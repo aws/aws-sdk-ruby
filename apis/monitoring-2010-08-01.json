@@ -23,8 +23,7 @@
       "http_path": "/",
       "documentation": "<p> Deletes all specified alarms. In the event of an error, no alarms are deleted. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "alarm_names": {
             "type": "list",
             "required": true,
@@ -34,7 +33,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -56,8 +56,7 @@
       "http_path": "/",
       "documentation": "<p> Retrieves history for the specified alarm. Filter alarms by date range or item type. If an alarm name is not specified, Amazon CloudWatch returns histories for all of the owner's alarms. </p> Amazon CloudWatch retains the history of an alarm for two weeks, whether or not you delete the alarm.",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "alarm_name": {
             "type": "string",
             "documentation": "<p> The name of the alarm. </p>",
@@ -93,7 +92,8 @@
             "documentation": "<p> The token returned by a previous call to indicate that there is more data available. </p>",
             "serialized_name": "NextToken"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -167,8 +167,7 @@
       "http_path": "/",
       "documentation": "<p> Retrieves alarms with the specified names. If no name is specified, all alarms for the user are returned. Alarms can be retrieved by using only a prefix for the alarm name, the alarm state, or a prefix for any action. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "alarm_names": {
             "type": "list",
             "documentation": "<p> A list of alarm names to retrieve information for. </p>",
@@ -207,7 +206,8 @@
             "documentation": "<p> The token returned by a previous call to indicate that there is more data available. </p>",
             "serialized_name": "NextToken"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -428,8 +428,7 @@
       "http_path": "/",
       "documentation": "<p> Retrieves all alarms for a single metric. Specify a statistic, period, or unit to filter the set of alarms further. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "metric_name": {
             "type": "string",
             "required": true,
@@ -516,7 +515,8 @@
               "None"
             ]
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -719,9 +719,7 @@
       "http_path": "/",
       "documentation": "<p> Disables actions for the specified alarms. When an alarm's actions are disabled the alarm's state may change, but none of the alarm's actions will execute. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "alarm_names": {
             "type": "list",
             "required": true,
@@ -731,7 +729,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "enable_alarm_actions": {
@@ -740,8 +739,7 @@
       "http_path": "/",
       "documentation": "<p> Enables actions for the specified alarms. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "alarm_names": {
             "type": "list",
             "required": true,
@@ -751,7 +749,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "get_metric_statistics": {
@@ -760,8 +759,7 @@
       "http_path": "/",
       "documentation": "<p> Gets statistics for the specified metric. </p> The maximum number of data points returned from a single <code>GetMetricStatistics</code> request is 1,440. If a request is made that generates more than 1,440 data points, Amazon CloudWatch returns an error. In such a case, alter the request by narrowing the specified time range or increasing the specified period. Alternatively, make multiple requests across adjacent time ranges. <p> Amazon CloudWatch aggregates data points based on the length of the <code>period</code> that you specify. For example, if you request statistics with a one-minute granularity, Amazon CloudWatch aggregates data points with time stamps that fall within the same one-minute period. In such a case, the data points queried can greatly outnumber the data points returned. </p> The maximum number of data points that can be queried is 50,850; whereas the maximum number of data points returned is 1,440. <p> The following examples show various statistics allowed by the data point query maximum of 50,850 when you call <code>GetMetricStatistics</code> on Amazon EC2 instances with detailed (one-minute) monitoring enabled: </p> <ul> <li>Statistics for up to 400 instances for a span of one hour</li> <li>Statistics for up to 35 instances over a span of 24 hours</li> <li>Statistics for up to 2 instances over a span of 2 weeks</li> </ul>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "namespace": {
             "type": "string",
             "required": true,
@@ -865,7 +863,8 @@
               "None"
             ]
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1006,8 +1005,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of valid metrics stored for the AWS account owner. Returned metrics can be used with <code>GetMetricStatistics</code> to obtain statistical data for a given metric. </p> Up to 500 results are returned for any one call. To retrieve further results, use returned <code>NextToken</code> values with subsequent <code>ListMetrics</code> operations. If you create a metric with the PutMetricData action, allow up to fifteen minutes for the metric to appear in calls to the <code>ListMetrics</code> action.",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "namespace": {
             "type": "string",
             "documentation": "<p> The namespace to filter against. </p>",
@@ -1045,7 +1043,8 @@
             "documentation": "<p> The token returned by a previous call to indicate that there is more data available. </p>",
             "serialized_name": "NextToken"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1131,8 +1130,7 @@
       "http_path": "/",
       "documentation": "<p> Creates or updates an alarm and associates it with the specified Amazon CloudWatch metric. Optionally, this operation can associate one or more Amazon Simple Notification Service resources with the alarm. </p> <p> When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is evaluated and its <code>StateValue</code> is set appropriately. Any actions associated with the <code>StateValue</code> is then executed. </p> When updating an existing alarm, its <code>StateValue</code> is left unchanged.",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "alarm_name": {
             "type": "string",
             "required": true,
@@ -1285,7 +1283,8 @@
               "LessThanOrEqualToThreshold"
             ]
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1307,8 +1306,7 @@
       "http_path": "/",
       "documentation": "<p> Publishes metric data points to Amazon CloudWatch. Amazon Cloudwatch associates the data points with the specified metric. If the specified metric does not exist, Amazon CloudWatch creates the metric. </p> If you create a metric with the <code>PutMetricData</code> action, allow up to fifteen minutes for the metric to appear in calls to the ListMetrics action. <p> The size of a <function>PutMetricData</function> request is limited to 8 KB for HTTP GET requests and 40 KB for HTTP POST requests. </p> <important> Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, Amazon CloudWatch truncates values with very large exponents. Values with base-10 exponents greater than 126 (1 x 10^126) are truncated. Likewise, values with base-10 exponents less than -130 (1 x 10^-130) are also truncated. </important>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "namespace": {
             "type": "string",
             "required": true,
@@ -1431,7 +1429,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1486,8 +1485,7 @@
       "http_path": "/",
       "documentation": "<p> Temporarily sets the state of an alarm. When the updated <code>StateValue</code> differs from the previous value, the action configured for the appropriate state is invoked. This is not a permanent change. The next periodic alarm check (in about a minute) will set the alarm to its actual state. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "alarm_name": {
             "type": "string",
             "required": true,
@@ -1516,7 +1514,8 @@
             "documentation": "<p> The reason that this alarm is set to this specific state (in machine-readable JSON format) </p>",
             "serialized_name": "StateReasonData"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {

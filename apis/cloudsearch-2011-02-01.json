@@ -21,15 +21,15 @@
       "http_path": "/",
       "documentation": "<p>Creates a new search domain.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -171,8 +171,7 @@
       "http_path": "/",
       "documentation": "<p>Configures an <code>IndexField</code> for the search domain. Used to create new fields and modify existing ones. If the field exists, the new configuration replaces the old one. You can configure a maximum of 200 index fields.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -369,7 +368,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -653,8 +653,7 @@
       "http_path": "/",
       "documentation": "<p>Configures a <code>RankExpression</code> for the search domain. Used to create new rank expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. You can configure a maximum of 50 rank expressions.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -681,7 +680,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -799,15 +799,15 @@
       "http_path": "/",
       "documentation": "<p>Permanently deletes a search domain and all of its data.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -937,8 +937,7 @@
       "http_path": "/",
       "documentation": "<p>Removes an <code>IndexField</code> from the search domain.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -951,7 +950,8 @@
             "documentation": "<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
             "serialized_name": "IndexFieldName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1229,8 +1229,7 @@
       "http_path": "/",
       "documentation": "<p>Removes a <code>RankExpression</code> from the search domain.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -1243,7 +1242,8 @@
             "documentation": "<p>The name of the <code>RankExpression</code> to delete.</p>",
             "serialized_name": "RankName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1355,15 +1355,15 @@
       "http_path": "/",
       "documentation": "<p>Gets the default search field configured for the search domain.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1457,8 +1457,7 @@
       "http_path": "/",
       "documentation": "<p>Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_names": {
             "type": "list",
             "documentation": "<p>Limits the DescribeDomains response to the specified search domains.</p>",
@@ -1468,7 +1467,8 @@
               "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1602,8 +1602,7 @@
       "http_path": "/",
       "documentation": "<p>Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. Shows all fields by default.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -1619,7 +1618,8 @@
               "documentation": "<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1895,8 +1895,7 @@
       "http_path": "/",
       "documentation": "<p>Gets the rank expressions configured for the search domain. Can be limited to specific rank expressions by name. Shows all rank expressions by default. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -1912,7 +1911,8 @@
               "documentation": "<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2022,15 +2022,15 @@
       "http_path": "/",
       "documentation": "<p>Gets information about the resource-based policies that control access to the domain's document and search services.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2124,15 +2124,15 @@
       "http_path": "/",
       "documentation": "<p>Gets the stemming dictionary configured for the search domain.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2226,15 +2226,15 @@
       "http_path": "/",
       "documentation": "<p>Gets the stopwords configured for the search domain.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2328,15 +2328,15 @@
       "http_path": "/",
       "documentation": "<p>Gets the synonym dictionary configured for the search domain.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2430,15 +2430,15 @@
       "http_path": "/",
       "documentation": "<p>Tells the search domain to start indexing its documents using the latest text processing options and <code>IndexFields</code>. This operation must be invoked to make options whose OptionStatus has <code>OptionState</code> of <code>RequiresIndexDocuments</code> visible in search results.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2492,8 +2492,7 @@
       "http_path": "/",
       "documentation": "<p>Configures the default search field for the search domain. The default search field is used when a search request does not specify which fields to search. By default, it is configured to include the contents of all of the domain's text fields.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -2506,7 +2505,8 @@
             "documentation": "<p>The <code>IndexField</code> to use for search requests issued with the <code>q</code> parameter. The default is an empty string, which automatically searches all text fields.</p>",
             "serialized_name": "DefaultSearchField"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2606,8 +2606,7 @@
       "http_path": "/",
       "documentation": "<p>Configures the policies that control access to the domain's document and search services. The maximum size of an access policy document is 100 KB.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -2620,7 +2619,8 @@
             "documentation": "<p>An IAM access policy as described in <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p> <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\", \"Action\": \"*\", \"Resource\": \"arn:aws:cs:us-east-1:1234567890:search/movies\", \"Condition\": { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] } }}, {\"Effect\":\"Allow\", \"Action\": \"*\", \"Resource\": \"arn:aws:cs:us-east-1:1234567890:documents/movies\", \"Condition\": { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] } }} ] }</code></p>",
             "serialized_name": "AccessPolicies"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2726,8 +2726,7 @@
       "http_path": "/",
       "documentation": "<p>Configures a stemming dictionary for the search domain. The stemming dictionary is used during indexing and when processing search requests. The maximum size of the stemming dictionary is 500 KB.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -2740,7 +2739,8 @@
             "documentation": "<p>Maps terms to their stems, serialized as a JSON document. The document has a single object with one property \"stems\" whose value is an object mapping terms to their stems. The maximum size of a stemming document is 500 KB. Example: <code>{ \"stems\": {\"people\": \"person\", \"walking\": \"walk\"} }</code></p>",
             "serialized_name": "Stems"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2846,8 +2846,7 @@
       "http_path": "/",
       "documentation": "<p>Configures stopwords for the search domain. Stopwords are used during indexing and when processing search requests. The maximum size of the stopwords dictionary is 10 KB.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -2860,7 +2859,8 @@
             "documentation": "<p>Lists stopwords serialized as a JSON document. The document has a single object with one property \"stopwords\" whose value is an array of strings. The maximum size of a stopwords document is 10 KB. Example: <code>{ \"stopwords\": [\"a\", \"an\", \"the\", \"of\"] }</code></p>",
             "serialized_name": "Stopwords"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2966,8 +2966,7 @@
       "http_path": "/",
       "documentation": "<p>Configures a synonym dictionary for the search domain. The synonym dictionary is used during indexing to configure mappings for terms that occur in text fields. The maximum size of the synonym dictionary is 100 KB. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "domain_name": {
             "type": "string",
             "required": true,
@@ -2980,7 +2979,8 @@
             "documentation": "<p>Maps terms to their synonyms, serialized as a JSON document. The document has a single object with one property \"synonyms\" whose value is an object mapping terms to their synonyms. Each synonym is a simple string or an array of strings. The maximum size of a stopwords document is 100 KB. Example: <code>{ \"synonyms\": {\"cat\": [\"feline\", \"kitten\"], \"puppy\": \"dog\"} }</code></p>",
             "serialized_name": "Synonyms"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",

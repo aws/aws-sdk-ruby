@@ -23,9 +23,7 @@
       "http_path": "/",
       "documentation": "<p>This action adds additional customer communication to an AWS Support case. You use the <i>CaseId</i> value to identify the case to which you want to add communication. You can list a set of email addresses to copy on the communication using the <i>CcEmailAddresses</i> value. The <i>CommunicationBody</i> value contains the text of the communication.</p> <p>This action's response indicates the success or failure of the request.</p> <p>This action implements a subset of the behavior on the AWS Support <a href=\"https://aws.amazon.com/support\" title=\"Support Center\">Your Support Cases</a> web form.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>To be written.</p>",
-        "members": {
+        "params": {
           "case_id": {
             "type": "string",
             "documentation": "<p>String that indicates the AWS Support caseID requested or returned in the call. The caseID is an alphanumeric string formatted as shown in this example CaseId: <i>case-12345678910-2013-c4c1d2bf33c5cf47</i></p>",
@@ -45,7 +43,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -89,8 +88,7 @@
       "http_path": "/",
       "documentation": "<p>Creates a new case in the AWS Support Center. This action is modeled on the behavior of the AWS Support Center <a href=\"https://aws.amazon.com/support/createCase\">Open a new case</a> page. Its parameters require you to specify the following information: </p> <ol> <li> <b>ServiceCode.</b> Represents a code for an AWS service. You obtain the <i>ServiceCode</i> by calling <a href=\"API_DescribeServices.html\" title=\"DescribeServices\">DescribeServices</a>. </li> <li> <b>CategoryCode</b>. Represents a category for the service defined for the ServiceCode value. You also obtain the cateogory code for a service by calling <a href=\"API_DescribeServices.html\" title=\"DescribeServices\">DescribeServices</a>. Each AWS service defines its own set of category codes. </li> <li> <b>SeverityCode</b>. Represents a value that specifies the urgency of the case, and the time interval in which your service level agreement specifies a response from AWS Support. You obtain the SeverityCode by calling <a href=\"API_DescribeSeverityLevels.html\" title=\"DescribeSeverityLevels\">DescribeSeverityLevels</a>.</li> <li> <b>Subject</b>. Represents the <b>Subject</b> field on the AWS Support Center <a href=\"https://aws.amazon.com/support/createCase\">Open a new case</a> page.</li> <li> <b>CommunicationBody</b>. Represents the <b>Description</b> field on the AWS Support Center <a href=\"https://aws.amazon.com/support/createCase\">Open a new case</a> page.</li> <li> <b>Language</b>. Specifies the human language in which AWS Support handles the case. The API currently supports English and Japanese.</li> <li> <b>CcEmailAddresses</b>. Represents the AWS Support Center <b>CC</b> field on the <a href=\"https://aws.amazon.com/support/createCase\">Open a new case</a> page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an <a href=\"http://aws.amazon.com/tools/\" title=\"Tools for Amazon Web Services\">AWS SDK</a>. </li> </ol> The AWS Support API does not currently support the ability to add attachments to cases. You can, however, call <a href=\"API_AddCommunicationToCase.html\" title=\"AddCommunicationToCase\">AddCommunicationToCase</a> to add information to an open case. <p>A successful <a href=\"API_CreateCase.html\" title=\"CreateCase\">CreateCase</a> request returns an AWS Support case number. Case numbers are used by <a href=\"API_DescribeCases.html\" title=\"DescribeCases\">DescribeCases</a> request to retrieve existing AWS Support support cases. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "subject": {
             "type": "string",
             "required": true,
@@ -138,7 +136,8 @@
             "documentation": "<p>Field passed as a parameter in a <a href=\"API_CreateCase.html\" title=\"CreateCase\">CreateCase</a> call. </p>",
             "serialized_name": "issueType"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -182,8 +181,7 @@
       "http_path": "/",
       "documentation": "<p>This action returns a list of cases that you specify by passing one or more CaseIds. In addition, you can filter the cases by date by setting values for the AfterTime and BeforeTime request parameters. </p> The response returns the following in JSON format: <ol> <li>One or more <a href=\"API_CaseDetails.html\" title=\"CaseDetails\">CaseDetails</a> data types. </li> <li>One or more <i>NextToken</i> objects, strings that specifies where to paginate the returned records represented by <i>CaseDetails</i>.</li> </ol>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "case_id_list": {
             "type": "list",
             "documentation": "<p>A list of Strings comprising ID numbers for support cases you want returned. The maximum number of cases is 100. </p>",
@@ -227,7 +225,8 @@
             "documentation": "<p>Specifies the ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English and Japanese, for which the codes are <i>en</i> and <i>ja</i>, respectively. Language parameters must be passed explicitly for operations that take them.</p>",
             "serialized_name": "language"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -383,8 +382,7 @@
       "http_path": "/",
       "documentation": "<p>This action returns communications regarding the support case. You can use the <i>AfterTime</i> and <i>BeforeTime</i> parameters to filter by date. The <i>CaseId</i> parameter enables you to identify a specific case by its <i>CaseId</i> number.</p> <p>The <i>MaxResults</i> and <i>NextToken</i> parameters enable you to control the pagination of the result set. Set <i>MaxResults</i> to the number of cases you want displayed on each page, and use <i>NextToken</i> to specify the resumption of pagination.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "case_id": {
             "type": "string",
             "required": true,
@@ -411,7 +409,8 @@
             "documentation": "<p>Integer that sets the maximum number of results to return before paginating.</p>",
             "serialized_name": "maxResults"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -486,8 +485,7 @@
       "http_path": "/",
       "documentation": "<p>Returns the current list of AWS services and a list of service categories that applies to each one. You then use service names and categories in your <a href=\"API_CreateCase.html\" title=\"CreateCase\">CreateCase</a> requests. Each AWS service has its own set of categories.</p> <p>The service codes and category codes correspond to the values that are displayed in the <b>Service</b> and <b>Category</b> drop-down lists on the AWS Support Center <a href=\"https://aws.amazon.com/support/createCase\" title=\"Open a new case\">Open a new case</a> page. The values in those fields, however, do not necessarily match the service codes and categories returned by the <code>DescribeServices</code> request. Always use the service codes and categories obtained programmatically. This practice ensures that you always have the most recent set of service and category codes.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "service_code_list": {
             "type": "list",
             "documentation": "<p>List in JSON format of service codes available for AWS services.</p>",
@@ -501,7 +499,8 @@
             "documentation": "<p>Specifies the ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English and Japanese, for which the codes are <i>en</i> and <i>ja</i>, respectively. Language parameters must be passed explicitly for operations that take them.</p>",
             "serialized_name": "language"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -571,14 +570,14 @@
       "http_path": "/",
       "documentation": "<p>This action returns the list of severity levels that you can assign to an AWS Support case. The severity level for a case is also a field in the <a href=\"API_CaseDetails.html\" title=\"CaseDetails\">CaseDetails</a> data type included in any <a href=\"API_CreateCase.html\" title=\"CreateCase\">CreateCase</a> request. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "language": {
             "type": "string",
             "documentation": "<p>Specifies the ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English and Japanese, for which the codes are <i>en</i> and <i>ja</i>, respectively. Language parameters must be passed explicitly for operations that take them.</p>",
             "serialized_name": "language"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -627,8 +626,7 @@
       "http_path": "/",
       "documentation": "<p>Returns the status of all refresh requests Trusted Advisor checks called using <a href=\"API_RefreshTrustedAdvisorCheck.html\" title=\"RefreshTrustedAdvisorCheck\">RefreshTrustedAdvisorCheck</a>. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "check_ids": {
             "type": "list",
             "required": true,
@@ -638,7 +636,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -692,8 +691,7 @@
       "http_path": "/",
       "documentation": "<p>This action responds with the results of a Trusted Advisor check. Once you have obtained the list of available Trusted Advisor checks by calling <a href=\"API_DescribeTrustedAdvisorChecks.html\" title=\"DescribeTrustedAdvisorChecks\">DescribeTrustedAdvisorChecks</a>, you specify the <i>CheckId</i> for the check you want to retrieve from AWS Support.</p> <p>The response for this action contains a JSON-formatted <a href=\"API_%20%20%20%20%20%20%20DescribeTrustedAdvisorCheckResultResult.html\" title=\"DescribeTrustedAdvisorCheckResultResult\">TrustedAdvisorCheckResult</a> object</p>, which is a container for the following three objects:<p></p> <ol> <li><a href=\"API_TrustedAdvisorCategorySpecificSummary.html\" title=\"TrustedAdvisorCategorySpecificSummary\">TrustedAdvisorCategorySpecificSummary</a></li> <li><a href=\"API_TrustedAdvisorResourceDetails.html\" title=\"TrustedAdvisorResourceDetails.html\">TrustedAdvisorResourceDetail</a></li> <li><a href=\"API_TrustedAdvisorResourcesSummary.html\" title=\"TrustedAdvisorResourcesSummary\">TrustedAdvisorResourcesSummary</a></li> </ol> <p>In addition, the response contains the following fields:</p> <ol> <li> <b>Status</b>. Overall status of the check.</li> <li> <b>Timestamp</b>. Time at which Trusted Advisor last ran the check. </li> <li> <b>CheckId</b>. Unique identifier for the specific check returned by the request.</li> </ol>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "check_id": {
             "type": "string",
             "required": true,
@@ -704,7 +702,8 @@
             "documentation": "<p>Specifies the ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English and Japanese, for which the codes are <i>en</i> and <i>ja</i>, respectively. Language parameters must be passed explicitly for operations that take them.</p>",
             "serialized_name": "language"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -844,8 +843,7 @@
       "http_path": "/",
       "documentation": "<p>This action enables you to get the latest summaries for Trusted Advisor checks that you specify in your request. You submit the list of Trusted Advisor checks for which you want summaries. You obtain these <i>CheckIds</i> by submitting a <a href=\"API_DescribeTrustedAdvisorChecks.html\" title=\"DescribeTrustedAdvisorChecks\">DescribeTrustedAdvisorChecks</a> request. </p> <p>The response body contains an array of <a href=\"API_TrustedAdvisorCheckSummary.html\" title=\"TrustedAdvisorCheckSummary\">TrustedAdvisorCheckSummary</a> objects. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "check_ids": {
             "type": "list",
             "required": true,
@@ -855,7 +853,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -965,15 +964,15 @@
       "http_path": "/",
       "documentation": "<p>This action enables you to get a list of the available Trusted Advisor checks. You must specify a language code. English (\"en\") and Japanese (\"jp\") are currently supported. The response contains a list of <a href=\"API_TrustedAdvisorCheckDescription.html\" title=\"TrustedAdvisorCheckDescription\">TrustedAdvisorCheckDescription</a> objects. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "language": {
             "type": "string",
             "required": true,
             "documentation": "<p>Specifies the ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English and Japanese, for which the codes are <i>en</i> and <i>ja</i>, respectively. Language parameters must be passed explicitly for operations that take them.</p>",
             "serialized_name": "language"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1040,14 +1039,14 @@
       "http_path": "/",
       "documentation": "<p>This action enables you to query the service to request a refresh for a specific Trusted Advisor check. Your request body contains a <i>CheckId</i> for which you are querying. The response body contains a <a href=\"API_RefreshTrustedAdvisorCheckResult.html\" title=\"RefreshTrustedAdvisorCheckResult\">RefreshTrustedAdvisorCheckResult</a> object containing <i>Status</i> and <i>TimeUntilNextRefresh</i> fields.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "check_id": {
             "type": "string",
             "required": true,
             "serialized_name": "checkId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1096,14 +1095,14 @@
       "http_path": "/",
       "documentation": "<p>Takes a <i>CaseId</i> and returns the initial state of the case along with the state of the case after the call to <a href=\"API_ResolveCase.html\" title=\"ResolveCase\">ResolveCase</a> completed.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "case_id": {
             "type": "string",
             "documentation": "<p>String that indicates the AWS Support caseID requested or returned in the call. The caseID is an alphanumeric string formatted as shown in this example CaseId: <i>case-12345678910-2013-c4c1d2bf33c5cf47</i></p>",
             "serialized_name": "caseId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",

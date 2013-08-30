@@ -23,9 +23,7 @@
       "http_path": "/",
       "documentation": "<p>AddInstanceGroups adds an instance group to a running cluster.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>Input to an AddInstanceGroups call.</p>",
-        "members": {
+        "params": {
           "instance_groups": {
             "type": "list",
             "required": true,
@@ -86,7 +84,8 @@
             "documentation": "<p>Job flow in which to add the instance groups.</p>",
             "serialized_name": "JobFlowId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -122,9 +121,7 @@
       "http_path": "/",
       "documentation": "<p> AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow. </p> <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p> <p> A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. </p> <p> Elastic MapReduce executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. </p> <p> You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input argument to the AddJobFlow operation. </p>",
-        "members": {
+        "params": {
           "job_flow_id": {
             "type": "string",
             "required": true,
@@ -207,7 +204,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -224,9 +222,7 @@
       "http_path": "/",
       "documentation": "<p> DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time.</p> <p> Regardless of supplied parameters, only job flows created within the last two months are returned.</p> <p> If no parameters are supplied, then job flows matching either of the following criteria are returned:</p> <ul> <li>Job flows created and completed in the last two weeks</li> <li> Job flows created within the last two months that are in one of the following states: <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>, <code>STARTING</code> </li> </ul> <p> Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the DescribeJobFlows operation. </p>",
-        "members": {
+        "params": {
           "created_after": {
             "type": "timestamp",
             "documentation": "<p>Return only job flows created after this date and time.</p>",
@@ -264,7 +260,8 @@
               ]
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -722,9 +719,7 @@
       "http_path": "/",
       "documentation": "<p>ModifyInstanceGroups modifies the number of nodes and configuration settings of an instance group. The input parameters include the new target instance count for the group and the instance group ID. The call will either succeed or fail atomically.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>Change the size of some instance groups.</p>",
-        "members": {
+        "params": {
           "instance_groups": {
             "type": "list",
             "documentation": "<p>Instance groups to change.</p>",
@@ -748,7 +743,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -765,9 +761,7 @@
       "http_path": "/",
       "documentation": "<p> RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. Once the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the JobFlowInstancesConfig <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the job flow will transition to the WAITING state rather than shutting down once the steps have completed. </p> <p>For additional protection, you can set the JobFlowInstancesConfig <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p> <p>For long running job flows, we recommend that you periodically store your results.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> Input to the RunJobFlow operation. </p>",
-        "members": {
+        "params": {
           "name": {
             "type": "string",
             "required": true,
@@ -1035,7 +1029,8 @@
             "documentation": "<p>An IAM role for the job flow. The EC2 instances of the job flow assume this role. The default role is <code>EMRJobflowDefault</code>. In order to use the default role, you must have already created it using the CLI.</p>",
             "serialized_name": "JobFlowRole"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1063,9 +1058,7 @@
       "http_path": "/",
       "documentation": "<p> SetTerminationProtection locks a job flow so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster.</p> <p> SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.</p> <p> To terminate a job flow that has been locked by setting SetTerminationProtection to <code>true</code>, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to <code>false</code>. </p> <p> For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/UsingEMR_TerminationProtection.html\">Protecting a Job Flow from Termination</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i></p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input argument to the TerminationProtection operation. </p>",
-        "members": {
+        "params": {
           "job_flow_ids": {
             "type": "list",
             "required": true,
@@ -1081,7 +1074,8 @@
             "documentation": "<p> A Boolean that indicates whether to protect the job flow and prevent the Amazon EC2 instances in the cluster from shutting down due to API calls, user intervention, or job-flow error. </p>",
             "serialized_name": "TerminationProtected"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1098,9 +1092,7 @@
       "http_path": "/",
       "documentation": "<p>Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specifed job flows. This action works on running job flows. You can also set the visibility of a job flow when you launch it using the <code>VisibleToAllUsers</code> parameter of RunJobFlow. The SetVisibleToAllUsers action can be called only by an IAM user who created the job flow or the AWS account that owns the job flow.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The input to the SetVisibleToAllUsers action.</p>",
-        "members": {
+        "params": {
           "job_flow_ids": {
             "type": "list",
             "required": true,
@@ -1116,7 +1108,8 @@
             "documentation": "<p>Whether the specified job flows are visible to all IAM users of the AWS account associated with the job flow. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the job flows. If it is set to False, only the IAM user that created a job flow can view and manage it.</p>",
             "serialized_name": "VisibleToAllUsers"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1133,9 +1126,7 @@
       "http_path": "/",
       "documentation": "<p> TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created. </p> <p> The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 5-20 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> Input to the TerminateJobFlows operation. </p>",
-        "members": {
+        "params": {
           "job_flow_ids": {
             "type": "list",
             "required": true,
@@ -1145,7 +1136,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {

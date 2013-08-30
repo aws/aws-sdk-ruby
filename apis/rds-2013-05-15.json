@@ -23,9 +23,7 @@
       "http_path": "/",
       "documentation": "<p>Adds a source identifier to an existing RDS event notification subscription.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "subscription_name": {
             "type": "string",
             "required": true,
@@ -38,7 +36,8 @@
             "documentation": "<p> The identifier of the event source to be added. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens. </p> <p>Constraints:</p> <ul> <li>If the source type is a DB instance, then a DBInstanceIdentifier must be supplied.</li> <li>If the source type is a DB security group, a DBSecurityGroupName must be supplied.</li> <li>If the source type is a DB parameter group, a DBParameterGroupName must be supplied.</li> <li>If the source type is a DB Snapshot, a DBSnapshotIdentifier must be supplied.</li> </ul>",
             "serialized_name": "SourceIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -129,9 +128,7 @@
       "http_path": "/",
       "documentation": "<p> Adds metadata tags to a DB Instance. These tags can also be used with cost allocation reporting to track cost associated with a DB Instance.</p> <p>For an overview on tagging DB Instances, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">DB Instance Tags.</a></p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "resource_name": {
             "type": "string",
             "required": true,
@@ -161,7 +158,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -184,9 +182,7 @@
       "http_path": "/",
       "documentation": "<p> Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC Security Groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC instances. Second, IP ranges are available if the application accessing your database is running on the Internet. Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC). </p> You cannot authorize ingress from an EC2 security group in one Region to an Amazon RDS DB Instance in another. You cannot authorize ingress from a VPC security group in one VPC to an Amazon RDS DB Instance in another. <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_security_group_name": {
             "type": "string",
             "required": true,
@@ -213,7 +209,8 @@
             "documentation": "<p> AWS Account Number of the owner of the EC2 Security Group specified in the EC2SecurityGroupName parameter. The AWS Access Key ID is not an acceptable value. For VPC DB Security Groups, <code>EC2SecurityGroupId</code> must be provided. Otherwise, EC2SecurityGroupOwnerId and either <code>EC2SecurityGroupName</code> or <code>EC2SecurityGroupId</code> must be provided. </p>",
             "serialized_name": "EC2SecurityGroupOwnerId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -337,9 +334,7 @@
       "http_path": "/",
       "documentation": "<p> Copies the specified DBSnapshot. The source DBSnapshot must be in the \"available\" state. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "source_db_snapshot_identifier": {
             "type": "string",
             "required": true,
@@ -352,7 +347,8 @@
             "documentation": "<p> The identifier for the copied snapshot. </p> <p>Constraints:</p> <ul> <li>Cannot be null, empty, or blank</li> <li>Must contain from 1 to 255 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul> <p>Example: <code>my-db-snapshot</code></p>",
             "serialized_name": "TargetDBSnapshotIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -482,9 +478,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new DB instance. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_name": {
             "type": "string",
             "documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p> <p><b>MySQL</b></p> <p>The name of the database to create when the DB Instance is created. If this parameter is not specified, no database is created in the DB Instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 64 alphanumeric characters</li> <li>Cannot be a word reserved by the specified database engine</li> </ul> <p>Type: String</p> <p><b>Oracle</b></p> <p> The Oracle System ID (SID) of the created DB Instance. </p> <p>Default: <code>ORCL</code></p> <p>Constraints:</p> <ul> <li>Cannot be longer than 8 characters</li> </ul> <p><b>SQL Server</b></p> <p>Not applicable. Must be null.</p>",
@@ -619,7 +613,8 @@
             "documentation": "<p> Specifies the accessibility options for the DB Instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. </p> <p> Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case. </p> <ul> <li> <b>Default VPC:</b>true</li> <li> <b>VPC:</b>false</li> </ul> <p> If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private. </p>",
             "serialized_name": "PubliclyAccessible"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1097,8 +1092,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a DB Instance that acts as a Read Replica of a source DB Instance. </p> <p> All Read Replica DB Instances are created as Single-AZ deployments with backups disabled. All other DB Instance attributes (including DB Security Groups and DB Parameter Groups) are inherited from the source DB Instance, except as specified below. </p> <important> <p> The source DB Instance must have backup retention enabled. </p> </important>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "db_instance_identifier": {
             "type": "string",
             "required": true,
@@ -1146,7 +1140,8 @@
             "documentation": "<p> Specifies the accessibility options for the DB Instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address. </p> <p> Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case. </p> <ul> <li> <b>Default VPC:</b>true</li> <li> <b>VPC:</b>false</li> </ul> <p> If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private. </p>",
             "serialized_name": "PubliclyAccessible"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1636,9 +1631,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new DB Parameter Group. </p> <p> A DB Parameter Group is initially created with the default parameters for the database engine used by the DB Instance. To provide custom values for any of the parameters, you must modify the group after creating it using <i>ModifyDBParameterGroup</i>. Once you've created a DB Parameter Group, you need to associate it with your DB Instance using <i>ModifyDBInstance</i>. When you associate a new DB Parameter Group with a running DB Instance, you need to reboot the DB Instance for the new DB Parameter Group and associated settings to take effect. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_parameter_group_name": {
             "type": "string",
             "required": true,
@@ -1657,7 +1650,8 @@
             "documentation": "<p> The description for the DB Parameter Group. </p>",
             "serialized_name": "Description"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1710,9 +1704,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new DB Security Group. DB Security Groups control access to a DB Instance. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_security_group_name": {
             "type": "string",
             "required": true,
@@ -1725,7 +1717,8 @@
             "documentation": "<p> The description for the DB Security Group. </p>",
             "serialized_name": "DBSecurityGroupDescription"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1843,9 +1836,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a DBSnapshot. The source DBInstance must be in \"available\" state. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_snapshot_identifier": {
             "type": "string",
             "required": true,
@@ -1858,7 +1849,8 @@
             "documentation": "<p> The DB Instance identifier. This is the unique key that identifies a DB Instance. This parameter isn't case sensitive. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
             "serialized_name": "DBInstanceIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1988,9 +1980,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_subnet_group_name": {
             "type": "string",
             "required": true,
@@ -2013,7 +2003,8 @@
               "serialized_name": "SubnetIdentifier"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2131,9 +2122,7 @@
       "http_path": "/",
       "documentation": "<p>Creates an RDS event notification subscription. This action requires a topic ARN (Amazon Resource Name) created by either the RDS console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the type of source (SourceType) you want to be notified of, provide a list of RDS sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup.</p> <p>If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you will be notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you will receive notice of the events for that source type for all your RDS sources. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all RDS sources belonging to your customer account.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "subscription_name": {
             "type": "string",
             "required": true,
@@ -2174,7 +2163,8 @@
             "documentation": "<p> A Boolean value; set to <b>true</b> to activate the subscription, set to <b>false</b> to create the subscription but not active it. </p>",
             "serialized_name": "Enabled"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2295,9 +2285,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new Option Group. You can create up to 20 option groups. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "option_group_name": {
             "type": "string",
             "required": true,
@@ -2322,7 +2310,8 @@
             "documentation": "<p> The description of the option group. </p>",
             "serialized_name": "OptionGroupDescription"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2528,9 +2517,7 @@
       "http_path": "/",
       "documentation": "<p> The DeleteDBInstance action deletes a previously provisioned DB instance. A successful response from the web service indicates the request was received correctly. When you delete a DB instance, all automated backups for that instance are deleted and cannot be recovered. Manual DB Snapshots of the DB instance to be deleted are not deleted. </p> <p> If a final DBSnapshot is requested the status of the RDS instance will be \"deleting\" until the DBSnapshot is created. DescribeDBInstance is used to monitor the status of this operation. This cannot be canceled or reverted once submitted. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_instance_identifier": {
             "type": "string",
             "required": true,
@@ -2547,7 +2534,8 @@
             "documentation": "<p> The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to <code>false</code>. </p> Specifying this parameter and also setting the SkipFinalShapshot parameter to true results in an error. <p>Constraints:</p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
             "serialized_name": "FinalDBSnapshotIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2977,16 +2965,15 @@
       "http_path": "/",
       "documentation": "<p> Deletes a specified DBParameterGroup. The DBParameterGroup cannot be associated with any RDS instances to be deleted. </p> The specified DB Parameter Group cannot be associated with any DB Instances.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_parameter_group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the DB Parameter Group. </p> <p>Constraints:</p> <ul> <li>Must be the name of an existing DB Parameter Group</li> <li>You cannot delete a default DB Parameter Group</li> <li>Cannot be associated with any DB Instances</li> </ul>",
             "serialized_name": "DBParameterGroupName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -3009,16 +2996,15 @@
       "http_path": "/",
       "documentation": "<p> Deletes a DB Security Group. </p> The specified DB Security Group must not be associated with any DB Instances.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_security_group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the DB Security Group to delete. </p> You cannot delete the default DB Security Group. <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
             "serialized_name": "DBSecurityGroupName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -3041,16 +3027,15 @@
       "http_path": "/",
       "documentation": "<p> Deletes a DBSnapshot. </p> The DBSnapshot must be in the <code>available</code> state to be deleted.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_snapshot_identifier": {
             "type": "string",
             "required": true,
             "documentation": "<p> The DBSnapshot identifier. </p> <p>Constraints: Must be the name of an existing DB Snapshot in the <code>available</code> state.</p>",
             "serialized_name": "DBSnapshotIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3168,16 +3153,15 @@
       "http_path": "/",
       "documentation": "<p> Deletes a DB subnet group. </p> The specified database subnet group must not be associated with any DB instances.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_subnet_group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the database subnet group to delete. </p> You cannot delete the default subnet group. <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
             "serialized_name": "DBSubnetGroupName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -3206,16 +3190,15 @@
       "http_path": "/",
       "documentation": "<p>Deletes an RDS event notification subscription.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "subscription_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the RDS event notification subscription you want to delete.</p>",
             "serialized_name": "SubscriptionName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3306,16 +3289,15 @@
       "http_path": "/",
       "documentation": "<p> Deletes an existing Option Group. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "option_group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the option group to be deleted. </p> You cannot delete default Option Groups.",
             "serialized_name": "OptionGroupName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -3338,8 +3320,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of the available DB engines. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "engine": {
             "type": "string",
             "documentation": "<p> The database engine to return. </p>",
@@ -3375,7 +3356,8 @@
             "documentation": "<p> If this parameter is specified, and if the requested engine supports the CharacterSetName parameter for CreateDBInstance, the response includes a list of supported character sets for each engine version. </p>",
             "serialized_name": "ListSupportedCharacterSets"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3471,9 +3453,7 @@
       "http_path": "/",
       "documentation": "<p> Returns information about provisioned RDS instances. This API supports pagination. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_instance_identifier": {
             "type": "string",
             "documentation": "<p> The user-supplied instance identifier. If this parameter is specified, information from only the specific DB Instance is returned. This parameter isn't case sensitive. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
@@ -3489,7 +3469,8 @@
             "documentation": "<p> An optional pagination token provided by a previous DescribeDBInstances request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> . </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3912,9 +3893,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of DB log files for the DB instance. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_instance_identifier": {
             "type": "string",
             "documentation": "<p> The customer-assigned name of the DB Instance that contains the log files you want to list. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
@@ -3945,7 +3924,8 @@
             "documentation": "<p> The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to MaxRecords. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4000,9 +3980,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified, the list will contain only the description of the specified DBParameterGroup. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_parameter_group_name": {
             "type": "string",
             "documentation": "<p> The name of a specific DB Parameter Group to return details for. </p> <p>Constraints:</p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
@@ -4018,7 +3996,8 @@
             "documentation": "<p> An optional pagination token provided by a previous DescribeDBParameterGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4076,8 +4055,7 @@
       "http_path": "/",
       "documentation": "<p> Returns the detailed parameter list for a particular DBParameterGroup. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "db_parameter_group_name": {
             "type": "string",
             "required": true,
@@ -4099,7 +4077,8 @@
             "documentation": "<p> An optional pagination token provided by a previous DescribeDBParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4193,9 +4172,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of DBSecurityGroup descriptions. If a DBSecurityGroupName is specified, the list will contain only the descriptions of the specified DBSecurityGroup. </p> <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_security_group_name": {
             "type": "string",
             "documentation": "<p> The name of the DB Security Group to return details for. </p>",
@@ -4211,7 +4188,8 @@
             "documentation": "<p> An optional pagination token provided by a previous DescribeDBSecurityGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4328,9 +4306,7 @@
       "http_path": "/",
       "documentation": "<p> Returns information about DBSnapshots. This API supports pagination. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_instance_identifier": {
             "type": "string",
             "documentation": "<p> A DB Instance Identifier to retrieve the list of DB Snapshots for. Cannot be used in conjunction with DBSnapshotIdentifier. This parameter isn't case sensitive. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
@@ -4356,7 +4332,8 @@
             "documentation": "<p> An optional pagination token provided by a previous DescribeDBSnapshots request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4479,9 +4456,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup. </p> <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_subnet_group_name": {
             "type": "string",
             "documentation": "<p> The name of the DB Subnet Group to return details for. </p>",
@@ -4497,7 +4472,8 @@
             "documentation": "<p> An optional pagination token provided by a previous DescribeDBSubnetGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4602,9 +4578,7 @@
       "http_path": "/",
       "documentation": "<p> Returns the default engine and system parameter information for the specified database engine. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_parameter_group_family": {
             "type": "string",
             "required": true,
@@ -4621,7 +4595,8 @@
             "documentation": "<p> An optional pagination token provided by a previous DescribeEngineDefaultParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4721,15 +4696,14 @@
       "http_path": "/",
       "documentation": "<p>Displays a list of categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in the <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\"> Events</a> topic in the Amazon RDS User Guide.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "source_type": {
             "type": "string",
             "documentation": "<p> The type of source that will be generating the events. </p> <p>Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot</p>",
             "serialized_name": "SourceType"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4773,9 +4747,7 @@
       "http_path": "/",
       "documentation": "<p>Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status. </p> <p>If you specify a SubscriptionName, lists the description for that subscription.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "subscription_name": {
             "type": "string",
             "documentation": "<p>The name of the RDS event notification subscription you want to describe.</p>",
@@ -4791,7 +4763,8 @@
             "documentation": "<p> An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> . </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4887,9 +4860,7 @@
       "http_path": "/",
       "documentation": "<p> Returns events related to DB Instances, DB Security Groups, DB Snapshots and DB Parameter Groups for the past 14 days. Events specific to a particular DB Instance, DB Security Group, database snapshot or DB Parameter Group can be obtained by providing the name as a parameter. By default, the past hour of events are returned. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "source_identifier": {
             "type": "string",
             "documentation": "<p> The identifier of the event source for which events will be returned. If not specified, then all sources are included in the response. </p> <p>Constraints:</p> <ul> <li>If SourceIdentifier is supplied, SourceType must also be provided.</li> <li>If the source type is DBInstance, then a DBInstanceIdentifier must be supplied.</li> <li>If the source type is DBSecurityGroup, a DBSecurityGroupName must be supplied.</li> <li>If the source type is DBParameterGroup, a DBParameterGroupName must be supplied.</li> <li>If the source type is DBSnapshot, a DBSnapshotIdentifier must be supplied.</li> <li>Cannot end with a hyphen or contain two consecutive hyphens.</li> </ul>",
@@ -4940,7 +4911,8 @@
             "documentation": "<p> An optional pagination token provided by a previous DescribeEvents request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5007,9 +4979,7 @@
       "http_path": "/",
       "documentation": "<p> Describes all available options. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "engine_name": {
             "type": "string",
             "required": true,
@@ -5031,7 +5001,8 @@
             "documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5159,9 +5130,7 @@
       "http_path": "/",
       "documentation": "<p> Describes the available option groups. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "option_group_name": {
             "type": "string",
             "documentation": "<p> The name of the option group to describe. Cannot be supplied together with EngineName or MajorEngineVersion. </p>",
@@ -5187,7 +5156,8 @@
             "documentation": "<p> Filters the list of option groups to only include groups associated with a specific database engine version. If specified, then EngineName must also be specified. </p>",
             "serialized_name": "MajorEngineVersion"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5398,9 +5368,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of orderable DB Instance options for the specified engine. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "engine": {
             "type": "string",
             "required": true,
@@ -5437,7 +5405,8 @@
             "documentation": "<p> An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> . </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5532,9 +5501,7 @@
       "http_path": "/",
       "documentation": "<p> Returns information about reserved DB Instances for this account, or about a specified reserved DB Instance. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "reserved_db_instance_id": {
             "type": "string",
             "documentation": "<p> The reserved DB Instance identifier filter value. Specify this parameter to show only the reservation that matches the specified reservation ID. </p>",
@@ -5580,7 +5547,8 @@
             "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5713,9 +5681,7 @@
       "http_path": "/",
       "documentation": "<p> Lists available reserved DB Instance offerings. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "reserved_db_instances_offering_id": {
             "type": "string",
             "documentation": "<p> The offering identifier filter value. Specify this parameter to show only the available offering that matches the specified reservation identifier. </p> <p>Example: <code>438012d3-4052-4cc7-b2e3-8d3372e0e706</code></p>",
@@ -5756,7 +5722,8 @@
             "documentation": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5869,9 +5836,7 @@
       "http_path": "/",
       "documentation": "<p> Downloads the last line of the specified log file. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_instance_identifier": {
             "type": "string",
             "documentation": "<p> The customer-assigned name of the DB Instance that contains the log files you want to list. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
@@ -5892,7 +5857,8 @@
             "documentation": "<p> The number of lines remaining to be downloaded. </p>",
             "serialized_name": "NumberOfLines"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5930,16 +5896,15 @@
       "http_path": "/",
       "documentation": "<p> Lists all tags on a DB Instance.</p> <p>For an overview on tagging DB Instances, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">DB Instance Tags.</a></p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "resource_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The DB Instance with tags to be listed. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>",
             "serialized_name": "ResourceName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5990,9 +5955,7 @@
       "http_path": "/",
       "documentation": "<p> Modify settings for a DB Instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_instance_identifier": {
             "type": "string",
             "required": true,
@@ -6092,7 +6055,8 @@
             "documentation": "<p> The new DB Instance identifier for the DB Instance when renaming a DB Instance. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>",
             "serialized_name": "NewDBInstanceIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -6569,9 +6533,7 @@
       "http_path": "/",
       "documentation": "<p> Modifies the parameters of a DBParameterGroup. To modify more than one parameter submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request. </p> <p> The <code>apply-immediate</code> method can be used only for dynamic parameters; the <code>pending-reboot</code> method can be used with MySQL and Oracle DB Instances for either dynamic or static parameters. For Microsoft SQL Server DB Instances, the <code>pending-reboot</code> method can be used only for static parameters. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_parameter_group_name": {
             "type": "string",
             "required": true,
@@ -6645,7 +6607,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -6679,9 +6642,7 @@
       "http_path": "/",
       "documentation": "<p> Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_subnet_group_name": {
             "type": "string",
             "required": true,
@@ -6703,7 +6664,8 @@
               "serialized_name": "SubnetIdentifier"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -6821,9 +6783,7 @@
       "http_path": "/",
       "documentation": "<p>Modifies an existing RDS event notification subscription. Note that you cannot modify the source identifiers using this call; to change source identifiers for a subscription, use the AddSourceIdentifierToSubscription and RemoveSourceIdentifierFromSubscription calls.</p> <p>You can see a list of the event categories for a given SourceType in the <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">Events</a> topic in the Amazon RDS User Guide or by using the <b>DescribeEventCategories</b> action.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "subscription_name": {
             "type": "string",
             "required": true,
@@ -6854,7 +6814,8 @@
             "documentation": "<p> A Boolean value; set to <b>true</b> to activate the subscription. </p>",
             "serialized_name": "Enabled"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -6969,9 +6930,7 @@
       "http_path": "/",
       "documentation": "<p> Modifies an existing Option Group. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "option_group_name": {
             "type": "string",
             "required": true,
@@ -7089,7 +7048,8 @@
             "documentation": "<p> Indicates whether the changes should be applied immediately, or during the next maintenance window for each instance associated with the Option Group. </p>",
             "serialized_name": "ApplyImmediately"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -7295,9 +7255,7 @@
       "http_path": "/",
       "documentation": "<p> Promotes a Read Replica DB Instance to a standalone DB Instance. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_instance_identifier": {
             "type": "string",
             "required": true,
@@ -7314,7 +7272,8 @@
             "documentation": "<p> The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p> Default: A 30-minute window selected at random from an 8-hour block of time per region. The following list shows the time blocks for each region from which the default backup windows are assigned. </p> <ul> <li> <b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC</li> <li> <b>US-West (Northern California) Region:</b> 06:00-14:00 UTC</li> <li> <b>EU (Ireland) Region:</b> 22:00-06:00 UTC</li> <li> <b>Asia Pacific (Singapore) Region:</b> 14:00-22:00 UTC</li> <li> <b>Asia Pacific (Tokyo) Region: </b> 17:00-03:00 UTC</li> </ul> <p> Constraints: Must be in the format <code>hh24:mi-hh24:mi</code>. Times should be Universal Time Coordinated (UTC). Must not conflict with the preferred maintenance window. Must be at least 30 minutes. </p>",
             "serialized_name": "PreferredBackupWindow"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -7732,9 +7691,7 @@
       "http_path": "/",
       "documentation": "<p> Purchases a reserved DB Instance offering. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "reserved_db_instances_offering_id": {
             "type": "string",
             "required": true,
@@ -7751,7 +7708,8 @@
             "documentation": "<p> The number of instances to reserve. </p> <p>Default: <code>1</code></p>",
             "serialized_name": "DBInstanceCount"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -7885,9 +7843,7 @@
       "http_path": "/",
       "documentation": "<p> Reboots a previously provisioned RDS instance. This API results in the application of modified DBParameterGroup parameters with ApplyStatus of pending-reboot to the RDS instance. This action is taken as soon as possible, and results in a momentary outage to the RDS instance during which the RDS instance status is set to rebooting. If the RDS instance is configured for MultiAZ, it is possible that the reboot will be conducted through a failover. A DBInstance event is created when the reboot is completed. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_instance_identifier": {
             "type": "string",
             "required": true,
@@ -7899,7 +7855,8 @@
             "documentation": "<p> When <code>true</code>, the reboot will be conducted through a MultiAZ failover. </p> <p>Constraint: You cannot specify <code>true</code> if the instance is not configured for MultiAZ.</p>",
             "serialized_name": "ForceFailover"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -8317,9 +8274,7 @@
       "http_path": "/",
       "documentation": "<p>Removes a source identifier from an existing RDS event notification subscription.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "subscription_name": {
             "type": "string",
             "required": true,
@@ -8332,7 +8287,8 @@
             "documentation": "<p> The source identifier to be removed from the subscription, such as the <b>DB instance identifier</b> for a DB instance or the name of a security group. </p>",
             "serialized_name": "SourceIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -8423,9 +8379,7 @@
       "http_path": "/",
       "documentation": "<p> Removes metadata tags from a DB Instance.</p> <p>For an overview on tagging DB Instances, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">DB Instance Tags.</a></p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "resource_name": {
             "type": "string",
             "required": true,
@@ -8441,7 +8395,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -8464,9 +8419,7 @@
       "http_path": "/",
       "documentation": "<p> Modifies the parameters of a DBParameterGroup to the engine/system default value. To reset specific parameters submit a list of the following: ParameterName and ApplyMethod. To reset the entire DBParameterGroup specify the DBParameterGroup name and ResetAllParameters parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_parameter_group_name": {
             "type": "string",
             "required": true,
@@ -8544,7 +8497,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -8578,9 +8532,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new DB Instance from a DB snapshot. The target database is created from the source database restore point with the same configuration as the original source database, except that the new RDS instance is created with the default security group. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_instance_identifier": {
             "type": "string",
             "required": true,
@@ -8653,7 +8605,8 @@
             "documentation": "<p> The name of the option group to be used for the restored DB instance.</p> <p> Permanent options, such as the TDE option for Oracle Advanced Security TDE, cannot be removed from an option group, and that option group cannot be removed from a DB instance once it is associated with a DB instance </p>",
             "serialized_name": "OptionGroupName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -9137,9 +9090,7 @@
       "http_path": "/",
       "documentation": "<p> Restores a DB Instance to an arbitrary point-in-time. Users can restore to any point in time before the latestRestorableTime for up to backupRetentionPeriod days. The target database is created from the source database with the same configuration as the original database except that the DB instance is created with the default DB security group. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "source_db_instance_identifier": {
             "type": "string",
             "required": true,
@@ -9222,7 +9173,8 @@
             "documentation": "<p> The name of the option group to be used for the restored DB instance.</p> <p> Permanent options, such as the TDE option for Oracle Advanced Security TDE, cannot be removed from an option group, and that option group cannot be removed from a DB instance once it is associated with a DB instance </p>",
             "serialized_name": "OptionGroupName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -9712,9 +9664,7 @@
       "http_path": "/",
       "documentation": "<p> Revokes ingress from a DBSecurityGroup for previously authorized IP ranges or EC2 or VPC Security Groups. Required parameters for this API are one of CIDRIP, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId). </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_security_group_name": {
             "type": "string",
             "required": true,
@@ -9741,7 +9691,8 @@
             "documentation": "<p> The AWS Account Number of the owner of the EC2 security group specified in the <code>EC2SecurityGroupName</code> parameter. The AWS Access Key ID is not an acceptable value. For VPC DB Security Groups, <code>EC2SecurityGroupId</code> must be provided. Otherwise, EC2SecurityGroupOwnerId and either <code>EC2SecurityGroupName</code> or <code>EC2SecurityGroupId</code> must be provided. </p>",
             "serialized_name": "EC2SecurityGroupOwnerId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",

@@ -23,8 +23,7 @@
       "http_path": "/",
       "documentation": "<p>Creates a new network connection between the customer network and a specific AWS Direct Connect location.</p> <p>A connection links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. A Direct Connect location provides access to Amazon Web Services in the region it is associated with. You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "offering_id": {
             "type": "string",
             "required": true,
@@ -37,7 +36,8 @@
             "documentation": "<p>The name of the connection.</p> <p>Example: \"<i>1G Connection to AWS</i>\"</p> <p>Default: None</p>",
             "serialized_name": "connectionName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -105,8 +105,7 @@
       "http_path": "/",
       "documentation": "Creates a new private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface supports sending traffic to a single Virtual Private Cloud (VPC).",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "connection_id": {
             "type": "string",
             "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
@@ -154,7 +153,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -279,8 +279,7 @@
       "http_path": "/",
       "documentation": "Creates a new public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon Simple Storage Service (Amazon S3).",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "connection_id": {
             "type": "string",
             "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
@@ -339,7 +338,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -464,15 +464,15 @@
       "http_path": "/",
       "documentation": "<p>Deletes the connection.</p> <p>Deleting a connection only stops the AWS Direct Connect port hour and data transfer charges. You separately need to cancel any services or charges for cross-connects or network circuits that connect you to the AWS Direct Connect location with the providers of those services.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "connection_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -540,14 +540,14 @@
       "http_path": "/",
       "documentation": "Deletes a virtual interface.",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "virtual_interface_id": {
             "type": "string",
             "documentation": "<p>ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>",
             "serialized_name": "virtualInterfaceId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -596,15 +596,15 @@
       "http_path": "/",
       "documentation": "<p>Displays details about a specific connection including the order steps for the connection and the current state of the connection order.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "connection_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -753,14 +753,14 @@
       "http_path": "/",
       "documentation": "<p>Displays all connections in this region.</p> <p>If a connection ID is provided, it will only return this particular connection.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "connection_id": {
             "type": "string",
             "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -839,15 +839,15 @@
       "http_path": "/",
       "documentation": "<p>Displays additional ordering step details for a specified offering.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "offering_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The ID of the offering.</p> <p>Example: us-west-1_EqSV5_1G</p> <p>Default: None</p>",
             "serialized_name": "offeringId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -979,6 +979,11 @@
       "http_method": "POST",
       "http_path": "/",
       "documentation": "<p>Describes one or more of the offerings that are currently available for creating new connections. The results include offerings for all regions.</p> <p>To order a new connection you need to select a specific offering ID.</p>",
+      "input": {
+        "params": {
+        },
+        "raw_payload": false
+      },
       "output": {
         "type": "structure",
         "documentation": "A structure containing a list of offerings.",
@@ -1085,6 +1090,11 @@
       "http_method": "POST",
       "http_path": "/",
       "documentation": "<p>Returns a list of virtual private gateways owned by the AWS account.</p> <p>You can create one or more AWS Direct Connect private virtual interfaces linking to a virtual private gateway. A virtual private gateway can be managed via Amazon Virtual Private Cloud (VPC) console or the <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html\">EC2 CreateVpnGateway</a> action.</p>",
+      "input": {
+        "params": {
+        },
+        "raw_payload": false
+      },
       "output": {
         "type": "structure",
         "documentation": "A structure containing a list of virtual private gateways.",
@@ -1141,8 +1151,7 @@
       "http_path": "/",
       "documentation": "<p>Displays all virtual interfaces for an AWS account. Virtual interfaces deleted fewer than 15 minutes before DescribeVirtualInterfaces is called are also returned. If a connection ID is included then only virtual interfaces associated with this connection will be returned. If a virtual interface ID is included then only a single virtual interface will be returned.</p> <p> A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "connection_id": {
             "type": "string",
             "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
@@ -1153,7 +1162,8 @@
             "documentation": "<p>ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>",
             "serialized_name": "virtualInterfaceId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",

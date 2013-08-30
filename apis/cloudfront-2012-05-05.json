@@ -21,8 +21,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "cloud_front_origin_access_identity_config": {
             "type": "structure",
             "required": true,
@@ -43,7 +42,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -149,8 +149,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "distribution_config": {
             "type": "structure",
             "required": true,
@@ -437,7 +436,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -950,8 +950,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution/{DistributionId}/invalidation",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "distribution_id": {
             "type": "string",
             "required": true,
@@ -993,7 +992,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1131,8 +1131,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/streaming-distribution",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "streaming_distribution_config": {
             "type": "structure",
             "required": true,
@@ -1242,7 +1241,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1545,8 +1545,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront/{Id}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "location": "uri",
@@ -1557,7 +1556,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1616,8 +1616,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution/{Id}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "location": "uri",
@@ -1628,7 +1627,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1687,8 +1687,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/streaming-distribution/{Id}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "location": "uri",
@@ -1699,7 +1698,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1758,14 +1758,14 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront/{Id}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1836,14 +1836,14 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront/{Id}/config",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1900,14 +1900,14 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution/{Id}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2266,14 +2266,14 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution/{Id}/config",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2560,8 +2560,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution/{DistributionId}/invalidation/{Id}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "distribution_id": {
             "type": "string",
             "required": true,
@@ -2574,7 +2573,8 @@
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2668,14 +2668,14 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/streaming-distribution/{Id}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2876,14 +2876,14 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/streaming-distribution/{Id}/config",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3016,8 +3016,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront?Marker={Marker}&MaxItems={MaxItems}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "marker": {
             "type": "string",
             "location": "uri",
@@ -3028,7 +3027,8 @@
             "location": "uri",
             "serialized_name": "MaxItems"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3104,8 +3104,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution?Marker={Marker}&MaxItems={MaxItems}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "marker": {
             "type": "string",
             "location": "uri",
@@ -3116,7 +3115,8 @@
             "location": "uri",
             "serialized_name": "MaxItems"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3408,8 +3408,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution/{DistributionId}/invalidation?Marker={Marker}&MaxItems={MaxItems}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "distribution_id": {
             "type": "string",
             "required": true,
@@ -3426,7 +3425,8 @@
             "location": "uri",
             "serialized_name": "MaxItems"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3508,8 +3508,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/streaming-distribution?Marker={Marker}&MaxItems={MaxItems}",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "marker": {
             "type": "string",
             "location": "uri",
@@ -3520,7 +3519,8 @@
             "location": "uri",
             "serialized_name": "MaxItems"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3662,8 +3662,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront/{Id}/config",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "cloud_front_origin_access_identity_config": {
             "type": "structure",
             "required": true,
@@ -3694,7 +3693,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3825,8 +3825,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution/{Id}/config",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "distribution_config": {
             "type": "structure",
             "required": true,
@@ -4123,7 +4122,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4641,8 +4641,7 @@
       "http_method": "POST",
       "http_path": "/2012-05-05/streaming-distribution/{Id}/config",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "streaming_distribution_config": {
             "type": "structure",
             "required": true,
@@ -4762,7 +4761,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",

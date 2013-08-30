@@ -21,9 +21,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new Auto Scaling group with the specified name and other attributes. When the creation request is completed, the Auto Scaling group is ready to be used in other calls. </p> The Auto Scaling group name must be unique within the scope of your AWS account, and under the quota of Auto Scaling groups allowed for your account.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -139,7 +137,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -172,9 +171,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new launch configuration. The launch configuration name must be unique within the scope of the client's AWS account. The maximum limit of launch configurations, which by default is 100, must not yet have been met; otherwise, the call will fail. When created, the new launch configuration is available for immediate use. </p> <p>You can create a launch configuration with Amazon EC2 security groups or with Amazon VPC security groups. However, you can't use Amazon EC2 security groups together with Amazon VPC security groups, or vice versa.</p> At this time, Auto Scaling launch configurations don't support compressed (e.g. zipped) user data files.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "launch_configuration_name": {
             "type": "string",
             "required": true,
@@ -287,7 +284,8 @@
             "documentation": "<p> Whether the instance is optimized for EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal EBS I/O performance. This optimization is not available with all instance types. Additional usage charges apply when using an EBS Optimized instance. For information about EBS-optimized instances, go to <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/instance-types.html#EBSOptimized\">EBS-Optimized Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>",
             "serialized_name": "EbsOptimized"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -320,9 +318,7 @@
       "http_path": "/",
       "documentation": "<p> Creates new tags or updates existing tags for an Auto Scaling group. </p> A tag's definition is composed of a resource ID, resource type, key and value, and the propagate flag. Value and the propagate flag are optional parameters. See the Request Parameters for more information.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "tags": {
             "type": "list",
             "required": true,
@@ -361,7 +357,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -394,9 +391,7 @@
       "http_path": "/",
       "documentation": "<p> Deletes the specified Auto Scaling group if the group has no instances and no scaling activities in progress. </p> To remove all instances before calling DeleteAutoScalingGroup, you can call UpdateAutoScalingGroup to set the minimum and maximum size of the AutoScalingGroup to zero.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -408,7 +403,8 @@
             "documentation": "<p>Starting with API version 2011-01-01, specifies that the Auto Scaling group will be deleted along with all instances associated with the group, without waiting for all instances to be terminated. </p>",
             "serialized_name": "ForceDelete"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -441,16 +437,15 @@
       "http_path": "/",
       "documentation": "<p> Deletes the specified LaunchConfiguration. </p> <p> The specified launch configuration must not be attached to an Auto Scaling group. When this call completes, the launch configuration is no longer available for use. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "launch_configuration_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the launch configuration. </p>",
             "serialized_name": "LaunchConfigurationName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -472,9 +467,7 @@
       "http_path": "/",
       "documentation": "<p>Deletes notifications created by PutNotificationConfiguration.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -487,7 +480,8 @@
             "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.</p>",
             "serialized_name": "TopicARN"
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "delete_policy": {
@@ -496,9 +490,7 @@
       "http_path": "/",
       "documentation": "<p>Deletes a policy created by PutScalingPolicy.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "documentation": "<p>The name of the Auto Scaling group.</p>",
@@ -510,7 +502,8 @@
             "documentation": "<p>The name or PolicyARN of the policy you want to delete.</p>",
             "serialized_name": "PolicyName"
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "delete_scheduled_action": {
@@ -519,9 +512,7 @@
       "http_path": "/",
       "documentation": "<p>Deletes a scheduled action previously created using the PutScheduledUpdateGroupAction.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "documentation": "<p>The name of the Auto Scaling group.</p>",
@@ -533,7 +524,8 @@
             "documentation": "<p>The name of the action you want to delete.</p>",
             "serialized_name": "ScheduledActionName"
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "delete_tags": {
@@ -542,9 +534,7 @@
       "http_path": "/",
       "documentation": "<p>Removes the specified tags or a set of tags from a set of resources.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "tags": {
             "type": "list",
             "required": true,
@@ -583,7 +573,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "describe_adjustment_types": {
@@ -591,6 +582,11 @@
       "http_method": "POST",
       "http_path": "/",
       "documentation": "<p> Returns policy adjustment types for use in the PutScalingPolicy action. </p>",
+      "input": {
+        "params": {
+        },
+        "raw_payload": false
+      },
       "output": {
         "type": "structure",
         "documentation": "<p> The output of the DescribeAdjustmentTypes action. </p>",
@@ -620,9 +616,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a full description of each Auto Scaling group in the given list. This includes all Amazon EC2 instances that are members of the group. If a list of names is not provided, the service returns the full details of all Auto Scaling groups. </p> <p> This action supports pagination by returning a token if there are more pages to retrieve. To get the next page, call this action again with the returned token as the <code>NextToken</code> parameter. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The <code>AutoScalingGroupNamesType</code> data type. </p>",
-        "members": {
+        "params": {
           "auto_scaling_group_names": {
             "type": "list",
             "documentation": "<p> A list of Auto Scaling group names. </p>",
@@ -641,7 +635,8 @@
             "documentation": "<p> The maximum number of records to return. </p>",
             "serialized_name": "MaxRecords"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -895,8 +890,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a description of each Auto Scaling instance in the <code>InstanceIds</code> list. If a list is not provided, the service returns the full details of all instances up to a maximum of 50. By default, the service returns a list of 20 items. </p> <p> This action supports pagination by returning a token if there are more pages to retrieve. To get the next page, call this action again with the returned token as the <code>NextToken</code> parameter. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "instance_ids": {
             "type": "list",
             "documentation": "<p> The list of Auto Scaling instances to describe. If this list is omitted, all auto scaling instances are described. The list of requested instances cannot contain more than 50 items. If unknown instances are requested, they are ignored with no error. </p>",
@@ -915,7 +909,8 @@
             "documentation": "<p> The token returned by a previous call to indicate that there is more data available. </p>",
             "serialized_name": "NextToken"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -988,6 +983,11 @@
       "http_method": "POST",
       "http_path": "/",
       "documentation": "<p> Returns a list of all notification types that are supported by Auto Scaling. </p>",
+      "input": {
+        "params": {
+        },
+        "raw_payload": false
+      },
       "output": {
         "type": "structure",
         "documentation": "<p>The <code>AutoScalingNotificationTypes</code> data type.</p>",
@@ -1009,9 +1009,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a full description of the launch configurations, or the specified launch configurations, if they exist. </p> <p> If no name is specified, then the full details of all launch configurations are returned. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The <code>LaunchConfigurationNamesType</code> data type. </p>",
-        "members": {
+        "params": {
           "launch_configuration_names": {
             "type": "list",
             "documentation": "<p> A list of launch configuration names. </p>",
@@ -1030,7 +1028,8 @@
             "documentation": "<p> The maximum number of launch configurations. The default is 100. </p>",
             "serialized_name": "MaxRecords"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1191,6 +1190,11 @@
       "http_method": "POST",
       "http_path": "/",
       "documentation": "<p> Returns a list of metrics and a corresponding list of granularities for each metric. </p>",
+      "input": {
+        "params": {
+        },
+        "raw_payload": false
+      },
       "output": {
         "type": "structure",
         "documentation": "<p>The output of the DescribeMetricCollectionTypes action.</p>",
@@ -1235,8 +1239,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of notification actions associated with Auto Scaling groups for specified events. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_names": {
             "type": "list",
             "documentation": "<p> The name of the Auto Scaling group. </p>",
@@ -1255,7 +1258,8 @@
             "documentation": "<p>Maximum number of records to be returned. </p>",
             "serialized_name": "MaxRecords"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1314,8 +1318,7 @@
       "http_path": "/",
       "documentation": "<p> Returns descriptions of what each policy does. This action supports pagination. If the response includes a token, there are more records available. To get the additional records, repeat the request with the response token as the <code>NextToken</code> parameter. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "documentation": "<p> The name of the Auto Scaling group. </p>",
@@ -1339,7 +1342,8 @@
             "documentation": "<p> The maximum number of policies that will be described with each call. </p>",
             "serialized_name": "MaxRecords"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1439,9 +1443,7 @@
       "http_path": "/",
       "documentation": "<p> Returns the scaling activities for the specified Auto Scaling group. </p> <p> If the specified <code>ActivityIds</code> list is empty, all the activities from the past six weeks are returned. Activities are sorted by completion time. Activities still in progress appear first on the list. </p> <p> This action supports pagination. If the response includes a token, there are more records available. To get the additional records, repeat the request with the response token as the <code>NextToken</code> parameter. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "activity_ids": {
             "type": "list",
             "documentation": "<p> A list containing the activity IDs of the desired scaling activities. If this list is omitted, all activities are described. If an <code>AutoScalingGroupName</code> is provided, the results are limited to that group. The list of requested activities cannot contain more than 50 items. If unknown activities are requested, they are ignored with no error. </p>",
@@ -1465,7 +1467,8 @@
             "documentation": "<p> A string that marks the start of the next batch of returned results for pagination. </p>",
             "serialized_name": "NextToken"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1568,6 +1571,11 @@
       "http_method": "POST",
       "http_path": "/",
       "documentation": "<p>Returns scaling process types for use in the ResumeProcesses and SuspendProcesses actions.</p>",
+      "input": {
+        "params": {
+        },
+        "raw_payload": false
+      },
       "output": {
         "type": "structure",
         "documentation": "<p> The output of the DescribeScalingProcessTypes action. </p>",
@@ -1597,8 +1605,7 @@
       "http_path": "/",
       "documentation": "<p> Lists all the actions scheduled for your Auto Scaling group that haven't been executed. To see a list of actions already executed, see the activity record returned in DescribeScalingActivities. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "documentation": "<p> The name of the Auto Scaling group. </p>",
@@ -1632,7 +1639,8 @@
             "documentation": "<p> The maximum number of scheduled actions to return. </p>",
             "serialized_name": "MaxRecords"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1726,9 +1734,7 @@
       "http_path": "/",
       "documentation": "<p> Lists the Auto Scaling group tags. </p> <p> You can use filters to limit results when describing tags. For example, you can query for tags of a particular Auto Scaling group. You can specify multiple values for a filter. A tag must match at least one of the specified values for it to be included in the results. </p> <p> You can also specify multiple filters. The result includes information for a particular tag only if it matches all your filters. If there's no match, no special message is returned. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "filters": {
             "type": "list",
             "documentation": "<p> The value of the filter type used to identify the tags to be returned. For example, you can filter so that tags are returned according to Auto Scaling group, the key and value, or whether the new tag will be applied to instances launched after the tag is created (PropagateAtLaunch). </p>",
@@ -1763,7 +1769,8 @@
             "documentation": "<p> The maximum number of records to return. </p>",
             "serialized_name": "MaxRecords"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1831,6 +1838,11 @@
       "http_method": "POST",
       "http_path": "/",
       "documentation": "<p> Returns a list of all termination policies supported by Auto Scaling. </p>",
+      "input": {
+        "params": {
+        },
+        "raw_payload": false
+      },
       "output": {
         "type": "structure",
         "documentation": "<p>The <code>TerminationPolicyTypes</code> data type.</p>",
@@ -1852,8 +1864,7 @@
       "http_path": "/",
       "documentation": "<p> Disables monitoring of group metrics for the Auto Scaling group specified in <code>AutoScalingGroupName</code>. You can specify the list of affected metrics with the <code>Metrics</code> parameter. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -1868,7 +1879,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "enable_metrics_collection": {
@@ -1877,8 +1889,7 @@
       "http_path": "/",
       "documentation": "<p> Enables monitoring of group metrics for the Auto Scaling group specified in <code>AutoScalingGroupName</code>. You can specify the list of enabled metrics with the <code>Metrics</code> parameter. </p> <p> Auto scaling metrics collection can be turned on only if the <code>InstanceMonitoring</code> flag, in the Auto Scaling group's launch configuration, is set to <code>True</code>. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -1899,7 +1910,8 @@
             "documentation": "<p> The granularity to associate with the metrics to collect. Currently, the only legal granularity is \"1Minute\". </p>",
             "serialized_name": "Granularity"
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "execute_policy": {
@@ -1908,8 +1920,7 @@
       "http_path": "/",
       "documentation": "<p>Runs the policy you create for your Auto Scaling group in PutScalingPolicy.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "documentation": "<p> The name or ARN of the Auto Scaling group. </p>",
@@ -1926,7 +1937,8 @@
             "documentation": "<p> Set to <code>True</code> if you want Auto Scaling to reject this request when the Auto Scaling group is in cooldown. </p>",
             "serialized_name": "HonorCooldown"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1948,8 +1960,7 @@
       "http_path": "/",
       "documentation": "<p> Configures an Auto Scaling group to send notifications when specified events take place. Subscribers to this topic can have messages for events delivered to an endpoint such as a web server or email address. </p> <p> A new <code>PutNotificationConfiguration</code> overwrites an existing configuration.</p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -1971,7 +1982,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1993,8 +2005,7 @@
       "http_path": "/",
       "documentation": "<p> Creates or updates a policy for an Auto Scaling group. To update an existing policy, use the existing policy name and set the parameter(s) you want to change. Any existing parameter not changed in an update to an existing policy is not changed in this update request. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -2029,7 +2040,8 @@
             "documentation": "<p> Used with <code>AdjustmentType</code> with the value <code>PercentChangeInCapacity</code>, the scaling policy changes the <code>DesiredCapacity</code> of the Auto Scaling group by at least the number of instances specified in the value. </p> <p> You will get a <code>ValidationError</code> if you use <code>MinAdjustmentStep</code> on a policy with an <code>AdjustmentType</code> other than <code>PercentChangeInCapacity</code>. </p>",
             "serialized_name": "MinAdjustmentStep"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2062,8 +2074,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a scheduled scaling action for an Auto Scaling group. If you leave a parameter unspecified, the corresponding value remains unchanged in the affected Auto Scaling group. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -2111,7 +2122,8 @@
             "documentation": "<p> The number of Amazon EC2 instances that should be running in the group. </p>",
             "serialized_name": "DesiredCapacity"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -2144,8 +2156,7 @@
       "http_path": "/",
       "documentation": "<p> Resumes Auto Scaling processes for an Auto Scaling group. For more information, see SuspendProcesses and ProcessType. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -2160,7 +2171,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "set_desired_capacity": {
@@ -2169,9 +2181,7 @@
       "http_path": "/",
       "documentation": "<p> Adjusts the desired size of the AutoScalingGroup by initiating scaling activities. When reducing the size of the group, it is not possible to define which Amazon EC2 instances will be terminated. This applies to any Auto Scaling decisions that might result in terminating instances. </p> <p> There are two common use cases for <code>SetDesiredCapacity</code>: one for users of the Auto Scaling triggering system, and another for developers who write their own triggering systems. Both use cases relate to the concept of cooldown. </p> <p> In the first case, if you use the Auto Scaling triggering system, <code>SetDesiredCapacity</code> changes the size of your Auto Scaling group without regard to the cooldown period. This could be useful, for example, if Auto Scaling did something unexpected for some reason. If your cooldown period is 10 minutes, Auto Scaling would normally reject requests to change the size of the group for that entire 10-minute period. The <code>SetDesiredCapacity</code> command allows you to circumvent this restriction and change the size of the group before the end of the cooldown period. </p> <p> In the second case, if you write your own triggering system, you can use <code>SetDesiredCapacity</code> to control the size of your Auto Scaling group. If you want the same cooldown functionality that Auto Scaling offers, you can configure <code>SetDesiredCapacity</code> to honor cooldown by setting the <code>HonorCooldown</code> parameter to <code>true</code>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -2189,7 +2199,8 @@
             "documentation": "<p> By default, <code>SetDesiredCapacity</code> overrides any cooldown period. Set to <code>True</code> if you want Auto Scaling to reject this request when the Auto Scaling group is in cooldown. </p>",
             "serialized_name": "HonorCooldown"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -2211,8 +2222,7 @@
       "http_path": "/",
       "documentation": "<p> Sets the health status of an instance. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "instance_id": {
             "type": "string",
             "required": true,
@@ -2230,7 +2240,8 @@
             "documentation": "<p>If True, this call should respect the grace period associated with the group.</p>",
             "serialized_name": "ShouldRespectGracePeriod"
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "suspend_processes": {
@@ -2239,8 +2250,7 @@
       "http_path": "/",
       "documentation": "<p> Suspends Auto Scaling processes for an Auto Scaling group. To suspend specific process types, specify them by name with the <code>ScalingProcesses.member.N</code> parameter. To suspend all process types, omit the <code>ScalingProcesses.member.N</code> parameter. </p> <important> <p> Suspending either of the two primary process types, <code>Launch</code> or <code>Terminate</code>, can prevent other process types from functioning properly. For more information about processes and their dependencies, see ProcessType. </p> </important> <p> To resume processes that have been suspended, use ResumeProcesses. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -2255,7 +2265,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "terminate_instance_in_auto_scaling_group": {
@@ -2264,9 +2275,7 @@
       "http_path": "/",
       "documentation": "<p> Terminates the specified instance. Optionally, the desired group size can be adjusted. </p> This call simply registers a termination request. The termination of the instance cannot happen immediately.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "instance_id": {
             "type": "string",
             "required": true,
@@ -2279,7 +2288,8 @@
             "documentation": "<p> Specifies whether (<i>true</i>) or not (<i>false</i>) terminating this instance should also decrement the size of the AutoScalingGroup. </p>",
             "serialized_name": "ShouldDecrementDesiredCapacity"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2374,9 +2384,7 @@
       "http_path": "/",
       "documentation": "<p> Updates the configuration for the specified AutoScalingGroup. </p> <p> To update an Auto Scaling group with a launch configuration that has the <code>InstanceMonitoring</code> flag set to <code>False</code>, you must first ensure that collection of group metrics is disabled. Otherwise, calls to UpdateAutoScalingGroup will fail. If you have previously enabled group metrics collection, you can disable collection of all group metrics by calling DisableMetricsCollection. </p> <p> The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Triggers that are currently in progress aren't affected. </p> <ul> <li> <p>If a new value is specified for <i>MinSize</i> without specifying the value for <i>DesiredCapacity</i>, and if the new <i>MinSize</i> is larger than the current size of the Auto Scaling Group, there will be an implicit call to SetDesiredCapacity to set the group to the new <i>MinSize</i>. </p> </li> <li> <p>If a new value is specified for <i>MaxSize</i> without specifying the value for <i>DesiredCapacity</i>, and the new <i>MaxSize</i> is smaller than the current size of the Auto Scaling Group, there will be an implicit call to SetDesiredCapacity to set the group to the new <i>MaxSize</i>. </p> </li> <li> <p>All other optional parameters are left unchanged if not passed in the request.</p> </li> </ul>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "auto_scaling_group_name": {
             "type": "string",
             "required": true,
@@ -2444,7 +2452,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {

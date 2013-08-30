@@ -21,9 +21,7 @@
       "http_path": "/",
       "documentation": "<p> Associates one or more security groups with your LoadBalancer in VPC. The provided security group IDs will override any currently applied security groups. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the ApplySecurityGroupsToLoadBalancer action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -39,7 +37,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -82,9 +81,7 @@
       "http_path": "/",
       "documentation": "<p> Adds one or more subnets to the set of configured subnets in the VPC for the LoadBalancer. </p> <p> The Loadbalancers evenly distribute requests across all of the registered subnets. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the AttachLoadBalancerToSubnets action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -100,7 +97,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -149,9 +147,7 @@
       "http_path": "/",
       "documentation": "<p> Enables the client to define an application healthcheck for the instances. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> Input for the ConfigureHealthCheck action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -196,7 +192,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -251,9 +248,7 @@
       "http_path": "/",
       "documentation": "<p> Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners. </p> <p> This policy is similar to the policy created by CreateLBCookieStickinessPolicy, except that the lifetime of the special Elastic Load Balancing cookie follows the lifetime of the application-generated cookie specified in the policy configuration. The LoadBalancer only inserts a new stickiness cookie when the application response includes a new application cookie. </p> <p> If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued. </p> An application client must receive and send two cookies: the application-generated cookie and the special Elastic Load Balancing cookie named <code>AWSELB</code>. This is the default behavior for many common web browsers. <p>For information on using CreateAppCookieStickinessPolicy, see <i>Using the Query API</i> in the <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_StickySessions.html#US_EnableStickySessionsAppCookies\">Enabling Application-Controlled Sesssion Stickiness</a> section of the <i>Elastic Load Balancing Developer Guide</i>.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the CreateAppCookieStickinessPolicy action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -272,7 +267,8 @@
             "documentation": "<p> Name of the application cookie used for stickiness. </p>",
             "serialized_name": "CookieName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -313,9 +309,7 @@
       "http_path": "/",
       "documentation": "<p> Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners. </p> <p> When a LoadBalancer implements this policy, the LoadBalancer uses a special cookie to track the backend server instance for each request. When the LoadBalancer receives a request, it first checks to see if this cookie is present in the request. If so, the LoadBalancer sends the request to the application server specified in the cookie. If not, the LoadBalancer sends the request to a server that is chosen based on the existing load balancing algorithm. </p> <p> A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration. </p> <p>For information on using CreateLBCookieStickinessPolicy, see <i>Using the Query API</i> in the <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_StickySessions.html#US_EnableStickySessionsLBCookies\">Enabling Duration-Based Sesssion Stickiness</a> section of the <i>Elastic Load Balancing Developer Guide</i>.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the CreateLBCookieStickinessPolicy action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -333,7 +327,8 @@
             "documentation": "<p> The time period in seconds after which the cookie should be considered stale. Not specifying this parameter indicates that the sticky session will last for the duration of the browser session. </p>",
             "serialized_name": "CookieExpirationPeriod"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -374,9 +369,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new LoadBalancer. </p> <p> After the call has completed successfully, a new LoadBalancer is created; however, it will not be usable until at least one instance has been registered. When the LoadBalancer creation is completed, the client can check whether or not it is usable by using the DescribeInstanceHealth action. The LoadBalancer is usable as soon as any registered instance is <i>InService</i>. </p> Currently, the client's quota of LoadBalancers is limited to ten per Region. <p> LoadBalancer DNS names vary depending on the Region they're created in. For LoadBalancers created in the United States, the DNS name ends with: </p> <ul> <li> <i>us-east-1.elb.amazonaws.com</i> (for the Northern Virginia Region) </li> <li> <i>us-west-1.elb.amazonaws.com</i> (for the Northern California Region) </li> </ul> <p> For LoadBalancers created in the EU (Ireland) Region, the DNS name ends with: </p> <ul> <li> <i>eu-west-1.elb.amazonaws.com</i> </li> </ul> <p>For information on using CreateLoadBalancer to create a new LoadBalancer in Amazon EC2, go to <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/creating_lb_QueryAPI.html\">Using Query API</a> section in the <i>Creating a Load Balancer With SSL Cipher Settings and Back-end Authentication</i> topic of the <i>Elastic Load Balancing Developer Guide</i>.</p> <p>For information on using CreateLoadBalancer to create a new LoadBalancer in Amazon VPC, see <i>Using the Query API</i> in the <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/USVPC_creating_basic_lb.html\">Creating a Basic Load Balancer in Amazon VPC</a> section in the <i>Elastic Load Balancing Developer Guide</i>.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the CreateLoadBalancer action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -452,7 +445,8 @@
             "documentation": "<p>The type of a LoadBalancer. </p> <p>By default, Elastic Load Balancing creates an Internet-facing LoadBalancer with a publicly resolvable DNS name, which resolves to public IP addresses. </p> <p>Specify the value <code>internal</code> for this option to create an internal LoadBalancer with a DNS name that resolves to private IP addresses.</p> <p>This option is only available for LoadBalancers attached to an Amazon VPC.</p>",
             "serialized_name": "Scheme"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -522,9 +516,7 @@
       "http_path": "/",
       "documentation": "<p> Creates one or more listeners on a LoadBalancer for the specified port. If a listener with the given port does not already exist, it will be created; otherwise, the properties of the new listener must match the properties of the existing listener. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the CreateLoadBalancerListeners action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -571,7 +563,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -612,8 +605,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new policy that contains the necessary attributes depending on the policy type. Policies are settings that are saved for your Elastic LoadBalancer and that can be applied to the front-end listener, or the back-end application server, depending on your policy type. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -653,7 +645,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -700,16 +693,15 @@
       "http_path": "/",
       "documentation": "<p> Deletes the specified LoadBalancer. </p> <p> If attempting to recreate the LoadBalancer, the client must reconfigure all the settings. The DNS name associated with a deleted LoadBalancer will no longer be usable. Once deleted, the name and associated DNS record of the LoadBalancer no longer exist and traffic sent to any of its IP addresses will no longer be delivered to client instances. The client will not receive the same DNS name even if a new LoadBalancer with same LoadBalancerName is created. </p> <p> To successfully call this API, the client must provide the same account credentials as were used to create the LoadBalancer. </p> By design, if the LoadBalancer does not exist or has already been deleted, DeleteLoadBalancer still succeeds.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the DeleteLoadBalancer action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name associated with the LoadBalancer. The name must be unique within the client AWS account. </p>",
             "serialized_name": "LoadBalancerName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -724,9 +716,7 @@
       "http_path": "/",
       "documentation": "<p> Deletes listeners from the LoadBalancer for the specified port. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the DeleteLoadBalancerListeners action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -742,7 +732,8 @@
               "type": "integer"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -765,9 +756,7 @@
       "http_path": "/",
       "documentation": "<p> Deletes a policy from the LoadBalancer. The specified policy must not be enabled for any listeners. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the DeleteLoadBalancerPolicy action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -780,7 +769,8 @@
             "documentation": "<p> The mnemonic name for the policy being deleted. </p>",
             "serialized_name": "PolicyName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -809,9 +799,7 @@
       "http_path": "/",
       "documentation": "<p> Deregisters instances from the LoadBalancer. Once the instance is deregistered, it will stop receiving traffic from the LoadBalancer. </p> <p> In order to successfully call this API, the same account credentials as those used to create the LoadBalancer must be provided. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the DeregisterInstancesFromLoadBalancer action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -835,7 +823,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -880,9 +869,7 @@
       "http_path": "/",
       "documentation": "<p> Returns the current state of the instances of the specified LoadBalancer. If no instances are specified, the state of all the instances for the LoadBalancer is returned. </p> The client must have created the specified input LoadBalancer in order to retrieve this information; the client must provide the same account credentials as those that were used to create the LoadBalancer.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> Returns the current state of the instances of the specified LoadBalancer. If no instances are specified, the state of all the instances for the LoadBalancer is returned. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -905,7 +892,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -965,8 +953,7 @@
       "http_path": "/",
       "documentation": "<p>Returns detailed descriptions of the policies. If you specify a LoadBalancer name, the operation returns either the descriptions of the specified policies, or descriptions of all the policies created for the LoadBalancer. If you don't specify a LoadBalancer name, the operation returns descriptions of the specified sample policies, or descriptions of all the sample policies. The names of the sample policies have the <code>ELBSample-</code> prefix. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "documentation": "<p> The mnemonic name associated with the LoadBalancer. If no name is specified, the operation returns the attributes of either all the sample policies pre-defined by Elastic Load Balancing or the specified sample polices. </p>",
@@ -980,7 +967,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1051,8 +1039,7 @@
       "http_path": "/",
       "documentation": "<p> Returns meta-information on the specified LoadBalancer policies defined by the Elastic Load Balancing service. The policy types that are returned from this action can be used in a CreateLoadBalancerPolicy action to instantiate specific policy configurations that will be applied to an Elastic LoadBalancer. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "policy_type_names": {
             "type": "list",
             "documentation": "<p> Specifies the name of the policy types. If no names are specified, returns the description of all the policy types defined by Elastic Load Balancing service. </p>",
@@ -1061,7 +1048,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1141,9 +1129,7 @@
       "http_path": "/",
       "documentation": "<p> Returns detailed configuration information for the specified LoadBalancers. If no LoadBalancers are specified, the operation returns configuration information for all LoadBalancers created by the caller. </p> The client must have created the specified input LoadBalancers in order to retrieve this information; the client must provide the same account credentials as those that were used to create the LoadBalancer.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the DescribeLoadBalancers action. </p>",
-        "members": {
+        "params": {
           "load_balancer_names": {
             "type": "list",
             "documentation": "<p> A list of names associated with the LoadBalancers at creation time. </p>",
@@ -1157,7 +1143,8 @@
             "documentation": "<p> An optional parameter reserved for future use. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1452,9 +1439,7 @@
       "http_path": "/",
       "documentation": "<p> Removes subnets from the set of configured subnets in the VPC for the LoadBalancer. </p> <p> After a subnet is removed all of the EndPoints registered with the LoadBalancer that are in the removed subnet will go into the <i>OutOfService</i> state. When a subnet is removed, the LoadBalancer will balance the traffic among the remaining routable subnets for the LoadBalancer. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the DetachLoadBalancerFromSubnets action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -1470,7 +1455,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1507,9 +1493,7 @@
       "http_path": "/",
       "documentation": "<p> Removes the specified EC2 Availability Zones from the set of configured Availability Zones for the LoadBalancer. </p> <p> There must be at least one Availability Zone registered with a LoadBalancer at all times. A client cannot remove all the Availability Zones from a LoadBalancer. Once an Availability Zone is removed, all the instances registered with the LoadBalancer that are in the removed Availability Zone go into the OutOfService state. Upon Availability Zone removal, the LoadBalancer attempts to equally balance the traffic among its remaining usable Availability Zones. Trying to remove an Availability Zone that was not associated with the LoadBalancer does nothing. </p> In order for this call to be successful, the client must have created the LoadBalancer. The client must provide the same account credentials as those that were used to create the LoadBalancer.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the DisableAvailabilityZonesForLoadBalancer action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -1525,7 +1509,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1562,9 +1547,7 @@
       "http_path": "/",
       "documentation": "<p> Adds one or more EC2 Availability Zones to the LoadBalancer. </p> <p> The LoadBalancer evenly distributes requests across all its registered Availability Zones that contain instances. As a result, the client must ensure that its LoadBalancer is appropriately scaled for each registered Availability Zone. </p> The new EC2 Availability Zones to be added must be in the same EC2 Region as the Availability Zones for which the LoadBalancer was created.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the EnableAvailabilityZonesForLoadBalancer action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -1580,7 +1563,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1611,9 +1595,7 @@
       "http_path": "/",
       "documentation": "<p> Adds new instances to the LoadBalancer. </p> <p> Once the instance is registered, it starts receiving traffic and requests from the LoadBalancer. Any instance that is not in any of the Availability Zones registered for the LoadBalancer will be moved to the <i>OutOfService</i> state. It will move to the <i>InService</i> state when the Availability Zone is added to the LoadBalancer. </p> In order for this call to be successful, the client must have created the LoadBalancer. The client must provide the same account credentials as those that were used to create the LoadBalancer. Completion of this API does not guarantee that operation has completed. Rather, it means that the request has been registered and the changes will happen shortly.",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the RegisterInstancesWithLoadBalancer action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -1637,7 +1619,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1682,9 +1665,7 @@
       "http_path": "/",
       "documentation": "<p> Sets the certificate that terminates the specified listener's SSL connections. The specified certificate replaces any prior certificate that was used on the same LoadBalancer and port. </p> <p>For information on using SetLoadBalancerListenerSSLCertificate, see <i>Using the Query API </i> in the <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_UpdatingLoadBalancerSSL.html\">Updating an SSL Certificate for a Load Balancer</a> section in of the <i>Elastic Load Balancing Developer Guide</i>.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the SetLoadBalancerListenerSSLCertificate action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -1703,7 +1684,8 @@
             "documentation": "<p> The ID of the SSL certificate chain to use. For more information on SSL certificates, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingServerCerts.html\"> Managing Server Certificates </a> in the AWS Identity and Access Management documentation. </p>",
             "serialized_name": "SSLCertificateId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1744,8 +1726,7 @@
       "http_path": "/",
       "documentation": "<p> Replaces the current set of policies associated with a port on which the back-end server is listening with a new set of policies. After the policies have been created using CreateLoadBalancerPolicy, they can be applied here as a list. At this time, only the back-end server authentication policy type can be applied to the back-end ports; this policy type is composed of multiple public key policies. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -1767,7 +1748,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1802,9 +1784,7 @@
       "http_path": "/",
       "documentation": "<p> Associates, updates, or disables a policy with a listener on the LoadBalancer. You can associate multiple policies with a listener. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The input for the SetLoadBalancerPoliciesOfListener action. </p>",
-        "members": {
+        "params": {
           "load_balancer_name": {
             "type": "string",
             "required": true,
@@ -1826,7 +1806,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",

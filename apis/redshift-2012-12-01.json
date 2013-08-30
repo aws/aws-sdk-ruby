@@ -22,9 +22,7 @@
       "http_path": "/",
       "documentation": "<p> Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR) IP address range or an EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. </p> The EC2 security group must be defined in the AWS region where the cluster resides. <p>For an overview of CIDR blocks, see the Wikipedia article on <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>. </p> <p> You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Working with Security Groups</a> in the <i>Amazon Redshift Management Guide</i>.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> ??? </p>",
-        "members": {
+        "params": {
           "cluster_security_group_name": {
             "type": "string",
             "required": true,
@@ -46,7 +44,8 @@
             "documentation": "<p> The AWS account number of the owner of the security group specified by the <i>EC2SecurityGroupName</i> parameter. The AWS Access Key ID is not an acceptable value. </p> <p> Example: <code>111122223333</code> </p>",
             "serialized_name": "EC2SecurityGroupOwnerId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -155,9 +154,7 @@
       "http_path": "/",
       "documentation": "<p> Authorizes the specified AWS customer account to restore the specified snapshot. </p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "snapshot_identifier": {
             "type": "string",
             "required": true,
@@ -174,7 +171,8 @@
             "documentation": "<p> The identifier of the AWS customer account authorized to restore the specified snapshot. </p>",
             "serialized_name": "AccountWithRestoreAccess"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -345,9 +343,7 @@
       "http_path": "/",
       "documentation": "<p> Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state. </p> <p> When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them. </p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "source_snapshot_identifier": {
             "type": "string",
             "required": true,
@@ -364,7 +360,8 @@
             "documentation": "<p> The identifier given to the new manual snapshot. </p> <p>Constraints:</p> <ul> <li>Cannot be null, empty, or blank.</li> <li>Must contain from 1 to 255 alphanumeric characters or hyphens.</li> <li>First character must be a letter.</li> <li>Cannot end with a hyphen or contain two consecutive hyphens.</li> <li>Must be unique for the AWS account that is making the request.</li> </ul>",
             "serialized_name": "TargetSnapshotIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -541,9 +538,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new cluster. To create the cluster in virtual private cloud (VPC), you must provide cluster subnet group name. If you don't provide a cluster subnet group name or the cluster security group parameter, Amazon Redshift creates a non-VPC cluster, it associates the default cluster security group with the cluster. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> . </p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "db_name": {
             "type": "string",
             "documentation": "<p>The name of the first database to be created when the cluster is created. </p> <p>To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database. For more information, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html\">Create a Database</a> in the Amazon Redshift Developer Guide. </p> <p>Default: <code>dev</code></p> <p>Constraints:</p> <ul> <li>Must contain 1 to 64 alphanumeric characters.</li> <li>Must contain only lowercase letters.</li> <li>Cannot be a word that is reserved by the service. A list of reserved words can be found in <a href=\"http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon Redshift Developer Guide. </li> </ul>",
@@ -651,7 +646,8 @@
             "documentation": "<p>If <code>true</code>, the data in cluster is encrypted at rest. </p> <p>Default: false</p>",
             "serialized_name": "Encrypted"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -982,9 +978,7 @@
       "http_path": "/",
       "documentation": "<p> Creates an Amazon Redshift parameter group. </p> <p>Creating parameter groups is independent of creating clusters. You can associate a cluster with a parameter group when you create the cluster. You can also associate an existing cluster with a parameter group after the cluster is created by using ModifyCluster. </p> <p> Parameters in the parameter group define specific behavior that applies to the databases you create on the cluster. For more information about managing parameter groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "parameter_group_name": {
             "type": "string",
             "required": true,
@@ -1003,7 +997,8 @@
             "documentation": "<p> A description of the parameter group. </p>",
             "serialized_name": "Description"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1056,9 +1051,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new Amazon Redshift security group. You use security groups to control access to non-VPC clusters. </p> <p> For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>???</p>",
-        "members": {
+        "params": {
           "cluster_security_group_name": {
             "type": "string",
             "required": true,
@@ -1071,7 +1064,8 @@
             "documentation": "<p> A description for the security group. </p>",
             "serialized_name": "Description"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1168,9 +1162,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a manual snapshot of the specified cluster. The cluster must be in the \"available\" state. </p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "snapshot_identifier": {
             "type": "string",
             "required": true,
@@ -1183,7 +1175,8 @@
             "documentation": "<p> The cluster identifier for which you want a snapshot. </p>",
             "serialized_name": "ClusterIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1360,9 +1353,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new Amazon Redshift subnet group. You must provide a list of one or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when creating Amazon Redshift subnet group. </p> <p> For information about subnet groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html\">Amazon Redshift Cluster Subnet Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_subnet_group_name": {
             "type": "string",
             "required": true,
@@ -1385,7 +1376,8 @@
               "serialized_name": "SubnetIdentifier"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1498,9 +1490,7 @@
       "http_path": "/",
       "documentation": "<p> Deletes a previously provisioned cluster. A successful response from the web service indicates that the request was received correctly. If a final cluster snapshot is requested the status of the cluster will be \"final-snapshot\" while the snapshot is being taken, then it's \"deleting\" once Amazon Redshift begins deleting the cluster. Use DescribeClusters to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> . </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_identifier": {
             "type": "string",
             "required": true,
@@ -1517,7 +1507,8 @@
             "documentation": "<p> The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, <i>SkipFinalClusterSnapshot</i> must be <code>false</code>. </p> <p>Constraints:</p> <ul> <li>Must be 1 to 255 alphanumeric characters.</li> <li>First character must be a letter.</li> <li>Cannot end with a hyphen or contain two consecutive hyphens.</li> </ul>",
             "serialized_name": "FinalClusterSnapshotIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1800,16 +1791,15 @@
       "http_path": "/",
       "documentation": "<p> Deletes a specified Amazon Redshift parameter group. You cannot delete a parameter group if it is associated with a cluster. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "parameter_group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the parameter group to be deleted. </p> <p>Constraints:</p> <ul> <li>Must be the name of an existing cluster parameter group.</li> <li>Cannot delete a default cluster parameter group.</li> </ul>",
             "serialized_name": "ParameterGroupName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1832,16 +1822,15 @@
       "http_path": "/",
       "documentation": "<p> Deletes an Amazon Redshift security group. </p> You cannot delete a security group that is associated with any clusters. You cannot delete the default security group. <p> For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_security_group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the cluster security group to be deleted. </p>",
             "serialized_name": "ClusterSecurityGroupName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1864,9 +1853,7 @@
       "http_path": "/",
       "documentation": "<p> Deletes the specified manual snapshot. The snapshot must be in the \"available\" state, with no other users authorized to access the snapshot. </p> <p> Unlike automated snapshots, manual snapshots are retained even after you delete your cluster. Amazon Redshift does not delete your manual snapshots. You must delete manual snapshot explicitly to avoid getting charged. If other accounts are authorized to access the snapshot, you must revoke all of the authorizations before you can delete the snapshot. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "snapshot_identifier": {
             "type": "string",
             "required": true,
@@ -1877,7 +1864,8 @@
             "type": "string",
             "serialized_name": "SnapshotClusterIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2042,15 +2030,15 @@
       "http_path": "/",
       "documentation": "<p> Deletes the specified cluster subnet group. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "cluster_subnet_group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name of the cluster subnet group name to be deleted.</p>",
             "serialized_name": "ClusterSubnetGroupName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -2079,9 +2067,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of Amazon Redshift parameter groups, including parameter groups you created and the default parameter group. For each parameter group, the response includes the parameter group name, description, and parameter group family name. You can optionally specify a name to retrieve the description of a specific parameter group. </p> <p> For more information about managing parameter groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "parameter_group_name": {
             "type": "string",
             "documentation": "<p> The name of a specific parameter group for which to return details. By default, details about all parameter groups and the default parameter group are returned. </p>",
@@ -2097,7 +2083,8 @@
             "documentation": "<p> An optional marker returned by a previous DescribeClusterParameterGroups request to indicate the first parameter group that the current request will return. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2155,8 +2142,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a detailed list of parameters contained within the specified Amazon Redshift parameter group. For each parameter the response includes information such as parameter name, description, data type, value, whether the parameter value is modifiable, and so on. </p> <p>You can specify <i>source</i> filter to retrieve parameters of only specific type. For example, to retrieve parameters that were modified by a user action such as from ModifyClusterParameterGroup, you can specify <i>source</i> equal to <i>user</i>.</p> <p> For more information about managing parameter groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "parameter_group_name": {
             "type": "string",
             "required": true,
@@ -2178,7 +2164,8 @@
             "documentation": "<p> An optional marker returned from a previous <b>DescribeClusterParameters</b> request. If this parameter is specified, the response includes only records beyond the specified marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2258,9 +2245,7 @@
       "http_path": "/",
       "documentation": "<p> Returns information about Amazon Redshift security groups. If the name of a security group is specified, the response will contain only information about only that security group. </p> <p> For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>???</p>",
-        "members": {
+        "params": {
           "cluster_security_group_name": {
             "type": "string",
             "documentation": "<p> The name of a cluster security group for which you are requesting details. You can specify either the <b>Marker</b> parameter or a <b>ClusterSecurityGroupName</b> parameter, but not both. </p> <p> Example: <code>securitygroup1</code> </p>",
@@ -2276,7 +2261,8 @@
             "documentation": "<p> An optional marker returned by a previous DescribeClusterSecurityGroups request to indicate the first security group that the current request will return. You can specify either the <b>Marker</b> parameter or a <b>ClusterSecurityGroupName</b> parameter, but not both. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2378,9 +2364,7 @@
       "http_path": "/",
       "documentation": "<p> Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by you AWS customer account. No information is returned for snapshots owned by inactive AWS customer accounts. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_identifier": {
             "type": "string",
             "documentation": "<p> The identifier of the cluster for which information about snapshots is requested. </p>",
@@ -2421,7 +2405,8 @@
             "documentation": "<p> The AWS customer account used to create or copy the snapshot. Use this field to filter the results to snapshots owned by a particular account. To describe snapshots you own, either specify your AWS customer account, or do not specify the parameter. </p>",
             "serialized_name": "OwnerAccount"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2591,9 +2576,7 @@
       "http_path": "/",
       "documentation": "<p> Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in you AWS account. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_subnet_group_name": {
             "type": "string",
             "documentation": "<p>The name of the cluster subnet group for which information is requested. </p>",
@@ -2609,7 +2592,8 @@
             "documentation": "<p>An optional marker returned by a previous DescribeClusterSubnetGroups request to indicate the first cluster subnet group that the current request will return.</p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2709,8 +2693,7 @@
       "http_path": "/",
       "documentation": "<p> Returns descriptions of the available Amazon Redshift cluster versions. You can call this operation even before creating any clusters to learn more about the Amazon Redshift versions. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> </p>",
       "input": {
-        "type": "structure",
-        "members": {
+        "params": {
           "cluster_version": {
             "type": "string",
             "documentation": "<p> The specific cluster version to return. </p> <p>Example: <code>1.0</code></p>",
@@ -2731,7 +2714,8 @@
             "documentation": "<p> The marker returned from a previous request. If this parameter is specified, the response includes records beyond the marker only, up to <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2778,9 +2762,7 @@
       "http_path": "/",
       "documentation": "<p> Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> . </p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_identifier": {
             "type": "string",
             "documentation": "<p> The unique identifier of a cluster whose properties you are requesting. This parameter isn't case sensitive. </p> <p>The default is that all clusters defined for an account are returned. </p>",
@@ -2796,7 +2778,8 @@
             "documentation": "<p> An optional marker returned by a previous <b>DescribeClusters</b> request to indicate the first cluster that the current <b>DescribeClusters</b> request will return. </p> <p>You can specify either a <b>Marker</b> parameter or a <b>ClusterIdentifier</b> parameter in a <b>DescribeClusters</b> request, but not both.</p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3072,9 +3055,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of parameter settings for the specified parameter group family. </p> <p> For more information about managing parameter groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "parameter_group_family": {
             "type": "string",
             "required": true,
@@ -3091,7 +3072,8 @@
             "documentation": "<p> An optional marker returned from a previous <b>DescribeDefaultClusterParameters</b> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3177,9 +3159,7 @@
       "http_path": "/",
       "documentation": "<p> Returns events related to clusters, security groups, snapshots, and parameter groups for the past 14 days. Events specific to a particular cluster, security group, snapshot or parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "source_identifier": {
             "type": "string",
             "documentation": "<p> The identifier of the event source for which events will be returned. If this parameter is not specified, then all sources are included in the response. </p> <p>Constraints:</p> <p>If <i>SourceIdentifier</i> is supplied, <i>SourceType</i> must also be provided.</p> <ul> <li>Specify a cluster identifier when <i>SourceType</i> is <code>cluster</code>.</li> <li>Specify a cluster security group name when <i>SourceType</i> is <code>cluster-security-group</code>.</li> <li>Specify a cluster parameter group name when <i>SourceType</i> is <code>cluster-parameter-group</code>.</li> <li>Specify a cluster snapshot identifier when <i>SourceType</i> is <code>cluster-snapshot</code>.</li> </ul>",
@@ -3221,7 +3201,8 @@
             "documentation": "<p> An optional marker returned from a previous <b>DescribeEvents</b> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3279,9 +3260,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_version": {
             "type": "string",
             "documentation": "<p> The version filter value. Specify this parameter to show only the available offerings matching the specified version. </p> <p>Default: All versions.</p> <p>Constraints: Must be one of the version returned from DescribeClusterVersions.</p>",
@@ -3302,7 +3281,8 @@
             "documentation": "<p> An optional marker returned from a previous <b>DescribeOrderableClusterOptions</b> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3372,9 +3352,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to PurchaseReservedNodeOffering to reserve one or more nodes for your Amazon Redshift cluster. </p> <p> For more information about managing parameter groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html\">Purchasing Reserved Nodes</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>to be provided.</p>",
-        "members": {
+        "params": {
           "reserved_node_offering_id": {
             "type": "string",
             "documentation": "<p>The unique identifier for the offering.</p>",
@@ -3390,7 +3368,8 @@
             "documentation": "<p> An optional marker returned by a previous DescribeReservedNodeOfferings request to indicate the first offering that the request will return. </p> <p>You can specify either a <b>Marker</b> parameter or a <b>ClusterIdentifier</b> parameter in a DescribeClusters request, but not both.</p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3493,9 +3472,7 @@
       "http_path": "/",
       "documentation": "<p> Returns the descriptions of the reserved nodes. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "reserved_node_id": {
             "type": "string",
             "documentation": "<p>Identifier for the node reservation.</p>",
@@ -3511,7 +3488,8 @@
             "documentation": "<p>An optional marker returned by a previous DescribeReservedNodes request to indicate the first parameter group that the current request will return.</p>",
             "serialized_name": "Marker"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3634,16 +3612,15 @@
       "http_path": "/",
       "documentation": "<p> Returns information about the last resize operation for the specified cluster. If no resize operation has ever been initiated for the specified cluster, a <code>HTTP 404</code> error is returned. If a resize operation was initiated and completed, the status of the resize remains as <code>SUCCEEDED</code> until the next resize. </p> <p> A resize operation can be requested using ModifyCluster and specifying a different number or type of nodes for the cluster. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_identifier": {
             "type": "string",
             "required": true,
             "documentation": "<p> The unique identifier of a cluster whose resize progress you are requesting. This parameter isn't case-sensitive. </p> <p>By default, resize operations for all clusters defined for an AWS account are returned. </p>",
             "serialized_name": "ClusterIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3716,9 +3693,7 @@
       "http_path": "/",
       "documentation": "<p> Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> </p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change. If you specify the same number of nodes and node type that are already configured for the cluster, an error is returned.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_identifier": {
             "type": "string",
             "required": true,
@@ -3788,7 +3763,8 @@
             "documentation": "<p> If <code>true</code>, upgrades will be applied automatically to the cluster during the maintenance window. </p> <p>Default: <code>false</code></p>",
             "serialized_name": "AllowVersionUpgrade"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4101,9 +4077,7 @@
       "http_path": "/",
       "documentation": "<p> Modifies the parameters of a parameter group. </p> <p> For more information about managing parameter groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "parameter_group_name": {
             "type": "string",
             "required": true,
@@ -4163,7 +4137,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4202,9 +4177,7 @@
       "http_path": "/",
       "documentation": "<p> Modifies a cluster subnet group to include the specified list of VPC subnets. The operation replaces the existing list of subnets with the new list of subnets. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_subnet_group_name": {
             "type": "string",
             "required": true,
@@ -4226,7 +4199,8 @@
               "serialized_name": "SubnetIdentifier"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4339,9 +4313,7 @@
       "http_path": "/",
       "documentation": "<p> Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings. You can purchase one of the offerings. You can call the DescribeReservedNodeOfferings API to obtain the available reserved node offerings. You can call this API by providing a specific reserved node offering and the number of nodes you want to reserve. </p> <p> For more information about managing parameter groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html\">Purchasing Reserved Nodes</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "reserved_node_offering_id": {
             "type": "string",
             "required": true,
@@ -4353,7 +4325,8 @@
             "documentation": "<p>The number of reserved nodes you want to purchase.</p> <p>Default: <code>1</code></p>",
             "serialized_name": "NodeCount"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4477,16 +4450,15 @@
       "http_path": "/",
       "documentation": "<p> Reboots a cluster. This action is taken as soon as possible. It results in a momentary outage to the cluster, during which the cluster status is set to <code>rebooting</code>. A cluster event is created when the reboot is completed. Any pending cluster modifications (see ModifyCluster) are applied at this reboot. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "cluster_identifier": {
             "type": "string",
             "required": true,
             "documentation": "<p> The cluster identifier. </p>",
             "serialized_name": "ClusterIdentifier"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4757,9 +4729,7 @@
       "http_path": "/",
       "documentation": "<p> Sets one or more parameters of the specified parameter group to their default values and sets the source values of the parameters to \"engine-default\". To reset the entire parameter group specify the <i>ResetAllParameters</i> parameter. For parameter changes to take effect you must reboot any associated clusters. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "parameter_group_name": {
             "type": "string",
             "required": true,
@@ -4823,7 +4793,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4862,9 +4833,7 @@
       "http_path": "/",
       "documentation": "<p> Creates a new cluster from a snapshot. Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter group. After Amazon Redshift creates the cluster you can use the ModifyCluster API to associate a different security group and different parameter group with the restored cluster. </p> <p> If a snapshot is taken of a cluster in VPC, you can restore it only in VPC. In this case, you must provide a cluster subnet group where you want the cluster restored. If snapshot is taken of a cluster outside VPC, then you can restore it only outside VPC.</p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> ??? </p>",
-        "members": {
+        "params": {
           "cluster_identifier": {
             "type": "string",
             "required": true,
@@ -4911,7 +4880,8 @@
             "documentation": "<p> The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot. </p>",
             "serialized_name": "OwnerAccount"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5254,9 +5224,7 @@
       "http_path": "/",
       "documentation": "<p> Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see AuthorizeClusterSecurityGroupIngress. For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> ??? </p>",
-        "members": {
+        "params": {
           "cluster_security_group_name": {
             "type": "string",
             "required": true,
@@ -5278,7 +5246,8 @@
             "documentation": "<p> The AWS account number of the owner of the security group specified in the <code>EC2SecurityGroupName</code> parameter. The AWS access key ID is not an acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified, <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code> cannot be provided. </p> <p>Example: <code>111122223333</code></p>",
             "serialized_name": "EC2SecurityGroupOwnerId"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5381,9 +5350,7 @@
       "http_path": "/",
       "documentation": "<p> Removes the ability of the specified AWS customer account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion. </p> <p> For more information about working with snapshots, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> </p>",
-        "members": {
+        "params": {
           "snapshot_identifier": {
             "type": "string",
             "required": true,
@@ -5400,7 +5367,8 @@
             "documentation": "<p> The identifier of the AWS customer account that can no longer restore the specified snapshot. </p>",
             "serialized_name": "AccountWithRestoreAccess"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",

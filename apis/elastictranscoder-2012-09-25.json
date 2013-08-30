@@ -21,16 +21,15 @@
       "http_path": "/2012-09-25/jobs/{Id}",
       "documentation": "<p>The CancelJob operation cancels an unfinished job.</p> You can only cancel a job that has a status of <code>Submitted</code>. To prevent a pipeline from starting to process a job while you're getting the job identifier, use UpdatePipelineStatus to temporarily pause the pipeline. </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>CancelJobRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "<p>The identifier of the job that you want to cancel. </p> <p>To get a list of the jobs (including their <code>jobId</code>) that have a status of <code>Submitted</code>, use the ListJobsByStatus API action.</p>",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -82,9 +81,7 @@
       "http_path": "/2012-09-25/jobs",
       "documentation": "<p> When you create a job, Elastic Transcoder returns JSON data that includes the values that you specified plus information about the job that is created. </p> <p>If you have specified more than one output for your jobs (for example, one output for the Kindle Fire and another output for the Apple iPhone 4s), you currently must use the Elastic Transcoder API to list the jobs (as opposed to the AWS Console).</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>CreateJobRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "pipeline_id": {
             "type": "string",
             "documentation": "<p>The <code>Id</code> of the pipeline that you want Elastic Transcoder to use for transcoding. The pipeline determines several settings, including the Amazon S3 bucket from which Elastic Transcoder gets the files to transcode and the bucket into which Elastic Transcoder puts the transcoded files.</p>",
@@ -271,7 +268,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -596,9 +594,7 @@
       "http_path": "/2012-09-25/pipelines",
       "documentation": "<p>The CreatePipeline operation creates a pipeline with settings that you specify.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>CreatePipelineRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "name": {
             "type": "string",
             "documentation": "<p>The name of the pipeline. We recommend that the name be unique within the AWS account, but uniqueness is not enforced.</p> <p>Constraints: Maximum 40 characters.</p>",
@@ -738,7 +734,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -951,9 +948,7 @@
       "http_path": "/2012-09-25/presets",
       "documentation": "<p>The CreatePreset operation creates a preset with settings that you specify.</p> <important>Elastic Transcoder checks the CreatePreset settings to ensure that they meet Elastic Transcoder requirements and to determine whether they comply with H.264 standards. If your settings are not valid for Elastic Transcoder, Elastic Transcoder returns an HTTP 400 response (<code>ValidationException</code>) and does not create the preset. If the settings are valid for Elastic Transcoder but aren't strictly compliant with the H.264 standard, Elastic Transcoder creates the preset and returns a warning message in the response. This helps you determine whether your settings comply with the H.264 standard while giving you greater flexibility with respect to the video that Elastic Transcoder produces.</important> <p>Elastic Transcoder uses the H.264 video-compression format. For more information, see the International Telecommunication Union publication <i>Recommendation ITU-T H.264: Advanced video coding for generic audiovisual services</i>.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>CreatePresetRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "name": {
             "type": "string",
             "documentation": "<p>The name of the preset. We recommend that the name be unique within the AWS account, but uniqueness is not enforced.</p>",
@@ -1187,7 +1182,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1488,16 +1484,15 @@
       "http_path": "/2012-09-25/pipelines/{Id}",
       "documentation": "<p>The DeletePipeline operation removes a pipeline.</p> <p> You can only delete a pipeline that has never been used or that is not currently in use (doesn't contain any active jobs). If the pipeline is currently in use, <code>DeletePipeline</code> returns an error. </p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>DeletePipelineRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "<p>The identifier of the pipeline that you want to delete.</p>",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1549,16 +1544,15 @@
       "http_path": "/2012-09-25/presets/{Id}",
       "documentation": "<p>The DeletePreset operation removes a preset that you've added in an AWS region.</p> <p>You can't delete the default presets that are included with Elastic Transcoder.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>DeletePresetRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "<p>The identifier of the preset for which you want to get detailed information.</p>",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1604,9 +1598,7 @@
       "http_path": "/2012-09-25/jobsByPipeline/{PipelineId}?Ascending={Ascending}&PageToken={PageToken}",
       "documentation": "<p>The ListJobsByPipeline operation gets a list of the jobs currently in a pipeline.</p> <p>Elastic Transcoder returns all of the jobs currently in the specified pipeline. The response body contains one element for each job that satisfies the search criteria.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>ListJobsByPipelineRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "pipeline_id": {
             "type": "string",
             "documentation": "<p> The ID of the pipeline for which you want to get job information. </p>",
@@ -1625,7 +1617,8 @@
             "location": "uri",
             "serialized_name": "PageToken"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1953,9 +1946,7 @@
       "http_path": "/2012-09-25/jobsByStatus/{Status}?Ascending={Ascending}&PageToken={PageToken}",
       "documentation": "<p>The ListJobsByStatus operation gets a list of jobs that have a specified status. The response body contains one element for each job that satisfies the search criteria.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>ListJobsByStatusRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "status": {
             "type": "string",
             "documentation": "<p>To get information about all of the jobs associated with the current AWS account that have a given status, specify the following status: <code>Submitted</code>, <code>Progressing</code>, <code>Complete</code>, <code>Canceled</code>, or <code>Error</code>.</p>",
@@ -1974,7 +1965,8 @@
             "location": "uri",
             "serialized_name": "PageToken"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2302,10 +2294,9 @@
       "http_path": "/2012-09-25/pipelines",
       "documentation": "<p>The ListPipelines operation gets a list of the pipelines associated with the current AWS account.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>ListPipelineRequest</code> structure.</p>",
-        "members": {
-        }
+        "params": {
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2510,10 +2501,9 @@
       "http_path": "/2012-09-25/presets",
       "documentation": "<p>The ListPresets operation gets a list of the default presets included with Elastic Transcoder and the presets that you've added in an AWS region.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>ListPresetsRequest</code> structure.</p>",
-        "members": {
-        }
+        "params": {
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2807,16 +2797,15 @@
       "http_path": "/2012-09-25/jobs/{Id}",
       "documentation": "<p>The ReadJob operation returns detailed information about a job.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>ReadJobRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "<p>The identifier of the job for which you want to get detailed information.</p>",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3135,16 +3124,15 @@
       "http_path": "/2012-09-25/pipelines/{Id}",
       "documentation": "<p>The ReadPipeline operation gets detailed information about a pipeline.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>ReadPipelineRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "<p>The identifier of the pipeline to read.</p>",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3351,16 +3339,15 @@
       "http_path": "/2012-09-25/presets/{Id}",
       "documentation": "<p>The ReadPreset operation gets detailed information about a preset.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>ReadPresetRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "<p>The identifier of the preset for which you want to get detailed information.</p>",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3656,9 +3643,7 @@
       "http_path": "/2012-09-25/roleTests",
       "documentation": "<p>The TestRole operation tests the IAM role used to create the pipeline.</p> <p>The <code>TestRole</code> action lets you determine whether the IAM role you are using has sufficient permissions to let Elastic Transcoder perform tasks associated with the transcoding process. The action attempts to assume the specified IAM role, checks read access to the input and output buckets, and tries to send a test notification to Amazon SNS topics that you specify.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p> The <code>TestRoleRequest</code> structure. </p>",
-        "members": {
+        "params": {
           "role": {
             "type": "string",
             "documentation": "<p>The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to test.</p>",
@@ -3682,7 +3667,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3741,9 +3727,7 @@
       "http_path": "/2012-09-25/pipelines/{Id}",
       "documentation": "<p> Use the <code>UpdatePipeline</code> operation to update settings for a pipeline. <important>When you change pipeline settings, your changes take effect immediately. Jobs that you have already submitted and that Elastic Transcoder has not started to process are affected in addition to jobs that you submit after you change settings. </important> </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>UpdatePipelineRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "required": true,
@@ -3885,7 +3869,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4098,9 +4083,7 @@
       "http_path": "/2012-09-25/pipelines/{Id}/notifications",
       "documentation": "<p>With the UpdatePipelineNotifications operation, you can update Amazon Simple Notification Service (Amazon SNS) notifications for a pipeline.</p> <p>When you update notifications for a pipeline, Elastic Transcoder returns the values that you specified in the request.</p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>UpdatePipelineNotificationsRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "<p> The identifier of the pipeline for which you want to change notification settings. </p>",
@@ -4134,7 +4117,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4347,9 +4331,7 @@
       "http_path": "/2012-09-25/pipelines/{Id}/status",
       "documentation": "<p>The UpdatePipelineStatus operation pauses or reactivates a pipeline, so that the pipeline stops or restarts the processing of jobs.</p> <p>Changing the pipeline status is useful if you want to cancel one or more jobs. You can't cancel jobs after Elastic Transcoder has started processing them; if you pause the pipeline to which you submitted the jobs, you have more time to get the job IDs for the jobs that you want to cancel, and to send a CancelJob request. </p> </examples>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The <code>UpdatePipelineStatusRequest</code> structure.</p>",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "<p>The identifier of the pipeline to update.</p>",
@@ -4361,7 +4343,8 @@
             "documentation": "<p>The desired status of the pipeline:</p> <ul> <li> <code>Active</code>: The pipeline is processing jobs.</li> <li> <code>Paused</code>: The pipeline is not currently processing jobs.</li> </ul>",
             "serialized_name": "Status"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",

@@ -23,16 +23,15 @@
       "http_path": "/",
       "documentation": "<p> Checks if the specified CNAME is available. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>Results message indicating whether a CNAME is available.</p>",
-        "members": {
+        "params": {
           "cname_prefix": {
             "type": "string",
             "required": true,
             "documentation": "<p> The prefix used when this CNAME is reserved. </p>",
             "serialized_name": "CNAMEPrefix"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -57,9 +56,7 @@
       "http_path": "/",
       "documentation": "<p> Creates an application that has one configuration template named <code>default</code> and no application versions. </p> The <code>default</code> configuration template is for a 32-bit version of the Amazon Linux operating system running the Tomcat 6 application container.",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -71,7 +68,8 @@
             "documentation": "<p>Describes the application.</p>",
             "serialized_name": "Description"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -137,9 +135,7 @@
       "http_path": "/",
       "documentation": "<p>Creates an application version for the specified application.</p> Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version.",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -179,7 +175,8 @@
             "documentation": "<p> Determines how the system behaves if the specified application for this version does not already exist: </p> <enumValues> <value name=\"true\"> <p> <code>true</code>: Automatically creates the specified application for this version if it does not already exist. </p> </value> <value name=\"false\"> <p> <code>false</code>: Returns an <code>InvalidParameterValue</code> if the specified application for this version does not already exist. </p> </value> </enumValues> <ul> <li> <code>true</code> : Automatically creates the specified application for this release if it does not already exist. </li> <li> <code>false</code> : Throws an <code>InvalidParameterValue</code> if the specified application for this release does not already exist. </li> </ul> <p> Default: <code>false</code> </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>",
             "serialized_name": "AutoCreateApplication"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -269,9 +266,7 @@
       "http_path": "/",
       "documentation": "<p>Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings.</p> <p>Related Topics</p> <ul> <li> DescribeConfigurationOptions </li> <li> DescribeConfigurationSettings </li> <li> ListAvailableSolutionStacks </li> </ul>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -342,7 +337,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -442,9 +438,7 @@
       "http_path": "/",
       "documentation": "<p> Launches an environment for the specified application using the specified configuration. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -529,7 +523,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -680,6 +675,11 @@
       "http_method": "POST",
       "http_path": "/",
       "documentation": "<p> Creates the Amazon S3 storage location for the account. </p> <p> This location is used to store user log files. </p>",
+      "input": {
+        "params": {
+        },
+        "raw_payload": false
+      },
       "output": {
         "type": "structure",
         "documentation": "<p>Results of a CreateStorageLocationResult call.</p>",
@@ -718,9 +718,7 @@
       "http_path": "/",
       "documentation": "<p> Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket. </p> You cannot delete an application that has a running environment.",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -732,7 +730,8 @@
             "documentation": "<p>When set to true, running environments will be terminated before deleting the application.</p>",
             "serialized_name": "TerminateEnvByForce"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -749,9 +748,7 @@
       "http_path": "/",
       "documentation": "<p> Deletes the specified version from the specified application. </p> You cannot delete an application version that is associated with a running environment.",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -769,7 +766,8 @@
             "documentation": "<p>Indicates whether to delete the associated source bundle from Amazon S3: </p> <ul> <li> <code>true</code>: An attempt is made to delete the associated Amazon S3 source bundle specified at time of creation. </li> <li> <code>false</code>: No action is taken on the Amazon S3 source bundle specified at time of creation. </li> </ul> <p> Valid Values: <code>true</code> | <code>false</code> </p>",
             "serialized_name": "DeleteSourceBundle"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -804,9 +802,7 @@
       "http_path": "/",
       "documentation": "<p>Deletes the specified configuration template.</p> When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment's copy of the template without affecting the running environment.",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -819,7 +815,8 @@
             "documentation": "<p>The name of the configuration template to delete.</p>",
             "serialized_name": "TemplateName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -836,9 +833,7 @@
       "http_path": "/",
       "documentation": "<p> Deletes the draft configuration associated with the running environment. </p> <p> Updating a running environment with any configuration changes creates a draft configuration set. You can get the draft configuration using DescribeConfigurationSettings while the update is in progress or if the update fails. The <code>DeploymentStatus</code> for the draft configuration indicates whether the deployment is in process or has failed. The draft configuration remains in existence until it is deleted with this action. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -851,7 +846,8 @@
             "documentation": "<p> The name of the environment to delete the draft configuration from. </p>",
             "serialized_name": "EnvironmentName"
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "describe_application_versions": {
@@ -860,9 +856,7 @@
       "http_path": "/",
       "documentation": "<p>Returns descriptions for existing application versions.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>Result message containing a list of configuration descriptions.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include ones that are associated with the specified application. </p>",
@@ -876,7 +870,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -944,9 +939,7 @@
       "http_path": "/",
       "documentation": "<p>Returns the descriptions of existing applications.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "application_names": {
             "type": "list",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names. </p>",
@@ -955,7 +948,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1017,9 +1011,7 @@
       "http_path": "/",
       "documentation": "<p> Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>Result message containig a list of application version descriptions. </p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "documentation": "<p> The name of the application associated with the configuration template or environment. Only needed if you want to describe the configuration options associated with either the configuration template or environment. </p>",
@@ -1061,7 +1053,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1166,9 +1159,7 @@
       "http_path": "/",
       "documentation": "<p> Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment. </p> <p> When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy. </p> <p>Related Topics</p> <ul> <li> DeleteEnvironmentConfiguration </li> </ul>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>Result message containing all of the configuration settings for a specified solution stack or configuration template.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -1185,7 +1176,8 @@
             "documentation": "<p> The name of the environment to describe. </p> <p> Condition: You must specify either this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
             "serialized_name": "EnvironmentName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1282,9 +1274,7 @@
       "http_path": "/",
       "documentation": "<p>Returns AWS resources for this environment.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "environment_id": {
             "type": "string",
             "documentation": "<p> The ID of the environment to retrieve AWS resource usage data. </p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
@@ -1295,7 +1285,8 @@
             "documentation": "<p> The name of the environment to retrieve AWS resource usage data. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
             "serialized_name": "EnvironmentName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1410,9 +1401,7 @@
       "http_path": "/",
       "documentation": "<p>Returns descriptions for existing environments.</p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application. </p>",
@@ -1449,7 +1438,8 @@
             "documentation": "<p> If specified when <code>IncludeDeleted</code> is set to <code>true</code>, then environments deleted after this date are displayed. </p>",
             "serialized_name": "IncludedDeletedBackTo"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1598,9 +1588,7 @@
       "http_path": "/",
       "documentation": "<p>Returns list of event descriptions matching criteria up to the last 6 weeks.</p> This action returns the most recent 1,000 events from the specified <code>NextToken</code>.",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those associated with this application. </p>",
@@ -1664,7 +1652,8 @@
             "documentation": "<p> Pagination token. If specified, the events return the next batch of results. </p>",
             "serialized_name": "NextToken"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1742,6 +1731,11 @@
       "http_method": "POST",
       "http_path": "/",
       "documentation": "<p> Returns a list of the available solution stack names. </p>",
+      "input": {
+        "params": {
+        },
+        "raw_payload": false
+      },
       "output": {
         "type": "structure",
         "documentation": "<p>A list of available AWS Elastic Beanstalk solution stacks. </p>",
@@ -1787,9 +1781,7 @@
       "http_path": "/",
       "documentation": "<p> Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "environment_id": {
             "type": "string",
             "documentation": "<p> The ID of the environment to rebuild. </p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
@@ -1800,7 +1792,8 @@
             "documentation": "<p> The name of the environment to rebuild. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
             "serialized_name": "EnvironmentName"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -1817,9 +1810,7 @@
       "http_path": "/",
       "documentation": "<p> Initiates a request to compile the specified type of information of the deployed environment. </p> <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from the application server log files of every Amazon EC2 instance in your environment. Use RetrieveEnvironmentInfo to access the compiled information. </p> <p>Related Topics</p> <ul> <li> RetrieveEnvironmentInfo </li> </ul>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "environment_id": {
             "type": "string",
             "documentation": "<p>The ID of the environment of the requested data.</p> <p> If no such environment is found, <code>RequestEnvironmentInfo</code> returns an <code>InvalidParameterValue</code> error. </p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
@@ -1839,7 +1830,8 @@
               "tail"
             ]
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "restart_app_server": {
@@ -1848,9 +1840,7 @@
       "http_path": "/",
       "documentation": "<p> Causes the environment to restart the application container server running on each Amazon EC2 instance. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "environment_id": {
             "type": "string",
             "documentation": "<p> The ID of the environment to restart the server for. </p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
@@ -1861,7 +1851,8 @@
             "documentation": "<p> The name of the environment to restart the server for. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
             "serialized_name": "EnvironmentName"
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "retrieve_environment_info": {
@@ -1870,9 +1861,7 @@
       "http_path": "/",
       "documentation": "<p> Retrieves the compiled information from a RequestEnvironmentInfo request. </p> <p>Related Topics</p> <ul> <li> RequestEnvironmentInfo </li> </ul>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "environment_id": {
             "type": "string",
             "documentation": "<p>The ID of the data's environment.</p> <p> If no such environment is found, returns an <code>InvalidParameterValue</code> error. </p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
@@ -1892,7 +1881,8 @@
               "tail"
             ]
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1941,9 +1931,7 @@
       "http_path": "/",
       "documentation": "<p> Swaps the CNAMEs of two environments. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "source_environment_id": {
             "type": "string",
             "documentation": "<p> The ID of the source environment. </p> <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If you specify the <code>SourceEnvironmentId</code>, you must specify the <code>DestinationEnvironmentId</code>. </p>",
@@ -1964,7 +1952,8 @@
             "documentation": "<p> The name of the destination environment. </p> <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the <code>SourceEnvironmentName</code> with the <code>DestinationEnvironmentName</code>. </p>",
             "serialized_name": "DestinationEnvironmentName"
           }
-        }
+        },
+        "raw_payload": false
       }
     },
     "terminate_environment": {
@@ -1973,9 +1962,7 @@
       "http_path": "/",
       "documentation": "<p> Terminates the specified environment. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "environment_id": {
             "type": "string",
             "documentation": "<p>The ID of the environment to terminate.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
@@ -1991,7 +1978,8 @@
             "documentation": "<p> Indicates whether the associated AWS resources should shut down when the environment is terminated: </p> <enumValues> <value name=\"true\"> <p> <code>true</code>: (default) The user AWS resources (for example, the Auto Scaling group, LoadBalancer, etc.) are terminated along with the environment. </p> </value> <value name=\"false\"> <p> <code>false</code>: The environment is removed from the AWS Elastic Beanstalk but the AWS resources continue to operate. </p> </value> </enumValues> <ul> <li> <code>true</code>: The specified environment as well as the associated AWS resources, such as Auto Scaling group and LoadBalancer, are terminated. </li> <li> <code>false</code>: AWS Elastic Beanstalk resource management is removed from the environment, but the AWS resources continue to operate. </li> </ul> <p> For more information, see the <a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/ug/\"> AWS Elastic Beanstalk User Guide. </a> </p> <p> Default: <code>true</code> </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>",
             "serialized_name": "TerminateResources"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2137,9 +2125,7 @@
       "http_path": "/",
       "documentation": "<p>Updates the specified application to have the specified properties. </p> If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear these properties, specify an empty string.",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -2151,7 +2137,8 @@
             "documentation": "<p> A new description for the application. </p> <p>Default: If not specified, AWS Elastic Beanstalk does not update the description. </p>",
             "serialized_name": "Description"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2209,9 +2196,7 @@
       "http_path": "/",
       "documentation": "<p> Updates the specified application version to have the specified properties. </p> If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear properties, specify an empty string.",
       "input": {
-        "type": "structure",
-        "documentation": "<p></p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -2229,7 +2214,8 @@
             "documentation": "<p>A new description for this release.</p>",
             "serialized_name": "Description"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2293,9 +2279,7 @@
       "http_path": "/",
       "documentation": "<p> Updates the specified configuration template to have the specified properties or configuration option values. </p> If a property (for example, <code>ApplicationName</code>) is not provided, its value remains unchanged. To clear such properties, specify an empty string. <p>Related Topics</p> <ul> <li> DescribeConfigurationOptions </li> </ul>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>The result message containing the options for the specified solution stack.</p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -2360,7 +2344,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2454,9 +2439,7 @@
       "http_path": "/",
       "documentation": "<p> Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment. </p> <p> Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p> <p> When updating the configuration settings to a new template or individual settings, a draft configuration is created and DescribeConfigurationSettings for this environment returns two setting descriptions with different <code>DeploymentStatus</code> values. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>This documentation target is not reported in the API reference.</p>",
-        "members": {
+        "params": {
           "environment_id": {
             "type": "string",
             "documentation": "<p>The ID of the environment to update.</p> <p> If no environment with this ID exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>",
@@ -2529,7 +2512,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2675,9 +2659,7 @@
       "http_path": "/",
       "documentation": "<p> Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid. </p> <p> This action returns a list of messages indicating any errors or warnings associated with the selection of option values. </p>",
       "input": {
-        "type": "structure",
-        "documentation": "<p>A list of validation messages for a specified configuration template. </p>",
-        "members": {
+        "params": {
           "application_name": {
             "type": "string",
             "required": true,
@@ -2721,7 +2703,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",

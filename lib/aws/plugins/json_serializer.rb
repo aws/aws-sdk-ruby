@@ -22,7 +22,8 @@ module Aws
         operation = context.operation
         metadata = context.config.api.metadata
 
-        rules = operation.input.body_params
+        rules = Seahorse::Model::Shapes::StructureShape.new
+        rules.members.update(operation.input.body_params)
         target = "#{metadata['json_target_prefix']}.#{operation.name}"
         version = metadata['json_version']
 

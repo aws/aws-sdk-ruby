@@ -22,9 +22,7 @@
       "http_path": "/2013-05-12/origin-access-identity/cloudfront",
       "documentation": "Create a new origin access identity.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to create a new origin access identity.",
-        "members": {
+        "params": {
           "cloud_front_origin_access_identity_config": {
             "type": "structure",
             "required": true,
@@ -48,7 +46,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -164,9 +163,7 @@
       "http_path": "/2013-05-12/distribution",
       "documentation": "Create a new distribution.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to create a new distribution.",
-        "members": {
+        "params": {
           "distribution_config": {
             "type": "structure",
             "required": true,
@@ -617,7 +614,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1344,9 +1342,7 @@
       "http_path": "/2013-05-12/distribution/{DistributionId}/invalidation",
       "documentation": "Create a new invalidation.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to create an invalidation.",
-        "members": {
+        "params": {
           "distribution_id": {
             "type": "string",
             "required": true,
@@ -1394,7 +1390,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -1544,9 +1541,7 @@
       "http_path": "/2013-05-12/streaming-distribution",
       "documentation": "Create a new streaming distribution.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to create a new streaming distribution.",
-        "members": {
+        "params": {
           "streaming_distribution_config": {
             "type": "structure",
             "required": true,
@@ -1685,7 +1680,8 @@
               }
             }
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2034,9 +2030,7 @@
       "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}",
       "documentation": "Delete an origin access identity.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to delete a origin access identity.",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "The origin access identity's id.",
@@ -2049,7 +2043,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -2109,9 +2104,7 @@
       "http_path": "/2013-05-12/distribution/{Id}",
       "documentation": "Delete a distribution.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to delete a distribution.",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "The distribution id.",
@@ -2124,7 +2117,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -2184,9 +2178,7 @@
       "http_path": "/2013-05-12/streaming-distribution/{Id}",
       "documentation": "Delete a streaming distribution.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to delete a streaming distribution.",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "The distribution id.",
@@ -2199,7 +2191,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "errors": [
         {
@@ -2259,16 +2252,15 @@
       "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}",
       "documentation": "Get the information about an origin access identity.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to get an origin access identity's information.",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "The identity's id.",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2348,16 +2340,15 @@
       "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}/config",
       "documentation": "Get the configuration information about an origin access identity.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to get an origin access identity's configuration.",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "The identity's id.",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2420,16 +2411,15 @@
       "http_path": "/2013-05-12/distribution/{Id}",
       "documentation": "Get the information about a distribution.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to get a distribution's information.",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "The distribution's id.",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -2962,16 +2952,15 @@
       "http_path": "/2013-05-12/distribution/{Id}/config",
       "documentation": "Get the configuration information about a distribution.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to get a distribution configuration.",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "The distribution's id.",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3417,9 +3406,7 @@
       "http_path": "/2013-05-12/distribution/{DistributionId}/invalidation/{Id}",
       "documentation": "Get the information about an invalidation.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to get an invalidation's information.",
-        "members": {
+        "params": {
           "distribution_id": {
             "type": "string",
             "required": true,
@@ -3434,7 +3421,8 @@
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3539,16 +3527,15 @@
       "http_path": "/2013-05-12/streaming-distribution/{Id}",
       "documentation": "Get the information about a streaming distribution.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to get a streaming distribution's information.",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "The streaming distribution's id.",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3794,16 +3781,15 @@
       "http_path": "/2013-05-12/streaming-distribution/{Id}/config",
       "documentation": "Get the configuration information about a streaming distribution.",
       "input": {
-        "type": "structure",
-        "documentation": "To request to get a streaming distribution configuration.",
-        "members": {
+        "params": {
           "id": {
             "type": "string",
             "documentation": "The streaming distribution's id.",
             "location": "uri",
             "serialized_name": "Id"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -3967,9 +3953,7 @@
       "http_path": "/2013-05-12/origin-access-identity/cloudfront?Marker={Marker}&MaxItems={MaxItems}",
       "documentation": "List origin access identities.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to list origin access identities.",
-        "members": {
+        "params": {
           "marker": {
             "type": "string",
             "documentation": "Use this when paginating results to indicate where to begin in your list of origin access identities. The results include identities in the list that occur after the marker. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response (which is also the ID of the last identity on that page).",
@@ -3982,7 +3966,8 @@
             "location": "uri",
             "serialized_name": "MaxItems"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4071,9 +4056,7 @@
       "http_path": "/2013-05-12/distribution?Marker={Marker}&MaxItems={MaxItems}",
       "documentation": "List distributions.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to list your distributions.",
-        "members": {
+        "params": {
           "marker": {
             "type": "string",
             "documentation": "Use this when paginating results to indicate where to begin in your list of distributions. The results include distributions in the list that occur after the marker. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response (which is also the ID of the last distribution on that page).",
@@ -4086,7 +4069,8 @@
             "location": "uri",
             "serialized_name": "MaxItems"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4535,9 +4519,7 @@
       "http_path": "/2013-05-12/distribution/{DistributionId}/invalidation?Marker={Marker}&MaxItems={MaxItems}",
       "documentation": "List invalidation batches.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to list invalidations.",
-        "members": {
+        "params": {
           "distribution_id": {
             "type": "string",
             "required": true,
@@ -4557,7 +4539,8 @@
             "location": "uri",
             "serialized_name": "MaxItems"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4665,9 +4648,7 @@
       "http_path": "/2013-05-12/streaming-distribution?Marker={Marker}&MaxItems={MaxItems}",
       "documentation": "List streaming distributions.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to list your streaming distributions.",
-        "members": {
+        "params": {
           "marker": {
             "type": "string",
             "documentation": "Use this when paginating results to indicate where to begin in your list of streaming distributions. The results include distributions in the list that occur after the marker. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response (which is also the ID of the last distribution on that page).",
@@ -4680,7 +4661,8 @@
             "location": "uri",
             "serialized_name": "MaxItems"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -4857,9 +4839,7 @@
       "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}/config",
       "documentation": "Update an origin access identity.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to update an origin access identity.",
-        "members": {
+        "params": {
           "cloud_front_origin_access_identity_config": {
             "type": "structure",
             "required": true,
@@ -4895,7 +4875,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -5035,9 +5016,7 @@
       "http_path": "/2013-05-12/distribution/{Id}/config",
       "documentation": "Update a distribution.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to update a distribution.",
-        "members": {
+        "params": {
           "distribution_config": {
             "type": "structure",
             "required": true,
@@ -5500,7 +5479,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
@@ -6231,9 +6211,7 @@
       "http_path": "/2013-05-12/streaming-distribution/{Id}/config",
       "documentation": "Update a streaming distribution.",
       "input": {
-        "type": "structure",
-        "documentation": "The request to update a streaming distribution.",
-        "members": {
+        "params": {
           "streaming_distribution_config": {
             "type": "structure",
             "required": true,
@@ -6384,7 +6362,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "raw_payload": false
       },
       "output": {
         "type": "structure",
