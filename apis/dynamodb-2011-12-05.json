@@ -10,6 +10,11 @@
     "xmlnamespace": "http://dynamodb.amazonaws.com/doc/2011-12-05/"
   },
   "plugins": [
+    "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::VersionedApiLoader",
+    "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::EnvironmentCredentials",
+    "Aws::Plugins::ContentLength",
     "Aws::Plugins::JsonSerializer"
   ],
   "documentation": "<p>Amazon DynamoDB is a fast, highly scalable, highly available, cost-effective non-relational database service.</p> <p>Amazon DynamoDB removes traditional scalability limitations on data storage while maintaining low latency and predictable performance.</p>",

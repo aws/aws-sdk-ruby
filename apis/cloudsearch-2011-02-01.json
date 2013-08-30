@@ -7,6 +7,11 @@
     "signature_version": "v2"
   },
   "plugins": [
+    "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::VersionedApiLoader",
+    "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::EnvironmentCredentials",
+    "Aws::Plugins::ContentLength",
     "Aws::Plugins::QuerySerializer"
   ],
   "documentation": "<fullname>Amazon CloudSearch Configuration Service</fullname> <p>You use the Configuration Service to create, configure, and manage search domains. Amazon CloudSearch configuration requests are submitted to <code>cloudsearch.us-east-1.amazonaws.com</code> using the AWS Query protocol. </p>",

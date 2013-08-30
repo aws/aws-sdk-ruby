@@ -10,6 +10,11 @@
     "xmlnamespace": "http://dynamodb.amazonaws.com/doc/2012-08-10/"
   },
   "plugins": [
+    "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::VersionedApiLoader",
+    "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::EnvironmentCredentials",
+    "Aws::Plugins::ContentLength",
     "Aws::Plugins::JsonSerializer"
   ],
   "documentation": "<fullname>Amazon DynamoDB</fullname> <b>Overview</b> <p>This is the Amazon DynamoDB API Reference. This guide provides descriptions and samples of the Amazon DynamoDB API. </p>",

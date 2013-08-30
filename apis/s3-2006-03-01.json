@@ -10,6 +10,12 @@
     "xmlnamespace": "http://s3.amazonaws.com/doc/2006-03-01/"
   },
   "plugins": [
+    "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::VersionedApiLoader",
+    "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::EnvironmentCredentials",
+    "Aws::Plugins::ContentLength",
+    "Aws::Plugins::RestProtocol",
     "Aws::Plugins::XmlSerializer"
   ],
   "operations": {

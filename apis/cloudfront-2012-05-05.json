@@ -8,6 +8,12 @@
     "xmlnamespace": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
   },
   "plugins": [
+    "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::VersionedApiLoader",
+    "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::EnvironmentCredentials",
+    "Aws::Plugins::ContentLength",
+    "Aws::Plugins::RestProtocol",
     "Aws::Plugins::XmlSerializer"
   ],
   "operations": {
