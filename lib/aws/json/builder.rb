@@ -57,7 +57,18 @@ module Aws
         case shape
         when StructureShape then structure(shape, value)
         when ListShape then list(shape, value)
+        when TimestampShape then timestamp(shape, value.utc)
         else value
+        end
+      end
+
+      def timestamp(shape, value)
+        format = shape.metadata['timestamp_format']
+        case format
+        when nil, 'iso8601' then value.iso8601
+        when 'rfc822' then value.rfc822
+        when 'unixtimestamp' then value.to_i
+        else raise "invalid timestamp format `#{format}'"
         end
       end
 
