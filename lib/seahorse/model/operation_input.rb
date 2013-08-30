@@ -14,28 +14,30 @@
 
 module Seahorse
   module Model
-    class Operation < Node
+    class OperationInput < Node
+      property :params, Symbol => Shape, always_serialize: true
+      property :raw_payload, Boolean
 
       def initialize(*)
         super
-        self.metadata = {}
+        @param_map = nil
       end
 
-      property :name, String
-      property :http_method, String
-      property :http_path, String
-      property :metadata, Hash
-      property :documentation, String
-      property :input, OperationInput
-      property :output, Shape
-      property :errors, [Shape]
+      def header_params; params_for('header') end
+      def body_params; params_for('body') end
+      def uri_params; params_for('uri') end
 
-      def to_hash
-        hash = super
-        hash.delete('metadata') if hash['metadata'].empty?
-        hash
+      def params_for(location)
+        build_params[location]
       end
 
+      private
+
+      def build_params
+        @param_map ||= params.inject({}) do |hsh, (member_name, shape)|
+          (hsh[shape.location] ||= {})[member_name] = shape; hsh
+        end
+      end
     end
   end
 end

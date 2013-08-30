@@ -60,10 +60,15 @@ module Seahorse
           name == '' ? nil : name
         end
 
+        def location
+          @location || 'body'
+        end
+
         def to_hash
           hash = super
           hash.delete('serialized_name') if @serialized_name.nil?
           hash.delete('metadata') if hash['metadata'].empty?
+          hash.delete('location') if @location.nil?
           hash
         end
 
