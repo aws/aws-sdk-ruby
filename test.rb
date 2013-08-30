@@ -29,6 +29,7 @@ end
 
 def client_class(endpoint, versions, plugins = [])
   #plugins << DummySenderPlugin
+  plugins << 'Aws::Plugins::VersionedApiLoader'
   Seahorse::Client.define({
     plugins: plugins,
     api: {
@@ -42,8 +43,6 @@ def client_class(endpoint, versions, plugins = [])
 end
 
 SWF = client_class 'swf', %w(2012-01-25)
-
-raise SWF.plugins.inspect
 
 EMR = client_class 'elasticmapreduce', %w(2009-03-31)
 CloudFront = client_class 'cloudfront', %w(2013-05-12)

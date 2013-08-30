@@ -10,13 +10,12 @@
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
-    "Aws::Plugins::VersionedApiLoader",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::XmlSerializer",
-    "Aws::Plugins::Signers::S3"
+    "Aws::Plugins::Signers::Version4"
   ],
   "operations": {
     "abort_multipart_upload": {

@@ -99,7 +99,6 @@ module Aws
     def set_type(type)
       plugins = @properties['plugins'] ||= []
       plugins << 'Aws::Plugins::GlobalConfiguration'
-      plugins << 'Aws::Plugins::VersionedApiLoader'
       plugins << 'Aws::Plugins::RegionalEndpoint'
       plugins << 'Aws::Plugins::EnvironmentCredentials'
       plugins << 'Aws::Plugins::ContentLength'
@@ -120,7 +119,7 @@ module Aws
         when 'v3' then 'Aws::Plugins::Signers::Version3'
         when 'v3https' then 'Aws::Plugins::Signers::Version3Https'
         when 'cloudfront' then 'Aws::Plugins::Signers::CloudFront'
-        when 's3' then 'Aws::Plugins::Signers::S3'
+        when 's3' then 'Aws::Plugins::Signers::Version4'
         when 'v2' then 'Aws::Plugins::Signers::Version2'
         else raise "unhandled signer version `#{version}'"
         end
