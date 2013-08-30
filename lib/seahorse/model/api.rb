@@ -26,6 +26,7 @@ module Seahorse
       def initialize(*)
         super
         self.metadata = {}
+        self.plugins = []
         self.operations = LazyOperationHash.new
       end
 
@@ -38,6 +39,7 @@ module Seahorse
         operations.load!
         hash = super
         hash.delete('metadata') if hash['metadata'].empty?
+        hash.delete('plugins') if hash['plugins'].empty?
         hash
       end
 
