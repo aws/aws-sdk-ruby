@@ -20,6 +20,8 @@ module Aws
     # @api private
     class Parser
 
+      include Seahorse::Model::Shapes
+
       # @api private
       EMPTY_ELEMENT_DEFAULTS = {
         :structure => {},
@@ -81,15 +83,15 @@ module Aws
         if raw.nil?
           EMPTY_ELEMENT_DEFAULTS[shape.type]
         else
-          case shape.type
-          when :structure then structure(shape, raw)
-          when :list then list(shape, raw)
-          when :map then map(shape, raw)
-          when :boolean then raw == 'true'
-          when :integer then raw.to_i
-          when :float then raw.to_f
-          when :timestamp then timestamp(raw)
-          when :blob then Base64.decode64(raw)
+          case shape
+          when StructureShape then structure(shape, raw)
+          when ListShape then list(shape, raw)
+          when MapShape then map(shape, raw)
+          when BooleanShape then raw == 'true'
+          when IntegerShape then raw.to_i
+          when FloatShape then raw.to_f
+          when TimestampShape then timestamp(raw)
+          when BlobShape then Base64.decode64(raw)
           else raw
           end
         end
