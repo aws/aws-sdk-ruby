@@ -17,6 +17,8 @@ module Aws
   module Json
     class Builder
 
+      include Seahorse::Model::Shapes
+
       # @param [Seahorse::Model::Shapes::Shape] rules
       def initialize(rules)
         @rules = rules
@@ -41,10 +43,22 @@ module Aws
         data = {}
         values.each do |key, value|
           if member_shape = shape.members[key]
-            data[member_shape.serialized_name] = value
+            data[member_shape.serialized_name] = member(member_shape, value)
           end
         end
         data
+      end
+
+      def list(shape, values)
+        values.map { |value| member(shape.members, value) }
+      end
+
+      def member(shape, value)
+        case shape
+        when StructureShape then structure(shape, value)
+        when ListShape then list(shape, value)
+        else value
+        end
       end
 
     end

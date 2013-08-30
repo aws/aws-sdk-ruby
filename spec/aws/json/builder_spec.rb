@@ -50,20 +50,41 @@ module Aws
             'abc' => {
               'type' => 'structure',
               'members' => {
-                'mno' => { 'type' => 'string' }
+                'mno' => { 'type' => 'string', 'serialized_name' => 'MNO' }
               }
             }
           }
-          expect(json(abc: { mno: 'xyz' })).to eq('{"abc":{"mno":"xyz"}}')
+          expect(json(abc: { mno: 'xyz' })).to eq('{"abc":{"MNO":"xyz"}}')
         end
 
       end
 
       describe 'lists' do
 
-        it 'serializes lists'
+        it 'serializes lists' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'members' => { 'type' => 'string' }
+            }
+          }
+          expect(json(items: %w(abc xyz))).to eq('{"items":["abc","xyz"]}')
+        end
 
-        it 'serializes comples list members'
+        it 'lists of complex shapes' do
+          rules['members'] = {
+            'abc' => {
+              'type' => 'list',
+              'members' => {
+                'type' => 'structure',
+                'members' => {
+                  'mno' => { 'type' => 'string', 'serialized_name' => 'MNO' }
+                }
+              }
+            }
+          }
+          expect(json(abc: [{mno:'xyz'}])).to eq('{"abc":[{"MNO":"xyz"}]}')
+        end
 
       end
 
