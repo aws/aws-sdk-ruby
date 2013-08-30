@@ -54,6 +54,14 @@ module Aws
           expect(parse(json)).to eq(first: 'John', last: 'Doe')
         end
 
+        it 'ignores non-described values' do
+          rules['members'] = {
+            'foo' => { 'type' => 'string' },
+          }
+          json = '{"foo":"bar", "abc":"xyz"}'
+          expect(parse(json)).to eq(foo: 'bar')
+        end
+
       end
 
       describe 'lists' do
@@ -157,19 +165,25 @@ module Aws
           expect(data[:created_at]).to eq(time)
         end
 
-        it 'throws an error when unable to determine the format'
-
       end
 
       describe 'integers' do
 
-        it 'parses integers'
+        it 'parses integers' do
+          rules['members'] = { 'count' => { 'type' => 'integer' } }
+          json = '{"count":123}'
+          expect(parse(json)).to eq(count: 123)
+        end
 
       end
 
       describe 'floats' do
 
-        it 'parses floats'
+        it 'parses floats' do
+          rules['members'] = { 'value' => { 'type' => 'float' } }
+          json = '{"value":12.34}'
+          expect(parse(json)).to eq(value: 12.34)
+        end
 
       end
 
