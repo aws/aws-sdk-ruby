@@ -28,10 +28,7 @@ class DummySenderPlugin < Seahorse::Client::Plugin
 end
 
 def options_for_client_class(endpoint, versions, plugins)
-  plugins = [
-    #DummySenderPlugin
-  ] + plugins.map {|plugin| "Aws::Plugins::#{plugin}" }
-
+  #plugins << DummySenderPlugin
   {
     plugins: plugins,
     api: {
@@ -44,16 +41,16 @@ def options_for_client_class(endpoint, versions, plugins)
   }
 end
 
-def client_class(endpoint, versions, plugins)
+def client_class(endpoint, versions, plugins = [])
   opts = options_for_client_class(endpoint, versions, plugins)
   Seahorse::Client.define(opts)
 end
 
-SWF = client_class 'swf', %w(2012-01-25), %w(Signers::Version3 JsonSerializer)
-EMR = client_class 'elasticmapreduce', %w(2009-03-31), %w(Signers::Version4 JsonSerializer)
-CloudFront = client_class 'cloudfront', %w(2013-05-12), %w(Signers::Version4 XmlSerializer)
-S3 = client_class 's3', %w(2006-03-01), %w(Signers::Version4 XmlSerializer)
-OpsWorks = client_class 'opsworks', %w(2013-02-18), %w(Signers::Version4 JsonSerializer)
+SWF = client_class 'swf', %w(2012-01-25)
+EMR = client_class 'elasticmapreduce', %w(2009-03-31)
+CloudFront = client_class 'cloudfront', %w(2013-05-12)
+S3 = client_class 's3', %w(2006-03-01)
+OpsWorks = client_class 'opsworks', %w(2013-02-18)
 
 swf = SWF.new
 emr = EMR.new
