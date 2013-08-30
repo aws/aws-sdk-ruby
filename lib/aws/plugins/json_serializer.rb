@@ -22,6 +22,7 @@ module Aws
         operation = context.operation
         metadata = context.config.api.metadata
 
+        rules = operation.input.body_params
         target = "#{metadata['json_target_prefix']}.#{operation.name}"
         version = metadata['json_version']
 
@@ -31,7 +32,7 @@ module Aws
         req.path = '/'
         req.headers['X-Amz-Target'] = target
         req.headers['Content-Type'] = "application/x-amz-json-#{version}"
-        req.body = Json::Builder.to_json(operation.input, context.params)
+        req.body = Json::Builder.to_json(rules, context.params)
 
         # parse response
         super(context).on_complete do |response|
