@@ -295,6 +295,17 @@ module Aws
           XML
         end
 
+        it 'serialzies blobs as base64 encoded strings' do
+          rules['members'] = {
+            'data' => { 'type' => 'blob' }
+          }
+          expect(xml(data: 'hello')).to eq(<<-XML)
+<xml>
+  <data>aGVsbG8=</data>
+</xml>
+          XML
+        end
+
         it 'serializes timestamps as is8601 strings by default' do
           now = Time.now
           rules['members'] = {

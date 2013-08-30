@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'builder'
-require 'seahorse'
+require 'base64'
 
 module Aws
   module Xml
@@ -93,10 +93,10 @@ module Aws
       end
 
       def format(shape, value)
-        if shape.is_a?(TimestampShape)
-          format_timestamp(shape, value.utc)
-        else
-          value.to_s
+        case shape
+        when TimestampShape then format_timestamp(shape, value.utc)
+        when BlobShape then Base64.strict_encode64(value)
+        else value.to_s
         end
       end
 
