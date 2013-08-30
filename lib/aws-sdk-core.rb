@@ -19,12 +19,8 @@ module Aws
   autoload :Credentials, 'aws/credentials'
   autoload :VERSION, 'aws/version'
 
-  module Signers
-    autoload :Version3, 'aws/signers/version_3'
-    autoload :Version4, 'aws/signers/version_4'
-  end
-
   module Plugins
+
     autoload :ContentLength, 'aws/plugins/content_length'
     autoload :EnvironmentCredentials, 'aws/plugins/environment_credentials'
     autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
@@ -39,6 +35,12 @@ module Aws
       autoload :Version3, 'aws/plugins/signers/version_3'
       autoload :Version4, 'aws/plugins/signers/version_4'
     end
+
+  end
+
+  module Signers
+    autoload :Version3, 'aws/signers/version_3'
+    autoload :Version4, 'aws/signers/version_4'
   end
 
   module Xml
