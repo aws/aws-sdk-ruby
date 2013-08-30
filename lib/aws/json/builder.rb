@@ -18,10 +18,21 @@ module Aws
     class Builder
 
       # @param [Seahorse::Model::Shapes::Shape] rules
+      def initialize(rules)
+        @rules = rules
+      end
+
+      # @param [Seahorse::Model::Shapes::Shape] rules
+      # @return [String<JSON>]
+      def to_json(params)
+        MultiJson.dump(params)
+      end
+
+      # @param [Seahorse::Model::Shapes::Shape] rules
       # @param [Hash] params
       # @return [String<JSON>]
       def self.to_json(rules, params)
-        MultiJson.dump(params)
+        new(rules).to_json(params)
       end
 
     end

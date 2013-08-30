@@ -16,6 +16,51 @@ require 'spec_helper'
 module Aws
   module Json
     describe Builder do
+
+      let(:rules) {{
+        'type' => 'structure',
+        'serialized_name' => 'xml',
+        'members' => {},
+      }}
+
+      def json(params)
+        shape = Seahorse::Model::Shapes::Shape.from_hash(rules)
+        Builder.to_json(shape, params)
+      end
+
+      describe 'structures' do
+
+        it 'returns an empty xml doc when there are no params'
+
+        it 'omits params that are not in the rules'
+
+        it 'serializes nested structures'
+
+      end
+
+      describe 'lists' do
+
+        it 'serializes lists'
+
+        it 'serializes comples list members'
+
+      end
+
+      describe 'scalars' do
+
+        it 'serializes integers'
+
+        it 'serializes floats'
+
+        it 'serializes booleans'
+
+        it 'serializes timestamps as is8601 strings by default'
+
+        it 'can serializes timestamps as rfc8622 strings'
+
+        it 'can serializes timestamps as unix timestamps'
+
+      end
     end
   end
 end
