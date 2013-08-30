@@ -90,7 +90,34 @@ module Aws
 
       describe 'maps' do
 
-        it 'accepts an arbitrary hash of values'
+        it 'accepts an arbitrary hash of values' do
+          rules['members'] = {
+            'attrs' => {
+              'type' => 'map',
+              'keys' => { 'type' => 'string' },
+              'members' => { 'type' => 'string' }
+            }
+          }
+          params = { attrs: { 'Size' => 'large', 'Color' => 'red' } }
+          expect(json(params)).to eq('{"attrs":{"Size":"large","Color":"red"}}')
+        end
+
+        it 'supports complex hash values' do
+          rules['members'] = {
+            'people' => {
+              'type' => 'map',
+              'keys' => { 'type' => 'string' },
+              'members' => {
+                'type' => 'structure',
+                'members' => {
+                  'age' => { 'type' => 'integer', 'serialized_name' => 'AGE' }
+                }
+              }
+            }
+          }
+          params = { people: { 'John' => { age: 40 } } }
+          expect(json(params)).to eq('{"people":{"John":{"AGE":40}}}')
+        end
 
       end
 

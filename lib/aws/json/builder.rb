@@ -54,10 +54,19 @@ module Aws
         values.map { |value| member(shape.members, value) }
       end
 
+      def map(shape, values)
+        data = {}
+        values.each do |key, value|
+          data[key] = member(shape.members, value)
+        end
+        data
+      end
+
       def member(shape, value)
         case shape
         when StructureShape then structure(shape, value)
         when ListShape then list(shape, value)
+        when MapShape then map(shape, value)
         when TimestampShape then timestamp(shape, value.utc)
         when BlobShape then Base64.strict_encode64(value)
         else value
