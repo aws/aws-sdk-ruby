@@ -29,12 +29,6 @@ end
 
 def options_for_client_class(endpoint, versions, plugins)
   plugins = [
-    Aws::Plugins::GlobalConfiguration,
-    Aws::Plugins::VersionedApiLoader,
-    Aws::Plugins::RegionalEndpoint,
-    Aws::Plugins::EnvironmentCredentials,
-    #Aws::Plugins::RestProtocol,
-    Aws::Plugins::ContentLength
     #DummySenderPlugin
   ] + plugins.map {|plugin| "Aws::Plugins::#{plugin}" }
 

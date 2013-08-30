@@ -97,14 +97,19 @@ module Aws
     metadata :xmlnamespace
 
     def set_type(type)
-      plugin = case type
+      plugins = @properties['plugins'] ||= []
+      plugins << 'Aws::Plugins::GlobalConfiguration'
+      plugins << 'Aws::Plugins::VersionedApiLoader'
+      plugins << 'Aws::Plugins::RegionalEndpoint'
+      plugins << 'Aws::Plugins::EnvironmentCredentials'
+      plugins << 'Aws::Plugins::ContentLength'
+      plugins << 'Aws::Plugins::RestProtocol' if type =~ /rest/
+      plugins <<
+        case type
         when 'query' then 'Aws::Plugins::QuerySerializer'
         when /json/ then 'Aws::Plugins::JsonSerializer'
         when /xml/ then 'Aws::Plugins::XmlSerializer'
-        else raise "unhandled type `#{type}'"
-      end
-      @properties['plugins'] ||= []
-      @properties['plugins'] << plugin
+        end
     end
 
     def set_endpoint_prefix(prefix)
