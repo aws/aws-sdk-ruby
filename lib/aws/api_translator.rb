@@ -112,6 +112,20 @@ module Aws
         end
     end
 
+    def set_signature_version(version)
+      plugins = @properties['plugins'] ||= []
+      plugins <<
+        case version
+        when 'v4' then 'Aws::Plugins::Signers::Version4'
+        when 'v3' then 'Aws::Plugins::Signers::Version3'
+        when 'v3https' then 'Aws::Plugins::Signers::Version3Https'
+        when 'cloudfront' then 'Aws::Plugins::Signers::CloudFront'
+        when 's3' then 'Aws::Plugins::Signers::S3'
+        when 'v2' then 'Aws::Plugins::Signers::Version2'
+        else raise "unhandled signer version `#{version}'"
+        end
+    end
+
     def set_endpoint_prefix(prefix)
       @properties['endpoint'] = "#{prefix}.%s.amazonaws.com"
     end

@@ -4,7 +4,6 @@
   "metadata": {
     "service_abbreviation": "CloudFront",
     "service_full_name": "Amazon CloudFront",
-    "signature_version": "v4",
     "xmlnamespace": "http://cloudfront.amazonaws.com/doc/2013-05-12/"
   },
   "plugins": [
@@ -14,7 +13,8 @@
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
-    "Aws::Plugins::XmlSerializer"
+    "Aws::Plugins::XmlSerializer",
+    "Aws::Plugins::Signers::Version4"
   ],
   "operations": {
     "create_cloud_front_origin_access_identity2013_05_12": {

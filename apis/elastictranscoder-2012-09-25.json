@@ -2,8 +2,7 @@
   "version": "2012-09-25",
   "endpoint": "elastictranscoder.%s.amazonaws.com",
   "metadata": {
-    "service_full_name": "Amazon Elastic Transcoder",
-    "signature_version": "v4"
+    "service_full_name": "Amazon Elastic Transcoder"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -12,7 +11,8 @@
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
-    "Aws::Plugins::JsonSerializer"
+    "Aws::Plugins::JsonSerializer",
+    "Aws::Plugins::Signers::Version4"
   ],
   "documentation": "<fullname>AWS Elastic Transcoder Service</fullname> <p>The AWS Elastic Transcoder Service.</p>",
   "operations": {

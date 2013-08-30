@@ -5,7 +5,6 @@
     "checksum_format": "md5",
     "service_abbreviation": "Amazon S3",
     "service_full_name": "Amazon Simple Storage Service",
-    "signature_version": "s3",
     "timestamp_format": "rfc822",
     "xmlnamespace": "http://s3.amazonaws.com/doc/2006-03-01/"
   },
@@ -16,7 +15,8 @@
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
-    "Aws::Plugins::XmlSerializer"
+    "Aws::Plugins::XmlSerializer",
+    "Aws::Plugins::Signers::S3"
   ],
   "operations": {
     "abort_multipart_upload": {

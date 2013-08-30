@@ -5,8 +5,7 @@
     "json-target-prefix": "ElasticMapReduce",
     "json-version": 1.1,
     "service_abbreviation": "Amazon EMR",
-    "service_full_name": "Amazon Elastic MapReduce",
-    "signature_version": "v4"
+    "service_full_name": "Amazon Elastic MapReduce"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -14,7 +13,8 @@
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
-    "Aws::Plugins::JsonSerializer"
+    "Aws::Plugins::JsonSerializer",
+    "Aws::Plugins::Signers::Version4"
   ],
   "documentation": "<p> This is the <i>Amazon Elastic MapReduce API Reference</i>. This guide provides descriptions and samples of the Amazon Elastic MapReduce APIs.</p> <p>Amazon Elastic MapReduce is a web service that makes it easy to process large amounts of data efficiently. Elastic MapReduce uses Hadoop processing combined with several AWS products to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehousing.</p>",
   "operations": {

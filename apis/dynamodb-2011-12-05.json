@@ -6,7 +6,6 @@
     "json-version": 1.0,
     "service_abbreviation": "DynamoDB",
     "service_full_name": "Amazon DynamoDB",
-    "signature_version": "v4",
     "xmlnamespace": "http://dynamodb.amazonaws.com/doc/2011-12-05/"
   },
   "plugins": [
@@ -15,7 +14,8 @@
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
-    "Aws::Plugins::JsonSerializer"
+    "Aws::Plugins::JsonSerializer",
+    "Aws::Plugins::Signers::Version4"
   ],
   "documentation": "<p>Amazon DynamoDB is a fast, highly scalable, highly available, cost-effective non-relational database service.</p> <p>Amazon DynamoDB removes traditional scalability limitations on data storage while maintaining low latency and predictable performance.</p>",
   "operations": {
