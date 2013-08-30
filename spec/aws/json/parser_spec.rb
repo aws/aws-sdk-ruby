@@ -201,7 +201,10 @@ module Aws
 
       describe 'parsing errors' do
 
-        it 'does not trap xml parsing errors'
+        it 'does not trap xml parsing errors' do
+          json = '{"abc"'
+          expect { parse(json) }.to raise_error
+        end
 
       end
     end
