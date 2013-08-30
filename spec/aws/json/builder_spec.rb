@@ -88,13 +88,35 @@ module Aws
 
       end
 
+      describe 'maps' do
+
+        it 'accepts an arbitrary hash of values'
+
+      end
+
       describe 'scalars' do
 
-        it 'serializes integers'
+        it 'serializes integers' do
+          rules['members'] = {
+            'count' => { 'type' => 'integer' }
+          }
+          expect(json(count: 123)).to eq('{"count":123}')
+        end
 
-        it 'serializes floats'
+        it 'serializes floats' do
+          rules['members'] = {
+            'price' => { 'type' => 'float' }
+          }
+          expect(json(price: 12.34)).to eq('{"price":12.34}')
+        end
 
-        it 'serializes booleans'
+        it 'serializes booleans' do
+          rules['members'] = {
+            'hot' => { 'type' => 'boolean' },
+            'cold' => { 'type' => 'boolean' }
+          }
+          expect(json(hot:true, cold:false)).to eq('{"hot":true,"cold":false}')
+        end
 
         it 'serializes timestamps as is8601 strings by default'
 
