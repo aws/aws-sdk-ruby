@@ -65,7 +65,16 @@ module Aws
         when StructureShape then structure(shape, value)
         when ListShape then list(shape, value)
         when MapShape then map(shape, value)
+        when TimestampShape then time(value)
         else value
+        end
+      end
+
+      def time(value)
+        if value.is_a?(Integer)
+          Time.at(value)
+        else
+          Time.parse(value)
         end
       end
 

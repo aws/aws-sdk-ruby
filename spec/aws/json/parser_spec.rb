@@ -108,17 +108,54 @@ module Aws
 
       describe 'booleans' do
 
-        it 'converts true/false booleans'
+        it 'converts true/false booleans' do
+          rules['members'] = {
+            'hot' => { 'type' => 'boolean' },
+            'cold' => { 'type' => 'boolean' },
+          }
+          json = '{"hot":true,"cold":false}'
+          expect(parse(json)).to eq(hot: true, cold: false)
+        end
 
       end
 
       describe 'timestamps' do
 
-        it 'can parse unix timestamps'
+        before(:each) do
+          rules['members'] = {
+            'created_at' => {
+              'type' => 'timestamp',
+              'serialized_name' => 'CreatedAt',
+            }
+          }
+        end
 
-        it 'can parse iso8601 strings'
+        it 'can parse unix timestamps' do
+          timestamp = 1349908100
+          time = Time.at(timestamp)
+          json = "{\"CreatedAt\":#{timestamp}}"
+          data = parse(json)
+          expect(data[:created_at]).to be_a(Time)
+          expect(data[:created_at]).to eq(time)
+        end
 
-        it 'can parse rfc822 strings'
+        it 'can parse iso8601 strings' do
+          timestamp = '2012-09-10T15:47:10.001Z'
+          time = Time.parse(timestamp).to_time.utc
+          json = "{\"CreatedAt\":\"#{timestamp}\"}"
+          data = parse(json)
+          expect(data[:created_at]).to be_a(Time)
+          expect(data[:created_at]).to eq(time)
+        end
+
+        it 'can parse rfc822 strings' do
+          timestamp = 'Wed, 10 Oct 2012 15:59:55 UTC'
+          time = Time.parse(timestamp).to_time.utc
+          json = "{\"CreatedAt\":\"#{timestamp}\"}"
+          data = parse(json)
+          expect(data[:created_at]).to be_a(Time)
+          expect(data[:created_at]).to eq(time)
+        end
 
         it 'throws an error when unable to determine the format'
 
