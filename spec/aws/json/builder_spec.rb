@@ -160,6 +160,10 @@ module Aws
         end
 
         it 'serializes blobs as base64 strings' do
+          rules['members'] = {
+            'data' => { 'type' => 'blob' }
+          }
+          expect(json(data:'hello')).to eq('{"data":"aGVsbG8="}')
         end
 
       end

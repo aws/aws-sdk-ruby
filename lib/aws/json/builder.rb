@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'multi_json'
+require 'base64'
 
 module Aws
   module Json
@@ -58,6 +59,7 @@ module Aws
         when StructureShape then structure(shape, value)
         when ListShape then list(shape, value)
         when TimestampShape then timestamp(shape, value.utc)
+        when BlobShape then Base64.strict_encode64(value)
         else value
         end
       end
