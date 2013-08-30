@@ -112,6 +112,42 @@ module Aws
 
       end
 
+      describe 'timestamps' do
+
+        it 'can parse unix timestamps'
+
+        it 'can parse iso8601 strings'
+
+        it 'can parse rfc822 strings'
+
+        it 'throws an error when unable to determine the format'
+
+      end
+
+      describe 'integers' do
+
+        it 'parses integers'
+
+      end
+
+      describe 'floats' do
+
+        it 'parses floats'
+
+      end
+
+      describe 'blobs' do
+
+        it 'base64 decodes blobs'
+
+      end
+
+      describe 'parsing errors' do
+
+        it 'does not trap xml parsing errors'
+
+      end
+
     end
   end
 end
