@@ -1,4 +1,22 @@
+2013-08-30 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/api_config/EC2-2013-02-01.yml,
+  lib/aws/api_config/EC2-2013-07-15.yml, lib/aws/ec2/client.rb: Correct EC2
+  Client Version to 2013-07-15
+
+2013-08-29 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.16.0
+
 2013-08-28 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/simple_workflow/request.rb: Upgrade AWS::SimpleWorkflow to SigV4
+
+  * doc-src/EC2/V20130201.yml, lib/aws/api_config/EC2-2013-02-01.yml: API
+  Update for Amazon EC2
+
+  Updates AWS::EC2::Client to support public IPs in VPC, and an optional
+  dry run flag.
 
   * lib/aws/core/configuration.rb, spec/aws/dynamo_db_spec.rb: Test failure
   fixes for DynamoDB.
