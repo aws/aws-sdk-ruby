@@ -121,7 +121,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>AWS::EC2</td>
-      <td>2013-02-01</td>
+      <td>2013-07-15</td>
       <td>Amazon Elastic Compute Cloud</td>
     </tr>
     <tr>
