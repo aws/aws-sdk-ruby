@@ -243,10 +243,10 @@ module Aws
       if members['type'].is_a?(String)
         @members = self.class.translate(members)
       else
-        @members = {}
+        @members = Seahorse::Model::Shapes::MemberHash.new
         members.each do |name, src|
           shape = self.class.translate(src)
-          shape.serialized_name ||= name
+          shape.serialized_name = name
           @members[underscore(name)] = shape
         end
       end
