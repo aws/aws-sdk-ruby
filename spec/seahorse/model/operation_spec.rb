@@ -23,7 +23,8 @@ module Seahorse
           'http_method' => 'POST',
           'http_path' => '/path/to/operation',
           'input' => {
-            'params' => {
+            'type' => 'input',
+            'members' => {
               'property' => { 'type' => 'string' }
             }
           },
@@ -46,7 +47,7 @@ module Seahorse
           expect(operation.documentation).to eq 'Docstring'
           expect(operation.http_path).to eq '/path/to/operation'
           expect(operation.http_method).to eq 'POST'
-          expect(operation.input).to be_instance_of OperationInput
+          expect(operation.input).to be_instance_of Shapes::InputShape
           expect(operation.output).to eq nil
           expect(operation.errors[0]).to be_instance_of Shapes::StringShape
         end

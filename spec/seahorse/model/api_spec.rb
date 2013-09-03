@@ -22,7 +22,8 @@ module Seahorse
           'http_method' => 'POST',
           'http_path' => '/path/to/operation',
           'input' => {
-            'params' => {
+            'type' => 'input',
+            'members' => {
               'property' => { 'type' => 'string' }
             }
           }
