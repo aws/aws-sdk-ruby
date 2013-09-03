@@ -11,15 +11,32 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-
 module Aws
   module Plugins
-    module Signers
-      class Version3 < Seahorse::Client::Plugin
-        handle_request :Handler, step: :sign do |context|
-          raise "Missing endpoint" unless context.config.respond_to?(:region)
-          Aws::Signers::Version3.sign(context)
+    class Signer < Seahorse::Client::Plugin
+
+      class SignatureHandler
+
+        def initialize(signer)
+          @signer = signer
         end
+
+        def new(handler)
+          @handler = handler
+          self
+        end
+
+        def call(context)
+          @signer.sign(context)
+          @handler.call(context)
+        end
+
+      end
+
+      def add_handlers(handlers, config)
+        version = config.api.metadata['aws_signer']
+        signer = Signers.const_get(version)
+        handlers.add(SignatureHandler.new(signer), step: :sign)
       end
     end
   end

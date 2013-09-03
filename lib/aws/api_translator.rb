@@ -85,12 +85,11 @@ module Aws
     property :version, from: :api_version
     property :endpoint, from: :global_endpoint
 
-    metadata :signature_version
+    metadata :signing_name, as: 'aws_sigv4_name'
     metadata :checksum_format
     metadata :json_version, as: 'json_version'
     metadata :target_prefix, as: 'json_target_prefix'
     metadata :timestamp_format
-    metadata :signing_name
     metadata :service_full_name
     metadata :service_abbreviation
     metadata :result_wrapped
@@ -109,20 +108,21 @@ module Aws
         when /json/ then 'Aws::Plugins::JsonSerializer'
         when /xml/ then 'Aws::Plugins::XmlSerializer'
         end
+      plugins << 'Aws::Plugins::Signer'
     end
 
     def set_signature_version(version)
-      plugins = @properties['plugins'] ||= []
-      plugins <<
-        case version
-        when 'v4' then 'Aws::Plugins::Signers::Version4'
-        when 'v3' then 'Aws::Plugins::Signers::Version3'
-        when 'v3https' then 'Aws::Plugins::Signers::Version3Https'
-        when 'cloudfront' then 'Aws::Plugins::Signers::CloudFront'
-        when 's3' then 'Aws::Plugins::Signers::Version4'
-        when 'v2' then 'Aws::Plugins::Signers::Version2'
-        else raise "unhandled signer version `#{version}'"
-        end
+      signer = case version
+      when 'v4' then 'Version4'
+      when 'v3' then 'Version3'
+      when 'v3https' then 'Version3Https'
+      when 'cloudfront' then 'CloudFront'
+      when 's3' then 'S3'
+      when 'v2' then 'Version2'
+      else raise "unhandled signer version `#{version}'"
+      end
+      @properties['metadata'] ||= {}
+      @properties['metadata']['aws_signer'] = signer
     end
 
     def set_endpoint_prefix(prefix)

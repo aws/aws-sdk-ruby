@@ -26,7 +26,6 @@ module Aws
   end
 
   module Plugins
-
     autoload :ContentLength, 'aws/plugins/content_length'
     autoload :EnvironmentCredentials, 'aws/plugins/environment_credentials'
     autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
@@ -34,14 +33,9 @@ module Aws
     autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
     autoload :RestProtocol, 'aws/plugins/rest_protocol'
     autoload :RpcProtocol, 'aws/plugins/rpc_protocol'
+    autoload :Signer, 'aws/plugins/signer'
     autoload :VersionedApiLoader, 'aws/plugins/versioned_api_loader'
     autoload :XmlSerializer, 'aws/plugins/xml_serializer'
-
-    module Signers
-      autoload :Version3, 'aws/plugins/signers/version_3'
-      autoload :Version4, 'aws/plugins/signers/version_4'
-    end
-
   end
 
   module Signers
