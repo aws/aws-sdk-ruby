@@ -131,7 +131,38 @@ module Seahorse
         end
       end
 
+      class InputShape < StructureShape
+
+        property :raw_payload, Boolean
+
+        def header_members
+          member_map['header']
+        end
+
+        def uri_members
+          member_map['uri']
+        end
+
+        def body_members
+          member_map['body']
+        end
+
+        private
+
+        def member_map
+          @member_map ||= begin
+            { 'header' => {}, 'uri' => {}, 'body' => {} }.tap do |map|
+              members.each do |member_name, member|
+                map[member.location][member_name] = member
+              end
+            end
+          end
+        end
+
+      end
+
       class Shape < Node
+        register_type input: InputShape
         register_type structure: StructureShape
         register_type list: ListShape
         register_type map: MapShape

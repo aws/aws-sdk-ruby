@@ -26,7 +26,7 @@ module Seahorse
       property :http_path, String
       property :metadata, Hash
       property :documentation, String
-      property :input, OperationInput
+      property :input, InputShape
       property :output, Shape
       property :errors, [Shape]
 

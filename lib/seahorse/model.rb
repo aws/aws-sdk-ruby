@@ -28,6 +28,7 @@ module Seahorse
       autoload :BooleanShape, 'seahorse/model/shapes/shape'
       autoload :DoubleShape, 'seahorse/model/shapes/shape'
       autoload :IntegerShape, 'seahorse/model/shapes/shape'
+      autoload :InputShape, 'seahorse/model/shapes/shape'
       autoload :FloatShape, 'seahorse/model/shapes/shape'
       autoload :LongShape, 'seahorse/model/shapes/shape'
       autoload :Shape, 'seahorse/model/shapes/shape'
