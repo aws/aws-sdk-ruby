@@ -42,11 +42,12 @@ module Aws
         def build_input_params(context)
           # add all top-level headers
           context.params.each do |key, value|
-            next unless member = context.operation.input.members[key]
+            input = context.operation.input
+            next unless member = input.members[key]
             if member.location == 'header'
               context.http_request.headers[member.location_name || key] = value
-            elsif member.payload && member.is_a?(Seahorse::Model::Shapes::ScalarShape)
-              context.http_request.body = value
+            elsif input.raw_payload
+              context.http_request.body = input.body_members.values.first
             end
           end
         end
@@ -61,7 +62,7 @@ module Aws
               if response.http_response.headers.has_key?(header)
                 response.data[name.to_sym] = response.http_response.headers[header]
               end
-            elsif member.payload
+            else
               response.data[name.to_sym] = response.http_response.body
             end
           end
