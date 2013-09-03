@@ -21,6 +21,7 @@ module Aws
 
   module Json
     autoload :Builder, 'aws/json/builder'
+    autoload :Handler, 'aws/json/handler'
     autoload :Parser, 'aws/json/parser'
   end
 
