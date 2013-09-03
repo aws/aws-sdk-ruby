@@ -22,10 +22,7 @@ module Aws
           @signer = signer
         end
 
-        def new(handler)
-          @handler = handler
-          self
-        end
+        attr_accessor :handler
 
         def call(context)
           @signer.sign(context)
