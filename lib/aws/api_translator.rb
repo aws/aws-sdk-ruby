@@ -107,11 +107,12 @@ module Aws
         when 'query' then 'Aws::Plugins::QuerySerializer'
         when /json/ then 'Aws::Plugins::JsonSerializer'
         when /xml/ then 'Aws::Plugins::XmlSerializer'
-        end
+        end if type
       plugins << 'Aws::Plugins::Signer'
     end
 
     def set_signature_version(version)
+      return unless version
       signer = case version
       when 'v4' then 'Version4'
       when 'v3' then 'Version3'
