@@ -19,6 +19,7 @@ module Aws
   autoload :Credentials, 'aws/credentials'
   autoload :VERSION, 'aws/version'
 
+  # @api private
   module Json
     autoload :Builder, 'aws/json/builder'
     autoload :Handler, 'aws/json/handler'
@@ -38,11 +39,13 @@ module Aws
     autoload :XmlSerializer, 'aws/plugins/xml_serializer'
   end
 
+  # @api private
   module Signers
     autoload :Version3, 'aws/signers/version_3'
     autoload :Version4, 'aws/signers/version_4'
   end
 
+  # @api private
   module Xml
     autoload :Builder, 'aws/xml/builder'
     autoload :Parser, 'aws/xml/parser'

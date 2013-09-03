@@ -15,6 +15,7 @@ module Aws
   module Plugins
     class Signer < Seahorse::Client::Plugin
 
+      # @api private
       class SignatureHandler
 
         def initialize(signer)

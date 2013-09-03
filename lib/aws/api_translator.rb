@@ -267,10 +267,12 @@ module Aws
 
   end
 
+  # @api private
   class InputShapeTranslator < ShapeTranslator
     property :required
   end
 
+  # @api private
   class OutputShapeTranslator < ShapeTranslator
     ignore :required
     ignore :timestamp_format
