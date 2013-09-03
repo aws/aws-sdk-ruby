@@ -77,7 +77,7 @@ module Aws
       api = Seahorse::Model::Api.from_hash(@properties)
       api.metadata = Hash[api.metadata.sort]
       @operations.each do |operation|
-        api.operations[operation.name] = operation
+        api.operations[sanitize_operation_name(operation.name)] = operation
       end
       api
     end
@@ -135,6 +135,15 @@ module Aws
       end
     end
 
+    private
+
+    def sanitize_operation_name(name)
+      name.
+        sub(/\d+_\d+_\d+$/, '').                  # strip version suffix
+        gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2'). # split acronyms
+        scan(/[a-z]+|\d+|[A-Z0-9]+[a-z]*/).       # split words
+        join('_').downcase                        # join parts
+    end
   end
 
   # @api private
