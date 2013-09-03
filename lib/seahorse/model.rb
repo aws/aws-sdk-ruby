@@ -31,6 +31,7 @@ module Seahorse
       autoload :InputShape, 'seahorse/model/shapes/shape'
       autoload :FloatShape, 'seahorse/model/shapes/shape'
       autoload :LongShape, 'seahorse/model/shapes/shape'
+      autoload :MemberHash, 'seahorse/model/shapes/shape'
       autoload :Shape, 'seahorse/model/shapes/shape'
       autoload :StringShape, 'seahorse/model/shapes/shape'
       autoload :StructureShape, 'seahorse/model/shapes/shape'

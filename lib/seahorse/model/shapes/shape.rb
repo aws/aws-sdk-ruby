@@ -108,12 +108,27 @@ module Seahorse
         end
       end
 
+      class MemberHash < Hash
+        def []=(member_name, member)
+          member.member_name = member_name.to_sym
+          super(member.member_name, member)
+        end
+
+        def self.from_hash(hash)
+          hash.inject(new) {|hsh, (k, v)| hsh[k] = Shape.from_hash(v); hsh }
+        end
+
+        def to_hash
+          inject({}) {|hsh, (k, v)| hsh[k.to_s] = v.to_hash; hsh }
+        end
+      end
+
       class StructureShape < Shape
-        property :members, Symbol => Shape
+        property :members, MemberHash
 
         def initialize(*)
           super
-          self.members = {}
+          self.members = MemberHash.new
         end
 
         # @return [Hash<String,Shape>]
