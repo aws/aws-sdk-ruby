@@ -73,6 +73,6 @@ opsworks = OpsWorks.new
 #   }
 # }).data
 
-pp swf.list_domains(registration_status: 'REGISTERED').data
+pp swf.list_domains(registration_status: 'DEPRECATED').data
 
 # pp opsworks.describe_stacks.data
