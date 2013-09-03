@@ -2,6 +2,7 @@
   "version": "2006-03-01",
   "endpoint": "s3.%s.amazonaws.com",
   "metadata": {
+    "aws_signer": "S3",
     "checksum_format": "md5",
     "service_abbreviation": "Amazon S3",
     "service_full_name": "Amazon Simple Storage Service",
@@ -15,7 +16,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::XmlSerializer",
-    "Aws::Plugins::Signers::Version4"
+    "Aws::Plugins::Signer"
   ],
   "operations": {
     "abort_multipart_upload": {

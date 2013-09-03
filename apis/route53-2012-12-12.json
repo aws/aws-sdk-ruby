@@ -2,6 +2,7 @@
   "version": "2012-12-12",
   "endpoint": "route53.%s.amazonaws.com",
   "metadata": {
+    "aws_signer": "Version3Https",
     "service_abbreviation": "Route 53",
     "service_full_name": "Amazon Route 53",
     "xmlnamespace": "https://route53.amazonaws.com/doc/2012-12-12/"
@@ -13,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::XmlSerializer",
-    "Aws::Plugins::Signers::Version3Https"
+    "Aws::Plugins::Signer"
   ],
   "operations": {
     "change_resource_record_sets": {

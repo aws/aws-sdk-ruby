@@ -2,6 +2,7 @@
   "version": "2013-02-12",
   "endpoint": "rds.%s.amazonaws.com",
   "metadata": {
+    "aws_signer": "Version4",
     "result_wrapped": true,
     "service_abbreviation": "Amazon RDS",
     "service_full_name": "Amazon Relational Database Service",
@@ -13,7 +14,7 @@
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::QuerySerializer",
-    "Aws::Plugins::Signers::Version4"
+    "Aws::Plugins::Signer"
   ],
   "documentation": "<fullname>Amazon Relational Database Service</fullname> <p> Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique. </p> <p> Amazon RDS gives you access to the capabilities of a familiar MySQL or Oracle database server. This means the code, applications, and tools you already use today with your existing MySQL or Oracle databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB Instance. Amazon RDS is flexible: you can scale your database instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use. </p> <p> This is the <i>Amazon RDS API Reference</i>. It contains a comprehensive description of all Amazon RDS Query APIs and data types. Note that this API is asynchronous and some actions may require polling to determine when an action has been applied. See the parameter description to determine if a change is applied immediately or on the next instance reboot or during the maintenance window. For more information on Amazon RDS concepts and usage scenarios, see the Amazon RDS User Guide. </p>",
   "operations": {

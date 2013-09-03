@@ -2,6 +2,7 @@
   "version": "2012-08-10",
   "endpoint": "dynamodb.%s.amazonaws.com",
   "metadata": {
+    "aws_signer": "Version4",
     "json_target_prefix": "DynamoDB_20120810",
     "json_version": 1.0,
     "service_abbreviation": "DynamoDB",
@@ -14,7 +15,7 @@
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::JsonSerializer",
-    "Aws::Plugins::Signers::Version4"
+    "Aws::Plugins::Signer"
   ],
   "documentation": "<fullname>Amazon DynamoDB</fullname> <b>Overview</b> <p>This is the Amazon DynamoDB API Reference. This guide provides descriptions and samples of the Amazon DynamoDB API. </p>",
   "operations": {

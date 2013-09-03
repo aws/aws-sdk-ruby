@@ -2,6 +2,7 @@
   "version": "2012-05-05",
   "endpoint": "cloudfront.%s.amazonaws.com",
   "metadata": {
+    "aws_signer": "CloudFront",
     "service_abbreviation": "CloudFront",
     "service_full_name": "Amazon CloudFront",
     "xmlnamespace": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
@@ -13,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::XmlSerializer",
-    "Aws::Plugins::Signers::CloudFront"
+    "Aws::Plugins::Signer"
   ],
   "operations": {
     "create_cloud_front_origin_access_identity2012_05_05": {
