@@ -195,7 +195,12 @@ module Seahorse
       # @return [Handler]
       def to_stack
         inject(nil) do |stack, handler|
-          handler.new(stack)
+          if handler.is_a?(Class)
+            handler = handler.new(stack)
+          else
+            handler.handler = stack
+            handler
+          end
         end
       end
 
