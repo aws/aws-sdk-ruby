@@ -15,7 +15,8 @@
 module Aws
   module Plugins
     class EnvironmentCredentials < Seahorse::Client::Plugin
-      MISSING_CREDENTIALS = 'missing require configuration option :credentials'
+
+      MISSING_CREDENTIALS = 'missing required configuration option :credentials'
 
       option(:credentials) do |config|
         Credentials.new(
@@ -31,6 +32,7 @@ module Aws
         end
         super(context)
       end
+
     end
   end
 end
