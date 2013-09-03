@@ -160,13 +160,9 @@ module Aws
     end
 
     def set_input(src)
-      @input = Seahorse::Model::OperationInput.new
-      if input = InputShapeTranslator.translate(src)
-        @input.params = input.members
-      else
-        @input.params = {}
+      if src
+        @input = InputShapeTranslator.translate(src.merge('type' => 'input'))
       end
-      @input.raw_payload = false
     end
 
     def set_output(src)

@@ -22,7 +22,9 @@
       "http_path": "/",
       "documentation": "<p> Authorizes ingress to a CacheSecurityGroup using EC2 Security Groups as authorization (therefore the application using the cache must be running on EC2 clusters). This API requires the following parameters: EC2SecurityGroupName and EC2SecurityGroupOwnerId. </p> You cannot authorize ingress from an EC2 security group in one Region to an Amazon Cache Cluster in another.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_security_group_name": {
             "type": "string",
             "required": true,
@@ -41,8 +43,7 @@
             "documentation": "<p> AWS Account Number of the owner of the security group specified in the EC2SecurityGroupName parameter. The AWS Access Key ID is not an acceptable value. </p>",
             "serialized_name": "EC2SecurityGroupOwnerId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -146,7 +147,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a new Cache Cluster. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_cluster_id": {
             "type": "string",
             "required": true,
@@ -229,8 +232,7 @@
             "documentation": "<p> Indicates that minor engine upgrades will be applied automatically to the Cache Cluster during the maintenance window. </p> <p>Default: <code>true</code></p>",
             "serialized_name": "AutoMinorVersionUpgrade"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -565,7 +567,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a new Cache Parameter Group. Cache Parameter groups control the parameters for a Cache Cluster.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_parameter_group_name": {
             "type": "string",
             "required": true,
@@ -584,8 +588,7 @@
             "documentation": "<p> The description for the Cache Parameter Group. </p>",
             "serialized_name": "Description"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -662,7 +665,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a new Cache Security Group. Cache Security groups control access to one or more Cache Clusters. </p> <p> Only use cache security groups when you are creating a cluster outside of an Amazon Virtual Private Cloud (VPC). Inside of a VPC, use VPC security groups. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_security_group_name": {
             "type": "string",
             "required": true,
@@ -675,8 +680,7 @@
             "documentation": "<p> The description for the Cache Security Group. </p>",
             "serialized_name": "Description"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -774,7 +778,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a new Cache Subnet Group. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "cache_subnet_group_name": {
             "type": "string",
             "required": true,
@@ -797,8 +803,7 @@
               "serialized_name": "SubnetIdentifier"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -895,15 +900,16 @@
       "http_path": "/",
       "documentation": "<p> Deletes a previously provisioned Cache Cluster. A successful response from the web service indicates the request was received correctly. This action cannot be canceled or reverted. DeleteCacheCluster deletes all associated Cache Nodes, node endpoints and the Cache Cluster itself. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_cluster_id": {
             "type": "string",
             "required": true,
             "documentation": "<p> The Cache Cluster identifier for the Cache Cluster to be deleted. This parameter isn't case sensitive. </p>",
             "serialized_name": "CacheClusterId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1197,15 +1203,16 @@
       "http_path": "/",
       "documentation": "<p> Deletes the specified CacheParameterGroup. The CacheParameterGroup cannot be deleted if it is associated with any cache clusters. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_parameter_group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the Cache Parameter Group to delete. </p> The specified cache security group must not be associated with any Cache clusters.",
             "serialized_name": "CacheParameterGroupName"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -1246,15 +1253,16 @@
       "http_path": "/",
       "documentation": "<p> Deletes a Cache Security Group. </p> The specified Cache Security Group must not be associated with any Cache Clusters.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_security_group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the Cache Security Group to delete. </p> You cannot delete the default security group.",
             "serialized_name": "CacheSecurityGroupName"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -1295,15 +1303,16 @@
       "http_path": "/",
       "documentation": "<p> Deletes a Cache Subnet Group. </p> The specified Cache Subnet Group must not be associated with any Cache Clusters.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "cache_subnet_group_name": {
             "type": "string",
             "required": true,
             "documentation": "<p> The name of the Cache Subnet Group to delete. </p> <p>Constraints: Must contain no more than 255 alphanumeric characters or hyphens.</p>",
             "serialized_name": "CacheSubnetGroupName"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -1326,7 +1335,9 @@
       "http_path": "/",
       "documentation": "<p> Returns information about all provisioned Cache Clusters if no Cache Cluster identifier is specified, or about a specific Cache Cluster if a Cache Cluster identifier is supplied. </p> <p> Cluster information will be returned by default. An optional <i>ShowDetails</i> flag can be used to retrieve detailed information about the Cache Nodes associated with the Cache Cluster. Details include the DNS address and port for the Cache Node endpoint. </p> <p> If the cluster is in the CREATING state, only cluster level information will be displayed until all of the nodes are successfully provisioned. </p> <p> If the cluster is in the DELETING state, only cluster level information will be displayed. </p> <p> While adding Cache Nodes, node endpoint information and creation time for the additional nodes will not be displayed until they are completely provisioned. The cluster lifecycle tells the customer when new nodes are AVAILABLE. </p> <p> While removing existing Cache Nodes from an cluster, endpoint information for the removed nodes will not be displayed. </p> <p>DescribeCacheClusters supports pagination.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_cluster_id": {
             "type": "string",
             "documentation": "<p> The user-supplied cluster identifier. If this parameter is specified, only information about that specific Cache Cluster is returned. This parameter isn't case sensitive. </p>",
@@ -1347,8 +1358,7 @@
             "documentation": "<p> An optional flag that can be included in the DescribeCacheCluster request to retrieve Cache Nodes information. </p>",
             "serialized_name": "ShowCacheNodeInfo"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1647,7 +1657,8 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of the available cache engines and their versions. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "engine": {
             "type": "string",
             "documentation": "<p> The cache engine to return. </p>",
@@ -1678,8 +1689,7 @@
             "documentation": "<p> Indicates that only the default version of the specified engine or engine and major version combination is returned. </p>",
             "serialized_name": "DefaultOnly"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1736,7 +1746,9 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of CacheParameterGroup descriptions. If a CacheParameterGroupName is specified, the list will contain only the descriptions of the specified CacheParameterGroup. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_parameter_group_name": {
             "type": "string",
             "documentation": "<p> The name of a specific cache parameter group to return details for. </p>",
@@ -1752,8 +1764,7 @@
             "documentation": "<p> An optional marker provided in the previous DescribeCacheParameterGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
             "serialized_name": "Marker"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1829,7 +1840,9 @@
       "http_path": "/",
       "documentation": "<p> Returns the detailed parameter list for a particular CacheParameterGroup. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_parameter_group_name": {
             "type": "string",
             "required": true,
@@ -1851,8 +1864,7 @@
             "documentation": "<p> An optional marker provided in the previous DescribeCacheClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
             "serialized_name": "Marker"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2019,7 +2031,9 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of CacheSecurityGroup descriptions. If a CacheSecurityGroupName is specified, the list will contain only the description of the specified CacheSecurityGroup. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_security_group_name": {
             "type": "string",
             "documentation": "<p> The name of the Cache Security Group to return details for. </p>",
@@ -2035,8 +2049,7 @@
             "documentation": "<p> An optional marker provided in the previous DescribeCacheClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
             "serialized_name": "Marker"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2139,7 +2152,9 @@
       "http_path": "/",
       "documentation": "<p> Returns a list of CacheSubnetGroup descriptions. If a CacheSubnetGroupName is specified, the list will contain only the description of the specified Cache Subnet Group. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "cache_subnet_group_name": {
             "type": "string",
             "documentation": "<p> The name of the Cache Subnet Group to return details for. </p>",
@@ -2155,8 +2170,7 @@
             "documentation": "<p> An optional marker provided in the previous DescribeCacheSubnetGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2246,7 +2260,9 @@
       "http_path": "/",
       "documentation": "<p> Returns the default engine and system parameter information for the specified cache engine. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_parameter_group_family": {
             "type": "string",
             "required": true,
@@ -2263,8 +2279,7 @@
             "documentation": "<p> An optional marker provided in the previous DescribeCacheClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
             "serialized_name": "Marker"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2439,7 +2454,9 @@
       "http_path": "/",
       "documentation": "<p> Returns events related to Cache Clusters, Cache Security Groups, and Cache Parameter Groups for the past 14 days. Events specific to a particular Cache Cluster, Cache Security Group, or Cache Parameter Group can be obtained by providing the name as a parameter. By default, the past hour of events are returned. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "source_identifier": {
             "type": "string",
             "documentation": "<p> The identifier of the event source for which events will be returned. If not specified, then all sources are included in the response. </p>",
@@ -2481,8 +2498,7 @@
             "documentation": "<p> An optional marker provided in the previous DescribeCacheClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <i>MaxRecords</i>. </p>",
             "serialized_name": "Marker"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2560,7 +2576,9 @@
       "http_path": "/",
       "documentation": "<p> Returns information about reserved Cache Nodes for this account, or about a specified reserved Cache Node. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "reserved_cache_node_id": {
             "type": "string",
             "documentation": "<p> The reserved Cache Node identifier filter value. Specify this parameter to show only the reservation that matches the specified reservation ID. </p>",
@@ -2601,8 +2619,7 @@
             "documentation": "<p> The marker provided in the previous request. If this parameter is specified, the response includes records beyond the marker only, up to <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2743,7 +2760,9 @@
       "http_path": "/",
       "documentation": "<p> Lists available reserved Cache Node offerings. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "reserved_cache_nodes_offering_id": {
             "type": "string",
             "documentation": "<p> The offering identifier filter value. Specify this parameter to show only the available offering that matches the specified reservation identifier. </p> <p>Example: <code>438012d3-4052-4cc7-b2e3-8d3372e0e706</code></p>",
@@ -2779,8 +2798,7 @@
             "documentation": "<p> The marker provided in the previous request. If this parameter is specified, the response includes records beyond the marker only, up to <code>MaxRecords</code>. </p>",
             "serialized_name": "Marker"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2901,7 +2919,9 @@
       "http_path": "/",
       "documentation": "<p> Modifies the Cache Cluster settings. You can change one or more Cache Cluster configuration parameters by specifying the parameters and the new values in the request. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_cluster_id": {
             "type": "string",
             "required": true,
@@ -2975,8 +2995,7 @@
             "documentation": "<p> Indicates that minor engine upgrades will be applied automatically to the Cache Cluster during the maintenance window. </p> <p>Default: <code>true</code></p>",
             "serialized_name": "AutoMinorVersionUpgrade"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3305,7 +3324,9 @@
       "http_path": "/",
       "documentation": "<p> Modifies the parameters of a CacheParameterGroup. To modify more than one parameter, submit a list of ParameterName and ParameterValue parameters. A maximum of 20 parameters can be modified in a single request. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_parameter_group_name": {
             "type": "string",
             "required": true,
@@ -3335,8 +3356,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3388,7 +3408,9 @@
       "http_path": "/",
       "documentation": "<p> Modifies an existing Cache Subnet Group. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "cache_subnet_group_name": {
             "type": "string",
             "required": true,
@@ -3409,8 +3431,7 @@
               "serialized_name": "SubnetIdentifier"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3507,7 +3528,9 @@
       "http_path": "/",
       "documentation": "<p> Purchases a reserved Cache Node offering. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "reserved_cache_nodes_offering_id": {
             "type": "string",
             "required": true,
@@ -3524,8 +3547,7 @@
             "documentation": "<p> The number of instances to reserve. </p> <p>Default: <code>1</code></p>",
             "serialized_name": "CacheNodeCount"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3667,7 +3689,9 @@
       "http_path": "/",
       "documentation": "<p> Reboots some (or all) of the cache cluster nodes within a previously provisioned ElastiCache cluster. This API results in the application of modified CacheParameterGroup parameters to the cache cluster. This action is taken as soon as possible, and results in a momentary outage to the cache cluster during which the cache cluster status is set to rebooting. During that momentary outage, the contents of the cache (for each cache cluster node being rebooted) are lost. A CacheCluster event is created when the reboot is completed. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_cluster_id": {
             "type": "string",
             "required": true,
@@ -3684,8 +3708,7 @@
               "serialized_name": "CacheNodeId"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3961,7 +3984,9 @@
       "http_path": "/",
       "documentation": "<p> Modifies the parameters of a CacheParameterGroup to the engine or system default value. To reset specific parameters submit a list of the parameter names. To reset the entire CacheParameterGroup, specify the CacheParameterGroup name and ResetAllParameters parameters. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_parameter_group_name": {
             "type": "string",
             "required": true,
@@ -3996,8 +4021,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -4049,7 +4073,9 @@
       "http_path": "/",
       "documentation": "<p> Revokes ingress from a CacheSecurityGroup for previously authorized EC2 Security Groups. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "cache_security_group_name": {
             "type": "string",
             "required": true,
@@ -4068,8 +4094,7 @@
             "documentation": "<p> The AWS Account Number of the owner of the security group specified in the <i>EC2SecurityGroupName</i> parameter. The AWS Access Key ID is not an acceptable value. </p>",
             "serialized_name": "EC2SecurityGroupOwnerId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",

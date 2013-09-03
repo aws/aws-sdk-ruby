@@ -21,15 +21,16 @@
       "http_path": "/",
       "documentation": "<p>Cancels an update on the specified stack. If the call completes successfully, the stack will roll back the update and revert to the previous stack configuration.</p> Only stacks that are in the UPDATE_IN_PROGRESS state can be canceled.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for CancelUpdateStack action.</p>",
+        "members": {
           "stack_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name or the unique identifier associated with the stack.</p>",
             "serialized_name": "StackName"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "create_stack": {
@@ -38,7 +39,9 @@
       "http_path": "/",
       "documentation": "<p>Creates a stack as specified in the template. After the call completes successfully, the stack creation starts. You can check the status of the stack via the DescribeStacks API.</p> Currently, the limit for stacks is 20 stacks per account per region.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for CreateStack action.</p>",
+        "members": {
           "stack_name": {
             "type": "string",
             "required": true,
@@ -136,8 +139,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -177,15 +179,16 @@
       "http_path": "/",
       "documentation": "<p>Deletes a specified stack. Once the call completes successfully, stack deletion starts. Deleted stacks do not show up in the DescribeStacks API if the deletion has been completed successfully.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for DeleteStack action.</p>",
+        "members": {
           "stack_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name or the unique identifier associated with the stack.</p>",
             "serialized_name": "StackName"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "describe_stack_events": {
@@ -194,7 +197,9 @@
       "http_path": "/",
       "documentation": "<p>Returns all stack related events for a specified stack. For more information about a stack's event history, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.</p> Events are returned, even if the stack never existed or has been successfully deleted.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for DescribeStackEvents action.</p>",
+        "members": {
           "stack_name": {
             "type": "string",
             "documentation": "<p>The name or the unique identifier associated with the stack.</p> <p>Default: There is no default value.</p>",
@@ -205,8 +210,7 @@
             "documentation": "<p>String that identifies the start of the next list of events, if there is one.</p> <p>Default: There is no default value.</p>",
             "serialized_name": "NextToken"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -298,7 +302,9 @@
       "http_path": "/",
       "documentation": "<p>Returns a description of the specified resource in the specified stack.</p> <p>For deleted stacks, DescribeStackResource returns resource information for up to 90 days after the stack has been deleted.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for DescribeStackResource action.</p>",
+        "members": {
           "stack_name": {
             "type": "string",
             "required": true,
@@ -311,8 +317,7 @@
             "documentation": "<p>The logical name of the resource as specified in the template.</p> <p>Default: There is no default value.</p>",
             "serialized_name": "LogicalResourceId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -395,7 +400,9 @@
       "http_path": "/",
       "documentation": "<p>Returns AWS resource descriptions for running and deleted stacks. If <code>StackName</code> is specified, all the associated resources that are part of the stack are returned. If <code>PhysicalResourceId</code> is specified, the associated resources of the stack that the resource belongs to are returned.</p> Only the first 100 resources will be returned. If your stack has more resources than this, you should use <code>ListStackResources</code> instead. <p>For deleted stacks, <code>DescribeStackResources</code> returns resource information for up to 90 days after the stack has been deleted.</p> <p>You must specify either <code>StackName</code> or <code>PhysicalResourceId</code>, but not both. In addition, you can specify <code>LogicalResourceId</code> to filter the returned result. For more information about resources, the <code>LogicalResourceId</code> and <code>PhysicalResourceId</code>, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.</p> A <code>ValidationError</code> is returned if you specify both <code>StackName</code> and <code>PhysicalResourceId</code> in the same request.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for DescribeStackResources action.</p>",
+        "members": {
           "stack_name": {
             "type": "string",
             "documentation": "<p>The name or the unique identifier associated with the stack.</p> <p>Required: Conditional. If you do not specify <code>StackName</code>, you must specify <code>PhysicalResourceId</code>.</p> <p>Default: There is no default value.</p>",
@@ -411,8 +418,7 @@
             "documentation": "<p>The name or unique identifier that corresponds to a physical instance ID of a resource supported by AWS CloudFormation.</p> <p>For example, for an Amazon Elastic Compute Cloud (EC2) instance, <code>PhysicalResourceId</code> corresponds to the <code>InstanceId</code>. You can pass the EC2 <code>InstanceId</code> to <code>DescribeStackResources</code> to find which stack the instance belongs to and what other resources are part of the stack.</p> <p>Required: Conditional. If you do not specify <code>PhysicalResourceId</code>, you must specify <code>StackName</code>.</p> <p>Default: There is no default value.</p>",
             "serialized_name": "PhysicalResourceId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -494,7 +500,9 @@
       "http_path": "/",
       "documentation": "<p>Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for DescribeStacks action.</p>",
+        "members": {
           "stack_name": {
             "type": "string",
             "documentation": "<p>The name or the unique identifier associated with the stack.</p> <p>Default: There is no default value.</p>",
@@ -504,8 +512,7 @@
             "type": "string",
             "serialized_name": "NextToken"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -685,7 +692,8 @@
       "http_path": "/",
       "documentation": "<p>Returns the estimated monthly cost of a template. The return value is an AWS Simple Monthly Calculator URL with a query string that describes the resources required to run the template.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "template_body": {
             "type": "string",
             "documentation": "<p>Structure containing the template body. (For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.)</p> <p>Conditional: You must pass <code>TemplateBody</code> or <code>TemplateURL</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
@@ -717,8 +725,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -738,15 +745,16 @@
       "http_path": "/",
       "documentation": "<p>Returns the template body for a specified stack name. You can get the template for running or deleted stacks.</p> <p>For deleted stacks, GetTemplate returns the template for up to 90 days after the stack has been deleted.</p> If the template does not exist, a <code>ValidationError</code> is returned.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for a GetTemplate action.</p>",
+        "members": {
           "stack_name": {
             "type": "string",
             "required": true,
             "documentation": "<p>The name or the unique identifier associated with the stack.</p>",
             "serialized_name": "StackName"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -766,7 +774,9 @@
       "http_path": "/",
       "documentation": "<p>Returns descriptions of all resources of the specified stack.</p> <p>For deleted stacks, ListStackResources returns resource information for up to 90 days after the stack has been deleted.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for ListStackResource action.</p>",
+        "members": {
           "stack_name": {
             "type": "string",
             "required": true,
@@ -778,8 +788,7 @@
             "documentation": "<p>String that identifies the start of the next list of stack resource summaries, if there is one.</p> <p>Default: There is no default value.</p>",
             "serialized_name": "NextToken"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -851,7 +860,9 @@
       "http_path": "/",
       "documentation": "<p>Returns the summary information for stacks whose status matches the specified StackStatusFilter. Summary information for stacks that have been deleted is kept for 90 days after the stack is deleted. If no StackStatusFilter is specified, summary information for all stacks is returned (including existing stacks and stacks that have been deleted).</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for ListStacks action.</p>",
+        "members": {
           "next_token": {
             "type": "string",
             "documentation": "<p>String that identifies the start of the next list of stacks, if there is one.</p> <p>Default: There is no default value.</p>",
@@ -883,8 +894,7 @@
               ]
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -973,7 +983,9 @@
       "http_path": "/",
       "documentation": "<p>Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack via the DescribeStacks action.</p> <p>To get a copy of the template for an existing stack, you can use the GetTemplate action.</p> <p>Tags that were associated with this stack during creation time will still be associated with the stack after an <code>UpdateStack</code> operation.</p> <p>For more information about creating an update template, updating a stack, and monitoring the progress of the update, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html\">Updating a Stack</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for UpdateStack action.</p>",
+        "members": {
           "stack_name": {
             "type": "string",
             "required": true,
@@ -1022,8 +1034,7 @@
               ]
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1051,7 +1062,9 @@
       "http_path": "/",
       "documentation": "<p>Validates a specified template.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for ValidateTemplate action.</p>",
+        "members": {
           "template_body": {
             "type": "string",
             "documentation": "<p>String containing the template body. (For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.)</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
@@ -1062,8 +1075,7 @@
             "documentation": "<p>Location of file containing the template body. The URL must point to a template (max size: 307,200 bytes) located in an S3 bucket in the same region as the stack. For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide\">AWS CloudFormation User Guide</a>.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>",
             "serialized_name": "TemplateURL"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",

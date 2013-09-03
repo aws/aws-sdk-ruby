@@ -23,7 +23,9 @@
       "http_path": "/",
       "documentation": "<p> Activates a specific number of licenses for a 90-day period. Activations can be done against a specific license ID. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -40,8 +42,7 @@
             "documentation": "<p> Specifies the additional number of licenses to activate. </p>",
             "serialized_name": "Capacity"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "allocate_address": {
@@ -50,7 +51,9 @@
       "http_path": "/",
       "documentation": "<p> The AllocateAddress operation acquires an elastic IP address for use with your account. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -64,8 +67,7 @@
               "standard"
             ]
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -96,7 +98,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "network_interface_id": {
             "type": "string",
             "required": true,
@@ -121,8 +124,7 @@
             "type": "boolean",
             "serialized_name": "AllowReassignment"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "associate_address": {
@@ -131,7 +133,9 @@
       "http_path": "/",
       "documentation": "<p> The AssociateAddress operation associates an elastic IP address with an instance. </p> <p> If the IP address is currently assigned to another instance, the IP address is assigned to the new instance. This is an idempotent operation. If you enter it more than once, Amazon EC2 does not return an error. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Associates an elastic IP address with an instance. If the IP address is currently assigned to another instance, the IP address is assigned to the new instance. </p> <p> This is an idempotent operation. If you enter it more than once, Amazon EC2 does not return an error. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -163,8 +167,7 @@
             "type": "boolean",
             "serialized_name": "AllowReassociation"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -182,7 +185,9 @@
       "http_path": "/",
       "documentation": "<p> Associates a set of DHCP options (that you've previously created) with the specified VPC. Or, associates the default DHCP options with the VPC. The default set consists of the standard EC2 host name, no domain name, no DNS server, no NTP server, and no NetBIOS server or node type. After you associate the options with the VPC, any existing instances and all new instances that you launch in that VPC use the options. For more information about the supported DHCP options and using them with Amazon VPC, go to Using DHCP Options in the Amazon Virtual Private Cloud Developer Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -199,8 +204,7 @@
             "documentation": "<p> The ID of the VPC to associate the DHCP options with. </p>",
             "serialized_name": "VpcId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "associate_route_table": {
@@ -209,7 +213,8 @@
       "http_path": "/",
       "documentation": "<p> Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. The action returns an association ID, which you need if you want to disassociate the route table from the subnet later. A route table can be associated with multiple subnets. </p> <p> For more information about route tables, go to <a href=\"http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -226,8 +231,7 @@
             "documentation": "<p> The ID of the route table. </p>",
             "serialized_name": "RouteTableId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -245,7 +249,8 @@
       "http_path": "/",
       "documentation": "<p> Attaches an Internet gateway to a VPC, enabling connectivity between the Internet and the VPC. For more information about your VPC and Internet gateway, go to the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -262,8 +267,7 @@
             "documentation": "<p> The ID of the VPC. </p>",
             "serialized_name": "VpcId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "attach_network_interface": {
@@ -271,7 +275,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -291,8 +296,7 @@
             "required": true,
             "serialized_name": "DeviceIndex"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -310,7 +314,9 @@
       "http_path": "/",
       "documentation": "<p> Attach a previously created volume to a running instance. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Request to attach an Amazon EBS volume to a running instance and expose it as the specified device. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -333,8 +339,7 @@
             "documentation": "<p> Specifies how the device is exposed to the instance (e.g., <code>/dev/sdh</code>). </p>",
             "serialized_name": "Device"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -385,7 +390,9 @@
       "http_path": "/",
       "documentation": "<p> Attaches a VPN gateway to a VPC. This is the last step required to get your VPC fully connected to your data center before launching instances in it. For more information, go to Process for Using Amazon VPC in the Amazon Virtual Private Cloud Developer Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -402,8 +409,7 @@
             "documentation": "<p> The ID of the VPC to attach to the VPN gateway. </p>",
             "serialized_name": "VpcId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -435,7 +441,8 @@
       "http_path": "/",
       "documentation": "<p> This action applies only to security groups in a VPC; it's not supported for EC2 security groups. For information about Amazon Virtual Private Cloud and VPC security groups, go to the Amazon Virtual Private Cloud User Guide. </p> <p> The action adds one or more egress rules to a VPC security group. Specifically, this permits instances in a security group to send traffic to either one or more destination CIDR IP address ranges, or to one or more destination security groups in the same VPC. </p> <p> Each rule consists of the protocol (e.g., TCP), plus either a CIDR range, or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use <code>-1</code> as a wildcard for the ICMP type or code. </p> <p> Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. </p> <p> <b>Important:</b> For VPC security groups: You can have up to 50 rules total per group (covering both ingress and egress). </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -554,8 +561,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "authorize_security_group_ingress": {
@@ -564,7 +570,9 @@
       "http_path": "/",
       "documentation": "<p> The AuthorizeSecurityGroupIngress operation adds permissions to a security group. </p> <p> Permissions are specified by the IP protocol (TCP, UDP or ICMP), the source of the request (by IP range or an Amazon EC2 user-group pair), the source and destination port ranges (for TCP and UDP), and the ICMP codes and types (for ICMP). When authorizing ICMP, <code>-1</code> can be used as a wildcard in the type and code fields. </p> <p> Permission changes are propagated to instances within the security group as quickly as possible. However, depending on the number of instances, a small delay might occur. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Request to adds permissions to a security group. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -687,8 +695,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "bundle_instance": {
@@ -697,7 +704,9 @@
       "http_path": "/",
       "documentation": "<p> The BundleInstance operation request that an instance is bundled the next time it boots. The bundling process creates a new image from a running instance and stores the AMI data in S3. Once bundled, the image must be registered in the normal way using the RegisterImage API. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -748,8 +757,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -857,7 +865,9 @@
       "http_path": "/",
       "documentation": "<p> CancelBundleTask operation cancels a pending or in-progress bundling task. This is an asynchronous call and it make take a while for the task to be canceled. If a task is canceled while it is storing items, there may be parts of the incomplete AMI stored in S3. It is up to the caller to clean up these parts from S3. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to cancel an Amazon EC2 bundle task. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -868,8 +878,7 @@
             "documentation": "<p> The ID of the bundle task to cancel. </p>",
             "serialized_name": "BundleId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -976,7 +985,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -990,8 +1000,7 @@
             "type": "string",
             "serialized_name": "ReasonMessage"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "cancel_export_task": {
@@ -999,14 +1008,14 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "export_task_id": {
             "type": "string",
             "required": true,
             "serialized_name": "ExportTaskId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "cancel_reserved_instances_listing": {
@@ -1014,14 +1023,14 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "reserved_instances_listing_id": {
             "type": "string",
             "required": true,
             "serialized_name": "ReservedInstancesListingId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1138,7 +1147,8 @@
       "http_path": "/",
       "documentation": "<p> Cancels one or more Spot Instance requests. </p> <p> Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current spot instance requests. </p> <p> For conceptual information about Spot Instances, refer to the <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/DeveloperGuide/\"> Amazon Elastic Compute Cloud Developer Guide </a> or <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/UserGuide/\"> Amazon Elastic Compute Cloud User Guide </a>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -1156,8 +1166,7 @@
               "serialized_name": "SpotInstanceRequestId"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1189,7 +1198,9 @@
       "http_path": "/",
       "documentation": "<p> The ConfirmProductInstance operation returns true if the specified product code is attached to the specified instance. The operation returns false if the product code is not attached to the instance. </p> <p> The ConfirmProductInstance operation can only be executed by the owner of the AMI. This feature is useful when an AMI owner is providing support and wants to verify whether a user's instance is eligible. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to verify whether an Amazon DevPay product code is associated with an instance. </p> <p> This can only be executed by the owner of the AMI and is useful when an AMI owner wants to verify whether a user's instance is eligible for support. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -1206,8 +1217,7 @@
             "documentation": "<p> The ID of the instance to confirm. </p>",
             "serialized_name": "InstanceId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1226,7 +1236,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -1254,8 +1265,7 @@
             "type": "string",
             "serialized_name": "ClientToken"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1272,7 +1282,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -1291,8 +1302,7 @@
             "type": "string",
             "serialized_name": "Description"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1310,7 +1320,9 @@
       "http_path": "/",
       "documentation": "<p> Provides information to AWS about your customer gateway device. The customer gateway is the appliance at your end of the VPN connection (compared to the VPN gateway, which is the device at the AWS side of the VPN connection). You can have a single active customer gateway per AWS account (active means that you've created a VPN connection to use with the customer gateway). AWS might delete any customer gateway that you create with this operation if you leave it inactive for an extended period of time. </p> <p> You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static. </p> <p> You must also provide the device's Border Gateway Protocol (BGP) Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range). For more information about ASNs, go to <a href=\"http://en.wikipedia.org/wiki/Autonomous_system_%28Internet%29\"> http://en.wikipedia.org/wiki/Autonomous_system_%28Internet%29</a>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -1333,8 +1345,7 @@
             "documentation": "<p> The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN). </p>",
             "serialized_name": "BgpAsn"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1403,7 +1414,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a set of DHCP options that you can then associate with one or more VPCs, causing all existing and new instances that you launch in those VPCs to use the set of DHCP options. The following table lists the individual DHCP options you can specify. For more information about the options, go to <a href=\"http://www.ietf.org/rfc/rfc2132.txt\">http://www.ietf.org/rfc/rfc2132.txt</a> </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -1441,8 +1454,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1517,7 +1529,9 @@
       "http_path": "/",
       "documentation": "<p> Creates an Amazon EBS-backed AMI from a \"running\" or \"stopped\" instance. AMIs that use an Amazon EBS root device boot faster than AMIs that use instance stores. They can be up to 1 TiB in size, use storage that persists on instance failure, and can be stopped and started. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Represents a request to create a new EC2 image. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -1607,8 +1621,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1627,7 +1640,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "description": {
             "type": "string",
             "serialized_name": "Description"
@@ -1674,8 +1688,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1758,13 +1771,13 @@
       "http_path": "/",
       "documentation": "<p> Creates a new Internet gateway in your AWS account. After creating the Internet gateway, you then attach it to a VPC using <code>AttachInternetGateway</code>. For more information about your VPC and Internet gateway, go to Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1827,7 +1840,9 @@
       "http_path": "/",
       "documentation": "<p> The CreateKeyPair operation creates a new 2048 bit RSA key pair and returns a unique ID that can be used to reference this key pair when launching new instances. For more information, see RunInstances. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Represents a request to create a new EC2 key pair. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -1838,8 +1853,7 @@
             "documentation": "<p> The unique name for the new key pair. </p>",
             "serialized_name": "KeyName"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1869,7 +1883,8 @@
       "http_path": "/",
       "documentation": "<p> Creates a new network ACL in a VPC. Network ACLs provide an optional layer of security (on top of security groups) for the instances in your VPC. For more information about network ACLs, go to Network ACLs in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -1880,8 +1895,7 @@
             "documentation": "<p> The ID of the VPC where the network ACL will be created. </p>",
             "serialized_name": "VpcId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2022,7 +2036,8 @@
       "http_path": "/",
       "documentation": "<p> Creates an entry (i.e., rule) in a network ACL with a rule number you specify. Each network ACL has a set of numbered ingress rules and a separate set of numbered egress rules. When determining whether a packet should be allowed in or out of a subnet associated with the ACL, Amazon VPC processes the entries in the ACL according to the rule numbers, in ascending order. </p> <p> <b>Important:</b> We recommend that you leave room between the rules (e.g., 100, 110, 120, etc.), and not number them sequentially (101, 102, 103, etc.). This allows you to easily add a new rule between existing ones without having to renumber the rules. </p> <p> After you add an entry, you can't modify it; you must either replace it, or create a new entry and delete the old one. </p> <p> For more information about network ACLs, go to Network ACLs in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -2101,8 +2116,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "create_network_interface": {
@@ -2110,7 +2124,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "subnet_id": {
             "type": "string",
             "required": true,
@@ -2164,8 +2179,7 @@
             "type": "boolean",
             "serialized_name": "DryRun"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2378,7 +2392,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a PlacementGroup into which multiple Amazon EC2 instances can be launched. Users must give the group a name unique within the scope of the user account. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -2398,8 +2414,7 @@
               "cluster"
             ]
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "create_reserved_instances_listing": {
@@ -2407,7 +2422,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "reserved_instances_id": {
             "type": "string",
             "required": true,
@@ -2448,8 +2464,7 @@
             "required": true,
             "serialized_name": "ClientToken"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2566,7 +2581,8 @@
       "http_path": "/",
       "documentation": "<p> Creates a new route in a route table within a VPC. The route's target can be either a gateway attached to the VPC or a NAT instance in the VPC. </p> <p> When determining how to route traffic, we use the route with the most specific match. For example, let's say the traffic is destined for <code>192.0.2.3</code>, and the route table includes the following two routes: </p> <ul> <li> <code>192.0.2.0/24</code> (goes to some target A) </li> <li> <code>192.0.2.0/28</code> (goes to some target B) </li> </ul> <p> Both routes apply to the traffic destined for <code>192.0.2.3</code>. However, the second route in the list is more specific, so we use that route to determine where to target the traffic. </p> <p> For more information about route tables, go to <a href=\"http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -2597,8 +2613,7 @@
             "type": "string",
             "serialized_name": "NetworkInterfaceId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "create_route_table": {
@@ -2607,7 +2622,8 @@
       "http_path": "/",
       "documentation": "<p> Creates a new route table within a VPC. After you create a new route table, you can add routes and associate the table with a subnet. For more information about route tables, go to <a href=\"http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -2618,8 +2634,7 @@
             "documentation": "<p> The ID of the VPC where the route table will be created. </p>",
             "serialized_name": "VpcId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2742,7 +2757,9 @@
       "http_path": "/",
       "documentation": "<p> The CreateSecurityGroup operation creates a new security group. </p> <p> Every instance is launched in a security group. If no security group is specified during launch, the instances are launched in the default security group. Instances within the same security group have unrestricted network access to each other. Instances will reject network access attempts from other instances in a different security group. As the owner of instances you can grant or revoke specific permissions using the AuthorizeSecurityGroupIngress and RevokeSecurityGroupIngress operations. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Represents a request to create a new EC2 security group. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -2764,8 +2781,7 @@
             "documentation": "<p> ID of the VPC. </p>",
             "serialized_name": "VpcId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2783,7 +2799,9 @@
       "http_path": "/",
       "documentation": "<p> Create a snapshot of the volume identified by volume ID. A volume does not have to be detached at the time the snapshot is taken. </p> Snapshot creation requires that the system is in a consistent state. For instance, this means that if taking a snapshot of a database, the tables must be read-only locked to ensure that the snapshot will not contain a corrupted version of the database. Therefore, be careful when using this API to ensure that the system remains in the consistent state until the create snapshot status has returned.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Represents a request to create a snapshot from an <i>Elastic Block Storage</i> (EBS) volume. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -2799,8 +2817,7 @@
             "documentation": "<p> The description for the new snapshot. </p>",
             "serialized_name": "Description"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2888,7 +2905,8 @@
       "http_path": "/",
       "documentation": "<p> Creates the data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per account. </p> <p> For conceptual information about Spot Instances, refer to the <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/DeveloperGuide/\"> Amazon Elastic Compute Cloud Developer Guide </a> or <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/UserGuide/\"> Amazon Elastic Compute Cloud User Guide </a>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -2904,8 +2922,7 @@
             "documentation": "<p> The prefix that is prepended to datafeed files. </p>",
             "serialized_name": "Prefix"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2961,7 +2978,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a subnet in an existing VPC. You can create up to 20 subnets in a VPC. If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you create each subnet, you provide the VPC ID and the CIDR block you want for the subnet. Once you create a subnet, you can't change its CIDR block. The subnet's CIDR block can be the same as the VPC's CIDR block (assuming you want only a single subnet in the VPC), or a subset of the VPC's CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest subnet (and VPC) you can create uses a <code>/28</code> netmask (16 IP addresses), and the largest uses a <code>/18</code> netmask (16,384 IP addresses). </p> <important> <p> AWS reserves both the first four and the last IP address in each subnet's CIDR block. They're not available for use. </p> </important>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -2983,8 +3002,7 @@
             "documentation": "<p> The Availability Zone to create the subnet in. </p>",
             "serialized_name": "AvailabilityZone"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3066,7 +3084,9 @@
       "http_path": "/",
       "documentation": "<p> Adds or overwrites tags for the specified resources. Each resource can have a maximum of 10 tags. Each tag consists of a key-value pair. Tag keys must be unique per resource. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3110,8 +3130,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "create_volume": {
@@ -3120,7 +3139,9 @@
       "http_path": "/",
       "documentation": "<p> Initializes an empty volume of a given size. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to create a new Amazon EC2 Elastic Block Storage (EBS) volume. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3153,8 +3174,7 @@
             "type": "integer",
             "serialized_name": "Iops"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3289,7 +3309,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a VPC with the CIDR block you specify. The smallest VPC you can create uses a <code>/28</code> netmask (16 IP addresses), and the largest uses a <code>/18</code> netmask (16,384 IP addresses). To help you decide how big to make your VPC, go to the topic about creating VPCs in the Amazon Virtual Private Cloud Developer Guide. </p> <p> By default, each instance you launch in the VPC has the default DHCP options (the standard EC2 host name, no domain name, no DNS server, no NTP server, and no NetBIOS server or node type). </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3305,8 +3327,7 @@
             "documentation": "<p> The allowed tenancy of instances launched into the VPC. A value of default means instances can be launched with any tenancy; a value of dedicated means instances must be launched with tenancy as dedicated. </p>",
             "serialized_name": "InstanceTenancy"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3380,7 +3401,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a new VPN connection between an existing VPN gateway and customer gateway. The only supported connection type is ipsec.1. </p> <p> The response includes information that you need to configure your customer gateway, in XML format. We recommend you use the command line version of this operation (<code>ec2-create-vpn-connection</code>), which takes an <code>-f</code> option (for format) and returns configuration information formatted as expected by the vendor you specified, or in a generic, human readable format. For information about the command, go to <code>ec2-create-vpn-connection</code> in the Amazon Virtual Private Cloud Command Line Reference. </p> <important> <p> We strongly recommend you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway. </p> <p> If you decide to shut down your VPN connection for any reason and then create a new one, you must re-configure your customer gateway with the new information returned from this call. </p> </important>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3413,8 +3436,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3549,7 +3571,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "vpn_connection_id": {
             "type": "string",
             "required": true,
@@ -3560,8 +3583,7 @@
             "required": true,
             "serialized_name": "DestinationCidrBlock"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "create_vpn_gateway": {
@@ -3570,7 +3592,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a new VPN gateway. A VPN gateway is the VPC-side endpoint for your VPN connection. You can create a VPN gateway before creating the VPC itself. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3586,8 +3610,7 @@
             "documentation": "<p> The Availability Zone in which to create the VPN gateway. </p>",
             "serialized_name": "AvailabilityZone"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3673,7 +3696,9 @@
       "http_path": "/",
       "documentation": "<p> Deactivates a specific number of licenses. Deactivations can be done against a specific license ID after they have persisted for at least a 90-day period. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3690,8 +3715,7 @@
             "documentation": "<p> Specifies the amount of capacity to deactivate against the license. </p>",
             "serialized_name": "Capacity"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_customer_gateway": {
@@ -3700,7 +3724,9 @@
       "http_path": "/",
       "documentation": "<p> Deletes a customer gateway. You must delete the VPN connection before deleting the customer gateway. </p> <p> You can have a single active customer gateway per AWS account (active means that you've created a VPN connection with that customer gateway). AWS might delete any customer gateway you leave inactive for an extended period of time. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3711,8 +3737,7 @@
             "documentation": "<p> The ID of the customer gateway to delete. </p>",
             "serialized_name": "CustomerGatewayId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_dhcp_options": {
@@ -3721,7 +3746,9 @@
       "http_path": "/",
       "documentation": "<p> Deletes a set of DHCP options that you specify. Amazon VPC returns an error if the set of options you specify is currently associated with a VPC. You can disassociate the set of options by associating either a new set of options or the default options with the VPC. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3732,8 +3759,7 @@
             "documentation": "<p> The ID of the DHCP options set to delete. </p>",
             "serialized_name": "DhcpOptionsId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_internet_gateway": {
@@ -3742,7 +3768,8 @@
       "http_path": "/",
       "documentation": "<p> Deletes an Internet gateway from your AWS account. The gateway must not be attached to a VPC. For more information about your VPC and Internet gateway, go to Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3753,8 +3780,7 @@
             "documentation": "<p> The ID of the Internet gateway to be deleted. </p>",
             "serialized_name": "InternetGatewayId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_key_pair": {
@@ -3763,7 +3789,9 @@
       "http_path": "/",
       "documentation": "<p> The DeleteKeyPair operation deletes a key pair. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Represents a request to delete an Amazon EC2 key pair. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3774,8 +3802,7 @@
             "documentation": "<p> The name of the Amazon EC2 key pair to delete. </p>",
             "serialized_name": "KeyName"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_network_acl": {
@@ -3784,7 +3811,8 @@
       "http_path": "/",
       "documentation": "<p> Deletes a network ACL from a VPC. The ACL must not have any subnets associated with it. You can't delete the default network ACL. For more information about network ACLs, go to Network ACLs in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3795,8 +3823,7 @@
             "documentation": "<p> The ID of the network ACL to be deleted. </p>",
             "serialized_name": "NetworkAclId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_network_acl_entry": {
@@ -3805,7 +3832,8 @@
       "http_path": "/",
       "documentation": "<p> Deletes an ingress or egress entry (i.e., rule) from a network ACL. For more information about network ACLs, go to Network ACLs in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3828,8 +3856,7 @@
             "documentation": "<p> Whether the rule to delete is an egress rule (<code>true</code>) or ingress rule (<code>false</code>). </p>",
             "serialized_name": "Egress"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_network_interface": {
@@ -3837,7 +3864,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3847,8 +3875,7 @@
             "required": true,
             "serialized_name": "NetworkInterfaceId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_placement_group": {
@@ -3857,7 +3884,9 @@
       "http_path": "/",
       "documentation": "<p> Deletes a PlacementGroup from a user's account. Terminate all Amazon EC2 instances in the placement group before deletion. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3868,8 +3897,7 @@
             "documentation": "<p> The name of the <code>PlacementGroup</code> to delete. </p>",
             "serialized_name": "GroupName"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_route": {
@@ -3878,7 +3906,8 @@
       "http_path": "/",
       "documentation": "<p> Deletes a route from a route table in a VPC. For more information about route tables, go to <a href=\"http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3895,8 +3924,7 @@
             "documentation": "<p> The CIDR range for the route you want to delete. The value you specify must exactly match the CIDR for the route you want to delete. </p>",
             "serialized_name": "DestinationCidrBlock"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_route_table": {
@@ -3905,7 +3933,8 @@
       "http_path": "/",
       "documentation": "<p> Deletes a route table from a VPC. The route table must not be associated with a subnet. You can't delete the main route table. For more information about route tables, go to <a href=\"http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3916,8 +3945,7 @@
             "documentation": "<p> The ID of the route table to be deleted. </p>",
             "serialized_name": "RouteTableId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_security_group": {
@@ -3926,7 +3954,9 @@
       "http_path": "/",
       "documentation": "<p> The DeleteSecurityGroup operation deletes a security group. </p> <p> If you attempt to delete a security group that contains instances, a fault is returned. </p> <p> If you attempt to delete a security group that is referenced by another security group, a fault is returned. For example, if security group B has a rule that allows access from security group A, security group A cannot be deleted until the allow rule is removed. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Represents a request to delete an Amazon EC2 security group. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3941,8 +3971,7 @@
             "documentation": "<p> The ID of the Amazon EC2 security group to delete. </p>",
             "serialized_name": "GroupId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_snapshot": {
@@ -3951,7 +3980,9 @@
       "http_path": "/",
       "documentation": "<p> Deletes the snapshot identified by <code>snapshotId</code>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Represents a request to delete an EBS snapshot. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3962,8 +3993,7 @@
             "documentation": "<p> The ID of the snapshot to delete. </p>",
             "serialized_name": "SnapshotId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_spot_datafeed_subscription": {
@@ -3972,13 +4002,14 @@
       "http_path": "/",
       "documentation": "<p> Deletes the data feed for Spot Instances. </p> <p> For conceptual information about Spot Instances, refer to the <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/DeveloperGuide/\"> Amazon Elastic Compute Cloud Developer Guide </a> or <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/UserGuide/\"> Amazon Elastic Compute Cloud User Guide </a>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Deletes the data feed for Spot Instances. </p> <p> For conceptual information about Spot Instances, refer to the <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/DeveloperGuide/\"> Amazon Elastic Compute Cloud Developer Guide </a> or <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/UserGuide/\"> Amazon Elastic Compute Cloud User Guide </a>. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_subnet": {
@@ -3987,7 +4018,9 @@
       "http_path": "/",
       "documentation": "<p> Deletes a subnet from a VPC. You must terminate all running instances in the subnet before deleting it, otherwise Amazon VPC returns an error. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -3998,8 +4031,7 @@
             "documentation": "<p> The ID of the subnet you want to delete. </p>",
             "serialized_name": "SubnetId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_tags": {
@@ -4008,7 +4040,9 @@
       "http_path": "/",
       "documentation": "<p> Deletes tags from the specified Amazon EC2 resources. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4051,8 +4085,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_volume": {
@@ -4061,7 +4094,9 @@
       "http_path": "/",
       "documentation": "<p> Deletes a previously created volume. Once successfully deleted, a new volume can be created with the same name. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Represents a request to delete an <i>Elastic Block Storage</i> (EBS) volume. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4072,8 +4107,7 @@
             "documentation": "<p> The ID of the EBS volume to delete. </p>",
             "serialized_name": "VolumeId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_vpc": {
@@ -4082,7 +4116,9 @@
       "http_path": "/",
       "documentation": "<p> Deletes a VPC. You must detach or delete all gateways or other objects that are dependent on the VPC first. For example, you must terminate all running instances, delete all VPC security groups (except the default), delete all the route tables (except the default), etc. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4093,8 +4129,7 @@
             "documentation": "<p> The ID of the VPC you want to delete. </p>",
             "serialized_name": "VpcId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_vpn_connection": {
@@ -4103,7 +4138,9 @@
       "http_path": "/",
       "documentation": "<p> Deletes a VPN connection. Use this if you want to delete a VPC and all its associated components. Another reason to use this operation is if you believe the tunnel credentials for your VPN connection have been compromised. In that situation, you can delete the VPN connection and create a new one that has new keys, without needing to delete the VPC or VPN gateway. If you create a new VPN connection, you must reconfigure the customer gateway using the new configuration information returned with the new VPN connection ID. </p> <p> If you're deleting the VPC and all its associated parts, we recommend you detach the VPN gateway from the VPC and delete the VPC before deleting the VPN connection. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4114,8 +4151,7 @@
             "documentation": "<p> The ID of the VPN connection to delete </p>",
             "serialized_name": "VpnConnectionId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_vpn_connection_route": {
@@ -4123,7 +4159,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "vpn_connection_id": {
             "type": "string",
             "required": true,
@@ -4134,8 +4171,7 @@
             "required": true,
             "serialized_name": "DestinationCidrBlock"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "delete_vpn_gateway": {
@@ -4144,7 +4180,9 @@
       "http_path": "/",
       "documentation": "<p> Deletes a VPN gateway. Use this when you want to delete a VPC and all its associated components because you no longer need them. We recommend that before you delete a VPN gateway, you detach it from the VPC and delete the VPN connection. Note that you don't need to delete the VPN gateway if you just want to delete and re-create the VPN connection between your VPC and data center. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4155,8 +4193,7 @@
             "documentation": "<p> The ID of the VPN gateway to delete. </p>",
             "serialized_name": "VpnGatewayId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "deregister_image": {
@@ -4165,7 +4202,9 @@
       "http_path": "/",
       "documentation": "<p> The DeregisterImage operation deregisters an AMI. Once deregistered, instances of the AMI can no longer be launched. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to deregister an <i>Amazon Machine Image</i> (AMI). </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4176,8 +4215,7 @@
             "documentation": "<p> The ID of the AMI to deregister. </p>",
             "serialized_name": "ImageId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "describe_account_attributes": {
@@ -4185,7 +4223,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4201,8 +4240,7 @@
               "serialized_name": "AttributeName"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -4244,7 +4282,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeAddresses operation lists elastic IP addresses assigned to your account. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe a user's available Elastic IPs. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4304,8 +4344,7 @@
               "serialized_name": "AllocationId"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -4370,7 +4409,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeAvailabilityZones operation describes availability zones that are currently available to the account and their states. </p> <p> Availability zones are not the same across accounts. The availability zone <code>us-east-1a</code> for account A is not necessarily the same as <code>us-east-1a</code> for account B. Zone assignments are mapped independently for each account. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe the Amazon EC2 availability zones in the current region. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4419,8 +4460,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -4477,7 +4517,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeBundleTasks operation describes in-progress and recent bundle tasks. Complete and failed tasks are removed from the list a short time after completion. If no bundle ids are given, all bundle tasks are returned. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe the bundle tasks for the user's account. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4526,8 +4568,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -4639,7 +4680,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4686,8 +4728,7 @@
               "serialized_name": "ConversionTaskId"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -4886,7 +4927,9 @@
       "http_path": "/",
       "documentation": "<p> Gives you information about your customer gateways. You can filter the results to return information only about customer gateways that match criteria you specify. For example, you could ask to get information about a particular customer gateway (or all) only if the gateway's state is pending or available. You can specify multiple filters (e.g., the customer gateway has a particular IP address for the Internet-routable external interface, and the gateway's state is pending or available). The result includes information for a particular customer gateway only if the gateway matches all your filters. If there's no match, no special message is returned; the response is simply empty. The following table shows the available filters. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -4935,8 +4978,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -5010,7 +5052,8 @@
       "http_path": "/",
       "documentation": "<p> Gives you information about one or more sets of DHCP options. You can specify one or more DHCP options set IDs, or no IDs (to describe all your sets of DHCP options). The returned information consists of: </p> <ul> <li> The DHCP options set ID </li> <li> The options </li> </ul>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -5058,8 +5101,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -5136,7 +5178,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "export_task_ids": {
             "type": "list",
             "serialized_name": "ExportTaskIds",
@@ -5148,8 +5191,7 @@
               "serialized_name": "ExportTaskId"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -5236,7 +5278,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeImageAttribute operation returns information about an attribute of an AMI. Only one attribute can be specified per call. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe an Amazon Machine Image (AMI) attribute. Only one attribute may be described per request. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -5253,8 +5297,7 @@
             "documentation": "<p> The name of the attribute to describe. </p> <p> Available attribute names: <code>productCodes</code>, <code>kernel</code>, <code>ramdisk</code>, <code>launchPermisson</code>, <code>blockDeviceMapping</code> </p>",
             "serialized_name": "Attribute"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -5415,7 +5458,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeImages operation returns information about AMIs, AKIs, and ARIs available to the user. Information returned includes image type, product codes, architecture, and kernel and RAM disk IDs. Images available to the user include public images available for any user to launch, private images owned by the user making the request, and private images owned by other users for which the user has explicit launch permissions. </p> <p> Launch permissions fall into three categories: </p> <ul> <li> <b>Public:</b> The owner of the AMI granted launch permissions for the AMI to the all group. All users have launch permissions for these AMIs. </li> <li> <b>Explicit:</b> The owner of the AMI granted launch permissions to a specific user. </li> <li> <b>Implicit:</b> A user has implicit launch permissions for all AMIs he or she owns. </li> </ul> <p> The list of AMIs returned can be modified by specifying AMI IDs, AMI owners, or users with launch permissions. If no options are specified, Amazon EC2 returns all AMIs for which the user has launch permissions. </p> <p> If you specify one or more AMI IDs, only AMIs that have the specified IDs are returned. If you specify an invalid AMI ID, a fault is returned. If you specify an AMI ID for which you do not have access, it will not be included in the returned results. </p> <p> If you specify one or more AMI owners, only AMIs from the specified owners and for which you have access are returned. The results can include the account IDs of the specified owners, amazon for AMIs owned by Amazon or self for AMIs that you own. </p> <p> If you specify a list of executable users, only users that have launch permissions for the AMIs are returned. You can specify account IDs (if you own the AMI(s)), self for AMIs for which you own or have explicit permissions, or all for public AMIs. </p> Deregistered images are included in the returned results for an unspecified interval after deregistration.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe the available <i>Amazon Machine Images</i> (AMIs). </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -5488,8 +5533,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -5732,7 +5776,9 @@
       "http_path": "/",
       "documentation": "<p> Returns information about an attribute of an instance. Only one attribute can be specified per call. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe an attribute of one of a user's EC2 instances. Only one attribute can be specified per call. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -5763,8 +5809,7 @@
               "ebsOptimized"
             ]
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -5944,7 +5989,8 @@
       "http_path": "/",
       "documentation": "<p> Describes the status of an Amazon Elastic Compute Cloud (Amazon EC2) instance. Instance status provides information about two types of scheduled events for an instance that may require your attention: </p> <ul> <li> Scheduled Reboot: When Amazon EC2 determines that an instance must be rebooted, the instance's status will return one of two event codes: <code>system-reboot</code> or <code>instance-reboot</code>. System reboot commonly occurs if certain maintenance or upgrade operations require a reboot of the underlying host that supports an instance. Instance reboot commonly occurs if the instance must be rebooted, rather than the underlying host. Rebooting events include a scheduled start and end time. </li> <li> Scheduled Retirement: When Amazon EC2 determines that an instance must be shut down, the instance's status will return an event code called <code>instance-retirement</code>. Retirement commonly occurs when the underlying host is degraded and must be replaced. Retirement events include a scheduled start and end time. You're also notified by email if one of your instances is set to retiring. The email message indicates when your instance will be permanently retired. </li> </ul> <p> If your instance is permanently retired, it will not be restarted. You can avoid retirement by manually restarting your instance when its event code is <code>instance-retirement</code>. This ensures that your instance is started on a healthy host. </p> <p> <code>DescribeInstanceStatus</code> returns information only for instances in the running state. </p> <p> You can filter the results to return information only about instances that match criteria you specify. For example, you could get information about instances in a specific Availability Zone. You can specify multiple values for a filter (e.g., more than one Availability Zone). An instance must match at least one of the specified values for it to be included in the results. </p> <p> You can specify multiple filters. An instance must match all the filters for it to be included in the results. If there's no match, no special message is returned; the response is simply empty. </p> <p> You can use wildcards with the filter values: <code>*</code> matches zero or more characters, and <code>?</code> matches exactly one character. You can escape special characters using a backslash before the character. For example, a value of <code>\\*amazon\\?\\\\</code> searches for the literal string <code>*amazon?\\</code>. </p> <p> The following filters are available: </p> <ul> <li> <code>availability-zone</code> - Filter on an instance's availability zone. </li> <li> <code>instance-state-name</code> - Filter on the intended state of the instance, e.g., running. </li> <li> <code>instance-state-code</code> - Filter on the intended state code of the instance, e.g., 16. </li> </ul>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -6007,8 +6053,7 @@
             "type": "boolean",
             "serialized_name": "IncludeAllInstances"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -6170,7 +6215,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeInstances operation returns information about instances that you own. </p> <p> If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an invalid instance ID, a fault is returned. If you specify an instance that you do not own, it will not be included in the returned results. </p> <p> Recently terminated instances might appear in the returned results. This interval is usually less than one hour. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe the Amazon EC2 instances in a user's account. </p> <p> If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an invalid instance ID, a fault is returned. If you specify an instance that you do not own, it will not be included in the returned results. </p> <p> Recently terminated instances might appear in the returned results. The interval within which this could occur is usually less than one hour from the time the instance is terminated. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -6219,8 +6266,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -6807,7 +6853,8 @@
       "http_path": "/",
       "documentation": "<p> Gives you information about your Internet gateways. You can filter the results to return information only about Internet gateways that match criteria you specify. For example, you could get information only about gateways with particular tags. The Internet gateway must match at least one of the specified values for it to be included in the results. </p> <p> You can specify multiple filters (e.g., the Internet gateway is attached to a particular VPC and is tagged with a particular value). The result includes information for a particular Internet gateway only if the gateway matches all your filters. If there's no match, no special message is returned; the response is simply empty. </p> <p> You can use wildcards with the filter values: an asterisk matches zero or more characters, and <code>?</code> matches exactly one character. You can escape special characters using a backslash before the character. For example, a value of <code>\\*amazon\\?\\\\</code> searches for the literal string <code>*amazon?\\</code>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -6856,8 +6903,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -6924,7 +6970,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeKeyPairs operation returns information about key pairs available to you. If you specify key pairs, information about those key pairs is returned. Otherwise, information for all registered key pairs is returned. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Request to describe information about key pairs available to you. </p> <p> If you specify key pairs, information about those key pairs is returned. Otherwise, information for all your registered key pairs is returned. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -6973,8 +7021,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -7011,7 +7058,9 @@
       "http_path": "/",
       "documentation": "<p> Provides details of a user's registered licenses. Zero or more IDs may be specified on the call. When one or more license IDs are specified, only data for the specified IDs are returned. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -7060,8 +7109,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -7157,7 +7205,8 @@
       "http_path": "/",
       "documentation": "<p> Gives you information about the network ACLs in your VPC. You can filter the results to return information only about ACLs that match criteria you specify. For example, you could get information only the ACL associated with a particular subnet. The ACL must match at least one of the specified values for it to be included in the results. </p> <p> You can specify multiple filters (e.g., the ACL is associated with a particular subnet and has an egress entry that denies traffic to a particular port). The result includes information for a particular ACL only if it matches all your filters. If there's no match, no special message is returned; the response is simply empty. </p> <p> You can use wildcards with the filter values: an asterisk matches zero or more characters, and <code>?</code> matches exactly one character. You can escape special characters using a backslash before the character. For example, a value of <code>\\*amazon\\?\\\\</code> searches for the literal string <code>*amazon?\\</code>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -7206,8 +7255,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -7351,7 +7399,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -7377,8 +7426,7 @@
             "type": "string",
             "serialized_name": "Attachment"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -7473,7 +7521,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -7520,8 +7569,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -7738,7 +7786,9 @@
       "http_path": "/",
       "documentation": "<p> Returns information about one or more PlacementGroup instances in a user's account. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -7787,8 +7837,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -7839,7 +7888,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeRegions operation describes regions zones that are currently available to the account. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Request to describe the available Amazon EC2 regions. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -7888,8 +7939,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -7926,7 +7976,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeReservedInstances operation describes Reserved Instances that were purchased for use with your account. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe the purchased Reserved Instances for your account. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -7980,8 +8032,7 @@
             "documentation": "The Reserved Instance offering type.",
             "serialized_name": "OfferingType"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -8136,7 +8187,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "reserved_instances_id": {
             "type": "string",
             "serialized_name": "ReservedInstancesId"
@@ -8175,8 +8227,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -8293,7 +8344,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeReservedInstancesOfferings operation describes Reserved Instance offerings that are available for purchase. With Amazon EC2 Reserved Instances, you purchase the right to launch Amazon EC2 instances for a period of time (without getting insufficient capacity errors) and pay a lower usage rate for the actual time used. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Request to describe the Reserved Instance offerings that are available for purchase. </p> <p> With Amazon EC2 Reserved Instances, you purchase the right to launch Amazon EC2 instances for a period of time (without getting insufficient capacity errors) and pay a lower usage rate for the actual time used. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -8415,8 +8468,7 @@
             "documentation": "<p> Maximum number of instances to filter when searching for offerings. </p>",
             "serialized_name": "MaxInstanceCount"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -8561,7 +8613,8 @@
       "http_path": "/",
       "documentation": "<p> Gives you information about your route tables. You can filter the results to return information only about tables that match criteria you specify. For example, you could get information only about a table associated with a particular subnet. You can specify multiple values for the filter. The table must match at least one of the specified values for it to be included in the results. </p> <p> You can specify multiple filters (e.g., the table has a particular route, and is associated with a particular subnet). The result includes information for a particular table only if it matches all your filters. If there's no match, no special message is returned; the response is simply empty. </p> <p> You can use wildcards with the filter values: an asterisk matches zero or more characters, and <code>?</code> matches exactly one character. You can escape special characters using a backslash before the character. For example, a value of <code>\\*amazon\\?\\\\</code> searches for the literal string <code>*amazon?\\</code>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -8610,8 +8663,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -8738,7 +8790,9 @@
       "http_path": "/",
       "documentation": "<p> The DescribeSecurityGroups operation returns information about security groups that you own. </p> <p> If you specify security group names, information about those security group is returned. Otherwise, information for all security group is returned. If you specify a group that does not exist, a fault is returned. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe the Amazon EC2 security groups for your account. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -8798,8 +8852,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -9011,7 +9064,9 @@
       "http_path": "/",
       "documentation": "<p> Returns information about an attribute of a snapshot. Only one attribute can be specified per call. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe an attribute of an EBS snapshot. Only one attribute can be specified per request. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -9032,8 +9087,7 @@
               "createVolumePermission"
             ]
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -9095,7 +9149,9 @@
       "http_path": "/",
       "documentation": "<p> Returns information about the Amazon EBS snapshots available to you. Snapshots available to you include public snapshots available for any AWS account to launch, private snapshots you own, and private snapshots owned by another AWS account but for which you've been given explicit create volume permissions. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe Amazon EBS snapshots available to your account. Information returned includes volume ID, status, start time, progress, owner ID, volume size, and description. </p> <p> Snapshots available to your account include public snapshots available for any user to launch, private snapshots owned by the user making the request, and private snapshots owned by other users for which the user granted explicit create volume permissions. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -9168,8 +9224,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -9268,13 +9323,13 @@
       "http_path": "/",
       "documentation": "<p> Describes the data feed for Spot Instances. </p> <p> For conceptual information about Spot Instances, refer to the <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/DeveloperGuide/\"> Amazon Elastic Compute Cloud Developer Guide </a> or <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/UserGuide/\"> Amazon Elastic Compute Cloud User Guide </a>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -9330,7 +9385,8 @@
       "http_path": "/",
       "documentation": "<p> Describes Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current spot instance requests. For conceptual information about Spot Instances, refer to the <a href=\"http://docs.amazonwebservices.com/AWSEC2/2010-08-31/DeveloperGuide/\"> Amazon Elastic Compute Cloud Developer Guide</a> or <a href=\"http://docs.amazonwebservices.com/AWSEC2/2010-08-31/UserGuide/\"> Amazon Elastic Compute Cloud User Guide</a>. </p> <p> You can filter the results to return information only about Spot Instance requests that match criteria you specify. For example, you could get information about requests where the Spot Price you specified is a certain value (you can't use greater than or less than comparison, but you can use <code>*</code> and <code>?</code> wildcards). You can specify multiple values for a filter. A Spot Instance request must match at least one of the specified values for it to be included in the results. </p> <p> You can specify multiple filters (e.g., the Spot Price is equal to a particular value, and the instance type is <code>m1.small</code>). The result includes information for a particular request only if it matches all your filters. If there's no match, no special message is returned; the response is simply empty. </p> <p> You can use wildcards with the filter values: an asterisk matches zero or more characters, and <code>?</code> matches exactly one character. You can escape special characters using a backslash before the character. For example, a value of <code>\\*amazon\\?\\\\</code> searches for the literal string <code>*amazon?\\</code>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -9379,8 +9435,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -9763,7 +9818,8 @@
       "http_path": "/",
       "documentation": "<p> Describes the Spot Price history. </p> <p> Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current spot instance requests. </p> <p> For conceptual information about Spot Instances, refer to the <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/DeveloperGuide/\"> Amazon Elastic Compute Cloud Developer Guide </a> or <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/UserGuide/\"> Amazon Elastic Compute Cloud User Guide </a>. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -9869,8 +9925,7 @@
             "documentation": "<p> Specifies the next set of rows to return. </p>",
             "serialized_name": "NextToken"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -9939,7 +9994,9 @@
       "http_path": "/",
       "documentation": "<p> Gives you information about your subnets. You can filter the results to return information only about subnets that match criteria you specify. </p> <p> For example, you could ask to get information about a particular subnet (or all) only if the subnet's state is available. You can specify multiple filters (e.g., the subnet is in a particular VPC, and the subnet's state is available). </p> <p> The result includes information for a particular subnet only if the subnet matches all your filters. If there's no match, no special message is returned; the response is simply empty. The following table shows the available filters. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -9988,8 +10045,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -10076,7 +10132,9 @@
       "http_path": "/",
       "documentation": "<p> Describes the tags for the specified resources. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -10113,8 +10171,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -10173,7 +10230,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -10191,8 +10249,7 @@
               "productCodes"
             ]
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -10242,7 +10299,8 @@
       "http_path": "/",
       "documentation": "<p> Describes the status of a volume. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -10297,8 +10355,7 @@
             "type": "integer",
             "serialized_name": "MaxResults"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -10418,7 +10475,9 @@
       "http_path": "/",
       "documentation": "<p> Describes the status of the indicated volume or, in lieu of any specified, all volumes belonging to the caller. Volumes that have been deleted are not described. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to describe the Amazon EBS volumes that you own. If you do not specify any volume IDs, all the volumes you own will be described. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -10467,8 +10526,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -10613,7 +10671,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -10631,8 +10690,7 @@
               "enableDnsHostnames"
             ]
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -10674,7 +10732,9 @@
       "http_path": "/",
       "documentation": "<p> Gives you information about your VPCs. You can filter the results to return information only about VPCs that match criteria you specify. </p> <p> For example, you could ask to get information about a particular VPC or VPCs (or all your VPCs) only if the VPC's state is available. You can specify multiple filters (e.g., the VPC uses one of several sets of DHCP options, and the VPC's state is available). The result includes information for a particular VPC only if the VPC matches all your filters. </p> <p> If there's no match, no special message is returned; the response is simply empty. The following table shows the available filters. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -10723,8 +10783,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -10803,7 +10862,9 @@
       "http_path": "/",
       "documentation": "<p> Gives you information about your VPN connections. </p> <important> <p> We strongly recommend you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway. </p> <p> You can filter the results to return information only about VPN connections that match criteria you specify. For example, you could ask to get information about a particular VPN connection (or all) only if the VPN's state is pending or available. You can specify multiple filters (e.g., the VPN connection is associated with a particular VPN gateway, and the gateway's state is pending or available). The result includes information for a particular VPN connection only if the VPN connection matches all your filters. If there's no match, no special message is returned; the response is simply empty. The following table shows the available filters. </p> </important>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -10852,8 +10913,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -10994,7 +11054,9 @@
       "http_path": "/",
       "documentation": "<p> Gives you information about your VPN gateways. You can filter the results to return information only about VPN gateways that match criteria you specify. </p> <p> For example, you could ask to get information about a particular VPN gateway (or all) only if the gateway's state is pending or available. You can specify multiple filters (e.g., the VPN gateway is in a particular Availability Zone and the gateway's state is pending or available). </p> <p> The result includes information for a particular VPN gateway only if the gateway matches all your filters. If there's no match, no special message is returned; the response is simply empty. The following table shows the available filters. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11043,8 +11105,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -11135,7 +11196,8 @@
       "http_path": "/",
       "documentation": "<p> Detaches an Internet gateway from a VPC, disabling connectivity between the Internet and the VPC. The VPC must not contain any running instances with elastic IP addresses. For more information about your VPC and Internet gateway, go to Amazon Virtual Private Cloud User Guide. </p> <p> For more information about Amazon Virtual Private Cloud and Internet gateways, go to the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11152,8 +11214,7 @@
             "documentation": "<p> The ID of the VPC. </p>",
             "serialized_name": "VpcId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "detach_network_interface": {
@@ -11161,7 +11222,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11175,8 +11237,7 @@
             "type": "boolean",
             "serialized_name": "Force"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "detach_volume": {
@@ -11185,7 +11246,9 @@
       "http_path": "/",
       "documentation": "<p> Detach a previously attached volume from a running instance. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to detaches an Amazon EBS volume from an instance. </p> <p> Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to unmount file systems, or otherwise properly release the device from use, can result in lost data and will corrupt the file system. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11211,8 +11274,7 @@
             "documentation": "<p> Forces detachment if the previous detachment attempt did not occur cleanly (logging into an instance, unmounting the volume, and detaching normally). </p> <p> This option can lead to data loss or a corrupted file system. Use this option only as a last resort to detach a volume from a failed instance. The instance will not have an opportunity to flush file system caches nor file system meta data. If you use this option, you must perform file system check and repair procedures. </p>",
             "serialized_name": "Force"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -11264,7 +11326,9 @@
       "http_path": "/",
       "documentation": "<p> Detaches a VPN gateway from a VPC. You do this if you're planning to turn off the VPC and not use it anymore. You can confirm a VPN gateway has been completely detached from a VPC by describing the VPN gateway (any attachments to the VPN gateway are also described). </p> <p> You must wait for the attachment's state to switch to detached before you can delete the VPC or attach a different VPC to the VPN gateway. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11281,8 +11345,7 @@
             "documentation": "<p> The ID of the VPC to detach the VPN gateway from. </p>",
             "serialized_name": "VpcId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "disable_vgw_route_propagation": {
@@ -11290,7 +11353,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "route_table_id": {
             "type": "string",
             "required": true,
@@ -11301,8 +11365,7 @@
             "required": true,
             "serialized_name": "GatewayId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "disassociate_address": {
@@ -11311,7 +11374,9 @@
       "http_path": "/",
       "documentation": "<p> The DisassociateAddress operation disassociates the specified elastic IP address from the instance to which it is assigned. This is an idempotent operation. If you enter it more than once, Amazon EC2 does not return an error. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to disassociate an elastic IP address from the instance to which it is assigned. </p> <p> This is an idempotent operation. If you enter it more than once, Amazon EC2 will not return an error. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11326,8 +11391,7 @@
             "documentation": "<p> Association ID corresponding to the VPC elastic IP address you want to disassociate. </p>",
             "serialized_name": "AssociationId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "disassociate_route_table": {
@@ -11336,7 +11400,8 @@
       "http_path": "/",
       "documentation": "<p> Disassociates a subnet from a route table. </p> <p> After you perform this action, the subnet no longer uses the routes in the route table. Instead it uses the routes in the VPC's main route table. For more information about route tables, go to <a href=\"http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11347,8 +11412,7 @@
             "documentation": "<p> The association ID representing the current association between the route table and subnet. </p>",
             "serialized_name": "AssociationId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "enable_vgw_route_propagation": {
@@ -11356,7 +11420,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "route_table_id": {
             "type": "string",
             "required": true,
@@ -11367,8 +11432,7 @@
             "required": true,
             "serialized_name": "GatewayId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "enable_volume_io": {
@@ -11377,7 +11441,8 @@
       "http_path": "/",
       "documentation": "<p> Enable IO on the volume after an event has occured. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11387,8 +11452,7 @@
             "required": true,
             "serialized_name": "VolumeId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "get_console_output": {
@@ -11397,7 +11461,9 @@
       "http_path": "/",
       "documentation": "<p> The GetConsoleOutput operation retrieves console output for the specified instance. </p> <p> Instance console output is buffered and posted shortly after instance boot, reboot, and termination. Amazon EC2 preserves the most recent 64 KB output which will be available for at least one hour after the most recent post. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to retrieve the console output for the specified instance. </p> <p> Instance console output is buffered and posted shortly after instance boot, reboot, and termination. Amazon EC2 preserves the most recent 64 KB output which will be available for at least one hour after the most recent post. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11408,8 +11474,7 @@
             "documentation": "<p> The ID of the instance for which you want console output. </p>",
             "serialized_name": "InstanceId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -11439,7 +11504,9 @@
       "http_path": "/",
       "documentation": "<p> Retrieves the encrypted administrator password for the instances running Windows. </p> The Windows password is only generated the first time an AMI is launched. It is not generated for rebundled AMIs or after the password is changed on an instance. The password is encrypted using the key pair that you provided.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to retrieve the encrypted administrator password for the instances running Windows. </p> <p> The Windows password is only generated the first time an AMI is launched. It is not generated for rebundled AMIs or after the password is changed on an instance. The password is encrypted using the key pair that you provided. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11450,8 +11517,7 @@
             "documentation": "<p> The ID of the instance for which you want the Windows administrator password. </p>",
             "serialized_name": "InstanceId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -11480,7 +11546,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11634,8 +11701,7 @@
             "required": true,
             "serialized_name": "Platform"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -11830,7 +11896,9 @@
       "http_path": "/",
       "documentation": "<p> Imports the public key from an RSA key pair created with a third-party tool. This operation differs from CreateKeyPair as the private key is never transferred between the caller and AWS servers. </p> <p> RSA key pairs are easily created on Microsoft Windows and Linux OS systems using the <code>ssh-keygen</code> command line tool provided with the standard OpenSSH installation. Standard library support for RSA key pair creation is also available for Java, Ruby, Python, and many other programming languages. </p> <p>The following formats are supported:</p> <ul> <li> OpenSSH public key format, </li> <li> Base64 encoded DER format. </li> <li> SSH public key file format as specified in <a href=\"http://tools.ietf.org/html/rfc4716\"> RFC4716 </a>. </li> </ul>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p></p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11847,8 +11915,7 @@
             "documentation": "<p> The public key portion of the key pair being imported. </p>",
             "serialized_name": "PublicKeyMaterial"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -11872,7 +11939,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -11917,8 +11985,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -12113,7 +12180,9 @@
       "http_path": "/",
       "documentation": "<p> The ModifyImageAttribute operation modifies an attribute of an AMI. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to modify an attribute of an Amazon Machine Image (AMI). </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12239,8 +12308,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "modify_instance_attribute": {
@@ -12249,7 +12317,9 @@
       "http_path": "/",
       "documentation": "<p> Modifies an attribute of an instance. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to modify an attribute of an Amazon EC2 instance. Only one attribute can be changed per request. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12438,8 +12508,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "modify_network_interface_attribute": {
@@ -12447,7 +12516,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12506,8 +12576,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "modify_snapshot_attribute": {
@@ -12516,7 +12585,9 @@
       "http_path": "/",
       "documentation": "<p> Adds or remove permission settings for the specified snapshot. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to modify an EBS snapshot's attributes. Only one attribute can be changed per request. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12617,8 +12688,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "modify_volume_attribute": {
@@ -12626,7 +12696,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12640,8 +12711,7 @@
             "type": "boolean",
             "serialized_name": "AutoEnableIO"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "modify_vpc_attribute": {
@@ -12649,7 +12719,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "vpc_id": {
             "type": "string",
             "required": true,
@@ -12679,8 +12750,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "monitor_instances": {
@@ -12689,7 +12759,9 @@
       "http_path": "/",
       "documentation": "<p> Enables monitoring for a running instance. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to enable monitoring for a running instance. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12707,8 +12779,7 @@
               "serialized_name": "InstanceId"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -12752,7 +12823,9 @@
       "http_path": "/",
       "documentation": "<p> The PurchaseReservedInstancesOffering operation purchases a Reserved Instance for use with your account. With Amazon EC2 Reserved Instances, you purchase the right to launch Amazon EC2 instances for a period of time (without getting insufficient capacity errors) and pay a lower usage rate for the actual time used. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Purchases a Reserved Instance for use with your account. </p> <p> With Amazon EC2 Reserved Instances, you purchase the right to launch Amazon EC2 instances for a period of time (without getting insufficient capacity errors) and pay a lower usage rate for the actual time used. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12783,8 +12856,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -12804,7 +12876,9 @@
       "http_path": "/",
       "documentation": "<p> The RebootInstances operation requests a reboot of one or more instances. This operation is asynchronous; it only queues a request to reboot the specified instance(s). The operation will succeed if the instances are valid and belong to the user. Requests to reboot terminated instances are ignored. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to reboot one or more instances. </p> <p> This operation is asynchronous; it only queues a request to reboot the specified instances. The operation will succeed if the instances are valid and belong to you. Requests to reboot terminated instances are ignored. </p> If a Linux/UNIX instance does not cleanly shut down within four minutes, Amazon EC2 will perform a hard reboot.",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12822,8 +12896,7 @@
               "serialized_name": "InstanceId"
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "register_image": {
@@ -12832,7 +12905,9 @@
       "http_path": "/",
       "documentation": "<p> The RegisterImage operation registers an AMI with Amazon EC2. Images must be registered before they can be launched. For more information, see RunInstances. </p> <p> Each AMI is associated with an unique ID which is provided by the Amazon EC2 service through the RegisterImage operation. During registration, Amazon EC2 retrieves the specified image manifest from Amazon S3 and verifies that the image is owned by the user registering the image. </p> <p> The image manifest is retrieved once and stored within the Amazon EC2. Any modifications to an image in Amazon S3 invalidates this registration. If you make changes to an image, deregister the previous image and register the new image. For more information, see DeregisterImage. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to register an AMI with Amazon EC2. Images must be registered before they can be launched. To launch instances, use the RunInstances operation. </p> <p> Each AMI is associated with an unique ID which is provided by the Amazon EC2 service through this operation. If needed, you can deregister an AMI at any time. </p> <p> AMIs backed by Amazon EBS are automatically registered when you create the image. However, you can use this to register a snapshot of an instance backed by Amazon EBS. Amazon EBS snapshots are not guaranteed to be bootable. For information on creating AMIs backed by Amazon EBS, go to the Amazon Elastic Compute Cloud Developer Guide or Amazon Elastic Compute Cloud User Guide. </p> <p> Any modifications to an AMI backed by Amazon S3 invalidates this registration. If you make changes to an image, deregister the previous image and register the new image. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12936,8 +13011,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -12957,7 +13031,9 @@
       "http_path": "/",
       "documentation": "<p> The ReleaseAddress operation releases an elastic IP address associated with your account. </p> Releasing an IP address automatically disassociates it from any instance with which it is associated. For more information, see DisassociateAddress. <important> <p> After releasing an elastic IP address, it is released to the IP address pool and might no longer be available to your account. Make sure to update your DNS records and any servers or devices that communicate with the address. </p> <p> If you run this operation on an elastic IP address that is already released, the address might be assigned to another account which will cause Amazon EC2 to return an error. </p> </important>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to release an elastic IP address associated with your account. </p> <p> If you run this operation on an elastic IP address that is already released, the address might be assigned to another account which will cause Amazon EC2 to return an error. </p> Releasing an IP address automatically disassociates it from any instance with which it is associated. To disassociate an IP address without releasing it, use the DisassociateAddress operation. <important> Important: After releasing an elastic IP address, it is released to the IP address pool and might no longer be available to your account. Make sure to update your DNS records and any servers or devices that communicate with the address. </important>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12972,8 +13048,7 @@
             "documentation": "<p> The allocation ID that AWS provided when you allocated the address for use with Amazon VPC. </p>",
             "serialized_name": "AllocationId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "replace_network_acl_association": {
@@ -12982,7 +13057,8 @@
       "http_path": "/",
       "documentation": "<p> Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information about network ACLs, go to Network ACLs in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -12999,8 +13075,7 @@
             "documentation": "<p> The ID of the new ACL to associate with the subnet. </p>",
             "serialized_name": "NetworkAclId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -13018,7 +13093,8 @@
       "http_path": "/",
       "documentation": "<p> Replaces an entry (i.e., rule) in a network ACL. For more information about network ACLs, go to Network ACLs in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -13097,8 +13173,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "replace_route": {
@@ -13107,7 +13182,8 @@
       "http_path": "/",
       "documentation": "<p> Replaces an existing route within a route table in a VPC. For more information about route tables, go to <a href=\"http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the Amazon Virtual Private Cloud User Guide. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -13138,8 +13214,7 @@
             "type": "string",
             "serialized_name": "NetworkInterfaceId"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "replace_route_table_association": {
@@ -13148,7 +13223,8 @@
       "http_path": "/",
       "documentation": "<p> Changes the route table associated with a given subnet in a VPC. After you execute this action, the subnet uses the routes in the new route table it's associated with. For more information about route tables, go to <a href=\"http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the Amazon Virtual Private Cloud User Guide. </p> <p> You can also use this to change which table is the main route table in the VPC. You just specify the main route table's association ID and the route table that you want to be the new main route table. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -13165,8 +13241,7 @@
             "documentation": "<p> The ID of the new route table to associate with the subnet. </p>",
             "serialized_name": "RouteTableId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -13183,7 +13258,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -13226,8 +13302,7 @@
             "type": "string",
             "serialized_name": "Description"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "request_spot_instances": {
@@ -13236,7 +13311,9 @@
       "http_path": "/",
       "documentation": "<p> Creates a Spot Instance request. </p> <p> Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot Price. Amazon EC2 periodically sets the Spot Price based on available Spot Instance capacity and current spot instance requests. </p> <p> For conceptual information about Spot Instances, refer to the <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/DeveloperGuide/\"> Amazon Elastic Compute Cloud Developer Guide </a> or <a hlink=\"http://docs.amazonwebservices.com/AWSEC2/2009-11-30/UserGuide/\"> Amazon Elastic Compute Cloud User Guide. </a> </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> The RequestSpotInstances data type. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -13547,8 +13624,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -13933,7 +14009,9 @@
       "http_path": "/",
       "documentation": "<p> The ResetImageAttribute operation resets an attribute of an AMI to its default value. </p> The productCodes attribute cannot be reset.",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to reset an attribute on an <i>Amazon Machine Image</i> (AMI) back to its default value. Only one attribute can be reset per request. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -13950,8 +14028,7 @@
             "documentation": "<p> The name of the attribute being reset. </p> <p> Available attribute names: <code>launchPermission</code> </p>",
             "serialized_name": "Attribute"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "reset_instance_attribute": {
@@ -13960,7 +14037,9 @@
       "http_path": "/",
       "documentation": "<p> Resets an attribute of an instance to its default value. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to reset an attribute on an Amazon EC2 instance back to its default value. Only one attribute can be reset per request. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -13991,8 +14070,7 @@
               "ebsOptimized"
             ]
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "reset_network_interface_attribute": {
@@ -14000,7 +14078,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -14014,8 +14093,7 @@
             "type": "string",
             "serialized_name": "SourceDestCheck"
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "reset_snapshot_attribute": {
@@ -14024,7 +14102,9 @@
       "http_path": "/",
       "documentation": "<p> Resets permission settings for the specified snapshot. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to reset an attribute on a snapshot back to its default value. Only one attribute can be reset per request. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -14045,8 +14125,7 @@
               "createVolumePermission"
             ]
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "revoke_security_group_egress": {
@@ -14055,7 +14134,8 @@
       "http_path": "/",
       "documentation": "<p> This action applies only to security groups in a VPC. It doesn't work with EC2 security groups. For information about Amazon Virtual Private Cloud and VPC security groups, go to the Amazon Virtual Private Cloud User Guide. </p> <p> The action removes one or more egress rules from a VPC security group. The values that you specify in the revoke request (e.g., ports, etc.) must match the existing rule's values in order for the rule to be revoked. </p> <p> Each rule consists of the protocol, and the CIDR range or destination security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. </p> <p> Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -14174,8 +14254,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "revoke_security_group_ingress": {
@@ -14184,7 +14263,9 @@
       "http_path": "/",
       "documentation": "<p> The RevokeSecurityGroupIngress operation revokes permissions from a security group. The permissions used to revoke must be specified using the same values used to grant the permissions. </p> <p> Permissions are specified by IP protocol (TCP, UDP, or ICMP), the source of the request (by IP range or an Amazon EC2 user-group pair), the source and destination port ranges (for TCP and UDP), and the ICMP codes and types (for ICMP). </p> <p> Permission changes are quickly propagated to instances within the security group. However, depending on the number of instances in the group, a small delay might occur. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to revoke permissions from a security group. The permissions used to revoke must be specified using the same values used to grant the permissions. </p> <p> Permissions are specified by IP protocol (TCP, UDP, or ICMP), the source of the request (by IP range or an Amazon EC2 user-group pair), the source and destination port ranges (for TCP and UDP), and the ICMP codes and types (for ICMP). </p> <p> Permission changes are quickly propagated to instances within the security group. However, depending on the number of instances in the group, a small delay might occur. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -14307,8 +14388,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "run_instances": {
@@ -14317,7 +14397,9 @@
       "http_path": "/",
       "documentation": "<p> The RunInstances operation launches a specified number of instances. </p> <p> If Amazon EC2 cannot launch the minimum number AMIs you request, no instances launch. If there is insufficient capacity to launch the maximum number of AMIs you request, Amazon EC2 launches as many as possible to satisfy the requested maximum values. </p> <p> Every instance is launched in a security group. If you do not specify a security group at launch, the instances start in your default security group. For more information on creating security groups, see CreateSecurityGroup. </p> <p> An optional instance type can be specified. For information about instance types, see Instance Types. </p> <p> You can provide an optional key pair ID for each image in the launch request (for more information, see CreateKeyPair). All instances that are created from images that use this key pair will have access to the associated public key at boot. You can use this key to provide secure access to an instance of an image on a per-instance basis. Amazon EC2 public images use this feature to provide secure access without passwords. </p> <important> <p> Launching public images without a key pair ID will leave them inaccessible. </p> <p> The public key material is made available to the instance at boot time by placing it in the <code>openssh_id.pub</code> file on a logical device that is exposed to the instance as <code>/dev/sda2</code> (the ephemeral store). The format of this file is suitable for use as an entry within <code>~/.ssh/authorized_keys</code> (the OpenSSH format). This can be done at boot (e.g., as part of <code>rc.local</code>) allowing for secure access without passwords. </p> <p> Optional user data can be provided in the launch request. All instances that collectively comprise the launch request have access to this data For more information, see Instance Metadata. </p> </important> If any of the AMIs have a product code attached for which the user has not subscribed, the RunInstances call will fail. <important> <p> We strongly recommend using the 2.6.18 Xen stock kernel with the <code>c1.medium</code> and <code>c1.xlarge</code> instances. Although the default Amazon EC2 kernels will work, the new kernels provide greater stability and performance for these instance types. For more information about kernels, see Kernels, RAM Disks, and Block Device Mappings. </p> </important>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Launches a specified number of instances of an AMI for which you have permissions. </p> <p> If Amazon EC2 cannot launch the minimum number AMIs you request, no instances will be launched. If there is insufficient capacity to launch the maximum number of AMIs you request, Amazon EC2 launches the minimum number specified for each AMI and allocate the remaining available instances using round robin. </p> <p> You can provide an optional key pair ID for each image in the launch request (created using the CreateKeyPair operation). All instances that are created from images that use this key pair will have access to the associated public key at boot. You can use this key to provide secure access to an instance of an image on a per-instance basis. Amazon EC2 public images use this feature to provide secure access without passwords. </p> <p> <b>Important:</b> Launching public images without a key pair ID will leave them inaccessible. </p> <p> We strongly recommend using the 2.6.18 Xen stock kernel with High-CPU and High-Memory instances. Although the default Amazon EC2 kernels will work, the new kernels provide greater stability and performance for these instance types. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -14640,8 +14722,7 @@
             "type": "boolean",
             "serialized_name": "EbsOptimized"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -15217,7 +15298,9 @@
       "http_path": "/",
       "documentation": "<p> Starts an instance that uses an Amazon EBS volume as its root device. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. </p> <p> Performing this operation on an instance that uses an instance store as its root device returns an error. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Starts an instance that uses an Amazon EBS volume as its root device. </p> <p> Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. </p> Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error.",
+        "members": {
           "instance_ids": {
             "type": "list",
             "required": true,
@@ -15239,8 +15322,7 @@
             "type": "boolean",
             "serialized_name": "DryRun"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -15322,7 +15404,9 @@
       "http_path": "/",
       "documentation": "<p> Stops an instance that uses an Amazon EBS volume as its root device. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. </p> <p> Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. </p> <p> Performing this operation on an instance that uses an instance store as its root device returns an error. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> Stops an instance that uses an Amazon EBS volume as its root device. </p> <p> Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. </p> Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error.",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -15345,8 +15429,7 @@
             "documentation": "Forces the instance to stop. The instance will not have an opportunity to flush file system caches nor file system meta data. If you use this option, you must perform file system check and repair procedures. This option is not recommended for Windows instances.",
             "serialized_name": "Force"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -15428,7 +15511,9 @@
       "http_path": "/",
       "documentation": "<p> The TerminateInstances operation shuts down one or more instances. This operation is idempotent; if you terminate an instance more than once, each call will succeed. </p> <p> Terminated instances will remain visible after termination (approximately one hour). </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to shut down one or more instances. This operation is idempotent; if you terminate an instance more than once, each call will succeed. Terminated instances will remain visible after termination (for approximately one hour). </p> By default, Amazon EC2 deletes all Amazon EBS volumes that were attached when the instance launched. Amazon EBS volumes attached after instance launch continue running.",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -15446,8 +15531,7 @@
               "serialized_name": "InstanceId"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -15528,7 +15612,8 @@
       "http_method": "POST",
       "http_path": "/",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "network_interface_id": {
             "type": "string",
             "required": true,
@@ -15546,8 +15631,7 @@
               "serialized_name": "PrivateIpAddress"
             }
           }
-        },
-        "raw_payload": false
+        }
       }
     },
     "unmonitor_instances": {
@@ -15556,7 +15640,9 @@
       "http_path": "/",
       "documentation": "<p> Disables monitoring for a running instance. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> A request to disable monitoring for an Amazon EC2 instance. </p>",
+        "members": {
           "dry_run": {
             "type": "boolean",
             "serialized_name": "DryRun"
@@ -15574,8 +15660,7 @@
               "serialized_name": "InstanceId"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",

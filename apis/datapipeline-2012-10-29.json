@@ -23,15 +23,16 @@
       "http_path": "/",
       "documentation": "<p> Validates a pipeline and initiates processing. If the pipeline does not pass validation, activation fails. </p> <p> Call this action to start processing pipeline tasks of a pipeline you've created using the CreatePipeline and PutPipelineDefinition actions. A pipeline cannot be modified after it has been successfully activated. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input of the ActivatePipeline action.</p>",
+        "members": {
           "pipeline_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The identifier of the pipeline to activate. </p>",
             "serialized_name": "pipelineId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -92,7 +93,9 @@
       "http_path": "/",
       "documentation": "<p>Creates a new empty pipeline. When this action succeeds, you can then use the PutPipelineDefinition action to populate the pipeline.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for the CreatePipeline action.</p>",
+        "members": {
           "name": {
             "type": "string",
             "required": true,
@@ -110,8 +113,7 @@
             "documentation": "<p>The description of the new pipeline.</p>",
             "serialized_name": "description"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -155,15 +157,16 @@
       "http_path": "/",
       "documentation": "<p> Permanently deletes a pipeline, its pipeline definition and its run history. You cannot query or restore a deleted pipeline. AWS Data Pipeline will attempt to cancel instances associated with the pipeline that are currently being processed by task runners. Deleting a pipeline cannot be undone. </p> <p> To temporarily pause a pipeline instead of deleting it, call SetStatus with the status set to Pause on individual components. Components that are paused by SetStatus can be resumed. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for the DeletePipeline action.</p>",
+        "members": {
           "pipeline_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The identifier of the pipeline to be deleted.</p>",
             "serialized_name": "pipelineId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -207,7 +210,9 @@
       "http_path": "/",
       "documentation": "<p> Returns the object definitions for a set of objects associated with the pipeline. Object definitions are composed of a set of fields that define the properties of the object. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p> The DescribeObjects action returns the object definitions for a specified set of object identifiers. You can filter the results to named fields and used markers to page through the results. </p>",
+        "members": {
           "pipeline_id": {
             "type": "string",
             "required": true,
@@ -233,8 +238,7 @@
             "documentation": "<p>The starting point for the results to be returned. The first time you call DescribeObjects, this value should be empty. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call DescribeObjects again and pass the marker value from the response to retrieve the next set of results.</p>",
             "serialized_name": "marker"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -352,7 +356,9 @@
       "http_path": "/",
       "documentation": "<p> Retrieve metadata about one or more pipelines. The information retrieved includes the name of the pipeline, the pipeline identifier, its current state, and the user account that owns the pipeline. Using account credentials, you can retrieve metadata about pipelines that you or your IAM users have created. If you are using an IAM user account, you can retrieve metadata about only those pipelines you have read permission for. </p> <p> To retrieve the full pipeline definition instead of metadata about the pipeline, call the GetPipelineDefinition action. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input to the DescribePipelines action.</p>",
+        "members": {
           "pipeline_ids": {
             "type": "list",
             "required": true,
@@ -362,8 +368,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -476,7 +481,9 @@
       "http_path": "/",
       "documentation": "<p>Evaluates a string in the context of a specified object. A task runner can use this action to evaluate SQL queries stored in Amazon S3. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for the EvaluateExpression action.</p>",
+        "members": {
           "pipeline_id": {
             "type": "string",
             "required": true,
@@ -495,8 +502,7 @@
             "documentation": "<p>The expression to evaluate.</p>",
             "serialized_name": "expression"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -573,7 +579,9 @@
       "http_path": "/",
       "documentation": "<p>Returns the definition of the specified pipeline. You can call GetPipelineDefinition to retrieve the pipeline definition you provided using PutPipelineDefinition.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for the GetPipelineDefinition action.</p>",
+        "members": {
           "pipeline_id": {
             "type": "string",
             "required": true,
@@ -585,8 +593,7 @@
             "documentation": "<p>The version of the pipeline definition to retrieve. This parameter accepts the values <code>latest</code> (default) and <code>active</code>. Where <code>latest</code> indicates the last definition saved to the pipeline and <code>active</code> indicates the last definition of the pipeline that was activated.</p>",
             "serialized_name": "version"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -694,14 +701,15 @@
       "http_path": "/",
       "documentation": "<p>Returns a list of pipeline identifiers for all active pipelines. Identifiers are returned only for pipelines you have permission to access. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input to the ListPipelines action.</p>",
+        "members": {
           "marker": {
             "type": "string",
             "documentation": "<p>The starting point for the results to be returned. The first time you call ListPipelines, this value should be empty. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call ListPipelines again and pass the marker value from the response to retrieve the next set of results.</p>",
             "serialized_name": "marker"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -771,7 +779,9 @@
       "http_path": "/",
       "documentation": "<p> Task runners call this action to receive a task to perform from AWS Data Pipeline. The task runner specifies which tasks it can perform by setting a value for the workerGroup parameter of the PollForTask call. The task returned by PollForTask may come from any of the pipelines that match the workerGroup value passed in by the task runner and that was launched using the IAM user credentials specified by the task runner. </p> <p> If tasks are ready in the work queue, PollForTask returns a response immediately. If no tasks are available in the queue, PollForTask uses long-polling and holds on to a poll connection for up to a 90 seconds during which time the first newly scheduled task is handed to the task runner. To accomodate this, set the socket timeout in your task runner to 90 seconds. The task runner should not call PollForTask again on the same <code>workerGroup</code> until it receives a response, and this may take up to 90 seconds. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The data type passed in as input to the PollForTask action.</p>",
+        "members": {
           "worker_group": {
             "type": "string",
             "required": true,
@@ -800,8 +810,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -923,7 +932,9 @@
       "http_path": "/",
       "documentation": "<p>Adds tasks, schedules, and preconditions that control the behavior of the pipeline. You can use PutPipelineDefinition to populate a new pipeline. </p> <p> PutPipelineDefinition also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline. <ol> <li>An object is missing a name or identifier field.</li> <li>A string or reference field is empty.</li> <li>The number of objects in the pipeline exceeds the maximum allowed objects.</li> </ol> </p> <p> Pipeline object definitions are passed to the PutPipelineDefinition action and returned by the GetPipelineDefinition action. </p> </examples>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input of the PutPipelineDefinition action.</p>",
+        "members": {
           "pipeline_id": {
             "type": "string",
             "required": true,
@@ -982,8 +993,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1097,7 +1107,9 @@
       "http_path": "/",
       "documentation": "<p>Queries a pipeline for the names of objects that match a specified set of conditions.</p> <p>The objects returned by QueryObjects are paginated and then filtered by the value you set for query. This means the action may return an empty result set with a value set for marker. If <code>HasMoreResults</code> is set to <code>True</code>, you should continue to call QueryObjects, passing in the returned value for marker, until <code>HasMoreResults</code> returns <code>False</code>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for the QueryObjects action.</p>",
+        "members": {
           "pipeline_id": {
             "type": "string",
             "required": true,
@@ -1170,8 +1182,7 @@
             "documentation": "<p>Specifies the maximum number of object names that QueryObjects will return in a single call. The default value is 100. </p>",
             "serialized_name": "limit"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1250,15 +1261,16 @@
       "http_path": "/",
       "documentation": "<p> Updates the AWS Data Pipeline service on the progress of the calling task runner. When the task runner is assigned a task, it should call ReportTaskProgress to acknowledge that it has the task within 2 minutes. If the web service does not recieve this acknowledgement within the 2 minute window, it will assign the task in a subsequent PollForTask call. After this initial acknowledgement, the task runner only needs to report progress every 15 minutes to maintain its ownership of the task. You can change this reporting time from 15 minutes by specifying a <code>reportProgressTimeout</code> field in your pipeline. If a task runner does not report its status after 5 minutes, AWS Data Pipeline will assume that the task runner is unable to process the task and will reassign the task in a subsequent response to PollForTask. task runners should call ReportTaskProgress every 60 seconds. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for the ReportTaskProgress action.</p>",
+        "members": {
           "task_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>Identifier of the task assigned to the task runner. This value is provided in the TaskObject that the service returns with the response for the PollForTask action.</p>",
             "serialized_name": "taskId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1335,7 +1347,9 @@
       "http_path": "/",
       "documentation": "<p>Task runners call ReportTaskRunnerHeartbeat every 15 minutes to indicate that they are operational. In the case of AWS Data Pipeline Task Runner launched on a resource managed by AWS Data Pipeline, the web service can use this call to detect when the task runner application has failed and restart a new instance.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input for the ReportTaskRunnerHeartbeat action.</p>",
+        "members": {
           "taskrunner_id": {
             "type": "string",
             "required": true,
@@ -1352,8 +1366,7 @@
             "documentation": "<p>The public DNS name of the calling task runner.</p>",
             "serialized_name": "hostname"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1397,7 +1410,9 @@
       "http_path": "/",
       "documentation": "<p>Requests that the status of an array of physical or logical pipeline objects be updated in the pipeline. This update may not occur immediately, but is eventually consistent. The status that can be set depends on the type of object.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input to the SetStatus action.</p>",
+        "members": {
           "pipeline_id": {
             "type": "string",
             "required": true,
@@ -1419,8 +1434,7 @@
             "documentation": "<p>Specifies the status to be set on all the objects in <code>objectIds</code>. For components, this can be either <code>PAUSE</code> or <code>RESUME</code>. For instances, this can be either <code>CANCEL</code>, <code>RERUN</code>, or <code>MARK_FINISHED</code>.</p>",
             "serialized_name": "status"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -1475,7 +1489,9 @@
       "http_path": "/",
       "documentation": "<p> Notifies AWS Data Pipeline that a task is completed and provides information about the final status. The task runner calls this action regardless of whether the task was sucessful. The task runner does not need to call SetTaskStatus for tasks that are canceled by the web service during a call to ReportTaskProgress. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input of the SetTaskStatus action.</p>",
+        "members": {
           "task_id": {
             "type": "string",
             "required": true,
@@ -1508,8 +1524,7 @@
             "documentation": "<p>If an error occurred during the task, this value specifies the stack trace associated with the error. This value is set on the physical attempt object. It is used to display error information to the user. The web service does not parse this value.</p>",
             "serialized_name": "errorStackTrace"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1581,7 +1596,9 @@
       "http_path": "/",
       "documentation": "<p>Tests the pipeline definition with a set of validation checks to ensure that it is well formed and can run without error. </p> </examples>",
       "input": {
-        "params": {
+        "type": "input",
+        "documentation": "<p>The input of the ValidatePipelineDefinition action.</p>",
+        "members": {
           "pipeline_id": {
             "type": "string",
             "required": true,
@@ -1640,8 +1657,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",

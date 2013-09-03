@@ -23,7 +23,8 @@
       "http_path": "/",
       "documentation": "<p>Attaches an Elastic Load Balancing instance to a specified layer.</p> You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html\"> Elastic Load Balancing Developer Guide</a>.",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "elastic_load_balancer_name": {
             "type": "string",
             "required": true,
@@ -36,8 +37,7 @@
             "documentation": "<p>The ID of the layer that the Elastic Load Balancing instance is to be attached to.</p>",
             "serialized_name": "LayerId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -70,7 +70,8 @@
       "http_path": "/",
       "documentation": "<p>Creates a clone of a specified stack. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-cloning.html\">Clone a Stack</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "source_stack_id": {
             "type": "string",
             "required": true,
@@ -224,8 +225,7 @@
               "instance-store"
             ]
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -269,7 +269,8 @@
       "http_path": "/",
       "documentation": "<p>Creates an app for a specified stack. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html\">Creating Apps</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "required": true,
@@ -401,8 +402,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -446,7 +446,8 @@
       "http_path": "/",
       "documentation": "<p>Deploys a stack or app.</p> <ul> <li>App deployment generates a <code>deploy</code> event, which runs the associated recipes and passes them a JSON stack configuration object that includes information about the app. </li> <li>Stack deployment runs the <code>deploy</code> recipes but does not raise an event.</li> </ul> <p>For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html\">Deploying Apps</a> and <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html\">Run Stack Commands</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "required": true,
@@ -516,8 +517,7 @@
             "documentation": "<p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format and must escape characters such as '\"'.:</p> <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code> <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>",
             "serialized_name": "CustomJson"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -561,7 +561,8 @@
       "http_path": "/",
       "documentation": "<p>Creates an instance in a specified stack. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html\">Adding an Instance to a Layer</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "required": true,
@@ -640,8 +641,7 @@
             "documentation": "<p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>. To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by using CreateDeployment to run the <code>update_dependencies</code> stack command or manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances. </p> We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.",
             "serialized_name": "InstallUpdatesOnBoot"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -685,7 +685,8 @@
       "http_path": "/",
       "documentation": "<p>Creates a layer. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html\">How to Create a Layer</a>.</p> You should use <b>CreateLayer</b> for non-custom layer types such as PHP App Server only if the stack does not have an existing layer of that type. A stack can have at most one instance of each non-custom layer; if you attempt to create a second instance, <b>CreateLayer</b> fails. A stack can have an arbitrary number of custom layers, so you can call <b>CreateLayer</b> as many times as you like for that layer type.",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "required": true,
@@ -870,8 +871,7 @@
             "documentation": "<p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>. To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by using CreateDeployment to run the <code>update_dependencies</code> stack command or manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances. </p> We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.",
             "serialized_name": "InstallUpdatesOnBoot"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -915,7 +915,8 @@
       "http_path": "/",
       "documentation": "<p>Creates a new stack. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-edit.html\">Create a New Stack</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "name": {
             "type": "string",
             "required": true,
@@ -1053,8 +1054,7 @@
               "instance-store"
             ]
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1087,7 +1087,8 @@
       "http_path": "/",
       "documentation": "<p>Creates a new user profile.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "iam_user_arn": {
             "type": "string",
             "required": true,
@@ -1104,8 +1105,7 @@
             "documentation": "<p>The user's public SSH key.</p>",
             "serialized_name": "SshPublicKey"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1138,15 +1138,15 @@
       "http_path": "/",
       "documentation": "<p>Deletes a specified app.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "app_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The app ID.</p>",
             "serialized_name": "AppId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -1179,7 +1179,8 @@
       "http_path": "/",
       "documentation": "<p>Deletes a specified instance. You must stop an instance before you can delete it. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-delete.html\">Deleting Instances</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "instance_id": {
             "type": "string",
             "required": true,
@@ -1196,8 +1197,7 @@
             "documentation": "<p>Whether to delete the instance Amazon EBS volumes.</p>",
             "serialized_name": "DeleteVolumes"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -1230,15 +1230,15 @@
       "http_path": "/",
       "documentation": "<p>Deletes a specified layer. You must first stop and then delete all associated instances. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-delete.html\">How to Delete a Layer</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "layer_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The layer ID.</p>",
             "serialized_name": "LayerId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -1271,15 +1271,15 @@
       "http_path": "/",
       "documentation": "<p>Deletes a specified stack. You must first delete all instances, layers, and apps. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-shutting.html\">Shut Down a Stack</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The stack ID.</p>",
             "serialized_name": "StackId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -1312,15 +1312,15 @@
       "http_path": "/",
       "documentation": "<p>Deletes a user profile.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "iam_user_arn": {
             "type": "string",
             "required": true,
             "documentation": "<p>The user's IAM ARN.</p>",
             "serialized_name": "IamUserArn"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -1353,7 +1353,8 @@
       "http_path": "/",
       "documentation": "<p>Requests a description of a specified set of apps.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "documentation": "<p>The app stack ID. If you use this parameter, <code>DescribeApps</code> returns a description of the apps in the specified stack.</p>",
@@ -1367,8 +1368,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1554,7 +1554,8 @@
       "http_path": "/",
       "documentation": "<p>Describes the results of specified commands.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "deployment_id": {
             "type": "string",
             "documentation": "<p>The deployment ID. If you include this parameter, <code>DescribeCommands</code> returns a description of the commands associated with the specified deployment.</p>",
@@ -1573,8 +1574,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1674,7 +1674,8 @@
       "http_path": "/",
       "documentation": "<p>Requests a description of a specified set of deployments.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "documentation": "<p>The stack ID. If you include this parameter, <code>DescribeDeployments</code> returns a description of the commands associated with the specified stack.</p>",
@@ -1693,8 +1694,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1840,7 +1840,8 @@
       "http_path": "/",
       "documentation": "<p>Describes an instance's <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP addresses</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "instance_id": {
             "type": "string",
             "documentation": "<p>The instance ID. If you include this parameter, <code>DescribeElasticIps</code> returns a description of the Elastic IP addresses associated with the specified instance.</p>",
@@ -1854,8 +1855,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -1925,7 +1925,8 @@
       "http_path": "/",
       "documentation": "<p>Describes a stack's Elastic Load Balancing instances.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "documentation": "<p>A stack ID. The action describes the Elastic Load Balancing instances for the stack.</p>",
@@ -1939,8 +1940,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2036,7 +2036,8 @@
       "http_path": "/",
       "documentation": "<p>Requests a description of a set of instances associated with a specified ID or IDs.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "documentation": "<p>A stack ID. If you use this parameter, <code>DescribeInstances</code> returns descriptions of the instances associated with the specified stack.</p>",
@@ -2055,8 +2056,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2259,7 +2259,8 @@
       "http_path": "/",
       "documentation": "<p>Requests a description of one or more layers in a specified stack.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "required": true,
@@ -2274,8 +2275,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2567,7 +2567,8 @@
       "http_path": "/",
       "documentation": "<p>Describes load-based auto scaling configurations for specified layers.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "layer_ids": {
             "type": "list",
             "required": true,
@@ -2577,8 +2578,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2712,7 +2712,8 @@
       "http_path": "/",
       "documentation": "<p>Describes the permissions for a specified stack.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "iam_user_arn": {
             "type": "string",
             "required": true,
@@ -2725,8 +2726,7 @@
             "documentation": "<p>The stack ID.</p>",
             "serialized_name": "StackId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2796,7 +2796,8 @@
       "http_path": "/",
       "documentation": "<p>Describe an instance's RAID arrays.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "instance_id": {
             "type": "string",
             "documentation": "<p>The instance ID. If you use this parameter, <code>DescribeRaidArrays</code> returns descriptions of the RAID arrays associated with the specified instance. </p>",
@@ -2810,8 +2811,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -2911,7 +2911,8 @@
       "http_path": "/",
       "documentation": "<p>Describes AWS OpsWorks service errors.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "documentation": "<p>The stack ID. If you use this parameter, <code>DescribeServiceErrors</code> returns descriptions of the errors associated with the specified stack.</p>",
@@ -2930,8 +2931,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3011,7 +3011,8 @@
       "http_path": "/",
       "documentation": "<p>Requests a description of one or more stacks.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_ids": {
             "type": "list",
             "documentation": "<p>An array of stack IDs that specify the stacks to be described. If you omit this parameter, <code>DescribeStacks</code> returns a description of every stack.</p>",
@@ -3020,8 +3021,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3214,7 +3214,8 @@
       "http_path": "/",
       "documentation": "<p>Describes time-based auto scaling configurations for specified instances.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "instance_ids": {
             "type": "list",
             "required": true,
@@ -3224,8 +3225,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3364,7 +3364,8 @@
       "http_path": "/",
       "documentation": "<p>Describe specified users.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "iam_user_arns": {
             "type": "list",
             "required": true,
@@ -3374,8 +3375,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3445,7 +3445,8 @@
       "http_path": "/",
       "documentation": "<p>Describes an instance's Amazon EBS volumes.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "instance_id": {
             "type": "string",
             "documentation": "<p>The instance ID. If you use this parameter, <code>DescribeVolumes</code> returns descriptions of the volumes associated with the specified instance.</p>",
@@ -3464,8 +3465,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3570,7 +3570,8 @@
       "http_path": "/",
       "documentation": "<p>Detaches a specified Elastic Load Balancing instance from it's layer.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "elastic_load_balancer_name": {
             "type": "string",
             "required": true,
@@ -3583,8 +3584,7 @@
             "documentation": "<p>The ID of the layer that the Elastic Load Balancing instance is attached to.</p>",
             "serialized_name": "LayerId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -3606,15 +3606,15 @@
       "http_path": "/",
       "documentation": "<p>Gets a generated host name for the specified layer, based on the current host name theme.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "layer_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The layer ID.</p>",
             "serialized_name": "LayerId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "output": {
         "type": "structure",
@@ -3652,15 +3652,15 @@
       "http_path": "/",
       "documentation": "<p>Reboots a specified instance. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html\">Starting, Stopping, and Rebooting Instances</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "instance_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The instance ID.</p>",
             "serialized_name": "InstanceId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -3693,7 +3693,8 @@
       "http_path": "/",
       "documentation": "<p>Specify the load-based auto scaling configuration for a specified layer. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html\">Managing Load with Time-based and Load-based Instances</a>.</p> To use load-based auto scaling, you must create a set of load-based auto scaling instances. Load-based auto scaling operates only on the instances from that set, so you must ensure that you have created enough instances to handle the maximum anticipated load.",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "layer_id": {
             "type": "string",
             "required": true,
@@ -3779,8 +3780,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -3813,7 +3813,8 @@
       "http_path": "/",
       "documentation": "<p>Specifies a stack's permissions. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html\">Security and Permissions</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "required": true,
@@ -3836,8 +3837,7 @@
             "documentation": "<p>The user is allowed to use <b>sudo</b> to elevate privileges.</p>",
             "serialized_name": "AllowSudo"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -3870,7 +3870,8 @@
       "http_path": "/",
       "documentation": "<p>Specify the time-based auto scaling configuration for a specified instance. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html\">Managing Load with Time-based and Load-based Instances</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "instance_id": {
             "type": "string",
             "required": true,
@@ -3961,8 +3962,7 @@
               }
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -3995,15 +3995,15 @@
       "http_path": "/",
       "documentation": "<p>Starts a specified instance. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html\">Starting, Stopping, and Rebooting Instances</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "instance_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The instance ID.</p>",
             "serialized_name": "InstanceId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -4036,15 +4036,15 @@
       "http_path": "/",
       "documentation": "<p>Starts stack's instances. </p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The stack ID.</p>",
             "serialized_name": "StackId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -4077,15 +4077,15 @@
       "http_path": "/",
       "documentation": "<p>Stops a specified instance. When you stop a standard instance, the data disappears and must be reinstalled when you restart the instance. You can stop an Amazon EBS-backed instance without losing data. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html\">Starting, Stopping, and Rebooting Instances</a>.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "instance_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The instance ID.</p>",
             "serialized_name": "InstanceId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -4118,15 +4118,15 @@
       "http_path": "/",
       "documentation": "<p>Stops a specified stack.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "required": true,
             "documentation": "<p>The stack ID.</p>",
             "serialized_name": "StackId"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -4159,7 +4159,8 @@
       "http_path": "/",
       "documentation": "<p>Updates a specified app.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "app_id": {
             "type": "string",
             "required": true,
@@ -4284,8 +4285,7 @@
               "type": "string"
             }
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -4318,7 +4318,8 @@
       "http_path": "/",
       "documentation": "<p>Updates a specified instance.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "instance_id": {
             "type": "string",
             "required": true,
@@ -4381,8 +4382,7 @@
             "documentation": "<p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>. To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by using CreateDeployment to run the <code>update_dependencies</code> stack command or manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances. </p> We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.",
             "serialized_name": "InstallUpdatesOnBoot"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -4415,7 +4415,8 @@
       "http_path": "/",
       "documentation": "<p>Updates a specified layer.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "layer_id": {
             "type": "string",
             "required": true,
@@ -4581,8 +4582,7 @@
             "documentation": "<p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>. To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by using CreateDeployment to run the <code>update_dependencies</code> stack command or manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances. </p> We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.",
             "serialized_name": "InstallUpdatesOnBoot"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -4615,7 +4615,8 @@
       "http_path": "/",
       "documentation": "<p>Updates a specified stack.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "stack_id": {
             "type": "string",
             "required": true,
@@ -4750,8 +4751,7 @@
               "instance-store"
             ]
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
@@ -4784,7 +4784,8 @@
       "http_path": "/",
       "documentation": "<p>Updates a specified user profile.</p>",
       "input": {
-        "params": {
+        "type": "input",
+        "members": {
           "iam_user_arn": {
             "type": "string",
             "required": true,
@@ -4801,8 +4802,7 @@
             "documentation": "<p>The user's new SSH public key.</p>",
             "serialized_name": "SshPublicKey"
           }
-        },
-        "raw_payload": false
+        }
       },
       "errors": [
         {
