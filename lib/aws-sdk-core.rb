@@ -33,7 +33,6 @@ module Aws
     autoload :JsonSerializer, 'aws/plugins/json_serializer'
     autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
     autoload :RestProtocol, 'aws/plugins/rest_protocol'
-    autoload :RpcProtocol, 'aws/plugins/rpc_protocol'
     autoload :Signer, 'aws/plugins/signer'
     autoload :VersionedApiLoader, 'aws/plugins/versioned_api_loader'
     autoload :XmlSerializer, 'aws/plugins/xml_serializer'
