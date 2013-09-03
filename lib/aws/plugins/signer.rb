@@ -15,27 +15,15 @@ module Aws
   module Plugins
     class Signer < Seahorse::Client::Plugin
 
-      # @api private
-      class SignatureHandler
-
-        def initialize(signer)
-          @signer = signer
+      handle(:Handler, step: :sign) do |context|
+        @signer ||= begin
+          version = context.config.api.metadata['aws_signer']
+          Signers.const_get(version)
         end
-
-        attr_accessor :handler
-
-        def call(context)
-          @signer.sign(context)
-          @handler.call(context)
-        end
-
+        @signer.sign(context)
+        super(context)
       end
 
-      def add_handlers(handlers, config)
-        version = config.api.metadata['aws_signer']
-        signer = Signers.const_get(version)
-        handlers.add(SignatureHandler.new(signer), step: :sign)
-      end
     end
   end
 end
