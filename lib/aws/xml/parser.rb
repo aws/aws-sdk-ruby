@@ -50,11 +50,12 @@ module Aws
       private
 
       def structure(shape, hash)
-        shape.members.inject({}) do |data, (member_name, member_shape)|
+        data = {}
+        shape.members.each do |member_name, member_shape|
           key = member_shape.serialized_name
           data[member_name] = member(member_shape, hash[key]) if hash.key?(key)
-          data
         end
+        data
       end
 
       def list(shape, values)
