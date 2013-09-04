@@ -211,6 +211,43 @@ module Aws
         end
 
         describe 'flattened maps' do
+
+          it 'serializes hashes with keys and values' do
+            rules['members'] = {
+              'attributes' => {
+                'type' => 'map',
+                'metadata' => { 'flattened' => true },
+                'keys' => { 'type' => 'string' },
+                'members' => { 'type' => 'string' }
+              }
+            }
+            params = { attributes: { 'Size' => 'large', 'Color' => 'red' } }
+            expect(query_params(params)).to eq([
+              ['attributes.1.key', 'Size'],
+              ['attributes.1.value', 'large'],
+              ['attributes.2.key', 'Color'],
+              ['attributes.2.value', 'red'],
+            ])
+          end
+
+          it 'serializes hashes with keys and values' do
+            rules['members'] = {
+              'attributes' => {
+                'type' => 'map',
+                'metadata' => { 'flattened' => true },
+                'keys' => { 'type' => 'string', 'serialized_name' => 'K' },
+                'members' => { 'type' => 'string', 'serialized_name' => 'V' }
+              }
+            }
+            params = { attributes: { 'Size' => 'large', 'Color' => 'red' } }
+            expect(query_params(params)).to eq([
+              ['attributes.1.K', 'Size'],
+              ['attributes.1.V', 'large'],
+              ['attributes.2.K', 'Color'],
+              ['attributes.2.V', 'red'],
+            ])
+          end
+
         end
 
         describe 'non-flattened maps' do
@@ -229,6 +266,23 @@ module Aws
               ['attributes.entry.1.value', 'large'],
               ['attributes.entry.2.key', 'Color'],
               ['attributes.entry.2.value', 'red'],
+            ])
+          end
+
+          it 'serializes hashes with keys and values' do
+            rules['members'] = {
+              'attributes' => {
+                'type' => 'map',
+                'keys' => { 'type' => 'string', 'serialized_name' => 'K' },
+                'members' => { 'type' => 'string', 'serialized_name' => 'V' }
+              }
+            }
+            params = { attributes: { 'Size' => 'large', 'Color' => 'red' } }
+            expect(query_params(params)).to eq([
+              ['attributes.entry.1.K', 'Size'],
+              ['attributes.entry.1.V', 'large'],
+              ['attributes.entry.2.K', 'Color'],
+              ['attributes.entry.2.V', 'red'],
             ])
           end
 

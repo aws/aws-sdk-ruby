@@ -66,12 +66,15 @@ module Aws
       end
 
       def map(param_list, shape, prefix, values)
+        key_shape = shape.keys
+        value_shape = shape.members
+        prefix += '.entry' unless shape.metadata['flattened']
+        key_name = "%s.%d.#{key_shape.serialized_name || 'key'}"
+        value_name  = "%s.%d.#{value_shape.serialized_name || 'value'}"
         n = 1
         values.each_pair do |key, value|
-          key_name = "#{prefix}.entry.#{n}.key"
-          value_name = "#{prefix}.entry.#{n}.value"
-          member(param_list, shape.keys, key_name, key)
-          member(param_list, shape.members, value_name, value)
+          member(param_list, key_shape, key_name % [prefix, n], key)
+          member(param_list, value_shape, value_name % [prefix, n], value)
           n += 1
         end
       end
