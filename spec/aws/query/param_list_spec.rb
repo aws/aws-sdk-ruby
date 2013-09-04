@@ -52,6 +52,16 @@ module Aws
 
       end
 
+      describe '#to_a' do
+
+        it 'returns an array of sorted Param objects' do
+          p1 = list.add('name2')
+          p2 = list.add('name1', 'value')
+          expect(list.to_a).to eq([p2, p1])
+        end
+
+      end
+
       describe '#to_s' do
 
         it 'returns the params as a string' do

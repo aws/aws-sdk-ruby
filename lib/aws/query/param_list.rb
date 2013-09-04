@@ -35,9 +35,14 @@ module Aws
         @params.delete(param_name)
       end
 
+      # @return [Array<Param>] Returns an array of sorted {Param} objects.
+      def to_a
+        @params.values.sort
+      end
+
       # @return [String]
       def to_s
-        @params.values.sort.map(&:to_s).join('&')
+        to_a.map(&:to_s).join('&')
       end
 
     end
