@@ -18,7 +18,7 @@ module Aws
     describe Builder do
 
       let(:rules) {{
-        'type' => 'structure',
+        'type' => 'input',
         'serialized_name' => 'xml',
         'members' => {},
       }}

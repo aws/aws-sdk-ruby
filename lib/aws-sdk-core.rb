@@ -40,6 +40,7 @@ module Aws
 
   # @api private
   module Query
+    autoload :Builder, 'aws/query/builder'
     autoload :Param, 'aws/query/param'
     autoload :ParamList, 'aws/query/param_list'
   end
