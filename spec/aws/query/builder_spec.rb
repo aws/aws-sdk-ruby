@@ -289,8 +289,95 @@ module Aws
         end
 
         describe 'scalars' do
-        end
 
+          it 'serializes integers' do
+            rules['members'] = {
+              'count' => { 'type' => 'integer' }
+            }
+            expect(query_params(count: 123)).to eq([
+              ['count', '123'],
+            ])
+          end
+
+          it 'serializes floats' do
+            rules['members'] = {
+              'price' => { 'type' => 'float' }
+            }
+            expect(query_params(price: 12.34)).to eq([
+              ['price', '12.34'],
+            ])
+          end
+
+          it 'serializes booleans' do
+            rules['members'] = {
+              'hot' => { 'type' => 'boolean' },
+              'cold' => { 'type' => 'boolean' }
+            }
+            expect(query_params(hot:true, cold:false)).to eq([
+              ['cold', 'false'],
+              ['hot', 'true'],
+            ])
+          end
+
+          it 'serializes timestamps as is8601 strings by default' do
+            now = Time.now
+            rules['members'] = {
+              'when' => { 'type' => 'timestamp' }
+            }
+            expect(query_params(when:now)).to eq([
+              ['when', now.utc.iso8601]
+            ])
+          end
+
+          it 'can serializes timestamps as rfc8622 strings' do
+            now = Time.now
+            rules['members'] = {
+              'when' => {
+                'type' => 'timestamp',
+                'metadata' => { 'timestamp_format' => 'rfc822' }
+              }
+            }
+            expect(query_params(when:now)).to eq([
+              ['when', now.utc.rfc822]
+            ])
+          end
+
+          it 'can serializes timestamps as unix timestamps' do
+            now = Time.now
+            rules['members'] = {
+              'when' => {
+                'type' => 'timestamp',
+                'metadata' => { 'timestamp_format' => 'unixtimestamp' }
+              }
+            }
+            expect(query_params(when:now)).to eq([
+              ['when', now.to_i.to_s]
+            ])
+          end
+
+          it 'raises an error for invalid timestamp formats' do
+            now = Time.now
+            rules['members'] = {
+              'when' => {
+                'type' => 'timestamp',
+                'metadata' => { 'timestamp_format' => 'oops' }
+              }
+            }
+            expect {
+              query_params(when:Time.now) 
+            }.to raise_error(/invalid timestamp/)
+          end
+
+          it 'serializes blobs as base64 strings' do
+            rules['members'] = {
+              'data' => { 'type' => 'blob' }
+            }
+            expect(query_params(data:'hello')).to eq([
+              ['data', 'aGVsbG8=']
+            ])
+          end
+
+        end
       end
     end
   end

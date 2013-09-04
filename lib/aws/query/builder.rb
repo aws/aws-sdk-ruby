@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'base64'
+
 module Aws
   module Query
     class Builder
@@ -84,8 +86,25 @@ module Aws
         when StructureShape then structure(param_list, shape, prefix, value)
         when ListShape then list(param_list, shape, prefix, value)
         when MapShape then map(param_list, shape, prefix, value)
+        when TimestampShape then timestamp(param_list, shape, prefix, value.utc)
+        when BlobShape then blob(param_list, shape, prefix, value)
         else param_list.add(prefix, value.to_s)
         end
+      end
+
+      def timestamp(param_list, shape, prefix, value)
+        format = shape.metadata['timestamp_format']
+        value = case format
+        when nil, 'iso8601' then value.iso8601
+        when 'rfc822' then value.rfc822
+        when 'unixtimestamp' then value.to_i.to_s
+        else raise "invalid timestamp format `#{format}'"
+        end
+        param_list.add(prefix, value)
+      end
+
+      def blob(param_list, shape, prefix, value)
+        param_list.add(prefix, Base64.strict_encode64(value))
       end
 
     end
