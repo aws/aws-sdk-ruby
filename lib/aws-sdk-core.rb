@@ -39,6 +39,12 @@ module Aws
   end
 
   # @api private
+  module Query
+    autoload :Param, 'aws/query/param'
+    autoload :ParamList, 'aws/query/param_list'
+  end
+
+  # @api private
   module Signers
     autoload :Version3, 'aws/signers/version_3'
     autoload :Version4, 'aws/signers/version_4'
