@@ -49,8 +49,19 @@ module Aws
       end
 
       def list(param_list, shape, prefix, values)
+        member_shape = shape.members
+
+        if name = member_shape.serialized_name
+          parts = prefix.split('.')
+          parts.pop
+          parts.push(name)
+          prefix = parts.join('.')
+        end
+
         values.each_with_index do |value, n|
-          param_list.add("#{prefix}.#{n+1}", value)
+          suffix = ".#{n+1}"
+          param_name = "#{prefix}#{suffix}"
+          member(param_list, member_shape, param_name, value)
         end
       end
 

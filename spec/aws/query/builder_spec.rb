@@ -104,6 +104,30 @@ module Aws
             ])
           end
 
+          it 'uses the list member serialized name as the param name' do
+            rules['members'] = {
+              'config' => {
+                'type' => 'structure',
+                'members' => {
+                  'items' => {
+                    'type' => 'list',
+                    'metadata' => { 'flattened' => true },
+                    'members' => {
+                      'type' => 'string',
+                      'serialized_name' => 'Item'
+                    }
+                  }
+                }
+              }
+            }
+            params = { config: { items: %w(abc mno xyz) } }
+            expect(query_params(params)).to eq([
+              ['config.Item.1', 'abc'],
+              ['config.Item.2', 'mno'],
+              ['config.Item.3', 'xyz'],
+            ])
+          end
+
         end
 
         describe 'non-flattened lists' do
