@@ -128,6 +128,26 @@ module Aws
             ])
           end
 
+          it 'supports lists of complex types' do
+            rules['members'] = {
+              'people' => {
+                'type' => 'list',
+                'metadata' => { 'flattened' => true },
+                'members' => {
+                  'type' => 'structure',
+                  'members' => {
+                    'name' => { 'type' => 'string' }
+                  }
+                }
+              }
+            }
+            params = { people: [ { name: 'John' }, { name: 'Jane' } ] }
+            expect(query_params(params)).to eq([
+              ['people.1.name', 'John'],
+              ['people.2.name', 'Jane'],
+            ])
+          end
+
         end
 
         describe 'non-flattened lists' do
