@@ -229,12 +229,12 @@
         "documentation": "<p> The input for the DescribeJobFlows operation. </p>",
         "members": {
           "created_after": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p>Return only job flows created after this date and time.</p>",
             "serialized_name": "CreatedAfter"
           },
           "created_before": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p>Return only job flows created before this date and time.</p>",
             "serialized_name": "CreatedBefore"
           },
@@ -320,22 +320,22 @@
                       ]
                     },
                     "creation_date_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>The creation date and time of the job flow.</p>",
                       "serialized_name": "CreationDateTime"
                     },
                     "start_date_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>The start date and time of the job flow.</p>",
                       "serialized_name": "StartDateTime"
                     },
                     "ready_date_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>The date and time when the job flow was ready to start running bootstrap actions.</p>",
                       "serialized_name": "ReadyDateTime"
                     },
                     "end_date_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>The completion date and time of the job flow.</p>",
                       "serialized_name": "EndDateTime"
                     },
@@ -456,22 +456,22 @@
                             "serialized_name": "LastStateChangeReason"
                           },
                           "creation_date_time": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "documentation": "<p>The date/time the instance group was created. </p>",
                             "serialized_name": "CreationDateTime"
                           },
                           "start_date_time": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "documentation": "<p>The date/time the instance group was started.</p>",
                             "serialized_name": "StartDateTime"
                           },
                           "ready_date_time": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "documentation": "<p>The date/time the instance group was available to the cluster. </p>",
                             "serialized_name": "ReadyDateTime"
                           },
                           "end_date_time": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "documentation": "<p>The date/time the instance group was terminated.</p>",
                             "serialized_name": "EndDateTime"
                           }
@@ -618,17 +618,17 @@
                             ]
                           },
                           "creation_date_time": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "documentation": "<p>The creation date and time of the step.</p>",
                             "serialized_name": "CreationDateTime"
                           },
                           "start_date_time": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "documentation": "<p>The start date and time of the step.</p>",
                             "serialized_name": "StartDateTime"
                           },
                           "end_date_time": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "documentation": "<p>The completion date and time of the step.</p>",
                             "serialized_name": "EndDateTime"
                           },

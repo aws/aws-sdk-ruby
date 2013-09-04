@@ -32,13 +32,10 @@
             "serialized_name": "DomainName"
           },
           "items": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "A list of items on which to perform the operation.",
             "serialized_name": "Items",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "serialized_name": "Item",
@@ -49,11 +46,8 @@
                   "serialized_name": "ItemName"
                 },
                 "attributes": {
-                  "type": "list",
+                  "type": "flat_list",
                   "serialized_name": "Attributes",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p></p>",
@@ -105,13 +99,10 @@
             "serialized_name": "DomainName"
           },
           "items": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "A list of items on which to perform the operation.",
             "serialized_name": "Items",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p></p>",
@@ -124,13 +115,10 @@
                   "serialized_name": "ItemName"
                 },
                 "attributes": {
-                  "type": "list",
+                  "type": "flat_list",
                   "required": true,
                   "documentation": "The list of attributes for a replaceable item.",
                   "serialized_name": "Attributes",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p></p>",
@@ -324,12 +312,9 @@
             "serialized_name": "ItemName"
           },
           "attributes": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "A list of Attributes. Similar to columns on a spreadsheet, attributes represent categories of data that can be assigned to items.",
             "serialized_name": "Attributes",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p></p>",
@@ -556,12 +541,9 @@
             "serialized_name": "ItemName"
           },
           "attribute_names": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "The names of the attributes.",
             "serialized_name": "AttributeNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "AttributeName"
@@ -578,12 +560,9 @@
         "type": "structure",
         "members": {
           "attributes": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "The list of attributes returned by the operation.",
             "serialized_name": "Attributes",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p></p>",
@@ -671,12 +650,9 @@
         "type": "structure",
         "members": {
           "domain_names": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "A list of domain names that match the expression.",
             "serialized_name": "DomainNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "DomainName"
@@ -733,13 +709,10 @@
             "serialized_name": "ItemName"
           },
           "attributes": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "The list of attributes.",
             "serialized_name": "Attributes",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p></p>",
@@ -892,12 +865,9 @@
         "type": "structure",
         "members": {
           "items": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "A list of items that match the select expression.",
             "serialized_name": "Items",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p></p>",
@@ -914,12 +884,9 @@
                   "serialized_name": "AlternateNameEncoding"
                 },
                 "attributes": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "A list of attributes.",
                   "serialized_name": "Attributes",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p></p>",

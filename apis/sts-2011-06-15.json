@@ -80,7 +80,7 @@
                 "serialized_name": "SessionToken"
               },
               "expiration": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date on which the current credentials expire.</p>",
                 "serialized_name": "Expiration"
               }
@@ -201,7 +201,7 @@
                 "serialized_name": "SessionToken"
               },
               "expiration": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date on which the current credentials expire.</p>",
                 "serialized_name": "Expiration"
               }
@@ -390,7 +390,7 @@
                 "serialized_name": "SessionToken"
               },
               "expiration": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date on which the current credentials expire.</p>",
                 "serialized_name": "Expiration"
               }
@@ -493,7 +493,7 @@
                 "serialized_name": "SessionToken"
               },
               "expiration": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date on which the current credentials expire.</p>",
                 "serialized_name": "Expiration"
               }

@@ -75,12 +75,12 @@
             ]
           },
           "start_date": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The starting date to retrieve alarm history. </p>",
             "serialized_name": "StartDate"
           },
           "end_date": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The ending date to retrieve alarm history. </p>",
             "serialized_name": "EndDate"
           },
@@ -114,7 +114,7 @@
                   "serialized_name": "AlarmName"
                 },
                 "timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time stamp for the alarm history item. </p>",
                   "serialized_name": "Timestamp"
                 },
@@ -238,7 +238,7 @@
                   "serialized_name": "AlarmDescription"
                 },
                 "alarm_configuration_updated_timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time stamp of the last update to the alarm configuration. </p>",
                   "serialized_name": "AlarmConfigurationUpdatedTimestamp"
                 },
@@ -292,7 +292,7 @@
                   "serialized_name": "StateReasonData"
                 },
                 "state_updated_timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time stamp of the last update to the alarm's state. </p>",
                   "serialized_name": "StateUpdatedTimestamp"
                 },
@@ -547,7 +547,7 @@
                   "serialized_name": "AlarmDescription"
                 },
                 "alarm_configuration_updated_timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time stamp of the last update to the alarm configuration. </p>",
                   "serialized_name": "AlarmConfigurationUpdatedTimestamp"
                 },
@@ -601,7 +601,7 @@
                   "serialized_name": "StateReasonData"
                 },
                 "state_updated_timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time stamp of the last update to the alarm's state. </p>",
                   "serialized_name": "StateUpdatedTimestamp"
                 },
@@ -799,13 +799,13 @@
             }
           },
           "start_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "required": true,
             "documentation": "<p> The time stamp to use for determining the first datapoint to return. The value specified is inclusive; results include datapoints with the time stamp specified. </p> The specified start time is rounded down to the nearest value. Datapoints are returned for start times up to two weeks in the past. Specified start times that are more than two weeks in the past will not return datapoints for metrics that are older than two weeks.",
             "serialized_name": "StartTime"
           },
           "end_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "required": true,
             "documentation": "<p> The time stamp to use for determining the last datapoint to return. The value specified is exclusive; results will include datapoints up to the time stamp specified. </p>",
             "serialized_name": "EndTime"
@@ -886,7 +886,7 @@
               "documentation": "<p> The <code>Datapoint</code> data type encapsulates the statistical data that Amazon CloudWatch computes from metric data. </p>",
               "members": {
                 "timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time stamp used for the datapoint. </p>",
                   "serialized_name": "Timestamp"
                 },
@@ -1355,7 +1355,7 @@
                   }
                 },
                 "timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time stamp used for the metric. If not specified, the default value is set to the time the metric data was received. </p>",
                   "serialized_name": "Timestamp"
                 },

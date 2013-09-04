@@ -16,7 +16,7 @@ task :apis do
 
   require 'fileutils'
   require 'json'
-  require_relative '../lib/aws/api_translator'
+  require_relative '../lib/aws-sdk-core'
 
   FileUtils.mkdir_p('apis')
   Dir.glob('apis-src/*.json').each do |path|

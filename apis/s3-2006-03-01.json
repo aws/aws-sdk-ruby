@@ -6,7 +6,6 @@
     "checksum_format": "md5",
     "service_abbreviation": "Amazon S3",
     "service_full_name": "Amazon Simple Storage Service",
-    "timestamp_format": "rfc822",
     "xmlnamespace": "http://s3.amazonaws.com/doc/2006-03-01/"
   },
   "plugins": [
@@ -84,11 +83,8 @@
             },
             "members": {
               "parts": {
-                "type": "list",
+                "type": "flat_list",
                 "serialized_name": "Part",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "structure",
                   "members": {
@@ -131,7 +127,7 @@
             "serialized_name": "Key"
           },
           "expiration": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.",
             "location": "header",
             "serialized_name": "x-amz-expiration"
@@ -225,31 +221,31 @@
             "serialized_name": "x-amz-copy-source"
           },
           "copy_source_if_match": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Copies the object if its entity tag (ETag) matches the specified tag.",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-match"
           },
           "copy_source_if_modified_since": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Copies the object if it has been modified since the specified time.",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-modified-since"
           },
           "copy_source_if_none_match": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Copies the object if its entity tag (ETag) is different than the specified ETag.",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-none-match"
           },
           "copy_source_if_unmodified_since": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Copies the object if it hasn't been modified since the specified time.",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-unmodified-since"
           },
           "expires": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "The date and time at which the object is no longer cacheable.",
             "location": "header",
             "serialized_name": "Expires"
@@ -548,7 +544,7 @@
             "serialized_name": "Content-Type"
           },
           "expires": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "The date and time at which the object is no longer cacheable.",
             "location": "header",
             "serialized_name": "Expires"
@@ -819,12 +815,9 @@
             },
             "members": {
               "objects": {
-                "type": "list",
+                "type": "flat_list",
                 "required": true,
                 "serialized_name": "Object",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "structure",
                   "members": {
@@ -861,11 +854,8 @@
         "type": "structure",
         "members": {
           "deleted": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Deleted",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -889,11 +879,8 @@
             }
           },
           "errors": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Error",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -1041,43 +1028,31 @@
         "type": "structure",
         "members": {
           "cors_rules": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "CORSRule",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
                 "allowed_headers": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "Specifies which headers are allowed in a pre-flight OPTIONS request.",
                   "serialized_name": "AllowedHeader",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string"
                   }
                 },
                 "allowed_origins": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "One or more origins you want customers to be able to access the bucket from.",
                   "serialized_name": "AllowedOrigin",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string"
                   }
                 },
                 "allowed_methods": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.",
                   "serialized_name": "AllowedMethod",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string"
                   }
@@ -1088,12 +1063,9 @@
                   "serialized_name": "MaxAgeSeconds"
                 },
                 "expose_headers": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
                   "serialized_name": "ExposeHeader",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string"
                   }
@@ -1124,11 +1096,8 @@
         "type": "structure",
         "members": {
           "rules": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Rule",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -1161,7 +1130,7 @@
                       "serialized_name": "Days"
                     },
                     "date": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.",
                       "serialized_name": "Date"
                     },
@@ -1187,7 +1156,7 @@
                       "serialized_name": "Days"
                     },
                     "date": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.",
                       "serialized_name": "Date"
                     }
@@ -1652,7 +1621,7 @@
             "serialized_name": "If-Match"
           },
           "if_modified_since": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Return the object only if it has been modified since the specified time, otherwise return a 304 (not modified).",
             "location": "header",
             "serialized_name": "If-Modified-Since"
@@ -1664,7 +1633,7 @@
             "serialized_name": "If-None-Match"
           },
           "if_unmodified_since": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Return the object only if it has not been modified since the specified time, otherwise return a 412 (precondition failed).",
             "location": "header",
             "serialized_name": "If-Unmodified-Since"
@@ -1712,7 +1681,7 @@
             "serialized_name": "ResponseContentType"
           },
           "response_expires": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Sets the Expires header of the response.",
             "location": "uri",
             "serialized_name": "ResponseExpires"
@@ -1765,7 +1734,7 @@
             "serialized_name": "x-amz-restore"
           },
           "last_modified": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Last modified date of the object",
             "location": "header",
             "serialized_name": "Last-Modified"
@@ -1825,7 +1794,7 @@
             "serialized_name": "Content-Type"
           },
           "expires": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "The date and time at which the object is no longer cacheable.",
             "location": "header",
             "serialized_name": "Expires"
@@ -2074,7 +2043,7 @@
             "serialized_name": "If-Match"
           },
           "if_modified_since": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Return the object only if it has been modified since the specified time, otherwise return a 304 (not modified).",
             "location": "header",
             "serialized_name": "If-Modified-Since"
@@ -2086,7 +2055,7 @@
             "serialized_name": "If-None-Match"
           },
           "if_unmodified_since": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Return the object only if it has not been modified since the specified time, otherwise return a 412 (precondition failed).",
             "location": "header",
             "serialized_name": "If-Unmodified-Since"
@@ -2142,7 +2111,7 @@
             "serialized_name": "x-amz-restore"
           },
           "last_modified": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Last modified date of the object",
             "location": "header",
             "serialized_name": "Last-Modified"
@@ -2202,7 +2171,7 @@
             "serialized_name": "Content-Type"
           },
           "expires": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "The date and time at which the object is no longer cacheable.",
             "location": "header",
             "serialized_name": "Expires"
@@ -2268,7 +2237,7 @@
                   "serialized_name": "Name"
                 },
                 "creation_date": {
-                  "type": "timestamp",
+                  "type": "rfc822_timestamp",
                   "documentation": "Date the bucket was created.",
                   "serialized_name": "CreationDate"
                 }
@@ -2377,11 +2346,8 @@
             "serialized_name": "IsTruncated"
           },
           "uploads": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Upload",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -2396,7 +2362,7 @@
                   "serialized_name": "Key"
                 },
                 "initiated": {
-                  "type": "timestamp",
+                  "type": "rfc822_timestamp",
                   "documentation": "Date and time at which the multipart upload was initiated.",
                   "serialized_name": "Initiated"
                 },
@@ -2521,11 +2487,8 @@
             "serialized_name": "NextVersionIdMarker"
           },
           "versions": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Version",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -2564,7 +2527,7 @@
                   "serialized_name": "IsLatest"
                 },
                 "last_modified": {
-                  "type": "timestamp",
+                  "type": "rfc822_timestamp",
                   "documentation": "Date and time the object was last modified.",
                   "serialized_name": "LastModified"
                 },
@@ -2586,11 +2549,8 @@
             }
           },
           "delete_markers": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "DeleteMarker",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -2624,7 +2584,7 @@
                   "serialized_name": "IsLatest"
                 },
                 "last_modified": {
-                  "type": "timestamp",
+                  "type": "rfc822_timestamp",
                   "documentation": "Date and time the object was last modified.",
                   "serialized_name": "LastModified"
                 }
@@ -2644,11 +2604,8 @@
             "serialized_name": "MaxKeys"
           },
           "common_prefixes": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "CommonPrefixes",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -2715,11 +2672,8 @@
             "serialized_name": "Marker"
           },
           "contents": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Contents",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -2728,7 +2682,7 @@
                   "serialized_name": "Key"
                 },
                 "last_modified": {
-                  "type": "timestamp",
+                  "type": "rfc822_timestamp",
                   "serialized_name": "LastModified"
                 },
                 "etag": {
@@ -2779,11 +2733,8 @@
             "serialized_name": "MaxKeys"
           },
           "common_prefixes": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "CommonPrefixes",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -2885,11 +2836,8 @@
             "serialized_name": "IsTruncated"
           },
           "parts": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Part",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -2899,7 +2847,7 @@
                   "serialized_name": "PartNumber"
                 },
                 "last_modified": {
-                  "type": "timestamp",
+                  "type": "rfc822_timestamp",
                   "documentation": "Date and time at which the part was uploaded.",
                   "serialized_name": "LastModified"
                 },
@@ -3138,54 +3086,39 @@
             },
             "members": {
               "cors_rules": {
-                "type": "list",
+                "type": "flat_list",
                 "serialized_name": "CORSRule",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "structure",
                   "members": {
                     "allowed_headers": {
-                      "type": "list",
+                      "type": "flat_list",
                       "documentation": "Specifies which headers are allowed in a pre-flight OPTIONS request.",
                       "serialized_name": "AllowedHeader",
-                      "metadata": {
-                        "flattened": true
-                      },
                       "members": {
                         "type": "string"
                       }
                     },
                     "allowed_methods": {
-                      "type": "list",
+                      "type": "flat_list",
                       "documentation": "Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.",
                       "serialized_name": "AllowedMethod",
-                      "metadata": {
-                        "flattened": true
-                      },
                       "members": {
                         "type": "string"
                       }
                     },
                     "allowed_origins": {
-                      "type": "list",
+                      "type": "flat_list",
                       "documentation": "One or more origins you want customers to be able to access the bucket from.",
                       "serialized_name": "AllowedOrigin",
-                      "metadata": {
-                        "flattened": true
-                      },
                       "members": {
                         "type": "string"
                       }
                     },
                     "expose_headers": {
-                      "type": "list",
+                      "type": "flat_list",
                       "documentation": "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
                       "serialized_name": "ExposeHeader",
-                      "metadata": {
-                        "flattened": true
-                      },
                       "members": {
                         "type": "string"
                       }
@@ -3235,12 +3168,9 @@
             },
             "members": {
               "rules": {
-                "type": "list",
+                "type": "flat_list",
                 "required": true,
                 "serialized_name": "Rule",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "structure",
                   "members": {
@@ -3249,10 +3179,9 @@
                       "serialized_name": "Expiration",
                       "members": {
                         "date": {
-                          "type": "timestamp",
+                          "type": "iso8601_timestamp",
                           "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.",
-                          "serialized_name": "Date",
-                          "timestamp_format": "iso8601"
+                          "serialized_name": "Date"
                         },
                         "days": {
                           "type": "integer",
@@ -3287,10 +3216,9 @@
                       "serialized_name": "Transition",
                       "members": {
                         "date": {
-                          "type": "timestamp",
+                          "type": "iso8601_timestamp",
                           "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.",
-                          "serialized_name": "Date",
-                          "timestamp_format": "iso8601"
+                          "serialized_name": "Date"
                         },
                         "days": {
                           "type": "integer",
@@ -3880,7 +3808,7 @@
             "serialized_name": "Content-Type"
           },
           "expires": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "The date and time at which the object is no longer cacheable.",
             "location": "header",
             "serialized_name": "Expires"
@@ -3960,7 +3888,7 @@
         "type": "structure",
         "members": {
           "expiration": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.",
             "location": "header",
             "serialized_name": "x-amz-expiration"
@@ -4298,25 +4226,25 @@
             "serialized_name": "x-amz-copy-source"
           },
           "copy_source_if_match": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Copies the object if its entity tag (ETag) matches the specified tag.",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-match"
           },
           "copy_source_if_modified_since": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Copies the object if it has been modified since the specified time.",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-modified-since"
           },
           "copy_source_if_none_match": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Copies the object if its entity tag (ETag) is different than the specified ETag.",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-none-match"
           },
           "copy_source_if_unmodified_since": {
-            "type": "timestamp",
+            "type": "rfc822_timestamp",
             "documentation": "Copies the object if it hasn't been modified since the specified time.",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-unmodified-since"
@@ -4371,7 +4299,7 @@
                 "serialized_name": "ETag"
               },
               "last_modified": {
-                "type": "timestamp",
+                "type": "rfc822_timestamp",
                 "documentation": "Date and time at which the object was uploaded.",
                 "serialized_name": "LastModified"
               }

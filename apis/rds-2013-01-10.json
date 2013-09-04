@@ -382,7 +382,7 @@
                 "serialized_name": "DBInstanceIdentifier"
               },
               "snapshot_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the time (UTC) when the snapshot was taken. </p>",
                 "serialized_name": "SnapshotCreateTime"
               },
@@ -417,7 +417,7 @@
                 "serialized_name": "VpcId"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the time (UTC) when the snapshot was taken. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -685,7 +685,7 @@
                 "serialized_name": "AllocatedStorage"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the DB Instance was created. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -900,7 +900,7 @@
                 }
               },
               "latest_restorable_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the latest time to which a database can be restored with point-in-time restore. </p>",
                 "serialized_name": "LatestRestorableTime"
               },
@@ -1173,7 +1173,7 @@
                 "serialized_name": "AllocatedStorage"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the DB Instance was created. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -1388,7 +1388,7 @@
                 }
               },
               "latest_restorable_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the latest time to which a database can be restored with point-in-time restore. </p>",
                 "serialized_name": "LatestRestorableTime"
               },
@@ -1805,7 +1805,7 @@
                 "serialized_name": "DBInstanceIdentifier"
               },
               "snapshot_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the time (UTC) when the snapshot was taken. </p>",
                 "serialized_name": "SnapshotCreateTime"
               },
@@ -1840,7 +1840,7 @@
                 "serialized_name": "VpcId"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the time (UTC) when the snapshot was taken. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -2469,7 +2469,7 @@
                 "serialized_name": "AllocatedStorage"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the DB Instance was created. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -2684,7 +2684,7 @@
                 }
               },
               "latest_restorable_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the latest time to which a database can be restored with point-in-time restore. </p>",
                 "serialized_name": "LatestRestorableTime"
               },
@@ -2892,7 +2892,7 @@
                 "serialized_name": "DBInstanceIdentifier"
               },
               "snapshot_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the time (UTC) when the snapshot was taken. </p>",
                 "serialized_name": "SnapshotCreateTime"
               },
@@ -2927,7 +2927,7 @@
                 "serialized_name": "VpcId"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the time (UTC) when the snapshot was taken. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -3383,7 +3383,7 @@
                   "serialized_name": "AllocatedStorage"
                 },
                 "instance_create_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Provides the date and time the DB Instance was created. </p>",
                   "serialized_name": "InstanceCreateTime"
                 },
@@ -3598,7 +3598,7 @@
                   }
                 },
                 "latest_restorable_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Specifies the latest time to which a database can be restored with point-in-time restore. </p>",
                   "serialized_name": "LatestRestorableTime"
                 },
@@ -4082,7 +4082,7 @@
                   "serialized_name": "DBInstanceIdentifier"
                 },
                 "snapshot_create_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Provides the time (UTC) when the snapshot was taken. </p>",
                   "serialized_name": "SnapshotCreateTime"
                 },
@@ -4117,7 +4117,7 @@
                   "serialized_name": "VpcId"
                 },
                 "instance_create_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Specifies the time (UTC) when the snapshot was taken. </p>",
                   "serialized_name": "InstanceCreateTime"
                 },
@@ -4599,12 +4599,12 @@
             ]
           },
           "start_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The beginning of the time interval to retrieve events for, specified in ISO 8601 format. For more information about ISO 8601, go to the <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO8601 Wikipedia page.</a> </p> <p>Example: 2009-07-08T18:00Z</p>",
             "serialized_name": "StartTime"
           },
           "end_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The end of the time interval for which to retrieve events, specified in ISO 8601 format. For more information about ISO 8601, go to the <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO8601 Wikipedia page.</a> </p> <p>Example: 2009-07-08T18:00Z</p>",
             "serialized_name": "EndTime"
           },
@@ -4683,7 +4683,7 @@
                   }
                 },
                 "date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Specifies the date and time of the event. </p>",
                   "serialized_name": "Date"
                 }
@@ -5191,7 +5191,7 @@
                   "serialized_name": "DBInstanceClass"
                 },
                 "start_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time the reservation started. </p>",
                   "serialized_name": "StartTime"
                 },
@@ -5669,7 +5669,7 @@
                 "serialized_name": "AllocatedStorage"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the DB Instance was created. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -5884,7 +5884,7 @@
                 }
               },
               "latest_restorable_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the latest time to which a database can be restored with point-in-time restore. </p>",
                 "serialized_name": "LatestRestorableTime"
               },
@@ -6734,7 +6734,7 @@
                 "serialized_name": "AllocatedStorage"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the DB Instance was created. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -6949,7 +6949,7 @@
                 }
               },
               "latest_restorable_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the latest time to which a database can be restored with point-in-time restore. </p>",
                 "serialized_name": "LatestRestorableTime"
               },
@@ -7096,7 +7096,7 @@
                 "serialized_name": "DBInstanceClass"
               },
               "start_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time the reservation started. </p>",
                 "serialized_name": "StartTime"
               },
@@ -7281,7 +7281,7 @@
                 "serialized_name": "AllocatedStorage"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the DB Instance was created. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -7496,7 +7496,7 @@
                 }
               },
               "latest_restorable_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the latest time to which a database can be restored with point-in-time restore. </p>",
                 "serialized_name": "LatestRestorableTime"
               },
@@ -8000,7 +8000,7 @@
                 "serialized_name": "AllocatedStorage"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the DB Instance was created. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -8215,7 +8215,7 @@
                 }
               },
               "latest_restorable_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the latest time to which a database can be restored with point-in-time restore. </p>",
                 "serialized_name": "LatestRestorableTime"
               },
@@ -8396,7 +8396,7 @@
             "serialized_name": "TargetDBInstanceIdentifier"
           },
           "restore_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The date and time to restore from. </p> <p>Valid Values: Value must be a UTC time</p> <p>Constraints:</p> <ul> <li>Must be before the latest restorable time for the DB Instance</li> <li>Cannot be specified if UseLatestRestorableTime parameter is true</li> </ul> <p>Example: <code>2009-09-07T23:45:00Z</code></p>",
             "serialized_name": "RestoreTime"
           },
@@ -8529,7 +8529,7 @@
                 "serialized_name": "AllocatedStorage"
               },
               "instance_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the DB Instance was created. </p>",
                 "serialized_name": "InstanceCreateTime"
               },
@@ -8744,7 +8744,7 @@
                 }
               },
               "latest_restorable_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Specifies the latest time to which a database can be restored with point-in-time restore. </p>",
                 "serialized_name": "LatestRestorableTime"
               },

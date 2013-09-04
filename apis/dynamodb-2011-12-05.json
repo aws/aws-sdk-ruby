@@ -1014,7 +1014,7 @@
                 ]
               },
               "creation_date_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "serialized_name": "CreationDateTime"
               },
               "provisioned_throughput": {
@@ -1022,11 +1022,11 @@
                 "serialized_name": "ProvisionedThroughput",
                 "members": {
                   "last_increase_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "serialized_name": "LastIncreaseDateTime"
                   },
                   "last_decrease_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "serialized_name": "LastDecreaseDateTime"
                   },
                   "number_of_decreases_today": {
@@ -1488,7 +1488,7 @@
                 ]
               },
               "creation_date_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "serialized_name": "CreationDateTime"
               },
               "provisioned_throughput": {
@@ -1496,11 +1496,11 @@
                 "serialized_name": "ProvisionedThroughput",
                 "members": {
                   "last_increase_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "serialized_name": "LastIncreaseDateTime"
                   },
                   "last_decrease_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "serialized_name": "LastDecreaseDateTime"
                   },
                   "number_of_decreases_today": {
@@ -1662,7 +1662,7 @@
                 ]
               },
               "creation_date_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "serialized_name": "CreationDateTime"
               },
               "provisioned_throughput": {
@@ -1670,11 +1670,11 @@
                 "serialized_name": "ProvisionedThroughput",
                 "members": {
                   "last_increase_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "serialized_name": "LastIncreaseDateTime"
                   },
                   "last_decrease_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "serialized_name": "LastDecreaseDateTime"
                   },
                   "number_of_decreases_today": {
@@ -3652,7 +3652,7 @@
                 ]
               },
               "creation_date_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "serialized_name": "CreationDateTime"
               },
               "provisioned_throughput": {
@@ -3660,11 +3660,11 @@
                 "serialized_name": "ProvisionedThroughput",
                 "members": {
                   "last_increase_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "serialized_name": "LastIncreaseDateTime"
                   },
                   "last_decrease_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "serialized_name": "LastDecreaseDateTime"
                   },
                   "number_of_decreases_today": {

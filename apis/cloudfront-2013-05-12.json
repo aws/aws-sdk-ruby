@@ -17,7 +17,7 @@
     "Aws::Plugins::Signer"
   ],
   "operations": {
-    "create_cloud_front_origin_access_identity2013_05_12": {
+    "create_cloud_front_origin_access_identity": {
       "name": "CreateCloudFrontOriginAccessIdentity2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/origin-access-identity/cloudfront",
@@ -159,7 +159,7 @@
         }
       ]
     },
-    "create_distribution2013_05_12": {
+    "create_distribution": {
       "name": "CreateDistribution2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/distribution",
@@ -643,7 +643,7 @@
                 "serialized_name": "Status"
               },
               "last_modified_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "The date and time the distribution was last modified.",
                 "serialized_name": "LastModifiedTime"
               },
@@ -1339,7 +1339,7 @@
         }
       ]
     },
-    "create_invalidation2013_05_12": {
+    "create_invalidation": {
       "name": "CreateInvalidation2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/distribution/{DistributionId}/invalidation",
@@ -1426,7 +1426,7 @@
                 "serialized_name": "Status"
               },
               "create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "The date and time the invalidation request was first made.",
                 "serialized_name": "CreateTime"
               },
@@ -1539,7 +1539,7 @@
         }
       ]
     },
-    "create_streaming_distribution2013_05_12": {
+    "create_streaming_distribution": {
       "name": "CreateStreamingDistribution2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/streaming-distribution",
@@ -1711,7 +1711,7 @@
                 "serialized_name": "Status"
               },
               "last_modified_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "The date and time the distribution was last modified.",
                 "serialized_name": "LastModifiedTime"
               },
@@ -2029,7 +2029,7 @@
         }
       ]
     },
-    "delete_cloud_front_origin_access_identity2013_05_12": {
+    "delete_cloud_front_origin_access_identity": {
       "name": "DeleteCloudFrontOriginAccessIdentity2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}",
@@ -2104,7 +2104,7 @@
         }
       ]
     },
-    "delete_distribution2013_05_12": {
+    "delete_distribution": {
       "name": "DeleteDistribution2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/distribution/{Id}",
@@ -2179,7 +2179,7 @@
         }
       ]
     },
-    "delete_streaming_distribution2013_05_12": {
+    "delete_streaming_distribution": {
       "name": "DeleteStreamingDistribution2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/streaming-distribution/{Id}",
@@ -2254,7 +2254,7 @@
         }
       ]
     },
-    "get_cloud_front_origin_access_identity2013_05_12": {
+    "get_cloud_front_origin_access_identity": {
       "name": "GetCloudFrontOriginAccessIdentity2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}",
@@ -2343,7 +2343,7 @@
         }
       ]
     },
-    "get_cloud_front_origin_access_identity_config2013_05_12": {
+    "get_cloud_front_origin_access_identity_config": {
       "name": "GetCloudFrontOriginAccessIdentityConfig2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}/config",
@@ -2415,7 +2415,7 @@
         }
       ]
     },
-    "get_distribution2013_05_12": {
+    "get_distribution": {
       "name": "GetDistribution2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/distribution/{Id}",
@@ -2455,7 +2455,7 @@
                 "serialized_name": "Status"
               },
               "last_modified_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "The date and time the distribution was last modified.",
                 "serialized_name": "LastModifiedTime"
               },
@@ -2957,7 +2957,7 @@
         }
       ]
     },
-    "get_distribution_config2013_05_12": {
+    "get_distribution_config": {
       "name": "GetDistributionConfig2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/distribution/{Id}/config",
@@ -3412,7 +3412,7 @@
         }
       ]
     },
-    "get_invalidation2013_05_12": {
+    "get_invalidation": {
       "name": "GetInvalidation2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/distribution/{DistributionId}/invalidation/{Id}",
@@ -3460,7 +3460,7 @@
                 "serialized_name": "Status"
               },
               "create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "The date and time the invalidation request was first made.",
                 "serialized_name": "CreateTime"
               },
@@ -3534,7 +3534,7 @@
         }
       ]
     },
-    "get_streaming_distribution2013_05_12": {
+    "get_streaming_distribution": {
       "name": "GetStreamingDistribution2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/streaming-distribution/{Id}",
@@ -3574,7 +3574,7 @@
                 "serialized_name": "Status"
               },
               "last_modified_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "The date and time the distribution was last modified.",
                 "serialized_name": "LastModifiedTime"
               },
@@ -3789,7 +3789,7 @@
         }
       ]
     },
-    "get_streaming_distribution_config2013_05_12": {
+    "get_streaming_distribution_config": {
       "name": "GetStreamingDistributionConfig2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/streaming-distribution/{Id}/config",
@@ -3962,7 +3962,7 @@
         }
       ]
     },
-    "list_cloud_front_origin_access_identities2013_05_12": {
+    "list_cloud_front_origin_access_identities": {
       "name": "ListCloudFrontOriginAccessIdentities2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/origin-access-identity/cloudfront?Marker={Marker}&MaxItems={MaxItems}",
@@ -4066,7 +4066,7 @@
         }
       ]
     },
-    "list_distributions2013_05_12": {
+    "list_distributions": {
       "name": "ListDistributions2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/distribution?Marker={Marker}&MaxItems={MaxItems}",
@@ -4146,7 +4146,7 @@
                       "serialized_name": "Status"
                     },
                     "last_modified_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "The date and time the distribution was last modified.",
                       "serialized_name": "LastModifiedTime"
                     },
@@ -4530,7 +4530,7 @@
         }
       ]
     },
-    "list_invalidations2013_05_12": {
+    "list_invalidations": {
       "name": "ListInvalidations2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/distribution/{DistributionId}/invalidation?Marker={Marker}&MaxItems={MaxItems}",
@@ -4612,7 +4612,7 @@
                       "serialized_name": "Id"
                     },
                     "create_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "serialized_name": "CreateTime"
                     },
                     "status": {
@@ -4660,7 +4660,7 @@
         }
       ]
     },
-    "list_streaming_distributions2013_05_12": {
+    "list_streaming_distributions": {
       "name": "ListStreamingDistributions2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/streaming-distribution?Marker={Marker}&MaxItems={MaxItems}",
@@ -4740,7 +4740,7 @@
                       "serialized_name": "Status"
                     },
                     "last_modified_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "The date and time the distribution was last modified.",
                       "serialized_name": "LastModifiedTime"
                     },
@@ -4852,7 +4852,7 @@
         }
       ]
     },
-    "update_cloud_front_origin_access_identity2013_05_12": {
+    "update_cloud_front_origin_access_identity": {
       "name": "UpdateCloudFrontOriginAccessIdentity2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}/config",
@@ -5030,7 +5030,7 @@
         }
       ]
     },
-    "update_distribution2013_05_12": {
+    "update_distribution": {
       "name": "UpdateDistribution2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/distribution/{Id}/config",
@@ -5526,7 +5526,7 @@
                 "serialized_name": "Status"
               },
               "last_modified_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "The date and time the distribution was last modified.",
                 "serialized_name": "LastModifiedTime"
               },
@@ -6226,7 +6226,7 @@
         }
       ]
     },
-    "update_streaming_distribution2013_05_12": {
+    "update_streaming_distribution": {
       "name": "UpdateStreamingDistribution2013_05_12",
       "http_method": "POST",
       "http_path": "/2013-05-12/streaming-distribution/{Id}/config",
@@ -6410,7 +6410,7 @@
                 "serialized_name": "Status"
               },
               "last_modified_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "The date and time the distribution was last modified.",
                 "serialized_name": "LastModifiedTime"
               },

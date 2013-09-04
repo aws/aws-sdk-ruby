@@ -570,12 +570,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -716,12 +716,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -1152,12 +1152,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -1278,12 +1278,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -1386,12 +1386,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -1823,12 +1823,12 @@
                   "serialized_name": "Status",
                   "members": {
                     "creation_date": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>A timestamp for when this option was created.</p>",
                       "serialized_name": "CreationDate"
                     },
                     "update_date": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>A timestamp for when this option was last updated.</p>",
                       "serialized_name": "UpdateDate"
                     },
@@ -1950,12 +1950,12 @@
                   "serialized_name": "Status",
                   "members": {
                     "creation_date": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>A timestamp for when this option was created.</p>",
                       "serialized_name": "CreationDate"
                     },
                     "update_date": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>A timestamp for when this option was last updated.</p>",
                       "serialized_name": "UpdateDate"
                     },
@@ -2053,12 +2053,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -2155,12 +2155,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -2257,12 +2257,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -2359,12 +2359,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -2529,12 +2529,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -2643,12 +2643,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -2763,12 +2763,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -2883,12 +2883,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
@@ -3003,12 +3003,12 @@
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },

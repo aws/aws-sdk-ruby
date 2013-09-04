@@ -39,26 +39,20 @@
             "serialized_name": "Label"
           },
           "aws_account_ids": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p>The AWS account number of the <a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/Glossary.html\">principal</a> who will be given permission. The principal must have an AWS account, but does not need to be signed up for Amazon SQS.</p>",
             "serialized_name": "AWSAccountIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "AWSAccountId"
             }
           },
           "actions": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p>The action the client wants to allow for the specified principal.</p>",
             "serialized_name": "Actions",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ActionName"
@@ -133,13 +127,10 @@
             "serialized_name": "QueueUrl"
           },
           "entries": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p>A list of receipt handles of the messages for which the visibility timeout must be changed.</p>",
             "serialized_name": "Entries",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p>Encloses a receipt handle and an entry id for each message in ChangeMessageVisibilityBatch.</p>",
@@ -171,12 +162,9 @@
         "type": "structure",
         "members": {
           "successful": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p>A list of ChangeMessageVisibilityBatchResultEntrys.</p>",
             "serialized_name": "Successful",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p>Encloses the id of an entry in ChangeMessageVisibilityBatch.</p>",
@@ -191,12 +179,9 @@
             }
           },
           "failed": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p>A list of BatchResultErrorEntrys.</p>",
             "serialized_name": "Failed",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p>This is used in the responses of batch API to give a detailed description of the result of an operation on each entry in the request.</p>",
@@ -269,12 +254,9 @@
             "serialized_name": "QueueName"
           },
           "attributes": {
-            "type": "map",
+            "type": "flat_map",
             "documentation": "<p>A map of attributes with their corresponding values.</p>",
             "serialized_name": "Attribute",
-            "metadata": {
-              "flattened": true
-            },
             "keys": {
               "type": "string",
               "documentation": "<p>The name of a queue attribute.</p>",
@@ -379,13 +361,10 @@
             "serialized_name": "QueueUrl"
           },
           "entries": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p>A list of receipt handles for the messages to be deleted.</p>",
             "serialized_name": "Entries",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p>Encloses a receipt handle and an identifier for it.</p>",
@@ -412,12 +391,9 @@
         "type": "structure",
         "members": {
           "successful": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p>A list of DeleteMessageBatchResultEntrys.</p>",
             "serialized_name": "Successful",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p>Encloses the id an entry in DeleteMessageBatch.</p>",
@@ -432,12 +408,9 @@
             }
           },
           "failed": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p>A list of BatchResultErrorEntrys.</p>",
             "serialized_name": "Failed",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p>This is used in the responses of batch API to give a detailed description of the result of an operation on each entry in the request.</p>",
@@ -527,12 +500,9 @@
             "serialized_name": "QueueUrl"
           },
           "attribute_names": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p>A list of attributes to retrieve information for. </p>",
             "serialized_name": "AttributeNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "AttributeName",
@@ -558,12 +528,9 @@
         "type": "structure",
         "members": {
           "attributes": {
-            "type": "map",
+            "type": "flat_map",
             "documentation": "<p>A map of attributes to the respective values.</p>",
             "serialized_name": "Attribute",
-            "metadata": {
-              "flattened": true
-            },
             "keys": {
               "type": "string",
               "documentation": "<p>The name of a queue attribute.</p>",
@@ -659,12 +626,9 @@
         "type": "structure",
         "members": {
           "queue_urls": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p>A list of queue URLs, up to 1000 entries.</p>",
             "serialized_name": "QueueUrls",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "QueueUrl"
@@ -688,12 +652,9 @@
             "serialized_name": "QueueUrl"
           },
           "attribute_names": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p>A list of attributes that need to be returned along with each message. The set of valid attributes are [SenderId, ApproximateFirstReceiveTimestamp, ApproximateReceiveCount, SentTimestamp]. </p>",
             "serialized_name": "AttributeNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "AttributeName",
@@ -734,12 +695,9 @@
         "type": "structure",
         "members": {
           "messages": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p>A list of messages.</p>",
             "serialized_name": "Messages",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "serialized_name": "Message",
@@ -761,11 +719,8 @@
                   "serialized_name": "Body"
                 },
                 "attributes": {
-                  "type": "map",
+                  "type": "flat_map",
                   "serialized_name": "Attribute",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "keys": {
                     "type": "string",
                     "documentation": "<p>The name of a queue attribute.</p>",
@@ -894,13 +849,10 @@
             "serialized_name": "QueueUrl"
           },
           "entries": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p>A list of SendMessageBatchRequestEntrys.</p>",
             "serialized_name": "Entries",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p>Contains the details of a single SQS message along with a <code>Id</code>. </p>",
@@ -932,12 +884,9 @@
         "type": "structure",
         "members": {
           "successful": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p>A list of SendMessageBatchResultEntrys.</p>",
             "serialized_name": "Successful",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p>Encloses a message ID for successfully enqueued message of a SendMessageBatch.</p>",
@@ -962,12 +911,9 @@
             }
           },
           "failed": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p>A list of BatchResultErrorEntrys with the error detail about each message that could not be enqueued.</p>",
             "serialized_name": "Failed",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p>This is used in the responses of batch API to give a detailed description of the result of an operation on each entry in the request.</p>",
@@ -1046,13 +992,10 @@
             "serialized_name": "QueueUrl"
           },
           "attributes": {
-            "type": "map",
+            "type": "flat_map",
             "required": true,
             "documentation": "<p>A map of attributes to set.</p>",
             "serialized_name": "Attribute",
-            "metadata": {
-              "flattened": true
-            },
             "keys": {
               "type": "string",
               "documentation": "<p>The name of a queue attribute.</p>",

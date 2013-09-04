@@ -1032,7 +1032,7 @@
                 ]
               },
               "creation_date_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>Represents the date and time when the table was created, in <a href=\"http://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
                 "serialized_name": "CreationDateTime"
               },
@@ -1042,12 +1042,12 @@
                 "serialized_name": "ProvisionedThroughput",
                 "members": {
                   "last_increase_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>The date and time of the last provisioned throughput increase for this table.</p>",
                     "serialized_name": "LastIncreaseDateTime"
                   },
                   "last_decrease_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>The date and time of the last provisioned throughput decrease for this table.</p>",
                     "serialized_name": "LastDecreaseDateTime"
                   },
@@ -1656,7 +1656,7 @@
                 ]
               },
               "creation_date_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>Represents the date and time when the table was created, in <a href=\"http://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
                 "serialized_name": "CreationDateTime"
               },
@@ -1666,12 +1666,12 @@
                 "serialized_name": "ProvisionedThroughput",
                 "members": {
                   "last_increase_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>The date and time of the last provisioned throughput increase for this table.</p>",
                     "serialized_name": "LastIncreaseDateTime"
                   },
                   "last_decrease_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>The date and time of the last provisioned throughput decrease for this table.</p>",
                     "serialized_name": "LastDecreaseDateTime"
                   },
@@ -1923,7 +1923,7 @@
                 ]
               },
               "creation_date_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>Represents the date and time when the table was created, in <a href=\"http://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
                 "serialized_name": "CreationDateTime"
               },
@@ -1933,12 +1933,12 @@
                 "serialized_name": "ProvisionedThroughput",
                 "members": {
                   "last_increase_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>The date and time of the last provisioned throughput increase for this table.</p>",
                     "serialized_name": "LastIncreaseDateTime"
                   },
                   "last_decrease_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>The date and time of the last provisioned throughput decrease for this table.</p>",
                     "serialized_name": "LastDecreaseDateTime"
                   },
@@ -4005,7 +4005,7 @@
                 ]
               },
               "creation_date_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>Represents the date and time when the table was created, in <a href=\"http://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
                 "serialized_name": "CreationDateTime"
               },
@@ -4015,12 +4015,12 @@
                 "serialized_name": "ProvisionedThroughput",
                 "members": {
                   "last_increase_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>The date and time of the last provisioned throughput increase for this table.</p>",
                     "serialized_name": "LastIncreaseDateTime"
                   },
                   "last_decrease_date_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>The date and time of the last provisioned throughput decrease for this table.</p>",
                     "serialized_name": "LastDecreaseDateTime"
                   },

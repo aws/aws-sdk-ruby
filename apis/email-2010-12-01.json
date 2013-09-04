@@ -285,7 +285,7 @@
               "documentation": "<p>Represents sending statistics data. Each <code>SendDataPoint</code> contains statistics for a 15-minute period of sending activity. </p>",
               "members": {
                 "timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>Time of the data point.</p>",
                   "serialized_name": "Timestamp"
                 },

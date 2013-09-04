@@ -16,11 +16,16 @@ module Aws
   # @api private
   class Translator
 
-    def initialize(src)
+    def initialize(src, options = {})
       @properties = {}
+      @options = options
       src.each_pair do |property, value|
         self.send("set_#{property}", value)
       end
+    end
+
+    def set_timestamp_format(format)
+      @options = @options.merge(timestamp_format: format.sub(/Timestamp/, ''))
     end
 
     def set_documentation(docs)
@@ -63,8 +68,8 @@ module Aws
 
     class << self
 
-      def translate(src)
-        new(src).translated if src
+      def translate(src, options = {})
+        new(src, options).translated if src
       end
 
       def property(name, options = {})
@@ -95,11 +100,15 @@ module Aws
   # @api private
   class ApiTranslator < Translator
 
+    def initialize(src, options = {})
+      super(src, { timestamp_format: 'iso8601' }.merge(options))
+    end
+
     def translated
       api = Seahorse::Model::Api.from_hash(@properties)
       api.metadata = Hash[api.metadata.sort]
       @operations.values.each do |src|
-        operation = OperationTranslator.translate(src)
+        operation = OperationTranslator.translate(src, @options)
         api.operations[method_name(underscore(operation.name))] = operation
       end
       api
@@ -116,7 +125,6 @@ module Aws
     metadata :checksum_format
     metadata :json_version, as: 'json_version'
     metadata :target_prefix, as: 'json_target_prefix'
-    metadata :timestamp_format
     metadata :service_full_name
     metadata :service_abbreviation
     metadata :result_wrapped
@@ -187,16 +195,16 @@ module Aws
 
     def set_input(src)
       if src
-        @input = InputShapeTranslator.translate(src.merge('type' => 'input'))
+        @input = InputShapeTranslator.translate(src.merge('type' => 'input'), @options)
       end
     end
 
     def set_output(src)
-      @output = OutputShapeTranslator.translate(src)
+      @output = OutputShapeTranslator.translate(src, @options)
     end
 
     def set_errors(errors)
-      @errors = errors.map { |src| OutputShapeTranslator.translate(src) }
+      @errors = errors.map { |src| OutputShapeTranslator.translate(src, @options) }
       @errors = nil if @errors.empty?
     end
 
@@ -211,7 +219,15 @@ module Aws
     }
 
     def translated
-      @properties['type'] = "#{@format}_#{@properties['type']}" if @format
+
+      if @properties['type'] == 'timestamp'
+        @type_prefix = @options[:timestamp_format]
+      end
+
+      if @type_prefix
+        @properties['type'] = "#{@type_prefix}_#{@properties['type']}"
+      end
+
       shape = Seahorse::Model::Shapes::Shape.from_hash(@properties)
       shape.members = @members unless @members.nil?
       shape.keys = @keys if @keys
@@ -249,27 +265,23 @@ module Aws
     end
 
     def set_flattened(state)
-      @format = 'flat' if state
-    end
-
-    def set_timestamp_format(format)
-      @format = format
+      @type_prefix = 'flat' if state
     end
 
     def set_keys(member)
-      @keys = self.class.translate(member)
+      @keys = self.class.translate(member, @options)
     end
 
     # Structure shapes have a hash of members.  Lists and maps have a
     # single member (with a type).
     def set_members(members)
       if members['type'].is_a?(String)
-        @members = self.class.translate(members)
+        @members = self.class.translate(members, @options)
       else
         @members = Seahorse::Model::Shapes::MemberHash.new
         members.each do |name, src|
-          shape = self.class.translate(src)
-          shape.serialized_name = name
+          shape = self.class.translate(src, @options)
+          shape.serialized_name ||= name
           @members[underscore(name)] = shape
         end
       end

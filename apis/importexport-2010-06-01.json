@@ -439,7 +439,7 @@
             "serialized_name": "CurrentManifest"
           },
           "creation_date": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "Timestamp of the CreateJob request in ISO8601 date format. For example \"2010-03-28T20:27:35Z\".",
             "serialized_name": "CreationDate"
           }
@@ -531,7 +531,7 @@
                   "serialized_name": "JobId"
                 },
                 "creation_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "Timestamp of the CreateJob request in ISO8601 date format. For example \"2010-03-28T20:27:35Z\".",
                   "serialized_name": "CreationDate"
                 },

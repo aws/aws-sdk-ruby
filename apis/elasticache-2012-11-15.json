@@ -304,7 +304,7 @@
                 "serialized_name": "PreferredAvailabilityZone"
               },
               "cache_cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the Cache Cluster was created. </p>",
                 "serialized_name": "CacheClusterCreateTime"
               },
@@ -429,7 +429,7 @@
                       "serialized_name": "CacheNodeStatus"
                     },
                     "cache_node_create_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p> Provides the date and time the Cache Node was created. </p>",
                       "serialized_name": "CacheNodeCreateTime"
                     },
@@ -981,7 +981,7 @@
                 "serialized_name": "PreferredAvailabilityZone"
               },
               "cache_cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the Cache Cluster was created. </p>",
                 "serialized_name": "CacheClusterCreateTime"
               },
@@ -1106,7 +1106,7 @@
                       "serialized_name": "CacheNodeStatus"
                     },
                     "cache_node_create_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p> Provides the date and time the Cache Node was created. </p>",
                       "serialized_name": "CacheNodeCreateTime"
                     },
@@ -1440,7 +1440,7 @@
                   "serialized_name": "PreferredAvailabilityZone"
                 },
                 "cache_cluster_create_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Provides the date and time the Cache Cluster was created. </p>",
                   "serialized_name": "CacheClusterCreateTime"
                 },
@@ -1565,7 +1565,7 @@
                         "serialized_name": "CacheNodeStatus"
                       },
                       "cache_node_create_time": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "documentation": "<p> Provides the date and time the Cache Node was created. </p>",
                         "serialized_name": "CacheNodeCreateTime"
                       },
@@ -2475,12 +2475,12 @@
             ]
           },
           "start_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The beginning of the time interval to retrieve events for, specified in ISO 8601 format. </p>",
             "serialized_name": "StartTime"
           },
           "end_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The end of the time interval for which to retrieve events, specified in ISO 8601 format. </p>",
             "serialized_name": "EndTime"
           },
@@ -2541,7 +2541,7 @@
                   "serialized_name": "Message"
                 },
                 "date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Specifies the date and time of the event. </p>",
                   "serialized_name": "Date"
                 }
@@ -2659,7 +2659,7 @@
                   "serialized_name": "CacheNodeType"
                 },
                 "start_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time the reservation started. </p>",
                   "serialized_name": "StartTime"
                 },
@@ -3067,7 +3067,7 @@
                 "serialized_name": "PreferredAvailabilityZone"
               },
               "cache_cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the Cache Cluster was created. </p>",
                 "serialized_name": "CacheClusterCreateTime"
               },
@@ -3192,7 +3192,7 @@
                       "serialized_name": "CacheNodeStatus"
                     },
                     "cache_node_create_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p> Provides the date and time the Cache Node was created. </p>",
                       "serialized_name": "CacheNodeCreateTime"
                     },
@@ -3577,7 +3577,7 @@
                 "serialized_name": "CacheNodeType"
               },
               "start_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time the reservation started. </p>",
                 "serialized_name": "StartTime"
               },
@@ -3780,7 +3780,7 @@
                 "serialized_name": "PreferredAvailabilityZone"
               },
               "cache_cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> Provides the date and time the Cache Cluster was created. </p>",
                 "serialized_name": "CacheClusterCreateTime"
               },
@@ -3905,7 +3905,7 @@
                       "serialized_name": "CacheNodeStatus"
                     },
                     "cache_node_create_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p> Provides the date and time the Cache Node was created. </p>",
                       "serialized_name": "CacheNodeCreateTime"
                     },

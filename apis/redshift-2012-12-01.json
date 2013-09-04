@@ -199,7 +199,7 @@
                 "serialized_name": "ClusterIdentifier"
               },
               "snapshot_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time. </p>",
                 "serialized_name": "SnapshotCreateTime"
               },
@@ -219,7 +219,7 @@
                 "serialized_name": "AvailabilityZone"
               },
               "cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time (UTC) when the cluster was originally created. </p>",
                 "serialized_name": "ClusterCreateTime"
               },
@@ -389,7 +389,7 @@
                 "serialized_name": "ClusterIdentifier"
               },
               "snapshot_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time. </p>",
                 "serialized_name": "SnapshotCreateTime"
               },
@@ -409,7 +409,7 @@
                 "serialized_name": "AvailabilityZone"
               },
               "cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time (UTC) when the cluster was originally created. </p>",
                 "serialized_name": "ClusterCreateTime"
               },
@@ -713,7 +713,7 @@
                 }
               },
               "cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The date and time that the cluster was created. </p>",
                 "serialized_name": "ClusterCreateTime"
               },
@@ -1208,7 +1208,7 @@
                 "serialized_name": "ClusterIdentifier"
               },
               "snapshot_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time. </p>",
                 "serialized_name": "SnapshotCreateTime"
               },
@@ -1228,7 +1228,7 @@
                 "serialized_name": "AvailabilityZone"
               },
               "cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time (UTC) when the cluster was originally created. </p>",
                 "serialized_name": "ClusterCreateTime"
               },
@@ -1579,7 +1579,7 @@
                 }
               },
               "cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The date and time that the cluster was created. </p>",
                 "serialized_name": "ClusterCreateTime"
               },
@@ -1902,7 +1902,7 @@
                 "serialized_name": "ClusterIdentifier"
               },
               "snapshot_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time. </p>",
                 "serialized_name": "SnapshotCreateTime"
               },
@@ -1922,7 +1922,7 @@
                 "serialized_name": "AvailabilityZone"
               },
               "cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time (UTC) when the cluster was originally created. </p>",
                 "serialized_name": "ClusterCreateTime"
               },
@@ -2398,12 +2398,12 @@
             "serialized_name": "SnapshotType"
           },
           "start_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> A value that requests only snapshots created at or after the specified time. The time value is specified in ISO 8601 format. For more information about ISO 8601, go to the <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO8601 Wikipedia page.</a> </p> <p>Example: <code>2012-07-16T18:00:00Z</code></p>",
             "serialized_name": "StartTime"
           },
           "end_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> A time value that requests only snapshots created at or before the specified time. The time value is specified in ISO 8601 format. For more information about ISO 8601, go to the <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO8601 Wikipedia page.</a> </p> <p>Example: <code>2012-07-16T18:00:00Z</code></p>",
             "serialized_name": "EndTime"
           },
@@ -2456,7 +2456,7 @@
                   "serialized_name": "ClusterIdentifier"
                 },
                 "snapshot_create_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time. </p>",
                   "serialized_name": "SnapshotCreateTime"
                 },
@@ -2476,7 +2476,7 @@
                   "serialized_name": "AvailabilityZone"
                 },
                 "cluster_create_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time (UTC) when the cluster was originally created. </p>",
                   "serialized_name": "ClusterCreateTime"
                 },
@@ -2868,7 +2868,7 @@
                   }
                 },
                 "cluster_create_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The date and time that the cluster was created. </p>",
                   "serialized_name": "ClusterCreateTime"
                 },
@@ -3198,12 +3198,12 @@
             ]
           },
           "start_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The beginning of the time interval to retrieve events for, specified in ISO 8601 format. For more information about ISO 8601, go to the <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO8601 Wikipedia page.</a> </p> <p>Example: <code>2009-07-08T18:00Z</code></p>",
             "serialized_name": "StartTime"
           },
           "end_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The end of the time interval for which to retrieve events, specified in ISO 8601 format. For more information about ISO 8601, go to the <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO8601 Wikipedia page.</a> </p> <p>Example: <code>2009-07-08T18:00Z</code></p>",
             "serialized_name": "EndTime"
           },
@@ -3264,7 +3264,7 @@
                   "serialized_name": "Message"
                 },
                 "date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The date and time of the event. </p>",
                   "serialized_name": "Date"
                 }
@@ -3551,7 +3551,7 @@
                   "serialized_name": "NodeType"
                 },
                 "start_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time the reservation started. You purchase a reserved node offering for a duration. This is the start time of that duration. </p>",
                   "serialized_name": "StartTime"
                 },
@@ -3850,7 +3850,7 @@
                 }
               },
               "cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The date and time that the cluster was created. </p>",
                 "serialized_name": "ClusterCreateTime"
               },
@@ -4383,7 +4383,7 @@
                 "serialized_name": "NodeType"
               },
               "start_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time the reservation started. You purchase a reserved node offering for a duration. This is the start time of that duration. </p>",
                 "serialized_name": "StartTime"
               },
@@ -4548,7 +4548,7 @@
                 }
               },
               "cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The date and time that the cluster was created. </p>",
                 "serialized_name": "ClusterCreateTime"
               },
@@ -4973,7 +4973,7 @@
                 }
               },
               "cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The date and time that the cluster was created. </p>",
                 "serialized_name": "ClusterCreateTime"
               },
@@ -5425,7 +5425,7 @@
                 "serialized_name": "ClusterIdentifier"
               },
               "snapshot_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time. </p>",
                 "serialized_name": "SnapshotCreateTime"
               },
@@ -5445,7 +5445,7 @@
                 "serialized_name": "AvailabilityZone"
               },
               "cluster_create_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time (UTC) when the cluster was originally created. </p>",
                 "serialized_name": "ClusterCreateTime"
               },

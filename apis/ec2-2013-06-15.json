@@ -107,11 +107,8 @@
             "serialized_name": "NetworkInterfaceId"
           },
           "private_ip_addresses": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "PrivateIpAddresses",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "PrivateIpAddress"
@@ -373,7 +370,7 @@
             ]
           },
           "attach_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> Timestamp when this attachment initiated. </p>",
             "serialized_name": "attachTime"
           },
@@ -485,12 +482,9 @@
             "serialized_name": "CidrIp"
           },
           "ip_permissions": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> List of IP permissions to authorize on the specified security group. Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control. </p>",
             "serialized_name": "IpPermissions",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> An IP permission describing allowed incoming IP traffic to an Amazon EC2 security group. </p>",
@@ -511,12 +505,9 @@
                   "serialized_name": "ToPort"
                 },
                 "user_id_group_pairs": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> The list of AWS user IDs and groups included in this permission. </p>",
                   "serialized_name": "UserIdGroupPairs",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p> An AWS user ID identifying an AWS account, and the name of a security group within that account. </p>",
@@ -541,12 +532,9 @@
                   }
                 },
                 "ip_ranges": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> The list of CIDR IP ranges included in this permission. </p>",
                   "serialized_name": "IpRanges",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p> Contains a list of CIDR IP ranges. </p>",
@@ -619,12 +607,9 @@
             "serialized_name": "CidrIp"
           },
           "ip_permissions": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> List of IP permissions to authorize on the specified security group. Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control. </p>",
             "serialized_name": "IpPermissions",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> An IP permission describing allowed incoming IP traffic to an Amazon EC2 security group. </p>",
@@ -645,12 +630,9 @@
                   "serialized_name": "ToPort"
                 },
                 "user_id_group_pairs": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> The list of AWS user IDs and groups included in this permission. </p>",
                   "serialized_name": "UserIdGroupPairs",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p> An AWS user ID identifying an AWS account, and the name of a security group within that account. </p>",
@@ -675,12 +657,9 @@
                   }
                 },
                 "ip_ranges": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> The list of CIDR IP ranges included in this permission. </p>",
                   "serialized_name": "IpRanges",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p> Contains a list of CIDR IP ranges. </p>",
@@ -785,12 +764,12 @@
                 "serialized_name": "state"
               },
               "start_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time this task started. </p>",
                 "serialized_name": "startTime"
               },
               "update_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time of the most recent update for the task. </p>",
                 "serialized_name": "updateTime"
               },
@@ -906,12 +885,12 @@
                 "serialized_name": "state"
               },
               "start_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time this task started. </p>",
                 "serialized_name": "startTime"
               },
               "update_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p> The time of the most recent update for the task. </p>",
                 "serialized_name": "updateTime"
               },
@@ -1052,11 +1031,11 @@
                   "serialized_name": "reservedInstancesId"
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "createDate"
                 },
                 "update_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "updateDate"
                 },
                 "status": {
@@ -1155,13 +1134,10 @@
             "serialized_name": "DryRun"
           },
           "spot_instance_request_ids": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> Specifies the ID of the Spot Instance request. </p>",
             "serialized_name": "SpotInstanceRequestIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "SpotInstanceRequestId"
@@ -1423,13 +1399,10 @@
             "serialized_name": "DryRun"
           },
           "dhcp_configurations": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> A set of one or more DHCP configurations. </p>",
             "serialized_name": "DhcpConfigurations",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> The DhcpConfiguration data type </p>",
@@ -1441,12 +1414,9 @@
                   "serialized_name": "Key"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains a set of values for a DHCP option. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -1560,11 +1530,8 @@
             "serialized_name": "NoReboot"
           },
           "block_device_mappings": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "BlockDeviceMappings",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> The BlockDeviceMappingItemType data type. </p>",
@@ -2141,22 +2108,16 @@
             "serialized_name": "PrivateIpAddress"
           },
           "groups": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Groups",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "SecurityGroupId"
             }
           },
           "private_ip_addresses": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "PrivateIpAddresses",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -2286,7 +2247,7 @@
                     "serialized_name": "status"
                   },
                   "attach_time": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "serialized_name": "attachTime"
                   },
                   "delete_on_termination": {
@@ -2436,12 +2397,9 @@
             "serialized_name": "InstanceCount"
           },
           "price_schedules": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "serialized_name": "PriceSchedules",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "members": {
@@ -2486,11 +2444,11 @@
                   "serialized_name": "reservedInstancesId"
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "createDate"
                 },
                 "update_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "updateDate"
                 },
                 "status": {
@@ -2846,7 +2804,7 @@
             ]
           },
           "start_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> Time stamp when the snapshot was initiated. </p>",
             "serialized_name": "startTime"
           },
@@ -3093,26 +3051,20 @@
             "serialized_name": "DryRun"
           },
           "resources": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> One or more IDs of resources to tag. This could be the ID of an AMI, an instance, an EBS volume, or snapshot, etc. </p>",
             "serialized_name": "Resources",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ResourceId"
             }
           },
           "tags": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> The tags to add or overwrite for the specified resources. Each tag item consists of a key-value pair. </p>",
             "serialized_name": "Tags",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> Represents metadata to associate with Amazon EC2 resources. Each tag consists of a user-defined key and value. Use tags to categorize EC2 resources, such as by purpose, owner, or environment. </p>",
@@ -3215,7 +3167,7 @@
             ]
           },
           "create_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> Timestamp when volume creation was initiated. </p>",
             "serialized_name": "createTime"
           },
@@ -3255,7 +3207,7 @@
                   ]
                 },
                 "attach_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Timestamp when this attachment initiated. </p>",
                   "serialized_name": "attachTime"
                 },
@@ -3516,7 +3468,7 @@
                       "serialized_name": "status"
                     },
                     "last_status_change": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "serialized_name": "lastStatusChange"
                     },
                     "status_message": {
@@ -4049,25 +4001,19 @@
             "serialized_name": "DryRun"
           },
           "resources": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> A list of one or more resource IDs. This could be the ID of an AMI, an instance, an EBS volume, or snapshot, etc. </p>",
             "serialized_name": "Resources",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ResourceId"
             }
           },
           "tags": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The tags to delete from the specified resources. Each tag item consists of a key-value pair. </p> <p> If a tag is specified without a value, the tag and all of its values are deleted. </p>",
             "serialized_name": "Tags",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> Represents metadata to associate with Amazon EC2 resources. Each tag consists of a user-defined key and value. Use tags to categorize EC2 resources, such as by purpose, owner, or environment. </p>",
@@ -4231,11 +4177,8 @@
             "serialized_name": "DryRun"
           },
           "attribute_names": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "AttributeNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "AttributeName"
@@ -4291,24 +4234,18 @@
             "serialized_name": "DryRun"
           },
           "public_ips": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The optional list of Elastic IP addresses to describe. </p>",
             "serialized_name": "PublicIps",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "PublicIp"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Addresses. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -4320,12 +4257,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -4335,11 +4269,8 @@
             }
           },
           "allocation_ids": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "AllocationIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "AllocationId"
@@ -4418,24 +4349,18 @@
             "serialized_name": "DryRun"
           },
           "zone_names": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of the availability zone names to describe. </p>",
             "serialized_name": "ZoneNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ZoneName"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for AvailabilityZones. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -4447,12 +4372,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -4526,24 +4448,18 @@
             "serialized_name": "DryRun"
           },
           "bundle_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The list of bundle task IDs to describe. </p>",
             "serialized_name": "BundleIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "BundleId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for BundleTasks. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -4555,12 +4471,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -4600,12 +4513,12 @@
                   "serialized_name": "state"
                 },
                 "start_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time this task started. </p>",
                   "serialized_name": "startTime"
                 },
                 "update_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time of the most recent update for the task. </p>",
                   "serialized_name": "updateTime"
                 },
@@ -4688,11 +4601,8 @@
             "serialized_name": "DryRun"
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -4704,12 +4614,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -4719,11 +4626,8 @@
             }
           },
           "conversion_task_ids": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "ConversionTaskIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ConversionTaskId"
@@ -4936,24 +4840,18 @@
             "serialized_name": "DryRun"
           },
           "customer_gateway_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A set of one or more customer gateway IDs. </p>",
             "serialized_name": "CustomerGatewayIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "CustomerGatewayId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Customer Gateways. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -4965,12 +4863,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -5060,23 +4955,17 @@
             "serialized_name": "DryRun"
           },
           "dhcp_options_ids": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "DhcpOptionsIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "DhcpOptionsId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for DhcpOptions. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -5088,12 +4977,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -5182,11 +5068,8 @@
         "type": "input",
         "members": {
           "export_task_ids": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "ExportTaskIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ExportTaskId"
@@ -5467,48 +5350,36 @@
             "serialized_name": "DryRun"
           },
           "image_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> An optional list of the AMI IDs to describe. If not specified, all AMIs will be described. </p>",
             "serialized_name": "ImageIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ImageId"
             }
           },
           "owners": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> An optional list of owners by which to scope the described AMIs. Valid values are: </p> <ul> <li> <code>self</code> : AMIs owned by you </li> <li> <i>AWS account ID</i> : AMIs owned by this account ID </li> <li> <code>aws-marketplace</code> : AMIs owned by the AWS Marketplace </li> <li> <code>amazon</code> : AMIs owned by Amazon </li> <li> <code>all</code> : Do not scope the AMIs returned by owner </li> </ul> <p> The values <code>self</code>, <code>aws-marketplace</code>, <code>amazon</code>, and <code>all</code> are literals. </p>",
             "serialized_name": "Owners",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "Owner"
             }
           },
           "executable_users": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> An optional list of users whose launch permissions will be used to scope the described AMIs. Valid values are: </p> <ul> <li> <code>self</code> : AMIs for which you have explicit launch permissions </li> <li> <code>AWS account ID</code> : AMIs for which this account ID has launch permissions </li> <li> <code>all</code> : AMIs that have public launch permissions </li> </ul> <p> The values <code>self</code> and <code>all</code> are literals. </p>",
             "serialized_name": "ExecutableUsers",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ExecutableBy"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Images. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -5520,12 +5391,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -5935,7 +5803,7 @@
                       "serialized_name": "status"
                     },
                     "attach_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p> The time at which the EBS volume was attached to the associated instance. </p>",
                       "serialized_name": "attachTime"
                     },
@@ -5997,24 +5865,18 @@
             "serialized_name": "DryRun"
           },
           "instance_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "The list of instance IDs. If not specified, all instances are described.",
             "serialized_name": "InstanceIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InstanceId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "The list of filters to limit returned results.",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -6026,12 +5888,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -6098,12 +5957,12 @@
                         "serialized_name": "description"
                       },
                       "not_before": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "documentation": "The earliest scheduled start time for the event.",
                         "serialized_name": "notBefore"
                       },
                       "not_after": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "documentation": "The latest scheduled end time for the event.",
                         "serialized_name": "notAfter"
                       }
@@ -6159,7 +6018,7 @@
                             "serialized_name": "status"
                           },
                           "impaired_since": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "serialized_name": "impairedSince"
                           }
                         }
@@ -6191,7 +6050,7 @@
                             "serialized_name": "status"
                           },
                           "impaired_since": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "serialized_name": "impairedSince"
                           }
                         }
@@ -6224,24 +6083,18 @@
             "serialized_name": "DryRun"
           },
           "instance_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> An optional list of the instances to describe. </p>",
             "serialized_name": "InstanceIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InstanceId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Instances. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/index.html?ApiReference-query-DescribeInstances.html\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -6253,12 +6106,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -6434,7 +6284,7 @@
                         ]
                       },
                       "launch_time": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "documentation": "<p> The time this instance launched. </p>",
                         "serialized_name": "launchTime"
                       },
@@ -6569,7 +6419,7 @@
                                   "serialized_name": "status"
                                 },
                                 "attach_time": {
-                                  "type": "timestamp",
+                                  "type": "iso8601_timestamp",
                                   "documentation": "<p> The time at which the EBS volume was attached to the associated instance. </p>",
                                   "serialized_name": "attachTime"
                                 },
@@ -6751,7 +6601,7 @@
                                   "serialized_name": "status"
                                 },
                                 "attach_time": {
-                                  "type": "timestamp",
+                                  "type": "iso8601_timestamp",
                                   "serialized_name": "attachTime"
                                 },
                                 "delete_on_termination": {
@@ -6861,24 +6711,18 @@
             "serialized_name": "DryRun"
           },
           "internet_gateway_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> One or more Internet gateway IDs. </p>",
             "serialized_name": "InternetGatewayIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InternetGatewayId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Internet Gateways. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -6890,12 +6734,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -6979,24 +6820,18 @@
             "serialized_name": "DryRun"
           },
           "key_names": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The optional list of key pair names to describe. </p>",
             "serialized_name": "KeyNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "KeyName"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for KeyPairs. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -7008,12 +6843,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -7067,24 +6899,18 @@
             "serialized_name": "DryRun"
           },
           "license_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> Specifies the license registration for which details are to be returned. </p>",
             "serialized_name": "LicenseIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "LicenseId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Licenses. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -7096,12 +6922,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -7165,7 +6988,7 @@
                         "serialized_name": "state"
                       },
                       "earliest_allowed_deactivation_time": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "documentation": "<p> The earliest allowed time at which a license can be deactivated. Some licenses have time restrictions on when they can be activated and reactivated. </p>",
                         "serialized_name": "earliestAllowedDeactivationTime"
                       }
@@ -7213,24 +7036,18 @@
             "serialized_name": "DryRun"
           },
           "network_acl_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> One or more network ACL IDs. </p>",
             "serialized_name": "NetworkAclIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "NetworkAclId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Network ACLs. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -7242,12 +7059,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -7505,7 +7319,7 @@
                 "serialized_name": "status"
               },
               "attach_time": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "serialized_name": "attachTime"
               },
               "delete_on_termination": {
@@ -7529,22 +7343,16 @@
             "serialized_name": "DryRun"
           },
           "network_interface_ids": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "NetworkInterfaceIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "NetworkInterfaceId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -7556,12 +7364,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -7679,7 +7484,7 @@
                       "serialized_name": "status"
                     },
                     "attach_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "serialized_name": "attachTime"
                     },
                     "delete_on_termination": {
@@ -7795,24 +7600,18 @@
             "serialized_name": "DryRun"
           },
           "group_names": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The name of the <code>PlacementGroup</code>. </p>",
             "serialized_name": "GroupNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "GroupName"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Placement Groups. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -7824,12 +7623,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -7897,24 +7693,18 @@
             "serialized_name": "DryRun"
           },
           "region_names": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The optional list of regions to describe. </p>",
             "serialized_name": "RegionNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "RegionName"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Regions. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -7926,12 +7716,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -7985,24 +7772,18 @@
             "serialized_name": "DryRun"
           },
           "reserved_instances_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The optional list of Reserved Instance IDs to describe. </p>",
             "serialized_name": "ReservedInstancesIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ReservedInstancesId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for ReservedInstances. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -8014,12 +7795,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -8084,7 +7862,7 @@
                   "serialized_name": "availabilityZone"
                 },
                 "start": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The date and time the Reserved Instances started. </p>",
                   "serialized_name": "start"
                 },
@@ -8199,11 +7977,8 @@
             "serialized_name": "ReservedInstancesListingId"
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -8214,12 +7989,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -8249,11 +8021,11 @@
                   "serialized_name": "reservedInstancesId"
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "createDate"
                 },
                 "update_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "updateDate"
                 },
                 "status": {
@@ -8353,12 +8125,9 @@
             "serialized_name": "DryRun"
           },
           "reserved_instances_offering_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> An optional list of the unique IDs of the Reserved Instance offerings to describe. </p>",
             "serialized_name": "ReservedInstancesOfferingIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ReservedInstancesOfferingId"
@@ -8400,12 +8169,9 @@
             "serialized_name": "ProductDescription"
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for ReservedInstancesOfferings. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -8417,12 +8183,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -8621,24 +8384,18 @@
             "serialized_name": "DryRun"
           },
           "route_table_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> One or more route table IDs. </p>",
             "serialized_name": "RouteTableIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "RouteTableId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Route Tables. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -8650,12 +8407,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -8799,35 +8553,26 @@
             "serialized_name": "DryRun"
           },
           "group_names": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> An optional list of group names that specify the Amazon EC2 security groups to describe. </p>",
             "serialized_name": "GroupNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "GroupName"
             }
           },
           "group_ids": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "GroupIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "GroupId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for SecurityGroups. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -8839,12 +8584,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -9158,48 +8900,36 @@
             "serialized_name": "DryRun"
           },
           "snapshot_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The optional list of EBS snapshot IDs to describe. </p>",
             "serialized_name": "SnapshotIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "SnapshotId"
             }
           },
           "owner_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> An optional list of owners by which to scope the described EBS snapshots. Valid values are: </p> <ul> <li> <code>self</code> : Snapshots owned by you </li> <li> <i>AWS account ID</i> : Snapshots owned by this account ID </li> <li> <code>amazon</code> : Snapshots owned by Amazon </li> </ul> <p> The values <code>self</code> and <code>amazon</code> are literals. </p>",
             "serialized_name": "OwnerIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "Owner"
             }
           },
           "restorable_by_user_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> An optional list of users. The described snapshots are scoped to only those snapshots from which these users can create volumes. </p>",
             "serialized_name": "RestorableByUserIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "RestorableBy"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Snapshots. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -9211,12 +8941,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -9261,7 +8988,7 @@
                   ]
                 },
                 "start_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Time stamp when the snapshot was initiated. </p>",
                   "serialized_name": "startTime"
                 },
@@ -9393,24 +9120,18 @@
             "serialized_name": "DryRun"
           },
           "spot_instance_request_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The ID of the request. </p>",
             "serialized_name": "SpotInstanceRequestIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "SpotInstanceRequestId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for SpotInstances. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -9422,12 +9143,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -9491,7 +9209,7 @@
                       "serialized_name": "code"
                     },
                     "update_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "serialized_name": "updateTime"
                     },
                     "message": {
@@ -9501,11 +9219,11 @@
                   }
                 },
                 "valid_from": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "validFrom"
                 },
                 "valid_until": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "validUntil"
                 },
                 "launch_group": {
@@ -9773,7 +9491,7 @@
                   "serialized_name": "instanceId"
                 },
                 "create_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "createTime"
                 },
                 "product_description": {
@@ -9826,22 +9544,19 @@
             "serialized_name": "DryRun"
           },
           "start_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The start date and time of the Spot Instance price history data. </p>",
             "serialized_name": "StartTime"
           },
           "end_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The end date and time of the Spot Instance price history data. </p>",
             "serialized_name": "EndTime"
           },
           "instance_types": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> Specifies the instance type to return. </p>",
             "serialized_name": "InstanceTypes",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InstanceType",
@@ -9868,24 +9583,18 @@
             }
           },
           "product_descriptions": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The description of the AMI. </p>",
             "serialized_name": "ProductDescriptions",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ProductDescription"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for SpotPriceHistory. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -9897,12 +9606,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -9971,7 +9677,7 @@
                   "serialized_name": "spotPrice"
                 },
                 "timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "timestamp"
                 },
                 "availability_zone": {
@@ -10003,24 +9709,18 @@
             "serialized_name": "DryRun"
           },
           "subnet_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A set of one or more subnet IDs. </p>",
             "serialized_name": "SubnetIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "SubnetId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Subnets. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -10032,12 +9732,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -10141,12 +9838,9 @@
             "serialized_name": "DryRun"
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for tags. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -10158,12 +9852,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -10307,22 +9998,16 @@
             "serialized_name": "DryRun"
           },
           "volume_ids": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "VolumeIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "VolumeId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -10334,12 +10019,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -10420,11 +10102,11 @@
                         "serialized_name": "description"
                       },
                       "not_before": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "serialized_name": "notBefore"
                       },
                       "not_after": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "serialized_name": "notAfter"
                       },
                       "event_id": {
@@ -10484,24 +10166,18 @@
             "serialized_name": "DryRun"
           },
           "volume_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The optional list of EBS volumes to describe. </p>",
             "serialized_name": "VolumeIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "VolumeId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for Volumes. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -10513,12 +10189,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -10575,7 +10248,7 @@
                   ]
                 },
                 "create_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Timestamp when volume creation was initiated. </p>",
                   "serialized_name": "createTime"
                 },
@@ -10615,7 +10288,7 @@
                         ]
                       },
                       "attach_time": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "documentation": "<p> Timestamp when this attachment initiated. </p>",
                         "serialized_name": "attachTime"
                       },
@@ -10741,24 +10414,18 @@
             "serialized_name": "DryRun"
           },
           "vpc_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The ID of a VPC you want information about. </p>",
             "serialized_name": "VpcIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "VpcId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for VPCs. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -10770,12 +10437,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -10871,24 +10535,18 @@
             "serialized_name": "DryRun"
           },
           "vpn_connection_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A VPN connection ID. More than one may be specified per request. </p>",
             "serialized_name": "VpnConnectionIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "VpnConnectionId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for VPN Connections. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -10900,12 +10558,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -10997,7 +10652,7 @@
                         "serialized_name": "status"
                       },
                       "last_status_change": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "serialized_name": "lastStatusChange"
                       },
                       "status_message": {
@@ -11063,24 +10718,18 @@
             "serialized_name": "DryRun"
           },
           "vpn_gateway_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for VPN Gateways. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "VpnGatewayIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "VpnGatewayId"
             }
           },
           "filters": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> A list of filters used to match properties for VPN Gateways. For a complete reference to the available filter keys for this operation, see the <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/\">Amazon EC2 API reference</a>. </p>",
             "serialized_name": "Filters",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> A filter used to limit results when describing tags. Multiple values can be specified per filter. A tag must match at least one of the specified values for it to be returned from an operation. </p> <p> Wildcards can be included in filter values; <code>*</code> specifies that zero or more characters must match, and <code>?</code> specifies that exactly one character must match. Use a backslash to escape special characters. For example, a filter value of <code>\\*amazon\\?\\\\</code> specifies the literal string <code>*amazon?\\</code>. </p>",
@@ -11092,12 +10741,9 @@
                   "serialized_name": "Name"
                 },
                 "values": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> Contains one or more values for the filter. </p>",
                   "serialized_name": "Values",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "Value"
@@ -11309,7 +10955,7 @@
             ]
           },
           "attach_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> Timestamp when this attachment initiated. </p>",
             "serialized_name": "attachTime"
           },
@@ -11487,7 +11133,7 @@
             "serialized_name": "instanceId"
           },
           "timestamp": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The time the output was last updated. </p>",
             "serialized_name": "timestamp"
           },
@@ -11530,7 +11176,7 @@
             "serialized_name": "instanceId"
           },
           "timestamp": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The time the data was last updated. </p>",
             "serialized_name": "timestamp"
           },
@@ -11566,11 +11212,8 @@
                 "serialized_name": "Architecture"
               },
               "group_names": {
-                "type": "list",
+                "type": "flat_list",
                 "serialized_name": "GroupNames",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "string",
                   "serialized_name": "GroupName"
@@ -11649,11 +11292,8 @@
             }
           },
           "disk_images": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "DiskImages",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "serialized_name": "DiskImage",
@@ -12205,36 +11845,27 @@
             "serialized_name": "OperationType"
           },
           "user_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The AWS user ID being added to or removed from the list of users with launch permissions for this AMI. Only valid when the launchPermission attribute is being modified. </p>",
             "serialized_name": "UserIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "UserId"
             }
           },
           "user_groups": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The user group being added to or removed from the list of user groups with launch permissions for this AMI. Only valid when the launchPermission attribute is being modified. </p> <p> Available user groups: <code>all</code> </p>",
             "serialized_name": "UserGroups",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "UserGroup"
             }
           },
           "product_codes": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The list of product codes being added to or removed from the specified AMI. Only valid when the productCodes attribute is being modified. </p>",
             "serialized_name": "ProductCodes",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ProductCode"
@@ -12250,11 +11881,8 @@
             "serialized_name": "LaunchPermission",
             "members": {
               "add": {
-                "type": "list",
+                "type": "flat_list",
                 "serialized_name": "Add",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "structure",
                   "documentation": "<p> Describes a permission to launch an Amazon Machine Image (AMI). </p>",
@@ -12273,11 +11901,8 @@
                 }
               },
               "remove": {
-                "type": "list",
+                "type": "flat_list",
                 "serialized_name": "Remove",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "structure",
                   "documentation": "<p> Describes a permission to launch an Amazon Machine Image (AMI). </p>",
@@ -12356,12 +11981,9 @@
             "serialized_name": "Value"
           },
           "block_device_mappings": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The new block device mappings for the instance whose attributes are being modified. </p> <p> Only valid when blockDeviceMapping is specified as the attribute being modified. </p>",
             "serialized_name": "BlockDeviceMappings",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> Specifies how an instance's block devices should be mapped on a running instance. </p>",
@@ -12487,11 +12109,8 @@
             }
           },
           "groups": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Groups",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "GroupId"
@@ -12553,11 +12172,8 @@
             }
           },
           "groups": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Groups",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "SecurityGroupId"
@@ -12614,24 +12230,18 @@
             "serialized_name": "OperationType"
           },
           "user_ids": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The AWS user IDs to add to or remove from the list of users that have permission to create EBS volumes from the specified snapshot. Currently supports \"all\". </p> Only valid when the <code>createVolumePermission</code> attribute is being modified.",
             "serialized_name": "UserIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "UserId"
             }
           },
           "group_names": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The AWS group names to add to or remove from the list of groups that have permission to create EBS volumes from the specified snapshot. Currently supports \"all\". </p> Only valid when the <code>createVolumePermission</code> attribute is being modified.",
             "serialized_name": "GroupNames",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "UserGroup"
@@ -12642,11 +12252,8 @@
             "serialized_name": "CreateVolumePermission",
             "members": {
               "add": {
-                "type": "list",
+                "type": "flat_list",
                 "serialized_name": "Add",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "structure",
                   "documentation": "<p> Describes a permission allowing either a user or group to create a new EBS volume from a snapshot. </p>",
@@ -12665,11 +12272,8 @@
                 }
               },
               "remove": {
-                "type": "list",
+                "type": "flat_list",
                 "serialized_name": "Remove",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "structure",
                   "documentation": "<p> Describes a permission allowing either a user or group to create a new EBS volume from a snapshot. </p>",
@@ -12768,13 +12372,10 @@
             "serialized_name": "DryRun"
           },
           "instance_ids": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> The list of Amazon EC2 instances on which to enable monitoring. </p>",
             "serialized_name": "InstanceIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InstanceId"
@@ -12885,13 +12486,10 @@
             "serialized_name": "DryRun"
           },
           "instance_ids": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> The list of instances to terminate. </p>",
             "serialized_name": "InstanceIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InstanceId"
@@ -12949,12 +12547,9 @@
             "serialized_name": "RootDeviceName"
           },
           "block_device_mappings": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The block device mappings for the new AMI, which specify how different block devices (ex: EBS volumes and ephemeral drives) will be exposed on instances launched from the new image. </p>",
             "serialized_name": "BlockDeviceMappings",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> The BlockDeviceMappingItemType data type. </p>",
@@ -13266,11 +12861,8 @@
             "serialized_name": "DryRun"
           },
           "instances": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "Instances",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InstanceId"
@@ -13281,19 +12873,16 @@
             "serialized_name": "Status"
           },
           "start_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "serialized_name": "StartTime"
           },
           "end_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "serialized_name": "EndTime"
           },
           "reason_codes": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "ReasonCodes",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "ReasonCode"
@@ -13340,12 +12929,12 @@
             ]
           },
           "valid_from": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> Defines the start date of the request. </p> <p> If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled. </p>",
             "serialized_name": "ValidFrom"
           },
           "valid_until": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> End date of the request. </p> <p> If this is a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date and time is reached. </p>",
             "serialized_name": "ValidUntil"
           },
@@ -13437,12 +13026,9 @@
                 "serialized_name": "RamdiskId"
               },
               "block_device_mappings": {
-                "type": "list",
+                "type": "flat_list",
                 "documentation": "<p> Specifies how block devices are exposed to the instance. Each mapping is made up of a virtualName and a deviceName. </p>",
                 "serialized_name": "BlockDeviceMappings",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "structure",
                   "documentation": "<p> The BlockDeviceMappingItemType data type. </p>",
@@ -13511,11 +13097,8 @@
                 "serialized_name": "SubnetId"
               },
               "network_interfaces": {
-                "type": "list",
+                "type": "flat_list",
                 "serialized_name": "NetworkInterfaces",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "structure",
                   "serialized_name": "NetworkInterface",
@@ -13541,11 +13124,8 @@
                       "serialized_name": "PrivateIpAddress"
                     },
                     "groups": {
-                      "type": "list",
+                      "type": "flat_list",
                       "serialized_name": "Groups",
-                      "metadata": {
-                        "flattened": true
-                      },
                       "members": {
                         "type": "string",
                         "serialized_name": "SecurityGroupId"
@@ -13556,11 +13136,8 @@
                       "serialized_name": "DeleteOnTermination"
                     },
                     "private_ip_addresses": {
-                      "type": "list",
+                      "type": "flat_list",
                       "serialized_name": "PrivateIpAddresses",
-                      "metadata": {
-                        "flattened": true
-                      },
                       "members": {
                         "type": "structure",
                         "members": {
@@ -13602,22 +13179,16 @@
                 "serialized_name": "EbsOptimized"
               },
               "security_group_ids": {
-                "type": "list",
+                "type": "flat_list",
                 "serialized_name": "SecurityGroupIds",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "string",
                   "serialized_name": "SecurityGroupId"
                 }
               },
               "security_groups": {
-                "type": "list",
+                "type": "flat_list",
                 "serialized_name": "SecurityGroups",
-                "metadata": {
-                  "flattened": true
-                },
                 "members": {
                   "type": "string",
                   "serialized_name": "SecurityGroup"
@@ -13682,7 +13253,7 @@
                       "serialized_name": "code"
                     },
                     "update_time": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "serialized_name": "updateTime"
                     },
                     "message": {
@@ -13692,11 +13263,11 @@
                   }
                 },
                 "valid_from": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "validFrom"
                 },
                 "valid_until": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "validUntil"
                 },
                 "launch_group": {
@@ -13964,7 +13535,7 @@
                   "serialized_name": "instanceId"
                 },
                 "create_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "createTime"
                 },
                 "product_description": {
@@ -14178,12 +13749,9 @@
             "serialized_name": "CidrIp"
           },
           "ip_permissions": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> List of IP permissions to authorize on the specified security group. Specifying permissions through IP permissions is the preferred way of authorizing permissions since it offers more flexibility and control. </p>",
             "serialized_name": "IpPermissions",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> An IP permission describing allowed incoming IP traffic to an Amazon EC2 security group. </p>",
@@ -14204,12 +13772,9 @@
                   "serialized_name": "ToPort"
                 },
                 "user_id_group_pairs": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> The list of AWS user IDs and groups included in this permission. </p>",
                   "serialized_name": "UserIdGroupPairs",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p> An AWS user ID identifying an AWS account, and the name of a security group within that account. </p>",
@@ -14234,12 +13799,9 @@
                   }
                 },
                 "ip_ranges": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> The list of CIDR IP ranges included in this permission. </p>",
                   "serialized_name": "IpRanges",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p> Contains a list of CIDR IP ranges. </p>",
@@ -14312,12 +13874,9 @@
             "serialized_name": "CidrIp"
           },
           "ip_permissions": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> List of IP permissions to revoke on the specified security group. For an IP permission to be removed, it must exactly match one of the IP permissions you specify in this list. Specifying permissions through IP permissions is the preferred way of revoking permissions since it offers more flexibility and control. </p>",
             "serialized_name": "IpPermissions",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> An IP permission describing allowed incoming IP traffic to an Amazon EC2 security group. </p>",
@@ -14338,12 +13897,9 @@
                   "serialized_name": "ToPort"
                 },
                 "user_id_group_pairs": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> The list of AWS user IDs and groups included in this permission. </p>",
                   "serialized_name": "UserIdGroupPairs",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p> An AWS user ID identifying an AWS account, and the name of a security group within that account. </p>",
@@ -14368,12 +13924,9 @@
                   }
                 },
                 "ip_ranges": {
-                  "type": "list",
+                  "type": "flat_list",
                   "documentation": "<p> The list of CIDR IP ranges included in this permission. </p>",
                   "serialized_name": "IpRanges",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "documentation": "<p> Contains a list of CIDR IP ranges. </p>",
@@ -14429,23 +13982,17 @@
             "serialized_name": "KeyName"
           },
           "security_groups": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> The names of the security groups into which the instances will be launched. </p>",
             "serialized_name": "SecurityGroups",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "SecurityGroup"
             }
           },
           "security_group_ids": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "SecurityGroupIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "SecurityGroupId"
@@ -14514,12 +14061,9 @@
             "serialized_name": "RamdiskId"
           },
           "block_device_mappings": {
-            "type": "list",
+            "type": "flat_list",
             "documentation": "<p> Specifies how block devices are exposed to the instance. Each mapping is made up of a virtualName and a deviceName. </p>",
             "serialized_name": "BlockDeviceMappings",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "documentation": "<p> The BlockDeviceMappingItemType data type. </p>",
@@ -14632,11 +14176,8 @@
             "serialized_name": "AdditionalInfo"
           },
           "network_interfaces": {
-            "type": "list",
+            "type": "flat_list",
             "serialized_name": "NetworkInterfaces",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "structure",
               "serialized_name": "NetworkInterface",
@@ -14662,11 +14203,8 @@
                   "serialized_name": "PrivateIpAddress"
                 },
                 "groups": {
-                  "type": "list",
+                  "type": "flat_list",
                   "serialized_name": "Groups",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "string",
                     "serialized_name": "SecurityGroupId"
@@ -14677,11 +14215,8 @@
                   "serialized_name": "DeleteOnTermination"
                 },
                 "private_ip_addresses": {
-                  "type": "list",
+                  "type": "flat_list",
                   "serialized_name": "PrivateIpAddresses",
-                  "metadata": {
-                    "flattened": true
-                  },
                   "members": {
                     "type": "structure",
                     "serialized_name": "PrivateIpAddressesSet",
@@ -14882,7 +14417,7 @@
                   ]
                 },
                 "launch_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The time this instance launched. </p>",
                   "serialized_name": "launchTime"
                 },
@@ -15017,7 +14552,7 @@
                             "serialized_name": "status"
                           },
                           "attach_time": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "documentation": "<p> The time at which the EBS volume was attached to the associated instance. </p>",
                             "serialized_name": "attachTime"
                           },
@@ -15199,7 +14734,7 @@
                             "serialized_name": "status"
                           },
                           "attach_time": {
-                            "type": "timestamp",
+                            "type": "iso8601_timestamp",
                             "serialized_name": "attachTime"
                           },
                           "delete_on_termination": {
@@ -15303,13 +14838,10 @@
         "documentation": "<p> Starts an instance that uses an Amazon EBS volume as its root device. </p> <p> Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. </p> Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error.",
         "members": {
           "instance_ids": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> The list of Amazon EC2 instances to start. </p>",
             "serialized_name": "InstanceIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InstanceId"
@@ -15413,13 +14945,10 @@
             "serialized_name": "DryRun"
           },
           "instance_ids": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> The list of Amazon EC2 instances to stop. </p>",
             "serialized_name": "InstanceIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InstanceId"
@@ -15520,13 +15049,10 @@
             "serialized_name": "DryRun"
           },
           "instance_ids": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> The list of instances to terminate. </p>",
             "serialized_name": "InstanceIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InstanceId"
@@ -15621,12 +15147,9 @@
             "serialized_name": "NetworkInterfaceId"
           },
           "private_ip_addresses": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "serialized_name": "PrivateIpAddresses",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "PrivateIpAddress"
@@ -15649,13 +15172,10 @@
             "serialized_name": "DryRun"
           },
           "instance_ids": {
-            "type": "list",
+            "type": "flat_list",
             "required": true,
             "documentation": "<p> The list of Amazon EC2 instances on which to disable monitoring. </p>",
             "serialized_name": "InstanceIds",
-            "metadata": {
-              "flattened": true
-            },
             "members": {
               "type": "string",
               "serialized_name": "InstanceId"

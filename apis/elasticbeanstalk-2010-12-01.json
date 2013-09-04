@@ -94,12 +94,12 @@
                 "serialized_name": "Description"
               },
               "date_created": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the application was created.</p>",
                 "serialized_name": "DateCreated"
               },
               "date_updated": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the application was last modified.</p>",
                 "serialized_name": "DateUpdated"
               },
@@ -224,12 +224,12 @@
                 }
               },
               "date_created": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The creation date of the application version.</p>",
                 "serialized_name": "DateCreated"
               },
               "date_updated": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The last modified date of the application version.</p>",
                 "serialized_name": "DateUpdated"
               }
@@ -385,12 +385,12 @@
             ]
           },
           "date_created": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The date (in UTC time) when this configuration set was created. </p>",
             "serialized_name": "DateCreated"
           },
           "date_updated": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The date (in UTC time) when this configuration set was last modified. </p>",
             "serialized_name": "DateUpdated"
           },
@@ -582,12 +582,12 @@
             "serialized_name": "CNAME"
           },
           "date_created": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p>The creation date for this environment.</p>",
             "serialized_name": "DateCreated"
           },
           "date_updated": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p>The last modified date for this environment.</p>",
             "serialized_name": "DateUpdated"
           },
@@ -924,12 +924,12 @@
                   }
                 },
                 "date_created": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The creation date of the application version.</p>",
                   "serialized_name": "DateCreated"
                 },
                 "date_updated": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The last modified date of the application version.</p>",
                   "serialized_name": "DateUpdated"
                 }
@@ -981,12 +981,12 @@
                   "serialized_name": "Description"
                 },
                 "date_created": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the application was created.</p>",
                   "serialized_name": "DateCreated"
                 },
                 "date_updated": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the application was last modified.</p>",
                   "serialized_name": "DateUpdated"
                 },
@@ -1236,12 +1236,12 @@
                   ]
                 },
                 "date_created": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The date (in UTC time) when this configuration set was created. </p>",
                   "serialized_name": "DateCreated"
                 },
                 "date_updated": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> The date (in UTC time) when this configuration set was last modified. </p>",
                   "serialized_name": "DateUpdated"
                 },
@@ -1446,7 +1446,7 @@
             "serialized_name": "IncludeDeleted"
           },
           "included_deleted_back_to": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> If specified when <code>IncludeDeleted</code> is set to <code>true</code>, then environments deleted after this date are displayed. </p>",
             "serialized_name": "IncludedDeletedBackTo"
           }
@@ -1510,12 +1510,12 @@
                   "serialized_name": "CNAME"
                 },
                 "date_created": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The creation date for this environment.</p>",
                   "serialized_name": "DateCreated"
                 },
                 "date_updated": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The last modified date for this environment.</p>",
                   "serialized_name": "DateUpdated"
                 },
@@ -1646,12 +1646,12 @@
             ]
           },
           "start_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur on or after this time. </p>",
             "serialized_name": "StartTime"
           },
           "end_time": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the <code>EndTime</code>. </p>",
             "serialized_name": "EndTime"
           },
@@ -1680,7 +1680,7 @@
               "documentation": "<p>Describes an event.</p>",
               "members": {
                 "event_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the event occurred.</p>",
                   "serialized_name": "EventDate"
                 },
@@ -1921,7 +1921,7 @@
                   "serialized_name": "Ec2InstanceId"
                 },
                 "sample_timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The time stamp when this information was retrieved.</p>",
                   "serialized_name": "SampleTimestamp"
                 },
@@ -2044,12 +2044,12 @@
             "serialized_name": "CNAME"
           },
           "date_created": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p>The creation date for this environment.</p>",
             "serialized_name": "DateCreated"
           },
           "date_updated": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p>The last modified date for this environment.</p>",
             "serialized_name": "DateUpdated"
           },
@@ -2174,12 +2174,12 @@
                 "serialized_name": "Description"
               },
               "date_created": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the application was created.</p>",
                 "serialized_name": "DateCreated"
               },
               "date_updated": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the application was last modified.</p>",
                 "serialized_name": "DateUpdated"
               },
@@ -2274,12 +2274,12 @@
                 }
               },
               "date_created": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The creation date of the application version.</p>",
                 "serialized_name": "DateCreated"
               },
               "date_updated": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The last modified date of the application version.</p>",
                 "serialized_name": "DateUpdated"
               }
@@ -2403,12 +2403,12 @@
             ]
           },
           "date_created": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The date (in UTC time) when this configuration set was created. </p>",
             "serialized_name": "DateCreated"
           },
           "date_updated": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p> The date (in UTC time) when this configuration set was last modified. </p>",
             "serialized_name": "DateUpdated"
           },
@@ -2582,12 +2582,12 @@
             "serialized_name": "CNAME"
           },
           "date_created": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p>The creation date for this environment.</p>",
             "serialized_name": "DateCreated"
           },
           "date_updated": {
-            "type": "timestamp",
+            "type": "iso8601_timestamp",
             "documentation": "<p>The last modified date for this environment.</p>",
             "serialized_name": "DateUpdated"
           },

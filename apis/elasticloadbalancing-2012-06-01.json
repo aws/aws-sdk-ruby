@@ -1419,7 +1419,7 @@
                   }
                 },
                 "created_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p> Provides the date and time the LoadBalancer was created. </p>",
                   "serialized_name": "CreatedTime"
                 },

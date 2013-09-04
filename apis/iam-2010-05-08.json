@@ -210,7 +210,7 @@
                 "serialized_name": "SecretAccessKey"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the access key was created.</p>",
                 "serialized_name": "CreateDate"
               }
@@ -321,7 +321,7 @@
                 "serialized_name": "Arn"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the group was created.</p>",
                 "serialized_name": "CreateDate"
               }
@@ -413,7 +413,7 @@
                 "serialized_name": "Arn"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the instance profile was created.</p>",
                 "serialized_name": "CreateDate"
               },
@@ -446,7 +446,7 @@
                       "serialized_name": "Arn"
                     },
                     "create_date": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>The date when the role was created.</p>",
                       "serialized_name": "CreateDate"
                     },
@@ -522,7 +522,7 @@
                 "serialized_name": "UserName"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the password for the user was created.</p>",
                 "serialized_name": "CreateDate"
               }
@@ -620,7 +620,7 @@
                 "serialized_name": "Arn"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the role was created.</p>",
                 "serialized_name": "CreateDate"
               },
@@ -717,7 +717,7 @@
                 "serialized_name": "Arn"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the user was created.</p>",
                 "serialized_name": "CreateDate"
               }
@@ -829,14 +829,14 @@
                     "serialized_name": "Arn"
                   },
                   "create_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>The date when the user was created.</p>",
                     "serialized_name": "CreateDate"
                   }
                 }
               },
               "enable_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "serialized_name": "EnableDate"
               }
             }
@@ -1647,7 +1647,7 @@
                 "serialized_name": "Arn"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the group was created.</p>",
                 "serialized_name": "CreateDate"
               }
@@ -1682,7 +1682,7 @@
                   "serialized_name": "Arn"
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the user was created.</p>",
                   "serialized_name": "CreateDate"
                 }
@@ -1816,7 +1816,7 @@
                 "serialized_name": "Arn"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the instance profile was created.</p>",
                 "serialized_name": "CreateDate"
               },
@@ -1849,7 +1849,7 @@
                       "serialized_name": "Arn"
                     },
                     "create_date": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>The date when the role was created.</p>",
                       "serialized_name": "CreateDate"
                     },
@@ -1909,7 +1909,7 @@
                 "serialized_name": "UserName"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the password for the user was created.</p>",
                 "serialized_name": "CreateDate"
               }
@@ -1976,7 +1976,7 @@
                 "serialized_name": "Arn"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the role was created.</p>",
                 "serialized_name": "CreateDate"
               },
@@ -2109,7 +2109,7 @@
                     "serialized_name": "Arn"
                   },
                   "upload_date": {
-                    "type": "timestamp",
+                    "type": "iso8601_timestamp",
                     "documentation": "<p>The date when the server certificate was uploaded.</p>",
                     "serialized_name": "UploadDate"
                   }
@@ -2187,7 +2187,7 @@
                 "serialized_name": "Arn"
               },
               "create_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the user was created.</p>",
                 "serialized_name": "CreateDate"
               }
@@ -2321,7 +2321,7 @@
                   ]
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the access key was created.</p>",
                   "serialized_name": "CreateDate"
                 }
@@ -2519,7 +2519,7 @@
                   "serialized_name": "Arn"
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the group was created.</p>",
                   "serialized_name": "CreateDate"
                 }
@@ -2598,7 +2598,7 @@
                   "serialized_name": "Arn"
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the group was created.</p>",
                   "serialized_name": "CreateDate"
                 }
@@ -2688,7 +2688,7 @@
                   "serialized_name": "Arn"
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the instance profile was created.</p>",
                   "serialized_name": "CreateDate"
                 },
@@ -2721,7 +2721,7 @@
                         "serialized_name": "Arn"
                       },
                       "create_date": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "documentation": "<p>The date when the role was created.</p>",
                         "serialized_name": "CreateDate"
                       },
@@ -2808,7 +2808,7 @@
                   "serialized_name": "Arn"
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the instance profile was created.</p>",
                   "serialized_name": "CreateDate"
                 },
@@ -2841,7 +2841,7 @@
                         "serialized_name": "Arn"
                       },
                       "create_date": {
-                        "type": "timestamp",
+                        "type": "iso8601_timestamp",
                         "documentation": "<p>The date when the role was created.</p>",
                         "serialized_name": "CreateDate"
                       },
@@ -2929,7 +2929,7 @@
                   "serialized_name": "SerialNumber"
                 },
                 "enable_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the MFA device was enabled for the user.</p>",
                   "serialized_name": "EnableDate"
                 }
@@ -3082,7 +3082,7 @@
                   "serialized_name": "Arn"
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the role was created.</p>",
                   "serialized_name": "CreateDate"
                 },
@@ -3165,7 +3165,7 @@
                   "serialized_name": "Arn"
                 },
                 "upload_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the server certificate was uploaded.</p>",
                   "serialized_name": "UploadDate"
                 }
@@ -3247,7 +3247,7 @@
                   ]
                 },
                 "upload_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the signing certificate was uploaded.</p>",
                   "serialized_name": "UploadDate"
                 }
@@ -3400,7 +3400,7 @@
                   "serialized_name": "Arn"
                 },
                 "create_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The date when the user was created.</p>",
                   "serialized_name": "CreateDate"
                 }
@@ -3502,14 +3502,14 @@
                       "serialized_name": "Arn"
                     },
                     "create_date": {
-                      "type": "timestamp",
+                      "type": "iso8601_timestamp",
                       "documentation": "<p>The date when the user was created.</p>",
                       "serialized_name": "CreateDate"
                     }
                   }
                 },
                 "enable_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "EnableDate"
                 }
               }
@@ -4308,7 +4308,7 @@
                 "serialized_name": "Arn"
               },
               "upload_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the server certificate was uploaded.</p>",
                 "serialized_name": "UploadDate"
               }
@@ -4414,7 +4414,7 @@
                 ]
               },
               "upload_date": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>The date when the signing certificate was uploaded.</p>",
                 "serialized_name": "UploadDate"
               }

@@ -256,7 +256,7 @@
                   "serialized_name": "ResourceType"
                 },
                 "timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>Time the status was updated.</p>",
                   "serialized_name": "Timestamp"
                 },
@@ -355,7 +355,7 @@
                 "serialized_name": "ResourceType"
               },
               "last_updated_timestamp": {
-                "type": "timestamp",
+                "type": "iso8601_timestamp",
                 "documentation": "<p>Time the status was updated.</p>",
                 "serialized_name": "LastUpdatedTimestamp"
               },
@@ -459,7 +459,7 @@
                   "serialized_name": "ResourceType"
                 },
                 "timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>Time the status was updated.</p>",
                   "serialized_name": "Timestamp"
                 },
@@ -564,12 +564,12 @@
                   }
                 },
                 "creation_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>Time at which the stack was created.</p>",
                   "serialized_name": "CreationTime"
                 },
                 "last_updated_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The time the stack was last updated. This field will only be returned if the stack has been updated at least once.</p>",
                   "serialized_name": "LastUpdatedTime"
                 },
@@ -819,7 +819,7 @@
                   "serialized_name": "ResourceType"
                 },
                 "last_updated_timestamp": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>Time the status was updated.</p>",
                   "serialized_name": "LastUpdatedTimestamp"
                 },
@@ -925,17 +925,17 @@
                   "serialized_name": "TemplateDescription"
                 },
                 "creation_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The time the stack was created.</p>",
                   "serialized_name": "CreationTime"
                 },
                 "last_updated_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The time the stack was last updated. This field will only be returned if the stack has been updated at least once.</p>",
                   "serialized_name": "LastUpdatedTime"
                 },
                 "deletion_time": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "documentation": "<p>The time the stack was deleted.</p>",
                   "serialized_name": "DeletionTime"
                 },
