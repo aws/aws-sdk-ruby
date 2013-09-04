@@ -50,18 +50,24 @@ module Aws
 
       def list(param_list, shape, prefix, values)
         member_shape = shape.members
-
-        if name = member_shape.serialized_name
-          parts = prefix.split('.')
-          parts.pop
-          parts.push(name)
-          prefix = parts.join('.')
-        end
-
-        values.each_with_index do |value, n|
-          suffix = ".#{n+1}"
-          param_name = "#{prefix}#{suffix}"
-          member(param_list, member_shape, param_name, value)
+        if shape.metadata['flattened']
+          if name = member_shape.serialized_name
+            parts = prefix.split('.')
+            parts.pop
+            parts.push(name)
+            prefix = parts.join('.')
+          end
+          values.each_with_index do |value, n|
+            suffix = ".#{n+1}"
+            param_name = "#{prefix}#{suffix}"
+            member(param_list, member_shape, param_name, value)
+          end
+        else
+          values.each_with_index do |value, n|
+            suffix = ".member.#{n+1}"
+            param_name = "#{prefix}#{suffix}"
+            member(param_list, member_shape, param_name, value)
+          end
         end
       end
 

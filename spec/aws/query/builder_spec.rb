@@ -151,6 +151,63 @@ module Aws
         end
 
         describe 'non-flattened lists' do
+
+          it 'numbers list members starting at 1' do
+            rules['members'] = {
+              'items' => {
+                'type' => 'list',
+                'members' => { 'type' => 'string' }
+              }
+            }
+            expect(query_params(items: %w(abc mno xyz))).to eq([
+              ['items.member.1', 'abc'],
+              ['items.member.2', 'mno'],
+              ['items.member.3', 'xyz'],
+            ])
+          end
+
+          it 'ignores the list member name' do
+            rules['members'] = {
+              'config' => {
+                'type' => 'structure',
+                'members' => {
+                  'items' => {
+                    'type' => 'list',
+                    'members' => {
+                      'type' => 'string',
+                      'serialized_name' => 'Item' # has no effect
+                    }
+                  }
+                }
+              }
+            }
+            params = { config: { items: %w(abc mno xyz) } }
+            expect(query_params(params)).to eq([
+              ['config.items.member.1', 'abc'],
+              ['config.items.member.2', 'mno'],
+              ['config.items.member.3', 'xyz'],
+            ])
+          end
+
+          it 'supports lists of complex types' do
+            rules['members'] = {
+              'people' => {
+                'type' => 'list',
+                'members' => {
+                  'type' => 'structure',
+                  'members' => {
+                    'name' => { 'type' => 'string' }
+                  }
+                }
+              }
+            }
+            params = { people: [ { name: 'John' }, { name: 'Jane' } ] }
+            expect(query_params(params)).to eq([
+              ['people.member.1.name', 'John'],
+              ['people.member.2.name', 'Jane'],
+            ])
+          end
+
         end
 
         describe 'flattened maps' do
