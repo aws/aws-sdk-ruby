@@ -54,12 +54,23 @@ module Aws
             QS
           end
 
+          it 'observes serialized name properties' do
+            rules['members'] = {
+              'name' => { 'type' => 'string', 'serialized_name' => 'NAME' },
+              'age' => { 'type' => 'integer', 'serialized_name' => 'AGE' }
+            }
+            expect(list(name: 'John', age: 40).to_s).to eq(<<-QS.strip)
+              AGE=40&NAME=John
+            QS
+          end
+
           it 'serializes nested params' do
             rules['members'] = {
               'name' => { 'type' => 'string' },
               'config' => {
                 'type' => 'structure',
-                'members' => { 'enabled' => { 'type' => 'boolean' } }
+                'members' => { 'enabled' => { 'type' => 'boolean' }
+                }
               }
             }
             params = { name: 'John', config: { enabled: true } }
@@ -71,6 +82,20 @@ module Aws
         end
 
         describe 'flattened lists' do
+
+          it 'numbers list members starting at 1' do
+            rules['members'] = {
+              'items' => {
+                'type' => 'list',
+                'metadata' => { 'flattened' => true },
+                'members' => { 'type' => 'string' }
+              }
+            }
+            expect(list(items: %w(abc mno xyz)).to_s).to eq(<<-QS.strip)
+              items.1=abc&items.2=mno&items.3=xyz
+            QS
+          end
+
         end
 
         describe 'non-flattened lists' do

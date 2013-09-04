@@ -25,9 +25,9 @@ module Aws
       # @param [Hash] params
       # @return [ParamList]
       def to_query_params(params)
-        list = ParamList.new
-        structure(list, @rules, nil, params)
-        list
+        param_list = ParamList.new
+        structure(param_list, @rules, nil, params)
+        param_list
       end
 
       # @param [Seahorse::Model::Shapes::Shape] rules
@@ -39,19 +39,26 @@ module Aws
 
       private
 
-      def structure(list, shape, prefix, values)
+      def structure(param_list, shape, prefix, values)
         values.each do |name, value|
           member_shape = shape.members[name]
           param_name = member_shape.serialized_name
           param_name = "#{prefix}.#{param_name}" if prefix
-          member(list, member_shape, param_name, value)
+          member(param_list, member_shape, param_name, value)
         end
       end
 
-      def member(list, shape, prefix, value)
+      def list(param_list, shape, prefix, values)
+        values.each_with_index do |value, n|
+          param_list.add("#{prefix}.#{n+1}", value)
+        end
+      end
+
+      def member(param_list, shape, prefix, value)
         case shape
-        when StructureShape then structure(list, shape, prefix, value)
-        else list.add(prefix, value.to_s)
+        when StructureShape then structure(param_list, shape, prefix, value)
+        when ListShape then list(param_list, shape, prefix, value)
+        else param_list.add(prefix, value.to_s)
         end
       end
 
