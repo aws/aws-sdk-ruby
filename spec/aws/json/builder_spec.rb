@@ -145,10 +145,10 @@ module Aws
           expect(json(hot:true, cold:false)).to eq('{"hot":true,"cold":false}')
         end
 
-        it 'serializes timestamps as is8601 strings by default' do
+        it 'serializes iso8601 timestamps' do
           now = Time.now
           rules['members'] = {
-            'when' => { 'type' => 'timestamp' }
+            'when' => { 'type' => 'iso8601_timestamp' }
           }
           expect(json(when:now)).to eq("{\"when\":\"#{now.utc.iso8601}\"}")
         end
@@ -157,8 +157,7 @@ module Aws
           now = Time.now
           rules['members'] = {
             'when' => {
-              'type' => 'timestamp',
-              'metadata' => { 'timestamp_format' => 'rfc822' }
+              'type' => 'rfc822_timestamp'
             }
           }
           expect(json(when:now)).to eq("{\"when\":\"#{now.utc.rfc822}\"}")
@@ -168,22 +167,20 @@ module Aws
           now = Time.now
           rules['members'] = {
             'when' => {
-              'type' => 'timestamp',
-              'metadata' => { 'timestamp_format' => 'unixtimestamp' }
+              'type' => 'unix_timestamp',
             }
           }
           expect(json(when:now)).to eq("{\"when\":#{now.to_i}}")
         end
 
-        it 'raises an error for invalid timestamp formats' do
+        it 'raises an error when the timestamp format is not specified' do
           now = Time.now
           rules['members'] = {
             'when' => {
               'type' => 'timestamp',
-              'metadata' => { 'timestamp_format' => 'oops' }
             }
           }
-          expect { json(when:Time.now) }.to raise_error(/invalid timestamp/)
+          expect { json(when:now) }.to raise_error(/invalid timestamp/)
         end
 
         it 'serializes blobs as base64 strings' do

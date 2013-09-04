@@ -101,13 +101,11 @@ module Aws
       end
 
       def format_timestamp(shape, value)
-        case shape.timestamp_format
-        when 'iso8601', nil then value.iso8601
-        when 'rfc822' then value.rfc822
-        when 'unixtimestamp' then value.to_i
-        else
-          msg = "invalid timestamp format #{shape.timestamp_format.inspect}"
-          raise ArgumentError, msg
+        value = case shape
+          when Iso8601TimestampShape then value.iso8601
+          when Rfc822TimestampShape then value.rfc822
+          when UnixTimestampShape then value.to_i
+          else raise "invalid timestamp format `#{shape.class.name}'"
         end
       end
 

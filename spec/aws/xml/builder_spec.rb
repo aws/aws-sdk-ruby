@@ -306,10 +306,10 @@ module Aws
           XML
         end
 
-        it 'serializes timestamps as is8601 strings by default' do
+        it 'serializes is8601 timestamp' do
           now = Time.now
           rules['members'] = {
-            'when' => { 'type' => 'timestamp' }
+            'when' => { 'type' => 'iso8601_timestamp' }
           }
           expect(xml(when: now)).to eq(<<-XML)
 <xml>
@@ -322,8 +322,7 @@ module Aws
           now = Time.now
           rules['members'] = {
             'when' => {
-              'type' => 'timestamp',
-              'timestamp_format' => 'rfc822'
+              'type' => 'rfc822_timestamp'
             }
           }
           expect(xml(when: now)).to eq(<<-XML)
@@ -333,12 +332,21 @@ module Aws
           XML
         end
 
-        it 'can serialize a timestamp as an unixtimestamp string' do
+        it 'raises an error when the timestamp format is not specified' do
           now = Time.now
           rules['members'] = {
             'when' => {
               'type' => 'timestamp',
-              'timestamp_format' => 'unixtimestamp'
+            }
+          }
+          expect { xml(when:now) }.to raise_error(/invalid timestamp/)
+        end
+
+        it 'can serialize a timestamp as an unixtimestamp string' do
+          now = Time.now
+          rules['members'] = {
+            'when' => {
+              'type' => 'unix_timestamp'
             }
           }
           expect(xml(when: now)).to eq(<<-XML)

@@ -93,12 +93,11 @@ module Aws
       end
 
       def timestamp(param_list, shape, prefix, value)
-        format = shape.metadata['timestamp_format']
-        value = case format
-        when nil, 'iso8601' then value.iso8601
-        when 'rfc822' then value.rfc822
-        when 'unixtimestamp' then value.to_i.to_s
-        else raise "invalid timestamp format `#{format}'"
+        value = case shape
+          when Iso8601TimestampShape then value.iso8601
+          when Rfc822TimestampShape then value.rfc822
+          when UnixTimestampShape then value.to_i.to_s
+          else raise "invalid timestamp format `#{shape.class.name}'"
         end
         param_list.add(prefix, value)
       end
