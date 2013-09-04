@@ -39,6 +39,28 @@ module Aws
       raise NotImplementedError
     end
 
+    def underscore(str)
+      inflector = Hash.new do |hash,key|
+        key.
+          gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2'). # split acronyms
+          scan(/[a-z]+|\d+|[A-Z0-9]+[a-z]*/).       # split words
+          join('_').downcase                        # join parts
+      end
+
+      # add a few irregular inflections
+      inflector['ETag'] = 'etag'
+      inflector['s3Bucket'] = 's3_bucket'
+      inflector['s3Key'] = 's3_key'
+      inflector['Ec2KeyName'] = 'ec2_key_name'
+      inflector['Ec2SubnetId'] = 'ec2_subnet_id'
+      inflector['Ec2VolumeId'] = 'ec2_volume_id'
+      inflector['Ec2InstanceId'] = 'ec2_instance_id'
+      inflector['ElastiCache'] = 'elasticache'
+      inflector['NotificationARNs'] = 'notification_arns'
+
+      inflector[str]
+    end
+
     class << self
 
       def translate(src)
@@ -76,10 +98,15 @@ module Aws
     def translated
       api = Seahorse::Model::Api.from_hash(@properties)
       api.metadata = Hash[api.metadata.sort]
-      @operations.each do |operation|
-        api.operations[sanitize_operation_name(operation.name)] = operation
+      @operations.values.each do |src|
+        operation = OperationTranslator.translate(src)
+        api.operations[method_name(underscore(operation.name))] = operation
       end
       api
+    end
+
+    def method_name(operation_name)
+      underscore(operation_name).sub(/_?\d{4}_\d{2}_\d{2}$/, '')
     end
 
     property :version, from: :api_version
@@ -131,20 +158,9 @@ module Aws
     end
 
     def set_operations(operations)
-      @operations = operations.values.map do |src|
-        OperationTranslator.translate(src)
-      end
+      @operations = operations
     end
 
-    private
-
-    def sanitize_operation_name(name)
-      name.
-        sub(/\d+_\d+_\d+$/, '').                  # strip version suffix
-        gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2'). # split acronyms
-        scan(/[a-z]+|\d+|[A-Z0-9]+[a-z]*/).       # split words
-        join('_').downcase                        # join parts
-    end
   end
 
   # @api private
@@ -195,6 +211,7 @@ module Aws
     }
 
     def translated
+      @properties['type'] = "#{@format}_#{@properties['type']}" if @format
       shape = Seahorse::Model::Shapes::Shape.from_hash(@properties)
       shape.members = @members unless @members.nil?
       shape.keys = @keys if @keys
@@ -205,9 +222,7 @@ module Aws
     property :serialized_name, from: :xmlname
     property :serialized_name, from: :location_name
     property :enum
-    property :timestamp_format
 
-    metadata :flattened
     metadata :xmlnamespace
     metadata :xmlattribute
     metadata :payload
@@ -233,6 +248,14 @@ module Aws
       @properties['type'] = CONVERT_TYPES[type] || type
     end
 
+    def set_flattened(state)
+      @format = 'flat' if state
+    end
+
+    def set_timestamp_format(format)
+      @format = format
+    end
+
     def set_keys(member)
       @keys = self.class.translate(member)
     end
@@ -252,29 +275,6 @@ module Aws
       end
     end
 
-    def underscore(str)
-      inflector = Hash.new do |hash,key|
-        key.
-          sub(/^.*:/, '').                          # strip namespace
-          gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2'). # split acronyms
-          scan(/[a-z]+|\d+|[A-Z0-9]+[a-z]*/).       # split words
-          join('_').downcase                        # join parts
-      end
-
-      # add a few irregular inflections
-      inflector['ETag'] = 'etag'
-      inflector['s3Bucket'] = 's3_bucket'
-      inflector['s3Key'] = 's3_key'
-      inflector['Ec2KeyName'] = 'ec2_key_name'
-      inflector['Ec2SubnetId'] = 'ec2_subnet_id'
-      inflector['Ec2VolumeId'] = 'ec2_volume_id'
-      inflector['Ec2InstanceId'] = 'ec2_instance_id'
-      inflector['ElastiCache'] = 'elasticache'
-      inflector['NotificationARNs'] = 'notification_arns'
-
-      inflector[str]
-    end
-
   end
 
   # @api private
@@ -285,7 +285,6 @@ module Aws
   # @api private
   class OutputShapeTranslator < ShapeTranslator
     ignore :required
-    ignore :timestamp_format
   end
 
 end
