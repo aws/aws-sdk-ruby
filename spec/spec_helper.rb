@@ -59,3 +59,15 @@ end
 def new_client(api, opts = {})
   new_client_class(api).new(opts)
 end
+
+def call_handler(klass, opts = {}, &block)
+  handler = klass.new(DummySendHandler.new)
+  config = opts[:config] ||
+    double(response_body: opts[:response_body] || '', api: opts[:api] || {})
+  context = Seahorse::Client::RequestContext.new config: config,
+    operation_name: opts[:operation_name] || 'operation',
+    params: opts[:params] || {}
+
+  yield(context) if block_given?
+  handler.call(context)
+end

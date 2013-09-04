@@ -15,22 +15,11 @@ require 'spec_helper'
 
 module Aws
   module Plugins
-    describe ContentLength do
-      let(:sender) { DummySendHandler.new }
-      let(:handler) { ContentLength::Handler.new(sender) }
-      let(:api) { load_api('swf') }
-      let(:context_opts) { { config: config, operation_name: 'list_domains' } }
-      let(:context) { Seahorse::Client::RequestContext.new(context_opts) }
-      let(:response) { handler.call(context) }
-      let(:config) do
-        config = Seahorse::Client::Configuration.new
-        config.add_option(:response_body, '{}')
-        config.add_option(:api, api)
-        config
-      end
-
+    describe ContentLength::Handler do
       it 'adds content-length to regular payload' do
-        context.http_request.body = StringIO.new('BODY')
+        response = call_handler(ContentLength::Handler) do |context|
+          context.http_request.body = StringIO.new('BODY')
+        end
         expect(response.http_request.headers['content-length']).to eq '4'
       end
     end
