@@ -17,16 +17,16 @@ module AWS
     # Client class for Amazon ElastiCache.
     class Client < Core::QueryClient
 
-      API_VERSION = '2012-11-15'
+      API_VERSION = '2013-06-15'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]
 
     end
 
-    class Client::V20121115 < Client
+    class Client::V20130615 < Client
 
-      define_client_methods('2012-11-15')
+      define_client_methods('2013-06-15')
 
     end
   end

@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2012-11-15'
+:api_version: '2013-06-15'
 :operations:
 - :name: AuthorizeCacheSecurityGroupIngress
   :method: :authorize_cache_security_group_ingress
@@ -46,6 +46,8 @@
     CacheClusterId:
     - :string
     - :required
+    ReplicationGroupId:
+    - :string
     NumCacheNodes:
     - :integer
     - :required
@@ -65,6 +67,9 @@
     - :membered_list:
       - :string
     SecurityGroupIds:
+    - :membered_list:
+      - :string
+    SnapshotArns:
     - :membered_list:
       - :string
     PreferredAvailabilityZone:
@@ -207,6 +212,54 @@
                     :rename: :subnets
                     :list: true
             :ignore: true
+- :name: CreateReplicationGroup
+  :method: :create_replication_group
+  :inputs:
+    ReplicationGroupId:
+    - :string
+    - :required
+    PrimaryClusterId:
+    - :string
+    - :required
+    ReplicationGroupDescription:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateReplicationGroupResult:
+        :ignore: true
+        :children:
+          ReplicationGroup:
+            :children:
+              MemberClusters:
+                :ignore: true
+                :children:
+                  ClusterId:
+                    :rename: :member_clusters
+                    :list: true
+              NodeGroups:
+                :ignore: true
+                :children:
+                  NodeGroup:
+                    :rename: :node_groups
+                    :list: true
+                    :children:
+                      PrimaryEndpoint:
+                        :children:
+                          Port:
+                            :type: :integer
+                      NodeGroupMembers:
+                        :ignore: true
+                        :children:
+                          NodeGroupMember:
+                            :rename: :node_group_members
+                            :list: true
+                            :children:
+                              ReadEndpoint:
+                                :children:
+                                  Port:
+                                    :type: :integer
+            :ignore: true
 - :name: DeleteCacheCluster
   :method: :delete_cache_cluster
   :inputs:
@@ -304,6 +357,48 @@
     :children:
       DeleteCacheSubnetGroupResult:
         :ignore: true
+- :name: DeleteReplicationGroup
+  :method: :delete_replication_group
+  :inputs:
+    ReplicationGroupId:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteReplicationGroupResult:
+        :ignore: true
+        :children:
+          ReplicationGroup:
+            :children:
+              MemberClusters:
+                :ignore: true
+                :children:
+                  ClusterId:
+                    :rename: :member_clusters
+                    :list: true
+              NodeGroups:
+                :ignore: true
+                :children:
+                  NodeGroup:
+                    :rename: :node_groups
+                    :list: true
+                    :children:
+                      PrimaryEndpoint:
+                        :children:
+                          Port:
+                            :type: :integer
+                      NodeGroupMembers:
+                        :ignore: true
+                        :children:
+                          NodeGroupMember:
+                            :rename: :node_group_members
+                            :list: true
+                            :children:
+                              ReadEndpoint:
+                                :children:
+                                  Port:
+                                    :type: :integer
+            :ignore: true
 - :name: DescribeCacheClusters
   :method: :describe_cache_clusters
   :inputs:
@@ -594,6 +689,55 @@
                 :children:
                   Date:
                     :type: :time
+- :name: DescribeReplicationGroups
+  :method: :describe_replication_groups
+  :inputs:
+    ReplicationGroupId:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeReplicationGroupsResult:
+        :ignore: true
+        :children:
+          ReplicationGroups:
+            :ignore: true
+            :children:
+              ReplicationGroup:
+                :rename: :replication_groups
+                :list: true
+                :children:
+                  MemberClusters:
+                    :ignore: true
+                    :children:
+                      ClusterId:
+                        :rename: :member_clusters
+                        :list: true
+                  NodeGroups:
+                    :ignore: true
+                    :children:
+                      NodeGroup:
+                        :rename: :node_groups
+                        :list: true
+                        :children:
+                          PrimaryEndpoint:
+                            :children:
+                              Port:
+                                :type: :integer
+                          NodeGroupMembers:
+                            :ignore: true
+                            :children:
+                              NodeGroupMember:
+                                :rename: :node_group_members
+                                :list: true
+                                :children:
+                                  ReadEndpoint:
+                                    :children:
+                                      Port:
+                                        :type: :integer
 - :name: DescribeReservedCacheNodes
   :method: :describe_reserved_cache_nodes
   :inputs:
@@ -822,6 +966,72 @@
                   Subnet:
                     :rename: :subnets
                     :list: true
+            :ignore: true
+- :name: ModifyReplicationGroup
+  :method: :modify_replication_group
+  :inputs:
+    ReplicationGroupId:
+    - :string
+    - :required
+    ReplicationGroupDescription:
+    - :string
+    CacheSecurityGroupNames:
+    - :membered_list:
+      - :string
+    SecurityGroupIds:
+    - :membered_list:
+      - :string
+    PreferredMaintenanceWindow:
+    - :string
+    NotificationTopicArn:
+    - :string
+    CacheParameterGroupName:
+    - :string
+    NotificationTopicStatus:
+    - :string
+    ApplyImmediately:
+    - :boolean
+    EngineVersion:
+    - :string
+    AutoMinorVersionUpgrade:
+    - :boolean
+    PrimaryClusterId:
+    - :string
+  :outputs:
+    :children:
+      ModifyReplicationGroupResult:
+        :ignore: true
+        :children:
+          ReplicationGroup:
+            :children:
+              MemberClusters:
+                :ignore: true
+                :children:
+                  ClusterId:
+                    :rename: :member_clusters
+                    :list: true
+              NodeGroups:
+                :ignore: true
+                :children:
+                  NodeGroup:
+                    :rename: :node_groups
+                    :list: true
+                    :children:
+                      PrimaryEndpoint:
+                        :children:
+                          Port:
+                            :type: :integer
+                      NodeGroupMembers:
+                        :ignore: true
+                        :children:
+                          NodeGroupMember:
+                            :rename: :node_group_members
+                            :list: true
+                            :children:
+                              ReadEndpoint:
+                                :children:
+                                  Port:
+                                    :type: :integer
             :ignore: true
 - :name: PurchaseReservedCacheNodesOffering
   :method: :purchase_reserved_cache_nodes_offering

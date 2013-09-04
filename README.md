@@ -126,7 +126,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>AWS::ElastiCache</td>
-      <td>2012-11-15</td>
+      <td>2013-06-15</td>
       <td>Amazon ElastiCache</td>
     </tr>
     <tr>
