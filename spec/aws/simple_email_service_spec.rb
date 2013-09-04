@@ -115,8 +115,8 @@ module AWS
 
       let(:send_opts) { send_opt_keys.inject({}) {|h,k| h[k] = k.to_s; h }}
 
-      it 'returns nil' do
-        ses.send_email(send_opts).should == nil
+      it 'returns a Response' do
+        ses.send_email(send_opts).should be_a Core::Response
       end
 
       it 'calls send email on the client' do
@@ -191,8 +191,8 @@ module AWS
         ses.send_raw_email(raw)
       end
 
-      it 'returns nil' do
-        ses.send_raw_email('raw').should == nil
+      it 'returns a Response' do
+        ses.send_raw_email('raw').should be_a Core::Response
       end
 
       it 'calls #send_raw_email on the client' do

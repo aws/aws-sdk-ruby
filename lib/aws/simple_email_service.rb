@@ -250,7 +250,7 @@ module AWS
     #   then you must also specify the character set. Examples include
     #   UTF-8, ISO-8859-1, and Shift_JIS. Defaults to 7-bit ASCII.
     # @option options [String] :body_html
-    # @return [nil]
+    # @return [Core::Response] the SendEmail response
     def send_email options = {}
 
         require_each(options, :subject, :from)
@@ -281,8 +281,6 @@ module AWS
       }
 
       client.send_email(nest_options(options, accepted_options))
-      nil
-
     end
 
     # Sends a raw email (email message, with header and content specified).
@@ -329,7 +327,7 @@ module AWS
     #   complaints will be sent to this email address. This takes
     #   precedence over any Return-Path header that you might include in
     #   the `raw_message`.
-    # @return [nil]
+    # @return [Core::Response] the SendRawEmail response
     def send_raw_email raw_message, options = {}
 
       send_opts = {}
@@ -343,11 +341,12 @@ module AWS
       send_opts[:destinations] = [options[:to]].flatten if options[:to]
 
       response = client.send_raw_email(send_opts)
+
       if raw_message.respond_to?(:message_id=)
         raw_message.message_id = "#{response.data[:message_id]}@email.amazonses.com"
       end
 
-      nil
+      response
     end
 
     # for compatability with ActionMailer
