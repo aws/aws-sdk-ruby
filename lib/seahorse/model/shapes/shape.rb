@@ -84,9 +84,10 @@ module Seahorse
         property :enum, [String]
       end
 
-      class TimestampShape < ScalarShape
-        property :timestamp_format, String
-      end
+      class TimestampShape < ScalarShape; end
+      class Iso8601TimestampShape < TimestampShape; end
+      class Rfc822TimestampShape < TimestampShape; end
+      class UnixTimestampShape < TimestampShape; end
 
       class ListShape < Shape
         property :members, Shape
@@ -184,6 +185,9 @@ module Seahorse
         register_type string: StringShape
         register_type integer: IntegerShape
         register_type timestamp: TimestampShape
+        register_type iso8601_timestamp: Iso8601TimestampShape
+        register_type rfc822_timestamp: Rfc822TimestampShape
+        register_type unix_timestamp: UnixTimestampShape
         register_type boolean: BooleanShape
         register_type blob: BlobShape
         register_type float: FloatShape
