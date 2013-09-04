@@ -47,11 +47,12 @@ def fixture(name, raw = false)
   @fixtures[[name, raw]]
 end
 
-def new_client_class(api)
-  if String === api
-    api = Aws::ApiTranslator.translate(fixture("api/#{api}.json"))
-  end
+def load_api(api)
+  Aws::ApiTranslator.translate(fixture("api/#{api}.json"))
+end
 
+def new_client_class(api)
+  api = load_api(api) if String === api
   Seahorse::Client::Base.define(api: api, plugins: [DummySendPlugin])
 end
 
