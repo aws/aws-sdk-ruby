@@ -31,8 +31,6 @@ module Aws
         rules = context.operation.input
 
         req = context.http_request
-        req.http_method = 'POST'
-        req.path = '/'
         req.headers['X-Amz-Target'] = target
         req.headers['Content-Type'] = "application/x-amz-json-#{version}"
         req.body = Json::Builder.to_json(rules, context.params)
