@@ -15,6 +15,8 @@ module Aws
   module Query
     class ParamList
 
+      include Enumerable
+
       # @api private
       def initialize
         @params = {}
@@ -33,6 +35,11 @@ module Aws
       # @return [Param, nil]
       def remove(param_name)
         @params.delete(param_name)
+      end
+
+      # @return [Enumerable]
+      def each(&block)
+        to_a.each(&block)
       end
 
       # @return [Boolean]
