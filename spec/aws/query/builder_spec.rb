@@ -214,6 +214,24 @@ module Aws
         end
 
         describe 'non-flattened maps' do
+
+          it 'serializes hashes with keys and values' do
+            rules['members'] = {
+              'attributes' => {
+                'type' => 'map',
+                'keys' => { 'type' => 'string' },
+                'members' => { 'type' => 'string' }
+              }
+            }
+            params = { attributes: { 'Size' => 'large', 'Color' => 'red' } }
+            expect(query_params(params)).to eq([
+              ['attributes.entry.1.key', 'Size'],
+              ['attributes.entry.1.value', 'large'],
+              ['attributes.entry.2.key', 'Color'],
+              ['attributes.entry.2.value', 'red'],
+            ])
+          end
+
         end
 
         describe 'scalars' do

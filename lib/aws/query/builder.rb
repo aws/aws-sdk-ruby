@@ -65,10 +65,22 @@ module Aws
         end
       end
 
+      def map(param_list, shape, prefix, values)
+        n = 1
+        values.each_pair do |key, value|
+          key_name = "#{prefix}.entry.#{n}.key"
+          value_name = "#{prefix}.entry.#{n}.value"
+          member(param_list, shape.keys, key_name, key)
+          member(param_list, shape.members, value_name, value)
+          n += 1
+        end
+      end
+
       def member(param_list, shape, prefix, value)
         case shape
         when StructureShape then structure(param_list, shape, prefix, value)
         when ListShape then list(param_list, shape, prefix, value)
+        when MapShape then map(param_list, shape, prefix, value)
         else param_list.add(prefix, value.to_s)
         end
       end
