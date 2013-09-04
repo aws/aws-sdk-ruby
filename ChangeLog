@@ -1,4 +1,25 @@
+2013-09-04 Alex Wood <awood45@gmail.com>
+
+  * README.md, doc-src/ElastiCache/V20130615.yml,
+  lib/aws/api_config/ElastiCache-2012-11-15.yml,
+  lib/aws/api_config/ElastiCache-2013-06-15.yml,
+  lib/aws/elasticache/client.rb: Add Redis support to Amazon ElastiCache
+
+  Updates the AWS::ElastiCache::Client class to the latest API version.
+
+2013-09-03 Kyle Dayton <kyle@graphicflash.com>
+
+  * lib/aws/simple_email_service.rb, spec/aws/simple_email_service_spec.rb:
+  Updated Spec for simple email service
+
+  * lib/aws/simple_email_service.rb: Updated SimpleEmailService#send_email and
+  #send_raw_email to return Message ID instead of nil
+
+  * README.md: Bump EC2 API version in README
+
 2013-08-30 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.16.1
 
   * lib/aws/api_config/EC2-2013-02-01.yml,
   lib/aws/api_config/EC2-2013-07-15.yml, lib/aws/ec2/client.rb: Correct EC2
