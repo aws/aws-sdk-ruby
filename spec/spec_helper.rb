@@ -13,7 +13,7 @@
 
 if ENV['COVERAGE']
   require 'simplecov'
-  SimpleCov.start
+  SimpleCov.start { add_filter 'spec'; add_filter 'vendor' }
 end
 
 require 'rspec'
