@@ -34,6 +34,17 @@ module Aws
         end
 
         describe 'structures' do
+
+          it 'serializes params by name' do
+            rules['members'] = {
+              'name' => { 'type' => 'string' },
+              'age' => { 'type' => 'integer' }
+            }
+            expect(list(name: 'John', age: 40).to_s).to eq(<<-QS.strip)
+              age=40&name=John
+            QS
+          end
+
         end
 
         describe 'flattened lists' do

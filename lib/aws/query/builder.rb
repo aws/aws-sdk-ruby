@@ -24,6 +24,8 @@ module Aws
       # @return [ParamList]
       def to_query_params(params)
         list = ParamList.new
+        structure(list, @rules, params)
+        list
       end
 
       # @param [Seahorse::Model::Shapes::Shape] rules
@@ -31,6 +33,14 @@ module Aws
       # @return [ParamList]
       def self.to_query_params(rules, params)
         new(rules).to_query_params(params)
+      end
+
+      private
+
+      def structure(list, rules, params)
+        params.each do |name, value|
+          list.add(name.to_s, value.to_s)
+        end
       end
 
     end
