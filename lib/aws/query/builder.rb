@@ -15,6 +15,8 @@ module Aws
   module Query
     class Builder
 
+      include Seahorse::Model::Shapes
+
       # @param [Seahorse::Model::Shapes::Shape] rules
       def initialize(rules)
         @rules = rules
@@ -24,7 +26,7 @@ module Aws
       # @return [ParamList]
       def to_query_params(params)
         list = ParamList.new
-        structure(list, @rules, params)
+        structure(list, @rules, nil, params)
         list
       end
 
@@ -37,9 +39,19 @@ module Aws
 
       private
 
-      def structure(list, rules, params)
-        params.each do |name, value|
-          list.add(name.to_s, value.to_s)
+      def structure(list, shape, prefix, values)
+        values.each do |name, value|
+          member_shape = shape.members[name]
+          param_name = member_shape.serialized_name
+          param_name = "#{prefix}.#{param_name}" if prefix
+          member(list, member_shape, param_name, value)
+        end
+      end
+
+      def member(list, shape, prefix, value)
+        case shape
+        when StructureShape then structure(list, shape, prefix, value)
+        else list.add(prefix, value.to_s)
         end
       end
 

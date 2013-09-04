@@ -35,6 +35,11 @@ module Aws
         @params.delete(param_name)
       end
 
+      # @return [Boolean]
+      def empty?
+        @params.empty?
+      end
+
       # @return [Array<Param>] Returns an array of sorted {Param} objects.
       def to_a
         @params.values.sort

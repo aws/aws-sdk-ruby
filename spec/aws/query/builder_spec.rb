@@ -35,6 +35,15 @@ module Aws
 
         describe 'structures' do
 
+          it 'returns an empty list when there are no members' do
+            expect(list).to be_empty
+          end
+
+          it 'returns an empty list when there are no params' do
+            rules['members'] = { 'name' => { 'type' => 'string' } }
+            expect(list({})).to be_empty
+          end
+
           it 'serializes params by name' do
             rules['members'] = {
               'name' => { 'type' => 'string' },
@@ -42,6 +51,20 @@ module Aws
             }
             expect(list(name: 'John', age: 40).to_s).to eq(<<-QS.strip)
               age=40&name=John
+            QS
+          end
+
+          it 'serializes nested params' do
+            rules['members'] = {
+              'name' => { 'type' => 'string' },
+              'config' => {
+                'type' => 'structure',
+                'members' => { 'enabled' => { 'type' => 'boolean' } }
+              }
+            }
+            params = { name: 'John', config: { enabled: true } }
+            expect(list(params).to_s).to eq(<<-QS.strip)
+              config.enabled=true&name=John
             QS
           end
 
