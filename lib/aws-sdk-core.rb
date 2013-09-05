@@ -31,6 +31,7 @@ module Aws
     autoload :EnvironmentCredentials, 'aws/plugins/environment_credentials'
     autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
     autoload :JsonSerializer, 'aws/plugins/json_serializer'
+    autoload :QuerySerializer, 'aws/plugins/query_serializer'
     autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
     autoload :RestProtocol, 'aws/plugins/rest_protocol'
     autoload :Signer, 'aws/plugins/signer'
@@ -41,6 +42,7 @@ module Aws
   # @api private
   module Query
     autoload :Builder, 'aws/query/builder'
+    autoload :Handler, 'aws/query/handler'
     autoload :Param, 'aws/query/param'
     autoload :ParamList, 'aws/query/param_list'
   end
