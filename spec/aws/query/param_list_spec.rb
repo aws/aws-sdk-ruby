@@ -19,35 +19,35 @@ module Aws
 
       let(:list) { ParamList.new }
 
-      describe '#add' do
+      describe '#set' do
 
         it 'returns a param' do
-          expect(list.add('name', 'value')).to be_kind_of(Param)
+          expect(list.set('name', 'value')).to be_kind_of(Param)
         end
 
-        it 'adds a param with name and value' do
-          param = list.add('name', 'value')
+        it 'sets a param with name and value' do
+          param = list.set('name', 'value')
           expect(param.name).to eq('name')
           expect(param.value).to eq('value')
         end
 
-        it 'can add a param without a value' do
-          param = list.add('name')
+        it 'can set a param without a value' do
+          param = list.set('name')
           expect(param.name).to eq('name')
           expect(param.value).to be(nil)
         end
 
       end
 
-      describe '#remove' do
+      describe '#delete' do
 
         it 'removes a returns a param' do
-          param = list.add('name', 'value')
-          expect(list.remove('name')).to be(param)
+          param = list.set('name', 'value')
+          expect(list.delete('name')).to be(param)
         end
 
-        it 'returns nil if the param was not added' do
-          expect(list.remove('name')).to be(nil)
+        it 'returns nil if the param was not seted' do
+          expect(list.delete('name')).to be(nil)
         end
 
       end
@@ -55,8 +55,8 @@ module Aws
       describe '#to_a' do
 
         it 'returns an array of sorted Param objects' do
-          p1 = list.add('name2')
-          p2 = list.add('name1', 'value')
+          p1 = list.set('name2')
+          p2 = list.set('name1', 'value')
           expect(list.to_a).to eq([p2, p1])
         end
 
@@ -65,24 +65,24 @@ module Aws
       describe '#to_s' do
 
         it 'returns the params as a string' do
-          list.add('name', 'value')
+          list.set('name', 'value')
           expect(list.to_s).to eq('name=value')
         end
 
         it 'joins multiple params with an ampersand' do
-          list.add('name1', 'value')
-          list.add('name2', 'value')
+          list.set('name1', 'value')
+          list.set('name2', 'value')
           expect(list.to_s).to eq('name1=value&name2=value')
         end
 
         it 'sorts params' do
-          list.add('name2', 'value')
-          list.add('name1', 'value')
+          list.set('name2', 'value')
+          list.set('name1', 'value')
           expect(list.to_s).to eq('name1=value&name2=value')
         end
 
         it 'escapes names and values' do
-          list.add('param name', 'val=u!')
+          list.set('param name', 'val=u!')
           expect(list.to_s).to eq('param%20name=val%3Du%21')
         end
 
