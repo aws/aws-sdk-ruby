@@ -55,7 +55,7 @@ emr = EMR.new
 cloudfront = CloudFront.new
 s3 = S3.new
 opsworks = OpsWorks.new
-ec2 = EC2.new(http_wire_trace: true, endpoint: 'ec2.us-east-1.amazonaws.com')
+ec2 = EC2.new
 pp ec2.describe_instances.data
 
 #resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
