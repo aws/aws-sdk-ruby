@@ -136,7 +136,7 @@ module Aws
       plugins << 'Aws::Plugins::RegionalEndpoint'
       plugins << 'Aws::Plugins::EnvironmentCredentials'
       plugins << 'Aws::Plugins::ContentLength'
-      plugins << 'Aws::Plugins::RestProtocol' #if type =~ /rest/
+      plugins << 'Aws::Plugins::RestProtocol'
       plugins <<
         case type
         when 'query' then 'Aws::Plugins::QuerySerializer'
