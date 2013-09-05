@@ -28,6 +28,10 @@ group :test do
   gem 'simplecov', require: false
 end
 
+group :tasks do
+  gem 'json'
+end
+
 group :docs do
   gem 'yard'
   gem 'rdiscount'

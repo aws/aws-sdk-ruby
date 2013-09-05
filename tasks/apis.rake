@@ -15,16 +15,17 @@ desc "Translates the API souce files into Seahorse APIs"
 task :apis do
 
   require 'fileutils'
-  require 'json'
+  require 'multi_json'
   require_relative '../lib/aws-sdk-core'
 
+    puts MultiJson.engine
   FileUtils.mkdir_p('apis')
   Dir.glob('apis-src/*.json').each do |path|
     next if path.match(/paginators/)
     puts "translating #{path.split('/')[1]}"
-    api = Aws::ApiTranslator.translate(JSON.load(File.read(path)))
+    api = Aws::ApiTranslator.translate(MultiJson.load(File.read(path), max_nesting: nil))
     File.open(path.sub('apis-src', 'apis'), 'w') do |file|
-      file.write(JSON.pretty_generate(api.to_hash, indent: '  '))
+      file.write(MultiJson.dump(api.to_hash, pretty: true))
     end
   end
 
