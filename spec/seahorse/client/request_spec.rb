@@ -78,7 +78,7 @@ module Seahorse
       describe '#send_request with a block' do
 
         let(:handler) do
-          -> (context) do
+          Proc.new do
             context.http_response.body.write('part1')
             context.http_response.body.write('part2')
             context.http_response.body.write('part3')

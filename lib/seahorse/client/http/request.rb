@@ -46,6 +46,17 @@ module Seahorse
         # @return [IO]
         attr_reader :body
 
+        # @return [String]
+        def pathname
+          path.split('?')[0]
+        end
+
+        # @return [String, nil]
+        def querystring
+          path.split('?')[1]
+        end
+
+        # @param [#read, #size, #rewind] io
         def body=(io)
           @body = case io
             when nil then PlainStringIO.new('')
@@ -53,6 +64,7 @@ module Seahorse
             else io
           end
         end
+
       end
     end
   end

@@ -61,6 +61,34 @@ module Seahorse
 
         end
 
+        describe '#pathname' do
+
+          it 'returns the path up to but not including the querystring' do
+            req = request(path: '/path?query')
+            expect(req.pathname).to eq('/path')
+          end
+
+          it 'returns the full path when a querystring is not present' do
+            req = request(path: '/path')
+            expect(req.pathname).to eq('/path')
+          end
+
+        end
+
+        describe '#querystring' do
+
+          it 'returns the querystring portion of the path' do
+            req = request(path: '/path?query')
+            expect(req.querystring).to eq('query')
+          end
+
+          it 'returns nil when not present' do
+            req = request(path: '/path')
+            expect(req.querystring).to be(nil)
+          end
+
+        end
+
         describe '#headers' do
 
           it 'defaults to a Http::Headers' do
