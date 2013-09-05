@@ -27,7 +27,7 @@ module Aws
           klass.const_get(const_name)
         else
           file = api_config_file(klass, version)
-          json = MultiJson.load(File.read(file))
+          json = MultiJson.load(File.read(file), max_nesting: false)
           new_klass = klass.define(api: json)
           new_klass.remove_plugin(VersionedApiLoader)
           klass.const_set(const_name, new_klass)
