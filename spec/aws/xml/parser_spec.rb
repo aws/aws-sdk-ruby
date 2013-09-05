@@ -141,17 +141,24 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'list',
-              'members' => { 'type' => 'string' }
+              'members' => {
+                'type' => 'structure',
+                'members' => {
+                  'enabled' => { 'type' => 'boolean' }
+                }
+              }
             }
           }
           xml = <<-XML
             <xml>
               <items>
-                <member>abc</member>
+                <member>
+                  <enabled>true</enabled>
+                </member>
               </items>
             </xml>
           XML
-          expect(parse(xml)[:items]).to eq(['abc'])
+          expect(parse(xml)[:items]).to eq([{ enabled: true }])
         end
 
         it 'observes the list member serialization name when present' do

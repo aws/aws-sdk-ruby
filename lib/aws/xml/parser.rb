@@ -63,7 +63,8 @@ module Aws
         unless flat?(shape)
           values = values[member_shape.serialized_name || 'member']
         end
-        Array(values).map { |value| member(member_shape, value) }
+        values = [values] unless values.is_a?(Array)
+        values.map { |value| member(member_shape, value) }
       end
 
       def map(shape, entries)
