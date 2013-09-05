@@ -95,7 +95,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "If the CallerReference is a value you already sent in a previous request to create an identity but the content of the CloudFrontOriginAccessIdentityConfig is different from the original request, CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists error.",
           "members": {
             "message": {
               "type": "string",
@@ -105,7 +104,6 @@
         },
         {
           "type": "structure",
-          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
           "members": {
             "message": {
               "type": "string",
@@ -115,7 +113,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Processing your request would cause you to exceed the maximum number of origin access identities allowed.",
           "members": {
             "message": {
               "type": "string",
@@ -125,7 +122,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The argument is invalid.",
           "members": {
             "message": {
               "type": "string",
@@ -135,7 +131,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The value of Quantity and the size of Items do not match.",
           "members": {
             "message": {
               "type": "string",
@@ -786,7 +781,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The caller reference you attempted to create the distribution with is associated with another distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -796,7 +790,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket.",
           "members": {
             "message": {
               "type": "string",
@@ -806,7 +799,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The origin access identity is not valid or doesn't exist.",
           "members": {
             "message": {
               "type": "string",
@@ -816,7 +808,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -826,7 +817,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Your request contains more trusted signers than are allowed per distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -836,7 +826,6 @@
         },
         {
           "type": "structure",
-          "documentation": "One or more of your trusted signers do not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -846,7 +835,6 @@
         },
         {
           "type": "structure",
-          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
           "members": {
             "message": {
               "type": "string",
@@ -856,7 +844,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Your request contains more CNAMEs than are allowed per distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -866,7 +853,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Processing your request would cause you to exceed the maximum number of distributions allowed.",
           "members": {
             "message": {
               "type": "string",
@@ -876,7 +862,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The default root object file name is too big or contains an invalid character.",
           "members": {
             "message": {
               "type": "string",
@@ -886,7 +871,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The argument is invalid.",
           "members": {
             "message": {
               "type": "string",
@@ -896,7 +880,6 @@
         },
         {
           "type": "structure",
-          "documentation": "This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the RequiredProtocols element from your distribution configuration.",
           "members": {
             "message": {
               "type": "string",
@@ -906,7 +889,6 @@
         },
         {
           "type": "structure",
-          "documentation": "No origin exists with the specified Origin Id.",
           "members": {
             "message": {
               "type": "string",
@@ -916,7 +898,6 @@
         },
         {
           "type": "structure",
-          "documentation": "You cannot create anymore origins for the distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -926,7 +907,6 @@
         },
         {
           "type": "structure",
-          "documentation": "You cannot create anymore cache behaviors for the distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -936,7 +916,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The value of Quantity and the size of Items do not match.",
           "members": {
             "message": {
               "type": "string",
@@ -1058,37 +1037,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "Access denied.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "The argument is invalid.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "The specified distribution does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -1107,7 +1055,6 @@
         },
         {
           "type": "structure",
-          "documentation": "You have exceeded the maximum number of allowable InProgress invalidation batch requests, or invalidation objects.",
           "members": {
             "message": {
               "type": "string",
@@ -1117,7 +1064,33 @@
         },
         {
           "type": "structure",
-          "documentation": "The value of Quantity and the size of Items do not match.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
           "members": {
             "message": {
               "type": "string",
@@ -1442,57 +1415,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "The origin access identity is not valid or doesn't exist.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "Access denied.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "Your request contains more trusted signers than are allowed per distribution.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "One or more of your trusted signers do not exist.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
           "members": {
             "message": {
               "type": "string",
@@ -1511,7 +1433,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Processing your request would cause you to exceed the maximum number of streaming distributions allowed.",
           "members": {
             "message": {
               "type": "string",
@@ -1521,7 +1442,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The argument is invalid.",
           "members": {
             "message": {
               "type": "string",
@@ -1531,7 +1451,51 @@
         },
         {
           "type": "structure",
-          "documentation": "The value of Quantity and the size of Items do not match.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
           "members": {
             "message": {
               "type": "string",
@@ -1563,7 +1527,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -1573,7 +1536,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The If-Match version is missing or not valid for the distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -1583,7 +1545,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The specified origin access identity does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -1593,7 +1554,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
           "members": {
             "message": {
               "type": "string",
@@ -1634,7 +1594,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -1653,7 +1612,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The If-Match version is missing or not valid for the distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -1663,7 +1621,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The specified distribution does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -1673,7 +1630,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
           "members": {
             "message": {
               "type": "string",
@@ -1705,7 +1661,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -1724,7 +1679,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The If-Match version is missing or not valid for the distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -1734,7 +1688,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The specified streaming distribution does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -1744,7 +1697,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
           "members": {
             "message": {
               "type": "string",
@@ -1812,7 +1764,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The specified origin access identity does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -1822,7 +1773,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -1876,7 +1826,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The specified origin access identity does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -1886,7 +1835,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -2242,7 +2190,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The specified distribution does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -2252,7 +2199,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -2536,7 +2482,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The specified distribution does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -2546,7 +2491,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -2634,7 +2578,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The specified invalidation does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -2644,7 +2587,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The specified distribution does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -2654,7 +2596,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -2852,7 +2793,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The specified streaming distribution does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -2862,7 +2802,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -2992,7 +2931,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The specified streaming distribution does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -3002,7 +2940,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -3090,7 +3027,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The argument is invalid.",
           "members": {
             "message": {
               "type": "string",
@@ -3394,7 +3330,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The argument is invalid.",
           "members": {
             "message": {
               "type": "string",
@@ -3484,7 +3419,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The argument is invalid.",
           "members": {
             "message": {
               "type": "string",
@@ -3494,7 +3428,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The specified distribution does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -3648,7 +3581,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "The argument is invalid.",
           "members": {
             "message": {
               "type": "string",
@@ -3741,7 +3673,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -3751,7 +3682,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Origin and CallerReference cannot be updated.",
           "members": {
             "message": {
               "type": "string",
@@ -3761,7 +3691,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The If-Match version is missing or not valid for the distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -3771,7 +3700,6 @@
         },
         {
           "type": "structure",
-          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
           "members": {
             "message": {
               "type": "string",
@@ -3781,7 +3709,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The specified origin access identity does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -3791,7 +3718,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
           "members": {
             "message": {
               "type": "string",
@@ -3801,7 +3727,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The argument is invalid.",
           "members": {
             "message": {
               "type": "string",
@@ -3811,7 +3736,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The value of Quantity and the size of Items do not match.",
           "members": {
             "message": {
               "type": "string",
@@ -4458,7 +4382,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -4477,7 +4400,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Origin and CallerReference cannot be updated.",
           "members": {
             "message": {
               "type": "string",
@@ -4487,7 +4409,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The If-Match version is missing or not valid for the distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -4497,7 +4418,6 @@
         },
         {
           "type": "structure",
-          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
           "members": {
             "message": {
               "type": "string",
@@ -4507,7 +4427,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The specified distribution does not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -4517,7 +4436,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
           "members": {
             "message": {
               "type": "string",
@@ -4527,7 +4445,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Your request contains more CNAMEs than are allowed per distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -4537,7 +4454,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The default root object file name is too big or contains an invalid character.",
           "members": {
             "message": {
               "type": "string",
@@ -4547,7 +4463,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The argument is invalid.",
           "members": {
             "message": {
               "type": "string",
@@ -4557,7 +4472,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The origin access identity is not valid or doesn't exist.",
           "members": {
             "message": {
               "type": "string",
@@ -4567,7 +4481,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Your request contains more trusted signers than are allowed per distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -4577,7 +4490,6 @@
         },
         {
           "type": "structure",
-          "documentation": "One or more of your trusted signers do not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -4587,7 +4499,6 @@
         },
         {
           "type": "structure",
-          "documentation": "This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the RequiredProtocols element from your distribution configuration.",
           "members": {
             "message": {
               "type": "string",
@@ -4597,7 +4508,6 @@
         },
         {
           "type": "structure",
-          "documentation": "No origin exists with the specified Origin Id.",
           "members": {
             "message": {
               "type": "string",
@@ -4607,7 +4517,6 @@
         },
         {
           "type": "structure",
-          "documentation": "You cannot create anymore origins for the distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -4617,7 +4526,6 @@
         },
         {
           "type": "structure",
-          "documentation": "You cannot create anymore cache behaviors for the distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -4627,7 +4535,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The value of Quantity and the size of Items do not match.",
           "members": {
             "message": {
               "type": "string",
@@ -4939,7 +4846,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "Access denied.",
           "members": {
             "message": {
               "type": "string",
@@ -4958,47 +4864,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Origin and CallerReference cannot be updated.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "The If-Match version is missing or not valid for the distribution.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "This operation requires a body. Ensure that the body is present and the Content-Type header is set.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "The specified streaming distribution does not exist.",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "The precondition given in one or more of the request-header fields evaluated to false.",
           "members": {
             "message": {
               "type": "string",
@@ -5017,7 +4882,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The argument is invalid.",
           "members": {
             "message": {
               "type": "string",
@@ -5027,7 +4891,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The origin access identity is not valid or doesn't exist.",
           "members": {
             "message": {
               "type": "string",
@@ -5037,7 +4900,6 @@
         },
         {
           "type": "structure",
-          "documentation": "Your request contains more trusted signers than are allowed per distribution.",
           "members": {
             "message": {
               "type": "string",
@@ -5047,7 +4909,6 @@
         },
         {
           "type": "structure",
-          "documentation": "One or more of your trusted signers do not exist.",
           "members": {
             "message": {
               "type": "string",
@@ -5057,7 +4918,42 @@
         },
         {
           "type": "structure",
-          "documentation": "The value of Quantity and the size of Items do not match.",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
+              "serialized_name": "Message"
+            }
+          }
+        },
+        {
+          "type": "structure",
           "members": {
             "message": {
               "type": "string",

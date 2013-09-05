@@ -17,32 +17,27 @@
     "Aws::Plugins::QuerySerializer",
     "Aws::Plugins::Signer"
   ],
-  "documentation": "<p>Amazon Simple Queue Service (Amazon SQS) offers a reliable, highly scalable, hosted queue for storing messages as they travel between computers. By using Amazon SQS, developers can simply move data between distributed components of their applications that perform different tasks, without losing messages or requiring each component to be always available. Amazon SQS makes it easy to build an automated workflow, working in close conjunction with the Amazon Elastic Compute Cloud (Amazon EC2) and the other AWS infrastructure web services.</p> <p>Amazon SQS works by exposing Amazon's web-scale messaging infrastructure as a web service. Any computer on the Internet can add or read messages without any installed software or special firewall configurations. Components of applications using Amazon SQS can run independently, and do not need to be on the same network, developed with the same technologies, or running at the same time.</p> <p>Visit <a href=\"http://aws.amazon.com/sqs/\">http://aws.amazon.com/sqs/</a> for more information.</p>",
   "operations": {
     "add_permission": {
       "name": "AddPermission",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>The AddPermission action adds a permission to a queue for a specific <a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/Glossary.html\">principal</a>. This allows for sharing access to the queue.</p> <p>When you create a queue, you have full control access rights for the queue. Only you (as owner of the queue) can grant or deny permissions to the queue. For more information about these permissions, see <a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/?acp-overview.html\">Shared Queues</a> in the Amazon SQS Developer Guide.</p> <p><code>AddPermission</code> writes an SQS-generated policy. If you want to write your own policy, use SetQueueAttributes to upload your policy. For more information about writing your own policy, see <a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/?AccessPolicyLanguage.html\">Appendix: The Access Policy Language</a> in the Amazon SQS Developer Guide.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "label": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The unique identification of the permission you're setting (e.g., <code>AliceSendMessage</code>). Constraints: Maximum 80 characters; alphanumeric characters, hyphens (-), and underscores (_) are allowed.</p>",
             "serialized_name": "Label"
           },
           "aws_account_ids": {
             "type": "flat_list",
             "required": true,
-            "documentation": "<p>The AWS account number of the <a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/Glossary.html\">principal</a> who will be given permission. The principal must have an AWS account, but does not need to be signed up for Amazon SQS.</p>",
             "serialized_name": "AWSAccountIds",
             "members": {
               "type": "string",
@@ -52,7 +47,6 @@
           "actions": {
             "type": "flat_list",
             "required": true,
-            "documentation": "<p>The action the client wants to allow for the specified principal.</p>",
             "serialized_name": "Actions",
             "members": {
               "type": "string",
@@ -64,7 +58,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>The operation that you requested would violate a limit. For example, ReceiveMessage returns this error if the maximum number of messages inflight has already been reached. AddPermission returns this error if the maximum number of permissions for the queue has already been reached. </p>",
           "members": {
           }
         }
@@ -74,26 +67,22 @@
       "name": "ChangeMessageVisibility",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>The <code>ChangeMessageVisibility</code> action changes the visibility timeout of a specified message in a queue to a new value. The maximum allowed timeout value you can set the value to is 12 hours. This means you can't extend the timeout of a message in an existing queue to more than a total visibility timeout of 12 hours. (For more information visibility timeout, see <a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html\">Visibility Timeout</a> in the Amazon SQS Developer Guide.)</p> <p>For example, let's say you have a message and its default message visibility timeout is 30 minutes. You could call <code>ChangeMessageVisiblity</code> with a value of two hours and the effective timeout would be two hours and 30 minutes. When that time comes near you could again extend the time out by calling ChangeMessageVisiblity, but this time the maximum allowed timeout would be 9 hours and 30 minutes.</p> <important>If you attempt to set the <code>VisibilityTimeout</code> to an amount more than the maximum time left, Amazon SQS returns an error. It will not automatically recalculate and increase the timeout to the maximum time remaining.</important> <important>Unlike with a queue, when you change the visibility timeout for a specific message, that timeout value is applied immediately but is not saved in memory for that message. If you don't delete a message after it is received, the visibility timeout for the message the next time it is received reverts to the original timeout value, not the value you set with the ChangeMessageVisibility action.</important>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "receipt_handle": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The receipt handle associated with the message whose visibility timeout should be changed.</p>",
             "serialized_name": "ReceiptHandle"
           },
           "visibility_timeout": {
             "type": "integer",
             "required": true,
-            "documentation": "<p>The new value (in seconds) for the message's visibility timeout.</p>",
             "serialized_name": "VisibilityTimeout"
           }
         }
@@ -101,13 +90,11 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>The message referred to is not in flight.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The receipt handle provided is not valid.</p>",
           "members": {
           }
         }
@@ -117,41 +104,34 @@
       "name": "ChangeMessageVisibilityBatch",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>This is a batch version of ChangeMessageVisibility. It takes multiple receipt handles and performs the operation on each of the them. The result of the operation on each message is reported individually in the response.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "entries": {
             "type": "flat_list",
             "required": true,
-            "documentation": "<p>A list of receipt handles of the messages for which the visibility timeout must be changed.</p>",
             "serialized_name": "Entries",
             "members": {
               "type": "structure",
-              "documentation": "<p>Encloses a receipt handle and an entry id for each message in ChangeMessageVisibilityBatch.</p>",
               "serialized_name": "ChangeMessageVisibilityBatchRequestEntry",
               "members": {
                 "id": {
                   "type": "string",
                   "required": true,
-                  "documentation": "<p>An identifier for this particular receipt handle. This is used to communicate the result. Note that the <code>Id</code>s of a batch request need to be unique within the request.</p>",
                   "serialized_name": "Id"
                 },
                 "receipt_handle": {
                   "type": "string",
                   "required": true,
-                  "documentation": "<p>A receipt handle.</p>",
                   "serialized_name": "ReceiptHandle"
                 },
                 "visibility_timeout": {
                   "type": "integer",
-                  "documentation": "<p>The new value (in seconds) for the message's visibility timeout.</p>",
                   "serialized_name": "VisibilityTimeout"
                 }
               }
@@ -164,16 +144,13 @@
         "members": {
           "successful": {
             "type": "flat_list",
-            "documentation": "<p>A list of ChangeMessageVisibilityBatchResultEntrys.</p>",
             "serialized_name": "Successful",
             "members": {
               "type": "structure",
-              "documentation": "<p>Encloses the id of an entry in ChangeMessageVisibilityBatch.</p>",
               "serialized_name": "ChangeMessageVisibilityBatchResultEntry",
               "members": {
                 "id": {
                   "type": "string",
-                  "documentation": "<p>Represents a message whose visibility timeout has been changed successfully.</p>",
                   "serialized_name": "Id"
                 }
               }
@@ -181,31 +158,25 @@
           },
           "failed": {
             "type": "flat_list",
-            "documentation": "<p>A list of BatchResultErrorEntrys.</p>",
             "serialized_name": "Failed",
             "members": {
               "type": "structure",
-              "documentation": "<p>This is used in the responses of batch API to give a detailed description of the result of an operation on each entry in the request.</p>",
               "serialized_name": "BatchResultErrorEntry",
               "members": {
                 "id": {
                   "type": "string",
-                  "documentation": "<p>The id of an entry in a batch request.</p>",
                   "serialized_name": "Id"
                 },
                 "sender_fault": {
                   "type": "boolean",
-                  "documentation": "<p>Whether the error happened due to the sender's fault.</p>",
                   "serialized_name": "SenderFault"
                 },
                 "code": {
                   "type": "string",
-                  "documentation": "<p>An error code representing why the operation failed on this entry.</p>",
                   "serialized_name": "Code"
                 },
                 "message": {
                   "type": "string",
-                  "documentation": "<p>A message explaining why the operation failed on this entry.</p>",
                   "serialized_name": "Message"
                 }
               }
@@ -216,25 +187,21 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>Batch request contains more number of entries than permissible.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Batch request does not contain an entry.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Two or more batch entries have the same <code>Id</code> in the request.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The <code>Id</code> of a batch entry in a batch request does not abide by the specification.</p>",
           "members": {
           }
         }
@@ -244,23 +211,19 @@
       "name": "CreateQueue",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>The <code>CreateQueue</code> action creates a new queue, or returns the URL of an existing one. When you request <code>CreateQueue</code>, you provide a name for the queue. To successfully create a new queue, you must provide a name that is unique within the scope of your own queues.</p> <p>You may pass one or more attributes in the request. If you do not provide a value for any attribute, the queue will have the default value for that attribute. Permitted attributes are the same that can be set using SetQueueAttributes.</p> <p>If you provide the name of an existing queue, a new queue isn't created. If the values of attributes provided with the request match up with those on the existing queue, the queue URL is returned. Otherwise, a <code>QueueNameExists</code> error is returned.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The name for the queue to be created.</p>",
             "serialized_name": "QueueName"
           },
           "attributes": {
             "type": "flat_map",
-            "documentation": "<p>A map of attributes with their corresponding values.</p>",
             "serialized_name": "Attribute",
             "keys": {
               "type": "string",
-              "documentation": "<p>The name of a queue attribute.</p>",
               "serialized_name": "Name",
               "enum": [
                 "Policy",
@@ -279,7 +242,6 @@
             },
             "members": {
               "type": "string",
-              "documentation": "<p>The value of a queue attribute.</p>",
               "serialized_name": "Value"
             }
           }
@@ -290,7 +252,6 @@
         "members": {
           "queue_url": {
             "type": "string",
-            "documentation": "<p>The URL for the created SQS queue.</p>",
             "serialized_name": "QueueUrl"
           }
         }
@@ -298,13 +259,11 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>You must wait 60 seconds after deleting a queue before you can create another with the same name.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>A queue already exists with this name. SQS returns this error only if the request includes attributes whose values differ from those of the existing queue.</p>",
           "members": {
           }
         }
@@ -314,20 +273,17 @@
       "name": "DeleteMessage",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>The <code>DeleteMessage</code> action unconditionally removes the specified message from the specified queue. Even if the message is locked by another reader due to the visibility timeout setting, it is still deleted from the queue.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "receipt_handle": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The receipt handle associated with the message to delete.</p>",
             "serialized_name": "ReceiptHandle"
           }
         }
@@ -335,13 +291,11 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>The receipt handle is not valid for the current version.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The receipt handle provided is not valid.</p>",
           "members": {
           }
         }
@@ -351,36 +305,30 @@
       "name": "DeleteMessageBatch",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>This is a batch version of DeleteMessage. It takes multiple receipt handles and deletes each one of the messages. The result of the delete operation on each message is reported individually in the response.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "entries": {
             "type": "flat_list",
             "required": true,
-            "documentation": "<p>A list of receipt handles for the messages to be deleted.</p>",
             "serialized_name": "Entries",
             "members": {
               "type": "structure",
-              "documentation": "<p>Encloses a receipt handle and an identifier for it.</p>",
               "serialized_name": "DeleteMessageBatchRequestEntry",
               "members": {
                 "id": {
                   "type": "string",
                   "required": true,
-                  "documentation": "<p>An identifier for this particular receipt handle. This is used to communicate the result. Note that the <code>Id</code>s of a batch request need to be unique within the request.</p>",
                   "serialized_name": "Id"
                 },
                 "receipt_handle": {
                   "type": "string",
                   "required": true,
-                  "documentation": "<p>A receipt handle.</p>",
                   "serialized_name": "ReceiptHandle"
                 }
               }
@@ -393,16 +341,13 @@
         "members": {
           "successful": {
             "type": "flat_list",
-            "documentation": "<p>A list of DeleteMessageBatchResultEntrys.</p>",
             "serialized_name": "Successful",
             "members": {
               "type": "structure",
-              "documentation": "<p>Encloses the id an entry in DeleteMessageBatch.</p>",
               "serialized_name": "DeleteMessageBatchResultEntry",
               "members": {
                 "id": {
                   "type": "string",
-                  "documentation": "<p>Represents a successfully deleted message.</p>",
                   "serialized_name": "Id"
                 }
               }
@@ -410,31 +355,25 @@
           },
           "failed": {
             "type": "flat_list",
-            "documentation": "<p>A list of BatchResultErrorEntrys.</p>",
             "serialized_name": "Failed",
             "members": {
               "type": "structure",
-              "documentation": "<p>This is used in the responses of batch API to give a detailed description of the result of an operation on each entry in the request.</p>",
               "serialized_name": "BatchResultErrorEntry",
               "members": {
                 "id": {
                   "type": "string",
-                  "documentation": "<p>The id of an entry in a batch request.</p>",
                   "serialized_name": "Id"
                 },
                 "sender_fault": {
                   "type": "boolean",
-                  "documentation": "<p>Whether the error happened due to the sender's fault.</p>",
                   "serialized_name": "SenderFault"
                 },
                 "code": {
                   "type": "string",
-                  "documentation": "<p>An error code representing why the operation failed on this entry.</p>",
                   "serialized_name": "Code"
                 },
                 "message": {
                   "type": "string",
-                  "documentation": "<p>A message explaining why the operation failed on this entry.</p>",
                   "serialized_name": "Message"
                 }
               }
@@ -445,25 +384,21 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>Batch request contains more number of entries than permissible.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Batch request does not contain an entry.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Two or more batch entries have the same <code>Id</code> in the request.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The <code>Id</code> of a batch entry in a batch request does not abide by the specification.</p>",
           "members": {
           }
         }
@@ -473,14 +408,12 @@
       "name": "DeleteQueue",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>This action unconditionally deletes the queue specified by the queue URL. Use this operation WITH CARE! The queue is deleted even if it is NOT empty.</p> <p>Once a queue has been deleted, the queue name is unavailable for use with new queues for 60 seconds.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           }
         }
@@ -490,19 +423,16 @@
       "name": "GetQueueAttributes",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Gets attributes for the specified queue. The following attributes are supported: <ul> <li> <code>All</code> - returns all values.</li> <li> <code>ApproximateNumberOfMessages</code> - returns the approximate number of visible messages in a queue. For more information, see Resources Required to Process Messages in the Amazon SQS Developer Guide.</li> <li> <code>ApproximateNumberOfMessagesNotVisible</code> - returns the approximate number of messages that are not timed-out and not deleted. For more information, see Resources Required to Process Messages in the Amazon SQS Developer Guide.</li> <li> <code>VisibilityTimeout</code> - returns the visibility timeout for the queue. For more information about visibility timeout, see Visibility Timeout in the Amazon SQS Developer Guide.</li> <li> <code>CreatedTimestamp</code> - returns the time when the queue was created (epoch time in seconds).</li> <li> <code>LastModifiedTimestamp</code> - returns the time when the queue was last changed (epoch time in seconds).</li> <li> <code>Policy</code> - returns the queue's policy.</li> <li> <code>MaximumMessageSize</code> - returns the limit of how many bytes a message can contain before Amazon SQS rejects it.</li> <li> <code>MessageRetentionPeriod</code> - returns the number of seconds Amazon SQS retains a message.</li> <li> <code>QueueArn</code> - returns the queue's Amazon resource name (ARN).</li> <li> <code>ApproximateNumberOfMessagesDelayed</code> - returns the approximate number of messages that are pending to be added to the queue.</li> <li> <code>DelaySeconds</code> - returns the default delay on the queue in seconds.</li> <li> <code>ReceiveMessageWaitTimeSeconds</code> - returns the time for which a ReceiveMessage call will wait for a message to arrive.</li> </ul> </p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "attribute_names": {
             "type": "flat_list",
-            "documentation": "<p>A list of attributes to retrieve information for. </p>",
             "serialized_name": "AttributeNames",
             "members": {
               "type": "string",
@@ -530,11 +460,9 @@
         "members": {
           "attributes": {
             "type": "flat_map",
-            "documentation": "<p>A map of attributes to the respective values.</p>",
             "serialized_name": "Attribute",
             "keys": {
               "type": "string",
-              "documentation": "<p>The name of a queue attribute.</p>",
               "serialized_name": "Name",
               "enum": [
                 "Policy",
@@ -553,7 +481,6 @@
             },
             "members": {
               "type": "string",
-              "documentation": "<p>The value of a queue attribute.</p>",
               "serialized_name": "Value"
             }
           }
@@ -562,7 +489,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>The attribute referred to does not exist.</p>",
           "members": {
           }
         }
@@ -572,19 +498,16 @@
       "name": "GetQueueUrl",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>The <code>GetQueueUrl</code> action returns the URL of an existing queue.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The name of the queue whose URL must be fetched.</p>",
             "serialized_name": "QueueName"
           },
           "queue_owner_aws_account_id": {
             "type": "string",
-            "documentation": "<p>The AWS account number of the queue's owner.</p>",
             "serialized_name": "QueueOwnerAWSAccountId"
           }
         }
@@ -594,7 +517,6 @@
         "members": {
           "queue_url": {
             "type": "string",
-            "documentation": "<p>The URL for the queue.</p>",
             "serialized_name": "QueueUrl"
           }
         }
@@ -602,7 +524,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>The queue referred to does not exist.</p>",
           "members": {
           }
         }
@@ -612,13 +533,11 @@
       "name": "ListQueues",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Returns a list of your queues.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_name_prefix": {
             "type": "string",
-            "documentation": "<p>A string to use for filtering the list results. Only those queues whose name begins with the specified string are returned.</p>",
             "serialized_name": "QueueNamePrefix"
           }
         }
@@ -628,7 +547,6 @@
         "members": {
           "queue_urls": {
             "type": "flat_list",
-            "documentation": "<p>A list of queue URLs, up to 1000 entries.</p>",
             "serialized_name": "QueueUrls",
             "members": {
               "type": "string",
@@ -642,19 +560,16 @@
       "name": "ReceiveMessage",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Retrieves one or more messages from the specified queue, including the message body and message ID of each message. Messages returned by this action stay in the queue until you delete them. However, once a message is returned to a <code>ReceiveMessage</code> request, it is not returned on subsequent <code>ReceiveMessage</code> requests for the duration of the <code>VisibilityTimeout</code>. If you do not specify a <code>VisibilityTimeout</code> in the request, the overall visibility timeout for the queue is used for the returned messages.</p> <p>If a message is available in the queue, the call will return immediately. Otherwise, it will wait up to <code>WaitTimeSeconds</code> for a message to arrive. If you do not specify <code>WaitTimeSeconds</code> in the request, the queue attribute ReceiveMessageWaitTimeSeconds is used to determine how long to wait.</p> <p>You could ask for additional information about each message through the attributes. Attributes that can be requested are <code>[SenderId, ApproximateFirstReceiveTimestamp, ApproximateReceiveCount, SentTimestamp]</code>.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "attribute_names": {
             "type": "flat_list",
-            "documentation": "<p>A list of attributes that need to be returned along with each message. The set of valid attributes are [SenderId, ApproximateFirstReceiveTimestamp, ApproximateReceiveCount, SentTimestamp]. </p>",
             "serialized_name": "AttributeNames",
             "members": {
               "type": "string",
@@ -677,17 +592,14 @@
           },
           "max_number_of_messages": {
             "type": "integer",
-            "documentation": "<p>The maximum number of messages to return. Amazon SQS never returns more messages than this value but may return fewer.</p> <p>All of the messages are not necessarily returned.</p>",
             "serialized_name": "MaxNumberOfMessages"
           },
           "visibility_timeout": {
             "type": "integer",
-            "documentation": "<p>The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a <code>ReceiveMessage</code> request.</p>",
             "serialized_name": "VisibilityTimeout"
           },
           "wait_time_seconds": {
             "type": "integer",
-            "documentation": "<p>The duration (in seconds) for which the call will wait for a message to arrive in the queue before returning. If a message is available, the call will return sooner than WaitTimeSeconds.</p>",
             "serialized_name": "WaitTimeSeconds"
           }
         }
@@ -697,7 +609,6 @@
         "members": {
           "messages": {
             "type": "flat_list",
-            "documentation": "<p>A list of messages.</p>",
             "serialized_name": "Messages",
             "members": {
               "type": "structure",
@@ -724,7 +635,6 @@
                   "serialized_name": "Attribute",
                   "keys": {
                     "type": "string",
-                    "documentation": "<p>The name of a queue attribute.</p>",
                     "serialized_name": "Name",
                     "enum": [
                       "Policy",
@@ -743,7 +653,6 @@
                   },
                   "members": {
                     "type": "string",
-                    "documentation": "<p>The value of a queue attribute.</p>",
                     "serialized_name": "Value"
                   }
                 }
@@ -755,7 +664,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>The operation that you requested would violate a limit. For example, ReceiveMessage returns this error if the maximum number of messages inflight has already been reached. AddPermission returns this error if the maximum number of permissions for the queue has already been reached. </p>",
           "members": {
           }
         }
@@ -765,20 +673,17 @@
       "name": "RemovePermission",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>The <code>RemovePermission</code> action revokes any permissions in the queue policy that matches the specified <code>Label</code> parameter. Only the owner of the queue can remove permissions.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "label": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The identification of the permission to remove. This is the label added with the AddPermission operation.</p>",
             "serialized_name": "Label"
           }
         }
@@ -788,25 +693,21 @@
       "name": "SendMessage",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>The <code>SendMessage</code> action delivers a message to the specified queue.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "message_body": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The message to send.</p>",
             "serialized_name": "MessageBody"
           },
           "delay_seconds": {
             "type": "integer",
-            "documentation": "<p>The number of seconds the message has to be delayed.</p>",
             "serialized_name": "DelaySeconds"
           }
         }
@@ -816,12 +717,10 @@
         "members": {
           "md5_of_message_body": {
             "type": "string",
-            "documentation": "<p>An MD5 digest of the non-URL-encoded message body string. This can be used to verify that SQS received the message correctly. SQS first URL decodes the message before creating the MD5 digest. For information about MD5, go to <a href=\"http://faqs.org/rfcs/rfc1321.html\">http://faqs.org/rfcs/rfc1321.html</a>.</p>",
             "serialized_name": "MD5OfMessageBody"
           },
           "message_id": {
             "type": "string",
-            "documentation": "<p>The message ID of the message added to the queue.</p>",
             "serialized_name": "MessageId"
           }
         }
@@ -829,7 +728,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>The message contains characters outside the allowed set.</p>",
           "members": {
           }
         }
@@ -839,41 +737,34 @@
       "name": "SendMessageBatch",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>This is a batch version of SendMessage. It takes multiple messages and adds each of them to the queue. The result of each add operation is reported individually in the response.</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "entries": {
             "type": "flat_list",
             "required": true,
-            "documentation": "<p>A list of SendMessageBatchRequestEntrys.</p>",
             "serialized_name": "Entries",
             "members": {
               "type": "structure",
-              "documentation": "<p>Contains the details of a single SQS message along with a <code>Id</code>. </p>",
               "serialized_name": "SendMessageBatchRequestEntry",
               "members": {
                 "id": {
                   "type": "string",
                   "required": true,
-                  "documentation": "<p>An identifier for the message in this batch. This is used to communicate the result. Note that the the <code>Id</code>s of a batch request need to be unique within the request.</p>",
                   "serialized_name": "Id"
                 },
                 "message_body": {
                   "type": "string",
                   "required": true,
-                  "documentation": "<p>Body of the message.</p>",
                   "serialized_name": "MessageBody"
                 },
                 "delay_seconds": {
                   "type": "integer",
-                  "documentation": "<p>The number of seconds for which the message has to be delayed.</p>",
                   "serialized_name": "DelaySeconds"
                 }
               }
@@ -886,26 +777,21 @@
         "members": {
           "successful": {
             "type": "flat_list",
-            "documentation": "<p>A list of SendMessageBatchResultEntrys.</p>",
             "serialized_name": "Successful",
             "members": {
               "type": "structure",
-              "documentation": "<p>Encloses a message ID for successfully enqueued message of a SendMessageBatch.</p>",
               "serialized_name": "SendMessageBatchResultEntry",
               "members": {
                 "id": {
                   "type": "string",
-                  "documentation": "<p>An identifier for the message in this batch.</p>",
                   "serialized_name": "Id"
                 },
                 "message_id": {
                   "type": "string",
-                  "documentation": "<p>An identifier for the message.</p>",
                   "serialized_name": "MessageId"
                 },
                 "md5_of_message_body": {
                   "type": "string",
-                  "documentation": "<p>An MD5 digest of the non-URL-encoded message body string. This can be used to verify that SQS received the message correctly. SQS first URL decodes the message before creating the MD5 digest. For information about MD5, go to <a href=\"http://faqs.org/rfcs/rfc1321.html\">http://faqs.org/rfcs/rfc1321.html</a>.</p>",
                   "serialized_name": "MD5OfMessageBody"
                 }
               }
@@ -913,31 +799,25 @@
           },
           "failed": {
             "type": "flat_list",
-            "documentation": "<p>A list of BatchResultErrorEntrys with the error detail about each message that could not be enqueued.</p>",
             "serialized_name": "Failed",
             "members": {
               "type": "structure",
-              "documentation": "<p>This is used in the responses of batch API to give a detailed description of the result of an operation on each entry in the request.</p>",
               "serialized_name": "BatchResultErrorEntry",
               "members": {
                 "id": {
                   "type": "string",
-                  "documentation": "<p>The id of an entry in a batch request.</p>",
                   "serialized_name": "Id"
                 },
                 "sender_fault": {
                   "type": "boolean",
-                  "documentation": "<p>Whether the error happened due to the sender's fault.</p>",
                   "serialized_name": "SenderFault"
                 },
                 "code": {
                   "type": "string",
-                  "documentation": "<p>An error code representing why the operation failed on this entry.</p>",
                   "serialized_name": "Code"
                 },
                 "message": {
                   "type": "string",
-                  "documentation": "<p>A message explaining why the operation failed on this entry.</p>",
                   "serialized_name": "Message"
                 }
               }
@@ -948,31 +828,26 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>Batch request contains more number of entries than permissible.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Batch request does not contain an entry.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Two or more batch entries have the same <code>Id</code> in the request.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The length of all the messages put together is more than the limit.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The <code>Id</code> of a batch entry in a batch request does not abide by the specification.</p>",
           "members": {
           }
         }
@@ -982,24 +857,20 @@
       "name": "SetQueueAttributes",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Sets the value of one or more queue attributes. Valid attributes that can be set are [VisibilityTimeout, Policy, MaximumMessageSize, MessageRetentionPeriod, ReceiveMessageWaitTimeSeconds].</p>",
       "input": {
         "type": "input",
         "members": {
           "queue_url": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The URL of the SQS queue to take action on.</p>",
             "serialized_name": "QueueUrl"
           },
           "attributes": {
             "type": "flat_map",
             "required": true,
-            "documentation": "<p>A map of attributes to set.</p>",
             "serialized_name": "Attribute",
             "keys": {
               "type": "string",
-              "documentation": "<p>The name of a queue attribute.</p>",
               "serialized_name": "Name",
               "enum": [
                 "Policy",
@@ -1018,7 +889,6 @@
             },
             "members": {
               "type": "string",
-              "documentation": "<p>The value of a queue attribute.</p>",
               "serialized_name": "Value"
             }
           }
@@ -1027,7 +897,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>The attribute referred to does not exist.</p>",
           "members": {
           }
         }

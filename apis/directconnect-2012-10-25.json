@@ -17,47 +17,39 @@
     "Aws::Plugins::JsonSerializer",
     "Aws::Plugins::Signer"
   ],
-  "documentation": "<p>AWS Direct Connect makes it easy to establish a dedicated network connection from your premises to Amazon Web Services (AWS). Using AWS Direct Connect, you can establish private connectivity between AWS and your data center, office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput, and provide a more consistent network experience than Internet-based connections.</p> <p>The AWS Direct Connect API Reference provides descriptions, syntax, and usage examples for each of the actions and data types for AWS Direct Connect. Use the following links to get started using the <i>AWS Direct Connect API Reference</i>:</p> <ul> <li> <a href=\"http://docs.aws.amazon.com/directconnect/latest/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all AWS Direct Connect actions.</li> <li> <a href=\"http://docs.aws.amazon.com/directconnect/latest/APIReference/API_Types.html\">Data Types</a>: An alphabetical list of all AWS Direct Connect data types.</li> <li> <a href=\"http://docs.aws.amazon.com/directconnect/latest/APIReference/CommonParameters.html\">Common Query Parameters</a>: Parameters that all Query actions can use.</li> <li> <a href=\"http://docs.aws.amazon.com/directconnect/latest/APIReference/CommonErrors.html\">Common Errors</a>: Client and server errors that all actions can return.</li> </ul>",
   "operations": {
     "create_connection": {
       "name": "CreateConnection",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Creates a new network connection between the customer network and a specific AWS Direct Connect location.</p> <p>A connection links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. A Direct Connect location provides access to Amazon Web Services in the region it is associated with. You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions.</p>",
       "input": {
         "type": "input",
         "members": {
           "offering_id": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The ID of the offering.</p> <p>Example: us-west-1_EqSV5_1G</p> <p>Default: None</p>",
             "serialized_name": "offeringId"
           },
           "connection_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The name of the connection.</p> <p>Example: \"<i>1G Connection to AWS</i>\"</p> <p>Default: None</p>",
             "serialized_name": "connectionName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "A connection represents the physical network connection between the Direct Connect location and the customer.",
         "members": {
           "connection_id": {
             "type": "string",
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           },
           "connection_name": {
             "type": "string",
-            "documentation": "<p>The name of the connection.</p> <p>Example: \"<i>1G Connection to AWS</i>\"</p> <p>Default: None</p>",
             "serialized_name": "connectionName"
           },
           "connection_state": {
             "type": "string",
-            "documentation": "State of the connection. <ul> <li> <b>Requested</b>: The initial state of connection immediately after creation. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</li> <li> <b>Pending</b>: A connection is pending after the customer receives the LOA and remains pending until the completion of the partner circuit.</li> <li> <b>Available</b>: A connection that is completed and ready for use. A connection must be available before virtual interfaces can be created.</li> <li> <b>Deleted</b>: A connection that has been deleted.</li> </ul>",
             "serialized_name": "connectionState",
             "enum": [
               "requested",
@@ -68,12 +60,10 @@
           },
           "region": {
             "type": "string",
-            "documentation": "<p>The AWS region where the offering is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>",
             "serialized_name": "region"
           },
           "location": {
             "type": "string",
-            "documentation": "<p>Where the AWS Direct Connect offering is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>",
             "serialized_name": "location"
           }
         }
@@ -81,7 +71,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -91,7 +80,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -105,53 +93,43 @@
       "name": "CreatePrivateVirtualInterface",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "Creates a new private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface supports sending traffic to a single Virtual Private Cloud (VPC).",
       "input": {
         "type": "input",
         "members": {
           "connection_id": {
             "type": "string",
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           },
           "new_private_virtual_interface": {
             "type": "structure",
-            "documentation": "<p>Detailed information of the private virtual interface to be created.</p> <p>Default: None</p>",
             "serialized_name": "newPrivateVirtualInterface",
             "members": {
               "virtual_interface_name": {
                 "type": "string",
-                "documentation": "<p>The name of the virtual interface assigned by the customer</p> <p>Example: \"My VPC\"</p>",
                 "serialized_name": "virtualInterfaceName"
               },
               "vlan": {
                 "type": "integer",
-                "documentation": "<p>VLAN ID</p> <p>Example: 101</p>",
                 "serialized_name": "vlan"
               },
               "asn": {
                 "type": "integer",
-                "documentation": "<p>Autonomous system (AS) number for Border Gateway Protocol (BGP) configuration</p> <p>Example: 65000</p>",
                 "serialized_name": "asn"
               },
               "auth_key": {
                 "type": "string",
-                "documentation": "<p>Authentication key for BGP configuration</p> <p>Example: asdf34example</p>",
                 "serialized_name": "authKey"
               },
               "amazon_address": {
                 "type": "string",
-                "documentation": "<p>IP address assigned to the Amazon interface.</p> <p>Example: 192.168.1.1/30</p>",
                 "serialized_name": "amazonAddress"
               },
               "customer_address": {
                 "type": "string",
-                "documentation": "<p>IP address assigned to the customer interface.</p> <p>Example: 192.168.1.2/30</p>",
                 "serialized_name": "customerAddress"
               },
               "virtual_gateway_id": {
                 "type": "string",
-                "documentation": "<p>The ID of the virtual private gateway to a VPC. Only applies to private virtual interfaces.</p> <p>Example: vgw-123er56</p>",
                 "serialized_name": "virtualGatewayId"
               }
             }
@@ -160,61 +138,49 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer.",
         "members": {
           "virtual_interface_id": {
             "type": "string",
-            "documentation": "<p>ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>",
             "serialized_name": "virtualInterfaceId"
           },
           "location": {
             "type": "string",
-            "documentation": "<p>Where the AWS Direct Connect offering is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>",
             "serialized_name": "location"
           },
           "connection_id": {
             "type": "string",
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           },
           "virtual_interface_type": {
             "type": "string",
-            "documentation": "<p>The type of virtual interface</p> <p>Example: private (Amazon VPC) or public (Amazon S3, Amazon DynamoDB, etc.)</p>",
             "serialized_name": "virtualInterfaceType"
           },
           "virtual_interface_name": {
             "type": "string",
-            "documentation": "<p>The name of the virtual interface assigned by the customer</p> <p>Example: \"My VPC\"</p>",
             "serialized_name": "virtualInterfaceName"
           },
           "vlan": {
             "type": "integer",
-            "documentation": "<p>VLAN ID</p> <p>Example: 101</p>",
             "serialized_name": "vlan"
           },
           "asn": {
             "type": "integer",
-            "documentation": "<p>Autonomous system (AS) number for Border Gateway Protocol (BGP) configuration</p> <p>Example: 65000</p>",
             "serialized_name": "asn"
           },
           "auth_key": {
             "type": "string",
-            "documentation": "<p>Authentication key for BGP configuration</p> <p>Example: asdf34example</p>",
             "serialized_name": "authKey"
           },
           "amazon_address": {
             "type": "string",
-            "documentation": "<p>IP address assigned to the Amazon interface.</p> <p>Example: 192.168.1.1/30</p>",
             "serialized_name": "amazonAddress"
           },
           "customer_address": {
             "type": "string",
-            "documentation": "<p>IP address assigned to the customer interface.</p> <p>Example: 192.168.1.2/30</p>",
             "serialized_name": "customerAddress"
           },
           "virtual_interface_state": {
             "type": "string",
-            "documentation": "State of the virtual interface. <ul> <li> <b>Verifying</b>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</li> <li> <b>Pending</b>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</li> <li> <b>Available</b>: A virtual interface that is able to forward traffic.</li> <li> <b>Deleting</b>: A virtual interface is in this state immediately after calling <i>DeleteVirtualInterface</i> until it can no longer forward traffic.</li> <li> <b>Deleted</b>: A virtual interface that cannot forward traffic.</li> </ul>",
             "serialized_name": "virtualInterfaceState",
             "enum": [
               "verifying",
@@ -226,25 +192,20 @@
           },
           "customer_router_config": {
             "type": "string",
-            "documentation": "Information for generating the customer router configuration.",
             "serialized_name": "customerRouterConfig"
           },
           "virtual_gateway_id": {
             "type": "string",
-            "documentation": "<p>The ID of the virtual private gateway to a VPC. Only applies to private virtual interfaces.</p> <p>Example: vgw-123er56</p>",
             "serialized_name": "virtualGatewayId"
           },
           "route_filter_prefixes": {
             "type": "list",
-            "documentation": "A list of routes to be advertised to the AWS network in this region (public virtual interface) or your VPC (private virtual interface).",
             "serialized_name": "routeFilterPrefixes",
             "members": {
               "type": "structure",
-              "documentation": "<p>A route filter prefix that the customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.</p>",
               "members": {
                 "cidr": {
                   "type": "string",
-                  "documentation": "<p>CIDR notation for the advertised route. Multiple routes are separated by commas</p> <p>Example: 10.10.10.0/24,10.10.11.0/24</p>",
                   "serialized_name": "cidr"
                 }
               }
@@ -255,7 +216,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -265,7 +225,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -279,61 +238,49 @@
       "name": "CreatePublicVirtualInterface",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "Creates a new public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon Simple Storage Service (Amazon S3).",
       "input": {
         "type": "input",
         "members": {
           "connection_id": {
             "type": "string",
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           },
           "new_public_virtual_interface": {
             "type": "structure",
-            "documentation": "<p>Detailed information of the public virtual interface to be created.</p> <p>Default: None</p>",
             "serialized_name": "newPublicVirtualInterface",
             "members": {
               "virtual_interface_name": {
                 "type": "string",
-                "documentation": "<p>The name of the virtual interface assigned by the customer</p> <p>Example: \"My VPC\"</p>",
                 "serialized_name": "virtualInterfaceName"
               },
               "vlan": {
                 "type": "integer",
-                "documentation": "<p>VLAN ID</p> <p>Example: 101</p>",
                 "serialized_name": "vlan"
               },
               "asn": {
                 "type": "integer",
-                "documentation": "<p>Autonomous system (AS) number for Border Gateway Protocol (BGP) configuration</p> <p>Example: 65000</p>",
                 "serialized_name": "asn"
               },
               "auth_key": {
                 "type": "string",
-                "documentation": "<p>Authentication key for BGP configuration</p> <p>Example: asdf34example</p>",
                 "serialized_name": "authKey"
               },
               "amazon_address": {
                 "type": "string",
-                "documentation": "<p>IP address assigned to the Amazon interface.</p> <p>Example: 192.168.1.1/30</p>",
                 "serialized_name": "amazonAddress"
               },
               "customer_address": {
                 "type": "string",
-                "documentation": "<p>IP address assigned to the customer interface.</p> <p>Example: 192.168.1.2/30</p>",
                 "serialized_name": "customerAddress"
               },
               "route_filter_prefixes": {
                 "type": "list",
-                "documentation": "A list of routes to be advertised to the AWS network in this region (public virtual interface) or your VPC (private virtual interface).",
                 "serialized_name": "routeFilterPrefixes",
                 "members": {
                   "type": "structure",
-                  "documentation": "<p>A route filter prefix that the customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.</p>",
                   "members": {
                     "cidr": {
                       "type": "string",
-                      "documentation": "<p>CIDR notation for the advertised route. Multiple routes are separated by commas</p> <p>Example: 10.10.10.0/24,10.10.11.0/24</p>",
                       "serialized_name": "cidr"
                     }
                   }
@@ -345,61 +292,49 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer.",
         "members": {
           "virtual_interface_id": {
             "type": "string",
-            "documentation": "<p>ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>",
             "serialized_name": "virtualInterfaceId"
           },
           "location": {
             "type": "string",
-            "documentation": "<p>Where the AWS Direct Connect offering is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>",
             "serialized_name": "location"
           },
           "connection_id": {
             "type": "string",
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           },
           "virtual_interface_type": {
             "type": "string",
-            "documentation": "<p>The type of virtual interface</p> <p>Example: private (Amazon VPC) or public (Amazon S3, Amazon DynamoDB, etc.)</p>",
             "serialized_name": "virtualInterfaceType"
           },
           "virtual_interface_name": {
             "type": "string",
-            "documentation": "<p>The name of the virtual interface assigned by the customer</p> <p>Example: \"My VPC\"</p>",
             "serialized_name": "virtualInterfaceName"
           },
           "vlan": {
             "type": "integer",
-            "documentation": "<p>VLAN ID</p> <p>Example: 101</p>",
             "serialized_name": "vlan"
           },
           "asn": {
             "type": "integer",
-            "documentation": "<p>Autonomous system (AS) number for Border Gateway Protocol (BGP) configuration</p> <p>Example: 65000</p>",
             "serialized_name": "asn"
           },
           "auth_key": {
             "type": "string",
-            "documentation": "<p>Authentication key for BGP configuration</p> <p>Example: asdf34example</p>",
             "serialized_name": "authKey"
           },
           "amazon_address": {
             "type": "string",
-            "documentation": "<p>IP address assigned to the Amazon interface.</p> <p>Example: 192.168.1.1/30</p>",
             "serialized_name": "amazonAddress"
           },
           "customer_address": {
             "type": "string",
-            "documentation": "<p>IP address assigned to the customer interface.</p> <p>Example: 192.168.1.2/30</p>",
             "serialized_name": "customerAddress"
           },
           "virtual_interface_state": {
             "type": "string",
-            "documentation": "State of the virtual interface. <ul> <li> <b>Verifying</b>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</li> <li> <b>Pending</b>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</li> <li> <b>Available</b>: A virtual interface that is able to forward traffic.</li> <li> <b>Deleting</b>: A virtual interface is in this state immediately after calling <i>DeleteVirtualInterface</i> until it can no longer forward traffic.</li> <li> <b>Deleted</b>: A virtual interface that cannot forward traffic.</li> </ul>",
             "serialized_name": "virtualInterfaceState",
             "enum": [
               "verifying",
@@ -411,25 +346,20 @@
           },
           "customer_router_config": {
             "type": "string",
-            "documentation": "Information for generating the customer router configuration.",
             "serialized_name": "customerRouterConfig"
           },
           "virtual_gateway_id": {
             "type": "string",
-            "documentation": "<p>The ID of the virtual private gateway to a VPC. Only applies to private virtual interfaces.</p> <p>Example: vgw-123er56</p>",
             "serialized_name": "virtualGatewayId"
           },
           "route_filter_prefixes": {
             "type": "list",
-            "documentation": "A list of routes to be advertised to the AWS network in this region (public virtual interface) or your VPC (private virtual interface).",
             "serialized_name": "routeFilterPrefixes",
             "members": {
               "type": "structure",
-              "documentation": "<p>A route filter prefix that the customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.</p>",
               "members": {
                 "cidr": {
                   "type": "string",
-                  "documentation": "<p>CIDR notation for the advertised route. Multiple routes are separated by commas</p> <p>Example: 10.10.10.0/24,10.10.11.0/24</p>",
                   "serialized_name": "cidr"
                 }
               }
@@ -440,7 +370,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -450,7 +379,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -464,35 +392,29 @@
       "name": "DeleteConnection",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Deletes the connection.</p> <p>Deleting a connection only stops the AWS Direct Connect port hour and data transfer charges. You separately need to cancel any services or charges for cross-connects or network circuits that connect you to the AWS Direct Connect location with the providers of those services.</p>",
       "input": {
         "type": "input",
         "members": {
           "connection_id": {
             "type": "string",
             "required": true,
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "A connection represents the physical network connection between the Direct Connect location and the customer.",
         "members": {
           "connection_id": {
             "type": "string",
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           },
           "connection_name": {
             "type": "string",
-            "documentation": "<p>The name of the connection.</p> <p>Example: \"<i>1G Connection to AWS</i>\"</p> <p>Default: None</p>",
             "serialized_name": "connectionName"
           },
           "connection_state": {
             "type": "string",
-            "documentation": "State of the connection. <ul> <li> <b>Requested</b>: The initial state of connection immediately after creation. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</li> <li> <b>Pending</b>: A connection is pending after the customer receives the LOA and remains pending until the completion of the partner circuit.</li> <li> <b>Available</b>: A connection that is completed and ready for use. A connection must be available before virtual interfaces can be created.</li> <li> <b>Deleted</b>: A connection that has been deleted.</li> </ul>",
             "serialized_name": "connectionState",
             "enum": [
               "requested",
@@ -503,12 +425,10 @@
           },
           "region": {
             "type": "string",
-            "documentation": "<p>The AWS region where the offering is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>",
             "serialized_name": "region"
           },
           "location": {
             "type": "string",
-            "documentation": "<p>Where the AWS Direct Connect offering is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>",
             "serialized_name": "location"
           }
         }
@@ -516,7 +436,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -526,7 +445,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -540,24 +458,20 @@
       "name": "DeleteVirtualInterface",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "Deletes a virtual interface.",
       "input": {
         "type": "input",
         "members": {
           "virtual_interface_id": {
             "type": "string",
-            "documentation": "<p>ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>",
             "serialized_name": "virtualInterfaceId"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "The response received when DeleteVirtualInterface is called.",
         "members": {
           "virtual_interface_state": {
             "type": "string",
-            "documentation": "State of the virtual interface. <ul> <li> <b>Verifying</b>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</li> <li> <b>Pending</b>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</li> <li> <b>Available</b>: A virtual interface that is able to forward traffic.</li> <li> <b>Deleting</b>: A virtual interface is in this state immediately after calling <i>DeleteVirtualInterface</i> until it can no longer forward traffic.</li> <li> <b>Deleted</b>: A virtual interface that cannot forward traffic.</li> </ul>",
             "serialized_name": "virtualInterfaceState",
             "enum": [
               "verifying",
@@ -572,7 +486,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -582,7 +495,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -596,35 +508,29 @@
       "name": "DescribeConnectionDetail",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Displays details about a specific connection including the order steps for the connection and the current state of the connection order.</p>",
       "input": {
         "type": "input",
         "members": {
           "connection_id": {
             "type": "string",
             "required": true,
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "Additional information about connection order steps.",
         "members": {
           "connection_id": {
             "type": "string",
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           },
           "connection_name": {
             "type": "string",
-            "documentation": "<p>The name of the connection.</p> <p>Example: \"<i>1G Connection to AWS</i>\"</p> <p>Default: None</p>",
             "serialized_name": "connectionName"
           },
           "connection_state": {
             "type": "string",
-            "documentation": "State of the connection. <ul> <li> <b>Requested</b>: The initial state of connection immediately after creation. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</li> <li> <b>Pending</b>: A connection is pending after the customer receives the LOA and remains pending until the completion of the partner circuit.</li> <li> <b>Available</b>: A connection that is completed and ready for use. A connection must be available before virtual interfaces can be created.</li> <li> <b>Deleted</b>: A connection that has been deleted.</li> </ul>",
             "serialized_name": "connectionState",
             "enum": [
               "requested",
@@ -635,45 +541,36 @@
           },
           "region": {
             "type": "string",
-            "documentation": "<p>The AWS region where the offering is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>",
             "serialized_name": "region"
           },
           "location": {
             "type": "string",
-            "documentation": "<p>Where the AWS Direct Connect offering is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>",
             "serialized_name": "location"
           },
           "bandwidth": {
             "type": "string",
-            "documentation": "<p>Bandwidth of the connection.</p> <p>Example: 1Gbps</p> <p>Default: None</p>",
             "serialized_name": "bandwidth"
           },
           "connection_costs": {
             "type": "list",
-            "documentation": "A list of connection costs.",
             "serialized_name": "connectionCosts",
             "members": {
               "type": "structure",
-              "documentation": "Cost description.",
               "members": {
                 "name": {
                   "type": "string",
-                  "documentation": "<p>The name of the cost item.</p> <p>Example: Inbound data transfer</p>",
                   "serialized_name": "name"
                 },
                 "unit": {
                   "type": "string",
-                  "documentation": "<p>The unit used in cost calculation.</p> <p>Example: \"Gbps,\" if the price is calculated based on Gbps.</p>",
                   "serialized_name": "unit"
                 },
                 "currency_code": {
                   "type": "string",
-                  "documentation": "<p>Currency code based on ISO 4217.</p> <p>Example: \"USD\" for US dollar.</p>",
                   "serialized_name": "currencyCode"
                 },
                 "amount": {
                   "type": "string",
-                  "documentation": "<p>The amount of charge per unit.</p> <p>Example: 0.01</p>",
                   "serialized_name": "amount"
                 }
               }
@@ -681,40 +578,32 @@
           },
           "order_steps": {
             "type": "list",
-            "documentation": "A list of connection order steps.",
             "serialized_name": "orderSteps",
             "members": {
               "type": "structure",
-              "documentation": "A step in the connection order process.",
               "members": {
                 "number": {
                   "type": "string",
-                  "documentation": "<p>Number of an order step.</p> <p>Example: 1</p>",
                   "serialized_name": "number"
                 },
                 "name": {
                   "type": "string",
-                  "documentation": "<p>Name of the order step.</p> <p>Example: Authorize cross connect</p>",
                   "serialized_name": "name"
                 },
                 "description": {
                   "type": "string",
-                  "documentation": "<p>More detailed description of the order step.</p> <p>Example: \"<i>AWS will prepare your connection and send you an email with an LOA to provide to the colocation provider</i>\"</p>",
                   "serialized_name": "description"
                 },
                 "owner": {
                   "type": "string",
-                  "documentation": "<p>The entity who owns the completion of the order step.</p> <p>Example: AWS, Customer</p>",
                   "serialized_name": "owner"
                 },
                 "sla": {
                   "type": "integer",
-                  "documentation": "<p>Time to complete the order step in minutes.</p> <p>Example: 60</p>",
                   "serialized_name": "sla"
                 },
                 "step_state": {
                   "type": "string",
-                  "documentation": "State of the connection step. <ul> <li> <b>Pending</b>: This step is not yet completed.</li> <li> <b>Completed</b>: This step has been completed</li> </ul>",
                   "serialized_name": "stepState",
                   "enum": [
                     "pending",
@@ -729,7 +618,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -739,7 +627,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -753,42 +640,34 @@
       "name": "DescribeConnections",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Displays all connections in this region.</p> <p>If a connection ID is provided, it will only return this particular connection.</p>",
       "input": {
         "type": "input",
         "members": {
           "connection_id": {
             "type": "string",
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "A structure containing a list of connections.",
         "members": {
           "connections": {
             "type": "list",
-            "documentation": "A list of connections.",
             "serialized_name": "connections",
             "members": {
               "type": "structure",
-              "documentation": "A connection represents the physical network connection between the Direct Connect location and the customer.",
               "members": {
                 "connection_id": {
                   "type": "string",
-                  "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
                   "serialized_name": "connectionId"
                 },
                 "connection_name": {
                   "type": "string",
-                  "documentation": "<p>The name of the connection.</p> <p>Example: \"<i>1G Connection to AWS</i>\"</p> <p>Default: None</p>",
                   "serialized_name": "connectionName"
                 },
                 "connection_state": {
                   "type": "string",
-                  "documentation": "State of the connection. <ul> <li> <b>Requested</b>: The initial state of connection immediately after creation. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</li> <li> <b>Pending</b>: A connection is pending after the customer receives the LOA and remains pending until the completion of the partner circuit.</li> <li> <b>Available</b>: A connection that is completed and ready for use. A connection must be available before virtual interfaces can be created.</li> <li> <b>Deleted</b>: A connection that has been deleted.</li> </ul>",
                   "serialized_name": "connectionState",
                   "enum": [
                     "requested",
@@ -799,12 +678,10 @@
                 },
                 "region": {
                   "type": "string",
-                  "documentation": "<p>The AWS region where the offering is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>",
                   "serialized_name": "region"
                 },
                 "location": {
                   "type": "string",
-                  "documentation": "<p>Where the AWS Direct Connect offering is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>",
                   "serialized_name": "location"
                 }
               }
@@ -815,7 +692,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -825,7 +701,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -839,35 +714,29 @@
       "name": "DescribeOfferingDetail",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Displays additional ordering step details for a specified offering.</p>",
       "input": {
         "type": "input",
         "members": {
           "offering_id": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The ID of the offering.</p> <p>Example: us-west-1_EqSV5_1G</p> <p>Default: None</p>",
             "serialized_name": "offeringId"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "A structure containing detailed information about an offering.",
         "members": {
           "offering_id": {
             "type": "string",
-            "documentation": "<p>The ID of the offering.</p> <p>Example: us-west-1_EqSV5_1G</p> <p>Default: None</p>",
             "serialized_name": "offeringId"
           },
           "region": {
             "type": "string",
-            "documentation": "<p>The AWS region where the offering is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>",
             "serialized_name": "region"
           },
           "location": {
             "type": "string",
-            "documentation": "<p>Where the AWS Direct Connect offering is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>",
             "serialized_name": "location"
           },
           "offering_name": {
@@ -876,40 +745,32 @@
           },
           "description": {
             "type": "string",
-            "documentation": "<p>Description of the offering.</p> <p>Example: \"<i>1Gbps Cross Connect in us-east-1</i>\"</p> <p>Default: None</p>",
             "serialized_name": "description"
           },
           "bandwidth": {
             "type": "string",
-            "documentation": "<p>Bandwidth of the connection.</p> <p>Example: 1Gbps</p> <p>Default: None</p>",
             "serialized_name": "bandwidth"
           },
           "connection_costs": {
             "type": "list",
-            "documentation": "A list of connection costs.",
             "serialized_name": "connectionCosts",
             "members": {
               "type": "structure",
-              "documentation": "Cost description.",
               "members": {
                 "name": {
                   "type": "string",
-                  "documentation": "<p>The name of the cost item.</p> <p>Example: Inbound data transfer</p>",
                   "serialized_name": "name"
                 },
                 "unit": {
                   "type": "string",
-                  "documentation": "<p>The unit used in cost calculation.</p> <p>Example: \"Gbps,\" if the price is calculated based on Gbps.</p>",
                   "serialized_name": "unit"
                 },
                 "currency_code": {
                   "type": "string",
-                  "documentation": "<p>Currency code based on ISO 4217.</p> <p>Example: \"USD\" for US dollar.</p>",
                   "serialized_name": "currencyCode"
                 },
                 "amount": {
                   "type": "string",
-                  "documentation": "<p>The amount of charge per unit.</p> <p>Example: 0.01</p>",
                   "serialized_name": "amount"
                 }
               }
@@ -917,35 +778,28 @@
           },
           "order_steps": {
             "type": "list",
-            "documentation": "A list of offering order steps.",
             "serialized_name": "orderSteps",
             "members": {
               "type": "structure",
-              "documentation": "A step in the offering order process.",
               "members": {
                 "number": {
                   "type": "string",
-                  "documentation": "<p>Number of an order step.</p> <p>Example: 1</p>",
                   "serialized_name": "number"
                 },
                 "name": {
                   "type": "string",
-                  "documentation": "<p>Name of the order step.</p> <p>Example: Authorize cross connect</p>",
                   "serialized_name": "name"
                 },
                 "description": {
                   "type": "string",
-                  "documentation": "<p>More detailed description of the order step.</p> <p>Example: \"<i>AWS will prepare your connection and send you an email with an LOA to provide to the colocation provider</i>\"</p>",
                   "serialized_name": "description"
                 },
                 "owner": {
                   "type": "string",
-                  "documentation": "<p>The entity who owns the completion of the order step.</p> <p>Example: AWS</p>",
                   "serialized_name": "owner"
                 },
                 "sla": {
                   "type": "integer",
-                  "documentation": "<p>Time to complete the order step in minutes.</p> <p>Example: 60</p>",
                   "serialized_name": "sla"
                 }
               }
@@ -956,7 +810,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -966,7 +819,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -980,75 +832,59 @@
       "name": "DescribeOfferings",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Describes one or more of the offerings that are currently available for creating new connections. The results include offerings for all regions.</p> <p>To order a new connection you need to select a specific offering ID.</p>",
       "output": {
         "type": "structure",
-        "documentation": "A structure containing a list of offerings.",
         "members": {
           "offerings": {
             "type": "list",
-            "documentation": "A list of offerings.",
             "serialized_name": "offerings",
             "members": {
               "type": "structure",
-              "documentation": "An offer to create a new connection for a specific price and terms.",
               "members": {
                 "offering_id": {
                   "type": "string",
-                  "documentation": "<p>The ID of the offering.</p> <p>Example: us-west-1_EqSV5_1G</p> <p>Default: None</p>",
                   "serialized_name": "offeringId"
                 },
                 "region": {
                   "type": "string",
-                  "documentation": "<p>The AWS region where the offering is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>",
                   "serialized_name": "region"
                 },
                 "location": {
                   "type": "string",
-                  "documentation": "<p>Where the AWS Direct Connect offering is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>",
                   "serialized_name": "location"
                 },
                 "offering_name": {
                   "type": "string",
-                  "documentation": "<p>Name of the offering.</p> <p>Example: \"<i>1Gbps Cross Connect in us-east-1</i>\"</p> <p>Default: None</p>",
                   "serialized_name": "offeringName"
                 },
                 "description": {
                   "type": "string",
-                  "documentation": "<p>Description of the offering.</p> <p>Example: \"<i>1Gbps Cross Connect in us-east-1</i>\"</p> <p>Default: None</p>",
                   "serialized_name": "description"
                 },
                 "bandwidth": {
                   "type": "string",
-                  "documentation": "<p>Bandwidth of the connection.</p> <p>Example: 1Gbps</p> <p>Default: None</p>",
                   "serialized_name": "bandwidth"
                 },
                 "connection_costs": {
                   "type": "list",
-                  "documentation": "A list of connection costs.",
                   "serialized_name": "connectionCosts",
                   "members": {
                     "type": "structure",
-                    "documentation": "Cost description.",
                     "members": {
                       "name": {
                         "type": "string",
-                        "documentation": "<p>The name of the cost item.</p> <p>Example: Inbound data transfer</p>",
                         "serialized_name": "name"
                       },
                       "unit": {
                         "type": "string",
-                        "documentation": "<p>The unit used in cost calculation.</p> <p>Example: \"Gbps,\" if the price is calculated based on Gbps.</p>",
                         "serialized_name": "unit"
                       },
                       "currency_code": {
                         "type": "string",
-                        "documentation": "<p>Currency code based on ISO 4217.</p> <p>Example: \"USD\" for US dollar.</p>",
                         "serialized_name": "currencyCode"
                       },
                       "amount": {
                         "type": "string",
-                        "documentation": "<p>The amount of charge per unit.</p> <p>Example: 0.01</p>",
                         "serialized_name": "amount"
                       }
                     }
@@ -1062,7 +898,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -1072,7 +907,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -1086,27 +920,21 @@
       "name": "DescribeVirtualGateways",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Returns a list of virtual private gateways owned by the AWS account.</p> <p>You can create one or more AWS Direct Connect private virtual interfaces linking to a virtual private gateway. A virtual private gateway can be managed via Amazon Virtual Private Cloud (VPC) console or the <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html\">EC2 CreateVpnGateway</a> action.</p>",
       "output": {
         "type": "structure",
-        "documentation": "A structure containing a list of virtual private gateways.",
         "members": {
           "virtual_gateways": {
             "type": "list",
-            "documentation": "A list of virtual private gateways.",
             "serialized_name": "virtualGateways",
             "members": {
               "type": "structure",
-              "documentation": "<p>You can create one or more Direct Connect private virtual interfaces linking to your virtual private gateway.</p> <p>Virtual private gateway can be managed via AWS Virtual Private Cloud Console or the <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html\">EC2 CreateVpnGateway API</a>.</p>",
               "members": {
                 "virtual_gateway_id": {
                   "type": "string",
-                  "documentation": "<p>The ID of the virtual private gateway to a VPC. Only applies to private virtual interfaces.</p> <p>Example: vgw-123er56</p>",
                   "serialized_name": "virtualGatewayId"
                 },
                 "virtual_gateway_state": {
                   "type": "string",
-                  "documentation": "State of the virtual private gateway. <ul> <li> <b>Pending</b>: This is the initial state after calling <i>CreateVpnGateway</i>.</li> <li> <b>Available</b>: Ready for use by a private virtual interface.</li> <li> <b>Deleting</b>: This is the initial state after calling <i>DeleteVpnGateway</i>.</li> <li> <b>Deleted</b>: In this state, a private virtual interface is unable to send traffic over this gateway.</li> </ul>",
                   "serialized_name": "virtualGatewayState"
                 }
               }
@@ -1117,7 +945,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -1127,7 +954,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -1141,87 +967,70 @@
       "name": "DescribeVirtualInterfaces",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Displays all virtual interfaces for an AWS account. Virtual interfaces deleted fewer than 15 minutes before DescribeVirtualInterfaces is called are also returned. If a connection ID is included then only virtual interfaces associated with this connection will be returned. If a virtual interface ID is included then only a single virtual interface will be returned.</p> <p> A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer.</p>",
       "input": {
         "type": "input",
         "members": {
           "connection_id": {
             "type": "string",
-            "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
             "serialized_name": "connectionId"
           },
           "virtual_interface_id": {
             "type": "string",
-            "documentation": "<p>ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>",
             "serialized_name": "virtualInterfaceId"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "A structure containing a list of virtual interfaces.",
         "members": {
           "virtual_interfaces": {
             "type": "list",
-            "documentation": "A list of virtual interfaces.",
             "serialized_name": "virtualInterfaces",
             "members": {
               "type": "structure",
-              "documentation": "A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer.",
               "members": {
                 "virtual_interface_id": {
                   "type": "string",
-                  "documentation": "<p>ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>",
                   "serialized_name": "virtualInterfaceId"
                 },
                 "location": {
                   "type": "string",
-                  "documentation": "<p>Where the AWS Direct Connect offering is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>",
                   "serialized_name": "location"
                 },
                 "connection_id": {
                   "type": "string",
-                  "documentation": "<p>ID of the connection.</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>",
                   "serialized_name": "connectionId"
                 },
                 "virtual_interface_type": {
                   "type": "string",
-                  "documentation": "<p>The type of virtual interface</p> <p>Example: private (Amazon VPC) or public (Amazon S3, Amazon DynamoDB, etc.)</p>",
                   "serialized_name": "virtualInterfaceType"
                 },
                 "virtual_interface_name": {
                   "type": "string",
-                  "documentation": "<p>The name of the virtual interface assigned by the customer</p> <p>Example: \"My VPC\"</p>",
                   "serialized_name": "virtualInterfaceName"
                 },
                 "vlan": {
                   "type": "integer",
-                  "documentation": "<p>VLAN ID</p> <p>Example: 101</p>",
                   "serialized_name": "vlan"
                 },
                 "asn": {
                   "type": "integer",
-                  "documentation": "<p>Autonomous system (AS) number for Border Gateway Protocol (BGP) configuration</p> <p>Example: 65000</p>",
                   "serialized_name": "asn"
                 },
                 "auth_key": {
                   "type": "string",
-                  "documentation": "<p>Authentication key for BGP configuration</p> <p>Example: asdf34example</p>",
                   "serialized_name": "authKey"
                 },
                 "amazon_address": {
                   "type": "string",
-                  "documentation": "<p>IP address assigned to the Amazon interface.</p> <p>Example: 192.168.1.1/30</p>",
                   "serialized_name": "amazonAddress"
                 },
                 "customer_address": {
                   "type": "string",
-                  "documentation": "<p>IP address assigned to the customer interface.</p> <p>Example: 192.168.1.2/30</p>",
                   "serialized_name": "customerAddress"
                 },
                 "virtual_interface_state": {
                   "type": "string",
-                  "documentation": "State of the virtual interface. <ul> <li> <b>Verifying</b>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</li> <li> <b>Pending</b>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</li> <li> <b>Available</b>: A virtual interface that is able to forward traffic.</li> <li> <b>Deleting</b>: A virtual interface is in this state immediately after calling <i>DeleteVirtualInterface</i> until it can no longer forward traffic.</li> <li> <b>Deleted</b>: A virtual interface that cannot forward traffic.</li> </ul>",
                   "serialized_name": "virtualInterfaceState",
                   "enum": [
                     "verifying",
@@ -1233,25 +1042,20 @@
                 },
                 "customer_router_config": {
                   "type": "string",
-                  "documentation": "Information for generating the customer router configuration.",
                   "serialized_name": "customerRouterConfig"
                 },
                 "virtual_gateway_id": {
                   "type": "string",
-                  "documentation": "<p>The ID of the virtual private gateway to a VPC. Only applies to private virtual interfaces.</p> <p>Example: vgw-123er56</p>",
                   "serialized_name": "virtualGatewayId"
                 },
                 "route_filter_prefixes": {
                   "type": "list",
-                  "documentation": "A list of routes to be advertised to the AWS network in this region (public virtual interface) or your VPC (private virtual interface).",
                   "serialized_name": "routeFilterPrefixes",
                   "members": {
                     "type": "structure",
-                    "documentation": "<p>A route filter prefix that the customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.</p>",
                     "members": {
                       "cidr": {
                         "type": "string",
-                        "documentation": "<p>CIDR notation for the advertised route. Multiple routes are separated by commas</p> <p>Example: 10.10.10.0/24,10.10.11.0/24</p>",
                         "serialized_name": "cidr"
                       }
                     }
@@ -1265,7 +1069,6 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "A server-side error occurred during the API call. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",
@@ -1275,7 +1078,6 @@
         },
         {
           "type": "structure",
-          "documentation": "The API was called with invalid parameters. The error message will contain additional details about the cause.",
           "members": {
             "message": {
               "type": "string",

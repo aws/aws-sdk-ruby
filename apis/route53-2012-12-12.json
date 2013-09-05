@@ -21,43 +21,35 @@
       "name": "ChangeResourceRecordSets",
       "http_method": "POST",
       "http_path": "/2012-12-12/hostedzone/{HostedZoneId}/rrset/",
-      "documentation": "<p>Use this action to create or change your authoritative DNS information. To use this action, send a <code>POST</code> request to the <code>2012-12-12/hostedzone/<i>hosted Zone ID</i>/rrset</code> resource. The request body must include an XML document with a <code>ChangeResourceRecordSetsRequest</code> element.</p> <p>Changes are a list of change items and are considered transactional. For more information on transactional changes, also known as change batches, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/RRSchanges.html#RRSchanges_API\">Creating, Changing, and Deleting Resource Record Sets Using the Route 53 API</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <important>Due to the nature of transactional changes, you cannot delete the same resource record set more than once in a single change batch. If you attempt to delete the same change batch more than once, Route 53 returns an <code>InvalidChangeBatch</code> error.</important> <p>In response to a <code>ChangeResourceRecordSets</code> request, your DNS data is changed on all Route 53 DNS servers. Initially, the status of a change is <code>PENDING</code>. This means the change has not yet propagated to all the authoritative Route 53 DNS servers. When the change is propagated to all hosts, the change returns a status of <code>INSYNC</code>.</p> <p>Note the following limitations on a <code>ChangeResourceRecordSets</code> request:</p> <p>- A request cannot contain more than 100 Change elements.</p> <p>- A request cannot contain more than 1000 ResourceRecord elements.</p> <p>The sum of the number of characters (including spaces) in all <code>Value</code> elements in a request cannot exceed 32,000 characters.</p>",
       "input": {
         "type": "input",
-        "documentation": "<p>A complex type that contains a change batch.</p>",
         "members": {
           "hosted_zone_id": {
             "type": "string",
             "required": true,
-            "documentation": "<p><i>Alias resource record sets only:</i> The value of the hosted zone ID for the AWS resource.</p> <p>For more information, an example, and several ways to get the hosted zone ID for the LoadBalancer, see <a href=\"http://docs.amazonwebservices.com/Route53/latest/DeveloperGuide/CreatingAliasRRSets.html\">Creating Alias Resource Record Sets for Elastic Load Balancing</a> in the <i>Amazon Route 53 Developer Guide</i></p>.",
             "location": "uri",
             "serialized_name": "HostedZoneId"
           },
           "change_batch": {
             "type": "structure",
             "required": true,
-            "documentation": "<p>A complex type that contains an optional comment and the <code>Changes</code> element.</p>",
             "serialized_name": "ChangeBatch",
             "members": {
               "comment": {
                 "type": "string",
-                "documentation": "<p><i>Optional:</i> Any comments you want to include about a change batch request.</p>",
                 "serialized_name": "Comment"
               },
               "changes": {
                 "type": "list",
                 "required": true,
-                "documentation": "<p>A complex type that contains one <code>Change</code> element for each resource record set that you want to create or delete.</p>",
                 "serialized_name": "Changes",
                 "members": {
                   "type": "structure",
-                  "documentation": "<p>A complex type that contains the information for each change in a change batch request.</p>",
                   "serialized_name": "Change",
                   "members": {
                     "action": {
                       "type": "string",
                       "required": true,
-                      "documentation": "<p>The action to perform.</p> <p>Valid values: <code>CREATE</code> | <code>DELETE</code></p>",
                       "serialized_name": "Action",
                       "enum": [
                         "CREATE",
@@ -67,19 +59,16 @@
                     "resource_record_set": {
                       "type": "structure",
                       "required": true,
-                      "documentation": "<p>Information about the resource record set to create or delete.</p>",
                       "serialized_name": "ResourceRecordSet",
                       "members": {
                         "name": {
                           "type": "string",
                           "required": true,
-                          "documentation": "<p>The domain name of the current resource record set.</p>",
                           "serialized_name": "Name"
                         },
                         "type": {
                           "type": "string",
                           "required": true,
-                          "documentation": "<p>The type of the current resource record set.</p>",
                           "serialized_name": "Type",
                           "enum": [
                             "SOA",
@@ -96,17 +85,14 @@
                         },
                         "set_identifier": {
                           "type": "string",
-                          "documentation": "<p><i>Weighted, Regional, and Failover resource record sets only:</i> An identifier that differentiates among multiple resource record sets that have the same combination of DNS name and type.</p>",
                           "serialized_name": "SetIdentifier"
                         },
                         "weight": {
                           "type": "integer",
-                          "documentation": "<p><i>Weighted resource record sets only:</i> Among resource record sets that have the same combination of DNS name and type, a value that determines what portion of traffic for the current resource record set is routed to the associated location.</p>",
                           "serialized_name": "Weight"
                         },
                         "region": {
                           "type": "string",
-                          "documentation": "<p><i>Regional resource record sets only:</i> Among resource record sets that have the same combination of DNS name and type, a value that specifies the AWS region for the current resource record set.</p>",
                           "serialized_name": "Region",
                           "enum": [
                             "us-east-1",
@@ -121,7 +107,6 @@
                         },
                         "failover": {
                           "type": "string",
-                          "documentation": "<p><i>Failover resource record sets only:</i> Among resource record sets that have the same combination of DNS name and type, a value that indicates whether the current resource record set is a primary or secondary resource record set. A failover set may contain at most one resource record set marked as primary and one resource record set marked as secondary. A resource record set marked as primary will be returned if any of the following are true: (1) an associated health check is passing, (2) if the resource record set is an alias with the evaluate target health and at least one target resource record set is healthy, (3) both the primary and secondary resource record set are failing health checks or (4) there is no secondary resource record set. A secondary resource record set will be returned if: (1) the primary is failing a health check and either the secondary is passing a health check or has no associated health check, or (2) there is no primary resource record set. </p> <p>Valid values: <code>PRIMARY</code> | <code>SECONDARY</code></p>",
                           "serialized_name": "Failover",
                           "enum": [
                             "PRIMARY",
@@ -130,22 +115,18 @@
                         },
                         "ttl": {
                           "type": "integer",
-                          "documentation": "<p>The cache time to live for the current resource record set.</p>",
                           "serialized_name": "TTL"
                         },
                         "resource_records": {
                           "type": "list",
-                          "documentation": "<p>A complex type that contains the resource records for the current resource record set.</p>",
                           "serialized_name": "ResourceRecords",
                           "members": {
                             "type": "structure",
-                            "documentation": "<p>A complex type that contains the value of the <code>Value</code> element for the current resource record set.</p>",
                             "serialized_name": "ResourceRecord",
                             "members": {
                               "value": {
                                 "type": "string",
                                 "required": true,
-                                "documentation": "<p>The value of the <code>Value</code> element for the current resource record set.</p>",
                                 "serialized_name": "Value"
                               }
                             }
@@ -153,32 +134,27 @@
                         },
                         "alias_target": {
                           "type": "structure",
-                          "documentation": "<p><i>Alias resource record sets only:</i> Information about the AWS resource to which you are redirecting traffic.</p>",
                           "serialized_name": "AliasTarget",
                           "members": {
                             "hosted_zone_id": {
                               "type": "string",
                               "required": true,
-                              "documentation": "<p><i>Alias resource record sets only:</i> The value of the hosted zone ID for the AWS resource.</p> <p>For more information and an example, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingAliasRRSets.html\">Creating Alias Resource Record Sets</a> in the <i>Amazon Route 53 Developer Guide</i></p>.",
                               "serialized_name": "HostedZoneId"
                             },
                             "dns_name": {
                               "type": "string",
                               "required": true,
-                              "documentation": "<p><i>Alias resource record sets only:</i> The external DNS name associated with the AWS Resource.</p> <p>For more information and an example, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingAliasRRSets.html\">Creating Alias Resource Record Sets</a> in the <i>Amazon Route 53 Developer Guide</i></p>.",
                               "serialized_name": "DNSName"
                             },
                             "evaluate_target_health": {
                               "type": "boolean",
                               "required": true,
-                              "documentation": "<p><i>Alias resource record sets only:</i> A boolean value that indicates whether this Resource Record Set should respect the health status of any health checks associated with the ALIAS target record which it is linked to.</p> <p>For more information and an example, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingAliasRRSets.html\">Creating Alias Resource Record Sets</a> in the <i>Amazon Route 53 Developer Guide</i></p>.",
                               "serialized_name": "EvaluateTargetHealth"
                             }
                           }
                         },
                         "health_check_id": {
                           "type": "string",
-                          "documentation": "<p><i>Health Check resource record sets only, not required for alias resource record sets:</i> An identifier that is used to identify health check associated with the resource record set.</p>",
                           "serialized_name": "HealthCheckId"
                         }
                       }
@@ -192,21 +168,17 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A complex type containing the response for the request.</p>",
         "members": {
           "change_info": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a GetChange action to get detailed information about the change.</p>",
             "serialized_name": "ChangeInfo",
             "members": {
               "id": {
                 "type": "string",
-                "documentation": "<p>The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.</p>",
                 "serialized_name": "Id"
               },
               "status": {
                 "type": "string",
-                "documentation": "<p>The current state of the request. <code>PENDING</code> indicates that this request has not yet been applied to all Amazon Route 53 DNS servers.</p> <p>Valid Values: <code>PENDING</code> | <code>INSYNC</code></p>",
                 "serialized_name": "Status",
                 "enum": [
                   "PENDING",
@@ -215,12 +187,10 @@
               },
               "submitted_at": {
                 "type": "iso8601_timestamp",
-                "documentation": "<p>The date and time the change was submitted, in the format <code>YYYY-MM-DDThh:mm:ssZ</code>, as specified in the ISO 8601 standard (for example, 2009-11-19T19:37:58Z). The <code>Z</code> after the time indicates that the time is listed in Coordinated Universal Time (UTC), which is synonymous with Greenwich Mean Time in this context.</p>",
                 "serialized_name": "SubmittedAt"
               },
               "comment": {
                 "type": "string",
-                "documentation": "<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a GetChange action to get detailed information about the change.</p>",
                 "serialized_name": "Comment"
               }
             }
@@ -239,22 +209,18 @@
         },
         {
           "type": "structure",
-          "documentation": "<p>The health check you are trying to get or delete does not exist.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>This error contains a list of one or more error messages. Each error message indicates one error in the change batch. For more information, see <a href=\"http://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html#example_Errors\">Example InvalidChangeBatch Errors</a>. </p>",
           "members": {
             "messages": {
               "type": "list",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "messages",
               "members": {
                 "type": "string",
@@ -265,18 +231,15 @@
         },
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because Route 53 was still processing a prior request.</p>",
           "members": {
             "message": {
               "type": "string",
@@ -290,38 +253,31 @@
       "name": "CreateHealthCheck",
       "http_method": "POST",
       "http_path": "/2012-12-12/healthcheck",
-      "documentation": "<p> This action creates a new health check.</p> <p> To create a new health check, send a <code>POST</code> request to the <code>2012-12-12/healthcheck</code> resource. The request body must include an XML document with a <code>CreateHealthCheckRequest</code> element. The response returns the <code>CreateHealthCheckResponse</code> element that contains metadata about the health check.</p>",
       "input": {
         "type": "input",
-        "documentation": "<p>&gt;A complex type that contains information about the request to create a health check.</p>",
         "members": {
           "caller_reference": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A unique string that identifies the request and that allows failed <code>CreateHealthCheck</code> requests to be retried without the risk of executing the operation twice. You must use a unique <code>CallerReference</code> string every time you create a health check. <code>CallerReference</code> can be any unique string; you might choose to use a string that identifies your project.</p> <p>Valid characters are any Unicode code points that are legal in an XML 1.0 document. The UTF-8 encoding of the value must be less than 128 bytes.</p>",
             "serialized_name": "CallerReference"
           },
           "health_check_config": {
             "type": "structure",
             "required": true,
-            "documentation": "<p>A complex type that contains health check configuration.</p>",
             "serialized_name": "HealthCheckConfig",
             "members": {
               "ip_address": {
                 "type": "string",
                 "required": true,
-                "documentation": "<p>IP Address of the instance being checked. </p>",
                 "serialized_name": "IPAddress"
               },
               "port": {
                 "type": "integer",
-                "documentation": "<p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>",
                 "serialized_name": "Port"
               },
               "type": {
                 "type": "string",
                 "required": true,
-                "documentation": "<p>The type of health check to be performed. Currently supported protocols are TCP and HTTP.</p>",
                 "serialized_name": "Type",
                 "enum": [
                   "HTTP",
@@ -330,12 +286,10 @@
               },
               "resource_path": {
                 "type": "string",
-                "documentation": "<p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>",
                 "serialized_name": "ResourcePath"
               },
               "fully_qualified_domain_name": {
                 "type": "string",
-                "documentation": "<p>Fully qualified domain name of the instance to be health checked.</p>",
                 "serialized_name": "FullyQualifiedDomainName"
               }
             }
@@ -344,41 +298,33 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A complex type containing the response information for the new health check.</p>",
         "members": {
           "health_check": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains identifying information about the health check.</p>",
             "serialized_name": "HealthCheck",
             "members": {
               "id": {
                 "type": "string",
-                "documentation": "<p>The ID of the specified health check.</p>",
                 "serialized_name": "Id"
               },
               "caller_reference": {
                 "type": "string",
-                "documentation": "<p>A unique string that identifies the request to create the health check.</p>",
                 "serialized_name": "CallerReference"
               },
               "health_check_config": {
                 "type": "structure",
-                "documentation": "<p>A complex type that contains the health check configuration.</p>",
                 "serialized_name": "HealthCheckConfig",
                 "members": {
                   "ip_address": {
                     "type": "string",
-                    "documentation": "<p>IP Address of the instance being checked. </p>",
                     "serialized_name": "IPAddress"
                   },
                   "port": {
                     "type": "integer",
-                    "documentation": "<p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>",
                     "serialized_name": "Port"
                   },
                   "type": {
                     "type": "string",
-                    "documentation": "<p>The type of health check to be performed. Currently supported protocols are TCP and HTTP.</p>",
                     "serialized_name": "Type",
                     "enum": [
                       "HTTP",
@@ -387,12 +333,10 @@
                   },
                   "resource_path": {
                     "type": "string",
-                    "documentation": "<p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>",
                     "serialized_name": "ResourcePath"
                   },
                   "fully_qualified_domain_name": {
                     "type": "string",
-                    "documentation": "<p>Fully qualified domain name of the instance to be health checked.</p>",
                     "serialized_name": "FullyQualifiedDomainName"
                   }
                 }
@@ -401,7 +345,6 @@
           },
           "location": {
             "type": "string",
-            "documentation": "<p>The unique URL representing the new health check.</p>",
             "location": "header",
             "serialized_name": "Location"
           }
@@ -419,22 +362,18 @@
         },
         {
           "type": "structure",
-          "documentation": "<p>The health check you are trying to create already exists. Route 53 returns this error when a health check has already been created with the specified <code>CallerReference</code>.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
@@ -445,31 +384,25 @@
       "name": "CreateHostedZone",
       "http_method": "POST",
       "http_path": "/2012-12-12/hostedzone",
-      "documentation": "<p> This action creates a new hosted zone.</p> <p>To create a new hosted zone, send a <code>POST</code> request to the <code>2012-12-12/hostedzone</code> resource. The request body must include an XML document with a <code>CreateHostedZoneRequest</code> element. The response returns the <code>CreateHostedZoneResponse</code> element that contains metadata about the hosted zone.</p> <p>Route 53 automatically creates a default SOA record and four NS records for the zone. The NS records in the hosted zone are the name servers you give your registrar to delegate your domain to. For more information about SOA and NS records, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html\">NS and SOA Records that Route 53 Creates for a Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>When you create a zone, its initial status is <code>PENDING</code>. This means that it is not yet available on all DNS servers. The status of the zone changes to <code>INSYNC</code> when the NS and SOA records are available on all Route 53 DNS servers. </p>",
       "input": {
         "type": "input",
-        "documentation": "<p>A complex type that contains information about the request to create a hosted zone.</p>",
         "members": {
           "name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.</p> <p>This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of <code>NameServers</code> elements returned in <code>DelegationSet</code>.</p>",
             "serialized_name": "Name"
           },
           "caller_reference": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A unique string that identifies the request and that allows failed <code>CreateHostedZone</code> requests to be retried without the risk of executing the operation twice. You must use a unique <code>CallerReference</code> string every time you create a hosted zone. <code>CallerReference</code> can be any unique string; you might choose to use a string that identifies your project, such as <code>DNSMigration_01</code>.</p> <p>Valid characters are any Unicode code points that are legal in an XML 1.0 document. The UTF-8 encoding of the value must be less than 128 bytes.</p>",
             "serialized_name": "CallerReference"
           },
           "hosted_zone_config": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains an optional comment about your hosted zone.</p>",
             "serialized_name": "HostedZoneConfig",
             "members": {
               "comment": {
                 "type": "string",
-                "documentation": "<p>An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>",
                 "serialized_name": "Comment"
               }
             }
@@ -478,60 +411,49 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A complex type containing the response information for the new hosted zone.</p>",
         "members": {
           "hosted_zone": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains identifying information about the hosted zone.</p>",
             "serialized_name": "HostedZone",
             "members": {
               "id": {
                 "type": "string",
-                "documentation": "<p>The ID of the specified hosted zone.</p>",
                 "serialized_name": "Id"
               },
               "name": {
                 "type": "string",
-                "documentation": "<p>The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.</p> <p>This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of <code>NameServers</code> elements returned in <code>DelegationSet</code>.</p>",
                 "serialized_name": "Name"
               },
               "caller_reference": {
                 "type": "string",
-                "documentation": "<p>A unique string that identifies the request to create the hosted zone.</p>",
                 "serialized_name": "CallerReference"
               },
               "config": {
                 "type": "structure",
-                "documentation": "<p>A complex type that contains the <code>Comment</code> element.</p>",
                 "serialized_name": "Config",
                 "members": {
                   "comment": {
                     "type": "string",
-                    "documentation": "<p>An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>",
                     "serialized_name": "Comment"
                   }
                 }
               },
               "resource_record_set_count": {
                 "type": "integer",
-                "documentation": "<p>Total number of resource record sets in the hosted zone.</p>",
                 "serialized_name": "ResourceRecordSetCount"
               }
             }
           },
           "change_info": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains information about the request to create a hosted zone. This includes an ID that you use when you call the GetChange action to get the current status of the change request.</p>",
             "serialized_name": "ChangeInfo",
             "members": {
               "id": {
                 "type": "string",
-                "documentation": "<p>The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.</p>",
                 "serialized_name": "Id"
               },
               "status": {
                 "type": "string",
-                "documentation": "<p>The current state of the request. <code>PENDING</code> indicates that this request has not yet been applied to all Amazon Route 53 DNS servers.</p> <p>Valid Values: <code>PENDING</code> | <code>INSYNC</code></p>",
                 "serialized_name": "Status",
                 "enum": [
                   "PENDING",
@@ -540,24 +462,20 @@
               },
               "submitted_at": {
                 "type": "iso8601_timestamp",
-                "documentation": "<p>The date and time the change was submitted, in the format <code>YYYY-MM-DDThh:mm:ssZ</code>, as specified in the ISO 8601 standard (for example, 2009-11-19T19:37:58Z). The <code>Z</code> after the time indicates that the time is listed in Coordinated Universal Time (UTC), which is synonymous with Greenwich Mean Time in this context.</p>",
                 "serialized_name": "SubmittedAt"
               },
               "comment": {
                 "type": "string",
-                "documentation": "<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a GetChange action to get detailed information about the change.</p>",
                 "serialized_name": "Comment"
               }
             }
           },
           "delegation_set": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains name server information.</p>",
             "serialized_name": "DelegationSet",
             "members": {
               "name_servers": {
                 "type": "list",
-                "documentation": "<p>A complex type that contains the authoritative name servers for the hosted zone. Use the method provided by your domain registrar to add an NS record to your domain for each <code>NameServer</code> that is assigned to your hosted zone.</p>",
                 "serialized_name": "NameServers",
                 "members": {
                   "type": "string",
@@ -568,7 +486,6 @@
           },
           "location": {
             "type": "string",
-            "documentation": "<p>The unique URL representing the new hosted zone.</p>",
             "location": "header",
             "serialized_name": "Location"
           }
@@ -577,55 +494,45 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>This error indicates that the specified domain name is not valid.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The hosted zone you are trying to create already exists. Route 53 returns this error when a hosted zone has already been created with the specified <code>CallerReference</code>.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>This error indicates that you've reached the maximum number of hosted zones that can be created for the current AWS account. You can request an increase to the limit on the <a href=\"http://aws.amazon.com/route53-request/\">Contact Us</a> page.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Route 53 allows some duplicate domain names, but there is a maximum number of duplicate names. This error indicates that you have reached that maximum. If you want to create another hosted zone with the same name and Route 53 generates this error, you can request an increase to the limit on the <a href=\"http://aws.amazon.com/route53-request/\">Contact Us</a> page.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
@@ -636,15 +543,12 @@
       "name": "DeleteHealthCheck",
       "http_method": "POST",
       "http_path": "/2012-12-12/healthcheck/{HealthCheckId}",
-      "documentation": "<p>This action deletes a health check. To delete a health check, send a <code>DELETE</code> request to the <code>2012-12-12/healthcheck/<i>health check ID</i></code> resource.</p> <important> You can delete a health check only if there are no resource record sets associated with this health check. If resource record sets are associated with this health check, you must disassociate them before you can delete your health check. If you try to delete a health check that is associated with resource record sets, Route 53 will deny your request with a <code>HealthCheckInUse</code> error. For information about disassociating the records from your health check, see ChangeResourceRecordSets.</important>",
       "input": {
         "type": "input",
-        "documentation": "<p>A complex type containing the request information for delete health check.</p>",
         "members": {
           "health_check_id": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The ID of the health check to delete.</p>",
             "location": "uri",
             "serialized_name": "HealthCheckId"
           }
@@ -652,40 +556,33 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>Empty response for the request.</p>",
         "members": {
         }
       },
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>The health check you are trying to get or delete does not exist.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>There are resource records associated with this health check. Before you can delete the health check, you must disassociate it from the resource record sets.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
@@ -696,15 +593,12 @@
       "name": "DeleteHostedZone",
       "http_method": "POST",
       "http_path": "/2012-12-12/hostedzone/{Id}",
-      "documentation": "<p>This action deletes a hosted zone. To delete a hosted zone, send a <code>DELETE</code> request to the <code>2012-12-12/hostedzone/<i>hosted zone ID</i></code> resource.</p> <p>For more information about deleting a hosted zone, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DeleteHostedZone.html\">Deleting a Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <important> You can delete a hosted zone only if there are no resource record sets other than the default SOA record and NS resource record sets. If your hosted zone contains other resource record sets, you must delete them before you can delete your hosted zone. If you try to delete a hosted zone that contains other resource record sets, Route 53 will deny your request with a <code>HostedZoneNotEmpty</code> error. For information about deleting records from your hosted zone, see ChangeResourceRecordSets.</important>",
       "input": {
         "type": "input",
-        "documentation": "<p>A complex type containing the response information for the delete request.</p>",
         "members": {
           "id": {
             "type": "string",
             "required": true,
-            "documentation": "<p> The ID of the request. Include this ID in a call to GetChange to track when the change has propagated to all Route 53 DNS servers.</p>",
             "location": "uri",
             "serialized_name": "Id"
           }
@@ -712,21 +606,17 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A complex type containing the response information for the request.</p>",
         "members": {
           "change_info": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains the ID, the status, and the date and time of your delete request.</p>",
             "serialized_name": "ChangeInfo",
             "members": {
               "id": {
                 "type": "string",
-                "documentation": "<p>The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.</p>",
                 "serialized_name": "Id"
               },
               "status": {
                 "type": "string",
-                "documentation": "<p>The current state of the request. <code>PENDING</code> indicates that this request has not yet been applied to all Amazon Route 53 DNS servers.</p> <p>Valid Values: <code>PENDING</code> | <code>INSYNC</code></p>",
                 "serialized_name": "Status",
                 "enum": [
                   "PENDING",
@@ -735,12 +625,10 @@
               },
               "submitted_at": {
                 "type": "iso8601_timestamp",
-                "documentation": "<p>The date and time the change was submitted, in the format <code>YYYY-MM-DDThh:mm:ssZ</code>, as specified in the ISO 8601 standard (for example, 2009-11-19T19:37:58Z). The <code>Z</code> after the time indicates that the time is listed in Coordinated Universal Time (UTC), which is synonymous with Greenwich Mean Time in this context.</p>",
                 "serialized_name": "SubmittedAt"
               },
               "comment": {
                 "type": "string",
-                "documentation": "<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a GetChange action to get detailed information about the change.</p>",
                 "serialized_name": "Comment"
               }
             }
@@ -759,18 +647,6 @@
         },
         {
           "type": "structure",
-          "documentation": "<p>The hosted zone contains resource record sets in addition to the default NS and SOA resource record sets. Before you can delete the hosted zone, you must delete the additional resource record sets.</p>",
-          "members": {
-            "message": {
-              "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "documentation": "<p>The request was rejected because Route 53 was still processing a prior request.</p>",
           "members": {
             "message": {
               "type": "string",
@@ -780,11 +656,18 @@
         },
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
+              "serialized_name": "message"
+            }
+          }
+        },
+        {
+          "type": "structure",
+          "members": {
+            "message": {
+              "type": "string",
               "serialized_name": "message"
             }
           }
@@ -795,15 +678,12 @@
       "name": "GetChange",
       "http_method": "POST",
       "http_path": "/2012-12-12/change/{Id}",
-      "documentation": "<p> This action returns the current status of a change batch request. The status is one of the following values:</p> <p>- <code>PENDING</code> indicates that the changes in this request have not replicated to all Route 53 DNS servers. This is the initial status of all change batch requests.</p> <p>- <code>INSYNC</code> indicates that the changes have replicated to all Amazon Route 53 DNS servers. </p>",
       "input": {
         "type": "input",
-        "documentation": "<p>The input for a GetChange request.</p>",
         "members": {
           "id": {
             "type": "string",
             "required": true,
-            "documentation": "<p> The ID of the change batch request. The value that you specify here is the value that <code>ChangeResourceRecordSets</code> returned in the Id element when you submitted the request.</p>",
             "location": "uri",
             "serialized_name": "Id"
           }
@@ -811,21 +691,17 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A complex type that contains the <code>ChangeInfo</code> element.</p>",
         "members": {
           "change_info": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains information about the specified change batch, including the change batch ID, the status of the change, and the date and time of the request.</p>",
             "serialized_name": "ChangeInfo",
             "members": {
               "id": {
                 "type": "string",
-                "documentation": "<p>The ID of the request. Use this ID to track when the change has completed across all Amazon Route 53 DNS servers.</p>",
                 "serialized_name": "Id"
               },
               "status": {
                 "type": "string",
-                "documentation": "<p>The current state of the request. <code>PENDING</code> indicates that this request has not yet been applied to all Amazon Route 53 DNS servers.</p> <p>Valid Values: <code>PENDING</code> | <code>INSYNC</code></p>",
                 "serialized_name": "Status",
                 "enum": [
                   "PENDING",
@@ -834,12 +710,10 @@
               },
               "submitted_at": {
                 "type": "iso8601_timestamp",
-                "documentation": "<p>The date and time the change was submitted, in the format <code>YYYY-MM-DDThh:mm:ssZ</code>, as specified in the ISO 8601 standard (for example, 2009-11-19T19:37:58Z). The <code>Z</code> after the time indicates that the time is listed in Coordinated Universal Time (UTC), which is synonymous with Greenwich Mean Time in this context.</p>",
                 "serialized_name": "SubmittedAt"
               },
               "comment": {
                 "type": "string",
-                "documentation": "<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a GetChange action to get detailed information about the change.</p>",
                 "serialized_name": "Comment"
               }
             }
@@ -858,11 +732,9 @@
         },
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
@@ -873,15 +745,12 @@
       "name": "GetHealthCheck",
       "http_method": "POST",
       "http_path": "/2012-12-12/healthcheck/{HealthCheckId}",
-      "documentation": "<p> To retrieve the health check, send a <code>GET</code> request to the <code>2012-12-12/healthcheck/<i>health check ID</i></code> resource. </p>",
       "input": {
         "type": "input",
-        "documentation": "<p>A complex type that contains information about the request to get a health check.</p>",
         "members": {
           "health_check_id": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The ID of the health check to retrieve.</p>",
             "location": "uri",
             "serialized_name": "HealthCheckId"
           }
@@ -889,41 +758,33 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A complex type containing information about the specified health check.</p>",
         "members": {
           "health_check": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains the information about the specified health check.</p>",
             "serialized_name": "HealthCheck",
             "members": {
               "id": {
                 "type": "string",
-                "documentation": "<p>The ID of the specified health check.</p>",
                 "serialized_name": "Id"
               },
               "caller_reference": {
                 "type": "string",
-                "documentation": "<p>A unique string that identifies the request to create the health check.</p>",
                 "serialized_name": "CallerReference"
               },
               "health_check_config": {
                 "type": "structure",
-                "documentation": "<p>A complex type that contains the health check configuration.</p>",
                 "serialized_name": "HealthCheckConfig",
                 "members": {
                   "ip_address": {
                     "type": "string",
-                    "documentation": "<p>IP Address of the instance being checked. </p>",
                     "serialized_name": "IPAddress"
                   },
                   "port": {
                     "type": "integer",
-                    "documentation": "<p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>",
                     "serialized_name": "Port"
                   },
                   "type": {
                     "type": "string",
-                    "documentation": "<p>The type of health check to be performed. Currently supported protocols are TCP and HTTP.</p>",
                     "serialized_name": "Type",
                     "enum": [
                       "HTTP",
@@ -932,12 +793,10 @@
                   },
                   "resource_path": {
                     "type": "string",
-                    "documentation": "<p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>",
                     "serialized_name": "ResourcePath"
                   },
                   "fully_qualified_domain_name": {
                     "type": "string",
-                    "documentation": "<p>Fully qualified domain name of the instance to be health checked.</p>",
                     "serialized_name": "FullyQualifiedDomainName"
                   }
                 }
@@ -949,22 +808,18 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>The health check you are trying to get or delete does not exist.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
@@ -975,15 +830,12 @@
       "name": "GetHostedZone",
       "http_method": "POST",
       "http_path": "/2012-12-12/hostedzone/{Id}",
-      "documentation": "<p> To retrieve the delegation set for a hosted zone, send a <code>GET</code> request to the <code>2012-12-12/hostedzone/<i>hosted zone ID</i></code> resource. The delegation set is the four Route 53 name servers that were assigned to the hosted zone when you created it.</p>",
       "input": {
         "type": "input",
-        "documentation": "<p> The input for a GetHostedZone request.</p>",
         "members": {
           "id": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The ID of the hosted zone for which you want to get a list of the name servers in the delegation set.</p>",
             "location": "uri",
             "serialized_name": "Id"
           }
@@ -991,55 +843,45 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A complex type containing information about the specified hosted zone.</p>",
         "members": {
           "hosted_zone": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains the information about the specified hosted zone.</p>",
             "serialized_name": "HostedZone",
             "members": {
               "id": {
                 "type": "string",
-                "documentation": "<p>The ID of the specified hosted zone.</p>",
                 "serialized_name": "Id"
               },
               "name": {
                 "type": "string",
-                "documentation": "<p>The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.</p> <p>This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of <code>NameServers</code> elements returned in <code>DelegationSet</code>.</p>",
                 "serialized_name": "Name"
               },
               "caller_reference": {
                 "type": "string",
-                "documentation": "<p>A unique string that identifies the request to create the hosted zone.</p>",
                 "serialized_name": "CallerReference"
               },
               "config": {
                 "type": "structure",
-                "documentation": "<p>A complex type that contains the <code>Comment</code> element.</p>",
                 "serialized_name": "Config",
                 "members": {
                   "comment": {
                     "type": "string",
-                    "documentation": "<p>An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>",
                     "serialized_name": "Comment"
                   }
                 }
               },
               "resource_record_set_count": {
                 "type": "integer",
-                "documentation": "<p>Total number of resource record sets in the hosted zone.</p>",
                 "serialized_name": "ResourceRecordSetCount"
               }
             }
           },
           "delegation_set": {
             "type": "structure",
-            "documentation": "<p>A complex type that contains information about the name servers for the specified hosted zone.</p>",
             "serialized_name": "DelegationSet",
             "members": {
               "name_servers": {
                 "type": "list",
-                "documentation": "<p>A complex type that contains the authoritative name servers for the hosted zone. Use the method provided by your domain registrar to add an NS record to your domain for each <code>NameServer</code> that is assigned to your hosted zone.</p>",
                 "serialized_name": "NameServers",
                 "members": {
                   "type": "string",
@@ -1062,11 +904,9 @@
         },
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
@@ -1077,20 +917,16 @@
       "name": "ListHealthChecks",
       "http_method": "POST",
       "http_path": "/2012-12-12/healthcheck?marker={Marker}&maxitems={MaxItems}",
-      "documentation": "<p> To retrieve a list of your health checks, send a <code>GET</code> request to the <code>2012-12-12/healthcheck</code> resource. The response to this request includes a <code>HealthChecks</code> element with zero, one, or multiple <code>HealthCheck</code> child elements. By default, the list of health checks is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the health check that the list begins with. </p> Amazon Route 53 returns a maximum of 100 items. If you set MaxItems to a value greater than 100, Amazon Route 53 returns only the first 100.",
       "input": {
         "type": "input",
-        "documentation": "<p> To retrieve a list of your health checks, send a <code>GET</code> request to the <code>2012-12-12/healthcheck</code> resource. The response to this request includes a <code>HealthChecks</code> element with zero or more <code>HealthCheck</code> child elements. By default, the list of health checks is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the health check that the list begins with.</p> Route 53 returns a maximum of 100 items. If you set <code>MaxItems</code> to a value greater than 100, Route 53 returns only the first 100.",
         "members": {
           "marker": {
             "type": "string",
-            "documentation": "<p>If the request returned more than one page of results, submit another request and specify the value of <code>NextMarker</code> from the last response in the <code>marker</code> parameter to get the next page of results.</p>",
             "location": "uri",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "string",
-            "documentation": "<p>Specify the maximum number of health checks to return per page of results.</p>",
             "location": "uri",
             "serialized_name": "MaxItems"
           }
@@ -1098,45 +934,36 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p> A complex type that contains the response for the request.</p>",
         "members": {
           "health_checks": {
             "type": "list",
-            "documentation": "<p>A complex type that contains information about the health checks associated with the current AWS account.</p>",
             "serialized_name": "HealthChecks",
             "members": {
               "type": "structure",
-              "documentation": "<p>A complex type that contains identifying information about the health check.</p>",
               "serialized_name": "HealthCheck",
               "members": {
                 "id": {
                   "type": "string",
-                  "documentation": "<p>The ID of the specified health check.</p>",
                   "serialized_name": "Id"
                 },
                 "caller_reference": {
                   "type": "string",
-                  "documentation": "<p>A unique string that identifies the request to create the health check.</p>",
                   "serialized_name": "CallerReference"
                 },
                 "health_check_config": {
                   "type": "structure",
-                  "documentation": "<p>A complex type that contains the health check configuration.</p>",
                   "serialized_name": "HealthCheckConfig",
                   "members": {
                     "ip_address": {
                       "type": "string",
-                      "documentation": "<p>IP Address of the instance being checked. </p>",
                       "serialized_name": "IPAddress"
                     },
                     "port": {
                       "type": "integer",
-                      "documentation": "<p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>",
                       "serialized_name": "Port"
                     },
                     "type": {
                       "type": "string",
-                      "documentation": "<p>The type of health check to be performed. Currently supported protocols are TCP and HTTP.</p>",
                       "serialized_name": "Type",
                       "enum": [
                         "HTTP",
@@ -1145,12 +972,10 @@
                     },
                     "resource_path": {
                       "type": "string",
-                      "documentation": "<p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>",
                       "serialized_name": "ResourcePath"
                     },
                     "fully_qualified_domain_name": {
                       "type": "string",
-                      "documentation": "<p>Fully qualified domain name of the instance to be health checked.</p>",
                       "serialized_name": "FullyQualifiedDomainName"
                     }
                   }
@@ -1160,22 +985,18 @@
           },
           "marker": {
             "type": "string",
-            "documentation": "<p>If the request returned more than one page of results, submit another request and specify the value of <code>NextMarker</code> from the last response in the <code>marker</code> parameter to get the next page of results.</p>",
             "serialized_name": "Marker"
           },
           "is_truncated": {
             "type": "boolean",
-            "documentation": "<p> A flag indicating whether there are more health checks to be listed. If your results were truncated, you can make a follow-up request for the next page of results by using the <code>Marker</code> element.</p> <p>Valid Values: <code>true</code> | <code>false</code></p>",
             "serialized_name": "IsTruncated"
           },
           "next_marker": {
             "type": "string",
-            "documentation": "<p> Indicates where to continue listing health checks. If ListHealthChecksResponse$IsTruncated is <code>true</code>, make another request to <code>ListHealthChecks</code> and include the value of the <code>NextMarker</code> element in the <code>Marker</code> element to get the next page of results.</p>",
             "serialized_name": "NextMarker"
           },
           "max_items": {
             "type": "string",
-            "documentation": "<p>The maximum number of health checks to be included in the response body. If the number of health checks associated with this AWS account exceeds <code>MaxItems</code>, the value of ListHealthChecksResponse$IsTruncated in the response is <code>true</code>. Call <code>ListHealthChecks</code> again and specify the value of ListHealthChecksResponse$NextMarker in the ListHostedZonesRequest$Marker element to get the next page of results.</p>",
             "serialized_name": "MaxItems"
           }
         }
@@ -1183,11 +1004,9 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
@@ -1198,20 +1017,16 @@
       "name": "ListHostedZones",
       "http_method": "POST",
       "http_path": "/2012-12-12/hostedzone?marker={Marker}&maxitems={MaxItems}",
-      "documentation": "<p> To retrieve a list of your hosted zones, send a <code>GET</code> request to the <code>2012-12-12/hostedzone</code> resource. The response to this request includes a <code>HostedZones</code> element with zero, one, or multiple <code>HostedZone</code> child elements. By default, the list of hosted zones is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the hosted zone that the list begins with. </p> Amazon Route 53 returns a maximum of 100 items. If you set MaxItems to a value greater than 100, Amazon Route 53 returns only the first 100.",
       "input": {
         "type": "input",
-        "documentation": "<p> To retrieve a list of your hosted zones, send a <code>GET</code> request to the <code>2012-12-12/hostedzone</code> resource. The response to this request includes a <code>HostedZones</code> element with zero or more <code>HostedZone</code> child elements. By default, the list of hosted zones is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the hosted zone that the list begins with. For more information about listing hosted zones, see <a href=\"http://docs.amazonwebservices.com/Route53/latest/DeveloperGuide/ListInfoOnHostedZone.html\">Listing the Hosted Zones for an AWS Account</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> Route 53 returns a maximum of 100 items. If you set <code>MaxItems</code> to a value greater than 100, Route 53 returns only the first 100.",
         "members": {
           "marker": {
             "type": "string",
-            "documentation": "<p>If the request returned more than one page of results, submit another request and specify the value of <code>NextMarker</code> from the last response in the <code>marker</code> parameter to get the next page of results.</p>",
             "location": "uri",
             "serialized_name": "Marker"
           },
           "max_items": {
             "type": "string",
-            "documentation": "<p>Specify the maximum number of hosted zones to return per page of results.</p>",
             "location": "uri",
             "serialized_name": "MaxItems"
           }
@@ -1219,47 +1034,38 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p> A complex type that contains the response for the request.</p>",
         "members": {
           "hosted_zones": {
             "type": "list",
-            "documentation": "<p>A complex type that contains information about the hosted zones associated with the current AWS account.</p>",
             "serialized_name": "HostedZones",
             "members": {
               "type": "structure",
-              "documentation": "<p>A complex type that contain information about the specified hosted zone.</p>",
               "serialized_name": "HostedZone",
               "members": {
                 "id": {
                   "type": "string",
-                  "documentation": "<p>The ID of the specified hosted zone.</p>",
                   "serialized_name": "Id"
                 },
                 "name": {
                   "type": "string",
-                  "documentation": "<p>The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.</p> <p>This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of <code>NameServers</code> elements returned in <code>DelegationSet</code>.</p>",
                   "serialized_name": "Name"
                 },
                 "caller_reference": {
                   "type": "string",
-                  "documentation": "<p>A unique string that identifies the request to create the hosted zone.</p>",
                   "serialized_name": "CallerReference"
                 },
                 "config": {
                   "type": "structure",
-                  "documentation": "<p>A complex type that contains the <code>Comment</code> element.</p>",
                   "serialized_name": "Config",
                   "members": {
                     "comment": {
                       "type": "string",
-                      "documentation": "<p>An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>",
                       "serialized_name": "Comment"
                     }
                   }
                 },
                 "resource_record_set_count": {
                   "type": "integer",
-                  "documentation": "<p>Total number of resource record sets in the hosted zone.</p>",
                   "serialized_name": "ResourceRecordSetCount"
                 }
               }
@@ -1267,22 +1073,18 @@
           },
           "marker": {
             "type": "string",
-            "documentation": "<p>If the request returned more than one page of results, submit another request and specify the value of <code>NextMarker</code> from the last response in the <code>marker</code> parameter to get the next page of results.</p>",
             "serialized_name": "Marker"
           },
           "is_truncated": {
             "type": "boolean",
-            "documentation": "<p> A flag indicating whether there are more hosted zones to be listed. If your results were truncated, you can make a follow-up request for the next page of results by using the <code>Marker</code> element.</p> <p>Valid Values: <code>true</code> | <code>false</code></p>",
             "serialized_name": "IsTruncated"
           },
           "next_marker": {
             "type": "string",
-            "documentation": "<p> Indicates where to continue listing hosted zones. If ListHostedZonesResponse$IsTruncated is <code>true</code>, make another request to <code>ListHostedZones</code> and include the value of the <code>NextMarker</code> element in the <code>Marker</code> element to get the next page of results.</p>",
             "serialized_name": "NextMarker"
           },
           "max_items": {
             "type": "string",
-            "documentation": "<p>The maximum number of hosted zones to be included in the response body. If the number of hosted zones associated with this AWS account exceeds <code>MaxItems</code>, the value of ListHostedZonesResponse$IsTruncated in the response is <code>true</code>. Call <code>ListHostedZones</code> again and specify the value of ListHostedZonesResponse$NextMarker in the ListHostedZonesRequest$Marker element to get the next page of results.</p>",
             "serialized_name": "MaxItems"
           }
         }
@@ -1290,11 +1092,9 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }
@@ -1305,27 +1105,22 @@
       "name": "ListResourceRecordSets",
       "http_method": "POST",
       "http_path": "/2012-12-12/hostedzone/{HostedZoneId}/rrset?type={StartRecordType}&name={StartRecordName}&identifier={StartRecordIdentifier}&maxitems={MaxItems}",
-      "documentation": "<p>Imagine all the resource record sets in a zone listed out in front of you. Imagine them sorted lexicographically first by DNS name (with the labels reversed, like \"com.amazon.www\" for example), and secondarily, lexicographically by record type. This operation retrieves at most MaxItems resource record sets from this list, in order, starting at a position specified by the Name and Type arguments:</p> <ul> <li>If both Name and Type are omitted, this means start the results at the first RRSET in the HostedZone.</li> <li>If Name is specified but Type is omitted, this means start the results at the first RRSET in the list whose name is greater than or equal to Name. </li> <li>If both Name and Type are specified, this means start the results at the first RRSET in the list whose name is greater than or equal to Name and whose type is greater than or equal to Type.</li> <li>It is an error to specify the Type but not the Name.</li> </ul> <p>Use ListResourceRecordSets to retrieve a single known record set by specifying the record set's name and type, and setting MaxItems = 1</p> <p>To retrieve all the records in a HostedZone, first pause any processes making calls to ChangeResourceRecordSets. Initially call ListResourceRecordSets without a Name and Type to get the first page of record sets. For subsequent calls, set Name and Type to the NextName and NextType values returned by the previous response. </p> <p>In the presence of concurrent ChangeResourceRecordSets calls, there is no consistency of results across calls to ListResourceRecordSets. The only way to get a consistent multi-page snapshot of all RRSETs in a zone is to stop making changes while pagination is in progress.</p> <p>However, the results from ListResourceRecordSets are consistent within a page. If MakeChange calls are taking place concurrently, the result of each one will either be completely visible in your results or not at all. You will not see partial changes, or changes that do not ultimately succeed. (This follows from the fact that MakeChange is atomic) </p> <p>The results from ListResourceRecordSets are strongly consistent with ChangeResourceRecordSets. To be precise, if a single process makes a call to ChangeResourceRecordSets and receives a successful response, the effects of that change will be visible in a subsequent call to ListResourceRecordSets by that process.</p>",
       "input": {
         "type": "input",
-        "documentation": "<p> The input for a ListResourceRecordSets request.</p>",
         "members": {
           "hosted_zone_id": {
             "type": "string",
             "required": true,
-            "documentation": "<p> The ID of the hosted zone that contains the resource record sets that you want to get.</p>",
             "location": "uri",
             "serialized_name": "HostedZoneId"
           },
           "start_record_name": {
             "type": "string",
-            "documentation": "<p>The first name in the lexicographic ordering of domain names that you want the <code>ListResourceRecordSets</code> request to list.</p>",
             "location": "uri",
             "serialized_name": "StartRecordName"
           },
           "start_record_type": {
             "type": "string",
-            "documentation": "<p>The DNS type at which to begin the listing of resource record sets. </p> <p>Valid values: <code>A</code> | <code>AAAA</code> | <code>CNAME</code> | <code>MX</code> | <code>NS</code> | <code>PTR</code> | <code>SOA</code> | <code>SPF</code> | <code>SRV</code> | <code>TXT</code></p> <p>Values for Weighted Resource Record Sets: <code>A</code> | <code>AAAA</code> | <code>CNAME</code> | <code>TXT</code></p> <p> Values for Regional Resource Record Sets: <code>A</code> | <code>AAAA</code> | <code>CNAME</code> | <code>TXT</code></p> <p>Values for Alias Resource Record Sets: <code>A</code> | <code>AAAA</code></p> <p>Constraint: Specifying <code>type</code> without specifying <code>name</code> returns an InvalidInput error.</p>",
             "location": "uri",
             "serialized_name": "StartRecordType",
             "enum": [
@@ -1343,13 +1138,11 @@
           },
           "start_record_identifier": {
             "type": "string",
-            "documentation": "<p><i>Weighted resource record sets only:</i> If results were truncated for a given DNS name and type, specify the value of <code>ListResourceRecordSetsResponse$NextRecordIdentifier</code> from the previous response to get the next resource record set that has the current DNS name and type.</p>",
             "location": "uri",
             "serialized_name": "StartRecordIdentifier"
           },
           "max_items": {
             "type": "string",
-            "documentation": "<p>The maximum number of records you want in the response body.</p>",
             "location": "uri",
             "serialized_name": "MaxItems"
           }
@@ -1357,25 +1150,20 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A complex type that contains information about the resource record sets that are returned by the request and information about the response.</p>",
         "members": {
           "resource_record_sets": {
             "type": "list",
-            "documentation": "<p>A complex type that contains information about the resource record sets that are returned by the request.</p>",
             "serialized_name": "ResourceRecordSets",
             "members": {
               "type": "structure",
-              "documentation": "<p>A complex type that contains information about the current resource record set.</p>",
               "serialized_name": "ResourceRecordSet",
               "members": {
                 "name": {
                   "type": "string",
-                  "documentation": "<p>The domain name of the current resource record set.</p>",
                   "serialized_name": "Name"
                 },
                 "type": {
                   "type": "string",
-                  "documentation": "<p>The type of the current resource record set.</p>",
                   "serialized_name": "Type",
                   "enum": [
                     "SOA",
@@ -1392,17 +1180,14 @@
                 },
                 "set_identifier": {
                   "type": "string",
-                  "documentation": "<p><i>Weighted, Regional, and Failover resource record sets only:</i> An identifier that differentiates among multiple resource record sets that have the same combination of DNS name and type.</p>",
                   "serialized_name": "SetIdentifier"
                 },
                 "weight": {
                   "type": "integer",
-                  "documentation": "<p><i>Weighted resource record sets only:</i> Among resource record sets that have the same combination of DNS name and type, a value that determines what portion of traffic for the current resource record set is routed to the associated location.</p>",
                   "serialized_name": "Weight"
                 },
                 "region": {
                   "type": "string",
-                  "documentation": "<p><i>Regional resource record sets only:</i> Among resource record sets that have the same combination of DNS name and type, a value that specifies the AWS region for the current resource record set.</p>",
                   "serialized_name": "Region",
                   "enum": [
                     "us-east-1",
@@ -1417,7 +1202,6 @@
                 },
                 "failover": {
                   "type": "string",
-                  "documentation": "<p><i>Failover resource record sets only:</i> Among resource record sets that have the same combination of DNS name and type, a value that indicates whether the current resource record set is a primary or secondary resource record set. A failover set may contain at most one resource record set marked as primary and one resource record set marked as secondary. A resource record set marked as primary will be returned if any of the following are true: (1) an associated health check is passing, (2) if the resource record set is an alias with the evaluate target health and at least one target resource record set is healthy, (3) both the primary and secondary resource record set are failing health checks or (4) there is no secondary resource record set. A secondary resource record set will be returned if: (1) the primary is failing a health check and either the secondary is passing a health check or has no associated health check, or (2) there is no primary resource record set. </p> <p>Valid values: <code>PRIMARY</code> | <code>SECONDARY</code></p>",
                   "serialized_name": "Failover",
                   "enum": [
                     "PRIMARY",
@@ -1426,21 +1210,17 @@
                 },
                 "ttl": {
                   "type": "integer",
-                  "documentation": "<p>The cache time to live for the current resource record set.</p>",
                   "serialized_name": "TTL"
                 },
                 "resource_records": {
                   "type": "list",
-                  "documentation": "<p>A complex type that contains the resource records for the current resource record set.</p>",
                   "serialized_name": "ResourceRecords",
                   "members": {
                     "type": "structure",
-                    "documentation": "<p>A complex type that contains the value of the <code>Value</code> element for the current resource record set.</p>",
                     "serialized_name": "ResourceRecord",
                     "members": {
                       "value": {
                         "type": "string",
-                        "documentation": "<p>The value of the <code>Value</code> element for the current resource record set.</p>",
                         "serialized_name": "Value"
                       }
                     }
@@ -1448,29 +1228,24 @@
                 },
                 "alias_target": {
                   "type": "structure",
-                  "documentation": "<p><i>Alias resource record sets only:</i> Information about the AWS resource to which you are redirecting traffic.</p>",
                   "serialized_name": "AliasTarget",
                   "members": {
                     "hosted_zone_id": {
                       "type": "string",
-                      "documentation": "<p><i>Alias resource record sets only:</i> The value of the hosted zone ID for the AWS resource.</p> <p>For more information and an example, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingAliasRRSets.html\">Creating Alias Resource Record Sets</a> in the <i>Amazon Route 53 Developer Guide</i></p>.",
                       "serialized_name": "HostedZoneId"
                     },
                     "dns_name": {
                       "type": "string",
-                      "documentation": "<p><i>Alias resource record sets only:</i> The external DNS name associated with the AWS Resource.</p> <p>For more information and an example, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingAliasRRSets.html\">Creating Alias Resource Record Sets</a> in the <i>Amazon Route 53 Developer Guide</i></p>.",
                       "serialized_name": "DNSName"
                     },
                     "evaluate_target_health": {
                       "type": "boolean",
-                      "documentation": "<p><i>Alias resource record sets only:</i> A boolean value that indicates whether this Resource Record Set should respect the health status of any health checks associated with the ALIAS target record which it is linked to.</p> <p>For more information and an example, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingAliasRRSets.html\">Creating Alias Resource Record Sets</a> in the <i>Amazon Route 53 Developer Guide</i></p>.",
                       "serialized_name": "EvaluateTargetHealth"
                     }
                   }
                 },
                 "health_check_id": {
                   "type": "string",
-                  "documentation": "<p><i>Health Check resource record sets only, not required for alias resource record sets:</i> An identifier that is used to identify health check associated with the resource record set.</p>",
                   "serialized_name": "HealthCheckId"
                 }
               }
@@ -1478,17 +1253,14 @@
           },
           "is_truncated": {
             "type": "boolean",
-            "documentation": "<p> A flag that indicates whether there are more resource record sets to be listed. If your results were truncated, you can make a follow-up request for the next page of results by using the ListResourceRecordSetsResponse$NextRecordName element.</p> <p>Valid Values: <code>true</code> | <code>false</code></p>",
             "serialized_name": "IsTruncated"
           },
           "next_record_name": {
             "type": "string",
-            "documentation": "<p>If the results were truncated, the name of the next record in the list. This element is present only if ListResourceRecordSetsResponse$IsTruncated is true. </p>",
             "serialized_name": "NextRecordName"
           },
           "next_record_type": {
             "type": "string",
-            "documentation": "<p>If the results were truncated, the type of the next record in the list. This element is present only if ListResourceRecordSetsResponse$IsTruncated is true. </p>",
             "serialized_name": "NextRecordType",
             "enum": [
               "SOA",
@@ -1505,12 +1277,10 @@
           },
           "next_record_identifier": {
             "type": "string",
-            "documentation": "<p><i>Weighted resource record sets only:</i> If results were truncated for a given DNS name and type, the value of <code>SetIdentifier</code> for the next resource record set that has the current DNS name and type.</p>",
             "serialized_name": "NextRecordIdentifier"
           },
           "max_items": {
             "type": "string",
-            "documentation": "<p>The maximum number of records you requested. The maximum value of <code>MaxItems</code> is 100.</p>",
             "serialized_name": "MaxItems"
           }
         }
@@ -1527,11 +1297,9 @@
         },
         {
           "type": "structure",
-          "documentation": "<p>Some value specified in the request is invalid or the XML document is malformed.</p>",
           "members": {
             "message": {
               "type": "string",
-              "documentation": "<p>Descriptive message for the error response.</p>",
               "serialized_name": "message"
             }
           }

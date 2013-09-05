@@ -15,115 +15,94 @@
     "Aws::Plugins::QuerySerializer",
     "Aws::Plugins::Signer"
   ],
-  "documentation": "<fullname>Amazon CloudSearch Configuration Service</fullname> <p>You use the Configuration Service to create, configure, and manage search domains. Amazon CloudSearch configuration requests are submitted to <code>cloudsearch.us-east-1.amazonaws.com</code> using the AWS Query protocol. </p>",
   "operations": {
     "create_domain": {
       "name": "CreateDomain",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Creates a new search domain.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of a newly created domain.</p>",
         "members": {
           "domain_status": {
             "type": "structure",
-            "documentation": "<p>The current status of the search domain.</p>",
             "serialized_name": "DomainStatus",
             "members": {
               "domain_id": {
                 "type": "string",
-                "documentation": "<p>An internally generated unique identifier for a domain.</p>",
                 "serialized_name": "DomainId"
               },
               "domain_name": {
                 "type": "string",
-                "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
                 "serialized_name": "DomainName"
               },
               "created": {
                 "type": "boolean",
-                "documentation": "<p>True if the search domain is created. It can take several minutes to initialize a domain when CreateDomain is called. Newly created search domains are returned from DescribeDomains with a false value for Created until domain creation is complete.</p>",
                 "serialized_name": "Created"
               },
               "deleted": {
                 "type": "boolean",
-                "documentation": "<p>True if the search domain has been deleted. The system must clean up resources dedicated to the search domain when DeleteDomain is called. Newly deleted search domains are returned from DescribeDomains with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>",
                 "serialized_name": "Deleted"
               },
               "num_searchable_docs": {
                 "type": "integer",
-                "documentation": "<p>The number of documents that have been submitted to the domain and indexed.</p>",
                 "serialized_name": "NumSearchableDocs"
               },
               "doc_service": {
                 "type": "structure",
-                "documentation": "<p>The service endpoint for updating documents in a search domain.</p>",
                 "serialized_name": "DocService",
                 "members": {
                   "arn": {
                     "type": "string",
-                    "documentation": "<p>An Amazon Resource Name (ARN). See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>",
                     "serialized_name": "Arn"
                   },
                   "endpoint": {
                     "type": "string",
-                    "documentation": "<p>The URL (including /version/pathPrefix) to which service requests can be submitted.</p>",
                     "serialized_name": "Endpoint"
                   }
                 }
               },
               "search_service": {
                 "type": "structure",
-                "documentation": "<p>The service endpoint for requesting search results from a search domain.</p>",
                 "serialized_name": "SearchService",
                 "members": {
                   "arn": {
                     "type": "string",
-                    "documentation": "<p>An Amazon Resource Name (ARN). See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>",
                     "serialized_name": "Arn"
                   },
                   "endpoint": {
                     "type": "string",
-                    "documentation": "<p>The URL (including /version/pathPrefix) to which service requests can be submitted.</p>",
                     "serialized_name": "Endpoint"
                   }
                 }
               },
               "requires_index_documents": {
                 "type": "boolean",
-                "documentation": "<p>True if IndexDocuments needs to be called to activate the current domain configuration.</p>",
                 "serialized_name": "RequiresIndexDocuments"
               },
               "processing": {
                 "type": "boolean",
-                "documentation": "<p>True if processing is being done to activate the current domain configuration.</p>",
                 "serialized_name": "Processing"
               },
               "search_instance_type": {
                 "type": "string",
-                "documentation": "<p>The instance type (such as search.m1.small) that is being used to process search requests.</p>",
                 "serialized_name": "SearchInstanceType"
               },
               "search_partition_count": {
                 "type": "integer",
-                "documentation": "<p>The number of partitions across which the search index is spread.</p>",
                 "serialized_name": "SearchPartitionCount"
               },
               "search_instance_count": {
                 "type": "integer",
-                "documentation": "<p>The number of search instances that are available to process search requests.</p>",
                 "serialized_name": "SearchInstanceCount"
               }
             }
@@ -133,35 +112,29 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because a resource limit has already been met.</p>",
           "members": {
           }
         }
@@ -171,32 +144,27 @@
       "name": "DefineIndexField",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Configures an <code>IndexField</code> for the search domain. Used to create new fields and modify existing ones. If the field exists, the new configuration replaces the old one. You can configure a maximum of 200 index fields.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "index_field": {
             "type": "structure",
             "required": true,
-            "documentation": "<p>Defines a field in the index, including its name, type, and the source of its data. The <code>IndexFieldType</code> indicates which of the options will be present. It is invalid to specify options for a type other than the <code>IndexFieldType</code>.</p>",
             "serialized_name": "IndexField",
             "members": {
               "index_field_name": {
                 "type": "string",
                 "required": true,
-                "documentation": "<p>The name of a field in the search index. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
                 "serialized_name": "IndexFieldName"
               },
               "index_field_type": {
                 "type": "string",
                 "required": true,
-                "documentation": "<p>The type of field. Based on this type, exactly one of the UIntOptions, LiteralOptions or TextOptions must be present.</p>",
                 "serialized_name": "IndexFieldType",
                 "enum": [
                   "uint",
@@ -206,82 +174,67 @@
               },
               "u_int_options": {
                 "type": "structure",
-                "documentation": "<p>Options for an unsigned integer field. Present if <code>IndexFieldType</code> specifies the field is of type unsigned integer.</p>",
                 "serialized_name": "UIntOptions",
                 "members": {
                   "default_value": {
                     "type": "integer",
-                    "documentation": "<p>The default value for an unsigned integer field. Optional.</p>",
                     "serialized_name": "DefaultValue"
                   }
                 }
               },
               "literal_options": {
                 "type": "structure",
-                "documentation": "<p>Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type literal.</p>",
                 "serialized_name": "LiteralOptions",
                 "members": {
                   "default_value": {
                     "type": "string",
-                    "documentation": "<p>The default value for a literal field. Optional.</p>",
                     "serialized_name": "DefaultValue"
                   },
                   "search_enabled": {
                     "type": "boolean",
-                    "documentation": "<p>Specifies whether search is enabled for this field. Default: False.</p>",
                     "serialized_name": "SearchEnabled"
                   },
                   "facet_enabled": {
                     "type": "boolean",
-                    "documentation": "<p>Specifies whether facets are enabled for this field. Default: False.</p>",
                     "serialized_name": "FacetEnabled"
                   },
                   "result_enabled": {
                     "type": "boolean",
-                    "documentation": "<p>Specifies whether values of this field can be returned in search results and used for ranking. Default: False.</p>",
                     "serialized_name": "ResultEnabled"
                   }
                 }
               },
               "text_options": {
                 "type": "structure",
-                "documentation": "<p>Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type text.</p>",
                 "serialized_name": "TextOptions",
                 "members": {
                   "default_value": {
                     "type": "string",
-                    "documentation": "<p>The default value for a text field. Optional.</p>",
                     "serialized_name": "DefaultValue"
                   },
                   "facet_enabled": {
                     "type": "boolean",
-                    "documentation": "<p>Specifies whether facets are enabled for this field. Default: False.</p>",
                     "serialized_name": "FacetEnabled"
                   },
                   "result_enabled": {
                     "type": "boolean",
-                    "documentation": "<p>Specifies whether values of this field can be returned in search results and used for ranking. Default: False.</p>",
                     "serialized_name": "ResultEnabled"
                   },
                   "text_processor": {
                     "type": "string",
-                    "documentation": "<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>",
                     "serialized_name": "TextProcessor"
                   }
                 }
               },
               "source_attributes": {
                 "type": "list",
-                "documentation": "<p>An optional list of source attributes that provide data for this index field. If not specified, the data is pulled from a source attribute with the same name as this <code>IndexField</code>. When one or more source attributes are specified, an optional data transformation can be applied to the source data when populating the index field. You can configure a maximum of 20 sources for an <code>IndexField</code>.</p>",
                 "serialized_name": "SourceAttributes",
                 "members": {
                   "type": "structure",
-                  "documentation": "<p>Identifies the source data for an index field. An optional data transformation can be applied to the source data when populating the index field. By default, the value of the source attribute is copied to the index field.</p>",
                   "members": {
                     "source_data_function": {
                       "type": "string",
                       "required": true,
-                      "documentation": "<p>Identifies the transformation to apply when copying data from a source attribute.</p>",
                       "serialized_name": "SourceDataFunction",
                       "enum": [
                         "Copy",
@@ -291,77 +244,63 @@
                     },
                     "source_data_copy": {
                       "type": "structure",
-                      "documentation": "<p>Copies data from a source document attribute to an <code>IndexField</code>.</p>",
                       "serialized_name": "SourceDataCopy",
                       "members": {
                         "source_name": {
                           "type": "string",
                           "required": true,
-                          "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                           "serialized_name": "SourceName"
                         },
                         "default_value": {
                           "type": "string",
-                          "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                           "serialized_name": "DefaultValue"
                         }
                       }
                     },
                     "source_data_trim_title": {
                       "type": "structure",
-                      "documentation": "<p>Trims common title words from a source document attribute when populating an <code>IndexField</code>. This can be used to create an <code>IndexField</code> you can use for sorting.</p>",
                       "serialized_name": "SourceDataTrimTitle",
                       "members": {
                         "source_name": {
                           "type": "string",
                           "required": true,
-                          "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                           "serialized_name": "SourceName"
                         },
                         "default_value": {
                           "type": "string",
-                          "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                           "serialized_name": "DefaultValue"
                         },
                         "separator": {
                           "type": "string",
-                          "documentation": "<p>The separator that follows the text to trim.</p>",
                           "serialized_name": "Separator"
                         },
                         "language": {
                           "type": "string",
-                          "documentation": "<p>An <a href=\"http://tools.ietf.org/html/rfc4646\">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.</p>",
                           "serialized_name": "Language"
                         }
                       }
                     },
                     "source_data_map": {
                       "type": "structure",
-                      "documentation": "<p>Maps source document attribute values to new values when populating the <code>IndexField</code>.</p>",
                       "serialized_name": "SourceDataMap",
                       "members": {
                         "source_name": {
                           "type": "string",
                           "required": true,
-                          "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                           "serialized_name": "SourceName"
                         },
                         "default_value": {
                           "type": "string",
-                          "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                           "serialized_name": "DefaultValue"
                         },
                         "cases": {
                           "type": "map",
-                          "documentation": "<p>A map that translates source field values to custom values.</p>",
                           "serialized_name": "Cases",
                           "keys": {
-                            "type": "string",
-                            "documentation": "<p>The value of a field or source document attribute.</p>"
+                            "type": "string"
                           },
                           "members": {
-                            "type": "string",
-                            "documentation": "<p>The value of a field or source document attribute.</p>"
+                            "type": "string"
                           }
                         }
                       }
@@ -375,26 +314,21 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of an updated index field.</p>",
         "members": {
           "index_field": {
             "type": "structure",
-            "documentation": "<p>The value of an <code>IndexField</code> and its current status.</p>",
             "serialized_name": "IndexField",
             "members": {
               "options": {
                 "type": "structure",
-                "documentation": "<p>Defines a field in the index, including its name, type, and the source of its data. The <code>IndexFieldType</code> indicates which of the options will be present. It is invalid to specify options for a type other than the <code>IndexFieldType</code>.</p>",
                 "serialized_name": "Options",
                 "members": {
                   "index_field_name": {
                     "type": "string",
-                    "documentation": "<p>The name of a field in the search index. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
                     "serialized_name": "IndexFieldName"
                   },
                   "index_field_type": {
                     "type": "string",
-                    "documentation": "<p>The type of field. Based on this type, exactly one of the UIntOptions, LiteralOptions or TextOptions must be present.</p>",
                     "serialized_name": "IndexFieldType",
                     "enum": [
                       "uint",
@@ -404,81 +338,66 @@
                   },
                   "u_int_options": {
                     "type": "structure",
-                    "documentation": "<p>Options for an unsigned integer field. Present if <code>IndexFieldType</code> specifies the field is of type unsigned integer.</p>",
                     "serialized_name": "UIntOptions",
                     "members": {
                       "default_value": {
                         "type": "integer",
-                        "documentation": "<p>The default value for an unsigned integer field. Optional.</p>",
                         "serialized_name": "DefaultValue"
                       }
                     }
                   },
                   "literal_options": {
                     "type": "structure",
-                    "documentation": "<p>Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type literal.</p>",
                     "serialized_name": "LiteralOptions",
                     "members": {
                       "default_value": {
                         "type": "string",
-                        "documentation": "<p>The default value for a literal field. Optional.</p>",
                         "serialized_name": "DefaultValue"
                       },
                       "search_enabled": {
                         "type": "boolean",
-                        "documentation": "<p>Specifies whether search is enabled for this field. Default: False.</p>",
                         "serialized_name": "SearchEnabled"
                       },
                       "facet_enabled": {
                         "type": "boolean",
-                        "documentation": "<p>Specifies whether facets are enabled for this field. Default: False.</p>",
                         "serialized_name": "FacetEnabled"
                       },
                       "result_enabled": {
                         "type": "boolean",
-                        "documentation": "<p>Specifies whether values of this field can be returned in search results and used for ranking. Default: False.</p>",
                         "serialized_name": "ResultEnabled"
                       }
                     }
                   },
                   "text_options": {
                     "type": "structure",
-                    "documentation": "<p>Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type text.</p>",
                     "serialized_name": "TextOptions",
                     "members": {
                       "default_value": {
                         "type": "string",
-                        "documentation": "<p>The default value for a text field. Optional.</p>",
                         "serialized_name": "DefaultValue"
                       },
                       "facet_enabled": {
                         "type": "boolean",
-                        "documentation": "<p>Specifies whether facets are enabled for this field. Default: False.</p>",
                         "serialized_name": "FacetEnabled"
                       },
                       "result_enabled": {
                         "type": "boolean",
-                        "documentation": "<p>Specifies whether values of this field can be returned in search results and used for ranking. Default: False.</p>",
                         "serialized_name": "ResultEnabled"
                       },
                       "text_processor": {
                         "type": "string",
-                        "documentation": "<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>",
                         "serialized_name": "TextProcessor"
                       }
                     }
                   },
                   "source_attributes": {
                     "type": "list",
-                    "documentation": "<p>An optional list of source attributes that provide data for this index field. If not specified, the data is pulled from a source attribute with the same name as this <code>IndexField</code>. When one or more source attributes are specified, an optional data transformation can be applied to the source data when populating the index field. You can configure a maximum of 20 sources for an <code>IndexField</code>.</p>",
                     "serialized_name": "SourceAttributes",
                     "members": {
                       "type": "structure",
-                      "documentation": "<p>Identifies the source data for an index field. An optional data transformation can be applied to the source data when populating the index field. By default, the value of the source attribute is copied to the index field.</p>",
                       "members": {
                         "source_data_function": {
                           "type": "string",
-                          "documentation": "<p>Identifies the transformation to apply when copying data from a source attribute.</p>",
                           "serialized_name": "SourceDataFunction",
                           "enum": [
                             "Copy",
@@ -488,74 +407,60 @@
                         },
                         "source_data_copy": {
                           "type": "structure",
-                          "documentation": "<p>Copies data from a source document attribute to an <code>IndexField</code>.</p>",
                           "serialized_name": "SourceDataCopy",
                           "members": {
                             "source_name": {
                               "type": "string",
-                              "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
-                              "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                               "serialized_name": "DefaultValue"
                             }
                           }
                         },
                         "source_data_trim_title": {
                           "type": "structure",
-                          "documentation": "<p>Trims common title words from a source document attribute when populating an <code>IndexField</code>. This can be used to create an <code>IndexField</code> you can use for sorting.</p>",
                           "serialized_name": "SourceDataTrimTitle",
                           "members": {
                             "source_name": {
                               "type": "string",
-                              "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
-                              "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                               "serialized_name": "DefaultValue"
                             },
                             "separator": {
                               "type": "string",
-                              "documentation": "<p>The separator that follows the text to trim.</p>",
                               "serialized_name": "Separator"
                             },
                             "language": {
                               "type": "string",
-                              "documentation": "<p>An <a href=\"http://tools.ietf.org/html/rfc4646\">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.</p>",
                               "serialized_name": "Language"
                             }
                           }
                         },
                         "source_data_map": {
                           "type": "structure",
-                          "documentation": "<p>Maps source document attribute values to new values when populating the <code>IndexField</code>.</p>",
                           "serialized_name": "SourceDataMap",
                           "members": {
                             "source_name": {
                               "type": "string",
-                              "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
-                              "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                               "serialized_name": "DefaultValue"
                             },
                             "cases": {
                               "type": "map",
-                              "documentation": "<p>A map that translates source field values to custom values.</p>",
                               "serialized_name": "Cases",
                               "keys": {
-                                "type": "string",
-                                "documentation": "<p>The value of a field or source document attribute.</p>"
+                                "type": "string"
                               },
                               "members": {
-                                "type": "string",
-                                "documentation": "<p>The value of a field or source document attribute.</p>"
+                                "type": "string"
                               }
                             }
                           }
@@ -567,27 +472,22 @@
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -597,7 +497,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -609,41 +508,34 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because a resource limit has already been met.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it specified an invalid type definition.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -653,32 +545,27 @@
       "name": "DefineRankExpression",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Configures a <code>RankExpression</code> for the search domain. Used to create new rank expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. You can configure a maximum of 50 rank expressions.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "rank_expression": {
             "type": "structure",
             "required": true,
-            "documentation": "<p>A named expression that can be evaluated at search time and used for ranking or thresholding in a search query. </p>",
             "serialized_name": "RankExpression",
             "members": {
               "rank_name": {
                 "type": "string",
                 "required": true,
-                "documentation": "<p>The name of a rank expression. Rank expression names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
                 "serialized_name": "RankName"
               },
               "rank_expression": {
                 "type": "string",
                 "required": true,
-                "documentation": "<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code> if <code>a</code> is <code>true</code> without evaluting <code>b</code> at all</li> <li>JavaScript order of precendence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>",
                 "serialized_name": "RankExpression"
               }
             }
@@ -687,53 +574,43 @@
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of an updated <code>RankExpression</code>.</p>",
         "members": {
           "rank_expression": {
             "type": "structure",
-            "documentation": "<p>The value of a <code>RankExpression</code> and its current status.</p>",
             "serialized_name": "RankExpression",
             "members": {
               "options": {
                 "type": "structure",
-                "documentation": "<p>The expression that is evaluated for ranking or thresholding while processing a search request.</p>",
                 "serialized_name": "Options",
                 "members": {
                   "rank_name": {
                     "type": "string",
-                    "documentation": "<p>The name of a rank expression. Rank expression names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
                     "serialized_name": "RankName"
                   },
                   "rank_expression": {
                     "type": "string",
-                    "documentation": "<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code> if <code>a</code> is <code>true</code> without evaluting <code>b</code> at all</li> <li>JavaScript order of precendence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>",
                     "serialized_name": "RankExpression"
                   }
                 }
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -743,7 +620,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -755,41 +631,34 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because a resource limit has already been met.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it specified an invalid type definition.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -799,109 +668,89 @@
       "name": "DeleteDomain",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Permanently deletes a search domain and all of its data.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of a newly deleted domain, or no status if the domain has already been completely deleted.</p>",
         "members": {
           "domain_status": {
             "type": "structure",
-            "documentation": "<p>The current status of the search domain.</p>",
             "serialized_name": "DomainStatus",
             "members": {
               "domain_id": {
                 "type": "string",
-                "documentation": "<p>An internally generated unique identifier for a domain.</p>",
                 "serialized_name": "DomainId"
               },
               "domain_name": {
                 "type": "string",
-                "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
                 "serialized_name": "DomainName"
               },
               "created": {
                 "type": "boolean",
-                "documentation": "<p>True if the search domain is created. It can take several minutes to initialize a domain when CreateDomain is called. Newly created search domains are returned from DescribeDomains with a false value for Created until domain creation is complete.</p>",
                 "serialized_name": "Created"
               },
               "deleted": {
                 "type": "boolean",
-                "documentation": "<p>True if the search domain has been deleted. The system must clean up resources dedicated to the search domain when DeleteDomain is called. Newly deleted search domains are returned from DescribeDomains with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>",
                 "serialized_name": "Deleted"
               },
               "num_searchable_docs": {
                 "type": "integer",
-                "documentation": "<p>The number of documents that have been submitted to the domain and indexed.</p>",
                 "serialized_name": "NumSearchableDocs"
               },
               "doc_service": {
                 "type": "structure",
-                "documentation": "<p>The service endpoint for updating documents in a search domain.</p>",
                 "serialized_name": "DocService",
                 "members": {
                   "arn": {
                     "type": "string",
-                    "documentation": "<p>An Amazon Resource Name (ARN). See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>",
                     "serialized_name": "Arn"
                   },
                   "endpoint": {
                     "type": "string",
-                    "documentation": "<p>The URL (including /version/pathPrefix) to which service requests can be submitted.</p>",
                     "serialized_name": "Endpoint"
                   }
                 }
               },
               "search_service": {
                 "type": "structure",
-                "documentation": "<p>The service endpoint for requesting search results from a search domain.</p>",
                 "serialized_name": "SearchService",
                 "members": {
                   "arn": {
                     "type": "string",
-                    "documentation": "<p>An Amazon Resource Name (ARN). See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>",
                     "serialized_name": "Arn"
                   },
                   "endpoint": {
                     "type": "string",
-                    "documentation": "<p>The URL (including /version/pathPrefix) to which service requests can be submitted.</p>",
                     "serialized_name": "Endpoint"
                   }
                 }
               },
               "requires_index_documents": {
                 "type": "boolean",
-                "documentation": "<p>True if IndexDocuments needs to be called to activate the current domain configuration.</p>",
                 "serialized_name": "RequiresIndexDocuments"
               },
               "processing": {
                 "type": "boolean",
-                "documentation": "<p>True if processing is being done to activate the current domain configuration.</p>",
                 "serialized_name": "Processing"
               },
               "search_instance_type": {
                 "type": "string",
-                "documentation": "<p>The instance type (such as search.m1.small) that is being used to process search requests.</p>",
                 "serialized_name": "SearchInstanceType"
               },
               "search_partition_count": {
                 "type": "integer",
-                "documentation": "<p>The number of partitions across which the search index is spread.</p>",
                 "serialized_name": "SearchPartitionCount"
               },
               "search_instance_count": {
                 "type": "integer",
-                "documentation": "<p>The number of search instances that are available to process search requests.</p>",
                 "serialized_name": "SearchInstanceCount"
               }
             }
@@ -911,23 +760,19 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         }
@@ -937,46 +782,38 @@
       "name": "DeleteIndexField",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Removes an <code>IndexField</code> from the search domain.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "index_field_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
             "serialized_name": "IndexFieldName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of a deleted index field.</p>",
         "members": {
           "index_field": {
             "type": "structure",
-            "documentation": "<p>The value of an <code>IndexField</code> and its current status.</p>",
             "serialized_name": "IndexField",
             "members": {
               "options": {
                 "type": "structure",
-                "documentation": "<p>Defines a field in the index, including its name, type, and the source of its data. The <code>IndexFieldType</code> indicates which of the options will be present. It is invalid to specify options for a type other than the <code>IndexFieldType</code>.</p>",
                 "serialized_name": "Options",
                 "members": {
                   "index_field_name": {
                     "type": "string",
-                    "documentation": "<p>The name of a field in the search index. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
                     "serialized_name": "IndexFieldName"
                   },
                   "index_field_type": {
                     "type": "string",
-                    "documentation": "<p>The type of field. Based on this type, exactly one of the UIntOptions, LiteralOptions or TextOptions must be present.</p>",
                     "serialized_name": "IndexFieldType",
                     "enum": [
                       "uint",
@@ -986,81 +823,66 @@
                   },
                   "u_int_options": {
                     "type": "structure",
-                    "documentation": "<p>Options for an unsigned integer field. Present if <code>IndexFieldType</code> specifies the field is of type unsigned integer.</p>",
                     "serialized_name": "UIntOptions",
                     "members": {
                       "default_value": {
                         "type": "integer",
-                        "documentation": "<p>The default value for an unsigned integer field. Optional.</p>",
                         "serialized_name": "DefaultValue"
                       }
                     }
                   },
                   "literal_options": {
                     "type": "structure",
-                    "documentation": "<p>Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type literal.</p>",
                     "serialized_name": "LiteralOptions",
                     "members": {
                       "default_value": {
                         "type": "string",
-                        "documentation": "<p>The default value for a literal field. Optional.</p>",
                         "serialized_name": "DefaultValue"
                       },
                       "search_enabled": {
                         "type": "boolean",
-                        "documentation": "<p>Specifies whether search is enabled for this field. Default: False.</p>",
                         "serialized_name": "SearchEnabled"
                       },
                       "facet_enabled": {
                         "type": "boolean",
-                        "documentation": "<p>Specifies whether facets are enabled for this field. Default: False.</p>",
                         "serialized_name": "FacetEnabled"
                       },
                       "result_enabled": {
                         "type": "boolean",
-                        "documentation": "<p>Specifies whether values of this field can be returned in search results and used for ranking. Default: False.</p>",
                         "serialized_name": "ResultEnabled"
                       }
                     }
                   },
                   "text_options": {
                     "type": "structure",
-                    "documentation": "<p>Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type text.</p>",
                     "serialized_name": "TextOptions",
                     "members": {
                       "default_value": {
                         "type": "string",
-                        "documentation": "<p>The default value for a text field. Optional.</p>",
                         "serialized_name": "DefaultValue"
                       },
                       "facet_enabled": {
                         "type": "boolean",
-                        "documentation": "<p>Specifies whether facets are enabled for this field. Default: False.</p>",
                         "serialized_name": "FacetEnabled"
                       },
                       "result_enabled": {
                         "type": "boolean",
-                        "documentation": "<p>Specifies whether values of this field can be returned in search results and used for ranking. Default: False.</p>",
                         "serialized_name": "ResultEnabled"
                       },
                       "text_processor": {
                         "type": "string",
-                        "documentation": "<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>",
                         "serialized_name": "TextProcessor"
                       }
                     }
                   },
                   "source_attributes": {
                     "type": "list",
-                    "documentation": "<p>An optional list of source attributes that provide data for this index field. If not specified, the data is pulled from a source attribute with the same name as this <code>IndexField</code>. When one or more source attributes are specified, an optional data transformation can be applied to the source data when populating the index field. You can configure a maximum of 20 sources for an <code>IndexField</code>.</p>",
                     "serialized_name": "SourceAttributes",
                     "members": {
                       "type": "structure",
-                      "documentation": "<p>Identifies the source data for an index field. An optional data transformation can be applied to the source data when populating the index field. By default, the value of the source attribute is copied to the index field.</p>",
                       "members": {
                         "source_data_function": {
                           "type": "string",
-                          "documentation": "<p>Identifies the transformation to apply when copying data from a source attribute.</p>",
                           "serialized_name": "SourceDataFunction",
                           "enum": [
                             "Copy",
@@ -1070,74 +892,60 @@
                         },
                         "source_data_copy": {
                           "type": "structure",
-                          "documentation": "<p>Copies data from a source document attribute to an <code>IndexField</code>.</p>",
                           "serialized_name": "SourceDataCopy",
                           "members": {
                             "source_name": {
                               "type": "string",
-                              "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
-                              "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                               "serialized_name": "DefaultValue"
                             }
                           }
                         },
                         "source_data_trim_title": {
                           "type": "structure",
-                          "documentation": "<p>Trims common title words from a source document attribute when populating an <code>IndexField</code>. This can be used to create an <code>IndexField</code> you can use for sorting.</p>",
                           "serialized_name": "SourceDataTrimTitle",
                           "members": {
                             "source_name": {
                               "type": "string",
-                              "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
-                              "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                               "serialized_name": "DefaultValue"
                             },
                             "separator": {
                               "type": "string",
-                              "documentation": "<p>The separator that follows the text to trim.</p>",
                               "serialized_name": "Separator"
                             },
                             "language": {
                               "type": "string",
-                              "documentation": "<p>An <a href=\"http://tools.ietf.org/html/rfc4646\">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.</p>",
                               "serialized_name": "Language"
                             }
                           }
                         },
                         "source_data_map": {
                           "type": "structure",
-                          "documentation": "<p>Maps source document attribute values to new values when populating the <code>IndexField</code>.</p>",
                           "serialized_name": "SourceDataMap",
                           "members": {
                             "source_name": {
                               "type": "string",
-                              "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                               "serialized_name": "SourceName"
                             },
                             "default_value": {
                               "type": "string",
-                              "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                               "serialized_name": "DefaultValue"
                             },
                             "cases": {
                               "type": "map",
-                              "documentation": "<p>A map that translates source field values to custom values.</p>",
                               "serialized_name": "Cases",
                               "keys": {
-                                "type": "string",
-                                "documentation": "<p>The value of a field or source document attribute.</p>"
+                                "type": "string"
                               },
                               "members": {
-                                "type": "string",
-                                "documentation": "<p>The value of a field or source document attribute.</p>"
+                                "type": "string"
                               }
                             }
                           }
@@ -1149,27 +957,22 @@
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -1179,7 +982,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -1191,35 +993,29 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it specified an invalid type definition.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -1229,73 +1025,60 @@
       "name": "DeleteRankExpression",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Removes a <code>RankExpression</code> from the search domain.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "rank_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The name of the <code>RankExpression</code> to delete.</p>",
             "serialized_name": "RankName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of a deleted <code>RankExpression</code>.</p>",
         "members": {
           "rank_expression": {
             "type": "structure",
-            "documentation": "<p>The value of a <code>RankExpression</code> and its current status.</p>",
             "serialized_name": "RankExpression",
             "members": {
               "options": {
                 "type": "structure",
-                "documentation": "<p>The expression that is evaluated for ranking or thresholding while processing a search request.</p>",
                 "serialized_name": "Options",
                 "members": {
                   "rank_name": {
                     "type": "string",
-                    "documentation": "<p>The name of a rank expression. Rank expression names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
                     "serialized_name": "RankName"
                   },
                   "rank_expression": {
                     "type": "string",
-                    "documentation": "<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code> if <code>a</code> is <code>true</code> without evaluting <code>b</code> at all</li> <li>JavaScript order of precendence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>",
                     "serialized_name": "RankExpression"
                   }
                 }
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -1305,7 +1088,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -1317,35 +1099,29 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it specified an invalid type definition.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -1355,55 +1131,45 @@
       "name": "DescribeDefaultSearchField",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Gets the default search field configured for the search domain.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the default search field for a search domain.</p>",
         "members": {
           "default_search_field": {
             "type": "structure",
-            "documentation": "<p>The name of the <code>IndexField</code> to use for search requests issued with the <code>q</code> parameter. The default is the empty string, which automatically searches all text fields.</p>",
             "serialized_name": "DefaultSearchField",
             "members": {
               "options": {
                 "type": "string",
-                "documentation": "<p>The name of the <code>IndexField</code> to use as the default search field. The default is an empty string, which automatically searches all text fields.</p>",
                 "serialized_name": "Options"
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -1413,7 +1179,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -1425,29 +1190,24 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -1457,115 +1217,93 @@
       "name": "DescribeDomains",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_names": {
             "type": "list",
-            "documentation": "<p>Limits the DescribeDomains response to the specified search domains.</p>",
             "serialized_name": "DomainNames",
             "members": {
-              "type": "string",
-              "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>"
+              "type": "string"
             }
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of one or more domains.</p>",
         "members": {
           "domain_status_list": {
             "type": "list",
-            "documentation": "<p>The current status of all of your search domains.</p>",
             "serialized_name": "DomainStatusList",
             "members": {
               "type": "structure",
-              "documentation": "<p>The current status of the search domain.</p>",
               "members": {
                 "domain_id": {
                   "type": "string",
-                  "documentation": "<p>An internally generated unique identifier for a domain.</p>",
                   "serialized_name": "DomainId"
                 },
                 "domain_name": {
                   "type": "string",
-                  "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
                   "serialized_name": "DomainName"
                 },
                 "created": {
                   "type": "boolean",
-                  "documentation": "<p>True if the search domain is created. It can take several minutes to initialize a domain when CreateDomain is called. Newly created search domains are returned from DescribeDomains with a false value for Created until domain creation is complete.</p>",
                   "serialized_name": "Created"
                 },
                 "deleted": {
                   "type": "boolean",
-                  "documentation": "<p>True if the search domain has been deleted. The system must clean up resources dedicated to the search domain when DeleteDomain is called. Newly deleted search domains are returned from DescribeDomains with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>",
                   "serialized_name": "Deleted"
                 },
                 "num_searchable_docs": {
                   "type": "integer",
-                  "documentation": "<p>The number of documents that have been submitted to the domain and indexed.</p>",
                   "serialized_name": "NumSearchableDocs"
                 },
                 "doc_service": {
                   "type": "structure",
-                  "documentation": "<p>The service endpoint for updating documents in a search domain.</p>",
                   "serialized_name": "DocService",
                   "members": {
                     "arn": {
                       "type": "string",
-                      "documentation": "<p>An Amazon Resource Name (ARN). See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>",
                       "serialized_name": "Arn"
                     },
                     "endpoint": {
                       "type": "string",
-                      "documentation": "<p>The URL (including /version/pathPrefix) to which service requests can be submitted.</p>",
                       "serialized_name": "Endpoint"
                     }
                   }
                 },
                 "search_service": {
                   "type": "structure",
-                  "documentation": "<p>The service endpoint for requesting search results from a search domain.</p>",
                   "serialized_name": "SearchService",
                   "members": {
                     "arn": {
                       "type": "string",
-                      "documentation": "<p>An Amazon Resource Name (ARN). See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>",
                       "serialized_name": "Arn"
                     },
                     "endpoint": {
                       "type": "string",
-                      "documentation": "<p>The URL (including /version/pathPrefix) to which service requests can be submitted.</p>",
                       "serialized_name": "Endpoint"
                     }
                   }
                 },
                 "requires_index_documents": {
                   "type": "boolean",
-                  "documentation": "<p>True if IndexDocuments needs to be called to activate the current domain configuration.</p>",
                   "serialized_name": "RequiresIndexDocuments"
                 },
                 "processing": {
                   "type": "boolean",
-                  "documentation": "<p>True if processing is being done to activate the current domain configuration.</p>",
                   "serialized_name": "Processing"
                 },
                 "search_instance_type": {
                   "type": "string",
-                  "documentation": "<p>The instance type (such as search.m1.small) that is being used to process search requests.</p>",
                   "serialized_name": "SearchInstanceType"
                 },
                 "search_partition_count": {
                   "type": "integer",
-                  "documentation": "<p>The number of partitions across which the search index is spread.</p>",
                   "serialized_name": "SearchPartitionCount"
                 },
                 "search_instance_count": {
                   "type": "integer",
-                  "documentation": "<p>The number of search instances that are available to process search requests.</p>",
                   "serialized_name": "SearchInstanceCount"
                 }
               }
@@ -1576,23 +1314,19 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         }
@@ -1602,52 +1336,42 @@
       "name": "DescribeIndexFields",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. Shows all fields by default.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "field_names": {
             "type": "list",
-            "documentation": "<p>Limits the <code>DescribeIndexFields</code> response to the specified fields.</p>",
             "serialized_name": "FieldNames",
             "members": {
-              "type": "string",
-              "documentation": "<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>"
+              "type": "string"
             }
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the index fields for a search domain.</p>",
         "members": {
           "index_fields": {
             "type": "list",
-            "documentation": "<p>The index fields configured for the domain.</p>",
             "serialized_name": "IndexFields",
             "members": {
               "type": "structure",
-              "documentation": "<p>The value of an <code>IndexField</code> and its current status.</p>",
               "members": {
                 "options": {
                   "type": "structure",
-                  "documentation": "<p>Defines a field in the index, including its name, type, and the source of its data. The <code>IndexFieldType</code> indicates which of the options will be present. It is invalid to specify options for a type other than the <code>IndexFieldType</code>.</p>",
                   "serialized_name": "Options",
                   "members": {
                     "index_field_name": {
                       "type": "string",
-                      "documentation": "<p>The name of a field in the search index. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
                       "serialized_name": "IndexFieldName"
                     },
                     "index_field_type": {
                       "type": "string",
-                      "documentation": "<p>The type of field. Based on this type, exactly one of the UIntOptions, LiteralOptions or TextOptions must be present.</p>",
                       "serialized_name": "IndexFieldType",
                       "enum": [
                         "uint",
@@ -1657,81 +1381,66 @@
                     },
                     "u_int_options": {
                       "type": "structure",
-                      "documentation": "<p>Options for an unsigned integer field. Present if <code>IndexFieldType</code> specifies the field is of type unsigned integer.</p>",
                       "serialized_name": "UIntOptions",
                       "members": {
                         "default_value": {
                           "type": "integer",
-                          "documentation": "<p>The default value for an unsigned integer field. Optional.</p>",
                           "serialized_name": "DefaultValue"
                         }
                       }
                     },
                     "literal_options": {
                       "type": "structure",
-                      "documentation": "<p>Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type literal.</p>",
                       "serialized_name": "LiteralOptions",
                       "members": {
                         "default_value": {
                           "type": "string",
-                          "documentation": "<p>The default value for a literal field. Optional.</p>",
                           "serialized_name": "DefaultValue"
                         },
                         "search_enabled": {
                           "type": "boolean",
-                          "documentation": "<p>Specifies whether search is enabled for this field. Default: False.</p>",
                           "serialized_name": "SearchEnabled"
                         },
                         "facet_enabled": {
                           "type": "boolean",
-                          "documentation": "<p>Specifies whether facets are enabled for this field. Default: False.</p>",
                           "serialized_name": "FacetEnabled"
                         },
                         "result_enabled": {
                           "type": "boolean",
-                          "documentation": "<p>Specifies whether values of this field can be returned in search results and used for ranking. Default: False.</p>",
                           "serialized_name": "ResultEnabled"
                         }
                       }
                     },
                     "text_options": {
                       "type": "structure",
-                      "documentation": "<p>Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type text.</p>",
                       "serialized_name": "TextOptions",
                       "members": {
                         "default_value": {
                           "type": "string",
-                          "documentation": "<p>The default value for a text field. Optional.</p>",
                           "serialized_name": "DefaultValue"
                         },
                         "facet_enabled": {
                           "type": "boolean",
-                          "documentation": "<p>Specifies whether facets are enabled for this field. Default: False.</p>",
                           "serialized_name": "FacetEnabled"
                         },
                         "result_enabled": {
                           "type": "boolean",
-                          "documentation": "<p>Specifies whether values of this field can be returned in search results and used for ranking. Default: False.</p>",
                           "serialized_name": "ResultEnabled"
                         },
                         "text_processor": {
                           "type": "string",
-                          "documentation": "<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>",
                           "serialized_name": "TextProcessor"
                         }
                       }
                     },
                     "source_attributes": {
                       "type": "list",
-                      "documentation": "<p>An optional list of source attributes that provide data for this index field. If not specified, the data is pulled from a source attribute with the same name as this <code>IndexField</code>. When one or more source attributes are specified, an optional data transformation can be applied to the source data when populating the index field. You can configure a maximum of 20 sources for an <code>IndexField</code>.</p>",
                       "serialized_name": "SourceAttributes",
                       "members": {
                         "type": "structure",
-                        "documentation": "<p>Identifies the source data for an index field. An optional data transformation can be applied to the source data when populating the index field. By default, the value of the source attribute is copied to the index field.</p>",
                         "members": {
                           "source_data_function": {
                             "type": "string",
-                            "documentation": "<p>Identifies the transformation to apply when copying data from a source attribute.</p>",
                             "serialized_name": "SourceDataFunction",
                             "enum": [
                               "Copy",
@@ -1741,74 +1450,60 @@
                           },
                           "source_data_copy": {
                             "type": "structure",
-                            "documentation": "<p>Copies data from a source document attribute to an <code>IndexField</code>.</p>",
                             "serialized_name": "SourceDataCopy",
                             "members": {
                               "source_name": {
                                 "type": "string",
-                                "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                                 "serialized_name": "SourceName"
                               },
                               "default_value": {
                                 "type": "string",
-                                "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                                 "serialized_name": "DefaultValue"
                               }
                             }
                           },
                           "source_data_trim_title": {
                             "type": "structure",
-                            "documentation": "<p>Trims common title words from a source document attribute when populating an <code>IndexField</code>. This can be used to create an <code>IndexField</code> you can use for sorting.</p>",
                             "serialized_name": "SourceDataTrimTitle",
                             "members": {
                               "source_name": {
                                 "type": "string",
-                                "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                                 "serialized_name": "SourceName"
                               },
                               "default_value": {
                                 "type": "string",
-                                "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                                 "serialized_name": "DefaultValue"
                               },
                               "separator": {
                                 "type": "string",
-                                "documentation": "<p>The separator that follows the text to trim.</p>",
                                 "serialized_name": "Separator"
                               },
                               "language": {
                                 "type": "string",
-                                "documentation": "<p>An <a href=\"http://tools.ietf.org/html/rfc4646\">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.</p>",
                                 "serialized_name": "Language"
                               }
                             }
                           },
                           "source_data_map": {
                             "type": "structure",
-                            "documentation": "<p>Maps source document attribute values to new values when populating the <code>IndexField</code>.</p>",
                             "serialized_name": "SourceDataMap",
                             "members": {
                               "source_name": {
                                 "type": "string",
-                                "documentation": "<p>The name of the document source field to add to this <code>IndexField</code>.</p>",
                                 "serialized_name": "SourceName"
                               },
                               "default_value": {
                                 "type": "string",
-                                "documentation": "<p>The default value to use if the source attribute is not specified in a document. Optional.</p>",
                                 "serialized_name": "DefaultValue"
                               },
                               "cases": {
                                 "type": "map",
-                                "documentation": "<p>A map that translates source field values to custom values.</p>",
                                 "serialized_name": "Cases",
                                 "keys": {
-                                  "type": "string",
-                                  "documentation": "<p>The value of a field or source document attribute.</p>"
+                                  "type": "string"
                                 },
                                 "members": {
-                                  "type": "string",
-                                  "documentation": "<p>The value of a field or source document attribute.</p>"
+                                  "type": "string"
                                 }
                               }
                             }
@@ -1820,27 +1515,22 @@
                 },
                 "status": {
                   "type": "structure",
-                  "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                   "serialized_name": "Status",
                   "members": {
                     "creation_date": {
                       "type": "iso8601_timestamp",
-                      "documentation": "<p>A timestamp for when this option was created.</p>",
                       "serialized_name": "CreationDate"
                     },
                     "update_date": {
                       "type": "iso8601_timestamp",
-                      "documentation": "<p>A timestamp for when this option was last updated.</p>",
                       "serialized_name": "UpdateDate"
                     },
                     "update_version": {
                       "type": "integer",
-                      "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                       "serialized_name": "UpdateVersion"
                     },
                     "state": {
                       "type": "string",
-                      "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                       "serialized_name": "State",
                       "enum": [
                         "RequiresIndexDocuments",
@@ -1850,7 +1540,6 @@
                     },
                     "pending_deletion": {
                       "type": "boolean",
-                      "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                       "serialized_name": "PendingDeletion"
                     }
                   }
@@ -1863,29 +1552,24 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -1895,79 +1579,64 @@
       "name": "DescribeRankExpressions",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Gets the rank expressions configured for the search domain. Can be limited to specific rank expressions by name. Shows all rank expressions by default. </p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "rank_names": {
             "type": "list",
-            "documentation": "<p>Limits the <code>DescribeRankExpressions</code> response to the specified fields.</p>",
             "serialized_name": "RankNames",
             "members": {
-              "type": "string",
-              "documentation": "<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>"
+              "type": "string"
             }
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the rank expressions for a search domain.</p>",
         "members": {
           "rank_expressions": {
             "type": "list",
-            "documentation": "<p>The rank expressions configured for the domain.</p>",
             "serialized_name": "RankExpressions",
             "members": {
               "type": "structure",
-              "documentation": "<p>The value of a <code>RankExpression</code> and its current status.</p>",
               "members": {
                 "options": {
                   "type": "structure",
-                  "documentation": "<p>The expression that is evaluated for ranking or thresholding while processing a search request.</p>",
                   "serialized_name": "Options",
                   "members": {
                     "rank_name": {
                       "type": "string",
-                      "documentation": "<p>The name of a rank expression. Rank expression names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>",
                       "serialized_name": "RankName"
                     },
                     "rank_expression": {
                       "type": "string",
-                      "documentation": "<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code> if <code>a</code> is <code>true</code> without evaluting <code>b</code> at all</li> <li>JavaScript order of precendence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>",
                       "serialized_name": "RankExpression"
                     }
                   }
                 },
                 "status": {
                   "type": "structure",
-                  "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                   "serialized_name": "Status",
                   "members": {
                     "creation_date": {
                       "type": "iso8601_timestamp",
-                      "documentation": "<p>A timestamp for when this option was created.</p>",
                       "serialized_name": "CreationDate"
                     },
                     "update_date": {
                       "type": "iso8601_timestamp",
-                      "documentation": "<p>A timestamp for when this option was last updated.</p>",
                       "serialized_name": "UpdateDate"
                     },
                     "update_version": {
                       "type": "integer",
-                      "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                       "serialized_name": "UpdateVersion"
                     },
                     "state": {
                       "type": "string",
-                      "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                       "serialized_name": "State",
                       "enum": [
                         "RequiresIndexDocuments",
@@ -1977,7 +1646,6 @@
                     },
                     "pending_deletion": {
                       "type": "boolean",
-                      "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                       "serialized_name": "PendingDeletion"
                     }
                   }
@@ -1990,29 +1658,24 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -2022,55 +1685,45 @@
       "name": "DescribeServiceAccessPolicies",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Gets information about the resource-based policies that control access to the domain's document and search services.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the access policies for a domain.</p>",
         "members": {
           "access_policies": {
             "type": "structure",
-            "documentation": "<p>A <code>PolicyDocument</code> that specifies access policies for the search domain's services, and the current status of those policies.</p>",
             "serialized_name": "AccessPolicies",
             "members": {
               "options": {
                 "type": "string",
-                "documentation": "<p>An IAM access policy as described in <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p> <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\", \"Action\": \"*\", \"Resource\": \"arn:aws:cs:us-east-1:1234567890:search/movies\", \"Condition\": { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] } }}, {\"Effect\":\"Allow\", \"Action\": \"*\", \"Resource\": \"arn:aws:cs:us-east-1:1234567890:documents/movies\", \"Condition\": { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] } }} ] }</code></p>",
                 "serialized_name": "Options"
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -2080,7 +1733,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -2092,29 +1744,24 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -2124,55 +1771,45 @@
       "name": "DescribeStemmingOptions",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Gets the stemming dictionary configured for the search domain.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the stemming options for a search domain.</p>",
         "members": {
           "stems": {
             "type": "structure",
-            "documentation": "<p>The stemming options configured for this search domain and the current status of those options.</p>",
             "serialized_name": "Stems",
             "members": {
               "options": {
                 "type": "string",
-                "documentation": "<p>Maps terms to their stems, serialized as a JSON document. The document has a single object with one property \"stems\" whose value is an object mapping terms to their stems. The maximum size of a stemming document is 500 KB. Example: <code>{ \"stems\": {\"people\": \"person\", \"walking\": \"walk\"} }</code></p>",
                 "serialized_name": "Options"
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -2182,7 +1819,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -2194,29 +1830,24 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -2226,55 +1857,45 @@
       "name": "DescribeStopwordOptions",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Gets the stopwords configured for the search domain.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the stopword options for a search domain.</p>",
         "members": {
           "stopwords": {
             "type": "structure",
-            "documentation": "<p>The stopword options configured for this search domain and the current status of those options.</p>",
             "serialized_name": "Stopwords",
             "members": {
               "options": {
                 "type": "string",
-                "documentation": "<p>Lists stopwords serialized as a JSON document. The document has a single object with one property \"stopwords\" whose value is an array of strings. The maximum size of a stopwords document is 10 KB. Example: <code>{ \"stopwords\": [\"a\", \"an\", \"the\", \"of\"] }</code></p>",
                 "serialized_name": "Options"
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -2284,7 +1905,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -2296,29 +1916,24 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -2328,55 +1943,45 @@
       "name": "DescribeSynonymOptions",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Gets the synonym dictionary configured for the search domain.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the synonym options for a search domain.</p>",
         "members": {
           "synonyms": {
             "type": "structure",
-            "documentation": "<p>The synonym options configured for this search domain and the current status of those options.</p>",
             "serialized_name": "Synonyms",
             "members": {
               "options": {
                 "type": "string",
-                "documentation": "<p>Maps terms to their synonyms, serialized as a JSON document. The document has a single object with one property \"synonyms\" whose value is an object mapping terms to their synonyms. Each synonym is a simple string or an array of strings. The maximum size of a stopwords document is 100 KB. Example: <code>{ \"synonyms\": {\"cat\": [\"feline\", \"kitten\"], \"puppy\": \"dog\"} }</code></p>",
                 "serialized_name": "Options"
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -2386,7 +1991,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -2398,29 +2002,24 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -2430,29 +2029,24 @@
       "name": "IndexDocuments",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Tells the search domain to start indexing its documents using the latest text processing options and <code>IndexFields</code>. This operation must be invoked to make options whose OptionStatus has <code>OptionState</code> of <code>RequiresIndexDocuments</code> visible in search results.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>The result of an <code>IndexDocuments</code> action.</p>",
         "members": {
           "field_names": {
             "type": "list",
-            "documentation": "<p>The names of the fields that are currently being processed due to an <code>IndexDocuments</code> action.</p>",
             "serialized_name": "FieldNames",
             "members": {
-              "type": "string",
-              "documentation": "<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>"
+              "type": "string"
             }
           }
         }
@@ -2460,29 +2054,24 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -2492,61 +2081,50 @@
       "name": "UpdateDefaultSearchField",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Configures the default search field for the search domain. The default search field is used when a search request does not specify which fields to search. By default, it is configured to include the contents of all of the domain's text fields.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "default_search_field": {
             "type": "string",
             "required": true,
-            "documentation": "<p>The <code>IndexField</code> to use for search requests issued with the <code>q</code> parameter. The default is an empty string, which automatically searches all text fields.</p>",
             "serialized_name": "DefaultSearchField"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of an updated default search field.</p>",
         "members": {
           "default_search_field": {
             "type": "structure",
-            "documentation": "<p>The value of the <code>DefaultSearchField</code> configured for this search domain and its current status.</p>",
             "serialized_name": "DefaultSearchField",
             "members": {
               "options": {
                 "type": "string",
-                "documentation": "<p>The name of the <code>IndexField</code> to use as the default search field. The default is an empty string, which automatically searches all text fields.</p>",
                 "serialized_name": "Options"
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -2556,7 +2134,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -2568,35 +2145,29 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it specified an invalid type definition.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -2606,61 +2177,50 @@
       "name": "UpdateServiceAccessPolicies",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Configures the policies that control access to the domain's document and search services. The maximum size of an access policy document is 100 KB.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "access_policies": {
             "type": "string",
             "required": true,
-            "documentation": "<p>An IAM access policy as described in <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p> <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\", \"Action\": \"*\", \"Resource\": \"arn:aws:cs:us-east-1:1234567890:search/movies\", \"Condition\": { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] } }}, {\"Effect\":\"Allow\", \"Action\": \"*\", \"Resource\": \"arn:aws:cs:us-east-1:1234567890:documents/movies\", \"Condition\": { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] } }} ] }</code></p>",
             "serialized_name": "AccessPolicies"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of updated access policies.</p>",
         "members": {
           "access_policies": {
             "type": "structure",
-            "documentation": "<p>A <code>PolicyDocument</code> that specifies access policies for the search domain's services, and the current status of those policies.</p>",
             "serialized_name": "AccessPolicies",
             "members": {
               "options": {
                 "type": "string",
-                "documentation": "<p>An IAM access policy as described in <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p> <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\", \"Action\": \"*\", \"Resource\": \"arn:aws:cs:us-east-1:1234567890:search/movies\", \"Condition\": { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] } }}, {\"Effect\":\"Allow\", \"Action\": \"*\", \"Resource\": \"arn:aws:cs:us-east-1:1234567890:documents/movies\", \"Condition\": { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] } }} ] }</code></p>",
                 "serialized_name": "Options"
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -2670,7 +2230,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -2682,41 +2241,34 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because a resource limit has already been met.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it specified an invalid type definition.</p>",
           "members": {
           }
         }
@@ -2726,61 +2278,50 @@
       "name": "UpdateStemmingOptions",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Configures a stemming dictionary for the search domain. The stemming dictionary is used during indexing and when processing search requests. The maximum size of the stemming dictionary is 500 KB.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "stems": {
             "type": "string",
             "required": true,
-            "documentation": "<p>Maps terms to their stems, serialized as a JSON document. The document has a single object with one property \"stems\" whose value is an object mapping terms to their stems. The maximum size of a stemming document is 500 KB. Example: <code>{ \"stems\": {\"people\": \"person\", \"walking\": \"walk\"} }</code></p>",
             "serialized_name": "Stems"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of updated stemming options.</p>",
         "members": {
           "stems": {
             "type": "structure",
-            "documentation": "<p>The stemming options configured for this search domain and the current status of those options.</p>",
             "serialized_name": "Stems",
             "members": {
               "options": {
                 "type": "string",
-                "documentation": "<p>Maps terms to their stems, serialized as a JSON document. The document has a single object with one property \"stems\" whose value is an object mapping terms to their stems. The maximum size of a stemming document is 500 KB. Example: <code>{ \"stems\": {\"people\": \"person\", \"walking\": \"walk\"} }</code></p>",
                 "serialized_name": "Options"
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -2790,7 +2331,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -2802,41 +2342,34 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it specified an invalid type definition.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because a resource limit has already been met.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -2846,61 +2379,50 @@
       "name": "UpdateStopwordOptions",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Configures stopwords for the search domain. Stopwords are used during indexing and when processing search requests. The maximum size of the stopwords dictionary is 10 KB.</p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "stopwords": {
             "type": "string",
             "required": true,
-            "documentation": "<p>Lists stopwords serialized as a JSON document. The document has a single object with one property \"stopwords\" whose value is an array of strings. The maximum size of a stopwords document is 10 KB. Example: <code>{ \"stopwords\": [\"a\", \"an\", \"the\", \"of\"] }</code></p>",
             "serialized_name": "Stopwords"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of updated stopword options.</p>",
         "members": {
           "stopwords": {
             "type": "structure",
-            "documentation": "<p>The stopword options configured for this search domain and the current status of those options.</p>",
             "serialized_name": "Stopwords",
             "members": {
               "options": {
                 "type": "string",
-                "documentation": "<p>Lists stopwords serialized as a JSON document. The document has a single object with one property \"stopwords\" whose value is an array of strings. The maximum size of a stopwords document is 10 KB. Example: <code>{ \"stopwords\": [\"a\", \"an\", \"the\", \"of\"] }</code></p>",
                 "serialized_name": "Options"
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -2910,7 +2432,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -2922,41 +2443,34 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it specified an invalid type definition.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because a resource limit has already been met.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
@@ -2966,61 +2480,50 @@
       "name": "UpdateSynonymOptions",
       "http_method": "POST",
       "http_path": "/",
-      "documentation": "<p>Configures a synonym dictionary for the search domain. The synonym dictionary is used during indexing to configure mappings for terms that occur in text fields. The maximum size of the synonym dictionary is 100 KB. </p>",
       "input": {
         "type": "input",
         "members": {
           "domain_name": {
             "type": "string",
             "required": true,
-            "documentation": "<p>A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.</p>",
             "serialized_name": "DomainName"
           },
           "synonyms": {
             "type": "string",
             "required": true,
-            "documentation": "<p>Maps terms to their synonyms, serialized as a JSON document. The document has a single object with one property \"synonyms\" whose value is an object mapping terms to their synonyms. Each synonym is a simple string or an array of strings. The maximum size of a stopwords document is 100 KB. Example: <code>{ \"synonyms\": {\"cat\": [\"feline\", \"kitten\"], \"puppy\": \"dog\"} }</code></p>",
             "serialized_name": "Synonyms"
           }
         }
       },
       "output": {
         "type": "structure",
-        "documentation": "<p>A response message that contains the status of updated synonym options.</p>",
         "members": {
           "synonyms": {
             "type": "structure",
-            "documentation": "<p>The synonym options configured for this search domain and the current status of those options.</p>",
             "serialized_name": "Synonyms",
             "members": {
               "options": {
                 "type": "string",
-                "documentation": "<p>Maps terms to their synonyms, serialized as a JSON document. The document has a single object with one property \"synonyms\" whose value is an object mapping terms to their synonyms. Each synonym is a simple string or an array of strings. The maximum size of a stopwords document is 100 KB. Example: <code>{ \"synonyms\": {\"cat\": [\"feline\", \"kitten\"], \"puppy\": \"dog\"} }</code></p>",
                 "serialized_name": "Options"
               },
               "status": {
                 "type": "structure",
-                "documentation": "<p>The status of an option, including when it was last updated and whether it is actively in use for searches.</p>",
                 "serialized_name": "Status",
                 "members": {
                   "creation_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was created.</p>",
                     "serialized_name": "CreationDate"
                   },
                   "update_date": {
                     "type": "iso8601_timestamp",
-                    "documentation": "<p>A timestamp for when this option was last updated.</p>",
                     "serialized_name": "UpdateDate"
                   },
                   "update_version": {
                     "type": "integer",
-                    "documentation": "<p>A unique integer that indicates when this option was last updated.</p>",
                     "serialized_name": "UpdateVersion"
                   },
                   "state": {
                     "type": "string",
-                    "documentation": "<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until IndexDocuments has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>",
                     "serialized_name": "State",
                     "enum": [
                       "RequiresIndexDocuments",
@@ -3030,7 +2533,6 @@
                   },
                   "pending_deletion": {
                     "type": "boolean",
-                    "documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>",
                     "serialized_name": "PendingDeletion"
                   }
                 }
@@ -3042,41 +2544,34 @@
       "errors": [
         {
           "type": "structure",
-          "documentation": "<p>An error occurred while processing the request.</p>",
           "members": {
             "code": {
               "type": "string",
-              "documentation": "<p>A machine-parsable string error or warning code.</p>",
               "serialized_name": "Code"
             },
             "message": {
               "type": "string",
-              "documentation": "<p>A human-readable string error or warning message.</p>",
               "serialized_name": "Message"
             }
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it specified an invalid type definition.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because a resource limit has already been met.</p>",
           "members": {
           }
         },
         {
           "type": "structure",
-          "documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
           "members": {
           }
         }
