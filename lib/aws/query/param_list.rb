@@ -25,7 +25,7 @@ module Aws
       # @param [String] param_name
       # @param [String, nil] param_value
       # @return [Param]
-      def add(param_name, param_value = nil)
+      def set(param_name, param_value = nil)
         param = Param.new(param_name, param_value)
         @params[param.name] = param
         param
@@ -33,7 +33,7 @@ module Aws
 
       # @param [String] param_name
       # @return [Param, nil]
-      def remove(param_name)
+      def delete(param_name)
         @params.delete(param_name)
       end
 

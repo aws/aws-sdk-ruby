@@ -88,7 +88,7 @@ module Aws
         when MapShape then map(param_list, shape, prefix, value)
         when TimestampShape then timestamp(param_list, shape, prefix, value.utc)
         when BlobShape then blob(param_list, shape, prefix, value)
-        else param_list.add(prefix, value.to_s)
+        else param_list.set(prefix, value.to_s)
         end
       end
 
@@ -99,11 +99,11 @@ module Aws
           when UnixTimestampShape then value.to_i.to_s
           else raise "invalid timestamp format `#{shape.class.name}'"
         end
-        param_list.add(prefix, value)
+        param_list.set(prefix, value)
       end
 
       def blob(param_list, shape, prefix, value)
-        param_list.add(prefix, Base64.strict_encode64(value))
+        param_list.set(prefix, Base64.strict_encode64(value))
       end
 
     end
