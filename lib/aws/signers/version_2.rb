@@ -35,8 +35,6 @@ module Aws
         params.delete('Signature')
         params.set('Signature', signature(http_request, params))
         http_request.body = params.to_io
-        puts http_request.body.read
-        http_request.body.rewind
       end
 
       private
