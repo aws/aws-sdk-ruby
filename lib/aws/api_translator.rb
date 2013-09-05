@@ -16,9 +16,17 @@ module Aws
   # @api private
   class Translator
 
-    def initialize(src, options = {})
+    DEFAULT_OPTIONS = {
+      documentation: true,
+      timestamp_format: 'iso8601',
+    }
+
+    def initialize(src, options)
       @properties = {}
       @options = options
+      DEFAULT_OPTIONS.each do |option, default|
+        @options[option] = default unless @options.key?(option)
+      end
       src.each_pair do |property, value|
         self.send("set_#{property}", value)
       end
@@ -29,7 +37,7 @@ module Aws
     end
 
     def set_documentation(docs)
-      if docs
+      if docs && @options[:documentation]
         docs = docs.gsub(/<!--.*?-->/m, '')
         docs = docs.gsub(/<a>(.+?)<\/a>/m, '\1')
         docs = docs.gsub(/<examples?>.+?<\/examples?>/m, '')
@@ -68,7 +76,7 @@ module Aws
 
     class << self
 
-      def translate(src, options = {})
+      def translate(src, options)
         new(src, options).translated if src
       end
 
@@ -99,10 +107,6 @@ module Aws
   # compatible.
   # @api private
   class ApiTranslator < Translator
-
-    def initialize(src, options = {})
-      super(src, { timestamp_format: 'iso8601' }.merge(options))
-    end
 
     def translated
       api = Seahorse::Model::Api.from_hash(@properties)

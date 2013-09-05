@@ -18,15 +18,20 @@ task :apis do
   require 'multi_json'
   require_relative '../lib/aws-sdk-core'
 
-    puts MultiJson.engine
   FileUtils.mkdir_p('apis')
   Dir.glob('apis-src/*.json').each do |path|
+
+    # skip the pagination descriptions
     next if path.match(/paginators/)
+
     puts "translating #{path.split('/')[1]}"
-    api = Aws::ApiTranslator.translate(MultiJson.load(File.read(path), max_nesting: nil))
+    api_src = MultiJson.load(File.read(path), max_nesting: nil)
+    api = Aws::ApiTranslator.translate(api_src, documentation: false)
+
     File.open(path.sub('apis-src', 'apis'), 'w') do |file|
       file.write(MultiJson.dump(api.to_hash, pretty: true))
     end
+
   end
 
 end
