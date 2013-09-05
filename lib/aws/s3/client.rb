@@ -24,8 +24,10 @@ module AWS
 
     # Client class for Amazon Simple Storage Service (S3).
     class Client < Core::Client
-
       API_VERSION = '2006-03-01'
+    end
+
+    class Client::V20060301 < Client
 
       XMLNS = "http://s3.amazonaws.com/doc/#{API_VERSION}/"
 
@@ -1811,8 +1813,6 @@ module AWS
       extend Validators
 
     end
-
-    class Client::V20060301 < Client; end
 
   end
 end

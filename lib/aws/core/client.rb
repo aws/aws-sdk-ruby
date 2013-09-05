@@ -581,8 +581,12 @@ module AWS
         # @return [Array<Symbol>] Returns a list of service operations as
         #   method names supported by this client.
         # @api private
-        def operations
-          @operations ||= []
+        def operations(options = {})
+          if name.match(/V\d{8}$/)
+            @operations ||= []
+          else
+            client_class(options).operations
+          end
         end
 
         # @api private
