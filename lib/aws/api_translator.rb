@@ -108,6 +108,10 @@ module Aws
   # @api private
   class ApiTranslator < Translator
 
+    def self.translate(src, options = {})
+      super(src, options)
+    end
+
     def translated
       api = Seahorse::Model::Api.from_hash(@properties)
       api.metadata = Hash[api.metadata.sort]
