@@ -181,7 +181,7 @@ module AWS
   # execution.  You can get a workflow execution by its workflow
   # id (you may optionally provide the run id as well).
   #
-  #     execution = domain.workflow_executions['workflow-id']
+  #     execution = domain.workflow_executions['workflow-id', 'run-id']
   #     execution.events.each do |event|
   #       puts event.attributes.to_h.inspect
   #     end
