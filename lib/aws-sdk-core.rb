@@ -68,8 +68,6 @@ module Aws
 
 end
 
-require 'seahorse/model/shapes/shape'
-
 module Seahorse::Model::Shapes
   class FlatMapShape < MapShape; end
   class FlatListShape < ListShape; end
