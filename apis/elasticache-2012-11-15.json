@@ -12,6 +12,7 @@
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
+    "Aws::Plugins::RestProtocol",
     "Aws::Plugins::QuerySerializer",
     "Aws::Plugins::Signer"
   ],
