@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'stringio'
+
 module Aws
   module Query
     class ParamList
@@ -55,6 +57,40 @@ module Aws
       # @return [String]
       def to_s
         to_a.map(&:to_s).join('&')
+      end
+
+      # @return [#read, #rewind, #size]
+      def to_io
+        IoWrapper.new(self)
+      end
+
+      # @api private
+      class IoWrapper
+
+        # @param [ParamList] param_list
+        def initialize(param_list)
+          @param_list = param_list
+          @io = StringIO.new(param_list.to_s)
+        end
+
+        # @return [ParamList]
+        attr_reader :param_list
+
+        # @return [Integer]
+        def size
+          @io.size
+        end
+
+        # @return [void]
+        def rewind
+          @io.rewind
+        end
+
+        # @return [String, nil]
+        def read(bytes = nil, output_buffer = nil)
+          @io.read(bytes, output_buffer)
+        end
+
       end
 
     end

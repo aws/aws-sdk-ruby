@@ -26,18 +26,25 @@ module Aws
       private
 
       def build_request(context)
-        context.http_request.body = Query::Builder.to_params(
+        context.http_request.headers['Content-Type'] =
+          'application/x-www-form-urlencoded; charset=utf-8'
+
+        param_list = Query::Builder.to_query_params(
           context.operation.input,
           context.params)
+
+        param_list.set('Version', context.config.api.version)
+        param_list.set('Action', context.operation.name)
+
+        context.http_request.body = param_list.to_io
       end
 
       def parse_response(response)
-        context.http_response.body.tap do |body|
-          response.data = Xml::Parser.to_hash(
-            context.operation.output,
-            body.read)
-          body.rewind
-        end
+        body = response.context.http_response.body
+        response.data = Xml::Parser.to_hash(
+          response.context.operation.output,
+          body.read)
+        body.rewind
       end
 
     end
