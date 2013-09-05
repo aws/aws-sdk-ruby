@@ -44,6 +44,7 @@ end
 
 SWF = client_class 'swf', %w(2012-01-25)
 
+EC2 = client_class 'ec2', %w(2013-06-15)
 EMR = client_class 'elasticmapreduce', %w(2009-03-31)
 CloudFront = client_class 'cloudfront', %w(2013-05-12)
 S3 = client_class 's3', %w(2006-03-01)
@@ -54,6 +55,8 @@ emr = EMR.new
 cloudfront = CloudFront.new
 s3 = S3.new
 opsworks = OpsWorks.new
+ec2 = EC2.new(http_wire_trace: true, endpoint: 'ec2.us-east-1.amazonaws.com')
+pp ec2.describe_instances.data
 
 #resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
 #pp resp.http_request
