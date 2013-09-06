@@ -99,6 +99,362 @@ module AWS
         end
       end
 
+      protected
+
+      def extract_error_details response
+        if
+          (response.http_response.status >= 300 ||
+            response.request_type == :complete_multipart_upload) and
+          body = response.http_response.body and
+          error = Core::XML::Parser.parse(body) and
+          error[:code]
+        then
+          [error[:code], error[:message]]
+        end
+      end
+
+      def empty_response_body? response_body
+        response_body.nil? or response_body == ''
+      end
+
+      # There are a few of s3 requests that can generate empty bodies and
+      # yet still be errors.  These return empty bodies to comply with the
+      # HTTP spec.  We have to detect these errors specially.
+      def populate_error resp
+        code = resp.http_response.status
+        if EMPTY_BODY_ERRORS.include?(code) and empty_response_body?(resp.http_response.body)
+          error_class = EMPTY_BODY_ERRORS[code]
+          resp.error = error_class.new(resp.http_request, resp.http_response)
+        else
+          super
+        end
+      end
+
+      def retryable_error? response
+        super or
+        failed_multipart_upload?(response) or
+        response.error.is_a?(Errors::RequestTimeout)
+      end
+
+      # S3 may return a 200 response code in response to complete_multipart_upload
+      # and then start streaming whitespace until it knows the final result.
+      # At that time it sends an XML message with success or failure.
+      def failed_multipart_upload? response
+        response.request_type == :complete_multipart_upload &&
+        extract_error_details(response)
+      end
+
+      def new_request
+        req = S3::Request.new
+        req.force_path_style = config.s3_force_path_style?
+        req
+      end
+
+      # Previously the access control policy could be specified via :acl
+      # as a string or an object that responds to #to_xml.  The prefered
+      # method now is to pass :access_control_policy an xml document.
+      def move_access_control_policy options
+        if acl = options[:acl]
+          if acl.is_a?(String) and is_xml?(acl)
+            options[:access_control_policy] = options.delete(:acl)
+          elsif acl.respond_to?(:to_xml)
+            options[:access_control_policy] = options.delete(:acl).to_xml
+          end
+        end
+      end
+
+      # @param [String] possible_xml
+      # @return [Boolean] Returns `true` if the given string is a valid xml
+      #   document.
+      def is_xml? possible_xml
+        begin
+          REXML::Document.new(possible_xml).has_elements?
+        rescue
+          false
+        end
+      end
+
+      def md5 str
+        Base64.encode64(Digest::MD5.digest(str)).strip
+      end
+
+      def parse_copy_part_response resp
+        doc = REXML::Document.new(resp.http_response.body)
+        resp[:etag] = doc.root.elements["ETag"].text
+        resp[:last_modified] = doc.root.elements["LastModified"].text
+        if header = resp.http_response.headers['x-amzn-requestid']
+          data[:request_id] = [header].flatten.first
+        end
+      end
+
+      def extract_object_headers resp
+        meta = {}
+        resp.http_response.headers.each_pair do |name,value|
+          if name =~ /^x-amz-meta-(.+)$/i
+            meta[$1] = [value].flatten.join
+          end
+        end
+        resp.data[:meta] = meta
+
+        if expiry = resp.http_response.headers['x-amz-expiration']
+          expiry.first =~ /^expiry-date="(.+)", rule-id="(.+)"$/
+          exp_date = DateTime.parse($1)
+          exp_rule_id = $2
+        else
+          exp_date = nil
+          exp_rule_id = nil
+        end
+        resp.data[:expiration_date] = exp_date if exp_date
+        resp.data[:expiration_rule_id] = exp_rule_id if exp_rule_id
+
+        restoring = false
+        restore_date = nil
+
+        if restore = resp.http_response.headers['x-amz-restore']
+          if restore.first =~ /ongoing-request="(.+?)", expiry-date="(.+?)"/
+            restoring = $1 == "true"
+            restore_date = $2 && DateTime.parse($2)
+          elsif restore.first =~ /ongoing-request="(.+?)"/
+            restoring = $1 == "true"
+          end
+        end
+        resp.data[:restore_in_progress] = restoring
+        resp.data[:restore_expiration_date] = restore_date if restore_date
+
+        {
+          'x-amz-version-id' => :version_id,
+          'content-type' => :content_type,
+          'content-encoding' => :content_encoding,
+          'cache-control' => :cache_control,
+          'expires' => :expires,
+          'etag' => :etag,
+          'x-amz-website-redirect-location' => :website_redirect_location,
+          'accept-ranges' => :accept_ranges,
+        }.each_pair do |header,method|
+          if value = resp.http_response.header(header)
+            resp.data[method] = value
+          end
+        end
+
+        if time = resp.http_response.header('Last-Modified')
+          resp.data[:last_modified] = Time.parse(time)
+        end
+
+        if length = resp.http_response.header('content-length')
+          resp.data[:content_length] = length.to_i
+        end
+
+        if sse = resp.http_response.header('x-amz-server-side-encryption')
+          resp.data[:server_side_encryption] = sse.downcase.to_sym
+        end
+
+      end
+
+      module Validators
+
+        # @return [Boolean] Returns true if the given bucket name is valid.
+        def valid_bucket_name?(bucket_name)
+          validate_bucket_name!(bucket_name) rescue false
+        end
+
+        # Returns true if the given `bucket_name` is DNS compatible.
+        #
+        # DNS compatible bucket names may be accessed like:
+        #
+        #     http://dns.compat.bucket.name.s3.amazonaws.com/
+        #
+        # Whereas non-dns compatible bucket names must place the bucket
+        # name in the url path, like:
+        #
+        #     http://s3.amazonaws.com/dns_incompat_bucket_name/
+        #
+        # @return [Boolean] Returns true if the given bucket name may be
+        #   is dns compatible.
+        #   this bucket n
+        #
+        def dns_compatible_bucket_name?(bucket_name)
+          return false if
+            !valid_bucket_name?(bucket_name) or
+
+            # Bucket names should be between 3 and 63 characters long
+            bucket_name.size > 63 or
+
+            # Bucket names must only contain lowercase letters, numbers, dots, and dashes
+            # and must start and end with a lowercase letter or a number
+            bucket_name !~ /^[a-z0-9][a-z0-9.-]+[a-z0-9]$/ or
+
+            # Bucket names should not be formatted like an IP address (e.g., 192.168.5.4)
+            bucket_name =~ /(\d+\.){3}\d+/ or
+
+            # Bucket names cannot contain two, adjacent periods
+            bucket_name['..'] or
+
+            # Bucket names cannot contain dashes next to periods
+            # (e.g., "my-.bucket.com" and "my.-bucket" are invalid)
+            (bucket_name['-.'] || bucket_name['.-'])
+
+          true
+        end
+
+        # Returns true if the bucket name must be used in the request
+        # path instead of as a sub-domain when making requests against
+        # S3.
+        #
+        # This can be an issue if the bucket name is DNS compatible but
+        # contains '.' (periods).  These cause the SSL certificate to
+        # become invalid when making authenticated requets over SSL to the
+        # bucket name.  The solution is to send this as a path argument
+        # instead.
+        #
+        # @return [Boolean] Returns true if the bucket name should be used
+        #   as a path segement instead of dns prefix when making requests
+        #   against s3.
+        #
+        def path_style_bucket_name? bucket_name
+          if dns_compatible_bucket_name?(bucket_name)
+            bucket_name =~ /\./ ? true : false
+          else
+            true
+          end
+        end
+
+        def validate! name, value, &block
+          if error_msg = yield
+            raise ArgumentError, "#{name} #{error_msg}"
+          end
+          value
+        end
+
+        def validate_key!(key)
+          validate!('key', key) do
+            case
+            when key.nil? || key == ''
+              'may not be blank'
+            end
+          end
+        end
+
+        def require_bucket_name! bucket_name
+          if [nil, ''].include?(bucket_name)
+            raise ArgumentError, "bucket_name may not be blank"
+          end
+        end
+
+        # Returns true if the given bucket name is valid.  If the name
+        # is invalid, an ArgumentError is raised.
+        def validate_bucket_name!(bucket_name)
+          validate!('bucket_name', bucket_name) do
+            case
+            when bucket_name.nil? || bucket_name == ''
+              'may not be blank'
+            when bucket_name !~ /^[A-Za-z0-9._\-]+$/
+              'may only contain uppercase letters, lowercase letters, numbers, periods (.), ' +
+              'underscores (_), and dashes (-)'
+            when !(3..255).include?(bucket_name.size)
+              'must be between 3 and 255 characters long'
+            when bucket_name =~ /\n/
+              'must not contain a newline character'
+            end
+          end
+        end
+
+        def require_policy!(policy)
+          validate!('policy', policy) do
+            case
+            when policy.nil? || policy == ''
+              'may not be blank'
+            else
+              json_validation_message(policy)
+            end
+          end
+        end
+
+        def require_acl! options
+          acl_options = [
+            :acl,
+            :grant_read,
+            :grant_write,
+            :grant_read_acp,
+            :grant_write_acp,
+            :grant_full_control,
+            :access_control_policy,
+          ]
+          unless options.keys.any?{|opt| acl_options.include?(opt) }
+            msg = "missing a required ACL option, must provide an ACL " +
+                  "via :acl, :grant_* or :access_control_policy"
+            raise ArgumentError, msg
+          end
+        end
+
+        def set_body_stream_and_content_length request, options
+
+          unless options[:content_length]
+            msg = "S3 requires a content-length header, unable to determine "
+            msg << "the content length of the data provided, please set "
+            msg << ":content_length"
+            raise ArgumentError, msg
+          end
+
+          request.headers['content-length'] = options[:content_length]
+          request.body_stream = options[:data]
+
+        end
+
+        def require_upload_id!(upload_id)
+          validate!("upload_id", upload_id) do
+            "must not be blank" if upload_id.to_s.empty?
+          end
+        end
+
+        def require_part_number! part_number
+          validate!("part_number", part_number) do
+            "must not be blank" if part_number.to_s.empty?
+          end
+        end
+
+        def validate_parts!(parts)
+          validate!("parts", parts) do
+            if !parts.kind_of?(Array)
+              "must not be blank"
+            elsif parts.empty?
+              "must contain at least one entry"
+            elsif !parts.all? { |p| p.kind_of?(Hash) }
+              "must be an array of hashes"
+            elsif !parts.all? { |p| p[:part_number] }
+              "must contain part_number for each part"
+            elsif !parts.all? { |p| p[:etag] }
+              "must contain etag for each part"
+            elsif parts.any? { |p| p[:part_number].to_i < 1 }
+              "must not have part numbers less than 1"
+            end
+          end
+        end
+
+        def json_validation_message(obj)
+          if obj.respond_to?(:to_str)
+            obj = obj.to_str
+          elsif obj.respond_to?(:to_json)
+            obj = obj.to_json
+          end
+
+          error = nil
+          begin
+            JSON.parse(obj)
+          rescue => e
+            error = e
+          end
+          "contains invalid JSON: #{error}" if error
+        end
+
+      end
+
+      include Validators
+      extend Validators
+
+    end
+
+    class Client::V20060301 < Client
+
       def self.object_method(method_name, verb, *args, &block)
         bucket_method(method_name, verb, *args) do
           configure_request do |req, options|
@@ -1458,361 +1814,6 @@ module AWS
 
       end
 
-      protected
-
-      def extract_error_details response
-        if
-          (response.http_response.status >= 300 ||
-            response.request_type == :complete_multipart_upload) and
-          body = response.http_response.body and
-          error = Core::XML::Parser.parse(body) and
-          error[:code]
-        then
-          [error[:code], error[:message]]
-        end
-      end
-
-      def empty_response_body? response_body
-        response_body.nil? or response_body == ''
-      end
-
-      # There are a few of s3 requests that can generate empty bodies and
-      # yet still be errors.  These return empty bodies to comply with the
-      # HTTP spec.  We have to detect these errors specially.
-      def populate_error resp
-        code = resp.http_response.status
-        if EMPTY_BODY_ERRORS.include?(code) and empty_response_body?(resp.http_response.body)
-          error_class = EMPTY_BODY_ERRORS[code]
-          resp.error = error_class.new(resp.http_request, resp.http_response)
-        else
-          super
-        end
-      end
-
-      def retryable_error? response
-        super or
-        failed_multipart_upload?(response) or
-        response.error.is_a?(Errors::RequestTimeout)
-      end
-
-      # S3 may return a 200 response code in response to complete_multipart_upload
-      # and then start streaming whitespace until it knows the final result.
-      # At that time it sends an XML message with success or failure.
-      def failed_multipart_upload? response
-        response.request_type == :complete_multipart_upload &&
-        extract_error_details(response)
-      end
-
-      def new_request
-        req = S3::Request.new
-        req.force_path_style = config.s3_force_path_style?
-        req
-      end
-
-      # Previously the access control policy could be specified via :acl
-      # as a string or an object that responds to #to_xml.  The prefered
-      # method now is to pass :access_control_policy an xml document.
-      def move_access_control_policy options
-        if acl = options[:acl]
-          if acl.is_a?(String) and is_xml?(acl)
-            options[:access_control_policy] = options.delete(:acl)
-          elsif acl.respond_to?(:to_xml)
-            options[:access_control_policy] = options.delete(:acl).to_xml
-          end
-        end
-      end
-
-      # @param [String] possible_xml
-      # @return [Boolean] Returns `true` if the given string is a valid xml
-      #   document.
-      def is_xml? possible_xml
-        begin
-          REXML::Document.new(possible_xml).has_elements?
-        rescue
-          false
-        end
-      end
-
-      def md5 str
-        Base64.encode64(Digest::MD5.digest(str)).strip
-      end
-
-      def parse_copy_part_response resp
-        doc = REXML::Document.new(resp.http_response.body)
-        resp[:etag] = doc.root.elements["ETag"].text
-        resp[:last_modified] = doc.root.elements["LastModified"].text
-        if header = resp.http_response.headers['x-amzn-requestid']
-          data[:request_id] = [header].flatten.first
-        end
-      end
-
-      def extract_object_headers resp
-        meta = {}
-        resp.http_response.headers.each_pair do |name,value|
-          if name =~ /^x-amz-meta-(.+)$/i
-            meta[$1] = [value].flatten.join
-          end
-        end
-        resp.data[:meta] = meta
-
-        if expiry = resp.http_response.headers['x-amz-expiration']
-          expiry.first =~ /^expiry-date="(.+)", rule-id="(.+)"$/
-          exp_date = DateTime.parse($1)
-          exp_rule_id = $2
-        else
-          exp_date = nil
-          exp_rule_id = nil
-        end
-        resp.data[:expiration_date] = exp_date if exp_date
-        resp.data[:expiration_rule_id] = exp_rule_id if exp_rule_id
-
-        restoring = false
-        restore_date = nil
-
-        if restore = resp.http_response.headers['x-amz-restore']
-          if restore.first =~ /ongoing-request="(.+?)", expiry-date="(.+?)"/
-            restoring = $1 == "true"
-            restore_date = $2 && DateTime.parse($2)
-          elsif restore.first =~ /ongoing-request="(.+?)"/
-            restoring = $1 == "true"
-          end
-        end
-        resp.data[:restore_in_progress] = restoring
-        resp.data[:restore_expiration_date] = restore_date if restore_date
-
-        {
-          'x-amz-version-id' => :version_id,
-          'content-type' => :content_type,
-          'content-encoding' => :content_encoding,
-          'cache-control' => :cache_control,
-          'expires' => :expires,
-          'etag' => :etag,
-          'x-amz-website-redirect-location' => :website_redirect_location,
-          'accept-ranges' => :accept_ranges,
-        }.each_pair do |header,method|
-          if value = resp.http_response.header(header)
-            resp.data[method] = value
-          end
-        end
-
-        if time = resp.http_response.header('Last-Modified')
-          resp.data[:last_modified] = Time.parse(time)
-        end
-
-        if length = resp.http_response.header('content-length')
-          resp.data[:content_length] = length.to_i
-        end
-
-        if sse = resp.http_response.header('x-amz-server-side-encryption')
-          resp.data[:server_side_encryption] = sse.downcase.to_sym
-        end
-
-      end
-
-      module Validators
-
-        # @return [Boolean] Returns true if the given bucket name is valid.
-        def valid_bucket_name?(bucket_name)
-          validate_bucket_name!(bucket_name) rescue false
-        end
-
-        # Returns true if the given `bucket_name` is DNS compatible.
-        #
-        # DNS compatible bucket names may be accessed like:
-        #
-        #     http://dns.compat.bucket.name.s3.amazonaws.com/
-        #
-        # Whereas non-dns compatible bucket names must place the bucket
-        # name in the url path, like:
-        #
-        #     http://s3.amazonaws.com/dns_incompat_bucket_name/
-        #
-        # @return [Boolean] Returns true if the given bucket name may be
-        #   is dns compatible.
-        #   this bucket n
-        #
-        def dns_compatible_bucket_name?(bucket_name)
-          return false if
-            !valid_bucket_name?(bucket_name) or
-
-            # Bucket names should be between 3 and 63 characters long
-            bucket_name.size > 63 or
-
-            # Bucket names must only contain lowercase letters, numbers, dots, and dashes
-            # and must start and end with a lowercase letter or a number
-            bucket_name !~ /^[a-z0-9][a-z0-9.-]+[a-z0-9]$/ or
-
-            # Bucket names should not be formatted like an IP address (e.g., 192.168.5.4)
-            bucket_name =~ /(\d+\.){3}\d+/ or
-
-            # Bucket names cannot contain two, adjacent periods
-            bucket_name['..'] or
-
-            # Bucket names cannot contain dashes next to periods
-            # (e.g., "my-.bucket.com" and "my.-bucket" are invalid)
-            (bucket_name['-.'] || bucket_name['.-'])
-
-          true
-        end
-
-        # Returns true if the bucket name must be used in the request
-        # path instead of as a sub-domain when making requests against
-        # S3.
-        #
-        # This can be an issue if the bucket name is DNS compatible but
-        # contains '.' (periods).  These cause the SSL certificate to
-        # become invalid when making authenticated requets over SSL to the
-        # bucket name.  The solution is to send this as a path argument
-        # instead.
-        #
-        # @return [Boolean] Returns true if the bucket name should be used
-        #   as a path segement instead of dns prefix when making requests
-        #   against s3.
-        #
-        def path_style_bucket_name? bucket_name
-          if dns_compatible_bucket_name?(bucket_name)
-            bucket_name =~ /\./ ? true : false
-          else
-            true
-          end
-        end
-
-        def validate! name, value, &block
-          if error_msg = yield
-            raise ArgumentError, "#{name} #{error_msg}"
-          end
-          value
-        end
-
-        def validate_key!(key)
-          validate!('key', key) do
-            case
-            when key.nil? || key == ''
-              'may not be blank'
-            end
-          end
-        end
-
-        def require_bucket_name! bucket_name
-          if [nil, ''].include?(bucket_name)
-            raise ArgumentError, "bucket_name may not be blank"
-          end
-        end
-
-        # Returns true if the given bucket name is valid.  If the name
-        # is invalid, an ArgumentError is raised.
-        def validate_bucket_name!(bucket_name)
-          validate!('bucket_name', bucket_name) do
-            case
-            when bucket_name.nil? || bucket_name == ''
-              'may not be blank'
-            when bucket_name !~ /^[A-Za-z0-9._\-]+$/
-              'may only contain uppercase letters, lowercase letters, numbers, periods (.), ' +
-              'underscores (_), and dashes (-)'
-            when !(3..255).include?(bucket_name.size)
-              'must be between 3 and 255 characters long'
-            when bucket_name =~ /\n/
-              'must not contain a newline character'
-            end
-          end
-        end
-
-        def require_policy!(policy)
-          validate!('policy', policy) do
-            case
-            when policy.nil? || policy == ''
-              'may not be blank'
-            else
-              json_validation_message(policy)
-            end
-          end
-        end
-
-        def require_acl! options
-          acl_options = [
-            :acl,
-            :grant_read,
-            :grant_write,
-            :grant_read_acp,
-            :grant_write_acp,
-            :grant_full_control,
-            :access_control_policy,
-          ]
-          unless options.keys.any?{|opt| acl_options.include?(opt) }
-            msg = "missing a required ACL option, must provide an ACL " +
-                  "via :acl, :grant_* or :access_control_policy"
-            raise ArgumentError, msg
-          end
-        end
-
-        def set_body_stream_and_content_length request, options
-
-          unless options[:content_length]
-            msg = "S3 requires a content-length header, unable to determine "
-            msg << "the content length of the data provided, please set "
-            msg << ":content_length"
-            raise ArgumentError, msg
-          end
-
-          request.headers['content-length'] = options[:content_length]
-          request.body_stream = options[:data]
-
-        end
-
-        def require_upload_id!(upload_id)
-          validate!("upload_id", upload_id) do
-            "must not be blank" if upload_id.to_s.empty?
-          end
-        end
-
-        def require_part_number! part_number
-          validate!("part_number", part_number) do
-            "must not be blank" if part_number.to_s.empty?
-          end
-        end
-
-        def validate_parts!(parts)
-          validate!("parts", parts) do
-            if !parts.kind_of?(Array)
-              "must not be blank"
-            elsif parts.empty?
-              "must contain at least one entry"
-            elsif !parts.all? { |p| p.kind_of?(Hash) }
-              "must be an array of hashes"
-            elsif !parts.all? { |p| p[:part_number] }
-              "must contain part_number for each part"
-            elsif !parts.all? { |p| p[:etag] }
-              "must contain etag for each part"
-            elsif parts.any? { |p| p[:part_number].to_i < 1 }
-              "must not have part numbers less than 1"
-            end
-          end
-        end
-
-        def json_validation_message(obj)
-          if obj.respond_to?(:to_str)
-            obj = obj.to_str
-          elsif obj.respond_to?(:to_json)
-            obj = obj.to_json
-          end
-
-          error = nil
-          begin
-            JSON.parse(obj)
-          rescue => e
-            error = e
-          end
-          "contains invalid JSON: #{error}" if error
-        end
-
-      end
-
-      include Validators
-      extend Validators
-
     end
-
-    class Client::V20060301 < Client; end
-
   end
 end
