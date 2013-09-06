@@ -41,7 +41,7 @@ module Aws
 
       def parse_response(response)
         body = response.context.http_response.body
-        response.data = Xml::Parser.to_hash(
+        response.data = Xml::Parser.parse(
           response.context.operation.output,
           body.read)
         body.rewind

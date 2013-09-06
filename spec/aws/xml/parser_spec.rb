@@ -25,7 +25,7 @@ module Aws
 
       def parse(xml)
         shape = Seahorse::Model::Shapes::Shape.from_hash(rules)
-        Parser.to_hash(shape, xml)
+        Parser.parse(shape, xml)
       end
 
       it 'returns an empty hash when the XML is empty' do

@@ -34,7 +34,7 @@ module Aws
         # parse xml resopnse
         super(context).on_complete do |response|
           xml = response.context.http_response.body.read
-          response.data = Xml::Parser.to_hash(operation.output, xml)
+          response.data = Xml::Parser.parse(operation.output, xml)
         end
 
       end

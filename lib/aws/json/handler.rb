@@ -39,7 +39,7 @@ module Aws
       def parse_response(response)
         context = response.context
         body = context.http_response.body
-        response.data = Json::Parser.to_hash(context.operation.output, body.read)
+        response.data = Json::Parser.parse(context.operation.output, body.read)
         body.rewind
       end
 

@@ -24,7 +24,7 @@ module Aws
 
       def parse(json)
         shape = Seahorse::Model::Shapes::Shape.from_hash(rules)
-        Parser.to_hash(shape, json)
+        Parser.parse(shape, json)
       end
 
       it 'returns an empty hash when given an empty string' do

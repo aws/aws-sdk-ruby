@@ -27,15 +27,15 @@ module Aws
 
       # @param [String<JSON>] json
       # @return [Hash]
-      def to_hash(json)
+      def parse(json)
         structure(@rules, MultiJson.load(json == '' ? '{}' : json))
       end
 
       # @param [Seahorse::Model::Shapes::Shape] rules
       # @param [String<JSON>] json
       # @return [Hash]
-      def self.to_hash(rules, json)
-        new(rules).to_hash(json)
+      def self.parse(rules, json)
+        new(rules).parse(json)
       end
 
       private

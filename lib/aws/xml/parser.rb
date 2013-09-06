@@ -36,15 +36,15 @@ module Aws
 
       # @param [String<xml>] xml
       # @return [Hash]
-      def to_hash(xml)
+      def parse(xml)
         structure(@rules, MultiXml.parse(xml).values.first || {})
       end
 
       # @param [Seahorse::Model::Shapes::Shape] rules
       # @param [String<xml>] xml
       # @return [Hash]
-      def self.to_hash(rules, xml)
-        Parser.new(rules).to_hash(xml)
+      def self.parse(rules, xml)
+        Parser.new(rules).parse(xml)
       end
 
       private
