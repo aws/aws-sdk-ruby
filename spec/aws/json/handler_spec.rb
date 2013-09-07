@@ -40,7 +40,7 @@ module Aws
       end
 
       it 'deserializes response to JSON' do
-        expect(response.data).to eq domain_infos: [{name: 'Hello'}]
+        expect(response.data.to_hash).to eq domain_infos: [{name: 'Hello'}]
       end
     end
   end

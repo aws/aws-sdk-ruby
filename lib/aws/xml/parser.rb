@@ -50,7 +50,7 @@ module Aws
       private
 
       def structure(shape, hash)
-        data = {}
+        data = Aws::Structure.new(shape.members.keys)
         shape.members.each do |member_name, member_shape|
           key = member_shape.serialized_name
           data[member_name] = member(member_shape, hash[key]) if hash.key?(key)

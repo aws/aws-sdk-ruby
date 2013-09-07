@@ -23,9 +23,10 @@ module Aws
         'members' => {},
       }}
 
+      let(:shape) { Seahorse::Model::Shapes::Shape.from_hash(rules) }
+
       def parse(xml)
-        shape = Seahorse::Model::Shapes::Shape.from_hash(rules)
-        Parser.parse(shape, xml)
+        Parser.parse(shape, xml).to_hash
       end
 
       it 'returns an empty hash when the XML is empty' do
@@ -39,6 +40,10 @@ module Aws
       it 'ignores xml elements when the rules are empty' do
         rules['members'] = {}
         expect(parse('<xml><foo>bar</foo></xml>')).to eq({})
+      end
+
+      it 'returns an instance of Struct' do
+        expect(Parser.parse(shape, '<xml/>')).to be_kind_of(Aws::Structure)
       end
 
       describe 'structures' do
@@ -557,7 +562,7 @@ module Aws
 
         it 'returns an empty element as nil' do
           xml = "<xml><CreatedAt/></xml>"
-          expect(parse(xml)).to eq(:created_at => nil)
+          expect(parse(xml)[:created_at]).to be(nil)
         end
 
         it 'can parse unix timestamps' do
@@ -640,7 +645,7 @@ module Aws
             'data' => { 'type' => 'string' }
           }
           xml = "<xml><data/></xml>"
-          expect(parse(xml)).to eq(data: nil)
+          expect(parse(xml)[:data]).to be(nil)
         end
 
       end
@@ -652,7 +657,7 @@ module Aws
             'data' => { 'type' => 'blob' }
           }
           xml = "<xml><data/></xml>"
-          expect(parse(xml)).to eq(data: nil)
+          expect(parse(xml)[:data]).to be(nil)
         end
 
         it 'base64 decodes blob elements' do

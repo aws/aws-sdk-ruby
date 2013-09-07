@@ -22,9 +22,10 @@ module Aws
         'members' => {},
       }}
 
+      let(:shape) { Seahorse::Model::Shapes::Shape.from_hash(rules) }
+
       def parse(json)
-        shape = Seahorse::Model::Shapes::Shape.from_hash(rules)
-        Parser.parse(shape, json)
+        Parser.parse(shape, json).to_hash
       end
 
       it 'returns an empty hash when given an empty string' do

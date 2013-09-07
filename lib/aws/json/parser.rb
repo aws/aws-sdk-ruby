@@ -41,7 +41,7 @@ module Aws
       private
 
       def structure(shape, values)
-        data = {}
+        data = Structure.new(shape.members.keys)
         values.each do |key, value|
           if member_shape = shape.serialized_members[key]
             data[member_shape.member_name] = member(member_shape, value)
