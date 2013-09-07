@@ -95,8 +95,10 @@ module Seahorse
             expect(request.headers).to be_kind_of(Headers)
           end
 
-          it 'defaults to a empty hash' do
-            expect(request.headers.to_h).to eq({})
+          it 'provides a default user agent' do
+            expect(request.headers.to_h).to eq(
+              'user-agent' => "Seahorse/#{Seahorse::VERSION}"
+            )
           end
 
         end

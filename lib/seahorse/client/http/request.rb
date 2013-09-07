@@ -18,6 +18,8 @@ module Seahorse
     module Http
       class Request
 
+        UAGENT = "Seahorse/#{Seahorse::VERSION}"
+
         # @option options [Endpoint] :endpoint (nil)
         # @option options [String] :http_method ('GET')
         # @option options [String] :path ('/')
@@ -29,6 +31,7 @@ module Seahorse
           self.path = options[:path] || '/'
           self.headers = options[:headers] || Headers.new
           self.body = options[:body]
+          headers['User-Agent'] = "#{headers['User-Agent']} #{UAGENT}".strip
         end
 
         # @return [Endpoint, nil]
