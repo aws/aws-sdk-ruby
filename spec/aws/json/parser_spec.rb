@@ -67,6 +67,17 @@ module Aws
 
       describe 'lists' do
 
+        it 'returns nil for lists missing in the json' do
+          rules['members'] = {
+            'items' => {
+              'type' => 'list',
+              'members' => { 'type' => 'string' }
+            }
+          }
+          json = '{}'
+          expect(parse(json)[:items]).to be(nil)
+        end
+
         it 'parses lists' do
           rules['members'] = {
             'items' => {
