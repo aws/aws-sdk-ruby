@@ -48,15 +48,16 @@ EC2 = client_class 'ec2', %w(2013-06-15)
 EMR = client_class 'elasticmapreduce', %w(2009-03-31)
 CloudFront = client_class 'cloudfront', %w(2013-05-12)
 S3 = client_class 's3', %w(2006-03-01)
+DynamoDB = client_class 'dynamodb', %w(2011-12-05)
 OpsWorks = client_class 'opsworks', %w(2013-02-18)
 
 swf = SWF.new
+ddb = DynamoDB.new
 emr = EMR.new
 cloudfront = CloudFront.new
 s3 = S3.new
 opsworks = OpsWorks.new
 ec2 = EC2.new
-pp ec2.describe_instances.data
 
 #resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
 #pp resp.http_request
@@ -76,6 +77,8 @@ pp ec2.describe_instances.data
 #   }
 # }).data
 
-pp swf.list_domains(registration_status: 'DEPRECATED').data
-
 # pp opsworks.describe_stacks.data
+
+pp ec2.describe_instances.data
+pp swf.list_domains(registration_status: 'DEPRECATED').data
+pp ddb.list_tables.data

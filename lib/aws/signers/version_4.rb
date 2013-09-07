@@ -134,7 +134,7 @@ module Aws
       def self.sign(context)
         new(
           context.config.credentials,
-          context.config.api.metadata['aws_endpoint_prefix'],
+          context.config.signing_name,
           context.config.region
         ).sign(context.http_request)
       end

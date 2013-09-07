@@ -129,7 +129,7 @@ module Aws
     property :version, from: :api_version
     property :endpoint, from: :global_endpoint
 
-    metadata :signing_name, as: 'aws_sigv4_name'
+    metadata :signing_name
     metadata :checksum_format
     metadata :json_version, as: 'json_version'
     metadata :target_prefix, as: 'json_target_prefix'

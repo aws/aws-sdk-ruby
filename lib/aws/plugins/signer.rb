@@ -15,6 +15,11 @@ module Aws
   module Plugins
     class Signer < Seahorse::Client::Plugin
 
+      option(:signing_name) do |config|
+        config.api.metadata['signing_name'] ||
+          config.endpoint.split(/[.-]/)[0]
+      end
+
       handle(:Handler, step: :sign) do |context|
         @signer ||= begin
           version = context.config.api.metadata['aws_signer']
