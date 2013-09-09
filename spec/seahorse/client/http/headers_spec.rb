@@ -122,6 +122,7 @@ module Seahorse
         end
 
         describe '#delete' do
+
           it 'deletes a header by key' do
             headers['key1'] = 'value1'
             headers.delete('key1')
@@ -134,22 +135,38 @@ module Seahorse
             expect(headers).to_not have_key('key1')
             expect(headers).to_not have_key(:key1)
           end
+
+          it 'deletes headers ignoring case' do
+            headers['key1'] = 'value'
+            headers['Key2'] = 'value'
+            headers.delete('Key1')
+            headers.delete('key2')
+            expect(headers).to_not have_key('key1')
+            expect(headers).to_not have_key('Key1')
+            expect(headers).to_not have_key('key2')
+            expect(headers).to_not have_key('Key2')
+          end
+
         end
 
         describe '#keys' do
+
           it 'returns the keys' do
             headers['key1'] = 'value1'
             headers['key2'] = 'value2'
             expect(headers.keys).to eql(['key1', 'key2'])
           end
+
         end
 
         describe '#values' do
+
           it 'returns the values' do
             headers['key1'] = 'value1'
             headers['key2'] = 'value2'
             expect(headers.values).to eql(['value1', 'value2'])
           end
+
         end
 
         describe '#key?' do

@@ -49,7 +49,7 @@ module Seahorse
 
         # @param [String] key
         def delete(key)
-          @data.delete(key.to_s)
+          @data.delete(key.to_s.downcase)
         end
 
         def keys
