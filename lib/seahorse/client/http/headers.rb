@@ -52,10 +52,12 @@ module Seahorse
           @data.delete(key.to_s.downcase)
         end
 
+        # @return [Array<String>]
         def keys
           @data.keys
         end
 
+        # @return [Array<String>]
         def values
           @data.values
         end
