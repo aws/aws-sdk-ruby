@@ -185,6 +185,17 @@ module Aws
     def translated
       @properties['http_method'] ||= 'POST'
       @properties['http_path'] ||= '/'
+
+      if @input
+        @input.members.each_pair do |member_name, member_shape|
+          if member_shape.location == 'uri'
+            placeholder = member_shape.serialized_name
+            @properties['http_path'].sub!("{#{placeholder}}", "{#{member_name}}")
+            member_shape.serialized_name = nil
+          end
+        end
+      end
+
       operation = Seahorse::Model::Operation.from_hash(@properties)
       operation.input = @input
       operation.output = @output
@@ -203,7 +214,8 @@ module Aws
 
     def set_input(src)
       if src
-        @input = InputShapeTranslator.translate(src.merge('type' => 'input'), @options)
+        src = src.merge('type' => 'input')
+        @input = InputShapeTranslator.translate(src, @options)
       end
     end
 

@@ -18,14 +18,13 @@
     "cancel_job": {
       "name": "CancelJob",
       "http_method": "POST",
-      "http_path": "/2012-09-25/jobs/{Id}",
+      "http_path": "/2012-09-25/jobs/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -1220,14 +1219,13 @@
     "delete_pipeline": {
       "name": "DeletePipeline",
       "http_method": "POST",
-      "http_path": "/2012-09-25/pipelines/{Id}",
+      "http_path": "/2012-09-25/pipelines/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -1272,14 +1270,13 @@
     "delete_preset": {
       "name": "DeletePreset",
       "http_method": "POST",
-      "http_path": "/2012-09-25/presets/{Id}",
+      "http_path": "/2012-09-25/presets/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -1319,24 +1316,21 @@
     "list_jobs_by_pipeline": {
       "name": "ListJobsByPipeline",
       "http_method": "POST",
-      "http_path": "/2012-09-25/jobsByPipeline/{PipelineId}?Ascending={Ascending}&PageToken={PageToken}",
+      "http_path": "/2012-09-25/jobsByPipeline/{pipeline_id}?Ascending={ascending}&PageToken={page_token}",
       "input": {
         "type": "input",
         "members": {
           "pipeline_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "PipelineId"
+            "location": "uri"
           },
           "ascending": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Ascending"
+            "location": "uri"
           },
           "page_token": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "PageToken"
+            "location": "uri"
           }
         }
       },
@@ -1604,24 +1598,21 @@
     "list_jobs_by_status": {
       "name": "ListJobsByStatus",
       "http_method": "POST",
-      "http_path": "/2012-09-25/jobsByStatus/{Status}?Ascending={Ascending}&PageToken={PageToken}",
+      "http_path": "/2012-09-25/jobsByStatus/{status}?Ascending={ascending}&PageToken={page_token}",
       "input": {
         "type": "input",
         "members": {
           "status": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Status"
+            "location": "uri"
           },
           "ascending": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Ascending"
+            "location": "uri"
           },
           "page_token": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "PageToken"
+            "location": "uri"
           }
         }
       },
@@ -2304,14 +2295,13 @@
     "read_job": {
       "name": "ReadJob",
       "http_method": "POST",
-      "http_path": "/2012-09-25/jobs/{Id}",
+      "http_path": "/2012-09-25/jobs/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -2572,14 +2562,13 @@
     "read_pipeline": {
       "name": "ReadPipeline",
       "http_method": "POST",
-      "http_path": "/2012-09-25/pipelines/{Id}",
+      "http_path": "/2012-09-25/pipelines/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -2751,14 +2740,13 @@
     "read_preset": {
       "name": "ReadPreset",
       "http_method": "POST",
-      "http_path": "/2012-09-25/presets/{Id}",
+      "http_path": "/2012-09-25/presets/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -3073,15 +3061,14 @@
     "update_pipeline": {
       "name": "UpdatePipeline",
       "http_method": "POST",
-      "http_path": "/2012-09-25/pipelines/{Id}",
+      "http_path": "/2012-09-25/pipelines/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           },
           "name": {
             "type": "string",
@@ -3368,14 +3355,13 @@
     "update_pipeline_notifications": {
       "name": "UpdatePipelineNotifications",
       "http_method": "POST",
-      "http_path": "/2012-09-25/pipelines/{Id}/notifications",
+      "http_path": "/2012-09-25/pipelines/{id}/notifications",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           },
           "notifications": {
             "type": "structure",
@@ -3574,14 +3560,13 @@
     "update_pipeline_status": {
       "name": "UpdatePipelineStatus",
       "http_method": "POST",
-      "http_path": "/2012-09-25/pipelines/{Id}/status",
+      "http_path": "/2012-09-25/pipelines/{id}/status",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           },
           "status": {
             "type": "string",

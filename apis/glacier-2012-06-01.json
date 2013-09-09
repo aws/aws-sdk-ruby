@@ -19,24 +19,21 @@
     "abort_multipart_upload": {
       "name": "AbortMultipartUpload",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
+      "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads/{upload_id}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "upload_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "uploadId"
+            "location": "uri"
           }
         }
       },
@@ -114,24 +111,21 @@
     "complete_multipart_upload": {
       "name": "CompleteMultipartUpload",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
+      "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads/{upload_id}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "upload_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "uploadId"
+            "location": "uri"
           },
           "archive_size": {
             "type": "string",
@@ -239,19 +233,17 @@
     "create_vault": {
       "name": "CreateVault",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}",
+      "http_path": "/{account_id}/vaults/{vault_name}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           }
         }
       },
@@ -339,24 +331,21 @@
     "delete_archive": {
       "name": "DeleteArchive",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/archives/{archiveId}",
+      "http_path": "/{account_id}/vaults/{vault_name}/archives/{archive_id}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "archive_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "archiveId"
+            "location": "uri"
           }
         }
       },
@@ -434,19 +423,17 @@
     "delete_vault": {
       "name": "DeleteVault",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}",
+      "http_path": "/{account_id}/vaults/{vault_name}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           }
         }
       },
@@ -524,19 +511,17 @@
     "delete_vault_notifications": {
       "name": "DeleteVaultNotifications",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/notification-configuration",
+      "http_path": "/{account_id}/vaults/{vault_name}/notification-configuration",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           }
         }
       },
@@ -614,24 +599,21 @@
     "describe_job": {
       "name": "DescribeJob",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/jobs/{jobId}",
+      "http_path": "/{account_id}/vaults/{vault_name}/jobs/{job_id}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "job_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "jobId"
+            "location": "uri"
           }
         }
       },
@@ -787,19 +769,17 @@
     "describe_vault": {
       "name": "DescribeVault",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}",
+      "http_path": "/{account_id}/vaults/{vault_name}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           }
         }
       },
@@ -906,24 +886,21 @@
     "get_job_output": {
       "name": "GetJobOutput",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/jobs/{jobId}/output",
+      "http_path": "/{account_id}/vaults/{vault_name}/jobs/{job_id}/output",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "job_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "jobId"
+            "location": "uri"
           },
           "range": {
             "type": "string",
@@ -1049,19 +1026,17 @@
     "get_vault_notifications": {
       "name": "GetVaultNotifications",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/notification-configuration",
+      "http_path": "/{account_id}/vaults/{vault_name}/notification-configuration",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           }
         }
       },
@@ -1164,19 +1139,17 @@
     "initiate_job": {
       "name": "InitiateJob",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/jobs",
+      "http_path": "/{account_id}/vaults/{vault_name}/jobs",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "job_parameters": {
             "type": "structure",
@@ -1302,19 +1275,17 @@
     "initiate_multipart_upload": {
       "name": "InitiateMultipartUpload",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads",
+      "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "archive_description": {
             "type": "string",
@@ -1417,39 +1388,33 @@
     "list_jobs": {
       "name": "ListJobs",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/jobs?marker={marker}&limit={limit}&completed={completed}&statuscode={statuscode}",
+      "http_path": "/{account_id}/vaults/{vault_name}/jobs?marker={marker}&limit={limit}&completed={completed}&statuscode={statuscode}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "limit": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "limit"
+            "location": "uri"
           },
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "marker"
+            "location": "uri"
           },
           "statuscode": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "statuscode"
+            "location": "uri"
           },
           "completed": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "completed"
+            "location": "uri"
           }
         }
       },
@@ -1618,29 +1583,25 @@
     "list_multipart_uploads": {
       "name": "ListMultipartUploads",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads?marker={marker}&limit={limit}",
+      "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads?marker={marker}&limit={limit}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "limit": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "limit"
+            "location": "uri"
           },
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "marker"
+            "location": "uri"
           }
         }
       },
@@ -1756,34 +1717,29 @@
     "list_parts": {
       "name": "ListParts",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}?marker={marker}&limit={limit}",
+      "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads/{upload_id}?marker={marker}&limit={limit}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "upload_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "uploadId"
+            "location": "uri"
           },
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "marker"
+            "location": "uri"
           },
           "limit": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "limit"
+            "location": "uri"
           }
         }
       },
@@ -1907,24 +1863,21 @@
     "list_vaults": {
       "name": "ListVaults",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults?marker={marker}&limit={limit}",
+      "http_path": "/{account_id}/vaults?marker={marker}&limit={limit}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "marker"
+            "location": "uri"
           },
           "limit": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "limit"
+            "location": "uri"
           }
         }
       },
@@ -2044,19 +1997,17 @@
     "set_vault_notifications": {
       "name": "SetVaultNotifications",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/notification-configuration",
+      "http_path": "/{account_id}/vaults/{vault_name}/notification-configuration",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "vault_notification_config": {
             "type": "structure",
@@ -2154,19 +2105,17 @@
     "upload_archive": {
       "name": "UploadArchive",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/archives",
+      "http_path": "/{account_id}/vaults/{vault_name}/archives",
       "input": {
         "type": "input",
         "members": {
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "archive_description": {
             "type": "string",
@@ -2299,24 +2248,21 @@
     "upload_multipart_part": {
       "name": "UploadMultipartPart",
       "http_method": "POST",
-      "http_path": "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
+      "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads/{upload_id}",
       "input": {
         "type": "input",
         "members": {
           "account_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "accountId"
+            "location": "uri"
           },
           "vault_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "vaultName"
+            "location": "uri"
           },
           "upload_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "uploadId"
+            "location": "uri"
           },
           "checksum": {
             "type": "string",

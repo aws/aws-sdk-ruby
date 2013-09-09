@@ -20,15 +20,14 @@
     "change_resource_record_sets": {
       "name": "ChangeResourceRecordSets",
       "http_method": "POST",
-      "http_path": "/2012-12-12/hostedzone/{HostedZoneId}/rrset/",
+      "http_path": "/2012-12-12/hostedzone/{hosted_zone_id}/rrset/",
       "input": {
         "type": "input",
         "members": {
           "hosted_zone_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "HostedZoneId"
+            "location": "uri"
           },
           "change_batch": {
             "type": "structure",
@@ -542,15 +541,14 @@
     "delete_health_check": {
       "name": "DeleteHealthCheck",
       "http_method": "POST",
-      "http_path": "/2012-12-12/healthcheck/{HealthCheckId}",
+      "http_path": "/2012-12-12/healthcheck/{health_check_id}",
       "input": {
         "type": "input",
         "members": {
           "health_check_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "HealthCheckId"
+            "location": "uri"
           }
         }
       },
@@ -592,15 +590,14 @@
     "delete_hosted_zone": {
       "name": "DeleteHostedZone",
       "http_method": "POST",
-      "http_path": "/2012-12-12/hostedzone/{Id}",
+      "http_path": "/2012-12-12/hostedzone/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -677,15 +674,14 @@
     "get_change": {
       "name": "GetChange",
       "http_method": "POST",
-      "http_path": "/2012-12-12/change/{Id}",
+      "http_path": "/2012-12-12/change/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -744,15 +740,14 @@
     "get_health_check": {
       "name": "GetHealthCheck",
       "http_method": "POST",
-      "http_path": "/2012-12-12/healthcheck/{HealthCheckId}",
+      "http_path": "/2012-12-12/healthcheck/{health_check_id}",
       "input": {
         "type": "input",
         "members": {
           "health_check_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "HealthCheckId"
+            "location": "uri"
           }
         }
       },
@@ -829,15 +824,14 @@
     "get_hosted_zone": {
       "name": "GetHostedZone",
       "http_method": "POST",
-      "http_path": "/2012-12-12/hostedzone/{Id}",
+      "http_path": "/2012-12-12/hostedzone/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -916,19 +910,17 @@
     "list_health_checks": {
       "name": "ListHealthChecks",
       "http_method": "POST",
-      "http_path": "/2012-12-12/healthcheck?marker={Marker}&maxitems={MaxItems}",
+      "http_path": "/2012-12-12/healthcheck?marker={marker}&maxitems={max_items}",
       "input": {
         "type": "input",
         "members": {
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Marker"
+            "location": "uri"
           },
           "max_items": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "MaxItems"
+            "location": "uri"
           }
         }
       },
@@ -1016,19 +1008,17 @@
     "list_hosted_zones": {
       "name": "ListHostedZones",
       "http_method": "POST",
-      "http_path": "/2012-12-12/hostedzone?marker={Marker}&maxitems={MaxItems}",
+      "http_path": "/2012-12-12/hostedzone?marker={marker}&maxitems={max_items}",
       "input": {
         "type": "input",
         "members": {
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Marker"
+            "location": "uri"
           },
           "max_items": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "MaxItems"
+            "location": "uri"
           }
         }
       },
@@ -1104,25 +1094,22 @@
     "list_resource_record_sets": {
       "name": "ListResourceRecordSets",
       "http_method": "POST",
-      "http_path": "/2012-12-12/hostedzone/{HostedZoneId}/rrset?type={StartRecordType}&name={StartRecordName}&identifier={StartRecordIdentifier}&maxitems={MaxItems}",
+      "http_path": "/2012-12-12/hostedzone/{hosted_zone_id}/rrset?type={start_record_type}&name={start_record_name}&identifier={start_record_identifier}&maxitems={max_items}",
       "input": {
         "type": "input",
         "members": {
           "hosted_zone_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "HostedZoneId"
+            "location": "uri"
           },
           "start_record_name": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "StartRecordName"
+            "location": "uri"
           },
           "start_record_type": {
             "type": "string",
             "location": "uri",
-            "serialized_name": "StartRecordType",
             "enum": [
               "SOA",
               "A",
@@ -1138,13 +1125,11 @@
           },
           "start_record_identifier": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "StartRecordIdentifier"
+            "location": "uri"
           },
           "max_items": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "MaxItems"
+            "location": "uri"
           }
         }
       },

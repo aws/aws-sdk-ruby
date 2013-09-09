@@ -21,27 +21,24 @@
     "abort_multipart_upload": {
       "name": "AbortMultipartUpload",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?uploadId={UploadId}",
+      "http_path": "/{bucket}/{key}?uploadId={upload_id}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "upload_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "UploadId"
+            "location": "uri"
           }
         }
       },
@@ -56,21 +53,19 @@
     "complete_multipart_upload": {
       "name": "CompleteMultipartUpload",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?uploadId={UploadId}",
+      "http_path": "/{bucket}/{key}?uploadId={upload_id}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "multipart_upload": {
             "type": "structure",
@@ -101,8 +96,7 @@
           "upload_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "UploadId"
+            "location": "uri"
           }
         }
       },
@@ -149,7 +143,7 @@
     "copy_object": {
       "name": "CopyObject",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}",
+      "http_path": "/{bucket}/{key}",
       "input": {
         "type": "input",
         "members": {
@@ -169,8 +163,7 @@
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "cache_control": {
             "type": "string",
@@ -251,8 +244,7 @@
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "metadata": {
             "type": "map",
@@ -349,7 +341,7 @@
     "create_bucket": {
       "name": "CreateBucket",
       "http_method": "POST",
-      "http_path": "/{Bucket}",
+      "http_path": "/{bucket}",
       "input": {
         "type": "input",
         "members": {
@@ -369,8 +361,7 @@
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "create_bucket_configuration": {
             "type": "structure",
@@ -443,7 +434,7 @@
     "create_multipart_upload": {
       "name": "CreateMultipartUpload",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?uploads",
+      "http_path": "/{bucket}/{key}?uploads",
       "input": {
         "type": "input",
         "members": {
@@ -463,8 +454,7 @@
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "cache_control": {
             "type": "string",
@@ -519,8 +509,7 @@
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "metadata": {
             "type": "map",
@@ -586,15 +575,14 @@
     "delete_bucket": {
       "name": "DeleteBucket",
       "http_method": "POST",
-      "http_path": "/{Bucket}",
+      "http_path": "/{bucket}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       }
@@ -602,15 +590,14 @@
     "delete_bucket_cors": {
       "name": "DeleteBucketCors",
       "http_method": "POST",
-      "http_path": "/{Bucket}?cors",
+      "http_path": "/{bucket}?cors",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       }
@@ -618,15 +605,14 @@
     "delete_bucket_lifecycle": {
       "name": "DeleteBucketLifecycle",
       "http_method": "POST",
-      "http_path": "/{Bucket}?lifecycle",
+      "http_path": "/{bucket}?lifecycle",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       }
@@ -634,15 +620,14 @@
     "delete_bucket_policy": {
       "name": "DeleteBucketPolicy",
       "http_method": "POST",
-      "http_path": "/{Bucket}?policy",
+      "http_path": "/{bucket}?policy",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       }
@@ -650,15 +635,14 @@
     "delete_bucket_tagging": {
       "name": "DeleteBucketTagging",
       "http_method": "POST",
-      "http_path": "/{Bucket}?tagging",
+      "http_path": "/{bucket}?tagging",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       }
@@ -666,15 +650,14 @@
     "delete_bucket_website": {
       "name": "DeleteBucketWebsite",
       "http_method": "POST",
-      "http_path": "/{Bucket}?website",
+      "http_path": "/{bucket}?website",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       }
@@ -682,21 +665,19 @@
     "delete_object": {
       "name": "DeleteObject",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}",
+      "http_path": "/{bucket}/{key}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           }
         }
       },
@@ -719,15 +700,14 @@
     "delete_objects": {
       "name": "DeleteObjects",
       "http_method": "POST",
-      "http_path": "/{Bucket}?delete",
+      "http_path": "/{bucket}?delete",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "delete": {
             "type": "structure",
@@ -828,15 +808,14 @@
     "get_bucket_acl": {
       "name": "GetBucketAcl",
       "http_method": "POST",
-      "http_path": "/{Bucket}?acl",
+      "http_path": "/{bucket}?acl",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -922,15 +901,14 @@
     "get_bucket_cors": {
       "name": "GetBucketCors",
       "http_method": "POST",
-      "http_path": "/{Bucket}?cors",
+      "http_path": "/{bucket}?cors",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -984,15 +962,14 @@
     "get_bucket_lifecycle": {
       "name": "GetBucketLifecycle",
       "http_method": "POST",
-      "http_path": "/{Bucket}?lifecycle",
+      "http_path": "/{bucket}?lifecycle",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -1067,15 +1044,14 @@
     "get_bucket_location": {
       "name": "GetBucketLocation",
       "http_method": "POST",
-      "http_path": "/{Bucket}?location",
+      "http_path": "/{bucket}?location",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -1092,15 +1068,14 @@
     "get_bucket_logging": {
       "name": "GetBucketLogging",
       "http_method": "POST",
-      "http_path": "/{Bucket}?logging",
+      "http_path": "/{bucket}?logging",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -1179,15 +1154,14 @@
     "get_bucket_notification": {
       "name": "GetBucketNotification",
       "http_method": "POST",
-      "http_path": "/{Bucket}?notification",
+      "http_path": "/{bucket}?notification",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -1217,15 +1191,14 @@
     "get_bucket_policy": {
       "name": "GetBucketPolicy",
       "http_method": "POST",
-      "http_path": "/{Bucket}?policy",
+      "http_path": "/{bucket}?policy",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -1245,15 +1218,14 @@
     "get_bucket_request_payment": {
       "name": "GetBucketRequestPayment",
       "http_method": "POST",
-      "http_path": "/{Bucket}?requestPayment",
+      "http_path": "/{bucket}?requestPayment",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -1274,15 +1246,14 @@
     "get_bucket_tagging": {
       "name": "GetBucketTagging",
       "http_method": "POST",
-      "http_path": "/{Bucket}?tagging",
+      "http_path": "/{bucket}?tagging",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -1313,15 +1284,14 @@
     "get_bucket_versioning": {
       "name": "GetBucketVersioning",
       "http_method": "POST",
-      "http_path": "/{Bucket}?versioning",
+      "http_path": "/{bucket}?versioning",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -1350,15 +1320,14 @@
     "get_bucket_website": {
       "name": "GetBucketWebsite",
       "http_method": "POST",
-      "http_path": "/{Bucket}?website",
+      "http_path": "/{bucket}?website",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -1463,15 +1432,14 @@
     "get_object": {
       "name": "GetObject",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?versionId={VersionId}&response-content-type={ResponseContentType}&response-content-language={ResponseContentLanguage}&response-expires={ResponseExpires}&response-cache-control={ResponseCacheControl}&response-content-disposition={ResponseContentDisposition}&response-content-encoding={ResponseContentEncoding}",
+      "http_path": "/{bucket}/{key}?versionId={version_id}&response-content-type={response_content_type}&response-content-language={response_content_language}&response-expires={response_expires}&response-cache-control={response_cache_control}&response-content-disposition={response_content_disposition}&response-content-encoding={response_content_encoding}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "if_match": {
             "type": "string",
@@ -1496,8 +1464,7 @@
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "range": {
             "type": "string",
@@ -1506,38 +1473,31 @@
           },
           "response_cache_control": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "ResponseCacheControl"
+            "location": "uri"
           },
           "response_content_disposition": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "ResponseContentDisposition"
+            "location": "uri"
           },
           "response_content_encoding": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "ResponseContentEncoding"
+            "location": "uri"
           },
           "response_content_language": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "ResponseContentLanguage"
+            "location": "uri"
           },
           "response_content_type": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "ResponseContentType"
+            "location": "uri"
           },
           "response_expires": {
             "type": "rfc822_timestamp",
-            "location": "uri",
-            "serialized_name": "ResponseExpires"
+            "location": "uri"
           },
           "version_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "VersionId"
+            "location": "uri"
           }
         }
       },
@@ -1668,26 +1628,23 @@
     "get_object_acl": {
       "name": "GetObjectAcl",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?acl&versionId={VersionId}",
+      "http_path": "/{bucket}/{key}?acl&versionId={version_id}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "version_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "VersionId"
+            "location": "uri"
           }
         }
       },
@@ -1780,21 +1737,19 @@
     "get_object_torrent": {
       "name": "GetObjectTorrent",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?torrent",
+      "http_path": "/{bucket}/{key}?torrent",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           }
         }
       },
@@ -1815,15 +1770,14 @@
     "head_bucket": {
       "name": "HeadBucket",
       "http_method": "POST",
-      "http_path": "/{Bucket}",
+      "http_path": "/{bucket}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           }
         }
       },
@@ -1838,15 +1792,14 @@
     "head_object": {
       "name": "HeadObject",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?versionId={VersionId}",
+      "http_path": "/{bucket}/{key}?versionId={version_id}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "if_match": {
             "type": "string",
@@ -1871,8 +1824,7 @@
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "range": {
             "type": "string",
@@ -1881,8 +1833,7 @@
           },
           "version_id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "VersionId"
+            "location": "uri"
           }
         }
       },
@@ -2047,40 +1998,34 @@
     "list_multipart_uploads": {
       "name": "ListMultipartUploads",
       "http_method": "POST",
-      "http_path": "/{Bucket}?uploads&prefix={Prefix}&delimiter={Delimiter}&max-uploads={MaxUploads}&key-marker={KeyMarker}&upload-id-marker={UploadIdMarker}",
+      "http_path": "/{bucket}?uploads&prefix={prefix}&delimiter={delimiter}&max-uploads={max_uploads}&key-marker={key_marker}&upload-id-marker={upload_id_marker}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "delimiter": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Delimiter"
+            "location": "uri"
           },
           "key_marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "KeyMarker"
+            "location": "uri"
           },
           "max_uploads": {
             "type": "integer",
-            "location": "uri",
-            "serialized_name": "MaxUploads"
+            "location": "uri"
           },
           "prefix": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Prefix"
+            "location": "uri"
           },
           "upload_id_marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "UploadIdMarker"
+            "location": "uri"
           }
         }
       },
@@ -2179,40 +2124,34 @@
     "list_object_versions": {
       "name": "ListObjectVersions",
       "http_method": "POST",
-      "http_path": "/{Bucket}?versions&delimiter={Delimiter}&key-marker={KeyMarker}&max-keys={MaxKeys}&prefix={Prefix}&version-id-marker={VersionIdMarker}",
+      "http_path": "/{bucket}?versions&delimiter={delimiter}&key-marker={key_marker}&max-keys={max_keys}&prefix={prefix}&version-id-marker={version_id_marker}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "delimiter": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Delimiter"
+            "location": "uri"
           },
           "key_marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "KeyMarker"
+            "location": "uri"
           },
           "max_keys": {
             "type": "integer",
-            "location": "uri",
-            "serialized_name": "MaxKeys"
+            "location": "uri"
           },
           "prefix": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Prefix"
+            "location": "uri"
           },
           "version_id_marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "VersionIdMarker"
+            "location": "uri"
           }
         }
       },
@@ -2365,35 +2304,30 @@
     "list_objects": {
       "name": "ListObjects",
       "http_method": "POST",
-      "http_path": "/{Bucket}?delimiter={Delimiter}&marker={Marker}&max-keys={MaxKeys}&prefix={Prefix}",
+      "http_path": "/{bucket}?delimiter={delimiter}&marker={marker}&max-keys={max_keys}&prefix={prefix}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "delimiter": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Delimiter"
+            "location": "uri"
           },
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Marker"
+            "location": "uri"
           },
           "max_keys": {
             "type": "integer",
-            "location": "uri",
-            "serialized_name": "MaxKeys"
+            "location": "uri"
           },
           "prefix": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Prefix"
+            "location": "uri"
           }
         }
       },
@@ -2494,37 +2428,32 @@
     "list_parts": {
       "name": "ListParts",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?uploadId={UploadId}&max-parts={MaxParts}&part-number-marker={PartNumberMarker}",
+      "http_path": "/{bucket}/{key}?uploadId={upload_id}&max-parts={max_parts}&part-number-marker={part_number_marker}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "max_parts": {
             "type": "integer",
-            "location": "uri",
-            "serialized_name": "MaxParts"
+            "location": "uri"
           },
           "part_number_marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "PartNumberMarker"
+            "location": "uri"
           },
           "upload_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "UploadId"
+            "location": "uri"
           }
         }
       },
@@ -2627,7 +2556,7 @@
     "put_bucket_acl": {
       "name": "PutBucketAcl",
       "http_method": "POST",
-      "http_path": "/{Bucket}?acl",
+      "http_path": "/{bucket}?acl",
       "input": {
         "type": "input",
         "members": {
@@ -2730,8 +2659,7 @@
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "content_md5": {
             "type": "string",
@@ -2769,15 +2697,14 @@
     "put_bucket_cors": {
       "name": "PutBucketCors",
       "http_method": "POST",
-      "http_path": "/{Bucket}?cors",
+      "http_path": "/{bucket}?cors",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "cors_configuration": {
             "type": "structure",
@@ -2840,15 +2767,14 @@
     "put_bucket_lifecycle": {
       "name": "PutBucketLifecycle",
       "http_method": "POST",
-      "http_path": "/{Bucket}?lifecycle",
+      "http_path": "/{bucket}?lifecycle",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "content_md5": {
             "type": "string",
@@ -2935,15 +2861,14 @@
     "put_bucket_logging": {
       "name": "PutBucketLogging",
       "http_method": "POST",
-      "http_path": "/{Bucket}?logging",
+      "http_path": "/{bucket}?logging",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "bucket_logging_status": {
             "type": "structure",
@@ -3034,15 +2959,14 @@
     "put_bucket_notification": {
       "name": "PutBucketNotification",
       "http_method": "POST",
-      "http_path": "/{Bucket}?notification",
+      "http_path": "/{bucket}?notification",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "content_md5": {
             "type": "string",
@@ -3083,15 +3007,14 @@
     "put_bucket_policy": {
       "name": "PutBucketPolicy",
       "http_method": "POST",
-      "http_path": "/{Bucket}?policy",
+      "http_path": "/{bucket}?policy",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "content_md5": {
             "type": "string",
@@ -3112,15 +3035,14 @@
     "put_bucket_request_payment": {
       "name": "PutBucketRequestPayment",
       "http_method": "POST",
-      "http_path": "/{Bucket}?requestPayment",
+      "http_path": "/{bucket}?requestPayment",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "content_md5": {
             "type": "string",
@@ -3152,15 +3074,14 @@
     "put_bucket_tagging": {
       "name": "PutBucketTagging",
       "http_method": "POST",
-      "http_path": "/{Bucket}?tagging",
+      "http_path": "/{bucket}?tagging",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "content_md5": {
             "type": "string",
@@ -3205,15 +3126,14 @@
     "put_bucket_versioning": {
       "name": "PutBucketVersioning",
       "http_method": "POST",
-      "http_path": "/{Bucket}?versioning",
+      "http_path": "/{bucket}?versioning",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "content_md5": {
             "type": "string",
@@ -3257,15 +3177,14 @@
     "put_bucket_website": {
       "name": "PutBucketWebsite",
       "http_method": "POST",
-      "http_path": "/{Bucket}?website",
+      "http_path": "/{bucket}?website",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "content_md5": {
             "type": "string",
@@ -3384,7 +3303,7 @@
     "put_object": {
       "name": "PutObject",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}",
+      "http_path": "/{bucket}/{key}",
       "input": {
         "type": "input",
         "members": {
@@ -3412,8 +3331,7 @@
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "cache_control": {
             "type": "string",
@@ -3478,8 +3396,7 @@
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "metadata": {
             "type": "map",
@@ -3548,7 +3465,7 @@
     "put_object_acl": {
       "name": "PutObjectAcl",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?acl",
+      "http_path": "/{bucket}/{key}?acl",
       "input": {
         "type": "input",
         "members": {
@@ -3651,8 +3568,7 @@
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "content_md5": {
             "type": "string",
@@ -3687,8 +3603,7 @@
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           }
         }
       },
@@ -3703,21 +3618,19 @@
     "restore_object": {
       "name": "RestoreObject",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?restore",
+      "http_path": "/{bucket}/{key}?restore",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "restore_request": {
             "type": "structure",
@@ -3746,7 +3659,7 @@
     "upload_part": {
       "name": "UploadPart",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}",
+      "http_path": "/{bucket}/{key}?partNumber={part_number}&uploadId={upload_id}",
       "input": {
         "type": "input",
         "members": {
@@ -3761,8 +3674,7 @@
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "content_length": {
             "type": "integer",
@@ -3772,20 +3684,17 @@
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "part_number": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "PartNumber"
+            "location": "uri"
           },
           "upload_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "UploadId"
+            "location": "uri"
           }
         }
       },
@@ -3811,15 +3720,14 @@
     "upload_part_copy": {
       "name": "UploadPartCopy",
       "http_method": "POST",
-      "http_path": "/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}",
+      "http_path": "/{bucket}/{key}?partNumber={part_number}&uploadId={upload_id}",
       "input": {
         "type": "input",
         "members": {
           "bucket": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Bucket"
+            "location": "uri"
           },
           "copy_source": {
             "type": "string",
@@ -3855,20 +3763,17 @@
           "key": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Key"
+            "location": "uri"
           },
           "part_number": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "PartNumber"
+            "location": "uri"
           },
           "upload_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "UploadId"
+            "location": "uri"
           }
         }
       },

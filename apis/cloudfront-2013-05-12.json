@@ -1158,15 +1158,14 @@
     "create_invalidation": {
       "name": "CreateInvalidation2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/distribution/{DistributionId}/invalidation",
+      "http_path": "/2013-05-12/distribution/{distribution_id}/invalidation",
       "input": {
         "type": "input",
         "members": {
           "distribution_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "DistributionId"
+            "location": "uri"
           },
           "invalidation_batch": {
             "type": "structure",
@@ -1757,14 +1756,13 @@
     "delete_cloud_front_origin_access_identity": {
       "name": "DeleteCloudFrontOriginAccessIdentity2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}",
+      "http_path": "/2013-05-12/origin-access-identity/cloudfront/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           },
           "if_match": {
             "type": "string",
@@ -1824,14 +1822,13 @@
     "delete_distribution": {
       "name": "DeleteDistribution2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/distribution/{Id}",
+      "http_path": "/2013-05-12/distribution/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           },
           "if_match": {
             "type": "string",
@@ -1891,14 +1888,13 @@
     "delete_streaming_distribution": {
       "name": "DeleteStreamingDistribution2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/streaming-distribution/{Id}",
+      "http_path": "/2013-05-12/streaming-distribution/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           },
           "if_match": {
             "type": "string",
@@ -1958,14 +1954,13 @@
     "get_cloud_front_origin_access_identity": {
       "name": "GetCloudFrontOriginAccessIdentity2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}",
+      "http_path": "/2013-05-12/origin-access-identity/cloudfront/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -2034,14 +2029,13 @@
     "get_cloud_front_origin_access_identity_config": {
       "name": "GetCloudFrontOriginAccessIdentityConfig2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}/config",
+      "http_path": "/2013-05-12/origin-access-identity/cloudfront/{id}/config",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -2096,14 +2090,13 @@
     "get_distribution": {
       "name": "GetDistribution2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/distribution/{Id}",
+      "http_path": "/2013-05-12/distribution/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -2553,14 +2546,13 @@
     "get_distribution_config": {
       "name": "GetDistributionConfig2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/distribution/{Id}/config",
+      "http_path": "/2013-05-12/distribution/{id}/config",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -2938,21 +2930,19 @@
     "get_invalidation": {
       "name": "GetInvalidation2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/distribution/{DistributionId}/invalidation/{Id}",
+      "http_path": "/2013-05-12/distribution/{distribution_id}/invalidation/{id}",
       "input": {
         "type": "input",
         "members": {
           "distribution_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "DistributionId"
+            "location": "uri"
           },
           "id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -3043,14 +3033,13 @@
     "get_streaming_distribution": {
       "name": "GetStreamingDistribution2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/streaming-distribution/{Id}",
+      "http_path": "/2013-05-12/streaming-distribution/{id}",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -3258,14 +3247,13 @@
     "get_streaming_distribution_config": {
       "name": "GetStreamingDistributionConfig2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/streaming-distribution/{Id}/config",
+      "http_path": "/2013-05-12/streaming-distribution/{id}/config",
       "input": {
         "type": "input",
         "members": {
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           }
         }
       },
@@ -3405,19 +3393,17 @@
     "list_cloud_front_origin_access_identities": {
       "name": "ListCloudFrontOriginAccessIdentities2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/origin-access-identity/cloudfront?Marker={Marker}&MaxItems={MaxItems}",
+      "http_path": "/2013-05-12/origin-access-identity/cloudfront?Marker={marker}&MaxItems={max_items}",
       "input": {
         "type": "input",
         "members": {
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Marker"
+            "location": "uri"
           },
           "max_items": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "MaxItems"
+            "location": "uri"
           }
         }
       },
@@ -3492,19 +3478,17 @@
     "list_distributions": {
       "name": "ListDistributions2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/distribution?Marker={Marker}&MaxItems={MaxItems}",
+      "http_path": "/2013-05-12/distribution?Marker={marker}&MaxItems={max_items}",
       "input": {
         "type": "input",
         "members": {
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Marker"
+            "location": "uri"
           },
           "max_items": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "MaxItems"
+            "location": "uri"
           }
         }
       },
@@ -3884,25 +3868,22 @@
     "list_invalidations": {
       "name": "ListInvalidations2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/distribution/{DistributionId}/invalidation?Marker={Marker}&MaxItems={MaxItems}",
+      "http_path": "/2013-05-12/distribution/{distribution_id}/invalidation?Marker={marker}&MaxItems={max_items}",
       "input": {
         "type": "input",
         "members": {
           "distribution_id": {
             "type": "string",
             "required": true,
-            "location": "uri",
-            "serialized_name": "DistributionId"
+            "location": "uri"
           },
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Marker"
+            "location": "uri"
           },
           "max_items": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "MaxItems"
+            "location": "uri"
           }
         }
       },
@@ -3995,19 +3976,17 @@
     "list_streaming_distributions": {
       "name": "ListStreamingDistributions2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/streaming-distribution?Marker={Marker}&MaxItems={MaxItems}",
+      "http_path": "/2013-05-12/streaming-distribution?Marker={marker}&MaxItems={max_items}",
       "input": {
         "type": "input",
         "members": {
           "marker": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Marker"
+            "location": "uri"
           },
           "max_items": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "MaxItems"
+            "location": "uri"
           }
         }
       },
@@ -4157,7 +4136,7 @@
     "update_cloud_front_origin_access_identity": {
       "name": "UpdateCloudFrontOriginAccessIdentity2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/origin-access-identity/cloudfront/{Id}/config",
+      "http_path": "/2013-05-12/origin-access-identity/cloudfront/{id}/config",
       "input": {
         "type": "input",
         "members": {
@@ -4183,8 +4162,7 @@
           },
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           },
           "if_match": {
             "type": "string",
@@ -4312,7 +4290,7 @@
     "update_distribution": {
       "name": "UpdateDistribution2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/distribution/{Id}/config",
+      "http_path": "/2013-05-12/distribution/{id}/config",
       "input": {
         "type": "input",
         "members": {
@@ -4705,8 +4683,7 @@
           },
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           },
           "if_match": {
             "type": "string",
@@ -5341,7 +5318,7 @@
     "update_streaming_distribution": {
       "name": "UpdateStreamingDistribution2013_05_12",
       "http_method": "POST",
-      "http_path": "/2013-05-12/streaming-distribution/{Id}/config",
+      "http_path": "/2013-05-12/streaming-distribution/{id}/config",
       "input": {
         "type": "input",
         "members": {
@@ -5466,8 +5443,7 @@
           },
           "id": {
             "type": "string",
-            "location": "uri",
-            "serialized_name": "Id"
+            "location": "uri"
           },
           "if_match": {
             "type": "string",
