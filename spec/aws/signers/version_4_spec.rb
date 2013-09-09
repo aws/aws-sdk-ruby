@@ -25,7 +25,9 @@ module Aws
       let(:signer) { Version4.new(credentials, service_name, region) }
       let(:sign) { signer.sign(http_request) }
       let(:http_request) do
-        Seahorse::Client::Http::Request.new(endpoint: endpoint)
+        req = Seahorse::Client::Http::Request.new(endpoint: endpoint)
+        req.headers.delete('User-Agent')
+        req
       end
 
       context '#sign' do
