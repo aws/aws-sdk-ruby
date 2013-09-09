@@ -208,7 +208,7 @@ module Aws
     ignore :alias
 
     def set_http(http)
-      @properties['http_method'] = http['verb']
+      @properties['http_method'] = http['method']
       @properties['http_path'] = http['uri']
     end
 

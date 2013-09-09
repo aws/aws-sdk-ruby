@@ -540,7 +540,7 @@
     },
     "delete_health_check": {
       "name": "DeleteHealthCheck",
-      "http_method": "POST",
+      "http_method": "DELETE",
       "http_path": "/2012-12-12/healthcheck/{health_check_id}",
       "input": {
         "type": "input",
@@ -589,7 +589,7 @@
     },
     "delete_hosted_zone": {
       "name": "DeleteHostedZone",
-      "http_method": "POST",
+      "http_method": "DELETE",
       "http_path": "/2012-12-12/hostedzone/{id}",
       "input": {
         "type": "input",
@@ -673,7 +673,7 @@
     },
     "get_change": {
       "name": "GetChange",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-12-12/change/{id}",
       "input": {
         "type": "input",
@@ -739,7 +739,7 @@
     },
     "get_health_check": {
       "name": "GetHealthCheck",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-12-12/healthcheck/{health_check_id}",
       "input": {
         "type": "input",
@@ -823,7 +823,7 @@
     },
     "get_hosted_zone": {
       "name": "GetHostedZone",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-12-12/hostedzone/{id}",
       "input": {
         "type": "input",
@@ -909,7 +909,7 @@
     },
     "list_health_checks": {
       "name": "ListHealthChecks",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-12-12/healthcheck?marker={marker}&maxitems={max_items}",
       "input": {
         "type": "input",
@@ -1007,7 +1007,7 @@
     },
     "list_hosted_zones": {
       "name": "ListHostedZones",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-12-12/hostedzone?marker={marker}&maxitems={max_items}",
       "input": {
         "type": "input",
@@ -1093,7 +1093,7 @@
     },
     "list_resource_record_sets": {
       "name": "ListResourceRecordSets",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-12-12/hostedzone/{hosted_zone_id}/rrset?type={start_record_type}&name={start_record_name}&identifier={start_record_identifier}&maxitems={max_items}",
       "input": {
         "type": "input",

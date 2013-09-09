@@ -18,7 +18,7 @@
   "operations": {
     "abort_multipart_upload": {
       "name": "AbortMultipartUpload",
-      "http_method": "POST",
+      "http_method": "DELETE",
       "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads/{upload_id}",
       "input": {
         "type": "input",
@@ -232,7 +232,7 @@
     },
     "create_vault": {
       "name": "CreateVault",
-      "http_method": "POST",
+      "http_method": "PUT",
       "http_path": "/{account_id}/vaults/{vault_name}",
       "input": {
         "type": "input",
@@ -330,7 +330,7 @@
     },
     "delete_archive": {
       "name": "DeleteArchive",
-      "http_method": "POST",
+      "http_method": "DELETE",
       "http_path": "/{account_id}/vaults/{vault_name}/archives/{archive_id}",
       "input": {
         "type": "input",
@@ -422,7 +422,7 @@
     },
     "delete_vault": {
       "name": "DeleteVault",
-      "http_method": "POST",
+      "http_method": "DELETE",
       "http_path": "/{account_id}/vaults/{vault_name}",
       "input": {
         "type": "input",
@@ -510,7 +510,7 @@
     },
     "delete_vault_notifications": {
       "name": "DeleteVaultNotifications",
-      "http_method": "POST",
+      "http_method": "DELETE",
       "http_path": "/{account_id}/vaults/{vault_name}/notification-configuration",
       "input": {
         "type": "input",
@@ -598,7 +598,7 @@
     },
     "describe_job": {
       "name": "DescribeJob",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/{account_id}/vaults/{vault_name}/jobs/{job_id}",
       "input": {
         "type": "input",
@@ -768,7 +768,7 @@
     },
     "describe_vault": {
       "name": "DescribeVault",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/{account_id}/vaults/{vault_name}",
       "input": {
         "type": "input",
@@ -885,7 +885,7 @@
     },
     "get_job_output": {
       "name": "GetJobOutput",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/{account_id}/vaults/{vault_name}/jobs/{job_id}/output",
       "input": {
         "type": "input",
@@ -1025,7 +1025,7 @@
     },
     "get_vault_notifications": {
       "name": "GetVaultNotifications",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/{account_id}/vaults/{vault_name}/notification-configuration",
       "input": {
         "type": "input",
@@ -1387,7 +1387,7 @@
     },
     "list_jobs": {
       "name": "ListJobs",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/{account_id}/vaults/{vault_name}/jobs?marker={marker}&limit={limit}&completed={completed}&statuscode={statuscode}",
       "input": {
         "type": "input",
@@ -1582,7 +1582,7 @@
     },
     "list_multipart_uploads": {
       "name": "ListMultipartUploads",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads?marker={marker}&limit={limit}",
       "input": {
         "type": "input",
@@ -1716,7 +1716,7 @@
     },
     "list_parts": {
       "name": "ListParts",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads/{upload_id}?marker={marker}&limit={limit}",
       "input": {
         "type": "input",
@@ -1862,7 +1862,7 @@
     },
     "list_vaults": {
       "name": "ListVaults",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/{account_id}/vaults?marker={marker}&limit={limit}",
       "input": {
         "type": "input",
@@ -1996,7 +1996,7 @@
     },
     "set_vault_notifications": {
       "name": "SetVaultNotifications",
-      "http_method": "POST",
+      "http_method": "PUT",
       "http_path": "/{account_id}/vaults/{vault_name}/notification-configuration",
       "input": {
         "type": "input",
@@ -2247,7 +2247,7 @@
     },
     "upload_multipart_part": {
       "name": "UploadMultipartPart",
-      "http_method": "POST",
+      "http_method": "PUT",
       "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads/{upload_id}",
       "input": {
         "type": "input",

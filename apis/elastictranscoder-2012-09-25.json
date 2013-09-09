@@ -17,7 +17,7 @@
   "operations": {
     "cancel_job": {
       "name": "CancelJob",
-      "http_method": "POST",
+      "http_method": "DELETE",
       "http_path": "/2012-09-25/jobs/{id}",
       "input": {
         "type": "input",
@@ -1218,7 +1218,7 @@
     },
     "delete_pipeline": {
       "name": "DeletePipeline",
-      "http_method": "POST",
+      "http_method": "DELETE",
       "http_path": "/2012-09-25/pipelines/{id}",
       "input": {
         "type": "input",
@@ -1269,7 +1269,7 @@
     },
     "delete_preset": {
       "name": "DeletePreset",
-      "http_method": "POST",
+      "http_method": "DELETE",
       "http_path": "/2012-09-25/presets/{id}",
       "input": {
         "type": "input",
@@ -1315,7 +1315,7 @@
     },
     "list_jobs_by_pipeline": {
       "name": "ListJobsByPipeline",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-09-25/jobsByPipeline/{pipeline_id}?Ascending={ascending}&PageToken={page_token}",
       "input": {
         "type": "input",
@@ -1597,7 +1597,7 @@
     },
     "list_jobs_by_status": {
       "name": "ListJobsByStatus",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-09-25/jobsByStatus/{status}?Ascending={ascending}&PageToken={page_token}",
       "input": {
         "type": "input",
@@ -1879,7 +1879,7 @@
     },
     "list_pipelines": {
       "name": "ListPipelines",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-09-25/pipelines",
       "input": {
         "type": "input",
@@ -2051,7 +2051,7 @@
     },
     "list_presets": {
       "name": "ListPresets",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-09-25/presets",
       "input": {
         "type": "input",
@@ -2294,7 +2294,7 @@
     },
     "read_job": {
       "name": "ReadJob",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-09-25/jobs/{id}",
       "input": {
         "type": "input",
@@ -2561,7 +2561,7 @@
     },
     "read_pipeline": {
       "name": "ReadPipeline",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-09-25/pipelines/{id}",
       "input": {
         "type": "input",
@@ -2739,7 +2739,7 @@
     },
     "read_preset": {
       "name": "ReadPreset",
-      "http_method": "POST",
+      "http_method": "GET",
       "http_path": "/2012-09-25/presets/{id}",
       "input": {
         "type": "input",
@@ -3060,7 +3060,7 @@
     },
     "update_pipeline": {
       "name": "UpdatePipeline",
-      "http_method": "POST",
+      "http_method": "PUT",
       "http_path": "/2012-09-25/pipelines/{id}",
       "input": {
         "type": "input",
