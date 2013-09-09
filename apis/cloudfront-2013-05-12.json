@@ -2,9 +2,9 @@
   "version": "2013-05-12",
   "endpoint": "cloudfront.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version4",
     "service_abbreviation": "CloudFront",
     "service_full_name": "Amazon CloudFront",
+    "signer": "Version4",
     "xmlnamespace": "http://cloudfront.amazonaws.com/doc/2013-05-12/"
   },
   "plugins": [

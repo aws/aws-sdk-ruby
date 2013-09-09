@@ -22,7 +22,7 @@ module Aws
 
       handle(:Handler, step: :sign) do |context|
         @signer ||= begin
-          version = context.config.api.metadata['aws_signer']
+          version = context.config.api.metadata['signer']
           Signers.const_get(version) if version
         end
         @signer.sign(context) if @signer

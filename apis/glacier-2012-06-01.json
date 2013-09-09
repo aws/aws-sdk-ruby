@@ -2,9 +2,9 @@
   "version": "2012-06-01",
   "endpoint": "glacier.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version4",
     "checksum_format": "sha256",
-    "service_full_name": "Amazon Glacier"
+    "service_full_name": "Amazon Glacier",
+    "signer": "Version4"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

@@ -2,10 +2,10 @@
   "version": "2010-05-08",
   "endpoint": "iam.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version4",
     "result_wrapped": true,
     "service_abbreviation": "IAM",
     "service_full_name": "AWS Identity and Access Management",
+    "signer": "Version4",
     "xmlnamespace": "https://iam.amazonaws.com/doc/2010-05-08/"
   },
   "plugins": [

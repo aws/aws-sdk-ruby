@@ -2,11 +2,11 @@
   "version": "2012-01-25",
   "endpoint": "swf.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version3",
     "json_target_prefix": "SimpleWorkflowService",
     "json_version": 1.0,
     "service_abbreviation": "Amazon SWF",
-    "service_full_name": "Amazon Simple Workflow Service"
+    "service_full_name": "Amazon Simple Workflow Service",
+    "signer": "Version3"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

@@ -2,10 +2,10 @@
   "version": "2010-03-31",
   "endpoint": "sns.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version4",
     "result_wrapped": true,
     "service_abbreviation": "Amazon SNS",
     "service_full_name": "Amazon Simple Notification Service",
+    "signer": "Version4",
     "xmlnamespace": "http://sns.amazonaws.com/doc/2010-03-31/"
   },
   "plugins": [

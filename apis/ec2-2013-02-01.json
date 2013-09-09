@@ -2,10 +2,10 @@
   "version": "2013-06-15",
   "endpoint": "ec2.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version2",
     "result_wrapped": false,
     "service_abbreviation": "Amazon EC2",
     "service_full_name": "Amazon Elastic Compute Cloud",
+    "signer": "Version2",
     "xmlnamespace": "http://ec2.amazonaws.com/doc/2013-06-15"
   },
   "plugins": [

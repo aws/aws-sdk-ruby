@@ -2,9 +2,9 @@
   "version": "2011-02-01",
   "endpoint": "cloudsearch.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version2",
     "result_wrapped": true,
-    "service_full_name": "Amazon CloudSearch"
+    "service_full_name": "Amazon CloudSearch",
+    "signer": "Version2"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

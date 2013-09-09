@@ -2,9 +2,9 @@
   "version": "2012-12-12",
   "endpoint": "route53.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version3Https",
     "service_abbreviation": "Route 53",
     "service_full_name": "Amazon Route 53",
+    "signer": "Version3Https",
     "xmlnamespace": "https://route53.amazonaws.com/doc/2012-12-12/"
   },
   "plugins": [

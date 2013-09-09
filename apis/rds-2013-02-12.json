@@ -2,10 +2,10 @@
   "version": "2013-02-12",
   "endpoint": "rds.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version4",
     "result_wrapped": true,
     "service_abbreviation": "Amazon RDS",
     "service_full_name": "Amazon Relational Database Service",
+    "signer": "Version4",
     "xmlnamespace": "http://rds.amazonaws.com/doc/2013-02-12/"
   },
   "plugins": [

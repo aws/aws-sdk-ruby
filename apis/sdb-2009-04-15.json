@@ -2,9 +2,9 @@
   "version": "2009-04-15",
   "endpoint": "sdb.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version2",
     "result_wrapped": true,
     "service_full_name": "Amazon SimpleDB",
+    "signer": "Version2",
     "xmlnamespace": "http://sdb.amazonaws.com/doc/2009-04-15/"
   },
   "plugins": [

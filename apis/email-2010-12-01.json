@@ -2,10 +2,10 @@
   "version": "2010-12-01",
   "endpoint": "email.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version4",
     "result_wrapped": true,
     "service_abbreviation": "Amazon SES",
     "service_full_name": "Amazon Simple Email Service",
+    "signer": "Version4",
     "signing_name": "ses",
     "xmlnamespace": "http://ses.amazonaws.com/doc/2010-12-01/"
   },

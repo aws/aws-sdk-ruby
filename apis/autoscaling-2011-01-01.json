@@ -2,9 +2,9 @@
   "version": "2011-01-01",
   "endpoint": "autoscaling.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version4",
     "result_wrapped": true,
-    "service_full_name": "Auto Scaling"
+    "service_full_name": "Auto Scaling",
+    "signer": "Version4"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

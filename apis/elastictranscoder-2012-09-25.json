@@ -2,8 +2,8 @@
   "version": "2012-09-25",
   "endpoint": "elastictranscoder.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version4",
-    "service_full_name": "Amazon Elastic Transcoder"
+    "service_full_name": "Amazon Elastic Transcoder",
+    "signer": "Version4"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

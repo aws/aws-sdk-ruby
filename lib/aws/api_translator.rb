@@ -166,7 +166,7 @@ module Aws
       else raise "unhandled signer version `#{version}'"
       end
       @properties['metadata'] ||= {}
-      @properties['metadata']['aws_signer'] = signer
+      @properties['metadata']['signer'] = signer
     end
 
     def set_endpoint_prefix(prefix)

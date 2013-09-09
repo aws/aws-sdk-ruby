@@ -2,9 +2,9 @@
   "version": "2012-11-15",
   "endpoint": "elasticache.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version2",
     "result_wrapped": true,
     "service_full_name": "Amazon ElastiCache",
+    "signer": "Version2",
     "xmlnamespace": "http://elasticache.amazonaws.com/doc/2012-11-15/"
   },
   "plugins": [

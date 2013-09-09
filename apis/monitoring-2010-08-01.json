@@ -2,10 +2,10 @@
   "version": "2010-08-01",
   "endpoint": "monitoring.%s.amazonaws.com",
   "metadata": {
-    "aws_signer": "Version2",
     "result_wrapped": true,
     "service_abbreviation": "CloudWatch",
     "service_full_name": "Amazon CloudWatch",
+    "signer": "Version2",
     "xmlnamespace": "http://monitoring.amazonaws.com/doc/2010-08-01/"
   },
   "plugins": [
