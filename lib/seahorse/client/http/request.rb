@@ -18,8 +18,6 @@ module Seahorse
     module Http
       class Request
 
-        UAGENT = "Seahorse/#{Seahorse::VERSION}"
-
         # @option options [Endpoint] :endpoint (nil)
         # @option options [String] :http_method ('GET')
         # @option options [String] :path ('/')
@@ -29,9 +27,8 @@ module Seahorse
           self.endpoint = options[:endpoint]
           self.http_method = options[:http_method] || 'GET'
           self.path = options[:path] || '/'
-          self.headers = options[:headers] || Headers.new
+          self.headers = options[:headers] || Headers.new('User-Agent' => ua)
           self.body = options[:body]
-          headers['User-Agent'] = "#{headers['User-Agent']} #{UAGENT}".strip
         end
 
         # @return [Endpoint, nil]
@@ -66,6 +63,13 @@ module Seahorse
             when String then PlainStringIO.new(io)
             else io
           end
+        end
+
+        private
+
+        # @return [String]
+        def ua
+          "Seahorse/#{Seahorse::VERSION}"
         end
 
       end
