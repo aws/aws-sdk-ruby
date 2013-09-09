@@ -36,6 +36,8 @@
     - :string
     Region:
     - :string
+    VpcId:
+    - :string
     Attributes:
     - :map:
         :key:
@@ -52,6 +54,8 @@
     HostnameTheme:
     - :string
     DefaultAvailabilityZone:
+    - :string
+    DefaultSubnetId:
     - :string
     CustomJson:
     - :string
@@ -202,6 +206,8 @@
     - :string
     AvailabilityZone:
     - :string
+    SubnetId:
+    - :string
     Architecture:
     - :string
     RootDeviceType:
@@ -291,6 +297,8 @@
     Region:
     - :string
     - :required
+    VpcId:
+    - :string
     Attributes:
     - :map:
         :key:
@@ -308,6 +316,8 @@
     HostnameTheme:
     - :string
     DefaultAvailabilityZone:
+    - :string
+    DefaultSubnetId:
     - :string
     CustomJson:
     - :string
@@ -640,6 +650,9 @@
         AvailabilityZones:
           :sym: :availability_zones
           :type: :string
+        SubnetIds:
+          :sym: :subnet_ids
+          :type: :string
         Ec2InstanceIds:
           :sym: :ec_2_instance_ids
           :type: :string
@@ -693,6 +706,9 @@
           :type: :string
         AvailabilityZone:
           :sym: :availability_zone
+          :type: :string
+        SubnetId:
+          :sym: :subnet_id
           :type: :string
         PublicDns:
           :sym: :public_dns
@@ -1036,6 +1052,9 @@
         Region:
           :sym: :region
           :type: :string
+        VpcId:
+          :sym: :vpc_id
+          :type: :string
         Attributes:
           :sym: :attributes
           :type: :map
@@ -1056,6 +1075,9 @@
           :type: :string
         DefaultAvailabilityZone:
           :sym: :default_availability_zone
+          :type: :string
+        DefaultSubnetId:
+          :sym: :default_subnet_id
           :type: :string
         CustomJson:
           :sym: :custom_json
@@ -1556,6 +1578,8 @@
     HostnameTheme:
     - :string
     DefaultAvailabilityZone:
+    - :string
+    DefaultSubnetId:
     - :string
     CustomJson:
     - :string

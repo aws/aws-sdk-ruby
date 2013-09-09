@@ -12,328 +12,866 @@
 # language governing permissions and limitations under the License.
 
 ---
-:attach_elastic_load_balancer: "Calls the AttachElasticLoadBalancer API operation.\n@param
-  [Hash] options\n  * `:elastic_load_balancer_name` - *required* - (String) \n  *
-  `:layer_id` - *required* - (String) \n@return [Core::Response]"
+:attach_elastic_load_balancer: |-
+  Calls the AttachElasticLoadBalancer API operation.
+  @param [Hash] options
+    * `:elastic_load_balancer_name` - *required* - (String) The Elastic Load Balancing instance's name.
+    * `:layer_id` - *required* - (String) The ID of the layer that the Elastic Load Balancing instance is to be attached to.
+  @return [Core::Response]
 :clone_stack: "Calls the CloneStack API operation.\n@param [Hash] options\n  * `:source_stack_id`
-  - *required* - (String) \n  * `:name` - (String) \n  * `:region` - (String) \n  *
-  `:attributes` - (Hash&lt;<String,String>) \n  * `:service_role_arn` - *required*
-  - (String) \n  * `:default_instance_profile_arn` - (String) \n  * `:default_os`
-  - (String) \n  * `:hostname_theme` - (String) \n  * `:default_availability_zone`
-  - (String) \n  * `:custom_json` - (String) \n  * `:configuration_manager` - (Hash)
-  \n    * `:name` - (String) \n    * `:version` - (String) \n  * `:use_custom_cookbooks`
-  - (Boolean) \n  * `:custom_cookbooks_source` - (Hash) \n    * `:type` - (String)
-  Valid values include:\n      * `git`\n      * `svn`\n      * `archive`\n      *
-  `s3`\n    * `:url` - (String) \n    * `:username` - (String) \n    * `:password`
-  - (String) \n    * `:ssh_key` - (String) \n    * `:revision` - (String) \n  * `:default_ssh_key_name`
-  - (String) \n  * `:clone_permissions` - (Boolean) \n  * `:clone_app_ids` - (Array&lt;<String>)
-  \n  * `:default_root_device_type` - (String) Valid values include:\n    * `ebs`\n
-  \   * `instance-store`\n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:stack_id` - (String)"
-:create_app: "Calls the CreateApp API operation.\n@param [Hash] options\n  * `:stack_id`
-  - *required* - (String) \n  * `:shortname` - (String) \n  * `:name` - *required*
-  - (String) \n  * `:description` - (String) \n  * `:type` - *required* - (String)
-  Valid values include:\n    * `rails`\n    * `php`\n    * `nodejs`\n    * `static`\n
-  \   * `other`\n  * `:app_source` - (Hash) \n    * `:type` - (String) Valid values
-  include:\n      * `git`\n      * `svn`\n      * `archive`\n      * `s3`\n    * `:url`
-  - (String) \n    * `:username` - (String) \n    * `:password` - (String) \n    *
-  `:ssh_key` - (String) \n    * `:revision` - (String) \n  * `:domains` - (Array&lt;<String>)
-  \n  * `:enable_ssl` - (Boolean) \n  * `:ssl_configuration` - (Hash) \n    * `:certificate`
-  - *required* - (String) \n    * `:private_key` - *required* - (String) \n    * `:chain`
-  - (String) \n  * `:attributes` - (Hash&lt;<String,String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:app_id` - (String)"
-:create_deployment: "Calls the CreateDeployment API operation.\n@param [Hash] options\n
-  \ * `:stack_id` - *required* - (String) \n  * `:app_id` - (String) \n  * `:instance_ids`
-  - (Array&lt;<String>) \n  * `:command` - *required* - (Hash) \n    * `:name` - *required*
-  - (String) Valid values include:\n      * `install_dependencies`\n      * `update_dependencies`\n
-  \     * `update_custom_cookbooks`\n      * `execute_recipes`\n      * `deploy`\n
-  \     * `rollback`\n      * `start`\n      * `stop`\n      * `restart`\n      *
-  `undeploy`\n    * `:args` - (Hash&lt;<String,Array&lt;<String>>) \n  * `:comment`
-  - (String) \n  * `:custom_json` - (String) \n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:deployment_id` - (String)"
-:create_instance: "Calls the CreateInstance API operation.\n@param [Hash] options\n
-  \ * `:stack_id` - *required* - (String) \n  * `:layer_ids` - *required* - (Array&lt;<String>)
-  \n  * `:instance_type` - *required* - (String) \n  * `:auto_scaling_type` - (String)
-  Valid values include:\n    * `load`\n    * `timer`\n  * `:hostname` - (String) \n
-  \ * `:os` - (String) \n  * `:ami_id` - (String) \n  * `:ssh_key_name` - (String)
-  \n  * `:availability_zone` - (String) \n  * `:architecture` - (String) Valid values
-  include:\n    * `x86_64`\n    * `i386`\n  * `:root_device_type` - (String) Valid
-  values include:\n    * `ebs`\n    * `instance-store`\n  * `:install_updates_on_boot`
-  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:instance_id` - (String)"
-:create_layer: "Calls the CreateLayer API operation.\n@param [Hash] options\n  * `:stack_id`
-  - *required* - (String) \n  * `:type` - *required* - (String) Valid values include:\n
-  \   * `lb`\n    * `web`\n    * `php-app`\n    * `rails-app`\n    * `nodejs-app`\n
-  \   * `memcached`\n    * `db-master`\n    * `monitoring-master`\n    * `custom`\n
-  \ * `:name` - *required* - (String) \n  * `:shortname` - *required* - (String) \n
-  \ * `:attributes` - (Hash&lt;<String,String>) \n  * `:custom_instance_profile_arn`
-  - (String) \n  * `:custom_security_group_ids` - (Array&lt;<String>) \n  * `:packages`
-  - (Array&lt;<String>) \n  * `:volume_configurations` - (Array&lt;<Hash>) \n    *
-  `:mount_point` - *required* - (String) \n    * `:raid_level` - (Integer) \n    *
-  `:number_of_disks` - *required* - (Integer) \n    * `:size` - *required* - (Integer)
-  \n  * `:enable_auto_healing` - (Boolean) \n  * `:auto_assign_elastic_ips` - (Boolean)
-  \n  * `:custom_recipes` - (Hash) \n    * `:setup` - (Array&lt;<String>) \n    *
-  `:configure` - (Array&lt;<String>) \n    * `:deploy` - (Array&lt;<String>) \n    *
-  `:undeploy` - (Array&lt;<String>) \n    * `:shutdown` - (Array&lt;<String>) \n  *
-  `:install_updates_on_boot` - (Boolean) \n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:layer_id`
-  - (String)"
+  - *required* - (String) The source stack ID.\n  * `:name` - (String) The cloned
+  stack name.\n  * `:region` - (String) The cloned stack AWS region, such as \"us-east-1\".
+  For more information about AWS regions, see Regions and Endpoints.\n  * `:vpc_id`
+  - (String) The ID of the VPC that the cloned stack is to be launched into. It must
+  be in the specified region. All instances will be launched into this VPC, and you
+  cannot change the ID later. If your account supports EC2 Classic, the default value
+  is no VPC. If you account does not support EC2 Classic, the default value is the
+  default VPC for the specified region. If the VPC ID corresponds to a default VPC
+  and you have specified either the DefaultAvailabilityZone or the DefaultSubnetId
+  parameter only, AWS OpsWorks infers the value of the other parameter. If you specify
+  neither parameter, AWS OpsWorks sets these parameters to the first valid Availability
+  Zone for the specified region and the corresponding default VPC subnet ID, respectively.
+  If you specify a nondefault VPC ID, note the following: It must belong to a VPC
+  in your account that is in the specified region. You must specify a value for DefaultSubnetId.
+  For more information on how to use AWS OpsWorks with a VPC, see Running a Stack
+  in a VPC. For more information on default VPC and EC2 Classic, see Supported Platforms.\n
+  \ * `:attributes` - (Hash&lt;<String,String>) A list of stack attributes and values
+  as key/value pairs to be added to the cloned stack.\n  * `:service_role_arn` - *required*
+  - (String) The stack AWS Identity and Access Management (IAM) role, which allows
+  AWS OpsWorks to work with AWS resources on your behalf. You must set this parameter
+  to the Amazon Resource Name (ARN) for an existing IAM role. If you create a stack
+  by using the AWS OpsWorks console, it creates the role for you. You can obtain an
+  existing stack's IAM ARN programmatically by calling DescribePermissions. For more
+  information about IAM ARNs, see Using Identifiers. You must set this parameter to
+  a valid service role ARN or the action will fail; there is no default value. You
+  can specify the source stack's service role ARN, if you prefer, but you must do
+  so explicitly.\n  * `:default_instance_profile_arn` - (String) The ARN of an IAM
+  profile that is the default profile for all of the stack's EC2 instances. For more
+  information about IAM ARNs, see Using Identifiers.\n  * `:default_os` - (String)
+  The cloned stack's default operating system, which must be set to Amazon Linux or
+  Ubuntu 12.04 LTS. The default option is Amazon Linux.\n  * `:hostname_theme` - (String)
+  The stack's host name theme, with spaces are replaced by underscores. The theme
+  is used to generate host names for the stack's instances. By default, HostnameTheme
+  is set to Layer_Dependent, which creates host names by appending integers to the
+  layer's short name. The other themes are: Baked_Goods Clouds European_Cities Fruits
+  Greek_Deities Legendary_Creatures_from_Japan Planets_and_Moons Roman_Deities Scottish_Islands
+  US_Cities Wild_Cats To obtain a generated host name, call GetHostNameSuggestion,
+  which returns a host name based on the current theme.\n  * `:default_availability_zone`
+  - (String) The cloned stack's default Availability Zone, which must be in the specified
+  region. For more information, see Regions and Endpoints. If you also specify a value
+  for DefaultSubnetId, the subnet must be in the same zone. For more information,
+  see the VpcId parameter description.\n  * `:default_subnet_id` - (String) The stack's
+  default subnet ID. All instances will be launched into this subnet unless you specify
+  otherwise when you create the instance. If you also specify a value for DefaultAvailabilityZone,
+  the subnet must be in the same zone. For information on default values and when
+  this parameter is required, see the VpcId parameter description.\n  * `:custom_json`
+  - (String) A string that contains user-defined, custom JSON. It is used to override
+  the corresponding default stack configuration JSON values. The string should be
+  in the following format and must escape characters such as '\"'.: \"{\\\"key1\\\":
+  \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\" For more information on custom
+  JSON, see Use Custom JSON to Modify the Stack Configuration JSON\n  * `:configuration_manager`
+  - (Hash) The configuration manager. When you clone a stack we recommend that you
+  use the configuration manager to specify the Chef version, 0.9 or 11.4. The default
+  value is currently 0.9. However, we expect to change the default value to 11.4 in
+  September 2013.\n    * `:name` - (String) The name. This parameter must be set to
+  \"Chef\".\n    * `:version` - (String) The Chef version. This parameter must be
+  set to \"0.9\" or \"11.4\". The default value is \"0.9\". However, we expect to
+  change the default value to \"11.4\" in September 2013.\n  * `:use_custom_cookbooks`
+  - (Boolean) Whether to use custom cookbooks.\n  * `:custom_cookbooks_source` - (Hash)
+  \n    * `:type` - (String) The repository type.  Valid values include:\n      *
+  `git`\n      * `svn`\n      * `archive`\n      * `s3`\n    * `:url` - (String) The
+  source URL.\n    * `:username` - (String) This parameter depends on the repository
+  type. For Amazon S3 bundles, set Username to the appropriate AWS access key. For
+  HTTP bundles, Git repositories, and Subversion repositories, set Username to the
+  user name.\n    * `:password` - (String) This parameter depends on the repository
+  type. For Amazon S3 bundles, set Password to the appropriate AWS secret key. For
+  HTTP bundles, Git repositories, and Subversion repositories, set Password to the
+  password.\n    * `:ssh_key` - (String) The repository's SSH key.\n    * `:revision`
+  - (String) The application's version. AWS OpsWorks enables you to easily deploy
+  new versions of an application. One of the simplest approaches is to have branches
+  or revisions in your repository that represent different versions that can potentially
+  be deployed.\n  * `:default_ssh_key_name` - (String) A default SSH key for the stack
+  instances. You can override this value when you create or update an instance.\n
+  \ * `:clone_permissions` - (Boolean) Whether to clone the source stack's permissions.\n
+  \ * `:clone_app_ids` - (Array&lt;<String>) A list of source stack app IDs to be
+  included in the cloned stack.\n  * `:default_root_device_type` - (String) The default
+  root device type. This value is used by default for all instances in the cloned
+  stack, but you can override it when you create an instance. For more information,
+  see Storage for the Root Device.  Valid values include:\n    * `ebs`\n    * `instance-store`\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:stack_id` - (String)"
+:create_app: |-
+  Calls the CreateApp API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+    * `:shortname` - (String) The app's short name.
+    * `:name` - *required* - (String) The app name.
+    * `:description` - (String) A description of the app.
+    * `:type` - *required* - (String) The app type. Each supported type is associated with a particular layer. For example, PHP applications are associated with a PHP layer. AWS OpsWorks deploys an application to those instances that are members of the corresponding layer.  Valid values include:
+      * `rails`
+      * `php`
+      * `nodejs`
+      * `static`
+      * `other`
+    * `:app_source` - (Hash) A Source object that specifies the app repository.
+      * `:type` - (String) The repository type.  Valid values include:
+        * `git`
+        * `svn`
+        * `archive`
+        * `s3`
+      * `:url` - (String) The source URL.
+      * `:username` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Username to the appropriate AWS access key. For HTTP bundles, Git repositories, and Subversion repositories, set Username to the user name.
+      * `:password` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Password to the appropriate AWS secret key. For HTTP bundles, Git repositories, and Subversion repositories, set Password to the password.
+      * `:ssh_key` - (String) The repository's SSH key.
+      * `:revision` - (String) The application's version. AWS OpsWorks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
+    * `:domains` - (Array&lt;<String>) The app virtual host settings, with multiple domains separated by commas. For example: 'www.example.com, example.com'
+    * `:enable_ssl` - (Boolean) Whether to enable SSL for the app.
+    * `:ssl_configuration` - (Hash) An SslConfiguration object with the SSL configuration.
+      * `:certificate` - *required* - (String) The contents of the certificate's domain.crt file.
+      * `:private_key` - *required* - (String) The private key; the contents of the certificate's domain.kex file.
+      * `:chain` - (String) Optional. Can be used to specify an intermediate certificate authority key or client authentication.
+    * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value pairs to be added to the stack attributes bag.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:app_id` - (String)
+:create_deployment: |-
+  Calls the CreateDeployment API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+    * `:app_id` - (String) The app ID. This parameter is required for app deployments, but not for other deployment commands.
+    * `:instance_ids` - (Array&lt;<String>) The instance IDs for the deployment targets.
+    * `:command` - *required* - (Hash) A DeploymentCommand object that specifies the deployment command and any associated arguments.
+      * `:name` - *required* - (String) Specifies the deployment operation. You can specify only one command. For stacks, the available commands are: execute_recipes: Execute the recipes that are specified by the Args parameter. install_dependencies: Installs the stack's dependencies. update_custom_cookbooks: Update the stack's custom cookbooks. update_dependencies: Update the stack's dependencies. For apps, the available commands are: deploy: Deploy the app. rollback Roll the app back to the previous version. When you update an app, AWS OpsWorks stores the previous version, up to a maximum of five versions. You can use this command to roll an app back as many as four versions. start: Start the app's web or application server. stop: Stop the app's web or application server. restart: Restart the app's web or application server. undeploy: Undeploy the app.  Valid values include:
+        * `install_dependencies`
+        * `update_dependencies`
+        * `update_custom_cookbooks`
+        * `execute_recipes`
+        * `deploy`
+        * `rollback`
+        * `start`
+        * `stop`
+        * `restart`
+        * `undeploy`
+      * `:args` - (Hash&lt;<String,Array&lt;<String>>) An array of command arguments. This parameter is currently used only to specify the list of recipes to be executed by the ExecuteRecipes command.
+    * `:comment` - (String) A user-defined comment.
+    * `:custom_json` - (String) A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format and must escape characters such as '"'.: "{\"key1\": \"value1\", \"key2\": \"value2\",...}" For more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration JSON.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:deployment_id` - (String)
+:create_instance: |-
+  Calls the CreateInstance API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+    * `:layer_ids` - *required* - (Array&lt;<String>) An array that contains the instance layer IDs.
+    * `:instance_type` - *required* - (String) The instance type. AWS OpsWorks supports all instance types except Cluster Compute, Cluster GPU, and High Memory Cluster. For more information, see Instance Families and Types. The parameter values that you use to specify the various types are in the API Name column of the Available Instance Types table.
+    * `:auto_scaling_type` - (String) The instance auto scaling type, which has three possible values: AlwaysRunning: A 24/7 instance, which is not affected by auto scaling. TimeBasedAutoScaling: A time-based auto scaling instance, which is started and stopped based on a specified schedule. To specify the schedule, call SetTimeBasedAutoScaling. LoadBasedAutoScaling: A load-based auto scaling instance, which is started and stopped based on load metrics. To use load-based auto scaling, you must enable it for the instance layer and configure the thresholds by calling SetLoadBasedAutoScaling.  Valid values include:
+      * `load`
+      * `timer`
+    * `:hostname` - (String) The instance host name.
+    * `:os` - (String) The instance operating system, which must be set to one of the following. Standard operating systems: Amazon Linux or Ubuntu 12.04 LTS Custom AMIs: Custom The default option is Amazon Linux. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. For more information on the standard operating systems, see Operating SystemsFor more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.
+    * `:ami_id` - (String) A custom AMI ID to be used to create the instance. The AMI should be based on one of the standard AWS OpsWorks APIs: Amazon Linux or Ubuntu 12.04 LTS. For more information, see Instances
+    * `:ssh_key_name` - (String) The instance SSH key name.
+    * `:availability_zone` - (String) The instance Availability Zone. For more information, see Regions and Endpoints.
+    * `:subnet_id` - (String) The ID of the instance's subnet. If the stack is running in a VPC, you can use this parameter to override the stack's default subnet ID value and direct AWS OpsWorks to launch the instance in a different subnet.
+    * `:architecture` - (String) The instance architecture. Instance types do not necessarily support both architectures. For a list of the architectures that are supported by the different instance types, see Instance Families and Types.  Valid values include:
+      * `x86_64`
+      * `i386`
+    * `:root_device_type` - (String) The instance root device type. For more information, see Storage for the Root Device.  Valid values include:
+      * `ebs`
+      * `instance-store`
+    * `:install_updates_on_boot` - (Boolean) Whether to install operating system and package updates when the instance boots. The default value is  `true` . To control when updates are installed, set this value to  `false` . You must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the default value of  `true` , to ensure that your instances have the latest security updates.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:instance_id` - (String)
+:create_layer: |-
+  Calls the CreateLayer API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The layer stack ID.
+    * `:type` - *required* - (String) The layer type. A stack cannot have more than one layer of the same type. This parameter must be set to one of the following: lb: An HAProxy layer web: A Static Web Server layer rails-app: A Rails App Server layer php-app: A PHP App Server layer nodejs-app: A Node.js App Server layer memcached: A Memcached layer db-master: A MySQL layer monitoring-master: A Ganglia layer custom: A custom layer  Valid values include:
+      * `lb`
+      * `web`
+      * `php-app`
+      * `rails-app`
+      * `nodejs-app`
+      * `memcached`
+      * `db-master`
+      * `monitoring-master`
+      * `custom`
+    * `:name` - *required* - (String) The layer name, which is used by the console.
+    * `:shortname` - *required* - (String) The layer short name, which is used internally by AWS OpsWorks and by Chef recipes. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters, which are limited to the alphanumeric characters, '-', '_', and '.'.
+    * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value pairs to be added to the stack attributes bag.
+    * `:custom_instance_profile_arn` - (String) The ARN of an IAM profile that to be used for the layer's EC2 instances. For more information about IAM ARNs, see Using Identifiers.
+    * `:custom_security_group_ids` - (Array&lt;<String>) An array containing the layer custom security group IDs.
+    * `:packages` - (Array&lt;<String>) An array of Package objects that describe the layer packages.
+    * `:volume_configurations` - (Array&lt;<Hash>) A VolumeConfigurations object that describes the layer Amazon EBS volumes.
+      * `:mount_point` - *required* - (String) The volume mount point. For example "/dev/sdh".
+      * `:raid_level` - (Integer) The volume RAID level.
+      * `:number_of_disks` - *required* - (Integer) The number of disks in the volume.
+      * `:size` - *required* - (Integer) The volume size.
+    * `:enable_auto_healing` - (Boolean) Whether to disable auto healing for the layer.
+    * `:auto_assign_elastic_ips` - (Boolean) Whether to automatically assign an Elastic IP address to the layer.
+    * `:custom_recipes` - (Hash) A LayerCustomRecipes object that specifies the layer custom recipes.
+      * `:setup` - (Array&lt;<String>) An array of custom recipe names to be run following a setup event.
+      * `:configure` - (Array&lt;<String>) An array of custom recipe names to be run following a configure event.
+      * `:deploy` - (Array&lt;<String>) An array of custom recipe names to be run following a deploy event.
+      * `:undeploy` - (Array&lt;<String>) An array of custom recipe names to be run following a undeploy event.
+      * `:shutdown` - (Array&lt;<String>) An array of custom recipe names to be run following a shutdown event.
+    * `:install_updates_on_boot` - (Boolean) Whether to install operating system and package updates when the instance boots. The default value is  `true` . To control when updates are installed, set this value to  `false` . You must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the default value of  `true` , to ensure that your instances have the latest security updates.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:layer_id` - (String)
 :create_stack: "Calls the CreateStack API operation.\n@param [Hash] options\n  * `:name`
-  - *required* - (String) \n  * `:region` - *required* - (String) \n  * `:attributes`
-  - (Hash&lt;<String,String>) \n  * `:service_role_arn` - *required* - (String) \n
-  \ * `:default_instance_profile_arn` - *required* - (String) \n  * `:default_os`
-  - (String) \n  * `:hostname_theme` - (String) \n  * `:default_availability_zone`
-  - (String) \n  * `:custom_json` - (String) \n  * `:configuration_manager` - (Hash)
-  \n    * `:name` - (String) \n    * `:version` - (String) \n  * `:use_custom_cookbooks`
-  - (Boolean) \n  * `:custom_cookbooks_source` - (Hash) \n    * `:type` - (String)
-  Valid values include:\n      * `git`\n      * `svn`\n      * `archive`\n      *
-  `s3`\n    * `:url` - (String) \n    * `:username` - (String) \n    * `:password`
-  - (String) \n    * `:ssh_key` - (String) \n    * `:revision` - (String) \n  * `:default_ssh_key_name`
-  - (String) \n  * `:default_root_device_type` - (String) Valid values include:\n
-  \   * `ebs`\n    * `instance-store`\n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:stack_id`
-  - (String)"
-:create_user_profile: "Calls the CreateUserProfile API operation.\n@param [Hash] options\n
-  \ * `:iam_user_arn` - *required* - (String) \n  * `:ssh_username` - (String) \n
-  \ * `:ssh_public_key` - (String) \n@return [Core::Response] The `#data` method of
-  the response object returns a hash with the following structure:\n\n  * `:iam_user_arn`
-  - (String)"
-:delete_app: "Calls the DeleteApp API operation.\n@param [Hash] options\n  * `:app_id`
-  - *required* - (String) \n@return [Core::Response]"
-:delete_instance: "Calls the DeleteInstance API operation.\n@param [Hash] options\n
-  \ * `:instance_id` - *required* - (String) \n  * `:delete_elastic_ip` - (Boolean)
-  \n  * `:delete_volumes` - (Boolean) \n@return [Core::Response]"
-:delete_layer: "Calls the DeleteLayer API operation.\n@param [Hash] options\n  * `:layer_id`
-  - *required* - (String) \n@return [Core::Response]"
-:delete_stack: "Calls the DeleteStack API operation.\n@param [Hash] options\n  * `:stack_id`
-  - *required* - (String) \n@return [Core::Response]"
-:delete_user_profile: "Calls the DeleteUserProfile API operation.\n@param [Hash] options\n
-  \ * `:iam_user_arn` - *required* - (String) \n@return [Core::Response]"
-:describe_apps: "Calls the DescribeApps API operation.\n@param [Hash] options\n  *
-  `:stack_id` - (String) \n  * `:app_ids` - (Array&lt;<String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:apps` - (Array<Hash>)\n    * `:app_id` - (String)\n    * `:stack_id` - (String)\n
-  \   * `:shortname` - (String)\n    * `:name` - (String)\n    * `:description` -
-  (String)\n    * `:type` - (String)\n    * `:app_source` - (Hash)\n      * `:type`
-  - (String)\n      * `:url` - (String)\n      * `:username` - (String)\n      * `:password`
-  - (String)\n      * `:ssh_key` - (String)\n      * `:revision` - (String)\n    *
-  `:domains` - (Array<String>)\n    * `:enable_ssl` - (Boolean)\n    * `:ssl_configuration`
-  - (Hash)\n      * `:certificate` - (String)\n      * `:private_key` - (String)\n
-  \     * `:chain` - (String)\n    * `:attributes` - (Hash<String,String>)\n    *
-  `:created_at` - (String)"
-:describe_commands: "Calls the DescribeCommands API operation.\n@param [Hash] options\n
-  \ * `:deployment_id` - (String) \n  * `:instance_id` - (String) \n  * `:command_ids`
-  - (Array&lt;<String>) \n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:commands` - (Array<Hash>)\n
-  \   * `:command_id` - (String)\n    * `:instance_id` - (String)\n    * `:deployment_id`
-  - (String)\n    * `:created_at` - (String)\n    * `:acknowledged_at` - (String)\n
-  \   * `:completed_at` - (String)\n    * `:status` - (String)\n    * `:exit_code`
-  - (Integer)\n    * `:log_url` - (String)\n    * `:type` - (String)"
-:describe_deployments: "Calls the DescribeDeployments API operation.\n@param [Hash]
-  options\n  * `:stack_id` - (String) \n  * `:app_id` - (String) \n  * `:deployment_ids`
-  - (Array&lt;<String>) \n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:deployments` - (Array<Hash>)\n
-  \   * `:deployment_id` - (String)\n    * `:stack_id` - (String)\n    * `:app_id`
-  - (String)\n    * `:created_at` - (String)\n    * `:completed_at` - (String)\n    *
-  `:duration` - (Integer)\n    * `:iam_user_arn` - (String)\n    * `:comment` - (String)\n
-  \   * `:command` - (Hash)\n      * `:name` - (String)\n      * `:args` - (Hash<String,Hash>)\n
-  \       * `:value` - (Array<String>)\n    * `:status` - (String)\n    * `:custom_json`
-  - (String)\n    * `:instance_ids` - (Array<String>)"
-:describe_elastic_ips: "Calls the DescribeElasticIps API operation.\n@param [Hash]
-  options\n  * `:instance_id` - (String) \n  * `:ips` - (Array&lt;<String>) \n@return
+  - *required* - (String) The stack name.\n  * `:region` - *required* - (String) The
+  stack AWS region, such as \"us-east-1\". For more information about Amazon regions,
+  see Regions and Endpoints.\n  * `:vpc_id` - (String) The ID of the VPC that the
+  stack is to be launched into. It must be in the specified region. All instances
+  will be launched into this VPC, and you cannot change the ID later. If your account
+  supports EC2 Classic, the default value is no VPC. If you account does not support
+  EC2 Classic, the default value is the default VPC for the specified region. If the
+  VPC ID corresponds to a default VPC and you have specified either the DefaultAvailabilityZone
+  or the DefaultSubnetId parameter only, AWS OpsWorks infers the value of the other
+  parameter. If you specify neither parameter, AWS OpsWorks sets these parameters
+  to the first valid Availability Zone for the specified region and the corresponding
+  default VPC subnet ID, respectively. If you specify a nondefault VPC ID, note the
+  following: It must belong to a VPC in your account that is in the specified region.
+  You must specify a value for DefaultSubnetId. For more information on how to use
+  AWS OpsWorks with a VPC, see Running a Stack in a VPC. For more information on default
+  VPC and EC2 Classic, see Supported Platforms.\n  * `:attributes` - (Hash&lt;<String,String>)
+  One or more user-defined key/value pairs to be added to the stack attributes bag.\n
+  \ * `:service_role_arn` - *required* - (String) The stack AWS Identity and Access
+  Management (IAM) role, which allows AWS OpsWorks to work with AWS resources on your
+  behalf. You must set this parameter to the Amazon Resource Name (ARN) for an existing
+  IAM role. For more information about IAM ARNs, see Using Identifiers.\n  * `:default_instance_profile_arn`
+  - *required* - (String) The ARN of an IAM profile that is the default profile for
+  all of the stack's EC2 instances. For more information about IAM ARNs, see Using
+  Identifiers.\n  * `:default_os` - (String) The stack's default operating system,
+  which must be set to Amazon Linux or Ubuntu 12.04 LTS. The default option is Amazon
+  Linux.\n  * `:hostname_theme` - (String) The stack's host name theme, with spaces
+  are replaced by underscores. The theme is used to generate host names for the stack's
+  instances. By default, HostnameTheme is set to Layer_Dependent, which creates host
+  names by appending integers to the layer's short name. The other themes are: Baked_Goods
+  Clouds European_Cities Fruits Greek_Deities Legendary_Creatures_from_Japan Planets_and_Moons
+  Roman_Deities Scottish_Islands US_Cities Wild_Cats To obtain a generated host name,
+  call GetHostNameSuggestion, which returns a host name based on the current theme.\n
+  \ * `:default_availability_zone` - (String) The stack's default Availability Zone,
+  which must be in the specified region. For more information, see Regions and Endpoints.
+  If you also specify a value for DefaultSubnetId, the subnet must be in the same
+  zone. For more information, see the VpcId parameter description.\n  * `:default_subnet_id`
+  - (String) The stack's default subnet ID. All instances will be launched into this
+  subnet unless you specify otherwise when you create the instance. If you also specify
+  a value for DefaultAvailabilityZone, the subnet must be in that zone. For information
+  on default values and when this parameter is required, see the VpcId parameter description.\n
+  \ * `:custom_json` - (String) A string that contains user-defined, custom JSON.
+  It is used to override the corresponding default stack configuration JSON values.
+  The string should be in the following format and must escape characters such as
+  '\"'.: \"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\" For
+  more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration
+  JSON.\n  * `:configuration_manager` - (Hash) The configuration manager. When you
+  create a stack we recommend that you use the configuration manager to specify the
+  Chef version, 0.9 or 11.4. The default value is currently 0.9. However, we expect
+  to change the default value to 11.4 in September 2013.\n    * `:name` - (String)
+  The name. This parameter must be set to \"Chef\".\n    * `:version` - (String) The
+  Chef version. This parameter must be set to \"0.9\" or \"11.4\". The default value
+  is \"0.9\". However, we expect to change the default value to \"11.4\" in September
+  2013.\n  * `:use_custom_cookbooks` - (Boolean) Whether the stack uses custom cookbooks.\n
+  \ * `:custom_cookbooks_source` - (Hash) \n    * `:type` - (String) The repository
+  type.  Valid values include:\n      * `git`\n      * `svn`\n      * `archive`\n
+  \     * `s3`\n    * `:url` - (String) The source URL.\n    * `:username` - (String)
+  This parameter depends on the repository type. For Amazon S3 bundles, set Username
+  to the appropriate AWS access key. For HTTP bundles, Git repositories, and Subversion
+  repositories, set Username to the user name.\n    * `:password` - (String) This
+  parameter depends on the repository type. For Amazon S3 bundles, set Password to
+  the appropriate AWS secret key. For HTTP bundles, Git repositories, and Subversion
+  repositories, set Password to the password.\n    * `:ssh_key` - (String) The repository's
+  SSH key.\n    * `:revision` - (String) The application's version. AWS OpsWorks enables
+  you to easily deploy new versions of an application. One of the simplest approaches
+  is to have branches or revisions in your repository that represent different versions
+  that can potentially be deployed.\n  * `:default_ssh_key_name` - (String) A default
+  SSH key for the stack instances. You can override this value when you create or
+  update an instance.\n  * `:default_root_device_type` - (String) The default root
+  device type. This value is used by default for all instances in the cloned stack,
+  but you can override it when you create an instance. For more information, see Storage
+  for the Root Device.  Valid values include:\n    * `ebs`\n    * `instance-store`\n@return
   [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:elastic_ips` - (Array<Hash>)\n    * `:ip` - (String)\n
-  \   * `:name` - (String)\n    * `:domain` - (String)\n    * `:region` - (String)"
-:describe_elastic_load_balancers: "Calls the DescribeElasticLoadBalancers API operation.\n@param
-  [Hash] options\n  * `:stack_id` - (String) \n  * `:layer_ids` - (Array&lt;<String>)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:elastic_load_balancers` - (Array<Hash>)\n
-  \   * `:elastic_load_balancer_name` - (String)\n    * `:region` - (String)\n    *
-  `:dns_name` - (String)\n    * `:stack_id` - (String)\n    * `:layer_id` - (String)\n
-  \   * `:vpc_id` - (String)\n    * `:availability_zones` - (Array<String>)\n    *
-  `:ec_2_instance_ids` - (Array<String>)"
-:describe_instances: "Calls the DescribeInstances API operation.\n@param [Hash] options\n
-  \ * `:stack_id` - (String) \n  * `:layer_id` - (String) \n  * `:instance_ids` -
-  (Array&lt;<String>) \n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:instances` - (Array<Hash>)\n
-  \   * `:instance_id` - (String)\n    * `:ec2_instance_id` - (String)\n    * `:hostname`
-  - (String)\n    * `:stack_id` - (String)\n    * `:layer_ids` - (Array<String>)\n
-  \   * `:security_group_ids` - (Array<String>)\n    * `:instance_type` - (String)\n
-  \   * `:instance_profile_arn` - (String)\n    * `:status` - (String)\n    * `:os`
-  - (String)\n    * `:ami_id` - (String)\n    * `:availability_zone` - (String)\n
-  \   * `:public_dns` - (String)\n    * `:private_dns` - (String)\n    * `:public_ip`
-  - (String)\n    * `:private_ip` - (String)\n    * `:elastic_ip` - (String)\n    *
-  `:auto_scaling_type` - (String)\n    * `:ssh_key_name` - (String)\n    * `:ssh_host_rsa_key_fingerprint`
-  - (String)\n    * `:ssh_host_dsa_key_fingerprint` - (String)\n    * `:created_at`
-  - (String)\n    * `:last_service_error_id` - (String)\n    * `:architecture` - (String)\n
-  \   * `:root_device_type` - (String)\n    * `:root_device_volume_id` - (String)\n
-  \   * `:install_updates_on_boot` - (Boolean)"
-:describe_layers: "Calls the DescribeLayers API operation.\n@param [Hash] options\n
-  \ * `:stack_id` - *required* - (String) \n  * `:layer_ids` - (Array&lt;<String>)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:layers` - (Array<Hash>)\n    * `:stack_id`
-  - (String)\n    * `:layer_id` - (String)\n    * `:type` - (String)\n    * `:name`
-  - (String)\n    * `:shortname` - (String)\n    * `:attributes` - (Hash<String,String>)\n
-  \   * `:custom_instance_profile_arn` - (String)\n    * `:custom_security_group_ids`
-  - (Array<String>)\n    * `:default_security_group_names` - (Array<String>)\n    *
-  `:packages` - (Array<String>)\n    * `:volume_configurations` - (Array<Hash>)\n
-  \     * `:mount_point` - (String)\n      * `:raid_level` - (Integer)\n      * `:number_of_disks`
-  - (Integer)\n      * `:size` - (Integer)\n    * `:enable_auto_healing` - (Boolean)\n
-  \   * `:auto_assign_elastic_ips` - (Boolean)\n    * `:default_recipes` - (Hash)\n
-  \     * `:setup` - (Array<String>)\n      * `:configure` - (Array<String>)\n      *
-  `:deploy` - (Array<String>)\n      * `:undeploy` - (Array<String>)\n      * `:shutdown`
-  - (Array<String>)\n    * `:custom_recipes` - (Hash)\n      * `:setup` - (Array<String>)\n
-  \     * `:configure` - (Array<String>)\n      * `:deploy` - (Array<String>)\n      *
-  `:undeploy` - (Array<String>)\n      * `:shutdown` - (Array<String>)\n    * `:created_at`
-  - (String)\n    * `:install_updates_on_boot` - (Boolean)"
-:describe_load_based_auto_scaling: "Calls the DescribeLoadBasedAutoScaling API operation.\n@param
-  [Hash] options\n  * `:layer_ids` - *required* - (Array&lt;<String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:load_based_auto_scaling_configurations` - (Array<Hash>)\n    * `:layer_id`
-  - (String)\n    * `:enable` - (Boolean)\n    * `:up_scaling` - (Hash)\n      * `:instance_count`
-  - (Integer)\n      * `:thresholds_wait_time` - (Integer)\n      * `:ignore_metrics_time`
-  - (Integer)\n      * `:cpu_threshold` - (Numeric)\n      * `:memory_threshold` -
-  (Numeric)\n      * `:load_threshold` - (Numeric)\n    * `:down_scaling` - (Hash)\n
-  \     * `:instance_count` - (Integer)\n      * `:thresholds_wait_time` - (Integer)\n
-  \     * `:ignore_metrics_time` - (Integer)\n      * `:cpu_threshold` - (Numeric)\n
-  \     * `:memory_threshold` - (Numeric)\n      * `:load_threshold` - (Numeric)"
-:describe_permissions: "Calls the DescribePermissions API operation.\n@param [Hash]
-  options\n  * `:iam_user_arn` - *required* - (String) \n  * `:stack_id` - *required*
-  - (String) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:permissions` - (Array<Hash>)\n
-  \   * `:stack_id` - (String)\n    * `:iam_user_arn` - (String)\n    * `:allow_ssh`
-  - (Boolean)\n    * `:allow_sudo` - (Boolean)"
-:describe_raid_arrays: "Calls the DescribeRaidArrays API operation.\n@param [Hash]
-  options\n  * `:instance_id` - (String) \n  * `:raid_array_ids` - (Array&lt;<String>)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:raid_arrays` - (Array<Hash>)\n    * `:raid_array_id`
-  - (String)\n    * `:instance_id` - (String)\n    * `:name` - (String)\n    * `:raid_level`
-  - (Integer)\n    * `:number_of_disks` - (Integer)\n    * `:size` - (Integer)\n    *
-  `:device` - (String)\n    * `:mount_point` - (String)\n    * `:availability_zone`
-  - (String)\n    * `:created_at` - (String)"
-:describe_service_errors: "Calls the DescribeServiceErrors API operation.\n@param
-  [Hash] options\n  * `:stack_id` - (String) \n  * `:instance_id` - (String) \n  *
-  `:service_error_ids` - (Array&lt;<String>) \n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:service_errors` - (Array<Hash>)\n    * `:service_error_id` - (String)\n    * `:stack_id`
-  - (String)\n    * `:instance_id` - (String)\n    * `:type` - (String)\n    * `:message`
-  - (String)\n    * `:created_at` - (String)"
-:describe_stacks: "Calls the DescribeStacks API operation.\n@param [Hash] options\n
-  \ * `:stack_ids` - (Array&lt;<String>) \n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:stacks`
-  - (Array<Hash>)\n    * `:stack_id` - (String)\n    * `:name` - (String)\n    * `:region`
-  - (String)\n    * `:attributes` - (Hash<String,String>)\n    * `:service_role_arn`
-  - (String)\n    * `:default_instance_profile_arn` - (String)\n    * `:default_os`
-  - (String)\n    * `:hostname_theme` - (String)\n    * `:default_availability_zone`
-  - (String)\n    * `:custom_json` - (String)\n    * `:configuration_manager` - (Hash)\n
-  \     * `:name` - (String)\n      * `:version` - (String)\n    * `:use_custom_cookbooks`
-  - (Boolean)\n    * `:custom_cookbooks_source` - (Hash)\n      * `:type` - (String)\n
-  \     * `:url` - (String)\n      * `:username` - (String)\n      * `:password` -
-  (String)\n      * `:ssh_key` - (String)\n      * `:revision` - (String)\n    * `:default_ssh_key_name`
-  - (String)\n    * `:created_at` - (String)\n    * `:default_root_device_type` -
-  (String)"
-:describe_time_based_auto_scaling: "Calls the DescribeTimeBasedAutoScaling API operation.\n@param
-  [Hash] options\n  * `:instance_ids` - *required* - (Array&lt;<String>) \n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:time_based_auto_scaling_configurations` - (Array<Hash>)\n
-  \   * `:instance_id` - (String)\n    * `:auto_scaling_schedule` - (Hash)\n      *
-  `:monday` - (Hash<String,String>)\n      * `:tuesday` - (Hash<String,String>)\n
-  \     * `:wednesday` - (Hash<String,String>)\n      * `:thursday` - (Hash<String,String>)\n
-  \     * `:friday` - (Hash<String,String>)\n      * `:saturday` - (Hash<String,String>)\n
-  \     * `:sunday` - (Hash<String,String>)"
-:describe_user_profiles: "Calls the DescribeUserProfiles API operation.\n@param [Hash]
-  options\n  * `:iam_user_arns` - *required* - (Array&lt;<String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:user_profiles` - (Array<Hash>)\n    * `:iam_user_arn` - (String)\n    * `:name`
-  - (String)\n    * `:ssh_username` - (String)\n    * `:ssh_public_key` - (String)"
-:describe_volumes: "Calls the DescribeVolumes API operation.\n@param [Hash] options\n
-  \ * `:instance_id` - (String) \n  * `:raid_array_id` - (String) \n  * `:volume_ids`
-  - (Array&lt;<String>) \n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:volumes` - (Array<Hash>)\n
-  \   * `:volume_id` - (String)\n    * `:ec2_volume_id` - (String)\n    * `:name`
-  - (String)\n    * `:raid_array_id` - (String)\n    * `:instance_id` - (String)\n
-  \   * `:status` - (String)\n    * `:size` - (Integer)\n    * `:device` - (String)\n
-  \   * `:mount_point` - (String)\n    * `:region` - (String)\n    * `:availability_zone`
-  - (String)"
-:detach_elastic_load_balancer: "Calls the DetachElasticLoadBalancer API operation.\n@param
-  [Hash] options\n  * `:elastic_load_balancer_name` - *required* - (String) \n  *
-  `:layer_id` - *required* - (String) \n@return [Core::Response]"
-:get_hostname_suggestion: "Calls the GetHostnameSuggestion API operation.\n@param
-  [Hash] options\n  * `:layer_id` - *required* - (String) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:layer_id` - (String)\n  * `:hostname` - (String)"
-:reboot_instance: "Calls the RebootInstance API operation.\n@param [Hash] options\n
-  \ * `:instance_id` - *required* - (String) \n@return [Core::Response]"
-:set_load_based_auto_scaling: "Calls the SetLoadBasedAutoScaling API operation.\n@param
-  [Hash] options\n  * `:layer_id` - *required* - (String) \n  * `:enable` - (Boolean)
-  \n  * `:up_scaling` - (Hash) \n    * `:instance_count` - (Integer) \n    * `:thresholds_wait_time`
-  - (Integer) \n    * `:ignore_metrics_time` - (Integer) \n    * `:cpu_threshold`
-  - (Float) \n    * `:memory_threshold` - (Float) \n    * `:load_threshold` - (Float)
-  \n  * `:down_scaling` - (Hash) \n    * `:instance_count` - (Integer) \n    * `:thresholds_wait_time`
-  - (Integer) \n    * `:ignore_metrics_time` - (Integer) \n    * `:cpu_threshold`
-  - (Float) \n    * `:memory_threshold` - (Float) \n    * `:load_threshold` - (Float)
-  \n@return [Core::Response]"
-:set_permission: "Calls the SetPermission API operation.\n@param [Hash] options\n
-  \ * `:stack_id` - *required* - (String) \n  * `:iam_user_arn` - *required* - (String)
-  \n  * `:allow_ssh` - (Boolean) \n  * `:allow_sudo` - (Boolean) \n@return [Core::Response]"
-:set_time_based_auto_scaling: "Calls the SetTimeBasedAutoScaling API operation.\n@param
-  [Hash] options\n  * `:instance_id` - *required* - (String) \n  * `:auto_scaling_schedule`
-  - (Hash) \n    * `:monday` - (Hash&lt;<String,String>) \n    * `:tuesday` - (Hash&lt;<String,String>)
-  \n    * `:wednesday` - (Hash&lt;<String,String>) \n    * `:thursday` - (Hash&lt;<String,String>)
-  \n    * `:friday` - (Hash&lt;<String,String>) \n    * `:saturday` - (Hash&lt;<String,String>)
-  \n    * `:sunday` - (Hash&lt;<String,String>) \n@return [Core::Response]"
-:start_instance: "Calls the StartInstance API operation.\n@param [Hash] options\n
-  \ * `:instance_id` - *required* - (String) \n@return [Core::Response]"
-:start_stack: "Calls the StartStack API operation.\n@param [Hash] options\n  * `:stack_id`
-  - *required* - (String) \n@return [Core::Response]"
-:stop_instance: "Calls the StopInstance API operation.\n@param [Hash] options\n  *
-  `:instance_id` - *required* - (String) \n@return [Core::Response]"
-:stop_stack: "Calls the StopStack API operation.\n@param [Hash] options\n  * `:stack_id`
-  - *required* - (String) \n@return [Core::Response]"
-:update_app: "Calls the UpdateApp API operation.\n@param [Hash] options\n  * `:app_id`
-  - *required* - (String) \n  * `:name` - (String) \n  * `:description` - (String)
-  \n  * `:type` - (String) Valid values include:\n    * `rails`\n    * `php`\n    *
-  `nodejs`\n    * `static`\n    * `other`\n  * `:app_source` - (Hash) \n    * `:type`
-  - (String) Valid values include:\n      * `git`\n      * `svn`\n      * `archive`\n
-  \     * `s3`\n    * `:url` - (String) \n    * `:username` - (String) \n    * `:password`
-  - (String) \n    * `:ssh_key` - (String) \n    * `:revision` - (String) \n  * `:domains`
-  - (Array&lt;<String>) \n  * `:enable_ssl` - (Boolean) \n  * `:ssl_configuration`
-  - (Hash) \n    * `:certificate` - *required* - (String) \n    * `:private_key` -
-  *required* - (String) \n    * `:chain` - (String) \n  * `:attributes` - (Hash&lt;<String,String>)
-  \n@return [Core::Response]"
-:update_instance: "Calls the UpdateInstance API operation.\n@param [Hash] options\n
-  \ * `:instance_id` - *required* - (String) \n  * `:layer_ids` - (Array&lt;<String>)
-  \n  * `:instance_type` - (String) \n  * `:auto_scaling_type` - (String) Valid values
-  include:\n    * `load`\n    * `timer`\n  * `:hostname` - (String) \n  * `:os` -
-  (String) \n  * `:ami_id` - (String) \n  * `:ssh_key_name` - (String) \n  * `:architecture`
-  - (String) Valid values include:\n    * `x86_64`\n    * `i386`\n  * `:install_updates_on_boot`
-  - (Boolean) \n@return [Core::Response]"
-:update_layer: "Calls the UpdateLayer API operation.\n@param [Hash] options\n  * `:layer_id`
-  - *required* - (String) \n  * `:name` - (String) \n  * `:shortname` - (String) \n
-  \ * `:attributes` - (Hash&lt;<String,String>) \n  * `:custom_instance_profile_arn`
-  - (String) \n  * `:custom_security_group_ids` - (Array&lt;<String>) \n  * `:packages`
-  - (Array&lt;<String>) \n  * `:volume_configurations` - (Array&lt;<Hash>) \n    *
-  `:mount_point` - *required* - (String) \n    * `:raid_level` - (Integer) \n    *
-  `:number_of_disks` - *required* - (Integer) \n    * `:size` - *required* - (Integer)
-  \n  * `:enable_auto_healing` - (Boolean) \n  * `:auto_assign_elastic_ips` - (Boolean)
-  \n  * `:custom_recipes` - (Hash) \n    * `:setup` - (Array&lt;<String>) \n    *
-  `:configure` - (Array&lt;<String>) \n    * `:deploy` - (Array&lt;<String>) \n    *
-  `:undeploy` - (Array&lt;<String>) \n    * `:shutdown` - (Array&lt;<String>) \n  *
-  `:install_updates_on_boot` - (Boolean) \n@return [Core::Response]"
+  following structure:\n\n  * `:stack_id` - (String)"
+:create_user_profile: |-
+  Calls the CreateUserProfile API operation.
+  @param [Hash] options
+    * `:iam_user_arn` - *required* - (String) The user's IAM ARN.
+    * `:ssh_username` - (String) The user's SSH user name.
+    * `:ssh_public_key` - (String) The user's public SSH key.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:iam_user_arn` - (String)
+:delete_app: |-
+  Calls the DeleteApp API operation.
+  @param [Hash] options
+    * `:app_id` - *required* - (String) The app ID.
+  @return [Core::Response]
+:delete_instance: |-
+  Calls the DeleteInstance API operation.
+  @param [Hash] options
+    * `:instance_id` - *required* - (String) The instance ID.
+    * `:delete_elastic_ip` - (Boolean) Whether to delete the instance Elastic IP address.
+    * `:delete_volumes` - (Boolean) Whether to delete the instance Amazon EBS volumes.
+  @return [Core::Response]
+:delete_layer: |-
+  Calls the DeleteLayer API operation.
+  @param [Hash] options
+    * `:layer_id` - *required* - (String) The layer ID.
+  @return [Core::Response]
+:delete_stack: |-
+  Calls the DeleteStack API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+  @return [Core::Response]
+:delete_user_profile: |-
+  Calls the DeleteUserProfile API operation.
+  @param [Hash] options
+    * `:iam_user_arn` - *required* - (String) The user's IAM ARN.
+  @return [Core::Response]
+:describe_apps: |-
+  Calls the DescribeApps API operation.
+  @param [Hash] options
+    * `:stack_id` - (String) The app stack ID. If you use this parameter, DescribeApps returns a description of the apps in the specified stack.
+    * `:app_ids` - (Array&lt;<String>) An array of app IDs for the apps to be described. If you use this parameter, DescribeApps returns a description of the specified apps. Otherwise, it returns a description of every app.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:apps` - (Array<Hash>)
+      * `:app_id` - (String)
+      * `:stack_id` - (String)
+      * `:shortname` - (String)
+      * `:name` - (String)
+      * `:description` - (String)
+      * `:type` - (String)
+      * `:app_source` - (Hash)
+        * `:type` - (String)
+        * `:url` - (String)
+        * `:username` - (String)
+        * `:password` - (String)
+        * `:ssh_key` - (String)
+        * `:revision` - (String)
+      * `:domains` - (Array<String>)
+      * `:enable_ssl` - (Boolean)
+      * `:ssl_configuration` - (Hash)
+        * `:certificate` - (String)
+        * `:private_key` - (String)
+        * `:chain` - (String)
+      * `:attributes` - (Hash<String,String>)
+      * `:created_at` - (String)
+:describe_commands: |-
+  Calls the DescribeCommands API operation.
+  @param [Hash] options
+    * `:deployment_id` - (String) The deployment ID. If you include this parameter, DescribeCommands returns a description of the commands associated with the specified deployment.
+    * `:instance_id` - (String) The instance ID. If you include this parameter, DescribeCommands returns a description of the commands associated with the specified instance.
+    * `:command_ids` - (Array&lt;<String>) An array of command IDs. If you include this parameter, DescribeCommands returns a description of the specified commands. Otherwise, it returns a description of every command.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:commands` - (Array<Hash>)
+      * `:command_id` - (String)
+      * `:instance_id` - (String)
+      * `:deployment_id` - (String)
+      * `:created_at` - (String)
+      * `:acknowledged_at` - (String)
+      * `:completed_at` - (String)
+      * `:status` - (String)
+      * `:exit_code` - (Integer)
+      * `:log_url` - (String)
+      * `:type` - (String)
+:describe_deployments: |-
+  Calls the DescribeDeployments API operation.
+  @param [Hash] options
+    * `:stack_id` - (String) The stack ID. If you include this parameter, DescribeDeployments returns a description of the commands associated with the specified stack.
+    * `:app_id` - (String) The app ID. If you include this parameter, DescribeDeployments returns a description of the commands associated with the specified app.
+    * `:deployment_ids` - (Array&lt;<String>) An array of deployment IDs to be described. If you include this parameter, DescribeDeployments returns a description of the specified deployments. Otherwise, it returns a description of every deployment.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:deployments` - (Array<Hash>)
+      * `:deployment_id` - (String)
+      * `:stack_id` - (String)
+      * `:app_id` - (String)
+      * `:created_at` - (String)
+      * `:completed_at` - (String)
+      * `:duration` - (Integer)
+      * `:iam_user_arn` - (String)
+      * `:comment` - (String)
+      * `:command` - (Hash)
+        * `:name` - (String)
+        * `:args` - (Hash<String,Hash>)
+          * `:value` - (Array<String>)
+      * `:status` - (String)
+      * `:custom_json` - (String)
+      * `:instance_ids` - (Array<String>)
+:describe_elastic_ips: |-
+  Calls the DescribeElasticIps API operation.
+  @param [Hash] options
+    * `:instance_id` - (String) The instance ID. If you include this parameter, DescribeElasticIps returns a description of the Elastic IP addresses associated with the specified instance.
+    * `:ips` - (Array&lt;<String>) An array of Elastic IP addresses to be described. If you include this parameter, DescribeElasticIps returns a description of the specified Elastic IP addresses. Otherwise, it returns a description of every Elastic IP address.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:elastic_ips` - (Array<Hash>)
+      * `:ip` - (String)
+      * `:name` - (String)
+      * `:domain` - (String)
+      * `:region` - (String)
+:describe_elastic_load_balancers: |-
+  Calls the DescribeElasticLoadBalancers API operation.
+  @param [Hash] options
+    * `:stack_id` - (String) A stack ID. The action describes the Elastic Load Balancing instances for the stack.
+    * `:layer_ids` - (Array&lt;<String>) A list of layer IDs. The action describes the Elastic Load Balancing instances for the specified layers.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:elastic_load_balancers` - (Array<Hash>)
+      * `:elastic_load_balancer_name` - (String)
+      * `:region` - (String)
+      * `:dns_name` - (String)
+      * `:stack_id` - (String)
+      * `:layer_id` - (String)
+      * `:vpc_id` - (String)
+      * `:availability_zones` - (Array<String>)
+      * `:subnet_ids` - (Array<String>)
+      * `:ec_2_instance_ids` - (Array<String>)
+:describe_instances: |-
+  Calls the DescribeInstances API operation.
+  @param [Hash] options
+    * `:stack_id` - (String) A stack ID. If you use this parameter, DescribeInstances returns descriptions of the instances associated with the specified stack.
+    * `:layer_id` - (String) A layer ID. If you use this parameter, DescribeInstances returns descriptions of the instances associated with the specified layer.
+    * `:instance_ids` - (Array&lt;<String>) An array of instance IDs to be described. If you use this parameter, DescribeInstances returns a description of the specified instances. Otherwise, it returns a description of every instance.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:instances` - (Array<Hash>)
+      * `:instance_id` - (String)
+      * `:ec2_instance_id` - (String)
+      * `:hostname` - (String)
+      * `:stack_id` - (String)
+      * `:layer_ids` - (Array<String>)
+      * `:security_group_ids` - (Array<String>)
+      * `:instance_type` - (String)
+      * `:instance_profile_arn` - (String)
+      * `:status` - (String)
+      * `:os` - (String)
+      * `:ami_id` - (String)
+      * `:availability_zone` - (String)
+      * `:subnet_id` - (String)
+      * `:public_dns` - (String)
+      * `:private_dns` - (String)
+      * `:public_ip` - (String)
+      * `:private_ip` - (String)
+      * `:elastic_ip` - (String)
+      * `:auto_scaling_type` - (String)
+      * `:ssh_key_name` - (String)
+      * `:ssh_host_rsa_key_fingerprint` - (String)
+      * `:ssh_host_dsa_key_fingerprint` - (String)
+      * `:created_at` - (String)
+      * `:last_service_error_id` - (String)
+      * `:architecture` - (String)
+      * `:root_device_type` - (String)
+      * `:root_device_volume_id` - (String)
+      * `:install_updates_on_boot` - (Boolean)
+:describe_layers: |-
+  Calls the DescribeLayers API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+    * `:layer_ids` - (Array&lt;<String>) An array of layer IDs that specify the layers to be described. If you omit this parameter, DescribeLayers returns a description of every layer in the specified stack.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:layers` - (Array<Hash>)
+      * `:stack_id` - (String)
+      * `:layer_id` - (String)
+      * `:type` - (String)
+      * `:name` - (String)
+      * `:shortname` - (String)
+      * `:attributes` - (Hash<String,String>)
+      * `:custom_instance_profile_arn` - (String)
+      * `:custom_security_group_ids` - (Array<String>)
+      * `:default_security_group_names` - (Array<String>)
+      * `:packages` - (Array<String>)
+      * `:volume_configurations` - (Array<Hash>)
+        * `:mount_point` - (String)
+        * `:raid_level` - (Integer)
+        * `:number_of_disks` - (Integer)
+        * `:size` - (Integer)
+      * `:enable_auto_healing` - (Boolean)
+      * `:auto_assign_elastic_ips` - (Boolean)
+      * `:default_recipes` - (Hash)
+        * `:setup` - (Array<String>)
+        * `:configure` - (Array<String>)
+        * `:deploy` - (Array<String>)
+        * `:undeploy` - (Array<String>)
+        * `:shutdown` - (Array<String>)
+      * `:custom_recipes` - (Hash)
+        * `:setup` - (Array<String>)
+        * `:configure` - (Array<String>)
+        * `:deploy` - (Array<String>)
+        * `:undeploy` - (Array<String>)
+        * `:shutdown` - (Array<String>)
+      * `:created_at` - (String)
+      * `:install_updates_on_boot` - (Boolean)
+:describe_load_based_auto_scaling: |-
+  Calls the DescribeLoadBasedAutoScaling API operation.
+  @param [Hash] options
+    * `:layer_ids` - *required* - (Array&lt;<String>) An array of layer IDs.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:load_based_auto_scaling_configurations` - (Array<Hash>)
+      * `:layer_id` - (String)
+      * `:enable` - (Boolean)
+      * `:up_scaling` - (Hash)
+        * `:instance_count` - (Integer)
+        * `:thresholds_wait_time` - (Integer)
+        * `:ignore_metrics_time` - (Integer)
+        * `:cpu_threshold` - (Numeric)
+        * `:memory_threshold` - (Numeric)
+        * `:load_threshold` - (Numeric)
+      * `:down_scaling` - (Hash)
+        * `:instance_count` - (Integer)
+        * `:thresholds_wait_time` - (Integer)
+        * `:ignore_metrics_time` - (Integer)
+        * `:cpu_threshold` - (Numeric)
+        * `:memory_threshold` - (Numeric)
+        * `:load_threshold` - (Numeric)
+:describe_permissions: |-
+  Calls the DescribePermissions API operation.
+  @param [Hash] options
+    * `:iam_user_arn` - *required* - (String) The user's IAM ARN. For more information about IAM ARNs, see Using Identifiers.
+    * `:stack_id` - *required* - (String) The stack ID.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:permissions` - (Array<Hash>)
+      * `:stack_id` - (String)
+      * `:iam_user_arn` - (String)
+      * `:allow_ssh` - (Boolean)
+      * `:allow_sudo` - (Boolean)
+:describe_raid_arrays: |-
+  Calls the DescribeRaidArrays API operation.
+  @param [Hash] options
+    * `:instance_id` - (String) The instance ID. If you use this parameter, DescribeRaidArrays returns descriptions of the RAID arrays associated with the specified instance.
+    * `:raid_array_ids` - (Array&lt;<String>) An array of RAID array IDs. If you use this parameter, DescribeRaidArrays returns descriptions of the specified arrays. Otherwise, it returns a description of every array.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:raid_arrays` - (Array<Hash>)
+      * `:raid_array_id` - (String)
+      * `:instance_id` - (String)
+      * `:name` - (String)
+      * `:raid_level` - (Integer)
+      * `:number_of_disks` - (Integer)
+      * `:size` - (Integer)
+      * `:device` - (String)
+      * `:mount_point` - (String)
+      * `:availability_zone` - (String)
+      * `:created_at` - (String)
+:describe_service_errors: |-
+  Calls the DescribeServiceErrors API operation.
+  @param [Hash] options
+    * `:stack_id` - (String) The stack ID. If you use this parameter, DescribeServiceErrors returns descriptions of the errors associated with the specified stack.
+    * `:instance_id` - (String) The instance ID. If you use this parameter, DescribeServiceErrors returns descriptions of the errors associated with the specified instance.
+    * `:service_error_ids` - (Array&lt;<String>) An array of service error IDs. If you use this parameter, DescribeServiceErrors returns descriptions of the specified errors. Otherwise, it returns a description of every error.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:service_errors` - (Array<Hash>)
+      * `:service_error_id` - (String)
+      * `:stack_id` - (String)
+      * `:instance_id` - (String)
+      * `:type` - (String)
+      * `:message` - (String)
+      * `:created_at` - (String)
+:describe_stacks: |-
+  Calls the DescribeStacks API operation.
+  @param [Hash] options
+    * `:stack_ids` - (Array&lt;<String>) An array of stack IDs that specify the stacks to be described. If you omit this parameter, DescribeStacks returns a description of every stack.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:stacks` - (Array<Hash>)
+      * `:stack_id` - (String)
+      * `:name` - (String)
+      * `:region` - (String)
+      * `:vpc_id` - (String)
+      * `:attributes` - (Hash<String,String>)
+      * `:service_role_arn` - (String)
+      * `:default_instance_profile_arn` - (String)
+      * `:default_os` - (String)
+      * `:hostname_theme` - (String)
+      * `:default_availability_zone` - (String)
+      * `:default_subnet_id` - (String)
+      * `:custom_json` - (String)
+      * `:configuration_manager` - (Hash)
+        * `:name` - (String)
+        * `:version` - (String)
+      * `:use_custom_cookbooks` - (Boolean)
+      * `:custom_cookbooks_source` - (Hash)
+        * `:type` - (String)
+        * `:url` - (String)
+        * `:username` - (String)
+        * `:password` - (String)
+        * `:ssh_key` - (String)
+        * `:revision` - (String)
+      * `:default_ssh_key_name` - (String)
+      * `:created_at` - (String)
+      * `:default_root_device_type` - (String)
+:describe_time_based_auto_scaling: |-
+  Calls the DescribeTimeBasedAutoScaling API operation.
+  @param [Hash] options
+    * `:instance_ids` - *required* - (Array&lt;<String>) An array of instance IDs.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:time_based_auto_scaling_configurations` - (Array<Hash>)
+      * `:instance_id` - (String)
+      * `:auto_scaling_schedule` - (Hash)
+        * `:monday` - (Hash<String,String>)
+        * `:tuesday` - (Hash<String,String>)
+        * `:wednesday` - (Hash<String,String>)
+        * `:thursday` - (Hash<String,String>)
+        * `:friday` - (Hash<String,String>)
+        * `:saturday` - (Hash<String,String>)
+        * `:sunday` - (Hash<String,String>)
+:describe_user_profiles: |-
+  Calls the DescribeUserProfiles API operation.
+  @param [Hash] options
+    * `:iam_user_arns` - *required* - (Array&lt;<String>) An array of IAM user ARNs that identify the users to be described.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:user_profiles` - (Array<Hash>)
+      * `:iam_user_arn` - (String)
+      * `:name` - (String)
+      * `:ssh_username` - (String)
+      * `:ssh_public_key` - (String)
+:describe_volumes: |-
+  Calls the DescribeVolumes API operation.
+  @param [Hash] options
+    * `:instance_id` - (String) The instance ID. If you use this parameter, DescribeVolumes returns descriptions of the volumes associated with the specified instance.
+    * `:raid_array_id` - (String) The RAID array ID. If you use this parameter, DescribeVolumes returns descriptions of the volumes associated with the specified RAID array.
+    * `:volume_ids` - (Array&lt;<String>) Am array of volume IDs. If you use this parameter, DescribeVolumes returns descriptions of the specified volumes. Otherwise, it returns a description of every volume.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:volumes` - (Array<Hash>)
+      * `:volume_id` - (String)
+      * `:ec2_volume_id` - (String)
+      * `:name` - (String)
+      * `:raid_array_id` - (String)
+      * `:instance_id` - (String)
+      * `:status` - (String)
+      * `:size` - (Integer)
+      * `:device` - (String)
+      * `:mount_point` - (String)
+      * `:region` - (String)
+      * `:availability_zone` - (String)
+:detach_elastic_load_balancer: |-
+  Calls the DetachElasticLoadBalancer API operation.
+  @param [Hash] options
+    * `:elastic_load_balancer_name` - *required* - (String) The Elastic Load Balancing instance's name.
+    * `:layer_id` - *required* - (String) The ID of the layer that the Elastic Load Balancing instance is attached to.
+  @return [Core::Response]
+:get_hostname_suggestion: |-
+  Calls the GetHostnameSuggestion API operation.
+  @param [Hash] options
+    * `:layer_id` - *required* - (String) The layer ID.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:layer_id` - (String)
+    * `:hostname` - (String)
+:reboot_instance: |-
+  Calls the RebootInstance API operation.
+  @param [Hash] options
+    * `:instance_id` - *required* - (String) The instance ID.
+  @return [Core::Response]
+:set_load_based_auto_scaling: |-
+  Calls the SetLoadBasedAutoScaling API operation.
+  @param [Hash] options
+    * `:layer_id` - *required* - (String) The layer ID.
+    * `:enable` - (Boolean) Enables load-based auto scaling for the layer.
+    * `:up_scaling` - (Hash) An AutoScalingThresholds object with the upscaling threshold configuration. If the load exceeds these thresholds for a specified amount of time, AWS OpsWorks starts a specified number of instances.
+      * `:instance_count` - (Integer) The number of instances to add or remove when the load exceeds a threshold.
+      * `:thresholds_wait_time` - (Integer) The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
+      * `:ignore_metrics_time` - (Integer) The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks should ignore metrics and not raise any additional scaling events. For example, AWS OpsWorks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. IgnoreMetricsTime allows you to direct AWS OpsWorks to not raise any scaling events long enough to get the new instances online.
+      * `:cpu_threshold` - (Float) The CPU utilization threshold, as a percent of the available CPU.
+      * `:memory_threshold` - (Float) The memory utilization threshold, as a percent of the available memory.
+      * `:load_threshold` - (Float) The load threshold. For more information about how load is computed, see Load (computing).
+    * `:down_scaling` - (Hash) An AutoScalingThresholds object with the downscaling threshold configuration. If the load falls below these thresholds for a specified amount of time, AWS OpsWorks stops a specified number of instances.
+      * `:instance_count` - (Integer) The number of instances to add or remove when the load exceeds a threshold.
+      * `:thresholds_wait_time` - (Integer) The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
+      * `:ignore_metrics_time` - (Integer) The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks should ignore metrics and not raise any additional scaling events. For example, AWS OpsWorks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. IgnoreMetricsTime allows you to direct AWS OpsWorks to not raise any scaling events long enough to get the new instances online.
+      * `:cpu_threshold` - (Float) The CPU utilization threshold, as a percent of the available CPU.
+      * `:memory_threshold` - (Float) The memory utilization threshold, as a percent of the available memory.
+      * `:load_threshold` - (Float) The load threshold. For more information about how load is computed, see Load (computing).
+  @return [Core::Response]
+:set_permission: |-
+  Calls the SetPermission API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+    * `:iam_user_arn` - *required* - (String) The user's IAM ARN.
+    * `:allow_ssh` - (Boolean) The user is allowed to use SSH to communicate with the instance.
+    * `:allow_sudo` - (Boolean) The user is allowed to use sudo to elevate privileges.
+  @return [Core::Response]
+:set_time_based_auto_scaling: |-
+  Calls the SetTimeBasedAutoScaling API operation.
+  @param [Hash] options
+    * `:instance_id` - *required* - (String) The instance ID.
+    * `:auto_scaling_schedule` - (Hash) An AutoScalingSchedule with the instance schedule.
+      * `:monday` - (Hash&lt;<String,String>) The schedule for Monday.
+      * `:tuesday` - (Hash&lt;<String,String>) The schedule for Tuesday.
+      * `:wednesday` - (Hash&lt;<String,String>) The schedule for Wednesday.
+      * `:thursday` - (Hash&lt;<String,String>) The schedule for Thursday.
+      * `:friday` - (Hash&lt;<String,String>) The schedule for Friday.
+      * `:saturday` - (Hash&lt;<String,String>) The schedule for Saturday.
+      * `:sunday` - (Hash&lt;<String,String>) The schedule for Sunday.
+  @return [Core::Response]
+:start_instance: |-
+  Calls the StartInstance API operation.
+  @param [Hash] options
+    * `:instance_id` - *required* - (String) The instance ID.
+  @return [Core::Response]
+:start_stack: |-
+  Calls the StartStack API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+  @return [Core::Response]
+:stop_instance: |-
+  Calls the StopInstance API operation.
+  @param [Hash] options
+    * `:instance_id` - *required* - (String) The instance ID.
+  @return [Core::Response]
+:stop_stack: |-
+  Calls the StopStack API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+  @return [Core::Response]
+:update_app: |-
+  Calls the UpdateApp API operation.
+  @param [Hash] options
+    * `:app_id` - *required* - (String) The app ID.
+    * `:name` - (String) The app name.
+    * `:description` - (String) A description of the app.
+    * `:type` - (String) The app type.  Valid values include:
+      * `rails`
+      * `php`
+      * `nodejs`
+      * `static`
+      * `other`
+    * `:app_source` - (Hash) A Source object that specifies the app repository.
+      * `:type` - (String) The repository type.  Valid values include:
+        * `git`
+        * `svn`
+        * `archive`
+        * `s3`
+      * `:url` - (String) The source URL.
+      * `:username` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Username to the appropriate AWS access key. For HTTP bundles, Git repositories, and Subversion repositories, set Username to the user name.
+      * `:password` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Password to the appropriate AWS secret key. For HTTP bundles, Git repositories, and Subversion repositories, set Password to the password.
+      * `:ssh_key` - (String) The repository's SSH key.
+      * `:revision` - (String) The application's version. AWS OpsWorks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
+    * `:domains` - (Array&lt;<String>) The app's virtual host settings, with multiple domains separated by commas. For example: 'www.example.com, example.com'
+    * `:enable_ssl` - (Boolean) Whether SSL is enabled for the app.
+    * `:ssl_configuration` - (Hash) An SslConfiguration object with the SSL configuration.
+      * `:certificate` - *required* - (String) The contents of the certificate's domain.crt file.
+      * `:private_key` - *required* - (String) The private key; the contents of the certificate's domain.kex file.
+      * `:chain` - (String) Optional. Can be used to specify an intermediate certificate authority key or client authentication.
+    * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value pairs to be added to the stack attributes bag.
+  @return [Core::Response]
+:update_instance: |-
+  Calls the UpdateInstance API operation.
+  @param [Hash] options
+    * `:instance_id` - *required* - (String) The instance ID.
+    * `:layer_ids` - (Array&lt;<String>) The instance's layer IDs.
+    * `:instance_type` - (String) The instance type. AWS OpsWorks supports all instance types except Cluster Compute, Cluster GPU, and High Memory Cluster. For more information, see Instance Families and Types. The parameter values that you use to specify the various types are in the API Name column of the Available Instance Types table.
+    * `:auto_scaling_type` - (String) The instance's auto scaling type, which has three possible values: AlwaysRunning: A 24/7 instance, which is not affected by auto scaling. TimeBasedAutoScaling: A time-based auto scaling instance, which is started and stopped based on a specified schedule. LoadBasedAutoScaling: A load-based auto scaling instance, which is started and stopped based on load metrics.  Valid values include:
+      * `load`
+      * `timer`
+    * `:hostname` - (String) The instance host name.
+    * `:os` - (String) The instance operating system, which must be set to one of the following. Standard operating systems: Amazon Linux or Ubuntu 12.04 LTS Custom AMIs: Custom The default option is Amazon Linux. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. For more information on the standard operating systems, see Operating SystemsFor more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.
+    * `:ami_id` - (String) A custom AMI ID to be used to create the instance. The AMI should be based on one of the standard AWS OpsWorks APIs: Amazon Linux or Ubuntu 12.04 LTS. For more information, see Instances
+    * `:ssh_key_name` - (String) The instance SSH key name.
+    * `:architecture` - (String) The instance architecture. Instance types do not necessarily support both architectures. For a list of the architectures that are supported by the different instance types, see Instance Families and Types.  Valid values include:
+      * `x86_64`
+      * `i386`
+    * `:install_updates_on_boot` - (Boolean) Whether to install operating system and package updates when the instance boots. The default value is  `true` . To control when updates are installed, set this value to  `false` . You must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the default value of  `true` , to ensure that your instances have the latest security updates.
+  @return [Core::Response]
+:update_layer: |-
+  Calls the UpdateLayer API operation.
+  @param [Hash] options
+    * `:layer_id` - *required* - (String) The layer ID.
+    * `:name` - (String) The layer name, which is used by the console.
+    * `:shortname` - (String) The layer short name, which is used internally by AWS OpsWorksand by Chef. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters and must be in the following format: /\A[a-z0-9\-\_\.]+\Z/.
+    * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value pairs to be added to the stack attributes bag.
+    * `:custom_instance_profile_arn` - (String) The ARN of an IAM profile to be used for all of the layer's EC2 instances. For more information about IAM ARNs, see Using Identifiers.
+    * `:custom_security_group_ids` - (Array&lt;<String>) An array containing the layer's custom security group IDs.
+    * `:packages` - (Array&lt;<String>) An array of Package objects that describe the layer's packages.
+    * `:volume_configurations` - (Array&lt;<Hash>) A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
+      * `:mount_point` - *required* - (String) The volume mount point. For example "/dev/sdh".
+      * `:raid_level` - (Integer) The volume RAID level.
+      * `:number_of_disks` - *required* - (Integer) The number of disks in the volume.
+      * `:size` - *required* - (Integer) The volume size.
+    * `:enable_auto_healing` - (Boolean) Whether to disable auto healing for the layer.
+    * `:auto_assign_elastic_ips` - (Boolean) Whether to automatically assign an Elastic IP address to the layer.
+    * `:custom_recipes` - (Hash) A LayerCustomRecipes object that specifies the layer's custom recipes.
+      * `:setup` - (Array&lt;<String>) An array of custom recipe names to be run following a setup event.
+      * `:configure` - (Array&lt;<String>) An array of custom recipe names to be run following a configure event.
+      * `:deploy` - (Array&lt;<String>) An array of custom recipe names to be run following a deploy event.
+      * `:undeploy` - (Array&lt;<String>) An array of custom recipe names to be run following a undeploy event.
+      * `:shutdown` - (Array&lt;<String>) An array of custom recipe names to be run following a shutdown event.
+    * `:install_updates_on_boot` - (Boolean) Whether to install operating system and package updates when the instance boots. The default value is  `true` . To control when updates are installed, set this value to  `false` . You must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the default value of  `true` , to ensure that your instances have the latest security updates.
+  @return [Core::Response]
 :update_stack: "Calls the UpdateStack API operation.\n@param [Hash] options\n  * `:stack_id`
-  - *required* - (String) \n  * `:name` - (String) \n  * `:attributes` - (Hash&lt;<String,String>)
-  \n  * `:service_role_arn` - (String) \n  * `:default_instance_profile_arn` - (String)
-  \n  * `:default_os` - (String) \n  * `:hostname_theme` - (String) \n  * `:default_availability_zone`
-  - (String) \n  * `:custom_json` - (String) \n  * `:configuration_manager` - (Hash)
-  \n    * `:name` - (String) \n    * `:version` - (String) \n  * `:use_custom_cookbooks`
-  - (Boolean) \n  * `:custom_cookbooks_source` - (Hash) \n    * `:type` - (String)
-  Valid values include:\n      * `git`\n      * `svn`\n      * `archive`\n      *
-  `s3`\n    * `:url` - (String) \n    * `:username` - (String) \n    * `:password`
-  - (String) \n    * `:ssh_key` - (String) \n    * `:revision` - (String) \n  * `:default_ssh_key_name`
-  - (String) \n  * `:default_root_device_type` - (String) Valid values include:\n
-  \   * `ebs`\n    * `instance-store`\n@return [Core::Response]"
-:update_user_profile: "Calls the UpdateUserProfile API operation.\n@param [Hash] options\n
-  \ * `:iam_user_arn` - *required* - (String) \n  * `:ssh_username` - (String) \n
-  \ * `:ssh_public_key` - (String) \n@return [Core::Response]"
+  - *required* - (String) The stack ID.\n  * `:name` - (String) The stack's new name.\n
+  \ * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value
+  pairs to be added to the stack attributes bag.\n  * `:service_role_arn` - (String)
+  The stack AWS Identity and Access Management (IAM) role, which allows AWS OpsWorks
+  to work with AWS resources on your behalf. You must set this parameter to the Amazon
+  Resource Name (ARN) for an existing IAM role. For more information about IAM ARNs,
+  see Using Identifiers. You must set this parameter to a valid service role ARN or
+  the action will fail; there is no default value. You can specify the stack's current
+  service role ARN, if you prefer, but you must do so explicitly.\n  * `:default_instance_profile_arn`
+  - (String) The ARN of an IAM profile that is the default profile for all of the
+  stack's EC2 instances. For more information about IAM ARNs, see Using Identifiers.\n
+  \ * `:default_os` - (String) The stack's default operating system, which must be
+  set to Amazon Linux or Ubuntu 12.04 LTS. The default option is Amazon Linux.\n  *
+  `:hostname_theme` - (String) The stack's new host name theme, with spaces are replaced
+  by underscores. The theme is used to generate host names for the stack's instances.
+  By default, HostnameTheme is set to Layer_Dependent, which creates host names by
+  appending integers to the layer's short name. The other themes are: Baked_Goods
+  Clouds European_Cities Fruits Greek_Deities Legendary_Creatures_from_Japan Planets_and_Moons
+  Roman_Deities Scottish_Islands US_Cities Wild_Cats To obtain a generated host name,
+  call GetHostNameSuggestion, which returns a host name based on the current theme.\n
+  \ * `:default_availability_zone` - (String) The stack's default Availability Zone,
+  which must be in the specified region. For more information, see Regions and Endpoints.
+  If you also specify a value for DefaultSubnetId, the subnet must be in the same
+  zone. For more information, see CreateStack.\n  * `:default_subnet_id` - (String)
+  The stack's default subnet ID. All instances will be launched into this subnet unless
+  you specify otherwise when you create the instance. If you also specify a value
+  for DefaultAvailabilityZone, the subnet must be in that zone. For more information,
+  see CreateStack.\n  * `:custom_json` - (String) A string that contains user-defined,
+  custom JSON. It is used to override the corresponding default stack configuration
+  JSON values. The string should be in the following format and must escape characters
+  such as '\"'.: \"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"
+  For more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration
+  JSON.\n  * `:configuration_manager` - (Hash) The configuration manager. When you
+  update a stack you can optionally use the configuration manager to specify the Chef
+  version, 0.9 or 11.4. If you omit this parameter, AWS OpsWorks does not change the
+  Chef version.\n    * `:name` - (String) The name. This parameter must be set to
+  \"Chef\".\n    * `:version` - (String) The Chef version. This parameter must be
+  set to \"0.9\" or \"11.4\". The default value is \"0.9\". However, we expect to
+  change the default value to \"11.4\" in September 2013.\n  * `:use_custom_cookbooks`
+  - (Boolean) Whether the stack uses custom cookbooks.\n  * `:custom_cookbooks_source`
+  - (Hash) \n    * `:type` - (String) The repository type.  Valid values include:\n
+  \     * `git`\n      * `svn`\n      * `archive`\n      * `s3`\n    * `:url` - (String)
+  The source URL.\n    * `:username` - (String) This parameter depends on the repository
+  type. For Amazon S3 bundles, set Username to the appropriate AWS access key. For
+  HTTP bundles, Git repositories, and Subversion repositories, set Username to the
+  user name.\n    * `:password` - (String) This parameter depends on the repository
+  type. For Amazon S3 bundles, set Password to the appropriate AWS secret key. For
+  HTTP bundles, Git repositories, and Subversion repositories, set Password to the
+  password.\n    * `:ssh_key` - (String) The repository's SSH key.\n    * `:revision`
+  - (String) The application's version. AWS OpsWorks enables you to easily deploy
+  new versions of an application. One of the simplest approaches is to have branches
+  or revisions in your repository that represent different versions that can potentially
+  be deployed.\n  * `:default_ssh_key_name` - (String) A default SSH key for the stack
+  instances. You can override this value when you create or update an instance.\n
+  \ * `:default_root_device_type` - (String) The default root device type. This value
+  is used by default for all instances in the cloned stack, but you can override it
+  when you create an instance. For more information, see Storage for the Root Device.
+  \ Valid values include:\n    * `ebs`\n    * `instance-store`\n@return [Core::Response]"
+:update_user_profile: |-
+  Calls the UpdateUserProfile API operation.
+  @param [Hash] options
+    * `:iam_user_arn` - *required* - (String) The user IAM ARN.
+    * `:ssh_username` - (String) The user's new SSH user name.
+    * `:ssh_public_key` - (String) The user's new SSH public key.
+  @return [Core::Response]
