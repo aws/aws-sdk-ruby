@@ -36,3 +36,7 @@ group :docs do
   gem 'yard'
   gem 'rdiscount', github: 'lsegal/rdiscount', branch: 'gfm-fenced-code'
 end
+
+group :bin do
+  gem 'pry'
+end
