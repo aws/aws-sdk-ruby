@@ -45,7 +45,7 @@ module Aws
             input = context.operation.input
             next unless member = input.members[key]
             if member.location == 'header'
-              context.http_request.headers[member.location_name || key] = value
+              context.http_request.headers[member.serialized_name] = value
             elsif input.raw_payload
               context.http_request.body = input.body_members.values.first
             end
@@ -58,9 +58,10 @@ module Aws
           # add all top-level headers
           context.operation.output.members.each do |name, member|
             if member.location == 'header'
-              header = member.location_name || name
-              if response.http_response.headers.has_key?(header)
-                response.data[name.to_sym] = response.http_response.headers[header]
+              header_name = member.serialized_name
+              if response.http_response.headers.has_key?(header_name)
+                response.data[name.to_sym] =
+                  response.http_response.headers[header_name]
               end
             else
               response.data[name.to_sym] = response.http_response.body
