@@ -1,6 +1,6 @@
 {
   "version": "2010-05-08",
-  "endpoint": "iam.%s.amazonaws.com",
+  "endpoint": "iam.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
     "service_abbreviation": "IAM",
@@ -10,7 +10,6 @@
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
-    "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",

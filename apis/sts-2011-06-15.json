@@ -1,6 +1,6 @@
 {
   "version": "2011-06-15",
-  "endpoint": "sts.%s.amazonaws.com",
+  "endpoint": "sts.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
     "service_abbreviation": "AWS STS",
@@ -10,7 +10,6 @@
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
-    "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",

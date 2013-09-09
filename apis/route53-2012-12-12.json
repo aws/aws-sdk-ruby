@@ -1,6 +1,6 @@
 {
   "version": "2012-12-12",
-  "endpoint": "route53.%s.amazonaws.com",
+  "endpoint": "route53.amazonaws.com",
   "metadata": {
     "service_abbreviation": "Route 53",
     "service_full_name": "Amazon Route 53",
@@ -9,7 +9,6 @@
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
-    "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",

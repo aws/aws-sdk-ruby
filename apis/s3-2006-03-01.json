@@ -1,6 +1,6 @@
 {
   "version": "2006-03-01",
-  "endpoint": "s3.%s.amazonaws.com",
+  "endpoint": "s3.amazonaws.com",
   "metadata": {
     "checksum_format": "md5",
     "service_abbreviation": "Amazon S3",
@@ -10,7 +10,6 @@
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
-    "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",

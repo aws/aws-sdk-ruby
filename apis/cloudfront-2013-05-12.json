@@ -1,6 +1,6 @@
 {
   "version": "2013-05-12",
-  "endpoint": "cloudfront.%s.amazonaws.com",
+  "endpoint": "cloudfront.amazonaws.com",
   "metadata": {
     "service_abbreviation": "CloudFront",
     "service_full_name": "Amazon CloudFront",
@@ -9,7 +9,6 @@
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
-    "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",

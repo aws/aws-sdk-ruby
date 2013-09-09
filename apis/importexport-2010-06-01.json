@@ -1,6 +1,6 @@
 {
   "version": "2010-06-01",
-  "endpoint": "importexport.%s.amazonaws.com",
+  "endpoint": "importexport.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
     "service_full_name": "AWS Import/Export",
@@ -9,7 +9,6 @@
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
-    "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::EnvironmentCredentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",

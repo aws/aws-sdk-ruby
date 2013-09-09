@@ -113,6 +113,10 @@ module Aws
     end
 
     def translated
+      if @global_endpoint
+        @properties['plugins'].delete('Aws::Plugins::RegionalEndpoint') if
+        @properties['endpoint'] = @global_endpoint
+      end
       api = Seahorse::Model::Api.from_hash(@properties)
       api.metadata = Hash[api.metadata.sort]
       @operations.values.each do |src|
@@ -127,7 +131,6 @@ module Aws
     end
 
     property :version, from: :api_version
-    property :endpoint, from: :global_endpoint
 
     metadata :signing_name
     metadata :checksum_format
@@ -167,6 +170,10 @@ module Aws
       end
       @properties['metadata'] ||= {}
       @properties['metadata']['signer'] = signer
+    end
+
+    def set_global_endpoint(endpoint)
+      @global_endpoint = endpoint
     end
 
     def set_endpoint_prefix(prefix)
