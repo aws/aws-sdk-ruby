@@ -27,7 +27,8 @@ module Seahorse
           self.endpoint = options[:endpoint]
           self.http_method = options[:http_method] || 'GET'
           self.path = options[:path] || '/'
-          self.headers = options[:headers] || Headers.new('User-Agent' => ua)
+          self.headers = Headers.new(options[:headers] || {})
+          self.headers['User-Agent'] ||= ua
           self.body = options[:body]
         end
 

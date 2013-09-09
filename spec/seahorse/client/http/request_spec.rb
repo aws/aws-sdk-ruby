@@ -101,6 +101,21 @@ module Seahorse
             )
           end
 
+          it 'sets a default user agent' do
+            ua = request.headers['User-Agent']
+            expect(ua).to eq("Seahorse/#{Seahorse::VERSION}")
+          end
+
+          it 'does not set the user-agent when given in the constructor' do
+            req = request(headers: { 'User-Agent' => 'ua' })
+            expect(req.headers['User-Agent']).to eq('ua')
+          end
+
+          it 'casts incoming headers as a Http::Headers object' do
+            req = request(headers: { 'User-Agent' => 'ua' })
+            expect(req.headers).to be_kind_of(Http::Headers)
+          end
+
         end
 
         describe '#body' do
