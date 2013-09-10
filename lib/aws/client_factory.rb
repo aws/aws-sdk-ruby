@@ -23,9 +23,7 @@ module Aws
 
       # @return [Seahorse::Client::Base] Returns a versioned client.
       def new(options = {})
-        version = (Aws.config[method_name] || {})[:api_version]
-        version ||= options[:api_version]
-        version ||= latest_version
+        version = options[:api_version] || default_version
         const_get("V#{version.gsub('-', '')}").new(options)
       end
 
@@ -53,6 +51,11 @@ module Aws
       # @return [String<YYYY-MM-DD>]
       def latest_version
         versions.last
+      end
+
+      # @return [String<YYYY-MM-DD>]
+      def default_version
+        (Aws.config[method_name] || {})[:api_version] || latest_version
       end
 
       # @api private
