@@ -28,10 +28,14 @@ module Aws
 
     class << self
 
-      # @api private
+      # @return [Symbol]
       attr_accessor :method_name
 
-      # @api private
+      # @param [Symbol] method_name The underscored short name for this service.
+      # @param [Array<Api, String>] An array of client APIs for this service.
+      #   Values may be string paths to API files or instances of
+      #   `Seahorse::Model::Api`.
+      # @return [Class<Service>]
       def define(method_name, apis = [])
         klass = Class.new(self)
         klass.method_name = method_name
