@@ -11,6 +11,13 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+def svc_class_name(api)
+  name = api.metadata['service_abbreviation'] || api.metadata['service_full_name']
+  name = name.sub('Amazon', '').sub('AWS', '').gsub(/\W+/, '')
+  prefix = api.endpoint.split(/[.-]/).first.upcase
+  [name, prefix].sort_by(&:size).first
+end
+
 desc "Translates the API souce files into Seahorse APIs"
 task :apis do
 
@@ -28,7 +35,8 @@ task :apis do
     api_src = MultiJson.load(File.read(path), max_nesting: nil)
     api = Aws::ApiTranslator.translate(api_src, documentation: false)
 
-    File.open(path.sub('apis-src', 'apis'), 'w') do |file|
+    target = "apis/#{svc_class_name(api)}-#{api.version}.json"
+    File.open(target, 'w') do |file|
       file.write(MultiJson.dump(api.to_hash, pretty: true))
     end
 
