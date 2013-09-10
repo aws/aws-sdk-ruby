@@ -22,8 +22,7 @@ module Aws
 
       # @return [Seahorse::Client::Base] Returns a versioned client.
       def new(options = {})
-        version = options[:api_version] || default_version
-        const_get("V#{version.gsub('-', '')}").new(options)
+        client_class(options).new(options)
       end
 
       # Register an API for this client.
@@ -82,6 +81,11 @@ module Aws
       end
 
       private
+
+      def client_class(options)
+        version = options[:api_version] || default_version
+        const_get("V#{version.gsub('-', '')}")
+      end
 
       def apis
         @apis ||= {}

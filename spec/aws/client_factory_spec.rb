@@ -92,6 +92,10 @@ module Aws
 
     describe 'new' do
 
+      after(:each) do
+        Aws.config = {}
+      end
+
       it 'builds the client class with the latest api version by default' do
         clients = ClientFactory.define(:name, apis)
         expect(clients.new.config.api).to be(api_newer)
@@ -99,11 +103,18 @@ module Aws
       end
 
       it 'defaults to the global configured version for the client' do
-        config = { client_name: { api_version: api_older.version } }
-        allow(Aws).to receive(:config).and_return(config)
+        Aws.config[:client_name] = { api_version: api_older.version }
         clients = ClientFactory.define(:client_name, apis)
         expect(clients.new.config.api).to be(api_older)
         expect(clients.new).to be_kind_of(clients.const_get(:V20130101))
+      end
+
+      it 'accepts the api verison as a constructor option' do
+        Aws.config[:client_name] = { api_version: api_older.version }
+        clients = ClientFactory.define(:client_name, apis)
+        client = clients.new(api_version: api_newer.version)
+        expect(client.config.api).to be(api_newer)
+        expect(client).to be_kind_of(clients.const_get(:V20130202))
       end
 
     end
