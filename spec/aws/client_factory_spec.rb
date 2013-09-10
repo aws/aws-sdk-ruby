@@ -117,6 +117,21 @@ module Aws
         expect(client).to be_kind_of(clients.const_get(:V20130202))
       end
 
+      it 'merges global defaults options when constructing the client' do
+        # shared default disabled
+        Aws.config = { http_wire_trace: false }
+        expect(Aws::EC2.new.config.http_wire_trace).to be(false)
+        expect(Aws::S3.new.config.http_wire_trace).to be(false)
+        # shared default enabled
+        Aws.config = { http_wire_trace: true }
+        expect(Aws::EC2.new.config.http_wire_trace).to be(true)
+        expect(Aws::S3.new.config.http_wire_trace).to be(true)
+        # default enabled, s3 disables
+        Aws.config = { http_wire_trace: true, s3: { http_wire_trace: false } }
+        expect(Aws::EC2.new.config.http_wire_trace).to be(true)
+        expect(Aws::S3.new.config.http_wire_trace).to be(false)
+      end
+
     end
 
     describe 'client classes' do

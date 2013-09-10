@@ -22,7 +22,7 @@ module Aws
 
       # @return [Seahorse::Client::Base] Returns a versioned client.
       def new(options = {})
-        client_class(options).new(options)
+        client_class(options).new(client_defaults.merge(options))
       end
 
       # Register an API for this client.
@@ -53,7 +53,7 @@ module Aws
 
       # @return [String<YYYY-MM-DD>]
       def default_version
-        (Aws.config[method_name] || {})[:api_version] || latest_version
+        client_defaults[:api_version] || latest_version
       end
 
       # @return [Symbol]
@@ -81,6 +81,10 @@ module Aws
       end
 
       private
+
+      def client_defaults
+        Aws.config[method_name] || {}
+      end
 
       def client_class(options)
         version = options[:api_version] || default_version

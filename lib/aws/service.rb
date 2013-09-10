@@ -16,10 +16,14 @@ module Aws
 
     def initialize(options = {})
       @client = self.class.const_get(:Client).new(options)
+      @config = @client.config
     end
 
-    # @return [Seahorse::Base::Client]
+    # @return [Seahorse::Client::Base]
     attr_reader :client
+
+    # @return [Seahorse::Client::Configuration]
+    attr_reader :config
 
     # @api private
     def inspect
