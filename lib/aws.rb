@@ -17,19 +17,7 @@ module Aws
     private
 
     def add_service(name, apis = [])
-      svc_class = Class.new(Service)
-      svc_class.const_set(:Client, client_factory(Util.underscore(name), apis))
-      const_set(name, svc_class)
-    end
-
-    def client_factory(method_name, apis)
-      client_factory = Class.new(ClientFactory)
-      client_factory.method_name = method_name.to_sym
-      apis.each do |path|
-        yyyy_mm_dd = path.match(/\d{4}-\d{2}-\d{2}/)[0]
-        client_factory.add_version(yyyy_mm_dd, path)
-      end
-      client_factory
+      const_set(name, Service.define(Util.underscore(name), apis))
     end
 
     def apis

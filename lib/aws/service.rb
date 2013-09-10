@@ -13,5 +13,19 @@
 
 module Aws
   class Service
+    class << self
+
+      # @api private
+      attr_accessor :method_name
+
+      # @api private
+      def define(method_name, apis = [])
+        klass = Class.new(self)
+        klass.method_name = method_name
+        klass.const_set(:Client, ClientFactory.define(method_name, apis))
+        klass
+      end
+
+    end
   end
 end

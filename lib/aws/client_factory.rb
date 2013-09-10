@@ -29,7 +29,7 @@ module Aws
       def new(options = {})
         version = (Aws.config[method_name] || {})[:api_version]
         version ||= options[:api_version]
-        version ||= versions.last
+        version ||= latest_version
         const_get("V#{version.gsub('-', '')}").new(options)
       end
 
@@ -54,8 +54,24 @@ module Aws
         apis.keys.sort
       end
 
+      # @return [String<YYYY-MM-DD>]
+      def latest_version
+        versions.last
+      end
+
       # @api private
       attr_accessor :method_name
+
+      # @api private
+      def define(method_name, apis = [])
+        klass = Class.new(self)
+        klass.method_name = method_name.to_sym
+        apis.each do |path|
+          yyyy_mm_dd = path.match(/\d{4}-\d{2}-\d{2}/)[0]
+          klass.add_version(yyyy_mm_dd, path)
+        end
+        klass
+      end
 
       private
 
