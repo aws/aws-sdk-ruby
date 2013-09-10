@@ -21,18 +21,18 @@ module Aws
     describe '#client' do
 
       it 'returns a client class' do
-        svc_class = Service.define(:method_name, apis)
+        svc_class = Service.define(:short_name, apis)
         svc = svc_class.new
         expect(svc.client).to be_kind_of(Seahorse::Client::Base)
       end
 
     end
 
-    describe '#method_name' do
+    describe '#short_name' do
 
       it 'is populated by the define method' do
-        svc_class = Service.define(:method_name, apis)
-        expect(svc_class.method_name).to be(:method_name)
+        svc_class = Service.define(:short_name, apis)
+        expect(svc_class.short_name).to be(:short_name)
       end
 
     end
@@ -40,7 +40,7 @@ module Aws
     describe '#inspect' do
 
       it 'foo' do
-        svc_class = Service.define(:method_name, apis)
+        svc_class = Service.define(:short_name, apis)
         allow(svc_class).to receive(:name).and_return('Service')
         expect(svc_class.new.inspect).to eq('#<Service>')
       end

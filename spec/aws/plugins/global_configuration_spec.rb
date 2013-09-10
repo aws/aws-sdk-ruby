@@ -16,6 +16,7 @@ require 'spec_helper'
 module Aws
   module Plugins
     describe GlobalConfiguration do
+
       let(:client_class) do
         klass = Class.new(Seahorse::Client::Base)
         klass.add_plugin(GlobalConfiguration)

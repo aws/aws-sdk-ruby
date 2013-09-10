@@ -18,7 +18,7 @@ module Aws
       initialize_client do |client|
         client.config.options.each do |option, value|
           global = Aws.config[option.to_sym]
-          client.config.add_option(option, global.nil? ? value : global)
+          client.config.add_option(option, global) unless global.nil?
         end
       end
     end

@@ -43,7 +43,7 @@ module Aws
 
     it 'adds a helper method that constructs a service and client object' do
       Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
-      svc = Aws.dummy_service(http_wire_trace: true)
+      svc = Aws.dummyservice(http_wire_trace: true)
       expect(Aws::DummyService::Client.versions).to eq(['2006-03-01'])
       expect(svc).to be_kind_of(Aws::DummyService)
       expect(svc.client).to be_kind_of(Seahorse::Client::Base)
@@ -61,7 +61,7 @@ module Aws
 
       Aws.add_service(:DummyService, [api_path])
       Aws::DummyService::Client::V20060301.clear_plugins
-      expect(Aws.dummy_service.client.config.api).to be(api)
+      expect(Aws.dummyservice.client.config.api).to be(api)
     end
 
   end

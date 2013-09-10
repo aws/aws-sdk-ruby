@@ -64,7 +64,7 @@ module Aws
 
       it 'populates the method name' do
         clients = ClientFactory.define(:short_name)
-        expect(clients.method_name).to eq(:short_name)
+        expect(clients.short_name).to eq(:short_name)
       end
 
       it 'accepts apis as a path to a translated api' do

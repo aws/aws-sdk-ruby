@@ -83,7 +83,7 @@ module Aws
     # @param [Symbol] name The name of the new service class.
     # @param [Array<String, Seahorse::Model::Api>]
     def add_service(name, apis = [])
-      method_name = Util.underscore(name.to_s).to_sym
+      method_name = name.downcase.to_sym
       svc_class = const_set(name, Service.define(method_name, apis))
       self.class.send(:define_method, method_name) do |options = {}|
         svc_class.new(options)
