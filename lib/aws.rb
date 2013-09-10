@@ -15,6 +15,54 @@ module Aws
 
   @config = {}
 
+  autoload :ApiTranslator, 'aws/api_translator'
+  autoload :ClientFactory, 'aws/client_factory'
+  autoload :Credentials, 'aws/credentials'
+  autoload :Service, 'aws/service'
+  autoload :Structure, 'aws/structure'
+  autoload :Util, 'aws/util'
+  autoload :VERSION, 'aws/version'
+
+  # @api private
+  module Json
+    autoload :Builder, 'aws/json/builder'
+    autoload :Handler, 'aws/json/handler'
+    autoload :Parser, 'aws/json/parser'
+  end
+
+  module Plugins
+    autoload :ContentLength, 'aws/plugins/content_length'
+    autoload :EnvironmentCredentials, 'aws/plugins/environment_credentials'
+    autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
+    autoload :JsonSerializer, 'aws/plugins/json_serializer'
+    autoload :QuerySerializer, 'aws/plugins/query_serializer'
+    autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
+    autoload :RestProtocol, 'aws/plugins/rest_protocol'
+    autoload :Signer, 'aws/plugins/signer'
+    autoload :XmlSerializer, 'aws/plugins/xml_serializer'
+  end
+
+  # @api private
+  module Query
+    autoload :Builder, 'aws/query/builder'
+    autoload :Handler, 'aws/query/handler'
+    autoload :Param, 'aws/query/param'
+    autoload :ParamList, 'aws/query/param_list'
+  end
+
+  # @api private
+  module Signers
+    autoload :Version2, 'aws/signers/version_2'
+    autoload :Version3, 'aws/signers/version_3'
+    autoload :Version4, 'aws/signers/version_4'
+  end
+
+  # @api private
+  module Xml
+    autoload :Builder, 'aws/xml/builder'
+    autoload :Parser, 'aws/xml/parser'
+  end
+
   class << self
 
     # @return [Hash]
