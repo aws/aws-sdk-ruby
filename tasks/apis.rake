@@ -23,6 +23,7 @@ task :apis do
 
   require 'fileutils'
   require 'multi_json'
+  require 'json'
   require_relative '../lib/aws-sdk-core'
 
   FileUtils.mkdir_p('apis')
@@ -32,6 +33,7 @@ task :apis do
     next if path.match(/paginators/)
 
     puts "translating #{path.split('/')[1]}"
+    MultiJson.engine = 'json_gem' # for consistent formatting
     api_src = MultiJson.load(File.read(path), max_nesting: nil)
     api = Aws::ApiTranslator.translate(api_src, documentation: false)
 
