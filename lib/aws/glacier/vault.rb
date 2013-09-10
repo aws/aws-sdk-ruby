@@ -50,11 +50,11 @@ module AWS
 
       populates_from(:list_vaults) do |resp|
         resp.request_options[:account_id] == account_id and
-        resp[:vault_list].find {|vault| vault[:name] == name }
+        resp[:vault_list].find {|vault| vault[:vault_name] == name }
       end
 
       populates_from(:describe_vault) do |resp|
-        if resp.request_options[:account_id] == account_id and resp[:name] == name
+        if resp.request_options[:account_id] == account_id and resp[:vault_name] == name
           resp
         end
       end
