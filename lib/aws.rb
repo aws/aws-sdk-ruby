@@ -81,7 +81,7 @@ module Aws
     # @note You should normally not need to call this method directly.
     #
     # @param [Symbol] name The name of the new service class.
-    # @param [Array<String, Seahorse::Model::Api>]
+    # @param [Array<String, Seahorse::Model::Api>] apis
     def add_service(name, apis = [])
       identifier = name.downcase.to_sym
       svc_class = const_set(name, Service.define(identifier, apis))

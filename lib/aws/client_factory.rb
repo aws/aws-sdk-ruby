@@ -61,8 +61,8 @@ module Aws
       attr_accessor :identifier
 
       # @param [Symbol] identifier The downcased short name for this service.
-      # @param [Array<Api, String>] An array of client APIs for this service.
-      #   Values may be string paths to API files or instances of
+      # @param [Array<Api, String>] apis An array of client APIs for this
+      #   service.  Values may be string paths to API files or instances of
       #   `Seahorse::Model::Api`.
       # @return [Class<ClientFactory>]
       # @api private
