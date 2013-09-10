@@ -13,6 +13,7 @@
 
 require 'seahorse'
 
+# @api private
 module Seahorse::Model::Shapes
   class FlatMapShape < MapShape; end
   class FlatListShape < ListShape; end
