@@ -13,6 +13,19 @@
 
 module Aws
   class Service
+
+    def initialize(options = {})
+      @client = self.class.const_get(:Client).new(options)
+    end
+
+    # @return [Seahorse::Base::Client]
+    attr_reader :client
+
+    # @api private
+    def inspect
+      "#<#{self.class.name}>"
+    end
+
     class << self
 
       # @api private

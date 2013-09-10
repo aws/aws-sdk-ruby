@@ -17,7 +17,10 @@ module Aws
     private
 
     def add_service(name, apis = [])
-      const_set(name, Service.define(Util.underscore(name), apis))
+      svc_class = const_set(name, Service.define(Util.underscore(name), apis))
+      self.class.send(:define_method, svc_class.method_name) do |options = {}|
+        svc_class.new(options)
+      end
     end
 
     def apis
