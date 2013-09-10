@@ -68,7 +68,7 @@ module Aws
       # @api private
       def define(identifier, apis = [])
         klass = Class.new(self)
-        klass.identifier = identifier
+        klass.identifier = identifier.to_sym
         apis.each do |api|
           if api.is_a?(String)
             yyyy_mm_dd = api.match(/\d{4}-\d{2}-\d{2}/)[0]
