@@ -24,6 +24,21 @@ module Aws
       expect(Structure.new([:abc, :xyz]).members).to eq([:abc, :xyz])
     end
 
+    describe '#each' do
+
+      it 'enumerates non-nil properties' do
+        struct = Structure.new([:abc, :mno, :xyz])
+        struct[:abc] = 'abc'
+        struct[:xyz] = 'xyz'
+        yielded = []
+        struct.each do |k, v|
+          yielded << [k, v]
+        end
+        expect(yielded).to eq([[:abc, 'abc'], [:xyz, 'xyz']])
+      end
+
+    end
+
     describe '#to_hash' do
 
       it 'returns a hash' do

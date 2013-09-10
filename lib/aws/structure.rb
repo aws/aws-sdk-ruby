@@ -17,6 +17,13 @@ module Aws
 
     @classes = {}
 
+    def each(&block)
+      members.each do |member|
+        value = self[member]
+        yield(member, value) unless value.nil?
+      end
+    end
+
     # @overload to_hash()
     #   @return [Hash]
     def to_hash(obj = self)
