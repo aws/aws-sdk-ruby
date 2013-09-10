@@ -71,6 +71,11 @@ module Seahorse
           context_for(operation_name, params))
       end
 
+      # @api private
+      def inspect
+        "#<#{self.class.name}>"
+      end
+
       private
 
       # Constructs a {Configuration} object and gives each plugin the
