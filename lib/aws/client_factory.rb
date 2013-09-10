@@ -16,7 +16,6 @@ require 'multi_json'
 module Aws
   class ClientFactory
 
-    # @api private
     class NoSuchApiVersionError < RuntimeError; end
 
     class << self
