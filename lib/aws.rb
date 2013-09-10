@@ -12,7 +12,13 @@
 # language governing permissions and limitations under the License.
 
 module Aws
+
+  @config = {}
+
   class << self
+
+    # @return [Hash]
+    attr_accessor :config
 
     private
 

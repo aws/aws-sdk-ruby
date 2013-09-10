@@ -63,12 +63,6 @@ module Aws
     autoload :Parser, 'aws/xml/parser'
   end
 
-  @config = {}
-
-  class << self
-    attr_accessor :config
-  end
-
 end
 
 module Seahorse::Model::Shapes
