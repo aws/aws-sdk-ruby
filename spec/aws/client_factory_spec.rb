@@ -58,13 +58,13 @@ module Aws
     describe 'define' do
 
       it 'defines a new client factory' do
-        clients = ClientFactory.define(:short_name)
+        clients = ClientFactory.define(:identifier)
         expect(clients.ancestors).to include(ClientFactory)
       end
 
       it 'populates the method name' do
-        clients = ClientFactory.define(:short_name)
-        expect(clients.short_name).to eq(:short_name)
+        clients = ClientFactory.define(:identifier)
+        expect(clients.identifier).to eq(:identifier)
       end
 
       it 'accepts apis as a path to a translated api' do

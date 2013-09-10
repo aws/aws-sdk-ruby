@@ -58,17 +58,17 @@ module Aws
 
       # @return [Symbol]
       # @api private
-      attr_accessor :short_name
+      attr_accessor :identifier
 
-      # @param [Symbol] short_name The underscored short name for this service.
+      # @param [Symbol] identifier The downcased short name for this service.
       # @param [Array<Api, String>] An array of client APIs for this service.
       #   Values may be string paths to API files or instances of
       #   `Seahorse::Model::Api`.
       # @return [Class<ClientFactory>]
       # @api private
-      def define(short_name, apis = [])
+      def define(identifier, apis = [])
         klass = Class.new(self)
-        klass.short_name = short_name
+        klass.identifier = identifier
         apis.each do |api|
           if api.is_a?(String)
             yyyy_mm_dd = api.match(/\d{4}-\d{2}-\d{2}/)[0]
@@ -83,7 +83,7 @@ module Aws
       private
 
       def client_defaults
-        Aws.config[short_name] || {}
+        Aws.config[identifier] || {}
       end
 
       def client_class(options)
