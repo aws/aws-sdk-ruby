@@ -17,12 +17,14 @@ module Aws
 
     @classes = {}
 
+    # Yields non-nil property names and values.
     def each(&block)
       members.each do |member|
         value = self[member]
         yield(member, value) unless value.nil?
       end
     end
+    alias each_pair each
 
     # @overload to_hash()
     #   @return [Hash]
