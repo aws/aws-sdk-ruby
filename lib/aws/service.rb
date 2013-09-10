@@ -29,6 +29,7 @@ module Aws
     class << self
 
       # @return [Symbol]
+      # @api private
       attr_accessor :method_name
 
       # @param [Symbol] method_name The underscored short name for this service.
@@ -36,6 +37,7 @@ module Aws
       #   Values may be string paths to API files or instances of
       #   `Seahorse::Model::Api`.
       # @return [Class<Service>]
+      # @api private
       def define(method_name, apis = [])
         klass = Class.new(self)
         klass.method_name = method_name

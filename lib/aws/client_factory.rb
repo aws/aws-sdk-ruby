@@ -57,13 +57,19 @@ module Aws
         (Aws.config[method_name] || {})[:api_version] || latest_version
       end
 
+      # @return [Symbol]
       # @api private
       attr_accessor :method_name
 
+      # @param [Symbol] method_name The underscored short name for this service.
+      # @param [Array<Api, String>] An array of client APIs for this service.
+      #   Values may be string paths to API files or instances of
+      #   `Seahorse::Model::Api`.
+      # @return [Class<ClientFactory>]
       # @api private
       def define(method_name, apis = [])
         klass = Class.new(self)
-        klass.method_name = method_name.to_sym
+        klass.method_name = method_name
         apis.each do |api|
           if api.is_a?(String)
             yyyy_mm_dd = api.match(/\d{4}-\d{2}-\d{2}/)[0]
