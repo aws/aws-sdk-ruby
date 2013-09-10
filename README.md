@@ -52,7 +52,17 @@ Client = Seahorse::Client::Base.define api: {
       'output' => {
         'type' => 'structure',
         'members' => {
-          ''
+          'statuses' => {
+            'type' => 'list',
+            'members' => {
+              'type' => 'structure',
+              'members' => {
+                'status_id' => { 'type' => 'integer' },
+                'body' => { 'type' => 'string' },
+                'username' => { 'type' => 'string' }
+              }
+            }
+          }
         }
       }
     }
@@ -70,6 +80,17 @@ operation like so:
 client = Client.new
 response = client.get_timeline(username: 'my_user')
 pp response.data # prints the de-serialized data from the service
+
+__END__
+Data will look like:
+
+{
+  statuses: [
+    {status_id: 1, body: 'Hello', username: 'my_user'},
+    {status_id: 2, body: 'Hello??', username: 'my_user'},
+    {status_id: 3, body: 'Bye bye!', username: 'my_user'}
+  ]
+}
 ```
 
 Seahorse handles managing the HTTP request and response (including pooling of
