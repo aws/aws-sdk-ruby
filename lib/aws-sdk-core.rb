@@ -18,6 +18,7 @@ module Aws
   autoload :ApiTranslator, 'aws/api_translator'
   autoload :Credentials, 'aws/credentials'
   autoload :Structure, 'aws/structure'
+  autoload :Util, 'aws/util'
   autoload :VERSION, 'aws/version'
 
   # @api private
