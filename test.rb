@@ -13,51 +13,15 @@
 
 require 'bundler/setup'
 require 'aws-sdk-core'
-require 'json'
 require 'pp'
-require 'stringio'
 
-class DummySenderPlugin < Seahorse::Client::Plugin
-  option(:response_body) { '' }
-
-  handler :Handler, step: :send do |context|
-    response = Seahorse::Client::Response.new(context: context)
-    response.http_response.body = context.config.response_body
-    response.signal_complete
-  end
-end
-
-def client_class(endpoint, versions, plugins = [])
-  #plugins << DummySenderPlugin
-  plugins << 'Aws::Plugins::VersionedApiLoader'
-  Seahorse::Client.define({
-    plugins: plugins,
-    api: {
-      'metadata' => {
-        'aws_api_versions' => versions.inject({}) {|hsh, version|
-          hsh[version] = "apis/#{endpoint}-#{version}.json"; hsh
-        }
-      }
-    }
-  })
-end
-
-SWF = client_class 'swf', %w(2012-01-25)
-
-EC2 = client_class 'ec2', %w(2013-06-15)
-EMR = client_class 'elasticmapreduce', %w(2009-03-31)
-CloudFront = client_class 'cloudfront', %w(2013-05-12)
-S3 = client_class 's3', %w(2006-03-01)
-DynamoDB = client_class 'dynamodb', %w(2011-12-05)
-OpsWorks = client_class 'opsworks', %w(2013-02-18)
-
-swf = SWF.new
-ddb = DynamoDB.new
-emr = EMR.new
-cloudfront = CloudFront.new
-s3 = S3.new
-opsworks = OpsWorks.new
-ec2 = EC2.new
+swf = Aws::SWF::Client.new
+ddb = Aws::DynamoDB::Client.new
+emr = Aws::EMR::Client.new
+cloudfront = Aws::CloudFront::Client.new
+s3 = Aws::S3::Client.new
+opsworks = Aws::OpsWorks::Client.new
+ec2 = Aws::EC2::Client.new
 
 #resp = s3.put_object Bucket: 'lorenfoo', Key: 'foo', Body: 'hello', ContentType: 'text/plain'
 #pp resp.http_request

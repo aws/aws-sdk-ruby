@@ -16,7 +16,9 @@ require 'seahorse'
 module Aws
 
   autoload :ApiTranslator, 'aws/api_translator'
+  autoload :ClientFactory, 'aws/client_factory'
   autoload :Credentials, 'aws/credentials'
+  autoload :Service, 'aws/service'
   autoload :Structure, 'aws/structure'
   autoload :Util, 'aws/util'
   autoload :VERSION, 'aws/version'
@@ -76,3 +78,5 @@ module Seahorse::Model::Shapes
   Shape.register_type flat_map: FlatMapShape
   Shape.register_type flat_list: FlatListShape
 end
+
+require_relative 'aws'
