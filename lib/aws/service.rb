@@ -34,18 +34,18 @@ module Aws
 
       # @return [Symbol]
       # @api private
-      attr_accessor :method_name
+      attr_accessor :short_name
 
-      # @param [Symbol] method_name The underscored short name for this service.
+      # @param [Symbol] short_name The underscored short name for this service.
       # @param [Array<Api, String>] An array of client APIs for this service.
       #   Values may be string paths to API files or instances of
       #   `Seahorse::Model::Api`.
       # @return [Class<Service>]
       # @api private
-      def define(method_name, apis = [])
+      def define(short_name, apis = [])
         klass = Class.new(self)
-        klass.method_name = method_name
-        klass.const_set(:Client, ClientFactory.define(method_name, apis))
+        klass.short_name = short_name
+        klass.const_set(:Client, ClientFactory.define(short_name, apis))
         klass
       end
 
