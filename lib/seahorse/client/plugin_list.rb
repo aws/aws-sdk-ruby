@@ -16,7 +16,6 @@ require 'thread'
 
 module Seahorse
   module Client
-    # @api private
     class PluginList
 
       include Enumerable
