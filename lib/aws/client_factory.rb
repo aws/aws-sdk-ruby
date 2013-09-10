@@ -17,11 +17,7 @@ module Aws
   class ClientFactory
 
     # @api private
-    class NoSuchApiError < RuntimeError
-      def initialize(client_factory, api_version)
-        super("API #{api_version} not defined for #{client_factory.name}")
-      end
-    end
+    class NoSuchApiVersionError < RuntimeError; end
 
     class << self
 
@@ -94,7 +90,9 @@ module Aws
         case api
         when Seahorse::Model::Api then api
         when String then load_api(api)
-        else raise NoSuchApiVersion.new(self, api_version)
+        else
+          msg = "API #{api_version} not defined for #{name}"
+          raise NoSuchApiVersionError, msg
         end
       end
 
