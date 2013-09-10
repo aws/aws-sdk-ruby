@@ -27,7 +27,7 @@ module Aws
       end
 
       def global_config(options = {})
-        Aws.stub(:config) { options }
+        allow(Aws).to receive(:config).and_return(options)
       end
 
       before { global_config }

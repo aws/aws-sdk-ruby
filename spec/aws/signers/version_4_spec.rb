@@ -30,6 +30,16 @@ module Aws
         req
       end
 
+      let(:now) { double('now') }
+      let(:utc) { double('utc-time') }
+      let(:datetime) { 'datetime' }
+
+      before(:each) {
+        allow(Time).to receive(:now).and_return(now)
+        allow(now).to receive(:utc).and_return(utc)
+        allow(utc).to receive(:strftime).and_return(datetime)
+      }
+
       context '#sign' do
 
         it "populates the 'HOST' header" do
@@ -38,24 +48,21 @@ module Aws
 
         it "populates the 'X-Amz-Date' header" do
           datetime = '20120102:10:11:12Z'
-          now = double('now')
-          expect(now).to receive(:strftime).with("%Y%m%dT%H%M%SZ") { datetime }
-          Time.stub_chain(:now, :utc) { now }
+          expect(utc).to receive(:strftime).with("%Y%m%dT%H%M%SZ") { datetime }
           expect(sign.headers['X-Amz-Date']).to eq(datetime)
         end
 
         it 'sets the X-Amz-Date header' do
-          Time.stub_chain(:now, :utc, :strftime) { 'datetime' }
-          expect(sign.headers['X-Amz-Date']).to eq('datetime')
+          expect(sign.headers['X-Amz-Date']).to eq(datetime)
         end
 
         it "omits 'X-Amz-Security-Token' header when session token is nil" do
-          credentials.stub(:session_token) { nil }
+          allow(credentials).to receive(:session_token).and_return(nil)
           expect(sign.headers['X-Amz-Security-Token']).to be(nil)
         end
 
         it "populates the 'X-Amz-Security-Token' header with session token" do
-          credentials.stub(:session_token) { 'session' }
+          allow(credentials).to receive(:session_token).and_return('session')
           expect(sign.headers['X-Amz-Security-Token']).to eq('session')
         end
 
@@ -67,7 +74,7 @@ module Aws
 
         it 'reads the http request payload in 1mb chunks' do
           body = double('http-payload')
-          body.stub(:rewind)
+          allow(body).to receive(:rewind)
           expect(body).to receive(:read).with(1024 * 1024) { 'a' }
           expect(body).to receive(:read).with(1024 * 1024) { 'b' }
           expect(body).to receive(:read).with(1024 * 1024) { 'c' }
@@ -91,8 +98,7 @@ module Aws
         end
 
         it 'signs the request' do
-          datetime = '20120102T10:11:12Z'
-          Time.stub_chain(:now, :utc, :strftime) { datetime }
+          datetime.replace('20120102T10:11:12Z')
           http_request.headers['Foo'] = 'foo'
           http_request.headers['Bar'] = 'bar  bar'
           http_request.headers['Bar2'] = '"bar  bar"'
