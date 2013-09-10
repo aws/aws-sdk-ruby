@@ -29,4 +29,40 @@ module Aws
     end
 
   end
+
+  describe 'add_service' do
+
+    after(:each) do
+      Aws.send(:remove_const, :DummyService)
+    end
+
+    it 'defines a new service interface' do
+      Aws.add_service(:DummyService)
+      expect(Aws::DummyService.ancestors).to include(Aws::Service)
+    end
+
+    it 'adds a helper method that constructs a service and client object' do
+      Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
+      svc = Aws.dummy_service(http_wire_trace: true)
+      expect(Aws::DummyService::Client.versions).to eq(['2006-03-01'])
+      expect(svc).to be_kind_of(Aws::DummyService)
+      expect(svc.client).to be_kind_of(Seahorse::Client::Base)
+      expect(svc.client.config.api).to be_kind_of(Seahorse::Model::Api)
+      expect(svc.client.config.http_wire_trace).to be(true)
+    end
+
+    it 'translates apis' do
+      api = Seahorse::Model::Api.new
+
+      api_path = 'apis-src/s3-2006-03-01.json'
+      expect(ApiTranslator).to receive(:translate).
+        with(MultiJson.load(File.read(api_path))).
+        and_return(api)
+
+      Aws.add_service(:DummyService, [api_path])
+      Aws::DummyService::Client::V20060301.clear_plugins
+      expect(Aws.dummy_service.client.config.api).to be(api)
+    end
+
+  end
 end

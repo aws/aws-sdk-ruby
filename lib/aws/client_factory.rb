@@ -62,9 +62,13 @@ module Aws
       def define(method_name, apis = [])
         klass = Class.new(self)
         klass.method_name = method_name.to_sym
-        apis.each do |path|
-          yyyy_mm_dd = path.match(/\d{4}-\d{2}-\d{2}/)[0]
-          klass.add_version(yyyy_mm_dd, path)
+        apis.each do |api|
+          if api.is_a?(String)
+            yyyy_mm_dd = api.match(/\d{4}-\d{2}-\d{2}/)[0]
+            klass.add_version(yyyy_mm_dd, api)
+          else
+            klass.add_version(api.version, api)
+          end
         end
         klass
       end
