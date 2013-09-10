@@ -65,17 +65,31 @@ module Aws
 
   class << self
 
-    # @return [Hash]
+    # @return [Hash] Returns a hash of default configuration options shared
+    #   by all constructed clients.
     attr_accessor :config
 
-    private
-
+    # Registers a new service interface.  This method accepts a constant
+    # (class name) for the new service class and a list of client API
+    # versions.
+    #
+    #     Aws.add_servcie(:S3, ['apis/S3-2006-03-01.json'])
+    #
+    # This method is called for each service defined in the apis directory of
+    # this project.
+    #
+    # @note You should normally not need to call this method directly.
+    #
+    # @param [Symbol] name The name of the new service class.
+    # @param [Array<String, Seahorse::Model::Api>]
     def add_service(name, apis = [])
       svc_class = const_set(name, Service.define(Util.underscore(name), apis))
       self.class.send(:define_method, svc_class.method_name) do |options = {}|
         svc_class.new(options)
       end
     end
+
+    private
 
     def apis
       Dir.glob('apis/*.json').group_by { |path| path.match(/\/(\w+)/)[1] }
