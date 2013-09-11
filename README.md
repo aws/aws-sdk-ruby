@@ -32,7 +32,7 @@ of operations:
 
 ```ruby
 Client = Seahorse::Client::Base.define api: {
-  'endpoint' => 'host.example.com' # Required endpoint for your service
+  'endpoint' => 'host.example.com', # Required endpoint for your service
   'version' => '1.0',
   'documentation' => 'General documentation about the service',
   'metadata' => { # Custom metadata
@@ -40,7 +40,7 @@ Client = Seahorse::Client::Base.define api: {
   },
   'operations' => {
     'get_timeline' => {
-      'documentation' => 'Gets the timeline of a supplied username.'
+      'documentation' => 'Gets the timeline of a supplied username.',
       'http_method' => 'GET',
       'http_path' => '/{username}/timeline',
       'input' => {
