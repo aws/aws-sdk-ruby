@@ -3,3 +3,8 @@
 --markup markdown
 --markup-provider rdiscount
 --hide-api private
+lib/seahorse/model/node.rb
+lib/**/*.rb
+-
+README.md
+LICENSE.txt
