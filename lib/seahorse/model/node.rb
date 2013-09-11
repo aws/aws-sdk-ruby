@@ -24,8 +24,9 @@ module Seahorse
       end
 
       class << self
-        # @!macro [attach]
+        # @!macro [attach] model.property
         #   @!attribute $1
+        #     @return [$2]
         def property(name, klass, opts = {})
           attr_accessor(name)
           @properties ||= IndifferentHash.new
