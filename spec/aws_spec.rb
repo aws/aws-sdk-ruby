@@ -30,6 +30,28 @@ module Aws
 
   end
 
+  describe 'add_plugin' do
+
+    it 'adds a plugin to every client for all services' do
+      klass = double('service-class')
+      expect(klass).to receive(:add_plugin).with('p')
+      expect(Aws).to receive(:service_classes).and_return([klass])
+      Aws.add_plugin('p')
+    end
+
+  end
+
+  describe 'remove_plugin' do
+
+    it 'removes a plugin from every client for each service' do
+      klass = double('service-class')
+      expect(klass).to receive(:remove_plugin).with('p')
+      expect(Aws).to receive(:service_classes).and_return([klass])
+      Aws.remove_plugin('p')
+    end
+
+  end
+
   describe 'add_service' do
 
     after(:each) do

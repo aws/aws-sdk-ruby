@@ -47,5 +47,25 @@ module Aws
 
     end
 
+    describe '.add_plugin' do
+
+      it 'adds a plugin to each versioned client class' do
+        svc_class = Service.define(:identifier, apis)
+        expect(svc_class.const_get(:Client)).to receive(:add_plugin).with('p')
+        svc_class.add_plugin('p')
+      end
+
+    end
+
+    describe '.remove_plugin' do
+
+      it 'removes a plugin from each versioned client class' do
+        svc_class = Service.define(:identifier, apis)
+        expect(svc_class.const_get(:Client)).to receive(:remove_plugin).with('p')
+        svc_class.remove_plugin('p')
+      end
+
+    end
+
   end
 end

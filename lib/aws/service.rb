@@ -36,6 +36,20 @@ module Aws
       # @api private
       attr_accessor :identifier
 
+      # Adds a plugin to each versioned client class.
+      # @param [Plugin] plugin
+      # @return [void]
+      def add_plugin(plugin)
+        const_get(:Client).add_plugin(plugin)
+      end
+
+      # Removes a plugin from each versioned client class.
+      # @param [Plugin] plugin
+      # @return [void]
+      def remove_plugin(plugin)
+        const_get(:Client).remove_plugin(plugin)
+      end
+
       # @param [Symbol] identifier The downcased short name for this service.
       # @param [Array<Api, String>] apis An array of client APIs for this
       #   service.  Values may be string paths to API files or instances of

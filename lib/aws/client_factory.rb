@@ -56,6 +56,30 @@ module Aws
         client_defaults[:api_version] || latest_version
       end
 
+      # @return [Array<Class>] Returns all of the registered versioned client
+      #   classes for this factory.
+      def client_classes
+        versions.map { |v| client_class(api_version: v) }
+      end
+
+      # Adds a plugin to each versioned client class.
+      # @param [Plugin] plugin
+      # @return [void]
+      def add_plugin(plugin)
+        client_classes.each do |client_class|
+          client_class.add_plugin(plugin)
+        end
+      end
+
+      # Removes a plugin from each versioned client class.
+      # @param [Plugin] plugin
+      # @return [void]
+      def remove_plugin(plugin)
+        client_classes.each do |client_class|
+          client_class.remove_plugin(plugin)
+        end
+      end
+
       # @return [Symbol]
       # @api private
       attr_accessor :identifier

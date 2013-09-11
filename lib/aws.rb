@@ -69,6 +69,32 @@ module Aws
     #   by all constructed clients.
     attr_accessor :config
 
+    # Adds a plugin to every AWS client class.  This registers the plugin
+    # with each versioned client for each service.
+    # @param [Plugin] plugin
+    # @return [void]
+    def add_plugin(plugin)
+      service_classes.each do |svc_class|
+        svc_class.add_plugin(plugin)
+      end
+    end
+
+    # Removes a plugin to from AWS client class.  This removes the plugin
+    # from each versioned client for each service.
+    # @param [Plugin] plugin
+    # @return [void]
+    def remove_plugin(plugin)
+      service_classes.each do |svc_class|
+        svc_class.remove_plugin(plugin)
+      end
+    end
+
+    # @return [Array<Class>]
+    # @api private
+    def service_classes
+      @service_classes ||=[]
+    end
+
     # Registers a new service interface.  This method accepts a constant
     # (class name) for the new service class and a list of client API
     # versions.
@@ -85,6 +111,7 @@ module Aws
     def add_service(name, apis = [])
       identifier = name.downcase.to_sym
       svc_class = const_set(name, Service.define(identifier, apis))
+      service_classes << svc_class
       self.class.send(:define_method, identifier) do |options = {}|
         svc_class.new(options)
       end

@@ -55,7 +55,34 @@ module Aws
 
     end
 
-    describe 'define' do
+    describe '.add_plugin' do
+
+      it 'adds a plugin to each versioned client class' do
+        plugin = double('plugin')
+        clients = ClientFactory.define(:name, apis)
+        clients.add_plugin(plugin)
+        clients.client_classes.each do |klass|
+          expect(klass.plugins).to include(plugin)
+        end
+      end
+
+    end
+
+    describe '.remove_plugin' do
+
+      it 'removes a plugin from each versioned client class' do
+        plugin = double('plugin')
+        clients = ClientFactory.define(:name, apis)
+        clients.add_plugin(plugin)
+        clients.remove_plugin(plugin)
+        clients.client_classes.each do |klass|
+          expect(klass.plugins).not_to include(plugin)
+        end
+      end
+
+    end
+
+    describe '.define' do
 
       it 'defines a new client factory' do
         clients = ClientFactory.define(:identifier)
@@ -135,6 +162,14 @@ module Aws
     end
 
     describe 'client classes' do
+
+      it 'returns each client class from .client_classes' do
+        clients = ClientFactory.define(:name, apis)
+        expect(clients.client_classes).to eq([
+          clients.const_get(:V20130101),
+          clients.const_get(:V20130202),
+        ])
+      end
 
       it 'defines clients for each api version' do
         target = Seahorse::Client::Base
