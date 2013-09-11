@@ -20,12 +20,57 @@ module Aws
 
     class << self
 
+      # Constructs and returns versioned API client.  Defaults to the 
+      # newest/latest API version.
+      #
+      #     Aws::DynamoDB::Client.new
+      #     #=> #<Aws::DynamoDB::Client::V20120810>
+      #
+      # ## Specify API Version
+      #
+      # You can specify the API version and get a different client.
+      #
+      #     Aws::DynamoDB::Client.new(api_version: '2011-12-05')
+      #     #=> #<Aws::DynamoDB::Client::V20111205>
+      #
+      # ## Locking API Versions
+      #
+      # You can lock the API version for a service via {Aws.config}:
+      #
+      #     Aws.config[:dynamodb] = { api_version: '2011-12-05' }
+      #     Aws::DynamoDB::Client.new
+      #     #=> #<Aws::DynamoDB::Client::V20111205>
+      #
+      # ## Global API Version Locking
+      #
+      # You can lock the API version for *every* service by setting the
+      # api version globally.
+      #
+      #     Aws.config[:api_version] = '2012-01-01'
+      #
+      #     Aws::S3::Client.new
+      #     #=> #<Aws::S3::Client::V20060301>
+      #
+      #     Aws::DynamoDB::Client.new
+      #     #=> #<Aws::DynamoDB::Client::V20111205>
+      #
+      # When constructing a client, the versioned client that was current
+      # on the locked date will be constructed and returned.
+      #
       # @return [Seahorse::Client::Base] Returns a versioned client.
+      #
+      # @see .versions
+      # @see .latest_version
+      # @see .default_version
+      #
       def new(options = {})
         client_class(options).new(client_defaults.merge(options))
       end
 
-      # Register an API for this client.
+      # Registers a new API version for this client factory.  You need to
+      # provide the API version in `YYYY-MM-DD` format and an API.
+      # The `api` may be a string path to an API on disk or a fully
+      # constructed `Seahorse::Model::Api` object.
       #
       # @example Register a client with a path to the JSON api.
       #   Aws::S3::Client.add_version('2013-01-02', '/path/to/api/src.json')
@@ -41,17 +86,20 @@ module Aws
         apis[api_version] = api
       end
 
-      # @return [Array<String>]
+      # @return [Array<String>] Returns a list of supported API versions
+      #   in a `YYYY-MM-DD` format.
       def versions
         apis.keys.sort
       end
 
-      # @return [String<YYYY-MM-DD>]
+      # @return [String<YYYY-MM-DD>] Returns the most current API version.
       def latest_version
         versions.last
       end
 
-      # @return [String<YYYY-MM-DD>]
+      # @return [String<YYYY-MM-DD>] Returns the default API version.  This
+      #   is the version of the client that will be constructed if there
+      #   is other configured or specified API version.
       def default_version
         client_defaults[:api_version] || latest_version
       end
