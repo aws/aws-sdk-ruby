@@ -18,6 +18,11 @@ def svc_class_name(api)
   [name, prefix].sort_by(&:size).first
 end
 
+def svc_plugins(endpoint_prefix)
+  config = MultiJson.load(File.read('apis-src/plugins.json'))
+  config[endpoint_prefix] || []
+end
+
 desc "Translates the API souce files into Seahorse APIs"
 task :apis do
 
@@ -29,13 +34,19 @@ task :apis do
   FileUtils.mkdir_p('apis')
   Dir.glob('apis-src/*.json').each do |path|
 
-    # skip the pagination descriptions
-    next if path.match(/paginators/)
+    # expecting apis-src/prefix-YYYY-MM-DD.json
+    matches = path.match(/^apis-src\/(\w+)-(\d{4}-\d{2}-\d{2}).json$/)
 
-    puts "translating #{path.split('/')[1]}"
+    next unless matches # skip extra configuration files like paginators
+
+    endpoint_prefix = matches[1]
+    api_version = matches[2]
+
+    puts "translating #{path}"
     MultiJson.engine = 'json_gem' # for consistent formatting
     api_src = MultiJson.load(File.read(path), max_nesting: nil)
     api = Aws::ApiTranslator.translate(api_src, documentation: false)
+    api.plugins += svc_plugins(endpoint_prefix)
 
     target = "apis/#{svc_class_name(api)}-#{api.version}.json"
     File.open(target, 'w') do |file|
@@ -43,5 +54,4 @@ task :apis do
     end
 
   end
-
 end
