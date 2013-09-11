@@ -100,6 +100,30 @@ plugins. Currently the support for REST operations and JSON/XML serialization
 live in [aws-sdk-ruby-core](http://github.com/aws/aws-sdk-ruby-core), but will
 be merged back into Seahorse eventually.
 
-## The Model, Client, and Plugins
+## The Model
 
-More information on how models, clients, and plugins interoperate will be added.
+Seahorse is driven by a descriptive model of a web service. Typically, this
+description is loaded from a JSON file, but it can be defined by any hash-like
+structure. The model loaded from this structure is represented by a
+`Seahorse::Model::Api` object, which is the root node of any service
+description. An API contains a set of operations, which in turn contain input
+and output parameters (known as Shapes) representing the data to be serialized
+and de-serialized from the wire.
+
+To load a JSON description into an Api object, you would use
+{Seahorse::Model::Node.from_hash Api.from_hash}:
+
+```ruby
+require 'json'
+
+json = JSON.parse(File.read('path/to/model.json'))
+api = Seahorse::Model::Api.from_hash(json)
+api.validate!
+```
+
+The {Seahorse::Model::Api} class provides a more detailed view of the properties
+available to a description.
+
+## The Client and Plugin Architecture
+
+More information on how clients, and plugins interoperate will be added.
