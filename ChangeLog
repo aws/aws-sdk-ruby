@@ -1,4 +1,36 @@
+2013-09-10 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/glacier/step_definitions/vaults.rb,
+  features/glacier/vaults.feature, lib/aws/glacier/vault.rb: Fixed a bug with
+  Glacier::Vault attributes.
+
+2013-09-09 Alex Wood <awood45@gmail.com>
+
+  * doc-src/OpsWorks/V20130218.yml,
+  lib/aws/api_config/OpsWorks-2013-02-18.yml: Update AWS OpsWorks to latest
+  API version.
+
+  Adds VPC support to AWS OpsWorks.
+
+2013-09-06 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/client.rb: Moved code from the s3 versioned client into the
+  base client class.
+
+  This fixes a few broken specs.
+
+2013-09-05 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/client.rb, lib/aws/s3/client.rb: Resolved an issue where
+  service client classes returned an empty list from .operations
+
+  The versioned client classes correctly return the list of operations
+  they support.  The service client class now proxies the call to the
+  versioned client class.
+
 2013-09-04 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.17.0
 
   * README.md, doc-src/ElastiCache/V20130615.yml,
   lib/aws/api_config/ElastiCache-2012-11-15.yml,
@@ -6,6 +38,8 @@
   lib/aws/elasticache/client.rb: Add Redis support to Amazon ElastiCache
 
   Updates the AWS::ElastiCache::Client class to the latest API version.
+
+  * lib/aws/simple_workflow.rb: fix AWS::SimpleWorkflow documentation example.
 
 2013-09-03 Kyle Dayton <kyle@graphicflash.com>
 
