@@ -41,22 +41,6 @@ module Aws
       #     Aws::DynamoDB::Client.new
       #     #=> #<Aws::DynamoDB::Client::V20111205>
       #
-      # ## Global API Version Locking
-      #
-      # You can lock the API version for *every* service by setting the
-      # api version globally.
-      #
-      #     Aws.config[:api_version] = '2012-01-01'
-      #
-      #     Aws::S3::Client.new
-      #     #=> #<Aws::S3::Client::V20060301>
-      #
-      #     Aws::DynamoDB::Client.new
-      #     #=> #<Aws::DynamoDB::Client::V20111205>
-      #
-      # When constructing a client, the versioned client that was current
-      # on the locked date will be constructed and returned.
-      #
       # @return [Seahorse::Client::Base] Returns a versioned client.
       #
       # @see .versions
