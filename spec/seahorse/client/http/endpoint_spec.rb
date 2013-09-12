@@ -17,11 +17,6 @@ module Seahorse
   module Client
     module Http
       describe Endpoint do
-
-        it 'is a string' do
-          expect(Endpoint.new('foo.com')).to be_kind_of(String)
-        end
-
         describe 'constructor' do
 
           it 'can be constructed from a string' do
@@ -67,6 +62,14 @@ module Seahorse
             expect(Endpoint.new('foo.com', ssl_default: false).scheme).to eq('http')
           end
 
+          it 'can be changed' do
+            endpoint = Endpoint.new('http://foo.com')
+            endpoint.scheme = 'https'
+            expect(endpoint.port).to eq(80)
+            expect(endpoint.scheme).to eq('https')
+            expect(endpoint).to eq('https://foo.com:80')
+          end
+
         end
 
         describe '#http?' do
@@ -100,6 +103,13 @@ module Seahorse
             expect(Endpoint.new('abc.mno.xyz').host).to eq('abc.mno.xyz')
           end
 
+          it 'can be changed' do
+            endpoint = Endpoint.new('http://foo.com')
+            endpoint.host = 'bar.com'
+            expect(endpoint.host).to eq('bar.com')
+            expect(endpoint).to eq('http://bar.com')
+          end
+
         end
 
         describe '#port' do
@@ -115,6 +125,53 @@ module Seahorse
           it 'can be specified in the constructor' do
             expect(Endpoint.new('http://foo.com:123').port).to eq(123)
             expect(Endpoint.new('foo.com:321').port).to eq(321)
+          end
+
+          it 'can be changed' do
+            endpoint = Endpoint.new('http://foo.com')
+            endpoint.port = 443
+            expect(endpoint.scheme).to eq('http')
+            expect(endpoint.port).to eq(443)
+            expect(endpoint).to eq('http://foo.com:443')
+          end
+
+        end
+
+        describe '#user' do
+
+          it 'defaults to nil' do
+            expect(Endpoint.new('foo.com').user).to be(nil)
+          end
+
+          it 'is parsed from the endpoint string' do
+            expect(Endpoint.new('http://user@foo.com').user).to eq('user')
+          end
+
+          it 'can be set' do
+            endpoint = Endpoint.new('foo.com')
+            endpoint.user = 'abc'
+            expect(endpoint.user).to eq('abc')
+            expect(endpoint).to eq('https://abc@foo.com')
+          end
+
+        end
+
+        describe '#password' do
+
+          it 'defaults to nil' do
+            expect(Endpoint.new('foo.com').password).to be(nil)
+          end
+
+          it 'is parsed from the endpoint string' do
+            expect(Endpoint.new('http://u:p@foo.com').password).to eq('p')
+          end
+
+          it 'can be set' do
+            endpoint = Endpoint.new('foo.com')
+            endpoint.user = 'u'
+            endpoint.password = 'p'
+            expect(endpoint.password).to eq('p')
+            expect(endpoint).to eq('https://u:p@foo.com')
           end
 
         end

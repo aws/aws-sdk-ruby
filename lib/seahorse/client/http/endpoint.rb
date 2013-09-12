@@ -34,53 +34,72 @@ module Seahorse
       #     puts Endpoint.new('foo.com', ssl_default: false)
       #     #=> 'http://foo.com'
       #
-      class Endpoint < String
+      class Endpoint
 
-        # @option (see #to_uri)
+        # @param [Endpoint, String] endpoint
+        # @option options [Boolean] :ssl_default (true)
         def initialize(endpoint, options = {})
-          uri = to_uri(endpoint, options)
-          @scheme = uri.scheme
-          @host = uri.host
-          @port = uri.port
-          super(uri.to_s)
+          endpoint = endpoint.to_s
+          unless endpoint =~ /^http/
+            endpoint = apply_scheme(endpoint, options)
+          end
+          URI.parse(endpoint).tap do |uri|
+            @scheme = uri.scheme
+            @host = uri.host
+            @port = uri.port
+            @user = uri.user
+            @password = uri.password
+          end
         end
 
         # @return [String] Returns the endpoint scheme ('https' or 'http').
-        attr_reader :scheme
+        attr_accessor :scheme
 
         # @return [String] Returns the endpoint host (e.g. 'foo.com')
-        attr_reader :host
+        attr_accessor :host
 
         # @return [Integer] Returns the endpoint port number (e.g. 443).
-        attr_reader :port
+        attr_accessor :port
+
+        # @return [String, nil]
+        attr_accessor :user
+
+        # @return [String, nil]
+        attr_accessor :password
 
         # @return [Boolean]
         def http?
-          scheme == 'http'
+          @scheme == 'http'
         end
 
         # @return [Boolean]
         def https?
-          scheme == 'https'
+          @scheme == 'https'
         end
-        alias secure? https?
+
+        # @return [String]
+        # @api private
+        def inspect
+          URI.parse("#{@scheme}://#{userpass}#{@host}:#{@port}").to_s
+        end
+        alias to_str inspect
+        alias to_s inspect
+
+        # @return [Boolean]
+        # @api private
+        def eq(other)
+          to_s == other.to_s
+        end
+        alias == eq
 
         private
 
-        # @param [Endpoint] endpoint
-        # @option options [Boolean] :ssl_default (true)
-        # @return [URI::HTTP, URI::HTTPS]
-        def to_uri(endpoint, options = {})
-          endpoint = endpoint.to_s
-          endpoint = apply_scheme(endpoint, options) unless endpoint =~ /^http/
-          URI.parse(endpoint)
-        end
-
-        # @param [String] endpoint
-        # @option options [Boolean] :ssl_default (true)
-        # @return [String]
         def apply_scheme(endpoint, options)
           "http#{options.fetch(:ssl_default, true) ? 's' : ''}://#{endpoint}"
+        end
+
+        def userpass
+          [@user, @password].compact.join(':') + '@' if @user
         end
 
       end
