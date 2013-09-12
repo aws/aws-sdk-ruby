@@ -263,19 +263,16 @@ module Seahorse
 
         it 'consults plugin list to see what client class to construct' do
           subclient_class = Class.new(client_class)
-
           plugin = double('plugin')
-          plugin.stub(:client_class_for) do |klass, config|
-            subclient_class
-          end
-
+          allow(plugin).to receive(:client_class_for).
+            and_return(subclient_class)
           client_class.add_plugin(plugin)
           expect(client_class.client_class).to be(subclient_class)
         end
 
         it 'does not change the client class if plugin#construct_client does not return Class' do
           plugin = Class.new(Plugin)
-          plugin.stub(:construct_client) {|c,o| nil }
+          allow(plugin).to receive(:construct_client)
           client_class.add_plugin(plugin)
           expect(client_class.client_class).to be(client_class)
         end
@@ -286,11 +283,11 @@ module Seahorse
           stub_const("ClassC", Class.new)
 
           plugin1 = double('plugin1')
-          plugin1.stub(:client_class_for) {|c,o| ClassA }
+          allow(plugin1).to receive(:client_class_for).and_return(ClassA)
           plugin2 = double('plugin2')
-          plugin2.stub(:client_class_for) {|c,o| ClassB }
+          allow(plugin2).to receive(:client_class_for).and_return(ClassB)
           plugin3 = double('plugin3')
-          plugin3.stub(:client_class_for) {|c,o| ClassC }
+          allow(plugin3).to receive(:client_class_for).and_return(ClassC)
 
           client_class.add_plugin(plugin1)
           client_class.add_plugin(plugin2)
@@ -304,7 +301,8 @@ module Seahorse
 
         it 'constructs the class specified by .client_class' do
           new_client_class = Class.new { def initialize(cfg); end }
-          client_class.stub(:client_class) { new_client_class }
+          allow(client_class).to receive(:client_class).
+            and_return(new_client_class)
           client = client_class.new(foo: 'bar')
           expect(client).to be_kind_of(new_client_class)
         end
@@ -312,7 +310,8 @@ module Seahorse
         it 'instructs plugins to #initialize_client' do
           initialized_client = nil
           plugin = double('plugin')
-          plugin.stub(:initialize_client) {|c| initialized_client = c }
+          allow(plugin).to receive(:initialize_client) { |c| 
+            initialized_client = c }
           client_class.add_plugin(plugin)
           client = client_class.new
           expect(initialized_client).to be(client)
@@ -320,7 +319,7 @@ module Seahorse
 
         it 'instructs plugins to #add_options' do
           plugin = double('plugin')
-          plugin.stub(:add_options) { |config| config.add_option(:foo) }
+          allow(plugin).to receive(:add_options) { |config| config.add_option(:foo) }
           client_class.add_plugin(plugin)
           expect(client_class.new.config).to respond_to(:foo)
         end

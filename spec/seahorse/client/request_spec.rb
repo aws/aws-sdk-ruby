@@ -62,14 +62,15 @@ module Seahorse
 
         it 'passes the request context to the handler stack' do
           passed = nil
-          handlers.stub(:to_stack).and_return(->(context) { passed = context })
+          allow(handlers).to receive(:to_stack).
+            and_return(->(context) { passed = context })
           request.send_request
           expect(passed).to be(context)
         end
 
         it 'returns the response from the handler stack' do
           resp = Response.new
-          handlers.stub(:to_stack).and_return(->(context) { resp })
+          allow(handlers).to receive(:to_stack).and_return(->(context) { resp })
           expect(Request.new(handlers, context).send_request).to be(resp)
         end
 
@@ -87,7 +88,7 @@ module Seahorse
         end
 
         before(:each) do
-          handlers.stub(:to_stack).and_return(handler)
+          allow(handlers).to receive(:to_stack).and_return(handler)
         end
 
         it 'streams data from the handler to the #send_request block' do

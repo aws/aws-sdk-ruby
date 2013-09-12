@@ -44,7 +44,7 @@ module Seahorse
 
         it 'passes block arguments to the #send_request method' do
           req = double('request')
-          client.stub(:build_request).and_return(req)
+          allow(client).to receive(:build_request).and_return(req)
           allow(req).to receive(:send_request).
             and_yield('chunk1').
             and_yield('chunk2').
@@ -62,7 +62,7 @@ module Seahorse
           next_client_class.remove_plugin OperationMethods
           client = next_client_class.new
 
-          expect(client.methods).to_not include(*operations.map(&:to_sym))
+          expect(client.methods).not_to include(*operations.map(&:to_sym))
           expect { client.operation1 }.to raise_error(NoMethodError)
         end
 
