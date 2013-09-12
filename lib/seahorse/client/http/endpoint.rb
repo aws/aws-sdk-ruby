@@ -83,15 +83,6 @@ module Seahorse
           "http#{options.fetch(:ssl_default, true) ? 's' : ''}://#{endpoint}"
         end
 
-        class << self
-
-          # @param [Configuration] config
-          # @return [Endpoint]
-          def from(config)
-            Http::Endpoint.new(config.endpoint, ssl_default: config.ssl_default)
-          end
-
-        end
       end
     end
   end
