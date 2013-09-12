@@ -54,13 +54,16 @@ module Seahorse
         # @return [Integer] Returns the endpoint port number (e.g. 443).
         attr_reader :port
 
+        # @return [Boolean]
         def http?
           scheme == 'http'
         end
 
+        # @return [Boolean]
         def https?
           scheme == 'https'
         end
+        alias secure? https?
 
         private
 
