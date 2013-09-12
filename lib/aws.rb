@@ -38,6 +38,8 @@ module Aws
     autoload :QuerySerializer, 'aws/plugins/query_serializer'
     autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
     autoload :RestProtocol, 'aws/plugins/rest_protocol'
+    autoload :S3BucketDns, 'aws/plugins/s3_bucket_dns'
+    autoload :S3RegionalEndpoint, 'aws/plugins/s3_regional_endpoint'
     autoload :Signer, 'aws/plugins/signer'
     autoload :XmlSerializer, 'aws/plugins/xml_serializer'
   end

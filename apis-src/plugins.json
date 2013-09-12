@@ -1,0 +1,6 @@
+{
+  "s3": [
+    "Aws::Plugins::S3BucketDns",
+    "Aws::Plugins::S3RegionalEndpoint"
+  ]
+}
