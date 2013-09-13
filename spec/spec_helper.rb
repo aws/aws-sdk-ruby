@@ -21,6 +21,7 @@ require 'aws-sdk-core'
 
 require 'seahorse'
 require 'multi_json'
+require 'yaml'
 
 # A helper :send_handler that does not send the request, it simply
 # returns an empty response.
@@ -35,7 +36,6 @@ class DummySendPlugin < Seahorse::Client::Plugin
   option(:response_body) { '{}' }
   handler DummySendHandler, step: :send
 end
-
 def fixture(name, raw = false)
   @fixtures ||= {}
   if !@fixtures[[name, raw]]

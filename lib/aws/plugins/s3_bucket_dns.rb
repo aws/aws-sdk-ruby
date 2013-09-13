@@ -43,12 +43,12 @@ module Aws
         # uses SSL.
         def move_dns_buckets(bucket_name, req)
           if dns_compatible?(bucket_name.to_s)
-            unless req.endpoint.https? && bucket_name.match('.')
+            unless req.endpoint.https? && bucket_name.match(/\./)
               # strip the bucket (and its preceeding slash) from the request
               # path and move it in-front of the host as a subdomain.
               req.endpoint.host = "#{bucket_name}.#{req.endpoint.host}"
               req.path = req.path[(bucket_name.size + 1)..-1]
-              req.path = "/#{req.path}" unless path.match(/^\//)
+              req.path = "/#{req.path}" unless req.path.match(/^\//)
             end
           end
         end

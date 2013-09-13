@@ -68,23 +68,23 @@ module Aws
           if rule.is_a?(MapShape)
             build_header_map(rule, headers, value)
           else
-            headers[rule.serialized_name] = cast_header_value(rule, value)
+            headers[rule.serialized_name] = serialize_header_value(rule, value)
           end
         end
 
         def build_header_map(shape, headers, hash)
           hash.each_pair do |suffix, value|
             headers["#{shape.serialized_name}#{suffix}"] =
-              cast_header_value(shape.members, value)
+              serialize_header_value(shape.members, value)
           end
         end
 
-        def cast_header_value(rule, value)
+        def serialize_header_value(shape, value)
           case shape
-            when UnixTimestampShape then value.to_i.to_s
-            when Rfc822TimestampShape then value.utc.iso8601
-            when Iso8601TimestampShape then value.utc.rfc822
-            else value.to_s
+          when UnixTimestampShape then value.to_i.to_s
+          when Rfc822TimestampShape then value.utc.rfc822
+          when Iso8601TimestampShape then value.utc.iso8601
+          else value.to_s
           end
         end
 
@@ -110,7 +110,7 @@ module Aws
           if shape.is_a?(MapShape)
             header_map(shape, headers)
           else
-            cast_header_value(shape, headers[shape.serialized_name])
+            parse_header_value(shape, headers[shape.serialized_name])
           end
         end
 
@@ -118,19 +118,20 @@ module Aws
           hash = {}
           headers.each do |header, value|
             if match = header.match(/^#{shape.serialized_name}(.+)/)
-              hash[match[1]] = cast_header_value(shape.members, value)
+              hash[match[1]] = parse_header_value(shape.members, value)
             end
           end
           hash
         end
 
-        def cast_header_value(shape, value)
+        def parse_header_value(shape, value)
           if value
             case shape
             when UnixTimestampShape then Time.at(value.to_i)
             when TimestampShape then Time.parse(value)
             when IntegerShape then value.to_i
             when FloatShape then value.to_f
+            when BooleanShape then value == 'true'
             else value
             end
           end
@@ -138,7 +139,7 @@ module Aws
 
       end
 
-      handle(Handler)
+      handle(Handler, priority: 90)
 
     end
   end
