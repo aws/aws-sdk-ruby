@@ -21,7 +21,8 @@ end
 
 group :documentation do
   gem 'yard', '>= 0.8.7', '< 1.0'
-  gem 'rdiscount'
+  gem 'rdiscount', github: 'lsegal/rdiscount', branch: 'gfm-fenced-code'
+  gem 'yard-sitemap', '~> 1.0'
   gem 'rdoc', '= 3.9.4'
 end
 
