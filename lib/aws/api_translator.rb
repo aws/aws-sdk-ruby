@@ -216,7 +216,6 @@ module Aws
         shape.members.each do |member_name, member|
           if member.metadata['payload']
             member.metadata.delete('payload')
-            puts member_name.inspect
             shape.payload = member_name
           end
         end
