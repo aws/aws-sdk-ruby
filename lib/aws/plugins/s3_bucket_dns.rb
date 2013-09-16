@@ -32,34 +32,48 @@ module Aws
 
         def call(context)
           unless context.config.force_path_style
-            move_dns_buckets(context.params[:bucket], context.http_request)
+            move_dns_compat_bucket_to_subdomain(context)
           end
           @handler.call(context)
         end
 
-        # Moves DNS compatible bucket names from the request uri path to
-        # the endpoint host as a subdomain.  This is skipped for DNS
-        # compatible bucket names that contain a dot if the request
-        # uses SSL.
-        def move_dns_buckets(bucket_name, req)
-          if dns_compatible?(bucket_name.to_s)
-            unless req.endpoint.https? && bucket_name.match(/\./)
-              # strip the bucket (and its preceeding slash) from the request
-              # path and move it in-front of the host as a subdomain.
-              req.endpoint.host = "#{bucket_name}.#{req.endpoint.host}"
-              req.path = req.path[(bucket_name.size + 1)..-1]
-              req.path = "/#{req.path}" unless req.path.match(/^\//)
+        private
+
+        def move_dns_compat_bucket_to_subdomain(context)
+          if bucket_name = context.params[:bucket]
+            req = context.http_request
+            if S3BucketDns.dns_compatible?(bucket_name, req.endpoint.https?)
+              move_bucket_to_subdomain(bucket_name, req)
             end
           end
         end
 
-        # DNS compatible bucket names must begin and end with a lower-cased
-        # letter or number, must be 3..64 characters in length,
-        # may not look like an IP address and may not contain consecutive
-        # dots or dashes.
+        def move_bucket_to_subdomain(bucket_name, req)
+          req.endpoint.host = "#{bucket_name}.#{req.endpoint.host}"
+          req.path = req.path[(bucket_name.size + 1)..-1]
+          req.path = "/#{req.path}" unless req.path.match(/^\//)
+        end
+
+      end
+
+      handler(Handler)
+
+      class << self
+
         # @param [String] bucket_name
+        # @param [Boolean] ssl
         # @return [Boolean]
-        def dns_compatible?(bucket_name)
+        def dns_compatible?(bucket_name, ssl)
+          if valid_subdomain?(bucket_name)
+            bucket_name.match(/\./) && ssl ? false : true
+          else
+            false
+          end
+        end
+
+        private
+
+        def valid_subdomain?(bucket_name)
           bucket_name.size < 64 &&
           bucket_name =~ /^[a-z0-9][a-z0-9.-]+[a-z0-9]$/ &&
           bucket_name !~ /(\d+\.){3}\d+/ &&
@@ -67,9 +81,6 @@ module Aws
         end
 
       end
-
-      handler(Handler)
-
     end
   end
 end

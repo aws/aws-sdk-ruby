@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'cgi'
-
 module Aws
   module Query
     class Param
@@ -20,7 +18,7 @@ module Aws
       # @param [String] name
       # @param [String, nil] value (nil)
       def initialize(name, value = nil)
-        @name = name
+        @name = name.to_s
         @value = value
       end
 
@@ -50,7 +48,7 @@ module Aws
       private
 
       def escape(str)
-        CGI::escape(str.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
+        Util.uri_escape(str)
       end
 
     end

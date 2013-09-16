@@ -54,6 +54,7 @@ module Aws
 
   # @api private
   module Signers
+    autoload :S3, 'aws/signers/s3'
     autoload :Version2, 'aws/signers/version_2'
     autoload :Version3, 'aws/signers/version_3'
     autoload :Version4, 'aws/signers/version_4'

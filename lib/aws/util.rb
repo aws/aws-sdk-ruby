@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'cgi'
+
 module Aws
   # @api private
   module Util
@@ -39,6 +41,11 @@ module Aws
       inflector[string]
     end
     module_function :underscore
+
+    def uri_escape(string)
+      CGI::escape(string.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
+    end
+    module_function :uri_escape
 
   end
 end

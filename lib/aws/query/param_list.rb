@@ -32,6 +32,12 @@ module Aws
         @params[param.name] = param
         param
       end
+      alias []= set
+
+      # @return [Param, nil]
+      def [](param_name)
+        @params[param_name.to_s]
+      end
 
       # @param [String] param_name
       # @return [Param, nil]
