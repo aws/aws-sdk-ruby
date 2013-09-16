@@ -1,0 +1,54 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+config:
+  region: us-west-2
+operation: list_buckets
+params: {}
+request:
+  host: s3-us-west-2.amazonaws.com
+  method: GET
+  path: /
+  headers: {}
+  body: ''
+response:
+  status_code: 200
+  headers:
+    X-Amz-Request-Id: AD2123C9A457305E
+    X-Amz-Delete-Marker: false
+  body: |
+    <ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+      <Owner>
+        <ID>owner-id</ID>
+        <DisplayName>aws-sdk</DisplayName>
+      </Owner>
+      <Buckets>
+        <Bucket>
+          <Name>aws-sdk</Name>
+          <CreationDate>2012-03-19T16:37:04.000Z</CreationDate>
+        </Bucket>
+        <Bucket>
+          <Name>aws-sdk-2</Name>
+          <CreationDate>2013-06-25T20:37:48.000Z</CreationDate>
+        </Bucket>
+      </Buckets>
+    </ListAllMyBucketsResult>
+data:
+  :owner:
+    :id: owner-id
+    :display_name: aws-sdk
+  :buckets:
+    - :name: aws-sdk
+      :creation_date: 2012-03-19 16:37:04 Z
+    - :name: aws-sdk-2
+      :creation_date: 2013-06-25 20:37:48 Z
