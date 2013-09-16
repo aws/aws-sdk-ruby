@@ -19,6 +19,7 @@ module Seahorse
       def initialize(*)
         super
         self.metadata = {}
+        self.input = InputShape.new
       end
 
       property :name, String
@@ -33,6 +34,8 @@ module Seahorse
       def to_hash
         hash = super
         hash.delete('metadata') if hash['metadata'].empty?
+        puts hash.inspect if hash['input'].nil?
+        hash.delete('input') if hash['input']['members'].empty?
         hash
       end
 
