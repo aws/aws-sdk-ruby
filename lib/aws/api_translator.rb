@@ -184,8 +184,8 @@ module Aws
       end
 
       operation = Seahorse::Model::Operation.from_hash(@properties)
-      operation.input = @input
-      operation.output = @output
+      operation.input = @input if @input
+      operation.output = @output if @output
       operation.errors = @errors if @errors
       operation
     end

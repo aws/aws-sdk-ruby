@@ -1881,11 +1881,6 @@
       "name": "ListPipelines",
       "http_method": "GET",
       "http_path": "/2012-09-25/pipelines",
-      "input": {
-        "type": "input",
-        "members": {
-        }
-      },
       "output": {
         "type": "structure",
         "members": {
@@ -2053,11 +2048,6 @@
       "name": "ListPresets",
       "http_method": "GET",
       "http_path": "/2012-09-25/presets",
-      "input": {
-        "type": "input",
-        "members": {
-        }
-      },
       "output": {
         "type": "structure",
         "members": {
