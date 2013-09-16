@@ -249,12 +249,12 @@ module Aws
     metadata :xmlnamespace
     metadata :xmlattribute
     metadata :payload
-    metadata :streaming
     metadata :wrapper
 
     ignore :shape_name
     ignore :member_order
     ignore :box
+    ignore :streaming
 
     # validation properties
     ignore :pattern
