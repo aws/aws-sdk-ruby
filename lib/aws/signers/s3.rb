@@ -47,7 +47,7 @@ module Aws
         if token = credentials.session_token
           request.headers["X-Amz-Security-Token"] = token
         end
-        request.headers["Authorization"] = authorization(request)
+        request.headers['Authorization'] = authorization(request)
       end
 
       # @param [RequestContext] context
@@ -102,7 +102,7 @@ module Aws
         if request.headers.detect{|k,v| k.to_s =~ /^x-amz-date$/i }
           ''
         else
-          request.headers['Date'] ||= Time.now.httpdate
+          request.headers['Date'] = Time.now.httpdate
         end
       end
 
@@ -137,13 +137,12 @@ module Aws
         if bucket = params[:bucket]
           ssl = request.endpoint.https?
           if Plugins::S3BucketDns.dns_compatible?(bucket.name, ssl)
-            parts << "/#{bucket.name}"
+            parts << "/#{bucket.value}"
           end
         end
 
-        # all requests require the portion of the un-decoded uri up to
-        # but not including the query string
-        parts << request.path
+        # append the path name (no querystring)
+        parts << request.path.split('?')[0]
 
         # lastly any sub resource querystring params need to be appened
         # in lexigraphical ordered joined by '&' and prefixed by '?'

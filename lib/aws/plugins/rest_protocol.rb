@@ -90,7 +90,7 @@ module Aws
 
         def parse_response(response)
           if rules = response.context.operation.output
-            response.data = Structure.new(rules.members.keys)
+            response.data ||= Structure.new(rules.members.keys)
             extract_headers_and_body(rules, response)
           end
         end
@@ -160,7 +160,7 @@ module Aws
           path = escape_path_params(path, params)
           if querystring
             querystring = escape_querystring_params(querystring, params)
-            path = "#{path}?#{querystring}" unless querystring == ''
+            path = "#{path}?#{querystring}" unless querystring.empty?
           end
           path
         end
