@@ -30,7 +30,8 @@ module Aws
         def build_request(context)
           populate_method(context)
           populate_path(context)
-          populated_headers_and_body(context)
+          populate_headers(context)
+          populate_body(context)
         end
 
         def populate_method(context)
@@ -38,29 +39,28 @@ module Aws
         end
 
         def populate_path(context)
-          context.http_request.path =
-            interpolate_path(context.operation.http_path, context.params)
+          builder = UriPathBuilder.new(
+            context.operation.http_path,
+            context.operation.input.uri_members)
+          context.http_request.path = builder.path(context.params)
         end
 
-        def interpolate_path(path, params)
-          path = path.gsub(/([^&\?= ]+?)=\{(.+?)\}(?:&|$)/) do
-            value = params[$2.to_sym]
-            value ? "#{$1}=#{value}" : ""
-          end
-          path = path.gsub(/\{(.+?)\}/) { params[$1.to_sym] }
-          path
-        end
-
-        def populated_headers_and_body(context)
+        def populate_headers(context)
           if rules = context.operation.input
             context.params.each do |param_name, value|
               rule = rules.members[param_name]
               if rule.location == 'header'
                 build_header(rule, context.http_request.headers, value)
-              elsif rule.metadata['streaming']
-                context.http_request.body = value
               end
             end
+          end
+        end
+
+        def populate_body(context)
+          input = context.operation.input
+          if input.raw_payload
+            payload = input.body_members.keys.first
+            context.http_request.body = context.params[payload]
           end
         end
 
@@ -141,6 +141,68 @@ module Aws
 
       handle(Handler, priority: 90)
 
+      # @api private
+      class UriPathBuilder
+
+        PLACEHOLDER_REGEX = /{\w+?}/
+
+        # @param [String] path_pattern
+        # @param [Hash<Seahorse::Model::Shapes::Shape>]
+        def initialize(path_pattern, rules)
+          @pattern = path_pattern
+          @rules = rules
+        end
+
+        # @param [Hash] params
+        # @return [String<URI path>]
+        def path(params)
+          path, querystring = @pattern.split('?')
+          path = escape_path_params(path, params)
+          if querystring
+            querystring = escape_querystring_params(querystring, params)
+            path = "#{path}?#{querystring}" unless querystring == ''
+          end
+          path
+        end
+
+        private
+
+        def escape_path_params(path, params)
+          path.gsub(PLACEHOLDER_REGEX) do |placeholder|
+            param_value = params[param_name(placeholder)]
+            path_escape(param_value)
+          end
+        end
+
+        def escape_querystring_params(querystring, params)
+          parts = []
+          querystring.split('&').each do |part|
+            if match = part.match(PLACEHOLDER_REGEX)
+              placeholder = match[0]
+              param_value = params[param_name(placeholder)]
+              unless param_value.nil?
+                parts << part.sub(placeholder, escape(param_value))
+              end
+            else
+              parts << part # querystring param has no substitution
+            end
+          end
+          parts.join('&')
+        end
+
+        def param_name(placeholder)
+          placeholder[1..-2].to_sym
+        end
+
+        def path_escape(value)
+          escape(value).gsub('%2F', '/')
+        end
+
+        def escape(value)
+          Util.uri_escape(value.to_s)
+        end
+
+      end
     end
   end
 end
