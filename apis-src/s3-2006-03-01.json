@@ -817,7 +817,7 @@
         "type": "structure",
         "members": {
           "DeleteMarker": {
-            "type": "string",
+            "type": "boolean",
             "location": "header",
             "location_name": "x-amz-delete-marker",
             "documentation": "Specifies whether the versioned object that was permanently deleted was (true) or was not (false) a delete marker."
@@ -1746,14 +1746,10 @@
             "documentation": "Object data."
           },
           "DeleteMarker": {
-            "type": "string",
+            "type": "boolean",
             "location": "header",
             "location_name": "x-amz-delete-marker",
-            "documentation": "Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response.",
-            "enum": [
-              "true",
-              "false"
-            ]
+            "documentation": "Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response."
           },
           "AcceptRanges": {
             "type": "string",
@@ -2116,14 +2112,10 @@
         "type": "structure",
         "members": {
           "DeleteMarker": {
-            "type": "string",
+            "type": "boolean",
             "location": "header",
             "location_name": "x-amz-delete-marker",
-            "documentation": "Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response.",
-            "enum": [
-              "true",
-              "false"
-            ]
+            "documentation": "Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response."
           },
           "AcceptRanges": {
             "type": "string",
@@ -2358,6 +2350,9 @@
             "type": "string",
             "documentation": "When a list is truncated, this element specifies the value that should be used for the key-marker request parameter in a subsequent request."
           },
+          "Prefix": {
+            "type": "string"
+          },
           "NextUploadIdMarker": {
             "type": "string",
             "documentation": "When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request."
@@ -2369,9 +2364,6 @@
           "IsTruncated": {
             "type": "boolean",
             "documentation": "Indicates whether the returned list of multipart uploads is truncated. A value of true indicates that the list was truncated. The list can be truncated if the number of multipart uploads exceeds the limit allowed or specified by max uploads."
-          },
-          "Prefix": {
-            "type": "string"
           },
           "Uploads": {
             "type": "list",

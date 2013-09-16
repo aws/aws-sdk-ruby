@@ -666,7 +666,7 @@
     "delete_object": {
       "name": "DeleteObject",
       "http_method": "DELETE",
-      "http_path": "/{bucket}/{key}",
+      "http_path": "/{bucket}/{key}?versionId={version_id}",
       "input": {
         "type": "input",
         "members": {
@@ -679,6 +679,15 @@
             "type": "string",
             "required": true,
             "location": "uri"
+          },
+          "mfa": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-mfa"
+          },
+          "version_id": {
+            "type": "string",
+            "location": "uri"
           }
         }
       },
@@ -686,7 +695,7 @@
         "type": "structure",
         "members": {
           "delete_marker": {
-            "type": "string",
+            "type": "boolean",
             "location": "header",
             "serialized_name": "x-amz-delete-marker"
           },
@@ -1304,7 +1313,7 @@
             "serialized_name": "Status",
             "enum": [
               "Enabled",
-              "Disabled"
+              "Suspended"
             ]
           },
           "mfa_delete": {
@@ -1514,13 +1523,9 @@
             }
           },
           "delete_marker": {
-            "type": "string",
+            "type": "boolean",
             "location": "header",
-            "serialized_name": "x-amz-delete-marker",
-            "enum": [
-              "true",
-              "false"
-            ]
+            "serialized_name": "x-amz-delete-marker"
           },
           "accept_ranges": {
             "type": "string",
@@ -1842,13 +1847,9 @@
         "type": "structure",
         "members": {
           "delete_marker": {
-            "type": "string",
+            "type": "boolean",
             "location": "header",
-            "serialized_name": "x-amz-delete-marker",
-            "enum": [
-              "true",
-              "false"
-            ]
+            "serialized_name": "x-amz-delete-marker"
           },
           "accept_ranges": {
             "type": "string",
@@ -2049,6 +2050,10 @@
             "type": "string",
             "serialized_name": "NextKeyMarker"
           },
+          "prefix": {
+            "type": "string",
+            "serialized_name": "Prefix"
+          },
           "next_upload_id_marker": {
             "type": "string",
             "serialized_name": "NextUploadIdMarker"
@@ -2115,6 +2120,19 @@
                       "serialized_name": "DisplayName"
                     }
                   }
+                }
+              }
+            }
+          },
+          "common_prefixes": {
+            "type": "flat_list",
+            "serialized_name": "CommonPrefixes",
+            "members": {
+              "type": "structure",
+              "members": {
+                "prefix": {
+                  "type": "string",
+                  "serialized_name": "Prefix"
                 }
               }
             }
@@ -3167,7 +3185,7 @@
                 "serialized_name": "Status",
                 "enum": [
                   "Enabled",
-                  "Disabled"
+                  "Suspended"
                 ]
               }
             }
