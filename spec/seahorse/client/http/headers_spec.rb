@@ -169,6 +169,16 @@ module Seahorse
 
         end
 
+        describe '#values_at' do
+
+          it 'returns the values for the given keys' do
+            headers['key1'] = 'v1'
+            headers['key2'] = 'v2'
+            expect(headers.values_at('key2', 'key1')).to eql(['v2', 'v1'])
+          end
+
+        end
+
         describe '#key?' do
 
           it 'returns true if the header has been set' do

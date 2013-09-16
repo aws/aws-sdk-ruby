@@ -62,6 +62,10 @@ module Seahorse
           @data.values
         end
 
+        def values_at(*keys)
+          @data.values_at(*keys.map{ |key| key.to_s.downcase })
+        end
+
         # @yield [key, value]
         # @yieldparam [String] key
         # @yieldparam [String] value
