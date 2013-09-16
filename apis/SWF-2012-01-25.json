@@ -119,7 +119,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "count": {
             "type": "integer",
@@ -220,7 +220,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "count": {
             "type": "integer",
@@ -280,7 +280,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "count": {
             "type": "integer",
@@ -340,7 +340,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "count": {
             "type": "integer",
@@ -571,7 +571,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "type_info": {
             "type": "structure",
@@ -683,7 +683,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "domain_info": {
             "type": "structure",
@@ -772,7 +772,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "execution_info": {
             "type": "structure",
@@ -979,7 +979,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "type_info": {
             "type": "structure",
@@ -1121,7 +1121,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "events": {
             "type": "list",
@@ -2670,7 +2670,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "type_infos": {
             "type": "list",
@@ -2855,7 +2855,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "execution_infos": {
             "type": "list",
@@ -3005,7 +3005,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "domain_infos": {
             "type": "list",
@@ -3130,7 +3130,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "execution_infos": {
             "type": "list",
@@ -3289,7 +3289,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "type_infos": {
             "type": "list",
@@ -3392,7 +3392,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "task_token": {
             "type": "string",
@@ -3513,7 +3513,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "task_token": {
             "type": "string",
@@ -5090,7 +5090,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cancel_requested": {
             "type": "boolean",
@@ -6043,7 +6043,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "run_id": {
             "type": "string",

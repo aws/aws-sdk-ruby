@@ -102,7 +102,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "location": {
             "type": "string",
@@ -292,7 +292,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "copy_object_result": {
             "type": "structure",
@@ -415,7 +415,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "location": {
             "type": "string",
@@ -548,7 +548,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "bucket": {
             "type": "string",
@@ -692,7 +692,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "delete_marker": {
             "type": "boolean",
@@ -760,7 +760,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "deleted": {
             "type": "flat_list",
@@ -830,7 +830,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "owner": {
             "type": "structure",
@@ -923,7 +923,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cors_rules": {
             "type": "flat_list",
@@ -984,7 +984,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "rules": {
             "type": "flat_list",
@@ -1066,7 +1066,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "location_constraint": {
             "type": "string",
@@ -1090,7 +1090,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "logging_enabled": {
             "type": "structure",
@@ -1176,7 +1176,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "topic_configuration": {
             "type": "structure",
@@ -1213,7 +1213,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "policy": {
             "type": "string",
@@ -1240,7 +1240,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "payer": {
             "type": "string",
@@ -1268,7 +1268,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "tag_set": {
             "type": "list",
@@ -1306,7 +1306,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "status": {
             "type": "string",
@@ -1342,7 +1342,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "redirect_all_requests_to": {
             "type": "structure",
@@ -1512,14 +1512,13 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "body": {
             "type": "blob",
             "serialized_name": "Body",
             "metadata": {
-              "payload": true,
-              "streaming": true
+              "payload": true
             }
           },
           "delete_marker": {
@@ -1655,7 +1654,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "owner": {
             "type": "structure",
@@ -1760,14 +1759,13 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "body": {
             "type": "blob",
             "serialized_name": "Body",
             "metadata": {
-              "payload": true,
-              "streaming": true
+              "payload": true
             }
           }
         }
@@ -1844,7 +1842,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "delete_marker": {
             "type": "boolean",
@@ -1960,7 +1958,7 @@
       "http_method": "GET",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "buckets": {
             "type": "list",
@@ -2032,7 +2030,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "bucket": {
             "type": "string",
@@ -2175,7 +2173,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "is_truncated": {
             "type": "boolean",
@@ -2351,7 +2349,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "is_truncated": {
             "type": "boolean",
@@ -2477,7 +2475,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "bucket": {
             "type": "string",
@@ -3343,8 +3341,7 @@
             "type": "blob",
             "serialized_name": "Body",
             "metadata": {
-              "payload": true,
-              "streaming": true
+              "payload": true
             }
           },
           "bucket": {
@@ -3453,7 +3450,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "expiration": {
             "type": "rfc822_timestamp",
@@ -3686,8 +3683,7 @@
             "type": "blob",
             "serialized_name": "Body",
             "metadata": {
-              "payload": true,
-              "streaming": true
+              "payload": true
             }
           },
           "bucket": {
@@ -3718,7 +3714,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "server_side_encryption": {
             "type": "string",
@@ -3797,7 +3793,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "copy_source_version_id": {
             "type": "string",

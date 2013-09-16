@@ -140,7 +140,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "successful": {
             "type": "flat_list",
@@ -248,7 +248,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "queue_url": {
             "type": "string",
@@ -337,7 +337,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "successful": {
             "type": "flat_list",
@@ -456,7 +456,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "attributes": {
             "type": "flat_map",
@@ -513,7 +513,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "queue_url": {
             "type": "string",
@@ -543,7 +543,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "queue_urls": {
             "type": "flat_list",
@@ -605,7 +605,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "messages": {
             "type": "flat_list",
@@ -713,7 +713,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "md5_of_message_body": {
             "type": "string",
@@ -773,7 +773,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "successful": {
             "type": "flat_list",

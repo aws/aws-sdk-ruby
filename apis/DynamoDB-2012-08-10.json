@@ -110,7 +110,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "responses": {
             "type": "map",
@@ -432,7 +432,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "unprocessed_items": {
             "type": "map",
@@ -818,7 +818,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "table_description": {
             "type": "structure",
@@ -1160,7 +1160,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "attributes": {
             "type": "map",
@@ -1344,7 +1344,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "table_description": {
             "type": "structure",
@@ -1567,7 +1567,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "table": {
             "type": "structure",
@@ -1837,7 +1837,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "item": {
             "type": "map",
@@ -1948,7 +1948,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "table_names": {
             "type": "list",
@@ -2118,7 +2118,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "attributes": {
             "type": "map",
@@ -2462,7 +2462,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "items": {
             "type": "list",
@@ -2778,7 +2778,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "items": {
             "type": "list",
@@ -3130,7 +3130,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "attributes": {
             "type": "map",
@@ -3331,7 +3331,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "table_description": {
             "type": "structure",

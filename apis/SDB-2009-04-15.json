@@ -404,7 +404,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "item_count": {
             "type": "integer",
@@ -489,7 +489,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "attributes": {
             "type": "flat_list",
@@ -567,7 +567,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "domain_names": {
             "type": "flat_list",
@@ -755,7 +755,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "items": {
             "type": "flat_list",

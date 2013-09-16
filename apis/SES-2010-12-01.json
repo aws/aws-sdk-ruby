@@ -34,7 +34,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       }
@@ -72,7 +72,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "dkim_attributes": {
             "type": "map",
@@ -129,7 +129,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "notification_attributes": {
             "type": "map",
@@ -176,7 +176,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "verification_attributes": {
             "type": "map",
@@ -213,7 +213,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "max_24_hour_send": {
             "type": "float",
@@ -235,7 +235,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "send_data_points": {
             "type": "list",
@@ -295,7 +295,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "identities": {
             "type": "list",
@@ -316,7 +316,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "verified_email_addresses": {
             "type": "list",
@@ -442,7 +442,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "message_id": {
             "type": "string",
@@ -491,7 +491,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "message_id": {
             "type": "string",
@@ -527,7 +527,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       }
@@ -552,7 +552,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       }
@@ -585,7 +585,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       }
@@ -605,7 +605,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "dkim_tokens": {
             "type": "list",
@@ -632,7 +632,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "verification_token": {
             "type": "string",
@@ -671,7 +671,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       }

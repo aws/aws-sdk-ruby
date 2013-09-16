@@ -46,7 +46,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cloud_front_origin_access_identity": {
             "type": "structure",
@@ -536,7 +536,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "distribution": {
             "type": "structure",
@@ -1204,7 +1204,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "location": {
             "type": "string",
@@ -1457,7 +1457,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "streaming_distribution": {
             "type": "structure",
@@ -1964,7 +1964,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cloud_front_origin_access_identity": {
             "type": "structure",
@@ -2039,7 +2039,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cloud_front_origin_access_identity_config": {
             "type": "structure",
@@ -2100,7 +2100,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "distribution": {
             "type": "structure",
@@ -2556,7 +2556,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "distribution_config": {
             "type": "structure",
@@ -2946,7 +2946,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "invalidation": {
             "type": "structure",
@@ -3043,7 +3043,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "streaming_distribution": {
             "type": "structure",
@@ -3257,7 +3257,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "streaming_distribution_config": {
             "type": "structure",
@@ -3407,7 +3407,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cloud_front_origin_access_identity_list": {
             "type": "structure",
@@ -3492,7 +3492,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "distribution_list": {
             "type": "structure",
@@ -3887,7 +3887,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "invalidation_list": {
             "type": "structure",
@@ -3990,7 +3990,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "streaming_distribution_list": {
             "type": "structure",
@@ -4171,7 +4171,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cloud_front_origin_access_identity": {
             "type": "structure",
@@ -4692,7 +4692,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "distribution": {
             "type": "structure",
@@ -5452,7 +5452,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "streaming_distribution": {
             "type": "structure",

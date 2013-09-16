@@ -31,7 +31,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "success": {
             "type": "boolean",
@@ -120,7 +120,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "job_id": {
             "type": "string",
@@ -296,7 +296,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "job_id": {
             "type": "string",
@@ -425,7 +425,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "jobs": {
             "type": "list",
@@ -517,7 +517,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "success": {
             "type": "boolean",

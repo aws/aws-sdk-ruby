@@ -44,7 +44,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster_security_group": {
             "type": "structure",
@@ -152,7 +152,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "snapshot": {
             "type": "structure",
@@ -309,7 +309,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "snapshot": {
             "type": "structure",
@@ -545,7 +545,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster": {
             "type": "structure",
@@ -842,7 +842,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster_parameter_group": {
             "type": "structure",
@@ -900,7 +900,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster_security_group": {
             "type": "structure",
@@ -994,7 +994,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "snapshot": {
             "type": "structure",
@@ -1161,7 +1161,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster_subnet_group": {
             "type": "structure",
@@ -1272,7 +1272,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster": {
             "type": "structure",
@@ -1577,7 +1577,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "snapshot": {
             "type": "structure",
@@ -1759,7 +1759,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -1827,7 +1827,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "parameters": {
             "type": "list",
@@ -1907,7 +1907,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2026,7 +2026,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2179,7 +2179,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2281,7 +2281,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2334,7 +2334,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2582,7 +2582,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "default_cluster_parameters": {
             "type": "structure",
@@ -2690,7 +2690,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2757,7 +2757,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "orderable_cluster_options": {
             "type": "list",
@@ -2830,7 +2830,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2930,7 +2930,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -3039,7 +3039,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "target_node_type": {
             "type": "string",
@@ -3160,7 +3160,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster": {
             "type": "structure",
@@ -3475,7 +3475,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "parameter_group_name": {
             "type": "string",
@@ -3528,7 +3528,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster_subnet_group": {
             "type": "structure",
@@ -3635,7 +3635,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "reserved_node": {
             "type": "structure",
@@ -3746,7 +3746,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster": {
             "type": "structure",
@@ -4029,7 +4029,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "parameter_group_name": {
             "type": "string",
@@ -4102,7 +4102,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster": {
             "type": "structure",
@@ -4411,7 +4411,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cluster_security_group": {
             "type": "structure",
@@ -4514,7 +4514,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "snapshot": {
             "type": "structure",

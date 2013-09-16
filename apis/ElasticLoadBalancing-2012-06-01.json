@@ -39,7 +39,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "security_groups": {
             "type": "list",
@@ -91,7 +91,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "subnets": {
             "type": "list",
@@ -172,7 +172,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "health_check": {
             "type": "structure",
@@ -235,7 +235,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -286,7 +286,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -386,7 +386,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "dns_name": {
             "type": "string",
@@ -485,7 +485,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -554,7 +554,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -601,7 +601,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       }
@@ -629,7 +629,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -661,7 +661,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -707,7 +707,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instances": {
             "type": "list",
@@ -765,7 +765,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_states": {
             "type": "list",
@@ -828,7 +828,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "policy_descriptions": {
             "type": "list",
@@ -896,7 +896,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "policy_type_descriptions": {
             "type": "list",
@@ -975,7 +975,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "load_balancer_descriptions": {
             "type": "list",
@@ -1234,7 +1234,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "subnets": {
             "type": "list",
@@ -1281,7 +1281,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "availability_zones": {
             "type": "list",
@@ -1328,7 +1328,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "availability_zones": {
             "type": "list",
@@ -1376,7 +1376,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instances": {
             "type": "list",
@@ -1431,7 +1431,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -1486,7 +1486,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -1536,7 +1536,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },

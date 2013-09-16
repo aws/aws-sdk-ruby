@@ -88,7 +88,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -306,7 +306,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -524,7 +524,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -742,7 +742,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -976,7 +976,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volume_arn": {
             "type": "string",
@@ -1195,7 +1195,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volume_arn": {
             "type": "string",
@@ -1414,7 +1414,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "snapshot_id": {
             "type": "string",
@@ -1656,7 +1656,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volume_arn": {
             "type": "string",
@@ -1884,7 +1884,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -2099,7 +2099,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "target_arn": {
             "type": "string",
@@ -2313,7 +2313,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -2523,7 +2523,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volume_arn": {
             "type": "string",
@@ -2733,7 +2733,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volume_arn": {
             "type": "string",
@@ -2943,7 +2943,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -3161,7 +3161,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -3401,7 +3401,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cachedi_scsi_volumes": {
             "type": "list",
@@ -3686,7 +3686,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "chap_credentials": {
             "type": "list",
@@ -3917,7 +3917,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -4209,7 +4209,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -4468,7 +4468,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volume_arn": {
             "type": "string",
@@ -4730,7 +4730,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "storedi_scsi_volumes": {
             "type": "list",
@@ -5023,7 +5023,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -5248,7 +5248,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -5476,7 +5476,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateways": {
             "type": "list",
@@ -5699,7 +5699,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -5949,7 +5949,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -6192,7 +6192,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -6427,7 +6427,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -6637,7 +6637,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -6855,7 +6855,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -7079,7 +7079,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "target_arn": {
             "type": "string",
@@ -7334,7 +7334,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -7544,7 +7544,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -7769,7 +7769,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "gateway_arn": {
             "type": "string",
@@ -7993,7 +7993,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volume_arn": {
             "type": "string",

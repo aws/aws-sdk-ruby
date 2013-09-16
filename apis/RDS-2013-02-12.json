@@ -38,7 +38,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "event_subscription": {
             "type": "structure",
@@ -185,7 +185,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_security_group": {
             "type": "structure",
@@ -301,7 +301,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_snapshot": {
             "type": "structure",
@@ -521,7 +521,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_instance": {
             "type": "structure",
@@ -929,7 +929,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_instance": {
             "type": "structure",
@@ -1324,7 +1324,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_parameter_group": {
             "type": "structure",
@@ -1382,7 +1382,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_security_group": {
             "type": "structure",
@@ -1493,7 +1493,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_snapshot": {
             "type": "structure",
@@ -1622,7 +1622,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_subnet_group": {
             "type": "structure",
@@ -1758,7 +1758,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "event_subscription": {
             "type": "structure",
@@ -1883,7 +1883,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "option_group": {
             "type": "structure",
@@ -2064,7 +2064,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_instance": {
             "type": "structure",
@@ -2453,7 +2453,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_snapshot": {
             "type": "structure",
@@ -2590,7 +2590,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "event_subscription": {
             "type": "structure",
@@ -2725,7 +2725,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2818,7 +2818,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -3165,7 +3165,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "describe_db_log_files": {
             "type": "list",
@@ -3225,7 +3225,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -3293,7 +3293,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "parameters": {
             "type": "list",
@@ -3385,7 +3385,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -3504,7 +3504,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -3619,7 +3619,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -3722,7 +3722,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "engine_defaults": {
             "type": "structure",
@@ -3812,7 +3812,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "event_categories_map_list": {
             "type": "list",
@@ -3864,7 +3864,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -3989,7 +3989,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -4065,7 +4065,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "option_group_options": {
             "type": "list",
@@ -4188,7 +4188,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "option_groups_list": {
             "type": "list",
@@ -4388,7 +4388,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "orderable_db_instance_options": {
             "type": "list",
@@ -4505,7 +4505,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -4649,7 +4649,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -4761,7 +4761,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "log_file_data": {
             "type": "string",
@@ -4800,7 +4800,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "tag_list": {
             "type": "list",
@@ -4926,7 +4926,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_instance": {
             "type": "structure",
@@ -5356,7 +5356,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_parameter_group_name": {
             "type": "string",
@@ -5405,7 +5405,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_subnet_group": {
             "type": "structure",
@@ -5532,7 +5532,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "event_subscription": {
             "type": "structure",
@@ -5729,7 +5729,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "option_group": {
             "type": "structure",
@@ -5910,7 +5910,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_instance": {
             "type": "structure",
@@ -6243,7 +6243,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "reserved_db_instance": {
             "type": "structure",
@@ -6366,7 +6366,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_instance": {
             "type": "structure",
@@ -6696,7 +6696,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "event_subscription": {
             "type": "structure",
@@ -6874,7 +6874,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_parameter_group_name": {
             "type": "string",
@@ -6963,7 +6963,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_instance": {
             "type": "structure",
@@ -7404,7 +7404,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_instance": {
             "type": "structure",
@@ -7805,7 +7805,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "db_security_group": {
             "type": "structure",

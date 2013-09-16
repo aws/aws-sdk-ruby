@@ -49,7 +49,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "credentials": {
             "type": "structure",
@@ -151,7 +151,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "credentials": {
             "type": "structure",
@@ -271,7 +271,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "decoded_message": {
             "type": "string",
@@ -314,7 +314,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "credentials": {
             "type": "structure",
@@ -401,7 +401,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "credentials": {
             "type": "structure",

@@ -160,7 +160,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "access_key": {
             "type": "structure",
@@ -260,7 +260,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "group": {
             "type": "structure",
@@ -339,7 +339,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_profile": {
             "type": "structure",
@@ -443,7 +443,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "login_profile": {
             "type": "structure",
@@ -515,7 +515,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "role": {
             "type": "structure",
@@ -598,7 +598,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "user": {
             "type": "structure",
@@ -677,7 +677,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "virtual_mfa_device": {
             "type": "structure",
@@ -1312,7 +1312,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "password_policy": {
             "type": "structure",
@@ -1363,7 +1363,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "summary_map": {
             "type": "map",
@@ -1417,7 +1417,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "group": {
             "type": "structure",
@@ -1516,7 +1516,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "group_name": {
             "type": "string",
@@ -1559,7 +1559,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_profile": {
             "type": "structure",
@@ -1649,7 +1649,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "login_profile": {
             "type": "structure",
@@ -1694,7 +1694,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "role": {
             "type": "structure",
@@ -1760,7 +1760,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "role_name": {
             "type": "string",
@@ -1803,7 +1803,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "server_certificate": {
             "type": "structure",
@@ -1873,7 +1873,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "user": {
             "type": "structure",
@@ -1935,7 +1935,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "user_name": {
             "type": "string",
@@ -1985,7 +1985,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "access_key_metadata": {
             "type": "list",
@@ -2056,7 +2056,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "account_aliases": {
             "type": "list",
@@ -2099,7 +2099,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "policy_names": {
             "type": "list",
@@ -2152,7 +2152,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "groups": {
             "type": "list",
@@ -2217,7 +2217,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "groups": {
             "type": "list",
@@ -2292,7 +2292,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_profiles": {
             "type": "list",
@@ -2390,7 +2390,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_profiles": {
             "type": "list",
@@ -2498,7 +2498,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "mfa_devices": {
             "type": "list",
@@ -2566,7 +2566,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "policy_names": {
             "type": "list",
@@ -2619,7 +2619,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "roles": {
             "type": "list",
@@ -2687,7 +2687,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "server_certificate_metadata_list": {
             "type": "list",
@@ -2751,7 +2751,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "certificates": {
             "type": "list",
@@ -2831,7 +2831,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "policy_names": {
             "type": "list",
@@ -2884,7 +2884,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "users": {
             "type": "list",
@@ -2953,7 +2953,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "virtual_mfa_devices": {
             "type": "list",
@@ -3683,7 +3683,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "server_certificate_metadata": {
             "type": "structure",
@@ -3771,7 +3771,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "certificate": {
             "type": "structure",

@@ -64,7 +64,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "public_ip": {
             "type": "string",
@@ -154,7 +154,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "association_id": {
             "type": "string",
@@ -211,7 +211,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "association_id": {
             "type": "string",
@@ -273,7 +273,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "attachment_id": {
             "type": "string",
@@ -311,7 +311,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "serialized_name": "attachment",
         "members": {
           "volume_id": {
@@ -371,7 +371,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "vpc_attachement": {
             "type": "structure",
@@ -643,7 +643,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "bundle_task": {
             "type": "structure",
@@ -743,7 +743,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "bundle_task": {
             "type": "structure",
@@ -877,7 +877,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "reserved_instances_listings": {
             "type": "list",
@@ -1005,7 +1005,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cancelled_spot_instance_requests": {
             "type": "list",
@@ -1052,7 +1052,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "owner_id": {
             "type": "string",
@@ -1098,7 +1098,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "image_id": {
             "type": "string",
@@ -1135,7 +1135,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "snapshot_id": {
             "type": "string",
@@ -1173,7 +1173,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "customer_gateway": {
             "type": "structure",
@@ -1259,7 +1259,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "dhcp_options": {
             "type": "structure",
@@ -1398,7 +1398,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "image_id": {
             "type": "string",
@@ -1463,7 +1463,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "export_task": {
             "type": "structure",
@@ -1551,7 +1551,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "internet_gateway": {
             "type": "structure",
@@ -1621,7 +1621,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "key_name": {
             "type": "string",
@@ -1657,7 +1657,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "network_acl": {
             "type": "structure",
@@ -1915,7 +1915,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "network_interface": {
             "type": "structure",
@@ -2188,7 +2188,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "reserved_instances_listings": {
             "type": "list",
@@ -2348,7 +2348,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "route_table": {
             "type": "structure",
@@ -2487,7 +2487,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "group_id": {
             "type": "string",
@@ -2519,7 +2519,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "serialized_name": "snapshot",
         "members": {
           "snapshot_id": {
@@ -2607,7 +2607,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "spot_datafeed_subscription": {
             "type": "structure",
@@ -2676,7 +2676,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "subnet": {
             "type": "structure",
@@ -2818,7 +2818,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "serialized_name": "volume",
         "members": {
           "volume_id": {
@@ -2948,7 +2948,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "vpc": {
             "type": "structure",
@@ -3040,7 +3040,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "vpn_connection": {
             "type": "structure",
@@ -3198,7 +3198,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "vpn_gateway": {
             "type": "structure",
@@ -3742,7 +3742,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "account_attributes": {
             "type": "list",
@@ -3827,7 +3827,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "addresses": {
             "type": "list",
@@ -3922,7 +3922,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "availability_zones": {
             "type": "list",
@@ -4007,7 +4007,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "bundle_tasks": {
             "type": "list",
@@ -4136,7 +4136,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "conversion_tasks": {
             "type": "list",
@@ -4367,7 +4367,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "customer_gateways": {
             "type": "list",
@@ -4464,7 +4464,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "dhcp_options": {
             "type": "list",
@@ -4541,7 +4541,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "export_tasks": {
             "type": "list",
@@ -4643,7 +4643,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "serialized_name": "imageAttribute",
         "members": {
           "image_id": {
@@ -4831,7 +4831,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "images": {
             "type": "list",
@@ -5066,7 +5066,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_id": {
             "type": "string",
@@ -5265,7 +5265,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_statuses": {
             "type": "list",
@@ -5448,7 +5448,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "reservations": {
             "type": "list",
@@ -6005,7 +6005,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "internet_gateways": {
             "type": "list",
@@ -6104,7 +6104,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "key_pairs": {
             "type": "list",
@@ -6171,7 +6171,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "licenses": {
             "type": "list",
@@ -6286,7 +6286,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "network_acls": {
             "type": "list",
@@ -6450,7 +6450,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "network_interface_id": {
             "type": "string",
@@ -6575,7 +6575,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "network_interfaces": {
             "type": "list",
@@ -6822,7 +6822,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "placement_groups": {
             "type": "list",
@@ -6902,7 +6902,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "regions": {
             "type": "list",
@@ -6973,7 +6973,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "reserved_instances": {
             "type": "list",
@@ -7135,7 +7135,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "reserved_instances_listings": {
             "type": "list",
@@ -7348,7 +7348,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "reserved_instances_offerings": {
             "type": "list",
@@ -7511,7 +7511,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "route_tables": {
             "type": "list",
@@ -7678,7 +7678,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "security_groups": {
             "type": "list",
@@ -7875,7 +7875,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "snapshot_id": {
             "type": "string",
@@ -7980,7 +7980,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "snapshots": {
             "type": "list",
@@ -8068,7 +8068,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "spot_datafeed_subscription": {
             "type": "structure",
@@ -8153,7 +8153,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "spot_instance_requests": {
             "type": "list",
@@ -8590,7 +8590,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "spot_price_history": {
             "type": "list",
@@ -8693,7 +8693,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "subnets": {
             "type": "list",
@@ -8794,7 +8794,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "tags": {
             "type": "list",
@@ -8865,7 +8865,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volume_id": {
             "type": "string",
@@ -8954,7 +8954,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volume_statuses": {
             "type": "list",
@@ -9109,7 +9109,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volumes": {
             "type": "list",
@@ -9252,7 +9252,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "vpc_id": {
             "type": "string",
@@ -9325,7 +9325,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "vpcs": {
             "type": "list",
@@ -9426,7 +9426,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "vpn_connections": {
             "type": "list",
@@ -9589,7 +9589,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "vpn_gateways": {
             "type": "list",
@@ -9734,7 +9734,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "serialized_name": "attachment",
         "members": {
           "volume_id": {
@@ -9913,7 +9913,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_id": {
             "type": "string",
@@ -9949,7 +9949,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_id": {
             "type": "string",
@@ -10119,7 +10119,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "conversion_task": {
             "type": "structure",
@@ -10326,7 +10326,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "key_name": {
             "type": "string",
@@ -10393,7 +10393,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "conversion_task": {
             "type": "structure",
@@ -11075,7 +11075,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_monitorings": {
             "type": "list",
@@ -11142,7 +11142,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "reserved_instances_id": {
             "type": "string",
@@ -11268,7 +11268,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "image_id": {
             "type": "string",
@@ -11323,7 +11323,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "new_association_id": {
             "type": "string",
@@ -11468,7 +11468,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "new_association_id": {
             "type": "string",
@@ -11796,7 +11796,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "spot_instance_requests": {
             "type": "list",
@@ -12738,7 +12738,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "serialized_name": "reservation",
         "members": {
           "reservation_id": {
@@ -13269,7 +13269,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "starting_instances": {
             "type": "list",
@@ -13359,7 +13359,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stopping_instances": {
             "type": "list",
@@ -13445,7 +13445,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "terminating_instances": {
             "type": "list",
@@ -13555,7 +13555,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_monitorings": {
             "type": "list",

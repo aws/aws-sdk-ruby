@@ -79,7 +79,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "job_flow_id": {
             "type": "string",
@@ -230,7 +230,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "job_flows": {
             "type": "list",
@@ -874,7 +874,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "job_flow_id": {
             "type": "string",

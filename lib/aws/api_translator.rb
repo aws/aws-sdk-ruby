@@ -207,7 +207,10 @@ module Aws
     end
 
     def set_output(src)
-      @output = OutputShapeTranslator.translate(src, @options)
+      if src
+        src = src.merge('type' => 'output')
+        @output = OutputShapeTranslator.translate(src, @options)
+      end
     end
 
     def set_errors(errors)

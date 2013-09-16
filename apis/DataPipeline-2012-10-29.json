@@ -33,7 +33,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -100,7 +100,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipeline_id": {
             "type": "string",
@@ -204,7 +204,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipeline_objects": {
             "type": "list",
@@ -311,7 +311,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipeline_description_list": {
             "type": "list",
@@ -421,7 +421,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "evaluated_expression": {
             "type": "string",
@@ -496,7 +496,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipeline_objects": {
             "type": "list",
@@ -591,7 +591,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipeline_id_list": {
             "type": "list",
@@ -674,7 +674,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "task_object": {
             "type": "structure",
@@ -825,7 +825,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "validation_errors": {
             "type": "list",
@@ -983,7 +983,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "ids": {
             "type": "list",
@@ -1056,7 +1056,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "canceled": {
             "type": "boolean",
@@ -1135,7 +1135,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "terminate": {
             "type": "boolean",
@@ -1267,7 +1267,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -1377,7 +1377,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "validation_errors": {
             "type": "list",

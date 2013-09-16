@@ -122,7 +122,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stack_id": {
             "type": "string",
@@ -181,7 +181,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stack_events": {
             "type": "list",
@@ -270,7 +270,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stack_resource_detail": {
             "type": "structure",
@@ -354,7 +354,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stack_resources": {
             "type": "list",
@@ -433,7 +433,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stacks": {
             "type": "list",
@@ -612,7 +612,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "url": {
             "type": "string",
@@ -636,7 +636,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "template_body": {
             "type": "string",
@@ -664,7 +664,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stack_resource_summaries": {
             "type": "list",
@@ -756,7 +756,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stack_summaries": {
             "type": "list",
@@ -874,7 +874,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stack_id": {
             "type": "string",
@@ -908,7 +908,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "parameters": {
             "type": "list",

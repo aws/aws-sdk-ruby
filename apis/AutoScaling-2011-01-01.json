@@ -493,7 +493,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "adjustment_types": {
             "type": "list",
@@ -536,7 +536,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "auto_scaling_groups": {
             "type": "list",
@@ -762,7 +762,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "auto_scaling_instances": {
             "type": "list",
@@ -820,7 +820,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "auto_scaling_notification_types": {
             "type": "list",
@@ -857,7 +857,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "launch_configurations": {
             "type": "list",
@@ -987,7 +987,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "metrics": {
             "type": "list",
@@ -1043,7 +1043,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "notification_configurations": {
             "type": "list",
@@ -1113,7 +1113,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "scaling_policies": {
             "type": "list",
@@ -1216,7 +1216,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "activities": {
             "type": "list",
@@ -1300,7 +1300,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "processes": {
             "type": "list",
@@ -1355,7 +1355,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "scheduled_update_group_actions": {
             "type": "list",
@@ -1462,7 +1462,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "tags": {
             "type": "list",
@@ -1516,7 +1516,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "termination_policy_types": {
             "type": "list",
@@ -1688,7 +1688,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "policy_arn": {
             "type": "string",
@@ -1899,7 +1899,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "activity": {
             "type": "structure",

@@ -38,7 +38,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "connection_id": {
             "type": "string",
@@ -137,7 +137,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "virtual_interface_id": {
             "type": "string",
@@ -291,7 +291,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "virtual_interface_id": {
             "type": "string",
@@ -403,7 +403,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "connection_id": {
             "type": "string",
@@ -468,7 +468,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "virtual_interface_state": {
             "type": "string",
@@ -519,7 +519,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "connection_id": {
             "type": "string",
@@ -650,7 +650,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "connections": {
             "type": "list",
@@ -725,7 +725,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "offering_id": {
             "type": "string",
@@ -833,7 +833,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "offerings": {
             "type": "list",
@@ -921,7 +921,7 @@
       "http_method": "POST",
       "http_path": "/",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "virtual_gateways": {
             "type": "list",
@@ -981,7 +981,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "virtual_interfaces": {
             "type": "list",

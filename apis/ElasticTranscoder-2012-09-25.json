@@ -29,7 +29,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -227,7 +227,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "job": {
             "type": "structure",
@@ -609,7 +609,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipeline": {
             "type": "structure",
@@ -977,7 +977,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "preset": {
             "type": "structure",
@@ -1230,7 +1230,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -1281,7 +1281,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -1335,7 +1335,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "jobs": {
             "type": "list",
@@ -1617,7 +1617,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "jobs": {
             "type": "list",
@@ -1882,7 +1882,7 @@
       "http_method": "GET",
       "http_path": "/2012-09-25/pipelines",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipelines": {
             "type": "list",
@@ -2049,7 +2049,7 @@
       "http_method": "GET",
       "http_path": "/2012-09-25/presets",
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "presets": {
             "type": "list",
@@ -2296,7 +2296,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "job": {
             "type": "structure",
@@ -2563,7 +2563,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipeline": {
             "type": "structure",
@@ -2741,7 +2741,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "preset": {
             "type": "structure",
@@ -3005,7 +3005,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "success": {
             "type": "string",
@@ -3173,7 +3173,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipeline": {
             "type": "structure",
@@ -3378,7 +3378,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipeline": {
             "type": "structure",
@@ -3565,7 +3565,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "pipeline": {
             "type": "structure",

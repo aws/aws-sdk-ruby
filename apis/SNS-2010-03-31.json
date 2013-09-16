@@ -116,7 +116,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "subscription_arn": {
             "type": "string",
@@ -203,7 +203,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "platform_application_arn": {
             "type": "string",
@@ -275,7 +275,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "endpoint_arn": {
             "type": "string",
@@ -337,7 +337,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "topic_arn": {
             "type": "string",
@@ -540,7 +540,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "attributes": {
             "type": "map",
@@ -608,7 +608,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "attributes": {
             "type": "map",
@@ -676,7 +676,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "attributes": {
             "type": "map",
@@ -744,7 +744,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "attributes": {
             "type": "map",
@@ -816,7 +816,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "endpoints": {
             "type": "list",
@@ -900,7 +900,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "platform_applications": {
             "type": "list",
@@ -975,7 +975,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "subscriptions": {
             "type": "list",
@@ -1061,7 +1061,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "subscriptions": {
             "type": "list",
@@ -1151,7 +1151,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "topics": {
             "type": "list",
@@ -1233,7 +1233,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "message_id": {
             "type": "string",
@@ -1632,7 +1632,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "subscription_arn": {
             "type": "string",

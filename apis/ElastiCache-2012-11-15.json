@@ -42,7 +42,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_security_group": {
             "type": "structure",
@@ -203,7 +203,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_cluster": {
             "type": "structure",
@@ -502,7 +502,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_parameter_group": {
             "type": "structure",
@@ -583,7 +583,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_security_group": {
             "type": "structure",
@@ -690,7 +690,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_subnet_group": {
             "type": "structure",
@@ -780,7 +780,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_cluster": {
             "type": "structure",
@@ -1162,7 +1162,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -1438,7 +1438,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -1499,7 +1499,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -1585,7 +1585,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -1739,7 +1739,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -1842,7 +1842,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -1933,7 +1933,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "engine_defaults": {
             "type": "structure",
@@ -2117,7 +2117,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2220,7 +2220,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2370,7 +2370,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "marker": {
             "type": "string",
@@ -2537,7 +2537,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_cluster": {
             "type": "structure",
@@ -2840,7 +2840,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_parameter_group_name": {
             "type": "string",
@@ -2906,7 +2906,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_subnet_group": {
             "type": "structure",
@@ -3004,7 +3004,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "reserved_cache_node": {
             "type": "structure",
@@ -3142,7 +3142,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_cluster": {
             "type": "structure",
@@ -3401,7 +3401,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_parameter_group_name": {
             "type": "string",
@@ -3465,7 +3465,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "cache_security_group": {
             "type": "structure",

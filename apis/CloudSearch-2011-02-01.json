@@ -31,7 +31,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "domain_status": {
             "type": "structure",
@@ -313,7 +313,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "index_field": {
             "type": "structure",
@@ -573,7 +573,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "rank_expression": {
             "type": "structure",
@@ -679,7 +679,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "domain_status": {
             "type": "structure",
@@ -798,7 +798,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "index_field": {
             "type": "structure",
@@ -1041,7 +1041,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "rank_expression": {
             "type": "structure",
@@ -1142,7 +1142,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "default_search_field": {
             "type": "structure",
@@ -1230,7 +1230,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "domain_status_list": {
             "type": "list",
@@ -1354,7 +1354,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "index_fields": {
             "type": "list",
@@ -1597,7 +1597,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "rank_expressions": {
             "type": "list",
@@ -1696,7 +1696,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "access_policies": {
             "type": "structure",
@@ -1782,7 +1782,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stems": {
             "type": "structure",
@@ -1868,7 +1868,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stopwords": {
             "type": "structure",
@@ -1954,7 +1954,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "synonyms": {
             "type": "structure",
@@ -2040,7 +2040,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "field_names": {
             "type": "list",
@@ -2097,7 +2097,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "default_search_field": {
             "type": "structure",
@@ -2193,7 +2193,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "access_policies": {
             "type": "structure",
@@ -2294,7 +2294,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stems": {
             "type": "structure",
@@ -2395,7 +2395,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stopwords": {
             "type": "structure",
@@ -2496,7 +2496,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "synonyms": {
             "type": "structure",

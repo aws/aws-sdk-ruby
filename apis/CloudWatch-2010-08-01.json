@@ -86,7 +86,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "alarm_history_items": {
             "type": "list",
@@ -182,7 +182,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "metric_alarms": {
             "type": "list",
@@ -451,7 +451,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "metric_alarms": {
             "type": "list",
@@ -756,7 +756,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "label": {
             "type": "string",
@@ -909,7 +909,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "metrics": {
             "type": "list",

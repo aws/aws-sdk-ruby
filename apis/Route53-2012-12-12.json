@@ -165,7 +165,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "change_info": {
             "type": "structure",
@@ -295,7 +295,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "health_check": {
             "type": "structure",
@@ -408,7 +408,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "hosted_zone": {
             "type": "structure",
@@ -552,7 +552,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
         }
       },
@@ -601,7 +601,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "change_info": {
             "type": "structure",
@@ -685,7 +685,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "change_info": {
             "type": "structure",
@@ -751,7 +751,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "health_check": {
             "type": "structure",
@@ -835,7 +835,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "hosted_zone": {
             "type": "structure",
@@ -924,7 +924,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "health_checks": {
             "type": "list",
@@ -1022,7 +1022,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "hosted_zones": {
             "type": "list",
@@ -1133,7 +1133,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "resource_record_sets": {
             "type": "list",

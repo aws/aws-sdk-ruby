@@ -196,7 +196,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stack_id": {
             "type": "string",
@@ -347,7 +347,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "app_id": {
             "type": "string",
@@ -447,7 +447,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "deployment_id": {
             "type": "string",
@@ -552,7 +552,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instance_id": {
             "type": "string",
@@ -752,7 +752,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "layer_id": {
             "type": "string",
@@ -906,7 +906,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stack_id": {
             "type": "string",
@@ -949,7 +949,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "iam_user_arn": {
             "type": "string",
@@ -1173,7 +1173,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "apps": {
             "type": "list",
@@ -1347,7 +1347,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "commands": {
             "type": "list",
@@ -1446,7 +1446,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "deployments": {
             "type": "list",
@@ -1583,7 +1583,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "elastic_ips": {
             "type": "list",
@@ -1654,7 +1654,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "elastic_load_balancers": {
             "type": "list",
@@ -1751,7 +1751,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "instances": {
             "type": "list",
@@ -1933,7 +1933,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "layers": {
             "type": "list",
@@ -2195,7 +2195,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "load_based_auto_scaling_configurations": {
             "type": "list",
@@ -2317,7 +2317,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "permissions": {
             "type": "list",
@@ -2388,7 +2388,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "raid_arrays": {
             "type": "list",
@@ -2487,7 +2487,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "service_errors": {
             "type": "list",
@@ -2562,7 +2562,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "stacks": {
             "type": "list",
@@ -2733,7 +2733,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "time_based_auto_scaling_configurations": {
             "type": "list",
@@ -2865,7 +2865,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "user_profiles": {
             "type": "list",
@@ -2940,7 +2940,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "volumes": {
             "type": "list",
@@ -3064,7 +3064,7 @@
         }
       },
       "output": {
-        "type": "structure",
+        "type": "output",
         "members": {
           "layer_id": {
             "type": "string",
