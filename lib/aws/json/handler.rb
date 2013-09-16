@@ -39,7 +39,8 @@ module Aws
       def parse_response(response)
         context = response.context
         body = context.http_response.body
-        response.data = Json::Parser.parse(context.operation.output, body.read)
+        rules = context.operation.output
+        response.data = Json::Parser.parse(rules, body.read)
         body.rewind
       end
 

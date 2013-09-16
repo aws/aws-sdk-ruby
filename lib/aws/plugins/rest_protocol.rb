@@ -46,21 +46,19 @@ module Aws
         end
 
         def populate_headers(context)
-          if rules = context.operation.input
-            context.params.each do |param_name, value|
-              rule = rules.members[param_name]
-              if rule.location == 'header'
-                build_header(rule, context.http_request.headers, value)
-              end
+          context.operation.input.header_members.each do |member_name, member|
+            value = context.params[member_name]
+            unless value.nil?
+              build_header(member, context.http_request.headers, value)
             end
           end
         end
 
         def populate_body(context)
           input = context.operation.input
-          if input.raw_payload
-            payload = input.body_members.keys.first
-            context.http_request.body = context.params[payload]
+          if input.raw_payload?
+            payload = context.params[input.payload]
+            context.http_request.body = payload unless payload.nil?
           end
         end
 
