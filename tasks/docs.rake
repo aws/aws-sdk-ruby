@@ -14,6 +14,7 @@
 namespace :docs do
 
   task :yard => [:update_readme, :update_region] do
+    ENV['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/AWSRubySDK/latest'
     sh "yard"
   end
 
