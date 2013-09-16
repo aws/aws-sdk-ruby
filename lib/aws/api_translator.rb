@@ -200,16 +200,27 @@ module Aws
     end
 
     def set_input(src)
-      if src
-        src = src.merge('type' => 'input')
-        @input = InputShapeTranslator.translate(src, @options)
-      end
+      handle_input_output('input', src)
     end
 
     def set_output(src)
+      handle_input_output('output', src)
+    end
+
+    def handle_input_output(input_or_output, src)
       if src
-        src = src.merge('type' => 'output')
-        @output = OutputShapeTranslator.translate(src, @options)
+        src = src.merge('type' => input_or_output)
+        translator = "#{input_or_output.capitalize}ShapeTranslator"
+        translator = Aws::const_get(translator)
+        shape = translator.translate(src, @options)
+        shape.members.each do |member_name, member|
+          if member.metadata['payload']
+            member.metadata.delete('payload')
+            puts member_name.inspect
+            shape.payload = member_name
+          end
+        end
+        instance_variable_set("@#{input_or_output}", shape)
       end
     end
 

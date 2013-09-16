@@ -27,9 +27,6 @@
             "type": "structure",
             "required": true,
             "serialized_name": "CloudFrontOriginAccessIdentityConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -43,7 +40,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "cloud_front_origin_access_identity_config"
       },
       "output": {
         "type": "output",
@@ -51,9 +49,6 @@
           "cloud_front_origin_access_identity": {
             "type": "structure",
             "serialized_name": "CloudFrontOriginAccessIdentity",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -89,7 +84,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "cloud_front_origin_access_identity"
       },
       "errors": [
         {
@@ -150,9 +146,6 @@
             "type": "structure",
             "required": true,
             "serialized_name": "DistributionConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -432,7 +425,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "distribution_config"
       },
       "output": {
         "type": "output",
@@ -440,9 +434,6 @@
           "distribution": {
             "type": "structure",
             "serialized_name": "Distribution",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -766,7 +757,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "distribution"
       },
       "errors": [
         {
@@ -940,9 +932,6 @@
             "type": "structure",
             "required": true,
             "serialized_name": "InvalidationBatch",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "paths": {
                 "type": "structure",
@@ -971,7 +960,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "invalidation_batch"
       },
       "output": {
         "type": "output",
@@ -984,9 +974,6 @@
           "invalidation": {
             "type": "structure",
             "serialized_name": "Invalidation",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -1030,7 +1017,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "invalidation"
       },
       "errors": [
         {
@@ -1109,9 +1097,6 @@
             "type": "structure",
             "required": true,
             "serialized_name": "StreamingDistributionConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -1214,7 +1199,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "streaming_distribution_config"
       },
       "output": {
         "type": "output",
@@ -1222,9 +1208,6 @@
           "streaming_distribution": {
             "type": "structure",
             "serialized_name": "StreamingDistribution",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -1390,7 +1373,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "streaming_distribution"
       },
       "errors": [
         {
@@ -1720,9 +1704,6 @@
           "cloud_front_origin_access_identity": {
             "type": "structure",
             "serialized_name": "CloudFrontOriginAccessIdentity",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -1753,7 +1734,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "cloud_front_origin_access_identity"
       },
       "errors": [
         {
@@ -1795,9 +1777,6 @@
           "cloud_front_origin_access_identity_config": {
             "type": "structure",
             "serialized_name": "CloudFrontOriginAccessIdentityConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -1814,7 +1793,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "cloud_front_origin_access_identity_config"
       },
       "errors": [
         {
@@ -1856,9 +1836,6 @@
           "distribution": {
             "type": "structure",
             "serialized_name": "Distribution",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -2177,7 +2154,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "distribution"
       },
       "errors": [
         {
@@ -2219,9 +2197,6 @@
           "distribution_config": {
             "type": "structure",
             "serialized_name": "DistributionConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -2468,7 +2443,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "distribution_config"
       },
       "errors": [
         {
@@ -2516,9 +2492,6 @@
           "invalidation": {
             "type": "structure",
             "serialized_name": "Invalidation",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -2562,7 +2535,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "invalidation"
       },
       "errors": [
         {
@@ -2613,9 +2587,6 @@
           "streaming_distribution": {
             "type": "structure",
             "serialized_name": "StreamingDistribution",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -2776,7 +2747,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "streaming_distribution"
       },
       "errors": [
         {
@@ -2818,9 +2790,6 @@
           "streaming_distribution_config": {
             "type": "structure",
             "serialized_name": "StreamingDistributionConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -2913,7 +2882,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "streaming_distribution_config"
       },
       "errors": [
         {
@@ -2959,9 +2929,6 @@
           "cloud_front_origin_access_identity_list": {
             "type": "structure",
             "serialized_name": "CloudFrontOriginAccessIdentityList",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "marker": {
                 "type": "string",
@@ -3007,7 +2974,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "cloud_front_origin_access_identity_list"
       },
       "errors": [
         {
@@ -3044,9 +3012,6 @@
           "distribution_list": {
             "type": "structure",
             "serialized_name": "DistributionList",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "marker": {
                 "type": "string",
@@ -3308,7 +3273,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "distribution_list"
       },
       "errors": [
         {
@@ -3350,9 +3316,6 @@
           "invalidation_list": {
             "type": "structure",
             "serialized_name": "InvalidationList",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "marker": {
                 "type": "string",
@@ -3394,7 +3357,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "invalidation_list"
       },
       "errors": [
         {
@@ -3440,9 +3404,6 @@
           "streaming_distribution_list": {
             "type": "structure",
             "serialized_name": "StreamingDistributionList",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "marker": {
                 "type": "string",
@@ -3554,7 +3515,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "streaming_distribution_list"
       },
       "errors": [
         {
@@ -3579,9 +3541,6 @@
             "type": "structure",
             "required": true,
             "serialized_name": "CloudFrontOriginAccessIdentityConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -3604,7 +3563,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "payload": "cloud_front_origin_access_identity_config"
       },
       "output": {
         "type": "output",
@@ -3612,9 +3572,6 @@
           "cloud_front_origin_access_identity": {
             "type": "structure",
             "serialized_name": "CloudFrontOriginAccessIdentity",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -3645,7 +3602,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "cloud_front_origin_access_identity"
       },
       "errors": [
         {
@@ -3733,9 +3691,6 @@
             "type": "structure",
             "required": true,
             "serialized_name": "DistributionConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -4024,7 +3979,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "payload": "distribution_config"
       },
       "output": {
         "type": "output",
@@ -4032,9 +3988,6 @@
           "distribution": {
             "type": "structure",
             "serialized_name": "Distribution",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -4353,7 +4306,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "distribution"
       },
       "errors": [
         {
@@ -4531,9 +4485,6 @@
             "type": "structure",
             "required": true,
             "serialized_name": "StreamingDistributionConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -4645,7 +4596,8 @@
             "location": "header",
             "serialized_name": "If-Match"
           }
-        }
+        },
+        "payload": "streaming_distribution_config"
       },
       "output": {
         "type": "output",
@@ -4653,9 +4605,6 @@
           "streaming_distribution": {
             "type": "structure",
             "serialized_name": "StreamingDistribution",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "id": {
                 "type": "string",
@@ -4816,7 +4765,8 @@
             "location": "header",
             "serialized_name": "ETag"
           }
-        }
+        },
+        "payload": "streaming_distribution"
       },
       "errors": [
         {

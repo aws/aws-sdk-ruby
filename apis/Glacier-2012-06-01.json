@@ -914,10 +914,7 @@
         "members": {
           "body": {
             "type": "blob",
-            "serialized_name": "body",
-            "metadata": {
-              "payload": true
-            }
+            "serialized_name": "body"
           },
           "checksum": {
             "type": "string",
@@ -949,7 +946,8 @@
             "location": "header",
             "serialized_name": "x-amz-archive-description"
           }
-        }
+        },
+        "payload": "body"
       },
       "errors": [
         {
@@ -1045,9 +1043,6 @@
           "vault_notification_config": {
             "type": "structure",
             "serialized_name": "vaultNotificationConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "sns_topic": {
                 "type": "string",
@@ -1062,7 +1057,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "vault_notification_config"
       },
       "errors": [
         {
@@ -1153,9 +1149,6 @@
           "job_parameters": {
             "type": "structure",
             "serialized_name": "jobParameters",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "format": {
                 "type": "string",
@@ -1183,7 +1176,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "job_parameters"
       },
       "output": {
         "type": "output",
@@ -2011,9 +2005,6 @@
           "vault_notification_config": {
             "type": "structure",
             "serialized_name": "vaultNotificationConfig",
-            "metadata": {
-              "payload": true
-            },
             "members": {
               "sns_topic": {
                 "type": "string",
@@ -2028,7 +2019,8 @@
               }
             }
           }
-        }
+        },
+        "payload": "vault_notification_config"
       },
       "errors": [
         {
@@ -2128,12 +2120,10 @@
           },
           "body": {
             "type": "blob",
-            "serialized_name": "body",
-            "metadata": {
-              "payload": true
-            }
+            "serialized_name": "body"
           }
-        }
+        },
+        "payload": "body"
       },
       "output": {
         "type": "output",
@@ -2274,12 +2264,10 @@
           },
           "body": {
             "type": "blob",
-            "serialized_name": "body",
-            "metadata": {
-              "payload": true
-            }
+            "serialized_name": "body"
           }
-        }
+        },
+        "payload": "body"
       },
       "output": {
         "type": "output",
