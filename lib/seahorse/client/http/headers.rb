@@ -62,6 +62,7 @@ module Seahorse
           @data.values
         end
 
+        # @return [Array<String>]
         def values_at(*keys)
           @data.values_at(*keys.map{ |key| key.to_s.downcase })
         end
