@@ -4,3 +4,4 @@ vendor
 *.gem
 doc
 .yardoc
+integration-test-config.json

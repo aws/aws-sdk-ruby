@@ -32,7 +32,12 @@ namespace :test do
 
   desc "Runs integration tests"
   task :integration do
-    execute_cmd('bundle exec cucumber')
+    config_file = './integration-test-config.json'
+    if File.exists?(config_file)
+      execute_cmd('bundle exec cucumber')
+    else
+      puts "*** SKIPPING INTEGRATION TESTS - missing #{config_file} ***"
+    end
   end
 
 end
