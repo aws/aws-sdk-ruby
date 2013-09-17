@@ -105,7 +105,26 @@ module Aws
         operation = OperationTranslator.translate(src, @options)
         api.operations[underscore(operation.name)] = operation
       end
+
+      # restful xml services that have multiple body params at the top
+      # level need guidance on their root level xml name and xmlns
+      if xml?
+        xmlns = api.metadata.delete('xmlnamespace')
+        api.operations.values.each do |operation|
+          if operation.input.payload
+            operation.input.body_member.metadata['xmlns_uri'] = xmlns
+          elsif !operation.input.body_member.members.empty?
+            operation.input.serialized_name = operation.name + "Request"
+            operation.input.metadata['xmlns_uri'] = xmlns
+          end
+        end
+      end
+
       api
+    end
+
+    def xml?
+      @properties['plugins'].include?('Aws::Plugins::XmlSerializer')
     end
 
     property :version, from: :api_version

@@ -4,8 +4,7 @@
   "metadata": {
     "service_abbreviation": "Route 53",
     "service_full_name": "Amazon Route 53",
-    "signer": "Version3Https",
-    "xmlnamespace": "https://route53.amazonaws.com/doc/2012-12-12/"
+    "signer": "Version3Https"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -22,6 +21,10 @@
       "http_path": "/2012-12-12/hostedzone/{hosted_zone_id}/rrset/",
       "input": {
         "type": "input",
+        "serialized_name": "ChangeResourceRecordSetsRequest",
+        "metadata": {
+          "xmlns_uri": "https://route53.amazonaws.com/doc/2012-12-12/"
+        },
         "members": {
           "hosted_zone_id": {
             "type": "string",
@@ -253,6 +256,10 @@
       "http_path": "/2012-12-12/healthcheck",
       "input": {
         "type": "input",
+        "serialized_name": "CreateHealthCheckRequest",
+        "metadata": {
+          "xmlns_uri": "https://route53.amazonaws.com/doc/2012-12-12/"
+        },
         "members": {
           "caller_reference": {
             "type": "string",
@@ -384,6 +391,10 @@
       "http_path": "/2012-12-12/hostedzone",
       "input": {
         "type": "input",
+        "serialized_name": "CreateHostedZoneRequest",
+        "metadata": {
+          "xmlns_uri": "https://route53.amazonaws.com/doc/2012-12-12/"
+        },
         "members": {
           "name": {
             "type": "string",

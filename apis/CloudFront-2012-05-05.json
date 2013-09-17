@@ -4,8 +4,7 @@
   "metadata": {
     "service_abbreviation": "CloudFront",
     "service_full_name": "Amazon CloudFront",
-    "signer": "CloudFront",
-    "xmlnamespace": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
+    "signer": "CloudFront"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -27,6 +26,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "CloudFrontOriginAccessIdentityConfig",
+            "metadata": {
+              "xmlns_uri": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
+            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -146,6 +148,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "DistributionConfig",
+            "metadata": {
+              "xmlns_uri": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
+            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -932,6 +937,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "InvalidationBatch",
+            "metadata": {
+              "xmlns_uri": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
+            },
             "members": {
               "paths": {
                 "type": "structure",
@@ -1097,6 +1105,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "StreamingDistributionConfig",
+            "metadata": {
+              "xmlns_uri": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
+            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -3541,6 +3552,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "CloudFrontOriginAccessIdentityConfig",
+            "metadata": {
+              "xmlns_uri": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
+            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -3691,6 +3705,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "DistributionConfig",
+            "metadata": {
+              "xmlns_uri": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
+            },
             "members": {
               "caller_reference": {
                 "type": "string",
@@ -4485,6 +4502,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "StreamingDistributionConfig",
+            "metadata": {
+              "xmlns_uri": "http://cloudfront.amazonaws.com/doc/2012-05-05/"
+            },
             "members": {
               "caller_reference": {
                 "type": "string",

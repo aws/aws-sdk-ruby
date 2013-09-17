@@ -5,8 +5,7 @@
     "checksum_format": "md5",
     "service_abbreviation": "Amazon S3",
     "service_full_name": "Amazon Simple Storage Service",
-    "signer": "S3",
-    "xmlnamespace": "http://s3.amazonaws.com/doc/2006-03-01/"
+    "signer": "S3"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -71,6 +70,9 @@
           "multipart_upload": {
             "type": "structure",
             "serialized_name": "CompleteMultipartUpload",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "parts": {
                 "type": "flat_list",
@@ -363,6 +365,9 @@
           "create_bucket_configuration": {
             "type": "structure",
             "serialized_name": "CreateBucketConfiguration",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "location_constraint": {
                 "type": "string",
@@ -717,6 +722,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "Delete",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "objects": {
                 "type": "flat_list",
@@ -2579,6 +2587,9 @@
           "access_control_policy": {
             "type": "structure",
             "serialized_name": "AccessControlPolicy",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "grants": {
                 "type": "list",
@@ -2710,6 +2721,9 @@
           "cors_configuration": {
             "type": "structure",
             "serialized_name": "CORSConfiguration",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "cors_rules": {
                 "type": "flat_list",
@@ -2783,6 +2797,9 @@
           "lifecycle_configuration": {
             "type": "structure",
             "serialized_name": "LifecycleConfiguration",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "rules": {
                 "type": "flat_list",
@@ -2871,6 +2888,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "BucketLoggingStatus",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "logging_enabled": {
                 "type": "structure",
@@ -2972,6 +2992,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "NotificationConfiguration",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "topic_configuration": {
                 "type": "structure",
@@ -3017,7 +3040,10 @@
           "policy": {
             "type": "string",
             "required": true,
-            "serialized_name": "Policy"
+            "serialized_name": "Policy",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            }
           }
         },
         "payload": "policy"
@@ -3044,6 +3070,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "RequestPaymentConfiguration",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "payer": {
                 "type": "string",
@@ -3081,6 +3110,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "Tagging",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "tag_set": {
                 "type": "list",
@@ -3136,6 +3168,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "VersioningConfiguration",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "mfa_delete": {
                 "type": "string",
@@ -3180,6 +3215,9 @@
             "type": "structure",
             "required": true,
             "serialized_name": "WebsiteConfiguration",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "error_document": {
                 "type": "structure",
@@ -3305,7 +3343,10 @@
           },
           "body": {
             "type": "blob",
-            "serialized_name": "Body"
+            "serialized_name": "Body",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            }
           },
           "bucket": {
             "type": "string",
@@ -3465,6 +3506,9 @@
           "access_control_policy": {
             "type": "structure",
             "serialized_name": "AccessControlPolicy",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "grants": {
                 "type": "list",
@@ -3613,6 +3657,9 @@
           "restore_request": {
             "type": "structure",
             "serialized_name": "RestoreRequest",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            },
             "members": {
               "days": {
                 "type": "integer",
@@ -3641,7 +3688,10 @@
         "members": {
           "body": {
             "type": "blob",
-            "serialized_name": "Body"
+            "serialized_name": "Body",
+            "metadata": {
+              "xmlns_uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            }
           },
           "bucket": {
             "type": "string",
