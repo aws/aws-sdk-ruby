@@ -143,7 +143,7 @@ module Aws
       plugins = @properties['plugins'] ||= []
       plugins << 'Aws::Plugins::GlobalConfiguration'
       plugins << 'Aws::Plugins::RegionalEndpoint'
-      plugins << 'Aws::Plugins::EnvironmentCredentials'
+      plugins << 'Aws::Plugins::Credentials'
       plugins << 'Aws::Plugins::ContentLength'
       plugins << 'Aws::Plugins::RestProtocol'
       plugins <<

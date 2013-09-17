@@ -10,7 +10,7 @@
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
-    "Aws::Plugins::EnvironmentCredentials",
+    "Aws::Plugins::Credentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::QuerySerializer",
