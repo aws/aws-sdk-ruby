@@ -20,15 +20,31 @@ def execute_cmd cmd
   end
 end
 
-desc "Runs unit tests"
-task :test => :setup do
-  opts = ['bundle exec rspec']
-  opts += FileList[ENV['FILES'] || 'spec/**/*_spec.rb'].sort
-  execute_cmd(opts.join(' '))
+namespace :test do
+
+  desc "Runs unit tests"
+  task :unit => :setup do
+    opts = ['bundle exec rspec']
+    opts += FileList[ENV['FILES'] || 'spec/**/*_spec.rb'].sort
+    execute_cmd(opts.join(' '))
+  end
+
+
+  desc "Runs integration tests"
+  task :integration do
+    execute_cmd('bundle exec cucumber')
+  end
+
 end
+
+desc 'Runs unit and integration tests'
+task :test => ['test:unit', 'test:integration']
 
 desc 'Generates a coverage report'
 task :coverage do
   ENV['COVERAGE'] = 'true'
-  Rake::Task['test'].execute
+  rm_rf "coverage/"
+  task = Rake::Task['test']
+  task.reenable
+  task.invoke
 end
