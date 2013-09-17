@@ -26,10 +26,16 @@ require 'yaml'
 # A helper :send_handler that does not send the request, it simply
 # returns an empty response.
 class DummySendHandler < Seahorse::Client::Handler
+
   def call(context)
+    headers = context.config.response_headers
+    headers = Seahorse::Client::Http::Headers.new(headers)
+    context.http_response.headers = headers
+    context.http_response.status_code = context.config.response_status_code
     context.http_response.body = StringIO.new(context.config.response_body)
     Seahorse::Client::Response.new(context: context).signal_complete
   end
+
 end
 
 class DummySendPlugin < Seahorse::Client::Plugin
@@ -61,13 +67,23 @@ def new_client(api, opts = {})
 end
 
 def call_handler(klass, opts = {}, &block)
-  handler = klass.new(DummySendHandler.new)
-  config = opts[:config] ||
-    double(response_body: opts[:response_body] || '', api: opts[:api] || {})
-  context = Seahorse::Client::RequestContext.new config: config,
-    operation_name: opts[:operation_name] || 'operation',
-    params: opts[:params] || {}
+
+  operation_name = opts.delete(:operation_name) || 'operation'
+  params = opts.delete(:params) || {}
+
+  config = opts.delete(:config) || Seahorse::Client::Configuration.new(opts)
+  config.add_option(:response_status_code, 200)
+  config.add_option(:response_headers, {})
+  config.add_option(:response_body, '')
+  opts.keys.each { |opt_name| config.add_option(opt_name) }
+
+  context = Seahorse::Client::RequestContext.new(
+    operation_name: operation_name,
+    config: config,
+    params: params)
 
   yield(context) if block_given?
-  handler.call(context)
+
+  klass.new(DummySendHandler.new).call(context)
+
 end
