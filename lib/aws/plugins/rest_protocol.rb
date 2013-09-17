@@ -149,7 +149,7 @@ module Aws
         PLACEHOLDER_REGEX = /{\w+?}/
 
         # @param [String] path_pattern
-        # @param [Hash<Seahorse::Model::Shapes::Shape>]
+        # @param [Hash<Seahorse::Model::Shapes::Shape>] rules
         def initialize(path_pattern, rules)
           @pattern = path_pattern
           @rules = rules
