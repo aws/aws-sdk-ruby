@@ -28,11 +28,6 @@
           }
         }
       },
-      "output": {
-        "type": "output",
-        "members": {
-        }
-      },
       "errors": [
         {
           "type": "structure",
@@ -1229,11 +1224,6 @@
           }
         }
       },
-      "output": {
-        "type": "output",
-        "members": {
-        }
-      },
       "errors": [
         {
           "type": "structure",
@@ -1278,11 +1268,6 @@
             "type": "string",
             "location": "uri"
           }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
         }
       },
       "errors": [

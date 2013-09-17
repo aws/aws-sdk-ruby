@@ -32,11 +32,6 @@
             "serialized_name": "Identity"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-        }
       }
     },
     "delete_verified_email_address": {
@@ -525,11 +520,6 @@
             "serialized_name": "DkimEnabled"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-        }
       }
     },
     "set_identity_feedback_forwarding_enabled": {
@@ -549,11 +539,6 @@
             "required": true,
             "serialized_name": "ForwardingEnabled"
           }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
         }
       }
     },
@@ -582,11 +567,6 @@
             "type": "string",
             "serialized_name": "SnsTopic"
           }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
         }
       }
     },
@@ -668,11 +648,6 @@
             "required": true,
             "serialized_name": "EmailAddress"
           }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
         }
       }
     }

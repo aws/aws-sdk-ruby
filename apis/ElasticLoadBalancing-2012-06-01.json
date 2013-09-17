@@ -234,11 +234,6 @@
           }
         }
       },
-      "output": {
-        "type": "output",
-        "members": {
-        }
-      },
       "errors": [
         {
           "type": "structure",
@@ -283,11 +278,6 @@
             "type": "integer",
             "serialized_name": "CookieExpirationPeriod"
           }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
         }
       },
       "errors": [
@@ -484,11 +474,6 @@
           }
         }
       },
-      "output": {
-        "type": "output",
-        "members": {
-        }
-      },
       "errors": [
         {
           "type": "structure",
@@ -553,11 +538,6 @@
           }
         }
       },
-      "output": {
-        "type": "output",
-        "members": {
-        }
-      },
       "errors": [
         {
           "type": "structure",
@@ -599,11 +579,6 @@
             "serialized_name": "LoadBalancerName"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-        }
       }
     },
     "delete_load_balancer_listeners": {
@@ -626,11 +601,6 @@
               "type": "integer"
             }
           }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
         }
       },
       "errors": [
@@ -658,11 +628,6 @@
             "required": true,
             "serialized_name": "PolicyName"
           }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
         }
       },
       "errors": [
@@ -1430,11 +1395,6 @@
           }
         }
       },
-      "output": {
-        "type": "output",
-        "members": {
-        }
-      },
       "errors": [
         {
           "type": "structure",
@@ -1485,11 +1445,6 @@
           }
         }
       },
-      "output": {
-        "type": "output",
-        "members": {
-        }
-      },
       "errors": [
         {
           "type": "structure",
@@ -1533,11 +1488,6 @@
               "type": "string"
             }
           }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
         }
       },
       "errors": [

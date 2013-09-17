@@ -32,11 +32,6 @@
           }
         }
       },
-      "output": {
-        "type": "output",
-        "members": {
-        }
-      },
       "errors": [
         {
           "type": "structure",
@@ -1264,11 +1259,6 @@
             "type": "string",
             "serialized_name": "errorStackTrace"
           }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
         }
       },
       "errors": [

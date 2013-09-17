@@ -562,11 +562,6 @@
           }
         }
       },
-      "output": {
-        "type": "output",
-        "members": {
-        }
-      },
       "errors": [
         {
           "type": "structure",
