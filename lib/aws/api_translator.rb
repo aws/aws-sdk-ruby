@@ -93,21 +93,19 @@ module Aws
     end
 
     def translated
+
       if @global_endpoint
         @properties['plugins'].delete('Aws::Plugins::RegionalEndpoint') if
         @properties['endpoint'] = @global_endpoint
       end
+
       api = Seahorse::Model::Api.from_hash(@properties)
       api.metadata = Hash[api.metadata.sort]
       @operations.values.each do |src|
         operation = OperationTranslator.translate(src, @options)
-        api.operations[method_name(underscore(operation.name))] = operation
+        api.operations[underscore(operation.name)] = operation
       end
       api
-    end
-
-    def method_name(operation_name)
-      underscore(operation_name).sub(/_?\d{4}_\d{2}_\d{2}$/, '')
     end
 
     property :version, from: :api_version
@@ -190,9 +188,13 @@ module Aws
       operation
     end
 
-    property :name
     ignore :documentation_url
     ignore :alias
+
+    def set_name(name)
+      # strip api version from operation name
+      @properties['name'] = name.sub(/\d{4}_\d{2}_\d{2}$/, '')
+    end
 
     def set_http(http)
       @properties['http_method'] = http['method']
