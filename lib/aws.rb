@@ -32,7 +32,7 @@ module Aws
 
   module Plugins
     autoload :ContentLength, 'aws/plugins/content_length'
-    autoload :EnvironmentCredentials, 'aws/plugins/environment_credentials'
+    autoload :Credentials, 'aws/plugins/credentials'
     autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
     autoload :JsonSerializer, 'aws/plugins/json_serializer'
     autoload :QuerySerializer, 'aws/plugins/query_serializer'

@@ -14,24 +14,30 @@
 
 module Aws
   module Plugins
-    class EnvironmentCredentials < Seahorse::Client::Plugin
-
-      MISSING_CREDENTIALS = 'missing required configuration option :credentials'
+    class Credentials < Seahorse::Client::Plugin
 
       option(:credentials) do |config|
-        Credentials.new(
+        Aws::Credentials.new(
           ENV['AWS_ACCESS_KEY_ID'] || ENV['AMAZON_ACCESS_KEY_ID'],
           ENV['AWS_SECRET_ACCESS_KEY'] || ENV['AMAZON_SECRET_ACCESS_KEY'],
           ENV['AWS_SESSION_TOKEN'] || ENV['AMAZON_SESSION_TOKEN']
         )
       end
 
-      handle :MissingCredentialsHandler, step: :validate do |context|
-        unless context.config.credentials.set?
-          raise ArgumentError, MISSING_CREDENTIALS
+      class MissingCredentialsError < RuntimeError; end
+
+      # @api private
+      class Handler < Seahorse::Client::Handler
+
+        def call(context)
+          credentials = context.config.credentials
+          raise MissingCredentialsError if credentials.nil? or !credentials.set?
+          @handler.call(context)
         end
-        super(context)
+
       end
+
+      handler(Handler, step: :validate)
 
     end
   end
