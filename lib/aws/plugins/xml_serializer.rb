@@ -14,32 +14,7 @@
 module Aws
   module Plugins
     class XmlSerializer < Seahorse::Client::Plugin
-
-      handle(:Handler) do |context|
-
-        operation = context.operation
-
-        # serialize xml request
-        if ['PUT', 'POST'].include?(operation.http_method)
-          rules = operation.input.members.values.find { |shape| shape.metadata['payload'] }
-          if rules.type == :blob
-            context.http_request.body = context.params[rules.member_name]
-          else
-            xml = Xml::Builder.to_xml(rules, context.params)
-            context.http_request.body = xml
-            context.http_request.headers['Content-Type'] = 'application/xml'
-          end
-        end
-
-        # parse xml resopnse
-        super(context).on_complete do |response|
-          body = response.context.http_response.body
-          response.data = Xml::Parser.parse(operation.output, body.read)
-          body.rewind
-        end
-
-      end
-
+      handler(Xml::Handler)
     end
   end
 end

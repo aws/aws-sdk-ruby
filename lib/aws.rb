@@ -63,6 +63,7 @@ module Aws
   # @api private
   module Xml
     autoload :Builder, 'aws/xml/builder'
+    autoload :Handler, 'aws/xml/handler'
     autoload :Parser, 'aws/xml/parser'
   end
 
