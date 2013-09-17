@@ -48,7 +48,7 @@ module Seahorse
           expect(operation.http_path).to eq '/path/to/operation'
           expect(operation.http_method).to eq 'POST'
           expect(operation.input).to be_instance_of Shapes::InputShape
-          expect(operation.output).to eq nil
+          expect(operation.output).to be_instance_of Shapes::OutputShape
           expect(operation.errors[0]).to be_instance_of Shapes::StringShape
         end
 

@@ -20,6 +20,7 @@ module Seahorse
         super
         self.metadata = {}
         self.input = InputShape.new
+        self.output = OutputShape.new
       end
 
       property :name, String
@@ -28,14 +29,14 @@ module Seahorse
       property :metadata, Hash
       property :documentation, String
       property :input, InputShape
-      property :output, Shape
+      property :output, OutputShape
       property :errors, [Shape]
 
       def to_hash
         hash = super
         hash.delete('metadata') if hash['metadata'].empty?
-        puts hash.inspect if hash['input'].nil?
         hash.delete('input') if hash['input']['members'].empty?
+        hash.delete('output') if hash['output']['members'].empty?
         hash
       end
 

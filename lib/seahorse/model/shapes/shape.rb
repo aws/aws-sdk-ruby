@@ -132,7 +132,19 @@ module Seahorse
           self.members = MemberHash.new
         end
 
-        # @return [Hash<String,Shape>]
+        def empty?
+          @members.empty?
+        end
+
+        def members= hash
+          @members = MemberHash.new
+          hash.each do |k, v|
+            @members[k] = v
+          end
+        end
+
+        # @return [Hash<String,Shape>] Returns a hash of members indexed
+        #  by their serialized names.  This is useful for parsing.
         def serialized_members
           @serialized_members ||= compute_serialized_members
         end
@@ -149,18 +161,40 @@ module Seahorse
 
       class InputShape < StructureShape
 
-        property :raw_payload, Boolean
+        property :payload, Symbol
 
+        # @return [Hash<Symbol, Shape>] Returns a hash of member shapes
+        #   that should be serialized into the request headers.
         def header_members
           member_map['header']
         end
 
+        # @return [Hash<Symbol, Shape>] Returns a hash of member shapes
+        #   that should be serialized into the request uri path.
         def uri_members
           member_map['uri']
         end
 
-        def body_members
-          member_map['body']
+        # @return [StructureShape] Returns a structure with each of the
+        #   members that represent the request body.
+        def body_member
+          @body_member ||= begin
+            if payload
+              members[payload]
+            else
+              shape = Seahorse::Model::Shapes::StructureShape.new
+              shape.members = member_map['body']
+              shape.serialized_name = serialized_name
+              shape.metadata = metadata
+              shape
+            end
+          end
+        end
+
+        # @return [Boolean] Returns `true` if the request input body
+        #   should be sent as blob/raw data (e.g. from a file).
+        def raw_payload?
+          payload && members[payload].is_a?(BlobShape)
         end
 
         private
@@ -177,8 +211,11 @@ module Seahorse
 
       end
 
+      class OutputShape < InputShape; end
+
       class Shape < Node
         register_type input: InputShape
+        register_type output: OutputShape
         register_type structure: StructureShape
         register_type list: ListShape
         register_type map: MapShape
