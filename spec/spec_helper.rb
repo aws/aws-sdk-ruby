@@ -11,11 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-if ENV['COVERAGE']
-  require 'simplecov'
-  SimpleCov.start { add_filter 'spec'; add_filter 'vendor' }
-end
-
+require 'simplecov' if ENV['COVERAGE']
 require 'rspec'
 require 'aws-sdk-core'
 
