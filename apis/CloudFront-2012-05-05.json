@@ -17,7 +17,7 @@
   ],
   "operations": {
     "create_cloud_front_origin_access_identity": {
-      "name": "CreateCloudFrontOriginAccessIdentity2012_05_05",
+      "name": "CreateCloudFrontOriginAccessIdentity",
       "http_method": "POST",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront",
       "input": {
@@ -136,7 +136,7 @@
       ]
     },
     "create_distribution": {
-      "name": "CreateDistribution2012_05_05",
+      "name": "CreateDistribution",
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution",
       "input": {
@@ -917,7 +917,7 @@
       ]
     },
     "create_invalidation": {
-      "name": "CreateInvalidation2012_05_05",
+      "name": "CreateInvalidation",
       "http_method": "POST",
       "http_path": "/2012-05-05/distribution/{distribution_id}/invalidation",
       "input": {
@@ -1087,7 +1087,7 @@
       ]
     },
     "create_streaming_distribution": {
-      "name": "CreateStreamingDistribution2012_05_05",
+      "name": "CreateStreamingDistribution",
       "http_method": "POST",
       "http_path": "/2012-05-05/streaming-distribution",
       "input": {
@@ -1488,7 +1488,7 @@
       ]
     },
     "delete_cloud_front_origin_access_identity": {
-      "name": "DeleteCloudFrontOriginAccessIdentity2012_05_05",
+      "name": "DeleteCloudFrontOriginAccessIdentity",
       "http_method": "DELETE",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront/{id}",
       "input": {
@@ -1554,7 +1554,7 @@
       ]
     },
     "delete_distribution": {
-      "name": "DeleteDistribution2012_05_05",
+      "name": "DeleteDistribution",
       "http_method": "DELETE",
       "http_path": "/2012-05-05/distribution/{id}",
       "input": {
@@ -1620,7 +1620,7 @@
       ]
     },
     "delete_streaming_distribution": {
-      "name": "DeleteStreamingDistribution2012_05_05",
+      "name": "DeleteStreamingDistribution",
       "http_method": "DELETE",
       "http_path": "/2012-05-05/streaming-distribution/{id}",
       "input": {
@@ -1686,7 +1686,7 @@
       ]
     },
     "get_cloud_front_origin_access_identity": {
-      "name": "GetCloudFrontOriginAccessIdentity2012_05_05",
+      "name": "GetCloudFrontOriginAccessIdentity",
       "http_method": "GET",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront/{id}",
       "input": {
@@ -1759,7 +1759,7 @@
       ]
     },
     "get_cloud_front_origin_access_identity_config": {
-      "name": "GetCloudFrontOriginAccessIdentityConfig2012_05_05",
+      "name": "GetCloudFrontOriginAccessIdentityConfig",
       "http_method": "GET",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront/{id}/config",
       "input": {
@@ -1818,7 +1818,7 @@
       ]
     },
     "get_distribution": {
-      "name": "GetDistribution2012_05_05",
+      "name": "GetDistribution",
       "http_method": "GET",
       "http_path": "/2012-05-05/distribution/{id}",
       "input": {
@@ -2179,7 +2179,7 @@
       ]
     },
     "get_distribution_config": {
-      "name": "GetDistributionConfig2012_05_05",
+      "name": "GetDistributionConfig",
       "http_method": "GET",
       "http_path": "/2012-05-05/distribution/{id}/config",
       "input": {
@@ -2468,7 +2468,7 @@
       ]
     },
     "get_invalidation": {
-      "name": "GetInvalidation2012_05_05",
+      "name": "GetInvalidation",
       "http_method": "GET",
       "http_path": "/2012-05-05/distribution/{distribution_id}/invalidation/{id}",
       "input": {
@@ -2569,7 +2569,7 @@
       ]
     },
     "get_streaming_distribution": {
-      "name": "GetStreamingDistribution2012_05_05",
+      "name": "GetStreamingDistribution",
       "http_method": "GET",
       "http_path": "/2012-05-05/streaming-distribution/{id}",
       "input": {
@@ -2772,7 +2772,7 @@
       ]
     },
     "get_streaming_distribution_config": {
-      "name": "GetStreamingDistributionConfig2012_05_05",
+      "name": "GetStreamingDistributionConfig",
       "http_method": "GET",
       "http_path": "/2012-05-05/streaming-distribution/{id}/config",
       "input": {
@@ -2907,7 +2907,7 @@
       ]
     },
     "list_cloud_front_origin_access_identities": {
-      "name": "ListCloudFrontOriginAccessIdentities2012_05_05",
+      "name": "ListCloudFrontOriginAccessIdentities",
       "http_method": "GET",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront?Marker={marker}&MaxItems={max_items}",
       "input": {
@@ -2990,7 +2990,7 @@
       ]
     },
     "list_distributions": {
-      "name": "ListDistributions2012_05_05",
+      "name": "ListDistributions",
       "http_method": "GET",
       "http_path": "/2012-05-05/distribution?Marker={marker}&MaxItems={max_items}",
       "input": {
@@ -3289,7 +3289,7 @@
       ]
     },
     "list_invalidations": {
-      "name": "ListInvalidations2012_05_05",
+      "name": "ListInvalidations",
       "http_method": "GET",
       "http_path": "/2012-05-05/distribution/{distribution_id}/invalidation?Marker={marker}&MaxItems={max_items}",
       "input": {
@@ -3382,7 +3382,7 @@
       ]
     },
     "list_streaming_distributions": {
-      "name": "ListStreamingDistributions2012_05_05",
+      "name": "ListStreamingDistributions",
       "http_method": "GET",
       "http_path": "/2012-05-05/streaming-distribution?Marker={marker}&MaxItems={max_items}",
       "input": {
@@ -3531,7 +3531,7 @@
       ]
     },
     "update_cloud_front_origin_access_identity": {
-      "name": "UpdateCloudFrontOriginAccessIdentity2012_05_05",
+      "name": "UpdateCloudFrontOriginAccessIdentity",
       "http_method": "PUT",
       "http_path": "/2012-05-05/origin-access-identity/cloudfront/{id}/config",
       "input": {
@@ -3681,7 +3681,7 @@
       ]
     },
     "update_distribution": {
-      "name": "UpdateDistribution2012_05_05",
+      "name": "UpdateDistribution",
       "http_method": "PUT",
       "http_path": "/2012-05-05/distribution/{id}/config",
       "input": {
@@ -4475,7 +4475,7 @@
       ]
     },
     "update_streaming_distribution": {
-      "name": "UpdateStreamingDistribution2012_05_05",
+      "name": "UpdateStreamingDistribution",
       "http_method": "PUT",
       "http_path": "/2012-05-05/streaming-distribution/{id}/config",
       "input": {
