@@ -110,7 +110,7 @@ module Aws
             f = OperationFixture.load(svc_name, fixture_name)
 
             # build a service client
-            svc = Aws.send(svc_name, f.config).client
+            svc = Aws.send(svc_name, f.config)
 
             # build the request
             req = svc.build_request(f.operation, f.params)

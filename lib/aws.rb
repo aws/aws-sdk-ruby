@@ -16,7 +16,6 @@ module Aws
   @config = {}
 
   autoload :ApiTranslator, 'aws/api_translator'
-  autoload :ClientFactory, 'aws/client_factory'
   autoload :Credentials, 'aws/credentials'
   autoload :Handler, 'aws/handler'
   autoload :Service, 'aws/service'
