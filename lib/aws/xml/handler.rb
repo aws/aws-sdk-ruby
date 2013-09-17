@@ -14,42 +14,18 @@
 
 module Aws
   module Xml
-    class Handler < Seahorse::Client::Handler
-
-      def call(context)
-        build_request(context)
-        super(context).on_complete do |response|
-          parse_response(response)
-        end
-      end
-
-      private
-
-      def build_request(context)
-        populate_headers(context)
-        populate_body(context)
-      end
+    class Handler < Aws::Handler
 
       def populate_headers(context)
         context.http_request.headers['Content-Type'] = 'application/xml'
       end
 
-      def populate_body(context)
-        input = context.operation.input
-        unless input.raw_payload? || input.body_member.empty?
-          xml = Builder.to_xml(input.body_member, context.params)
-          context.http_request.body = xml
-        end
+      def builder_class
+        Xml::Builder
       end
 
-      def parse_response(response)
-        output = response.context.operation.output
-        response.data = Structure.new(output.members.keys)
-        unless output.raw_payload?
-          body = response.context.http_response.body
-          Parser.parse(output, body.read, response.data)
-          body.rewind
-        end
+      def parser_class
+        Xml::Parser
       end
 
     end

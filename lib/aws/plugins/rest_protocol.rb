@@ -87,20 +87,17 @@ module Aws
         end
 
         def parse_response(response)
-          if rules = response.context.operation.output
-            response.data ||= Structure.new(rules.members.keys)
-            extract_headers_and_body(rules, response)
-          end
+          output = response.context.operation.output
+          response.data ||= Structure.new(output.members.keys)
+          extract_headers(response)
+          extract_body(response)
         end
 
-        def extract_headers_and_body(rules, response)
+        def extract_headers(response)
           headers = response.http_response.headers
-          rules.members.each do |member_name, member|
-            if member.location == 'header'
-              response.data[member_name] = header_value(member, headers)
-            elsif member.metadata['streaming']
-              response.data[member_name] = response.http_response.body
-            end
+          rules = response.context.operation.output.header_members
+          rules.each do |member_name, member|
+            response.data[member_name] = header_value(member, headers)
           end
         end
 
@@ -132,6 +129,13 @@ module Aws
             when BooleanShape then value == 'true'
             else value
             end
+          end
+        end
+
+        def extract_body(response)
+          output = response.context.operation.output
+          if output.raw_payload?
+            response.data[output.payload] = response.http_response.body
           end
         end
 

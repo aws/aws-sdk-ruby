@@ -35,11 +35,16 @@ module Aws
         @xml.join
       end
 
-      # @param [Seahorse::Model::Shapes::Shape] rules
-      # @param [Hash] params
-      # @return [String] Returns an XML doc string.
-      def self.to_xml(rules, params)
-        new(rules).to_xml(params)
+      class << self
+
+        # @param [Seahorse::Model::Shapes::Shape] rules
+        # @param [Hash] params
+        # @return [String] Returns an XML doc string.
+        def to_xml(rules, params)
+          new(rules).to_xml(params)
+        end
+        alias build to_xml
+
       end
 
       private

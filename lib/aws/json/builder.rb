@@ -31,11 +31,16 @@ module Aws
         MultiJson.dump(structure(@rules, params))
       end
 
-      # @param [Seahorse::Model::Shapes::Shape] rules
-      # @param [Hash] params
-      # @return [String<JSON>]
-      def self.to_json(rules, params)
-        new(rules).to_json(params)
+      class << self
+
+        # @param [Seahorse::Model::Shapes::Shape] rules
+        # @param [Hash] params
+        # @return [String<JSON>]
+        def to_json(rules, params)
+          new(rules).to_json(params)
+        end
+        alias build  to_json
+
       end
 
       private
