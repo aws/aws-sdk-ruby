@@ -26,28 +26,30 @@ module Aws
       end
 
       # @param [String<JSON>] json
+      # @param [Hash] target (nil)
       # @return [Hash]
-      def parse(json)
-        structure(@rules, MultiJson.load(json == '' ? '{}' : json))
+      def parse(json, target = nil)
+        structure(@rules, MultiJson.load(json == '' ? '{}' : json), target)
       end
 
-      # @param [Seahorse::Model::Shapes::Shape] rules
+      # @param [Seahorse::Model::Shapes::OutputShape] rules
       # @param [String<JSON>] json
+      # @param [Hash] target (nil)
       # @return [Hash]
-      def self.parse(rules, json)
-        new(rules).parse(json)
+      def self.parse(rules, json, target = nil)
+        new(rules.body_member).parse(json, target)
       end
 
       private
 
-      def structure(shape, values)
-        data = Structure.new(shape.members.keys)
+      def structure(shape, values, target = nil)
+        target ||= Structure.new(shape.members.keys)
         values.each do |key, value|
           if member_shape = shape.serialized_members[key]
-            data[member_shape.member_name] = member(member_shape, value)
+            target[member_shape.member_name] = member(member_shape, value)
           end
         end
-        data
+        target
       end
 
       def list(shape, values)

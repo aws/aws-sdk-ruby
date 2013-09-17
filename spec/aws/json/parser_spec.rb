@@ -18,7 +18,7 @@ module Aws
     describe Parser do
 
       let(:rules) {{
-        'type' => 'structure',
+        'type' => 'input',
         'members' => {},
       }}
 

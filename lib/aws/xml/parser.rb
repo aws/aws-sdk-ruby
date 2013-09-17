@@ -35,27 +35,30 @@ module Aws
       end
 
       # @param [String<xml>] xml
+      # @param [Hash] target (nil)
       # @return [Hash]
-      def parse(xml)
-        structure(@rules, MultiXml.parse(xml).values.first || {})
+      def parse(xml, target = nil)
+        target ||= Structure.new(@rules.members.keys)
+        structure(@rules, MultiXml.parse(xml).values.first || {}, target)
       end
 
-      # @param [Seahorse::Model::Shapes::Shape] rules
+      # @param [Seahorse::Model::Shapes::OutputShape] rules
       # @param [String<xml>] xml
+      # @param [Hash] target (nil)
       # @return [Hash]
-      def self.parse(rules, xml)
-        Parser.new(rules).parse(xml)
+      def self.parse(rules, xml, target = nil)
+        Parser.new(rules.body_member).parse(xml, target)
       end
 
       private
 
-      def structure(shape, hash)
-        data = Aws::Structure.new(shape.members.keys)
+      def structure(shape, hash, target = nil)
+        target ||= Structure.new(shape.members.keys)
         shape.members.each do |member_name, member_shape|
           key = member_shape.serialized_name
-          data[member_name] = member(member_shape, hash[key]) if hash.key?(key)
+          target[member_name] = member(member_shape, hash[key]) if hash.key?(key)
         end
-        data
+        target
       end
 
       def list(shape, values)
