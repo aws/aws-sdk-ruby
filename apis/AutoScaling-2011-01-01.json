@@ -119,27 +119,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_launch_configuration": {
       "name": "CreateLaunchConfiguration",
@@ -241,27 +221,7 @@
             "serialized_name": "EbsOptimized"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_or_update_tags": {
       "name": "CreateOrUpdateTags",
@@ -302,27 +262,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_auto_scaling_group": {
       "name": "DeleteAutoScalingGroup",
@@ -341,27 +281,7 @@
             "serialized_name": "ForceDelete"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_launch_configuration": {
       "name": "DeleteLaunchConfiguration",
@@ -376,18 +296,7 @@
             "serialized_name": "LaunchConfigurationName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_notification_configuration": {
       "name": "DeleteNotificationConfiguration",
@@ -724,18 +633,7 @@
             "serialized_name": "NextToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_auto_scaling_instances": {
       "name": "DescribeAutoScalingInstances",
@@ -802,18 +700,7 @@
             "serialized_name": "NextToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_auto_scaling_notification_types": {
       "name": "DescribeAutoScalingNotificationTypes",
@@ -969,18 +856,7 @@
             "serialized_name": "NextToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_metric_collection_types": {
       "name": "DescribeMetricCollectionTypes",
@@ -1071,18 +947,7 @@
             "serialized_name": "NextToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_policies": {
       "name": "DescribePolicies",
@@ -1174,18 +1039,7 @@
             "serialized_name": "NextToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_scaling_activities": {
       "name": "DescribeScalingActivities",
@@ -1282,18 +1136,7 @@
             "serialized_name": "NextToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_scaling_process_types": {
       "name": "DescribeScalingProcessTypes",
@@ -1411,18 +1254,7 @@
             "serialized_name": "NextToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_tags": {
       "name": "DescribeTags",
@@ -1498,18 +1330,7 @@
             "serialized_name": "NextToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_termination_policy_types": {
       "name": "DescribeTerminationPolicyTypes",
@@ -1598,18 +1419,7 @@
             "serialized_name": "HonorCooldown"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "put_notification_configuration": {
       "name": "PutNotificationConfiguration",
@@ -1637,18 +1447,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "put_scaling_policy": {
       "name": "PutScalingPolicy",
@@ -1695,18 +1494,7 @@
             "serialized_name": "PolicyARN"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "put_scheduled_update_group_action": {
       "name": "PutScheduledUpdateGroupAction",
@@ -1754,27 +1542,7 @@
             "serialized_name": "DesiredCapacity"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "resume_processes": {
       "name": "ResumeProcesses",
@@ -1820,18 +1588,7 @@
             "serialized_name": "HonorCooldown"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "set_instance_health": {
       "name": "SetInstanceHealth",
@@ -1958,18 +1715,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "update_auto_scaling_group": {
       "name": "UpdateAutoScalingGroup",
@@ -2034,18 +1780,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     }
   }
 }

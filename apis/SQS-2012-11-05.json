@@ -54,14 +54,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "change_message_visibility": {
       "name": "ChangeMessageVisibility",
@@ -86,19 +79,7 @@
             "serialized_name": "VisibilityTimeout"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "change_message_visibility_batch": {
       "name": "ChangeMessageVisibilityBatch",
@@ -183,29 +164,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_queue": {
       "name": "CreateQueue",
@@ -255,19 +214,7 @@
             "serialized_name": "QueueUrl"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_message": {
       "name": "DeleteMessage",
@@ -287,19 +234,7 @@
             "serialized_name": "ReceiptHandle"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_message_batch": {
       "name": "DeleteMessageBatch",
@@ -380,29 +315,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_queue": {
       "name": "DeleteQueue",
@@ -485,14 +398,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "get_queue_url": {
       "name": "GetQueueUrl",
@@ -520,14 +426,7 @@
             "serialized_name": "QueueUrl"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "list_queues": {
       "name": "ListQueues",
@@ -660,14 +559,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "remove_permission": {
       "name": "RemovePermission",
@@ -724,14 +616,7 @@
             "serialized_name": "MessageId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "send_message_batch": {
       "name": "SendMessageBatch",
@@ -824,34 +709,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "set_queue_attributes": {
       "name": "SetQueueAttributes",
@@ -893,14 +751,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     }
   }
 }

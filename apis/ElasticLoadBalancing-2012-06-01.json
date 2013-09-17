@@ -49,24 +49,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "attach_load_balancer_to_subnets": {
       "name": "AttachLoadBalancerToSubnets",
@@ -101,29 +84,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "configure_health_check": {
       "name": "ConfigureHealthCheck",
@@ -201,14 +162,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_app_cookie_stickiness_policy": {
       "name": "CreateAppCookieStickinessPolicy",
@@ -233,29 +187,7 @@
             "serialized_name": "CookieName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_lb_cookie_stickiness_policy": {
       "name": "CreateLBCookieStickinessPolicy",
@@ -279,29 +211,7 @@
             "serialized_name": "CookieExpirationPeriod"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_load_balancer": {
       "name": "CreateLoadBalancer",
@@ -383,49 +293,7 @@
             "serialized_name": "DNSName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_load_balancer_listeners": {
       "name": "CreateLoadBalancerListeners",
@@ -473,29 +341,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_load_balancer_policy": {
       "name": "CreateLoadBalancerPolicy",
@@ -537,34 +383,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_load_balancer": {
       "name": "DeleteLoadBalancer",
@@ -602,14 +421,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_load_balancer_policy": {
       "name": "DeleteLoadBalancerPolicy",
@@ -629,19 +441,7 @@
             "serialized_name": "PolicyName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "deregister_instances_from_load_balancer": {
       "name": "DeregisterInstancesFromLoadBalancer",
@@ -688,19 +488,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_instance_health": {
       "name": "DescribeInstanceHealth",
@@ -758,19 +546,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_load_balancer_policies": {
       "name": "DescribeLoadBalancerPolicies",
@@ -830,19 +606,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_load_balancer_policy_types": {
       "name": "DescribeLoadBalancerPolicyTypes",
@@ -910,14 +674,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_load_balancers": {
       "name": "DescribeLoadBalancers",
@@ -1167,14 +924,7 @@
             "serialized_name": "NextMarker"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "detach_load_balancer_from_subnets": {
       "name": "DetachLoadBalancerFromSubnets",
@@ -1209,19 +959,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "disable_availability_zones_for_load_balancer": {
       "name": "DisableAvailabilityZonesForLoadBalancer",
@@ -1256,19 +994,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "enable_availability_zones_for_load_balancer": {
       "name": "EnableAvailabilityZonesForLoadBalancer",
@@ -1303,14 +1029,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "register_instances_with_load_balancer": {
       "name": "RegisterInstancesWithLoadBalancer",
@@ -1357,19 +1076,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "set_load_balancer_listener_ssl_certificate": {
       "name": "SetLoadBalancerListenerSSLCertificate",
@@ -1394,29 +1101,7 @@
             "serialized_name": "SSLCertificateId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "set_load_balancer_policies_for_backend_server": {
       "name": "SetLoadBalancerPoliciesForBackendServer",
@@ -1444,24 +1129,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "set_load_balancer_policies_of_listener": {
       "name": "SetLoadBalancerPoliciesOfListener",
@@ -1489,29 +1157,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     }
   }
 }

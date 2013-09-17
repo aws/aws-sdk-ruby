@@ -78,8 +78,8 @@ module Aws
 
       api_path = 'apis-src/s3-2006-03-01.json'
       expect(ApiTranslator).to receive(:translate).
-        with(MultiJson.load(File.read(api_path))).
-        and_return(api)
+        with(MultiJson.load(File.read(api_path)),
+          documentation: false, errors: false).and_return(api)
 
       Aws.add_service(:DummyService, [api_path])
       Aws::DummyService::Client::V20060301.clear_plugins

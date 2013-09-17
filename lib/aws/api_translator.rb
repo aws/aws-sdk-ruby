@@ -20,6 +20,7 @@ module Aws
 
     DEFAULT_OPTIONS = {
       documentation: true,
+      errors: true,
       timestamp_format: 'iso8601',
     }
 
@@ -203,7 +204,7 @@ module Aws
       operation = Seahorse::Model::Operation.from_hash(@properties)
       operation.input = @input if @input
       operation.output = @output if @output
-      operation.errors = @errors if @errors
+      operation.errors = @errors if @errors and @options[:errors]
       operation
     end
 

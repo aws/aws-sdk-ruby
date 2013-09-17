@@ -444,14 +444,7 @@
             "serialized_name": "MessageId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "send_raw_email": {
       "name": "SendRawEmail",
@@ -493,14 +486,7 @@
             "serialized_name": "MessageId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "set_identity_dkim_enabled": {
       "name": "SetIdentityDkimEnabled",

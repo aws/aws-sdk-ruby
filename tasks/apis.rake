@@ -45,7 +45,9 @@ task :apis do
     puts "translating #{path}"
     MultiJson.engine = 'json_gem' # for consistent formatting
     api_src = MultiJson.load(File.read(path), max_nesting: nil)
-    api = Aws::ApiTranslator.translate(api_src, documentation: false)
+    api = Aws::ApiTranslator.translate(api_src,
+      documentation: false,
+      errors: false)
     api.plugins += svc_plugins(endpoint_prefix)
 
     target = "apis/#{svc_class_name(api)}-#{api.version}.json"

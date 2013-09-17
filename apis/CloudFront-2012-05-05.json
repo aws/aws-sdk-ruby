@@ -88,54 +88,7 @@
           }
         },
         "payload": "cloud_front_origin_access_identity"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_distribution": {
       "name": "CreateDistribution",
@@ -764,162 +717,7 @@
           }
         },
         "payload": "distribution"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_invalidation": {
       "name": "CreateInvalidation",
@@ -1027,72 +825,7 @@
           }
         },
         "payload": "invalidation"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_streaming_distribution": {
       "name": "CreateStreamingDistribution",
@@ -1386,117 +1119,7 @@
           }
         },
         "payload": "streaming_distribution"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_cloud_front_origin_access_identity": {
       "name": "DeleteCloudFrontOriginAccessIdentity",
@@ -1515,54 +1138,7 @@
             "serialized_name": "If-Match"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_distribution": {
       "name": "DeleteDistribution",
@@ -1581,54 +1157,7 @@
             "serialized_name": "If-Match"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_streaming_distribution": {
       "name": "DeleteStreamingDistribution",
@@ -1647,54 +1176,7 @@
             "serialized_name": "If-Match"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "get_cloud_front_origin_access_identity": {
       "name": "GetCloudFrontOriginAccessIdentity",
@@ -1747,27 +1229,7 @@
           }
         },
         "payload": "cloud_front_origin_access_identity"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "get_cloud_front_origin_access_identity_config": {
       "name": "GetCloudFrontOriginAccessIdentityConfig",
@@ -1806,27 +1268,7 @@
           }
         },
         "payload": "cloud_front_origin_access_identity_config"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "get_distribution": {
       "name": "GetDistribution",
@@ -2167,27 +1609,7 @@
           }
         },
         "payload": "distribution"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "get_distribution_config": {
       "name": "GetDistributionConfig",
@@ -2456,27 +1878,7 @@
           }
         },
         "payload": "distribution_config"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "get_invalidation": {
       "name": "GetInvalidation",
@@ -2548,36 +1950,7 @@
           }
         },
         "payload": "invalidation"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "get_streaming_distribution": {
       "name": "GetStreamingDistribution",
@@ -2760,27 +2133,7 @@
           }
         },
         "payload": "streaming_distribution"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "get_streaming_distribution_config": {
       "name": "GetStreamingDistributionConfig",
@@ -2895,27 +2248,7 @@
           }
         },
         "payload": "streaming_distribution_config"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "list_cloud_front_origin_access_identities": {
       "name": "ListCloudFrontOriginAccessIdentities",
@@ -2987,18 +2320,7 @@
           }
         },
         "payload": "cloud_front_origin_access_identity_list"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "list_distributions": {
       "name": "ListDistributions",
@@ -3286,18 +2608,7 @@
           }
         },
         "payload": "distribution_list"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "list_invalidations": {
       "name": "ListInvalidations",
@@ -3370,27 +2681,7 @@
           }
         },
         "payload": "invalidation_list"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "list_streaming_distributions": {
       "name": "ListStreamingDistributions",
@@ -3528,18 +2819,7 @@
           }
         },
         "payload": "streaming_distribution_list"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "update_cloud_front_origin_access_identity": {
       "name": "UpdateCloudFrontOriginAccessIdentity",
@@ -3618,81 +2898,7 @@
           }
         },
         "payload": "cloud_front_origin_access_identity"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "update_distribution": {
       "name": "UpdateDistribution",
@@ -4325,171 +3531,7 @@
           }
         },
         "payload": "distribution"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     },
     "update_streaming_distribution": {
       "name": "UpdateStreamingDistribution",
@@ -4787,126 +3829,7 @@
           }
         },
         "payload": "streaming_distribution"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        }
-      ]
+      }
     }
   }
 }

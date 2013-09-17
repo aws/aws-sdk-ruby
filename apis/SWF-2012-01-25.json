@@ -130,27 +130,7 @@
             "serialized_name": "truncated"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "count_open_workflow_executions": {
       "name": "CountOpenWorkflowExecutions",
@@ -231,27 +211,7 @@
             "serialized_name": "truncated"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "count_pending_activity_tasks": {
       "name": "CountPendingActivityTasks",
@@ -291,27 +251,7 @@
             "serialized_name": "truncated"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "count_pending_decision_tasks": {
       "name": "CountPendingDecisionTasks",
@@ -351,27 +291,7 @@
             "serialized_name": "truncated"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "deprecate_activity_type": {
       "name": "DeprecateActivityType",
@@ -403,36 +323,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "deprecate_domain": {
       "name": "DeprecateDomain",
@@ -447,36 +338,7 @@
             "serialized_name": "name"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "deprecate_workflow_type": {
       "name": "DeprecateWorkflowType",
@@ -508,36 +370,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_activity_type": {
       "name": "DescribeActivityType",
@@ -646,27 +479,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_domain": {
       "name": "DescribeDomain",
@@ -718,27 +531,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_workflow_execution": {
       "name": "DescribeWorkflowExecution",
@@ -925,27 +718,7 @@
             "serialized_name": "latestExecutionContext"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_workflow_type": {
       "name": "DescribeWorkflowType",
@@ -1055,27 +828,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "get_workflow_execution_history": {
       "name": "GetWorkflowExecutionHistory",
@@ -2608,27 +2361,7 @@
             "serialized_name": "nextPageToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "list_activity_types": {
       "name": "ListActivityTypes",
@@ -2720,27 +2453,7 @@
             "serialized_name": "nextPageToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "list_closed_workflow_executions": {
       "name": "ListClosedWorkflowExecutions",
@@ -2952,27 +2665,7 @@
             "serialized_name": "nextPageToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "list_domains": {
       "name": "ListDomains",
@@ -3037,18 +2730,7 @@
             "serialized_name": "nextPageToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "list_open_workflow_executions": {
       "name": "ListOpenWorkflowExecutions",
@@ -3227,27 +2909,7 @@
             "serialized_name": "nextPageToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "list_workflow_types": {
       "name": "ListWorkflowTypes",
@@ -3339,27 +3001,7 @@
             "serialized_name": "nextPageToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "poll_for_activity_task": {
       "name": "PollForActivityTask",
@@ -3439,36 +3081,7 @@
             "serialized_name": "input"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "poll_for_decision_task": {
       "name": "PollForDecisionTask",
@@ -5040,36 +4653,7 @@
             "serialized_name": "previousStartedEventId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "record_activity_task_heartbeat": {
       "name": "RecordActivityTaskHeartbeat",
@@ -5097,27 +4681,7 @@
             "serialized_name": "cancelRequested"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "register_activity_type": {
       "name": "RegisterActivityType",
@@ -5173,45 +4737,7 @@
             "serialized_name": "defaultTaskScheduleToCloseTimeout"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "register_domain": {
       "name": "RegisterDomain",
@@ -5235,36 +4761,7 @@
             "serialized_name": "workflowExecutionRetentionPeriodInDays"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "register_workflow_type": {
       "name": "RegisterWorkflowType",
@@ -5321,45 +4818,7 @@
             ]
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "request_cancel_workflow_execution": {
       "name": "RequestCancelWorkflowExecution",
@@ -5383,27 +4842,7 @@
             "serialized_name": "runId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "respond_activity_task_canceled": {
       "name": "RespondActivityTaskCanceled",
@@ -5422,27 +4861,7 @@
             "serialized_name": "details"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "respond_activity_task_completed": {
       "name": "RespondActivityTaskCompleted",
@@ -5461,27 +4880,7 @@
             "serialized_name": "result"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "respond_activity_task_failed": {
       "name": "RespondActivityTaskFailed",
@@ -5504,27 +4903,7 @@
             "serialized_name": "details"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "respond_decision_task_completed": {
       "name": "RespondDecisionTaskCompleted",
@@ -5892,27 +5271,7 @@
             "serialized_name": "executionContext"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "signal_workflow_execution": {
       "name": "SignalWorkflowExecution",
@@ -5945,27 +5304,7 @@
             "serialized_name": "input"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "start_workflow_execution": {
       "name": "StartWorkflowExecution",
@@ -6050,63 +5389,7 @@
             "serialized_name": "runId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "terminate_workflow_execution": {
       "name": "TerminateWorkflowExecution",
@@ -6147,27 +5430,7 @@
             ]
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     }
   }
 }

@@ -88,42 +88,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_cache_cluster": {
       "name": "CreateCacheCluster",
@@ -410,72 +375,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_cache_parameter_group": {
       "name": "CreateCacheParameterGroup",
@@ -526,42 +426,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_cache_security_group": {
       "name": "CreateCacheSecurityGroup",
@@ -629,37 +494,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_cache_subnet_group": {
       "name": "CreateCacheSubnetGroup",
@@ -741,29 +576,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_cache_cluster": {
       "name": "DeleteCacheCluster",
@@ -987,37 +800,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_cache_parameter_group": {
       "name": "DeleteCacheParameterGroup",
@@ -1032,37 +815,7 @@
             "serialized_name": "CacheParameterGroupName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_cache_security_group": {
       "name": "DeleteCacheSecurityGroup",
@@ -1077,37 +830,7 @@
             "serialized_name": "CacheSecurityGroupName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_cache_subnet_group": {
       "name": "DeleteCacheSubnetGroup",
@@ -1122,19 +845,7 @@
             "serialized_name": "CacheSubnetGroupName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_cache_clusters": {
       "name": "DescribeCacheClusters",
@@ -1377,32 +1088,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_cache_engine_versions": {
       "name": "DescribeCacheEngineVersions",
@@ -1531,32 +1217,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_cache_parameters": {
       "name": "DescribeCacheParameters",
@@ -1690,32 +1351,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_cache_security_groups": {
       "name": "DescribeCacheSecurityGroups",
@@ -1793,32 +1429,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_cache_subnet_groups": {
       "name": "DescribeCacheSubnetGroups",
@@ -1901,14 +1512,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_engine_default_parameters": {
       "name": "DescribeEngineDefaultParameters",
@@ -2051,27 +1655,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_events": {
       "name": "DescribeEvents",
@@ -2156,27 +1740,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_reserved_cache_nodes": {
       "name": "DescribeReservedCacheNodes",
@@ -2305,32 +1869,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_reserved_cache_nodes_offerings": {
       "name": "DescribeReservedCacheNodesOfferings",
@@ -2439,32 +1978,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "modify_cache_cluster": {
       "name": "ModifyCacheCluster",
@@ -2744,67 +2258,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "modify_cache_parameter_group": {
       "name": "ModifyCacheParameterGroup",
@@ -2847,37 +2301,7 @@
             "serialized_name": "CacheParameterGroupName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "modify_cache_subnet_group": {
       "name": "ModifyCacheSubnetGroup",
@@ -2957,29 +2381,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "purchase_reserved_cache_nodes_offering": {
       "name": "PurchaseReservedCacheNodesOffering",
@@ -3081,42 +2483,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "reboot_cache_cluster": {
       "name": "RebootCacheCluster",
@@ -3349,19 +2716,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "reset_cache_parameter_group": {
       "name": "ResetCacheParameterGroup",
@@ -3408,37 +2763,7 @@
             "serialized_name": "CacheParameterGroupName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "revoke_cache_security_group_ingress": {
       "name": "RevokeCacheSecurityGroupIngress",
@@ -3511,42 +2836,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     }
   }
 }

@@ -97,15 +97,17 @@ module Aws
       it 'accepts apis as a path to a translated api' do
         api = 'apis/S3-2006-03-01.json'
         clients = ClientFactory.define(:name, [api])
-        expect(clients.const_get(:V20060301).new.config.api.to_hash).to eq(
-          MultiJson.load(File.read(api)))
+        client_class = clients.const_get(:V20060301)
+        client = client_class.new
+        expect(client.config.api.version).to eq('2006-03-01')
       end
 
       it 'accepts apis as a path to an un-translated api' do
         api = 'apis-src/autoscaling-2011-01-01.json'
         clients = ClientFactory.define(:name, [api])
-        expect(clients.const_get(:V20110101).new.config.api.to_hash).to eq(
-          ApiTranslator.translate(MultiJson.load(File.read(api))).to_hash)
+        client_class = clients.const_get(:V20110101)
+        client = client_class.new
+        expect(client.config.api.version).to eq('2011-01-01')
       end
 
       it 'accepts apis as Seahorse::Model::Api' do

@@ -36,27 +36,7 @@
             "serialized_name": "LayerId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "clone_stack": {
       "name": "CloneStack",
@@ -203,27 +183,7 @@
             "serialized_name": "StackId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_app": {
       "name": "CreateApp",
@@ -354,27 +314,7 @@
             "serialized_name": "AppId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_deployment": {
       "name": "CreateDeployment",
@@ -454,27 +394,7 @@
             "serialized_name": "DeploymentId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_instance": {
       "name": "CreateInstance",
@@ -559,27 +479,7 @@
             "serialized_name": "InstanceId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_layer": {
       "name": "CreateLayer",
@@ -759,27 +659,7 @@
             "serialized_name": "LayerId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_stack": {
       "name": "CreateStack",
@@ -913,18 +793,7 @@
             "serialized_name": "StackId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_user_profile": {
       "name": "CreateUserProfile",
@@ -956,18 +825,7 @@
             "serialized_name": "IamUserArn"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_app": {
       "name": "DeleteApp",
@@ -982,27 +840,7 @@
             "serialized_name": "AppId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_instance": {
       "name": "DeleteInstance",
@@ -1025,27 +863,7 @@
             "serialized_name": "DeleteVolumes"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_layer": {
       "name": "DeleteLayer",
@@ -1060,27 +878,7 @@
             "serialized_name": "LayerId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_stack": {
       "name": "DeleteStack",
@@ -1095,27 +893,7 @@
             "serialized_name": "StackId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_user_profile": {
       "name": "DeleteUserProfile",
@@ -1130,27 +908,7 @@
             "serialized_name": "IamUserArn"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_apps": {
       "name": "DescribeApps",
@@ -1300,27 +1058,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_commands": {
       "name": "DescribeCommands",
@@ -1399,27 +1137,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_deployments": {
       "name": "DescribeDeployments",
@@ -1540,27 +1258,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_elastic_ips": {
       "name": "DescribeElasticIps",
@@ -1611,27 +1309,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_elastic_load_balancers": {
       "name": "DescribeElasticLoadBalancers",
@@ -1704,27 +1382,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_instances": {
       "name": "DescribeInstances",
@@ -1889,27 +1547,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_layers": {
       "name": "DescribeLayers",
@@ -2155,27 +1793,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_load_based_auto_scaling": {
       "name": "DescribeLoadBasedAutoScaling",
@@ -2275,27 +1893,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_permissions": {
       "name": "DescribePermissions",
@@ -2345,27 +1943,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_raid_arrays": {
       "name": "DescribeRaidArrays",
@@ -2440,27 +2018,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_service_errors": {
       "name": "DescribeServiceErrors",
@@ -2523,27 +2081,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_stacks": {
       "name": "DescribeStacks",
@@ -2693,27 +2231,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_time_based_auto_scaling": {
       "name": "DescribeTimeBasedAutoScaling",
@@ -2825,27 +2343,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_user_profiles": {
       "name": "DescribeUserProfiles",
@@ -2893,27 +2391,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "describe_volumes": {
       "name": "DescribeVolumes",
@@ -2996,27 +2474,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "detach_elastic_load_balancer": {
       "name": "DetachElasticLoadBalancer",
@@ -3036,18 +2494,7 @@
             "serialized_name": "LayerId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "get_hostname_suggestion": {
       "name": "GetHostnameSuggestion",
@@ -3075,18 +2522,7 @@
             "serialized_name": "Hostname"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "reboot_instance": {
       "name": "RebootInstance",
@@ -3101,27 +2537,7 @@
             "serialized_name": "InstanceId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "set_load_based_auto_scaling": {
       "name": "SetLoadBasedAutoScaling",
@@ -3200,27 +2616,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "set_permission": {
       "name": "SetPermission",
@@ -3248,27 +2644,7 @@
             "serialized_name": "AllowSudo"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "set_time_based_auto_scaling": {
       "name": "SetTimeBasedAutoScaling",
@@ -3359,27 +2735,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "start_instance": {
       "name": "StartInstance",
@@ -3394,27 +2750,7 @@
             "serialized_name": "InstanceId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "start_stack": {
       "name": "StartStack",
@@ -3429,27 +2765,7 @@
             "serialized_name": "StackId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "stop_instance": {
       "name": "StopInstance",
@@ -3464,27 +2780,7 @@
             "serialized_name": "InstanceId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "stop_stack": {
       "name": "StopStack",
@@ -3499,27 +2795,7 @@
             "serialized_name": "StackId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "update_app": {
       "name": "UpdateApp",
@@ -3635,27 +2911,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "update_instance": {
       "name": "UpdateInstance",
@@ -3717,27 +2973,7 @@
             "serialized_name": "InstallUpdatesOnBoot"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "update_layer": {
       "name": "UpdateLayer",
@@ -3890,27 +3126,7 @@
             "serialized_name": "InstallUpdatesOnBoot"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "update_stack": {
       "name": "UpdateStack",
@@ -4032,27 +3248,7 @@
             ]
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     },
     "update_user_profile": {
       "name": "UpdateUserProfile",
@@ -4075,27 +3271,7 @@
             "serialized_name": "SshPublicKey"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "message": {
-              "type": "string",
-              "serialized_name": "message"
-            }
-          }
-        }
-      ]
+      }
     }
   }
 }

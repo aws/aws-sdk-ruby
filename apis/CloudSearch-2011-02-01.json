@@ -108,37 +108,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "define_index_field": {
       "name": "DefineIndexField",
@@ -504,42 +474,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "define_rank_expression": {
       "name": "DefineRankExpression",
@@ -627,42 +562,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_domain": {
       "name": "DeleteDomain",
@@ -756,27 +656,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_index_field": {
       "name": "DeleteIndexField",
@@ -989,37 +869,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_rank_expression": {
       "name": "DeleteRankExpression",
@@ -1095,37 +945,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_default_search_field": {
       "name": "DescribeDefaultSearchField",
@@ -1186,32 +1006,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_domains": {
       "name": "DescribeDomains",
@@ -1310,27 +1105,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_index_fields": {
       "name": "DescribeIndexFields",
@@ -1548,32 +1323,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_rank_expressions": {
       "name": "DescribeRankExpressions",
@@ -1654,32 +1404,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_service_access_policies": {
       "name": "DescribeServiceAccessPolicies",
@@ -1740,32 +1465,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_stemming_options": {
       "name": "DescribeStemmingOptions",
@@ -1826,32 +1526,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_stopword_options": {
       "name": "DescribeStopwordOptions",
@@ -1912,32 +1587,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_synonym_options": {
       "name": "DescribeSynonymOptions",
@@ -1998,32 +1648,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "index_documents": {
       "name": "IndexDocuments",
@@ -2050,32 +1675,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "update_default_search_field": {
       "name": "UpdateDefaultSearchField",
@@ -2141,37 +1741,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "update_service_access_policies": {
       "name": "UpdateServiceAccessPolicies",
@@ -2237,42 +1807,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "update_stemming_options": {
       "name": "UpdateStemmingOptions",
@@ -2338,42 +1873,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "update_stopword_options": {
       "name": "UpdateStopwordOptions",
@@ -2439,42 +1939,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "update_synonym_options": {
       "name": "UpdateSynonymOptions",
@@ -2540,42 +2005,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "code": {
-              "type": "string",
-              "serialized_name": "Code"
-            },
-            "message": {
-              "type": "string",
-              "serialized_name": "Message"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     }
   }
 }

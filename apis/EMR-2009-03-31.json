@@ -93,14 +93,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "add_job_flow_steps": {
       "name": "AddJobFlowSteps",
@@ -179,14 +172,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_job_flows": {
       "name": "DescribeJobFlows",
@@ -596,14 +582,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "modify_instance_groups": {
       "name": "ModifyInstanceGroups",
@@ -632,14 +611,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "run_job_flow": {
       "name": "RunJobFlow",
@@ -881,14 +853,7 @@
             "serialized_name": "JobFlowId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "set_termination_protection": {
       "name": "SetTerminationProtection",
@@ -911,14 +876,7 @@
             "serialized_name": "TerminationProtected"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "set_visible_to_all_users": {
       "name": "SetVisibleToAllUsers",
@@ -941,14 +899,7 @@
             "serialized_name": "VisibleToAllUsers"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "terminate_job_flows": {
       "name": "TerminateJobFlows",
@@ -966,14 +917,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     }
   }
 }

@@ -104,29 +104,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "authorize_snapshot_access": {
       "name": "AuthorizeSnapshotAccess",
@@ -266,24 +244,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "copy_cluster_snapshot": {
       "name": "CopyClusterSnapshot",
@@ -423,29 +384,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_cluster": {
       "name": "CreateCluster",
@@ -753,69 +692,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_cluster_parameter_group": {
       "name": "CreateClusterParameterGroup",
@@ -866,19 +743,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_cluster_security_group": {
       "name": "CreateClusterSecurityGroup",
@@ -960,19 +825,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_cluster_snapshot": {
       "name": "CreateClusterSnapshot",
@@ -1108,29 +961,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_cluster_subnet_group": {
       "name": "CreateClusterSubnetGroup",
@@ -1220,34 +1051,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_cluster": {
       "name": "DeleteCluster",
@@ -1480,29 +1284,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_cluster_parameter_group": {
       "name": "DeleteClusterParameterGroup",
@@ -1517,19 +1299,7 @@
             "serialized_name": "ParameterGroupName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_cluster_security_group": {
       "name": "DeleteClusterSecurityGroup",
@@ -1544,19 +1314,7 @@
             "serialized_name": "ClusterSecurityGroupName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_cluster_snapshot": {
       "name": "DeleteClusterSnapshot",
@@ -1691,19 +1449,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_cluster_subnet_group": {
       "name": "DeleteClusterSubnetGroup",
@@ -1718,24 +1464,7 @@
             "serialized_name": "ClusterSubnetGroupName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_cluster_parameter_groups": {
       "name": "DescribeClusterParameterGroups",
@@ -1791,14 +1520,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_cluster_parameters": {
       "name": "DescribeClusterParameters",
@@ -1876,14 +1598,7 @@
             "serialized_name": "Marker"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_cluster_security_groups": {
       "name": "DescribeClusterSecurityGroups",
@@ -1975,14 +1690,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_cluster_snapshots": {
       "name": "DescribeClusterSnapshots",
@@ -2148,14 +1856,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_cluster_subnet_groups": {
       "name": "DescribeClusterSubnetGroups",
@@ -2246,14 +1947,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_cluster_versions": {
       "name": "DescribeClusterVersions",
@@ -2550,14 +2244,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_default_cluster_parameters": {
       "name": "DescribeDefaultClusterParameters",
@@ -2899,14 +2586,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_reserved_nodes": {
       "name": "DescribeReservedNodes",
@@ -3015,14 +2695,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_resize": {
       "name": "DescribeResize",
@@ -3079,19 +2752,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "modify_cluster": {
       "name": "ModifyCluster",
@@ -3368,54 +3029,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "modify_cluster_parameter_group": {
       "name": "ModifyClusterParameterGroup",
@@ -3486,19 +3100,7 @@
             "serialized_name": "ParameterGroupStatus"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "modify_cluster_subnet_group": {
       "name": "ModifyClusterSubnetGroup",
@@ -3587,34 +3189,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "purchase_reserved_node_offering": {
       "name": "PurchaseReservedNodeOffering",
@@ -3712,24 +3287,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "reboot_cluster": {
       "name": "RebootCluster",
@@ -3954,19 +3512,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "reset_cluster_parameter_group": {
       "name": "ResetClusterParameterGroup",
@@ -4040,19 +3586,7 @@
             "serialized_name": "ParameterGroupStatus"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "restore_from_cluster_snapshot": {
       "name": "RestoreFromClusterSnapshot",
@@ -4310,79 +3844,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "revoke_cluster_security_group_ingress": {
       "name": "RevokeClusterSecurityGroupIngress",
@@ -4471,24 +3933,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "revoke_snapshot_access": {
       "name": "RevokeSnapshotAccess",
@@ -4628,24 +4073,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     }
   }
 }

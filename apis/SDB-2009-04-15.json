@@ -130,90 +130,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        }
-      ]
+      }
     },
     "create_domain": {
       "name": "CreateDomain",
@@ -228,36 +145,7 @@
             "serialized_name": "DomainName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_attributes": {
       "name": "DeleteAttributes",
@@ -323,45 +211,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        }
-      ]
+      }
     },
     "delete_domain": {
       "name": "DeleteDomain",
@@ -376,18 +226,7 @@
             "serialized_name": "DomainName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        }
-      ]
+      }
     },
     "domain_metadata": {
       "name": "DomainMetadata",
@@ -435,27 +274,7 @@
             "serialized_name": "Timestamp"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        }
-      ]
+      }
     },
     "get_attributes": {
       "name": "GetAttributes",
@@ -518,36 +337,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        }
-      ]
+      }
     },
     "list_domains": {
       "name": "ListDomains",
@@ -582,27 +372,7 @@
             "serialized_name": "NextToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        }
-      ]
+      }
     },
     "put_attributes": {
       "name": "PutAttributes",
@@ -665,72 +435,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        }
-      ]
+      }
     },
     "select": {
       "name": "Select",
@@ -806,90 +511,7 @@
             "serialized_name": "NextToken"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-            "box_usage": {
-              "type": "float",
-              "serialized_name": "BoxUsage"
-            }
-          }
-        }
-      ]
+      }
     }
   }
 }

@@ -104,14 +104,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_application_version": {
       "name": "CreateApplicationVersion",
@@ -198,29 +191,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_configuration_template": {
       "name": "CreateConfigurationTemplate",
@@ -350,19 +321,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_environment": {
       "name": "CreateEnvironment",
@@ -547,19 +506,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_storage_location": {
       "name": "CreateStorageLocation",
@@ -573,24 +520,7 @@
             "serialized_name": "S3Bucket"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_application": {
       "name": "DeleteApplication",
@@ -609,14 +539,7 @@
             "serialized_name": "TerminateEnvByForce"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_application_version": {
       "name": "DeleteApplicationVersion",
@@ -640,29 +563,7 @@
             "serialized_name": "DeleteSourceBundle"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_configuration_template": {
       "name": "DeleteConfigurationTemplate",
@@ -682,14 +583,7 @@
             "serialized_name": "TemplateName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_environment_configuration": {
       "name": "DeleteEnvironmentConfiguration",
@@ -1154,14 +1048,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "describe_environments": {
       "name": "DescribeEnvironments",
@@ -1492,14 +1379,7 @@
             "serialized_name": "EnvironmentName"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "request_environment_info": {
       "name": "RequestEnvironmentInfo",
@@ -1757,14 +1637,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "update_application": {
       "name": "UpdateApplication",
@@ -2018,14 +1891,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "update_environment": {
       "name": "UpdateEnvironment",
@@ -2200,14 +2066,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "validate_configuration_settings": {
       "name": "ValidateConfigurationSettings",
@@ -2286,14 +2145,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     }
   }
 }

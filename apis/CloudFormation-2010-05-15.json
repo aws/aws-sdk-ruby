@@ -129,24 +129,7 @@
             "serialized_name": "StackId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        },
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "delete_stack": {
       "name": "DeleteStack",
@@ -881,14 +864,7 @@
             "serialized_name": "StackId"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "validate_template": {
       "name": "ValidateTemplate",

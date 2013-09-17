@@ -41,14 +41,7 @@
             "location": "uri"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "complete_multipart_upload": {
       "name": "CompleteMultipartUpload",
@@ -328,14 +321,7 @@
           }
         },
         "payload": "copy_object_result"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_bucket": {
       "name": "CreateBucket",
@@ -422,14 +408,7 @@
             "serialized_name": "Location"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "create_multipart_upload": {
       "name": "CreateMultipartUpload",
@@ -1617,14 +1596,7 @@
           }
         },
         "payload": "body"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "get_object_acl": {
       "name": "GetObjectAcl",
@@ -1726,14 +1698,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "get_object_torrent": {
       "name": "GetObjectTorrent",
@@ -1778,14 +1743,7 @@
             "location": "uri"
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "head_object": {
       "name": "HeadObject",
@@ -1938,14 +1896,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "list_buckets": {
       "name": "ListBuckets",
@@ -2427,14 +2378,7 @@
             }
           }
         }
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "list_parts": {
       "name": "ListParts",
@@ -3628,14 +3572,7 @@
           }
         },
         "payload": "access_control_policy"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "restore_object": {
       "name": "RestoreObject",
@@ -3670,14 +3607,7 @@
           }
         },
         "payload": "restore_request"
-      },
-      "errors": [
-        {
-          "type": "structure",
-          "members": {
-          }
-        }
-      ]
+      }
     },
     "upload_part": {
       "name": "UploadPart",
