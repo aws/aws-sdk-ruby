@@ -22,7 +22,7 @@ Note: the AWS SDK for Ruby requires Ruby 1.9 or greater.
 ```ruby
 require 'aws-sdk-core'
 
-response = Aws.ec2.client.describe_instances
+response = Aws.ec2.describe_instances
 p response.data.reservations.first.instances.first
 ```
 
@@ -30,7 +30,7 @@ You can also use `bin/aws-rb` to evaluate code through a REPL:
 
 ```ruby
 $ bundle exec bin/aws-rb
-Aws> client = Aws.ec2.client
+Aws> client = Aws.ec2
 => #<Aws::EC2::Client::V20130615>
 Aws> client.describe_instances.data.reservations.first.instances.first
 => #<struct
