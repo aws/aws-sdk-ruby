@@ -100,9 +100,7 @@ module Aws
       # @see .latest_version
       # @see .versions
       def default_version
-        version = service_defaults[:api_version]
-        version ||= global_version
-        version ||= latest_version
+        configured_version || globally_locked_version || latest_version
       end
 
       # @return [Array<Class>] Returns all of the registered versioned client
@@ -160,7 +158,11 @@ module Aws
         Aws.config[identifier] || {}
       end
 
-      def global_version
+      def configured_version
+        service_defaults[:api_version]
+      end
+
+      def globally_locked_version
         if global_version = Aws.config[:api_version]
           versions.select { |v| v <= global_version }.last || global_version
         end
