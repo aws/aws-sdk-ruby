@@ -146,6 +146,20 @@ module Aws
         expect(client).to be_kind_of(clients.const_get(:V20130202))
       end
 
+      it 'uses the closest version without going over' do
+        Aws.config[:api_version] = '2013-01-15'
+        clients = Service.define(:client_name, apis)
+        expect(clients.new.class).to be(clients.const_get(:V20130101))
+      end
+
+      it 'raises an error if the global version is preceedes all versions' do
+        Aws.config[:api_version] = '2000-00-00'
+        clients = Service.define(:client_name, apis)
+        expect {
+          expect(clients.new)
+        }.to raise_error(Errors::NoSuchApiVersionError, /2000-00-00/)
+      end
+
       it 'merges global defaults options when constructing the client' do
         # shared default disabled
         Aws.config = { http_wire_trace: false }

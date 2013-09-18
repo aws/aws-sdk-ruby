@@ -39,9 +39,19 @@ module Aws
       #     Aws::DynamoDB.new
       #     #=> #<Aws::DynamoDB::V20111205>
       #
+      # ## Global Version Lock
+      #
+      # If you are using multiple services in your application, you can lock
+      # them to a specific set of versions by setting a global API version.
+      #
+      #     Aws.config[:api_version] = '2013-06-01'
+      #
+      # This causes each service to choose the closer API version that does
+      # not exceed the given `YYYY-MM-DD` date.
+      #
       # @return [Seahorse::Client::Base] Returns a versioned client.
       def new(options = {})
-        versioned_client(options).new(defaults.merge(options))
+        versioned_client(options).new(service_defaults.merge(options))
       end
 
       # Registers a new API version for this client factory.  You need to
@@ -90,7 +100,9 @@ module Aws
       # @see .latest_version
       # @see .versions
       def default_version
-        defaults[:api_version] || latest_version
+        version = service_defaults[:api_version]
+        version ||= global_version
+        version ||= latest_version
       end
 
       # @return [Array<Class>] Returns all of the registered versioned client
@@ -144,8 +156,14 @@ module Aws
 
       private
 
-      def defaults
+      def service_defaults
         Aws.config[identifier] || {}
+      end
+
+      def global_version
+        if global_version = Aws.config[:api_version]
+          versions.select { |v| v <= global_version }.last || global_version
+        end
       end
 
       def versioned_client(options)
