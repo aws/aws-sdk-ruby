@@ -44,7 +44,10 @@ module Aws
       # If you are using multiple services in your application, you can lock
       # them to a specific set of versions by setting a global API version.
       #
-      #     Aws.config[:api_version] = '2013-06-01'
+      #     Aws.config[:api_version] = '2012-10-01'
+      #     Aws::DynamoDB.new
+      #     #=> #<Aws::DynamoDB::V20120810>
+      #
       #
       # This causes each service to choose the closer API version that does
       # not exceed the given `YYYY-MM-DD` date.
