@@ -113,8 +113,8 @@ module Aws
         xmlns = api.metadata.delete('xmlnamespace')
         api.operations.values.each do |operation|
           if operation.input.payload
-            operation.input.body_member.metadata['xmlns_uri'] = xmlns
-          elsif !operation.input.body_member.members.empty?
+            operation.input.payload_member.metadata['xmlns_uri'] = xmlns
+          elsif !operation.input.payload_member.members.empty?
             operation.input.serialized_name = operation.name + "Request"
             operation.input.metadata['xmlns_uri'] = xmlns
           end
