@@ -122,7 +122,6 @@ module Aws
       end
 
       # @return [Symbol]
-      # @api private
       attr_accessor :identifier
 
       # @param [Symbol] identifier The downcased short name for this service.
