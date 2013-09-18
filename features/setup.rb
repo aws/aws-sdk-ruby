@@ -13,7 +13,7 @@
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 
-require 'simplecov' if ENV['COVERAGE']
+require 'simplecov'
 require 'aws-sdk-core'
 require 'multi_json'
 
