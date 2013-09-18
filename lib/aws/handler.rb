@@ -42,7 +42,7 @@ module Aws
 
     def populate_body(context)
       input = context.operation.input
-      unless input.raw_payload? || input.body_member.empty?
+      unless input.raw_payload? || input.payload_member.empty?
         context.http_request.body = builder_class.build(input, context.params)
       end
     end

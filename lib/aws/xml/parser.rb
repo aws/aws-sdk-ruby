@@ -47,7 +47,7 @@ module Aws
       # @param [Hash] target (nil)
       # @return [Hash]
       def self.parse(rules, xml, target = nil)
-        Parser.new(rules.body_member).parse(xml, target)
+        Parser.new(rules.payload_member).parse(xml, target)
       end
 
       private
