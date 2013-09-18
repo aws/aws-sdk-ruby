@@ -42,13 +42,8 @@ module Aws
       #     #=> #<Aws::DynamoDB::V20111205>
       #
       # @return [Seahorse::Client::Base] Returns a versioned client.
-      #
-      # @see .versions
-      # @see .latest_version
-      # @see .default_version
-      #
       def new(options = {})
-        client_class(options).new(defaults.merge(options))
+        versioned_client(options).new(defaults.merge(options))
       end
 
       # Registers a new API version for this client factory.  You need to
@@ -66,17 +61,26 @@ module Aws
       # @param [String<YYYY-MM-DD>] api_version
       # @param [String<Pathname>, Seahorse::Model::Api] api
       # @return [void]
+      # @see .default_version
+      # @see .latest_version
+      # @see .versions
       def add_version(api_version, api)
         apis[api_version] = api
       end
 
       # @return [Array<String>] Returns a list of supported API versions
       #   in a `YYYY-MM-DD` format.
+      # @see .add_version
+      # @see .latest_version
+      # @see .default_version
       def versions
         apis.keys.sort
       end
 
       # @return [String<YYYY-MM-DD>] Returns the most current API version.
+      # @see .add_version
+      # @see .default_version
+      # @see .versions
       def latest_version
         versions.last
       end
@@ -84,6 +88,9 @@ module Aws
       # @return [String<YYYY-MM-DD>] Returns the default API version.  This
       #   is the version of the client that will be constructed if there
       #   is other configured or specified API version.
+      # @see .add_version
+      # @see .latest_version
+      # @see .versions
       def default_version
         defaults[:api_version] || latest_version
       end
@@ -91,12 +98,13 @@ module Aws
       # @return [Array<Class>] Returns all of the registered versioned client
       #   classes for this factory.
       def versioned_clients
-        versions.map { |v| client_class(api_version: v) }
+        versions.map { |v| versioned_client(api_version: v) }
       end
 
       # Adds a plugin to each versioned client class.
       # @param [Plugin] plugin
       # @return [void]
+      # @see .remove_plugin
       def add_plugin(plugin)
         versioned_clients.each do |client_class|
           client_class.add_plugin(plugin)
@@ -106,6 +114,7 @@ module Aws
       # Removes a plugin from each versioned client class.
       # @param [Plugin] plugin
       # @return [void]
+      # @see .add_plugin
       def remove_plugin(plugin)
         versioned_clients.each do |client_class|
           client_class.remove_plugin(plugin)
@@ -142,7 +151,7 @@ module Aws
         Aws.config[identifier] || {}
       end
 
-      def client_class(options)
+      def versioned_client(options)
         version = options[:api_version] || default_version
         const_get("V#{version.gsub('-', '')}")
       end
