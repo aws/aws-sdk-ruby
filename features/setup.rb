@@ -19,4 +19,3 @@ require 'multi_json'
 
 config_file = './integration-test-config.json'
 Aws.config = MultiJson.load(File.read(config_file), symbolize_keys: true)
-puts Aws.config.inspect

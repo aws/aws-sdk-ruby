@@ -29,6 +29,7 @@ task :apis do
   require 'fileutils'
   require 'multi_json'
   require 'json'
+  MultiJson.engine = 'json_gem' # for consistent formatting
   require_relative '../lib/aws-sdk-core'
 
   FileUtils.mkdir_p('apis')
@@ -43,11 +44,12 @@ task :apis do
     api_version = matches[2]
 
     puts "translating #{path}"
-    MultiJson.engine = 'json_gem' # for consistent formatting
-    api_src = MultiJson.load(File.read(path), max_nesting: nil)
-    api = Aws::ApiTranslator.translate(api_src,
+
+    api = Aws::ApiTranslator.translate(
+      MultiJson.load(File.read(path), max_nesting: nil),
       documentation: false,
       errors: false)
+
     api.plugins += svc_plugins(endpoint_prefix)
 
     target = "apis/#{svc_class_name(api)}-#{api.version}.json"
