@@ -175,15 +175,21 @@ module Seahorse
           member_map['uri']
         end
 
+        # @return [Hash<Symbol, Shape>] Returns a hash of member shapes
+        #   that should be serialized into the request body.
+        def body_members
+          member_map['body']
+        end
+
         # @return [StructureShape] Returns a structure with each of the
         #   members that represent the request body.
-        def body_member
-          @body_member ||= begin
+        def payload_member
+          @payload_member ||= begin
             if payload
               members[payload]
             else
               shape = Seahorse::Model::Shapes::StructureShape.new
-              shape.members = member_map['body']
+              shape.members = body_members
               shape.serialized_name = serialized_name
               shape.metadata = metadata
               shape
@@ -194,7 +200,7 @@ module Seahorse
         # @return [Boolean] Returns `true` if the request input body
         #   should be sent as blob/raw data (e.g. from a file).
         def raw_payload?
-          payload && members[payload].is_a?(BlobShape)
+          payload_member.is_a?(BlobShape)
         end
 
         private
