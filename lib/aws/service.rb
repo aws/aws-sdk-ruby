@@ -16,8 +16,6 @@ require 'multi_json'
 module Aws
   class Service
 
-    class NoSuchApiVersionError < RuntimeError; end
-
     class << self
 
       # Constructs and returns versioned API client.  Defaults to the 
@@ -176,7 +174,7 @@ module Aws
         when String then load_api(api)
         else
           msg = "API #{api_version} not defined for #{name}"
-          raise NoSuchApiVersionError, msg
+          raise Errors::NoSuchApiVersionError, msg
         end
       end
 

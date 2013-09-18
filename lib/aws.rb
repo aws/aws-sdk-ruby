@@ -17,6 +17,7 @@ module Aws
 
   autoload :ApiTranslator, 'aws/api_translator'
   autoload :Credentials, 'aws/credentials'
+  autoload :Errors, 'aws/errors'
   autoload :Handler, 'aws/handler'
   autoload :Service, 'aws/service'
   autoload :Structure, 'aws/structure'

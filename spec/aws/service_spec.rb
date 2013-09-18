@@ -183,7 +183,7 @@ module Aws
         clients = Service.define(:name)
         expect {
           clients.const_get(:V20001012)
-        }.to raise_error(Service::NoSuchApiVersionError)
+        }.to raise_error(Errors::NoSuchApiVersionError)
       end
 
       it 'raises a helpful error when the api is not defined' do
