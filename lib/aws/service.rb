@@ -48,7 +48,7 @@ module Aws
       # @see .default_version
       #
       def new(options = {})
-        client_class(options).new(client_defaults.merge(options))
+        client_class(options).new(defaults.merge(options))
       end
 
       # Registers a new API version for this client factory.  You need to
@@ -56,10 +56,10 @@ module Aws
       # The `api` may be a string path to an API on disk or a fully
       # constructed `Seahorse::Model::Api` object.
       #
-      # @example Register a client with a path to the JSON api.
+      # @example Register a versioned client with a path to the JSON api.
       #   Aws::S3::add_version('2013-01-02', '/path/to/api/src.json')
       #
-      # @example Register a client with a hydrated API.
+      # @example Register a versioned client with a hydrated API.
       #   api = Seahorse::Model::Api.from_hash(api_src)
       #   Aws::S3::add_version('2013-01-02', api)
       #
@@ -85,7 +85,7 @@ module Aws
       #   is the version of the client that will be constructed if there
       #   is other configured or specified API version.
       def default_version
-        client_defaults[:api_version] || latest_version
+        defaults[:api_version] || latest_version
       end
 
       # @return [Array<Class>] Returns all of the registered versioned client
@@ -138,7 +138,7 @@ module Aws
 
       private
 
-      def client_defaults
+      def defaults
         Aws.config[identifier] || {}
       end
 
