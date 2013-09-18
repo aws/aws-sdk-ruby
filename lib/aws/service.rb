@@ -57,11 +57,11 @@ module Aws
       # constructed `Seahorse::Model::Api` object.
       #
       # @example Register a client with a path to the JSON api.
-      #   Aws::S3::Client.add_version('2013-01-02', '/path/to/api/src.json')
+      #   Aws::S3::add_version('2013-01-02', '/path/to/api/src.json')
       #
       # @example Register a client with a hydrated API.
       #   api = Seahorse::Model::Api.from_hash(api_src)
-      #   Aws::S3::Client.add_version('2013-01-02', api)
+      #   Aws::S3::add_version('2013-01-02', api)
       #
       # @param [String<YYYY-MM-DD>] api_version
       # @param [String<Pathname>, Seahorse::Model::Api] api
@@ -120,7 +120,7 @@ module Aws
       # @param [Array<Api, String>] apis An array of client APIs for this
       #   service.  Values may be string paths to API files or instances of
       #   `Seahorse::Model::Api`.
-      # @return [Class<ClientFactory>]
+      # @return [Class<Service>]
       # @api private
       def define(identifier, apis = [])
         klass = Class.new(self)
