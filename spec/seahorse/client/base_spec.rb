@@ -36,8 +36,8 @@ module Seahorse
 
       describe '#config' do
 
-        it 'returns a Configuration object' do
-          expect(client.config).to be_kind_of(Configuration)
+        it 'returns a Configuration struct' do
+          expect(client.config).to be_kind_of(Struct)
         end
 
         it 'contains the client api' do
@@ -53,9 +53,9 @@ module Seahorse
         end
 
         it 'passes constructor args to the config' do
-          client = client_class.new(foo: 'bar')
-          client.config.add_option(:foo)
-          expect(client.config.foo).to eq('bar')
+          expect {
+            client_class.new(foo: 'bar')
+          }.to raise_error(ArgumentError, /invalid configuration option/)
         end
 
       end
@@ -329,7 +329,7 @@ module Seahorse
           expect(plugin).to receive(:is_a?).
             at_least(:once).with(kind_of(Class)) { false }
           expect(plugin).to receive(:add_handlers).with(
-            kind_of(HandlerList), kind_of(Configuration))
+            kind_of(HandlerList), kind_of(Struct))
           client_class.add_plugin(plugin)
           client_class.new
         end

@@ -20,9 +20,7 @@ module Seahorse
       # @param [Configuration] config
       # @return [void]
       def add_options(config)
-        self.class.options.each do |option|
-          name, default = option
-          default = instance_exec(config, &default) if default.is_a?(Proc)
+        self.class.options.each do |name, default|
           config.add_option(name, default)
         end
       end
@@ -59,9 +57,9 @@ module Seahorse
 
         def option(name, default = nil, &block)
           if block_given?
-            options << [name, Proc.new]
+            options[name] = Proc.new
           else
-            options << [name, default]
+            options[name] = default
           end
         end
 
@@ -85,7 +83,7 @@ module Seahorse
 
         # @api private
         def options
-          @options ||= []
+          @options ||= {}
         end
 
         # @api private

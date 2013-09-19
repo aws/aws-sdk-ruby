@@ -82,11 +82,11 @@ module Seahorse
       # opportunity to register options with default values.
       def build_config(options)
         options = options.merge(api: self.class.api) unless options[:api]
-        config = Configuration.new(options)
+        config = Configuration.new
         @plugins.each do |plugin|
           plugin.add_options(config) if plugin.respond_to?(:add_options)
         end
-        config
+        config.build!(options)
       end
 
       # Gives each plugin the opportunity to modify this client.
