@@ -71,16 +71,31 @@ module Seahorse
       # value.  Default values can be passed as a static positional argument
       # or via a block.
       #
+      #    # defaults to nil
+      #    configuraiton.add_option(:name)
+      #
+      #    # with a string default
+      #    configuraiton.add_option(:name, 'John Doe')
+      #
+      #    # with a dynamic default value, evaluated once when calling #build!
+      #    configuraiton.add_option(:name, 'John Doe')
+      #    configuraiton.add_option(:username) do |config|
+      #       config.name.gsub(/\W+/, '').downcase
+      #    end
+      #    cfg = configuration.build!
+      #    cfg.name #=> 'John Doe'
+      #    cfg.username #=> 'johndoe'
+      #
       # @param [Symbol] name The name of the configuration option.  This will
       #   be used to define a getter by the same name.
       #
-      # @param default Specifies the default value used when not set
-      #   via the constructor.  You can skip this argument and specify a default
-      #   via a block argument.
+      # @param default The default value for this option.  You can specify
+      #   a default by passing a value, a `Proc` object or a block argument.
+      #   Procs and blocks are evaluated when {#build!} is called.
       #
       # @return [self]
-      def add_option(name, default = nil)
-        @defaults[name.to_sym] = default
+      def add_option(name, default = nil, &block)
+        @defaults[name.to_sym] = block_given? ? Proc.new : default
         self
       end
 
@@ -120,23 +135,31 @@ module Seahorse
       # @param [Hash] options ({}) A hash of configuration options.
       # @return [Struct] Returns a frozen configuration `Struct`.
       def build!(options = {})
-        options.inject(default_struct) do |cfg, (name, value)|
+        struct = default_struct
+        options.each do |opt, value|
           begin
-            cfg[name] = value
-            cfg
+            struct[opt] = value
           rescue NameError
-            msg = "invalid configuration option `#{name.inspect}'"
+            msg = "invalid configuration option `#{opt.inspect}'"
             raise ArgumentError, msg
           end
-        end.freeze
+        end
+        resolve_dynamic_values(struct).freeze
       end
 
       private
 
+      def resolve_dynamic_values(struct)
+        struct.members.each do |opt|
+          if struct[opt].is_a?(Proc)
+            struct[opt] = struct[opt].call(struct)
+          end
+        end
+        struct
+      end
+
       def default_struct
-        members = @defaults.keys
-        raise 'unable to build empty configuration' if members.empty?
-        Struct.new(*members).new(*@defaults.values_at(*members))
+        Struct.new(*@defaults.keys).new(*@defaults.values_at(*@defaults.keys))
       end
 
     end

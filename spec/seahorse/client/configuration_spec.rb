@@ -36,6 +36,38 @@ module Seahorse
           expect(config.build!.name).to eq('John Doe')
         end
 
+        it 'accepts blocks' do
+          config.add_option(:name) { 'John Doe' }
+          expect(config.build!.name).to eq('John Doe')
+        end
+
+        it 'accepts blocks with an arity of 1, yielding self' do
+          config.add_option(:name) { 'John Doe' }
+          config.add_option(:username) { |cfg| cfg.name.gsub(/\W+/, '').downcase }
+          expect(config.build!.name).to eq('John Doe')
+          expect(config.build!.username).to eq('johndoe')
+        end
+
+        it 'blocks can rely on other blocks' do
+          config.add_option(:base) { 2 }
+          config.add_option(:next) { |cfg| cfg.base * 2 }
+          config.add_option(:last) { |cfg| cfg.next * 3 }
+          cfg = config.build!
+          expect(cfg.last).to eq(12)
+          expect(cfg.next).to eq(4)
+          expect(cfg.base).to eq(2)
+        end
+
+        it 'blocks work with supplied values' do
+          config.add_option(:base) { 2 }
+          config.add_option(:next) { |cfg| cfg.base * 2 }
+          config.add_option(:last) { |cfg| cfg.next * 3 }
+          cfg = config.build!(base: 1, next: 1)
+          expect(cfg.base).to eq(1)
+          expect(cfg.next).to eq(1)
+          expect(cfg.last).to eq(3)
+        end
+
         it 'replaces previous default values when called twice' do
           config.add_option(:name, 'abc')
           config.add_option(:name, 'xyz')

@@ -55,7 +55,7 @@ module Seahorse
         initialize_client
       end
 
-      # @return [Configuration]
+      # @return [Configuration<Struct>]
       attr_reader :config
 
       # @return [HandlerList]
