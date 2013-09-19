@@ -14,60 +14,57 @@
 module Seahorse
   module Client
 
-    # Configuration objects are immutable objects that are constructed with a
-    # hash of user supplied data.  You can register configuration options 
-    # via {#add_option} which defines a getter with a default value.
+    # Configuration is used to define possible configuration options and
+    # then build read-only structures with user-supplied data.
     #
-    # ## Adding Options
+    # ## Adding Configuration Options
     #
-    # The {#add_option} method registers a new option.  This adds a getter
-    # method and allows you to specify a default value.
+    # Add configuration options with optional default values.  These are used
+    # when building configuration objects.
     #
-    #     config = Seahorse::Client::Configuration.new
-    #     config.add_option(:api_key)
-    #     config.api_key
-    #     #=> defaults to nil
+    #     configuration = Configuration.new
     #
-    # Configuration options provide access to values passed into the
-    # constructor.
+    #     configuration.add_option(:max_retries, 3)
+    #     configuration.add_option(:use_ssl, true)
     #
-    #     config = Seahorse::Client::Configuration.new(api_key: 'my-api-key')
-    #     config.add_option(:api_key)
-    #     config.api_key
-    #     #=> 'my-api-key'
+    #     cfg = configuration.build!
+    #     #=> #<struct max_retires=3 use_ssl=true>
     #
-    # ## Default Values
+    # ## Building Configuration Objects
     #
-    # You can specify a default value for configuration options that were
-    # not provided to the constructor.
+    # Calling {#build!} on a {Configuration} object causes it to return
+    # a read-only (frozen) struct.  Options passed to {#build!} are merged
+    # on top of any default options.
     #
-    #     config = Seahorse::Client::Configuration.new
-    #     config.add_option(:use_ssl, true)
-    #     config.use_ssl
-    #     #=> returns the default value of true
+    #     configuration = Configuration.new
+    #     configuration.add_option(:color, 'red')
     #
-    # Values given to the constructor override defaults:
+    #     # default
+    #     cfg1 = configuration.build!
+    #     cfg1.color #=> 'red'
     #
-    #     config = Seahorse::Client::Configuration.new(use_ssl: false)
-    #     config.add_option(:use_ssl, true)
-    #     config.use_ssl
-    #     #=> false
+    #     # supplied color
+    #     cfg2 = configuration.build!(color: blue)
+    #     cfg2.color #=> 'blue'
     #
-    # ## Dynamic Default Values
+    # ## Accepted Options
     #
-    # If you prefer for default values to be calculated when the getter is
-    # called, you can provide the default value via a block argument.
+    # If you try to {#build!} a {Configuration} object with an unknown
+    # option, an `ArgumentError` is raised.
     #
-    #     config.add_option(:current_time) { Time.now }
-    #     config.current_time
-    #     #=> returns a different value every time #current_time is called.
+    #     configuration = Configuration.new
+    #     configuration.add_option(:color)
+    #     configuration.add_option(:size)
+    #     configuration.add_option(:category)
+    #
+    #     configuration.build!(price: 100)
+    #     #=> raises an ArgumentError, :price was not added as an option
     #
     class Configuration
 
       # @api private
-      def initialize(options = {})
+      def initialize
         @defaults = {}
-        @options = options
       end
 
       # Adds a getter method that returns the named option or a default
@@ -81,34 +78,65 @@ module Seahorse
       #   via the constructor.  You can skip this argument and specify a default
       #   via a block argument.
       #
-      # @return [void]
+      # @return [self]
       def add_option(name, default = nil)
-        name = name.to_sym
-        define_getter(name) unless @defaults.key?(name)
-        @defaults[name] = default
-        nil
+        @defaults[name.to_sym] = default
+        self
       end
 
-      # @return [Hash<Symbol,Object>]
-      def options
-        @defaults.keys.inject({}) do |options, opt_name|
-          options[opt_name] = send(opt_name)
-          options
+      # Constructs and returns a configuration structure.
+      # Values not present in `options` will default to those supplied via
+      # add option.
+      #
+      #     configuration = Configuration.new
+      #     configuration.add_option(:enabled, true)
+      #
+      #     cfg1 = configuration.build!
+      #     cfg1.enabled #=> true
+      #
+      #     cfg2 = configuration.build!(enabled: false)
+      #     cfg2.enabled #=> false
+      #
+      # If you pass in options to `#build!` that have not been defined,
+      # then an `ArgumentError` will be raised.
+      #
+      #     configuration = Configuration.new
+      #     configuration.add_option(:enabled, true)
+      #
+      #     # oops, spelling error for :enabled
+      #     cfg = configuration.build!(enabld: true)
+      #     #=> raises ArgumentError
+      #
+      # The object returned is a frozen `Struct`.
+      #
+      #     configuration = Configuration.new
+      #     configuration.add_option(:enabled, true)
+      #
+      #     cfg = configuration.build!
+      #     cfg.enabled #=> true
+      #     cfg[:enabled] #=> true
+      #     cfg['enabled'] #=> true
+      #
+      # @param [Hash] options ({}) A hash of configuration options.
+      # @return [Struct] Returns a frozen configuration `Struct`.
+      def build!(options = {})
+        options.inject(default_struct) do |cfg, (name, value)|
+          begin
+            cfg[name] = value
+            cfg
+          rescue NameError
+            msg = "invalid configuration option `#{name.inspect}'"
+            raise ArgumentError, msg
+          end
         end.freeze
       end
-      alias to_h options
-      alias to_hash options
 
       private
 
-      def define_getter(name)
-        define_singleton_method(name) do
-          if @options.key?(name)
-            @options[name]
-          else
-            @defaults[name]
-          end
-        end
+      def default_struct
+        members = @defaults.keys
+        raise 'unable to build empty configuration' if members.empty?
+        Struct.new(*members).new(*@defaults.values_at(*members))
       end
 
     end

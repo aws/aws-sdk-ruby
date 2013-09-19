@@ -19,94 +19,68 @@ module Seahorse
 
       let(:config) { Configuration.new }
 
-      describe '#initialize' do
-
-        it 'can be constructed without any arguments' do
-          expect(Configuration.new).to be_kind_of(Configuration)
-        end
-
-        it 'keeps all options passed to the constructor' do
-          config = Configuration.new(:opt_name => 'opt-value')
-          expect(config).to_not respond_to(:opt_name)
-          config.add_option(:opt_name)
-          expect(config.opt_name).to eq('opt-value')
-        end
-
-      end
-
       describe '#add_option' do
 
-        it 'defines a getter method' do
+        it 'defines a getter' do
           config.add_option(:name)
-          expect(config).to respond_to(:name)
+          expect(config.build!).to respond_to(:name)
         end
 
-        it 'returns nil from getters by default' do
-          config.add_option(:color)
-          expect(config.color).to eq(nil)
+        it 'defaults the value to nil' do
+          config.add_option(:name)
+          expect(config.build!.name).to be(nil)
         end
 
         it 'accepts a default value' do
-          config.add_option(:size, 'large')
-          expect(config.size).to eq('large')
+          config.add_option(:name, 'John Doe')
+          expect(config.build!.name).to eq('John Doe')
         end
 
-        it 'can be called with the same option multiple times' do
-          config.add_option(:color, 'red')
-          config.add_option(:color, 'blue')
-          expect(config.color).to eq('blue')
+        it 'replaces previous default values when called twice' do
+          config.add_option(:name, 'abc')
+          config.add_option(:name, 'xyz')
+          expect(config.build!.name).to eq('xyz')
         end
 
-        it 'does not redefine the getter if called multiple times' do
-          expect(config).to receive(:define_singleton_method).
-            with(:size).exactly(1).times
-          config.add_option(:size, 'small')
-          config.add_option(:size, 'large')
-        end
-
-        it 'symbolizes the option name' do
-          config.add_option('name', 'default')
-          expect(config.name).to eq('default')
-          expect(config.to_hash).to eq(name: 'default')
+        it 'returns self so it can be chained' do
+          c = config.add_option(:name).add_option(:color)
+          expect(c).to be(config)
+          expect(c.build!.members).to eq([:name, :color])
         end
 
       end
 
-      describe '#options' do
+      describe '#build!' do
 
-        it 'returns a hash of all configuration options with defaults' do
-          cfg = Configuration.new(opt: 'opt-value')
-          cfg.add_option(:opt)
-          cfg.add_option(:nil_opt)
-          cfg.add_option(:opt_with_default, 'default')
-          expect(cfg.options).to eq({
-            opt: 'opt-value',
-            nil_opt: nil,
-            opt_with_default: 'default',
-          })
+        it 'returns a Struct' do
+          expect(config.add_option(:opt).build!).to be_kind_of(Struct)
         end
 
-        it 'returns a frozen hash' do
-          expect(Configuration.new.options).to be_frozen
+        it 'returns a frozen structure' do
+          config.add_option(:foo)
+          c = config.build!
+          expect(c).to be_frozen
+          expect {
+            c.foo = 'bar'
+          }.to raise_error(/can't modify frozen/)
         end
 
-      end
-
-      describe '#inspect' do
-
-        it 'provides a helpful inspect method' do
-          opts = { :abc => 'xyz' }
-          cfg = Configuration.new(opts)
-          expect(cfg.inspect).to include(cfg.options.inspect)
+        it 'accepts a hash of options' do
+          config.add_option(:size, 'default')
+          config.add_option(:color, 'default')
+          cfg = config.build!(size: 'large', color: 'red')
+          expect(cfg.size).to eq('large')
+          expect(cfg.color).to eq('red')
         end
 
-        it 'displays the configuration class name' do
-          expect(Configuration.new.inspect).to include(
-            'Seahorse::Client::Configuration')
+        it 'raises an argument error for uknown options' do
+          config.add_option(:known)
+          expect {
+            config.build!(unknown: 'option')
+          }.to raise_error(ArgumentError, /invalid configuration option/)
         end
 
       end
-
     end
   end
 end
