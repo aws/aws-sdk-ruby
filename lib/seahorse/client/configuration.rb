@@ -72,14 +72,14 @@ module Seahorse
       # or via a block.
       #
       #    # defaults to nil
-      #    configuraiton.add_option(:name)
+      #    configuration.add_option(:name)
       #
       #    # with a string default
-      #    configuraiton.add_option(:name, 'John Doe')
+      #    configuration.add_option(:name, 'John Doe')
       #
       #    # with a dynamic default value, evaluated once when calling #build!
-      #    configuraiton.add_option(:name, 'John Doe')
-      #    configuraiton.add_option(:username) do |config|
+      #    configuration.add_option(:name, 'John Doe')
+      #    configuration.add_option(:username) do |config|
       #       config.name.gsub(/\W+/, '').downcase
       #    end
       #    cfg = configuration.build!
