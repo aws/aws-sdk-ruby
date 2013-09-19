@@ -21,7 +21,7 @@ module Seahorse
         let(:config) do
           Configuration.new.tap do |config|
             NetHttp.new.add_options(config)
-          end
+          end.build!
         end
 
         describe '#add_options' do

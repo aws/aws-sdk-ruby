@@ -19,9 +19,10 @@ module Seahorse
       describe Logging do
 
         def setup_plugin(options = {})
-          @config ||= Configuration.new(options)
-          @handlers ||= HandlerList.new
+          @config ||= Configuration.new
           Logging.new.add_options(@config)
+          @config = @config.build!(options)
+          @handlers ||= HandlerList.new
           Logging.new.add_handlers(@handlers, @config)
         end
 

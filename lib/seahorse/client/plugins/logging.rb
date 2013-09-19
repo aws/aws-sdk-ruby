@@ -41,6 +41,8 @@ module Seahorse
       # The log handler is inserted `:before_validate`.  This allows the handler
       # to record the total time spent making the request.
       #
+      # @note This plugin is still a work-in-progress
+      #
       class Logging < Plugin
 
         option(:logger, nil)

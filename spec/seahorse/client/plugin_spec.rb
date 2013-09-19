@@ -30,20 +30,15 @@ module Seahorse
 
       describe '#add_options' do
 
-        it 'does nothing by default' do
-          options = config.options
-          plugin.new.add_options(config)
-          expect(config.options).to eq(options)
-        end
-
         it 'adds options registered by .option' do
           plugin.option(:opt_without_default)
           plugin.option(:opt_with_default, 'DEFAULT')
           plugin.option(:opt_with_block) { 'BLOCK-DEFAULT' }
           plugin.new.add_options(config)
-          expect(config.opt_without_default).to eq(nil)
-          expect(config.opt_with_default).to eq('DEFAULT')
-          expect(config.opt_with_block).to eq('BLOCK-DEFAULT')
+          cfg = config.build!
+          expect(cfg.opt_without_default).to eq(nil)
+          expect(cfg.opt_with_default).to eq('DEFAULT')
+          expect(cfg.opt_with_block).to eq('BLOCK-DEFAULT')
         end
 
       end
@@ -72,13 +67,13 @@ module Seahorse
         it 'provides a short-cut method for adding options' do
           plugin = Class.new(Plugin) { option(:opt) }
           plugin.new.add_options(config)
-          expect(config.opt).to be(nil)
+          expect(config.build!.opt).to be(nil)
         end
 
         it 'accepts a static default value' do
           plugin = Class.new(Plugin) { option(:opt, 'default') }
           plugin.new.add_options(config)
-          expect(config.opt).to eq('default')
+          expect(config.build!.opt).to eq('default')
         end
 
         it 'accepts a default value as a block' do
@@ -87,7 +82,7 @@ module Seahorse
             option(:opt) { value }
           end
           plugin.new.add_options(config)
-          expect(config.opt).to be(value)
+          expect(config.build!.opt).to be(value)
        end
 
         it 'accepts a default block value and yields the config' do
@@ -96,18 +91,7 @@ module Seahorse
             option(:opt2) { |config| config.opt1 * 2 }
           end
           plugin.new.add_options(config)
-          expect(config.opt2).to equal(20)
-        end
-
-        it 'instance evals the block' do
-          plugin = Class.new(Plugin) do
-            def initialize
-              @value = 'instance-value'
-            end
-            option(:value) { @value }
-          end
-          plugin.new.add_options(config)
-          expect(config.value).to eq('instance-value')
+          expect(config.build!.opt2).to equal(20)
         end
 
       end
