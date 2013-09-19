@@ -52,7 +52,7 @@ module AWS
         resp[:change_info] if resp[:change_info][:id] == id
       end
 
-      # @return [Boolean] Returns true if this alarm exists.
+      # @return [Boolean] Returns true if this change exists.
       def exists?
         get_resource.data[:change_info][:id] == id
       end
