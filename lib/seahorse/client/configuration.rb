@@ -144,24 +144,43 @@ module Seahorse
             raise ArgumentError, msg
           end
         end
-        resolve_dynamic_values(struct).freeze
+        BlockResolver.new(struct).struct.freeze
       end
 
       private
-
-      def resolve_dynamic_values(struct)
-        struct.members.each do |opt|
-          if struct[opt].is_a?(Proc)
-            struct[opt] = struct[opt].call(struct)
-          end
-        end
-        struct
-      end
 
       def default_struct
         Struct.new(*@defaults.keys).new(*@defaults.values_at(*@defaults.keys))
       end
 
+      # @api private
+      class BlockResolver
+
+        def initialize(struct)
+          @struct = struct
+          @struct.members.each do |opt|
+            if struct[opt].is_a?(Proc)
+              struct[opt] = struct[opt].call(self)
+            end
+          end
+        end
+
+        attr_reader :struct
+
+        def method_missing(method_name, *args)
+          begin
+            value = @struct[method_name]
+            if value.is_a?(Proc)
+              value = value.call(self)
+              @struct[method_name] = value
+            end
+            value
+          rescue
+            super
+          end
+        end
+
+      end
     end
   end
 end
