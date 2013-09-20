@@ -79,7 +79,7 @@ module Aws
     # @param [Plugin] plugin
     # @return [void]
     def add_plugin(plugin)
-      service_classes.each do |svc_class|
+      service_classes.values.each do |svc_class|
         svc_class.add_plugin(plugin)
       end
     end
@@ -89,7 +89,7 @@ module Aws
     # @param [Plugin] plugin
     # @return [void]
     def remove_plugin(plugin)
-      service_classes.each do |svc_class|
+      service_classes.values.each do |svc_class|
         svc_class.remove_plugin(plugin)
       end
     end
@@ -97,7 +97,7 @@ module Aws
     # @return [Array<Class>]
     # @api private
     def service_classes
-      @service_classes ||=[]
+      @service_classes ||= {}
     end
 
     # Registers a new service interface.  This method accepts a constant
@@ -114,10 +114,9 @@ module Aws
     # @param [Symbol] name The name of the new service class.
     # @param [Array<String, Seahorse::Model::Api>] apis
     def add_service(name, apis = [])
-      identifier = name.downcase.to_sym
-      svc_class = const_set(name, Service.define(identifier, apis))
-      service_classes << svc_class
-      self.class.send(:define_method, identifier) do |options = {}|
+      svc_class = const_set(name, Service.define(name.downcase.to_sym, apis))
+      service_classes[svc_class.identifier] = svc_class
+      self.class.send(:define_method, svc_class.identifier) do |options = {}|
         svc_class.new(options)
       end
     end

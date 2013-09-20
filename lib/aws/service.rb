@@ -54,7 +54,10 @@ module Aws
       #
       # @return [Seahorse::Client::Base] Returns a versioned client.
       def new(options = {})
-        versioned_client(options).new(service_defaults.merge(options))
+        client_class = versioned_client(options)
+        options = default_options.merge(options)
+        options.delete(:api_version)
+        client_class.new(options)
       end
 
       # Registers a new API version for this client factory.  You need to
@@ -156,6 +159,20 @@ module Aws
       end
 
       private
+
+      def default_options
+        # service specific defaults trump global aws defaults
+        global_defaults.merge(service_defaults)
+      end
+
+      def global_defaults
+        Aws.config.inject({}) do |defaults, (key, value)|
+          unless Aws.service_classes.key?(key) || key == identifier
+            defaults[key] = value
+          end
+          defaults
+        end
+      end
 
       def service_defaults
         Aws.config[identifier] || {}

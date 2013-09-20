@@ -16,10 +16,10 @@ module Aws
   module Plugins
     class GlobalConfiguration < Seahorse::Client::Plugin
       initialize_client do |client|
-        client.config.options.each do |option, value|
-          global = Aws.config[option.to_sym]
-          client.config.add_option(option, global) unless global.nil?
-        end
+#         client.config.to_h.each do |option, value|
+#           global = Aws.config[option.to_sym]
+#           client.config.add_option(option, global) unless global.nil?
+#         end
       end
     end
   end
