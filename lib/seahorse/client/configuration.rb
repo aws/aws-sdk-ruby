@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'set'
+
 module Seahorse
   module Client
 
@@ -158,6 +160,7 @@ module Seahorse
 
         def initialize(struct)
           @struct = struct
+          @members = Set.new(@struct.members)
           @struct.members.each do |opt|
             if struct[opt].is_a?(Proc)
               struct[opt] = struct[opt].call(self)
@@ -167,17 +170,21 @@ module Seahorse
 
         attr_reader :struct
 
+        private
+
         def method_missing(method_name, *args)
-          begin
-            value = @struct[method_name]
-            if value.is_a?(Proc)
-              value = value.call(self)
-              @struct[method_name] = value
-            end
-            value
-          rescue
+          if @members.include?(method_name)
+            resolve_blocks(method_name)
+          else
             super
           end
+        end
+
+        def resolve_blocks(member)
+          if @struct[member].is_a?(Proc)
+            @struct[member] = @struct[member].call(self)
+          end
+          @struct[member]
         end
 
       end
