@@ -1,3 +1,60 @@
+2013-09-20 Alex Wood <awood45@gmail.com>
+
+  * doc-src/AutoScaling/V20110101.yml,
+  lib/aws/api_config/AutoScaling-2011-01-01.yml: API Updates for Auto Scaling
+
+  * lib/aws/s3/s3_object.rb: Add documentation for setting Content-Disposition
+  in copy_from
+
+  #66 added support for setting the Content-Disposition header in `copy_from`,
+  but the documentation didn't reflect that this new option was available.
+2013-09-19 Markus Krogemann <markus@krogemann.de>
+
+  * lib/aws/route_53/change_info.rb: fix documentation: replace 'alarm' with
+  'change'
+
+2013-09-16 Loren Segal <lsegal@amazon.com>
+
+  * aws-sdk.gemspec: Give Bundler a hint about which Nokogiri version to use.
+
+  Bundler seems to have problems resolving version conflicts with
+  less-than constraints (as per bundler/bundler#2593), so provide a
+  greater-or-equal-to constraint as well to give Bundler a hint.
+
+  Closes #361
+
+  * tasks/docs.rake: Add SITEMAP_BASEURL to docs task
+
+2013-09-14 Loren Segal <lsegal@soen.ca>
+
+  * Gemfile: Use 1.8 syntax in Gemfile
+  * .yardopts: Use yard-sitemap plugin when generating documentation
+  * Gemfile: Add yard-sitemap to Gemfile, update rdiscount gem location
+2013-09-13 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/s3/client.rb: Add parameter validation to put_bucket_cors
+
+  Adds validation that two required parameters in
+  AWS::S3::Client#put_bucket_cors
+  are present and match the type requirements.
+
+  Resolves Issue #357
+
+2013-09-11 Alex Wood <awood45@gmail.com>
+
+  * README.md: Update EC2 Version in README
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.18.0
+
+  * doc-src/EC2/V20130201.yml, doc-src/EC2/V20130815.yml,
+  lib/aws/api_config/EC2-2013-07-15.yml,
+  lib/aws/api_config/EC2-2013-08-15.yml, lib/aws/ec2/client.rb: Upgrade
+  AWS::EC2::Client to latest API version.
+
+  Upgrades AWS::EC2::Client to 2013-08-15 API version. Includes modifications
+  to
+  Amazon EC2 Reserved Instances API.
+
 2013-09-10 Trevor Rowe <trevorrowe@gmail.com>
 
   * features/glacier/step_definitions/vaults.rb,
