@@ -35,7 +35,7 @@ module Aws
     it 'adds a plugin to every client for all services' do
       klass = double('service-class')
       expect(klass).to receive(:add_plugin).with('p')
-      expect(Aws).to receive(:service_classes).and_return([klass])
+      expect(Aws).to receive(:service_classes).and_return(klass: klass)
       Aws.add_plugin('p')
     end
 
@@ -46,7 +46,7 @@ module Aws
     it 'removes a plugin from every client for each service' do
       klass = double('service-class')
       expect(klass).to receive(:remove_plugin).with('p')
-      expect(Aws).to receive(:service_classes).and_return([klass])
+      expect(Aws).to receive(:service_classes).and_return(klass: klass)
       Aws.remove_plugin('p')
     end
 
@@ -66,7 +66,7 @@ module Aws
     it 'adds a helper method that constructs a service and client object' do
       Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
       svc = Aws.dummyservice(http_wire_trace: true)
-      expect(Aws::DummyService.versions).to eq(['2006-03-01'])
+      expect(Aws::DummyService.api_versions).to eq(['2006-03-01'])
       expect(svc).to be_kind_of(Seahorse::Client::Base)
       expect(svc.config.api).to be_kind_of(Seahorse::Model::Api)
       expect(svc.config.http_wire_trace).to be(true)

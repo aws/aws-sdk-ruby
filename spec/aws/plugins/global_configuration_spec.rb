@@ -17,42 +17,47 @@ module Aws
   module Plugins
     describe GlobalConfiguration do
 
-      let(:client_class) do
-        klass = Class.new(Seahorse::Client::Base)
-        klass.add_plugin(GlobalConfiguration)
-        klass
-      end
-
       def plugin(&block)
         Class.new(Seahorse::Client::Plugin, &block)
       end
 
-      def global_config(options = {})
-        allow(Aws).to receive(:config).and_return(options)
+      before(:each) do
+        api = Seahorse::Model::Api.new
+        api.version = '2013-01-01'
+        Aws.add_service(:Svc, [api])
+        Aws::Svc.add_plugin(GlobalConfiguration)
+        Aws::Svc.add_plugin(plugin { option(:property, 'plugin-default') })
+        allow(Aws).to receive(:config).and_return({})
       end
 
-      before { global_config }
-
-      it 'uses global configuration settings for options with no default' do
-        global_config(property: 'global')
-        client_class.add_plugin plugin { option :property }
-        client = client_class.new
-        expect(client.config.property).to eq 'global'
+      it 'does not interfere with plugins and their defaults' do
+        expect(Aws.svc.config.property).to eq('plugin-default')
       end
 
-      it 'uses global configuration settings even if option has default' do
-        global_config(property: 'global')
-        client_class.add_plugin plugin { option :property, 'default' }
-        client = client_class.new
-        expect(client.config.property).to eq 'global'
+      it 'gives priority to Aws.config over plugin defaults' do
+        Aws.config[:property] = 'aws-default'
+        expect(Aws.svc.config.property).to eq('aws-default')
       end
 
-      it 'does not use global configuration setting if provided in constructor' do
-        global_config(property: 'global')
-        client_class.add_plugin plugin { option :property, 'default' }
-        client = client_class.new property: 'user'
-        expect(client.config.property).to eq 'user'
+      it 'gives priority to Aws.config[:svc] over Aws.config' do
+        Aws.config[:property] = 'aws-default'
+        Aws.config[:svc] = { property: 'svc-default' }
+        expect(Aws.svc.config.property).to eq('svc-default')
       end
+
+      it 'gives priority to constructor options over Aws.config' do
+        Aws.config[:property] = 'aws-default'
+        Aws.config[:svc] = { property: 'svc-default' }
+        expect(Aws.svc(property: 'arg').config.property).to eq('arg')
+      end
+
+      it 'ignores configuration for others services in Aws.config' do
+        Aws.config[:property] = 'aws-default'
+        Aws.config[:svc] = { property: 'svc-default' }
+        Aws.config[:s3] = { property: 's3-default' }
+        expect(Aws.svc.config.property).to eq('svc-default')
+      end
+
     end
   end
 end

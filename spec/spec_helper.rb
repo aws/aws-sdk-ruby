@@ -67,7 +67,7 @@ def call_handler(klass, opts = {}, &block)
   operation_name = opts.delete(:operation_name) || 'operation'
   params = opts.delete(:params) || {}
 
-  config = opts.delete(:config) || Seahorse::Client::Configuration.new(opts)
+  config = opts.delete(:config) || Seahorse::Client::Configuration.new
   config.add_option(:response_status_code, 200)
   config.add_option(:response_headers, {})
   config.add_option(:response_body, '')
@@ -75,7 +75,7 @@ def call_handler(klass, opts = {}, &block)
 
   context = Seahorse::Client::RequestContext.new(
     operation_name: operation_name,
-    config: config,
+    config: config.build!(opts),
     params: params)
 
   yield(context) if block_given?

@@ -35,22 +35,22 @@ module Aws
       it 'registers a new API version' do
         clients = Class.new(Service)
         clients.add_version('2013-01-02', 'path/to/api.json')
-        expect(clients.versions).to eq(['2013-01-02'])
+        expect(clients.api_versions).to eq(['2013-01-02'])
       end
 
       it 'can be called multiple times' do
         clients = Class.new(Service)
         clients.add_version('2013-02-03', 'path/to/api2.json')
         clients.add_version('2013-01-02', 'path/to/api1.json')
-        expect(clients.versions).to eq(['2013-01-02', '2013-02-03'])
-        expect(clients.latest_version).to eq('2013-02-03')
+        expect(clients.api_versions).to eq(['2013-01-02', '2013-02-03'])
+        expect(clients.latest_api_version).to eq('2013-02-03')
       end
 
       it 'treats the newest api version as the default' do
         clients = Class.new(Service)
         clients.add_version('2013-02-03', 'path/to/api2.json')
         clients.add_version('2013-01-02', 'path/to/api1.json')
-        expect(clients.default_version).to eq(clients.latest_version)
+        expect(clients.default_api_version).to eq(clients.latest_api_version)
       end
 
     end
@@ -98,6 +98,7 @@ module Aws
         api = 'apis/S3-2006-03-01.json'
         clients = Service.define(:name, [api])
         client_class = clients.const_get(:V20060301)
+        allow(client_class).to receive(:name).and_return('Aws::Svc::V20060301')
         client = client_class.new
         expect(client.config.api.version).to eq('2006-03-01')
       end
@@ -106,6 +107,7 @@ module Aws
         api = 'apis-src/autoscaling-2011-01-01.json'
         clients = Service.define(:name, [api])
         client_class = clients.const_get(:V20110101)
+        allow(client_class).to receive(:name).and_return('Aws::Svc::V20060301')
         client = client_class.new
         expect(client.config.api.version).to eq('2011-01-01')
       end

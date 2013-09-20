@@ -25,18 +25,18 @@ module Aws
       end
 
       it 'sets x-amz-target header' do
-        result = 'SimpleWorkflowService.ListDomains'
-        expect(response.http_request.headers['x-amz-target']).to eq result
+        target = 'SimpleWorkflowService.ListDomains'
+        expect(response.http_request.headers['x-amz-target']).to eq(target)
       end
 
       it 'sets content-type header' do
-        result = 'application/x-amz-json-1.0'
-        expect(response.http_request.headers['content-type']).to eq result
+        ctype = 'application/x-amz-json-1.0'
+        expect(response.http_request.headers['content-type']).to eq(ctype)
       end
 
       it 'serializes body parameters' do
-        result = '{"registrationStatus":"REGISTERED"}'
-        expect(response.http_request.body.read).to eq result
+        body = '{"registrationStatus":"REGISTERED"}'
+        expect(response.http_request.body.read).to eq(body)
       end
 
       it 'deserializes response to JSON' do

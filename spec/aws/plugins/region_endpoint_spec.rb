@@ -31,10 +31,13 @@ module Aws
 
       def setup_plugin(options = {})
         options[:api] ||= api
-        @config ||= Seahorse::Client::Configuration.new(options)
+
+        @config ||= Seahorse::Client::Configuration.new
         @config.add_option(:api)
-        @handlers ||= Seahorse::Client::HandlerList.new
         RegionalEndpoint.new.add_options(@config)
+        @config = @config.build!(options)
+
+        @handlers ||= Seahorse::Client::HandlerList.new
         RegionalEndpoint.new.add_handlers(@handlers, @config)
       end
 

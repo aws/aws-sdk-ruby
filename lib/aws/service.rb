@@ -15,7 +15,6 @@ require 'multi_json'
 
 module Aws
   class Service
-
     class << self
 
       # Constructs and returns versioned API client.  Defaults to the 
@@ -42,7 +41,7 @@ module Aws
       # ## Global Version Lock
       #
       # If you are using multiple services in your application, you can lock
-      # them to a specific set of versions by setting a global API version.
+      # them to a specific set of API version by setting a global API version.
       #
       #     Aws.config[:api_version] = '2012-10-01'
       #     Aws::DynamoDB.new
@@ -54,10 +53,9 @@ module Aws
       #
       # @return [Seahorse::Client::Base] Returns a versioned client.
       def new(options = {})
-        client_class = versioned_client(options)
-        options = default_options.merge(options)
-        options.delete(:api_version)
-        client_class.new(options)
+        options = options.dup
+        api_version = options.delete(:api_version) || default_api_version
+        versioned_client_class(api_version).new(options)
       end
 
       # Registers a new API version for this client factory.  You need to
@@ -75,9 +73,10 @@ module Aws
       # @param [String<YYYY-MM-DD>] api_version
       # @param [String<Pathname>, Seahorse::Model::Api] api
       # @return [void]
-      # @see .default_version
-      # @see .latest_version
-      # @see .versions
+      # @see .api_versions
+      # @see .default_api_version
+      # @see .latest_api_version
+      # @see .versioned_clients
       def add_version(api_version, api)
         apis[api_version] = api
       end
@@ -85,34 +84,46 @@ module Aws
       # @return [Array<String>] Returns a list of supported API versions
       #   in a `YYYY-MM-DD` format.
       # @see .add_version
-      # @see .latest_version
-      # @see .default_version
-      def versions
+      # @see .latest_api_version
+      # @see .default_api_version
+      # @see .versioned_clients
+      def api_versions
         apis.keys.sort
       end
 
       # @return [String<YYYY-MM-DD>] Returns the most current API version.
       # @see .add_version
-      # @see .default_version
-      # @see .versions
-      def latest_version
-        versions.last
+      # @see .api_versions
+      # @see .default_api_version
+      # @see .versioned_clients
+      def latest_api_version
+        api_versions.last
       end
 
       # @return [String<YYYY-MM-DD>] Returns the default API version.  This
       #   is the version of the client that will be constructed if there
       #   is other configured or specified API version.
       # @see .add_version
-      # @see .latest_version
-      # @see .versions
-      def default_version
-        configured_version || globally_locked_version || latest_version
+      # @see .api_versions
+      # @see .latest_api_version
+      # @see .versioned_clients
+      def default_api_version
+        svc_locked_version || aws_locked_version || latest_api_version
       end
 
-      # @return [Array<Class>] Returns all of the registered versioned client
-      #   classes for this factory.
+      # Returns an array of versioned client classes for this service.
+      #
+      #     Aws::DynamoDB.versioned_clients
+      #     #=> [Aws::DynamoDB::V20111205, Aws::DynamoDB::V20120810]
+      #
+      # @return [Array<Class>] Returns an array of the versioned client
+      #   classes for this service.
+      # @see .add_version
+      # @see .api_versions
+      # @see .default_api_version
+      # @see .latest_api_version
       def versioned_clients
-        versions.map { |v| versioned_client(api_version: v) }
+        api_versions.map { |api_version| versioned_client_class(api_version) }
       end
 
       # Adds a plugin to each versioned client class.
@@ -135,7 +146,8 @@ module Aws
         end
       end
 
-      # @return [Symbol]
+      # @return [Symbol] Returns the service identifier.  This is the
+      #   downcased service name (e.g. `:s3`, `:dynamodb`, `:ec2`, etc).
       attr_accessor :identifier
 
       # @param [Symbol] identifier The downcased short name for this service.
@@ -160,37 +172,18 @@ module Aws
 
       private
 
-      def default_options
-        # service specific defaults trump global aws defaults
-        global_defaults.merge(service_defaults)
+      def svc_locked_version
+        (Aws.config[identifier] || {})[:api_version]
       end
 
-      def global_defaults
-        Aws.config.inject({}) do |defaults, (key, value)|
-          unless Aws.service_classes.key?(key) || key == identifier
-            defaults[key] = value
-          end
-          defaults
+      def aws_locked_version
+        if api_version = Aws.config[:api_version]
+          api_versions.select { |v| v <= api_version }.last || api_version
         end
       end
 
-      def service_defaults
-        Aws.config[identifier] || {}
-      end
-
-      def configured_version
-        service_defaults[:api_version]
-      end
-
-      def globally_locked_version
-        if global_version = Aws.config[:api_version]
-          versions.select { |v| v <= global_version }.last || global_version
-        end
-      end
-
-      def versioned_client(options)
-        version = options[:api_version] || default_version
-        const_get("V#{version.gsub('-', '')}")
+      def versioned_client_class(api_version)
+        const_get("V#{api_version.gsub('-', '')}")
       end
 
       def apis
@@ -199,15 +192,14 @@ module Aws
 
       def const_missing(constant)
         if constant =~ /^V\d{8}$/
-          api = api_for(constant)
+          api = api(api_version(constant))
           const_set(constant, Seahorse::Client.define(api: api))
         else
           super
         end
       end
 
-      def api_for(constant)
-        api_version = version_for(constant)
+      def api(api_version)
         api = apis[api_version]
         case api
         when Seahorse::Model::Api then api
@@ -218,7 +210,7 @@ module Aws
         end
       end
 
-      def version_for(constant)
+      def api_version(constant)
         yyyy = constant[1,4]
         mm = constant[5,2]
         dd = constant[7,2]
