@@ -43,6 +43,10 @@ module Seahorse
         hash
       end
 
+      def inspect
+        "#<#{self.class.name} version=#{version}>"
+      end
+
     end
   end
 end

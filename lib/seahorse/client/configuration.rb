@@ -144,7 +144,7 @@ module Seahorse
             raise ArgumentError, msg
           end
         end
-        BlockResolver.new(struct).struct.freeze
+        OptionBlockResolver.new(struct).struct.freeze
       end
 
       private
@@ -154,7 +154,7 @@ module Seahorse
       end
 
       # @api private
-      class BlockResolver
+      class OptionBlockResolver
 
         def initialize(struct)
           @struct = struct
