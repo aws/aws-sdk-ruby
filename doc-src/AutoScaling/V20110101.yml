@@ -12,27 +12,32 @@
 # language governing permissions and limitations under the License.
 
 ---
+:attach_instances: "Calls the AttachInstances API operation.\n@param [Hash] options\n
+  \ * `:instance_ids` - (Array&lt;<String>) \n  * `:auto_scaling_group_name` - *required*
+  - (String) \n@return [Core::Response]"
 :create_auto_scaling_group: "Calls the CreateAutoScalingGroup API operation.\n@param
   [Hash] options\n  * `:auto_scaling_group_name` - *required* - (String) \n  * `:launch_configuration_name`
-  - *required* - (String) \n  * `:min_size` - *required* - (Integer) \n  * `:max_size`
-  - *required* - (Integer) \n  * `:desired_capacity` - (Integer) \n  * `:default_cooldown`
-  - (Integer) \n  * `:availability_zones` - (Array&lt;<String>) \n  * `:load_balancer_names`
-  - (Array&lt;<String>) \n  * `:health_check_type` - (String) \n  * `:health_check_grace_period`
-  - (Integer) \n  * `:placement_group` - (String) \n  * `:vpc_zone_identifier` - (String)
-  \n  * `:termination_policies` - (Array&lt;<String>) \n  * `:tags` - (Array&lt;<Hash>)
-  \n    * `:resource_id` - (String) \n    * `:resource_type` - (String) \n    * `:key`
-  - *required* - (String) \n    * `:value` - (String) \n    * `:propagate_at_launch`
-  - (Boolean) \n@return [Core::Response]"
+  - (String) \n  * `:instance_id` - (String) \n  * `:min_size` - *required* - (Integer)
+  \n  * `:max_size` - *required* - (Integer) \n  * `:desired_capacity` - (Integer)
+  \n  * `:default_cooldown` - (Integer) \n  * `:availability_zones` - (Array&lt;<String>)
+  \n  * `:load_balancer_names` - (Array&lt;<String>) \n  * `:health_check_type` -
+  (String) \n  * `:health_check_grace_period` - (Integer) \n  * `:placement_group`
+  - (String) \n  * `:vpc_zone_identifier` - (String) \n  * `:termination_policies`
+  - (Array&lt;<String>) \n  * `:tags` - (Array&lt;<Hash>) \n    * `:resource_id` -
+  (String) \n    * `:resource_type` - (String) \n    * `:key` - *required* - (String)
+  \n    * `:value` - (String) \n    * `:propagate_at_launch` - (Boolean) \n@return
+  [Core::Response]"
 :create_launch_configuration: "Calls the CreateLaunchConfiguration API operation.\n@param
   [Hash] options\n  * `:launch_configuration_name` - *required* - (String) \n  * `:image_id`
-  - *required* - (String) \n  * `:key_name` - (String) \n  * `:security_groups` -
-  (Array&lt;<String>) \n  * `:user_data` - (String) \n  * `:instance_type` - *required*
+  - (String) \n  * `:key_name` - (String) \n  * `:security_groups` - (Array&lt;<String>)
+  \n  * `:user_data` - (String) \n  * `:instance_id` - (String) \n  * `:instance_type`
   - (String) \n  * `:kernel_id` - (String) \n  * `:ramdisk_id` - (String) \n  * `:block_device_mappings`
   - (Array&lt;<Hash>) \n    * `:virtual_name` - (String) \n    * `:device_name` -
   *required* - (String) \n    * `:ebs` - (Hash) \n      * `:snapshot_id` - (String)
   \n      * `:volume_size` - (Integer) \n  * `:instance_monitoring` - (Hash) \n    *
   `:enabled` - (Boolean) \n  * `:spot_price` - (String) \n  * `:iam_instance_profile`
-  - (String) \n  * `:ebs_optimized` - (Boolean) \n@return [Core::Response]"
+  - (String) \n  * `:ebs_optimized` - (Boolean) \n  * `:associate_public_ip_address`
+  - (Boolean) \n@return [Core::Response]"
 :create_or_update_tags: "Calls the CreateOrUpdateTags API operation.\n@param [Hash]
   options\n  * `:tags` - *required* - (Array&lt;<Hash>) \n    * `:resource_id` - (String)
   \n    * `:resource_type` - (String) \n    * `:key` - *required* - (String) \n    *
@@ -111,7 +116,8 @@
   (Hash)\n        * `:snapshot_id` - (String)\n        * `:volume_size` - (Integer)\n
   \   * `:instance_monitoring` - (Hash)\n      * `:enabled` - (Boolean)\n    * `:spot_price`
   - (String)\n    * `:iam_instance_profile` - (String)\n    * `:created_time` - (Time)\n
-  \   * `:ebs_optimized` - (Boolean)\n  * `:next_token` - (String)"
+  \   * `:ebs_optimized` - (Boolean)\n    * `:associate_public_ip_address` - (Boolean)\n
+  \ * `:next_token` - (String)"
 :describe_metric_collection_types: |-
   Calls the DescribeMetricCollectionTypes API operation.
   @param [Hash] options
