@@ -31,7 +31,9 @@ module Aws
 
         def call(context)
           credentials = context.config.credentials
-          raise MissingCredentialsError if credentials.nil? or !credentials.set?
+          if credentials.nil? or !credentials.set?
+            raise Errors::MissingCredentialsError
+          end
           @handler.call(context)
         end
 

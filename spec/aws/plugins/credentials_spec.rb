@@ -76,14 +76,14 @@ module Aws
         it 'raises a runtime error if credentials are not set' do
           expect {
             call_handler(Credentials::Handler, credentials: nil)
-          }.to raise_error(Credentials::MissingCredentialsError)
+          }.to raise_error(Errors::MissingCredentialsError)
         end
 
         it 'raises a runtime error if credentials are empty' do
           credentials = Aws::Credentials.new(nil, nil)
           expect {
             call_handler(Credentials::Handler, credentials: credentials)
-          }.to raise_error(Credentials::MissingCredentialsError)
+          }.to raise_error(Errors::MissingCredentialsError)
         end
 
         it 'accepts populated credentials' do
