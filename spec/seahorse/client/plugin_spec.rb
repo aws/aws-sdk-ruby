@@ -96,33 +96,33 @@ module Seahorse
 
       end
 
-      describe '.initialize_client' do
+      describe '.pre_init' do
 
-        it 'provides a short-cut method for adding initializers' do
-          initialized_client = nil
-          client = client_with_plugin do
-            initialize_client {|c| initialized_client = c }
+        it 'yeilds the client class and constructor options to the plugin' do
+          yielded_class = nil
+          yielded_options = nil
+          client = client_with_plugin(foo: 'bar') do
+            option(:foo)
+            pre_init do |klass, options|
+              yielded_class = klass
+              yielded_options = options
+            end
           end
-          expect(client).to be(initialized_client)
+          expect(yielded_class).to be(client.class)
+          expect(yielded_options).to eq(foo: 'bar')
+          expect(client.config.foo).to eq('bar')
         end
 
       end
 
-      describe '.client_class_for' do
+      describe '.post_init' do
 
-        it 'provides a method to specify a different client class' do
+        it 'yieldes the fully constructed client to the plugin' do
+          initialized_client = nil
           client = client_with_plugin do
-            client_class_for {|klass, options| OpenStruct }
+            post_init {|c| initialized_client = c }
           end
-          expect(client).to be_kind_of(OpenStruct)
-        end
-
-        it 'gives the constructor options to the block' do
-          yielded = nil
-          client_with_plugin(foo: 'bar') do
-            client_class_for {|klass, options| yielded = options }
-          end
-          expect(yielded).to eq(foo: 'bar')
+          expect(client).to be(initialized_client)
         end
 
       end

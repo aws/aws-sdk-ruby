@@ -259,77 +259,38 @@ module Seahorse
 
       end
 
-      describe '.client_class' do
-
-        it 'consults plugin list to see what client class to construct' do
-          subclient_class = Class.new(client_class)
-          plugin = double('plugin')
-          allow(plugin).to receive(:client_class_for).
-            and_return(subclient_class)
-          client_class.add_plugin(plugin)
-          expect(client_class.client_class).to be(subclient_class)
-        end
-
-        it 'does not change the client class if plugin#construct_client does not return Class' do
-          plugin = Class.new(Plugin)
-          allow(plugin).to receive(:construct_client)
-          client_class.add_plugin(plugin)
-          expect(client_class.client_class).to be(client_class)
-        end
-
-        it 'takes the last returned Class object from plugins' do
-          stub_const("ClassA", Class.new)
-          stub_const("ClassB", Class.new)
-          stub_const("ClassC", Class.new)
-
-          plugin1 = double('plugin1')
-          allow(plugin1).to receive(:client_class_for).and_return(ClassA)
-          plugin2 = double('plugin2')
-          allow(plugin2).to receive(:client_class_for).and_return(ClassB)
-          plugin3 = double('plugin3')
-          allow(plugin3).to receive(:client_class_for).and_return(ClassC)
-
-          client_class.add_plugin(plugin1)
-          client_class.add_plugin(plugin2)
-          client_class.add_plugin(plugin3)
-
-          expect(client_class.client_class).to eq ClassC
-        end
-      end
-
       describe '.new' do
 
-        it 'constructs the class specified by .client_class' do
-          new_client_class = Class.new { def initialize(cfg); end }
-          allow(client_class).to receive(:client_class).
-            and_return(new_client_class)
-          client = client_class.new(foo: 'bar')
-          expect(client).to be_kind_of(new_client_class)
-        end
+        let(:plugin) {
+          p = double('plugin')
+          allow(p).to receive(:is_a?).with(kind_of(Class)).and_return(false)
+          p
+        }
 
-        it 'instructs plugins to #initialize_client' do
-          initialized_client = nil
-          plugin = double('plugin')
-          allow(plugin).to receive(:initialize_client) { |c| 
-            initialized_client = c }
+        it 'instructs plugins to #pre_init' do
+          options = {}
+          expect(plugin).to receive(:pre_init).with(client_class, options)
           client_class.add_plugin(plugin)
-          client = client_class.new
-          expect(initialized_client).to be(client)
+          client_class.new(options)
         end
 
         it 'instructs plugins to #add_options' do
-          plugin = double('plugin')
-          allow(plugin).to receive(:add_options) { |config| config.add_option(:foo) }
+          expect(plugin).to receive(:add_options) do |config|
+            config.add_option(:foo, 'bar')
+          end
           client_class.add_plugin(plugin)
-          expect(client_class.new.config).to respond_to(:foo)
+          expect(client_class.new.config.foo).to eq('bar')
         end
 
         it 'instructs plugins to #add_handlers' do
-          plugin = double('plugin')
-          expect(plugin).to receive(:is_a?).
-            at_least(:once).with(kind_of(Class)) { false }
-          expect(plugin).to receive(:add_handlers).with(
-            kind_of(HandlerList), kind_of(Struct))
+          expect(plugin).to receive(:add_handlers).
+            with(kind_of(HandlerList), kind_of(Struct))
+          client_class.add_plugin(plugin)
+          client_class.new
+        end
+
+        it 'instructs plugins to #post_init' do
+          expect(plugin).to receive(:post_init).with(kind_of(Client::Base))
           client_class.add_plugin(plugin)
           client_class.new
         end

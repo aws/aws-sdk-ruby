@@ -38,16 +38,17 @@ module Seahorse
       #
       class OperationMethods < Plugin
 
-        initialize_client do |client|
+        def post_init(client)
           unless client.respond_to?(:operation_names)
-            names = client.config.api.operations.keys
+            add_operation_helpers(client, client.config.api.operations.keys)
+          end
+        end
 
-            client.class.send(:define_method, :operation_names) { names }
-
-            names.each do |name|
-              client.class.send(:define_method, name) do |*args, &block|
-                build_request(name, *args).send_request(&block)
-              end
+        def add_operation_helpers(client, operations)
+          client.class.send(:define_method, :operation_names) { operations }
+          operations.each do |name|
+            client.class.send(:define_method, name) do |*args, &block|
+              build_request(name, *args).send_request(&block)
             end
           end
         end

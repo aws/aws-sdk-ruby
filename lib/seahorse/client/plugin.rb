@@ -32,25 +32,21 @@ module Seahorse
         handlers.copy_from(self.class.handlers)
       end
 
-      # @param [Client::Base] client the client to initialize
+      # @param [Class<Client::Base>]
+      # @param [Hash] options
       # @return [void]
-      def initialize_client(client)
-        self.class.initializers.each do |block|
-          instance_exec(client, &block)
+      def pre_init(client_class, options)
+        self.class.pre_init_hooks.each do |block|
+          block.call(client_class, options)
         end
       end
 
-      # @param [Class<Client::Base>] client_class
-      # @param [Hash] options
-      # @return [Class<Client::Base>] the client class that should be
-      #   allocated and constructed
-      # @return [nil] if the client class should not be changed
-      def client_class_for(client_class, options)
-        self.class.constructors.each do |block|
-          new_client_class = instance_exec(client_class, options, &block)
-          client_class = new_client_class if Class === new_client_class
+      # @param [Client::Base]
+      # @return [void]
+      def post_init(client)
+        self.class.post_init_hooks.each do |block|
+          block.call(client)
         end
-        client_class
       end
 
       class << self
@@ -63,22 +59,12 @@ module Seahorse
           end
         end
 
-        def initialize_client(&block)
-          initializers << block
+        def pre_init(&block)
+          pre_init_hooks << block
         end
 
-        def client_class_for(&block)
-          constructors << block
-        end
-
-        # @api private
-        def initializers
-          @initializers ||= []
-        end
-
-        # @api private
-        def constructors
-          @constructors ||= []
+        def post_init(&block)
+          post_init_hooks << block
         end
 
         # @api private
@@ -89,6 +75,16 @@ module Seahorse
         # @api private
         def handlers
           @handlers ||= HandlerList.new
+        end
+
+        # @api private
+        def pre_init_hooks
+          @pre_init_hooks ||= []
+        end
+
+        # @api private
+        def post_init_hooks
+          @post_init_hooks ||= []
         end
 
       end
