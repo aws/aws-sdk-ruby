@@ -810,6 +810,10 @@ module AWS
       #   the copied object.  Defaults to the source object's content
       #   type.
       #
+      # @option options [String] :content_disposition The presentational
+      #   information for the object. Defaults to the source object's
+      #   content disposition.
+      #
       # @option options [Boolean] :reduced_redundancy (false) If true the
       #   object is stored with reduced redundancy in S3 for a lower cost.
       #
