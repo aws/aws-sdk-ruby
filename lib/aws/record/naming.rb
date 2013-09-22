@@ -16,14 +16,12 @@ module AWS
 
     # @api private
     module Naming
-
       # This method should only ever get called in a Rails 3+ context
       # where active model and active support have been loaded.  Rails 2
       # does not call model name on object.
       # @api private
       def model_name
-        @_model_name ||=
-          ActiveModel::Name.new(self.kind_of?(Class) ? self : self.class)
+        ActiveModel::Name.new(self.kind_of?(Class) ? self : self.class)
       end
 
     end
