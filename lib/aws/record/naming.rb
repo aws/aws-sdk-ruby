@@ -17,6 +17,7 @@ module AWS
     # @api private
     module Naming
 
+      require 'active_model' unless defined?(ActiveModel)
       # This method should only ever get called in a Rails 3+ context
       # where active model and active support have been loaded.  Rails 2
       # does not call model name on object.
