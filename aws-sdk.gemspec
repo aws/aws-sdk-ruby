@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.add_dependency('uuidtools', '~> 2.1')
   s.add_dependency('nokogiri', '>= 1.4.4', '< 1.6.0') # 1.6 no longer supports Ruby 1.8.7
   s.add_dependency('json', '~> 1.4')
+  s.add_dependency("activemodel", ["~> 4.0.0"])
 
   s.files = [
     'ca-bundle.crt',
