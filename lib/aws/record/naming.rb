@@ -23,8 +23,7 @@ module AWS
       # does not call model name on object.
       # @api private
       def model_name
-        @_model_name ||=
-          ActiveModel::Name.new(self.kind_of?(Class) ? self : self.class)
+        @_model_name ||= self.kind_of?(Class) ? self : self.class
       end
 
     end
