@@ -28,7 +28,7 @@ module Seahorse
 
           def call(context)
             rules = context.operation.input
-            context.params = ParamValidator.new(rules).validate(context.params)
+            context.params = ParamValidator.new(rules).validate!(context.params)
             @handler.call(context)
           end
 

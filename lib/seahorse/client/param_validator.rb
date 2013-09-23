@@ -22,7 +22,7 @@ module Seahorse
 
       # @param [Hash] params
       # @return [Hash] Returns a hash of validate and normalized parameters.
-      def validate(params)
+      def validate!(params)
         errors = []
         raise ArgumentError, format_error_msg(errors) unless errors.empty?
         params
