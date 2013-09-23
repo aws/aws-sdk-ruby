@@ -32,6 +32,10 @@ module Seahorse
       private
 
       def structure(rules, values, errors, context)
+        unless values.is_a?(Hash)
+          errors << "expected #{context} to be a hash"
+          return
+        end
         rules.members.each do |member_name, member_shape|
           if values[member_name].nil?
             errors << "missing required parameter #{context}[#{member_name.inspect}]"

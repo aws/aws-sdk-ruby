@@ -51,6 +51,23 @@ module Seahorse
 
       describe 'structures' do
 
+        it 'expects the value to be a hash' do
+          rules['members'] = {
+            'config' => {
+              'type' => 'structure',
+              'members' => {
+                'settings' => {
+                  'type' => 'structure',
+                  'members' => {}
+                }
+              }
+            }
+          }
+          validate('abc', 'expected params to be a hash')
+          validate({ config: 'abc' }, 'expected params[:config] to be a hash')
+          validate({ config: { settings: 'abc' }}, 'expected params[:config][:settings] to be a hash')
+        end
+
         it 'raises an error when a required paramter is missing' do
           rules['members'] = {
             'name' => { 'type' => 'string', 'required' => true }
