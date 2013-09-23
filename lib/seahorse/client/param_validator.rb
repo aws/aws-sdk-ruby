@@ -24,8 +24,24 @@ module Seahorse
       # @return [Hash] Returns a hash of validate and normalized parameters.
       def validate!(params)
         errors = []
+        structure(@rules, params, errors, context = 'params')
         raise ArgumentError, format_error_msg(errors) unless errors.empty?
         params
+      end
+
+      def structure(rules, values, errors, context)
+        rules.members.each do |member_name, member_shape|
+          if values[member_name].nil?
+            errors << "missing required parameter #{context}[#{member_name.inspect}]"
+          end
+        end
+        values.each_pair do |name, value|
+          if member_shape = rules.members[name]
+            # ...
+          else
+            errors << "unexpected parameter #{context}[#{name.inspect}]"
+          end
+        end
       end
 
       private
@@ -35,7 +51,7 @@ module Seahorse
           errors.first
         else
           prefix = "\n  - "
-          "validating parameterss found #{errors.size} errors:" +
+          "parameter validator found #{errors.size} errors:" +
             prefix + errors.join(prefix)
         end
       end

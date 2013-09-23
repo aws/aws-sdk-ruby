@@ -17,32 +17,67 @@ module Seahorse
 
       let(:rules) {{ 'type' => 'input', 'members' => {} }}
 
-      def validate(params)
+      def validate(params, expected_errors = [])
         shape = Model::Shapes::Shape.from_hash(rules)
-        ParamValidator.new(shape).validate!(params)
+        if expected_errors.empty?
+          ParamValidator.new(shape).validate!(params)
+        else
+          expect {
+            ParamValidator.new(shape).validate!(params)
+          }.to raise_error(ArgumentError) do |error|
+            match_errors(error, expected_errors)
+          end
+        end
+      end
+
+      def match_errors(error, expected_errors)
+        expected_errors = [expected_errors] unless expected_errors.is_a?(Array)
+        expected_errors.each do |expected_error|
+          if String === expected_error
+            expect(error.message).to include(expected_error)
+          else
+            expect(error.message).to match(expected_error)
+          end
+        end
       end
 
       describe 'empty rules' do
 
-        it 'accepts an empty hash of params when rules are empty'
-
-        it 'returns an empty hash' do
+        it 'accepts an empty hash of params when rules are empty' do
           expect(validate({})).to be_kind_of(Hash)
         end
-
-        it 'rejects params when given'
 
       end
 
       describe 'structures' do
 
-        it 'raises an error when a required paramter is missing'
+        it 'raises an error when a required paramter is missing' do
+          rules['members'] = {
+            'name' => { 'type' => 'string', 'required' => true }
+          }
+          validate({}, 'missing required parameter params[:name]')
+        end
 
-        it 'raises an error when a given parameter is unexpected'
+        it 'raises an error when a given parameter is unexpected' do
+          validate({foo: 'bar'}, 'unexpected parameter params[:foo]')
+        end
 
-        it 'raises an error when a given parameter fails validation'
+        it 'accepts members that pass validation' do
+          rules['members'] = {
+            'name' => { 'type' => 'string', 'required' => true }
+          }
+          validate(name: 'john doe')
+        end
 
-        it 'aggregates errors for members'
+        it 'aggregates errors for members' do
+          rules['members'] = {
+            'name' => { 'type' => 'string', 'required' => true }
+          }
+          validate({foo: 'bar'}, [
+            'missing required parameter params[:name]',
+            'unexpected parameter params[:foo]'
+          ])
+        end
 
         it 'validates nested structures'
 
