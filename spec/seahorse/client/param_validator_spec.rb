@@ -79,9 +79,18 @@ module Seahorse
           ])
         end
 
-        it 'validates nested structures'
-
-        it 'provides a helpful context for nested params'
+        it 'provides a helpful context for nested params' do
+          rules['members'] = {
+            'config' => {
+              'type' => 'structure',
+              'members' => {
+                'name' => { 'type' => 'string', 'required' => true }
+              }
+            }
+          }
+          validate({ config: {} },
+            'missing required parameter params[:config][:name]')
+        end
 
       end
 

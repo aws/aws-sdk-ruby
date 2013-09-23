@@ -29,6 +29,8 @@ module Seahorse
         params
       end
 
+      private
+
       def structure(rules, values, errors, context)
         rules.members.each do |member_name, member_shape|
           if values[member_name].nil?
@@ -37,14 +39,19 @@ module Seahorse
         end
         values.each_pair do |name, value|
           if member_shape = rules.members[name]
-            # ...
+            member(member_shape, value, errors, context + "[#{name.inspect}]")
           else
             errors << "unexpected parameter #{context}[#{name.inspect}]"
           end
         end
       end
 
-      private
+      def member(rules, value, errors, context)
+        case rules
+        when Model::Shapes::StructureShape
+          structure(rules, value, errors, context)
+        end
+      end
 
       def format_error_msg(errors)
         if errors.size == 1
