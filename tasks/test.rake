@@ -30,5 +30,6 @@ end
 desc 'Generates a coverage report'
 task :coverage do
   ENV['COVERAGE'] = 'true'
+  rm_rf "coverage/"
   Rake::Task['test'].execute
 end
