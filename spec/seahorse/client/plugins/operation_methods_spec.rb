@@ -37,7 +37,7 @@ module Seahorse
         end
 
         it 'sets up the method to call build_request and sends it' do
-          client_class.remove_plugin(ValidateParams)
+          client_class.remove_plugin(ParamValidation)
           expect(client).to receive(:build_request).
             with('operation1', param: 'X').and_call_original
           expect(client.operation1(param: 'X').data).to eq(result: 'success')

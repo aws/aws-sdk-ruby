@@ -14,7 +14,7 @@
 module Seahorse
   module Client
     module Plugins
-      class ValidateParams
+      class ParamValidation
 
         def add_options(config)
           config.add_option(:validate_params, true)

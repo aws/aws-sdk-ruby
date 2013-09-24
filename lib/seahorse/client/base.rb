@@ -28,7 +28,7 @@ module Seahorse
       @plugins = PluginList.new([
         Plugins::NetHttp,
         Plugins::OperationMethods,
-        Plugins::ValidateParams,
+        Plugins::ParamValidation,
       ])
 
       # @api private

@@ -51,7 +51,7 @@ module Seahorse
       autoload :Logging, 'seahorse/client/plugins/logging'
       autoload :NetHttp, 'seahorse/client/plugins/net_http'
       autoload :OperationMethods, 'seahorse/client/plugins/operation_methods'
-      autoload :ValidateParams, 'seahorse/client/plugins/validate_params'
+      autoload :ParamValidation, 'seahorse/client/plugins/param_validation'
     end
 
     module Xml
