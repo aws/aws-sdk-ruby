@@ -24,7 +24,7 @@ module Seahorse
           handlers.add(Handler, step: :validate) if config.validate_params
         end
 
-        class Handler << Client::Handler
+        class Handler < Client::Handler
 
           def call(context)
             rules = context.operation.input
