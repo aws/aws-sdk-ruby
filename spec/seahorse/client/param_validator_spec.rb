@@ -51,7 +51,7 @@ module Seahorse
 
       describe 'structures' do
 
-        it 'expects the value to be a hash' do
+        it 'validates nested structures' do
           rules['members'] = {
             'config' => {
               'type' => 'structure',
@@ -68,6 +68,11 @@ module Seahorse
           validate({ config: { settings: 'abc' }}, 'expected params[:config][:settings] to be a hash')
         end
 
+        it 'accepts hashes and objects that are hash-like' do
+          validate({})
+          validate(Struct.new(:config).new)
+        end
+
         it 'raises an error when a required paramter is missing' do
           rules['members'] = {
             'name' => { 'type' => 'string', 'required' => true }
@@ -76,7 +81,7 @@ module Seahorse
         end
 
         it 'raises an error when a given parameter is unexpected' do
-          validate({foo: 'bar'}, 'unexpected parameter params[:foo]')
+          validate({foo: 'bar'}, 'unexpected value at params[:foo]')
         end
 
         it 'accepts members that pass validation' do
@@ -92,7 +97,7 @@ module Seahorse
           }
           validate({foo: 'bar'}, [
             'missing required parameter params[:name]',
-            'unexpected parameter params[:foo]'
+            'unexpected value at params[:foo]'
           ])
         end
 
@@ -113,89 +118,171 @@ module Seahorse
 
       describe 'lists' do
 
-        it 'expects the value to be an array'
+        before(:each) do
+          rules['members'] = {
+            # list of strings
+            'names' => {
+              'type' => 'list',
+              'members' => { 'type' => 'string' }
+            },
+            # list of structures
+            'filters' => {
+              'type' => 'list',
+              'members' => {
+                'type' => 'structure',
+                'members' => {
+                  'values' => {
+                    'type' => 'list',
+                    'members' => { 'type' => 'string' }
+                  }
+                }
+              }
+            }
+          }
+        end
 
-        it 'validates each member of the list'
+        it 'accepts arrays' do
+          validate(names: [])
+          validate(names: %w(abc mno xyz))
+        end
+
+        it 'expects the value to be an array' do
+          validate({ names: [] })
+          validate({ names: 'abc' }, 'expected params[:names] to be an array')
+        end
+
+        it 'validates each member of the list' do
+          validate({ filters: [{}] })
+          validate({ filters: ['abc'] },
+            'expected params[:filters][0] to be a hash')
+          validate({ filters: [{}, 'abc'] },
+            'expected params[:filters][1] to be a hash')
+          validate({ filters: [{ values: 'abc' }] },
+            'expected params[:filters][0][:values] to be an array')
+          validate({ filters: [{ value: 'abc' }] },
+            'unexpected value at params[:filters][0][:value]')
+        end
 
       end
 
       describe 'maps' do
 
-        it 'expects maps to be hashes'
+        before(:each) do
+          rules['members'] = {
+            'attributes' => {
+              'type' => 'map',
+              'keys' => { 'type' => 'string' },
+              'members' => { 'type' => 'integer' }
+            }
+          }
+        end
 
-        it 'accepts string keys'
+        it 'accepts hashes' do
+          validate({ attributes: {}})
+          validate({ attributes: 'abc' },
+            'expected params[:attributes] to be a hash')
+        end
 
-        it 'validates each map entry'
+        it 'validates map keys' do
+          validate({ attributes: { 'foo' => 123 }})
+          validate({ attributes: { 123 => 456 }},
+            'expected params[:attributes] 123 key to be a string')
+        end
+
+        it 'validates map values' do
+          validate({ attributes: { 'foo' => 123 }})
+          validate({ attributes: { 'foo' => 'bar' }},
+            'expected params[:attributes]["foo"] to be an integer')
+        end
 
       end
 
       describe 'integers' do
 
-        it 'accepts integers'
-
-        it 'accepts integer strings'
-
-        it 'accepts objects that respond to #to_int'
+        it 'accepts integers' do
+          rules['members'] = { 'count' => { 'type' => 'integer' } }
+          validate(count: 123)
+          validate({ count: '123' }, 'expected params[:count] to be an integer')
+        end
 
       end
 
       describe 'floats' do
 
-        it 'accepts integers'
-
-        it 'accepts floats'
-
-        it 'accepts float strings'
-
-        it 'accepts objects that respond to #to_float'
+        it 'accepts integers' do
+          rules['members'] = { 'price' => { 'type' => 'float' } }
+          validate(price: 123.0)
+          validate({ price: 123 }, 'expected params[:price] to be a float')
+        end
 
       end
 
       describe 'timestamps' do
 
-        it 'accepts date objects'
-
-        it 'accepts datetime objects'
-
-        it 'accepts time objects'
-
-        it 'accepts integers (as unix timestamps)'
-
-        it 'strings parseable by Time.parse'
-
-        it 'accepts objects that respond to #to_time'
+        it 'accepts time objects' do
+          rules['members'] = {
+            'a' => { 'type' => 'timestamp' },
+            'b' => { 'type' => 'iso8601_timestamp' },
+            'c' => { 'type' => 'rfc822_timestamp' },
+            'd' => { 'type' => 'unix_timestamp' },
+          }
+          validate(a: Time.now)
+          validate(b: Time.now)
+          validate(c: Time.now)
+          validate(d: Time.now)
+          validate({a: 12345}, 'expected params[:a] to be a Time object')
+          validate({b: '2013-01-01'}, 'expected params[:b] to be a Time object')
+          validate({c: DateTime.now}, 'expected params[:c] to be a Time object')
+          validate({d: Date.new}, 'expected params[:d] to be a Time object')
+        end
 
       end
 
       describe 'booleans' do
 
-        it 'accepts TrueClass'
+        it 'accepts TrueClass and FalseClass' do
+          rules['members'] = { 'enabled' => { 'type' => 'boolean' } }
+          validate(enabled: true)
+          validate(enabled: false)
+          validate({ enabled: 'true' },
+            'expected params[:enabled] to be true or false')
+        end
 
-        it 'accepts FalseClass'
+      end
+
+      describe 'base64 strings' do
+
+        it 'accepts string objects' do
+          rules['members'] = { 'data' => { 'type' => 'base64' } }
+          validate(data: 'YQ==')
+          validate({ data: 123 },
+            'expected params[:data] to be a base64 encoded string')
+        end
 
       end
 
       describe 'blobs' do
 
-        it 'accepts strings'
-
-        it 'accepts pathname objects'
-
-        it 'accepts File objects'
-
-        it 'accept Tempfile objects'
-
-        it 'accepts objects that respond to #read, #rewind and #size'
-
-        it 'tracks a list of opened/managed files to close after a response'
+        it 'accepts io objects' do
+          rules['payload'] = 'data'
+          rules['members'] = {
+            'data' => { 'type' => 'blob' }
+          }
+          validate(data: StringIO.new('abc'))
+          validate(data: double('d', :read => 'abc', :size => 3, :rewind => 0))
+          validate({ data: 'abc' },
+            'expected params[:data] to be an IO object')
+        end
 
       end
 
       describe 'strings' do
 
-        it 'accepts strings'
-
-        it 'accepts objects that respond to #to_str'
+        it 'accepts string objects' do
+          rules['members'] = { 'name' => { 'type' => 'string' } }
+          validate(name: 'john doe')
+          validate({ name: 123 }, 'expected params[:name] to be a string')
+        end
 
       end
     end

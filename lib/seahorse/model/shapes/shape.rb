@@ -55,6 +55,8 @@ module Seahorse
         property :serialized_name, String
         property :metadata, Hash
 
+        alias required? required
+
         def serialized_name
           name = @serialized_name || @member_name.to_s
           name == '' ? nil : name
@@ -84,6 +86,7 @@ module Seahorse
         property :enum, [String]
       end
 
+      class Base64Shape < StringShape; end
       class TimestampShape < ScalarShape; end
       class Iso8601TimestampShape < TimestampShape; end
       class Rfc822TimestampShape < TimestampShape; end
@@ -226,6 +229,7 @@ module Seahorse
         register_type list: ListShape
         register_type map: MapShape
         register_type string: StringShape
+        register_type base64: Base64Shape
         register_type integer: IntegerShape
         register_type timestamp: TimestampShape
         register_type iso8601_timestamp: Iso8601TimestampShape
