@@ -27,8 +27,7 @@ module Seahorse
         class Handler < Client::Handler
 
           def call(context)
-            rules = context.operation.input
-            context.params = ParamValidator.new(rules).validate!(context.params)
+            ParamValidator.validate!(context.operation.input, context.params)
             @handler.call(context)
           end
 

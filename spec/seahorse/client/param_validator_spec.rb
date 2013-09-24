@@ -44,7 +44,7 @@ module Seahorse
       describe 'empty rules' do
 
         it 'accepts an empty hash of params when rules are empty' do
-          expect(validate({})).to be_kind_of(Hash)
+          expect(validate({}))
         end
 
       end

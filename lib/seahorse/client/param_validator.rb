@@ -16,17 +16,23 @@ module Seahorse
     class ParamValidator
 
       # @param [Model::Shapes::InputShape] rules
+      # @param [Hash] params
+      # @return [void]
+      def self.validate!(rules, params)
+        new(rules).validate!(params)
+      end
+
+      # @param [Model::Shapes::InputShape] rules
       def initialize(rules)
         @rules = rules
       end
 
       # @param [Hash] params
-      # @return [Hash] Returns a hash of validate and normalized parameters.
+      # @return [void]
       def validate!(params)
         errors = []
         structure(@rules, params, errors, context = 'params')
         raise ArgumentError, error_messages(errors) unless errors.empty?
-        params
       end
 
       private
