@@ -1052,6 +1052,11 @@
         "https": true,
         "hostname": "iam.us-gov.amazonaws.com"
       },
+      "sts": {
+        "http": false,
+        "https": true,
+        "hostname": "sts.us-gov-west-1.amazonaws.com"
+      },
       "elasticloadbalancing": {
         "http": true,
         "https": true,

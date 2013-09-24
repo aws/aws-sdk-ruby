@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'STS', 'sts', 'sts.amazonaws.com'
+  add_service 'STS', 'sts', 'sts.%s.amazonaws.com'
 
 end
