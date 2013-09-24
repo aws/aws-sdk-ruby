@@ -250,20 +250,9 @@ module Seahorse
 
       end
 
-      describe 'base64 strings' do
-
-        it 'accepts string objects' do
-          rules['members'] = { 'data' => { 'type' => 'base64' } }
-          validate(data: 'YQ==')
-          validate({ data: 123 },
-            'expected params[:data] to be a base64 encoded string')
-        end
-
-      end
-
       describe 'blobs' do
 
-        it 'accepts io objects' do
+        it 'accepts io objects for payload members' do
           rules['payload'] = 'data'
           rules['members'] = {
             'data' => { 'type' => 'blob' }
@@ -272,6 +261,13 @@ module Seahorse
           validate(data: double('d', :read => 'abc', :size => 3, :rewind => 0))
           validate({ data: 'abc' },
             'expected params[:data] to be an IO object')
+        end
+
+        it 'accepts string objects for non-payload members' do
+          rules['members'] = { 'data' => { 'type' => 'blob' } }
+          validate(data: 'YQ==')
+          validate({ data: 123 },
+            'expected params[:data] to be a base64 encoded string')
         end
 
       end

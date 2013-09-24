@@ -47,7 +47,10 @@ module Seahorse
         values.each do |name, value|
           unless value.nil?
             if member_shape = rules.members[name]
-              member(member_shape, value, errors, context + "[#{name.inspect}]")
+              payload = rules.is_a?(Model::Shapes::InputShape) &&
+                rules.payload == name
+              member(member_shape, value, errors, context + "[#{name.inspect}]",
+                payload)
             else
               errors << "unexpected value at #{context}[#{name.inspect}]"
             end
@@ -78,7 +81,7 @@ module Seahorse
         end
       end
 
-      def member(rules, value, errors, context)
+      def member(rules, value, errors, context, payload = false)
         case rules
         when Model::Shapes::StructureShape
           structure(rules, value, errors, context)
@@ -86,10 +89,6 @@ module Seahorse
           list(rules, value, errors, context)
         when Model::Shapes::MapShape
           map(rules, value, errors, context)
-        when Model::Shapes::Base64Shape
-          unless value.is_a?(String)
-            errors << "expected #{context} to be a base64 encoded string"
-          end
         when Model::Shapes::StringShape
           unless value.is_a?(String)
             errors << "expected #{context} to be a string"
@@ -111,8 +110,14 @@ module Seahorse
             errors << "expected #{context} to be true or false"
           end
         when Model::Shapes::BlobShape
-          unless io_like?(value)
-            errors << "expected #{context} to be an IO object"
+          if payload
+            unless io_like?(value)
+              errors << "expected #{context} to be an IO object"
+            end
+          else
+            unless value.is_a?(String)
+              errors << "expected #{context} to be a base64 encoded string"
+            end
           end
         end
       end
