@@ -30,6 +30,11 @@ module Aws
         allow(Aws).to receive(:config).and_return({})
       end
 
+      after(:each) do
+        # to silence warnings about Svc getting redefined each pass
+        Aws.send(:remove_const, :Svc)
+      end
+
       it 'does not interfere with plugins and their defaults' do
         expect(Aws.svc.config.property).to eq('plugin-default')
       end
