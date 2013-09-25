@@ -55,7 +55,7 @@ module Aws
         else
           node(name, shape, structure_attrs(shape, values)) do
             shape.members.each_pair do |member_name, member_shape|
-              if values.key?(member_name)
+              unless values[member_name].nil?
                 next if xml_attribute?(member_shape)
                 mname = member_shape.serialized_name
                 member(mname, member_shape, values[member_name])
