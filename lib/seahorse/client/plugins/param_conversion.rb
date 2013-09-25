@@ -14,20 +14,22 @@
 module Seahorse
   module Client
     module Plugins
-      class ParamValidation < Plugin
+      class ParamConversion < Plugin
 
-        option(:validate_params, true)
+        option(:convert_params, true)
 
         def add_handlers(handlers, config)
-          if config.validate_params
-            handlers.add(Handler, step: :validate, priority: 50)
+          if config.convert_params
+            handlers.add(Handler, step: :validate, priority: 75)
           end
         end
 
         class Handler < Client::Handler
 
           def call(context)
-            ParamValidator.validate!(context.operation.input, context.params)
+            context.params = ParamConverter.convert(
+              context.operation.input,
+              context.params)
             @handler.call(context)
           end
 
