@@ -159,6 +159,15 @@ module Aws
           expect(data[:created_at]).to eq(time)
         end
 
+        it 'can parse unix timestamps expressed as floats' do
+          timestamp = 1349908100.123
+          time = Time.at(timestamp)
+          json = "{\"CreatedAt\":#{timestamp}}"
+          data = parse(json)
+          expect(data[:created_at]).to be_a(Time)
+          expect(data[:created_at]).to eq(time)
+        end
+
         it 'can parse iso8601 strings' do
           timestamp = '2012-09-10T15:47:10.001Z'
           time = Time.parse(timestamp).to_time.utc

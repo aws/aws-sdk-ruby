@@ -76,11 +76,7 @@ module Aws
       end
 
       def time(value)
-        if value.is_a?(Integer)
-          Time.at(value)
-        else
-          Time.parse(value)
-        end
+        value.is_a?(Numeric) ? Time.at(value) : Time.parse(value)
       end
 
     end
