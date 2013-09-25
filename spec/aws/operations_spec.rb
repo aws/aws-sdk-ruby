@@ -94,7 +94,7 @@ module Aws
     end
 
     def response_assertions(f, resp)
-      expect(resp.data.to_h).to eq(f.data.to_h)
+      expect(resp.data.to_hash).to eq(f.data.to_h)
     end
 
     glob = File.expand_path(File.join(

@@ -39,7 +39,6 @@ module Aws
       else obj
       end
     end
-    alias to_h to_hash
 
     # @param [Array<Symbol>] properties
     # @return [Structure]
