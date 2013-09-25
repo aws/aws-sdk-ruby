@@ -161,7 +161,7 @@ module Aws
         case version
           when 'v4'         then 'Aws::Plugins::SignatureV4'
           when 'v3'         then 'Aws::Plugins::SignatureV4'
-          when 'v3https'    then 'Aws::Plugins::SignatureV3Https'
+          when 'v3https'    then 'Aws::Plugins::SignatureV3'
           when 'v2'         then 'Aws::Plugins::SignatureV2'
           when 'cloudfront' then 'Aws::Plugins::SignatureV4'
           when 's3'         then 'Aws::Plugins::S3Signer'

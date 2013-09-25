@@ -13,11 +13,7 @@
 
 module Aws
   module Signers
-    class Version2
-
-      def self.sign(context)
-        new(context.config.credentials).sign(context.http_request)
-      end
+    class V2
 
       def initialize(credentials)
         @credentials = credentials

@@ -17,7 +17,8 @@ require 'openssl'
 
 module Aws
   module Signers
-    class Version4
+    class V4
+
       # @param [Credentials] credentials
       # @param [String] service_name The name used by the service in
       #   signing signature version 4 requests.  This is generally
@@ -128,15 +129,6 @@ module Aws
 
       def hexhmac(key, value)
         OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha256'), key, value)
-      end
-
-      # @param [RequestContext] context
-      def self.sign(context)
-        new(
-          context.config.credentials,
-          context.config.signing_name,
-          context.config.region
-        ).sign(context.http_request)
       end
 
       private

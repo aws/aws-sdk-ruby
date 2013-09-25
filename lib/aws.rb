@@ -41,7 +41,10 @@ module Aws
     autoload :RestProtocol, 'aws/plugins/rest_protocol'
     autoload :S3BucketDns, 'aws/plugins/s3_bucket_dns'
     autoload :S3RegionalEndpoint, 'aws/plugins/s3_regional_endpoint'
-    autoload :Signer, 'aws/plugins/signer'
+    autoload :S3Signer, 'aws/plugins/s3_signer'
+    autoload :SignatureV4, 'aws/plugins/signature_v4'
+    autoload :SignatureV3, 'aws/plugins/signature_v3'
+    autoload :SignatureV2, 'aws/plugins/signature_v2'
     autoload :XmlSerializer, 'aws/plugins/xml_serializer'
   end
 
@@ -56,9 +59,9 @@ module Aws
   # @api private
   module Signers
     autoload :S3, 'aws/signers/s3'
-    autoload :Version2, 'aws/signers/version_2'
-    autoload :Version3, 'aws/signers/version_3'
-    autoload :Version4, 'aws/signers/version_4'
+    autoload :V2, 'aws/signers/v2'
+    autoload :V3, 'aws/signers/v3'
+    autoload :V4, 'aws/signers/v4'
   end
 
   # @api private

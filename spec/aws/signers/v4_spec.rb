@@ -15,14 +15,14 @@ require 'spec_helper'
 
 module Aws
   module Signers
-    describe Version4 do
+    describe V4 do
 
       let(:credentials) { Credentials.new('akid', 'secret') }
       let(:datetime) { '20120101T10:11:12Z' }
       let(:service_name) { 'SERVICE' }
       let(:region) { 'REGION' }
       let(:endpoint) { URI.parse('https://domain.com') }
-      let(:signer) { Version4.new(credentials, service_name, region) }
+      let(:signer) { V4.new(credentials, service_name, region) }
       let(:sign) { signer.sign(http_request) }
       let(:http_request) do
         req = Seahorse::Client::Http::Request.new(endpoint: endpoint)
