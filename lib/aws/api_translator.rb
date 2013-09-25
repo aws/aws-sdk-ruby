@@ -94,12 +94,6 @@ module Aws
     end
 
     def translated
-
-      if @global_endpoint
-        @properties['plugins'].delete('Aws::Plugins::RegionalEndpoint') if
-        @properties['endpoint'] = @global_endpoint
-      end
-
       api = Seahorse::Model::Api.from_hash(@properties)
       api.metadata = Hash[api.metadata.sort]
       @operations.values.each do |src|
@@ -170,11 +164,11 @@ module Aws
     end
 
     def set_global_endpoint(endpoint)
-      @global_endpoint = endpoint
+      @properties['endpoint'] = endpoint
     end
 
     def set_endpoint_prefix(prefix)
-      @properties['endpoint'] = "#{prefix}.%s.amazonaws.com"
+      @properties['endpoint'] ||= "#{prefix}.%s.amazonaws.com"
     end
 
     def set_operations(operations)

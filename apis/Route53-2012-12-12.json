@@ -7,11 +7,12 @@
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::XmlSerializer",
-    "Aws::Plugins::SignatureV3Https"
+    "Aws::Plugins::SignatureV3"
   ],
   "operations": {
     "change_resource_record_sets": {

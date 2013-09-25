@@ -8,6 +8,7 @@
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
