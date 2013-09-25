@@ -39,7 +39,7 @@ module Seahorse
 
       def structure(rules, values, errors, context)
         # ensure the value is hash like
-        return unless hash_like?(values, errors, context)
+        return unless hash?(values, errors, context)
 
         # ensure required members are present
         rules.members.each do |member_name, member_shape|
@@ -80,7 +80,7 @@ module Seahorse
       end
 
       def map(rules, values, errors, context)
-        return unless hash_like?(values, errors, context)
+        return unless hash?(values, errors, context)
         values.each do |key, value|
           member(rules.keys, key, errors, "#{context} #{key.inspect} key")
           member(rules.members, value, errors, context + "[#{key.inspect}]")
@@ -128,8 +128,8 @@ module Seahorse
         end
       end
 
-      def hash_like?(value, errors, context)
-        if value.is_a?(Enumerable) && value.respond_to?(:[])
+      def hash?(value, errors, context)
+        if value.is_a?(Hash)
           true
         else
           errors << "expected #{context} to be a hash"

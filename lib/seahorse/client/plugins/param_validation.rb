@@ -14,11 +14,9 @@
 module Seahorse
   module Client
     module Plugins
-      class ParamValidation
+      class ParamValidation < Plugin
 
-        def add_options(config)
-          config.add_option(:validate_params, true)
-        end
+        option(:validate_params, true)
 
         def add_handlers(handlers, config)
           handlers.add(Handler, step: :validate) if config.validate_params

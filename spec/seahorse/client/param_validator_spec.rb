@@ -68,9 +68,8 @@ module Seahorse
           validate({ config: { settings: 'abc' }}, 'expected params[:config][:settings] to be a hash')
         end
 
-        it 'accepts hashes and objects that are hash-like' do
+        it 'accepts hashes' do
           validate({})
-          validate(Struct.new(:config).new)
         end
 
         it 'raises an error when a required paramter is missing' do

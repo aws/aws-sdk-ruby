@@ -20,6 +20,7 @@ module Seahorse
     autoload :Handler, 'seahorse/client/handler'
     autoload :HandlerBuilder, 'seahorse/client/handler_builder'
     autoload :HandlerList, 'seahorse/client/handler_list'
+    autoload :ParamConverter, 'seahorse/client/param_converter'
     autoload :ParamValidator, 'seahorse/client/param_validator'
     autoload :Plugin, 'seahorse/client/plugin'
     autoload :PluginList, 'seahorse/client/plugin_list'
@@ -51,6 +52,7 @@ module Seahorse
       autoload :Logging, 'seahorse/client/plugins/logging'
       autoload :NetHttp, 'seahorse/client/plugins/net_http'
       autoload :OperationMethods, 'seahorse/client/plugins/operation_methods'
+      autoload :ParamConversion, 'seahorse/client/plugins/param_conversion'
       autoload :ParamValidation, 'seahorse/client/plugins/param_validation'
     end
 
