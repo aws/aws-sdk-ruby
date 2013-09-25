@@ -5,7 +5,6 @@
     "result_wrapped": true,
     "service_abbreviation": "Amazon SQS",
     "service_full_name": "Amazon Simple Queue Service",
-    "signer": "Version4",
     "xmlnamespace": "http://queue.amazonaws.com/doc/2012-11-05/"
   },
   "plugins": [
@@ -15,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::QuerySerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "add_permission": {

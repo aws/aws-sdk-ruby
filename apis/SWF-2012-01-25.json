@@ -5,8 +5,7 @@
     "json_target_prefix": "SimpleWorkflowService",
     "json_version": 1.0,
     "service_abbreviation": "Amazon SWF",
-    "service_full_name": "Amazon Simple Workflow Service",
-    "signer": "Version3"
+    "service_full_name": "Amazon Simple Workflow Service"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -15,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::JsonSerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "count_closed_workflow_executions": {

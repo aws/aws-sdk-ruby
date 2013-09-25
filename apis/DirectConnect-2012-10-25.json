@@ -5,7 +5,6 @@
     "json_target_prefix": "OvertureService",
     "json_version": 1.1,
     "service_full_name": "AWS Direct Connect",
-    "signer": "Version4",
     "xmlnamespace": "http://directconnect.amazonaws.com/doc/2012-10-25/"
   },
   "plugins": [
@@ -15,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::JsonSerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "create_connection": {

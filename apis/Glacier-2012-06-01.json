@@ -3,8 +3,7 @@
   "endpoint": "glacier.%s.amazonaws.com",
   "metadata": {
     "checksum_format": "sha256",
-    "service_full_name": "Amazon Glacier",
-    "signer": "Version4"
+    "service_full_name": "Amazon Glacier"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -13,7 +12,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::JsonSerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "abort_multipart_upload": {

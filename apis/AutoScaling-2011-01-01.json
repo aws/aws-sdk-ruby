@@ -3,8 +3,7 @@
   "endpoint": "autoscaling.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
-    "service_full_name": "Auto Scaling",
-    "signer": "Version4"
+    "service_full_name": "Auto Scaling"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -13,7 +12,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::QuerySerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "create_auto_scaling_group": {

@@ -5,7 +5,6 @@
     "result_wrapped": true,
     "service_abbreviation": "Amazon SNS",
     "service_full_name": "Amazon Simple Notification Service",
-    "signer": "Version4",
     "xmlnamespace": "http://sns.amazonaws.com/doc/2010-03-31/"
   },
   "plugins": [
@@ -15,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::QuerySerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "add_permission": {

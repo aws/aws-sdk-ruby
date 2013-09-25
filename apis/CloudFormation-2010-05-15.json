@@ -3,8 +3,7 @@
   "endpoint": "cloudformation.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
-    "service_full_name": "AWS CloudFormation",
-    "signer": "Version4"
+    "service_full_name": "AWS CloudFormation"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -13,7 +12,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::QuerySerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "cancel_update_stack": {

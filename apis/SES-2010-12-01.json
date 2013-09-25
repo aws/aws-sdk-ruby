@@ -5,7 +5,6 @@
     "result_wrapped": true,
     "service_abbreviation": "Amazon SES",
     "service_full_name": "Amazon Simple Email Service",
-    "signer": "Version4",
     "signing_name": "ses",
     "xmlnamespace": "http://ses.amazonaws.com/doc/2010-12-01/"
   },
@@ -16,7 +15,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::QuerySerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "delete_identity": {

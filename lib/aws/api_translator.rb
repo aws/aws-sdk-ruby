@@ -152,22 +152,21 @@ module Aws
         when /json/ then 'Aws::Plugins::JsonSerializer'
         when /xml/ then 'Aws::Plugins::XmlSerializer'
         end if type
-      plugins << 'Aws::Plugins::Signer'
     end
 
     def set_signature_version(version)
       return unless version
-      signer = case version
-      when 'v4' then 'Version4'
-      when 'v3' then 'Version3'
-      when 'v3https' then 'Version3Https'
-      when 'cloudfront' then 'CloudFront'
-      when 's3' then 'S3'
-      when 'v2' then 'Version2'
-      else raise "unhandled signer version `#{version}'"
-      end
-      @properties['metadata'] ||= {}
-      @properties['metadata']['signer'] = signer
+      @properties['plugins'] ||= []
+      @properties['plugins'] <<
+        case version
+          when 'v4'         then 'Aws::Plugins::SignatureV4'
+          when 'v3'         then 'Aws::Plugins::SignatureV4'
+          when 'v3https'    then 'Aws::Plugins::SignatureV3Https'
+          when 'v2'         then 'Aws::Plugins::SignatureV2'
+          when 'cloudfront' then 'Aws::Plugins::SignatureV4'
+          when 's3'         then 'Aws::Plugins::S3Signer'
+          else raise "unhandled signer version `#{version}'"
+        end
     end
 
     def set_global_endpoint(endpoint)

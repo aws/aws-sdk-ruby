@@ -6,7 +6,6 @@
     "json_version": 1.0,
     "service_abbreviation": "DynamoDB",
     "service_full_name": "Amazon DynamoDB",
-    "signer": "Version4",
     "xmlnamespace": "http://dynamodb.amazonaws.com/doc/2011-12-05/"
   },
   "plugins": [
@@ -16,7 +15,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::JsonSerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "batch_get_item": {

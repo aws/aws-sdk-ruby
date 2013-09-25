@@ -5,7 +5,6 @@
     "json_target_prefix": "DataPipeline",
     "json_version": 1.1,
     "service_full_name": "AWS Data Pipeline",
-    "signer": "Version4",
     "xmlnamespace": "http://datapipeline.amazonaws.com/doc/2012-10-29/"
   },
   "plugins": [
@@ -15,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::JsonSerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "activate_pipeline": {

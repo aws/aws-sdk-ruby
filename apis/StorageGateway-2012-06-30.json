@@ -4,8 +4,7 @@
   "metadata": {
     "json_target_prefix": "StorageGateway_20120630",
     "json_version": 1.1,
-    "service_full_name": "AWS Storage Gateway",
-    "signer": "Version4"
+    "service_full_name": "AWS Storage Gateway"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -14,7 +13,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::JsonSerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "activate_gateway": {

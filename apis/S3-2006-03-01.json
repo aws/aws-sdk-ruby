@@ -4,8 +4,7 @@
   "metadata": {
     "checksum_format": "md5",
     "service_abbreviation": "Amazon S3",
-    "service_full_name": "Amazon Simple Storage Service",
-    "signer": "S3"
+    "service_full_name": "Amazon Simple Storage Service"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -13,7 +12,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::XmlSerializer",
-    "Aws::Plugins::Signer",
+    "Aws::Plugins::S3Signer",
     "Aws::Plugins::S3BucketDns",
     "Aws::Plugins::S3RegionalEndpoint"
   ],

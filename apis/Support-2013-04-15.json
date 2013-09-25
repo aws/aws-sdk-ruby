@@ -5,7 +5,6 @@
     "json_target_prefix": "AWSSupport_20130415",
     "json_version": "1.1",
     "service_full_name": "AWS Support",
-    "signer": "Version4",
     "xmlnamespace": "http://support.amazonaws.com/doc/2013-04-15/"
   },
   "plugins": [
@@ -15,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::JsonSerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "add_communication_to_case": {

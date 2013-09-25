@@ -4,7 +4,6 @@
   "metadata": {
     "result_wrapped": true,
     "service_full_name": "AWS Import/Export",
-    "signer": "Version2",
     "xmlnamespace": "http://importexport.amazonaws.com/doc/2010-06-01/"
   },
   "plugins": [
@@ -13,7 +12,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::QuerySerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV2"
   ],
   "operations": {
     "cancel_job": {

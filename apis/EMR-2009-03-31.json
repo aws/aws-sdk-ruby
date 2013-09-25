@@ -5,8 +5,7 @@
     "json_target_prefix": "ElasticMapReduce",
     "json_version": 1.1,
     "service_abbreviation": "Amazon EMR",
-    "service_full_name": "Amazon Elastic MapReduce",
-    "signer": "Version4"
+    "service_full_name": "Amazon Elastic MapReduce"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -15,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::JsonSerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "add_instance_groups": {

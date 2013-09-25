@@ -1,11 +1,11 @@
 {
-  "version": "2013-06-15",
+  "version": "2013-08-15",
   "endpoint": "ec2.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": false,
     "service_abbreviation": "Amazon EC2",
     "service_full_name": "Amazon Elastic Compute Cloud",
-    "xmlnamespace": "http://ec2.amazonaws.com/doc/2013-06-15"
+    "xmlnamespace": "http://ec2.amazonaws.com/doc/2013-08-15"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -7017,6 +7017,10 @@
                   "type": "iso8601_timestamp",
                   "serialized_name": "start"
                 },
+                "end": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "end"
+                },
                 "duration": {
                   "type": "integer",
                   "serialized_name": "duration"
@@ -7235,6 +7239,143 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "describe_reserved_instances_modifications": {
+      "name": "DescribeReservedInstancesModifications",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "reserved_instances_modification_ids": {
+            "type": "flat_list",
+            "serialized_name": "ReservedInstancesModificationIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "ReservedInstancesModificationId"
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
+          },
+          "filters": {
+            "type": "flat_list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "values": {
+                  "type": "flat_list",
+                  "serialized_name": "Values",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "reserved_instances_modifications": {
+            "type": "list",
+            "serialized_name": "reservedInstancesModificationsSet",
+            "members": {
+              "type": "structure",
+              "serialized_name": "item",
+              "members": {
+                "reserved_instances_modification_id": {
+                  "type": "string",
+                  "serialized_name": "reservedInstancesModificationId"
+                },
+                "reserved_instances_ids": {
+                  "type": "list",
+                  "serialized_name": "reservedInstancesSet",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "item",
+                    "members": {
+                      "reserved_instances_id": {
+                        "type": "string",
+                        "serialized_name": "reservedInstancesId"
+                      }
+                    }
+                  }
+                },
+                "modification_results": {
+                  "type": "list",
+                  "serialized_name": "modificationResultSet",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "item",
+                    "members": {
+                      "reserved_instances_id": {
+                        "type": "string",
+                        "serialized_name": "reservedInstancesId"
+                      },
+                      "target_configuration": {
+                        "type": "structure",
+                        "serialized_name": "targetConfiguration",
+                        "members": {
+                          "availability_zone": {
+                            "type": "string",
+                            "serialized_name": "availabilityZone"
+                          },
+                          "platform": {
+                            "type": "string",
+                            "serialized_name": "platform"
+                          },
+                          "instance_count": {
+                            "type": "integer",
+                            "serialized_name": "instanceCount"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "create_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "createDate"
+                },
+                "update_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "updateDate"
+                },
+                "effective_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "effectiveDate"
+                },
+                "status": {
+                  "type": "string",
+                  "serialized_name": "status"
+                },
+                "status_message": {
+                  "type": "string",
+                  "serialized_name": "statusMessage"
+                },
+                "client_token": {
+                  "type": "string",
+                  "serialized_name": "clientToken"
+                }
+              }
+            }
+          },
+          "next_token": {
+            "type": "string",
+            "serialized_name": "nextToken"
           }
         }
       }
@@ -8433,6 +8574,10 @@
                           "secondary_private_ip_address_count": {
                             "type": "integer",
                             "serialized_name": "secondaryPrivateIpAddressCount"
+                          },
+                          "associate_public_ip_address": {
+                            "type": "boolean",
+                            "serialized_name": "associatePublicIpAddress"
                           }
                         }
                       }
@@ -10906,6 +11051,61 @@
         }
       }
     },
+    "modify_reserved_instances": {
+      "name": "ModifyReservedInstances",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "client_token": {
+            "type": "string",
+            "serialized_name": "ClientToken"
+          },
+          "reserved_instances_ids": {
+            "type": "flat_list",
+            "required": true,
+            "serialized_name": "ReservedInstancesIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "ReservedInstancesId"
+            }
+          },
+          "target_configurations": {
+            "type": "flat_list",
+            "required": true,
+            "serialized_name": "TargetConfigurations",
+            "members": {
+              "type": "structure",
+              "serialized_name": "ReservedInstancesConfigurationSetItemType",
+              "members": {
+                "availability_zone": {
+                  "type": "string",
+                  "serialized_name": "AvailabilityZone"
+                },
+                "platform": {
+                  "type": "string",
+                  "serialized_name": "Platform"
+                },
+                "instance_count": {
+                  "type": "integer",
+                  "serialized_name": "InstanceCount"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "reserved_instances_modification_id": {
+            "type": "string",
+            "serialized_name": "reservedInstancesModificationId"
+          }
+        }
+      }
+    },
     "modify_snapshot_attribute": {
       "name": "ModifySnapshotAttribute",
       "http_method": "POST",
@@ -11752,6 +11952,10 @@
                     "secondary_private_ip_address_count": {
                       "type": "integer",
                       "serialized_name": "SecondaryPrivateIpAddressCount"
+                    },
+                    "associate_public_ip_address": {
+                      "type": "boolean",
+                      "serialized_name": "AssociatePublicIpAddress"
                     }
                   }
                 }
@@ -12076,6 +12280,10 @@
                           "secondary_private_ip_address_count": {
                             "type": "integer",
                             "serialized_name": "secondaryPrivateIpAddressCount"
+                          },
+                          "associate_public_ip_address": {
+                            "type": "boolean",
+                            "serialized_name": "associatePublicIpAddress"
                           }
                         }
                       }
@@ -12712,6 +12920,10 @@
                 "secondary_private_ip_address_count": {
                   "type": "integer",
                   "serialized_name": "SecondaryPrivateIpAddressCount"
+                },
+                "associate_public_ip_address": {
+                  "type": "boolean",
+                  "serialized_name": "AssociatePublicIpAddress"
                 }
               }
             }

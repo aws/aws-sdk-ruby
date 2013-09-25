@@ -5,7 +5,6 @@
     "result_wrapped": true,
     "service_abbreviation": "Amazon RDS",
     "service_full_name": "Amazon Relational Database Service",
-    "signer": "Version2",
     "xmlnamespace": "http://rds.amazonaws.com/doc/2013-01-10/"
   },
   "plugins": [
@@ -15,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::QuerySerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV2"
   ],
   "operations": {
     "add_source_identifier_to_subscription": {

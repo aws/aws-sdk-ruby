@@ -5,7 +5,6 @@
     "result_wrapped": true,
     "service_abbreviation": "Elastic Beanstalk",
     "service_full_name": "AWS Elastic Beanstalk",
-    "signer": "Version4",
     "xmlnamespace": "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"
   },
   "plugins": [
@@ -15,7 +14,7 @@
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
     "Aws::Plugins::QuerySerializer",
-    "Aws::Plugins::Signer"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "check_dns_availability": {

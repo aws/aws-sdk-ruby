@@ -1,10 +1,10 @@
 {
-  "version": "2012-11-15",
+  "version": "2013-06-15",
   "endpoint": "elasticache.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
     "service_full_name": "Amazon ElastiCache",
-    "xmlnamespace": "http://elasticache.amazonaws.com/doc/2012-11-15/"
+    "xmlnamespace": "http://elasticache.amazonaws.com/doc/2013-06-15/"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
@@ -101,6 +101,10 @@
             "required": true,
             "serialized_name": "CacheClusterId"
           },
+          "replication_group_id": {
+            "type": "string",
+            "serialized_name": "ReplicationGroupId"
+          },
           "num_cache_nodes": {
             "type": "integer",
             "required": true,
@@ -142,6 +146,14 @@
             "members": {
               "type": "string",
               "serialized_name": "SecurityGroupId"
+            }
+          },
+          "snapshot_arns": {
+            "type": "list",
+            "serialized_name": "SnapshotArns",
+            "members": {
+              "type": "string",
+              "serialized_name": "SnapshotArn"
             }
           },
           "preferred_availability_zone": {
@@ -346,6 +358,10 @@
                     "parameter_group_status": {
                       "type": "string",
                       "serialized_name": "ParameterGroupStatus"
+                    },
+                    "source_cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "SourceCacheNodeId"
                     }
                   }
                 }
@@ -370,6 +386,10 @@
                     }
                   }
                 }
+              },
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
               }
             }
           }
@@ -577,6 +597,147 @@
         }
       }
     },
+    "create_replication_group": {
+      "name": "CreateReplicationGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "replication_group_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ReplicationGroupId"
+          },
+          "primary_cluster_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "PrimaryClusterId"
+          },
+          "replication_group_description": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ReplicationGroupDescription"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "replication_group": {
+            "type": "structure",
+            "serialized_name": "ReplicationGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "primary_cluster_id": {
+                    "type": "string",
+                    "serialized_name": "PrimaryClusterId"
+                  }
+                }
+              },
+              "member_clusters": {
+                "type": "list",
+                "serialized_name": "MemberClusters",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "ClusterId"
+                }
+              },
+              "node_groups": {
+                "type": "list",
+                "serialized_name": "NodeGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "NodeGroup",
+                  "members": {
+                    "node_group_id": {
+                      "type": "string",
+                      "serialized_name": "NodeGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "primary_endpoint": {
+                      "type": "structure",
+                      "serialized_name": "PrimaryEndpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "node_group_members": {
+                      "type": "list",
+                      "serialized_name": "NodeGroupMembers",
+                      "members": {
+                        "type": "structure",
+                        "serialized_name": "NodeGroupMember",
+                        "members": {
+                          "cache_cluster_id": {
+                            "type": "string",
+                            "serialized_name": "CacheClusterId"
+                          },
+                          "cache_node_id": {
+                            "type": "string",
+                            "serialized_name": "CacheNodeId"
+                          },
+                          "read_endpoint": {
+                            "type": "structure",
+                            "serialized_name": "ReadEndpoint",
+                            "members": {
+                              "address": {
+                                "type": "string",
+                                "serialized_name": "Address"
+                              },
+                              "port": {
+                                "type": "integer",
+                                "serialized_name": "Port"
+                              }
+                            }
+                          },
+                          "preferred_availability_zone": {
+                            "type": "string",
+                            "serialized_name": "PreferredAvailabilityZone"
+                          },
+                          "current_role": {
+                            "type": "string",
+                            "serialized_name": "CurrentRole"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "delete_cache_cluster": {
       "name": "DeleteCacheCluster",
       "http_method": "POST",
@@ -771,6 +932,10 @@
                     "parameter_group_status": {
                       "type": "string",
                       "serialized_name": "ParameterGroupStatus"
+                    },
+                    "source_cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "SourceCacheNodeId"
                     }
                   }
                 }
@@ -795,6 +960,10 @@
                     }
                   }
                 }
+              },
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
               }
             }
           }
@@ -842,6 +1011,137 @@
             "type": "string",
             "required": true,
             "serialized_name": "CacheSubnetGroupName"
+          }
+        }
+      }
+    },
+    "delete_replication_group": {
+      "name": "DeleteReplicationGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "replication_group_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ReplicationGroupId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "replication_group": {
+            "type": "structure",
+            "serialized_name": "ReplicationGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "primary_cluster_id": {
+                    "type": "string",
+                    "serialized_name": "PrimaryClusterId"
+                  }
+                }
+              },
+              "member_clusters": {
+                "type": "list",
+                "serialized_name": "MemberClusters",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "ClusterId"
+                }
+              },
+              "node_groups": {
+                "type": "list",
+                "serialized_name": "NodeGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "NodeGroup",
+                  "members": {
+                    "node_group_id": {
+                      "type": "string",
+                      "serialized_name": "NodeGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "primary_endpoint": {
+                      "type": "structure",
+                      "serialized_name": "PrimaryEndpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "node_group_members": {
+                      "type": "list",
+                      "serialized_name": "NodeGroupMembers",
+                      "members": {
+                        "type": "structure",
+                        "serialized_name": "NodeGroupMember",
+                        "members": {
+                          "cache_cluster_id": {
+                            "type": "string",
+                            "serialized_name": "CacheClusterId"
+                          },
+                          "cache_node_id": {
+                            "type": "string",
+                            "serialized_name": "CacheNodeId"
+                          },
+                          "read_endpoint": {
+                            "type": "structure",
+                            "serialized_name": "ReadEndpoint",
+                            "members": {
+                              "address": {
+                                "type": "string",
+                                "serialized_name": "Address"
+                              },
+                              "port": {
+                                "type": "integer",
+                                "serialized_name": "Port"
+                              }
+                            }
+                          },
+                          "preferred_availability_zone": {
+                            "type": "string",
+                            "serialized_name": "PreferredAvailabilityZone"
+                          },
+                          "current_role": {
+                            "type": "string",
+                            "serialized_name": "CurrentRole"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1058,6 +1358,10 @@
                       "parameter_group_status": {
                         "type": "string",
                         "serialized_name": "ParameterGroupStatus"
+                      },
+                      "source_cache_node_id": {
+                        "type": "string",
+                        "serialized_name": "SourceCacheNodeId"
                       }
                     }
                   }
@@ -1082,6 +1386,10 @@
                       }
                     }
                   }
+                },
+                "replication_group_id": {
+                  "type": "string",
+                  "serialized_name": "ReplicationGroupId"
                 }
               }
             }
@@ -1741,6 +2049,152 @@
         }
       }
     },
+    "describe_replication_groups": {
+      "name": "DescribeReplicationGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "replication_group_id": {
+            "type": "string",
+            "serialized_name": "ReplicationGroupId"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "replication_groups": {
+            "type": "list",
+            "serialized_name": "ReplicationGroups",
+            "members": {
+              "type": "structure",
+              "serialized_name": "ReplicationGroup",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "replication_group_id": {
+                  "type": "string",
+                  "serialized_name": "ReplicationGroupId"
+                },
+                "description": {
+                  "type": "string",
+                  "serialized_name": "Description"
+                },
+                "status": {
+                  "type": "string",
+                  "serialized_name": "Status"
+                },
+                "pending_modified_values": {
+                  "type": "structure",
+                  "serialized_name": "PendingModifiedValues",
+                  "members": {
+                    "primary_cluster_id": {
+                      "type": "string",
+                      "serialized_name": "PrimaryClusterId"
+                    }
+                  }
+                },
+                "member_clusters": {
+                  "type": "list",
+                  "serialized_name": "MemberClusters",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "ClusterId"
+                  }
+                },
+                "node_groups": {
+                  "type": "list",
+                  "serialized_name": "NodeGroups",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "NodeGroup",
+                    "members": {
+                      "node_group_id": {
+                        "type": "string",
+                        "serialized_name": "NodeGroupId"
+                      },
+                      "status": {
+                        "type": "string",
+                        "serialized_name": "Status"
+                      },
+                      "primary_endpoint": {
+                        "type": "structure",
+                        "serialized_name": "PrimaryEndpoint",
+                        "members": {
+                          "address": {
+                            "type": "string",
+                            "serialized_name": "Address"
+                          },
+                          "port": {
+                            "type": "integer",
+                            "serialized_name": "Port"
+                          }
+                        }
+                      },
+                      "node_group_members": {
+                        "type": "list",
+                        "serialized_name": "NodeGroupMembers",
+                        "members": {
+                          "type": "structure",
+                          "serialized_name": "NodeGroupMember",
+                          "members": {
+                            "cache_cluster_id": {
+                              "type": "string",
+                              "serialized_name": "CacheClusterId"
+                            },
+                            "cache_node_id": {
+                              "type": "string",
+                              "serialized_name": "CacheNodeId"
+                            },
+                            "read_endpoint": {
+                              "type": "structure",
+                              "serialized_name": "ReadEndpoint",
+                              "members": {
+                                "address": {
+                                  "type": "string",
+                                  "serialized_name": "Address"
+                                },
+                                "port": {
+                                  "type": "integer",
+                                  "serialized_name": "Port"
+                                }
+                              }
+                            },
+                            "preferred_availability_zone": {
+                              "type": "string",
+                              "serialized_name": "PreferredAvailabilityZone"
+                            },
+                            "current_role": {
+                              "type": "string",
+                              "serialized_name": "CurrentRole"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "describe_reserved_cache_nodes": {
       "name": "DescribeReservedCacheNodes",
       "http_method": "POST",
@@ -2229,6 +2683,10 @@
                     "parameter_group_status": {
                       "type": "string",
                       "serialized_name": "ParameterGroupStatus"
+                    },
+                    "source_cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "SourceCacheNodeId"
                     }
                   }
                 }
@@ -2253,6 +2711,10 @@
                     }
                   }
                 }
+              },
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
               }
             }
           }
@@ -2371,6 +2833,189 @@
                         "name": {
                           "type": "string",
                           "serialized_name": "Name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "modify_replication_group": {
+      "name": "ModifyReplicationGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "replication_group_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ReplicationGroupId"
+          },
+          "replication_group_description": {
+            "type": "string",
+            "serialized_name": "ReplicationGroupDescription"
+          },
+          "cache_security_group_names": {
+            "type": "list",
+            "serialized_name": "CacheSecurityGroupNames",
+            "members": {
+              "type": "string",
+              "serialized_name": "CacheSecurityGroupName"
+            }
+          },
+          "security_group_ids": {
+            "type": "list",
+            "serialized_name": "SecurityGroupIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SecurityGroupId"
+            }
+          },
+          "preferred_maintenance_window": {
+            "type": "string",
+            "serialized_name": "PreferredMaintenanceWindow"
+          },
+          "notification_topic_arn": {
+            "type": "string",
+            "serialized_name": "NotificationTopicArn"
+          },
+          "cache_parameter_group_name": {
+            "type": "string",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "notification_topic_status": {
+            "type": "string",
+            "serialized_name": "NotificationTopicStatus"
+          },
+          "apply_immediately": {
+            "type": "boolean",
+            "serialized_name": "ApplyImmediately"
+          },
+          "engine_version": {
+            "type": "string",
+            "serialized_name": "EngineVersion"
+          },
+          "auto_minor_version_upgrade": {
+            "type": "boolean",
+            "serialized_name": "AutoMinorVersionUpgrade"
+          },
+          "primary_cluster_id": {
+            "type": "string",
+            "serialized_name": "PrimaryClusterId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "replication_group": {
+            "type": "structure",
+            "serialized_name": "ReplicationGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "primary_cluster_id": {
+                    "type": "string",
+                    "serialized_name": "PrimaryClusterId"
+                  }
+                }
+              },
+              "member_clusters": {
+                "type": "list",
+                "serialized_name": "MemberClusters",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "ClusterId"
+                }
+              },
+              "node_groups": {
+                "type": "list",
+                "serialized_name": "NodeGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "NodeGroup",
+                  "members": {
+                    "node_group_id": {
+                      "type": "string",
+                      "serialized_name": "NodeGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "primary_endpoint": {
+                      "type": "structure",
+                      "serialized_name": "PrimaryEndpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "node_group_members": {
+                      "type": "list",
+                      "serialized_name": "NodeGroupMembers",
+                      "members": {
+                        "type": "structure",
+                        "serialized_name": "NodeGroupMember",
+                        "members": {
+                          "cache_cluster_id": {
+                            "type": "string",
+                            "serialized_name": "CacheClusterId"
+                          },
+                          "cache_node_id": {
+                            "type": "string",
+                            "serialized_name": "CacheNodeId"
+                          },
+                          "read_endpoint": {
+                            "type": "structure",
+                            "serialized_name": "ReadEndpoint",
+                            "members": {
+                              "address": {
+                                "type": "string",
+                                "serialized_name": "Address"
+                              },
+                              "port": {
+                                "type": "integer",
+                                "serialized_name": "Port"
+                              }
+                            }
+                          },
+                          "preferred_availability_zone": {
+                            "type": "string",
+                            "serialized_name": "PreferredAvailabilityZone"
+                          },
+                          "current_role": {
+                            "type": "string",
+                            "serialized_name": "CurrentRole"
+                          }
                         }
                       }
                     }
@@ -2687,6 +3332,10 @@
                     "parameter_group_status": {
                       "type": "string",
                       "serialized_name": "ParameterGroupStatus"
+                    },
+                    "source_cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "SourceCacheNodeId"
                     }
                   }
                 }
@@ -2711,6 +3360,10 @@
                     }
                   }
                 }
+              },
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
               }
             }
           }
