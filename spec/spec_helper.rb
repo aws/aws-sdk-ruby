@@ -14,10 +14,7 @@
 require 'simplecov'
 require 'rspec'
 require 'aws-sdk-core'
-
 require 'seahorse'
-require 'multi_json'
-require 'yaml'
 
 # A helper :send_handler that does not send the request, it simply
 # returns an empty response.
@@ -32,34 +29,6 @@ class DummySendHandler < Seahorse::Client::Handler
     Seahorse::Client::Response.new(context: context).signal_complete
   end
 
-end
-
-class DummySendPlugin < Seahorse::Client::Plugin
-  option(:response_body) { '{}' }
-  handler DummySendHandler, step: :send
-end
-def fixture(name, raw = false)
-  @fixtures ||= {}
-  if !@fixtures[[name, raw]]
-    file = File.join(File.dirname(__FILE__), 'fixtures', name)
-    contents = File.read(file)
-    @fixtures[[name, raw]] = raw ? contents : MultiJson.load(contents)
-  end
-
-  @fixtures[[name, raw]]
-end
-
-def load_api(api)
-  Aws::ApiTranslator.translate(fixture("api/#{api}.json"))
-end
-
-def new_client_class(api)
-  api = load_api(api) if String === api
-  Seahorse::Client::Base.define(api: api, plugins: [DummySendPlugin])
-end
-
-def new_client(api, opts = {})
-  new_client_class(api).new(opts)
 end
 
 def call_handler(klass, opts = {}, &block)
