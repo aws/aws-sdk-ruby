@@ -36,6 +36,13 @@ module Seahorse
         # @return [IO]
         attr_accessor :body
 
+        # @return [String]
+        def body_contents
+          contents = body.read
+          body.rewind
+          contents
+        end
+
       end
     end
   end

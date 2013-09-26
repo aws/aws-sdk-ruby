@@ -74,6 +74,16 @@ module Seahorse
 
         end
 
+        describe '#body_contents' do
+
+          it 'returns the body as a string' do
+            response = Response.new
+            response.body = StringIO.new('abc')
+            expect(response.body_contents).to eq(response.body.read)
+          end
+
+        end
+
       end
     end
   end
