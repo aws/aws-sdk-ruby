@@ -45,7 +45,7 @@ module Aws
       unless input.raw_payload? || input.payload_member.empty?
         if input.payload
           rules = input.payload_member
-          params = context.params[input.payload]
+          params = context.params[input.payload] || {}
         else
           rules = input
           params = context.params

@@ -10,12 +10,3 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-
-
-When(/^I ask for foo$/) do
-  @foo = 'bar'
-end
-
-Then(/^foo should be "(.*?)"$/) do |value|
-  expect(@foo).to eq(value)
-end
