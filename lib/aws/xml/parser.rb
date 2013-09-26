@@ -116,7 +116,7 @@ module Aws
       end
 
       def flat?(shape)
-        !!shape.metadata['flattened']
+        FlatListShape === shape || FlatMapShape === shape
       end
 
     end

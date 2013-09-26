@@ -11,26 +11,27 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'set'
 require 'time'
 require 'digest/sha1'
 require 'openssl'
+require 'uri'
 
 module Aws
   module Signers
     class S3
 
-      SUB_RESOURCES = %w(
-        acl location logging notification partNumber policy
-        requestPayment torrent uploadId uploads versionId
-        versioning versions restore delete lifecycle tagging cors
-        website
-      )
+      SIGNED_QUERYSTRING_PARAMS = Set.new(%w(
 
-      QUERY_PARAMS = %w(
+        acl delete cors lifecycle location logging notification partNumber
+        policy requestPayment restore tagging torrent uploadId uploads
+        versionId versioning versions website
+
         response-content-type response-content-language
         response-expires response-cache-control
         response-content-disposition response-content-encoding
-      )
+
+      ))
 
       # @param [Credentials] credentials
       def initialize(credentials, params)
@@ -146,9 +147,7 @@ module Aws
 
         # lastly any sub resource querystring params need to be appened
         # in lexigraphical ordered joined by '&' and prefixed by '?'
-        params =
-          sub_resource_params(request) +
-          query_parameters_for_signature(request)
+        params = signed_querystring_params(request)
 
         unless params.empty?
           parts << '?'
@@ -158,12 +157,10 @@ module Aws
         parts.join
       end
 
-      def sub_resource_params(request)
-        params.select{|p| SUB_RESOURCES.include?(p.name) }
-      end
-
-      def query_parameters_for_signature(request)
-        params.select { |p| QUERY_PARAMS.include?(p.name) }
+      def signed_querystring_params(request)
+        request.querystring.to_s.split('&').select do |p|
+          SIGNED_QUERYSTRING_PARAMS.include?(p.split('=')[0])
+        end.map { |p| URI.decode(p) }
       end
 
     end

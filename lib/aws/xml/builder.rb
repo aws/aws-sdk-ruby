@@ -75,7 +75,7 @@ module Aws
       end
 
       def list(name, shape, values)
-        if shape.metadata['flattened']
+        if flat?(shape)
           values.each do |value|
             member(name, shape.members, value)
           end
@@ -144,6 +144,10 @@ module Aws
 
       def xml_attribute?(shape)
         !!shape.metadata['xmlattribute']
+      end
+
+      def flat?(shape)
+        FlatListShape === shape || FlatMapShape === shape
       end
 
     end

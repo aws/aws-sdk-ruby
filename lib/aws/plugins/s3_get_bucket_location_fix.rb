@@ -19,8 +19,7 @@ module Aws
 
         def call(context)
           @handler.call(context).on_complete do |response|
-            xml = response.http_response.body_contents
-            xml = MultiXml.parse(xml)
+            xml = MultiXml.parse(response.http_response.body_contents)
             response.data[:location_constraint] =
               xml['LocationConstraint']['__content__'].to_s
           end
