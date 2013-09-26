@@ -3,9 +3,10 @@
   "endpoint": "ec2.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": false,
-    "service_abbreviation": "Amazon EC2",
+    "xmlnamespace": "http://ec2.amazonaws.com/doc/2013-06-15",
     "service_full_name": "Amazon Elastic Compute Cloud",
-    "xmlnamespace": "http://ec2.amazonaws.com/doc/2013-06-15"
+    "service_abbreviation": "Amazon EC2",
+    "service_class_name": "EC2"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

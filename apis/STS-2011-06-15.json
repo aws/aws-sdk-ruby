@@ -3,9 +3,10 @@
   "endpoint": "sts.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
-    "service_abbreviation": "AWS STS",
+    "xmlnamespace": "https://sts.amazonaws.com/doc/2011-06-15/",
     "service_full_name": "AWS Security Token Service",
-    "xmlnamespace": "https://sts.amazonaws.com/doc/2011-06-15/"
+    "service_abbreviation": "AWS STS",
+    "service_class_name": "STS"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

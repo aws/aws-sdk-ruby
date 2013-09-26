@@ -6,7 +6,7 @@
     "xmlnamespace": "http://monitoring.amazonaws.com/doc/2010-08-01/",
     "service_full_name": "Amazon CloudWatch",
     "service_abbreviation": "CloudWatch",
-    "service_class_name": "CloudWatch"
+    "service_class_name": "MONITORING"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

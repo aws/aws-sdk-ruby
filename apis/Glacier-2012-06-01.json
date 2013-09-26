@@ -3,7 +3,8 @@
   "endpoint": "glacier.%s.amazonaws.com",
   "metadata": {
     "checksum_format": "sha256",
-    "service_full_name": "Amazon Glacier"
+    "service_full_name": "Amazon Glacier",
+    "service_class_name": "Glacier"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

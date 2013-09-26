@@ -2,8 +2,9 @@
   "version": "2012-05-05",
   "endpoint": "cloudfront.amazonaws.com",
   "metadata": {
+    "service_full_name": "Amazon CloudFront",
     "service_abbreviation": "CloudFront",
-    "service_full_name": "Amazon CloudFront"
+    "service_class_name": "CloudFront"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

@@ -3,8 +3,9 @@
   "endpoint": "sdb.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
+    "xmlnamespace": "http://sdb.amazonaws.com/doc/2009-04-15/",
     "service_full_name": "Amazon SimpleDB",
-    "xmlnamespace": "http://sdb.amazonaws.com/doc/2009-04-15/"
+    "service_class_name": "SDB"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

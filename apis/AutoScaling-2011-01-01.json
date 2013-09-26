@@ -3,7 +3,8 @@
   "endpoint": "autoscaling.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
-    "service_full_name": "Auto Scaling"
+    "service_full_name": "Auto Scaling",
+    "service_class_name": "AutoScaling"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

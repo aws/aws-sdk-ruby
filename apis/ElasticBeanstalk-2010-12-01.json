@@ -3,9 +3,10 @@
   "endpoint": "elasticbeanstalk.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
-    "service_abbreviation": "Elastic Beanstalk",
+    "xmlnamespace": "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/",
     "service_full_name": "AWS Elastic Beanstalk",
-    "xmlnamespace": "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"
+    "service_abbreviation": "Elastic Beanstalk",
+    "service_class_name": "ElasticBeanstalk"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

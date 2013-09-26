@@ -3,7 +3,8 @@
   "endpoint": "cloudsearch.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
-    "service_full_name": "Amazon CloudSearch"
+    "service_full_name": "Amazon CloudSearch",
+    "service_class_name": "CloudSearch"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

@@ -4,8 +4,9 @@
   "metadata": {
     "json_target_prefix": "OvertureService",
     "json_version": 1.1,
+    "xmlnamespace": "http://directconnect.amazonaws.com/doc/2012-10-25/",
     "service_full_name": "AWS Direct Connect",
-    "xmlnamespace": "http://directconnect.amazonaws.com/doc/2012-10-25/"
+    "service_class_name": "DirectConnect"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

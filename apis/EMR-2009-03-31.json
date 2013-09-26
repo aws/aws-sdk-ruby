@@ -4,8 +4,9 @@
   "metadata": {
     "json_target_prefix": "ElasticMapReduce",
     "json_version": 1.1,
+    "service_full_name": "Amazon Elastic MapReduce",
     "service_abbreviation": "Amazon EMR",
-    "service_full_name": "Amazon Elastic MapReduce"
+    "service_class_name": "EMR"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

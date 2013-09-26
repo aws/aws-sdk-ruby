@@ -3,8 +3,9 @@
   "endpoint": "redshift.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
+    "xmlnamespace": "http://redshift.amazonaws.com/doc/2012-12-01/",
     "service_full_name": "Amazon Redshift",
-    "xmlnamespace": "http://redshift.amazonaws.com/doc/2012-12-01/"
+    "service_class_name": "Redshift"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

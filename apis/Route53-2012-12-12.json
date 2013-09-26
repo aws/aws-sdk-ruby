@@ -2,8 +2,9 @@
   "version": "2012-12-12",
   "endpoint": "route53.amazonaws.com",
   "metadata": {
+    "service_full_name": "Amazon Route 53",
     "service_abbreviation": "Route 53",
-    "service_full_name": "Amazon Route 53"
+    "service_class_name": "Route53"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

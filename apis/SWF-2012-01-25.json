@@ -4,8 +4,9 @@
   "metadata": {
     "json_target_prefix": "SimpleWorkflowService",
     "json_version": 1.0,
+    "service_full_name": "Amazon Simple Workflow Service",
     "service_abbreviation": "Amazon SWF",
-    "service_full_name": "Amazon Simple Workflow Service"
+    "service_class_name": "SWF"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

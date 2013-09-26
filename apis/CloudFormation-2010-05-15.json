@@ -3,7 +3,8 @@
   "endpoint": "cloudformation.%s.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
-    "service_full_name": "AWS CloudFormation"
+    "service_full_name": "AWS CloudFormation",
+    "service_class_name": "CloudFormation"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

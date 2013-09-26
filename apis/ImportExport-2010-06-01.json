@@ -3,8 +3,9 @@
   "endpoint": "importexport.amazonaws.com",
   "metadata": {
     "result_wrapped": true,
+    "xmlnamespace": "http://importexport.amazonaws.com/doc/2010-06-01/",
     "service_full_name": "AWS Import/Export",
-    "xmlnamespace": "http://importexport.amazonaws.com/doc/2010-06-01/"
+    "service_class_name": "ImportExport"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",

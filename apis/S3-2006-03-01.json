@@ -3,8 +3,9 @@
   "endpoint": "s3.amazonaws.com",
   "metadata": {
     "checksum_format": "md5",
+    "service_full_name": "Amazon Simple Storage Service",
     "service_abbreviation": "Amazon S3",
-    "service_full_name": "Amazon Simple Storage Service"
+    "service_class_name": "S3"
   },
   "plugins": [
     "Aws::Plugins::GlobalConfiguration",
