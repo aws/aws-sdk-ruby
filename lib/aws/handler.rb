@@ -16,9 +16,19 @@ module Aws
 
     def call(context)
       build_request(context)
-      super(context).on_complete do |response|
+      response = @handler.call(context)
+
+      # handle 200 level responses
+      response.on_success do |response|
         parse_response(response)
       end
+
+      # handle 300-500 level responses
+      response.on_error do |response|
+        extract_error(response)
+      end
+
+      response
     end
 
     private
@@ -37,6 +47,10 @@ module Aws
     end
 
     def parser_class
+      raise NotImplementedError
+    end
+
+    def extract_error(response)
       raise NotImplementedError
     end
 

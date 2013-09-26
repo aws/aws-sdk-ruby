@@ -20,7 +20,7 @@ module Aws
 
         def call(context)
           build_request(context)
-          @handler.call(context).on_complete do |response|
+          @handler.call(context).on_success do |response|
             parse_response(response)
           end
         end

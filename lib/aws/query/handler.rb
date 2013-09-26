@@ -14,16 +14,7 @@
 
 module Aws
   module Query
-    class Handler < Seahorse::Client::Handler
-
-      def call(context)
-        build_request(context)
-        super(context).on_complete do |response|
-          parse_response(response)
-        end
-      end
-
-      private
+    class Handler < Aws::Handler
 
       def build_request(context)
         context.http_request.headers['Content-Type'] =
@@ -39,12 +30,8 @@ module Aws
         context.http_request.body = param_list.to_io
       end
 
-      def parse_response(response)
-        body = response.context.http_response.body
-        response.data = Xml::Parser.parse(
-          response.context.operation.output,
-          body.read)
-        body.rewind
+      def parser_class
+        Xml::Parser
       end
 
     end
