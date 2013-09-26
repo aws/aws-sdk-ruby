@@ -27,8 +27,8 @@ module Seahorse
         @http_request = @context.http_request
         @http_response = @context.http_response
         @complete_mutex = Mutex.new
-        @complete_callbacks = []
-        @completed = false
+        @callbacks = []
+        @complete = false
       end
 
       # @return [RequestContext]
@@ -44,16 +44,27 @@ module Seahorse
       # @return [Hash] the hash of data returned from the service
       attr_accessor :data
 
+      # @param [Range<Integer>] status_code_range (nil) When present, the
+      #   `callback` will be triggered only for responses 
       # @return [Response] Returns self.
-      def on_complete(&callback)
+      def on_complete(status_code_range = nil, &callback)
         @complete_mutex.synchronize do
-          if @completed
-            yield(self)
-          else
-            @complete_callbacks << Proc.new
-          end
+          @callbacks << [status_code_range, Proc.new]
+          trigger_callback(*@callbacks.last) if @complete
         end
         self
+      end
+
+      def on_success(&callback)
+        on_complete(200..299, &callback)
+      end
+
+      def on_redirect(&callback)
+        on_complete(300..399, &callback)
+      end
+
+      def on_error(&callback)
+        on_complete(400..599, &callback)
       end
 
       # This method should only be called by the HTTP handler that generates
@@ -61,16 +72,26 @@ module Seahorse
       # @return [Request] Returns `self`.
       def signal_complete
         @complete_mutex.synchronize do
-          @completed = true
-          @complete_callbacks.each { |callback| callback.call(self) }
+          @complete = true
+          trigger_callbacks
           self
         end
       end
 
       # @return [Boolean] Returns `true` if the full response has been received.
       def complete?
-        @complete_mutex.synchronize do
-          @completed
+        @complete_mutex.synchronize { @complete }
+      end
+
+      def trigger_callbacks
+        @callbacks.each do |range, callback|
+          trigger_callback(range, callback)
+        end
+      end
+
+      def trigger_callback(range, callback)
+        if range.nil? || range.include?(@http_response.status_code)
+          callback.call(self)
         end
       end
 

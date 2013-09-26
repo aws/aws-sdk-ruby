@@ -124,6 +124,18 @@ module Seahorse
           expect(callback_arg).to be(resp)
         end
 
+        it 'accepts an optional range that limits if it is triggered' do
+          a_triggered = false
+          b_triggered = false
+          resp = Response.new
+          resp.http_response.status_code = 404
+          resp.on_complete(400..499) { |resp| a_triggered = true }
+          resp.on_complete(200..299) { |resp| b_triggered = true }
+          resp.signal_complete
+          expect(a_triggered).to be(true)
+          expect(b_triggered).to be(false)
+        end
+
       end
 
       describe '#signal_complete' do
