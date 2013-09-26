@@ -12,18 +12,18 @@
 # language governing permissions and limitations under the License.
 
 module Aws
-  class Handler < Seahorse::Client::Handler
+  class ProtocolHandler < Seahorse::Client::Handler
 
     def call(context)
       build_request(context)
       response = @handler.call(context)
 
-      # handle 200 level responses
+      # handle ~200 level responses
       response.on_success do |response|
         parse_response(response)
       end
 
-      # handle 300-500 level responses
+      # handle ~400 and ~500 level responses
       response.on_error do |response|
         extract_error(response)
       end

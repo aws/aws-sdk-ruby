@@ -14,7 +14,7 @@
 
 module Aws
   module Query
-    class Handler < Aws::Handler
+    class Handler < ProtocolHandler
 
       def build_request(context)
         context.http_request.headers['Content-Type'] =

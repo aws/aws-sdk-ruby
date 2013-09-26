@@ -14,7 +14,7 @@
 
 module Aws
   module Xml
-    class Handler < Aws::Handler
+    class Handler < ProtocolHandler
 
       def populate_headers(context)
         context.http_request.headers['Content-Type'] = 'application/xml'

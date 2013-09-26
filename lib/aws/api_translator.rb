@@ -142,7 +142,7 @@ module Aws
     end
 
     def xml?
-      @properties['plugins'].include?('Aws::Plugins::XmlSerializer')
+      @properties['plugins'].include?('Aws::Plugins::XmlProtocol')
     end
 
     property :version, from: :api_version
@@ -165,9 +165,9 @@ module Aws
       plugins << 'Aws::Plugins::RestProtocol'
       plugins <<
         case type
-        when 'query' then 'Aws::Plugins::QuerySerializer'
-        when /json/ then 'Aws::Plugins::JsonSerializer'
-        when /xml/ then 'Aws::Plugins::XmlSerializer'
+        when 'query' then 'Aws::Plugins::QueryProtocol'
+        when /json/ then 'Aws::Plugins::JsonProtocol'
+        when /xml/ then 'Aws::Plugins::XmlProtocol'
         end if type
     end
 

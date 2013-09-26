@@ -13,10 +13,8 @@
 
 module Aws
   module Plugins
-    class XmlSerializer < Seahorse::Client::Plugin
-
-      handler(Xml::Handler, step: :build, priority: 50)
-
+    class QueryProtocol < Seahorse::Client::Plugin
+      handler(Query::Handler)
     end
   end
 end

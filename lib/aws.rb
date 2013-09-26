@@ -18,7 +18,7 @@ module Aws
   autoload :ApiTranslator, 'aws/api_translator'
   autoload :Credentials, 'aws/credentials'
   autoload :Errors, 'aws/errors'
-  autoload :Handler, 'aws/handler'
+  autoload :ProtocolHandler, 'aws/protocol_handler'
   autoload :Service, 'aws/service'
   autoload :Structure, 'aws/structure'
   autoload :Util, 'aws/util'
@@ -35,8 +35,8 @@ module Aws
     autoload :ContentLength, 'aws/plugins/content_length'
     autoload :Credentials, 'aws/plugins/credentials'
     autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
-    autoload :JsonSerializer, 'aws/plugins/json_serializer'
-    autoload :QuerySerializer, 'aws/plugins/query_serializer'
+    autoload :JsonProtocol, 'aws/plugins/json_protocol'
+    autoload :QueryProtocol, 'aws/plugins/query_protocol'
     autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
     autoload :RestProtocol, 'aws/plugins/rest_protocol'
     autoload :S3BucketDns, 'aws/plugins/s3_bucket_dns'
@@ -47,7 +47,7 @@ module Aws
     autoload :SignatureV4, 'aws/plugins/signature_v4'
     autoload :SignatureV3, 'aws/plugins/signature_v3'
     autoload :SignatureV2, 'aws/plugins/signature_v2'
-    autoload :XmlSerializer, 'aws/plugins/xml_serializer'
+    autoload :XmlProtocol, 'aws/plugins/xml_protocol'
   end
 
   # @api private

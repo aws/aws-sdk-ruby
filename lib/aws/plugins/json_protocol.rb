@@ -13,7 +13,7 @@
 
 module Aws
   module Plugins
-    class JsonSerializer < Seahorse::Client::Plugin
+    class JsonProtocol < Seahorse::Client::Plugin
       handler(Json::Handler)
     end
   end

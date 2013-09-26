@@ -13,7 +13,7 @@
 
 module Aws
   module Json
-    class Handler < Aws::Handler
+    class Handler < ProtocolHandler
 
       def populate_headers(context)
         metadata = context.config.api.metadata
