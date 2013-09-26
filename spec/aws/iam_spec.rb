@@ -11,23 +11,25 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'spec_helper'
 
 module Aws
-  module Plugins
-    class RegionalEndpoint < Seahorse::Client::Plugin
+  describe IAM do
 
-      # raised when region is not configured
-      MISSING_REGION = 'missing required configuration option :region'
-
-      option(:region) { ENV['AWS_REGION'] || ENV['AMAZON_REGION'] }
-
-      option(:endpoint) do |config|
-        if config.api.endpoint.match(/%s/) and config.region.nil?
-          raise ArgumentError, MISSING_REGION
-        end
-        config.api.endpoint % config.region
-      end
-
+    it 'does not require a region' do
+      iam = IAM.new(region: nil)
+      expect(iam.config.region).to be(nil)
     end
+
+    it 'uses us-east-1 as the signing region' do
+      iam = IAM.new(region: 'us-west-2')
+      expect(iam.config.signing_region).to eq('us-east-1')
+    end
+
+    it 'forces the endpoint to iam.amazonaws.com despite region' do
+      iam = IAM.new(region: 'us-west-2')
+      expect(iam.config.endpoint).to eq('iam.amazonaws.com')
+    end
+
   end
 end
