@@ -15,6 +15,7 @@ require 'simplecov'
 require 'rspec'
 require 'aws-sdk-core'
 require 'seahorse'
+require 'yaml'
 
 # A helper :send_handler that does not send the request, it simply
 # returns an empty response.
