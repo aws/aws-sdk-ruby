@@ -33,24 +33,24 @@ module Aws
     describe 'add_version' do
 
       it 'registers a new API version' do
-        clients = Class.new(Service)
-        clients.add_version('2013-01-02', 'path/to/api.json')
-        expect(clients.api_versions).to eq(['2013-01-02'])
+        svc = Class.new(Service)
+        svc.add_version('2013-01-02', 'path/to/api.json')
+        expect(svc.api_versions).to eq(['2013-01-02'])
       end
 
       it 'can be called multiple times' do
-        clients = Class.new(Service)
-        clients.add_version('2013-02-03', 'path/to/api2.json')
-        clients.add_version('2013-01-02', 'path/to/api1.json')
-        expect(clients.api_versions).to eq(['2013-01-02', '2013-02-03'])
-        expect(clients.latest_api_version).to eq('2013-02-03')
+        svc = Class.new(Service)
+        svc.add_version('2013-02-03', 'path/to/api2.json')
+        svc.add_version('2013-01-02', 'path/to/api1.json')
+        expect(svc.api_versions).to eq(['2013-01-02', '2013-02-03'])
+        expect(svc.latest_api_version).to eq('2013-02-03')
       end
 
       it 'treats the newest api version as the default' do
-        clients = Class.new(Service)
-        clients.add_version('2013-02-03', 'path/to/api2.json')
-        clients.add_version('2013-01-02', 'path/to/api1.json')
-        expect(clients.default_api_version).to eq(clients.latest_api_version)
+        svc = Class.new(Service)
+        svc.add_version('2013-02-03', 'path/to/api2.json')
+        svc.add_version('2013-01-02', 'path/to/api1.json')
+        expect(svc.default_api_version).to eq(svc.latest_api_version)
       end
 
     end
@@ -59,9 +59,9 @@ module Aws
 
       it 'adds a plugin to each versioned client class' do
         plugin = double('plugin')
-        clients = Service.define(:name, apis)
-        clients.add_plugin(plugin)
-        clients.versioned_clients.each do |klass|
+        svc = Service.define(:name, apis)
+        svc.add_plugin(plugin)
+        svc.versioned_clients.each do |klass|
           expect(klass.plugins).to include(plugin)
         end
       end
@@ -72,10 +72,10 @@ module Aws
 
       it 'removes a plugin from each versioned client class' do
         plugin = double('plugin')
-        clients = Service.define(:name, apis)
-        clients.add_plugin(plugin)
-        clients.remove_plugin(plugin)
-        clients.versioned_clients.each do |klass|
+        svc = Service.define(:name, apis)
+        svc.add_plugin(plugin)
+        svc.remove_plugin(plugin)
+        svc.versioned_clients.each do |klass|
           expect(klass.plugins).not_to include(plugin)
         end
       end
@@ -85,19 +85,19 @@ module Aws
     describe '.define' do
 
       it 'defines a new client factory' do
-        clients = Service.define(:identifier)
-        expect(clients.ancestors).to include(Service)
+        svc = Service.define(:identifier)
+        expect(svc.ancestors).to include(Service)
       end
 
       it 'populates the method name' do
-        clients = Service.define(:identifier)
-        expect(clients.identifier).to eq(:identifier)
+        svc = Service.define(:identifier)
+        expect(svc.identifier).to eq(:identifier)
       end
 
       it 'accepts apis as a path to a translated api' do
         api = 'apis/S3-2006-03-01.json'
-        clients = Service.define(:name, [api])
-        client_class = clients.const_get(:V20060301)
+        svc = Service.define(:name, [api])
+        client_class = svc.const_get(:V20060301)
         allow(client_class).to receive(:name).and_return('Aws::Svc::V20060301')
         client = client_class.new
         expect(client.config.api.version).to eq('2006-03-01')
@@ -105,8 +105,8 @@ module Aws
 
       it 'accepts apis as a path to an un-translated api' do
         api = 'apis-src/autoscaling-2011-01-01.json'
-        clients = Service.define(:name, [api])
-        client_class = clients.const_get(:V20110101)
+        svc = Service.define(:name, [api])
+        client_class = svc.const_get(:V20110101)
         allow(client_class).to receive(:name).and_return('Aws::Svc::V20060301')
         client = client_class.new
         expect(client.config.api.version).to eq('2011-01-01')
@@ -115,8 +115,8 @@ module Aws
       it 'accepts apis as Seahorse::Model::Api' do
         api = Seahorse::Model::Api.new
         api.version = '2013-01-02'
-        clients = Service.define(:name, [api])
-        expect(clients.const_get(:V20130102).new.config.api).to be(api)
+        svc = Service.define(:name, [api])
+        expect(svc.const_get(:V20130102).new.config.api).to be(api)
       end
 
     end
@@ -128,37 +128,37 @@ module Aws
       end
 
       it 'builds the client class with the latest api version by default' do
-        clients = Service.define(:name, apis)
-        expect(clients.new.config.api).to be(api_newer)
-        expect(clients.new).to be_kind_of(clients.const_get(:V20130202))
+        svc = Service.define(:name, apis)
+        expect(svc.new.config.api).to be(api_newer)
+        expect(svc.new).to be_kind_of(svc.const_get(:V20130202))
       end
 
       it 'defaults to the global configured version for the client' do
         Aws.config[:client_name] = { api_version: api_older.version }
-        clients = Service.define(:client_name, apis)
-        expect(clients.new.config.api).to be(api_older)
-        expect(clients.new).to be_kind_of(clients.const_get(:V20130101))
+        svc = Service.define(:client_name, apis)
+        expect(svc.new.config.api).to be(api_older)
+        expect(svc.new).to be_kind_of(svc.const_get(:V20130101))
       end
 
       it 'accepts the api verison as a constructor option' do
         Aws.config[:client_name] = { api_version: api_older.version }
-        clients = Service.define(:client_name, apis)
-        client = clients.new(api_version: api_newer.version)
+        svc = Service.define(:client_name, apis)
+        client = svc.new(api_version: api_newer.version)
         expect(client.config.api).to be(api_newer)
-        expect(client).to be_kind_of(clients.const_get(:V20130202))
+        expect(client).to be_kind_of(svc.const_get(:V20130202))
       end
 
       it 'uses the closest version without going over' do
         Aws.config[:api_version] = '2013-01-15'
-        clients = Service.define(:client_name, apis)
-        expect(clients.new.class).to be(clients.const_get(:V20130101))
+        svc = Service.define(:client_name, apis)
+        expect(svc.new.class).to be(svc.const_get(:V20130101))
       end
 
       it 'raises an error if the global version is preceedes all versions' do
         Aws.config[:api_version] = '2000-00-00'
-        clients = Service.define(:client_name, apis)
+        svc = Service.define(:client_name, apis)
         expect {
-          expect(clients.new)
+          expect(svc.new)
         }.to raise_error(Errors::NoSuchApiVersionError, /2000-00-00/)
       end
 
@@ -182,10 +182,10 @@ module Aws
     describe 'client classes' do
 
       it 'returns each client class from .versioned_clients' do
-        clients = Service.define(:name, apis)
-        expect(clients.versioned_clients).to eq([
-          clients.const_get(:V20130101),
-          clients.const_get(:V20130202),
+        svc = Service.define(:name, apis)
+        expect(svc.versioned_clients).to eq([
+          svc.const_get(:V20130101),
+          svc.const_get(:V20130202),
         ])
       end
 
@@ -196,23 +196,23 @@ module Aws
       end
 
       it 'raises an error if the asked for client class does not exist' do
-        clients = Service.define(:name)
+        svc = Service.define(:name)
         expect {
-          clients.const_get(:V20001012)
+          svc.const_get(:V20001012)
         }.to raise_error(Errors::NoSuchApiVersionError)
       end
 
       it 'raises a helpful error when the api is not defined' do
-        clients = Service.define(:name)
+        svc = Service.define(:name)
         expect {
-          clients.const_get(:V20001012)
-        }.to raise_error("API 2000-10-12 not defined for #{clients.name}")
+          svc.const_get(:V20001012)
+        }.to raise_error("API 2000-10-12 not defined for #{svc.name}")
       end
 
       it 'does not interfere with const missing' do
-        clients = Service.define(:name)
+        svc = Service.define(:name)
         expect {
-          clients.const_get(:FooBar)
+          svc.const_get(:FooBar)
         }.to raise_error(NameError, /uninitialized constant/)
       end
 
@@ -220,12 +220,12 @@ module Aws
 
     describe 'Errors module' do
 
-      let(:clients) { Service.define(:name) }
+      let(:svc) { Service.define(:name) }
 
-      let(:errors) { clients.const_get(:Errors) }
+      let(:errors) { svc.const_get(:Errors) }
 
       it 'has an errors module' do
-        expect(clients.const_defined?(:Errors)).to be(true)
+        expect(svc.const_defined?(:Errors)).to be(true)
       end
 
       it 'lazily creates error classes' do
