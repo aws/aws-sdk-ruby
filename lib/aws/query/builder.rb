@@ -52,7 +52,7 @@ module Aws
 
       def list(param_list, shape, prefix, values)
         member_shape = shape.members
-        if shape.metadata['flattened'] 
+        if flat?(shape)
           if member_shape.serialized_name
             parts = prefix.split('.')
             parts.pop
@@ -70,7 +70,7 @@ module Aws
       def map(param_list, shape, prefix, values)
         key_shape = shape.keys
         value_shape = shape.members
-        prefix += '.entry' unless shape.metadata['flattened']
+        prefix += '.entry' unless flat?(shape)
         key_name = "%s.%d.#{key_shape.serialized_name || 'key'}"
         value_name  = "%s.%d.#{value_shape.serialized_name || 'value'}"
         n = 1
@@ -104,6 +104,10 @@ module Aws
 
       def blob(param_list, shape, prefix, value)
         param_list.set(prefix, Base64.strict_encode64(value))
+      end
+
+      def flat?(shape)
+        FlatListShape === shape || FlatMapShape === shape
       end
 
     end

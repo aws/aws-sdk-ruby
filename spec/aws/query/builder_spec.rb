@@ -92,8 +92,7 @@ module Aws
           it 'numbers list members starting at 1' do
             rules['members'] = {
               'items' => {
-                'type' => 'list',
-                'metadata' => { 'flattened' => true },
+                'type' => 'flat_list',
                 'members' => { 'type' => 'string' }
               }
             }
@@ -110,8 +109,7 @@ module Aws
                 'type' => 'structure',
                 'members' => {
                   'items' => {
-                    'type' => 'list',
-                    'metadata' => { 'flattened' => true },
+                    'type' => 'flat_list',
                     'members' => {
                       'type' => 'string',
                       'serialized_name' => 'Item'
@@ -131,8 +129,7 @@ module Aws
           it 'supports lists of complex types' do
             rules['members'] = {
               'people' => {
-                'type' => 'list',
-                'metadata' => { 'flattened' => true },
+                'type' => 'flat_list',
                 'members' => {
                   'type' => 'structure',
                   'members' => {
@@ -215,8 +212,7 @@ module Aws
           it 'serializes hashes with keys and values' do
             rules['members'] = {
               'attributes' => {
-                'type' => 'map',
-                'metadata' => { 'flattened' => true },
+                'type' => 'flat_map',
                 'keys' => { 'type' => 'string' },
                 'members' => { 'type' => 'string' }
               }
@@ -233,8 +229,7 @@ module Aws
           it 'serializes hashes with keys and values' do
             rules['members'] = {
               'attributes' => {
-                'type' => 'map',
-                'metadata' => { 'flattened' => true },
+                'type' => 'flat_map',
                 'keys' => { 'type' => 'string', 'serialized_name' => 'K' },
                 'members' => { 'type' => 'string', 'serialized_name' => 'V' }
               }
