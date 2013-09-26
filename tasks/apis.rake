@@ -11,13 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-def svc_class_name(api)
-  name = api.metadata['service_abbreviation'] || api.metadata['service_full_name']
-  name = name.sub('Amazon', '').sub('AWS', '').gsub(/\W+/, '')
-  prefix = api.endpoint.split(/[.-]/).first.upcase
-  [name, prefix].sort_by(&:size).first
-end
-
 def svc_plugins(endpoint_prefix)
   config = MultiJson.load(File.read('apis-src/plugins.json'))
   config[endpoint_prefix] || []
@@ -52,7 +45,9 @@ task :apis do
 
     api.plugins += svc_plugins(endpoint_prefix)
 
-    target = "apis/#{svc_class_name(api)}-#{api.version}.json"
+    class_name = api.metadata['service_class_name']
+
+    target = "apis/#{class_name}-#{api.version}.json"
     File.open(target, 'w') do |file|
       file.write(MultiJson.dump(api.to_hash, pretty: true))
     end
