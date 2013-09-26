@@ -125,6 +125,11 @@ module Seahorse
       #   same `:step` and `:priority`, the handler registered last has
       #   the highest priority.
       #
+      # @option options [Array<Symbol,String>] :operations A list of
+      #   operations names the handler should be applied to.  When
+      #   `:operations` is omitted, the handler is applied to all
+      #   operations for the client.
+      #
       # @raise [InvalidStepError]
       # @raise [InvalidPriorityError]
       # @note There can be only one `:send` handler.  Adding an additional
