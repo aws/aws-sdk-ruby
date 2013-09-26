@@ -41,6 +41,7 @@ module Aws
     autoload :RestProtocol, 'aws/plugins/rest_protocol'
     autoload :S3BucketDns, 'aws/plugins/s3_bucket_dns'
     autoload :S3GetBucketLocationFix, 'aws/plugins/s3_get_bucket_location_fix'
+    autoload :S3Md5s, 'aws/plugins/s3_md5s'
     autoload :S3RegionalEndpoint, 'aws/plugins/s3_regional_endpoint'
     autoload :S3Signer, 'aws/plugins/s3_signer'
     autoload :SignatureV4, 'aws/plugins/signature_v4'

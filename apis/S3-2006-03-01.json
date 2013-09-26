@@ -15,6 +15,7 @@
     "Aws::Plugins::XmlSerializer",
     "Aws::Plugins::S3Signer",
     "Aws::Plugins::S3BucketDns",
+    "Aws::Plugins::S3Md5s",
     "Aws::Plugins::S3RegionalEndpoint",
     "Aws::Plugins::S3GetBucketLocationFix"
   ],
