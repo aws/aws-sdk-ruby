@@ -201,8 +201,7 @@ module Aws
         it 'serializes lists without a wrapping element' do
           rules['members'] = {
             'items' => {
-              'type' => 'list',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_list',
               'members' => { 'type' => 'string' }
             }
           }
@@ -218,8 +217,7 @@ module Aws
         it 'applies xmlnames to the list elements' do
           rules['members'] = {
             'items' => {
-              'type' => 'list',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_list',
               'serialized_name' => 'item',
               'members' => { 'type' => 'string' }
             }
@@ -236,8 +234,7 @@ module Aws
         it 'can serialize a list of complex types' do
           rules['members'] = {
             'items' => {
-              'type' => 'list',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_list',
               'serialized_name' => 'item',
               'members' => {
                 'type' => 'structure',

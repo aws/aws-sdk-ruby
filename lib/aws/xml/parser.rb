@@ -22,13 +22,6 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      # @api private
-      EMPTY_ELEMENT_DEFAULTS = {
-        :structure => {},
-        :list => [],
-        :map => {},
-      }
-
       # @param [Seahorse::Model::Shapes::Shape] rules
       def initialize(rules)
         @rules = rules
@@ -86,7 +79,11 @@ module Aws
 
       def member(shape, raw)
         if raw.nil?
-          EMPTY_ELEMENT_DEFAULTS[shape.type]
+          case shape
+          when StructureShape, MapShape then {}
+          when ListShape then []
+          else nil
+          end
         else
           case shape
           when StructureShape then structure(shape, raw)

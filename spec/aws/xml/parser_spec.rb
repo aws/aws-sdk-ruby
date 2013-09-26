@@ -219,8 +219,7 @@ module Aws
         it 'returns missing lists as nil' do
           rules['members'] = {
             'items' => {
-              'type' => 'list',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_list',
               'members' => { 'type' => 'string' }
             }
           }
@@ -231,8 +230,7 @@ module Aws
         it 'returns empty list elements as []' do
           rules['members'] = {
             'items' => {
-              'type' => 'list',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_list',
               'members' => { 'type' => 'string' }
             }
           }
@@ -243,8 +241,7 @@ module Aws
         it 'converts lists of strings into arrays of strings' do
           rules['members'] = {
             'items' => {
-              'type' => 'list',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_list',
               'members' => { 'type' => 'string' }
             }
           }
@@ -261,8 +258,7 @@ module Aws
         it 'accepts lists of a single element' do
           rules['members'] = {
             'items' => {
-              'type' => 'list',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_list',
               'members' => { 'type' => 'string' }
             }
           }
@@ -277,8 +273,7 @@ module Aws
         it 'observes the list serialization name when present' do
           rules['members'] = {
             'items' => {
-              'type' => 'list',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_list',
               'serialized_name' => 'item',
               'members' => { 'type' => 'string' }
             }
@@ -296,8 +291,7 @@ module Aws
         it 'can parse lists of complex types' do
           rules['members'] = {
             'people' => {
-              'type' => 'list',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_list',
               'serialized_name' => 'Person',
               'members' => {
                 'type' => 'structure',
@@ -430,8 +424,7 @@ module Aws
         it 'returns missing maps as nil' do
           rules['members'] = {
             'attributes' => {
-              'type' => 'map',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_map',
               'keys' => { 'type' => 'string' },
               'members' => { 'type' => 'string' }
             }
@@ -443,8 +436,7 @@ module Aws
         it 'returns empty maps as {}' do
           rules['members'] = {
             'attributes' => {
-              'type' => 'map',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_map',
               'keys' => { 'type' => 'string' },
               'members' => { 'type' => 'string' }
             }
@@ -456,8 +448,7 @@ module Aws
         it 'expects key and value tags by default' do
           rules['members'] = {
             'attributes' => {
-              'type' => 'map',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_map',
               'keys' => { 'type' => 'string' },
               'members' => { 'type' => 'string' }
             }
@@ -483,8 +474,7 @@ module Aws
         it 'accepts maps with a single entry' do
           rules['members'] = {
             'attributes' => {
-              'type' => 'map',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_map',
               'keys' => { 'type' => 'string' },
               'members' => { 'type' => 'string' }
             }
@@ -503,8 +493,7 @@ module Aws
         it 'accepts alternate key and value names' do
           rules['members'] = {
             'attributes' => {
-              'type' => 'map',
-              'metadata' => { 'flattened' => true },
+              'type' => 'flat_map',
               'keys' => { 'type' => 'string', 'serialized_name' => 'attr' },
               'members' => { 'type' => 'string', 'serialized_name' => 'val' }
             }
