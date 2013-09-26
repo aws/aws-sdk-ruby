@@ -158,6 +158,7 @@ module Aws
       # @api private
       def define(identifier, apis = [])
         klass = Class.new(self)
+        klass.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
         klass.identifier = identifier.to_sym
         apis.each do |api|
           if api.is_a?(String)

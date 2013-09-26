@@ -14,6 +14,10 @@
 module Aws
   module Errors
 
+    # The base class for all errors returned by an Amazon Web Service.
+    # These include all client errors (~400) and server errors (~500).
+    class ServiceError < RuntimeError; end
+
     # Raised when a {Service} is constructed an no suitable API
     # version is found based on configuration.
     class NoSuchApiVersionError < RuntimeError; end
@@ -21,6 +25,24 @@ module Aws
     # Raised when a {Service} is constructed and credentials are not
     # set, or the set credentials are empty.
     class MissingCredentialsError < RuntimeError; end
+
+    # @api private
+    module DynamicErrors
+
+      def const_missing(constant)
+        error_class(constant)
+      end
+
+      def error_class(constant)
+        constant = constant.to_s.gsub(/\W+/, '')
+        if const_defined?(constant)
+          const_get(constant)
+        else
+          const_set(constant, Class.new(ServiceError))
+        end
+      end
+
+    end
 
   end
 end

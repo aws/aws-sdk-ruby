@@ -217,5 +217,22 @@ module Aws
       end
 
     end
+
+    describe 'Errors module' do
+
+      let(:clients) { Service.define(:name) }
+
+      let(:errors) { clients.const_get(:Errors) }
+
+      it 'has an errors module' do
+        expect(clients.const_defined?(:Errors)).to be(true)
+      end
+
+      it 'lazily creates error classes' do
+        err_class = errors.const_get(:AbcXyz)
+        expect(err_class.new).to be_kind_of(Errors::ServiceError)
+      end
+
+    end
   end
 end
