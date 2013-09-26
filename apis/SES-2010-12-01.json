@@ -15,7 +15,7 @@
     "Aws::Plugins::Credentials",
     "Aws::Plugins::ContentLength",
     "Aws::Plugins::RestProtocol",
-    "Aws::Plugins::QuerySerializer",
+    "Aws::Plugins::QueryProtocol",
     "Aws::Plugins::SignatureV4"
   ],
   "operations": {
