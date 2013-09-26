@@ -233,6 +233,13 @@ module Aws
         expect(err_class.new).to be_kind_of(Errors::ServiceError)
       end
 
+      it 'allows you to create error classes named like Ruby classes' do
+        error_class = Aws::Errors.error_class('S3', 'Range')
+        expect(error_class).not_to be(Range)
+        expect(error_class).to be(Aws::S3::Errors::Range)
+        expect(error_class.ancestors).to include(Errors::ServiceError)
+      end
+
     end
   end
 end

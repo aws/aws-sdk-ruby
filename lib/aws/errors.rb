@@ -30,18 +30,20 @@ module Aws
     module DynamicErrors
 
       def const_missing(constant)
-        error_class(constant)
+        const_set(constant, Class.new(ServiceError))
       end
 
-      def error_class(constant)
-        constant = constant.to_s.gsub(/\W+/, '')
-        if const_defined?(constant)
-          const_get(constant)
-        else
-          const_set(constant, Class.new(ServiceError))
-        end
-      end
+    end
 
+    # @api private
+    def self.error_class(svc_class_name, error_code)
+      constant = error_code.to_s.gsub(/\W+/, '').to_sym
+      errors = Aws.const_get(svc_class_name).const_get(:Errors)
+      if errors.constants.include?(constant)
+        errors.const_get(constant)
+      else
+        errors.const_set(constant, Class.new(ServiceError))
+      end
     end
 
   end
