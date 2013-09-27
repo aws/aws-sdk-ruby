@@ -27,6 +27,7 @@ module Aws
     autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
     autoload :RestProtocol, 'aws/plugins/rest_protocol'
     autoload :S3BucketDns, 'aws/plugins/s3_bucket_dns'
+    autoload :S3CompleteMultipartUploadFix, 'aws/plugins/s3_complete_multipart_upload_fix'
     autoload :S3GetBucketLocationFix, 'aws/plugins/s3_get_bucket_location_fix'
     autoload :S3Md5s, 'aws/plugins/s3_md5s'
     autoload :S3RegionalEndpoint, 'aws/plugins/s3_regional_endpoint'
