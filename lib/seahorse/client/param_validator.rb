@@ -116,14 +116,8 @@ module Seahorse
             errors << "expected #{context} to be true or false"
           end
         when Model::Shapes::BlobShape
-          if payload
-            unless io_like?(value)
-              errors << "expected #{context} to be an IO object"
-            end
-          else
-            unless value.is_a?(String)
-              errors << "expected #{context} to be a base64 encoded string"
-            end
+          unless io_like?(value) or value.is_a?(String)
+            errors << "expected #{context} to be a string or IO object"
           end
         end
       end

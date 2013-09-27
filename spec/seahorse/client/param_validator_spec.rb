@@ -251,22 +251,21 @@ module Seahorse
 
       describe 'blobs' do
 
-        it 'accepts io objects for payload members' do
+        it 'accepts strings and io objects for payload members' do
           rules['payload'] = 'data'
           rules['members'] = {
             'data' => { 'type' => 'blob' }
           }
           validate(data: StringIO.new('abc'))
           validate(data: double('d', :read => 'abc', :size => 3, :rewind => 0))
-          validate({ data: 'abc' },
-            'expected params[:data] to be an IO object')
+          validate({ data: 'abc' })
         end
 
         it 'accepts string objects for non-payload members' do
           rules['members'] = { 'data' => { 'type' => 'blob' } }
           validate(data: 'YQ==')
           validate({ data: 123 },
-            'expected params[:data] to be a base64 encoded string')
+            'expected params[:data] to be a string or IO object')
         end
 
       end
