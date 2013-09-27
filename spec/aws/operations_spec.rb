@@ -35,29 +35,23 @@ module Aws
         @params = data['params'] || {}
         @data = data['data']
 
-        if data['error']
-          @error = Error.new
-          data['error'].each do |key, value|
-            @error[key] = value
+        {
+          'error' => Error,
+          'request' => Request,
+          'response' => Response,
+        }.each do |entry, struct_class|
+          if data.key?(entry)
+            struct = struct_class.new
+            data[entry].each do |key, value|
+              struct[key] = value
+            end
+            instance_variable_set("@#{entry}", struct)
           end
         end
 
-        req = data['request'] || {}
-        resp = data['response'] || {}
-
-        @request = data['request'] || {}
-        @request = Request.new
-        @request.method = req['method']
-        @request.host = req['host']
-        @request.headers = header_hash(req['headers'])
-        @request.path = req['path']
-        @request.body = req['body'] || ''
-
-        @response = Response.new
-        @response.status_code = resp['status_code'] || 200
-        @response.headers = header_hash(resp['headers'])
+        @response.headers = header_hash(@response.headers)
         @response.body =
-          Seahorse::Client::Http::PlainStringIO.new(resp['body'] || '')
+          Seahorse::Client::Http::PlainStringIO.new(@response.body || '')
       end
 
       attr_reader :operation, :config, :params, :request, :response, :data, :error
@@ -95,8 +89,10 @@ module Aws
       expect(http_req.endpoint.host).to eq(f.request.host)
       expect(http_req.http_method).to eq(f.request.method)
       expect(http_req.path).to eq(f.request.path)
-      f.request.headers.each_pair do |header, value|
-        expect(http_req.headers[header]).to eq(value.to_s)
+      if f.request.headers
+        f.request.headers.each_pair do |header, value|
+          expect(http_req.headers[header]).to eq(value.to_s)
+        end
       end
       expect(http_req.body.read).to eq(f.request.body)
     end
@@ -105,6 +101,7 @@ module Aws
       if f.data
         expect(resp.data.to_hash).to eq(f.data.to_h)
       end
+
       if f.error
         expect(resp.data).to be(nil)
         expect(resp.error.class.name).to eq(f.error.class) if f.error.class
