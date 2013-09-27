@@ -12,19 +12,10 @@
 # language governing permissions and limitations under the License.
 
 config:
-  region: us-east-1
+  validate_params: false
 operation: delete_bucket
-params:
-  :bucket: 'bucket-name'
-request:
-  host: bucket-name.s3.amazonaws.com
-  method: DELETE
-  path: /
-  headers: {}
-  body: ''
 response:
   status_code: 409
-  headers: {}
   body: |
     <?xml version="1.0" encoding="UTF-8"?>
     <Error>
