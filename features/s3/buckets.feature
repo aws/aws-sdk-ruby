@@ -15,40 +15,21 @@
 @s3 @buckets
 Feature: S3 Buckets
 
-  @wip
-  Scenario: CRUD buckets
+  Scenario: CRUD buckets using the classic endpoint
+    Given I am using the S3 "us-east-1" region
     When I create a bucket
     Then the bucket should exist
     When I delete the bucket
     Then the bucket should not exist
 
-  # this test will exercise following 307 redirects
-  Scenario: Creating a bucket with a location constraint
+  Scenario: CRUD buckets using a regional endpoint
+    Given I am using the S3 "us-west-2" region
+    When I create a bucket
+    Then the bucket should exist
+    When I delete the bucket
+    Then the bucket should not exist
+
+  Scenario: Access bucket following 307 redirects
+    Given I am using the S3 "us-east-1" region
     When I create a bucket with the location constraint "EU"
     Then the bucket should have a location constraint of "EU"
-
-  @cors
-  Scenario: Bucket CORS
-    When I create a bucket
-    And I put a bucket CORS configuration
-    And I get the bucket CORS configuration
-    Then the AllowedMethods list should inclue "DELETE POST PUT"
-    Then the AllowedOrigin value should equal "http://example.com"
-    Then the AllowedHeader value should equal "*"
-    Then the ExposeHeader value should equal "x-amz-server-side-encryption"
-    Then the MaxAgeSeconds value should equal 5000
-
-  @lifecycle
-  Scenario: Bucket lifecycles
-    When I create a bucket
-    And I put a transition lifecycle configuration on the bucket with prefix "/"
-    And I get the transition lifecycle configuration on the bucket
-    Then the lifecycle configuration should have transition days of 0
-    And the lifecycle configuration should have transition storage class of "GLACIER"
-
-  @tagging
-  Scenario: Bucket Tagging
-    When I create a bucket
-    And I put a bucket tag with key "KEY" and value "VALUE"
-    And I get the bucket tagging
-    Then the first tag in the tag set should have key and value "KEY", "VALUE"

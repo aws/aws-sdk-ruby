@@ -132,7 +132,7 @@ module Aws
 
             # build a service client
             Aws.send(svc_name).class.remove_plugin(
-              Seahorse::Client::Plugins::RaiseServiceErrors)
+              Seahorse::Client::Plugins::RaiseResponseErrors)
             svc = Aws.send(svc_name, f.config)
 
             # build the request
