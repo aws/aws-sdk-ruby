@@ -31,7 +31,7 @@ module Aws
       # @param [Hash] params
       # @return [String] Returns an XML doc string.
       def to_xml(params)
-        structure(@rules.serialized_name, @rules, params)
+        structure(@rules.serialized_name, @rules, params) unless params.empty?
         @xml.join
       end
 

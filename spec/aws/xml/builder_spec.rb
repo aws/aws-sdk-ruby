@@ -30,10 +30,8 @@ module Aws
 
       describe 'structures' do
 
-        it 'returns an empty xml doc when there are no params' do
-          expect(xml({})).to eq(<<-XML)
-<xml/>
-          XML
+        it 'returns an empty string when there are no params' do
+          expect(xml({})).to eq('')
         end
 
         it 'omits members that are not present in the params' do
@@ -41,9 +39,7 @@ module Aws
             'abc' => { 'type' => 'string' },
             'mno' => { 'type' => 'string' },
           }
-          expect(xml({})).to eq(<<-XML)
-<xml/>
-          XML
+          expect(xml({})).to eq('')
         end
 
         it 'includes members that are present in the params' do
