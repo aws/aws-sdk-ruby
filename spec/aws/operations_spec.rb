@@ -49,9 +49,11 @@ module Aws
           end
         end
 
-        @response.headers = header_hash(@response.headers)
-        @response.body =
-          Seahorse::Client::Http::PlainStringIO.new(@response.body || '')
+        if @response
+          @response.headers = header_hash(@response.headers)
+          @response.body =
+            Seahorse::Client::Http::PlainStringIO.new(@response.body || '')
+        end
       end
 
       attr_reader :operation, :config, :params, :request, :response, :data, :error
@@ -77,10 +79,15 @@ module Aws
       attr_accessor :handler, :f
 
       def call(context)
-        context.http_response.status_code = f.response.status_code
-        context.http_response.headers = f.response.headers
-        context.http_response.body = f.response.body
-        Seahorse::Client::Response.new(context: context).signal_complete
+        response = Seahorse::Client::Response.new(context: context)
+        if f.response
+          context.http_response.status_code = f.response.status_code
+          context.http_response.headers = f.response.headers
+          context.http_response.body = f.response.body
+          response.signal_complete
+        else
+          response
+        end
       end
 
     end
@@ -124,6 +131,8 @@ module Aws
             f = OperationFixture.load(svc_name, fixture_name)
 
             # build a service client
+            Aws.send(svc_name).class.remove_plugin(
+              Seahorse::Client::Plugins::RaiseServiceErrors)
             svc = Aws.send(svc_name, f.config)
 
             # build the request
