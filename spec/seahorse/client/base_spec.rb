@@ -248,7 +248,7 @@ module Seahorse
             Plugins::OperationMethods,
             Plugins::ParamConversion,
             Plugins::ParamValidation,
-            Plugins::RaiseServiceErrors,
+            Plugins::RaiseResponseErrors,
           ])
         end
 

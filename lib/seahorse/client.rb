@@ -54,7 +54,7 @@ module Seahorse
       autoload :OperationMethods, 'seahorse/client/plugins/operation_methods'
       autoload :ParamConversion, 'seahorse/client/plugins/param_conversion'
       autoload :ParamValidation, 'seahorse/client/plugins/param_validation'
-      autoload :RaiseServiceErrors, 'seahorse/client/plugins/raise_service_errors'
+      autoload :RaiseResponseErrors, 'seahorse/client/plugins/raise_response_errors'
     end
 
     module Xml

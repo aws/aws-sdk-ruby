@@ -14,21 +14,21 @@
 module Seahorse
   module Client
     module Plugins
-      class RaiseServiceErrors < Plugin
+      class RaiseResponseErrors < Plugin
 
-        option(:raise_service_errors, true)
+        option(:raise_response_errors, true)
 
         # @api private
         class Handler < Client::Handler
           def call(context)
-            @handler.call(context).on_complete do |response|
-              raise response.error if response.error
-            end
+            response = @handler.call(context)
+            raise response.error if response.error
+            response
           end
         end
 
         def add_handlers(handlers, config)
-          if config.raise_service_errors
+          if config.raise_response_errors
             handlers.add(Handler, step: :validate, priority: 95)
           end
         end
