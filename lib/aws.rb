@@ -43,6 +43,7 @@ module Aws
     autoload :S3GetBucketLocationFix, 'aws/plugins/s3_get_bucket_location_fix'
     autoload :S3Md5s, 'aws/plugins/s3_md5s'
     autoload :S3RegionalEndpoint, 'aws/plugins/s3_regional_endpoint'
+    autoload :S3Redirects, 'aws/plugins/s3_redirects'
     autoload :S3Signer, 'aws/plugins/s3_signer'
     autoload :SignatureV4, 'aws/plugins/signature_v4'
     autoload :SignatureV3, 'aws/plugins/signature_v3'
