@@ -65,7 +65,8 @@ module Aws
           rules = input
           params = context.params
         end
-        context.http_request.body = builder_class.build(rules, params)
+        context.http_request.body = builder_class.build(rules, params) unless
+          params.empty?
       end
     end
 

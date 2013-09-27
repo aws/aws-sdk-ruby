@@ -13,7 +13,13 @@
 
 When(/^I create a bucket$/) do
   @bucket_name = "aws-sdk-test-#{Time.now.to_i}-#{rand(1000)}"
-  @s3.create_bucket(bucket: @bucket_name)
+  options = { bucket: @bucket_name }
+  if @s3.config.region != 'us-east-1'
+    options[:create_bucket_configuration] = {
+      location_constraint: @s3.config.region
+    }
+  end
+  @s3.create_bucket(options)
   @created_buckets << @bucket_name
 end
 
@@ -27,7 +33,6 @@ When(/^I delete the bucket$/) do
 end
 
 Then(/^the bucket should not exist$/) do
-  pending
   expect {
     @s3.get_bucket_location(bucket: @bucket_name)
   }.to raise_error(Aws::S3::Errors::NoSuchBucket)
