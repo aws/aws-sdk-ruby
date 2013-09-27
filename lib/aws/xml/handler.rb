@@ -1,4 +1,3 @@
-
 # Copyright 2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -11,6 +10,8 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
+
+require 'multi_xml'
 
 module Aws
   module Xml
@@ -26,6 +27,14 @@ module Aws
 
       def parser_class
         Xml::Parser
+      end
+
+      def extract_error(response)
+        svc_class = response.context.config.api.metadata['service_class_name']
+        xml = MultiXml.parse(response.http_response.body_contents)
+        error_code = xml['Error']['Code']
+        error_message = xml['Error']['Message']
+        Errors.error_class(svc_class, error_code).new(error_message)
       end
 
     end

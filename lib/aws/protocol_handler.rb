@@ -25,7 +25,8 @@ module Aws
 
       # handle ~400 and ~500 level responses
       response.on_error do |response|
-        extract_error(response)
+        response.data = nil
+        response.error = extract_error(response)
       end
 
       response

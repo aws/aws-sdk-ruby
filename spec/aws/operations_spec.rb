@@ -19,6 +19,7 @@ module Aws
 
       Request = Struct.new(:method, :host, :headers, :path, :body)
       Response = Struct.new(:status_code, :headers, :body)
+      Error = Struct.new(:class, :message)
 
       def self.load(svc_name, fixture_name)
         path = File.expand_path(File.join(File.dirname(__FILE__),
@@ -32,7 +33,14 @@ module Aws
           config.merge(key.to_sym => value)
         end
         @params = data['params'] || {}
-        @data = data['data'] || {}
+        @data = data['data']
+
+        if data['error']
+          @error = Error.new
+          data['error'].each do |key, value|
+            @error[key] = value
+          end
+        end
 
         req = data['request'] || {}
         resp = data['response'] || {}
@@ -52,7 +60,7 @@ module Aws
           Seahorse::Client::Http::PlainStringIO.new(resp['body'] || '')
       end
 
-      attr_reader :operation, :config, :params, :request, :response, :data
+      attr_reader :operation, :config, :params, :request, :response, :data, :error
 
       def handler
         FixtureHandler.new(self)
@@ -94,7 +102,14 @@ module Aws
     end
 
     def response_assertions(f, resp)
-      expect(resp.data.to_hash).to eq(f.data.to_h)
+      if f.data
+        expect(resp.data.to_hash).to eq(f.data.to_h)
+      end
+      if f.error
+        expect(resp.data).to be(nil)
+        expect(resp.error.class.name).to eq(f.error.class) if f.error.class
+        expect(resp.error.message).to eq(f.error.message) if f.error.message
+      end
     end
 
     glob = File.expand_path(File.join(

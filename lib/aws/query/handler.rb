@@ -14,7 +14,7 @@
 
 module Aws
   module Query
-    class Handler < ProtocolHandler
+    class Handler < Xml::Handler
 
       def build_request(context)
         context.http_request.headers['Content-Type'] =
@@ -28,10 +28,6 @@ module Aws
         param_list.set('Action', context.operation.name)
 
         context.http_request.body = param_list.to_io
-      end
-
-      def parser_class
-        Xml::Parser
       end
 
     end
