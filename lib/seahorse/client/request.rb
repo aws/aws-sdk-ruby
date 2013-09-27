@@ -85,8 +85,9 @@ module Seahorse
       #     end
       #
       # @return [Response]
-      def send_request(&block)
+      def send_request(options = {}, &block)
         @context.http_response.body = BlockIO.new(&block) if block_given?
+        @context.http_response.body = options[:target] if options[:target]
         @handlers.to_stack.call(@context)
       end
 

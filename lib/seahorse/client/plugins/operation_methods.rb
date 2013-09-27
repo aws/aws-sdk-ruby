@@ -48,7 +48,9 @@ module Seahorse
           client.class.send(:define_method, :operation_names) { operations }
           operations.each do |name|
             client.class.send(:define_method, name) do |*args, &block|
-              build_request(name, *args).send_request(&block)
+              params = args[0] || {}
+              send_options = args[1] || {}
+              build_request(name, params).send_request(send_options, &block)
             end
           end
         end

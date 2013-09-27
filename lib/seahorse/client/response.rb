@@ -44,6 +44,9 @@ module Seahorse
       # @return [Hash] the hash of data returned from the service
       attr_accessor :data
 
+      # @return [StandardError, nil]
+      attr_accessor :error
+
       # @param [Range<Integer>] status_code_range (nil) When present, the
       #   `callback` will be triggered only for responses 
       # @return [Response] Returns self.
