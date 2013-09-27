@@ -75,6 +75,7 @@ module AWS
             :user_data => Base64.encode64('user-data'),
             :iam_instance_profile => 'iam-profile',
             :spot_price => '123.45',
+            :associate_public_ip_address => true,
           })
 
           launch_configurations.create('name', 'image', 'type', {
@@ -99,6 +100,7 @@ module AWS
             :user_data => 'user-data',
             :iam_instance_profile => 'iam-profile',
             :spot_price => '123.45',
+            :associate_public_ip_address => true,
           })
         end
 

@@ -62,6 +62,11 @@ module AWS
       #
       # @option options [String] :spot_price
       #
+      # @option options [Boolean] :associate_public_ip_address
+      #   Used for Auto Scaling groups that launch instances into an
+      #   Amazon Virtual Private Cloud (Amazon VPC). Specifies whether
+      #   to assign a public IP address to each instance launched in a Amazon VPC.
+      #
       # @return [LaunchConfiguration]
       #
       def create name, image, instance_type, options = {}
@@ -83,6 +88,7 @@ module AWS
           :kernel_id,
           :ramdisk_id,
           :block_device_mappings,
+          :associate_public_ip_address
         ].each do |opt|
           client_opts[opt] = options[opt] if options.key?(opt)
         end
