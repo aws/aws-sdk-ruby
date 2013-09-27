@@ -49,7 +49,7 @@ module Aws
         target ||= Structure.new(shape.members.keys)
         shape.members.each do |member_name, member_shape|
           key = member_shape.serialized_name
-          target[member_name] = member(member_shape, hash[key]) if hash.key?(key)
+          target[member_name] = member(member_shape, hash[key])
         end
         target
       end
