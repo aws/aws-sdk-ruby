@@ -22,9 +22,7 @@ module Aws
       end
 
       def extract_error(response)
-        json = MultiJson.parse(response.http_response.body_contents)
-        xml = xml['Response'] if xml.key?('Response')
-        xml = xml['Errors'] if xml.key?('Errors')
+        json = MultiJson.load(response.http_response.body_contents)
         error_code = json['__type']
         error_code = error_code.split('#').last
         if error_code == 'RequestEntityTooLarge'
