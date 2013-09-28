@@ -571,9 +571,9 @@ module Aws
         it 'throws an error when unable to determine the format' do
           timestamp = 'bad-date-format'
           xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
-          lambda {
+          expect {
             parse(xml)
-          }.should raise_error("unhandled timestamp format `#{timestamp}'")
+          }.to raise_error("unhandled timestamp format `#{timestamp}'")
         end
 
       end

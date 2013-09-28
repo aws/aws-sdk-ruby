@@ -4,34 +4,34 @@ module Aws
   describe Credentials do
 
     it 'provides access to the access key id' do
-      Credentials.new('akid', 'secret').access_key_id.should eq('akid')
+      expect(Credentials.new('akid', 'secret').access_key_id).to eq('akid')
     end
 
     it 'provides access to the secret access key' do
-      Credentials.new('akid', 'secret').secret_access_key.should eq('secret')
+      expect(Credentials.new('akid', 'secret').secret_access_key).to eq('secret')
     end
 
     it 'provides access to the session tokey' do
       creds = Credentials.new('akid', 'secret', 'token')
-      creds.session_token.should eq('token')
+      expect(creds.session_token).to eq('token')
     end
 
     it 'defaults the session token to nil' do
-      Credentials.new('akid', 'secret').session_token.should be(nil)
+      expect(Credentials.new('akid', 'secret').session_token).to be(nil)
     end
 
     describe '#set?' do
 
       it 'returns true when the key and secret are both non nil values' do
-        Credentials.new('akid', 'secret').set?.should be(true)
+        expect(Credentials.new('akid', 'secret').set?).to be(true)
       end
 
       it 'returns false if the key is nil' do
-        Credentials.new(nil, 'secret').set?.should be(false)
+        expect(Credentials.new(nil, 'secret').set?).to be(false)
       end
 
       it 'returns false if the secret is nil' do
-        Credentials.new('akid', nil).set?.should be(false)
+        expect(Credentials.new('akid', nil).set?).to be(false)
       end
 
     end
