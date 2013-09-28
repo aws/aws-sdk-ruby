@@ -1,3 +1,5 @@
+require 'multi_xml'
+
 module Aws
   module Plugins
     class S3CompleteMultipartUploadFix < Seahorse::Client::Plugin
@@ -19,8 +21,7 @@ module Aws
           if xml['Error']
             error_code = xml['Error']['Code']
             error_message = xml['Error']['Message']
-            svc_class = response.context.config.api.metadata['service_class_name']
-            Errors.error_class(svc_class, error_code).new(error_message)
+            Errors.error_class(response, error_code).new(error_message)
           end
         end
 

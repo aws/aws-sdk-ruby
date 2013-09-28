@@ -1,3 +1,5 @@
+require 'multi_json'
+
 module Aws
   module Json
     class Handler < ProtocolHandler
@@ -17,6 +19,20 @@ module Aws
 
       def parser_class
         Json::Parser
+      end
+
+      def extract_error(response)
+        json = MultiJson.parse(response.http_response.body_contents)
+        xml = xml['Response'] if xml.key?('Response')
+        xml = xml['Errors'] if xml.key?('Errors')
+        error_code = json['__type']
+        error_code = error_code.split('#').last
+        if error_code == 'RequestEntityTooLarge'
+          error_message = 'Request body must be less than 1 MB'
+        else
+          error_message = json['message'] || json['Message']
+        end
+        Errors.error_class(response, error_code).new(error_message)
       end
 
     end
