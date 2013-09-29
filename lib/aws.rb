@@ -33,9 +33,9 @@ module Aws
     autoload :S3RegionalEndpoint, 'aws/plugins/s3_regional_endpoint'
     autoload :S3Redirects, 'aws/plugins/s3_redirects'
     autoload :S3Signer, 'aws/plugins/s3_signer'
-    autoload :SignatureV4, 'aws/plugins/signature_v4'
-    autoload :SignatureV3, 'aws/plugins/signature_v3'
     autoload :SignatureV2, 'aws/plugins/signature_v2'
+    autoload :SignatureV3, 'aws/plugins/signature_v3'
+    autoload :SignatureV4, 'aws/plugins/signature_v4'
     autoload :XmlProtocol, 'aws/plugins/xml_protocol'
   end
 
