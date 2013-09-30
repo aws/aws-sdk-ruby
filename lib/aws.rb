@@ -119,13 +119,13 @@ module Aws
 
     private
 
-    def apis
+    def bundled_apis
       Dir.glob('apis/*.json').group_by { |path| path.match(/\/(\w+)/)[1] }
     end
 
   end
 
-  apis.each do |svc_class_name, api_versions|
+  bundled_apis.each do |svc_class_name, api_versions|
     add_service(svc_class_name, api_versions)
   end
 
