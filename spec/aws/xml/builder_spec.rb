@@ -83,6 +83,23 @@ module Aws
           XML
         end
 
+        it 'serializes empty structures as empty nodes' do
+          rules['members'] = {
+            'name' => { 'type' => 'string' },
+            'details' => {
+              'type' => 'structure',
+              'members' => { 'size' => { 'type' => 'string' } }
+            },
+          }
+          params = { name: 'Name', details: {} }
+          expect(xml(params)).to eq(<<-XML)
+<xml>
+  <name>Name</name>
+  <details/>
+</xml>
+          XML
+        end
+
         it 'applies xml attribute members to the structure' do
           rules['members'] = {
             'config' => {
