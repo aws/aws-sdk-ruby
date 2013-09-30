@@ -12,8 +12,6 @@ module Aws
         :put_bucket_lifecycle,
         :put_bucket_policy,
         :put_bucket_tagging,
-        #:put_bucket_logging,
-        #:restore_object,
       ]
 
       # @api private
@@ -46,7 +44,7 @@ module Aws
           step: :build, # the request is built but before it is signed
         }
 
-        unless config.compute_optional_md5s
+        if !config.compute_optional_md5s
           options[:operations] = REQUIRED_OPERATIONS
         end
 

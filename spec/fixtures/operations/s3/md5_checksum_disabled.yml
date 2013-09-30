@@ -1,0 +1,10 @@
+config:
+  compute_optional_md5s: false
+operation: put_object
+params:
+  :bucket: 'bucket-name'
+  :key: 'key'
+  :body: 'abc'
+request:
+  headers:
+    Content-Md5: NULL # should not be set
