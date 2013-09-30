@@ -81,15 +81,16 @@ module Aws
 
     def request_assertions(f, http_req)
       if f.request
-        expect(http_req.endpoint.host).to eq(f.request.host)
-        expect(http_req.http_method).to eq(f.request.method)
-        expect(http_req.path).to eq(f.request.path)
+        expect(http_req.endpoint.host).to eq(f.request.host) if f.request.host
+        expect(http_req.http_method).to eq(f.request.method) if f.request.method
+        expect(http_req.path).to eq(f.request.path) if f.request.path
         if f.request.headers
           f.request.headers.each_pair do |header, value|
-            expect(http_req.headers[header]).to eq(value.to_s)
+            expected_value = value.nil? ? nil : value.to_s
+            expect(http_req.headers[header]).to eq(expected_value)
           end
         end
-        expect(http_req.body.read).to eq(f.request.body)
+        expect(http_req.body.read).to eq(f.request.body) if f.request.body
       end
     end
 
