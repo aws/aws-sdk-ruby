@@ -23,12 +23,12 @@ module Aws
     end
 
     # @api private
-    def self.error_class(response, error_code)
+    def self.response_error(response, error_code)
       svc_class_name = response.context.config.api.metadata['service_class_name']
-      class_for(svc_class_name, error_code)
+      error_class(svc_class_name, error_code)
     end
 
-    def self.class_for(svc_class_name, error_code)
+    def self.error_class(svc_class_name, error_code)
       constant = error_code.to_s.gsub(/\W+/, '').to_sym
       errors = Aws.const_get(svc_class_name).const_get(:Errors)
       if errors.constants.include?(constant)

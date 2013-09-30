@@ -22,7 +22,7 @@ module Aws
         xml = xml['Errors'] if xml.key?('Errors')
         error_code = xml['Error']['Code']
         error_message = xml['Error']['Message']
-        Errors.error_class(response, error_code).new(error_message)
+        Errors.response_error(response, error_code).new(error_message)
       end
 
     end

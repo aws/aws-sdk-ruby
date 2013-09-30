@@ -30,7 +30,7 @@ module Aws
         else
           error_message = json['message'] || json['Message']
         end
-        Errors.error_class(response, error_code).new(error_message)
+        Errors.response_error(response, error_code).new(error_message)
       end
 
     end
