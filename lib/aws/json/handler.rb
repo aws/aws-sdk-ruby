@@ -21,6 +21,26 @@ module Aws
         Json::Parser
       end
 
+      def populate_body(context)
+        if convert?(context)
+          super
+        else
+          context.http_request.body = MultiJson.dump(context.params)
+        end
+      end
+
+      def populate_response_data(rules, response)
+        if convert?(response.context)
+          super
+        else
+          response.data = MultiJson.load(response.http_response.body_contents)
+        end
+      end
+
+      def convert?(context)
+        context.config.convert_params
+      end
+
       def extract_error(response)
         json = MultiJson.load(response.http_response.body_contents)
         error_code = json['__type']

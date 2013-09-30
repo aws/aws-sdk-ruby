@@ -1,0 +1,23 @@
+config:
+  api_version: '2012-08-10'
+  convert_params: false
+  validate_params: false
+operation: put_item
+params:
+  RawBuild: true
+  Nothing:
+    Checked: 'sent-as-is'
+    For:
+      - speed
+      - efficiency
+request:
+  body: '{"RawBuild":true,"Nothing":{"Checked":"sent-as-is","For":["speed","efficiency"]}}'
+response:
+  body: '{"RawParse":true,"Nothing":{"Parsed":"read-as-is","For":["speed","efficiency"]}}'
+data:
+  RawParse: true
+  Nothing:
+    Parsed: 'read-as-is'
+    For:
+      - speed
+      - efficiency

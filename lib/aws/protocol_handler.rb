@@ -60,10 +60,14 @@ module Aws
       output = response.context.operation.output
       response.data = Structure.new(output.members.keys)
       unless output.raw_payload?
-        body = response.context.http_response.body
-        parser_class.parse(output, body.read, response.data)
-        body.rewind
+        populate_response_data(output, response)
       end
+    end
+
+    def populate_response_data(rules, response)
+      body = response.context.http_response.body
+      parser_class.parse(rules, body.read, response.data)
+      body.rewind
     end
 
   end

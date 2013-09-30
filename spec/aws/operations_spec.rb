@@ -37,6 +37,7 @@ module Aws
         end
 
         if @response
+          @response.status_code ||= 200
           @response.headers = header_hash(@response.headers)
           @response.body =
             Seahorse::Client::Http::PlainStringIO.new(@response.body || '')
