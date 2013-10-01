@@ -1,4 +1,12 @@
+2013-10-01 Alex Wood <awood45@gmail.com>
+
+  * doc-src/CloudFront/V20130826.yml,
+  lib/aws/api_config/CloudFront-2013-08-26.yml, lib/aws/cloud_front/client.rb:
+  Update API version for Amazon CloudFront.
+
 2013-09-20 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.19.0
 
   * doc-src/AutoScaling/V20110101.yml,
   lib/aws/api_config/AutoScaling-2011-01-01.yml: API Updates for Auto Scaling
