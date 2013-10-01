@@ -16,16 +16,16 @@ module AWS
 
     class Client < Core::RESTXMLClient
 
-      API_VERSION = '2013-05-12'
+      API_VERSION = '2013-08-26'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]
 
     end
 
-    class Client::V20130512 < Client
+    class Client::V20130826 < Client
 
-      define_client_methods('2013-05-12')
+      define_client_methods('2013-08-26')
 
     end
   end
