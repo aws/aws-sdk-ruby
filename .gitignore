@@ -1,7 +1,6 @@
+integration-test-config.json
 Gemfile.lock
 coverage
-vendor
-*.gem
 doc
 .yardoc
-integration-test-config.json
+*.gem

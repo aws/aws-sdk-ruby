@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gemspec
 
 gem 'rake', require: false
-gem 'seahorse', path: 'vendor/seahorse'
 
 group :test do
   gem 'rspec', github: 'rspec/rspec'
