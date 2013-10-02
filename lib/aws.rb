@@ -19,7 +19,6 @@ module Aws
   end
 
   module Plugins
-    autoload :ContentLength, 'aws/plugins/content_length'
     autoload :Credentials, 'aws/plugins/credentials'
     autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
     autoload :JsonProtocol, 'aws/plugins/json_protocol'
