@@ -1,5 +1,3 @@
-require 'stringio'
-
 module Seahorse
   module Client
     module Http
