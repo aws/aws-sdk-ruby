@@ -10,12 +10,11 @@ end
 namespace :test do
 
   desc "Runs unit tests"
-  task :unit => :setup do
+  task :unit do
     opts = ['bundle exec rspec']
     opts += FileList[ENV['FILES'] || 'spec/**/*_spec.rb'].sort
     execute_cmd(opts.join(' '))
   end
-
 
   desc "Runs integration tests"
   task :integration do
