@@ -145,11 +145,11 @@ module Aws
 
     def set_type(type)
       plugins = @properties['plugins'] ||= []
+      plugins << 'Seahorse::Client::Plugins::RestfulBindings'
+      plugins << 'Seahorse::Client::Plugins::ContentLength'
       plugins << 'Aws::Plugins::GlobalConfiguration'
       plugins << 'Aws::Plugins::RegionalEndpoint'
       plugins << 'Aws::Plugins::Credentials'
-      plugins << 'Aws::Plugins::ContentLength'
-      plugins << 'Seahorse::Client::Plugins::RestfulBindings'
       plugins <<
         case type
         when 'query' then 'Aws::Plugins::QueryProtocol'

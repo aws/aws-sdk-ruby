@@ -10,11 +10,11 @@
     "service_class_name": "DynamoDB"
   },
   "plugins": [
+    "Seahorse::Client::Plugins::RestfulBindings",
+    "Seahorse::Client::Plugins::ContentLength",
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",
-    "Aws::Plugins::ContentLength",
-    "Seahorse::Client::Plugins::RestfulBindings",
     "Aws::Plugins::JsonProtocol",
     "Aws::Plugins::SignatureV4"
   ],
