@@ -5,16 +5,17 @@ module Seahorse
     module Http
       class Response
 
-        # @option options [Integer] :status_code (nil)
+        # @option options [Integer] :status_code (0)
         # @option options [Headers] :headers (Headers.new)
         # @option options [IO] :body (StringIO.new)
         def initialize(options = {})
-          @status_code = nil
+          @status_code = options[:status_code] || 0
           @headers = options[:headers] || Headers.new
           @body = options[:body] || PlainStringIO.new
         end
 
-        # @return [Integer, nil]
+        # @return [Integer] Returns `0` if the request failed to generate
+        #   any response.
         attr_accessor :status_code
 
         # @return [Headers]

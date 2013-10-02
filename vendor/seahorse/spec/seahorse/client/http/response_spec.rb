@@ -7,8 +7,8 @@ module Seahorse
 
         describe '#status_code' do
 
-          it 'defaults to nil' do
-            expect(Response.new.status_code).to eq(nil)
+          it 'defaults to 0' do
+            expect(Response.new.status_code).to eq(0)
           end
 
           it 'can be set' do
