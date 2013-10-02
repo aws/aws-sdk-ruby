@@ -70,7 +70,7 @@ module Seahorse
             context.http_response.body.write('part1')
             context.http_response.body.write('part2')
             context.http_response.body.write('part3')
-            Response.new(context: context).signal_complete
+            Response.new(context: context)
           end
         end
 

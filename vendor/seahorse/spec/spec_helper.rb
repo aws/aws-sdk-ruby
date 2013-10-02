@@ -10,8 +10,9 @@ require 'seahorse'
 # returns an empty response.
 class DummySendHandler < Seahorse::Client::Handler
   def call(context)
-    options = { context: context, data: context.config.response_data }
-    Seahorse::Client::Response.new(options).signal_complete
+    Seahorse::Client::Response.new(
+      context: context,
+      data: context.config.response_data)
   end
 end
 

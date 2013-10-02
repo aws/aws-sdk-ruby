@@ -14,7 +14,7 @@ module Seahorse
         # @return [Response]
         def call(context)
           transmit(context.config, context.http_request, context.http_response)
-          Response.new(context: context).signal_complete
+          Response.new(context: context)
         end
 
         # @param [Configuration] config

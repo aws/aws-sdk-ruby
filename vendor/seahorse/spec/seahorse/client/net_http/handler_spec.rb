@@ -103,12 +103,6 @@ module Seahorse
             expect(resp.context).to be(context)
           end
 
-          it 'returns a completed request' do
-            stub_request(:any, endpoint)
-            resp = make_request
-            expect(resp.complete?).to eq(true)
-          end
-
           describe 'request endpoint' do
 
             it 'makes a request against the given endpoint' do

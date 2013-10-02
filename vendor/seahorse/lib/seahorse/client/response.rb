@@ -10,12 +10,9 @@ module Seahorse
       # @option options [String] :body ('')
       def initialize(options = {})
         @context = options[:context] || RequestContext.new
-        @data = options[:data] || {}
+        @data = options[:data]
         @http_request = @context.http_request
         @http_response = @context.http_response
-        @complete_mutex = Mutex.new
-        @callbacks = []
-        @complete = false
       end
 
       # @return [RequestContext]
@@ -27,62 +24,58 @@ module Seahorse
       # @return [Http::Response]
       attr_reader :http_response
 
-      # @todo This will eventually return a structure like object, not a hash.
-      # @return [Hash] the hash of data returned from the service
+      # @return The response data.  This may be `nil` if the response contains
+      #   an #{error}.
       attr_accessor :data
 
       # @return [StandardError, nil]
       attr_accessor :error
 
+      # Yields to the given block if the HTTP request received a response.
+      def on_complete(&block)
+        on_status(200..599, &block)
+      end
+
+      # Yields to the given block if the HTTP request received response with a
+      # ~ 200 level status code.
+      def on_success(&block)
+        on_status(200..299, &block)
+      end
+
+      # Yields to the given block if the HTTP request received response with a
+      # ~ 300 level status code.
+      def on_redirect(&block)
+        on_status(300..399, &block)
+      end
+
+      # Yields to the given block if the HTTP request received response with a
+      # ~ 400 or 500 level status code.
+      def on_error(&block)
+        on_status(400..599, &block)
+      end
+
+      # Yields to the given block if the HTTP request failed to receive any
+      # response.  This generally indicates there was a network 
+      # level status code.
+      def on_failure(&block)
+        on_status(0..0, &block)
+      end
+
+      private
+
       # @param [Range<Integer>] status_code_range (nil) When present, the
-      #   `callback` will be triggered only for responses 
+      #   `block` will be triggered only for responses with a status code
+      #   in the given range.
       # @return [Response] Returns self.
-      def on_complete(status_code_range = nil, &callback)
-        @complete_mutex.synchronize do
-          @callbacks << [status_code_range, Proc.new]
-          trigger_callback(*@callbacks.last) if @complete
+      def on_status(status_code_range = nil, &block)
+        if status_code_range.nil? || status_code_range.include?(status_code)
+          yield(self)
         end
         self
       end
 
-      def on_success(&callback)
-        on_complete(200..299, &callback)
-      end
-
-      def on_redirect(&callback)
-        on_complete(300..399, &callback)
-      end
-
-      def on_error(&callback)
-        on_complete(400..599, &callback)
-      end
-
-      # This method should only be called by the HTTP handler that generates
-      # this {Response}.  This triggers all {#on_complete} callbacks.
-      # @return [Request] Returns `self`.
-      def signal_complete
-        @complete_mutex.synchronize do
-          @complete = true
-          trigger_callbacks
-          self
-        end
-      end
-
-      # @return [Boolean] Returns `true` if the full response has been received.
-      def complete?
-        @complete_mutex.synchronize { @complete }
-      end
-
-      def trigger_callbacks
-        @callbacks.each do |range, callback|
-          trigger_callback(range, callback)
-        end
-      end
-
-      def trigger_callback(range, callback)
-        if range.nil? || range.include?(@http_response.status_code)
-          callback.call(self)
-        end
+      def status_code
+        @http_response.status_code
       end
 
     end
