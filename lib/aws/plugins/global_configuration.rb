@@ -1,31 +1,38 @@
-
 module Aws
   module Plugins
     class GlobalConfiguration < Seahorse::Client::Plugin
 
-      def pre_init(client_class, options)
-        defaults(client_class).each do |opt_name, opt_value|
-          next if opt_name == :api_version
-          options[opt_name] = opt_value unless options.key?(opt_name)
-        end
+      def pre_init(service_class, options)
+        # apply service specific defaults before the global aws defaults
+        apply_service_defaults(service_class, options)
+        apply_aws_defaults(options)
       end
 
       private
 
-      def defaults(client_class)
-        aws_opts.merge(client_opts(client_class))
-      end
-
-      def aws_opts
-        Aws.config.inject({}) do |defaults, (opt_name, default)|
-          defaults[opt_name] = default unless Aws.service_classes.key?(opt_name)
-          defaults
+      def apply_service_defaults(service_class, options)
+        if defaults = Aws.config[identifier(service_class)]
+          defaults.each do |option_name, default|
+            options[option_name] = default unless options.key?(option_name)
+          end
         end
       end
 
-      def client_opts(client_class)
-        identifier = client_class.name.split('::')[1].downcase.to_sym
-        Aws.config[identifier] || {}
+      def apply_aws_defaults(options)
+        Aws.config.each do |option_name, default|
+          next if svc_identifier?(option_name)
+          next if option_name == :api_version
+          next if options.key?(option_name)
+          options[option_name] = default
+        end
+      end
+
+      def identifier(service_class)
+        service_class.name.split('::')[1].downcase.to_sym
+      end
+
+      def svc_identifier?(option_name)
+        Aws.service_classes.key?(option_name)
       end
 
     end
