@@ -5,6 +5,7 @@ module Aws
 
       def pre_init(client_class, options)
         defaults(client_class).each do |opt_name, opt_value|
+          next if opt_name == :api_version
           options[opt_name] = opt_value unless options.key?(opt_name)
         end
       end

@@ -59,6 +59,13 @@ module Aws
       expect(svc.config.http_wire_trace).to be(true)
     end
 
+    it 'filters the :api_version option from the client constructor' do
+      Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
+      Aws.config[:api_version] = '2007-01-01'
+      expect { Aws.dummyservice }.not_to raise_error
+      expect { Aws.dummyservice(api_version: '2006-03-01') }.not_to raise_error
+    end
+
     it 'translates apis' do
       api = Seahorse::Model::Api.new
 
