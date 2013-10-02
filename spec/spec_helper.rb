@@ -14,7 +14,7 @@ class DummySendHandler < Seahorse::Client::Handler
     context.http_response.headers = headers
     context.http_response.status_code = context.config.response_status_code
     context.http_response.body = StringIO.new(context.config.response_body)
-    Seahorse::Client::Response.new(context: context).signal_complete
+    Seahorse::Client::Response.new(context: context)
   end
 
 end

@@ -72,10 +72,8 @@ module Aws
           context.http_response.status_code = f.response.status_code
           context.http_response.headers = f.response.headers
           context.http_response.body = f.response.body
-          response.signal_complete
-        else
-          response
         end
+        response
       end
 
     end
