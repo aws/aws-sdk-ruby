@@ -39,7 +39,7 @@ module Aws
     class GlobalConfiguration < Seahorse::Client::Plugin
 
       # @api private
-      def pre_init(service_class, options)
+      def before_initialize(service_class, options)
         # apply service specific defaults before the global aws defaults
         apply_service_defaults(service_class, options)
         apply_aws_defaults(options)

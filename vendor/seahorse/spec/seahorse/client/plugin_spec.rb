@@ -83,14 +83,14 @@ module Seahorse
 
       end
 
-      describe '.pre_init' do
+      describe '.before_initialize' do
 
         it 'yeilds the client class and constructor options to the plugin' do
           yielded_class = nil
           yielded_options = nil
           client = client_with_plugin(foo: 'bar') do
             option(:foo)
-            pre_init do |klass, options|
+            before_initialize do |klass, options|
               yielded_class = klass
               yielded_options = options
             end
@@ -102,12 +102,12 @@ module Seahorse
 
       end
 
-      describe '.post_init' do
+      describe '.after_initialize' do
 
         it 'yieldes the fully constructed client to the plugin' do
           initialized_client = nil
           client = client_with_plugin do
-            post_init {|c| initialized_client = c }
+            after_initialize {|c| initialized_client = c }
           end
           expect(client).to be(initialized_client)
         end

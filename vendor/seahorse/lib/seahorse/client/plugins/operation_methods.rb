@@ -25,7 +25,7 @@ module Seahorse
       #
       class OperationMethods < Plugin
 
-        def post_init(client)
+        def after_initialize(client)
           unless client.respond_to?(:operation_names)
             add_operation_helpers(client, client.config.api.operations.keys)
           end

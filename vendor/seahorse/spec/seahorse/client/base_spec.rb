@@ -257,9 +257,9 @@ module Seahorse
           p
         }
 
-        it 'instructs plugins to #pre_init' do
+        it 'instructs plugins to #before_initialize' do
           options = {}
-          expect(plugin).to receive(:pre_init).with(client_class, options)
+          expect(plugin).to receive(:before_initialize).with(client_class, options)
           client_class.add_plugin(plugin)
           client_class.new(options)
         end
@@ -279,8 +279,8 @@ module Seahorse
           client_class.new
         end
 
-        it 'instructs plugins to #post_init' do
-          expect(plugin).to receive(:post_init).with(kind_of(Client::Base))
+        it 'instructs plugins to #after_initialize' do
+          expect(plugin).to receive(:after_initialize).with(kind_of(Client::Base))
           client_class.add_plugin(plugin)
           client_class.new
         end

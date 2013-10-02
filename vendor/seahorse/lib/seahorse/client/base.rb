@@ -24,7 +24,7 @@ module Seahorse
       def initialize(plugins, options)
         @config = build_config(plugins, options)
         @handlers = handler_list(plugins)
-        post_init(plugins)
+        after_initialize(plugins)
       end
 
       # @return [Configuration<Struct>]
@@ -73,9 +73,9 @@ module Seahorse
       end
 
       # Gives each plugin the opportunity to modify this client.
-      def post_init(plugins)
+      def after_initialize(plugins)
         plugins.each do |plugin|
-          plugin.post_init(self) if plugin.respond_to?(:post_init)
+          plugin.after_initialize(self) if plugin.respond_to?(:after_initialize)
         end
       end
 
@@ -110,7 +110,7 @@ module Seahorse
         def new(options = {})
           plugins = build_plugins
           options = options.dup
-          pre_init(plugins, options)
+          before_initialize(plugins, options)
           client = allocate
           client.send(:initialize, plugins, options)
           client
@@ -214,9 +214,9 @@ module Seahorse
           plugins.map { |plugin| plugin.is_a?(Class) ? plugin.new : plugin }
         end
 
-        def pre_init(plugins, options)
+        def before_initialize(plugins, options)
           plugins.each do |plugin|
-            plugin.pre_init(self, options) if plugin.respond_to?(:pre_init)
+            plugin.before_initialize(self, options) if plugin.respond_to?(:before_initialize)
           end
         end
 

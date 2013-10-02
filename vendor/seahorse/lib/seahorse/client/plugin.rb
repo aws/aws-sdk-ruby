@@ -22,16 +22,16 @@ module Seahorse
       # @param [Class<Client::Base>]
       # @param [Hash] options
       # @return [void]
-      def pre_init(client_class, options)
-        self.class.pre_init_hooks.each do |block|
+      def before_initialize(client_class, options)
+        self.class.before_initialize_hooks.each do |block|
           block.call(client_class, options)
         end
       end
 
       # @param [Client::Base]
       # @return [void]
-      def post_init(client)
-        self.class.post_init_hooks.each do |block|
+      def after_initialize(client)
+        self.class.after_initialize_hooks.each do |block|
           block.call(client)
         end
       end
@@ -46,12 +46,12 @@ module Seahorse
           end
         end
 
-        def pre_init(&block)
-          pre_init_hooks << block
+        def before_initialize(&block)
+          before_initialize_hooks << block
         end
 
-        def post_init(&block)
-          post_init_hooks << block
+        def after_initialize(&block)
+          after_initialize_hooks << block
         end
 
         # @api private
@@ -65,13 +65,13 @@ module Seahorse
         end
 
         # @api private
-        def pre_init_hooks
-          @pre_init_hooks ||= []
+        def before_initialize_hooks
+          @before_initialize_hooks ||= []
         end
 
         # @api private
-        def post_init_hooks
-          @post_init_hooks ||= []
+        def after_initialize_hooks
+          @after_initialize_hooks ||= []
         end
 
       end
