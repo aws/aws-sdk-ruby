@@ -13,10 +13,10 @@ module Seahorse
           end
 
         end
+
+        handler(Handler, step: :sign, proiority: 0)
+
       end
-
-      handler(Handler, step: :sign, proiority: 0)
-
     end
   end
 end
