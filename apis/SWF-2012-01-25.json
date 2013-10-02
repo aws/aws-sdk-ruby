@@ -13,7 +13,7 @@
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::ContentLength",
-    "Aws::Plugins::RestProtocol",
+    "Seahorse::Client::Plugins::RestfulBindings",
     "Aws::Plugins::JsonProtocol",
     "Aws::Plugins::SignatureV4"
   ],

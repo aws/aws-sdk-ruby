@@ -149,7 +149,7 @@ module Aws
       plugins << 'Aws::Plugins::RegionalEndpoint'
       plugins << 'Aws::Plugins::Credentials'
       plugins << 'Aws::Plugins::ContentLength'
-      plugins << 'Aws::Plugins::RestProtocol'
+      plugins << 'Seahorse::Client::Plugins::RestfulBindings'
       plugins <<
         case type
         when 'query' then 'Aws::Plugins::QueryProtocol'
