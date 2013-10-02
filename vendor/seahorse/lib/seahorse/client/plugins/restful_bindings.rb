@@ -53,7 +53,7 @@ module Seahorse
           end
 
           def build_header(rule, headers, value)
-            if rule.is_a?(Model::Shapes::MapShape)
+            if map_shape?(rule)
               build_header_map(rule, headers, value)
             else
               headers[rule.serialized_name] = serialize_header_value(rule, value)
@@ -92,7 +92,7 @@ module Seahorse
           end
 
           def header_value(shape, headers)
-            if shape.is_a?(MapShape)
+            if map_shape?(shape)
               header_map(shape, headers)
             else
               parse_header_value(shape, headers[shape.serialized_name])
@@ -127,6 +127,10 @@ module Seahorse
             if output.raw_payload?
               response.data[output.payload] = response.http_response.body
             end
+          end
+
+          def map_shape?(shape)
+            shape.is_a?(Model::Shapes::MapShape)
           end
 
         end
