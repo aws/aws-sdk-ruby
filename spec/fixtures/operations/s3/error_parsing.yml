@@ -1,6 +1,6 @@
-config:
-  validate_params: false
 operation: delete_bucket
+params:
+  :bucket: 'bucket'
 response:
   status_code: 409
   body: |

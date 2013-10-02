@@ -1,6 +1,8 @@
-config:
-  validate_params: false
 operation: complete_multipart_upload
+params:
+  :bucket: 'bucket'
+  :key: 'key'
+  :upload_id: 'id'
 response:
   status_code: 200
   body: |
