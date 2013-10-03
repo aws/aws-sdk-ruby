@@ -147,15 +147,19 @@ module Aws
       plugins = @properties['plugins'] ||= []
       plugins << 'Seahorse::Client::Plugins::RestfulBindings'
       plugins << 'Seahorse::Client::Plugins::ContentLength'
+      plugins << 'Seahorse::Client::Plugins::JsonSimple' if type.match(/json/)
       plugins << 'Aws::Plugins::GlobalConfiguration'
       plugins << 'Aws::Plugins::RegionalEndpoint'
       plugins << 'Aws::Plugins::Credentials'
-      plugins <<
-        case type
-        when 'query' then 'Aws::Plugins::QueryProtocol'
-        when /json/ then 'Aws::Plugins::JsonProtocol'
-        when /xml/ then 'Aws::Plugins::XmlProtocol'
-        end if type
+      plugins.push(*case type
+        when 'query' then ['Aws::Plugins::QueryProtocol']
+        when 'json' then [
+          'Aws::Plugins::JsonProtocol', # used by all aws json services
+          'Aws::Plugins::JsonTarget' # not used by services like Glacier
+        ]
+        when /json/ then ['Aws::Plugins::JsonProtocol']
+        when /xml/ then ['Aws::Plugins::XmlProtocol']
+      end)
     end
 
     def set_signature_version(version)

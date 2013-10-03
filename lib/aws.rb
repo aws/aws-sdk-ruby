@@ -22,6 +22,7 @@ module Aws
     autoload :Credentials, 'aws/plugins/credentials'
     autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
     autoload :JsonProtocol, 'aws/plugins/json_protocol'
+    autoload :JsonTarget, 'aws/plugins/json_target'
     autoload :QueryProtocol, 'aws/plugins/query_protocol'
     autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
     autoload :S3BucketDns, 'aws/plugins/s3_bucket_dns'
