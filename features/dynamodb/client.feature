@@ -1,5 +1,5 @@
 # language: en
-@ec2 @client
+@dynamodb @client
 Feature: Amazon Elastic Compute Cloud
 
   Scenario: DescribeRegions
