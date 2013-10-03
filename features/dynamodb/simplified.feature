@@ -10,16 +10,23 @@ Feature: Amazon DynamoDB without translation
     Given I disable translation features Aws::DynamoDB
 
   Scenario: Sending a request with a simplified hash structure
-    When I call "describe_table" on "dynamodb" with the following params:
+    When I call "list_tables" on "dynamodb" with the following params:
     """
-    { 'TableName' => 'my-table' }
+    { 'Limit' => 1 }
     """
     Then the HTTP request body should be:
     """
-    {"TableName":"my-table"}
+    {"Limit":1}
     """
 
   Scenario: Receiving a response with a simplified hash structure
     When I call "list_tables" on "dynamodb"
     Then I expect response data to be a hash
     And I expect response data["TableNames"] to be an array
+
+  Scenario: Using simple mode does not disable error handling
+    When I call "describe_table" on "dynamodb" with the following params:
+    """
+    { 'TableName' => 'fake-table' }
+    """
+    Then I expect the response error to be "ResourceNotFoundException"

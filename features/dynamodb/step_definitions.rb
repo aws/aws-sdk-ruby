@@ -21,3 +21,7 @@ end
 Then(/^I expect response data\["(.*?)"\] to be an array$/) do |key|
   expect(@response.data[key]).to be_an(Array)
 end
+
+Then(/^I expect the response error to be "(.*?)"$/) do |error_class|
+  expect(@error.class.name).to match(error_class)
+end
