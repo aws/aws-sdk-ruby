@@ -1,18 +1,9 @@
-require 'multi_json'
-
 module Aws
   module Json
-    class Handler < ProtocolHandler
+    class ResponseHandler < Aws::ResponseHandler
 
-      def populate_headers(context)
-      end
-
-      def builder_class
-        Json::Builder
-      end
-
-      def parser_class
-        Json::Parser
+      def extract_data(rules, xml, target)
+        Parser.parse(rules, xml, target)
       end
 
       def extract_error(response)

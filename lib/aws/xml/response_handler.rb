@@ -2,18 +2,11 @@ require 'multi_xml'
 
 module Aws
   module Xml
-    class Handler < ProtocolHandler
+    # @api private
+    class ResponseHandler < Aws::ResponseHandler
 
-      def populate_headers(context)
-        context.http_request.headers['Content-Type'] = 'application/xml'
-      end
-
-      def builder_class
-        Xml::Builder
-      end
-
-      def parser_class
-        Xml::Parser
+      def extract_data(rules, xml, target)
+        Parser.parse(rules, xml, target)
       end
 
       def extract_error(response)

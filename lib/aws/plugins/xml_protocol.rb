@@ -2,7 +2,8 @@ module Aws
   module Plugins
     class XmlProtocol < Seahorse::Client::Plugin
 
-      handler(Xml::Handler, step: :build, priority: 50)
+      handler(Xml::RequestHandler)
+      handler(Xml::ResponseHandler)
 
     end
   end
