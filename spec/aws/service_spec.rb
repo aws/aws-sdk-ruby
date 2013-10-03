@@ -71,38 +71,43 @@ module Aws
 
     describe '.define' do
 
+      let(:apis) { [] }
+
+      let(:svc) {
+        svc = Service.define(:svc, apis)
+        svc.remove_plugin(Plugins::S3RegionalEndpoint)
+        svc.remove_plugin(Plugins::GlobalConfiguration)
+        svc
+      }
+
       it 'defines a new client factory' do
-        svc = Service.define(:identifier)
         expect(svc.ancestors).to include(Service)
       end
 
       it 'populates the method name' do
-        svc = Service.define(:identifier)
-        expect(svc.identifier).to eq(:identifier)
+        expect(svc.identifier).to eq(:svc)
       end
 
       it 'accepts apis as a path to a translated api' do
-        api = 'apis/S3-2006-03-01.json'
-        svc = Service.define(:name, [api])
+        apis << 'apis/S3-2006-03-01.json'
         client_class = svc.const_get(:V20060301)
-        allow(client_class).to receive(:name).and_return('Aws::Svc::V20060301')
+        allow(client_class).to receive(:svc).and_return('Aws::Svc::V20060301')
         client = client_class.new
         expect(client.config.api.version).to eq('2006-03-01')
       end
 
       it 'accepts apis as a path to an un-translated api' do
-        api = 'apis-src/autoscaling-2011-01-01.json'
-        svc = Service.define(:name, [api])
-        client_class = svc.const_get(:V20110101)
-        allow(client_class).to receive(:name).and_return('Aws::Svc::V20060301')
+        apis << 'apis-src/s3-2006-03-01.json'
+        client_class = svc.const_get(:V20060301)
+        allow(client_class).to receive(:svc).and_return('Aws::Svc::V20060301')
         client = client_class.new
-        expect(client.config.api.version).to eq('2011-01-01')
+        expect(client.config.api.version).to eq('2006-03-01')
       end
 
       it 'accepts apis as Seahorse::Model::Api' do
         api = Seahorse::Model::Api.new
         api.version = '2013-01-02'
-        svc = Service.define(:name, [api])
+        svc = Service.define(:svc, [api])
         expect(svc.const_get(:V20130102).new.config.api).to be(api)
       end
 
@@ -150,18 +155,14 @@ module Aws
       end
 
       it 'merges global defaults options when constructing the client' do
-        # shared default disabled
-        Aws.config = { http_wire_trace: false }
-        expect(Aws::EC2.new.config.http_wire_trace).to be(false)
-        expect(Aws::S3.new.config.http_wire_trace).to be(false)
-        # shared default enabled
-        Aws.config = { http_wire_trace: true }
-        expect(Aws::EC2.new.config.http_wire_trace).to be(true)
-        expect(Aws::S3.new.config.http_wire_trace).to be(true)
+        # shared default
+        Aws.config = { region: 'us-east-1' }
+        expect(Aws::EC2.new.config.region).to eq('us-east-1')
+        expect(Aws::S3.new.config.region).to eq('us-east-1')
         # default enabled, s3 disables
-        Aws.config = { http_wire_trace: true, s3: { http_wire_trace: false } }
-        expect(Aws::EC2.new.config.http_wire_trace).to be(true)
-        expect(Aws::S3.new.config.http_wire_trace).to be(false)
+        Aws.config = { region: 'us-east-1', s3: { region: 'us-west-2' } }
+        expect(Aws::EC2.new.config.region).to eq('us-east-1')
+        expect(Aws::S3.new.config.region).to eq('us-west-2')
       end
 
     end

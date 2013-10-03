@@ -19,6 +19,8 @@ module Aws
         @config = (data['config'] || {}).inject({}) do |config, (key, value)|
           config.merge(key.to_sym => value)
         end
+        @config[:region] ||= 'us-east-1'
+        @config[:credentials] = Credentials.new('akid', 'secret')
         @params = data['params'] || {}
         @data = data['data']
 
@@ -117,9 +119,11 @@ module Aws
             # load the fixture from disk
             f = OperationFixture.load(svc_name, fixture_name)
 
-            # build a service client
-            Aws.send(svc_name).class.remove_plugin(
+            # remove the plugin that raises errors
+            Aws.service_classes[svc_name.to_sym].remove_plugin(
               Seahorse::Client::Plugins::RaiseResponseErrors)
+
+            # build the service interface
             svc = Aws.send(svc_name, f.config)
 
             # build the request

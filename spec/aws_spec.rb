@@ -41,8 +41,13 @@ module Aws
 
   describe 'add_service' do
 
+    before(:each) do
+      Aws.config[:region] = 'us-east-1'
+    end
+
     after(:each) do
       Aws.send(:remove_const, :DummyService)
+      Aws.config = {}
     end
 
     it 'defines a new service interface' do

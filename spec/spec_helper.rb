@@ -4,6 +4,13 @@ require 'aws-sdk-core'
 require 'seahorse'
 require 'yaml'
 
+# prevent env from leaking state into tests
+%w(AWS AMAZON).each do |prefix|
+  ENV.delete("#{prefix}_ACCESS_KEY_ID")
+  ENV.delete("#{prefix}_SECRET_ACCESS_KEY")
+  ENV.delete("#{prefix}_SESSION_TOKEN")
+end
+
 # A helper :send_handler that does not send the request, it simply
 # returns an empty response.
 class DummySendHandler < Seahorse::Client::Handler
