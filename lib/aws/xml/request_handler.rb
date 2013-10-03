@@ -8,7 +8,7 @@ module Aws
       end
 
       def serialize_params(context, rules, params)
-        Builder.build(rules, params)
+        context.http_request.body = Builder.build(rules, params)
       end
 
     end

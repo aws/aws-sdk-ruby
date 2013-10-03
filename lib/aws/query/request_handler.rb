@@ -12,7 +12,7 @@ module Aws
         param_list = Builder.to_query_params(rules, params)
         param_list.set('Version', context.config.api.version)
         param_list.set('Action', context.operation.name)
-        param_list.to_io
+        context.http_request.body = param_list.to_io
       end
 
     end

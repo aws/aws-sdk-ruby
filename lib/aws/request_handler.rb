@@ -24,7 +24,7 @@ module Aws
           rules = input
           params = context.params
         end
-        context.http_request.body = serialize_params(context, rules, params)
+        serialize_params(context, rules, params)
       end
     end
 

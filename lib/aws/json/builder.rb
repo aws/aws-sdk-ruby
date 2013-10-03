@@ -13,9 +13,15 @@ module Aws
       end
 
       # @param [Hash] params
+      # @return [Hash]
+      def build(params)
+        structure(@rules, params)
+      end
+
+      # @param [Hash] params
       # @return [String<JSON>]
       def to_json(params)
-        MultiJson.dump(structure(@rules, params))
+        MultiJson.dump(build(params))
       end
 
       class << self
