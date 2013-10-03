@@ -8,7 +8,7 @@ module Aws
       end
 
       option(:signing_region) do |config|
-        config.respond_to?(:region) ? config.region : 'us-east-1'
+        config.api.endpoint.match(/%s/) ? config.region : 'us-east-1'
       end
 
       handle(:Handler, step: :sign) do |context|

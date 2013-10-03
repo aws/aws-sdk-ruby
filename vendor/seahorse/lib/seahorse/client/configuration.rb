@@ -157,6 +157,10 @@ module Seahorse
 
         attr_reader :struct
 
+        def respond_to?(method_name)
+          @members.include?(method_name.to_sym) || super
+        end
+
         private
 
         def method_missing(method_name, *args)
