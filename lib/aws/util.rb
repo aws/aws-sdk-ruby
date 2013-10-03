@@ -34,16 +34,5 @@ module Aws
     end
     module_function :uri_escape
 
-    # Performs a simple deep copy of hashes and arrays.  Non-hash and
-    # non-array values are not duplicated.
-    def deep_copy(value)
-      case value
-      when Hash then value.inject({}) { |h, (k, v)| h[k] = deep_copy(v); h }
-      when Array then value.map { |v| deep_copy(v) }
-      else value
-      end
-    end
-    module_function :deep_copy
-
   end
 end
