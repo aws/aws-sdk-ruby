@@ -3,7 +3,7 @@ module Aws
     class XmlProtocol < Seahorse::Client::Plugin
 
       handler(Xml::RequestHandler)
-      handler(ResponseHandler.new(Xml::Parser))
+      handler(ResponseHandler.new(Xml::Parser.new))
       handler(ErrorHandler.new(Xml::ErrorParser.new))
 
     end

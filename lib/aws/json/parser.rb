@@ -7,17 +7,13 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      # @param [Seahorse::Model::Shapes::Shape] rules
-      def initialize(rules)
-        @rules = rules
-      end
-
+      # @param [Seahorse::Model::Shapes::OutputShape] rules
       # @param [String<JSON>] json
       # @param [Hash] target (nil)
       # @return [Hash]
-      def parse(json, target = nil)
+      def parse(rules, json, target = nil)
         json = '{}' if json == ''
-        structure(@rules, MultiJson.load(json, max_nesting: false), target)
+        structure(rules, MultiJson.load(json, max_nesting: false), target)
       end
 
       # @param [Seahorse::Model::Shapes::OutputShape] rules
@@ -25,7 +21,7 @@ module Aws
       # @param [Hash] target (nil)
       # @return [Hash]
       def self.parse(rules, json, target = nil)
-        new(rules.payload_member).parse(json, target)
+        new.parse(rules, json, target)
       end
 
       private

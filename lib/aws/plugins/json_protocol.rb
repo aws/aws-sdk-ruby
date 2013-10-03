@@ -11,7 +11,7 @@ module Aws
       def add_handlers(handlers, config)
         unless config.simple
           handlers.add(Json::RequestHandler)
-          handlers.add(ResponseHandler.new(Json::Parser))
+          handlers.add(ResponseHandler.new(Json::Parser.new))
         end
         handlers.add(ErrorHandler.new(Json::ErrorParser.new))
       end

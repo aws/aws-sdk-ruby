@@ -9,17 +9,12 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      # @param [Seahorse::Model::Shapes::Shape] rules
-      def initialize(rules)
-        @rules = rules
-      end
-
+      # @param [Seahorse::Model::Shapes::OutputShape] rules
       # @param [String<xml>] xml
       # @param [Hash] target (nil)
       # @return [Hash]
-      def parse(xml, target = nil)
-        target ||= Structure.new(@rules.members.keys)
-        structure(@rules, MultiXml.parse(xml).values.first || {}, target)
+      def parse(rules, xml, target = nil)
+        structure(rules, MultiXml.parse(xml).values.first || {}, target)
       end
 
       # @param [Seahorse::Model::Shapes::OutputShape] rules
@@ -27,7 +22,7 @@ module Aws
       # @param [Hash] target (nil)
       # @return [Hash]
       def self.parse(rules, xml, target = nil)
-        Parser.new(rules.payload_member).parse(xml, target)
+        new.parse(rules, xml, target)
       end
 
       private

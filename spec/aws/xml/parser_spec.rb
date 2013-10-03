@@ -13,7 +13,7 @@ module Aws
       let(:shape) { Seahorse::Model::Shapes::Shape.from_hash(rules) }
 
       def parse(xml)
-        Parser.parse(shape, xml).to_hash
+        Parser.new.parse(shape, xml).to_hash
       end
 
       it 'returns an empty hash when the XML is empty' do
