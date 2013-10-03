@@ -12,10 +12,12 @@
   "plugins": [
     "Seahorse::Client::Plugins::RestfulBindings",
     "Seahorse::Client::Plugins::ContentLength",
+    "Seahorse::Client::Plugins::JsonSimple",
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
+    "Aws::Plugins::JsonTarget",
     "Aws::Plugins::SignatureV4"
   ],
   "operations": {
