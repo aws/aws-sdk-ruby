@@ -201,12 +201,13 @@ module Seahorse
         # @return [Class<Client::Base>]
         def define(options = {})
           subclass = Class.new(self)
-          subclass.set_api(options[:api]) if options.key?(:api)
+          subclass.set_api(options[:api] || api)
           Array(options[:plugins]).each do |plugin|
             subclass.add_plugin(plugin)
           end
           subclass
         end
+        alias extend define
 
         private
 
