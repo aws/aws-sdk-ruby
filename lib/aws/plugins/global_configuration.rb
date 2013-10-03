@@ -65,7 +65,7 @@ module Aws
       end
 
       def identifier(service_class)
-        service_class.name.split('::')[1].downcase.to_sym
+        service_class.api.metadata['service_class_name'].downcase.to_sym
       end
 
       def svc_identifier?(option_name)

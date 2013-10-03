@@ -10,6 +10,7 @@ module Aws
 
       before(:each) do
         api = Seahorse::Model::Api.new
+        api.metadata['service_class_name'] = 'Svc'
         api.version = '2013-01-01'
         Aws.add_service(:Svc, [api])
         Aws::Svc.add_plugin(GlobalConfiguration)
