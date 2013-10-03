@@ -24,6 +24,7 @@ module Seahorse
 
         # @return [String]
         def body_contents
+          body.rewind
           contents = body.read
           body.rewind
           contents

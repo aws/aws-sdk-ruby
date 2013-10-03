@@ -35,6 +35,14 @@ module Seahorse
         attr_reader :body
 
         # @return [String]
+        def body_contents
+          body.rewind
+          contents = body.read
+          body.rewind
+          contents
+        end
+
+        # @return [String]
         def pathname
           path.split('?')[0]
         end
