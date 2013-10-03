@@ -37,6 +37,7 @@ module Seahorse
       autoload :Api, 'seahorse/client/plugins/api'
       autoload :ContentLength, 'seahorse/client/plugins/content_length'
       autoload :Endpoint, 'seahorse/client/plugins/endpoint'
+      autoload :JsonSimple, 'seahorse/client/plugins/json_simple'
       autoload :Logging, 'seahorse/client/plugins/logging'
       autoload :NetHttp, 'seahorse/client/plugins/net_http'
       autoload :OperationMethods, 'seahorse/client/plugins/operation_methods'
