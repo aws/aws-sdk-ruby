@@ -1,18 +1,22 @@
 module Aws
   # @api private
-  class RequestHandler < Seahorse::Client::Handler
+  class RequestHandler
+
+    def initialize(serializer)
+      @serializer = serializer
+    end
+
+    attr_accessor :handler
 
     def call(context)
-      build_request(context)
+      populate_headers(context)
+      populate_body(context)
       @handler.call(context)
     end
 
-    def build_request(context)
-      populate_headers(context)
-      populate_body(context)
+    def populate_headers(context)
+      @serializer.populate_headers(context)
     end
-
-    def populate_headers(context); end
 
     def populate_body(context)
       input = context.operation.input
@@ -24,7 +28,7 @@ module Aws
           rules = input
           params = context.params
         end
-        serialize_params(context, rules, params)
+        @serializer.populate_body(context, rules, params)
       end
     end
 

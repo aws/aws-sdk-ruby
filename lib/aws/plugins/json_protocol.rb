@@ -9,8 +9,10 @@ module Aws
       option(:convert_params) { |config| !config.simple }
 
       def add_handlers(handlers, config)
-        unless config.simple
-          handlers.add(Json::RequestHandler)
+        if config.simple
+          handlers.add(Seahorse::Client::Plugins::JsonSimple::Handler)
+        else
+          handlers.add(RequestHandler.new(Json::Serializer.new))
           handlers.add(ResponseHandler.new(Json::Parser.new))
         end
         handlers.add(ErrorHandler.new(Json::ErrorParser.new))

@@ -1,13 +1,13 @@
 module Aws
   module Xml
     # @api private
-    class RequestHandler < Aws::RequestHandler
+    class Serializer
 
       def populate_headers(context)
         context.http_request.headers['Content-Type'] = 'application/xml'
       end
 
-      def serialize_params(context, rules, params)
+      def populate_body(context, rules, params)
         context.http_request.body = Builder.build(rules, params)
       end
 

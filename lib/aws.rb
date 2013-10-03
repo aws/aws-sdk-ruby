@@ -18,7 +18,7 @@ module Aws
     autoload :Builder, 'aws/json/builder'
     autoload :ErrorParser, 'aws/json/error_parser'
     autoload :Parser, 'aws/json/parser'
-    autoload :RequestHandler, 'aws/json/request_handler'
+    autoload :Serializer, 'aws/json/serializer'
   end
 
   module Plugins
@@ -46,7 +46,7 @@ module Aws
     autoload :Builder, 'aws/query/builder'
     autoload :Param, 'aws/query/param'
     autoload :ParamList, 'aws/query/param_list'
-    autoload :RequestHandler, 'aws/query/request_handler'
+    autoload :Serializer, 'aws/query/serializer'
   end
 
   # @api private
@@ -62,7 +62,7 @@ module Aws
     autoload :Builder, 'aws/xml/builder'
     autoload :ErrorParser,  'aws/xml/error_parser'
     autoload :Parser, 'aws/xml/parser'
-    autoload :RequestHandler, 'aws/xml/request_handler'
+    autoload :Serializer, 'aws/xml/serializer'
   end
 
   class << self
