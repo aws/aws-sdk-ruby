@@ -155,7 +155,7 @@ module Aws
         when 'query' then ['Aws::Plugins::QueryProtocol']
         when 'json' then [
           'Aws::Plugins::JsonProtocol', # used by all aws json services
-          'Aws::Plugins::JsonTarget' # not used by services like Glacier
+          'Aws::Plugins::JsonRpcHeaders' # not used by services like Glacier
         ]
         when /json/ then ['Aws::Plugins::JsonProtocol']
         when /xml/ then ['Aws::Plugins::XmlProtocol']

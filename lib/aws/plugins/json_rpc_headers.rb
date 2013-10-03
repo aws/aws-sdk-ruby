@@ -4,7 +4,7 @@ module Aws
 
     # This plugin applies the "X-Amz-Target" and "Content-Type" headers
     # for AWS JSON Rpc style APIs.
-    class JsonTarget < Seahorse::Client::Plugin
+    class JsonRpcHeaders < Seahorse::Client::Plugin
 
       # @api private
       class Handler < Seahorse::Client::Handler

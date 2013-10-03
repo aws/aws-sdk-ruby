@@ -15,7 +15,7 @@
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
-    "Aws::Plugins::JsonTarget",
+    "Aws::Plugins::JsonRpcHeaders",
     "Aws::Plugins::SignatureV4"
   ],
   "operations": {
