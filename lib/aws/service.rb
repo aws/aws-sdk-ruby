@@ -206,7 +206,7 @@ module Aws
       end
 
       def load_api(path)
-        api = MultiJson.load(File.read(path))
+        api = MultiJson.load(File.read(path), max_nesting: false)
         if api.key?('metadata')
           Seahorse::Model::Api.from_hash(api)
         else

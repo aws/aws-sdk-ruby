@@ -16,7 +16,8 @@ module Aws
       # @param [Hash] target (nil)
       # @return [Hash]
       def parse(json, target = nil)
-        structure(@rules, MultiJson.load(json == '' ? '{}' : json), target)
+        json = '{}' if json == ''
+        structure(@rules, MultiJson.load(json, max_nesting: false), target)
       end
 
       # @param [Seahorse::Model::Shapes::OutputShape] rules
