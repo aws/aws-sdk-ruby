@@ -10,5 +10,9 @@ Aws.config = MultiJson.load(File.read(config_file), symbolize_keys: true)
 
 def call_request(service, operation_name, params = {})
   service = instance_variable_get("@#{service}")
-  @response = service.build_request(operation_name, params).send_request
+  begin
+    @response = service.build_request(operation_name, params).send_request
+  rescue => error
+    @error = error
+  end
 end

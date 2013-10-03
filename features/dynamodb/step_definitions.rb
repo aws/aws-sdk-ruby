@@ -1,9 +1,5 @@
 Given(/^I disable translation features Aws::DynamoDB$/) do
-  subclass = Aws::DynamoDB.versioned_clients.last.extend
-  subclass.remove_plugin(Seahorse::Client::Plugins::ParamConversion)
-  subclass.remove_plugin(Seahorse::Client::Plugins::ParamValidation)
-  subclass.remove_plugin(Aws::Plugins::JsonProtocol)
-  @dynamodb = subclass.new
+  @dynamodb = Aws.dynamodb(simple: true)
 end
 
 When(/^I call "(.*?)" on "(.*?)"$/) do |operation, service|

@@ -3,7 +3,8 @@ module Aws
     class QueryProtocol < Seahorse::Client::Plugin
 
       handler(Query::RequestHandler)
-      handler(Xml::ResponseHandler)
+      handler(ResponseHandler.new(Xml::Parser))
+      handler(ErrorHandler.new(Xml::ErrorParser.new))
 
     end
   end

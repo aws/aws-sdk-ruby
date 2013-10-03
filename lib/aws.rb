@@ -5,6 +5,7 @@ module Aws
   autoload :ApiTranslator, 'aws/api_translator'
   autoload :Credentials, 'aws/credentials'
   autoload :Errors, 'aws/errors'
+  autoload :ErrorHandler, 'aws/error_handler'
   autoload :RequestHandler, 'aws/request_handler'
   autoload :ResponseHandler, 'aws/response_handler'
   autoload :Service, 'aws/service'
@@ -15,9 +16,9 @@ module Aws
   # @api private
   module Json
     autoload :Builder, 'aws/json/builder'
+    autoload :ErrorParser, 'aws/json/error_parser'
     autoload :Parser, 'aws/json/parser'
     autoload :RequestHandler, 'aws/json/request_handler'
-    autoload :ResponseHandler, 'aws/json/response_handler'
   end
 
   module Plugins
@@ -59,9 +60,9 @@ module Aws
   # @api private
   module Xml
     autoload :Builder, 'aws/xml/builder'
+    autoload :ErrorParser,  'aws/xml/error_parser'
     autoload :Parser, 'aws/xml/parser'
     autoload :RequestHandler, 'aws/xml/request_handler'
-    autoload :ResponseHandler, 'aws/xml/response_handler'
   end
 
   class << self
