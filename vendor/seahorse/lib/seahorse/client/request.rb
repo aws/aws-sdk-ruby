@@ -17,7 +17,7 @@ module Seahorse
       # @return [RequestContext]
       attr_reader :context
 
-      # Sends the request, returning a {Response Response}.
+      # Sends the request, returning a {Response} object.
       #
       #     response = request.send_request
       #
@@ -30,46 +30,25 @@ module Seahorse
       #
       # ## Streaming to a File
       #
-      # TODO: write this
+      # You can stream the raw HTTP response body to a File, or any IO-like
+      # object, by passing the `:target` option.
       #
-      # ## Streaming to a Tempfile
-      #
-      # TODO: write this
+      #     File.open('photo.jpg', 'wb') do |file|
+      #       request.send_request(target: file)
+      #     end
       #
       # ## Block Streaming
       #
-      # Pass a block to `#send` and the response will be yielded in chunks
-      # and will not be loaded into memory.
+      # Pass a block to `#send_request` and the response will be yielded in
+      # chunks to the given block.
       #
       #     # stream the response data
-      #     response = request.send_request do |chunk|
+      #     request.send_request do |chunk|
       #       file.write(chunk)
       #     end
       #
-      # **Please Note**: When streaming to a block, retries are disabled.
-      #
-      # # Asynchronous Requests
-      #
-      # If you are using a HTTP handler that makes asynchronous requests,
-      # then you will need to wait for the returned response to be
-      # complete before you inspect the response.
-      #
-      #     response = request.send_request
-      #     response.complete?
-      #     #=> false
-      #
-      #     response.on_complete do
-      #       response.complete?
-      #       #=> true
-      #     end
-      #
-      # The {Response#on_complete on_complete} method can also yield the
-      # {Response Response} object to your block.
-      #
-      #     request.send_request.on_complete do |response|
-      #       response.complete?
-      #       #=> true
-      #     end
+      # **Please Note**: When streaming to a block, it is not possible to
+      # retry failed requests.
       #
       # @return [Response]
       def send_request(options = {}, &block)
