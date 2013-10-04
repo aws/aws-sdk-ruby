@@ -1,0 +1,34 @@
+# This test ensures that the result wrapped elements in the response
+# XML are correctly deserialized
+operation: list_users
+response:
+  status_code: 200
+  body: |
+    <ListUsersResponse xmlns="https://iam.amazonaws.com/doc/2010-05-08/">
+      <ListUsersResult>
+        <Users>
+          <member>
+            <UserId>AIDAJGIY4Z6DJLHUYPUJ6</UserId>
+            <Path>/</Path>
+            <UserName>user</UserName>
+            <Arn>arn:aws:iam::469596866844:user/u3</Arn>
+            <CreateDate>2012-03-22T17:38:39Z</CreateDate>
+          </member>
+        </Users>
+        <IsTruncated>false</IsTruncated>
+      </ListUsersResult>
+      <ResponseMetadata>
+        <RequestId>88073802-2d1e-11e3-98d0-159f3b2d2434</RequestId>
+      </ResponseMetadata>
+    </ListUsersResponse>
+data:
+  :list_users_result:
+    :users:
+      - :path: /
+        :user_name: user
+        :user_id: AIDAJGIY4Z6DJLHUYPUJ6
+        :arn: arn:aws:iam::469596866844:user/u3
+        :create_date: 2012-03-22 17:38:39 UTC
+    :is_truncated: false
+  :response_metadata:
+    :request_id: 88073802-2d1e-11e3-98d0-159f3b2d2434

@@ -2,7 +2,6 @@
   "version": "2010-12-01",
   "endpoint": "email.%s.amazonaws.com",
   "metadata": {
-    "result_wrapped": true,
     "signing_name": "ses",
     "xmlnamespace": "http://ses.amazonaws.com/doc/2010-12-01/",
     "service_full_name": "Amazon Simple Email Service",
@@ -32,6 +31,21 @@
             "serialized_name": "Identity"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "delete_verified_email_address": {
@@ -45,6 +59,21 @@
             "type": "string",
             "required": true,
             "serialized_name": "EmailAddress"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -69,37 +98,53 @@
       "output": {
         "type": "output",
         "members": {
-          "dkim_attributes": {
-            "type": "map",
-            "serialized_name": "DkimAttributes",
-            "keys": {
-              "type": "string"
-            },
+          "get_identity_dkim_attributes_result": {
+            "type": "structure",
+            "serialized_name": "GetIdentityDkimAttributesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "dkim_enabled": {
-                  "type": "boolean",
-                  "serialized_name": "DkimEnabled"
+              "dkim_attributes": {
+                "type": "map",
+                "serialized_name": "DkimAttributes",
+                "keys": {
+                  "type": "string"
                 },
-                "dkim_verification_status": {
-                  "type": "string",
-                  "serialized_name": "DkimVerificationStatus",
-                  "enum": [
-                    "Pending",
-                    "Success",
-                    "Failed",
-                    "TemporaryFailure",
-                    "NotStarted"
-                  ]
-                },
-                "dkim_tokens": {
-                  "type": "list",
-                  "serialized_name": "DkimTokens",
+                "members": {
+                  "type": "structure",
                   "members": {
-                    "type": "string"
+                    "dkim_enabled": {
+                      "type": "boolean",
+                      "serialized_name": "DkimEnabled"
+                    },
+                    "dkim_verification_status": {
+                      "type": "string",
+                      "serialized_name": "DkimVerificationStatus",
+                      "enum": [
+                        "Pending",
+                        "Success",
+                        "Failed",
+                        "TemporaryFailure",
+                        "NotStarted"
+                      ]
+                    },
+                    "dkim_tokens": {
+                      "type": "list",
+                      "serialized_name": "DkimTokens",
+                      "members": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -126,27 +171,43 @@
       "output": {
         "type": "output",
         "members": {
-          "notification_attributes": {
-            "type": "map",
-            "serialized_name": "NotificationAttributes",
-            "keys": {
-              "type": "string"
-            },
+          "get_identity_notification_attributes_result": {
+            "type": "structure",
+            "serialized_name": "GetIdentityNotificationAttributesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "bounce_topic": {
-                  "type": "string",
-                  "serialized_name": "BounceTopic"
+              "notification_attributes": {
+                "type": "map",
+                "serialized_name": "NotificationAttributes",
+                "keys": {
+                  "type": "string"
                 },
-                "complaint_topic": {
-                  "type": "string",
-                  "serialized_name": "ComplaintTopic"
-                },
-                "forwarding_enabled": {
-                  "type": "boolean",
-                  "serialized_name": "ForwardingEnabled"
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "bounce_topic": {
+                      "type": "string",
+                      "serialized_name": "BounceTopic"
+                    },
+                    "complaint_topic": {
+                      "type": "string",
+                      "serialized_name": "ComplaintTopic"
+                    },
+                    "forwarding_enabled": {
+                      "type": "boolean",
+                      "serialized_name": "ForwardingEnabled"
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -173,30 +234,46 @@
       "output": {
         "type": "output",
         "members": {
-          "verification_attributes": {
-            "type": "map",
-            "serialized_name": "VerificationAttributes",
-            "keys": {
-              "type": "string"
-            },
+          "get_identity_verification_attributes_result": {
+            "type": "structure",
+            "serialized_name": "GetIdentityVerificationAttributesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "verification_status": {
-                  "type": "string",
-                  "serialized_name": "VerificationStatus",
-                  "enum": [
-                    "Pending",
-                    "Success",
-                    "Failed",
-                    "TemporaryFailure",
-                    "NotStarted"
-                  ]
+              "verification_attributes": {
+                "type": "map",
+                "serialized_name": "VerificationAttributes",
+                "keys": {
+                  "type": "string"
                 },
-                "verification_token": {
-                  "type": "string",
-                  "serialized_name": "VerificationToken"
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "verification_status": {
+                      "type": "string",
+                      "serialized_name": "VerificationStatus",
+                      "enum": [
+                        "Pending",
+                        "Success",
+                        "Failed",
+                        "TemporaryFailure",
+                        "NotStarted"
+                      ]
+                    },
+                    "verification_token": {
+                      "type": "string",
+                      "serialized_name": "VerificationToken"
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -210,17 +287,33 @@
       "output": {
         "type": "output",
         "members": {
-          "max_24_hour_send": {
-            "type": "float",
-            "serialized_name": "Max24HourSend"
+          "get_send_quota_result": {
+            "type": "structure",
+            "serialized_name": "GetSendQuotaResult",
+            "members": {
+              "max_24_hour_send": {
+                "type": "float",
+                "serialized_name": "Max24HourSend"
+              },
+              "max_send_rate": {
+                "type": "float",
+                "serialized_name": "MaxSendRate"
+              },
+              "sent_last_24_hours": {
+                "type": "float",
+                "serialized_name": "SentLast24Hours"
+              }
+            }
           },
-          "max_send_rate": {
-            "type": "float",
-            "serialized_name": "MaxSendRate"
-          },
-          "sent_last_24_hours": {
-            "type": "float",
-            "serialized_name": "SentLast24Hours"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -232,32 +325,48 @@
       "output": {
         "type": "output",
         "members": {
-          "send_data_points": {
-            "type": "list",
-            "serialized_name": "SendDataPoints",
+          "get_send_statistics_result": {
+            "type": "structure",
+            "serialized_name": "GetSendStatisticsResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "timestamp": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "Timestamp"
-                },
-                "delivery_attempts": {
-                  "type": "integer",
-                  "serialized_name": "DeliveryAttempts"
-                },
-                "bounces": {
-                  "type": "integer",
-                  "serialized_name": "Bounces"
-                },
-                "complaints": {
-                  "type": "integer",
-                  "serialized_name": "Complaints"
-                },
-                "rejects": {
-                  "type": "integer",
-                  "serialized_name": "Rejects"
+              "send_data_points": {
+                "type": "list",
+                "serialized_name": "SendDataPoints",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "timestamp": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "Timestamp"
+                    },
+                    "delivery_attempts": {
+                      "type": "integer",
+                      "serialized_name": "DeliveryAttempts"
+                    },
+                    "bounces": {
+                      "type": "integer",
+                      "serialized_name": "Bounces"
+                    },
+                    "complaints": {
+                      "type": "integer",
+                      "serialized_name": "Complaints"
+                    },
+                    "rejects": {
+                      "type": "integer",
+                      "serialized_name": "Rejects"
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -292,16 +401,32 @@
       "output": {
         "type": "output",
         "members": {
-          "identities": {
-            "type": "list",
-            "serialized_name": "Identities",
+          "list_identities_result": {
+            "type": "structure",
+            "serialized_name": "ListIdentitiesResult",
             "members": {
-              "type": "string"
+              "identities": {
+                "type": "list",
+                "serialized_name": "Identities",
+                "members": {
+                  "type": "string"
+                }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
+              }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -313,11 +438,27 @@
       "output": {
         "type": "output",
         "members": {
-          "verified_email_addresses": {
-            "type": "list",
-            "serialized_name": "VerifiedEmailAddresses",
+          "list_verified_email_addresses_result": {
+            "type": "structure",
+            "serialized_name": "ListVerifiedEmailAddressesResult",
             "members": {
-              "type": "string"
+              "verified_email_addresses": {
+                "type": "list",
+                "serialized_name": "VerifiedEmailAddresses",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -439,9 +580,25 @@
       "output": {
         "type": "output",
         "members": {
-          "message_id": {
-            "type": "string",
-            "serialized_name": "MessageId"
+          "send_email_result": {
+            "type": "structure",
+            "serialized_name": "SendEmailResult",
+            "members": {
+              "message_id": {
+                "type": "string",
+                "serialized_name": "MessageId"
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -481,9 +638,25 @@
       "output": {
         "type": "output",
         "members": {
-          "message_id": {
-            "type": "string",
-            "serialized_name": "MessageId"
+          "send_raw_email_result": {
+            "type": "structure",
+            "serialized_name": "SendRawEmailResult",
+            "members": {
+              "message_id": {
+                "type": "string",
+                "serialized_name": "MessageId"
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -506,6 +679,21 @@
             "serialized_name": "DkimEnabled"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "set_identity_feedback_forwarding_enabled": {
@@ -524,6 +712,21 @@
             "type": "boolean",
             "required": true,
             "serialized_name": "ForwardingEnabled"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -554,6 +757,21 @@
             "serialized_name": "SnsTopic"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "verify_domain_dkim": {
@@ -573,11 +791,27 @@
       "output": {
         "type": "output",
         "members": {
-          "dkim_tokens": {
-            "type": "list",
-            "serialized_name": "DkimTokens",
+          "verify_domain_dkim_result": {
+            "type": "structure",
+            "serialized_name": "VerifyDomainDkimResult",
             "members": {
-              "type": "string"
+              "dkim_tokens": {
+                "type": "list",
+                "serialized_name": "DkimTokens",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -600,9 +834,25 @@
       "output": {
         "type": "output",
         "members": {
-          "verification_token": {
-            "type": "string",
-            "serialized_name": "VerificationToken"
+          "verify_domain_identity_result": {
+            "type": "structure",
+            "serialized_name": "VerifyDomainIdentityResult",
+            "members": {
+              "verification_token": {
+                "type": "string",
+                "serialized_name": "VerificationToken"
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -620,6 +870,21 @@
             "serialized_name": "EmailAddress"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "verify_email_identity": {
@@ -633,6 +898,21 @@
             "type": "string",
             "required": true,
             "serialized_name": "EmailAddress"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }

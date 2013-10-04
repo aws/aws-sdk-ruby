@@ -2,7 +2,6 @@
   "version": "2012-06-01",
   "endpoint": "elasticloadbalancing.%s.amazonaws.com",
   "metadata": {
-    "result_wrapped": true,
     "service_full_name": "Elastic Load Balancing",
     "service_class_name": "ElasticLoadBalancing"
   },
@@ -41,11 +40,27 @@
       "output": {
         "type": "output",
         "members": {
-          "security_groups": {
-            "type": "list",
-            "serialized_name": "SecurityGroups",
+          "apply_security_groups_to_load_balancer_result": {
+            "type": "structure",
+            "serialized_name": "ApplySecurityGroupsToLoadBalancerResult",
             "members": {
-              "type": "string"
+              "security_groups": {
+                "type": "list",
+                "serialized_name": "SecurityGroups",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -76,11 +91,27 @@
       "output": {
         "type": "output",
         "members": {
-          "subnets": {
-            "type": "list",
-            "serialized_name": "Subnets",
+          "attach_load_balancer_to_subnets_result": {
+            "type": "structure",
+            "serialized_name": "AttachLoadBalancerToSubnetsResult",
             "members": {
-              "type": "string"
+              "subnets": {
+                "type": "list",
+                "serialized_name": "Subnets",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -135,29 +166,45 @@
       "output": {
         "type": "output",
         "members": {
-          "health_check": {
+          "configure_health_check_result": {
             "type": "structure",
-            "serialized_name": "HealthCheck",
+            "serialized_name": "ConfigureHealthCheckResult",
             "members": {
-              "target": {
+              "health_check": {
+                "type": "structure",
+                "serialized_name": "HealthCheck",
+                "members": {
+                  "target": {
+                    "type": "string",
+                    "serialized_name": "Target"
+                  },
+                  "interval": {
+                    "type": "integer",
+                    "serialized_name": "Interval"
+                  },
+                  "timeout": {
+                    "type": "integer",
+                    "serialized_name": "Timeout"
+                  },
+                  "unhealthy_threshold": {
+                    "type": "integer",
+                    "serialized_name": "UnhealthyThreshold"
+                  },
+                  "healthy_threshold": {
+                    "type": "integer",
+                    "serialized_name": "HealthyThreshold"
+                  }
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
                 "type": "string",
-                "serialized_name": "Target"
-              },
-              "interval": {
-                "type": "integer",
-                "serialized_name": "Interval"
-              },
-              "timeout": {
-                "type": "integer",
-                "serialized_name": "Timeout"
-              },
-              "unhealthy_threshold": {
-                "type": "integer",
-                "serialized_name": "UnhealthyThreshold"
-              },
-              "healthy_threshold": {
-                "type": "integer",
-                "serialized_name": "HealthyThreshold"
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -187,6 +234,21 @@
             "serialized_name": "CookieName"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "create_lb_cookie_stickiness_policy": {
@@ -209,6 +271,21 @@
           "cookie_expiration_period": {
             "type": "integer",
             "serialized_name": "CookieExpirationPeriod"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -288,9 +365,25 @@
       "output": {
         "type": "output",
         "members": {
-          "dns_name": {
-            "type": "string",
-            "serialized_name": "DNSName"
+          "create_load_balancer_result": {
+            "type": "structure",
+            "serialized_name": "CreateLoadBalancerResult",
+            "members": {
+              "dns_name": {
+                "type": "string",
+                "serialized_name": "DNSName"
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -341,6 +434,21 @@
             }
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "create_load_balancer_policy": {
@@ -383,6 +491,21 @@
             }
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "delete_load_balancer": {
@@ -396,6 +519,21 @@
             "type": "string",
             "required": true,
             "serialized_name": "LoadBalancerName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -421,6 +559,21 @@
             }
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "delete_load_balancer_policy": {
@@ -439,6 +592,21 @@
             "type": "string",
             "required": true,
             "serialized_name": "PolicyName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -474,16 +642,32 @@
       "output": {
         "type": "output",
         "members": {
-          "instances": {
-            "type": "list",
-            "serialized_name": "Instances",
+          "deregister_instances_from_load_balancer_result": {
+            "type": "structure",
+            "serialized_name": "DeregisterInstancesFromLoadBalancerResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "instance_id": {
-                  "type": "string",
-                  "serialized_name": "InstanceId"
+              "instances": {
+                "type": "list",
+                "serialized_name": "Instances",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "instance_id": {
+                      "type": "string",
+                      "serialized_name": "InstanceId"
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -520,28 +704,44 @@
       "output": {
         "type": "output",
         "members": {
-          "instance_states": {
-            "type": "list",
-            "serialized_name": "InstanceStates",
+          "describe_instance_health_result": {
+            "type": "structure",
+            "serialized_name": "DescribeInstanceHealthResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "instance_id": {
-                  "type": "string",
-                  "serialized_name": "InstanceId"
-                },
-                "state": {
-                  "type": "string",
-                  "serialized_name": "State"
-                },
-                "reason_code": {
-                  "type": "string",
-                  "serialized_name": "ReasonCode"
-                },
-                "description": {
-                  "type": "string",
-                  "serialized_name": "Description"
+              "instance_states": {
+                "type": "list",
+                "serialized_name": "InstanceStates",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "instance_id": {
+                      "type": "string",
+                      "serialized_name": "InstanceId"
+                    },
+                    "state": {
+                      "type": "string",
+                      "serialized_name": "State"
+                    },
+                    "reason_code": {
+                      "type": "string",
+                      "serialized_name": "ReasonCode"
+                    },
+                    "description": {
+                      "type": "string",
+                      "serialized_name": "Description"
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -571,37 +771,53 @@
       "output": {
         "type": "output",
         "members": {
-          "policy_descriptions": {
-            "type": "list",
-            "serialized_name": "PolicyDescriptions",
+          "describe_load_balancer_policies_result": {
+            "type": "structure",
+            "serialized_name": "DescribeLoadBalancerPoliciesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "policy_name": {
-                  "type": "string",
-                  "serialized_name": "PolicyName"
-                },
-                "policy_type_name": {
-                  "type": "string",
-                  "serialized_name": "PolicyTypeName"
-                },
-                "policy_attribute_descriptions": {
-                  "type": "list",
-                  "serialized_name": "PolicyAttributeDescriptions",
+              "policy_descriptions": {
+                "type": "list",
+                "serialized_name": "PolicyDescriptions",
+                "members": {
+                  "type": "structure",
                   "members": {
-                    "type": "structure",
-                    "members": {
-                      "attribute_name": {
-                        "type": "string",
-                        "serialized_name": "AttributeName"
-                      },
-                      "attribute_value": {
-                        "type": "string",
-                        "serialized_name": "AttributeValue"
+                    "policy_name": {
+                      "type": "string",
+                      "serialized_name": "PolicyName"
+                    },
+                    "policy_type_name": {
+                      "type": "string",
+                      "serialized_name": "PolicyTypeName"
+                    },
+                    "policy_attribute_descriptions": {
+                      "type": "list",
+                      "serialized_name": "PolicyAttributeDescriptions",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "attribute_name": {
+                            "type": "string",
+                            "serialized_name": "AttributeName"
+                          },
+                          "attribute_value": {
+                            "type": "string",
+                            "serialized_name": "AttributeValue"
+                          }
+                        }
                       }
                     }
                   }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -627,49 +843,65 @@
       "output": {
         "type": "output",
         "members": {
-          "policy_type_descriptions": {
-            "type": "list",
-            "serialized_name": "PolicyTypeDescriptions",
+          "describe_load_balancer_policy_types_result": {
+            "type": "structure",
+            "serialized_name": "DescribeLoadBalancerPolicyTypesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "policy_type_name": {
-                  "type": "string",
-                  "serialized_name": "PolicyTypeName"
-                },
-                "description": {
-                  "type": "string",
-                  "serialized_name": "Description"
-                },
-                "policy_attribute_type_descriptions": {
-                  "type": "list",
-                  "serialized_name": "PolicyAttributeTypeDescriptions",
+              "policy_type_descriptions": {
+                "type": "list",
+                "serialized_name": "PolicyTypeDescriptions",
+                "members": {
+                  "type": "structure",
                   "members": {
-                    "type": "structure",
-                    "members": {
-                      "attribute_name": {
-                        "type": "string",
-                        "serialized_name": "AttributeName"
-                      },
-                      "attribute_type": {
-                        "type": "string",
-                        "serialized_name": "AttributeType"
-                      },
-                      "description": {
-                        "type": "string",
-                        "serialized_name": "Description"
-                      },
-                      "default_value": {
-                        "type": "string",
-                        "serialized_name": "DefaultValue"
-                      },
-                      "cardinality": {
-                        "type": "string",
-                        "serialized_name": "Cardinality"
+                    "policy_type_name": {
+                      "type": "string",
+                      "serialized_name": "PolicyTypeName"
+                    },
+                    "description": {
+                      "type": "string",
+                      "serialized_name": "Description"
+                    },
+                    "policy_attribute_type_descriptions": {
+                      "type": "list",
+                      "serialized_name": "PolicyAttributeTypeDescriptions",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "attribute_name": {
+                            "type": "string",
+                            "serialized_name": "AttributeName"
+                          },
+                          "attribute_type": {
+                            "type": "string",
+                            "serialized_name": "AttributeType"
+                          },
+                          "description": {
+                            "type": "string",
+                            "serialized_name": "Description"
+                          },
+                          "default_value": {
+                            "type": "string",
+                            "serialized_name": "DefaultValue"
+                          },
+                          "cardinality": {
+                            "type": "string",
+                            "serialized_name": "Cardinality"
+                          }
+                        }
                       }
                     }
                   }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -699,229 +931,245 @@
       "output": {
         "type": "output",
         "members": {
-          "load_balancer_descriptions": {
-            "type": "list",
-            "serialized_name": "LoadBalancerDescriptions",
+          "describe_load_balancers_result": {
+            "type": "structure",
+            "serialized_name": "DescribeLoadBalancersResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "load_balancer_name": {
-                  "type": "string",
-                  "serialized_name": "LoadBalancerName"
-                },
-                "dns_name": {
-                  "type": "string",
-                  "serialized_name": "DNSName"
-                },
-                "canonical_hosted_zone_name": {
-                  "type": "string",
-                  "serialized_name": "CanonicalHostedZoneName"
-                },
-                "canonical_hosted_zone_name_id": {
-                  "type": "string",
-                  "serialized_name": "CanonicalHostedZoneNameID"
-                },
-                "listener_descriptions": {
-                  "type": "list",
-                  "serialized_name": "ListenerDescriptions",
+              "load_balancer_descriptions": {
+                "type": "list",
+                "serialized_name": "LoadBalancerDescriptions",
+                "members": {
+                  "type": "structure",
                   "members": {
-                    "type": "structure",
-                    "members": {
-                      "listener": {
+                    "load_balancer_name": {
+                      "type": "string",
+                      "serialized_name": "LoadBalancerName"
+                    },
+                    "dns_name": {
+                      "type": "string",
+                      "serialized_name": "DNSName"
+                    },
+                    "canonical_hosted_zone_name": {
+                      "type": "string",
+                      "serialized_name": "CanonicalHostedZoneName"
+                    },
+                    "canonical_hosted_zone_name_id": {
+                      "type": "string",
+                      "serialized_name": "CanonicalHostedZoneNameID"
+                    },
+                    "listener_descriptions": {
+                      "type": "list",
+                      "serialized_name": "ListenerDescriptions",
+                      "members": {
                         "type": "structure",
-                        "serialized_name": "Listener",
                         "members": {
-                          "protocol": {
-                            "type": "string",
-                            "serialized_name": "Protocol"
+                          "listener": {
+                            "type": "structure",
+                            "serialized_name": "Listener",
+                            "members": {
+                              "protocol": {
+                                "type": "string",
+                                "serialized_name": "Protocol"
+                              },
+                              "load_balancer_port": {
+                                "type": "integer",
+                                "serialized_name": "LoadBalancerPort"
+                              },
+                              "instance_protocol": {
+                                "type": "string",
+                                "serialized_name": "InstanceProtocol"
+                              },
+                              "instance_port": {
+                                "type": "integer",
+                                "serialized_name": "InstancePort"
+                              },
+                              "ssl_certificate_id": {
+                                "type": "string",
+                                "serialized_name": "SSLCertificateId"
+                              }
+                            }
                           },
-                          "load_balancer_port": {
-                            "type": "integer",
-                            "serialized_name": "LoadBalancerPort"
-                          },
-                          "instance_protocol": {
-                            "type": "string",
-                            "serialized_name": "InstanceProtocol"
-                          },
+                          "policy_names": {
+                            "type": "list",
+                            "serialized_name": "PolicyNames",
+                            "members": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "policies": {
+                      "type": "structure",
+                      "serialized_name": "Policies",
+                      "members": {
+                        "app_cookie_stickiness_policies": {
+                          "type": "list",
+                          "serialized_name": "AppCookieStickinessPolicies",
+                          "members": {
+                            "type": "structure",
+                            "members": {
+                              "policy_name": {
+                                "type": "string",
+                                "serialized_name": "PolicyName"
+                              },
+                              "cookie_name": {
+                                "type": "string",
+                                "serialized_name": "CookieName"
+                              }
+                            }
+                          }
+                        },
+                        "lb_cookie_stickiness_policies": {
+                          "type": "list",
+                          "serialized_name": "LBCookieStickinessPolicies",
+                          "members": {
+                            "type": "structure",
+                            "members": {
+                              "policy_name": {
+                                "type": "string",
+                                "serialized_name": "PolicyName"
+                              },
+                              "cookie_expiration_period": {
+                                "type": "integer",
+                                "serialized_name": "CookieExpirationPeriod"
+                              }
+                            }
+                          }
+                        },
+                        "other_policies": {
+                          "type": "list",
+                          "serialized_name": "OtherPolicies",
+                          "members": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "backend_server_descriptions": {
+                      "type": "list",
+                      "serialized_name": "BackendServerDescriptions",
+                      "members": {
+                        "type": "structure",
+                        "members": {
                           "instance_port": {
                             "type": "integer",
                             "serialized_name": "InstancePort"
                           },
-                          "ssl_certificate_id": {
-                            "type": "string",
-                            "serialized_name": "SSLCertificateId"
-                          }
-                        }
-                      },
-                      "policy_names": {
-                        "type": "list",
-                        "serialized_name": "PolicyNames",
-                        "members": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "policies": {
-                  "type": "structure",
-                  "serialized_name": "Policies",
-                  "members": {
-                    "app_cookie_stickiness_policies": {
-                      "type": "list",
-                      "serialized_name": "AppCookieStickinessPolicies",
-                      "members": {
-                        "type": "structure",
-                        "members": {
-                          "policy_name": {
-                            "type": "string",
-                            "serialized_name": "PolicyName"
-                          },
-                          "cookie_name": {
-                            "type": "string",
-                            "serialized_name": "CookieName"
+                          "policy_names": {
+                            "type": "list",
+                            "serialized_name": "PolicyNames",
+                            "members": {
+                              "type": "string"
+                            }
                           }
                         }
                       }
                     },
-                    "lb_cookie_stickiness_policies": {
+                    "availability_zones": {
                       "type": "list",
-                      "serialized_name": "LBCookieStickinessPolicies",
-                      "members": {
-                        "type": "structure",
-                        "members": {
-                          "policy_name": {
-                            "type": "string",
-                            "serialized_name": "PolicyName"
-                          },
-                          "cookie_expiration_period": {
-                            "type": "integer",
-                            "serialized_name": "CookieExpirationPeriod"
-                          }
-                        }
-                      }
-                    },
-                    "other_policies": {
-                      "type": "list",
-                      "serialized_name": "OtherPolicies",
+                      "serialized_name": "AvailabilityZones",
                       "members": {
                         "type": "string"
                       }
-                    }
-                  }
-                },
-                "backend_server_descriptions": {
-                  "type": "list",
-                  "serialized_name": "BackendServerDescriptions",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "instance_port": {
-                        "type": "integer",
-                        "serialized_name": "InstancePort"
-                      },
-                      "policy_names": {
-                        "type": "list",
-                        "serialized_name": "PolicyNames",
+                    },
+                    "subnets": {
+                      "type": "list",
+                      "serialized_name": "Subnets",
+                      "members": {
+                        "type": "string"
+                      }
+                    },
+                    "vpc_id": {
+                      "type": "string",
+                      "serialized_name": "VPCId"
+                    },
+                    "instances": {
+                      "type": "list",
+                      "serialized_name": "Instances",
+                      "members": {
+                        "type": "structure",
                         "members": {
-                          "type": "string"
+                          "instance_id": {
+                            "type": "string",
+                            "serialized_name": "InstanceId"
+                          }
                         }
                       }
-                    }
-                  }
-                },
-                "availability_zones": {
-                  "type": "list",
-                  "serialized_name": "AvailabilityZones",
-                  "members": {
-                    "type": "string"
-                  }
-                },
-                "subnets": {
-                  "type": "list",
-                  "serialized_name": "Subnets",
-                  "members": {
-                    "type": "string"
-                  }
-                },
-                "vpc_id": {
-                  "type": "string",
-                  "serialized_name": "VPCId"
-                },
-                "instances": {
-                  "type": "list",
-                  "serialized_name": "Instances",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "instance_id": {
-                        "type": "string",
-                        "serialized_name": "InstanceId"
+                    },
+                    "health_check": {
+                      "type": "structure",
+                      "serialized_name": "HealthCheck",
+                      "members": {
+                        "target": {
+                          "type": "string",
+                          "serialized_name": "Target"
+                        },
+                        "interval": {
+                          "type": "integer",
+                          "serialized_name": "Interval"
+                        },
+                        "timeout": {
+                          "type": "integer",
+                          "serialized_name": "Timeout"
+                        },
+                        "unhealthy_threshold": {
+                          "type": "integer",
+                          "serialized_name": "UnhealthyThreshold"
+                        },
+                        "healthy_threshold": {
+                          "type": "integer",
+                          "serialized_name": "HealthyThreshold"
+                        }
                       }
+                    },
+                    "source_security_group": {
+                      "type": "structure",
+                      "serialized_name": "SourceSecurityGroup",
+                      "members": {
+                        "owner_alias": {
+                          "type": "string",
+                          "serialized_name": "OwnerAlias"
+                        },
+                        "group_name": {
+                          "type": "string",
+                          "serialized_name": "GroupName"
+                        }
+                      }
+                    },
+                    "security_groups": {
+                      "type": "list",
+                      "serialized_name": "SecurityGroups",
+                      "members": {
+                        "type": "string"
+                      }
+                    },
+                    "created_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CreatedTime"
+                    },
+                    "scheme": {
+                      "type": "string",
+                      "serialized_name": "Scheme"
                     }
                   }
-                },
-                "health_check": {
-                  "type": "structure",
-                  "serialized_name": "HealthCheck",
-                  "members": {
-                    "target": {
-                      "type": "string",
-                      "serialized_name": "Target"
-                    },
-                    "interval": {
-                      "type": "integer",
-                      "serialized_name": "Interval"
-                    },
-                    "timeout": {
-                      "type": "integer",
-                      "serialized_name": "Timeout"
-                    },
-                    "unhealthy_threshold": {
-                      "type": "integer",
-                      "serialized_name": "UnhealthyThreshold"
-                    },
-                    "healthy_threshold": {
-                      "type": "integer",
-                      "serialized_name": "HealthyThreshold"
-                    }
-                  }
-                },
-                "source_security_group": {
-                  "type": "structure",
-                  "serialized_name": "SourceSecurityGroup",
-                  "members": {
-                    "owner_alias": {
-                      "type": "string",
-                      "serialized_name": "OwnerAlias"
-                    },
-                    "group_name": {
-                      "type": "string",
-                      "serialized_name": "GroupName"
-                    }
-                  }
-                },
-                "security_groups": {
-                  "type": "list",
-                  "serialized_name": "SecurityGroups",
-                  "members": {
-                    "type": "string"
-                  }
-                },
-                "created_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "CreatedTime"
-                },
-                "scheme": {
-                  "type": "string",
-                  "serialized_name": "Scheme"
                 }
+              },
+              "next_marker": {
+                "type": "string",
+                "serialized_name": "NextMarker"
               }
             }
           },
-          "next_marker": {
-            "type": "string",
-            "serialized_name": "NextMarker"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -951,11 +1199,27 @@
       "output": {
         "type": "output",
         "members": {
-          "subnets": {
-            "type": "list",
-            "serialized_name": "Subnets",
+          "detach_load_balancer_from_subnets_result": {
+            "type": "structure",
+            "serialized_name": "DetachLoadBalancerFromSubnetsResult",
             "members": {
-              "type": "string"
+              "subnets": {
+                "type": "list",
+                "serialized_name": "Subnets",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -986,11 +1250,27 @@
       "output": {
         "type": "output",
         "members": {
-          "availability_zones": {
-            "type": "list",
-            "serialized_name": "AvailabilityZones",
+          "disable_availability_zones_for_load_balancer_result": {
+            "type": "structure",
+            "serialized_name": "DisableAvailabilityZonesForLoadBalancerResult",
             "members": {
-              "type": "string"
+              "availability_zones": {
+                "type": "list",
+                "serialized_name": "AvailabilityZones",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -1021,11 +1301,27 @@
       "output": {
         "type": "output",
         "members": {
-          "availability_zones": {
-            "type": "list",
-            "serialized_name": "AvailabilityZones",
+          "enable_availability_zones_for_load_balancer_result": {
+            "type": "structure",
+            "serialized_name": "EnableAvailabilityZonesForLoadBalancerResult",
             "members": {
-              "type": "string"
+              "availability_zones": {
+                "type": "list",
+                "serialized_name": "AvailabilityZones",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -1062,16 +1358,32 @@
       "output": {
         "type": "output",
         "members": {
-          "instances": {
-            "type": "list",
-            "serialized_name": "Instances",
+          "register_instances_with_load_balancer_result": {
+            "type": "structure",
+            "serialized_name": "RegisterInstancesWithLoadBalancerResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "instance_id": {
-                  "type": "string",
-                  "serialized_name": "InstanceId"
+              "instances": {
+                "type": "list",
+                "serialized_name": "Instances",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "instance_id": {
+                      "type": "string",
+                      "serialized_name": "InstanceId"
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -1099,6 +1411,21 @@
             "type": "string",
             "required": true,
             "serialized_name": "SSLCertificateId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -1129,6 +1456,21 @@
             }
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "set_load_balancer_policies_of_listener": {
@@ -1154,6 +1496,21 @@
             "serialized_name": "PolicyNames",
             "members": {
               "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }

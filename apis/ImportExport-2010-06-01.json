@@ -2,7 +2,6 @@
   "version": "2010-06-01",
   "endpoint": "importexport.amazonaws.com",
   "metadata": {
-    "result_wrapped": true,
     "xmlnamespace": "http://importexport.amazonaws.com/doc/2010-06-01/",
     "service_full_name": "AWS Import/Export",
     "service_class_name": "ImportExport"
@@ -34,9 +33,25 @@
       "output": {
         "type": "output",
         "members": {
-          "success": {
-            "type": "boolean",
-            "serialized_name": "Success"
+          "cancel_job_result": {
+            "type": "structure",
+            "serialized_name": "CancelJobResult",
+            "members": {
+              "success": {
+                "type": "boolean",
+                "serialized_name": "Success"
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -76,33 +91,49 @@
       "output": {
         "type": "output",
         "members": {
-          "job_id": {
-            "type": "string",
-            "serialized_name": "JobId"
+          "create_job_result": {
+            "type": "structure",
+            "serialized_name": "CreateJobResult",
+            "members": {
+              "job_id": {
+                "type": "string",
+                "serialized_name": "JobId"
+              },
+              "job_type": {
+                "type": "string",
+                "serialized_name": "JobType",
+                "enum": [
+                  "Import",
+                  "Export"
+                ]
+              },
+              "aws_shipping_address": {
+                "type": "string",
+                "serialized_name": "AwsShippingAddress"
+              },
+              "signature": {
+                "type": "string",
+                "serialized_name": "Signature"
+              },
+              "signature_file_contents": {
+                "type": "string",
+                "serialized_name": "SignatureFileContents"
+              },
+              "warning_message": {
+                "type": "string",
+                "serialized_name": "WarningMessage"
+              }
+            }
           },
-          "job_type": {
-            "type": "string",
-            "serialized_name": "JobType",
-            "enum": [
-              "Import",
-              "Export"
-            ]
-          },
-          "aws_shipping_address": {
-            "type": "string",
-            "serialized_name": "AwsShippingAddress"
-          },
-          "signature": {
-            "type": "string",
-            "serialized_name": "Signature"
-          },
-          "signature_file_contents": {
-            "type": "string",
-            "serialized_name": "SignatureFileContents"
-          },
-          "warning_message": {
-            "type": "string",
-            "serialized_name": "WarningMessage"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -124,73 +155,89 @@
       "output": {
         "type": "output",
         "members": {
-          "job_id": {
-            "type": "string",
-            "serialized_name": "JobId"
+          "get_status_result": {
+            "type": "structure",
+            "serialized_name": "GetStatusResult",
+            "members": {
+              "job_id": {
+                "type": "string",
+                "serialized_name": "JobId"
+              },
+              "job_type": {
+                "type": "string",
+                "serialized_name": "JobType",
+                "enum": [
+                  "Import",
+                  "Export"
+                ]
+              },
+              "aws_shipping_address": {
+                "type": "string",
+                "serialized_name": "AwsShippingAddress"
+              },
+              "location_code": {
+                "type": "string",
+                "serialized_name": "LocationCode"
+              },
+              "location_message": {
+                "type": "string",
+                "serialized_name": "LocationMessage"
+              },
+              "progress_code": {
+                "type": "string",
+                "serialized_name": "ProgressCode"
+              },
+              "progress_message": {
+                "type": "string",
+                "serialized_name": "ProgressMessage"
+              },
+              "carrier": {
+                "type": "string",
+                "serialized_name": "Carrier"
+              },
+              "tracking_number": {
+                "type": "string",
+                "serialized_name": "TrackingNumber"
+              },
+              "log_bucket": {
+                "type": "string",
+                "serialized_name": "LogBucket"
+              },
+              "log_key": {
+                "type": "string",
+                "serialized_name": "LogKey"
+              },
+              "error_count": {
+                "type": "integer",
+                "serialized_name": "ErrorCount"
+              },
+              "signature": {
+                "type": "string",
+                "serialized_name": "Signature"
+              },
+              "signature_file_contents": {
+                "type": "string",
+                "serialized_name": "SignatureFileContents"
+              },
+              "current_manifest": {
+                "type": "string",
+                "serialized_name": "CurrentManifest"
+              },
+              "creation_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreationDate"
+              }
+            }
           },
-          "job_type": {
-            "type": "string",
-            "serialized_name": "JobType",
-            "enum": [
-              "Import",
-              "Export"
-            ]
-          },
-          "aws_shipping_address": {
-            "type": "string",
-            "serialized_name": "AwsShippingAddress"
-          },
-          "location_code": {
-            "type": "string",
-            "serialized_name": "LocationCode"
-          },
-          "location_message": {
-            "type": "string",
-            "serialized_name": "LocationMessage"
-          },
-          "progress_code": {
-            "type": "string",
-            "serialized_name": "ProgressCode"
-          },
-          "progress_message": {
-            "type": "string",
-            "serialized_name": "ProgressMessage"
-          },
-          "carrier": {
-            "type": "string",
-            "serialized_name": "Carrier"
-          },
-          "tracking_number": {
-            "type": "string",
-            "serialized_name": "TrackingNumber"
-          },
-          "log_bucket": {
-            "type": "string",
-            "serialized_name": "LogBucket"
-          },
-          "log_key": {
-            "type": "string",
-            "serialized_name": "LogKey"
-          },
-          "error_count": {
-            "type": "integer",
-            "serialized_name": "ErrorCount"
-          },
-          "signature": {
-            "type": "string",
-            "serialized_name": "Signature"
-          },
-          "signature_file_contents": {
-            "type": "string",
-            "serialized_name": "SignatureFileContents"
-          },
-          "current_manifest": {
-            "type": "string",
-            "serialized_name": "CurrentManifest"
-          },
-          "creation_date": {
-            "type": "iso8601_timestamp",
-            "serialized_name": "CreationDate"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -215,38 +262,54 @@
       "output": {
         "type": "output",
         "members": {
-          "jobs": {
-            "type": "list",
-            "serialized_name": "Jobs",
+          "list_jobs_result": {
+            "type": "structure",
+            "serialized_name": "ListJobsResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "job_id": {
-                  "type": "string",
-                  "serialized_name": "JobId"
-                },
-                "creation_date": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "CreationDate"
-                },
-                "is_canceled": {
-                  "type": "boolean",
-                  "serialized_name": "IsCanceled"
-                },
-                "job_type": {
-                  "type": "string",
-                  "serialized_name": "JobType",
-                  "enum": [
-                    "Import",
-                    "Export"
-                  ]
+              "jobs": {
+                "type": "list",
+                "serialized_name": "Jobs",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "job_id": {
+                      "type": "string",
+                      "serialized_name": "JobId"
+                    },
+                    "creation_date": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CreationDate"
+                    },
+                    "is_canceled": {
+                      "type": "boolean",
+                      "serialized_name": "IsCanceled"
+                    },
+                    "job_type": {
+                      "type": "string",
+                      "serialized_name": "JobType",
+                      "enum": [
+                        "Import",
+                        "Export"
+                      ]
+                    }
+                  }
                 }
+              },
+              "is_truncated": {
+                "type": "boolean",
+                "serialized_name": "IsTruncated"
               }
             }
           },
-          "is_truncated": {
-            "type": "boolean",
-            "serialized_name": "IsTruncated"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -287,13 +350,29 @@
       "output": {
         "type": "output",
         "members": {
-          "success": {
-            "type": "boolean",
-            "serialized_name": "Success"
+          "update_job_result": {
+            "type": "structure",
+            "serialized_name": "UpdateJobResult",
+            "members": {
+              "success": {
+                "type": "boolean",
+                "serialized_name": "Success"
+              },
+              "warning_message": {
+                "type": "string",
+                "serialized_name": "WarningMessage"
+              }
+            }
           },
-          "warning_message": {
-            "type": "string",
-            "serialized_name": "WarningMessage"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }

@@ -81,11 +81,40 @@ module Aws
     end
 
     def translated
+
       api = Seahorse::Model::Api.from_hash(@properties)
       api.metadata = Hash[api.metadata.sort]
       @operations.values.each do |src|
         operation = OperationTranslator.translate(src, @options)
         api.operations[underscore(operation.name)] = operation
+      end
+
+      if @result_wrapped
+        api.operations.each do |op_name, operation|
+
+          output = Seahorse::Model::Shapes::OutputShape.new
+
+          unless operation.output.empty?
+            struct = operation.output.to_hash
+            struct['type'] = 'structure'
+            struct['serialized_name'] = "#{operation.name}Result"
+            struct = Seahorse::Model::Shapes::Shape.from_hash(struct)
+            output.members[:"#{op_name}_result"] = struct
+          end
+
+          output.members[:response_metadata] =
+            Seahorse::Model::Shapes::Shape.from_hash(
+              'type' => 'structure',
+              'serialized_name' => 'ResponseMetadata',
+              'members' => {
+                'request_id' => {
+                  'type' => 'string',
+                  'serialized_name' => 'RequestId'
+                }
+              })
+
+          operation.output = output
+        end
       end
 
       # restful xml services that have multiple body params at the top
@@ -140,7 +169,6 @@ module Aws
     metadata :target_prefix, as: 'json_target_prefix'
     metadata :service_full_name
     metadata :service_abbreviation
-    metadata :result_wrapped
     metadata :xmlnamespace
 
     def set_type(type)
@@ -175,6 +203,10 @@ module Aws
           when 's3'         then 'Aws::Plugins::S3Signer'
           else raise "unhandled signer version `#{version}'"
         end
+    end
+
+    def set_result_wrapped(state)
+      @result_wrapped = state
     end
 
     def set_global_endpoint(endpoint)

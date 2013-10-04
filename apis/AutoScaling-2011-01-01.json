@@ -2,7 +2,6 @@
   "version": "2011-01-01",
   "endpoint": "autoscaling.%s.amazonaws.com",
   "metadata": {
-    "result_wrapped": true,
     "service_full_name": "Auto Scaling",
     "service_class_name": "AutoScaling"
   },
@@ -119,6 +118,21 @@
             }
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "create_launch_configuration": {
@@ -221,6 +235,21 @@
             "serialized_name": "EbsOptimized"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "create_or_update_tags": {
@@ -262,6 +291,21 @@
             }
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "delete_auto_scaling_group": {
@@ -281,6 +325,21 @@
             "serialized_name": "ForceDelete"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "delete_launch_configuration": {
@@ -294,6 +353,21 @@
             "type": "string",
             "required": true,
             "serialized_name": "LaunchConfigurationName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -316,6 +390,21 @@
             "serialized_name": "TopicARN"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "delete_policy": {
@@ -335,6 +424,21 @@
             "serialized_name": "PolicyName"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "delete_scheduled_action": {
@@ -352,6 +456,21 @@
             "type": "string",
             "required": true,
             "serialized_name": "ScheduledActionName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -395,6 +514,21 @@
             }
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "describe_adjustment_types": {
@@ -404,16 +538,32 @@
       "output": {
         "type": "output",
         "members": {
-          "adjustment_types": {
-            "type": "list",
-            "serialized_name": "AdjustmentTypes",
+          "describe_adjustment_types_result": {
+            "type": "structure",
+            "serialized_name": "DescribeAdjustmentTypesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "adjustment_type": {
-                  "type": "string",
-                  "serialized_name": "AdjustmentType"
+              "adjustment_types": {
+                "type": "list",
+                "serialized_name": "AdjustmentTypes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "adjustment_type": {
+                      "type": "string",
+                      "serialized_name": "AdjustmentType"
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -447,190 +597,206 @@
       "output": {
         "type": "output",
         "members": {
-          "auto_scaling_groups": {
-            "type": "list",
-            "serialized_name": "AutoScalingGroups",
+          "describe_auto_scaling_groups_result": {
+            "type": "structure",
+            "serialized_name": "DescribeAutoScalingGroupsResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "auto_scaling_group_name": {
-                  "type": "string",
-                  "serialized_name": "AutoScalingGroupName"
-                },
-                "auto_scaling_group_arn": {
-                  "type": "string",
-                  "serialized_name": "AutoScalingGroupARN"
-                },
-                "launch_configuration_name": {
-                  "type": "string",
-                  "serialized_name": "LaunchConfigurationName"
-                },
-                "min_size": {
-                  "type": "integer",
-                  "serialized_name": "MinSize"
-                },
-                "max_size": {
-                  "type": "integer",
-                  "serialized_name": "MaxSize"
-                },
-                "desired_capacity": {
-                  "type": "integer",
-                  "serialized_name": "DesiredCapacity"
-                },
-                "default_cooldown": {
-                  "type": "integer",
-                  "serialized_name": "DefaultCooldown"
-                },
-                "availability_zones": {
-                  "type": "list",
-                  "serialized_name": "AvailabilityZones",
+              "auto_scaling_groups": {
+                "type": "list",
+                "serialized_name": "AutoScalingGroups",
+                "members": {
+                  "type": "structure",
                   "members": {
-                    "type": "string"
-                  }
-                },
-                "load_balancer_names": {
-                  "type": "list",
-                  "serialized_name": "LoadBalancerNames",
-                  "members": {
-                    "type": "string"
-                  }
-                },
-                "health_check_type": {
-                  "type": "string",
-                  "serialized_name": "HealthCheckType"
-                },
-                "health_check_grace_period": {
-                  "type": "integer",
-                  "serialized_name": "HealthCheckGracePeriod"
-                },
-                "instances": {
-                  "type": "list",
-                  "serialized_name": "Instances",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "instance_id": {
-                        "type": "string",
-                        "serialized_name": "InstanceId"
-                      },
-                      "availability_zone": {
-                        "type": "string",
-                        "serialized_name": "AvailabilityZone"
-                      },
-                      "lifecycle_state": {
-                        "type": "string",
-                        "serialized_name": "LifecycleState",
-                        "enum": [
-                          "Pending",
-                          "Quarantined",
-                          "InService",
-                          "Terminating",
-                          "Terminated"
-                        ]
-                      },
-                      "health_status": {
-                        "type": "string",
-                        "serialized_name": "HealthStatus"
-                      },
-                      "launch_configuration_name": {
-                        "type": "string",
-                        "serialized_name": "LaunchConfigurationName"
+                    "auto_scaling_group_name": {
+                      "type": "string",
+                      "serialized_name": "AutoScalingGroupName"
+                    },
+                    "auto_scaling_group_arn": {
+                      "type": "string",
+                      "serialized_name": "AutoScalingGroupARN"
+                    },
+                    "launch_configuration_name": {
+                      "type": "string",
+                      "serialized_name": "LaunchConfigurationName"
+                    },
+                    "min_size": {
+                      "type": "integer",
+                      "serialized_name": "MinSize"
+                    },
+                    "max_size": {
+                      "type": "integer",
+                      "serialized_name": "MaxSize"
+                    },
+                    "desired_capacity": {
+                      "type": "integer",
+                      "serialized_name": "DesiredCapacity"
+                    },
+                    "default_cooldown": {
+                      "type": "integer",
+                      "serialized_name": "DefaultCooldown"
+                    },
+                    "availability_zones": {
+                      "type": "list",
+                      "serialized_name": "AvailabilityZones",
+                      "members": {
+                        "type": "string"
+                      }
+                    },
+                    "load_balancer_names": {
+                      "type": "list",
+                      "serialized_name": "LoadBalancerNames",
+                      "members": {
+                        "type": "string"
+                      }
+                    },
+                    "health_check_type": {
+                      "type": "string",
+                      "serialized_name": "HealthCheckType"
+                    },
+                    "health_check_grace_period": {
+                      "type": "integer",
+                      "serialized_name": "HealthCheckGracePeriod"
+                    },
+                    "instances": {
+                      "type": "list",
+                      "serialized_name": "Instances",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "instance_id": {
+                            "type": "string",
+                            "serialized_name": "InstanceId"
+                          },
+                          "availability_zone": {
+                            "type": "string",
+                            "serialized_name": "AvailabilityZone"
+                          },
+                          "lifecycle_state": {
+                            "type": "string",
+                            "serialized_name": "LifecycleState",
+                            "enum": [
+                              "Pending",
+                              "Quarantined",
+                              "InService",
+                              "Terminating",
+                              "Terminated"
+                            ]
+                          },
+                          "health_status": {
+                            "type": "string",
+                            "serialized_name": "HealthStatus"
+                          },
+                          "launch_configuration_name": {
+                            "type": "string",
+                            "serialized_name": "LaunchConfigurationName"
+                          }
+                        }
+                      }
+                    },
+                    "created_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CreatedTime"
+                    },
+                    "suspended_processes": {
+                      "type": "list",
+                      "serialized_name": "SuspendedProcesses",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "process_name": {
+                            "type": "string",
+                            "serialized_name": "ProcessName"
+                          },
+                          "suspension_reason": {
+                            "type": "string",
+                            "serialized_name": "SuspensionReason"
+                          }
+                        }
+                      }
+                    },
+                    "placement_group": {
+                      "type": "string",
+                      "serialized_name": "PlacementGroup"
+                    },
+                    "vpc_zone_identifier": {
+                      "type": "string",
+                      "serialized_name": "VPCZoneIdentifier"
+                    },
+                    "enabled_metrics": {
+                      "type": "list",
+                      "serialized_name": "EnabledMetrics",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "metric": {
+                            "type": "string",
+                            "serialized_name": "Metric"
+                          },
+                          "granularity": {
+                            "type": "string",
+                            "serialized_name": "Granularity"
+                          }
+                        }
+                      }
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "tags": {
+                      "type": "list",
+                      "serialized_name": "Tags",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "resource_id": {
+                            "type": "string",
+                            "serialized_name": "ResourceId"
+                          },
+                          "resource_type": {
+                            "type": "string",
+                            "serialized_name": "ResourceType"
+                          },
+                          "key": {
+                            "type": "string",
+                            "serialized_name": "Key"
+                          },
+                          "value": {
+                            "type": "string",
+                            "serialized_name": "Value"
+                          },
+                          "propagate_at_launch": {
+                            "type": "boolean",
+                            "serialized_name": "PropagateAtLaunch"
+                          }
+                        }
+                      }
+                    },
+                    "termination_policies": {
+                      "type": "list",
+                      "serialized_name": "TerminationPolicies",
+                      "members": {
+                        "type": "string"
                       }
                     }
-                  }
-                },
-                "created_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "CreatedTime"
-                },
-                "suspended_processes": {
-                  "type": "list",
-                  "serialized_name": "SuspendedProcesses",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "process_name": {
-                        "type": "string",
-                        "serialized_name": "ProcessName"
-                      },
-                      "suspension_reason": {
-                        "type": "string",
-                        "serialized_name": "SuspensionReason"
-                      }
-                    }
-                  }
-                },
-                "placement_group": {
-                  "type": "string",
-                  "serialized_name": "PlacementGroup"
-                },
-                "vpc_zone_identifier": {
-                  "type": "string",
-                  "serialized_name": "VPCZoneIdentifier"
-                },
-                "enabled_metrics": {
-                  "type": "list",
-                  "serialized_name": "EnabledMetrics",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "metric": {
-                        "type": "string",
-                        "serialized_name": "Metric"
-                      },
-                      "granularity": {
-                        "type": "string",
-                        "serialized_name": "Granularity"
-                      }
-                    }
-                  }
-                },
-                "status": {
-                  "type": "string",
-                  "serialized_name": "Status"
-                },
-                "tags": {
-                  "type": "list",
-                  "serialized_name": "Tags",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "resource_id": {
-                        "type": "string",
-                        "serialized_name": "ResourceId"
-                      },
-                      "resource_type": {
-                        "type": "string",
-                        "serialized_name": "ResourceType"
-                      },
-                      "key": {
-                        "type": "string",
-                        "serialized_name": "Key"
-                      },
-                      "value": {
-                        "type": "string",
-                        "serialized_name": "Value"
-                      },
-                      "propagate_at_launch": {
-                        "type": "boolean",
-                        "serialized_name": "PropagateAtLaunch"
-                      }
-                    }
-                  }
-                },
-                "termination_policies": {
-                  "type": "list",
-                  "serialized_name": "TerminationPolicies",
-                  "members": {
-                    "type": "string"
                   }
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -662,42 +828,58 @@
       "output": {
         "type": "output",
         "members": {
-          "auto_scaling_instances": {
-            "type": "list",
-            "serialized_name": "AutoScalingInstances",
+          "describe_auto_scaling_instances_result": {
+            "type": "structure",
+            "serialized_name": "DescribeAutoScalingInstancesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "instance_id": {
-                  "type": "string",
-                  "serialized_name": "InstanceId"
-                },
-                "auto_scaling_group_name": {
-                  "type": "string",
-                  "serialized_name": "AutoScalingGroupName"
-                },
-                "availability_zone": {
-                  "type": "string",
-                  "serialized_name": "AvailabilityZone"
-                },
-                "lifecycle_state": {
-                  "type": "string",
-                  "serialized_name": "LifecycleState"
-                },
-                "health_status": {
-                  "type": "string",
-                  "serialized_name": "HealthStatus"
-                },
-                "launch_configuration_name": {
-                  "type": "string",
-                  "serialized_name": "LaunchConfigurationName"
+              "auto_scaling_instances": {
+                "type": "list",
+                "serialized_name": "AutoScalingInstances",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "instance_id": {
+                      "type": "string",
+                      "serialized_name": "InstanceId"
+                    },
+                    "auto_scaling_group_name": {
+                      "type": "string",
+                      "serialized_name": "AutoScalingGroupName"
+                    },
+                    "availability_zone": {
+                      "type": "string",
+                      "serialized_name": "AvailabilityZone"
+                    },
+                    "lifecycle_state": {
+                      "type": "string",
+                      "serialized_name": "LifecycleState"
+                    },
+                    "health_status": {
+                      "type": "string",
+                      "serialized_name": "HealthStatus"
+                    },
+                    "launch_configuration_name": {
+                      "type": "string",
+                      "serialized_name": "LaunchConfigurationName"
+                    }
+                  }
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -709,11 +891,27 @@
       "output": {
         "type": "output",
         "members": {
-          "auto_scaling_notification_types": {
-            "type": "list",
-            "serialized_name": "AutoScalingNotificationTypes",
+          "describe_auto_scaling_notification_types_result": {
+            "type": "structure",
+            "serialized_name": "DescribeAutoScalingNotificationTypesResult",
             "members": {
-              "type": "string"
+              "auto_scaling_notification_types": {
+                "type": "list",
+                "serialized_name": "AutoScalingNotificationTypes",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -746,114 +944,130 @@
       "output": {
         "type": "output",
         "members": {
-          "launch_configurations": {
-            "type": "list",
-            "serialized_name": "LaunchConfigurations",
+          "describe_launch_configurations_result": {
+            "type": "structure",
+            "serialized_name": "DescribeLaunchConfigurationsResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "launch_configuration_name": {
-                  "type": "string",
-                  "serialized_name": "LaunchConfigurationName"
-                },
-                "launch_configuration_arn": {
-                  "type": "string",
-                  "serialized_name": "LaunchConfigurationARN"
-                },
-                "image_id": {
-                  "type": "string",
-                  "serialized_name": "ImageId"
-                },
-                "key_name": {
-                  "type": "string",
-                  "serialized_name": "KeyName"
-                },
-                "security_groups": {
-                  "type": "list",
-                  "serialized_name": "SecurityGroups",
+              "launch_configurations": {
+                "type": "list",
+                "serialized_name": "LaunchConfigurations",
+                "members": {
+                  "type": "structure",
                   "members": {
-                    "type": "string"
-                  }
-                },
-                "user_data": {
-                  "type": "string",
-                  "serialized_name": "UserData"
-                },
-                "instance_type": {
-                  "type": "string",
-                  "serialized_name": "InstanceType"
-                },
-                "kernel_id": {
-                  "type": "string",
-                  "serialized_name": "KernelId"
-                },
-                "ramdisk_id": {
-                  "type": "string",
-                  "serialized_name": "RamdiskId"
-                },
-                "block_device_mappings": {
-                  "type": "list",
-                  "serialized_name": "BlockDeviceMappings",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "virtual_name": {
-                        "type": "string",
-                        "serialized_name": "VirtualName"
-                      },
-                      "device_name": {
-                        "type": "string",
-                        "serialized_name": "DeviceName"
-                      },
-                      "ebs": {
+                    "launch_configuration_name": {
+                      "type": "string",
+                      "serialized_name": "LaunchConfigurationName"
+                    },
+                    "launch_configuration_arn": {
+                      "type": "string",
+                      "serialized_name": "LaunchConfigurationARN"
+                    },
+                    "image_id": {
+                      "type": "string",
+                      "serialized_name": "ImageId"
+                    },
+                    "key_name": {
+                      "type": "string",
+                      "serialized_name": "KeyName"
+                    },
+                    "security_groups": {
+                      "type": "list",
+                      "serialized_name": "SecurityGroups",
+                      "members": {
+                        "type": "string"
+                      }
+                    },
+                    "user_data": {
+                      "type": "string",
+                      "serialized_name": "UserData"
+                    },
+                    "instance_type": {
+                      "type": "string",
+                      "serialized_name": "InstanceType"
+                    },
+                    "kernel_id": {
+                      "type": "string",
+                      "serialized_name": "KernelId"
+                    },
+                    "ramdisk_id": {
+                      "type": "string",
+                      "serialized_name": "RamdiskId"
+                    },
+                    "block_device_mappings": {
+                      "type": "list",
+                      "serialized_name": "BlockDeviceMappings",
+                      "members": {
                         "type": "structure",
-                        "serialized_name": "Ebs",
                         "members": {
-                          "snapshot_id": {
+                          "virtual_name": {
                             "type": "string",
-                            "serialized_name": "SnapshotId"
+                            "serialized_name": "VirtualName"
                           },
-                          "volume_size": {
-                            "type": "integer",
-                            "serialized_name": "VolumeSize"
+                          "device_name": {
+                            "type": "string",
+                            "serialized_name": "DeviceName"
+                          },
+                          "ebs": {
+                            "type": "structure",
+                            "serialized_name": "Ebs",
+                            "members": {
+                              "snapshot_id": {
+                                "type": "string",
+                                "serialized_name": "SnapshotId"
+                              },
+                              "volume_size": {
+                                "type": "integer",
+                                "serialized_name": "VolumeSize"
+                              }
+                            }
                           }
                         }
                       }
-                    }
-                  }
-                },
-                "instance_monitoring": {
-                  "type": "structure",
-                  "serialized_name": "InstanceMonitoring",
-                  "members": {
-                    "enabled": {
+                    },
+                    "instance_monitoring": {
+                      "type": "structure",
+                      "serialized_name": "InstanceMonitoring",
+                      "members": {
+                        "enabled": {
+                          "type": "boolean",
+                          "serialized_name": "Enabled"
+                        }
+                      }
+                    },
+                    "spot_price": {
+                      "type": "string",
+                      "serialized_name": "SpotPrice"
+                    },
+                    "iam_instance_profile": {
+                      "type": "string",
+                      "serialized_name": "IamInstanceProfile"
+                    },
+                    "created_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CreatedTime"
+                    },
+                    "ebs_optimized": {
                       "type": "boolean",
-                      "serialized_name": "Enabled"
+                      "serialized_name": "EbsOptimized"
                     }
                   }
-                },
-                "spot_price": {
-                  "type": "string",
-                  "serialized_name": "SpotPrice"
-                },
-                "iam_instance_profile": {
-                  "type": "string",
-                  "serialized_name": "IamInstanceProfile"
-                },
-                "created_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "CreatedTime"
-                },
-                "ebs_optimized": {
-                  "type": "boolean",
-                  "serialized_name": "EbsOptimized"
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -865,29 +1079,45 @@
       "output": {
         "type": "output",
         "members": {
-          "metrics": {
-            "type": "list",
-            "serialized_name": "Metrics",
+          "describe_metric_collection_types_result": {
+            "type": "structure",
+            "serialized_name": "DescribeMetricCollectionTypesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "metric": {
-                  "type": "string",
-                  "serialized_name": "Metric"
+              "metrics": {
+                "type": "list",
+                "serialized_name": "Metrics",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "metric": {
+                      "type": "string",
+                      "serialized_name": "Metric"
+                    }
+                  }
+                }
+              },
+              "granularities": {
+                "type": "list",
+                "serialized_name": "Granularities",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "granularity": {
+                      "type": "string",
+                      "serialized_name": "Granularity"
+                    }
+                  }
                 }
               }
             }
           },
-          "granularities": {
-            "type": "list",
-            "serialized_name": "Granularities",
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
             "members": {
-              "type": "structure",
-              "members": {
-                "granularity": {
-                  "type": "string",
-                  "serialized_name": "Granularity"
-                }
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -921,30 +1151,46 @@
       "output": {
         "type": "output",
         "members": {
-          "notification_configurations": {
-            "type": "list",
-            "serialized_name": "NotificationConfigurations",
+          "describe_notification_configurations_result": {
+            "type": "structure",
+            "serialized_name": "DescribeNotificationConfigurationsResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "auto_scaling_group_name": {
-                  "type": "string",
-                  "serialized_name": "AutoScalingGroupName"
-                },
-                "topic_arn": {
-                  "type": "string",
-                  "serialized_name": "TopicARN"
-                },
-                "notification_type": {
-                  "type": "string",
-                  "serialized_name": "NotificationType"
+              "notification_configurations": {
+                "type": "list",
+                "serialized_name": "NotificationConfigurations",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "auto_scaling_group_name": {
+                      "type": "string",
+                      "serialized_name": "AutoScalingGroupName"
+                    },
+                    "topic_arn": {
+                      "type": "string",
+                      "serialized_name": "TopicARN"
+                    },
+                    "notification_type": {
+                      "type": "string",
+                      "serialized_name": "NotificationType"
+                    }
+                  }
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -980,63 +1226,79 @@
       "output": {
         "type": "output",
         "members": {
-          "scaling_policies": {
-            "type": "list",
-            "serialized_name": "ScalingPolicies",
+          "describe_policies_result": {
+            "type": "structure",
+            "serialized_name": "DescribePoliciesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "auto_scaling_group_name": {
-                  "type": "string",
-                  "serialized_name": "AutoScalingGroupName"
-                },
-                "policy_name": {
-                  "type": "string",
-                  "serialized_name": "PolicyName"
-                },
-                "scaling_adjustment": {
-                  "type": "integer",
-                  "serialized_name": "ScalingAdjustment"
-                },
-                "adjustment_type": {
-                  "type": "string",
-                  "serialized_name": "AdjustmentType"
-                },
-                "cooldown": {
-                  "type": "integer",
-                  "serialized_name": "Cooldown"
-                },
-                "policy_arn": {
-                  "type": "string",
-                  "serialized_name": "PolicyARN"
-                },
-                "alarms": {
-                  "type": "list",
-                  "serialized_name": "Alarms",
+              "scaling_policies": {
+                "type": "list",
+                "serialized_name": "ScalingPolicies",
+                "members": {
+                  "type": "structure",
                   "members": {
-                    "type": "structure",
-                    "members": {
-                      "alarm_name": {
-                        "type": "string",
-                        "serialized_name": "AlarmName"
-                      },
-                      "alarm_arn": {
-                        "type": "string",
-                        "serialized_name": "AlarmARN"
+                    "auto_scaling_group_name": {
+                      "type": "string",
+                      "serialized_name": "AutoScalingGroupName"
+                    },
+                    "policy_name": {
+                      "type": "string",
+                      "serialized_name": "PolicyName"
+                    },
+                    "scaling_adjustment": {
+                      "type": "integer",
+                      "serialized_name": "ScalingAdjustment"
+                    },
+                    "adjustment_type": {
+                      "type": "string",
+                      "serialized_name": "AdjustmentType"
+                    },
+                    "cooldown": {
+                      "type": "integer",
+                      "serialized_name": "Cooldown"
+                    },
+                    "policy_arn": {
+                      "type": "string",
+                      "serialized_name": "PolicyARN"
+                    },
+                    "alarms": {
+                      "type": "list",
+                      "serialized_name": "Alarms",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "alarm_name": {
+                            "type": "string",
+                            "serialized_name": "AlarmName"
+                          },
+                          "alarm_arn": {
+                            "type": "string",
+                            "serialized_name": "AlarmARN"
+                          }
+                        }
                       }
+                    },
+                    "min_adjustment_step": {
+                      "type": "integer",
+                      "serialized_name": "MinAdjustmentStep"
                     }
                   }
-                },
-                "min_adjustment_step": {
-                  "type": "integer",
-                  "serialized_name": "MinAdjustmentStep"
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -1072,68 +1334,84 @@
       "output": {
         "type": "output",
         "members": {
-          "activities": {
-            "type": "list",
-            "serialized_name": "Activities",
+          "describe_scaling_activities_result": {
+            "type": "structure",
+            "serialized_name": "DescribeScalingActivitiesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "activity_id": {
-                  "type": "string",
-                  "serialized_name": "ActivityId"
-                },
-                "auto_scaling_group_name": {
-                  "type": "string",
-                  "serialized_name": "AutoScalingGroupName"
-                },
-                "description": {
-                  "type": "string",
-                  "serialized_name": "Description"
-                },
-                "cause": {
-                  "type": "string",
-                  "serialized_name": "Cause"
-                },
-                "start_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "StartTime"
-                },
-                "end_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "EndTime"
-                },
-                "status_code": {
-                  "type": "string",
-                  "serialized_name": "StatusCode",
-                  "enum": [
-                    "WaitingForSpotInstanceRequestId",
-                    "WaitingForSpotInstanceId",
-                    "WaitingForInstanceId",
-                    "PreInService",
-                    "InProgress",
-                    "Successful",
-                    "Failed",
-                    "Cancelled"
-                  ]
-                },
-                "status_message": {
-                  "type": "string",
-                  "serialized_name": "StatusMessage"
-                },
-                "progress": {
-                  "type": "integer",
-                  "serialized_name": "Progress"
-                },
-                "details": {
-                  "type": "string",
-                  "serialized_name": "Details"
+              "activities": {
+                "type": "list",
+                "serialized_name": "Activities",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "activity_id": {
+                      "type": "string",
+                      "serialized_name": "ActivityId"
+                    },
+                    "auto_scaling_group_name": {
+                      "type": "string",
+                      "serialized_name": "AutoScalingGroupName"
+                    },
+                    "description": {
+                      "type": "string",
+                      "serialized_name": "Description"
+                    },
+                    "cause": {
+                      "type": "string",
+                      "serialized_name": "Cause"
+                    },
+                    "start_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "StartTime"
+                    },
+                    "end_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "EndTime"
+                    },
+                    "status_code": {
+                      "type": "string",
+                      "serialized_name": "StatusCode",
+                      "enum": [
+                        "WaitingForSpotInstanceRequestId",
+                        "WaitingForSpotInstanceId",
+                        "WaitingForInstanceId",
+                        "PreInService",
+                        "InProgress",
+                        "Successful",
+                        "Failed",
+                        "Cancelled"
+                      ]
+                    },
+                    "status_message": {
+                      "type": "string",
+                      "serialized_name": "StatusMessage"
+                    },
+                    "progress": {
+                      "type": "integer",
+                      "serialized_name": "Progress"
+                    },
+                    "details": {
+                      "type": "string",
+                      "serialized_name": "Details"
+                    }
+                  }
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -1145,16 +1423,32 @@
       "output": {
         "type": "output",
         "members": {
-          "processes": {
-            "type": "list",
-            "serialized_name": "Processes",
+          "describe_scaling_process_types_result": {
+            "type": "structure",
+            "serialized_name": "DescribeScalingProcessTypesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "process_name": {
-                  "type": "string",
-                  "serialized_name": "ProcessName"
+              "processes": {
+                "type": "list",
+                "serialized_name": "Processes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "process_name": {
+                      "type": "string",
+                      "serialized_name": "ProcessName"
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -1200,58 +1494,74 @@
       "output": {
         "type": "output",
         "members": {
-          "scheduled_update_group_actions": {
-            "type": "list",
-            "serialized_name": "ScheduledUpdateGroupActions",
+          "describe_scheduled_actions_result": {
+            "type": "structure",
+            "serialized_name": "DescribeScheduledActionsResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "auto_scaling_group_name": {
-                  "type": "string",
-                  "serialized_name": "AutoScalingGroupName"
-                },
-                "scheduled_action_name": {
-                  "type": "string",
-                  "serialized_name": "ScheduledActionName"
-                },
-                "scheduled_action_arn": {
-                  "type": "string",
-                  "serialized_name": "ScheduledActionARN"
-                },
-                "time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "Time"
-                },
-                "start_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "StartTime"
-                },
-                "end_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "EndTime"
-                },
-                "recurrence": {
-                  "type": "string",
-                  "serialized_name": "Recurrence"
-                },
-                "min_size": {
-                  "type": "integer",
-                  "serialized_name": "MinSize"
-                },
-                "max_size": {
-                  "type": "integer",
-                  "serialized_name": "MaxSize"
-                },
-                "desired_capacity": {
-                  "type": "integer",
-                  "serialized_name": "DesiredCapacity"
+              "scheduled_update_group_actions": {
+                "type": "list",
+                "serialized_name": "ScheduledUpdateGroupActions",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "auto_scaling_group_name": {
+                      "type": "string",
+                      "serialized_name": "AutoScalingGroupName"
+                    },
+                    "scheduled_action_name": {
+                      "type": "string",
+                      "serialized_name": "ScheduledActionName"
+                    },
+                    "scheduled_action_arn": {
+                      "type": "string",
+                      "serialized_name": "ScheduledActionARN"
+                    },
+                    "time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "Time"
+                    },
+                    "start_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "StartTime"
+                    },
+                    "end_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "EndTime"
+                    },
+                    "recurrence": {
+                      "type": "string",
+                      "serialized_name": "Recurrence"
+                    },
+                    "min_size": {
+                      "type": "integer",
+                      "serialized_name": "MinSize"
+                    },
+                    "max_size": {
+                      "type": "integer",
+                      "serialized_name": "MaxSize"
+                    },
+                    "desired_capacity": {
+                      "type": "integer",
+                      "serialized_name": "DesiredCapacity"
+                    }
+                  }
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -1296,38 +1606,54 @@
       "output": {
         "type": "output",
         "members": {
-          "tags": {
-            "type": "list",
-            "serialized_name": "Tags",
+          "describe_tags_result": {
+            "type": "structure",
+            "serialized_name": "DescribeTagsResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "resource_id": {
-                  "type": "string",
-                  "serialized_name": "ResourceId"
-                },
-                "resource_type": {
-                  "type": "string",
-                  "serialized_name": "ResourceType"
-                },
-                "key": {
-                  "type": "string",
-                  "serialized_name": "Key"
-                },
-                "value": {
-                  "type": "string",
-                  "serialized_name": "Value"
-                },
-                "propagate_at_launch": {
-                  "type": "boolean",
-                  "serialized_name": "PropagateAtLaunch"
+              "tags": {
+                "type": "list",
+                "serialized_name": "Tags",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "resource_id": {
+                      "type": "string",
+                      "serialized_name": "ResourceId"
+                    },
+                    "resource_type": {
+                      "type": "string",
+                      "serialized_name": "ResourceType"
+                    },
+                    "key": {
+                      "type": "string",
+                      "serialized_name": "Key"
+                    },
+                    "value": {
+                      "type": "string",
+                      "serialized_name": "Value"
+                    },
+                    "propagate_at_launch": {
+                      "type": "boolean",
+                      "serialized_name": "PropagateAtLaunch"
+                    }
+                  }
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -1339,11 +1665,27 @@
       "output": {
         "type": "output",
         "members": {
-          "termination_policy_types": {
-            "type": "list",
-            "serialized_name": "TerminationPolicyTypes",
+          "describe_termination_policy_types_result": {
+            "type": "structure",
+            "serialized_name": "DescribeTerminationPolicyTypesResult",
             "members": {
-              "type": "string"
+              "termination_policy_types": {
+                "type": "list",
+                "serialized_name": "TerminationPolicyTypes",
+                "members": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -1366,6 +1708,21 @@
             "serialized_name": "Metrics",
             "members": {
               "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -1396,6 +1753,21 @@
             "serialized_name": "Granularity"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "execute_policy": {
@@ -1417,6 +1789,21 @@
           "honor_cooldown": {
             "type": "boolean",
             "serialized_name": "HonorCooldown"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -1444,6 +1831,21 @@
             "serialized_name": "NotificationTypes",
             "members": {
               "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -1489,9 +1891,25 @@
       "output": {
         "type": "output",
         "members": {
-          "policy_arn": {
-            "type": "string",
-            "serialized_name": "PolicyARN"
+          "put_scaling_policy_result": {
+            "type": "structure",
+            "serialized_name": "PutScalingPolicyResult",
+            "members": {
+              "policy_arn": {
+                "type": "string",
+                "serialized_name": "PolicyARN"
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -1542,6 +1960,21 @@
             "serialized_name": "DesiredCapacity"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "resume_processes": {
@@ -1561,6 +1994,21 @@
             "serialized_name": "ScalingProcesses",
             "members": {
               "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -1588,6 +2036,21 @@
             "serialized_name": "HonorCooldown"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "set_instance_health": {
@@ -1612,6 +2075,21 @@
             "serialized_name": "ShouldRespectGracePeriod"
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
+          }
+        }
       }
     },
     "suspend_processes": {
@@ -1631,6 +2109,21 @@
             "serialized_name": "ScalingProcesses",
             "members": {
               "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }
@@ -1658,59 +2151,75 @@
       "output": {
         "type": "output",
         "members": {
-          "activity": {
+          "terminate_instance_in_auto_scaling_group_result": {
             "type": "structure",
-            "serialized_name": "Activity",
+            "serialized_name": "TerminateInstanceInAutoScalingGroupResult",
             "members": {
-              "activity_id": {
+              "activity": {
+                "type": "structure",
+                "serialized_name": "Activity",
+                "members": {
+                  "activity_id": {
+                    "type": "string",
+                    "serialized_name": "ActivityId"
+                  },
+                  "auto_scaling_group_name": {
+                    "type": "string",
+                    "serialized_name": "AutoScalingGroupName"
+                  },
+                  "description": {
+                    "type": "string",
+                    "serialized_name": "Description"
+                  },
+                  "cause": {
+                    "type": "string",
+                    "serialized_name": "Cause"
+                  },
+                  "start_time": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "StartTime"
+                  },
+                  "end_time": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "EndTime"
+                  },
+                  "status_code": {
+                    "type": "string",
+                    "serialized_name": "StatusCode",
+                    "enum": [
+                      "WaitingForSpotInstanceRequestId",
+                      "WaitingForSpotInstanceId",
+                      "WaitingForInstanceId",
+                      "PreInService",
+                      "InProgress",
+                      "Successful",
+                      "Failed",
+                      "Cancelled"
+                    ]
+                  },
+                  "status_message": {
+                    "type": "string",
+                    "serialized_name": "StatusMessage"
+                  },
+                  "progress": {
+                    "type": "integer",
+                    "serialized_name": "Progress"
+                  },
+                  "details": {
+                    "type": "string",
+                    "serialized_name": "Details"
+                  }
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
                 "type": "string",
-                "serialized_name": "ActivityId"
-              },
-              "auto_scaling_group_name": {
-                "type": "string",
-                "serialized_name": "AutoScalingGroupName"
-              },
-              "description": {
-                "type": "string",
-                "serialized_name": "Description"
-              },
-              "cause": {
-                "type": "string",
-                "serialized_name": "Cause"
-              },
-              "start_time": {
-                "type": "iso8601_timestamp",
-                "serialized_name": "StartTime"
-              },
-              "end_time": {
-                "type": "iso8601_timestamp",
-                "serialized_name": "EndTime"
-              },
-              "status_code": {
-                "type": "string",
-                "serialized_name": "StatusCode",
-                "enum": [
-                  "WaitingForSpotInstanceRequestId",
-                  "WaitingForSpotInstanceId",
-                  "WaitingForInstanceId",
-                  "PreInService",
-                  "InProgress",
-                  "Successful",
-                  "Failed",
-                  "Cancelled"
-                ]
-              },
-              "status_message": {
-                "type": "string",
-                "serialized_name": "StatusMessage"
-              },
-              "progress": {
-                "type": "integer",
-                "serialized_name": "Progress"
-              },
-              "details": {
-                "type": "string",
-                "serialized_name": "Details"
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -1777,6 +2286,21 @@
             "serialized_name": "TerminationPolicies",
             "members": {
               "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
           }
         }

@@ -2,7 +2,6 @@
   "version": "2010-05-15",
   "endpoint": "cloudformation.%s.amazonaws.com",
   "metadata": {
-    "result_wrapped": true,
     "service_full_name": "AWS CloudFormation",
     "service_class_name": "CloudFormation"
   },
@@ -27,6 +26,21 @@
             "type": "string",
             "required": true,
             "serialized_name": "StackName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -124,9 +138,25 @@
       "output": {
         "type": "output",
         "members": {
-          "stack_id": {
-            "type": "string",
-            "serialized_name": "StackId"
+          "create_stack_result": {
+            "type": "structure",
+            "serialized_name": "CreateStackResult",
+            "members": {
+              "stack_id": {
+                "type": "string",
+                "serialized_name": "StackId"
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -142,6 +172,21 @@
             "type": "string",
             "required": true,
             "serialized_name": "StackName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -166,69 +211,85 @@
       "output": {
         "type": "output",
         "members": {
-          "stack_events": {
-            "type": "list",
-            "serialized_name": "StackEvents",
+          "describe_stack_events_result": {
+            "type": "structure",
+            "serialized_name": "DescribeStackEventsResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "stack_id": {
-                  "type": "string",
-                  "serialized_name": "StackId"
-                },
-                "event_id": {
-                  "type": "string",
-                  "serialized_name": "EventId"
-                },
-                "stack_name": {
-                  "type": "string",
-                  "serialized_name": "StackName"
-                },
-                "logical_resource_id": {
-                  "type": "string",
-                  "serialized_name": "LogicalResourceId"
-                },
-                "physical_resource_id": {
-                  "type": "string",
-                  "serialized_name": "PhysicalResourceId"
-                },
-                "resource_type": {
-                  "type": "string",
-                  "serialized_name": "ResourceType"
-                },
-                "timestamp": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "Timestamp"
-                },
-                "resource_status": {
-                  "type": "string",
-                  "serialized_name": "ResourceStatus",
-                  "enum": [
-                    "CREATE_IN_PROGRESS",
-                    "CREATE_FAILED",
-                    "CREATE_COMPLETE",
-                    "DELETE_IN_PROGRESS",
-                    "DELETE_FAILED",
-                    "DELETE_COMPLETE",
-                    "UPDATE_IN_PROGRESS",
-                    "UPDATE_FAILED",
-                    "UPDATE_COMPLETE"
-                  ]
-                },
-                "resource_status_reason": {
-                  "type": "string",
-                  "serialized_name": "ResourceStatusReason"
-                },
-                "resource_properties": {
-                  "type": "string",
-                  "serialized_name": "ResourceProperties"
+              "stack_events": {
+                "type": "list",
+                "serialized_name": "StackEvents",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "stack_id": {
+                      "type": "string",
+                      "serialized_name": "StackId"
+                    },
+                    "event_id": {
+                      "type": "string",
+                      "serialized_name": "EventId"
+                    },
+                    "stack_name": {
+                      "type": "string",
+                      "serialized_name": "StackName"
+                    },
+                    "logical_resource_id": {
+                      "type": "string",
+                      "serialized_name": "LogicalResourceId"
+                    },
+                    "physical_resource_id": {
+                      "type": "string",
+                      "serialized_name": "PhysicalResourceId"
+                    },
+                    "resource_type": {
+                      "type": "string",
+                      "serialized_name": "ResourceType"
+                    },
+                    "timestamp": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "Timestamp"
+                    },
+                    "resource_status": {
+                      "type": "string",
+                      "serialized_name": "ResourceStatus",
+                      "enum": [
+                        "CREATE_IN_PROGRESS",
+                        "CREATE_FAILED",
+                        "CREATE_COMPLETE",
+                        "DELETE_IN_PROGRESS",
+                        "DELETE_FAILED",
+                        "DELETE_COMPLETE",
+                        "UPDATE_IN_PROGRESS",
+                        "UPDATE_FAILED",
+                        "UPDATE_COMPLETE"
+                      ]
+                    },
+                    "resource_status_reason": {
+                      "type": "string",
+                      "serialized_name": "ResourceStatusReason"
+                    },
+                    "resource_properties": {
+                      "type": "string",
+                      "serialized_name": "ResourceProperties"
+                    }
+                  }
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -255,60 +316,76 @@
       "output": {
         "type": "output",
         "members": {
-          "stack_resource_detail": {
+          "describe_stack_resource_result": {
             "type": "structure",
-            "serialized_name": "StackResourceDetail",
+            "serialized_name": "DescribeStackResourceResult",
             "members": {
-              "stack_name": {
+              "stack_resource_detail": {
+                "type": "structure",
+                "serialized_name": "StackResourceDetail",
+                "members": {
+                  "stack_name": {
+                    "type": "string",
+                    "serialized_name": "StackName"
+                  },
+                  "stack_id": {
+                    "type": "string",
+                    "serialized_name": "StackId"
+                  },
+                  "logical_resource_id": {
+                    "type": "string",
+                    "serialized_name": "LogicalResourceId"
+                  },
+                  "physical_resource_id": {
+                    "type": "string",
+                    "serialized_name": "PhysicalResourceId"
+                  },
+                  "resource_type": {
+                    "type": "string",
+                    "serialized_name": "ResourceType"
+                  },
+                  "last_updated_timestamp": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "LastUpdatedTimestamp"
+                  },
+                  "resource_status": {
+                    "type": "string",
+                    "serialized_name": "ResourceStatus",
+                    "enum": [
+                      "CREATE_IN_PROGRESS",
+                      "CREATE_FAILED",
+                      "CREATE_COMPLETE",
+                      "DELETE_IN_PROGRESS",
+                      "DELETE_FAILED",
+                      "DELETE_COMPLETE",
+                      "UPDATE_IN_PROGRESS",
+                      "UPDATE_FAILED",
+                      "UPDATE_COMPLETE"
+                    ]
+                  },
+                  "resource_status_reason": {
+                    "type": "string",
+                    "serialized_name": "ResourceStatusReason"
+                  },
+                  "description": {
+                    "type": "string",
+                    "serialized_name": "Description"
+                  },
+                  "metadata": {
+                    "type": "string",
+                    "serialized_name": "Metadata"
+                  }
+                }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
                 "type": "string",
-                "serialized_name": "StackName"
-              },
-              "stack_id": {
-                "type": "string",
-                "serialized_name": "StackId"
-              },
-              "logical_resource_id": {
-                "type": "string",
-                "serialized_name": "LogicalResourceId"
-              },
-              "physical_resource_id": {
-                "type": "string",
-                "serialized_name": "PhysicalResourceId"
-              },
-              "resource_type": {
-                "type": "string",
-                "serialized_name": "ResourceType"
-              },
-              "last_updated_timestamp": {
-                "type": "iso8601_timestamp",
-                "serialized_name": "LastUpdatedTimestamp"
-              },
-              "resource_status": {
-                "type": "string",
-                "serialized_name": "ResourceStatus",
-                "enum": [
-                  "CREATE_IN_PROGRESS",
-                  "CREATE_FAILED",
-                  "CREATE_COMPLETE",
-                  "DELETE_IN_PROGRESS",
-                  "DELETE_FAILED",
-                  "DELETE_COMPLETE",
-                  "UPDATE_IN_PROGRESS",
-                  "UPDATE_FAILED",
-                  "UPDATE_COMPLETE"
-                ]
-              },
-              "resource_status_reason": {
-                "type": "string",
-                "serialized_name": "ResourceStatusReason"
-              },
-              "description": {
-                "type": "string",
-                "serialized_name": "Description"
-              },
-              "metadata": {
-                "type": "string",
-                "serialized_name": "Metadata"
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -339,59 +416,75 @@
       "output": {
         "type": "output",
         "members": {
-          "stack_resources": {
-            "type": "list",
-            "serialized_name": "StackResources",
+          "describe_stack_resources_result": {
+            "type": "structure",
+            "serialized_name": "DescribeStackResourcesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "stack_name": {
-                  "type": "string",
-                  "serialized_name": "StackName"
-                },
-                "stack_id": {
-                  "type": "string",
-                  "serialized_name": "StackId"
-                },
-                "logical_resource_id": {
-                  "type": "string",
-                  "serialized_name": "LogicalResourceId"
-                },
-                "physical_resource_id": {
-                  "type": "string",
-                  "serialized_name": "PhysicalResourceId"
-                },
-                "resource_type": {
-                  "type": "string",
-                  "serialized_name": "ResourceType"
-                },
-                "timestamp": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "Timestamp"
-                },
-                "resource_status": {
-                  "type": "string",
-                  "serialized_name": "ResourceStatus",
-                  "enum": [
-                    "CREATE_IN_PROGRESS",
-                    "CREATE_FAILED",
-                    "CREATE_COMPLETE",
-                    "DELETE_IN_PROGRESS",
-                    "DELETE_FAILED",
-                    "DELETE_COMPLETE",
-                    "UPDATE_IN_PROGRESS",
-                    "UPDATE_FAILED",
-                    "UPDATE_COMPLETE"
-                  ]
-                },
-                "resource_status_reason": {
-                  "type": "string",
-                  "serialized_name": "ResourceStatusReason"
-                },
-                "description": {
-                  "type": "string",
-                  "serialized_name": "Description"
+              "stack_resources": {
+                "type": "list",
+                "serialized_name": "StackResources",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "stack_name": {
+                      "type": "string",
+                      "serialized_name": "StackName"
+                    },
+                    "stack_id": {
+                      "type": "string",
+                      "serialized_name": "StackId"
+                    },
+                    "logical_resource_id": {
+                      "type": "string",
+                      "serialized_name": "LogicalResourceId"
+                    },
+                    "physical_resource_id": {
+                      "type": "string",
+                      "serialized_name": "PhysicalResourceId"
+                    },
+                    "resource_type": {
+                      "type": "string",
+                      "serialized_name": "ResourceType"
+                    },
+                    "timestamp": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "Timestamp"
+                    },
+                    "resource_status": {
+                      "type": "string",
+                      "serialized_name": "ResourceStatus",
+                      "enum": [
+                        "CREATE_IN_PROGRESS",
+                        "CREATE_FAILED",
+                        "CREATE_COMPLETE",
+                        "DELETE_IN_PROGRESS",
+                        "DELETE_FAILED",
+                        "DELETE_COMPLETE",
+                        "UPDATE_IN_PROGRESS",
+                        "UPDATE_FAILED",
+                        "UPDATE_COMPLETE"
+                      ]
+                    },
+                    "resource_status_reason": {
+                      "type": "string",
+                      "serialized_name": "ResourceStatusReason"
+                    },
+                    "description": {
+                      "type": "string",
+                      "serialized_name": "Description"
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
               }
             }
           }
@@ -418,144 +511,160 @@
       "output": {
         "type": "output",
         "members": {
-          "stacks": {
-            "type": "list",
-            "serialized_name": "Stacks",
+          "describe_stacks_result": {
+            "type": "structure",
+            "serialized_name": "DescribeStacksResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "stack_id": {
-                  "type": "string",
-                  "serialized_name": "StackId"
-                },
-                "stack_name": {
-                  "type": "string",
-                  "serialized_name": "StackName"
-                },
-                "description": {
-                  "type": "string",
-                  "serialized_name": "Description"
-                },
-                "parameters": {
-                  "type": "list",
-                  "serialized_name": "Parameters",
+              "stacks": {
+                "type": "list",
+                "serialized_name": "Stacks",
+                "members": {
+                  "type": "structure",
                   "members": {
-                    "type": "structure",
-                    "members": {
-                      "parameter_key": {
-                        "type": "string",
-                        "serialized_name": "ParameterKey"
-                      },
-                      "parameter_value": {
-                        "type": "string",
-                        "serialized_name": "ParameterValue"
+                    "stack_id": {
+                      "type": "string",
+                      "serialized_name": "StackId"
+                    },
+                    "stack_name": {
+                      "type": "string",
+                      "serialized_name": "StackName"
+                    },
+                    "description": {
+                      "type": "string",
+                      "serialized_name": "Description"
+                    },
+                    "parameters": {
+                      "type": "list",
+                      "serialized_name": "Parameters",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "parameter_key": {
+                            "type": "string",
+                            "serialized_name": "ParameterKey"
+                          },
+                          "parameter_value": {
+                            "type": "string",
+                            "serialized_name": "ParameterValue"
+                          }
+                        }
                       }
-                    }
-                  }
-                },
-                "creation_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "CreationTime"
-                },
-                "last_updated_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "LastUpdatedTime"
-                },
-                "stack_status": {
-                  "type": "string",
-                  "serialized_name": "StackStatus",
-                  "enum": [
-                    "CREATE_IN_PROGRESS",
-                    "CREATE_FAILED",
-                    "CREATE_COMPLETE",
-                    "ROLLBACK_IN_PROGRESS",
-                    "ROLLBACK_FAILED",
-                    "ROLLBACK_COMPLETE",
-                    "DELETE_IN_PROGRESS",
-                    "DELETE_FAILED",
-                    "DELETE_COMPLETE",
-                    "UPDATE_IN_PROGRESS",
-                    "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
-                    "UPDATE_COMPLETE",
-                    "UPDATE_ROLLBACK_IN_PROGRESS",
-                    "UPDATE_ROLLBACK_FAILED",
-                    "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
-                    "UPDATE_ROLLBACK_COMPLETE"
-                  ]
-                },
-                "stack_status_reason": {
-                  "type": "string",
-                  "serialized_name": "StackStatusReason"
-                },
-                "disable_rollback": {
-                  "type": "boolean",
-                  "serialized_name": "DisableRollback"
-                },
-                "notification_arns": {
-                  "type": "list",
-                  "serialized_name": "NotificationARNs",
-                  "members": {
-                    "type": "string"
-                  }
-                },
-                "timeout_in_minutes": {
-                  "type": "integer",
-                  "serialized_name": "TimeoutInMinutes"
-                },
-                "capabilities": {
-                  "type": "list",
-                  "serialized_name": "Capabilities",
-                  "members": {
-                    "type": "string",
-                    "enum": [
-                      "CAPABILITY_IAM"
-                    ]
-                  }
-                },
-                "outputs": {
-                  "type": "list",
-                  "serialized_name": "Outputs",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "output_key": {
-                        "type": "string",
-                        "serialized_name": "OutputKey"
-                      },
-                      "output_value": {
-                        "type": "string",
-                        "serialized_name": "OutputValue"
-                      },
-                      "description": {
-                        "type": "string",
-                        "serialized_name": "Description"
+                    },
+                    "creation_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CreationTime"
+                    },
+                    "last_updated_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "LastUpdatedTime"
+                    },
+                    "stack_status": {
+                      "type": "string",
+                      "serialized_name": "StackStatus",
+                      "enum": [
+                        "CREATE_IN_PROGRESS",
+                        "CREATE_FAILED",
+                        "CREATE_COMPLETE",
+                        "ROLLBACK_IN_PROGRESS",
+                        "ROLLBACK_FAILED",
+                        "ROLLBACK_COMPLETE",
+                        "DELETE_IN_PROGRESS",
+                        "DELETE_FAILED",
+                        "DELETE_COMPLETE",
+                        "UPDATE_IN_PROGRESS",
+                        "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
+                        "UPDATE_COMPLETE",
+                        "UPDATE_ROLLBACK_IN_PROGRESS",
+                        "UPDATE_ROLLBACK_FAILED",
+                        "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
+                        "UPDATE_ROLLBACK_COMPLETE"
+                      ]
+                    },
+                    "stack_status_reason": {
+                      "type": "string",
+                      "serialized_name": "StackStatusReason"
+                    },
+                    "disable_rollback": {
+                      "type": "boolean",
+                      "serialized_name": "DisableRollback"
+                    },
+                    "notification_arns": {
+                      "type": "list",
+                      "serialized_name": "NotificationARNs",
+                      "members": {
+                        "type": "string"
                       }
-                    }
-                  }
-                },
-                "tags": {
-                  "type": "list",
-                  "serialized_name": "Tags",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "key": {
+                    },
+                    "timeout_in_minutes": {
+                      "type": "integer",
+                      "serialized_name": "TimeoutInMinutes"
+                    },
+                    "capabilities": {
+                      "type": "list",
+                      "serialized_name": "Capabilities",
+                      "members": {
                         "type": "string",
-                        "serialized_name": "Key"
-                      },
-                      "value": {
-                        "type": "string",
-                        "serialized_name": "Value"
+                        "enum": [
+                          "CAPABILITY_IAM"
+                        ]
+                      }
+                    },
+                    "outputs": {
+                      "type": "list",
+                      "serialized_name": "Outputs",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "output_key": {
+                            "type": "string",
+                            "serialized_name": "OutputKey"
+                          },
+                          "output_value": {
+                            "type": "string",
+                            "serialized_name": "OutputValue"
+                          },
+                          "description": {
+                            "type": "string",
+                            "serialized_name": "Description"
+                          }
+                        }
+                      }
+                    },
+                    "tags": {
+                      "type": "list",
+                      "serialized_name": "Tags",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "key": {
+                            "type": "string",
+                            "serialized_name": "Key"
+                          },
+                          "value": {
+                            "type": "string",
+                            "serialized_name": "Value"
+                          }
+                        }
                       }
                     }
                   }
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -597,9 +706,25 @@
       "output": {
         "type": "output",
         "members": {
-          "url": {
-            "type": "string",
-            "serialized_name": "Url"
+          "estimate_template_cost_result": {
+            "type": "structure",
+            "serialized_name": "EstimateTemplateCostResult",
+            "members": {
+              "url": {
+                "type": "string",
+                "serialized_name": "Url"
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -621,9 +746,25 @@
       "output": {
         "type": "output",
         "members": {
-          "template_body": {
-            "type": "string",
-            "serialized_name": "TemplateBody"
+          "get_template_result": {
+            "type": "structure",
+            "serialized_name": "GetTemplateResult",
+            "members": {
+              "template_body": {
+                "type": "string",
+                "serialized_name": "TemplateBody"
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -649,53 +790,69 @@
       "output": {
         "type": "output",
         "members": {
-          "stack_resource_summaries": {
-            "type": "list",
-            "serialized_name": "StackResourceSummaries",
+          "list_stack_resources_result": {
+            "type": "structure",
+            "serialized_name": "ListStackResourcesResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "logical_resource_id": {
-                  "type": "string",
-                  "serialized_name": "LogicalResourceId"
-                },
-                "physical_resource_id": {
-                  "type": "string",
-                  "serialized_name": "PhysicalResourceId"
-                },
-                "resource_type": {
-                  "type": "string",
-                  "serialized_name": "ResourceType"
-                },
-                "last_updated_timestamp": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "LastUpdatedTimestamp"
-                },
-                "resource_status": {
-                  "type": "string",
-                  "serialized_name": "ResourceStatus",
-                  "enum": [
-                    "CREATE_IN_PROGRESS",
-                    "CREATE_FAILED",
-                    "CREATE_COMPLETE",
-                    "DELETE_IN_PROGRESS",
-                    "DELETE_FAILED",
-                    "DELETE_COMPLETE",
-                    "UPDATE_IN_PROGRESS",
-                    "UPDATE_FAILED",
-                    "UPDATE_COMPLETE"
-                  ]
-                },
-                "resource_status_reason": {
-                  "type": "string",
-                  "serialized_name": "ResourceStatusReason"
+              "stack_resource_summaries": {
+                "type": "list",
+                "serialized_name": "StackResourceSummaries",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "logical_resource_id": {
+                      "type": "string",
+                      "serialized_name": "LogicalResourceId"
+                    },
+                    "physical_resource_id": {
+                      "type": "string",
+                      "serialized_name": "PhysicalResourceId"
+                    },
+                    "resource_type": {
+                      "type": "string",
+                      "serialized_name": "ResourceType"
+                    },
+                    "last_updated_timestamp": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "LastUpdatedTimestamp"
+                    },
+                    "resource_status": {
+                      "type": "string",
+                      "serialized_name": "ResourceStatus",
+                      "enum": [
+                        "CREATE_IN_PROGRESS",
+                        "CREATE_FAILED",
+                        "CREATE_COMPLETE",
+                        "DELETE_IN_PROGRESS",
+                        "DELETE_FAILED",
+                        "DELETE_COMPLETE",
+                        "UPDATE_IN_PROGRESS",
+                        "UPDATE_FAILED",
+                        "UPDATE_COMPLETE"
+                      ]
+                    },
+                    "resource_status_reason": {
+                      "type": "string",
+                      "serialized_name": "ResourceStatusReason"
+                    }
+                  }
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -741,68 +898,84 @@
       "output": {
         "type": "output",
         "members": {
-          "stack_summaries": {
-            "type": "list",
-            "serialized_name": "StackSummaries",
+          "list_stacks_result": {
+            "type": "structure",
+            "serialized_name": "ListStacksResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "stack_id": {
-                  "type": "string",
-                  "serialized_name": "StackId"
-                },
-                "stack_name": {
-                  "type": "string",
-                  "serialized_name": "StackName"
-                },
-                "template_description": {
-                  "type": "string",
-                  "serialized_name": "TemplateDescription"
-                },
-                "creation_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "CreationTime"
-                },
-                "last_updated_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "LastUpdatedTime"
-                },
-                "deletion_time": {
-                  "type": "iso8601_timestamp",
-                  "serialized_name": "DeletionTime"
-                },
-                "stack_status": {
-                  "type": "string",
-                  "serialized_name": "StackStatus",
-                  "enum": [
-                    "CREATE_IN_PROGRESS",
-                    "CREATE_FAILED",
-                    "CREATE_COMPLETE",
-                    "ROLLBACK_IN_PROGRESS",
-                    "ROLLBACK_FAILED",
-                    "ROLLBACK_COMPLETE",
-                    "DELETE_IN_PROGRESS",
-                    "DELETE_FAILED",
-                    "DELETE_COMPLETE",
-                    "UPDATE_IN_PROGRESS",
-                    "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
-                    "UPDATE_COMPLETE",
-                    "UPDATE_ROLLBACK_IN_PROGRESS",
-                    "UPDATE_ROLLBACK_FAILED",
-                    "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
-                    "UPDATE_ROLLBACK_COMPLETE"
-                  ]
-                },
-                "stack_status_reason": {
-                  "type": "string",
-                  "serialized_name": "StackStatusReason"
+              "stack_summaries": {
+                "type": "list",
+                "serialized_name": "StackSummaries",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "stack_id": {
+                      "type": "string",
+                      "serialized_name": "StackId"
+                    },
+                    "stack_name": {
+                      "type": "string",
+                      "serialized_name": "StackName"
+                    },
+                    "template_description": {
+                      "type": "string",
+                      "serialized_name": "TemplateDescription"
+                    },
+                    "creation_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CreationTime"
+                    },
+                    "last_updated_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "LastUpdatedTime"
+                    },
+                    "deletion_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "DeletionTime"
+                    },
+                    "stack_status": {
+                      "type": "string",
+                      "serialized_name": "StackStatus",
+                      "enum": [
+                        "CREATE_IN_PROGRESS",
+                        "CREATE_FAILED",
+                        "CREATE_COMPLETE",
+                        "ROLLBACK_IN_PROGRESS",
+                        "ROLLBACK_FAILED",
+                        "ROLLBACK_COMPLETE",
+                        "DELETE_IN_PROGRESS",
+                        "DELETE_FAILED",
+                        "DELETE_COMPLETE",
+                        "UPDATE_IN_PROGRESS",
+                        "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
+                        "UPDATE_COMPLETE",
+                        "UPDATE_ROLLBACK_IN_PROGRESS",
+                        "UPDATE_ROLLBACK_FAILED",
+                        "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
+                        "UPDATE_ROLLBACK_COMPLETE"
+                      ]
+                    },
+                    "stack_status_reason": {
+                      "type": "string",
+                      "serialized_name": "StackStatusReason"
+                    }
+                  }
                 }
+              },
+              "next_token": {
+                "type": "string",
+                "serialized_name": "NextToken"
               }
             }
           },
-          "next_token": {
-            "type": "string",
-            "serialized_name": "NextToken"
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -859,9 +1032,25 @@
       "output": {
         "type": "output",
         "members": {
-          "stack_id": {
-            "type": "string",
-            "serialized_name": "StackId"
+          "update_stack_result": {
+            "type": "structure",
+            "serialized_name": "UpdateStackResult",
+            "members": {
+              "stack_id": {
+                "type": "string",
+                "serialized_name": "StackId"
+              }
+            }
+          },
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
+            "members": {
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
+            }
           }
         }
       }
@@ -886,48 +1075,64 @@
       "output": {
         "type": "output",
         "members": {
-          "parameters": {
-            "type": "list",
-            "serialized_name": "Parameters",
+          "validate_template_result": {
+            "type": "structure",
+            "serialized_name": "ValidateTemplateResult",
             "members": {
-              "type": "structure",
-              "members": {
-                "parameter_key": {
-                  "type": "string",
-                  "serialized_name": "ParameterKey"
-                },
-                "default_value": {
-                  "type": "string",
-                  "serialized_name": "DefaultValue"
-                },
-                "no_echo": {
-                  "type": "boolean",
-                  "serialized_name": "NoEcho"
-                },
-                "description": {
-                  "type": "string",
-                  "serialized_name": "Description"
+              "parameters": {
+                "type": "list",
+                "serialized_name": "Parameters",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "parameter_key": {
+                      "type": "string",
+                      "serialized_name": "ParameterKey"
+                    },
+                    "default_value": {
+                      "type": "string",
+                      "serialized_name": "DefaultValue"
+                    },
+                    "no_echo": {
+                      "type": "boolean",
+                      "serialized_name": "NoEcho"
+                    },
+                    "description": {
+                      "type": "string",
+                      "serialized_name": "Description"
+                    }
+                  }
                 }
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "capabilities": {
+                "type": "list",
+                "serialized_name": "Capabilities",
+                "members": {
+                  "type": "string",
+                  "enum": [
+                    "CAPABILITY_IAM"
+                  ]
+                }
+              },
+              "capabilities_reason": {
+                "type": "string",
+                "serialized_name": "CapabilitiesReason"
               }
             }
           },
-          "description": {
-            "type": "string",
-            "serialized_name": "Description"
-          },
-          "capabilities": {
-            "type": "list",
-            "serialized_name": "Capabilities",
+          "response_metadata": {
+            "type": "structure",
+            "serialized_name": "ResponseMetadata",
             "members": {
-              "type": "string",
-              "enum": [
-                "CAPABILITY_IAM"
-              ]
+              "request_id": {
+                "type": "string",
+                "serialized_name": "RequestId"
+              }
             }
-          },
-          "capabilities_reason": {
-            "type": "string",
-            "serialized_name": "CapabilitiesReason"
           }
         }
       }
