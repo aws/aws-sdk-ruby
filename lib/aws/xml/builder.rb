@@ -115,7 +115,7 @@ module Aws
         attrs = args.last.is_a?(Hash) ? args.pop : {}
         attrs = shape_attrs(shape).merge(attrs)
         args << attrs
-        @builder.send(name, *args, &block)
+        @builder.__send__(name, *args, &block)
       end
 
       def shape_attrs(shape)
