@@ -106,6 +106,32 @@ module AWS
 
       end
 
+      context '#upload_date' do
+
+        it 'lists certificates to find the upload_date' do
+
+          response = client.stub_for(:list_signing_certificates)
+
+          response.data[:certificates] = [
+            {
+              :user_name => user.name,
+              :certificate_id => 'id',
+              :certificate_body => 'body',
+              :status => 'Active',
+              :upload_date => Time.at(1380000000),
+            },
+          ]
+
+          client.should_receive(:list_signing_certificates).
+            with(:user_name => user.name).
+            and_return(response)
+
+          certificate.upload_date.should == Time.at(1380000000)
+
+        end
+
+      end
+
       context '#active?' do
 
         it 'returns true if the status is :active' do
