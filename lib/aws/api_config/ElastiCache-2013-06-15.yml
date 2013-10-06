@@ -212,6 +212,78 @@
                     :rename: :subnets
                     :list: true
             :ignore: true
+- :name: CreateCacheCluster
+  :method: :create_read_replica
+  :inputs:
+    CacheClusterId:
+    - :string
+    - :required
+    ReplicationGroupId:
+    - :string
+    - :required
+    PreferredAvailabilityZone:
+    - :string
+  :outputs:
+    :children:
+      CreateCacheClusterResult:
+        :ignore: true
+        :children:
+          CacheCluster:
+            :children:
+              ConfigurationEndpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              NumCacheNodes:
+                :type: :integer
+              CacheClusterCreateTime:
+                :type: :time
+              PendingModifiedValues:
+                :children:
+                  NumCacheNodes:
+                    :type: :integer
+                  CacheNodeIdsToRemove:
+                    :ignore: true
+                    :children:
+                      CacheNodeId:
+                        :rename: :cache_node_ids_to_remove
+                        :list: true
+              CacheSecurityGroups:
+                :ignore: true
+                :children:
+                  CacheSecurityGroup:
+                    :rename: :cache_security_groups
+                    :list: true
+              CacheParameterGroup:
+                :children:
+                  CacheNodeIdsToReboot:
+                    :ignore: true
+                    :children:
+                      CacheNodeId:
+                        :rename: :cache_node_ids_to_reboot
+                        :list: true
+              CacheNodes:
+                :ignore: true
+                :children:
+                  CacheNode:
+                    :rename: :cache_nodes
+                    :list: true
+                    :children:
+                      CacheNodeCreateTime:
+                        :type: :time
+                      Endpoint:
+                        :children:
+                          Port:
+                            :type: :integer
+              AutoMinorVersionUpgrade:
+                :type: :boolean
+              SecurityGroups:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :security_groups
+                    :list: true
+            :ignore: true
 - :name: CreateReplicationGroup
   :method: :create_replication_group
   :inputs:
