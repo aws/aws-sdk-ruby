@@ -75,7 +75,7 @@ module Aws
       api = Seahorse::Model::Api.new
 
       api_path = 'apis-src/s3-2006-03-01.json'
-      expect(ApiTranslator).to receive(:translate).
+      expect(Api::Translator).to receive(:translate).
         with(MultiJson.load(File.read(api_path)),
           documentation: false, errors: false).and_return(api)
 

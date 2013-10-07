@@ -210,9 +210,7 @@ module Aws
         if api.key?('metadata')
           Seahorse::Model::Api.from_hash(api)
         else
-          ApiTranslator.translate(api,
-            documentation: false,
-            errors: false)
+          Api::Translator.translate(api, documentation: false, errors: false)
         end
       end
 
