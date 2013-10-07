@@ -31,6 +31,17 @@ module Seahorse
       # @return [StandardError, nil]
       attr_accessor :error
 
+      # @param [Range<Integer>] status_code_range (nil) When present, the
+      #   `block` will be triggered only for responses with a status code
+      #   in the given range.
+      # @return [Response] Returns self.
+      def on_status(status_code_range = nil, &block)
+        if status_code_range.nil? || status_code_range.include?(status_code)
+          yield(self)
+        end
+        self
+      end
+
       # Yields to the given block if the HTTP request received a response.
       def on_complete(&block)
         on_status(200..599, &block)
@@ -62,17 +73,6 @@ module Seahorse
       end
 
       private
-
-      # @param [Range<Integer>] status_code_range (nil) When present, the
-      #   `block` will be triggered only for responses with a status code
-      #   in the given range.
-      # @return [Response] Returns self.
-      def on_status(status_code_range = nil, &block)
-        if status_code_range.nil? || status_code_range.include?(status_code)
-          yield(self)
-        end
-        self
-      end
 
       def status_code
         @http_response.status_code

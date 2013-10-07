@@ -1,0 +1,12 @@
+# This test ensures that we generate a helpful error message for failed requests
+# that return no response body
+operation: get_object
+params:
+  :bucket: 'bucket'
+  :key: 'key'
+response:
+  status_code: 400
+  body: ''
+error:
+  class: Aws::S3::Errors::BadRequest
+  message: ''
