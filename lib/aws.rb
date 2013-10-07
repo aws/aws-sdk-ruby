@@ -2,7 +2,6 @@ module Aws
 
   @config = {}
 
-  autoload :ApiTranslator, 'aws/api_translator'
   autoload :Credentials, 'aws/credentials'
   autoload :Errors, 'aws/errors'
   autoload :ErrorHandler, 'aws/error_handler'
@@ -14,9 +13,16 @@ module Aws
   autoload :Util, 'aws/util'
   autoload :VERSION, 'aws/version'
 
+  # @api private
   module Api
+    autoload :BaseTranslator, 'aws/api/base_translator'
+    autoload :InputShapeTranslator, 'aws/api/shape_translator'
+    autoload :OperationTranslator, 'aws/api/operation_translator'
+    autoload :OutputShapeTranslator, 'aws/api/shape_translator'
     autoload :ResultWrapper, 'aws/api/result_wrapper'
     autoload :ServiceNamer, 'aws/api/service_namer'
+    autoload :ShapeTranslator, 'aws/api/shape_translator'
+    autoload :Translator, 'aws/api/translator'
   end
 
   # @api private

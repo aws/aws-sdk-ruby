@@ -25,7 +25,7 @@ task :apis do
 
     puts "translating #{path}"
 
-    api = Aws::ApiTranslator.translate(
+    api = Aws::Api::Translator.translate(
       MultiJson.load(File.read(path), max_nesting: nil),
       documentation: false,
       errors: false)
