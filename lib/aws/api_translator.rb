@@ -81,31 +81,15 @@ module Aws
     end
 
     def translated
-
-      api = Seahorse::Model::Api.from_hash(@properties)
-      sort_metadata(api)
-      translate_operations(api)
-
-      # restful xml services that have multiple body params at the top
-      # level need guidance on their root level xml name and xmlns
-      if xml?
-        xmlns = api.metadata.delete('xmlnamespace')
-        api.operations.values.each do |operation|
-          if operation.input.payload
-            operation.input.payload_member.metadata['xmlns_uri'] = xmlns
-          elsif !operation.input.payload_member.members.empty?
-            operation.input.serialized_name = operation.name + "Request"
-            operation.input.metadata['xmlns_uri'] = xmlns
-          end
-        end
+      Seahorse::Model::Api.from_hash(@properties).tap do |api|
+        sort_metadata_keys(api)
+        translate_operations(api)
+        apply_xml_namespaces(api) if xml?
+        set_service_names(api)
       end
-
-      set_service_class_name(api)
-
-      api
     end
 
-    def set_service_class_name(api)
+    def set_service_names(api)
       service_namer(api) do |svc|
         api.metadata['service_full_name'] = svc.full_name
         api.metadata['service_abbreviation'] = svc.abbr if svc.abbr
@@ -113,7 +97,7 @@ module Aws
       end
     end
 
-    def sort_metadata(api)
+    def sort_metadata_keys(api)
       api.metadata = Hash[api.metadata.sort]
     end
 
@@ -123,6 +107,22 @@ module Aws
         method_name = underscore(operation.name)
         Api::ResultWrapper.wrap_output(method_name, operation) if @result_wrapped
         api.operations[method_name] = operation
+      end
+    end
+
+    # XML services, like S3 require the proper XML namespace to be applied
+    # to the root element for each request.  This moves it from the API
+    # metadata into the operation input shape for each operation where
+    # the XML serializer can read it.
+    def apply_xml_namespaces(api)
+      xmlns = api.metadata.delete('xmlnamespace')
+      api.operations.values.each do |operation|
+        if operation.input.payload
+          operation.input.payload_member.metadata['xmlns_uri'] = xmlns
+        elsif !operation.input.payload_member.members.empty?
+          operation.input.serialized_name = operation.name + "Request"
+          operation.input.metadata['xmlns_uri'] = xmlns
+        end
       end
     end
 
