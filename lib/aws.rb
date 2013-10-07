@@ -14,6 +14,10 @@ module Aws
   autoload :Util, 'aws/util'
   autoload :VERSION, 'aws/version'
 
+  module Api
+    autoload :ServiceNamer, 'aws/api/service_namer'
+  end
+
   # @api private
   module Json
     autoload :Builder, 'aws/json/builder'

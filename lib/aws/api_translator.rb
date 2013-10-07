@@ -137,24 +137,19 @@ module Aws
     end
 
     def set_service_class_name(api)
+      service_namer(api) do |svc|
+        api.metadata['service_full_name'] = svc.full_name
+        api.metadata['service_abbreviation'] = svc.abbr if svc.abbr
+        api.metadata['service_class_name'] = svc.class_name
+      end
+    end
 
-      full_name = api.metadata.delete('service_full_name')
-      abbr = api.metadata.delete('service_abbreviation')
-      endpoint_prefix = api.endpoint.split(/[.-]/).first.upcase
-
-      # the class name is the shortest of 3 options:
-      # * service full name
-      # * service abbreviation
-      # * service endpoint prefix
-      class_name = abbr || full_name
-      class_name = class_name.sub('Amazon', '').sub('AWS', '').gsub(/\W+/, '')
-      class_name = [class_name, endpoint_prefix].sort_by(&:size).first
-
-      # purposefully grouping names in the metadata hash
-      api.metadata['service_full_name'] = full_name
-      api.metadata['service_abbreviation'] = abbr if abbr
-      api.metadata['service_class_name'] = class_name
-
+    def service_namer(api)
+      args = []
+      args << api.endpoint
+      args << api.metadata.delete('service_full_name')
+      args << api.metadata.delete('service_abbreviation')
+      yield(Api::ServiceNamer.new(*args))
     end
 
     def xml?
