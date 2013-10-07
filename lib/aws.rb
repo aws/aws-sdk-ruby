@@ -15,6 +15,7 @@ module Aws
   autoload :VERSION, 'aws/version'
 
   module Api
+    autoload :ResultWrapper, 'aws/api/result_wrapper'
     autoload :ServiceNamer, 'aws/api/service_namer'
   end
 

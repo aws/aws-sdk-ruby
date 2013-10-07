@@ -83,39 +83,8 @@ module Aws
     def translated
 
       api = Seahorse::Model::Api.from_hash(@properties)
-      api.metadata = Hash[api.metadata.sort]
-      @operations.values.each do |src|
-        operation = OperationTranslator.translate(src, @options)
-        api.operations[underscore(operation.name)] = operation
-      end
-
-      if @result_wrapped
-        api.operations.each do |op_name, operation|
-
-          output = Seahorse::Model::Shapes::OutputShape.new
-
-          unless operation.output.empty?
-            struct = operation.output.to_hash
-            struct['type'] = 'structure'
-            struct['serialized_name'] = "#{operation.name}Result"
-            struct = Seahorse::Model::Shapes::Shape.from_hash(struct)
-            output.members[:"#{op_name}_result"] = struct
-          end
-
-          output.members[:response_metadata] =
-            Seahorse::Model::Shapes::Shape.from_hash(
-              'type' => 'structure',
-              'serialized_name' => 'ResponseMetadata',
-              'members' => {
-                'request_id' => {
-                  'type' => 'string',
-                  'serialized_name' => 'RequestId'
-                }
-              })
-
-          operation.output = output
-        end
-      end
+      sort_metadata(api)
+      translate_operations(api)
 
       # restful xml services that have multiple body params at the top
       # level need guidance on their root level xml name and xmlns
@@ -141,6 +110,19 @@ module Aws
         api.metadata['service_full_name'] = svc.full_name
         api.metadata['service_abbreviation'] = svc.abbr if svc.abbr
         api.metadata['service_class_name'] = svc.class_name
+      end
+    end
+
+    def sort_metadata(api)
+      api.metadata = Hash[api.metadata.sort]
+    end
+
+    def translate_operations(api)
+      @operations.values.each do |src|
+        operation = OperationTranslator.translate(src, @options)
+        method_name = underscore(operation.name)
+        Api::ResultWrapper.wrap_output(method_name, operation) if @result_wrapped
+        api.operations[method_name] = operation
       end
     end
 
