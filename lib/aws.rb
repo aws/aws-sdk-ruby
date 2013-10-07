@@ -10,6 +10,7 @@ module Aws
   autoload :ResponseHandler, 'aws/response_handler'
   autoload :Service, 'aws/service'
   autoload :Structure, 'aws/structure'
+  autoload :TimestampFormatter, 'aws/timestamp_formatter'
   autoload :Util, 'aws/util'
   autoload :VERSION, 'aws/version'
 

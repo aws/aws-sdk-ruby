@@ -6,6 +6,7 @@ module Aws
     class Builder
 
       include Seahorse::Model::Shapes
+      include TimestampFormatter
 
       # @param [Seahorse::Model::Shapes::Shape] rules
       def initialize(rules)
@@ -68,15 +69,6 @@ module Aws
         when TimestampShape then timestamp(shape, value.utc)
         when BlobShape then Base64.strict_encode64(value)
         else value
-        end
-      end
-
-      def timestamp(shape, value)
-        case shape
-        when Iso8601TimestampShape then value.iso8601
-        when Rfc822TimestampShape then value.rfc822
-        when UnixTimestampShape then value.to_i
-        else raise "invalid timestamp format `#{shape.class.name}'"
         end
       end
 
