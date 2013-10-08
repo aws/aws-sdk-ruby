@@ -10,7 +10,7 @@ module Aws
 
     def call(context)
       populate_headers(context)
-      populate_body(context)
+      populate_body(context) if populate_body?(context)
       @handler.call(context)
     end
 
@@ -20,16 +20,19 @@ module Aws
 
     def populate_body(context)
       input = context.operation.input
-      unless input.raw_payload? || input.payload_member.empty?
-        if input.payload
-          rules = input.payload_member
-          params = context.params[input.payload] || {}
-        else
-          rules = input
-          params = context.params
-        end
-        @serializer.populate_body(context, rules, params)
+      if input.payload
+        rules = input.payload_member
+        params = context.params[input.payload] || {}
+      else
+        rules = input
+        params = context.params
       end
+      @serializer.populate_body(context, rules, params)
+    end
+
+    def populate_body?(context)
+      rules = context.operation.input
+      !(rules.raw_payload? || rules.payload_member.empty?)
     end
 
   end
