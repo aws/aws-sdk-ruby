@@ -73,6 +73,7 @@ module Aws
       # @see .add_version
       # @see .latest_api_version
       # @see .default_api_version
+      # @see .default_client_class
       # @see .versioned_clients
       def api_versions
         apis.keys.sort
@@ -82,6 +83,7 @@ module Aws
       # @see .add_version
       # @see .api_versions
       # @see .default_api_version
+      # @see .default_client_class
       # @see .versioned_clients
       def latest_api_version
         api_versions.last
@@ -92,6 +94,7 @@ module Aws
       #   is other configured or specified API version.
       # @see .add_version
       # @see .api_versions
+      # @see .default_client_class
       # @see .latest_api_version
       # @see .versioned_clients
       def default_api_version
@@ -108,9 +111,20 @@ module Aws
       # @see .add_version
       # @see .api_versions
       # @see .default_api_version
+      # @see .default_client_class
       # @see .latest_api_version
       def versioned_clients
         api_versions.map { |api_version| versioned_client_class(api_version) }
+      end
+
+      # @return [Class<Seahorse::Client::Base>]
+      # @see .add_version
+      # @see .api_versions
+      # @see .default_api_version
+      # @see .latest_api_version
+      # @see .versioned_clients
+      def default_client_class
+        versioned_client_class(default_api_version)
       end
 
       # Adds a plugin to each versioned client class.

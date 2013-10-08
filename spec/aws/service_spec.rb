@@ -17,6 +17,16 @@ module Aws
 
     let(:apis) { [api_newer, api_older] }
 
+    describe 'default_client_class' do
+
+      it 'returns a client with the default api version' do
+        svc = Service.define(:name, apis)
+        allow(svc).to receive(:default_api_version).and_return(api_older.version)
+        expect(svc.default_client_class.api).to be(api_older)
+      end
+
+    end
+
     describe 'add_version' do
 
       it 'registers a new API version' do
