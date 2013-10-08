@@ -20,6 +20,13 @@ module Aws
 
       ))
 
+      def self.sign(context)
+        new(
+          context.config.credentials,
+          context.params
+        ).sign(context.http_request)
+      end
+
       # @param [Credentials] credentials
       def initialize(credentials, params)
         @credentials = credentials

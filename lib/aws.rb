@@ -63,6 +63,8 @@ module Aws
 
   # @api private
   module Signers
+    autoload :Base, 'aws/signers/base'
+    autoload :Handler, 'aws/signers/handler'
     autoload :S3, 'aws/signers/s3'
     autoload :V2, 'aws/signers/v2'
     autoload :V3, 'aws/signers/v3'

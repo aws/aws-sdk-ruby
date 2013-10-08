@@ -5,12 +5,7 @@ require 'openssl'
 module Aws
   # @api private
   module Signers
-    class V3
-
-      # @param [Credentials] credentials
-      def initialize(credentials)
-        @credentials = credentials
-      end
+    class V3 < Base
 
       def sign(http_req)
 
@@ -31,13 +26,7 @@ module Aws
       private
 
       def signature(date)
-        Base64.encode64(
-          OpenSSL::HMAC.digest(
-            OpenSSL::Digest::Digest.new('sha256'),
-            @credentials.secret_access_key,
-            date
-          )
-        ).strip
+        sha256_hmac(date)
       end
 
     end

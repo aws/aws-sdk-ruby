@@ -11,14 +11,7 @@ module Aws
         config.api.endpoint.match(/%s/) ? config.region : 'us-east-1'
       end
 
-      handle(:Handler, step: :sign) do |context|
-        Signers::V4.new(
-          context.config.credentials,
-          context.config.signing_name,
-          context.config.signing_region
-        ).sign(context.http_request)
-        @handler.call(context)
-      end
+      handler(Signers::Handler.new(Signers::V4), step: :sign)
 
     end
   end

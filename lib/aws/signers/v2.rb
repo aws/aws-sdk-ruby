@@ -1,10 +1,6 @@
 module Aws
   module Signers
-    class V2
-
-      def initialize(credentials)
-        @credentials = credentials
-      end
+    class V2 < Base
 
       # @param [Http::Request] http_request
       def sign(http_request)
@@ -23,13 +19,7 @@ module Aws
       private
 
       def signature(http_request, params)
-        Base64.encode64(
-          OpenSSL::HMAC.digest(
-            OpenSSL::Digest::Digest.new('sha256'),
-            @credentials.secret_access_key,
-            string_to_sign(http_request, params)
-          )
-        ).strip
+        sha256_hmac(string_to_sign(http_request, params))
       end
 
       def string_to_sign(http_request, params)
