@@ -16,3 +16,23 @@ def call_request(service, operation_name, params = {})
     @error = error
   end
 end
+
+def eventually(seconds = 15, &block)
+
+  # generate a list of times-to-sleep that add up to less than `seconds'
+  sleeps = [1]
+  while sleeps.inject(0) { |sum, i| sum + i } < seconds
+    sleeps << sleeps.last * 1.2
+  end
+
+  begin
+    yield
+  rescue => error
+    unless sleeps.empty?
+      sleep(sleeps.shift)
+      retry
+    end
+    raise error # terminal case
+  end
+
+end

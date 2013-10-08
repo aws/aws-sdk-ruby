@@ -39,9 +39,11 @@ When(/^I delete the bucket$/) do
 end
 
 Then(/^the bucket should not exist$/) do
-  expect {
-    @s3.get_bucket_location(bucket: @bucket_name)
-  }.to raise_error(Aws::S3::Errors::NoSuchBucket)
+  eventually do
+    expect {
+      @s3.get_bucket_location(bucket: @bucket_name)
+    }.to raise_error(Aws::S3::Errors::NoSuchBucket)
+  end
 end
 
 When(/^I put nothing to the key "(.*?)"$/) do |key|
