@@ -79,40 +79,93 @@ module Seahorse
 
       end
 
-      describe '#on_complete' do
+      describe 'callbacks' do
 
-        it 'triggers the callback when a response is received'
+        let(:http_resp) { Http::Response.new }
 
-        it 'does not trigger when when a response is not received'
+        let(:response) {
+          Response.new(context: RequestContext.new(http_response: http_resp))
+        }
+
+        describe '#on_complete' do
+
+          it 'triggers the callback when a response is received' do
+            http_resp.status_code = 200
+            expect { |b| response.on_complete(&b) }.to yield_control
+          end
+
+          it 'does not trigger when when a response is not received' do
+            http_resp.status_code = 0
+            expect { |b| response.on_complete(&b) }.not_to yield_control
+          end
+
+        end
+
+        describe '#on_success' do
+
+          it 'triggers the callback when response has a ~ 200 status code' do
+            http_resp.status_code = 0
+            expect { |b| response.on_success(&b) }.not_to yield_control
+            http_resp.status_code = 200
+            expect { |b| response.on_success(&b) }.to yield_control
+            http_resp.status_code = 299
+            expect { |b| response.on_success(&b) }.to yield_control
+            http_resp.status_code = 300
+            expect { |b| response.on_success(&b) }.not_to yield_control
+          end
+
+        end
+
+        describe '#on_redirect' do
+
+          it 'triggers the callback when response has a ~ 300 status code' do
+            http_resp.status_code = 200
+            expect { |b| response.on_redirect(&b) }.not_to yield_control
+            http_resp.status_code = 304
+            expect { |b| response.on_redirect(&b) }.to yield_control
+            http_resp.status_code = 307
+            expect { |b| response.on_redirect(&b) }.to yield_control
+            http_resp.status_code = 400
+            expect { |b| response.on_redirect(&b) }.not_to yield_control
+          end
+
+        end
+
+        describe '#on_error' do
+
+          it 'triggers the callback when response has a ~ 400-500 code' do
+            http_resp.status_code = 0
+            expect { |b| response.on_error(&b) }.not_to yield_control
+            http_resp.status_code = 200
+            expect { |b| response.on_error(&b) }.not_to yield_control
+            http_resp.status_code = 300
+            expect { |b| response.on_error(&b) }.not_to yield_control
+            http_resp.status_code = 400
+            expect { |b| response.on_error(&b) }.to yield_control
+            http_resp.status_code = 500
+            expect { |b| response.on_error(&b) }.to yield_control
+          end
+
+        end
+
+        describe '#on_failure' do
+
+          it 'triggers the callback when a response is not received' do
+            http_resp.status_code = 0
+            expect { |b| response.on_failure(&b) }.to yield_control
+            http_resp.status_code = 200
+            expect { |b| response.on_failure(&b) }.not_to yield_control
+            http_resp.status_code = 300
+            expect { |b| response.on_failure(&b) }.not_to yield_control
+            http_resp.status_code = 400
+            expect { |b| response.on_failure(&b) }.not_to yield_control
+            http_resp.status_code = 500
+            expect { |b| response.on_failure(&b) }.not_to yield_control
+          end
+
+        end
 
       end
-
-      describe '#on_success' do
-
-        it 'triggers the callback when response has a ~ 200 status code'
-
-      end
-
-      describe '#on_redirect' do
-
-        it 'triggers the callback when response has a ~ 300 status code'
-
-      end
-
-      describe '#on_error' do
-
-        it 'triggers the callback when response has a ~ 400 status code'
-
-        it 'triggers the callback when response has a ~ 500 status code'
-
-      end
-
-      describe '#on_failure' do
-
-        it 'triggers the callback when response has a 0 status code'
-
-      end
-
     end
   end
 end
