@@ -34,7 +34,7 @@ Aws> Aws.ec2.describe_instances.reservations.first.instances.first
  state=#<struct  code=16, name="running">,
  ...>
 
-Aws> Aws.s3.list_buckets.map(&:name)
+Aws> Aws.s3.list_buckets.buckets.map(&:name)
 => ["bucket-1", "bucket-2", ...]
 ```
 
