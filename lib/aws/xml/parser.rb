@@ -9,31 +9,50 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      # @param [Seahorse::Model::Shapes::OutputShape] rules
+      # @param [Seahorse::Model::Shapes::OutputShape] output
       # @param [String<xml>] xml
-      # @param [Hash] target (nil)
       # @return [Hash]
-      def parse(rules, xml, target = nil)
-        structure(rules, MultiXml.parse(xml).values.first || {}, target)
+      def parse(output, xml)
+        rules = apply_wrapper(output)
+        result = structure(rules, MultiXml.parse(xml).values.first || {})
+        remove_wrapper(output, result)
       end
 
       # @param [Seahorse::Model::Shapes::OutputShape] rules
       # @param [String<xml>] xml
-      # @param [Hash] target (nil)
       # @return [Hash]
-      def self.parse(rules, xml, target = nil)
-        new.parse(rules, xml, target)
+      def self.parse(rules, xml)
+        new.parse(rules, xml)
       end
 
       private
 
-      def structure(shape, hash, target = nil)
-        target ||= Structure.new(shape.members.keys)
+      def apply_wrapper(shape)
+        if wrapper_name = shape.metadata['wrapper']
+          wrapper = Seahorse::Model::Shapes::OutputShape.new
+          wrapper.serialized_name = wrapper_name
+          wrapper.members[wrapper_name] = shape
+          wrapper
+        else
+          shape
+        end
+      end
+
+      def remove_wrapper(shape, data)
+        if wrapper_name = shape.metadata['wrapper']
+          data[wrapper_name]
+        else
+          data
+        end
+      end
+
+      def structure(shape, hash)
+        data = Structure.new(shape.members.keys)
         shape.members.each do |member_name, member_shape|
           key = member_shape.serialized_name
-          target[member_name] = member(member_shape, hash[key])
+          data[member_name] = member(member_shape, hash[key])
         end
-        target
+        data
       end
 
       def list(shape, values)
@@ -62,7 +81,8 @@ module Aws
       def member(shape, raw)
         if raw.nil?
           case shape
-          when StructureShape, MapShape then {}
+          when StructureShape then Structure.new(shape.members.keys)
+          when MapShape then {}
           when ListShape then []
           else nil
           end

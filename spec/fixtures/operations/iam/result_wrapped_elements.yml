@@ -22,13 +22,10 @@ response:
       </ResponseMetadata>
     </ListUsersResponse>
 data:
-  :list_users_result:
-    :users:
-      - :path: /
-        :user_name: user
-        :user_id: AIDAJGIY4Z6DJLHUYPUJ6
-        :arn: arn:aws:iam::469596866844:user/u3
-        :create_date: 2012-03-22 17:38:39 UTC
-    :is_truncated: false
-  :response_metadata:
-    :request_id: 88073802-2d1e-11e3-98d0-159f3b2d2434
+  :users:
+    - :path: /
+      :user_name: user
+      :user_id: AIDAJGIY4Z6DJLHUYPUJ6
+      :arn: arn:aws:iam::469596866844:user/u3
+      :create_date: 2012-03-22 17:38:39 UTC
+  :is_truncated: false

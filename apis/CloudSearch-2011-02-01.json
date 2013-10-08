@@ -31,94 +31,81 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "CreateDomainResult"
+        },
         "members": {
-          "create_domain_result": {
+          "domain_status": {
             "type": "structure",
-            "serialized_name": "CreateDomainResult",
+            "serialized_name": "DomainStatus",
             "members": {
-              "domain_status": {
+              "domain_id": {
+                "type": "string",
+                "serialized_name": "DomainId"
+              },
+              "domain_name": {
+                "type": "string",
+                "serialized_name": "DomainName"
+              },
+              "created": {
+                "type": "boolean",
+                "serialized_name": "Created"
+              },
+              "deleted": {
+                "type": "boolean",
+                "serialized_name": "Deleted"
+              },
+              "num_searchable_docs": {
+                "type": "integer",
+                "serialized_name": "NumSearchableDocs"
+              },
+              "doc_service": {
                 "type": "structure",
-                "serialized_name": "DomainStatus",
+                "serialized_name": "DocService",
                 "members": {
-                  "domain_id": {
+                  "arn": {
                     "type": "string",
-                    "serialized_name": "DomainId"
+                    "serialized_name": "Arn"
                   },
-                  "domain_name": {
+                  "endpoint": {
                     "type": "string",
-                    "serialized_name": "DomainName"
-                  },
-                  "created": {
-                    "type": "boolean",
-                    "serialized_name": "Created"
-                  },
-                  "deleted": {
-                    "type": "boolean",
-                    "serialized_name": "Deleted"
-                  },
-                  "num_searchable_docs": {
-                    "type": "integer",
-                    "serialized_name": "NumSearchableDocs"
-                  },
-                  "doc_service": {
-                    "type": "structure",
-                    "serialized_name": "DocService",
-                    "members": {
-                      "arn": {
-                        "type": "string",
-                        "serialized_name": "Arn"
-                      },
-                      "endpoint": {
-                        "type": "string",
-                        "serialized_name": "Endpoint"
-                      }
-                    }
-                  },
-                  "search_service": {
-                    "type": "structure",
-                    "serialized_name": "SearchService",
-                    "members": {
-                      "arn": {
-                        "type": "string",
-                        "serialized_name": "Arn"
-                      },
-                      "endpoint": {
-                        "type": "string",
-                        "serialized_name": "Endpoint"
-                      }
-                    }
-                  },
-                  "requires_index_documents": {
-                    "type": "boolean",
-                    "serialized_name": "RequiresIndexDocuments"
-                  },
-                  "processing": {
-                    "type": "boolean",
-                    "serialized_name": "Processing"
-                  },
-                  "search_instance_type": {
-                    "type": "string",
-                    "serialized_name": "SearchInstanceType"
-                  },
-                  "search_partition_count": {
-                    "type": "integer",
-                    "serialized_name": "SearchPartitionCount"
-                  },
-                  "search_instance_count": {
-                    "type": "integer",
-                    "serialized_name": "SearchInstanceCount"
+                    "serialized_name": "Endpoint"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
+              },
+              "search_service": {
+                "type": "structure",
+                "serialized_name": "SearchService",
+                "members": {
+                  "arn": {
+                    "type": "string",
+                    "serialized_name": "Arn"
+                  },
+                  "endpoint": {
+                    "type": "string",
+                    "serialized_name": "Endpoint"
+                  }
+                }
+              },
+              "requires_index_documents": {
+                "type": "boolean",
+                "serialized_name": "RequiresIndexDocuments"
+              },
+              "processing": {
+                "type": "boolean",
+                "serialized_name": "Processing"
+              },
+              "search_instance_type": {
                 "type": "string",
-                "serialized_name": "RequestId"
+                "serialized_name": "SearchInstanceType"
+              },
+              "search_partition_count": {
+                "type": "integer",
+                "serialized_name": "SearchPartitionCount"
+              },
+              "search_instance_count": {
+                "type": "integer",
+                "serialized_name": "SearchInstanceCount"
               }
             }
           }
@@ -299,208 +286,195 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DefineIndexFieldResult"
+        },
         "members": {
-          "define_index_field_result": {
+          "index_field": {
             "type": "structure",
-            "serialized_name": "DefineIndexFieldResult",
+            "serialized_name": "IndexField",
             "members": {
-              "index_field": {
+              "options": {
                 "type": "structure",
-                "serialized_name": "IndexField",
+                "serialized_name": "Options",
                 "members": {
-                  "options": {
+                  "index_field_name": {
+                    "type": "string",
+                    "serialized_name": "IndexFieldName"
+                  },
+                  "index_field_type": {
+                    "type": "string",
+                    "serialized_name": "IndexFieldType",
+                    "enum": [
+                      "uint",
+                      "literal",
+                      "text"
+                    ]
+                  },
+                  "u_int_options": {
                     "type": "structure",
-                    "serialized_name": "Options",
+                    "serialized_name": "UIntOptions",
                     "members": {
-                      "index_field_name": {
+                      "default_value": {
+                        "type": "integer",
+                        "serialized_name": "DefaultValue"
+                      }
+                    }
+                  },
+                  "literal_options": {
+                    "type": "structure",
+                    "serialized_name": "LiteralOptions",
+                    "members": {
+                      "default_value": {
                         "type": "string",
-                        "serialized_name": "IndexFieldName"
+                        "serialized_name": "DefaultValue"
                       },
-                      "index_field_type": {
+                      "search_enabled": {
+                        "type": "boolean",
+                        "serialized_name": "SearchEnabled"
+                      },
+                      "facet_enabled": {
+                        "type": "boolean",
+                        "serialized_name": "FacetEnabled"
+                      },
+                      "result_enabled": {
+                        "type": "boolean",
+                        "serialized_name": "ResultEnabled"
+                      }
+                    }
+                  },
+                  "text_options": {
+                    "type": "structure",
+                    "serialized_name": "TextOptions",
+                    "members": {
+                      "default_value": {
                         "type": "string",
-                        "serialized_name": "IndexFieldType",
-                        "enum": [
-                          "uint",
-                          "literal",
-                          "text"
-                        ]
+                        "serialized_name": "DefaultValue"
                       },
-                      "u_int_options": {
-                        "type": "structure",
-                        "serialized_name": "UIntOptions",
-                        "members": {
-                          "default_value": {
-                            "type": "integer",
-                            "serialized_name": "DefaultValue"
-                          }
-                        }
+                      "facet_enabled": {
+                        "type": "boolean",
+                        "serialized_name": "FacetEnabled"
                       },
-                      "literal_options": {
-                        "type": "structure",
-                        "serialized_name": "LiteralOptions",
-                        "members": {
-                          "default_value": {
-                            "type": "string",
-                            "serialized_name": "DefaultValue"
-                          },
-                          "search_enabled": {
-                            "type": "boolean",
-                            "serialized_name": "SearchEnabled"
-                          },
-                          "facet_enabled": {
-                            "type": "boolean",
-                            "serialized_name": "FacetEnabled"
-                          },
-                          "result_enabled": {
-                            "type": "boolean",
-                            "serialized_name": "ResultEnabled"
-                          }
-                        }
+                      "result_enabled": {
+                        "type": "boolean",
+                        "serialized_name": "ResultEnabled"
                       },
-                      "text_options": {
-                        "type": "structure",
-                        "serialized_name": "TextOptions",
-                        "members": {
-                          "default_value": {
-                            "type": "string",
-                            "serialized_name": "DefaultValue"
-                          },
-                          "facet_enabled": {
-                            "type": "boolean",
-                            "serialized_name": "FacetEnabled"
-                          },
-                          "result_enabled": {
-                            "type": "boolean",
-                            "serialized_name": "ResultEnabled"
-                          },
-                          "text_processor": {
-                            "type": "string",
-                            "serialized_name": "TextProcessor"
-                          }
-                        }
-                      },
-                      "source_attributes": {
-                        "type": "list",
-                        "serialized_name": "SourceAttributes",
-                        "members": {
+                      "text_processor": {
+                        "type": "string",
+                        "serialized_name": "TextProcessor"
+                      }
+                    }
+                  },
+                  "source_attributes": {
+                    "type": "list",
+                    "serialized_name": "SourceAttributes",
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "source_data_function": {
+                          "type": "string",
+                          "serialized_name": "SourceDataFunction",
+                          "enum": [
+                            "Copy",
+                            "TrimTitle",
+                            "Map"
+                          ]
+                        },
+                        "source_data_copy": {
                           "type": "structure",
+                          "serialized_name": "SourceDataCopy",
                           "members": {
-                            "source_data_function": {
+                            "source_name": {
                               "type": "string",
-                              "serialized_name": "SourceDataFunction",
-                              "enum": [
-                                "Copy",
-                                "TrimTitle",
-                                "Map"
-                              ]
+                              "serialized_name": "SourceName"
                             },
-                            "source_data_copy": {
-                              "type": "structure",
-                              "serialized_name": "SourceDataCopy",
-                              "members": {
-                                "source_name": {
-                                  "type": "string",
-                                  "serialized_name": "SourceName"
-                                },
-                                "default_value": {
-                                  "type": "string",
-                                  "serialized_name": "DefaultValue"
-                                }
-                              }
+                            "default_value": {
+                              "type": "string",
+                              "serialized_name": "DefaultValue"
+                            }
+                          }
+                        },
+                        "source_data_trim_title": {
+                          "type": "structure",
+                          "serialized_name": "SourceDataTrimTitle",
+                          "members": {
+                            "source_name": {
+                              "type": "string",
+                              "serialized_name": "SourceName"
                             },
-                            "source_data_trim_title": {
-                              "type": "structure",
-                              "serialized_name": "SourceDataTrimTitle",
-                              "members": {
-                                "source_name": {
-                                  "type": "string",
-                                  "serialized_name": "SourceName"
-                                },
-                                "default_value": {
-                                  "type": "string",
-                                  "serialized_name": "DefaultValue"
-                                },
-                                "separator": {
-                                  "type": "string",
-                                  "serialized_name": "Separator"
-                                },
-                                "language": {
-                                  "type": "string",
-                                  "serialized_name": "Language"
-                                }
-                              }
+                            "default_value": {
+                              "type": "string",
+                              "serialized_name": "DefaultValue"
                             },
-                            "source_data_map": {
-                              "type": "structure",
-                              "serialized_name": "SourceDataMap",
+                            "separator": {
+                              "type": "string",
+                              "serialized_name": "Separator"
+                            },
+                            "language": {
+                              "type": "string",
+                              "serialized_name": "Language"
+                            }
+                          }
+                        },
+                        "source_data_map": {
+                          "type": "structure",
+                          "serialized_name": "SourceDataMap",
+                          "members": {
+                            "source_name": {
+                              "type": "string",
+                              "serialized_name": "SourceName"
+                            },
+                            "default_value": {
+                              "type": "string",
+                              "serialized_name": "DefaultValue"
+                            },
+                            "cases": {
+                              "type": "map",
+                              "serialized_name": "Cases",
+                              "keys": {
+                                "type": "string"
+                              },
                               "members": {
-                                "source_name": {
-                                  "type": "string",
-                                  "serialized_name": "SourceName"
-                                },
-                                "default_value": {
-                                  "type": "string",
-                                  "serialized_name": "DefaultValue"
-                                },
-                                "cases": {
-                                  "type": "map",
-                                  "serialized_name": "Cases",
-                                  "keys": {
-                                    "type": "string"
-                                  },
-                                  "members": {
-                                    "type": "string"
-                                  }
-                                }
+                                "type": "string"
                               }
                             }
                           }
                         }
                       }
                     }
-                  },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
+              },
+              "status": {
+                "type": "structure",
+                "serialized_name": "Status",
+                "members": {
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
+                  },
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
+                  }
+                }
               }
             }
           }
@@ -540,71 +514,58 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DefineRankExpressionResult"
+        },
         "members": {
-          "define_rank_expression_result": {
+          "rank_expression": {
             "type": "structure",
-            "serialized_name": "DefineRankExpressionResult",
+            "serialized_name": "RankExpression",
             "members": {
-              "rank_expression": {
+              "options": {
                 "type": "structure",
-                "serialized_name": "RankExpression",
+                "serialized_name": "Options",
                 "members": {
-                  "options": {
-                    "type": "structure",
-                    "serialized_name": "Options",
-                    "members": {
-                      "rank_name": {
-                        "type": "string",
-                        "serialized_name": "RankName"
-                      },
-                      "rank_expression": {
-                        "type": "string",
-                        "serialized_name": "RankExpression"
-                      }
-                    }
+                  "rank_name": {
+                    "type": "string",
+                    "serialized_name": "RankName"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "rank_expression": {
+                    "type": "string",
+                    "serialized_name": "RankExpression"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
+              },
+              "status": {
+                "type": "structure",
+                "serialized_name": "Status",
+                "members": {
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
+                  },
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
+                  }
+                }
               }
             }
           }
@@ -627,94 +588,81 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DeleteDomainResult"
+        },
         "members": {
-          "delete_domain_result": {
+          "domain_status": {
             "type": "structure",
-            "serialized_name": "DeleteDomainResult",
+            "serialized_name": "DomainStatus",
             "members": {
-              "domain_status": {
+              "domain_id": {
+                "type": "string",
+                "serialized_name": "DomainId"
+              },
+              "domain_name": {
+                "type": "string",
+                "serialized_name": "DomainName"
+              },
+              "created": {
+                "type": "boolean",
+                "serialized_name": "Created"
+              },
+              "deleted": {
+                "type": "boolean",
+                "serialized_name": "Deleted"
+              },
+              "num_searchable_docs": {
+                "type": "integer",
+                "serialized_name": "NumSearchableDocs"
+              },
+              "doc_service": {
                 "type": "structure",
-                "serialized_name": "DomainStatus",
+                "serialized_name": "DocService",
                 "members": {
-                  "domain_id": {
+                  "arn": {
                     "type": "string",
-                    "serialized_name": "DomainId"
+                    "serialized_name": "Arn"
                   },
-                  "domain_name": {
+                  "endpoint": {
                     "type": "string",
-                    "serialized_name": "DomainName"
-                  },
-                  "created": {
-                    "type": "boolean",
-                    "serialized_name": "Created"
-                  },
-                  "deleted": {
-                    "type": "boolean",
-                    "serialized_name": "Deleted"
-                  },
-                  "num_searchable_docs": {
-                    "type": "integer",
-                    "serialized_name": "NumSearchableDocs"
-                  },
-                  "doc_service": {
-                    "type": "structure",
-                    "serialized_name": "DocService",
-                    "members": {
-                      "arn": {
-                        "type": "string",
-                        "serialized_name": "Arn"
-                      },
-                      "endpoint": {
-                        "type": "string",
-                        "serialized_name": "Endpoint"
-                      }
-                    }
-                  },
-                  "search_service": {
-                    "type": "structure",
-                    "serialized_name": "SearchService",
-                    "members": {
-                      "arn": {
-                        "type": "string",
-                        "serialized_name": "Arn"
-                      },
-                      "endpoint": {
-                        "type": "string",
-                        "serialized_name": "Endpoint"
-                      }
-                    }
-                  },
-                  "requires_index_documents": {
-                    "type": "boolean",
-                    "serialized_name": "RequiresIndexDocuments"
-                  },
-                  "processing": {
-                    "type": "boolean",
-                    "serialized_name": "Processing"
-                  },
-                  "search_instance_type": {
-                    "type": "string",
-                    "serialized_name": "SearchInstanceType"
-                  },
-                  "search_partition_count": {
-                    "type": "integer",
-                    "serialized_name": "SearchPartitionCount"
-                  },
-                  "search_instance_count": {
-                    "type": "integer",
-                    "serialized_name": "SearchInstanceCount"
+                    "serialized_name": "Endpoint"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
+              },
+              "search_service": {
+                "type": "structure",
+                "serialized_name": "SearchService",
+                "members": {
+                  "arn": {
+                    "type": "string",
+                    "serialized_name": "Arn"
+                  },
+                  "endpoint": {
+                    "type": "string",
+                    "serialized_name": "Endpoint"
+                  }
+                }
+              },
+              "requires_index_documents": {
+                "type": "boolean",
+                "serialized_name": "RequiresIndexDocuments"
+              },
+              "processing": {
+                "type": "boolean",
+                "serialized_name": "Processing"
+              },
+              "search_instance_type": {
                 "type": "string",
-                "serialized_name": "RequestId"
+                "serialized_name": "SearchInstanceType"
+              },
+              "search_partition_count": {
+                "type": "integer",
+                "serialized_name": "SearchPartitionCount"
+              },
+              "search_instance_count": {
+                "type": "integer",
+                "serialized_name": "SearchInstanceCount"
               }
             }
           }
@@ -742,208 +690,195 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DeleteIndexFieldResult"
+        },
         "members": {
-          "delete_index_field_result": {
+          "index_field": {
             "type": "structure",
-            "serialized_name": "DeleteIndexFieldResult",
+            "serialized_name": "IndexField",
             "members": {
-              "index_field": {
+              "options": {
                 "type": "structure",
-                "serialized_name": "IndexField",
+                "serialized_name": "Options",
                 "members": {
-                  "options": {
+                  "index_field_name": {
+                    "type": "string",
+                    "serialized_name": "IndexFieldName"
+                  },
+                  "index_field_type": {
+                    "type": "string",
+                    "serialized_name": "IndexFieldType",
+                    "enum": [
+                      "uint",
+                      "literal",
+                      "text"
+                    ]
+                  },
+                  "u_int_options": {
                     "type": "structure",
-                    "serialized_name": "Options",
+                    "serialized_name": "UIntOptions",
                     "members": {
-                      "index_field_name": {
+                      "default_value": {
+                        "type": "integer",
+                        "serialized_name": "DefaultValue"
+                      }
+                    }
+                  },
+                  "literal_options": {
+                    "type": "structure",
+                    "serialized_name": "LiteralOptions",
+                    "members": {
+                      "default_value": {
                         "type": "string",
-                        "serialized_name": "IndexFieldName"
+                        "serialized_name": "DefaultValue"
                       },
-                      "index_field_type": {
+                      "search_enabled": {
+                        "type": "boolean",
+                        "serialized_name": "SearchEnabled"
+                      },
+                      "facet_enabled": {
+                        "type": "boolean",
+                        "serialized_name": "FacetEnabled"
+                      },
+                      "result_enabled": {
+                        "type": "boolean",
+                        "serialized_name": "ResultEnabled"
+                      }
+                    }
+                  },
+                  "text_options": {
+                    "type": "structure",
+                    "serialized_name": "TextOptions",
+                    "members": {
+                      "default_value": {
                         "type": "string",
-                        "serialized_name": "IndexFieldType",
-                        "enum": [
-                          "uint",
-                          "literal",
-                          "text"
-                        ]
+                        "serialized_name": "DefaultValue"
                       },
-                      "u_int_options": {
-                        "type": "structure",
-                        "serialized_name": "UIntOptions",
-                        "members": {
-                          "default_value": {
-                            "type": "integer",
-                            "serialized_name": "DefaultValue"
-                          }
-                        }
+                      "facet_enabled": {
+                        "type": "boolean",
+                        "serialized_name": "FacetEnabled"
                       },
-                      "literal_options": {
-                        "type": "structure",
-                        "serialized_name": "LiteralOptions",
-                        "members": {
-                          "default_value": {
-                            "type": "string",
-                            "serialized_name": "DefaultValue"
-                          },
-                          "search_enabled": {
-                            "type": "boolean",
-                            "serialized_name": "SearchEnabled"
-                          },
-                          "facet_enabled": {
-                            "type": "boolean",
-                            "serialized_name": "FacetEnabled"
-                          },
-                          "result_enabled": {
-                            "type": "boolean",
-                            "serialized_name": "ResultEnabled"
-                          }
-                        }
+                      "result_enabled": {
+                        "type": "boolean",
+                        "serialized_name": "ResultEnabled"
                       },
-                      "text_options": {
-                        "type": "structure",
-                        "serialized_name": "TextOptions",
-                        "members": {
-                          "default_value": {
-                            "type": "string",
-                            "serialized_name": "DefaultValue"
-                          },
-                          "facet_enabled": {
-                            "type": "boolean",
-                            "serialized_name": "FacetEnabled"
-                          },
-                          "result_enabled": {
-                            "type": "boolean",
-                            "serialized_name": "ResultEnabled"
-                          },
-                          "text_processor": {
-                            "type": "string",
-                            "serialized_name": "TextProcessor"
-                          }
-                        }
-                      },
-                      "source_attributes": {
-                        "type": "list",
-                        "serialized_name": "SourceAttributes",
-                        "members": {
+                      "text_processor": {
+                        "type": "string",
+                        "serialized_name": "TextProcessor"
+                      }
+                    }
+                  },
+                  "source_attributes": {
+                    "type": "list",
+                    "serialized_name": "SourceAttributes",
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "source_data_function": {
+                          "type": "string",
+                          "serialized_name": "SourceDataFunction",
+                          "enum": [
+                            "Copy",
+                            "TrimTitle",
+                            "Map"
+                          ]
+                        },
+                        "source_data_copy": {
                           "type": "structure",
+                          "serialized_name": "SourceDataCopy",
                           "members": {
-                            "source_data_function": {
+                            "source_name": {
                               "type": "string",
-                              "serialized_name": "SourceDataFunction",
-                              "enum": [
-                                "Copy",
-                                "TrimTitle",
-                                "Map"
-                              ]
+                              "serialized_name": "SourceName"
                             },
-                            "source_data_copy": {
-                              "type": "structure",
-                              "serialized_name": "SourceDataCopy",
-                              "members": {
-                                "source_name": {
-                                  "type": "string",
-                                  "serialized_name": "SourceName"
-                                },
-                                "default_value": {
-                                  "type": "string",
-                                  "serialized_name": "DefaultValue"
-                                }
-                              }
+                            "default_value": {
+                              "type": "string",
+                              "serialized_name": "DefaultValue"
+                            }
+                          }
+                        },
+                        "source_data_trim_title": {
+                          "type": "structure",
+                          "serialized_name": "SourceDataTrimTitle",
+                          "members": {
+                            "source_name": {
+                              "type": "string",
+                              "serialized_name": "SourceName"
                             },
-                            "source_data_trim_title": {
-                              "type": "structure",
-                              "serialized_name": "SourceDataTrimTitle",
-                              "members": {
-                                "source_name": {
-                                  "type": "string",
-                                  "serialized_name": "SourceName"
-                                },
-                                "default_value": {
-                                  "type": "string",
-                                  "serialized_name": "DefaultValue"
-                                },
-                                "separator": {
-                                  "type": "string",
-                                  "serialized_name": "Separator"
-                                },
-                                "language": {
-                                  "type": "string",
-                                  "serialized_name": "Language"
-                                }
-                              }
+                            "default_value": {
+                              "type": "string",
+                              "serialized_name": "DefaultValue"
                             },
-                            "source_data_map": {
-                              "type": "structure",
-                              "serialized_name": "SourceDataMap",
+                            "separator": {
+                              "type": "string",
+                              "serialized_name": "Separator"
+                            },
+                            "language": {
+                              "type": "string",
+                              "serialized_name": "Language"
+                            }
+                          }
+                        },
+                        "source_data_map": {
+                          "type": "structure",
+                          "serialized_name": "SourceDataMap",
+                          "members": {
+                            "source_name": {
+                              "type": "string",
+                              "serialized_name": "SourceName"
+                            },
+                            "default_value": {
+                              "type": "string",
+                              "serialized_name": "DefaultValue"
+                            },
+                            "cases": {
+                              "type": "map",
+                              "serialized_name": "Cases",
+                              "keys": {
+                                "type": "string"
+                              },
                               "members": {
-                                "source_name": {
-                                  "type": "string",
-                                  "serialized_name": "SourceName"
-                                },
-                                "default_value": {
-                                  "type": "string",
-                                  "serialized_name": "DefaultValue"
-                                },
-                                "cases": {
-                                  "type": "map",
-                                  "serialized_name": "Cases",
-                                  "keys": {
-                                    "type": "string"
-                                  },
-                                  "members": {
-                                    "type": "string"
-                                  }
-                                }
+                                "type": "string"
                               }
                             }
                           }
                         }
                       }
                     }
-                  },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
+              },
+              "status": {
+                "type": "structure",
+                "serialized_name": "Status",
+                "members": {
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
+                  },
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
+                  }
+                }
               }
             }
           }
@@ -971,71 +906,58 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DeleteRankExpressionResult"
+        },
         "members": {
-          "delete_rank_expression_result": {
+          "rank_expression": {
             "type": "structure",
-            "serialized_name": "DeleteRankExpressionResult",
+            "serialized_name": "RankExpression",
             "members": {
-              "rank_expression": {
+              "options": {
                 "type": "structure",
-                "serialized_name": "RankExpression",
+                "serialized_name": "Options",
                 "members": {
-                  "options": {
-                    "type": "structure",
-                    "serialized_name": "Options",
-                    "members": {
-                      "rank_name": {
-                        "type": "string",
-                        "serialized_name": "RankName"
-                      },
-                      "rank_expression": {
-                        "type": "string",
-                        "serialized_name": "RankExpression"
-                      }
-                    }
+                  "rank_name": {
+                    "type": "string",
+                    "serialized_name": "RankName"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "rank_expression": {
+                    "type": "string",
+                    "serialized_name": "RankExpression"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
+              },
+              "status": {
+                "type": "structure",
+                "serialized_name": "Status",
+                "members": {
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
+                  },
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
+                  }
+                }
               }
             }
           }
@@ -1058,61 +980,48 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeDefaultSearchFieldResult"
+        },
         "members": {
-          "describe_default_search_field_result": {
+          "default_search_field": {
             "type": "structure",
-            "serialized_name": "DescribeDefaultSearchFieldResult",
+            "serialized_name": "DefaultSearchField",
             "members": {
-              "default_search_field": {
+              "options": {
+                "type": "string",
+                "serialized_name": "Options"
+              },
+              "status": {
                 "type": "structure",
-                "serialized_name": "DefaultSearchField",
+                "serialized_name": "Status",
                 "members": {
-                  "options": {
-                    "type": "string",
-                    "serialized_name": "Options"
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -1137,97 +1046,84 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeDomainsResult"
+        },
         "members": {
-          "describe_domains_result": {
-            "type": "structure",
-            "serialized_name": "DescribeDomainsResult",
+          "domain_status_list": {
+            "type": "list",
+            "serialized_name": "DomainStatusList",
             "members": {
-              "domain_status_list": {
-                "type": "list",
-                "serialized_name": "DomainStatusList",
-                "members": {
+              "type": "structure",
+              "members": {
+                "domain_id": {
+                  "type": "string",
+                  "serialized_name": "DomainId"
+                },
+                "domain_name": {
+                  "type": "string",
+                  "serialized_name": "DomainName"
+                },
+                "created": {
+                  "type": "boolean",
+                  "serialized_name": "Created"
+                },
+                "deleted": {
+                  "type": "boolean",
+                  "serialized_name": "Deleted"
+                },
+                "num_searchable_docs": {
+                  "type": "integer",
+                  "serialized_name": "NumSearchableDocs"
+                },
+                "doc_service": {
                   "type": "structure",
+                  "serialized_name": "DocService",
                   "members": {
-                    "domain_id": {
+                    "arn": {
                       "type": "string",
-                      "serialized_name": "DomainId"
+                      "serialized_name": "Arn"
                     },
-                    "domain_name": {
+                    "endpoint": {
                       "type": "string",
-                      "serialized_name": "DomainName"
-                    },
-                    "created": {
-                      "type": "boolean",
-                      "serialized_name": "Created"
-                    },
-                    "deleted": {
-                      "type": "boolean",
-                      "serialized_name": "Deleted"
-                    },
-                    "num_searchable_docs": {
-                      "type": "integer",
-                      "serialized_name": "NumSearchableDocs"
-                    },
-                    "doc_service": {
-                      "type": "structure",
-                      "serialized_name": "DocService",
-                      "members": {
-                        "arn": {
-                          "type": "string",
-                          "serialized_name": "Arn"
-                        },
-                        "endpoint": {
-                          "type": "string",
-                          "serialized_name": "Endpoint"
-                        }
-                      }
-                    },
-                    "search_service": {
-                      "type": "structure",
-                      "serialized_name": "SearchService",
-                      "members": {
-                        "arn": {
-                          "type": "string",
-                          "serialized_name": "Arn"
-                        },
-                        "endpoint": {
-                          "type": "string",
-                          "serialized_name": "Endpoint"
-                        }
-                      }
-                    },
-                    "requires_index_documents": {
-                      "type": "boolean",
-                      "serialized_name": "RequiresIndexDocuments"
-                    },
-                    "processing": {
-                      "type": "boolean",
-                      "serialized_name": "Processing"
-                    },
-                    "search_instance_type": {
-                      "type": "string",
-                      "serialized_name": "SearchInstanceType"
-                    },
-                    "search_partition_count": {
-                      "type": "integer",
-                      "serialized_name": "SearchPartitionCount"
-                    },
-                    "search_instance_count": {
-                      "type": "integer",
-                      "serialized_name": "SearchInstanceCount"
+                      "serialized_name": "Endpoint"
                     }
                   }
+                },
+                "search_service": {
+                  "type": "structure",
+                  "serialized_name": "SearchService",
+                  "members": {
+                    "arn": {
+                      "type": "string",
+                      "serialized_name": "Arn"
+                    },
+                    "endpoint": {
+                      "type": "string",
+                      "serialized_name": "Endpoint"
+                    }
+                  }
+                },
+                "requires_index_documents": {
+                  "type": "boolean",
+                  "serialized_name": "RequiresIndexDocuments"
+                },
+                "processing": {
+                  "type": "boolean",
+                  "serialized_name": "Processing"
+                },
+                "search_instance_type": {
+                  "type": "string",
+                  "serialized_name": "SearchInstanceType"
+                },
+                "search_partition_count": {
+                  "type": "integer",
+                  "serialized_name": "SearchPartitionCount"
+                },
+                "search_instance_count": {
+                  "type": "integer",
+                  "serialized_name": "SearchInstanceCount"
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -1257,211 +1153,198 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeIndexFieldsResult"
+        },
         "members": {
-          "describe_index_fields_result": {
-            "type": "structure",
-            "serialized_name": "DescribeIndexFieldsResult",
+          "index_fields": {
+            "type": "list",
+            "serialized_name": "IndexFields",
             "members": {
-              "index_fields": {
-                "type": "list",
-                "serialized_name": "IndexFields",
-                "members": {
+              "type": "structure",
+              "members": {
+                "options": {
                   "type": "structure",
+                  "serialized_name": "Options",
                   "members": {
-                    "options": {
+                    "index_field_name": {
+                      "type": "string",
+                      "serialized_name": "IndexFieldName"
+                    },
+                    "index_field_type": {
+                      "type": "string",
+                      "serialized_name": "IndexFieldType",
+                      "enum": [
+                        "uint",
+                        "literal",
+                        "text"
+                      ]
+                    },
+                    "u_int_options": {
                       "type": "structure",
-                      "serialized_name": "Options",
+                      "serialized_name": "UIntOptions",
                       "members": {
-                        "index_field_name": {
+                        "default_value": {
+                          "type": "integer",
+                          "serialized_name": "DefaultValue"
+                        }
+                      }
+                    },
+                    "literal_options": {
+                      "type": "structure",
+                      "serialized_name": "LiteralOptions",
+                      "members": {
+                        "default_value": {
                           "type": "string",
-                          "serialized_name": "IndexFieldName"
+                          "serialized_name": "DefaultValue"
                         },
-                        "index_field_type": {
+                        "search_enabled": {
+                          "type": "boolean",
+                          "serialized_name": "SearchEnabled"
+                        },
+                        "facet_enabled": {
+                          "type": "boolean",
+                          "serialized_name": "FacetEnabled"
+                        },
+                        "result_enabled": {
+                          "type": "boolean",
+                          "serialized_name": "ResultEnabled"
+                        }
+                      }
+                    },
+                    "text_options": {
+                      "type": "structure",
+                      "serialized_name": "TextOptions",
+                      "members": {
+                        "default_value": {
                           "type": "string",
-                          "serialized_name": "IndexFieldType",
-                          "enum": [
-                            "uint",
-                            "literal",
-                            "text"
-                          ]
+                          "serialized_name": "DefaultValue"
                         },
-                        "u_int_options": {
-                          "type": "structure",
-                          "serialized_name": "UIntOptions",
-                          "members": {
-                            "default_value": {
-                              "type": "integer",
-                              "serialized_name": "DefaultValue"
-                            }
-                          }
+                        "facet_enabled": {
+                          "type": "boolean",
+                          "serialized_name": "FacetEnabled"
                         },
-                        "literal_options": {
-                          "type": "structure",
-                          "serialized_name": "LiteralOptions",
-                          "members": {
-                            "default_value": {
-                              "type": "string",
-                              "serialized_name": "DefaultValue"
-                            },
-                            "search_enabled": {
-                              "type": "boolean",
-                              "serialized_name": "SearchEnabled"
-                            },
-                            "facet_enabled": {
-                              "type": "boolean",
-                              "serialized_name": "FacetEnabled"
-                            },
-                            "result_enabled": {
-                              "type": "boolean",
-                              "serialized_name": "ResultEnabled"
-                            }
-                          }
+                        "result_enabled": {
+                          "type": "boolean",
+                          "serialized_name": "ResultEnabled"
                         },
-                        "text_options": {
-                          "type": "structure",
-                          "serialized_name": "TextOptions",
-                          "members": {
-                            "default_value": {
-                              "type": "string",
-                              "serialized_name": "DefaultValue"
-                            },
-                            "facet_enabled": {
-                              "type": "boolean",
-                              "serialized_name": "FacetEnabled"
-                            },
-                            "result_enabled": {
-                              "type": "boolean",
-                              "serialized_name": "ResultEnabled"
-                            },
-                            "text_processor": {
-                              "type": "string",
-                              "serialized_name": "TextProcessor"
-                            }
-                          }
-                        },
-                        "source_attributes": {
-                          "type": "list",
-                          "serialized_name": "SourceAttributes",
-                          "members": {
+                        "text_processor": {
+                          "type": "string",
+                          "serialized_name": "TextProcessor"
+                        }
+                      }
+                    },
+                    "source_attributes": {
+                      "type": "list",
+                      "serialized_name": "SourceAttributes",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "source_data_function": {
+                            "type": "string",
+                            "serialized_name": "SourceDataFunction",
+                            "enum": [
+                              "Copy",
+                              "TrimTitle",
+                              "Map"
+                            ]
+                          },
+                          "source_data_copy": {
                             "type": "structure",
+                            "serialized_name": "SourceDataCopy",
                             "members": {
-                              "source_data_function": {
+                              "source_name": {
                                 "type": "string",
-                                "serialized_name": "SourceDataFunction",
-                                "enum": [
-                                  "Copy",
-                                  "TrimTitle",
-                                  "Map"
-                                ]
+                                "serialized_name": "SourceName"
                               },
-                              "source_data_copy": {
-                                "type": "structure",
-                                "serialized_name": "SourceDataCopy",
-                                "members": {
-                                  "source_name": {
-                                    "type": "string",
-                                    "serialized_name": "SourceName"
-                                  },
-                                  "default_value": {
-                                    "type": "string",
-                                    "serialized_name": "DefaultValue"
-                                  }
-                                }
+                              "default_value": {
+                                "type": "string",
+                                "serialized_name": "DefaultValue"
+                              }
+                            }
+                          },
+                          "source_data_trim_title": {
+                            "type": "structure",
+                            "serialized_name": "SourceDataTrimTitle",
+                            "members": {
+                              "source_name": {
+                                "type": "string",
+                                "serialized_name": "SourceName"
                               },
-                              "source_data_trim_title": {
-                                "type": "structure",
-                                "serialized_name": "SourceDataTrimTitle",
-                                "members": {
-                                  "source_name": {
-                                    "type": "string",
-                                    "serialized_name": "SourceName"
-                                  },
-                                  "default_value": {
-                                    "type": "string",
-                                    "serialized_name": "DefaultValue"
-                                  },
-                                  "separator": {
-                                    "type": "string",
-                                    "serialized_name": "Separator"
-                                  },
-                                  "language": {
-                                    "type": "string",
-                                    "serialized_name": "Language"
-                                  }
-                                }
+                              "default_value": {
+                                "type": "string",
+                                "serialized_name": "DefaultValue"
                               },
-                              "source_data_map": {
-                                "type": "structure",
-                                "serialized_name": "SourceDataMap",
+                              "separator": {
+                                "type": "string",
+                                "serialized_name": "Separator"
+                              },
+                              "language": {
+                                "type": "string",
+                                "serialized_name": "Language"
+                              }
+                            }
+                          },
+                          "source_data_map": {
+                            "type": "structure",
+                            "serialized_name": "SourceDataMap",
+                            "members": {
+                              "source_name": {
+                                "type": "string",
+                                "serialized_name": "SourceName"
+                              },
+                              "default_value": {
+                                "type": "string",
+                                "serialized_name": "DefaultValue"
+                              },
+                              "cases": {
+                                "type": "map",
+                                "serialized_name": "Cases",
+                                "keys": {
+                                  "type": "string"
+                                },
                                 "members": {
-                                  "source_name": {
-                                    "type": "string",
-                                    "serialized_name": "SourceName"
-                                  },
-                                  "default_value": {
-                                    "type": "string",
-                                    "serialized_name": "DefaultValue"
-                                  },
-                                  "cases": {
-                                    "type": "map",
-                                    "serialized_name": "Cases",
-                                    "keys": {
-                                      "type": "string"
-                                    },
-                                    "members": {
-                                      "type": "string"
-                                    }
-                                  }
+                                  "type": "string"
                                 }
                               }
                             }
                           }
                         }
                       }
+                    }
+                  }
+                },
+                "status": {
+                  "type": "structure",
+                  "serialized_name": "Status",
+                  "members": {
+                    "creation_date": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CreationDate"
                     },
-                    "status": {
-                      "type": "structure",
-                      "serialized_name": "Status",
-                      "members": {
-                        "creation_date": {
-                          "type": "iso8601_timestamp",
-                          "serialized_name": "CreationDate"
-                        },
-                        "update_date": {
-                          "type": "iso8601_timestamp",
-                          "serialized_name": "UpdateDate"
-                        },
-                        "update_version": {
-                          "type": "integer",
-                          "serialized_name": "UpdateVersion"
-                        },
-                        "state": {
-                          "type": "string",
-                          "serialized_name": "State",
-                          "enum": [
-                            "RequiresIndexDocuments",
-                            "Processing",
-                            "Active"
-                          ]
-                        },
-                        "pending_deletion": {
-                          "type": "boolean",
-                          "serialized_name": "PendingDeletion"
-                        }
-                      }
+                    "update_date": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "UpdateDate"
+                    },
+                    "update_version": {
+                      "type": "integer",
+                      "serialized_name": "UpdateVersion"
+                    },
+                    "state": {
+                      "type": "string",
+                      "serialized_name": "State",
+                      "enum": [
+                        "RequiresIndexDocuments",
+                        "Processing",
+                        "Active"
+                      ]
+                    },
+                    "pending_deletion": {
+                      "type": "boolean",
+                      "serialized_name": "PendingDeletion"
                     }
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -1491,74 +1374,61 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeRankExpressionsResult"
+        },
         "members": {
-          "describe_rank_expressions_result": {
-            "type": "structure",
-            "serialized_name": "DescribeRankExpressionsResult",
+          "rank_expressions": {
+            "type": "list",
+            "serialized_name": "RankExpressions",
             "members": {
-              "rank_expressions": {
-                "type": "list",
-                "serialized_name": "RankExpressions",
-                "members": {
+              "type": "structure",
+              "members": {
+                "options": {
                   "type": "structure",
+                  "serialized_name": "Options",
                   "members": {
-                    "options": {
-                      "type": "structure",
-                      "serialized_name": "Options",
-                      "members": {
-                        "rank_name": {
-                          "type": "string",
-                          "serialized_name": "RankName"
-                        },
-                        "rank_expression": {
-                          "type": "string",
-                          "serialized_name": "RankExpression"
-                        }
-                      }
+                    "rank_name": {
+                      "type": "string",
+                      "serialized_name": "RankName"
                     },
-                    "status": {
-                      "type": "structure",
-                      "serialized_name": "Status",
-                      "members": {
-                        "creation_date": {
-                          "type": "iso8601_timestamp",
-                          "serialized_name": "CreationDate"
-                        },
-                        "update_date": {
-                          "type": "iso8601_timestamp",
-                          "serialized_name": "UpdateDate"
-                        },
-                        "update_version": {
-                          "type": "integer",
-                          "serialized_name": "UpdateVersion"
-                        },
-                        "state": {
-                          "type": "string",
-                          "serialized_name": "State",
-                          "enum": [
-                            "RequiresIndexDocuments",
-                            "Processing",
-                            "Active"
-                          ]
-                        },
-                        "pending_deletion": {
-                          "type": "boolean",
-                          "serialized_name": "PendingDeletion"
-                        }
-                      }
+                    "rank_expression": {
+                      "type": "string",
+                      "serialized_name": "RankExpression"
+                    }
+                  }
+                },
+                "status": {
+                  "type": "structure",
+                  "serialized_name": "Status",
+                  "members": {
+                    "creation_date": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CreationDate"
+                    },
+                    "update_date": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "UpdateDate"
+                    },
+                    "update_version": {
+                      "type": "integer",
+                      "serialized_name": "UpdateVersion"
+                    },
+                    "state": {
+                      "type": "string",
+                      "serialized_name": "State",
+                      "enum": [
+                        "RequiresIndexDocuments",
+                        "Processing",
+                        "Active"
+                      ]
+                    },
+                    "pending_deletion": {
+                      "type": "boolean",
+                      "serialized_name": "PendingDeletion"
                     }
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -1581,61 +1451,48 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeServiceAccessPoliciesResult"
+        },
         "members": {
-          "describe_service_access_policies_result": {
+          "access_policies": {
             "type": "structure",
-            "serialized_name": "DescribeServiceAccessPoliciesResult",
+            "serialized_name": "AccessPolicies",
             "members": {
-              "access_policies": {
+              "options": {
+                "type": "string",
+                "serialized_name": "Options"
+              },
+              "status": {
                 "type": "structure",
-                "serialized_name": "AccessPolicies",
+                "serialized_name": "Status",
                 "members": {
-                  "options": {
-                    "type": "string",
-                    "serialized_name": "Options"
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -1658,61 +1515,48 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeStemmingOptionsResult"
+        },
         "members": {
-          "describe_stemming_options_result": {
+          "stems": {
             "type": "structure",
-            "serialized_name": "DescribeStemmingOptionsResult",
+            "serialized_name": "Stems",
             "members": {
-              "stems": {
+              "options": {
+                "type": "string",
+                "serialized_name": "Options"
+              },
+              "status": {
                 "type": "structure",
-                "serialized_name": "Stems",
+                "serialized_name": "Status",
                 "members": {
-                  "options": {
-                    "type": "string",
-                    "serialized_name": "Options"
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -1735,61 +1579,48 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeStopwordOptionsResult"
+        },
         "members": {
-          "describe_stopword_options_result": {
+          "stopwords": {
             "type": "structure",
-            "serialized_name": "DescribeStopwordOptionsResult",
+            "serialized_name": "Stopwords",
             "members": {
-              "stopwords": {
+              "options": {
+                "type": "string",
+                "serialized_name": "Options"
+              },
+              "status": {
                 "type": "structure",
-                "serialized_name": "Stopwords",
+                "serialized_name": "Status",
                 "members": {
-                  "options": {
-                    "type": "string",
-                    "serialized_name": "Options"
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -1812,61 +1643,48 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeSynonymOptionsResult"
+        },
         "members": {
-          "describe_synonym_options_result": {
+          "synonyms": {
             "type": "structure",
-            "serialized_name": "DescribeSynonymOptionsResult",
+            "serialized_name": "Synonyms",
             "members": {
-              "synonyms": {
+              "options": {
+                "type": "string",
+                "serialized_name": "Options"
+              },
+              "status": {
                 "type": "structure",
-                "serialized_name": "Synonyms",
+                "serialized_name": "Status",
                 "members": {
-                  "options": {
-                    "type": "string",
-                    "serialized_name": "Options"
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -1889,28 +1707,15 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "IndexDocumentsResult"
+        },
         "members": {
-          "index_documents_result": {
-            "type": "structure",
-            "serialized_name": "IndexDocumentsResult",
+          "field_names": {
+            "type": "list",
+            "serialized_name": "FieldNames",
             "members": {
-              "field_names": {
-                "type": "list",
-                "serialized_name": "FieldNames",
-                "members": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
+              "type": "string"
             }
           }
         }
@@ -1937,61 +1742,48 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "UpdateDefaultSearchFieldResult"
+        },
         "members": {
-          "update_default_search_field_result": {
+          "default_search_field": {
             "type": "structure",
-            "serialized_name": "UpdateDefaultSearchFieldResult",
+            "serialized_name": "DefaultSearchField",
             "members": {
-              "default_search_field": {
+              "options": {
+                "type": "string",
+                "serialized_name": "Options"
+              },
+              "status": {
                 "type": "structure",
-                "serialized_name": "DefaultSearchField",
+                "serialized_name": "Status",
                 "members": {
-                  "options": {
-                    "type": "string",
-                    "serialized_name": "Options"
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -2019,61 +1811,48 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "UpdateServiceAccessPoliciesResult"
+        },
         "members": {
-          "update_service_access_policies_result": {
+          "access_policies": {
             "type": "structure",
-            "serialized_name": "UpdateServiceAccessPoliciesResult",
+            "serialized_name": "AccessPolicies",
             "members": {
-              "access_policies": {
+              "options": {
+                "type": "string",
+                "serialized_name": "Options"
+              },
+              "status": {
                 "type": "structure",
-                "serialized_name": "AccessPolicies",
+                "serialized_name": "Status",
                 "members": {
-                  "options": {
-                    "type": "string",
-                    "serialized_name": "Options"
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -2101,61 +1880,48 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "UpdateStemmingOptionsResult"
+        },
         "members": {
-          "update_stemming_options_result": {
+          "stems": {
             "type": "structure",
-            "serialized_name": "UpdateStemmingOptionsResult",
+            "serialized_name": "Stems",
             "members": {
-              "stems": {
+              "options": {
+                "type": "string",
+                "serialized_name": "Options"
+              },
+              "status": {
                 "type": "structure",
-                "serialized_name": "Stems",
+                "serialized_name": "Status",
                 "members": {
-                  "options": {
-                    "type": "string",
-                    "serialized_name": "Options"
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -2183,61 +1949,48 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "UpdateStopwordOptionsResult"
+        },
         "members": {
-          "update_stopword_options_result": {
+          "stopwords": {
             "type": "structure",
-            "serialized_name": "UpdateStopwordOptionsResult",
+            "serialized_name": "Stopwords",
             "members": {
-              "stopwords": {
+              "options": {
+                "type": "string",
+                "serialized_name": "Options"
+              },
+              "status": {
                 "type": "structure",
-                "serialized_name": "Stopwords",
+                "serialized_name": "Status",
                 "members": {
-                  "options": {
-                    "type": "string",
-                    "serialized_name": "Options"
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -2265,61 +2018,48 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "UpdateSynonymOptionsResult"
+        },
         "members": {
-          "update_synonym_options_result": {
+          "synonyms": {
             "type": "structure",
-            "serialized_name": "UpdateSynonymOptionsResult",
+            "serialized_name": "Synonyms",
             "members": {
-              "synonyms": {
+              "options": {
+                "type": "string",
+                "serialized_name": "Options"
+              },
+              "status": {
                 "type": "structure",
-                "serialized_name": "Synonyms",
+                "serialized_name": "Status",
                 "members": {
-                  "options": {
-                    "type": "string",
-                    "serialized_name": "Options"
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
                   },
-                  "status": {
-                    "type": "structure",
-                    "serialized_name": "Status",
-                    "members": {
-                      "creation_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreationDate"
-                      },
-                      "update_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UpdateDate"
-                      },
-                      "update_version": {
-                        "type": "integer",
-                        "serialized_name": "UpdateVersion"
-                      },
-                      "state": {
-                        "type": "string",
-                        "serialized_name": "State",
-                        "enum": [
-                          "RequiresIndexDocuments",
-                          "Processing",
-                          "Active"
-                        ]
-                      },
-                      "pending_deletion": {
-                        "type": "boolean",
-                        "serialized_name": "PendingDeletion"
-                      }
-                    }
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }

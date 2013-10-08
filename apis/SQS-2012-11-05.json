@@ -53,21 +53,6 @@
             }
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "change_message_visibility": {
@@ -91,21 +76,6 @@
             "type": "integer",
             "required": true,
             "serialized_name": "VisibilityTimeout"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -151,60 +121,47 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ChangeMessageVisibilityBatchResult"
+        },
         "members": {
-          "change_message_visibility_batch_result": {
-            "type": "structure",
-            "serialized_name": "ChangeMessageVisibilityBatchResult",
+          "successful": {
+            "type": "flat_list",
+            "serialized_name": "Successful",
             "members": {
-              "successful": {
-                "type": "flat_list",
-                "serialized_name": "Successful",
-                "members": {
-                  "type": "structure",
-                  "serialized_name": "ChangeMessageVisibilityBatchResultEntry",
-                  "members": {
-                    "id": {
-                      "type": "string",
-                      "serialized_name": "Id"
-                    }
-                  }
-                }
-              },
-              "failed": {
-                "type": "flat_list",
-                "serialized_name": "Failed",
-                "members": {
-                  "type": "structure",
-                  "serialized_name": "BatchResultErrorEntry",
-                  "members": {
-                    "id": {
-                      "type": "string",
-                      "serialized_name": "Id"
-                    },
-                    "sender_fault": {
-                      "type": "boolean",
-                      "serialized_name": "SenderFault"
-                    },
-                    "code": {
-                      "type": "string",
-                      "serialized_name": "Code"
-                    },
-                    "message": {
-                      "type": "string",
-                      "serialized_name": "Message"
-                    }
-                  }
+              "type": "structure",
+              "serialized_name": "ChangeMessageVisibilityBatchResultEntry",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
                 }
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
+          "failed": {
+            "type": "flat_list",
+            "serialized_name": "Failed",
             "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
+              "type": "structure",
+              "serialized_name": "BatchResultErrorEntry",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
+                },
+                "sender_fault": {
+                  "type": "boolean",
+                  "serialized_name": "SenderFault"
+                },
+                "code": {
+                  "type": "string",
+                  "serialized_name": "Code"
+                },
+                "message": {
+                  "type": "string",
+                  "serialized_name": "Message"
+                }
               }
             }
           }
@@ -253,26 +210,13 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "CreateQueueResult"
+        },
         "members": {
-          "create_queue_result": {
-            "type": "structure",
-            "serialized_name": "CreateQueueResult",
-            "members": {
-              "queue_url": {
-                "type": "string",
-                "serialized_name": "QueueUrl"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "queue_url": {
+            "type": "string",
+            "serialized_name": "QueueUrl"
           }
         }
       }
@@ -293,21 +237,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "ReceiptHandle"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -349,60 +278,47 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DeleteMessageBatchResult"
+        },
         "members": {
-          "delete_message_batch_result": {
-            "type": "structure",
-            "serialized_name": "DeleteMessageBatchResult",
+          "successful": {
+            "type": "flat_list",
+            "serialized_name": "Successful",
             "members": {
-              "successful": {
-                "type": "flat_list",
-                "serialized_name": "Successful",
-                "members": {
-                  "type": "structure",
-                  "serialized_name": "DeleteMessageBatchResultEntry",
-                  "members": {
-                    "id": {
-                      "type": "string",
-                      "serialized_name": "Id"
-                    }
-                  }
-                }
-              },
-              "failed": {
-                "type": "flat_list",
-                "serialized_name": "Failed",
-                "members": {
-                  "type": "structure",
-                  "serialized_name": "BatchResultErrorEntry",
-                  "members": {
-                    "id": {
-                      "type": "string",
-                      "serialized_name": "Id"
-                    },
-                    "sender_fault": {
-                      "type": "boolean",
-                      "serialized_name": "SenderFault"
-                    },
-                    "code": {
-                      "type": "string",
-                      "serialized_name": "Code"
-                    },
-                    "message": {
-                      "type": "string",
-                      "serialized_name": "Message"
-                    }
-                  }
+              "type": "structure",
+              "serialized_name": "DeleteMessageBatchResultEntry",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
                 }
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
+          "failed": {
+            "type": "flat_list",
+            "serialized_name": "Failed",
             "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
+              "type": "structure",
+              "serialized_name": "BatchResultErrorEntry",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
+                },
+                "sender_fault": {
+                  "type": "boolean",
+                  "serialized_name": "SenderFault"
+                },
+                "code": {
+                  "type": "string",
+                  "serialized_name": "Code"
+                },
+                "message": {
+                  "type": "string",
+                  "serialized_name": "Message"
+                }
               }
             }
           }
@@ -420,21 +336,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "QueueUrl"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -477,47 +378,34 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "GetQueueAttributesResult"
+        },
         "members": {
-          "get_queue_attributes_result": {
-            "type": "structure",
-            "serialized_name": "GetQueueAttributesResult",
+          "attributes": {
+            "type": "flat_map",
+            "serialized_name": "Attribute",
+            "keys": {
+              "type": "string",
+              "serialized_name": "Name",
+              "enum": [
+                "Policy",
+                "VisibilityTimeout",
+                "MaximumMessageSize",
+                "MessageRetentionPeriod",
+                "ApproximateNumberOfMessages",
+                "ApproximateNumberOfMessagesNotVisible",
+                "CreatedTimestamp",
+                "LastModifiedTimestamp",
+                "QueueArn",
+                "ApproximateNumberOfMessagesDelayed",
+                "DelaySeconds",
+                "ReceiveMessageWaitTimeSeconds"
+              ]
+            },
             "members": {
-              "attributes": {
-                "type": "flat_map",
-                "serialized_name": "Attribute",
-                "keys": {
-                  "type": "string",
-                  "serialized_name": "Name",
-                  "enum": [
-                    "Policy",
-                    "VisibilityTimeout",
-                    "MaximumMessageSize",
-                    "MessageRetentionPeriod",
-                    "ApproximateNumberOfMessages",
-                    "ApproximateNumberOfMessagesNotVisible",
-                    "CreatedTimestamp",
-                    "LastModifiedTimestamp",
-                    "QueueArn",
-                    "ApproximateNumberOfMessagesDelayed",
-                    "DelaySeconds",
-                    "ReceiveMessageWaitTimeSeconds"
-                  ]
-                },
-                "members": {
-                  "type": "string",
-                  "serialized_name": "Value"
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
+              "type": "string",
+              "serialized_name": "Value"
             }
           }
         }
@@ -543,26 +431,13 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "GetQueueUrlResult"
+        },
         "members": {
-          "get_queue_url_result": {
-            "type": "structure",
-            "serialized_name": "GetQueueUrlResult",
-            "members": {
-              "queue_url": {
-                "type": "string",
-                "serialized_name": "QueueUrl"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "queue_url": {
+            "type": "string",
+            "serialized_name": "QueueUrl"
           }
         }
       }
@@ -582,29 +457,16 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListQueuesResult"
+        },
         "members": {
-          "list_queues_result": {
-            "type": "structure",
-            "serialized_name": "ListQueuesResult",
+          "queue_urls": {
+            "type": "flat_list",
+            "serialized_name": "QueueUrls",
             "members": {
-              "queue_urls": {
-                "type": "flat_list",
-                "serialized_name": "QueueUrls",
-                "members": {
-                  "type": "string",
-                  "serialized_name": "QueueUrl"
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
+              "type": "string",
+              "serialized_name": "QueueUrl"
             }
           }
         }
@@ -660,72 +522,59 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ReceiveMessageResult"
+        },
         "members": {
-          "receive_message_result": {
-            "type": "structure",
-            "serialized_name": "ReceiveMessageResult",
+          "messages": {
+            "type": "flat_list",
+            "serialized_name": "Messages",
             "members": {
-              "messages": {
-                "type": "flat_list",
-                "serialized_name": "Messages",
-                "members": {
-                  "type": "structure",
-                  "serialized_name": "Message",
+              "type": "structure",
+              "serialized_name": "Message",
+              "members": {
+                "message_id": {
+                  "type": "string",
+                  "serialized_name": "MessageId"
+                },
+                "receipt_handle": {
+                  "type": "string",
+                  "serialized_name": "ReceiptHandle"
+                },
+                "md5_of_body": {
+                  "type": "string",
+                  "serialized_name": "MD5OfBody"
+                },
+                "body": {
+                  "type": "string",
+                  "serialized_name": "Body"
+                },
+                "attributes": {
+                  "type": "flat_map",
+                  "serialized_name": "Attribute",
+                  "keys": {
+                    "type": "string",
+                    "serialized_name": "Name",
+                    "enum": [
+                      "Policy",
+                      "VisibilityTimeout",
+                      "MaximumMessageSize",
+                      "MessageRetentionPeriod",
+                      "ApproximateNumberOfMessages",
+                      "ApproximateNumberOfMessagesNotVisible",
+                      "CreatedTimestamp",
+                      "LastModifiedTimestamp",
+                      "QueueArn",
+                      "ApproximateNumberOfMessagesDelayed",
+                      "DelaySeconds",
+                      "ReceiveMessageWaitTimeSeconds"
+                    ]
+                  },
                   "members": {
-                    "message_id": {
-                      "type": "string",
-                      "serialized_name": "MessageId"
-                    },
-                    "receipt_handle": {
-                      "type": "string",
-                      "serialized_name": "ReceiptHandle"
-                    },
-                    "md5_of_body": {
-                      "type": "string",
-                      "serialized_name": "MD5OfBody"
-                    },
-                    "body": {
-                      "type": "string",
-                      "serialized_name": "Body"
-                    },
-                    "attributes": {
-                      "type": "flat_map",
-                      "serialized_name": "Attribute",
-                      "keys": {
-                        "type": "string",
-                        "serialized_name": "Name",
-                        "enum": [
-                          "Policy",
-                          "VisibilityTimeout",
-                          "MaximumMessageSize",
-                          "MessageRetentionPeriod",
-                          "ApproximateNumberOfMessages",
-                          "ApproximateNumberOfMessagesNotVisible",
-                          "CreatedTimestamp",
-                          "LastModifiedTimestamp",
-                          "QueueArn",
-                          "ApproximateNumberOfMessagesDelayed",
-                          "DelaySeconds",
-                          "ReceiveMessageWaitTimeSeconds"
-                        ]
-                      },
-                      "members": {
-                        "type": "string",
-                        "serialized_name": "Value"
-                      }
-                    }
+                    "type": "string",
+                    "serialized_name": "Value"
                   }
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -748,21 +597,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "Label"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -792,30 +626,17 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "SendMessageResult"
+        },
         "members": {
-          "send_message_result": {
-            "type": "structure",
-            "serialized_name": "SendMessageResult",
-            "members": {
-              "md5_of_message_body": {
-                "type": "string",
-                "serialized_name": "MD5OfMessageBody"
-              },
-              "message_id": {
-                "type": "string",
-                "serialized_name": "MessageId"
-              }
-            }
+          "md5_of_message_body": {
+            "type": "string",
+            "serialized_name": "MD5OfMessageBody"
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "message_id": {
+            "type": "string",
+            "serialized_name": "MessageId"
           }
         }
       }
@@ -861,68 +682,55 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "SendMessageBatchResult"
+        },
         "members": {
-          "send_message_batch_result": {
-            "type": "structure",
-            "serialized_name": "SendMessageBatchResult",
+          "successful": {
+            "type": "flat_list",
+            "serialized_name": "Successful",
             "members": {
-              "successful": {
-                "type": "flat_list",
-                "serialized_name": "Successful",
-                "members": {
-                  "type": "structure",
-                  "serialized_name": "SendMessageBatchResultEntry",
-                  "members": {
-                    "id": {
-                      "type": "string",
-                      "serialized_name": "Id"
-                    },
-                    "message_id": {
-                      "type": "string",
-                      "serialized_name": "MessageId"
-                    },
-                    "md5_of_message_body": {
-                      "type": "string",
-                      "serialized_name": "MD5OfMessageBody"
-                    }
-                  }
-                }
-              },
-              "failed": {
-                "type": "flat_list",
-                "serialized_name": "Failed",
-                "members": {
-                  "type": "structure",
-                  "serialized_name": "BatchResultErrorEntry",
-                  "members": {
-                    "id": {
-                      "type": "string",
-                      "serialized_name": "Id"
-                    },
-                    "sender_fault": {
-                      "type": "boolean",
-                      "serialized_name": "SenderFault"
-                    },
-                    "code": {
-                      "type": "string",
-                      "serialized_name": "Code"
-                    },
-                    "message": {
-                      "type": "string",
-                      "serialized_name": "Message"
-                    }
-                  }
+              "type": "structure",
+              "serialized_name": "SendMessageBatchResultEntry",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
+                },
+                "message_id": {
+                  "type": "string",
+                  "serialized_name": "MessageId"
+                },
+                "md5_of_message_body": {
+                  "type": "string",
+                  "serialized_name": "MD5OfMessageBody"
                 }
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
+          "failed": {
+            "type": "flat_list",
+            "serialized_name": "Failed",
             "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
+              "type": "structure",
+              "serialized_name": "BatchResultErrorEntry",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
+                },
+                "sender_fault": {
+                  "type": "boolean",
+                  "serialized_name": "SenderFault"
+                },
+                "code": {
+                  "type": "string",
+                  "serialized_name": "Code"
+                },
+                "message": {
+                  "type": "string",
+                  "serialized_name": "Message"
+                }
               }
             }
           }
@@ -966,21 +774,6 @@
             "members": {
               "type": "string",
               "serialized_name": "Value"
-            }
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
             }
           }
         }

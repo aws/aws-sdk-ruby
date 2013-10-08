@@ -73,21 +73,6 @@
             }
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "batch_put_attributes": {
@@ -144,21 +129,6 @@
             }
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "create_domain": {
@@ -172,21 +142,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "DomainName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -255,21 +210,6 @@
             }
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "delete_domain": {
@@ -283,21 +223,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "DomainName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -318,50 +243,37 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DomainMetadataResult"
+        },
         "members": {
-          "domain_metadata_result": {
-            "type": "structure",
-            "serialized_name": "DomainMetadataResult",
-            "members": {
-              "item_count": {
-                "type": "integer",
-                "serialized_name": "ItemCount"
-              },
-              "item_names_size_bytes": {
-                "type": "integer",
-                "serialized_name": "ItemNamesSizeBytes"
-              },
-              "attribute_name_count": {
-                "type": "integer",
-                "serialized_name": "AttributeNameCount"
-              },
-              "attribute_names_size_bytes": {
-                "type": "integer",
-                "serialized_name": "AttributeNamesSizeBytes"
-              },
-              "attribute_value_count": {
-                "type": "integer",
-                "serialized_name": "AttributeValueCount"
-              },
-              "attribute_values_size_bytes": {
-                "type": "integer",
-                "serialized_name": "AttributeValuesSizeBytes"
-              },
-              "timestamp": {
-                "type": "integer",
-                "serialized_name": "Timestamp"
-              }
-            }
+          "item_count": {
+            "type": "integer",
+            "serialized_name": "ItemCount"
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "item_names_size_bytes": {
+            "type": "integer",
+            "serialized_name": "ItemNamesSizeBytes"
+          },
+          "attribute_name_count": {
+            "type": "integer",
+            "serialized_name": "AttributeNameCount"
+          },
+          "attribute_names_size_bytes": {
+            "type": "integer",
+            "serialized_name": "AttributeNamesSizeBytes"
+          },
+          "attribute_value_count": {
+            "type": "integer",
+            "serialized_name": "AttributeValueCount"
+          },
+          "attribute_values_size_bytes": {
+            "type": "integer",
+            "serialized_name": "AttributeValuesSizeBytes"
+          },
+          "timestamp": {
+            "type": "integer",
+            "serialized_name": "Timestamp"
           }
         }
       }
@@ -399,46 +311,33 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "GetAttributesResult"
+        },
         "members": {
-          "get_attributes_result": {
-            "type": "structure",
-            "serialized_name": "GetAttributesResult",
+          "attributes": {
+            "type": "flat_list",
+            "serialized_name": "Attributes",
             "members": {
-              "attributes": {
-                "type": "flat_list",
-                "serialized_name": "Attributes",
-                "members": {
-                  "type": "structure",
-                  "serialized_name": "Attribute",
-                  "members": {
-                    "name": {
-                      "type": "string",
-                      "serialized_name": "Name"
-                    },
-                    "alternate_name_encoding": {
-                      "type": "string",
-                      "serialized_name": "AlternateNameEncoding"
-                    },
-                    "value": {
-                      "type": "string",
-                      "serialized_name": "Value"
-                    },
-                    "alternate_value_encoding": {
-                      "type": "string",
-                      "serialized_name": "AlternateValueEncoding"
-                    }
-                  }
+              "type": "structure",
+              "serialized_name": "Attribute",
+              "members": {
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "alternate_name_encoding": {
+                  "type": "string",
+                  "serialized_name": "AlternateNameEncoding"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                },
+                "alternate_value_encoding": {
+                  "type": "string",
+                  "serialized_name": "AlternateValueEncoding"
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -464,34 +363,21 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListDomainsResult"
+        },
         "members": {
-          "list_domains_result": {
-            "type": "structure",
-            "serialized_name": "ListDomainsResult",
+          "domain_names": {
+            "type": "flat_list",
+            "serialized_name": "DomainNames",
             "members": {
-              "domain_names": {
-                "type": "flat_list",
-                "serialized_name": "DomainNames",
-                "members": {
-                  "type": "string",
-                  "serialized_name": "DomainName"
-                }
-              },
-              "next_token": {
-                "type": "string",
-                "serialized_name": "NextToken"
-              }
+              "type": "string",
+              "serialized_name": "DomainName"
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
           }
         }
       }
@@ -557,21 +443,6 @@
             }
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "select": {
@@ -598,70 +469,57 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "SelectResult"
+        },
         "members": {
-          "select_result": {
-            "type": "structure",
-            "serialized_name": "SelectResult",
+          "items": {
+            "type": "flat_list",
+            "serialized_name": "Items",
             "members": {
-              "items": {
-                "type": "flat_list",
-                "serialized_name": "Items",
-                "members": {
-                  "type": "structure",
-                  "serialized_name": "Item",
+              "type": "structure",
+              "serialized_name": "Item",
+              "members": {
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "alternate_name_encoding": {
+                  "type": "string",
+                  "serialized_name": "AlternateNameEncoding"
+                },
+                "attributes": {
+                  "type": "flat_list",
+                  "serialized_name": "Attributes",
                   "members": {
-                    "name": {
-                      "type": "string",
-                      "serialized_name": "Name"
-                    },
-                    "alternate_name_encoding": {
-                      "type": "string",
-                      "serialized_name": "AlternateNameEncoding"
-                    },
-                    "attributes": {
-                      "type": "flat_list",
-                      "serialized_name": "Attributes",
-                      "members": {
-                        "type": "structure",
-                        "serialized_name": "Attribute",
-                        "members": {
-                          "name": {
-                            "type": "string",
-                            "serialized_name": "Name"
-                          },
-                          "alternate_name_encoding": {
-                            "type": "string",
-                            "serialized_name": "AlternateNameEncoding"
-                          },
-                          "value": {
-                            "type": "string",
-                            "serialized_name": "Value"
-                          },
-                          "alternate_value_encoding": {
-                            "type": "string",
-                            "serialized_name": "AlternateValueEncoding"
-                          }
-                        }
+                    "type": "structure",
+                    "serialized_name": "Attribute",
+                    "members": {
+                      "name": {
+                        "type": "string",
+                        "serialized_name": "Name"
+                      },
+                      "alternate_name_encoding": {
+                        "type": "string",
+                        "serialized_name": "AlternateNameEncoding"
+                      },
+                      "value": {
+                        "type": "string",
+                        "serialized_name": "Value"
+                      },
+                      "alternate_value_encoding": {
+                        "type": "string",
+                        "serialized_name": "AlternateValueEncoding"
                       }
                     }
                   }
                 }
-              },
-              "next_token": {
-                "type": "string",
-                "serialized_name": "NextToken"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
           }
         }
       }

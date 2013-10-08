@@ -50,62 +50,49 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "AssumeRoleResult"
+        },
         "members": {
-          "assume_role_result": {
+          "credentials": {
             "type": "structure",
-            "serialized_name": "AssumeRoleResult",
+            "serialized_name": "Credentials",
             "members": {
-              "credentials": {
-                "type": "structure",
-                "serialized_name": "Credentials",
-                "members": {
-                  "access_key_id": {
-                    "type": "string",
-                    "serialized_name": "AccessKeyId"
-                  },
-                  "secret_access_key": {
-                    "type": "string",
-                    "serialized_name": "SecretAccessKey"
-                  },
-                  "session_token": {
-                    "type": "string",
-                    "serialized_name": "SessionToken"
-                  },
-                  "expiration": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "Expiration"
-                  }
-                }
+              "access_key_id": {
+                "type": "string",
+                "serialized_name": "AccessKeyId"
               },
-              "assumed_role_user": {
-                "type": "structure",
-                "serialized_name": "AssumedRoleUser",
-                "members": {
-                  "assumed_role_id": {
-                    "type": "string",
-                    "serialized_name": "AssumedRoleId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  }
-                }
+              "secret_access_key": {
+                "type": "string",
+                "serialized_name": "SecretAccessKey"
               },
-              "packed_policy_size": {
-                "type": "integer",
-                "serialized_name": "PackedPolicySize"
+              "session_token": {
+                "type": "string",
+                "serialized_name": "SessionToken"
+              },
+              "expiration": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "Expiration"
               }
             }
           },
-          "response_metadata": {
+          "assumed_role_user": {
             "type": "structure",
-            "serialized_name": "ResponseMetadata",
+            "serialized_name": "AssumedRoleUser",
             "members": {
-              "request_id": {
+              "assumed_role_id": {
                 "type": "string",
-                "serialized_name": "RequestId"
+                "serialized_name": "AssumedRoleId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
               }
             }
+          },
+          "packed_policy_size": {
+            "type": "integer",
+            "serialized_name": "PackedPolicySize"
           }
         }
       }
@@ -148,66 +135,53 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "AssumeRoleWithWebIdentityResult"
+        },
         "members": {
-          "assume_role_with_web_identity_result": {
+          "credentials": {
             "type": "structure",
-            "serialized_name": "AssumeRoleWithWebIdentityResult",
+            "serialized_name": "Credentials",
             "members": {
-              "credentials": {
-                "type": "structure",
-                "serialized_name": "Credentials",
-                "members": {
-                  "access_key_id": {
-                    "type": "string",
-                    "serialized_name": "AccessKeyId"
-                  },
-                  "secret_access_key": {
-                    "type": "string",
-                    "serialized_name": "SecretAccessKey"
-                  },
-                  "session_token": {
-                    "type": "string",
-                    "serialized_name": "SessionToken"
-                  },
-                  "expiration": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "Expiration"
-                  }
-                }
-              },
-              "subject_from_web_identity_token": {
+              "access_key_id": {
                 "type": "string",
-                "serialized_name": "SubjectFromWebIdentityToken"
+                "serialized_name": "AccessKeyId"
               },
-              "assumed_role_user": {
-                "type": "structure",
-                "serialized_name": "AssumedRoleUser",
-                "members": {
-                  "assumed_role_id": {
-                    "type": "string",
-                    "serialized_name": "AssumedRoleId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  }
-                }
+              "secret_access_key": {
+                "type": "string",
+                "serialized_name": "SecretAccessKey"
               },
-              "packed_policy_size": {
-                "type": "integer",
-                "serialized_name": "PackedPolicySize"
+              "session_token": {
+                "type": "string",
+                "serialized_name": "SessionToken"
+              },
+              "expiration": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "Expiration"
               }
             }
           },
-          "response_metadata": {
+          "subject_from_web_identity_token": {
+            "type": "string",
+            "serialized_name": "SubjectFromWebIdentityToken"
+          },
+          "assumed_role_user": {
             "type": "structure",
-            "serialized_name": "ResponseMetadata",
+            "serialized_name": "AssumedRoleUser",
             "members": {
-              "request_id": {
+              "assumed_role_id": {
                 "type": "string",
-                "serialized_name": "RequestId"
+                "serialized_name": "AssumedRoleId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
               }
             }
+          },
+          "packed_policy_size": {
+            "type": "integer",
+            "serialized_name": "PackedPolicySize"
           }
         }
       }
@@ -228,26 +202,13 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DecodeAuthorizationMessageResult"
+        },
         "members": {
-          "decode_authorization_message_result": {
-            "type": "structure",
-            "serialized_name": "DecodeAuthorizationMessageResult",
-            "members": {
-              "decoded_message": {
-                "type": "string",
-                "serialized_name": "DecodedMessage"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "decoded_message": {
+            "type": "string",
+            "serialized_name": "DecodedMessage"
           }
         }
       }
@@ -276,62 +237,49 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "GetFederationTokenResult"
+        },
         "members": {
-          "get_federation_token_result": {
+          "credentials": {
             "type": "structure",
-            "serialized_name": "GetFederationTokenResult",
+            "serialized_name": "Credentials",
             "members": {
-              "credentials": {
-                "type": "structure",
-                "serialized_name": "Credentials",
-                "members": {
-                  "access_key_id": {
-                    "type": "string",
-                    "serialized_name": "AccessKeyId"
-                  },
-                  "secret_access_key": {
-                    "type": "string",
-                    "serialized_name": "SecretAccessKey"
-                  },
-                  "session_token": {
-                    "type": "string",
-                    "serialized_name": "SessionToken"
-                  },
-                  "expiration": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "Expiration"
-                  }
-                }
+              "access_key_id": {
+                "type": "string",
+                "serialized_name": "AccessKeyId"
               },
-              "federated_user": {
-                "type": "structure",
-                "serialized_name": "FederatedUser",
-                "members": {
-                  "federated_user_id": {
-                    "type": "string",
-                    "serialized_name": "FederatedUserId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  }
-                }
+              "secret_access_key": {
+                "type": "string",
+                "serialized_name": "SecretAccessKey"
               },
-              "packed_policy_size": {
-                "type": "integer",
-                "serialized_name": "PackedPolicySize"
+              "session_token": {
+                "type": "string",
+                "serialized_name": "SessionToken"
+              },
+              "expiration": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "Expiration"
               }
             }
           },
-          "response_metadata": {
+          "federated_user": {
             "type": "structure",
-            "serialized_name": "ResponseMetadata",
+            "serialized_name": "FederatedUser",
             "members": {
-              "request_id": {
+              "federated_user_id": {
                 "type": "string",
-                "serialized_name": "RequestId"
+                "serialized_name": "FederatedUserId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
               }
             }
+          },
+          "packed_policy_size": {
+            "type": "integer",
+            "serialized_name": "PackedPolicySize"
           }
         }
       }
@@ -359,42 +307,29 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "GetSessionTokenResult"
+        },
         "members": {
-          "get_session_token_result": {
+          "credentials": {
             "type": "structure",
-            "serialized_name": "GetSessionTokenResult",
+            "serialized_name": "Credentials",
             "members": {
-              "credentials": {
-                "type": "structure",
-                "serialized_name": "Credentials",
-                "members": {
-                  "access_key_id": {
-                    "type": "string",
-                    "serialized_name": "AccessKeyId"
-                  },
-                  "secret_access_key": {
-                    "type": "string",
-                    "serialized_name": "SecretAccessKey"
-                  },
-                  "session_token": {
-                    "type": "string",
-                    "serialized_name": "SessionToken"
-                  },
-                  "expiration": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "Expiration"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
+              "access_key_id": {
                 "type": "string",
-                "serialized_name": "RequestId"
+                "serialized_name": "AccessKeyId"
+              },
+              "secret_access_key": {
+                "type": "string",
+                "serialized_name": "SecretAccessKey"
+              },
+              "session_token": {
+                "type": "string",
+                "serialized_name": "SessionToken"
+              },
+              "expiration": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "Expiration"
               }
             }
           }

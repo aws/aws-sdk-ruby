@@ -29,9 +29,9 @@ module Aws
 
     # @param [Array<Symbol>] properties
     # @return [Structure]
-    def self.new(properties)
+    def self.new(properties, values = [])
       properties = [:_] if properties.empty?
-      (@classes[properties] ||= super(*properties)).new
+      (@classes[properties] ||= super(*properties)).new(*values)
     end
 
   end

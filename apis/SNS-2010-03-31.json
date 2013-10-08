@@ -51,21 +51,6 @@
             }
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "confirm_subscription": {
@@ -93,26 +78,13 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ConfirmSubscriptionResult"
+        },
         "members": {
-          "confirm_subscription_result": {
-            "type": "structure",
-            "serialized_name": "ConfirmSubscriptionResult",
-            "members": {
-              "subscription_arn": {
-                "type": "string",
-                "serialized_name": "SubscriptionArn"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "subscription_arn": {
+            "type": "string",
+            "serialized_name": "SubscriptionArn"
           }
         }
       }
@@ -149,26 +121,13 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "CreatePlatformApplicationResult"
+        },
         "members": {
-          "create_platform_application_result": {
-            "type": "structure",
-            "serialized_name": "CreatePlatformApplicationResult",
-            "members": {
-              "platform_application_arn": {
-                "type": "string",
-                "serialized_name": "PlatformApplicationArn"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "platform_application_arn": {
+            "type": "string",
+            "serialized_name": "PlatformApplicationArn"
           }
         }
       }
@@ -208,26 +167,13 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "CreatePlatformEndpointResult"
+        },
         "members": {
-          "create_platform_endpoint_result": {
-            "type": "structure",
-            "serialized_name": "CreatePlatformEndpointResult",
-            "members": {
-              "endpoint_arn": {
-                "type": "string",
-                "serialized_name": "EndpointArn"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "endpoint_arn": {
+            "type": "string",
+            "serialized_name": "EndpointArn"
           }
         }
       }
@@ -248,26 +194,13 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "CreateTopicResult"
+        },
         "members": {
-          "create_topic_result": {
-            "type": "structure",
-            "serialized_name": "CreateTopicResult",
-            "members": {
-              "topic_arn": {
-                "type": "string",
-                "serialized_name": "TopicArn"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "topic_arn": {
+            "type": "string",
+            "serialized_name": "TopicArn"
           }
         }
       }
@@ -285,21 +218,6 @@
             "serialized_name": "EndpointArn"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "delete_platform_application": {
@@ -315,21 +233,6 @@
             "serialized_name": "PlatformApplicationArn"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "delete_topic": {
@@ -343,21 +246,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "TopicArn"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -378,31 +266,18 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "GetEndpointAttributesResult"
+        },
         "members": {
-          "get_endpoint_attributes_result": {
-            "type": "structure",
-            "serialized_name": "GetEndpointAttributesResult",
+          "attributes": {
+            "type": "map",
+            "serialized_name": "Attributes",
+            "keys": {
+              "type": "string"
+            },
             "members": {
-              "attributes": {
-                "type": "map",
-                "serialized_name": "Attributes",
-                "keys": {
-                  "type": "string"
-                },
-                "members": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
+              "type": "string"
             }
           }
         }
@@ -424,31 +299,18 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "GetPlatformApplicationAttributesResult"
+        },
         "members": {
-          "get_platform_application_attributes_result": {
-            "type": "structure",
-            "serialized_name": "GetPlatformApplicationAttributesResult",
+          "attributes": {
+            "type": "map",
+            "serialized_name": "Attributes",
+            "keys": {
+              "type": "string"
+            },
             "members": {
-              "attributes": {
-                "type": "map",
-                "serialized_name": "Attributes",
-                "keys": {
-                  "type": "string"
-                },
-                "members": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
+              "type": "string"
             }
           }
         }
@@ -470,31 +332,18 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "GetSubscriptionAttributesResult"
+        },
         "members": {
-          "get_subscription_attributes_result": {
-            "type": "structure",
-            "serialized_name": "GetSubscriptionAttributesResult",
+          "attributes": {
+            "type": "map",
+            "serialized_name": "Attributes",
+            "keys": {
+              "type": "string"
+            },
             "members": {
-              "attributes": {
-                "type": "map",
-                "serialized_name": "Attributes",
-                "keys": {
-                  "type": "string"
-                },
-                "members": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
+              "type": "string"
             }
           }
         }
@@ -516,31 +365,18 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "GetTopicAttributesResult"
+        },
         "members": {
-          "get_topic_attributes_result": {
-            "type": "structure",
-            "serialized_name": "GetTopicAttributesResult",
+          "attributes": {
+            "type": "map",
+            "serialized_name": "Attributes",
+            "keys": {
+              "type": "string"
+            },
             "members": {
-              "attributes": {
-                "type": "map",
-                "serialized_name": "Attributes",
-                "keys": {
-                  "type": "string"
-                },
-                "members": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
+              "type": "string"
             }
           }
         }
@@ -566,49 +402,36 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListEndpointsByPlatformApplicationResult"
+        },
         "members": {
-          "list_endpoints_by_platform_application_result": {
-            "type": "structure",
-            "serialized_name": "ListEndpointsByPlatformApplicationResult",
+          "endpoints": {
+            "type": "list",
+            "serialized_name": "Endpoints",
             "members": {
-              "endpoints": {
-                "type": "list",
-                "serialized_name": "Endpoints",
-                "members": {
-                  "type": "structure",
+              "type": "structure",
+              "members": {
+                "endpoint_arn": {
+                  "type": "string",
+                  "serialized_name": "EndpointArn"
+                },
+                "attributes": {
+                  "type": "map",
+                  "serialized_name": "Attributes",
+                  "keys": {
+                    "type": "string"
+                  },
                   "members": {
-                    "endpoint_arn": {
-                      "type": "string",
-                      "serialized_name": "EndpointArn"
-                    },
-                    "attributes": {
-                      "type": "map",
-                      "serialized_name": "Attributes",
-                      "keys": {
-                        "type": "string"
-                      },
-                      "members": {
-                        "type": "string"
-                      }
-                    }
+                    "type": "string"
                   }
                 }
-              },
-              "next_token": {
-                "type": "string",
-                "serialized_name": "NextToken"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
           }
         }
       }
@@ -628,49 +451,36 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListPlatformApplicationsResult"
+        },
         "members": {
-          "list_platform_applications_result": {
-            "type": "structure",
-            "serialized_name": "ListPlatformApplicationsResult",
+          "platform_applications": {
+            "type": "list",
+            "serialized_name": "PlatformApplications",
             "members": {
-              "platform_applications": {
-                "type": "list",
-                "serialized_name": "PlatformApplications",
-                "members": {
-                  "type": "structure",
+              "type": "structure",
+              "members": {
+                "platform_application_arn": {
+                  "type": "string",
+                  "serialized_name": "PlatformApplicationArn"
+                },
+                "attributes": {
+                  "type": "map",
+                  "serialized_name": "Attributes",
+                  "keys": {
+                    "type": "string"
+                  },
                   "members": {
-                    "platform_application_arn": {
-                      "type": "string",
-                      "serialized_name": "PlatformApplicationArn"
-                    },
-                    "attributes": {
-                      "type": "map",
-                      "serialized_name": "Attributes",
-                      "keys": {
-                        "type": "string"
-                      },
-                      "members": {
-                        "type": "string"
-                      }
-                    }
+                    "type": "string"
                   }
                 }
-              },
-              "next_token": {
-                "type": "string",
-                "serialized_name": "NextToken"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
           }
         }
       }
@@ -690,55 +500,42 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListSubscriptionsResult"
+        },
         "members": {
-          "list_subscriptions_result": {
-            "type": "structure",
-            "serialized_name": "ListSubscriptionsResult",
+          "subscriptions": {
+            "type": "list",
+            "serialized_name": "Subscriptions",
             "members": {
-              "subscriptions": {
-                "type": "list",
-                "serialized_name": "Subscriptions",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "subscription_arn": {
-                      "type": "string",
-                      "serialized_name": "SubscriptionArn"
-                    },
-                    "owner": {
-                      "type": "string",
-                      "serialized_name": "Owner"
-                    },
-                    "protocol": {
-                      "type": "string",
-                      "serialized_name": "Protocol"
-                    },
-                    "endpoint": {
-                      "type": "string",
-                      "serialized_name": "Endpoint"
-                    },
-                    "topic_arn": {
-                      "type": "string",
-                      "serialized_name": "TopicArn"
-                    }
-                  }
+              "type": "structure",
+              "members": {
+                "subscription_arn": {
+                  "type": "string",
+                  "serialized_name": "SubscriptionArn"
+                },
+                "owner": {
+                  "type": "string",
+                  "serialized_name": "Owner"
+                },
+                "protocol": {
+                  "type": "string",
+                  "serialized_name": "Protocol"
+                },
+                "endpoint": {
+                  "type": "string",
+                  "serialized_name": "Endpoint"
+                },
+                "topic_arn": {
+                  "type": "string",
+                  "serialized_name": "TopicArn"
                 }
-              },
-              "next_token": {
-                "type": "string",
-                "serialized_name": "NextToken"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
           }
         }
       }
@@ -763,55 +560,42 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListSubscriptionsByTopicResult"
+        },
         "members": {
-          "list_subscriptions_by_topic_result": {
-            "type": "structure",
-            "serialized_name": "ListSubscriptionsByTopicResult",
+          "subscriptions": {
+            "type": "list",
+            "serialized_name": "Subscriptions",
             "members": {
-              "subscriptions": {
-                "type": "list",
-                "serialized_name": "Subscriptions",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "subscription_arn": {
-                      "type": "string",
-                      "serialized_name": "SubscriptionArn"
-                    },
-                    "owner": {
-                      "type": "string",
-                      "serialized_name": "Owner"
-                    },
-                    "protocol": {
-                      "type": "string",
-                      "serialized_name": "Protocol"
-                    },
-                    "endpoint": {
-                      "type": "string",
-                      "serialized_name": "Endpoint"
-                    },
-                    "topic_arn": {
-                      "type": "string",
-                      "serialized_name": "TopicArn"
-                    }
-                  }
+              "type": "structure",
+              "members": {
+                "subscription_arn": {
+                  "type": "string",
+                  "serialized_name": "SubscriptionArn"
+                },
+                "owner": {
+                  "type": "string",
+                  "serialized_name": "Owner"
+                },
+                "protocol": {
+                  "type": "string",
+                  "serialized_name": "Protocol"
+                },
+                "endpoint": {
+                  "type": "string",
+                  "serialized_name": "Endpoint"
+                },
+                "topic_arn": {
+                  "type": "string",
+                  "serialized_name": "TopicArn"
                 }
-              },
-              "next_token": {
-                "type": "string",
-                "serialized_name": "NextToken"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
           }
         }
       }
@@ -831,39 +615,26 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListTopicsResult"
+        },
         "members": {
-          "list_topics_result": {
-            "type": "structure",
-            "serialized_name": "ListTopicsResult",
+          "topics": {
+            "type": "list",
+            "serialized_name": "Topics",
             "members": {
-              "topics": {
-                "type": "list",
-                "serialized_name": "Topics",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "topic_arn": {
-                      "type": "string",
-                      "serialized_name": "TopicArn"
-                    }
-                  }
+              "type": "structure",
+              "members": {
+                "topic_arn": {
+                  "type": "string",
+                  "serialized_name": "TopicArn"
                 }
-              },
-              "next_token": {
-                "type": "string",
-                "serialized_name": "NextToken"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
           }
         }
       }
@@ -900,26 +671,13 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "PublishResult"
+        },
         "members": {
-          "publish_result": {
-            "type": "structure",
-            "serialized_name": "PublishResult",
-            "members": {
-              "message_id": {
-                "type": "string",
-                "serialized_name": "MessageId"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "message_id": {
+            "type": "string",
+            "serialized_name": "MessageId"
           }
         }
       }
@@ -940,21 +698,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "Label"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -980,21 +723,6 @@
             },
             "members": {
               "type": "string"
-            }
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
             }
           }
         }
@@ -1024,21 +752,6 @@
             }
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "set_subscription_attributes": {
@@ -1063,21 +776,6 @@
             "serialized_name": "AttributeValue"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "set_topic_attributes": {
@@ -1100,21 +798,6 @@
           "attribute_value": {
             "type": "string",
             "serialized_name": "AttributeValue"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -1144,26 +827,13 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "SubscribeResult"
+        },
         "members": {
-          "subscribe_result": {
-            "type": "structure",
-            "serialized_name": "SubscribeResult",
-            "members": {
-              "subscription_arn": {
-                "type": "string",
-                "serialized_name": "SubscriptionArn"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "subscription_arn": {
+            "type": "string",
+            "serialized_name": "SubscriptionArn"
           }
         }
       }
@@ -1179,21 +849,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "SubscriptionArn"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }

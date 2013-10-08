@@ -30,9 +30,10 @@ module Aws
       def translate_operations(api)
         @operations.values.each do |src|
           operation = OperationTranslator.translate(src, @options)
-          method_name = underscore(operation.name)
-          Api::ResultWrapper.wrap_output(method_name, operation) if @result_wrapped
-          api.operations[method_name] = operation
+          if @result_wrapped
+            operation.output.metadata['wrapper'] = "#{operation.name}Result"
+          end
+          api.operations[underscore(operation.name)] = operation
         end
       end
 

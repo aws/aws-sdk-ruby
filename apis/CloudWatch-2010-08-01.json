@@ -33,21 +33,6 @@
             }
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "describe_alarm_history": {
@@ -90,60 +75,47 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeAlarmHistoryResult"
+        },
         "members": {
-          "describe_alarm_history_result": {
-            "type": "structure",
-            "serialized_name": "DescribeAlarmHistoryResult",
+          "alarm_history_items": {
+            "type": "list",
+            "serialized_name": "AlarmHistoryItems",
             "members": {
-              "alarm_history_items": {
-                "type": "list",
-                "serialized_name": "AlarmHistoryItems",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "alarm_name": {
-                      "type": "string",
-                      "serialized_name": "AlarmName"
-                    },
-                    "timestamp": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "Timestamp"
-                    },
-                    "history_item_type": {
-                      "type": "string",
-                      "serialized_name": "HistoryItemType",
-                      "enum": [
-                        "ConfigurationUpdate",
-                        "StateUpdate",
-                        "Action"
-                      ]
-                    },
-                    "history_summary": {
-                      "type": "string",
-                      "serialized_name": "HistorySummary"
-                    },
-                    "history_data": {
-                      "type": "string",
-                      "serialized_name": "HistoryData"
-                    }
-                  }
+              "type": "structure",
+              "members": {
+                "alarm_name": {
+                  "type": "string",
+                  "serialized_name": "AlarmName"
+                },
+                "timestamp": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "Timestamp"
+                },
+                "history_item_type": {
+                  "type": "string",
+                  "serialized_name": "HistoryItemType",
+                  "enum": [
+                    "ConfigurationUpdate",
+                    "StateUpdate",
+                    "Action"
+                  ]
+                },
+                "history_summary": {
+                  "type": "string",
+                  "serialized_name": "HistorySummary"
+                },
+                "history_data": {
+                  "type": "string",
+                  "serialized_name": "HistoryData"
                 }
-              },
-              "next_token": {
-                "type": "string",
-                "serialized_name": "NextToken"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
           }
         }
       }
@@ -191,188 +163,175 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeAlarmsResult"
+        },
         "members": {
-          "describe_alarms_result": {
-            "type": "structure",
-            "serialized_name": "DescribeAlarmsResult",
+          "metric_alarms": {
+            "type": "list",
+            "serialized_name": "MetricAlarms",
             "members": {
-              "metric_alarms": {
-                "type": "list",
-                "serialized_name": "MetricAlarms",
-                "members": {
-                  "type": "structure",
+              "type": "structure",
+              "members": {
+                "alarm_name": {
+                  "type": "string",
+                  "serialized_name": "AlarmName"
+                },
+                "alarm_arn": {
+                  "type": "string",
+                  "serialized_name": "AlarmArn"
+                },
+                "alarm_description": {
+                  "type": "string",
+                  "serialized_name": "AlarmDescription"
+                },
+                "alarm_configuration_updated_timestamp": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "AlarmConfigurationUpdatedTimestamp"
+                },
+                "actions_enabled": {
+                  "type": "boolean",
+                  "serialized_name": "ActionsEnabled"
+                },
+                "ok_actions": {
+                  "type": "list",
+                  "serialized_name": "OKActions",
                   "members": {
-                    "alarm_name": {
-                      "type": "string",
-                      "serialized_name": "AlarmName"
-                    },
-                    "alarm_arn": {
-                      "type": "string",
-                      "serialized_name": "AlarmArn"
-                    },
-                    "alarm_description": {
-                      "type": "string",
-                      "serialized_name": "AlarmDescription"
-                    },
-                    "alarm_configuration_updated_timestamp": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "AlarmConfigurationUpdatedTimestamp"
-                    },
-                    "actions_enabled": {
-                      "type": "boolean",
-                      "serialized_name": "ActionsEnabled"
-                    },
-                    "ok_actions": {
-                      "type": "list",
-                      "serialized_name": "OKActions",
-                      "members": {
-                        "type": "string"
+                    "type": "string"
+                  }
+                },
+                "alarm_actions": {
+                  "type": "list",
+                  "serialized_name": "AlarmActions",
+                  "members": {
+                    "type": "string"
+                  }
+                },
+                "insufficient_data_actions": {
+                  "type": "list",
+                  "serialized_name": "InsufficientDataActions",
+                  "members": {
+                    "type": "string"
+                  }
+                },
+                "state_value": {
+                  "type": "string",
+                  "serialized_name": "StateValue",
+                  "enum": [
+                    "OK",
+                    "ALARM",
+                    "INSUFFICIENT_DATA"
+                  ]
+                },
+                "state_reason": {
+                  "type": "string",
+                  "serialized_name": "StateReason"
+                },
+                "state_reason_data": {
+                  "type": "string",
+                  "serialized_name": "StateReasonData"
+                },
+                "state_updated_timestamp": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "StateUpdatedTimestamp"
+                },
+                "metric_name": {
+                  "type": "string",
+                  "serialized_name": "MetricName"
+                },
+                "namespace": {
+                  "type": "string",
+                  "serialized_name": "Namespace"
+                },
+                "statistic": {
+                  "type": "string",
+                  "serialized_name": "Statistic",
+                  "enum": [
+                    "SampleCount",
+                    "Average",
+                    "Sum",
+                    "Minimum",
+                    "Maximum"
+                  ]
+                },
+                "dimensions": {
+                  "type": "list",
+                  "serialized_name": "Dimensions",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "name": {
+                        "type": "string",
+                        "serialized_name": "Name"
+                      },
+                      "value": {
+                        "type": "string",
+                        "serialized_name": "Value"
                       }
-                    },
-                    "alarm_actions": {
-                      "type": "list",
-                      "serialized_name": "AlarmActions",
-                      "members": {
-                        "type": "string"
-                      }
-                    },
-                    "insufficient_data_actions": {
-                      "type": "list",
-                      "serialized_name": "InsufficientDataActions",
-                      "members": {
-                        "type": "string"
-                      }
-                    },
-                    "state_value": {
-                      "type": "string",
-                      "serialized_name": "StateValue",
-                      "enum": [
-                        "OK",
-                        "ALARM",
-                        "INSUFFICIENT_DATA"
-                      ]
-                    },
-                    "state_reason": {
-                      "type": "string",
-                      "serialized_name": "StateReason"
-                    },
-                    "state_reason_data": {
-                      "type": "string",
-                      "serialized_name": "StateReasonData"
-                    },
-                    "state_updated_timestamp": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "StateUpdatedTimestamp"
-                    },
-                    "metric_name": {
-                      "type": "string",
-                      "serialized_name": "MetricName"
-                    },
-                    "namespace": {
-                      "type": "string",
-                      "serialized_name": "Namespace"
-                    },
-                    "statistic": {
-                      "type": "string",
-                      "serialized_name": "Statistic",
-                      "enum": [
-                        "SampleCount",
-                        "Average",
-                        "Sum",
-                        "Minimum",
-                        "Maximum"
-                      ]
-                    },
-                    "dimensions": {
-                      "type": "list",
-                      "serialized_name": "Dimensions",
-                      "members": {
-                        "type": "structure",
-                        "members": {
-                          "name": {
-                            "type": "string",
-                            "serialized_name": "Name"
-                          },
-                          "value": {
-                            "type": "string",
-                            "serialized_name": "Value"
-                          }
-                        }
-                      }
-                    },
-                    "period": {
-                      "type": "integer",
-                      "serialized_name": "Period"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "serialized_name": "Unit",
-                      "enum": [
-                        "Seconds",
-                        "Microseconds",
-                        "Milliseconds",
-                        "Bytes",
-                        "Kilobytes",
-                        "Megabytes",
-                        "Gigabytes",
-                        "Terabytes",
-                        "Bits",
-                        "Kilobits",
-                        "Megabits",
-                        "Gigabits",
-                        "Terabits",
-                        "Percent",
-                        "Count",
-                        "Bytes/Second",
-                        "Kilobytes/Second",
-                        "Megabytes/Second",
-                        "Gigabytes/Second",
-                        "Terabytes/Second",
-                        "Bits/Second",
-                        "Kilobits/Second",
-                        "Megabits/Second",
-                        "Gigabits/Second",
-                        "Terabits/Second",
-                        "Count/Second",
-                        "None"
-                      ]
-                    },
-                    "evaluation_periods": {
-                      "type": "integer",
-                      "serialized_name": "EvaluationPeriods"
-                    },
-                    "threshold": {
-                      "type": "float",
-                      "serialized_name": "Threshold"
-                    },
-                    "comparison_operator": {
-                      "type": "string",
-                      "serialized_name": "ComparisonOperator",
-                      "enum": [
-                        "GreaterThanOrEqualToThreshold",
-                        "GreaterThanThreshold",
-                        "LessThanThreshold",
-                        "LessThanOrEqualToThreshold"
-                      ]
                     }
                   }
+                },
+                "period": {
+                  "type": "integer",
+                  "serialized_name": "Period"
+                },
+                "unit": {
+                  "type": "string",
+                  "serialized_name": "Unit",
+                  "enum": [
+                    "Seconds",
+                    "Microseconds",
+                    "Milliseconds",
+                    "Bytes",
+                    "Kilobytes",
+                    "Megabytes",
+                    "Gigabytes",
+                    "Terabytes",
+                    "Bits",
+                    "Kilobits",
+                    "Megabits",
+                    "Gigabits",
+                    "Terabits",
+                    "Percent",
+                    "Count",
+                    "Bytes/Second",
+                    "Kilobytes/Second",
+                    "Megabytes/Second",
+                    "Gigabytes/Second",
+                    "Terabytes/Second",
+                    "Bits/Second",
+                    "Kilobits/Second",
+                    "Megabits/Second",
+                    "Gigabits/Second",
+                    "Terabits/Second",
+                    "Count/Second",
+                    "None"
+                  ]
+                },
+                "evaluation_periods": {
+                  "type": "integer",
+                  "serialized_name": "EvaluationPeriods"
+                },
+                "threshold": {
+                  "type": "float",
+                  "serialized_name": "Threshold"
+                },
+                "comparison_operator": {
+                  "type": "string",
+                  "serialized_name": "ComparisonOperator",
+                  "enum": [
+                    "GreaterThanOrEqualToThreshold",
+                    "GreaterThanThreshold",
+                    "LessThanThreshold",
+                    "LessThanOrEqualToThreshold"
+                  ]
                 }
-              },
-              "next_token": {
-                "type": "string",
-                "serialized_name": "NextToken"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
           }
         }
       }
@@ -465,182 +424,169 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "DescribeAlarmsForMetricResult"
+        },
         "members": {
-          "describe_alarms_for_metric_result": {
-            "type": "structure",
-            "serialized_name": "DescribeAlarmsForMetricResult",
+          "metric_alarms": {
+            "type": "list",
+            "serialized_name": "MetricAlarms",
             "members": {
-              "metric_alarms": {
-                "type": "list",
-                "serialized_name": "MetricAlarms",
-                "members": {
-                  "type": "structure",
+              "type": "structure",
+              "members": {
+                "alarm_name": {
+                  "type": "string",
+                  "serialized_name": "AlarmName"
+                },
+                "alarm_arn": {
+                  "type": "string",
+                  "serialized_name": "AlarmArn"
+                },
+                "alarm_description": {
+                  "type": "string",
+                  "serialized_name": "AlarmDescription"
+                },
+                "alarm_configuration_updated_timestamp": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "AlarmConfigurationUpdatedTimestamp"
+                },
+                "actions_enabled": {
+                  "type": "boolean",
+                  "serialized_name": "ActionsEnabled"
+                },
+                "ok_actions": {
+                  "type": "list",
+                  "serialized_name": "OKActions",
                   "members": {
-                    "alarm_name": {
-                      "type": "string",
-                      "serialized_name": "AlarmName"
-                    },
-                    "alarm_arn": {
-                      "type": "string",
-                      "serialized_name": "AlarmArn"
-                    },
-                    "alarm_description": {
-                      "type": "string",
-                      "serialized_name": "AlarmDescription"
-                    },
-                    "alarm_configuration_updated_timestamp": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "AlarmConfigurationUpdatedTimestamp"
-                    },
-                    "actions_enabled": {
-                      "type": "boolean",
-                      "serialized_name": "ActionsEnabled"
-                    },
-                    "ok_actions": {
-                      "type": "list",
-                      "serialized_name": "OKActions",
-                      "members": {
-                        "type": "string"
+                    "type": "string"
+                  }
+                },
+                "alarm_actions": {
+                  "type": "list",
+                  "serialized_name": "AlarmActions",
+                  "members": {
+                    "type": "string"
+                  }
+                },
+                "insufficient_data_actions": {
+                  "type": "list",
+                  "serialized_name": "InsufficientDataActions",
+                  "members": {
+                    "type": "string"
+                  }
+                },
+                "state_value": {
+                  "type": "string",
+                  "serialized_name": "StateValue",
+                  "enum": [
+                    "OK",
+                    "ALARM",
+                    "INSUFFICIENT_DATA"
+                  ]
+                },
+                "state_reason": {
+                  "type": "string",
+                  "serialized_name": "StateReason"
+                },
+                "state_reason_data": {
+                  "type": "string",
+                  "serialized_name": "StateReasonData"
+                },
+                "state_updated_timestamp": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "StateUpdatedTimestamp"
+                },
+                "metric_name": {
+                  "type": "string",
+                  "serialized_name": "MetricName"
+                },
+                "namespace": {
+                  "type": "string",
+                  "serialized_name": "Namespace"
+                },
+                "statistic": {
+                  "type": "string",
+                  "serialized_name": "Statistic",
+                  "enum": [
+                    "SampleCount",
+                    "Average",
+                    "Sum",
+                    "Minimum",
+                    "Maximum"
+                  ]
+                },
+                "dimensions": {
+                  "type": "list",
+                  "serialized_name": "Dimensions",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "name": {
+                        "type": "string",
+                        "serialized_name": "Name"
+                      },
+                      "value": {
+                        "type": "string",
+                        "serialized_name": "Value"
                       }
-                    },
-                    "alarm_actions": {
-                      "type": "list",
-                      "serialized_name": "AlarmActions",
-                      "members": {
-                        "type": "string"
-                      }
-                    },
-                    "insufficient_data_actions": {
-                      "type": "list",
-                      "serialized_name": "InsufficientDataActions",
-                      "members": {
-                        "type": "string"
-                      }
-                    },
-                    "state_value": {
-                      "type": "string",
-                      "serialized_name": "StateValue",
-                      "enum": [
-                        "OK",
-                        "ALARM",
-                        "INSUFFICIENT_DATA"
-                      ]
-                    },
-                    "state_reason": {
-                      "type": "string",
-                      "serialized_name": "StateReason"
-                    },
-                    "state_reason_data": {
-                      "type": "string",
-                      "serialized_name": "StateReasonData"
-                    },
-                    "state_updated_timestamp": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "StateUpdatedTimestamp"
-                    },
-                    "metric_name": {
-                      "type": "string",
-                      "serialized_name": "MetricName"
-                    },
-                    "namespace": {
-                      "type": "string",
-                      "serialized_name": "Namespace"
-                    },
-                    "statistic": {
-                      "type": "string",
-                      "serialized_name": "Statistic",
-                      "enum": [
-                        "SampleCount",
-                        "Average",
-                        "Sum",
-                        "Minimum",
-                        "Maximum"
-                      ]
-                    },
-                    "dimensions": {
-                      "type": "list",
-                      "serialized_name": "Dimensions",
-                      "members": {
-                        "type": "structure",
-                        "members": {
-                          "name": {
-                            "type": "string",
-                            "serialized_name": "Name"
-                          },
-                          "value": {
-                            "type": "string",
-                            "serialized_name": "Value"
-                          }
-                        }
-                      }
-                    },
-                    "period": {
-                      "type": "integer",
-                      "serialized_name": "Period"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "serialized_name": "Unit",
-                      "enum": [
-                        "Seconds",
-                        "Microseconds",
-                        "Milliseconds",
-                        "Bytes",
-                        "Kilobytes",
-                        "Megabytes",
-                        "Gigabytes",
-                        "Terabytes",
-                        "Bits",
-                        "Kilobits",
-                        "Megabits",
-                        "Gigabits",
-                        "Terabits",
-                        "Percent",
-                        "Count",
-                        "Bytes/Second",
-                        "Kilobytes/Second",
-                        "Megabytes/Second",
-                        "Gigabytes/Second",
-                        "Terabytes/Second",
-                        "Bits/Second",
-                        "Kilobits/Second",
-                        "Megabits/Second",
-                        "Gigabits/Second",
-                        "Terabits/Second",
-                        "Count/Second",
-                        "None"
-                      ]
-                    },
-                    "evaluation_periods": {
-                      "type": "integer",
-                      "serialized_name": "EvaluationPeriods"
-                    },
-                    "threshold": {
-                      "type": "float",
-                      "serialized_name": "Threshold"
-                    },
-                    "comparison_operator": {
-                      "type": "string",
-                      "serialized_name": "ComparisonOperator",
-                      "enum": [
-                        "GreaterThanOrEqualToThreshold",
-                        "GreaterThanThreshold",
-                        "LessThanThreshold",
-                        "LessThanOrEqualToThreshold"
-                      ]
                     }
                   }
+                },
+                "period": {
+                  "type": "integer",
+                  "serialized_name": "Period"
+                },
+                "unit": {
+                  "type": "string",
+                  "serialized_name": "Unit",
+                  "enum": [
+                    "Seconds",
+                    "Microseconds",
+                    "Milliseconds",
+                    "Bytes",
+                    "Kilobytes",
+                    "Megabytes",
+                    "Gigabytes",
+                    "Terabytes",
+                    "Bits",
+                    "Kilobits",
+                    "Megabits",
+                    "Gigabits",
+                    "Terabits",
+                    "Percent",
+                    "Count",
+                    "Bytes/Second",
+                    "Kilobytes/Second",
+                    "Megabytes/Second",
+                    "Gigabytes/Second",
+                    "Terabytes/Second",
+                    "Bits/Second",
+                    "Kilobits/Second",
+                    "Megabits/Second",
+                    "Gigabits/Second",
+                    "Terabits/Second",
+                    "Count/Second",
+                    "None"
+                  ]
+                },
+                "evaluation_periods": {
+                  "type": "integer",
+                  "serialized_name": "EvaluationPeriods"
+                },
+                "threshold": {
+                  "type": "float",
+                  "serialized_name": "Threshold"
+                },
+                "comparison_operator": {
+                  "type": "string",
+                  "serialized_name": "ComparisonOperator",
+                  "enum": [
+                    "GreaterThanOrEqualToThreshold",
+                    "GreaterThanThreshold",
+                    "LessThanThreshold",
+                    "LessThanOrEqualToThreshold"
+                  ]
                 }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
               }
             }
           }
@@ -663,21 +609,6 @@
             }
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "enable_alarm_actions": {
@@ -693,21 +624,6 @@
             "serialized_name": "AlarmNames",
             "members": {
               "type": "string"
-            }
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
             }
           }
         }
@@ -816,90 +732,77 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "GetMetricStatisticsResult"
+        },
         "members": {
-          "get_metric_statistics_result": {
-            "type": "structure",
-            "serialized_name": "GetMetricStatisticsResult",
-            "members": {
-              "label": {
-                "type": "string",
-                "serialized_name": "Label"
-              },
-              "datapoints": {
-                "type": "list",
-                "serialized_name": "Datapoints",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "timestamp": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "Timestamp"
-                    },
-                    "sample_count": {
-                      "type": "float",
-                      "serialized_name": "SampleCount"
-                    },
-                    "average": {
-                      "type": "float",
-                      "serialized_name": "Average"
-                    },
-                    "sum": {
-                      "type": "float",
-                      "serialized_name": "Sum"
-                    },
-                    "minimum": {
-                      "type": "float",
-                      "serialized_name": "Minimum"
-                    },
-                    "maximum": {
-                      "type": "float",
-                      "serialized_name": "Maximum"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "serialized_name": "Unit",
-                      "enum": [
-                        "Seconds",
-                        "Microseconds",
-                        "Milliseconds",
-                        "Bytes",
-                        "Kilobytes",
-                        "Megabytes",
-                        "Gigabytes",
-                        "Terabytes",
-                        "Bits",
-                        "Kilobits",
-                        "Megabits",
-                        "Gigabits",
-                        "Terabits",
-                        "Percent",
-                        "Count",
-                        "Bytes/Second",
-                        "Kilobytes/Second",
-                        "Megabytes/Second",
-                        "Gigabytes/Second",
-                        "Terabytes/Second",
-                        "Bits/Second",
-                        "Kilobits/Second",
-                        "Megabits/Second",
-                        "Gigabits/Second",
-                        "Terabits/Second",
-                        "Count/Second",
-                        "None"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
+          "label": {
+            "type": "string",
+            "serialized_name": "Label"
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
+          "datapoints": {
+            "type": "list",
+            "serialized_name": "Datapoints",
             "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
+              "type": "structure",
+              "members": {
+                "timestamp": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "Timestamp"
+                },
+                "sample_count": {
+                  "type": "float",
+                  "serialized_name": "SampleCount"
+                },
+                "average": {
+                  "type": "float",
+                  "serialized_name": "Average"
+                },
+                "sum": {
+                  "type": "float",
+                  "serialized_name": "Sum"
+                },
+                "minimum": {
+                  "type": "float",
+                  "serialized_name": "Minimum"
+                },
+                "maximum": {
+                  "type": "float",
+                  "serialized_name": "Maximum"
+                },
+                "unit": {
+                  "type": "string",
+                  "serialized_name": "Unit",
+                  "enum": [
+                    "Seconds",
+                    "Microseconds",
+                    "Milliseconds",
+                    "Bytes",
+                    "Kilobytes",
+                    "Megabytes",
+                    "Gigabytes",
+                    "Terabytes",
+                    "Bits",
+                    "Kilobits",
+                    "Megabits",
+                    "Gigabits",
+                    "Terabits",
+                    "Percent",
+                    "Count",
+                    "Bytes/Second",
+                    "Kilobytes/Second",
+                    "Megabytes/Second",
+                    "Gigabytes/Second",
+                    "Terabytes/Second",
+                    "Bits/Second",
+                    "Kilobits/Second",
+                    "Megabits/Second",
+                    "Gigabits/Second",
+                    "Terabits/Second",
+                    "Count/Second",
+                    "None"
+                  ]
+                }
               }
             }
           }
@@ -947,60 +850,47 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListMetricsResult"
+        },
         "members": {
-          "list_metrics_result": {
-            "type": "structure",
-            "serialized_name": "ListMetricsResult",
+          "metrics": {
+            "type": "list",
+            "serialized_name": "Metrics",
             "members": {
-              "metrics": {
-                "type": "list",
-                "serialized_name": "Metrics",
-                "members": {
-                  "type": "structure",
+              "type": "structure",
+              "members": {
+                "namespace": {
+                  "type": "string",
+                  "serialized_name": "Namespace"
+                },
+                "metric_name": {
+                  "type": "string",
+                  "serialized_name": "MetricName"
+                },
+                "dimensions": {
+                  "type": "list",
+                  "serialized_name": "Dimensions",
                   "members": {
-                    "namespace": {
-                      "type": "string",
-                      "serialized_name": "Namespace"
-                    },
-                    "metric_name": {
-                      "type": "string",
-                      "serialized_name": "MetricName"
-                    },
-                    "dimensions": {
-                      "type": "list",
-                      "serialized_name": "Dimensions",
-                      "members": {
-                        "type": "structure",
-                        "members": {
-                          "name": {
-                            "type": "string",
-                            "serialized_name": "Name"
-                          },
-                          "value": {
-                            "type": "string",
-                            "serialized_name": "Value"
-                          }
-                        }
+                    "type": "structure",
+                    "members": {
+                      "name": {
+                        "type": "string",
+                        "serialized_name": "Name"
+                      },
+                      "value": {
+                        "type": "string",
+                        "serialized_name": "Value"
                       }
                     }
                   }
                 }
-              },
-              "next_token": {
-                "type": "string",
-                "serialized_name": "NextToken"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "next_token": {
+            "type": "string",
+            "serialized_name": "NextToken"
           }
         }
       }
@@ -1147,21 +1037,6 @@
             ]
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "put_metric_data": {
@@ -1278,21 +1153,6 @@
             }
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "set_alarm_state": {
@@ -1325,21 +1185,6 @@
           "state_reason_data": {
             "type": "string",
             "serialized_name": "StateReasonData"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }

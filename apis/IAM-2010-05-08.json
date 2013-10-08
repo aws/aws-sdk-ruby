@@ -35,21 +35,6 @@
             "serialized_name": "RoleName"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "add_user_to_group": {
@@ -68,21 +53,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "UserName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -105,21 +75,6 @@
             "serialized_name": "NewPassword"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "create_access_key": {
@@ -137,50 +92,37 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "CreateAccessKeyResult"
+        },
         "members": {
-          "create_access_key_result": {
+          "access_key": {
             "type": "structure",
-            "serialized_name": "CreateAccessKeyResult",
+            "serialized_name": "AccessKey",
             "members": {
-              "access_key": {
-                "type": "structure",
-                "serialized_name": "AccessKey",
-                "members": {
-                  "user_name": {
-                    "type": "string",
-                    "serialized_name": "UserName"
-                  },
-                  "access_key_id": {
-                    "type": "string",
-                    "serialized_name": "AccessKeyId"
-                  },
-                  "status": {
-                    "type": "string",
-                    "serialized_name": "Status",
-                    "enum": [
-                      "Active",
-                      "Inactive"
-                    ]
-                  },
-                  "secret_access_key": {
-                    "type": "string",
-                    "serialized_name": "SecretAccessKey"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
+              "user_name": {
                 "type": "string",
-                "serialized_name": "RequestId"
+                "serialized_name": "UserName"
+              },
+              "access_key_id": {
+                "type": "string",
+                "serialized_name": "AccessKeyId"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status",
+                "enum": [
+                  "Active",
+                  "Inactive"
+                ]
+              },
+              "secret_access_key": {
+                "type": "string",
+                "serialized_name": "SecretAccessKey"
+              },
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
               }
             }
           }
@@ -198,21 +140,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "AccountAlias"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -237,46 +164,33 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "CreateGroupResult"
+        },
         "members": {
-          "create_group_result": {
+          "group": {
             "type": "structure",
-            "serialized_name": "CreateGroupResult",
+            "serialized_name": "Group",
             "members": {
-              "group": {
-                "type": "structure",
-                "serialized_name": "Group",
-                "members": {
-                  "path": {
-                    "type": "string",
-                    "serialized_name": "Path"
-                  },
-                  "group_name": {
-                    "type": "string",
-                    "serialized_name": "GroupName"
-                  },
-                  "group_id": {
-                    "type": "string",
-                    "serialized_name": "GroupId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
+              "path": {
                 "type": "string",
-                "serialized_name": "RequestId"
+                "serialized_name": "Path"
+              },
+              "group_name": {
+                "type": "string",
+                "serialized_name": "GroupName"
+              },
+              "group_id": {
+                "type": "string",
+                "serialized_name": "GroupId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
               }
             }
           }
@@ -303,2344 +217,34 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "CreateInstanceProfileResult"
+        },
         "members": {
-          "create_instance_profile_result": {
+          "instance_profile": {
             "type": "structure",
-            "serialized_name": "CreateInstanceProfileResult",
+            "serialized_name": "InstanceProfile",
             "members": {
-              "instance_profile": {
-                "type": "structure",
-                "serialized_name": "InstanceProfile",
-                "members": {
-                  "path": {
-                    "type": "string",
-                    "serialized_name": "Path"
-                  },
-                  "instance_profile_name": {
-                    "type": "string",
-                    "serialized_name": "InstanceProfileName"
-                  },
-                  "instance_profile_id": {
-                    "type": "string",
-                    "serialized_name": "InstanceProfileId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  },
-                  "roles": {
-                    "type": "list",
-                    "serialized_name": "Roles",
-                    "members": {
-                      "type": "structure",
-                      "members": {
-                        "path": {
-                          "type": "string",
-                          "serialized_name": "Path"
-                        },
-                        "role_name": {
-                          "type": "string",
-                          "serialized_name": "RoleName"
-                        },
-                        "role_id": {
-                          "type": "string",
-                          "serialized_name": "RoleId"
-                        },
-                        "arn": {
-                          "type": "string",
-                          "serialized_name": "Arn"
-                        },
-                        "create_date": {
-                          "type": "iso8601_timestamp",
-                          "serialized_name": "CreateDate"
-                        },
-                        "assume_role_policy_document": {
-                          "type": "string",
-                          "serialized_name": "AssumeRolePolicyDocument"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
+              "path": {
                 "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "create_login_profile": {
-      "name": "CreateLoginProfile",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "UserName"
-          },
-          "password": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "Password"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "create_login_profile_result": {
-            "type": "structure",
-            "serialized_name": "CreateLoginProfileResult",
-            "members": {
-              "login_profile": {
-                "type": "structure",
-                "serialized_name": "LoginProfile",
-                "members": {
-                  "user_name": {
-                    "type": "string",
-                    "serialized_name": "UserName"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "create_role": {
-      "name": "CreateRole",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "path": {
-            "type": "string",
-            "serialized_name": "Path"
-          },
-          "role_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "RoleName"
-          },
-          "assume_role_policy_document": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "AssumeRolePolicyDocument"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "create_role_result": {
-            "type": "structure",
-            "serialized_name": "CreateRoleResult",
-            "members": {
-              "role": {
-                "type": "structure",
-                "serialized_name": "Role",
-                "members": {
-                  "path": {
-                    "type": "string",
-                    "serialized_name": "Path"
-                  },
-                  "role_name": {
-                    "type": "string",
-                    "serialized_name": "RoleName"
-                  },
-                  "role_id": {
-                    "type": "string",
-                    "serialized_name": "RoleId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  },
-                  "assume_role_policy_document": {
-                    "type": "string",
-                    "serialized_name": "AssumeRolePolicyDocument"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "create_user": {
-      "name": "CreateUser",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "path": {
-            "type": "string",
-            "serialized_name": "Path"
-          },
-          "user_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "UserName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "create_user_result": {
-            "type": "structure",
-            "serialized_name": "CreateUserResult",
-            "members": {
-              "user": {
-                "type": "structure",
-                "serialized_name": "User",
-                "members": {
-                  "path": {
-                    "type": "string",
-                    "serialized_name": "Path"
-                  },
-                  "user_name": {
-                    "type": "string",
-                    "serialized_name": "UserName"
-                  },
-                  "user_id": {
-                    "type": "string",
-                    "serialized_name": "UserId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "create_virtual_mfa_device": {
-      "name": "CreateVirtualMFADevice",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "path": {
-            "type": "string",
-            "serialized_name": "Path"
-          },
-          "virtual_mfa_device_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "VirtualMFADeviceName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "create_virtual_mfa_device_result": {
-            "type": "structure",
-            "serialized_name": "CreateVirtualMFADeviceResult",
-            "members": {
-              "virtual_mfa_device": {
-                "type": "structure",
-                "serialized_name": "VirtualMFADevice",
-                "members": {
-                  "serial_number": {
-                    "type": "string",
-                    "serialized_name": "SerialNumber"
-                  },
-                  "base_32_string_seed": {
-                    "type": "blob",
-                    "serialized_name": "Base32StringSeed"
-                  },
-                  "qr_code_png": {
-                    "type": "blob",
-                    "serialized_name": "QRCodePNG"
-                  },
-                  "user": {
-                    "type": "structure",
-                    "serialized_name": "User",
-                    "members": {
-                      "path": {
-                        "type": "string",
-                        "serialized_name": "Path"
-                      },
-                      "user_name": {
-                        "type": "string",
-                        "serialized_name": "UserName"
-                      },
-                      "user_id": {
-                        "type": "string",
-                        "serialized_name": "UserId"
-                      },
-                      "arn": {
-                        "type": "string",
-                        "serialized_name": "Arn"
-                      },
-                      "create_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "CreateDate"
-                      }
-                    }
-                  },
-                  "enable_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "EnableDate"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "deactivate_mfa_device": {
-      "name": "DeactivateMFADevice",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "UserName"
-          },
-          "serial_number": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "SerialNumber"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_access_key": {
-      "name": "DeleteAccessKey",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "serialized_name": "UserName"
-          },
-          "access_key_id": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "AccessKeyId"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_account_alias": {
-      "name": "DeleteAccountAlias",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "account_alias": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "AccountAlias"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_account_password_policy": {
-      "name": "DeleteAccountPasswordPolicy",
-      "http_method": "POST",
-      "http_path": "/",
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_group": {
-      "name": "DeleteGroup",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "group_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "GroupName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_group_policy": {
-      "name": "DeleteGroupPolicy",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "group_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "GroupName"
-          },
-          "policy_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "PolicyName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_instance_profile": {
-      "name": "DeleteInstanceProfile",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "instance_profile_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "InstanceProfileName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_login_profile": {
-      "name": "DeleteLoginProfile",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "UserName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_role": {
-      "name": "DeleteRole",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "role_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "RoleName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_role_policy": {
-      "name": "DeleteRolePolicy",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "role_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "RoleName"
-          },
-          "policy_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "PolicyName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_server_certificate": {
-      "name": "DeleteServerCertificate",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "server_certificate_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "ServerCertificateName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_signing_certificate": {
-      "name": "DeleteSigningCertificate",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "serialized_name": "UserName"
-          },
-          "certificate_id": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "CertificateId"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_user": {
-      "name": "DeleteUser",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "UserName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_user_policy": {
-      "name": "DeleteUserPolicy",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "UserName"
-          },
-          "policy_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "PolicyName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "delete_virtual_mfa_device": {
-      "name": "DeleteVirtualMFADevice",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "serial_number": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "SerialNumber"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "enable_mfa_device": {
-      "name": "EnableMFADevice",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "UserName"
-          },
-          "serial_number": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "SerialNumber"
-          },
-          "authentication_code_1": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "AuthenticationCode1"
-          },
-          "authentication_code_2": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "AuthenticationCode2"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_account_password_policy": {
-      "name": "GetAccountPasswordPolicy",
-      "http_method": "POST",
-      "http_path": "/",
-      "output": {
-        "type": "output",
-        "members": {
-          "get_account_password_policy_result": {
-            "type": "structure",
-            "serialized_name": "GetAccountPasswordPolicyResult",
-            "members": {
-              "password_policy": {
-                "type": "structure",
-                "serialized_name": "PasswordPolicy",
-                "members": {
-                  "minimum_password_length": {
-                    "type": "integer",
-                    "serialized_name": "MinimumPasswordLength"
-                  },
-                  "require_symbols": {
-                    "type": "boolean",
-                    "serialized_name": "RequireSymbols"
-                  },
-                  "require_numbers": {
-                    "type": "boolean",
-                    "serialized_name": "RequireNumbers"
-                  },
-                  "require_uppercase_characters": {
-                    "type": "boolean",
-                    "serialized_name": "RequireUppercaseCharacters"
-                  },
-                  "require_lowercase_characters": {
-                    "type": "boolean",
-                    "serialized_name": "RequireLowercaseCharacters"
-                  },
-                  "allow_users_to_change_password": {
-                    "type": "boolean",
-                    "serialized_name": "AllowUsersToChangePassword"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_account_summary": {
-      "name": "GetAccountSummary",
-      "http_method": "POST",
-      "http_path": "/",
-      "output": {
-        "type": "output",
-        "members": {
-          "get_account_summary_result": {
-            "type": "structure",
-            "serialized_name": "GetAccountSummaryResult",
-            "members": {
-              "summary_map": {
-                "type": "map",
-                "serialized_name": "SummaryMap",
-                "keys": {
-                  "type": "string",
-                  "enum": [
-                    "Users",
-                    "UsersQuota",
-                    "Groups",
-                    "GroupsQuota",
-                    "ServerCertificates",
-                    "ServerCertificatesQuota",
-                    "UserPolicySizeQuota",
-                    "GroupPolicySizeQuota",
-                    "GroupsPerUserQuota",
-                    "SigningCertificatesPerUserQuota",
-                    "AccessKeysPerUserQuota",
-                    "MFADevices",
-                    "MFADevicesInUse",
-                    "AccountMFAEnabled"
-                  ]
-                },
-                "members": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_group": {
-      "name": "GetGroup",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "group_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "GroupName"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "get_group_result": {
-            "type": "structure",
-            "serialized_name": "GetGroupResult",
-            "members": {
-              "group": {
-                "type": "structure",
-                "serialized_name": "Group",
-                "members": {
-                  "path": {
-                    "type": "string",
-                    "serialized_name": "Path"
-                  },
-                  "group_name": {
-                    "type": "string",
-                    "serialized_name": "GroupName"
-                  },
-                  "group_id": {
-                    "type": "string",
-                    "serialized_name": "GroupId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  }
-                }
+                "serialized_name": "Path"
               },
-              "users": {
-                "type": "list",
-                "serialized_name": "Users",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "path": {
-                      "type": "string",
-                      "serialized_name": "Path"
-                    },
-                    "user_name": {
-                      "type": "string",
-                      "serialized_name": "UserName"
-                    },
-                    "user_id": {
-                      "type": "string",
-                      "serialized_name": "UserId"
-                    },
-                    "arn": {
-                      "type": "string",
-                      "serialized_name": "Arn"
-                    },
-                    "create_date": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "CreateDate"
-                    }
-                  }
-                }
+              "instance_profile_name": {
+                "type": "string",
+                "serialized_name": "InstanceProfileName"
               },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
+              "instance_profile_id": {
+                "type": "string",
+                "serialized_name": "InstanceProfileId"
               },
-              "marker": {
+              "arn": {
                 "type": "string",
-                "serialized_name": "Marker"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_group_policy": {
-      "name": "GetGroupPolicy",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "group_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "GroupName"
-          },
-          "policy_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "PolicyName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "get_group_policy_result": {
-            "type": "structure",
-            "serialized_name": "GetGroupPolicyResult",
-            "members": {
-              "group_name": {
-                "type": "string",
-                "serialized_name": "GroupName"
+                "serialized_name": "Arn"
               },
-              "policy_name": {
-                "type": "string",
-                "serialized_name": "PolicyName"
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
               },
-              "policy_document": {
-                "type": "string",
-                "serialized_name": "PolicyDocument"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_instance_profile": {
-      "name": "GetInstanceProfile",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "instance_profile_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "InstanceProfileName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "get_instance_profile_result": {
-            "type": "structure",
-            "serialized_name": "GetInstanceProfileResult",
-            "members": {
-              "instance_profile": {
-                "type": "structure",
-                "serialized_name": "InstanceProfile",
-                "members": {
-                  "path": {
-                    "type": "string",
-                    "serialized_name": "Path"
-                  },
-                  "instance_profile_name": {
-                    "type": "string",
-                    "serialized_name": "InstanceProfileName"
-                  },
-                  "instance_profile_id": {
-                    "type": "string",
-                    "serialized_name": "InstanceProfileId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  },
-                  "roles": {
-                    "type": "list",
-                    "serialized_name": "Roles",
-                    "members": {
-                      "type": "structure",
-                      "members": {
-                        "path": {
-                          "type": "string",
-                          "serialized_name": "Path"
-                        },
-                        "role_name": {
-                          "type": "string",
-                          "serialized_name": "RoleName"
-                        },
-                        "role_id": {
-                          "type": "string",
-                          "serialized_name": "RoleId"
-                        },
-                        "arn": {
-                          "type": "string",
-                          "serialized_name": "Arn"
-                        },
-                        "create_date": {
-                          "type": "iso8601_timestamp",
-                          "serialized_name": "CreateDate"
-                        },
-                        "assume_role_policy_document": {
-                          "type": "string",
-                          "serialized_name": "AssumeRolePolicyDocument"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_login_profile": {
-      "name": "GetLoginProfile",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "UserName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "get_login_profile_result": {
-            "type": "structure",
-            "serialized_name": "GetLoginProfileResult",
-            "members": {
-              "login_profile": {
-                "type": "structure",
-                "serialized_name": "LoginProfile",
-                "members": {
-                  "user_name": {
-                    "type": "string",
-                    "serialized_name": "UserName"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_role": {
-      "name": "GetRole",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "role_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "RoleName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "get_role_result": {
-            "type": "structure",
-            "serialized_name": "GetRoleResult",
-            "members": {
-              "role": {
-                "type": "structure",
-                "serialized_name": "Role",
-                "members": {
-                  "path": {
-                    "type": "string",
-                    "serialized_name": "Path"
-                  },
-                  "role_name": {
-                    "type": "string",
-                    "serialized_name": "RoleName"
-                  },
-                  "role_id": {
-                    "type": "string",
-                    "serialized_name": "RoleId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  },
-                  "assume_role_policy_document": {
-                    "type": "string",
-                    "serialized_name": "AssumeRolePolicyDocument"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_role_policy": {
-      "name": "GetRolePolicy",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "role_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "RoleName"
-          },
-          "policy_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "PolicyName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "get_role_policy_result": {
-            "type": "structure",
-            "serialized_name": "GetRolePolicyResult",
-            "members": {
-              "role_name": {
-                "type": "string",
-                "serialized_name": "RoleName"
-              },
-              "policy_name": {
-                "type": "string",
-                "serialized_name": "PolicyName"
-              },
-              "policy_document": {
-                "type": "string",
-                "serialized_name": "PolicyDocument"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_server_certificate": {
-      "name": "GetServerCertificate",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "server_certificate_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "ServerCertificateName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "get_server_certificate_result": {
-            "type": "structure",
-            "serialized_name": "GetServerCertificateResult",
-            "members": {
-              "server_certificate": {
-                "type": "structure",
-                "serialized_name": "ServerCertificate",
-                "members": {
-                  "server_certificate_metadata": {
-                    "type": "structure",
-                    "serialized_name": "ServerCertificateMetadata",
-                    "members": {
-                      "path": {
-                        "type": "string",
-                        "serialized_name": "Path"
-                      },
-                      "server_certificate_name": {
-                        "type": "string",
-                        "serialized_name": "ServerCertificateName"
-                      },
-                      "server_certificate_id": {
-                        "type": "string",
-                        "serialized_name": "ServerCertificateId"
-                      },
-                      "arn": {
-                        "type": "string",
-                        "serialized_name": "Arn"
-                      },
-                      "upload_date": {
-                        "type": "iso8601_timestamp",
-                        "serialized_name": "UploadDate"
-                      }
-                    }
-                  },
-                  "certificate_body": {
-                    "type": "string",
-                    "serialized_name": "CertificateBody"
-                  },
-                  "certificate_chain": {
-                    "type": "string",
-                    "serialized_name": "CertificateChain"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_user": {
-      "name": "GetUser",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "serialized_name": "UserName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "get_user_result": {
-            "type": "structure",
-            "serialized_name": "GetUserResult",
-            "members": {
-              "user": {
-                "type": "structure",
-                "serialized_name": "User",
-                "members": {
-                  "path": {
-                    "type": "string",
-                    "serialized_name": "Path"
-                  },
-                  "user_name": {
-                    "type": "string",
-                    "serialized_name": "UserName"
-                  },
-                  "user_id": {
-                    "type": "string",
-                    "serialized_name": "UserId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  },
-                  "create_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "CreateDate"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "get_user_policy": {
-      "name": "GetUserPolicy",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "UserName"
-          },
-          "policy_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "PolicyName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "get_user_policy_result": {
-            "type": "structure",
-            "serialized_name": "GetUserPolicyResult",
-            "members": {
-              "user_name": {
-                "type": "string",
-                "serialized_name": "UserName"
-              },
-              "policy_name": {
-                "type": "string",
-                "serialized_name": "PolicyName"
-              },
-              "policy_document": {
-                "type": "string",
-                "serialized_name": "PolicyDocument"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "list_access_keys": {
-      "name": "ListAccessKeys",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "serialized_name": "UserName"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "list_access_keys_result": {
-            "type": "structure",
-            "serialized_name": "ListAccessKeysResult",
-            "members": {
-              "access_key_metadata": {
-                "type": "list",
-                "serialized_name": "AccessKeyMetadata",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "user_name": {
-                      "type": "string",
-                      "serialized_name": "UserName"
-                    },
-                    "access_key_id": {
-                      "type": "string",
-                      "serialized_name": "AccessKeyId"
-                    },
-                    "status": {
-                      "type": "string",
-                      "serialized_name": "Status",
-                      "enum": [
-                        "Active",
-                        "Inactive"
-                      ]
-                    },
-                    "create_date": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "CreateDate"
-                    }
-                  }
-                }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "list_account_aliases": {
-      "name": "ListAccountAliases",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "list_account_aliases_result": {
-            "type": "structure",
-            "serialized_name": "ListAccountAliasesResult",
-            "members": {
-              "account_aliases": {
-                "type": "list",
-                "serialized_name": "AccountAliases",
-                "members": {
-                  "type": "string"
-                }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "list_group_policies": {
-      "name": "ListGroupPolicies",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "group_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "GroupName"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "list_group_policies_result": {
-            "type": "structure",
-            "serialized_name": "ListGroupPoliciesResult",
-            "members": {
-              "policy_names": {
-                "type": "list",
-                "serialized_name": "PolicyNames",
-                "members": {
-                  "type": "string"
-                }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "list_groups": {
-      "name": "ListGroups",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "path_prefix": {
-            "type": "string",
-            "serialized_name": "PathPrefix"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "list_groups_result": {
-            "type": "structure",
-            "serialized_name": "ListGroupsResult",
-            "members": {
-              "groups": {
-                "type": "list",
-                "serialized_name": "Groups",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "path": {
-                      "type": "string",
-                      "serialized_name": "Path"
-                    },
-                    "group_name": {
-                      "type": "string",
-                      "serialized_name": "GroupName"
-                    },
-                    "group_id": {
-                      "type": "string",
-                      "serialized_name": "GroupId"
-                    },
-                    "arn": {
-                      "type": "string",
-                      "serialized_name": "Arn"
-                    },
-                    "create_date": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "CreateDate"
-                    }
-                  }
-                }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "list_groups_for_user": {
-      "name": "ListGroupsForUser",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "UserName"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "list_groups_for_user_result": {
-            "type": "structure",
-            "serialized_name": "ListGroupsForUserResult",
-            "members": {
-              "groups": {
-                "type": "list",
-                "serialized_name": "Groups",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "path": {
-                      "type": "string",
-                      "serialized_name": "Path"
-                    },
-                    "group_name": {
-                      "type": "string",
-                      "serialized_name": "GroupName"
-                    },
-                    "group_id": {
-                      "type": "string",
-                      "serialized_name": "GroupId"
-                    },
-                    "arn": {
-                      "type": "string",
-                      "serialized_name": "Arn"
-                    },
-                    "create_date": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "CreateDate"
-                    }
-                  }
-                }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "list_instance_profiles": {
-      "name": "ListInstanceProfiles",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "path_prefix": {
-            "type": "string",
-            "serialized_name": "PathPrefix"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "list_instance_profiles_result": {
-            "type": "structure",
-            "serialized_name": "ListInstanceProfilesResult",
-            "members": {
-              "instance_profiles": {
-                "type": "list",
-                "serialized_name": "InstanceProfiles",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "path": {
-                      "type": "string",
-                      "serialized_name": "Path"
-                    },
-                    "instance_profile_name": {
-                      "type": "string",
-                      "serialized_name": "InstanceProfileName"
-                    },
-                    "instance_profile_id": {
-                      "type": "string",
-                      "serialized_name": "InstanceProfileId"
-                    },
-                    "arn": {
-                      "type": "string",
-                      "serialized_name": "Arn"
-                    },
-                    "create_date": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "CreateDate"
-                    },
-                    "roles": {
-                      "type": "list",
-                      "serialized_name": "Roles",
-                      "members": {
-                        "type": "structure",
-                        "members": {
-                          "path": {
-                            "type": "string",
-                            "serialized_name": "Path"
-                          },
-                          "role_name": {
-                            "type": "string",
-                            "serialized_name": "RoleName"
-                          },
-                          "role_id": {
-                            "type": "string",
-                            "serialized_name": "RoleId"
-                          },
-                          "arn": {
-                            "type": "string",
-                            "serialized_name": "Arn"
-                          },
-                          "create_date": {
-                            "type": "iso8601_timestamp",
-                            "serialized_name": "CreateDate"
-                          },
-                          "assume_role_policy_document": {
-                            "type": "string",
-                            "serialized_name": "AssumeRolePolicyDocument"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "list_instance_profiles_for_role": {
-      "name": "ListInstanceProfilesForRole",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "role_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "RoleName"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "list_instance_profiles_for_role_result": {
-            "type": "structure",
-            "serialized_name": "ListInstanceProfilesForRoleResult",
-            "members": {
-              "instance_profiles": {
-                "type": "list",
-                "serialized_name": "InstanceProfiles",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "path": {
-                      "type": "string",
-                      "serialized_name": "Path"
-                    },
-                    "instance_profile_name": {
-                      "type": "string",
-                      "serialized_name": "InstanceProfileName"
-                    },
-                    "instance_profile_id": {
-                      "type": "string",
-                      "serialized_name": "InstanceProfileId"
-                    },
-                    "arn": {
-                      "type": "string",
-                      "serialized_name": "Arn"
-                    },
-                    "create_date": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "CreateDate"
-                    },
-                    "roles": {
-                      "type": "list",
-                      "serialized_name": "Roles",
-                      "members": {
-                        "type": "structure",
-                        "members": {
-                          "path": {
-                            "type": "string",
-                            "serialized_name": "Path"
-                          },
-                          "role_name": {
-                            "type": "string",
-                            "serialized_name": "RoleName"
-                          },
-                          "role_id": {
-                            "type": "string",
-                            "serialized_name": "RoleId"
-                          },
-                          "arn": {
-                            "type": "string",
-                            "serialized_name": "Arn"
-                          },
-                          "create_date": {
-                            "type": "iso8601_timestamp",
-                            "serialized_name": "CreateDate"
-                          },
-                          "assume_role_policy_document": {
-                            "type": "string",
-                            "serialized_name": "AssumeRolePolicyDocument"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "list_mfa_devices": {
-      "name": "ListMFADevices",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "user_name": {
-            "type": "string",
-            "serialized_name": "UserName"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "list_mfa_devices_result": {
-            "type": "structure",
-            "serialized_name": "ListMFADevicesResult",
-            "members": {
-              "mfa_devices": {
-                "type": "list",
-                "serialized_name": "MFADevices",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "user_name": {
-                      "type": "string",
-                      "serialized_name": "UserName"
-                    },
-                    "serial_number": {
-                      "type": "string",
-                      "serialized_name": "SerialNumber"
-                    },
-                    "enable_date": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "EnableDate"
-                    }
-                  }
-                }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "list_role_policies": {
-      "name": "ListRolePolicies",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "role_name": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "RoleName"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "list_role_policies_result": {
-            "type": "structure",
-            "serialized_name": "ListRolePoliciesResult",
-            "members": {
-              "policy_names": {
-                "type": "list",
-                "serialized_name": "PolicyNames",
-                "members": {
-                  "type": "string"
-                }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
-      }
-    },
-    "list_roles": {
-      "name": "ListRoles",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "path_prefix": {
-            "type": "string",
-            "serialized_name": "PathPrefix"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_items": {
-            "type": "integer",
-            "serialized_name": "MaxItems"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "list_roles_result": {
-            "type": "structure",
-            "serialized_name": "ListRolesResult",
-            "members": {
               "roles": {
                 "type": "list",
                 "serialized_name": "Roles",
@@ -2673,26 +277,1758 @@
                     }
                   }
                 }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_login_profile": {
+      "name": "CreateLoginProfile",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "UserName"
+          },
+          "password": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Password"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateLoginProfileResult"
+        },
+        "members": {
+          "login_profile": {
+            "type": "structure",
+            "serialized_name": "LoginProfile",
+            "members": {
+              "user_name": {
                 "type": "string",
-                "serialized_name": "Marker"
+                "serialized_name": "UserName"
+              },
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_role": {
+      "name": "CreateRole",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "path": {
+            "type": "string",
+            "serialized_name": "Path"
+          },
+          "role_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RoleName"
+          },
+          "assume_role_policy_document": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "AssumeRolePolicyDocument"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateRoleResult"
+        },
+        "members": {
+          "role": {
+            "type": "structure",
+            "serialized_name": "Role",
+            "members": {
+              "path": {
+                "type": "string",
+                "serialized_name": "Path"
+              },
+              "role_name": {
+                "type": "string",
+                "serialized_name": "RoleName"
+              },
+              "role_id": {
+                "type": "string",
+                "serialized_name": "RoleId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
+              },
+              "assume_role_policy_document": {
+                "type": "string",
+                "serialized_name": "AssumeRolePolicyDocument"
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_user": {
+      "name": "CreateUser",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "path": {
+            "type": "string",
+            "serialized_name": "Path"
+          },
+          "user_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "UserName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateUserResult"
+        },
+        "members": {
+          "user": {
+            "type": "structure",
+            "serialized_name": "User",
+            "members": {
+              "path": {
+                "type": "string",
+                "serialized_name": "Path"
+              },
+              "user_name": {
+                "type": "string",
+                "serialized_name": "UserName"
+              },
+              "user_id": {
+                "type": "string",
+                "serialized_name": "UserId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_virtual_mfa_device": {
+      "name": "CreateVirtualMFADevice",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "path": {
+            "type": "string",
+            "serialized_name": "Path"
+          },
+          "virtual_mfa_device_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VirtualMFADeviceName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateVirtualMFADeviceResult"
+        },
+        "members": {
+          "virtual_mfa_device": {
+            "type": "structure",
+            "serialized_name": "VirtualMFADevice",
+            "members": {
+              "serial_number": {
+                "type": "string",
+                "serialized_name": "SerialNumber"
+              },
+              "base_32_string_seed": {
+                "type": "blob",
+                "serialized_name": "Base32StringSeed"
+              },
+              "qr_code_png": {
+                "type": "blob",
+                "serialized_name": "QRCodePNG"
+              },
+              "user": {
+                "type": "structure",
+                "serialized_name": "User",
+                "members": {
+                  "path": {
+                    "type": "string",
+                    "serialized_name": "Path"
+                  },
+                  "user_name": {
+                    "type": "string",
+                    "serialized_name": "UserName"
+                  },
+                  "user_id": {
+                    "type": "string",
+                    "serialized_name": "UserId"
+                  },
+                  "arn": {
+                    "type": "string",
+                    "serialized_name": "Arn"
+                  },
+                  "create_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreateDate"
+                  }
+                }
+              },
+              "enable_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "EnableDate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "deactivate_mfa_device": {
+      "name": "DeactivateMFADevice",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "UserName"
+          },
+          "serial_number": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SerialNumber"
+          }
+        }
+      }
+    },
+    "delete_access_key": {
+      "name": "DeleteAccessKey",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "serialized_name": "UserName"
+          },
+          "access_key_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "AccessKeyId"
+          }
+        }
+      }
+    },
+    "delete_account_alias": {
+      "name": "DeleteAccountAlias",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "account_alias": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "AccountAlias"
+          }
+        }
+      }
+    },
+    "delete_account_password_policy": {
+      "name": "DeleteAccountPasswordPolicy",
+      "http_method": "POST",
+      "http_path": "/"
+    },
+    "delete_group": {
+      "name": "DeleteGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GroupName"
+          }
+        }
+      }
+    },
+    "delete_group_policy": {
+      "name": "DeleteGroupPolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GroupName"
+          },
+          "policy_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "PolicyName"
+          }
+        }
+      }
+    },
+    "delete_instance_profile": {
+      "name": "DeleteInstanceProfile",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "instance_profile_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "InstanceProfileName"
+          }
+        }
+      }
+    },
+    "delete_login_profile": {
+      "name": "DeleteLoginProfile",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "UserName"
+          }
+        }
+      }
+    },
+    "delete_role": {
+      "name": "DeleteRole",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "role_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RoleName"
+          }
+        }
+      }
+    },
+    "delete_role_policy": {
+      "name": "DeleteRolePolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "role_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RoleName"
+          },
+          "policy_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "PolicyName"
+          }
+        }
+      }
+    },
+    "delete_server_certificate": {
+      "name": "DeleteServerCertificate",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "server_certificate_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ServerCertificateName"
+          }
+        }
+      }
+    },
+    "delete_signing_certificate": {
+      "name": "DeleteSigningCertificate",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "serialized_name": "UserName"
+          },
+          "certificate_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CertificateId"
+          }
+        }
+      }
+    },
+    "delete_user": {
+      "name": "DeleteUser",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "UserName"
+          }
+        }
+      }
+    },
+    "delete_user_policy": {
+      "name": "DeleteUserPolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "UserName"
+          },
+          "policy_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "PolicyName"
+          }
+        }
+      }
+    },
+    "delete_virtual_mfa_device": {
+      "name": "DeleteVirtualMFADevice",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "serial_number": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SerialNumber"
+          }
+        }
+      }
+    },
+    "enable_mfa_device": {
+      "name": "EnableMFADevice",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "UserName"
+          },
+          "serial_number": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SerialNumber"
+          },
+          "authentication_code_1": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "AuthenticationCode1"
+          },
+          "authentication_code_2": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "AuthenticationCode2"
+          }
+        }
+      }
+    },
+    "get_account_password_policy": {
+      "name": "GetAccountPasswordPolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetAccountPasswordPolicyResult"
+        },
+        "members": {
+          "password_policy": {
+            "type": "structure",
+            "serialized_name": "PasswordPolicy",
+            "members": {
+              "minimum_password_length": {
+                "type": "integer",
+                "serialized_name": "MinimumPasswordLength"
+              },
+              "require_symbols": {
+                "type": "boolean",
+                "serialized_name": "RequireSymbols"
+              },
+              "require_numbers": {
+                "type": "boolean",
+                "serialized_name": "RequireNumbers"
+              },
+              "require_uppercase_characters": {
+                "type": "boolean",
+                "serialized_name": "RequireUppercaseCharacters"
+              },
+              "require_lowercase_characters": {
+                "type": "boolean",
+                "serialized_name": "RequireLowercaseCharacters"
+              },
+              "allow_users_to_change_password": {
+                "type": "boolean",
+                "serialized_name": "AllowUsersToChangePassword"
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_account_summary": {
+      "name": "GetAccountSummary",
+      "http_method": "POST",
+      "http_path": "/",
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetAccountSummaryResult"
+        },
+        "members": {
+          "summary_map": {
+            "type": "map",
+            "serialized_name": "SummaryMap",
+            "keys": {
+              "type": "string",
+              "enum": [
+                "Users",
+                "UsersQuota",
+                "Groups",
+                "GroupsQuota",
+                "ServerCertificates",
+                "ServerCertificatesQuota",
+                "UserPolicySizeQuota",
+                "GroupPolicySizeQuota",
+                "GroupsPerUserQuota",
+                "SigningCertificatesPerUserQuota",
+                "AccessKeysPerUserQuota",
+                "MFADevices",
+                "MFADevicesInUse",
+                "AccountMFAEnabled"
+              ]
+            },
+            "members": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "get_group": {
+      "name": "GetGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GroupName"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetGroupResult"
+        },
+        "members": {
+          "group": {
+            "type": "structure",
+            "serialized_name": "Group",
+            "members": {
+              "path": {
+                "type": "string",
+                "serialized_name": "Path"
+              },
+              "group_name": {
+                "type": "string",
+                "serialized_name": "GroupName"
+              },
+              "group_id": {
+                "type": "string",
+                "serialized_name": "GroupId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
+          "users": {
+            "type": "list",
+            "serialized_name": "Users",
             "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
+              "type": "structure",
+              "members": {
+                "path": {
+                  "type": "string",
+                  "serialized_name": "Path"
+                },
+                "user_name": {
+                  "type": "string",
+                  "serialized_name": "UserName"
+                },
+                "user_id": {
+                  "type": "string",
+                  "serialized_name": "UserId"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "create_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CreateDate"
+                }
               }
             }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "get_group_policy": {
+      "name": "GetGroupPolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GroupName"
+          },
+          "policy_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "PolicyName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetGroupPolicyResult"
+        },
+        "members": {
+          "group_name": {
+            "type": "string",
+            "serialized_name": "GroupName"
+          },
+          "policy_name": {
+            "type": "string",
+            "serialized_name": "PolicyName"
+          },
+          "policy_document": {
+            "type": "string",
+            "serialized_name": "PolicyDocument"
+          }
+        }
+      }
+    },
+    "get_instance_profile": {
+      "name": "GetInstanceProfile",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "instance_profile_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "InstanceProfileName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetInstanceProfileResult"
+        },
+        "members": {
+          "instance_profile": {
+            "type": "structure",
+            "serialized_name": "InstanceProfile",
+            "members": {
+              "path": {
+                "type": "string",
+                "serialized_name": "Path"
+              },
+              "instance_profile_name": {
+                "type": "string",
+                "serialized_name": "InstanceProfileName"
+              },
+              "instance_profile_id": {
+                "type": "string",
+                "serialized_name": "InstanceProfileId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
+              },
+              "roles": {
+                "type": "list",
+                "serialized_name": "Roles",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "path": {
+                      "type": "string",
+                      "serialized_name": "Path"
+                    },
+                    "role_name": {
+                      "type": "string",
+                      "serialized_name": "RoleName"
+                    },
+                    "role_id": {
+                      "type": "string",
+                      "serialized_name": "RoleId"
+                    },
+                    "arn": {
+                      "type": "string",
+                      "serialized_name": "Arn"
+                    },
+                    "create_date": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CreateDate"
+                    },
+                    "assume_role_policy_document": {
+                      "type": "string",
+                      "serialized_name": "AssumeRolePolicyDocument"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_login_profile": {
+      "name": "GetLoginProfile",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "UserName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetLoginProfileResult"
+        },
+        "members": {
+          "login_profile": {
+            "type": "structure",
+            "serialized_name": "LoginProfile",
+            "members": {
+              "user_name": {
+                "type": "string",
+                "serialized_name": "UserName"
+              },
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_role": {
+      "name": "GetRole",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "role_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RoleName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetRoleResult"
+        },
+        "members": {
+          "role": {
+            "type": "structure",
+            "serialized_name": "Role",
+            "members": {
+              "path": {
+                "type": "string",
+                "serialized_name": "Path"
+              },
+              "role_name": {
+                "type": "string",
+                "serialized_name": "RoleName"
+              },
+              "role_id": {
+                "type": "string",
+                "serialized_name": "RoleId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
+              },
+              "assume_role_policy_document": {
+                "type": "string",
+                "serialized_name": "AssumeRolePolicyDocument"
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_role_policy": {
+      "name": "GetRolePolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "role_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RoleName"
+          },
+          "policy_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "PolicyName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetRolePolicyResult"
+        },
+        "members": {
+          "role_name": {
+            "type": "string",
+            "serialized_name": "RoleName"
+          },
+          "policy_name": {
+            "type": "string",
+            "serialized_name": "PolicyName"
+          },
+          "policy_document": {
+            "type": "string",
+            "serialized_name": "PolicyDocument"
+          }
+        }
+      }
+    },
+    "get_server_certificate": {
+      "name": "GetServerCertificate",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "server_certificate_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ServerCertificateName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetServerCertificateResult"
+        },
+        "members": {
+          "server_certificate": {
+            "type": "structure",
+            "serialized_name": "ServerCertificate",
+            "members": {
+              "server_certificate_metadata": {
+                "type": "structure",
+                "serialized_name": "ServerCertificateMetadata",
+                "members": {
+                  "path": {
+                    "type": "string",
+                    "serialized_name": "Path"
+                  },
+                  "server_certificate_name": {
+                    "type": "string",
+                    "serialized_name": "ServerCertificateName"
+                  },
+                  "server_certificate_id": {
+                    "type": "string",
+                    "serialized_name": "ServerCertificateId"
+                  },
+                  "arn": {
+                    "type": "string",
+                    "serialized_name": "Arn"
+                  },
+                  "upload_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UploadDate"
+                  }
+                }
+              },
+              "certificate_body": {
+                "type": "string",
+                "serialized_name": "CertificateBody"
+              },
+              "certificate_chain": {
+                "type": "string",
+                "serialized_name": "CertificateChain"
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_user": {
+      "name": "GetUser",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "serialized_name": "UserName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetUserResult"
+        },
+        "members": {
+          "user": {
+            "type": "structure",
+            "serialized_name": "User",
+            "members": {
+              "path": {
+                "type": "string",
+                "serialized_name": "Path"
+              },
+              "user_name": {
+                "type": "string",
+                "serialized_name": "UserName"
+              },
+              "user_id": {
+                "type": "string",
+                "serialized_name": "UserId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
+              "create_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CreateDate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_user_policy": {
+      "name": "GetUserPolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "UserName"
+          },
+          "policy_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "PolicyName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetUserPolicyResult"
+        },
+        "members": {
+          "user_name": {
+            "type": "string",
+            "serialized_name": "UserName"
+          },
+          "policy_name": {
+            "type": "string",
+            "serialized_name": "PolicyName"
+          },
+          "policy_document": {
+            "type": "string",
+            "serialized_name": "PolicyDocument"
+          }
+        }
+      }
+    },
+    "list_access_keys": {
+      "name": "ListAccessKeys",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "serialized_name": "UserName"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListAccessKeysResult"
+        },
+        "members": {
+          "access_key_metadata": {
+            "type": "list",
+            "serialized_name": "AccessKeyMetadata",
+            "members": {
+              "type": "structure",
+              "members": {
+                "user_name": {
+                  "type": "string",
+                  "serialized_name": "UserName"
+                },
+                "access_key_id": {
+                  "type": "string",
+                  "serialized_name": "AccessKeyId"
+                },
+                "status": {
+                  "type": "string",
+                  "serialized_name": "Status",
+                  "enum": [
+                    "Active",
+                    "Inactive"
+                  ]
+                },
+                "create_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CreateDate"
+                }
+              }
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_account_aliases": {
+      "name": "ListAccountAliases",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListAccountAliasesResult"
+        },
+        "members": {
+          "account_aliases": {
+            "type": "list",
+            "serialized_name": "AccountAliases",
+            "members": {
+              "type": "string"
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_group_policies": {
+      "name": "ListGroupPolicies",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GroupName"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListGroupPoliciesResult"
+        },
+        "members": {
+          "policy_names": {
+            "type": "list",
+            "serialized_name": "PolicyNames",
+            "members": {
+              "type": "string"
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_groups": {
+      "name": "ListGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "path_prefix": {
+            "type": "string",
+            "serialized_name": "PathPrefix"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListGroupsResult"
+        },
+        "members": {
+          "groups": {
+            "type": "list",
+            "serialized_name": "Groups",
+            "members": {
+              "type": "structure",
+              "members": {
+                "path": {
+                  "type": "string",
+                  "serialized_name": "Path"
+                },
+                "group_name": {
+                  "type": "string",
+                  "serialized_name": "GroupName"
+                },
+                "group_id": {
+                  "type": "string",
+                  "serialized_name": "GroupId"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "create_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CreateDate"
+                }
+              }
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_groups_for_user": {
+      "name": "ListGroupsForUser",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "UserName"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListGroupsForUserResult"
+        },
+        "members": {
+          "groups": {
+            "type": "list",
+            "serialized_name": "Groups",
+            "members": {
+              "type": "structure",
+              "members": {
+                "path": {
+                  "type": "string",
+                  "serialized_name": "Path"
+                },
+                "group_name": {
+                  "type": "string",
+                  "serialized_name": "GroupName"
+                },
+                "group_id": {
+                  "type": "string",
+                  "serialized_name": "GroupId"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "create_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CreateDate"
+                }
+              }
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_instance_profiles": {
+      "name": "ListInstanceProfiles",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "path_prefix": {
+            "type": "string",
+            "serialized_name": "PathPrefix"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListInstanceProfilesResult"
+        },
+        "members": {
+          "instance_profiles": {
+            "type": "list",
+            "serialized_name": "InstanceProfiles",
+            "members": {
+              "type": "structure",
+              "members": {
+                "path": {
+                  "type": "string",
+                  "serialized_name": "Path"
+                },
+                "instance_profile_name": {
+                  "type": "string",
+                  "serialized_name": "InstanceProfileName"
+                },
+                "instance_profile_id": {
+                  "type": "string",
+                  "serialized_name": "InstanceProfileId"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "create_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CreateDate"
+                },
+                "roles": {
+                  "type": "list",
+                  "serialized_name": "Roles",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "path": {
+                        "type": "string",
+                        "serialized_name": "Path"
+                      },
+                      "role_name": {
+                        "type": "string",
+                        "serialized_name": "RoleName"
+                      },
+                      "role_id": {
+                        "type": "string",
+                        "serialized_name": "RoleId"
+                      },
+                      "arn": {
+                        "type": "string",
+                        "serialized_name": "Arn"
+                      },
+                      "create_date": {
+                        "type": "iso8601_timestamp",
+                        "serialized_name": "CreateDate"
+                      },
+                      "assume_role_policy_document": {
+                        "type": "string",
+                        "serialized_name": "AssumeRolePolicyDocument"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_instance_profiles_for_role": {
+      "name": "ListInstanceProfilesForRole",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "role_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RoleName"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListInstanceProfilesForRoleResult"
+        },
+        "members": {
+          "instance_profiles": {
+            "type": "list",
+            "serialized_name": "InstanceProfiles",
+            "members": {
+              "type": "structure",
+              "members": {
+                "path": {
+                  "type": "string",
+                  "serialized_name": "Path"
+                },
+                "instance_profile_name": {
+                  "type": "string",
+                  "serialized_name": "InstanceProfileName"
+                },
+                "instance_profile_id": {
+                  "type": "string",
+                  "serialized_name": "InstanceProfileId"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "create_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CreateDate"
+                },
+                "roles": {
+                  "type": "list",
+                  "serialized_name": "Roles",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "path": {
+                        "type": "string",
+                        "serialized_name": "Path"
+                      },
+                      "role_name": {
+                        "type": "string",
+                        "serialized_name": "RoleName"
+                      },
+                      "role_id": {
+                        "type": "string",
+                        "serialized_name": "RoleId"
+                      },
+                      "arn": {
+                        "type": "string",
+                        "serialized_name": "Arn"
+                      },
+                      "create_date": {
+                        "type": "iso8601_timestamp",
+                        "serialized_name": "CreateDate"
+                      },
+                      "assume_role_policy_document": {
+                        "type": "string",
+                        "serialized_name": "AssumeRolePolicyDocument"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_mfa_devices": {
+      "name": "ListMFADevices",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "user_name": {
+            "type": "string",
+            "serialized_name": "UserName"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListMFADevicesResult"
+        },
+        "members": {
+          "mfa_devices": {
+            "type": "list",
+            "serialized_name": "MFADevices",
+            "members": {
+              "type": "structure",
+              "members": {
+                "user_name": {
+                  "type": "string",
+                  "serialized_name": "UserName"
+                },
+                "serial_number": {
+                  "type": "string",
+                  "serialized_name": "SerialNumber"
+                },
+                "enable_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "EnableDate"
+                }
+              }
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_role_policies": {
+      "name": "ListRolePolicies",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "role_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RoleName"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListRolePoliciesResult"
+        },
+        "members": {
+          "policy_names": {
+            "type": "list",
+            "serialized_name": "PolicyNames",
+            "members": {
+              "type": "string"
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_roles": {
+      "name": "ListRoles",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "path_prefix": {
+            "type": "string",
+            "serialized_name": "PathPrefix"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListRolesResult"
+        },
+        "members": {
+          "roles": {
+            "type": "list",
+            "serialized_name": "Roles",
+            "members": {
+              "type": "structure",
+              "members": {
+                "path": {
+                  "type": "string",
+                  "serialized_name": "Path"
+                },
+                "role_name": {
+                  "type": "string",
+                  "serialized_name": "RoleName"
+                },
+                "role_id": {
+                  "type": "string",
+                  "serialized_name": "RoleId"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "create_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CreateDate"
+                },
+                "assume_role_policy_document": {
+                  "type": "string",
+                  "serialized_name": "AssumeRolePolicyDocument"
+                }
+              }
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
           }
         }
       }
@@ -2720,59 +2056,46 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListServerCertificatesResult"
+        },
         "members": {
-          "list_server_certificates_result": {
-            "type": "structure",
-            "serialized_name": "ListServerCertificatesResult",
+          "server_certificate_metadata_list": {
+            "type": "list",
+            "serialized_name": "ServerCertificateMetadataList",
             "members": {
-              "server_certificate_metadata_list": {
-                "type": "list",
-                "serialized_name": "ServerCertificateMetadataList",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "path": {
-                      "type": "string",
-                      "serialized_name": "Path"
-                    },
-                    "server_certificate_name": {
-                      "type": "string",
-                      "serialized_name": "ServerCertificateName"
-                    },
-                    "server_certificate_id": {
-                      "type": "string",
-                      "serialized_name": "ServerCertificateId"
-                    },
-                    "arn": {
-                      "type": "string",
-                      "serialized_name": "Arn"
-                    },
-                    "upload_date": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "UploadDate"
-                    }
-                  }
+              "type": "structure",
+              "members": {
+                "path": {
+                  "type": "string",
+                  "serialized_name": "Path"
+                },
+                "server_certificate_name": {
+                  "type": "string",
+                  "serialized_name": "ServerCertificateName"
+                },
+                "server_certificate_id": {
+                  "type": "string",
+                  "serialized_name": "ServerCertificateId"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "upload_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "UploadDate"
                 }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
           }
         }
       }
@@ -2800,63 +2123,50 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListSigningCertificatesResult"
+        },
         "members": {
-          "list_signing_certificates_result": {
-            "type": "structure",
-            "serialized_name": "ListSigningCertificatesResult",
+          "certificates": {
+            "type": "list",
+            "serialized_name": "Certificates",
             "members": {
-              "certificates": {
-                "type": "list",
-                "serialized_name": "Certificates",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "user_name": {
-                      "type": "string",
-                      "serialized_name": "UserName"
-                    },
-                    "certificate_id": {
-                      "type": "string",
-                      "serialized_name": "CertificateId"
-                    },
-                    "certificate_body": {
-                      "type": "string",
-                      "serialized_name": "CertificateBody"
-                    },
-                    "status": {
-                      "type": "string",
-                      "serialized_name": "Status",
-                      "enum": [
-                        "Active",
-                        "Inactive"
-                      ]
-                    },
-                    "upload_date": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "UploadDate"
-                    }
-                  }
+              "type": "structure",
+              "members": {
+                "user_name": {
+                  "type": "string",
+                  "serialized_name": "UserName"
+                },
+                "certificate_id": {
+                  "type": "string",
+                  "serialized_name": "CertificateId"
+                },
+                "certificate_body": {
+                  "type": "string",
+                  "serialized_name": "CertificateBody"
+                },
+                "status": {
+                  "type": "string",
+                  "serialized_name": "Status",
+                  "enum": [
+                    "Active",
+                    "Inactive"
+                  ]
+                },
+                "upload_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "UploadDate"
                 }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
           }
         }
       }
@@ -2885,37 +2195,24 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListUserPoliciesResult"
+        },
         "members": {
-          "list_user_policies_result": {
-            "type": "structure",
-            "serialized_name": "ListUserPoliciesResult",
+          "policy_names": {
+            "type": "list",
+            "serialized_name": "PolicyNames",
             "members": {
-              "policy_names": {
-                "type": "list",
-                "serialized_name": "PolicyNames",
-                "members": {
-                  "type": "string"
-                }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
-              }
+              "type": "string"
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
           }
         }
       }
@@ -2943,59 +2240,46 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListUsersResult"
+        },
         "members": {
-          "list_users_result": {
-            "type": "structure",
-            "serialized_name": "ListUsersResult",
+          "users": {
+            "type": "list",
+            "serialized_name": "Users",
             "members": {
-              "users": {
-                "type": "list",
-                "serialized_name": "Users",
-                "members": {
-                  "type": "structure",
-                  "members": {
-                    "path": {
-                      "type": "string",
-                      "serialized_name": "Path"
-                    },
-                    "user_name": {
-                      "type": "string",
-                      "serialized_name": "UserName"
-                    },
-                    "user_id": {
-                      "type": "string",
-                      "serialized_name": "UserId"
-                    },
-                    "arn": {
-                      "type": "string",
-                      "serialized_name": "Arn"
-                    },
-                    "create_date": {
-                      "type": "iso8601_timestamp",
-                      "serialized_name": "CreateDate"
-                    }
-                  }
+              "type": "structure",
+              "members": {
+                "path": {
+                  "type": "string",
+                  "serialized_name": "Path"
+                },
+                "user_name": {
+                  "type": "string",
+                  "serialized_name": "UserName"
+                },
+                "user_id": {
+                  "type": "string",
+                  "serialized_name": "UserId"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "create_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CreateDate"
                 }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
           }
         }
       }
@@ -3028,81 +2312,68 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "ListVirtualMFADevicesResult"
+        },
         "members": {
-          "list_virtual_mfa_devices_result": {
-            "type": "structure",
-            "serialized_name": "ListVirtualMFADevicesResult",
+          "virtual_mfa_devices": {
+            "type": "list",
+            "serialized_name": "VirtualMFADevices",
             "members": {
-              "virtual_mfa_devices": {
-                "type": "list",
-                "serialized_name": "VirtualMFADevices",
-                "members": {
+              "type": "structure",
+              "members": {
+                "serial_number": {
+                  "type": "string",
+                  "serialized_name": "SerialNumber"
+                },
+                "base_32_string_seed": {
+                  "type": "blob",
+                  "serialized_name": "Base32StringSeed"
+                },
+                "qr_code_png": {
+                  "type": "blob",
+                  "serialized_name": "QRCodePNG"
+                },
+                "user": {
                   "type": "structure",
+                  "serialized_name": "User",
                   "members": {
-                    "serial_number": {
+                    "path": {
                       "type": "string",
-                      "serialized_name": "SerialNumber"
+                      "serialized_name": "Path"
                     },
-                    "base_32_string_seed": {
-                      "type": "blob",
-                      "serialized_name": "Base32StringSeed"
+                    "user_name": {
+                      "type": "string",
+                      "serialized_name": "UserName"
                     },
-                    "qr_code_png": {
-                      "type": "blob",
-                      "serialized_name": "QRCodePNG"
+                    "user_id": {
+                      "type": "string",
+                      "serialized_name": "UserId"
                     },
-                    "user": {
-                      "type": "structure",
-                      "serialized_name": "User",
-                      "members": {
-                        "path": {
-                          "type": "string",
-                          "serialized_name": "Path"
-                        },
-                        "user_name": {
-                          "type": "string",
-                          "serialized_name": "UserName"
-                        },
-                        "user_id": {
-                          "type": "string",
-                          "serialized_name": "UserId"
-                        },
-                        "arn": {
-                          "type": "string",
-                          "serialized_name": "Arn"
-                        },
-                        "create_date": {
-                          "type": "iso8601_timestamp",
-                          "serialized_name": "CreateDate"
-                        }
-                      }
+                    "arn": {
+                      "type": "string",
+                      "serialized_name": "Arn"
                     },
-                    "enable_date": {
+                    "create_date": {
                       "type": "iso8601_timestamp",
-                      "serialized_name": "EnableDate"
+                      "serialized_name": "CreateDate"
                     }
                   }
+                },
+                "enable_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "EnableDate"
                 }
-              },
-              "is_truncated": {
-                "type": "boolean",
-                "serialized_name": "IsTruncated"
-              },
-              "marker": {
-                "type": "string",
-                "serialized_name": "Marker"
               }
             }
           },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
           }
         }
       }
@@ -3130,21 +2401,6 @@
             "serialized_name": "PolicyDocument"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "put_role_policy": {
@@ -3168,21 +2424,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "PolicyDocument"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -3210,21 +2451,6 @@
             "serialized_name": "PolicyDocument"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "remove_role_from_instance_profile": {
@@ -3245,21 +2471,6 @@
             "serialized_name": "RoleName"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "remove_user_from_group": {
@@ -3278,21 +2489,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "UserName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -3325,21 +2521,6 @@
             "serialized_name": "AuthenticationCode2"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "update_access_key": {
@@ -3366,21 +2547,6 @@
               "Active",
               "Inactive"
             ]
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -3417,21 +2583,6 @@
             "serialized_name": "AllowUsersToChangePassword"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "update_assume_role_policy": {
@@ -3450,21 +2601,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "PolicyDocument"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -3490,21 +2626,6 @@
             "serialized_name": "NewGroupName"
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "update_login_profile": {
@@ -3523,21 +2644,6 @@
             "type": "string",
             "required": true,
             "serialized_name": "Password"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -3561,21 +2667,6 @@
           "new_server_certificate_name": {
             "type": "string",
             "serialized_name": "NewServerCertificateName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -3606,21 +2697,6 @@
             ]
           }
         }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
-          }
-        }
       }
     },
     "update_user": {
@@ -3642,21 +2718,6 @@
           "new_user_name": {
             "type": "string",
             "serialized_name": "NewUserName"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
-                "type": "string",
-                "serialized_name": "RequestId"
-              }
-            }
           }
         }
       }
@@ -3695,46 +2756,33 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "UploadServerCertificateResult"
+        },
         "members": {
-          "upload_server_certificate_result": {
+          "server_certificate_metadata": {
             "type": "structure",
-            "serialized_name": "UploadServerCertificateResult",
+            "serialized_name": "ServerCertificateMetadata",
             "members": {
-              "server_certificate_metadata": {
-                "type": "structure",
-                "serialized_name": "ServerCertificateMetadata",
-                "members": {
-                  "path": {
-                    "type": "string",
-                    "serialized_name": "Path"
-                  },
-                  "server_certificate_name": {
-                    "type": "string",
-                    "serialized_name": "ServerCertificateName"
-                  },
-                  "server_certificate_id": {
-                    "type": "string",
-                    "serialized_name": "ServerCertificateId"
-                  },
-                  "arn": {
-                    "type": "string",
-                    "serialized_name": "Arn"
-                  },
-                  "upload_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "UploadDate"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
+              "path": {
                 "type": "string",
-                "serialized_name": "RequestId"
+                "serialized_name": "Path"
+              },
+              "server_certificate_name": {
+                "type": "string",
+                "serialized_name": "ServerCertificateName"
+              },
+              "server_certificate_id": {
+                "type": "string",
+                "serialized_name": "ServerCertificateId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
+              "upload_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "UploadDate"
               }
             }
           }
@@ -3761,50 +2809,37 @@
       },
       "output": {
         "type": "output",
+        "metadata": {
+          "wrapper": "UploadSigningCertificateResult"
+        },
         "members": {
-          "upload_signing_certificate_result": {
+          "certificate": {
             "type": "structure",
-            "serialized_name": "UploadSigningCertificateResult",
+            "serialized_name": "Certificate",
             "members": {
-              "certificate": {
-                "type": "structure",
-                "serialized_name": "Certificate",
-                "members": {
-                  "user_name": {
-                    "type": "string",
-                    "serialized_name": "UserName"
-                  },
-                  "certificate_id": {
-                    "type": "string",
-                    "serialized_name": "CertificateId"
-                  },
-                  "certificate_body": {
-                    "type": "string",
-                    "serialized_name": "CertificateBody"
-                  },
-                  "status": {
-                    "type": "string",
-                    "serialized_name": "Status",
-                    "enum": [
-                      "Active",
-                      "Inactive"
-                    ]
-                  },
-                  "upload_date": {
-                    "type": "iso8601_timestamp",
-                    "serialized_name": "UploadDate"
-                  }
-                }
-              }
-            }
-          },
-          "response_metadata": {
-            "type": "structure",
-            "serialized_name": "ResponseMetadata",
-            "members": {
-              "request_id": {
+              "user_name": {
                 "type": "string",
-                "serialized_name": "RequestId"
+                "serialized_name": "UserName"
+              },
+              "certificate_id": {
+                "type": "string",
+                "serialized_name": "CertificateId"
+              },
+              "certificate_body": {
+                "type": "string",
+                "serialized_name": "CertificateBody"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status",
+                "enum": [
+                  "Active",
+                  "Inactive"
+                ]
+              },
+              "upload_date": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "UploadDate"
               }
             }
           }
