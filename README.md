@@ -12,7 +12,7 @@ installed via Bundler with the following Gemfile contents:
 gem 'aws-sdk-core', github: 'aws/aws-sdk-core-ruby'
 ```
 
-Note: the AWS SDK for Ruby requires Ruby 1.9.3+.
+Note: AWS SDK Core requires Ruby 1.9.3+.
 
 ## Usage
 
@@ -40,5 +40,5 @@ Aws> Aws.s3.list_buckets.map(&:name)
 
 ## License
 
-The AWS SDK for Ruby Core is distributed under the
+AWS SDK Core is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
