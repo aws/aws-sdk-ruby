@@ -10,22 +10,28 @@ module Aws
 
     def call(context)
       @handler.call(context).on_success do |response|
-        output = context.operation.output
-        body = context.http_response.body_contents
-        if output.payload
-          response.data = Structure.new(output.members.keys)
-          unless output.raw_payload?
-            response.data[output.payload] = parse(output.payload_member, body)
-          end
-        else
-          response.data = parse(output, body)
-        end
+        rules = context.operation.output
         response.error = nil
+        response.data = case
+          when rules.raw_payload? then empty_struct(rules)
+          when rules.payload then parse_payload(rules, context)
+          else parse(rules, context)
+        end
       end
     end
 
-    def parse(rules, body)
-      @parser.parse(rules, body)
+    def empty_struct(rules)
+      Structure.new(rules.members.keys)
+    end
+
+    def parse_payload(rules, context)
+      data = empty_struct(rules)
+      data[rules.payload] = parse(rules.payload_member, context)
+      data
+    end
+
+    def parse(rules, context)
+      @parser.parse(rules, context.http_response.body_contents)
     end
 
   end
