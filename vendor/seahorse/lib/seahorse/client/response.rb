@@ -72,10 +72,32 @@ module Seahorse
         on_status(0..0, &block)
       end
 
+      # @api private
+      def respond_to?(*args)
+        @data.respond_to?(args.first, false) || super
+      end
+
+      # @api private
+      def inspect
+        if @data
+          @data.respond_to?(:pretty_inspect) ? @data.pretty_inspect : super
+        else
+          super
+        end
+      end
+
       private
 
       def status_code
         @http_response.status_code
+      end
+
+      def method_missing(*args, &block)
+        if @data.respond_to?(args.first, false)
+          @data.send(*args, &block)
+        else
+          super
+        end
       end
 
     end

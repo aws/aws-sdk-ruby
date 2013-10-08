@@ -1,8 +1,48 @@
 require 'spec_helper'
+require 'pp'
 
 module Seahorse
   module Client
     describe Response do
+
+      describe '#inspect' do
+
+        it 'returns the inspect string for the data' do
+          resp = Response.new
+          resp.data = double('data')
+          expect(resp.inspect).to eq(resp.data.pretty_inspect)
+        end
+
+        it 'returns the default inspect if data is not set' do
+          expect(Response.new.inspect).to include('#<Seahorse::Client::Response:')
+        end
+
+      end
+
+      describe '#data' do
+
+        it 'can be set' do
+          data = double('data')
+          resp = Response.new
+          resp.data = data
+          expect(resp.data).to be(data)
+        end
+
+        it 'can be accessed via method_missing on the response' do
+          data = double('data', foo: 'bar')
+          resp = Response.new
+          resp.data = data
+          expect(resp.foo).to be(data.foo)
+        end
+
+        it 'correctly answers respond_to?' do
+          data = double('data', foo: 'bar')
+          resp = Response.new
+          resp.data = data
+          expect(resp.respond_to?(:foo)).to be(true)
+        end
+
+      end
 
       describe '#context' do
 
