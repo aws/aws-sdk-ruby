@@ -49,7 +49,6 @@ module Seahorse
 
     module Xml
       autoload :Builder, 'seahorse/client/xml/builder'
-      autoload :Parser, 'seahorse/client/xml/parser'
     end
 
     # @param (see Base.define)
