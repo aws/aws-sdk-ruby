@@ -1,5 +1,3 @@
-require 'uri'
-
 module Aws
   module Plugins
 
@@ -14,10 +12,10 @@ module Aws
         def call(context)
           response = @handler.call(context)
           if response.http_response.status_code == 307
-            uri = URI.parse(response.http_response.headers['location'])
-            endpoint = Seahorse::Client::Http::Endpoint.new(uri)
-            context.http_response.body.truncate(0)
+            endpoint = response.http_response.headers['location']
+            endpoint = Seahorse::Client::Http::Endpoint.new(endpoint)
             context.http_request.endpoint = endpoint
+            context.http_response.body.truncate(0)
             @handler.call(context)
           else
             response
