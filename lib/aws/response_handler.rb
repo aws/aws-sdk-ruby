@@ -10,14 +10,19 @@ module Aws
 
     def call(context)
       @handler.call(context).on_success do |response|
-        rules = context.operation.output
+        output = context.operation.output
         response.error = nil
-        response.data = Structure.new(rules.members.keys)
-        unless rules.raw_payload?
-          @parser.parse(
-            rules.payload_member,
-            context.http_response.body_contents,
-            response.data)
+        response.data = Structure.new(output.members.keys)
+        unless output.raw_payload?
+          if output.payload
+            rules = output.payload_member
+            target = Structure.new(rules.members.keys)
+            response.data[output.payload] = target
+          else
+            rules = output
+            target = response.data
+          end
+          @parser.parse(rules, context.http_response.body_contents, target)
         end
       end
     end

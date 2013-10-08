@@ -1,0 +1,193 @@
+# CloudFront uses a target payload.  This test ensures the response elements
+# are correctly deserialized
+operation: list_distributions
+response:
+  status_code: 200
+  body: |
+    <?xml version="1.0"?>
+    <DistributionList xmlns="http://cloudfront.amazonaws.com/doc/2013-05-12/">
+      <Marker />
+      <MaxItems>100</MaxItems>
+      <IsTruncated>false</IsTruncated>
+      <Quantity>1</Quantity>
+      <Items>
+        <DistributionSummary>
+          <Id>EDFDVBD6EXAMPLE</Id>
+          <Status>Deployed</Status>
+          <LastModifiedTime>2012-05-19T19:37:58Z</LastModifiedTime>
+          <DomainName>d111111abcdef8.cloudfront.net</DomainName>
+          <Aliases>
+            <Quantity>1</Quantity>
+            <Items>
+              <CNAME>www.example.com</CNAME>
+            </Items>
+          </Aliases>
+          <Origins>
+            <Quantity>2</Quantity>
+            <Items>
+              <Origin>
+                <Id>example-Amazon S3-origin</Id>
+                <DomainName>myawsbucket.s3.amazonaws.com</DomainName>
+                <S3OriginConfig>
+                  <OriginAccessIdentity>origin-access-identity/cloudfront/E74FTE3AEXAMPLE</OriginAccessIdentity>
+                </S3OriginConfig>
+              </Origin>
+              <Origin>
+                <Id>example-custom-origin</Id>
+                <DomainName>example.com</DomainName>
+                <CustomOriginConfig>
+                  <HTTPPort>80</HTTPPort>
+                  <HTTPSPort>443</HTTPSPort>
+                  <OriginProtocolPolicy>match-viewer</OriginProtocolPolicy>
+                </CustomOriginConfig>
+              </Origin>
+            </Items>
+          </Origins>
+          <DefaultCacheBehavior>
+            <TargetOriginId>example-Amazon S3-origin</TargetOriginId>
+            <ForwardedValues>
+              <QueryString>true</QueryString>
+              <Cookies>
+                <Forward>whitelist</Forward>
+                <WhitelistedNames>
+                  <Quantity>1</Quantity>
+                  <Items>
+                    <Name>example-cookie</Name>
+                  </Items>
+                </WhitelistedNames>
+              </Cookies>
+            </ForwardedValues>
+            <TrustedSigners>
+              <Enabled>true</Enabled>
+              <Quantity>3</Quantity>
+              <Items>
+                <AwsAccountNumber>self</AwsAccountNumber>
+                <AwsAccountNumber>111122223333</AwsAccountNumber>
+                <AwsAccountNumber>444455556666</AwsAccountNumber>
+              </Items>
+            </TrustedSigners>
+            <ViewerProtocolPolicy>https-only</ViewerProtocolPolicy>
+            <MinTTL>0</MinTTL>
+          </DefaultCacheBehavior>
+          <CacheBehaviors>
+            <Quantity>1</Quantity>
+            <Items>
+              <CacheBehavior>
+                <PathPattern>*.jpg</PathPattern>
+                <TargetOriginId>example-custom-origin</TargetOriginId>
+                <ForwardedValues>
+                  <QueryString>false</QueryString>
+                  <Cookies>
+                    <Forward>all</Forward>
+                  </Cookies>
+                </ForwardedValues>
+                <TrustedSigners>
+                  <Enabled>true</Enabled>
+                  <Quantity>2</Quantity>
+                  <Items>
+                    <AwsAccountNumber>self</AwsAccountNumber>
+                    <AwsAccountNumber>111122223333</AwsAccountNumber>
+                  </Items>
+                </TrustedSigners>
+                <ViewerProtocolPolicy>allow-all</ViewerProtocolPolicy>
+                <MinTTL>86400</MinTTL>
+              </CacheBehavior>
+            </Items>
+          </CacheBehaviors>
+          <CustomErrorResponses>
+            <Quantity>1</Quantity>
+            <Items>
+              <CustomErrorResponse>
+                <ErrorCode>404</ErrorCode>
+                <ResponsePagePath>/error-pages/custom-404.html</ResponsePagePath>
+                <ResponseCode>200</ResponseCode>
+                <ErrorCachingMinTTL>30</ErrorCachingMinTTL>
+              </CustomErrorResponse>
+            </Items>
+          </CustomErrorResponses>
+          <Comment>example comment</Comment>
+          <Logging>
+            <Enabled>true</Enabled>
+            <IncludeCookies>true</IncludeCookies>
+            <Bucket>myawslogbucket.s3.amazonaws.com</Bucket>
+            <Prefix>example.com.</Prefix>
+          </Logging>
+          <ViewerCertificate>
+            <IAMCertificateId>AS1A2M3P4L5E67SIIXR3J</IAMCertificateId>
+          </ViewerCertificate>
+          <PriceClass>PriceClass_All</PriceClass>
+          <Enabled>true</Enabled>
+        </DistributionSummary>
+      </Items>
+    </DistributionList>
+data:
+  :distribution_list:
+    :max_items: 100
+    :is_truncated: false
+    :quantity: 1
+    :items:
+      - :id: EDFDVBD6EXAMPLE
+        :status: Deployed
+        :last_modified_time: 2012-05-19 19:37:58 UTC
+        :domain_name: d111111abcdef8.cloudfront.net
+        :aliases:
+          :quantity: 1
+          :items:
+          - www.example.com
+        :origins:
+          :quantity: 2
+          :items:
+          - :id: example-Amazon S3-origin
+            :domain_name: myawsbucket.s3.amazonaws.com
+            :s3_origin_config:
+              :origin_access_identity: origin-access-identity/cloudfront/E74FTE3AEXAMPLE
+            :custom_origin_config: {}
+          - :id: example-custom-origin
+            :domain_name: example.com
+            :s3_origin_config: {}
+            :custom_origin_config:
+              :http_port: 80
+              :https_port: 443
+              :origin_protocol_policy: match-viewer
+        :default_cache_behavior:
+          :target_origin_id: example-Amazon S3-origin
+          :forwarded_values:
+            :query_string: true
+            :cookies:
+              :forward: whitelist
+              :whitelisted_names:
+                :quantity: 1
+                :items:
+                - example-cookie
+          :trusted_signers:
+            :enabled: true
+            :quantity: 3
+            :items:
+            - self
+            - '111122223333'
+            - '444455556666'
+          :viewer_protocol_policy: https-only
+          :min_ttl: 0
+        :cache_behaviors:
+          :quantity: 1
+          :items:
+          - :path_pattern: '*.jpg'
+            :target_origin_id: example-custom-origin
+            :forwarded_values:
+              :query_string: false
+              :cookies:
+                :forward: all
+                :whitelisted_names: {}
+            :trusted_signers:
+              :enabled: true
+              :quantity: 2
+              :items:
+              - self
+              - '111122223333'
+            :viewer_protocol_policy: allow-all
+            :min_ttl: 86400
+        :comment: example comment
+        :price_class: PriceClass_All
+        :enabled: true
+        :viewer_certificate:
+          :iam_certificate_id: AS1A2M3P4L5E67SIIXR3J

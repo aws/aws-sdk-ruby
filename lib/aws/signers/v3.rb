@@ -15,7 +15,7 @@ module Aws
       def sign(http_req)
 
         date = Time.now.httpdate
-        headers['Date'] = date
+        http_req.headers['Date'] = date
 
         if @credentials.session_token
           http_req.headers['X-Amz-Security-Token'] = @credentials.session_token
@@ -25,7 +25,7 @@ module Aws
         parts << "AWS3-HTTPS AWSAccessKeyId=#{@credentials.access_key_id}"
         parts << "Algorithm=HmacSHA256"
         parts << "Signature=#{signature(date)}"
-        headers['X-Amzn-Authorization'] = parts.join(',')
+        http_req.headers['X-Amzn-Authorization'] = parts.join(',')
       end
 
       private
