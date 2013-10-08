@@ -27,16 +27,20 @@ module Aws
       #
       # ## Global Version Lock
       #
-      # If you are using multiple services in your application, you can lock
-      # them to a specific set of API version by setting a global API version.
+      # It is possible to provide a single 'YYYY-MM-DD' date to lock the
+      # API version for every service.  This is useful to ensure that
+      # future API updates do not break existing usage.
       #
-      #     Aws.config[:api_version] = '2012-10-01'
+      # When using the single lock, the API version that was current
+      # at the given date will be used.
+      #
+      # For example, Aws::DynamoDB has two API versions, 2011-12-05 and
+      # 2012-10-01.  If the lock date is in between these two dates, the
+      # older will be used.
+      #
+      #     Aws.config[:api_version] = '2012-01-01'
       #     Aws::DynamoDB.new
-      #     #=> #<Aws::DynamoDB::V20120810>
-      #
-      #
-      # This causes each service to choose the closer API version that does
-      # not exceed the given `YYYY-MM-DD` date.
+      #     #=> #<Aws::DynamoDB::V20111205>
       #
       # @return [Seahorse::Client::Base] Returns a versioned client.
       def new(options = {})
