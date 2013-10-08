@@ -75,20 +75,20 @@ module Aws
       end
 
       def canonical_request(request)
-        parts = []
-        parts << request.http_method
-        parts << request.path.split('?', 2)[0] || ''
-        parts << request.path.split('?', 2)[1] || ''
-        parts << canonical_headers(request) + "\n"
-        parts << signed_headers(request)
-        parts << request.headers['X-Amz-Content-Sha256']
-        parts.join("\n")
+        [
+          request.http_method,
+          request.pathname,
+          request.querystring,
+          canonical_headers(request) + "\n",
+          signed_headers(request),
+          request.headers['X-Amz-Content-Sha256']
+        ].join("\n")
       end
 
       def signed_headers(request)
-        to_sign = request.headers.keys.map(&:to_s).map(&:downcase)
-        to_sign.delete('authorization')
-        to_sign.sort.join(";")
+        headers = request.headers.keys
+        headers.delete('authorization')
+        headers.sort.join(';')
       end
 
       def canonical_headers(request)

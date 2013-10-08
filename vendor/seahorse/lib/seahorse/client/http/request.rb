@@ -44,12 +44,12 @@ module Seahorse
 
         # @return [String]
         def pathname
-          path.split('?')[0]
+          path.split('?', 2)[0]
         end
 
-        # @return [String, nil]
+        # @return [String]
         def querystring
-          path.split('?')[1]
+          path.split('?', 2)[1] || ''
         end
 
         # @param [#read, #size, #rewind] io

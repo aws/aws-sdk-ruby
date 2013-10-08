@@ -69,9 +69,9 @@ module Seahorse
             expect(req.querystring).to eq('query')
           end
 
-          it 'returns nil when not present' do
+          it 'returns the empty string when not present' do
             req = request(path: '/path')
-            expect(req.querystring).to be(nil)
+            expect(req.querystring).to eq('')
           end
 
         end
