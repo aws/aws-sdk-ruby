@@ -12,9 +12,7 @@ installed via Bundler with the following Gemfile contents:
 gem 'aws-sdk-core', github: 'aws/aws-sdk-core-ruby'
 ```
 
-And `bundle install`.
-
-Note: the AWS SDK for Ruby requires Ruby 1.9 or greater.
+Note: the AWS SDK for Ruby requires Ruby 1.9.3+.
 
 ## Usage
 
@@ -22,21 +20,22 @@ Note: the AWS SDK for Ruby requires Ruby 1.9 or greater.
 require 'aws-sdk-core'
 
 response = Aws.ec2.describe_instances
-p response.data.reservations.first.instances.first
+p response.reservations.first.instances.first
 ```
 
-You can also use `bin/aws-rb` to evaluate code through a REPL:
+You can also use `bin/aws.rb` to evaluate code through a REPL:
 
 ```ruby
-$ bundle exec bin/aws-rb
-Aws> client = Aws.ec2
-=> #<Aws::EC2::Client::V20130615>
-Aws> client.describe_instances.data.reservations.first.instances.first
+$ bundle exec bin/aws.rb
+Aws> Aws.ec2.describe_instances.reservations.first.instances.first
 => #<struct
  instance_id="i-1234567",
  image_id="ami-7654321",
  state=#<struct  code=16, name="running">,
  ...>
+
+Aws> Aws.s3.list_buckets.map(&:name)
+=> ["bucket-1", "bucket-2", ...]
 ```
 
 ## License
