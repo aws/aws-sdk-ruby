@@ -47,16 +47,16 @@ module Aws
           !!(THROTTLING_ERRORS.include?(@name) || @name.match(/throttl/i))
         end
 
-        def checksum_error?
+        def checksum?
           CHECKSUM_ERRORS.include?(@name) || @error.is_a?(Errors::ChecksumError)
         end
 
-        def server_error?
-          (500..599).include?(@http_status_code)
+        def networking?
+          NETWORKING_ERRORS.include?(@name) || @http_status_code == 0
         end
 
-        def networking_error?
-          NETWORKING_ERRORS.include?(@name) || @http_status_code == 0
+        def server?
+          (500..599).include?(@http_status_code)
         end
 
       end
@@ -77,6 +77,62 @@ module Aws
         def retry_if_possible(response)
           error = ErrorInspector.new(response.error)
           context = response.context
+          if should_retry?(context, error)
+            retry_request(context)
+          else
+            response
+          end
+        end
+
+        def retry_request(context, error)
+          refresh_credentials!(context) if
+            credentials_expired?(context, error)
+          context.metadata[:retry_count] += 1
+          context.http_request.body.rewind
+          context.http_response.body.truncate(0)
+          call(context)
+        end
+
+        def should_retry?(context, error)
+          retryable?(context, error) and
+          retries_left?(context) and
+          response_truncatable?(context)
+        end
+
+        def retries_left?(context)
+          retry_count(context) < max_retries(context)
+        end
+
+        def retryable?(context, error)
+          credentials_expired?(context, error) or
+          error.throttling_error? or
+          error.checksum? or
+          error.networking? or
+          error.server?
+        end
+
+        def credentials_expired?(context, error)
+          error.expired_credentials? and credentials_refresh?(context)
+        end
+
+        def credentials_refresh?(context)
+          context.config.credentials.respond_to?(:refresh!)
+        end
+
+        def refresh_credentials!(context)
+          context.config.credentials.refresh!
+        end
+
+        def retry_count(context)
+          context.metadata[:retry_count] ||= 0
+        end
+
+        def max_retries(context)
+          context.config.max_retries
+        end
+
+        def response_truncatable?(context)
+          context.http_response.body.respond_to?(:truncate)
         end
 
       end

@@ -95,49 +95,54 @@ module Aws
 
         end
 
-        describe '#checksum_error?' do
+        describe '#checksum?' do
 
           it 'returns true if the error extends Errors::ChecksumError' do
             error = Errors::ChecksumError.new
-            expect(inspector(error).checksum_error?).to be(true)
+            expect(inspector(error).checksum?).to be(true)
+          end
+
+          it 'returns true if the error is a crc32 error' do
+            error = DynamoDB::Errors::CRC32CheckFailed.new
+            expect(inspector(error).checksum?).to be(true)
           end
 
           it 'returns false if the error does not exend ChecksumError' do
             error = double('error')
-            expect(inspector(error).checksum_error?).to be(false)
+            expect(inspector(error).checksum?).to be(false)
           end
 
         end
 
-        describe '#server_error?' do
+        describe '#server?' do
 
           it 'returns true if the error is a 500 level error' do
             error = EC2::Errors::RandomError.new
-            expect(inspector(error, 500).server_error?).to be(true)
+            expect(inspector(error, 500).server?).to be(true)
           end
 
           it 'returns false if the error is not a 500 level error' do
             error = EC2::Errors::RandomError.new
-            expect(inspector(error, 404).server_error?).to be(false)
+            expect(inspector(error, 404).server?).to be(false)
           end
 
         end
 
-        describe '#networking_error?' do
+        describe '#networking?' do
 
           it 'returns true if the error code is RequestTimeout' do
             error = S3::Errors::RequestTimeout.new
-            expect(inspector(error).networking_error?).to be(true)
+            expect(inspector(error).networking?).to be(true)
           end
 
           it 'returns true if the http status code is 0' do
             error = double('error')
-            expect(inspector(error, 0).networking_error?).to be(true)
+            expect(inspector(error, 0).networking?).to be(true)
           end
 
           it 'returns false if the http status code is not 0' do
             error = double('error')
-            expect(inspector(error, 307).networking_error?).to be(false)
+            expect(inspector(error, 307).networking?).to be(false)
           end
 
         end
