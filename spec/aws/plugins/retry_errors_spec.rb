@@ -17,16 +17,94 @@ module Aws
           RetryErrors::ErrorInspector.new(error, http_status_code)
         end
 
-        describe '#client_error?' do
+        describe '#expired_credentials?' do
 
-          it 'returns true if the error is a 400 level error' do
-            error = Aws::EC2::Errors::RandomError.new
-            expect(inspector(error, 400).client_error?).to be(true)
+          it 'returns true if the error code is InvalidClientTokenId' do
+            error = IAM::Errors::InvalidClientTokenId.new
+            expect(inspector(error).expired_credentials?).to be(true)
           end
 
-          it 'returns false if the error is not a 500 level error' do
-            error = Aws::EC2::Errors::RandomError.new
-            expect(inspector(error, 500).client_error?).to be(false)
+          it 'returns true if the error code is UnrecognizedClientException' do
+            error = SWF::Errors::UnrecognizedClientException.new
+            expect(inspector(error).expired_credentials?).to be(true)
+          end
+
+          it 'returns true if the error code is InvalidAccessKeyId' do
+            error = S3::Errors::InvalidAccessKeyId.new
+            expect(inspector(error).expired_credentials?).to be(true)
+          end
+
+          it 'returns true if the error code is AuthFailure' do
+            error = EC2::Errors::AuthFailure.new
+            expect(inspector(error).expired_credentials?).to be(true)
+          end
+
+          it 'returns true if the error code matches /expired/' do
+            error = Aws::IAM::Errors::SomethingExpiredError.new
+            expect(inspector(error).expired_credentials?).to be(true)
+          end
+
+          it 'returns false for other errors' do
+            error = Aws::IAM::Errors::SomeRandomError.new
+            expect(inspector(error).expired_credentials?).to be(false)
+          end
+
+        end
+
+        describe '#throttling_error?' do
+
+          it 'returns true for Throttling' do
+            error = IAM::Errors::Throttling.new
+            expect(inspector(error).throttling_error?).to be(true)
+          end
+
+          it 'returns true for ThrottlingException' do
+            error = SWF::Errors::ThrottlingException.new
+            expect(inspector(error).throttling_error?).to be(true)
+          end
+
+          it 'returns true for RequestThrottled' do
+            error = SQS::Errors::RequestThrottled.new
+            expect(inspector(error).throttling_error?).to be(true)
+          end
+
+          it 'returns true for ProvisionedThroughputExceededException' do
+            error = DynamoDB::Errors::ProvisionedThroughputExceededException.new
+            expect(inspector(error).throttling_error?).to be(true)
+          end
+
+          it 'returns true for RequestLimitExceeded' do
+            error = EC2::Errors::RequestLimitExceeded.new
+            expect(inspector(error).throttling_error?).to be(true)
+          end
+
+          it 'returns true for BandwidthLimitExceeded' do
+            error = CloudSearch::Errors::BandwidthLimitExceeded.new
+            expect(inspector(error).throttling_error?).to be(true)
+          end
+
+          it 'returns true for error codes that match /throttl/' do
+            error = IAM::Errors::Throttled.new
+            expect(inspector(error).throttling_error?).to be(true)
+          end
+
+          it 'returns false for other errors' do
+            error = IAM::Errors::SomeRandomError.new
+            expect(inspector(error).throttling_error?).to be(false)
+          end
+
+        end
+
+        describe '#checksum_error?' do
+
+          it 'returns true if the error extends Aws::Errors::ChecksumError' do
+            error = Aws::Errors::ChecksumError.new
+            expect(inspector(error).checksum_error?).to be(true)
+          end
+
+          it 'returns false if the error does not exend ChecksumError' do
+            error = double('error')
+            expect(inspector(error).checksum_error?).to be(false)
           end
 
         end
@@ -58,58 +136,21 @@ module Aws
           end
 
         end
+      end
 
-        describe '#expired_credentials?' do
+      describe 'Handler' do
 
-          # aws query
-          it 'returns true if the error code is InvalidClientTokenId' do
-            error = Aws::IAM::Errors::InvalidClientTokenId.new
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          # json rpc
-          it 'returns true if the error code is UnrecognizedClientException' do
-            error = Aws::IAM::Errors::UnrecognizedClientException.new
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          # s3
-          it 'returns true if the error code is InvalidAccessKeyId' do
-            error = Aws::IAM::Errors::InvalidAccessKeyId.new
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          # ec2
-          it 'returns true if the error code is AuthFailure' do
-            error = Aws::IAM::Errors::AuthFailure.new
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns true if the error code matches /expired/' do
-            error = Aws::IAM::Errors::SomethingExpiredError.new
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns false for other errors' do
-            error = Aws::IAM::Errors::SomeRandomError.new
-            expect(inspector(error).expired_credentials?).to be(false)
-          end
-
+        def handle(&block)
+          context = Seahorse::Client::RequestContext.new
+          handler = RetryErrors::Handler.new(block)
+          handler.call(context)
         end
 
-        describe '#checksum_error?' do
-
-          it 'returns true if the error extends Aws::Errors::ChecksumError' do
-            error = Aws::Errors::ChecksumError.new
-            expect(inspector(error).checksum_error?).to be(true)
-          end
-
-          it 'returns false if the error does not exend ChecksumError' do
-            error = double('error')
-            expect(inspector(error).checksum_error?).to be(false)
-          end
-
+        it 'returns the response directly if the response has no error' do
+          resp = double('response', error: nil)
+          expect(handle { |context| resp }).to be(resp)
         end
+
       end
     end
   end
