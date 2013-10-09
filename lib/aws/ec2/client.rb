@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::QueryClient
 
-      API_VERSION = '2013-08-15'
+      API_VERSION = '2013-10-01'
 
       # @api private
       CACHEABLE_REQUESTS = Set[
@@ -61,9 +61,11 @@ module AWS
     end
 
     class Client::V20130815 < Client
-
       define_client_methods('2013-08-15')
+    end
 
+    class Client::V20131001 < Client
+      define_client_methods('2013-10-01')
     end
 
   end
