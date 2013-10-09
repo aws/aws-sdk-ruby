@@ -1,4 +1,16 @@
+2013-10-09 Trevor Rowe <trevorrowe@gmail.com>
+
+  * doc-src/EC2/V20131001.yml, lib/aws/api_config/EC2-2013-10-01.yml,
+  lib/aws/ec2/client.rb: Added support for Reserved Instance instance type
+  modifications in Amazon EC2 (API version 2013-10-01).
+
+  * doc-src/OpsWorks/V20130218.yml,
+  lib/aws/api_config/OpsWorks-2013-02-18.yml: Added support for new resource
+  management features in AWS OpsWorks.
+
 2013-10-01 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.20.0
 
   * doc-src/CloudFront/V20130826.yml,
   lib/aws/api_config/CloudFront-2013-08-26.yml, lib/aws/cloud_front/client.rb:
