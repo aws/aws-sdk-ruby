@@ -1,7 +1,6 @@
-# AWS SDK for Ruby Core [![Build Status](https://travis-ci.org/aws/aws-sdk-core-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-core-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-core-ruby.png)](https://codeclimate.com/github/aws/aws-sdk-core-ruby)
+# AWS SDK Core [![Build Status](https://travis-ci.org/aws/aws-sdk-core-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-core-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-core-ruby.png)](https://codeclimate.com/github/aws/aws-sdk-core-ruby)
 
-Version 2.0 of the official AWS SDK for Ruby. For the current supported version
-of the official SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
+Version 2.0 of the official AWS SDK for Ruby. For the version 1.0 of the Ruby SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
 
 ## Installing
 
