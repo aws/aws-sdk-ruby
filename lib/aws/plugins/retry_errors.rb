@@ -61,7 +61,15 @@ module Aws
 
       end
 
-      class Handler < Seahorse::Client::Handler
+      class Handler
+
+        def initialize(&backoff)
+          @backoff = backoff || lambda do |context|
+            sleep(2 ** context.retry_count * 0.3)
+          end
+        end
+
+        attr_accessor :handler
 
         def call(context)
           response = @handler.call(context)
@@ -75,21 +83,27 @@ module Aws
         private
 
         def retry_if_possible(response)
-          error = ErrorInspector.new(response.error)
           context = response.context
+          error = error_for(response)
           if should_retry?(context, error)
-            retry_request(context)
+            retry_request(context, error)
           else
             response
           end
         end
 
+        def error_for(response)
+          ErrorInspector.new(response.error, response.http_response.status_code)
+        end
+
         def retry_request(context, error)
-          refresh_credentials!(context) if
-            credentials_expired?(context, error)
-          context.metadata[:retry_count] += 1
+          delay_retry(context)
+          context.increment_retry_count!
+          context.config.credentials.refresh! if error.expired_credentials?
           context.http_request.body.rewind
-          context.http_response.body.truncate(0)
+          context.http_response.body.tap do |body|
+            body.truncate(0) unless body.pos == 0
+          end
           call(context)
         end
 
@@ -99,32 +113,24 @@ module Aws
           response_truncatable?(context)
         end
 
+        def delay_retry(context)
+          @backoff.call(context)
+        end
+
         def retries_left?(context)
-          retry_count(context) < max_retries(context)
+          context.retry_count < max_retries(context)
         end
 
         def retryable?(context, error)
-          credentials_expired?(context, error) or
+          (error.expired_credentials? and refreshable_credentials?(context)) or
           error.throttling_error? or
           error.checksum? or
           error.networking? or
           error.server?
         end
 
-        def credentials_expired?(context, error)
-          error.expired_credentials? and credentials_refresh?(context)
-        end
-
-        def credentials_refresh?(context)
+        def refreshable_credentials?(context)
           context.config.credentials.respond_to?(:refresh!)
-        end
-
-        def refresh_credentials!(context)
-          context.config.credentials.refresh!
-        end
-
-        def retry_count(context)
-          context.metadata[:retry_count] ||= 0
         end
 
         def max_retries(context)
@@ -132,7 +138,10 @@ module Aws
         end
 
         def response_truncatable?(context)
-          context.http_response.body.respond_to?(:truncate)
+          # IF the target response body IO object has received no bytes
+          # or if it can be truncated then we can retry the request.
+          context.http_response.body.respond_to?(:truncate) or
+          context.http_response.body.pos == 0
         end
 
       end

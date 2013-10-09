@@ -16,6 +16,7 @@ module Seahorse
         @config = options[:config]
         @http_request = options[:http_request] || Http::Request.new
         @http_response = options[:http_response] || Http::Response.new
+        @retry_count = 0
         @metadata = {}
       end
 
@@ -33,6 +34,9 @@ module Seahorse
 
       # @return [Http::Response]
       attr_accessor :http_response
+
+      # @return [Integer]
+      attr_reader :retry_count
 
       # Returns the metadata for the given `key`.
       # @param [Symbol] key
@@ -53,6 +57,10 @@ module Seahorse
       # @return [Model::Operation]
       def operation
         @operation ||= config.api.operations[operation_name]
+      end
+
+      def increment_retry_count!
+        @retry_count += 1
       end
 
     end

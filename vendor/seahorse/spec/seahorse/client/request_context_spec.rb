@@ -43,6 +43,21 @@ module Seahorse
 
       end
 
+      describe '#retry_count' do
+
+        it 'defaults to 0' do
+          expect(RequestContext.new.retry_count).to eq(0)
+        end
+
+        it 'can be incremented' do
+          context = RequestContext.new
+          context.increment_retry_count!
+          context.increment_retry_count!
+          expect(context.retry_count).to eq(2)
+        end
+
+      end
+
       describe '#http_request' do
 
         it 'defaults to a Http::Request object' do

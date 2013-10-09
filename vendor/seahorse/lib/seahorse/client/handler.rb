@@ -10,7 +10,7 @@ module Seahorse
       end
 
       # @return [Handler, nil]
-      attr_reader :handler
+      attr_accessor :handler
 
       # @param [RequestContext] context
       # @return [Response]

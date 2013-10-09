@@ -150,15 +150,103 @@ module Aws
 
       describe 'Handler' do
 
-        def handle(&block)
-          context = Seahorse::Client::RequestContext.new
-          handler = RetryErrors::Handler.new(block)
-          handler.call(context)
+        let(:credentials) { Credentials.new }
+
+        let(:config) { double('cfg', credentials: credentials, max_retries: 3) }
+
+        let(:resp) { Seahorse::Client::Response.new }
+
+        let(:handler) { RetryErrors::Handler.new }
+
+        before(:each) do
+          resp.context.config = config
+          resp.context.http_response.status_code = 400
         end
 
-        it 'returns the response directly if the response has no error' do
-          resp = double('response', error: nil)
-          expect(handle { |context| resp }).to be(resp)
+        def handle(send_handler = nil, &block)
+          allow(handler).to receive(:sleep)
+          handler.handler = send_handler || block
+          handler.call(resp.context)
+        end
+
+        it 'does not retry responses that have no error' do
+          resp.error = nil
+          send_handler = double('send-handler')
+          expect(send_handler).to receive(:call).once.and_return(resp)
+          handle(send_handler)
+        end
+
+        it 'reties 3 times for a total of 4 attemps' do
+          resp.error = EC2::Errors::RequestLimitExceeded.new
+          send_handler = double('send-handler')
+          expect(send_handler).to receive(:call).
+            exactly(4).times.
+            with(resp.context).
+            and_return(resp)
+          handle(send_handler)
+        end
+
+        it 'backs off exponentially between each retry attempt' do
+          expect(handler).to receive(:sleep).with(0.3).ordered
+          expect(handler).to receive(:sleep).with(0.6).ordered
+          expect(handler).to receive(:sleep).with(1.2).ordered
+          resp.error = EC2::Errors::RequestLimitExceeded.new
+          handle { |context| resp }
+        end
+
+        it 'increments the retry count on the context' do
+          resp.error = EC2::Errors::RequestLimitExceeded.new
+          handle { |context| resp }
+          expect(resp.context.retry_count).to eq(3)
+        end
+
+        it 'rewinds the request body before each retry attempt' do
+          body = resp.context.http_request.body
+          expect(body).to receive(:rewind).exactly(3).times
+          resp.error = EC2::Errors::RequestLimitExceeded.new
+          handle { |context| resp }
+        end
+
+        it 'truncates the response body before each retry attempt' do
+          body = double('truncatable-body', pos: 100, truncate: 0)
+          resp.context.http_response.body = body
+          expect(body).to receive(:truncate).with(0).exactly(3).times
+          resp.error = EC2::Errors::RequestLimitExceeded.new
+          handle { |context| resp }
+        end
+
+        it 'skips retry if un-truncatable response body has received data' do
+          resp.context.http_response.body = double('write-once-body', pos: 100)
+          resp.error = EC2::Errors::RequestLimitExceeded.new
+          handle { |context| resp }
+          expect(resp.context.retry_count).to eq(0)
+        end
+
+        it 'retries if the un-truncatable response body has received no data' do
+          resp.context.http_response.body = double('write-once-body', pos: 0)
+          resp.error = EC2::Errors::RequestLimitExceeded.new
+          handle { |context| resp }
+          expect(resp.context.retry_count).to eq(3)
+        end
+
+        it 'retries if creds expire and are refreshable' do
+          expect(credentials).to receive(:refresh!).exactly(3).times
+          resp.error = EC2::Errors::AuthFailure.new
+          handle { |context| resp }
+          expect(resp.context.retry_count).to eq(3)
+        end
+
+        it 'skips retry if creds expire and are not refreshable' do
+          resp.error = EC2::Errors::AuthFailure.new
+          handle { |context| resp }
+          expect(resp.context.retry_count).to eq(0)
+        end
+
+        it 'retries 500 level errors' do
+          resp.context.http_response.status_code = 500
+          resp.error = RuntimeError.new('random-runtime-error')
+          handle { |context| resp }
+          expect(resp.context.retry_count).to eq(3)
         end
 
       end

@@ -11,6 +11,7 @@ module Seahorse
       def initialize(options = {})
         @context = options[:context] || RequestContext.new
         @data = options[:data]
+        @error = options[:error]
         @http_request = @context.http_request
         @http_response = @context.http_response
       end
