@@ -56,7 +56,7 @@ module Aws
         end
 
         def networking_error?
-          @http_status_code == 0
+          NETWORKING_ERRORS.include?(@name) || @http_status_code == 0
         end
 
       end

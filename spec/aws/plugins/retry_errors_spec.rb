@@ -40,12 +40,12 @@ module Aws
           end
 
           it 'returns true if the error code matches /expired/' do
-            error = Aws::IAM::Errors::SomethingExpiredError.new
+            error = IAM::Errors::SomethingExpiredError.new
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
           it 'returns false for other errors' do
-            error = Aws::IAM::Errors::SomeRandomError.new
+            error = IAM::Errors::SomeRandomError.new
             expect(inspector(error).expired_credentials?).to be(false)
           end
 
@@ -97,8 +97,8 @@ module Aws
 
         describe '#checksum_error?' do
 
-          it 'returns true if the error extends Aws::Errors::ChecksumError' do
-            error = Aws::Errors::ChecksumError.new
+          it 'returns true if the error extends Errors::ChecksumError' do
+            error = Errors::ChecksumError.new
             expect(inspector(error).checksum_error?).to be(true)
           end
 
@@ -112,18 +112,23 @@ module Aws
         describe '#server_error?' do
 
           it 'returns true if the error is a 500 level error' do
-            error = Aws::EC2::Errors::RandomError.new
+            error = EC2::Errors::RandomError.new
             expect(inspector(error, 500).server_error?).to be(true)
           end
 
           it 'returns false if the error is not a 500 level error' do
-            error = Aws::EC2::Errors::RandomError.new
+            error = EC2::Errors::RandomError.new
             expect(inspector(error, 404).server_error?).to be(false)
           end
 
         end
 
         describe '#networking_error?' do
+
+          it 'returns true if the error code is RequestTimeout' do
+            error = S3::Errors::RequestTimeout.new
+            expect(inspector(error).networking_error?).to be(true)
+          end
 
           it 'returns true if the http status code is 0' do
             error = double('error')
