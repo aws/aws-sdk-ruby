@@ -42,6 +42,10 @@ module Aws
           (400..499).include?(@http_status_code)
         end
 
+        def checksum_error?
+          @error.is_a?(Errors::ChecksumError)
+        end
+
         def networking_error?
           @http_status_code == 0
         end

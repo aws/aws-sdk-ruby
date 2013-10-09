@@ -5,6 +5,10 @@ module Aws
     # These include all client errors (~400) and server errors (~500).
     class ServiceError < RuntimeError; end
 
+    # Various plugins perform client-side checksums of responses.
+    # This error indicates a checksum failed.
+    class ChecksumError < RuntimeError; end
+
     # Raised when a {Service} is constructed an no suitable API
     # version is found based on configuration.
     class NoSuchApiVersionError < RuntimeError; end

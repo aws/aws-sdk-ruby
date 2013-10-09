@@ -96,6 +96,20 @@ module Aws
           end
 
         end
+
+        describe '#checksum_error?' do
+
+          it 'returns true if the error extends Aws::Errors::ChecksumError' do
+            error = Aws::Errors::ChecksumError.new
+            expect(inspector(error).checksum_error?).to be(true)
+          end
+
+          it 'returns false if the error does not exend ChecksumError' do
+            error = double('error')
+            expect(inspector(error).checksum_error?).to be(false)
+          end
+
+        end
       end
     end
   end
