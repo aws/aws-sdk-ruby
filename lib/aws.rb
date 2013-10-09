@@ -40,6 +40,7 @@ module Aws
     autoload :JsonRpcHeaders, 'aws/plugins/json_rpc_headers'
     autoload :QueryProtocol, 'aws/plugins/query_protocol'
     autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
+    autoload :RetryErrors, 'aws/plugins/retry_errors'
     autoload :S3BucketDns, 'aws/plugins/s3_bucket_dns'
     autoload :S3CompleteMultipartUploadFix, 'aws/plugins/s3_complete_multipart_upload_fix'
     autoload :S3GetBucketLocationFix, 'aws/plugins/s3_get_bucket_location_fix'
