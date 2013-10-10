@@ -99,6 +99,19 @@ module Seahorse
           }.to raise_error(ArgumentError, /invalid configuration option/)
         end
 
+        it 'resolves nested dependent options' do
+          config.add_option(:base, 1)
+          config.add_option(:top) { |cfg| cfg.middle }
+          config.add_option(:middle) { |cfg| cfg.base }
+          expect(config.build!.top).to eq(1)
+        end
+
+        it 'does not resolve procs passed as args' do
+          value = lambda {}
+          config.add_option(:proc, value)
+          expect(config.build!.proc).to be(value)
+        end
+
       end
     end
   end

@@ -84,7 +84,9 @@ module Seahorse
       #
       # @return [self]
       def add_option(name, default = nil, &block)
-        @defaults[name.to_sym] = block_given? ? Proc.new : default
+        @defaults[name.to_sym] = block_given? ?
+          UnresolvedOption.new(Proc.new) :
+          default
         self
       end
 
@@ -143,14 +145,25 @@ module Seahorse
       end
 
       # @api private
+      class UnresolvedOption
+
+        def initialize(block)
+          @block = block
+        end
+
+        attr_reader :block
+
+      end
+
+      # @api private
       class OptionBlockResolver
 
         def initialize(struct)
           @struct = struct
           @members = Set.new(@struct.members)
           @struct.members.each do |opt|
-            if struct[opt].is_a?(Proc)
-              struct[opt] = struct[opt].call(self)
+            if struct[opt].is_a?(UnresolvedOption)
+              struct[opt] = struct[opt].block.call(self)
             end
           end
         end
@@ -172,8 +185,8 @@ module Seahorse
         end
 
         def resolve_blocks(member)
-          if @struct[member].is_a?(Proc)
-            @struct[member] = @struct[member].call(self)
+          if @struct[member].is_a?(UnresolvedOption)
+            @struct[member] = @struct[member].block.call(self)
           end
           @struct[member]
         end
