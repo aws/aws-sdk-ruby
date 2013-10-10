@@ -19,7 +19,7 @@ module Seahorse
         handlers.copy_from(self.class.handlers)
       end
 
-      # @param [Class<Client::Base>]
+      # @param [Class<Client::Base>] client_class
       # @param [Hash] options
       # @return [void]
       def before_initialize(client_class, options)
@@ -28,7 +28,7 @@ module Seahorse
         end
       end
 
-      # @param [Client::Base]
+      # @param [Client::Base] client
       # @return [void]
       def after_initialize(client)
         self.class.after_initialize_hooks.each do |block|

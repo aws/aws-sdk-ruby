@@ -26,7 +26,7 @@ module Seahorse
       attr_reader :http_response
 
       # @return The response data.  This may be `nil` if the response contains
-      #   an #{error}.
+      #   an {#error}.
       attr_accessor :data
 
       # @return [StandardError, nil]
