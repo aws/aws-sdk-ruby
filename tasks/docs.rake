@@ -1,4 +1,4 @@
-namespace :docs do
+namespace :doc do
   task :clobber do
     rm_rf ".yardoc"
     rm_rf "doc"
@@ -6,6 +6,6 @@ namespace :docs do
 end
 
 desc "Generate the API documentation."
-task :docs => 'docs:clobber' do
+task :doc => 'doc:clobber' do
   sh "bundle exec yard"
 end
