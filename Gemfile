@@ -21,6 +21,7 @@ end
 
 group :docs do
   gem 'yard'
+  gem 'yard-sitemap', '~> 1.0'
   gem 'rdiscount', github: 'lsegal/rdiscount', branch: 'gfm-fenced-code'
 end
 
