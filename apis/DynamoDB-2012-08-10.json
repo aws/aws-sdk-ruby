@@ -13,12 +13,14 @@
     "Seahorse::Client::Plugins::RestfulBindings",
     "Seahorse::Client::Plugins::ContentLength",
     "Seahorse::Client::Plugins::JsonSimple",
+    "Aws::Plugins::RetryErrors",
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
     "Aws::Plugins::JsonRpcHeaders",
-    "Aws::Plugins::SignatureV4"
+    "Aws::Plugins::SignatureV4",
+    "Aws::Plugins::DynamoDBExtendedRetries"
   ],
   "operations": {
     "batch_get_item": {

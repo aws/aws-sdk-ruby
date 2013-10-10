@@ -8,6 +8,7 @@
   "plugins": [
     "Seahorse::Client::Plugins::RestfulBindings",
     "Seahorse::Client::Plugins::ContentLength",
+    "Aws::Plugins::RetryErrors",
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",

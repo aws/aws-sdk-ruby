@@ -1,4 +1,7 @@
 {
+  "dynamodb": [
+    "Aws::Plugins::DynamoDBExtendedRetries"
+  ],
   "s3": [
     "Aws::Plugins::S3BucketDns",
     "Aws::Plugins::S3CompleteMultipartUploadFix",
