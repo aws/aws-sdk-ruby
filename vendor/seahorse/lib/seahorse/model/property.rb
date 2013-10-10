@@ -73,7 +73,7 @@ module Seahorse
       def serialize(value, klass)
         return if value.nil?
 
-        if klass == LazyOperationHash
+        if klass == Operations
           hsh = {}
           value.each do |k, v|
             hsh[key_case(k.to_s)] = serialize(v, Operation)
@@ -103,11 +103,11 @@ module Seahorse
       def deserialize(value, klass)
         if klass == Symbol
           value ? value.to_sym : nil
-        elsif klass == LazyOperationHash
+        elsif klass == Operations
           hash = value.inject({}) do |hsh, (k, v)|
             hsh[key_case(k)] = v; hsh
           end
-          LazyOperationHash.new(hash)
+          Operations.new(hash)
         elsif klass.is_a?(Hash)
           hsh = {}
           value.each do |key, item|

@@ -3,9 +3,9 @@ module Seahorse
   module Model
 
     autoload :Api, 'seahorse/model/api'
-    autoload :LazyOperationHash, 'seahorse/model/lazy_operation_hash'
     autoload :Node, 'seahorse/model/node'
     autoload :Operation, 'seahorse/model/operation'
+    autoload :Operations, 'seahorse/model/operations'
     autoload :OperationInput, 'seahorse/model/operation_input'
     autoload :Property, 'seahorse/model/property'
     autoload :PropertyError, 'seahorse/model/property'

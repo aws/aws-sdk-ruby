@@ -8,13 +8,13 @@ module Seahorse
       property :metadata, Hash
       property :plugins, [String]
       property :documentation, String
-      property :operations, LazyOperationHash
+      property :operations, Operations
 
       def initialize(*)
         super
         self.metadata = {}
         self.plugins = []
-        self.operations = LazyOperationHash.new
+        self.operations = Operations.new
       end
 
       def validate!

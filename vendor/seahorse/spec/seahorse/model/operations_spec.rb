@@ -2,15 +2,15 @@ require 'spec_helper'
 
 module Seahorse
   module Model
-    describe LazyOperationHash do
+    describe Operations do
       def hash(raw = {})
-        LazyOperationHash.new(raw)
+        Operations.new(raw)
       end
 
       describe '#initialize' do
         it 'clones raw data' do
           hash = {'a' => {'name' => 'op'}}
-          lazy = LazyOperationHash.new(hash)
+          lazy = Operations.new(hash)
           lazy.load!
           expect(hash).to eq 'a' => {'name' => 'op'}
         end
@@ -19,7 +19,7 @@ module Seahorse
       describe '#keys' do
         it 'returns keys of unloaded objects' do
           hash = {'a' => {'name' => 'op1'}, 'b' => {'name' => 'op2'}}
-          lazy = LazyOperationHash.new(hash)
+          lazy = Operations.new(hash)
           lazy['a'] # hydrate a but not b
           expect(lazy.keys).to eq %w(a b)
         end
