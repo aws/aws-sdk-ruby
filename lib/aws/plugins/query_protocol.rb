@@ -4,7 +4,7 @@ module Aws
 
       handler(RequestHandler.new(Query::Serializer.new))
       handler(ResponseHandler.new(Xml::Parser.new))
-      handler(ErrorHandler.new(Xml::ErrorParser.new))
+      handler(ErrorHandler.new(Xml::ErrorParser.new), step: :sign)
 
     end
   end

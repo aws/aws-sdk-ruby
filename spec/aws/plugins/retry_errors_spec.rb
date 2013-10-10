@@ -164,7 +164,6 @@ module Aws
         let(:handler) { RetryErrors::Handler.new }
 
         before(:each) do
-          puts config.inspect
           resp.context.config = config
           resp.context.http_response.status_code = 400
         end
@@ -226,13 +225,6 @@ module Aws
           resp.error = EC2::Errors::RequestLimitExceeded.new
           handle { |context| resp }
           expect(resp.context.retries).to eq(0)
-        end
-
-        it 'retries if the un-truncatable response body has received no data' do
-          resp.context.http_response.body = double('write-once-body', pos: 0)
-          resp.error = EC2::Errors::RequestLimitExceeded.new
-          handle { |context| resp }
-          expect(resp.context.retries).to eq(3)
         end
 
         it 'retries if creds expire and are refreshable' do

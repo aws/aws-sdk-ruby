@@ -15,7 +15,7 @@ module Aws
           handlers.add(RequestHandler.new(Json::Serializer.new))
           handlers.add(ResponseHandler.new(Json::Parser.new))
         end
-        handlers.add(ErrorHandler.new(Json::ErrorParser.new))
+        handlers.add(ErrorHandler.new(Json::ErrorParser.new), step: :sign)
       end
 
     end

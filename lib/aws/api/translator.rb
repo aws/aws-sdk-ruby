@@ -80,6 +80,7 @@ module Aws
         plugins << 'Seahorse::Client::Plugins::RestfulBindings'
         plugins << 'Seahorse::Client::Plugins::ContentLength'
         plugins << 'Seahorse::Client::Plugins::JsonSimple' if type.match(/json/)
+        plugins << 'Aws::Plugins::RetryErrors'
         plugins << 'Aws::Plugins::GlobalConfiguration'
         plugins << 'Aws::Plugins::RegionalEndpoint'
         plugins << 'Aws::Plugins::Credentials'

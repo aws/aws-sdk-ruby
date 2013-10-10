@@ -95,9 +95,7 @@ module Aws
           context.increment_retries!
           context.config.credentials.refresh! if error.expired_credentials?
           context.http_request.body.rewind
-          context.http_response.body.tap do |body|
-            body.truncate(0) unless body.pos == 0
-          end
+          context.http_response.body.truncate(0)
           call(context)
         end
 
@@ -128,10 +126,7 @@ module Aws
         end
 
         def response_truncatable?(context)
-          # IF the target response body IO object has received no bytes
-          # or if it can be truncated then we can retry the request.
-          context.http_response.body.respond_to?(:truncate) or
-          context.http_response.body.pos == 0
+          context.http_response.body.respond_to?(:truncate)
         end
 
       end
