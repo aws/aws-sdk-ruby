@@ -4,7 +4,9 @@ module Aws
   module Plugins
     class RetryErrors < Seahorse::Client::Plugin
 
-      option(:max_retries, 3)
+      option(:retry_limit, 3)
+
+      option(:retry_backoff, lambda { |c| Kernel.sleep(2 ** c.retries * 0.3) })
 
       # @api private
       class ErrorInspector
@@ -61,15 +63,7 @@ module Aws
 
       end
 
-      class Handler
-
-        def initialize(&backoff)
-          @backoff = backoff || lambda do |context|
-            sleep(2 ** context.retry_count * 0.3)
-          end
-        end
-
-        attr_accessor :handler
+      class Handler < Seahorse::Client::Handler
 
         def call(context)
           response = @handler.call(context)
@@ -98,7 +92,7 @@ module Aws
 
         def retry_request(context, error)
           delay_retry(context)
-          context.increment_retry_count!
+          context.increment_retries!
           context.config.credentials.refresh! if error.expired_credentials?
           context.http_request.body.rewind
           context.http_response.body.tap do |body|
@@ -107,18 +101,14 @@ module Aws
           call(context)
         end
 
+        def delay_retry(context)
+          context.config.retry_backoff.call(context)
+        end
+
         def should_retry?(context, error)
           retryable?(context, error) and
-          retries_left?(context) and
+          context.retries < retry_limit(context) and
           response_truncatable?(context)
-        end
-
-        def delay_retry(context)
-          @backoff.call(context)
-        end
-
-        def retries_left?(context)
-          context.retry_count < max_retries(context)
         end
 
         def retryable?(context, error)
@@ -133,8 +123,8 @@ module Aws
           context.config.credentials.respond_to?(:refresh!)
         end
 
-        def max_retries(context)
-          context.config.max_retries
+        def retry_limit(context)
+          context.config.retry_limit
         end
 
         def response_truncatable?(context)
@@ -145,6 +135,13 @@ module Aws
         end
 
       end
+
+      def add_handlers(handlers, config)
+        if config.retry_limit > 0
+          handlers.add(Handler, step: :sign, priority: 99)
+        end
+      end
+
     end
   end
 end

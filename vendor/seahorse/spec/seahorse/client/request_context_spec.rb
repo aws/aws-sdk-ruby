@@ -43,17 +43,17 @@ module Seahorse
 
       end
 
-      describe '#retry_count' do
+      describe '#retries' do
 
         it 'defaults to 0' do
-          expect(RequestContext.new.retry_count).to eq(0)
+          expect(RequestContext.new.retries).to eq(0)
         end
 
         it 'can be incremented' do
           context = RequestContext.new
-          context.increment_retry_count!
-          context.increment_retry_count!
-          expect(context.retry_count).to eq(2)
+          context.increment_retries!
+          context.increment_retries!
+          expect(context.retries).to eq(2)
         end
 
       end

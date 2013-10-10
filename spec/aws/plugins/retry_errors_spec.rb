@@ -4,11 +4,11 @@ module Aws
   module Plugins
     describe RetryErrors do
 
-      it 'defaults config.max_retries to 3' do
+      it 'defaults config.retry_limit to 3' do
         config = Seahorse::Client::Configuration.new
         RetryErrors.new.add_options(config)
         config = config.build!
-        expect(config.max_retries).to eq(3)
+        expect(config.retry_limit).to eq(3)
       end
 
       describe 'ErrorInspector' do
@@ -152,19 +152,25 @@ module Aws
 
         let(:credentials) { Credentials.new }
 
-        let(:config) { double('cfg', credentials: credentials, max_retries: 3) }
+        let(:config) {
+          cfg = Seahorse::Client::Configuration.new
+          cfg.add_option(:credentials, credentials)
+          RetryErrors.new.add_options(cfg)
+          cfg.build!
+        }
 
         let(:resp) { Seahorse::Client::Response.new }
 
         let(:handler) { RetryErrors::Handler.new }
 
         before(:each) do
+          puts config.inspect
           resp.context.config = config
           resp.context.http_response.status_code = 400
         end
 
         def handle(send_handler = nil, &block)
-          allow(handler).to receive(:sleep)
+          allow(Kernel).to receive(:sleep)
           handler.handler = send_handler || block
           handler.call(resp.context)
         end
@@ -187,9 +193,9 @@ module Aws
         end
 
         it 'backs off exponentially between each retry attempt' do
-          expect(handler).to receive(:sleep).with(0.3).ordered
-          expect(handler).to receive(:sleep).with(0.6).ordered
-          expect(handler).to receive(:sleep).with(1.2).ordered
+          expect(Kernel).to receive(:sleep).with(0.3).ordered
+          expect(Kernel).to receive(:sleep).with(0.6).ordered
+          expect(Kernel).to receive(:sleep).with(1.2).ordered
           resp.error = EC2::Errors::RequestLimitExceeded.new
           handle { |context| resp }
         end
@@ -197,7 +203,7 @@ module Aws
         it 'increments the retry count on the context' do
           resp.error = EC2::Errors::RequestLimitExceeded.new
           handle { |context| resp }
-          expect(resp.context.retry_count).to eq(3)
+          expect(resp.context.retries).to eq(3)
         end
 
         it 'rewinds the request body before each retry attempt' do
@@ -219,34 +225,34 @@ module Aws
           resp.context.http_response.body = double('write-once-body', pos: 100)
           resp.error = EC2::Errors::RequestLimitExceeded.new
           handle { |context| resp }
-          expect(resp.context.retry_count).to eq(0)
+          expect(resp.context.retries).to eq(0)
         end
 
         it 'retries if the un-truncatable response body has received no data' do
           resp.context.http_response.body = double('write-once-body', pos: 0)
           resp.error = EC2::Errors::RequestLimitExceeded.new
           handle { |context| resp }
-          expect(resp.context.retry_count).to eq(3)
+          expect(resp.context.retries).to eq(3)
         end
 
         it 'retries if creds expire and are refreshable' do
           expect(credentials).to receive(:refresh!).exactly(3).times
           resp.error = EC2::Errors::AuthFailure.new
           handle { |context| resp }
-          expect(resp.context.retry_count).to eq(3)
+          expect(resp.context.retries).to eq(3)
         end
 
         it 'skips retry if creds expire and are not refreshable' do
           resp.error = EC2::Errors::AuthFailure.new
           handle { |context| resp }
-          expect(resp.context.retry_count).to eq(0)
+          expect(resp.context.retries).to eq(0)
         end
 
         it 'retries 500 level errors' do
           resp.context.http_response.status_code = 500
           resp.error = RuntimeError.new('random-runtime-error')
           handle { |context| resp }
-          expect(resp.context.retry_count).to eq(3)
+          expect(resp.context.retries).to eq(3)
         end
 
       end
