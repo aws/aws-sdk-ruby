@@ -33,7 +33,6 @@ module Aws
       metadata :payload
       metadata :wrapper
 
-      ignore :shape_name
       ignore :member_order
       ignore :box
       ignore :streaming
@@ -42,6 +41,13 @@ module Aws
       ignore :pattern
       ignore :min_length
       ignore :max_length
+
+      def set_shape_name(shape_name)
+        if @options[:documentation]
+          metadata = @properties['metadata'] ||= {}
+          metadata['shape_name'] = shape_name
+        end
+      end
 
       def set_xmlnamespace(xmlns)
         metadata = @properties['metadata'] ||= {}

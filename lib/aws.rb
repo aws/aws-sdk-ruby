@@ -16,6 +16,7 @@ module Aws
   # @api private
   module Api
     autoload :BaseTranslator, 'aws/api/base_translator'
+    autoload :Documentor, 'aws/api/documentor'
     autoload :InputShapeTranslator, 'aws/api/shape_translator'
     autoload :OperationTranslator, 'aws/api/operation_translator'
     autoload :OutputShapeTranslator, 'aws/api/shape_translator'

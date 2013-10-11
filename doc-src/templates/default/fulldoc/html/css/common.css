@@ -1,0 +1,80 @@
+
+/* AWS API operation tabs */
+
+ul.tabs {
+  list-style-type: none;
+  margin: 30px 0 0 0;
+  padding: 0 0 0.75em 0;
+}
+
+ul.tabs li {
+  display: inline;
+  font-color: #42454a;
+  background-color: #dedbde;
+  border: 1px solid #c9c3ba;
+  border-bottom: none;
+  padding: 0.75em;
+  text-decoration: none;
+}
+ul.tabs li:hover {
+  background-color: #f1f0ee;
+  cursor: pointer;
+}
+ul.tabs li.active {
+  background-color: #fff;
+  color: #000;
+}
+.tab-contents {
+  border: 1px solid #ccc;
+  padding: 0.5em;
+}
+
+/* formatting for request parameters and response data */
+
+.params, .params .params {
+  background: url(../images/vline.png) repeat-y;
+  margin: 0;
+  padding: 0;
+}
+
+.params .params {
+  margin-left: 10px;
+}
+
+.params .param {
+  margin: 0;
+  padding: 0 12px;
+  line-height: 20px;
+  background: url(../images/node.png) no-repeat;
+}
+
+.params .param:last-child {
+  background: #fff url(../images/lastnode.png) no-repeat;
+}
+
+.entry {
+  //border: 1px solid #ccc;
+  font-family: monospace;
+  display: inline;
+  line-height: 20px;
+  padding: 0 4px;
+}
+
+.entry .key.required {
+  font-weight: bold;
+}
+
+/* documentation provided by the AWS service API reference docs */
+
+.api-ref {
+  margin: 0 0 0 1px;
+  font-style: italic;
+  padding-left: 15px;
+  color: #777;
+  border-left: 1px solid #666;
+  overflow: hidden;
+}
+
+.params .api-ref {
+  border: none;
+}

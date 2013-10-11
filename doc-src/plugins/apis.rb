@@ -2,9 +2,10 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'aws-sdk-core'
 
+YARD::Templates::Engine.register_template_path(File.join(File.dirname(__FILE__), '..', 'templates'))
+
 YARD::Parser::SourceParser.after_parse_list do
   svc_apis.each do |svc_name, apis|
-    next unless svc_name == 'DynamoDB'
     document_svc(svc_name, apis)
   end
 end
@@ -66,12 +67,77 @@ def document_svc_api(svc_name, api)
   end
 end
 
+class Tabulator
+
+  def initialize
+    @tabs = []
+    @tab_contents = []
+  end
+
+  def tab(method_name, tab_name, &block)
+    tab_id = "#{method_name}-#{tab_name}".downcase.gsub(/[^a-z]+/i, '-')
+    @tabs << [tab_id, tab_name]
+    @tab_contents << "<div class=\"tab-contents\" id=\"#{tab_id}\">"
+    @tab_contents << yield
+    @tab_contents << '</div>'
+  end
+
+  def to_html
+    lines = []
+    lines << '<div class="tab-box">'
+    lines << '<ul class="tabs">'
+    @tabs.each do |tab_id, tab_name|
+      lines << "<li data-tab-id=\"#{tab_id}\">#{tab_name}</li>"
+    end
+    lines << '</ul>'
+    lines.concat(@tab_contents)
+    lines << '</div>'
+    lines.join
+  end
+
+end
+
+def without_docs(value)
+  case value
+  when Hash
+    value.inject({}) do |h,(k,v)|
+      h[k] = without_docs(v) unless k == 'documentation'
+      h
+    end
+  when Array then value.map{ |v| without_docs(v) }
+  else value
+  end
+end
+
 def document_svc_api_operation(client, method_name, operation)
+
+  documentor = Aws::Api::Documentor.new(operation)
+
+  tabs = Tabulator.new.tap do |t|
+    t.tab(method_name, 'Parameters') do
+      documentor.input
+    end
+    t.tab(method_name, 'Response') do
+      documentor.output
+    end
+    t.tab(method_name, 'Example') do
+      "FORMATTING FOO"
+    end
+    t.tab(method_name, 'API') do
+      "<pre class=\"code json\"><code class=\"json\">\n#{MultiJson.dump(without_docs(operation.to_hash), pretty: true)}\n</code></pre>"
+    end
+  end
+
   m = YARD::CodeObjects::MethodObject.new(client, method_name)
-  m.docstring = <<-DOC.strip
+  m.scope = :instance
+  m.signature = "#{method_name}(params = {})"
+  m.docstring = <<-DOCSTRING.strip
 @overload #{method_name}(params = {})
-Calls the #{operation.name} operation.
+<p>Calls the #{operation.name} operation.<p>
+#{documentor.api_ref(operation)}
+#{tabs.to_html}
 @param [Hash] params ({})
 @return [Seahorse::Client::Response]
-  DOC
+DOCSTRING
+
 end
