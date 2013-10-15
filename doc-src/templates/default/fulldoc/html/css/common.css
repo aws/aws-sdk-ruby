@@ -78,3 +78,10 @@ ul.tabs li.active {
 .params .api-ref {
   border: none;
 }
+
+/* tab specific styles */
+
+.api-model {
+  max-height: 400px;
+  overflow: auto;
+}

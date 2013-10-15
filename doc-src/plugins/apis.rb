@@ -63,7 +63,7 @@ def document_svc_api(svc_name, api)
   klass = YARD::CodeObjects::ClassObject.new(namespace, name)
   klass.docstring = "A client for the #{full_name} #{api.version} API.{"
   api.operations.each do |method_name, operation|
-    document_svc_api_operation(klass, method_name, operation)
+    document_svc_api_operation(svc_name, klass, method_name, operation)
   end
 end
 
@@ -75,9 +75,11 @@ class Tabulator
   end
 
   def tab(method_name, tab_name, &block)
-    tab_id = "#{method_name}-#{tab_name}".downcase.gsub(/[^a-z]+/i, '-')
+    tab_class = tab_name.downcase.gsub(/[^a-z]+/i, '-')
+    tab_id = "#{method_name.gsub(/_/, '-')}-#{tab_class}"
+    class_names = ['tab-contents', tab_class]
     @tabs << [tab_id, tab_name]
-    @tab_contents << "<div class=\"tab-contents\" id=\"#{tab_id}\">"
+    @tab_contents << "<div class=\"#{class_names.join(' ')}\" id=\"#{tab_id}\">"
     @tab_contents << yield
     @tab_contents << '</div>'
   end
@@ -94,6 +96,9 @@ class Tabulator
     lines << '</div>'
     lines.join
   end
+  alias inspect to_html
+  alias to_str to_html
+  alias to_s to_html
 
 end
 
@@ -109,22 +114,22 @@ def without_docs(value)
   end
 end
 
-def document_svc_api_operation(client, method_name, operation)
+def document_svc_api_operation(svc_name, client, method_name, operation)
 
-  documentor = Aws::Api::Documentor.new(operation)
+  documentor = Aws::Api::Documentor.new(svc_name.downcase, method_name, operation)
 
   tabs = Tabulator.new.tap do |t|
-    t.tab(method_name, 'Parameters') do
+    t.tab(method_name, 'Formatting Example') do
+      "<pre><code>#{documentor.example}</code></pre>"
+    end
+    t.tab(method_name, 'Parameters Reference') do
       documentor.input
     end
-    t.tab(method_name, 'Response') do
+    t.tab(method_name, 'Response  Reference') do
       documentor.output
     end
-    t.tab(method_name, 'Example') do
-      "FORMATTING FOO"
-    end
-    t.tab(method_name, 'API') do
-      "<pre class=\"code json\"><code class=\"json\">\n#{MultiJson.dump(without_docs(operation.to_hash), pretty: true)}\n</code></pre>"
+    t.tab(method_name, 'API Model') do
+      "<div class=\"api-src\"><pre><code class=\"json\">#{MultiJson.dump(without_docs(operation.to_hash), pretty: true)}</pre></code></div>"
     end
   end
 
@@ -132,10 +137,9 @@ def document_svc_api_operation(client, method_name, operation)
   m.scope = :instance
   m.signature = "#{method_name}(params = {})"
   m.docstring = <<-DOCSTRING.strip
-@overload #{method_name}(params = {})
 <p>Calls the #{operation.name} operation.<p>
 #{documentor.api_ref(operation)}
-#{tabs.to_html}
+#{tabs}
 @param [Hash] params ({})
 @return [Seahorse::Client::Response]
 DOCSTRING

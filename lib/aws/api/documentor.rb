@@ -4,8 +4,9 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      def initialize(operation)
+      def initialize(obj_name, method_name, operation)
         @operation = operation
+        @example = DocExample.new(obj_name, method_name, operation)
       end
 
       def input
@@ -18,6 +19,10 @@ module Aws
         params('') do
           structure(@operation.output)
         end.join
+      end
+
+      def example
+        @example
       end
 
       def api_ref(shape)
