@@ -68,10 +68,9 @@ ul.tabs li.active {
 
 .api-ref {
   margin: 0 0 0 1px;
-  font-style: italic;
   padding-left: 15px;
-  color: #777;
-  border-left: 1px solid #666;
+  color: #333;
+  border-left: 1px solid #333;
   overflow: hidden;
 }
 

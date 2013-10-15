@@ -135,8 +135,8 @@ def document_svc_api_operation(svc_name, client, method_name, operation)
 
   m = YARD::CodeObjects::MethodObject.new(client, method_name)
   m.scope = :instance
-  m.signature = "#{method_name}(params = {})"
   m.docstring = <<-DOCSTRING.strip
+@overload #{method_name}(params = {})"
 <p>Calls the #{operation.name} operation.<p>
 #{documentor.api_ref(operation)}
 #{tabs}
