@@ -3,30 +3,33 @@
 
 ul.tabs {
   list-style-type: none;
-  margin: 30px 0 0 0;
-  padding: 0 0 0.75em 0;
+  margin: 15px 0 0 0;
+  padding: 0 0 0 10px;
+  height: 26px;
+  clear: both;
 }
 
 ul.tabs li {
-  display: inline;
-  font-color: #42454a;
-  background-color: #dedbde;
+  float: left;
   border: 1px solid #c9c3ba;
-  border-bottom: none;
-  padding: 0.75em;
-  text-decoration: none;
+  background-color: #eee;
+  line-height: 25px;
+  height: 25px;
+  padding: 0px 5px;
+  margin: 0 0 0 3px;
 }
 ul.tabs li:hover {
-  background-color: #f1f0ee;
   cursor: pointer;
+  background-color: #ddd;
 }
 ul.tabs li.active {
   background-color: #fff;
-  color: #000;
+  border-bottom: 2px solid #fff;
 }
 .tab-contents {
   border: 1px solid #ccc;
   padding: 0.5em;
+  width: 100%;
 }
 
 /* formatting for request parameters and response data */
@@ -53,7 +56,6 @@ ul.tabs li.active {
 }
 
 .entry {
-  //border: 1px solid #ccc;
   font-family: monospace;
   display: inline;
   line-height: 20px;
@@ -70,17 +72,10 @@ ul.tabs li.active {
   margin: 0 0 0 1px;
   padding-left: 15px;
   color: #333;
-  border-left: 1px solid #333;
+  border-left: 1px solid #c9c3ba;
   overflow: hidden;
 }
 
 .params .api-ref {
   border: none;
-}
-
-/* tab specific styles */
-
-.api-model {
-  max-height: 400px;
-  overflow: auto;
 }
