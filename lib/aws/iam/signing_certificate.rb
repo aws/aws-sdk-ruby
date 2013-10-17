@@ -48,6 +48,8 @@ module AWS
     # @attr_reader [String] contents Returns the contents of this
     #   signing certificate.
     #
+    # @attr_reader [Time] upload_date
+    #
     # @attr_reader [Symbol] status The status of this signing
     #   certificate.  Status may be `:active` or `:inactive`.
     #
@@ -72,6 +74,9 @@ module AWS
       attr_reader :user
 
       attribute :contents, :from => :certificate_body, :static => true
+
+      # @attr_reader [Time] upload_date
+      attribute :upload_date, :static => true
 
       mutable_attribute :status, :to_sym => true
 

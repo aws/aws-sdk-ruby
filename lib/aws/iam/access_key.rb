@@ -17,6 +17,8 @@ module AWS
     # @attr_reader [Symbol] status The status of this access key.
     #   Status may be `:active` or `:inactive`.
     #
+    # @attr_reader [Time] create_date
+    #
     class AccessKey < Resource
 
       # @param [String] access_key_id The id of this access key.
@@ -40,6 +42,9 @@ module AWS
       attr_reader :id
 
       alias_method :access_key_id, :id
+
+      # @attr_reader [Time] When the access key was created.
+      attribute :create_date, :static => true
 
       attribute :secret_value, :from => :secret_access_key, :static => true
 
