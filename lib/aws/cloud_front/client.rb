@@ -23,10 +23,23 @@ module AWS
 
     end
 
+    class Client::V20130512 < Client
+
+      define_client_methods('2013-05-12')
+
+    end
+
+    class Client::V20130826 < Client
+
+      define_client_methods('2013-08-26')
+
+    end
+
     class Client::V20130927 < Client
 
       define_client_methods('2013-09-27')
 
     end
+
   end
 end
