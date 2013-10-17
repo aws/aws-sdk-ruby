@@ -1,7 +1,11 @@
 --title 'AWS SDK Core'
+--template-path doc-src/templates
 --embed-mixins
 --markup markdown
 --markup-provider rdiscount
 --hide-api private
+--plugin sitemap
+--asset doc-src/images:images
+-e doc-src/plugins/apis.rb
 lib/**/*.rb
 vendor/seahorse/lib/**/*.rb
