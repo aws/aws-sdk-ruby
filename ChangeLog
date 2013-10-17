@@ -1,4 +1,70 @@
+2013-10-17 Trevor Rowe <trevorrowe@gmail.com>
+
+  * spec/aws/dynamo_db/client_versions_spec.rb: Fixed spec that was using 1.9+
+  syntax to work with 1.8
+
+  * lib/aws/core/xml/frame_stack.rb,
+  lib/aws/core/xml/sax_handlers/nokogiri.rb,
+  lib/aws/core/xml/sax_handlers/rexml.rb: Fixed the REXML xml parser.
+
+  Fixes #318
+
+  * lib/aws/core/client.rb, spec/aws/dynamo_db/client_versions_spec.rb: When
+  constructing a client, the API version can be specified via the :config
+  option.
+
+  Here is an example of the behavior that was fixed:
+
+       config = AWS.config.with(dynamo_db: { api_version: '2012-08-10' })
+       AWS::DynamoDB::Client.new(config: config)
+       #=> #<AWS::DynamoDB::Client::V20120810>
+
+  Fixed #355
+
+  * features/dynamo_db/scan.feature,
+  features/dynamo_db/step_definitions/dynamo_db.rb,
+  features/dynamo_db/step_definitions/scan.rb,
+  lib/aws/dynamo_db/item_collection.rb: Fixed a bug in
+  AWS::DynamoDB::ItemCollection#first
+
+  When calling `#first` on a collection with a where collection,
+  the `:limit` param was incorrectly being used, causing many
+  extra requets.
+
+  Fixes #385
+
+  * lib/aws/s3/object_collection.rb: Corrected the documentation for
+  AWS::S3::ObjectCollection#create.
+
+  Fixes #368
+
+  * lib/aws/simple_db/item_collection.rb,
+  spec/aws/simple_db/item_collection_spec.rb: Fixed issue with
+  SimpleDB::ItemCollection#where.
+
+  If a placeholder received a substituted value that looked
+  like another placeholder, then an `ArgumentError` was
+  raised.
+
+  Now placeholders in the final string are checked against the
+  original to see if they are actual placeholders that were
+  not replaced before raising.
+
+  Fixes #386
+
+  * README.md: Updated the list of supported AWS API versions in the README.
+
+  * lib/aws/core/rest_request_builder.rb: Fixed an issue with uploading files
+  to Glacier in Ruby 1.8.
+
+2013-10-10 Dan Fried <daniel.k.fried@gmail.com>
+
+  * lib/aws/sts/config.rb: Add conditional to STS to work with both govcloud
+  and commercial API endpoints
+
 2013-10-09 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.21.0
 
   * doc-src/EC2/V20131001.yml, lib/aws/api_config/EC2-2013-10-01.yml,
   lib/aws/ec2/client.rb: Added support for Reserved Instance instance type
@@ -8,6 +74,25 @@
   lib/aws/api_config/OpsWorks-2013-02-18.yml: Added support for new resource
   management features in AWS OpsWorks.
 
+2013-10-04 Andy Brody <andy@stripe.com>
+
+  * spec/aws/iam/signing_certificate_spec.rb: Add test for signing cert
+  upload_date.
+
+  * lib/aws/iam/signing_certificate.rb: Expose upload_date attribute on
+  certificates.
+
+  * spec/aws/iam/access_key_spec.rb: Add test of create_date.
+
+  * lib/aws/iam/access_key.rb: Expose the create_date attribute of access
+  keys.
+
+  * samples/sns/publish.rb: Update publish.rb
+2013-10-03 Bouke van der Bijl <boukevanderbijl@gmail.com>
+
+  * lib/aws/s3/data_options.rb, spec/aws/s3/s3_object_spec.rb: Duplicate
+  frozen strings before forcing the encoding to prevent a RuntimeError
+
 2013-10-01 Alex Wood <awood45@gmail.com>
 
   * ChangeLog, lib/aws/version.rb: Bump version to 1.20.0
@@ -15,6 +100,19 @@
   * doc-src/CloudFront/V20130826.yml,
   lib/aws/api_config/CloudFront-2013-08-26.yml, lib/aws/cloud_front/client.rb:
   Update API version for Amazon CloudFront.
+
+2013-09-27 Volker Tietz <volker.tietz@gmail.com>
+
+  * lib/aws/auto_scaling/launch_configuration.rb,
+  lib/aws/auto_scaling/launch_configuration_collection.rb,
+  spec/aws/auto_scaling/launch_configuration_collection_spec.rb,
+  spec/aws/auto_scaling/launch_configuration_spec.rb: Added support for
+  AssociatePublicIpAddress option in LaunchConfiguration. Fixes Issue #372
+
+2013-09-24 Dan Fried <daniel.k.fried@gmail.com>
+
+  * endpoints.json, lib/aws/sts/config.rb: Add Simple Token Service API
+  support for Govcloud region, which has a different API endpoint
 
 2013-09-20 Alex Wood <awood45@gmail.com>
 
@@ -196,7 +294,21 @@
   abstraction layer. Relevant Cucumber and RSpec tests included to
   make the process of adding these for later releases a little easier.
 
-2013-08-22 Alex Wood <awood45@gmail.com>
+2013-08-22 Jon <jonathan.j.mason@gmail.com>
+
+  * lib/aws/sqs/errors.rb: Update documentation for BatchSendError.
+
+  Note that the previous documentation was copied from
+  BatchChangeVisibilityError and contained inaccuracies.
+
+  * lib/aws/sqs/queue.rb, spec/aws/sqs/queue_spec.rb: Add body and index to
+  BatchSendError.failures
+
+  * Add :message_body and :batch_index to entries in BatchSendError.failures.
+
+  * Updates specs to reflect this
+
+  Updates specs to reflect the changes.
 
   * lib/aws/core/xml/sax_handlers/nokogiri.rb, lib/aws/s3/client.rb,
   lib/aws/s3/client/xml.rb, spec/aws/s3/client_spec.rb: Add AWS::S3::Client
