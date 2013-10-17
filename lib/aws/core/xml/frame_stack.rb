@@ -75,7 +75,7 @@ module AWS
         # Adds text to the current frame.  Frames that only contain
         # text and no child elements are leaf nodes and have
         # raw string values.
-        def text text
+        def set_text text
           @frame.add_text(text) if @frame
         end
 
