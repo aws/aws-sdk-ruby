@@ -42,6 +42,8 @@ module AWS
     #
     # @attr_reader [String] spot_price
     #
+    # @attr_reader [Boolean] associate_public_ip_address
+    #
     class LaunchConfiguration < Core::Resource
 
       # @api private
@@ -91,6 +93,8 @@ module AWS
       attribute :security_group_details,
         :from => :security_groups,
         :static => true
+
+      attribute :associate_public_ip_address, :static => true
 
       protected :security_group_details
 
