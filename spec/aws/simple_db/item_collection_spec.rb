@@ -658,6 +658,12 @@ module AWS
               should raise_error(ArgumentError, "missing value for placeholder :foo")
           end
 
+          it '? placeholders can use things looking like named placeholders' do
+            lambda {
+              items.where('`created` < ?', Time.now.strftime('%F %T'))
+            }.should_not raise_error
+          end
+
         end
 
       end

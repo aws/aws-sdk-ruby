@@ -600,8 +600,9 @@ module AWS
       # @api private
       protected
       def replace_placeholders_outside_quotes(str, count, substitutions, named = {})
+        orig_str = str.dup
         str, count = replace_positional_placeders(str, count, substitutions)
-        str = replace_named_placeholders(str, named)
+        str = replace_named_placeholders(orig_str, str, named)
         [str, count]
       end
 
@@ -619,12 +620,14 @@ module AWS
 
       # @api private
       protected
-      def replace_named_placeholders(str, named)
+      def replace_named_placeholders(orig_str, str, named)
         named.each do |name, value|
           str = str.gsub(name.to_sym.inspect, coerce_substitution(value))
         end
         str.scan(/:\S+/) do |missing|
-          raise ArgumentError.new("missing value for placeholder #{missing}")
+          if orig_str.include?(missing)
+            raise ArgumentError.new("missing value for placeholder #{missing}")
+          end
         end
         str
       end
