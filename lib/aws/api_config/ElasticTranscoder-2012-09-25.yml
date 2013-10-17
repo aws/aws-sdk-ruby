@@ -89,6 +89,38 @@
               :input_key:
                 :name: InputKey
                 :type: :string
+        :album_art:
+          :name: AlbumArt
+          :type: :hash
+          :members:
+            :merge_policy:
+              :name: MergePolicy
+              :type: :string
+            :artwork:
+              :name: Artwork
+              :type: :array
+              :members:
+                :name: member
+                :type: :hash
+                :members:
+                  :input_key:
+                    :name: InputKey
+                    :type: :string
+                  :max_width:
+                    :name: MaxWidth
+                    :type: :string
+                  :max_height:
+                    :name: MaxHeight
+                    :type: :string
+                  :sizing_policy:
+                    :name: SizingPolicy
+                    :type: :string
+                  :padding_policy:
+                    :name: PaddingPolicy
+                    :type: :string
+                  :album_art_format:
+                    :name: AlbumArtFormat
+                    :type: :string
     :outputs:
       :name: Outputs
       :type: :array
@@ -124,6 +156,38 @@
                 :input_key:
                   :name: InputKey
                   :type: :string
+          :album_art:
+            :name: AlbumArt
+            :type: :hash
+            :members:
+              :merge_policy:
+                :name: MergePolicy
+                :type: :string
+              :artwork:
+                :name: Artwork
+                :type: :array
+                :members:
+                  :name: member
+                  :type: :hash
+                  :members:
+                    :input_key:
+                      :name: InputKey
+                      :type: :string
+                    :max_width:
+                      :name: MaxWidth
+                      :type: :string
+                    :max_height:
+                      :name: MaxHeight
+                      :type: :string
+                    :sizing_policy:
+                      :name: SizingPolicy
+                      :type: :string
+                    :padding_policy:
+                      :name: PaddingPolicy
+                      :type: :string
+                    :album_art_format:
+                      :name: AlbumArtFormat
+                      :type: :string
     :output_key_prefix:
       :name: OutputKeyPrefix
       :type: :string
@@ -226,6 +290,35 @@
                 InputKey:
                   :sym: :input_key
                   :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -273,6 +366,35 @@
                 InputKey:
                   :sym: :input_key
                   :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
           :type: :string
@@ -893,6 +1015,35 @@
                 InputKey:
                   :sym: :input_key
                   :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -940,6 +1091,35 @@
                 InputKey:
                   :sym: :input_key
                   :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
           :type: :string
@@ -1061,6 +1241,35 @@
                 InputKey:
                   :sym: :input_key
                   :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -1108,6 +1317,35 @@
                 InputKey:
                   :sym: :input_key
                   :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
           :type: :string
@@ -1472,6 +1710,35 @@
                 InputKey:
                   :sym: :input_key
                   :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -1519,6 +1786,35 @@
                 InputKey:
                   :sym: :input_key
                   :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
           :type: :string
