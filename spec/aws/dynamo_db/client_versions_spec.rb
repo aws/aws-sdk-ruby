@@ -18,8 +18,8 @@ module AWS
     describe Client do
 
       it 'constructs a client using version from config' do
-        config = AWS.config.with(dynamo_db: { api_version: '2012-08-10' })
-        client = AWS::DynamoDB::Client.new(config: config)
+        config = AWS.config.with(:dynamo_db => { :api_version => '2012-08-10' })
+        client = AWS::DynamoDB::Client.new(:config => config)
         client.should be_a(Client::V20120810)
       end
 
