@@ -18,12 +18,12 @@ module AWS
 
     # Provides a method to {Bucket} and {S3Object} that parses a wide
     # range of ACL options.
-    # @private
+    # @api private
     module ACLOptions
 
       protected
 
-      # @param [Symbol,String,Hash,AccessControlList] acl Accepts an ACL 
+      # @param [Symbol,String,Hash,AccessControlList] acl Accepts an ACL
       #   description in one of the following formats:
       #
       #   ==== Canned ACL
@@ -31,77 +31,75 @@ module AWS
       #   S3 supports a number of canned ACLs for buckets and
       #   objects.  These include:
       #
-      #   * +:private+
-      #   * +:public_read+
-      #   * +:public_read_write+
-      #   * +:authenticated_read+
-      #   * +:bucket_owner_read+ (object-only)
-      #   * +:bucket_owner_full_control+ (object-only)
-      #   * +:log_delivery_write+ (bucket-only)
+      #   * `:private`
+      #   * `:public_read`
+      #   * `:public_read_write`
+      #   * `:authenticated_read`
+      #   * `:bucket_owner_read` (object-only)
+      #   * `:bucket_owner_full_control` (object-only)
+      #   * `:log_delivery_write` (bucket-only)
       #
       #   Here is an example of providing a canned ACL to a bucket:
-      # 
-      #     s3.buckets['bucket-name'].acl = :public_read
+      #
+      #       s3.buckets['bucket-name'].acl = :public_read
       #
       #   ==== ACL Grant Hash
       #
       #   You can provide a hash of grants.  The hash is composed of grants (keys)
       #   and grantees (values).  Accepted grant keys are:
       #
-      #   * +:grant_read+
-      #   * +:grant_write+
-      #   * +:grant_read_acp+
-      #   * +:grant_write_acp+
-      #   * +:grant_full_control+
+      #   * `:grant_read`
+      #   * `:grant_write`
+      #   * `:grant_read_acp`
+      #   * `:grant_write_acp`
+      #   * `:grant_full_control`
       #
-      #   Grantee strings (values) should be formatted like some of the 
+      #   Grantee strings (values) should be formatted like some of the
       #   following examples:
       #
-      #     id="8a6925ce4adf588a4532142d3f74dd8c71fa124b1ddee97f21c32aa379004fef"
-      #     uri="http://acs.amazonaws.com/groups/global/AllUsers"
-      #     emailAddress="xyz@amazon.com"
+      #       id="8a6925ce4adf588a4532142d3f74dd8c71fa124b1ddee97f21c32aa379004fef"
+      #       uri="http://acs.amazonaws.com/groups/global/AllUsers"
+      #       emailAddress="xyz@amazon.com"
       #
       #   You can provide a comma delimited list of multiple grantees in a single
       #   string.  Please note the use of quotes inside the grantee string.
       #   Here is a simple example:
       #
-      #     {
-      #       :grant_full_control => "emailAddress=\"foo@bar.com\", id=\"abc..mno\""
-      #     }
+      #       { :grant_full_control => "emailAddress=\"foo@bar.com\", id=\"abc..mno\"" }
       #
       #   See the S3 API documentation for more information on formatting
       #   grants.
       #
       #   ==== AcessControlList Object
       #
-      #   You can build an ACL using the {AccessControlList} class and 
+      #   You can build an ACL using the {AccessControlList} class and
       #   pass this object.
       #
-      #     acl = AWS::S3::AccessControlList.new
-      #     acl.grant(:full_control).to(:canonical_user_id => "8a6...fef")
-      #     acl #=> this is acceptible
+      #       acl = AWS::S3::AccessControlList.new
+      #       acl.grant(:full_control).to(:canonical_user_id => "8a6...fef")
+      #       acl #=> this is acceptible
       #
       #   ==== ACL XML String
       #
       #   Lastly you can build your own ACL XML document and pass it as a string.
       #
-      #     <<-XML
-      #       <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-      #         <Owner>
-      #           <ID>8a6...fef</ID>
-      #           <DisplayName>owner-display-name</DisplayName>
-      #         </Owner>
-      #         <AccessControlList>
-      #           <Grant>
-      #             <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Canonical User">
-      #               <ID>8a6...fef</ID>
-      #               <DisplayName>owner-display-name</DisplayName>
-      #             </Grantee>
-      #             <Permission>FULL_CONTROL</Permission>
-      #           </Grant>
-      #         </AccessControlList>
-      #       </AccessControlPolicy> 
-      #     XML
+      #       <<-XML
+      #         <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+      #           <Owner>
+      #             <ID>8a6...fef</ID>
+      #             <DisplayName>owner-display-name</DisplayName>
+      #           </Owner>
+      #           <AccessControlList>
+      #             <Grant>
+      #               <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Canonical User">
+      #                 <ID>8a6...fef</ID>
+      #                 <DisplayName>owner-display-name</DisplayName>
+      #               </Grantee>
+      #               <Permission>FULL_CONTROL</Permission>
+      #             </Grant>
+      #           </AccessControlList>
+      #         </AccessControlPolicy>
+      #       XML
       #
       # @return [Hash] Returns a hash of options suitable for
       #   passing to {Client#put_bucket_acl} and {Client#put_object_acl}
@@ -134,7 +132,7 @@ module AWS
       end
 
       # @param [Hash] acl_hash
-      # @return [Boolean] Retursn +true+ if this hash is a hash of grants.
+      # @return [Boolean] Retursn `true` if this hash is a hash of grants.
       def grant_hash? acl_hash
         grant_keys = [
           :grant_read,
@@ -147,7 +145,7 @@ module AWS
       end
 
       # @param [String] acl_string
-      # @return [Boolean] Returns +true+ if this string is an xml document.
+      # @return [Boolean] Returns `true` if this string is an xml document.
       def xml? acl_string
         begin
           REXML::Document.new(acl_string).has_elements?
@@ -179,14 +177,16 @@ module AWS
           end
 
           # A granee hash looks like:
-          #   { :id => 'abc...fec' }
-          #   { :uri => 'http://abc.com/foo' }
-          #   { :email_address => 'xyz@amazon.com }
+          #
+          #     { :id => 'abc...fec' }
+          #     { :uri => 'http://abc.com/foo' }
+          #     { :email_address => 'xyz@amazon.com }
           #
           # It needs to look like
-          #   'id="abc...fec"'
-          #   'uri="http://abc.com/foo"'
-          #   'emailAddress="xyz@amazon.com"'
+          #
+          #     'id="abc...fec"'
+          #     'uri="http://abc.com/foo"'
+          #     'emailAddress="xyz@amazon.com"'
           type, token = grantee.to_a.flatten
           type = type.to_s.split('_').map{|part| ucfirst(part) }.join
           "#{type[0,1].downcase}#{type[1..-1]}=\"#{token}\""

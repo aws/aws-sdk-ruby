@@ -17,16 +17,16 @@ module AWS
     # A collection that provides access to IAM server certificates
     # belonging to this account.
     #
-    #   iam = AWS::IAM.new
-    #   certificates = iam.server_certificates
+    #     iam = AWS::IAM.new
+    #     certificates = iam.server_certificates
     #
-    # == Uploading A Server Certificate
+    # ## Uploading A Server Certificate
     #
     # You can upload any valid, signed certificate using {#upload}.
     #
-    #   certificates.upload(:name => "MyCert",
-    #                       :certificate_body => my_certificate_body,
-    #                       :private_key => my_private_key)
+    #     certificates.upload(:name => "MyCert",
+    #                         :certificate_body => my_certificate_body,
+    #                         :private_key => my_private_key)
     #
     # For information about generating a server certificate for use
     # with IAM, see
@@ -34,22 +34,22 @@ module AWS
     # Creating and Uploading Server Certificates} in <i>Using AWS
     # Identity and Access Management</i>.
     #
-    # == Getting a Server Certificate by Name
+    # ## Getting a Server Certificate by Name
     #
     # You can get a reference to a server certificate using array notation:
     #
-    #   certificate = certificates['MyCert']
+    #     certificate = certificates['MyCert']
     #
-    # == Enumerating Server Certificates
+    # ## Enumerating Server Certificates
     #
     # Server certificate collections can also be used to enumerate
     # certificates:
     #
-    #   certificates.each do |cert|
-    #     puts cert.name
-    #   end
+    #     certificates.each do |cert|
+    #       puts cert.name
+    #     end
     #
-    # You can limit the certificates returned by passing a +:prefix+
+    # You can limit the certificates returned by passing a `:prefix`
     # option to any of the enumerator methods.  When you pass a
     # prefix, only the certificates whose paths start with the given
     # string will be returned.
@@ -63,7 +63,7 @@ module AWS
       # all be PEM-encoded.
       #
       # @param [Hash] options Options for uploading the certificate.
-      #   +:name+, +:certificate_body+, and +:private_key+ are
+      #   `:name`, `:certificate_body`, and `:private_key` are
       #   required.
       #
       # @option options [String] :certificate_body The contents of the
@@ -101,7 +101,7 @@ module AWS
         resp = client.upload_server_certificate(client_opts)
 
         ServerCertificate.new(
-          resp[:server_certificate_metadata][:server_certificate_name], 
+          resp[:server_certificate_metadata][:server_certificate_name],
           :config => config)
 
       end
@@ -120,7 +120,7 @@ module AWS
         ServerCertificate.new(name, :config => config)
       end
 
-      # @private
+      # @api private
       protected
       def each_item response, &block
         response.server_certificate_metadata_list.each do |sc|

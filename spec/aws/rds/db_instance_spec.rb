@@ -78,6 +78,9 @@ module AWS
           :preferred_maintenance_window => 'window2',
           :read_replica_db_instance_identifiers => %w(abc xyz),
           :read_replica_source_db_instance_identifier => 'mno',
+          :db_subnet_group => {
+            :vpc_id => 'vpc-123',
+          },
         }}
 
         it 'extracts attributes' do
@@ -104,6 +107,30 @@ module AWS
           i.preferred_maintenance_window.should eq('window2')
           i.read_replica_db_instance_identifiers.should eq(['abc','xyz'])
           i.read_replica_source_db_instance_identifier.should eq('mno')
+          i.vpc_id.should eq('vpc-123')
+        end
+
+      end
+
+      context '#vpc' do
+
+        let(:details) {{
+          :db_instance_identifier => instance.id,
+          :db_subnet_group => {
+            :vpc_id => 'vpc-123',
+          },
+        }}
+
+        it 'returns an EC2::VPC object' do
+          vpc = instance.vpc
+          vpc.should be_a(EC2::VPC)
+          vpc.id.should eq('vpc-123')
+          vpc.config.should eq(instance.config)
+        end
+
+        it 'returns nil when it does not have a VPC id' do
+          instance.stub(:vpc_id).and_return(nil)
+          instance.vpc.should be(nil)
         end
 
       end

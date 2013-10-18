@@ -1,0 +1,475 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:json_version: '1.1'
+:target_prefix: OvertureService.
+:api_version: '2012-10-25'
+:operations:
+- :name: CreateConnection
+  :method: :create_connection
+  :inputs:
+    offeringId:
+    - :string
+    - :required
+    connectionName:
+    - :string
+    - :required
+  :outputs:
+    connectionId:
+      :sym: :connection_id
+      :type: :string
+    connectionName:
+      :sym: :connection_name
+      :type: :string
+    connectionState:
+      :sym: :connection_state
+      :type: :string
+    region:
+      :sym: :region
+      :type: :string
+    location:
+      :sym: :location
+      :type: :string
+- :name: CreatePrivateVirtualInterface
+  :method: :create_private_virtual_interface
+  :inputs:
+    connectionId:
+    - :string
+    newPrivateVirtualInterface:
+    - :structure:
+        virtualInterfaceName:
+        - :string
+        vlan:
+        - :integer
+        asn:
+        - :integer
+        authKey:
+        - :string
+        amazonAddress:
+        - :string
+        customerAddress:
+        - :string
+        virtualGatewayId:
+        - :string
+  :outputs:
+    virtualInterfaceId:
+      :sym: :virtual_interface_id
+      :type: :string
+    location:
+      :sym: :location
+      :type: :string
+    connectionId:
+      :sym: :connection_id
+      :type: :string
+    virtualInterfaceType:
+      :sym: :virtual_interface_type
+      :type: :string
+    virtualInterfaceName:
+      :sym: :virtual_interface_name
+      :type: :string
+    vlan:
+      :sym: :vlan
+      :type: :integer
+    asn:
+      :sym: :asn
+      :type: :integer
+    authKey:
+      :sym: :auth_key
+      :type: :string
+    amazonAddress:
+      :sym: :amazon_address
+      :type: :string
+    customerAddress:
+      :sym: :customer_address
+      :type: :string
+    virtualInterfaceState:
+      :sym: :virtual_interface_state
+      :type: :string
+    customerRouterConfig:
+      :sym: :customer_router_config
+      :type: :string
+    virtualGatewayId:
+      :sym: :virtual_gateway_id
+      :type: :string
+    routeFilterPrefixes:
+      :sym: :route_filter_prefixes
+      :type: :hash
+      :members:
+        cidr:
+          :sym: :cidr
+          :type: :string
+- :name: CreatePublicVirtualInterface
+  :method: :create_public_virtual_interface
+  :inputs:
+    connectionId:
+    - :string
+    newPublicVirtualInterface:
+    - :structure:
+        virtualInterfaceName:
+        - :string
+        vlan:
+        - :integer
+        asn:
+        - :integer
+        authKey:
+        - :string
+        amazonAddress:
+        - :string
+        customerAddress:
+        - :string
+        routeFilterPrefixes:
+        - :list:
+          - :structure:
+              cidr:
+              - :string
+  :outputs:
+    virtualInterfaceId:
+      :sym: :virtual_interface_id
+      :type: :string
+    location:
+      :sym: :location
+      :type: :string
+    connectionId:
+      :sym: :connection_id
+      :type: :string
+    virtualInterfaceType:
+      :sym: :virtual_interface_type
+      :type: :string
+    virtualInterfaceName:
+      :sym: :virtual_interface_name
+      :type: :string
+    vlan:
+      :sym: :vlan
+      :type: :integer
+    asn:
+      :sym: :asn
+      :type: :integer
+    authKey:
+      :sym: :auth_key
+      :type: :string
+    amazonAddress:
+      :sym: :amazon_address
+      :type: :string
+    customerAddress:
+      :sym: :customer_address
+      :type: :string
+    virtualInterfaceState:
+      :sym: :virtual_interface_state
+      :type: :string
+    customerRouterConfig:
+      :sym: :customer_router_config
+      :type: :string
+    virtualGatewayId:
+      :sym: :virtual_gateway_id
+      :type: :string
+    routeFilterPrefixes:
+      :sym: :route_filter_prefixes
+      :type: :hash
+      :members:
+        cidr:
+          :sym: :cidr
+          :type: :string
+- :name: DeleteConnection
+  :method: :delete_connection
+  :inputs:
+    connectionId:
+    - :string
+    - :required
+  :outputs:
+    connectionId:
+      :sym: :connection_id
+      :type: :string
+    connectionName:
+      :sym: :connection_name
+      :type: :string
+    connectionState:
+      :sym: :connection_state
+      :type: :string
+    region:
+      :sym: :region
+      :type: :string
+    location:
+      :sym: :location
+      :type: :string
+- :name: DeleteVirtualInterface
+  :method: :delete_virtual_interface
+  :inputs:
+    virtualInterfaceId:
+    - :string
+  :outputs:
+    virtualInterfaceState:
+      :sym: :virtual_interface_state
+      :type: :string
+- :name: DescribeConnectionDetail
+  :method: :describe_connection_detail
+  :inputs:
+    connectionId:
+    - :string
+    - :required
+  :outputs:
+    connectionId:
+      :sym: :connection_id
+      :type: :string
+    connectionName:
+      :sym: :connection_name
+      :type: :string
+    connectionState:
+      :sym: :connection_state
+      :type: :string
+    region:
+      :sym: :region
+      :type: :string
+    location:
+      :sym: :location
+      :type: :string
+    bandwidth:
+      :sym: :bandwidth
+      :type: :string
+    connectionCosts:
+      :sym: :connection_costs
+      :type: :hash
+      :members:
+        name:
+          :sym: :name
+          :type: :string
+        unit:
+          :sym: :unit
+          :type: :string
+        currencyCode:
+          :sym: :currency_code
+          :type: :string
+        amount:
+          :sym: :amount
+          :type: :string
+    orderSteps:
+      :sym: :order_steps
+      :type: :hash
+      :members:
+        number:
+          :sym: :number
+          :type: :string
+        name:
+          :sym: :name
+          :type: :string
+        description:
+          :sym: :description
+          :type: :string
+        owner:
+          :sym: :owner
+          :type: :string
+        sla:
+          :sym: :sla
+          :type: :integer
+        stepState:
+          :sym: :step_state
+          :type: :string
+- :name: DescribeConnections
+  :method: :describe_connections
+  :inputs:
+    connectionId:
+    - :string
+  :outputs:
+    connections:
+      :sym: :connections
+      :type: :hash
+      :members:
+        connectionId:
+          :sym: :connection_id
+          :type: :string
+        connectionName:
+          :sym: :connection_name
+          :type: :string
+        connectionState:
+          :sym: :connection_state
+          :type: :string
+        region:
+          :sym: :region
+          :type: :string
+        location:
+          :sym: :location
+          :type: :string
+- :name: DescribeOfferingDetail
+  :method: :describe_offering_detail
+  :inputs:
+    offeringId:
+    - :string
+    - :required
+  :outputs:
+    offeringId:
+      :sym: :offering_id
+      :type: :string
+    region:
+      :sym: :region
+      :type: :string
+    location:
+      :sym: :location
+      :type: :string
+    offeringName:
+      :sym: :offering_name
+      :type: :string
+    description:
+      :sym: :description
+      :type: :string
+    bandwidth:
+      :sym: :bandwidth
+      :type: :string
+    connectionCosts:
+      :sym: :connection_costs
+      :type: :hash
+      :members:
+        name:
+          :sym: :name
+          :type: :string
+        unit:
+          :sym: :unit
+          :type: :string
+        currencyCode:
+          :sym: :currency_code
+          :type: :string
+        amount:
+          :sym: :amount
+          :type: :string
+    orderSteps:
+      :sym: :order_steps
+      :type: :hash
+      :members:
+        number:
+          :sym: :number
+          :type: :string
+        name:
+          :sym: :name
+          :type: :string
+        description:
+          :sym: :description
+          :type: :string
+        owner:
+          :sym: :owner
+          :type: :string
+        sla:
+          :sym: :sla
+          :type: :integer
+- :name: DescribeOfferings
+  :method: :describe_offerings
+  :inputs: {}
+  :outputs:
+    offerings:
+      :sym: :offerings
+      :type: :hash
+      :members:
+        offeringId:
+          :sym: :offering_id
+          :type: :string
+        region:
+          :sym: :region
+          :type: :string
+        location:
+          :sym: :location
+          :type: :string
+        offeringName:
+          :sym: :offering_name
+          :type: :string
+        description:
+          :sym: :description
+          :type: :string
+        bandwidth:
+          :sym: :bandwidth
+          :type: :string
+        connectionCosts:
+          :sym: :connection_costs
+          :type: :hash
+          :members:
+            name:
+              :sym: :name
+              :type: :string
+            unit:
+              :sym: :unit
+              :type: :string
+            currencyCode:
+              :sym: :currency_code
+              :type: :string
+            amount:
+              :sym: :amount
+              :type: :string
+- :name: DescribeVirtualGateways
+  :method: :describe_virtual_gateways
+  :inputs: {}
+  :outputs:
+    virtualGateways:
+      :sym: :virtual_gateways
+      :type: :hash
+      :members:
+        virtualGatewayId:
+          :sym: :virtual_gateway_id
+          :type: :string
+        virtualGatewayState:
+          :sym: :virtual_gateway_state
+          :type: :string
+- :name: DescribeVirtualInterfaces
+  :method: :describe_virtual_interfaces
+  :inputs:
+    connectionId:
+    - :string
+    virtualInterfaceId:
+    - :string
+  :outputs:
+    virtualInterfaces:
+      :sym: :virtual_interfaces
+      :type: :hash
+      :members:
+        virtualInterfaceId:
+          :sym: :virtual_interface_id
+          :type: :string
+        location:
+          :sym: :location
+          :type: :string
+        connectionId:
+          :sym: :connection_id
+          :type: :string
+        virtualInterfaceType:
+          :sym: :virtual_interface_type
+          :type: :string
+        virtualInterfaceName:
+          :sym: :virtual_interface_name
+          :type: :string
+        vlan:
+          :sym: :vlan
+          :type: :integer
+        asn:
+          :sym: :asn
+          :type: :integer
+        authKey:
+          :sym: :auth_key
+          :type: :string
+        amazonAddress:
+          :sym: :amazon_address
+          :type: :string
+        customerAddress:
+          :sym: :customer_address
+          :type: :string
+        virtualInterfaceState:
+          :sym: :virtual_interface_state
+          :type: :string
+        customerRouterConfig:
+          :sym: :customer_router_config
+          :type: :string
+        virtualGatewayId:
+          :sym: :virtual_gateway_id
+          :type: :string
+        routeFilterPrefixes:
+          :sym: :route_filter_prefixes
+          :type: :hash
+          :members:
+            cidr:
+              :sym: :cidr
+              :type: :string

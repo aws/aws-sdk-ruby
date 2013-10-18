@@ -22,3 +22,7 @@ end
 When /^I count the items in the table with the following conditions:$/ do |string|
   @result = @table.items.instance_eval(string).count
 end
+
+When(/^I scan the the first item with the name "(.*?)"$/) do |name|
+  @result = @table.items.where(:name => name).first
+end

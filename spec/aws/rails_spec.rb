@@ -15,9 +15,9 @@ require 'spec_helper'
 
 module AWS
   describe Rails do
-  
+
     context 'Rails Integration' do
-  
+
       context 'log_to_rails_logger' do
 
         it 'uses Rails.logger for rails 3+' do
@@ -36,8 +36,8 @@ module AWS
           logger.should == 'foo'
 
         end
-      
-  
+
+
         it 'uses RAILS_DEFUALT_LOGGER for older rails' do
 
           module ::Rails; end
@@ -58,17 +58,17 @@ module AWS
         end
 
       end
-  
+
       context 'add_action_mailer_delivery_method' do
-  
+
         before(:each) do
-  
+
           module ::Rails
             def self.version
               '3.0.10'
             end
           end
-  
+
           module ::ActionMailer
             class Base
               def self.add_delivery_method name, klass, opts
@@ -81,14 +81,14 @@ module AWS
               ::ActionMailer::Base.instance_eval &block
             end
           end
-  
+
         end
-  
+
         after(:each) do
           Object.send(:remove_const, :ActionMailer)
           Object.send(:remove_const, :Rails)
         end
-  
+
         it 'adds an :amazon_ses delivery method' do
           ActionMailer::Base.should_receive(:add_delivery_method).
             with(:amazon_ses, AWS::SimpleEmailService, {})
@@ -100,13 +100,13 @@ module AWS
             with(:action_mailer)
           AWS::Rails.add_action_mailer_delivery_method
         end
-  
+
         it 'returns nil' do
           AWS::Rails.add_action_mailer_delivery_method.should == nil
         end
-  
+
         context 'older rails' do
-  
+
           before(:each) do
             ::Rails.stub(:version).and_return('1.1.6')
             AWS.config(
@@ -114,39 +114,39 @@ module AWS
               :access_key_id => 'id',
               :secret_access_key => 'secret')
           end
-  
+
           after(:each) do
             AWS.config(
               :stub_requests => false,
               :access_key_id => nil,
               :secret_access_key => nil)
           end
-  
+
           it 'defines a method for older versions of rails' do
-  
+
             ActionMailer::Base.should_receive(:define_method).
               with('perform_delivery_amazon_ses')
-  
+
             AWS::Rails.add_action_mailer_delivery_method
-  
+
           end
-  
+
           it 'the added method calls send_raw_email' do
-  
+
             ses = double('ses')
             ses.should_receive(:send_raw_email).with('raw')
             AWS::SimpleEmailService.should_receive(:new).with({}).and_return(ses)
-  
+
             AWS::Rails.add_action_mailer_delivery_method
             ActionMailer::Base.new.perform_delivery_amazon_ses('raw')
-  
+
           end
-  
+
         end
-  
+
       end
-  
+
     end
-    
+
   end
 end

@@ -26,13 +26,13 @@ Feature: ELB Load Balancers
     | TYPE        | NAME                                | VALUE              |
     | param       | Action                              | CreateLoadBalancer |
     | param_match | LoadBalancerName                    | ruby-test-.*       |
-    | param       | AvailabilityZones.member.1          | us-east-1a         |
-    | param       | AvailabilityZones.member.2          | us-east-1b         |
+    | param       | AvailabilityZones.member.1          | us-east-1b         |
+    | param       | AvailabilityZones.member.2          | us-east-1c         |
     | param       | Listeners.member.1.Protocol         | HTTP               |
     | param       | Listeners.member.1.InstancePort     | 80                 |
     | param       | Listeners.member.1.InstanceProtocol | HTTP               |
     | param       | Listeners.member.1.LoadBalancerPort | 80                 |
-    
+
   @delete
   Scenario: Delete a load balancer
     Given I create a load balancer
@@ -57,11 +57,11 @@ Feature: ELB Load Balancers
     Given I create a load balancer
     When I update the health check configuration with:
     | OPT_NAME | OPT_VALUE |
-    | interval | 12        |   
+    | interval | 12        |
     | timeout  | 11        |
     Then the health check configuration should have the following values:
     | OPT_NAME | OPT_VALUE |
-    | interval | 12        |   
+    | interval | 12        |
     | timeout  | 11        |
 
   @ec2 @security_groups
@@ -77,4 +77,4 @@ Feature: ELB Load Balancers
     | param  | IpPermissions.1.Groups.1.UserId    | amazon-elb                    |
     | param  | IpPermissions.1.Groups.1.GroupName | amazon-elb-sg                 |
     | param  | IpPermissions.1.IpProtocol         | tcp                           |
-    
+

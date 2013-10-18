@@ -16,7 +16,7 @@ module AWS
 
     # This mixin provides a method for parsing Auto Scaling group options
     # (for create and update methods).
-    # @private
+    # @api private
     module GroupOptions
 
       protected
@@ -36,42 +36,50 @@ module AWS
       #
       # @option options [required,Array<String>] :availability_zones
       #   A list of Availability Zones for the Auto Scaling group.
-      #   This can be {EC2::AvailabilityZone} objects or availability 
+      #   This can be {EC2::AvailabilityZone} objects or availability
       #   zone names.
       #
-      # @option options [Integer] :default_cooldown 
-      #   The amount of time, in seconds, after a scaling activity completes 
+      # @option options [Integer] :default_cooldown
+      #   The amount of time, in seconds, after a scaling activity completes
       #   before any further trigger-related scaling activities can start.
       #
       # @option options [Integer] :desired_capacity
-      #   The number of Amazon EC2 instances that should be running in 
+      #   The number of Amazon EC2 instances that should be running in
       #   the group.
       #
       # @option options [Integer] :health_check_grace_period
-      #   Length of time in seconds after a new Amazon EC2 instance comes 
+      #   Length of time in seconds after a new Amazon EC2 instance comes
       #   into service that Auto Scaling starts checking its health.
       #
       # @option options [Symbol] :health_check_type
-      #   The service you want the health status from, 
-      #   Amazon EC2 or Elastic Load Balancer. Valid values are 
-      #   +:ec2+ or +:elb+.
+      #   The service you want the health status from,
+      #   Amazon EC2 or Elastic Load Balancer. Valid values are
+      #   `:ec2` or `:elb`.
       #
       # @option options [String] :placement_group
-      #   Physical location of your cluster placement group created in 
+      #   Physical location of your cluster placement group created in
       #   Amazon EC2. For more information about cluster placement group, see
-      #   {Using Cluster Instances}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html].
+      #   [Using Cluster Instances](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html).
+      #
+      # @option options [Array<String>] :termination_policies
+      #   A standalone termination policy or a list of termination policies used
+      #   to select the instance to terminate. The policies are executed in the
+      #   order they are listed. For more information on creating a termination
+      #   policy for your Auto Scaling group, go to
+      #   [Instance Termination Policy for Your Auto Scaling Group](http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-termination-policy.html)
+      #   in the Auto Scaling Developer Guide.
       #
       # @option options [Array<Hash>] :tags A list of tags to apply launched
       #   instances.  Each tag hash may have the following keys:
       #
-      #   * +:key+ - (required,String) The tag name.
-      #   * +:value+ - (String) The optional tag value.
-      #   * +:propagate_at_launch+ - (Boolean) Whether or not to propagate 
-      #     to instances, defaults to true.
+      #     * `:key` - (required,String) The tag name.
+      #     * `:value` - (String) The optional tag value.
+      #     * `:propagate_at_launch` - (Boolean) Whether or not to propagate
+      #       to instances, defaults to true.
       #
       # @option options [Array<EC2::Subnet>,Array<String>] :subnets
-      #   A list of subnet identifiers of Amazon Virtual Private Clouds 
-      #   (Amazon VPCs). Ensure the subnets' Availability Zones match the 
+      #   A list of subnet identifiers of Amazon Virtual Private Clouds
+      #   (Amazon VPCs). Ensure the subnets' Availability Zones match the
       #   Availability Zones specified.
       #
       # @return [Hash]
@@ -95,13 +103,14 @@ module AWS
         group_opts[:tags] = tags_opt(options) if
           options.key?(:tags)
 
-        [ 
+        [
           :min_size,
           :max_size,
-          :default_cooldown, 
-          :desired_capacity, 
+          :default_cooldown,
+          :desired_capacity,
           :health_check_grace_period,
           :placement_group,
+          :termination_policies,
         ].each do |opt|
           group_opts[opt] = options[opt] if options.key?(opt)
         end

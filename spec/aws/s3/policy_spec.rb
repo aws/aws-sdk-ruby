@@ -43,7 +43,7 @@ module AWS
             bucket = Bucket.new('mybucket')
             s3object = S3Object.new(bucket, 'object/key')
             statement.resources = [s3object]
-            statement.to_h["Resource"].should == 
+            statement.to_h["Resource"].should ==
               ["arn:aws:s3:::mybucket/object/key"]
           end
 
@@ -51,7 +51,7 @@ module AWS
             bucket = Bucket.new('mybucket')
             collection = bucket.objects.with_prefix('foo/bar')
             statement.resources = [collection]
-            statement.to_h["Resource"].should == 
+            statement.to_h["Resource"].should ==
               ["arn:aws:s3:::mybucket/foo/bar*"]
           end
 

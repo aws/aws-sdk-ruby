@@ -16,13 +16,13 @@ module AWS
 
     # Represents a single route in a {RouteTable}.
     #
-    #   # enumerating routes within a route table
-    #   ec2 = AWS::EC2.new
-    #   route_table = ec2.route_tables.first
-    #   route_table.routes.each do |route|
-    #     # ...  
-    #   end
-    # 
+    #     # enumerating routes within a route table
+    #     ec2 = AWS::EC2.new
+    #     route_table = ec2.route_tables.first
+    #     route_table.routes.each do |route|
+    #       # ...
+    #     end
+    #
     class RouteTable < Resource
       class Route
 
@@ -47,7 +47,7 @@ module AWS
 
           if details[:network_interface_id]
             @network_interface = NetworkInterface.new(
-              details[:network_interface_id], 
+              details[:network_interface_id],
               :vpc_id => route_table.vpc_id,
               :config => route_table.config)
           end

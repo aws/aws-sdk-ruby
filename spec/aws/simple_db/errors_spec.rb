@@ -34,8 +34,8 @@ module AWS
 
         let(:http_request) { double("http request") }
 
-        let(:http_response) { 
-          double("http response", :body => error_xml, :status => 400) 
+        let(:http_response) {
+          double("http response", :body => error_xml, :status => 400)
         }
 
         let(:exception) do

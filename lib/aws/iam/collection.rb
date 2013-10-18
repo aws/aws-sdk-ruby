@@ -26,7 +26,7 @@ module AWS
         #   filtered.
         attr_reader :prefix
 
-        # @private
+        # @api private
         def initialize options = {}
           @prefix = options[:prefix]
           super
@@ -46,7 +46,7 @@ module AWS
 
         protected
         def _each_item marker, max_items, options = {}, &block
-            
+
           prefix = options.delete(:prefix) || self.prefix
 
           options[:path_prefix] = "/#{prefix}".sub(%r{^//}, "/") if prefix

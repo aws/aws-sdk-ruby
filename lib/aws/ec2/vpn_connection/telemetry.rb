@@ -15,7 +15,7 @@ module AWS
   class EC2
     class VPNConnection < Resource
       class Telemetry
-        
+
         def initialize vpn_connection, details
           @vpn_connection = vpn_connection
           @outside_ip_address = details.outside_ip_address

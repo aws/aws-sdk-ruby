@@ -19,7 +19,7 @@ module AWS
     # use it to access the {AttributeCollection} for the item in
     # order to add, remove, or read the item's attributes.
     #
-    #   item = AWS::SimpleDB.new.domains['mydomain'].items['item-id']
+    #     item = AWS::SimpleDB.new.domains['mydomain'].items['item-id']
     #
     class Item
 
@@ -35,7 +35,7 @@ module AWS
         @name = name
         super
       end
-      
+
       # @return [Domain] The domain this item belongs to.
       attr_reader :domain
 
@@ -50,9 +50,9 @@ module AWS
 
       # Deletes the item and all of its attributes from SimpleDB.
       # @param [Hash] options
-      # @option options [Hash] :if Pass a hash with a single key (attribute 
+      # @option options [Hash] :if Pass a hash with a single key (attribute
       #   name) and a single value (the attribute value).  This causes the
-      #   delete to become conditional. 
+      #   delete to become conditional.
       # @option options [String,Symbol] :unless Pass an attribute name.  This
       #   causes the delete to become conditional on that attribute not
       #   existing.
@@ -80,7 +80,7 @@ module AWS
       end
 
       def == other
-        other.is_a?(Item) and 
+        other.is_a?(Item) and
         other.domain == domain and
         other.name == name
       end

@@ -69,7 +69,7 @@ Feature: Managing SNS Topics
     Then The queue should eventually have the message
 
   @delivery_policies
-  Scenario: 
+  Scenario:
     Given I create an SNS topic
     And I set the delivery policy to:
     """

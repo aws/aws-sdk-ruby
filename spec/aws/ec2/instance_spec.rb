@@ -55,7 +55,7 @@ module AWS
         let(:response) { client.stub_for(:get_console_output) }
 
         before(:each) do
-          response.stub(:output).and_return("YWJj\n")
+          response.data[:output] = "YWJj\n"
         end
 
         it 'calls get_console_output on the client' do
@@ -70,7 +70,7 @@ module AWS
         end
 
         it 'does not attempt to decode output when blank' do
-          response.stub(:output).and_return(nil)
+          response.data.delete(:output)
           instance.console_output.should == nil
         end
 

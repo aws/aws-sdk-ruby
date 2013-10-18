@@ -14,46 +14,44 @@
 module AWS
   class IAM
 
-    
+
     # Represents an IAM User.  Each AWS account can have many users.  Users
     # can be organized (optionally) into groups.  Users (and groups) can be
     # given policies that affect that they can do.
     #
-    # == Creating A User
+    # ## Creating A User
     #
-    #   iam = AWS::IAM.new
+    #     iam = AWS::IAM.new
+    #     user = iam.users.create('johndoe')
     #
-    #   user = iam.users.create('johndoe')
-    # 
-    #
-    # == Renaming a User
+    # ## Renaming a User
     #
     # You can only edit a user's name and path (both of which will modify
     # the user's ARN).
     #
-    #   user = iam.users['johndoe']
-    #   user.name = 'newname'
+    #     user = iam.users['johndoe']
+    #     user.name = 'newname'
     #
-    # == User Path
-    # 
+    # ## User Path
+    #
     # When you create a user you can assign a path.  Paths must begin and
-    # end with a forward slash (/).  
+    # end with a forward slash (/).
     #
-    #   user = iam.users.create('newuser', :path => '/developers/ruby/')
+    #     user = iam.users.create('newuser', :path => '/developers/ruby/')
     #
     # Paths are a useful tool for organizing/tagging users.  You can later
     # enumerate users by their path prefixes:
     #
-    #   iam.users.each(:path_prefix => '/developers').each do |developer|
-    #     puts developer.name
-    #   end
+    #     iam.users.each(:path_prefix => '/developers').each do |developer|
+    #       puts developer.name
+    #     end
     #
-    # == Login Profile
+    # ## Login Profile
     #
     # A login profile is required for an IAM user to use the AWS Management
     # console (web interface).  See {LoginProfile} for more information.
     #
-    # == Deleting Users
+    # ## Deleting Users
     #
     # In order to delete a user you must first remove it from all of its
     # groups and delete all of its signing certificates.  Once this is done:
@@ -91,8 +89,8 @@ module AWS
       # @attr_reader [String] The user's ARN (Amazon Resource Name).
       attribute :arn
 
-      # @attr [String] The path for this user.  Paths are used to 
-      #   identify which division or part of an organization the user 
+      # @attr [String] The path for this user.  Paths are used to
+      #   identify which division or part of an organization the user
       #   belongs to.
       mutable_attribute :path
 
@@ -129,33 +127,33 @@ module AWS
 
       # Returns a collection that represents all policies for this user.
       #
-      #   user.policies.each do |policy|
-      #     puts policy.name
-      #   end
+      #     user.policies.each do |policy|
+      #       puts policy.name
+      #     end
       #
       # @return [PolicyCollection] Returns a collection that represents
       #   all policies for this user.
       def policies
-        UserPolicyCollection.new(self)  
+        UserPolicyCollection.new(self)
       end
 
       # Returns a collection that represents the signing certificates
       # belonging to this user.
       #
-      #   user.signing_certificates.each do |cert|
-      #     # ...
-      #   end
+      #     user.signing_certificates.each do |cert|
+      #       # ...
+      #     end
       #
       # If you need to access the signing certificates of this AWS account,
       # see {IAM#signing_certificates}.
-      # 
+      #
       # @return [SigningCertificateCollection] Returns a collection that
       #   represents signing certificates for this user.
       def signing_certificates
         SigningCertificateCollection.new(:user => self, :config => config)
       end
 
-      # @return [MFADeviceCollection] Returns a collection that represents 
+      # @return [MFADeviceCollection] Returns a collection that represents
       #   all MFA devices assigned to this user.
       def mfa_devices
         MFADeviceCollection.new(self)
@@ -166,19 +164,18 @@ module AWS
       # Management Console}.  The object returned by this method
       # allows you to set or delete the password.  For example:
       #
-      #   user.login_profile.password = "TheNewPassword"
+      #     user.login_profile.password = "TheNewPassword"
       #
-      # @return [LoginProfile] Returns the login profile for this
-      #   user.
+      # @return [LoginProfile] Returns the login profile for this user.
       def login_profile
         LoginProfile.new(self)
       end
 
       # Returns a collection that represents the access keys for this user.
       #
-      #   user.access_keys.each do |access_key|
-      #     puts access_key.id
-      #   end
+      #     user.access_keys.each do |access_key|
+      #       puts access_key.id
+      #     end
       #
       # @return [AccessKeyCollection] Returns a collection that represents all
       #   access keys for this user.
@@ -186,15 +183,13 @@ module AWS
         AccessKeyCollection.new(:user => self)
       end
 
-      # Returns a collection that includes all of the groups the user
-      # is in.
-      #
+      # Returns a collection that includes all of the groups the user is in.
       # @return [UserGroupCollection]
       def groups
         UserGroupCollection.new(self)
       end
 
-      # @private
+      # @api private
       protected
       def resource_identifiers
         [[:user_name, name]]

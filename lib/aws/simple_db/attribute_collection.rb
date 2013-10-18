@@ -37,10 +37,12 @@ module AWS
       #
       # You can ask for any attribute by name.  The attribute may or may not
       # actually exist in SimpleDB.
-      # 
+      #
       # @example Get an attribute by symbol or string name
+      #
       #   colors = item.attributes[:colors]
       #   colors = item.attributes['colors']
+      #
       # @param [String, Symbol] attribute_name name of the attribute to get.
       # @return [Item] An item with the given name.
       def [] attribute_name
@@ -50,7 +52,9 @@ module AWS
       # Sets the values for a given attribute.
       #
       # @example Replace all of the values for the named attribute.
+      #
       #   item.attributes[:color] = 'red', 'blue'
+      #
       # @return This method returns the values passed to it.
       def []= attribute_name, *values
         self[attribute_name].set(*values)
@@ -64,12 +68,12 @@ module AWS
       #     puts "#{name}: #{value}"
       #   end
       #
-      # @yield [attribute_name, attribute_value] Yields once for every 
+      # @yield [attribute_name, attribute_value] Yields once for every
       #   attribute value on the item.
       # @yieldparam [String] attribute_name
       # @yieldparam [String] attribute_value
-      # @param [Hash] options 
-      # @option options [Boolean] :consistent_read (false) Causes this 
+      # @param [Hash] options
+      # @option options [Boolean] :consistent_read (false) Causes this
       #   method to yield the most current attributes for this item.
       # @return [nil]
       def each_value options = {}, &block
@@ -101,13 +105,13 @@ module AWS
       #   on the item.  Yields each attribute only one time, even it
       #   has multiple values.
       # @yieldparam [Attribute] attribute
-      # @param [Hash] options 
-      # @option options [Boolean] :consistent_read (false) Causes this 
+      # @param [Hash] options
+      # @option options [Boolean] :consistent_read (false) Causes this
       #   method to yield the most current attributes for this item.
       # @return [nil]
       def each options = {}, &block
         yielded = {}
-        each_value(options) do |attribute_name, attribute_value| 
+        each_value(options) do |attribute_name, attribute_value|
           unless yielded[attribute_name]
             attribute = self[attribute_name]
             yield(attribute)
@@ -119,7 +123,7 @@ module AWS
 
       # Replaces attributes for the {#item}.
       #
-      # The +attributes_hash+ should have attribute names as keys.  The 
+      # The `attributes_hash` should have attribute names as keys.  The
       # hash values should be either strings or arrays of strings.
       #
       # Attributes not named in this hash are left alone.  Attributes named
@@ -128,7 +132,7 @@ module AWS
       # @example
       #
       #   item.attributes.set(
-      #     'colors' => ['red', 'blue'],  
+      #     'colors' => ['red', 'blue'],
       #     'category' => 'clearance')
       #
       # @param [Hash] attributes
@@ -140,13 +144,13 @@ module AWS
 
       # Adds values to attributes on the {#item}.
       #
-      # The +attributes_hash+ should have attribute names as keys.  The 
+      # The `attributes_hash` should have attribute names as keys.  The
       # hash values should be either strings or arrays of strings.
       #
       # @example
       #
       #   item.attributes.add(
-      #     'colors' => ['red', 'blue'],  
+      #     'colors' => ['red', 'blue'],
       #     'category' => 'clearance')
       #
       # @param[Hash] attribute_hash
@@ -156,6 +160,8 @@ module AWS
       end
 
       # Perform a mixed update of added and replace attributes.
+      #
+      # @example
       #
       #   item.attributes.put(
       #     :add => { 'colors' => %w(green blue), 'tags' => 'cool' }
@@ -183,11 +189,12 @@ module AWS
       # arrays of strings.
       #
       # @example
+      #
       #   item.attributes.to_h
       #   #=> { 'colors' => ['red','blue'], 'size' => ['large'] }
       #
-      # @param [Hash] options 
-      # @option options [Boolean] :consistent_read (false) Causes this 
+      # @param [Hash] options
+      # @option options [Boolean] :consistent_read (false) Causes this
       #   method to return the most current attributes values.
       # @return [Hash]
       def to_h options = {}
@@ -202,10 +209,12 @@ module AWS
       # Delete one or more attributes from {#item}.
       #
       # @example Delete a list of attributes by name (accepts a list or array)
+      #
       #   item.attributes.delete 'size', 'color'
       #   item.attributes.delete %w(size color)
       #
       # @example Delete a specific list of attribute values
+      #
       #   item.attributes.delete(:color => 'red', :tags => %w(special limited))
       #
       # @overload delete(attributes)

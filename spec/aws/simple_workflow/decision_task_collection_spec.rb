@@ -67,38 +67,38 @@ module AWS
 
         before(:each) do
           response.stub(:data).and_return({
-            "taskToken"=>"tasktoken", 
+            "taskToken"=>"tasktoken",
             "startedEventId"=>3,
-            "previousStartedEventId"=>0, 
-            "workflowType"=>{"name"=>"name", "version"=>"version"}, 
-            "workflowExecution"=> {"workflowId"=>"wid", "runId"=>"rid"}, 
+            "previousStartedEventId"=>0,
+            "workflowType"=>{"name"=>"name", "version"=>"version"},
+            "workflowExecution"=> {"workflowId"=>"wid", "runId"=>"rid"},
             "events"=>[
               {
                 "workflowExecutionStartedEventAttributes"=>{
-                  "parentInitiatedEventId"=>0, 
-                  "taskStartToCloseTimeout"=>"3600", 
-                  "taskList"=>{"name"=>"task-list"}, 
-                  "workflowType"=>{"name"=>"name", "version"=>"version"}, 
-                  "executionStartToCloseTimeout"=>"3600", 
+                  "parentInitiatedEventId"=>0,
+                  "taskStartToCloseTimeout"=>"3600",
+                  "taskList"=>{"name"=>"task-list"},
+                  "workflowType"=>{"name"=>"name", "version"=>"version"},
+                  "executionStartToCloseTimeout"=>"3600",
                   "childPolicy"=>"TERMINATE"
-                }, 
-                "eventType"=>"WorkflowExecutionStarted", 
-                "eventId"=>1, 
+                },
+                "eventType"=>"WorkflowExecutionStarted",
+                "eventId"=>1,
                 "eventTimestamp"=>1320428958.56
-              }, 
+              },
               {
-                "eventType"=>"DecisionTaskScheduled", 
-                "eventId"=>2, 
+                "eventType"=>"DecisionTaskScheduled",
+                "eventId"=>2,
                 "decisionTaskScheduledEventAttributes"=>{
-                  "taskList"=>{"name"=>"task-list"}, 
+                  "taskList"=>{"name"=>"task-list"},
                   "startToCloseTimeout"=>"P0Y0M0DT0H0M3600S"
-                }, 
+                },
                 "eventTimestamp"=>1320428958.56
-              }, 
+              },
               {
-                "eventType"=>"DecisionTaskStarted", 
-                "eventId"=>3, 
-                "eventTimestamp"=>1320428959.24, 
+                "eventType"=>"DecisionTaskStarted",
+                "eventId"=>3,
+                "eventTimestamp"=>1320428959.24,
                 "decisionTaskStartedEventAttributes"=>{
                   "scheduledEventId"=>2
                 }
@@ -109,7 +109,7 @@ module AWS
         end
 
         context ':identity' do
-          
+
           it 'passes the identity to the client request' do
 
             client.should_receive(method).
@@ -121,7 +121,7 @@ module AWS
           end
 
           it 'defaults to the hostname and pid' do
-            
+
             ident = "#{Socket.gethostname}:#{Process.pid}"
 
             client.should_receive(method).
@@ -194,7 +194,7 @@ module AWS
             end
             yielded.should == false
           end
-          
+
         end
 
         context 'without block' do
@@ -249,7 +249,7 @@ module AWS
 
       end
 
-      context '#poll' do 
+      context '#poll' do
 
         it 'calls #poll_for_single_task in a loop' do
 

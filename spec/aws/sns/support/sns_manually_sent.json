@@ -1,0 +1,12 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "5b324425-3d5e-4fdf-a3f6-f46b8f93df79",
+  "TopicArn" : "arn:aws:sns:eu-west-1:382739154790:for_justeat_aws_specs",
+  "Subject" : "sdfghdsfg",
+  "Message" : "dfgdsfg",
+  "Timestamp" : "2012-04-30T11:07:54.008Z",
+  "SignatureVersion" : "1",
+  "Signature" : "CTbst0fA37gbKnC0fiWK6HB0nQOr767MSLCJaWb0GyXc7283m1gozU3lRvOBaKP5Cwcj+clhR+rAN1m0Cp6W63oxBEu9n1Z50oyWx/tWtQd2j+MPaes+tNJSGohjHSe5qAqMwvYFYTZkbgFDFoWuVQLQuRj9I53hR1Eo3waHkJQ=",
+  "SigningCertURL" : "https://sns.eu-west-1.amazonaws.com/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.pem",
+  "UnsubscribeURL" : "https://sns.eu-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-1:382739154790:for_justeat_aws_specs:674f4ab3-2d1d-4df9-b411-b8a336f0ef7d"
+}

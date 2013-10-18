@@ -1,0 +1,116 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:abort_multipart_upload: "Calls the DELETE AbortMultipartUpload API operation.\n@param
+  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
+  *required* - (String) \n  * `:upload_id` - *required* - (String) \n@return [Core::Response]"
+:complete_multipart_upload: "Calls the POST CompleteMultipartUpload API operation.\n@param
+  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
+  *required* - (String) \n  * `:upload_id` - *required* - (String) \n  * `:archive_size`
+  - (Integer) \n  * `:checksum` - *required* - (String) \n  * `:content_sha256` -
+  (String) \n@return [Core::Response]"
+:create_vault: "Calls the PUT CreateVault API operation.\n@param [Hash] options\n
+  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
+  \n@return [Core::Response]"
+:delete_archive: "Calls the DELETE DeleteArchive API operation.\n@param [Hash] options\n
+  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
+  \n  * `:archive_id` - *required* - (String) \n@return [Core::Response]"
+:delete_vault: "Calls the DELETE DeleteVault API operation.\n@param [Hash] options\n
+  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
+  \n@return [Core::Response]"
+:delete_vault_notifications: "Calls the DELETE DeleteVaultNotifications API operation.\n@param
+  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
+  *required* - (String) \n@return [Core::Response]"
+:describe_job: "Calls the GET DescribeJob API operation.\n@param [Hash] options\n
+  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
+  \n  * `:job_id` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:job_id`
+  - (String)\n  * `:job_description` - (String)\n  * `:action` - (String)\n  * `:archive_id`
+  - (String)\n  * `:vault_arn` - (String)\n  * `:creation_date` - (String)\n  * `:completed`
+  - (Boolean)\n  * `:status_code` - (String)\n  * `:status_message` - (String)\n  *
+  `:archive_size_in_bytes` - (Integer)\n  * `:inventory_size_in_bytes` - (Integer)\n
+  \ * `:sns_topic` - (String)\n  * `:completion_date` - (String)\n  * `:sha256_tree_hash`
+  - (String)"
+:describe_vault: "Calls the GET DescribeVault API operation.\n@param [Hash] options\n
+  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:vault_arn` - (String)\n  * `:vault_name`
+  - (String)\n  * `:creation_date` - (String)\n  * `:last_inventory_date` - (String)\n
+  \ * `:number_of_archives` - (Integer)\n  * `:size_in_bytes` - (Integer)"
+:get_job_output: "Calls the GET GetJobOutput API operation.\n@param [Hash] options\n
+  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
+  \n  * `:job_id` - *required* - (String) \n  * `:range` - (String) \n@return [Core::Response]"
+:get_vault_notifications: "Calls the GET GetVaultNotifications API operation.\n@param
+  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
+  *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:sns_topic` - (String)\n
+  \ * `:events` - (Array<String>)"
+:initiate_job: "Calls the POST InitiateJob API operation.\n@param [Hash] options\n
+  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
+  \n  * `:job_parameters` - *required* - (Hash) \n    * `:format` - (String) \n    *
+  `:type` - (String) \n    * `:archive_id` - (String) \n    * `:description` - (String)
+  \n    * `:sns_topic` - (String) \n@return [Core::Response]"
+:initiate_multipart_upload: "Calls the POST InitiateMultipartUpload API operation.\n@param
+  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
+  *required* - (String) \n  * `:archive_description` - (String) \n  * `:part_size`
+  - (Integer) \n@return [Core::Response]"
+:list_jobs: "Calls the GET ListJobs API operation.\n@param [Hash] options\n  * `:account_id`
+  - *required* - (String) \n  * `:vault_name` - *required* - (String) \n  * `:limit`
+  - (Integer) \n  * `:marker` - (String) \n  * `:statuscode` - (String) \n  * `:completed`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:job_list` - (Array<Hash>)\n
+  \   * `:job_id` - (String)\n    * `:job_description` - (String)\n    * `:action`
+  - (String)\n    * `:archive_id` - (String)\n    * `:vault_arn` - (String)\n    *
+  `:creation_date` - (String)\n    * `:completed` - (Boolean)\n    * `:status_code`
+  - (String)\n    * `:status_message` - (String)\n    * `:archive_size_in_bytes` -
+  (Integer)\n    * `:inventory_size_in_bytes` - (Integer)\n    * `:sns_topic` - (String)\n
+  \   * `:completion_date` - (String)\n    * `:sha256_tree_hash` - (String)\n  * `:marker`
+  - (String)"
+:list_multipart_uploads: "Calls the GET ListMultipartUploads API operation.\n@param
+  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
+  *required* - (String) \n  * `:upload_id_marker` - (String) \n  * `:limit` - (Integer)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:uploads_list` - (Array<Hash>)\n    * `:multipart_upload_id`
+  - (String)\n    * `:vault_arn` - (String)\n    * `:archive_description` - (String)\n
+  \   * `:part_size_in_bytes` - (Integer)\n    * `:creation_date` - (String)\n  *
+  `:marker` - (String)"
+:list_parts: "Calls the GET ListParts API operation.\n@param [Hash] options\n  * `:account_id`
+  - *required* - (String) \n  * `:vault_name` - *required* - (String) \n  * `:upload_id`
+  - *required* - (String) \n  * `:marker` - (String) \n  * `:limit` - (Integer) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:multipart_upload_id` - (String)\n  * `:vault_arn`
+  - (String)\n  * `:archive_description` - (String)\n  * `:part_size_in_bytes` - (Integer)\n
+  \ * `:creation_date` - (String)\n  * `:parts` - (Array<Hash>)\n    * `:range_in_bytes`
+  - (String)\n    * `:sha256_tree_hash` - (String)\n  * `:marker` - (String)"
+:list_vaults: "Calls the GET ListVaults API operation.\n@param [Hash] options\n  *
+  `:account_id` - *required* - (String) \n  * `:marker` - (String) \n  * `:limit`
+  - (Integer) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:vault_list` - (Array<Hash>)\n
+  \   * `:vault_arn` - (String)\n    * `:vault_name` - (String)\n    * `:creation_date`
+  - (String)\n    * `:last_inventory_date` - (String)\n    * `:number_of_archives`
+  - (Integer)\n    * `:size_in_bytes` - (Integer)\n  * `:marker` - (String)"
+:set_vault_notifications: "Calls the PUT SetVaultNotifications API operation.\n@param
+  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
+  *required* - (String) \n  * `:vault_notification_config` - *required* - (Hash) \n
+  \   * `:sns_topic` - (String) \n    * `:events` - (Array&lt;String>) \n    * `:member`
+  - (String) \n@return [Core::Response]"
+:upload_archive: "Calls the POST UploadArchive API operation.\n@param [Hash] options\n
+  \ * `:vault_name` - *required* - (String) \n  * `:account_id` - *required* - (String)
+  \n  * `:archive_description` - (String) \n  * `:checksum` - *required* - (String)
+  \n  * `:body` - *required* - (IO) \n  * `:content_sha256` - (String) \n@return [Core::Response]"
+:upload_multipart_part: "Calls the PUT UploadMultipartPart API operation.\n@param
+  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
+  *required* - (String) \n  * `:upload_id` - *required* - (String) \n  * `:checksum`
+  - *required* - (String) \n  * `:range` - (String) \n  * `:body` - *required* - (IO)
+  \n  * `:content_sha256` - (String) \n@return [Core::Response]"

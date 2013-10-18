@@ -27,7 +27,7 @@ module AWS
       let(:device) { MFADevice.new(user, 'ABCXYZ123') }
 
       context '#user' do
-        
+
         it 'returns the mfa device owner/user' do
           device.user.should == user
         end
@@ -35,7 +35,7 @@ module AWS
       end
 
       context '#serial_number' do
-        
+
         it 'returns the mfa device serial number' do
           device.serial_number.should == 'ABCXYZ123'
         end

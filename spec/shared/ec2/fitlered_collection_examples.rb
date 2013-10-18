@@ -30,7 +30,7 @@ module AWS
       end
 
       context 'filtered enumeration' do
-            
+
         it 'accepts multiple values for a single filter name' do
           client.should_receive(client_method).
             with(:filters => [{ :name => 'filter-name', :values => %w(abc xyz) }])

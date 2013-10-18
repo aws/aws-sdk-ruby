@@ -13,30 +13,30 @@
 
 module AWS
   class SimpleDB
-    
-    # @private
+
+    # @api private
     module ConsistentReadOption
 
       # Determines if SimpleDB should be read consistently or not.
       #
       # Precedence is given to:
       #
-      # * +:consistent_read+ option
+      # * `:consistent_read` option
       # * SimpleDB.consistent_reads block value
       # * AWS.config.simple_db_consistent_reads?
-      # 
+      #
       # @return [Boolean] Returns true if a read should be made consistently
       #   to SimpleDB.
       def consistent_read options
         if options.has_key?(:consistent_read)
-          options[:consistent_read] ? true : false  
+          options[:consistent_read] ? true : false
         elsif SimpleDB.send(:in_consistent_reads_block?)
           SimpleDB.send(:consistent_reads_state)
         else
           config.simple_db_consistent_reads?
         end
       end
-        
+
     end
   end
 end

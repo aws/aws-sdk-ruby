@@ -20,33 +20,33 @@ module AWS
   #
   # For more information about Redshift:
   #
-  # * {Amazon Redshift}[http://aws.amazon.com/redshift/]
-  # * {Amazon Redshift Documentation}[http://aws.amazon.com/documentation/redshift/]
+  # * [Amazon Redshift](http://aws.amazon.com/redshift/)
+  # * [Amazon Redshift Documentation](http://aws.amazon.com/documentation/redshift/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the AWS::Redshift interface:
   #
-  #   redshift = AWS::Redshift.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     redshift = AWS::Redshift.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   class Redshift
 
-    AWS.register_autoloads(self) do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/redshift/client'
+    autoload :Errors, 'aws/redshift/errors'
+    autoload :Request, 'aws/redshift/request'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'redshift'
 
   end
 end

@@ -43,3 +43,11 @@ Then /^the vault configuration notification should have the following events:$/ 
   events = table.hashes.map{|h| h['EVENT'] }.sort
   @vault.notification_configuration.events.sort.should eq(events)
 end
+
+When(/^I get the vault by name$/) do
+  @vault = @glacier.vaults[@vault.name]
+end
+
+Then(/^I should be able to get vault attributes$/) do
+  @vault.arn.should include(@vault.name)
+end

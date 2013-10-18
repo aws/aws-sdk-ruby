@@ -135,7 +135,7 @@ module AWS
 
             it 'may not be used with :greater_than' do
               lambda {
-                klass.validates_numericality_of :foo, 
+                klass.validates_numericality_of :foo,
                   :equal_to => 10,
                   :greater_than => 5
               }.should raise_error(ArgumentError)
@@ -143,7 +143,7 @@ module AWS
 
             it 'may not be used with :greater_than_or_equal_to' do
               lambda {
-                klass.validates_numericality_of :foo, 
+                klass.validates_numericality_of :foo,
                   :equal_to => 10,
                   :greater_than_or_equal_to => 5
               }.should raise_error(ArgumentError)
@@ -151,7 +151,7 @@ module AWS
 
             it 'may not be used with :less_than' do
               lambda {
-                klass.validates_numericality_of :foo, 
+                klass.validates_numericality_of :foo,
                   :equal_to => 10,
                   :less_than => 5
               }.should raise_error(ArgumentError)
@@ -159,7 +159,7 @@ module AWS
 
             it 'may not be used with :less_than_or_equal_to' do
               lambda {
-                klass.validates_numericality_of :foo, 
+                klass.validates_numericality_of :foo,
                   :equal_to => 10,
                   :less_than_or_equal_to => 5
               }.should raise_error(ArgumentError)
@@ -230,7 +230,7 @@ module AWS
             it 'can accept values based on block return value' do
               klass.integer_attr :age
               klass.integer_attr :shoe_size
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :equal_to => lambda{|record| record.shoe_size }
               obj.shoe_size = 10
               obj.age = 10
@@ -240,7 +240,7 @@ module AWS
             it 'can reject values based on block return value' do
               klass.integer_attr :age
               klass.integer_attr :shoe_size
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :equal_to => lambda{|record| record.shoe_size }
               obj.shoe_size = 10
               obj.age = 20
@@ -250,7 +250,7 @@ module AWS
             it 'uses block return value for error message' do
               klass.integer_attr :age
               klass.integer_attr :shoe_size
-              klass.validates_numericality_of(:age, 
+              klass.validates_numericality_of(:age,
                 :equal_to => lambda{|record| record.shoe_size })
               obj.shoe_size = 10
               obj.age = 20
@@ -261,36 +261,36 @@ module AWS
           end
 
           context ':greater_than' do
-            
-            it 'accepts integers' do 
+
+            it 'accepts integers' do
               lambda {
                 klass.validates_numericality_of :age, :greater_than => 18
               }.should_not raise_error
             end
 
-            it 'accepts floats' do 
+            it 'accepts floats' do
               lambda {
                 klass.validates_numericality_of :age, :greater_than => 18.5
               }.should_not raise_error
             end
 
-            it 'accepts symbols' do 
+            it 'accepts symbols' do
               lambda {
-                klass.validates_numericality_of :age, 
+                klass.validates_numericality_of :age,
                   :greater_than => :shoe_size
               }.should_not raise_error
             end
 
-            it 'accepts procs' do 
+            it 'accepts procs' do
               lambda {
-                klass.validates_numericality_of :age, 
+                klass.validates_numericality_of :age,
                   :greater_than => lambda{|record| record.shoe_size }
               }.should_not raise_error
             end
 
             it 'accepts values that are greater' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :greater_than => 18
               obj.age = 20
               obj.valid?.should == true
@@ -298,7 +298,7 @@ module AWS
 
             it 'rejects values that are not greater' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :greater_than => 18
               obj.age = 16
               obj.valid?.should == false
@@ -306,7 +306,7 @@ module AWS
 
             it 'adds a sensible error message' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :greater_than => 18
               obj.age = 16
               obj.valid?
@@ -315,7 +315,7 @@ module AWS
 
             it 'accepts custom error messages' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :greater_than => 18,
                 :message => 'indicates you are too young'
               obj.age = 16
@@ -326,36 +326,36 @@ module AWS
           end
 
           context ':greater_than_or_equal_to' do
-            
-            it 'accepts integers' do 
+
+            it 'accepts integers' do
               lambda {
                 klass.validates_numericality_of :age, :greater_than_or_equal_to => 18
               }.should_not raise_error
             end
 
-            it 'accepts floats' do 
+            it 'accepts floats' do
               lambda {
                 klass.validates_numericality_of :age, :greater_than_or_equal_to => 18.5
               }.should_not raise_error
             end
 
-            it 'accepts symbols' do 
+            it 'accepts symbols' do
               lambda {
-                klass.validates_numericality_of :age, 
+                klass.validates_numericality_of :age,
                   :greater_than_or_equal_to => :shoe_size
               }.should_not raise_error
             end
 
-            it 'accepts procs' do 
+            it 'accepts procs' do
               lambda {
-                klass.validates_numericality_of :age, 
+                klass.validates_numericality_of :age,
                   :greater_than_or_equal_to => lambda{|record| record.shoe_size }
               }.should_not raise_error
             end
 
             it 'accepts values that are equal' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :greater_than_or_equal_to => 18
               obj.age = 18
               obj.valid?.should == true
@@ -363,7 +363,7 @@ module AWS
 
             it 'accepts values that are greater' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :greater_than_or_equal_to => 18
               obj.age = 20
               obj.valid?.should == true
@@ -371,7 +371,7 @@ module AWS
 
             it 'rejects values that are not greater' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :greater_than_or_equal_to => 18
               obj.age = 16
               obj.valid?.should == false
@@ -379,7 +379,7 @@ module AWS
 
             it 'adds a sensible error message' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :greater_than_or_equal_to => 18
               obj.age = 16
               obj.valid?
@@ -388,7 +388,7 @@ module AWS
 
             it 'accepts custom error messages' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :greater_than_or_equal_to => 18,
                 :message => 'indicates you are too young'
               obj.age = 16
@@ -399,36 +399,36 @@ module AWS
           end
 
           context ':less_than' do
-            
-            it 'accepts integers' do 
+
+            it 'accepts integers' do
               lambda {
                 klass.validates_numericality_of :age, :less_than => 18
               }.should_not raise_error
             end
 
-            it 'accepts floats' do 
+            it 'accepts floats' do
               lambda {
                 klass.validates_numericality_of :age, :less_than => 18.5
               }.should_not raise_error
             end
 
-            it 'accepts symbols' do 
+            it 'accepts symbols' do
               lambda {
-                klass.validates_numericality_of :age, 
+                klass.validates_numericality_of :age,
                   :less_than => :shoe_size
               }.should_not raise_error
             end
 
-            it 'accepts procs' do 
+            it 'accepts procs' do
               lambda {
-                klass.validates_numericality_of :age, 
+                klass.validates_numericality_of :age,
                   :less_than => lambda{|record| record.shoe_size }
               }.should_not raise_error
             end
 
             it 'accepts values that are less' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :less_than => 18
               obj.age = 16
               obj.valid?.should == true
@@ -436,7 +436,7 @@ module AWS
 
             it 'rejects values that are not less' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :less_than => 18
               obj.age = 20
               obj.valid?.should == false
@@ -444,7 +444,7 @@ module AWS
 
             it 'adds a sensible error message' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :less_than => 18
               obj.age = 20
               obj.valid?
@@ -453,7 +453,7 @@ module AWS
 
             it 'accepts custom error messages' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :less_than => 18,
                 :message => 'indicates you are too old'
               obj.age = 20
@@ -464,36 +464,36 @@ module AWS
           end
 
           context ':less_than_or_equal_to' do
-            
-            it 'accepts integers' do 
+
+            it 'accepts integers' do
               lambda {
                 klass.validates_numericality_of :age, :less_than_or_equal_to => 18
               }.should_not raise_error
             end
 
-            it 'accepts floats' do 
+            it 'accepts floats' do
               lambda {
                 klass.validates_numericality_of :age, :less_than_or_equal_to => 18.5
               }.should_not raise_error
             end
 
-            it 'accepts symbols' do 
+            it 'accepts symbols' do
               lambda {
-                klass.validates_numericality_of :age, 
+                klass.validates_numericality_of :age,
                   :less_than_or_equal_to => :shoe_size
               }.should_not raise_error
             end
 
-            it 'accepts procs' do 
+            it 'accepts procs' do
               lambda {
-                klass.validates_numericality_of :age, 
+                klass.validates_numericality_of :age,
                   :less_than_or_equal_to => lambda{|record| record.shoe_size }
               }.should_not raise_error
             end
 
             it 'accepts values that are equal' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :less_than_or_equal_to => 18
               obj.age = 18
               obj.valid?.should == true
@@ -501,7 +501,7 @@ module AWS
 
             it 'accepts values that are less' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :less_than_or_equal_to => 18
               obj.age = 16
               obj.valid?.should == true
@@ -509,7 +509,7 @@ module AWS
 
             it 'rejects values that are not less' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :less_than_or_equal_to => 18
               obj.age = 20
               obj.valid?.should == false
@@ -517,7 +517,7 @@ module AWS
 
             it 'adds a sensible error message' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :less_than_or_equal_to => 18
               obj.age = 20
               obj.valid?
@@ -526,7 +526,7 @@ module AWS
 
             it 'accepts custom error messages' do
               klass.integer_attr :age
-              klass.validates_numericality_of :age, 
+              klass.validates_numericality_of :age,
                 :less_than_or_equal_to => 18,
                 :message => 'indicates you are too old'
               obj.age = 20
@@ -665,14 +665,14 @@ module AWS
                 :even => true
               obj.age = 15
               obj.valid?
-              obj.errors[:age].sort.should == 
+              obj.errors[:age].sort.should ==
                 ['must be greater than 16', 'must be an even number'].sort
             end
 
           end
 
           context 'multi-valued attributes' do
-            
+
             it 'works with basic sets' do
               klass.string_attr :ranks
               klass.validates_numericality_of :ranks, :only_integer => true

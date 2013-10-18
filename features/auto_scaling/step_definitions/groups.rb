@@ -18,7 +18,6 @@ When /^I create an auto scaling group$/ do
   @group_options = {
     :launch_configuration => @launch_configuration,
     :availability_zones => [
-      EC2::AvailabilityZone.new('us-east-1a'),
       EC2::AvailabilityZone.new('us-east-1b'),
       EC2::AvailabilityZone.new('us-east-1c'),
     ],
@@ -29,6 +28,9 @@ When /^I create an auto scaling group$/ do
     :desired_capacity => 1,
     :health_check_grace_period => 10,
     :health_check_type => :ec2,
+    :termination_policies => [
+      "Default",
+    ],
     :tags => [
       { :key => 'k1' },
       { :key => 'k2', :value => 'v2' },
@@ -71,12 +73,13 @@ Then /^the auto scaling group should have the options I created it with$/ do
     if key == :availability_zones
       got.sort_by(&:name).should == expected.sort_by(&:name)
     elsif key == :tags
-      got.should == expected.collect{|tag| 
+      got.should eq(expected.collect{|tag|
         tag[:resource_type] = 'auto-scaling-group'
         tag[:resource_id] = @group_name
         tag[:propagate_at_launch] == true unless tag.key?(:propagate_at_launch)
+        tag[:value] = nil unless tag[:value]
         tag
-      }
+      })
       got.each{|tag| tag.resource.should == @auto_scaling_group }
     else
       got.should == expected

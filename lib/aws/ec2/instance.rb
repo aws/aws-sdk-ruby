@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'base64'
+
 module AWS
   class EC2
 
@@ -25,11 +27,11 @@ module AWS
     #   The instance must be in a stopped state to change user data;
     #   for example:
     #
-    #     i.user_data             # => "HELLO"
-    #     i.status                # => :running
-    #     i.user_data = "GOODBYE" # raises an exception
-    #     i.stop; sleep 1 until i.status == :stopped
-    #     i.user_data = "GOODBYE" # => "GOODBYE"
+    #       i.user_data             # => "HELLO"
+    #       i.status                # => :running
+    #       i.user_data = "GOODBYE" # raises an exception
+    #       i.stop; sleep 1 until i.status == :stopped
+    #       i.user_data = "GOODBYE" # => "GOODBYE"
     #
     # @attr [String] instance_type The instance type,
     #   e.g. "m1.small".  The instance must be in a stopped state to
@@ -45,11 +47,12 @@ module AWS
     # @attr [String] instance_initiated_shutdown_behavior Valid
     #   values are:
     #
-    #   ["stop"] When the instance shuts down, it will go into a
-    #            "stopped" state.
+    #     * "stop"] When the instance shuts down, it will go into a
+    #       "stopped" state.
+    #     * "terminate"] When the instance shuts down, it will be
+    #       terminated.
     #
-    #   ["terminate"] When the instance shuts down, it will be
-    #                 terminated.
+    # @attr [Boolean] source_dest_check
     #
     # @attr_reader [String] image_id Image ID of the AMI used to
     #   launch the instance.
@@ -68,8 +71,9 @@ module AWS
     # @attr_reader [Symbol] root_device_type The root device type
     #   used by the AMI. The AMI can use an Amazon EBS or instance
     #   store root device.  Valid values:
-    #   * +:ebs+
-    #   * +:instance_store+
+    #
+    #     * `:ebs`
+    #     * `:instance_store`
     #
     # @attr_reader [String] root_device_name The name of the root
     #   device.
@@ -90,23 +94,25 @@ module AWS
     # @attr_reader [String] ip_address The IP address of the
     #   instance.
     #
-    # @attr_reader [Symbol] status The instance status.  Valid values are:
-    #   * +:pending+
-    #   * +:running+
-    #   * +:shutting_down+
-    #   * +:terminated+
-    #   * +:stopping+
-    #   * +:stopped+
+    # @attr_reader [Symbol] status The instance status.
+    #   Valid values are:
+    #
+    #     * `:pending`
+    #     * `:running`
+    #     * `:shutting_down`
+    #     * `:terminated`
+    #     * `:stopping`
+    #     * `:stopped`
     #
     # @attr_reader [Integer] status_code The numeric instance status code.
     #
-    # @attr_reader [Symbol] architecture The architecture of the
-    #   image.
+    # @attr_reader [Symbol] architecture The architecture of the image.
     #
     # @attr_reader [Symbol] virtualization_type The instance's
     #   virtualization type.  Valid values:
-    #   * +:paravirtual+
-    #   * +:hvm+
+    #
+    #     * `:paravirtual`
+    #     * `:hvm`
     #
     # @attr_reader [String] reservation_id The ID of the reservation
     #   in which this instance was launched.
@@ -120,9 +126,10 @@ module AWS
     #
     # @attr_reader [Symbol] monitoring The status of CloudWatch
     #   monitoring for the instance.  Valid values:
-    #   * +:enabled+
-    #   * +:disabled+
-    #   * +:pending+
+    #
+    #     * `:enabled`
+    #     * `:disabled`
+    #     * `:pending`
     #
     # @attr_reader [String] state_transition_reason A string
     #   describing the reason for the last state transition.
@@ -135,8 +142,9 @@ module AWS
     #
     # @attr_reader [Symbol] hypervisor The instance's hypervisor
     #   type.  Valid values:
-    #   * +:ovm+
-    #   * +:xen+
+    #
+    #     * `:ovm`
+    #     * `:xen`
     #
     # @attr_reader [String] client_token Idempotency token you
     #   provided when you launched the instance.
@@ -168,40 +176,40 @@ module AWS
       attr_reader :id
       alias_method :instance_id, :id
 
-      # @private
+      # @api private
       def self.reservation_attributes
         @reservation_attributes ||= {}
       end
 
-      # @private
+      # @api private
       def self.reservation_attribute name, options = {}, &block
         attr = attribute(name, options, &block)
         reservation_attributes[attr.name] = attr
       end
 
-      # @private
+      # @api private
       def self.describe_call_attributes
         @describe_call_attributes ||= {}
       end
 
-      # @private
+      # @api private
       def self.mutable_describe_attributes
         @mutable_describe_attributes ||= {}
       end
 
-      # @private
+      # @api private
       def self.describe_call_attribute name, options = {}, &block
         attr = attribute(name, options, &block)
         describe_call_attributes[attr.name] = attr
       end
 
-      # @private
+      # @api private
       def self.mutable_describe_call_attribute name, options = {}, &block
         attr = mutable_attribute(name, options, &block)
         describe_call_attributes[attr.name] = attr
       end
 
-      # @private
+      # @api private
       def self.mutable_describe_attribute name, options = {}, &block
         attr = mutable_attribute(name, options, &block)
         mutable_describe_attributes[attr.name] = attr
@@ -458,22 +466,22 @@ module AWS
 
       # Returns a list of block device mappings.
       #
-      #   instance.block_devices
-      #   #=>
-      #   [
-      #     {
-      #       :device_name => "/dev/sda2",
-      #       :ebs => {
-      #         :volume_id => "vol-123",
-      #         :status => "attaching",
-      #         :attach_time => time,
-      #         :delete_on_termination => true
+      #     instance.block_devices
+      #     #=>
+      #     [
+      #       {
+      #         :device_name => "/dev/sda2",
+      #         :ebs => {
+      #           :volume_id => "vol-123",
+      #           :status => "attaching",
+      #           :attach_time => time,
+      #           :delete_on_termination => true
+      #         }
+      #       }, {
+      #         :device_name => "/dev/sdb",
+      #         :virtual_name => "ephemeral0",
       #       }
-      #     }, {
-      #       :device_name => "/dev/sdb",
-      #       :virtual_name => "ephemeral0",
-      #     }
-      #   ]
+      #     ]
       #
       # @return [Array<Hash>] Returns a list of block device mappings.  This
       #   list may contain ephemeral volumes.
@@ -502,7 +510,7 @@ module AWS
         state ? enable_monitoring : disable_monitoring
       end
 
-      # @return [Booelan] Returns +true+ if CloudWatch monitoring is
+      # @return [Booelan] Returns `true` if CloudWatch monitoring is
       #   enabled for this instance.
       def monitoring_enabled?
         monitoring == :enabled
@@ -550,17 +558,15 @@ module AWS
       #   parenthesis (()), commas (,), slashes (/), dashes (-), or
       #   underscores(_)
       #
-      # @param [Hash] options Additional options for creating the
-      #   image.
+      # @param [Hash] options Additional options for creating the image.
       #
-      # @option options [String] :description A description of the
-      #   new image.
+      # @option options [String] :description A description of the new image.
       #
       # @option options [Boolean] :no_reboot By default this
-      #   option is set to +false+, which means Amazon EC2
+      #   option is set to `false`, which means Amazon EC2
       #   attempts to cleanly shut down the instance before image
       #   creation and reboots the instance afterwards. When the
-      #   option is set to +true+, Amazon EC2 does not shut down
+      #   option is set to `true`, Amazon EC2 does not shut down
       #   the instance before creating the image. When this option
       #   is used, file system integrity on the created image cannot
       #   be guaranteed.
@@ -571,11 +577,12 @@ module AWS
         images.create(options.merge(:instance_id => id, :name => name))
       end
 
-      # Retrieves the console output for the instance.
-      #
-      # @return [String] the console output.
+      # Retrieves the console output for the instance, returning +nil+ if it
+      # is not available yet.
+      # @return [String] the console output
+      # @return [nil] if no output is available
       def console_output
-        output = client.get_console_output(:instance_id => self.id).output
+        output = client.get_console_output(:instance_id => self.id)[:output]
         Base64.decode64(output) if output
       end
 
@@ -685,28 +692,28 @@ module AWS
       # virtualization environment and then writes the image to a
       # S3 bucket.
       #
-      # == Granting EC2 write access to your bucket
+      # ## Granting EC2 write access to your bucket
       #
       # Before you can export an image to an S3 bucket, you must modify
       # the bucket ACL.  You only need to do this once per bucket.
       #
-      #   s3.buckets['bucket-name'].acl.change do |acl|
-      #     acl.grant(:read_acp).to(:amazon_customer_email => 'vm-import-export@amazon.com')
-      #     acl.grant(:write).to(:amazon_customer_email => 'vm-import-export@amazon.com')
-      #   end
+      #     s3.buckets['bucket-name'].acl.change do |acl|
+      #       acl.grant(:read_acp).to(:amazon_customer_email => 'vm-import-export@amazon.com')
+      #       acl.grant(:write).to(:amazon_customer_email => 'vm-import-export@amazon.com')
+      #     end
       #
-      # == Performing the export
+      # ## Performing the export
       #
       # Simply call #export_to_s3 on your instance.   Only instances
       # derived from your own ImportInstance tasks may be exported.
       #
-      #    task = ec2.instances['i-12345678'].export_to_s3('bucket-name')
+      #      task = ec2.instances['i-12345678'].export_to_s3('bucket-name')
       #
-      # == Downloading the results
+      # ## Downloading the results
       #
       # Given a completed export task you can download the final image:
       #
-      #   File.open('image.ova', 'w') {|f| f.write(task.s3_object.read) }
+      #     File.open('image.ova', 'wb') {|f| f.write(task.s3_object.read) }
       #
       # @param [S3::Bucket,String] bucket The destination bucket.  May
       #   be the name of the bucket (string) or a {S3::Bucket} object. The
@@ -720,13 +727,13 @@ module AWS
       #   and 'microsoft'.
       #
       # @option options [String] :disk_image_format The format for the exported
-      #    image.  Defaults to 'vmdk' if +:target_environemnt+ is 'vmware',
+      #    image.  Defaults to 'vmdk' if `:target_environemnt` is 'vmware',
       #    otherwise, 'vhd'.
       #
       # @option options [String] :container_format The container format used to
       #   combine disk images with metadata (such as OVF). If absent, only
       #   the disk image will be exported.  Defaults to 'ova' if
-      #   +:target_environment+ is 'vmware', otherwise ommited.
+      #   `:target_environment` is 'vmware', otherwise ommited.
       #
       # @option options [String] :description Description of the conversion
       #   task or the resource being exported.
@@ -734,7 +741,7 @@ module AWS
       # @option options [String] :prefix (nil) The image is written to a
       #   single object in the bucket at the key:
       #
-      #     "#{prefix}#{export_task_id}.#{disk_image_format}"
+      #       "#{prefix}#{export_task_id}.#{disk_image_format}"
       #
       # @return [ExportTask]
       #

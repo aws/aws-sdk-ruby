@@ -21,9 +21,9 @@ module AWS
 
       # A hash containing the following keys:
       #
-      # * +:access_key_id+
-      # * +:secret_access_key+
-      # * +:session_token+
+      # * `:access_key_id`
+      # * `:secret_access_key`
+      # * `:session_token`
       #
       # This hash may be passed as-is to {AWS.config} or to the
       # constructor of any service interface that supports temporary
@@ -37,7 +37,7 @@ module AWS
       # @return [Time]
       attr_reader :expires_at
 
-      # @private
+      # @api private
       def initialize(opts = {})
         @credentials = opts[:credentials]
         @expires_at = opts[:expires_at]

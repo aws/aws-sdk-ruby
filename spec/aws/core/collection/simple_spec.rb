@@ -23,7 +23,7 @@ module AWS
 
           include Collection::Simple
 
-          def initialize size = 10 
+          def initialize size = 10
             @size = size
           end
 
@@ -53,7 +53,7 @@ module AWS
 
           it 'accepts the :limit option' do
             items = []
-            collection.each(:limit => 3) do |item| 
+            collection.each(:limit => 3) do |item|
               items << item
             end
             items.should == [1,2,3]
@@ -64,7 +64,7 @@ module AWS
             next_token.should == 4
           end
 
-          it 'returns nil if limit is greater than collection size' do 
+          it 'returns nil if limit is greater than collection size' do
             next_token = collection.each(:limit => 20) {|item|}
             next_token.should == nil
           end
@@ -79,7 +79,7 @@ module AWS
 
           it 'accpets a hash of options' do
             items = []
-            collection.each(:even_only => true) do |item| 
+            collection.each(:even_only => true) do |item|
               items << item
             end
             items.should == [2,4,6,8,10]
@@ -94,7 +94,7 @@ module AWS
 
             # :next_token of 3 means skip items 1 and 2, in this case items
             # 1 and 2 are the first two even items (2 & 4)
-            items.should == [6,8] 
+            items.should == [6,8]
           end
 
         end
@@ -141,7 +141,7 @@ module AWS
             end
             # :next_token of 3 means skip items 1 and 2, in this case items
             # 1 and 2 are the first two even items (2 & 4)
-            batch.should == [6,8] 
+            batch.should == [6,8]
           end
 
         end
@@ -164,7 +164,7 @@ module AWS
             groups.should == [[1,2],[3]]
           end
 
-          it 'accepts custom options' do 
+          it 'accepts custom options' do
             groups = []
             collection.in_groups_of(2, :even_only => true) do |group|
               groups << group
@@ -172,7 +172,7 @@ module AWS
             groups.should == [[2,4],[6,8],[10]]
           end
 
-          it 'accepts multiple options' do 
+          it 'accepts multiple options' do
             opts = { :even_only => true, :limit => 2, :next_token => 3 }
             groups = []
             collection.in_groups_of(2, opts) do |group|
@@ -197,7 +197,7 @@ module AWS
             collection.enum.map{|n|n}
           end
 
-          it 'passes along options' do 
+          it 'passes along options' do
             collection.should_receive(:each).with(:foo => 'bar')
             collection.enum(:foo => 'bar').map{|n|n}
           end
@@ -205,7 +205,7 @@ module AWS
         end
 
         context '#first' do
-          
+
           it 'returns the first element' do
             collection.first.should == 1
           end
@@ -213,7 +213,7 @@ module AWS
           it 'accepts :next_token' do
             collection.first(:next_token => 3).should == 3
           end
-          
+
           it 'accepts custom options' do
             collection.first(:even_only => true).should == 2
           end
@@ -259,7 +259,7 @@ module AWS
           end
 
           context '#next_token' do
-            
+
             it 'returns a simulated next_token which is actually an offset' do
               collection = new_collection(20)
               page = collection.page(:per_page => 10)
@@ -297,8 +297,8 @@ module AWS
 
           context '#next_page' do
 
-            it 'grabs the next page of items' do 
-              
+            it 'grabs the next page of items' do
+
               collection = new_collection(35)
 
               p1 = collection.page
@@ -315,7 +315,7 @@ module AWS
             end
 
             it 'works with alternate :per_page values' do
-              
+
               collection = new_collection(35)
 
               p1 = collection.page(:per_page => 15)

@@ -43,6 +43,16 @@ module AWS
 
       end
 
+      context '#image_id' do
+
+        it 'aliases image_id to id' do
+          image = Image.new('ami-123')
+          image.id.should eq('ami-123')
+          image.image_id.should eq(image.id)
+        end
+
+      end
+
       context '#deregister' do
 
         it 'should call deregister_image' do
@@ -408,7 +418,7 @@ module AWS
 
         before(:each) do
           resp_image = {
-            :image_id => 'ami-123', 
+            :image_id => 'ami-123',
             :product_codes => [
               { :product_code => 'abc' },
               { :product_code => 'xyz' },
@@ -425,7 +435,7 @@ module AWS
       end
 
       context '#add_product_codes' do
-        
+
         it 'calls modify image attribute on the client' do
           client.should_receive(:modify_image_attribute).
             with(:image_id => image.id, :product_codes => ['ABC'])

@@ -18,27 +18,26 @@ module AWS
     #
     # Enumerating ALL activities:
     #
-    #   auto_scaling = AWS::AutoScaling.new
-    #   auto_scaling.activities.each do |activity|
-    #     # ...
-    #   end
+    #     auto_scaling = AWS::AutoScaling.new
+    #     auto_scaling.activities.each do |activity|
+    #       # ...
+    #     end
     #
     # Enumerating activities for a single Auto Scaling group:
     #
-    #   group = auto_scaling.groups['group-name']
-    #   group.activities.each do |activity|
-    #     # ...
-    #   end
+    #     group = auto_scaling.groups['group-name']
+    #     group.activities.each do |activity|
+    #       # ...
+    #     end
     #
     # If you know the id of an activity you can get a reference to it:
     #
-    #   activity = auto_scaling.activities['activity-id']
-    #   
+    #     activity = auto_scaling.activities['activity-id']
     class ActivityCollection
 
       include Core::Collection::WithLimitAndNextToken
-      
-      # @private
+
+      # @api private
       def initialize options = {}
         @group = options[:group]
         if @group
@@ -53,7 +52,7 @@ module AWS
       def [] activity_id
         Activity.new(activity_id, :config => config)
       end
-      
+
       protected
 
       def _each_item next_token, limit, options = {}, &block
@@ -64,13 +63,13 @@ module AWS
 
         resp = client.describe_scaling_activities(options)
         resp.activities.each do |details|
-          
+
           activity = Activity.new_from(
-            :describe_scaling_activities, details, 
+            :describe_scaling_activities, details,
             details.activity_id, :config => config)
 
           yield(activity)
-          
+
         end
 
         resp.data[:next_token]

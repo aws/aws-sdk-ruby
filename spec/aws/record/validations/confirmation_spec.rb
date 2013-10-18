@@ -67,7 +67,7 @@ module AWS
 
             sdb_data.stub(:attributes).and_return('password' => %w(abc))
             klass.string_attr :password
-            klass.validates_confirmation_of :password, 
+            klass.validates_confirmation_of :password,
               :if => :password_changed?
 
             obj = klass['item-id']

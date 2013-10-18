@@ -11,12 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/validator'
-
 module AWS
   module Record
 
-    # @private
+    # @api private
     class AcceptanceValidator < Validator
 
       ACCEPTED_OPTIONS = [:accept, :message, :allow_nil, :allow_blank, :on, :if, :unless]
@@ -31,7 +29,7 @@ module AWS
         accepted = case value
         when '1'  then true
         when true then true
-        else 
+        else
           options.has_key?(:accept) ?
             value == options[:accept] :
             false

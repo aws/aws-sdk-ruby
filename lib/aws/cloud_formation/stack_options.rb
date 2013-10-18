@@ -15,7 +15,7 @@ module AWS
   class CloudFormation
 
     # This module provide option helpers for methods operation on stacks.
-    # @private
+    # @api private
     module StackOptions
 
       protected

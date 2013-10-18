@@ -38,7 +38,7 @@ module AWS
       # @return [nil]
       def deactivate
         client.deactivate_mfa_device({
-          :user_name => user.name, 
+          :user_name => user.name,
           :serial_number => serial_number,
         })
         nil

@@ -1,0 +1,534 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:count_closed_workflow_executions: "Calls the CountClosedWorkflowExecutions API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
+  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
+  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:close_time_filter`
+  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
+  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:execution_filter` -
+  (Hash) \n    * `:workflow_id` - *required* - (String) \n  * `:type_filter` - (Hash)
+  \n    * `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
+  - (Hash) \n    * `:tag` - *required* - (String) \n  * `:close_status_filter` - (Hash)
+  \n    * `:status` - *required* - (String) Valid values include:\n      * `COMPLETED`\n
+  \     * `FAILED`\n      * `CANCELED`\n      * `TERMINATED`\n      * `CONTINUED_AS_NEW`\n
+  \     * `TIMED_OUT`\n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `count` - (Integer)\n
+  \ * `truncated` - (Boolean)"
+:count_open_workflow_executions: "Calls the CountOpenWorkflowExecutions API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
+  - *required* - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>)
+  \n    * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:type_filter` - (Hash)
+  \n    * `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
+  - (Hash) \n    * `:tag` - *required* - (String) \n  * `:execution_filter` - (Hash)
+  \n    * `:workflow_id` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `count` - (Integer)\n  * `truncated` - (Boolean)"
+:count_pending_activity_tasks: "Calls the CountPendingActivityTasks API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:task_list` - *required*
+  - (Hash) \n    * `:name` - *required* - (String) \n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `count` - (Integer)\n  * `truncated` - (Boolean)"
+:count_pending_decision_tasks: "Calls the CountPendingDecisionTasks API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:task_list` - *required*
+  - (Hash) \n    * `:name` - *required* - (String) \n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `count` - (Integer)\n  * `truncated` - (Boolean)"
+:deprecate_activity_type: "Calls the DeprecateActivityType API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:activity_type` - *required*
+  - (Hash) \n    * `:name` - *required* - (String) \n    * `:version` - *required*
+  - (String) \n@return [Core::Response]"
+:deprecate_domain: "Calls the DeprecateDomain API operation.\n@param [Hash] options\n
+  \ * `:name` - *required* - (String) \n@return [Core::Response]"
+:deprecate_workflow_type: "Calls the DeprecateWorkflowType API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_type` - *required*
+  - (Hash) \n    * `:name` - *required* - (String) \n    * `:version` - *required*
+  - (String) \n@return [Core::Response]"
+:describe_activity_type: "Calls the DescribeActivityType API operation.\n@param [Hash]
+  options\n  * `:domain` - *required* - (String) \n  * `:activity_type` - *required*
+  - (Hash) \n    * `:name` - *required* - (String) \n    * `:version` - *required*
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `typeInfo` - (Hash)\n    * `activityType`
+  - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n    * `status`
+  - (String)\n    * `description` - (String)\n    * `creationDate` - (Time)\n    *
+  `deprecationDate` - (Time)\n  * `configuration` - (Hash)\n    * `defaultTaskStartToCloseTimeout`
+  - (String)\n    * `defaultTaskHeartbeatTimeout` - (String)\n    * `defaultTaskList`
+  - (Hash)\n      * `name` - (String)\n    * `defaultTaskScheduleToStartTimeout` -
+  (String)\n    * `defaultTaskScheduleToCloseTimeout` - (String)"
+:describe_domain: "Calls the DescribeDomain API operation.\n@param [Hash] options\n
+  \ * `:name` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `domainInfo`
+  - (Hash)\n    * `name` - (String)\n    * `status` - (String)\n    * `description`
+  - (String)\n  * `configuration` - (Hash)\n    * `workflowExecutionRetentionPeriodInDays`
+  - (String)"
+:describe_workflow_execution: "Calls the DescribeWorkflowExecution API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:execution` - *required*
+  - (Hash) \n    * `:workflow_id` - *required* - (String) \n    * `:run_id` - *required*
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `executionInfo` - (Hash)\n    *
+  `execution` - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n
+  \   * `workflowType` - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n
+  \   * `startTimestamp` - (Time)\n    * `closeTimestamp` - (Time)\n    * `executionStatus`
+  - (String)\n    * `closeStatus` - (String)\n    * `parent` - (Hash)\n      * `workflowId`
+  - (String)\n      * `runId` - (String)\n    * `tagList` - (Array<String>)\n    *
+  `cancelRequested` - (Boolean)\n  * `executionConfiguration` - (Hash)\n    * `taskStartToCloseTimeout`
+  - (String)\n    * `executionStartToCloseTimeout` - (String)\n    * `taskList` -
+  (Hash)\n      * `name` - (String)\n    * `childPolicy` - (String)\n  * `openCounts`
+  - (Hash)\n    * `openActivityTasks` - (Integer)\n    * `openDecisionTasks` - (Integer)\n
+  \   * `openTimers` - (Integer)\n    * `openChildWorkflowExecutions` - (Integer)\n
+  \ * `latestActivityTaskTimestamp` - (Time)\n  * `latestExecutionContext` - (String)"
+:describe_workflow_type: "Calls the DescribeWorkflowType API operation.\n@param [Hash]
+  options\n  * `:domain` - *required* - (String) \n  * `:workflow_type` - *required*
+  - (Hash) \n    * `:name` - *required* - (String) \n    * `:version` - *required*
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `typeInfo` - (Hash)\n    * `workflowType`
+  - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n    * `status`
+  - (String)\n    * `description` - (String)\n    * `creationDate` - (Time)\n    *
+  `deprecationDate` - (Time)\n  * `configuration` - (Hash)\n    * `defaultTaskStartToCloseTimeout`
+  - (String)\n    * `defaultExecutionStartToCloseTimeout` - (String)\n    * `defaultTaskList`
+  - (Hash)\n      * `name` - (String)\n    * `defaultChildPolicy` - (String)"
+:get_workflow_execution_history: "Calls the GetWorkflowExecutionHistory API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:execution` - *required*
+  - (Hash) \n    * `:workflow_id` - *required* - (String) \n    * `:run_id` - *required*
+  - (String) \n  * `:next_page_token` - (String) \n  * `:maximum_page_size` - (Integer)
+  \n  * `:reverse_order` - (Boolean) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `events`
+  - (Array<Hash>)\n    * `eventTimestamp` - (Time)\n    * `eventType` - (String)\n
+  \   * `eventId` - (Integer)\n    * `workflowExecutionStartedEventAttributes` - (Hash)\n
+  \     * `input` - (String)\n      * `executionStartToCloseTimeout` - (String)\n
+  \     * `taskStartToCloseTimeout` - (String)\n      * `childPolicy` - (String)\n
+  \     * `taskList` - (Hash)\n        * `name` - (String)\n      * `workflowType`
+  - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n      * `tagList`
+  - (Array<String>)\n      * `continuedExecutionRunId` - (String)\n      * `parentWorkflowExecution`
+  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
+  `parentInitiatedEventId` - (Integer)\n    * `workflowExecutionCompletedEventAttributes`
+  - (Hash)\n      * `result` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n    * `completeWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
+  `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n    * `workflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `reason` - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n    * `failWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
+  `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n    * `workflowExecutionTimedOutEventAttributes`
+  - (Hash)\n      * `timeoutType` - (String)\n      * `childPolicy` - (String)\n    *
+  `workflowExecutionCanceledEventAttributes` - (Hash)\n      * `details` - (String)\n
+  \     * `decisionTaskCompletedEventId` - (Integer)\n    * `cancelWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n
+  \   * `workflowExecutionContinuedAsNewEventAttributes` - (Hash)\n      * `input`
+  - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `newExecutionRunId`
+  - (String)\n      * `executionStartToCloseTimeout` - (String)\n      * `taskList`
+  - (Hash)\n        * `name` - (String)\n      * `taskStartToCloseTimeout` - (String)\n
+  \     * `childPolicy` - (String)\n      * `tagList` - (Array<String>)\n      * `workflowType`
+  - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n    * `continueAsNewWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n
+  \   * `workflowExecutionTerminatedEventAttributes` - (Hash)\n      * `reason` -
+  (String)\n      * `details` - (String)\n      * `childPolicy` - (String)\n      *
+  `cause` - (String)\n    * `workflowExecutionCancelRequestedEventAttributes` - (Hash)\n
+  \     * `externalWorkflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `externalInitiatedEventId` - (Integer)\n      *
+  `cause` - (String)\n    * `decisionTaskScheduledEventAttributes` - (Hash)\n      *
+  `taskList` - (Hash)\n        * `name` - (String)\n      * `startToCloseTimeout`
+  - (String)\n    * `decisionTaskStartedEventAttributes` - (Hash)\n      * `identity`
+  - (String)\n      * `scheduledEventId` - (Integer)\n    * `decisionTaskCompletedEventAttributes`
+  - (Hash)\n      * `executionContext` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n    * `decisionTaskTimedOutEventAttributes`
+  - (Hash)\n      * `timeoutType` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n    * `activityTaskScheduledEventAttributes`
+  - (Hash)\n      * `activityType` - (Hash)\n        * `name` - (String)\n        *
+  `version` - (String)\n      * `activityId` - (String)\n      * `input` - (String)\n
+  \     * `control` - (String)\n      * `scheduleToStartTimeout` - (String)\n      *
+  `scheduleToCloseTimeout` - (String)\n      * `startToCloseTimeout` - (String)\n
+  \     * `taskList` - (Hash)\n        * `name` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `heartbeatTimeout` - (String)\n    * `activityTaskStartedEventAttributes`
+  - (Hash)\n      * `identity` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \   * `activityTaskCompletedEventAttributes` - (Hash)\n      * `result` - (String)\n
+  \     * `scheduledEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    *
+  `activityTaskFailedEventAttributes` - (Hash)\n      * `reason` - (String)\n      *
+  `details` - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId`
+  - (Integer)\n    * `activityTaskTimedOutEventAttributes` - (Hash)\n      * `timeoutType`
+  - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId` - (Integer)\n
+  \     * `details` - (String)\n    * `activityTaskCanceledEventAttributes` - (Hash)\n
+  \     * `details` - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId`
+  - (Integer)\n      * `latestCancelRequestedEventId` - (Integer)\n    * `activityTaskCancelRequestedEventAttributes`
+  - (Hash)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `activityId`
+  - (String)\n    * `workflowExecutionSignaledEventAttributes` - (Hash)\n      * `signalName`
+  - (String)\n      * `input` - (String)\n      * `externalWorkflowExecution` - (Hash)\n
+  \       * `workflowId` - (String)\n        * `runId` - (String)\n      * `externalInitiatedEventId`
+  - (Integer)\n    * `markerRecordedEventAttributes` - (Hash)\n      * `markerName`
+  - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n    * `recordMarkerFailedEventAttributes` - (Hash)\n      * `markerName`
+  - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n    * `timerStartedEventAttributes` - (Hash)\n      * `timerId` - (String)\n
+  \     * `control` - (String)\n      * `startToFireTimeout` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n    * `timerFiredEventAttributes` - (Hash)\n      * `timerId` - (String)\n
+  \     * `startedEventId` - (Integer)\n    * `timerCanceledEventAttributes` - (Hash)\n
+  \     * `timerId` - (String)\n      * `startedEventId` - (Integer)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n    * `startChildWorkflowExecutionInitiatedEventAttributes` - (Hash)\n
+  \     * `workflowId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
+  - (String)\n        * `version` - (String)\n      * `control` - (String)\n      *
+  `input` - (String)\n      * `executionStartToCloseTimeout` - (String)\n      * `taskList`
+  - (Hash)\n        * `name` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n      * `childPolicy` - (String)\n      * `taskStartToCloseTimeout` -
+  (String)\n      * `tagList` - (Array<String>)\n    * `childWorkflowExecutionStartedEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
+  - (String)\n        * `version` - (String)\n      * `initiatedEventId` - (Integer)\n
+  \   * `childWorkflowExecutionCompletedEventAttributes` - (Hash)\n      * `workflowExecution`
+  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
+  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
+  \     * `result` - (String)\n      * `initiatedEventId` - (Integer)\n      * `startedEventId`
+  - (Integer)\n    * `childWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
+  `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n        * `runId`
+  - (String)\n      * `workflowType` - (Hash)\n        * `name` - (String)\n        *
+  `version` - (String)\n      * `reason` - (String)\n      * `details` - (String)\n
+  \     * `initiatedEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    *
+  `childWorkflowExecutionTimedOutEventAttributes` - (Hash)\n      * `workflowExecution`
+  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
+  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
+  \     * `timeoutType` - (String)\n      * `initiatedEventId` - (Integer)\n      *
+  `startedEventId` - (Integer)\n    * `childWorkflowExecutionCanceledEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
+  - (String)\n        * `version` - (String)\n      * `details` - (String)\n      *
+  `initiatedEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    * `childWorkflowExecutionTerminatedEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
+  - (String)\n        * `version` - (String)\n      * `initiatedEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n    * `signalExternalWorkflowExecutionInitiatedEventAttributes`
+  - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `signalName`
+  - (String)\n      * `input` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n      * `control` - (String)\n    * `externalWorkflowExecutionSignaledEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `initiatedEventId` - (Integer)\n    * `signalExternalWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `cause`
+  - (String)\n      * `initiatedEventId` - (Integer)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `control` - (String)\n    * `externalWorkflowExecutionCancelRequestedEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `initiatedEventId` - (Integer)\n    * `requestCancelExternalWorkflowExecutionInitiatedEventAttributes`
+  - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `control` - (String)\n    * `requestCancelExternalWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `cause`
+  - (String)\n      * `initiatedEventId` - (Integer)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `control` - (String)\n    * `scheduleActivityTaskFailedEventAttributes`
+  - (Hash)\n      * `activityType` - (Hash)\n        * `name` - (String)\n        *
+  `version` - (String)\n      * `activityId` - (String)\n      * `cause` - (String)\n
+  \     * `decisionTaskCompletedEventId` - (Integer)\n    * `requestCancelActivityTaskFailedEventAttributes`
+  - (Hash)\n      * `activityId` - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n    * `startTimerFailedEventAttributes` - (Hash)\n      * `timerId`
+  - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n    * `cancelTimerFailedEventAttributes` - (Hash)\n      * `timerId`
+  - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n    * `startChildWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
+  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
+  \     * `cause` - (String)\n      * `workflowId` - (String)\n      * `initiatedEventId`
+  - (Integer)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `control`
+  - (String)\n  * `nextPageToken` - (String)"
+:list_activity_types: "Calls the ListActivityTypes API operation.\n@param [Hash] options\n
+  \ * `:domain` - *required* - (String) \n  * `:name` - (String) \n  * `:registration_status`
+  - *required* - (String) Valid values include:\n    * `REGISTERED`\n    * `DEPRECATED`\n
+  \ * `:next_page_token` - (String) \n  * `:maximum_page_size` - (Integer) \n  * `:reverse_order`
+  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `typeInfos` - (Array<Hash>)\n
+  \   * `activityType` - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n
+  \   * `status` - (String)\n    * `description` - (String)\n    * `creationDate`
+  - (Time)\n    * `deprecationDate` - (Time)\n  * `nextPageToken` - (String)"
+:list_closed_workflow_executions: "Calls the ListClosedWorkflowExecutions API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
+  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
+  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:close_time_filter`
+  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
+  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:execution_filter` -
+  (Hash) \n    * `:workflow_id` - *required* - (String) \n  * `:close_status_filter`
+  - (Hash) \n    * `:status` - *required* - (String) Valid values include:\n      *
+  `COMPLETED`\n      * `FAILED`\n      * `CANCELED`\n      * `TERMINATED`\n      *
+  `CONTINUED_AS_NEW`\n      * `TIMED_OUT`\n  * `:type_filter` - (Hash) \n    * `:name`
+  - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter` - (Hash)
+  \n    * `:tag` - *required* - (String) \n  * `:next_page_token` - (String) \n  *
+  `:maximum_page_size` - (Integer) \n  * `:reverse_order` - (Boolean) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `executionInfos` - (Array<Hash>)\n    * `execution` - (Hash)\n      * `workflowId`
+  - (String)\n      * `runId` - (String)\n    * `workflowType` - (Hash)\n      * `name`
+  - (String)\n      * `version` - (String)\n    * `startTimestamp` - (Time)\n    *
+  `closeTimestamp` - (Time)\n    * `executionStatus` - (String)\n    * `closeStatus`
+  - (String)\n    * `parent` - (Hash)\n      * `workflowId` - (String)\n      * `runId`
+  - (String)\n    * `tagList` - (Array<String>)\n    * `cancelRequested` - (Boolean)\n
+  \ * `nextPageToken` - (String)"
+:list_domains: "Calls the ListDomains API operation.\n@param [Hash] options\n  * `:next_page_token`
+  - (String) \n  * `:registration_status` - *required* - (String) Valid values include:\n
+  \   * `REGISTERED`\n    * `DEPRECATED`\n  * `:maximum_page_size` - (Integer) \n
+  \ * `:reverse_order` - (Boolean) \n@return [Core::Response] The `#data` method of
+  the response object returns a hash with the following structure:\n\n  * `domainInfos`
+  - (Array<Hash>)\n    * `name` - (String)\n    * `status` - (String)\n    * `description`
+  - (String)\n  * `nextPageToken` - (String)"
+:list_open_workflow_executions: "Calls the ListOpenWorkflowExecutions API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
+  - *required* - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>)
+  \n    * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:type_filter` - (Hash)
+  \n    * `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
+  - (Hash) \n    * `:tag` - *required* - (String) \n  * `:next_page_token` - (String)
+  \n  * `:maximum_page_size` - (Integer) \n  * `:reverse_order` - (Boolean) \n  *
+  `:execution_filter` - (Hash) \n    * `:workflow_id` - *required* - (String) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `executionInfos` - (Array<Hash>)\n    * `execution`
+  - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n    * `workflowType`
+  - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n    * `startTimestamp`
+  - (Time)\n    * `closeTimestamp` - (Time)\n    * `executionStatus` - (String)\n
+  \   * `closeStatus` - (String)\n    * `parent` - (Hash)\n      * `workflowId` -
+  (String)\n      * `runId` - (String)\n    * `tagList` - (Array<String>)\n    * `cancelRequested`
+  - (Boolean)\n  * `nextPageToken` - (String)"
+:list_workflow_types: "Calls the ListWorkflowTypes API operation.\n@param [Hash] options\n
+  \ * `:domain` - *required* - (String) \n  * `:name` - (String) \n  * `:registration_status`
+  - *required* - (String) Valid values include:\n    * `REGISTERED`\n    * `DEPRECATED`\n
+  \ * `:next_page_token` - (String) \n  * `:maximum_page_size` - (Integer) \n  * `:reverse_order`
+  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `typeInfos` - (Array<Hash>)\n
+  \   * `workflowType` - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n
+  \   * `status` - (String)\n    * `description` - (String)\n    * `creationDate`
+  - (Time)\n    * `deprecationDate` - (Time)\n  * `nextPageToken` - (String)"
+:poll_for_activity_task: "Calls the PollForActivityTask API operation.\n@param [Hash]
+  options\n  * `:domain` - *required* - (String) \n  * `:task_list` - *required* -
+  (Hash) \n    * `:name` - *required* - (String) \n  * `:identity` - (String) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `taskToken` - (String)\n  * `activityId` - (String)\n
+  \ * `startedEventId` - (Integer)\n  * `workflowExecution` - (Hash)\n    * `workflowId`
+  - (String)\n    * `runId` - (String)\n  * `activityType` - (Hash)\n    * `name`
+  - (String)\n    * `version` - (String)\n  * `input` - (String)"
+:poll_for_decision_task: "Calls the PollForDecisionTask API operation.\n@param [Hash]
+  options\n  * `:domain` - *required* - (String) \n  * `:task_list` - *required* -
+  (Hash) \n    * `:name` - *required* - (String) \n  * `:identity` - (String) \n  *
+  `:next_page_token` - (String) \n  * `:maximum_page_size` - (Integer) \n  * `:reverse_order`
+  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `taskToken` - (String)\n  *
+  `startedEventId` - (Integer)\n  * `workflowExecution` - (Hash)\n    * `workflowId`
+  - (String)\n    * `runId` - (String)\n  * `workflowType` - (Hash)\n    * `name`
+  - (String)\n    * `version` - (String)\n  * `events` - (Array<Hash>)\n    * `eventTimestamp`
+  - (Time)\n    * `eventType` - (String)\n    * `eventId` - (Integer)\n    * `workflowExecutionStartedEventAttributes`
+  - (Hash)\n      * `input` - (String)\n      * `executionStartToCloseTimeout` - (String)\n
+  \     * `taskStartToCloseTimeout` - (String)\n      * `childPolicy` - (String)\n
+  \     * `taskList` - (Hash)\n        * `name` - (String)\n      * `workflowType`
+  - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n      * `tagList`
+  - (Array<String>)\n      * `continuedExecutionRunId` - (String)\n      * `parentWorkflowExecution`
+  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
+  `parentInitiatedEventId` - (Integer)\n    * `workflowExecutionCompletedEventAttributes`
+  - (Hash)\n      * `result` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n    * `completeWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
+  `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n    * `workflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `reason` - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n    * `failWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
+  `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n    * `workflowExecutionTimedOutEventAttributes`
+  - (Hash)\n      * `timeoutType` - (String)\n      * `childPolicy` - (String)\n    *
+  `workflowExecutionCanceledEventAttributes` - (Hash)\n      * `details` - (String)\n
+  \     * `decisionTaskCompletedEventId` - (Integer)\n    * `cancelWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n
+  \   * `workflowExecutionContinuedAsNewEventAttributes` - (Hash)\n      * `input`
+  - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `newExecutionRunId`
+  - (String)\n      * `executionStartToCloseTimeout` - (String)\n      * `taskList`
+  - (Hash)\n        * `name` - (String)\n      * `taskStartToCloseTimeout` - (String)\n
+  \     * `childPolicy` - (String)\n      * `tagList` - (Array<String>)\n      * `workflowType`
+  - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n    * `continueAsNewWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n
+  \   * `workflowExecutionTerminatedEventAttributes` - (Hash)\n      * `reason` -
+  (String)\n      * `details` - (String)\n      * `childPolicy` - (String)\n      *
+  `cause` - (String)\n    * `workflowExecutionCancelRequestedEventAttributes` - (Hash)\n
+  \     * `externalWorkflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `externalInitiatedEventId` - (Integer)\n      *
+  `cause` - (String)\n    * `decisionTaskScheduledEventAttributes` - (Hash)\n      *
+  `taskList` - (Hash)\n        * `name` - (String)\n      * `startToCloseTimeout`
+  - (String)\n    * `decisionTaskStartedEventAttributes` - (Hash)\n      * `identity`
+  - (String)\n      * `scheduledEventId` - (Integer)\n    * `decisionTaskCompletedEventAttributes`
+  - (Hash)\n      * `executionContext` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n    * `decisionTaskTimedOutEventAttributes`
+  - (Hash)\n      * `timeoutType` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n    * `activityTaskScheduledEventAttributes`
+  - (Hash)\n      * `activityType` - (Hash)\n        * `name` - (String)\n        *
+  `version` - (String)\n      * `activityId` - (String)\n      * `input` - (String)\n
+  \     * `control` - (String)\n      * `scheduleToStartTimeout` - (String)\n      *
+  `scheduleToCloseTimeout` - (String)\n      * `startToCloseTimeout` - (String)\n
+  \     * `taskList` - (Hash)\n        * `name` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `heartbeatTimeout` - (String)\n    * `activityTaskStartedEventAttributes`
+  - (Hash)\n      * `identity` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \   * `activityTaskCompletedEventAttributes` - (Hash)\n      * `result` - (String)\n
+  \     * `scheduledEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    *
+  `activityTaskFailedEventAttributes` - (Hash)\n      * `reason` - (String)\n      *
+  `details` - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId`
+  - (Integer)\n    * `activityTaskTimedOutEventAttributes` - (Hash)\n      * `timeoutType`
+  - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId` - (Integer)\n
+  \     * `details` - (String)\n    * `activityTaskCanceledEventAttributes` - (Hash)\n
+  \     * `details` - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId`
+  - (Integer)\n      * `latestCancelRequestedEventId` - (Integer)\n    * `activityTaskCancelRequestedEventAttributes`
+  - (Hash)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `activityId`
+  - (String)\n    * `workflowExecutionSignaledEventAttributes` - (Hash)\n      * `signalName`
+  - (String)\n      * `input` - (String)\n      * `externalWorkflowExecution` - (Hash)\n
+  \       * `workflowId` - (String)\n        * `runId` - (String)\n      * `externalInitiatedEventId`
+  - (Integer)\n    * `markerRecordedEventAttributes` - (Hash)\n      * `markerName`
+  - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n    * `recordMarkerFailedEventAttributes` - (Hash)\n      * `markerName`
+  - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n    * `timerStartedEventAttributes` - (Hash)\n      * `timerId` - (String)\n
+  \     * `control` - (String)\n      * `startToFireTimeout` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n    * `timerFiredEventAttributes` - (Hash)\n      * `timerId` - (String)\n
+  \     * `startedEventId` - (Integer)\n    * `timerCanceledEventAttributes` - (Hash)\n
+  \     * `timerId` - (String)\n      * `startedEventId` - (Integer)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n    * `startChildWorkflowExecutionInitiatedEventAttributes` - (Hash)\n
+  \     * `workflowId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
+  - (String)\n        * `version` - (String)\n      * `control` - (String)\n      *
+  `input` - (String)\n      * `executionStartToCloseTimeout` - (String)\n      * `taskList`
+  - (Hash)\n        * `name` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n      * `childPolicy` - (String)\n      * `taskStartToCloseTimeout` -
+  (String)\n      * `tagList` - (Array<String>)\n    * `childWorkflowExecutionStartedEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
+  - (String)\n        * `version` - (String)\n      * `initiatedEventId` - (Integer)\n
+  \   * `childWorkflowExecutionCompletedEventAttributes` - (Hash)\n      * `workflowExecution`
+  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
+  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
+  \     * `result` - (String)\n      * `initiatedEventId` - (Integer)\n      * `startedEventId`
+  - (Integer)\n    * `childWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
+  `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n        * `runId`
+  - (String)\n      * `workflowType` - (Hash)\n        * `name` - (String)\n        *
+  `version` - (String)\n      * `reason` - (String)\n      * `details` - (String)\n
+  \     * `initiatedEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    *
+  `childWorkflowExecutionTimedOutEventAttributes` - (Hash)\n      * `workflowExecution`
+  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
+  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
+  \     * `timeoutType` - (String)\n      * `initiatedEventId` - (Integer)\n      *
+  `startedEventId` - (Integer)\n    * `childWorkflowExecutionCanceledEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
+  - (String)\n        * `version` - (String)\n      * `details` - (String)\n      *
+  `initiatedEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    * `childWorkflowExecutionTerminatedEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
+  - (String)\n        * `version` - (String)\n      * `initiatedEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n    * `signalExternalWorkflowExecutionInitiatedEventAttributes`
+  - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `signalName`
+  - (String)\n      * `input` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n      * `control` - (String)\n    * `externalWorkflowExecutionSignaledEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `initiatedEventId` - (Integer)\n    * `signalExternalWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `cause`
+  - (String)\n      * `initiatedEventId` - (Integer)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `control` - (String)\n    * `externalWorkflowExecutionCancelRequestedEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `initiatedEventId` - (Integer)\n    * `requestCancelExternalWorkflowExecutionInitiatedEventAttributes`
+  - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `control` - (String)\n    * `requestCancelExternalWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n      * `cause`
+  - (String)\n      * `initiatedEventId` - (Integer)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `control` - (String)\n    * `scheduleActivityTaskFailedEventAttributes`
+  - (Hash)\n      * `activityType` - (Hash)\n        * `name` - (String)\n        *
+  `version` - (String)\n      * `activityId` - (String)\n      * `cause` - (String)\n
+  \     * `decisionTaskCompletedEventId` - (Integer)\n    * `requestCancelActivityTaskFailedEventAttributes`
+  - (Hash)\n      * `activityId` - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n    * `startTimerFailedEventAttributes` - (Hash)\n      * `timerId`
+  - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n    * `cancelTimerFailedEventAttributes` - (Hash)\n      * `timerId`
+  - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
+  (Integer)\n    * `startChildWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
+  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
+  \     * `cause` - (String)\n      * `workflowId` - (String)\n      * `initiatedEventId`
+  - (Integer)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `control`
+  - (String)\n  * `nextPageToken` - (String)\n  * `previousStartedEventId` - (Integer)"
+:record_activity_task_heartbeat: "Calls the RecordActivityTaskHeartbeat API operation.\n@param
+  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:details` - (String)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `cancelRequested` - (Boolean)"
+:register_activity_type: "Calls the RegisterActivityType API operation.\n@param [Hash]
+  options\n  * `:domain` - *required* - (String) \n  * `:name` - *required* - (String)
+  \n  * `:version` - *required* - (String) \n  * `:description` - (String) \n  * `:default_task_start_to_close_timeout`
+  - (String) \n  * `:default_task_heartbeat_timeout` - (String) \n  * `:default_task_list`
+  - (Hash) \n    * `:name` - *required* - (String) \n  * `:default_task_schedule_to_start_timeout`
+  - (String) \n  * `:default_task_schedule_to_close_timeout` - (String) \n@return
+  [Core::Response]"
+:register_domain: "Calls the RegisterDomain API operation.\n@param [Hash] options\n
+  \ * `:name` - *required* - (String) \n  * `:description` - (String) \n  * `:workflow_execution_retention_period_in_days`
+  - *required* - (String) \n@return [Core::Response]"
+:register_workflow_type: "Calls the RegisterWorkflowType API operation.\n@param [Hash]
+  options\n  * `:domain` - *required* - (String) \n  * `:name` - *required* - (String)
+  \n  * `:version` - *required* - (String) \n  * `:description` - (String) \n  * `:default_task_start_to_close_timeout`
+  - (String) \n  * `:default_execution_start_to_close_timeout` - (String) \n  * `:default_task_list`
+  - (Hash) \n    * `:name` - *required* - (String) \n  * `:default_child_policy` -
+  (String) Valid values include:\n    * `TERMINATE`\n    * `REQUEST_CANCEL`\n    *
+  `ABANDON`\n@return [Core::Response]"
+:request_cancel_workflow_execution: "Calls the RequestCancelWorkflowExecution API
+  operation.\n@param [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_id`
+  - *required* - (String) \n  * `:run_id` - (String) \n@return [Core::Response]"
+:respond_activity_task_canceled: "Calls the RespondActivityTaskCanceled API operation.\n@param
+  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:details` - (String)
+  \n@return [Core::Response]"
+:respond_activity_task_completed: "Calls the RespondActivityTaskCompleted API operation.\n@param
+  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:result` - (String)
+  \n@return [Core::Response]"
+:respond_activity_task_failed: "Calls the RespondActivityTaskFailed API operation.\n@param
+  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:reason` - (String)
+  \n  * `:details` - (String) \n@return [Core::Response]"
+:respond_decision_task_completed: "Calls the RespondDecisionTaskCompleted API operation.\n@param
+  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:decisions` - (Array&lt;<Hash>)
+  \n    * `:decision_type` - *required* - (String) Valid values include:\n      *
+  `ScheduleActivityTask`\n      * `RequestCancelActivityTask`\n      * `CompleteWorkflowExecution`\n
+  \     * `FailWorkflowExecution`\n      * `CancelWorkflowExecution`\n      * `ContinueAsNewWorkflowExecution`\n
+  \     * `RecordMarker`\n      * `StartTimer`\n      * `CancelTimer`\n      * `SignalExternalWorkflowExecution`\n
+  \     * `RequestCancelExternalWorkflowExecution`\n      * `StartChildWorkflowExecution`\n
+  \   * `:schedule_activity_task_decision_attributes` - (Hash) \n      * `:activity_type`
+  - *required* - (Hash) \n        * `:name` - *required* - (String) \n        * `:version`
+  - *required* - (String) \n      * `:activity_id` - *required* - (String) \n      *
+  `:control` - (String) \n      * `:input` - (String) \n      * `:schedule_to_close_timeout`
+  - (String) \n      * `:task_list` - (Hash) \n        * `:name` - *required* - (String)
+  \n      * `:schedule_to_start_timeout` - (String) \n      * `:start_to_close_timeout`
+  - (String) \n      * `:heartbeat_timeout` - (String) \n    * `:request_cancel_activity_task_decision_attributes`
+  - (Hash) \n      * `:activity_id` - *required* - (String) \n    * `:complete_workflow_execution_decision_attributes`
+  - (Hash) \n      * `:result` - (String) \n    * `:fail_workflow_execution_decision_attributes`
+  - (Hash) \n      * `:reason` - (String) \n      * `:details` - (String) \n    *
+  `:cancel_workflow_execution_decision_attributes` - (Hash) \n      * `:details` -
+  (String) \n    * `:continue_as_new_workflow_execution_decision_attributes` - (Hash)
+  \n      * `:input` - (String) \n      * `:execution_start_to_close_timeout` - (String)
+  \n      * `:task_list` - (Hash) \n        * `:name` - *required* - (String) \n      *
+  `:task_start_to_close_timeout` - (String) \n      * `:child_policy` - (String) Valid
+  values include:\n        * `TERMINATE`\n        * `REQUEST_CANCEL`\n        * `ABANDON`\n
+  \     * `:tag_list` - (Array&lt;<String>) \n      * `:workflow_type_version` - (String)
+  \n    * `:record_marker_decision_attributes` - (Hash) \n      * `:marker_name` -
+  *required* - (String) \n      * `:details` - (String) \n    * `:start_timer_decision_attributes`
+  - (Hash) \n      * `:timer_id` - *required* - (String) \n      * `:control` - (String)
+  \n      * `:start_to_fire_timeout` - *required* - (String) \n    * `:cancel_timer_decision_attributes`
+  - (Hash) \n      * `:timer_id` - *required* - (String) \n    * `:signal_external_workflow_execution_decision_attributes`
+  - (Hash) \n      * `:workflow_id` - *required* - (String) \n      * `:run_id` -
+  (String) \n      * `:signal_name` - *required* - (String) \n      * `:input` - (String)
+  \n      * `:control` - (String) \n    * `:request_cancel_external_workflow_execution_decision_attributes`
+  - (Hash) \n      * `:workflow_id` - *required* - (String) \n      * `:run_id` -
+  (String) \n      * `:control` - (String) \n    * `:start_child_workflow_execution_decision_attributes`
+  - (Hash) \n      * `:workflow_type` - *required* - (Hash) \n        * `:name` -
+  *required* - (String) \n        * `:version` - *required* - (String) \n      * `:workflow_id`
+  - *required* - (String) \n      * `:control` - (String) \n      * `:input` - (String)
+  \n      * `:execution_start_to_close_timeout` - (String) \n      * `:task_list`
+  - (Hash) \n        * `:name` - *required* - (String) \n      * `:task_start_to_close_timeout`
+  - (String) \n      * `:child_policy` - (String) Valid values include:\n        *
+  `TERMINATE`\n        * `REQUEST_CANCEL`\n        * `ABANDON`\n      * `:tag_list`
+  - (Array&lt;<String>) \n  * `:execution_context` - (String) \n@return [Core::Response]"
+:signal_workflow_execution: "Calls the SignalWorkflowExecution API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_id` - *required*
+  - (String) \n  * `:run_id` - (String) \n  * `:signal_name` - *required* - (String)
+  \n  * `:input` - (String) \n@return [Core::Response]"
+:start_workflow_execution: "Calls the StartWorkflowExecution API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_id` - *required*
+  - (String) \n  * `:workflow_type` - *required* - (Hash) \n    * `:name` - *required*
+  - (String) \n    * `:version` - *required* - (String) \n  * `:task_list` - (Hash)
+  \n    * `:name` - *required* - (String) \n  * `:input` - (String) \n  * `:execution_start_to_close_timeout`
+  - (String) \n  * `:tag_list` - (Array&lt;<String>) \n  * `:task_start_to_close_timeout`
+  - (String) \n  * `:child_policy` - (String) Valid values include:\n    * `TERMINATE`\n
+  \   * `REQUEST_CANCEL`\n    * `ABANDON`\n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `runId`
+  - (String)"
+:terminate_workflow_execution: "Calls the TerminateWorkflowExecution API operation.\n@param
+  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_id` - *required*
+  - (String) \n  * `:run_id` - (String) \n  * `:reason` - (String) \n  * `:details`
+  - (String) \n  * `:child_policy` - (String) Valid values include:\n    * `TERMINATE`\n
+  \   * `REQUEST_CANCEL`\n    * `ABANDON`\n@return [Core::Response]"

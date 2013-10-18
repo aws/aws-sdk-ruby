@@ -32,7 +32,7 @@ module AWS
           instance = instances['i-1234']
           instance.should be_a(EC2::Instance)
         end
-        
+
         it 'returns an ec2 instance object with the correct configuration' do
           instance = instances['i-1234']
           instance.config.should == config
@@ -44,7 +44,7 @@ module AWS
         end
 
         context '#elb_health' do
-          
+
           let(:response) { client.stub_for(:describe_instance_health) }
 
           before(:each) do
@@ -70,13 +70,13 @@ module AWS
                 :reason_code => 'reason-code',
                 :state => 'state',
             }
-              
+
           end
 
         end
 
         context '#load_balancer' do
-          
+
           it 'returns the load balancer' do
             instances['i-12346'].load_balancer.should == instances.load_balancer
           end
@@ -132,7 +132,7 @@ module AWS
 
         end
 
-        it 'returns an array of hashes' do 
+        it 'returns an array of hashes' do
           instances.health.should == [
             {
               :description => 'desc-1',
@@ -235,12 +235,12 @@ module AWS
         end
 
         it 'yields instance objects' do
-          
+
           instances.to_a.should == [
             instances['i-1'],
             instances['i-2'],
           ]
-            
+
         end
 
       end

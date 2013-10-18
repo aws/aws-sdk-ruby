@@ -27,7 +27,7 @@ module AWS
     it_behaves_like 'a class that accepts configuration', :simple_workflow_client
 
     context '#domains' do
-      
+
       it 'returns a domain collection' do
         swf.domains.should be_a(SimpleWorkflow::DomainCollection)
       end

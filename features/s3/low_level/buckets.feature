@@ -42,6 +42,16 @@ Feature: Working with Buckets
     | http  | host      | s3.amazonaws.com           |
     | http  | uri_match | /ruby_integration_test_\d+ |
 
+  @create_bucket
+  Scenario: Mixed case bucket name
+    When I ask the client to create a bucket named "miXedCase"
+    Then the bucket should exist
+    Then a request should have been made like:
+    | TYPE  | NAME      | VALUE                      |
+    | http  | verb      | PUT                        |
+    | http  | host      | s3.amazonaws.com           |
+    | http  | uri_match | /miXedCase |
+
   @create_bucket @endpoint
   Scenario: Create a bucket in a different region
     When I ask the client to create a bucket in "s3-us-west-1.amazonaws.com"

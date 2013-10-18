@@ -96,7 +96,7 @@ module AWS
             customer_gateways.create(65432, '1.2.3.4')
 
           end
-          
+
           it 'returns a customer gateway object' do
             cgw = customer_gateways.create(65432, '1.2.3.4')
             cgw.should be_a(CustomerGateway)

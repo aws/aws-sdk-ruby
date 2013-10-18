@@ -22,13 +22,15 @@ module AWS
 
       let(:client) { config.sqs_client }
 
-      let(:queue) { Queue.new("url", :config => config) }
+      let(:url) { "http://queue-url.sqs.us-east-1.amazonaws.com" }
+
+      let(:queue) { Queue.new(url, :config => config) }
 
       let(:required_args) { [queue, "id", "handle"] }
 
       let(:message) { described_class.new(*required_args) }
 
-      it_should_behave_like "an SQS model object", Queue.new("url"), "id", "handle"
+      it_should_behave_like "an SQS model object", Queue.new('http://foo.com'), "id", "handle"
 
       context '#initialize' do
 
@@ -63,7 +65,7 @@ module AWS
       end
 
       context '#as_sns_message' do
-        
+
         it 'returns a recieved sns message object' do
           msg = message.as_sns_message
           msg.should be_a(ReceivedSNSMessage)
@@ -76,7 +78,7 @@ module AWS
 
         it 'should call delete_message' do
           client.should_receive(:delete_message).
-            with(:queue_url => "url",
+            with(:queue_url => url,
                  :receipt_handle => "handle")
           message.delete
         end
@@ -91,7 +93,7 @@ module AWS
 
         it 'should call change_message_visibility' do
           client.should_receive(:change_message_visibility).
-            with(:queue_url => "url",
+            with(:queue_url => url,
                  :receipt_handle => "handle",
                  :visibility_timeout => 12)
           message.visibility_timeout = 12

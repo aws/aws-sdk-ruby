@@ -15,7 +15,7 @@
 @s3 @lifecycle_configuration
 Feature: Bucket Lifecycle Configuration
 
-  Scenario: 
+  Scenario:
     Given I create a new bucket
     Then the lifecycle configuration should have 0 rules
 

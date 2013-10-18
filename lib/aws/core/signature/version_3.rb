@@ -28,7 +28,7 @@ module AWS
           headers["x-amz-date"] ||= (headers["date"] ||= Time.now.httpdate)
           headers["host"] ||= host
 
-          headers["x-amz-security-token"] = credentials.session_token if 
+          headers["x-amz-security-token"] = credentials.session_token if
             credentials.session_token
 
           # compute the authorization
@@ -43,7 +43,7 @@ module AWS
         protected
 
         def signature credentials
-          Signer.sign(credentials.secret_access_key, string_to_sign)  
+          Signer.sign(credentials.secret_access_key, string_to_sign)
         end
 
         def string_to_sign

@@ -14,13 +14,9 @@
 require 'digest/md5'
 
 Before("@dynamo_db") do
-
-  session = AWS::STS.new.new_session
-
   @dynamo_db = AWS::DynamoDB.new
   @tables = []
   @created_tables = []
-
 end
 
 After("@dynamo_db") do |scenario|
@@ -62,6 +58,7 @@ def create_table(string)
       raise "Not sure how to make table #{@table.name.inspect} active"
     end
   end
+  AWS.config.http_handler.requests_made.clear
 end
 
 Given /^I configure dynamo DB to not convert numbers to big decimal$/ do

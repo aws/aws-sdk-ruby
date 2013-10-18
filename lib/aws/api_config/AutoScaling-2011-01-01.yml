@@ -14,6 +14,19 @@
 ---
 :api_version: '2011-01-01'
 :operations:
+- :name: AttachInstances
+  :method: :attach_instances
+  :inputs:
+    InstanceIds:
+    - :membered_list:
+      - :string
+    AutoScalingGroupName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      AttachInstancesResult:
+        :ignore: true
 - :name: CreateAutoScalingGroup
   :method: :create_auto_scaling_group
   :inputs:
@@ -22,7 +35,8 @@
     - :required
     LaunchConfigurationName:
     - :string
-    - :required
+    InstanceId:
+    - :string
     MinSize:
     - :integer
     - :required
@@ -76,7 +90,6 @@
     - :required
     ImageId:
     - :string
-    - :required
     KeyName:
     - :string
     SecurityGroups:
@@ -84,9 +97,10 @@
       - :string
     UserData:
     - :string
+    InstanceId:
+    - :string
     InstanceType:
     - :string
-    - :required
     KernelId:
     - :string
     RamdiskId:
@@ -114,6 +128,8 @@
     IamInstanceProfile:
     - :string
     EbsOptimized:
+    - :boolean
+    AssociatePublicIpAddress:
     - :boolean
   :outputs:
     :children:
@@ -396,6 +412,8 @@
                   CreatedTime:
                     :type: :time
                   EbsOptimized:
+                    :type: :boolean
+                  AssociatePublicIpAddress:
                     :type: :boolean
 - :name: DescribeMetricCollectionTypes
   :method: :describe_metric_collection_types

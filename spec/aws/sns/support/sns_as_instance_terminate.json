@@ -1,0 +1,12 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "2b72222b-0266-4d8f-b88f-af5d744871f8",
+  "TopicArn" : "arn:aws:sns:eu-west-1:382739154790:pete-AutoScalingSnsT-6064W6KCK0H3",
+  "Subject" : "AWS Notification - autoscaling:EC2_INSTANCE_TERMINATE",
+  "Message" : "{\"StatusCode\":\"InProgress\",\"Service\":\"AWS Auto Scaling\",\"AutoScalingGroupName\":\"pete-ReverseProxyAsG-AX2MGMM4X8IM\",\"Description\":\"Terminating EC2 instance i-e3f20eab\",\"ActivityId\":\"9be0b646-5b23-4dd1-9a2e-5e4c5cd4ed34\",\"Event\":\"autoscaling:EC2_INSTANCE_TERMINATE\",\"Details\":{},\"AutoScalingGroupARN\":\"arn:aws:autoscaling:eu-west-1:382739154790:autoScalingGroup:7c23f8cd-65dc-4f6a-a1a0-342ca2cf9228:autoScalingGroupName/pete-ReverseProxyAsG-AX2MGMM4X8IM\",\"Progress\":0,\"Time\":\"2012-04-30T10:54:50.555Z\",\"AccountId\":\"382739154790\",\"RequestId\":\"9be0b646-5b23-4dd1-9a2e-5e4c5cd4ed34\",\"StatusMessage\":\"\",\"EndTime\":\"2012-04-30T10:54:50.555Z\",\"EC2InstanceId\":\"i-e3f20eab\",\"StartTime\":\"2012-04-30T10:54:15.360Z\",\"Cause\":\"At 2012-04-30T10:54:15Z an instance was taken out of service in response to a system health-check.\"}",
+  "Timestamp" : "2012-04-30T10:54:50.598Z",
+  "SignatureVersion" : "1",
+  "Signature" : "AAS19SCTCaaYxcF0e/vWX+xwiGpC4Q/OGYdYeS9w9TUOKLgEj2bJ4TU4NX8XI69wU+b8qH/H1KR0irdwWonRau30wVJrW3r8JbnoWsLIa0/W0vl0c1zi1j3fcDbRTq0zPqphZn2+2xlhhCQxFah3mPQlXhAmkrHxO5G6DBZ2hWQ=",
+  "SigningCertURL" : "https://sns.eu-west-1.amazonaws.com/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.pem",
+  "UnsubscribeURL" : "https://sns.eu-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-1:382739154790:pete-AutoScalingSnsT-6064W6KCK0H3:cf5d7737-18c9-4c34-befb-3ca939cb6cf2"
+}

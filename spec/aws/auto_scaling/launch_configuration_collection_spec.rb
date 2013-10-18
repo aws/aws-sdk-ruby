@@ -22,7 +22,7 @@ module AWS
 
       let(:client) { config.auto_scaling_client }
 
-      let(:launch_configurations) { 
+      let(:launch_configurations) {
         LaunchConfigurationCollection.new(:config => config)
       }
 
@@ -61,7 +61,7 @@ module AWS
               },
               {
                 :device_name => '/dev/sda1',
-                :ebs => { 
+                :ebs => {
                   :snapshot_id => 'snap-id',
                   :volume_size => 10,
                 },
@@ -75,6 +75,7 @@ module AWS
             :user_data => Base64.encode64('user-data'),
             :iam_instance_profile => 'iam-profile',
             :spot_price => '123.45',
+            :associate_public_ip_address => true,
           })
 
           launch_configurations.create('name', 'image', 'type', {
@@ -85,7 +86,7 @@ module AWS
               },
               {
                 :device_name => '/dev/sda1',
-                :ebs => { 
+                :ebs => {
                   :snapshot_id => 'snap-id',
                   :volume_size => 10,
                 },
@@ -99,6 +100,7 @@ module AWS
             :user_data => 'user-data',
             :iam_instance_profile => 'iam-profile',
             :spot_price => '123.45',
+            :associate_public_ip_address => true,
           })
         end
 
@@ -112,7 +114,7 @@ module AWS
           client.should_receive(:create_launch_configuration).
             with(hash_including(:security_groups => groups.map(&:id)))
 
-          launch_configurations.create('name', 'image', 'type', 
+          launch_configurations.create('name', 'image', 'type',
             :security_groups => groups)
 
         end
@@ -124,7 +126,7 @@ module AWS
           client.should_receive(:create_launch_configuration).
             with(hash_including(:key_name => key_pair.name))
 
-          launch_configurations.create('name', 'image', 'type', 
+          launch_configurations.create('name', 'image', 'type',
             :key_pair => key_pair)
 
         end

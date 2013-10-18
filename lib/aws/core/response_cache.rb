@@ -14,7 +14,7 @@
 module AWS
   module Core
 
-    # @private
+    # @api private
     class ResponseCache
 
       attr_reader :cached_responses

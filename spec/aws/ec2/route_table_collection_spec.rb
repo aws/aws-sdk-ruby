@@ -91,7 +91,7 @@ module AWS
             route_tables.create(:vpc => 'vpc-id')
 
           end
-          
+
           it 'accepts a vpc object' do
 
             client.should_receive(:create_route_table).

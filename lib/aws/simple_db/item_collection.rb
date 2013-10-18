@@ -21,7 +21,7 @@ module AWS
       # the regions before and after each quoted region, for example:
       #  "? ? `foo?``bar?` ? 'foo?' ?".scan(OUTSIDE_QUOTES_REGEX)
       #  # => [["? ? ", "`foo?``bar?`", " ? "], ["", "'foo?'", " ?"]]
-      # @private
+      # @api private
       OUTSIDE_QUOTES_REGEX = Regexp.compile(
         '([^\'"`]*)(`(?:[^`]*(?:``))*[^`]*`|' +
         '\'(?:[^\']*(?:\'\'))*[^\']*\'|'      +
@@ -35,13 +35,13 @@ module AWS
       # @return [Domain] The domain the items belong to.
       attr_reader :domain
 
-      # @private
+      # @api private
       attr_reader :output_list
 
-      # @private
+      # @api private
       attr_reader :conditions
 
-      # @private
+      # @api private
       attr_reader :sort_instructions
 
       # @param [Domain] domain The domain that you want an item collection for.
@@ -56,16 +56,18 @@ module AWS
         super
       end
 
-      # Creates a new item in SimpleDB with the given attributes: 
+      # Creates a new item in SimpleDB with the given attributes:
+      #
+      # @example
       #
       #   domain.items.create('shirt', {
-      #     'colors' => ['red', 'blue'],  
+      #     'colors' => ['red', 'blue'],
       #     'category' => 'clearance'})
       #
       # @overload create(item_name, attributes)
       #   @param [String] item_name The name of the item as you want it stored
       #     in SimpleDB.
-      #   @param [Hash] attributes A hash of attribute names and values 
+      #   @param [Hash] attributes A hash of attribute names and values
       #     you want to store in SimpleDB.
       #   @return [Item] Returns a reference to the object that was created.
       def create item_name, *args
@@ -99,33 +101,33 @@ module AWS
       # * AWS::SimpleDB::ItemData objects (some or all attributes populated)
       #
       # The default mode of an ItemCollection is to yield Item objects with
-      # no populated attributes.  
+      # no populated attributes.
       #
-      #   # only receives item names from SimpleDB
-      #   domain.items.each do |item|
-      #     puts item.name
-      #     puts item.class.name # => AWS::SimpleDB::Item
-      #   end
+      #     # only receives item names from SimpleDB
+      #     domain.items.each do |item|
+      #       puts item.name
+      #       puts item.class.name # => AWS::SimpleDB::Item
+      #     end
       #
       # You can switch a collection into yielded {ItemData} objects by
       # specifying what attributes to request:
       #
-      #   domain.items.select(:all).each do |item_data|
-      #     puts item_data.class.name # => AWS::SimpleDB::ItemData
-      #     puts item_data.attributes # => { 'attr-name' => 'attr-value', ... }
-      #   end
+      #     domain.items.select(:all).each do |item_data|
+      #       puts item_data.class.name # => AWS::SimpleDB::ItemData
+      #       puts item_data.attributes # => { 'attr-name' => 'attr-value', ... }
+      #     end
       #
       # You can also pass the standard scope options to #each as well:
       #
-      #   # output the item names of the 10 most expensive items
-      #   domain.items.each(:order => [:price, :desc], :limit => 10).each do |item|
-      #     puts item.name
-      #   end
+      #     # output the item names of the 10 most expensive items
+      #     domain.items.each(:order => [:price, :desc], :limit => 10).each do |item|
+      #       puts item.name
+      #     end
       #
       # @yield [item] Yields once for every item in the {#domain}.
       #
       # @yieldparam [Item,ItemData] item If the item collection has been
-      #   scoped by chaining +#select+ or by passing the +:select+ option
+      #   scoped by chaining `#select` or by passing the `:select` option
       #   then {ItemData} objects (that contain a hash of attributes) are
       #   yielded.  If no list of attributes has been provided, then#
       #   {Item} objects (with no populated data) are yielded.
@@ -137,9 +139,9 @@ module AWS
       #
       # @option options [Mixed] :select If select is provided, then each
       #   will yield {ItemData} objects instead of empty {Item}.
-      #   The +:select+ option may be:
+      #   The `:select` option may be:
       #
-      #   * +:all+ - Specifies that all attributes should requested.
+      #   * `:all` - Specifies that all attributes should requested.
       #
       #   * A single or array of attribute names (as strings or symbols).
       #     This causes the named attribute(s) to be requested.
@@ -151,14 +153,14 @@ module AWS
       #   will be yielded (see {#order}).
       #
       # @option options :limit [Integer] The maximum number of
-      #   items to fetch from SimpleDB.  
+      #   items to fetch from SimpleDB.
       #
       # @option options :batch_size Specifies a maximum number of records
       #   to fetch from SimpleDB in a single request.  SimpleDB may return
       #   fewer items than :batch_size per request, but never more.
       #   Generally you should not need to specify this option.
       #
-      # @return [String,nil] Returns a next token that can be used with 
+      # @return [String,nil] Returns a next token that can be used with
       #   the exact same SimpleDB select expression to get more results.
       #   A next token is returned ONLY if there was a limit on the
       #   expression, otherwise all items will be enumerated and
@@ -168,7 +170,7 @@ module AWS
         super
       end
 
-      # @private
+      # @api private
       def each_batch options = {}, &block
         handle_query_options(options) do |collection, opts|
           return collection.each_batch(opts, &block)
@@ -178,21 +180,21 @@ module AWS
 
       # Counts the items in the collection.
       #
-      #   domain.items.count
+      #     domain.items.count
       #
       # You can specify what items to count with {#where}:
       #
-      #   domain.items.where(:color => "red").count
+      #     domain.items.where(:color => "red").count
       #
       # You can also limit the number of items to count:
       #
-      #   # count up to 500 items and then stop
-      #   domain.items.limit(500).count
+      #     # count up to 500 items and then stop
+      #     domain.items.limit(500).count
       #
       # @param [Hash] options Options for counting items.
       #
       # @option options [Boolean] :consistent_read (false) Causes this
-      #   method to yield the most current data in the domain when +true+.
+      #   method to yield the most current data in the domain when `true`.
       #
       # @option options :where Restricts the item collection using
       #   {#where} before querying.
@@ -217,7 +219,7 @@ module AWS
 
           response = select_request(options, next_token)
 
-          if 
+          if
             domain_item = response.items.first and
             count_attribute = domain_item.attributes.first
           then
@@ -238,36 +240,36 @@ module AWS
 #       #   the selection mode (item names only or with attributes).
 #       #
 #       def page options = {}
-# 
+#
 #         handle_query_options(options) do |collection, opts|
 #           return collection.page(opts)
 #         end
-# 
+#
 #         super(options)
-# 
+#
 #       end
 
       # Specifies a list of attributes select from SimpleDB.
       #
-      #   domain.items.select('size', 'color').each do |item_data|
-      #     puts item_data.attributes # => { 'size' => ..., :color => ... }
-      #   end
+      #     domain.items.select('size', 'color').each do |item_data|
+      #       puts item_data.attributes # => { 'size' => ..., :color => ... }
+      #     end
       #
-      # You can select all attributes by passing +:all+ or '*':
+      # You can select all attributes by passing `:all` or '*':
       #
-      #   domain.items.select('*').each {|item_data| ... }
+      #     domain.items.select('*').each {|item_data| ... }
       #
-      #   domain.items.select(:all).each {|item_data| ... }
+      #     domain.items.select(:all).each {|item_data| ... }
       #
       # Calling #select causes #each to yield {ItemData} objects
-      # with #attribute hashes, instead of {Item} objects with 
+      # with #attribute hashes, instead of {Item} objects with
       # an item name.
       #
       # @param [Symbol, String, or Array] attributes The attributes to
       #   retrieve.  This can be:
-      #  
-      #   * +:all+ or '*' to request all attributes for each item
-      #  
+      #
+      #   * `:all` or '*' to request all attributes for each item
+      #
       #   * A list or array of attribute names as strings or symbols
       #
       #     Attribute names may contain any characters that are valid
@@ -319,64 +321,64 @@ module AWS
       # in addition to any conditions defined on this collection.
       # For example:
       #
-      #  items = domain.items.where(:color => 'blue').
-      #    where('engine_type is not null')
+      #     items = domain.items.where(:color => 'blue').
+      #       where('engine_type is not null')
       #
-      #  # does SELECT itemName() FROM `mydomain`
-      #  #      WHERE color = "blue" AND engine_type is not null
-      #  items.each { |i| ... }
+      #     # does SELECT itemName() FROM `mydomain`
+      #     #      WHERE color = "blue" AND engine_type is not null
+      #     items.each { |i| ... }
       #
-      # == Hash Conditions
+      # ## Hash Conditions
       #
-      # When +conditions+ is a hash, each entry produces a condition
+      # When `conditions` is a hash, each entry produces a condition
       # on the attribute named in the hash key.  For example:
       #
-      #  # produces "WHERE `foo` = 'bar'"
-      #  domain.items.where(:foo => 'bar')
+      #     # produces "WHERE `foo` = 'bar'"
+      #     domain.items.where(:foo => 'bar')
       #
       # You can pass an array value to use an "IN" operator instead
       # of "=":
       #
-      #  # produces "WHERE `foo` IN ('bar', 'baz')"
-      #  domain.items.where(:foo => ['bar', 'baz'])
+      #     # produces "WHERE `foo` IN ('bar', 'baz')"
+      #     domain.items.where(:foo => ['bar', 'baz'])
       #
       # You can also pass a range value to use a "BETWEEN" operator:
       #
-      #  # produces "WHERE `foo` BETWEEN 'bar' AND 'baz'
-      #  domain.items.where(:foo => 'bar'..'baz')
+      #     # produces "WHERE `foo` BETWEEN 'bar' AND 'baz'
+      #     domain.items.where(:foo => 'bar'..'baz')
       #
-      #  # produces "WHERE (`foo` >= 'bar' AND `foo` < 'baz')"
-      #  domain.items.where(:foo => 'bar'...'baz')
+      #     # produces "WHERE (`foo` >= 'bar' AND `foo` < 'baz')"
+      #     domain.items.where(:foo => 'bar'...'baz')
       #
-      # == Placeholders
+      # ## Placeholders
       #
-      # If +conditions+ is a string and "?" appears outside of any
-      # quoted part of the expression, +placeholers+ is expected to
+      # If `conditions` is a string and "?" appears outside of any
+      # quoted part of the expression, `placeholers` is expected to
       # contain a value for each of the "?" characters in the
       # expression.  For example:
       #
-      #  # produces "WHERE foo like 'fred''s % value'"
-      #  domain.items.where("foo like ?", "fred's % value")
+      #     # produces "WHERE foo like 'fred''s % value'"
+      #     domain.items.where("foo like ?", "fred's % value")
       #
       # Array values are surrounded with parentheses when they are
       # substituted for a placeholder:
       #
-      #  # produces "WHERE foo in ('1', '2')"
-      #  domain.items.where("foo in ?", [1, 2])
+      #     # produces "WHERE foo in ('1', '2')"
+      #     domain.items.where("foo in ?", [1, 2])
       #
       # Note that no substitutions are made within a quoted region
       # of the query:
       #
-      #  # produces "WHERE `foo?` = 'red'"
-      #  domain.items.where("`foo?` = ?", "red")
+      #     # produces "WHERE `foo?` = 'red'"
+      #     domain.items.where("`foo?` = ?", "red")
       #
-      #  # produces "WHERE foo = 'fuzz?' AND bar = 'zap'"
-      #  domain.items.where("foo = 'fuzz?' AND bar = ?", "zap")
+      #     # produces "WHERE foo = 'fuzz?' AND bar = 'zap'"
+      #     domain.items.where("foo = 'fuzz?' AND bar = ?", "zap")
       #
       # Also note that no attempt is made to correct for syntax:
       #
-      #  # produces "WHERE 'foo' = 'bar'", which is invalid
-      #  domain.items.where("? = 'bar'", "foo")
+      #     # produces "WHERE 'foo' = 'bar'", which is invalid
+      #     domain.items.where("? = 'bar'", "foo")
       #
       # @return [ItemCollection] Returns a new item collection with the
       #   additional conditions.
@@ -412,13 +414,13 @@ module AWS
       # For example, to get item names in descending order of
       # popularity, you can do:
       #
-      #  domain.items.order(:popularity, :desc).map(&:name)
+      #     domain.items.order(:popularity, :desc).map(&:name)
       #
       # @param attribute [String or Symbol] The attribute name to
       #   order by.
       # @param order [String or Symbol] The desired order, which may be:
-      #   * +asc+ or +ascending+ (the default)
-      #   * +desc+ or +descending+
+      #   * `asc` or `ascending` (the default)
+      #   * `desc` or `descending`
       # @return [ItemCollection] Returns a new item collection with the
       #   given ordering logic.
       def order(attribute, order = nil)
@@ -432,10 +434,10 @@ module AWS
       # Limits the number of items that are returned or yielded.
       # For example, to get the 100 most popular item names:
       #
-      #  domain.items.
-      #    order(:popularity, :desc).
-      #    limit(100).
-      #    map(&:name)
+      #     domain.items.
+      #       order(:popularity, :desc).
+      #       limit(100).
+      #       map(&:name)
       #
       # @overload limit
       #   @return [Integer] Returns the current limit for the collection.
@@ -451,14 +453,14 @@ module AWS
 
       # Applies standard scope options (e.g. :where => 'foo') and removes them from
       # the options hash by calling their method (e.g. by calling #where('foo')).
-      # Yields only if there were scope options to apply.  
-      # @private
+      # Yields only if there were scope options to apply.
+      # @api private
       protected
       def handle_query_options(*args)
 
         options = args.last.is_a?(Hash) ? args.pop : {}
 
-        if 
+        if
           query_options = options.keys & [:select, :where, :order, :limit] and
           !query_options.empty?
         then
@@ -486,7 +488,7 @@ module AWS
 
         response = select_request(options, next_token, max)
 
-        if output_list == 'itemName()'  
+        if output_list == 'itemName()'
           response.items.each do |item|
             yield(self[item.name])
           end
@@ -497,7 +499,7 @@ module AWS
         end
 
         response[:next_token]
-        
+
       end
 
       protected
@@ -518,7 +520,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       protected
       def select_expression options = {}
         expression = []
@@ -530,7 +532,7 @@ module AWS
         expression.compact.join(' ')
       end
 
-      # @private
+      # @api private
       protected
       def where_clause
 
@@ -544,22 +546,22 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       protected
       def order_by_clause
         sort_instructions ? "ORDER BY #{sort_instructions}" : nil
       end
 
-      # @private
+      # @api private
       protected
       def limit_clause
         limit ? "LIMIT #{limit}" : nil
       end
 
-      # @private
+      # @api private
       protected
       def collection_with options
-        ItemCollection.new(domain, { 
+        ItemCollection.new(domain, {
           :output_list => output_list,
           :conditions => conditions,
           :sort_instructions => sort_instructions,
@@ -568,7 +570,7 @@ module AWS
         }.merge(options))
       end
 
-      # @private
+      # @api private
       protected
       def replace_placeholders(str, *substitutions)
         named = {}
@@ -595,15 +597,16 @@ module AWS
         str
       end
 
-      # @private
+      # @api private
       protected
       def replace_placeholders_outside_quotes(str, count, substitutions, named = {})
+        orig_str = str.dup
         str, count = replace_positional_placeders(str, count, substitutions)
-        str = replace_named_placeholders(str, named)
+        str = replace_named_placeholders(orig_str, str, named)
         [str, count]
       end
 
-      # @private
+      # @api private
       protected
       def replace_positional_placeders(str, count, substitutions)
         str = str.gsub("?") do |placeholder|
@@ -615,19 +618,21 @@ module AWS
         [str, count]
       end
 
-      # @private
+      # @api private
       protected
-      def replace_named_placeholders(str, named)
+      def replace_named_placeholders(orig_str, str, named)
         named.each do |name, value|
           str = str.gsub(name.to_sym.inspect, coerce_substitution(value))
         end
         str.scan(/:\S+/) do |missing|
-          raise ArgumentError.new("missing value for placeholder #{missing}")
+          if orig_str.include?(missing)
+            raise ArgumentError.new("missing value for placeholder #{missing}")
+          end
         end
         str
       end
 
-      # @private
+      # @api private
       protected
       def coerce_substitution(subst)
         if subst.kind_of?(Array)
@@ -638,7 +643,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def coerce_attribute(name)
         '`' + name.to_s.gsub('`', '``') + '`'

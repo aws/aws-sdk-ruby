@@ -11,12 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/validator'
-
 module AWS
   module Record
-    
-    # @private
+
+    # @api private
     class NumericalityValidator < Validator
 
       ACCEPTED_OPTIONS = [
@@ -27,10 +25,10 @@ module AWS
       ]
 
       COMPARISONS = {
-        :equal_to => :==, 
+        :equal_to => :==,
         :greater_than => :>,
         :greater_than_or_equal_to => :>=,
-        :less_than => :<, 
+        :less_than => :<,
         :less_than_or_equal_to => :<=,
         :even => lambda{|value| value.to_i % 2 == 0 },
         :odd => lambda{|value| value.to_i % 2 == 1 },
@@ -40,7 +38,7 @@ module AWS
 
         ensure_exclusive(:odd, :even)
 
-        ensure_exclusive(:equal_to, 
+        ensure_exclusive(:equal_to,
           [:greater_than, :greater_than_or_equal_to,
            :less_than, :less_than_or_equal_to])
 
@@ -48,7 +46,7 @@ module AWS
 
         ensure_type(TrueClass, :odd, :even)
 
-        ensure_type([Numeric, Symbol, Proc], 
+        ensure_type([Numeric, Symbol, Proc],
           :greater_than, :greater_than_or_equal_to,
           :less_than, :less_than_or_equal_to,
           :equal_to)
@@ -78,7 +76,7 @@ module AWS
             record.errors.add(attribute_name, message_for(error_type))
             return
           end
-          
+
           COMPARISONS.each do |option,method|
 
             next unless options.has_key?(option)

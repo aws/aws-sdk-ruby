@@ -18,7 +18,7 @@ module AWS
     # the file that it just streamed over HTTP should be closed after receiving the
     # response.  This should only be used internally to track files that we opened.
     # Open files passed into upload methods should be closed by the user.
-    # @private
+    # @api private
     class ManagedFile < File
 
       def self.open path

@@ -60,7 +60,7 @@ end
 Then /^the "([^\"]*)" item should eventually have attributes named:$/ do |item_name,table|
 
   attributes = @domain.items[item_name].attributes
-  
+
   names = []
   attributes.each(:consistent_read => true) do |attribute|
     names << attribute.name
@@ -87,13 +87,13 @@ Then /^the "([^\"]*)" item should eventually have no attributes$/ do |item_name|
 end
 
 When /^I (add|set) the following attributes to "([^\"]*)"$/ do |add_or_set, item_name, table|
-  
+
   attributes_hash = {}
   table.hashes.each do |hash|
     attributes_hash[hash['name']] ||= []
     attributes_hash[hash['name']] << hash['value']
   end
-  
+
   @domain.items[item_name].attributes.send(add_or_set, attributes_hash)
 
 end

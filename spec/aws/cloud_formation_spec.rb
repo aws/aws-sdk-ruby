@@ -39,7 +39,7 @@ module AWS
     context '#stack_summaries' do
 
       it 'returns a stack collection' do
-        cloud_formation.stack_summaries.should 
+        cloud_formation.stack_summaries.should
           be_a(CloudFormation::StackSummaryCollection)
       end
 
@@ -62,7 +62,7 @@ module AWS
       it 'accepts a stack name and a logical resource id' do
 
         client.should_receive(:describe_stack_resources).with(
-          :stack_name => 'stack-name', 
+          :stack_name => 'stack-name',
           :logical_resource_id => 'logical-resource-id'
         ).and_return(resp)
 
@@ -94,7 +94,7 @@ module AWS
     context '#validte_template' do
 
       let(:resp) { client.stub_for(:validate_template) }
-      
+
       it 'calls #validate_template on the client' do
         client.should_receive(:validate_template).
           with(:template_body => 'template').
@@ -134,7 +134,7 @@ module AWS
         }
 
       end
-      
+
     end
 
     context '#estimate_template_cost' do
@@ -144,21 +144,21 @@ module AWS
       before(:each) do
         resp.stub(:url).and_return('url')
       end
-      
+
       it 'calls #estimate_template_cost on the client' do
         client.should_receive(:estimate_template_cost).
-          with(:template_body => 'template').
+          with(:parameters => [], :template_body => 'template').
           and_return(resp)
         cloud_formation.estimate_template_cost('template')
       end
-      
+
       it 'accepts urls' do
         client.should_receive(:estimate_template_cost).
-          with(:template_url => 'http://domain.com/template').
+          with(:parameters => [], :template_url => 'http://domain.com/template').
           and_return(resp)
         cloud_formation.estimate_template_cost('http://domain.com/template')
       end
-      
+
       it 'returns a url' do
         cloud_formation.estimate_template_cost('template').should == 'url'
       end

@@ -67,28 +67,63 @@ module AWS
         klass = params[:klass]
         kind = params[:kind]
 
-        before(:each) do
-          Kernel.stub(:sleep)
-          http_handler.stub(:handle) do |req, resp|
-            resp.status = status
-            resp.body = nil
+        [nil, ''].each do |body|
+
+          context "when the body is #{body.inspect}" do
+
+            before(:each) do
+              Kernel.stub(:sleep)
+              http_handler.stub(:handle) do |req, resp|
+                 resp.status = status
+                 resp.body = body
+              end
+            end
+
+            it "should raise an instance of #{klass}" do
+              lambda { client.send(method, opts) }.
+                should raise_error(klass)
+            end
+  
+            it "should raise an instance of #{kind}" do
+              lambda { client.send(method, opts) }.
+                should raise_error(kind)
+            end
+  
           end
-        end
-
-        it "should raise an instance of #{klass}" do
-          lambda { client.send(method, opts) }.
-            should raise_error(klass)
-        end
-
-        it "should raise an instance of #{kind}" do
-          lambda { client.send(method, opts) }.
-            should raise_error(kind)
+  
         end
 
       end
 
-      context 'cors', :cors => true do
+      context '#put_bucket_website' do
 
+        let(:xml) { <<-XML.strip.xml_cleanup }
+<WebsiteConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">
+  <IndexDocument>
+    <Suffix>index.html</Suffix>
+  </IndexDocument>
+  <ErrorDocument>
+    <Key>error.html</Key>
+  </ErrorDocument>
+</WebsiteConfiguration>
+        XML
+
+        it 'does not serialize empty routing rules' do
+          body = nil
+          client.with_http_handler do |req, resp|
+            body = req.body.xml_cleanup
+          end.put_bucket_website(
+            :bucket_name => 'bucket',
+            :index_document => { :suffix => 'index.html' },
+            :error_document => { :key => 'error.html' },
+            :routing_rules => []
+          )
+          body.should eq(xml)
+        end
+      end
+
+      context 'cors', :cors => true do
+  
         let(:xml) { <<-XML.strip.xml_cleanup }
 <CORSConfiguration>
   <CORSRule>
@@ -195,6 +230,112 @@ module AWS
             req.querystring.should eq('cors')
             req.bucket.should eq('bucket')
             req.body.should eq(nil)
+          end
+
+        end
+
+      end
+
+      context 'logging', :logging => true do
+
+        let(:xml) { <<-XML.strip }
+<BucketLoggingStatus xmlns="http://doc.s3.amazonaws.com/2006-03-01">
+  <LoggingEnabled>
+    <TargetBucket>mybucketlogs</TargetBucket>
+    <TargetPrefix>mybucket-access_log-/</TargetPrefix>
+    <TargetGrants>
+      <Grant>
+        <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:type="AmazonCustomerByEmail">
+          <EmailAddress>user@company.com</EmailAddress>
+        </Grantee>
+        <Permission>READ</Permission>
+      </Grant>
+      <Grant>
+        <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:type="AmazonCustomerByEmail">
+          <EmailAddress>admin@company.com</EmailAddress>
+        </Grantee>
+        <Permission>WRITE</Permission>
+      </Grant>
+    </TargetGrants>
+  </LoggingEnabled>
+</BucketLoggingStatus>
+        XML
+
+        def get_request method, params
+          request = nil
+          client.with_http_handler do |req, resp|
+            request = req
+          end.send(method, params)
+          request
+        end
+
+        def stub_response method, params, resp_data
+          client.with_http_handler do |req,resp|
+            resp.status = resp_data[:status] || 200
+            (resp_data[:headers] || {}).each_pair do |k,v|
+              resp.headers[k] = v
+            end
+            resp.body = resp_data[:body]
+          end.send(method, params)
+        end
+
+        context '#put_bucket_logging' do
+
+          it 'make a put request to the logging subresource' do
+
+            request = get_request(:put_bucket_logging, {
+              :bucket_name => 'bucket',
+              :logging_enabled => true,
+              :target_bucket => 'mybucketlogs',
+              :target_prefix => 'mybucket-access_log-/',
+              :grants => [{:email_address => 'user@company.com',
+                           :permission => 'READ'},
+                          {:email_address => 'admin@company.com',
+                           :permission => 'WRITE'}]
+            })
+
+            request.http_method.should eq('PUT')
+            request.querystring.should eq('logging')
+
+          end
+          
+        end
+
+        context '#get_bucket_logging' do
+
+          it 'make a get request to the logging subresource' do
+            req = get_request(:get_bucket_logging, :bucket_name => 'bucket')
+            req.http_method.should eq('GET')
+            req.querystring.should eq('logging')
+            req.bucket.should eq('bucket')
+            req.body.should eq(nil)
+          end
+
+          it 'returns the parsed xml response' do
+            resp = stub_response(:get_bucket_logging,
+            {
+              :bucket_name => 'bucket',
+            }, {
+              :status => 200,
+              :headers => {},
+              :body => xml,
+            })
+
+            resp.data.should eq({
+              :logging_enabled =>
+                {:target_grants => [
+                  {:grantee =>
+                    {:type => "AmazonCustomerByEmail",
+                     :email_address => "user@company.com"},
+                  :permission => "READ"},
+                  {:grantee =>
+                    {:type => "AmazonCustomerByEmail",
+                     :email_address => "admin@company.com"},
+                  :permission => "WRITE"}],
+              :target_bucket => "mybucketlogs", :target_prefix => "mybucket-access_log-/"}
+            })
           end
 
         end
@@ -330,6 +471,11 @@ module AWS
           it_should_behave_like("an s3 error response with no body",
                                 :status => 304,
                                 :klass => Errors::NotModified,
+                                :kind => Errors::ClientError)
+
+          it_should_behave_like("an s3 error response with no body",
+                                :status => 400,
+                                :klass => Errors::BadRequest,
                                 :kind => Errors::ClientError)
 
           it_should_behave_like("an s3 error response with no body",
@@ -1324,6 +1470,7 @@ module AWS
             resp.headers['content-type'] = ['text/plain']
             resp.headers['content-encoding'] = ['gzip']
             resp.headers['cache-control'] = ['max-age=1296000']
+            resp.headers['expires'] = ['Sat, 22 Mar 2014 14:14:21 GMT']
             resp.headers['accept-ranges'] = ['bytes']
             resp.headers['x-amz-meta-Color'] = ['red']
             resp.headers['x-amz-meta-foo'] = 'bar'
@@ -1442,6 +1589,22 @@ module AWS
         it_should_behave_like "formats date header", :if_modified_since, "If-Modified-Since"
         it_should_behave_like "formats date header", :if_unmodified_since, "If-Unmodified-Since"
 
+        context ':range option' do
+          it 'calculates the correct range for an inclusive Range object' do
+            http_handler.should_receive(:handle).with do |req, resp|
+              req.headers["range"].should == "bytes=3-10"
+            end
+            client.get_object(opts.merge(:range => (3..10)))
+          end
+
+          it 'calculates the correct range for an exclusive Range object' do
+            http_handler.should_receive(:handle).with do |req, resp|
+              req.headers["range"].should == "bytes=3-9"
+            end
+            client.get_object(opts.merge(:range => (3...10)))
+          end
+        end
+
         context 'response' do
 
           let(:body) { "FOO DATA" }
@@ -1512,6 +1675,7 @@ module AWS
               resp.headers['content-type'] = ['text/plain']
               resp.headers['content-encoding'] = ['gzip']
               resp.headers['cache-control'] = ['max-age=1296000']
+              resp.headers['expires'] = ['Sat, 22 Mar 2014 14:14:21 GMT']
               resp.headers['accept-ranges'] = ['bytes']
               resp.headers['x-amz-meta-Color'] = ['red']
               resp.headers['x-amz-meta-foo'] = 'bar'
@@ -1519,6 +1683,7 @@ module AWS
             r[:content_type].should eq('text/plain')
             r[:content_encoding].should eq('gzip')
             r[:cache_control].should eq('max-age=1296000')
+            r[:expires].should eq('Sat, 22 Mar 2014 14:14:21 GMT')
             r[:accept_ranges].should eq('bytes')
             r[:meta].should eq('Color' => 'red', 'foo' => 'bar')
           end
@@ -1799,7 +1964,7 @@ module AWS
           end
 
           before(:each) do
-            Kernel.stub!(:sleep)
+            Kernel.stub(:sleep)
             http_handler.stub(:handle) do |req, resp|
               resp.body = error_response
             end
@@ -1868,7 +2033,7 @@ module AWS
 
         it 'sends :parts as an XML request body' do
           http_handler.should_receive(:handle).with do |req, resp|
-            req.body.should == "<CompleteMultipartUpload>"+
+            req.body.xml_cleanup.should == "<CompleteMultipartUpload>"+
               "<Part><PartNumber>1</PartNumber><ETag>foo</ETag></Part>"+
               "<Part><PartNumber>2</PartNumber><ETag>bar</ETag></Part>"+
               "</CompleteMultipartUpload>"
@@ -1882,18 +2047,18 @@ module AWS
 
         it 'converts the part number to an integer' do
           http_handler.should_receive(:handle).with do |req, resp|
-            req.body.should == "<CompleteMultipartUpload>"+
+            req.body.xml_cleanup.should == "<CompleteMultipartUpload>"+
               "<Part><PartNumber>1</PartNumber><ETag>foo</ETag></Part>"+
               "</CompleteMultipartUpload>"
           end
-          my_opts = opts.merge(:parts => [{ :part_number => "1.2",
+          my_opts = opts.merge(:parts => [{ :part_number => "1",
                                             :etag => 'foo' }])
           client.complete_multipart_upload(my_opts)
         end
 
         it 'escapes XML characters in the etag' do
           http_handler.should_receive(:handle).with do |req, resp|
-            req.body.should == "<CompleteMultipartUpload>"+
+            req.body.xml_cleanup.should == "<CompleteMultipartUpload>"+
               "<Part><PartNumber>1</PartNumber><ETag>foo&amp;bar</ETag></Part>"+
               "</CompleteMultipartUpload>"
           end
@@ -1964,7 +2129,7 @@ module AWS
 
         context 'accepts letters and' do
           it('should accept lowercasename'){ should_pass('lowercasename') }
-          it('should reject MixedCaseName'){ should_fail('MixedCaseName') }
+          it('should accept MixedCaseName'){ should_pass('MixedCaseName') }
         end
 
         context 'accepts numbers and' do
@@ -1978,31 +2143,31 @@ module AWS
           it('should reject a 256 char long name'){ should_fail('n'*256) }
         end
 
-        context 'accepts dots after the first character and' do
+        context 'accepts names with dots and' do
           it('should accept sample.name'){ should_pass('sample.name') }
           it('should accept sample.'){ should_pass('sample.') }
-          it('should reject .sample'){ should_fail('.sample') }
+          it('should accept .sample'){ should_pass('.sample') }
         end
 
-        context 'accepts underscores after first character and' do
+        context 'accepts names with underscores and' do
           it('should accept sample_name'){ should_pass('sample_name') }
           it('should accept sample_'){ should_pass('sample_') }
-          it('should reject _sample'){ should_fail('_sample') }
+          it('should accept _sample'){ should_pass('_sample') }
         end
 
-        context 'accepts dashes after first character and' do
+        context 'accepts names with dashes and' do
           it('should accept sample-name'){ should_pass('sample-name') }
           it('should accept sample-'){ should_pass('sample-') }
-          it('should reject -sample'){ should_fail('-sample') }
+          it('should accept -sample'){ should_pass('-sample') }
         end
 
-        context 'rejects names that look like ip addresses and' do
+        context 'accepts names that look like ip addresses and' do
           it('should accept 1.a.3.4'){ should_pass('1.a.3.4') }
-          it('should reject 1.2.3.4'){ should_fail('1.2.3.4') }
+          it('should accept 1.2.3.4'){ should_pass('1.2.3.4') }
         end
 
-        it 'only accepts a-z 0-9 . _ - characters' do
-          valid = ('a'..'z').to_a + ('0'..'9').to_a + ['.', '_', '-']
+        it 'only accepts A-Z a-z 0-9 . _ - characters' do
+          valid = ('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + ['.', '_', '-']
           invalid = (1..255).collect{|n| n.chr } - valid
           invalid.each{|bad_char| should_fail("abc#{bad_char}") }
         end
@@ -2010,15 +2175,15 @@ module AWS
         let (:valid_names) { ["foo",
                               "1234",
                               "a1.b2-c3_d4",
-                              "r"*255] }
+                              "r"*255,
+                              ".bla",
+                              "-bla",
+                              "_bla",
+                              "1.2.3.4"] }
 
         let (:invalid_names) { ["it",
                                 "r"*256,
-                                "it!",
-                                ".bla",
-                                "-bla",
-                                "_bla",
-                                "1.2.3.4"] }
+                                "it!"] }
 
         it 'should return true for valid names' do
           valid_names.each do |name|
@@ -2053,16 +2218,24 @@ module AWS
         it('should reject a 64 char long name') { should_fail('n'*64) }
         it('should reject names with _') { should_fail('abc_xyz') }
         it('should reject names ending with -') { should_fail('abc-') }
+        it('should reject names ending with .') { should_fail('abc.') }
         it('should reject names containing ..') { should_fail('abc..xyz') }
         it('should reject names containing .-') { should_fail('abc.-xyz') }
         it('should reject names containing -.') { should_fail('abc-.xyz') }
+        it('should reject names containing upper case') { should_fail('abC')}
 
-        let (:compatible_names) { ["foo",
+        let (:compatible_names) { ["myawsbucket",
+                                   "my.aws.bucket",
+                                   "myawsbucket.1",
+                                   "foo",
                                    "1234",
                                    "a1.b2-c3.d4",
                                    "r"*63] }
 
-        let (:incompatible_names) { ["it",
+        let (:incompatible_names) { [".myawsbucket",
+                                     "myawsbucket.",
+                                     "my..awsbucket",
+                                     "it",
                                      "r"*64,
                                      "it!",
                                      ".bla",
@@ -2086,6 +2259,14 @@ module AWS
           end
         end
 
+      end
+
+      it 'retries request timeout errors' do
+        resp = Core::Response.new
+        resp.http_response = Core::Http::Response.new
+        resp.http_response.status = 400
+        resp.error = AWS::S3::Errors::RequestTimeout.new
+        Client.new.send(:retryable_error?, resp).should be(true)
       end
 
     end

@@ -14,13 +14,13 @@
 module AWS
   class SimpleWorkflow
 
-    # Simple Workflow returns counts that may be truncated.  Truncated 
-    # counts indicate a lower bound.  A count of 100 that is truncated 
-    # could be represented to a user like "100+".  Non-truncated counts 
+    # Simple Workflow returns counts that may be truncated.  Truncated
+    # counts indicate a lower bound.  A count of 100 that is truncated
+    # could be represented to a user like "100+".  Non-truncated counts
     # are definitive.
     class Count
 
-      # @private
+      # @api private
       def initialize count, truncated
         @count = count
         @truncated = truncated
@@ -37,8 +37,8 @@ module AWS
       end
 
       def == other
-        other.is_a?(Count) and 
-        other.count == self.count and 
+        other.is_a?(Count) and
+        other.count == self.count and
         other.truncated? == self.truncated?
       end
 

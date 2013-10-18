@@ -11,38 +11,18 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'uri'
+
 module AWS
   class SQS
 
-    # @private
+    # @api private
     class Request < Core::Http::Request
 
       include Core::Signature::Version4
 
       def service
         'sqs'
-      end
-
-      def path
-        full_url.path
-      end
-
-      def host
-        full_url.host
-      end
-
-      def uri
-        path
-      end
-
-      private
-
-      def full_url
-        if url_param = params.find { |p| p.name == "QueueUrl" }
-          URI.parse(url_param.value)
-        else
-          URI::HTTP.build(:host => @host, :path => '/')
-        end
       end
 
     end

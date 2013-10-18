@@ -30,7 +30,7 @@ module AWS
 
         include Parent
 
-        # @private
+        # @api private
         def initialize parent, collection, options = {}
           @parent = parent
           super(collection,

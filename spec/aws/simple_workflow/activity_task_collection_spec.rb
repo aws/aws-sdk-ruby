@@ -35,14 +35,14 @@ module AWS
       end
 
       context '#count' do
-        
+
         let(:response) { client.stub_for(:count_pending_activity_tasks) }
 
         before(:each) do
           response.data['count'] = 1
           response.data['truncated'] = true
         end
-        
+
         it 'calls count_pending_activity_tasks on the client' do
           client.should_receive(:count_pending_activity_tasks).with(
             :domain => domain.name,
@@ -58,7 +58,7 @@ module AWS
       end
 
       context '#poll_for_single_task' do
-        
+
         let(:response) { client.stub_for(:poll_for_activity_task) }
 
         let(:data) {{
@@ -156,11 +156,11 @@ module AWS
           it 'calls fail! if an error is raised' do
 
             trace = ['a/b/c', 'x/y/z']
-             
+
             task = double('activity-task')
             task.stub(:responded?).and_return(false)
             task.should_receive(:fail!).with(
-              :reason => 'UNTRAPPED ERROR: error-msg', 
+              :reason => 'UNTRAPPED ERROR: error-msg',
               :details => trace.join("\n"))
 
             ActivityTask.stub(:new).and_return(task)
@@ -179,7 +179,7 @@ module AWS
 
       end
 
-      context '#poll' do 
+      context '#poll' do
 
         it 'calls #poll_for_single_task in a loop' do
 

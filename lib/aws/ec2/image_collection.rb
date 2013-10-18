@@ -18,24 +18,23 @@ module AWS
     # find out which images exist with the characteristics you are
     # interested in:
     #
-    #  ec2 = EC2.new
-    #  all_images = ec2.images
-    #  amazon_owned_images = all_images.with_owner('amazon')
-    #  my_images = all_images.with_owner('self')
-    #  tagged_amis = all_images.tagged('mytag')
-    #  tagged_amis.map(&:id)   # => ["ami-123", ...]
+    #     ec2 = EC2.new
+    #     all_images = ec2.images
+    #     amazon_owned_images = all_images.with_owner('amazon')
+    #     my_images = all_images.with_owner('self')
+    #     tagged_amis = all_images.tagged('mytag')
+    #     tagged_amis.map(&:id)   # => ["ami-123", ...]
     #
     # You can also use it to create new images.  For example:
     #
-    #  ec2.images.create(:instance_id => "i-123",
-    #                    :name => "my-image")
+    #     ec2.images.create(:instance_id => "i-123", :name => "my-image")
     #
     class ImageCollection < Collection
 
       include TaggedCollection
       include BlockDeviceMappings
 
-      # @private
+      # @api private
       def initialize(options = {})
         @owners = options[:owners] || []
         @executable_users = options[:executable_users] || []
@@ -49,7 +48,7 @@ module AWS
 
       # @return [ImageCollection] A new collection that only includes
       #   images owned by one or more of the specified AWS accounts.
-      #   The IDs +:amazon+ and +:self+ can be used to include AMIs
+      #   The IDs `:amazon` and `:self` can be used to include AMIs
       #   owned by Amazon or AMIs owned by you, respectively.
       #
       # @param [Array of Strings] owners The AWS account IDs by
@@ -60,9 +59,9 @@ module AWS
 
       # @return [ImageCollection] A new collection that only includes
       #   images for which the specified user ID has explicit launch
-      #   permissions. The user ID can be an AWS account ID, +:self+
+      #   permissions. The user ID can be an AWS account ID, `:self`
       #   to return AMIs for which the sender of the request has
-      #   explicit launch permissions, or +:all+ to return AMIs with
+      #   explicit launch permissions, or `:all` to return AMIs with
       #   public launch permissions.
       #
       # @param [Array of Strings] users The AWS account IDs by which
@@ -88,35 +87,34 @@ module AWS
 
       # Creates an AMI.  There are several ways to create an AMI
       # using this method; for detailed information on each strategy
-      # see {the EC2 Developer
-      # Guide}[http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/creating-an-ami.html].
+      # see [the EC2 Developer Guide](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/creating-an-ami.html).
       #
       # @param [Hash] options Options for creating the image.
-      #   +:name+ is required, and you must also specify one of the
+      #   `:name` is required, and you must also specify one of the
       #   following options:
       #
-      #   * +:instance_id+
-      #   * +:image_location+
-      #   * +:root_device_name+
+      #     * `:instance_id`
+      #     * `:image_location`
+      #     * `:root_device_name`
       #
       # @option options [String] :instance_id The ID of a running
       #   instance.  This instance will be rebooted unless
-      #   +:no_reboot+ is set to +true+.
+      #   `:no_reboot` is set to `true`.
       #
       # @option options [String] :description A description of the
       #   new image.
       #
       # @option options [Boolean] :no_reboot By default this
-      #   option is set to +false+, which means Amazon EC2
+      #   option is set to `false`, which means Amazon EC2
       #   attempts to cleanly shut down the instance before image
       #   creation and reboots the instance afterwards. When the
-      #   option is set to +true+, Amazon EC2 does not shut down
+      #   option is set to `true`, Amazon EC2 does not shut down
       #   the instance before creating the image. When this option
       #   is used, file system integrity on the created image cannot
       #   be guaranteed.
       #
       #   *Note*: This option is only valid when used with
-      #   +:instance_id+.
+      #   `:instance_id`.
       #
       # @option options [String] :image_location Full path to your
       #   AMI manifest in Amazon S3 storage.  This must be of the
@@ -125,24 +123,24 @@ module AWS
       # @option options [String] :architecture The architecture of
       #   the image.  Valid values:
       #
-      #   * +:i386+
-      #   * +:x86_64+
+      #     * `:i386`
+      #     * `:x86_64`
       #
-      #   *Note*: This option is only valid with +:image_location+
-      #   or +:root_device_name+
+      #   *Note*: This option is only valid with `:image_location`
+      #   or `:root_device_name`
       #
       # @option options [String] :kernel_id The ID of the kernel to
       #   select.
       #
-      #   *Note*: This option is only valid with +:image_location+
-      #   or +:root_device_name+
+      #   *Note*: This option is only valid with `:image_location`
+      #   or `:root_device_name`
       #
       # @option options [Image] :kernel The kernel image to use.
-      #   Equivalent to passing +:kernel_id+ with the ID of the
+      #   Equivalent to passing `:kernel_id` with the ID of the
       #   image.
       #
-      #   *Note*: This option is only valid with +:image_location+
-      #   or +:root_device_name+
+      #   *Note*: This option is only valid with `:image_location`
+      #   or `:root_device_name`
       #
       # @option options [String] :ramdisk_id The ID of the RAM disk
       #   to select. Some kernels require additional drivers at
@@ -151,15 +149,15 @@ module AWS
       #   requirements, refer to the Resource Center and search for
       #   the kernel ID.
       #
-      #   *Note*: This option is only valid with +:image_location+
-      #   or +:root_device_name+
+      #   *Note*: This option is only valid with `:image_location`
+      #   or `:root_device_name`
       #
       # @option options [Image] :ramdisk The ramdisk image to use.
-      #   Equivalent to passing +:ramdisk_id+ with the ID of the
+      #   Equivalent to passing `:ramdisk_id` with the ID of the
       #   image.
       #
-      #   *Note*: This option is only valid with +:image_location+
-      #   or +:root_device_name+
+      #   *Note*: This option is only valid with `:image_location`
+      #   or `:root_device_name`
       #
       # @option options [String] :root_device_name The root device
       #   name (e.g., /dev/sda1, or xvda).
@@ -169,23 +167,17 @@ module AWS
       #   each entry determines how that device is mapped.  Valid
       #   values include:
       #
-      #   * A string, which is interpreted as a virtual device name.
+      #     * A string, which is interpreted as a virtual device name.
+      #     * A hash with any of the following options.  One of
+      #       `:snapshot`, `:snapshot_id` or `:volume_size` is
+      #       required.
       #
-      #   * A hash with any of the following options.  One of
-      #     +:snapshot+, +:snapshot_id+ or +:volume_size+ is
-      #     required.
-      #
-      #     [:snapshot] A snapshot to use when creating the block
-      #                 device.
-      #
-      #     [:snapshot_id] The ID of a snapshot to use when creating
-      #                    the block device.
-      #
-      #     [:volume_size] The size of volume to create, in gigabytes.
-      #
-      #     [:delete_on_termination] Setting this to true causes EC2
-      #                              to delete the volume when the
-      #                              instance is terminated.
+      #         * `:snapshot` - A snapshot to use when creating the block device.
+      #         * `:snapshot_id` - The ID of a snapshot to use when creating
+      #           the block device.
+      #         * `:volume_size` -] The size of volume to create, in gigabytes.
+      #         * `:delete_on_termination` - Setting this to true causes EC2
+      #           to delete the volume when the instance is terminated.
       # @return [Image]
       def create options = {}
         resp = case
@@ -210,13 +202,13 @@ module AWS
         Image.new(resp.image_id, :config => config)
       end
 
-      # @private
+      # @api private
       protected
       def member_class
         Image
       end
 
-      # @private
+      # @api private
       protected
       def preserved_options
         super.merge(:owners => @owners, :executable_users => @executable_users)

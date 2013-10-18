@@ -141,7 +141,7 @@ module AWS
               :ssl_certificate_id => 'cert-arn',
             }
           }
-          
+
           lb = {
             :load_balancer_name => load_balancer.name,
             :listener_descriptions => listeners,

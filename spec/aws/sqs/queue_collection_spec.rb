@@ -69,7 +69,7 @@ module AWS
 
         it 'should pass additional options' do
           client.should_receive(:create_queue).
-            with(:queue_name => "foo", :attributes => { 
+            with(:queue_name => "foo", :attributes => {
               'Foo' => 'bar',
             })
           queues.create("foo", :foo => "bar")

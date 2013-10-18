@@ -27,7 +27,7 @@ module AWS
     # wrap a 1-level hash as a return value, but we want the user to access
     # the values with string or symbol keys.
     #
-    # @private
+    # @api private
     class IndifferentHash < Hash
 
       def initialize *args

@@ -100,7 +100,7 @@ module AWS
 
           let(:response) { client.stub_for(:describe_tags) }
 
-          before(:each) do 
+          before(:each) do
             response.stub(:tag_set).and_return(mock_resources)
             client.stub(:describe_tags).and_return(response)
           end

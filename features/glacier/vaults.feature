@@ -34,3 +34,8 @@ Feature: Managing Glacier vaults
     | EVENT                       |
     | ArchiveRetrievalCompleted   |
     | InventoryRetrievalCompleted |
+
+  Scenario: Getting a vault by name
+    Given I create a glacier vault
+    When I get the vault by name
+    Then I should be able to get vault attributes

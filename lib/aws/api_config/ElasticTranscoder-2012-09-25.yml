@@ -35,11 +35,9 @@
     :pipeline_id:
       :name: PipelineId
       :type: :string
-      :required: true
     :input:
       :name: Input
       :type: :hash
-      :required: true
       :members:
         :key:
           :name: Key
@@ -62,7 +60,6 @@
     :output:
       :name: Output
       :type: :hash
-      :required: true
       :members:
         :key:
           :name: Key
@@ -76,6 +73,143 @@
         :preset_id:
           :name: PresetId
           :type: :string
+        :segment_duration:
+          :name: SegmentDuration
+          :type: :string
+        :watermarks:
+          :name: Watermarks
+          :type: :array
+          :members:
+            :name: member
+            :type: :hash
+            :members:
+              :preset_watermark_id:
+                :name: PresetWatermarkId
+                :type: :string
+              :input_key:
+                :name: InputKey
+                :type: :string
+        :album_art:
+          :name: AlbumArt
+          :type: :hash
+          :members:
+            :merge_policy:
+              :name: MergePolicy
+              :type: :string
+            :artwork:
+              :name: Artwork
+              :type: :array
+              :members:
+                :name: member
+                :type: :hash
+                :members:
+                  :input_key:
+                    :name: InputKey
+                    :type: :string
+                  :max_width:
+                    :name: MaxWidth
+                    :type: :string
+                  :max_height:
+                    :name: MaxHeight
+                    :type: :string
+                  :sizing_policy:
+                    :name: SizingPolicy
+                    :type: :string
+                  :padding_policy:
+                    :name: PaddingPolicy
+                    :type: :string
+                  :album_art_format:
+                    :name: AlbumArtFormat
+                    :type: :string
+    :outputs:
+      :name: Outputs
+      :type: :array
+      :members:
+        :name: member
+        :type: :hash
+        :members:
+          :key:
+            :name: Key
+            :type: :string
+          :thumbnail_pattern:
+            :name: ThumbnailPattern
+            :type: :string
+          :rotate:
+            :name: Rotate
+            :type: :string
+          :preset_id:
+            :name: PresetId
+            :type: :string
+          :segment_duration:
+            :name: SegmentDuration
+            :type: :string
+          :watermarks:
+            :name: Watermarks
+            :type: :array
+            :members:
+              :name: member
+              :type: :hash
+              :members:
+                :preset_watermark_id:
+                  :name: PresetWatermarkId
+                  :type: :string
+                :input_key:
+                  :name: InputKey
+                  :type: :string
+          :album_art:
+            :name: AlbumArt
+            :type: :hash
+            :members:
+              :merge_policy:
+                :name: MergePolicy
+                :type: :string
+              :artwork:
+                :name: Artwork
+                :type: :array
+                :members:
+                  :name: member
+                  :type: :hash
+                  :members:
+                    :input_key:
+                      :name: InputKey
+                      :type: :string
+                    :max_width:
+                      :name: MaxWidth
+                      :type: :string
+                    :max_height:
+                      :name: MaxHeight
+                      :type: :string
+                    :sizing_policy:
+                      :name: SizingPolicy
+                      :type: :string
+                    :padding_policy:
+                      :name: PaddingPolicy
+                      :type: :string
+                    :album_art_format:
+                      :name: AlbumArtFormat
+                      :type: :string
+    :output_key_prefix:
+      :name: OutputKeyPrefix
+      :type: :string
+    :playlists:
+      :name: Playlists
+      :type: :array
+      :members:
+        :name: member
+        :type: :hash
+        :members:
+          :name:
+            :name: Name
+            :type: :string
+          :format:
+            :name: Format
+            :type: :string
+          :output_keys:
+            :name: OutputKeys
+            :type: :array
+            :members:
+              :name: member
+              :type: :string
   :outputs:
     Job:
       :sym: :job
@@ -113,6 +247,9 @@
           :sym: :output
           :type: :hash
           :members:
+            Id:
+              :sym: :id
+              :type: :string
             Key:
               :sym: :key
               :type: :string
@@ -125,12 +262,164 @@
             PresetId:
               :sym: :preset_id
               :type: :string
+            SegmentDuration:
+              :sym: :segment_duration
+              :type: :string
             Status:
               :sym: :status
               :type: :string
             StatusDetail:
               :sym: :status_detail
               :type: :string
+            Duration:
+              :sym: :duration
+              :type: :integer
+            Width:
+              :sym: :width
+              :type: :integer
+            Height:
+              :sym: :height
+              :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
+        Outputs:
+          :sym: :outputs
+          :type: :hash
+          :members:
+            Id:
+              :sym: :id
+              :type: :string
+            Key:
+              :sym: :key
+              :type: :string
+            ThumbnailPattern:
+              :sym: :thumbnail_pattern
+              :type: :string
+            Rotate:
+              :sym: :rotate
+              :type: :string
+            PresetId:
+              :sym: :preset_id
+              :type: :string
+            SegmentDuration:
+              :sym: :segment_duration
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+            Duration:
+              :sym: :duration
+              :type: :integer
+            Width:
+              :sym: :width
+              :type: :integer
+            Height:
+              :sym: :height
+              :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
+        OutputKeyPrefix:
+          :sym: :output_key_prefix
+          :type: :string
+        Playlists:
+          :sym: :playlists
+          :type: :hash
+          :members:
+            Name:
+              :sym: :name
+              :type: :string
+            Format:
+              :sym: :format
+              :type: :string
+            OutputKeys:
+              :sym: :output_keys
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+        Status:
+          :sym: :status
+          :type: :string
 - :name: CreatePipeline
   :method: :create_pipeline
   :http:
@@ -141,23 +430,18 @@
     :name:
       :name: Name
       :type: :string
-      :required: true
     :input_bucket:
       :name: InputBucket
       :type: :string
-      :required: true
     :output_bucket:
       :name: OutputBucket
       :type: :string
-      :required: true
     :role:
       :name: Role
       :type: :string
-      :required: true
     :notifications:
       :name: Notifications
       :type: :hash
-      :required: true
       :members:
         :progressing:
           :name: Progressing
@@ -171,6 +455,64 @@
         :error:
           :name: Error
           :type: :string
+    :content_config:
+      :name: ContentConfig
+      :type: :hash
+      :members:
+        :bucket:
+          :name: Bucket
+          :type: :string
+        :storage_class:
+          :name: StorageClass
+          :type: :string
+        :permissions:
+          :name: Permissions
+          :type: :array
+          :members:
+            :name: member
+            :type: :hash
+            :members:
+              :grantee_type:
+                :name: GranteeType
+                :type: :string
+              :grantee:
+                :name: Grantee
+                :type: :string
+              :access:
+                :name: Access
+                :type: :array
+                :members:
+                  :name: member
+                  :type: :string
+    :thumbnail_config:
+      :name: ThumbnailConfig
+      :type: :hash
+      :members:
+        :bucket:
+          :name: Bucket
+          :type: :string
+        :storage_class:
+          :name: StorageClass
+          :type: :string
+        :permissions:
+          :name: Permissions
+          :type: :array
+          :members:
+            :name: member
+            :type: :hash
+            :members:
+              :grantee_type:
+                :name: GranteeType
+                :type: :string
+              :grantee:
+                :name: Grantee
+                :type: :string
+              :access:
+                :name: Access
+                :type: :array
+                :members:
+                  :name: member
+                  :type: :string
   :outputs:
     Pipeline:
       :sym: :pipeline
@@ -178,6 +520,9 @@
       :members:
         Id:
           :sym: :id
+          :type: :string
+        Arn:
+          :sym: :arn
           :type: :string
         Name:
           :sym: :name
@@ -210,6 +555,52 @@
             Error:
               :sym: :error
               :type: :string
+        ContentConfig:
+          :sym: :content_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
+        ThumbnailConfig:
+          :sym: :thumbnail_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
 - :name: CreatePreset
   :method: :create_preset
   :http:
@@ -220,18 +611,15 @@
     :name:
       :name: Name
       :type: :string
-      :required: true
     :description:
       :name: Description
       :type: :string
     :container:
       :name: Container
       :type: :string
-      :required: true
     :video:
       :name: Video
       :type: :hash
-      :required: true
       :members:
         :codec:
           :name: Codec
@@ -257,16 +645,70 @@
         :frame_rate:
           :name: FrameRate
           :type: :string
+        :max_frame_rate:
+          :name: MaxFrameRate
+          :type: :string
         :resolution:
           :name: Resolution
           :type: :string
         :aspect_ratio:
           :name: AspectRatio
           :type: :string
+        :max_width:
+          :name: MaxWidth
+          :type: :string
+        :max_height:
+          :name: MaxHeight
+          :type: :string
+        :display_aspect_ratio:
+          :name: DisplayAspectRatio
+          :type: :string
+        :sizing_policy:
+          :name: SizingPolicy
+          :type: :string
+        :padding_policy:
+          :name: PaddingPolicy
+          :type: :string
+        :watermarks:
+          :name: Watermarks
+          :type: :array
+          :members:
+            :name: member
+            :type: :hash
+            :members:
+              :id:
+                :name: Id
+                :type: :string
+              :max_width:
+                :name: MaxWidth
+                :type: :string
+              :max_height:
+                :name: MaxHeight
+                :type: :string
+              :sizing_policy:
+                :name: SizingPolicy
+                :type: :string
+              :horizontal_align:
+                :name: HorizontalAlign
+                :type: :string
+              :horizontal_offset:
+                :name: HorizontalOffset
+                :type: :string
+              :vertical_align:
+                :name: VerticalAlign
+                :type: :string
+              :vertical_offset:
+                :name: VerticalOffset
+                :type: :string
+              :opacity:
+                :name: Opacity
+                :type: :string
+              :target:
+                :name: Target
+                :type: :string
     :audio:
       :name: Audio
       :type: :hash
-      :required: true
       :members:
         :codec:
           :name: Codec
@@ -283,7 +725,6 @@
     :thumbnails:
       :name: Thumbnails
       :type: :hash
-      :required: true
       :members:
         :format:
           :name: Format
@@ -296,6 +737,18 @@
           :type: :string
         :aspect_ratio:
           :name: AspectRatio
+          :type: :string
+        :max_width:
+          :name: MaxWidth
+          :type: :string
+        :max_height:
+          :name: MaxHeight
+          :type: :string
+        :sizing_policy:
+          :name: SizingPolicy
+          :type: :string
+        :padding_policy:
+          :name: PaddingPolicy
           :type: :string
   :outputs:
     Preset:
@@ -355,12 +808,64 @@
             FrameRate:
               :sym: :frame_rate
               :type: :string
+            MaxFrameRate:
+              :sym: :max_frame_rate
+              :type: :string
             Resolution:
               :sym: :resolution
               :type: :string
             AspectRatio:
               :sym: :aspect_ratio
               :type: :string
+            MaxWidth:
+              :sym: :max_width
+              :type: :string
+            MaxHeight:
+              :sym: :max_height
+              :type: :string
+            DisplayAspectRatio:
+              :sym: :display_aspect_ratio
+              :type: :string
+            SizingPolicy:
+              :sym: :sizing_policy
+              :type: :string
+            PaddingPolicy:
+              :sym: :padding_policy
+              :type: :string
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                Id:
+                  :sym: :id
+                  :type: :string
+                MaxWidth:
+                  :sym: :max_width
+                  :type: :string
+                MaxHeight:
+                  :sym: :max_height
+                  :type: :string
+                SizingPolicy:
+                  :sym: :sizing_policy
+                  :type: :string
+                HorizontalAlign:
+                  :sym: :horizontal_align
+                  :type: :string
+                HorizontalOffset:
+                  :sym: :horizontal_offset
+                  :type: :string
+                VerticalAlign:
+                  :sym: :vertical_align
+                  :type: :string
+                VerticalOffset:
+                  :sym: :vertical_offset
+                  :type: :string
+                Opacity:
+                  :sym: :opacity
+                  :type: :string
+                Target:
+                  :sym: :target
+                  :type: :string
         Thumbnails:
           :sym: :thumbnails
           :type: :hash
@@ -376,6 +881,18 @@
               :type: :string
             AspectRatio:
               :sym: :aspect_ratio
+              :type: :string
+            MaxWidth:
+              :sym: :max_width
+              :type: :string
+            MaxHeight:
+              :sym: :max_height
+              :type: :string
+            SizingPolicy:
+              :sym: :sizing_policy
+              :type: :string
+            PaddingPolicy:
+              :sym: :padding_policy
               :type: :string
         Type:
           :sym: :type
@@ -455,6 +972,9 @@
           :sym: :output
           :type: :hash
           :members:
+            Id:
+              :sym: :id
+              :type: :string
             Key:
               :sym: :key
               :type: :string
@@ -467,12 +987,164 @@
             PresetId:
               :sym: :preset_id
               :type: :string
+            SegmentDuration:
+              :sym: :segment_duration
+              :type: :string
             Status:
               :sym: :status
               :type: :string
             StatusDetail:
               :sym: :status_detail
               :type: :string
+            Duration:
+              :sym: :duration
+              :type: :integer
+            Width:
+              :sym: :width
+              :type: :integer
+            Height:
+              :sym: :height
+              :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
+        Outputs:
+          :sym: :outputs
+          :type: :hash
+          :members:
+            Id:
+              :sym: :id
+              :type: :string
+            Key:
+              :sym: :key
+              :type: :string
+            ThumbnailPattern:
+              :sym: :thumbnail_pattern
+              :type: :string
+            Rotate:
+              :sym: :rotate
+              :type: :string
+            PresetId:
+              :sym: :preset_id
+              :type: :string
+            SegmentDuration:
+              :sym: :segment_duration
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+            Duration:
+              :sym: :duration
+              :type: :integer
+            Width:
+              :sym: :width
+              :type: :integer
+            Height:
+              :sym: :height
+              :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
+        OutputKeyPrefix:
+          :sym: :output_key_prefix
+          :type: :string
+        Playlists:
+          :sym: :playlists
+          :type: :hash
+          :members:
+            Name:
+              :sym: :name
+              :type: :string
+            Format:
+              :sym: :format
+              :type: :string
+            OutputKeys:
+              :sym: :output_keys
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+        Status:
+          :sym: :status
+          :type: :string
     NextPageToken:
       :sym: :next_page_token
       :type: :string
@@ -526,6 +1198,9 @@
           :sym: :output
           :type: :hash
           :members:
+            Id:
+              :sym: :id
+              :type: :string
             Key:
               :sym: :key
               :type: :string
@@ -538,12 +1213,164 @@
             PresetId:
               :sym: :preset_id
               :type: :string
+            SegmentDuration:
+              :sym: :segment_duration
+              :type: :string
             Status:
               :sym: :status
               :type: :string
             StatusDetail:
               :sym: :status_detail
               :type: :string
+            Duration:
+              :sym: :duration
+              :type: :integer
+            Width:
+              :sym: :width
+              :type: :integer
+            Height:
+              :sym: :height
+              :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
+        Outputs:
+          :sym: :outputs
+          :type: :hash
+          :members:
+            Id:
+              :sym: :id
+              :type: :string
+            Key:
+              :sym: :key
+              :type: :string
+            ThumbnailPattern:
+              :sym: :thumbnail_pattern
+              :type: :string
+            Rotate:
+              :sym: :rotate
+              :type: :string
+            PresetId:
+              :sym: :preset_id
+              :type: :string
+            SegmentDuration:
+              :sym: :segment_duration
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+            Duration:
+              :sym: :duration
+              :type: :integer
+            Width:
+              :sym: :width
+              :type: :integer
+            Height:
+              :sym: :height
+              :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
+        OutputKeyPrefix:
+          :sym: :output_key_prefix
+          :type: :string
+        Playlists:
+          :sym: :playlists
+          :type: :hash
+          :members:
+            Name:
+              :sym: :name
+              :type: :string
+            Format:
+              :sym: :format
+              :type: :string
+            OutputKeys:
+              :sym: :output_keys
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+        Status:
+          :sym: :status
+          :type: :string
     NextPageToken:
       :sym: :next_page_token
       :type: :string
@@ -560,6 +1387,9 @@
       :members:
         Id:
           :sym: :id
+          :type: :string
+        Arn:
+          :sym: :arn
           :type: :string
         Name:
           :sym: :name
@@ -592,6 +1422,52 @@
             Error:
               :sym: :error
               :type: :string
+        ContentConfig:
+          :sym: :content_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
+        ThumbnailConfig:
+          :sym: :thumbnail_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
 - :name: ListPresets
   :method: :list_presets
   :http:
@@ -656,12 +1532,64 @@
             FrameRate:
               :sym: :frame_rate
               :type: :string
+            MaxFrameRate:
+              :sym: :max_frame_rate
+              :type: :string
             Resolution:
               :sym: :resolution
               :type: :string
             AspectRatio:
               :sym: :aspect_ratio
               :type: :string
+            MaxWidth:
+              :sym: :max_width
+              :type: :string
+            MaxHeight:
+              :sym: :max_height
+              :type: :string
+            DisplayAspectRatio:
+              :sym: :display_aspect_ratio
+              :type: :string
+            SizingPolicy:
+              :sym: :sizing_policy
+              :type: :string
+            PaddingPolicy:
+              :sym: :padding_policy
+              :type: :string
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                Id:
+                  :sym: :id
+                  :type: :string
+                MaxWidth:
+                  :sym: :max_width
+                  :type: :string
+                MaxHeight:
+                  :sym: :max_height
+                  :type: :string
+                SizingPolicy:
+                  :sym: :sizing_policy
+                  :type: :string
+                HorizontalAlign:
+                  :sym: :horizontal_align
+                  :type: :string
+                HorizontalOffset:
+                  :sym: :horizontal_offset
+                  :type: :string
+                VerticalAlign:
+                  :sym: :vertical_align
+                  :type: :string
+                VerticalOffset:
+                  :sym: :vertical_offset
+                  :type: :string
+                Opacity:
+                  :sym: :opacity
+                  :type: :string
+                Target:
+                  :sym: :target
+                  :type: :string
         Thumbnails:
           :sym: :thumbnails
           :type: :hash
@@ -677,6 +1605,18 @@
               :type: :string
             AspectRatio:
               :sym: :aspect_ratio
+              :type: :string
+            MaxWidth:
+              :sym: :max_width
+              :type: :string
+            MaxHeight:
+              :sym: :max_height
+              :type: :string
+            SizingPolicy:
+              :sym: :sizing_policy
+              :type: :string
+            PaddingPolicy:
+              :sym: :padding_policy
               :type: :string
         Type:
           :sym: :type
@@ -727,6 +1667,9 @@
           :sym: :output
           :type: :hash
           :members:
+            Id:
+              :sym: :id
+              :type: :string
             Key:
               :sym: :key
               :type: :string
@@ -739,12 +1682,164 @@
             PresetId:
               :sym: :preset_id
               :type: :string
+            SegmentDuration:
+              :sym: :segment_duration
+              :type: :string
             Status:
               :sym: :status
               :type: :string
             StatusDetail:
               :sym: :status_detail
               :type: :string
+            Duration:
+              :sym: :duration
+              :type: :integer
+            Width:
+              :sym: :width
+              :type: :integer
+            Height:
+              :sym: :height
+              :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
+        Outputs:
+          :sym: :outputs
+          :type: :hash
+          :members:
+            Id:
+              :sym: :id
+              :type: :string
+            Key:
+              :sym: :key
+              :type: :string
+            ThumbnailPattern:
+              :sym: :thumbnail_pattern
+              :type: :string
+            Rotate:
+              :sym: :rotate
+              :type: :string
+            PresetId:
+              :sym: :preset_id
+              :type: :string
+            SegmentDuration:
+              :sym: :segment_duration
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+            Duration:
+              :sym: :duration
+              :type: :integer
+            Width:
+              :sym: :width
+              :type: :integer
+            Height:
+              :sym: :height
+              :type: :integer
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                PresetWatermarkId:
+                  :sym: :preset_watermark_id
+                  :type: :string
+                InputKey:
+                  :sym: :input_key
+                  :type: :string
+            AlbumArt:
+              :sym: :album_art
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                Artwork:
+                  :sym: :artwork
+                  :type: :hash
+                  :members:
+                    InputKey:
+                      :sym: :input_key
+                      :type: :string
+                    MaxWidth:
+                      :sym: :max_width
+                      :type: :string
+                    MaxHeight:
+                      :sym: :max_height
+                      :type: :string
+                    SizingPolicy:
+                      :sym: :sizing_policy
+                      :type: :string
+                    PaddingPolicy:
+                      :sym: :padding_policy
+                      :type: :string
+                    AlbumArtFormat:
+                      :sym: :album_art_format
+                      :type: :string
+        OutputKeyPrefix:
+          :sym: :output_key_prefix
+          :type: :string
+        Playlists:
+          :sym: :playlists
+          :type: :hash
+          :members:
+            Name:
+              :sym: :name
+              :type: :string
+            Format:
+              :sym: :format
+              :type: :string
+            OutputKeys:
+              :sym: :output_keys
+              :type: :string
+            Status:
+              :sym: :status
+              :type: :string
+            StatusDetail:
+              :sym: :status_detail
+              :type: :string
+        Status:
+          :sym: :status
+          :type: :string
 - :name: ReadPipeline
   :method: :read_pipeline
   :http:
@@ -761,6 +1856,9 @@
       :members:
         Id:
           :sym: :id
+          :type: :string
+        Arn:
+          :sym: :arn
           :type: :string
         Name:
           :sym: :name
@@ -793,6 +1891,52 @@
             Error:
               :sym: :error
               :type: :string
+        ContentConfig:
+          :sym: :content_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
+        ThumbnailConfig:
+          :sym: :thumbnail_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
 - :name: ReadPreset
   :method: :read_preset
   :http:
@@ -860,12 +2004,64 @@
             FrameRate:
               :sym: :frame_rate
               :type: :string
+            MaxFrameRate:
+              :sym: :max_frame_rate
+              :type: :string
             Resolution:
               :sym: :resolution
               :type: :string
             AspectRatio:
               :sym: :aspect_ratio
               :type: :string
+            MaxWidth:
+              :sym: :max_width
+              :type: :string
+            MaxHeight:
+              :sym: :max_height
+              :type: :string
+            DisplayAspectRatio:
+              :sym: :display_aspect_ratio
+              :type: :string
+            SizingPolicy:
+              :sym: :sizing_policy
+              :type: :string
+            PaddingPolicy:
+              :sym: :padding_policy
+              :type: :string
+            Watermarks:
+              :sym: :watermarks
+              :type: :hash
+              :members:
+                Id:
+                  :sym: :id
+                  :type: :string
+                MaxWidth:
+                  :sym: :max_width
+                  :type: :string
+                MaxHeight:
+                  :sym: :max_height
+                  :type: :string
+                SizingPolicy:
+                  :sym: :sizing_policy
+                  :type: :string
+                HorizontalAlign:
+                  :sym: :horizontal_align
+                  :type: :string
+                HorizontalOffset:
+                  :sym: :horizontal_offset
+                  :type: :string
+                VerticalAlign:
+                  :sym: :vertical_align
+                  :type: :string
+                VerticalOffset:
+                  :sym: :vertical_offset
+                  :type: :string
+                Opacity:
+                  :sym: :opacity
+                  :type: :string
+                Target:
+                  :sym: :target
+                  :type: :string
         Thumbnails:
           :sym: :thumbnails
           :type: :hash
@@ -882,6 +2078,18 @@
             AspectRatio:
               :sym: :aspect_ratio
               :type: :string
+            MaxWidth:
+              :sym: :max_width
+              :type: :string
+            MaxHeight:
+              :sym: :max_height
+              :type: :string
+            SizingPolicy:
+              :sym: :sizing_policy
+              :type: :string
+            PaddingPolicy:
+              :sym: :padding_policy
+              :type: :string
         Type:
           :sym: :type
           :type: :string
@@ -890,23 +2098,20 @@
   :http:
     :verb: POST
     :uri: /2012-09-25/roleTests
+    :response_code: 200
   :inputs:
     :role:
       :name: Role
       :type: :string
-      :required: true
     :input_bucket:
       :name: InputBucket
       :type: :string
-      :required: true
     :output_bucket:
       :name: OutputBucket
       :type: :string
-      :required: true
     :topics:
       :name: Topics
       :type: :array
-      :required: true
       :members:
         :name: member
         :type: :string
@@ -917,6 +2122,187 @@
     Messages:
       :sym: :messages
       :type: :string
+- :name: UpdatePipeline
+  :method: :update_pipeline
+  :http:
+    :verb: PUT
+    :uri: /2012-09-25/pipelines/:id
+    :response_code: 200
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+    :name:
+      :name: Name
+      :type: :string
+    :input_bucket:
+      :name: InputBucket
+      :type: :string
+    :role:
+      :name: Role
+      :type: :string
+    :notifications:
+      :name: Notifications
+      :type: :hash
+      :members:
+        :progressing:
+          :name: Progressing
+          :type: :string
+        :completed:
+          :name: Completed
+          :type: :string
+        :warning:
+          :name: Warning
+          :type: :string
+        :error:
+          :name: Error
+          :type: :string
+    :content_config:
+      :name: ContentConfig
+      :type: :hash
+      :members:
+        :bucket:
+          :name: Bucket
+          :type: :string
+        :storage_class:
+          :name: StorageClass
+          :type: :string
+        :permissions:
+          :name: Permissions
+          :type: :array
+          :members:
+            :name: member
+            :type: :hash
+            :members:
+              :grantee_type:
+                :name: GranteeType
+                :type: :string
+              :grantee:
+                :name: Grantee
+                :type: :string
+              :access:
+                :name: Access
+                :type: :array
+                :members:
+                  :name: member
+                  :type: :string
+    :thumbnail_config:
+      :name: ThumbnailConfig
+      :type: :hash
+      :members:
+        :bucket:
+          :name: Bucket
+          :type: :string
+        :storage_class:
+          :name: StorageClass
+          :type: :string
+        :permissions:
+          :name: Permissions
+          :type: :array
+          :members:
+            :name: member
+            :type: :hash
+            :members:
+              :grantee_type:
+                :name: GranteeType
+                :type: :string
+              :grantee:
+                :name: Grantee
+                :type: :string
+              :access:
+                :name: Access
+                :type: :array
+                :members:
+                  :name: member
+                  :type: :string
+  :outputs:
+    Pipeline:
+      :sym: :pipeline
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Arn:
+          :sym: :arn
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :string
+        InputBucket:
+          :sym: :input_bucket
+          :type: :string
+        OutputBucket:
+          :sym: :output_bucket
+          :type: :string
+        Role:
+          :sym: :role
+          :type: :string
+        Notifications:
+          :sym: :notifications
+          :type: :hash
+          :members:
+            Progressing:
+              :sym: :progressing
+              :type: :string
+            Completed:
+              :sym: :completed
+              :type: :string
+            Warning:
+              :sym: :warning
+              :type: :string
+            Error:
+              :sym: :error
+              :type: :string
+        ContentConfig:
+          :sym: :content_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
+        ThumbnailConfig:
+          :sym: :thumbnail_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
 - :name: UpdatePipelineNotifications
   :method: :update_pipeline_notifications
   :http:
@@ -929,7 +2315,6 @@
     :notifications:
       :name: Notifications
       :type: :hash
-      :required: true
       :members:
         :progressing:
           :name: Progressing
@@ -951,6 +2336,9 @@
         Id:
           :sym: :id
           :type: :string
+        Arn:
+          :sym: :arn
+          :type: :string
         Name:
           :sym: :name
           :type: :string
@@ -982,6 +2370,52 @@
             Error:
               :sym: :error
               :type: :string
+        ContentConfig:
+          :sym: :content_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
+        ThumbnailConfig:
+          :sym: :thumbnail_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
 - :name: UpdatePipelineStatus
   :method: :update_pipeline_status
   :http:
@@ -994,7 +2428,6 @@
     :status:
       :name: Status
       :type: :string
-      :required: true
   :outputs:
     Pipeline:
       :sym: :pipeline
@@ -1002,6 +2435,9 @@
       :members:
         Id:
           :sym: :id
+          :type: :string
+        Arn:
+          :sym: :arn
           :type: :string
         Name:
           :sym: :name
@@ -1034,3 +2470,49 @@
             Error:
               :sym: :error
               :type: :string
+        ContentConfig:
+          :sym: :content_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string
+        ThumbnailConfig:
+          :sym: :thumbnail_config
+          :type: :hash
+          :members:
+            Bucket:
+              :sym: :bucket
+              :type: :string
+            StorageClass:
+              :sym: :storage_class
+              :type: :string
+            Permissions:
+              :sym: :permissions
+              :type: :hash
+              :members:
+                GranteeType:
+                  :sym: :grantee_type
+                  :type: :string
+                Grantee:
+                  :sym: :grantee
+                  :type: :string
+                Access:
+                  :sym: :access
+                  :type: :string

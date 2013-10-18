@@ -38,7 +38,7 @@ When /^I use the client to create a distrubtion for a non\-existent origin$/ do
         :caller_reference => '123',
         :aliases => {
           :quantity => 0,
-        }, 
+        },
         :default_root_object => '/',
         :origins => {
           :quantity => 0,
@@ -47,6 +47,7 @@ When /^I use the client to create a distrubtion for a non\-existent origin$/ do
           :target_origin_id => 'abc',
           :forwarded_values => {
             :query_string => true,
+            :cookies => { :forward => 'none' }
           },
           :trusted_signers => {
             :enabled => false,
@@ -63,9 +64,18 @@ When /^I use the client to create a distrubtion for a non\-existent origin$/ do
           :enabled => false,
           :bucket => 'aws-sdk',
           :prefix => 'prefix',
-        }, :enabled => false
+          :include_cookies => false,
+        },
+        :enabled => false,
+        :price_class => 'PriceClass_All',
       },
     })
   rescue => @error
   end
+end
+
+Then(/^I should be able to list distributions with session credentials$/) do
+  client = AWS::CloudFront::Client.new(@session.credentials)
+  resp = client.list_distributions
+  resp.data[:items].should be_an(Array)
 end

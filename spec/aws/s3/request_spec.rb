@@ -39,7 +39,7 @@ module AWS
       end
 
       context '#path' do
-        
+
         it 'defaults to /' do
           request.path.should == '/'
         end
@@ -159,7 +159,7 @@ module AWS
 
       context '#add_authorization!' do
 
-        let(:credential_provider) { 
+        let(:credential_provider) {
           Core::CredentialProviders::StaticProvider.new({
             :access_key_id => 'KEY',
             :secret_access_key => 'SECRET',
@@ -200,7 +200,7 @@ module AWS
         let(:content_type) { 'text/plain' }
         let(:date) { Time.now.httpdate }
 
-        let(:request) { 
+        let(:request) {
           req = Request.new
           req.bucket = 'some_bucket'
           req.key = 'some/path'
@@ -217,7 +217,7 @@ module AWS
         }
 
         let(:signing_string_lines) { request.string_to_sign.split(/\n/) }
-        
+
         it 'line 1 is the http verb' do
           signing_string_lines[0].should == verb
         end
@@ -250,7 +250,7 @@ module AWS
         it 'should begin with a slash' do
           Request.new.canonicalized_resource.should match(/^\//)
         end
-        
+
         it 'should begin with the bucket if it is not dns compat' do
           req = Request.new
           req.bucket = 'dns_incompat'

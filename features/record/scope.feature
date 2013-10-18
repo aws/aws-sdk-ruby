@@ -16,7 +16,7 @@
 Feature: Scoped Finds
 
   As an ORM user
-  I want to use an expressive interface 
+  I want to use an expressive interface
   So that I can find records.
 
   @where
@@ -60,7 +60,7 @@ Feature: Scoped Finds
     | condition | name = 'joe' |
 
   @where @wip
-  Scenario: Using named integer attributes in where condition hashes should 
+  Scenario: Using named integer attributes in where condition hashes should
     properly pad the numeric value.
     Given I configure the example class with:
     """

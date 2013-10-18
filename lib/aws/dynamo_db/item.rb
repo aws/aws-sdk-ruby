@@ -18,16 +18,16 @@ module AWS
     # complex primary key (according to the table schema) and consists
     # of a collection of attributes.  Attributes are name/value pairs
     # where the value may be a string, number, string set, or number
-    # set.  
+    # set.
     #
     # Getting an item by hash key value:
     #
-    #   item = table.items['hash-key-value'] 
+    #     item = table.items['hash-key-value']
     #
     # Getting an item from a table with both hash and range keys:
     #
-    #   item = table.items['hash-key','range-key']
-    # 
+    #     item = table.items['hash-key','range-key']
+    #
     class Item < Core::Resource
 
       extend Types
@@ -41,10 +41,10 @@ module AWS
       attr_reader :hash_value
 
       # @return [String, Numeric, nil] The range key value of the
-      #   item, or +nil+ if the table has a simple primary key.
+      #   item, or `nil` if the table has a simple primary key.
       attr_reader :range_value
 
-      # @private
+      # @api private
       def initialize(table, *args)
         opts = args.pop if args.last.kind_of?(Hash)
         (@hash_value, @range_value) = args
@@ -60,17 +60,17 @@ module AWS
       #   The operation will fail unless the item exists and has the
       #   attributes in the value for this option.  For example:
       #
-      #     # throws DynamoDB::Errors::ConditionalCheckFailedException
-      #     # unless the item has "color" set to "red"
-      #     item.delete(:if => { :color => "red" })
+      #       # throws DynamoDB::Errors::ConditionalCheckFailedException
+      #       # unless the item has "color" set to "red"
+      #       item.delete(:if => { :color => "red" })
       #
       # @option options [String, Symbol, Array] :unless_exists A name
       #   or collection of attribute names; if the item has a value
       #   for any of these attributes, this method will raise
-      #   +DynamoDB::Errors::ConditionalCheckFailedException+.  For
+      #   `DynamoDB::Errors::ConditionalCheckFailedException`.  For
       #   example:
       #
-      #     item.delete(:unless_exists => "version")
+      #       item.delete(:unless_exists => "version")
       def delete(options = {})
         client_opts = item_key_options(self)
 
@@ -100,7 +100,7 @@ module AWS
         AttributeCollection.new(self)
       end
 
-      # @private
+      # @api private
       def self.new_from(op, response_object, table, *args)
 
         config = args.last.is_a?(Hash) ? args.last : AWS.config

@@ -46,7 +46,7 @@ module AWS
       end
 
       context 'chainable filter methods' do
-        
+
         let(:collection) { items }
         let(:client_method) { :describe_alarm_history }
 

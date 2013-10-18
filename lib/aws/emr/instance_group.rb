@@ -40,7 +40,7 @@ module AWS
     #
     class InstanceGroup < Core::Resource
 
-      # @private
+      # @api private
       def initialize job_flow, instance_group_id, options = {}
         @job_flow = job_flow
         @instance_group_id = instance_group_id
@@ -104,7 +104,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] Returns +true+ if the instance group exists.
+      # @return [Boolean] Returns `true` if the instance group exists.
       def exists?
         !!find_in_response(get_resource)
       end

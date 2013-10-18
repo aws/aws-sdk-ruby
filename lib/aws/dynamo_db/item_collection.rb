@@ -22,31 +22,31 @@ module AWS
     # * Get an {Item}
     # * Enumerate {Item} or {ItemData} objects
     #
-    # == Creating an Item
+    # ## Creating an Item
     #
     # To create an item, just call {#create} with a hash of attributes.
     #
-    #   table = dynamo_db.tables['my-table']
-    #   table.hash_key = [:id, :string]
+    #     table = dynamo_db.tables['my-table']
+    #     table.hash_key = [:id, :string]
     #
-    #   table.items.create('id' => 'abc', 'count' => 5, 'colors' => %w(red blue))
+    #     table.items.create('id' => 'abc', 'count' => 5, 'colors' => %w(red blue))
     #
     # Attribute names can be symbols/strings and values can be strings or
     # numbers or arrays/sets of strings/numbers.  The attributes must contain
     # the hash key name/value for the item and the value must be of the
     # correct type (e.g. string or number).
     #
-    # == Getting an Item
+    # ## Getting an Item
     #
     # To get an item, you provide the hash key
     #
-    #   # gets a reference to the item, no request is made
-    #   item = table.items['hash-key-value']
+    #     # gets a reference to the item, no request is made
+    #     item = table.items['hash-key-value']
     #
     # You call methods against the item returned to get, add, update or delete
     # attributes.  See {Item} for more information.
     #
-    # == Enumerating Items
+    # ## Enumerating Items
     #
     # You can enumerate items 2 ways:
     #
@@ -61,26 +61,26 @@ module AWS
     #
     # To enumerate {Item} objects just call each on the item collection.
     #
-    #   table.items.each do |item|
-    #     puts item.hash_value
-    #   end
+    #     table.items.each do |item|
+    #       puts item.hash_value
+    #     end
     #
     # To enumerate {ItemData} objects you need to specify what attributes
     # you are interested in.  This will cause #each to yield {ItemData}
     # objects.  Call {ItemData#attributes} to get the hash of attribute
     # names/values.
     #
-    #   table.items.select('id', 'category').each do |item_data|
-    #     item_data.attributes #=> { 'id' => 'abc', 'category' => 'foo' }
-    #   end
+    #     table.items.select('id', 'category').each do |item_data|
+    #       item_data.attributes #=> { 'id' => 'abc', 'category' => 'foo' }
+    #     end
     #
     # If you want item data objects with all attributes just call select
     # without a list of attributes (#select still accepts options).
     #
-    #   # request a maximum of 10 items from Amazon DynamoDB
-    #   table.items.select(:limit => 10).each do |item_data|
-    #     item_data.attributes #=> { 'id' => 'abc', 'category' => 'foo', ... }
-    #   end
+    #     # request a maximum of 10 items from Amazon DynamoDB
+    #     table.items.select(:limit => 10).each do |item_data|
+    #       item_data.attributes #=> { 'id' => 'abc', 'category' => 'foo', ... }
+    #     end
     #
     # Please note that enumerating objects is done via the scan operation.
     # Refer to the Amazon DynamoDB documentation for more information
@@ -92,7 +92,7 @@ module AWS
       include Types
       include Expectations
 
-      # @private
+      # @api private
       def initialize(table, opts = {})
         @table = table
         @scan_filters = opts[:scan_filters] || {}
@@ -103,7 +103,7 @@ module AWS
       #   belong.
       attr_reader :table
 
-      # @private
+      # @api private
       attr_reader :scan_filters
 
       # Creates a new item, or replaces an old item with a new item
@@ -114,7 +114,7 @@ module AWS
       # primary key doesn't exist), or replace an existing item if it
       # has certain attribute values.
       #
-      #   items.put(:id => "abc123", :colors => ["red", "white"])
+      #     items.put(:id => "abc123", :colors => ["red", "white"])
       #
       # @param [Hash] attributes The attributes to store with the
       #   item.  These must include the primary key attributes for the
@@ -122,10 +122,10 @@ module AWS
       #   Attribute names may be symbols or UTF-8 strings, and
       #   attribute values may be any of these types:
       #
-      #   * String
-      #   * Array<String> or Set<String>
-      #   * Numeric
-      #   * Array<Numeric> or Set<Numeric>
+      #     * String
+      #     * Array<String> or Set<String>
+      #     * Numeric
+      #     * Array<Numeric> or Set<Numeric>
       #
       #   Empty sets, arrays, and strings are invalid.
       #
@@ -136,33 +136,33 @@ module AWS
       #   operation will fail unless the item exists and has the
       #   attributes in the value for this option.  For example:
       #
-      #     # throws DynamoDB::Errors::ConditionalCheckFailedException
-      #     # unless the item has "color" set to "red"
-      #     items.put(
-      #       { :foo => "Bar" },
-      #       :if => { :color => "red" }
-      #     )
+      #       # throws DynamoDB::Errors::ConditionalCheckFailedException
+      #       # unless the item has "color" set to "red"
+      #       items.put(
+      #         { :foo => "Bar" },
+      #         :if => { :color => "red" }
+      #       )
       #
       # @option options [String, Symbol, Array] :unless_exists A name
       #   or collection of attribute names; if the item already exists
       #   and has a value for any of these attributes, this method
       #   will raise
-      #   +DynamoDB::Errors::ConditionalCheckFailedException+.  For example:
+      #   `DynamoDB::Errors::ConditionalCheckFailedException`.  For example:
       #
-      #     items.put({ :id => "abc123" }, :unless_exists => "id")
+      #       items.put({ :id => "abc123" }, :unless_exists => "id")
       #
-      # @option options [Symbol] :return If set to +:all_old+, this
+      # @option options [Symbol] :return If set to `:all_old`, this
       #   method will return a hash containing the previous values of
       #   all attributes for the item that was overwritten.  If this
-      #   option is set to +:none+, or if it is set to +:all_old+ and
+      #   option is set to `:none`, or if it is set to `:all_old` and
       #   no item currently exists with the same primary key values,
-      #   the method will return +nil+.
+      #   the method will return `nil`.
       #
       # @return [Item] An object representing the item that was
       #   stored.  Note that the SDK retains only the item's primary
       #   key values in memory; if you access the attributes of the
       #   item using the returned object, the SDK will contact the
-      #   service to retrieve those attributes.  The +:return+ option
+      #   service to retrieve those attributes.  The `:return` option
       #   may be used to change the return value of this method.
       def create attributes, options = {}
         table.assert_schema!
@@ -200,8 +200,8 @@ module AWS
       # exception unless the table has a schema loaded or configured,
       # or if the table has a composite primary key.
       #
-      #   table.hash_key = [:id, :string]
-      #   item = table.items["abc123"]
+      #     table.hash_key = [:id, :string]
+      #     item = table.items["abc123"]
       #
       # @param [String, Numeric] hash_value The hash key value for the
       #   item.  The type of this parameter must match the type in the
@@ -225,9 +225,9 @@ module AWS
       # currently the SDK makes no attempt to validate the key
       # elements.
       #
-      #   table.hash_key = [:id, :string]
-      #   table.range_key = [:range, :number]
-      #   item = table.items.at("abc123", 12)
+      #     table.hash_key = [:id, :string]
+      #     table.range_key = [:range, :number]
+      #     item = table.items.at("abc123", 12)
       #
       # @param [String, Numeric] hash_value The hash key value for the
       #   item.
@@ -249,7 +249,7 @@ module AWS
 
       # Provides a convenient syntax for expressing scan filters.
       #
-      #   table.items.where(:path).begins_with("users/")
+      #     table.items.where(:path).begins_with("users/")
       #
       class FilterBuilder
 
@@ -259,7 +259,7 @@ module AWS
 
         attr_reader :attribute
 
-        # @private
+        # @api private
         def initialize(items, attribute)
           @items = items
           @attribute = attribute
@@ -423,7 +423,7 @@ module AWS
 
       # @overload where(attributes)
       #
-      #   table.items.where(:name => "Fred")
+      #       table.items.where(:name => "Fred")
       #
       #   @param [Hash] attributes The returned collection will be
       #     filtered such that each item contains the attributes and
@@ -434,7 +434,7 @@ module AWS
       #
       # @overload where(attribute_name)
       #
-      #   table.items.where(:name).equals("Fred")
+      #       table.items.where(:name).equals("Fred")
       #
       #   @return [FilterBuilder] An object that allows you to specify
       #     a filter on the provided attribute name.
@@ -496,6 +496,12 @@ module AWS
         super(options, &block)
       end
 
+      def first(options = {})
+        each(options) do |item|
+          return item
+        end
+      end
+
       # Retrieves data about the items in the collection.  This method
       # works like {#each}, except that it returns or yields
       # {ItemData} instances instead of {Item} instances.  This is
@@ -505,16 +511,16 @@ module AWS
       # method allows you to specify which attributes to retrieve from
       # DynamoDB.
       #
-      #   # fetch all attributes for a collection of items
-      #   items.select { |data| p data.attributes }
+      #     # fetch all attributes for a collection of items
+      #     items.select { |data| p data.attributes }
       #
-      #   # fetch only the "color" attribute of each item
-      #   items.select(:color) { |data| p data.attributes["color"] }
+      #     # fetch only the "color" attribute of each item
+      #     items.select(:color) { |data| p data.attributes["color"] }
       #
-      #   # use client-side filtering to delete a subset of the items
-      #   items.select do |data|
-      #     data.item.delete if data.attributes.size % 2 == 0
-      #   end
+      #     # use client-side filtering to delete a subset of the items
+      #     items.select do |data|
+      #       data.item.delete if data.attributes.size % 2 == 0
+      #     end
       #
       # @overload select(*attributes, options = {})
       #
@@ -566,8 +572,8 @@ module AWS
       # count applies to the items that match all the filters on the
       # collection.  For example:
       #
-      #   # count the blue items
-      #   items.where(:color => "blue").count
+      #     # count the blue items
+      #     items.where(:color => "blue").count
       #
       # @param [Hash] options Options for counting the items.
       #
@@ -618,32 +624,32 @@ module AWS
       # of key conditions and does not have the added step of
       # filtering out results.
       #
-      #   # find all items with a given hash key value
-      #   items.query(:hash_value => "abc123")
+      #     # find all items with a given hash key value
+      #     items.query(:hash_value => "abc123")
       #
-      #   # get only the colors attribute of each item
-      #   items.query(
-      #     :hash_value => "abc123",
-      #     :select => [:colors])
+      #     # get only the colors attribute of each item
+      #     items.query(
+      #       :hash_value => "abc123",
+      #       :select => [:colors])
       #
-      #   # find only the items where the range key is between two values
-      #   items.query(
-      #     :hash_value => "abc123",
-      #     :range_value => 1..100
-      #   )
+      #     # find only the items where the range key is between two values
+      #     items.query(
+      #       :hash_value => "abc123",
+      #       :range_value => 1..100
+      #     )
       #
       # @note This method is only valid for tables with a composite
       #   primary key.
       #
-      # @param [Hash] options Options for the query.  +:hash_value+ is
+      # @param [Hash] options Options for the query.  `:hash_value` is
       #   required.  Only one of the following options may be set:
       #
-      #   * +:range_value+
-      #   * +:range_greater_than+
-      #   * +:range_less_than+
-      #   * +:range_gte+
-      #   * +:range_lte+
-      #   * +:range_begins_with+
+      #     * `:range_value`
+      #     * `:range_greater_than`
+      #     * `:range_less_than`
+      #     * `:range_gte`
+      #     * `:range_lte`
+      #     * `:range_begins_with`
       #
       # @option [Boolean] :scan_index_forward (true) Specifies which
       #   order records will be returned.  Defaults to returning them
@@ -653,11 +659,11 @@ module AWS
       #   objects without any attribute data.  If you want to select
       #   specific attributes, pass a list of them to :select.
       #
-      #      :select => [:id, :category, :size]
+      #       :select => [:id, :category, :size]
       #
-      #   If you want to select ALL attributes, pass the symbol +:all+
+      #   If you want to select ALL attributes, pass the symbol `:all`
       #
-      #      :select => :all
+      #       :select => :all
       #
       # @option options [String, Numeric] :hash_value Attribute value
       #   of the hash component of the composite primary key.
@@ -665,7 +671,7 @@ module AWS
       # @option options [Array<String, Symbol>, String, Symbol] :select
       #   Attribute name or names to retrieve.  When this option is
       #   set, the returned or yielded items will be instances of
-      #   {ItemData} instead of {Item}.  The special value +:all+
+      #   {ItemData} instead of {Item}.  The special value `:all`
       #   indicates that all attributes should be retrieved and
       #   returned in ItemData instances.
       #
@@ -730,11 +736,9 @@ module AWS
           :comparison_operator => range_op
         } if range_op
 
-        if select = options.delete(:select)
+        if select = options.delete(:select) || options.delete(:attributes_to_get)
           options[:item_data] = true
-          options[:attributes_to_get] = select.map do |att|
-            att.to_s
-          end unless select == :all
+          options[:attributes_to_get] = select.map(&:to_s) unless select == :all
         end
 
         if block
@@ -744,7 +748,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       def with_filter attribute, op, *values
 
         values = values.map {|value| format_attribute_value(value) }
@@ -762,7 +766,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       def refine(opts)
         opts = {
           :scan_filters => scan_filters

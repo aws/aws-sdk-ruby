@@ -51,8 +51,8 @@ module AWS
 
         def stub_members(resp, quantity)
           resp.data[:parts] = [
-            { :part_number => 1 },
-            { :part_number => 2 },
+            { :part_number => 1, :etag => '1' },
+            { :part_number => 2, :etag => '2' },
           ].first(quantity)
         end
 
@@ -71,8 +71,8 @@ module AWS
         let(:resp) { client.new_stub_for(:list_parts) }
 
         let(:response_parts) {[
-          { :part_number => 1 },
-          { :part_number => 2 },
+          { :part_number => 1, :etag => '1', },
+          { :part_number => 2, :etag => '2', },
         ]}
 
         before(:each) do

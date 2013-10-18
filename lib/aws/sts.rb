@@ -23,6 +23,7 @@ module AWS
   # IAM users.
   #
   # @example Getting temporary credentials and using them to make an EC2 request
+  #
   #   sts = AWS::STS.new(:access_key_id => "LONG_TERM_KEY",
   #                      :secret_access_key => "LONG_TERM_SECRET")
   #   session = sts.new_session(:duration => 60*60)
@@ -30,6 +31,7 @@ module AWS
   #   ec2.instances.to_a
   #
   # @example Getting temporary credentials with restricted permissions
+  #
   #   policy = AWS::STS::Policy.new
   #   policy.allow(:actions => ["s3:*", "ec2:*"],
   #                :resources => :any)
@@ -37,18 +39,20 @@ module AWS
   #   ec2 = AWS::EC2.new(session.credentials)
   #   ec2.instances.to_a
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level STS client object
   class STS
 
-    AWS.register_autoloads(self) do
-      autoload :Client,           'client'
-      autoload :Errors,           'errors'
-      autoload :FederatedSession, 'federated_session'
-      autoload :Policy,           'policy'
-      autoload :Request,          'request'
-      autoload :Session,          'session'
-    end
+    autoload :Client, 'aws/sts/client'
+    autoload :Errors, 'aws/sts/errors'
+    autoload :FederatedSession, 'aws/sts/federated_session'
+    autoload :Policy, 'aws/sts/policy'
+    autoload :Request, 'aws/sts/request'
+    autoload :Session, 'aws/sts/session'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'sts', :global => true
 
     # (see Client#assume_role)
     def assume_role options = {}

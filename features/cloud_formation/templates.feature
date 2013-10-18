@@ -33,7 +33,7 @@ Feature: CloudFormations templates
     """
     Then I should get a response like:
     """
-    {:capabilities=>[], :description=>"A simple template", :parameters=>[]} 
+    {:capabilities=>[], :description=>"A simple template", :parameters=>[]}
     """
 
   Scenario: Validating an invalid template
@@ -49,7 +49,7 @@ Feature: CloudFormations templates
             "Type" : "String"
           }
         },
-        
+
         "Resources": {
           "web": {
             "Type": "AWS::EC2::Instance",
@@ -70,5 +70,5 @@ Feature: CloudFormations templates
     """
     Then I should get a response like:
     """
-    {:code=>"ValidationError", :message=>"Invalid template resource property 'ConfigurationTemplates'"} 
+    {:code=>"ValidationError", :message=>"Invalid template resource property 'ConfigurationTemplates'"}
     """

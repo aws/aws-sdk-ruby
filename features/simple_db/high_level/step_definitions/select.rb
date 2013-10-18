@@ -123,7 +123,7 @@ end
 
 When /^I enumerate items with a limit of (\d+) and batch size of (\d+)$/ do |limit, batch_size|
   @domain.items.each(
-    :limit => limit, 
+    :limit => limit,
     :batch_size => batch_size,
     :consistent_read => true
   ) {|i|}
@@ -131,7 +131,7 @@ end
 
 When /^I select item data with a limit of (\d+) and batch size of (\d+)$/ do |limit, batch_size|
   @domain.items.select(:all,
-    :limit => limit, 
+    :limit => limit,
     :batch_size => batch_size,
     :consistent_read => true
   ) {|i|}

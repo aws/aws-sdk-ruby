@@ -47,7 +47,7 @@ module AWS
           response.data[:policy_descriptions] = [
             { :policy_name => 'name', :policy_type_name => 'TYPE' },
           ]
-          
+
           described_class.new(load_balancer, 'name').type.should == 'TYPE'
         end
 
@@ -78,14 +78,14 @@ module AWS
           client.should_receive(:describe_load_balancer_policies).with(
             :load_balancer_name => load_balancer.name
           ).and_return(response)
-          
+
           policy.attributes.should == {
             'a1' => %w(v1),
             'a2' => %w(v2 v3),
           }
 
         end
-        
+
       end
 
       context '#delete' do

@@ -18,25 +18,25 @@ module AWS
     # types that SimpleDB can return.  You can use these classes to
     # rescue specific errors, for example:
     #
-    #  begin
-    #    SimpleDB.new.domains.mydomain.
-    #      items["foo"].attributes.set(:color => "red")
-    #  rescue SimpleDB::Errors::NoSuchDomain => e
-    #    SimpleDB.new.domians.create("mydomain")
-    #    retry
-    #  end
+    #     begin
+    #       SimpleDB.new.domains.mydomain.
+    #         items["foo"].attributes.set(:color => "red")
+    #     rescue SimpleDB::Errors::NoSuchDomain => e
+    #       SimpleDB.new.domians.create("mydomain")
+    #       retry
+    #     end
     #
     # Each exception has:
     #
-    # * +code+: returns the error code as a string.
-    # * +box_usage+: returns the box usage for the operation.
+    # * `code`: returns the error code as a string.
+    # * `box_usage`: returns the box usage for the operation.
     #
     # All errors raised as a result of error responses from the
     # service are instances of either {ClientError} or {ServerError}.
-    # @private
+    # @api private
     module Errors
 
-      # @private
+      # @api private
       GRAMMAR = Core::XML::Grammar.customize do
         element("Errors") do
           ignore

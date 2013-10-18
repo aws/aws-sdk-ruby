@@ -23,7 +23,7 @@ module AWS
       include Core::Model
       include HasDeliveryPolicy
 
-      # @private
+      # @api private
       def initialize(arn, opts = {})
         @arn = arn
         @topic_arn = opts[:topic_arn]
@@ -42,11 +42,11 @@ module AWS
 
       # @return [String] The protocol.  Possible values:
       #
-      #  * +:http+
-      #  * +:https+
-      #  * +:email+
-      #  * +:email_json+
-      #  * +:sqs+
+      #  * `:http`
+      #  * `:https`
+      #  * `:email`
+      #  * `:email_json`
+      #  * `:sqs`
       attr_reader :protocol
 
       # @return [String] The AWS account ID of the subscription owner.
@@ -61,7 +61,7 @@ module AWS
 
       # @return [Topic]
       def topic
-        Topic.new(topic_arn, :config => config)  
+        Topic.new(topic_arn, :config => config)
       end
 
       # Deletes this subscription.
@@ -71,7 +71,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] Returns true if the subscription confirmation 
+      # @return [Boolean] Returns true if the subscription confirmation
       #   request was authenticated.
       def confirmation_authenticated?
 
@@ -112,7 +112,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class} arn:#{arn}>"
       end

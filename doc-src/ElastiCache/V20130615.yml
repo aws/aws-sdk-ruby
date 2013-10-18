@@ -1,0 +1,370 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:authorize_cache_security_group_ingress: "Calls the AuthorizeCacheSecurityGroupIngress
+  API operation.\n@param [Hash] options\n  * `:cache_security_group_name` - *required*
+  - (String) \n  * `:ec2_security_group_name` - *required* - (String) \n  * `:ec2_security_group_owner_id`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:owner_id` - (String)\n
+  \ * `:cache_security_group_name` - (String)\n  * `:description` - (String)\n  *
+  `:ec_2_security_groups` - (Array<Hash>)\n    * `:status` - (String)\n    * `:ec2_security_group_name`
+  - (String)\n    * `:ec2_security_group_owner_id` - (String)"
+:create_cache_cluster: "Calls the CreateCacheCluster API operation.\n@param [Hash]
+  options\n  * `:cache_cluster_id` - *required* - (String) \n  * `:replication_group_id`
+  - (String) \n  * `:num_cache_nodes` - *required* - (Integer) \n  * `:cache_node_type`
+  - *required* - (String) \n  * `:engine` - *required* - (String) \n  * `:engine_version`
+  - (String) \n  * `:cache_parameter_group_name` - (String) \n  * `:cache_subnet_group_name`
+  - (String) \n  * `:cache_security_group_names` - (Array&lt;<String>) \n  * `:security_group_ids`
+  - (Array&lt;<String>) \n  * `:snapshot_arns` - (Array&lt;<String>) \n  * `:preferred_availability_zone`
+  - (String) \n  * `:preferred_maintenance_window` - (String) \n  * `:port` - (Integer)
+  \n  * `:notification_topic_arn` - (String) \n  * `:auto_minor_version_upgrade` -
+  (Boolean) \n@return [Core::Response] The `#data` method of the response object returns
+  a hash with the following structure:\n\n  * `:cache_cluster_id` - (String)\n  *
+  `:configuration_endpoint` - (Hash)\n    * `:address` - (String)\n    * `:port` -
+  (Integer)\n  * `:client_download_landing_page` - (String)\n  * `:cache_node_type`
+  - (String)\n  * `:engine` - (String)\n  * `:engine_version` - (String)\n  * `:cache_cluster_status`
+  - (String)\n  * `:num_cache_nodes` - (Integer)\n  * `:preferred_availability_zone`
+  - (String)\n  * `:cache_cluster_create_time` - (Time)\n  * `:preferred_maintenance_window`
+  - (String)\n  * `:pending_modified_values` - (Hash)\n    * `:num_cache_nodes` -
+  (Integer)\n    * `:cache_node_ids_to_remove` - (Array<String>)\n    * `:engine_version`
+  - (String)\n  * `:notification_configuration` - (Hash)\n    * `:topic_arn` - (String)\n
+  \   * `:topic_status` - (String)\n  * `:cache_security_groups` - (Array<Hash>)\n
+  \   * `:cache_security_group_name` - (String)\n    * `:status` - (String)\n  * `:cache_parameter_group`
+  - (Hash)\n    * `:cache_parameter_group_name` - (String)\n    * `:parameter_apply_status`
+  - (String)\n    * `:cache_node_ids_to_reboot` - (Array<String>)\n  * `:cache_subnet_group_name`
+  - (String)\n  * `:cache_nodes` - (Array<Hash>)\n    * `:cache_node_id` - (String)\n
+  \   * `:cache_node_status` - (String)\n    * `:cache_node_create_time` - (Time)\n
+  \   * `:endpoint` - (Hash)\n      * `:address` - (String)\n      * `:port` - (Integer)\n
+  \   * `:parameter_group_status` - (String)\n    * `:source_cache_node_id` - (String)\n
+  \ * `:auto_minor_version_upgrade` - (Boolean)\n  * `:security_groups` - (Array<Hash>)\n
+  \   * `:security_group_id` - (String)\n    * `:status` - (String)\n  * `:replication_group_id`
+  - (String)"
+:create_cache_parameter_group: "Calls the CreateCacheParameterGroup API operation.\n@param
+  [Hash] options\n  * `:cache_parameter_group_name` - *required* - (String) \n  *
+  `:cache_parameter_group_family` - *required* - (String) \n  * `:description` - *required*
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:cache_parameter_group_name`
+  - (String)\n  * `:cache_parameter_group_family` - (String)\n  * `:description` -
+  (String)"
+:create_cache_security_group: "Calls the CreateCacheSecurityGroup API operation.\n@param
+  [Hash] options\n  * `:cache_security_group_name` - *required* - (String) \n  * `:description`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:owner_id` - (String)\n
+  \ * `:cache_security_group_name` - (String)\n  * `:description` - (String)\n  *
+  `:ec_2_security_groups` - (Array<Hash>)\n    * `:status` - (String)\n    * `:ec2_security_group_name`
+  - (String)\n    * `:ec2_security_group_owner_id` - (String)"
+:create_cache_subnet_group: "Calls the CreateCacheSubnetGroup API operation.\n@param
+  [Hash] options\n  * `:cache_subnet_group_name` - *required* - (String) \n  * `:cache_subnet_group_description`
+  - *required* - (String) \n  * `:subnet_ids` - *required* - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:cache_subnet_group_name` - (String)\n  * `:cache_subnet_group_description`
+  - (String)\n  * `:vpc_id` - (String)\n  * `:subnets` - (Array<Hash>)\n    * `:subnet_identifier`
+  - (String)\n    * `:subnet_availability_zone` - (Hash)\n      * `:name` - (String)"
+:create_replication_group: "Calls the CreateReplicationGroup API operation.\n@param
+  [Hash] options\n  * `:replication_group_id` - *required* - (String) \n  * `:primary_cluster_id`
+  - *required* - (String) \n  * `:replication_group_description` - *required* - (String)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:replication_group_id` - (String)\n  * `:description`
+  - (String)\n  * `:status` - (String)\n  * `:pending_modified_values` - (Hash)\n
+  \   * `:primary_cluster_id` - (String)\n  * `:member_clusters` - (Array<String>)\n
+  \ * `:node_groups` - (Array<Hash>)\n    * `:node_group_id` - (String)\n    * `:status`
+  - (String)\n    * `:primary_endpoint` - (Hash)\n      * `:address` - (String)\n
+  \     * `:port` - (Integer)\n    * `:node_group_members` - (Array<Hash>)\n      *
+  `:cache_cluster_id` - (String)\n      * `:cache_node_id` - (String)\n      * `:read_endpoint`
+  - (Hash)\n        * `:address` - (String)\n        * `:port` - (Integer)\n      *
+  `:preferred_availability_zone` - (String)\n      * `:current_role` - (String)"
+:delete_cache_cluster: "Calls the DeleteCacheCluster API operation.\n@param [Hash]
+  options\n  * `:cache_cluster_id` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:cache_cluster_id` - (String)\n  * `:configuration_endpoint` - (Hash)\n    *
+  `:address` - (String)\n    * `:port` - (Integer)\n  * `:client_download_landing_page`
+  - (String)\n  * `:cache_node_type` - (String)\n  * `:engine` - (String)\n  * `:engine_version`
+  - (String)\n  * `:cache_cluster_status` - (String)\n  * `:num_cache_nodes` - (Integer)\n
+  \ * `:preferred_availability_zone` - (String)\n  * `:cache_cluster_create_time`
+  - (Time)\n  * `:preferred_maintenance_window` - (String)\n  * `:pending_modified_values`
+  - (Hash)\n    * `:num_cache_nodes` - (Integer)\n    * `:cache_node_ids_to_remove`
+  - (Array<String>)\n    * `:engine_version` - (String)\n  * `:notification_configuration`
+  - (Hash)\n    * `:topic_arn` - (String)\n    * `:topic_status` - (String)\n  * `:cache_security_groups`
+  - (Array<Hash>)\n    * `:cache_security_group_name` - (String)\n    * `:status`
+  - (String)\n  * `:cache_parameter_group` - (Hash)\n    * `:cache_parameter_group_name`
+  - (String)\n    * `:parameter_apply_status` - (String)\n    * `:cache_node_ids_to_reboot`
+  - (Array<String>)\n  * `:cache_subnet_group_name` - (String)\n  * `:cache_nodes`
+  - (Array<Hash>)\n    * `:cache_node_id` - (String)\n    * `:cache_node_status` -
+  (String)\n    * `:cache_node_create_time` - (Time)\n    * `:endpoint` - (Hash)\n
+  \     * `:address` - (String)\n      * `:port` - (Integer)\n    * `:parameter_group_status`
+  - (String)\n    * `:source_cache_node_id` - (String)\n  * `:auto_minor_version_upgrade`
+  - (Boolean)\n  * `:security_groups` - (Array<Hash>)\n    * `:security_group_id`
+  - (String)\n    * `:status` - (String)\n  * `:replication_group_id` - (String)"
+:delete_cache_parameter_group: "Calls the DeleteCacheParameterGroup API operation.\n@param
+  [Hash] options\n  * `:cache_parameter_group_name` - *required* - (String) \n@return
+  [Core::Response]"
+:delete_cache_security_group: "Calls the DeleteCacheSecurityGroup API operation.\n@param
+  [Hash] options\n  * `:cache_security_group_name` - *required* - (String) \n@return
+  [Core::Response]"
+:delete_cache_subnet_group: "Calls the DeleteCacheSubnetGroup API operation.\n@param
+  [Hash] options\n  * `:cache_subnet_group_name` - *required* - (String) \n@return
+  [Core::Response]"
+:delete_replication_group: "Calls the DeleteReplicationGroup API operation.\n@param
+  [Hash] options\n  * `:replication_group_id` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:replication_group_id` - (String)\n  * `:description` - (String)\n  * `:status`
+  - (String)\n  * `:pending_modified_values` - (Hash)\n    * `:primary_cluster_id`
+  - (String)\n  * `:member_clusters` - (Array<String>)\n  * `:node_groups` - (Array<Hash>)\n
+  \   * `:node_group_id` - (String)\n    * `:status` - (String)\n    * `:primary_endpoint`
+  - (Hash)\n      * `:address` - (String)\n      * `:port` - (Integer)\n    * `:node_group_members`
+  - (Array<Hash>)\n      * `:cache_cluster_id` - (String)\n      * `:cache_node_id`
+  - (String)\n      * `:read_endpoint` - (Hash)\n        * `:address` - (String)\n
+  \       * `:port` - (Integer)\n      * `:preferred_availability_zone` - (String)\n
+  \     * `:current_role` - (String)"
+:describe_cache_clusters: "Calls the DescribeCacheClusters API operation.\n@param
+  [Hash] options\n  * `:cache_cluster_id` - (String) \n  * `:max_records` - (Integer)
+  \n  * `:marker` - (String) \n  * `:show_cache_node_info` - (Boolean) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:marker` - (String)\n  * `:cache_clusters` - (Array<Hash>)\n    * `:cache_cluster_id`
+  - (String)\n    * `:configuration_endpoint` - (Hash)\n      * `:address` - (String)\n
+  \     * `:port` - (Integer)\n    * `:client_download_landing_page` - (String)\n
+  \   * `:cache_node_type` - (String)\n    * `:engine` - (String)\n    * `:engine_version`
+  - (String)\n    * `:cache_cluster_status` - (String)\n    * `:num_cache_nodes` -
+  (Integer)\n    * `:preferred_availability_zone` - (String)\n    * `:cache_cluster_create_time`
+  - (Time)\n    * `:preferred_maintenance_window` - (String)\n    * `:pending_modified_values`
+  - (Hash)\n      * `:num_cache_nodes` - (Integer)\n      * `:cache_node_ids_to_remove`
+  - (Array<String>)\n      * `:engine_version` - (String)\n    * `:notification_configuration`
+  - (Hash)\n      * `:topic_arn` - (String)\n      * `:topic_status` - (String)\n
+  \   * `:cache_security_groups` - (Array<Hash>)\n      * `:cache_security_group_name`
+  - (String)\n      * `:status` - (String)\n    * `:cache_parameter_group` - (Hash)\n
+  \     * `:cache_parameter_group_name` - (String)\n      * `:parameter_apply_status`
+  - (String)\n      * `:cache_node_ids_to_reboot` - (Array<String>)\n    * `:cache_subnet_group_name`
+  - (String)\n    * `:cache_nodes` - (Array<Hash>)\n      * `:cache_node_id` - (String)\n
+  \     * `:cache_node_status` - (String)\n      * `:cache_node_create_time` - (Time)\n
+  \     * `:endpoint` - (Hash)\n        * `:address` - (String)\n        * `:port`
+  - (Integer)\n      * `:parameter_group_status` - (String)\n      * `:source_cache_node_id`
+  - (String)\n    * `:auto_minor_version_upgrade` - (Boolean)\n    * `:security_groups`
+  - (Array<Hash>)\n      * `:security_group_id` - (String)\n      * `:status` - (String)\n
+  \   * `:replication_group_id` - (String)"
+:describe_cache_engine_versions: "Calls the DescribeCacheEngineVersions API operation.\n@param
+  [Hash] options\n  * `:engine` - (String) \n  * `:engine_version` - (String) \n  *
+  `:cache_parameter_group_family` - (String) \n  * `:max_records` - (Integer) \n  *
+  `:marker` - (String) \n  * `:default_only` - (Boolean) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:marker` - (String)\n  * `:cache_engine_versions` - (Array<Hash>)\n    * `:engine`
+  - (String)\n    * `:engine_version` - (String)\n    * `:cache_parameter_group_family`
+  - (String)\n    * `:cache_engine_description` - (String)\n    * `:cache_engine_version_description`
+  - (String)"
+:describe_cache_parameter_groups: "Calls the DescribeCacheParameterGroups API operation.\n@param
+  [Hash] options\n  * `:cache_parameter_group_name` - (String) \n  * `:max_records`
+  - (Integer) \n  * `:marker` - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:marker`
+  - (String)\n  * `:cache_parameter_groups` - (Array<Hash>)\n    * `:cache_parameter_group_name`
+  - (String)\n    * `:cache_parameter_group_family` - (String)\n    * `:description`
+  - (String)"
+:describe_cache_parameters: "Calls the DescribeCacheParameters API operation.\n@param
+  [Hash] options\n  * `:cache_parameter_group_name` - *required* - (String) \n  *
+  `:source` - (String) \n  * `:max_records` - (Integer) \n  * `:marker` - (String)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:marker` - (String)\n  * `:parameters` - (Array<Hash>)\n
+  \   * `:parameter_name` - (String)\n    * `:parameter_value` - (String)\n    * `:description`
+  - (String)\n    * `:source` - (String)\n    * `:data_type` - (String)\n    * `:allowed_values`
+  - (String)\n    * `:is_modifiable` - (Boolean)\n    * `:minimum_engine_version`
+  - (String)\n  * `:cache_node_type_specific_parameters` - (Array<Hash>)\n    * `:parameter_name`
+  - (String)\n    * `:description` - (String)\n    * `:source` - (String)\n    * `:data_type`
+  - (String)\n    * `:allowed_values` - (String)\n    * `:is_modifiable` - (Boolean)\n
+  \   * `:minimum_engine_version` - (String)\n    * `:cache_node_type_specific_values`
+  - (Array<Hash>)\n      * `:cache_node_type` - (String)\n      * `:value` - (String)"
+:describe_cache_security_groups: "Calls the DescribeCacheSecurityGroups API operation.\n@param
+  [Hash] options\n  * `:cache_security_group_name` - (String) \n  * `:max_records`
+  - (Integer) \n  * `:marker` - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:marker`
+  - (String)\n  * `:cache_security_groups` - (Array<Hash>)\n    * `:owner_id` - (String)\n
+  \   * `:cache_security_group_name` - (String)\n    * `:description` - (String)\n
+  \   * `:ec_2_security_groups` - (Array<Hash>)\n      * `:status` - (String)\n      *
+  `:ec2_security_group_name` - (String)\n      * `:ec2_security_group_owner_id` -
+  (String)"
+:describe_cache_subnet_groups: "Calls the DescribeCacheSubnetGroups API operation.\n@param
+  [Hash] options\n  * `:cache_subnet_group_name` - (String) \n  * `:max_records` -
+  (Integer) \n  * `:marker` - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:marker`
+  - (String)\n  * `:cache_subnet_groups` - (Array<Hash>)\n    * `:cache_subnet_group_name`
+  - (String)\n    * `:cache_subnet_group_description` - (String)\n    * `:vpc_id`
+  - (String)\n    * `:subnets` - (Array<Hash>)\n      * `:subnet_identifier` - (String)\n
+  \     * `:subnet_availability_zone` - (Hash)\n        * `:name` - (String)"
+:describe_engine_default_parameters: "Calls the DescribeEngineDefaultParameters API
+  operation.\n@param [Hash] options\n  * `:cache_parameter_group_family` - *required*
+  - (String) \n  * `:max_records` - (Integer) \n  * `:marker` - (String) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:cache_parameter_group_family` - (String)\n  * `:marker`
+  - (String)\n  * `:parameters` - (Array<Hash>)\n    * `:parameter_name` - (String)\n
+  \   * `:parameter_value` - (String)\n    * `:description` - (String)\n    * `:source`
+  - (String)\n    * `:data_type` - (String)\n    * `:allowed_values` - (String)\n
+  \   * `:is_modifiable` - (Boolean)\n    * `:minimum_engine_version` - (String)\n
+  \ * `:cache_node_type_specific_parameters` - (Array<Hash>)\n    * `:parameter_name`
+  - (String)\n    * `:description` - (String)\n    * `:source` - (String)\n    * `:data_type`
+  - (String)\n    * `:allowed_values` - (String)\n    * `:is_modifiable` - (Boolean)\n
+  \   * `:minimum_engine_version` - (String)\n    * `:cache_node_type_specific_values`
+  - (Array<Hash>)\n      * `:cache_node_type` - (String)\n      * `:value` - (String)"
+:describe_events: "Calls the DescribeEvents API operation.\n@param [Hash] options\n
+  \ * `:source_identifier` - (String) \n  * `:source_type` - (String) Valid values
+  include:\n    * `cache-cluster`\n    * `cache-parameter-group`\n    * `cache-security-group`\n
+  \   * `cache-subnet-group`\n  * `:start_time` - (String&lt;<ISO8601 datetime>) \n
+  \ * `:end_time` - (String&lt;<ISO8601 datetime>) \n  * `:duration` - (Integer) \n
+  \ * `:max_records` - (Integer) \n  * `:marker` - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:marker` - (String)\n  * `:events` - (Array<Hash>)\n    * `:source_identifier`
+  - (String)\n    * `:source_type` - (String)\n    * `:message` - (String)\n    *
+  `:date` - (Time)"
+:describe_replication_groups: "Calls the DescribeReplicationGroups API operation.\n@param
+  [Hash] options\n  * `:replication_group_id` - (String) \n  * `:max_records` - (Integer)
+  \n  * `:marker` - (String) \n@return [Core::Response] The `#data` method of the
+  response object returns a hash with the following structure:\n\n  * `:marker` -
+  (String)\n  * `:replication_groups` - (Array<Hash>)\n    * `:replication_group_id`
+  - (String)\n    * `:description` - (String)\n    * `:status` - (String)\n    * `:pending_modified_values`
+  - (Hash)\n      * `:primary_cluster_id` - (String)\n    * `:member_clusters` - (Array<String>)\n
+  \   * `:node_groups` - (Array<Hash>)\n      * `:node_group_id` - (String)\n      *
+  `:status` - (String)\n      * `:primary_endpoint` - (Hash)\n        * `:address`
+  - (String)\n        * `:port` - (Integer)\n      * `:node_group_members` - (Array<Hash>)\n
+  \       * `:cache_cluster_id` - (String)\n        * `:cache_node_id` - (String)\n
+  \       * `:read_endpoint` - (Hash)\n          * `:address` - (String)\n          *
+  `:port` - (Integer)\n        * `:preferred_availability_zone` - (String)\n        *
+  `:current_role` - (String)"
+:describe_reserved_cache_nodes: "Calls the DescribeReservedCacheNodes API operation.\n@param
+  [Hash] options\n  * `:reserved_cache_node_id` - (String) \n  * `:reserved_cache_nodes_offering_id`
+  - (String) \n  * `:cache_node_type` - (String) \n  * `:duration` - (String) \n  *
+  `:product_description` - (String) \n  * `:offering_type` - (String) \n  * `:max_records`
+  - (Integer) \n  * `:marker` - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:marker`
+  - (String)\n  * `:reserved_cache_nodes` - (Array<Hash>)\n    * `:reserved_cache_node_id`
+  - (String)\n    * `:reserved_cache_nodes_offering_id` - (String)\n    * `:cache_node_type`
+  - (String)\n    * `:start_time` - (Time)\n    * `:duration` - (Integer)\n    * `:fixed_price`
+  - (Numeric)\n    * `:usage_price` - (Numeric)\n    * `:cache_node_count` - (Integer)\n
+  \   * `:product_description` - (String)\n    * `:offering_type` - (String)\n    *
+  `:state` - (String)\n    * `:recurring_charges` - (Array<Hash>)\n      * `:recurring_charge_amount`
+  - (Numeric)\n      * `:recurring_charge_frequency` - (String)"
+:describe_reserved_cache_nodes_offerings: "Calls the DescribeReservedCacheNodesOfferings
+  API operation.\n@param [Hash] options\n  * `:reserved_cache_nodes_offering_id` -
+  (String) \n  * `:cache_node_type` - (String) \n  * `:duration` - (String) \n  *
+  `:product_description` - (String) \n  * `:offering_type` - (String) \n  * `:max_records`
+  - (Integer) \n  * `:marker` - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:marker`
+  - (String)\n  * `:reserved_cache_nodes_offerings` - (Array<Hash>)\n    * `:reserved_cache_nodes_offering_id`
+  - (String)\n    * `:cache_node_type` - (String)\n    * `:duration` - (Integer)\n
+  \   * `:fixed_price` - (Numeric)\n    * `:usage_price` - (Numeric)\n    * `:product_description`
+  - (String)\n    * `:offering_type` - (String)\n    * `:recurring_charges` - (Array<Hash>)\n
+  \     * `:recurring_charge_amount` - (Numeric)\n      * `:recurring_charge_frequency`
+  - (String)"
+:modify_cache_cluster: "Calls the ModifyCacheCluster API operation.\n@param [Hash]
+  options\n  * `:cache_cluster_id` - *required* - (String) \n  * `:num_cache_nodes`
+  - (Integer) \n  * `:cache_node_ids_to_remove` - (Array&lt;<String>) \n  * `:cache_security_group_names`
+  - (Array&lt;<String>) \n  * `:security_group_ids` - (Array&lt;<String>) \n  * `:preferred_maintenance_window`
+  - (String) \n  * `:notification_topic_arn` - (String) \n  * `:cache_parameter_group_name`
+  - (String) \n  * `:notification_topic_status` - (String) \n  * `:apply_immediately`
+  - (Boolean) \n  * `:engine_version` - (String) \n  * `:auto_minor_version_upgrade`
+  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:cache_cluster_id` - (String)\n
+  \ * `:configuration_endpoint` - (Hash)\n    * `:address` - (String)\n    * `:port`
+  - (Integer)\n  * `:client_download_landing_page` - (String)\n  * `:cache_node_type`
+  - (String)\n  * `:engine` - (String)\n  * `:engine_version` - (String)\n  * `:cache_cluster_status`
+  - (String)\n  * `:num_cache_nodes` - (Integer)\n  * `:preferred_availability_zone`
+  - (String)\n  * `:cache_cluster_create_time` - (Time)\n  * `:preferred_maintenance_window`
+  - (String)\n  * `:pending_modified_values` - (Hash)\n    * `:num_cache_nodes` -
+  (Integer)\n    * `:cache_node_ids_to_remove` - (Array<String>)\n    * `:engine_version`
+  - (String)\n  * `:notification_configuration` - (Hash)\n    * `:topic_arn` - (String)\n
+  \   * `:topic_status` - (String)\n  * `:cache_security_groups` - (Array<Hash>)\n
+  \   * `:cache_security_group_name` - (String)\n    * `:status` - (String)\n  * `:cache_parameter_group`
+  - (Hash)\n    * `:cache_parameter_group_name` - (String)\n    * `:parameter_apply_status`
+  - (String)\n    * `:cache_node_ids_to_reboot` - (Array<String>)\n  * `:cache_subnet_group_name`
+  - (String)\n  * `:cache_nodes` - (Array<Hash>)\n    * `:cache_node_id` - (String)\n
+  \   * `:cache_node_status` - (String)\n    * `:cache_node_create_time` - (Time)\n
+  \   * `:endpoint` - (Hash)\n      * `:address` - (String)\n      * `:port` - (Integer)\n
+  \   * `:parameter_group_status` - (String)\n    * `:source_cache_node_id` - (String)\n
+  \ * `:auto_minor_version_upgrade` - (Boolean)\n  * `:security_groups` - (Array<Hash>)\n
+  \   * `:security_group_id` - (String)\n    * `:status` - (String)\n  * `:replication_group_id`
+  - (String)"
+:modify_cache_parameter_group: "Calls the ModifyCacheParameterGroup API operation.\n@param
+  [Hash] options\n  * `:cache_parameter_group_name` - *required* - (String) \n  *
+  `:parameter_name_values` - *required* - (Array&lt;<Hash>) \n    * `:parameter_name`
+  - (String) \n    * `:parameter_value` - (String) \n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:cache_parameter_group_name` - (String)"
+:modify_cache_subnet_group: "Calls the ModifyCacheSubnetGroup API operation.\n@param
+  [Hash] options\n  * `:cache_subnet_group_name` - *required* - (String) \n  * `:cache_subnet_group_description`
+  - (String) \n  * `:subnet_ids` - (Array&lt;<String>) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:cache_subnet_group_name` - (String)\n  * `:cache_subnet_group_description`
+  - (String)\n  * `:vpc_id` - (String)\n  * `:subnets` - (Array<Hash>)\n    * `:subnet_identifier`
+  - (String)\n    * `:subnet_availability_zone` - (Hash)\n      * `:name` - (String)"
+:modify_replication_group: "Calls the ModifyReplicationGroup API operation.\n@param
+  [Hash] options\n  * `:replication_group_id` - *required* - (String) \n  * `:replication_group_description`
+  - (String) \n  * `:cache_security_group_names` - (Array&lt;<String>) \n  * `:security_group_ids`
+  - (Array&lt;<String>) \n  * `:preferred_maintenance_window` - (String) \n  * `:notification_topic_arn`
+  - (String) \n  * `:cache_parameter_group_name` - (String) \n  * `:notification_topic_status`
+  - (String) \n  * `:apply_immediately` - (Boolean) \n  * `:engine_version` - (String)
+  \n  * `:auto_minor_version_upgrade` - (Boolean) \n  * `:primary_cluster_id` - (String)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:replication_group_id` - (String)\n  * `:description`
+  - (String)\n  * `:status` - (String)\n  * `:pending_modified_values` - (Hash)\n
+  \   * `:primary_cluster_id` - (String)\n  * `:member_clusters` - (Array<String>)\n
+  \ * `:node_groups` - (Array<Hash>)\n    * `:node_group_id` - (String)\n    * `:status`
+  - (String)\n    * `:primary_endpoint` - (Hash)\n      * `:address` - (String)\n
+  \     * `:port` - (Integer)\n    * `:node_group_members` - (Array<Hash>)\n      *
+  `:cache_cluster_id` - (String)\n      * `:cache_node_id` - (String)\n      * `:read_endpoint`
+  - (Hash)\n        * `:address` - (String)\n        * `:port` - (Integer)\n      *
+  `:preferred_availability_zone` - (String)\n      * `:current_role` - (String)"
+:purchase_reserved_cache_nodes_offering: "Calls the PurchaseReservedCacheNodesOffering
+  API operation.\n@param [Hash] options\n  * `:reserved_cache_nodes_offering_id` -
+  *required* - (String) \n  * `:reserved_cache_node_id` - (String) \n  * `:cache_node_count`
+  - (Integer) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:reserved_cache_node_id` -
+  (String)\n  * `:reserved_cache_nodes_offering_id` - (String)\n  * `:cache_node_type`
+  - (String)\n  * `:start_time` - (Time)\n  * `:duration` - (Integer)\n  * `:fixed_price`
+  - (Numeric)\n  * `:usage_price` - (Numeric)\n  * `:cache_node_count` - (Integer)\n
+  \ * `:product_description` - (String)\n  * `:offering_type` - (String)\n  * `:state`
+  - (String)\n  * `:recurring_charges` - (Array<Hash>)\n    * `:recurring_charge_amount`
+  - (Numeric)\n    * `:recurring_charge_frequency` - (String)"
+:reboot_cache_cluster: "Calls the RebootCacheCluster API operation.\n@param [Hash]
+  options\n  * `:cache_cluster_id` - *required* - (String) \n  * `:cache_node_ids_to_reboot`
+  - *required* - (Array&lt;<String>) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:cache_cluster_id`
+  - (String)\n  * `:configuration_endpoint` - (Hash)\n    * `:address` - (String)\n
+  \   * `:port` - (Integer)\n  * `:client_download_landing_page` - (String)\n  * `:cache_node_type`
+  - (String)\n  * `:engine` - (String)\n  * `:engine_version` - (String)\n  * `:cache_cluster_status`
+  - (String)\n  * `:num_cache_nodes` - (Integer)\n  * `:preferred_availability_zone`
+  - (String)\n  * `:cache_cluster_create_time` - (Time)\n  * `:preferred_maintenance_window`
+  - (String)\n  * `:pending_modified_values` - (Hash)\n    * `:num_cache_nodes` -
+  (Integer)\n    * `:cache_node_ids_to_remove` - (Array<String>)\n    * `:engine_version`
+  - (String)\n  * `:notification_configuration` - (Hash)\n    * `:topic_arn` - (String)\n
+  \   * `:topic_status` - (String)\n  * `:cache_security_groups` - (Array<Hash>)\n
+  \   * `:cache_security_group_name` - (String)\n    * `:status` - (String)\n  * `:cache_parameter_group`
+  - (Hash)\n    * `:cache_parameter_group_name` - (String)\n    * `:parameter_apply_status`
+  - (String)\n    * `:cache_node_ids_to_reboot` - (Array<String>)\n  * `:cache_subnet_group_name`
+  - (String)\n  * `:cache_nodes` - (Array<Hash>)\n    * `:cache_node_id` - (String)\n
+  \   * `:cache_node_status` - (String)\n    * `:cache_node_create_time` - (Time)\n
+  \   * `:endpoint` - (Hash)\n      * `:address` - (String)\n      * `:port` - (Integer)\n
+  \   * `:parameter_group_status` - (String)\n    * `:source_cache_node_id` - (String)\n
+  \ * `:auto_minor_version_upgrade` - (Boolean)\n  * `:security_groups` - (Array<Hash>)\n
+  \   * `:security_group_id` - (String)\n    * `:status` - (String)\n  * `:replication_group_id`
+  - (String)"
+:reset_cache_parameter_group: "Calls the ResetCacheParameterGroup API operation.\n@param
+  [Hash] options\n  * `:cache_parameter_group_name` - *required* - (String) \n  *
+  `:reset_all_parameters` - (Boolean) \n  * `:parameter_name_values` - *required*
+  - (Array&lt;<Hash>) \n    * `:parameter_name` - (String) \n    * `:parameter_value`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:cache_parameter_group_name`
+  - (String)"
+:revoke_cache_security_group_ingress: "Calls the RevokeCacheSecurityGroupIngress API
+  operation.\n@param [Hash] options\n  * `:cache_security_group_name` - *required*
+  - (String) \n  * `:ec2_security_group_name` - *required* - (String) \n  * `:ec2_security_group_owner_id`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:owner_id` - (String)\n
+  \ * `:cache_security_group_name` - (String)\n  * `:description` - (String)\n  *
+  `:ec_2_security_groups` - (Array<Hash>)\n    * `:status` - (String)\n    * `:ec2_security_group_name`
+  - (String)\n    * `:ec2_security_group_owner_id` - (String)"

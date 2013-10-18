@@ -110,42 +110,42 @@ module AWS
 
         it 'defaults to registered domains in alphabetical order' do
           client.should_receive(:list_domains).with(
-            :registration_status => 'REGISTERED', 
+            :registration_status => 'REGISTERED',
             :reverse_order => false)
           domains.to_a
         end
 
         it 'can request only deprecated domains' do
           client.should_receive(:list_domains).with(
-            :registration_status => 'DEPRECATED', 
+            :registration_status => 'DEPRECATED',
             :reverse_order => false)
           domains.deprecated.to_a
         end
 
         it 'accepts registration status order as an option to #each' do
           client.should_receive(:list_domains).with(
-            :registration_status => 'DEPRECATED', 
+            :registration_status => 'DEPRECATED',
             :reverse_order => false)
           domains.each(:registration_status => 'DEPRECATED') {|d|}
         end
 
         it 'can request domains in reserse alphabetical order' do
           client.should_receive(:list_domains).with(
-            :registration_status => 'REGISTERED', 
+            :registration_status => 'REGISTERED',
             :reverse_order => true)
           domains.reverse_order.to_a
         end
 
         it 'accepts reverse order as an option to #each' do
           client.should_receive(:list_domains).with(
-            :registration_status => 'REGISTERED', 
+            :registration_status => 'REGISTERED',
             :reverse_order => true)
           domains.each(:reverse_order => true) {|d|}
         end
 
         it 'can request deprecated domains in reserse alphabetical order' do
           client.should_receive(:list_domains).with(
-            :registration_status => 'DEPRECATED', 
+            :registration_status => 'DEPRECATED',
             :reverse_order => true)
           domains.deprecated.reverse_order.to_a
         end

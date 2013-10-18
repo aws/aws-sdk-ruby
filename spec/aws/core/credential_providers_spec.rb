@@ -126,7 +126,7 @@ module AWS
 
         it 'returns credentials with session tokens when provided' do
           creds = {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => 'session' }
           provider = StaticProvider.new(creds)
@@ -135,24 +135,24 @@ module AWS
 
         it 'ommits nil values from credentials' do
           creds = {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => nil }
           provider = StaticProvider.new(creds)
           provider.credentials.should == {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret' }
         end
 
         it 'protects static credetials from downstream changes' do
           creds = {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => 'session' }
           provider = StaticProvider.new(creds)
           provider.credentials.delete(:access_key_id)
           provider.credentials.should == {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => 'session' }
         end
@@ -171,6 +171,8 @@ module AWS
           'AWS_ACCESS_KEY_ID' => 'akid',
           'AWS_SECRET_ACCESS_KEY' => 'secret',
         }}
+
+        let(:mock_credential_file) { File.expand_path('../../../mock-credential-file.txt', __FILE__) }
 
         before(:each) do
           ENV.stub(:[]).and_return{|key| env_variables[key] }
@@ -211,6 +213,24 @@ module AWS
           }
         end
 
+        it 'reads credentials from {PREFIX}_CREDENTIAL_FILE environment variable' do
+          env_variables['AMAZON_CREDENTIAL_FILE'] = mock_credential_file
+          ENVProvider.new('AMAZON').credentials.should == {
+            :access_key_id => 'cred_file_key',
+            :secret_access_key => 'cred_file_secret',
+          }
+        end
+
+        it 'preferences {PREFIX}_CREDENTIAL_FILE environment data when merging it in' do
+          env_variables['AWS_CREDENTIAL_FILE'] = mock_credential_file
+          env_variables['AWS_SESSION_TOKEN'] = 'token'
+          ENVProvider.new('AWS').credentials.should == {
+            :access_key_id => 'cred_file_key',
+            :secret_access_key => 'cred_file_secret',
+            :session_token => 'token',
+          }
+        end
+
         it 'does not access/cache credentials until asked' do
           provider = ENVProvider.new('AWS')
           env_variables['AWS_ACCESS_KEY_ID'] = 'new-akid'
@@ -223,12 +243,44 @@ module AWS
           }
         end
 
-        it 'protects static credetials from downstream changes' do
+        it 'protects static credentials from downstream changes' do
           provider = ENVProvider.new('AWS')
           provider.credentials.delete(:access_key_id)
           provider.credentials.should == {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret' }
+        end
+
+      end
+
+      describe CredentialFileProvider do
+
+        let(:mock_credential_file) { File.expand_path('../../../mock-credential-file.txt', __FILE__) }
+
+        it 'raises an error when no credentials are present' do
+          lambda {
+            CredentialFileProvider.new('/no/file/here').credentials
+          }.should raise_error(Errors::MissingCredentialsError)
+        end
+
+        it 'reads credentials from a credential file' do
+          provider = CredentialFileProvider.new(mock_credential_file)
+          provider.credentials.should == {
+            :access_key_id => 'cred_file_key',
+            :secret_access_key => 'cred_file_secret' }
+        end
+
+        it 'should return an empty hash from a bad file' do
+          provider = CredentialFileProvider.new('/no/file/here')
+          provider.get_credentials.should == {}
+        end
+
+        it 'protects static credentials from downstream changes' do
+          provider = CredentialFileProvider.new(mock_credential_file)
+          provider.credentials.delete(:access_key_id)
+          provider.credentials.should == {
+            :access_key_id => 'cred_file_key',
+            :secret_access_key => 'cred_file_secret' }
         end
 
       end
@@ -307,7 +359,7 @@ module AWS
               :secret_access_key => "secret-3",
               :session_token => "token-3",
             }
-            
+
           end
 
         end
@@ -366,7 +418,7 @@ module AWS
       end
 
       describe SessionProvider do
-        
+
         let(:long_term_creds) {{
           :access_key_id => 'akid',
           :secret_access_key => 'secret',

@@ -14,22 +14,22 @@
 module AWS
   class Route53
 
-    # = Modify resource record sets with ChangeBatch
+    # # Modify resource record sets with ChangeBatch
     #
-    #   batch = AWS::Route53::ChangeBatch.new(hosted_zone_id)
-    #   batch << AWS::Route53::CreateRequest.new('foo.example.com.', 'A', :resource_records => [{:value => '192.168.0.1'}])
-    #   batch << AWS::Route53::DeleteRequest.new('bar.example.com.', 'CNAME')
-    #   batch << AWS::Route53::DeleteRequest.new('baz.example.com.', 'AAAA')
-    #   batch << AWS::Route53::CreateRequest.new('baz.example.com.', 'AAAA', :resource_records => [{:value => '192.168.0.3'}])
+    #     batch = AWS::Route53::ChangeBatch.new(hosted_zone_id)
+    #     batch << AWS::Route53::CreateRequest.new('foo.example.com.', 'A', :resource_records => [{:value => '192.168.0.1'}])
+    #     batch << AWS::Route53::DeleteRequest.new('bar.example.com.', 'CNAME')
+    #     batch << AWS::Route53::DeleteRequest.new('baz.example.com.', 'AAAA')
+    #     batch << AWS::Route53::CreateRequest.new('baz.example.com.', 'AAAA', :resource_records => [{:value => '192.168.0.3'}])
     #
-    #   batch.call
+    #     batch.call
     #
     class ChangeBatch
 
       include Enumerable
       include Core::Model
 
-      # @private
+      # @api private
       def initialize hosted_zone_id, options = {}
         super(options)
         @hosted_zone_id = hosted_zone_id
@@ -97,7 +97,7 @@ module AWS
 
     class ChangeRequest
 
-      # @private
+      # @api private
       def initialize(action, name, type, options={})
         @action = action
         @name = name
@@ -114,7 +114,7 @@ module AWS
       # @return [String]
       attr_reader :type
 
-      # Build query fro change request.
+      # Build query for change request.
       # @return [Hash]
       def to_hash
         q = {}
@@ -128,6 +128,8 @@ module AWS
         q[:resource_record_set][:ttl] = @change_options[:ttl] if @change_options[:ttl]
         q[:resource_record_set][:resource_records] = @change_options[:resource_records] if @change_options[:resource_records]
         q[:resource_record_set][:alias_target] = @change_options[:alias_target] if @change_options[:alias_target]
+        q[:resource_record_set][:failover] = @change_options[:failover] if @change_options[:failover]
+        q[:resource_record_set][:health_check_id] = @change_options[:health_check_id] if @change_options[:health_check_id]
         q
       end
     end

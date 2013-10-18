@@ -17,14 +17,14 @@ module AWS
     # Represents the tables in your account.  Each table is
     # represented by an instance of the {Table} class.
     #
-    # == Schemas
+    # ## Schemas
     #
     # Before you can operate on items in a table you must specify the schema.
     # You do this by calling #hash_key= (and optionally #range_key=) on
     # a table.
     #
-    #   table = dynamo_db.tables['mytable']
-    #   table.hash_key = [:id, :string]
+    #     table = dynamo_db.tables['mytable']
+    #     table.hash_key = [:id, :string]
     #
     # @example Creating a Table
     #   table = dynamo_db.tables.create('mytable', 10, 10, :hash_key => { :id => :string })
@@ -41,12 +41,12 @@ module AWS
 
       # Creates a new table.
       #
-      #   table = dynamo_db.tables.create('mytable', 25, 25,
-      #     :hash_key => { :id => :string })
+      #     table = dynamo_db.tables.create('mytable', 25, 25,
+      #       :hash_key => { :id => :string })
       #
       # @note Creating a table is an eventualy consistent operation.  You
       #   can not interact with the table until its status
-      #   ({Table#status}) is +:active+.
+      #   ({Table#status}) is `:active`.
       #
       # @param [String] name The name of the table.
       #
@@ -63,22 +63,22 @@ module AWS
       #   hash key on the string attribute username you would call #create
       #   with:
       #
-      #      :hash_key => { :username => :string }
+      #       :hash_key => { :username => :string }
       #
-      #   The other supported types are +:number+ and +:binary+.  If you
+      #   The other supported types are `:number` and `:binary`.  If you
       #   wanted to set the hash key on a numeric (integer) attribute then you
       #   could call #create with:
       #
-      #      :hash_key => { :id => :number }
+      #       :hash_key => { :id => :number }
       #
-      #   All tables require a hash key.  If +:hash_key+ is not provided
+      #   All tables require a hash key.  If `:hash_key` is not provided
       #   then a default hash key will be provided.  The default hash
       #   key is:
       #
-      #      :hash_key => { :id => :string }
+      #       :hash_key => { :id => :string }
       #
       # @option options [String] :range_key You can setup a table to use
-      #   composite keys by providing a +:range_key+.  Range keys are
+      #   composite keys by providing a `:range_key`.  Range keys are
       #   configured the same way as hash keys.  They are useful
       #   for ordering items that share the same hash key.
       #
@@ -103,7 +103,7 @@ module AWS
 
       # References a table by name.
       #
-      #   dynamo_db.tables["MyTable"]
+      #     dynamo_db.tables["MyTable"]
       #
       # @param [String] name
       # @return [Table] Returns the table with the given name.
@@ -111,7 +111,7 @@ module AWS
         Table.new(name, :config => config)
       end
 
-      # @private
+      # @api private
       protected
       def _each_item next_token, limit, options = {}, &block
 

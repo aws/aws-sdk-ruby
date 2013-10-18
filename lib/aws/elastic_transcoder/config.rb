@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'ElasticTranscoder', 'elastic_transcoder', 'elastictranscoder.us-east-1.amazonaws.com'
+  add_service 'ElasticTranscoder', 'elastic_transcoder', 'elastictranscoder.%s.amazonaws.com'
 
 end

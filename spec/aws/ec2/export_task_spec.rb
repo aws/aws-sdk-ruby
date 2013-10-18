@@ -86,7 +86,7 @@ module AWS
           before(:each) do
             data[:instance_export] = { :instance_id => 'i-12345' }
           end
-          
+
           it 'returns an instance object' do
             task.instance.should be_an(Instance)
           end
@@ -106,7 +106,7 @@ module AWS
           before(:each) do
             data[:export_to_s3] = { :s3_bucket => 'bucket-name' }
           end
-          
+
           it 'returns a bucket object' do
             task.s3_bucket.should be_an(S3::Bucket)
           end
@@ -126,7 +126,7 @@ module AWS
           before(:each) do
             data[:export_to_s3] = { :s3_bucket => 'bucket-name', :s3_key => 'key' }
           end
-          
+
           it 'returns an s3 object' do
             task.s3_object.should be_an(S3::S3Object)
           end

@@ -30,7 +30,7 @@ module AWS
           :set_topic_attributes => 'sns:SetTopicAttributes',
           :subscribe => 'sns:Subscribe',
         }
-        
+
         protected
         def resource_arn resource
           case resource

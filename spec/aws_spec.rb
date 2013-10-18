@@ -40,7 +40,7 @@ describe AWS do
       AWS.should_receive(:config).with(:stub_requests => true)
       AWS.stub!
     end
-    
+
   end
 
   context '#start_memoizing' do
@@ -215,6 +215,32 @@ describe AWS do
         AWS.config.iam_region.should == 'us-gov-west-1'
       end
 
+      it 'observes the nested region' do
+        config = AWS.config.with(:s3 => { :region => 'us-west-2' })
+        config.s3_endpoint.should eq('s3-us-west-2.amazonaws.com')
+      end
+
+    end
+
+  end
+
+  context '#eager_autoload!' do
+
+    it 'returns a list of loaded modules' do
+      path = File.join(File.dirname(__FILE__), 'fixtures', 'autoload_target')
+      mod = Module.new
+      mod.send(:autoload, :AutoloadTarget, path)
+      AWS.eager_autoload!(mod)
+      mod.autoload?(:AutoloadTarget).should be(nil)
+    end
+
+    it 'eager autoloads passed defined modules' do
+      path = File.join(File.dirname(__FILE__), 'fixtures', 'nested_autoload_target')
+      mod = Module.new
+      mod::Nested = Module.new
+      mod::Nested.send(:autoload, :NestedAutoloadTarget, path)
+      AWS.eager_autoload!(mod)
+      mod::Nested.autoload?(:NestedAutoloadTarget).should be(nil)
     end
 
   end

@@ -12,13 +12,13 @@
 # language governing permissions and limitations under the License.
 
 Given /^ my account has a versioned bucket in it$/ do
-  step "I call create_bucket"  
+  step "I call create_bucket"
   step "I enable versioning for the bucket"
 end
 
 When /^I call set_bucket_versioning with "([^\"]*)"$/ do |state|
   @s3_client.set_bucket_versioning(
-    :bucket_name => @bucket_name, 
+    :bucket_name => @bucket_name,
     :state => state.to_sym)
 end
 

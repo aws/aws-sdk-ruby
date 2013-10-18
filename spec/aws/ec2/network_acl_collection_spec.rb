@@ -102,7 +102,7 @@ module AWS
             network_acls.create(:vpc => 'vpc-id')
 
           end
-          
+
           it 'accepts a vpc object' do
 
             client.should_receive(:create_network_acl).

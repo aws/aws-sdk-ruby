@@ -15,7 +15,7 @@ module AWS
   class EC2
     module Errors
 
-      # @private
+      # @api private
       GRAMMAR = Core::XML::Grammar.customize do
         element "Errors" do
           ignore

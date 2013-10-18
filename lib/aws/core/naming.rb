@@ -14,7 +14,7 @@
 module AWS
   module Core
 
-    # @private
+    # @api private
     module Naming
 
       def service_name

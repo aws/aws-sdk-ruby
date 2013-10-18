@@ -19,18 +19,18 @@ module AWS
     # Common methods for AccessControlList and related objects.
     module ACLObject
 
-      # @private
+      # @api private
       def initialize(opts = {}); end
 
-      # @private
+      # @api private
       def body_xml; ""; end
 
-      # @private
+      # @api private
       def stag
         element_name
       end
 
-      # @private
+      # @api private
       def element_name
         self.class.name[/::([^:]*)$/, 1]
       end
@@ -69,12 +69,12 @@ module AWS
       # @see #valid?
       def validate!; end
 
-      # @private
+      # @api private
       def validate_input(name, value, context = nil)
         send("validate_#{name}_input!", value, context)
       end
 
-      # @private
+      # @api private
       module ClassMethods
 
         def string_attr(element_name, options = {})

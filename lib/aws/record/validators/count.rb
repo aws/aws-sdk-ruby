@@ -11,12 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/validator'
-
 module AWS
   module Record
 
-    # @private
+    # @api private
     class CountValidator < Validator
 
       ACCEPTED_OPTIONS = [
@@ -71,22 +69,22 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       protected
       def wrong_number exactly, got
-        msg = options[:wrong_number] || 
+        msg = options[:wrong_number] ||
           "has the wrong number of values (should have %{exactly})"
         interpolate(msg, :exactly => exactly, :count => got)
       end
 
-      # @private
+      # @api private
       protected
       def too_few min, got
         msg = options[:too_few] || "has too few values (minimum is %{minimum})"
         interpolate(msg, :minimum => min, :count => got)
       end
 
-      # @private
+      # @api private
       protected
       def too_many max, got
         msg = options[:too_many] || "has too many values (maximum is %{maximum})"
@@ -95,7 +93,7 @@ module AWS
 
       protected
       def interpolate message_with_placeholders, values
-        msg = message_with_placeholders.dup 
+        msg = message_with_placeholders.dup
         values.each_pair do |key,value|
           msg.gsub!(/%\{#{key}\}/, value.to_s)
         end

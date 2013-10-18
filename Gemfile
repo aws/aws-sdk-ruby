@@ -11,21 +11,28 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gemspec
 
-group :development do
-  gem 'yard'
+group :repl do
+  gem 'pry'
+end
+
+group :documentation do
+  gem 'yard', '>= 0.8.7', '< 1.0'
+  gem 'rdiscount', :github => 'lsegal/rdiscount', :branch => 'gfm-fenced-code'
+  gem 'yard-sitemap', '~> 1.0'
+  gem 'rdoc', '= 3.9.4'
 end
 
 group :test do
-  gem 'rspec', '= 2.12'
+  gem 'rspec', '~> 2.12'
   gem 'cucumber'
   gem 'simplecov', :require => false
   gem 'rvm-tester'
   gem 'net-ssh', '~> 2.1'
-  gem 'multipart-post', '~> 1.1.2'
+  gem 'multipart-post'
   gem 'rotp', '~> 1.3.0'
 end
 

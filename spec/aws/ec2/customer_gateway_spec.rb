@@ -48,7 +48,7 @@ module AWS
       end
 
       context '#delete' do
-        
+
         it 'calls #delete_customer_gateway on the client' do
           client.should_receive(:delete_customer_gateway).with(
             :customer_gateway_id => customer_gateway.id)
@@ -82,7 +82,7 @@ module AWS
         end
 
         context 'vpc_type' do
-          
+
           it 'is retruned as a string' do
             customer_gateway.vpn_type.should == 'ipsec.1'
           end
@@ -90,7 +90,7 @@ module AWS
         end
 
         context 'ip_address' do
-          
+
           it 'is retruned as a string' do
             customer_gateway.ip_address.should == '1.2.3.4'
           end
@@ -98,7 +98,7 @@ module AWS
         end
 
         context 'bgp_asn' do
-          
+
           it 'is retruned as an integer' do
             customer_gateway.bgp_asn.should == 65432
           end

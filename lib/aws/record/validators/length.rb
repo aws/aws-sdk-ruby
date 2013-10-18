@@ -11,12 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/validator'
-
 module AWS
   module Record
-    
-    # @private
+
+    # @api private
     class LengthValidator < Validator
 
       ACCEPTED_OPTIONS = [
@@ -68,33 +66,33 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def wrong_length exactly, got
-        msg = options[:wrong_length] || 
+        msg = options[:wrong_length] ||
           "is the wrong length (should be %{exactly} characters)"
         interpolate(msg, :exactly => exactly, :length => got)
       end
 
-      # @private
+      # @api private
       protected
       def too_short min, got
-        msg = options[:too_short] || 
+        msg = options[:too_short] ||
           "is too short (minimum is %{minimum} characters)"
         interpolate(msg, :minimum => min, :length => got)
       end
 
-      # @private
+      # @api private
       protected
       def too_long max, got
-        msg = options[:too_long] || 
+        msg = options[:too_long] ||
           "is too long (maximum is %{maximum} characters)"
         interpolate(msg, :maximum => max, :length => got)
       end
 
       protected
       def interpolate message_with_placeholders, values
-        msg = message_with_placeholders.dup 
+        msg = message_with_placeholders.dup
         values.each_pair do |key,value|
           msg.gsub!(/%\{#{key}\}/, value.to_s)
         end

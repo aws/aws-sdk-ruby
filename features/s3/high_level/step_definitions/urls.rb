@@ -15,9 +15,30 @@ When /^I generate a pre\-signed (\w+) URL for the object "([^\"]*)"$/ do |method
   @url = @result = @bucket.objects[key].url_for(method, :secure => false)
 end
 
+When(/^I generate a pre\-signed PUT URL for the object "(.*?)" with content info$/) do |key|
+  @url = @bucket.objects[key].url_for(:write, {
+    :secure => false,
+    :content_type => 'text/plain',
+    :content_md5 => "62HurZDjuJnGvL4nrFgWYA==", # the string "HELLO"
+  })
+end
+
+When(/^I use a regular HTTP client to PUT "HELLO" to the URL with content info$/) do
+  Net::HTTP.start(@url.host) do |http|
+    resp = http.send_request("PUT", @url.request_uri, 'HELLO', {
+      "content-type" => "text/plain",
+      "content-md5" => "62HurZDjuJnGvL4nrFgWYA==", # the string "HELLO"
+    })
+    resp.should be_a(Net::HTTPSuccess)
+  end
+end
+
 When /^I use a regular HTTP client to GET the URL$/ do
   require 'net/http'
-  @result = Net::HTTP.get_response(@url)
+  http = Net::HTTP.new(@url.host, @url.port)
+  http.start do
+    @result = http.request(Net::HTTP::Get.new(@url.request_uri))
+  end
 end
 
 Then /^the response body should be "([^\"]*)"$/ do |body|

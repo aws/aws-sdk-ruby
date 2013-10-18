@@ -117,7 +117,7 @@ module AWS
             with(:public_ip => ip.public_ip)
 
           ip.stub(:domain).and_return('standard')
-          ip.delete  
+          ip.delete
 
         end
 
@@ -128,7 +128,7 @@ module AWS
 
           ip.stub(:domain).and_return('vpc')
           ip.stub(:allocation_id).and_return('allocation-id')
-          ip.delete  
+          ip.delete
 
         end
 
@@ -143,21 +143,21 @@ module AWS
       end
 
       context '#associate' do
-        
+
         let(:resp) { client.stub_for(:associate_address) }
 
-        before(:each) do 
+        before(:each) do
           resp.data[:association_id] = 'assoc-id'
           client.stub(:associate_address).and_return(resp)
         end
 
         context 'vpc elastic ips' do
-          
-          let(:ip) { 
-            ElasticIp.new('1.1.1.1', 
-              :domain => 'vpc', 
+
+          let(:ip) {
+            ElasticIp.new('1.1.1.1',
+              :domain => 'vpc',
               :allocation_id => 'alloc-id',
-              :config => config) 
+              :config => config)
           }
 
           it 'accpets :instance with an instance object' do
@@ -204,8 +204,8 @@ module AWS
 
         context 'regular elastic ips' do
 
-          let(:ip) { 
-            ElasticIp.new('1.1.1.1', :domain => 'standard', :config => config) 
+          let(:ip) {
+            ElasticIp.new('1.1.1.1', :domain => 'standard', :config => config)
           }
 
           it 'accpets :instance with an instance object' do
@@ -231,7 +231,7 @@ module AWS
           it 'returns the association id' do
             ip.associate(:instance => 'i-12345678').should == 'assoc-id'
           end
-          
+
         end
 
       end

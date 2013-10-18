@@ -150,7 +150,7 @@ module AWS
       end
 
       context '#to_h' do
-        
+
         it 'returns the metadata hash from the response' do
           metadata.to_h.should == response.meta
         end

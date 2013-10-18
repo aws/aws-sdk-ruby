@@ -14,7 +14,7 @@
 module AWS
   module Core
 
-    # @private
+    # @api private
     module Inflection
 
       def ruby_name aws_name

@@ -14,18 +14,13 @@
 module AWS
   class SimpleWorkflow
 
-    # @private
+    # @api private
     class Request < Core::Http::Request
 
-      include Core::Signature::Version3
+      include Core::Signature::Version4
 
-      def read_timeout
-        # increase read timeout for long polling
-        if headers['x-amz-target'] =~ /PollFor(Decision|Activity)Task/
-          90 
-        else
-          @read_timeout
-        end
+      def service
+        'swf'
       end
 
     end

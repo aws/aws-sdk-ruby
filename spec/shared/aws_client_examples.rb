@@ -110,10 +110,10 @@ module AWS::Core
   # http_verb - expected http method, PUT, GET, POST or DELETE
   shared_examples_for "an aws http request" do |http_verb|
 
-    it_should_behave_like "supports async option"
+    #it_should_behave_like "supports async option"
 
     before(:each) do
-      Kernel.stub!(:sleep)
+      Kernel.stub(:sleep)
     end
 
     let(:server_error_client) {
@@ -141,34 +141,6 @@ module AWS::Core
       new_client.config.stub(:use_ssl?).and_return(use_ssl)
       new_client.send(method, opts)
       use_ssl_state.should == use_ssl
-
-    end
-
-    it 'should set ssl_verify_peer to the current config ssl_verify_peer? value' do
-
-      ssl_verify_peer = double('ssl_peer_state')
-
-      ssl_peer_state = nil
-      new_client = client.with_http_handler{|request, response|
-        ssl_peer_state = request.ssl_verify_peer?
-      }
-      new_client.config.stub(:ssl_verify_peer?).and_return(ssl_verify_peer)
-      new_client.send(method, opts)
-      ssl_peer_state.should == ssl_verify_peer
-
-    end
-
-    it 'should set ssl_ca_file to the current config ssl_ca_file value' do
-
-      ssl_ca_file = double('ssl_ca_state')
-
-      ssl_ca_state = nil
-      new_client = client.with_http_handler{|request, response|
-        ssl_ca_state = request.ssl_ca_file
-      }
-      new_client.config.stub(:ssl_ca_file).and_return(ssl_ca_file)
-      new_client.send(method, opts)
-      ssl_ca_state.should == ssl_ca_file
 
     end
 
@@ -347,7 +319,7 @@ module AWS::Core
     end
 
     it 'it uses a randomized scaling factor for throttled requests' do
-      Kernel.stub!(:rand) { 0.5 }
+      Kernel.stub(:rand) { 0.5 }
       Kernel.should_receive(:sleep).with(0.55).with(1.1).with(2.2)
       begin
         client.with_http_handler{|req, resp|

@@ -59,7 +59,21 @@ module AWS
         klass.string_attr :foo
         klass.string_attr :bar
         obj = klass.new(:foo => 'abc', :bar => '123')
-        obj.attributes.should == { 'foo' => 'abc', 'bar' => '123' }
+        obj.attributes['foo'].should eq('abc')
+        obj.attributes['bar'].should eq('123')
+      end
+
+      it 'populates default attributes' do
+        klass.string_attr :foo, :default_value => 'default'
+        obj = klass.new
+        obj.attributes['foo'].should eq('default')
+      end
+
+      it 'populates default with blocks' do
+        defaults = [1,2]
+        klass.integer_attr :size, :default_value => lambda { defaults.shift }
+        klass.new.size.should eq(1)
+        klass.new.size.should eq(2)
       end
 
       it 'it uses value override methods' do
@@ -70,7 +84,7 @@ module AWS
           end
         end
         obj = klass.new(:foo => 'bar')
-        obj.attributes.should == { 'foo' => 'barbar' }
+        obj.attributes['foo'].should eq('barbar')
       end
 
       it 'returns a hash that provides indifferent access' do

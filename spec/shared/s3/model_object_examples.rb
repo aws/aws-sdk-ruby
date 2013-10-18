@@ -26,7 +26,7 @@ module AWS
                           :s3_server_side_encryption => nil) }
 
     let(:instance) do
-      options = args.last.is_a?(Hash) ? args.pop : {} 
+      options = args.last.is_a?(Hash) ? args.pop : {}
       options[:config] = config
       args << options
       described_class.new(*args)
@@ -50,7 +50,7 @@ module AWS
     end
 
     context '#inspect' do
-      
+
       it 'should have a short inspect method' do
         instance.inspect.length.should < 100
       end

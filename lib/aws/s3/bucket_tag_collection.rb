@@ -50,7 +50,7 @@ module AWS
 
       # @param [String] key
       # @return [String,nil] Returns the tag for the given key.  If there
-      #    Returns +nil+ if the key does not exist.
+      #    Returns `nil` if the key does not exist.
       def [] key
         self.to_h[key]
       end
@@ -74,6 +74,8 @@ module AWS
 
       # Removes all tags from the bucket.
       #
+      # @example
+      #
       #   bucket.tags.clear
       #   bucket.tags.to_h #=> {}
       #
@@ -92,14 +94,14 @@ module AWS
       alias_method :to_hash, :to_h
 
       # @param [Hash] other
-      # @return [Boolean] Returns +true+ if the tags for this bucket match
+      # @return [Boolean] Returns `true` if the tags for this bucket match
       #   the passed hash.
       def eql? other
         self.to_h == other
       end
       alias_method :==, :eql?
 
-      # @private
+      # @api private
       def inspect
         self.to_h.inspect
       end

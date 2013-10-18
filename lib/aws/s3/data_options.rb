@@ -18,7 +18,7 @@ module AWS
 
     # Used by S3#S3Object and S3::Client to accept options with
     # data that should be uploaded (streamed).
-    # @private
+    # @api private
     module DataOptions
 
       protected
@@ -71,6 +71,7 @@ module AWS
         if block_given?
           options[:data] = IOProxy.new(block)
         elsif data.is_a?(String)
+          data = data.dup if data.frozen?
           data.force_encoding("BINARY") if data.respond_to?(:force_encoding)
           options[:data] = StringIO.new(data)
         elsif data.is_a?(Pathname)
@@ -126,8 +127,8 @@ module AWS
 
       end
 
-      # @return [Boolean] Returns +true+ if the object responds to
-      #   +#read+ and +#eof?+.
+      # @return [Boolean] Returns `true` if the object responds to
+      #   `#read` and `#eof?`.
       def io_like? io
         io.respond_to?(:read) and io.respond_to?(:eof?)
       end
@@ -140,7 +141,7 @@ module AWS
 
       # A utility class that turns a block (with 2 args) into an
       # IO object that responds to #read and #eof.
-      # @private
+      # @api private
       class IOProxy
 
         def initialize write_block
@@ -153,16 +154,13 @@ module AWS
           @eof = false
         end
 
-        def read bytes = nil
-          if bytes
-            buffer = StringIO.new
-            @write_block.call(buffer, bytes)
-            buffer.rewind
-            @eof = true if buffer.size < bytes
-            buffer.size == 0 ? nil : buffer.read
+        def read bytes = nil, output_buffer = nil
+          data = if bytes
+            (@eof) ? nil : read_chunk(bytes)
           else
-            read_all
+            (@eof) ? ""  : read_all
           end
+          output_buffer ? output_buffer.replace(data || '') : data
         end
 
         def eof?
@@ -171,9 +169,17 @@ module AWS
 
         protected
 
+        def read_chunk bytes
+          buffer = StringIO.new
+          @write_block.call(buffer, bytes)
+          buffer.rewind
+          @eof = true if buffer.size < bytes
+          buffer.read
+        end
+
         def read_all
           buffer = StringIO.new
-          buffer << read(1024 * 1024 * 5) until eof?
+          buffer << read_chunk(1024 * 1024 * 5) until @eof
           buffer.rewind
           buffer.read
         end

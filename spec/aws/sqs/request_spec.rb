@@ -40,22 +40,6 @@ module AWS
 
       end
 
-      context 'queue URL parameter included' do
-
-        before(:each) do
-          request.add_param("QueueUrl", "http://foo.bar/baz")
-        end
-
-        it 'should use the host from the queue URL' do
-          request.host.should == "foo.bar"
-        end
-
-        it 'should use the path from the queue URL' do
-          request.path.should == "/baz"
-        end
-
-      end
-
     end
 
   end

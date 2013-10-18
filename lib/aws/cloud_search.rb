@@ -19,53 +19,55 @@ module AWS
   # This class is the starting point for working with Amazon CloudSearch.
   #
   # To use Amazon CloudSearch you must first
-  # {sign up here}[http://aws.amazon.com/cloudsearch/].
+  # [sign up here](http://aws.amazon.com/cloudsearch/).
   #
   # For more information about Amazon CloudSearch:
   #
-  # * {Amazon CloudSearch}[http://aws.amazon.com/cloudsearch/]
-  # * {Amazon CloudSearch Documentation}[http://aws.amazon.com/documentation/cloudsearch/]
+  # * [Amazon CloudSearch](http://aws.amazon.com/cloudsearch/)
+  # * [Amazon CloudSearch Documentation](http://aws.amazon.com/documentation/cloudsearch/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # Or you can set them directly on the AWS::Route53 interface:
+  # Or you can set them directly on the AWS::CloudSearch interface:
   #
-  #   cs = AWS::CloudSearch.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     cs = AWS::CloudSearch.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Using the Client
+  # # Using the Client
   #
   # AWS::CloudSearch does not provide higher level abstractions for CloudSearch at
   # this time.  You can still access all of the API methods using
   # {AWS::CloudSearch::Client}.  Here is how you access the client and make
   # a simple request:
   #
-  #   cs = AWS::CloudSearch.new
+  #     cs = AWS::CloudSearch.new
   #
-  #   resp = cs.client.describe_domains
-  #   resp[:domain_status_list].each do |domain|
-  #     puts domain[:domain_id]
-  #   end
+  #     resp = cs.client.describe_domains
+  #     resp[:domain_status_list].each do |domain|
+  #       puts domain[:domain_id]
+  #     end
   #
   # See {Client} for documentation on all of the supported operations.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level CloudSearch client object
   class CloudSearch
 
-    AWS.register_autoloads(self, 'aws/cloud_search') do
-      autoload :Client,                        'client'
-      autoload :Errors,                        'errors'
-      autoload :Request,                       'request'
-    end
+    autoload :Client, 'aws/cloud_search/client'
+    autoload :Errors, 'aws/cloud_search/errors'
+    autoload :Request, 'aws/cloud_search/request'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'cloudsearch'
 
   end
 

@@ -52,7 +52,7 @@ module AWS
       end
 
       context '#url_for' do
-        
+
         it 'calls #url_for on the object with a version id' do
           object.should_receive(:url_for).with(:read, :version_id => version.version_id)
           version.url_for(:read)
@@ -103,7 +103,7 @@ module AWS
       end
 
       context '#delete_marker' do
-        
+
         it 'returns true if set as such' do
           v = ObjectVersion.new(object, 'version_id', :delete_marker => true)
           v.delete_marker?.should == true

@@ -19,26 +19,26 @@ module AWS
     class ScheduledActionCollection
 
       include Core::Collection::WithLimitAndNextToken
-      
-      # @private
+
+      # @api private
       def initialize options = {}
         @filters = options[:filters] || {}
         super
       end
 
-      # Creates a scheduled scaling action for an Auto Scaling group. 
+      # Creates a scheduled scaling action for an Auto Scaling group.
       # If you leave a parameter unspecified, the corresponding attribute
       # remains unchanged in the group.
       #
       # You must specify an Auto Scaling group.  This can be implicit
       # or explicit:
       #
-      #   # given explicitly
-      #   auto_scaling.scheduled_actions.create('action-name', :group => 'group-name')
+      #     # given explicitly
+      #     auto_scaling.scheduled_actions.create('action-name', :group => 'group-name')
       #
-      #   # implied by the group
-      #   group = auto_scaling.groups.first
-      #   group.scheduled_actions.create('action-name')
+      #     # implied by the group
+      #     group = auto_scaling.groups.first
+      #     group.scheduled_actions.create('action-name')
       #
       # @param [String] name
       #
@@ -55,14 +55,14 @@ module AWS
       # @option options [String] :recurrence
       #
       # @option options [Time] :start_time
-      # 
+      #
       # @option options [Time] :end_time
       #
       # @return [ScheduledAction]
       #
       def create name, options = {}
-        
-        scheduled_action = ScheduledAction.new(name, 
+
+        scheduled_action = ScheduledAction.new(name,
           :auto_scaling_group_name => auto_scaling_group_name_opt(options),
           :config => config)
 
@@ -86,37 +86,37 @@ module AWS
       # Returns a new {ScheduledActionCollection} filtered
       # by the given options.
       #
-      #   auto_scaling.scheduled_actions.filter(:end_time => Time.now).each do |a|
-      #      # ...
-      #   end
+      #     auto_scaling.scheduled_actions.filter(:end_time => Time.now).each do |a|
+      #        # ...
+      #     end
       #
       # You can chain filter calls:
       #
-      #   actions = auto_scaling.scheduled_actions.
-      #      filter(:group => 'auto-scaling-group-name').
-      #      filter(:start_time => Time.now - 3600).
-      #      filter(:end_time => Time.now)
+      #     actions = auto_scaling.scheduled_actions.
+      #        filter(:group => 'auto-scaling-group-name').
+      #        filter(:start_time => Time.now - 3600).
+      #        filter(:end_time => Time.now)
       #
-      #   actions.each {|scheduled_action| ... }
-      # 
+      #     actions.each {|scheduled_action| ... }
+      #
       # @param [Hash] filters
       #
       # @option filters [Group,String] :group
       #
       # @option filters [Array<String>] :scheduled_actions
-      #    A list of scheduled actions to be described. If this list is 
-      #    omitted, all scheduled actions are described. The list of 
-      #    requested scheduled actions cannot contain more than 50 items. 
-      #    If an Auto Scaling group name is provided, 
-      #    the results are limited to that group. If unknown scheduled 
+      #    A list of scheduled actions to be described. If this list is
+      #    omitted, all scheduled actions are described. The list of
+      #    requested scheduled actions cannot contain more than 50 items.
+      #    If an Auto Scaling group name is provided,
+      #    the results are limited to that group. If unknown scheduled
       #    actions are requested, they are ignored with no error.
       #
       # @option options [Time,String] :start_time The earliest scheduled
-      #   start time to return. If +:scheduled_actions+ is provided, 
+      #   start time to return. If `:scheduled_actions` is provided,
       #   this field will be ignored.  Should be a Time object or
       #   an iso8601 string.
       #
-      # @option filters [Time,String] :end_time 
+      # @option filters [Time,String] :end_time
       #
       # @return [ScheduledActionCollection] Returns a scheduled action
       #   collection that will filter the actions returned by the
@@ -175,7 +175,7 @@ module AWS
 
         resp = client.describe_scheduled_actions(options.merge(@filters))
         resp.scheduled_update_group_actions.each do |details|
-          
+
           scheduled_action = ScheduledAction.new_from(
             :describe_scheduled_actions,
             details,
@@ -183,7 +183,7 @@ module AWS
             :config => config)
 
           yield(scheduled_action)
-          
+
         end
 
         resp.data[:next_token]

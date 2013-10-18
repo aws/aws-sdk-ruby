@@ -31,6 +31,32 @@ Then /^I should eventually be able to receive "([^\"]*)" from the queue$/ do |ms
   end
 end
 
+When /^I receive a message from the queue$/ do
+  eventually(10) do
+    @message = @queue.receive_message
+    raise "no message receieved" unless @message
+  end
+end
+
+When /^I use the SQS message to construct an SNS message$/ do
+  @message = AWS::SNS::Message.new(@message.body)
+end
+
+Then /^the message should be authentic$/ do
+  @message.authentic?.should be(true)
+end
+
+Then(/^the message should not be authentic$/) do
+  @message.authentic?.should be(false)
+end
+
+When(/^I tamper with the message body$/) do
+  body = @message.body
+  body = JSON.parse(body)
+  body['Message'] += '(tampered)'
+  @message.body.replace(JSON.dump(body))
+end
+
 When /^I receive a message with a (\d+)\-second visibility timeout$/ do |timeout|
   @queue.receive_message(:visibility_timeout => timeout.to_i)
 end
@@ -167,3 +193,9 @@ end
 Then /^the message should have a string sender ID$/ do
   @message.sender_id.should be_a(String)
 end
+
+Then /^I should be able to send a message using a "(.*?)" client$/ do |region|
+  @sqs = AWS::SQS.new(:sqs_endpoint => "sqs.#{region}.amazonaws.com")
+  @sqs.queues[@queue.url].send_message('HELLO')
+end
+

@@ -18,12 +18,12 @@ module AWS
     # string keys and values that are instances of {Policy}.  For
     # example:
     #
-    #  # add or replace a policy named "ReadOnly"
-    #  policy = AWS::IAM::Policy.new do |p|
-    #    # ...
-    #  end
-    #  user.policies["ReadOnly"] = policy
-    #  user.policies.has_key?("ReadOnly")  # => true
+    #     # add or replace a policy named "ReadOnly"
+    #     policy = AWS::IAM::Policy.new do |p|
+    #       # ...
+    #     end
+    #     user.policies["ReadOnly"] = policy
+    #     user.policies.has_key?("ReadOnly")  # => true
     #
     # All of the methods for this class are defined in the
     # {PolicyCollection} module.

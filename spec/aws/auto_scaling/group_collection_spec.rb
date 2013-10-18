@@ -41,7 +41,7 @@ module AWS
             :min_size => 1,
             :max_size => 2)
 
-          groups.create('name', 
+          groups.create('name',
             :launch_configuration => 'lc-name',
             :availability_zones => %w(us-east-1a),
             :min_size => 1,
@@ -65,7 +65,7 @@ module AWS
             :min_size => 1,
             :max_size => 2)
 
-          groups.create('name', 
+          groups.create('name',
             :launch_configuration => lc,
             :availability_zones => azs,
             :min_size => 1,
@@ -75,7 +75,7 @@ module AWS
 
         it 'raises an argument error if you omit :launch_configuration' do
           lambda {
-            groups.create('name', 
+            groups.create('name',
               :availability_zones => %w(us-east-1a),
               :min_size => 1,
               :max_size => 2)
@@ -84,7 +84,7 @@ module AWS
 
         it 'raises an argument error if you omit :min_size' do
           lambda {
-            groups.create('name', 
+            groups.create('name',
               :launch_configuration => 'lc-name',
               :availability_zones => %w(us-east-1a),
               :max_size => 2)
@@ -93,7 +93,7 @@ module AWS
 
         it 'raises an argument error if you omit :max_size' do
           lambda {
-            groups.create('name', 
+            groups.create('name',
               :launch_configuration => 'lc-name',
               :availability_zones => %w(us-east-1a),
               :min_size => 1)
@@ -166,6 +166,20 @@ module AWS
             :placement_group => 'abc'))
           groups.create('name', create_opts.merge(
             :placement_group => 'abc'))
+        end
+
+        it 'accepts termination policies' do
+          client.should_receive(:create_auto_scaling_group).with(hash_including(
+            :termination_policies => [
+              "Default",
+              "OldestInstance",
+            ]))
+          groups.create('name', create_opts.merge(
+            :termination_policies => [
+              "Default",
+              "OldestInstance",
+            ]))
+ 
         end
 
         it 'accepts tags' do

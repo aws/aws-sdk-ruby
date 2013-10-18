@@ -17,11 +17,11 @@ module AWS
 
       # Adds a single tag with an optional tag value.
       #
-      #   # adds a tag with the key production
-      #   resource.tag('production')
+      #     # adds a tag with the key production
+      #     resource.tag('production')
       #
-      #   # adds a tag with the optional value set to production
-      #   resource.tag('role', :value => 'webserver')
+      #     # adds a tag with the optional value set to production
+      #     resource.tag('role', :value => 'webserver')
       #
       # @param [String] key The name of the tag to add.
       # @param [Hash] options
@@ -29,7 +29,7 @@ module AWS
       # @return [Tag] The tag that was created.
       def add_tag key, options = {}
         client.create_tags({
-          :resources => [id], 
+          :resources => [id],
           :tags => [{ :key => key, :value => options[:value].to_s }],
         })
         Tag.new(self, key, options.merge(:config => config))
@@ -47,11 +47,11 @@ module AWS
       # this resource.
       #
       # @example Manipulating the tags of an EC2 instance
-      #  i = ec2.instances["i-123"]
-      #  i.tags.to_h                  # => { "foo" => "bar", ... }
-      #  i.tags.clear
-      #  i.tags.stage = "production"
-      #  i.tags.stage                 # => "production"
+      #   i = ec2.instances["i-123"]
+      #   i.tags.to_h                  # => { "foo" => "bar", ... }
+      #   i.tags.clear
+      #   i.tags.stage = "production"
+      #   i.tags.stage                 # => "production"
       #
       # @return [ResourceTagCollection] A collection of tags that
       #   belong to this resource.
@@ -60,7 +60,7 @@ module AWS
         ResourceTagCollection.new(self, :config => config)
       end
 
-      # @private
+      # @api private
       def cached_tags
         if cache = AWS.response_cache
           cache.select(describe_call_name.to_sym).each do |resp|
@@ -75,7 +75,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       def tagging_resource_type
         Core::Inflection.ruby_name(self.class.to_s).tr("_","-")
       end

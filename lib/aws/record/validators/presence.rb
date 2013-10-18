@@ -11,16 +11,14 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/validator'
-
 module AWS
   module Record
 
-    # @private
+    # @api private
     class PresenceValidator < Validator
 
       ACCEPTED_OPTIONS = [:message, :allow_nil, :allow_blank, :on, :if, :unless]
-      
+
       def validate_attribute record, attribute_name, value
 
         blank = case

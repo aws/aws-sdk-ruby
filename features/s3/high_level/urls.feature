@@ -30,6 +30,11 @@ Feature: Pre-signed URLs
     And I use a regular HTTP client to PUT "HELLO" to the URL
     Then the contents of object "foo" should eventually be "HELLO"
 
+  Scenario: Pre-signed PUT with Content-Type and Content-MD5
+    When I generate a pre-signed PUT URL for the object "foo" with content info
+    And I use a regular HTTP client to PUT "HELLO" to the URL with content info
+    Then the contents of object "foo" should eventually be "HELLO"
+
   Scenario: Pre-signed DELETE
     Given the object "foo" has the contents "HELLO"
     When I generate a pre-signed DELETE URL for the object "foo"

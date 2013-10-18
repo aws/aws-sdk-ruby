@@ -15,7 +15,7 @@ module AWS
   class IAM
     class Resource < Core::Resource
 
-      # @return [Boolean] Returns +true+ if the resource exists.
+      # @return [Boolean] Returns `true` if the resource exists.
       def exists?
         get_resource
         true
@@ -45,12 +45,12 @@ module AWS
 
       class << self
 
-        # @private
+        # @api private
         def prefix_update_attributes prefix = 'new_'
-          @update_prefix = prefix 
+          @update_prefix = prefix
         end
 
-        # @private
+        # @api private
         def update_prefix
           @update_prefix
         end

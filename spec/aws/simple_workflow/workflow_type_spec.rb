@@ -39,7 +39,7 @@ module AWS
         end
 
         context ":workflow_id" do
-          
+
           it 'autogenerates a workflow id' do
             type.start_execution.workflow_id.should =~
               /[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/
@@ -63,7 +63,7 @@ module AWS
               and_return(response)
             type.start_execution(:task_start_to_close_timeout => 1234)
           end
-          
+
           it 'converts :none into NONE' do
             client.should_receive(:start_workflow_execution).
               with(hash_including(:task_start_to_close_timeout => 'NONE')).
@@ -81,7 +81,7 @@ module AWS
               and_return(response)
             type.start_execution(:execution_start_to_close_timeout => 1234)
           end
-          
+
           it 'converts :none into NONE' do
             client.should_receive(:start_workflow_execution).
               with(hash_including(:execution_start_to_close_timeout => 'NONE')).
@@ -137,13 +137,13 @@ module AWS
         let(:deprecate_method) { :deprecate_workflow_type }
 
         context '#count_executions' do
-          
+
           it 'calls count on the workflow executions collection' do
             response = client.stub_for(:count_open_workflow_executions)
             response.data['count'] = 2
             response.data['truncated'] = true
             client.should_receive(:count_open_workflow_executions).with(
-              :start_time_filter => { :oldest_date => anything() }, 
+              :start_time_filter => { :oldest_date => anything() },
               :type_filter => { :version => "version", :name => "name" },
               :domain => "domain-name"
             ).and_return(response)

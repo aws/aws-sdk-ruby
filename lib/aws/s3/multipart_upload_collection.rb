@@ -17,14 +17,16 @@ module AWS
     # Represents the uploads in progress for a bucket.
     #
     # @example Finding uploads by prefix
-    #  bucket.multipart_uploads.with_prefix("photos/").
-    #    map { |upload| upload.object.key }
-    #  # => ["photos/1.jpg", "photos/2.jpg", ...]
+    #
+    #   bucket.multipart_uploads.with_prefix("photos/").
+    #     map { |upload| upload.object.key }
+    #   # => ["photos/1.jpg", "photos/2.jpg", ...]
     #
     # @example Browsing with a tree interface
-    #  bucket.multipart_uploads.with_prefix("photos").as_tree.
-    #    children.select(&:branch?).map(&:prefix)
-    #  # => ["photos/2010", "photos/2011", ...]
+    #
+    #   bucket.multipart_uploads.with_prefix("photos").as_tree.
+    #     children.select(&:branch?).map(&:prefix)
+    #   # => ["photos/2010", "photos/2011", ...]
     #
     # @see Tree
     class MultipartUploadCollection
@@ -37,7 +39,7 @@ module AWS
       #   place.
       attr_reader :bucket
 
-      # @private
+      # @api private
       def initialize(bucket, opts = {})
         @bucket = bucket
         super

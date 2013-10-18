@@ -15,14 +15,16 @@ module AWS
   class IAM
 
     # @attr_reader [Symbol] status The status of this access key.
-    #   Status may be +:active+ or +:inactive+.
+    #   Status may be `:active` or `:inactive`.
+    #
+    # @attr_reader [Time] create_date
     #
     class AccessKey < Resource
-      
+
       # @param [String] access_key_id The id of this access key.
       # @param [Hash] options
       # @option [String] :user The IAM user this access key belongs to.
-      #   If +:user+ is omitted then this access key belongs to the
+      #   If `:user` is omitted then this access key belongs to the
       #   AWS account.
       def initialize access_key_id, options = {}
         @id = access_key_id
@@ -32,7 +34,7 @@ module AWS
       end
 
       # @return [User,nil] Returns the user this access key belongs to.
-      #   Returns +nil+ if this access key belongs to the AWS account and not
+      #   Returns `nil` if this access key belongs to the AWS account and not
       #   a specific user.
       attr_reader :user
 
@@ -40,6 +42,9 @@ module AWS
       attr_reader :id
 
       alias_method :access_key_id, :id
+
+      # @attr_reader [Time] When the access key was created.
+      attribute :create_date, :static => true
 
       attribute :secret_value, :from => :secret_access_key, :static => true
 
@@ -59,8 +64,8 @@ module AWS
 
       # Returns the secret access key.
       #
-      # You can only access the secret for newly created access 
-      # keys.  Calling +secret+ on existing access keys raises an error.
+      # You can only access the secret for newly created access
+      # keys.  Calling `secret` on existing access keys raises an error.
       #
       # @example Getting the secret from a newly created access key
       #
@@ -74,7 +79,7 @@ module AWS
       #   access_key.secret
       #   #=> raises a runtime error
       #
-      # @return [String] Returns the secret access key.  
+      # @return [String] Returns the secret access key.
       def secret
         secret_value or raise 'secret is only available for new access keys'
       end
@@ -82,7 +87,7 @@ module AWS
       alias_method :secret_access_key, :secret
 
       # @return [String,nil] Returns the name of the user this access key
-      #   belogns to.  If the access key belongs to the account, +nil+ is
+      #   belogns to.  If the access key belongs to the account, `nil` is
       #   returned.
       def user_name
         @user ? @user.name : nil
@@ -131,24 +136,24 @@ module AWS
         nil
       end
 
-      # Returns a hash that should be saved somewhere safe.  
+      # Returns a hash that should be saved somewhere safe.
       #
-      #   access_keys = iam.access_keys.create
-      #   access_keys.credentials
-      #   #=> { :access_key_id => '...', :secret_access_key => '...' }
+      #     access_keys = iam.access_keys.create
+      #     access_keys.credentials
+      #     #=> { :access_key_id => '...', :secret_access_key => '...' }
       #
       # You can also use these credentials to make requests:
       #
-      #   s3 = AWS::S3.new(access_keys.credentials)
-      #   s3.buckets.create('newbucket')
+      #     s3 = AWS::S3.new(access_keys.credentials)
+      #     s3.buckets.create('newbucket')
       #
       # @return [Hash] Returns a hash with the access key id and
-      #   secret access key. 
+      #   secret access key.
       def credentials
         { :access_key_id => id, :secret_access_key => secret }
       end
 
-      # @private
+      # @api private
       protected
       def resource_identifiers
         identifiers = []
@@ -158,17 +163,17 @@ module AWS
       end
 
       # IAM does not provide a request for "get access keys".
-      # Also note, we do not page the response. This is because 
-      # restrictions on how many access keys an account / user may 
+      # Also note, we do not page the response. This is because
+      # restrictions on how many access keys an account / user may
       # have is fewer than one page of results.
-      # @private
+      # @api private
       protected
       def get_resource attribute
         options = user ? { :user_name => user.name } : {}
         client.list_access_keys(options)
       end
 
-      # @private
+      # @api private
       protected
       def matches_response_object? obj
         user_name = obj.respond_to?(:user_name) ? obj.user_name : nil

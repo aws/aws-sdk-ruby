@@ -30,7 +30,7 @@ module AWS
     #
     class LoginProfile < Resource
 
-      # @private
+      # @api private
       def initialize(user, opts = {})
         @user = user
         super

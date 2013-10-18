@@ -35,7 +35,7 @@ Feature: IAM Users
     | TYPE        | NAME     | VALUE                      |
     | param       | Action   | DeleteUser                 |
     | param_match | UserName | ruby-integreation-test-\d+ |
-  
+
   @get
   Scenario: Getting user details
     Given I create an IAM user

@@ -37,14 +37,16 @@ module AWS
     # @attr_reader [String,nil] user_data
     #
     # @attr_reader [Array<Hash>] block_device_mappings
-    # 
+    #
     # @attr_reader [String] iam_instance_profile
     #
     # @attr_reader [String] spot_price
     #
+    # @attr_reader [Boolean] associate_public_ip_address
+    #
     class LaunchConfiguration < Core::Resource
 
-      # @private
+      # @api private
       def initialize name, options = {}
         super(options.merge(:name => name))
       end
@@ -88,9 +90,11 @@ module AWS
         translates_output{|mappings| mappings.map(&:to_hash) }
       end
 
-      attribute :security_group_details, 
-        :from => :security_groups, 
+      attribute :security_group_details,
+        :from => :security_groups,
         :static => true
+
+      attribute :associate_public_ip_address, :static => true
 
       protected :security_group_details
 

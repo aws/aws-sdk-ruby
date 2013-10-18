@@ -14,22 +14,22 @@
 module AWS
   class S3
 
-    # Represents a collection of buckets.  
+    # Represents a collection of buckets.
     #
     # You can use this to create a bucket:
     #
-    #   s3.buckets.create(:name => "mybucket")
+    #     s3.buckets.create(:name => "mybucket")
     #
     # You can get a handle for a specific bucket with indifferent
     # access:
     #
-    #   bucket = s3.buckets[:mybucket]
-    #   bucket = s3.buckets['mybucket']
+    #     bucket = s3.buckets[:mybucket]
+    #     bucket = s3.buckets['mybucket']
     #
     # You can also use it to find out which buckets are in your account:
     #
-    #   s3.buckets.collect(&:name)
-    #   #=> ['bucket1', 'bucket2', ...]
+    #     s3.buckets.collect(&:name)
+    #     #=> ['bucket1', 'bucket2', ...]
     #
     class BucketCollection
 
@@ -43,8 +43,8 @@ module AWS
       #   against the bucket using the S3 endpoint specific to the
       #   region in which your bucket resides. For example:
       #
-      #     s3 = AWS::S3.new(:s3_endpoint => "s3-eu-west-1.amazonaws.com")
-      #     bucket = s3.buckets.create("my.eu.bucket")
+      #       s3 = AWS::S3.new(:region => "eu-west-1")
+      #       bucket = s3.buckets.create("my.eu.bucket")
       #
       #   For a full list of endpoints and regions, see
       #   {http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html
@@ -68,17 +68,17 @@ module AWS
       #   appropriate location constraint for the endpoint.  For
       #   example:
       #
-      #     s3 = AWS::S3.new(:s3_endpoint => "s3-us-west-1.amazonaws.com")
-      #     bucket = s3.buckets.create("my-us-west-bucket")
-      #     bucket.location_constraint # => "us-west-1"
+      #       s3 = AWS::S3.new(:region => "us-west-1")
+      #       bucket = s3.buckets.create("my-us-west-bucket")
+      #       bucket.location_constraint # => "us-west-1"
       #
-      # @option options [Symbol,String] :acl (:private) Sets the ACL of the 
+      # @option options [Symbol,String] :acl (:private) Sets the ACL of the
       #   bucket you are creating.  Valid Values include:
-      #   * +:private+
-      #   * +:public_read+
-      #   * +:public_read_write+
-      #   * +:authenticated_read+
-      #   * +:log_delivery_write+
+      #   * `:private`
+      #   * `:public_read`
+      #   * `:public_read_write`
+      #   * `:authenticated_read`
+      #   * `:log_delivery_write`
       #
       # @option options [String] :grant_read
       # @option options [String] :grant_write
@@ -95,10 +95,10 @@ module AWS
           options[:acl] = acl.to_s.tr('_', '-')
         end
 
-        # auto set the location constraint for the user if it is not 
-        # passed in and the endpoint is not the us-standard region.  don't 
-        # override the location constraint though, even it is wrong, 
-        unless 
+        # auto set the location constraint for the user if it is not
+        # passed in and the endpoint is not the us-standard region.  don't
+        # override the location constraint though, even it is wrong,
+        unless
           config.s3_endpoint == 's3.amazonaws.com' or
           options[:location_constraint]
         then
@@ -148,7 +148,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       private
       def bucket_named name, owner = nil
         S3::Bucket.new(name.to_s, :owner => owner, :config => config)

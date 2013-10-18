@@ -14,7 +14,7 @@
 module AWS
   class SimpleWorkflow
 
-    # @private
+    # @api private
     class Resource < Core::Resource
 
       # @return [Boolean] Returns true if the resource exists.
@@ -24,7 +24,7 @@ module AWS
         false
       end
 
-      # @private
+      # @api private
       def self.attribute name, options = {}, &block
 
         # the simple workflow attributes are all given as 'lowerCamelCase'
@@ -39,7 +39,7 @@ module AWS
 
         if options[:duration]
           super(name, options) do
-            translates_output do |v| 
+            translates_output do |v|
               v.to_s =~ /^\d+$/ ? v.to_i : v.downcase.to_sym
             end
           end
@@ -55,35 +55,35 @@ module AWS
         client.send(method, resource_options)
       end
 
-      # @private
+      # @api private
       def self.type_attributes
         @type_attributes ||= {}
       end
 
-      # @private
+      # @api private
       def self.config_attributes
         @config_attributes ||= {}
       end
 
-      # @private
+      # @api private
       def self.info_attributes
         @info_attributes ||= {}
       end
 
-      # @private
+      # @api private
       def self.type_attribute name, options = {}, &block
         options[:static] = true unless options.has_key?(:static)
         attr = attribute(name, options, &block)
         type_attributes[attr.name] = attr
       end
 
-      # @private
+      # @api private
       def self.config_attribute name, options = {}, &block
         attr = attribute(name, options.merge(:static => true), &block)
         config_attributes[attr.name] = attr
       end
 
-      # @private
+      # @api private
       def self.info_attribute name, options = {}
         attr = attribute(name, options)
         info_attributes[attr.name] = attr

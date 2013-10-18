@@ -13,31 +13,31 @@
 
 module AWS
 
-  # = Errors
+  # # Errors
   #
   # There are two basic types of errors:
   #
   # * {ClientError}
   # * {ServerError}
   #
-  # == Client Errors
+  # ## Client Errors
   #
   # Errors in the three and four hundreds are client errors ({ClientError}).
   # A client error should not be resent without changes.  The body of the
   # http response (the error #message) should give more information about
   # the nature of the problem.
   #
-  # == Server Errors
+  # ## Server Errors
   #
   # A 500 level error typically indicates the service is having an issue.
   #
   # Requests that generate service errors are automatically retried with
-  # an exponential backoff.  If the service still fails to respond with 
+  # an exponential backoff.  If the service still fails to respond with
   # a 200 after 3 retries the error is raised.
   #
   module Errors
 
-    # Base class for all errors returned by the service.  
+    # Base class for all errors returned by the service.
     class Base < StandardError
 
       # @overload new(error_message)
@@ -89,7 +89,7 @@ module AWS
 
     # Provides the ability to instantiate instances of {ServerError} and
     # {ClientError}.
-    # @private
+    # @api private
     module ExceptionMixinClassMethods
       def new(*args)
         e = Base.new(*args)
@@ -133,7 +133,7 @@ a few different ways:
 
 * Export AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY to ENV
 
-* On EC2 you can run instances with an IAM instance profile and credentials 
+* On EC2 you can run instances with an IAM instance profile and credentials
   will be auto loaded from the instance metadata service on those
   instances.
 
@@ -143,7 +143,7 @@ a few different ways:
 
 = Ruby on Rails
 
-In a Ruby on Rails application you may also specify your credentials in 
+In a Ruby on Rails application you may also specify your credentials in
 the following ways:
 
 * Via a config initializer script using any of the methods mentioned above

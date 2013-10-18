@@ -34,7 +34,7 @@ module AWS
 
       let(:data) {{
 
-        # generic 
+        # generic
         'arrayValues' => ['abc', 'xyz'],
         'complexArray' => [{ 'abc' => 'xyz' }, { 'mno' => 'jkl' }],
         'simpleKey' => 'simple-value',
@@ -82,7 +82,7 @@ module AWS
 
           event.attributes.to_h.should == {
 
-            # generic 
+            # generic
             :array_values => ['abc', 'xyz'],
             :complex_array => [{ :abc => 'xyz' }, { :mno => 'jkl' }],
             :simple_key => 'simple-value',
@@ -108,7 +108,7 @@ module AWS
       end
 
       context '#to_json' do
-        
+
         it 'returns json representation of the event' do
           JSON.parse(event.to_json).should == event_data
         end

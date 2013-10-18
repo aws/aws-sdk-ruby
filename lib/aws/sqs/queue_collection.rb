@@ -21,19 +21,23 @@ module AWS
     # by URL.
     #
     # @example Printing the URLs of all queues
+    #
     #   pp sqs.queues.map(&:url)
     #
     # @example Filtering queues by queue name prefix
+    #
     #   pp sqs.queues.with_prefix("production_").map(&:url)
     #
     # @example Accessing a queue by URL
-    #   url = "http://sqs.us-east-1.amazonaws.com/123456789012/myqueue"
+    #
+    #   url = "http://sqs.us-west-2.amazonaws.com/123456789012/myqueue"
     #   sqs.queues[url].send_message("HELLO")
+    #
     class QueueCollection
 
       include Core::Collection::Simple
 
-      # @private
+      # @api private
       def initialize(opts = {})
         @prefix = opts[:prefix]
         super
@@ -59,18 +63,18 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [Integer] :visibility_timeout (30) The number of 
-      #   seconds a message received from a queue will be invisible to 
+      # @option options [Integer] :visibility_timeout (30) The number of
+      #   seconds a message received from a queue will be invisible to
       #   others when they ask to receive messages.
       #
       # @option options [Policy] :policy A policy object or policy desription
       #   (a json string).
       #
       # @option options [Integer] :maximum_message_size (65536) The maximum
-      #   number of bytes a message can contain before Amazon SQS rejects 
+      #   number of bytes a message can contain before Amazon SQS rejects
       #   it.
       #
-      # @option options [Integer] :delay_seconds The time in seconds that 
+      # @option options [Integer] :delay_seconds The time in seconds that
       #   the delivery of all messages in the queue will be delayed.
       #   This can be overriden when sending a message to the queue.
       #
@@ -86,7 +90,7 @@ module AWS
         # in the 2011-10-01 update -- this allows us to not break existing
         # customers.
         if options[:default_visibility_timeout]
-          options[:visibility_timeout] = 
+          options[:visibility_timeout] =
             options.delete(:default_visibility_timeout)
         end
 
@@ -124,6 +128,8 @@ module AWS
       # a request to SQS to get the queue url.  If you know the url,
       # you should use {#[]} instead.
       #
+      # @example
+      #
       #   queue = AWS::SQS.new.queues.named('my-queue')
       #
       # @param (see #url_for)
@@ -135,8 +141,10 @@ module AWS
 
       # Returns the url for the given queue.
       #
-      #   sqs.queues.url_for('my-queue') 
-      #   #=> "https://sqs.us-east-1.amazonaws.com/123456789012/my-queue" 
+      # @example
+      #
+      #   sqs.queues.url_for('my-queue')
+      #   #=> "https://sqs.us-east-1.amazonaws.com/123456789012/my-queue"
       #
       # @param [String] queue_name The name of the queue you need a URL for.
       #

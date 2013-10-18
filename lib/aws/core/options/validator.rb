@@ -18,10 +18,10 @@ module AWS
       # Given a hash of validation rules, a validator validate request
       # options.  Validations support:
       #
-      # * rejecting unknown options
-      # * ensuring presence of required options
-      # * validating expected option types (e.g. hash, array, string,
-      #   integer, etc).
+      #   * rejecting unknown options
+      #   * ensuring presence of required options
+      #   * validating expected option types (e.g. hash, array, string,
+      #     integer, etc).
       #
       # After validating, a hash of request options is returned with
       # with normalized values (with converted types).

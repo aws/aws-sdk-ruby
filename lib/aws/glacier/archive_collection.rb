@@ -37,7 +37,7 @@ module AWS
 
       # Creates an archive by uploading a file to a vault.
       # @param [File,Pathname,IO,String] data The data to upload.
-      #   If +data+ is a string, this is treated as a path to a file
+      #   If `data` is a string, this is treated as a path to a file
       #   on disk.
       # @param [Hash] options
       # @option options [String] description
@@ -81,7 +81,7 @@ module AWS
         raise ArgumentError, msg
       end
 
-      # @return [Boolean] Returns +tue+ if data acts like a file.
+      # @return [Boolean] Returns `tue` if data acts like a file.
       def io_like? data
         data.respond_to?(:read) and
         data.respond_to?(:eof?) and

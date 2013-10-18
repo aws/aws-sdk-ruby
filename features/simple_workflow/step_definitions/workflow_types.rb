@@ -61,7 +61,7 @@ When /^I deprecate the workflow type$/ do
 end
 
 Then /^deprecated workflow types should include the workflow type$/ do
-  eventually do 
+  eventually do
     @domain.workflow_types.deprecated.should include(@workflow_type)
   end
 end

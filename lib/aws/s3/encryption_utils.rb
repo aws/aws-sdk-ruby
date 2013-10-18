@@ -15,27 +15,34 @@ require 'openssl'
 
 module AWS
   class S3
-    # @private
+    # @api private
     module EncryptionUtils
 
       protected
 
+      UNSAFE_MSG = "Unsafe encryption, data is longer than key length"
 
       # @param [OpenSSL::PKey::RSA, String] key Key used to encrypt.
       #
       # @param [String] data Data to be encrypted.
       #
       # @note Use check_encryption_materials before this method to check
-      #   formatting of keys
+      #   formatting of keys.
+      # @note This should not be used for data longer than the key length as
+      #   it will not be cryptographically safe.
       #
       # @return [String] Returns the data encrypted with the key given.
       def encrypt data, key
         rsa = OpenSSL::PKey::RSA
-        ## Encrypting data key
+        data_cipher_size = get_cipher_size(data.length)
+
+        # Encrypting data key
         case key
         when rsa # Asymmetric encryption
+          warn UNSAFE_MSG if key.public_key.n.num_bits < data_cipher_size
           key.public_encrypt(data)
         when String             # Symmetric encryption
+          warn UNSAFE_MSG if get_cipher_size(key.length) < data_cipher_size
           cipher = get_aes_cipher(:encrypt, :ECB, key)
           cipher.update(data) + cipher.final
         end
@@ -97,7 +104,7 @@ module AWS
       #
       # @param [String] iv IV for the cipher.
       #
-      # @return [OpenSSL::Cipher] Will return a configured +OpenSSL::Cipher+.
+      # @return [OpenSSL::Cipher] Will return a configured `OpenSSL::Cipher`.
       def get_aes_cipher mode, block_mode, key = nil, iv = nil
 
         # If no key given, default to 256 bit

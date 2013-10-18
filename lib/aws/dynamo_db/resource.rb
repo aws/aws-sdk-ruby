@@ -15,7 +15,7 @@ module AWS
   class DynamoDB
     class Resource < Core::Resource
 
-      # @private
+      # @api private
       def self.attribute name, options = {}
 
         # DynamoDB attributes are all returned in UpperCamelCase, this

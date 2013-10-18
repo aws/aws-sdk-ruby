@@ -47,3 +47,27 @@ Given /^I have a bucket with (\d+) keys$/ do |count|
     step "I write \"foo\" to the key \"#{'%04d' % n}\""
   end
 end
+
+Given(/^I monkey\-patch Net::HTTP to work with 100-continue$/) do
+  AWS.patch_net_http_100_continue!
+end
+
+Given(/^I configure S3 with a (\d+)MB http_continue_threshold and (\d+) second continue timeout$/) do |size, seconds|
+  @s3 = AWS::S3.new(
+    :http_continue_threshold => size.to_i * 1024 * 1024,
+    :http_continue_timeout => seconds.to_i)
+end
+
+When(/^I put an object that is (\d+)MB large$/) do |size|
+  @response = @s3.client.put_object({
+    :bucket_name => @bucket.name,
+    :key => 'foo',
+    :data => '.' * size.to_i * 1024 * 1024,
+  })
+end
+
+Then(/^the request headers should have "Expect" set to "100-continue"$/) do
+  @response.http_request.headers['expect'].should eq('100-continue')
+end
+
+

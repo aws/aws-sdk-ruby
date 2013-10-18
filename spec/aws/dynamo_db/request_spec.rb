@@ -16,11 +16,11 @@ require 'spec_helper'
 module AWS
   class DynamoDB
     describe Request do
-      
+
       it_should_behave_like "an authorize v4 request"
 
       context '#service' do
-        
+
         it 'should be dynamodb' do
           Request.new.service.should eq('dynamodb')
         end

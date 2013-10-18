@@ -14,10 +14,10 @@
 module AWS
   class Route53
 
-    # = Delete existing hosted zone
+    # # Delete existing hosted zone
     #
-    #   hosted_zone = AWS::Route53::HostedZone.new(hosted_zone_id)
-    #   hosted_zone.delete
+    #     hosted_zone = AWS::Route53::HostedZone.new(hosted_zone_id)
+    #     hosted_zone.delete
     #
     # @attr_reader [String] name The hosted zone name.
     #
@@ -30,7 +30,7 @@ module AWS
     #
     class HostedZone < Core::Resource
 
-      # @private
+      # @api private
       def initialize id, options = {}
         @id = id.sub(%r!^/hostedzone/!, '')
         @change_info = options[:change_info]
@@ -84,19 +84,19 @@ module AWS
         end
       end
 
-      # @return [Boolean] Returns +true+ if this hosted zone exists.
+      # @return [Boolean] Returns `true` if this hosted zone exists.
       def exists?
         get_resource.data[:hosted_zone][:id] == path
       end
 
-      # Returns resource recoed sets.
+      # Returns resource record sets.
       # @return [ResourceRecordSetCollection]
       def resource_record_sets
         ResourceRecordSetCollection.new(id, :config => config)
       end
       alias_method :rrsets, :resource_record_sets
 
-      private
+      protected
 
       def resource_identifiers
         [[:id, id], [:name, name], [:caller_reference, caller_reference]]

@@ -19,7 +19,7 @@ module AWS
     module Options
 
       # Given a hash of serialization rules, a JSONSerializer can convert
-      # a hash of request options into a JSON document.  The request options 
+      # a hash of request options into a JSON document.  The request options
       # are validated before returning JSON.
       class JSONSerializer
 

@@ -25,7 +25,7 @@ module AWS
       let(:client) { config.s3_client }
 
       let(:buckets) { BucketCollection.new(:config => config) }
- 
+
       context '#create' do
 
         it 'should call create_bucket with the bucket name' do
@@ -91,18 +91,18 @@ module AWS
           # location constraint should be EU
           config.stub(:s3_endpoint).
             and_return('s3-eu-west-1.amazonaws.com')
-          
+
           buckets.client.should_receive(:create_bucket).
             with(hash_including(:location_constraint => 'eek!'))
 
           buckets.create('name', :location_constraint => 'eek!')
-          
+
         end
 
         it 'guesses the location constraint for other endpoints' do
 
           config.stub(:s3_endpoint).and_return('s3-fake-2.amazonaws.com')
-          
+
           buckets.client.should_receive(:create_bucket).
             with(hash_including(:location_constraint => 'fake-2'))
 

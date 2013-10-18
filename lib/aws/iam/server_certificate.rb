@@ -16,7 +16,7 @@ module AWS
 
     # Respresents a server certificate.
     #
-    #   certificate = iam.server_certificates["MyCert"]
+    #     certificate = iam.server_certificates["MyCert"]
     #
     # You can use this class to get information about a certificate
     # and to delete it.
@@ -24,7 +24,7 @@ module AWS
 
       prefix_update_attributes
 
-      # @private
+      # @api private
       def initialize(name, opts={})
         opts[:name] = name
         super(opts)
@@ -117,7 +117,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       protected
       def resource_identifiers
         [[:server_certificate_name, name]]

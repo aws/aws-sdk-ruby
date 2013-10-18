@@ -14,14 +14,6 @@
 require 'uuidtools'
 require 'set'
 
-require 'aws/record/scope'
-require 'aws/record/naming'
-require 'aws/record/validations'
-require 'aws/record/dirty_tracking'
-require 'aws/record/conversion'
-require 'aws/record/errors'
-require 'aws/record/exceptions'
-
 module AWS
   module Record
     module AbstractBase
@@ -46,7 +38,7 @@ module AWS
         #
         # @param [Hash] attributes Attributes that should be bulk assigned
         #   to this record.  You can also specify the shard (i.e. domain
-        #   or table) this record should persist to via +:shard+).
+        #   or table) this record should persist to via `:shard`).
         #
         # @option attributes [String] :shard The domain/table this record
         #   should persist to.  If this is omitted, it will persist to the
@@ -80,19 +72,10 @@ module AWS
         end
         alias_method :domain, :shard # for backwards compatability
 
-        # The id for each record is auto-generated.  The default strategy
-        # generates uuid strings.
-        # @return [String] Returns the id string (uuid) for this record.  Retuns
-        #   nil if this is a new record that has not been persisted yet.
-        def id
-          @_id
-        end
-
         # @return [Hash] A hash with attribute names as hash keys (strings) and
         #   attribute values (of mixed types) as hash values.
         def attributes
           attributes = Core::IndifferentHash.new
-          attributes['id'] = id if persisted?
           self.class.attributes.keys.inject(attributes) do |hash,attr_name|
             hash.merge(attr_name => __send__(attr_name))
           end
@@ -100,7 +83,7 @@ module AWS
 
         # Acts like {#update} but does not call {#save}.
         #
-        #   record.attributes = { :name => 'abc', :age => 20 }
+        #     record.attributes = { :name => 'abc', :age => 20 }
         #
         # @param [Hash] attributes A hash of attributes to set on this record
         #   without calling save.
@@ -213,16 +196,16 @@ module AWS
         # If you define a custom setter, you use #[]= to set the value
         # on the record.
         #
-        #   class Book < AWS::Record::Model
+        #     class Book < AWS::Record::Model
         #
-        #     string_attr :name
+        #       string_attr :name
         #
-        #     # replace the default #author= method
-        #     def author= name
-        #       self['author'] = name.blank? ? 'Anonymous' : name
+        #       # replace the default #author= method
+        #       def author= name
+        #         self['author'] = name.blank? ? 'Anonymous' : name
+        #       end
+        #
         #     end
-        #
-        #   end
         #
         # @param [String,Symbol] The attribute name to set a value for
         # @param attribute_value The value to assign.
@@ -247,27 +230,27 @@ module AWS
 
         # Returns the typecasted value for the named attribute.
         #
-        #   book = Book.new(:title => 'My Book')
-        #   book['title'] #=> 'My Book'
-        #   book.title    #=> 'My Book'
+        #     book = Book.new(:title => 'My Book')
+        #     book['title'] #=> 'My Book'
+        #     book.title    #=> 'My Book'
         #
-        # === Intended Use
+        # ### Intended Use
         #
         # This method's primary use is for getting/setting the value for
         # an attribute inside a custom method:
         #
-        #   class Book < AWS::Record::Model
+        #     class Book < AWS::Record::Model
         #
-        #     string_attr :title
+        #       string_attr :title
         #
-        #     def title
-        #       self['title'] ? self['title'].upcase : nil
+        #       def title
+        #         self['title'] ? self['title'].upcase : nil
+        #       end
+        #
         #     end
         #
-        #   end
-        #
-        #   book = Book.new(:title => 'My Book')
-        #   book.title    #=> 'MY BOOK'
+        #     book = Book.new(:title => 'My Book')
+        #     book.title    #=> 'MY BOOK'
         #
         # @param [String,Symbol] attribute_name The name of the attribute to fetch
         #   a value for.
@@ -294,11 +277,6 @@ module AWS
           touch_timestamps('updated_at')
           increment_optimistic_lock_value
           update_storage
-        end
-
-        protected
-        def populate_id
-          @_id = UUIDTools::UUID.random_create.to_s
         end
 
         protected
@@ -351,12 +329,13 @@ module AWS
           # populate default attribute values
           ignore_changes do
             self.class.attributes.values.each do |attribute|
+              default = attribute.default_value
               begin
                 # copy default values down so methods like #gsub! don't
                 # modify the default values for other objects
-                @_data[attribute.name] = attribute.default_value.clone
+                @_data[attribute.name] = default.clone
               rescue TypeError
-                @_data[attribute.name] = attribute.default_value
+                @_data[attribute.name] = default
               end
             end
           end
@@ -456,14 +435,9 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         protected
         def hydrate id, data
-
-          # @todo need to do something about partial hyrdation of attributes
-
-          @_id = id
-
           # New objects are populated with default values, but we don't
           # want these values to hang around when hydrating persisted values
           # (those values may have been blanked out before save).
@@ -476,7 +450,6 @@ module AWS
           end
 
           @_persisted = true
-
         end
 
         protected
@@ -527,25 +500,25 @@ module AWS
 
         # Adds a scoped finder to this class.
         #
-        #   class Book < AWS::Record::Model
-        #     scope :top_10, order(:popularity, :desc).limit(10)
-        #   end
+        #     class Book < AWS::Record::Model
+        #       scope :top_10, order(:popularity, :desc).limit(10)
+        #     end
         #
-        #   Book.top_10.to_a
-        #   #=> [#<Book...>, #<Book...>]
+        #     Book.top_10.to_a
+        #     #=> [#<Book...>, #<Book...>]
         #
-        #   Book.top_10.first
-        #   #=> #<Book...>
+        #     Book.top_10.first
+        #     #=> #<Book...>
         #
         # You can also provide a block that accepts params for the scoped
         # finder.  This block should return a scope.
         #
-        #   class Book < AWS::Record::Model
-        #     scope :by_author, lambda {|name| where(:author => name) }
-        #   end
+        #     class Book < AWS::Record::Model
+        #       scope :by_author, lambda {|name| where(:author => name) }
+        #     end
         #
-        #   # top 10 books by the author 'John Doe'
-        #   Book.by_author('John Doe').top_10
+        #     # top 10 books by the author 'John Doe'
+        #     Book.by_author('John Doe').top_10
         #
         # @param [Symbol] name The name of the scope.  Scope names should be
         #   method-safe and should not conflict with any other class methods.
@@ -564,17 +537,17 @@ module AWS
         # The {#save} method is called on the object(s) after construction.
         # The object(s) are returned wether or not the object(s) are valid.
         #
-        #   class Book < AWS::Record::Model
-        #     string_attr :title
-        #   end
+        #     class Book < AWS::Record::Model
+        #       string_attr :title
+        #     end
         #
-        #   book = Book.create(:title => "The big book of tests")
-        #   book.persisted?
-        #   #=> true
+        #     book = Book.create(:title => "The big book of tests")
+        #     book.persisted?
+        #     #=> true
         #
-        #   books = Book.create([{:title => 'abc'}, {:title => 'xyz'}])
-        #   books.each(&:persisted?)
-        #   #=> [true, true]
+        #     books = Book.create([{:title => 'abc'}, {:title => 'xyz'}])
+        #     books.each(&:persisted?)
+        #     #=> [true, true]
         #
         def create attributes = {}
           create_impl(attributes, :create, :save)
@@ -584,23 +557,23 @@ module AWS
         # The {#save!} method is called on the object(s) after construction.
         # If the object(s) are not valid, then an error is raised.
         #
-        #   class Book < AWS::Record::Model
-        #     string_attr :title
-        #     validates_presence_of :title
-        #   end
+        #     class Book < AWS::Record::Model
+        #       string_attr :title
+        #       validates_presence_of :title
+        #     end
         #
-        #   book = Book.create!(:title => "The big book of tests")
-        #   book.persisted?
-        #   #=> true
+        #     book = Book.create!(:title => "The big book of tests")
+        #     book.persisted?
+        #     #=> true
         #
-        #   book = Book.create!()
-        #   #=> raises AWS::Record::InvalidRecordError
+        #     book = Book.create!()
+        #     #=> raises AWS::Record::InvalidRecordError
         #
         def create! attributes = {}
           create_impl(attributes, :create!, :save!)
         end
 
-        # @private
+        # @api private
         def new_scope
           self::Scope.new(self)
         end
@@ -627,7 +600,7 @@ module AWS
           @attributes ||= {}
         end
 
-        # @private
+        # @api private
         def attribute_for attribute_name, &block
           unless attribute = attributes[attribute_name.to_s]
             raise UndefinedAttributeError.new(attribute_name.to_s)
@@ -635,7 +608,7 @@ module AWS
           block_given? ? yield(attribute) : attribute
         end
 
-        # @private
+        # @api private
         def add_attribute attribute
 
           attr_name = attribute.name
@@ -657,7 +630,7 @@ module AWS
             @_data[attr_name]
           end
 
-          ## dirty tracking methods
+          # dirty tracking methods
 
           define_method("#{attr_name}_changed?") do
             attribute_changed?(attr_name)
@@ -681,6 +654,22 @@ module AWS
 
           attribute
 
+        end
+
+        # @api private
+        def remove_attribute(attribute)
+          send(:remove_method, attribute.name)
+          send(:remove_method, "#{attribute.name}=")
+          send(:remove_method, "#{attribute.name}_before_type_cast")
+          send(:remove_method, "#{attribute.name}_changed?")
+          send(:remove_method, "#{attribute.name}_change")
+          send(:remove_method, "#{attribute.name}_was")
+          send(:remove_method, "#{attribute.name}_will_change!")
+          send(:remove_method, "reset_#{attribute.name}!")
+          validators.each do |validator|
+            validator.attribute_names.delete(attribute.name)
+          end
+          attributes.delete(attribute.name)
         end
 
         private

@@ -1,0 +1,114 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:add_permission: "Calls the AddPermission API operation.\n@param [Hash] options\n
+  \ * `:topic_arn` - *required* - (String) \n  * `:label` - *required* - (String)
+  \n  * `:aws_account_id` - *required* - (Array&lt;<String>) \n  * `:action_name`
+  - *required* - (Array&lt;<String>) \n@return [Core::Response]"
+:confirm_subscription: "Calls the ConfirmSubscription API operation.\n@param [Hash]
+  options\n  * `:topic_arn` - *required* - (String) \n  * `:token` - *required* -
+  (String) \n  * `:authenticate_on_unsubscribe` - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:subscription_arn` - (String)"
+:create_platform_application: "Calls the CreatePlatformApplication API operation.\n@param
+  [Hash] options\n  * `:name` - *required* - (String) \n  * `:platform` - *required*
+  - (String) \n  * `:attributes` - *required* - (Hash&lt;<String,String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:platform_application_arn` - (String)"
+:create_platform_endpoint: "Calls the CreatePlatformEndpoint API operation.\n@param
+  [Hash] options\n  * `:platform_application_arn` - *required* - (String) \n  * `:token`
+  - *required* - (String) \n  * `:custom_user_data` - (String) \n  * `:attributes`
+  - (Hash&lt;<String,String>) \n@return [Core::Response] The `#data` method of the
+  response object returns a hash with the following structure:\n\n  * `:endpoint_arn`
+  - (String)"
+:create_topic: "Calls the CreateTopic API operation.\n@param [Hash] options\n  * `:name`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:topic_arn` - (String)"
+:delete_endpoint: "Calls the DeleteEndpoint API operation.\n@param [Hash] options\n
+  \ * `:endpoint_arn` - *required* - (String) \n@return [Core::Response]"
+:delete_platform_application: "Calls the DeletePlatformApplication API operation.\n@param
+  [Hash] options\n  * `:platform_application_arn` - *required* - (String) \n@return
+  [Core::Response]"
+:delete_topic: "Calls the DeleteTopic API operation.\n@param [Hash] options\n  * `:topic_arn`
+  - *required* - (String) \n@return [Core::Response]"
+:get_endpoint_attributes: "Calls the GetEndpointAttributes API operation.\n@param
+  [Hash] options\n  * `:endpoint_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:attributes` - (Hash<String,String>)"
+:get_platform_application_attributes: "Calls the GetPlatformApplicationAttributes
+  API operation.\n@param [Hash] options\n  * `:platform_application_arn` - *required*
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:attributes` - (Hash<String,String>)"
+:get_subscription_attributes: "Calls the GetSubscriptionAttributes API operation.\n@param
+  [Hash] options\n  * `:subscription_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:attributes` - (Hash<String,String>)"
+:get_topic_attributes: "Calls the GetTopicAttributes API operation.\n@param [Hash]
+  options\n  * `:topic_arn` - *required* - (String) \n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:attributes` - (Hash<String,String>)"
+:list_endpoints_by_platform_application: "Calls the ListEndpointsByPlatformApplication
+  API operation.\n@param [Hash] options\n  * `:platform_application_arn` - *required*
+  - (String) \n  * `:next_token` - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:endpoints` - (Array<Hash>)\n    * `:endpoint_arn` - (String)\n    * `:attributes`
+  - (Hash<String,String>)\n  * `:next_token` - (String)"
+:list_platform_applications: "Calls the ListPlatformApplications API operation.\n@param
+  [Hash] options\n  * `:next_token` - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:platform_applications` - (Array<Hash>)\n    * `:platform_application_arn` - (String)\n
+  \   * `:attributes` - (Hash<String,String>)\n  * `:next_token` - (String)"
+:list_subscriptions: "Calls the ListSubscriptions API operation.\n@param [Hash] options\n
+  \ * `:next_token` - (String) \n@return [Core::Response] The `#data` method of the
+  response object returns a hash with the following structure:\n\n  * `:subscriptions`
+  - (Array<Hash>)\n    * `:subscription_arn` - (String)\n    * `:owner` - (String)\n
+  \   * `:protocol` - (String)\n    * `:endpoint` - (String)\n    * `:topic_arn` -
+  (String)\n  * `:next_token` - (String)"
+:list_subscriptions_by_topic: "Calls the ListSubscriptionsByTopic API operation.\n@param
+  [Hash] options\n  * `:topic_arn` - *required* - (String) \n  * `:next_token` - (String)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:subscriptions` - (Array<Hash>)\n    * `:subscription_arn`
+  - (String)\n    * `:owner` - (String)\n    * `:protocol` - (String)\n    * `:endpoint`
+  - (String)\n    * `:topic_arn` - (String)\n  * `:next_token` - (String)"
+:list_topics: "Calls the ListTopics API operation.\n@param [Hash] options\n  * `:next_token`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:topics` - (Array<Hash>)\n
+  \   * `:topic_arn` - (String)\n  * `:next_token` - (String)"
+:publish: "Calls the Publish API operation.\n@param [Hash] options\n  * `:topic_arn`
+  - (String) \n  * `:target_arn` - (String) \n  * `:message` - *required* - (String)
+  \n  * `:subject` - (String) \n  * `:message_structure` - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:message_id` - (String)"
+:remove_permission: "Calls the RemovePermission API operation.\n@param [Hash] options\n
+  \ * `:topic_arn` - *required* - (String) \n  * `:label` - *required* - (String)
+  \n@return [Core::Response]"
+:set_endpoint_attributes: "Calls the SetEndpointAttributes API operation.\n@param
+  [Hash] options\n  * `:endpoint_arn` - *required* - (String) \n  * `:attributes`
+  - *required* - (Hash&lt;<String,String>) \n@return [Core::Response]"
+:set_platform_application_attributes: "Calls the SetPlatformApplicationAttributes
+  API operation.\n@param [Hash] options\n  * `:platform_application_arn` - *required*
+  - (String) \n  * `:attributes` - *required* - (Hash&lt;<String,String>) \n@return
+  [Core::Response]"
+:set_subscription_attributes: "Calls the SetSubscriptionAttributes API operation.\n@param
+  [Hash] options\n  * `:subscription_arn` - *required* - (String) \n  * `:attribute_name`
+  - *required* - (String) \n  * `:attribute_value` - (String) \n@return [Core::Response]"
+:set_topic_attributes: "Calls the SetTopicAttributes API operation.\n@param [Hash]
+  options\n  * `:topic_arn` - *required* - (String) \n  * `:attribute_name` - *required*
+  - (String) \n  * `:attribute_value` - (String) \n@return [Core::Response]"
+:subscribe: "Calls the Subscribe API operation.\n@param [Hash] options\n  * `:topic_arn`
+  - *required* - (String) \n  * `:protocol` - *required* - (String) \n  * `:endpoint`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:subscription_arn` - (String)"
+:unsubscribe: "Calls the Unsubscribe API operation.\n@param [Hash] options\n  * `:subscription_arn`
+  - *required* - (String) \n@return [Core::Response]"

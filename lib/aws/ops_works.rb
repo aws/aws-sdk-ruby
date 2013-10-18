@@ -18,13 +18,13 @@ module AWS
 
   class OpsWorks
 
-    AWS.register_autoloads(self, 'aws/ops_works') do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/ops_works/client'
+    autoload :Errors, 'aws/ops_works/errors'
+    autoload :Request, 'aws/ops_works/request'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'opsworks'
 
   end
 end

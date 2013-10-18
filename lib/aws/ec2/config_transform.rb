@@ -3,7 +3,7 @@
 module AWS
   class EC2
 
-    # @private
+    # @api private
     class ConfigTransform
 
       class << self

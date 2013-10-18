@@ -19,23 +19,27 @@ module AWS
     module XML
       module SaxHandlers
         class REXML
-  
+
           include FrameStack
           include ::REXML::StreamListener
-  
+
           def sax_parse xml
             source = ::REXML::Source.new(xml)
             ::REXML::Parsers::StreamParser.new(source, self).parse
           end
-  
+
           def tag_start name, attrs
             start_element(name, attrs)
           end
-    
+
           def tag_end name
             end_element
           end
-  
+
+          def text(chars)
+            set_text(chars)
+          end
+
         end
       end
     end

@@ -33,7 +33,7 @@ module AWS
       end
 
       context '#to_h' do
-        
+
         it 'calls get_send_quota' do
           client.should_receive(:get_send_quota)
           quotas.to_h
@@ -50,7 +50,7 @@ module AWS
       end
 
       context '#max_24_hour_send' do
-        
+
         it 'returns a value from #to_h' do
           quotas.max_24_hour_send.should == 200.0
         end
@@ -58,7 +58,7 @@ module AWS
       end
 
       context '#max_send_rate' do
-        
+
         it 'returns a value from #to_h' do
           quotas.max_send_rate.should == 1.0
         end
@@ -66,7 +66,7 @@ module AWS
       end
 
       context '#sent_last_24_hours' do
-        
+
         it 'returns a value from #to_h' do
           quotas.sent_last_24_hours.should == 10.0
         end
@@ -74,7 +74,7 @@ module AWS
       end
 
       context '#inspect' do
-        
+
         it 'returns a string with the details' do
           quotas.inspect.should match(/max_24_hour_send/)
           quotas.inspect.should match(/max_send_rate/)

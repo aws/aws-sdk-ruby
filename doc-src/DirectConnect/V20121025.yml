@@ -1,0 +1,121 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:create_connection: "Calls the CreateConnection API operation.\n@param [Hash] options\n
+  \ * `:offering_id` - *required* - (String) \n  * `:connection_name` - *required*
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:connection_id` - (String)\n
+  \ * `:connection_name` - (String)\n  * `:connection_state` - (String)\n  * `:region`
+  - (String)\n  * `:location` - (String)"
+:create_private_virtual_interface: "Calls the CreatePrivateVirtualInterface API operation.\n@param
+  [Hash] options\n  * `:connection_id` - (String) \n  * `:new_private_virtual_interface`
+  - (Hash) Detailed information of the private virtual interface to be created. Default:
+  None\n    * `:virtual_interface_name` - (String) \n    * `:vlan` - (Integer) \n
+  \   * `:asn` - (Integer) \n    * `:auth_key` - (String) \n    * `:amazon_address`
+  - (String) \n    * `:customer_address` - (String) \n    * `:virtual_gateway_id`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:virtual_interface_id` - (String)\n
+  \ * `:location` - (String)\n  * `:connection_id` - (String)\n  * `:virtual_interface_type`
+  - (String)\n  * `:virtual_interface_name` - (String)\n  * `:vlan` - (Integer)\n
+  \ * `:asn` - (Integer)\n  * `:auth_key` - (String)\n  * `:amazon_address` - (String)\n
+  \ * `:customer_address` - (String)\n  * `:virtual_interface_state` - (String)\n
+  \ * `:customer_router_config` - (String)\n  * `:virtual_gateway_id` - (String)\n
+  \ * `:route_filter_prefixes` - (Array<Hash>)\n    * `:cidr` - (String)"
+:create_public_virtual_interface: "Calls the CreatePublicVirtualInterface API operation.\n@param
+  [Hash] options\n  * `:connection_id` - (String) \n  * `:new_public_virtual_interface`
+  - (Hash) Detailed information of the public virtual interface to be created. Default:
+  None\n    * `:virtual_interface_name` - (String) \n    * `:vlan` - (Integer) \n
+  \   * `:asn` - (Integer) \n    * `:auth_key` - (String) \n    * `:amazon_address`
+  - (String) \n    * `:customer_address` - (String) \n    * `:route_filter_prefixes`
+  - (Array&lt;<Hash>) \n      * `:cidr` - (String) CIDR notation for the advertised
+  route. Multiple routes are separated by commas Example: 10.10.10.0/24,10.10.11.0/24\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:virtual_interface_id` - (String)\n  * `:location`
+  - (String)\n  * `:connection_id` - (String)\n  * `:virtual_interface_type` - (String)\n
+  \ * `:virtual_interface_name` - (String)\n  * `:vlan` - (Integer)\n  * `:asn` -
+  (Integer)\n  * `:auth_key` - (String)\n  * `:amazon_address` - (String)\n  * `:customer_address`
+  - (String)\n  * `:virtual_interface_state` - (String)\n  * `:customer_router_config`
+  - (String)\n  * `:virtual_gateway_id` - (String)\n  * `:route_filter_prefixes` -
+  (Array<Hash>)\n    * `:cidr` - (String)"
+:delete_connection: "Calls the DeleteConnection API operation.\n@param [Hash] options\n
+  \ * `:connection_id` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:connection_id` - (String)\n  * `:connection_name` - (String)\n  * `:connection_state`
+  - (String)\n  * `:region` - (String)\n  * `:location` - (String)"
+:delete_virtual_interface: "Calls the DeleteVirtualInterface API operation.\n@param
+  [Hash] options\n  * `:virtual_interface_id` - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:virtual_interface_state` - (String)"
+:describe_connection_detail: "Calls the DescribeConnectionDetail API operation.\n@param
+  [Hash] options\n  * `:connection_id` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:connection_id` - (String)\n  * `:connection_name` - (String)\n  * `:connection_state`
+  - (String)\n  * `:region` - (String)\n  * `:location` - (String)\n  * `:bandwidth`
+  - (String)\n  * `:connection_costs` - (Array<Hash>)\n    * `:name` - (String)\n
+  \   * `:unit` - (String)\n    * `:currency_code` - (String)\n    * `:amount` - (String)\n
+  \ * `:order_steps` - (Array<Hash>)\n    * `:number` - (String)\n    * `:name` -
+  (String)\n    * `:description` - (String)\n    * `:owner` - (String)\n    * `:sla`
+  - (Integer)\n    * `:step_state` - (String)"
+:describe_connections: "Calls the DescribeConnections API operation.\n@param [Hash]
+  options\n  * `:connection_id` - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:connections` - (Array<Hash>)\n    * `:connection_id` - (String)\n    * `:connection_name`
+  - (String)\n    * `:connection_state` - (String)\n    * `:region` - (String)\n    *
+  `:location` - (String)"
+:describe_offering_detail: "Calls the DescribeOfferingDetail API operation.\n@param
+  [Hash] options\n  * `:offering_id` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:offering_id` - (String)\n  * `:region` - (String)\n  * `:location` - (String)\n
+  \ * `:offering_name` - (String)\n  * `:description` - (String)\n  * `:bandwidth`
+  - (String)\n  * `:connection_costs` - (Array<Hash>)\n    * `:name` - (String)\n
+  \   * `:unit` - (String)\n    * `:currency_code` - (String)\n    * `:amount` - (String)\n
+  \ * `:order_steps` - (Array<Hash>)\n    * `:number` - (String)\n    * `:name` -
+  (String)\n    * `:description` - (String)\n    * `:owner` - (String)\n    * `:sla`
+  - (Integer)"
+:describe_offerings: |-
+  Calls the DescribeOfferings API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:offerings` - (Array<Hash>)
+      * `:offering_id` - (String)
+      * `:region` - (String)
+      * `:location` - (String)
+      * `:offering_name` - (String)
+      * `:description` - (String)
+      * `:bandwidth` - (String)
+      * `:connection_costs` - (Array<Hash>)
+        * `:name` - (String)
+        * `:unit` - (String)
+        * `:currency_code` - (String)
+        * `:amount` - (String)
+:describe_virtual_gateways: |-
+  Calls the DescribeVirtualGateways API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:virtual_gateways` - (Array<Hash>)
+      * `:virtual_gateway_id` - (String)
+      * `:virtual_gateway_state` - (String)
+:describe_virtual_interfaces: "Calls the DescribeVirtualInterfaces API operation.\n@param
+  [Hash] options\n  * `:connection_id` - (String) \n  * `:virtual_interface_id` -
+  (String) \n@return [Core::Response] The `#data` method of the response object returns
+  a hash with the following structure:\n\n  * `:virtual_interfaces` - (Array<Hash>)\n
+  \   * `:virtual_interface_id` - (String)\n    * `:location` - (String)\n    * `:connection_id`
+  - (String)\n    * `:virtual_interface_type` - (String)\n    * `:virtual_interface_name`
+  - (String)\n    * `:vlan` - (Integer)\n    * `:asn` - (Integer)\n    * `:auth_key`
+  - (String)\n    * `:amazon_address` - (String)\n    * `:customer_address` - (String)\n
+  \   * `:virtual_interface_state` - (String)\n    * `:customer_router_config` - (String)\n
+  \   * `:virtual_gateway_id` - (String)\n    * `:route_filter_prefixes` - (Array<Hash>)\n
+  \     * `:cidr` - (String)"

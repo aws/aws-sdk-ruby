@@ -21,10 +21,10 @@ module AWS
     # @attr_reader [String,nil] region_name Returns the region name
     #   of the availability zone.
     #
-    # @attr_reader [Symbol] state Returns the state of the availability 
-    #   zone, e.g. +:available+.
+    # @attr_reader [Symbol] state Returns the state of the availability
+    #   zone, e.g. `:available`.
     #
-    # @attr_reader [Array<String>] messages Returns a list of messages about the 
+    # @attr_reader [Array<String>] messages Returns a list of messages about the
     #   Availability Zone.
     #
     class AvailabilityZone < Resource
@@ -39,7 +39,7 @@ module AWS
       end
 
       # @return [String] Returns the name of the availability zone,
-      #   e.g. "us-east-1a".
+      #   e.g. "us-west-2a".
       attr_reader :name
 
       alias_method :to_s, :name

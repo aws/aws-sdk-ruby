@@ -14,24 +14,24 @@
 module AWS
   module Record
 
-    # @private
+    # @api private
     module Conversion
 
-      # @private
+      # @api private
       def to_model
         self
       end
 
-      # @private
+      # @api private
       def to_key
         persisted? ? [id] : nil
       end
 
-      # @private
+      # @api private
       def to_param
         persisted? ? to_key.join('-') : nil
       end
-      
+
     end
 
   end

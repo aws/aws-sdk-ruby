@@ -21,20 +21,17 @@ module AWS
       # and parses the actual response.
       class Request
 
+        extend Deprecations
+
         # Returns a new empty http request object.
         def initialize
-          @default_read_timeout = 60
           @http_method = 'POST'
           @use_ssl = true
           @headers = CaseInsensitiveHash.new
           @uri = '/'
           @params = []
+          @read_timeout = 60
         end
-
-        # @return [Integer] The number of seconds the service has to respond
-        #   before a timeout error is raised on the request.  Defaults to
-        #   60 seconds.
-        attr_accessor :default_read_timeout
 
         # @return [String] hostname of the request
         attr_accessor :host
@@ -59,14 +56,14 @@ module AWS
 
         # @return [String] Returns the AWS access key ID used to authorize the
         #   request.
-        # @private
+        # @api private
         attr_accessor :access_key_id
 
         # @return [Array<Param>] Returns an array of request params.  Requests
         #   that use signature version 2 add params to the request and then
         #   sign those before building the {#body}.  Normally the {#body}
         #   should be set directly with the HTTP payload.
-        # @private
+        # @api private
         attr_accessor :params
 
         # @return [String] The name of the service for Signature v4 signing.
@@ -74,49 +71,37 @@ module AWS
         #   simple_email_service and ses do not match).
         attr_accessor :service_ruby_name
 
-        # @return [nil, URI] The URI to the proxy server requests are
-        #   sent through if configured.  Returns nil if there is no proxy.
-        attr_accessor :proxy_uri
-
         # @return [Integer] The number of seconds the service has to respond
-        #   before a timeout error is raised on the request.  Defaults to
-        #   60 seconds.
+        #   before a timeout error is raised on the request.
         attr_accessor :read_timeout
 
-        # @return [Boolean] Returns +true+ if this request should be made
+        alias_method :default_read_timeout, :read_timeout
+        deprecated :default_read_timeout, :use => :read_timeout
+
+        # @return [Boolean] Returns `true` if this request should be made
         #   with SSL enabled.
         attr_accessor :use_ssl
 
         alias_method :use_ssl?, :use_ssl
 
-        # @return [Boolean] Returns +true+ if the client should verify
-        #   the peer certificate.
-        attr_accessor :ssl_verify_peer
+        # @return [Float] timeout The number of seconds to wait for a
+        #   100-continue response before sending the HTTP request body.
+        # @api private
+        attr_accessor :continue_timeout
 
-        alias_method :ssl_verify_peer?, :ssl_verify_peer
-
-        # @return [String] Returns the path to a bundle of CA certs in PEM
-        #   format; the HTTP handler should use this to verify all HTTPS
-        #   requests if {#ssl_verify_peer?} is true.
-        attr_accessor :ssl_ca_file
-
-        # @return [String] Returns the path to a directory of CA certs.
-        #   The HTTP handler should use these to verify all HTTPS
-        #   requests if {#ssl_verify_peer?} is true.
-        attr_accessor :ssl_ca_path
+        def endpoint
+          scheme = use_ssl ? 'https' : 'http'
+          port = case scheme
+          when 'https' then self.port == 443 ? '' : ":#{self.port}"
+          when 'http' then self.port == 80 ? '' : ":#{self.port}"
+          end
+          "#{scheme}://#{host}#{port}"
+        end
 
         # @return [Integer] Returns the port the request will be made over.
         #   Defaults to 443 for SSL requests and 80 for non-SSL requests.
         def port
           @port || (use_ssl? ? 443 : 80)
-        end
-
-        # Some subclasses override this method to obseve requirements
-        # set by the services (e.q. SimpleWorlfow and SQS have special
-        # long-pulling requirements and require special read timeouts).
-        # @private
-        def read_timeout
-          default_read_timeout
         end
 
         # @return [String] Returns the HTTP request path.
@@ -140,7 +125,7 @@ module AWS
         #   Add a param (object)
         #   @param [Param] param_obj
         #
-        # @private
+        # @api private
         def add_param name_or_param, value = nil
           if name_or_param.kind_of?(Param)
             @params << name_or_param
@@ -149,7 +134,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         # @return [String,nil] Returns the url encoded request params.  If there
         #   are no params, then nil is returned.
         def url_encoded_params
@@ -203,7 +188,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         class CaseInsensitiveHash < Hash
 
           def []= key, value
@@ -227,7 +212,7 @@ module AWS
         # in a form encoded body string, others as query parameters.
         # It is up to each service's Request class to determine how to
         # consume these params.
-        # @private
+        # @api private
         class Param
 
           include UriEscape

@@ -21,7 +21,7 @@ module AWS
     #
     # @attr_reader [String] vpc_id
     #
-    # @attr_reader [Boolean] default Returns true if this is the default 
+    # @attr_reader [Boolean] default Returns true if this is the default
     #   network ACL.
     #
     class NetworkACL < Resource
@@ -65,27 +65,27 @@ module AWS
         VPC.new(vpc_id, :config => config)
       end
 
-      # @return [Array<Subnet>] Returns an array of subnets ({Subnet}) 
+      # @return [Array<Subnet>] Returns an array of subnets ({Subnet})
       #   that currently use this network ACL.
       def subnets
         associations.map(&:subnet)
       end
 
-      # @return [Array<NetworkACL::Association>] Returns an array of 
+      # @return [Array<NetworkACL::Association>] Returns an array of
       #   {NetworkACL::Association} objects (association to subnets).
       def associations
         association_set.map do |assoc|
 
-          subnet = Subnet.new(assoc.subnet_id, 
-            :vpc_id => vpc_id, 
+          subnet = Subnet.new(assoc.subnet_id,
+            :vpc_id => vpc_id,
             :config => config)
 
           Association.new(assoc.network_acl_association_id, self, subnet)
-          
+
         end
       end
 
-      # @return [Array<NetworkACL::Entry>] Returns an array of 
+      # @return [Array<NetworkACL::Entry>] Returns an array of
       #   all entries for this network ACL.
       def entries
         entry_set.map do |entry_details|
@@ -97,34 +97,34 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [required,Integer] :rule_number Rule number to 
-      #   assign to the entry (e.g., 100). ACL entries are processed in 
+      # @option options [required,Integer] :rule_number Rule number to
+      #   assign to the entry (e.g., 100). ACL entries are processed in
       #   ascending order by rule number.
       #
-      # @option options [required,:allow,:deny] :action Whether to 
+      # @option options [required,:allow,:deny] :action Whether to
       #   allow or deny traffic that matches the rule.
       #
-      # @option options [required,Integer] :protocol IP protocol the rule 
-      #   applies to. You can use -1 to mean all protocols. You can see a 
-      #   list of #   supported protocol numbers here: 
+      # @option options [required,Integer] :protocol IP protocol the rule
+      #   applies to. You can use -1 to mean all protocols. You can see a
+      #   list of #   supported protocol numbers here:
       #   http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml
       #
-      # @option options [required,String] :cidr_block The CIDR range to 
+      # @option options [required,String] :cidr_block The CIDR range to
       #   allow or deny, in CIDR notation (e.g., 172.16.0.0/24).
       #
-      # @option options [Boolean] :egress (false) 
-      #   Whether this rule applies to egress traffic from the subnet (true) 
+      # @option options [Boolean] :egress (false)
+      #   Whether this rule applies to egress traffic from the subnet (true)
       #   or ingress traffic to the subnet (false).
       #
       # @option options [Range<Integer>] :port_range A numeric range
-      #   of ports. Required if specifying TCP (6) or UDP (17) for the 
+      #   of ports. Required if specifying TCP (6) or UDP (17) for the
       #   :protocol.
       #
-      # @option options [Integer] :icmp_code For the ICMP protocol, the 
-      #   ICMP code. You can use -1 to specify all ICMP codes for the given 
+      # @option options [Integer] :icmp_code For the ICMP protocol, the
+      #   ICMP code. You can use -1 to specify all ICMP codes for the given
       #   ICMP type.
       #
-      # @option options [Integer] :icmp_type For the ICMP protocol, 
+      # @option options [Integer] :icmp_type For the ICMP protocol,
       #   the ICMP type. You can use -1 to specify all ICMP types.
       #
       # @return [nil]
@@ -138,34 +138,34 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [required,Integer] :rule_number Rule number to 
-      #   assign to the entry (e.g., 100). ACL entries are processed in 
+      # @option options [required,Integer] :rule_number Rule number to
+      #   assign to the entry (e.g., 100). ACL entries are processed in
       #   ascending order by rule number.
       #
-      # @option options [required,:allow,:deny] :action Whether to 
+      # @option options [required,:allow,:deny] :action Whether to
       #   allow or deny traffic that matches the rule.
       #
-      # @option options [required,Integer] :protocol IP protocol the rule 
-      #   applies to. You can use -1 to mean all protocols. You can see a 
-      #   list of #   supported protocol numbers here: 
+      # @option options [required,Integer] :protocol IP protocol the rule
+      #   applies to. You can use -1 to mean all protocols. You can see a
+      #   list of #   supported protocol numbers here:
       #   http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml
       #
-      # @option options [required,String] :cidr_block The CIDR range to 
+      # @option options [required,String] :cidr_block The CIDR range to
       #   allow or deny, in CIDR notation (e.g., 172.16.0.0/24).
       #
-      # @option options [Boolean] :egress (false) 
-      #   Whether this rule applies to egress traffic from the subnet (true) 
+      # @option options [Boolean] :egress (false)
+      #   Whether this rule applies to egress traffic from the subnet (true)
       #   or ingress traffic to the subnet (false).
       #
       # @option options [Range<Integer>] :port_range A numeric range
-      #   of ports. Required if specifying TCP (6) or UDP (17) for the 
+      #   of ports. Required if specifying TCP (6) or UDP (17) for the
       #   :protocol.
       #
-      # @option options [Integer] :icmp_code For the ICMP protocol, the 
-      #   ICMP code. You can use -1 to specify all ICMP codes for the given 
+      # @option options [Integer] :icmp_code For the ICMP protocol, the
+      #   ICMP code. You can use -1 to specify all ICMP codes for the given
       #   ICMP type.
       #
-      # @option options [Integer] :icmp_type For the ICMP protocol, 
+      # @option options [Integer] :icmp_type For the ICMP protocol,
       #   the ICMP type. You can use -1 to specify all ICMP types.
       #
       # @return [nil]
@@ -178,12 +178,12 @@ module AWS
       # Deletes an entry from this network ACL. To delete an entry
       # you need to know its rule number and if it is an egress or ingress
       # rule.
-      # 
-      #   # delete ingress rule 10
-      #   network_acl.delete_entry :egress, 10
       #
-      #   # delete egress rules 5
-      #   network_acl.delete_entry :ingress, 5
+      #     # delete ingress rule 10
+      #     network_acl.delete_entry :egress, 10
+      #
+      #     # delete egress rules 5
+      #     network_acl.delete_entry :ingress, 5
       #
       # @param [:ingress,:egress] egress_or_ingress Specifies if you want to
       #   delete an ingress or an egress rule.
@@ -219,7 +219,7 @@ module AWS
       end
 
       protected
-      
+
       def entry_options options
 
         unless [true,false].include?(options[:egress])

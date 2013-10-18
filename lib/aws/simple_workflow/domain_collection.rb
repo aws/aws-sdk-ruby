@@ -17,34 +17,34 @@ module AWS
     # The primary interface for registering, listing and deprecating
     # domains.
     #
-    # == Creating a Domain
+    # ## Creating a Domain
     #
     # To create a domain you need to pass a unique name to #create.
     #
-    #   domain = simple_workflow.domains.create('my-domain', :none)
-    #   #=> #<AWS::SimpleWorkflow::Domain name:my-domain>
+    #     domain = simple_workflow.domains.create('my-domain', :none)
+    #     #=> #<AWS::SimpleWorkflow::Domain name:my-domain>
     #
-    # == Getting a Domain
+    # ## Getting a Domain
     #
     # Domains are indexed by their name.
     #
-    #   domain = simple_workflow.domains['my-domain']
+    #     domain = simple_workflow.domains['my-domain']
     #
-    # == Enumerating Domains
+    # ## Enumerating Domains
     #
     # You can call Enumerable methods on a domain collection to iterate
     # the domains controlled by your account.
     #
-    #   simple_workflow.domains.each {|domain| ... }
+    #     simple_workflow.domains.each {|domain| ... }
     #
     # By default only registered domains are enumerated.  If you would like
     # to enumerate deprecated (deleted) domains you need to pass the
-    # +:deprecated+ option.
+    # `:deprecated` option.
     #
-    #   # returns an array of names for all deprecated domains
-    #   simple_workflow.domains.deprecated.map(&:name)
+    #     # returns an array of names for all deprecated domains
+    #     simple_workflow.domains.deprecated.map(&:name)
     #
-    # See {AWS::Core::Collection} to see other useful methods you can 
+    # See {AWS::Core::Collection} to see other useful methods you can
     # call against a domain collection (e.g. #enum, #page, #each_batch).
     #
     class DomainCollection
@@ -53,8 +53,8 @@ module AWS
       include Core::Collection::WithLimitAndNextToken
 
       def initialize options = {}
-        
-        @registration_status = options[:registration_status] ? 
+
+        @registration_status = options[:registration_status] ?
           options[:registration_status].to_s.upcase : 'REGISTERED'
 
         @reverse_order = options.key?(:reverse_order) ?
@@ -66,23 +66,23 @@ module AWS
 
       # Registers a new domain.
       #
-      #   # register a domain named 'domain' that has no expiry on workflow
-      #   # execution history
-      #   domain = AWS::SimpleWorkflow.new.domains.register('domain', :none)
+      #     # register a domain named 'domain' that has no expiry on workflow
+      #     # execution history
+      #     domain = AWS::SimpleWorkflow.new.domains.register('domain', :none)
       #
-      # @param [String] name Name of the domain to register. The name must 
-      #   be unique.  
+      # @param [String] name Name of the domain to register. The name must
+      #   be unique.
       #
-      # @param [Integer,:none] retention_period A duration (in days) 
-      #   for which the record (including the history) of workflow 
-      #   executions in this domain should be kept by the service. 
-      #   After the retention period, the workflow execution will not be 
+      # @param [Integer,:none] retention_period A duration (in days)
+      #   for which the record (including the history) of workflow
+      #   executions in this domain should be kept by the service.
+      #   After the retention period, the workflow execution will not be
       #   available in the results of visibility calls.
       #
-      #   If you pass the symbol +:none+ then there is no expiration for
+      #   If you pass the symbol `:none` then there is no expiration for
       #   workflow execution history (effectively an infinite retention
       #   period).
-      # 
+      #
       # @param [Hash] options
       #
       # @option [String] :description (nil) Textual description of the domain.
@@ -146,7 +146,7 @@ module AWS
         options[:maximum_page_size] = limit if limit
         options[:next_page_token] = next_token if next_token
         options[:registration_status] ||= @registration_status
-        options[:reverse_order] = @reverse_order unless 
+        options[:reverse_order] = @reverse_order unless
           options.has_key?(:reverse_order)
 
         response = client.list_domains(options)
@@ -156,7 +156,7 @@ module AWS
             desc['name'], :config => config)
 
           yield(domain)
-          
+
         end
 
         response.data['nextPageToken']

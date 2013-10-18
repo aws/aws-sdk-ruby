@@ -15,7 +15,7 @@ require 'spec_helper'
 
 module AWS
   describe SNS do
-    
+
     let(:config) { stub_config }
 
     let(:client) { config.sns_client }

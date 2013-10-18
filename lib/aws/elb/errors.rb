@@ -17,7 +17,7 @@ module AWS
 
       extend Core::LazyErrorClasses
 
-      def self.error_class code 
+      def self.error_class code
         super(code.sub(/^ElasticLoadBalancing\./, ''))
       end
 

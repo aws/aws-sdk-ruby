@@ -14,12 +14,12 @@
 module AWS
   class SimpleDB
 
-    # @private
+    # @api private
     module DeleteAttributes
 
       include ExpectConditionOption
 
-      # @private
+      # @api private
       protected
       def delete_named_attributes *attribute_names
         expect_opts = attribute_names.pop if attribute_names.last.kind_of?(Hash)
@@ -34,7 +34,7 @@ module AWS
         client.delete_attributes(opts) unless attributes.empty?
       end
 
-      # @private
+      # @api private
       protected
       def delete_attribute_values(attributes)
         opts = {

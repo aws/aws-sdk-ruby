@@ -34,7 +34,7 @@ module AWS
       end
 
       context '#delivery_policy_json' do
-        
+
         it 'returns the raw json' do
           object.delivery_policy_json.should == delivery_policy_json
         end
@@ -47,7 +47,7 @@ module AWS
       end
 
       context '#delivery_policy' do
-        
+
         it 'returns nil if the policy is not present' do
           attributes.delete('DeliveryPolicy')
           object.delivery_policy.should == nil
@@ -56,9 +56,9 @@ module AWS
       end
 
       context '#effective_delivery_policy_json' do
-        
+
         it 'returns the raw json' do
-          object.effective_delivery_policy_json.should == 
+          object.effective_delivery_policy_json.should ==
             effective_delivery_policy_json
         end
 
@@ -70,18 +70,18 @@ module AWS
       end
 
       context '#effective_delivery_policy' do
-        
+
         it 'returns the parsed json' do
-          object.effective_delivery_policy.should == 
+          object.effective_delivery_policy.should ==
             JSON.parse(effective_delivery_policy_json)
         end
 
       end
 
       context '#delivery_policy=' do
-        
+
         it 'calls the set attributes client method' do
-          
+
           client.should_receive(set_method).with(
             arn_key => object.arn,
             :attribute_name => 'DeliveryPolicy',
@@ -94,7 +94,7 @@ module AWS
         it 'calls #to_json on non-string arguments' do
 
           policy = double('delivery-policy', :to_json => 'json')
-          
+
           client.should_receive(set_method).with(
             arn_key => object.arn,
             :attribute_name => 'DeliveryPolicy',
@@ -105,7 +105,7 @@ module AWS
         end
 
         it 'passes an empty string when the policy is nil' do
-          
+
           client.should_receive(set_method).with(
             arn_key => object.arn,
             :attribute_name => 'DeliveryPolicy',

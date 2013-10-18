@@ -26,7 +26,7 @@ module AWS
       it_behaves_like 'enumerable'
 
       context '#create' do
-        
+
         it 'calls create_domain with the proper domain name' do
           domains.client.should_receive(:create_domain).
             with(:domain_name => 'new-domain')
@@ -44,17 +44,17 @@ module AWS
         it 'returns an object with the proper config' do
           domains.create('new-domain').config.should == domains.config
         end
-        
+
       end
 
       context '#[]' do
-      
+
         context 'with a string' do
-          
+
           it 'returns a domain' do
             domains['foo'].should be_a(Domain)
           end
-          
+
           it 'returns a domain with the correct name' do
             domains['foo'].name.should == 'foo'
           end
@@ -64,7 +64,7 @@ module AWS
           end
 
         end
-      
+
       end
 
       context '#each' do
@@ -72,7 +72,7 @@ module AWS
         let(:response) { client.stub_for(:list_domains) }
 
         before(:each) do
-          response = domains.client.stub_for(:list_domains) 
+          response = domains.client.stub_for(:list_domains)
           response.stub(:domain_names).and_return(%w(foo bar yuck))
         end
 
@@ -81,11 +81,11 @@ module AWS
         end
 
         it 'yields up domain objects' do
-          
+
           response.data[:domain_names] = %w(foo bar yuck)
 
           domains.client.stub(:list_domains).and_return(response)
-          
+
           yielded = []
           domains.each do |domain|
             yielded << domain

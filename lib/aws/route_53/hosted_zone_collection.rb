@@ -16,21 +16,21 @@ require 'time'
 module AWS
   class Route53
 
-    # = Create new hosted zone
+    # # Create new hosted zone
     #
-    #   r53 = AWS::Route53.new
-    #   hosted_zone = r53.hosted_zones.create('example.com.')
+    #     r53 = AWS::Route53.new
+    #     hosted_zone = r53.hosted_zones.create('example.com.')
     #
-    # = Find existing hosted zone
+    # # Find existing hosted zone
     #
-    #   r53 = AWS::Route53.new
-    #   hosted_zone = r53.hosted_zones['example.com.']
+    #     r53 = AWS::Route53.new
+    #     hosted_zone = r53.hosted_zones['example.com.']
     #
     class HostedZoneCollection
 
       include Core::Collection::WithLimitAndNextToken
 
-      # @private
+      # @api private
       def initialize options = {}
         @filters = options[:filters] || {}
         super
@@ -54,7 +54,7 @@ module AWS
         end
         if options[:comment]
           options[:hosted_zone_config] ||= {}
-          options[:hosted_zone_config][:comment] = options[:comment]
+          options[:hosted_zone_config][:comment] = options.delete(:comment)
         end
 
         resp = client.create_hosted_zone(options)
@@ -83,7 +83,7 @@ module AWS
         resp.data[:hosted_zones].each do |details|
           hosted_zone = HostedZone.new_from(
             :list_hosted_zones,
-            details, 
+            details,
             details[:id],
             :config => config)
 

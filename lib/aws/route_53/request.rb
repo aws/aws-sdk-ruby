@@ -14,7 +14,7 @@
 module AWS
   class Route53
 
-    # @private
+    # @api private
     class Request < Core::Http::Request
       include Core::Signature::Version3HTTPS
     end

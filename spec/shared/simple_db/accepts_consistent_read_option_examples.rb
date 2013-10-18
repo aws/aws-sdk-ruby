@@ -12,21 +12,21 @@
 # language governing permissions and limitations under the License.
 
 module AWS
-  
+
   shared_examples_for "accepts :consistent_read option" do |block|
 
     it 'calls the client method with the passed true' do
       object.client.should_receive(client_method).
         with(hash_including(:consistent_read => true)).
         and_return(response)
-      object.send(method, { :consistent_read => true }, &block) 
+      object.send(method, { :consistent_read => true }, &block)
     end
 
     it 'calls the client method with the passed false' do
       object.client.should_receive(client_method).
         with(hash_including(:consistent_read => false)).
         and_return(response)
-      object.send(method, { :consistent_read => false }, &block) 
+      object.send(method, { :consistent_read => false }, &block)
     end
 
     it 'defaults to true when AWS.config.simple_db_consistent_reads? is true' do
@@ -34,7 +34,7 @@ module AWS
       object.client.should_receive(client_method).
         with(hash_including(:consistent_read => false)).
         and_return(response)
-      object.send(method, {}, &block) 
+      object.send(method, {}, &block)
     end
 
     it 'defaults to false when AWS.config.simple_db_consistent_reads? is false' do

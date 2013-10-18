@@ -16,13 +16,13 @@ require 'spec_helper'
 module AWS
   class SimpleEmailService
     describe Request do
-      
+
       it_should_behave_like "an authorize v4 request"
 
       it_should_behave_like "an aws query request"
 
       context '#service' do
-        
+
         it 'should be ses' do
           Request.new.service.should eq('ses')
         end

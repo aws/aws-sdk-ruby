@@ -19,16 +19,18 @@ module AWS
     # Domains, like database tables, must exist before you can write to one.
     #
     # @example Creating a domain
+    #
     #   domain = SimpleDB.new.domains.create('mydomain')
     #
     # @example Getting a domain
+    #
     #   domain = SimpleDB.new.domains['mydomain']
     #
     # @see DomainCollection
     #
     class Domain
 
-      # @private
+      # @api private
       class NonEmptyDeleteError < StandardError; end
 
       include Core::Model
@@ -102,16 +104,16 @@ module AWS
 
       # @return [Boolean] Returns true if the domains are the same.
       def == other
-        other.is_a?(Domain) and 
+        other.is_a?(Domain) and
         other.name == name and
-        other.config.simple_db_endpoint == config.simple_db_endpoint 
+        other.config.simple_db_endpoint == config.simple_db_endpoint
       end
       alias_method :eql?, :==
 
       # An irb-friendly string representation of this object.
       #
       # @return [String]
-      # @private
+      # @api private
       def inspect
         "#<#{self.class}:#{name}>"
       end

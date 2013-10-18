@@ -21,7 +21,7 @@ module AWS
       include Core::Model
       include OptionFormatters
 
-      # @private
+      # @api private
       def initialize domain, options = {}
         @domain = domain
         super
@@ -30,19 +30,19 @@ module AWS
       # @return [Domain]
       attr_reader :domain
 
-      # Returns the number of tasks in the specified +task_list+.
+      # Returns the number of tasks in the specified `task_list`.
       #
-      #   count = activity_tasks.count('task-list-name')
-      #   count.truncated? #=> false
-      #   count.to_i #=> 7
+      #     count = activity_tasks.count('task-list-name')
+      #     count.truncated? #=> false
+      #     count.to_i #=> 7
       #
-      # @note This operation is eventually consistent. The results are best 
+      # @note This operation is eventually consistent. The results are best
       #   effort and may not exactly reflect recent updates and changes.
       #
       # @param [String] task_list The name of the task list.
       #
       # @return [Count] Returns a possibly truncated count of
-      #   pending activity tasks for the given +task_list+.
+      #   pending activity tasks for the given `task_list`.
       #
       def count task_list
         options = {}
@@ -57,18 +57,18 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [String] :identity (nil) Identity of the worker 
-      #   making the request, which is recorded in the ActivityTaskStarted 
-      #   event in the workflow history. This enables diagnostic tracing 
-      #   when problems arise. The :identity defaults to the hostname and 
+      # @option options [String] :identity (nil) Identity of the worker
+      #   making the request, which is recorded in the ActivityTaskStarted
+      #   event in the workflow history. This enables diagnostic tracing
+      #   when problems arise. The :identity defaults to the hostname and
       #   pid (e.g. "hostname:pid").
       #
       # @yieldparam [ActivityTask] activity_task Yields if a task is
-      #   available within 60 seconds.  
+      #   available within 60 seconds.
       #
-      # @return [ActivityTask,nil] Returns an activity task when one is 
-      #    available, +nil+ otherwise.  If you call this function with
-      #    a block, +nil+ is always returned.
+      # @return [ActivityTask,nil] Returns an activity task when one is
+      #    available, `nil` otherwise.  If you call this function with
+      #    a block, `nil` is always returned.
       #
       def poll_for_single_task task_list, options = {}, &block
 
@@ -106,7 +106,7 @@ module AWS
       end
 
       def poll task_list, options = {}, &block
-        loop do 
+        loop do
           begin
             poll_for_single_task(task_list, options) do |activity_task|
               yield(activity_task)

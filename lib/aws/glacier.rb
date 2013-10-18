@@ -19,45 +19,47 @@ module AWS
   # This class is the starting point for working with Amazon Glacier.
   #
   # To use Amazon Glacier you must first
-  # {sign up here}[http://aws.amazon.com/glacier/].
+  # [sign up here](http://aws.amazon.com/glacier/).
   #
   # For more information about AWS Data Pipeline:
   #
-  # * {AWS Data Pipeline}[http://aws.amazon.com/glacier/]
-  # * {AWS Data Pipeline Documentation}[http://aws.amazon.com/documentation/glacier/]
+  # * [AWS Data Pipeline](http://aws.amazon.com/glacier/)
+  # * [AWS Data Pipeline Documentation](http://aws.amazon.com/documentation/glacier/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the AWS::Glacier interface:
   #
-  #   glacier = AWS::Glacier.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     glacier = AWS::Glacier.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # See {Client} for documentation on all of the supported API operations.
   #
+  # @!attribute [r] client
+  #   @return [Client] the low-level Glacier client object
   class Glacier
 
-    AWS.register_autoloads(self, 'aws/glacier') do
-      autoload :Archive, 'archive'
-      autoload :ArchiveCollection, 'archive_collection'
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Request, 'request'
-      autoload :Resource, 'resource'
-      autoload :Vault, 'vault'
-      autoload :VaultCollection, 'vault_collection'
-      autoload :VaultNotificationConfiguration, 'vault_notification_configuration'
-    end
+    autoload :Archive, 'aws/glacier/archive'
+    autoload :ArchiveCollection, 'aws/glacier/archive_collection'
+    autoload :Client, 'aws/glacier/client'
+    autoload :Errors, 'aws/glacier/errors'
+    autoload :Request, 'aws/glacier/request'
+    autoload :Resource, 'aws/glacier/resource'
+    autoload :Vault, 'aws/glacier/vault'
+    autoload :VaultCollection, 'aws/glacier/vault_collection'
+    autoload :VaultNotificationConfiguration, 'aws/glacier/vault_notification_configuration'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'glacier'
 
     # @option options[String] :account_id ('-')
     def intialize options = {}

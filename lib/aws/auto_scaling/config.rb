@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'AutoScaling', 'auto_scaling', 'autoscaling.us-east-1.amazonaws.com'
+  add_service 'AutoScaling', 'auto_scaling', 'autoscaling.%s.amazonaws.com'
 
 end

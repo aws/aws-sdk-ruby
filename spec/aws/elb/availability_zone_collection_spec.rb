@@ -91,7 +91,7 @@ module AWS
         end
 
       end
-      
+
       context '#each' do
 
         let(:response) { client.stub_for(:describe_load_balancers) }

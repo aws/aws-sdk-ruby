@@ -42,7 +42,7 @@ module AWS
 
         let(:response) { client.stub_for(:put_scaling_policy) }
 
-        before(:each) do 
+        before(:each) do
           response.data[:policy_arn] = 'arn'
           client.stub(:put_scaling_policy).and_return(response)
         end
@@ -54,18 +54,20 @@ module AWS
             :policy_name => 'name',
             :adjustment_type => 'type',
             :scaling_adjustment => 1,
+            :min_adjustment_step => 2,
             :cooldown => 10)
 
-          policies.create('name', 
+          policies.create('name',
             :adjustment_type => 'type',
             :scaling_adjustment => 1,
+            :min_adjustment_step => 2,
             :cooldown => 10)
 
         end
 
         it 'returns a scaling policy' do
-          
-          policy = policies.create('name', 
+
+          policy = policies.create('name',
             :adjustment_type => 'type',
             :scaling_adjustment => 1)
 
@@ -77,7 +79,7 @@ module AWS
         end
 
         it 'populates the policy arn' do
-          policy = policies.create('name', 
+          policy = policies.create('name',
             :adjustment_type => 'type',
             :scaling_adjustment => 1)
           policy.arn.should == 'arn'

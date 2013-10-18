@@ -1,0 +1,210 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:cancel_update_stack: |-
+  Calls the CancelUpdateStack API operation.
+  @param [Hash] options
+    * `:stack_name` - *required* - (String) The name or the unique identifier associated with the stack.
+  @return [Core::Response]
+:create_stack: "Calls the CreateStack API operation.\n@param [Hash] options\n  * `:stack_name`
+  - *required* - (String) The name associated with the stack. The name must be unique
+  within your AWS account. Must contain only alphanumeric characters (case sensitive)
+  and start with an alpha character. Maximum length of the name is 255 characters.\n
+  \ * `:template_body` - (String) Structure containing the template body. (For more
+  information, go to the AWS CloudFormation User Guide.) Conditional: You must pass
+  TemplateBody or TemplateURL. If both are passed, only TemplateBody is used.\n  *
+  `:template_url` - (String) Location of file containing the template body. The URL
+  must point to a template (max size: 307,200 bytes) located in an S3 bucket in the
+  same region as the stack. For more information, go to the AWS CloudFormation User
+  Guide. Conditional: You must pass TemplateURL or TemplateBody. If both are passed,
+  only TemplateBody is used.\n  * `:parameters` - (Array&lt;<Hash>) A list of Parameter
+  structures that specify input parameters for the stack.\n    * `:parameter_key`
+  - (String) The key associated with the parameter.\n    * `:parameter_value` - (String)
+  The value associated with the parameter.\n  * `:disable_rollback` - (Boolean) Set
+  to  `true`  to disable rollback of the stack if stack creation failed. You can specify
+  either DisableRollback or OnFailure, but not both. Default:  `false` \n  * `:timeout_in_minutes`
+  - (Integer) The amount of time that can pass before the stack status becomes CREATE_FAILED;
+  if DisableRollback is not set or is set to  `false` , the stack will be rolled back.\n
+  \ * `:notification_arns` - (Array&lt;<String>) The Simple Notification Service (SNS)
+  topic ARNs to publish stack related events. You can find your SNS topic ARNs using
+  the SNS console or your Command Line Interface (CLI).\n  * `:capabilities` - (Array&lt;<String>)
+  The list of capabilities that you want to allow in the stack. If your template contains
+  IAM resources, you must specify the CAPABILITY_IAM value for this parameter; otherwise,
+  this action returns an InsufficientCapabilities error. IAM resources are the following:
+  AWS::IAM::AccessKey, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::User, and AWS::IAM::UserToGroupAddition.\n
+  \ * `:on_failure` - (String) Determines what action will be taken if stack creation
+  fails. This must be one of: DO_NOTHING, ROLLBACK, or DELETE. You can specify either
+  OnFailure or DisableRollback, but not both. Default: ROLLBACK  Valid values include:\n
+  \   * `DO_NOTHING`\n    * `ROLLBACK`\n    * `DELETE`\n  * `:tags` - (Array&lt;<Hash>)
+  A set of user-defined Tags to associate with this stack, represented by key/value
+  pairs. Tags defined for the stack are propogated to EC2 resources that are created
+  as part of the stack. A maximum number of 10 tags can be specified.\n    * `:key`
+  - (String) Required. A string used to identify this tag. You can specify a maximum
+  of 128 characters for a tag key. Tags owned by Amazon Web Services (AWS) have the
+  reserved prefix: aws:.\n    * `:value` - (String) Required. A string containing
+  the value for this tag. You can specify a maximum of 256 characters for a tag value.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:stack_id` - (String)"
+:delete_stack: |-
+  Calls the DeleteStack API operation.
+  @param [Hash] options
+    * `:stack_name` - *required* - (String) The name or the unique identifier associated with the stack.
+  @return [Core::Response]
+:describe_stack_events: |-
+  Calls the DescribeStackEvents API operation.
+  @param [Hash] options
+    * `:stack_name` - (String) The name or the unique identifier associated with the stack. Default: There is no default value.
+    * `:next_token` - (String) String that identifies the start of the next list of events, if there is one. Default: There is no default value.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:stack_events` - (Array<Hash>)
+      * `:stack_id` - (String)
+      * `:event_id` - (String)
+      * `:stack_name` - (String)
+      * `:logical_resource_id` - (String)
+      * `:physical_resource_id` - (String)
+      * `:resource_type` - (String)
+      * `:timestamp` - (Time)
+      * `:resource_status` - (String)
+      * `:resource_status_reason` - (String)
+      * `:resource_properties` - (String)
+    * `:next_token` - (String)
+:describe_stack_resource: |-
+  Calls the DescribeStackResource API operation.
+  @param [Hash] options
+    * `:stack_name` - *required* - (String) The name or the unique identifier associated with the stack. Default: There is no default value.
+    * `:logical_resource_id` - *required* - (String) The logical name of the resource as specified in the template. Default: There is no default value.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:stack_resource_detail` - (Hash)
+      * `:stack_name` - (String)
+      * `:stack_id` - (String)
+      * `:logical_resource_id` - (String)
+      * `:physical_resource_id` - (String)
+      * `:resource_type` - (String)
+      * `:last_updated_timestamp` - (Time)
+      * `:resource_status` - (String)
+      * `:resource_status_reason` - (String)
+      * `:description` - (String)
+      * `:metadata` - (String)
+:describe_stack_resources: |-
+  Calls the DescribeStackResources API operation.
+  @param [Hash] options
+    * `:stack_name` - (String) The name or the unique identifier associated with the stack. Required: Conditional. If you do not specify StackName, you must specify PhysicalResourceId. Default: There is no default value.
+    * `:logical_resource_id` - (String) The logical name of the resource as specified in the template. Default: There is no default value.
+    * `:physical_resource_id` - (String) The name or unique identifier that corresponds to a physical instance ID of a resource supported by AWS CloudFormation. For example, for an Amazon Elastic Compute Cloud (EC2) instance, PhysicalResourceId corresponds to the InstanceId. You can pass the EC2 InstanceId to DescribeStackResources to find which stack the instance belongs to and what other resources are part of the stack. Required: Conditional. If you do not specify PhysicalResourceId, you must specify StackName. Default: There is no default value.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:stack_resources` - (Array<Hash>)
+      * `:stack_name` - (String)
+      * `:stack_id` - (String)
+      * `:logical_resource_id` - (String)
+      * `:physical_resource_id` - (String)
+      * `:resource_type` - (String)
+      * `:timestamp` - (Time)
+      * `:resource_status` - (String)
+      * `:resource_status_reason` - (String)
+      * `:description` - (String)
+:describe_stacks: "Calls the DescribeStacks API operation.\n@param [Hash] options\n
+  \ * `:stack_name` - (String) The name or the unique identifier associated with the
+  stack. Default: There is no default value.\n  * `:next_token` - (String) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:stacks` - (Array<Hash>)\n    * `:stack_id` - (String)\n
+  \   * `:stack_name` - (String)\n    * `:description` - (String)\n    * `:parameters`
+  - (Array<Hash>)\n      * `:parameter_key` - (String)\n      * `:parameter_value`
+  - (String)\n    * `:creation_time` - (Time)\n    * `:last_updated_time` - (Time)\n
+  \   * `:stack_status` - (String)\n    * `:stack_status_reason` - (String)\n    *
+  `:disable_rollback` - (Boolean)\n    * `:notification_arns` - (Array<String>)\n
+  \   * `:timeout_in_minutes` - (Integer)\n    * `:capabilities` - (Array<String>)\n
+  \   * `:outputs` - (Array<Hash>)\n      * `:output_key` - (String)\n      * `:output_value`
+  - (String)\n      * `:description` - (String)\n    * `:tags` - (Array<Hash>)\n      *
+  `:key` - (String)\n      * `:value` - (String)\n  * `:next_token` - (String)"
+:estimate_template_cost: |-
+  Calls the EstimateTemplateCost API operation.
+  @param [Hash] options
+    * `:template_body` - (String) Structure containing the template body. (For more information, go to the AWS CloudFormation User Guide.) Conditional: You must pass TemplateBody or TemplateURL. If both are passed, only TemplateBody is used.
+    * `:template_url` - (String) Location of file containing the template body. The URL must point to a template located in an S3 bucket in the same region as the stack. For more information, go to the AWS CloudFormation User Guide. Conditional: You must pass TemplateURL or TemplateBody. If both are passed, only TemplateBody is used.
+    * `:parameters` - (Array&lt;<Hash>) A list of Parameter structures that specify input parameters.
+      * `:parameter_key` - (String) The key associated with the parameter.
+      * `:parameter_value` - (String) The value associated with the parameter.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:url` - (String)
+:get_template: |-
+  Calls the GetTemplate API operation.
+  @param [Hash] options
+    * `:stack_name` - *required* - (String) The name or the unique identifier associated with the stack.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:template_body` - (String)
+:list_stack_resources: |-
+  Calls the ListStackResources API operation.
+  @param [Hash] options
+    * `:stack_name` - *required* - (String) The name or the unique identifier associated with the stack. Default: There is no default value.
+    * `:next_token` - (String) String that identifies the start of the next list of stack resource summaries, if there is one. Default: There is no default value.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:stack_resource_summaries` - (Array<Hash>)
+      * `:logical_resource_id` - (String)
+      * `:physical_resource_id` - (String)
+      * `:resource_type` - (String)
+      * `:last_updated_timestamp` - (Time)
+      * `:resource_status` - (String)
+      * `:resource_status_reason` - (String)
+    * `:next_token` - (String)
+:list_stacks: |-
+  Calls the ListStacks API operation.
+  @param [Hash] options
+    * `:next_token` - (String) String that identifies the start of the next list of stacks, if there is one. Default: There is no default value.
+    * `:stack_status_filter` - (Array&lt;<String>) Stack status to use as a filter. Specify one or more stack status codes to list only stacks with the specified status codes. For a complete list of stack status codes, see the StackStatus parameter of the Stack data type.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:stack_summaries` - (Array<Hash>)
+      * `:stack_id` - (String)
+      * `:stack_name` - (String)
+      * `:template_description` - (String)
+      * `:creation_time` - (Time)
+      * `:last_updated_time` - (Time)
+      * `:deletion_time` - (Time)
+      * `:stack_status` - (String)
+      * `:stack_status_reason` - (String)
+    * `:next_token` - (String)
+:update_stack: |-
+  Calls the UpdateStack API operation.
+  @param [Hash] options
+    * `:stack_name` - *required* - (String) The name or stack ID of the stack to update. Must contain only alphanumeric characters (case sensitive) and start with an alpha character. Maximum length of the name is 255 characters.
+    * `:template_body` - (String) Structure containing the template body. (For more information, go to the AWS CloudFormation User Guide.) Conditional: You must pass TemplateBody or TemplateURL. If both are passed, only TemplateBody is used.
+    * `:template_url` - (String) Location of file containing the template body. The URL must point to a template located in an S3 bucket in the same region as the stack. For more information, go to the AWS CloudFormation User Guide. Conditional: You must pass TemplateURL or TemplateBody. If both are passed, only TemplateBody is used.
+    * `:parameters` - (Array&lt;<Hash>) A list of Parameter structures that specify input parameters for the stack.
+      * `:parameter_key` - (String) The key associated with the parameter.
+      * `:parameter_value` - (String) The value associated with the parameter.
+    * `:capabilities` - (Array&lt;<String>) The list of capabilities that you want to allow in the stack. If your stack contains IAM resources, you must specify the CAPABILITY_IAM value for this parameter; otherwise, this action returns an InsufficientCapabilities error. IAM resources are the following: AWS::IAM::AccessKey, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::User, and AWS::IAM::UserToGroupAddition.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:stack_id` - (String)
+:validate_template: |-
+  Calls the ValidateTemplate API operation.
+  @param [Hash] options
+    * `:template_body` - (String) String containing the template body. (For more information, go to the AWS CloudFormation User Guide.) Conditional: You must pass TemplateURL or TemplateBody. If both are passed, only TemplateBody is used.
+    * `:template_url` - (String) Location of file containing the template body. The URL must point to a template (max size: 307,200 bytes) located in an S3 bucket in the same region as the stack. For more information, go to the AWS CloudFormation User Guide. Conditional: You must pass TemplateURL or TemplateBody. If both are passed, only TemplateBody is used.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:parameters` - (Array<Hash>)
+      * `:parameter_key` - (String)
+      * `:default_value` - (String)
+      * `:no_echo` - (Boolean)
+      * `:description` - (String)
+    * `:description` - (String)
+    * `:capabilities` - (Array<String>)
+    * `:capabilities_reason` - (String)

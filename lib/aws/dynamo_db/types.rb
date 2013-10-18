@@ -18,7 +18,7 @@ require 'base64'
 module AWS
   class DynamoDB
 
-    # @private
+    # @api private
     module Types
 
       def value_from_response(hash, options = {})

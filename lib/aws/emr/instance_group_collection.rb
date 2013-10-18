@@ -18,7 +18,7 @@ module AWS
       include Core::Collection::Simple
 
       # @param [JobFlow] job_flow
-      # @private
+      # @api private
       def initialize job_flow, options = {}
         @job_flow = job_flow
         super
@@ -42,7 +42,7 @@ module AWS
       # @option options [String] :market Market type of the Amazon EC2
       #   instances used to create a cluster node.
       # @option opitons [Float,String] :bid_price Bid price for each Amazon
-      #   EC2 instance in the instance group when launching nodes as 
+      #   EC2 instance in the instance group when launching nodes as
       #   spot instances, expressed in USD.
       # @return [InstanceGroup]
       def create role, instance_type, instance_count, options = {}
