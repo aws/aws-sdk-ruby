@@ -174,6 +174,9 @@ def document_svc_api_operation(svc_name, client, method_name, operation)
     end
   end
 
+  errors = (operation.errors || []).map { |shape| shape.metadata['shape_name'] }
+  errors = errors.map { |e| "@raise [Errors::#{e}]" }.join("\n")
+
   m = YARD::CodeObjects::MethodObject.new(client, method_name)
   m.scope = :instance
   m.docstring = <<-DOCSTRING.strip
@@ -183,6 +186,7 @@ def document_svc_api_operation(svc_name, client, method_name, operation)
 #{tabs}
 @param [Hash] params ({})
 @return [Seahorse::Client::Response]
+#{errors}
 DOCSTRING
 
 end
