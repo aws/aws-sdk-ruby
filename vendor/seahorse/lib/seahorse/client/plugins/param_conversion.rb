@@ -1,6 +1,10 @@
 module Seahorse
   module Client
     module Plugins
+
+      # @seahorse_client_option [Boolean] :convert_params (true)
+      #   When `true`, an attempt is made to coerce request parameters
+      #   into the required types.
       class ParamConversion < Plugin
 
         option(:convert_params, true)

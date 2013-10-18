@@ -2,6 +2,8 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'aws-sdk-core'
 
+YARD::Tags::Library.define_tag('CONFIGURATION_OPTIONS', :seahorse_client_option)
+
 YARD::Templates::Engine.register_template_path(File.join(File.dirname(__FILE__), '..', 'templates'))
 
 YARD::Parser::SourceParser.after_parse_list do
@@ -39,14 +41,13 @@ end
 
 def document_svc_helper(svc_name, apis)
   method_name = svc_name.downcase
-  desc = "Returns a new instance of {#{svc_name}}."
   m = YARD::CodeObjects::MethodObject.new(YARD::Registry['Aws'], method_name)
   m.scope = :class
+  m.parameters << ['options', '{}']
   m.docstring = <<-DOC.strip
-@overload #{method_name}(options = {})
-  #{desc}
-  @param [Hash] options ({})
-  @return [#{svc_name}] #{desc}
+Returns a new instance of {#{svc_name}}.
+@option (see Aws::#{svc_name}.new)
+@return (see Aws::#{svc_name}.new)
   DOC
 end
 
@@ -54,6 +55,46 @@ def document_svc_class(svc_name, apis)
   namespace = YARD::Registry['Aws']
   klass = YARD::CodeObjects::ClassObject.new(namespace, svc_name)
   klass.docstring = "A service constructor."
+
+  svc = Aws.const_get(svc_name)
+
+  options = {}
+
+  svc.default_client_class.plugins.each do |plugin|
+    if p = YARD::Registry[plugin.name]
+      p.tags.each do |tag|
+        if tag.tag_name == 'seahorse_client_option'
+          option_name = tag.text.match(/:\w+/)[0]
+          option_text = "@option options " + tag.text.split("\n").join("\n  ")
+          options[option_name] = option_text +
+            "  See {#{plugin.name}} for more details."
+        end
+      end
+    end
+  end
+  options = options.sort_by { |k,v| k }.map(&:last).join("\n")
+
+  docstring = <<-DOCS.strip
+Constructs a versioned client for this service.
+@option options [String<YYYY-MM-DD>] :api_version ('#{svc.latest_api_version}')
+  The API version to use for this service.  Valid values include:
+
+  * #{svc.api_versions.join("\n  * ")}
+#{options}
+@return [#{svc.default_client_class.name}] Returns a versioned client.
+  By default, this will be a client for the latest API version.  Configure
+  the `:api_version` option to affect which client class is constructed.
+  Possible versioned clients are:
+
+  * #{svc.versioned_clients.map{ |k| "{#{k.name}}" }.join("\n  * ")}
+
+  DOCS
+
+  constructor = YARD::CodeObjects::MethodObject.new(klass, :new)
+  constructor.scope = :class
+  constructor.parameters << ['options', '{}']
+  constructor.docstring = docstring
+
 end
 
 def document_svc_api(svc_name, api)

@@ -1,5 +1,18 @@
 module Aws
   module Plugins
+
+    # @seahorse_client_option [Credentials] :credentials
+    #   Your AWS account credentials.  Defaults to a new {Credentials} object.
+    #   This object attempts to load your credentials from:
+    #
+    #       ENV['AWS_ACCESS_KEY_ID']
+    #       ENV['AWS_SECRET_ACCESS_KEY']
+    #
+    #   Alternatively, you can construct a new {Credentials} object with
+    #   static values:
+    #
+    #       Aws::Credentials.new('akid', 'secret')
+    #
     class Credentials < Seahorse::Client::Plugin
 
       option(:credentials) do |config|

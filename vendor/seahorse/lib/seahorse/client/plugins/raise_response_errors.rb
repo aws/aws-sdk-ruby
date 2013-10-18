@@ -1,6 +1,9 @@
 module Seahorse
   module Client
     module Plugins
+
+      # @seahorse_client_option [Boolean] :raise_response_errors (true)
+      #   When `true`, response errors are raised.
       class RaiseResponseErrors < Plugin
 
         option(:raise_response_errors, true)

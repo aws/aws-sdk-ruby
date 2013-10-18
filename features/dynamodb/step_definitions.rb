@@ -1,5 +1,5 @@
 Given(/^I disable translation features Aws::DynamoDB$/) do
-  @dynamodb = Aws.dynamodb(simple: true)
+  @dynamodb = Aws.dynamodb(raw_json: true)
 end
 
 When(/^I call "(.*?)" on "(.*?)"$/) do |operation, service|

@@ -9,8 +9,8 @@ module Aws
       def self.sign(context)
         new(
           context.config.credentials,
-          context.config.signing_name,
-          context.config.signing_region
+          context.config.sigv4_name,
+          context.config.sigv4_region
         ).sign(context.http_request)
       end
 

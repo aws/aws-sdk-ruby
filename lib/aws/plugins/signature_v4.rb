@@ -1,13 +1,18 @@
 module Aws
   module Plugins
+
+    # @seahorse_client_option [String] :sigv4_name
+    #   Override the default service named used for signing sigv4 requests.
+    # @seahorse_client_option [String] :sigv4_region
+    #   Override the default region named used for signing sigv4 requests.
     class SignatureV4 < Seahorse::Client::Plugin
 
-      option(:signing_name) do |config|
+      option(:sigv4_name) do |config|
         config.api.metadata['signing_name'] ||
           config.endpoint.split(/[.-]/)[0]
       end
 
-      option(:signing_region) do |config|
+      option(:sigv4_region) do |config|
         config.api.endpoint.match(/%s/) ? config.region : 'us-east-1'
       end
 
