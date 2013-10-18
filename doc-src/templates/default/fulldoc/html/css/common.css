@@ -79,3 +79,8 @@ ul.tabs li.active {
 .params .api-ref {
   border: none;
 }
+
+.api-src {
+  max-height: 400px;
+  overflow: auto;
+}
