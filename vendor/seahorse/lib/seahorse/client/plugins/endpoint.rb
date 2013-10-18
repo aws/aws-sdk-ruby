@@ -6,11 +6,19 @@ module Seahorse
       #    The HTTP or HTTPS endpoint to send requests to.
       #    For example:
       #
+      #        'example.com'
       #        'http://example.com'
       #        'https://example.com'
-      #        'https://example.com:4123'
+      #        'http://example.com:123'
       #
-      #    This should include the scheme, host and optionally the port.
+      #    This must include the host.  It may also include the scheme and
+      #    port.  When the scheme is not set it defaults to `https`
+      #    or `http` based on the `:ssl_default` option.
+      #
+      # @seahorse_client_option [Boolean] :ssl_default (true)
+      #    When `true`, endpoints without a scheme are prefixed by `http://`.
+      #    When `false`, endpoints without a scheme are prefixed by `http://`.
+      #
       class Endpoint < Plugin
 
         option(:endpoint) { |config| config.api.endpoint }
