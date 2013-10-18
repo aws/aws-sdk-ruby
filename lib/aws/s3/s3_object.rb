@@ -1185,8 +1185,14 @@ module AWS
       # @option options [Boolean] :secure (true) Whether to generate a
       #   secure (HTTPS) URL or a plain HTTP url.
       #
-      # @option options [String] :content_type
-      # @option options [String] :content_md5
+      # @option options [String] :content_type Object content type for
+      #   HTTP PUT. When provided, has to be also added to the request 
+      #   header as a 'content-type' field
+      #
+      # @option options [String] :content_md5 Object MD5 hash for HTTP PUT.
+      #   When provided, has to be also added to the request header as a 
+      #   'content-md5' field
+      #
       # @option options [String] :endpoint Sets the hostname of the
       #   endpoint.
       #
