@@ -1,4 +1,7 @@
 {
+  "glacier": [
+    "Aws::Plugins::GlacierApiVersion"
+  ],
   "dynamodb": [
     "Aws::Plugins::DynamoDBExtendedRetries"
   ],

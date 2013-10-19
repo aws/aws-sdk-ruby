@@ -15,7 +15,8 @@
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
-    "Aws::Plugins::SignatureV4"
+    "Aws::Plugins::SignatureV4",
+    "Aws::Plugins::GlacierApiVersion"
   ],
   "operations": {
     "abort_multipart_upload": {
