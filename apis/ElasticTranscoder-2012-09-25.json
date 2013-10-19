@@ -26,6 +26,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -1099,6 +1100,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -1113,6 +1115,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -1127,6 +1130,7 @@
         "members": {
           "pipeline_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "ascending": {
@@ -1382,6 +1386,7 @@
         "members": {
           "status": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "ascending": {
@@ -1998,6 +2003,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -2238,6 +2244,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -2389,6 +2396,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -2918,6 +2926,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "notifications": {
@@ -3091,6 +3100,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "status": {

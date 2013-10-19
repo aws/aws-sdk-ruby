@@ -1345,6 +1345,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "if_match": {
@@ -1364,6 +1365,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "if_match": {
@@ -1383,6 +1385,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "if_match": {
@@ -1402,6 +1405,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -1455,6 +1459,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -1494,6 +1499,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -1928,6 +1934,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -2362,6 +2369,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -2554,6 +2562,7 @@
         "members": {
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -3371,6 +3380,7 @@
           },
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "if_match": {
@@ -3817,6 +3827,7 @@
           },
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "if_match": {
@@ -4376,6 +4387,7 @@
           },
           "id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "if_match": {

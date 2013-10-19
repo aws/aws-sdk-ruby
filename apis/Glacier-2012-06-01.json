@@ -27,14 +27,17 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "upload_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -49,14 +52,17 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "upload_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "archive_size": {
@@ -101,10 +107,12 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -129,14 +137,17 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "archive_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -151,10 +162,12 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -169,10 +182,12 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -187,14 +202,17 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "job_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -287,10 +305,12 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -334,14 +354,17 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "job_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "range": {
@@ -401,10 +424,12 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           }
         }
@@ -442,10 +467,12 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "job_parameters": {
@@ -506,10 +533,12 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "archive_description": {
@@ -549,10 +578,12 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "limit": {
@@ -674,10 +705,12 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "limit": {
@@ -738,14 +771,17 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "upload_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "marker": {
@@ -814,6 +850,7 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "marker": {
@@ -878,10 +915,12 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_notification_config": {
@@ -914,10 +953,12 @@
         "members": {
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "archive_description": {
@@ -967,14 +1008,17 @@
         "members": {
           "account_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "vault_name": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "upload_id": {
             "type": "string",
+            "required": true,
             "location": "uri"
           },
           "checksum": {
