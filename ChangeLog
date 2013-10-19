@@ -1,4 +1,27 @@
-2013-10-17 Trevor Rowe <trevorrowe@gmail.com>
+2013-10-18 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/core/json_parser.rb: Handle Null Values in JSON Parser
+
+  * lib/aws/s3/s3_object.rb: S3Object#url_for docummentation update
+
+2013-10-17 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/cloud_front/client.rb: Support Older CloudFront Clients
+
+  * README.md: Fix Amazon CloudFront Version in README
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.22.0
+
+  * doc-src/ElasticTranscoder/V20120925.yml,
+  lib/aws/api_config/ElasticTranscoder-2012-09-25.yml: Audio-Only Support for
+  Amazon Elastic Transcoder.
+
+  Adds support for audio-only transcoding features in Amazon Elastic
+  Transcoder.
+
+  * doc-src/CloudFront/V20130927.yml,
+  lib/aws/api_config/CloudFront-2013-09-27.yml, lib/aws/cloud_front/client.rb:
+  Amazon CloudFront API Version Bump to 2013-09-27
 
   * spec/aws/dynamo_db/client_versions_spec.rb: Fixed spec that was using 1.9+
   syntax to work with 1.8
