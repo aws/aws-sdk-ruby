@@ -1,0 +1,10 @@
+operation: list_vaults
+params:
+  :account_id: '12345'
+response:
+  status_code: 409
+  body: |
+    {"message":"Access denied for account ID: 12345","code":"AccessDeniedException","type":"Client"}
+error:
+  class: Aws::Glacier::Errors::AccessDeniedException
+  message: 'Access denied for account ID: 12345'

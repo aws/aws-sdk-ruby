@@ -12,7 +12,6 @@
   "plugins": [
     "Seahorse::Client::Plugins::RestfulBindings",
     "Seahorse::Client::Plugins::ContentLength",
-    "Seahorse::Client::Plugins::JsonSimple",
     "Aws::Plugins::RetryErrors",
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",

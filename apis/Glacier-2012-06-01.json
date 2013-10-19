@@ -9,7 +9,6 @@
   "plugins": [
     "Seahorse::Client::Plugins::RestfulBindings",
     "Seahorse::Client::Plugins::ContentLength",
-    "Seahorse::Client::Plugins::JsonSimple",
     "Aws::Plugins::RetryErrors",
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
@@ -882,11 +881,11 @@
                   "serialized_name": "VaultName"
                 },
                 "creation_date": {
-                  "type": "string",
+                  "type": "timestamp",
                   "serialized_name": "CreationDate"
                 },
                 "last_inventory_date": {
-                  "type": "string",
+                  "type": "timestamp",
                   "serialized_name": "LastInventoryDate"
                 },
                 "number_of_archives": {
