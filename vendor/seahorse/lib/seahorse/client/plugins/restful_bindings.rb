@@ -177,7 +177,7 @@ module Seahorse
                 placeholder = match[0]
                 param_value = params[param_name(placeholder)]
                 unless param_value.nil?
-                  parts << part.sub(placeholder, escape(param_value))
+                  parts << part.sub(placeholder, escape(param_value.to_s))
                 end
               else
                 parts << part # querystring param has no substitution
