@@ -40,7 +40,7 @@ module AWS
       # @return [Hash]
       def translate values, rules = @rules
         rules.inject({}) do |data,(key,rule)|
-          if values.key?(key)
+          if values.key?(key) && !values[key].nil?
             data.merge(rule[:sym] || key => translate_value(values[key], rule))
           else
             data
