@@ -102,7 +102,7 @@ def document_svc_api(svc_name, api)
   name = "V#{api.version.gsub(/-/, '')}"
   full_name = api.metadata['service_full_name']
   klass = YARD::CodeObjects::ClassObject.new(namespace, name)
-  klass.docstring = "A client for the #{full_name} #{api.version} API.{"
+  klass.docstring = "A client for the #{full_name} #{api.version} API."
   api.operations.each do |method_name, operation|
     document_svc_api_operation(svc_name, klass, method_name, operation)
   end
