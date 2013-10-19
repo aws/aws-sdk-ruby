@@ -33,6 +33,7 @@ module Seahorse
 
       # @api private
       STEPS = {
+        initialize: 300,
         validate: 200,
         build: 100,
         sign: 0,
@@ -69,6 +70,7 @@ module Seahorse
       # Handlers are ordered first by step.  These steps represent the
       # life-cycle of a request.  Valid steps are:
       #
+      # * `:initialize`
       # * `:validate`
       # * `:build`
       # * `:sign`
