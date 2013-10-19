@@ -2,14 +2,6 @@ Given(/^I disable translation features Aws::DynamoDB$/) do
   @dynamodb = Aws.dynamodb(raw_json: true)
 end
 
-When(/^I call "(.*?)" on "(.*?)"$/) do |operation, service|
-  call_request(service, operation)
-end
-
-When(/^I call "(.*?)" on "(.*?)" with the following params:$/) do |operation, service, params|
-  call_request(service, operation, eval(params))
-end
-
 Then(/^the HTTP request body should be:$/) do |string|
   expect(@response.http_request.body_contents).to eq(string)
 end
