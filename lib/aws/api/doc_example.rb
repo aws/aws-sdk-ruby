@@ -11,7 +11,7 @@ module Aws
       end
 
       def to_str
-        "resp = #{@obj_name}.#{@method_name}(#{params})"
+        "resp = #{@obj_name}.#{@method_name}(#{params[1...-1]})"
       end
       alias to_s to_str
       alias inspect to_str
@@ -29,7 +29,7 @@ module Aws
           if member_shape.required
             lines << "#{i}  # required"
           end
-          lines << "#{i}  #{member_name.inspect} => #{member(member_shape, i + '  ')},"
+          lines << "#{i}  #{member_name}: #{member(member_shape, i + '  ')},"
         end
         lines << "#{i}}"
         lines.join("\n")
