@@ -47,6 +47,7 @@ module Aws
       end
 
       def member(shape, value)
+        return nil if value.nil?
         case shape
         when StructureShape then structure(shape, value)
         when ListShape then list(shape, value)

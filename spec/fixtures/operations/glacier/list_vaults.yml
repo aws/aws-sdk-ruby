@@ -14,12 +14,11 @@ request:
 response:
   status_code: 200
   body: |
-    {"Marker":null,"VaultList":[{"CreationDate":"2012-08-29T17:05:48.575Z","LastInventoryDate":"2013-10-17T23:25:57.701Z","NumberOfArchives":19,"SizeInBytes":16261451,"VaultARN":"arn:aws:glacier:us-east-1:469596866844:vaults/aws-sdk","VaultName":"aws-sdk"}]}
+    {"Marker":null,"VaultList":[{"CreationDate":"2012-08-29T17:05:48.575Z","LastInventoryDate":null,"NumberOfArchives":19,"SizeInBytes":16261451,"VaultARN":"arn:aws:glacier:us-east-1:469596866844:vaults/aws-sdk","VaultName":"aws-sdk"}]}
 data:
   :vault_list:
     - :vault_arn: 'arn:aws:glacier:us-east-1:469596866844:vaults/aws-sdk'
       :vault_name: aws-sdk
       :creation_date: 2012-08-29 17:05:48.575 Z
-      :last_inventory_date: 2013-10-17 23:25:57.701 Z
       :number_of_archives: 19
       :size_in_bytes: 16261451
