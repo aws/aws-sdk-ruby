@@ -12,6 +12,9 @@ module Aws
               placeholder = member_shape.serialized_name
               @properties['http_path'].sub!("{#{placeholder}}", "{#{member_name}}")
               member_shape.serialized_name = nil
+              if path_param?(@properties['http_path'], member_name)
+                member_shape.required = true
+              end
             end
           end
         end
@@ -25,6 +28,10 @@ module Aws
 
       ignore :documentation_url
       ignore :alias
+
+      def path_param?(path, param_name)
+        path.split('?').first.include?("{#{param_name}}")
+      end
 
       def set_name(name)
         # strip api version from operation name
