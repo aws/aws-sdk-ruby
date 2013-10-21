@@ -552,7 +552,7 @@ module AWS
       #
       #   @option options :content_disposition [String] Specifies
       #     presentational information for the object.  See
-      #     http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec19.5.1
+      #     http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
       #
       #   @option options :content_encoding [String] Specifies what
       #     content encodings have been applied to the object and thus
