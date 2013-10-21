@@ -15,7 +15,8 @@
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
     "Aws::Plugins::SignatureV4",
-    "Aws::Plugins::GlacierApiVersion"
+    "Aws::Plugins::GlacierApiVersion",
+    "Aws::Plugins::GlacierChecksums"
   ],
   "operations": {
     "abort_multipart_upload": {

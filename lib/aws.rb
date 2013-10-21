@@ -39,6 +39,7 @@ module Aws
     autoload :Credentials, 'aws/plugins/credentials'
     autoload :DynamoDBExtendedRetries, 'aws/plugins/dynamodb_extended_retries'
     autoload :GlacierApiVersion, 'aws/plugins/glacier_api_version'
+    autoload :GlacierChecksums, 'aws/plugins/glacier_checksums'
     autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
     autoload :JsonProtocol, 'aws/plugins/json_protocol'
     autoload :JsonRpcHeaders, 'aws/plugins/json_rpc_headers'
