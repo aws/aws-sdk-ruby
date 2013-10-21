@@ -45,7 +45,7 @@ module AWS
     #     tree = bucket.as_tree(:prefix => 'photos/2011')
     #
     #     directories = tree.children.select(&:branch?).collect(&:prefix)
-    #     #=> ['photos/20011/fall', 'photos/20011/summer']
+    #     #=> ['photos/2011/fall', 'photos/2011/summer']
     #
     #     files = tree.children.select(&:leaf?).collect(&:key)
     #     #=> []
