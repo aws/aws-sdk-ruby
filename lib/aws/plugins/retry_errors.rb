@@ -99,7 +99,7 @@ module Aws
 
         def retry_request(context, error)
           delay_retry(context)
-          context.increment_retries!
+          context.retries += 1
           context.config.credentials.refresh! if error.expired_credentials?
           context.http_request.body.rewind
           context.http_response.body.truncate(0)

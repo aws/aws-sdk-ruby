@@ -51,8 +51,8 @@ module Seahorse
 
         it 'can be incremented' do
           context = RequestContext.new
-          context.increment_retries!
-          context.increment_retries!
+          context.retries += 1
+          context.retries += 1
           expect(context.retries).to eq(2)
         end
 

@@ -36,7 +36,7 @@ module Seahorse
       attr_accessor :http_response
 
       # @return [Integer]
-      attr_reader :retries
+      attr_accessor :retries
 
       # Returns the metadata for the given `key`.
       # @param [Symbol] key
@@ -57,10 +57,6 @@ module Seahorse
       # @return [Model::Operation]
       def operation
         @operation ||= config.api.operations[operation_name]
-      end
-
-      def increment_retries!
-        @retries += 1
       end
 
     end
