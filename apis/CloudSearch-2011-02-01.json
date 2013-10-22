@@ -6,6 +6,7 @@
     "service_class_name": "CloudSearch"
   },
   "plugins": [
+    "Seahorse::Client::Plugins::Logging",
     "Seahorse::Client::Plugins::RestfulBindings",
     "Seahorse::Client::Plugins::ContentLength",
     "Aws::Plugins::RetryErrors",

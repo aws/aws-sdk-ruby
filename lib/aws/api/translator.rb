@@ -94,6 +94,7 @@ module Aws
 
       def set_type(type)
         plugins = @properties['plugins'] ||= []
+        plugins << 'Seahorse::Client::Plugins::Logging'
         plugins << 'Seahorse::Client::Plugins::RestfulBindings'
         plugins << 'Seahorse::Client::Plugins::ContentLength'
         plugins << 'Aws::Plugins::RetryErrors'
