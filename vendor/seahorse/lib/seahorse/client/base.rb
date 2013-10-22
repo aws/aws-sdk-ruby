@@ -90,6 +90,7 @@ module Seahorse
         RequestContext.new(
           operation_name: operation_name.to_s,
           operation: operation(operation_name),
+          client: self,
           params: params,
           config: config)
       end

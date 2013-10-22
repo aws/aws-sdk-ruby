@@ -64,7 +64,7 @@ def document_svc_class(svc_name, apis)
     if p = YARD::Registry[plugin.name]
       p.tags.each do |tag|
         if tag.tag_name == 'seahorse_client_option'
-          option_name = tag.text.match(/:\w+/)[0]
+          option_name = tag.text.match(/.+(:\w+)/)[1]
           option_text = "@option options " + tag.text.split("\n").join("\n  ")
           options[option_name] = option_text +
             "  See {#{plugin.name}} for more details."

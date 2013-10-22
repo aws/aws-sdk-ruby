@@ -31,13 +31,13 @@ module Seahorse
       # @note This plugin is still a work-in-progress
       #
       # @seahorse_client_option [Logger] :logger (nil)
-      #    The logging device to send log messages to.
+      #   The logging device to send log messages to.
       #
       # @seahorse_client_option [Symbol] :log_level (:info)
-      #    The log level to send messages at.
+      #   The log level to send messages at.
       #
       # @seahorse_client_option [Logging::LogFormatter] :log_formatter
-      #    The log formatter.  Defaults to {Logging::LogFormatter.default}.
+      #   The log formatter.  Defaults to {Logging::LogFormatter.default}.
       #
       class Logging < Plugin
 

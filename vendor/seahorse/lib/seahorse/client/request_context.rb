@@ -14,6 +14,7 @@ module Seahorse
       def initialize(options = {})
         @operation_name = options[:operation_name]
         @operation = options[:operation]
+        @client = options[:client]
         @params = options[:params] || {}
         @config = options[:config]
         @http_request = options[:http_request] || Http::Request.new
@@ -27,6 +28,9 @@ module Seahorse
 
       # @return [Model::Operation]
       attr_accessor :operation
+
+      # @return [Seahorse::Client::Base]
+      attr_accessor :client
 
       # @return [Hash] The hash of request parameters.
       attr_accessor :params
