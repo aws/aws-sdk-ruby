@@ -278,8 +278,8 @@ module AWS
           end
           network_interface[:associate_public_ip_address] = true
           network_interface[:device_index] = 0
-          options.delete(:associate_public_ip_address)
         end
+        options.delete(:associate_public_ip_address)
 
         options[:network_interfaces] = [network_interface] unless network_interface.empty?
 
