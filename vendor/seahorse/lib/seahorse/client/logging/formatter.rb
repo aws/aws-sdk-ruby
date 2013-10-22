@@ -8,7 +8,7 @@ module Seahorse
       # a log message as a string..  When you construct a {Formatter}, you provide
       # a pattern string with substitutions.
       #
-      #     pattern = ':operation :http_response_status_code :total_time'
+      #     pattern = ':operation :http_response_status_code :time'
       #     formatter = Seahorse::Logging::Formatter.new(pattern)
       #     formatter.format(response)
       #     #=> 'get_bucket 200 0.0352'
@@ -34,17 +34,9 @@ module Seahorse
       #     strings are truncated/summarized if they exceed the
       #     {#max_string_size}.  Other objects are inspected.
       #
-      #   * `:total_time` - The total time in seconds spent on the
+      #   * `:time` - The total time in seconds spent on the
       #     request.  This includes client side time spent building
       #     the request and parsing the response.
-      #
-      #   * `:http_time` - The time in seconds spent waiting on the network.
-      #     This starts once data is given to the send handler and stops
-      #     once the complete response has been received.
-      #
-      #   * `:client_time` - The time spent in the client preparing the
-      #     request and processing the response.  This is the difference
-      #     of `:total_time` and `:http_time`.
       #
       #   * `:retries` - The number of times a client request was retried.
       #
@@ -135,7 +127,7 @@ module Seahorse
           summarize_hash(response.context.params)
         end
 
-        def _total_time(response)
+        def _time(response)
           time = response.context[:completed_at] - response.context[:started_at]
           ("%.06f" % time).sub(/0+$/, '')
         end
@@ -276,7 +268,7 @@ module Seahorse
             pattern = []
             pattern << "[:client_class"
             pattern << ":http_response_status_code"
-            pattern << ":total_time"
+            pattern << ":time"
             pattern << ":retries retries]"
             pattern << ":operation(:request_params)"
             pattern << ":error_class"
@@ -297,7 +289,7 @@ module Seahorse
             pattern = []
             pattern << "[:client_class"
             pattern << ":http_response_status_code"
-            pattern << ":total_time]"
+            pattern << ":time]"
             pattern << ":operation"
             pattern << ":error_class"
             Formatter.new(pattern.join(' ') + "\n")
@@ -318,7 +310,7 @@ module Seahorse
             pattern = []
             pattern << "#{bold}#{color}[:client_class"
             pattern << ":http_response_status_code"
-            pattern << ":total_time"
+            pattern << ":time"
             pattern << ":retries retries]#{reset}#{bold}"
             pattern << ":operation(:request_params)"
             pattern << ":error_class"
