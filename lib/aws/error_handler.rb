@@ -31,6 +31,7 @@ module Aws
     def error_code(response)
       error_code = response.http_response.status_code
       {
+        302 => 'MovedTemporarily',
         304 => 'NotModified',
         400 => 'BadRequest',
         403 => 'Forbidden',
