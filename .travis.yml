@@ -10,7 +10,7 @@ env:
   global:
   - CI=1
   - SUITE=1
-  - AWS_INTEGRATION=1
+  - secure: sKkuGQLZ/lPPpHstCQvDCbcNk445gevqM7Gk2bbOtKHSCLtXdvtPNl3MjD3OMvFVZ1XvP6E2zIbUe0dgGUx7AI/ijSZVZNeIp6NUe0ST1cocD/W64e5JD/4c8dqwRLseu23ivRbWz0EIh+3CxY13llMgZwcUXmxDbVTHh20+i1k=
   - secure: Vqre9i0USNoFqR3amMy+pxJ3kbekrqaIife2TIclAmR7jicsDkmJl3TsKmos4dZf2Oa7RImY5ZndlWRGmkRy38Aczw2aixepC3xc8zqm+cydygYYFQg8vp0wJMFs112+4UAm8KaxpC2BBXi19ykaB2MmTje8UdOS9+64uTzW4WY=
   - secure: cyh30Y3q/ZH+sbgVQtfbHtdHEU/d0VMmogL1mloX+1x2sE7LiYKomtKYRlRbK6JEGl4QXoO3keqV2sz5ig2S/QPHXcffayIL3rD5MPIDSn2knNKTeWoaVDwl1ypjx0j/J6ZZlElaUEdK5iL15MYwdh46gnIl+N397m/Dizbpxw0=
   - secure: XT33es7svSuR4U46sRQzJsmd0MBdnLvxHUfzadmo70PpZOkgPUjZEq/PC0m/mhpiNTY4a3bj1PeUTAwbqXUM+Dlm/DnmiIMt2DUv1RK4efQ3H2JJv7xJXNSdJ1DQMdjSOCBOBX//wtacS4ljyUtPHAl93vesMcrPo9a3k9Mdlxw=
