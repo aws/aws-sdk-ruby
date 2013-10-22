@@ -5,7 +5,12 @@ module Seahorse
     module Plugins
       describe Endpoint do
         let(:client_class) do
-          client_class = Client::Base.define api: { 'endpoint' => 'foo.com' }
+          client_class = Client::Base.define api: {
+            'endpoint' => 'foo.com',
+            'operations' => {
+              'operation' => {},
+            }
+          }
           client_class.clear_plugins
           client_class.add_plugin(DummySendPlugin)
           client_class

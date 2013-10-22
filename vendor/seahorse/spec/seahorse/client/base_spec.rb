@@ -5,7 +5,12 @@ module Seahorse
   module Client
     describe Base do
 
-      let(:api) {{ 'endpoint' => 'http://endpoint:123' }}
+      let(:api) {{ 
+        'endpoint' => 'http://endpoint:123',
+        'operations' => {
+          'operation' => {},
+        }
+      }}
 
       let(:client_class) { Base.define(api: api) }
 
@@ -88,8 +93,8 @@ module Seahorse
         end
 
         it 'populates the request context operation name' do
-          request = client.build_request('operation_name')
-          expect(request.context.operation_name).to eq('operation_name')
+          request = client.build_request('operation')
+          expect(request.context.operation_name).to eq('operation')
         end
 
         it 'stringifies the operation name' do
@@ -111,6 +116,12 @@ module Seahorse
         it 'populates the request context configuration' do
           request = client.build_request('operation')
           expect(request.context.config).to be(client.config)
+        end
+
+        it 'raises an error for unknown operations' do
+          expect {
+            client.build_request('foo')
+          }.to raise_error("unknown operation `foo'")
         end
 
       end

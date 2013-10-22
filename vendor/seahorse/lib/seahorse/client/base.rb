@@ -81,8 +81,11 @@ module Seahorse
 
       # @return [RequestContext]
       def context_for(operation_name, params)
+        operation = config.api.operations[operation_name] ||
+          raise("unknown operation `#{operation_name}'")
         RequestContext.new(
           operation_name: operation_name.to_s,
+          operation: operation,
           params: params,
           config: config)
       end

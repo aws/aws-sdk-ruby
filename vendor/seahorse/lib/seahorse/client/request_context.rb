@@ -12,6 +12,7 @@ module Seahorse
       #   and #rewind.
       def initialize(options = {})
         @operation_name = options[:operation_name]
+        @operation = options[:operation]
         @params = options[:params] || {}
         @config = options[:config]
         @http_request = options[:http_request] || Http::Request.new
