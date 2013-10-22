@@ -2,16 +2,13 @@ module Seahorse
   module Client
     module Plugins
 
-      # Adds a logging handler to the client handler stack.
+      # Enables logging for all requests.  This plugin allows you to configure
+      # your logging device, the log format and the level to log messages at.
       #
       # ## Configuration Options
       #
       # This plugin adds three configuration options:
       #
-      # * `:logger` (nil) The logging device.  This should be an instance
-      #   of Ruby's `Logger` or any object that implements the same interface.
-      #   When `:logger` is not configured, this plugin will not insert
-      #   a hanlder into the stack.
       #
       # * `:log_level` (`:info`) The level to write messages at.  This should
       #   be the symbolized method name of the log level (e.g., `:info`,
@@ -23,21 +20,15 @@ module Seahorse
       #   {Client::Logging::Formatter} for a complete list and for information
       #   on creating a custom log formatter.
       #
-      # ## Priority
+      # @seahorse_client_option [Logger] :logger (nil) The Logger instance
+      #   to send log messages to.  If this option is not set, logging
+      #   will be disabled.
       #
-      # The log handler is inserted `:before_validate`.  This allows the handler
-      # to record the total time spent making the request.
+      # @seahorse_client_option [Symbol] :log_level (:info) The log level
+      #   to send messages to the logger at.
       #
-      # @note This plugin is still a work-in-progress
-      #
-      # @seahorse_client_option [Logger] :logger (nil)
-      #   The logging device to send log messages to.
-      #
-      # @seahorse_client_option [Symbol] :log_level (:info)
-      #   The log level to send messages at.
-      #
-      # @seahorse_client_option [Logging::LogFormatter] :log_formatter
-      #   The log formatter.  Defaults to {Logging::LogFormatter.default}.
+      # @seahorse_client_option [Logging::LogFormatter] :log_formatter The log
+      #   formatter.  Defaults to {Seahorse::Client::Logging::Formatter.default}.
       #
       class Logging < Plugin
 
