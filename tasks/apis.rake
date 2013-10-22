@@ -34,6 +34,7 @@ task :apis do
     target = "apis/#{class_name}-#{api.version}.json"
     File.open(target, 'w') do |file|
       file.write(MultiJson.dump(api.to_hash, pretty: true))
+      file.write("\n")
     end
 
   end
