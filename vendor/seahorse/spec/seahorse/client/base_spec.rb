@@ -5,10 +5,10 @@ module Seahorse
   module Client
     describe Base do
 
-      let(:api) {{ 
+      let(:api) {{
         'endpoint' => 'http://endpoint:123',
         'operations' => {
-          'operation' => {},
+          'operation_name' => {},
         }
       }}
 
@@ -75,7 +75,7 @@ module Seahorse
 
       describe '#build_request' do
 
-        let(:request) { client.build_request('operation') }
+        let(:request) { client.build_request('operation_name') }
 
         it 'returns a Request' do
           expect(request).to be_kind_of(Request)
@@ -87,34 +87,34 @@ module Seahorse
 
         it 'includes operation specific handlers in the handler list' do
           handler = double('handler')
-          client.handler(handler, operations: ['operation'])
-          request = client.build_request('operation')
+          client.handler(handler, operations: ['operation_name'])
+          request = client.build_request('operation_name')
           expect(request.handlers.to_a).to include(handler)
         end
 
         it 'populates the request context operation name' do
-          request = client.build_request('operation')
-          expect(request.context.operation_name).to eq('operation')
+          request = client.build_request('operation_name')
+          expect(request.context.operation_name).to eq('operation_name')
         end
 
         it 'stringifies the operation name' do
-          request = client.build_request(:operation)
-          expect(request.context.operation_name).to eq('operation')
+          request = client.build_request(:operation_name)
+          expect(request.context.operation_name).to eq('operation_name')
         end
 
         it 'populates the request context params' do
           params = double('params')
-          request = client.build_request('operation', params)
+          request = client.build_request('operation_name', params)
           expect(request.context.params).to be(params)
         end
 
         it 'defaults params to an empty hash' do
-          request = client.build_request('operation')
+          request = client.build_request('operation_name')
           expect(request.context.params).to eq({})
         end
 
         it 'populates the request context configuration' do
-          request = client.build_request('operation')
+          request = client.build_request('operation_name')
           expect(request.context.config).to be(client.config)
         end
 

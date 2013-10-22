@@ -43,6 +43,12 @@ module Seahorse
           context_for(operation_name, params))
       end
 
+      # @param [String] name
+      # @return [Model::Operation]
+      def operation(name)
+        config.api.operations[name] || raise("unknown operation `#{name}'")
+      end
+
       # @api private
       def inspect
         "#<#{self.class.name}>"
@@ -81,11 +87,9 @@ module Seahorse
 
       # @return [RequestContext]
       def context_for(operation_name, params)
-        operation = config.api.operations[operation_name] ||
-          raise("unknown operation `#{operation_name}'")
         RequestContext.new(
           operation_name: operation_name.to_s,
-          operation: operation,
+          operation: operation(operation_name),
           params: params,
           config: config)
       end
