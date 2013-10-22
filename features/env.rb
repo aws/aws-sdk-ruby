@@ -11,7 +11,13 @@ if File.exist?(cfg)
 elsif ENV['AWS_INTEGRATION']
   # run integration tests, just don't read a configuration file from disk
 else
-  msg = "skipping integration tests - export AWS_INTEGRATION or create #{cfg}"
-  puts "*** #{msg} ***"
+  msg = <<-MSG
+
+*** skipping integration tests ***
+  To enable integration tests, create a #{cfg} file or export AWS_INTEGRATION=1
+  Please note, running integration tests requires AWS account credentials.
+
+  MSG
+  puts msg
   exit(0)
 end
