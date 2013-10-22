@@ -31,11 +31,11 @@ When(/^I call "(.*?)" on "(.*?)"$/) do |operation, service|
   call_request(service, operation)
 end
 
-When(/^I call "(.*?)" on "(.*?)" with the following params:$/) do |operation, service, params|
+When(/^I call "(.*?)" on "(.*?)" with:$/) do |operation, service, params|
   call_request(service, operation, eval(params))
 end
 
-Then(/^the response data should include a "(.*?)"$/) do |member_name|
+Then(/^the response data should include "(.*?)"$/) do |member_name|
   expect(@response.data.members).to include(member_name.to_sym)
 end
 
@@ -55,6 +55,10 @@ Then(/^I expect response data\["(.*?)"\] to be an array$/) do |key|
   expect(@response.data[key]).to be_an(Array)
 end
 
-Then(/^I expect the response error to be "(.*?)"$/) do |error_class|
+Then(/^I expect the response error code to be "(.*?)"$/) do |error_class|
   expect(@error.class.name).to match(error_class)
+end
+
+Then(/^I expect the response error message to include:$/) do |message|
+  expect(@error.message).to include(message)
 end

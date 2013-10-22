@@ -3,11 +3,11 @@
 Feature: Amazon Glacier
 
   Scenario: Listing vaults
-    When I call "list_vaults" on "glacier" with the following params:
+    When I call "list_vaults" on "glacier" with:
     """
     { account_id: '-' }
     """
-    Then the response data should include a "vault_list"
+    Then the response data should include "vault_list"
     And the response "vault_list" should be an array
 
   @upload
@@ -21,7 +21,7 @@ Feature: Amazon Glacier
     Then I should be able to delete the archive
 
   Scenario: Error handling
-    When I call "list_vaults" on "glacier" with the following params:
+    When I call "list_vaults" on "glacier" with:
     """
     { account_id: 'abcmnoxyz' }
     """
