@@ -9,16 +9,16 @@ module Aws
     attr_accessor :handler
 
     def call(context)
-      populate_headers(context)
-      populate_body(context) if populate_body?(context)
+      setup_request(context)
+      serialize_params(context) if serialize_params?(context)
       @handler.call(context)
     end
 
-    def populate_headers(context)
-      @serializer.populate_headers(context)
+    def setup_request(context)
+      @serializer.setup_request(context)
     end
 
-    def populate_body(context)
+    def serialize_params(context)
       input = context.operation.input
       if input.payload
         rules = input.payload_member
@@ -27,10 +27,10 @@ module Aws
         rules = input
         params = context.params
       end
-      @serializer.populate_body(context, rules, params)
+      @serializer.serialize_params(context, rules, params)
     end
 
-    def populate_body?(context)
+    def serialize_params?(context)
       rules = context.operation.input
       !(rules.raw_payload? || rules.payload_member.empty?)
     end

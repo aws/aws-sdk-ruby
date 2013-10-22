@@ -3,11 +3,11 @@ module Aws
     # @api private
     class Serializer
 
-      def populate_headers(context)
+      def setup_request(context)
         context.http_request.headers['Content-Type'] = 'application/xml'
       end
 
-      def populate_body(context, rules, params)
+      def serialize_params(context, rules, params)
         context.http_request.body = Builder.build(rules, params)
       end
 

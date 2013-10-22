@@ -3,9 +3,9 @@ module Aws
     # @api private
     class Serializer
 
-      def populate_headers(*args); end
+      def setup_request(*args); end
 
-      def populate_body(context, rules, params)
+      def serialize_params(context, rules, params)
         json_params = Builder.new(rules).build(params)
         context.http_request.body = MultiJson.dump(json_params)
       end

@@ -11,7 +11,6 @@ group :test do
   gem 'rspec-expectations', github: 'rspec/rspec-expectations'
   gem 'rspec-support', github: 'rspec/rspec-support'
   gem 'cucumber'
-
   gem 'webmock'
   gem 'simplecov', require: false
 end
