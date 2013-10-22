@@ -25,6 +25,11 @@ module Aws
     autoload :ServiceNamer, 'aws/api/service_namer'
     autoload :ShapeTranslator, 'aws/api/shape_translator'
     autoload :Translator, 'aws/api/translator'
+
+    module ServiceTranslators
+      autoload :Glacier, 'aws/api/service_translators/glacier'
+    end
+
   end
 
   # @api private

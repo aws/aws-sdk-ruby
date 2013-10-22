@@ -16,12 +16,11 @@ task :apis do
   Dir.glob('apis-src/*.json').each do |path|
 
     # expecting apis-src/prefix-YYYY-MM-DD.json
-    matches = path.match(/^apis-src\/(\w+)-(\d{4}-\d{2}-\d{2}).json$/)
+    matches = path.match(/^apis-src\/\w+-(\d{4}-\d{2}-\d{2}).json$/)
 
     next unless matches # skip extra configuration files like paginators
 
-    endpoint_prefix = matches[1]
-    api_version = matches[2]
+    api_version = matches[1]
 
     puts "translating #{path}"
 
@@ -29,8 +28,6 @@ task :apis do
       MultiJson.load(File.read(path), max_nesting: nil),
       documentation: false,
       errors: false)
-
-    api.plugins += svc_plugins(endpoint_prefix)
 
     class_name = api.metadata['service_class_name']
 

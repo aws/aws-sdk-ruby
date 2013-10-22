@@ -10,9 +10,7 @@ module Seahorse
         option(:convert_params, true)
 
         def add_handlers(handlers, config)
-          if config.convert_params
-            handlers.add(Handler, step: :validate, priority: 75)
-          end
+          handlers.add(Handler, step: :initialize) if config.convert_params
         end
 
         class Handler < Client::Handler
@@ -25,7 +23,6 @@ module Seahorse
           end
 
         end
-
       end
     end
   end

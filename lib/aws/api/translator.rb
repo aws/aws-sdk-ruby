@@ -1,3 +1,5 @@
+require 'multi_json'
+
 module Aws
   module Api
     class Translator < BaseTranslator
@@ -12,6 +14,8 @@ module Aws
           translate_operations(api)
           apply_xml_namespaces(api) if xml?
           set_service_names(api)
+          apply_service_plugins(api)
+          apply_service_customizations(api)
         end
       end
 
@@ -50,6 +54,19 @@ module Aws
             operation.input.serialized_name = operation.name + "Request"
             operation.input.metadata['xmlns_uri'] = xmlns
           end
+        end
+      end
+
+      def apply_service_plugins(api)
+        plugins = MultiJson.load(File.read('apis-src/plugins.json'))
+        plugins = plugins[api.metadata['service_class_name']] || []
+        api.plugins += plugins
+      end
+
+      def apply_service_customizations(api)
+        svc_name = api.metadata['service_class_name']
+        if ServiceTranslators.const_defined?(svc_name)
+          ServiceTranslators.const_get(svc_name).translate(api)
         end
       end
 

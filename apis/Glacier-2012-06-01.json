@@ -70,11 +70,6 @@
             "type": "string",
             "location": "header",
             "serialized_name": "x-amz-archive-size"
-          },
-          "checksum": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-sha256-tree-hash"
           }
         }
       },
@@ -246,7 +241,7 @@
             "serialized_name": "VaultARN"
           },
           "creation_date": {
-            "type": "string",
+            "type": "iso8601_timestamp",
             "serialized_name": "CreationDate"
           },
           "completed": {
@@ -279,7 +274,7 @@
             "serialized_name": "SNSTopic"
           },
           "completion_date": {
-            "type": "string",
+            "type": "iso8601_timestamp",
             "serialized_name": "CompletionDate"
           },
           "sha256_tree_hash": {
@@ -328,11 +323,11 @@
             "serialized_name": "VaultName"
           },
           "creation_date": {
-            "type": "string",
+            "type": "iso8601_timestamp",
             "serialized_name": "CreationDate"
           },
           "last_inventory_date": {
-            "type": "string",
+            "type": "iso8601_timestamp",
             "serialized_name": "LastInventoryDate"
           },
           "number_of_archives": {
@@ -639,7 +634,7 @@
                   "serialized_name": "VaultARN"
                 },
                 "creation_date": {
-                  "type": "string",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "CreationDate"
                 },
                 "completed": {
@@ -672,7 +667,7 @@
                   "serialized_name": "SNSTopic"
                 },
                 "completion_date": {
-                  "type": "string",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "CompletionDate"
                 },
                 "sha256_tree_hash": {
@@ -750,7 +745,7 @@
                   "serialized_name": "PartSizeInBytes"
                 },
                 "creation_date": {
-                  "type": "string",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "CreationDate"
                 }
               }
@@ -815,7 +810,7 @@
             "serialized_name": "PartSizeInBytes"
           },
           "creation_date": {
-            "type": "string",
+            "type": "iso8601_timestamp",
             "serialized_name": "CreationDate"
           },
           "parts": {
@@ -882,11 +877,11 @@
                   "serialized_name": "VaultName"
                 },
                 "creation_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "CreationDate"
                 },
                 "last_inventory_date": {
-                  "type": "timestamp",
+                  "type": "iso8601_timestamp",
                   "serialized_name": "LastInventoryDate"
                 },
                 "number_of_archives": {
