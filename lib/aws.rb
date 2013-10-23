@@ -24,10 +24,11 @@ module Aws
     autoload :ServiceNamer, 'aws/api/service_namer'
     autoload :ShapeTranslator, 'aws/api/shape_translator'
     autoload :Translator, 'aws/api/translator'
+    autoload :Visitor, 'aws/api/visitor'
 
     module ServiceTranslators
+      autoload :CloudFront, 'aws/api/service_translators/cloud_front'
       autoload :Glacier, 'aws/api/service_translators/glacier'
-      autoload :ModifyShapes, 'aws/api/service_translators/modify_shapes'
     end
 
   end
