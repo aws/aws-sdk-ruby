@@ -68,7 +68,7 @@
             "location": "uri"
           },
           "archive_size": {
-            "type": "string",
+            "type": "integer",
             "location": "header",
             "serialized_name": "x-amz-archive-size"
           }
@@ -544,7 +544,7 @@
             "serialized_name": "x-amz-archive-description"
           },
           "part_size": {
-            "type": "string",
+            "type": "integer",
             "location": "header",
             "serialized_name": "x-amz-part-size"
           }
@@ -584,7 +584,7 @@
             "location": "uri"
           },
           "limit": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           },
           "marker": {
@@ -711,7 +711,7 @@
             "location": "uri"
           },
           "limit": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           },
           "marker": {
@@ -786,7 +786,7 @@
             "location": "uri"
           },
           "limit": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           }
         }
@@ -855,7 +855,7 @@
             "location": "uri"
           },
           "limit": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           }
         }
