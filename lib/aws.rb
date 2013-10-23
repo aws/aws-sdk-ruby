@@ -27,6 +27,7 @@ module Aws
 
     module ServiceTranslators
       autoload :Glacier, 'aws/api/service_translators/glacier'
+      autoload :ModifyShapes, 'aws/api/service_translators/modify_shapes'
     end
 
   end

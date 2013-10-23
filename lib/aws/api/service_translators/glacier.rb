@@ -1,36 +1,28 @@
-module Aws::Api::ServiceTranslators::Glacier
-  class << self
+module Aws::Api::ServiceTranslators
+  module Glacier
 
-    include Seahorse::Model::Shapes
+    extend ModifyShapes
 
-    def translate(api)
-      remove_complete_multipart_upload_checksum(api)
-      convert_timestamp_shapes(api)
-    end
+    class << self
 
-    def remove_complete_multipart_upload_checksum(api)
-      api.operations[:complete_multipart_upload].input.members.delete(:checksum)
-    end
-
-    def convert_timestamp_shapes(api)
-      api.operations.values.each do |operation|
-        convert_timestamps(operation.input)
-        convert_timestamps(operation.output)
+      def translate(api)
+        convert_dates(api)
+        remove_checksum(api)
       end
-    end
 
-    def convert_timestamps(shape)
-      case shape
-      when StructureShape
-        shape.members.each do |member_name, member_shape|
-          convert_timestamps(member_shape)
+      # convert all of the "string" date shapes to timestamps
+      def convert_dates(api)
+        modify_shapes(api) do |shape_name, shape|
+          shape.type = 'iso8601_timestamp' if shape.serialized_name =~ /date/i
         end
-      when MapShape then convert_timestamps(shape.members)
-      when ListShape then convert_timestamps(shape.members)
-      else
-        shape.type = 'iso8601_timestamp' if shape.serialized_name =~ /date/i
       end
-    end
 
+      # this checksum parameter - it must be calculated on xml that is not user
+      # supplied, so the sdk has to compute the checksum after building the xml
+      def remove_checksum(api)
+        api.operations[:complete_multipart_upload].input.members.delete(:checksum)
+      end
+
+    end
   end
 end
