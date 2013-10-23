@@ -76,9 +76,9 @@ module Seahorse
             expect(result).to eq('<xml xmlns="abc"><out a="b"><c/></out></xml>')
           end
 
-          it 'escapes node values'
+          #it 'escapes node values'
 
-          it 'escapes attribute values'
+          #it 'escapes attribute values'
 
           it 'accepts :indent and initial :pad options' do
             options[:indent] = '  '
