@@ -149,7 +149,8 @@ module Aws
     private
 
     def bundled_apis
-      Dir.glob('apis/*.json').group_by { |path| path.match(/\/(\w+)/)[1] }
+      apis = File.join(File.dirname(File.dirname(__FILE__)), 'apis', '*.json')
+      Dir.glob(apis).group_by { |path| File.basename(path).split('-').first }
     end
 
   end
