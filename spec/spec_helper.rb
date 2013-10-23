@@ -4,6 +4,8 @@ require 'aws-sdk-core'
 require 'seahorse'
 require 'yaml'
 
+require_relative '../vendor/seahorse/spec/spec_helper'
+
 # prevent env from leaking state into tests
 %w(AWS AMAZON).each do |prefix|
   ENV.delete("#{prefix}_ACCESS_KEY_ID")

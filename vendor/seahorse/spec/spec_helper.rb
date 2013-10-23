@@ -6,19 +6,17 @@ require 'rspec'
 require 'webmock/rspec'
 require 'seahorse'
 
-# A helper :send_handler that does not send the request, it simply
-# returns an empty response.
-class DummySendHandler < Seahorse::Client::Handler
-  def call(context)
-    Seahorse::Client::Response.new(
-      context: context,
-      data: context.config.response_data)
-  end
-end
 
 class DummySendPlugin < Seahorse::Client::Plugin
+  class Handler < Seahorse::Client::Handler
+    def call(context)
+      Seahorse::Client::Response.new(
+        context: context,
+        data: context.config.response_data)
+    end
+  end
   option(:response_data) { { result: 'success' } }
-  handler DummySendHandler, step: :send
+  handler Handler, step: :send
 end
 
 class Seahorse::Client::Base

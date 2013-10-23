@@ -7,18 +7,14 @@ def execute_cmd cmd
   end
 end
 
-def run_rspec
-  opts = ['bundle exec rspec']
-  opts += FileList[ENV['FILES'] || 'spec/**/*_spec.rb'].sort
-  execute_cmd(opts.join(' '))
-end
-
 namespace :test do
 
   desc "Runs unit tests"
   task :unit do
-    run_rspec
-    Dir.chdir('vendor/seahorse') { run_rspec }
+    opts = ['bundle exec rspec']
+    opts += FileList[ENV['FILES'] || 'spec/**/*_spec.rb'].sort
+    opts += FileList[ENV['FILES'] || 'vendor/seahorse/spec/**/*_spec.rb'].sort
+    execute_cmd(opts.join(' '))
   end
 
   desc "Runs integration tests"
