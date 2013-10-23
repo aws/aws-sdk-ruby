@@ -1,5 +1,5 @@
 # language: en
-@ec2 @glacier
+@glacier
 Feature: Amazon Glacier
 
   Scenario: Listing vaults
