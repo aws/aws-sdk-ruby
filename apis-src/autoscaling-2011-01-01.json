@@ -363,6 +363,11 @@
             "shape_name": "EbsOptimized",
             "type": "boolean",
             "documentation": "\n        <p>\n            Whether the instance is optimized for EBS I/O. This optimization provides \n            dedicated throughput to Amazon EBS and an optimized configuration stack to provide \n            optimal EBS I/O performance. This optimization is not available with all instance \n            types. Additional usage charges apply when using an EBS Optimized instance.  \n            For information about EBS-optimized instances, go to <a href=\"http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/instance-types.html#EBSOptimized\">EBS-Optimized Instances</a>            \n       in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>\n        \n    "
+          },
+          "AssociatePublicIpAddress": {
+            "shape_name": "AssociatePublicIpAddress",
+            "type": "boolean",
+            "documentation": null
           }
         },
         "documentation": "\n        <p>\n\n        </p>\n    "
@@ -1532,6 +1537,11 @@
                   "shape_name": "EbsOptimized",
                   "type": "boolean",
                   "documentation": "\n        <p>Specifies whether the instance is optimized for EBS I/O (<i>true</i>) or not (<i>false</i>).</p>   \n    "
+                },
+                "AssociatePublicIpAddress": {
+                  "shape_name": "AssociatePublicIpAddress",
+                  "type": "boolean",
+                  "documentation": null
                 }
               },
               "documentation": "\n        <p>\n            The <code>LaunchConfiguration</code> data type.\n        </p>\n    "

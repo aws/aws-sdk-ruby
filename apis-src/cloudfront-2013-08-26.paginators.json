@@ -1,0 +1,28 @@
+{
+  "pagination": {
+    "ListCloudFrontOriginAccessIdentities": {
+      "input_token": "Marker",
+      "output_token": "NextMarker",
+      "more_results": "IsTruncated",
+      "result_key": "Items"
+    },
+    "ListDistributions": {
+      "input_token": "Marker",
+      "output_token": "NextMarker",
+      "more_results": "IsTruncated",
+      "result_key": "Items"
+    },
+    "ListInvalidations": {
+      "input_token": "Marker",
+      "output_token": "NextMarker",
+      "more_results": "IsTruncated",
+      "result_key": "Items"
+    },
+    "ListStreamingDistributions": {
+      "input_token": "Marker",
+      "output_token": "NextMarker",
+      "more_results": "IsTruncated",
+      "result_key": "Items"
+    }
+  }
+}

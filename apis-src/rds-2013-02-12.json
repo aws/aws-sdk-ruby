@@ -165,14 +165,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         },
         {
           "shape_name": "DBSnapshotNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB Snapshot.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p> Adds metadata tags to a DB Instance. These tags can also be used with cost allocation reporting to track cost associated with a DB Instance.</p>\n\n    "
@@ -308,14 +308,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB Security Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB security group.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidDBSecurityGroupStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The state of the DB Security Group does not allow deletion.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The state of the DB security group does not allow deletion.\n        </p>\n    "
         },
         {
           "shape_name": "AuthorizationAlreadyExistsFault",
@@ -329,7 +329,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            Database security group authorization quota has been reached.\n        </p>\n    "
+          "documentation": "\n        <p>\n            DB security group authorization quota has been reached.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Enables ingress to a DBSecurityGroup using one of two forms of authorization. First,\n        EC2 or VPC Security Groups can be added to the DBSecurityGroup if the application using the database\n        is running on EC2 or VPC instances. Second, IP ranges are available if the application accessing your\n        database is running on the Internet. Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or\n        (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC).\n        </p>\n        <note>\n            You cannot authorize ingress from an EC2 security group in one Region to an Amazon RDS DB Instance in another.\n            You cannot authorize ingress from a VPC security group in one VPC to an Amazon RDS DB Instance in another.\n        </note>\n        <p>For an overview of CIDR ranges, go to the \n            <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?CIDRIP=192.168.1.1%2F24\n    &DBSecurityGroupName=mydbsecuritygroup\n    &Version=2013-02-12\n    &Action=AuthorizeDBSecurityGroupIngress\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T17%3A10%3A50.274Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><AuthorizeDBSecurityGroupIngressResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <AuthorizeDBSecurityGroupIngressResult>\n    <DBSecurityGroup>\n      <EC2SecurityGroups/>\n      <DBSecurityGroupDescription>My new DBSecurityGroup</DBSecurityGroupDescription>\n      <IPRanges>\n        <IPRange>\n          <CIDRIP>192.168.1.1/24</CIDRIP>\n          <Status>authorizing</Status>\n        </IPRange>\n      </IPRanges>\n      <OwnerId>621567473609</OwnerId>\n      <DBSecurityGroupName>mydbsecuritygroup</DBSecurityGroupName>\n      <VpcId>vpc-1ab2c3d4</VpcId>\n    </DBSecurityGroup>\n  </AuthorizeDBSecurityGroupIngressResult>\n  <ResponseMetadata>\n    <RequestId>d9799197-bf2d-11de-b88d-993294bf1c81</RequestId>\n  </ResponseMetadata>\n</AuthorizeDBSecurityGroupIngressResponse></queryresponse>\n        </examples>\n    "
@@ -462,21 +462,21 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB Snapshot.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidDBSnapshotStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The state of the DB Security Snapshot does not allow deletion.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The state of the DB snapshot does not allow deletion.\n        </p>\n    "
         },
         {
           "shape_name": "SnapshotQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB Snapshots.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB snapshots.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Copies the specified DBSnapshot. The source DBSnapshot must be in the \"available\" state.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=CopyDBSnapshot\n    &SourceDBSnapshotIdentifier=rds:simcoprod01-2012-04-02-00-01\n    &TargetDBSnapshotIdentifier=mydbsnapshot\n    &Version=2013-02-12\n    &SignatureVersion=2&SignatureMethod=HmacSHA256\n    &Timestamp=2011-12-12T06%3A27%3A42.551Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><CopyDBSnapshotResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <CopyDBSnapshotResult>\n    <DBSnapshot>\n      <Port>3306</Port>\n      <Engine>mysql</Engine>\n      <Status>available</Status>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <LicenseModel>general-public-license</LicenseModel>\n      <InstanceCreateTime>2011-05-23T06:06:43.110Z</InstanceCreateTime>\n      <AllocatedStorage>10</AllocatedStorage>\n      <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n      <EngineVersion>5.1.50</EngineVersion>\n      <DBSnapshotIdentifier>mydbsnapshot</DBSnapshotIdentifier>\n      <SnapshotType>manual</SnapshotType>\n      <MasterUsername>master</MasterUsername>\n    </DBSnapshot>\n  </CopyDBSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>c4181d1d-8505-11e0-90aa-eb648410240d</RequestId>\n  </ResponseMetadata>\n</CopyDBSnapshotResponse></queryresponse>\n        </examples>\n    "
@@ -999,70 +999,70 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        User already has a DB Instance with the given identifier.\n        </p>\n    "
+          "documentation": "\n        <p>\n        User already has a DB instance with the given identifier.\n        </p>\n    "
         },
         {
           "shape_name": "InsufficientDBInstanceCapacityFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Specified DB Instance class is not available in the specified Availability Zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Specified DB instance class is not available in the specified Availability Zone.\n        </p>\n    "
         },
         {
           "shape_name": "DBParameterGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB Parameter Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB parameter group.\n        </p>\n    "
         },
         {
           "shape_name": "DBSecurityGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB Security Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB security group.\n        </p>\n    "
         },
         {
           "shape_name": "InstanceQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB Instances.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB instances.\n        </p>\n    "
         },
         {
           "shape_name": "StorageQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the\n        allowed amount of storage available across all DB Instances.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the\n        allowed amount of storage available across all DB instances.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB Subnet Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetGroupDoesNotCoverEnoughAZs",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 availability zones unless there's'only 1 available zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidSubnet",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         Request subnet is valid, or all subnets are not in common Vpc. \n        </p>\n    "
+          "documentation": null
         },
         {
           "shape_name": "InvalidVPCNetworkStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         DB Subnet Group does not cover all availability zones after it is created because users' change.\n        </p>\n    "
+          "documentation": "\n        <p>\n         DB subnet group does not cover all Availability Zones after it is created because users' change.\n        </p>\n    "
         },
         {
           "shape_name": "ProvisionedIopsNotAvailableInAZFault",
@@ -1508,84 +1508,84 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        User already has a DB Instance with the given identifier.\n        </p>\n    "
+          "documentation": "\n        <p>\n        User already has a DB instance with the given identifier.\n        </p>\n    "
         },
         {
           "shape_name": "InsufficientDBInstanceCapacityFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Specified DB Instance class is not available in the specified Availability Zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Specified DB instance class is not available in the specified Availability Zone.\n        </p>\n    "
         },
         {
           "shape_name": "DBParameterGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB Parameter Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB parameter group.\n        </p>\n    "
         },
         {
           "shape_name": "DBSecurityGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB Security Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB security group.\n        </p>\n    "
         },
         {
           "shape_name": "InstanceQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB Instances.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB instances.\n        </p>\n    "
         },
         {
           "shape_name": "StorageQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the\n        allowed amount of storage available across all DB Instances.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the\n        allowed amount of storage available across all DB instances.\n        </p>\n    "
         },
         {
           "shape_name": "DBInstanceNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidDBInstanceStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The specified DB Instance is not in the <i>available</i> state.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The specified DB instance is not in the <i>available</i> state.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB Subnet Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetGroupDoesNotCoverEnoughAZs",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 availability zones unless there's'only 1 available zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidSubnet",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         Request subnet is valid, or all subnets are not in common Vpc. \n        </p>\n    "
+          "documentation": null
         },
         {
           "shape_name": "InvalidVPCNetworkStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         DB Subnet Group does not cover all availability zones after it is created because users' change.\n        </p>\n    "
+          "documentation": "\n        <p>\n         DB subnet group does not cover all Availability Zones after it is created because users' change.\n        </p>\n    "
         },
         {
           "shape_name": "ProvisionedIopsNotAvailableInAZFault",
@@ -1666,14 +1666,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed\n        number of DB Parameter Groups.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed\n        number of DB parameter groups.\n        </p>\n    "
         },
         {
           "shape_name": "DBParameterGroupAlreadyExistsFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        A DB Parameter Group with the same name exists.\n        </p>\n    "
+          "documentation": "\n        <p>\n        A DB parameter group with the same name exists.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Creates a new DB Parameter Group.\n        </p>\n        <p>\n            A DB Parameter Group is initially created with the default parameters for the\n            database engine used by the DB Instance. To provide custom values for any of the\n            parameters, you must modify the group after creating it using\n            <i>ModifyDBParameterGroup</i>. Once you've created a DB Parameter Group, you need to\n            associate it with your DB Instance using <i>ModifyDBInstance</i>. When you associate\n            a new DB Parameter Group with a running DB Instance, you need to reboot the DB\n            Instance for the new DB Parameter Group and associated settings to take effect. \n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=CreateDBParameterGroup\n    &DBParameterGroupName=mydbparametergroup3\n    &DBParameterGroupFamily=MySQL5.1\n    &Version=2013-02-12\n    &Description=My%20new%20DBParameterGroup\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-05-11T18%3A09%3A29.793Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><CreateDBParameterGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <CreateDBParameterGroupResult>\n    <DBParameterGroup>\n      <DBParameterGroupFamily>mysql5.1</DBParameterGroupFamily>\n      <Description>My new DBParameterGroup</Description>\n      <DBParameterGroupName>mydbparametergroup3</DBParameterGroupName>\n    </DBParameterGroup>\n  </CreateDBParameterGroupResult>\n  <ResponseMetadata>\n    <RequestId>0b447b66-bf36-11de-a88b-7b5b3d23b3a7</RequestId>\n  </ResponseMetadata>\n</CreateDBParameterGroupResponse></queryresponse>\n        </examples>\n    "
@@ -1795,14 +1795,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        A database security group with the name specified in\n        <i>DBSecurityGroupName</i> already exists.\n        </p>\n    "
+          "documentation": "\n        <p>\n        A DB security group with the name specified in\n        <i>DBSecurityGroupName</i> already exists.\n        </p>\n    "
         },
         {
           "shape_name": "DBSecurityGroupQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            Request would result in user exceeding the allowed number of DB Security Groups.\n        </p>\n    "
+          "documentation": "\n        <p>\n            Request would result in user exceeding the allowed number of DB security groups.\n        </p>\n    "
         },
         {
           "shape_name": "DBSecurityGroupNotSupportedFault",
@@ -1942,21 +1942,21 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The specified DB Instance is not in the <i>available</i> state.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The specified DB instance is not in the <i>available</i> state.\n        </p>\n    "
         },
         {
           "shape_name": "DBInstanceNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         },
         {
           "shape_name": "SnapshotQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB Snapshots.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB snapshots.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Creates a DBSnapshot. The source DBInstance must be in \"available\" state.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=CreateDBSnapshot\n    &DBInstanceIdentifier=simcoprod01\n    &DBSnapshotIdentifier=mydbsnapshot\n    &Version=2013-02-12\n    &SignatureVersion=2&SignatureMethod=HmacSHA256\n    &Timestamp=2011-05-23T06%3A27%3A42.551Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><CreateDBSnapshotResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <CreateDBSnapshotResult>\n    <DBSnapshot>\n      <Port>3306</Port>\n      <Engine>mysql</Engine>\n      <Status>creating</Status>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <LicenseModel>general-public-license</LicenseModel>\n      <InstanceCreateTime>2011-05-23T06:06:43.110Z</InstanceCreateTime>\n      <AllocatedStorage>10</AllocatedStorage>\n      <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n      <EngineVersion>5.1.50</EngineVersion>\n      <DBSnapshotIdentifier>mydbsnapshot</DBSnapshotIdentifier>\n      <SnapshotType>manual</SnapshotType>\n      <MasterUsername>master</MasterUsername>\n    </DBSnapshot>\n  </CreateDBSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>c4181d1d-8505-11e0-90aa-eb648410240d</RequestId>\n  </ResponseMetadata>\n</CreateDBSnapshotResponse></queryresponse>\n        </examples>\n    "
@@ -2075,35 +2075,35 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> is already used by an existing DBSubnetGroup.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> is already used by an existing DB subnet group.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetGroupQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB Subnet Groups.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB subnet groups.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of subnets in a DB subnet Groups.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of subnets in a DB subnet groups.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetGroupDoesNotCoverEnoughAZs",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 availability zones unless there's'only 1 available zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidSubnet",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         Request subnet is valid, or all subnets are not in common Vpc. \n        </p>\n    "
+          "documentation": null
         }
       ],
       "documentation": "\n        <p>\n            Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=CreateDBSubnetGroup\n    &DBSubnetGroupName=mydbsubnetgroup\n    &DBSubnetGroupDescription=My%20new%20DBSubnetGroup\n    &Version=2013-02-12\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T18%3A14%3A49.482Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><CreateDBSubnetGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n    <CreateDBSubnetGroupResult>\n            <DBSubnetGroup>\n                <VpcId>990524496922</VpcId>\n                <SubnetGroupStatus>Complete</SubnetGroupStatus>\n                <DBSubnetGroupDescription>My new DBSubnetGroup</DBSubnetGroupDescription>\n                <DBSubnetGroupName>mydbsubnetgroup</DBSubnetGroupName>\n                <Subnets>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7c5b4115</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1c</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7b5b4112</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1b</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-3ea6bd57</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1d</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                </Subnets>\n            </DBSubnetGroup>       \n        </CreateDBSubnetGroupResult>\n        <ResponseMetadata>\n            <RequestId>ed662948-a57b-11df-9e38-7ffab86c801f</RequestId>\n        </ResponseMetadata>\n    </CreateDBSubnetGroupResponse></queryresponse>\n            </examples>\n    "
@@ -2913,14 +2913,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidDBInstanceStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The specified DB Instance is not in the <i>available</i> state.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The specified DB instance is not in the <i>available</i> state.\n        </p>\n    "
         },
         {
           "shape_name": "DBSnapshotAlreadyExistsFault",
@@ -2934,7 +2934,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB Snapshots.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB snapshots.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        The DeleteDBInstance action deletes a previously provisioned DB instance. A successful response\n        from the web service indicates the request was received correctly. \n        When you delete a DB instance, all automated backups for that instance are deleted \n        and cannot be recovered. Manual DB Snapshots of the DB instance to be deleted are not deleted.\n        </p>\n         <p>\n        If a final DBSnapshot is requested\n        the status of the RDS instance will be \"deleting\" until the DBSnapshot is created. DescribeDBInstance\n        is used to monitor the status of this operation. This cannot be canceled or reverted once submitted.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n   ?Action=DeleteDBInstance\n   &DBInstanceIdentifier=myrestoreddbinstance\n   &SkipFinalSnapshot=true\n   &Version=2013-02-12\n   &Timestamp=2011-05-23T07%3A19%3A35.947Z\n   &SignatureVersion=2\n   &SignatureMethod=HmacSHA256\n   &AWSAccessKeyId=<AWS Access Key ID>\n   &Signature=<Signature></queryrequest>\n            <queryresponse><DeleteDBInstanceResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <DeleteDBInstanceResult>\n    <DBInstance>\n      <ReadReplicaDBInstanceIdentifiers/>\n      <LatestRestorableTime>2011-05-23T07:15:00Z</LatestRestorableTime>\n      <Engine>mysql</Engine>\n      <PendingModifiedValues/>\n      <BackupRetentionPeriod>1</BackupRetentionPeriod>\n      <MultiAZ>false</MultiAZ>\n      <LicenseModel>general-public-license</LicenseModel>\n      <DBInstanceStatus>deleting</DBInstanceStatus>\n      <EngineVersion>5.1.50</EngineVersion>\n      <Endpoint>\n        <Port>3306</Port>\n        <Address>myrestoreddbinstance.cu7u2t4uz396.us-east.rds.amazonaws.com</Address>\n      </Endpoint>\n      <DBInstanceIdentifier>myrestoreddbinstance</DBInstanceIdentifier>\n      <DBParameterGroups>\n        <DBParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <DBParameterGroupName>default.mysql5.1</DBParameterGroupName>\n        </DBParameterGroup>\n      </DBParameterGroups>\n      <DBSecurityGroups>\n        <DBSecurityGroup>\n          <Status>active</Status>\n          <DBSecurityGroupName>default</DBSecurityGroupName>\n        </DBSecurityGroup>\n      </DBSecurityGroups>\n      <PreferredBackupWindow>00:00-00:30</PreferredBackupWindow>\n      <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>\n      <PreferredMaintenanceWindow>sat:07:30-sat:08:00</PreferredMaintenanceWindow>\n      <AvailabilityZone>us-east-1d</AvailabilityZone>\n      <InstanceCreateTime>2011-05-23T06:52:48.255Z</InstanceCreateTime>\n      <AllocatedStorage>10</AllocatedStorage>\n      <DBInstanceClass>db.m1.large</DBInstanceClass>\n      <MasterUsername>master</MasterUsername>\n    </DBInstance>\n  </DeleteDBInstanceResult>\n  <ResponseMetadata>\n    <RequestId>03ea4ae8-850d-11e0-90aa-eb648410240d</RequestId>\n  </ResponseMetadata>\n</DeleteDBInstanceResponse></queryresponse>\n        </examples>\n    "
@@ -2961,14 +2961,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The DB Parameter Group cannot be deleted because it is in use.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The DB parameter group cannot be deleted because it is in use.\n        </p>\n    "
         },
         {
           "shape_name": "DBParameterGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB Parameter Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB parameter group.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Deletes a specified DBParameterGroup. The DBParameterGroup cannot be associated with\n        any RDS instances to be deleted.\n        </p>\n        <note>\n            The specified DB Parameter Group cannot be associated with any DB Instances.\n        </note>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=DeleteDBParameterGroup\n    &DBParameterGroupName=mydbparametergroup\n    &Version=2013-02-12\n    &SignatureVersion=2&SignatureMethod=HmacSHA256\n    &Timestamp=2011-05-11T18%3A47%3A08.851Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><DeleteDBParameterGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <ResponseMetadata>\n    <RequestId>4dc38be9-bf3b-11de-a88b-7b5b3d23b3a7</RequestId>\n  </ResponseMetadata>\n</DeleteDBParameterGroupResponse></queryresponse>\n        </examples>\n    "
@@ -2995,14 +2995,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The state of the DB Security Group does not allow deletion.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The state of the DB security group does not allow deletion.\n        </p>\n    "
         },
         {
           "shape_name": "DBSecurityGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB Security Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB security group.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Deletes a DB Security Group. \n        </p>\n        <note>The specified DB Security Group must not be associated with any DB Instances.</note>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n ?Action=DeleteDBSecurityGroup\n &DBSecurityGroupName=mysecuritygroup\n &Version=2013-02-12\n &SignatureVersion=2\n &SignatureMethod=HmacSHA256\n &Timestamp=2011-02-15T17%3A48%3A21.746Z\n &AWSAccessKeyId=<AWS Access Key ID>\n &Signature=<Signature></queryrequest>\n            <queryresponse><DeleteDBSecurityGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <ResponseMetadata>\n    <RequestId>5d013245-4172-11df-8520-e7e1e602a915</RequestId>\n  </ResponseMetadata>\n</DeleteDBSecurityGroupResponse></queryresponse>\n        </examples>\n    "
@@ -3122,14 +3122,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The state of the DB Security Snapshot does not allow deletion.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The state of the DB snapshot does not allow deletion.\n        </p>\n    "
         },
         {
           "shape_name": "DBSnapshotNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB Snapshot.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Deletes a DBSnapshot. \n        </p>\n        <note>The DBSnapshot must be in the <code>available</code> state to be\n        deleted.</note>\n        <examples>\n            <queryrequest>https://rds.amazon.com/\n   &DBSnapshotIdentifier=mydbsnapshot\n   &Version=2013-02-12\n   &SignatureVersion=2\n   &SignatureMethod=HmacSHA256\n   &Timestamp=2011-05-23T06%3A27%3A42.551Z\n   &AWSAccessKeyId=<AWS Access Key ID>\n   &Signature=<Signature></queryrequest>\n            <queryresponse><DeleteDBSnapshotResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <DeleteDBSnapshotResult>\n    <DBSnapshot>\n      <Port>3306</Port>\n      <SnapshotCreateTime>2011-03-11T07:20:24.082Z</SnapshotCreateTime>\n      <Engine>mysql</Engine>\n      <Status>deleted</Status>\n      <AvailabilityZone>us-east-1d</AvailabilityZone>\n      <LicenseModel>general-public-license</LicenseModel>\n      <InstanceCreateTime>2010-07-16T00:06:59.107Z</InstanceCreateTime>\n      <AllocatedStorage>60</AllocatedStorage>\n      <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n      <EngineVersion>5.1.47</EngineVersion>\n      <DBSnapshotIdentifier>mysnapshot2</DBSnapshotIdentifier>\n      <SnapshotType>manual</SnapshotType>\n      <MasterUsername>master</MasterUsername>\n    </DBSnapshot>\n  </DeleteDBSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>627a43a1-8507-11e0-bd9b-a7b1ece36d51</RequestId>\n  </ResponseMetadata>\n</DeleteDBSnapshotResponse></queryresponse>\n        </examples>\n    "
@@ -3156,7 +3156,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         The DB Subnet Group cannot be deleted because it is in use.\n        </p>\n    "
+          "documentation": "\n        <p>\n         The DB subnet group cannot be deleted because it is in use.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidDBSubnetStateFault",
@@ -3170,7 +3170,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB Subnet Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Deletes a DB subnet group. \n        </p>\n        <note>The specified database subnet group must not be associated with any DB instances.</note>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n     ?Action=DeleteDBSubnetGroup\n     &DBSubnetGroupName=mysubnetgroup\n     &Version=2013-02-12\n     &SignatureVersion=2\n     &SignatureMethod=HmacSHA256\n     &Timestamp=2011-02-15T17%3A48%3A21.746Z\n     &AWSAccessKeyId=<AWS Access Key ID>\n     &Signature=<Signature></queryrequest>\n                <queryresponse><DeleteDBSubnetGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n      <ResponseMetadata>\n        <RequestId>5d013245-4172-11df-8520-e7e1e602a915</RequestId>\n      </ResponseMetadata>\n    </DeleteDBSubnetGroupResponse></queryresponse>\n        </examples>\n    "
@@ -3308,7 +3308,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            The Option Group is not in the <i>available</i> state.\n        </p>\n    "
+          "documentation": "\n        <p>\n            The option group is not in the <i>available</i> state.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n            Deletes an existing Option Group.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n                ?Action=DeleteOptionGroup\n                &OptionGroupName=myoptiongroup</queryrequest>\n            <queryresponse><DeleteOptionGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n            </DeleteOptionGroupResponse></queryresponse>\n        </examples>\n    "
@@ -3859,7 +3859,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Returns information about provisioned RDS instances. This API supports pagination.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n   ?Action=DescribeDBInstances\n   &Version=2013-02-12\n   &MaxRecords=100\n   &SignatureVersion=2\n   &SignatureMethod=HmacSHA256\n   &Timestamp=2011-05-23T06%3A54%3A55.116Z\n   &AWSAccessKeyId=< Your AWS Access ID Key >\n   &Signature= < Your Signature ></queryrequest>\n            <queryresponse><DescribeDBInstancesResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <DescribeDBInstancesResult>\n    <DBInstances>     \n      <DBInstance>\n        <ReadReplicaDBInstanceIdentifiers/>\n        <LatestRestorableTime>2011-05-23T06:50:00Z</LatestRestorableTime>\n        <Engine>mysql</Engine>\n        <PendingModifiedValues/>\n        <BackupRetentionPeriod>1</BackupRetentionPeriod>\n        <MultiAZ>false</MultiAZ>\n        <LicenseModel>general-public-license</LicenseModel>\n        <DBInstanceStatus>available</DBInstanceStatus>\n        <EngineVersion>5.1.50</EngineVersion>\n        <Endpoint>\n          <Port>3306</Port>\n          <Address>simcoprod01.cu7u2t4uz396.us-east-1.rds.amazonaws.com</Address>\n        </Endpoint>\n        <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n        <DBParameterGroups>\n          <DBParameterGroup>\n            <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n            <DBParameterGroupName>default.mysql5.1</DBParameterGroupName>\n          </DBParameterGroup>\n        </DBParameterGroups>\n        <DBSecurityGroups>\n          <DBSecurityGroup>\n            <Status>active</Status>\n            <DBSecurityGroupName>default</DBSecurityGroupName>\n          </DBSecurityGroup>\n        </DBSecurityGroups>\n        <PreferredBackupWindow>00:00-00:30</PreferredBackupWindow>\n        <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>\n        <PreferredMaintenanceWindow>sat:07:30-sat:08:00</PreferredMaintenanceWindow>\n        <AvailabilityZone>us-east-1a</AvailabilityZone>\n        <InstanceCreateTime>2011-05-23T06:06:43.110Z</InstanceCreateTime>\n        <AllocatedStorage>10</AllocatedStorage>\n        <OptionGroupMemberships>\n          <OptionGroupMembership>\n            <OptionGroupName>default.mysql5.1</OptionGroupName>\n            <Status>in-sync</Status>\n          </OptionGroupMembership>\n        </OptionGroupMemberships>\n        <DBInstanceClass>db.m1.large</DBInstanceClass>\n        <MasterUsername>master</MasterUsername>\n      </DBInstance>\n  </DescribeDBInstancesResult>\n  <ResponseMetadata>\n    <RequestId>9135fff3-8509-11e0-bd9b-a7b1ece36d51</RequestId>\n  </ResponseMetadata>\n</DescribeDBInstancesResponse></queryresponse>\n        </examples>\n    "
@@ -3873,7 +3873,8 @@
           "DBInstanceIdentifier": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            The customer-assigned name of the DB Instance that contains the \n            log files you want to list.\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li>\n            <li>First character must be a letter</li>\n            <li>Cannot end with a hyphen or contain two consecutive hyphens</li>\n        </ul>\n    "
+            "documentation": "\n        <p>\n            The customer-assigned name of the DB Instance that contains the \n            log files you want to list.\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li>\n            <li>First character must be a letter</li>\n            <li>Cannot end with a hyphen or contain two consecutive hyphens</li>\n        </ul>\n    ",
+            "required": true
           },
           "FilenameContains": {
             "shape_name": "String",
@@ -3949,7 +3950,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n            Returns a list of DB log files for the DB instance.        \n        </p>\n        \n        <examples>\n            <queryrequest>\n            </queryrequest>\n            <queryresponse>\n            </queryresponse>\n        </examples>\n    "
@@ -4025,7 +4026,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB Parameter Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB parameter group.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified,\n        the list will contain only the description of the specified DBParameterGroup.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=DescribeDBParameterGroups\n    &DBParameterGroupName=myparamsgroup\n    &MaxRecords=100\n    &Version=2013-02-12\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T17%3A54%3A32.899Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><DescribeDBParameterGroupsResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <DescribeDBParameterGroupsResult>\n    <DBParameterGroups>\n      <DBParameterGroup>\n        <DBParameterGroupFamily>mysql5.1</DBParameterGroupFamily>\n        <Description>Default parameter group for mysql5.1</Description>\n        <DBParameterGroupName>default.mysql5.1</DBParameterGroupName>\n      </DBParameterGroup>\n      <DBParameterGroup>\n        <DBParameterGroupFamily>mysql5.1</DBParameterGroupFamily>\n        <Description>My DB Param Group</Description>\n        <DBParameterGroupName>testdbparamgroup</DBParameterGroupName>\n      </DBParameterGroup>\n    </DBParameterGroups>\n  </DescribeDBParameterGroupsResult>\n  <ResponseMetadata>\n    <RequestId>cb8d9bb4-a02a-11df-bd60-c955b7d6e8e0</RequestId>\n  </ResponseMetadata>\n</DescribeDBParameterGroupsResponse></queryresponse>\n        </examples>\n    "
@@ -4145,7 +4146,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB Parameter Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB parameter group.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Returns the detailed parameter list for a particular DBParameterGroup.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=DescribeDBParameters\n    &DBParameterGroupName=mydbparametergroup\n    &Source=system\n    &MaxRecords=100\n    &Version=2013-02-12\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-05-11T19%3A31%3A42.262Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><DescribeDBParametersResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <DescribeDBParametersResult>\n    <Parameters>\n      <Parameter>\n        <ParameterValue>/rdsdbbin/mysql</ParameterValue>\n        <DataType>string</DataType>\n        <Source>system</Source>\n        <IsModifiable>false</IsModifiable>\n        <Description>The MySQL installation base directory.</Description>\n        <ApplyType>static</ApplyType>\n        <ParameterName>basedir</ParameterName>\n      </Parameter>\n      <Parameter>\n        <ParameterValue>32768</ParameterValue>\n        <DataType>integer</DataType>\n        <Source>system</Source>\n        <IsModifiable>true</IsModifiable>\n        <Description>The size of the cache to hold the SQL statements for the binary log during a transaction.</Description>\n        <ApplyType>dynamic</ApplyType>\n        <AllowedValues>4096-9223372036854775807</AllowedValues>\n        <ParameterName>binlog_cache_size</ParameterName>\n      </Parameter>\n    </Parameters>\n  </DescribeDBParametersResult>\n  <ResponseMetadata>\n    <RequestId>8743f2cf-bf41-11de-8c8e-49155882c409</RequestId>\n  </ResponseMetadata>\n</DescribeDBParametersResponse></queryresponse>\n        </examples>\n    "
@@ -4282,7 +4283,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB Security Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB security group.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Returns a list of DBSecurityGroup descriptions. If a DBSecurityGroupName is specified,\n        the list will contain only the descriptions of the specified DBSecurityGroup.\n        </p>\n        <p>For an overview of CIDR ranges, go to the \n            <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>.\n        </p>\n        \n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=DescribeDBSecurityGroups\n    &Version=2013-02-12\n    &MaxRecords=100\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T19%3A40%3A19.926Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><DescribeDBSecurityGroupsResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <DescribeDBSecurityGroupsResult>\n    <DBSecurityGroups>\n      <DBSecurityGroup>\n        <EC2SecurityGroups>\n          <EC2SecurityGroup>\n            <Status>authorized</Status>\n            <EC2SecurityGroupName>myec2securitygroup</EC2SecurityGroupName>\n            <EC2SecurityGroupOwnerId>054794666394</EC2SecurityGroupOwnerId>\n          </EC2SecurityGroup>\n        </EC2SecurityGroups>\n        <DBSecurityGroupDescription>default</DBSecurityGroupDescription>\n        <IPRanges>\n          <IPRange>\n            <CIDRIP>127.0.0.1/30</CIDRIP>\n            <Status>authorized</Status>\n          </IPRange>\n        </IPRanges>\n        <OwnerId>621567473609</OwnerId>\n        <DBSecurityGroupName>default</DBSecurityGroupName>\n        <VpcId>vpc-1ab2c3d4</VpcId>\n      </DBSecurityGroup>\n      <DBSecurityGroup>\n        <EC2SecurityGroups/>\n        <DBSecurityGroupDescription>My new DBSecurityGroup</DBSecurityGroupDescription>\n        <IPRanges>\n          <IPRange>\n            <CIDRIP>192.168.1.1/24</CIDRIP>\n            <Status>authorized</Status>\n          </IPRange>\n        </IPRanges>\n        <OwnerId>621567473609</OwnerId>\n        <DBSecurityGroupName>mydbsecuritygroup</DBSecurityGroupName>\n        <VpcId>vpc-1ab2c3d5</VpcId>\n      </DBSecurityGroup>\n      <DBSecurityGroup>\n        <EC2SecurityGroups/>\n        <DBSecurityGroupDescription>My new DBSecurityGroup</DBSecurityGroupDescription>\n        <IPRanges/>\n        <OwnerId>621567473609</OwnerId>\n        <DBSecurityGroupName>mydbsecuritygroup4</DBSecurityGroupName>\n        <VpcId>vpc-1ab2c3d6</VpcId>\n      </DBSecurityGroup>\n    </DBSecurityGroups>\n  </DescribeDBSecurityGroupsResult>\n  <ResponseMetadata>\n    <RequestId>bbdad154-bf42-11de-86a4-97241dfaadff</RequestId>\n  </ResponseMetadata>\n</DescribeDBSecurityGroupsResponse></queryresponse>\n        </examples>\n    "
@@ -4433,7 +4434,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB Snapshot.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Returns information about DBSnapshots. This API supports pagination.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazon.com/\n    ?Action=DescribeDBSnapshots\n    &MaxRecords=100\n    &Version=2013-02-12\n    &Timestamp=2011-05-23T06%3A27%3A42.551Z\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><DescribeDBSnapshotsResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <DescribeDBSnapshotsResult>\n    <DBSnapshots>\n      <DBSnapshot>\n        <Port>3306</Port>\n        <SnapshotCreateTime>2011-05-23T06:29:03.483Z</SnapshotCreateTime>\n        <Engine>mysql</Engine>\n        <Status>available</Status>\n        <AvailabilityZone>us-east-1a</AvailabilityZone>\n        <LicenseModel>general-public-license</LicenseModel>\n        <InstanceCreateTime>2011-05-23T06:06:43.110Z</InstanceCreateTime>\n        <AllocatedStorage>10</AllocatedStorage>\n        <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n        <EngineVersion>5.1.50</EngineVersion>\n        <DBSnapshotIdentifier>mydbsnapshot</DBSnapshotIdentifier>\n        <SnapshotType>manual</SnapshotType>\n        <MasterUsername>master</MasterUsername>\n        <OptionGroupName>myoptiongroupname</OptionGroupName>\n      </DBSnapshot>\n      <DBSnapshot>\n        <Port>3306</Port>\n        <SnapshotCreateTime>2011-03-11T07:20:24.082Z</SnapshotCreateTime>\n        <Engine>mysql</Engine>\n        <Status>available</Status>\n        <AvailabilityZone>us-east-1a</AvailabilityZone>\n        <LicenseModel>general-public-license</LicenseModel>\n        <InstanceCreateTime>2010-08-04T23:27:36.420Z</InstanceCreateTime>\n        <AllocatedStorage>50</AllocatedStorage>\n        <DBInstanceIdentifier>mydbinstance</DBInstanceIdentifier>\n        <EngineVersion>5.1.49</EngineVersion>\n        <DBSnapshotIdentifier>mysnapshot1</DBSnapshotIdentifier>\n        <SnapshotType>manual</SnapshotType>\n        <MasterUsername>sa</MasterUsername>\n        <OptionGroupName>myoptiongroupname</OptionGroupName>\n      </DBSnapshot>\n      <DBSnapshot>\n        <Port>3306</Port>\n        <SnapshotCreateTime>2012-04-02T00:01:24.082Z</SnapshotCreateTime>\n        <Engine>mysql</Engine>\n        <Status>available</Status>\n        <AvailabilityZone>us-east-1d</AvailabilityZone>\n        <LicenseModel>general-public-license</LicenseModel>\n        <InstanceCreateTime>2010-07-16T00:06:59.107Z</InstanceCreateTime>\n        <AllocatedStorage>60</AllocatedStorage>\n        <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n        <EngineVersion>5.1.47</EngineVersion>\n        <DBSnapshotIdentifier>rds:simcoprod01-2012-04-02-00-01</DBSnapshotIdentifier>\n        <SnapshotType>automated</SnapshotType>\n        <MasterUsername>master</MasterUsername>\n        <OptionGroupName>myoptiongroupname</OptionGroupName>\n      </DBSnapshot>\n    </DBSnapshots>\n  </DescribeDBSnapshotsResult>\n  <ResponseMetadata>\n    <RequestId>c4191173-8506-11e0-90aa-eb648410240d</RequestId>\n  </ResponseMetadata>\n</DescribeDBSnapshotsResponse></queryresponse>\n        </examples>\n    "
@@ -4555,7 +4556,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB Subnet Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified,\n        the list will contain only the descriptions of the specified DBSubnetGroup.\n        </p>\n        <p>For an overview of CIDR ranges, go to the \n            <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>.\n        </p>\n        \n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=DescribeDBSubnetGroups\n    &Version=2013-02-12\n    &MaxRecords=100\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T19%3A40%3A19.926Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><DescribeDBSubnetGroupsResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n        <DescribeDBSubnetGroupsResult>\n            <DBSubnetGroups>\n                <DBSubnetGroup>\n                    <VpcId>990524496922</VpcId>\n                    <SubnetGroupStatus>Complete</SubnetGroupStatus>\n                    <DBSubnetGroupDescription>description</DBSubnetGroupDescription>\n                    <DBSubnetGroupName>subnet_grp1</DBSubnetGroupName>\n                    <Subnets>\n                        <Subnet>\n                            <SubnetStatus>Active</SubnetStatus>\n                            <SubnetIdentifier>subnet-7c5b4115</SubnetIdentifier>\n                            <SubnetAvailabilityZone>\n                                <Name>us-east-1c</Name>\n                            </SubnetAvailabilityZone>\n                        </Subnet>\n                        <Subnet>\n                            <SubnetStatus>Active</SubnetStatus>\n                            <SubnetIdentifier>subnet-7b5b4112</SubnetIdentifier>\n                            <SubnetAvailabilityZone>\n                                <Name>us-east-1b</Name>\n                            </SubnetAvailabilityZone>\n                        </Subnet>\n                        <Subnet>\n                            <SubnetStatus>Active</SubnetStatus>\n                            <SubnetIdentifier>subnet-3ea6bd57</SubnetIdentifier>\n                            <SubnetAvailabilityZone>\n                                <Name>us-east-1d</Name>\n                            </SubnetAvailabilityZone>\n                        </Subnet>\n                    </Subnets>\n                </DBSubnetGroup>\n                <DBSubnetGroup>\n                    <VpcId>990524496922</VpcId>\n                    <SubnetGroupStatus>Complete</SubnetGroupStatus>\n                    <DBSubnetGroupDescription>description</DBSubnetGroupDescription>\n                    <DBSubnetGroupName>subnet_grp2</DBSubnetGroupName>\n                    <Subnets>\n                        <Subnet>\n                            <SubnetStatus>Active</SubnetStatus>\n                            <SubnetIdentifier>subnet-7c5b4115</SubnetIdentifier>\n                            <SubnetAvailabilityZone>\n                                <Name>us-east-1c</Name>\n                            </SubnetAvailabilityZone>\n                        </Subnet>\n                        <Subnet>\n                            <SubnetStatus>Active</SubnetStatus>\n                            <SubnetIdentifier>subnet-7b5b4112</SubnetIdentifier>\n                            <SubnetAvailabilityZone>\n                                <Name>us-east-1b</Name>\n                            </SubnetAvailabilityZone>\n                        </Subnet>\n                        <Subnet>\n                            <SubnetStatus>Active</SubnetStatus>\n                            <SubnetIdentifier>subnet-3ea6bd57</SubnetIdentifier>\n                            <SubnetAvailabilityZone>\n                                <Name>us-east-1d</Name>\n                            </SubnetAvailabilityZone>\n                        </Subnet>\n                    </Subnets>\n                </DBSubnetGroup>\n            </DBSubnetGroups>\n        </DescribeDBSubnetGroupsResult>\n        <ResponseMetadata>\n            <RequestId>31d0faee-229b-11e1-81f1-df3a2a803dad</RequestId>\n        </ResponseMetadata>\n    </DescribeDBSubnetGroupsResponse></queryresponse>\n        </examples>\n    "
@@ -5854,12 +5855,14 @@
           "DBInstanceIdentifier": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            The customer-assigned name of the DB Instance that contains the \n            log files you want to list.\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li>\n            <li>First character must be a letter</li>\n            <li>Cannot end with a hyphen or contain two consecutive hyphens</li>\n        </ul>\n    "
+            "documentation": "\n        <p>\n            The customer-assigned name of the DB Instance that contains the \n            log files you want to list.\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li>\n            <li>First character must be a letter</li>\n            <li>Cannot end with a hyphen or contain two consecutive hyphens</li>\n        </ul>\n    ",
+            "required": true
           },
           "LogFileName": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            The name of the log file to be downloaded.\n        </p>\n    "
+            "documentation": "\n        <p>\n            The name of the log file to be downloaded.\n        </p>\n    ",
+            "required": true
           },
           "Marker": {
             "shape_name": "String",
@@ -5902,7 +5905,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n            Downloads the last line of the specified log file.         \n        </p>\n        \n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n?DBInstanceIdentifier=rra-mysql\n&MaxRecords=100\n&Version=2013-02-12\n&Action=DescribeDBLogFiles\n&SignatureVersion=4\n&SignatureMethod=HmacSHA256\n&Timestamp=20130327T173621Z\n&X-Amz-Algorithm=AWS4-HMAC-SHA256\n&X-Amz-Date=20130327T173621Z\n&X-Amz-SignedHeaders=Host\n&X-Amz-Expires=20130327T173621Z\n&X-Amz-Credential=<Credentials>\n&X-Amz-Signature=<Signature>\n            </queryrequest>\n            <queryresponse><DescribeDBLogFilesResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <DescribeDBLogFilesResult>\n    <DescribeDBLogFiles>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364403600000</LastWritten>\n        <LogFileName>error/mysql-error-running.log</LogFileName>\n        <Size>0</Size>\n      </DescribeDBLogFilesDetails>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364338800000</LastWritten>\n        <LogFileName>error/mysql-error-running.log.0</LogFileName>\n        <Size>0</Size>\n      </DescribeDBLogFilesDetails>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364342400000</LastWritten>\n        <LogFileName>error/mysql-error-running.log.1</LogFileName>\n        <Size>0</Size>\n      </DescribeDBLogFilesDetails>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364371200000</LastWritten>\n        <LogFileName>error/mysql-error-running.log.9</LogFileName>\n        <Size>0</Size>\n      </DescribeDBLogFilesDetails>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364405700000</LastWritten>\n        <LogFileName>error/mysql-error.log</LogFileName>\n        <Size>0</Size>\n      </DescribeDBLogFilesDetails>\n    </DescribeDBLogFiles>\n  </DescribeDBLogFilesResult>\n  <ResponseMetadata>\n    <RequestId>d70fb3b3-9704-11e2-a0db-871552e0ef19</RequestId>\n  </ResponseMetadata>\n</DescribeDBLogFilesResponse>\n            </queryresponse>\n        </examples>\n    "
@@ -5958,14 +5961,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         },
         {
           "shape_name": "DBSnapshotNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB Snapshot.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p> Lists all tags on a DB Instance.</p>\n\n    "
@@ -6453,63 +6456,63 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The specified DB Instance is not in the <i>available</i> state.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The specified DB instance is not in the <i>available</i> state.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidDBSecurityGroupStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The state of the DB Security Group does not allow deletion.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The state of the DB security group does not allow deletion.\n        </p>\n    "
         },
         {
           "shape_name": "DBInstanceAlreadyExistsFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        User already has a DB Instance with the given identifier.\n        </p>\n    "
+          "documentation": "\n        <p>\n        User already has a DB instance with the given identifier.\n        </p>\n    "
         },
         {
           "shape_name": "DBInstanceNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         },
         {
           "shape_name": "DBSecurityGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB Security Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB security group.\n        </p>\n    "
         },
         {
           "shape_name": "DBParameterGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB Parameter Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB parameter group.\n        </p>\n    "
         },
         {
           "shape_name": "InsufficientDBInstanceCapacityFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Specified DB Instance class is not available in the specified Availability Zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Specified DB instance class is not available in the specified Availability Zone.\n        </p>\n    "
         },
         {
           "shape_name": "StorageQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the\n        allowed amount of storage available across all DB Instances.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the\n        allowed amount of storage available across all DB instances.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidVPCNetworkStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         DB Subnet Group does not cover all availability zones after it is created because users' change.\n        </p>\n    "
+          "documentation": "\n        <p>\n         DB subnet group does not cover all Availability Zones after it is created because users' change.\n        </p>\n    "
         },
         {
           "shape_name": "ProvisionedIopsNotAvailableInAZFault",
@@ -6636,14 +6639,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB Parameter Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB parameter group.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidDBParameterGroupStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The DB Parameter Group cannot be deleted because it is in use.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The DB parameter group cannot be deleted because it is in use.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Modifies the parameters of a DBParameterGroup. To modify more than one parameter\n        submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20\n        parameters can be modified in a single request.\n        </p>\n        <note>\n            <p>\n                The <code>apply-immediate</code> method can be used only for\n                dynamic parameters; the <code>pending-reboot</code> method can be used\n                with MySQL and Oracle DB Instances for either dynamic or static parameters. For \n                Microsoft SQL Server DB Instances, the <code>pending-reboot</code> method can \n                be used only for static parameters.                \n            </p>\n        </note>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=ModifyDBParameterGroup\n    &DBParameterGroupName=mydbparametergroup\n    &Parameters.member.1.ParameterName=max_user_connections\n    &Parameters.member.1.ParameterValue=24\n    &Parameters.member.1.ApplyMethod=pending-reboot\n    &Parameters.member.2.ParameterName=max_allowed_packet\n    &Parameters.member.2.ParameterValue=1024\n    &Parameters.member.2.ApplyMethod=immediate\n    &Version=2013-02-12\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-05-11T21%3A25%3A00.686Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><ModifyDBParameterGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <ModifyDBParameterGroupResult>\n    <DBParameterGroupName>mydbparametergroup</DBParameterGroupName>\n  </ModifyDBParameterGroupResult>\n  <ResponseMetadata>\n    <RequestId>5ba91f97-bf51-11de-bf60-ef2e377db6f3</RequestId>\n  </ResponseMetadata>\n</ModifyDBParameterGroupResponse></queryresponse>\n        </examples>\n    "
@@ -6761,35 +6764,35 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB Subnet Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of subnets in a DB subnet Groups.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of subnets in a DB subnet groups.\n        </p>\n    "
         },
         {
           "shape_name": "SubnetAlreadyInUse",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            The DB subnet is already in use in the availability zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n            The DB subnet is already in use in the Availability Zone.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetGroupDoesNotCoverEnoughAZs",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 availability zones unless there's'only 1 available zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidSubnet",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         Request subnet is valid, or all subnets are not in common Vpc. \n        </p>\n    "
+          "documentation": null
         }
       ],
       "documentation": "\n        <p>\n            Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=ModifyDBSubnetGroup\n    &DBSubnetGroupName=mydbsubnetgroup\n    &DBSubnetGroupDescription=My%20modified%20DBSubnetGroup\n    &Version=2013-02-12\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T18%3A14%3A49.482Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><ModifyDBSubnetGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n    <ModifyDBSubnetGroupResult>\n            <DBSubnetGroup>\n                <VpcId>990524496922</VpcId>\n                <SubnetGroupStatus>Complete</SubnetGroupStatus>\n                <DBSubnetGroupDescription>My modified DBSubnetGroup</DBSubnetGroupDescription>\n                <DBSubnetGroupName>mydbsubnetgroup</DBSubnetGroupName>\n                <Subnets>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7c5b4115</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1c</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7b5b4112</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1b</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-3ea6bd57</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1d</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                </Subnets>\n            </DBSubnetGroup>       \n        </ModifyDBSubnetGroupResult>\n        <ResponseMetadata>\n            <RequestId>ed662948-a57b-11df-9e38-7ffab86c801f</RequestId>\n        </ResponseMetadata>\n    </ModifyDBSubnetGroupResponse></queryresponse>\n            </examples>\n    "
@@ -7273,7 +7276,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            The Option Group is not in the <i>available</i> state.\n        </p>\n    "
+          "documentation": "\n        <p>\n            The option group is not in the <i>available</i> state.\n        </p>\n    "
         },
         {
           "shape_name": "OptionGroupNotFoundFault",
@@ -7681,14 +7684,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The specified DB Instance is not in the <i>available</i> state.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The specified DB instance is not in the <i>available</i> state.\n        </p>\n    "
         },
         {
           "shape_name": "DBInstanceNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Promotes a Read Replica DB Instance to a standalone DB Instance.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n   ?Action=PromoteReadReplica\n   &DBInstanceIdentifier=simcoprod01\n   &Version=2013-02-12\n   &SignatureVersion=2\n   &SignatureMethod=HmacSHA256\n   &Timestamp=2012-08-23T08%3A02%3A09.574Z\n   &AWSAccessKeyId=<AWS Access Key ID>\n   &Signature=<Signature></queryrequest>\n            <queryresponse><PromoteReadReplicaResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <PromoteReadReplicaResult>\n    <DBInstance>\n      <ReadReplicaDBInstanceIdentifiers/>\n      <LatestRestorableTime>2011-05-23T08:00:00Z</LatestRestorableTime>\n      <Engine>mysql</Engine>\n      <PendingModifiedValues>\n        <AllocatedStorage>50</AllocatedStorage>\n      </PendingModifiedValues>\n      <BackupRetentionPeriod>1</BackupRetentionPeriod>\n      <MultiAZ>false</MultiAZ>\n      <LicenseModel>general-public-license</LicenseModel>\n      <DBInstanceStatus>available</DBInstanceStatus>\n      <EngineVersion>5.1.50</EngineVersion>\n      <Endpoint>\n        <Port>3306</Port>\n        <Address>simcoprod01.cu7u2t4uz396.us-east-1.rds.amazonaws.com</Address>\n      </Endpoint>\n      <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n      <DBParameterGroups>\n        <DBParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <DBParameterGroupName>default.mysql5.1</DBParameterGroupName>\n        </DBParameterGroup>\n      </DBParameterGroups>\n      <DBSecurityGroups>\n        <DBSecurityGroup>\n          <Status>active</Status>\n          <DBSecurityGroupName>default</DBSecurityGroupName>\n        </DBSecurityGroup>\n      </DBSecurityGroups>\n      <PreferredBackupWindow>00:00-00:30</PreferredBackupWindow>\n      <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>\n      <PreferredMaintenanceWindow>sat:07:30-sat:08:00</PreferredMaintenanceWindow>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <InstanceCreateTime>2011-05-23T06:06:43.110Z</InstanceCreateTime>\n      <AllocatedStorage>10</AllocatedStorage>\n      <DBInstanceClass>db.m1.large</DBInstanceClass>\n      <MasterUsername>master</MasterUsername>\n    </DBInstance>\n  </PromoteReadReplicaResult>\n  <ResponseMetadata>\n    <RequestId>f61a020f-8512-11e0-90aa-eb648410240d</RequestId>\n  </ResponseMetadata>\n</PromoteReadReplicaResponse></queryresponse>\n        </examples>\n    "
@@ -8237,14 +8240,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The specified DB Instance is not in the <i>available</i> state.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The specified DB instance is not in the <i>available</i> state.\n        </p>\n    "
         },
         {
           "shape_name": "DBInstanceNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Reboots a previously provisioned RDS instance. This API results in the\n        application of modified DBParameterGroup parameters with ApplyStatus of pending-reboot to the\n        RDS instance. This action is taken as soon as possible, and results in a momentary outage to the RDS\n        instance during which the RDS instance status is set to rebooting. If the RDS instance is configured \n        for MultiAZ, it is possible that the reboot will be conducted through a failover. A DBInstance event \n        is created when the reboot is completed.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=RebootDBInstance\n    &DBInstanceIdentifier=simcoprod01\n    &Version=2013-02-12\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-05-23T06%3A10%3A31.216Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><RebootDBInstanceResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <RebootDBInstanceResult>\n    <DBInstance>\n      <ReadReplicaDBInstanceIdentifiers/>\n      <LatestRestorableTime>2011-05-23T06:07:38.831Z</LatestRestorableTime>\n      <Engine>mysql</Engine>\n      <PendingModifiedValues/>\n      <BackupRetentionPeriod>1</BackupRetentionPeriod>\n      <MultiAZ>false</MultiAZ>\n      <LicenseModel>general-public-license</LicenseModel>\n      <DBInstanceStatus>rebooting</DBInstanceStatus>\n      <EngineVersion>5.1.50</EngineVersion>\n      <Endpoint>\n        <Port>3306</Port>\n        <Address>simcoprod01.cu7u2t4uz396.us-east-1.rds.amazonaws.com</Address>\n      </Endpoint>\n      <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n      <DBParameterGroups>\n        <DBParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <DBParameterGroupName>default.mysql5.1</DBParameterGroupName>\n        </DBParameterGroup>\n      </DBParameterGroups>\n      <DBSecurityGroups>\n        <DBSecurityGroup>\n          <Status>active</Status>\n          <DBSecurityGroupName>default</DBSecurityGroupName>\n        </DBSecurityGroup>\n      </DBSecurityGroups>\n      <PreferredBackupWindow>00:00-00:30</PreferredBackupWindow>\n      <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>\n      <PreferredMaintenanceWindow>sat:07:30-sat:08:00</PreferredMaintenanceWindow>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <InstanceCreateTime>2011-05-23T06:06:43.110Z</InstanceCreateTime>\n      <AllocatedStorage>10</AllocatedStorage>\n      <DBInstanceClass>db.m1.large</DBInstanceClass>\n      <MasterUsername>master</MasterUsername>\n    </DBInstance>\n  </RebootDBInstanceResult>\n  <ResponseMetadata>\n    <RequestId>5d5df758-8503-11e0-90aa-eb648410240d</RequestId>\n  </ResponseMetadata>\n</RebootDBInstanceResponse></queryresponse>\n        </examples>\n    "
@@ -8392,14 +8395,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         },
         {
           "shape_name": "DBSnapshotNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB Snapshot.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p> Removes metadata tags from a DB Instance.</p>\n\n    "
@@ -8509,14 +8512,14 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The DB Parameter Group cannot be deleted because it is in use.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The DB parameter group cannot be deleted because it is in use.\n        </p>\n    "
         },
         {
           "shape_name": "DBParameterGroupNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB Parameter Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBParameterGroupName</i> does not refer to an\n        existing DB parameter group.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Modifies the parameters of a DBParameterGroup to the engine/system default value. To\n        reset specific parameters submit a list of the following: ParameterName and ApplyMethod. To reset the\n        entire DBParameterGroup specify the DBParameterGroup name and ResetAllParameters parameters.\n        When resetting the entire group, dynamic parameters are updated immediately and static parameters\n        are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=ResetDBParameterGroup\n    &DBParameterGroupName=mydbparametergroup\n    &Parameters.member.1.ParameterName=max_user_connections\n    &Parameters.member.1.ApplyMethod=pending-reboot\n    &Parameters.member.2.ParameterName=max_allowed_packet\n    &Parameters.member.2.ApplyMethod=immediate\n    &ResetAllParameters=false\n    &Version=2013-02-12\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><ResetDBParameterGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <ResetDBParameterGroupResult>\n    <DBParameterGroupName>mydbparametergroup</DBParameterGroupName>\n  </ResetDBParameterGroupResult>\n  <ResponseMetadata>\n    <RequestId>071e758f-bf57-11de-9f9f-53d6aee22de9</RequestId>\n  </ResponseMetadata>\n</ResetDBParameterGroupResponse></queryresponse>\n        </examples>\n    "
@@ -8973,49 +8976,49 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        User already has a DB Instance with the given identifier.\n        </p>\n    "
+          "documentation": "\n        <p>\n        User already has a DB instance with the given identifier.\n        </p>\n    "
         },
         {
           "shape_name": "DBSnapshotNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB Snapshot.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot.\n        </p>\n    "
         },
         {
           "shape_name": "InstanceQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB Instances.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB instances.\n        </p>\n    "
         },
         {
           "shape_name": "InsufficientDBInstanceCapacityFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Specified DB Instance class is not available in the specified Availability Zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Specified DB instance class is not available in the specified Availability Zone.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidDBSnapshotStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The state of the DB Security Snapshot does not allow deletion.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The state of the DB snapshot does not allow deletion.\n        </p>\n    "
         },
         {
           "shape_name": "StorageQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the\n        allowed amount of storage available across all DB Instances.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the\n        allowed amount of storage available across all DB instances.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidVPCNetworkStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         DB Subnet Group does not cover all availability zones after it is created because users' change.\n        </p>\n    "
+          "documentation": "\n        <p>\n         DB subnet group does not cover all Availability Zones after it is created because users' change.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidRestoreFault",
@@ -9029,21 +9032,21 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB Subnet Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetGroupDoesNotCoverEnoughAZs",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 availability zones unless there's'only 1 available zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidSubnet",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         Request subnet is valid, or all subnets are not in common Vpc. \n        </p>\n    "
+          "documentation": null
         },
         {
           "shape_name": "ProvisionedIopsNotAvailableInAZFault",
@@ -9524,56 +9527,56 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        User already has a DB Instance with the given identifier.\n        </p>\n    "
+          "documentation": "\n        <p>\n        User already has a DB instance with the given identifier.\n        </p>\n    "
         },
         {
           "shape_name": "DBInstanceNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB Instance.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         },
         {
           "shape_name": "InstanceQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB Instances.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the allowed number of DB instances.\n        </p>\n    "
         },
         {
           "shape_name": "InsufficientDBInstanceCapacityFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Specified DB Instance class is not available in the specified Availability Zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Specified DB instance class is not available in the specified Availability Zone.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidDBInstanceStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The specified DB Instance is not in the <i>available</i> state.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The specified DB instance is not in the <i>available</i> state.\n        </p>\n    "
         },
         {
           "shape_name": "PointInTimeRestoreNotEnabledFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>SourceDBInstanceIdentifier</i>\n        refers to a DB Instance with\n        <i>BackupRetentionPeriod</i> equal to 0.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>SourceDBInstanceIdentifier</i>\n        refers to a DB instance with\n        <i>BackupRetentionPeriod</i> equal to 0.\n        </p>\n    "
         },
         {
           "shape_name": "StorageQuotaExceededFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Request would result in user exceeding the\n        allowed amount of storage available across all DB Instances.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Request would result in user exceeding the\n        allowed amount of storage available across all DB instances.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidVPCNetworkStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         DB Subnet Group does not cover all availability zones after it is created because users' change.\n        </p>\n    "
+          "documentation": "\n        <p>\n         DB subnet group does not cover all Availability Zones after it is created because users' change.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidRestoreFault",
@@ -9587,21 +9590,21 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB Subnet Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group.\n        </p>\n    "
         },
         {
           "shape_name": "DBSubnetGroupDoesNotCoverEnoughAZs",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 availability zones unless there's'only 1 available zone.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidSubnet",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n         Request subnet is valid, or all subnets are not in common Vpc. \n        </p>\n    "
+          "documentation": null
         },
         {
           "shape_name": "ProvisionedIopsNotAvailableInAZFault",
@@ -9751,21 +9754,21 @@
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB Security Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n            <i>DBSecurityGroupName</i> does not refer to an existing DB security group.\n        </p>\n    "
         },
         {
           "shape_name": "AuthorizationNotFoundFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        Specified CIDRIP or EC2 security group is not authorized\n        for the specified DB Security Group.\n        </p>\n    "
+          "documentation": "\n        <p>\n        Specified CIDRIP or EC2 security group is not authorized\n        for the specified DB security group.\n        </p>\n    "
         },
         {
           "shape_name": "InvalidDBSecurityGroupStateFault",
           "type": "structure",
           "members": {
           },
-          "documentation": "\n        <p>\n        The state of the DB Security Group does not allow deletion.\n        </p>\n    "
+          "documentation": "\n        <p>\n        The state of the DB security group does not allow deletion.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Revokes ingress from a DBSecurityGroup for previously authorized IP ranges or EC2 or VPC Security\n        Groups. Required parameters for this API are one of CIDRIP, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId\n        and either EC2SecurityGroupName or EC2SecurityGroupId).\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=RevokeDBSecurityGroupIngress\n    &DBSecurityGroupName=mydbsecuritygroup\n    &CIDRIP=192.168.1.1%2F24\n    &Version=2013-02-12\n    &SignatureVersion=2&SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T22%3A32%3A12.515Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><RevokeDBSecurityGroupIngressResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <RevokeDBSecurityGroupIngressResult>\n    <DBSecurityGroup>\n      <EC2SecurityGroups/>\n      <DBSecurityGroupDescription>My new DBSecurityGroup</DBSecurityGroupDescription>\n      <IPRanges>\n        <IPRange>\n          <CIDRIP>192.168.1.1/24</CIDRIP>\n          <Status>revoking</Status>\n        </IPRange>\n      </IPRanges>\n      <OwnerId>621567473609</OwnerId>\n      <DBSecurityGroupName>mydbsecuritygroup</DBSecurityGroupName>\n      <VpcId>vpc-1ab2c3d4</VpcId>\n    </DBSecurityGroup>\n  </RevokeDBSecurityGroupIngressResult>\n  <ResponseMetadata>\n    <RequestId>beecb8ac-bf5a-11de-9f9f-53d6aee22de9</RequestId>\n  </ResponseMetadata>\n</RevokeDBSecurityGroupIngressResponse></queryresponse>\n        </examples>\n    "
