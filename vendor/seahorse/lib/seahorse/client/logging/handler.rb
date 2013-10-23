@@ -6,9 +6,9 @@ module Seahorse
         # @param [RequestContext] context
         # @return [Response]
         def call(context)
-          context[:started_at] = Time.now
+          context[:logging_started_at] = Time.now
           @handler.call(context).on_complete do |response|
-            context[:completed_at] = Time.now
+            context[:logging_completed_at] = Time.now
             log(context.config, response)
           end
         end

@@ -128,16 +128,9 @@ module Seahorse
         end
 
         def _time(response)
-          time = response.context[:completed_at] - response.context[:started_at]
-          ("%.06f" % time).sub(/0+$/, '')
-        end
-
-        def _http_time(response)
-          raise NotImplementedError
-        end
-
-        def _client_time(response)
-          raise NotImplementedError
+          duration = response.context[:logging_completed_at] -
+            response.context[:logging_started_at]
+          ("%.06f" % duration).sub(/0+$/, '')
         end
 
         def _retries(response)
@@ -173,7 +166,7 @@ module Seahorse
         end
 
         def _http_request_body(response)
-          response.http_request.body_contents
+          summarize_value(response.http_request.body_contents)
         end
 
         def _http_response_status_code(response)
@@ -185,7 +178,7 @@ module Seahorse
         end
 
         def _http_response_body(response)
-          response.context.http_response.body_contents
+          summarize_value(response.context.http_response.body_contents)
         end
 
         def _error_class(response)
@@ -206,7 +199,7 @@ module Seahorse
 
         def summarize_symbol_hash(hash)
           hash.map do |key,v|
-            "#{key.inspect}=>#{summarize_value(v)}"
+            "#{key}:#{summarize_value(v)}"
           end.join(",")
         end
 

@@ -84,7 +84,8 @@ module Seahorse
 
         it 'requires prefixes from plugin names when loading' do
           expect(Kernel.const_defined?(:SeahorseFixtures)).to eq(false)
-          plugins.add('fixtures/plugin.SeahorseFixtures::Plugin')
+          prefix = File.dirname(File.dirname(File.dirname(__FILE__)))
+          plugins.add("#{prefix}/fixtures/plugin.SeahorseFixtures::Plugin")
           expect(plugins.to_a).to eq([SeahorseFixtures::Plugin])
         end
 

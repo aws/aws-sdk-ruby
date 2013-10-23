@@ -22,6 +22,15 @@ module Seahorse
         # @return [IO]
         attr_accessor :body
 
+        # @param [#read, #size, #rewind] io
+        def body=(io)
+          @body = case io
+            when nil then PlainStringIO.new('')
+            when String then PlainStringIO.new(io)
+            else io
+          end
+        end
+
         # @return [String]
         def body_contents
           body.rewind
