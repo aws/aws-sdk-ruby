@@ -39,8 +39,9 @@ Then(/^the response data should include "(.*?)"$/) do |member_name|
   expect(@response.data.members).to include(member_name.to_sym)
 end
 
-Then(/^the response "(.*?)" should be an array$/) do |member_name|
-  expect(@response.data[member_name]).to be_an(Array)
+Then(/^the response "(.*?)" should be an array$/) do |expression|
+  item = eval("@response.#{expression}")
+  expect(item).to be_an(Array)
 end
 
 Then(/^the HTTP request body should be:$/) do |string|
