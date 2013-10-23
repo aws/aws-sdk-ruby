@@ -1,0 +1,12 @@
+# The source cloud front model describes 'MaxItems' as a string instead of
+# an integer.  This test asserts that we can make the request using an integer.
+config:
+  region: us-east-1
+  api_version: '2013-05-12'
+operation: list_distributions
+params:
+  :max_items: 1
+request:
+  host: cloudfront.amazonaws.com
+  path: /2013-05-12/distribution?MaxItems=1
+  body: ''
