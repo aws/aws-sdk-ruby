@@ -2754,6 +2754,7 @@
         "members": {
           "db_instance_identifier": {
             "type": "string",
+            "required": true,
             "serialized_name": "DBInstanceIdentifier"
           },
           "filename_contains": {
@@ -4333,10 +4334,12 @@
         "members": {
           "db_instance_identifier": {
             "type": "string",
+            "required": true,
             "serialized_name": "DBInstanceIdentifier"
           },
           "log_file_name": {
             "type": "string",
+            "required": true,
             "serialized_name": "LogFileName"
           },
           "marker": {

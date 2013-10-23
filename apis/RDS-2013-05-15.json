@@ -258,6 +258,24 @@
             "type": "string",
             "required": true,
             "serialized_name": "TargetDBSnapshotIdentifier"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -459,6 +477,24 @@
           "publicly_accessible": {
             "type": "boolean",
             "serialized_name": "PubliclyAccessible"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -834,6 +870,24 @@
           "publicly_accessible": {
             "type": "boolean",
             "serialized_name": "PubliclyAccessible"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1186,6 +1240,24 @@
             "type": "string",
             "required": true,
             "serialized_name": "Description"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1235,6 +1307,24 @@
             "type": "string",
             "required": true,
             "serialized_name": "DBSecurityGroupDescription"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1332,6 +1422,24 @@
             "type": "string",
             "required": true,
             "serialized_name": "DBInstanceIdentifier"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1441,6 +1549,24 @@
             "members": {
               "type": "string",
               "serialized_name": "SubnetIdentifier"
+            }
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
             }
           }
         }
@@ -1554,6 +1680,24 @@
           "enabled": {
             "type": "boolean",
             "serialized_name": "Enabled"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1645,6 +1789,24 @@
             "type": "string",
             "required": true,
             "serialized_name": "OptionGroupDescription"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -2507,6 +2669,30 @@
             "type": "string",
             "serialized_name": "DBInstanceIdentifier"
           },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
+          },
           "max_records": {
             "type": "integer",
             "serialized_name": "MaxRecords"
@@ -2862,6 +3048,7 @@
         "members": {
           "db_instance_identifier": {
             "type": "string",
+            "required": true,
             "serialized_name": "DBInstanceIdentifier"
           },
           "filename_contains": {
@@ -2931,6 +3118,30 @@
           "db_parameter_group_name": {
             "type": "string",
             "serialized_name": "DBParameterGroupName"
+          },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
           },
           "max_records": {
             "type": "integer",
@@ -3084,6 +3295,30 @@
             "type": "string",
             "serialized_name": "DBSecurityGroupName"
           },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
+          },
           "max_records": {
             "type": "integer",
             "serialized_name": "MaxRecords"
@@ -3199,6 +3434,30 @@
             "type": "string",
             "serialized_name": "SnapshotType"
           },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
+          },
           "max_records": {
             "type": "integer",
             "serialized_name": "MaxRecords"
@@ -3309,6 +3568,30 @@
           "db_subnet_group_name": {
             "type": "string",
             "serialized_name": "DBSubnetGroupName"
+          },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
           },
           "max_records": {
             "type": "integer",
@@ -3556,6 +3839,30 @@
           "subscription_name": {
             "type": "string",
             "serialized_name": "SubscriptionName"
+          },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
           },
           "max_records": {
             "type": "integer",
@@ -3878,6 +4185,30 @@
           "option_group_name": {
             "type": "string",
             "serialized_name": "OptionGroupName"
+          },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
           },
           "marker": {
             "type": "string",
@@ -4207,6 +4538,30 @@
             "type": "boolean",
             "serialized_name": "MultiAZ"
           },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
+          },
           "max_records": {
             "type": "integer",
             "serialized_name": "MaxRecords"
@@ -4449,10 +4804,12 @@
         "members": {
           "db_instance_identifier": {
             "type": "string",
+            "required": true,
             "serialized_name": "DBInstanceIdentifier"
           },
           "log_file_name": {
             "type": "string",
+            "required": true,
             "serialized_name": "LogFileName"
           },
           "marker": {
@@ -5848,6 +6205,24 @@
           "db_instance_count": {
             "type": "integer",
             "serialized_name": "DBInstanceCount"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -6541,6 +6916,24 @@
           "option_group_name": {
             "type": "string",
             "serialized_name": "OptionGroupName"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -6944,6 +7337,24 @@
           "option_group_name": {
             "type": "string",
             "serialized_name": "OptionGroupName"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },

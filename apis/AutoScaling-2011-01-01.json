@@ -220,6 +220,10 @@
           "ebs_optimized": {
             "type": "boolean",
             "serialized_name": "EbsOptimized"
+          },
+          "associate_public_ip_address": {
+            "type": "boolean",
+            "serialized_name": "AssociatePublicIpAddress"
           }
         }
       }
@@ -863,6 +867,10 @@
                 "ebs_optimized": {
                   "type": "boolean",
                   "serialized_name": "EbsOptimized"
+                },
+                "associate_public_ip_address": {
+                  "type": "boolean",
+                  "serialized_name": "AssociatePublicIpAddress"
                 }
               }
             }

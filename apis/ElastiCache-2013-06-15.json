@@ -1,0 +1,3577 @@
+{
+  "version": "2013-06-15",
+  "endpoint": "elasticache.%s.amazonaws.com",
+  "metadata": {
+    "xmlnamespace": "http://elasticache.amazonaws.com/doc/2013-06-15/",
+    "service_full_name": "Amazon ElastiCache",
+    "service_class_name": "ElastiCache"
+  },
+  "plugins": [
+    "Seahorse::Client::Plugins::Logging",
+    "Seahorse::Client::Plugins::RestfulBindings",
+    "Seahorse::Client::Plugins::ContentLength",
+    "Aws::Plugins::RetryErrors",
+    "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::Credentials",
+    "Aws::Plugins::QueryProtocol",
+    "Aws::Plugins::SignatureV2"
+  ],
+  "operations": {
+    "authorize_cache_security_group_ingress": {
+      "name": "AuthorizeCacheSecurityGroupIngress",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_security_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheSecurityGroupName"
+          },
+          "ec2_security_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "EC2SecurityGroupName"
+          },
+          "ec2_security_group_owner_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "EC2SecurityGroupOwnerId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "AuthorizeCacheSecurityGroupIngressResult"
+        },
+        "members": {
+          "cache_security_group": {
+            "type": "structure",
+            "serialized_name": "CacheSecurityGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "owner_id": {
+                "type": "string",
+                "serialized_name": "OwnerId"
+              },
+              "cache_security_group_name": {
+                "type": "string",
+                "serialized_name": "CacheSecurityGroupName"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "ec2_security_groups": {
+                "type": "list",
+                "serialized_name": "EC2SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "EC2SecurityGroup",
+                  "members": {
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "ec2_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "EC2SecurityGroupName"
+                    },
+                    "ec2_security_group_owner_id": {
+                      "type": "string",
+                      "serialized_name": "EC2SecurityGroupOwnerId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_cache_cluster": {
+      "name": "CreateCacheCluster",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_cluster_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheClusterId"
+          },
+          "replication_group_id": {
+            "type": "string",
+            "serialized_name": "ReplicationGroupId"
+          },
+          "num_cache_nodes": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "NumCacheNodes"
+          },
+          "cache_node_type": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheNodeType"
+          },
+          "engine": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Engine"
+          },
+          "engine_version": {
+            "type": "string",
+            "serialized_name": "EngineVersion"
+          },
+          "cache_parameter_group_name": {
+            "type": "string",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "cache_subnet_group_name": {
+            "type": "string",
+            "serialized_name": "CacheSubnetGroupName"
+          },
+          "cache_security_group_names": {
+            "type": "list",
+            "serialized_name": "CacheSecurityGroupNames",
+            "members": {
+              "type": "string",
+              "serialized_name": "CacheSecurityGroupName"
+            }
+          },
+          "security_group_ids": {
+            "type": "list",
+            "serialized_name": "SecurityGroupIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SecurityGroupId"
+            }
+          },
+          "snapshot_arns": {
+            "type": "list",
+            "serialized_name": "SnapshotArns",
+            "members": {
+              "type": "string",
+              "serialized_name": "SnapshotArn"
+            }
+          },
+          "preferred_availability_zone": {
+            "type": "string",
+            "serialized_name": "PreferredAvailabilityZone"
+          },
+          "preferred_maintenance_window": {
+            "type": "string",
+            "serialized_name": "PreferredMaintenanceWindow"
+          },
+          "port": {
+            "type": "integer",
+            "serialized_name": "Port"
+          },
+          "notification_topic_arn": {
+            "type": "string",
+            "serialized_name": "NotificationTopicArn"
+          },
+          "auto_minor_version_upgrade": {
+            "type": "boolean",
+            "serialized_name": "AutoMinorVersionUpgrade"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateCacheClusterResult"
+        },
+        "members": {
+          "cache_cluster": {
+            "type": "structure",
+            "serialized_name": "CacheCluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_cluster_id": {
+                "type": "string",
+                "serialized_name": "CacheClusterId"
+              },
+              "configuration_endpoint": {
+                "type": "structure",
+                "serialized_name": "ConfigurationEndpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "client_download_landing_page": {
+                "type": "string",
+                "serialized_name": "ClientDownloadLandingPage"
+              },
+              "cache_node_type": {
+                "type": "string",
+                "serialized_name": "CacheNodeType"
+              },
+              "engine": {
+                "type": "string",
+                "serialized_name": "Engine"
+              },
+              "engine_version": {
+                "type": "string",
+                "serialized_name": "EngineVersion"
+              },
+              "cache_cluster_status": {
+                "type": "string",
+                "serialized_name": "CacheClusterStatus"
+              },
+              "num_cache_nodes": {
+                "type": "integer",
+                "serialized_name": "NumCacheNodes"
+              },
+              "preferred_availability_zone": {
+                "type": "string",
+                "serialized_name": "PreferredAvailabilityZone"
+              },
+              "cache_cluster_create_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CacheClusterCreateTime"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "num_cache_nodes": {
+                    "type": "integer",
+                    "serialized_name": "NumCacheNodes"
+                  },
+                  "cache_node_ids_to_remove": {
+                    "type": "list",
+                    "serialized_name": "CacheNodeIdsToRemove",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  },
+                  "engine_version": {
+                    "type": "string",
+                    "serialized_name": "EngineVersion"
+                  }
+                }
+              },
+              "notification_configuration": {
+                "type": "structure",
+                "serialized_name": "NotificationConfiguration",
+                "members": {
+                  "topic_arn": {
+                    "type": "string",
+                    "serialized_name": "TopicArn"
+                  },
+                  "topic_status": {
+                    "type": "string",
+                    "serialized_name": "TopicStatus"
+                  }
+                }
+              },
+              "cache_security_groups": {
+                "type": "list",
+                "serialized_name": "CacheSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "CacheSecurityGroup",
+                  "members": {
+                    "cache_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "CacheSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cache_parameter_group": {
+                "type": "structure",
+                "serialized_name": "CacheParameterGroup",
+                "members": {
+                  "cache_parameter_group_name": {
+                    "type": "string",
+                    "serialized_name": "CacheParameterGroupName"
+                  },
+                  "parameter_apply_status": {
+                    "type": "string",
+                    "serialized_name": "ParameterApplyStatus"
+                  },
+                  "cache_node_ids_to_reboot": {
+                    "type": "list",
+                    "serialized_name": "CacheNodeIdsToReboot",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  }
+                }
+              },
+              "cache_subnet_group_name": {
+                "type": "string",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_nodes": {
+                "type": "list",
+                "serialized_name": "CacheNodes",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "CacheNode",
+                  "members": {
+                    "cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    },
+                    "cache_node_status": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeStatus"
+                    },
+                    "cache_node_create_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CacheNodeCreateTime"
+                    },
+                    "endpoint": {
+                      "type": "structure",
+                      "serialized_name": "Endpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "parameter_group_status": {
+                      "type": "string",
+                      "serialized_name": "ParameterGroupStatus"
+                    },
+                    "source_cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "SourceCacheNodeId"
+                    }
+                  }
+                }
+              },
+              "auto_minor_version_upgrade": {
+                "type": "boolean",
+                "serialized_name": "AutoMinorVersionUpgrade"
+              },
+              "security_groups": {
+                "type": "list",
+                "serialized_name": "SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "security_group_id": {
+                      "type": "string",
+                      "serialized_name": "SecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_cache_parameter_group": {
+      "name": "CreateCacheParameterGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "cache_parameter_group_family": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheParameterGroupFamily"
+          },
+          "description": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Description"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateCacheParameterGroupResult"
+        },
+        "members": {
+          "cache_parameter_group": {
+            "type": "structure",
+            "serialized_name": "CacheParameterGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_parameter_group_name": {
+                "type": "string",
+                "serialized_name": "CacheParameterGroupName"
+              },
+              "cache_parameter_group_family": {
+                "type": "string",
+                "serialized_name": "CacheParameterGroupFamily"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_cache_security_group": {
+      "name": "CreateCacheSecurityGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_security_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheSecurityGroupName"
+          },
+          "description": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Description"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateCacheSecurityGroupResult"
+        },
+        "members": {
+          "cache_security_group": {
+            "type": "structure",
+            "serialized_name": "CacheSecurityGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "owner_id": {
+                "type": "string",
+                "serialized_name": "OwnerId"
+              },
+              "cache_security_group_name": {
+                "type": "string",
+                "serialized_name": "CacheSecurityGroupName"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "ec2_security_groups": {
+                "type": "list",
+                "serialized_name": "EC2SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "EC2SecurityGroup",
+                  "members": {
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "ec2_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "EC2SecurityGroupName"
+                    },
+                    "ec2_security_group_owner_id": {
+                      "type": "string",
+                      "serialized_name": "EC2SecurityGroupOwnerId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_cache_subnet_group": {
+      "name": "CreateCacheSubnetGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_subnet_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheSubnetGroupName"
+          },
+          "cache_subnet_group_description": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheSubnetGroupDescription"
+          },
+          "subnet_ids": {
+            "type": "list",
+            "required": true,
+            "serialized_name": "SubnetIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SubnetIdentifier"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateCacheSubnetGroupResult"
+        },
+        "members": {
+          "cache_subnet_group": {
+            "type": "structure",
+            "serialized_name": "CacheSubnetGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_subnet_group_name": {
+                "type": "string",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_subnet_group_description": {
+                "type": "string",
+                "serialized_name": "CacheSubnetGroupDescription"
+              },
+              "vpc_id": {
+                "type": "string",
+                "serialized_name": "VpcId"
+              },
+              "subnets": {
+                "type": "list",
+                "serialized_name": "Subnets",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "Subnet",
+                  "members": {
+                    "subnet_identifier": {
+                      "type": "string",
+                      "serialized_name": "SubnetIdentifier"
+                    },
+                    "subnet_availability_zone": {
+                      "type": "structure",
+                      "serialized_name": "SubnetAvailabilityZone",
+                      "metadata": {
+                        "wrapper": true
+                      },
+                      "members": {
+                        "name": {
+                          "type": "string",
+                          "serialized_name": "Name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_replication_group": {
+      "name": "CreateReplicationGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "replication_group_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ReplicationGroupId"
+          },
+          "primary_cluster_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "PrimaryClusterId"
+          },
+          "replication_group_description": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ReplicationGroupDescription"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateReplicationGroupResult"
+        },
+        "members": {
+          "replication_group": {
+            "type": "structure",
+            "serialized_name": "ReplicationGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "primary_cluster_id": {
+                    "type": "string",
+                    "serialized_name": "PrimaryClusterId"
+                  }
+                }
+              },
+              "member_clusters": {
+                "type": "list",
+                "serialized_name": "MemberClusters",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "ClusterId"
+                }
+              },
+              "node_groups": {
+                "type": "list",
+                "serialized_name": "NodeGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "NodeGroup",
+                  "members": {
+                    "node_group_id": {
+                      "type": "string",
+                      "serialized_name": "NodeGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "primary_endpoint": {
+                      "type": "structure",
+                      "serialized_name": "PrimaryEndpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "node_group_members": {
+                      "type": "list",
+                      "serialized_name": "NodeGroupMembers",
+                      "members": {
+                        "type": "structure",
+                        "serialized_name": "NodeGroupMember",
+                        "members": {
+                          "cache_cluster_id": {
+                            "type": "string",
+                            "serialized_name": "CacheClusterId"
+                          },
+                          "cache_node_id": {
+                            "type": "string",
+                            "serialized_name": "CacheNodeId"
+                          },
+                          "read_endpoint": {
+                            "type": "structure",
+                            "serialized_name": "ReadEndpoint",
+                            "members": {
+                              "address": {
+                                "type": "string",
+                                "serialized_name": "Address"
+                              },
+                              "port": {
+                                "type": "integer",
+                                "serialized_name": "Port"
+                              }
+                            }
+                          },
+                          "preferred_availability_zone": {
+                            "type": "string",
+                            "serialized_name": "PreferredAvailabilityZone"
+                          },
+                          "current_role": {
+                            "type": "string",
+                            "serialized_name": "CurrentRole"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete_cache_cluster": {
+      "name": "DeleteCacheCluster",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_cluster_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheClusterId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DeleteCacheClusterResult"
+        },
+        "members": {
+          "cache_cluster": {
+            "type": "structure",
+            "serialized_name": "CacheCluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_cluster_id": {
+                "type": "string",
+                "serialized_name": "CacheClusterId"
+              },
+              "configuration_endpoint": {
+                "type": "structure",
+                "serialized_name": "ConfigurationEndpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "client_download_landing_page": {
+                "type": "string",
+                "serialized_name": "ClientDownloadLandingPage"
+              },
+              "cache_node_type": {
+                "type": "string",
+                "serialized_name": "CacheNodeType"
+              },
+              "engine": {
+                "type": "string",
+                "serialized_name": "Engine"
+              },
+              "engine_version": {
+                "type": "string",
+                "serialized_name": "EngineVersion"
+              },
+              "cache_cluster_status": {
+                "type": "string",
+                "serialized_name": "CacheClusterStatus"
+              },
+              "num_cache_nodes": {
+                "type": "integer",
+                "serialized_name": "NumCacheNodes"
+              },
+              "preferred_availability_zone": {
+                "type": "string",
+                "serialized_name": "PreferredAvailabilityZone"
+              },
+              "cache_cluster_create_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CacheClusterCreateTime"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "num_cache_nodes": {
+                    "type": "integer",
+                    "serialized_name": "NumCacheNodes"
+                  },
+                  "cache_node_ids_to_remove": {
+                    "type": "list",
+                    "serialized_name": "CacheNodeIdsToRemove",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  },
+                  "engine_version": {
+                    "type": "string",
+                    "serialized_name": "EngineVersion"
+                  }
+                }
+              },
+              "notification_configuration": {
+                "type": "structure",
+                "serialized_name": "NotificationConfiguration",
+                "members": {
+                  "topic_arn": {
+                    "type": "string",
+                    "serialized_name": "TopicArn"
+                  },
+                  "topic_status": {
+                    "type": "string",
+                    "serialized_name": "TopicStatus"
+                  }
+                }
+              },
+              "cache_security_groups": {
+                "type": "list",
+                "serialized_name": "CacheSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "CacheSecurityGroup",
+                  "members": {
+                    "cache_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "CacheSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cache_parameter_group": {
+                "type": "structure",
+                "serialized_name": "CacheParameterGroup",
+                "members": {
+                  "cache_parameter_group_name": {
+                    "type": "string",
+                    "serialized_name": "CacheParameterGroupName"
+                  },
+                  "parameter_apply_status": {
+                    "type": "string",
+                    "serialized_name": "ParameterApplyStatus"
+                  },
+                  "cache_node_ids_to_reboot": {
+                    "type": "list",
+                    "serialized_name": "CacheNodeIdsToReboot",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  }
+                }
+              },
+              "cache_subnet_group_name": {
+                "type": "string",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_nodes": {
+                "type": "list",
+                "serialized_name": "CacheNodes",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "CacheNode",
+                  "members": {
+                    "cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    },
+                    "cache_node_status": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeStatus"
+                    },
+                    "cache_node_create_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CacheNodeCreateTime"
+                    },
+                    "endpoint": {
+                      "type": "structure",
+                      "serialized_name": "Endpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "parameter_group_status": {
+                      "type": "string",
+                      "serialized_name": "ParameterGroupStatus"
+                    },
+                    "source_cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "SourceCacheNodeId"
+                    }
+                  }
+                }
+              },
+              "auto_minor_version_upgrade": {
+                "type": "boolean",
+                "serialized_name": "AutoMinorVersionUpgrade"
+              },
+              "security_groups": {
+                "type": "list",
+                "serialized_name": "SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "security_group_id": {
+                      "type": "string",
+                      "serialized_name": "SecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete_cache_parameter_group": {
+      "name": "DeleteCacheParameterGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheParameterGroupName"
+          }
+        }
+      }
+    },
+    "delete_cache_security_group": {
+      "name": "DeleteCacheSecurityGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_security_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheSecurityGroupName"
+          }
+        }
+      }
+    },
+    "delete_cache_subnet_group": {
+      "name": "DeleteCacheSubnetGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_subnet_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheSubnetGroupName"
+          }
+        }
+      }
+    },
+    "delete_replication_group": {
+      "name": "DeleteReplicationGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "replication_group_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ReplicationGroupId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DeleteReplicationGroupResult"
+        },
+        "members": {
+          "replication_group": {
+            "type": "structure",
+            "serialized_name": "ReplicationGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "primary_cluster_id": {
+                    "type": "string",
+                    "serialized_name": "PrimaryClusterId"
+                  }
+                }
+              },
+              "member_clusters": {
+                "type": "list",
+                "serialized_name": "MemberClusters",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "ClusterId"
+                }
+              },
+              "node_groups": {
+                "type": "list",
+                "serialized_name": "NodeGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "NodeGroup",
+                  "members": {
+                    "node_group_id": {
+                      "type": "string",
+                      "serialized_name": "NodeGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "primary_endpoint": {
+                      "type": "structure",
+                      "serialized_name": "PrimaryEndpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "node_group_members": {
+                      "type": "list",
+                      "serialized_name": "NodeGroupMembers",
+                      "members": {
+                        "type": "structure",
+                        "serialized_name": "NodeGroupMember",
+                        "members": {
+                          "cache_cluster_id": {
+                            "type": "string",
+                            "serialized_name": "CacheClusterId"
+                          },
+                          "cache_node_id": {
+                            "type": "string",
+                            "serialized_name": "CacheNodeId"
+                          },
+                          "read_endpoint": {
+                            "type": "structure",
+                            "serialized_name": "ReadEndpoint",
+                            "members": {
+                              "address": {
+                                "type": "string",
+                                "serialized_name": "Address"
+                              },
+                              "port": {
+                                "type": "integer",
+                                "serialized_name": "Port"
+                              }
+                            }
+                          },
+                          "preferred_availability_zone": {
+                            "type": "string",
+                            "serialized_name": "PreferredAvailabilityZone"
+                          },
+                          "current_role": {
+                            "type": "string",
+                            "serialized_name": "CurrentRole"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_cache_clusters": {
+      "name": "DescribeCacheClusters",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_cluster_id": {
+            "type": "string",
+            "serialized_name": "CacheClusterId"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "show_cache_node_info": {
+            "type": "boolean",
+            "serialized_name": "ShowCacheNodeInfo"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeCacheClustersResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "cache_clusters": {
+            "type": "list",
+            "serialized_name": "CacheClusters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "CacheCluster",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "cache_cluster_id": {
+                  "type": "string",
+                  "serialized_name": "CacheClusterId"
+                },
+                "configuration_endpoint": {
+                  "type": "structure",
+                  "serialized_name": "ConfigurationEndpoint",
+                  "members": {
+                    "address": {
+                      "type": "string",
+                      "serialized_name": "Address"
+                    },
+                    "port": {
+                      "type": "integer",
+                      "serialized_name": "Port"
+                    }
+                  }
+                },
+                "client_download_landing_page": {
+                  "type": "string",
+                  "serialized_name": "ClientDownloadLandingPage"
+                },
+                "cache_node_type": {
+                  "type": "string",
+                  "serialized_name": "CacheNodeType"
+                },
+                "engine": {
+                  "type": "string",
+                  "serialized_name": "Engine"
+                },
+                "engine_version": {
+                  "type": "string",
+                  "serialized_name": "EngineVersion"
+                },
+                "cache_cluster_status": {
+                  "type": "string",
+                  "serialized_name": "CacheClusterStatus"
+                },
+                "num_cache_nodes": {
+                  "type": "integer",
+                  "serialized_name": "NumCacheNodes"
+                },
+                "preferred_availability_zone": {
+                  "type": "string",
+                  "serialized_name": "PreferredAvailabilityZone"
+                },
+                "cache_cluster_create_time": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CacheClusterCreateTime"
+                },
+                "preferred_maintenance_window": {
+                  "type": "string",
+                  "serialized_name": "PreferredMaintenanceWindow"
+                },
+                "pending_modified_values": {
+                  "type": "structure",
+                  "serialized_name": "PendingModifiedValues",
+                  "members": {
+                    "num_cache_nodes": {
+                      "type": "integer",
+                      "serialized_name": "NumCacheNodes"
+                    },
+                    "cache_node_ids_to_remove": {
+                      "type": "list",
+                      "serialized_name": "CacheNodeIdsToRemove",
+                      "members": {
+                        "type": "string",
+                        "serialized_name": "CacheNodeId"
+                      }
+                    },
+                    "engine_version": {
+                      "type": "string",
+                      "serialized_name": "EngineVersion"
+                    }
+                  }
+                },
+                "notification_configuration": {
+                  "type": "structure",
+                  "serialized_name": "NotificationConfiguration",
+                  "members": {
+                    "topic_arn": {
+                      "type": "string",
+                      "serialized_name": "TopicArn"
+                    },
+                    "topic_status": {
+                      "type": "string",
+                      "serialized_name": "TopicStatus"
+                    }
+                  }
+                },
+                "cache_security_groups": {
+                  "type": "list",
+                  "serialized_name": "CacheSecurityGroups",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "CacheSecurityGroup",
+                    "members": {
+                      "cache_security_group_name": {
+                        "type": "string",
+                        "serialized_name": "CacheSecurityGroupName"
+                      },
+                      "status": {
+                        "type": "string",
+                        "serialized_name": "Status"
+                      }
+                    }
+                  }
+                },
+                "cache_parameter_group": {
+                  "type": "structure",
+                  "serialized_name": "CacheParameterGroup",
+                  "members": {
+                    "cache_parameter_group_name": {
+                      "type": "string",
+                      "serialized_name": "CacheParameterGroupName"
+                    },
+                    "parameter_apply_status": {
+                      "type": "string",
+                      "serialized_name": "ParameterApplyStatus"
+                    },
+                    "cache_node_ids_to_reboot": {
+                      "type": "list",
+                      "serialized_name": "CacheNodeIdsToReboot",
+                      "members": {
+                        "type": "string",
+                        "serialized_name": "CacheNodeId"
+                      }
+                    }
+                  }
+                },
+                "cache_subnet_group_name": {
+                  "type": "string",
+                  "serialized_name": "CacheSubnetGroupName"
+                },
+                "cache_nodes": {
+                  "type": "list",
+                  "serialized_name": "CacheNodes",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "CacheNode",
+                    "members": {
+                      "cache_node_id": {
+                        "type": "string",
+                        "serialized_name": "CacheNodeId"
+                      },
+                      "cache_node_status": {
+                        "type": "string",
+                        "serialized_name": "CacheNodeStatus"
+                      },
+                      "cache_node_create_time": {
+                        "type": "iso8601_timestamp",
+                        "serialized_name": "CacheNodeCreateTime"
+                      },
+                      "endpoint": {
+                        "type": "structure",
+                        "serialized_name": "Endpoint",
+                        "members": {
+                          "address": {
+                            "type": "string",
+                            "serialized_name": "Address"
+                          },
+                          "port": {
+                            "type": "integer",
+                            "serialized_name": "Port"
+                          }
+                        }
+                      },
+                      "parameter_group_status": {
+                        "type": "string",
+                        "serialized_name": "ParameterGroupStatus"
+                      },
+                      "source_cache_node_id": {
+                        "type": "string",
+                        "serialized_name": "SourceCacheNodeId"
+                      }
+                    }
+                  }
+                },
+                "auto_minor_version_upgrade": {
+                  "type": "boolean",
+                  "serialized_name": "AutoMinorVersionUpgrade"
+                },
+                "security_groups": {
+                  "type": "list",
+                  "serialized_name": "SecurityGroups",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "security_group_id": {
+                        "type": "string",
+                        "serialized_name": "SecurityGroupId"
+                      },
+                      "status": {
+                        "type": "string",
+                        "serialized_name": "Status"
+                      }
+                    }
+                  }
+                },
+                "replication_group_id": {
+                  "type": "string",
+                  "serialized_name": "ReplicationGroupId"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_cache_engine_versions": {
+      "name": "DescribeCacheEngineVersions",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "engine": {
+            "type": "string",
+            "serialized_name": "Engine"
+          },
+          "engine_version": {
+            "type": "string",
+            "serialized_name": "EngineVersion"
+          },
+          "cache_parameter_group_family": {
+            "type": "string",
+            "serialized_name": "CacheParameterGroupFamily"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "default_only": {
+            "type": "boolean",
+            "serialized_name": "DefaultOnly"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeCacheEngineVersionsResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "cache_engine_versions": {
+            "type": "list",
+            "serialized_name": "CacheEngineVersions",
+            "members": {
+              "type": "structure",
+              "serialized_name": "CacheEngineVersion",
+              "members": {
+                "engine": {
+                  "type": "string",
+                  "serialized_name": "Engine"
+                },
+                "engine_version": {
+                  "type": "string",
+                  "serialized_name": "EngineVersion"
+                },
+                "cache_parameter_group_family": {
+                  "type": "string",
+                  "serialized_name": "CacheParameterGroupFamily"
+                },
+                "cache_engine_description": {
+                  "type": "string",
+                  "serialized_name": "CacheEngineDescription"
+                },
+                "cache_engine_version_description": {
+                  "type": "string",
+                  "serialized_name": "CacheEngineVersionDescription"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_cache_parameter_groups": {
+      "name": "DescribeCacheParameterGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeCacheParameterGroupsResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "cache_parameter_groups": {
+            "type": "list",
+            "serialized_name": "CacheParameterGroups",
+            "members": {
+              "type": "structure",
+              "serialized_name": "CacheParameterGroup",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "cache_parameter_group_name": {
+                  "type": "string",
+                  "serialized_name": "CacheParameterGroupName"
+                },
+                "cache_parameter_group_family": {
+                  "type": "string",
+                  "serialized_name": "CacheParameterGroupFamily"
+                },
+                "description": {
+                  "type": "string",
+                  "serialized_name": "Description"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_cache_parameters": {
+      "name": "DescribeCacheParameters",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "source": {
+            "type": "string",
+            "serialized_name": "Source"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeCacheParametersResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "parameters": {
+            "type": "list",
+            "serialized_name": "Parameters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Parameter",
+              "members": {
+                "parameter_name": {
+                  "type": "string",
+                  "serialized_name": "ParameterName"
+                },
+                "parameter_value": {
+                  "type": "string",
+                  "serialized_name": "ParameterValue"
+                },
+                "description": {
+                  "type": "string",
+                  "serialized_name": "Description"
+                },
+                "source": {
+                  "type": "string",
+                  "serialized_name": "Source"
+                },
+                "data_type": {
+                  "type": "string",
+                  "serialized_name": "DataType"
+                },
+                "allowed_values": {
+                  "type": "string",
+                  "serialized_name": "AllowedValues"
+                },
+                "is_modifiable": {
+                  "type": "boolean",
+                  "serialized_name": "IsModifiable"
+                },
+                "minimum_engine_version": {
+                  "type": "string",
+                  "serialized_name": "MinimumEngineVersion"
+                }
+              }
+            }
+          },
+          "cache_node_type_specific_parameters": {
+            "type": "list",
+            "serialized_name": "CacheNodeTypeSpecificParameters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "CacheNodeTypeSpecificParameter",
+              "members": {
+                "parameter_name": {
+                  "type": "string",
+                  "serialized_name": "ParameterName"
+                },
+                "description": {
+                  "type": "string",
+                  "serialized_name": "Description"
+                },
+                "source": {
+                  "type": "string",
+                  "serialized_name": "Source"
+                },
+                "data_type": {
+                  "type": "string",
+                  "serialized_name": "DataType"
+                },
+                "allowed_values": {
+                  "type": "string",
+                  "serialized_name": "AllowedValues"
+                },
+                "is_modifiable": {
+                  "type": "boolean",
+                  "serialized_name": "IsModifiable"
+                },
+                "minimum_engine_version": {
+                  "type": "string",
+                  "serialized_name": "MinimumEngineVersion"
+                },
+                "cache_node_type_specific_values": {
+                  "type": "list",
+                  "serialized_name": "CacheNodeTypeSpecificValues",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "CacheNodeTypeSpecificValue",
+                    "members": {
+                      "cache_node_type": {
+                        "type": "string",
+                        "serialized_name": "CacheNodeType"
+                      },
+                      "value": {
+                        "type": "string",
+                        "serialized_name": "Value"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_cache_security_groups": {
+      "name": "DescribeCacheSecurityGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_security_group_name": {
+            "type": "string",
+            "serialized_name": "CacheSecurityGroupName"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeCacheSecurityGroupsResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "cache_security_groups": {
+            "type": "list",
+            "serialized_name": "CacheSecurityGroups",
+            "members": {
+              "type": "structure",
+              "serialized_name": "CacheSecurityGroup",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "owner_id": {
+                  "type": "string",
+                  "serialized_name": "OwnerId"
+                },
+                "cache_security_group_name": {
+                  "type": "string",
+                  "serialized_name": "CacheSecurityGroupName"
+                },
+                "description": {
+                  "type": "string",
+                  "serialized_name": "Description"
+                },
+                "ec2_security_groups": {
+                  "type": "list",
+                  "serialized_name": "EC2SecurityGroups",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "EC2SecurityGroup",
+                    "members": {
+                      "status": {
+                        "type": "string",
+                        "serialized_name": "Status"
+                      },
+                      "ec2_security_group_name": {
+                        "type": "string",
+                        "serialized_name": "EC2SecurityGroupName"
+                      },
+                      "ec2_security_group_owner_id": {
+                        "type": "string",
+                        "serialized_name": "EC2SecurityGroupOwnerId"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_cache_subnet_groups": {
+      "name": "DescribeCacheSubnetGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_subnet_group_name": {
+            "type": "string",
+            "serialized_name": "CacheSubnetGroupName"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeCacheSubnetGroupsResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "cache_subnet_groups": {
+            "type": "list",
+            "serialized_name": "CacheSubnetGroups",
+            "members": {
+              "type": "structure",
+              "serialized_name": "CacheSubnetGroup",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "cache_subnet_group_name": {
+                  "type": "string",
+                  "serialized_name": "CacheSubnetGroupName"
+                },
+                "cache_subnet_group_description": {
+                  "type": "string",
+                  "serialized_name": "CacheSubnetGroupDescription"
+                },
+                "vpc_id": {
+                  "type": "string",
+                  "serialized_name": "VpcId"
+                },
+                "subnets": {
+                  "type": "list",
+                  "serialized_name": "Subnets",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "Subnet",
+                    "members": {
+                      "subnet_identifier": {
+                        "type": "string",
+                        "serialized_name": "SubnetIdentifier"
+                      },
+                      "subnet_availability_zone": {
+                        "type": "structure",
+                        "serialized_name": "SubnetAvailabilityZone",
+                        "metadata": {
+                          "wrapper": true
+                        },
+                        "members": {
+                          "name": {
+                            "type": "string",
+                            "serialized_name": "Name"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_engine_default_parameters": {
+      "name": "DescribeEngineDefaultParameters",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_parameter_group_family": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheParameterGroupFamily"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeEngineDefaultParametersResult"
+        },
+        "members": {
+          "engine_defaults": {
+            "type": "structure",
+            "serialized_name": "EngineDefaults",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_parameter_group_family": {
+                "type": "string",
+                "serialized_name": "CacheParameterGroupFamily"
+              },
+              "marker": {
+                "type": "string",
+                "serialized_name": "Marker"
+              },
+              "parameters": {
+                "type": "list",
+                "serialized_name": "Parameters",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "Parameter",
+                  "members": {
+                    "parameter_name": {
+                      "type": "string",
+                      "serialized_name": "ParameterName"
+                    },
+                    "parameter_value": {
+                      "type": "string",
+                      "serialized_name": "ParameterValue"
+                    },
+                    "description": {
+                      "type": "string",
+                      "serialized_name": "Description"
+                    },
+                    "source": {
+                      "type": "string",
+                      "serialized_name": "Source"
+                    },
+                    "data_type": {
+                      "type": "string",
+                      "serialized_name": "DataType"
+                    },
+                    "allowed_values": {
+                      "type": "string",
+                      "serialized_name": "AllowedValues"
+                    },
+                    "is_modifiable": {
+                      "type": "boolean",
+                      "serialized_name": "IsModifiable"
+                    },
+                    "minimum_engine_version": {
+                      "type": "string",
+                      "serialized_name": "MinimumEngineVersion"
+                    }
+                  }
+                }
+              },
+              "cache_node_type_specific_parameters": {
+                "type": "list",
+                "serialized_name": "CacheNodeTypeSpecificParameters",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "CacheNodeTypeSpecificParameter",
+                  "members": {
+                    "parameter_name": {
+                      "type": "string",
+                      "serialized_name": "ParameterName"
+                    },
+                    "description": {
+                      "type": "string",
+                      "serialized_name": "Description"
+                    },
+                    "source": {
+                      "type": "string",
+                      "serialized_name": "Source"
+                    },
+                    "data_type": {
+                      "type": "string",
+                      "serialized_name": "DataType"
+                    },
+                    "allowed_values": {
+                      "type": "string",
+                      "serialized_name": "AllowedValues"
+                    },
+                    "is_modifiable": {
+                      "type": "boolean",
+                      "serialized_name": "IsModifiable"
+                    },
+                    "minimum_engine_version": {
+                      "type": "string",
+                      "serialized_name": "MinimumEngineVersion"
+                    },
+                    "cache_node_type_specific_values": {
+                      "type": "list",
+                      "serialized_name": "CacheNodeTypeSpecificValues",
+                      "members": {
+                        "type": "structure",
+                        "serialized_name": "CacheNodeTypeSpecificValue",
+                        "members": {
+                          "cache_node_type": {
+                            "type": "string",
+                            "serialized_name": "CacheNodeType"
+                          },
+                          "value": {
+                            "type": "string",
+                            "serialized_name": "Value"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_events": {
+      "name": "DescribeEvents",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "source_identifier": {
+            "type": "string",
+            "serialized_name": "SourceIdentifier"
+          },
+          "source_type": {
+            "type": "string",
+            "serialized_name": "SourceType",
+            "enum": [
+              "cache-cluster",
+              "cache-parameter-group",
+              "cache-security-group",
+              "cache-subnet-group"
+            ]
+          },
+          "start_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "StartTime"
+          },
+          "end_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "EndTime"
+          },
+          "duration": {
+            "type": "integer",
+            "serialized_name": "Duration"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeEventsResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "events": {
+            "type": "list",
+            "serialized_name": "Events",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Event",
+              "members": {
+                "source_identifier": {
+                  "type": "string",
+                  "serialized_name": "SourceIdentifier"
+                },
+                "source_type": {
+                  "type": "string",
+                  "serialized_name": "SourceType",
+                  "enum": [
+                    "cache-cluster",
+                    "cache-parameter-group",
+                    "cache-security-group",
+                    "cache-subnet-group"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "serialized_name": "Message"
+                },
+                "date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "Date"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_replication_groups": {
+      "name": "DescribeReplicationGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "replication_group_id": {
+            "type": "string",
+            "serialized_name": "ReplicationGroupId"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeReplicationGroupsResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "replication_groups": {
+            "type": "list",
+            "serialized_name": "ReplicationGroups",
+            "members": {
+              "type": "structure",
+              "serialized_name": "ReplicationGroup",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "replication_group_id": {
+                  "type": "string",
+                  "serialized_name": "ReplicationGroupId"
+                },
+                "description": {
+                  "type": "string",
+                  "serialized_name": "Description"
+                },
+                "status": {
+                  "type": "string",
+                  "serialized_name": "Status"
+                },
+                "pending_modified_values": {
+                  "type": "structure",
+                  "serialized_name": "PendingModifiedValues",
+                  "members": {
+                    "primary_cluster_id": {
+                      "type": "string",
+                      "serialized_name": "PrimaryClusterId"
+                    }
+                  }
+                },
+                "member_clusters": {
+                  "type": "list",
+                  "serialized_name": "MemberClusters",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "ClusterId"
+                  }
+                },
+                "node_groups": {
+                  "type": "list",
+                  "serialized_name": "NodeGroups",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "NodeGroup",
+                    "members": {
+                      "node_group_id": {
+                        "type": "string",
+                        "serialized_name": "NodeGroupId"
+                      },
+                      "status": {
+                        "type": "string",
+                        "serialized_name": "Status"
+                      },
+                      "primary_endpoint": {
+                        "type": "structure",
+                        "serialized_name": "PrimaryEndpoint",
+                        "members": {
+                          "address": {
+                            "type": "string",
+                            "serialized_name": "Address"
+                          },
+                          "port": {
+                            "type": "integer",
+                            "serialized_name": "Port"
+                          }
+                        }
+                      },
+                      "node_group_members": {
+                        "type": "list",
+                        "serialized_name": "NodeGroupMembers",
+                        "members": {
+                          "type": "structure",
+                          "serialized_name": "NodeGroupMember",
+                          "members": {
+                            "cache_cluster_id": {
+                              "type": "string",
+                              "serialized_name": "CacheClusterId"
+                            },
+                            "cache_node_id": {
+                              "type": "string",
+                              "serialized_name": "CacheNodeId"
+                            },
+                            "read_endpoint": {
+                              "type": "structure",
+                              "serialized_name": "ReadEndpoint",
+                              "members": {
+                                "address": {
+                                  "type": "string",
+                                  "serialized_name": "Address"
+                                },
+                                "port": {
+                                  "type": "integer",
+                                  "serialized_name": "Port"
+                                }
+                              }
+                            },
+                            "preferred_availability_zone": {
+                              "type": "string",
+                              "serialized_name": "PreferredAvailabilityZone"
+                            },
+                            "current_role": {
+                              "type": "string",
+                              "serialized_name": "CurrentRole"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_reserved_cache_nodes": {
+      "name": "DescribeReservedCacheNodes",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "reserved_cache_node_id": {
+            "type": "string",
+            "serialized_name": "ReservedCacheNodeId"
+          },
+          "reserved_cache_nodes_offering_id": {
+            "type": "string",
+            "serialized_name": "ReservedCacheNodesOfferingId"
+          },
+          "cache_node_type": {
+            "type": "string",
+            "serialized_name": "CacheNodeType"
+          },
+          "duration": {
+            "type": "string",
+            "serialized_name": "Duration"
+          },
+          "product_description": {
+            "type": "string",
+            "serialized_name": "ProductDescription"
+          },
+          "offering_type": {
+            "type": "string",
+            "serialized_name": "OfferingType"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeReservedCacheNodesResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "reserved_cache_nodes": {
+            "type": "list",
+            "serialized_name": "ReservedCacheNodes",
+            "members": {
+              "type": "structure",
+              "serialized_name": "ReservedCacheNode",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "reserved_cache_node_id": {
+                  "type": "string",
+                  "serialized_name": "ReservedCacheNodeId"
+                },
+                "reserved_cache_nodes_offering_id": {
+                  "type": "string",
+                  "serialized_name": "ReservedCacheNodesOfferingId"
+                },
+                "cache_node_type": {
+                  "type": "string",
+                  "serialized_name": "CacheNodeType"
+                },
+                "start_time": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "StartTime"
+                },
+                "duration": {
+                  "type": "integer",
+                  "serialized_name": "Duration"
+                },
+                "fixed_price": {
+                  "type": "float",
+                  "serialized_name": "FixedPrice"
+                },
+                "usage_price": {
+                  "type": "float",
+                  "serialized_name": "UsagePrice"
+                },
+                "cache_node_count": {
+                  "type": "integer",
+                  "serialized_name": "CacheNodeCount"
+                },
+                "product_description": {
+                  "type": "string",
+                  "serialized_name": "ProductDescription"
+                },
+                "offering_type": {
+                  "type": "string",
+                  "serialized_name": "OfferingType"
+                },
+                "state": {
+                  "type": "string",
+                  "serialized_name": "State"
+                },
+                "recurring_charges": {
+                  "type": "list",
+                  "serialized_name": "RecurringCharges",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "RecurringCharge",
+                    "metadata": {
+                      "wrapper": true
+                    },
+                    "members": {
+                      "recurring_charge_amount": {
+                        "type": "float",
+                        "serialized_name": "RecurringChargeAmount"
+                      },
+                      "recurring_charge_frequency": {
+                        "type": "string",
+                        "serialized_name": "RecurringChargeFrequency"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_reserved_cache_nodes_offerings": {
+      "name": "DescribeReservedCacheNodesOfferings",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "reserved_cache_nodes_offering_id": {
+            "type": "string",
+            "serialized_name": "ReservedCacheNodesOfferingId"
+          },
+          "cache_node_type": {
+            "type": "string",
+            "serialized_name": "CacheNodeType"
+          },
+          "duration": {
+            "type": "string",
+            "serialized_name": "Duration"
+          },
+          "product_description": {
+            "type": "string",
+            "serialized_name": "ProductDescription"
+          },
+          "offering_type": {
+            "type": "string",
+            "serialized_name": "OfferingType"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeReservedCacheNodesOfferingsResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "reserved_cache_nodes_offerings": {
+            "type": "list",
+            "serialized_name": "ReservedCacheNodesOfferings",
+            "members": {
+              "type": "structure",
+              "serialized_name": "ReservedCacheNodesOffering",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "reserved_cache_nodes_offering_id": {
+                  "type": "string",
+                  "serialized_name": "ReservedCacheNodesOfferingId"
+                },
+                "cache_node_type": {
+                  "type": "string",
+                  "serialized_name": "CacheNodeType"
+                },
+                "duration": {
+                  "type": "integer",
+                  "serialized_name": "Duration"
+                },
+                "fixed_price": {
+                  "type": "float",
+                  "serialized_name": "FixedPrice"
+                },
+                "usage_price": {
+                  "type": "float",
+                  "serialized_name": "UsagePrice"
+                },
+                "product_description": {
+                  "type": "string",
+                  "serialized_name": "ProductDescription"
+                },
+                "offering_type": {
+                  "type": "string",
+                  "serialized_name": "OfferingType"
+                },
+                "recurring_charges": {
+                  "type": "list",
+                  "serialized_name": "RecurringCharges",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "RecurringCharge",
+                    "metadata": {
+                      "wrapper": true
+                    },
+                    "members": {
+                      "recurring_charge_amount": {
+                        "type": "float",
+                        "serialized_name": "RecurringChargeAmount"
+                      },
+                      "recurring_charge_frequency": {
+                        "type": "string",
+                        "serialized_name": "RecurringChargeFrequency"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "modify_cache_cluster": {
+      "name": "ModifyCacheCluster",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_cluster_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheClusterId"
+          },
+          "num_cache_nodes": {
+            "type": "integer",
+            "serialized_name": "NumCacheNodes"
+          },
+          "cache_node_ids_to_remove": {
+            "type": "list",
+            "serialized_name": "CacheNodeIdsToRemove",
+            "members": {
+              "type": "string",
+              "serialized_name": "CacheNodeId"
+            }
+          },
+          "cache_security_group_names": {
+            "type": "list",
+            "serialized_name": "CacheSecurityGroupNames",
+            "members": {
+              "type": "string",
+              "serialized_name": "CacheSecurityGroupName"
+            }
+          },
+          "security_group_ids": {
+            "type": "list",
+            "serialized_name": "SecurityGroupIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SecurityGroupId"
+            }
+          },
+          "preferred_maintenance_window": {
+            "type": "string",
+            "serialized_name": "PreferredMaintenanceWindow"
+          },
+          "notification_topic_arn": {
+            "type": "string",
+            "serialized_name": "NotificationTopicArn"
+          },
+          "cache_parameter_group_name": {
+            "type": "string",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "notification_topic_status": {
+            "type": "string",
+            "serialized_name": "NotificationTopicStatus"
+          },
+          "apply_immediately": {
+            "type": "boolean",
+            "serialized_name": "ApplyImmediately"
+          },
+          "engine_version": {
+            "type": "string",
+            "serialized_name": "EngineVersion"
+          },
+          "auto_minor_version_upgrade": {
+            "type": "boolean",
+            "serialized_name": "AutoMinorVersionUpgrade"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ModifyCacheClusterResult"
+        },
+        "members": {
+          "cache_cluster": {
+            "type": "structure",
+            "serialized_name": "CacheCluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_cluster_id": {
+                "type": "string",
+                "serialized_name": "CacheClusterId"
+              },
+              "configuration_endpoint": {
+                "type": "structure",
+                "serialized_name": "ConfigurationEndpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "client_download_landing_page": {
+                "type": "string",
+                "serialized_name": "ClientDownloadLandingPage"
+              },
+              "cache_node_type": {
+                "type": "string",
+                "serialized_name": "CacheNodeType"
+              },
+              "engine": {
+                "type": "string",
+                "serialized_name": "Engine"
+              },
+              "engine_version": {
+                "type": "string",
+                "serialized_name": "EngineVersion"
+              },
+              "cache_cluster_status": {
+                "type": "string",
+                "serialized_name": "CacheClusterStatus"
+              },
+              "num_cache_nodes": {
+                "type": "integer",
+                "serialized_name": "NumCacheNodes"
+              },
+              "preferred_availability_zone": {
+                "type": "string",
+                "serialized_name": "PreferredAvailabilityZone"
+              },
+              "cache_cluster_create_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CacheClusterCreateTime"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "num_cache_nodes": {
+                    "type": "integer",
+                    "serialized_name": "NumCacheNodes"
+                  },
+                  "cache_node_ids_to_remove": {
+                    "type": "list",
+                    "serialized_name": "CacheNodeIdsToRemove",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  },
+                  "engine_version": {
+                    "type": "string",
+                    "serialized_name": "EngineVersion"
+                  }
+                }
+              },
+              "notification_configuration": {
+                "type": "structure",
+                "serialized_name": "NotificationConfiguration",
+                "members": {
+                  "topic_arn": {
+                    "type": "string",
+                    "serialized_name": "TopicArn"
+                  },
+                  "topic_status": {
+                    "type": "string",
+                    "serialized_name": "TopicStatus"
+                  }
+                }
+              },
+              "cache_security_groups": {
+                "type": "list",
+                "serialized_name": "CacheSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "CacheSecurityGroup",
+                  "members": {
+                    "cache_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "CacheSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cache_parameter_group": {
+                "type": "structure",
+                "serialized_name": "CacheParameterGroup",
+                "members": {
+                  "cache_parameter_group_name": {
+                    "type": "string",
+                    "serialized_name": "CacheParameterGroupName"
+                  },
+                  "parameter_apply_status": {
+                    "type": "string",
+                    "serialized_name": "ParameterApplyStatus"
+                  },
+                  "cache_node_ids_to_reboot": {
+                    "type": "list",
+                    "serialized_name": "CacheNodeIdsToReboot",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  }
+                }
+              },
+              "cache_subnet_group_name": {
+                "type": "string",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_nodes": {
+                "type": "list",
+                "serialized_name": "CacheNodes",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "CacheNode",
+                  "members": {
+                    "cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    },
+                    "cache_node_status": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeStatus"
+                    },
+                    "cache_node_create_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CacheNodeCreateTime"
+                    },
+                    "endpoint": {
+                      "type": "structure",
+                      "serialized_name": "Endpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "parameter_group_status": {
+                      "type": "string",
+                      "serialized_name": "ParameterGroupStatus"
+                    },
+                    "source_cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "SourceCacheNodeId"
+                    }
+                  }
+                }
+              },
+              "auto_minor_version_upgrade": {
+                "type": "boolean",
+                "serialized_name": "AutoMinorVersionUpgrade"
+              },
+              "security_groups": {
+                "type": "list",
+                "serialized_name": "SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "security_group_id": {
+                      "type": "string",
+                      "serialized_name": "SecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
+              }
+            }
+          }
+        }
+      }
+    },
+    "modify_cache_parameter_group": {
+      "name": "ModifyCacheParameterGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "parameter_name_values": {
+            "type": "list",
+            "required": true,
+            "serialized_name": "ParameterNameValues",
+            "members": {
+              "type": "structure",
+              "serialized_name": "ParameterNameValue",
+              "members": {
+                "parameter_name": {
+                  "type": "string",
+                  "serialized_name": "ParameterName"
+                },
+                "parameter_value": {
+                  "type": "string",
+                  "serialized_name": "ParameterValue"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ModifyCacheParameterGroupResult"
+        },
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "serialized_name": "CacheParameterGroupName"
+          }
+        }
+      }
+    },
+    "modify_cache_subnet_group": {
+      "name": "ModifyCacheSubnetGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_subnet_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheSubnetGroupName"
+          },
+          "cache_subnet_group_description": {
+            "type": "string",
+            "serialized_name": "CacheSubnetGroupDescription"
+          },
+          "subnet_ids": {
+            "type": "list",
+            "serialized_name": "SubnetIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SubnetIdentifier"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ModifyCacheSubnetGroupResult"
+        },
+        "members": {
+          "cache_subnet_group": {
+            "type": "structure",
+            "serialized_name": "CacheSubnetGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_subnet_group_name": {
+                "type": "string",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_subnet_group_description": {
+                "type": "string",
+                "serialized_name": "CacheSubnetGroupDescription"
+              },
+              "vpc_id": {
+                "type": "string",
+                "serialized_name": "VpcId"
+              },
+              "subnets": {
+                "type": "list",
+                "serialized_name": "Subnets",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "Subnet",
+                  "members": {
+                    "subnet_identifier": {
+                      "type": "string",
+                      "serialized_name": "SubnetIdentifier"
+                    },
+                    "subnet_availability_zone": {
+                      "type": "structure",
+                      "serialized_name": "SubnetAvailabilityZone",
+                      "metadata": {
+                        "wrapper": true
+                      },
+                      "members": {
+                        "name": {
+                          "type": "string",
+                          "serialized_name": "Name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "modify_replication_group": {
+      "name": "ModifyReplicationGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "replication_group_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ReplicationGroupId"
+          },
+          "replication_group_description": {
+            "type": "string",
+            "serialized_name": "ReplicationGroupDescription"
+          },
+          "cache_security_group_names": {
+            "type": "list",
+            "serialized_name": "CacheSecurityGroupNames",
+            "members": {
+              "type": "string",
+              "serialized_name": "CacheSecurityGroupName"
+            }
+          },
+          "security_group_ids": {
+            "type": "list",
+            "serialized_name": "SecurityGroupIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SecurityGroupId"
+            }
+          },
+          "preferred_maintenance_window": {
+            "type": "string",
+            "serialized_name": "PreferredMaintenanceWindow"
+          },
+          "notification_topic_arn": {
+            "type": "string",
+            "serialized_name": "NotificationTopicArn"
+          },
+          "cache_parameter_group_name": {
+            "type": "string",
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "notification_topic_status": {
+            "type": "string",
+            "serialized_name": "NotificationTopicStatus"
+          },
+          "apply_immediately": {
+            "type": "boolean",
+            "serialized_name": "ApplyImmediately"
+          },
+          "engine_version": {
+            "type": "string",
+            "serialized_name": "EngineVersion"
+          },
+          "auto_minor_version_upgrade": {
+            "type": "boolean",
+            "serialized_name": "AutoMinorVersionUpgrade"
+          },
+          "primary_cluster_id": {
+            "type": "string",
+            "serialized_name": "PrimaryClusterId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ModifyReplicationGroupResult"
+        },
+        "members": {
+          "replication_group": {
+            "type": "structure",
+            "serialized_name": "ReplicationGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "primary_cluster_id": {
+                    "type": "string",
+                    "serialized_name": "PrimaryClusterId"
+                  }
+                }
+              },
+              "member_clusters": {
+                "type": "list",
+                "serialized_name": "MemberClusters",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "ClusterId"
+                }
+              },
+              "node_groups": {
+                "type": "list",
+                "serialized_name": "NodeGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "NodeGroup",
+                  "members": {
+                    "node_group_id": {
+                      "type": "string",
+                      "serialized_name": "NodeGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "primary_endpoint": {
+                      "type": "structure",
+                      "serialized_name": "PrimaryEndpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "node_group_members": {
+                      "type": "list",
+                      "serialized_name": "NodeGroupMembers",
+                      "members": {
+                        "type": "structure",
+                        "serialized_name": "NodeGroupMember",
+                        "members": {
+                          "cache_cluster_id": {
+                            "type": "string",
+                            "serialized_name": "CacheClusterId"
+                          },
+                          "cache_node_id": {
+                            "type": "string",
+                            "serialized_name": "CacheNodeId"
+                          },
+                          "read_endpoint": {
+                            "type": "structure",
+                            "serialized_name": "ReadEndpoint",
+                            "members": {
+                              "address": {
+                                "type": "string",
+                                "serialized_name": "Address"
+                              },
+                              "port": {
+                                "type": "integer",
+                                "serialized_name": "Port"
+                              }
+                            }
+                          },
+                          "preferred_availability_zone": {
+                            "type": "string",
+                            "serialized_name": "PreferredAvailabilityZone"
+                          },
+                          "current_role": {
+                            "type": "string",
+                            "serialized_name": "CurrentRole"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "purchase_reserved_cache_nodes_offering": {
+      "name": "PurchaseReservedCacheNodesOffering",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "reserved_cache_nodes_offering_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ReservedCacheNodesOfferingId"
+          },
+          "reserved_cache_node_id": {
+            "type": "string",
+            "serialized_name": "ReservedCacheNodeId"
+          },
+          "cache_node_count": {
+            "type": "integer",
+            "serialized_name": "CacheNodeCount"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "PurchaseReservedCacheNodesOfferingResult"
+        },
+        "members": {
+          "reserved_cache_node": {
+            "type": "structure",
+            "serialized_name": "ReservedCacheNode",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "reserved_cache_node_id": {
+                "type": "string",
+                "serialized_name": "ReservedCacheNodeId"
+              },
+              "reserved_cache_nodes_offering_id": {
+                "type": "string",
+                "serialized_name": "ReservedCacheNodesOfferingId"
+              },
+              "cache_node_type": {
+                "type": "string",
+                "serialized_name": "CacheNodeType"
+              },
+              "start_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "StartTime"
+              },
+              "duration": {
+                "type": "integer",
+                "serialized_name": "Duration"
+              },
+              "fixed_price": {
+                "type": "float",
+                "serialized_name": "FixedPrice"
+              },
+              "usage_price": {
+                "type": "float",
+                "serialized_name": "UsagePrice"
+              },
+              "cache_node_count": {
+                "type": "integer",
+                "serialized_name": "CacheNodeCount"
+              },
+              "product_description": {
+                "type": "string",
+                "serialized_name": "ProductDescription"
+              },
+              "offering_type": {
+                "type": "string",
+                "serialized_name": "OfferingType"
+              },
+              "state": {
+                "type": "string",
+                "serialized_name": "State"
+              },
+              "recurring_charges": {
+                "type": "list",
+                "serialized_name": "RecurringCharges",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "RecurringCharge",
+                  "metadata": {
+                    "wrapper": true
+                  },
+                  "members": {
+                    "recurring_charge_amount": {
+                      "type": "float",
+                      "serialized_name": "RecurringChargeAmount"
+                    },
+                    "recurring_charge_frequency": {
+                      "type": "string",
+                      "serialized_name": "RecurringChargeFrequency"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "reboot_cache_cluster": {
+      "name": "RebootCacheCluster",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_cluster_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheClusterId"
+          },
+          "cache_node_ids_to_reboot": {
+            "type": "list",
+            "required": true,
+            "serialized_name": "CacheNodeIdsToReboot",
+            "members": {
+              "type": "string",
+              "serialized_name": "CacheNodeId"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "RebootCacheClusterResult"
+        },
+        "members": {
+          "cache_cluster": {
+            "type": "structure",
+            "serialized_name": "CacheCluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cache_cluster_id": {
+                "type": "string",
+                "serialized_name": "CacheClusterId"
+              },
+              "configuration_endpoint": {
+                "type": "structure",
+                "serialized_name": "ConfigurationEndpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "client_download_landing_page": {
+                "type": "string",
+                "serialized_name": "ClientDownloadLandingPage"
+              },
+              "cache_node_type": {
+                "type": "string",
+                "serialized_name": "CacheNodeType"
+              },
+              "engine": {
+                "type": "string",
+                "serialized_name": "Engine"
+              },
+              "engine_version": {
+                "type": "string",
+                "serialized_name": "EngineVersion"
+              },
+              "cache_cluster_status": {
+                "type": "string",
+                "serialized_name": "CacheClusterStatus"
+              },
+              "num_cache_nodes": {
+                "type": "integer",
+                "serialized_name": "NumCacheNodes"
+              },
+              "preferred_availability_zone": {
+                "type": "string",
+                "serialized_name": "PreferredAvailabilityZone"
+              },
+              "cache_cluster_create_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "CacheClusterCreateTime"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "num_cache_nodes": {
+                    "type": "integer",
+                    "serialized_name": "NumCacheNodes"
+                  },
+                  "cache_node_ids_to_remove": {
+                    "type": "list",
+                    "serialized_name": "CacheNodeIdsToRemove",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  },
+                  "engine_version": {
+                    "type": "string",
+                    "serialized_name": "EngineVersion"
+                  }
+                }
+              },
+              "notification_configuration": {
+                "type": "structure",
+                "serialized_name": "NotificationConfiguration",
+                "members": {
+                  "topic_arn": {
+                    "type": "string",
+                    "serialized_name": "TopicArn"
+                  },
+                  "topic_status": {
+                    "type": "string",
+                    "serialized_name": "TopicStatus"
+                  }
+                }
+              },
+              "cache_security_groups": {
+                "type": "list",
+                "serialized_name": "CacheSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "CacheSecurityGroup",
+                  "members": {
+                    "cache_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "CacheSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cache_parameter_group": {
+                "type": "structure",
+                "serialized_name": "CacheParameterGroup",
+                "members": {
+                  "cache_parameter_group_name": {
+                    "type": "string",
+                    "serialized_name": "CacheParameterGroupName"
+                  },
+                  "parameter_apply_status": {
+                    "type": "string",
+                    "serialized_name": "ParameterApplyStatus"
+                  },
+                  "cache_node_ids_to_reboot": {
+                    "type": "list",
+                    "serialized_name": "CacheNodeIdsToReboot",
+                    "members": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    }
+                  }
+                }
+              },
+              "cache_subnet_group_name": {
+                "type": "string",
+                "serialized_name": "CacheSubnetGroupName"
+              },
+              "cache_nodes": {
+                "type": "list",
+                "serialized_name": "CacheNodes",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "CacheNode",
+                  "members": {
+                    "cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeId"
+                    },
+                    "cache_node_status": {
+                      "type": "string",
+                      "serialized_name": "CacheNodeStatus"
+                    },
+                    "cache_node_create_time": {
+                      "type": "iso8601_timestamp",
+                      "serialized_name": "CacheNodeCreateTime"
+                    },
+                    "endpoint": {
+                      "type": "structure",
+                      "serialized_name": "Endpoint",
+                      "members": {
+                        "address": {
+                          "type": "string",
+                          "serialized_name": "Address"
+                        },
+                        "port": {
+                          "type": "integer",
+                          "serialized_name": "Port"
+                        }
+                      }
+                    },
+                    "parameter_group_status": {
+                      "type": "string",
+                      "serialized_name": "ParameterGroupStatus"
+                    },
+                    "source_cache_node_id": {
+                      "type": "string",
+                      "serialized_name": "SourceCacheNodeId"
+                    }
+                  }
+                }
+              },
+              "auto_minor_version_upgrade": {
+                "type": "boolean",
+                "serialized_name": "AutoMinorVersionUpgrade"
+              },
+              "security_groups": {
+                "type": "list",
+                "serialized_name": "SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "security_group_id": {
+                      "type": "string",
+                      "serialized_name": "SecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "replication_group_id": {
+                "type": "string",
+                "serialized_name": "ReplicationGroupId"
+              }
+            }
+          }
+        }
+      }
+    },
+    "reset_cache_parameter_group": {
+      "name": "ResetCacheParameterGroup",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheParameterGroupName"
+          },
+          "reset_all_parameters": {
+            "type": "boolean",
+            "serialized_name": "ResetAllParameters"
+          },
+          "parameter_name_values": {
+            "type": "list",
+            "required": true,
+            "serialized_name": "ParameterNameValues",
+            "members": {
+              "type": "structure",
+              "serialized_name": "ParameterNameValue",
+              "members": {
+                "parameter_name": {
+                  "type": "string",
+                  "serialized_name": "ParameterName"
+                },
+                "parameter_value": {
+                  "type": "string",
+                  "serialized_name": "ParameterValue"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ResetCacheParameterGroupResult"
+        },
+        "members": {
+          "cache_parameter_group_name": {
+            "type": "string",
+            "serialized_name": "CacheParameterGroupName"
+          }
+        }
+      }
+    },
+    "revoke_cache_security_group_ingress": {
+      "name": "RevokeCacheSecurityGroupIngress",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cache_security_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CacheSecurityGroupName"
+          },
+          "ec2_security_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "EC2SecurityGroupName"
+          },
+          "ec2_security_group_owner_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "EC2SecurityGroupOwnerId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "RevokeCacheSecurityGroupIngressResult"
+        },
+        "members": {
+          "cache_security_group": {
+            "type": "structure",
+            "serialized_name": "CacheSecurityGroup",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "owner_id": {
+                "type": "string",
+                "serialized_name": "OwnerId"
+              },
+              "cache_security_group_name": {
+                "type": "string",
+                "serialized_name": "CacheSecurityGroupName"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "ec2_security_groups": {
+                "type": "list",
+                "serialized_name": "EC2SecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "EC2SecurityGroup",
+                  "members": {
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "ec2_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "EC2SecurityGroupName"
+                    },
+                    "ec2_security_group_owner_id": {
+                      "type": "string",
+                      "serialized_name": "EC2SecurityGroupOwnerId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

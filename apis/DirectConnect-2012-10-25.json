@@ -30,7 +30,6 @@
         "members": {
           "offering_id": {
             "type": "string",
-            "required": true,
             "serialized_name": "offeringId"
           },
           "connection_name": {
@@ -58,6 +57,7 @@
               "requested",
               "pending",
               "available",
+              "down",
               "deleted"
             ]
           },
@@ -363,6 +363,7 @@
               "requested",
               "pending",
               "available",
+              "down",
               "deleted"
             ]
           },
@@ -439,6 +440,7 @@
               "requested",
               "pending",
               "available",
+              "down",
               "deleted"
             ]
           },
@@ -453,68 +455,6 @@
           "bandwidth": {
             "type": "string",
             "serialized_name": "bandwidth"
-          },
-          "connection_costs": {
-            "type": "list",
-            "serialized_name": "connectionCosts",
-            "members": {
-              "type": "structure",
-              "members": {
-                "name": {
-                  "type": "string",
-                  "serialized_name": "name"
-                },
-                "unit": {
-                  "type": "string",
-                  "serialized_name": "unit"
-                },
-                "currency_code": {
-                  "type": "string",
-                  "serialized_name": "currencyCode"
-                },
-                "amount": {
-                  "type": "string",
-                  "serialized_name": "amount"
-                }
-              }
-            }
-          },
-          "order_steps": {
-            "type": "list",
-            "serialized_name": "orderSteps",
-            "members": {
-              "type": "structure",
-              "members": {
-                "number": {
-                  "type": "string",
-                  "serialized_name": "number"
-                },
-                "name": {
-                  "type": "string",
-                  "serialized_name": "name"
-                },
-                "description": {
-                  "type": "string",
-                  "serialized_name": "description"
-                },
-                "owner": {
-                  "type": "string",
-                  "serialized_name": "owner"
-                },
-                "sla": {
-                  "type": "integer",
-                  "serialized_name": "sla"
-                },
-                "step_state": {
-                  "type": "string",
-                  "serialized_name": "stepState",
-                  "enum": [
-                    "pending",
-                    "completed"
-                  ]
-                }
-              }
-            }
           }
         }
       }
@@ -556,6 +496,7 @@
                     "requested",
                     "pending",
                     "available",
+                    "down",
                     "deleted"
                   ]
                 },

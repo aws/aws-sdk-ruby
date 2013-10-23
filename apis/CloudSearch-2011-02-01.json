@@ -14,7 +14,7 @@
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::QueryProtocol",
-    "Aws::Plugins::SignatureV2"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "create_domain": {

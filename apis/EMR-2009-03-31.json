@@ -838,6 +838,26 @@
               "type": "string"
             }
           },
+          "new_supported_products": {
+            "type": "list",
+            "serialized_name": "NewSupportedProducts",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "args": {
+                  "type": "list",
+                  "serialized_name": "Args",
+                  "members": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
           "visible_to_all_users": {
             "type": "boolean",
             "serialized_name": "VisibleToAllUsers"

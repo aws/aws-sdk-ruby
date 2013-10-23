@@ -21,6 +21,44 @@
     "Aws::Plugins::SignatureV4"
   ],
   "operations": {
+    "assign_volume": {
+      "name": "AssignVolume",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VolumeId"
+          },
+          "instance_id": {
+            "type": "string",
+            "serialized_name": "InstanceId"
+          }
+        }
+      }
+    },
+    "associate_elastic_ip": {
+      "name": "AssociateElasticIp",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "elastic_ip": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ElasticIp"
+          },
+          "instance_id": {
+            "type": "string",
+            "serialized_name": "InstanceId"
+          }
+        }
+      }
+    },
     "attach_elastic_load_balancer": {
       "name": "AttachElasticLoadBalancer",
       "http_method": "POST",
@@ -61,6 +99,10 @@
             "type": "string",
             "serialized_name": "Region"
           },
+          "vpc_id": {
+            "type": "string",
+            "serialized_name": "VpcId"
+          },
           "attributes": {
             "type": "map",
             "serialized_name": "Attributes",
@@ -94,6 +136,10 @@
           "default_availability_zone": {
             "type": "string",
             "serialized_name": "DefaultAvailabilityZone"
+          },
+          "default_subnet_id": {
+            "type": "string",
+            "serialized_name": "DefaultSubnetId"
           },
           "custom_json": {
             "type": "string",
@@ -452,6 +498,10 @@
             "type": "string",
             "serialized_name": "AvailabilityZone"
           },
+          "subnet_id": {
+            "type": "string",
+            "serialized_name": "SubnetId"
+          },
           "architecture": {
             "type": "string",
             "serialized_name": "Architecture",
@@ -607,6 +657,10 @@
             "type": "boolean",
             "serialized_name": "AutoAssignElasticIps"
           },
+          "auto_assign_public_ips": {
+            "type": "boolean",
+            "serialized_name": "AutoAssignPublicIps"
+          },
           "custom_recipes": {
             "type": "structure",
             "serialized_name": "CustomRecipes",
@@ -681,6 +735,10 @@
             "required": true,
             "serialized_name": "Region"
           },
+          "vpc_id": {
+            "type": "string",
+            "serialized_name": "VpcId"
+          },
           "attributes": {
             "type": "map",
             "serialized_name": "Attributes",
@@ -715,6 +773,10 @@
           "default_availability_zone": {
             "type": "string",
             "serialized_name": "DefaultAvailabilityZone"
+          },
+          "default_subnet_id": {
+            "type": "string",
+            "serialized_name": "DefaultSubnetId"
           },
           "custom_json": {
             "type": "string",
@@ -909,6 +971,36 @@
             "type": "string",
             "required": true,
             "serialized_name": "IamUserArn"
+          }
+        }
+      }
+    },
+    "deregister_elastic_ip": {
+      "name": "DeregisterElasticIp",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "elastic_ip": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ElasticIp"
+          }
+        }
+      }
+    },
+    "deregister_volume": {
+      "name": "DeregisterVolume",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VolumeId"
           }
         }
       }
@@ -1274,6 +1366,10 @@
             "type": "string",
             "serialized_name": "InstanceId"
           },
+          "stack_id": {
+            "type": "string",
+            "serialized_name": "StackId"
+          },
           "ips": {
             "type": "list",
             "serialized_name": "Ips",
@@ -1307,6 +1403,10 @@
                 "region": {
                   "type": "string",
                   "serialized_name": "Region"
+                },
+                "instance_id": {
+                  "type": "string",
+                  "serialized_name": "InstanceId"
                 }
               }
             }
@@ -1370,6 +1470,13 @@
                 "availability_zones": {
                   "type": "list",
                   "serialized_name": "AvailabilityZones",
+                  "members": {
+                    "type": "string"
+                  }
+                },
+                "subnet_ids": {
+                  "type": "list",
+                  "serialized_name": "SubnetIds",
                   "members": {
                     "type": "string"
                   }
@@ -1474,6 +1581,10 @@
                   "type": "string",
                   "serialized_name": "AvailabilityZone"
                 },
+                "subnet_id": {
+                  "type": "string",
+                  "serialized_name": "SubnetId"
+                },
                 "public_dns": {
                   "type": "string",
                   "serialized_name": "PublicDns"
@@ -1561,7 +1672,6 @@
         "members": {
           "stack_id": {
             "type": "string",
-            "required": true,
             "serialized_name": "StackId"
           },
           "layer_ids": {
@@ -1701,6 +1811,10 @@
                 "auto_assign_elastic_ips": {
                   "type": "boolean",
                   "serialized_name": "AutoAssignElasticIps"
+                },
+                "auto_assign_public_ips": {
+                  "type": "boolean",
+                  "serialized_name": "AutoAssignPublicIps"
                 },
                 "default_recipes": {
                   "type": "structure",
@@ -2123,6 +2237,10 @@
                   "type": "string",
                   "serialized_name": "Region"
                 },
+                "vpc_id": {
+                  "type": "string",
+                  "serialized_name": "VpcId"
+                },
                 "attributes": {
                   "type": "map",
                   "serialized_name": "Attributes",
@@ -2155,6 +2273,10 @@
                 "default_availability_zone": {
                   "type": "string",
                   "serialized_name": "DefaultAvailabilityZone"
+                },
+                "default_subnet_id": {
+                  "type": "string",
+                  "serialized_name": "DefaultSubnetId"
                 },
                 "custom_json": {
                   "type": "string",
@@ -2407,6 +2529,10 @@
             "type": "string",
             "serialized_name": "InstanceId"
           },
+          "stack_id": {
+            "type": "string",
+            "serialized_name": "StackId"
+          },
           "raid_array_id": {
             "type": "string",
             "serialized_name": "RaidArrayId"
@@ -2499,6 +2625,21 @@
         }
       }
     },
+    "disassociate_elastic_ip": {
+      "name": "DisassociateElasticIp",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "elastic_ip": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ElasticIp"
+          }
+        }
+      }
+    },
     "get_hostname_suggestion": {
       "name": "GetHostnameSuggestion",
       "http_method": "POST",
@@ -2538,6 +2679,63 @@
             "type": "string",
             "required": true,
             "serialized_name": "InstanceId"
+          }
+        }
+      }
+    },
+    "register_elastic_ip": {
+      "name": "RegisterElasticIp",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "elastic_ip": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ElasticIp"
+          },
+          "stack_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StackId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "elastic_ip": {
+            "type": "string",
+            "serialized_name": "ElasticIp"
+          }
+        }
+      }
+    },
+    "register_volume": {
+      "name": "RegisterVolume",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "ec2_volume_id": {
+            "type": "string",
+            "serialized_name": "Ec2VolumeId"
+          },
+          "stack_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StackId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "volume_id": {
+            "type": "string",
+            "serialized_name": "VolumeId"
           }
         }
       }
@@ -2800,6 +2998,21 @@
         }
       }
     },
+    "unassign_volume": {
+      "name": "UnassignVolume",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VolumeId"
+          }
+        }
+      }
+    },
     "update_app": {
       "name": "UpdateApp",
       "http_method": "POST",
@@ -2912,6 +3125,25 @@
             "members": {
               "type": "string"
             }
+          }
+        }
+      }
+    },
+    "update_elastic_ip": {
+      "name": "UpdateElasticIp",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "elastic_ip": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ElasticIp"
+          },
+          "name": {
+            "type": "string",
+            "serialized_name": "Name"
           }
         }
       }
@@ -3083,6 +3315,10 @@
             "type": "boolean",
             "serialized_name": "AutoAssignElasticIps"
           },
+          "auto_assign_public_ips": {
+            "type": "boolean",
+            "serialized_name": "AutoAssignPublicIps"
+          },
           "custom_recipes": {
             "type": "structure",
             "serialized_name": "CustomRecipes",
@@ -3180,6 +3416,10 @@
             "type": "string",
             "serialized_name": "DefaultAvailabilityZone"
           },
+          "default_subnet_id": {
+            "type": "string",
+            "serialized_name": "DefaultSubnetId"
+          },
           "custom_json": {
             "type": "string",
             "serialized_name": "CustomJson"
@@ -3272,6 +3512,29 @@
           "ssh_public_key": {
             "type": "string",
             "serialized_name": "SshPublicKey"
+          }
+        }
+      }
+    },
+    "update_volume": {
+      "name": "UpdateVolume",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VolumeId"
+          },
+          "name": {
+            "type": "string",
+            "serialized_name": "Name"
+          },
+          "mount_point": {
+            "type": "string",
+            "serialized_name": "MountPoint"
           }
         }
       }

@@ -371,6 +371,7 @@
                   "us-west-1",
                   "us-west-2",
                   "ap-southeast-1",
+                  "ap-southeast-2",
                   "ap-northeast-1",
                   "sa-east-1",
                   ""
@@ -2845,7 +2846,7 @@
             "members": {
               "logging_enabled": {
                 "type": "structure",
-                "required": true,
+                "required": false,
                 "serialized_name": "LoggingEnabled",
                 "members": {
                   "target_bucket": {
