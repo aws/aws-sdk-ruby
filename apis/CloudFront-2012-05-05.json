@@ -2274,7 +2274,7 @@
             "location": "uri"
           },
           "max_items": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           }
         }
@@ -2346,7 +2346,7 @@
             "location": "uri"
           },
           "max_items": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           }
         }
@@ -2639,7 +2639,7 @@
             "location": "uri"
           },
           "max_items": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           }
         }
@@ -2707,7 +2707,7 @@
             "location": "uri"
           },
           "max_items": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           }
         }

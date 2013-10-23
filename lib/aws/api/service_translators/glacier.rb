@@ -11,7 +11,7 @@ module Aws::Api::ServiceTranslators::Glacier
 
     # convert all of the "string" date shapes to timestamps
     def convert_dates(api)
-      modify_shapes(api) do |shape_name, shape|
+      each_shape(api) do |shape_name, shape|
         shape.type = 'iso8601_timestamp' if shape.serialized_name =~ /date/i
       end
     end

@@ -10,7 +10,7 @@ module Aws::Api::ServiceTranslators::CloudFront
 
     # max_item shapes are modeled incorrectly as strings instead of numbers
     def convert_max_items(api)
-      modify_shapes(api) do |member_name, shape|
+      each_shape(api) do |member_name, shape|
         shape.type = 'integer' if member_name == :max_items
       end
     end
