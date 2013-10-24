@@ -1,5 +1,3 @@
-require 'set'
-
 module Aws::Api::ServiceTranslators::Glacier
 
   extend Aws::Api::Visitor
@@ -7,8 +5,14 @@ module Aws::Api::ServiceTranslators::Glacier
   class << self
 
     def translate(api)
+      apply_plugins(api)
       remove_checksum(api)
       convert_types(api)
+    end
+
+    def apply_plugins(api)
+      api.plugins << "Aws::Plugins::GlacierApiVersion"
+      api.plugins << "Aws::Plugins::GlacierChecksums"
     end
 
     # this checksum parameter - it must be calculated on xml that is not user
