@@ -1,4 +1,25 @@
+2013-10-24 Alex Wood <awood45@gmail.com>
+
+  * features/direct_connect/step_definitions/client.rb: Update AWS
+  DirectConnect Integration Test
+
+  Cucumber test points to a method now removed, change test to
+  point to a new function.
+
+  * README.md: Fix README Tables
+
+  * doc-src/DirectConnect/V20121025.yml,
+  lib/aws/api_config/DirectConnect-2012-10-25.yml: Update AWS DirectConnect to
+  latest API Version
+
+2013-10-20 Joel Van Horn <joel@joelvanhorn.com>
+
+  * lib/aws/s3/s3_object.rb: Fixed link
+  * lib/aws/s3/tree.rb: fix documentation typo from 20011 to 2011
+
 2013-10-18 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.22.1
 
   * lib/aws/core/json_parser.rb: Handle Null Values in JSON Parser
 
