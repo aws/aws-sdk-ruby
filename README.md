@@ -87,9 +87,15 @@ The SDK currently supports the following services:
       <td>AWS CloudFormation</td>
     </tr>
     <tr>
-      <td>AWS::CloudFront</td>
+      <td rowspan="3">AWS::CloudFront</td>
+      <td>2013-05-12</td>
+      <td rowspan="3">Amazon CloudFront</td>
+    </tr>
+    <tr>
+      <td>2013-08-26</td>
+    </tr>
+    <tr>
       <td>2013-09-27</td>
-      <td>Amazon CloudFront</td>
     </tr>
     <tr>
       <td>AWS::CloudSearch</td>
