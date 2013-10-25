@@ -49,7 +49,7 @@ module Aws
       def structure(shape, hash)
         data = Structure.new(shape.members.keys)
         shape.members.each do |member_name, member_shape|
-          key = member_shape.serialized_name
+          key = member_xmlname(member_shape)
           data[member_name] = member(member_shape, hash[key])
         end
         data
@@ -76,6 +76,14 @@ module Aws
           data[member(key_shape, key)] = member(value_shape, value)
         end
         data
+      end
+
+      def member_xmlname(shape)
+        if shape.is_a?(FlatListShape)
+          shape.members.serialized_name || shape.serialized_name
+        else
+          shape.serialized_name
+        end
       end
 
       def member(shape, raw)

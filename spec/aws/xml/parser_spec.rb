@@ -261,8 +261,7 @@ module Aws
           rules['members'] = {
             'items' => {
               'type' => 'flat_list',
-              'serialized_name' => 'item',
-              'members' => { 'type' => 'string' }
+              'members' => { 'type' => 'string', 'serialized_name' => 'item' }
             }
           }
           xml = <<-XML
