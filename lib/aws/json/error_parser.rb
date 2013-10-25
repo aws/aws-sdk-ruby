@@ -4,7 +4,8 @@ module Aws
 
       def extract_error(response)
         json = MultiJson.load(response.http_response.body_contents)
-        error_code = json['code'] || json['__type']
+        error_code = json['code'] || json['__type'] 
+        error_code ||= response.http_response.headers['x-amzn-errortype']
         error_code = error_code.split('#').last
         if error_code == 'RequestEntityTooLarge'
           error_message = 'Request body must be less than 1 MB'
