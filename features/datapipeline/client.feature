@@ -1,6 +1,6 @@
 # language: en
 @datapipeline @client
-Feature: Amazon CloudWatch
+Feature: AWS Data Pipeline
 
   Scenario: Making a basic request
     When I call "list_pipelines" on "datapipeline"

@@ -2,7 +2,7 @@ def call_request(service, operation_name, params = {})
   service = instance_variable_get("@#{service}")
   begin
     @response = service.build_request(operation_name, params).send_request
-  rescue => error
+  rescue Aws::Errors::ServiceError => error
     @error = error
   end
 end
