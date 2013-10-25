@@ -2,7 +2,7 @@
 @autoscaling @client
 Feature: Auto Scaling
 
-  Scenario: Managing auto scaling groups
+  Scenario: Making a basic request
     When I call "describe_scaling_process_types" on "autoscaling"
     Then the response "processes" should be an array
 

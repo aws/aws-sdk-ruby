@@ -2,7 +2,7 @@
 @cloudformation @client
 Feature: AWS CloudFormation
 
-  Scenario: Listing stacks
+  Scenario: Making a basic request
     When I call "list_stacks" on "cloudformation"
     Then the response "stack_summaries" should be an array
 

@@ -1,6 +1,6 @@
 # language: en
 @opsworks @client
-Feature: Amazon Elastic Compute Cloud
+Feature: AWS OpsWorks
 
   Scenario: Making a basic request
     When I call "describe_stacks" on "opsworks"

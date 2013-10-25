@@ -2,7 +2,7 @@
 @cloudfront @client
 Feature: Amazon CloudFront
 
-  Scenario: Listing distributions
+  Scenario: Making a basic request
     When I call "list_distributions" on "cloudfront" with:
     """
     { max_items: 1 }
