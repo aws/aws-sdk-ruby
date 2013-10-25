@@ -15,7 +15,7 @@ module Seahorse
           end
 
           it 'can be set in the constructor' do
-            endpoint = Object.new
+            endpoint = 'http://foo.com'
             req = request(endpoint: endpoint)
             expect(req.endpoint).to eq(endpoint)
           end

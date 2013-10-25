@@ -16,7 +16,7 @@ Feature: Amazon Simple Queue Service
     """
     { queue_name: 'fake_queue' }
     """
-    Then I expect the response error code to be "AWSSimpleQueueServiceNonExistentQueue"
+    Then I expect the response error code to be "NonExistentQueue"
     And I expect the response error message to include:
     """
     The specified queue does not exist for this wsdl version.
