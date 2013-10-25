@@ -1,5 +1,5 @@
 # language: en
-@datapipeline @client
+@datapipeline @client @pending
 Feature: AWS Data Pipeline
 
   Scenario: Making a basic request

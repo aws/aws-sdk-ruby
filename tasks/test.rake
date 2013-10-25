@@ -19,8 +19,10 @@ namespace :test do
 
   desc "Runs integration tests"
   task :integration do
-    tags = ENV['TAGS'] ? "--tags #{ENV['TAGS']}" : ''
-    execute_cmd("bundle exec cucumber #{tags}".strip)
+    tags = []
+    tags << "--tags ~@pending"
+    tags << "--tags #{ENV['TAGS']}" if ENV['TAGS']
+    execute_cmd("bundle exec cucumber #{tags.join(' ')}".strip)
   end
 
 end
