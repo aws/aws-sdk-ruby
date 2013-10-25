@@ -1,18 +1,21 @@
 # language: en
-@elasticloadbalancing @client
-Feature: Elastic Load Balancing
+@ec2 @client
+Feature: Amazon Elastic Compute Cloud
 
   Scenario: Making a basic request
-    When I call "describe_load_balancers" on "elasticloadbalancing"
-    Then the response "load_balancer_descriptions" should be an array
+    When I call "describe_regions" on "ec2" with:
+    """
+    { region_names: ['us-west-2'] }
+    """
+    Then the response "regions" should be an array
 
   Scenario: Error handling
-    Given I call "describe_load_balancers" on "elasticloadbalancing" with:
+    Given I call "describe_instances" on "ec2" with:
     """
-    { load_balancer_names: ['fake_load_balancer'] }
+    { instance_ids: ['i-12345678'] }
     """
-    Then I expect the response error code to be "ValidationError"
+    Then I expect the response error code to be "InvalidInstanceIDNotFound"
     And I expect the response error message to include:
     """
-    LoadBalancer name cannot contain characters that are not letters, or digits or the dash.
+    The instance ID 'i-12345678' does not exist
     """
