@@ -50,6 +50,24 @@ module Aws
           expect(parse(json)).to eq(foo: 'bar')
         end
 
+        it 'skips over null values' do
+          rules['members'] = {
+            'base' => {
+              'type' => 'structure',
+              'members' => {
+                'nested' => {
+                  'type' => 'structure',
+                  'members' => {
+                    'leaf' => { 'type' => 'string' }
+                  }
+                }
+              }
+            },
+          }
+          json = '{"base":{"nested":null}}'
+          expect(parse(json)).to eq(base: {})
+        end
+
       end
 
       describe 'lists' do
