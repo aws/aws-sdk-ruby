@@ -4,7 +4,8 @@
   "metadata": {
     "service_full_name": "Amazon Simple Queue Service",
     "service_abbreviation": "Amazon SQS",
-    "service_class_name": "SQS"
+    "service_class_name": "SQS",
+    "remove_error_prefix": "AWS.SimpleQueueService."
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

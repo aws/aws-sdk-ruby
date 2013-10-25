@@ -32,6 +32,7 @@ module Aws
       autoload :Glacier, 'aws/api/service_translators/glacier'
       autoload :ImportExport, 'aws/api/service_translators/import_export'
       autoload :S3, 'aws/api/service_translators/s3'
+      autoload :SQS, 'aws/api/service_translators/sqs'
     end
 
   end

@@ -7,7 +7,16 @@ module Aws
         %w(Response ErrorResponse Errors Error).each do |wrapper|
           error = error[wrapper] if error[wrapper]
         end
-        [error['Code'], error['Message']]
+        [remove_prefix(response, error['Code']), error['Message']]
+      end
+
+      def remove_prefix(response, error_code)
+        prefix = response.context.config.api.metadata['remove_error_prefix']
+        if prefix = response.context.config.api.metadata['remove_error_prefix']
+          error_code.sub(/^#{prefix}/, '')
+        else
+          error_code
+        end
       end
 
     end
