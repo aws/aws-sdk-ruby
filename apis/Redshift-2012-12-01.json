@@ -2,7 +2,6 @@
   "version": "2012-12-01",
   "endpoint": "redshift.%s.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "http://redshift.amazonaws.com/doc/2012-12-01/",
     "service_full_name": "Amazon Redshift",
     "service_class_name": "Redshift"
   },

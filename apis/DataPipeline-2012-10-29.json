@@ -4,7 +4,6 @@
   "metadata": {
     "json_target_prefix": "DataPipeline",
     "json_version": 1.1,
-    "xmlnamespace": "http://datapipeline.amazonaws.com/doc/2012-10-29/",
     "service_full_name": "AWS Data Pipeline",
     "service_class_name": "DataPipeline"
   },

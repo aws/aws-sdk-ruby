@@ -3,7 +3,6 @@
   "endpoint": "email.%s.amazonaws.com",
   "metadata": {
     "signing_name": "ses",
-    "xmlnamespace": "http://ses.amazonaws.com/doc/2010-12-01/",
     "service_full_name": "Amazon Simple Email Service",
     "service_abbreviation": "Amazon SES",
     "service_class_name": "SES"

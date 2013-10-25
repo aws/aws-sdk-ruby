@@ -2,7 +2,6 @@
   "version": "2010-05-08",
   "endpoint": "iam.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "https://iam.amazonaws.com/doc/2010-05-08/",
     "service_full_name": "AWS Identity and Access Management",
     "service_abbreviation": "IAM",
     "service_class_name": "IAM"

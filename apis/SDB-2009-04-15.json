@@ -2,7 +2,6 @@
   "version": "2009-04-15",
   "endpoint": "sdb.%s.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "http://sdb.amazonaws.com/doc/2009-04-15/",
     "service_full_name": "Amazon SimpleDB",
     "service_class_name": "SDB"
   },

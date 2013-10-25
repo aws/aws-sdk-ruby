@@ -2,7 +2,6 @@
   "version": "2013-01-10",
   "endpoint": "rds.%s.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "http://rds.amazonaws.com/doc/2013-01-10/",
     "service_full_name": "Amazon Relational Database Service",
     "service_abbreviation": "Amazon RDS",
     "service_class_name": "RDS"

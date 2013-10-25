@@ -2,7 +2,6 @@
   "version": "2010-08-01",
   "endpoint": "monitoring.%s.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "http://monitoring.amazonaws.com/doc/2010-08-01/",
     "service_full_name": "Amazon CloudWatch",
     "service_abbreviation": "CloudWatch",
     "service_class_name": "CloudWatch"

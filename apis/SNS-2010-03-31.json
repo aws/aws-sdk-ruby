@@ -2,7 +2,6 @@
   "version": "2010-03-31",
   "endpoint": "sns.%s.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "http://sns.amazonaws.com/doc/2010-03-31/",
     "service_full_name": "Amazon Simple Notification Service",
     "service_abbreviation": "Amazon SNS",
     "service_class_name": "SNS"

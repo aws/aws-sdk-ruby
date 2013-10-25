@@ -2,7 +2,6 @@
   "version": "2013-06-15",
   "endpoint": "elasticache.%s.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "http://elasticache.amazonaws.com/doc/2013-06-15/",
     "service_full_name": "Amazon ElastiCache",
     "service_class_name": "ElastiCache"
   },

@@ -2,7 +2,6 @@
   "version": "2011-06-15",
   "endpoint": "sts.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "https://sts.amazonaws.com/doc/2011-06-15/",
     "service_full_name": "AWS Security Token Service",
     "service_abbreviation": "AWS STS",
     "service_class_name": "STS"

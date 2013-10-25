@@ -12,7 +12,7 @@ module Aws
         Seahorse::Model::Api.from_hash(@properties).tap do |api|
           sort_metadata_keys(api)
           translate_operations(api)
-          apply_xml_namespaces(api) if xml?
+          apply_xml_namespaces(api)
           set_service_names(api)
           apply_service_customizations(api)
         end
@@ -46,12 +46,14 @@ module Aws
       # the XML serializer can read it.
       def apply_xml_namespaces(api)
         xmlns = api.metadata.delete('xmlnamespace')
-        api.operations.values.each do |operation|
-          if operation.input.payload
-            operation.input.payload_member.metadata['xmlns_uri'] = xmlns
-          elsif !operation.input.payload_member.members.empty?
-            operation.input.serialized_name = operation.name + "Request"
-            operation.input.metadata['xmlns_uri'] = xmlns
+        if xml?
+          api.operations.values.each do |operation|
+            if operation.input.payload
+              operation.input.payload_member.metadata['xmlns_uri'] = xmlns
+            elsif !operation.input.payload_member.members.empty?
+              operation.input.serialized_name = operation.name + "Request"
+              operation.input.metadata['xmlns_uri'] = xmlns
+            end
           end
         end
       end

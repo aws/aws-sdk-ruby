@@ -2,7 +2,6 @@
   "version": "2010-06-01",
   "endpoint": "importexport.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "http://importexport.amazonaws.com/doc/2010-06-01/",
     "service_full_name": "AWS Import/Export",
     "service_class_name": "ImportExport"
   },

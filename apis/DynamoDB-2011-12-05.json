@@ -4,7 +4,6 @@
   "metadata": {
     "json_target_prefix": "DynamoDB_20111205",
     "json_version": 1.0,
-    "xmlnamespace": "http://dynamodb.amazonaws.com/doc/2011-12-05/",
     "service_full_name": "Amazon DynamoDB",
     "service_abbreviation": "DynamoDB",
     "service_class_name": "DynamoDB"

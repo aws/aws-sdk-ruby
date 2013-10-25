@@ -2,7 +2,6 @@
   "version": "2012-11-05",
   "endpoint": "sqs.%s.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "http://queue.amazonaws.com/doc/2012-11-05/",
     "service_full_name": "Amazon Simple Queue Service",
     "service_abbreviation": "Amazon SQS",
     "service_class_name": "SQS"

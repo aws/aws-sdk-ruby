@@ -2,7 +2,6 @@
   "version": "2010-12-01",
   "endpoint": "elasticbeanstalk.%s.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/",
     "service_full_name": "AWS Elastic Beanstalk",
     "service_abbreviation": "Elastic Beanstalk",
     "service_class_name": "ElasticBeanstalk"

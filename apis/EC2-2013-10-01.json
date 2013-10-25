@@ -2,7 +2,6 @@
   "version": "2013-10-01",
   "endpoint": "ec2.%s.amazonaws.com",
   "metadata": {
-    "xmlnamespace": "http://ec2.amazonaws.com/doc/2013-10-01",
     "service_full_name": "Amazon Elastic Compute Cloud",
     "service_abbreviation": "Amazon EC2",
     "service_class_name": "EC2"

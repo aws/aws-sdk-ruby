@@ -4,7 +4,6 @@
   "metadata": {
     "json_target_prefix": "OpsWorks_20130218",
     "json_version": 1.1,
-    "xmlnamespace": "http://opsworks.amazonaws.com/doc/2013-02-18/",
     "service_full_name": "AWS OpsWorks",
     "service_class_name": "OpsWorks"
   },
