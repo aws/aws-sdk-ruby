@@ -1,6 +1,6 @@
 # language: en
 @iam @client
-Feature: Amazon Elastic Compute Cloud
+Feature: AWS Identity and Access Management
 
   Scenario: Making a basic request
     When I call "list_users" on "iam"

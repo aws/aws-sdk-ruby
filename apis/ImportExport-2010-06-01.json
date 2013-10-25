@@ -21,7 +21,7 @@
     "cancel_job": {
       "name": "CancelJob",
       "http_method": "POST",
-      "http_path": "/?Operation=CancelJob",
+      "http_path": "/",
       "input": {
         "type": "input",
         "members": {
@@ -48,7 +48,7 @@
     "create_job": {
       "name": "CreateJob",
       "http_method": "POST",
-      "http_path": "/?Operation=CreateJob",
+      "http_path": "/",
       "input": {
         "type": "input",
         "members": {
@@ -117,7 +117,7 @@
     "get_status": {
       "name": "GetStatus",
       "http_method": "POST",
-      "http_path": "/?Operation=GetStatus",
+      "http_path": "/",
       "input": {
         "type": "input",
         "members": {
@@ -208,7 +208,7 @@
     "list_jobs": {
       "name": "ListJobs",
       "http_method": "POST",
-      "http_path": "/?Operation=ListJobs",
+      "http_path": "/",
       "input": {
         "type": "input",
         "members": {
@@ -267,7 +267,7 @@
     "update_job": {
       "name": "UpdateJob",
       "http_method": "POST",
-      "http_path": "/?Operation=UpdateJob",
+      "http_path": "/",
       "input": {
         "type": "input",
         "members": {
