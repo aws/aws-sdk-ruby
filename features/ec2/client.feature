@@ -2,10 +2,20 @@
 @ec2 @client
 Feature: Amazon Elastic Compute Cloud
 
-  Scenario: DescribeRegions
-    Given I describe the EC2 region "us-west-2"
-    Then the EC2 endpoint for the region should be "ec2.us-west-2.amazonaws.com"
+  Scenario: Making a basic request
+    When I call "describe_regions" on "ec2" with:
+    """
+    { region_names: ['us-west-2'] }
+    """
+    Then the response "regions" should be an array
 
   Scenario: Error handling
-    Given I describe a non-existent instance
-    Then a "InvalidInstanceIDNotFound" error should be raised
+    Given I call "describe_instances" on "ec2" with:
+    """
+    { instance_ids: ['i-12345678'] }
+    """
+    Then I expect the response error code to be "InvalidInstanceIDNotFound"
+    And I expect the response error message to include:
+    """
+    The instance ID 'i-12345678' does not exist
+    """
