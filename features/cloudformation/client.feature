@@ -1,5 +1,5 @@
 # language: en
-@cloudformation
+@cloudformation @client
 Feature: AWS CloudFormation
 
   Scenario: Listing stacks

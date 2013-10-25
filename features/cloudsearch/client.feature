@@ -1,6 +1,6 @@
 # language: en
 @cloudsearch @client
-Feature: Auto Scaling
+Feature: Amazon CloudSearch
 
   Scenario: Making a basic request
     When I call "describe_domains" on "cloudsearch"
