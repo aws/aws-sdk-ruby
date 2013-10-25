@@ -11,7 +11,7 @@ module Seahorse
         # @option options [Headers] :headers (Headers.new)
         # @option options [Body] :body (StringIO.new)
         def initialize(options = {})
-          self.endpoint = options[:endpoint]
+          self.endpoint = options[:endpoint] if options[:endpoint]
           self.http_method = options[:http_method] || 'GET'
           self.path = options[:path] || '/'
           self.headers = Headers.new(options[:headers] || {})
@@ -33,6 +33,10 @@ module Seahorse
 
         # @return [IO]
         attr_reader :body
+
+        def endpoint=(endpoint)
+          @endpoint = Endpoint.new(endpoint)
+        end
 
         # @return [String]
         def body_contents

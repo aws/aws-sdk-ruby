@@ -66,6 +66,7 @@ module Aws
     autoload :SignatureV2, 'aws/plugins/signature_v2'
     autoload :SignatureV3, 'aws/plugins/signature_v3'
     autoload :SignatureV4, 'aws/plugins/signature_v4'
+    autoload :SQSQueueUrls, 'aws/plugins/sqs_queue_urls'
     autoload :XmlProtocol, 'aws/plugins/xml_protocol'
   end
 

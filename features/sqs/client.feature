@@ -6,6 +6,11 @@ Feature: Amazon Simple Queue Service
     When I call "list_queues" on "sqs"
     Then the response "queue_urls" should be an array
 
+  Scenario: Cross Region Queue Operatoins
+    Given I create a queue in "us-west-1"
+    When I operate on that queue in "us-west-2"
+    Then the request should be made against "us-west-1"
+
   Scenario: Error handling
     Given I call "get_queue_url" on "sqs" with:
     """

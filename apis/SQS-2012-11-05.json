@@ -16,7 +16,8 @@
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::QueryProtocol",
-    "Aws::Plugins::SignatureV4"
+    "Aws::Plugins::SignatureV4",
+    "Aws::Plugins::SQSQueueUrls"
   ],
   "operations": {
     "add_permission": {
