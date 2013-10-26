@@ -77,7 +77,7 @@ module AWS
 
         # This method is called on a credential provider to fetch
         # credentials.  The credentials hash returned from this
-        # method will be cashed until the client calls {#refresh}.
+        # method will be cached until the client calls {#refresh}.
         # @return [Hash]
         def get_credentials
           # should be defined in provider classes.
