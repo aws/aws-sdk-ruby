@@ -1404,6 +1404,20 @@ module AWS
 
       end
 
+      # Gets the torrent for a key.
+      # @overload get_object_torrent(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @option options [required,String] :key
+      #   @return [Core::Response]
+      #
+      object_method(:get_object_torrent, :get, 'torrent') do
+        process_response do |resp|
+          extract_object_headers(resp)
+          resp.data[:data] = resp.http_response.body
+        end
+      end
+
       # @overload head_object(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
