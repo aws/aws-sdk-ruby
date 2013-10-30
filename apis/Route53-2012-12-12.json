@@ -683,7 +683,7 @@
             "location": "uri"
           },
           "max_items": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           }
         }
@@ -752,7 +752,7 @@
             "serialized_name": "NextMarker"
           },
           "max_items": {
-            "type": "string",
+            "type": "integer",
             "serialized_name": "MaxItems"
           }
         }
@@ -770,7 +770,7 @@
             "location": "uri"
           },
           "max_items": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           }
         }
@@ -827,7 +827,7 @@
             "serialized_name": "NextMarker"
           },
           "max_items": {
-            "type": "string",
+            "type": "integer",
             "serialized_name": "MaxItems"
           }
         }
@@ -870,7 +870,7 @@
             "location": "uri"
           },
           "max_items": {
-            "type": "string",
+            "type": "integer",
             "location": "uri"
           }
         }
@@ -1007,7 +1007,7 @@
             "serialized_name": "NextRecordIdentifier"
           },
           "max_items": {
-            "type": "string",
+            "type": "integer",
             "serialized_name": "MaxItems"
           }
         }

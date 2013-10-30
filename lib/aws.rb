@@ -31,6 +31,7 @@ module Aws
       autoload :DynamoDB, 'aws/api/service_translators/dynamo_db'
       autoload :Glacier, 'aws/api/service_translators/glacier'
       autoload :ImportExport, 'aws/api/service_translators/import_export'
+      autoload :Route53, 'aws/api/service_translators/route53'
       autoload :S3, 'aws/api/service_translators/s3'
       autoload :SQS, 'aws/api/service_translators/sqs'
     end
