@@ -60,7 +60,6 @@ module Aws
     autoload :S3CompleteMultipartUploadFix, 'aws/plugins/s3_complete_multipart_upload_fix'
     autoload :S3GetBucketLocationFix, 'aws/plugins/s3_get_bucket_location_fix'
     autoload :S3Md5s, 'aws/plugins/s3_md5s'
-    autoload :S3RegionalEndpoint, 'aws/plugins/s3_regional_endpoint'
     autoload :S3Redirects, 'aws/plugins/s3_redirects'
     autoload :S3Signer, 'aws/plugins/s3_signer'
     autoload :SignatureV2, 'aws/plugins/signature_v2'

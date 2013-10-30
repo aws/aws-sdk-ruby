@@ -4,80 +4,71 @@ module Aws
   module Plugins
     describe RegionalEndpoint do
 
-      let(:api) do
-        Seahorse::Model::Api.new.tap do |api|
-          api.endpoint = 'svc.%s.amazonaws.com'
-        end
-      end
-
       let(:env) { {} }
+
+      let(:client_class) {
+        Seahorse::Client.define(plugins: [RegionalEndpoint])
+      }
 
       before do
         stub_const("ENV", env)
       end
 
-      def setup_plugin(options = {})
-        options[:api] ||= api
-
-        @config ||= Seahorse::Client::Configuration.new
-        @config.add_option(:api)
-        RegionalEndpoint.new.add_options(@config)
-        @config = @config.build!(options)
-
-        @handlers ||= Seahorse::Client::HandlerList.new
-        RegionalEndpoint.new.add_handlers(@handlers, @config)
-      end
-
       describe 'region option' do
 
         it 'adds a :region configuration option' do
-          setup_plugin(region: 'region')
-          expect(@config.region).to eq('region')
+          expect(client_class.new(region: 'region').config.region).to eq('region')
         end
 
         it 'defaults to ENV["AWS_REGION"]' do
-          env['AWS_REGION'] = 'aws-region'
-          setup_plugin
-          expect(@config.region).to eq('aws-region')
+          env['AWS_REGION'] = 'env-region'
+          expect(client_class.new.config.region).to eq('env-region')
         end
 
         it 'falls back to ENV["AMAZON_REGION"]' do
-          env['AMAZON_REGION'] = 'amazon-region'
-          setup_plugin
-          expect(@config.region).to eq('amazon-region')
+          env['AMAZON_REGION'] = 'region-fallback'
+          expect(client_class.new.config.region).to eq('region-fallback')
         end
 
         it 'prefers AWS_REGION to AMAZON_REGION' do
           env['AWS_REGION'] = 'aws-region'
           env['AMAZON_REGION'] = 'amazon-region'
-          setup_plugin
-          expect(@config.region).to eq('aws-region')
+          expect(client_class.new.config.region).to eq('aws-region')
+        end
+
+        it 'can be set directly, overriding the ENV["AWS_REGION"]' do
+          env['AWS_REGION'] = 'env-region'
+          expect(client_class.new(region:'cfg').config.region).to eq('cfg')
         end
 
         it 'raises an argument error when not set' do
-          expect { setup_plugin }.to raise_error(
-            ArgumentError, RegionalEndpoint::MISSING_REGION)
+          client = Seahorse::Client.define
+          client.add_plugin(RegionalEndpoint)
+          expect { client.new }.to raise_error(Errors::MissingRegionError)
         end
 
         it 'raises an argument error when set to nil' do
-          expect { setup_plugin(region: nil) }.to raise_error(
-            ArgumentError, RegionalEndpoint::MISSING_REGION)
-        end
-
-        it 'can be set' do
-          env['AWS_REGION'] = 'aws-region'
-          setup_plugin(endpoint: 'my-endpoint')
-          expect(@config.endpoint).to eq('my-endpoint')
+          client = Seahorse::Client.define
+          client.add_plugin(RegionalEndpoint)
+          expect { client.new(region:nil) }.to raise_error(Errors::MissingRegionError)
         end
 
       end
 
       describe 'endpoint option' do
 
-        it 'builds the endpoint from the regional_endpoint and the region' do
-          api.metadata['regional_endpoint'] = 'svc.%s.amazonaws.com'
-          setup_plugin(api: api, region: 'REGION')
-          expect(@config.endpoint).to eq('svc.REGION.amazonaws.com')
+        it 'defaults the endpoint to PREFIX.REGION.amazonaws.com' do
+          client_class.api.metadata['endpoint_prefix'] = 'PREFIX'
+          client = client_class.new(region: 'REGION')
+          expect(client.config.endpoint).to eq('PREFIX.REGION.amazonaws.com')
+        end
+
+        it 'uses the endpoint defined in metadata if present' do
+          client_class.api.metadata['regional_endpoints'] = {
+            'region-name' => 'ENDPOINT'
+          }
+          client = client_class.new(region: 'region-name')
+          expect(client.config.endpoint).to eq('ENDPOINT')
         end
 
       end

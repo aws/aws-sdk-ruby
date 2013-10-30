@@ -17,6 +17,9 @@ module Aws
     # set, or the set credentials are empty.
     class MissingCredentialsError < RuntimeError; end
 
+    # Raised when a {Service} is constructed and region is not specified.
+    class MissingRegionError < RuntimeError; end
+
     # This module is mixed into another module, providing dynamic
     # error classes.  Error classes all inherit from {ServiceError}.
     #

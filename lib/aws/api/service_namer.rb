@@ -10,10 +10,10 @@ module Aws
     #
     class ServiceNamer
 
-      def initialize(endpoint, full_name, abbreviation = nil)
+      def initialize(endpoint_prefix, full_name, abbreviation = nil)
         @full_name = full_name
         @abbreviation = abbreviation
-        @class_name = build_class_name(endpoint)
+        @class_name = build_class_name(endpoint_prefix)
       end
 
       # @return [String]
@@ -29,11 +29,10 @@ module Aws
 
       private
 
-      def build_class_name(endpoint)
-        endpoint_prefix = endpoint.split(/[.-]/).first.upcase
+      def build_class_name(endpoint_prefix)
         name = @abbreviation || @full_name
         name = name.sub('Amazon', '').sub('AWS', '').gsub(/\W+/, '')
-        [name, endpoint_prefix].sort_by(&:size).first
+        [name, endpoint_prefix.upcase].sort_by(&:size).first
       end
 
     end

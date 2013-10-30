@@ -8,12 +8,18 @@ module Aws
     class SignatureV4 < Seahorse::Client::Plugin
 
       option(:sigv4_name) do |config|
-        config.api.metadata['signing_name'] ||
-          config.endpoint.split(/[.-]/)[0]
+        config.api.metadata['endpoint_prefix']
       end
 
       option(:sigv4_region) do |config|
-        config.api.endpoint.match(/%s/) ? config.region : 'us-east-1'
+        prefix = config.api.metadata['endpoint_prefix']
+        if matches = config.endpoint.match(/#{prefix}[.-](.+)\.amazonaws.com/)
+          matches[1]
+        elsif config.endpoint.match(/#{prefix}.amazonaws.com/)
+          'us-east-1'
+        else
+          config.region
+        end
       end
 
       handler(Signers::Handler.new(Signers::V4), step: :sign)

@@ -1,4 +1,3 @@
-
 module Aws
   module Plugins
 
@@ -20,11 +19,17 @@ module Aws
 
       option(:region) { ENV['AWS_REGION'] || ENV['AMAZON_REGION'] }
 
-      option(:endpoint) do |config|
-        if config.api.endpoint.match(/%s/) and config.region.nil?
-          raise ArgumentError, MISSING_REGION
+      option(:endpoint) do |cfg|
+        endpoints = cfg.api.metadata['regional_endpoints']
+        if endpoints && endpoints[cfg.region]
+          endpoints[cfg.region]
+        else
+          "#{cfg.api.metadata['endpoint_prefix']}.#{cfg.region}.amazonaws.com"
         end
-        config.api.endpoint % config.region
+      end
+
+      def after_initialize(client)
+        raise Errors::MissingRegionError unless client.config.region
       end
 
     end

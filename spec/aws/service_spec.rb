@@ -85,7 +85,6 @@ module Aws
 
       let(:svc) {
         svc = Service.define(:svc, apis)
-        svc.remove_plugin(Plugins::S3RegionalEndpoint)
         svc.remove_plugin(Plugins::GlobalConfiguration)
         svc
       }

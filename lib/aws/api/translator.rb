@@ -10,11 +10,11 @@ module Aws
 
       def translated
         Seahorse::Model::Api.from_hash(@properties).tap do |api|
-          sort_metadata_keys(api)
           translate_operations(api)
           apply_xml_namespaces(api)
           set_service_names(api)
           apply_service_customizations(api)
+          sort_metadata_keys(api)
         end
       end
 
@@ -67,7 +67,7 @@ module Aws
 
       def service_namer(api)
         args = []
-        args << api.endpoint
+        args << api.metadata['endpoint_prefix']
         args << api.metadata.delete('service_full_name')
         args << api.metadata.delete('service_abbreviation')
         yield(Api::ServiceNamer.new(*args))
@@ -86,6 +86,8 @@ module Aws
       metadata :service_full_name
       metadata :service_abbreviation
       metadata :xmlnamespace
+
+      ignore :global_endpoint
 
       def set_type(type)
         plugins = @properties['plugins'] ||= []
@@ -126,12 +128,16 @@ module Aws
         @result_wrapped = state
       end
 
-      def set_global_endpoint(endpoint)
-        @properties['endpoint'] = endpoint
-      end
-
       def set_endpoint_prefix(prefix)
-        @properties['endpoint'] ||= "#{prefix}.%s.amazonaws.com"
+        data = MultiJson.load(File.read('endpoints.json'))
+        region_names = data['services'][prefix]
+        regions = {}
+        region_names.each do |region|
+          regions[region] = data['regions'][region][prefix]['hostname']
+        end
+        @properties['metadata'] ||= {}
+        @properties['metadata']['endpoint_prefix'] = prefix
+        @properties['metadata']['regional_endpoints'] = regions
       end
 
       def set_operations(operations)
