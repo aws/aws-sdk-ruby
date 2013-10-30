@@ -31,7 +31,7 @@ module AWS
 
       include TaggedCollection
 
-      # @yield [Instance] Yields each volume in the collection.
+      # @yield [Volume] Yields each volume in the collection.
       # @return [nil]
       def each(&block)
         resp = filtered_request(:describe_volumes)
