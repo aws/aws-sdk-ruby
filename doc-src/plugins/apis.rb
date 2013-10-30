@@ -13,8 +13,8 @@ YARD::Parser::SourceParser.after_parse_list do
 end
 
 def svc_apis
-  Dir.glob('apis-src/*.json').inject({}) do |apis, path|
-    if matches = path.match(/^apis-src\/(\w+)-(\d{4}-\d{2}-\d{2}).json$/)
+  Dir.glob('apis/source/*.json').inject({}) do |apis, path|
+    if matches = path.match(/^apis\/source\/(\w+)-(\d{4}-\d{2}-\d{2}).json$/)
       api = load_api(path)
       svc_name = api.metadata['service_class_name']
       apis[svc_name] ||= []
