@@ -13,12 +13,12 @@ task :apis do
   require_relative '../lib/aws-sdk-core'
 
   FileUtils.mkdir_p('apis')
-  Dir.glob('apis-src/*.json').each do |path|
+  Dir.glob('apis/source/*.json').each do |path|
 
-    # expecting apis-src/prefix-YYYY-MM-DD.json
-    matches = path.match(/^apis-src\/\w+-(\d{4}-\d{2}-\d{2}).json$/)
+    # expecting apis/source/prefix-YYYY-MM-DD.json
+    matches = path.match(/^apis\/source\/\w+-(\d{4}-\d{2}-\d{2}).json$/)
 
-    next unless matches # skip extra configuration files like paginators
+    next unless matches # skip extra configuration files like paginiators
 
     api_version = matches[1]
 
