@@ -106,7 +106,7 @@ module Aws
       end
 
       it 'accepts apis as a path to an un-translated api' do
-        apis << 'apis-src/s3-2006-03-01.json'
+        apis << 'apis/source/s3-2006-03-01.json'
         client_class = svc.const_get(:V20060301)
         allow(client_class).to receive(:svc).and_return('Aws::Svc::V20060301')
         client = client_class.new
