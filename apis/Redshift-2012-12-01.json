@@ -1,9 +1,13 @@
 {
   "version": "2012-12-01",
-  "endpoint": "redshift.%s.amazonaws.com",
   "metadata": {
-    "service_full_name": "Amazon Redshift",
-    "service_class_name": "Redshift"
+    "endpoint_prefix": "redshift",
+    "regional_endpoints": {
+      "us-east-1": "redshift.us-east-1.amazonaws.com",
+      "us-west-2": "redshift.us-west-2.amazonaws.com"
+    },
+    "service_class_name": "Redshift",
+    "service_full_name": "Amazon Redshift"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

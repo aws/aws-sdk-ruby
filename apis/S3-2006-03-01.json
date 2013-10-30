@@ -1,11 +1,22 @@
 {
   "version": "2006-03-01",
-  "endpoint": "s3.amazonaws.com",
   "metadata": {
     "checksum_format": "md5",
-    "service_full_name": "Amazon Simple Storage Service",
+    "endpoint_prefix": "s3",
+    "regional_endpoints": {
+      "us-east-1": "s3.amazonaws.com",
+      "us-west-1": "s3-us-west-1.amazonaws.com",
+      "us-west-2": "s3-us-west-2.amazonaws.com",
+      "eu-west-1": "s3-eu-west-1.amazonaws.com",
+      "ap-northeast-1": "s3-ap-northeast-1.amazonaws.com",
+      "ap-southeast-1": "s3-ap-southeast-1.amazonaws.com",
+      "ap-southeast-2": "s3-ap-southeast-2.amazonaws.com",
+      "sa-east-1": "s3-sa-east-1.amazonaws.com",
+      "us-gov-west-1": "s3-us-gov-west-1.amazonaws.com"
+    },
     "service_abbreviation": "Amazon S3",
-    "service_class_name": "S3"
+    "service_class_name": "S3",
+    "service_full_name": "Amazon Simple Storage Service"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",
@@ -21,8 +32,7 @@
     "Aws::Plugins::S3CompleteMultipartUploadFix",
     "Aws::Plugins::S3GetBucketLocationFix",
     "Aws::Plugins::S3Md5s",
-    "Aws::Plugins::S3Redirects",
-    "Aws::Plugins::S3RegionalEndpoint"
+    "Aws::Plugins::S3Redirects"
   ],
   "operations": {
     "abort_multipart_upload": {

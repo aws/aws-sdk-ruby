@@ -1,10 +1,20 @@
 {
   "version": "2010-12-01",
-  "endpoint": "elasticbeanstalk.%s.amazonaws.com",
   "metadata": {
-    "service_full_name": "AWS Elastic Beanstalk",
+    "endpoint_prefix": "elasticbeanstalk",
+    "regional_endpoints": {
+      "us-east-1": "elasticbeanstalk.us-east-1.amazonaws.com",
+      "us-west-1": "elasticbeanstalk.us-west-1.amazonaws.com",
+      "us-west-2": "elasticbeanstalk.us-west-2.amazonaws.com",
+      "eu-west-1": "elasticbeanstalk.eu-west-1.amazonaws.com",
+      "ap-northeast-1": "elasticbeanstalk.ap-northeast-1.amazonaws.com",
+      "ap-southeast-1": "elasticbeanstalk.ap-southeast-1.amazonaws.com",
+      "ap-southeast-2": "elasticbeanstalk.ap-southeast-2.amazonaws.com",
+      "sa-east-1": "elasticbeanstalk.sa-east-1.amazonaws.com"
+    },
     "service_abbreviation": "Elastic Beanstalk",
-    "service_class_name": "ElasticBeanstalk"
+    "service_class_name": "ElasticBeanstalk",
+    "service_full_name": "AWS Elastic Beanstalk"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

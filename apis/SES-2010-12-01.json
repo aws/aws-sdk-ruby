@@ -1,11 +1,14 @@
 {
   "version": "2010-12-01",
-  "endpoint": "email.%s.amazonaws.com",
   "metadata": {
-    "signing_name": "ses",
-    "service_full_name": "Amazon Simple Email Service",
+    "endpoint_prefix": "email",
+    "regional_endpoints": {
+      "us-east-1": "email.us-east-1.amazonaws.com"
+    },
     "service_abbreviation": "Amazon SES",
-    "service_class_name": "SES"
+    "service_class_name": "SES",
+    "service_full_name": "Amazon Simple Email Service",
+    "signing_name": "ses"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

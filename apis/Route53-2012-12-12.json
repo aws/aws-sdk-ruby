@@ -1,10 +1,20 @@
 {
   "version": "2012-12-12",
-  "endpoint": "route53.amazonaws.com",
   "metadata": {
-    "service_full_name": "Amazon Route 53",
+    "endpoint_prefix": "route53",
+    "regional_endpoints": {
+      "us-east-1": "route53.amazonaws.com",
+      "us-west-1": "route53.amazonaws.com",
+      "us-west-2": "route53.amazonaws.com",
+      "eu-west-1": "route53.amazonaws.com",
+      "ap-northeast-1": "route53.amazonaws.com",
+      "ap-southeast-1": "route53.amazonaws.com",
+      "ap-southeast-2": "route53.amazonaws.com",
+      "sa-east-1": "route53.amazonaws.com"
+    },
     "service_abbreviation": "Route 53",
-    "service_class_name": "Route53"
+    "service_class_name": "Route53",
+    "service_full_name": "Amazon Route 53"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

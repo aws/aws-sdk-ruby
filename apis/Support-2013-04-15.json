@@ -1,11 +1,14 @@
 {
   "version": "2013-04-15",
-  "endpoint": "support.%s.amazonaws.com",
   "metadata": {
+    "endpoint_prefix": "support",
     "json_target_prefix": "AWSSupport_20130415",
     "json_version": "1.1",
-    "service_full_name": "AWS Support",
-    "service_class_name": "Support"
+    "regional_endpoints": {
+      "us-east-1": "support.us-east-1.amazonaws.com"
+    },
+    "service_class_name": "Support",
+    "service_full_name": "AWS Support"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

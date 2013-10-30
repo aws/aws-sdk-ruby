@@ -1,11 +1,14 @@
 {
   "version": "2012-10-29",
-  "endpoint": "datapipeline.%s.amazonaws.com",
   "metadata": {
+    "endpoint_prefix": "datapipeline",
     "json_target_prefix": "DataPipeline",
     "json_version": 1.1,
-    "service_full_name": "AWS Data Pipeline",
-    "service_class_name": "DataPipeline"
+    "regional_endpoints": {
+      "us-east-1": "datapipeline.us-east-1.amazonaws.com"
+    },
+    "service_class_name": "DataPipeline",
+    "service_full_name": "AWS Data Pipeline"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

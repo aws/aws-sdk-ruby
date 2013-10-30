@@ -1,11 +1,21 @@
 {
   "version": "2012-10-25",
-  "endpoint": "directconnect.%s.amazonaws.com",
   "metadata": {
+    "endpoint_prefix": "directconnect",
     "json_target_prefix": "OvertureService",
     "json_version": 1.1,
-    "service_full_name": "AWS Direct Connect",
-    "service_class_name": "DirectConnect"
+    "regional_endpoints": {
+      "us-east-1": "directconnect.us-east-1.amazonaws.com",
+      "us-west-1": "directconnect.us-west-1.amazonaws.com",
+      "us-west-2": "directconnect.us-west-2.amazonaws.com",
+      "eu-west-1": "directconnect.eu-west-1.amazonaws.com",
+      "ap-northeast-1": "directconnect.ap-northeast-1.amazonaws.com",
+      "ap-southeast-1": "directconnect.ap-southeast-1.amazonaws.com",
+      "ap-southeast-2": "directconnect.ap-southeast-2.amazonaws.com",
+      "sa-east-1": "directconnect.sa-east-1.amazonaws.com"
+    },
+    "service_class_name": "DirectConnect",
+    "service_full_name": "AWS Direct Connect"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

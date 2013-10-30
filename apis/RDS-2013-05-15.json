@@ -1,10 +1,21 @@
 {
   "version": "2013-05-15",
-  "endpoint": "rds.%s.amazonaws.com",
   "metadata": {
-    "service_full_name": "Amazon Relational Database Service",
+    "endpoint_prefix": "rds",
+    "regional_endpoints": {
+      "us-east-1": "rds.us-east-1.amazonaws.com",
+      "us-west-1": "rds.us-west-1.amazonaws.com",
+      "us-west-2": "rds.us-west-2.amazonaws.com",
+      "eu-west-1": "rds.eu-west-1.amazonaws.com",
+      "ap-northeast-1": "rds.ap-northeast-1.amazonaws.com",
+      "ap-southeast-1": "rds.ap-southeast-1.amazonaws.com",
+      "ap-southeast-2": "rds.ap-southeast-2.amazonaws.com",
+      "sa-east-1": "rds.sa-east-1.amazonaws.com",
+      "us-gov-west-1": "rds.us-gov-west-1.amazonaws.com"
+    },
     "service_abbreviation": "Amazon RDS",
-    "service_class_name": "RDS"
+    "service_class_name": "RDS",
+    "service_full_name": "Amazon Relational Database Service"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

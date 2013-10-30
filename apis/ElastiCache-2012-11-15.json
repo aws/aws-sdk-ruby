@@ -1,9 +1,18 @@
 {
   "version": "2012-11-15",
-  "endpoint": "elasticache.%s.amazonaws.com",
   "metadata": {
-    "service_full_name": "Amazon ElastiCache",
-    "service_class_name": "ElastiCache"
+    "endpoint_prefix": "elasticache",
+    "regional_endpoints": {
+      "us-east-1": "elasticache.us-east-1.amazonaws.com",
+      "us-west-1": "elasticache.us-west-1.amazonaws.com",
+      "us-west-2": "elasticache.us-west-2.amazonaws.com",
+      "eu-west-1": "elasticache.eu-west-1.amazonaws.com",
+      "ap-northeast-1": "elasticache.ap-northeast-1.amazonaws.com",
+      "ap-southeast-1": "elasticache.ap-southeast-1.amazonaws.com",
+      "sa-east-1": "elasticache.sa-east-1.amazonaws.com"
+    },
+    "service_class_name": "ElastiCache",
+    "service_full_name": "Amazon ElastiCache"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

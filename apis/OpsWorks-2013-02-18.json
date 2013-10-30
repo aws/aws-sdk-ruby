@@ -1,11 +1,14 @@
 {
   "version": "2013-02-18",
-  "endpoint": "opsworks.%s.amazonaws.com",
   "metadata": {
+    "endpoint_prefix": "opsworks",
     "json_target_prefix": "OpsWorks_20130218",
     "json_version": 1.1,
-    "service_full_name": "AWS OpsWorks",
-    "service_class_name": "OpsWorks"
+    "regional_endpoints": {
+      "us-east-1": "opsworks.us-east-1.amazonaws.com"
+    },
+    "service_class_name": "OpsWorks",
+    "service_full_name": "AWS OpsWorks"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

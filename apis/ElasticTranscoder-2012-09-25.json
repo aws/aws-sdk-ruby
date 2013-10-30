@@ -1,9 +1,19 @@
 {
   "version": "2012-09-25",
-  "endpoint": "elastictranscoder.%s.amazonaws.com",
   "metadata": {
-    "service_full_name": "Amazon Elastic Transcoder",
-    "service_class_name": "ElasticTranscoder"
+    "endpoint_prefix": "elastictranscoder",
+    "regional_endpoints": {
+      "us-east-1": "elastictranscoder.us-east-1.amazonaws.com",
+      "us-west-1": "elastictranscoder.us-west-1.amazonaws.com",
+      "us-west-2": "elastictranscoder.us-west-2.amazonaws.com",
+      "eu-west-1": "elastictranscoder.eu-west-1.amazonaws.com",
+      "ap-northeast-1": "elastictranscoder.ap-northeast-1.amazonaws.com",
+      "ap-southeast-1": "elastictranscoder.ap-southeast-1.amazonaws.com",
+      "ap-southeast-2": "elastictranscoder.ap-southeast-2.amazonaws.com",
+      "sa-east-1": "elastictranscoder.sa-east-1.amazonaws.com"
+    },
+    "service_class_name": "ElasticTranscoder",
+    "service_full_name": "Amazon Elastic Transcoder"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

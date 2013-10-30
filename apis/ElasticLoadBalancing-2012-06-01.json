@@ -1,9 +1,20 @@
 {
   "version": "2012-06-01",
-  "endpoint": "elasticloadbalancing.%s.amazonaws.com",
   "metadata": {
-    "service_full_name": "Elastic Load Balancing",
-    "service_class_name": "ElasticLoadBalancing"
+    "endpoint_prefix": "elasticloadbalancing",
+    "regional_endpoints": {
+      "us-east-1": "elasticloadbalancing.us-east-1.amazonaws.com",
+      "us-west-1": "elasticloadbalancing.us-west-1.amazonaws.com",
+      "us-west-2": "elasticloadbalancing.us-west-2.amazonaws.com",
+      "eu-west-1": "elasticloadbalancing.eu-west-1.amazonaws.com",
+      "ap-northeast-1": "elasticloadbalancing.ap-northeast-1.amazonaws.com",
+      "ap-southeast-1": "elasticloadbalancing.ap-southeast-1.amazonaws.com",
+      "ap-southeast-2": "elasticloadbalancing.ap-southeast-2.amazonaws.com",
+      "sa-east-1": "elasticloadbalancing.sa-east-1.amazonaws.com",
+      "us-gov-west-1": "elasticloadbalancing.us-gov-west-1.amazonaws.com"
+    },
+    "service_class_name": "ElasticLoadBalancing",
+    "service_full_name": "Elastic Load Balancing"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

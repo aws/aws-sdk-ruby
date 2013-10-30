@@ -1,9 +1,16 @@
 {
   "version": "2011-02-01",
-  "endpoint": "cloudsearch.%s.amazonaws.com",
   "metadata": {
-    "service_full_name": "Amazon CloudSearch",
-    "service_class_name": "CloudSearch"
+    "endpoint_prefix": "cloudsearch",
+    "regional_endpoints": {
+      "us-east-1": "cloudsearch.us-east-1.amazonaws.com",
+      "us-west-1": "cloudsearch.us-west-1.amazonaws.com",
+      "us-west-2": "cloudsearch.us-west-2.amazonaws.com",
+      "eu-west-1": "cloudsearch.eu-west-1.amazonaws.com",
+      "ap-southeast-1": "cloudsearch.ap-southeast-1.amazonaws.com"
+    },
+    "service_class_name": "CloudSearch",
+    "service_full_name": "Amazon CloudSearch"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

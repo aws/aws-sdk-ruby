@@ -1,10 +1,17 @@
 {
   "version": "2012-06-01",
-  "endpoint": "glacier.%s.amazonaws.com",
   "metadata": {
     "checksum_format": "sha256",
-    "service_full_name": "Amazon Glacier",
-    "service_class_name": "Glacier"
+    "endpoint_prefix": "glacier",
+    "regional_endpoints": {
+      "us-east-1": "glacier.us-east-1.amazonaws.com",
+      "us-west-1": "glacier.us-west-1.amazonaws.com",
+      "us-west-2": "glacier.us-west-2.amazonaws.com",
+      "eu-west-1": "glacier.eu-west-1.amazonaws.com",
+      "ap-northeast-1": "glacier.ap-northeast-1.amazonaws.com"
+    },
+    "service_class_name": "Glacier",
+    "service_full_name": "Amazon Glacier"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",

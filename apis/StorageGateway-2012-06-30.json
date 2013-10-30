@@ -1,11 +1,21 @@
 {
   "version": "2012-06-30",
-  "endpoint": "storagegateway.%s.amazonaws.com",
   "metadata": {
+    "endpoint_prefix": "storagegateway",
     "json_target_prefix": "StorageGateway_20120630",
     "json_version": 1.1,
-    "service_full_name": "AWS Storage Gateway",
-    "service_class_name": "StorageGateway"
+    "regional_endpoints": {
+      "us-east-1": "storagegateway.us-east-1.amazonaws.com",
+      "us-west-1": "storagegateway.us-west-1.amazonaws.com",
+      "us-west-2": "storagegateway.us-west-2.amazonaws.com",
+      "eu-west-1": "storagegateway.eu-west-1.amazonaws.com",
+      "ap-northeast-1": "storagegateway.ap-northeast-1.amazonaws.com",
+      "ap-southeast-1": "storagegateway.ap-southeast-1.amazonaws.com",
+      "ap-southeast-2": "storagegateway.ap-southeast-2.amazonaws.com",
+      "sa-east-1": "storagegateway.sa-east-1.amazonaws.com"
+    },
+    "service_class_name": "StorageGateway",
+    "service_full_name": "AWS Storage Gateway"
   },
   "plugins": [
     "Seahorse::Client::Plugins::Logging",
