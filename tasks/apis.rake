@@ -1,8 +1,3 @@
-def svc_plugins(endpoint_prefix)
-  config = MultiJson.load(File.read('apis-src/plugins.json'))
-  config[endpoint_prefix] || []
-end
-
 desc "Translates the API souce files into Seahorse APIs"
 task :apis do
 
