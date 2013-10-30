@@ -1,9 +1,10 @@
+require 'fileutils'
+require 'multi_json'
+require 'json'
+
 desc "Translates the API souce files into Seahorse APIs"
 task :apis do
 
-  require 'fileutils'
-  require 'multi_json'
-  require 'json'
   MultiJson.engine = 'json_gem' # for consistent formatting
   require_relative '../lib/aws-sdk-core'
 
@@ -33,4 +34,20 @@ task :apis do
     end
 
   end
+end
+
+namespace :api do
+
+  desc "Lists the supported services and their API versions"
+  task :versions do
+    require 'aws-sdk-core'
+    supported = []
+    Aws.service_classes.each do |key, svc|
+      name = svc.default_client_class.api.metadata['service_full_name']
+      versions = svc.api_versions.join(', ')
+      supported << "%-40s\t%s" % [name, versions]
+    end
+    puts supported.sort_by(&:downcase)
+  end
+
 end
