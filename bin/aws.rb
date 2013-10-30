@@ -31,6 +31,10 @@ OptionParser.new do |opts|
 
   opts.banner = "Usage: aws-rb [options]"
 
+  opts.on("--region NAME", "specify the AWS region, e.g. us-west-2") do |value|
+    options[:region] = value
+  end
+
   opts.on("--repl REPL", "specify the repl environment, pry or irb") do |value|
     options[:repl] = value
   end
@@ -94,6 +98,8 @@ require 'aws-sdk-core'
 # configure the aws-sdk gem
 
 cfg = {}
+
+cfg[:region] = options[:region] if options[:region]
 
 if options[:log]
   logger = Logger.new($stdout)
