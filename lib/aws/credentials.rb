@@ -25,9 +25,10 @@ module Aws
       !!(@access_key_id && @secret_access_key)
     end
 
+    # Removing the secret access key from the default inspect string.
     # @api private
     def inspect
-      "#<#{self.class.name} @access_key_id=#{access_key_id}>"
+      "#<#{self.class.name} access_key_id=#{access_key_id}>"
     end
 
   end
