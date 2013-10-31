@@ -2,6 +2,7 @@
   "version": "2012-11-05",
   "metadata": {
     "endpoint_prefix": "sqs",
+    "error_prefix": "AWS.SimpleQueueService.",
     "regional_endpoints": {
       "us-east-1": "sqs.us-east-1.amazonaws.com",
       "us-west-1": "sqs.us-west-1.amazonaws.com",
@@ -13,7 +14,6 @@
       "sa-east-1": "sqs.sa-east-1.amazonaws.com",
       "us-gov-west-1": "sqs.us-gov-west-1.amazonaws.com"
     },
-    "remove_error_prefix": "AWS.SimpleQueueService.",
     "service_abbreviation": "Amazon SQS",
     "service_class_name": "SQS",
     "service_full_name": "Amazon Simple Queue Service"
