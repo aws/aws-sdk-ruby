@@ -11,24 +11,29 @@ module Aws
     def call(context)
       @handler.call(context).on_status(300..599) do |response|
         if empty_body?(response)
-          response.error = empty_body_error(response)
+          error_code = error_code_for_empty_response(response)
+          error_message = ''
         else
-          code, message = @parser.extract_error(response)
-          response.error = Errors.response_error(response, code).new(message)
+          error_code, error_message = @parser.extract_error(response)
         end
+        response.error = error(context, error_code, error_message)
         response.data = nil
       end
+    end
+
+    private
+
+    def error(context, code, message)
+      svc_class_name = context.config.api.metadata['service_class_name']
+      klass = Errors.error_class(svc_class_name, code)
+      Errors.error_class(svc_class_name, code).new(context, message)
     end
 
     def empty_body?(response)
       response.http_response.body_contents.empty?
     end
 
-    def empty_body_error(response)
-      Errors.response_error(response, error_code(response)).new('')
-    end
-
-    def error_code(response)
+    def error_code_for_empty_response(response)
       error_code = response.http_response.status_code
       {
         302 => 'MovedTemporarily',

@@ -21,7 +21,7 @@ module Aws
           if xml['Error']
             error_code = xml['Error']['Code']
             error_message = xml['Error']['Message']
-            Errors.response_error(response, error_code).new(error_message)
+            Errors.error_class('S3', error_code).new(error_message)
           end
         end
 
