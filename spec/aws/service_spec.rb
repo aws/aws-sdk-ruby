@@ -102,7 +102,7 @@ module Aws
         apis << 'apis/S3-2006-03-01.json'
         client_class = svc.const_get(:V20060301)
         allow(client_class).to receive(:svc).and_return('Aws::Svc::V20060301')
-        client = client_class.new
+        client = client_class.new(credentials: dummy_credentials)
         expect(client.config.api.version).to eq('2006-03-01')
       end
 
@@ -110,7 +110,7 @@ module Aws
         apis << 'apis/source/s3-2006-03-01.json'
         client_class = svc.const_get(:V20060301)
         allow(client_class).to receive(:svc).and_return('Aws::Svc::V20060301')
-        client = client_class.new
+        client = client_class.new(credentials: dummy_credentials)
         expect(client.config.api.version).to eq('2006-03-01')
       end
 
@@ -166,11 +166,15 @@ module Aws
 
       it 'merges global defaults options when constructing the client' do
         # shared default
-        Aws.config = { region: 'us-east-1' }
+        Aws.config = { region: 'us-east-1', credentials: dummy_credentials }
         expect(Aws::EC2.new.config.region).to eq('us-east-1')
         expect(Aws::S3.new.config.region).to eq('us-east-1')
         # default enabled, s3 disables
-        Aws.config = { region: 'us-east-1', s3: { region: 'us-west-2' } }
+        Aws.config = {
+          credentials: dummy_credentials,
+          region: 'us-east-1', 
+          s3: { region: 'us-west-2' } 
+        }
         expect(Aws::EC2.new.config.region).to eq('us-east-1')
         expect(Aws::S3.new.config.region).to eq('us-west-2')
       end

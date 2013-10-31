@@ -57,7 +57,7 @@ module Aws
 
     it 'adds a helper method that constructs a service and client object' do
       Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
-      svc = Aws.dummyservice(http_wire_trace: true)
+      svc = Aws.dummyservice(http_wire_trace: true, credentials: dummy_credentials)
       expect(Aws::DummyService.api_versions).to eq(['2006-03-01'])
       expect(svc).to be_kind_of(Seahorse::Client::Base)
       expect(svc.config.api).to be_kind_of(Seahorse::Model::Api)
@@ -67,6 +67,7 @@ module Aws
     it 'filters the :api_version option from the client constructor' do
       Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
       Aws.config[:api_version] = '2007-01-01'
+      Aws.config[:credentials] = dummy_credentials
       expect { Aws.dummyservice }.not_to raise_error
       expect { Aws.dummyservice(api_version: '2006-03-01') }.not_to raise_error
     end

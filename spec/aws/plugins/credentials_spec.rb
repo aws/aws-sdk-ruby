@@ -50,43 +50,10 @@ module Aws
           expect(cfg.credentials.session_token).to eq('token2')
         end
 
-      end
-
-      describe 'handler' do
-
-        let(:config) {
-          config = Seahorse::Client::Configuration.new
-          plugin.add_options(config)
-          config
-        }
-
-        it 'raises a runtime error if credentials are not set' do
-          expect {
-            call_handler(Credentials::Handler, credentials: nil)
-          }.to raise_error(Errors::MissingCredentialsError)
-        end
-
-        it 'raises a runtime error if credentials are empty' do
-          credentials = Aws::Credentials.new(nil, nil)
-          expect {
-            call_handler(Credentials::Handler, credentials: credentials)
-          }.to raise_error(Errors::MissingCredentialsError)
-        end
-
-        it 'accepts populated credentials' do
-          credentials = Aws::Credentials.new('akid', 'secret')
-          expect {
-            call_handler(Credentials::Handler, credentials: credentials)
-          }.not_to raise_error
-        end
-
-        it 'accepts credentials populated from ENV' do
-          env['AWS_ACCESS_KEY_ID'] = 'akid'
-          env['AWS_SECRET_ACCESS_KEY'] = 'secret'
-          env['AWS_SESSION_TOKEN'] = 'token'
-          expect {
-            call_handler(Credentials::Handler, config: config)
-          }.not_to raise_error
+        it 'raises an error if you construct a client without credentials' do
+          client_class = Seahorse::Client.define
+          client_class.add_plugin(Credentials)
+          expect { client_class.new }.to raise_error(Errors::MissingCredentialsError)
         end
 
       end

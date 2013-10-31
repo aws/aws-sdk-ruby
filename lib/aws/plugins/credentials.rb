@@ -23,22 +23,11 @@ module Aws
         )
       end
 
-      class MissingCredentialsError < RuntimeError; end
-
-      # @api private
-      class Handler < Seahorse::Client::Handler
-
-        def call(context)
-          credentials = context.config.credentials
-          if credentials.nil? or !credentials.set?
-            raise Errors::MissingCredentialsError
-          end
-          @handler.call(context)
+      def after_initialize(client)
+        if client.config.credentials.nil? or !client.config.credentials.set?
+          raise Errors::MissingCredentialsError
         end
-
       end
-
-      handler(Handler, step: :validate)
 
     end
   end
