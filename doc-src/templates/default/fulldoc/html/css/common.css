@@ -84,3 +84,7 @@ ul.tabs li.active {
   max-height: 400px;
   overflow: auto;
 }
+
+pre.code .label {
+  color: red;
+}
