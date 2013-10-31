@@ -111,7 +111,7 @@
               "FrameRate": {
                 "shape_name": "FrameRate",
                 "type": "string",
-                "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                 "documentation": "\n        <p>The frame rate of the input file. If you want Elastic Transcoder to automatically detect the frame rate\n            of the input file, specify <code>auto</code>. If you want to specify the frame rate for\n            the input file, enter one of the following values: </p>\n        <p>\n            <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>,\n                <code>29.97</code>, <code>30</code>, <code>60</code>\n        </p>\n        <p>If you specify a value other than <code>auto</code>, Elastic Transcoder disables automatic detection of\n            the frame rate.</p>\n    "
               },
               "Resolution": {
@@ -135,8 +135,8 @@
               "Container": {
                 "shape_name": "JobContainer",
                 "type": "string",
-                "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)",
-                "documentation": "\n        <p>The container type for the input file. If you want Elastic Transcoder to automatically detect the\n            container type of the input file, specify <code>auto</code>. If you want to specify the\n            container type for the input file, enter one of the following values: </p>\n        <p>\n            <code>3gp</code>, <code>asf</code>, <code>avi</code>, <code>divx</code>,\n                <code>flv</code>, <code>mkv</code>, <code>mov</code>, <code>mp4</code>,\n                <code>mpeg</code>, <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>,\n                <code>ogg</code>, <code>vob</code>, <code>wav</code>, <code>webm</code>\n        </p>\n    "
+                "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)|(^mp3$)|(^m4a$)|(^aac$)",
+                "documentation": "\n        <p>The container type for the input file. If you want Elastic Transcoder to automatically detect the\n            container type of the input file, specify <code>auto</code>. If you want to specify the\n            container type for the input file, enter one of the following values: </p>\n        <p>\n            <code>3gp</code>, <code>aac</code>, <code>asf</code>, <code>avi</code>, \n                <code>divx</code>, <code>flv</code>, <code>m4a</code>, <code>mkv</code>, \n                <code>mov</code>, <code>mp3</code>, <code>mp4</code>, <code>mpeg</code>, \n                <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>, <code>ogg</code>, \n                <code>vob</code>, <code>wav</code>, <code>webm</code>\n        </p>\n    "
               }
             },
             "documentation": "\n        <p>A section of the request body that provides information about the file that is being\n            transcoded.</p>\n    "
@@ -202,6 +202,69 @@
                   "documentation": "\n        <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not\n            rectangular, use the .png format, which supports transparency.</p>\n    "
                 },
                 "documentation": "\n        <p>Information about the watermarks that you want Elastic Transcoder to add to the video during\n            transcoding. You can specify up to four watermarks for each output. Settings for each\n            watermark must be defined in the preset for the current output.</p>\n    "
+              },
+              "AlbumArt": {
+                "shape_name": "JobAlbumArt",
+                "type": "structure",
+                "members": {
+                  "MergePolicy": {
+                    "shape_name": "MergePolicy",
+                    "type": "string",
+                    "pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)",
+                    "documentation": "\n        <p>A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.</p>\n        <p>\n            <ul>\n                <li>\n<code>Replace:</code> The specified album art will replace any existing album art.</li>\n                <li>\n<code>Prepend:</code> The specified album art will be placed in front of any existing \n                    album art.</li>\n                <li>\n<code>Append:</code> The specified album art will be placed after any existing album art.</li>\n                <li>\n<code>Fallback:</code> If the original input file contains artwork, Elastic Transcoder will use that\n                    artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the \n                    specified album art file.</li>\n            </ul>\n        </p>\n   "
+                  },
+                  "Artwork": {
+                    "shape_name": "Artworks",
+                    "type": "list",
+                    "members": {
+                      "shape_name": "Artwork",
+                      "type": "structure",
+                      "members": {
+                        "InputKey": {
+                          "shape_name": "WatermarkKey",
+                          "type": "string",
+                          "min_length": 1,
+                          "max_length": 255,
+                          "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
+                          "documentation": "\n        <p>The name of the file to be used as album art. To determine which Amazon S3 bucket contains the \n            specified file, Elastic Transcoder checks the pipeline specified by <code>PipelineId</code>; the \n            <code>InputBucket</code> object in that pipeline identifies the bucket.</p>\n        <p>If the file name includes a prefix, for example, <code>cooking/pie.jpg</code>,\n            include the prefix in the key. If the file isn't in the specified bucket, \n            Elastic Transcoder returns an error.</p>\n   "
+                        },
+                        "MaxWidth": {
+                          "shape_name": "DigitsOrAuto",
+                          "type": "string",
+                          "pattern": "(^auto$)|(^\\d{2,4}$)",
+                          "documentation": "\n        <p>The maximum width of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 4096, inclusive.</p>\n   "
+                        },
+                        "MaxHeight": {
+                          "shape_name": "DigitsOrAuto",
+                          "type": "string",
+                          "pattern": "(^auto$)|(^\\d{2,4}$)",
+                          "documentation": "\n        <p>The maximum height of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 3072, inclusive.</p>\n   "
+                        },
+                        "SizingPolicy": {
+                          "shape_name": "SizingPolicy",
+                          "type": "string",
+                          "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
+                          "documentation": "\n        <p>Specify one of the following values to control scaling of the output album art:</p>\n        <p>\n            <ul>\n                <li>\n<code>Fit:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without \n                    exceeding the other value.</li>\n                <li>\n<code>Fill:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or \n                    exceeds the other value. Elastic Transcoder centers the output art and then crops it in the \n                    dimension (if any) that exceeds the maximum value. </li>\n                <li>\n<code>Stretch:</code> Elastic Transcoder stretches the output art to match the values that you\n                    specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative \n                    proportions of the input art and the output art are different, the output art will \n                    be distorted.</li>\n                <li>\n<code>Keep:</code> Elastic Transcoder does not scale the output art. If either dimension of the\n                    input art exceeds the values that you specified for <code>MaxWidth</code> and \n                    <code>MaxHeight</code>, Elastic Transcoder crops the output art.</li>\n                <li>\n<code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without exceeding either value. If you specify this option, \n                    Elastic Transcoder does not scale the art up.</li>\n                <li>\n<code>ShrinkToFill</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without dropping below either value. If you specify this \n                    option, Elastic Transcoder does not scale the art up.</li>\n            </ul>\n        </p>\n   "
+                        },
+                        "PaddingPolicy": {
+                          "shape_name": "PaddingPolicy",
+                          "type": "string",
+                          "pattern": "(^Pad$)|(^NoPad$)",
+                          "documentation": "\n        <p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add white bars to the \n        top and bottom and/or left and right sides of the output album art to make the total size of \n        the output art match the values that you specified for <code>MaxWidth</code> and \n        <code>MaxHeight</code>.</p>\n   "
+                        },
+                        "AlbumArtFormat": {
+                          "shape_name": "JpgOrPng",
+                          "type": "string",
+                          "pattern": "(^jpg$)|(^png$)",
+                          "documentation": "\n        <p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20.</p>\n        <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code>\n            to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty\n            <code>Artwork</code> array.</p>\n        <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to\n            \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>\n   "
+                    },
+                    "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20. Valid formats are <code>.jpg</code> and <code>.png</code></p>\n   "
+                  }
+                },
+                "documentation": "\n        <p>Information about the album art that you want Elastic Transcoder to add to the file during\n            transcoding. You can specify up to twenty album artworks for each output. Settings for each\n            artwork must be defined in the job for the current output.</p>\n   "
               }
             },
             "documentation": "\n        <p>The <code>CreateJobOutput</code> structure.</p>\n    "
@@ -270,6 +333,69 @@
                     "documentation": "\n        <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not\n            rectangular, use the .png format, which supports transparency.</p>\n    "
                   },
                   "documentation": "\n        <p>Information about the watermarks that you want Elastic Transcoder to add to the video during\n            transcoding. You can specify up to four watermarks for each output. Settings for each\n            watermark must be defined in the preset for the current output.</p>\n    "
+                },
+                "AlbumArt": {
+                  "shape_name": "JobAlbumArt",
+                  "type": "structure",
+                  "members": {
+                    "MergePolicy": {
+                      "shape_name": "MergePolicy",
+                      "type": "string",
+                      "pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)",
+                      "documentation": "\n        <p>A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.</p>\n        <p>\n            <ul>\n                <li>\n<code>Replace:</code> The specified album art will replace any existing album art.</li>\n                <li>\n<code>Prepend:</code> The specified album art will be placed in front of any existing \n                    album art.</li>\n                <li>\n<code>Append:</code> The specified album art will be placed after any existing album art.</li>\n                <li>\n<code>Fallback:</code> If the original input file contains artwork, Elastic Transcoder will use that\n                    artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the \n                    specified album art file.</li>\n            </ul>\n        </p>\n   "
+                    },
+                    "Artwork": {
+                      "shape_name": "Artworks",
+                      "type": "list",
+                      "members": {
+                        "shape_name": "Artwork",
+                        "type": "structure",
+                        "members": {
+                          "InputKey": {
+                            "shape_name": "WatermarkKey",
+                            "type": "string",
+                            "min_length": 1,
+                            "max_length": 255,
+                            "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
+                            "documentation": "\n        <p>The name of the file to be used as album art. To determine which Amazon S3 bucket contains the \n            specified file, Elastic Transcoder checks the pipeline specified by <code>PipelineId</code>; the \n            <code>InputBucket</code> object in that pipeline identifies the bucket.</p>\n        <p>If the file name includes a prefix, for example, <code>cooking/pie.jpg</code>,\n            include the prefix in the key. If the file isn't in the specified bucket, \n            Elastic Transcoder returns an error.</p>\n   "
+                          },
+                          "MaxWidth": {
+                            "shape_name": "DigitsOrAuto",
+                            "type": "string",
+                            "pattern": "(^auto$)|(^\\d{2,4}$)",
+                            "documentation": "\n        <p>The maximum width of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 4096, inclusive.</p>\n   "
+                          },
+                          "MaxHeight": {
+                            "shape_name": "DigitsOrAuto",
+                            "type": "string",
+                            "pattern": "(^auto$)|(^\\d{2,4}$)",
+                            "documentation": "\n        <p>The maximum height of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 3072, inclusive.</p>\n   "
+                          },
+                          "SizingPolicy": {
+                            "shape_name": "SizingPolicy",
+                            "type": "string",
+                            "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
+                            "documentation": "\n        <p>Specify one of the following values to control scaling of the output album art:</p>\n        <p>\n            <ul>\n                <li>\n<code>Fit:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without \n                    exceeding the other value.</li>\n                <li>\n<code>Fill:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or \n                    exceeds the other value. Elastic Transcoder centers the output art and then crops it in the \n                    dimension (if any) that exceeds the maximum value. </li>\n                <li>\n<code>Stretch:</code> Elastic Transcoder stretches the output art to match the values that you\n                    specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative \n                    proportions of the input art and the output art are different, the output art will \n                    be distorted.</li>\n                <li>\n<code>Keep:</code> Elastic Transcoder does not scale the output art. If either dimension of the\n                    input art exceeds the values that you specified for <code>MaxWidth</code> and \n                    <code>MaxHeight</code>, Elastic Transcoder crops the output art.</li>\n                <li>\n<code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without exceeding either value. If you specify this option, \n                    Elastic Transcoder does not scale the art up.</li>\n                <li>\n<code>ShrinkToFill</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without dropping below either value. If you specify this \n                    option, Elastic Transcoder does not scale the art up.</li>\n            </ul>\n        </p>\n   "
+                          },
+                          "PaddingPolicy": {
+                            "shape_name": "PaddingPolicy",
+                            "type": "string",
+                            "pattern": "(^Pad$)|(^NoPad$)",
+                            "documentation": "\n        <p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add white bars to the \n        top and bottom and/or left and right sides of the output album art to make the total size of \n        the output art match the values that you specified for <code>MaxWidth</code> and \n        <code>MaxHeight</code>.</p>\n   "
+                          },
+                          "AlbumArtFormat": {
+                            "shape_name": "JpgOrPng",
+                            "type": "string",
+                            "pattern": "(^jpg$)|(^png$)",
+                            "documentation": "\n        <p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>\n   "
+                          }
+                        },
+                        "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20.</p>\n        <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code>\n            to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty\n            <code>Artwork</code> array.</p>\n        <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to\n            \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>\n   "
+                      },
+                      "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20. Valid formats are <code>.jpg</code> and <code>.png</code></p>\n   "
+                    }
+                  },
+                  "documentation": "\n        <p>Information about the album art that you want Elastic Transcoder to add to the file during\n            transcoding. You can specify up to twenty album artworks for each output. Settings for each\n            artwork must be defined in the job for the current output.</p>\n   "
                 }
               },
               "documentation": "\n        <p>The <code>CreateJobOutput</code> structure.</p>\n    "
@@ -360,7 +486,7 @@
                   "FrameRate": {
                     "shape_name": "FrameRate",
                     "type": "string",
-                    "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                    "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                     "documentation": "\n        <p>The frame rate of the input file. If you want Elastic Transcoder to automatically detect the frame rate\n            of the input file, specify <code>auto</code>. If you want to specify the frame rate for\n            the input file, enter one of the following values: </p>\n        <p>\n            <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>,\n                <code>29.97</code>, <code>30</code>, <code>60</code>\n        </p>\n        <p>If you specify a value other than <code>auto</code>, Elastic Transcoder disables automatic detection of\n            the frame rate.</p>\n    "
                   },
                   "Resolution": {
@@ -384,8 +510,8 @@
                   "Container": {
                     "shape_name": "JobContainer",
                     "type": "string",
-                    "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)",
-                    "documentation": "\n        <p>The container type for the input file. If you want Elastic Transcoder to automatically detect the\n            container type of the input file, specify <code>auto</code>. If you want to specify the\n            container type for the input file, enter one of the following values: </p>\n        <p>\n            <code>3gp</code>, <code>asf</code>, <code>avi</code>, <code>divx</code>,\n                <code>flv</code>, <code>mkv</code>, <code>mov</code>, <code>mp4</code>,\n                <code>mpeg</code>, <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>,\n                <code>ogg</code>, <code>vob</code>, <code>wav</code>, <code>webm</code>\n        </p>\n    "
+                    "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)|(^mp3$)|(^m4a$)|(^aac$)",
+                    "documentation": "\n        <p>The container type for the input file. If you want Elastic Transcoder to automatically detect the\n            container type of the input file, specify <code>auto</code>. If you want to specify the\n            container type for the input file, enter one of the following values: </p>\n        <p>\n            <code>3gp</code>, <code>aac</code>, <code>asf</code>, <code>avi</code>, \n                <code>divx</code>, <code>flv</code>, <code>m4a</code>, <code>mkv</code>, \n                <code>mov</code>, <code>mp3</code>, <code>mp4</code>, <code>mpeg</code>, \n                <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>, <code>ogg</code>, \n                <code>vob</code>, <code>wav</code>, <code>webm</code>\n        </p>\n    "
                   }
                 },
                 "documentation": "\n        <p> A section of the request or response body that provides information about the file that\n            is being transcoded.</p>\n    "
@@ -484,6 +610,69 @@
                       "documentation": "\n        <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not\n            rectangular, use the .png format, which supports transparency.</p>\n    "
                     },
                     "documentation": "\n        <p>Information about the watermarks that you want Elastic Transcoder to add to the video during\n            transcoding. You can specify up to four watermarks for each output. Settings for each\n            watermark must be defined in the preset that you specify in <code>Preset</code> for the\n            current output.</p>\n        <p>Watermarks are added to the output video in the sequence in which you list them in the\n            job output&#x2014;the first watermark in the list is added to the output video first, the\n            second watermark in the list is added next, and so on. As a result, if the settings in a\n            preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark\n            that you add will cover the first one, the third one will cover the second, and the\n            fourth one will cover the third.</p>\n    "
+                  },
+                  "AlbumArt": {
+                    "shape_name": "JobAlbumArt",
+                    "type": "structure",
+                    "members": {
+                      "MergePolicy": {
+                        "shape_name": "MergePolicy",
+                        "type": "string",
+                        "pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)",
+                        "documentation": "\n        <p>A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.</p>\n        <p>\n            <ul>\n                <li>\n<code>Replace:</code> The specified album art will replace any existing album art.</li>\n                <li>\n<code>Prepend:</code> The specified album art will be placed in front of any existing \n                    album art.</li>\n                <li>\n<code>Append:</code> The specified album art will be placed after any existing album art.</li>\n                <li>\n<code>Fallback:</code> If the original input file contains artwork, Elastic Transcoder will use that\n                    artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the \n                    specified album art file.</li>\n            </ul>\n        </p>\n   "
+                      },
+                      "Artwork": {
+                        "shape_name": "Artworks",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "Artwork",
+                          "type": "structure",
+                          "members": {
+                            "InputKey": {
+                              "shape_name": "WatermarkKey",
+                              "type": "string",
+                              "min_length": 1,
+                              "max_length": 255,
+                              "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
+                              "documentation": "\n        <p>The name of the file to be used as album art. To determine which Amazon S3 bucket contains the \n            specified file, Elastic Transcoder checks the pipeline specified by <code>PipelineId</code>; the \n            <code>InputBucket</code> object in that pipeline identifies the bucket.</p>\n        <p>If the file name includes a prefix, for example, <code>cooking/pie.jpg</code>,\n            include the prefix in the key. If the file isn't in the specified bucket, \n            Elastic Transcoder returns an error.</p>\n   "
+                            },
+                            "MaxWidth": {
+                              "shape_name": "DigitsOrAuto",
+                              "type": "string",
+                              "pattern": "(^auto$)|(^\\d{2,4}$)",
+                              "documentation": "\n        <p>The maximum width of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 4096, inclusive.</p>\n   "
+                            },
+                            "MaxHeight": {
+                              "shape_name": "DigitsOrAuto",
+                              "type": "string",
+                              "pattern": "(^auto$)|(^\\d{2,4}$)",
+                              "documentation": "\n        <p>The maximum height of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 3072, inclusive.</p>\n   "
+                            },
+                            "SizingPolicy": {
+                              "shape_name": "SizingPolicy",
+                              "type": "string",
+                              "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
+                              "documentation": "\n        <p>Specify one of the following values to control scaling of the output album art:</p>\n        <p>\n            <ul>\n                <li>\n<code>Fit:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without \n                    exceeding the other value.</li>\n                <li>\n<code>Fill:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or \n                    exceeds the other value. Elastic Transcoder centers the output art and then crops it in the \n                    dimension (if any) that exceeds the maximum value. </li>\n                <li>\n<code>Stretch:</code> Elastic Transcoder stretches the output art to match the values that you\n                    specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative \n                    proportions of the input art and the output art are different, the output art will \n                    be distorted.</li>\n                <li>\n<code>Keep:</code> Elastic Transcoder does not scale the output art. If either dimension of the\n                    input art exceeds the values that you specified for <code>MaxWidth</code> and \n                    <code>MaxHeight</code>, Elastic Transcoder crops the output art.</li>\n                <li>\n<code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without exceeding either value. If you specify this option, \n                    Elastic Transcoder does not scale the art up.</li>\n                <li>\n<code>ShrinkToFill</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without dropping below either value. If you specify this \n                    option, Elastic Transcoder does not scale the art up.</li>\n            </ul>\n        </p>\n   "
+                            },
+                            "PaddingPolicy": {
+                              "shape_name": "PaddingPolicy",
+                              "type": "string",
+                              "pattern": "(^Pad$)|(^NoPad$)",
+                              "documentation": "\n        <p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add white bars to the \n        top and bottom and/or left and right sides of the output album art to make the total size of \n        the output art match the values that you specified for <code>MaxWidth</code> and \n        <code>MaxHeight</code>.</p>\n   "
+                            },
+                            "AlbumArtFormat": {
+                              "shape_name": "JpgOrPng",
+                              "type": "string",
+                              "pattern": "(^jpg$)|(^png$)",
+                              "documentation": "\n        <p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>\n   "
+                            }
+                          },
+                          "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20.</p>\n        <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code>\n            to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty\n            <code>Artwork</code> array.</p>\n        <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to\n            \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>\n   "
+                        },
+                        "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20. Valid formats are <code>.jpg</code> and <code>.png</code></p>\n   "
+                      }
+                    },
+                    "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
                   }
                 },
                 "documentation": "\n        <p>If you specified one output for a job, information about that output. If you specified\n            multiple outputs for a job, the Output object lists information about the first output.\n            This duplicates the information that is listed for the first output in the Outputs\n            object.</p>\n        <p><important>Outputs recommended instead.</important> A section of the request or response\n            body that provides information about the transcoded (target) file. </p>\n    "
@@ -585,6 +774,69 @@
                         "documentation": "\n        <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not\n            rectangular, use the .png format, which supports transparency.</p>\n    "
                       },
                       "documentation": "\n        <p>Information about the watermarks that you want Elastic Transcoder to add to the video during\n            transcoding. You can specify up to four watermarks for each output. Settings for each\n            watermark must be defined in the preset that you specify in <code>Preset</code> for the\n            current output.</p>\n        <p>Watermarks are added to the output video in the sequence in which you list them in the\n            job output&#x2014;the first watermark in the list is added to the output video first, the\n            second watermark in the list is added next, and so on. As a result, if the settings in a\n            preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark\n            that you add will cover the first one, the third one will cover the second, and the\n            fourth one will cover the third.</p>\n    "
+                    },
+                    "AlbumArt": {
+                      "shape_name": "JobAlbumArt",
+                      "type": "structure",
+                      "members": {
+                        "MergePolicy": {
+                          "shape_name": "MergePolicy",
+                          "type": "string",
+                          "pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)",
+                          "documentation": "\n        <p>A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.</p>\n        <p>\n            <ul>\n                <li>\n<code>Replace:</code> The specified album art will replace any existing album art.</li>\n                <li>\n<code>Prepend:</code> The specified album art will be placed in front of any existing \n                    album art.</li>\n                <li>\n<code>Append:</code> The specified album art will be placed after any existing album art.</li>\n                <li>\n<code>Fallback:</code> If the original input file contains artwork, Elastic Transcoder will use that\n                    artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the \n                    specified album art file.</li>\n            </ul>\n        </p>\n   "
+                        },
+                        "Artwork": {
+                          "shape_name": "Artworks",
+                          "type": "list",
+                          "members": {
+                            "shape_name": "Artwork",
+                            "type": "structure",
+                            "members": {
+                              "InputKey": {
+                                "shape_name": "WatermarkKey",
+                                "type": "string",
+                                "min_length": 1,
+                                "max_length": 255,
+                                "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
+                                "documentation": "\n        <p>The name of the file to be used as album art. To determine which Amazon S3 bucket contains the \n            specified file, Elastic Transcoder checks the pipeline specified by <code>PipelineId</code>; the \n            <code>InputBucket</code> object in that pipeline identifies the bucket.</p>\n        <p>If the file name includes a prefix, for example, <code>cooking/pie.jpg</code>,\n            include the prefix in the key. If the file isn't in the specified bucket, \n            Elastic Transcoder returns an error.</p>\n   "
+                              },
+                              "MaxWidth": {
+                                "shape_name": "DigitsOrAuto",
+                                "type": "string",
+                                "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                "documentation": "\n        <p>The maximum width of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 4096, inclusive.</p>\n   "
+                              },
+                              "MaxHeight": {
+                                "shape_name": "DigitsOrAuto",
+                                "type": "string",
+                                "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                "documentation": "\n        <p>The maximum height of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 3072, inclusive.</p>\n   "
+                              },
+                              "SizingPolicy": {
+                                "shape_name": "SizingPolicy",
+                                "type": "string",
+                                "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
+                                "documentation": "\n        <p>Specify one of the following values to control scaling of the output album art:</p>\n        <p>\n            <ul>\n                <li>\n<code>Fit:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without \n                    exceeding the other value.</li>\n                <li>\n<code>Fill:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or \n                    exceeds the other value. Elastic Transcoder centers the output art and then crops it in the \n                    dimension (if any) that exceeds the maximum value. </li>\n                <li>\n<code>Stretch:</code> Elastic Transcoder stretches the output art to match the values that you\n                    specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative \n                    proportions of the input art and the output art are different, the output art will \n                    be distorted.</li>\n                <li>\n<code>Keep:</code> Elastic Transcoder does not scale the output art. If either dimension of the\n                    input art exceeds the values that you specified for <code>MaxWidth</code> and \n                    <code>MaxHeight</code>, Elastic Transcoder crops the output art.</li>\n                <li>\n<code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without exceeding either value. If you specify this option, \n                    Elastic Transcoder does not scale the art up.</li>\n                <li>\n<code>ShrinkToFill</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without dropping below either value. If you specify this \n                    option, Elastic Transcoder does not scale the art up.</li>\n            </ul>\n        </p>\n   "
+                              },
+                              "PaddingPolicy": {
+                                "shape_name": "PaddingPolicy",
+                                "type": "string",
+                                "pattern": "(^Pad$)|(^NoPad$)",
+                                "documentation": "\n        <p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add white bars to the \n        top and bottom and/or left and right sides of the output album art to make the total size of \n        the output art match the values that you specified for <code>MaxWidth</code> and \n        <code>MaxHeight</code>.</p>\n   "
+                              },
+                              "AlbumArtFormat": {
+                                "shape_name": "JpgOrPng",
+                                "type": "string",
+                                "pattern": "(^jpg$)|(^png$)",
+                                "documentation": "\n        <p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>\n   "
+                              }
+                            },
+                            "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20.</p>\n        <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code>\n            to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty\n            <code>Artwork</code> array.</p>\n        <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to\n            \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>\n   "
+                          },
+                          "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20. Valid formats are <code>.jpg</code> and <code>.png</code></p>\n   "
+                        }
+                      },
+                      "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
                     }
                   },
                   "documentation": "\n        <p><important>Outputs recommended instead.</important>If you specified one output for a job,\n            information about that output. If you specified multiple outputs for a job, the\n                <code>Output</code> object lists information about the first output. This duplicates\n            the information that is listed for the first output in the <code>Outputs</code>\n            object.</p>\n    "
@@ -1166,8 +1418,8 @@
           "Container": {
             "shape_name": "PresetContainer",
             "type": "string",
-            "pattern": "(^mp4$)|(^ts$)|(^webm$)",
-            "documentation": "\n        <p>The container type for the output file. This value must be <code>mp4</code>.</p>\n    "
+            "pattern": "(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^ogg$)",
+            "documentation": "\n        <p>The container type for the output file. Valid values include <code>mp3</code>, \n            <code>mp4</code>, <code>ogg</code>, <code>ts</code>, and <code>webm</code>.</p>\n    "
           },
           "Video": {
             "shape_name": "VideoParameters",
@@ -1220,13 +1472,13 @@
               "FrameRate": {
                 "shape_name": "FrameRate",
                 "type": "string",
-                "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                 "documentation": "\n        <p>The frames per second for the video stream in the output file. Valid values include:</p>\n        <p><code>auto</code>, <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>,\n                <code>25</code>, <code>29.97</code>, <code>30</code>, <code>60</code></p>\n        <p>If you specify <code>auto</code>, Elastic Transcoder uses the detected frame rate of the input source.\n            If you specify a frame rate, we recommend that you perform the following\n            calculation:</p>\n        <p>\n            <code>Frame rate = maximum recommended decoding speed in luma samples/second / (width in\n                pixels * height in pixels)</code>\n        </p>\n        <p>where:</p>\n        <ul>\n            <li>\n<i>width in pixels</i> and <i>height in pixels</i> represent the Resolution of the\n                output video.</li>\n            <li>\n<i>maximum recommended decoding speed in Luma samples/second</i> is less than or\n                equal to the maximum value listed in the following table, based on the value that\n                you specified for Level.</li>\n        </ul>\n        <p>The maximum recommended decoding speed in Luma samples/second for each level is described\n            in the following list (<i>Level - Decoding speed</i>):</p>\n        <ul>\n            <li>1 - 380160</li>\n            <li>1b - 380160</li>\n            <li>1.1 - 76800</li>\n            <li>1.2 - 1536000</li>\n            <li>1.3 - 3041280</li>\n            <li>2 - 3041280</li>\n            <li>2.1 - 5068800</li>\n            <li>2.2 - 5184000</li>\n            <li>3 - 10368000</li>\n            <li>3.1 - 27648000</li>\n            <li>3.2 - 55296000</li>\n            <li>4 - 62914560</li>\n            <li>4.1 - 62914560</li>\n        </ul>\n    "
               },
               "MaxFrameRate": {
                 "shape_name": "MaxFrameRate",
                 "type": "string",
-                "pattern": "(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                "pattern": "(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                 "documentation": "\n        <p>If you specify <code>auto</code> for <code>FrameRate</code>, Elastic Transcoder uses the frame rate of\n            the input video for the frame rate of the output video. Specify the maximum frame rate\n            that you want Elastic Transcoder to use when the frame rate of the input video is greater than the\n            desired maximum frame rate of the output video. Valid values include: <code>10</code>,\n                <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>,\n                <code>29.97</code>, <code>30</code>, <code>60</code>.</p>\n    "
               },
               "Resolution": {
@@ -1354,8 +1606,8 @@
               "Codec": {
                 "shape_name": "AudioCodec",
                 "type": "string",
-                "pattern": "(^AAC$)|(^vorbis$)",
-                "documentation": "\n        <p>The audio codec for the output file. This value must be <code>AAC</code>.</p>\n    "
+                "pattern": "(^AAC$)|(^vorbis$)|(^mp3$)",
+                "documentation": "\n        <p>the audio codec for the output file. Valid values include <code>aac</code>, \n            <code>mp3</code>, and <code>vorbis</code>.</p>\n    "
               },
               "SampleRate": {
                 "shape_name": "AudioSampleRate",
@@ -1383,7 +1635,7 @@
             "type": "structure",
             "members": {
               "Format": {
-                "shape_name": "ThumbnailFormat",
+                "shape_name": "JpgOrPng",
                 "type": "string",
                 "pattern": "(^jpg$)|(^png$)",
                 "documentation": "\n        <p>The format of thumbnails, if any. Valid values are <code>jpg</code> and <code>png</code>. </p>\n        <p>You specify whether you want Elastic Transcoder to create thumbnails when you create a job.</p>\n    "
@@ -1467,8 +1719,8 @@
               "Container": {
                 "shape_name": "PresetContainer",
                 "type": "string",
-                "pattern": "(^mp4$)|(^ts$)|(^webm$)",
-                "documentation": "\n        <p>The container type for the output file. This value must be <code>mp4</code>.</p>\n    "
+                "pattern": "(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^ogg$)",
+                "documentation": "\n        <p>The container type for the output file. Valid values include <code>mp3</code>,\n            <code>mp4</code>, <code>ogg</code>, <code>ts</code>, and <code>webm</code>.</p>\n    "
               },
               "Audio": {
                 "shape_name": "AudioParameters",
@@ -1477,8 +1729,8 @@
                   "Codec": {
                     "shape_name": "AudioCodec",
                     "type": "string",
-                    "pattern": "(^AAC$)|(^vorbis$)",
-                    "documentation": "\n        <p>The audio codec for the output file. This value must be <code>AAC</code>.</p>\n    "
+                    "pattern": "(^AAC$)|(^vorbis$)|(^mp3$)",
+                    "documentation": "\n        <p>the audio codec for the output file. Valid values include <code>aac</code>, \n            <code>mp3</code>, and <code>vorbis</code>.</p>\n    "
                   },
                   "SampleRate": {
                     "shape_name": "AudioSampleRate",
@@ -1552,13 +1804,13 @@
                   "FrameRate": {
                     "shape_name": "FrameRate",
                     "type": "string",
-                    "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                    "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                     "documentation": "\n        <p>The frames per second for the video stream in the output file. Valid values include:</p>\n        <p><code>auto</code>, <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>,\n                <code>25</code>, <code>29.97</code>, <code>30</code>, <code>60</code></p>\n        <p>If you specify <code>auto</code>, Elastic Transcoder uses the detected frame rate of the input source.\n            If you specify a frame rate, we recommend that you perform the following\n            calculation:</p>\n        <p>\n            <code>Frame rate = maximum recommended decoding speed in luma samples/second / (width in\n                pixels * height in pixels)</code>\n        </p>\n        <p>where:</p>\n        <ul>\n            <li>\n<i>width in pixels</i> and <i>height in pixels</i> represent the Resolution of the\n                output video.</li>\n            <li>\n<i>maximum recommended decoding speed in Luma samples/second</i> is less than or\n                equal to the maximum value listed in the following table, based on the value that\n                you specified for Level.</li>\n        </ul>\n        <p>The maximum recommended decoding speed in Luma samples/second for each level is described\n            in the following list (<i>Level - Decoding speed</i>):</p>\n        <ul>\n            <li>1 - 380160</li>\n            <li>1b - 380160</li>\n            <li>1.1 - 76800</li>\n            <li>1.2 - 1536000</li>\n            <li>1.3 - 3041280</li>\n            <li>2 - 3041280</li>\n            <li>2.1 - 5068800</li>\n            <li>2.2 - 5184000</li>\n            <li>3 - 10368000</li>\n            <li>3.1 - 27648000</li>\n            <li>3.2 - 55296000</li>\n            <li>4 - 62914560</li>\n            <li>4.1 - 62914560</li>\n        </ul>\n    "
                   },
                   "MaxFrameRate": {
                     "shape_name": "MaxFrameRate",
                     "type": "string",
-                    "pattern": "(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                    "pattern": "(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                     "documentation": "\n        <p>If you specify <code>auto</code> for <code>FrameRate</code>, Elastic Transcoder uses the frame rate of\n            the input video for the frame rate of the output video. Specify the maximum frame rate\n            that you want Elastic Transcoder to use when the frame rate of the input video is greater than the\n            desired maximum frame rate of the output video. Valid values include: <code>10</code>,\n                <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>,\n                <code>29.97</code>, <code>30</code>, <code>60</code>.</p>\n    "
                   },
                   "Resolution": {
@@ -1684,7 +1936,7 @@
                 "type": "structure",
                 "members": {
                   "Format": {
-                    "shape_name": "ThumbnailFormat",
+                    "shape_name": "JpgOrPng",
                     "type": "string",
                     "pattern": "(^jpg$)|(^png$)",
                     "documentation": "\n        <p>The format of thumbnails, if any. Valid values are <code>jpg</code> and <code>png</code>. </p>\n        <p>You specify whether you want Elastic Transcoder to create thumbnails when you create a job.</p>\n    "
@@ -2002,7 +2254,7 @@
                     "FrameRate": {
                       "shape_name": "FrameRate",
                       "type": "string",
-                      "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                      "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                       "documentation": "\n        <p>The frame rate of the input file. If you want Elastic Transcoder to automatically detect the frame rate\n            of the input file, specify <code>auto</code>. If you want to specify the frame rate for\n            the input file, enter one of the following values: </p>\n        <p>\n            <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>,\n                <code>29.97</code>, <code>30</code>, <code>60</code>\n        </p>\n        <p>If you specify a value other than <code>auto</code>, Elastic Transcoder disables automatic detection of\n            the frame rate.</p>\n    "
                     },
                     "Resolution": {
@@ -2026,8 +2278,8 @@
                     "Container": {
                       "shape_name": "JobContainer",
                       "type": "string",
-                      "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)",
-                      "documentation": "\n        <p>The container type for the input file. If you want Elastic Transcoder to automatically detect the\n            container type of the input file, specify <code>auto</code>. If you want to specify the\n            container type for the input file, enter one of the following values: </p>\n        <p>\n            <code>3gp</code>, <code>asf</code>, <code>avi</code>, <code>divx</code>,\n                <code>flv</code>, <code>mkv</code>, <code>mov</code>, <code>mp4</code>,\n                <code>mpeg</code>, <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>,\n                <code>ogg</code>, <code>vob</code>, <code>wav</code>, <code>webm</code>\n        </p>\n    "
+                      "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)|(^mp3$)|(^m4a$)|(^aac$)",
+                      "documentation": "\n        <p>The container type for the input file. If you want Elastic Transcoder to automatically detect the\n            container type of the input file, specify <code>auto</code>. If you want to specify the\n            container type for the input file, enter one of the following values: </p>\n        <p>\n            <code>3gp</code>, <code>aac</code>, <code>asf</code>, <code>avi</code>, \n                <code>divx</code>, <code>flv</code>, <code>m4a</code>, <code>mkv</code>, \n                <code>mov</code>, <code>mp3</code>, <code>mp4</code>, <code>mpeg</code>, \n                <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>, <code>ogg</code>, \n                <code>vob</code>, <code>wav</code>, <code>webm</code>\n        </p>\n    "
                     }
                   },
                   "documentation": "\n        <p> A section of the request or response body that provides information about the file that\n            is being transcoded.</p>\n    "
@@ -2126,6 +2378,69 @@
                         "documentation": "\n        <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not\n            rectangular, use the .png format, which supports transparency.</p>\n    "
                       },
                       "documentation": "\n        <p>Information about the watermarks that you want Elastic Transcoder to add to the video during\n            transcoding. You can specify up to four watermarks for each output. Settings for each\n            watermark must be defined in the preset that you specify in <code>Preset</code> for the\n            current output.</p>\n        <p>Watermarks are added to the output video in the sequence in which you list them in the\n            job output&#x2014;the first watermark in the list is added to the output video first, the\n            second watermark in the list is added next, and so on. As a result, if the settings in a\n            preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark\n            that you add will cover the first one, the third one will cover the second, and the\n            fourth one will cover the third.</p>\n    "
+                    },
+                    "AlbumArt": {
+                      "shape_name": "JobAlbumArt",
+                      "type": "structure",
+                      "members": {
+                        "MergePolicy": {
+                          "shape_name": "MergePolicy",
+                          "type": "string",
+                          "pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)",
+                          "documentation": "\n        <p>A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.</p>\n        <p>\n            <ul>\n                <li>\n<code>Replace:</code> The specified album art will replace any existing album art.</li>\n                <li>\n<code>Prepend:</code> The specified album art will be placed in front of any existing \n                    album art.</li>\n                <li>\n<code>Append:</code> The specified album art will be placed after any existing album art.</li>\n                <li>\n<code>Fallback:</code> If the original input file contains artwork, Elastic Transcoder will use that\n                    artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the \n                    specified album art file.</li>\n            </ul>\n        </p>\n   "
+                        },
+                        "Artwork": {
+                          "shape_name": "Artworks",
+                          "type": "list",
+                          "members": {
+                            "shape_name": "Artwork",
+                            "type": "structure",
+                            "members": {
+                              "InputKey": {
+                                "shape_name": "WatermarkKey",
+                                "type": "string",
+                                "min_length": 1,
+                                "max_length": 255,
+                                "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
+                                "documentation": "\n        <p>The name of the file to be used as album art. To determine which Amazon S3 bucket contains the \n            specified file, Elastic Transcoder checks the pipeline specified by <code>PipelineId</code>; the \n            <code>InputBucket</code> object in that pipeline identifies the bucket.</p>\n        <p>If the file name includes a prefix, for example, <code>cooking/pie.jpg</code>,\n            include the prefix in the key. If the file isn't in the specified bucket, \n            Elastic Transcoder returns an error.</p>\n   "
+                              },
+                              "MaxWidth": {
+                                "shape_name": "DigitsOrAuto",
+                                "type": "string",
+                                "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                "documentation": "\n        <p>The maximum width of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 4096, inclusive.</p>\n   "
+                              },
+                              "MaxHeight": {
+                                "shape_name": "DigitsOrAuto",
+                                "type": "string",
+                                "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                "documentation": "\n        <p>The maximum height of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 3072, inclusive.</p>\n   "
+                              },
+                              "SizingPolicy": {
+                                "shape_name": "SizingPolicy",
+                                "type": "string",
+                                "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
+                                "documentation": "\n        <p>Specify one of the following values to control scaling of the output album art:</p>\n        <p>\n            <ul>\n                <li>\n<code>Fit:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without \n                    exceeding the other value.</li>\n                <li>\n<code>Fill:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or \n                    exceeds the other value. Elastic Transcoder centers the output art and then crops it in the \n                    dimension (if any) that exceeds the maximum value. </li>\n                <li>\n<code>Stretch:</code> Elastic Transcoder stretches the output art to match the values that you\n                    specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative \n                    proportions of the input art and the output art are different, the output art will \n                    be distorted.</li>\n                <li>\n<code>Keep:</code> Elastic Transcoder does not scale the output art. If either dimension of the\n                    input art exceeds the values that you specified for <code>MaxWidth</code> and \n                    <code>MaxHeight</code>, Elastic Transcoder crops the output art.</li>\n                <li>\n<code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without exceeding either value. If you specify this option, \n                    Elastic Transcoder does not scale the art up.</li>\n                <li>\n<code>ShrinkToFill</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without dropping below either value. If you specify this \n                    option, Elastic Transcoder does not scale the art up.</li>\n            </ul>\n        </p>\n   "
+                              },
+                              "PaddingPolicy": {
+                                "shape_name": "PaddingPolicy",
+                                "type": "string",
+                                "pattern": "(^Pad$)|(^NoPad$)",
+                                "documentation": "\n        <p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add white bars to the \n        top and bottom and/or left and right sides of the output album art to make the total size of \n        the output art match the values that you specified for <code>MaxWidth</code> and \n        <code>MaxHeight</code>.</p>\n   "
+                              },
+                              "AlbumArtFormat": {
+                                "shape_name": "JpgOrPng",
+                                "type": "string",
+                                "pattern": "(^jpg$)|(^png$)",
+                                "documentation": "\n        <p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>\n   "
+                              }
+                            },
+                            "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20.</p>\n        <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code>\n            to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty\n            <code>Artwork</code> array.</p>\n        <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to\n            \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>\n   "
+                          },
+                          "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20. Valid formats are <code>.jpg</code> and <code>.png</code></p>\n   "
+                        }
+                      },
+                      "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
                     }
                   },
                   "documentation": "\n        <p>If you specified one output for a job, information about that output. If you specified\n            multiple outputs for a job, the Output object lists information about the first output.\n            This duplicates the information that is listed for the first output in the Outputs\n            object.</p>\n        <p><important>Outputs recommended instead.</important> A section of the request or response\n            body that provides information about the transcoded (target) file. </p>\n    "
@@ -2227,6 +2542,69 @@
                           "documentation": "\n        <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not\n            rectangular, use the .png format, which supports transparency.</p>\n    "
                         },
                         "documentation": "\n        <p>Information about the watermarks that you want Elastic Transcoder to add to the video during\n            transcoding. You can specify up to four watermarks for each output. Settings for each\n            watermark must be defined in the preset that you specify in <code>Preset</code> for the\n            current output.</p>\n        <p>Watermarks are added to the output video in the sequence in which you list them in the\n            job output&#x2014;the first watermark in the list is added to the output video first, the\n            second watermark in the list is added next, and so on. As a result, if the settings in a\n            preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark\n            that you add will cover the first one, the third one will cover the second, and the\n            fourth one will cover the third.</p>\n    "
+                      },
+                      "AlbumArt": {
+                        "shape_name": "JobAlbumArt",
+                        "type": "structure",
+                        "members": {
+                          "MergePolicy": {
+                            "shape_name": "MergePolicy",
+                            "type": "string",
+                            "pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)",
+                            "documentation": "\n        <p>A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.</p>\n        <p>\n            <ul>\n                <li>\n<code>Replace:</code> The specified album art will replace any existing album art.</li>\n                <li>\n<code>Prepend:</code> The specified album art will be placed in front of any existing \n                    album art.</li>\n                <li>\n<code>Append:</code> The specified album art will be placed after any existing album art.</li>\n                <li>\n<code>Fallback:</code> If the original input file contains artwork, Elastic Transcoder will use that\n                    artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the \n                    specified album art file.</li>\n            </ul>\n        </p>\n   "
+                          },
+                          "Artwork": {
+                            "shape_name": "Artworks",
+                            "type": "list",
+                            "members": {
+                              "shape_name": "Artwork",
+                              "type": "structure",
+                              "members": {
+                                "InputKey": {
+                                  "shape_name": "WatermarkKey",
+                                  "type": "string",
+                                  "min_length": 1,
+                                  "max_length": 255,
+                                  "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
+                                  "documentation": "\n        <p>The name of the file to be used as album art. To determine which Amazon S3 bucket contains the \n            specified file, Elastic Transcoder checks the pipeline specified by <code>PipelineId</code>; the \n            <code>InputBucket</code> object in that pipeline identifies the bucket.</p>\n        <p>If the file name includes a prefix, for example, <code>cooking/pie.jpg</code>,\n            include the prefix in the key. If the file isn't in the specified bucket, \n            Elastic Transcoder returns an error.</p>\n   "
+                                },
+                                "MaxWidth": {
+                                  "shape_name": "DigitsOrAuto",
+                                  "type": "string",
+                                  "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                  "documentation": "\n        <p>The maximum width of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 4096, inclusive.</p>\n   "
+                                },
+                                "MaxHeight": {
+                                  "shape_name": "DigitsOrAuto",
+                                  "type": "string",
+                                  "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                  "documentation": "\n        <p>The maximum height of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 3072, inclusive.</p>\n   "
+                                },
+                                "SizingPolicy": {
+                                  "shape_name": "SizingPolicy",
+                                  "type": "string",
+                                  "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
+                                  "documentation": "\n        <p>Specify one of the following values to control scaling of the output album art:</p>\n        <p>\n            <ul>\n                <li>\n<code>Fit:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without \n                    exceeding the other value.</li>\n                <li>\n<code>Fill:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or \n                    exceeds the other value. Elastic Transcoder centers the output art and then crops it in the \n                    dimension (if any) that exceeds the maximum value. </li>\n                <li>\n<code>Stretch:</code> Elastic Transcoder stretches the output art to match the values that you\n                    specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative \n                    proportions of the input art and the output art are different, the output art will \n                    be distorted.</li>\n                <li>\n<code>Keep:</code> Elastic Transcoder does not scale the output art. If either dimension of the\n                    input art exceeds the values that you specified for <code>MaxWidth</code> and \n                    <code>MaxHeight</code>, Elastic Transcoder crops the output art.</li>\n                <li>\n<code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without exceeding either value. If you specify this option, \n                    Elastic Transcoder does not scale the art up.</li>\n                <li>\n<code>ShrinkToFill</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without dropping below either value. If you specify this \n                    option, Elastic Transcoder does not scale the art up.</li>\n            </ul>\n        </p>\n   "
+                                },
+                                "PaddingPolicy": {
+                                  "shape_name": "PaddingPolicy",
+                                  "type": "string",
+                                  "pattern": "(^Pad$)|(^NoPad$)",
+                                  "documentation": "\n        <p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add white bars to the \n        top and bottom and/or left and right sides of the output album art to make the total size of \n        the output art match the values that you specified for <code>MaxWidth</code> and \n        <code>MaxHeight</code>.</p>\n   "
+                                },
+                                "AlbumArtFormat": {
+                                  "shape_name": "JpgOrPng",
+                                  "type": "string",
+                                  "pattern": "(^jpg$)|(^png$)",
+                                  "documentation": "\n        <p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>\n   "
+                                }
+                              },
+                              "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20.</p>\n        <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code>\n            to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty\n            <code>Artwork</code> array.</p>\n        <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to\n            \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>\n   "
+                            },
+                            "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20. Valid formats are <code>.jpg</code> and <code>.png</code></p>\n   "
+                          }
+                        },
+                        "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
                       }
                     },
                     "documentation": "\n        <p><important>Outputs recommended instead.</important>If you specified one output for a job,\n            information about that output. If you specified multiple outputs for a job, the\n                <code>Output</code> object lists information about the first output. This duplicates\n            the information that is listed for the first output in the <code>Outputs</code>\n            object.</p>\n    "
@@ -2421,7 +2799,7 @@
                     "FrameRate": {
                       "shape_name": "FrameRate",
                       "type": "string",
-                      "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                      "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                       "documentation": "\n        <p>The frame rate of the input file. If you want Elastic Transcoder to automatically detect the frame rate\n            of the input file, specify <code>auto</code>. If you want to specify the frame rate for\n            the input file, enter one of the following values: </p>\n        <p>\n            <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>,\n                <code>29.97</code>, <code>30</code>, <code>60</code>\n        </p>\n        <p>If you specify a value other than <code>auto</code>, Elastic Transcoder disables automatic detection of\n            the frame rate.</p>\n    "
                     },
                     "Resolution": {
@@ -2445,8 +2823,8 @@
                     "Container": {
                       "shape_name": "JobContainer",
                       "type": "string",
-                      "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)",
-                      "documentation": "\n        <p>The container type for the input file. If you want Elastic Transcoder to automatically detect the\n            container type of the input file, specify <code>auto</code>. If you want to specify the\n            container type for the input file, enter one of the following values: </p>\n        <p>\n            <code>3gp</code>, <code>asf</code>, <code>avi</code>, <code>divx</code>,\n                <code>flv</code>, <code>mkv</code>, <code>mov</code>, <code>mp4</code>,\n                <code>mpeg</code>, <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>,\n                <code>ogg</code>, <code>vob</code>, <code>wav</code>, <code>webm</code>\n        </p>\n    "
+                      "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)|(^mp3$)|(^m4a$)|(^aac$)",
+                      "documentation": "\n        <p>The container type for the input file. If you want Elastic Transcoder to automatically detect the\n            container type of the input file, specify <code>auto</code>. If you want to specify the\n            container type for the input file, enter one of the following values: </p>\n        <p>\n            <code>3gp</code>, <code>aac</code>, <code>asf</code>, <code>avi</code>, \n                <code>divx</code>, <code>flv</code>, <code>m4a</code>, <code>mkv</code>, \n                <code>mov</code>, <code>mp3</code>, <code>mp4</code>, <code>mpeg</code>, \n                <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>, <code>ogg</code>, \n                <code>vob</code>, <code>wav</code>, <code>webm</code>\n        </p>\n    "
                     }
                   },
                   "documentation": "\n        <p> A section of the request or response body that provides information about the file that\n            is being transcoded.</p>\n    "
@@ -2545,6 +2923,69 @@
                         "documentation": "\n        <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not\n            rectangular, use the .png format, which supports transparency.</p>\n    "
                       },
                       "documentation": "\n        <p>Information about the watermarks that you want Elastic Transcoder to add to the video during\n            transcoding. You can specify up to four watermarks for each output. Settings for each\n            watermark must be defined in the preset that you specify in <code>Preset</code> for the\n            current output.</p>\n        <p>Watermarks are added to the output video in the sequence in which you list them in the\n            job output&#x2014;the first watermark in the list is added to the output video first, the\n            second watermark in the list is added next, and so on. As a result, if the settings in a\n            preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark\n            that you add will cover the first one, the third one will cover the second, and the\n            fourth one will cover the third.</p>\n    "
+                    },
+                    "AlbumArt": {
+                      "shape_name": "JobAlbumArt",
+                      "type": "structure",
+                      "members": {
+                        "MergePolicy": {
+                          "shape_name": "MergePolicy",
+                          "type": "string",
+                          "pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)",
+                          "documentation": "\n        <p>A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.</p>\n        <p>\n            <ul>\n                <li>\n<code>Replace:</code> The specified album art will replace any existing album art.</li>\n                <li>\n<code>Prepend:</code> The specified album art will be placed in front of any existing \n                    album art.</li>\n                <li>\n<code>Append:</code> The specified album art will be placed after any existing album art.</li>\n                <li>\n<code>Fallback:</code> If the original input file contains artwork, Elastic Transcoder will use that\n                    artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the \n                    specified album art file.</li>\n            </ul>\n        </p>\n   "
+                        },
+                        "Artwork": {
+                          "shape_name": "Artworks",
+                          "type": "list",
+                          "members": {
+                            "shape_name": "Artwork",
+                            "type": "structure",
+                            "members": {
+                              "InputKey": {
+                                "shape_name": "WatermarkKey",
+                                "type": "string",
+                                "min_length": 1,
+                                "max_length": 255,
+                                "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
+                                "documentation": "\n        <p>The name of the file to be used as album art. To determine which Amazon S3 bucket contains the \n            specified file, Elastic Transcoder checks the pipeline specified by <code>PipelineId</code>; the \n            <code>InputBucket</code> object in that pipeline identifies the bucket.</p>\n        <p>If the file name includes a prefix, for example, <code>cooking/pie.jpg</code>,\n            include the prefix in the key. If the file isn't in the specified bucket, \n            Elastic Transcoder returns an error.</p>\n   "
+                              },
+                              "MaxWidth": {
+                                "shape_name": "DigitsOrAuto",
+                                "type": "string",
+                                "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                "documentation": "\n        <p>The maximum width of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 4096, inclusive.</p>\n   "
+                              },
+                              "MaxHeight": {
+                                "shape_name": "DigitsOrAuto",
+                                "type": "string",
+                                "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                "documentation": "\n        <p>The maximum height of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 3072, inclusive.</p>\n   "
+                              },
+                              "SizingPolicy": {
+                                "shape_name": "SizingPolicy",
+                                "type": "string",
+                                "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
+                                "documentation": "\n        <p>Specify one of the following values to control scaling of the output album art:</p>\n        <p>\n            <ul>\n                <li>\n<code>Fit:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without \n                    exceeding the other value.</li>\n                <li>\n<code>Fill:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or \n                    exceeds the other value. Elastic Transcoder centers the output art and then crops it in the \n                    dimension (if any) that exceeds the maximum value. </li>\n                <li>\n<code>Stretch:</code> Elastic Transcoder stretches the output art to match the values that you\n                    specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative \n                    proportions of the input art and the output art are different, the output art will \n                    be distorted.</li>\n                <li>\n<code>Keep:</code> Elastic Transcoder does not scale the output art. If either dimension of the\n                    input art exceeds the values that you specified for <code>MaxWidth</code> and \n                    <code>MaxHeight</code>, Elastic Transcoder crops the output art.</li>\n                <li>\n<code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without exceeding either value. If you specify this option, \n                    Elastic Transcoder does not scale the art up.</li>\n                <li>\n<code>ShrinkToFill</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without dropping below either value. If you specify this \n                    option, Elastic Transcoder does not scale the art up.</li>\n            </ul>\n        </p>\n   "
+                              },
+                              "PaddingPolicy": {
+                                "shape_name": "PaddingPolicy",
+                                "type": "string",
+                                "pattern": "(^Pad$)|(^NoPad$)",
+                                "documentation": "\n        <p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add white bars to the \n        top and bottom and/or left and right sides of the output album art to make the total size of \n        the output art match the values that you specified for <code>MaxWidth</code> and \n        <code>MaxHeight</code>.</p>\n   "
+                              },
+                              "AlbumArtFormat": {
+                                "shape_name": "JpgOrPng",
+                                "type": "string",
+                                "pattern": "(^jpg$)|(^png$)",
+                                "documentation": "\n        <p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>\n   "
+                              }
+                            },
+                            "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20.</p>\n        <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code>\n            to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty\n            <code>Artwork</code> array.</p>\n        <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to\n            \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>\n   "
+                          },
+                          "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20. Valid formats are <code>.jpg</code> and <code>.png</code></p>\n   "
+                        }
+                      },
+                      "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
                     }
                   },
                   "documentation": "\n        <p>If you specified one output for a job, information about that output. If you specified\n            multiple outputs for a job, the Output object lists information about the first output.\n            This duplicates the information that is listed for the first output in the Outputs\n            object.</p>\n        <p><important>Outputs recommended instead.</important> A section of the request or response\n            body that provides information about the transcoded (target) file. </p>\n    "
@@ -2646,6 +3087,69 @@
                           "documentation": "\n        <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not\n            rectangular, use the .png format, which supports transparency.</p>\n    "
                         },
                         "documentation": "\n        <p>Information about the watermarks that you want Elastic Transcoder to add to the video during\n            transcoding. You can specify up to four watermarks for each output. Settings for each\n            watermark must be defined in the preset that you specify in <code>Preset</code> for the\n            current output.</p>\n        <p>Watermarks are added to the output video in the sequence in which you list them in the\n            job output&#x2014;the first watermark in the list is added to the output video first, the\n            second watermark in the list is added next, and so on. As a result, if the settings in a\n            preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark\n            that you add will cover the first one, the third one will cover the second, and the\n            fourth one will cover the third.</p>\n    "
+                      },
+                      "AlbumArt": {
+                        "shape_name": "JobAlbumArt",
+                        "type": "structure",
+                        "members": {
+                          "MergePolicy": {
+                            "shape_name": "MergePolicy",
+                            "type": "string",
+                            "pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)",
+                            "documentation": "\n        <p>A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.</p>\n        <p>\n            <ul>\n                <li>\n<code>Replace:</code> The specified album art will replace any existing album art.</li>\n                <li>\n<code>Prepend:</code> The specified album art will be placed in front of any existing \n                    album art.</li>\n                <li>\n<code>Append:</code> The specified album art will be placed after any existing album art.</li>\n                <li>\n<code>Fallback:</code> If the original input file contains artwork, Elastic Transcoder will use that\n                    artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the \n                    specified album art file.</li>\n            </ul>\n        </p>\n   "
+                          },
+                          "Artwork": {
+                            "shape_name": "Artworks",
+                            "type": "list",
+                            "members": {
+                              "shape_name": "Artwork",
+                              "type": "structure",
+                              "members": {
+                                "InputKey": {
+                                  "shape_name": "WatermarkKey",
+                                  "type": "string",
+                                  "min_length": 1,
+                                  "max_length": 255,
+                                  "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
+                                  "documentation": "\n        <p>The name of the file to be used as album art. To determine which Amazon S3 bucket contains the \n            specified file, Elastic Transcoder checks the pipeline specified by <code>PipelineId</code>; the \n            <code>InputBucket</code> object in that pipeline identifies the bucket.</p>\n        <p>If the file name includes a prefix, for example, <code>cooking/pie.jpg</code>,\n            include the prefix in the key. If the file isn't in the specified bucket, \n            Elastic Transcoder returns an error.</p>\n   "
+                                },
+                                "MaxWidth": {
+                                  "shape_name": "DigitsOrAuto",
+                                  "type": "string",
+                                  "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                  "documentation": "\n        <p>The maximum width of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 4096, inclusive.</p>\n   "
+                                },
+                                "MaxHeight": {
+                                  "shape_name": "DigitsOrAuto",
+                                  "type": "string",
+                                  "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                  "documentation": "\n        <p>The maximum height of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 3072, inclusive.</p>\n   "
+                                },
+                                "SizingPolicy": {
+                                  "shape_name": "SizingPolicy",
+                                  "type": "string",
+                                  "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
+                                  "documentation": "\n        <p>Specify one of the following values to control scaling of the output album art:</p>\n        <p>\n            <ul>\n                <li>\n<code>Fit:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without \n                    exceeding the other value.</li>\n                <li>\n<code>Fill:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or \n                    exceeds the other value. Elastic Transcoder centers the output art and then crops it in the \n                    dimension (if any) that exceeds the maximum value. </li>\n                <li>\n<code>Stretch:</code> Elastic Transcoder stretches the output art to match the values that you\n                    specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative \n                    proportions of the input art and the output art are different, the output art will \n                    be distorted.</li>\n                <li>\n<code>Keep:</code> Elastic Transcoder does not scale the output art. If either dimension of the\n                    input art exceeds the values that you specified for <code>MaxWidth</code> and \n                    <code>MaxHeight</code>, Elastic Transcoder crops the output art.</li>\n                <li>\n<code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without exceeding either value. If you specify this option, \n                    Elastic Transcoder does not scale the art up.</li>\n                <li>\n<code>ShrinkToFill</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without dropping below either value. If you specify this \n                    option, Elastic Transcoder does not scale the art up.</li>\n            </ul>\n        </p>\n   "
+                                },
+                                "PaddingPolicy": {
+                                  "shape_name": "PaddingPolicy",
+                                  "type": "string",
+                                  "pattern": "(^Pad$)|(^NoPad$)",
+                                  "documentation": "\n        <p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add white bars to the \n        top and bottom and/or left and right sides of the output album art to make the total size of \n        the output art match the values that you specified for <code>MaxWidth</code> and \n        <code>MaxHeight</code>.</p>\n   "
+                                },
+                                "AlbumArtFormat": {
+                                  "shape_name": "JpgOrPng",
+                                  "type": "string",
+                                  "pattern": "(^jpg$)|(^png$)",
+                                  "documentation": "\n        <p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>\n   "
+                                }
+                              },
+                              "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20.</p>\n        <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code>\n            to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty\n            <code>Artwork</code> array.</p>\n        <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to\n            \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>\n   "
+                            },
+                            "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20. Valid formats are <code>.jpg</code> and <code>.png</code></p>\n   "
+                          }
+                        },
+                        "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
                       }
                     },
                     "documentation": "\n        <p><important>Outputs recommended instead.</important>If you specified one output for a job,\n            information about that output. If you specified multiple outputs for a job, the\n                <code>Output</code> object lists information about the first output. This duplicates\n            the information that is listed for the first output in the <code>Outputs</code>\n            object.</p>\n    "
@@ -3067,8 +3571,8 @@
                 "Container": {
                   "shape_name": "PresetContainer",
                   "type": "string",
-                  "pattern": "(^mp4$)|(^ts$)|(^webm$)",
-                  "documentation": "\n        <p>The container type for the output file. This value must be <code>mp4</code>.</p>\n    "
+                  "pattern": "(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^ogg$)",
+                  "documentation": "\n        <p>The container type for the output file. Valid values include <code>mp3</code>,\n            <code>mp4</code>, <code>ogg</code>, <code>ts</code>, and <code>webm</code>.</p>\n    "
                 },
                 "Audio": {
                   "shape_name": "AudioParameters",
@@ -3077,8 +3581,8 @@
                     "Codec": {
                       "shape_name": "AudioCodec",
                       "type": "string",
-                      "pattern": "(^AAC$)|(^vorbis$)",
-                      "documentation": "\n        <p>The audio codec for the output file. This value must be <code>AAC</code>.</p>\n    "
+                      "pattern": "(^AAC$)|(^vorbis$)|(^mp3$)",
+                      "documentation": "\n        <p>the audio codec for the output file. Valid values include <code>aac</code>, \n            <code>mp3</code>, and <code>vorbis</code>.</p>\n    "
                     },
                     "SampleRate": {
                       "shape_name": "AudioSampleRate",
@@ -3152,13 +3656,13 @@
                     "FrameRate": {
                       "shape_name": "FrameRate",
                       "type": "string",
-                      "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                      "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                       "documentation": "\n        <p>The frames per second for the video stream in the output file. Valid values include:</p>\n        <p><code>auto</code>, <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>,\n                <code>25</code>, <code>29.97</code>, <code>30</code>, <code>60</code></p>\n        <p>If you specify <code>auto</code>, Elastic Transcoder uses the detected frame rate of the input source.\n            If you specify a frame rate, we recommend that you perform the following\n            calculation:</p>\n        <p>\n            <code>Frame rate = maximum recommended decoding speed in luma samples/second / (width in\n                pixels * height in pixels)</code>\n        </p>\n        <p>where:</p>\n        <ul>\n            <li>\n<i>width in pixels</i> and <i>height in pixels</i> represent the Resolution of the\n                output video.</li>\n            <li>\n<i>maximum recommended decoding speed in Luma samples/second</i> is less than or\n                equal to the maximum value listed in the following table, based on the value that\n                you specified for Level.</li>\n        </ul>\n        <p>The maximum recommended decoding speed in Luma samples/second for each level is described\n            in the following list (<i>Level - Decoding speed</i>):</p>\n        <ul>\n            <li>1 - 380160</li>\n            <li>1b - 380160</li>\n            <li>1.1 - 76800</li>\n            <li>1.2 - 1536000</li>\n            <li>1.3 - 3041280</li>\n            <li>2 - 3041280</li>\n            <li>2.1 - 5068800</li>\n            <li>2.2 - 5184000</li>\n            <li>3 - 10368000</li>\n            <li>3.1 - 27648000</li>\n            <li>3.2 - 55296000</li>\n            <li>4 - 62914560</li>\n            <li>4.1 - 62914560</li>\n        </ul>\n    "
                     },
                     "MaxFrameRate": {
                       "shape_name": "MaxFrameRate",
                       "type": "string",
-                      "pattern": "(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                      "pattern": "(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                       "documentation": "\n        <p>If you specify <code>auto</code> for <code>FrameRate</code>, Elastic Transcoder uses the frame rate of\n            the input video for the frame rate of the output video. Specify the maximum frame rate\n            that you want Elastic Transcoder to use when the frame rate of the input video is greater than the\n            desired maximum frame rate of the output video. Valid values include: <code>10</code>,\n                <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>,\n                <code>29.97</code>, <code>30</code>, <code>60</code>.</p>\n    "
                     },
                     "Resolution": {
@@ -3284,7 +3788,7 @@
                   "type": "structure",
                   "members": {
                     "Format": {
-                      "shape_name": "ThumbnailFormat",
+                      "shape_name": "JpgOrPng",
                       "type": "string",
                       "pattern": "(^jpg$)|(^png$)",
                       "documentation": "\n        <p>The format of thumbnails, if any. Valid values are <code>jpg</code> and <code>png</code>. </p>\n        <p>You specify whether you want Elastic Transcoder to create thumbnails when you create a job.</p>\n    "
@@ -3434,7 +3938,7 @@
                   "FrameRate": {
                     "shape_name": "FrameRate",
                     "type": "string",
-                    "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                    "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                     "documentation": "\n        <p>The frame rate of the input file. If you want Elastic Transcoder to automatically detect the frame rate\n            of the input file, specify <code>auto</code>. If you want to specify the frame rate for\n            the input file, enter one of the following values: </p>\n        <p>\n            <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>,\n                <code>29.97</code>, <code>30</code>, <code>60</code>\n        </p>\n        <p>If you specify a value other than <code>auto</code>, Elastic Transcoder disables automatic detection of\n            the frame rate.</p>\n    "
                   },
                   "Resolution": {
@@ -3458,8 +3962,8 @@
                   "Container": {
                     "shape_name": "JobContainer",
                     "type": "string",
-                    "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)",
-                    "documentation": "\n        <p>The container type for the input file. If you want Elastic Transcoder to automatically detect the\n            container type of the input file, specify <code>auto</code>. If you want to specify the\n            container type for the input file, enter one of the following values: </p>\n        <p>\n            <code>3gp</code>, <code>asf</code>, <code>avi</code>, <code>divx</code>,\n                <code>flv</code>, <code>mkv</code>, <code>mov</code>, <code>mp4</code>,\n                <code>mpeg</code>, <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>,\n                <code>ogg</code>, <code>vob</code>, <code>wav</code>, <code>webm</code>\n        </p>\n    "
+                    "pattern": "(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)|(^mp3$)|(^m4a$)|(^aac$)",
+                    "documentation": "\n        <p>The container type for the input file. If you want Elastic Transcoder to automatically detect the\n            container type of the input file, specify <code>auto</code>. If you want to specify the\n            container type for the input file, enter one of the following values: </p>\n        <p>\n            <code>3gp</code>, <code>aac</code>, <code>asf</code>, <code>avi</code>, \n                <code>divx</code>, <code>flv</code>, <code>m4a</code>, <code>mkv</code>, \n                <code>mov</code>, <code>mp3</code>, <code>mp4</code>, <code>mpeg</code>, \n                <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>, <code>ogg</code>, \n                <code>vob</code>, <code>wav</code>, <code>webm</code>\n        </p>\n    "
                   }
                 },
                 "documentation": "\n        <p> A section of the request or response body that provides information about the file that\n            is being transcoded.</p>\n    "
@@ -3558,6 +4062,69 @@
                       "documentation": "\n        <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not\n            rectangular, use the .png format, which supports transparency.</p>\n    "
                     },
                     "documentation": "\n        <p>Information about the watermarks that you want Elastic Transcoder to add to the video during\n            transcoding. You can specify up to four watermarks for each output. Settings for each\n            watermark must be defined in the preset that you specify in <code>Preset</code> for the\n            current output.</p>\n        <p>Watermarks are added to the output video in the sequence in which you list them in the\n            job output&#x2014;the first watermark in the list is added to the output video first, the\n            second watermark in the list is added next, and so on. As a result, if the settings in a\n            preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark\n            that you add will cover the first one, the third one will cover the second, and the\n            fourth one will cover the third.</p>\n    "
+                  },
+                  "AlbumArt": {
+                    "shape_name": "JobAlbumArt",
+                    "type": "structure",
+                    "members": {
+                      "MergePolicy": {
+                        "shape_name": "MergePolicy",
+                        "type": "string",
+                        "pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)",
+                        "documentation": "\n        <p>A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.</p>\n        <p>\n            <ul>\n                <li>\n<code>Replace:</code> The specified album art will replace any existing album art.</li>\n                <li>\n<code>Prepend:</code> The specified album art will be placed in front of any existing \n                    album art.</li>\n                <li>\n<code>Append:</code> The specified album art will be placed after any existing album art.</li>\n                <li>\n<code>Fallback:</code> If the original input file contains artwork, Elastic Transcoder will use that\n                    artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the \n                    specified album art file.</li>\n            </ul>\n        </p>\n   "
+                      },
+                      "Artwork": {
+                        "shape_name": "Artworks",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "Artwork",
+                          "type": "structure",
+                          "members": {
+                            "InputKey": {
+                              "shape_name": "WatermarkKey",
+                              "type": "string",
+                              "min_length": 1,
+                              "max_length": 255,
+                              "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
+                              "documentation": "\n        <p>The name of the file to be used as album art. To determine which Amazon S3 bucket contains the \n            specified file, Elastic Transcoder checks the pipeline specified by <code>PipelineId</code>; the \n            <code>InputBucket</code> object in that pipeline identifies the bucket.</p>\n        <p>If the file name includes a prefix, for example, <code>cooking/pie.jpg</code>,\n            include the prefix in the key. If the file isn't in the specified bucket, \n            Elastic Transcoder returns an error.</p>\n   "
+                            },
+                            "MaxWidth": {
+                              "shape_name": "DigitsOrAuto",
+                              "type": "string",
+                              "pattern": "(^auto$)|(^\\d{2,4}$)",
+                              "documentation": "\n        <p>The maximum width of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 4096, inclusive.</p>\n   "
+                            },
+                            "MaxHeight": {
+                              "shape_name": "DigitsOrAuto",
+                              "type": "string",
+                              "pattern": "(^auto$)|(^\\d{2,4}$)",
+                              "documentation": "\n        <p>The maximum height of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 3072, inclusive.</p>\n   "
+                            },
+                            "SizingPolicy": {
+                              "shape_name": "SizingPolicy",
+                              "type": "string",
+                              "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
+                              "documentation": "\n        <p>Specify one of the following values to control scaling of the output album art:</p>\n        <p>\n            <ul>\n                <li>\n<code>Fit:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without \n                    exceeding the other value.</li>\n                <li>\n<code>Fill:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or \n                    exceeds the other value. Elastic Transcoder centers the output art and then crops it in the \n                    dimension (if any) that exceeds the maximum value. </li>\n                <li>\n<code>Stretch:</code> Elastic Transcoder stretches the output art to match the values that you\n                    specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative \n                    proportions of the input art and the output art are different, the output art will \n                    be distorted.</li>\n                <li>\n<code>Keep:</code> Elastic Transcoder does not scale the output art. If either dimension of the\n                    input art exceeds the values that you specified for <code>MaxWidth</code> and \n                    <code>MaxHeight</code>, Elastic Transcoder crops the output art.</li>\n                <li>\n<code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without exceeding either value. If you specify this option, \n                    Elastic Transcoder does not scale the art up.</li>\n                <li>\n<code>ShrinkToFill</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without dropping below either value. If you specify this \n                    option, Elastic Transcoder does not scale the art up.</li>\n            </ul>\n        </p>\n   "
+                            },
+                            "PaddingPolicy": {
+                              "shape_name": "PaddingPolicy",
+                              "type": "string",
+                              "pattern": "(^Pad$)|(^NoPad$)",
+                              "documentation": "\n        <p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add white bars to the \n        top and bottom and/or left and right sides of the output album art to make the total size of \n        the output art match the values that you specified for <code>MaxWidth</code> and \n        <code>MaxHeight</code>.</p>\n   "
+                            },
+                            "AlbumArtFormat": {
+                              "shape_name": "JpgOrPng",
+                              "type": "string",
+                              "pattern": "(^jpg$)|(^png$)",
+                              "documentation": "\n        <p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>\n   "
+                            }
+                          },
+                          "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20.</p>\n        <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code>\n            to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty\n            <code>Artwork</code> array.</p>\n        <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to\n            \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>\n   "
+                        },
+                        "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20. Valid formats are <code>.jpg</code> and <code>.png</code></p>\n   "
+                      }
+                    },
+                    "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
                   }
                 },
                 "documentation": "\n        <p>If you specified one output for a job, information about that output. If you specified\n            multiple outputs for a job, the Output object lists information about the first output.\n            This duplicates the information that is listed for the first output in the Outputs\n            object.</p>\n        <p><important>Outputs recommended instead.</important> A section of the request or response\n            body that provides information about the transcoded (target) file. </p>\n    "
@@ -3659,6 +4226,69 @@
                         "documentation": "\n        <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not\n            rectangular, use the .png format, which supports transparency.</p>\n    "
                       },
                       "documentation": "\n        <p>Information about the watermarks that you want Elastic Transcoder to add to the video during\n            transcoding. You can specify up to four watermarks for each output. Settings for each\n            watermark must be defined in the preset that you specify in <code>Preset</code> for the\n            current output.</p>\n        <p>Watermarks are added to the output video in the sequence in which you list them in the\n            job output&#x2014;the first watermark in the list is added to the output video first, the\n            second watermark in the list is added next, and so on. As a result, if the settings in a\n            preset cause Elastic Transcoder to place all watermarks in the same location, the second watermark\n            that you add will cover the first one, the third one will cover the second, and the\n            fourth one will cover the third.</p>\n    "
+                    },
+                    "AlbumArt": {
+                      "shape_name": "JobAlbumArt",
+                      "type": "structure",
+                      "members": {
+                        "MergePolicy": {
+                          "shape_name": "MergePolicy",
+                          "type": "string",
+                          "pattern": "(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)",
+                          "documentation": "\n        <p>A policy that determines how Elastic Transcoder will handle the existence of multiple album artwork files.</p>\n        <p>\n            <ul>\n                <li>\n<code>Replace:</code> The specified album art will replace any existing album art.</li>\n                <li>\n<code>Prepend:</code> The specified album art will be placed in front of any existing \n                    album art.</li>\n                <li>\n<code>Append:</code> The specified album art will be placed after any existing album art.</li>\n                <li>\n<code>Fallback:</code> If the original input file contains artwork, Elastic Transcoder will use that\n                    artwork for the output. If the original input does not contain artwork, Elastic Transcoder will use the \n                    specified album art file.</li>\n            </ul>\n        </p>\n   "
+                        },
+                        "Artwork": {
+                          "shape_name": "Artworks",
+                          "type": "list",
+                          "members": {
+                            "shape_name": "Artwork",
+                            "type": "structure",
+                            "members": {
+                              "InputKey": {
+                                "shape_name": "WatermarkKey",
+                                "type": "string",
+                                "min_length": 1,
+                                "max_length": 255,
+                                "pattern": "(^.{1,}.jpg$)|(^.{1,}.jpeg$)|(^.{1,}.png$)",
+                                "documentation": "\n        <p>The name of the file to be used as album art. To determine which Amazon S3 bucket contains the \n            specified file, Elastic Transcoder checks the pipeline specified by <code>PipelineId</code>; the \n            <code>InputBucket</code> object in that pipeline identifies the bucket.</p>\n        <p>If the file name includes a prefix, for example, <code>cooking/pie.jpg</code>,\n            include the prefix in the key. If the file isn't in the specified bucket, \n            Elastic Transcoder returns an error.</p>\n   "
+                              },
+                              "MaxWidth": {
+                                "shape_name": "DigitsOrAuto",
+                                "type": "string",
+                                "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                "documentation": "\n        <p>The maximum width of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 4096, inclusive.</p>\n   "
+                              },
+                              "MaxHeight": {
+                                "shape_name": "DigitsOrAuto",
+                                "type": "string",
+                                "pattern": "(^auto$)|(^\\d{2,4}$)",
+                                "documentation": "\n        <p>The maximum height of the output album art in pixels. If you specify <code>auto</code>, Elastic Transcoder \n        uses 600 as the default value. If you specify a numeric value, enter an even integer between 32 \n        and 3072, inclusive.</p>\n   "
+                              },
+                              "SizingPolicy": {
+                                "shape_name": "SizingPolicy",
+                                "type": "string",
+                                "pattern": "(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)",
+                                "documentation": "\n        <p>Specify one of the following values to control scaling of the output album art:</p>\n        <p>\n            <ul>\n                <li>\n<code>Fit:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> without \n                    exceeding the other value.</li>\n                <li>\n<code>Fill:</code> Elastic Transcoder scales the output art so it matches the value that you\n                    specified in either <code>MaxWidth</code> or <code>MaxHeight</code> and matches or \n                    exceeds the other value. Elastic Transcoder centers the output art and then crops it in the \n                    dimension (if any) that exceeds the maximum value. </li>\n                <li>\n<code>Stretch:</code> Elastic Transcoder stretches the output art to match the values that you\n                    specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative \n                    proportions of the input art and the output art are different, the output art will \n                    be distorted.</li>\n                <li>\n<code>Keep:</code> Elastic Transcoder does not scale the output art. If either dimension of the\n                    input art exceeds the values that you specified for <code>MaxWidth</code> and \n                    <code>MaxHeight</code>, Elastic Transcoder crops the output art.</li>\n                <li>\n<code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without exceeding either value. If you specify this option, \n                    Elastic Transcoder does not scale the art up.</li>\n                <li>\n<code>ShrinkToFill</code> Elastic Transcoder scales the output art down so that its dimensions \n                    match the values that you specified for at least one of <code>MaxWidth</code> and \n                    <code>MaxHeight</code> without dropping below either value. If you specify this \n                    option, Elastic Transcoder does not scale the art up.</li>\n            </ul>\n        </p>\n   "
+                              },
+                              "PaddingPolicy": {
+                                "shape_name": "PaddingPolicy",
+                                "type": "string",
+                                "pattern": "(^Pad$)|(^NoPad$)",
+                                "documentation": "\n        <p>When you set <code>PaddingPolicy</code> to <code>Pad</code>, Elastic Transcoder may add white bars to the \n        top and bottom and/or left and right sides of the output album art to make the total size of \n        the output art match the values that you specified for <code>MaxWidth</code> and \n        <code>MaxHeight</code>.</p>\n   "
+                              },
+                              "AlbumArtFormat": {
+                                "shape_name": "JpgOrPng",
+                                "type": "string",
+                                "pattern": "(^jpg$)|(^png$)",
+                                "documentation": "\n        <p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>\n   "
+                              }
+                            },
+                            "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20.</p>\n        <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code>\n            to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty\n            <code>Artwork</code> array.</p>\n        <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to\n            \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>\n   "
+                          },
+                          "documentation": "\n        <p>The file to be used as album art. There can be multiple artworks associated with an audio file, \n            to a maximum of 20. Valid formats are <code>.jpg</code> and <code>.png</code></p>\n   "
+                        }
+                      },
+                      "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
                     }
                   },
                   "documentation": "\n        <p><important>Outputs recommended instead.</important>If you specified one output for a job,\n            information about that output. If you specified multiple outputs for a job, the\n                <code>Output</code> object lists information about the first output. This duplicates\n            the information that is listed for the first output in the <code>Outputs</code>\n            object.</p>\n    "
@@ -4085,8 +4715,8 @@
               "Container": {
                 "shape_name": "PresetContainer",
                 "type": "string",
-                "pattern": "(^mp4$)|(^ts$)|(^webm$)",
-                "documentation": "\n        <p>The container type for the output file. This value must be <code>mp4</code>.</p>\n    "
+                "pattern": "(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^ogg$)",
+                "documentation": "\n        <p>The container type for the output file. Valid values include <code>mp3</code>,\n            <code>mp4</code>, <code>ogg</code>, <code>ts</code>, and <code>webm</code>.</p>\n    "
               },
               "Audio": {
                 "shape_name": "AudioParameters",
@@ -4095,8 +4725,8 @@
                   "Codec": {
                     "shape_name": "AudioCodec",
                     "type": "string",
-                    "pattern": "(^AAC$)|(^vorbis$)",
-                    "documentation": "\n        <p>The audio codec for the output file. This value must be <code>AAC</code>.</p>\n    "
+                    "pattern": "(^AAC$)|(^vorbis$)|(^mp3$)",
+                    "documentation": "\n        <p>the audio codec for the output file. Valid values include <code>aac</code>, \n            <code>mp3</code>, and <code>vorbis</code>.</p>\n    "
                   },
                   "SampleRate": {
                     "shape_name": "AudioSampleRate",
@@ -4170,13 +4800,13 @@
                   "FrameRate": {
                     "shape_name": "FrameRate",
                     "type": "string",
-                    "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                    "pattern": "(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                     "documentation": "\n        <p>The frames per second for the video stream in the output file. Valid values include:</p>\n        <p><code>auto</code>, <code>10</code>, <code>15</code>, <code>23.97</code>, <code>24</code>,\n                <code>25</code>, <code>29.97</code>, <code>30</code>, <code>60</code></p>\n        <p>If you specify <code>auto</code>, Elastic Transcoder uses the detected frame rate of the input source.\n            If you specify a frame rate, we recommend that you perform the following\n            calculation:</p>\n        <p>\n            <code>Frame rate = maximum recommended decoding speed in luma samples/second / (width in\n                pixels * height in pixels)</code>\n        </p>\n        <p>where:</p>\n        <ul>\n            <li>\n<i>width in pixels</i> and <i>height in pixels</i> represent the Resolution of the\n                output video.</li>\n            <li>\n<i>maximum recommended decoding speed in Luma samples/second</i> is less than or\n                equal to the maximum value listed in the following table, based on the value that\n                you specified for Level.</li>\n        </ul>\n        <p>The maximum recommended decoding speed in Luma samples/second for each level is described\n            in the following list (<i>Level - Decoding speed</i>):</p>\n        <ul>\n            <li>1 - 380160</li>\n            <li>1b - 380160</li>\n            <li>1.1 - 76800</li>\n            <li>1.2 - 1536000</li>\n            <li>1.3 - 3041280</li>\n            <li>2 - 3041280</li>\n            <li>2.1 - 5068800</li>\n            <li>2.2 - 5184000</li>\n            <li>3 - 10368000</li>\n            <li>3.1 - 27648000</li>\n            <li>3.2 - 55296000</li>\n            <li>4 - 62914560</li>\n            <li>4.1 - 62914560</li>\n        </ul>\n    "
                   },
                   "MaxFrameRate": {
                     "shape_name": "MaxFrameRate",
                     "type": "string",
-                    "pattern": "(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^60$)",
+                    "pattern": "(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)",
                     "documentation": "\n        <p>If you specify <code>auto</code> for <code>FrameRate</code>, Elastic Transcoder uses the frame rate of\n            the input video for the frame rate of the output video. Specify the maximum frame rate\n            that you want Elastic Transcoder to use when the frame rate of the input video is greater than the\n            desired maximum frame rate of the output video. Valid values include: <code>10</code>,\n                <code>15</code>, <code>23.97</code>, <code>24</code>, <code>25</code>,\n                <code>29.97</code>, <code>30</code>, <code>60</code>.</p>\n    "
                   },
                   "Resolution": {
@@ -4302,7 +4932,7 @@
                 "type": "structure",
                 "members": {
                   "Format": {
-                    "shape_name": "ThumbnailFormat",
+                    "shape_name": "JpgOrPng",
                     "type": "string",
                     "pattern": "(^jpg$)|(^png$)",
                     "documentation": "\n        <p>The format of thumbnails, if any. Valid values are <code>jpg</code> and <code>png</code>. </p>\n        <p>You specify whether you want Elastic Transcoder to create thumbnails when you create a job.</p>\n    "

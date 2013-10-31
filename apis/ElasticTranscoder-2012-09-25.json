@@ -123,6 +123,49 @@
                     }
                   }
                 }
+              },
+              "album_art": {
+                "type": "structure",
+                "serialized_name": "AlbumArt",
+                "members": {
+                  "merge_policy": {
+                    "type": "string",
+                    "serialized_name": "MergePolicy"
+                  },
+                  "artwork": {
+                    "type": "list",
+                    "serialized_name": "Artwork",
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "input_key": {
+                          "type": "string",
+                          "serialized_name": "InputKey"
+                        },
+                        "max_width": {
+                          "type": "string",
+                          "serialized_name": "MaxWidth"
+                        },
+                        "max_height": {
+                          "type": "string",
+                          "serialized_name": "MaxHeight"
+                        },
+                        "sizing_policy": {
+                          "type": "string",
+                          "serialized_name": "SizingPolicy"
+                        },
+                        "padding_policy": {
+                          "type": "string",
+                          "serialized_name": "PaddingPolicy"
+                        },
+                        "album_art_format": {
+                          "type": "string",
+                          "serialized_name": "AlbumArtFormat"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -165,6 +208,49 @@
                       "input_key": {
                         "type": "string",
                         "serialized_name": "InputKey"
+                      }
+                    }
+                  }
+                },
+                "album_art": {
+                  "type": "structure",
+                  "serialized_name": "AlbumArt",
+                  "members": {
+                    "merge_policy": {
+                      "type": "string",
+                      "serialized_name": "MergePolicy"
+                    },
+                    "artwork": {
+                      "type": "list",
+                      "serialized_name": "Artwork",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "input_key": {
+                            "type": "string",
+                            "serialized_name": "InputKey"
+                          },
+                          "max_width": {
+                            "type": "string",
+                            "serialized_name": "MaxWidth"
+                          },
+                          "max_height": {
+                            "type": "string",
+                            "serialized_name": "MaxHeight"
+                          },
+                          "sizing_policy": {
+                            "type": "string",
+                            "serialized_name": "SizingPolicy"
+                          },
+                          "padding_policy": {
+                            "type": "string",
+                            "serialized_name": "PaddingPolicy"
+                          },
+                          "album_art_format": {
+                            "type": "string",
+                            "serialized_name": "AlbumArtFormat"
+                          }
+                        }
                       }
                     }
                   }
@@ -311,6 +397,49 @@
                         }
                       }
                     }
+                  },
+                  "album_art": {
+                    "type": "structure",
+                    "serialized_name": "AlbumArt",
+                    "members": {
+                      "merge_policy": {
+                        "type": "string",
+                        "serialized_name": "MergePolicy"
+                      },
+                      "artwork": {
+                        "type": "list",
+                        "serialized_name": "Artwork",
+                        "members": {
+                          "type": "structure",
+                          "members": {
+                            "input_key": {
+                              "type": "string",
+                              "serialized_name": "InputKey"
+                            },
+                            "max_width": {
+                              "type": "string",
+                              "serialized_name": "MaxWidth"
+                            },
+                            "max_height": {
+                              "type": "string",
+                              "serialized_name": "MaxHeight"
+                            },
+                            "sizing_policy": {
+                              "type": "string",
+                              "serialized_name": "SizingPolicy"
+                            },
+                            "padding_policy": {
+                              "type": "string",
+                              "serialized_name": "PaddingPolicy"
+                            },
+                            "album_art_format": {
+                              "type": "string",
+                              "serialized_name": "AlbumArtFormat"
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -377,6 +506,49 @@
                           "input_key": {
                             "type": "string",
                             "serialized_name": "InputKey"
+                          }
+                        }
+                      }
+                    },
+                    "album_art": {
+                      "type": "structure",
+                      "serialized_name": "AlbumArt",
+                      "members": {
+                        "merge_policy": {
+                          "type": "string",
+                          "serialized_name": "MergePolicy"
+                        },
+                        "artwork": {
+                          "type": "list",
+                          "serialized_name": "Artwork",
+                          "members": {
+                            "type": "structure",
+                            "members": {
+                              "input_key": {
+                                "type": "string",
+                                "serialized_name": "InputKey"
+                              },
+                              "max_width": {
+                                "type": "string",
+                                "serialized_name": "MaxWidth"
+                              },
+                              "max_height": {
+                                "type": "string",
+                                "serialized_name": "MaxHeight"
+                              },
+                              "sizing_policy": {
+                                "type": "string",
+                                "serialized_name": "SizingPolicy"
+                              },
+                              "padding_policy": {
+                                "type": "string",
+                                "serialized_name": "PaddingPolicy"
+                              },
+                              "album_art_format": {
+                                "type": "string",
+                                "serialized_name": "AlbumArtFormat"
+                              }
+                            }
                           }
                         }
                       }
@@ -1264,6 +1436,49 @@
                           }
                         }
                       }
+                    },
+                    "album_art": {
+                      "type": "structure",
+                      "serialized_name": "AlbumArt",
+                      "members": {
+                        "merge_policy": {
+                          "type": "string",
+                          "serialized_name": "MergePolicy"
+                        },
+                        "artwork": {
+                          "type": "list",
+                          "serialized_name": "Artwork",
+                          "members": {
+                            "type": "structure",
+                            "members": {
+                              "input_key": {
+                                "type": "string",
+                                "serialized_name": "InputKey"
+                              },
+                              "max_width": {
+                                "type": "string",
+                                "serialized_name": "MaxWidth"
+                              },
+                              "max_height": {
+                                "type": "string",
+                                "serialized_name": "MaxHeight"
+                              },
+                              "sizing_policy": {
+                                "type": "string",
+                                "serialized_name": "SizingPolicy"
+                              },
+                              "padding_policy": {
+                                "type": "string",
+                                "serialized_name": "PaddingPolicy"
+                              },
+                              "album_art_format": {
+                                "type": "string",
+                                "serialized_name": "AlbumArtFormat"
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -1330,6 +1545,49 @@
                             "input_key": {
                               "type": "string",
                               "serialized_name": "InputKey"
+                            }
+                          }
+                        }
+                      },
+                      "album_art": {
+                        "type": "structure",
+                        "serialized_name": "AlbumArt",
+                        "members": {
+                          "merge_policy": {
+                            "type": "string",
+                            "serialized_name": "MergePolicy"
+                          },
+                          "artwork": {
+                            "type": "list",
+                            "serialized_name": "Artwork",
+                            "members": {
+                              "type": "structure",
+                              "members": {
+                                "input_key": {
+                                  "type": "string",
+                                  "serialized_name": "InputKey"
+                                },
+                                "max_width": {
+                                  "type": "string",
+                                  "serialized_name": "MaxWidth"
+                                },
+                                "max_height": {
+                                  "type": "string",
+                                  "serialized_name": "MaxHeight"
+                                },
+                                "sizing_policy": {
+                                  "type": "string",
+                                  "serialized_name": "SizingPolicy"
+                                },
+                                "padding_policy": {
+                                  "type": "string",
+                                  "serialized_name": "PaddingPolicy"
+                                },
+                                "album_art_format": {
+                                  "type": "string",
+                                  "serialized_name": "AlbumArtFormat"
+                                }
+                              }
                             }
                           }
                         }
@@ -1520,6 +1778,49 @@
                           }
                         }
                       }
+                    },
+                    "album_art": {
+                      "type": "structure",
+                      "serialized_name": "AlbumArt",
+                      "members": {
+                        "merge_policy": {
+                          "type": "string",
+                          "serialized_name": "MergePolicy"
+                        },
+                        "artwork": {
+                          "type": "list",
+                          "serialized_name": "Artwork",
+                          "members": {
+                            "type": "structure",
+                            "members": {
+                              "input_key": {
+                                "type": "string",
+                                "serialized_name": "InputKey"
+                              },
+                              "max_width": {
+                                "type": "string",
+                                "serialized_name": "MaxWidth"
+                              },
+                              "max_height": {
+                                "type": "string",
+                                "serialized_name": "MaxHeight"
+                              },
+                              "sizing_policy": {
+                                "type": "string",
+                                "serialized_name": "SizingPolicy"
+                              },
+                              "padding_policy": {
+                                "type": "string",
+                                "serialized_name": "PaddingPolicy"
+                              },
+                              "album_art_format": {
+                                "type": "string",
+                                "serialized_name": "AlbumArtFormat"
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -1586,6 +1887,49 @@
                             "input_key": {
                               "type": "string",
                               "serialized_name": "InputKey"
+                            }
+                          }
+                        }
+                      },
+                      "album_art": {
+                        "type": "structure",
+                        "serialized_name": "AlbumArt",
+                        "members": {
+                          "merge_policy": {
+                            "type": "string",
+                            "serialized_name": "MergePolicy"
+                          },
+                          "artwork": {
+                            "type": "list",
+                            "serialized_name": "Artwork",
+                            "members": {
+                              "type": "structure",
+                              "members": {
+                                "input_key": {
+                                  "type": "string",
+                                  "serialized_name": "InputKey"
+                                },
+                                "max_width": {
+                                  "type": "string",
+                                  "serialized_name": "MaxWidth"
+                                },
+                                "max_height": {
+                                  "type": "string",
+                                  "serialized_name": "MaxHeight"
+                                },
+                                "sizing_policy": {
+                                  "type": "string",
+                                  "serialized_name": "SizingPolicy"
+                                },
+                                "padding_policy": {
+                                  "type": "string",
+                                  "serialized_name": "PaddingPolicy"
+                                },
+                                "album_art_format": {
+                                  "type": "string",
+                                  "serialized_name": "AlbumArtFormat"
+                                }
+                              }
                             }
                           }
                         }
@@ -2127,6 +2471,49 @@
                         }
                       }
                     }
+                  },
+                  "album_art": {
+                    "type": "structure",
+                    "serialized_name": "AlbumArt",
+                    "members": {
+                      "merge_policy": {
+                        "type": "string",
+                        "serialized_name": "MergePolicy"
+                      },
+                      "artwork": {
+                        "type": "list",
+                        "serialized_name": "Artwork",
+                        "members": {
+                          "type": "structure",
+                          "members": {
+                            "input_key": {
+                              "type": "string",
+                              "serialized_name": "InputKey"
+                            },
+                            "max_width": {
+                              "type": "string",
+                              "serialized_name": "MaxWidth"
+                            },
+                            "max_height": {
+                              "type": "string",
+                              "serialized_name": "MaxHeight"
+                            },
+                            "sizing_policy": {
+                              "type": "string",
+                              "serialized_name": "SizingPolicy"
+                            },
+                            "padding_policy": {
+                              "type": "string",
+                              "serialized_name": "PaddingPolicy"
+                            },
+                            "album_art_format": {
+                              "type": "string",
+                              "serialized_name": "AlbumArtFormat"
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -2193,6 +2580,49 @@
                           "input_key": {
                             "type": "string",
                             "serialized_name": "InputKey"
+                          }
+                        }
+                      }
+                    },
+                    "album_art": {
+                      "type": "structure",
+                      "serialized_name": "AlbumArt",
+                      "members": {
+                        "merge_policy": {
+                          "type": "string",
+                          "serialized_name": "MergePolicy"
+                        },
+                        "artwork": {
+                          "type": "list",
+                          "serialized_name": "Artwork",
+                          "members": {
+                            "type": "structure",
+                            "members": {
+                              "input_key": {
+                                "type": "string",
+                                "serialized_name": "InputKey"
+                              },
+                              "max_width": {
+                                "type": "string",
+                                "serialized_name": "MaxWidth"
+                              },
+                              "max_height": {
+                                "type": "string",
+                                "serialized_name": "MaxHeight"
+                              },
+                              "sizing_policy": {
+                                "type": "string",
+                                "serialized_name": "SizingPolicy"
+                              },
+                              "padding_policy": {
+                                "type": "string",
+                                "serialized_name": "PaddingPolicy"
+                              },
+                              "album_art_format": {
+                                "type": "string",
+                                "serialized_name": "AlbumArtFormat"
+                              }
+                            }
                           }
                         }
                       }
