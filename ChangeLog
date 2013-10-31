@@ -1,4 +1,31 @@
+2013-10-30 Alex Wood <awood45@gmail.com>
+
+  * doc-src/ElastiCache/V20130615.yml,
+  lib/aws/api_config/ElastiCache-2013-06-15.yml: Amazon ElastiCache Updates
+
+  Update ElastiCache docs to latest version, adds an optional parameter and
+  makes
+  some required parameters optional.
+
+  * lib/aws/ec2/volume_collection.rb: Update volume_collection.rb
+
+  VolumeCollection#each docs says that the method yields on the Instance. It
+  actually yields on the Volume. Update docs to reflect clode
+2013-10-28 Alex Wood <awood45@gmail.com>
+
+  * doc-src/EMR/V20090331.yml, lib/aws/api_config/EMR-2009-03-31.yml: API
+  Updates for Amazon Elastic MapReduce
+
+2013-10-26 Michael H. Oshita <ijinpublic+github@gmail.com>
+
+  * lib/aws/core/credential_providers.rb: fixed typo
+
+  cashed -> cached
 2013-10-24 Alex Wood <awood45@gmail.com>
+
+  * README.md: Add all supported CloudFront API versions to README
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.23.0
 
   * features/direct_connect/step_definitions/client.rb: Update AWS
   DirectConnect Integration Test
