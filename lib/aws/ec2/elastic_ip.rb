@@ -133,9 +133,10 @@ module AWS
 
         client_opts = {}
 
-        [:instance,:network_interface].each do |opt|
+        [:instance,:network_interface,:private_ip_address].each do |opt|
           if value = options[opt]
-            client_opts[:"#{opt}_id"] = value.is_a?(Resource) ? value.id : value
+            	key = ( opt.to_s=='instance' || opt.to_s=='network_interface' ? opt.to_s+"_id" : opt.to_s ) 
+		client_opts[:"#{key}"] = value.is_a?(Resource) ? value.id : value
           end
         end
 
