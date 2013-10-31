@@ -50,6 +50,19 @@ module Aws
           expect(cfg.credentials.session_token).to eq('token2')
         end
 
+        it 'hydrates credentials object from 3 options' do
+          options = {}
+          options[:access_key_id] = 'akid'
+          options[:secret_access_key] = 'secret'
+          options[:session_token] = 'session'
+          plugin.add_options(config)
+          cfg = config.build!(options)
+          expect(cfg.credentials.set?).to be(true)
+          expect(cfg.credentials.access_key_id).to eq('akid')
+          expect(cfg.credentials.secret_access_key).to eq('secret')
+          expect(cfg.credentials.session_token).to eq('session')
+        end
+
         it 'raises an error if you construct a client without credentials' do
           client_class = Seahorse::Client.define
           client_class.add_plugin(Credentials)
