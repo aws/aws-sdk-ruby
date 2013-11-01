@@ -73,7 +73,7 @@ module AWS
          part = resp.parts.first and
          part.part_number == part_number and
          part.send(name)) or
-          raise "part 3 of upload abc123 does not exist"
+          raise "part #{part_number} of upload #{upload.object.key} does not exist"
       end
 
     end
