@@ -31,6 +31,8 @@ module Seahorse
         # @return [void]
         def transmit(config, request, response)
           pool_for(config).session_for(request.endpoint) do |http|
+
+            http.read_timeout = config.http_read_timeout
             http.request(net_http_request(request)) do |resp|
 
               # extract HTTP status code and headers

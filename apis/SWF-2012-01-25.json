@@ -28,7 +28,8 @@
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
     "Aws::Plugins::JsonRpcHeaders",
-    "Aws::Plugins::SignatureV4"
+    "Aws::Plugins::SignatureV4",
+    "Aws::Plugins::SWFReadTimeouts"
   ],
   "operations": {
     "count_closed_workflow_executions": {

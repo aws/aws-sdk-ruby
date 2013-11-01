@@ -37,6 +37,7 @@ module Aws
       autoload :Route53, 'aws/api/service_translators/route53'
       autoload :S3, 'aws/api/service_translators/s3'
       autoload :SQS, 'aws/api/service_translators/sqs'
+      autoload :SWF, 'aws/api/service_translators/swf'
     end
 
   end
@@ -70,6 +71,7 @@ module Aws
     autoload :SignatureV3, 'aws/plugins/signature_v3'
     autoload :SignatureV4, 'aws/plugins/signature_v4'
     autoload :SQSQueueUrls, 'aws/plugins/sqs_queue_urls'
+    autoload :SWFReadTimeouts, 'aws/plugins/swf_read_timeouts'
     autoload :XmlProtocol, 'aws/plugins/xml_protocol'
   end
 
