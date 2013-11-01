@@ -72,6 +72,7 @@ module Aws
     autoload :SignatureV4, 'aws/plugins/signature_v4'
     autoload :SQSQueueUrls, 'aws/plugins/sqs_queue_urls'
     autoload :SWFReadTimeouts, 'aws/plugins/swf_read_timeouts'
+    autoload :UserAgent, 'aws/plugins/user_agent'
     autoload :XmlProtocol, 'aws/plugins/xml_protocol'
   end
 

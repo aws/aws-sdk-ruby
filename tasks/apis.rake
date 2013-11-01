@@ -38,15 +38,14 @@ end
 def translate_api(path)
   require 'aws-sdk-core'
   api = Aws::Api::Translator.translate(
-    MultiJson.load(File.read(path), max_nesting: nil),
-    documentation: false,
+    JSON.parse(File.read(path), max_nesting: false), documentation: false,
     errors: false)
 
   class_name = api.metadata['service_class_name']
 
   target = "apis/#{class_name}-#{api.version}.json"
   File.open(target, 'w') do |file|
-    file.write(MultiJson.dump(api.to_hash, pretty: true))
+    file.write(JSON.pretty_generate(api.to_hash, indent: '  ', max_nesting: false))
     file.write("\n")
   end
 end

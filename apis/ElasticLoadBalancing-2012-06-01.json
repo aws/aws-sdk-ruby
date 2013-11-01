@@ -20,6 +20,7 @@
     "Seahorse::Client::Plugins::Logging",
     "Seahorse::Client::Plugins::RestfulBindings",
     "Seahorse::Client::Plugins::ContentLength",
+    "Aws::Plugins::UserAgent",
     "Aws::Plugins::RetryErrors",
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
