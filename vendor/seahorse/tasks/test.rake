@@ -8,13 +8,15 @@ def execute_cmd cmd
 end
 
 desc "Runs unit tests"
-task :test do
+task 'test:unit' do
   root = File.dirname(File.dirname(__FILE__))
   spec_files = File.join(root, 'spec', '**', '*_spec.rb')
   opts = ['bundle exec rspec']
   opts += FileList[spec_files].sort
   execute_cmd(opts.join(' '))
 end
+
+task :test => 'test:unit'
 
 desc 'Generates a coverage report'
 task :coverage do
