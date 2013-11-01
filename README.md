@@ -150,7 +150,7 @@ version.
 ## License
 
 This library is distributed under the
-[apache license, version 2.0](http://www.apache.org/licenses/license-2.0).
+[apache license, version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 ```no-highlight
 copyright 2013. amazon web services, inc. all rights reserved.
