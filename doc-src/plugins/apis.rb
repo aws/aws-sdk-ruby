@@ -172,7 +172,7 @@ def document_svc_api_operation(svc_name, client, method_name, operation)
       documentor.output
     end
     t.tab(method_name, 'API Model') do
-      "<div class=\"api-src\"><pre><code class=\"json\">#{MultiJson.dump(without_docs(operation.to_hash), pretty: true)}</pre></code></div>"
+      "<div class=\"api-src\"><pre><code class=\"json\">#{MultiJson.dump(without_docs(operation.to_hash), pretty: true, max_nesting: false)}</pre></code></div>"
     end
   end
 
