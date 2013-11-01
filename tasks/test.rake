@@ -13,7 +13,6 @@ namespace :test do
   task :unit do
     opts = ['bundle exec rspec']
     opts += FileList[ENV['FILES'] || 'spec/**/*_spec.rb'].sort
-    opts += FileList[ENV['FILES'] || 'vendor/seahorse/spec/**/*_spec.rb'].sort
     execute_cmd(opts.join(' '))
   end
 

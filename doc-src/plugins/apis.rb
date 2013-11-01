@@ -1,4 +1,6 @@
-$LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
+root = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
+$:.unshift(File.join(root, 'vendor', 'seahorse', 'lib'))
+$:.unshift(File.join(root, 'lib'))
 
 require 'aws-sdk-core'
 

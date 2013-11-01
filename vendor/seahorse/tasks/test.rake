@@ -9,8 +9,10 @@ end
 
 desc "Runs unit tests"
 task :test do
+  root = File.dirname(File.dirname(__FILE__))
+  spec_files = File.join(root, 'spec', '**', '*_spec.rb')
   opts = ['bundle exec rspec']
-  opts += FileList[ENV['FILES'] || 'spec/**/*_spec.rb'].sort
+  opts += FileList[spec_files].sort
   execute_cmd(opts.join(' '))
 end
 
