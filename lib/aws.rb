@@ -1,5 +1,8 @@
 module Aws
 
+  # @api private
+  GEM_ROOT = File.dirname(File.dirname(__FILE__))
+
   @config = {}
 
   autoload :Credentials, 'aws/credentials'
@@ -153,9 +156,11 @@ module Aws
 
     private
 
+    # @return Returns a hash of API paths grouped by their service class names.
     def bundled_apis
-      apis = File.join(File.dirname(File.dirname(__FILE__)), 'apis', '*.json')
-      Dir.glob(apis).group_by { |path| File.basename(path).split('-').first }
+      Dir.glob(File.join(GEM_ROOT, 'apis', '*.json')).group_by do |path|
+        File.basename(path).split('-').first
+      end
     end
 
   end
