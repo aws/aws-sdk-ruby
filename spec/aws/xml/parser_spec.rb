@@ -623,6 +623,32 @@ module Aws
           expect(parse(xml)[:data]).to be(nil)
         end
 
+        it 'base64 decodes strings when encoding attribute is present' do
+          rules['members'] = {
+            'encoded' => { 'type' => 'string' },
+            'not_encoded' => { 'type' => 'string' },
+            'nested' => {
+              'type' => 'structure',
+              'members' => {
+                'encoded' => { 'type' => 'string' }
+              }
+            }
+          }
+          xml = <<-XML.strip
+          <xml>
+            <encoded encoding="base64">#{Base64.encode64('a')}</encoded>
+            <not_encoded abc="yxz">mno</not_encoded>
+            <nested>
+              <encoded encoding="base64">#{Base64.encode64('b')}</encoded>
+            </nested>
+          </xml>
+          XML
+          parsed = parse(xml)
+          expect(parsed[:encoded]).to eq('a')
+          expect(parsed[:nested][:encoded]).to eq('b')
+          expect(parsed[:not_encoded]).to eq('mno')
+        end
+
       end
 
       describe 'blobs' do

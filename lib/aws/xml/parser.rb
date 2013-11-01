@@ -96,6 +96,7 @@ module Aws
           end
         else
           case shape
+          when StringShape then string(shape, raw)
           when StructureShape then structure(shape, raw)
           when ListShape then list(shape, raw)
           when MapShape then map(shape, raw)
@@ -106,6 +107,21 @@ module Aws
           when BlobShape then Base64.decode64(raw)
           else raw
           end
+        end
+      end
+
+      def string(shape, raw)
+        if raw.is_a?(Hash)
+          decode_string(raw)
+        else
+          raw
+        end
+      end
+
+      def decode_string(raw)
+        case raw['encoding']
+        when 'base64' then Base64.decode64(raw['__content__'])
+        else raw['__content__']
         end
       end
 
