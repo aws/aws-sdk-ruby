@@ -109,6 +109,11 @@ def document_svc_api(svc_name, api)
   api.operations.each do |method_name, operation|
     document_svc_api_operation(svc_name, klass, method_name, operation)
   end
+
+  constructor = YARD::CodeObjects::MethodObject.new(klass, :initialize)
+  constructor.scope = :instance
+  constructor.parameters << ['options', '{}']
+  constructor.docstring = "@option (see #{svc_name}.new)"
 end
 
 class Tabulator
