@@ -2,7 +2,7 @@ module Seahorse
   module Client
     module Plugins
 
-      # @seahorse_client_option [Boolean] :validate_params (true)
+      # @seahorse.client.option [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
       class ParamValidation < Plugin

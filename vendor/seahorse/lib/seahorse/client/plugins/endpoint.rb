@@ -2,7 +2,7 @@ module Seahorse
   module Client
     module Plugins
 
-      # @seahorse_client_option [String] :endpoint
+      # @seahorse.client.option [String] :endpoint
       #    The HTTP or HTTPS endpoint to send requests to.
       #    For example:
       #
@@ -15,7 +15,7 @@ module Seahorse
       #    port.  When the scheme is not set it defaults to `https`
       #    or `http` based on the `:ssl_default` option.
       #
-      # @seahorse_client_option [Boolean] :ssl_default (true)
+      # @seahorse.client.option [Boolean] :ssl_default (true)
       #    When `true`, endpoints without a scheme are prefixed by `http://`.
       #    When `false`, endpoints without a scheme are prefixed by `http://`.
       #

@@ -7,14 +7,14 @@ module Seahorse
       #
       # @see Logging::Formatter
       #
-      # @seahorse_client_option [Logger] :logger (nil) The Logger instance
+      # @seahorse.client.option [Logger] :logger (nil) The Logger instance
       #   to send log messages to.  If this option is not set, logging
       #   will be disabled.
       #
-      # @seahorse_client_option [Symbol] :log_level (:info) The log level
+      # @seahorse.client.option [Symbol] :log_level (:info) The log level
       #   to send messages to the logger at.
       #
-      # @seahorse_client_option [Logging::LogFormatter] :log_formatter The log
+      # @seahorse.client.option [Logging::LogFormatter] :log_formatter The log
       #   formatter.  Defaults to {Seahorse::Client::Logging::Formatter.default}.
       #
       class Logging < Plugin

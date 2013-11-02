@@ -1,7 +1,7 @@
 module Aws
   module Plugins
 
-    # @seahorse_client_option [Boolean] :raw_json (false)
+    # @seahorse.client.option [Boolean] :raw_json (false)
     #   When `true`, request parameters are not validated or translated.
     #   Request parameter keys and values are expected to be formated as
     #   they are expected by the service.  Similarly, when `:raw_json`

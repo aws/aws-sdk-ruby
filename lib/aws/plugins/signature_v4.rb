@@ -1,9 +1,9 @@
 module Aws
   module Plugins
 
-    # @seahorse_client_option [String] :sigv4_name
+    # @seahorse.client.option [String] :sigv4_name
     #   Override the default service name used for signing sigv4 requests.
-    # @seahorse_client_option [String] :sigv4_region
+    # @seahorse.client.option [String] :sigv4_region
     #   Override the default region name used for signing sigv4 requests.
     class SignatureV4 < Seahorse::Client::Plugin
 

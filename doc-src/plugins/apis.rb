@@ -10,6 +10,7 @@ YARD::Templates::Engine.register_template_path(File.join(File.dirname(__FILE__),
 
 YARD::Parser::SourceParser.after_parse_list do
   svc_apis.each do |svc_name, apis|
+    next unless svc_name == 'DynamoDB'
     document_svc(svc_name, apis)
   end
 end

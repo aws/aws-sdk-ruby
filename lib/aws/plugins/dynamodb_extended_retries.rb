@@ -1,7 +1,7 @@
 module Aws
   module Plugins
 
-    # @seahorse_client_option [Integer] :retry_limit (10)
+    # @seahorse.client.option [Integer] :retry_limit (10)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
