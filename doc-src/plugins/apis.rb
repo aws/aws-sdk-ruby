@@ -56,6 +56,7 @@ end
 def document_svc_class(svc_name, apis)
   namespace = YARD::Registry['Aws']
   klass = YARD::CodeObjects::ClassObject.new(namespace, svc_name)
+  klass.superclass = YARD::Registry['Aws::Service']
   klass.docstring = "A service constructor."
 
   svc = Aws.const_get(svc_name)
