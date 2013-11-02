@@ -172,10 +172,10 @@ def document_svc_api_operation(svc_name, client, method_name, operation)
     t.tab(method_name, 'Formatting Example') do
       "<pre><code>#{documentor.example}</code></pre>"
     end
-    t.tab(method_name, 'Parameters Reference') do
+    t.tab(method_name, 'Request Parameters') do
       documentor.input
     end
-    t.tab(method_name, 'Response  Reference') do
+    t.tab(method_name, 'Response Structure') do
       documentor.output
     end
     t.tab(method_name, 'API Model') do
