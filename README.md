@@ -21,7 +21,7 @@ For version 1.0 of the Ruby SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aw
 
 You can install the AWS SDK Core from rubygems:
 
-    gem install aws-sdk-core
+    gem install aws-sdk-core --pre
 
 If you are using Bundler, we recommend that you express a major version
 dependency (this library uses [semantic versioning](http://semver.org/)):
