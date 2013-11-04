@@ -5,12 +5,13 @@ $:.unshift(File.join(root, 'lib'))
 require 'aws-sdk-core'
 
 YARD::Tags::Library.define_tag('CONFIGURATION_OPTIONS', :seahorse_client_option)
+YARD::Tags::Library.define_tag('SERVICE', :service)
+YARD::Tags::Library.define_tag('API_VERSION', :api_version)
 
 YARD::Templates::Engine.register_template_path(File.join(File.dirname(__FILE__), '..', 'templates'))
 
 YARD::Parser::SourceParser.after_parse_list do
   svc_apis.each do |svc_name, apis|
-    next unless svc_name == 'DynamoDB'
     document_svc(svc_name, apis)
   end
 end
@@ -58,7 +59,8 @@ def document_svc_class(svc_name, apis)
   namespace = YARD::Registry['Aws']
   klass = YARD::CodeObjects::ClassObject.new(namespace, svc_name)
   klass.superclass = YARD::Registry['Aws::Service']
-  klass.docstring = "A service constructor."
+  klass.docstring = 'A service constructor.'
+  klass.docstring.add_tag(YARD::Tags::Tag.new(:service, svc_name))
 
   svc = Aws.const_get(svc_name)
 
@@ -106,7 +108,9 @@ def document_svc_api(svc_name, api)
   name = "V#{api.version.gsub(/-/, '')}"
   full_name = api.metadata['service_full_name']
   klass = YARD::CodeObjects::ClassObject.new(namespace, name)
+  klass.superclass = YARD::Registry['Seahorse::Client::Base']
   klass.docstring = "A client for the #{full_name} #{api.version} API."
+  klass.docstring.add_tag(YARD::Tags::Tag.new(:api_version, api.version))
   api.operations.each do |method_name, operation|
     document_svc_api_operation(svc_name, klass, method_name, operation)
   end
@@ -188,8 +192,8 @@ def document_svc_api_operation(svc_name, client, method_name, operation)
 
   m = YARD::CodeObjects::MethodObject.new(client, method_name)
   m.scope = :instance
+  m.parameters << ['params', '{}']
   m.docstring = <<-DOCSTRING.strip
-@overload #{method_name}(params = {})"
 <p>Calls the #{operation.name} operation.<p>
 #{documentor.api_ref(operation)}
 #{tabs}
