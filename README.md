@@ -59,7 +59,7 @@ s3 = Aws.s3 # helper method returns a new client
 ```
 
 Each client provides one operation per API operation. Refer to the
-[API documentation](http://docs.aws.amazon.com/AWSRubySDKCore/latest/frames.html)
+[API documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
 for a complete list of available methods.
 
 ```ruby
