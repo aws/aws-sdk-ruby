@@ -1634,6 +1634,47 @@ module AWS
 
       end
 
+      context '#get_object_torrent' do
+
+        let(:method) { :get_object_torrent }
+
+        let(:opts) { { :bucket_name => 'foo', :key => 'some/key' } }
+
+        it_should_behave_like "requires bucket_name"
+
+        it_should_behave_like "an s3 http request", 'GET'
+
+        it_should_behave_like "returns server_side_encryption"
+
+        context 'response' do
+
+          let(:body) { "FOO DATA" }
+
+          it 'should return the bencoded response body from the data method' do
+            http_handler.stub(:handle) do |req, resp|
+              resp.body = body
+            end
+            client.get_object(opts).data[:data].should == "FOO DATA"
+          end
+
+          it 'should read the bencoded response body on success' do
+            got_handle = nil
+            got_resp = nil
+            http_handler.stub(:handle_async) do |req, resp, handle|
+              got_resp = resp
+              got_handle = handle
+            end
+            r = client.get_object(opts.merge(:async => true))
+            got_resp.body = body
+            got_resp.status = 200
+            got_handle.signal_success
+            r.data[:data].should == "FOO DATA"
+          end
+
+        end
+
+      end
+
       context '#head_object' do
 
         let(:method) { :head_object }
