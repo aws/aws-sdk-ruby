@@ -4,6 +4,17 @@ module Aws
   module Api
     class Translator < BaseTranslator
 
+      DEFAULT_PLUGINS = %w(
+        Seahorse::Client::Plugins::Logging
+        Seahorse::Client::Plugins::RestfulBindings
+        Seahorse::Client::Plugins::ContentLength
+        Aws::Plugins::UserAgent
+        Aws::Plugins::RetryErrors
+        Aws::Plugins::GlobalConfiguration
+        Aws::Plugins::RegionalEndpoint
+        Aws::Plugins::Credentials
+      )
+
       def self.translate(src, options = {})
         super(src, options)
       end
@@ -91,14 +102,7 @@ module Aws
 
       def set_type(type)
         plugins = @properties['plugins'] ||= []
-        plugins << 'Seahorse::Client::Plugins::Logging'
-        plugins << 'Seahorse::Client::Plugins::RestfulBindings'
-        plugins << 'Seahorse::Client::Plugins::ContentLength'
-        plugins << 'Aws::Plugins::UserAgent'
-        plugins << 'Aws::Plugins::RetryErrors'
-        plugins << 'Aws::Plugins::GlobalConfiguration'
-        plugins << 'Aws::Plugins::RegionalEndpoint'
-        plugins << 'Aws::Plugins::Credentials'
+        plugins.concat(DEFAULT_PLUGINS)
         plugins.push(*case type
           when 'query' then ['Aws::Plugins::QueryProtocol']
           when 'json' then [
