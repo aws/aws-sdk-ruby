@@ -7,5 +7,6 @@
 --plugin sitemap
 --asset doc-src/images:images
 -e doc-src/plugins/apis.rb
+-e doc-src/plugins/stability.rb
 lib/**/*.rb
 vendor/seahorse/lib/**/*.rb

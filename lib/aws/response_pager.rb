@@ -73,6 +73,13 @@ module Aws
   # When `truncated_if` is configured, the tokens will not be checked,
   # unless the configured member is `true`.
   #
+  # @stability Unstable
+  #   ResponsePager public methods should be considered stable.
+  #   The structure of `:paging_rules` should be considered unstable
+  #   and subject to change.  If you are not providing custom
+  #   paging rules, then you should not worry about backwards
+  #   incompatible changes.
+  #
   class ResponsePager < Delegator
 
     # Raised when calling {ResponsePager#next_page} on a pager that
@@ -101,6 +108,11 @@ module Aws
     #
     #   See class level documentation above for more information about the
     #   structure of `:paging_rules`.
+    #
+    # @stability Experimental
+    #   The structure of the `:paging_rules` option is subject to change.
+    #   Using this class without a custom set of paging rules should
+    #   be considered stable.
     #
     def initialize(response, options = {})
       @response = response
