@@ -9,7 +9,7 @@ module Aws
     attr_accessor :handler
 
     def call(context)
-      @handler.call(context).on_status(300..599) do |response|
+      @handler.call(context).on(300..599) do |response|
         if empty_body?(response)
           error_code = error_code_for_empty_response(response)
           error_message = ''

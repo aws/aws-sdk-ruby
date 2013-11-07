@@ -155,6 +155,12 @@ module Aws
       @response = response
     end
 
+    # @api private
+    def on(status_code, &block)
+      @response.on(status_code) { |_| yield(self) }
+      self
+    end
+
     private
 
     # @return [Boolean] Returns `true` if the API operation is pageable.

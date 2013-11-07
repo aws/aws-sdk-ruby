@@ -15,9 +15,9 @@ module Seahorse
 
       def handle_response(*args, &block)
         handler(*args) do |context|
-          @handler.call(context).on_complete do |response|
-            block.call(response)
-          end
+          resp = @handler.call(context)
+          block.call(resp) if resp.http_response.status_code > 0
+          resp
         end
       end
 
