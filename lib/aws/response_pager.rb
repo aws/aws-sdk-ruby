@@ -1,6 +1,78 @@
 require 'delegate'
 
 module Aws
+
+  # A simple response pager.
+  #
+  # ## Basic Usage
+  #
+  # A pager is constructed with a response and a paging configuration.
+  # Typically, the paging configuration will already be present in
+  # the response context.
+  #
+  # The pager becomes a delegate to the response that allows you to
+  # discover if there are additional response pages to be requested.
+  #
+  #     page = ResponsePager.new(response)
+  #     page.last_page?(false)
+  #
+  #     # sends a request to receive the next response page
+  #     page = page.next_page
+  #     page.last_page?(true)
+  #
+  #     page.next_page
+  #     #=> raises ResponsePager::LastPageError
+  #
+  # You can still access all of the attributes and methods of the
+  # wrapped response.
+  #
+  #     # same
+  #     response.data
+  #     ResponsePager.new(response).data
+  #
+  # ## Paging Rules
+  #
+  # You can configure paging behavior by passing a `:paging_rules`
+  # hash to the constructor. If the hash is empty, then paging
+  # will be disabled.
+  #
+  #    # disables pagigng
+  #    page = ResponsePager.new(response, paging_rules: {})
+  #    page.last_page?
+  #    #=> true
+  #
+  # ### Tokens
+  #
+  # If you want to configure paging you must specify at least
+  # the `tokens` entry:
+  #
+  #    paging_rules = {
+  #      'tokens' => {
+  #        'input_param' => 'response_key',
+  #      }
+  #    }
+  #
+  # Tokens should be a hash of request parameter names as keys, and
+  # response data member names as values.  The `response.data` is
+  # inspected for a `response_key` member.  If it is present,
+  # it will be sent to the next page request as `:input_param`.
+  #
+  # If all of the configured tokens return `nil` values, the response
+  # is assumed to be the last page of results.
+  #
+  # ### Truncation Indicator
+  #
+  # Some services do not specify a token, but rather expect you to
+  # extract the final value from some list to request the next page.
+  # When this is the case, they will typically provide some boolean
+  # response data value that indicates if the response is truncated.
+  # You can configure this via `truncated_if`:
+  #
+  #     paging_rules['truncated_if'] = 'is_truncated'
+  #
+  # When `truncated_if` is configured, the tokens will not be checked,
+  # unless the configured member is `true`.
+  #
   class ResponsePager < Delegator
 
     # Raised when calling {ResponsePager#next_page} on a pager that
@@ -20,13 +92,22 @@ module Aws
     end
 
     # @param [Seahorse::Client::Response] response
-    # @option options [Hash] :paging_rules (nil)
+    #
+    # @option options [Hash] :paging_rules Defaults to the `paging`
+    #   configuration in the response context.  If one is not configured
+    #   or you wish to override this paging configuration, you can
+    #   pass the `:paging_rules` option.  Passing an empty hash
+    #   disable paging for this operation.
+    #
+    #   See class level documentation above for more information about the
+    #   structure of `:paging_rules`.
+    #
     def initialize(response, options = {})
       @response = response
       @paging_rules = options[:paging_rules]
     end
 
-    # Returns `true` if there are no more results.  Calling {#next_page} 
+    # Returns `true` if there are no more results.  Calling {#next_page}
     # when this method returns `false` will raise an error.
     # @return [Boolean]
     def last_page?
