@@ -14,6 +14,7 @@ module Aws
   autoload :InstanceProfileCredentials, "#{SRC}/instance_profile_credentials"
   autoload :RequestHandler, "#{SRC}/request_handler"
   autoload :ResponseHandler, "#{SRC}/response_handler"
+  autoload :ResponsePager, "#{SRC}/response_pager"
   autoload :Service, "#{SRC}/service"
   autoload :Structure, "#{SRC}/structure"
   autoload :TimestampFormatter, "#{SRC}/timestamp_formatter"
