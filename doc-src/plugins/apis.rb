@@ -67,24 +67,29 @@ def document_svc_class(svc_name, apis)
   klass.docstring = <<-DOCSTRING
 A service client builder for #{full_name}.
 
-# Regions & Endpoints
+## Configuration
+
+You can specify global default configuration options via `Aws.config`.  Values
+in `Aws.config` are used as default options for all services.
+
+    Aws.config[:region] = 'us-west-2'
+
+You can specify service specific defaults as well:
+
+    Aws.config[:#{svc_name.downcase}] = { region: 'us-west-1' }
+
+This has a higher precendence that values at the root of `Aws.config` and will
+only applied to objects constructed by {new}.
+
+## Regions & Endpoints
 
 You must configure a default region with `Aws.config` or provide a `:region`
-when creating a service client.
-
-    # configure a default region
-    Aws.config[:region] = 'us-east-1'
-    Aws::#{svc_name}.new
-
-    # or provide a :region option
-    Aws::#{svc_name}.new(region: 'us-west-2')
-
-The {new} method accpets the following regions uses them to connect to
-the following endpoints.
+when creating a service client.  The regions listed below will connect
+to the following endpoints:
 
 #{default_api.metadata['regional_endpoints'].map { |r,e| "* `#{r}` - #{e}"}.join("\n")}
 
-# API Versions
+## API Versions
 
 Calling {new} will construct and return a versioned service client. The client
 will default to the most recent API version. You can also specify an API version:
