@@ -148,7 +148,7 @@ module Aws
     # @return [Boolean] Returns `true` if the API operation is pageable.
     #   Returns `false` if the API operation always returns ALL results.
     def pageable?
-      !paging_rules.nil?
+      paging_rules.key?('tokens')
     end
 
     # @return [Boolean] Returns `true` if the response is truncated and
@@ -177,7 +177,7 @@ module Aws
     # @return [Hash, nil] Returns the rules for paging this response.
     #   Returns `nil` when the response is not pageable.
     def paging_rules
-      @paging_rules ||= @response.context.operation.metadata['paging']
+      @paging_rules ||= @response.context.operation.metadata['paging'] || {}
     end
 
     # @param [Hash] params A hash of additional request params to

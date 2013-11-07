@@ -9,6 +9,8 @@ module Aws
 
     let(:pager) { ResponsePager.new(resp) }
 
+    let(:paging) { nil }
+
     before(:each) do
       resp.context.operation = operation
     end
@@ -16,8 +18,6 @@ module Aws
     # If an operation has no paging metadata, then it is considered
     # un-pageable and will always treat a response as the last page.
     describe 'unpageable-operation' do
-
-      let(:paging) { nil }
 
       it 'returns true from #last_page?' do
         expect(pager.last_page?).to be(true)
@@ -139,6 +139,18 @@ module Aws
 
       it 'returns true from last page if the truncation marker is false' do
         resp.data = { 'is_truncated' => false }
+        expect(pager.last_page?).to be(true)
+        expect(pager.next_page?).to be(false)
+      end
+
+    end
+
+    describe 'custom paging rules' do
+
+      let(:paging) {{ 'tokens' => { 'offset' => 'next_token' } }}
+
+      it 'can be constructed with an empty set of rules to disable paging' do
+        pager = ResponsePager.new(resp, paging_rules: {})
         expect(pager.last_page?).to be(true)
         expect(pager.next_page?).to be(false)
       end
