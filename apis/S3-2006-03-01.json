@@ -1964,6 +1964,14 @@
       "name": "ListMultipartUploads",
       "http_method": "GET",
       "http_path": "/{bucket}?uploads&prefix={prefix}&delimiter={delimiter}&max-uploads={max_uploads}&key-marker={key_marker}&upload-id-marker={upload_id_marker}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "key_marker": "next_key_marker",
+            "upload_id_marker": "next_upload_id_marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2107,6 +2115,14 @@
       "name": "ListObjectVersions",
       "http_method": "GET",
       "http_path": "/{bucket}?versions&delimiter={delimiter}&key-marker={key_marker}&max-keys={max_keys}&prefix={prefix}&version-id-marker={version_id_marker}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "key_marker": "next_key_marker",
+            "version_id_marker": "next_version_id_marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2287,6 +2303,13 @@
       "name": "ListObjects",
       "http_method": "GET",
       "http_path": "/{bucket}?delimiter={delimiter}&marker={marker}&max-keys={max_keys}&prefix={prefix}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "next_marker || contents[-1].key"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2408,6 +2431,13 @@
       "name": "ListParts",
       "http_method": "GET",
       "http_path": "/{bucket}/{key}?uploadId={upload_id}&max-parts={max_parts}&part-number-marker={part_number_marker}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "part_number_marker": "next_part_number_marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

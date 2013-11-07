@@ -41,7 +41,7 @@ module Aws
 
       def extract_tokens(config)
         input = Array(config['input_token'])
-        output = Array(config['output_token'] || config['output_tokens'])
+        output = Array(config['output_token'])
         (0..(input.size-1)).inject({}) do |tokens, n|
           tokens[underscore(input[n])] = underscore_jamespath(output[n])
           tokens

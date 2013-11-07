@@ -888,6 +888,13 @@
       "name": "GetGroup",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1385,6 +1392,13 @@
       "name": "ListAccessKeys",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1452,6 +1466,13 @@
       "name": "ListAccountAliases",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1493,6 +1514,13 @@
       "name": "ListGroupPolicies",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1539,6 +1567,13 @@
       "name": "ListGroups",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1606,6 +1641,13 @@
       "name": "ListGroupsForUser",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1674,6 +1716,13 @@
       "name": "ListInstanceProfiles",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1774,6 +1823,13 @@
       "name": "ListInstanceProfilesForRole",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1875,6 +1931,13 @@
       "name": "ListMFADevices",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1934,6 +1997,13 @@
       "name": "ListRolePolicies",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1980,6 +2050,13 @@
       "name": "ListRoles",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2051,6 +2128,13 @@
       "name": "ListServerCertificates",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2118,6 +2202,13 @@
       "name": "ListSigningCertificates",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2189,6 +2280,13 @@
       "name": "ListUserPolicies",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2235,6 +2333,13 @@
       "name": "ListUsers",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2302,6 +2407,13 @@
       "name": "ListVirtualMFADevices",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

@@ -677,6 +677,13 @@
       "name": "ListHealthChecks",
       "http_method": "GET",
       "http_path": "/2012-12-12/healthcheck?marker={marker}&maxitems={max_items}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -764,6 +771,13 @@
       "name": "ListHostedZones",
       "http_method": "GET",
       "http_path": "/2012-12-12/hostedzone?marker={marker}&maxitems={max_items}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -839,6 +853,15 @@
       "name": "ListResourceRecordSets",
       "http_method": "GET",
       "http_path": "/2012-12-12/hostedzone/{hosted_zone_id}/rrset?type={start_record_type}&name={start_record_name}&identifier={start_record_identifier}&maxitems={max_items}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "start_record_name": "next_rec||d_name",
+            "start_record_type": "next_rec||d_type",
+            "start_record_identifier": "next_rec||d_identifier"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

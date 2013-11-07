@@ -5226,6 +5226,13 @@
       "name": "DescribeInstanceStatus",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -7257,6 +7264,13 @@
       "name": "DescribeReservedInstancesOfferings",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -8515,6 +8529,13 @@
       "name": "DescribeSpotPriceHistory",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -8919,6 +8940,13 @@
       "name": "DescribeVolumeStatus",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

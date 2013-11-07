@@ -2695,6 +2695,13 @@
       "name": "ListCloudFrontOriginAccessIdentities",
       "http_method": "GET",
       "http_path": "/2013-05-12/origin-access-identity/cloudfront?Marker={marker}&MaxItems={max_items}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "next_marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2767,6 +2774,13 @@
       "name": "ListDistributions",
       "http_method": "GET",
       "http_path": "/2013-05-12/distribution?Marker={marker}&MaxItems={max_items}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "next_marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -3144,6 +3158,13 @@
       "name": "ListInvalidations",
       "http_method": "GET",
       "http_path": "/2013-05-12/distribution/{distribution_id}/invalidation?Marker={marker}&MaxItems={max_items}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "next_marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -3221,6 +3242,13 @@
       "name": "ListStreamingDistributions",
       "http_method": "GET",
       "http_path": "/2013-05-12/streaming-distribution?Marker={marker}&MaxItems={max_items}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "next_marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

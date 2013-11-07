@@ -503,6 +503,13 @@
       "name": "ListSubscriptions",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -558,6 +565,13 @@
       "name": "ListSubscriptionsByTopic",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -618,6 +632,13 @@
       "name": "ListTopics",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

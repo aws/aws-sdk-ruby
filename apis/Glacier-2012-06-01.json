@@ -580,6 +580,13 @@
       "name": "ListJobs",
       "http_method": "GET",
       "http_path": "/{account_id}/vaults/{vault_name}/jobs?marker={marker}&limit={limit}&completed={completed}&statuscode={statuscode}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -707,6 +714,13 @@
       "name": "ListMultipartUploads",
       "http_method": "GET",
       "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads?marker={marker}&limit={limit}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -773,6 +787,13 @@
       "name": "ListParts",
       "http_method": "GET",
       "http_path": "/{account_id}/vaults/{vault_name}/multipart-uploads/{upload_id}?marker={marker}&limit={limit}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -852,6 +873,13 @@
       "name": "ListVaults",
       "http_method": "GET",
       "http_path": "/{account_id}/vaults?marker={marker}&limit={limit}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

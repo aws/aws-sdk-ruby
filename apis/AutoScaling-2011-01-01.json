@@ -445,6 +445,13 @@
       "name": "DescribeAutoScalingGroups",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -663,6 +670,13 @@
       "name": "DescribeAutoScalingInstances",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -753,6 +767,13 @@
       "name": "DescribeLaunchConfigurations",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -938,6 +959,13 @@
       "name": "DescribeNotificationConfigurations",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -996,6 +1024,13 @@
       "name": "DescribePolicies",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1091,6 +1126,13 @@
       "name": "DescribeScalingActivities",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1217,6 +1259,13 @@
       "name": "DescribeScheduledActions",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1315,6 +1364,13 @@
       "name": "DescribeTags",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

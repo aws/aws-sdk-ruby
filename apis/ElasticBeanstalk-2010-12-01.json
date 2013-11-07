@@ -1258,6 +1258,13 @@
       "name": "DescribeEvents",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

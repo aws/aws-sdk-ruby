@@ -757,6 +757,13 @@
       "name": "DescribeLoadBalancers",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "next_marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
