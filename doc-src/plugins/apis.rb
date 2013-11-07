@@ -56,10 +56,48 @@ Returns a new instance of {#{svc_name}}.
 end
 
 def document_svc_class(svc_name, apis)
+
+  oldest_api = apis.sort_by(&:version).first
+  default_api = apis.sort_by(&:version).last
+  full_name = default_api.metadata['service_full_name']
+
   namespace = YARD::Registry['Aws']
   klass = YARD::CodeObjects::ClassObject.new(namespace, svc_name)
   klass.superclass = YARD::Registry['Aws::Service']
-  klass.docstring = 'A service constructor.'
+  klass.docstring = <<-DOCSTRING
+A service client builder for #{full_name}.
+
+# Regions & Endpoints
+
+You must configure a default region with `Aws.config` or provide a `:region`
+when creating a service client.
+
+    # configure a default region
+    Aws.config[:region] = 'us-east-1'
+    Aws::#{svc_name}.new
+
+    # or provide a :region option
+    Aws::#{svc_name}.new(region: 'us-west-2')
+
+The {new} method accpets the following regions uses them to connect to
+the following endpoints.
+
+#{default_api.metadata['regional_endpoints'].map { |r,e| "* `#{r}` - #{e}"}.join("\n")}
+
+# API Versions
+
+Calling {new} will construct and return a versioned service client. The client
+will default to the most recent API version. You can also specify an API version:
+
+    #{svc_name.downcase} = Aws::#{svc_name}.new # Aws::#{svc_name}::V#{default_api.version.gsub(/-/, '')}
+    #{svc_name.downcase} = Aws::#{svc_name}.new(api_version: '#{oldest_api.version}') # Aws::#{svc_name}::V#{oldest_api.version.gsub(/-/, '')}
+
+The following API versions are available for Aws::#{svc_name}:
+
+#{apis.map{ |a| "* {V#{a.version.gsub(/-/, '')} #{a.version}}" }.join("\n")}
+
+You can specify the API version for the client by passing `:api_version` to {new}.
+  DOCSTRING
   klass.docstring.add_tag(YARD::Tags::Tag.new(:service, svc_name))
 
   svc = Aws.const_get(svc_name)
