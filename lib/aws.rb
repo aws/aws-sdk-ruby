@@ -29,6 +29,7 @@ module Aws
     autoload :InputShapeTranslator, "#{SRC}/api/shape_translator"
     autoload :OperationTranslator, "#{SRC}/api/operation_translator"
     autoload :OutputShapeTranslator, "#{SRC}/api/shape_translator"
+    autoload :PaginationTranslator, "#{SRC}/api/pagination_translator"
     autoload :ServiceNamer, "#{SRC}/api/service_namer"
     autoload :ShapeTranslator, "#{SRC}/api/shape_translator"
     autoload :Translator, "#{SRC}/api/translator"
