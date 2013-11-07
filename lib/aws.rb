@@ -68,6 +68,7 @@ module Aws
     autoload :JsonRpcHeaders, "#{SRC}/plugins/json_rpc_headers"
     autoload :QueryProtocol, "#{SRC}/plugins/query_protocol"
     autoload :RegionalEndpoint, "#{SRC}/plugins/regional_endpoint"
+    autoload :ResponsePaging, "#{SRC}/plugins/response_paging"
     autoload :RetryErrors, "#{SRC}/plugins/retry_errors"
     autoload :S3BucketDns, "#{SRC}/plugins/s3_bucket_dns"
     autoload :S3CompleteMultipartUploadFix, "#{SRC}/plugins/s3_complete_multipart_upload_fix"

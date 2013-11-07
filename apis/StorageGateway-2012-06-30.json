@@ -26,6 +26,7 @@
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::InstanceProfileCredentials",
+    "Aws::Plugins::ResponsePaging",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
     "Aws::Plugins::JsonRpcHeaders",

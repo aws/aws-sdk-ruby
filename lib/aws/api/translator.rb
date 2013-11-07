@@ -13,6 +13,7 @@ module Aws
         Aws::Plugins::GlobalConfiguration
         Aws::Plugins::RegionalEndpoint
         Aws::Plugins::InstanceProfileCredentials
+        Aws::Plugins::ResponsePaging
         Aws::Plugins::Credentials
       )
 
