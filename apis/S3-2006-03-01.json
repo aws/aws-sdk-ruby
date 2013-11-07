@@ -1969,7 +1969,8 @@
           "tokens": {
             "key_marker": "next_key_marker",
             "upload_id_marker": "next_upload_id_marker"
-          }
+          },
+          "truncated_if": "is_truncated"
         }
       },
       "input": {
@@ -2120,7 +2121,8 @@
           "tokens": {
             "key_marker": "next_key_marker",
             "version_id_marker": "next_version_id_marker"
-          }
+          },
+          "truncated_if": "is_truncated"
         }
       },
       "input": {
@@ -2307,7 +2309,8 @@
         "paging": {
           "tokens": {
             "marker": "next_marker || contents[-1].key"
-          }
+          },
+          "truncated_if": "is_truncated"
         }
       },
       "input": {

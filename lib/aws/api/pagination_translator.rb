@@ -34,7 +34,7 @@ module Aws
       end
 
       def apply_truncated(paging, config)
-        if truncated_if = config['more_key']
+        if truncated_if = config['more_results']
           paging['truncated_if'] = underscore(truncated_if)
         end
       end

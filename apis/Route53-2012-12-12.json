@@ -681,7 +681,8 @@
         "paging": {
           "tokens": {
             "marker": "marker"
-          }
+          },
+          "truncated_if": "is_truncated"
         }
       },
       "input": {
@@ -775,7 +776,8 @@
         "paging": {
           "tokens": {
             "marker": "marker"
-          }
+          },
+          "truncated_if": "is_truncated"
         }
       },
       "input": {
@@ -859,7 +861,8 @@
             "start_record_name": "next_rec||d_name",
             "start_record_type": "next_rec||d_type",
             "start_record_identifier": "next_rec||d_identifier"
-          }
+          },
+          "truncated_if": "is_truncated"
         }
       },
       "input": {
