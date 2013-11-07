@@ -36,21 +36,21 @@ module Aws
   # hash to the constructor. If the hash is empty, then paging
   # will be disabled.
   #
-  #    # disables pagigng
-  #    page = PageableResponse.new(response, paging_rules: {})
-  #    page.last_page?
-  #    #=> true
+  #     # disables pagigng
+  #     page = PageableResponse.new(response, paging_rules: {})
+  #     page.last_page?
+  #     #=> true
   #
   # ### Tokens
   #
   # If you want to configure paging you must specify at least
   # the `tokens` entry:
   #
-  #    paging_rules = {
-  #      'tokens' => {
-  #        'input_param' => 'response_key',
-  #      }
-  #    }
+  #     paging_rules = {
+  #       'tokens' => {
+  #         'input_param' => 'response_key',
+  #       }
+  #     }
   #
   # Tokens should be a hash of request parameter names as keys, and
   # response data member names as values.  The `response.data` is
