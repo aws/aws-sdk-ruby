@@ -13,7 +13,7 @@ module Aws
   # The pager becomes a delegate to the response that allows you to
   # discover if there are additional response pages to be requested.
   #
-  #     page = ResponsePager.new(response)
+  #     page = PageableResponse.new(response)
   #     page.last_page?(false)
   #
   #     # sends a request to receive the next response page
@@ -21,14 +21,14 @@ module Aws
   #     page.last_page?(true)
   #
   #     page.next_page
-  #     #=> raises ResponsePager::LastPageError
+  #     #=> raises PageableResponse::LastPageError
   #
   # You can still access all of the attributes and methods of the
   # wrapped response.
   #
   #     # same
   #     response.data
-  #     ResponsePager.new(response).data
+  #     PageableResponse.new(response).data
   #
   # ## Paging Rules
   #
@@ -37,7 +37,7 @@ module Aws
   # will be disabled.
   #
   #    # disables pagigng
-  #    page = ResponsePager.new(response, paging_rules: {})
+  #    page = PageableResponse.new(response, paging_rules: {})
   #    page.last_page?
   #    #=> true
   #
@@ -74,17 +74,17 @@ module Aws
   # unless the configured member is `true`.
   #
   # @stability Unstable
-  #   ResponsePager public methods should be considered stable.
+  #   PageableResponse public methods should be considered stable.
   #   The structure of `:paging_rules` should be considered unstable
   #   and subject to change.  If you are not providing custom
   #   paging rules, then you should not worry about backwards
   #   incompatible changes.
   #
-  class ResponsePager < Delegator
+  class PageableResponse < Delegator
 
-    # Raised when calling {ResponsePager#next_page} on a pager that
-    # is on the last page of results.  You can call {ResponsePager#last_page?}
-    # or {ResponsePager#next_page?} to know if there are more pages.
+    # Raised when calling {PageableResponse#next_page} on a pager that
+    # is on the last page of results.  You can call {PageableResponse#last_page?}
+    # or {PageableResponse#next_page?} to know if there are more pages.
     class LastPageError < RuntimeError
 
       # @param [Seahorse::Client::Response] response
@@ -139,7 +139,7 @@ module Aws
       if last_page?
         raise LastPageError.new(@response)
       else
-        ResponsePager.new(next_response(params), paging_rules: paging_rules)
+        PageableResponse.new(next_response(params), paging_rules: paging_rules)
       end
     end
 

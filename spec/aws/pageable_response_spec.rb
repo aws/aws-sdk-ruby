@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 module Aws
-  describe ResponsePager do
+  describe PageableResponse do
 
     let(:resp) { Seahorse::Client::Response.new }
 
     let(:operation) { double('operation', metadata: { 'paging' => paging }) }
 
-    let(:pager) { ResponsePager.new(resp) }
+    let(:pager) { PageableResponse.new(resp) }
 
     let(:paging) { nil }
 
@@ -25,7 +25,7 @@ module Aws
       end
 
       it 'raises a LastPageError when calling next_page' do
-        expect { pager.next_page }.to raise_error(ResponsePager::LastPageError)
+        expect { pager.next_page }.to raise_error(PageableResponse::LastPageError)
       end
 
       it 'popualtes the error with the response' do
@@ -150,7 +150,7 @@ module Aws
       let(:paging) {{ 'tokens' => { 'offset' => 'next_token' } }}
 
       it 'can be constructed with an empty set of rules to disable paging' do
-        pager = ResponsePager.new(resp, paging_rules: {})
+        pager = PageableResponse.new(resp, paging_rules: {})
         expect(pager.last_page?).to be(true)
         expect(pager.next_page?).to be(false)
       end
