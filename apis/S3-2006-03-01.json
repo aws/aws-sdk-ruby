@@ -2323,6 +2323,10 @@
             "type": "string",
             "serialized_name": "Marker"
           },
+          "next_marker": {
+            "type": "string",
+            "serialized_name": "NextMarker"
+          },
           "contents": {
             "type": "flat_list",
             "serialized_name": "Contents",
