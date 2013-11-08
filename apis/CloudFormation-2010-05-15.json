@@ -114,6 +114,14 @@
               "DELETE"
             ]
           },
+          "stack_policy_body": {
+            "type": "string",
+            "serialized_name": "StackPolicyBody"
+          },
+          "stack_policy_url": {
+            "type": "string",
+            "serialized_name": "StackPolicyURL"
+          },
           "tags": {
             "type": "list",
             "serialized_name": "Tags",
@@ -634,6 +642,33 @@
         }
       }
     },
+    "get_stack_policy": {
+      "name": "GetStackPolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stack_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StackName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetStackPolicyResult"
+        },
+        "members": {
+          "stack_policy_body": {
+            "type": "string",
+            "serialized_name": "StackPolicyBody"
+          }
+        }
+      }
+    },
     "get_template": {
       "name": "GetTemplate",
       "http_method": "POST",
@@ -846,6 +881,29 @@
         }
       }
     },
+    "set_stack_policy": {
+      "name": "SetStackPolicy",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stack_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StackName"
+          },
+          "stack_policy_body": {
+            "type": "string",
+            "serialized_name": "StackPolicyBody"
+          },
+          "stack_policy_url": {
+            "type": "string",
+            "serialized_name": "StackPolicyURL"
+          }
+        }
+      }
+    },
     "update_stack": {
       "name": "UpdateStack",
       "http_method": "POST",
@@ -865,6 +923,14 @@
           "template_url": {
             "type": "string",
             "serialized_name": "TemplateURL"
+          },
+          "stack_policy_during_update_body": {
+            "type": "string",
+            "serialized_name": "StackPolicyDuringUpdateBody"
+          },
+          "stack_policy_during_update_url": {
+            "type": "string",
+            "serialized_name": "StackPolicyDuringUpdateURL"
           },
           "parameters": {
             "type": "list",
@@ -892,6 +958,14 @@
                 "CAPABILITY_IAM"
               ]
             }
+          },
+          "stack_policy_body": {
+            "type": "string",
+            "serialized_name": "StackPolicyBody"
+          },
+          "stack_policy_url": {
+            "type": "string",
+            "serialized_name": "StackPolicyURL"
           }
         }
       },
