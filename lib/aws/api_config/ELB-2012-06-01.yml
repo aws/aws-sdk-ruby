@@ -296,6 +296,23 @@
               member:
                 :rename: :instance_states
                 :list: true
+- :name: DescribeLoadBalancerAttributes
+  :method: :describe_load_balancer_attributes
+  :inputs:
+    LoadBalancerName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DescribeLoadBalancerAttributesResult:
+        :ignore: true
+        :children:
+          LoadBalancerAttributes:
+            :children:
+              CrossZoneLoadBalancing:
+                :children:
+                  Enabled:
+                    :type: :boolean
 - :name: DescribeLoadBalancerPolicies
   :method: :describe_load_balancer_policies
   :inputs:
@@ -522,6 +539,24 @@
               member:
                 :rename: :availability_zones
                 :list: true
+- :name: ModifyLoadBalancerAttributes
+  :method: :modify_load_balancer_attributes
+  :inputs:
+    LoadBalancerName:
+    - :string
+    - :required
+    LoadBalancerAttributes:
+    - :structure:
+        CrossZoneLoadBalancing:
+        - :structure:
+            Enabled:
+            - :boolean
+            - :required
+    - :required
+  :outputs:
+    :children:
+      ModifyLoadBalancerAttributesResult:
+        :ignore: true
 - :name: RegisterInstancesWithLoadBalancer
   :method: :register_instances_with_load_balancer
   :inputs:
