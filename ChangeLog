@@ -1,3 +1,70 @@
+2013-11-08 Alex Wood <awood45@gmail.com>
+
+  * doc-src/ELB/V20120601.yml, lib/aws/api_config/ELB-2012-06-01.yml: Add
+  Cross-Zone Balancing to Elastic Load Balancing
+
+  Updates AWS::ELB::Client.
+
+  * doc-src/StorageGateway/V20130630.yml,
+  features/storage_gateway/client.feature,
+  lib/aws/api_config/StorageGateway-2013-06-30.yml,
+  lib/aws/storage_gateway/client.rb: New API Version 2013-06-30 for AWS
+  Storage Gateway
+
+  AWS Storage Gateway now supports Gateway-VTL.
+
+  AWS::StorageGateway::Client supports the '2012-06-30' and '2013-06-30' API
+  versions, this change defaults users to the '2013-06-30' version and updates
+  tests to handle this version.
+
+  * lib/aws/core.rb, lib/aws/core/configuration.rb: Updating documentation
+  about :max_retries to include information about throttling errors.
+
+2013-11-02 osamu1203 <osamuintz@gmail.com>
+
+  * lib/aws/s3/uploaded_part.rb: Fixed raise message
+2013-10-31 Alex Wood <awood45@gmail.com>
+
+  * doc-src/ElastiCache/V20121115.yml: Remove Unused Amazon ElastiCache
+  Documentation
+
+  An older client doc source was causing the AWS::ElastiCache::Client docs
+  to be out of date. This change deletes the offending file.
+
+  * lib/aws/auto_scaling/scheduled_action.rb,
+  lib/aws/auto_scaling/scheduled_action_collection.rb,
+  spec/aws/auto_scaling/scheduled_action_collection_spec.rb,
+  spec/aws/auto_scaling/scheduled_action_spec.rb: Fixed a bug with AutoScaling
+  scheduled actions.
+
+  The `AWS::AutoScaling::ScheduledAction` class incorrectly assumed that their
+  group names were unique and suffient to identify the action.  In order to
+  correct
+  this bug, it was required to add a new positional required argument to the
+  `ScheduledAction` constructor.  This affects two code paths.
+
+  First, the scheduled action collection must now be scoped by a group:
+
+      # now raises an error, must scope to a group first
+      auto_scaling.scheduled_actions['name']
+
+      # this works
+      auto_scaling.groups['group-name'].scheduled_actions['name']
+
+      # this also works
+      auto_scaling.scheduled_actions.filter(:group => 'group-name')['name']
+
+  Also the constructor now requires a group:
+
+      # no longer works, raises error
+      AWS::AutoScaling::ScheduledAction.new('name')
+
+      # this works
+      group = AWS::AutoScaling::Group.new('group-name')
+      AWS::AutoScaling::ScheduledAction.new(group, 'name')
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.24.0
+
 2013-10-30 Alex Wood <awood45@gmail.com>
 
   * doc-src/ElastiCache/V20130615.yml,
@@ -15,6 +82,9 @@
 
   * doc-src/EMR/V20090331.yml, lib/aws/api_config/EMR-2009-03-31.yml: API
   Updates for Amazon Elastic MapReduce
+
+  * lib/aws/s3/client.rb, spec/aws/s3/client_spec.rb: Support S3 GET Object
+  torrent
 
 2013-10-26 Michael H. Oshita <ijinpublic+github@gmail.com>
 
