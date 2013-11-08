@@ -1,0 +1,2032 @@
+{
+  "version": "2013-06-30",
+  "metadata": {
+    "endpoint_prefix": "storagegateway",
+    "json_target_prefix": "StorageGateway_20130630",
+    "json_version": 1.1,
+    "regional_endpoints": {
+      "us-east-1": "storagegateway.us-east-1.amazonaws.com",
+      "us-west-1": "storagegateway.us-west-1.amazonaws.com",
+      "us-west-2": "storagegateway.us-west-2.amazonaws.com",
+      "eu-west-1": "storagegateway.eu-west-1.amazonaws.com",
+      "ap-northeast-1": "storagegateway.ap-northeast-1.amazonaws.com",
+      "ap-southeast-1": "storagegateway.ap-southeast-1.amazonaws.com",
+      "ap-southeast-2": "storagegateway.ap-southeast-2.amazonaws.com",
+      "sa-east-1": "storagegateway.sa-east-1.amazonaws.com"
+    },
+    "service_class_name": "StorageGateway",
+    "service_full_name": "AWS Storage Gateway"
+  },
+  "plugins": [
+    "Seahorse::Client::Plugins::Logging",
+    "Seahorse::Client::Plugins::RestfulBindings",
+    "Seahorse::Client::Plugins::ContentLength",
+    "Aws::Plugins::UserAgent",
+    "Aws::Plugins::RetryErrors",
+    "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::ResponsePaging",
+    "Aws::Plugins::Credentials",
+    "Aws::Plugins::JsonProtocol",
+    "Aws::Plugins::JsonRpcHeaders",
+    "Aws::Plugins::SignatureV4"
+  ],
+  "operations": {
+    "activate_gateway": {
+      "name": "ActivateGateway",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "activation_key": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ActivationKey"
+          },
+          "gateway_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayName"
+          },
+          "gateway_timezone": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayTimezone"
+          },
+          "gateway_region": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayRegion"
+          },
+          "gateway_type": {
+            "type": "string",
+            "serialized_name": "GatewayType"
+          },
+          "tape_drive_type": {
+            "type": "string",
+            "serialized_name": "TapeDriveType"
+          },
+          "medium_changer_type": {
+            "type": "string",
+            "serialized_name": "MediumChangerType"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "add_cache": {
+      "name": "AddCache",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "disk_ids": {
+            "type": "list",
+            "required": true,
+            "serialized_name": "DiskIds",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "add_upload_buffer": {
+      "name": "AddUploadBuffer",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "disk_ids": {
+            "type": "list",
+            "required": true,
+            "serialized_name": "DiskIds",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "add_working_storage": {
+      "name": "AddWorkingStorage",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "disk_ids": {
+            "type": "list",
+            "required": true,
+            "serialized_name": "DiskIds",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "cancel_archival": {
+      "name": "CancelArchival",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "tape_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TapeARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "tape_arn": {
+            "type": "string",
+            "serialized_name": "TapeARN"
+          }
+        }
+      }
+    },
+    "cancel_retrieval": {
+      "name": "CancelRetrieval",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "tape_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TapeARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "tape_arn": {
+            "type": "string",
+            "serialized_name": "TapeARN"
+          }
+        }
+      }
+    },
+    "create_cachedi_scsi_volume": {
+      "name": "CreateCachediSCSIVolume",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "volume_size_in_bytes": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "VolumeSizeInBytes"
+          },
+          "snapshot_id": {
+            "type": "string",
+            "serialized_name": "SnapshotId"
+          },
+          "target_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TargetName"
+          },
+          "network_interface_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "NetworkInterfaceId"
+          },
+          "client_token": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ClientToken"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "serialized_name": "VolumeARN"
+          },
+          "target_arn": {
+            "type": "string",
+            "serialized_name": "TargetARN"
+          }
+        }
+      }
+    },
+    "create_snapshot": {
+      "name": "CreateSnapshot",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VolumeARN"
+          },
+          "snapshot_description": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SnapshotDescription"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "serialized_name": "VolumeARN"
+          },
+          "snapshot_id": {
+            "type": "string",
+            "serialized_name": "SnapshotId"
+          }
+        }
+      }
+    },
+    "create_snapshot_from_volume_recovery_point": {
+      "name": "CreateSnapshotFromVolumeRecoveryPoint",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VolumeARN"
+          },
+          "snapshot_description": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SnapshotDescription"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "snapshot_id": {
+            "type": "string",
+            "serialized_name": "SnapshotId"
+          },
+          "volume_arn": {
+            "type": "string",
+            "serialized_name": "VolumeARN"
+          },
+          "volume_recovery_point_time": {
+            "type": "string",
+            "serialized_name": "VolumeRecoveryPointTime"
+          }
+        }
+      }
+    },
+    "create_storedi_scsi_volume": {
+      "name": "CreateStorediSCSIVolume",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "disk_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "DiskId"
+          },
+          "snapshot_id": {
+            "type": "string",
+            "serialized_name": "SnapshotId"
+          },
+          "preserve_existing_data": {
+            "type": "boolean",
+            "required": true,
+            "serialized_name": "PreserveExistingData"
+          },
+          "target_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TargetName"
+          },
+          "network_interface_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "NetworkInterfaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "serialized_name": "VolumeARN"
+          },
+          "volume_size_in_bytes": {
+            "type": "integer",
+            "serialized_name": "VolumeSizeInBytes"
+          },
+          "target_arn": {
+            "type": "string",
+            "serialized_name": "TargetARN"
+          }
+        }
+      }
+    },
+    "create_tapes": {
+      "name": "CreateTapes",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "tape_size_in_bytes": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "TapeSizeInBytes"
+          },
+          "client_token": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ClientToken"
+          },
+          "num_tapes_to_create": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "NumTapesToCreate"
+          },
+          "tape_barcode_prefix": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TapeBarcodePrefix"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "tape_ar_ns": {
+            "type": "list",
+            "serialized_name": "TapeARNs",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "delete_bandwidth_rate_limit": {
+      "name": "DeleteBandwidthRateLimit",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "bandwidth_type": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "BandwidthType"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "delete_chap_credentials": {
+      "name": "DeleteChapCredentials",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "target_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TargetARN"
+          },
+          "initiator_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "InitiatorName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "target_arn": {
+            "type": "string",
+            "serialized_name": "TargetARN"
+          },
+          "initiator_name": {
+            "type": "string",
+            "serialized_name": "InitiatorName"
+          }
+        }
+      }
+    },
+    "delete_gateway": {
+      "name": "DeleteGateway",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "delete_snapshot_schedule": {
+      "name": "DeleteSnapshotSchedule",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VolumeARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "serialized_name": "VolumeARN"
+          }
+        }
+      }
+    },
+    "delete_tape": {
+      "name": "DeleteTape",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "tape_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TapeARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "tape_arn": {
+            "type": "string",
+            "serialized_name": "TapeARN"
+          }
+        }
+      }
+    },
+    "delete_tape_archive": {
+      "name": "DeleteTapeArchive",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "tape_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TapeARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "tape_arn": {
+            "type": "string",
+            "serialized_name": "TapeARN"
+          }
+        }
+      }
+    },
+    "delete_volume": {
+      "name": "DeleteVolume",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VolumeARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "serialized_name": "VolumeARN"
+          }
+        }
+      }
+    },
+    "describe_bandwidth_rate_limit": {
+      "name": "DescribeBandwidthRateLimit",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "average_upload_rate_limit_in_bits_per_sec": {
+            "type": "integer",
+            "serialized_name": "AverageUploadRateLimitInBitsPerSec"
+          },
+          "average_download_rate_limit_in_bits_per_sec": {
+            "type": "integer",
+            "serialized_name": "AverageDownloadRateLimitInBitsPerSec"
+          }
+        }
+      }
+    },
+    "describe_cache": {
+      "name": "DescribeCache",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "disk_ids": {
+            "type": "list",
+            "serialized_name": "DiskIds",
+            "members": {
+              "type": "string"
+            }
+          },
+          "cache_allocated_in_bytes": {
+            "type": "integer",
+            "serialized_name": "CacheAllocatedInBytes"
+          },
+          "cache_used_percentage": {
+            "type": "float",
+            "serialized_name": "CacheUsedPercentage"
+          },
+          "cache_dirty_percentage": {
+            "type": "float",
+            "serialized_name": "CacheDirtyPercentage"
+          },
+          "cache_hit_percentage": {
+            "type": "float",
+            "serialized_name": "CacheHitPercentage"
+          },
+          "cache_miss_percentage": {
+            "type": "float",
+            "serialized_name": "CacheMissPercentage"
+          }
+        }
+      }
+    },
+    "describe_cachedi_scsi_volumes": {
+      "name": "DescribeCachediSCSIVolumes",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_ar_ns": {
+            "type": "list",
+            "required": true,
+            "serialized_name": "VolumeARNs",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "cachedi_scsi_volumes": {
+            "type": "list",
+            "serialized_name": "CachediSCSIVolumes",
+            "members": {
+              "type": "structure",
+              "members": {
+                "volume_arn": {
+                  "type": "string",
+                  "serialized_name": "VolumeARN"
+                },
+                "volume_id": {
+                  "type": "string",
+                  "serialized_name": "VolumeId"
+                },
+                "volume_type": {
+                  "type": "string",
+                  "serialized_name": "VolumeType"
+                },
+                "volume_status": {
+                  "type": "string",
+                  "serialized_name": "VolumeStatus"
+                },
+                "volume_size_in_bytes": {
+                  "type": "integer",
+                  "serialized_name": "VolumeSizeInBytes"
+                },
+                "volume_progress": {
+                  "type": "float",
+                  "serialized_name": "VolumeProgress"
+                },
+                "source_snapshot_id": {
+                  "type": "string",
+                  "serialized_name": "SourceSnapshotId"
+                },
+                "volumei_scsi_attributes": {
+                  "type": "structure",
+                  "serialized_name": "VolumeiSCSIAttributes",
+                  "members": {
+                    "target_arn": {
+                      "type": "string",
+                      "serialized_name": "TargetARN"
+                    },
+                    "network_interface_id": {
+                      "type": "string",
+                      "serialized_name": "NetworkInterfaceId"
+                    },
+                    "network_interface_port": {
+                      "type": "integer",
+                      "serialized_name": "NetworkInterfacePort"
+                    },
+                    "lun_number": {
+                      "type": "integer",
+                      "serialized_name": "LunNumber"
+                    },
+                    "chap_enabled": {
+                      "type": "boolean",
+                      "serialized_name": "ChapEnabled"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_chap_credentials": {
+      "name": "DescribeChapCredentials",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "target_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TargetARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "chap_credentials": {
+            "type": "list",
+            "serialized_name": "ChapCredentials",
+            "members": {
+              "type": "structure",
+              "members": {
+                "target_arn": {
+                  "type": "string",
+                  "serialized_name": "TargetARN"
+                },
+                "secret_to_authenticate_initiator": {
+                  "type": "string",
+                  "serialized_name": "SecretToAuthenticateInitiator"
+                },
+                "initiator_name": {
+                  "type": "string",
+                  "serialized_name": "InitiatorName"
+                },
+                "secret_to_authenticate_target": {
+                  "type": "string",
+                  "serialized_name": "SecretToAuthenticateTarget"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_gateway_information": {
+      "name": "DescribeGatewayInformation",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "gateway_id": {
+            "type": "string",
+            "serialized_name": "GatewayId"
+          },
+          "gateway_timezone": {
+            "type": "string",
+            "serialized_name": "GatewayTimezone"
+          },
+          "gateway_state": {
+            "type": "string",
+            "serialized_name": "GatewayState"
+          },
+          "gateway_network_interfaces": {
+            "type": "list",
+            "serialized_name": "GatewayNetworkInterfaces",
+            "members": {
+              "type": "structure",
+              "members": {
+                "ipv_4_address": {
+                  "type": "string",
+                  "serialized_name": "Ipv4Address"
+                },
+                "mac_address": {
+                  "type": "string",
+                  "serialized_name": "MacAddress"
+                },
+                "ipv_6_address": {
+                  "type": "string",
+                  "serialized_name": "Ipv6Address"
+                }
+              }
+            }
+          },
+          "gateway_type": {
+            "type": "string",
+            "serialized_name": "GatewayType"
+          },
+          "next_update_availability_date": {
+            "type": "string",
+            "serialized_name": "NextUpdateAvailabilityDate"
+          }
+        }
+      }
+    },
+    "describe_maintenance_start_time": {
+      "name": "DescribeMaintenanceStartTime",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "hour_of_day": {
+            "type": "integer",
+            "serialized_name": "HourOfDay"
+          },
+          "minute_of_hour": {
+            "type": "integer",
+            "serialized_name": "MinuteOfHour"
+          },
+          "day_of_week": {
+            "type": "integer",
+            "serialized_name": "DayOfWeek"
+          },
+          "timezone": {
+            "type": "string",
+            "serialized_name": "Timezone"
+          }
+        }
+      }
+    },
+    "describe_snapshot_schedule": {
+      "name": "DescribeSnapshotSchedule",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VolumeARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "serialized_name": "VolumeARN"
+          },
+          "start_at": {
+            "type": "integer",
+            "serialized_name": "StartAt"
+          },
+          "recurrence_in_hours": {
+            "type": "integer",
+            "serialized_name": "RecurrenceInHours"
+          },
+          "description": {
+            "type": "string",
+            "serialized_name": "Description"
+          },
+          "timezone": {
+            "type": "string",
+            "serialized_name": "Timezone"
+          }
+        }
+      }
+    },
+    "describe_storedi_scsi_volumes": {
+      "name": "DescribeStorediSCSIVolumes",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_ar_ns": {
+            "type": "list",
+            "required": true,
+            "serialized_name": "VolumeARNs",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "storedi_scsi_volumes": {
+            "type": "list",
+            "serialized_name": "StorediSCSIVolumes",
+            "members": {
+              "type": "structure",
+              "members": {
+                "volume_arn": {
+                  "type": "string",
+                  "serialized_name": "VolumeARN"
+                },
+                "volume_id": {
+                  "type": "string",
+                  "serialized_name": "VolumeId"
+                },
+                "volume_type": {
+                  "type": "string",
+                  "serialized_name": "VolumeType"
+                },
+                "volume_status": {
+                  "type": "string",
+                  "serialized_name": "VolumeStatus"
+                },
+                "volume_size_in_bytes": {
+                  "type": "integer",
+                  "serialized_name": "VolumeSizeInBytes"
+                },
+                "volume_progress": {
+                  "type": "float",
+                  "serialized_name": "VolumeProgress"
+                },
+                "volume_disk_id": {
+                  "type": "string",
+                  "serialized_name": "VolumeDiskId"
+                },
+                "source_snapshot_id": {
+                  "type": "string",
+                  "serialized_name": "SourceSnapshotId"
+                },
+                "preserved_existing_data": {
+                  "type": "boolean",
+                  "serialized_name": "PreservedExistingData"
+                },
+                "volumei_scsi_attributes": {
+                  "type": "structure",
+                  "serialized_name": "VolumeiSCSIAttributes",
+                  "members": {
+                    "target_arn": {
+                      "type": "string",
+                      "serialized_name": "TargetARN"
+                    },
+                    "network_interface_id": {
+                      "type": "string",
+                      "serialized_name": "NetworkInterfaceId"
+                    },
+                    "network_interface_port": {
+                      "type": "integer",
+                      "serialized_name": "NetworkInterfacePort"
+                    },
+                    "lun_number": {
+                      "type": "integer",
+                      "serialized_name": "LunNumber"
+                    },
+                    "chap_enabled": {
+                      "type": "boolean",
+                      "serialized_name": "ChapEnabled"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_tape_archives": {
+      "name": "DescribeTapeArchives",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "tape_ar_ns": {
+            "type": "list",
+            "serialized_name": "TapeARNs",
+            "members": {
+              "type": "string"
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "limit": {
+            "type": "integer",
+            "serialized_name": "Limit"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "tape_archives": {
+            "type": "list",
+            "serialized_name": "TapeArchives",
+            "members": {
+              "type": "structure",
+              "members": {
+                "tape_arn": {
+                  "type": "string",
+                  "serialized_name": "TapeARN"
+                },
+                "tape_barcode": {
+                  "type": "string",
+                  "serialized_name": "TapeBarcode"
+                },
+                "tape_size_in_bytes": {
+                  "type": "integer",
+                  "serialized_name": "TapeSizeInBytes"
+                },
+                "completion_time": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CompletionTime"
+                },
+                "retrieved_to": {
+                  "type": "string",
+                  "serialized_name": "RetrievedTo"
+                },
+                "tape_status": {
+                  "type": "string",
+                  "serialized_name": "TapeStatus"
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "describe_tape_recovery_points": {
+      "name": "DescribeTapeRecoveryPoints",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "limit": {
+            "type": "integer",
+            "serialized_name": "Limit"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "tape_recovery_point_infos": {
+            "type": "list",
+            "serialized_name": "TapeRecoveryPointInfos",
+            "members": {
+              "type": "structure",
+              "members": {
+                "tape_arn": {
+                  "type": "string",
+                  "serialized_name": "TapeARN"
+                },
+                "tape_recovery_point_time": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "TapeRecoveryPointTime"
+                },
+                "tape_size_in_bytes": {
+                  "type": "integer",
+                  "serialized_name": "TapeSizeInBytes"
+                },
+                "tape_status": {
+                  "type": "string",
+                  "serialized_name": "TapeStatus"
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "describe_tapes": {
+      "name": "DescribeTapes",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "tape_ar_ns": {
+            "type": "list",
+            "serialized_name": "TapeARNs",
+            "members": {
+              "type": "string"
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "limit": {
+            "type": "integer",
+            "serialized_name": "Limit"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "tapes": {
+            "type": "list",
+            "serialized_name": "Tapes",
+            "members": {
+              "type": "structure",
+              "members": {
+                "tape_arn": {
+                  "type": "string",
+                  "serialized_name": "TapeARN"
+                },
+                "tape_barcode": {
+                  "type": "string",
+                  "serialized_name": "TapeBarcode"
+                },
+                "tape_size_in_bytes": {
+                  "type": "integer",
+                  "serialized_name": "TapeSizeInBytes"
+                },
+                "tape_status": {
+                  "type": "string",
+                  "serialized_name": "TapeStatus"
+                },
+                "vtl_device": {
+                  "type": "string",
+                  "serialized_name": "VTLDevice"
+                },
+                "progress": {
+                  "type": "float",
+                  "serialized_name": "Progress"
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "describe_upload_buffer": {
+      "name": "DescribeUploadBuffer",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "disk_ids": {
+            "type": "list",
+            "serialized_name": "DiskIds",
+            "members": {
+              "type": "string"
+            }
+          },
+          "upload_buffer_used_in_bytes": {
+            "type": "integer",
+            "serialized_name": "UploadBufferUsedInBytes"
+          },
+          "upload_buffer_allocated_in_bytes": {
+            "type": "integer",
+            "serialized_name": "UploadBufferAllocatedInBytes"
+          }
+        }
+      }
+    },
+    "describe_vtl_devices": {
+      "name": "DescribeVTLDevices",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "vtl_device_ar_ns": {
+            "type": "list",
+            "serialized_name": "VTLDeviceARNs",
+            "members": {
+              "type": "string"
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "limit": {
+            "type": "integer",
+            "serialized_name": "Limit"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "vtl_devices": {
+            "type": "list",
+            "serialized_name": "VTLDevices",
+            "members": {
+              "type": "structure",
+              "members": {
+                "vtl_device_arn": {
+                  "type": "string",
+                  "serialized_name": "VTLDeviceARN"
+                },
+                "vtl_device_type": {
+                  "type": "string",
+                  "serialized_name": "VTLDeviceType"
+                },
+                "vtl_device_vendor": {
+                  "type": "string",
+                  "serialized_name": "VTLDeviceVendor"
+                },
+                "vtl_device_product_identifier": {
+                  "type": "string",
+                  "serialized_name": "VTLDeviceProductIdentifier"
+                },
+                "devicei_scsi_attributes": {
+                  "type": "structure",
+                  "serialized_name": "DeviceiSCSIAttributes",
+                  "members": {
+                    "target_arn": {
+                      "type": "string",
+                      "serialized_name": "TargetARN"
+                    },
+                    "network_interface_id": {
+                      "type": "string",
+                      "serialized_name": "NetworkInterfaceId"
+                    },
+                    "network_interface_port": {
+                      "type": "integer",
+                      "serialized_name": "NetworkInterfacePort"
+                    },
+                    "chap_enabled": {
+                      "type": "boolean",
+                      "serialized_name": "ChapEnabled"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "describe_working_storage": {
+      "name": "DescribeWorkingStorage",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "disk_ids": {
+            "type": "list",
+            "serialized_name": "DiskIds",
+            "members": {
+              "type": "string"
+            }
+          },
+          "working_storage_used_in_bytes": {
+            "type": "integer",
+            "serialized_name": "WorkingStorageUsedInBytes"
+          },
+          "working_storage_allocated_in_bytes": {
+            "type": "integer",
+            "serialized_name": "WorkingStorageAllocatedInBytes"
+          }
+        }
+      }
+    },
+    "disable_gateway": {
+      "name": "DisableGateway",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "list_gateways": {
+      "name": "ListGateways",
+      "http_method": "POST",
+      "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "limit": {
+            "type": "integer",
+            "serialized_name": "Limit"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateways": {
+            "type": "list",
+            "serialized_name": "Gateways",
+            "members": {
+              "type": "structure",
+              "members": {
+                "gateway_arn": {
+                  "type": "string",
+                  "serialized_name": "GatewayARN"
+                },
+                "gateway_type": {
+                  "type": "string",
+                  "serialized_name": "GatewayType"
+                },
+                "gateway_operational_state": {
+                  "type": "string",
+                  "serialized_name": "GatewayOperationalState"
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_local_disks": {
+      "name": "ListLocalDisks",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "disks": {
+            "type": "list",
+            "serialized_name": "Disks",
+            "members": {
+              "type": "structure",
+              "members": {
+                "disk_id": {
+                  "type": "string",
+                  "serialized_name": "DiskId"
+                },
+                "disk_path": {
+                  "type": "string",
+                  "serialized_name": "DiskPath"
+                },
+                "disk_node": {
+                  "type": "string",
+                  "serialized_name": "DiskNode"
+                },
+                "disk_size_in_bytes": {
+                  "type": "integer",
+                  "serialized_name": "DiskSizeInBytes"
+                },
+                "disk_allocation_type": {
+                  "type": "string",
+                  "serialized_name": "DiskAllocationType"
+                },
+                "disk_allocation_resource": {
+                  "type": "string",
+                  "serialized_name": "DiskAllocationResource"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "list_volume_recovery_points": {
+      "name": "ListVolumeRecoveryPoints",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "volume_recovery_point_infos": {
+            "type": "list",
+            "serialized_name": "VolumeRecoveryPointInfos",
+            "members": {
+              "type": "structure",
+              "members": {
+                "volume_arn": {
+                  "type": "string",
+                  "serialized_name": "VolumeARN"
+                },
+                "volume_size_in_bytes": {
+                  "type": "integer",
+                  "serialized_name": "VolumeSizeInBytes"
+                },
+                "volume_usage_in_bytes": {
+                  "type": "integer",
+                  "serialized_name": "VolumeUsageInBytes"
+                },
+                "volume_recovery_point_time": {
+                  "type": "string",
+                  "serialized_name": "VolumeRecoveryPointTime"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "list_volumes": {
+      "name": "ListVolumes",
+      "http_method": "POST",
+      "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "limit": {
+            "type": "integer",
+            "serialized_name": "Limit"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "volume_infos": {
+            "type": "list",
+            "serialized_name": "VolumeInfos",
+            "members": {
+              "type": "structure",
+              "members": {
+                "volume_arn": {
+                  "type": "string",
+                  "serialized_name": "VolumeARN"
+                },
+                "volume_type": {
+                  "type": "string",
+                  "serialized_name": "VolumeType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "retrieve_tape_archive": {
+      "name": "RetrieveTapeArchive",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "tape_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TapeARN"
+          },
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "tape_arn": {
+            "type": "string",
+            "serialized_name": "TapeARN"
+          }
+        }
+      }
+    },
+    "retrieve_tape_recovery_point": {
+      "name": "RetrieveTapeRecoveryPoint",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "tape_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TapeARN"
+          },
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "tape_arn": {
+            "type": "string",
+            "serialized_name": "TapeARN"
+          }
+        }
+      }
+    },
+    "shutdown_gateway": {
+      "name": "ShutdownGateway",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "start_gateway": {
+      "name": "StartGateway",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "update_bandwidth_rate_limit": {
+      "name": "UpdateBandwidthRateLimit",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "average_upload_rate_limit_in_bits_per_sec": {
+            "type": "integer",
+            "serialized_name": "AverageUploadRateLimitInBitsPerSec"
+          },
+          "average_download_rate_limit_in_bits_per_sec": {
+            "type": "integer",
+            "serialized_name": "AverageDownloadRateLimitInBitsPerSec"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "update_chap_credentials": {
+      "name": "UpdateChapCredentials",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "target_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "TargetARN"
+          },
+          "secret_to_authenticate_initiator": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SecretToAuthenticateInitiator"
+          },
+          "initiator_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "InitiatorName"
+          },
+          "secret_to_authenticate_target": {
+            "type": "string",
+            "serialized_name": "SecretToAuthenticateTarget"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "target_arn": {
+            "type": "string",
+            "serialized_name": "TargetARN"
+          },
+          "initiator_name": {
+            "type": "string",
+            "serialized_name": "InitiatorName"
+          }
+        }
+      }
+    },
+    "update_gateway_information": {
+      "name": "UpdateGatewayInformation",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "gateway_name": {
+            "type": "string",
+            "serialized_name": "GatewayName"
+          },
+          "gateway_timezone": {
+            "type": "string",
+            "serialized_name": "GatewayTimezone"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "update_gateway_software_now": {
+      "name": "UpdateGatewaySoftwareNow",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "update_maintenance_start_time": {
+      "name": "UpdateMaintenanceStartTime",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "GatewayARN"
+          },
+          "hour_of_day": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "HourOfDay"
+          },
+          "minute_of_hour": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "MinuteOfHour"
+          },
+          "day_of_week": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "DayOfWeek"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "gateway_arn": {
+            "type": "string",
+            "serialized_name": "GatewayARN"
+          }
+        }
+      }
+    },
+    "update_snapshot_schedule": {
+      "name": "UpdateSnapshotSchedule",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "VolumeARN"
+          },
+          "start_at": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "StartAt"
+          },
+          "recurrence_in_hours": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "RecurrenceInHours"
+          },
+          "description": {
+            "type": "string",
+            "serialized_name": "Description"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "volume_arn": {
+            "type": "string",
+            "serialized_name": "VolumeARN"
+          }
+        }
+      }
+    }
+  }
+}

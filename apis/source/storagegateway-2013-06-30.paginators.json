@@ -1,0 +1,28 @@
+{
+  "pagination": {
+    "DescribeCachediSCSIVolumes": {
+      "result_key": "CachediSCSIVolumes"
+    },
+    "DescribeStorediSCSIVolumes": {
+      "result_key": "StorediSCSIVolumes"
+    },
+    "ListGateways": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "Limit",
+      "result_key": "Gateways"
+    },
+    "ListLocalDisks": {
+      "result_key": "Disks"
+    },
+    "ListVolumeRecoveryPoints": {
+      "result_key": "VolumeRecoveryPointInfos"
+    },
+    "ListVolumes": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "Limit",
+      "result_key": "VolumeInfos"
+    }
+  }
+}
