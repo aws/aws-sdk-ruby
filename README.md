@@ -224,9 +224,12 @@ The SDK currently supports the following services:
       <td>Amazon Simple Queue Service</td>
     </tr>
     <tr>
-      <td>AWS::StorageGateway</td>
+      <td rowspan="2">AWS::StorageGateway</td>
       <td>2012-06-30</td>
-      <td>AWS Storage Gateway</td>
+      <td rowspan="2">AWS Storage Gateway</td>
+    </tr>
+    <tr>
+      <td>2013-06-30</td>
     </tr>
     <tr>
       <td>AWS::STS</td>
