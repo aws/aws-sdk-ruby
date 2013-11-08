@@ -20,7 +20,7 @@ Feature: AWS Storage Gateway client
     Then the result should have an array of gateways
     And a request should have been made like:
     | TYPE   | NAME         | VALUE                                |
-    | header | x-amz-target | StorageGateway_20120630.ListGateways |
+    | header | x-amz-target | StorageGateway_20130630.ListGateways  |
     | json   | ["Limit"]    | 10                                   |
 
   Scenario: Errors
