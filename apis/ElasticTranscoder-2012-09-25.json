@@ -167,6 +167,29 @@
                     }
                   }
                 }
+              },
+              "composition": {
+                "type": "list",
+                "serialized_name": "Composition",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "time_span": {
+                      "type": "structure",
+                      "serialized_name": "TimeSpan",
+                      "members": {
+                        "start_time": {
+                          "type": "string",
+                          "serialized_name": "StartTime"
+                        },
+                        "duration": {
+                          "type": "string",
+                          "serialized_name": "Duration"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -250,6 +273,29 @@
                           "album_art_format": {
                             "type": "string",
                             "serialized_name": "AlbumArtFormat"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "composition": {
+                  "type": "list",
+                  "serialized_name": "Composition",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "time_span": {
+                        "type": "structure",
+                        "serialized_name": "TimeSpan",
+                        "members": {
+                          "start_time": {
+                            "type": "string",
+                            "serialized_name": "StartTime"
+                          },
+                          "duration": {
+                            "type": "string",
+                            "serialized_name": "Duration"
                           }
                         }
                       }
@@ -441,6 +487,29 @@
                         }
                       }
                     }
+                  },
+                  "composition": {
+                    "type": "list",
+                    "serialized_name": "Composition",
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "time_span": {
+                          "type": "structure",
+                          "serialized_name": "TimeSpan",
+                          "members": {
+                            "start_time": {
+                              "type": "string",
+                              "serialized_name": "StartTime"
+                            },
+                            "duration": {
+                              "type": "string",
+                              "serialized_name": "Duration"
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -548,6 +617,29 @@
                               "album_art_format": {
                                 "type": "string",
                                 "serialized_name": "AlbumArtFormat"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "composition": {
+                      "type": "list",
+                      "serialized_name": "Composition",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "time_span": {
+                            "type": "structure",
+                            "serialized_name": "TimeSpan",
+                            "members": {
+                              "start_time": {
+                                "type": "string",
+                                "serialized_name": "StartTime"
+                              },
+                              "duration": {
+                                "type": "string",
+                                "serialized_name": "Duration"
                               }
                             }
                           }
@@ -1480,6 +1572,29 @@
                           }
                         }
                       }
+                    },
+                    "composition": {
+                      "type": "list",
+                      "serialized_name": "Composition",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "time_span": {
+                            "type": "structure",
+                            "serialized_name": "TimeSpan",
+                            "members": {
+                              "start_time": {
+                                "type": "string",
+                                "serialized_name": "StartTime"
+                              },
+                              "duration": {
+                                "type": "string",
+                                "serialized_name": "Duration"
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -1587,6 +1702,29 @@
                                 "album_art_format": {
                                   "type": "string",
                                   "serialized_name": "AlbumArtFormat"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "composition": {
+                        "type": "list",
+                        "serialized_name": "Composition",
+                        "members": {
+                          "type": "structure",
+                          "members": {
+                            "time_span": {
+                              "type": "structure",
+                              "serialized_name": "TimeSpan",
+                              "members": {
+                                "start_time": {
+                                  "type": "string",
+                                  "serialized_name": "StartTime"
+                                },
+                                "duration": {
+                                  "type": "string",
+                                  "serialized_name": "Duration"
                                 }
                               }
                             }
@@ -1822,6 +1960,29 @@
                           }
                         }
                       }
+                    },
+                    "composition": {
+                      "type": "list",
+                      "serialized_name": "Composition",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "time_span": {
+                            "type": "structure",
+                            "serialized_name": "TimeSpan",
+                            "members": {
+                              "start_time": {
+                                "type": "string",
+                                "serialized_name": "StartTime"
+                              },
+                              "duration": {
+                                "type": "string",
+                                "serialized_name": "Duration"
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -1929,6 +2090,29 @@
                                 "album_art_format": {
                                   "type": "string",
                                   "serialized_name": "AlbumArtFormat"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "composition": {
+                        "type": "list",
+                        "serialized_name": "Composition",
+                        "members": {
+                          "type": "structure",
+                          "members": {
+                            "time_span": {
+                              "type": "structure",
+                              "serialized_name": "TimeSpan",
+                              "members": {
+                                "start_time": {
+                                  "type": "string",
+                                  "serialized_name": "StartTime"
+                                },
+                                "duration": {
+                                  "type": "string",
+                                  "serialized_name": "Duration"
                                 }
                               }
                             }
@@ -2515,6 +2699,29 @@
                         }
                       }
                     }
+                  },
+                  "composition": {
+                    "type": "list",
+                    "serialized_name": "Composition",
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "time_span": {
+                          "type": "structure",
+                          "serialized_name": "TimeSpan",
+                          "members": {
+                            "start_time": {
+                              "type": "string",
+                              "serialized_name": "StartTime"
+                            },
+                            "duration": {
+                              "type": "string",
+                              "serialized_name": "Duration"
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -2622,6 +2829,29 @@
                               "album_art_format": {
                                 "type": "string",
                                 "serialized_name": "AlbumArtFormat"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "composition": {
+                      "type": "list",
+                      "serialized_name": "Composition",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "time_span": {
+                            "type": "structure",
+                            "serialized_name": "TimeSpan",
+                            "members": {
+                              "start_time": {
+                                "type": "string",
+                                "serialized_name": "StartTime"
+                              },
+                              "duration": {
+                                "type": "string",
+                                "serialized_name": "Duration"
                               }
                             }
                           }

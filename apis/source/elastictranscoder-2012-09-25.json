@@ -265,6 +265,37 @@
                   }
                 },
                 "documentation": "\n        <p>Information about the album art that you want Elastic Transcoder to add to the file during\n            transcoding. You can specify up to twenty album artworks for each output. Settings for each\n            artwork must be defined in the job for the current output.</p>\n   "
+              },
+              "Composition": {
+                "shape_name": "Composition",
+                "type": "list",
+                "members": {
+                  "shape_name": "Clip",
+                  "type": "structure",
+                  "members": {
+                    "TimeSpan": {
+                      "shape_name": "TimeSpan",
+                      "type": "structure",
+                      "members": {
+                        "StartTime": {
+                          "shape_name": "Time",
+                          "type": "string",
+                          "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                          "documentation": "\n       <p>The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS \n       (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). \n       If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.</p>\n   "
+                        },
+                        "Duration": {
+                          "shape_name": "Time",
+                          "type": "string",
+                          "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                          "documentation": "\n       <p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n       <p>Settings that determine when a clip begins and how long it lasts.</p>\n   "
+                    }
+                  },
+                  "documentation": "\n       <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>\n   "
+                },
+                "documentation": "\n       <p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>\n   "
               }
             },
             "documentation": "\n        <p>The <code>CreateJobOutput</code> structure.</p>\n    "
@@ -396,6 +427,37 @@
                     }
                   },
                   "documentation": "\n        <p>Information about the album art that you want Elastic Transcoder to add to the file during\n            transcoding. You can specify up to twenty album artworks for each output. Settings for each\n            artwork must be defined in the job for the current output.</p>\n   "
+                },
+                "Composition": {
+                  "shape_name": "Composition",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "Clip",
+                    "type": "structure",
+                    "members": {
+                      "TimeSpan": {
+                        "shape_name": "TimeSpan",
+                        "type": "structure",
+                        "members": {
+                          "StartTime": {
+                            "shape_name": "Time",
+                            "type": "string",
+                            "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                            "documentation": "\n       <p>The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS \n       (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). \n       If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.</p>\n   "
+                          },
+                          "Duration": {
+                            "shape_name": "Time",
+                            "type": "string",
+                            "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                            "documentation": "\n       <p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>\n   "
+                          }
+                        },
+                        "documentation": "\n       <p>Settings that determine when a clip begins and how long it lasts.</p>\n   "
+                      }
+                    },
+                    "documentation": "\n       <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>\n   "
+                  },
+                  "documentation": "\n       <p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>\n   "
                 }
               },
               "documentation": "\n        <p>The <code>CreateJobOutput</code> structure.</p>\n    "
@@ -673,6 +735,37 @@
                       }
                     },
                     "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
+                  },
+                  "Composition": {
+                    "shape_name": "Composition",
+                    "type": "list",
+                    "members": {
+                      "shape_name": "Clip",
+                      "type": "structure",
+                      "members": {
+                        "TimeSpan": {
+                          "shape_name": "TimeSpan",
+                          "type": "structure",
+                          "members": {
+                            "StartTime": {
+                              "shape_name": "Time",
+                              "type": "string",
+                              "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                              "documentation": "\n       <p>The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS \n       (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). \n       If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.</p>\n   "
+                            },
+                            "Duration": {
+                              "shape_name": "Time",
+                              "type": "string",
+                              "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                              "documentation": "\n       <p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>\n   "
+                            }
+                          },
+                          "documentation": "\n       <p>Settings that determine when a clip begins and how long it lasts.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n       <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>\n   "
+                    },
+                    "documentation": "\n       <p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>\n   "
                   }
                 },
                 "documentation": "\n        <p>If you specified one output for a job, information about that output. If you specified\n            multiple outputs for a job, the Output object lists information about the first output.\n            This duplicates the information that is listed for the first output in the Outputs\n            object.</p>\n        <p><important>Outputs recommended instead.</important> A section of the request or response\n            body that provides information about the transcoded (target) file. </p>\n    "
@@ -837,6 +930,37 @@
                         }
                       },
                       "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
+                    },
+                    "Composition": {
+                      "shape_name": "Composition",
+                      "type": "list",
+                      "members": {
+                        "shape_name": "Clip",
+                        "type": "structure",
+                        "members": {
+                          "TimeSpan": {
+                            "shape_name": "TimeSpan",
+                            "type": "structure",
+                            "members": {
+                              "StartTime": {
+                                "shape_name": "Time",
+                                "type": "string",
+                                "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                "documentation": "\n       <p>The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS \n       (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). \n       If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.</p>\n   "
+                              },
+                              "Duration": {
+                                "shape_name": "Time",
+                                "type": "string",
+                                "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                "documentation": "\n       <p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>\n   "
+                              }
+                            },
+                            "documentation": "\n       <p>Settings that determine when a clip begins and how long it lasts.</p>\n   "
+                          }
+                        },
+                        "documentation": "\n       <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>\n   "
+                      },
+                      "documentation": "\n       <p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>\n   "
                     }
                   },
                   "documentation": "\n        <p><important>Outputs recommended instead.</important>If you specified one output for a job,\n            information about that output. If you specified multiple outputs for a job, the\n                <code>Output</code> object lists information about the first output. This duplicates\n            the information that is listed for the first output in the <code>Outputs</code>\n            object.</p>\n    "
@@ -1449,7 +1573,7 @@
                   "documentation": null
                 },
                 "max_length": 30,
-                "documentation": "\n        <p>\n            <b>Profile</b>\n        </p>\n        <p>The H.264 profile that you want to use for the output file. Elastic Transcoder supports the following\n            profiles:</p>\n        <ul>\n            <li>\n<code>baseline</code>: The profile most commonly used for videoconferencing and for\n                mobile applications.</li>\n            <li>\n<code>main</code>: The profile used for standard-definition digital TV\n                broadcasts.</li>\n            <li>\n<code>high</code>: The profile used for high-definition digital TV broadcasts and\n                for Blu-ray discs.</li>\n        </ul>\n        <p>\n            <b>Level (H.264 Only)</b>\n        </p>\n        <p>The H.264 level that you want to use for the output file. Elastic Transcoder supports the following\n            levels:</p>\n        <p><code>1</code>, <code>1b</code>, <code>1.1</code>, <code>1.2</code>, <code>1.3</code>,\n                <code>2</code>, <code>2.1</code>, <code>2.2</code>, <code>3</code>,\n            <code>3.1</code>, <code>3.2</code>, <code>4</code>, <code>4.1</code></p>\n        <p>\n            <b>MaxReferenceFrames (H.264 Only)</b>\n        </p>\n        <p>Applicable only when the value of Video:Codec is H.264. The maximum number of previously\n            decoded frames to use as a reference for decoding future frames. Valid values are\n            integers 0 through 16, but we recommend that you not use a value greater than the\n            following:</p>\n        <p>\n            <code>Min(Floor(Maximum decoded picture buffer in macroblocks * 256 / (Width in pixels *\n                Height in pixels)), 16)</code>\n        </p>\n        <p>where <i>Width in pixels</i> and <i>Height in pixels</i> represent either MaxWidth and\n            MaxHeight, or Resolution. <i>Maximum decoded picture buffer in macroblocks</i> depends\n            on the value of the <code>Level</code> object. See the list below. (A macroblock is a\n            block of pixels measuring 16x16.) </p>\n        <ul>\n            <li>1 - 396</li>\n            <li>1b - 396</li>\n            <li>1.1 - 900</li>\n            <li>1.2 - 2376</li>\n            <li>1.3 - 2376</li>\n            <li>2 - 2376</li>\n            <li>2.1 - 4752</li>\n            <li>2.2 - 8100</li>\n            <li>3 - 8100</li>\n            <li>3.1 - 18000</li>\n            <li>3.2 - 20480</li>\n            <li>4 - 32768</li>\n            <li>4.1 - 32768</li>\n        </ul>\n        <p>\n            <b>MaxBitRate</b>\n        </p>\n        <p>The maximum number of bits per second in a video buffer; the size of the buffer is\n            specified by <code>BufferSize</code>. Specify a value between 16 and 62,500. You can\n            reduce the bandwidth required to stream a video by reducing the maximum bit rate, but\n            this also reduces the quality of the video.</p>\n        <p>\n            <b>BufferSize</b>\n        </p>\n        <p>The maximum number of bits in any x seconds of the output video. This window is commonly\n            10 seconds, the standard segment duration when you&#x2019;re using MPEG-TS for the container\n            type of the output video. Specify an integer greater than 0. If you specify\n                <code>MaxBitRate</code> and omit <code>BufferSize</code>, Elastic Transcoder sets\n                <code>BufferSize</code> to 10 times the value of <code>MaxBitRate</code>.</p>\n    "
+                "documentation": "\n        <p>\n            <b>Profile</b>\n        </p>\n        <p>The H.264 profile that you want to use for the output file. Elastic Transcoder supports the following\n            profiles:</p>\n        <ul>\n            <li>\n<code>baseline</code>: The profile most commonly used for videoconferencing and for\n                mobile applications.</li>\n            <li>\n<code>main</code>: The profile used for standard-definition digital TV\n                broadcasts.</li>\n            <li>\n<code>high</code>: The profile used for high-definition digital TV broadcasts and\n                for Blu-ray discs.</li>\n        </ul>\n        <p>\n            <b>Level (H.264 Only)</b>\n        </p>\n        <p>The H.264 level that you want to use for the output file. Elastic Transcoder supports the following\n            levels:</p>\n        <p><code>1</code>, <code>1b</code>, <code>1.1</code>, <code>1.2</code>, <code>1.3</code>,\n                <code>2</code>, <code>2.1</code>, <code>2.2</code>, <code>3</code>,\n            <code>3.1</code>, <code>3.2</code>, <code>4</code>, <code>4.1</code></p>\n        <p>\n            <b>MaxReferenceFrames (H.264 Only)</b>\n        </p>\n        <p>Applicable only when the value of Video:Codec is H.264. The maximum number of previously\n            decoded frames to use as a reference for decoding future frames. Valid values are\n            integers 0 through 16, but we recommend that you not use a value greater than the\n            following:</p>\n        <p>\n            <code>Min(Floor(Maximum decoded picture buffer in macroblocks * 256 / (Width in pixels *\n                Height in pixels)), 16)</code>\n        </p>\n        <p>where <i>Width in pixels</i> and <i>Height in pixels</i> represent either MaxWidth and\n            MaxHeight, or Resolution. <i>Maximum decoded picture buffer in macroblocks</i> depends\n            on the value of the <code>Level</code> object. See the list below. (A macroblock is a\n            block of pixels measuring 16x16.) </p>\n        <ul>\n            <li>1 - 396</li>\n            <li>1b - 396</li>\n            <li>1.1 - 900</li>\n            <li>1.2 - 2376</li>\n            <li>1.3 - 2376</li>\n            <li>2 - 2376</li>\n            <li>2.1 - 4752</li>\n            <li>2.2 - 8100</li>\n            <li>3 - 8100</li>\n            <li>3.1 - 18000</li>\n            <li>3.2 - 20480</li>\n            <li>4 - 32768</li>\n            <li>4.1 - 32768</li>\n        </ul>\n        <p>\n            <b>MaxBitRate</b>\n        </p>\n        <p>The maximum number of bits per second in a video buffer; the size of the buffer is\n            specified by <code>BufferSize</code>. Specify a value between 16 and 62,500. You can\n            reduce the bandwidth required to stream a video by reducing the maximum bit rate, but\n            this also reduces the quality of the video.</p>\n        <p>\n            <b>BufferSize</b>\n        </p>\n        <p>The maximum number of bits in any x seconds of the output video. This window is commonly\n            10 seconds, the standard segment duration when you're using MPEG-TS for the container\n            type of the output video. Specify an integer greater than 0. If you specify\n                <code>MaxBitRate</code> and omit <code>BufferSize</code>, Elastic Transcoder sets\n                <code>BufferSize</code> to 10 times the value of <code>MaxBitRate</code>.</p>\n    "
               },
               "KeyframesMaxDist": {
                 "shape_name": "KeyframesMaxDist",
@@ -1781,7 +1905,7 @@
                       "documentation": null
                     },
                     "max_length": 30,
-                    "documentation": "\n        <p>\n            <b>Profile</b>\n        </p>\n        <p>The H.264 profile that you want to use for the output file. Elastic Transcoder supports the following\n            profiles:</p>\n        <ul>\n            <li>\n<code>baseline</code>: The profile most commonly used for videoconferencing and for\n                mobile applications.</li>\n            <li>\n<code>main</code>: The profile used for standard-definition digital TV\n                broadcasts.</li>\n            <li>\n<code>high</code>: The profile used for high-definition digital TV broadcasts and\n                for Blu-ray discs.</li>\n        </ul>\n        <p>\n            <b>Level (H.264 Only)</b>\n        </p>\n        <p>The H.264 level that you want to use for the output file. Elastic Transcoder supports the following\n            levels:</p>\n        <p><code>1</code>, <code>1b</code>, <code>1.1</code>, <code>1.2</code>, <code>1.3</code>,\n                <code>2</code>, <code>2.1</code>, <code>2.2</code>, <code>3</code>,\n            <code>3.1</code>, <code>3.2</code>, <code>4</code>, <code>4.1</code></p>\n        <p>\n            <b>MaxReferenceFrames (H.264 Only)</b>\n        </p>\n        <p>Applicable only when the value of Video:Codec is H.264. The maximum number of previously\n            decoded frames to use as a reference for decoding future frames. Valid values are\n            integers 0 through 16, but we recommend that you not use a value greater than the\n            following:</p>\n        <p>\n            <code>Min(Floor(Maximum decoded picture buffer in macroblocks * 256 / (Width in pixels *\n                Height in pixels)), 16)</code>\n        </p>\n        <p>where <i>Width in pixels</i> and <i>Height in pixels</i> represent either MaxWidth and\n            MaxHeight, or Resolution. <i>Maximum decoded picture buffer in macroblocks</i> depends\n            on the value of the <code>Level</code> object. See the list below. (A macroblock is a\n            block of pixels measuring 16x16.) </p>\n        <ul>\n            <li>1 - 396</li>\n            <li>1b - 396</li>\n            <li>1.1 - 900</li>\n            <li>1.2 - 2376</li>\n            <li>1.3 - 2376</li>\n            <li>2 - 2376</li>\n            <li>2.1 - 4752</li>\n            <li>2.2 - 8100</li>\n            <li>3 - 8100</li>\n            <li>3.1 - 18000</li>\n            <li>3.2 - 20480</li>\n            <li>4 - 32768</li>\n            <li>4.1 - 32768</li>\n        </ul>\n        <p>\n            <b>MaxBitRate</b>\n        </p>\n        <p>The maximum number of bits per second in a video buffer; the size of the buffer is\n            specified by <code>BufferSize</code>. Specify a value between 16 and 62,500. You can\n            reduce the bandwidth required to stream a video by reducing the maximum bit rate, but\n            this also reduces the quality of the video.</p>\n        <p>\n            <b>BufferSize</b>\n        </p>\n        <p>The maximum number of bits in any x seconds of the output video. This window is commonly\n            10 seconds, the standard segment duration when you&#x2019;re using MPEG-TS for the container\n            type of the output video. Specify an integer greater than 0. If you specify\n                <code>MaxBitRate</code> and omit <code>BufferSize</code>, Elastic Transcoder sets\n                <code>BufferSize</code> to 10 times the value of <code>MaxBitRate</code>.</p>\n    "
+                    "documentation": "\n        <p>\n            <b>Profile</b>\n        </p>\n        <p>The H.264 profile that you want to use for the output file. Elastic Transcoder supports the following\n            profiles:</p>\n        <ul>\n            <li>\n<code>baseline</code>: The profile most commonly used for videoconferencing and for\n                mobile applications.</li>\n            <li>\n<code>main</code>: The profile used for standard-definition digital TV\n                broadcasts.</li>\n            <li>\n<code>high</code>: The profile used for high-definition digital TV broadcasts and\n                for Blu-ray discs.</li>\n        </ul>\n        <p>\n            <b>Level (H.264 Only)</b>\n        </p>\n        <p>The H.264 level that you want to use for the output file. Elastic Transcoder supports the following\n            levels:</p>\n        <p><code>1</code>, <code>1b</code>, <code>1.1</code>, <code>1.2</code>, <code>1.3</code>,\n                <code>2</code>, <code>2.1</code>, <code>2.2</code>, <code>3</code>,\n            <code>3.1</code>, <code>3.2</code>, <code>4</code>, <code>4.1</code></p>\n        <p>\n            <b>MaxReferenceFrames (H.264 Only)</b>\n        </p>\n        <p>Applicable only when the value of Video:Codec is H.264. The maximum number of previously\n            decoded frames to use as a reference for decoding future frames. Valid values are\n            integers 0 through 16, but we recommend that you not use a value greater than the\n            following:</p>\n        <p>\n            <code>Min(Floor(Maximum decoded picture buffer in macroblocks * 256 / (Width in pixels *\n                Height in pixels)), 16)</code>\n        </p>\n        <p>where <i>Width in pixels</i> and <i>Height in pixels</i> represent either MaxWidth and\n            MaxHeight, or Resolution. <i>Maximum decoded picture buffer in macroblocks</i> depends\n            on the value of the <code>Level</code> object. See the list below. (A macroblock is a\n            block of pixels measuring 16x16.) </p>\n        <ul>\n            <li>1 - 396</li>\n            <li>1b - 396</li>\n            <li>1.1 - 900</li>\n            <li>1.2 - 2376</li>\n            <li>1.3 - 2376</li>\n            <li>2 - 2376</li>\n            <li>2.1 - 4752</li>\n            <li>2.2 - 8100</li>\n            <li>3 - 8100</li>\n            <li>3.1 - 18000</li>\n            <li>3.2 - 20480</li>\n            <li>4 - 32768</li>\n            <li>4.1 - 32768</li>\n        </ul>\n        <p>\n            <b>MaxBitRate</b>\n        </p>\n        <p>The maximum number of bits per second in a video buffer; the size of the buffer is\n            specified by <code>BufferSize</code>. Specify a value between 16 and 62,500. You can\n            reduce the bandwidth required to stream a video by reducing the maximum bit rate, but\n            this also reduces the quality of the video.</p>\n        <p>\n            <b>BufferSize</b>\n        </p>\n        <p>The maximum number of bits in any x seconds of the output video. This window is commonly\n            10 seconds, the standard segment duration when you're using MPEG-TS for the container\n            type of the output video. Specify an integer greater than 0. If you specify\n                <code>MaxBitRate</code> and omit <code>BufferSize</code>, Elastic Transcoder sets\n                <code>BufferSize</code> to 10 times the value of <code>MaxBitRate</code>.</p>\n    "
                   },
                   "KeyframesMaxDist": {
                     "shape_name": "KeyframesMaxDist",
@@ -2441,6 +2565,37 @@
                         }
                       },
                       "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
+                    },
+                    "Composition": {
+                      "shape_name": "Composition",
+                      "type": "list",
+                      "members": {
+                        "shape_name": "Clip",
+                        "type": "structure",
+                        "members": {
+                          "TimeSpan": {
+                            "shape_name": "TimeSpan",
+                            "type": "structure",
+                            "members": {
+                              "StartTime": {
+                                "shape_name": "Time",
+                                "type": "string",
+                                "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                "documentation": "\n       <p>The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS \n       (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). \n       If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.</p>\n   "
+                              },
+                              "Duration": {
+                                "shape_name": "Time",
+                                "type": "string",
+                                "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                "documentation": "\n       <p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>\n   "
+                              }
+                            },
+                            "documentation": "\n       <p>Settings that determine when a clip begins and how long it lasts.</p>\n   "
+                          }
+                        },
+                        "documentation": "\n       <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>\n   "
+                      },
+                      "documentation": "\n       <p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>\n   "
                     }
                   },
                   "documentation": "\n        <p>If you specified one output for a job, information about that output. If you specified\n            multiple outputs for a job, the Output object lists information about the first output.\n            This duplicates the information that is listed for the first output in the Outputs\n            object.</p>\n        <p><important>Outputs recommended instead.</important> A section of the request or response\n            body that provides information about the transcoded (target) file. </p>\n    "
@@ -2605,6 +2760,37 @@
                           }
                         },
                         "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
+                      },
+                      "Composition": {
+                        "shape_name": "Composition",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "Clip",
+                          "type": "structure",
+                          "members": {
+                            "TimeSpan": {
+                              "shape_name": "TimeSpan",
+                              "type": "structure",
+                              "members": {
+                                "StartTime": {
+                                  "shape_name": "Time",
+                                  "type": "string",
+                                  "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                  "documentation": "\n       <p>The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS \n       (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). \n       If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.</p>\n   "
+                                },
+                                "Duration": {
+                                  "shape_name": "Time",
+                                  "type": "string",
+                                  "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                  "documentation": "\n       <p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>\n   "
+                                }
+                              },
+                              "documentation": "\n       <p>Settings that determine when a clip begins and how long it lasts.</p>\n   "
+                            }
+                          },
+                          "documentation": "\n       <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>\n   "
+                        },
+                        "documentation": "\n       <p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>\n   "
                       }
                     },
                     "documentation": "\n        <p><important>Outputs recommended instead.</important>If you specified one output for a job,\n            information about that output. If you specified multiple outputs for a job, the\n                <code>Output</code> object lists information about the first output. This duplicates\n            the information that is listed for the first output in the <code>Outputs</code>\n            object.</p>\n    "
@@ -2986,6 +3172,37 @@
                         }
                       },
                       "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
+                    },
+                    "Composition": {
+                      "shape_name": "Composition",
+                      "type": "list",
+                      "members": {
+                        "shape_name": "Clip",
+                        "type": "structure",
+                        "members": {
+                          "TimeSpan": {
+                            "shape_name": "TimeSpan",
+                            "type": "structure",
+                            "members": {
+                              "StartTime": {
+                                "shape_name": "Time",
+                                "type": "string",
+                                "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                "documentation": "\n       <p>The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS \n       (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). \n       If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.</p>\n   "
+                              },
+                              "Duration": {
+                                "shape_name": "Time",
+                                "type": "string",
+                                "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                "documentation": "\n       <p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>\n   "
+                              }
+                            },
+                            "documentation": "\n       <p>Settings that determine when a clip begins and how long it lasts.</p>\n   "
+                          }
+                        },
+                        "documentation": "\n       <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>\n   "
+                      },
+                      "documentation": "\n       <p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>\n   "
                     }
                   },
                   "documentation": "\n        <p>If you specified one output for a job, information about that output. If you specified\n            multiple outputs for a job, the Output object lists information about the first output.\n            This duplicates the information that is listed for the first output in the Outputs\n            object.</p>\n        <p><important>Outputs recommended instead.</important> A section of the request or response\n            body that provides information about the transcoded (target) file. </p>\n    "
@@ -3150,6 +3367,37 @@
                           }
                         },
                         "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
+                      },
+                      "Composition": {
+                        "shape_name": "Composition",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "Clip",
+                          "type": "structure",
+                          "members": {
+                            "TimeSpan": {
+                              "shape_name": "TimeSpan",
+                              "type": "structure",
+                              "members": {
+                                "StartTime": {
+                                  "shape_name": "Time",
+                                  "type": "string",
+                                  "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                  "documentation": "\n       <p>The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS \n       (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). \n       If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.</p>\n   "
+                                },
+                                "Duration": {
+                                  "shape_name": "Time",
+                                  "type": "string",
+                                  "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                  "documentation": "\n       <p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>\n   "
+                                }
+                              },
+                              "documentation": "\n       <p>Settings that determine when a clip begins and how long it lasts.</p>\n   "
+                            }
+                          },
+                          "documentation": "\n       <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>\n   "
+                        },
+                        "documentation": "\n       <p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>\n   "
                       }
                     },
                     "documentation": "\n        <p><important>Outputs recommended instead.</important>If you specified one output for a job,\n            information about that output. If you specified multiple outputs for a job, the\n                <code>Output</code> object lists information about the first output. This duplicates\n            the information that is listed for the first output in the <code>Outputs</code>\n            object.</p>\n    "
@@ -3633,7 +3881,7 @@
                         "documentation": null
                       },
                       "max_length": 30,
-                      "documentation": "\n        <p>\n            <b>Profile</b>\n        </p>\n        <p>The H.264 profile that you want to use for the output file. Elastic Transcoder supports the following\n            profiles:</p>\n        <ul>\n            <li>\n<code>baseline</code>: The profile most commonly used for videoconferencing and for\n                mobile applications.</li>\n            <li>\n<code>main</code>: The profile used for standard-definition digital TV\n                broadcasts.</li>\n            <li>\n<code>high</code>: The profile used for high-definition digital TV broadcasts and\n                for Blu-ray discs.</li>\n        </ul>\n        <p>\n            <b>Level (H.264 Only)</b>\n        </p>\n        <p>The H.264 level that you want to use for the output file. Elastic Transcoder supports the following\n            levels:</p>\n        <p><code>1</code>, <code>1b</code>, <code>1.1</code>, <code>1.2</code>, <code>1.3</code>,\n                <code>2</code>, <code>2.1</code>, <code>2.2</code>, <code>3</code>,\n            <code>3.1</code>, <code>3.2</code>, <code>4</code>, <code>4.1</code></p>\n        <p>\n            <b>MaxReferenceFrames (H.264 Only)</b>\n        </p>\n        <p>Applicable only when the value of Video:Codec is H.264. The maximum number of previously\n            decoded frames to use as a reference for decoding future frames. Valid values are\n            integers 0 through 16, but we recommend that you not use a value greater than the\n            following:</p>\n        <p>\n            <code>Min(Floor(Maximum decoded picture buffer in macroblocks * 256 / (Width in pixels *\n                Height in pixels)), 16)</code>\n        </p>\n        <p>where <i>Width in pixels</i> and <i>Height in pixels</i> represent either MaxWidth and\n            MaxHeight, or Resolution. <i>Maximum decoded picture buffer in macroblocks</i> depends\n            on the value of the <code>Level</code> object. See the list below. (A macroblock is a\n            block of pixels measuring 16x16.) </p>\n        <ul>\n            <li>1 - 396</li>\n            <li>1b - 396</li>\n            <li>1.1 - 900</li>\n            <li>1.2 - 2376</li>\n            <li>1.3 - 2376</li>\n            <li>2 - 2376</li>\n            <li>2.1 - 4752</li>\n            <li>2.2 - 8100</li>\n            <li>3 - 8100</li>\n            <li>3.1 - 18000</li>\n            <li>3.2 - 20480</li>\n            <li>4 - 32768</li>\n            <li>4.1 - 32768</li>\n        </ul>\n        <p>\n            <b>MaxBitRate</b>\n        </p>\n        <p>The maximum number of bits per second in a video buffer; the size of the buffer is\n            specified by <code>BufferSize</code>. Specify a value between 16 and 62,500. You can\n            reduce the bandwidth required to stream a video by reducing the maximum bit rate, but\n            this also reduces the quality of the video.</p>\n        <p>\n            <b>BufferSize</b>\n        </p>\n        <p>The maximum number of bits in any x seconds of the output video. This window is commonly\n            10 seconds, the standard segment duration when you&#x2019;re using MPEG-TS for the container\n            type of the output video. Specify an integer greater than 0. If you specify\n                <code>MaxBitRate</code> and omit <code>BufferSize</code>, Elastic Transcoder sets\n                <code>BufferSize</code> to 10 times the value of <code>MaxBitRate</code>.</p>\n    "
+                      "documentation": "\n        <p>\n            <b>Profile</b>\n        </p>\n        <p>The H.264 profile that you want to use for the output file. Elastic Transcoder supports the following\n            profiles:</p>\n        <ul>\n            <li>\n<code>baseline</code>: The profile most commonly used for videoconferencing and for\n                mobile applications.</li>\n            <li>\n<code>main</code>: The profile used for standard-definition digital TV\n                broadcasts.</li>\n            <li>\n<code>high</code>: The profile used for high-definition digital TV broadcasts and\n                for Blu-ray discs.</li>\n        </ul>\n        <p>\n            <b>Level (H.264 Only)</b>\n        </p>\n        <p>The H.264 level that you want to use for the output file. Elastic Transcoder supports the following\n            levels:</p>\n        <p><code>1</code>, <code>1b</code>, <code>1.1</code>, <code>1.2</code>, <code>1.3</code>,\n                <code>2</code>, <code>2.1</code>, <code>2.2</code>, <code>3</code>,\n            <code>3.1</code>, <code>3.2</code>, <code>4</code>, <code>4.1</code></p>\n        <p>\n            <b>MaxReferenceFrames (H.264 Only)</b>\n        </p>\n        <p>Applicable only when the value of Video:Codec is H.264. The maximum number of previously\n            decoded frames to use as a reference for decoding future frames. Valid values are\n            integers 0 through 16, but we recommend that you not use a value greater than the\n            following:</p>\n        <p>\n            <code>Min(Floor(Maximum decoded picture buffer in macroblocks * 256 / (Width in pixels *\n                Height in pixels)), 16)</code>\n        </p>\n        <p>where <i>Width in pixels</i> and <i>Height in pixels</i> represent either MaxWidth and\n            MaxHeight, or Resolution. <i>Maximum decoded picture buffer in macroblocks</i> depends\n            on the value of the <code>Level</code> object. See the list below. (A macroblock is a\n            block of pixels measuring 16x16.) </p>\n        <ul>\n            <li>1 - 396</li>\n            <li>1b - 396</li>\n            <li>1.1 - 900</li>\n            <li>1.2 - 2376</li>\n            <li>1.3 - 2376</li>\n            <li>2 - 2376</li>\n            <li>2.1 - 4752</li>\n            <li>2.2 - 8100</li>\n            <li>3 - 8100</li>\n            <li>3.1 - 18000</li>\n            <li>3.2 - 20480</li>\n            <li>4 - 32768</li>\n            <li>4.1 - 32768</li>\n        </ul>\n        <p>\n            <b>MaxBitRate</b>\n        </p>\n        <p>The maximum number of bits per second in a video buffer; the size of the buffer is\n            specified by <code>BufferSize</code>. Specify a value between 16 and 62,500. You can\n            reduce the bandwidth required to stream a video by reducing the maximum bit rate, but\n            this also reduces the quality of the video.</p>\n        <p>\n            <b>BufferSize</b>\n        </p>\n        <p>The maximum number of bits in any x seconds of the output video. This window is commonly\n            10 seconds, the standard segment duration when you're using MPEG-TS for the container\n            type of the output video. Specify an integer greater than 0. If you specify\n                <code>MaxBitRate</code> and omit <code>BufferSize</code>, Elastic Transcoder sets\n                <code>BufferSize</code> to 10 times the value of <code>MaxBitRate</code>.</p>\n    "
                     },
                     "KeyframesMaxDist": {
                       "shape_name": "KeyframesMaxDist",
@@ -4125,6 +4373,37 @@
                       }
                     },
                     "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
+                  },
+                  "Composition": {
+                    "shape_name": "Composition",
+                    "type": "list",
+                    "members": {
+                      "shape_name": "Clip",
+                      "type": "structure",
+                      "members": {
+                        "TimeSpan": {
+                          "shape_name": "TimeSpan",
+                          "type": "structure",
+                          "members": {
+                            "StartTime": {
+                              "shape_name": "Time",
+                              "type": "string",
+                              "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                              "documentation": "\n       <p>The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS \n       (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). \n       If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.</p>\n   "
+                            },
+                            "Duration": {
+                              "shape_name": "Time",
+                              "type": "string",
+                              "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                              "documentation": "\n       <p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>\n   "
+                            }
+                          },
+                          "documentation": "\n       <p>Settings that determine when a clip begins and how long it lasts.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n       <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>\n   "
+                    },
+                    "documentation": "\n       <p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>\n   "
                   }
                 },
                 "documentation": "\n        <p>If you specified one output for a job, information about that output. If you specified\n            multiple outputs for a job, the Output object lists information about the first output.\n            This duplicates the information that is listed for the first output in the Outputs\n            object.</p>\n        <p><important>Outputs recommended instead.</important> A section of the request or response\n            body that provides information about the transcoded (target) file. </p>\n    "
@@ -4289,6 +4568,37 @@
                         }
                       },
                       "documentation": "\n        <p>The album art to be associated with the output file, if any.</p>\n    "
+                    },
+                    "Composition": {
+                      "shape_name": "Composition",
+                      "type": "list",
+                      "members": {
+                        "shape_name": "Clip",
+                        "type": "structure",
+                        "members": {
+                          "TimeSpan": {
+                            "shape_name": "TimeSpan",
+                            "type": "structure",
+                            "members": {
+                              "StartTime": {
+                                "shape_name": "Time",
+                                "type": "string",
+                                "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                "documentation": "\n       <p>The place in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS \n       (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value: 86399.999). \n       If you don't specify a value, Elastic Transcoder starts at the beginning of the input file.</p>\n   "
+                              },
+                              "Duration": {
+                                "shape_name": "Time",
+                                "type": "string",
+                                "pattern": "(^\\d{1,5}([.]\\d{0,3})?$)|(^(((([0-1]?\\d)|(2[0-3])):)?(([0-5]?\\d):))?(([0-5]?\\d))([.]\\d{0,3})?$)",
+                                "documentation": "\n       <p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>\n   "
+                              }
+                            },
+                            "documentation": "\n       <p>Settings that determine when a clip begins and how long it lasts.</p>\n   "
+                          }
+                        },
+                        "documentation": "\n       <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>\n   "
+                      },
+                      "documentation": "\n       <p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>\n   "
                     }
                   },
                   "documentation": "\n        <p><important>Outputs recommended instead.</important>If you specified one output for a job,\n            information about that output. If you specified multiple outputs for a job, the\n                <code>Output</code> object lists information about the first output. This duplicates\n            the information that is listed for the first output in the <code>Outputs</code>\n            object.</p>\n    "
@@ -4777,7 +5087,7 @@
                       "documentation": null
                     },
                     "max_length": 30,
-                    "documentation": "\n        <p>\n            <b>Profile</b>\n        </p>\n        <p>The H.264 profile that you want to use for the output file. Elastic Transcoder supports the following\n            profiles:</p>\n        <ul>\n            <li>\n<code>baseline</code>: The profile most commonly used for videoconferencing and for\n                mobile applications.</li>\n            <li>\n<code>main</code>: The profile used for standard-definition digital TV\n                broadcasts.</li>\n            <li>\n<code>high</code>: The profile used for high-definition digital TV broadcasts and\n                for Blu-ray discs.</li>\n        </ul>\n        <p>\n            <b>Level (H.264 Only)</b>\n        </p>\n        <p>The H.264 level that you want to use for the output file. Elastic Transcoder supports the following\n            levels:</p>\n        <p><code>1</code>, <code>1b</code>, <code>1.1</code>, <code>1.2</code>, <code>1.3</code>,\n                <code>2</code>, <code>2.1</code>, <code>2.2</code>, <code>3</code>,\n            <code>3.1</code>, <code>3.2</code>, <code>4</code>, <code>4.1</code></p>\n        <p>\n            <b>MaxReferenceFrames (H.264 Only)</b>\n        </p>\n        <p>Applicable only when the value of Video:Codec is H.264. The maximum number of previously\n            decoded frames to use as a reference for decoding future frames. Valid values are\n            integers 0 through 16, but we recommend that you not use a value greater than the\n            following:</p>\n        <p>\n            <code>Min(Floor(Maximum decoded picture buffer in macroblocks * 256 / (Width in pixels *\n                Height in pixels)), 16)</code>\n        </p>\n        <p>where <i>Width in pixels</i> and <i>Height in pixels</i> represent either MaxWidth and\n            MaxHeight, or Resolution. <i>Maximum decoded picture buffer in macroblocks</i> depends\n            on the value of the <code>Level</code> object. See the list below. (A macroblock is a\n            block of pixels measuring 16x16.) </p>\n        <ul>\n            <li>1 - 396</li>\n            <li>1b - 396</li>\n            <li>1.1 - 900</li>\n            <li>1.2 - 2376</li>\n            <li>1.3 - 2376</li>\n            <li>2 - 2376</li>\n            <li>2.1 - 4752</li>\n            <li>2.2 - 8100</li>\n            <li>3 - 8100</li>\n            <li>3.1 - 18000</li>\n            <li>3.2 - 20480</li>\n            <li>4 - 32768</li>\n            <li>4.1 - 32768</li>\n        </ul>\n        <p>\n            <b>MaxBitRate</b>\n        </p>\n        <p>The maximum number of bits per second in a video buffer; the size of the buffer is\n            specified by <code>BufferSize</code>. Specify a value between 16 and 62,500. You can\n            reduce the bandwidth required to stream a video by reducing the maximum bit rate, but\n            this also reduces the quality of the video.</p>\n        <p>\n            <b>BufferSize</b>\n        </p>\n        <p>The maximum number of bits in any x seconds of the output video. This window is commonly\n            10 seconds, the standard segment duration when you&#x2019;re using MPEG-TS for the container\n            type of the output video. Specify an integer greater than 0. If you specify\n                <code>MaxBitRate</code> and omit <code>BufferSize</code>, Elastic Transcoder sets\n                <code>BufferSize</code> to 10 times the value of <code>MaxBitRate</code>.</p>\n    "
+                    "documentation": "\n        <p>\n            <b>Profile</b>\n        </p>\n        <p>The H.264 profile that you want to use for the output file. Elastic Transcoder supports the following\n            profiles:</p>\n        <ul>\n            <li>\n<code>baseline</code>: The profile most commonly used for videoconferencing and for\n                mobile applications.</li>\n            <li>\n<code>main</code>: The profile used for standard-definition digital TV\n                broadcasts.</li>\n            <li>\n<code>high</code>: The profile used for high-definition digital TV broadcasts and\n                for Blu-ray discs.</li>\n        </ul>\n        <p>\n            <b>Level (H.264 Only)</b>\n        </p>\n        <p>The H.264 level that you want to use for the output file. Elastic Transcoder supports the following\n            levels:</p>\n        <p><code>1</code>, <code>1b</code>, <code>1.1</code>, <code>1.2</code>, <code>1.3</code>,\n                <code>2</code>, <code>2.1</code>, <code>2.2</code>, <code>3</code>,\n            <code>3.1</code>, <code>3.2</code>, <code>4</code>, <code>4.1</code></p>\n        <p>\n            <b>MaxReferenceFrames (H.264 Only)</b>\n        </p>\n        <p>Applicable only when the value of Video:Codec is H.264. The maximum number of previously\n            decoded frames to use as a reference for decoding future frames. Valid values are\n            integers 0 through 16, but we recommend that you not use a value greater than the\n            following:</p>\n        <p>\n            <code>Min(Floor(Maximum decoded picture buffer in macroblocks * 256 / (Width in pixels *\n                Height in pixels)), 16)</code>\n        </p>\n        <p>where <i>Width in pixels</i> and <i>Height in pixels</i> represent either MaxWidth and\n            MaxHeight, or Resolution. <i>Maximum decoded picture buffer in macroblocks</i> depends\n            on the value of the <code>Level</code> object. See the list below. (A macroblock is a\n            block of pixels measuring 16x16.) </p>\n        <ul>\n            <li>1 - 396</li>\n            <li>1b - 396</li>\n            <li>1.1 - 900</li>\n            <li>1.2 - 2376</li>\n            <li>1.3 - 2376</li>\n            <li>2 - 2376</li>\n            <li>2.1 - 4752</li>\n            <li>2.2 - 8100</li>\n            <li>3 - 8100</li>\n            <li>3.1 - 18000</li>\n            <li>3.2 - 20480</li>\n            <li>4 - 32768</li>\n            <li>4.1 - 32768</li>\n        </ul>\n        <p>\n            <b>MaxBitRate</b>\n        </p>\n        <p>The maximum number of bits per second in a video buffer; the size of the buffer is\n            specified by <code>BufferSize</code>. Specify a value between 16 and 62,500. You can\n            reduce the bandwidth required to stream a video by reducing the maximum bit rate, but\n            this also reduces the quality of the video.</p>\n        <p>\n            <b>BufferSize</b>\n        </p>\n        <p>The maximum number of bits in any x seconds of the output video. This window is commonly\n            10 seconds, the standard segment duration when you're using MPEG-TS for the container\n            type of the output video. Specify an integer greater than 0. If you specify\n                <code>MaxBitRate</code> and omit <code>BufferSize</code>, Elastic Transcoder sets\n                <code>BufferSize</code> to 10 times the value of <code>MaxBitRate</code>.</p>\n    "
                   },
                   "KeyframesMaxDist": {
                     "shape_name": "KeyframesMaxDist",
