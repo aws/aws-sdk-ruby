@@ -56,9 +56,6 @@ module AWS
     #
     #     table.provision_throughput :read_capacity_units => 100, :write_capacity_units => 100
     #
-    # Please note that provisioned throughput can be decreased only once
-    # within a 24 hour period.
-    #
     # ## Table Status
     #
     # When you create or update a table the changes can take some time to
