@@ -102,11 +102,7 @@ module AWS
           config.s3_endpoint == 's3.amazonaws.com' or
           options[:location_constraint]
         then
-          constraint =
-            case config.s3_endpoint
-            when 's3-eu-west-1.amazonaws.com' then 'EU'
-            when /^s3-(.*)\.amazonaws\.com$/ then $1
-            end
+          constraint = guess_constraint
           options[:location_constraint] = constraint if constraint
         end
 
@@ -148,13 +144,19 @@ module AWS
         nil
       end
 
-      # @api private
       private
+
       def bucket_named name, owner = nil
         S3::Bucket.new(name.to_s, :owner => owner, :config => config)
       end
 
-    end
+      def guess_constraint
+        case config.s3_endpoint
+        when 's3-eu-west-1.amazonaws.com' then 'EU'
+        when /^s3[.-](.*)\.amazonaws\.com/ then $1
+        end
+      end
 
+    end
   end
 end
