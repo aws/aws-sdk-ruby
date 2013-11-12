@@ -540,7 +540,7 @@ module AWS
 
         response = client.send_message_batch(client_opts)
         
-        failed = batch_failures(entries, response)
+        failed = batch_failures(entries, response, true)
 
         checksum_failed = verify_send_message_batch_checksum entries, response
         
@@ -682,7 +682,7 @@ module AWS
       end
 
       protected
-      def batch_failures entries, response
+      def batch_failures entries, response, include_batch_index=false
         response[:failed].inject([]) do |failures, failure|
 
           entry = entries.find{|e| e[:id] == failure[:id] }
@@ -693,6 +693,14 @@ module AWS
             :sender_fault => failure[:sender_fault],
           }
 
+          if include_batch_index
+            details[:batch_index] = failure[:id].to_i
+          end
+          
+          if message_body = entry[:message_body]
+            details[:message_body] = message_body
+          end
+          
           if handle = entry[:receipt_handle]
             details[:receipt_handle] = handle
           end

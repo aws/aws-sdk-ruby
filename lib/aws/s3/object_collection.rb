@@ -80,7 +80,7 @@ module AWS
       # @see S3Object#write
       #
       # @param [String] key Where in S3 to write the object.
-      # @return [S3Object]
+      # @return (see S3Object#write)
       def create key, *args, &block
         self[key].write(*args, &block)
       end

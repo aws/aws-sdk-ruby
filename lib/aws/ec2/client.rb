@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::QueryClient
 
-      API_VERSION = '2013-07-15'
+      API_VERSION = '2013-10-01'
 
       signature_version :Version2
 
@@ -62,10 +62,12 @@ module AWS
 
     end
 
-    class Client::V20130715 < Client
+    class Client::V20130815 < Client
+      define_client_methods('2013-08-15')
+    end
 
-      define_client_methods('2013-07-15')
-
+    class Client::V20131001 < Client
+      define_client_methods('2013-10-01')
     end
 
   end

@@ -552,7 +552,7 @@ module AWS
       #
       #   @option options :content_disposition [String] Specifies
       #     presentational information for the object.  See
-      #     http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec19.5.1
+      #     http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
       #
       #   @option options :content_encoding [String] Specifies what
       #     content encodings have been applied to the object and thus
@@ -809,6 +809,10 @@ module AWS
       # @option options [String] :content_type The content type of
       #   the copied object.  Defaults to the source object's content
       #   type.
+      #
+      # @option options [String] :content_disposition The presentational
+      #   information for the object. Defaults to the source object's
+      #   content disposition.
       #
       # @option options [Boolean] :reduced_redundancy (false) If true the
       #   object is stored with reduced redundancy in S3 for a lower cost.
@@ -1181,8 +1185,14 @@ module AWS
       # @option options [Boolean] :secure (true) Whether to generate a
       #   secure (HTTPS) URL or a plain HTTP url.
       #
-      # @option options [String] :content_type
-      # @option options [String] :content_md5
+      # @option options [String] :content_type Object content type for
+      #   HTTP PUT. When provided, has to be also added to the request 
+      #   header as a 'content-type' field
+      #
+      # @option options [String] :content_md5 Object MD5 hash for HTTP PUT.
+      #   When provided, has to be also added to the request header as a 
+      #   'content-md5' field
+      #
       # @option options [String] :endpoint Sets the hostname of the
       #   endpoint.
       #

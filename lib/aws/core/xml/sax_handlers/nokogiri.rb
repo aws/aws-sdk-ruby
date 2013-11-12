@@ -46,7 +46,7 @@ module AWS
           end
 
           def characters chars
-            text(chars)
+            set_text(chars)
           end
 
         end

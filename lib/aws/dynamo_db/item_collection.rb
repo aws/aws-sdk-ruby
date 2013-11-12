@@ -496,6 +496,12 @@ module AWS
         super(options, &block)
       end
 
+      def first(options = {})
+        each(options) do |item|
+          return item
+        end
+      end
+
       # Retrieves data about the items in the collection.  This method
       # works like {#each}, except that it returns or yields
       # {ItemData} instances instead of {Item} instances.  This is

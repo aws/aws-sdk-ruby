@@ -20,7 +20,7 @@ module AWS
 
       API_VERSION = '2011-02-01'
 
-      signature_version :Version2
+      signature_version :Version4, 'cloudsearch'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]

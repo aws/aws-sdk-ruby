@@ -71,6 +71,7 @@ module AWS
         if block_given?
           options[:data] = IOProxy.new(block)
         elsif data.is_a?(String)
+          data = data.dup if data.frozen?
           data.force_encoding("BINARY") if data.respond_to?(:force_encoding)
           options[:data] = StringIO.new(data)
         elsif data.is_a?(Pathname)

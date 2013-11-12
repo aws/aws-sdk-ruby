@@ -128,10 +128,14 @@ module AWS
           request.body = nil
         elsif payload = streaming_param # streaming request
           request.body_stream = params[payload]
-          request.headers['Content-Length'] = params[payload].size
+          request.headers['Content-Length'] = size(params[payload])
         else
           request.body = @serializer.serialize(params)
         end
+      end
+
+      def size(payload)
+        payload.respond_to?(:size) ? payload.size : File.size(payload.path)
       end
 
       def streaming_param

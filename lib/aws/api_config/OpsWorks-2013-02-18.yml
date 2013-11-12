@@ -16,6 +16,24 @@
 :target_prefix: OpsWorks_20130218.
 :api_version: '2013-02-18'
 :operations:
+- :name: AssignVolume
+  :method: :assign_volume
+  :inputs:
+    VolumeId:
+    - :string
+    - :required
+    InstanceId:
+    - :string
+  :outputs: {}
+- :name: AssociateElasticIp
+  :method: :associate_elastic_ip
+  :inputs:
+    ElasticIp:
+    - :string
+    - :required
+    InstanceId:
+    - :string
+  :outputs: {}
 - :name: AttachElasticLoadBalancer
   :method: :attach_elastic_load_balancer
   :inputs:
@@ -265,6 +283,8 @@
     - :boolean
     AutoAssignElasticIps:
     - :boolean
+    AutoAssignPublicIps:
+    - :boolean
     CustomRecipes:
     - :structure:
         Setup:
@@ -401,6 +421,20 @@
   :method: :delete_user_profile
   :inputs:
     IamUserArn:
+    - :string
+    - :required
+  :outputs: {}
+- :name: DeregisterElasticIp
+  :method: :deregister_elastic_ip
+  :inputs:
+    ElasticIp:
+    - :string
+    - :required
+  :outputs: {}
+- :name: DeregisterVolume
+  :method: :deregister_volume
+  :inputs:
+    VolumeId:
     - :string
     - :required
   :outputs: {}
@@ -596,6 +630,8 @@
   :inputs:
     InstanceId:
     - :string
+    StackId:
+    - :string
     Ips:
     - :list:
       - :string
@@ -615,6 +651,9 @@
           :type: :string
         Region:
           :sym: :region
+          :type: :string
+        InstanceId:
+          :sym: :instance_id
           :type: :string
 - :name: DescribeElasticLoadBalancers
   :method: :describe_elastic_load_balancers
@@ -760,7 +799,6 @@
   :inputs:
     StackId:
     - :string
-    - :required
     LayerIds:
     - :list:
       - :string
@@ -823,6 +861,9 @@
           :type: :boolean
         AutoAssignElasticIps:
           :sym: :auto_assign_elastic_ips
+          :type: :boolean
+        AutoAssignPublicIps:
+          :sym: :auto_assign_public_ips
           :type: :boolean
         DefaultRecipes:
           :sym: :default_recipes
@@ -1216,6 +1257,8 @@
   :inputs:
     InstanceId:
     - :string
+    StackId:
+    - :string
     RaidArrayId:
     - :string
     VolumeIds:
@@ -1269,6 +1312,13 @@
     - :string
     - :required
   :outputs: {}
+- :name: DisassociateElasticIp
+  :method: :disassociate_elastic_ip
+  :inputs:
+    ElasticIp:
+    - :string
+    - :required
+  :outputs: {}
 - :name: GetHostnameSuggestion
   :method: :get_hostname_suggestion
   :inputs:
@@ -1289,6 +1339,31 @@
     - :string
     - :required
   :outputs: {}
+- :name: RegisterElasticIp
+  :method: :register_elastic_ip
+  :inputs:
+    ElasticIp:
+    - :string
+    - :required
+    StackId:
+    - :string
+    - :required
+  :outputs:
+    ElasticIp:
+      :sym: :elastic_ip
+      :type: :string
+- :name: RegisterVolume
+  :method: :register_volume
+  :inputs:
+    Ec2VolumeId:
+    - :string
+    StackId:
+    - :string
+    - :required
+  :outputs:
+    VolumeId:
+      :sym: :volume_id
+      :type: :string
 - :name: SetLoadBasedAutoScaling
   :method: :set_load_based_auto_scaling
   :inputs:
@@ -1419,6 +1494,13 @@
     - :string
     - :required
   :outputs: {}
+- :name: UnassignVolume
+  :method: :unassign_volume
+  :inputs:
+    VolumeId:
+    - :string
+    - :required
+  :outputs: {}
 - :name: UpdateApp
   :method: :update_app
   :inputs:
@@ -1466,6 +1548,15 @@
         - :string
         :value:
         - :string
+  :outputs: {}
+- :name: UpdateElasticIp
+  :method: :update_elastic_ip
+  :inputs:
+    ElasticIp:
+    - :string
+    - :required
+    Name:
+    - :string
   :outputs: {}
 - :name: UpdateInstance
   :method: :update_instance
@@ -1534,6 +1625,8 @@
     EnableAutoHealing:
     - :boolean
     AutoAssignElasticIps:
+    - :boolean
+    AutoAssignPublicIps:
     - :boolean
     CustomRecipes:
     - :structure:
@@ -1619,5 +1712,16 @@
     SshUsername:
     - :string
     SshPublicKey:
+    - :string
+  :outputs: {}
+- :name: UpdateVolume
+  :method: :update_volume
+  :inputs:
+    VolumeId:
+    - :string
+    - :required
+    Name:
+    - :string
+    MountPoint:
     - :string
   :outputs: {}

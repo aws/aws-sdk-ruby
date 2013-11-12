@@ -628,13 +628,14 @@ module AWS
 
         def client_api_version(options)
           api_version = options[:api_version]
-          api_version ||= configured_version
+          api_version ||= configured_version(options[:config]) if options[:config]
+          api_version ||= configured_version(AWS.config)
           api_version || const_get(:API_VERSION)
         end
 
-        def configured_version
+        def configured_version(config = AWS.config)
           svc_opt = AWS::SERVICES[name.split('::')[1]].method_name
-          AWS.config.send(svc_opt)[:api_version]
+          config.send(svc_opt)[:api_version]
         end
 
         protected

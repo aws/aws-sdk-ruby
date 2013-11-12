@@ -16,9 +16,9 @@ module AWS
 
     class Client < Core::RESTXMLClient
 
-      API_VERSION = '2013-05-12'
+      API_VERSION = '2013-09-27'
 
-      signature_version :CloudFront
+      signature_version :Version4, 'cloudfront'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]
@@ -30,5 +30,18 @@ module AWS
       define_client_methods('2013-05-12')
 
     end
+
+    class Client::V20130826 < Client
+
+      define_client_methods('2013-08-26')
+
+    end
+
+    class Client::V20130927 < Client
+
+      define_client_methods('2013-09-27')
+
+    end
+
   end
 end

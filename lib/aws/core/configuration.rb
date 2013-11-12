@@ -437,7 +437,7 @@ module AWS
                 else
                   'us-gov-west-1' # e.g. iam.us-gov.amazonaws.com
                 end
-              elsif matches = endpoint.match(/^.+?[.-](.+)\.amazonaws.com$/)
+              elsif matches = endpoint.match(/^.+?[.-](.+)\.amazonaws.com/)
                 matches[1]
               else
                 AWS.const_get(name).global_endpoint? ? 'us-east-1' : config.region

@@ -54,10 +54,10 @@ module AWS
         # to know what region the bucket may be in.  Since the region is
         # required to generate a version 4 signature, we will fall back to
         # the older v3 signer.
-        if @region == 'us-east-1'
-          v3_signer.sign_request(request)
-        else
+        if @region =~ /cn-/
           v4_signer.sign_request(request, :chunk_signing => chunk_sign?(request))
+        else
+          v3_signer.sign_request(request)
         end
       end
 
@@ -78,6 +78,7 @@ module AWS
       # @param [Http::Request] req
       # @return [Boolean]
       def chunk_sign? req
+        return false # disabling chunk signing implementation
         req.http_method == 'PUT' &&
         req.headers['content-length'].to_i > 2 * 1024 * 1024 # 2MB
       end
@@ -507,6 +508,26 @@ module AWS
           "contains invalid JSON: #{error}" if error
         end
 
+        def require_allowed_methods!(allowed_methods)
+          validate!("allowed_methods", allowed_methods) do
+            if !allowed_methods.kind_of?(Array)
+              "must be an array"
+            elsif !allowed_methods.all? { |x| x.kind_of?(String) }
+              "must be an array of strings"
+            end
+          end
+        end
+
+        def require_allowed_origins!(allowed_origins)
+          validate!("allowed_origins", allowed_origins) do
+            if !allowed_origins.kind_of?(Array)
+              "must be an array"
+            elsif !allowed_origins.all? { |x| x.kind_of?(String) }
+              "must be an array of strings"
+            end
+          end
+        end
+
       end
 
       include Validators
@@ -736,6 +757,11 @@ module AWS
         configure_request do |req, options|
 
           req.add_param('cors')
+
+          options[:rules].each do |rule|
+            require_allowed_methods!(rule[:allowed_methods])
+            require_allowed_origins!(rule[:allowed_origins])
+          end
 
           xml = Nokogiri::XML::Builder.new do |xml|
             xml.CORSConfiguration do

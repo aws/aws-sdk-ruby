@@ -36,6 +36,10 @@ module AWS
             end_element
           end
 
+          def text(chars)
+            set_text(chars)
+          end
+
         end
       end
     end
