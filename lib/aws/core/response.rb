@@ -153,8 +153,8 @@ module AWS
       # (throttling, server errors, socket errors, etc).
       # @api private
       def rebuild_request
-        build_request
         @http_request.body_stream.rewind if @http_request.body_stream
+        build_request
       end
 
       # @return [Boolean] Returns `false` if it is not safe to retry a
