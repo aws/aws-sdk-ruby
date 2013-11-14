@@ -1,4 +1,82 @@
+2013-11-13 Alex Wood <awood45@gmail.com>
+
+  * doc-src/IAM/V20100508.yml, lib/aws/api_config/IAM-2010-05-08.yml: API
+  Updates to AWS Identity and Access Management
+
+  With this release of AWS Identity and Access Management (IAM), you can
+  enable
+  identity federation using SAML 2.0 (Security Assertion Markup Language 2.0),
+  an
+  open standard. This feature enables federated single sign-on, or SSO, which
+  lets
+  users log into the AWS Management Console or make programmatic calls to AWS
+  APIs
+  using authentication responses (assertions) from a SAML-compliant identity
+  provider.
+
+  * doc-src/STS/V20110615.yml, lib/aws/api_config/STS-2011-06-15.yml: Add SAML
+  support for AWS Security Token Service
+
+  Includes a new AWS Security Token Service (STS) API action called
+  AssumeRoleWithSAML that returns a set of temporary security credentials for
+  users who have been authenticated via a SAML authentication response.
+
+  * doc-src/Redshift/V20121201.yml,
+  lib/aws/api_config/Redshift-2012-12-01.yml: API Updates to Amazon Redshift
+
+  This release for Amazon Redshift includes several new features related to
+  event
+  notifications, encryption, audit logging, data load from external hosts, WLM
+  configuration, and database distribution styles and functions.
+
+2013-11-14 Alex Wood <awood45@gmail.com>
+
+  * doc-src/CloudTrail/V20131101.yml, endpoints.json,
+  features/cloud_trail/client.feature,
+  features/cloud_trail/step_definitions/client.rb,
+  features/cloud_trail/step_definitions/cloud_trail.rb,
+  lib/aws/api_config/CloudTrail-2013-11-01.yml, lib/aws/cloud_trail.rb,
+  lib/aws/cloud_trail/client.rb, lib/aws/cloud_trail/config.rb,
+  lib/aws/cloud_trail/errors.rb, lib/aws/cloud_trail/request.rb,
+  lib/aws/core.rb, spec/aws/cloud_trail_spec.rb: Initial Support for AWS
+  CloudTrail
+
+  AWS CloudTrail is a web service that records AWS API calls for your account
+  and
+  delivers log files to you. The recorded information includes the identity of
+  the
+  API caller, the time of the API call, the source IP address of the API
+  caller,
+  the request parameters, and the response elements returned by the AWS
+  service.
+
+2013-11-12 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/response.rb: Rewinding the body before re-signing.  This
+  affects sigv4 signed retries.
+
+2013-11-11 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/dynamo_db/table.rb: Removed a documentation note about reducing
+  provisioned capacity that was incorrect.
+
+  Fixes #406
+
 2013-11-08 Alex Wood <awood45@gmail.com>
+
+  * README.md: Update README
+
+  Add new AWS Storage Gateway API version to README.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.25.0
+
+  * doc-src/CloudFormation/V20100515.yml,
+  lib/aws/api_config/CloudFormation-2010-05-15.yml: API Updates for AWS
+  CloudFormation
+
+  * doc-src/ElasticTranscoder/V20120925.yml,
+  lib/aws/api_config/ElasticTranscoder-2012-09-25.yml: API Updates for Amazon
+  Elastic Transcoder
 
   * doc-src/ELB/V20120601.yml, lib/aws/api_config/ELB-2012-06-01.yml: Add
   Cross-Zone Balancing to Elastic Load Balancing
