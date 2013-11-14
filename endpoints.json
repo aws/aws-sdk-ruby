@@ -16,6 +16,11 @@
         "https": true,
         "hostname": "cloudsearch.us-east-1.amazonaws.com"
       },
+      "cloudtrail": {
+          "http": false,
+          "https": true,
+          "hostname": "cloudtrail.us-east-1.amazonaws.com"
+      },
       "monitoring": {
         "http": true,
         "https": true,
@@ -294,6 +299,11 @@
         "http": false,
         "https": true,
         "hostname": "cloudsearch.us-west-2.amazonaws.com"
+      },
+      "cloudtrail": {
+          "http": false,
+          "https": true,
+          "hostname": "cloudtrail.us-east-1.amazonaws.com"
       },
       "monitoring": {
         "http": true,
