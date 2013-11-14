@@ -103,6 +103,11 @@ The SDK currently supports the following services:
       <td>Amazon CloudSearch</td>
     </tr>
     <tr>
+      <td>AWS::CloudTrail</td>
+      <td>2013-11-01</td>
+      <td>AWS CloudTrail</td>
+    </tr>
+    <tr>
       <td>AWS::CloudWatch</td>
       <td>2010-08-01</td>
       <td>Amazon CloudWatch</td>
