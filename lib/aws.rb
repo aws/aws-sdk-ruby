@@ -53,6 +53,7 @@ module Aws
   module Plugins
     autoload :Credentials, 'aws/plugins/credentials'
     autoload :DynamoDBExtendedRetries, 'aws/plugins/dynamodb_extended_retries'
+    autoload :GlacierAccountId, 'aws/plugins/glacier_account_id'
     autoload :GlacierApiVersion, 'aws/plugins/glacier_api_version'
     autoload :GlacierChecksums, 'aws/plugins/glacier_checksums'
     autoload :GlobalConfiguration, 'aws/plugins/global_configuration'

@@ -11,6 +11,7 @@ module Aws::Api::ServiceTranslators::Glacier
     end
 
     def apply_plugins(api)
+      api.plugins << "Aws::Plugins::GlacierAccountId"
       api.plugins << "Aws::Plugins::GlacierApiVersion"
       api.plugins << "Aws::Plugins::GlacierChecksums"
     end
