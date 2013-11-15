@@ -84,7 +84,7 @@ module Aws
       if f.request
         expect(http_req.endpoint.host).to eq(f.request.host) if f.request.host
         expect(http_req.http_method).to eq(f.request.method) if f.request.method
-        expect(http_req.path).to eq(f.request.path) if f.request.path
+        expect(http_req.endpoint.request_uri).to eq(f.request.path) if f.request.path
         if f.request.headers
           f.request.headers.each_pair do |header, value|
             expected_value = value.nil? ? nil : value.to_s

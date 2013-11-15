@@ -15,7 +15,7 @@ module Seahorse
           end
 
           it 'can be set in the constructor' do
-            endpoint = 'http://foo.com'
+            endpoint = 'http://foo.com/'
             req = request(endpoint: endpoint)
             expect(req.endpoint).to eq(endpoint)
           end
@@ -31,47 +31,6 @@ module Seahorse
           it 'can be set in the constructor' do
             req = request(http_method: 'POST')
             expect(req.http_method).to eq('POST')
-          end
-
-        end
-
-        describe '#path' do
-
-          it 'defaults to GET' do
-            expect(request.path).to eq('/')
-          end
-
-          it 'can be set in the constructor' do
-            req = request(path: '/path?abc=xyz')
-            expect(req.path).to eq('/path?abc=xyz')
-          end
-
-        end
-
-        describe '#pathname' do
-
-          it 'returns the path up to but not including the querystring' do
-            req = request(path: '/path?query')
-            expect(req.pathname).to eq('/path')
-          end
-
-          it 'returns the full path when a querystring is not present' do
-            req = request(path: '/path')
-            expect(req.pathname).to eq('/path')
-          end
-
-        end
-
-        describe '#querystring' do
-
-          it 'returns the querystring portion of the path' do
-            req = request(path: '/path?query')
-            expect(req.querystring).to eq('query')
-          end
-
-          it 'returns the empty string when not present' do
-            req = request(path: '/path')
-            expect(req.querystring).to eq('')
           end
 
         end

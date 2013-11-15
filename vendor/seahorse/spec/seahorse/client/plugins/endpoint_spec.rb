@@ -28,13 +28,13 @@ module Seahorse
 
         it 'populates the http request endpoint' do
           resp = client.build_request('operation').send_request
-          expect(resp.context.http_request.endpoint).to eq('https://foo.com')
+          expect(resp.context.http_request.endpoint).to eq('https://foo.com/')
         end
 
         it 'defaults to http when ssl_default is false' do
           client = client(ssl_default: false)
           resp = client.build_request('operation').send_request
-          expect(resp.context.http_request.endpoint).to eq('http://foo.com')
+          expect(resp.context.http_request.endpoint).to eq('http://foo.com/')
        end
 
       end

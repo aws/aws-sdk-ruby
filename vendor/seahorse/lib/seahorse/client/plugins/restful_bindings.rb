@@ -19,20 +19,12 @@ module Seahorse
 
           def build_request(context)
             populate_method(context)
-            populate_path(context)
             populate_headers(context)
             populate_body(context)
           end
 
           def populate_method(context)
             context.http_request.http_method = context.operation.http_method
-          end
-
-          def populate_path(context)
-            builder = UriPathBuilder.new(
-              context.operation.http_path,
-              context.operation.input.uri_members)
-            context.http_request.path = builder.path(context.params)
           end
 
           def populate_headers(context)
@@ -78,7 +70,7 @@ module Seahorse
 
           def parse_response(response)
             output = response.context.operation.output
-            response.data ||= Structure.new(output.members.keys)
+            response.data ||= Aws::Structure.new(output.members.keys)
             extract_headers(response)
             extract_body(response)
           end
@@ -137,68 +129,6 @@ module Seahorse
 
         handle(Handler, priority: 90)
 
-        # @api private
-        class UriPathBuilder
-
-          PLACEHOLDER_REGEX = /{\w+?}/
-
-          # @param [String] path_pattern
-          # @param [Hash<Model::Shapes::Shape>] rules
-          def initialize(path_pattern, rules)
-            @pattern = path_pattern
-            @rules = rules
-          end
-
-          # @param [Hash] params
-          # @return [String<URI path>]
-          def path(params)
-            path, querystring = @pattern.split('?')
-            path = escape_path_params(path, params)
-            if querystring
-              querystring = escape_querystring_params(querystring, params)
-              path = "#{path}?#{querystring}" unless querystring.empty?
-            end
-            path
-          end
-
-          private
-
-          def escape_path_params(path, params)
-            path.gsub(PLACEHOLDER_REGEX) do |placeholder|
-              param_value = params[param_name(placeholder)]
-              path_escape(param_value)
-            end
-          end
-
-          def escape_querystring_params(querystring, params)
-            parts = []
-            querystring.split('&').each do |part|
-              if match = part.match(PLACEHOLDER_REGEX)
-                placeholder = match[0]
-                param_value = params[param_name(placeholder)]
-                unless param_value.nil?
-                  parts << part.sub(placeholder, escape(param_value.to_s))
-                end
-              else
-                parts << part # querystring param has no substitution
-              end
-            end
-            parts.join('&')
-          end
-
-          def param_name(placeholder)
-            placeholder[1..-2].to_sym
-          end
-
-          def path_escape(value)
-            escape(value).gsub('%2F', '/')
-          end
-
-          def escape(string)
-            CGI::escape(string.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
-          end
-
-        end
       end
     end
   end

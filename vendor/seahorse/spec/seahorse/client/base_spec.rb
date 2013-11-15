@@ -63,7 +63,7 @@ module Seahorse
           client_class.add_plugin(Plugins::NetHttp)
           expect(client.handlers.to_a).to eq([
             NetHttp::Handler,
-            Plugins::Endpoint::EndpointHandler,
+            Plugins::Endpoint::Handler,
           ])
         end
 

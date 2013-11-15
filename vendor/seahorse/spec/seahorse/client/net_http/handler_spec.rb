@@ -183,14 +183,14 @@ module Seahorse
           describe 'request path' do
 
             it 'sends the request with the correct request uri' do
-              http_request.path = '/path'
-              stub_request(:any, "#{endpoint}/path")
+              http_request.endpoint.request_uri = '/path'
+              stub_request(:any, http_request.endpoint)
               make_request
             end
 
             it 'sends the request with the querystring' do
-              http_request.path = '/abc?mno=xyz'
-              stub_request(:any, "#{endpoint}/abc?mno=xyz")
+              http_request.endpoint.request_uri = '/abc?mno=xyz'
+              stub_request(:any, http_request.endpoint)
               make_request
             end
 

@@ -137,7 +137,7 @@ module Aws
         end
 
         # append the path name (no querystring)
-        parts << request.path.split('?')[0]
+        parts << request.endpoint.path
 
         # lastly any sub resource querystring params need to be appened
         # in lexigraphical ordered joined by '&' and prefixed by '?'
@@ -152,7 +152,7 @@ module Aws
       end
 
       def signed_querystring_params(request)
-        request.querystring.to_s.split('&').select do |p|
+        request.endpoint.querystring.to_s.split('&').select do |p|
           SIGNED_QUERYSTRING_PARAMS.include?(p.split('=')[0])
         end.map { |p| URI.decode(p) }
       end

@@ -62,7 +62,7 @@ module Seahorse
           it 'provides a :http_request_endpoint replacement' do
             response.context.http_request.endpoint =
               Http::Endpoint.new('http://foo.com:123')
-            expect(format(':http_request_endpoint')).to eq('http://foo.com:123')
+            expect(format(':http_request_endpoint')).to eq('http://foo.com:123/')
           end
 
           it 'provides a :http_request_scheme replacement' do
@@ -90,11 +90,6 @@ module Seahorse
             response.context.http_request.endpoint =
               Http::Endpoint.new('http://foo.com:123')
             expect(format(':http_request_port')).to eq('123')
-          end
-
-          it 'provides a :http_request_path replacement' do
-            response.context.http_request.path = '/foo?bar=1'
-            expect(format(':http_request_path')).to eq('/foo?bar=1')
           end
 
           it 'provides a :http_request_headers replacement' do

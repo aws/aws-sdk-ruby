@@ -33,17 +33,18 @@ module Aws
 
         def move_dns_compat_bucket_to_subdomain(context)
           if bucket_name = context.params[:bucket]
-            req = context.http_request
-            if S3BucketDns.dns_compatible?(bucket_name, req.endpoint.https?)
-              move_bucket_to_subdomain(bucket_name, req)
+            endpoint = context.http_request.endpoint
+            if S3BucketDns.dns_compatible?(bucket_name, endpoint.https?)
+              move_bucket_to_subdomain(bucket_name, endpoint)
             end
           end
         end
 
-        def move_bucket_to_subdomain(bucket_name, req)
-          req.endpoint.host = "#{bucket_name}.#{req.endpoint.host}"
-          req.path = req.path[(bucket_name.size + 1)..-1]
-          req.path = "/#{req.path}" unless req.path.match(/^\//)
+        def move_bucket_to_subdomain(bucket_name, endpoint)
+          endpoint.host = "#{bucket_name}.#{endpoint.host}"
+          path = endpoint.request_uri[(bucket_name.size + 1)..-1] || ''
+          path = "/#{path}" unless path.match(/^\//)
+          endpoint.request_uri = path
         end
 
       end
