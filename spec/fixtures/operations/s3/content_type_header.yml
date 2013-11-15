@@ -1,0 +1,12 @@
+# This test ensures that the content type param makes it to the Content-Type
+# header.  There was a bug that caused S3 to always set the content
+# type to application/xml.
+operation: put_object
+params:
+  :bucket: 'bucket-name'
+  :key: 'key'
+  :body: 'abc'
+  :content_type: 'text/plain'
+request:
+  headers:
+    Content-Type: 'text/plain'

@@ -4,7 +4,7 @@ module Aws
     class Serializer
 
       def setup_request(context)
-        context.http_request.headers['Content-Type'] = 'application/xml'
+        context.http_request.headers['Content-Type'] ||= 'application/xml'
       end
 
       def serialize_params(context, rules, params)
