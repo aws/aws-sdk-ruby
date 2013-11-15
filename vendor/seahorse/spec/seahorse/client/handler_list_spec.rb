@@ -18,12 +18,12 @@ module Seahorse
           expect(handlers.to_a).to eq([handler])
         end
 
-        it 'handlers added latter have a higher priority' do
+        it 'handlers added first have a higher priority' do
           handler1 = Class.new
           handler2 = Class.new
           handlers.add(handler1)
           handlers.add(handler2)
-          expect(handlers.to_a).to eq([handler1, handler2])
+          expect(handlers.to_a).to eq([handler2, handler1])
         end
 
         it 'returns the handler class' do
@@ -53,7 +53,7 @@ module Seahorse
             handlers.add('h2', step: :validate)
             handlers.add('h3', step: :build)
             handlers.add('h4', step: :build)
-            expect(handlers.to_a).to eq(%w(h3 h4 h1 h2))
+            expect(handlers.to_a).to eq(%w(h4 h3 h2 h1))
           end
 
         end
@@ -78,7 +78,7 @@ module Seahorse
             handlers.add('y', priority: 20, step: :validate)
             handlers.add('z', priority: 20, step: :validate)
             handlers.add('-', step: :send)
-            expect(handlers.to_a).to eq(%w(- a b c m n o x y z))
+            expect(handlers.to_a).to eq(%w(- c b a o n m z y x))
           end
 
         end
@@ -138,7 +138,7 @@ module Seahorse
             handlers.add('handler1', operations: ['operation1'])
             handlers.add('handler2', operations: ['operation1'])
             handlers.add('handler3', operations: ['operation2'])
-            expect(handlers.for('operation1').to_a).to eq(%w(handler1 handler2))
+            expect(handlers.for('operation1').to_a).to eq(%w(handler2 handler1))
           end
 
         end
@@ -184,7 +184,7 @@ module Seahorse
           handlers2 = handlers.for('operation')
           handlers2.add('handler2')
           expect(handlers.to_a).to eq(['handler1'])
-          expect(handlers2.to_a).to eq(['handler1', 'handler2'])
+          expect(handlers2.to_a).to eq(['handler2', 'handler1'])
         end
 
         it 'copies operation handlers with the given name' do
@@ -207,8 +207,8 @@ module Seahorse
         it 'accpets operation names as symbols' do
           handlers.add('handler1', operations: [:operation])
           handlers.add('handler2', operations: ['operation'])
-          expect(handlers.for('operation').to_a).to eq(%w(handler1 handler2))
-          expect(handlers.for(:operation).to_a).to eq(%w(handler1 handler2))
+          expect(handlers.for('operation').to_a).to eq(%w(handler2 handler1))
+          expect(handlers.for(:operation).to_a).to eq(%w(handler2 handler1))
         end
 
       end
@@ -229,8 +229,8 @@ module Seahorse
         it 'does not construct handlers that are not classes' do
           handler1 = double('handler1')
           handler2 = double('handler2')
-          expect(handler1).to receive(:handler=).with(nil)
-          expect(handler2).to receive(:handler=).with(handler1)
+          expect(handler2).to receive(:handler=).with(nil)
+          expect(handler1).to receive(:handler=).with(handler2)
           handlers.add(handler1)
           handlers.add(handler2)
           handlers.to_stack

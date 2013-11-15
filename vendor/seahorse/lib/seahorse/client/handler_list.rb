@@ -24,7 +24,7 @@ module Seahorse
       Entry = Struct.new(:klass, :options, :operations, :priority, :inserted) do
         def <=>(other)
           if priority == other.priority
-            inserted <=> other.inserted
+            (inserted <=> other.inserted) * -1
           else
             priority <=> other.priority
           end
