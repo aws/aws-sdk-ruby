@@ -40,10 +40,6 @@ module Seahorse
           expect(client.config.endpoint).to eq(api['endpoint'])
         end
 
-        it 'defaults ssl_default to true' do
-          expect(client.config.ssl_default).to equal(true)
-        end
-
         it 'passes constructor args to the config' do
           expect {
             client_class.new(foo: 'bar')

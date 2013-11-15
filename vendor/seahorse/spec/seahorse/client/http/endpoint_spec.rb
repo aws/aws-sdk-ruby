@@ -45,10 +45,6 @@ module Seahorse
             expect(Endpoint.new('foo.com').scheme).to eq('https')
           end
 
-          it 'looks for the :ssl_default options when picking the default scheme' do
-            expect(Endpoint.new('foo.com', ssl_default: false).scheme).to eq('http')
-          end
-
           it 'can be changed' do
             endpoint = Endpoint.new('http://foo.com/')
             endpoint.scheme = 'https'

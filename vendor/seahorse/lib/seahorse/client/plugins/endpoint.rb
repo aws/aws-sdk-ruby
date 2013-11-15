@@ -12,39 +12,27 @@ module Seahorse
       #        'http://example.com:123'
       #
       #    This must include the host.  It may also include the scheme and
-      #    port.  When the scheme is not set it defaults to `https`
-      #    or `http` based on the `:ssl_default` option.
-      #
-      # @seahorse.client.option [Boolean] :ssl_default (true)
-      #    When `true`, endpoints without a scheme are prefixed by `http://`.
-      #    When `false`, endpoints without a scheme are prefixed by `http://`.
+      #    port.  When the scheme is not set it defaults to `https`.
       #
       class Endpoint < Plugin
 
         option(:endpoint) { |config| config.api.endpoint }
 
-        option(:ssl_default, true)
-
         class Handler < Client::Handler
 
           def call(context)
-            populate_endpoint(context)
+            endpoint = Http::Endpoint.new(context.config.endpoint)
+            apply_url_params(endpoint, context)
+            context.http_request.endpoint = endpoint
             @handler.call(context)
           end
 
-          def populate_endpoint(context)
-            ssl_default = context.config.ssl_default
-            endpoint = context.config.endpoint
-            endpoint = Http::Endpoint.new(endpoint, ssl_default: ssl_default)
-
-            request_uri = endpoint.path == '/' ? '' : endpoint.path
-            request_uri += RequestUriBuilder.new(
+          def apply_url_params(endpoint, context)
+            prefix = endpoint.path.sub(/\/$/, '')
+            endpoint.request_uri = prefix + RequestUriBuilder.new(
               context.operation.http_path || '/',
               context.operation.input.uri_members,
             ).path(context.params)
-            endpoint.request_uri = request_uri
-
-            context.http_request.endpoint = endpoint
           end
 
         end
@@ -113,7 +101,6 @@ module Seahorse
           end
 
         end
-
       end
     end
   end
