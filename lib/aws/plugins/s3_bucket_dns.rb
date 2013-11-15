@@ -19,13 +19,15 @@ module Aws
       # the classic region.
       option(:force_path_style, false)
 
+      def add_handlers(handlers, config)
+        handlers.add(Handler) unless config.force_path_style
+      end
+
       # @api private
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          unless context.config.force_path_style
-            move_dns_compat_bucket_to_subdomain(context)
-          end
+          move_dns_compat_bucket_to_subdomain(context)
           @handler.call(context)
         end
 
@@ -50,8 +52,6 @@ module Aws
         end
 
       end
-
-      handler(Handler)
 
       class << self
 
