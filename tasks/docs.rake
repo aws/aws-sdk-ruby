@@ -35,7 +35,6 @@ def supported_services_table
   line = "| %-35s | %-25s | %-30s |\n"
 
   lines = []
-  require 'aws-sdk-core'
   Aws.service_classes.keys.sort_by(&:downcase).each do |svc|
     svc = Aws.service_classes[svc]
     client = svc.default_client_class

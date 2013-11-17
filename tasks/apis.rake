@@ -8,7 +8,6 @@ namespace :api do
 
   desc "Lists the supported services and their API versions"
   task :versions do
-    require 'aws-sdk-core'
     supported = []
     Aws.service_classes.each do |key, svc|
       name = svc.default_client_class.api.metadata['service_full_name']
@@ -36,7 +35,6 @@ namespace :api do
 end
 
 def translate_api(path)
-  require 'aws-sdk-core'
   api = Aws::Api::Translator.translate(
     JSON.parse(File.read(path), max_nesting: false), documentation: false,
     errors: false)
