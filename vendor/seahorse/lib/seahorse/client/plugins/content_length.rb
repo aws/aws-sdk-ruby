@@ -14,7 +14,7 @@ module Seahorse
 
         end
 
-        handler(Handler, step: :sign, proiority: 0)
+        handler(Handler, step: :sign, priority: 0)
 
       end
     end
