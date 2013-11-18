@@ -20,6 +20,14 @@ Feature: Amazon Glacier
     When I upload an archive from a 5.5MB large file
     Then I should be able to delete the archive
 
+  # There was an issue where the client would fail attempting to compute
+  # a checksum of an empty body, this step ensures that the checksum
+  # computation does not hang.
+  @upload
+  Scenario: Attempting to upload an empty archive
+    When I upload an archive with the contents ""
+    Then a "InvalidParameterValueException" error should be raised
+
   Scenario: Error handling
     When I call "list_vaults" on "glacier" with:
     """

@@ -59,14 +59,18 @@ module Aws
           tree_digest = OpenSSL::Digest::Digest.new('sha256')
           tree_parts = []
 
-          until body.eof?
+          # if the body is empty/EOF, then we should compute the
+          # digests of the empty string
+          if body.size == 0
+            tree_parts << tree_digest.update('').digest
+            digest.update('')
+          end
 
+          until body.eof?
             chunk = body.read(1024 * 1024) # read 1MB
             tree_parts << tree_digest.update(chunk).digest
             tree_digest.reset
-
             digest.update(chunk)
-
           end
 
           body.rewind

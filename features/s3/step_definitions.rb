@@ -40,9 +40,8 @@ end
 
 Then(/^the bucket should not exist$/) do
   eventually do
-    expect {
-      @s3.get_bucket_location(bucket: @bucket_name)
-    }.to raise_error(Aws::S3::Errors::NoSuchBucket)
+    resp = @s3.get_bucket_location(bucket: @bucket_name)
+    expect(resp.error).to be_kind_of(Aws::S3::Errors::NoSuchBucket)
   end
 end
 

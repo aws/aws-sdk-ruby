@@ -1,9 +1,10 @@
 def upload_glacier_archive(contents)
-  @response = @glacier.upload_archive(
+  resp = call_request('glacier', 'upload_archive', {
     vault_name: @vault_name,
     account_id: '-',
-    body: contents)
-  @archive_id = @response.archive_id
+    body: contents,
+  })
+  @archive_id = resp.data.archive_id if resp.data
 end
 
 When(/^I upload an archive with the contents "(.*?)"$/) do |contents|
@@ -18,8 +19,9 @@ When(/^I upload an archive from a (\d+\.\d+)MB large file$/) do |size|
 end
 
 Then(/^I should be able to delete the archive$/) do
-  @glacier.delete_archive(
+  call_request('glacier', 'delete_archive', {
     vault_name: @vault_name,
     account_id: '-',
-    archive_id: @archive_id)
+    archive_id: @archive_id,
+  })
 end

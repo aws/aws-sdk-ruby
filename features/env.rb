@@ -21,3 +21,5 @@ else
   puts msg
   exit(0)
 end
+
+Aws.config[:raise_response_errors] = false
