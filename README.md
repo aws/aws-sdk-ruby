@@ -28,6 +28,9 @@ dependency (this library uses [semantic versioning](http://semver.org/)):
 
     gem 'aws-sdk-core', '~> 2.0'
 
+Until the final release becomes available on Rubygems, leave off the version
+dependency in your Gemfile so Bundler can find it.
+
 **Note:** AWS SDK Core requires Ruby 1.9.3+.
 
 ## Configuration
