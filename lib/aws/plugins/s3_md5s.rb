@@ -4,7 +4,7 @@ require 'base64'
 module Aws
   module Plugins
 
-    # @seahorse.client.option [Boolean] :compute_optional_md5s (true)
+    # @seahorse.client.option [Boolean] :compute_checksums (true)
     #   When `true` a MD5 checksum will be computed for all requests that
     #   accept the optional `Content-MD5` header.  Checksum errors returned
     #   by Amazon S3 are automatically retried up to `:retry_limit` times.
@@ -41,7 +41,7 @@ module Aws
 
       end
 
-      option(:compute_optional_md5s, true)
+      option(:compute_checksums, true)
 
       def add_handlers(handlers, config)
         options = {
@@ -49,7 +49,7 @@ module Aws
           step: :build, # the request is built but before it is signed
         }
 
-        if !config.compute_optional_md5s
+        if !config.compute_checksums
           options[:operations] = REQUIRED_OPERATIONS
         end
 

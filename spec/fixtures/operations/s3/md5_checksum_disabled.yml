@@ -1,5 +1,5 @@
 config:
-  compute_optional_md5s: false
+  compute_checksums: false
 operation: put_object
 params:
   :bucket: 'bucket-name'
