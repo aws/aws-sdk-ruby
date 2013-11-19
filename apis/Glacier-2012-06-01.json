@@ -24,6 +24,7 @@
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
     "Aws::Plugins::SignatureV4",
+    "Aws::Plugins::GlacierAccountId",
     "Aws::Plugins::GlacierApiVersion",
     "Aws::Plugins::GlacierChecksums"
   ],
