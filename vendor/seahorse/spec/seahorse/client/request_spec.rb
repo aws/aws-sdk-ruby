@@ -93,7 +93,7 @@ module Seahorse
           response = request.send_request { |chunk| }
           body = response.http_response.body
           expect(body.read).to eq('')
-          expect { body.rewind }.to raise_error(NotImplementedError)
+          expect(body).not_to respond_to(:truncate)
         end
 
       end

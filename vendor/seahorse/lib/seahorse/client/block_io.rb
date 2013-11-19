@@ -27,13 +27,6 @@ module Seahorse
         @size
       end
 
-      # It is not possible to rewind a {BlockIO} object as the data has
-      # already been yielded.
-      # @return [NotImplementedError]
-      def rewind
-        raise NotImplementedError
-      end
-
     end
   end
 end
