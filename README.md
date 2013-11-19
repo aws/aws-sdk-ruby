@@ -13,6 +13,12 @@ dependency (aws-sdk follows [semantic versioning](http://semver.org/)):
 
     gem 'aws-sdk', '~> 1.0'
 
+If you are using a version of Ruby older than 1.9, you may encounter problems with Nokogiri.
+The authors dropped support for Ruby 1.8.x in Nokogiri 1.6. To use aws-sdk, you'll also have
+to install or specify a version of Nokogiri prior to 1.6, like this:
+
+    gem 'nokogiri', '~> 1.5.0'
+
 ## Basic Configuration
 
 You need to provide your AWS security credentials and choose a default region.
