@@ -1,11 +1,13 @@
 namespace :doc do
 
+  desc "Delete the locally generated docs" if ENV['ALL']
   task :clobber do
     rm_rf ".yardoc"
     rm_rf "doc"
   end
 
   # Updates the list of supported services and versions in the README
+  desc "Updated the list of supported services in the README" if ENV['ALL']
   task :readme do
     lines = []
     skip = false

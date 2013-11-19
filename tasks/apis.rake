@@ -25,6 +25,8 @@ namespace :api do
       svc_task = "translate:#{svc}"
       version_task = "translate:#{svc}:#{version}"
       task(version_task) { translate_api(path) }
+
+      desc "Translate source APIs for #{svc}" if ENV['ALL']
       task(svc_task => version_task)
 
       desc "Translate source APIs into Seahorse APIs"
