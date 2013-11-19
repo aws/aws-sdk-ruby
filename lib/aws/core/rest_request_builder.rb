@@ -135,7 +135,7 @@ module AWS
       end
 
       def size(payload)
-        payload.respond_to?(:size) ? payload.size : File.size(payload.path)
+        payload.respond_to?(:path) ? File.size(payload.path) : payload.size
       end
 
       def streaming_param
