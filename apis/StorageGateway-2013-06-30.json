@@ -1497,13 +1497,6 @@
       "name": "ListGateways",
       "http_method": "POST",
       "http_path": "/",
-      "metadata": {
-        "paging": {
-          "tokens": {
-            "marker": "marker"
-          }
-        }
-      },
       "input": {
         "type": "input",
         "members": {
@@ -1658,13 +1651,6 @@
       "name": "ListVolumes",
       "http_method": "POST",
       "http_path": "/",
-      "metadata": {
-        "paging": {
-          "tokens": {
-            "marker": "marker"
-          }
-        }
-      },
       "input": {
         "type": "input",
         "members": {

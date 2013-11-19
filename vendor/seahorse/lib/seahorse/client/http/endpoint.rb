@@ -16,24 +16,17 @@ module Seahorse
       #     puts Endpoint.new('foo.com')
       #     #=> 'https://foo.com'
       #
-      # You can default to a HTTP endpoint by passing `:ssl_default` as `false`:
-      #
-      #     puts Endpoint.new('foo.com', ssl_default: false)
-      #     #=> 'http://foo.com'
-      #
       class Endpoint
 
         # @param [Endpoint, String] endpoint
-        # @option options [Boolean] :ssl_default (true)
-        def initialize(endpoint, options = {})
+        def initialize(endpoint)
           endpoint = endpoint.to_s
-          unless endpoint =~ /^http/
-            endpoint = apply_scheme(endpoint, options)
-          end
+          endpoint = "https://#{endpoint}" unless endpoint =~ /^http/
           URI.parse(endpoint).tap do |uri|
             @scheme = uri.scheme
             @host = uri.host
             @port = uri.port
+            @request_uri = uri.request_uri
             @user = uri.user
             @password = uri.password
           end
@@ -48,11 +41,25 @@ module Seahorse
         # @return [Integer] Returns the endpoint port number (e.g. 443).
         attr_accessor :port
 
+        # @return [String] Returns the path and querystring,
+        #   e.g. '/path?querystring'.
+        attr_accessor :request_uri
+
         # @return [String, nil]
         attr_accessor :user
 
         # @return [String, nil]
         attr_accessor :password
+
+        # @return [String]
+        def path
+          request_uri.split('?', 2)[0]
+        end
+
+        # @return [String, nil]
+        def querystring
+          request_uri.split('?', 2)[1]
+        end
 
         # @return [Boolean]
         def http?
@@ -67,7 +74,8 @@ module Seahorse
         # @return [String]
         # @api private
         def inspect
-          URI.parse("#{@scheme}://#{userpass}#{@host}:#{@port}").to_s
+          uri = "#{@scheme}://#{userpass}#{@host}:#{@port}#{@request_uri}"
+          URI.parse(uri).to_s
         end
         alias to_str inspect
         alias to_s inspect
@@ -80,10 +88,6 @@ module Seahorse
         alias == eq
 
         private
-
-        def apply_scheme(endpoint, options)
-          "http#{options.fetch(:ssl_default, true) ? 's' : ''}://#{endpoint}"
-        end
 
         def userpass
           [@user, @password].compact.join(':') + '@' if @user

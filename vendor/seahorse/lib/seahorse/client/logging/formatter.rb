@@ -53,9 +53,6 @@ module Seahorse
       #
       #   * `:http_request_port` - The port number (e.g. '443' or '80').
       #
-      #   * `:http_request_path` - The full path (pathname plus querystring)
-      #     for the request, e.g., `/bucket_name/objects/key?versions`.
-      #
       #   * `:http_request_headers` - The http request headers, inspected.
       #
       #   * `:http_request_body` - The http request payload.
@@ -155,10 +152,6 @@ module Seahorse
 
         def _http_request_method(response)
           response.context.http_request.http_method
-        end
-
-        def _http_request_path(response)
-          response.context.http_request.path
         end
 
         def _http_request_headers(response)

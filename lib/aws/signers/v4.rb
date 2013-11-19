@@ -77,8 +77,8 @@ module Aws
       def canonical_request(request)
         [
           request.http_method,
-          request.pathname,
-          request.querystring,
+          request.endpoint.path,
+          request.endpoint.querystring,
           canonical_headers(request) + "\n",
           signed_headers(request),
           request.headers['X-Amz-Content-Sha256']

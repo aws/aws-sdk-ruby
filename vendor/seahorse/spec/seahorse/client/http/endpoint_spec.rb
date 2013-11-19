@@ -11,12 +11,12 @@ module Seahorse
           end
 
           it 'can be constructed from a URI::HTTP' do
-            uri = 'http://foo.com'
+            uri = 'http://foo.com/'
             expect(Endpoint.new(URI.parse(uri))).to eq(uri)
           end
 
           it 'can be constructed from a URI::HTTPS' do
-            uri = 'https://foo.com'
+            uri = 'https://foo.com/'
             expect(Endpoint.new(URI.parse(uri))).to eq(uri)
           end
 
@@ -45,16 +45,12 @@ module Seahorse
             expect(Endpoint.new('foo.com').scheme).to eq('https')
           end
 
-          it 'looks for the :ssl_default options when picking the default scheme' do
-            expect(Endpoint.new('foo.com', ssl_default: false).scheme).to eq('http')
-          end
-
           it 'can be changed' do
-            endpoint = Endpoint.new('http://foo.com')
+            endpoint = Endpoint.new('http://foo.com/')
             endpoint.scheme = 'https'
             expect(endpoint.port).to eq(80)
             expect(endpoint.scheme).to eq('https')
-            expect(endpoint).to eq('https://foo.com:80')
+            expect(endpoint).to eq('https://foo.com:80/')
           end
 
         end
@@ -91,10 +87,10 @@ module Seahorse
           end
 
           it 'can be changed' do
-            endpoint = Endpoint.new('http://foo.com')
+            endpoint = Endpoint.new('http://foo.com/')
             endpoint.host = 'bar.com'
             expect(endpoint.host).to eq('bar.com')
-            expect(endpoint).to eq('http://bar.com')
+            expect(endpoint).to eq('http://bar.com/')
           end
 
         end
@@ -115,11 +111,47 @@ module Seahorse
           end
 
           it 'can be changed' do
-            endpoint = Endpoint.new('http://foo.com')
+            endpoint = Endpoint.new('http://foo.com/')
             endpoint.port = 443
             expect(endpoint.scheme).to eq('http')
             expect(endpoint.port).to eq(443)
-            expect(endpoint).to eq('http://foo.com:443')
+            expect(endpoint).to eq('http://foo.com:443/')
+          end
+
+        end
+
+        describe '#request_uri' do
+
+          it 'defaults to /' do
+            expect(Endpoint.new('foo.com').request_uri).to eq('/')
+          end
+
+          it 'can be set in the constructor' do
+            expect(Endpoint.new('foo.com/bar?a=b').request_uri).to eq('/bar?a=b')
+          end
+
+        end
+
+        describe '#path' do
+
+          it 'defaults to /' do
+            expect(Endpoint.new('foo.com').path).to eq('/')
+          end
+
+          it 'can be set in the constructor' do
+            expect(Endpoint.new('foo.com/bar?a=b').path).to eq('/bar')
+          end
+
+        end
+
+        describe '#querystring' do
+
+          it 'defaults to nil' do
+            expect(Endpoint.new('foo.com').querystring).to be(nil)
+          end
+
+          it 'can be set in the constructor' do
+            expect(Endpoint.new('foo.com/bar?a=b').querystring).to eq('a=b')
           end
 
         end
@@ -138,7 +170,7 @@ module Seahorse
             endpoint = Endpoint.new('foo.com')
             endpoint.user = 'abc'
             expect(endpoint.user).to eq('abc')
-            expect(endpoint).to eq('https://abc@foo.com')
+            expect(endpoint).to eq('https://abc@foo.com/')
           end
 
         end
@@ -158,7 +190,7 @@ module Seahorse
             endpoint.user = 'u'
             endpoint.password = 'p'
             expect(endpoint.password).to eq('p')
-            expect(endpoint).to eq('https://u:p@foo.com')
+            expect(endpoint).to eq('https://u:p@foo.com/')
           end
 
         end

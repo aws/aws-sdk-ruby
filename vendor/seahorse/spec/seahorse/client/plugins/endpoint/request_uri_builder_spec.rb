@@ -3,14 +3,14 @@ require 'spec_helper'
 module Seahorse
   module Client
     module Plugins
-      class RestfulBindings
-        describe UriPathBuilder do
+      class Endpoint
+        describe RequestUriBuilder do
 
           let(:rules) {{ 'type' => 'input', 'members' => {} }}
 
           def path_for(pattern, params)
             input = Model::Shapes::Shape.from_hash(rules)
-            UriPathBuilder.new(pattern, input.uri_members).path(params)
+            RequestUriBuilder.new(pattern, input.uri_members).path(params)
           end
 
           it 'does not modify paths without placeholders' do

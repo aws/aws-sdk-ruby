@@ -97,24 +97,6 @@ module Seahorse
 
       class << self
 
-        # @option options [String] :endpoint
-        #   Endpoints specify the http scheme, hostname and port to connect
-        #   to.  You must specify at a minimum the hostname.  Endpoints without
-        #   a uri scheme will default to https on port 443.
-        #
-        #       # defaults to https on port 443
-        #       hostname: 'domain.com'
-        #
-        #       # defaults to http on port 80
-        #       hostname: 'domain.com', ssl_default: false
-        #
-        #       # defaults are ignored, as scheme and port are present
-        #       hostname: 'http://domain.com:123'
-        #
-        # @option options [Boolean] :ssl_default (true) Specifies the default
-        #   scheme for the #endpoint when not specified.  Defaults to `true`
-        #   which creates https endpoints.
-        #
         def new(options = {})
           plugins = build_plugins
           options = options.dup

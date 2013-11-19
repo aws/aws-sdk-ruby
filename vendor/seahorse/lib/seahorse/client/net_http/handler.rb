@@ -66,7 +66,7 @@ module Seahorse
         # @return [Net::HTTP::Request]
         def net_http_request(request)
           request_class = net_http_request_class(request)
-          req = request_class.new(request.path, headers(request))
+          req = request_class.new(request.endpoint.request_uri, headers(request))
           req.body_stream = request.body
           req
         end

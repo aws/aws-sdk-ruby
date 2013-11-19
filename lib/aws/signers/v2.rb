@@ -26,7 +26,7 @@ module Aws
         [
           http_request.http_method,
           host(http_request),
-          http_request.pathname,
+          http_request.endpoint.path,
           params.to_s,
         ].join("\n")
       end

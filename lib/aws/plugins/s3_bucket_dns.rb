@@ -19,36 +19,39 @@ module Aws
       # the classic region.
       option(:force_path_style, false)
 
+      def add_handlers(handlers, config)
+        handlers.add(Handler) unless config.force_path_style
+      end
+
       # @api private
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          unless context.config.force_path_style
-            move_dns_compat_bucket_to_subdomain(context)
-          end
+          move_dns_compat_bucket_to_subdomain(context)
           @handler.call(context)
         end
 
         private
 
         def move_dns_compat_bucket_to_subdomain(context)
-          if bucket_name = context.params[:bucket]
-            req = context.http_request
-            if S3BucketDns.dns_compatible?(bucket_name, req.endpoint.https?)
-              move_bucket_to_subdomain(bucket_name, req)
-            end
+          bucket_name = context.params[:bucket]
+          endpoint = context.http_request.endpoint
+          if
+            bucket_name &&
+            S3BucketDns.dns_compatible?(bucket_name, endpoint.https?)
+          then
+            move_bucket_to_subdomain(bucket_name, endpoint)
           end
         end
 
-        def move_bucket_to_subdomain(bucket_name, req)
-          req.endpoint.host = "#{bucket_name}.#{req.endpoint.host}"
-          req.path = req.path[(bucket_name.size + 1)..-1]
-          req.path = "/#{req.path}" unless req.path.match(/^\//)
+        def move_bucket_to_subdomain(bucket_name, endpoint)
+          endpoint.host = "#{bucket_name}.#{endpoint.host}"
+          request_uri = endpoint.request_uri.sub("/#{bucket_name}", '')
+          request_uri = "/#{request_uri}" unless request_uri.match(/^\//)
+          endpoint.request_uri = request_uri
         end
 
       end
-
-      handler(Handler)
 
       class << self
 

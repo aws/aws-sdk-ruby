@@ -22,20 +22,10 @@ module Seahorse
           expect(client.config.endpoint).to eq('foo.com')
         end
 
-        it 'adds an #ssl_default option to config' do
-          expect(client.config.ssl_default).to be(true)
-        end
-
         it 'populates the http request endpoint' do
           resp = client.build_request('operation').send_request
-          expect(resp.context.http_request.endpoint).to eq('https://foo.com')
+          expect(resp.context.http_request.endpoint).to eq('https://foo.com/')
         end
-
-        it 'defaults to http when ssl_default is false' do
-          client = client(ssl_default: false)
-          resp = client.build_request('operation').send_request
-          expect(resp.context.http_request.endpoint).to eq('http://foo.com')
-       end
 
       end
     end
