@@ -18,6 +18,8 @@ module AWS
 
       API_VERSION = '2013-11-01'
 
+      signature_version :Version4, 'cloudtrail'
+
       # @api private
       CACHEABLE_REQUESTS = Set[]
 

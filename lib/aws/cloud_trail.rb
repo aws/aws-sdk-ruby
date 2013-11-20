@@ -63,7 +63,6 @@ module AWS
 
     autoload :Client,  'aws/cloud_trail/client'
     autoload :Errors,  'aws/cloud_trail/errors'
-    autoload :Request, 'aws/cloud_trail/request'
 
     include Core::ServiceInterface
 
