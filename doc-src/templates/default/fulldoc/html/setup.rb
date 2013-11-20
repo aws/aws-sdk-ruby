@@ -35,7 +35,7 @@ def class_list(root = Registry.root)
 
     services = Registry.at('Aws').children.select { |c| c.has_tag?(:service) }
 
-    services.each do |svc|
+    services.sort_by(&:name).each do |svc|
       out << "<li><a class='toggle'></a>"
       out << linkify(svc, svc.name)
       out << " &lt; Service"
