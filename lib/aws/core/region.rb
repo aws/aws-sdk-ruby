@@ -28,6 +28,7 @@ module AWS
     # @attr_reader [CloudFormation] cloud_formation
     # @attr_reader [CloudFront] cloud_front
     # @attr_reader [CloudSearch] cloud_search
+    # @attr_reader [CloudTrail] cloud_trail
     # @attr_reader [CloudWatch] cloud_watch
     # @attr_reader [DataPipeline] data_pipeline
     # @attr_reader [DirectConnect] direct_connect

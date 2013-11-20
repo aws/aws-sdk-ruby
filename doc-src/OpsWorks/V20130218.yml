@@ -12,6 +12,18 @@
 # language governing permissions and limitations under the License.
 
 ---
+:assign_volume: |-
+  Calls the AssignVolume API operation.
+  @param [Hash] options
+    * `:volume_id` - *required* - (String) The volume ID.
+    * `:instance_id` - (String) The instance ID.
+  @return [Core::Response]
+:associate_elastic_ip: |-
+  Calls the AssociateElasticIp API operation.
+  @param [Hash] options
+    * `:elastic_ip` - *required* - (String) The Elastic IP address.
+    * `:instance_id` - (String) The instance ID.
+  @return [Core::Response]
 :attach_elastic_load_balancer: |-
   Calls the AttachElasticLoadBalancer API operation.
   @param [Hash] options
@@ -25,7 +37,7 @@
   - (String) The ID of the VPC that the cloned stack is to be launched into. It must
   be in the specified region. All instances will be launched into this VPC, and you
   cannot change the ID later. If your account supports EC2 Classic, the default value
-  is no VPC. If you account does not support EC2 Classic, the default value is the
+  is no VPC. If your account does not support EC2 Classic, the default value is the
   default VPC for the specified region. If the VPC ID corresponds to a default VPC
   and you have specified either the DefaultAvailabilityZone or the DefaultSubnetId
   parameter only, AWS OpsWorks infers the value of the other parameter. If you specify
@@ -209,7 +221,8 @@
       * `:number_of_disks` - *required* - (Integer) The number of disks in the volume.
       * `:size` - *required* - (Integer) The volume size.
     * `:enable_auto_healing` - (Boolean) Whether to disable auto healing for the layer.
-    * `:auto_assign_elastic_ips` - (Boolean) Whether to automatically assign an Elastic IP address to the layer.
+    * `:auto_assign_elastic_ips` - (Boolean) Whether to automatically assign an Elastic IP address to the layer's instances. For more information, see How to Edit a Layer.
+    * `:auto_assign_public_ips` - (Boolean) For stacks that are running in a VPC, whether to automatically assign a public IP address to the layer's instances. For more information, see How to Edit a Layer.
     * `:custom_recipes` - (Hash) A LayerCustomRecipes object that specifies the layer custom recipes.
       * `:setup` - (Array&lt;<String>) An array of custom recipe names to be run following a setup event.
       * `:configure` - (Array&lt;<String>) An array of custom recipe names to be run following a configure event.
@@ -226,7 +239,7 @@
   see Regions and Endpoints.\n  * `:vpc_id` - (String) The ID of the VPC that the
   stack is to be launched into. It must be in the specified region. All instances
   will be launched into this VPC, and you cannot change the ID later. If your account
-  supports EC2 Classic, the default value is no VPC. If you account does not support
+  supports EC2 Classic, the default value is no VPC. If your account does not support
   EC2 Classic, the default value is the default VPC for the specified region. If the
   VPC ID corresponds to a default VPC and you have specified either the DefaultAvailabilityZone
   or the DefaultSubnetId parameter only, AWS OpsWorks infers the value of the other
@@ -330,6 +343,16 @@
   @param [Hash] options
     * `:iam_user_arn` - *required* - (String) The user's IAM ARN.
   @return [Core::Response]
+:deregister_elastic_ip: |-
+  Calls the DeregisterElasticIp API operation.
+  @param [Hash] options
+    * `:elastic_ip` - *required* - (String) The Elastic IP address.
+  @return [Core::Response]
+:deregister_volume: |-
+  Calls the DeregisterVolume API operation.
+  @param [Hash] options
+    * `:volume_id` - *required* - (String) The volume ID.
+  @return [Core::Response]
 :describe_apps: |-
   Calls the DescribeApps API operation.
   @param [Hash] options
@@ -406,6 +429,7 @@
   Calls the DescribeElasticIps API operation.
   @param [Hash] options
     * `:instance_id` - (String) The instance ID. If you include this parameter, DescribeElasticIps returns a description of the Elastic IP addresses associated with the specified instance.
+    * `:stack_id` - (String) A stack ID. If you include this parameter, DescribeElasticIps returns a description of the Elastic IP addresses that are registered with the specified stack.
     * `:ips` - (Array&lt;<String>) An array of Elastic IP addresses to be described. If you include this parameter, DescribeElasticIps returns a description of the specified Elastic IP addresses. Otherwise, it returns a description of every Elastic IP address.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -414,10 +438,11 @@
       * `:name` - (String)
       * `:domain` - (String)
       * `:region` - (String)
+      * `:instance_id` - (String)
 :describe_elastic_load_balancers: |-
   Calls the DescribeElasticLoadBalancers API operation.
   @param [Hash] options
-    * `:stack_id` - (String) A stack ID. The action describes the Elastic Load Balancing instances for the stack.
+    * `:stack_id` - (String) A stack ID. The action describes the stack's Elastic Load Balancing instances.
     * `:layer_ids` - (Array&lt;<String>) A list of layer IDs. The action describes the Elastic Load Balancing instances for the specified layers.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -471,7 +496,7 @@
 :describe_layers: |-
   Calls the DescribeLayers API operation.
   @param [Hash] options
-    * `:stack_id` - *required* - (String) The stack ID.
+    * `:stack_id` - (String) The stack ID.
     * `:layer_ids` - (Array&lt;<String>) An array of layer IDs that specify the layers to be described. If you omit this parameter, DescribeLayers returns a description of every layer in the specified stack.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -493,6 +518,7 @@
         * `:size` - (Integer)
       * `:enable_auto_healing` - (Boolean)
       * `:auto_assign_elastic_ips` - (Boolean)
+      * `:auto_assign_public_ips` - (Boolean)
       * `:default_recipes` - (Hash)
         * `:setup` - (Array<String>)
         * `:configure` - (Array<String>)
@@ -639,6 +665,7 @@
   Calls the DescribeVolumes API operation.
   @param [Hash] options
     * `:instance_id` - (String) The instance ID. If you use this parameter, DescribeVolumes returns descriptions of the volumes associated with the specified instance.
+    * `:stack_id` - (String) A stack ID. The action describes the stack's registered Amazon EBS volumes.
     * `:raid_array_id` - (String) The RAID array ID. If you use this parameter, DescribeVolumes returns descriptions of the volumes associated with the specified RAID array.
     * `:volume_ids` - (Array&lt;<String>) Am array of volume IDs. If you use this parameter, DescribeVolumes returns descriptions of the specified volumes. Otherwise, it returns a description of every volume.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -661,6 +688,11 @@
     * `:elastic_load_balancer_name` - *required* - (String) The Elastic Load Balancing instance's name.
     * `:layer_id` - *required* - (String) The ID of the layer that the Elastic Load Balancing instance is attached to.
   @return [Core::Response]
+:disassociate_elastic_ip: |-
+  Calls the DisassociateElasticIp API operation.
+  @param [Hash] options
+    * `:elastic_ip` - *required* - (String) The Elastic IP address.
+  @return [Core::Response]
 :get_hostname_suggestion: |-
   Calls the GetHostnameSuggestion API operation.
   @param [Hash] options
@@ -674,6 +706,22 @@
   @param [Hash] options
     * `:instance_id` - *required* - (String) The instance ID.
   @return [Core::Response]
+:register_elastic_ip: |-
+  Calls the RegisterElasticIp API operation.
+  @param [Hash] options
+    * `:elastic_ip` - *required* - (String) The Elastic IP address.
+    * `:stack_id` - *required* - (String) The stack ID.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:elastic_ip` - (String)
+:register_volume: |-
+  Calls the RegisterVolume API operation.
+  @param [Hash] options
+    * `:ec2_volume_id` - (String) The Amazon EBS volume ID.
+    * `:stack_id` - *required* - (String) The stack ID.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:volume_id` - (String)
 :set_load_based_auto_scaling: |-
   Calls the SetLoadBasedAutoScaling API operation.
   @param [Hash] options
@@ -735,6 +783,11 @@
   @param [Hash] options
     * `:stack_id` - *required* - (String) The stack ID.
   @return [Core::Response]
+:unassign_volume: |-
+  Calls the UnassignVolume API operation.
+  @param [Hash] options
+    * `:volume_id` - *required* - (String) The volume ID.
+  @return [Core::Response]
 :update_app: |-
   Calls the UpdateApp API operation.
   @param [Hash] options
@@ -765,6 +818,12 @@
       * `:private_key` - *required* - (String) The private key; the contents of the certificate's domain.kex file.
       * `:chain` - (String) Optional. Can be used to specify an intermediate certificate authority key or client authentication.
     * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value pairs to be added to the stack attributes bag.
+  @return [Core::Response]
+:update_elastic_ip: |-
+  Calls the UpdateElasticIp API operation.
+  @param [Hash] options
+    * `:elastic_ip` - *required* - (String) The address.
+    * `:name` - (String) The new name.
   @return [Core::Response]
 :update_instance: |-
   Calls the UpdateInstance API operation.
@@ -800,7 +859,8 @@
       * `:number_of_disks` - *required* - (Integer) The number of disks in the volume.
       * `:size` - *required* - (Integer) The volume size.
     * `:enable_auto_healing` - (Boolean) Whether to disable auto healing for the layer.
-    * `:auto_assign_elastic_ips` - (Boolean) Whether to automatically assign an Elastic IP address to the layer.
+    * `:auto_assign_elastic_ips` - (Boolean) Whether to automatically assign an Elastic IP address to the layer's instances. For more information, see How to Edit a Layer.
+    * `:auto_assign_public_ips` - (Boolean) For stacks that are running in a VPC, whether to automatically assign a public IP address to the layer's instances. For more information, see How to Edit a Layer.
     * `:custom_recipes` - (Hash) A LayerCustomRecipes object that specifies the layer's custom recipes.
       * `:setup` - (Array&lt;<String>) An array of custom recipe names to be run following a setup event.
       * `:configure` - (Array&lt;<String>) An array of custom recipe names to be run following a configure event.
@@ -874,4 +934,11 @@
     * `:iam_user_arn` - *required* - (String) The user IAM ARN.
     * `:ssh_username` - (String) The user's new SSH user name.
     * `:ssh_public_key` - (String) The user's new SSH public key.
+  @return [Core::Response]
+:update_volume: |-
+  Calls the UpdateVolume API operation.
+  @param [Hash] options
+    * `:volume_id` - *required* - (String) The volume ID.
+    * `:name` - (String) The new name.
+    * `:mount_point` - (String) The new mount point.
   @return [Core::Response]

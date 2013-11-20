@@ -30,55 +30,84 @@
     * `:ip_ranges` - (Array<Hash>)
       * `:status` - (String)
       * `:cidrip` - (String)
-:authorize_snapshot_access: "Calls the AuthorizeSnapshotAccess API operation.\n@param
-  [Hash] options\n  * `:snapshot_identifier` - *required* - (String) The identifier
-  of the snapshot the account is authorized to restore.\n  * `:snapshot_cluster_identifier`
-  - (String) \n  * `:account_with_restore_access` - *required* - (String) The identifier
-  of the AWS customer account authorized to restore the specified snapshot.\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:snapshot_identifier` - (String)\n  * `:cluster_identifier`
-  - (String)\n  * `:snapshot_create_time` - (Time)\n  * `:status` - (String)\n  *
-  `:port` - (Integer)\n  * `:availability_zone` - (String)\n  * `:cluster_create_time`
-  - (Time)\n  * `:master_username` - (String)\n  * `:cluster_version` - (String)\n
-  \ * `:snapshot_type` - (String)\n  * `:node_type` - (String)\n  * `:number_of_nodes`
-  - (Integer)\n  * `:db_name` - (String)\n  * `:vpc_id` - (String)\n  * `:encrypted`
-  - (Boolean)\n  * `:accounts_with_restore_access` - (Array<Hash>)\n    * `:account_id`
-  - (String)\n  * `:owner_account` - (String)\n  * `:total_backup_size_in_mega_bytes`
-  - (Numeric)\n  * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)\n  *
-  `:backup_progress_in_mega_bytes` - (Numeric)\n  * `:current_backup_rate_in_mega_bytes_per_second`
-  - (Numeric)\n  * `:estimated_seconds_to_completion` - (Integer)\n  * `:elapsed_time_in_seconds`
-  - (Integer)"
-:copy_cluster_snapshot: "Calls the CopyClusterSnapshot API operation.\n@param [Hash]
-  options\n  * `:source_snapshot_identifier` - *required* - (String) The identifier
-  for the source snapshot. Constraints: Must be the identifier for a valid automated
-  snapshot whose state is \"available\".\n  * `:source_snapshot_cluster_identifier`
-  - (String) \n  * `:target_snapshot_identifier` - *required* - (String) The identifier
-  given to the new manual snapshot. Constraints: Cannot be null, empty, or blank.
-  Must contain from 1 to 255 alphanumeric characters or hyphens. First character must
-  be a letter. Cannot end with a hyphen or contain two consecutive hyphens. Must be
-  unique for the AWS account that is making the request.\n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:snapshot_identifier` - (String)\n  * `:cluster_identifier` - (String)\n  *
-  `:snapshot_create_time` - (Time)\n  * `:status` - (String)\n  * `:port` - (Integer)\n
-  \ * `:availability_zone` - (String)\n  * `:cluster_create_time` - (Time)\n  * `:master_username`
-  - (String)\n  * `:cluster_version` - (String)\n  * `:snapshot_type` - (String)\n
-  \ * `:node_type` - (String)\n  * `:number_of_nodes` - (Integer)\n  * `:db_name`
-  - (String)\n  * `:vpc_id` - (String)\n  * `:encrypted` - (Boolean)\n  * `:accounts_with_restore_access`
-  - (Array<Hash>)\n    * `:account_id` - (String)\n  * `:owner_account` - (String)\n
-  \ * `:total_backup_size_in_mega_bytes` - (Numeric)\n  * `:actual_incremental_backup_size_in_mega_bytes`
-  - (Numeric)\n  * `:backup_progress_in_mega_bytes` - (Numeric)\n  * `:current_backup_rate_in_mega_bytes_per_second`
-  - (Numeric)\n  * `:estimated_seconds_to_completion` - (Integer)\n  * `:elapsed_time_in_seconds`
-  - (Integer)"
+:authorize_snapshot_access: |-
+  Calls the AuthorizeSnapshotAccess API operation.
+  @param [Hash] options
+    * `:snapshot_identifier` - *required* - (String) The identifier of the snapshot the account is authorized to restore.
+    * `:snapshot_cluster_identifier` - (String) The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+    * `:account_with_restore_access` - *required* - (String) The identifier of the AWS customer account authorized to restore the specified snapshot.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:snapshot_identifier` - (String)
+    * `:cluster_identifier` - (String)
+    * `:snapshot_create_time` - (Time)
+    * `:status` - (String)
+    * `:port` - (Integer)
+    * `:availability_zone` - (String)
+    * `:cluster_create_time` - (Time)
+    * `:master_username` - (String)
+    * `:cluster_version` - (String)
+    * `:snapshot_type` - (String)
+    * `:node_type` - (String)
+    * `:number_of_nodes` - (Integer)
+    * `:db_name` - (String)
+    * `:vpc_id` - (String)
+    * `:encrypted` - (Boolean)
+    * `:encrypted_with_hsm` - (Boolean)
+    * `:accounts_with_restore_access` - (Array<Hash>)
+      * `:account_id` - (String)
+    * `:owner_account` - (String)
+    * `:total_backup_size_in_mega_bytes` - (Numeric)
+    * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
+    * `:backup_progress_in_mega_bytes` - (Numeric)
+    * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
+    * `:estimated_seconds_to_completion` - (Integer)
+    * `:elapsed_time_in_seconds` - (Integer)
+    * `:source_region` - (String)
+:copy_cluster_snapshot: |-
+  Calls the CopyClusterSnapshot API operation.
+  @param [Hash] options
+    * `:source_snapshot_identifier` - *required* - (String) The identifier for the source snapshot. Constraints: Must be the identifier for a valid automated snapshot whose state is "available".
+    * `:source_snapshot_cluster_identifier` - (String) The identifier of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name. Constraints: Must be the identifier for a valid cluster.
+    * `:target_snapshot_identifier` - *required* - (String) The identifier given to the new manual snapshot. Constraints: Cannot be null, empty, or blank. Must contain from 1 to 255 alphanumeric characters or hyphens. First character must be a letter. Cannot end with a hyphen or contain two consecutive hyphens. Must be unique for the AWS account that is making the request.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:snapshot_identifier` - (String)
+    * `:cluster_identifier` - (String)
+    * `:snapshot_create_time` - (Time)
+    * `:status` - (String)
+    * `:port` - (Integer)
+    * `:availability_zone` - (String)
+    * `:cluster_create_time` - (Time)
+    * `:master_username` - (String)
+    * `:cluster_version` - (String)
+    * `:snapshot_type` - (String)
+    * `:node_type` - (String)
+    * `:number_of_nodes` - (Integer)
+    * `:db_name` - (String)
+    * `:vpc_id` - (String)
+    * `:encrypted` - (Boolean)
+    * `:encrypted_with_hsm` - (Boolean)
+    * `:accounts_with_restore_access` - (Array<Hash>)
+      * `:account_id` - (String)
+    * `:owner_account` - (String)
+    * `:total_backup_size_in_mega_bytes` - (Numeric)
+    * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
+    * `:backup_progress_in_mega_bytes` - (Numeric)
+    * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
+    * `:estimated_seconds_to_completion` - (Integer)
+    * `:elapsed_time_in_seconds` - (Integer)
+    * `:source_region` - (String)
 :create_cluster: "Calls the CreateCluster API operation.\n@param [Hash] options\n
   \ * `:db_name` - (String) The name of the first database to be created when the
   cluster is created. To create additional databases after the cluster is created,
   connect to the cluster with a SQL client and use SQL commands to create a database.
-  For more information, go to Create a Database in the Amazon Redshift Developer Guide.
-  Default: dev Constraints: Must contain 1 to 64 alphanumeric characters. Must contain
-  only lowercase letters. Cannot be a word that is reserved by the service. A list
-  of reserved words can be found in Reserved Words in the Amazon Redshift Developer
-  Guide.\n  * `:cluster_identifier` - *required* - (String) A unique identifier for
-  the cluster. You use this identifier to refer to the cluster for any subsequent
+  For more information, go to Create a Database in the Amazon Redshift Database Developer
+  Guide. Default: dev Constraints: Must contain 1 to 64 alphanumeric characters. Must
+  contain only lowercase letters. Cannot be a word that is reserved by the service.
+  A list of reserved words can be found in Reserved Words in the Amazon Redshift Database
+  Developer Guide.\n  * `:cluster_identifier` - *required* - (String) A unique identifier
+  for the cluster. You use this identifier to refer to the cluster for any subsequent
   cluster operations such as deleting or modifying. The identifier also appears in
   the Amazon Redshift console. Constraints: Must contain from 1 to 63 alphanumeric
   characters or hyphens. Alphabetic characters must be lowercase. First character
@@ -93,10 +122,10 @@
   - *required* - (String) The user name associated with the master user account for
   the cluster that is being created. Constraints: Must be 1 - 128 alphanumeric characters.
   First character must be a letter. Cannot be a reserved word. A list of reserved
-  words can be found in Reserved Words in the Amazon Redshift Developer Guide.\n  *
-  `:master_user_password` - *required* - (String) The password associated with the
-  master user account for the cluster that is being created. Constraints: Must be
-  between 8 and 64 characters in length. Must contain at least one uppercase letter.
+  words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.\n
+  \ * `:master_user_password` - *required* - (String) The password associated with
+  the master user account for the cluster that is being created. Constraints: Must
+  be between 8 and 64 characters in length. Must contain at least one uppercase letter.
   Must contain at least one lowercase letter. Must contain one number. Can be any
   printable ASCII character (ASCII code 33 to 126) except ' (single quote), \" (double
   quote), \\, /, @, or space.\n  * `:cluster_security_groups` - (Array&lt;<String>)
@@ -150,27 +179,42 @@
   must be at least 1 and no more than 100.\n  * `:publicly_accessible` - (Boolean)
   If  `true` , the cluster can be accessed from a public network.\n  * `:encrypted`
   - (Boolean) If  `true` , the data in cluster is encrypted at rest. Default:  `false`
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:cluster_identifier` - (String)\n  * `:node_type`
-  - (String)\n  * `:cluster_status` - (String)\n  * `:modify_status` - (String)\n
-  \ * `:master_username` - (String)\n  * `:db_name` - (String)\n  * `:endpoint` -
-  (Hash)\n    * `:address` - (String)\n    * `:port` - (Integer)\n  * `:cluster_create_time`
-  - (Time)\n  * `:automated_snapshot_retention_period` - (Integer)\n  * `:cluster_security_groups`
-  - (Array<Hash>)\n    * `:cluster_security_group_name` - (String)\n    * `:status`
-  - (String)\n  * `:vpc_security_groups` - (Array<Hash>)\n    * `:vpc_security_group_id`
-  - (String)\n    * `:status` - (String)\n  * `:cluster_parameter_groups` - (Array<Hash>)\n
-  \   * `:parameter_group_name` - (String)\n    * `:parameter_apply_status` - (String)\n
-  \ * `:cluster_subnet_group_name` - (String)\n  * `:vpc_id` - (String)\n  * `:availability_zone`
-  - (String)\n  * `:preferred_maintenance_window` - (String)\n  * `:pending_modified_values`
-  - (Hash)\n    * `:master_user_password` - (String)\n    * `:node_type` - (String)\n
-  \   * `:number_of_nodes` - (Integer)\n    * `:cluster_type` - (String)\n    * `:cluster_version`
-  - (String)\n    * `:automated_snapshot_retention_period` - (Integer)\n  * `:cluster_version`
-  - (String)\n  * `:allow_version_upgrade` - (Boolean)\n  * `:number_of_nodes` - (Integer)\n
-  \ * `:publicly_accessible` - (Boolean)\n  * `:encrypted` - (Boolean)\n  * `:restore_status`
-  - (Hash)\n    * `:status` - (String)\n    * `:current_restore_rate_in_mega_bytes_per_second`
-  - (Numeric)\n    * `:snapshot_size_in_mega_bytes` - (Integer)\n    * `:progress_in_mega_bytes`
-  - (Integer)\n    * `:elapsed_time_in_seconds` - (Integer)\n    * `:estimated_time_to_completion_in_seconds`
-  - (Integer)"
+  \n  * `:hsm_client_certificate_identifier` - (String) Specifies the name of the
+  HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption
+  keys stored in an HSM.\n  * `:hsm_configuration_identifier` - (String) Specifies
+  the name of the HSM configuration that contains the information the Amazon Redshift
+  cluster can use to retrieve and store keys in an HSM.\n  * `:elastic_ip` - (String)
+  The Elastic IP (EIP) address for the cluster. Constraints: The cluster must be provisioned
+  in EC2-VPC and publicly-accessible through an Internet gateway. For more information
+  about provisioning clusters in EC2-VPC, go to Supported Platforms to Launch Your
+  Cluster in the Amazon Redshift Management Guide.\n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:cluster_identifier` - (String)\n  * `:node_type` - (String)\n  * `:cluster_status`
+  - (String)\n  * `:modify_status` - (String)\n  * `:master_username` - (String)\n
+  \ * `:db_name` - (String)\n  * `:endpoint` - (Hash)\n    * `:address` - (String)\n
+  \   * `:port` - (Integer)\n  * `:cluster_create_time` - (Time)\n  * `:automated_snapshot_retention_period`
+  - (Integer)\n  * `:cluster_security_groups` - (Array<Hash>)\n    * `:cluster_security_group_name`
+  - (String)\n    * `:status` - (String)\n  * `:vpc_security_groups` - (Array<Hash>)\n
+  \   * `:vpc_security_group_id` - (String)\n    * `:status` - (String)\n  * `:cluster_parameter_groups`
+  - (Array<Hash>)\n    * `:parameter_group_name` - (String)\n    * `:parameter_apply_status`
+  - (String)\n  * `:cluster_subnet_group_name` - (String)\n  * `:vpc_id` - (String)\n
+  \ * `:availability_zone` - (String)\n  * `:preferred_maintenance_window` - (String)\n
+  \ * `:pending_modified_values` - (Hash)\n    * `:master_user_password` - (String)\n
+  \   * `:node_type` - (String)\n    * `:number_of_nodes` - (Integer)\n    * `:cluster_type`
+  - (String)\n    * `:cluster_version` - (String)\n    * `:automated_snapshot_retention_period`
+  - (Integer)\n  * `:cluster_version` - (String)\n  * `:allow_version_upgrade` - (Boolean)\n
+  \ * `:number_of_nodes` - (Integer)\n  * `:publicly_accessible` - (Boolean)\n  *
+  `:encrypted` - (Boolean)\n  * `:restore_status` - (Hash)\n    * `:status` - (String)\n
+  \   * `:current_restore_rate_in_mega_bytes_per_second` - (Numeric)\n    * `:snapshot_size_in_mega_bytes`
+  - (Integer)\n    * `:progress_in_mega_bytes` - (Integer)\n    * `:elapsed_time_in_seconds`
+  - (Integer)\n    * `:estimated_time_to_completion_in_seconds` - (Integer)\n  * `:hsm_status`
+  - (Hash)\n    * `:hsm_client_certificate_identifier` - (String)\n    * `:hsm_configuration_identifier`
+  - (String)\n    * `:status` - (String)\n  * `:cluster_snapshot_copy_status` - (Hash)\n
+  \   * `:destination_region` - (String)\n    * `:retention_period` - (Integer)\n
+  \ * `:cluster_public_key` - (String)\n  * `:cluster_nodes` - (Array<Hash>)\n    *
+  `:node_role` - (String)\n    * `:private_ip_address` - (String)\n    * `:public_ip_address`
+  - (String)\n  * `:elastic_ip_status` - (Hash)\n    * `:elastic_ip` - (String)\n
+  \   * `:status` - (String)"
 :create_cluster_parameter_group: |-
   Calls the CreateClusterParameterGroup API operation.
   @param [Hash] options
@@ -220,6 +264,7 @@
     * `:db_name` - (String)
     * `:vpc_id` - (String)
     * `:encrypted` - (Boolean)
+    * `:encrypted_with_hsm` - (Boolean)
     * `:accounts_with_restore_access` - (Array<Hash>)
       * `:account_id` - (String)
     * `:owner_account` - (String)
@@ -229,6 +274,7 @@
     * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
     * `:estimated_seconds_to_completion` - (Integer)
     * `:elapsed_time_in_seconds` - (Integer)
+    * `:source_region` - (String)
 :create_cluster_subnet_group: |-
   Calls the CreateClusterSubnetGroup API operation.
   @param [Hash] options
@@ -246,6 +292,51 @@
       * `:subnet_availability_zone` - (Hash)
         * `:name` - (String)
       * `:subnet_status` - (String)
+:create_event_subscription: |-
+  Calls the CreateEventSubscription API operation.
+  @param [Hash] options
+    * `:subscription_name` - *required* - (String) The name of the event subscription to be created. Constraints: Cannot be null, empty, or blank. Must contain from 1 to 255 alphanumeric characters or hyphens. First character must be a letter. Cannot end with a hyphen or contain two consecutive hyphens.
+    * `:sns_topic_arn` - *required* - (String) The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the event notifications. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
+    * `:source_type` - (String) The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs. Valid values: cluster, cluster-parameter-group, cluster-security-group, and cluster-snapshot.
+    * `:source_ids` - (Array&lt;<String>) A list of one or more identifiers of Amazon Redshift source objects. All of the objects must be of the same type as was specified in the source type parameter. The event subscription will return only events generated by the specified objects. If not specified, then events are returned for all objects within the source type specified. Example: my-cluster-1, my-cluster-2 Example: my-snapshot-20131010
+    * `:event_categories` - (Array&lt;<String>) Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: Configuration, Management, Monitoring, Security
+    * `:severity` - (String) Specifies the Amazon Redshift event severity to be published by the event notification subscription. Values: ERROR, INFO
+    * `:enabled` - (Boolean) A Boolean value; set to  `true`  to activate the subscription, set to  `false`  to create the subscription but not active it.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:customer_aws_id` - (String)
+    * `:cust_subscription_id` - (String)
+    * `:sns_topic_arn` - (String)
+    * `:status` - (String)
+    * `:subscription_creation_time` - (Time)
+    * `:source_type` - (String)
+    * `:source_ids_list` - (Array<String>)
+    * `:event_categories_list` - (Array<String>)
+    * `:severity` - (String)
+    * `:enabled` - (Boolean)
+:create_hsm_client_certificate: |-
+  Calls the CreateHsmClientCertificate API operation.
+  @param [Hash] options
+    * `:hsm_client_certificate_identifier` - *required* - (String) The identifier to be assigned to the new HSM client certificate that the cluster will use to connect to the HSM to retrieve the database encryption keys.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:hsm_client_certificate_identifier` - (String)
+    * `:hsm_client_certificate_public_key` - (String)
+:create_hsm_configuration: |-
+  Calls the CreateHsmConfiguration API operation.
+  @param [Hash] options
+    * `:hsm_configuration_identifier` - *required* - (String) The identifier to be assigned to the new Amazon Redshift HSM configuration.
+    * `:description` - *required* - (String) A text description of the HSM configuration to be created.
+    * `:hsm_ip_address` - *required* - (String) The IP address that the Amazon Redshift cluster must use to access the HSM.
+    * `:hsm_partition_name` - *required* - (String) The name of the partition in the HSM where the Amazon Redshift clusters will store their database encryption keys.
+    * `:hsm_partition_password` - *required* - (String) The password required to access the HSM partition.
+    * `:hsm_server_public_certificate` - *required* - (String) The public key used to access the HSM client certificate, which was created by calling the Amazon Redshift create HSM certificate command.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:hsm_configuration_identifier` - (String)
+    * `:description` - (String)
+    * `:hsm_ip_address` - (String)
+    * `:hsm_partition_name` - (String)
 :delete_cluster: "Calls the DeleteCluster API operation.\n@param [Hash] options\n
   \ * `:cluster_identifier` - *required* - (String) The identifier of the cluster
   to be deleted. Constraints: Must contain lowercase characters. Must contain from
@@ -280,7 +371,13 @@
   - (Hash)\n    * `:status` - (String)\n    * `:current_restore_rate_in_mega_bytes_per_second`
   - (Numeric)\n    * `:snapshot_size_in_mega_bytes` - (Integer)\n    * `:progress_in_mega_bytes`
   - (Integer)\n    * `:elapsed_time_in_seconds` - (Integer)\n    * `:estimated_time_to_completion_in_seconds`
-  - (Integer)"
+  - (Integer)\n  * `:hsm_status` - (Hash)\n    * `:hsm_client_certificate_identifier`
+  - (String)\n    * `:hsm_configuration_identifier` - (String)\n    * `:status` -
+  (String)\n  * `:cluster_snapshot_copy_status` - (Hash)\n    * `:destination_region`
+  - (String)\n    * `:retention_period` - (Integer)\n  * `:cluster_public_key` - (String)\n
+  \ * `:cluster_nodes` - (Array<Hash>)\n    * `:node_role` - (String)\n    * `:private_ip_address`
+  - (String)\n    * `:public_ip_address` - (String)\n  * `:elastic_ip_status` - (Hash)\n
+  \   * `:elastic_ip` - (String)\n    * `:status` - (String)"
 :delete_cluster_parameter_group: |-
   Calls the DeleteClusterParameterGroup API operation.
   @param [Hash] options
@@ -291,27 +388,58 @@
   @param [Hash] options
     * `:cluster_security_group_name` - *required* - (String) The name of the cluster security group to be deleted.
   @return [Core::Response]
-:delete_cluster_snapshot: "Calls the DeleteClusterSnapshot API operation.\n@param
-  [Hash] options\n  * `:snapshot_identifier` - *required* - (String) The unique identifier
-  of the manual snapshot to be deleted. Constraints: Must be the name of an existing
-  snapshot that is in the available state.\n  * `:snapshot_cluster_identifier` - (String)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:snapshot_identifier` - (String)\n  * `:cluster_identifier`
-  - (String)\n  * `:snapshot_create_time` - (Time)\n  * `:status` - (String)\n  *
-  `:port` - (Integer)\n  * `:availability_zone` - (String)\n  * `:cluster_create_time`
-  - (Time)\n  * `:master_username` - (String)\n  * `:cluster_version` - (String)\n
-  \ * `:snapshot_type` - (String)\n  * `:node_type` - (String)\n  * `:number_of_nodes`
-  - (Integer)\n  * `:db_name` - (String)\n  * `:vpc_id` - (String)\n  * `:encrypted`
-  - (Boolean)\n  * `:accounts_with_restore_access` - (Array<Hash>)\n    * `:account_id`
-  - (String)\n  * `:owner_account` - (String)\n  * `:total_backup_size_in_mega_bytes`
-  - (Numeric)\n  * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)\n  *
-  `:backup_progress_in_mega_bytes` - (Numeric)\n  * `:current_backup_rate_in_mega_bytes_per_second`
-  - (Numeric)\n  * `:estimated_seconds_to_completion` - (Integer)\n  * `:elapsed_time_in_seconds`
-  - (Integer)"
+:delete_cluster_snapshot: |-
+  Calls the DeleteClusterSnapshot API operation.
+  @param [Hash] options
+    * `:snapshot_identifier` - *required* - (String) The unique identifier of the manual snapshot to be deleted. Constraints: Must be the name of an existing snapshot that is in the available state.
+    * `:snapshot_cluster_identifier` - (String) The unique identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name. Constraints: Must be the name of valid cluster.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:snapshot_identifier` - (String)
+    * `:cluster_identifier` - (String)
+    * `:snapshot_create_time` - (Time)
+    * `:status` - (String)
+    * `:port` - (Integer)
+    * `:availability_zone` - (String)
+    * `:cluster_create_time` - (Time)
+    * `:master_username` - (String)
+    * `:cluster_version` - (String)
+    * `:snapshot_type` - (String)
+    * `:node_type` - (String)
+    * `:number_of_nodes` - (Integer)
+    * `:db_name` - (String)
+    * `:vpc_id` - (String)
+    * `:encrypted` - (Boolean)
+    * `:encrypted_with_hsm` - (Boolean)
+    * `:accounts_with_restore_access` - (Array<Hash>)
+      * `:account_id` - (String)
+    * `:owner_account` - (String)
+    * `:total_backup_size_in_mega_bytes` - (Numeric)
+    * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
+    * `:backup_progress_in_mega_bytes` - (Numeric)
+    * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
+    * `:estimated_seconds_to_completion` - (Integer)
+    * `:elapsed_time_in_seconds` - (Integer)
+    * `:source_region` - (String)
 :delete_cluster_subnet_group: |-
   Calls the DeleteClusterSubnetGroup API operation.
   @param [Hash] options
     * `:cluster_subnet_group_name` - *required* - (String) The name of the cluster subnet group name to be deleted.
+  @return [Core::Response]
+:delete_event_subscription: |-
+  Calls the DeleteEventSubscription API operation.
+  @param [Hash] options
+    * `:subscription_name` - *required* - (String) The name of the Amazon Redshift event notification subscription to be deleted.
+  @return [Core::Response]
+:delete_hsm_client_certificate: |-
+  Calls the DeleteHsmClientCertificate API operation.
+  @param [Hash] options
+    * `:hsm_client_certificate_identifier` - *required* - (String) The identifier of the HSM client certificate to be deleted.
+  @return [Core::Response]
+:delete_hsm_configuration: |-
+  Calls the DeleteHsmConfiguration API operation.
+  @param [Hash] options
+    * `:hsm_configuration_identifier` - *required* - (String) The identifier of the Amazon Redshift HSM configuration to be deleted.
   @return [Core::Response]
 :describe_cluster_parameter_groups: |-
   Calls the DescribeClusterParameterGroups API operation.
@@ -394,6 +522,7 @@
       * `:db_name` - (String)
       * `:vpc_id` - (String)
       * `:encrypted` - (Boolean)
+      * `:encrypted_with_hsm` - (Boolean)
       * `:accounts_with_restore_access` - (Array<Hash>)
         * `:account_id` - (String)
       * `:owner_account` - (String)
@@ -403,6 +532,7 @@
       * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
       * `:estimated_seconds_to_completion` - (Integer)
       * `:elapsed_time_in_seconds` - (Integer)
+      * `:source_region` - (String)
 :describe_cluster_subnet_groups: |-
   Calls the DescribeClusterSubnetGroups API operation.
   @param [Hash] options
@@ -489,6 +619,21 @@
         * `:progress_in_mega_bytes` - (Integer)
         * `:elapsed_time_in_seconds` - (Integer)
         * `:estimated_time_to_completion_in_seconds` - (Integer)
+      * `:hsm_status` - (Hash)
+        * `:hsm_client_certificate_identifier` - (String)
+        * `:hsm_configuration_identifier` - (String)
+        * `:status` - (String)
+      * `:cluster_snapshot_copy_status` - (Hash)
+        * `:destination_region` - (String)
+        * `:retention_period` - (Integer)
+      * `:cluster_public_key` - (String)
+      * `:cluster_nodes` - (Array<Hash>)
+        * `:node_role` - (String)
+        * `:private_ip_address` - (String)
+        * `:public_ip_address` - (String)
+      * `:elastic_ip_status` - (Hash)
+        * `:elastic_ip` - (String)
+        * `:status` - (String)
 :describe_default_cluster_parameters: |-
   Calls the DescribeDefaultClusterParameters API operation.
   @param [Hash] options
@@ -508,6 +653,39 @@
       * `:allowed_values` - (String)
       * `:is_modifiable` - (Boolean)
       * `:minimum_engine_version` - (String)
+:describe_event_categories: |-
+  Calls the DescribeEventCategories API operation.
+  @param [Hash] options
+    * `:source_type` - (String) The source type, such as cluster or parameter group, to which the described event categories apply. Valid values: cluster, snapshot, parameter group, and security group.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:event_categories_map_list` - (Array<Hash>)
+      * `:source_type` - (String)
+      * `:events` - (Array<Hash>)
+        * `:event_id` - (String)
+        * `:event_categories` - (Array<String>)
+        * `:event_description` - (String)
+        * `:severity` - (String)
+:describe_event_subscriptions: |-
+  Calls the DescribeEventSubscriptions API operation.
+  @param [Hash] options
+    * `:subscription_name` - (String) The name of the Amazon Redshift event notification subscription to be described.
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: minimum 20, maximum 100
+    * `:marker` - (String) An optional pagination token provided by a previous DescribeOrderableClusterOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:event_subscriptions_list` - (Array<Hash>)
+      * `:customer_aws_id` - (String)
+      * `:cust_subscription_id` - (String)
+      * `:sns_topic_arn` - (String)
+      * `:status` - (String)
+      * `:subscription_creation_time` - (Time)
+      * `:source_type` - (String)
+      * `:source_ids_list` - (Array<String>)
+      * `:event_categories_list` - (Array<String>)
+      * `:severity` - (String)
+      * `:enabled` - (Boolean)
 :describe_events: |-
   Calls the DescribeEvents API operation.
   @param [Hash] options
@@ -529,7 +707,48 @@
       * `:source_identifier` - (String)
       * `:source_type` - (String)
       * `:message` - (String)
+      * `:event_categories` - (Array<String>)
+      * `:severity` - (String)
       * `:date` - (Time)
+      * `:event_id` - (String)
+:describe_hsm_client_certificates: |-
+  Calls the DescribeHsmClientCertificates API operation.
+  @param [Hash] options
+    * `:hsm_client_certificate_identifier` - (String) The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates associated with Amazon Redshift clusters owned by your AWS customer account.
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results may be retrieved. Default: 100 Constraints: minimum 20, maximum 100.
+    * `:marker` - (String) An optional marker returned from a previous DescribeOrderableClusterOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:hsm_client_certificates` - (Array<Hash>)
+      * `:hsm_client_certificate_identifier` - (String)
+      * `:hsm_client_certificate_public_key` - (String)
+:describe_hsm_configurations: |-
+  Calls the DescribeHsmConfigurations API operation.
+  @param [Hash] options
+    * `:hsm_configuration_identifier` - (String) The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your AWS customer account.
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results may be retrieved. Default: 100 Constraints: minimum 20, maximum 100.
+    * `:marker` - (String) An optional marker returned from a previous DescribeOrderableClusterOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:hsm_configurations` - (Array<Hash>)
+      * `:hsm_configuration_identifier` - (String)
+      * `:description` - (String)
+      * `:hsm_ip_address` - (String)
+      * `:hsm_partition_name` - (String)
+:describe_logging_status: |-
+  Calls the DescribeLoggingStatus API operation.
+  @param [Hash] options
+    * `:cluster_identifier` - *required* - (String) The identifier of the cluster to get the logging status from. Example: examplecluster
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:logging_enabled` - (Boolean)
+    * `:bucket_name` - (String)
+    * `:s3_key_prefix` - (String)
+    * `:last_successful_delivery_time` - (Time)
+    * `:last_failure_time` - (Time)
+    * `:last_failure_message` - (String)
 :describe_orderable_cluster_options: |-
   Calls the DescribeOrderableClusterOptions API operation.
   @param [Hash] options
@@ -603,6 +822,162 @@
     * `:import_tables_completed` - (Array<String>)
     * `:import_tables_in_progress` - (Array<String>)
     * `:import_tables_not_started` - (Array<String>)
+:disable_logging: |-
+  Calls the DisableLogging API operation.
+  @param [Hash] options
+    * `:cluster_identifier` - *required* - (String) The identifier of the cluster on which logging is to be stopped. Example: examplecluster
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:logging_enabled` - (Boolean)
+    * `:bucket_name` - (String)
+    * `:s3_key_prefix` - (String)
+    * `:last_successful_delivery_time` - (Time)
+    * `:last_failure_time` - (Time)
+    * `:last_failure_message` - (String)
+:disable_snapshot_copy: |-
+  Calls the DisableSnapshotCopy API operation.
+  @param [Hash] options
+    * `:cluster_identifier` - *required* - (String) The unique identifier of the source cluster that you want to disable copying of snapshots to a destination region. Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cluster_identifier` - (String)
+    * `:node_type` - (String)
+    * `:cluster_status` - (String)
+    * `:modify_status` - (String)
+    * `:master_username` - (String)
+    * `:db_name` - (String)
+    * `:endpoint` - (Hash)
+      * `:address` - (String)
+      * `:port` - (Integer)
+    * `:cluster_create_time` - (Time)
+    * `:automated_snapshot_retention_period` - (Integer)
+    * `:cluster_security_groups` - (Array<Hash>)
+      * `:cluster_security_group_name` - (String)
+      * `:status` - (String)
+    * `:vpc_security_groups` - (Array<Hash>)
+      * `:vpc_security_group_id` - (String)
+      * `:status` - (String)
+    * `:cluster_parameter_groups` - (Array<Hash>)
+      * `:parameter_group_name` - (String)
+      * `:parameter_apply_status` - (String)
+    * `:cluster_subnet_group_name` - (String)
+    * `:vpc_id` - (String)
+    * `:availability_zone` - (String)
+    * `:preferred_maintenance_window` - (String)
+    * `:pending_modified_values` - (Hash)
+      * `:master_user_password` - (String)
+      * `:node_type` - (String)
+      * `:number_of_nodes` - (Integer)
+      * `:cluster_type` - (String)
+      * `:cluster_version` - (String)
+      * `:automated_snapshot_retention_period` - (Integer)
+    * `:cluster_version` - (String)
+    * `:allow_version_upgrade` - (Boolean)
+    * `:number_of_nodes` - (Integer)
+    * `:publicly_accessible` - (Boolean)
+    * `:encrypted` - (Boolean)
+    * `:restore_status` - (Hash)
+      * `:status` - (String)
+      * `:current_restore_rate_in_mega_bytes_per_second` - (Numeric)
+      * `:snapshot_size_in_mega_bytes` - (Integer)
+      * `:progress_in_mega_bytes` - (Integer)
+      * `:elapsed_time_in_seconds` - (Integer)
+      * `:estimated_time_to_completion_in_seconds` - (Integer)
+    * `:hsm_status` - (Hash)
+      * `:hsm_client_certificate_identifier` - (String)
+      * `:hsm_configuration_identifier` - (String)
+      * `:status` - (String)
+    * `:cluster_snapshot_copy_status` - (Hash)
+      * `:destination_region` - (String)
+      * `:retention_period` - (Integer)
+    * `:cluster_public_key` - (String)
+    * `:cluster_nodes` - (Array<Hash>)
+      * `:node_role` - (String)
+      * `:private_ip_address` - (String)
+      * `:public_ip_address` - (String)
+    * `:elastic_ip_status` - (Hash)
+      * `:elastic_ip` - (String)
+      * `:status` - (String)
+:enable_logging: |-
+  Calls the EnableLogging API operation.
+  @param [Hash] options
+    * `:cluster_identifier` - *required* - (String) The identifier of the cluster on which logging is to be started. Example: examplecluster
+    * `:bucket_name` - *required* - (String) The name of an existing S3 bucket where the log files are to be stored. Constraints: Must be in the same region as the cluster The cluster must have read bucket and put object permissions
+    * `:s3_key_prefix` - (String) The prefix applied to the log file names. Constraints: Cannot exceed 512 characters Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash (\), or control characters. The hexadecimal codes for invalid characters are: x00 to x20 x22 x27 x5c x7f or larger
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:logging_enabled` - (Boolean)
+    * `:bucket_name` - (String)
+    * `:s3_key_prefix` - (String)
+    * `:last_successful_delivery_time` - (Time)
+    * `:last_failure_time` - (Time)
+    * `:last_failure_message` - (String)
+:enable_snapshot_copy: |-
+  Calls the EnableSnapshotCopy API operation.
+  @param [Hash] options
+    * `:cluster_identifier` - *required* - (String) The unique identifier of the source cluster to copy snapshots from. Constraints: Must be the valid name of an existing cluster that does not already have cross-region snapshot copy enabled.
+    * `:destination_region` - *required* - (String) The destination region that you want to copy snapshots to. Constraints: Must be the name of a valid region. For more information, see Regions and Endpoints in the Amazon Web Services General Reference.
+    * `:retention_period` - (Integer) The number of days to retain automated snapshots in the destination region after they are copied from the source region. Default: 7. Constraints: Must be at least 1 and no more than 35.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cluster_identifier` - (String)
+    * `:node_type` - (String)
+    * `:cluster_status` - (String)
+    * `:modify_status` - (String)
+    * `:master_username` - (String)
+    * `:db_name` - (String)
+    * `:endpoint` - (Hash)
+      * `:address` - (String)
+      * `:port` - (Integer)
+    * `:cluster_create_time` - (Time)
+    * `:automated_snapshot_retention_period` - (Integer)
+    * `:cluster_security_groups` - (Array<Hash>)
+      * `:cluster_security_group_name` - (String)
+      * `:status` - (String)
+    * `:vpc_security_groups` - (Array<Hash>)
+      * `:vpc_security_group_id` - (String)
+      * `:status` - (String)
+    * `:cluster_parameter_groups` - (Array<Hash>)
+      * `:parameter_group_name` - (String)
+      * `:parameter_apply_status` - (String)
+    * `:cluster_subnet_group_name` - (String)
+    * `:vpc_id` - (String)
+    * `:availability_zone` - (String)
+    * `:preferred_maintenance_window` - (String)
+    * `:pending_modified_values` - (Hash)
+      * `:master_user_password` - (String)
+      * `:node_type` - (String)
+      * `:number_of_nodes` - (Integer)
+      * `:cluster_type` - (String)
+      * `:cluster_version` - (String)
+      * `:automated_snapshot_retention_period` - (Integer)
+    * `:cluster_version` - (String)
+    * `:allow_version_upgrade` - (Boolean)
+    * `:number_of_nodes` - (Integer)
+    * `:publicly_accessible` - (Boolean)
+    * `:encrypted` - (Boolean)
+    * `:restore_status` - (Hash)
+      * `:status` - (String)
+      * `:current_restore_rate_in_mega_bytes_per_second` - (Numeric)
+      * `:snapshot_size_in_mega_bytes` - (Integer)
+      * `:progress_in_mega_bytes` - (Integer)
+      * `:elapsed_time_in_seconds` - (Integer)
+      * `:estimated_time_to_completion_in_seconds` - (Integer)
+    * `:hsm_status` - (Hash)
+      * `:hsm_client_certificate_identifier` - (String)
+      * `:hsm_configuration_identifier` - (String)
+      * `:status` - (String)
+    * `:cluster_snapshot_copy_status` - (Hash)
+      * `:destination_region` - (String)
+      * `:retention_period` - (Integer)
+    * `:cluster_public_key` - (String)
+    * `:cluster_nodes` - (Array<Hash>)
+      * `:node_role` - (String)
+      * `:private_ip_address` - (String)
+      * `:public_ip_address` - (String)
+    * `:elastic_ip_status` - (Hash)
+      * `:elastic_ip` - (String)
+      * `:status` - (String)
 :modify_cluster: "Calls the ModifyCluster API operation.\n@param [Hash] options\n
   \ * `:cluster_identifier` - *required* - (String) The unique identifier of the cluster
   to be modified. Example: examplecluster\n  * `:cluster_type` - (String) The new
@@ -671,11 +1046,16 @@
   about managing parameter groups, go to Amazon Redshift Parameter Groups in the Amazon
   Redshift Management Guide. Example: 1.0\n  * `:allow_version_upgrade` - (Boolean)
   If  `true` , upgrades will be applied automatically to the cluster during the maintenance
-  window. Default:  `false` \n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:cluster_identifier`
-  - (String)\n  * `:node_type` - (String)\n  * `:cluster_status` - (String)\n  * `:modify_status`
-  - (String)\n  * `:master_username` - (String)\n  * `:db_name` - (String)\n  * `:endpoint`
-  - (Hash)\n    * `:address` - (String)\n    * `:port` - (Integer)\n  * `:cluster_create_time`
+  window. Default:  `false` \n  * `:hsm_client_certificate_identifier` - (String)
+  Specifies the name of the HSM client certificate the Amazon Redshift cluster uses
+  to retrieve the data encryption keys stored in an HSM.\n  * `:hsm_configuration_identifier`
+  - (String) Specifies the name of the HSM configuration that contains the information
+  the Amazon Redshift cluster can use to retrieve and store keys in an HSM.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:cluster_identifier` - (String)\n  * `:node_type` -
+  (String)\n  * `:cluster_status` - (String)\n  * `:modify_status` - (String)\n  *
+  `:master_username` - (String)\n  * `:db_name` - (String)\n  * `:endpoint` - (Hash)\n
+  \   * `:address` - (String)\n    * `:port` - (Integer)\n  * `:cluster_create_time`
   - (Time)\n  * `:automated_snapshot_retention_period` - (Integer)\n  * `:cluster_security_groups`
   - (Array<Hash>)\n    * `:cluster_security_group_name` - (String)\n    * `:status`
   - (String)\n  * `:vpc_security_groups` - (Array<Hash>)\n    * `:vpc_security_group_id`
@@ -691,7 +1071,13 @@
   - (Hash)\n    * `:status` - (String)\n    * `:current_restore_rate_in_mega_bytes_per_second`
   - (Numeric)\n    * `:snapshot_size_in_mega_bytes` - (Integer)\n    * `:progress_in_mega_bytes`
   - (Integer)\n    * `:elapsed_time_in_seconds` - (Integer)\n    * `:estimated_time_to_completion_in_seconds`
-  - (Integer)"
+  - (Integer)\n  * `:hsm_status` - (Hash)\n    * `:hsm_client_certificate_identifier`
+  - (String)\n    * `:hsm_configuration_identifier` - (String)\n    * `:status` -
+  (String)\n  * `:cluster_snapshot_copy_status` - (Hash)\n    * `:destination_region`
+  - (String)\n    * `:retention_period` - (Integer)\n  * `:cluster_public_key` - (String)\n
+  \ * `:cluster_nodes` - (Array<Hash>)\n    * `:node_role` - (String)\n    * `:private_ip_address`
+  - (String)\n    * `:public_ip_address` - (String)\n  * `:elastic_ip_status` - (Hash)\n
+  \   * `:elastic_ip` - (String)\n    * `:status` - (String)"
 :modify_cluster_parameter_group: |-
   Calls the ModifyClusterParameterGroup API operation.
   @param [Hash] options
@@ -726,6 +1112,93 @@
       * `:subnet_availability_zone` - (Hash)
         * `:name` - (String)
       * `:subnet_status` - (String)
+:modify_event_subscription: |-
+  Calls the ModifyEventSubscription API operation.
+  @param [Hash] options
+    * `:subscription_name` - *required* - (String) The name of the modified Amazon Redshift event notification subscription.
+    * `:sns_topic_arn` - (String) The Amazon Resource Name (ARN) of the SNS topic to be used by the event notification subscription.
+    * `:source_type` - (String) The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs. Valid values: cluster, cluster-parameter-group, cluster-security-group, and cluster-snapshot.
+    * `:source_ids` - (Array&lt;<String>) A list of one or more identifiers of Amazon Redshift source objects. All of the objects must be of the same type as was specified in the source type parameter. The event subscription will return only events generated by the specified objects. If not specified, then events are returned for all objects within the source type specified. Example: my-cluster-1, my-cluster-2 Example: my-snapshot-20131010
+    * `:event_categories` - (Array&lt;<String>) Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: Configuration, Management, Monitoring, Security
+    * `:severity` - (String) Specifies the Amazon Redshift event severity to be published by the event notification subscription. Values: ERROR, INFO
+    * `:enabled` - (Boolean) A Boolean value indicating if the subscription is enabled.  `true`  indicates the subscription is enabled
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:customer_aws_id` - (String)
+    * `:cust_subscription_id` - (String)
+    * `:sns_topic_arn` - (String)
+    * `:status` - (String)
+    * `:subscription_creation_time` - (Time)
+    * `:source_type` - (String)
+    * `:source_ids_list` - (Array<String>)
+    * `:event_categories_list` - (Array<String>)
+    * `:severity` - (String)
+    * `:enabled` - (Boolean)
+:modify_snapshot_copy_retention_period: |-
+  Calls the ModifySnapshotCopyRetentionPeriod API operation.
+  @param [Hash] options
+    * `:cluster_identifier` - *required* - (String) The unique identifier of the cluster for which you want to change the retention period for automated snapshots that are copied to a destination region. Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.
+    * `:retention_period` - *required* - (Integer) The number of days to retain automated snapshots in the destination region after they are copied from the source region. If you decrease the retention period for automated snapshots that are copied to a destination region, Amazon Redshift will delete any existing automated snapshots that were copied to the destination region and that fall outside of the new retention period. Constraints: Must be at least 1 and no more than 35.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cluster_identifier` - (String)
+    * `:node_type` - (String)
+    * `:cluster_status` - (String)
+    * `:modify_status` - (String)
+    * `:master_username` - (String)
+    * `:db_name` - (String)
+    * `:endpoint` - (Hash)
+      * `:address` - (String)
+      * `:port` - (Integer)
+    * `:cluster_create_time` - (Time)
+    * `:automated_snapshot_retention_period` - (Integer)
+    * `:cluster_security_groups` - (Array<Hash>)
+      * `:cluster_security_group_name` - (String)
+      * `:status` - (String)
+    * `:vpc_security_groups` - (Array<Hash>)
+      * `:vpc_security_group_id` - (String)
+      * `:status` - (String)
+    * `:cluster_parameter_groups` - (Array<Hash>)
+      * `:parameter_group_name` - (String)
+      * `:parameter_apply_status` - (String)
+    * `:cluster_subnet_group_name` - (String)
+    * `:vpc_id` - (String)
+    * `:availability_zone` - (String)
+    * `:preferred_maintenance_window` - (String)
+    * `:pending_modified_values` - (Hash)
+      * `:master_user_password` - (String)
+      * `:node_type` - (String)
+      * `:number_of_nodes` - (Integer)
+      * `:cluster_type` - (String)
+      * `:cluster_version` - (String)
+      * `:automated_snapshot_retention_period` - (Integer)
+    * `:cluster_version` - (String)
+    * `:allow_version_upgrade` - (Boolean)
+    * `:number_of_nodes` - (Integer)
+    * `:publicly_accessible` - (Boolean)
+    * `:encrypted` - (Boolean)
+    * `:restore_status` - (Hash)
+      * `:status` - (String)
+      * `:current_restore_rate_in_mega_bytes_per_second` - (Numeric)
+      * `:snapshot_size_in_mega_bytes` - (Integer)
+      * `:progress_in_mega_bytes` - (Integer)
+      * `:elapsed_time_in_seconds` - (Integer)
+      * `:estimated_time_to_completion_in_seconds` - (Integer)
+    * `:hsm_status` - (Hash)
+      * `:hsm_client_certificate_identifier` - (String)
+      * `:hsm_configuration_identifier` - (String)
+      * `:status` - (String)
+    * `:cluster_snapshot_copy_status` - (Hash)
+      * `:destination_region` - (String)
+      * `:retention_period` - (Integer)
+    * `:cluster_public_key` - (String)
+    * `:cluster_nodes` - (Array<Hash>)
+      * `:node_role` - (String)
+      * `:private_ip_address` - (String)
+      * `:public_ip_address` - (String)
+    * `:elastic_ip_status` - (Hash)
+      * `:elastic_ip` - (String)
+      * `:status` - (String)
 :purchase_reserved_node_offering: |-
   Calls the PurchaseReservedNodeOffering API operation.
   @param [Hash] options
@@ -796,6 +1269,21 @@
       * `:progress_in_mega_bytes` - (Integer)
       * `:elapsed_time_in_seconds` - (Integer)
       * `:estimated_time_to_completion_in_seconds` - (Integer)
+    * `:hsm_status` - (Hash)
+      * `:hsm_client_certificate_identifier` - (String)
+      * `:hsm_configuration_identifier` - (String)
+      * `:status` - (String)
+    * `:cluster_snapshot_copy_status` - (Hash)
+      * `:destination_region` - (String)
+      * `:retention_period` - (Integer)
+    * `:cluster_public_key` - (String)
+    * `:cluster_nodes` - (Array<Hash>)
+      * `:node_role` - (String)
+      * `:private_ip_address` - (String)
+      * `:public_ip_address` - (String)
+    * `:elastic_ip_status` - (Hash)
+      * `:elastic_ip` - (String)
+      * `:status` - (String)
 :reset_cluster_parameter_group: "Calls the ResetClusterParameterGroup API operation.\n@param
   [Hash] options\n  * `:parameter_group_name` - *required* - (String) The name of
   the cluster parameter group to be reset.\n  * `:reset_all_parameters` - (Boolean)
@@ -823,40 +1311,55 @@
   two consecutive hyphens. Must be unique for all clusters within an AWS account.\n
   \ * `:snapshot_identifier` - *required* - (String) The name of the snapshot from
   which to create the new cluster. This parameter isn't case sensitive. Example: my-snapshot-id\n
-  \ * `:snapshot_cluster_identifier` - (String) \n  * `:port` - (Integer) The port
-  number on which the cluster accepts connections. Default: The same port as the original
-  cluster. Constraints: Must be between 1115 and 65535.\n  * `:availability_zone`
-  - (String) The Amazon EC2 Availability Zone in which to restore the cluster. Default:
-  A random, system-chosen Availability Zone. Example: us-east-1a\n  * `:allow_version_upgrade`
-  - (Boolean) If  `true` , upgrades can be applied during the maintenance window to
-  the Amazon Redshift engine that is running on the cluster. Default:  `true` \n  *
-  `:cluster_subnet_group_name` - (String) The name of the subnet group where you want
-  to cluster restored. A snapshot of cluster in VPC can be restored only in VPC. Therefore,
-  you must provide subnet group name where you want the cluster restored.\n  * `:publicly_accessible`
-  - (Boolean) If  `true` , the cluster can be accessed from a public network.\n  *
-  `:owner_account` - (String) The AWS customer account used to create or copy the
-  snapshot. Required if you are restoring a snapshot you do not own, optional if you
-  own the snapshot.\n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:cluster_identifier` - (String)\n
-  \ * `:node_type` - (String)\n  * `:cluster_status` - (String)\n  * `:modify_status`
-  - (String)\n  * `:master_username` - (String)\n  * `:db_name` - (String)\n  * `:endpoint`
-  - (Hash)\n    * `:address` - (String)\n    * `:port` - (Integer)\n  * `:cluster_create_time`
-  - (Time)\n  * `:automated_snapshot_retention_period` - (Integer)\n  * `:cluster_security_groups`
-  - (Array<Hash>)\n    * `:cluster_security_group_name` - (String)\n    * `:status`
-  - (String)\n  * `:vpc_security_groups` - (Array<Hash>)\n    * `:vpc_security_group_id`
-  - (String)\n    * `:status` - (String)\n  * `:cluster_parameter_groups` - (Array<Hash>)\n
-  \   * `:parameter_group_name` - (String)\n    * `:parameter_apply_status` - (String)\n
-  \ * `:cluster_subnet_group_name` - (String)\n  * `:vpc_id` - (String)\n  * `:availability_zone`
-  - (String)\n  * `:preferred_maintenance_window` - (String)\n  * `:pending_modified_values`
-  - (Hash)\n    * `:master_user_password` - (String)\n    * `:node_type` - (String)\n
-  \   * `:number_of_nodes` - (Integer)\n    * `:cluster_type` - (String)\n    * `:cluster_version`
-  - (String)\n    * `:automated_snapshot_retention_period` - (Integer)\n  * `:cluster_version`
-  - (String)\n  * `:allow_version_upgrade` - (Boolean)\n  * `:number_of_nodes` - (Integer)\n
-  \ * `:publicly_accessible` - (Boolean)\n  * `:encrypted` - (Boolean)\n  * `:restore_status`
-  - (Hash)\n    * `:status` - (String)\n    * `:current_restore_rate_in_mega_bytes_per_second`
-  - (Numeric)\n    * `:snapshot_size_in_mega_bytes` - (Integer)\n    * `:progress_in_mega_bytes`
-  - (Integer)\n    * `:elapsed_time_in_seconds` - (Integer)\n    * `:estimated_time_to_completion_in_seconds`
-  - (Integer)"
+  \ * `:snapshot_cluster_identifier` - (String) The name of the cluster the source
+  snapshot was created from. This parameter is required if your IAM user has a policy
+  containing a snapshot resource element that specifies anything other than * for
+  the cluster name.\n  * `:port` - (Integer) The port number on which the cluster
+  accepts connections. Default: The same port as the original cluster. Constraints:
+  Must be between 1115 and 65535.\n  * `:availability_zone` - (String) The Amazon
+  EC2 Availability Zone in which to restore the cluster. Default: A random, system-chosen
+  Availability Zone. Example: us-east-1a\n  * `:allow_version_upgrade` - (Boolean)
+  If  `true` , upgrades can be applied during the maintenance window to the Amazon
+  Redshift engine that is running on the cluster. Default:  `true` \n  * `:cluster_subnet_group_name`
+  - (String) The name of the subnet group where you want to cluster restored. A snapshot
+  of cluster in VPC can be restored only in VPC. Therefore, you must provide subnet
+  group name where you want the cluster restored.\n  * `:publicly_accessible` - (Boolean)
+  If  `true` , the cluster can be accessed from a public network.\n  * `:owner_account`
+  - (String) The AWS customer account used to create or copy the snapshot. Required
+  if you are restoring a snapshot you do not own, optional if you own the snapshot.\n
+  \ * `:hsm_client_certificate_identifier` - (String) Specifies the name of the HSM
+  client certificate the Amazon Redshift cluster uses to retrieve the data encryption
+  keys stored in an HSM.\n  * `:hsm_configuration_identifier` - (String) Specifies
+  the name of the HSM configuration that contains the information the Amazon Redshift
+  cluster can use to retrieve and store keys in an HSM.\n  * `:elastic_ip` - (String)
+  The elastic IP (EIP) address for the cluster.\n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:cluster_identifier` - (String)\n  * `:node_type` - (String)\n  * `:cluster_status`
+  - (String)\n  * `:modify_status` - (String)\n  * `:master_username` - (String)\n
+  \ * `:db_name` - (String)\n  * `:endpoint` - (Hash)\n    * `:address` - (String)\n
+  \   * `:port` - (Integer)\n  * `:cluster_create_time` - (Time)\n  * `:automated_snapshot_retention_period`
+  - (Integer)\n  * `:cluster_security_groups` - (Array<Hash>)\n    * `:cluster_security_group_name`
+  - (String)\n    * `:status` - (String)\n  * `:vpc_security_groups` - (Array<Hash>)\n
+  \   * `:vpc_security_group_id` - (String)\n    * `:status` - (String)\n  * `:cluster_parameter_groups`
+  - (Array<Hash>)\n    * `:parameter_group_name` - (String)\n    * `:parameter_apply_status`
+  - (String)\n  * `:cluster_subnet_group_name` - (String)\n  * `:vpc_id` - (String)\n
+  \ * `:availability_zone` - (String)\n  * `:preferred_maintenance_window` - (String)\n
+  \ * `:pending_modified_values` - (Hash)\n    * `:master_user_password` - (String)\n
+  \   * `:node_type` - (String)\n    * `:number_of_nodes` - (Integer)\n    * `:cluster_type`
+  - (String)\n    * `:cluster_version` - (String)\n    * `:automated_snapshot_retention_period`
+  - (Integer)\n  * `:cluster_version` - (String)\n  * `:allow_version_upgrade` - (Boolean)\n
+  \ * `:number_of_nodes` - (Integer)\n  * `:publicly_accessible` - (Boolean)\n  *
+  `:encrypted` - (Boolean)\n  * `:restore_status` - (Hash)\n    * `:status` - (String)\n
+  \   * `:current_restore_rate_in_mega_bytes_per_second` - (Numeric)\n    * `:snapshot_size_in_mega_bytes`
+  - (Integer)\n    * `:progress_in_mega_bytes` - (Integer)\n    * `:elapsed_time_in_seconds`
+  - (Integer)\n    * `:estimated_time_to_completion_in_seconds` - (Integer)\n  * `:hsm_status`
+  - (Hash)\n    * `:hsm_client_certificate_identifier` - (String)\n    * `:hsm_configuration_identifier`
+  - (String)\n    * `:status` - (String)\n  * `:cluster_snapshot_copy_status` - (Hash)\n
+  \   * `:destination_region` - (String)\n    * `:retention_period` - (Integer)\n
+  \ * `:cluster_public_key` - (String)\n  * `:cluster_nodes` - (Array<Hash>)\n    *
+  `:node_role` - (String)\n    * `:private_ip_address` - (String)\n    * `:public_ip_address`
+  - (String)\n  * `:elastic_ip_status` - (Hash)\n    * `:elastic_ip` - (String)\n
+  \   * `:status` - (String)"
 :revoke_cluster_security_group_ingress: |-
   Calls the RevokeClusterSecurityGroupIngress API operation.
   @param [Hash] options
@@ -875,21 +1378,101 @@
     * `:ip_ranges` - (Array<Hash>)
       * `:status` - (String)
       * `:cidrip` - (String)
-:revoke_snapshot_access: "Calls the RevokeSnapshotAccess API operation.\n@param [Hash]
-  options\n  * `:snapshot_identifier` - *required* - (String) The identifier of the
-  snapshot that the account can no longer access.\n  * `:snapshot_cluster_identifier`
-  - (String) \n  * `:account_with_restore_access` - *required* - (String) The identifier
-  of the AWS customer account that can no longer restore the specified snapshot.\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:snapshot_identifier` - (String)\n  * `:cluster_identifier`
-  - (String)\n  * `:snapshot_create_time` - (Time)\n  * `:status` - (String)\n  *
-  `:port` - (Integer)\n  * `:availability_zone` - (String)\n  * `:cluster_create_time`
-  - (Time)\n  * `:master_username` - (String)\n  * `:cluster_version` - (String)\n
-  \ * `:snapshot_type` - (String)\n  * `:node_type` - (String)\n  * `:number_of_nodes`
-  - (Integer)\n  * `:db_name` - (String)\n  * `:vpc_id` - (String)\n  * `:encrypted`
-  - (Boolean)\n  * `:accounts_with_restore_access` - (Array<Hash>)\n    * `:account_id`
-  - (String)\n  * `:owner_account` - (String)\n  * `:total_backup_size_in_mega_bytes`
-  - (Numeric)\n  * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)\n  *
-  `:backup_progress_in_mega_bytes` - (Numeric)\n  * `:current_backup_rate_in_mega_bytes_per_second`
-  - (Numeric)\n  * `:estimated_seconds_to_completion` - (Integer)\n  * `:elapsed_time_in_seconds`
-  - (Integer)"
+:revoke_snapshot_access: |-
+  Calls the RevokeSnapshotAccess API operation.
+  @param [Hash] options
+    * `:snapshot_identifier` - *required* - (String) The identifier of the snapshot that the account can no longer access.
+    * `:snapshot_cluster_identifier` - (String) The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+    * `:account_with_restore_access` - *required* - (String) The identifier of the AWS customer account that can no longer restore the specified snapshot.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:snapshot_identifier` - (String)
+    * `:cluster_identifier` - (String)
+    * `:snapshot_create_time` - (Time)
+    * `:status` - (String)
+    * `:port` - (Integer)
+    * `:availability_zone` - (String)
+    * `:cluster_create_time` - (Time)
+    * `:master_username` - (String)
+    * `:cluster_version` - (String)
+    * `:snapshot_type` - (String)
+    * `:node_type` - (String)
+    * `:number_of_nodes` - (Integer)
+    * `:db_name` - (String)
+    * `:vpc_id` - (String)
+    * `:encrypted` - (Boolean)
+    * `:encrypted_with_hsm` - (Boolean)
+    * `:accounts_with_restore_access` - (Array<Hash>)
+      * `:account_id` - (String)
+    * `:owner_account` - (String)
+    * `:total_backup_size_in_mega_bytes` - (Numeric)
+    * `:actual_incremental_backup_size_in_mega_bytes` - (Numeric)
+    * `:backup_progress_in_mega_bytes` - (Numeric)
+    * `:current_backup_rate_in_mega_bytes_per_second` - (Numeric)
+    * `:estimated_seconds_to_completion` - (Integer)
+    * `:elapsed_time_in_seconds` - (Integer)
+    * `:source_region` - (String)
+:rotate_encryption_key: |-
+  Calls the RotateEncryptionKey API operation.
+  @param [Hash] options
+    * `:cluster_identifier` - *required* - (String) The unique identifier of the cluster that you want to rotate the encryption keys for. Constraints: Must be the name of valid cluster that has encryption enabled.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cluster_identifier` - (String)
+    * `:node_type` - (String)
+    * `:cluster_status` - (String)
+    * `:modify_status` - (String)
+    * `:master_username` - (String)
+    * `:db_name` - (String)
+    * `:endpoint` - (Hash)
+      * `:address` - (String)
+      * `:port` - (Integer)
+    * `:cluster_create_time` - (Time)
+    * `:automated_snapshot_retention_period` - (Integer)
+    * `:cluster_security_groups` - (Array<Hash>)
+      * `:cluster_security_group_name` - (String)
+      * `:status` - (String)
+    * `:vpc_security_groups` - (Array<Hash>)
+      * `:vpc_security_group_id` - (String)
+      * `:status` - (String)
+    * `:cluster_parameter_groups` - (Array<Hash>)
+      * `:parameter_group_name` - (String)
+      * `:parameter_apply_status` - (String)
+    * `:cluster_subnet_group_name` - (String)
+    * `:vpc_id` - (String)
+    * `:availability_zone` - (String)
+    * `:preferred_maintenance_window` - (String)
+    * `:pending_modified_values` - (Hash)
+      * `:master_user_password` - (String)
+      * `:node_type` - (String)
+      * `:number_of_nodes` - (Integer)
+      * `:cluster_type` - (String)
+      * `:cluster_version` - (String)
+      * `:automated_snapshot_retention_period` - (Integer)
+    * `:cluster_version` - (String)
+    * `:allow_version_upgrade` - (Boolean)
+    * `:number_of_nodes` - (Integer)
+    * `:publicly_accessible` - (Boolean)
+    * `:encrypted` - (Boolean)
+    * `:restore_status` - (Hash)
+      * `:status` - (String)
+      * `:current_restore_rate_in_mega_bytes_per_second` - (Numeric)
+      * `:snapshot_size_in_mega_bytes` - (Integer)
+      * `:progress_in_mega_bytes` - (Integer)
+      * `:elapsed_time_in_seconds` - (Integer)
+      * `:estimated_time_to_completion_in_seconds` - (Integer)
+    * `:hsm_status` - (Hash)
+      * `:hsm_client_certificate_identifier` - (String)
+      * `:hsm_configuration_identifier` - (String)
+      * `:status` - (String)
+    * `:cluster_snapshot_copy_status` - (Hash)
+      * `:destination_region` - (String)
+      * `:retention_period` - (Integer)
+    * `:cluster_public_key` - (String)
+    * `:cluster_nodes` - (Array<Hash>)
+      * `:node_role` - (String)
+      * `:private_ip_address` - (String)
+      * `:public_ip_address` - (String)
+    * `:elastic_ip_status` - (Hash)
+      * `:elastic_ip` - (String)
+      * `:status` - (String)

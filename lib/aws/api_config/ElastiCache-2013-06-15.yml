@@ -50,13 +50,10 @@
     - :string
     NumCacheNodes:
     - :integer
-    - :required
     CacheNodeType:
     - :string
-    - :required
     Engine:
     - :string
-    - :required
     EngineVersion:
     - :string
     CacheParameterGroupName:
@@ -363,6 +360,8 @@
     ReplicationGroupId:
     - :string
     - :required
+    RetainPrimaryCluster:
+    - :boolean
   :outputs:
     :children:
       DeleteReplicationGroupResult:

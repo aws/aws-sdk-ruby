@@ -94,10 +94,10 @@ module AWS
           data = options[:data]
 
           length = case
+            when data.respond_to?(:path) && data.path then File.size(data.path)
             when data.respond_to?(:bytesize) then data.bytesize
             when data.respond_to?(:size)     then data.size
             when data.respond_to?(:length)   then data.length
-            when data.respond_to?(:path)     then File.size(data.path)
             else nil
           end
 

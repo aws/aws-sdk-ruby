@@ -158,6 +158,19 @@
             :children:
               CreateDate:
                 :type: :time
+- :name: CreateSAMLProvider
+  :method: :create_saml_provider
+  :inputs:
+    SAMLMetadataDocument:
+    - :string
+    - :required
+    Name:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateSAMLProviderResult:
+        :ignore: true
 - :name: CreateUser
   :method: :create_user
   :inputs:
@@ -308,6 +321,16 @@
     :children:
       DeleteRolePolicyResult:
         :ignore: true
+- :name: DeleteSAMLProvider
+  :method: :delete_saml_provider
+  :inputs:
+    SAMLProviderArn:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteSAMLProviderResult:
+        :ignore: true
 - :name: DeleteServerCertificate
   :method: :delete_server_certificate
   :inputs:
@@ -404,6 +427,10 @@
                 :type: :boolean
               AllowUsersToChangePassword:
                 :type: :boolean
+              ExpirePasswords:
+                :type: :boolean
+              MaxPasswordAge:
+                :type: :integer
 - :name: GetAccountSummary
   :method: :get_account_summary
   :inputs: {}
@@ -533,6 +560,21 @@
     :children:
       GetRolePolicyResult:
         :ignore: true
+- :name: GetSAMLProvider
+  :method: :get_saml_provider
+  :inputs:
+    SAMLProviderArn:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetSAMLProviderResult:
+        :ignore: true
+        :children:
+          CreateDate:
+            :type: :time
+          ValidUntil:
+            :type: :time
 - :name: GetServerCertificate
   :method: :get_server_certificate
   :inputs:
@@ -838,6 +880,25 @@
                     :type: :time
           IsTruncated:
             :type: :boolean
+- :name: ListSAMLProviders
+  :method: :list_saml_providers
+  :inputs: {}
+  :outputs:
+    :children:
+      ListSAMLProvidersResult:
+        :ignore: true
+        :children:
+          SAMLProviderList:
+            :ignore: true
+            :children:
+              member:
+                :rename: :saml_provider_list
+                :list: true
+                :children:
+                  ValidUntil:
+                    :type: :time
+                  CreateDate:
+                    :type: :time
 - :name: ListServerCertificates
   :method: :list_server_certificates
   :inputs:
@@ -1131,9 +1192,23 @@
     - :required
     Password:
     - :string
+    - :required
   :outputs:
     :children:
       UpdateLoginProfileResult:
+        :ignore: true
+- :name: UpdateSAMLProvider
+  :method: :update_saml_provider
+  :inputs:
+    SAMLMetadataDocument:
+    - :string
+    - :required
+    SAMLProviderArn:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      UpdateSAMLProviderResult:
         :ignore: true
 - :name: UpdateServerCertificate
   :method: :update_server_certificate

@@ -53,6 +53,10 @@
       - :string
     OnFailure:
     - :string
+    StackPolicyBody:
+    - :string
+    StackPolicyURL:
+    - :string
     Tags:
     - :membered_list:
       - :structure:
@@ -211,6 +215,16 @@
     :children:
       EstimateTemplateCostResult:
         :ignore: true
+- :name: GetStackPolicy
+  :method: :get_stack_policy
+  :inputs:
+    StackName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetStackPolicyResult:
+        :ignore: true
 - :name: GetTemplate
   :method: :get_template
   :inputs:
@@ -269,6 +283,20 @@
                     :type: :time
                   DeletionTime:
                     :type: :time
+- :name: SetStackPolicy
+  :method: :set_stack_policy
+  :inputs:
+    StackName:
+    - :string
+    - :required
+    StackPolicyBody:
+    - :string
+    StackPolicyURL:
+    - :string
+  :outputs:
+    :children:
+      SetStackPolicyResult:
+        :ignore: true
 - :name: UpdateStack
   :method: :update_stack
   :inputs:
@@ -278,6 +306,10 @@
     TemplateBody:
     - :string
     TemplateURL:
+    - :string
+    StackPolicyDuringUpdateBody:
+    - :string
+    StackPolicyDuringUpdateURL:
     - :string
     Parameters:
     - :membered_list:
@@ -289,6 +321,10 @@
     Capabilities:
     - :membered_list:
       - :string
+    StackPolicyBody:
+    - :string
+    StackPolicyURL:
+    - :string
   :outputs:
     :children:
       UpdateStackResult:

@@ -21,7 +21,9 @@ module AWS
 
       let(:client) { config.auto_scaling_client }
 
-      let(:action) { ScheduledAction.new('name', :config => config) }
+      let(:group) { Group.new('group', :config => config) }
+
+      let(:action) { ScheduledAction.new(group, 'name') }
 
       let(:response) { client.stub_for(:describe_scheduled_actions) }
 
@@ -47,7 +49,7 @@ module AWS
       context '#name' do
 
         it 'is set in the constructor' do
-          ScheduledAction.new('name').name.should == 'name'
+          ScheduledAction.new(group, 'name').name.should == 'name'
         end
 
       end
@@ -108,9 +110,10 @@ module AWS
         let(:resp) { client.stub_for(:describe_scheduled_actions) }
 
         before(:each) do
-          client.should_receive(:describe_scheduled_actions).
-            with(:scheduled_action_names => [action.name]).
-            and_return(resp)
+          client.should_receive(:describe_scheduled_actions).with(
+            :scheduled_action_names => [action.name],
+            :auto_scaling_group_name => 'group'
+          ).and_return(resp)
         end
 
         it 'returns true if it can be described' do
@@ -129,6 +132,7 @@ module AWS
 
         it 'calls #delete_scheduled_action on the client' do
           client.should_receive(:delete_scheduled_action).with(
+            :auto_scaling_group_name => 'group',
             :scheduled_action_name => action.name,
             :auto_scaling_group_name => 'group')
           action.delete

@@ -17,7 +17,7 @@ module AWS
     # Client class for AWS Storage Gateway.
     class Client < Core::JSONClient
 
-      API_VERSION = '2012-06-30'
+      API_VERSION = '2013-06-30'
 
       signature_version :Version4, 'storagegateway'
 
@@ -31,5 +31,12 @@ module AWS
       define_client_methods('2012-06-30')
 
     end
+
+    class Client::V20130630 < Client
+
+      define_client_methods('2013-06-30')
+
+    end
+
   end
 end

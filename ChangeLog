@@ -1,4 +1,430 @@
+2013-11-13 Alex Wood <awood45@gmail.com>
+
+  * doc-src/IAM/V20100508.yml, lib/aws/api_config/IAM-2010-05-08.yml: API
+  Updates to AWS Identity and Access Management
+
+  With this release of AWS Identity and Access Management (IAM), you can
+  enable
+  identity federation using SAML 2.0 (Security Assertion Markup Language 2.0),
+  an
+  open standard. This feature enables federated single sign-on, or SSO, which
+  lets
+  users log into the AWS Management Console or make programmatic calls to AWS
+  APIs
+  using authentication responses (assertions) from a SAML-compliant identity
+  provider.
+
+  * doc-src/STS/V20110615.yml, lib/aws/api_config/STS-2011-06-15.yml: Add SAML
+  support for AWS Security Token Service
+
+  Includes a new AWS Security Token Service (STS) API action called
+  AssumeRoleWithSAML that returns a set of temporary security credentials for
+  users who have been authenticated via a SAML authentication response.
+
+  * doc-src/Redshift/V20121201.yml,
+  lib/aws/api_config/Redshift-2012-12-01.yml: API Updates to Amazon Redshift
+
+  This release for Amazon Redshift includes several new features related to
+  event
+  notifications, encryption, audit logging, data load from external hosts, WLM
+  configuration, and database distribution styles and functions.
+
+2013-11-14 Alex Wood <awood45@gmail.com>
+
+  * doc-src/CloudTrail/V20131101.yml, endpoints.json,
+  features/cloud_trail/client.feature,
+  features/cloud_trail/step_definitions/client.rb,
+  features/cloud_trail/step_definitions/cloud_trail.rb,
+  lib/aws/api_config/CloudTrail-2013-11-01.yml, lib/aws/cloud_trail.rb,
+  lib/aws/cloud_trail/client.rb, lib/aws/cloud_trail/config.rb,
+  lib/aws/cloud_trail/errors.rb, lib/aws/cloud_trail/request.rb,
+  lib/aws/core.rb, spec/aws/cloud_trail_spec.rb: Initial Support for AWS
+  CloudTrail
+
+  AWS CloudTrail is a web service that records AWS API calls for your account
+  and
+  delivers log files to you. The recorded information includes the identity of
+  the
+  API caller, the time of the API call, the source IP address of the API
+  caller,
+  the request parameters, and the response elements returned by the AWS
+  service.
+
+2013-11-12 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/response.rb: Rewinding the body before re-signing.  This
+  affects sigv4 signed retries.
+
+2013-11-11 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/dynamo_db/table.rb: Removed a documentation note about reducing
+  provisioned capacity that was incorrect.
+
+  Fixes #406
+
+2013-11-08 Alex Wood <awood45@gmail.com>
+
+  * README.md: Update README
+
+  Add new AWS Storage Gateway API version to README.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.25.0
+
+  * doc-src/CloudFormation/V20100515.yml,
+  lib/aws/api_config/CloudFormation-2010-05-15.yml: API Updates for AWS
+  CloudFormation
+
+  * doc-src/ElasticTranscoder/V20120925.yml,
+  lib/aws/api_config/ElasticTranscoder-2012-09-25.yml: API Updates for Amazon
+  Elastic Transcoder
+
+  * doc-src/ELB/V20120601.yml, lib/aws/api_config/ELB-2012-06-01.yml: Add
+  Cross-Zone Balancing to Elastic Load Balancing
+
+  Updates AWS::ELB::Client.
+
+  * doc-src/StorageGateway/V20130630.yml,
+  features/storage_gateway/client.feature,
+  lib/aws/api_config/StorageGateway-2013-06-30.yml,
+  lib/aws/storage_gateway/client.rb: New API Version 2013-06-30 for AWS
+  Storage Gateway
+
+  AWS Storage Gateway now supports Gateway-VTL.
+
+  AWS::StorageGateway::Client supports the '2012-06-30' and '2013-06-30' API
+  versions, this change defaults users to the '2013-06-30' version and updates
+  tests to handle this version.
+
+  * lib/aws/core.rb, lib/aws/core/configuration.rb: Updating documentation
+  about :max_retries to include information about throttling errors.
+
+2013-11-02 osamu1203 <osamuintz@gmail.com>
+
+  * lib/aws/s3/uploaded_part.rb: Fixed raise message
+2013-10-31 Alex Wood <awood45@gmail.com>
+
+  * doc-src/ElastiCache/V20121115.yml: Remove Unused Amazon ElastiCache
+  Documentation
+
+  An older client doc source was causing the AWS::ElastiCache::Client docs
+  to be out of date. This change deletes the offending file.
+
+  * lib/aws/auto_scaling/scheduled_action.rb,
+  lib/aws/auto_scaling/scheduled_action_collection.rb,
+  spec/aws/auto_scaling/scheduled_action_collection_spec.rb,
+  spec/aws/auto_scaling/scheduled_action_spec.rb: Fixed a bug with AutoScaling
+  scheduled actions.
+
+  The `AWS::AutoScaling::ScheduledAction` class incorrectly assumed that their
+  group names were unique and suffient to identify the action.  In order to
+  correct
+  this bug, it was required to add a new positional required argument to the
+  `ScheduledAction` constructor.  This affects two code paths.
+
+  First, the scheduled action collection must now be scoped by a group:
+
+      # now raises an error, must scope to a group first
+      auto_scaling.scheduled_actions['name']
+
+      # this works
+      auto_scaling.groups['group-name'].scheduled_actions['name']
+
+      # this also works
+      auto_scaling.scheduled_actions.filter(:group => 'group-name')['name']
+
+  Also the constructor now requires a group:
+
+      # no longer works, raises error
+      AWS::AutoScaling::ScheduledAction.new('name')
+
+      # this works
+      group = AWS::AutoScaling::Group.new('group-name')
+      AWS::AutoScaling::ScheduledAction.new(group, 'name')
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.24.0
+
+2013-10-30 Alex Wood <awood45@gmail.com>
+
+  * doc-src/ElastiCache/V20130615.yml,
+  lib/aws/api_config/ElastiCache-2013-06-15.yml: Amazon ElastiCache Updates
+
+  Update ElastiCache docs to latest version, adds an optional parameter and
+  makes
+  some required parameters optional.
+
+  * lib/aws/ec2/volume_collection.rb: Update volume_collection.rb
+
+  VolumeCollection#each docs says that the method yields on the Instance. It
+  actually yields on the Volume. Update docs to reflect clode
+2013-10-28 Alex Wood <awood45@gmail.com>
+
+  * doc-src/EMR/V20090331.yml, lib/aws/api_config/EMR-2009-03-31.yml: API
+  Updates for Amazon Elastic MapReduce
+
+  * lib/aws/s3/client.rb, spec/aws/s3/client_spec.rb: Support S3 GET Object
+  torrent
+
+2013-10-26 Michael H. Oshita <ijinpublic+github@gmail.com>
+
+  * lib/aws/core/credential_providers.rb: fixed typo
+
+  cashed -> cached
+2013-10-24 Alex Wood <awood45@gmail.com>
+
+  * README.md: Add all supported CloudFront API versions to README
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.23.0
+
+  * features/direct_connect/step_definitions/client.rb: Update AWS
+  DirectConnect Integration Test
+
+  Cucumber test points to a method now removed, change test to
+  point to a new function.
+
+  * README.md: Fix README Tables
+
+  * doc-src/DirectConnect/V20121025.yml,
+  lib/aws/api_config/DirectConnect-2012-10-25.yml: Update AWS DirectConnect to
+  latest API Version
+
+2013-10-20 Joel Van Horn <joel@joelvanhorn.com>
+
+  * lib/aws/s3/s3_object.rb: Fixed link
+  * lib/aws/s3/tree.rb: fix documentation typo from 20011 to 2011
+
+2013-10-18 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.22.1
+
+  * lib/aws/core/json_parser.rb: Handle Null Values in JSON Parser
+
+  * lib/aws/s3/s3_object.rb: S3Object#url_for docummentation update
+
+2013-10-17 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/cloud_front/client.rb: Support Older CloudFront Clients
+
+  * README.md: Fix Amazon CloudFront Version in README
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.22.0
+
+  * doc-src/ElasticTranscoder/V20120925.yml,
+  lib/aws/api_config/ElasticTranscoder-2012-09-25.yml: Audio-Only Support for
+  Amazon Elastic Transcoder.
+
+  Adds support for audio-only transcoding features in Amazon Elastic
+  Transcoder.
+
+  * doc-src/CloudFront/V20130927.yml,
+  lib/aws/api_config/CloudFront-2013-09-27.yml, lib/aws/cloud_front/client.rb:
+  Amazon CloudFront API Version Bump to 2013-09-27
+
+  * spec/aws/dynamo_db/client_versions_spec.rb: Fixed spec that was using 1.9+
+  syntax to work with 1.8
+
+  * lib/aws/core/xml/frame_stack.rb,
+  lib/aws/core/xml/sax_handlers/nokogiri.rb,
+  lib/aws/core/xml/sax_handlers/rexml.rb: Fixed the REXML xml parser.
+
+  Fixes #318
+
+  * lib/aws/core/client.rb, spec/aws/dynamo_db/client_versions_spec.rb: When
+  constructing a client, the API version can be specified via the :config
+  option.
+
+  Here is an example of the behavior that was fixed:
+
+       config = AWS.config.with(dynamo_db: { api_version: '2012-08-10' })
+       AWS::DynamoDB::Client.new(config: config)
+       #=> #<AWS::DynamoDB::Client::V20120810>
+
+  Fixed #355
+
+  * features/dynamo_db/scan.feature,
+  features/dynamo_db/step_definitions/dynamo_db.rb,
+  features/dynamo_db/step_definitions/scan.rb,
+  lib/aws/dynamo_db/item_collection.rb: Fixed a bug in
+  AWS::DynamoDB::ItemCollection#first
+
+  When calling `#first` on a collection with a where collection,
+  the `:limit` param was incorrectly being used, causing many
+  extra requets.
+
+  Fixes #385
+
+  * lib/aws/s3/object_collection.rb: Corrected the documentation for
+  AWS::S3::ObjectCollection#create.
+
+  Fixes #368
+
+  * lib/aws/simple_db/item_collection.rb,
+  spec/aws/simple_db/item_collection_spec.rb: Fixed issue with
+  SimpleDB::ItemCollection#where.
+
+  If a placeholder received a substituted value that looked
+  like another placeholder, then an `ArgumentError` was
+  raised.
+
+  Now placeholders in the final string are checked against the
+  original to see if they are actual placeholders that were
+  not replaced before raising.
+
+  Fixes #386
+
+  * README.md: Updated the list of supported AWS API versions in the README.
+
+  * lib/aws/core/rest_request_builder.rb: Fixed an issue with uploading files
+  to Glacier in Ruby 1.8.
+
+2013-10-10 Dan Fried <daniel.k.fried@gmail.com>
+
+  * lib/aws/sts/config.rb: Add conditional to STS to work with both govcloud
+  and commercial API endpoints
+
+2013-10-09 Trevor Rowe <trevorrowe@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.21.0
+
+  * doc-src/EC2/V20131001.yml, lib/aws/api_config/EC2-2013-10-01.yml,
+  lib/aws/ec2/client.rb: Added support for Reserved Instance instance type
+  modifications in Amazon EC2 (API version 2013-10-01).
+
+  * doc-src/OpsWorks/V20130218.yml,
+  lib/aws/api_config/OpsWorks-2013-02-18.yml: Added support for new resource
+  management features in AWS OpsWorks.
+
+2013-10-04 Andy Brody <andy@stripe.com>
+
+  * spec/aws/iam/signing_certificate_spec.rb: Add test for signing cert
+  upload_date.
+
+  * lib/aws/iam/signing_certificate.rb: Expose upload_date attribute on
+  certificates.
+
+  * spec/aws/iam/access_key_spec.rb: Add test of create_date.
+
+  * lib/aws/iam/access_key.rb: Expose the create_date attribute of access
+  keys.
+
+  * samples/sns/publish.rb: Update publish.rb
+2013-10-03 Bouke van der Bijl <boukevanderbijl@gmail.com>
+
+  * lib/aws/s3/data_options.rb, spec/aws/s3/s3_object_spec.rb: Duplicate
+  frozen strings before forcing the encoding to prevent a RuntimeError
+
+2013-10-01 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.20.0
+
+  * doc-src/CloudFront/V20130826.yml,
+  lib/aws/api_config/CloudFront-2013-08-26.yml, lib/aws/cloud_front/client.rb:
+  Update API version for Amazon CloudFront.
+
+2013-09-27 Volker Tietz <volker.tietz@gmail.com>
+
+  * lib/aws/auto_scaling/launch_configuration.rb,
+  lib/aws/auto_scaling/launch_configuration_collection.rb,
+  spec/aws/auto_scaling/launch_configuration_collection_spec.rb,
+  spec/aws/auto_scaling/launch_configuration_spec.rb: Added support for
+  AssociatePublicIpAddress option in LaunchConfiguration. Fixes Issue #372
+
+2013-09-24 Dan Fried <daniel.k.fried@gmail.com>
+
+  * endpoints.json, lib/aws/sts/config.rb: Add Simple Token Service API
+  support for Govcloud region, which has a different API endpoint
+
+2013-09-20 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.19.0
+
+  * doc-src/AutoScaling/V20110101.yml,
+  lib/aws/api_config/AutoScaling-2011-01-01.yml: API Updates for Auto Scaling
+
+  * lib/aws/s3/s3_object.rb: Add documentation for setting Content-Disposition
+  in copy_from
+
+  #66 added support for setting the Content-Disposition header in `copy_from`,
+  but the documentation didn't reflect that this new option was available.
+2013-09-19 Markus Krogemann <markus@krogemann.de>
+
+  * lib/aws/route_53/change_info.rb: fix documentation: replace 'alarm' with
+  'change'
+
+2013-09-16 Loren Segal <lsegal@amazon.com>
+
+  * aws-sdk.gemspec: Give Bundler a hint about which Nokogiri version to use.
+
+  Bundler seems to have problems resolving version conflicts with
+  less-than constraints (as per bundler/bundler#2593), so provide a
+  greater-or-equal-to constraint as well to give Bundler a hint.
+
+  Closes #361
+
+  * tasks/docs.rake: Add SITEMAP_BASEURL to docs task
+
+2013-09-14 Loren Segal <lsegal@soen.ca>
+
+  * Gemfile: Use 1.8 syntax in Gemfile
+  * .yardopts: Use yard-sitemap plugin when generating documentation
+  * Gemfile: Add yard-sitemap to Gemfile, update rdiscount gem location
+2013-09-13 Alex Wood <awood45@gmail.com>
+
+  * lib/aws/s3/client.rb: Add parameter validation to put_bucket_cors
+
+  Adds validation that two required parameters in
+  AWS::S3::Client#put_bucket_cors
+  are present and match the type requirements.
+
+  Resolves Issue #357
+
+2013-09-11 Alex Wood <awood45@gmail.com>
+
+  * README.md: Update EC2 Version in README
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.18.0
+
+  * doc-src/EC2/V20130201.yml, doc-src/EC2/V20130815.yml,
+  lib/aws/api_config/EC2-2013-07-15.yml,
+  lib/aws/api_config/EC2-2013-08-15.yml, lib/aws/ec2/client.rb: Upgrade
+  AWS::EC2::Client to latest API version.
+
+  Upgrades AWS::EC2::Client to 2013-08-15 API version. Includes modifications
+  to
+  Amazon EC2 Reserved Instances API.
+
+2013-09-10 Trevor Rowe <trevorrowe@gmail.com>
+
+  * features/glacier/step_definitions/vaults.rb,
+  features/glacier/vaults.feature, lib/aws/glacier/vault.rb: Fixed a bug with
+  Glacier::Vault attributes.
+
+2013-09-09 Alex Wood <awood45@gmail.com>
+
+  * doc-src/OpsWorks/V20130218.yml,
+  lib/aws/api_config/OpsWorks-2013-02-18.yml: Update AWS OpsWorks to latest
+  API version.
+
+  Adds VPC support to AWS OpsWorks.
+
+2013-09-06 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/client.rb: Moved code from the s3 versioned client into the
+  base client class.
+
+  This fixes a few broken specs.
+
+2013-09-05 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core/client.rb, lib/aws/s3/client.rb: Resolved an issue where
+  service client classes returned an empty list from .operations
+
+  The versioned client classes correctly return the list of operations
+  they support.  The service client class now proxies the call to the
+  versioned client class.
+
 2013-09-04 Alex Wood <awood45@gmail.com>
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.17.0
 
   * README.md, doc-src/ElastiCache/V20130615.yml,
   lib/aws/api_config/ElastiCache-2012-11-15.yml,
@@ -6,6 +432,8 @@
   lib/aws/elasticache/client.rb: Add Redis support to Amazon ElastiCache
 
   Updates the AWS::ElastiCache::Client class to the latest API version.
+
+  * lib/aws/simple_workflow.rb: fix AWS::SimpleWorkflow documentation example.
 
 2013-09-03 Kyle Dayton <kyle@graphicflash.com>
 
@@ -85,7 +513,21 @@
   abstraction layer. Relevant Cucumber and RSpec tests included to
   make the process of adding these for later releases a little easier.
 
-2013-08-22 Alex Wood <awood45@gmail.com>
+2013-08-22 Jon <jonathan.j.mason@gmail.com>
+
+  * lib/aws/sqs/errors.rb: Update documentation for BatchSendError.
+
+  Note that the previous documentation was copied from
+  BatchChangeVisibilityError and contained inaccuracies.
+
+  * lib/aws/sqs/queue.rb, spec/aws/sqs/queue_spec.rb: Add body and index to
+  BatchSendError.failures
+
+  * Add :message_body and :batch_index to entries in BatchSendError.failures.
+
+  * Updates specs to reflect this
+
+  Updates specs to reflect the changes.
 
   * lib/aws/core/xml/sax_handlers/nokogiri.rb, lib/aws/s3/client.rb,
   lib/aws/s3/client/xml.rb, spec/aws/s3/client_spec.rb: Add AWS::S3::Client

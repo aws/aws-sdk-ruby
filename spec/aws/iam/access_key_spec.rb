@@ -91,6 +91,32 @@ module AWS
 
       end
 
+      context '#create_date' do
+
+        it 'lists access keys to find the create_date' do
+
+          response = client.stub_for(:list_access_keys)
+
+          response.data[:access_key_metadata] = [
+            {
+              :access_key_id => 'id',
+              :user_name => user.name,
+              :status => 'Active',
+              :create_date => Time.at(1380000000),
+            },
+          ]
+
+          client.should_receive(:list_access_keys).
+            with(:user_name => user.name).
+            and_return(response)
+
+          access_key.create_date.should == Time.at(1380000000)
+
+        end
+
+      end
+
+
       context '#active?' do
 
         it 'returns true if the status is :active' do

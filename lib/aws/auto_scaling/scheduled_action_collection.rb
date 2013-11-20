@@ -62,8 +62,10 @@ module AWS
       #
       def create name, options = {}
 
-        scheduled_action = ScheduledAction.new(name,
-          :auto_scaling_group_name => auto_scaling_group_name_opt(options),
+        group = auto_scaling_group(options)
+
+        scheduled_action = ScheduledAction.new(group, name,
+          :auto_scaling_group_name => group.name,
           :config => config)
 
         scheduled_action.update(options)
@@ -75,12 +77,14 @@ module AWS
       # @param [String] name The name of the scheduled action.
       # @return [ScheduledAction]
       def [] name
-        options = {}
-        options[:config] = config
-        if group = @filters[:auto_scaling_group_name]
-          options[:auto_scaling_group_name] = group
+        if group_name = @filters[:auto_scaling_group_name]
+          group = Group.new(group_name, :config => config)
+          ScheduledAction.new(group, name)
+        else
+          msg = 'uou must filter this collection by a group to get a ' +
+            'scheduled action by name'
+          raise msg
         end
-        ScheduledAction.new(name, options)
       end
 
       # Returns a new {ScheduledActionCollection} filtered
@@ -132,11 +136,11 @@ module AWS
 
       protected
 
-      def auto_scaling_group_name_opt options
+      def auto_scaling_group(options)
 
         group = options.delete(:group)
         group ||= @filters[:auto_scaling_group_name]
-        group = group.name if group.is_a?(Group)
+        group = Group.new(group, :config => config) if group.is_a?(String)
 
         unless group
           raise ArgumentError, 'missing required option :group'
@@ -176,9 +180,12 @@ module AWS
         resp = client.describe_scheduled_actions(options.merge(@filters))
         resp.scheduled_update_group_actions.each do |details|
 
+          group = Group.new(details[:auto_scaling_group_name], :config => config)
+
           scheduled_action = ScheduledAction.new_from(
             :describe_scheduled_actions,
             details,
+            group,
             details.scheduled_action_name,
             :config => config)
 

@@ -38,18 +38,55 @@
     * `:job_flow_id` - *required* - (String) A string that uniquely identifies the job flow. This identifier is returned by RunJobFlow and can also be obtained from DescribeJobFlows.
     * `:steps` - *required* - (Array&lt;<Hash>) A list of StepConfig to be executed by the job flow.
       * `:name` - *required* - (String) The name of the job flow step.
-      * `:action_on_failure` - (String) Specifies the action to take if the job flow step fails.  Valid values include:
+      * `:action_on_failure` - (String) The action to take if the job flow step fails.  Valid values include:
         * `TERMINATE_JOB_FLOW`
+        * `TERMINATE_CLUSTER`
         * `CANCEL_AND_WAIT`
         * `CONTINUE`
-      * `:hadoop_jar_step` - *required* - (Hash) Specifies the JAR file used for the job flow step.
+      * `:hadoop_jar_step` - *required* - (Hash) The JAR file used for the job flow step.
         * `:properties` - (Array&lt;<Hash>) A list of Java properties that are set when the step runs. You can use these properties to pass key value pairs to your main function.
           * `:key` - (String) The unique identifier of a key value pair.
           * `:value` - (String) The value part of the identified key.
         * `:jar` - *required* - (String) A path to a JAR file run during the step.
         * `:main_class` - (String) The name of the main class in the specified Java file. If not specified, the JAR file should specify a Main-Class in its manifest file.
         * `:args` - (Array&lt;<String>) A list of command line arguments passed to the JAR file's main function when executed.
-  @return [Core::Response]
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:step_ids` - (Array<String>)
+:describe_cluster: |-
+  Calls the DescribeCluster API operation.
+  @param [Hash] options
+    * `:cluster_id` - (String) The identifier of the cluster to describe.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cluster` - (Hash)
+      * `:id` - (String)
+      * `:name` - (String)
+      * `:status` - (Hash)
+        * `:state` - (String)
+        * `:state_change_reason` - (Hash)
+          * `:code` - (String)
+          * `:message` - (String)
+        * `:timeline` - (Hash)
+          * `:creation_date_time` - (Time)
+          * `:ready_date_time` - (Time)
+          * `:end_date_time` - (Time)
+      * `:ec_2_instance_attributes` - (Hash)
+        * `:ec2_key_name` - (String)
+        * `:ec2_subnet_id` - (String)
+        * `:ec_2_availability_zone` - (String)
+        * `:iam_instance_profile` - (String)
+      * `:log_uri` - (String)
+      * `:requested_ami_version` - (String)
+      * `:running_ami_version` - (String)
+      * `:auto_terminate` - (Boolean)
+      * `:termination_protected` - (Boolean)
+      * `:visible_to_all_users` - (Boolean)
+      * `:applications` - (Array<Hash>)
+        * `:name` - (String)
+        * `:version` - (String)
+        * `:args` - (Array<String>)
+        * `:additional_info` - (Hash<String,String>)
 :describe_job_flows: |-
   Calls the DescribeJobFlows API operation.
   @param [Hash] options
@@ -126,20 +163,153 @@
       * `:supported_products` - (Array<String>)
       * `:visible_to_all_users` - (Boolean)
       * `:job_flow_role` - (String)
+:describe_step: |-
+  Calls the DescribeStep API operation.
+  @param [Hash] options
+    * `:cluster_id` - (String) The identifier of the cluster with steps to describe.
+    * `:step_id` - (String) The identifier of the step to describe.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:step` - (Hash)
+      * `:id` - (String)
+      * `:name` - (String)
+      * `:config` - (Hash)
+        * `:jar` - (String)
+        * `:properties` - (Hash<String,String>)
+        * `:main_class` - (String)
+        * `:args` - (Array<String>)
+      * `:action_on_failure` - (String)
+      * `:status` - (Hash)
+        * `:state` - (String)
+        * `:state_change_reason` - (Hash)
+          * `:code` - (String)
+          * `:message` - (String)
+        * `:timeline` - (Hash)
+          * `:creation_date_time` - (Time)
+          * `:start_date_time` - (Time)
+          * `:end_date_time` - (Time)
+:list_bootstrap_actions: |-
+  Calls the ListBootstrapActions API operation.
+  @param [Hash] options
+    * `:cluster_id` - (String) The cluster identifier for the bootstrap actions to list .
+    * `:marker` - (String) The pagination token that indicates the next set of results to retrieve .
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:bootstrap_actions` - (Array<Hash>)
+      * `:name` - (String)
+      * `:script_path` - (String)
+      * `:args` - (Array<String>)
+    * `:marker` - (String)
+:list_clusters: |-
+  Calls the ListClusters API operation.
+  @param [Hash] options
+    * `:created_after` - (String&lt;<ISO8601 datetime>) The creation date and time beginning value filter for listing clusters .
+    * `:created_before` - (String&lt;<ISO8601 datetime>) The creation date and time end value filter for listing clusters .
+    * `:cluster_states` - (Array&lt;<String>) The cluster state filters to apply when listing clusters.
+    * `:marker` - (String) The pagination token that indicates the next set of results to retrieve.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:clusters` - (Array<Hash>)
+      * `:id` - (String)
+      * `:name` - (String)
+      * `:status` - (Hash)
+        * `:state` - (String)
+        * `:state_change_reason` - (Hash)
+          * `:code` - (String)
+          * `:message` - (String)
+        * `:timeline` - (Hash)
+          * `:creation_date_time` - (Time)
+          * `:ready_date_time` - (Time)
+          * `:end_date_time` - (Time)
+    * `:marker` - (String)
+:list_instance_groups: |-
+  Calls the ListInstanceGroups API operation.
+  @param [Hash] options
+    * `:cluster_id` - (String) The identifier of the cluster for which to list the instance groups.
+    * `:marker` - (String) The pagination token that indicates the next set of results to retrieve.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:instance_groups` - (Array<Hash>)
+      * `:id` - (String)
+      * `:name` - (String)
+      * `:market` - (String)
+      * `:instance_group_type` - (String)
+      * `:bid_price` - (String)
+      * `:instance_type` - (String)
+      * `:requested_instance_count` - (Integer)
+      * `:running_instance_count` - (Integer)
+      * `:status` - (Hash)
+        * `:state` - (String)
+        * `:state_change_reason` - (Hash)
+          * `:code` - (String)
+          * `:message` - (String)
+        * `:timeline` - (Hash)
+          * `:creation_date_time` - (Time)
+          * `:ready_date_time` - (Time)
+          * `:end_date_time` - (Time)
+    * `:marker` - (String)
+:list_instances: |-
+  Calls the ListInstances API operation.
+  @param [Hash] options
+    * `:cluster_id` - (String) The identifier of the cluster for which to list the instances.
+    * `:instance_group_id` - (String) The identifier of the instance group for which to list the instances.
+    * `:instance_group_types` - (Array&lt;<String>) The type of instance group for which to list the instances.
+    * `:marker` - (String) The pagination token that indicates the next set of results to retrieve.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:instances` - (Array<Hash>)
+      * `:id` - (String)
+      * `:ec2_instance_id` - (String)
+      * `:public_dns_name` - (String)
+      * `:public_ip_address` - (String)
+      * `:private_dns_name` - (String)
+      * `:private_ip_address` - (String)
+      * `:status` - (Hash)
+        * `:state` - (String)
+        * `:state_change_reason` - (Hash)
+          * `:code` - (String)
+          * `:message` - (String)
+        * `:timeline` - (Hash)
+          * `:creation_date_time` - (Time)
+          * `:ready_date_time` - (Time)
+          * `:end_date_time` - (Time)
+    * `:marker` - (String)
+:list_steps: |-
+  Calls the ListSteps API operation.
+  @param [Hash] options
+    * `:cluster_id` - (String) The identifier of the cluster for which to list the steps.
+    * `:step_states` - (Array&lt;<String>) The filter to limit the step list based on certain states.
+    * `:marker` - (String) The pagination token that indicates the next set of results to retrieve.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:steps` - (Array<Hash>)
+      * `:id` - (String)
+      * `:name` - (String)
+      * `:status` - (Hash)
+        * `:state` - (String)
+        * `:state_change_reason` - (Hash)
+          * `:code` - (String)
+          * `:message` - (String)
+        * `:timeline` - (Hash)
+          * `:creation_date_time` - (Time)
+          * `:start_date_time` - (Time)
+          * `:end_date_time` - (Time)
+    * `:marker` - (String)
 :modify_instance_groups: |-
   Calls the ModifyInstanceGroups API operation.
   @param [Hash] options
     * `:instance_groups` - (Array&lt;<Hash>) Instance groups to change.
       * `:instance_group_id` - *required* - (String) Unique ID of the instance group to expand or shrink.
-      * `:instance_count` - *required* - (Integer) Target size for the instance group.
+      * `:instance_count` - (Integer) Target size for the instance group.
+      * `:ec2_instance_ids_to_terminate` - (Array&lt;<String>) The EC2 InstanceIds to terminate. For advanced users only. Once you terminate the instances, the instance group will not return to its original requested size.
   @return [Core::Response]
 :run_job_flow: |-
   Calls the RunJobFlow API operation.
   @param [Hash] options
     * `:name` - *required* - (String) The name of the job flow.
-    * `:log_uri` - (String) Specifies the location in Amazon S3 to write the log files of the job flow. If a value is not provided, logs are not created.
+    * `:log_uri` - (String) The location in Amazon S3 to write the log files of the job flow. If a value is not provided, logs are not created.
     * `:additional_info` - (String) A JSON string for selecting additional features.
-    * `:ami_version` - (String) The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid: "latest" (uses the latest AMI) The version number of the AMI to use, for example, "2.0" If this value is not specified, the job flow uses the default of (AMI 1.0, Hadoop 0.18). If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the JobFlowInstancesConfig HadoopVersion parameter to modify the version of Hadoop from the defaults shown above. For details about the AMI versions currently supported by Amazon ElasticMapReduce, go to AMI Versions Supported in Elastic MapReduce in the Amazon Elastic MapReduce Developer's Guide.
+    * `:ami_version` - (String) The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid: "latest" (uses the latest AMI) The version number of the AMI to use, for example, "2.0" If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the JobFlowInstancesConfig HadoopVersion parameter to modify the version of Hadoop from the defaults shown above. For details about the AMI versions currently supported by Amazon Elastic MapReduce, go to AMI Versions Supported in Elastic MapReduce in the Amazon Elastic MapReduce Developer's Guide.
     * `:instances` - *required* - (Hash) A specification of the number and type of Amazon EC2 instances on which to run the job flow.
       * `:master_instance_type` - (String) The EC2 instance type of the master node.
       * `:slave_instance_type` - (String) The EC2 instance type of the slave nodes.
@@ -156,20 +326,21 @@
         * `:bid_price` - (String) Bid price for each Amazon EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
         * `:instance_type` - *required* - (String) The Amazon EC2 instance type for all instances in the instance group.
         * `:instance_count` - *required* - (Integer) Target number of instances for the instance group.
-      * `:ec2_key_name` - (String) Specifies the name of the Amazon EC2 key pair that can be used to ssh to the master node as the user called "hadoop."
-      * `:placement` - (Hash) Specifies the Availability Zone the job flow will run in.
+      * `:ec2_key_name` - (String) The name of the Amazon EC2 key pair that can be used to ssh to the master node as the user called "hadoop."
+      * `:placement` - (Hash) The Availability Zone the job flow will run in.
         * `:availability_zone` - *required* - (String) The Amazon EC2 Availability Zone for the job flow.
       * `:keep_job_flow_alive_when_no_steps` - (Boolean) Specifies whether the job flow should terminate after completing all steps.
       * `:termination_protected` - (Boolean) Specifies whether to lock the job flow to prevent the Amazon EC2 instances from being terminated by API call, user intervention, or in the event of a job flow error.
-      * `:hadoop_version` - (String) Specifies the Hadoop version for the job flow. Valid inputs are "0.18", "0.20", or "0.20.205". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
+      * `:hadoop_version` - (String) The Hadoop version for the job flow. Valid inputs are "0.18", "0.20", or "0.20.205". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
       * `:ec2_subnet_id` - (String) To launch the job flow in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal Amazon Web Services cloud, outside of an Amazon VPC. Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a Amazon VPC.
     * `:steps` - (Array&lt;<Hash>) A list of steps to be executed by the job flow.
       * `:name` - *required* - (String) The name of the job flow step.
-      * `:action_on_failure` - (String) Specifies the action to take if the job flow step fails.  Valid values include:
+      * `:action_on_failure` - (String) The action to take if the job flow step fails.  Valid values include:
         * `TERMINATE_JOB_FLOW`
+        * `TERMINATE_CLUSTER`
         * `CANCEL_AND_WAIT`
         * `CONTINUE`
-      * `:hadoop_jar_step` - *required* - (Hash) Specifies the JAR file used for the job flow step.
+      * `:hadoop_jar_step` - *required* - (Hash) The JAR file used for the job flow step.
         * `:properties` - (Array&lt;<Hash>) A list of Java properties that are set when the step runs. You can use these properties to pass key value pairs to your main function.
           * `:key` - (String) The unique identifier of a key value pair.
           * `:value` - (String) The value part of the identified key.
@@ -182,6 +353,9 @@
         * `:path` - *required* - (String) Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.
         * `:args` - (Array&lt;<String>) A list of command line arguments to pass to the bootstrap action script.
     * `:supported_products` - (Array&lt;<String>) A list of strings that indicates third-party software to use with the job flow. For more information, go to Use Third Party Applications with Amazon EMR. Currently supported values are: "karmasphere-enterprise-utility" - tag the job flow for management by Karmasphere. "mapr-m3" - launch the job flow using MapR M3 Edition. "mapr-m5" - launch the job flow using MapR M5 Edition.
+    * `:new_supported_products` - (Array&lt;<Hash>) A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see Launch a Job Flow on the MapR Distribution for Hadoop. Currently supported values are: "karmasphere-enterprise-utility" - tag the job flow for management by Karmasphere. "mapr-m3" - launch the job flow using MapR M3 Edition. "mapr-m5" - launch the job flow using MapR M5 Edition. "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.
+      * `:name` - (String) The name of the product configuration.
+      * `:args` - (Array&lt;<String>) The list of user-supplied arguments.
     * `:visible_to_all_users` - (Boolean) Whether the job flow is visible to all IAM users of the AWS account associated with the job flow. If this value is set to  `true` , all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the job flow. If it is set to  `false` , only the IAM user that created the job flow can view and manage it.
     * `:job_flow_role` - (String) An IAM role for the job flow. The EC2 instances of the job flow assume this role. The default role is EMRJobflowDefault. In order to use the default role, you must have already created it using the CLI.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:

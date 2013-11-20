@@ -22,7 +22,7 @@ end
 
 When(/^I use the client to describe a non\-existent connection$/) do
   begin
-    @direct_connect.client.describe_connection_detail(:connection_id => 'abc')
+    @direct_connect.client.describe_connections(:connection_id => 'abc')
   rescue => error
     @error = error
   end

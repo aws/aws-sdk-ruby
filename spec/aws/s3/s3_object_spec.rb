@@ -170,6 +170,13 @@ module AWS
 
         end
 
+        context 'with a frozen string' do
+          it 'should not raise an Exception' do
+            client.should_receive(:put_object).and_return(client.stub_for(:put_object))
+            expect { object.write("HELLO".freeze) }.to_not raise_error
+          end
+        end
+
         context 'with a file path' do
 
           it 'should call put_object with the bucket, key and data' do

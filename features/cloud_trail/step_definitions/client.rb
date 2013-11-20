@@ -11,20 +11,11 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'time'
 
-module AWS
-  class CloudFront
+When(/^I use the client to describe trails$/) do
+  @response = @cloud_trail_client.describe_trails
+end
 
-    # @api private
-    class Request < Core::Http::Request
-
-      include Core::Signature::Version4
-
-      def service
-        'cloudfront'
-      end
-
-    end
-  end
+Then(/^the result should have an array of trails$/) do
+  @response[:trail_list].should be_an(Array)
 end

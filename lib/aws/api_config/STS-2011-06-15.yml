@@ -40,6 +40,33 @@
                 :type: :time
           PackedPolicySize:
             :type: :integer
+- :name: AssumeRoleWithSAML
+  :method: :assume_role_with_saml
+  :inputs:
+    RoleArn:
+    - :string
+    - :required
+    PrincipalArn:
+    - :string
+    - :required
+    SAMLAssertion:
+    - :string
+    - :required
+    Policy:
+    - :string
+    DurationSeconds:
+    - :integer
+  :outputs:
+    :children:
+      AssumeRoleWithSAMLResult:
+        :ignore: true
+        :children:
+          Credentials:
+            :children:
+              Expiration:
+                :type: :time
+          PackedPolicySize:
+            :type: :integer
 - :name: AssumeRoleWithWebIdentity
   :method: :assume_role_with_web_identity
   :inputs:

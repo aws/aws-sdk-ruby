@@ -17,10 +17,9 @@ module AWS
     # Client class for Cloud Watch
     class Client < Core::QueryClient
 
-
       API_VERSION = '2010-08-01'
 
-      signature_version :Version2
+      signature_version :Version4, 'monitoring'
 
       # @api private
       CACHEABLE_REQUESTS = Set[

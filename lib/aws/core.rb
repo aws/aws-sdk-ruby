@@ -52,6 +52,9 @@ module AWS
     SvcDetails.new("CloudSearch",
       :full_name => "Amazon CloudSearch",
       :method_name => :cloud_search),
+    SvcDetails.new("CloudTrail",
+      :full_name => "AWS CloudTrail",
+      :method_name => :cloud_trail),
     SvcDetails.new("CloudWatch",
       :full_name => "Amazon CloudWatch",
       :method_name => :cloud_watch),
@@ -370,8 +373,8 @@ module AWS
     #   and instance of {Core::Response} and returns a string.
     #
     # @option options [Integer] :max_retries (3) The maximum number of times
-    #   service errors (500) should be retried.  There is an exponential
-    #   backoff in between service request retries, so the more retries the
+    #   service errors (500) and throttling errors should be retried. There is
+    #   an exponential backoff in between retries, so the more retries the
     #   longer it can take to fail.
     #
     # @option options [String, URI, nil] :proxy_uri (nil) The URI of the proxy
