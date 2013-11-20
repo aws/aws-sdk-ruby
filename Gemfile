@@ -15,6 +15,8 @@ source 'https://rubygems.org'
 
 gemspec
 
+gem 'nokogiri', '< 1.6' if RUBY_VERSION < '1.9'
+
 group :repl do
   gem 'pry'
 end
