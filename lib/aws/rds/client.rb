@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Relational Database Service (RDS).
     class Client < Core::QueryClient
 
-      API_VERSION = '2013-05-15'
+      API_VERSION = '2013-09-09'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]
@@ -29,5 +29,12 @@ module AWS
       define_client_methods('2013-05-15')
 
     end
+
+    class Client::V20130909 < Client
+
+      define_client_methods('2013-09-09')
+
+    end
+
   end
 end
