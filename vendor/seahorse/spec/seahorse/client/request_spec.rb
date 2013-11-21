@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'tempfile'
 
 module Seahorse
   module Client
@@ -63,7 +64,7 @@ module Seahorse
 
       end
 
-      describe '#send_request with a block' do
+      describe '#send_request with a target' do
 
         let(:handler) do
           Proc.new do
@@ -78,24 +79,73 @@ module Seahorse
           allow(handlers).to receive(:to_stack).and_return(handler)
         end
 
-        it 'streams data from the handler to the #send_request block' do
-          data = []
-          request.send_request { |chunk| data << chunk }
-          expect(data).to eq(['part1', 'part2', 'part3'])
+        describe 'String target' do
+
+          it 'writes to the file named' do
+            tmpfile = Tempfile.new('tempfile')
+            tmpfile.close
+            request.send_request(target: tmpfile.path)
+            expect(File.read(tmpfile.path)).to eq("part1part2part3")
+          end
+
+          it 'closes the file before returning the response' do
+            tmpfile = Tempfile.new('tempfile')
+            tmpfile.close
+            resp = request.send_request(target: tmpfile.path)
+            expect(resp.context.http_response.body).to be_closed
+          end
+
         end
 
-        it 'counts the bytes yielded' do
-          resp = request.send_request { |chunk| }
-          expect(resp.http_response.body.size).to eq(15)
+        describe 'Pathname target' do
+
+          it 'writes to the file named' do
+            tmpfile = Tempfile.new('tempfile')
+            tmpfile.close
+            request.send_request(target: Pathname.new(tmpfile.path))
+            expect(File.read(tmpfile.path)).to eq("part1part2part3")
+          end
+
+          it 'closes the file before returning the response' do
+            tmpfile = Tempfile.new('tempfile')
+            tmpfile.close
+            resp = request.send_request(target: Pathname.new(tmpfile.path))
+            expect(resp.context.http_response.body).to be_closed
+          end
+
         end
 
-        it 'does not buffer the response chunks' do
-          response = request.send_request { |chunk| }
-          body = response.http_response.body
-          expect(body.read).to eq('')
-          expect(body).not_to respond_to(:truncate)
+        describe 'IO object target' do
+
+          it 'writes to the given object' do
+            buffer = StringIO.new('')
+            request.send_request(target: buffer)
+            expect(buffer.string).to eq("part1part2part3")
+          end
+
         end
 
+        describe 'Block target' do
+
+          it 'streams data from the handler to the #send_request block' do
+            data = []
+            request.send_request { |chunk| data << chunk }
+            expect(data).to eq(['part1', 'part2', 'part3'])
+          end
+
+          it 'counts the bytes yielded' do
+            resp = request.send_request { |chunk| }
+            expect(resp.http_response.body.size).to eq(15)
+          end
+
+          it 'does not buffer the response chunks' do
+            response = request.send_request { |chunk| }
+            body = response.http_response.body
+            expect(body.read).to eq('')
+            expect(body).not_to respond_to(:truncate)
+          end
+
+        end
       end
     end
   end

@@ -221,6 +221,7 @@ module Seahorse
             it 'populates the response body' do
               stub_request(:any, endpoint).to_return(body: 'response-body')
               resp_body = make_request.http_response.body
+              resp_body.rewind
               expect(resp_body.read).to eq('response-body')
             end
 

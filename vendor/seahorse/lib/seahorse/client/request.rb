@@ -52,9 +52,32 @@ module Seahorse
       #
       # @return [Response]
       def send_request(options = {}, &block)
-        @context.http_response.body = BlockIO.new(&block) if block_given?
-        @context.http_response.body = options[:target] if options[:target]
-        @handlers.to_stack.call(@context)
+        set_target(options, &block)
+        resp = @handlers.to_stack.call(@context)
+        close_managed_files
+        resp
+      end
+
+      private
+
+      def set_target(options, &block)
+        if target = options[:target] || block
+          @context.http_response.body =
+            case target
+            when Proc then BlockIO.new(&target)
+            when String, Pathname then ManagedFile.new(target, 'wb')
+            else target
+          end
+        end
+      end
+
+      def close_managed_files
+        [
+          @context.http_request.body,
+          @context.http_response.body,
+        ].each do |io|
+          io.close if io.is_a?(ManagedFile) && io.open?
+        end
       end
 
     end
