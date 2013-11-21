@@ -1,3 +1,24 @@
+2013-11-14 Alex Wood <awood45@gmail.com>
+
+  * doc-src/CloudTrail/V20131101.yml, endpoints.json,
+  features/cloud_trail/client.feature,
+  features/cloud_trail/step_definitions/client.rb,
+  features/cloud_trail/step_definitions/cloud_trail.rb,
+  lib/aws/api_config/CloudTrail-2013-11-01.yml, lib/aws/cloud_trail.rb,
+  lib/aws/cloud_trail/client.rb, lib/aws/cloud_trail/config.rb,
+  lib/aws/cloud_trail/errors.rb, lib/aws/cloud_trail/request.rb,
+  lib/aws/core.rb, spec/aws/cloud_trail_spec.rb: Initial Support for AWS
+  CloudTrail
+
+  AWS CloudTrail is a web service that records AWS API calls for your account
+  and
+  delivers log files to you. The recorded information includes the identity of
+  the
+  API caller, the time of the API call, the source IP address of the API
+  caller,
+  the request parameters, and the response elements returned by the AWS
+  service.
+
 2013-11-13 Alex Wood <awood45@gmail.com>
 
   * doc-src/IAM/V20100508.yml, lib/aws/api_config/IAM-2010-05-08.yml: API
@@ -28,27 +49,6 @@
   event
   notifications, encryption, audit logging, data load from external hosts, WLM
   configuration, and database distribution styles and functions.
-
-2013-11-14 Alex Wood <awood45@gmail.com>
-
-  * doc-src/CloudTrail/V20131101.yml, endpoints.json,
-  features/cloud_trail/client.feature,
-  features/cloud_trail/step_definitions/client.rb,
-  features/cloud_trail/step_definitions/cloud_trail.rb,
-  lib/aws/api_config/CloudTrail-2013-11-01.yml, lib/aws/cloud_trail.rb,
-  lib/aws/cloud_trail/client.rb, lib/aws/cloud_trail/config.rb,
-  lib/aws/cloud_trail/errors.rb, lib/aws/cloud_trail/request.rb,
-  lib/aws/core.rb, spec/aws/cloud_trail_spec.rb: Initial Support for AWS
-  CloudTrail
-
-  AWS CloudTrail is a web service that records AWS API calls for your account
-  and
-  delivers log files to you. The recorded information includes the identity of
-  the
-  API caller, the time of the API call, the source IP address of the API
-  caller,
-  the request parameters, and the response elements returned by the AWS
-  service.
 
 2013-11-12 Trevor Rowe <trevorrowe@gmail.com>
 
