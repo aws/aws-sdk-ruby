@@ -2,6 +2,8 @@ script: bundle exec rake
 rvm:
 - 1.9.3
 - 2.0.0
+- jruby
+- rbx
 bundler_args: --without bin docs
 branches:
   only:

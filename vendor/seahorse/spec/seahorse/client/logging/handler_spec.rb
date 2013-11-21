@@ -41,7 +41,7 @@ module Seahorse
           resp = handle!
           expect(resp.context[:logging_started_at]).to be_kind_of(Time)
           expect(resp.context[:logging_completed_at]).to be_kind_of(Time)
-          expect(resp.context[:logging_started_at]).to be < resp.context[:logging_completed_at]
+          expect(resp.context[:logging_started_at]).to be <= resp.context[:logging_completed_at]
         end
 
         it 'sends the formatted message to the logger' do

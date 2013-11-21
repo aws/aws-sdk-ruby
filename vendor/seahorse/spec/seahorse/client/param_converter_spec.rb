@@ -271,6 +271,7 @@ module Seahorse
           it 'accepts io objects (like tempfiles)' do
             file = Tempfile.new('abc')
             expect(ParamConverter.c(shape_class, file)).to be(file)
+            file.close
             file.delete
           end
 
