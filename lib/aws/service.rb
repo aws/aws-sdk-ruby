@@ -176,6 +176,16 @@ module Aws
         klass
       end
 
+      # @api private
+      def const_missing(constant)
+        if constant =~ /^V\d{8}$/
+          api = api(api_version(constant))
+          const_set(constant, Seahorse::Client.define(api: api))
+        else
+          super
+        end
+      end
+
       private
 
       def svc_locked_version
@@ -194,15 +204,6 @@ module Aws
 
       def apis
         @apis ||= {}
-      end
-
-      def const_missing(constant)
-        if constant =~ /^V\d{8}$/
-          api = api(api_version(constant))
-          const_set(constant, Seahorse::Client.define(api: api))
-        else
-          super
-        end
       end
 
       def api(api_version)

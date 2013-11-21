@@ -90,12 +90,6 @@ module Seahorse
           duplicate
         end
 
-        private
-
-        def compute_weight
-          @weight = STEPS[@step] + @priority
-        end
-
         # @api private
         def <=>(other)
           if weight == other.weight
@@ -103,6 +97,12 @@ module Seahorse
           else
             weight <=> other.weight
           end
+        end
+
+        private
+
+        def compute_weight
+          @weight = STEPS[@step] + @priority
         end
 
       end
