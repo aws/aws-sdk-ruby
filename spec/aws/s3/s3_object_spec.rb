@@ -371,19 +371,19 @@ module AWS
           context 'string' do
 
             it 'should split the upload into parts' do
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
-              object.write("aabb",
-                           :multipart_threshold => 2,
-                           :multipart_min_part_size => 2)
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
+              object.write('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb',
+                :multipart_threshold => 2,
+                :multipart_min_part_size => 2)
             end
 
             it 'should default to the configured multipart_min_part_size' do
               config.stub(:s3_multipart_min_part_size).and_return(2)
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
-              object.write("aabb",
-                           :multipart_threshold => 2)
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
+              object.write('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb',
+                :multipart_threshold => 2)
             end
 
           end
@@ -391,11 +391,11 @@ module AWS
           context 'stream' do
 
             it 'should split the upload into parts' do
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
-              object.write(StringIO.new("aabb"),
-                           :multipart_threshold => 2,
-                           :multipart_min_part_size => 2)
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
+              object.write(StringIO.new('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb'),
+                :multipart_threshold => 2,
+                :multipart_min_part_size => 2)
             end
 
           end
@@ -403,14 +403,14 @@ module AWS
           context 'file' do
 
             it 'should split the upload into parts' do
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
               f = Tempfile.new("foo")
-              f.write("aabb")
+              f.write('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb')
               f.close
               object.write(:file => f.path,
-                           :multipart_threshold => 2,
-                           :multipart_min_part_size => 2)
+                :multipart_threshold => 2,
+                :multipart_min_part_size => 2)
             end
 
           end

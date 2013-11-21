@@ -1370,7 +1370,9 @@ module AWS
 
         estimated_size = estimated_content_length(options)
 
-        [(estimated_size.to_f / max_parts).ceil, min_size].max.to_i
+        part_size = [(estimated_size.to_f / max_parts).ceil, min_size].max.to_i
+        part_size += 16 - (part_size % 16)
+        part_size
 
       end
 
