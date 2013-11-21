@@ -146,7 +146,7 @@ version.
 | AWS Import/Export                   | Aws::ImportExport         | 2010-06-01                     |
 | AWS OpsWorks                        | Aws::OpsWorks             | 2013-02-18                     |
 | AWS Security Token Service          | Aws::STS                  | 2011-06-15                     |
-| AWS Storage Gateway                 | Aws::StorageGateway       | 2012-06-30                     |
+| AWS Storage Gateway                 | Aws::StorageGateway       | 2012-06-30 &mdash; 2013-06-30  |
 | AWS Support                         | Aws::Support              | 2013-04-15                     |
 | Elastic Load Balancing              | Aws::ElasticLoadBalancing | 2012-06-01                     |
 
