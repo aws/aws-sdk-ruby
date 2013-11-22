@@ -11,24 +11,24 @@ module Aws
     end
 
     # @return [String, nil]
-    attr_accessor :access_key_id
+    attr_reader :access_key_id
 
     # @return [String, nil]
-    attr_accessor :secret_access_key
+    attr_reader :secret_access_key
 
     # @return [String, nil]
-    attr_accessor :session_token
+    attr_reader :session_token
 
     # @return [Boolean] Returns `true` if the access key id and secret
     #   access key are both set.
     def set?
-      !!(@access_key_id && @secret_access_key)
+      !!(access_key_id && secret_access_key)
     end
 
     # Removing the secret access key from the default inspect string.
     # @api private
     def inspect
-      "#<#{self.class.name} access_key_id=#{access_key_id}>"
+      "#<#{self.class.name} access_key_id=#{access_key_id.inspect}>"
     end
 
   end
