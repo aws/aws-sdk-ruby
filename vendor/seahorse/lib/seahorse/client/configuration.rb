@@ -52,8 +52,22 @@ module Seahorse
     class Configuration
 
       # @api private
+      Defaults = Class.new(Array) do
+        def each(&block)
+          reverse.each(&block)
+        end
+      end
+
+      # @api private
+      DynamicDefault = Struct.new(:block) do
+        def call(*args)
+          block.call(*args)
+        end
+      end
+
+      # @api private
       def initialize
-        @defaults = {}
+        @defaults = Hash.new { |h,k| h[k] = Defaults.new }
       end
 
       # Adds a getter method that returns the named option or a default
@@ -84,9 +98,8 @@ module Seahorse
       #
       # @return [self]
       def add_option(name, default = nil, &block)
-        @defaults[name.to_sym] = block_given? ?
-          UnresolvedOption.new(Proc.new) :
-          default
+        default = DynamicDefault.new(Proc.new) if block_given?
+        @defaults[name.to_sym] << default
         self
       end
 
@@ -126,7 +139,19 @@ module Seahorse
       # @param [Hash] options ({}) A hash of configuration options.
       # @return [Struct] Returns a frozen configuration `Struct`.
       def build!(options = {})
-        struct = default_struct
+        struct = empty_struct
+        apply_options(struct, options)
+        apply_defaults(struct, options)
+        struct
+      end
+
+      private
+
+      def empty_struct
+        Struct.new(*@defaults.keys.sort).new
+      end
+
+      def apply_options(struct, options)
         options.each do |opt, value|
           begin
             struct[opt] = value
@@ -135,60 +160,55 @@ module Seahorse
             raise ArgumentError, msg
           end
         end
-        OptionBlockResolver.new(struct).struct.freeze
       end
 
-      private
-
-      def default_struct
-        Struct.new(*@defaults.keys).new(*@defaults.values_at(*@defaults.keys))
-      end
-
-      # @api private
-      class UnresolvedOption
-
-        def initialize(block)
-          @block = block
+      def apply_defaults(struct, options)
+        @defaults.each do |opt_name, defaults|
+          unless options.key?(opt_name)
+            struct[opt_name] = defaults
+          end
         end
-
-        attr_reader :block
-
+        DefaultResolver.new(struct).resolve
       end
 
       # @api private
-      class OptionBlockResolver
+      class DefaultResolver
 
         def initialize(struct)
           @struct = struct
           @members = Set.new(@struct.members)
-          @struct.members.each do |opt|
-            if struct[opt].is_a?(UnresolvedOption)
-              struct[opt] = struct[opt].block.call(self)
-            end
-          end
         end
 
-        attr_reader :struct
+        def resolve
+          @members.each { |opt_name| value_at(opt_name) }
+        end
 
-        def respond_to?(method_name)
-          @members.include?(method_name.to_sym) || super
+        def respond_to?(method_name, *args)
+          @members.include?(method_name) or super
         end
 
         private
 
+        def value_at(opt_name)
+          value = @struct[opt_name]
+          value.is_a?(Defaults) ? resolve_defaults(opt_name, value) : value
+        end
+
+        def resolve_defaults(opt_name, defaults)
+          defaults.each do |default|
+            default = default.call(self) if default.is_a?(DynamicDefault)
+            @struct[opt_name] = default
+            break if !default.nil?
+          end
+          @struct[opt_name]
+        end
+
         def method_missing(method_name, *args)
           if @members.include?(method_name)
-            resolve_blocks(method_name)
+            value_at(method_name)
           else
             super
           end
-        end
-
-        def resolve_blocks(member)
-          if @struct[member].is_a?(UnresolvedOption)
-            @struct[member] = @struct[member].block.call(self)
-          end
-          @struct[member]
         end
 
       end
