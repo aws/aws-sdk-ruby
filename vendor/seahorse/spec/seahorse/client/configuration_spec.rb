@@ -64,7 +64,7 @@ module Seahorse
         it 'returns self so it can be chained' do
           c = config.add_option(:name).add_option(:color)
           expect(c).to be(config)
-          expect(c.build!.members).to eq([:name, :color])
+          expect(c.build!.members).to eq([:color, :name])
         end
 
       end
@@ -73,15 +73,6 @@ module Seahorse
 
         it 'returns a Struct' do
           expect(config.add_option(:opt).build!).to be_kind_of(Struct)
-        end
-
-        it 'returns a frozen structure' do
-          config.add_option(:foo)
-          c = config.build!
-          expect(c).to be_frozen
-          expect {
-            c.foo = 'bar'
-          }.to raise_error(/can't modify frozen/)
         end
 
         it 'accepts a hash of options' do

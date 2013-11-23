@@ -31,10 +31,11 @@ module Aws
       }
 
       option(:credentials) do |config|
-        Aws::Credentials.new(
+        credentials = Aws::Credentials.new(
           config.access_key_id,
           config.secret_access_key,
           config.session_token)
+        credentials.set? ? credentials : nil
       end
 
       def after_initialize(client)

@@ -24,6 +24,7 @@
     "Aws::Plugins::RetryErrors",
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::InstanceProfileCredentials",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::XmlProtocol",
     "Aws::Plugins::SignatureV3"

@@ -21,9 +21,9 @@ module Aws
           expect(config.build!).to respond_to(:credentials)
         end
 
-        it 'defaults to a Credentials object' do
+        it 'defaults to nil when credentials not set' do
           plugin.add_options(config)
-          expect(config.build!.credentials).to be_kind_of(Aws::Credentials)
+          expect(config.build!.credentials).to be(nil)
         end
 
         it 'hydrates credentials from the env (AWS_)' do

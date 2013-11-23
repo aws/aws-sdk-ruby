@@ -12,6 +12,7 @@ module Aws
         Aws::Plugins::RetryErrors
         Aws::Plugins::GlobalConfiguration
         Aws::Plugins::RegionalEndpoint
+        Aws::Plugins::InstanceProfileCredentials
         Aws::Plugins::Credentials
       )
 
