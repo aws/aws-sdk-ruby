@@ -11,7 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/version'
 require 'set'
 
 # AWS is the root module for all of the Amazon Web Services.  It is also
@@ -146,94 +145,97 @@ module AWS
   # @api private
   ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
-  autoload :Errors, 'aws/errors'
-  autoload :Record, 'aws/record'
+  SRC = ROOT + '/lib/aws'
+
+  autoload :Errors, "#{SRC}/errors"
+  autoload :Record, "#{SRC}/record"
+  autoload :VERSION, "#{SRC}/version"
 
   module Core
 
-    autoload :AsyncHandle, 'aws/core/async_handle'
-    autoload :Cacheable, 'aws/core/cacheable'
-    autoload :Client, 'aws/core/client'
-    autoload :Collection, 'aws/core/collection'
-    autoload :Configuration, 'aws/core/configuration'
-    autoload :CredentialProviders, 'aws/core/credential_providers'
-    autoload :Data, 'aws/core/data'
-    autoload :Deprecations, 'aws/core/deprecations'
-    autoload :IndifferentHash, 'aws/core/indifferent_hash'
-    autoload :Inflection, 'aws/core/inflection'
-    autoload :JSONParser, 'aws/core/json_parser'
+    autoload :AsyncHandle, "#{SRC}/core/async_handle"
+    autoload :Cacheable, "#{SRC}/core/cacheable"
+    autoload :Client, "#{SRC}/core/client"
+    autoload :Collection, "#{SRC}/core/collection"
+    autoload :Configuration, "#{SRC}/core/configuration"
+    autoload :CredentialProviders, "#{SRC}/core/credential_providers"
+    autoload :Data, "#{SRC}/core/data"
+    autoload :Deprecations, "#{SRC}/core/deprecations"
+    autoload :IndifferentHash, "#{SRC}/core/indifferent_hash"
+    autoload :Inflection, "#{SRC}/core/inflection"
+    autoload :JSONParser, "#{SRC}/core/json_parser"
 
-    autoload :JSONClient, 'aws/core/json_client'
-    autoload :JSONRequestBuilder, 'aws/core/json_request_builder'
-    autoload :JSONResponseParser, 'aws/core/json_response_parser'
+    autoload :JSONClient, "#{SRC}/core/json_client"
+    autoload :JSONRequestBuilder, "#{SRC}/core/json_request_builder"
+    autoload :JSONResponseParser, "#{SRC}/core/json_response_parser"
 
-    autoload :LazyErrorClasses, 'aws/core/lazy_error_classes'
-    autoload :LogFormatter, 'aws/core/log_formatter'
-    autoload :MetaUtils, 'aws/core/meta_utils'
-    autoload :ManagedFile, 'aws/core/managed_file'
-    autoload :Model, 'aws/core/model'
-    autoload :Naming, 'aws/core/naming'
-    autoload :OptionGrammar, 'aws/core/option_grammar'
-    autoload :PageResult, 'aws/core/page_result'
-    autoload :Policy, 'aws/core/policy'
+    autoload :LazyErrorClasses, "#{SRC}/core/lazy_error_classes"
+    autoload :LogFormatter, "#{SRC}/core/log_formatter"
+    autoload :MetaUtils, "#{SRC}/core/meta_utils"
+    autoload :ManagedFile, "#{SRC}/core/managed_file"
+    autoload :Model, "#{SRC}/core/model"
+    autoload :Naming, "#{SRC}/core/naming"
+    autoload :OptionGrammar, "#{SRC}/core/option_grammar"
+    autoload :PageResult, "#{SRC}/core/page_result"
+    autoload :Policy, "#{SRC}/core/policy"
 
-    autoload :QueryClient, 'aws/core/query_client'
-    autoload :QueryRequestBuilder, 'aws/core/query_request_builder'
-    autoload :QueryResponseParser, 'aws/core/query_response_parser'
+    autoload :QueryClient, "#{SRC}/core/query_client"
+    autoload :QueryRequestBuilder, "#{SRC}/core/query_request_builder"
+    autoload :QueryResponseParser, "#{SRC}/core/query_response_parser"
 
-    autoload :Region, 'aws/core/region'
-    autoload :RegionCollection, 'aws/core/region_collection'
+    autoload :Region, "#{SRC}/core/region"
+    autoload :RegionCollection, "#{SRC}/core/region_collection"
 
-    autoload :Resource, 'aws/core/resource'
-    autoload :ResourceCache, 'aws/core/resource_cache'
-    autoload :Response, 'aws/core/response'
-    autoload :ResponseCache, 'aws/core/response_cache'
+    autoload :Resource, "#{SRC}/core/resource"
+    autoload :ResourceCache, "#{SRC}/core/resource_cache"
+    autoload :Response, "#{SRC}/core/response"
+    autoload :ResponseCache, "#{SRC}/core/response_cache"
 
-    autoload :RESTClient, 'aws/core/rest_xml_client'
-    autoload :RESTJSONClient, 'aws/core/rest_json_client'
-    autoload :RESTXMLClient, 'aws/core/rest_xml_client'
-    autoload :RESTRequestBuilder, 'aws/core/rest_request_builder'
-    autoload :RESTResponseParser, 'aws/core/rest_response_parser'
+    autoload :RESTClient, "#{SRC}/core/rest_xml_client"
+    autoload :RESTJSONClient, "#{SRC}/core/rest_json_client"
+    autoload :RESTXMLClient, "#{SRC}/core/rest_xml_client"
+    autoload :RESTRequestBuilder, "#{SRC}/core/rest_request_builder"
+    autoload :RESTResponseParser, "#{SRC}/core/rest_response_parser"
 
-    autoload :ServiceInterface, 'aws/core/service_interface'
-    autoload :Signer, 'aws/core/signer'
-    autoload :UriEscape, 'aws/core/uri_escape'
+    autoload :ServiceInterface, "#{SRC}/core/service_interface"
+    autoload :Signer, "#{SRC}/core/signer"
+    autoload :UriEscape, "#{SRC}/core/uri_escape"
 
     module Options
-      autoload :JSONSerializer, 'aws/core/options/json_serializer'
-      autoload :XMLSerializer, 'aws/core/options/xml_serializer'
-      autoload :Validator, 'aws/core/options/validator'
+      autoload :JSONSerializer, "#{SRC}/core/options/json_serializer"
+      autoload :XMLSerializer, "#{SRC}/core/options/xml_serializer"
+      autoload :Validator, "#{SRC}/core/options/validator"
     end
 
     module Signature
-      autoload :Version2, 'aws/core/signature/version_2'
-      autoload :Version3, 'aws/core/signature/version_3'
-      autoload :Version3HTTPS, 'aws/core/signature/version_3_https'
-      autoload :Version4, 'aws/core/signature/version_4'
+      autoload :Version2, "#{SRC}/core/signature/version_2"
+      autoload :Version3, "#{SRC}/core/signature/version_3"
+      autoload :Version3HTTPS, "#{SRC}/core/signature/version_3_https"
+      autoload :Version4, "#{SRC}/core/signature/version_4"
     end
 
     module XML
 
-      autoload :Parser, 'aws/core/xml/parser'
-      autoload :Grammar, 'aws/core/xml/grammar'
-      autoload :Stub, 'aws/core/xml/stub'
-      autoload :Frame, 'aws/core/xml/frame'
-      autoload :RootFrame, 'aws/core/xml/root_frame'
-      autoload :FrameStack, 'aws/core/xml/frame_stack'
+      autoload :Parser, "#{SRC}/core/xml/parser"
+      autoload :Grammar, "#{SRC}/core/xml/grammar"
+      autoload :Stub, "#{SRC}/core/xml/stub"
+      autoload :Frame, "#{SRC}/core/xml/frame"
+      autoload :RootFrame, "#{SRC}/core/xml/root_frame"
+      autoload :FrameStack, "#{SRC}/core/xml/frame_stack"
 
       module SaxHandlers
-        autoload :Nokogiri, 'aws/core/xml/sax_handlers/nokogiri'
-        autoload :REXML, 'aws/core/xml/sax_handlers/rexml'
+        autoload :Nokogiri, "#{SRC}/core/xml/sax_handlers/nokogiri"
+        autoload :REXML, "#{SRC}/core/xml/sax_handlers/rexml"
       end
 
     end
 
     module Http
-      autoload :ConnectionPool, 'aws/core/http/connection_pool'
-      autoload :Handler, 'aws/core/http/handler'
-      autoload :NetHttpHandler, 'aws/core/http/net_http_handler'
-      autoload :Request, 'aws/core/http/request'
-      autoload :Response, 'aws/core/http/response'
+      autoload :ConnectionPool, "#{SRC}/core/http/connection_pool"
+      autoload :Handler, "#{SRC}/core/http/handler"
+      autoload :NetHttpHandler, "#{SRC}/core/http/net_http_handler"
+      autoload :Request, "#{SRC}/core/http/request"
+      autoload :Response, "#{SRC}/core/http/response"
     end
 
   end
