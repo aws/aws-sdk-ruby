@@ -3,104 +3,107 @@ module Aws
   # @api private
   GEM_ROOT = File.dirname(File.dirname(__FILE__))
 
+  # @api private
+  SRC = GEM_ROOT + '/lib/aws'
+
   @config = {}
 
-  autoload :Credentials, 'aws/credentials'
-  autoload :Errors, 'aws/errors'
-  autoload :ErrorHandler, 'aws/error_handler'
-  autoload :RequestHandler, 'aws/request_handler'
-  autoload :ResponseHandler, 'aws/response_handler'
-  autoload :Service, 'aws/service'
-  autoload :Structure, 'aws/structure'
-  autoload :TimestampFormatter, 'aws/timestamp_formatter'
-  autoload :Util, 'aws/util'
-  autoload :VERSION, 'aws/version'
+  autoload :Credentials, "#{SRC}/credentials"
+  autoload :Errors, "#{SRC}/errors"
+  autoload :ErrorHandler, "#{SRC}/error_handler"
+  autoload :RequestHandler, "#{SRC}/request_handler"
+  autoload :ResponseHandler, "#{SRC}/response_handler"
+  autoload :Service, "#{SRC}/service"
+  autoload :Structure, "#{SRC}/structure"
+  autoload :TimestampFormatter, "#{SRC}/timestamp_formatter"
+  autoload :Util, "#{SRC}/util"
+  autoload :VERSION, "#{SRC}/version"
 
   # @api private
   module Api
-    autoload :BaseTranslator, 'aws/api/base_translator'
-    autoload :Documentor, 'aws/api/documentor'
-    autoload :DocExample, 'aws/api/doc_example'
-    autoload :InputShapeTranslator, 'aws/api/shape_translator'
-    autoload :OperationTranslator, 'aws/api/operation_translator'
-    autoload :OutputShapeTranslator, 'aws/api/shape_translator'
-    autoload :ServiceNamer, 'aws/api/service_namer'
-    autoload :ShapeTranslator, 'aws/api/shape_translator'
-    autoload :Translator, 'aws/api/translator'
-    autoload :Visitor, 'aws/api/visitor'
+    autoload :BaseTranslator, "#{SRC}/api/base_translator"
+    autoload :Documentor, "#{SRC}/api/documentor"
+    autoload :DocExample, "#{SRC}/api/doc_example"
+    autoload :InputShapeTranslator, "#{SRC}/api/shape_translator"
+    autoload :OperationTranslator, "#{SRC}/api/operation_translator"
+    autoload :OutputShapeTranslator, "#{SRC}/api/shape_translator"
+    autoload :ServiceNamer, "#{SRC}/api/service_namer"
+    autoload :ShapeTranslator, "#{SRC}/api/shape_translator"
+    autoload :Translator, "#{SRC}/api/translator"
+    autoload :Visitor, "#{SRC}/api/visitor"
 
     module ServiceTranslators
-      autoload :CloudFront, 'aws/api/service_translators/cloud_front'
-      autoload :DynamoDB, 'aws/api/service_translators/dynamo_db'
-      autoload :Glacier, 'aws/api/service_translators/glacier'
-      autoload :ImportExport, 'aws/api/service_translators/import_export'
-      autoload :Route53, 'aws/api/service_translators/route53'
-      autoload :S3, 'aws/api/service_translators/s3'
-      autoload :SQS, 'aws/api/service_translators/sqs'
-      autoload :SWF, 'aws/api/service_translators/swf'
+      autoload :CloudFront, "#{SRC}/api/service_translators/cloud_front"
+      autoload :DynamoDB, "#{SRC}/api/service_translators/dynamo_db"
+      autoload :Glacier, "#{SRC}/api/service_translators/glacier"
+      autoload :ImportExport, "#{SRC}/api/service_translators/import_export"
+      autoload :Route53, "#{SRC}/api/service_translators/route53"
+      autoload :S3, "#{SRC}/api/service_translators/s3"
+      autoload :SQS, "#{SRC}/api/service_translators/sqs"
+      autoload :SWF, "#{SRC}/api/service_translators/swf"
     end
 
   end
 
   # @api private
   module Json
-    autoload :Builder, 'aws/json/builder'
-    autoload :ErrorParser, 'aws/json/error_parser'
-    autoload :Parser, 'aws/json/parser'
-    autoload :Serializer, 'aws/json/serializer'
+    autoload :Builder, "#{SRC}/json/builder"
+    autoload :ErrorParser, "#{SRC}/json/error_parser"
+    autoload :Parser, "#{SRC}/json/parser"
+    autoload :Serializer, "#{SRC}/json/serializer"
   end
 
   module Plugins
-    autoload :Credentials, 'aws/plugins/credentials'
-    autoload :DynamoDBExtendedRetries, 'aws/plugins/dynamodb_extended_retries'
-    autoload :GlacierAccountId, 'aws/plugins/glacier_account_id'
-    autoload :GlacierApiVersion, 'aws/plugins/glacier_api_version'
-    autoload :GlacierChecksums, 'aws/plugins/glacier_checksums'
-    autoload :GlobalConfiguration, 'aws/plugins/global_configuration'
-    autoload :JsonProtocol, 'aws/plugins/json_protocol'
-    autoload :JsonRpcHeaders, 'aws/plugins/json_rpc_headers'
-    autoload :QueryProtocol, 'aws/plugins/query_protocol'
-    autoload :RegionalEndpoint, 'aws/plugins/regional_endpoint'
-    autoload :RetryErrors, 'aws/plugins/retry_errors'
-    autoload :S3BucketDns, 'aws/plugins/s3_bucket_dns'
-    autoload :S3CompleteMultipartUploadFix, 'aws/plugins/s3_complete_multipart_upload_fix'
-    autoload :S3GetBucketLocationFix, 'aws/plugins/s3_get_bucket_location_fix'
-    autoload :S3Md5s, 'aws/plugins/s3_md5s'
-    autoload :S3Redirects, 'aws/plugins/s3_redirects'
-    autoload :S3Signer, 'aws/plugins/s3_signer'
-    autoload :SignatureV2, 'aws/plugins/signature_v2'
-    autoload :SignatureV3, 'aws/plugins/signature_v3'
-    autoload :SignatureV4, 'aws/plugins/signature_v4'
-    autoload :SQSQueueUrls, 'aws/plugins/sqs_queue_urls'
-    autoload :SWFReadTimeouts, 'aws/plugins/swf_read_timeouts'
-    autoload :UserAgent, 'aws/plugins/user_agent'
-    autoload :XmlProtocol, 'aws/plugins/xml_protocol'
+    autoload :Credentials, "#{SRC}/plugins/credentials"
+    autoload :DynamoDBExtendedRetries, "#{SRC}/plugins/dynamodb_extended_retries"
+    autoload :GlacierAccountId, "#{SRC}/plugins/glacier_account_id"
+    autoload :GlacierApiVersion, "#{SRC}/plugins/glacier_api_version"
+    autoload :GlacierChecksums, "#{SRC}/plugins/glacier_checksums"
+    autoload :GlobalConfiguration, "#{SRC}/plugins/global_configuration"
+    autoload :JsonProtocol, "#{SRC}/plugins/json_protocol"
+    autoload :JsonRpcHeaders, "#{SRC}/plugins/json_rpc_headers"
+    autoload :QueryProtocol, "#{SRC}/plugins/query_protocol"
+    autoload :RegionalEndpoint, "#{SRC}/plugins/regional_endpoint"
+    autoload :RetryErrors, "#{SRC}/plugins/retry_errors"
+    autoload :S3BucketDns, "#{SRC}/plugins/s3_bucket_dns"
+    autoload :S3CompleteMultipartUploadFix, "#{SRC}/plugins/s3_complete_multipart_upload_fix"
+    autoload :S3GetBucketLocationFix, "#{SRC}/plugins/s3_get_bucket_location_fix"
+    autoload :S3Md5s, "#{SRC}/plugins/s3_md5s"
+    autoload :S3Redirects, "#{SRC}/plugins/s3_redirects"
+    autoload :S3Signer, "#{SRC}/plugins/s3_signer"
+    autoload :SignatureV2, "#{SRC}/plugins/signature_v2"
+    autoload :SignatureV3, "#{SRC}/plugins/signature_v3"
+    autoload :SignatureV4, "#{SRC}/plugins/signature_v4"
+    autoload :SQSQueueUrls, "#{SRC}/plugins/sqs_queue_urls"
+    autoload :SWFReadTimeouts, "#{SRC}/plugins/swf_read_timeouts"
+    autoload :UserAgent, "#{SRC}/plugins/user_agent"
+    autoload :XmlProtocol, "#{SRC}/plugins/xml_protocol"
   end
 
   # @api private
   module Query
-    autoload :Builder, 'aws/query/builder'
-    autoload :Param, 'aws/query/param'
-    autoload :ParamList, 'aws/query/param_list'
-    autoload :Serializer, 'aws/query/serializer'
+    autoload :Builder, "#{SRC}/query/builder"
+    autoload :Param, "#{SRC}/query/param"
+    autoload :ParamList, "#{SRC}/query/param_list"
+    autoload :Serializer, "#{SRC}/query/serializer"
   end
 
   # @api private
   module Signers
-    autoload :Base, 'aws/signers/base'
-    autoload :Handler, 'aws/signers/handler'
-    autoload :S3, 'aws/signers/s3'
-    autoload :V2, 'aws/signers/v2'
-    autoload :V3, 'aws/signers/v3'
-    autoload :V4, 'aws/signers/v4'
+    autoload :Base, "#{SRC}/signers/base"
+    autoload :Handler, "#{SRC}/signers/handler"
+    autoload :S3, "#{SRC}/signers/s3"
+    autoload :V2, "#{SRC}/signers/v2"
+    autoload :V3, "#{SRC}/signers/v3"
+    autoload :V4, "#{SRC}/signers/v4"
   end
 
   # @api private
   module Xml
-    autoload :Builder, 'aws/xml/builder'
-    autoload :ErrorParser,  'aws/xml/error_parser'
-    autoload :Parser, 'aws/xml/parser'
-    autoload :Serializer, 'aws/xml/serializer'
+    autoload :Builder, "#{SRC}/xml/builder"
+    autoload :ErrorParser,  "#{SRC}/xml/error_parser"
+    autoload :Parser, "#{SRC}/xml/parser"
+    autoload :Serializer, "#{SRC}/xml/serializer"
   end
 
   class << self
