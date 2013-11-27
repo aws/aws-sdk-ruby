@@ -18,4 +18,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency('multi_json', '~> 1.0')
   spec.add_dependency('multi_xml', '~> 0.5')
   spec.add_dependency('builder', '~> 3.0')
+  spec.add_dependency('jamespath')
 end

@@ -7,7 +7,7 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          @handler.call(context).on_success do |response|
+          @handler.call(context).on(200) do |response|
             if error = check_for_error(response)
               response.http_response.status_code = 500
               response.data = nil

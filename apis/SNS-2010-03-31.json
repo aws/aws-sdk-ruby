@@ -26,6 +26,7 @@
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::InstanceProfileCredentials",
+    "Aws::Plugins::ResponsePaging",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::QueryProtocol",
     "Aws::Plugins::SignatureV4"
@@ -503,6 +504,13 @@
       "name": "ListSubscriptions",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -558,6 +566,13 @@
       "name": "ListSubscriptionsByTopic",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -618,6 +633,13 @@
       "name": "ListTopics",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

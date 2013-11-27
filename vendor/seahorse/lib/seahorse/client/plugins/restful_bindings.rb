@@ -10,7 +10,7 @@ module Seahorse
 
           def call(context)
             build_request(context)
-            @handler.call(context).on_success do |response|
+            @handler.call(context).on(200..299) do |response|
               parse_response(response)
             end
           end

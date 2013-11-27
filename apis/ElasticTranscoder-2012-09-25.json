@@ -24,6 +24,7 @@
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::InstanceProfileCredentials",
+    "Aws::Plugins::ResponsePaging",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
     "Aws::Plugins::SignatureV4"
@@ -1401,6 +1402,13 @@
       "name": "ListJobsByPipeline",
       "http_method": "GET",
       "http_path": "/2012-09-25/jobsByPipeline/{pipeline_id}?Ascending={ascending}&PageToken={page_token}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "page_token": "next_page_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1789,6 +1797,13 @@
       "name": "ListJobsByStatus",
       "http_method": "GET",
       "http_path": "/2012-09-25/jobsByStatus/{status}?Ascending={ascending}&PageToken={page_token}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "page_token": "next_page_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

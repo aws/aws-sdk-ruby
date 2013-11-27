@@ -19,6 +19,7 @@
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::InstanceProfileCredentials",
+    "Aws::Plugins::ResponsePaging",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
     "Aws::Plugins::JsonRpcHeaders",
@@ -92,6 +93,14 @@
       "name": "DescribeObjects",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          },
+          "truncated_if": "has_more_results"
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -335,6 +344,14 @@
       "name": "ListPipelines",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          },
+          "truncated_if": "has_more_results"
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -583,6 +600,14 @@
       "name": "QueryObjects",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          },
+          "truncated_if": "has_more_results"
+        }
+      },
       "input": {
         "type": "input",
         "members": {

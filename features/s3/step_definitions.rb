@@ -63,3 +63,18 @@ Then(/^the object with the key "(.*?)" should have a content length of (\d+)$/) 
   resp = @s3.head_object(bucket: @bucket_name, key: key)
   expect(resp.data.content_length).to eq(size.to_i)
 end
+
+When(/^I page s3 objects prefixed "(.*?)" delimited "(.*?)" limit (\d+)$/) do |prefix, delimiter, max_keys|
+  @responses = []
+  @responses << @s3.list_objects(
+    bucket: @bucket_name,
+    prefix: prefix,
+    delimiter: delimiter,
+    max_keys: max_keys
+  )
+  @responses << @responses.last.next_page until @responses.last.last_page?
+end
+
+Then(/^I should have received (\d+) responses$/) do |count|
+  expect(@responses.size).to eq(count.to_i)
+end

@@ -13,6 +13,7 @@ module Aws
         Aws::Plugins::GlobalConfiguration
         Aws::Plugins::RegionalEndpoint
         Aws::Plugins::InstanceProfileCredentials
+        Aws::Plugins::ResponsePaging
         Aws::Plugins::Credentials
       )
 
@@ -26,6 +27,7 @@ module Aws
           apply_xml_namespaces(api)
           set_service_names(api)
           apply_service_customizations(api)
+          apply_paging_metadata(api)
           sort_metadata_keys(api)
         end
       end
@@ -75,6 +77,10 @@ module Aws
         if ServiceTranslators.const_defined?(svc_name)
           ServiceTranslators.const_get(svc_name).translate(api)
         end
+      end
+
+      def apply_paging_metadata(api)
+        PaginationTranslator.translate(api)
       end
 
       def service_namer(api)

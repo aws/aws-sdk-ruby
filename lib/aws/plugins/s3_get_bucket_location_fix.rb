@@ -5,7 +5,7 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          @handler.call(context).on_success do |response|
+          @handler.call(context).on(200) do |response|
             xml = MultiXml.parse(response.http_response.body_contents)
             if constraint = xml['LocationConstraint']
               response.data[:location_constraint] = constraint['__content__'].to_s

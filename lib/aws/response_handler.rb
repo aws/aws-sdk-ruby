@@ -9,7 +9,7 @@ module Aws
     attr_accessor :handler
 
     def call(context)
-      @handler.call(context).on_success do |response|
+      @handler.call(context).on(200..299) do |response|
         rules = context.operation.output
         response.error = nil
         response.data = case

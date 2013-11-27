@@ -24,6 +24,7 @@
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::InstanceProfileCredentials",
+    "Aws::Plugins::ResponsePaging",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::QueryProtocol",
     "Aws::Plugins::SignatureV2"
@@ -220,6 +221,14 @@
       "name": "ListJobs",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "jobs[-1].job_id"
+          },
+          "truncated_if": "is_truncated"
+        }
+      },
       "input": {
         "type": "input",
         "members": {

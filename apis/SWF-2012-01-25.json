@@ -27,6 +27,7 @@
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::InstanceProfileCredentials",
+    "Aws::Plugins::ResponsePaging",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::JsonProtocol",
     "Aws::Plugins::JsonRpcHeaders",
@@ -850,6 +851,13 @@
       "name": "GetWorkflowExecutionHistory",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_page_token": "next_page_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2383,6 +2391,13 @@
       "name": "ListActivityTypes",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_page_token": "next_page_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2475,6 +2490,13 @@
       "name": "ListClosedWorkflowExecutions",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_page_token": "next_page_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2687,6 +2709,13 @@
       "name": "ListDomains",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_page_token": "next_page_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2752,6 +2781,13 @@
       "name": "ListOpenWorkflowExecutions",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_page_token": "next_page_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -2931,6 +2967,13 @@
       "name": "ListWorkflowTypes",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_page_token": "next_page_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -3103,6 +3146,13 @@
       "name": "PollForDecisionTask",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_page_token": "next_page_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

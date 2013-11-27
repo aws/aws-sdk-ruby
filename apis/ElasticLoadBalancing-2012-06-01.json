@@ -25,6 +25,7 @@
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
     "Aws::Plugins::InstanceProfileCredentials",
+    "Aws::Plugins::ResponsePaging",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::QueryProtocol",
     "Aws::Plugins::SignatureV4"
@@ -757,6 +758,13 @@
       "name": "DescribeLoadBalancers",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "next_marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
