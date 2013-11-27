@@ -20,7 +20,7 @@ module AWS
 
       # @api private
       def initialize options = {}
-        @status_filter = options[:status_filter]
+        @status_filters = options[:status_filters] || []
         super
       end
 
@@ -183,18 +183,21 @@ module AWS
       #   filters the stacks returned by the given status.
       #
       def with_status status_filter
-        StackCollection.new(:status_filter => status_filter, :config => config)
+        StackCollection.new(
+          :status_filters => @status_filters + [status_filter.to_s.upcase],
+          :config => config)
       end
 
       protected
 
       def _each_item next_token, options = {}
         options[:next_token] = next_token if next_token
-        resp = client.describe_stacks(options)
-        resp[:stacks].each do |summary|
+        options[:stack_status_filter] = @status_filters unless @status_filters.empty?
+        resp = client.list_stacks(options)
+        resp[:stack_summaries].each do |summary|
 
           stack = Stack.new_from(
-            :describe_stacks,
+            :list_stacks,
             summary,
             summary[:stack_name],
             :config => config)

@@ -35,6 +35,11 @@ Feature: Pre-signed URLs
     And I use a regular HTTP client to PUT "HELLO" to the URL with content info
     Then the contents of object "foo" should eventually be "HELLO"
 
+  Scenario: Pre-signed PUT with canned ACL
+    When I generate a pre-signed PUT URL for the object "food" with "public_read"
+    And I use a regular HTTP client to PUT "yummy" to the URL
+    Then the public contents of object "food" should eventually be "yummy"
+
   Scenario: Pre-signed DELETE
     Given the object "foo" has the contents "HELLO"
     When I generate a pre-signed DELETE URL for the object "foo"

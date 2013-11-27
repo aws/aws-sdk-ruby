@@ -4084,8 +4084,11 @@
               NoDevice:
               - :string
         - :rename: blockDeviceMappings
-        MonitoringEnabled:
-        - :boolean
+        Monitoring:
+        - :structure:
+            Enabled:
+            - :boolean
+            - :required
         SubnetId:
         - :string
         NetworkInterface:

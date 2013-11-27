@@ -97,6 +97,22 @@ module AWS
         get_attributes['EffectiveDeliveryPolicy']
       end
 
+      # @return [Boolean] Returns true if the subscriptions has raw message delivery enabled.
+      def raw_message_delivery
+        raw_value = get_attributes['RawMessageDelivery']
+        raw_value.downcase == 'true'
+      end
+
+      # @param [Boolean] raw_delivery Whether to enable or disable raw message delivery.
+      def raw_message_delivery= raw_delivery
+        value = if raw_delivery
+          'true'
+        else
+          'false'
+        end
+        update_subscription_attribute('RawMessageDelivery', value)
+      end
+
       # @note This method requests the entire list of subscriptions
       #   for the topic (if known) or the account (if the topic is not
       #   known).  It can be expensive if the number of subscriptions
@@ -125,12 +141,17 @@ module AWS
       alias_method :==, :eql?
 
       protected
-      def update_delivery_policy policy_json
+      def update_subscription_attribute name, value
         client_opts = {}
         client_opts[:subscription_arn] = arn
-        client_opts[:attribute_name] = 'DeliveryPolicy'
-        client_opts[:attribute_value] = policy_json
+        client_opts[:attribute_name] = name
+        client_opts[:attribute_value] = value
         client.set_subscription_attributes(client_opts)
+      end
+
+      protected
+      def update_delivery_policy policy_json
+        update_subscription_attribute('DeliveryPolicy', policy_json)
       end
 
       protected

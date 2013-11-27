@@ -262,6 +262,27 @@ module AWS
 
         options[:placement] = placement unless placement.empty?
 
+        network_interface = {}
+
+        if options[:associate_public_ip_address]
+          if subnet_id = subnet_id_option(options)
+            network_interface[:subnet_id] = subnet_id
+            options.delete(:subnet)
+            options.delete(:subnet_id)
+          end
+          if private_ip_address = options.delete(:private_ip_address)
+            network_interface[:private_ip_address] = private_ip_address
+          end
+          if security_group_ids = options.delete(:security_group_ids)
+            network_interface[:groups] = security_group_ids
+          end
+          network_interface[:associate_public_ip_address] = true
+          network_interface[:device_index] = 0
+        end
+        options.delete(:associate_public_ip_address)
+
+        options[:network_interfaces] = [network_interface] unless network_interface.empty?
+
         if subnet_id = subnet_id_option(options)
           options[:subnet_id] = subnet_id
         end

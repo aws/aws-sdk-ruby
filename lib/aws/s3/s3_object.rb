@@ -1223,6 +1223,9 @@ module AWS
       #   the Content-Disposition header of the response when
       #   performing an HTTP GET on the returned URL.
       #
+      # @option options [String] :acl The value to use for the
+      #   x-amz-acl.
+      #
       # @option options [String] :response_content_encoding Sets the
       #   Content-Encoding header of the response when performing an
       #   HTTP GET on the returned URL.
@@ -1231,6 +1234,7 @@ module AWS
         options = options.dup
         options[:secure] = config.use_ssl? unless options.key?(:secure)
         options[:expires] = expiration_timestamp(options[:expires])
+        options[:acl] = options[:acl].to_s.sub('_', '-') if options[:acl]
 
         req = request_for_signing(options)
         req.http_method = http_method(method)
@@ -1238,6 +1242,7 @@ module AWS
         req.add_param("versionId", options[:version_id]) if options[:version_id]
         req.add_param("Signature", signature(req, options))
         req.add_param("Expires", options[:expires])
+        req.add_param("x-amz-acl", options[:acl]) if options[:acl]
         if config.credential_provider.session_token
           req.add_param(
             "x-amz-security-token",
@@ -1370,7 +1375,9 @@ module AWS
 
         estimated_size = estimated_content_length(options)
 
-        [(estimated_size.to_f / max_parts).ceil, min_size].max.to_i
+        part_size = [(estimated_size.to_f / max_parts).ceil, min_size].max.to_i
+        part_size += 16 - (part_size % 16)
+        part_size
 
       end
 
@@ -1401,6 +1408,7 @@ module AWS
         parts << options[:content_md5].to_s
         parts << options[:content_type].to_s
         parts << options[:expires]
+        parts << "x-amz-acl:#{options[:acl]}" if options[:acl]
         if token = config.credential_provider.session_token
           parts << "x-amz-security-token:#{token}"
         end

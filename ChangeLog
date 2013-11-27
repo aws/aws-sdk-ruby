@@ -1,3 +1,101 @@
+2013-11-21 Alex Wood <awood45@gmail.com>
+
+  * doc-src/RDS/V20130909.yml, lib/aws/api_config/RDS-2013-09-09.yml,
+  lib/aws/rds/client.rb: Add New API Version for Amazon RDS 2013-09-09
+
+  This release of the Amazon Relational Database Service (RDS) introduces
+  support
+  for copying DB snapshots from one AWS region to another. The release also
+  includes a new Amazon RDS API version, 2013-09-09.
+
+  * features/s3/high_level/step_definitions/urls.rb,
+  features/s3/high_level/urls.feature, lib/aws/s3/s3_object.rb: Added support
+  for canned ACLs to S3 presigned urls.
+
+  Example:
+
+      bucket.objects['target-key'].url_for(:write, :acl => :public_read)
+
+  Fixes #412
+
+2013-11-20 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/s3/s3_object.rb, spec/aws/s3/s3_object_encrypt_spec.rb,
+  spec/aws/s3/s3_object_spec.rb: A fix/workaround for streaming encrypted IO
+  objects via S3.
+
+  The `AWS::S3::CipherIO` class has a bug that causes it to report
+  `#eof?` before reaching the end of the stream if `#read` is called
+  with a number of bytes not divisible by 16.
+
+  This patch works around this limitation by causing the multipart
+  uploader to always use part sizes evenly divisible by 16.  CipherIO
+  is a private/undocumented class, but this is a shim.  CipherIO
+  should be updated to properly work when `#read` is called on the
+  non-final chunk with an odd number of bytes.
+
+  The underlying cause is the internal encryption cipher
+  buffers internally and only returns values 16 bytes at a time.
+  Using an internal buffer in CipherIO could solve this problem.
+
+  Fixes #414
+
+  * lib/aws/core/rest_request_builder.rb, lib/aws/s3/data_options.rb: Fixed a
+  bug with Ruby 1.8 and how StringIO#path.
+
+  It was assumed that IO objects responding to `#path` could be
+  given to `File.size`.  This is incorrect for Ruby 1.8.7, where
+  `StringIO` responds to `#path`, returning `nil`.
+
+  This check has been expanded to responds to path and path not nil.
+
+2013-11-19 Trevor Rowe <trevorrowe@gmail.com>
+
+  * Gemfile: Added a nokogiri dependendency to the Gemfile for local
+  development.
+
+  This allows the travis-ci build for 1.8.7 to install Nokogiri < 1.6
+  which is required for unit tests.
+
+  * lib/aws/cloud_watch/request.rb: Updating AWS::CloudWatch to use sigv4.
+
+  * lib/aws/core/rest_request_builder.rb, lib/aws/s3/data_options.rb: Now
+  using File.size to determine file size for File/Tempfile objects.
+
+  It is possible for a File/Tempfile to report an incorrect value
+  from `#size`.  This change causes the SDK to prefer the response
+  from `File.size(file.path)` over `file.size`.
+
+  See https://github.com/thoughtbot/paperclip/issues/751
+
+  * lib/aws/version.rb: Bump version to 1.27.0
+
+2013-11-14 Alex Wood <awood45@gmail.com>
+
+  * README.md, lib/aws/core/region.rb: Add AWS CloudTrail to README and Region
+  File
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.26.0
+
+  * doc-src/CloudTrail/V20131101.yml, endpoints.json,
+  features/cloud_trail/client.feature,
+  features/cloud_trail/step_definitions/client.rb,
+  features/cloud_trail/step_definitions/cloud_trail.rb,
+  lib/aws/api_config/CloudTrail-2013-11-01.yml, lib/aws/cloud_trail.rb,
+  lib/aws/cloud_trail/client.rb, lib/aws/cloud_trail/config.rb,
+  lib/aws/cloud_trail/errors.rb, lib/aws/cloud_trail/request.rb,
+  lib/aws/core.rb, spec/aws/cloud_trail_spec.rb: Initial Support for AWS
+  CloudTrail
+
+  AWS CloudTrail is a web service that records AWS API calls for your account
+  and
+  delivers log files to you. The recorded information includes the identity of
+  the
+  API caller, the time of the API call, the source IP address of the API
+  caller,
+  the request parameters, and the response elements returned by the AWS
+  service.
+
 2013-11-13 Alex Wood <awood45@gmail.com>
 
   * doc-src/IAM/V20100508.yml, lib/aws/api_config/IAM-2010-05-08.yml: API
@@ -28,27 +126,6 @@
   event
   notifications, encryption, audit logging, data load from external hosts, WLM
   configuration, and database distribution styles and functions.
-
-2013-11-14 Alex Wood <awood45@gmail.com>
-
-  * doc-src/CloudTrail/V20131101.yml, endpoints.json,
-  features/cloud_trail/client.feature,
-  features/cloud_trail/step_definitions/client.rb,
-  features/cloud_trail/step_definitions/cloud_trail.rb,
-  lib/aws/api_config/CloudTrail-2013-11-01.yml, lib/aws/cloud_trail.rb,
-  lib/aws/cloud_trail/client.rb, lib/aws/cloud_trail/config.rb,
-  lib/aws/cloud_trail/errors.rb, lib/aws/cloud_trail/request.rb,
-  lib/aws/core.rb, spec/aws/cloud_trail_spec.rb: Initial Support for AWS
-  CloudTrail
-
-  AWS CloudTrail is a web service that records AWS API calls for your account
-  and
-  delivers log files to you. The recorded information includes the identity of
-  the
-  API caller, the time of the API call, the source IP address of the API
-  caller,
-  the request parameters, and the response elements returned by the AWS
-  service.
 
 2013-11-12 Trevor Rowe <trevorrowe@gmail.com>
 
@@ -98,6 +175,16 @@
   * lib/aws/core.rb, lib/aws/core/configuration.rb: Updating documentation
   about :max_retries to include information about throttling errors.
 
+2013-11-06 Torsten Becker <torsten.becker@gmail.com>
+
+  * lib/aws/sns/subscription.rb, spec/aws/sns/subscription_spec.rb: Support
+  RawMessageDelivery on SNS subscriptions.
+
+2013-11-03 Kyle VanderBeek <kylev@kylev.com>
+
+  * README.md, aws-sdk.gemspec: Remove Nokogiri < 1.6 restriction and explain
+  in the README how to get things working on Ruby 1.8.x.
+
 2013-11-02 osamu1203 <osamuintz@gmail.com>
 
   * lib/aws/s3/uploaded_part.rb: Fixed raise message
@@ -141,6 +228,9 @@
       group = AWS::AutoScaling::Group.new('group-name')
       AWS::AutoScaling::ScheduledAction.new(group, 'name')
 
+  * lib/aws/ec2/elastic_ip.rb: Allow the ability to supply private IP to the
+  associate method and use a particular secondary IP on an ENI
+
   * ChangeLog, lib/aws/version.rb: Bump version to 1.24.0
 
 2013-10-30 Alex Wood <awood45@gmail.com>
@@ -163,6 +253,29 @@
 
   * lib/aws/s3/client.rb, spec/aws/s3/client_spec.rb: Support S3 GET Object
   torrent
+
+2013-01-28 Bernat Foj Capell <bfcapell@gmail.com>
+
+  * lib/aws/api_config/EC2-2013-08-15.yml,
+  lib/aws/api_config/EC2-2013-10-01.yml: Updated API definition of Monitoring
+  field in request_spot_instances method
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.1.1
+
+  * .travis.yml: Removed REE from travis configuration, currently broken on
+  travis-ci.org.
+
+  * aws-sdk.gemspec: Removed HTTParty from gem specification.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.1
+
+  * features/elastic_transcoder/client.feature,
+  features/elastic_transcoder/step_definitions/client.rb,
+  features/elastic_transcoder/step_definitions/elastic_transcoder.rb,
+  features/iam/step_definitions/iam.rb,
+  features/iam/step_definitions/roles.rb,
+  lib/aws/elastic_transcoder/client.rb: Added support for Elastic Transcoding
+  errors and some integration tests.
 
 2013-10-26 Michael H. Oshita <ijinpublic+github@gmail.com>
 
@@ -187,6 +300,11 @@
   lib/aws/api_config/DirectConnect-2012-10-25.yml: Update AWS DirectConnect to
   latest API Version
 
+2013-10-22 Jason LaPier <jasonlp@elementaltechnologies.com>
+
+  * lib/aws/ec2/instance_collection.rb: delete the associate_public_ip_address
+  option from create instance params whether it is true or false
+
 2013-10-20 Joel Van Horn <joel@joelvanhorn.com>
 
   * lib/aws/s3/s3_object.rb: Fixed link
@@ -197,6 +315,16 @@
   * ChangeLog, lib/aws/version.rb: Bump version to 1.22.1
 
   * lib/aws/core/json_parser.rb: Handle Null Values in JSON Parser
+
+  * lib/aws/ec2/instance_collection.rb: adds public IP option to instances in
+  VPC
+
+  allows you to pass :associate_public_ip_address to
+  InstanceCollection#create,
+  and applies this value to the network interface options.
+  NOTE: in order for this to work, a couple of other options have to be moved
+  out of the base and into the network interface:
+  private_ip_address, subnet, and security_group_ids
 
   * lib/aws/s3/s3_object.rb: S3Object#url_for docummentation update
 
@@ -3558,25 +3686,6 @@
   * lib/aws/core/credential_providers.rb: missing require time lib for
   Time.parse is used in EC2Provider, the test passed because there is an
   example required the time lib
-
-2013-01-28 Trevor Rowe <trevorrowe@gmail.com>
-
-  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.1.1
-
-  * .travis.yml: Removed REE from travis configuration, currently broken on
-  travis-ci.org.
-
-  * aws-sdk.gemspec: Removed HTTParty from gem specification.
-
-  * ChangeLog, lib/aws/version.rb: Bump version to 1.8.1
-
-  * features/elastic_transcoder/client.feature,
-  features/elastic_transcoder/step_definitions/client.rb,
-  features/elastic_transcoder/step_definitions/elastic_transcoder.rb,
-  features/iam/step_definitions/iam.rb,
-  features/iam/step_definitions/roles.rb,
-  lib/aws/elastic_transcoder/client.rb: Added support for Elastic Transcoding
-  errors and some integration tests.
 
 2013-01-21 Trevor Rowe <trevorrowe@gmail.com>
 

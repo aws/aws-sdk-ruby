@@ -15,6 +15,14 @@ When /^I generate a pre\-signed (\w+) URL for the object "([^\"]*)"$/ do |method
   @url = @result = @bucket.objects[key].url_for(method, :secure => false)
 end
 
+When(/^I generate a pre\-signed PUT URL for the object "(.*?)" with "(.*?)"$/) do |key, acl|
+  @url = @bucket.objects[key].url_for(:write, :secure => false, :acl => acl)
+end
+
+Then(/^the public contents of object "(.*?)" should eventually be "(.*?)"$/) do |key, data|
+  Net::HTTP.get_response(@bucket.objects[key].public_url).body.should eq(data)
+end
+
 When(/^I generate a pre\-signed PUT URL for the object "(.*?)" with content info$/) do |key|
   @url = @bucket.objects[key].url_for(:write, {
     :secure => false,

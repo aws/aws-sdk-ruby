@@ -190,9 +190,12 @@ The SDK currently supports the following services:
       <td>AWS OpsWorks</td>
     </tr>
     <tr>
-      <td>AWS::RDS</td>
+      <td rowspan="2">AWS::RDS</td>
       <td>2013-05-15</td>
-      <td>Amazon Relational Database Service (Beta)</td>
+      <td rowspan="2">Amazon Relational Database Service (Beta)</td>
+    </tr>
+    <tr>
+      <td>2013-09-09</td>
     </tr>
     <tr>
       <td>AWS::Redshift</td>

@@ -133,3 +133,12 @@ Then /^the stack should eventually have some events$/ do
     @stack.events.count.should > 0
   end
 end
+
+Given(/^I filter stacks by "(.*?)"$/) do |status|
+  @stacks ||= @cloud_formation.stacks
+  @stacks = @stacks.with_status(status)
+end
+
+When(/^I enumerate stacks$/) do
+  @stacks.each {|stack|}
+end
