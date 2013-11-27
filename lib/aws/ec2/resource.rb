@@ -94,7 +94,6 @@ module AWS
         end
         options[:"#{inflected_name}_id"] = __resource_id__
         method_name = "modify_#{inflected_name}_attribute"
-        puts options.inspect
         client.send(method_name, options)
       end
 

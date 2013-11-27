@@ -190,7 +190,7 @@ module AWS::Core
         it 'accepts params that have no values' do
           req = Request.new
           req.add_param('acl')
-          req.url_encoded_params.should == 'acl'
+          req.url_encoded_params.should == 'acl='
         end
 
         it 'url encodes param names and valeus' do
