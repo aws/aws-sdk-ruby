@@ -55,7 +55,7 @@ module Aws
       class << self
 
         def translate(api)
-          filename = api.metadata['service_class_name'].downcase
+          filename = api.metadata['endpoint_prefix']
           filename += "-#{api.version}.paginators.json"
           path = File.join(Aws::GEM_ROOT, 'apis', 'source',filename)
           if File.exists?(path)
