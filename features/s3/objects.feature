@@ -17,6 +17,7 @@ Feature: S3 Objects
     When I put the test png to the key "img"
     Then the object with the key "img" should have a content length of 976
 
+  @paging
   Scenario: Paging responses
     Given I put nothing to the key "photos/camping/cascades.jpg"
     Given I put nothing to the key "photos/skiing/stevens.jpg"
