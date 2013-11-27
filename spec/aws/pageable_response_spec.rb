@@ -156,5 +156,37 @@ module Aws
       end
 
     end
+
+    describe '#each_page' do
+
+      let(:paging) {{
+        'tokens' => {
+          'offset' => 'next_token'
+        }
+      }}
+
+      it 'yields once per paging result' do
+        client = double('client')
+        new_request = double('new-request')
+
+        resp.data = { 'next_token' => 'OFFSET' }
+        resp.context.client = client
+        resp.context.operation_name = 'operation-name'
+
+        resp2 = Seahorse::Client::Response.new
+        resp2.data = {}
+
+        allow(client).to receive(:build_request).
+          with('operation-name', { :offset => 'OFFSET' }).
+          and_return(new_request)
+
+        allow(new_request).to receive(:send_request).and_return(resp2)
+
+        pages = []
+        pager.each { |r| pages << r }
+        expect(pages).to eq([resp, resp2])
+      end
+
+    end
   end
 end

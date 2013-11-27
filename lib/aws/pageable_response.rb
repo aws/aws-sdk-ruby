@@ -83,6 +83,8 @@ module Aws
   #
   class PageableResponse < Delegator
 
+    include Enumerable
+
     # Raised when calling {PageableResponse#next_page} on a pager that
     # is on the last page of results.  You can call {PageableResponse#last_page?}
     # or {PageableResponse#next_page?} to know if there are more pages.
@@ -141,6 +143,22 @@ module Aws
         raise LastPageError.new(@response)
       else
         PageableResponse.new(next_response(params), paging_rules: paging_rules)
+      end
+    end
+
+    # Yields the current and each following response to the given block.
+    # @yieldparam [Response] response
+    # @return [Enumerable,nil] Returns a new Enumerable if no block is given.
+    def each_page(&block)
+      if block_given?
+        response = self
+        yield(response)
+        until response.last_page?
+          response = response.next_page
+          yield(response)
+        end
+      else
+        to_enum(__method__)
       end
     end
 

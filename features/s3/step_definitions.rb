@@ -66,13 +66,14 @@ end
 
 When(/^I page s3 objects prefixed "(.*?)" delimited "(.*?)" limit (\d+)$/) do |prefix, delimiter, max_keys|
   @responses = []
-  @responses << @s3.list_objects(
+  @s3.list_objects(
     bucket: @bucket_name,
     prefix: prefix,
     delimiter: delimiter,
     max_keys: max_keys
-  )
-  @responses << @responses.last.next_page until @responses.last.last_page?
+  ).each do |resp|
+    @responses << resp
+  end
 end
 
 Then(/^I should have received (\d+) responses$/) do |count|

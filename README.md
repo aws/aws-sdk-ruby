@@ -80,6 +80,26 @@ resp.contents.each do |object|
 end
 ```
 
+## Paging Responses
+
+Many AWS operations limit the number of results returned with each response.
+To make working with multiple pages of results simple, response objects are
+enumerable:
+
+```ruby
+# without paging, get the first page of results only
+resp = s3.list_objects(bucket:'aws-sdk')
+resp.is_truncated? #=> true
+puts resp.contents.map(&:key)
+
+# with simple paging, yields once per page of results
+s3.list_objects(bucket:'aws-sdk').each do |resp|
+  puts resp.contents.map(&:key)
+end
+```
+
+Many service API operations return only a portion of the available results in 
+
 ## Interactive Console
 
 AWS SDK Core ships with a REPL that acts as an interactive console. You
