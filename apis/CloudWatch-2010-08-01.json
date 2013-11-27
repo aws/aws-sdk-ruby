@@ -54,6 +54,13 @@
       "name": "DescribeAlarmHistory",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -139,6 +146,13 @@
       "name": "DescribeAlarms",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -828,6 +842,13 @@
       "name": "ListMetrics",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "next_token": "next_token"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
