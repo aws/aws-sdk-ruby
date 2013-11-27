@@ -83,22 +83,27 @@ end
 ## Paging Responses
 
 Many AWS operations limit the number of results returned with each response.
-To make working with multiple pages of results simple, response objects are
-enumerable:
+A simple paging interface is provided that works with every AWS request.
 
 ```ruby
-# without paging, get the first page of results only
-resp = s3.list_objects(bucket:'aws-sdk')
-resp.is_truncated? #=> true
-puts resp.contents.map(&:key)
-
-# with simple paging, yields once per page of results
+# yields once per response, even works with non-paged requests
 s3.list_objects(bucket:'aws-sdk').each do |resp|
   puts resp.contents.map(&:key)
 end
 ```
 
-Many service API operations return only a portion of the available results in 
+If you prefer to control paging yourself, all returned responses have the
+same helper methods:
+
+```ruby
+# make a request that returns a truncated response
+resp = s3.list_objects(bucket:'aws-sdk')
+
+resp.last_page? #=> false
+resp.next_page? #=> true
+resp = resp.next_page # send a request for the next response page
+resp = resp.next_page until resp.last_page?
+```
 
 ## Interactive Console
 
