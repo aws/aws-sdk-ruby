@@ -161,6 +161,7 @@ module Aws
         to_enum(__method__)
       end
     end
+    alias each each_page
 
     # Required by Delegator
     # @api private
