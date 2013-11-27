@@ -35,7 +35,7 @@ module AWS
       # If you have not set a display name (see {#display_name=}) then
       # this is used as the "From" field for notifications to email and
       # email-json endpoints.
-      # @return [String] Returns the toipc name.
+      # @return [String] Returns the topic name.
       def name
         arn.split(/:/)[-1]
       end
