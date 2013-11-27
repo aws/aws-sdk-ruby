@@ -32,7 +32,7 @@ module Aws
         begin
           pager.next_page
         rescue => error
-          expect(error.response).to be(resp)
+          expect(error.response).to eq(resp)
         end
       end
 
@@ -73,7 +73,8 @@ module Aws
           with('operation-name', { :offset => 'OFFSET' }).
           and_return(new_request)
 
-        expect(new_request).to receive(:send_request)
+        expect(new_request).to receive(:send_request).
+          and_return(Seahorse::Client::Response.new)
 
         pager.next_page
       end
@@ -118,6 +119,8 @@ module Aws
         expect(client).to receive(:build_request).
           with('operation-name', { :offset_a => 'a' }).
           and_return(new_request)
+
+        allow(new_request).to receive(:send_request).and_return(resp)
 
         pager.next_page
       end

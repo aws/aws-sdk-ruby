@@ -1,4 +1,3 @@
-require 'delegate'
 require 'jamespath'
 
 module Aws
@@ -81,7 +80,7 @@ module Aws
   #   paging rules, then you should not worry about backwards
   #   incompatible changes.
   #
-  class PageableResponse < Delegator
+  class PageableResponse < Seahorse::Client::Response
 
     include Enumerable
 
@@ -118,7 +117,7 @@ module Aws
     #   be considered stable.
     #
     def initialize(response, options = {})
-      @response = response
+      super(context:response.context, data:response.data, error:response.error)
       @paging_rules = options[:paging_rules]
     end
 
@@ -140,7 +139,7 @@ module Aws
     # @return [Seahorse::Client::Response]
     def next_page(params = {})
       if last_page?
-        raise LastPageError.new(@response)
+        raise LastPageError.new(self)
       else
         PageableResponse.new(next_response(params), paging_rules: paging_rules)
       end
@@ -163,23 +162,14 @@ module Aws
     end
     alias each each_page
 
-    # Required by Delegator
     # @api private
-    def __getobj__
-      @response
+    def eql?(other)
+      other.is_a?(Seahorse::Client::Response) &&
+      other.context == context &&
+      other.data == data &&
+      other.error == error
     end
-
-    # Required by Delegator
-    # @api private
-    def __setobj__(response)
-      @response = response
-    end
-
-    # @api private
-    def on(status_code, &block)
-      @response.on(status_code) { |_| yield(self) }
-      self
-    end
+    alias == eql?
 
     private
 
@@ -193,7 +183,7 @@ module Aws
     #   there are more results to be had.
     def truncated?
       if condition = paging_rules['truncated_if']
-        Jamespath.search(condition, @response.data)
+        Jamespath.search(condition, data)
       else
         !next_tokens.empty?
       end
@@ -205,7 +195,7 @@ module Aws
     def next_tokens
       @next_tokens ||= begin
         paging_rules['tokens'].inject({}) do |tokens, (param, jamespath)|
-          value = Jamespath.search(jamespath, @response.data)
+          value = Jamespath.search(jamespath, data)
           tokens[param.to_sym] = value unless value.nil?
           tokens
         end
@@ -215,7 +205,7 @@ module Aws
     # @return [Hash, nil] Returns the rules for paging this response.
     #   Returns `nil` when the response is not pageable.
     def paging_rules
-      @paging_rules ||= @response.context.operation.metadata['paging'] || {}
+      @paging_rules ||= context.operation.metadata['paging'] || {}
     end
 
     # @param [Hash] params A hash of additional request params to
@@ -223,7 +213,7 @@ module Aws
     # @return [Seahorse::Client::Response] Returns the next page of
     #   results.
     def next_response(params)
-      c = @response.context
+      c = context
       req = c.client.build_request(c.operation_name, next_page_params(params))
       req.send_request
     end
@@ -233,7 +223,7 @@ module Aws
     # @return [Hash] Returns the hash of request parameters for the
     #   next page, merging any given params.
     def next_page_params(params)
-      @response.context.params.merge(next_tokens.merge(params))
+      context.params.merge(next_tokens.merge(params))
     end
 
   end
