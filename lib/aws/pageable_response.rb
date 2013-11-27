@@ -1,4 +1,5 @@
 require 'delegate'
+require 'jamespath'
 
 module Aws
 
@@ -173,7 +174,7 @@ module Aws
     #   there are more results to be had.
     def truncated?
       if condition = paging_rules['truncated_if']
-        @response.data[condition]
+        Jamespath.search(condition, @response.data)
       else
         !next_tokens.empty?
       end
@@ -185,7 +186,7 @@ module Aws
     def next_tokens
       @next_tokens ||= begin
         paging_rules['tokens'].inject({}) do |tokens, (param, jamespath)|
-          value = @response.data[jamespath]
+          value = Jamespath.search(jamespath, @response.data)
           tokens[param.to_sym] = value unless value.nil?
           tokens
         end
