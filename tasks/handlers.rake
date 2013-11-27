@@ -2,7 +2,7 @@ namespace :handlers do
   Aws.service_classes.each do |svc_name, svc_class|
 
     # create a task for each service, e.g. handlers:s3
-    desc "Displays handlers for #{svc_class.name}"
+    desc "Displays handlers for #{svc_class.name}" if ENV['ALL']
     task(svc_name) do
       svc = svc_class.new
       if operation_name = ENV['OPERATION']
