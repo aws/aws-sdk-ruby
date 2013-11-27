@@ -140,6 +140,7 @@
                   "serialized_name": "ActionOnFailure",
                   "enum": [
                     "TERMINATE_JOB_FLOW",
+                    "TERMINATE_CLUSTER",
                     "CANCEL_AND_WAIT",
                     "CONTINUE"
                   ]
@@ -188,6 +189,191 @@
             }
           }
         }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "step_ids": {
+            "type": "list",
+            "serialized_name": "StepIds",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "describe_cluster": {
+      "name": "DescribeCluster",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_id": {
+            "type": "string",
+            "serialized_name": "ClusterId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "cluster": {
+            "type": "structure",
+            "serialized_name": "Cluster",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "status": {
+                "type": "structure",
+                "serialized_name": "Status",
+                "members": {
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "STARTING",
+                      "BOOTSTRAPPING",
+                      "RUNNING",
+                      "WAITING",
+                      "TERMINATING",
+                      "TERMINATED",
+                      "TERMINATED_WITH_ERRORS"
+                    ]
+                  },
+                  "state_change_reason": {
+                    "type": "structure",
+                    "serialized_name": "StateChangeReason",
+                    "members": {
+                      "code": {
+                        "type": "string",
+                        "serialized_name": "Code",
+                        "enum": [
+                          "INTERNAL_ERROR",
+                          "VALIDATION_ERROR",
+                          "INSTANCE_FAILURE",
+                          "BOOTSTRAP_FAILURE",
+                          "USER_REQUEST",
+                          "STEP_FAILURE",
+                          "ALL_STEPS_COMPLETED"
+                        ]
+                      },
+                      "message": {
+                        "type": "string",
+                        "serialized_name": "Message"
+                      }
+                    }
+                  },
+                  "timeline": {
+                    "type": "structure",
+                    "serialized_name": "Timeline",
+                    "members": {
+                      "creation_date_time": {
+                        "type": "unix_timestamp",
+                        "serialized_name": "CreationDateTime"
+                      },
+                      "ready_date_time": {
+                        "type": "unix_timestamp",
+                        "serialized_name": "ReadyDateTime"
+                      },
+                      "end_date_time": {
+                        "type": "unix_timestamp",
+                        "serialized_name": "EndDateTime"
+                      }
+                    }
+                  }
+                }
+              },
+              "ec_2_instance_attributes": {
+                "type": "structure",
+                "serialized_name": "Ec2InstanceAttributes",
+                "members": {
+                  "ec2_key_name": {
+                    "type": "string",
+                    "serialized_name": "Ec2KeyName"
+                  },
+                  "ec2_subnet_id": {
+                    "type": "string",
+                    "serialized_name": "Ec2SubnetId"
+                  },
+                  "ec_2_availability_zone": {
+                    "type": "string",
+                    "serialized_name": "Ec2AvailabilityZone"
+                  },
+                  "iam_instance_profile": {
+                    "type": "string",
+                    "serialized_name": "IamInstanceProfile"
+                  }
+                }
+              },
+              "log_uri": {
+                "type": "string",
+                "serialized_name": "LogUri"
+              },
+              "requested_ami_version": {
+                "type": "string",
+                "serialized_name": "RequestedAmiVersion"
+              },
+              "running_ami_version": {
+                "type": "string",
+                "serialized_name": "RunningAmiVersion"
+              },
+              "auto_terminate": {
+                "type": "boolean",
+                "serialized_name": "AutoTerminate"
+              },
+              "termination_protected": {
+                "type": "boolean",
+                "serialized_name": "TerminationProtected"
+              },
+              "visible_to_all_users": {
+                "type": "boolean",
+                "serialized_name": "VisibleToAllUsers"
+              },
+              "applications": {
+                "type": "list",
+                "serialized_name": "Applications",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "name": {
+                      "type": "string",
+                      "serialized_name": "Name"
+                    },
+                    "version": {
+                      "type": "string",
+                      "serialized_name": "Version"
+                    },
+                    "args": {
+                      "type": "list",
+                      "serialized_name": "Args",
+                      "members": {
+                        "type": "string"
+                      }
+                    },
+                    "additional_info": {
+                      "type": "map",
+                      "serialized_name": "AdditionalInfo",
+                      "keys": {
+                        "type": "string"
+                      },
+                      "members": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "describe_job_flows": {
@@ -198,11 +384,11 @@
         "type": "input",
         "members": {
           "created_after": {
-            "type": "iso8601_timestamp",
+            "type": "unix_timestamp",
             "serialized_name": "CreatedAfter"
           },
           "created_before": {
-            "type": "iso8601_timestamp",
+            "type": "unix_timestamp",
             "serialized_name": "CreatedBefore"
           },
           "job_flow_ids": {
@@ -218,14 +404,14 @@
             "members": {
               "type": "string",
               "enum": [
-                "COMPLETED",
-                "FAILED",
-                "TERMINATED",
-                "RUNNING",
-                "SHUTTING_DOWN",
                 "STARTING",
+                "BOOTSTRAPPING",
+                "RUNNING",
                 "WAITING",
-                "BOOTSTRAPPING"
+                "SHUTTING_DOWN",
+                "TERMINATED",
+                "COMPLETED",
+                "FAILED"
               ]
             }
           }
@@ -264,30 +450,30 @@
                       "type": "string",
                       "serialized_name": "State",
                       "enum": [
-                        "COMPLETED",
-                        "FAILED",
-                        "TERMINATED",
-                        "RUNNING",
-                        "SHUTTING_DOWN",
                         "STARTING",
+                        "BOOTSTRAPPING",
+                        "RUNNING",
                         "WAITING",
-                        "BOOTSTRAPPING"
+                        "SHUTTING_DOWN",
+                        "TERMINATED",
+                        "COMPLETED",
+                        "FAILED"
                       ]
                     },
                     "creation_date_time": {
-                      "type": "iso8601_timestamp",
+                      "type": "unix_timestamp",
                       "serialized_name": "CreationDateTime"
                     },
                     "start_date_time": {
-                      "type": "iso8601_timestamp",
+                      "type": "unix_timestamp",
                       "serialized_name": "StartDateTime"
                     },
                     "ready_date_time": {
-                      "type": "iso8601_timestamp",
+                      "type": "unix_timestamp",
                       "serialized_name": "ReadyDateTime"
                     },
                     "end_date_time": {
-                      "type": "iso8601_timestamp",
+                      "type": "unix_timestamp",
                       "serialized_name": "EndDateTime"
                     },
                     "last_state_change_reason": {
@@ -372,14 +558,14 @@
                             "serialized_name": "State",
                             "enum": [
                               "PROVISIONING",
-                              "STARTING",
                               "BOOTSTRAPPING",
                               "RUNNING",
                               "RESIZING",
+                              "SUSPENDED",
+                              "TERMINATING",
+                              "TERMINATED",
                               "ARRESTED",
                               "SHUTTING_DOWN",
-                              "TERMINATED",
-                              "FAILED",
                               "ENDED"
                             ]
                           },
@@ -388,19 +574,19 @@
                             "serialized_name": "LastStateChangeReason"
                           },
                           "creation_date_time": {
-                            "type": "iso8601_timestamp",
+                            "type": "unix_timestamp",
                             "serialized_name": "CreationDateTime"
                           },
                           "start_date_time": {
-                            "type": "iso8601_timestamp",
+                            "type": "unix_timestamp",
                             "serialized_name": "StartDateTime"
                           },
                           "ready_date_time": {
-                            "type": "iso8601_timestamp",
+                            "type": "unix_timestamp",
                             "serialized_name": "ReadyDateTime"
                           },
                           "end_date_time": {
-                            "type": "iso8601_timestamp",
+                            "type": "unix_timestamp",
                             "serialized_name": "EndDateTime"
                           }
                         }
@@ -461,6 +647,7 @@
                             "serialized_name": "ActionOnFailure",
                             "enum": [
                               "TERMINATE_JOB_FLOW",
+                              "TERMINATE_CLUSTER",
                               "CANCEL_AND_WAIT",
                               "CONTINUE"
                             ]
@@ -523,15 +710,15 @@
                             ]
                           },
                           "creation_date_time": {
-                            "type": "iso8601_timestamp",
+                            "type": "unix_timestamp",
                             "serialized_name": "CreationDateTime"
                           },
                           "start_date_time": {
-                            "type": "iso8601_timestamp",
+                            "type": "unix_timestamp",
                             "serialized_name": "StartDateTime"
                           },
                           "end_date_time": {
-                            "type": "iso8601_timestamp",
+                            "type": "unix_timestamp",
                             "serialized_name": "EndDateTime"
                           },
                           "last_state_change_reason": {
@@ -600,6 +787,693 @@
         }
       }
     },
+    "describe_step": {
+      "name": "DescribeStep",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_id": {
+            "type": "string",
+            "serialized_name": "ClusterId"
+          },
+          "step_id": {
+            "type": "string",
+            "serialized_name": "StepId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "step": {
+            "type": "structure",
+            "serialized_name": "Step",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "config": {
+                "type": "structure",
+                "serialized_name": "Config",
+                "members": {
+                  "jar": {
+                    "type": "string",
+                    "serialized_name": "Jar"
+                  },
+                  "properties": {
+                    "type": "map",
+                    "serialized_name": "Properties",
+                    "keys": {
+                      "type": "string"
+                    },
+                    "members": {
+                      "type": "string"
+                    }
+                  },
+                  "main_class": {
+                    "type": "string",
+                    "serialized_name": "MainClass"
+                  },
+                  "args": {
+                    "type": "list",
+                    "serialized_name": "Args",
+                    "members": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "action_on_failure": {
+                "type": "string",
+                "serialized_name": "ActionOnFailure",
+                "enum": [
+                  "TERMINATE_JOB_FLOW",
+                  "TERMINATE_CLUSTER",
+                  "CANCEL_AND_WAIT",
+                  "CONTINUE"
+                ]
+              },
+              "status": {
+                "type": "structure",
+                "serialized_name": "Status",
+                "members": {
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "PENDING",
+                      "RUNNING",
+                      "COMPLETED",
+                      "CANCELLED",
+                      "FAILED",
+                      "INTERRUPTED"
+                    ]
+                  },
+                  "state_change_reason": {
+                    "type": "structure",
+                    "serialized_name": "StateChangeReason",
+                    "members": {
+                      "code": {
+                        "type": "string",
+                        "serialized_name": "Code",
+                        "enum": [
+                          "NONE"
+                        ]
+                      },
+                      "message": {
+                        "type": "string",
+                        "serialized_name": "Message"
+                      }
+                    }
+                  },
+                  "timeline": {
+                    "type": "structure",
+                    "serialized_name": "Timeline",
+                    "members": {
+                      "creation_date_time": {
+                        "type": "unix_timestamp",
+                        "serialized_name": "CreationDateTime"
+                      },
+                      "start_date_time": {
+                        "type": "unix_timestamp",
+                        "serialized_name": "StartDateTime"
+                      },
+                      "end_date_time": {
+                        "type": "unix_timestamp",
+                        "serialized_name": "EndDateTime"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "list_bootstrap_actions": {
+      "name": "ListBootstrapActions",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_id": {
+            "type": "string",
+            "serialized_name": "ClusterId"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "bootstrap_actions": {
+            "type": "list",
+            "serialized_name": "BootstrapActions",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "script_path": {
+                  "type": "string",
+                  "serialized_name": "ScriptPath"
+                },
+                "args": {
+                  "type": "list",
+                  "serialized_name": "Args",
+                  "members": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_clusters": {
+      "name": "ListClusters",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "created_after": {
+            "type": "unix_timestamp",
+            "serialized_name": "CreatedAfter"
+          },
+          "created_before": {
+            "type": "unix_timestamp",
+            "serialized_name": "CreatedBefore"
+          },
+          "cluster_states": {
+            "type": "list",
+            "serialized_name": "ClusterStates",
+            "members": {
+              "type": "string",
+              "enum": [
+                "STARTING",
+                "BOOTSTRAPPING",
+                "RUNNING",
+                "WAITING",
+                "TERMINATING",
+                "TERMINATED",
+                "TERMINATED_WITH_ERRORS"
+              ]
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "clusters": {
+            "type": "list",
+            "serialized_name": "Clusters",
+            "members": {
+              "type": "structure",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
+                },
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "status": {
+                  "type": "structure",
+                  "serialized_name": "Status",
+                  "members": {
+                    "state": {
+                      "type": "string",
+                      "serialized_name": "State",
+                      "enum": [
+                        "STARTING",
+                        "BOOTSTRAPPING",
+                        "RUNNING",
+                        "WAITING",
+                        "TERMINATING",
+                        "TERMINATED",
+                        "TERMINATED_WITH_ERRORS"
+                      ]
+                    },
+                    "state_change_reason": {
+                      "type": "structure",
+                      "serialized_name": "StateChangeReason",
+                      "members": {
+                        "code": {
+                          "type": "string",
+                          "serialized_name": "Code",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "VALIDATION_ERROR",
+                            "INSTANCE_FAILURE",
+                            "BOOTSTRAP_FAILURE",
+                            "USER_REQUEST",
+                            "STEP_FAILURE",
+                            "ALL_STEPS_COMPLETED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string",
+                          "serialized_name": "Message"
+                        }
+                      }
+                    },
+                    "timeline": {
+                      "type": "structure",
+                      "serialized_name": "Timeline",
+                      "members": {
+                        "creation_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "CreationDateTime"
+                        },
+                        "ready_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "ReadyDateTime"
+                        },
+                        "end_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "EndDateTime"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_instance_groups": {
+      "name": "ListInstanceGroups",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_id": {
+            "type": "string",
+            "serialized_name": "ClusterId"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "instance_groups": {
+            "type": "list",
+            "serialized_name": "InstanceGroups",
+            "members": {
+              "type": "structure",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
+                },
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "market": {
+                  "type": "string",
+                  "serialized_name": "Market",
+                  "enum": [
+                    "ON_DEMAND",
+                    "SPOT"
+                  ]
+                },
+                "instance_group_type": {
+                  "type": "string",
+                  "serialized_name": "InstanceGroupType",
+                  "enum": [
+                    "MASTER",
+                    "CORE",
+                    "TASK"
+                  ]
+                },
+                "bid_price": {
+                  "type": "string",
+                  "serialized_name": "BidPrice"
+                },
+                "instance_type": {
+                  "type": "string",
+                  "serialized_name": "InstanceType"
+                },
+                "requested_instance_count": {
+                  "type": "integer",
+                  "serialized_name": "RequestedInstanceCount"
+                },
+                "running_instance_count": {
+                  "type": "integer",
+                  "serialized_name": "RunningInstanceCount"
+                },
+                "status": {
+                  "type": "structure",
+                  "serialized_name": "Status",
+                  "members": {
+                    "state": {
+                      "type": "string",
+                      "serialized_name": "State",
+                      "enum": [
+                        "PROVISIONING",
+                        "BOOTSTRAPPING",
+                        "RUNNING",
+                        "RESIZING",
+                        "SUSPENDED",
+                        "TERMINATING",
+                        "TERMINATED",
+                        "ARRESTED",
+                        "SHUTTING_DOWN",
+                        "ENDED"
+                      ]
+                    },
+                    "state_change_reason": {
+                      "type": "structure",
+                      "serialized_name": "StateChangeReason",
+                      "members": {
+                        "code": {
+                          "type": "string",
+                          "serialized_name": "Code",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "VALIDATION_ERROR",
+                            "INSTANCE_FAILURE",
+                            "CLUSTER_TERMINATED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string",
+                          "serialized_name": "Message"
+                        }
+                      }
+                    },
+                    "timeline": {
+                      "type": "structure",
+                      "serialized_name": "Timeline",
+                      "members": {
+                        "creation_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "CreationDateTime"
+                        },
+                        "ready_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "ReadyDateTime"
+                        },
+                        "end_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "EndDateTime"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_instances": {
+      "name": "ListInstances",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_id": {
+            "type": "string",
+            "serialized_name": "ClusterId"
+          },
+          "instance_group_id": {
+            "type": "string",
+            "serialized_name": "InstanceGroupId"
+          },
+          "instance_group_types": {
+            "type": "list",
+            "serialized_name": "InstanceGroupTypes",
+            "members": {
+              "type": "string",
+              "enum": [
+                "MASTER",
+                "CORE",
+                "TASK"
+              ]
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "instances": {
+            "type": "list",
+            "serialized_name": "Instances",
+            "members": {
+              "type": "structure",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
+                },
+                "ec2_instance_id": {
+                  "type": "string",
+                  "serialized_name": "Ec2InstanceId"
+                },
+                "public_dns_name": {
+                  "type": "string",
+                  "serialized_name": "PublicDnsName"
+                },
+                "public_ip_address": {
+                  "type": "string",
+                  "serialized_name": "PublicIpAddress"
+                },
+                "private_dns_name": {
+                  "type": "string",
+                  "serialized_name": "PrivateDnsName"
+                },
+                "private_ip_address": {
+                  "type": "string",
+                  "serialized_name": "PrivateIpAddress"
+                },
+                "status": {
+                  "type": "structure",
+                  "serialized_name": "Status",
+                  "members": {
+                    "state": {
+                      "type": "string",
+                      "serialized_name": "State",
+                      "enum": [
+                        "AWAITING_FULFILLMENT",
+                        "PROVISIONING",
+                        "BOOTSTRAPPING",
+                        "RUNNING",
+                        "TERMINATED"
+                      ]
+                    },
+                    "state_change_reason": {
+                      "type": "structure",
+                      "serialized_name": "StateChangeReason",
+                      "members": {
+                        "code": {
+                          "type": "string",
+                          "serialized_name": "Code",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "VALIDATION_ERROR",
+                            "INSTANCE_FAILURE",
+                            "BOOTSTRAP_FAILURE",
+                            "CLUSTER_TERMINATED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string",
+                          "serialized_name": "Message"
+                        }
+                      }
+                    },
+                    "timeline": {
+                      "type": "structure",
+                      "serialized_name": "Timeline",
+                      "members": {
+                        "creation_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "CreationDateTime"
+                        },
+                        "ready_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "ReadyDateTime"
+                        },
+                        "end_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "EndDateTime"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
+    "list_steps": {
+      "name": "ListSteps",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_id": {
+            "type": "string",
+            "serialized_name": "ClusterId"
+          },
+          "step_states": {
+            "type": "list",
+            "serialized_name": "StepStates",
+            "members": {
+              "type": "string",
+              "enum": [
+                "PENDING",
+                "RUNNING",
+                "COMPLETED",
+                "CANCELLED",
+                "FAILED",
+                "INTERRUPTED"
+              ]
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "steps": {
+            "type": "list",
+            "serialized_name": "Steps",
+            "members": {
+              "type": "structure",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
+                },
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "status": {
+                  "type": "structure",
+                  "serialized_name": "Status",
+                  "members": {
+                    "state": {
+                      "type": "string",
+                      "serialized_name": "State",
+                      "enum": [
+                        "PENDING",
+                        "RUNNING",
+                        "COMPLETED",
+                        "CANCELLED",
+                        "FAILED",
+                        "INTERRUPTED"
+                      ]
+                    },
+                    "state_change_reason": {
+                      "type": "structure",
+                      "serialized_name": "StateChangeReason",
+                      "members": {
+                        "code": {
+                          "type": "string",
+                          "serialized_name": "Code",
+                          "enum": [
+                            "NONE"
+                          ]
+                        },
+                        "message": {
+                          "type": "string",
+                          "serialized_name": "Message"
+                        }
+                      }
+                    },
+                    "timeline": {
+                      "type": "structure",
+                      "serialized_name": "Timeline",
+                      "members": {
+                        "creation_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "CreationDateTime"
+                        },
+                        "start_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "StartDateTime"
+                        },
+                        "end_date_time": {
+                          "type": "unix_timestamp",
+                          "serialized_name": "EndDateTime"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      }
+    },
     "modify_instance_groups": {
       "name": "ModifyInstanceGroups",
       "http_method": "POST",
@@ -620,8 +1494,14 @@
                 },
                 "instance_count": {
                   "type": "integer",
-                  "required": true,
                   "serialized_name": "InstanceCount"
+                },
+                "ec2_instance_ids_to_terminate": {
+                  "type": "list",
+                  "serialized_name": "EC2InstanceIdsToTerminate",
+                  "members": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -764,6 +1644,7 @@
                   "serialized_name": "ActionOnFailure",
                   "enum": [
                     "TERMINATE_JOB_FLOW",
+                    "TERMINATE_CLUSTER",
                     "CANCEL_AND_WAIT",
                     "CONTINUE"
                   ]

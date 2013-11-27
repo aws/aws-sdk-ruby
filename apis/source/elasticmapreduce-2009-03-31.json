@@ -6,9 +6,9 @@
   "signature_version": "v4",
   "service_full_name": "Amazon Elastic MapReduce",
   "service_abbreviation": "Amazon EMR",
+  "timestamp_format": "unixTimestamp",
   "endpoint_prefix": "elasticmapreduce",
-  "xmlnamespace": "http://elasticmapreduce.amazonaws.com/doc/2009-03-31",
-  "documentation": "\n      <p> This is the <i>Amazon Elastic MapReduce API Reference</i>. This guide provides descriptions and\n         samples of the Amazon Elastic MapReduce APIs.</p>\n\n      <p>Amazon Elastic MapReduce is a web service that makes it easy to process large amounts of\n         data efficiently. Elastic MapReduce uses Hadoop processing combined with several AWS\n         products to do tasks such as web indexing, data mining, log file analysis, machine\n         learning, scientific simulation, and data warehousing.</p>\n\n   ",
+  "documentation": "\n      <p> This is the <i>Amazon Elastic MapReduce API Reference</i>. This guide provides descriptions and\n         samples of the Amazon Elastic MapReduce APIs.</p>\n\n      <p>Amazon Elastic MapReduce (Amazon EMR) is a web service that makes it easy to process large amounts of\n         data efficiently. Amazon EMR uses Hadoop processing combined with several AWS\n         products to do tasks such as web indexing, data mining, log file analysis, machine\n         learning, scientific simulation, and data warehousing.</p>\n\n   ",
   "operations": {
     "AddInstanceGroups": {
       "name": "AddInstanceGroups",
@@ -167,10 +167,11 @@
                   "type": "string",
                   "enum": [
                     "TERMINATE_JOB_FLOW",
+                    "TERMINATE_CLUSTER",
                     "CANCEL_AND_WAIT",
                     "CONTINUE"
                   ],
-                  "documentation": "\n      <p>Specifies the action to take if the job flow step fails.</p>\n   "
+                  "documentation": "\n      <p>The action to take if the job flow step fails.</p>\n   "
                 },
                 "HadoopJarStep": {
                   "shape_name": "HadoopJarStepConfig",
@@ -222,7 +223,7 @@
                       "documentation": "\n      <p>The name of the main class in the specified Java file. If not specified, the JAR file\n         should specify a Main-Class in its manifest file.</p>\n   "
                     },
                     "Args": {
-                      "shape_name": "StringList",
+                      "shape_name": "XmlStringList",
                       "type": "list",
                       "members": {
                         "shape_name": "XmlString",
@@ -235,19 +236,38 @@
                       "documentation": "\n      <p>A list of command line arguments passed to the JAR file's main function when executed.</p>\n   "
                     }
                   },
-                  "documentation": "\n      <p>Specifies the JAR file used for the job flow step.</p>\n   ",
+                  "documentation": "\n      <p>The JAR file used for the job flow step.</p>\n   ",
                   "required": true
                 }
               },
               "documentation": "\n      <p>Specification of a job flow step.</p>\n   "
             },
-            "documentation": "\n\n      <p> A list of <a>StepConfig</a> to be executed by the job flow. </p>\n   ",
+            "documentation": "\n      <p>A list of <a>StepConfig</a> to be executed by the job flow. </p>\n   ",
             "required": true
           }
         },
-        "documentation": "\n      <p> The input argument to the <a>AddJobFlow</a> operation. </p>\n   "
+        "documentation": "\n      <p> The input argument to the <a>AddJobFlowSteps</a> operation. </p>\n   "
       },
-      "output": null,
+      "output": {
+        "shape_name": "AddJobFlowStepsOutput",
+        "type": "structure",
+        "members": {
+          "StepIds": {
+            "shape_name": "StepIdsList",
+            "type": "list",
+            "members": {
+              "shape_name": "XmlStringMaxLen256",
+              "type": "string",
+              "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+              "min_length": 0,
+              "max_length": 256,
+              "documentation": null
+            },
+            "documentation": "\n      <p>The identifiers of the list of steps added to the job flow.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>The output for the <a>AddJobFlowSteps</a> operation. </p>\n   "
+      },
       "errors": [
         {
           "shape_name": "InternalServerError",
@@ -258,6 +278,276 @@
         }
       ],
       "documentation": "\n      <p> AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed\n      in each job flow. </p>\n      <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p>\n      <p> A step specifies the location of a JAR file stored either on the master node of the job\n         flow or in Amazon S3. Each step is performed by the main function of the main class of the\n         JAR file. The main class can be specified either in the manifest of the JAR or by using the\n         MainFunction parameter of the step. </p>\n      <p> Elastic MapReduce executes each step in the order listed. For a step to be considered\n         complete, the main function must exit with a zero exit code and all Hadoop jobs started\n         while the step was running must have completed and run successfully. </p>\n      <p> You can only add steps to a job flow that is in one of the following states: STARTING,\n      BOOTSTRAPPING, RUNNING, or WAITING.</p>\n\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.AddJobFlowSteps\nContent-Length: 426\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130716T210948Z\nX-Amz-Content-Sha256: 9e5ad0a93c22224947ce98eea94f766103d91b28fa82eb60d0cb8b6f9555a6b2\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130716/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=2a2393390760ae85eb74ee3a539e1d758bfdd8815a1a6d6f14d4a2fbcfdcd5b7\nAccept: */*\n\n{\n    \"JobFlowId\": \"j-3TS0OIYO4NFN\",\n    \"Steps\": [{\n        \"Name\": \"Example Jar Step\",\n        \"ActionOnFailure\": \"CANCEL_AND_WAIT\",\n        \"HadoopJarStep\": {\n            \"Jar\": \"s3n:\\\\/\\\\/elasticmapreduce\\\\/samples\\\\/cloudburst\\\\/cloudburst.jar\",\n            \"Args\": [\n                \"s3n:\\\\/\\\\/elasticmapreduce\\\\/samples\\\\/cloudburst\\\\/input\\\\/s_suis.br\",\n                \"s3n:\\\\/\\\\/elasticmapreduce\\\\/samples\\\\/cloudburst\\\\/input\\\\/100k.br\",\n                \"s3n:\\\\/\\\\/examples-bucket\\\\/cloudburst\\\\/output\",\n                \"36\",\n                \"3\",\n                \"0\",\n                \"1\",\n                \"240\",\n                \"48\",\n                \"24\",\n                \"24\",\n                \"128\",\n                \"16\"\n            ]\n        }\n    }]\n}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 6514261f-ee5b-11e2-9345-5332e9ab2e6d\nContent-Type: application/x-amz-json-1.1\nContent-Length: 0\nDate: Tue, 16 Jul 2013 21:05:07 GMT\n\n         </queryresponse>\n      </examples>\n   "
+    },
+    "DescribeCluster": {
+      "name": "DescribeCluster",
+      "input": {
+        "shape_name": "DescribeClusterInput",
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "shape_name": "ClusterId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 64,
+            "documentation": "\n      <p>The identifier of the cluster to describe.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This input determines which cluster to describe.</p>\n   "
+      },
+      "output": {
+        "shape_name": "DescribeClusterOutput",
+        "type": "structure",
+        "members": {
+          "Cluster": {
+            "shape_name": "Cluster",
+            "type": "structure",
+            "members": {
+              "Id": {
+                "shape_name": "ClusterId",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 64,
+                "documentation": "\n      <p>The unique identifier for the cluster.</p>"
+              },
+              "Name": {
+                "shape_name": "StringMaxLen256",
+                "type": "string",
+                "min_length": 0,
+                "max_length": 256,
+                "documentation": "\n      <p>The name of the cluster.</p>"
+              },
+              "Status": {
+                "shape_name": "ClusterStatus",
+                "type": "structure",
+                "members": {
+                  "State": {
+                    "shape_name": "ClusterState",
+                    "type": "string",
+                    "enum": [
+                      "STARTING",
+                      "BOOTSTRAPPING",
+                      "RUNNING",
+                      "WAITING",
+                      "TERMINATING",
+                      "TERMINATED",
+                      "TERMINATED_WITH_ERRORS"
+                    ],
+                    "documentation": "\n      <p>The current state of the cluster.</p>\n   "
+                  },
+                  "StateChangeReason": {
+                    "shape_name": "ClusterStateChangeReason",
+                    "type": "structure",
+                    "members": {
+                      "Code": {
+                        "shape_name": "ClusterStateChangeReasonCode",
+                        "type": "string",
+                        "enum": [
+                          "INTERNAL_ERROR",
+                          "VALIDATION_ERROR",
+                          "INSTANCE_FAILURE",
+                          "BOOTSTRAP_FAILURE",
+                          "USER_REQUEST",
+                          "STEP_FAILURE",
+                          "ALL_STEPS_COMPLETED"
+                        ],
+                        "documentation": "\n      <p>The programmatic code for the state change reason.</p>\n   "
+                      },
+                      "Message": {
+                        "shape_name": "String",
+                        "type": "string",
+                        "documentation": "\n      <p>The descriptive message for the state change reason.</p>\n   "
+                      }
+                    },
+                    "documentation": "\n      <p>The reason for the cluster status change.</p>\n   "
+                  },
+                  "Timeline": {
+                    "shape_name": "ClusterTimeline",
+                    "type": "structure",
+                    "members": {
+                      "CreationDateTime": {
+                        "shape_name": "Date",
+                        "type": "timestamp",
+                        "documentation": "\n      <p>The creation date and time of the cluster.</p>\n   "
+                      },
+                      "ReadyDateTime": {
+                        "shape_name": "Date",
+                        "type": "timestamp",
+                        "documentation": "\n      <p>The date and time when the cluster was ready to execute steps.</p>\n   "
+                      },
+                      "EndDateTime": {
+                        "shape_name": "Date",
+                        "type": "timestamp",
+                        "documentation": "\n      <p>The date and time when the cluster was terminated.</p>\n   "
+                      }
+                    },
+                    "documentation": "\n      <p>A timeline that represents the status of a cluster over the lifetime of the cluster.</p>\n   "
+                  }
+                },
+                "documentation": "\n      <p>The current status details about the cluster.</p>\n   "
+              },
+              "Ec2InstanceAttributes": {
+                "shape_name": "Ec2InstanceAttributes",
+                "type": "structure",
+                "members": {
+                  "Ec2KeyName": {
+                    "shape_name": "StringMaxLen256",
+                    "type": "string",
+                    "min_length": 0,
+                    "max_length": 256,
+                    "documentation": "\n      <p>The name of the Amazon EC2 key pair to use when connecting with SSH into the master node as\n         a user named \"hadoop\".</p>\n   "
+                  },
+                  "Ec2SubnetId": {
+                    "shape_name": "StringMaxLen256",
+                    "type": "string",
+                    "min_length": 0,
+                    "max_length": 256,
+                    "documentation": "\n      <p>\n         To launch the job flow in Amazon VPC, set this parameter to the identifier of the Amazon VPC subnet where \n         you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal AWS cloud, outside of \n         a VPC. \n      </p>\n      <p>\n         Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances.  \n         Thus, you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a VPC.\n      </p>\n   "
+                  },
+                  "Ec2AvailabilityZone": {
+                    "shape_name": "StringMaxLen256",
+                    "type": "string",
+                    "min_length": 0,
+                    "max_length": 256,
+                    "documentation": "\n      <p>The Availability Zone in which the cluster will run.</p>\n   "
+                  },
+                  "IamInstanceProfile": {
+                    "shape_name": "StringMaxLen256",
+                    "type": "string",
+                    "min_length": 0,
+                    "max_length": 256,
+                    "documentation": "\n      <p>The IAM role that was specified when the job flow was launched. The EC2 instances of the job flow assume this role.</p>\n   "
+                  }
+                },
+                "documentation": "\n      <p>Provides information about the EC2 instances in a cluster grouped by category. For example, EC2 Key Name, Subnet Id, Instance Profile, and so on.</p>      \n   "
+              },
+              "LogUri": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n      <p>The path to the Amazon S3 location where logs for this cluster are stored.</p> \n   "
+              },
+              "RequestedAmiVersion": {
+                "shape_name": "StringMaxLen256",
+                "type": "string",
+                "min_length": 0,
+                "max_length": 256,
+                "documentation": "\n      <p>The AMI version requested for this cluster.<!-- For more information, see <a>JobFlowDetail$AmiVersion</a>.--></p>\n   "
+              },
+              "RunningAmiVersion": {
+                "shape_name": "StringMaxLen256",
+                "type": "string",
+                "min_length": 0,
+                "max_length": 256,
+                "documentation": "\n      <p>The AMI version running on this cluster. This differs from the requested version only if the requested version is a meta version, such as \"latest\". <!--For more information, see <a>JobFlowDetail$AmiVersion</a>.--></p>\n   "
+              },
+              "AutoTerminate": {
+                "shape_name": "Boolean",
+                "type": "boolean",
+                "documentation": "\n      <p>Specifies whether the cluster should terminate after completing all steps.</p>\n   "
+              },
+              "TerminationProtected": {
+                "shape_name": "Boolean",
+                "type": "boolean",
+                "documentation": " \n      <p>Indicates whether Amazon EMR will lock the cluster to prevent the EC2 instances from being terminated by an API call or \n      user intervention, or in the event of a cluster error.</p>"
+              },
+              "VisibleToAllUsers": {
+                "shape_name": "Boolean",
+                "type": "boolean",
+                "documentation": "\n      <p>Indicates whether the job flow is visible to all IAM users of the AWS account associated with the job flow. If this value is set to <code>true</code>, all IAM users of that AWS account can view and manage the job flow if they have the proper policy permissions set. \n         If this value is <code>false</code>, only the IAM user that created the cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.</p>      \n   "
+              },
+              "Applications": {
+                "shape_name": "ApplicationList",
+                "type": "list",
+                "members": {
+                  "shape_name": "Application",
+                  "type": "structure",
+                  "members": {
+                    "Name": {
+                      "shape_name": "StringMaxLen256",
+                      "type": "string",
+                      "min_length": 0,
+                      "max_length": 256,
+                      "documentation": "\n      <p>The name of the application.</p>"
+                    },
+                    "Version": {
+                      "shape_name": "StringMaxLen256",
+                      "type": "string",
+                      "min_length": 0,
+                      "max_length": 256,
+                      "documentation": "\n      <p>The version of the application.</p>"
+                    },
+                    "Args": {
+                      "shape_name": "StringList",
+                      "type": "list",
+                      "members": {
+                        "shape_name": "String",
+                        "type": "string",
+                        "documentation": null
+                      },
+                      "documentation": "\n      <p>Arguments for Amazon EMR to pass to the application.</p>"
+                    },
+                    "AdditionalInfo": {
+                      "shape_name": "StringMap",
+                      "type": "map",
+                      "keys": {
+                        "shape_name": "StringMaxLen256",
+                        "type": "string",
+                        "min_length": 0,
+                        "max_length": 256,
+                        "documentation": null
+                      },
+                      "members": {
+                        "shape_name": "String",
+                        "type": "string",
+                        "documentation": null
+                      },
+                      "documentation": "\n      <p>This option is for advanced users only. This is meta information about third-party applications that third-party vendors use for testing purposes.</p>"
+                    }
+                  },
+                  "documentation": "\n      <p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p>\n      <ul>\n         <li>\"karmasphere-enterprise-utility\" - tag the \n            job flow for management by <a href=\"http://aws.amazon.com/elasticmapreduce/karmasphere/\">Karmasphere</a>.</li>\n         <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n         <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition, respectively.</li>\n      </ul>\n   "
+                },
+                "documentation": "\n      <p>The applications installed on this cluster.</p>\n   "
+              }
+            },
+            "documentation": "\n      <p>This output contains the details for the requested cluster.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This output contains the description of the cluster.</p>\n   "
+      },
+      "errors": [
+        {
+          "shape_name": "InternalServerException",
+          "type": "structure",
+          "members": {
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is an internal failure in the EMR service.</p>      \n      \n   "
+        },
+        {
+          "shape_name": "InvalidRequestException",
+          "type": "structure",
+          "members": {
+            "ErrorCode": {
+              "shape_name": "ErrorCode",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 256,
+              "documentation": "\n      <p>The error code associated with the exception.</p>      \n      \n   "
+            },
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is something wrong with user input.</p>      \n      \n   "
+        }
+      ],
+      "documentation": "\n      <p>Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. For information about the cluster steps, see <a>ListSteps</a>.</p>      \n      \n   "
     },
     "DescribeJobFlows": {
       "name": "DescribeJobFlows",
@@ -276,7 +566,7 @@
             "documentation": "\n      <p>Return only job flows created before this date and time.</p>\n   "
           },
           "JobFlowIds": {
-            "shape_name": "StringList",
+            "shape_name": "XmlStringList",
             "type": "list",
             "members": {
               "shape_name": "XmlString",
@@ -295,14 +585,14 @@
               "shape_name": "JobFlowExecutionState",
               "type": "string",
               "enum": [
-                "COMPLETED",
-                "FAILED",
-                "TERMINATED",
-                "RUNNING",
-                "SHUTTING_DOWN",
                 "STARTING",
+                "BOOTSTRAPPING",
+                "RUNNING",
                 "WAITING",
-                "BOOTSTRAPPING"
+                "SHUTTING_DOWN",
+                "TERMINATED",
+                "COMPLETED",
+                "FAILED"
               ],
               "documentation": "\n      <p> The type of instance. </p>\n      <enumValues>\n         <value name=\"JobFlowExecutionState$COMPLETED\">\n            <p>A small instance</p>\n         </value>\n         <value name=\"JobFlowExecutionState$FAILED\">\n            <p>A large instance</p>\n         </value>\n      </enumValues>\n   "
             },
@@ -364,14 +654,14 @@
                       "shape_name": "JobFlowExecutionState",
                       "type": "string",
                       "enum": [
-                        "COMPLETED",
-                        "FAILED",
-                        "TERMINATED",
-                        "RUNNING",
-                        "SHUTTING_DOWN",
                         "STARTING",
+                        "BOOTSTRAPPING",
+                        "RUNNING",
                         "WAITING",
-                        "BOOTSTRAPPING"
+                        "SHUTTING_DOWN",
+                        "TERMINATED",
+                        "COMPLETED",
+                        "FAILED"
                       ],
                       "documentation": "\n      <p>The state of the job flow.</p>\n   ",
                       "required": true
@@ -531,14 +821,14 @@
                             "type": "string",
                             "enum": [
                               "PROVISIONING",
-                              "STARTING",
                               "BOOTSTRAPPING",
                               "RUNNING",
                               "RESIZING",
+                              "SUSPENDED",
+                              "TERMINATING",
+                              "TERMINATED",
                               "ARRESTED",
                               "SHUTTING_DOWN",
-                              "TERMINATED",
-                              "FAILED",
                               "ENDED"
                             ],
                             "documentation": "\n      <p>State of instance group. The following values are deprecated: STARTING, TERMINATED, and FAILED.</p>\n   ",
@@ -613,12 +903,12 @@
                           "required": true
                         }
                       },
-                      "documentation": "\n      <p>Specifies the Amazon EC2 Availability Zone for the job flow.</p>\n   "
+                      "documentation": "\n      <p>The Amazon EC2 Availability Zone for the job flow.</p>\n   "
                     },
                     "KeepJobFlowAliveWhenNoSteps": {
                       "shape_name": "Boolean",
                       "type": "boolean",
-                      "documentation": "\n      <p>Specifies whether or not the job flow should terminate after completing all steps.</p>\n   "
+                      "documentation": "\n      <p>Specifies whether the job flow should terminate after completing all steps.</p>\n   "
                     },
                     "TerminationProtected": {
                       "shape_name": "Boolean",
@@ -631,7 +921,7 @@
                       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                       "min_length": 0,
                       "max_length": 256,
-                      "documentation": "\n      <p>Specifies the Hadoop version for the job flow.</p>\n   "
+                      "documentation": "\n      <p>The Hadoop version for the job flow.</p>\n   "
                     }
                   },
                   "documentation": "\n      <p>Describes the Amazon EC2 instances of the job flow.</p>\n   ",
@@ -662,10 +952,11 @@
                             "type": "string",
                             "enum": [
                               "TERMINATE_JOB_FLOW",
+                              "TERMINATE_CLUSTER",
                               "CANCEL_AND_WAIT",
                               "CONTINUE"
                             ],
-                            "documentation": "\n      <p>Specifies the action to take if the job flow step fails.</p>\n   "
+                            "documentation": "\n      <p>The action to take if the job flow step fails.</p>\n   "
                           },
                           "HadoopJarStep": {
                             "shape_name": "HadoopJarStepConfig",
@@ -717,7 +1008,7 @@
                                 "documentation": "\n      <p>The name of the main class in the specified Java file. If not specified, the JAR file\n         should specify a Main-Class in its manifest file.</p>\n   "
                               },
                               "Args": {
-                                "shape_name": "StringList",
+                                "shape_name": "XmlStringList",
                                 "type": "list",
                                 "members": {
                                   "shape_name": "XmlString",
@@ -730,7 +1021,7 @@
                                 "documentation": "\n      <p>A list of command line arguments passed to the JAR file's main function when executed.</p>\n   "
                               }
                             },
-                            "documentation": "\n      <p>Specifies the JAR file used for the job flow step.</p>\n   ",
+                            "documentation": "\n      <p>The JAR file used for the job flow step.</p>\n   ",
                             "required": true
                           }
                         },
@@ -823,7 +1114,7 @@
                                 "required": true
                               },
                               "Args": {
-                                "shape_name": "StringList",
+                                "shape_name": "XmlStringList",
                                 "type": "list",
                                 "members": {
                                   "shape_name": "XmlString",
@@ -892,6 +1183,1106 @@
       ],
       "documentation": "\n      <p> DescribeJobFlows returns a list of job flows that match all of the supplied parameters.\n         The parameters can include a list of job flow IDs, job flow states, and restrictions on job\n         flow creation date and time.</p>\n      <p> Regardless of supplied parameters, only job flows created within the last two months are\n         returned.</p>\n      <p> If no parameters are supplied, then job flows matching either of the following criteria\n         are returned:</p>\n      <ul>\n         <li>Job flows created and completed in the last two weeks</li>\n         <li> Job flows created within the last two months that are in one of the following states:\n               <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>,\n               <code>STARTING</code>\n         </li>\n      </ul>\n      <p> Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions. </p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.DescribeJobFlows\nContent-Length: 62\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130715T220330Z\nX-Amz-Content-Sha256: fce83af973f96f173512aca2845c56862b946feb1de0600326f1365b658a0e39\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130715/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=29F98a6f44e05ad54fe1e8b3d1a7101ab08dc3ad348995f89c533693cee2bb3b\nAccept: */*\n\n{\n    \"JobFlowIds\": [\"j-ZKIY4CKQRX72\"],\n    \"DescriptionType\": \"EXTENDED\"\n}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 634d4142-ed9a-11e2-bbba-b56d7d016ec4\nContent-Type: application/x-amz-json-1.1\nContent-Length: 1624\nDate: Mon, 15 Jul 2013 22:03:31 GMT\n\n{\"JobFlows\": [{\n    \"AmiVersion\": \"2.3.6\",\n    \"BootstrapActions\": [],\n    \"ExecutionStatusDetail\": {\n        \"CreationDateTime\": 1.373923429E9,\n        \"EndDateTime\": 1.373923995E9,\n        \"LastStateChangeReason\": \"Steps completed\",\n        \"ReadyDateTime\": 1.373923754E9,\n        \"StartDateTime\": 1.373923754E9,\n        \"State\": \"COMPLETED\"\n    },\n    \"Instances\": {\n        \"HadoopVersion\": \"1.0.3\",\n        \"InstanceCount\": 1,\n        \"InstanceGroups\": [{\n            \"CreationDateTime\": 1.373923429E9,\n            \"EndDateTime\": 1.373923995E9,\n            \"InstanceGroupId\": \"ig-3SRUWV3E0NB7K\",\n            \"InstanceRequestCount\": 1,\n            \"InstanceRole\": \"MASTER\",\n            \"InstanceRunningCount\": 0,\n            \"InstanceType\": \"m1.small\",\n            \"LastStateChangeReason\": \"Job flow terminated\",\n            \"Market\": \"ON_DEMAND\",\n            \"Name\": \"Master InstanceGroup\",\n            \"ReadyDateTime\": 1.37392375E9,\n            \"StartDateTime\": 1.373923646E9,\n            \"State\": \"ENDED\"\n        }],\n        \"KeepJobFlowAliveWhenNoSteps\": false,\n        \"MasterInstanceId\": \"i-8c4fbbef\",\n        \"MasterInstanceType\": \"m1.small\",\n        \"MasterPublicDnsName\": \"ec2-107-20-46-140.compute-1.amazonaws.com\",\n        \"NormalizedInstanceHours\": 1,\n        \"Placement\": {\"AvailabilityZone\": \"us-east-1a\"},\n        \"TerminationProtected\": false\n    },\n    \"JobFlowId\": \"j-ZKIY4CKQRX72\",\n    \"Name\": \"Development Job Flow\",\n    \"Steps\": [{\n        \"ExecutionStatusDetail\": {\n            \"CreationDateTime\": 1.373923429E9,\n            \"EndDateTime\": 1.373923914E9,\n            \"StartDateTime\": 1.373923754E9,\n            \"State\": \"COMPLETED\"\n        },\n        \"StepConfig\": {\n            \"ActionOnFailure\": \"CANCEL_AND_WAIT\",\n            \"HadoopJarStep\": {\n                \"Args\": [\n                    \"-input\",\n                    \"s3://elasticmapreduce/samples/wordcount/input\",\n                    \"-output\",\n                    \"s3://examples-bucket/example-output\",\n                    \"-mapper\",\n                    \"s3://elasticmapreduce/samples/wordcount/wordSplitter.py\",\n                    \"-reducer\",\n                    \"aggregate\"\n                ],\n                \"Jar\": \"/home/hadoop/contrib/streaming/hadoop-streaming.jar\",\n                \"Properties\": []\n            },\n            \"Name\": \"Example Streaming Step\"\n        }\n    }],\n    \"SupportedProducts\": [],\n    \"VisibleToAllUsers\": false\n}]}\n</queryresponse>\n      </examples>\n   "
     },
+    "DescribeStep": {
+      "name": "DescribeStep",
+      "input": {
+        "shape_name": "DescribeStepInput",
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "shape_name": "ClusterId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 64,
+            "documentation": "\n      <p>The identifier of the cluster with steps to describe.</p>\n   "
+          },
+          "StepId": {
+            "shape_name": "StepId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 64,
+            "documentation": "\n      <p>The identifier of the step to describe.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This input determines which step to describe.</p>\n   "
+      },
+      "output": {
+        "shape_name": "DescribeStepOutput",
+        "type": "structure",
+        "members": {
+          "Step": {
+            "shape_name": "Step",
+            "type": "structure",
+            "members": {
+              "Id": {
+                "shape_name": "StepId",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 64,
+                "documentation": "\n      <p>The identifier of the cluster step.</p>\n   "
+              },
+              "Name": {
+                "shape_name": "StringMaxLen256",
+                "type": "string",
+                "min_length": 0,
+                "max_length": 256,
+                "documentation": "\n      <p>The name of the cluster step.</p>\n   "
+              },
+              "Config": {
+                "shape_name": "HadoopStepConfig",
+                "type": "structure",
+                "members": {
+                  "Jar": {
+                    "shape_name": "String",
+                    "type": "string",
+                    "documentation": "\n      <p>The path to the JAR file that runs during the step.</p>\n   "
+                  },
+                  "Properties": {
+                    "shape_name": "StringMap",
+                    "type": "map",
+                    "keys": {
+                      "shape_name": "StringMaxLen256",
+                      "type": "string",
+                      "min_length": 0,
+                      "max_length": 256,
+                      "documentation": null
+                    },
+                    "members": {
+                      "shape_name": "String",
+                      "type": "string",
+                      "documentation": null
+                    },
+                    "documentation": "\n      <p>The list of Java properties that are set when the step runs. You can use these properties to\n         pass key value pairs to your main function.</p>\n   "
+                  },
+                  "MainClass": {
+                    "shape_name": "String",
+                    "type": "string",
+                    "documentation": "\n      <p>The name of the main class in the specified Java file. If not specified, the JAR file\n         should specify a main class in its manifest file.</p>\n   "
+                  },
+                  "Args": {
+                    "shape_name": "StringList",
+                    "type": "list",
+                    "members": {
+                      "shape_name": "String",
+                      "type": "string",
+                      "documentation": null
+                    },
+                    "documentation": "\n      <p>The list of command line arguments to pass to the JAR file's main function for execution.</p>\n   "
+                  }
+                },
+                "documentation": "\n      <p>The Hadoop job configuration of the cluster step.\n      </p>\n   "
+              },
+              "ActionOnFailure": {
+                "shape_name": "ActionOnFailure",
+                "type": "string",
+                "enum": [
+                  "TERMINATE_JOB_FLOW",
+                  "TERMINATE_CLUSTER",
+                  "CANCEL_AND_WAIT",
+                  "CONTINUE"
+                ],
+                "documentation": "\n      <p>This specifies what action to take when the cluster step fails. TERMINATE_JOB_FLOW is deprecated, use TERMINATE_CLUSTER instead.\n         </p>\n   "
+              },
+              "Status": {
+                "shape_name": "StepStatus",
+                "type": "structure",
+                "members": {
+                  "State": {
+                    "shape_name": "StepState",
+                    "type": "string",
+                    "enum": [
+                      "PENDING",
+                      "RUNNING",
+                      "COMPLETED",
+                      "CANCELLED",
+                      "FAILED",
+                      "INTERRUPTED"
+                    ],
+                    "documentation": "\n      <p>The execution state of the cluster step.\n      </p>\n   "
+                  },
+                  "StateChangeReason": {
+                    "shape_name": "StepStateChangeReason",
+                    "type": "structure",
+                    "members": {
+                      "Code": {
+                        "shape_name": "StepStateChangeReasonCode",
+                        "type": "string",
+                        "enum": [
+                          "NONE"
+                        ],
+                        "documentation": "\n      <p>The programmable code for the state change reason.\n      </p>\n   "
+                      },
+                      "Message": {
+                        "shape_name": "String",
+                        "type": "string",
+                        "documentation": "\n      <p>The descriptive message for the state change reason.\n      </p>\n   "
+                      }
+                    },
+                    "documentation": "\n      <p>The reason for the step execution status change.\n      </p>\n   "
+                  },
+                  "Timeline": {
+                    "shape_name": "StepTimeline",
+                    "type": "structure",
+                    "members": {
+                      "CreationDateTime": {
+                        "shape_name": "Date",
+                        "type": "timestamp",
+                        "documentation": "\n      <p>The date and time when the cluster step was created.\n      </p>\n   "
+                      },
+                      "StartDateTime": {
+                        "shape_name": "Date",
+                        "type": "timestamp",
+                        "documentation": "\n      <p>The date and time when the cluster step execution started.\n         Due to delays in step status reporting, this can display a time which pre-dates a previous call to DescribeStep that indicated the step was not yet running. \n      </p>\n   "
+                      },
+                      "EndDateTime": {
+                        "shape_name": "Date",
+                        "type": "timestamp",
+                        "documentation": "\n      <p>The date and time when the cluster step execution completed or failed. \n         This can display a time that pre-dates a call to DescribeStep that indicates the step is running, due to delays in step status reporting. \n      </p>\n   "
+                      }
+                    },
+                    "documentation": "\n      <p>The timeline of the cluster step status over time.\n      </p>\n   "
+                  }
+                },
+                "documentation": "\n      <p>The current execution status details of the cluster step.\n      </p>\n   "
+              }
+            },
+            "documentation": "\n      <p>The step details for the requested step identifier.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This output contains the description of the cluster step.</p>\n   "
+      },
+      "errors": [
+        {
+          "shape_name": "InternalServerException",
+          "type": "structure",
+          "members": {
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is an internal failure in the EMR service.</p>      \n      \n   "
+        },
+        {
+          "shape_name": "InvalidRequestException",
+          "type": "structure",
+          "members": {
+            "ErrorCode": {
+              "shape_name": "ErrorCode",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 256,
+              "documentation": "\n      <p>The error code associated with the exception.</p>      \n      \n   "
+            },
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is something wrong with user input.</p>      \n      \n   "
+        }
+      ],
+      "documentation": "\n      <p>Provides more detail about the cluster step.</p>  \n   "
+    },
+    "ListBootstrapActions": {
+      "name": "ListBootstrapActions",
+      "input": {
+        "shape_name": "ListBootstrapActionsInput",
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "shape_name": "ClusterId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 64,
+            "documentation": "\n      <p>The cluster identifier for the bootstrap actions to list\n      .</p>\n   "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve\n         .</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This input determines which bootstrap actions to retrieve.</p>\n   "
+      },
+      "output": {
+        "shape_name": "ListBootstrapActionsOutput",
+        "type": "structure",
+        "members": {
+          "BootstrapActions": {
+            "shape_name": "CommandList",
+            "type": "list",
+            "members": {
+              "shape_name": "Command",
+              "type": "structure",
+              "members": {
+                "Name": {
+                  "shape_name": "StringMaxLen256",
+                  "type": "string",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The name of the command.</p>\n   "
+                },
+                "ScriptPath": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": "\n      <p>The Amazon S3 location of the command script.</p>\n   "
+                },
+                "Args": {
+                  "shape_name": "StringList",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "String",
+                    "type": "string",
+                    "documentation": null
+                  },
+                  "documentation": "\n      <p>Arguments for Amazon EMR to pass to the command for execution.</p>\n   "
+                }
+              },
+              "documentation": "\n      <p>An entity describing an executable that runs on a cluster.</p>\n   "
+            },
+            "documentation": "\n      <p>The bootstrap actions associated with the cluster\n      .</p>\n   "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve\n      .</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This output contains the boostrap actions detail\n      .</p>\n   "
+      },
+      "errors": [
+        {
+          "shape_name": "InternalServerException",
+          "type": "structure",
+          "members": {
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is an internal failure in the EMR service.</p>      \n      \n   "
+        },
+        {
+          "shape_name": "InvalidRequestException",
+          "type": "structure",
+          "members": {
+            "ErrorCode": {
+              "shape_name": "ErrorCode",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 256,
+              "documentation": "\n      <p>The error code associated with the exception.</p>      \n      \n   "
+            },
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is something wrong with user input.</p>      \n      \n   "
+        }
+      ],
+      "documentation": "\n      <p>Provides information about the bootstrap actions associated with a cluster.</p>      \n      \n   "
+    },
+    "ListClusters": {
+      "name": "ListClusters",
+      "input": {
+        "shape_name": "ListClustersInput",
+        "type": "structure",
+        "members": {
+          "CreatedAfter": {
+            "shape_name": "Date",
+            "type": "timestamp",
+            "documentation": "\n      <p>The creation date and time beginning value filter for listing clusters\n      .</p>\n   "
+          },
+          "CreatedBefore": {
+            "shape_name": "Date",
+            "type": "timestamp",
+            "documentation": "\n      <p>The creation date and time end value filter for listing clusters\n      .</p>\n   "
+          },
+          "ClusterStates": {
+            "shape_name": "ClusterStateList",
+            "type": "list",
+            "members": {
+              "shape_name": "ClusterState",
+              "type": "string",
+              "enum": [
+                "STARTING",
+                "BOOTSTRAPPING",
+                "RUNNING",
+                "WAITING",
+                "TERMINATING",
+                "TERMINATED",
+                "TERMINATED_WITH_ERRORS"
+              ],
+              "documentation": null
+            },
+            "documentation": "\n      <p>The cluster state filters to apply when listing clusters.\n      </p>\n   "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.\n      </p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This input determines how the ListClusters action filters the list of clusters that it returns.</p>      \n   "
+      },
+      "output": {
+        "shape_name": "ListClustersOutput",
+        "type": "structure",
+        "members": {
+          "Clusters": {
+            "shape_name": "ClusterSummaryList",
+            "type": "list",
+            "members": {
+              "shape_name": "ClusterSummary",
+              "type": "structure",
+              "members": {
+                "Id": {
+                  "shape_name": "ClusterId",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 64,
+                  "documentation": "\n      <p>The unique identifier for the cluster.</p>\n   "
+                },
+                "Name": {
+                  "shape_name": "StringMaxLen256",
+                  "type": "string",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The name of the cluster.</p>\n   "
+                },
+                "Status": {
+                  "shape_name": "ClusterStatus",
+                  "type": "structure",
+                  "members": {
+                    "State": {
+                      "shape_name": "ClusterState",
+                      "type": "string",
+                      "enum": [
+                        "STARTING",
+                        "BOOTSTRAPPING",
+                        "RUNNING",
+                        "WAITING",
+                        "TERMINATING",
+                        "TERMINATED",
+                        "TERMINATED_WITH_ERRORS"
+                      ],
+                      "documentation": "\n      <p>The current state of the cluster.</p>\n   "
+                    },
+                    "StateChangeReason": {
+                      "shape_name": "ClusterStateChangeReason",
+                      "type": "structure",
+                      "members": {
+                        "Code": {
+                          "shape_name": "ClusterStateChangeReasonCode",
+                          "type": "string",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "VALIDATION_ERROR",
+                            "INSTANCE_FAILURE",
+                            "BOOTSTRAP_FAILURE",
+                            "USER_REQUEST",
+                            "STEP_FAILURE",
+                            "ALL_STEPS_COMPLETED"
+                          ],
+                          "documentation": "\n      <p>The programmatic code for the state change reason.</p>\n   "
+                        },
+                        "Message": {
+                          "shape_name": "String",
+                          "type": "string",
+                          "documentation": "\n      <p>The descriptive message for the state change reason.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n      <p>The reason for the cluster status change.</p>\n   "
+                    },
+                    "Timeline": {
+                      "shape_name": "ClusterTimeline",
+                      "type": "structure",
+                      "members": {
+                        "CreationDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The creation date and time of the cluster.</p>\n   "
+                        },
+                        "ReadyDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The date and time when the cluster was ready to execute steps.</p>\n   "
+                        },
+                        "EndDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The date and time when the cluster was terminated.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n      <p>A timeline that represents the status of a cluster over the lifetime of the cluster.</p>\n   "
+                    }
+                  },
+                  "documentation": "\n      <p>The details about the current status of the cluster.</p>\n   "
+                }
+              },
+              "documentation": "\n      <p>The summary description of the cluster.</p>\n   "
+            },
+            "documentation": "\n      <p>The list of clusters for the account based on the given filters.\n      </p>\n   "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.\n      </p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This contains a ClusterSummaryList with the cluster details; for example, the cluster IDs, names, and status.</p>      \n   "
+      },
+      "errors": [
+        {
+          "shape_name": "InternalServerException",
+          "type": "structure",
+          "members": {
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is an internal failure in the EMR service.</p>      \n      \n   "
+        },
+        {
+          "shape_name": "InvalidRequestException",
+          "type": "structure",
+          "members": {
+            "ErrorCode": {
+              "shape_name": "ErrorCode",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 256,
+              "documentation": "\n      <p>The error code associated with the exception.</p>      \n      \n   "
+            },
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is something wrong with user input.</p>      \n      \n   "
+        }
+      ],
+      "documentation": "\n      <p>Provides the status of all clusters visible to this AWS account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status.\n         This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.        \n      </p>      \n      \n   "
+    },
+    "ListInstanceGroups": {
+      "name": "ListInstanceGroups",
+      "input": {
+        "shape_name": "ListInstanceGroupsInput",
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "shape_name": "ClusterId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 64,
+            "documentation": "\n      <p>The identifier of the cluster for which to list the instance groups.</p>\n   "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This input determines which instance groups to retrieve.</p>\n   "
+      },
+      "output": {
+        "shape_name": "ListInstanceGroupsOutput",
+        "type": "structure",
+        "members": {
+          "InstanceGroups": {
+            "shape_name": "InstanceGroupList",
+            "type": "list",
+            "members": {
+              "shape_name": "InstanceGroup",
+              "type": "structure",
+              "members": {
+                "Id": {
+                  "shape_name": "InstanceGroupId",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 64,
+                  "documentation": "\n      <p>The identifier of the instance group.</p>\n   "
+                },
+                "Name": {
+                  "shape_name": "StringMaxLen256",
+                  "type": "string",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The name of the instance group.</p>\n   "
+                },
+                "Market": {
+                  "shape_name": "MarketType",
+                  "type": "string",
+                  "enum": [
+                    "ON_DEMAND",
+                    "SPOT"
+                  ],
+                  "documentation": "\n      <p>The marketplace to provision instances for this group. Valid values are ON_DEMAND or SPOT.</p>\n   "
+                },
+                "InstanceGroupType": {
+                  "shape_name": "InstanceGroupType",
+                  "type": "string",
+                  "enum": [
+                    "MASTER",
+                    "CORE",
+                    "TASK"
+                  ],
+                  "documentation": "\n      <p>The type of the instance group. Valid values are MASTER, CORE or TASK.</p>\n   "
+                },
+                "BidPrice": {
+                  "shape_name": "StringMaxLen256",
+                  "type": "string",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The bid price for each EC2 instance in the\n         instance group when launching nodes as Spot Instances, expressed in USD.</p>\n   "
+                },
+                "InstanceType": {
+                  "shape_name": "InstanceType",
+                  "type": "string",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "min_length": 1,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The EC2 instance type for all instances in the instance group. </p>\n   "
+                },
+                "RequestedInstanceCount": {
+                  "shape_name": "Integer",
+                  "type": "integer",
+                  "documentation": "\n      <p>The target number of instances for the instance group. </p>\n   "
+                },
+                "RunningInstanceCount": {
+                  "shape_name": "Integer",
+                  "type": "integer",
+                  "documentation": "\n      <p>The number of instances currently running in this instance group.</p>\n   "
+                },
+                "Status": {
+                  "shape_name": "InstanceGroupStatus",
+                  "type": "structure",
+                  "members": {
+                    "State": {
+                      "shape_name": "InstanceGroupState",
+                      "type": "string",
+                      "enum": [
+                        "PROVISIONING",
+                        "BOOTSTRAPPING",
+                        "RUNNING",
+                        "RESIZING",
+                        "SUSPENDED",
+                        "TERMINATING",
+                        "TERMINATED",
+                        "ARRESTED",
+                        "SHUTTING_DOWN",
+                        "ENDED"
+                      ],
+                      "documentation": "\n      <p>The current state of the instance group. The following values are deprecated: ARRESTED, SHUTTING_DOWN, and ENDED. Use SUSPENDED, TERMINATING, and TERMINATED instead, respectively.\n      </p>\n   "
+                    },
+                    "StateChangeReason": {
+                      "shape_name": "InstanceGroupStateChangeReason",
+                      "type": "structure",
+                      "members": {
+                        "Code": {
+                          "shape_name": "InstanceGroupStateChangeReasonCode",
+                          "type": "string",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "VALIDATION_ERROR",
+                            "INSTANCE_FAILURE",
+                            "CLUSTER_TERMINATED"
+                          ],
+                          "documentation": "\n      <p>The programmable code for the state change reason.</p>\n   "
+                        },
+                        "Message": {
+                          "shape_name": "String",
+                          "type": "string",
+                          "documentation": "\n      <p>The status change reason description.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n      <p>The status change reason details for the instance group.</p>\n   "
+                    },
+                    "Timeline": {
+                      "shape_name": "InstanceGroupTimeline",
+                      "type": "structure",
+                      "members": {
+                        "CreationDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The creation date and time of the instance group.</p>\n   "
+                        },
+                        "ReadyDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The date and time when the instance group became ready to perform tasks.</p>\n   "
+                        },
+                        "EndDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The date and time when the instance group terminated.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n      <p>The timeline of the instance group status over time.</p>\n   "
+                    }
+                  },
+                  "documentation": "\n      <p>The current status of the instance group.</p>\n   "
+                }
+              },
+              "documentation": "\n     <p>This entity represents an instance group, which is a group of instances that have common purpose. For example, CORE instance group is used for HDFS.</p>\n   "
+            },
+            "documentation": "\n      <p>The list of instance groups for the cluster and given filters.</p>\n   "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This input determines which instance groups to retrieve.</p>\n   "
+      },
+      "errors": [
+        {
+          "shape_name": "InternalServerException",
+          "type": "structure",
+          "members": {
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is an internal failure in the EMR service.</p>      \n      \n   "
+        },
+        {
+          "shape_name": "InvalidRequestException",
+          "type": "structure",
+          "members": {
+            "ErrorCode": {
+              "shape_name": "ErrorCode",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 256,
+              "documentation": "\n      <p>The error code associated with the exception.</p>      \n      \n   "
+            },
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is something wrong with user input.</p>      \n      \n   "
+        }
+      ],
+      "documentation": "\n      <p>Provides all available details about the instance groups in a cluster.</p>      \n      \n   "
+    },
+    "ListInstances": {
+      "name": "ListInstances",
+      "input": {
+        "shape_name": "ListInstancesInput",
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "shape_name": "ClusterId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 64,
+            "documentation": "\n      <p>The identifier of the cluster for which to list the instances.</p>\n   "
+          },
+          "InstanceGroupId": {
+            "shape_name": "InstanceGroupId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 64,
+            "documentation": "\n      <p>The identifier of the instance group for which to list the instances.</p>\n   "
+          },
+          "InstanceGroupTypes": {
+            "shape_name": "InstanceGroupTypeList",
+            "type": "list",
+            "members": {
+              "shape_name": "InstanceGroupType",
+              "type": "string",
+              "enum": [
+                "MASTER",
+                "CORE",
+                "TASK"
+              ],
+              "documentation": null
+            },
+            "documentation": "\n      <p>The type of instance group for which to list the instances.</p>\n   "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This input determines which instances to list.</p>\n   "
+      },
+      "output": {
+        "shape_name": "ListInstancesOutput",
+        "type": "structure",
+        "members": {
+          "Instances": {
+            "shape_name": "InstanceList",
+            "type": "list",
+            "members": {
+              "shape_name": "Instance",
+              "type": "structure",
+              "members": {
+                "Id": {
+                  "shape_name": "InstanceId",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 64,
+                  "documentation": "\n      <p>The unique identifier for the instance in Amazon EMR.</p>\n   "
+                },
+                "Ec2InstanceId": {
+                  "shape_name": "InstanceId",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 64,
+                  "documentation": "\n      <p>The unique identifier of the instance in Amazon EC2.</p>\n   "
+                },
+                "PublicDnsName": {
+                  "shape_name": "StringMaxLen256",
+                  "type": "string",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The public DNS name of the instance.</p>\n   "
+                },
+                "PublicIpAddress": {
+                  "shape_name": "StringMaxLen256",
+                  "type": "string",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The public IP address of the instance.</p>\n   "
+                },
+                "PrivateDnsName": {
+                  "shape_name": "StringMaxLen256",
+                  "type": "string",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The private DNS name of the instance.</p>\n   "
+                },
+                "PrivateIpAddress": {
+                  "shape_name": "StringMaxLen256",
+                  "type": "string",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The private IP address of the instance.</p>\n   "
+                },
+                "Status": {
+                  "shape_name": "InstanceStatus",
+                  "type": "structure",
+                  "members": {
+                    "State": {
+                      "shape_name": "InstanceState",
+                      "type": "string",
+                      "enum": [
+                        "AWAITING_FULFILLMENT",
+                        "PROVISIONING",
+                        "BOOTSTRAPPING",
+                        "RUNNING",
+                        "TERMINATED"
+                      ],
+                      "documentation": "\n      <p>The current state of the instance.</p>\n   "
+                    },
+                    "StateChangeReason": {
+                      "shape_name": "InstanceStateChangeReason",
+                      "type": "structure",
+                      "members": {
+                        "Code": {
+                          "shape_name": "InstanceStateChangeReasonCode",
+                          "type": "string",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "VALIDATION_ERROR",
+                            "INSTANCE_FAILURE",
+                            "BOOTSTRAP_FAILURE",
+                            "CLUSTER_TERMINATED"
+                          ],
+                          "documentation": "\n      <p>The programmable code for the state change reason.</p>\n   "
+                        },
+                        "Message": {
+                          "shape_name": "String",
+                          "type": "string",
+                          "documentation": "\n      <p>The status change reason description.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n      <p>The details of the status change reason for the instance.</p>\n   "
+                    },
+                    "Timeline": {
+                      "shape_name": "InstanceTimeline",
+                      "type": "structure",
+                      "members": {
+                        "CreationDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The creation date and time of the instance.</p>\n   "
+                        },
+                        "ReadyDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The date and time when the instance was ready to perform tasks.</p>\n   "
+                        },
+                        "EndDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The date and time when the instance was terminated.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n      <p>The timeline of the instance status over time.</p>\n   "
+                    }
+                  },
+                  "documentation": "\n      <p>The current status of the instance.</p>\n   "
+                }
+              },
+              "documentation": "\n      <p>Represents an EC2 instance provisioned as part of cluster.</p>\n   "
+            },
+            "documentation": "\n      <p>The list of instances for the cluster and given filters.</p>\n   "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This output contains the list of instances.</p>\n   "
+      },
+      "errors": [
+        {
+          "shape_name": "InternalServerException",
+          "type": "structure",
+          "members": {
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is an internal failure in the EMR service.</p>      \n      \n   "
+        },
+        {
+          "shape_name": "InvalidRequestException",
+          "type": "structure",
+          "members": {
+            "ErrorCode": {
+              "shape_name": "ErrorCode",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 256,
+              "documentation": "\n      <p>The error code associated with the exception.</p>      \n      \n   "
+            },
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is something wrong with user input.</p>      \n      \n   "
+        }
+      ],
+      "documentation": "\n      <p>Provides information about the cluster instances that Amazon EMR provisions on behalf of a user when it creates the cluster. \n         For example, this operation indicates when the EC2 instances reach the Ready state, when instances become available to Amazon EMR to use for jobs, and the IP addresses for cluster instances, etc.\n      </p>           \n   "
+    },
+    "ListSteps": {
+      "name": "ListSteps",
+      "input": {
+        "shape_name": "ListStepsInput",
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "shape_name": "ClusterId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 64,
+            "documentation": "\n      <p>The identifier of the cluster for which to list the steps.</p>\n   "
+          },
+          "StepStates": {
+            "shape_name": "StepStateList",
+            "type": "list",
+            "members": {
+              "shape_name": "StepState",
+              "type": "string",
+              "enum": [
+                "PENDING",
+                "RUNNING",
+                "COMPLETED",
+                "CANCELLED",
+                "FAILED",
+                "INTERRUPTED"
+              ],
+              "documentation": null
+            },
+            "documentation": "\n      <p>The filter to limit the step list based on certain states.</p>\n   "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This input determines which steps to list.</p>\n   "
+      },
+      "output": {
+        "shape_name": "ListStepsOutput",
+        "type": "structure",
+        "members": {
+          "Steps": {
+            "shape_name": "StepSummaryList",
+            "type": "list",
+            "members": {
+              "shape_name": "StepSummary",
+              "type": "structure",
+              "members": {
+                "Id": {
+                  "shape_name": "StepId",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 64,
+                  "documentation": "\n      <p>The identifier of the cluster step.\n      </p>\n   "
+                },
+                "Name": {
+                  "shape_name": "StringMaxLen256",
+                  "type": "string",
+                  "min_length": 0,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The name of the cluster step.\n      </p>\n   "
+                },
+                "Status": {
+                  "shape_name": "StepStatus",
+                  "type": "structure",
+                  "members": {
+                    "State": {
+                      "shape_name": "StepState",
+                      "type": "string",
+                      "enum": [
+                        "PENDING",
+                        "RUNNING",
+                        "COMPLETED",
+                        "CANCELLED",
+                        "FAILED",
+                        "INTERRUPTED"
+                      ],
+                      "documentation": "\n      <p>The execution state of the cluster step.\n      </p>\n   "
+                    },
+                    "StateChangeReason": {
+                      "shape_name": "StepStateChangeReason",
+                      "type": "structure",
+                      "members": {
+                        "Code": {
+                          "shape_name": "StepStateChangeReasonCode",
+                          "type": "string",
+                          "enum": [
+                            "NONE"
+                          ],
+                          "documentation": "\n      <p>The programmable code for the state change reason.\n      </p>\n   "
+                        },
+                        "Message": {
+                          "shape_name": "String",
+                          "type": "string",
+                          "documentation": "\n      <p>The descriptive message for the state change reason.\n      </p>\n   "
+                        }
+                      },
+                      "documentation": "\n      <p>The reason for the step execution status change.\n      </p>\n   "
+                    },
+                    "Timeline": {
+                      "shape_name": "StepTimeline",
+                      "type": "structure",
+                      "members": {
+                        "CreationDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The date and time when the cluster step was created.\n      </p>\n   "
+                        },
+                        "StartDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The date and time when the cluster step execution started.\n         Due to delays in step status reporting, this can display a time which pre-dates a previous call to DescribeStep that indicated the step was not yet running. \n      </p>\n   "
+                        },
+                        "EndDateTime": {
+                          "shape_name": "Date",
+                          "type": "timestamp",
+                          "documentation": "\n      <p>The date and time when the cluster step execution completed or failed. \n         This can display a time that pre-dates a call to DescribeStep that indicates the step is running, due to delays in step status reporting. \n      </p>\n   "
+                        }
+                      },
+                      "documentation": "\n      <p>The timeline of the cluster step status over time.\n      </p>\n   "
+                    }
+                  },
+                  "documentation": "\n      <p>The current execution status details of the cluster step.\n      </p>\n   "
+                }
+              },
+              "documentation": "\n      <p>The summary of the cluster step.</p>\n   "
+            },
+            "documentation": "\n      <p>The filtered list of steps for the cluster.</p>\n   "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This output contains the list of steps.</p>\n   "
+      },
+      "errors": [
+        {
+          "shape_name": "InternalServerException",
+          "type": "structure",
+          "members": {
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is an internal failure in the EMR service.</p>      \n      \n   "
+        },
+        {
+          "shape_name": "InvalidRequestException",
+          "type": "structure",
+          "members": {
+            "ErrorCode": {
+              "shape_name": "ErrorCode",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 256,
+              "documentation": "\n      <p>The error code associated with the exception.</p>      \n      \n   "
+            },
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is something wrong with user input.</p>      \n      \n   "
+        }
+      ],
+      "documentation": "\n      <p>Provides a list of steps for the cluster. \n      </p>      \n   "
+    },
     "ModifyInstanceGroups": {
       "name": "ModifyInstanceGroups",
       "input": {
@@ -917,8 +2308,19 @@
                 "InstanceCount": {
                   "shape_name": "Integer",
                   "type": "integer",
-                  "documentation": "\n      <p>Target size for the instance group.</p>\n   ",
-                  "required": true
+                  "documentation": "\n      <p>Target size for the instance group.</p>\n   "
+                },
+                "EC2InstanceIdsToTerminate": {
+                  "shape_name": "EC2InstanceIdsToTerminateList",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "InstanceId",
+                    "type": "string",
+                    "min_length": 1,
+                    "max_length": 64,
+                    "documentation": null
+                  },
+                  "documentation": "\n      <p>The EC2 InstanceIds to terminate. For advanced users only. \n         Once you terminate the instances, the instance group will not return to its original requested size.</p>\n   "
                 }
               },
               "documentation": "\n      <p>Modify an instance group size.</p>\n   "
@@ -961,7 +2363,7 @@
             "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "min_length": 0,
             "max_length": 10280,
-            "documentation": "\n      <p>Specifies the location in Amazon S3 to write the log files of the job flow. If a value is\n         not provided, logs are not created.</p>\n   "
+            "documentation": "\n      <p>The location in Amazon S3 to write the log files of the job flow. If a value is\n         not provided, logs are not created.</p>\n   "
           },
           "AdditionalInfo": {
             "shape_name": "XmlString",
@@ -977,7 +2379,7 @@
             "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
             "min_length": 0,
             "max_length": 256,
-            "documentation": "\n      <p>The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid: </p>\n         <ul>\n            <li>\"latest\" (uses the latest AMI)</li>\n            <li>The version number of the AMI to use, for example, \"2.0\"</li>\n         </ul>\n         <p>If this value is not specified, the job flow uses the default of (AMI 1.0, Hadoop 0.18). </p>\n         <p>If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the \n            <a>JobFlowInstancesConfig</a> <code>HadoopVersion</code> parameter\n             to modify the version of Hadoop from the defaults shown above.</p>\n         <p>For details about the AMI versions currently \n         supported by Amazon ElasticMapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the \n         <i>Amazon Elastic MapReduce Developer's Guide.</i>\n         </p>\n   "
+            "documentation": "\n      <p>The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid: </p>\n         <ul>\n            <li>\"latest\" (uses the latest AMI)</li>\n            <li>The version number of the AMI to use, for example, \"2.0\"</li>\n         </ul>\n         \n         <p>If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the \n            <a>JobFlowInstancesConfig</a> <code>HadoopVersion</code> parameter\n             to modify the version of Hadoop from the defaults shown above.</p>\n         <p>For details about the AMI versions currently \n         supported by Amazon Elastic MapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the \n         <i>Amazon Elastic MapReduce Developer's Guide.</i>\n         </p>\n   "
           },
           "Instances": {
             "shape_name": "JobFlowInstancesConfig",
@@ -1073,7 +2475,7 @@
                 "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "min_length": 0,
                 "max_length": 256,
-                "documentation": "\n      <p>Specifies the name of the Amazon EC2 key pair that can be used to ssh to the master node as\n         the user called \"hadoop.\"</p>\n   "
+                "documentation": "\n      <p>The name of the Amazon EC2 key pair that can be used to ssh to the master node as\n         the user called \"hadoop.\"</p>\n   "
               },
               "Placement": {
                 "shape_name": "PlacementType",
@@ -1089,7 +2491,7 @@
                     "required": true
                   }
                 },
-                "documentation": "\n      <p>Specifies the Availability Zone the job flow will run in.</p>\n   "
+                "documentation": "\n      <p>The Availability Zone the job flow will run in.</p>\n   "
               },
               "KeepJobFlowAliveWhenNoSteps": {
                 "shape_name": "Boolean",
@@ -1107,7 +2509,7 @@
                 "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
                 "min_length": 0,
                 "max_length": 256,
-                "documentation": "\n      <p>Specifies the Hadoop version for the job flow. Valid inputs are \"0.18\", \"0.20\", or \"0.20.205\". If you do not set this value, the default of 0.18 is used, \n         unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.</p>\n   "
+                "documentation": "\n      <p>The Hadoop version for the job flow. Valid inputs are \"0.18\", \"0.20\", or \"0.20.205\". If you do not set this value, the default of 0.18 is used, \n         unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.</p>\n   "
               },
               "Ec2SubnetId": {
                 "shape_name": "XmlStringMaxLen256",
@@ -1142,10 +2544,11 @@
                   "type": "string",
                   "enum": [
                     "TERMINATE_JOB_FLOW",
+                    "TERMINATE_CLUSTER",
                     "CANCEL_AND_WAIT",
                     "CONTINUE"
                   ],
-                  "documentation": "\n      <p>Specifies the action to take if the job flow step fails.</p>\n   "
+                  "documentation": "\n      <p>The action to take if the job flow step fails.</p>\n   "
                 },
                 "HadoopJarStep": {
                   "shape_name": "HadoopJarStepConfig",
@@ -1197,7 +2600,7 @@
                       "documentation": "\n      <p>The name of the main class in the specified Java file. If not specified, the JAR file\n         should specify a Main-Class in its manifest file.</p>\n   "
                     },
                     "Args": {
-                      "shape_name": "StringList",
+                      "shape_name": "XmlStringList",
                       "type": "list",
                       "members": {
                         "shape_name": "XmlString",
@@ -1210,7 +2613,7 @@
                       "documentation": "\n      <p>A list of command line arguments passed to the JAR file's main function when executed.</p>\n   "
                     }
                   },
-                  "documentation": "\n      <p>Specifies the JAR file used for the job flow step.</p>\n   ",
+                  "documentation": "\n      <p>The JAR file used for the job flow step.</p>\n   ",
                   "required": true
                 }
               },
@@ -1248,7 +2651,7 @@
                       "required": true
                     },
                     "Args": {
-                      "shape_name": "StringList",
+                      "shape_name": "XmlStringList",
                       "type": "list",
                       "members": {
                         "shape_name": "XmlString",
@@ -1298,7 +2701,7 @@
                   "documentation": "\n      <p>The name of the product configuration.</p>\n   "
                 },
                 "Args": {
-                  "shape_name": "StringList",
+                  "shape_name": "XmlStringList",
                   "type": "list",
                   "members": {
                     "shape_name": "XmlString",
@@ -1364,7 +2767,7 @@
         "type": "structure",
         "members": {
           "JobFlowIds": {
-            "shape_name": "StringList",
+            "shape_name": "XmlStringList",
             "type": "list",
             "members": {
               "shape_name": "XmlString",
@@ -1405,7 +2808,7 @@
         "type": "structure",
         "members": {
           "JobFlowIds": {
-            "shape_name": "StringList",
+            "shape_name": "XmlStringList",
             "type": "list",
             "members": {
               "shape_name": "XmlString",
@@ -1437,7 +2840,7 @@
           "documentation": "\n      <p>Indicates that an error occurred while processing the request and that the request was not\n         completed.</p>\n   "
         }
       ],
-      "documentation": "\n      <p>Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specifed job flows. This action works on running job flows. You can also set the visibility of \n      a job flow when you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers action can  be called only by an IAM user who created the job flow or the AWS account that owns the job flow.</p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.SetVisibleToAllUsers\nContent-Length: 58\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130715T221616Z\nX-Amz-Content-Sha256: 2ff32d11eab2383d764ffcb97571454e798689ecd09a7b1bb2327e22b0b930d4\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130715/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=e1a00b37787d9ccc43c9de32f1f0a73813b0bd6643d4db7762b62a7092d51997\nAccept: */*\n\n{\n    \"JobFlowIds\": [\"j-ZKIY4CKQRX72\"],\n    \"VisibleToAllUsers\": true\n}\n\n</queryrequest>\n         \n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 2be9cde9-ed9c-11e2-82b6-2351cde3f33f\nContent-Type: application/x-amz-json-1.1\nContent-Length: 0\nDate: Mon, 15 Jul 2013 22:16:18 GMT\n\n\n         </queryresponse>\n      </examples>\n   "
+      "documentation": "\n      <p>Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified job flows. This action works on running job flows. You can also set the visibility of \n      a job flow when you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers action can  be called only by an IAM user who created the job flow or the AWS account that owns the job flow.</p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.SetVisibleToAllUsers\nContent-Length: 58\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130715T221616Z\nX-Amz-Content-Sha256: 2ff32d11eab2383d764ffcb97571454e798689ecd09a7b1bb2327e22b0b930d4\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130715/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=e1a00b37787d9ccc43c9de32f1f0a73813b0bd6643d4db7762b62a7092d51997\nAccept: */*\n\n{\n    \"JobFlowIds\": [\"j-ZKIY4CKQRX72\"],\n    \"VisibleToAllUsers\": true\n}\n\n</queryrequest>\n         \n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 2be9cde9-ed9c-11e2-82b6-2351cde3f33f\nContent-Type: application/x-amz-json-1.1\nContent-Length: 0\nDate: Mon, 15 Jul 2013 22:16:18 GMT\n\n\n         </queryresponse>\n      </examples>\n   "
     },
     "TerminateJobFlows": {
       "name": "TerminateJobFlows",
@@ -1446,7 +2849,7 @@
         "type": "structure",
         "members": {
           "JobFlowIds": {
-            "shape_name": "StringList",
+            "shape_name": "XmlStringList",
             "type": "list",
             "members": {
               "shape_name": "XmlString",
