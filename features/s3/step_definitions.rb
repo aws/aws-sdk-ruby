@@ -79,3 +79,16 @@ end
 Then(/^I should have received (\d+) responses$/) do |count|
   expect(@responses.size).to eq(count.to_i)
 end
+
+Given(/^I am using the S3 "(.*?)" endpoint$/) do |endpoint|
+  @s3 = Aws.s3(endpoint: endpoint)
+end
+
+When(/^I create a bucket with a DNS compatible name that contains a dot$/) do
+  @bucket_name = "aws.#{Time.now.to_i}.sdk"
+  @s3.create_bucket(bucket: @bucket_name)
+end
+
+Then(/^I should be able to delete the bucket$/) do
+  @s3.delete_bucket(bucket: @bucket_name)
+end

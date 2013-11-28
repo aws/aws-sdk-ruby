@@ -131,7 +131,7 @@ module Aws
         # in the canonicalized resource prefixed by a forward slash.
         if bucket = params[:bucket]
           ssl = request.endpoint.https?
-          if Plugins::S3BucketDns.dns_compatible?(bucket.name, ssl)
+          if Plugins::S3BucketDns.dns_compatible?(bucket.value, ssl)
             parts << "/#{bucket.value}"
           end
         end
