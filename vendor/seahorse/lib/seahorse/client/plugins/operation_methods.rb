@@ -7,7 +7,7 @@ module Seahorse
       #
       # # Helper Methods
       #
-      # This plugin adds a helper method that lists the availalbe API
+      # This plugin adds a helper method that lists the available API
       # operations.
       #
       #     client.operation_names
