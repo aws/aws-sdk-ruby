@@ -225,6 +225,12 @@ module Seahorse
               expect(resp_body.read).to eq('response-body')
             end
 
+            it 'wraps errors with a Http::Error' do
+              stub_request(:any, endpoint).to_raise(EOFError)
+              resp = make_request
+              expect(resp.error).to be_a(Seahorse::Client::Http::Error)
+            end
+
           end
         end
       end

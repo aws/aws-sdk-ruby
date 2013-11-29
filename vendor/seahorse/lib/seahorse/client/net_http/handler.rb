@@ -6,6 +6,12 @@ module Seahorse
       # the Ruby's `Net::HTTP`.
       class Handler < Client::Handler
 
+        NETWORK_ERRORS = [
+          SocketError, EOFError, IOError, Timeout::Error,
+          Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
+          Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError
+        ]
+
         # Raised when a {Handler} can not construct a `Net::HTTP::Request`
         # from the given http verb.
         class InvalidHttpVerbError < StandardError; end
@@ -13,8 +19,13 @@ module Seahorse
         # @param [RequestContext] context
         # @return [Response]
         def call(context)
-          transmit(context.config, context.http_request, context.http_response)
-          Response.new(context: context)
+          response = Response.new(context: context)
+          begin
+            transmit(context.config, context.http_request, context.http_response)
+          rescue *NETWORK_ERRORS => error
+            response.error = Http::Error.new(error)
+          end
+          response
         end
 
         # @param [Configuration] config

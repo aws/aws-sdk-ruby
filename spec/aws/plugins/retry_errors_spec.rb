@@ -145,6 +145,12 @@ module Aws
             expect(inspector(error, 307).networking?).to be(false)
           end
 
+          it 'returns true if the error is wrapped in a Http::Error' do
+            error = StandardError.new('oops')
+            error = Seahorse::Client::Http::Error.new(error)
+            expect(inspector(error, 200).networking?).to be(true)
+          end
+
         end
       end
 
@@ -243,6 +249,13 @@ module Aws
         it 'retries 500 level errors' do
           resp.context.http_response.status_code = 500
           resp.error = RuntimeError.new('random-runtime-error')
+          handle { |context| resp }
+          expect(resp.context.retries).to eq(3)
+        end
+
+        it 'retries Seahorse::Client::Http::Errors' do
+          error = RuntimeError.new('random-runtime-error')
+          resp.error = Seahorse::Client::Http::Error.new(error)
           handle { |context| resp }
           expect(resp.context.retries).to eq(3)
         end

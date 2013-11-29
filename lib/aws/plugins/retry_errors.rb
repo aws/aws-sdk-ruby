@@ -61,7 +61,9 @@ module Aws
         end
 
         def networking?
-          NETWORKING_ERRORS.include?(@name) || @http_status_code == 0
+          @error.is_a?(Seahorse::Client::Http::Error) ||
+          NETWORKING_ERRORS.include?(@name) ||
+          @http_status_code == 0
         end
 
         def server?
