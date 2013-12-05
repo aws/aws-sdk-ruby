@@ -274,7 +274,7 @@ module AWS
             network_interface[:private_ip_address] = private_ip_address
           end
           if security_group_ids = options.delete(:security_group_ids)
-            network_interface[:groups] = security_group_ids
+            network_interface[:groups] = Array(security_group_ids)
           end
           network_interface[:associate_public_ip_address] = true
           network_interface[:device_index] = 0
