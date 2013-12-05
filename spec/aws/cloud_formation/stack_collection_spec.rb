@@ -294,11 +294,11 @@ module AWS
       it_behaves_like "a pageable collection" do
 
         let(:collection)      { stacks }
-        let(:client_method)   { :list_stacks }
+        let(:client_method)   { :describe_stacks }
         let(:request_options) {{}}
 
         def stub_n_members response, n
-          response.data[:stack_summaries] = (1..n).map{|i|
+          response.data[:stacks] = (1..n).map{|i|
             { :stack_name => "stack-#{i}" }
           }
         end
