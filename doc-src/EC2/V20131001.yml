@@ -642,12 +642,11 @@
   - (String)\n    * `:group` - (String)\n  * `:product_codes` - (Array<Hash>)\n    *
   `:product_code` - (String)\n    * `:type` - (String)\n  * `:kernel` - (Hash)\n    *
   `:value` - (String)\n  * `:ramdisk` - (Hash)\n    * `:value` - (String)\n  * `:description`
-  - (Hash)\n    * `:value` - (String)\n  * `:sriov_net_support` - (Hash)\n    * `:value`
-  - (String)\n  * `:block_device_mapping` - (Array<Hash>)\n    * `:virtual_name` -
-  (String)\n    * `:device_name` - (String)\n    * `:ebs` - (Hash)\n      * `:snapshot_id`
-  - (String)\n      * `:volume_size` - (Integer)\n      * `:delete_on_termination`
-  - (Boolean)\n      * `:volume_type` - (String)\n      * `:iops` - (Integer)\n    *
-  `:no_device` - (String)"
+  - (Hash)\n    * `:value` - (String)\n  * `:block_device_mapping` - (Array<Hash>)\n
+  \   * `:virtual_name` - (String)\n    * `:device_name` - (String)\n    * `:ebs`
+  - (Hash)\n      * `:snapshot_id` - (String)\n      * `:volume_size` - (Integer)\n
+  \     * `:delete_on_termination` - (Boolean)\n      * `:volume_type` - (String)\n
+  \     * `:iops` - (Integer)\n    * `:no_device` - (String)"
 :describe_images: "Calls the DescribeImages API operation.\n@param [Hash] options\n
   \ * `:dry_run` - (Boolean) \n  * `:image_ids` - (Array&lt;<String>) An optional
   list of the AMI IDs to describe. If not specified, all AMIs will be described.\n
@@ -671,16 +670,16 @@
   - (Boolean)\n    * `:product_codes` - (Array<Hash>)\n      * `:product_code` - (String)\n
   \     * `:type` - (String)\n    * `:architecture` - (String)\n    * `:image_type`
   - (String)\n    * `:kernel_id` - (String)\n    * `:ramdisk_id` - (String)\n    *
-  `:platform` - (String)\n    * `:sriov_net_support` - (String)\n    * `:state_reason`
-  - (Hash)\n      * `:code` - (String)\n      * `:message` - (String)\n    * `:image_owner_alias`
-  - (String)\n    * `:name` - (String)\n    * `:description` - (String)\n    * `:root_device_type`
-  - (String)\n    * `:root_device_name` - (String)\n    * `:block_device_mapping`
-  - (Array<Hash>)\n      * `:virtual_name` - (String)\n      * `:device_name` - (String)\n
-  \     * `:ebs` - (Hash)\n        * `:snapshot_id` - (String)\n        * `:volume_size`
-  - (Integer)\n        * `:delete_on_termination` - (Boolean)\n        * `:volume_type`
-  - (String)\n        * `:iops` - (Integer)\n      * `:no_device` - (String)\n    *
-  `:virtualization_type` - (String)\n    * `:tag_set` - (Array<Hash>)\n      * `:key`
-  - (String)\n      * `:value` - (String)\n    * `:hypervisor` - (String)"
+  `:platform` - (String)\n    * `:state_reason` - (Hash)\n      * `:code` - (String)\n
+  \     * `:message` - (String)\n    * `:image_owner_alias` - (String)\n    * `:name`
+  - (String)\n    * `:description` - (String)\n    * `:root_device_type` - (String)\n
+  \   * `:root_device_name` - (String)\n    * `:block_device_mapping` - (Array<Hash>)\n
+  \     * `:virtual_name` - (String)\n      * `:device_name` - (String)\n      * `:ebs`
+  - (Hash)\n        * `:snapshot_id` - (String)\n        * `:volume_size` - (Integer)\n
+  \       * `:delete_on_termination` - (Boolean)\n        * `:volume_type` - (String)\n
+  \       * `:iops` - (Integer)\n      * `:no_device` - (String)\n    * `:virtualization_type`
+  - (String)\n    * `:tag_set` - (Array<Hash>)\n      * `:key` - (String)\n      *
+  `:value` - (String)\n    * `:hypervisor` - (String)"
 :describe_instance_attribute: "Calls the DescribeInstanceAttribute API operation.\n@param
   [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:instance_id` - *required* - (String)
   The ID of the instance whose instance attribute is being described.\n  * `:attribute`
@@ -701,8 +700,7 @@
   `:volume_id` - (String)\n      * `:status` - (String)\n      * `:attach_time` -
   (Time)\n      * `:delete_on_termination` - (Boolean)\n  * `:product_codes` - (Array<Hash>)\n
   \   * `:product_code` - (String)\n    * `:type` - (String)\n  * `:ebs_optimized`
-  - (Hash)\n    * `:value` - (Boolean)\n  * `:sriov_net_support` - (Hash)\n    * `:value`
-  - (String)"
+  - (Hash)\n    * `:value` - (Boolean)"
 :describe_instance_status: "Calls the DescribeInstanceStatus API operation.\n@param
   [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:instance_ids` - (Array&lt;<String>)
   The list of instance IDs. If not specified, all instances are described.\n  * `:filters`
@@ -728,52 +726,51 @@
   filters used to match properties for Instances. For a complete reference to the
   available filter keys for this operation, see the Amazon EC2 API reference.\n    *
   `:name` - (String) Specifies the name of the filter.\n    * `:values` - (Array&lt;<String>)
-  Contains one or more values for the filter.\n  * `:next_token` - (String) \n  *
-  `:max_results` - (Integer) \n@return [Core::Response] The `#data` method of the
-  response object returns a hash with the following structure:\n\n  * `:reservation_set`
-  - (Array<Hash>)\n    * `:reservation_id` - (String)\n    * `:owner_id` - (String)\n
-  \   * `:requester_id` - (String)\n    * `:group_set` - (Array<Hash>)\n      * `:group_name`
-  - (String)\n      * `:group_id` - (String)\n    * `:instances_set` - (Array<Hash>)\n
-  \     * `:instance_id` - (String)\n      * `:image_id` - (String)\n      * `:instance_state`
-  - (Hash)\n        * `:code` - (Integer)\n        * `:name` - (String)\n      * `:private_dns_name`
-  - (String)\n      * `:dns_name` - (String)\n      * `:reason` - (String)\n      *
-  `:key_name` - (String)\n      * `:ami_launch_index` - (Integer)\n      * `:product_codes`
-  - (Array<Hash>)\n        * `:product_code` - (String)\n        * `:type` - (String)\n
-  \     * `:instance_type` - (String)\n      * `:launch_time` - (Time)\n      * `:placement`
-  - (Hash)\n        * `:availability_zone` - (String)\n        * `:group_name` - (String)\n
-  \       * `:tenancy` - (String)\n      * `:kernel_id` - (String)\n      * `:ramdisk_id`
-  - (String)\n      * `:platform` - (String)\n      * `:monitoring` - (Hash)\n        *
-  `:state` - (String)\n      * `:subnet_id` - (String)\n      * `:vpc_id` - (String)\n
-  \     * `:private_ip_address` - (String)\n      * `:ip_address` - (String)\n      *
-  `:state_reason` - (Hash)\n        * `:code` - (String)\n        * `:message` - (String)\n
-  \     * `:architecture` - (String)\n      * `:root_device_type` - (String)\n      *
-  `:root_device_name` - (String)\n      * `:block_device_mapping` - (Array<Hash>)\n
-  \       * `:device_name` - (String)\n        * `:ebs` - (Hash)\n          * `:volume_id`
-  - (String)\n          * `:status` - (String)\n          * `:attach_time` - (Time)\n
-  \         * `:delete_on_termination` - (Boolean)\n      * `:virtualization_type`
-  - (String)\n      * `:instance_lifecycle` - (String)\n      * `:spot_instance_request_id`
-  - (String)\n      * `:license` - (Hash)\n        * `:pool` - (String)\n      * `:client_token`
-  - (String)\n      * `:tag_set` - (Array<Hash>)\n        * `:key` - (String)\n        *
-  `:value` - (String)\n      * `:group_set` - (Array<Hash>)\n        * `:group_name`
-  - (String)\n        * `:group_id` - (String)\n      * `:source_dest_check` - (Boolean)\n
-  \     * `:hypervisor` - (String)\n      * `:network_interface_set` - (Array<Hash>)\n
-  \       * `:network_interface_id` - (String)\n        * `:subnet_id` - (String)\n
-  \       * `:vpc_id` - (String)\n        * `:description` - (String)\n        * `:owner_id`
-  - (String)\n        * `:status` - (String)\n        * `:private_ip_address` - (String)\n
-  \       * `:private_dns_name` - (String)\n        * `:source_dest_check` - (Boolean)\n
-  \       * `:group_set` - (Array<Hash>)\n          * `:group_name` - (String)\n          *
-  `:group_id` - (String)\n        * `:attachment` - (Hash)\n          * `:attachment_id`
-  - (String)\n          * `:device_index` - (Integer)\n          * `:status` - (String)\n
-  \         * `:attach_time` - (Time)\n          * `:delete_on_termination` - (Boolean)\n
-  \       * `:association` - (Hash)\n          * `:public_ip` - (String)\n          *
-  `:public_dns_name` - (String)\n          * `:ip_owner_id` - (String)\n        *
-  `:private_ip_addresses_set` - (Array<Hash>)\n          * `:private_ip_address` -
-  (String)\n          * `:private_dns_name` - (String)\n          * `:primary` - (Boolean)\n
-  \         * `:association` - (Hash)\n            * `:public_ip` - (String)\n            *
-  `:public_dns_name` - (String)\n            * `:ip_owner_id` - (String)\n      *
-  `:iam_instance_profile` - (Hash)\n        * `:arn` - (String)\n        * `:id` -
-  (String)\n      * `:ebs_optimized` - (Boolean)\n      * `:sriov_net_support` - (String)\n
-  \ * `:next_token` - (String)"
+  Contains one or more values for the filter.\n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:reservation_set` - (Array<Hash>)\n    * `:reservation_id` - (String)\n    * `:owner_id`
+  - (String)\n    * `:requester_id` - (String)\n    * `:group_set` - (Array<Hash>)\n
+  \     * `:group_name` - (String)\n      * `:group_id` - (String)\n    * `:instances_set`
+  - (Array<Hash>)\n      * `:instance_id` - (String)\n      * `:image_id` - (String)\n
+  \     * `:instance_state` - (Hash)\n        * `:code` - (Integer)\n        * `:name`
+  - (String)\n      * `:private_dns_name` - (String)\n      * `:dns_name` - (String)\n
+  \     * `:reason` - (String)\n      * `:key_name` - (String)\n      * `:ami_launch_index`
+  - (Integer)\n      * `:product_codes` - (Array<Hash>)\n        * `:product_code`
+  - (String)\n        * `:type` - (String)\n      * `:instance_type` - (String)\n
+  \     * `:launch_time` - (Time)\n      * `:placement` - (Hash)\n        * `:availability_zone`
+  - (String)\n        * `:group_name` - (String)\n        * `:tenancy` - (String)\n
+  \     * `:kernel_id` - (String)\n      * `:ramdisk_id` - (String)\n      * `:platform`
+  - (String)\n      * `:monitoring` - (Hash)\n        * `:state` - (String)\n      *
+  `:subnet_id` - (String)\n      * `:vpc_id` - (String)\n      * `:private_ip_address`
+  - (String)\n      * `:ip_address` - (String)\n      * `:state_reason` - (Hash)\n
+  \       * `:code` - (String)\n        * `:message` - (String)\n      * `:architecture`
+  - (String)\n      * `:root_device_type` - (String)\n      * `:root_device_name`
+  - (String)\n      * `:block_device_mapping` - (Array<Hash>)\n        * `:device_name`
+  - (String)\n        * `:ebs` - (Hash)\n          * `:volume_id` - (String)\n          *
+  `:status` - (String)\n          * `:attach_time` - (Time)\n          * `:delete_on_termination`
+  - (Boolean)\n      * `:virtualization_type` - (String)\n      * `:instance_lifecycle`
+  - (String)\n      * `:spot_instance_request_id` - (String)\n      * `:license` -
+  (Hash)\n        * `:pool` - (String)\n      * `:client_token` - (String)\n      *
+  `:tag_set` - (Array<Hash>)\n        * `:key` - (String)\n        * `:value` - (String)\n
+  \     * `:group_set` - (Array<Hash>)\n        * `:group_name` - (String)\n        *
+  `:group_id` - (String)\n      * `:source_dest_check` - (Boolean)\n      * `:hypervisor`
+  - (String)\n      * `:network_interface_set` - (Array<Hash>)\n        * `:network_interface_id`
+  - (String)\n        * `:subnet_id` - (String)\n        * `:vpc_id` - (String)\n
+  \       * `:description` - (String)\n        * `:owner_id` - (String)\n        *
+  `:status` - (String)\n        * `:private_ip_address` - (String)\n        * `:private_dns_name`
+  - (String)\n        * `:source_dest_check` - (Boolean)\n        * `:group_set` -
+  (Array<Hash>)\n          * `:group_name` - (String)\n          * `:group_id` - (String)\n
+  \       * `:attachment` - (Hash)\n          * `:attachment_id` - (String)\n          *
+  `:device_index` - (Integer)\n          * `:status` - (String)\n          * `:attach_time`
+  - (Time)\n          * `:delete_on_termination` - (Boolean)\n        * `:association`
+  - (Hash)\n          * `:public_ip` - (String)\n          * `:public_dns_name` -
+  (String)\n          * `:ip_owner_id` - (String)\n        * `:private_ip_addresses_set`
+  - (Array<Hash>)\n          * `:private_ip_address` - (String)\n          * `:private_dns_name`
+  - (String)\n          * `:primary` - (Boolean)\n          * `:association` - (Hash)\n
+  \           * `:public_ip` - (String)\n            * `:public_dns_name` - (String)\n
+  \           * `:ip_owner_id` - (String)\n      * `:iam_instance_profile` - (Hash)\n
+  \       * `:arn` - (String)\n        * `:id` - (String)\n      * `:ebs_optimized`
+  - (Boolean)"
 :describe_internet_gateways: "Calls the DescribeInternetGateways API operation.\n@param
   [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:internet_gateway_ids` - (Array&lt;<String>)
   One or more Internet gateway IDs.\n  * `:filters` - (Array&lt;<Hash>) A list of
@@ -949,39 +946,38 @@
   - (Array&lt;<String>) An optional list of the unique IDs of the Reserved Instance
   offerings to describe.\n  * `:instance_type` - (String) The instance type on which
   the Reserved Instance can be used.  Valid values include:\n    * `t1.micro`\n    *
-  `m1.small`\n    * `m1.medium`\n    * `m1.large`\n    * `m1.xlarge`\n    * `m3.xlarge`\n
-  \   * `m3.2xlarge`\n    * `m2.xlarge`\n    * `m2.2xlarge`\n    * `m2.4xlarge`\n
-  \   * `cr1.8xlarge`\n    * `hi1.4xlarge`\n    * `hs1.8xlarge`\n    * `c1.medium`\n
-  \   * `c1.xlarge`\n    * `c3.large`\n    * `c3.xlarge`\n    * `c3.2xlarge`\n    *
-  `c3.4xlarge`\n    * `c3.8xlarge`\n    * `cc1.4xlarge`\n    * `cc2.8xlarge`\n    *
-  `g2.2xlarge`\n    * `cg1.4xlarge`\n  * `:availability_zone` - (String) The Availability
-  Zone in which the Reserved Instance can be used.\n  * `:product_description` - (String)
-  The Reserved Instance product description.  Valid values include:\n    * `Linux/UNIX`\n
-  \   * `Linux/UNIX (Amazon VPC)`\n    * `Windows`\n    * `Windows (Amazon VPC)`\n
-  \ * `:filters` - (Array&lt;<Hash>) A list of filters used to match properties for
-  ReservedInstancesOfferings. For a complete reference to the available filter keys
-  for this operation, see the Amazon EC2 API reference.\n    * `:name` - (String)
-  Specifies the name of the filter.\n    * `:values` - (Array&lt;<String>) Contains
-  one or more values for the filter.\n  * `:instance_tenancy` - (String) The tenancy
-  of the Reserved Instance offering. A Reserved Instance with tenancy of dedicated
-  will run on single-tenant hardware and can only be launched within a VPC.  Valid
-  values include:\n    * `default`\n    * `dedicated`\n  * `:offering_type` - (String)
-  The Reserved Instance offering type.  Valid values include:\n    * `Heavy Utilization`\n
-  \   * `Medium Utilization`\n    * `Light Utilization`\n  * `:next_token` - (String)
-  \n  * `:max_results` - (Integer) \n  * `:include_marketplace` - (Boolean) Include
-  Marketplace offerings in the response.\n  * `:min_duration` - (Integer) Minimum
-  duration (in seconds) to filter when searching for offerings.\n  * `:max_duration`
-  - (Integer) Maximum duration (in seconds) to filter when searching for offerings.\n
-  \ * `:max_instance_count` - (Integer) \n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:reserved_instances_offerings_set`
-  - (Array<Hash>)\n    * `:reserved_instances_offering_id` - (String)\n    * `:instance_type`
-  - (String)\n    * `:availability_zone` - (String)\n    * `:duration` - (Integer)\n
-  \   * `:usage_price` - (Numeric)\n    * `:fixed_price` - (Numeric)\n    * `:product_description`
-  - (String)\n    * `:instance_tenancy` - (String)\n    * `:currency_code` - (String)\n
-  \   * `:offering_type` - (String)\n    * `:recurring_charges` - (Array<Hash>)\n
-  \     * `:frequency` - (String)\n      * `:amount` - (Numeric)\n    * `:marketplace`
-  - (Boolean)\n    * `:pricing_details_set` - (Array<Hash>)\n      * `:price` - (Numeric)\n
-  \     * `:count` - (Integer)\n  * `:next_token` - (String)"
+  `m1.small`\n    * `m1.medium`\n    * `m1.large`\n    * `m1.xlarge`\n    * `m2.xlarge`\n
+  \   * `m2.2xlarge`\n    * `m2.4xlarge`\n    * `m3.xlarge`\n    * `m3.2xlarge`\n
+  \   * `c1.medium`\n    * `c1.xlarge`\n    * `hi1.4xlarge`\n    * `hs1.8xlarge`\n
+  \   * `cc1.4xlarge`\n    * `cc2.8xlarge`\n    * `cg1.4xlarge`\n    * `cr1.8xlarge`\n
+  \ * `:availability_zone` - (String) The Availability Zone in which the Reserved
+  Instance can be used.\n  * `:product_description` - (String) The Reserved Instance
+  product description.  Valid values include:\n    * `Linux/UNIX`\n    * `Linux/UNIX
+  (Amazon VPC)`\n    * `Windows`\n    * `Windows (Amazon VPC)`\n  * `:filters` - (Array&lt;<Hash>)
+  A list of filters used to match properties for ReservedInstancesOfferings. For a
+  complete reference to the available filter keys for this operation, see the Amazon
+  EC2 API reference.\n    * `:name` - (String) Specifies the name of the filter.\n
+  \   * `:values` - (Array&lt;<String>) Contains one or more values for the filter.\n
+  \ * `:instance_tenancy` - (String) The tenancy of the Reserved Instance offering.
+  A Reserved Instance with tenancy of dedicated will run on single-tenant hardware
+  and can only be launched within a VPC.  Valid values include:\n    * `default`\n
+  \   * `dedicated`\n  * `:offering_type` - (String) The Reserved Instance offering
+  type.  Valid values include:\n    * `Heavy Utilization`\n    * `Medium Utilization`\n
+  \   * `Light Utilization`\n  * `:next_token` - (String) \n  * `:max_results` - (Integer)
+  \n  * `:include_marketplace` - (Boolean) Include Marketplace offerings in the response.\n
+  \ * `:min_duration` - (Integer) Minimum duration (in seconds) to filter when searching
+  for offerings.\n  * `:max_duration` - (Integer) Maximum duration (in seconds) to
+  filter when searching for offerings.\n  * `:max_instance_count` - (Integer) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:reserved_instances_offerings_set` - (Array<Hash>)\n
+  \   * `:reserved_instances_offering_id` - (String)\n    * `:instance_type` - (String)\n
+  \   * `:availability_zone` - (String)\n    * `:duration` - (Integer)\n    * `:usage_price`
+  - (Numeric)\n    * `:fixed_price` - (Numeric)\n    * `:product_description` - (String)\n
+  \   * `:instance_tenancy` - (String)\n    * `:currency_code` - (String)\n    * `:offering_type`
+  - (String)\n    * `:recurring_charges` - (Array<Hash>)\n      * `:frequency` - (String)\n
+  \     * `:amount` - (Numeric)\n    * `:marketplace` - (Boolean)\n    * `:pricing_details_set`
+  - (Array<Hash>)\n      * `:price` - (Numeric)\n      * `:count` - (Integer)\n  *
+  `:next_token` - (String)"
 :describe_route_tables: "Calls the DescribeRouteTables API operation.\n@param [Hash]
   options\n  * `:dry_run` - (Boolean) \n  * `:route_table_ids` - (Array&lt;<String>)
   One or more route table IDs.\n  * `:filters` - (Array&lt;<Hash>) A list of filters
@@ -1127,11 +1123,10 @@
   `:dry_run` - (Boolean) \n  * `:filters` - (Array&lt;<Hash>) A list of filters used
   to match properties for tags.\n    * `:name` - (String) Specifies the name of the
   filter.\n    * `:values` - (Array&lt;<String>) Contains one or more values for the
-  filter.\n  * `:max_results` - (Integer) \n  * `:next_token` - (String) \n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:tag_set` - (Array<Hash>)\n    * `:resource_id` - (String)\n
-  \   * `:resource_type` - (String)\n    * `:key` - (String)\n    * `:value` - (String)\n
-  \ * `:next_token` - (String)"
+  filter.\n@return [Core::Response] The `#data` method of the response object returns
+  a hash with the following structure:\n\n  * `:tag_set` - (Array<Hash>)\n    * `:resource_id`
+  - (String)\n    * `:resource_type` - (String)\n    * `:key` - (String)\n    * `:value`
+  - (String)"
 :describe_volume_attribute: "Calls the DescribeVolumeAttribute API operation.\n@param
   [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:volume_id` - *required* - (String)
   \n  * `:attribute` - (String) Valid values include:\n    * `autoEnableIO`\n    *
@@ -1282,39 +1277,37 @@
   \     * `x86_64`\n    * `:group_names` - (Array&lt;<String>) \n    * `:additional_info`
   - (String) \n    * `:user_data` - (String) \n    * `:instance_type` - (String) Valid
   values include:\n      * `t1.micro`\n      * `m1.small`\n      * `m1.medium`\n      *
-  `m1.large`\n      * `m1.xlarge`\n      * `m3.xlarge`\n      * `m3.2xlarge`\n      *
-  `m2.xlarge`\n      * `m2.2xlarge`\n      * `m2.4xlarge`\n      * `cr1.8xlarge`\n
-  \     * `hi1.4xlarge`\n      * `hs1.8xlarge`\n      * `c1.medium`\n      * `c1.xlarge`\n
-  \     * `c3.large`\n      * `c3.xlarge`\n      * `c3.2xlarge`\n      * `c3.4xlarge`\n
-  \     * `c3.8xlarge`\n      * `cc1.4xlarge`\n      * `cc2.8xlarge`\n      * `g2.2xlarge`\n
-  \     * `cg1.4xlarge`\n    * `:placement` - (Hash) \n      * `:availability_zone`
-  - (String) The availability zone in which an Amazon EC2 instance runs.\n      *
-  `:group_name` - (String) The name of the PlacementGroup in which an Amazon EC2 instance
-  runs. Placement groups are primarily used for launching High Performance Computing
-  instances in the same group to ensure fast connection speeds.\n      * `:tenancy`
-  - (String) The allowed tenancy of instances launched into the VPC. A value of default
-  means instances can be launched with any tenancy; a value of dedicated means all
-  instances launched into the VPC will be launched as dedicated tenancy regardless
-  of the tenancy assigned to the instance at launch.  Valid values include:\n        *
-  `default`\n        * `dedicated`\n    * `:monitoring` - (Boolean) \n    * `:subnet_id`
-  - (String) \n    * `:instance_initiated_shutdown_behavior` - (String) Valid values
-  include:\n      * `stop`\n      * `terminate`\n    * `:private_ip_address` - (String)
-  \n  * `:disk_images` - (Array&lt;<Hash>) \n    * `:image` - (Hash) \n      * `:format`
-  - *required* - (String) Valid values include:\n        * `VMDK`\n        * `RAW`\n
-  \       * `VHD`\n      * `:bytes` - *required* - (Integer) \n      * `:import_manifest_url`
-  - *required* - (String) \n    * `:description` - (String) \n    * `:volume` - (Hash)
-  \n      * `:size` - *required* - (Integer) \n  * `:platform` - *required* - (String)
-  Valid values include:\n    * `Windows`\n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:conversion_task`
-  - (Hash)\n    * `:conversion_task_id` - (String)\n    * `:expiration_time` - (String)\n
-  \   * `:import_instance` - (Hash)\n      * `:volumes` - (Array<Hash>)\n        *
-  `:bytes_converted` - (Integer)\n        * `:availability_zone` - (String)\n        *
-  `:image` - (Hash)\n          * `:format` - (String)\n          * `:size` - (Integer)\n
-  \         * `:import_manifest_url` - (String)\n          * `:checksum` - (String)\n
-  \       * `:volume` - (Hash)\n          * `:size` - (Integer)\n          * `:id`
-  - (String)\n        * `:status` - (String)\n        * `:status_message` - (String)\n
-  \       * `:description` - (String)\n      * `:instance_id` - (String)\n      *
-  `:platform` - (String)\n      * `:description` - (String)\n    * `:import_volume`
+  `m1.large`\n      * `m1.xlarge`\n      * `m2.xlarge`\n      * `m2.2xlarge`\n      *
+  `m2.4xlarge`\n      * `m3.xlarge`\n      * `m3.2xlarge`\n      * `c1.medium`\n      *
+  `c1.xlarge`\n      * `hi1.4xlarge`\n      * `hs1.8xlarge`\n      * `cc1.4xlarge`\n
+  \     * `cc2.8xlarge`\n      * `cg1.4xlarge`\n      * `cr1.8xlarge`\n    * `:placement`
+  - (Hash) \n      * `:availability_zone` - (String) The availability zone in which
+  an Amazon EC2 instance runs.\n      * `:group_name` - (String) The name of the PlacementGroup
+  in which an Amazon EC2 instance runs. Placement groups are primarily used for launching
+  High Performance Computing instances in the same group to ensure fast connection
+  speeds.\n      * `:tenancy` - (String) The allowed tenancy of instances launched
+  into the VPC. A value of default means instances can be launched with any tenancy;
+  a value of dedicated means all instances launched into the VPC will be launched
+  as dedicated tenancy regardless of the tenancy assigned to the instance at launch.
+  \ Valid values include:\n        * `default`\n        * `dedicated`\n    * `:monitoring`
+  - (Boolean) \n    * `:subnet_id` - (String) \n    * `:instance_initiated_shutdown_behavior`
+  - (String) Valid values include:\n      * `stop`\n      * `terminate`\n    * `:private_ip_address`
+  - (String) \n  * `:disk_images` - (Array&lt;<Hash>) \n    * `:image` - (Hash) \n
+  \     * `:format` - *required* - (String) Valid values include:\n        * `VMDK`\n
+  \       * `RAW`\n        * `VHD`\n      * `:bytes` - *required* - (Integer) \n      *
+  `:import_manifest_url` - *required* - (String) \n    * `:description` - (String)
+  \n    * `:volume` - (Hash) \n      * `:size` - *required* - (Integer) \n  * `:platform`
+  - *required* - (String) Valid values include:\n    * `Windows`\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:conversion_task` - (Hash)\n    * `:conversion_task_id` - (String)\n    * `:expiration_time`
+  - (String)\n    * `:import_instance` - (Hash)\n      * `:volumes` - (Array<Hash>)\n
+  \       * `:bytes_converted` - (Integer)\n        * `:availability_zone` - (String)\n
+  \       * `:image` - (Hash)\n          * `:format` - (String)\n          * `:size`
+  - (Integer)\n          * `:import_manifest_url` - (String)\n          * `:checksum`
+  - (String)\n        * `:volume` - (Hash)\n          * `:size` - (Integer)\n          *
+  `:id` - (String)\n        * `:status` - (String)\n        * `:status_message` -
+  (String)\n        * `:description` - (String)\n      * `:instance_id` - (String)\n
+  \     * `:platform` - (String)\n      * `:description` - (String)\n    * `:import_volume`
   - (Hash)\n      * `:bytes_converted` - (Integer)\n      * `:availability_zone` -
   (String)\n      * `:description` - (String)\n      * `:image` - (Hash)\n        *
   `:format` - (String)\n        * `:size` - (Integer)\n        * `:import_manifest_url`
@@ -1403,8 +1396,7 @@
   value\n  * `:ramdisk` - (Hash) \n    * `:value` - (String) String value\n  * `:user_data`
   - (Hash) \n    * `:value` - (String) String value\n  * `:instance_initiated_shutdown_behavior`
   - (Hash) \n    * `:value` - (String) String value\n  * `:groups` - (Array&lt;<String>)
-  \n  * `:ebs_optimized` - (Hash) \n    * `:value` - (Boolean) Boolean value\n  *
-  `:sriov_net_support` - (Hash) \n    * `:value` - (String) String value\n@return
+  \n  * `:ebs_optimized` - (Hash) \n    * `:value` - (Boolean) Boolean value\n@return
   [Core::Response]"
 :modify_network_interface_attribute: "Calls the ModifyNetworkInterfaceAttribute API
   operation.\n@param [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:network_interface_id`
@@ -1428,25 +1420,19 @@
         * `m1.medium`
         * `m1.large`
         * `m1.xlarge`
-        * `m3.xlarge`
-        * `m3.2xlarge`
         * `m2.xlarge`
         * `m2.2xlarge`
         * `m2.4xlarge`
-        * `cr1.8xlarge`
-        * `hi1.4xlarge`
-        * `hs1.8xlarge`
+        * `m3.xlarge`
+        * `m3.2xlarge`
         * `c1.medium`
         * `c1.xlarge`
-        * `c3.large`
-        * `c3.xlarge`
-        * `c3.2xlarge`
-        * `c3.4xlarge`
-        * `c3.8xlarge`
+        * `hi1.4xlarge`
+        * `hs1.8xlarge`
         * `cc1.4xlarge`
         * `cc2.8xlarge`
-        * `g2.2xlarge`
         * `cg1.4xlarge`
+        * `cr1.8xlarge`
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:reserved_instances_modification_id` - (String)
@@ -1519,10 +1505,9 @@
   Specifies whether the Amazon EBS volume is deleted on instance termination.\n      *
   `:volume_type` - (String) Valid values include:\n        * `standard`\n        *
   `io1`\n      * `:iops` - (Integer) \n    * `:no_device` - (String) Specifies the
-  device name to suppress during instance launch.\n  * `:virtualization_type` - (String)
-  \n  * `:sriov_net_support` - (String) \n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:image_id`
-  - (String)"
+  device name to suppress during instance launch.\n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:image_id` - (String)"
 :release_address: "Calls the ReleaseAddress API operation.\n@param [Hash] options\n
   \ * `:dry_run` - (Boolean) \n  * `:public_ip` - (String) The elastic IP address
   that you are releasing from your account.\n  * `:allocation_id` - (String) The allocation
@@ -1600,59 +1585,57 @@
   is never returned through API responses.\n    * `:addressing_type` - (String) Deprecated.\n
   \   * `:instance_type` - (String) Specifies the instance type.  Valid values include:\n
   \     * `t1.micro`\n      * `m1.small`\n      * `m1.medium`\n      * `m1.large`\n
-  \     * `m1.xlarge`\n      * `m3.xlarge`\n      * `m3.2xlarge`\n      * `m2.xlarge`\n
-  \     * `m2.2xlarge`\n      * `m2.4xlarge`\n      * `cr1.8xlarge`\n      * `hi1.4xlarge`\n
-  \     * `hs1.8xlarge`\n      * `c1.medium`\n      * `c1.xlarge`\n      * `c3.large`\n
-  \     * `c3.xlarge`\n      * `c3.2xlarge`\n      * `c3.4xlarge`\n      * `c3.8xlarge`\n
-  \     * `cc1.4xlarge`\n      * `cc2.8xlarge`\n      * `g2.2xlarge`\n      * `cg1.4xlarge`\n
-  \   * `:placement` - (Hash) Defines a placement item.\n      * `:availability_zone`
-  - (String) The availability zone in which an Amazon EC2 instance runs.\n      *
-  `:group_name` - (String) The name of the PlacementGroup in which an Amazon EC2 instance
-  runs. Placement groups are primarily used for launching High Performance Computing
-  instances in the same group to ensure fast connection speeds.\n    * `:kernel_id`
-  - (String) Specifies the ID of the kernel to select.\n    * `:ramdisk_id` - (String)
-  Specifies the ID of the RAM disk to select. Some kernels require additional drivers
-  at launch. Check the kernel requirements for information on whether or not you need
-  to specify a RAM disk and search for the kernel ID.\n    * `:block_device_mappings`
-  - (Array&lt;<Hash>) Specifies how block devices are exposed to the instance. Each
-  mapping is made up of a virtualName and a deviceName.\n      * `:virtual_name` -
-  (String) Specifies the virtual device name.\n      * `:device_name` - (String) Specifies
-  the device name (e.g., /dev/sdh).\n      * `:ebs` - (Hash) Specifies parameters
-  used to automatically setup Amazon EBS volumes when the instance is launched.\n
-  \       * `:snapshot_id` - (String) The ID of the snapshot from which the volume
-  will be created.\n        * `:volume_size` - (Integer) The size of the volume, in
-  gigabytes.\n        * `:delete_on_termination` - (Boolean) Specifies whether the
-  Amazon EBS volume is deleted on instance termination.\n        * `:volume_type`
-  - (String) Valid values include:\n          * `standard`\n          * `io1`\n        *
-  `:iops` - (Integer) \n      * `:no_device` - (String) Specifies the device name
-  to suppress during instance launch.\n    * `:monitoring` - (Hash) \n      * `:enabled`
-  - *required* - (Boolean) \n    * `:subnet_id` - (String) Specifies the Amazon VPC
-  subnet ID within which to launch the instance(s) for Amazon Virtual Private Cloud.\n
-  \   * `:network_interfaces` - (Array&lt;<Hash>) \n      * `:network_interface_id`
-  - (String) An existing interface to attach to a single instance. Requires n=1 instances.\n
-  \     * `:device_index` - (Integer) The device index. Applies to both attaching
-  an existing network interface and when creating a network interface. Condition:
-  If you are specifying a network interface in the request, you must provide the device
-  index.\n      * `:subnet_id` - (String) The subnet ID. Applies only when creating
-  a network interface.\n      * `:description` - (String) A description. Applies only
-  when creating a network interface.\n      * `:private_ip_address` - (String) The
-  primary private IP address. Applies only when creating a network interface. Requires
-  n=1 network interfaces in launch.\n      * `:groups` - (Array&lt;<String>) \n      *
-  `:delete_on_termination` - (Boolean) \n      * `:private_ip_addresses` - (Array&lt;<Hash>)
-  \n        * `:private_ip_address` - *required* - (String) \n        * `:primary`
-  - (Boolean) \n      * `:secondary_private_ip_address_count` - (Integer) \n      *
-  `:associate_public_ip_address` - (Boolean) Indicates whether to assign a public
-  IP address to an instance in a VPC. The public IP address is associated with a specific
-  network interface. If set to  `true` , the following rules apply: Can only be associated
-  with a single network interface with the device index of 0. You can't associate
-  a public IP address with a second network interface, and you can't associate a public
-  IP address if you are launching more than one network interface. Can only be associated
-  with a new network interface, not an existing one. Default: If launching into a
-  default subnet, the default value is  `true` . If launching into a nondefault subnet,
-  the default value is  `false` .\n    * `:iam_instance_profile` - (Hash) \n      *
-  `:arn` - (String) \n      * `:name` - (String) \n    * `:ebs_optimized` - (Boolean)
-  \n    * `:security_groups` - (Array&lt;<String>) \n    * `:security_group_ids` -
-  (Array&lt;<String>) \n@return [Core::Response] The `#data` method of the response
+  \     * `m1.xlarge`\n      * `m2.xlarge`\n      * `m2.2xlarge`\n      * `m2.4xlarge`\n
+  \     * `m3.xlarge`\n      * `m3.2xlarge`\n      * `c1.medium`\n      * `c1.xlarge`\n
+  \     * `hi1.4xlarge`\n      * `hs1.8xlarge`\n      * `cc1.4xlarge`\n      * `cc2.8xlarge`\n
+  \     * `cg1.4xlarge`\n      * `cr1.8xlarge`\n    * `:placement` - (Hash) Defines
+  a placement item.\n      * `:availability_zone` - (String) The availability zone
+  in which an Amazon EC2 instance runs.\n      * `:group_name` - (String) The name
+  of the PlacementGroup in which an Amazon EC2 instance runs. Placement groups are
+  primarily used for launching High Performance Computing instances in the same group
+  to ensure fast connection speeds.\n    * `:kernel_id` - (String) Specifies the ID
+  of the kernel to select.\n    * `:ramdisk_id` - (String) Specifies the ID of the
+  RAM disk to select. Some kernels require additional drivers at launch. Check the
+  kernel requirements for information on whether or not you need to specify a RAM
+  disk and search for the kernel ID.\n    * `:block_device_mappings` - (Array&lt;<Hash>)
+  Specifies how block devices are exposed to the instance. Each mapping is made up
+  of a virtualName and a deviceName.\n      * `:virtual_name` - (String) Specifies
+  the virtual device name.\n      * `:device_name` - (String) Specifies the device
+  name (e.g., /dev/sdh).\n      * `:ebs` - (Hash) Specifies parameters used to automatically
+  setup Amazon EBS volumes when the instance is launched.\n        * `:snapshot_id`
+  - (String) The ID of the snapshot from which the volume will be created.\n        *
+  `:volume_size` - (Integer) The size of the volume, in gigabytes.\n        * `:delete_on_termination`
+  - (Boolean) Specifies whether the Amazon EBS volume is deleted on instance termination.\n
+  \       * `:volume_type` - (String) Valid values include:\n          * `standard`\n
+  \         * `io1`\n        * `:iops` - (Integer) \n      * `:no_device` - (String)
+  Specifies the device name to suppress during instance launch.\n    * `:monitoring_enabled`
+  - (Boolean) Enables monitoring for the instance.\n    * `:subnet_id` - (String)
+  Specifies the Amazon VPC subnet ID within which to launch the instance(s) for Amazon
+  Virtual Private Cloud.\n    * `:network_interfaces` - (Array&lt;<Hash>) \n      *
+  `:network_interface_id` - (String) An existing interface to attach to a single instance.
+  Requires n=1 instances.\n      * `:device_index` - (Integer) The device index. Applies
+  to both attaching an existing network interface and when creating a network interface.
+  Condition: If you are specifying a network interface in the request, you must provide
+  the device index.\n      * `:subnet_id` - (String) The subnet ID. Applies only when
+  creating a network interface.\n      * `:description` - (String) A description.
+  Applies only when creating a network interface.\n      * `:private_ip_address` -
+  (String) The primary private IP address. Applies only when creating a network interface.
+  Requires n=1 network interfaces in launch.\n      * `:groups` - (Array&lt;<String>)
+  \n      * `:delete_on_termination` - (Boolean) \n      * `:private_ip_addresses`
+  - (Array&lt;<Hash>) \n        * `:private_ip_address` - *required* - (String) \n
+  \       * `:primary` - (Boolean) \n      * `:secondary_private_ip_address_count`
+  - (Integer) \n      * `:associate_public_ip_address` - (Boolean) Indicates whether
+  to assign a public IP address to an instance in a VPC. The public IP address is
+  associated with a specific network interface. If set to  `true` , the following
+  rules apply: Can only be associated with a single network interface with the device
+  index of 0. You can't associate a public IP address with a second network interface,
+  and you can't associate a public IP address if you are launching more than one network
+  interface. Can only be associated with a new network interface, not an existing
+  one. Default: If launching into a default subnet, the default value is  `true` .
+  If launching into a nondefault subnet, the default value is  `false` .\n    * `:iam_instance_profile`
+  - (Hash) \n      * `:arn` - (String) \n      * `:name` - (String) \n    * `:ebs_optimized`
+  - (Boolean) \n    * `:security_groups` - (Array&lt;<String>) \n    * `:security_group_ids`
+  - (Array&lt;<String>) \n@return [Core::Response] The `#data` method of the response
   object returns a hash with the following structure:\n\n  * `:spot_instance_request_set`
   - (Array<Hash>)\n    * `:spot_instance_request_id` - (String)\n    * `:spot_price`
   - (String)\n    * `:type` - (String)\n    * `:state` - (String)\n    * `:fault`
@@ -1769,102 +1752,101 @@
   be passed as a Base64-encoded string.\n  * `:instance_type` - (String) Specifies
   the instance type for the launched instances.  Valid values include:\n    * `t1.micro`\n
   \   * `m1.small`\n    * `m1.medium`\n    * `m1.large`\n    * `m1.xlarge`\n    *
-  `m3.xlarge`\n    * `m3.2xlarge`\n    * `m2.xlarge`\n    * `m2.2xlarge`\n    * `m2.4xlarge`\n
-  \   * `cr1.8xlarge`\n    * `hi1.4xlarge`\n    * `hs1.8xlarge`\n    * `c1.medium`\n
-  \   * `c1.xlarge`\n    * `c3.large`\n    * `c3.xlarge`\n    * `c3.2xlarge`\n    *
-  `c3.4xlarge`\n    * `c3.8xlarge`\n    * `cc1.4xlarge`\n    * `cc2.8xlarge`\n    *
-  `g2.2xlarge`\n    * `cg1.4xlarge`\n  * `:placement` - (Hash) Specifies the placement
-  constraints (Availability Zones) for launching the instances.\n    * `:availability_zone`
-  - (String) The availability zone in which an Amazon EC2 instance runs.\n    * `:group_name`
-  - (String) The name of the PlacementGroup in which an Amazon EC2 instance runs.
-  Placement groups are primarily used for launching High Performance Computing instances
-  in the same group to ensure fast connection speeds.\n    * `:tenancy` - (String)
-  The allowed tenancy of instances launched into the VPC. A value of default means
-  instances can be launched with any tenancy; a value of dedicated means all instances
-  launched into the VPC will be launched as dedicated tenancy regardless of the tenancy
-  assigned to the instance at launch.  Valid values include:\n      * `default`\n
-  \     * `dedicated`\n  * `:kernel_id` - (String) The ID of the kernel with which
-  to launch the instance.\n  * `:ramdisk_id` - (String) The ID of the RAM disk with
-  which to launch the instance. Some kernels require additional drivers at launch.
-  Check the kernel requirements for information on whether you need to specify a RAM
-  disk. To find kernel requirements, go to the Resource Center and search for the
-  kernel ID.\n  * `:block_device_mappings` - (Array&lt;<Hash>) Specifies how block
-  devices are exposed to the instance. Each mapping is made up of a virtualName and
-  a deviceName.\n    * `:virtual_name` - (String) Specifies the virtual device name.\n
-  \   * `:device_name` - (String) Specifies the device name (e.g., /dev/sdh).\n    *
-  `:ebs` - (Hash) Specifies parameters used to automatically setup Amazon EBS volumes
-  when the instance is launched.\n      * `:snapshot_id` - (String) The ID of the
-  snapshot from which the volume will be created.\n      * `:volume_size` - (Integer)
-  The size of the volume, in gigabytes.\n      * `:delete_on_termination` - (Boolean)
-  Specifies whether the Amazon EBS volume is deleted on instance termination.\n      *
-  `:volume_type` - (String) Valid values include:\n        * `standard`\n        *
-  `io1`\n      * `:iops` - (Integer) \n    * `:no_device` - (String) Specifies the
-  device name to suppress during instance launch.\n  * `:monitoring` - (Hash) Enables
-  monitoring for the instance.\n    * `:enabled` - *required* - (Boolean) \n  * `:subnet_id`
-  - (String) Specifies the subnet ID within which to launch the instance(s) for Amazon
-  Virtual Private Cloud.\n  * `:disable_api_termination` - (Boolean) Specifies whether
-  the instance can be terminated using the APIs. You must modify this attribute before
-  you can terminate any \"locked\" instances from the APIs.\n  * `:instance_initiated_shutdown_behavior`
-  - (String) Specifies whether the instance's Amazon EBS volumes are stopped or terminated
-  when the instance is shut down.  Valid values include:\n    * `stop`\n    * `terminate`\n
-  \ * `:license` - (Hash) Specifies active licenses in use and attached to an Amazon
-  EC2 instance.\n    * `:pool` - (String) The license pool from which to take a license
-  when starting Amazon EC2 instances in the associated RunInstances request.\n  *
-  `:private_ip_address` - (String) If you're using Amazon Virtual Private Cloud, you
-  can optionally use this parameter to assign the instance a specific available IP
-  address from the subnet.\n  * `:client_token` - (String) Unique, case-sensitive
-  identifier you provide to ensure idempotency of the request. For more information,
-  go to How to Ensure Idempotency in the Amazon Elastic Compute Cloud User Guide.\n
-  \ * `:additional_info` - (String) Do not use. Reserved for internal use.\n  * `:network_interfaces`
-  - (Array&lt;<Hash>) List of network interfaces associated with the instance.\n    *
-  `:network_interface_id` - (String) An existing interface to attach to a single instance.
-  Requires n=1 instances.\n    * `:device_index` - (Integer) The device index. Applies
-  to both attaching an existing network interface and when creating a network interface.
-  Condition: If you are specifying a network interface in the request, you must provide
-  the device index.\n    * `:subnet_id` - (String) The subnet ID. Applies only when
-  creating a network interface.\n    * `:description` - (String) A description. Applies
-  only when creating a network interface.\n    * `:private_ip_address` - (String)
-  The primary private IP address. Applies only when creating a network interface.
-  Requires n=1 network interfaces in launch.\n    * `:groups` - (Array&lt;<String>)
-  \n    * `:delete_on_termination` - (Boolean) \n    * `:private_ip_addresses` - (Array&lt;<Hash>)
-  \n      * `:private_ip_address` - *required* - (String) \n      * `:primary` - (Boolean)
-  \n    * `:secondary_private_ip_address_count` - (Integer) \n    * `:associate_public_ip_address`
-  - (Boolean) Indicates whether to assign a public IP address to an instance in a
-  VPC. The public IP address is associated with a specific network interface. If set
-  to  `true` , the following rules apply: Can only be associated with a single network
-  interface with the device index of 0. You can't associate a public IP address with
-  a second network interface, and you can't associate a public IP address if you are
-  launching more than one network interface. Can only be associated with a new network
-  interface, not an existing one. Default: If launching into a default subnet, the
-  default value is  `true` . If launching into a nondefault subnet, the default value
-  is  `false` .\n  * `:iam_instance_profile` - (Hash) \n    * `:arn` - (String) \n
-  \   * `:name` - (String) \n  * `:ebs_optimized` - (Boolean) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:reservation_id` - (String)\n  * `:owner_id` - (String)\n  * `:requester_id`
-  - (String)\n  * `:group_set` - (Array<Hash>)\n    * `:group_name` - (String)\n    *
-  `:group_id` - (String)\n  * `:instances_set` - (Array<Hash>)\n    * `:instance_id`
-  - (String)\n    * `:image_id` - (String)\n    * `:instance_state` - (Hash)\n      *
-  `:code` - (Integer)\n      * `:name` - (String)\n    * `:private_dns_name` - (String)\n
-  \   * `:dns_name` - (String)\n    * `:reason` - (String)\n    * `:key_name` - (String)\n
-  \   * `:ami_launch_index` - (Integer)\n    * `:product_codes` - (Array<Hash>)\n
-  \     * `:product_code` - (String)\n      * `:type` - (String)\n    * `:instance_type`
-  - (String)\n    * `:launch_time` - (Time)\n    * `:placement` - (Hash)\n      *
-  `:availability_zone` - (String)\n      * `:group_name` - (String)\n      * `:tenancy`
-  - (String)\n    * `:kernel_id` - (String)\n    * `:ramdisk_id` - (String)\n    *
-  `:platform` - (String)\n    * `:monitoring` - (Hash)\n      * `:state` - (String)\n
-  \   * `:subnet_id` - (String)\n    * `:vpc_id` - (String)\n    * `:private_ip_address`
-  - (String)\n    * `:ip_address` - (String)\n    * `:state_reason` - (Hash)\n      *
-  `:code` - (String)\n      * `:message` - (String)\n    * `:architecture` - (String)\n
-  \   * `:root_device_type` - (String)\n    * `:root_device_name` - (String)\n    *
-  `:block_device_mapping` - (Array<Hash>)\n      * `:device_name` - (String)\n      *
-  `:ebs` - (Hash)\n        * `:volume_id` - (String)\n        * `:status` - (String)\n
-  \       * `:attach_time` - (Time)\n        * `:delete_on_termination` - (Boolean)\n
-  \   * `:virtualization_type` - (String)\n    * `:instance_lifecycle` - (String)\n
-  \   * `:spot_instance_request_id` - (String)\n    * `:license` - (Hash)\n      *
-  `:pool` - (String)\n    * `:client_token` - (String)\n    * `:tag_set` - (Array<Hash>)\n
-  \     * `:key` - (String)\n      * `:value` - (String)\n    * `:group_set` - (Array<Hash>)\n
-  \     * `:group_name` - (String)\n      * `:group_id` - (String)\n    * `:source_dest_check`
-  - (Boolean)\n    * `:hypervisor` - (String)\n    * `:network_interface_set` - (Array<Hash>)\n
+  `m2.xlarge`\n    * `m2.2xlarge`\n    * `m2.4xlarge`\n    * `m3.xlarge`\n    * `m3.2xlarge`\n
+  \   * `c1.medium`\n    * `c1.xlarge`\n    * `hi1.4xlarge`\n    * `hs1.8xlarge`\n
+  \   * `cc1.4xlarge`\n    * `cc2.8xlarge`\n    * `cg1.4xlarge`\n    * `cr1.8xlarge`\n
+  \ * `:placement` - (Hash) Specifies the placement constraints (Availability Zones)
+  for launching the instances.\n    * `:availability_zone` - (String) The availability
+  zone in which an Amazon EC2 instance runs.\n    * `:group_name` - (String) The name
+  of the PlacementGroup in which an Amazon EC2 instance runs. Placement groups are
+  primarily used for launching High Performance Computing instances in the same group
+  to ensure fast connection speeds.\n    * `:tenancy` - (String) The allowed tenancy
+  of instances launched into the VPC. A value of default means instances can be launched
+  with any tenancy; a value of dedicated means all instances launched into the VPC
+  will be launched as dedicated tenancy regardless of the tenancy assigned to the
+  instance at launch.  Valid values include:\n      * `default`\n      * `dedicated`\n
+  \ * `:kernel_id` - (String) The ID of the kernel with which to launch the instance.\n
+  \ * `:ramdisk_id` - (String) The ID of the RAM disk with which to launch the instance.
+  Some kernels require additional drivers at launch. Check the kernel requirements
+  for information on whether you need to specify a RAM disk. To find kernel requirements,
+  go to the Resource Center and search for the kernel ID.\n  * `:block_device_mappings`
+  - (Array&lt;<Hash>) Specifies how block devices are exposed to the instance. Each
+  mapping is made up of a virtualName and a deviceName.\n    * `:virtual_name` - (String)
+  Specifies the virtual device name.\n    * `:device_name` - (String) Specifies the
+  device name (e.g., /dev/sdh).\n    * `:ebs` - (Hash) Specifies parameters used to
+  automatically setup Amazon EBS volumes when the instance is launched.\n      * `:snapshot_id`
+  - (String) The ID of the snapshot from which the volume will be created.\n      *
+  `:volume_size` - (Integer) The size of the volume, in gigabytes.\n      * `:delete_on_termination`
+  - (Boolean) Specifies whether the Amazon EBS volume is deleted on instance termination.\n
+  \     * `:volume_type` - (String) Valid values include:\n        * `standard`\n
+  \       * `io1`\n      * `:iops` - (Integer) \n    * `:no_device` - (String) Specifies
+  the device name to suppress during instance launch.\n  * `:monitoring` - (Hash)
+  Enables monitoring for the instance.\n    * `:enabled` - *required* - (Boolean)
+  \n  * `:subnet_id` - (String) Specifies the subnet ID within which to launch the
+  instance(s) for Amazon Virtual Private Cloud.\n  * `:disable_api_termination` -
+  (Boolean) Specifies whether the instance can be terminated using the APIs. You must
+  modify this attribute before you can terminate any \"locked\" instances from the
+  APIs.\n  * `:instance_initiated_shutdown_behavior` - (String) Specifies whether
+  the instance's Amazon EBS volumes are stopped or terminated when the instance is
+  shut down.  Valid values include:\n    * `stop`\n    * `terminate`\n  * `:license`
+  - (Hash) Specifies active licenses in use and attached to an Amazon EC2 instance.\n
+  \   * `:pool` - (String) The license pool from which to take a license when starting
+  Amazon EC2 instances in the associated RunInstances request.\n  * `:private_ip_address`
+  - (String) If you're using Amazon Virtual Private Cloud, you can optionally use
+  this parameter to assign the instance a specific available IP address from the subnet.\n
+  \ * `:client_token` - (String) Unique, case-sensitive identifier you provide to
+  ensure idempotency of the request. For more information, go to How to Ensure Idempotency
+  in the Amazon Elastic Compute Cloud User Guide.\n  * `:additional_info` - (String)
+  Do not use. Reserved for internal use.\n  * `:network_interfaces` - (Array&lt;<Hash>)
+  List of network interfaces associated with the instance.\n    * `:network_interface_id`
+  - (String) An existing interface to attach to a single instance. Requires n=1 instances.\n
+  \   * `:device_index` - (Integer) The device index. Applies to both attaching an
+  existing network interface and when creating a network interface. Condition: If
+  you are specifying a network interface in the request, you must provide the device
+  index.\n    * `:subnet_id` - (String) The subnet ID. Applies only when creating
+  a network interface.\n    * `:description` - (String) A description. Applies only
+  when creating a network interface.\n    * `:private_ip_address` - (String) The primary
+  private IP address. Applies only when creating a network interface. Requires n=1
+  network interfaces in launch.\n    * `:groups` - (Array&lt;<String>) \n    * `:delete_on_termination`
+  - (Boolean) \n    * `:private_ip_addresses` - (Array&lt;<Hash>) \n      * `:private_ip_address`
+  - *required* - (String) \n      * `:primary` - (Boolean) \n    * `:secondary_private_ip_address_count`
+  - (Integer) \n    * `:associate_public_ip_address` - (Boolean) Indicates whether
+  to assign a public IP address to an instance in a VPC. The public IP address is
+  associated with a specific network interface. If set to  `true` , the following
+  rules apply: Can only be associated with a single network interface with the device
+  index of 0. You can't associate a public IP address with a second network interface,
+  and you can't associate a public IP address if you are launching more than one network
+  interface. Can only be associated with a new network interface, not an existing
+  one. Default: If launching into a default subnet, the default value is  `true` .
+  If launching into a nondefault subnet, the default value is  `false` .\n  * `:iam_instance_profile`
+  - (Hash) \n    * `:arn` - (String) \n    * `:name` - (String) \n  * `:ebs_optimized`
+  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:reservation_id` - (String)\n
+  \ * `:owner_id` - (String)\n  * `:requester_id` - (String)\n  * `:group_set` - (Array<Hash>)\n
+  \   * `:group_name` - (String)\n    * `:group_id` - (String)\n  * `:instances_set`
+  - (Array<Hash>)\n    * `:instance_id` - (String)\n    * `:image_id` - (String)\n
+  \   * `:instance_state` - (Hash)\n      * `:code` - (Integer)\n      * `:name` -
+  (String)\n    * `:private_dns_name` - (String)\n    * `:dns_name` - (String)\n    *
+  `:reason` - (String)\n    * `:key_name` - (String)\n    * `:ami_launch_index` -
+  (Integer)\n    * `:product_codes` - (Array<Hash>)\n      * `:product_code` - (String)\n
+  \     * `:type` - (String)\n    * `:instance_type` - (String)\n    * `:launch_time`
+  - (Time)\n    * `:placement` - (Hash)\n      * `:availability_zone` - (String)\n
+  \     * `:group_name` - (String)\n      * `:tenancy` - (String)\n    * `:kernel_id`
+  - (String)\n    * `:ramdisk_id` - (String)\n    * `:platform` - (String)\n    *
+  `:monitoring` - (Hash)\n      * `:state` - (String)\n    * `:subnet_id` - (String)\n
+  \   * `:vpc_id` - (String)\n    * `:private_ip_address` - (String)\n    * `:ip_address`
+  - (String)\n    * `:state_reason` - (Hash)\n      * `:code` - (String)\n      *
+  `:message` - (String)\n    * `:architecture` - (String)\n    * `:root_device_type`
+  - (String)\n    * `:root_device_name` - (String)\n    * `:block_device_mapping`
+  - (Array<Hash>)\n      * `:device_name` - (String)\n      * `:ebs` - (Hash)\n        *
+  `:volume_id` - (String)\n        * `:status` - (String)\n        * `:attach_time`
+  - (Time)\n        * `:delete_on_termination` - (Boolean)\n    * `:virtualization_type`
+  - (String)\n    * `:instance_lifecycle` - (String)\n    * `:spot_instance_request_id`
+  - (String)\n    * `:license` - (Hash)\n      * `:pool` - (String)\n    * `:client_token`
+  - (String)\n    * `:tag_set` - (Array<Hash>)\n      * `:key` - (String)\n      *
+  `:value` - (String)\n    * `:group_set` - (Array<Hash>)\n      * `:group_name` -
+  (String)\n      * `:group_id` - (String)\n    * `:source_dest_check` - (Boolean)\n
+  \   * `:hypervisor` - (String)\n    * `:network_interface_set` - (Array<Hash>)\n
   \     * `:network_interface_id` - (String)\n      * `:subnet_id` - (String)\n      *
   `:vpc_id` - (String)\n      * `:description` - (String)\n      * `:owner_id` - (String)\n
   \     * `:status` - (String)\n      * `:private_ip_address` - (String)\n      *
@@ -1879,8 +1861,7 @@
   - (String)\n        * `:primary` - (Boolean)\n        * `:association` - (Hash)\n
   \         * `:public_ip` - (String)\n          * `:public_dns_name` - (String)\n
   \         * `:ip_owner_id` - (String)\n    * `:iam_instance_profile` - (Hash)\n
-  \     * `:arn` - (String)\n      * `:id` - (String)\n    * `:ebs_optimized` - (Boolean)\n
-  \   * `:sriov_net_support` - (String)"
+  \     * `:arn` - (String)\n      * `:id` - (String)\n    * `:ebs_optimized` - (Boolean)"
 :start_instances: "Calls the StartInstances API operation.\n@param [Hash] options\n
   \ * `:instance_ids` - *required* - (Array&lt;<String>) The list of Amazon EC2 instances
   to start.\n  * `:additional_info` - (String) \n  * `:dry_run` - (Boolean) \n@return

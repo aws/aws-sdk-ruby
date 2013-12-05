@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2013-10-01'
+:api_version: '2013-10-15'
 :operations:
 - :name: ActivateLicense
   :method: :activate_license
@@ -1865,6 +1865,10 @@
             - :string
           - :rename: Values
     - :rename: filters
+    NextToken:
+    - :string
+    MaxResults:
+    - :integer
   :outputs:
     :children:
       reservationSet:
@@ -2970,6 +2974,10 @@
             - :string
           - :rename: Values
     - :rename: filters
+    MaxResults:
+    - :integer
+    NextToken:
+    - :string
   :outputs:
     :children:
       tagSet:
@@ -3696,6 +3704,10 @@
     - :structure:
         Value:
         - :boolean
+    SriovNetSupport:
+    - :structure:
+        Value:
+        - :string
   :outputs: {}
 - :name: ModifyNetworkInterfaceAttribute
   :method: :modify_network_interface_attribute
@@ -3906,6 +3918,10 @@
           NoDevice:
           - :string
     - :rename: blockDeviceMappings
+    VirtualizationType:
+    - :string
+    SriovNetSupport:
+    - :string
   :outputs: {}
 - :name: ReleaseAddress
   :method: :release_address
