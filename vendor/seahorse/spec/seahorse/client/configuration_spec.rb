@@ -103,6 +103,19 @@ module Seahorse
           expect(config.build!.proc).to be(value)
         end
 
+        it 'resolves defaults in LIFO order until a non-nil value is found' do
+          # default cost is 10
+          config.add_option(:cost) { 10 }
+
+          # increase cost for red items
+          config.add_option(:cost) { |cfg| cfg.color == 'red' ? 9001 : nil }
+
+          config.add_option(:color)
+
+          expect(config.build!(color: 'green').cost).to eq(10)
+          expect(config.build!(color: 'red').cost).to eq(9001) # over 9000!
+        end
+
       end
     end
   end
