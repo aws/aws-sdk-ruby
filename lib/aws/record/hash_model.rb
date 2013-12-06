@@ -149,7 +149,7 @@ module AWS
       # @api private
       private
       def dynamo_db_item
-        dynamo_db_table.items[id]
+        dynamo_db_table.items[hash_key]
       end
 
       # @return [SimpleDB::Domain] Returns the domain this record is

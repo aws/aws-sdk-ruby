@@ -140,5 +140,6 @@ Given(/^I filter stacks by "(.*?)"$/) do |status|
 end
 
 When(/^I enumerate stacks$/) do
+  @stacks ||= @cloud_formation.stacks
   @stacks.each {|stack|}
 end

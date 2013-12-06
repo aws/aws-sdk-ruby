@@ -192,14 +192,24 @@ module AWS
 
       def _each_item next_token, options = {}
         options[:next_token] = next_token if next_token
-        options[:stack_status_filter] = @status_filters unless @status_filters.empty?
-        resp = client.list_stacks(options)
-        resp[:stack_summaries].each do |summary|
+
+        if @status_filters.empty?
+          api_method = :describe_stacks
+          resp_key = :stacks
+        else
+          api_method = :list_stacks
+          resp_key = :stack_summaries
+          options[:stack_status_filter] = @status_filters
+        end
+
+        resp = client.send(api_method, options)
+
+        resp[resp_key].each do |data|
 
           stack = Stack.new_from(
-            :list_stacks,
-            summary,
-            summary[:stack_name],
+            api_method,
+            data,
+            data[:stack_name],
             :config => config)
 
           yield(stack)

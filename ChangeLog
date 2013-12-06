@@ -1,4 +1,50 @@
+2013-11-27 Alex Wood <awood45@gmail.com>
+
+  * doc-src/EC2/V20131001.yml, lib/aws/api_config/EC2-2013-10-01.yml: Amazon
+  EC2 API Update
+
+  Added support for pagination of the describe_instances and describe_tags
+  operations to the Amazon EC2 client.
+
+  Added support for the new C3 instance types and the g2.2xlarge instance
+  type to the Amazon EC2 client.
+
+  Added support for enabling Single Root I/O Virtualization (SR-IOV)
+  support for the new C3 instance types to the Amazon EC2 client.
+
+2013-11-26 Sean McCann <sean@seanmccann.ca>
+
+  * lib/aws/sns/topic.rb: Fix spelling error in comment
+  * features/cloud_formation/stacks.feature,
+  features/cloud_formation/step_definitions/stacks.rb,
+  lib/aws/cloud_formation/stack_collection.rb,
+  spec/aws/cloud_formation/stack_collection_spec.rb: Resolved an issue where
+  the `AWS::CloudFormation::Stacks#with_status` would not apply the filter.
+
+  Updated the unit tests and added an integration test that
+  exercises this feature.
+
+  Fixes #419
+
+2013-11-23 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/version.rb: Bump version to 1.28.1
+
+2013-11-22 Trevor Rowe <trevorrowe@gmail.com>
+
+  * lib/aws/core.rb: Replaced autoload relative paths with expanded paths.
+
+  This eliminates load order issues with aws-sdk-core.
+
+  See (https://github.com/aws/aws-sdk-core-ruby/issues/15)
+
 2013-11-21 Alex Wood <awood45@gmail.com>
+
+  * README.md: Update README
+
+  Include new Amazon RDS API version in README file.
+
+  * ChangeLog, lib/aws/version.rb: Bump version to 1.28.0
 
   * doc-src/RDS/V20130909.yml, lib/aws/api_config/RDS-2013-09-09.yml,
   lib/aws/rds/client.rb: Add New API Version for Amazon RDS 2013-09-09

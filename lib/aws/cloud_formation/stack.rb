@@ -62,6 +62,8 @@ module AWS
 
       define_attribute_type :template
 
+      define_attribute_type :list
+
       define_attribute_type :describe
 
       # returned by GetTemplate
@@ -70,17 +72,19 @@ module AWS
 
       alias_method :template_body, :template
 
+      # returned by ListStacks & DescribeStacks
+
+      list_attribute :creation_time, :static => true
+
+      list_attribute :last_updated_time
+
+      list_attribute :stack_id, :static => true
+
+      list_attribute :status, :from => :stack_status
+
+      list_attribute :status_reason, :from => :stack_status_reason
+
       # returned by DescribeStacks
-
-      describe_attribute :creation_time, :static => true
-
-      describe_attribute :last_updated_time
-
-      describe_attribute :stack_id, :static => true
-
-      describe_attribute :status, :from => :stack_status
-
-      describe_attribute :status_reason, :from => :stack_status_reason
 
       describe_attribute :capabilities
 
@@ -114,7 +118,14 @@ module AWS
         provider.find do |resp|
           resp.data[:stacks].find{|stack| stack[:stack_name] == name }
         end
-        provider.provides *describe_attributes.keys
+        provider.provides(*(list_attributes.keys + describe_attributes.keys))
+      end
+
+      provider(:list_stacks) do |provider|
+        provider.find do |resp|
+          resp.data[:stack_summaries].find{|stack| stack[:stack_name] == name }
+        end
+        provider.provides *list_attributes.keys
       end
 
       provider(:get_template) do |provider|

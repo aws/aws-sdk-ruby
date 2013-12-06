@@ -30,6 +30,12 @@ module AWS
         Client.new(test_credentials.merge(:http_handler => http_handler))
       end
 
+      it 'raises argument error for invalid queue urls' do
+        lambda {
+          client.send_message(:message_body => "foo", :queue_url => "bogus")
+        }.should raise_error(ArgumentError, "invalid queue url `bogus'")
+      end
+
       context "error parsing" do
 
         it 'should raise the correct error class' do
