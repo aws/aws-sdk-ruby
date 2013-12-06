@@ -28,6 +28,9 @@ module AWS
         request = super(*args)
         if url_param = request.params.find { |p| p.name == "QueueUrl" }
           url = URI.parse(url_param.value)
+          if url.class == URI::Generic
+            raise ArgumentError, "invalid queue url `#{url_param.value}'"
+          end
           request.host = url.host
           request.uri = url.request_uri
           if matches = request.host.match(/^sqs\.(.+?)\./)
