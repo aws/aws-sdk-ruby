@@ -115,7 +115,14 @@ module Aws
 
     # @return [Hash] Returns a hash of default configuration options shared
     #   by all constructed clients.
-    attr_accessor :config
+    attr_reader :config
+
+    def config=(config)
+      unless Hash === config
+        raise ArgumentError, 'configuration object must be a hash'
+      end
+      @config = config
+    end
 
     # Adds a plugin to every AWS client class.  This registers the plugin
     # with each versioned client for each service.
