@@ -54,7 +54,7 @@ module Seahorse
       # @api private
       Defaults = Class.new(Array) do
         def each(&block)
-          reverse.each(&block)
+          reverse.to_a.each(&block)
         end
       end
 
