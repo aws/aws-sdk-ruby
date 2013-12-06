@@ -39,4 +39,6 @@ AWS::Core::Configuration.module_eval do
 
   add_option :s3_storage_class, 'STANDARD'
 
+  add_option :s3_signature_version
+
 end

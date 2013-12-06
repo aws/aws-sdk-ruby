@@ -48,7 +48,7 @@ module AWS
 
         # translate these into service specific configuration options,
         # e.g. :endpoint into :s3_endpoint
-        [:endpoint, :region, :port].each do |opt|
+        [:endpoint, :region, :port, :signature_version].each do |opt|
           if options[opt]
             options[:"#{service_ruby_name}_#{opt}"] = options.delete(opt)
           end

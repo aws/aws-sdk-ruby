@@ -50,14 +50,14 @@ module AWS
       # @param [Core::Http::Request] request
       # @api private
       def sign_request request
-        # When using the "classic" region ('s3.amazonaws.com') it is not possible
-        # to know what region the bucket may be in.  Since the region is
-        # required to generate a version 4 signature, we will fall back to
-        # the older v3 signer.
-        if @region =~ /cn-/
-          v4_signer.sign_request(request, :chunk_signing => chunk_sign?(request))
+        version = @config.s3_signature_version ?
+          @config.s3_signature_version.to_sym :
+          (@region =~ /cn-/ ? :v4 : :v3)
+        case version
+        when :v4 then v4_signer.sign_request(request)
+        when :v3 then v3_signer.sign_request(request)
         else
-          v3_signer.sign_request(request)
+          raise "invalid signature version #{version.inspect}"
         end
       end
 
@@ -78,7 +78,6 @@ module AWS
       # @param [Http::Request] req
       # @return [Boolean]
       def chunk_sign? req
-        return false # disabling chunk signing implementation
         req.http_method == 'PUT' &&
         req.headers['content-length'].to_i > 2 * 1024 * 1024 # 2MB
       end
