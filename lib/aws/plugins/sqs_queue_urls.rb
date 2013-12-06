@@ -18,10 +18,13 @@ module Aws
         end
 
         def update_region(context, url)
-          region = url.split('.')[1]
-          context.config = context.config.dup
-          context.config.region = region
-          context.config.sigv4_region = region
+          if region = url.split('.')[1]
+            context.config = context.config.dup
+            context.config.region = region
+            context.config.sigv4_region = region
+          else
+            raise ArgumentError, "invalid queue url `#{url}'"
+          end
         end
 
       end
