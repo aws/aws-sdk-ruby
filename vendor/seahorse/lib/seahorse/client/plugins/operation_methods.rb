@@ -27,7 +27,9 @@ module Seahorse
 
         def after_initialize(client)
           unless client.respond_to?(:operation_names)
-            add_operation_helpers(client, client.config.api.operations.keys)
+            client.class.mutex.synchronize do
+              add_operation_helpers(client, client.config.api.operations.keys)
+            end
           end
         end
 

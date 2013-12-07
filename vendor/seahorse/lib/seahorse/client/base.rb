@@ -1,3 +1,5 @@
+require 'thread'
+
 module Seahorse
   module Client
     class Base
@@ -106,6 +108,9 @@ module Seahorse
           client
         end
 
+        # Used by plugins that modify the client class.
+        attr_reader :mutex
+
         # Registers a plugin with this client.
         #
         # @example Register a plugin
@@ -213,6 +218,7 @@ module Seahorse
 
         def inherited(subclass)
           subclass.instance_variable_set('@plugins', PluginList.new(@plugins))
+          subclass.instance_variable_set("@mutex", Mutex.new)
         end
 
       end
