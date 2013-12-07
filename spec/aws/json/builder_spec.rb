@@ -44,6 +44,18 @@ module Aws
           expect(json(abc: { mno: 'xyz' })).to eq('{"abc":{"MNO":"xyz"}}')
         end
 
+        it 'does not serialize nil members' do
+          rules['members'] = {
+            'cfg' => {
+              'type' => 'structure',
+              'members' => {
+                'data' => { 'type' => 'blob' },
+              }
+            }
+          }
+          expect(json(cfg: { data: nil })).to eq('{"cfg":{}}')
+        end
+
       end
 
       describe 'lists' do
