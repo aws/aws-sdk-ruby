@@ -589,7 +589,7 @@ module AWS
           !!@optimistic_locking_attr
         end
 
-         @private
+        # @private
         def optimistic_locking_attr
           @optimistic_locking_attr
         end
