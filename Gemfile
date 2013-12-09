@@ -21,6 +21,6 @@ group :docs do
   gem 'rdiscount'
 end
 
-group :bin do
+group :repl do
   gem 'pry'
 end
