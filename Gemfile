@@ -4,6 +4,10 @@ gemspec
 
 gem 'rake', require: false
 
+gem 'oj' if ENV['OJ']
+gem 'ox' if ENV['OX']
+gem 'nokogiri' if ENV['NOKOGIRI']
+
 group :test do
   gem 'rspec', github: 'rspec/rspec'
   gem 'rspec-core', github: 'rspec/rspec-core'

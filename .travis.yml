@@ -1,13 +1,16 @@
 script: bundle exec rake
-rvm:
-- 1.9.3
-- 2.0.0
-- jruby
 bundler_args: --without bin docs
 branches:
   only:
   - master
+rvm:
+- 1.9.3
+- 2.0.0
+- jruby
 env:
-  global:
-  - CI=1
-  - SUITE=1
+  - OX=1 OJ=1
+  - NOKOGIRI=1
+matrix:
+  exclude:
+    - rvm: jruby
+    - env: OX=1 OJ=1
