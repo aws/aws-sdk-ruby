@@ -132,6 +132,33 @@
         CapacityUnits:
           :sym: :capacity_units
           :type: :float
+        Table:
+          :sym: :table
+          :type: :hash
+          :members:
+            CapacityUnits:
+              :sym: :capacity_units
+              :type: :float
+        LocalSecondaryIndexes:
+          :sym: :local_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
 - :name: BatchWriteItem
   :method: :batch_write_item
   :inputs:
@@ -306,6 +333,33 @@
         CapacityUnits:
           :sym: :capacity_units
           :type: :float
+        Table:
+          :sym: :table
+          :type: :hash
+          :members:
+            CapacityUnits:
+              :sym: :capacity_units
+              :type: :float
+        LocalSecondaryIndexes:
+          :sym: :local_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
 - :name: CreateTable
   :method: :create_table
   :inputs:
@@ -355,6 +409,39 @@
               NonKeyAttributes:
               - :list:
                 - :string
+          - :required
+    GlobalSecondaryIndexes:
+    - :list:
+      - :structure:
+          IndexName:
+          - :string
+          - :required
+          KeySchema:
+          - :list:
+            - :structure:
+                AttributeName:
+                - :string
+                - :required
+                KeyType:
+                - :string
+                - :required
+          - :required
+          Projection:
+          - :structure:
+              ProjectionType:
+              - :string
+              NonKeyAttributes:
+              - :list:
+                - :string
+          - :required
+          ProvisionedThroughput:
+          - :structure:
+              ReadCapacityUnits:
+              - :long
+              - :required
+              WriteCapacityUnits:
+              - :long
+              - :required
           - :required
     ProvisionedThroughput:
     - :structure:
@@ -457,6 +544,61 @@
             ItemCount:
               :sym: :item_count
               :type: :integer
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :hash
+          :members:
+            IndexName:
+              :sym: :index_name
+              :type: :string
+            KeySchema:
+              :sym: :key_schema
+              :type: :hash
+              :members:
+                AttributeName:
+                  :sym: :attribute_name
+                  :type: :string
+                KeyType:
+                  :sym: :key_type
+                  :type: :string
+            Projection:
+              :sym: :projection
+              :type: :hash
+              :members:
+                ProjectionType:
+                  :sym: :projection_type
+                  :type: :string
+                NonKeyAttributes:
+                  :sym: :non_key_attributes
+                  :type: :string
+            IndexStatus:
+              :sym: :index_status
+              :type: :string
+            ProvisionedThroughput:
+              :sym: :provisioned_throughput
+              :type: :hash
+              :members:
+                LastIncreaseDateTime:
+                  :sym: :last_increase_date_time
+                  :type: :time
+                LastDecreaseDateTime:
+                  :sym: :last_decrease_date_time
+                  :type: :time
+                NumberOfDecreasesToday:
+                  :sym: :number_of_decreases_today
+                  :type: :integer
+                ReadCapacityUnits:
+                  :sym: :read_capacity_units
+                  :type: :integer
+                WriteCapacityUnits:
+                  :sym: :write_capacity_units
+                  :type: :integer
+            IndexSizeBytes:
+              :sym: :index_size_bytes
+              :type: :integer
+            ItemCount:
+              :sym: :item_count
+              :type: :integer
 - :name: DeleteItem
   :method: :delete_item
   :inputs:
@@ -552,6 +694,33 @@
         CapacityUnits:
           :sym: :capacity_units
           :type: :float
+        Table:
+          :sym: :table
+          :type: :hash
+          :members:
+            CapacityUnits:
+              :sym: :capacity_units
+              :type: :float
+        LocalSecondaryIndexes:
+          :sym: :local_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
     ItemCollectionMetrics:
       :sym: :item_collection_metrics
       :type: :hash
@@ -682,6 +851,61 @@
             ItemCount:
               :sym: :item_count
               :type: :integer
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :hash
+          :members:
+            IndexName:
+              :sym: :index_name
+              :type: :string
+            KeySchema:
+              :sym: :key_schema
+              :type: :hash
+              :members:
+                AttributeName:
+                  :sym: :attribute_name
+                  :type: :string
+                KeyType:
+                  :sym: :key_type
+                  :type: :string
+            Projection:
+              :sym: :projection
+              :type: :hash
+              :members:
+                ProjectionType:
+                  :sym: :projection_type
+                  :type: :string
+                NonKeyAttributes:
+                  :sym: :non_key_attributes
+                  :type: :string
+            IndexStatus:
+              :sym: :index_status
+              :type: :string
+            ProvisionedThroughput:
+              :sym: :provisioned_throughput
+              :type: :hash
+              :members:
+                LastIncreaseDateTime:
+                  :sym: :last_increase_date_time
+                  :type: :time
+                LastDecreaseDateTime:
+                  :sym: :last_decrease_date_time
+                  :type: :time
+                NumberOfDecreasesToday:
+                  :sym: :number_of_decreases_today
+                  :type: :integer
+                ReadCapacityUnits:
+                  :sym: :read_capacity_units
+                  :type: :integer
+                WriteCapacityUnits:
+                  :sym: :write_capacity_units
+                  :type: :integer
+            IndexSizeBytes:
+              :sym: :index_size_bytes
+              :type: :integer
+            ItemCount:
+              :sym: :item_count
+              :type: :integer
 - :name: DescribeTable
   :method: :describe_table
   :inputs:
@@ -780,6 +1004,61 @@
             ItemCount:
               :sym: :item_count
               :type: :integer
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :hash
+          :members:
+            IndexName:
+              :sym: :index_name
+              :type: :string
+            KeySchema:
+              :sym: :key_schema
+              :type: :hash
+              :members:
+                AttributeName:
+                  :sym: :attribute_name
+                  :type: :string
+                KeyType:
+                  :sym: :key_type
+                  :type: :string
+            Projection:
+              :sym: :projection
+              :type: :hash
+              :members:
+                ProjectionType:
+                  :sym: :projection_type
+                  :type: :string
+                NonKeyAttributes:
+                  :sym: :non_key_attributes
+                  :type: :string
+            IndexStatus:
+              :sym: :index_status
+              :type: :string
+            ProvisionedThroughput:
+              :sym: :provisioned_throughput
+              :type: :hash
+              :members:
+                LastIncreaseDateTime:
+                  :sym: :last_increase_date_time
+                  :type: :time
+                LastDecreaseDateTime:
+                  :sym: :last_decrease_date_time
+                  :type: :time
+                NumberOfDecreasesToday:
+                  :sym: :number_of_decreases_today
+                  :type: :integer
+                ReadCapacityUnits:
+                  :sym: :read_capacity_units
+                  :type: :integer
+                WriteCapacityUnits:
+                  :sym: :write_capacity_units
+                  :type: :integer
+            IndexSizeBytes:
+              :sym: :index_size_bytes
+              :type: :integer
+            ItemCount:
+              :sym: :item_count
+              :type: :integer
 - :name: GetItem
   :method: :get_item
   :inputs:
@@ -851,6 +1130,33 @@
         CapacityUnits:
           :sym: :capacity_units
           :type: :float
+        Table:
+          :sym: :table
+          :type: :hash
+          :members:
+            CapacityUnits:
+              :sym: :capacity_units
+              :type: :float
+        LocalSecondaryIndexes:
+          :sym: :local_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
 - :name: ListTables
   :method: :list_tables
   :inputs:
@@ -960,6 +1266,33 @@
         CapacityUnits:
           :sym: :capacity_units
           :type: :float
+        Table:
+          :sym: :table
+          :type: :hash
+          :members:
+            CapacityUnits:
+              :sym: :capacity_units
+              :type: :float
+        LocalSecondaryIndexes:
+          :sym: :local_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
     ItemCollectionMetrics:
       :sym: :item_collection_metrics
       :type: :hash
@@ -1125,6 +1458,33 @@
         CapacityUnits:
           :sym: :capacity_units
           :type: :float
+        Table:
+          :sym: :table
+          :type: :hash
+          :members:
+            CapacityUnits:
+              :sym: :capacity_units
+              :type: :float
+        LocalSecondaryIndexes:
+          :sym: :local_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
 - :name: Scan
   :method: :scan
   :inputs:
@@ -1259,6 +1619,33 @@
         CapacityUnits:
           :sym: :capacity_units
           :type: :float
+        Table:
+          :sym: :table
+          :type: :hash
+          :members:
+            CapacityUnits:
+              :sym: :capacity_units
+              :type: :float
+        LocalSecondaryIndexes:
+          :sym: :local_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
 - :name: UpdateItem
   :method: :update_item
   :inputs:
@@ -1379,6 +1766,33 @@
         CapacityUnits:
           :sym: :capacity_units
           :type: :float
+        Table:
+          :sym: :table
+          :type: :hash
+          :members:
+            CapacityUnits:
+              :sym: :capacity_units
+              :type: :float
+        LocalSecondaryIndexes:
+          :sym: :local_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :map
+          :members:
+            :sym: :map_value
+            :type: :hash
+            :members:
+              CapacityUnits:
+                :sym: :capacity_units
+                :type: :float
     ItemCollectionMetrics:
       :sym: :item_collection_metrics
       :type: :hash
@@ -1425,7 +1839,23 @@
         WriteCapacityUnits:
         - :long
         - :required
-    - :required
+    GlobalSecondaryIndexUpdates:
+    - :list:
+      - :structure:
+          Update:
+          - :structure:
+              IndexName:
+              - :string
+              - :required
+              ProvisionedThroughput:
+              - :structure:
+                  ReadCapacityUnits:
+                  - :long
+                  - :required
+                  WriteCapacityUnits:
+                  - :long
+                  - :required
+              - :required
   :outputs:
     TableDescription:
       :sym: :table_description
@@ -1512,6 +1942,61 @@
                 NonKeyAttributes:
                   :sym: :non_key_attributes
                   :type: :string
+            IndexSizeBytes:
+              :sym: :index_size_bytes
+              :type: :integer
+            ItemCount:
+              :sym: :item_count
+              :type: :integer
+        GlobalSecondaryIndexes:
+          :sym: :global_secondary_indexes
+          :type: :hash
+          :members:
+            IndexName:
+              :sym: :index_name
+              :type: :string
+            KeySchema:
+              :sym: :key_schema
+              :type: :hash
+              :members:
+                AttributeName:
+                  :sym: :attribute_name
+                  :type: :string
+                KeyType:
+                  :sym: :key_type
+                  :type: :string
+            Projection:
+              :sym: :projection
+              :type: :hash
+              :members:
+                ProjectionType:
+                  :sym: :projection_type
+                  :type: :string
+                NonKeyAttributes:
+                  :sym: :non_key_attributes
+                  :type: :string
+            IndexStatus:
+              :sym: :index_status
+              :type: :string
+            ProvisionedThroughput:
+              :sym: :provisioned_throughput
+              :type: :hash
+              :members:
+                LastIncreaseDateTime:
+                  :sym: :last_increase_date_time
+                  :type: :time
+                LastDecreaseDateTime:
+                  :sym: :last_decrease_date_time
+                  :type: :time
+                NumberOfDecreasesToday:
+                  :sym: :number_of_decreases_today
+                  :type: :integer
+                ReadCapacityUnits:
+                  :sym: :read_capacity_units
+                  :type: :integer
+                WriteCapacityUnits:
+                  :sym: :write_capacity_units
+                  :type: :integer
             IndexSizeBytes:
               :sym: :index_size_bytes
               :type: :integer
