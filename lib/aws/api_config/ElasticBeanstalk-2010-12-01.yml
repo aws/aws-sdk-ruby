@@ -139,18 +139,26 @@
     ApplicationName:
     - :string
     - :required
-    VersionLabel:
-    - :string
     EnvironmentName:
     - :string
     - :required
-    TemplateName:
-    - :string
-    SolutionStackName:
+    Description:
     - :string
     CNAMEPrefix:
     - :string
-    Description:
+    Tier:
+    - :structure:
+        Name:
+        - :string
+        Type:
+        - :string
+        Version:
+        - :string
+    VersionLabel:
+    - :string
+    TemplateName:
+    - :string
+    SolutionStackName:
     - :string
     OptionSettings:
     - :membered_list:
@@ -203,6 +211,8 @@
     ApplicationName:
     - :string
     - :required
+    TerminateEnvByForce:
+    - :boolean
   :outputs:
     :children:
       DeleteApplicationResult:
@@ -425,6 +435,12 @@
                 :children:
                   member:
                     :rename: :triggers
+                    :list: true
+              Queues:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :queues
                     :list: true
 - :name: DescribeEnvironments
   :method: :describe_environments
@@ -746,11 +762,19 @@
     - :string
     EnvironmentName:
     - :string
+    Description:
+    - :string
+    Tier:
+    - :structure:
+        Name:
+        - :string
+        Type:
+        - :string
+        Version:
+        - :string
     VersionLabel:
     - :string
     TemplateName:
-    - :string
-    Description:
     - :string
     OptionSettings:
     - :membered_list:
