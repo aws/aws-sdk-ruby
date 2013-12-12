@@ -168,8 +168,8 @@ module Seahorse
       #   priority, the last one added will have the highest priority and
       #   the first one added will have the lowest priority.
       #
-      # @param [Class<Handler>] handler_class This should be a subclass
-      #   of {Handler} or any class that construct an object that
+      # @param [Class<Handler>] handler This should be a subclass
+      #   of {Handler} or anany class that construct an object that
       #   responds to `#call`.
       #
       # @option options [Symbol] :step (:build) The request life-cycle
