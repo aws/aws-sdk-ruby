@@ -313,6 +313,7 @@
     * `:iam_user_arn` - *required* - (String) The user's IAM ARN.
     * `:ssh_username` - (String) The user's SSH user name.
     * `:ssh_public_key` - (String) The user's public SSH key.
+    * `:allow_self_management` - (Boolean) Whether users can specify their own SSH public key through the My Settings page. For more information, see .
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:iam_user_arn` - (String)
@@ -556,11 +557,21 @@
         * `:cpu_threshold` - (Numeric)
         * `:memory_threshold` - (Numeric)
         * `:load_threshold` - (Numeric)
+:describe_my_user_profile: |-
+  Calls the DescribeMyUserProfile API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:user_profile` - (Hash)
+      * `:iam_user_arn` - (String)
+      * `:name` - (String)
+      * `:ssh_username` - (String)
+      * `:ssh_public_key` - (String)
 :describe_permissions: |-
   Calls the DescribePermissions API operation.
   @param [Hash] options
-    * `:iam_user_arn` - *required* - (String) The user's IAM ARN. For more information about IAM ARNs, see Using Identifiers.
-    * `:stack_id` - *required* - (String) The stack ID.
+    * `:iam_user_arn` - (String) The user's IAM ARN. For more information about IAM ARNs, see Using Identifiers.
+    * `:stack_id` - (String) The stack ID.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:permissions` - (Array<Hash>)
@@ -568,6 +579,7 @@
       * `:iam_user_arn` - (String)
       * `:allow_ssh` - (Boolean)
       * `:allow_sudo` - (Boolean)
+      * `:level` - (String)
 :describe_raid_arrays: |-
   Calls the DescribeRaidArrays API operation.
   @param [Hash] options
@@ -601,6 +613,30 @@
       * `:type` - (String)
       * `:message` - (String)
       * `:created_at` - (String)
+:describe_stack_summary: |-
+  Calls the DescribeStackSummary API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:stack_summary` - (Hash)
+      * `:stack_id` - (String)
+      * `:name` - (String)
+      * `:layers_count` - (Integer)
+      * `:apps_count` - (Integer)
+      * `:instances_count` - (Hash)
+        * `:booting` - (Integer)
+        * `:connection_lost` - (Integer)
+        * `:pending` - (Integer)
+        * `:rebooting` - (Integer)
+        * `:requested` - (Integer)
+        * `:running_setup` - (Integer)
+        * `:setup_failed` - (Integer)
+        * `:shutting_down` - (Integer)
+        * `:start_failed` - (Integer)
+        * `:stopped` - (Integer)
+        * `:terminated` - (Integer)
+        * `:terminating` - (Integer)
 :describe_stacks: |-
   Calls the DescribeStacks API operation.
   @param [Hash] options
@@ -653,7 +689,7 @@
 :describe_user_profiles: |-
   Calls the DescribeUserProfiles API operation.
   @param [Hash] options
-    * `:iam_user_arns` - *required* - (Array&lt;<String>) An array of IAM user ARNs that identify the users to be described.
+    * `:iam_user_arns` - (Array&lt;<String>) An array of IAM user ARNs that identify the users to be described.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:user_profiles` - (Array<Hash>)
@@ -661,6 +697,7 @@
       * `:name` - (String)
       * `:ssh_username` - (String)
       * `:ssh_public_key` - (String)
+      * `:allow_self_management` - (Boolean)
 :describe_volumes: |-
   Calls the DescribeVolumes API operation.
   @param [Hash] options
@@ -749,6 +786,7 @@
     * `:iam_user_arn` - *required* - (String) The user's IAM ARN.
     * `:allow_ssh` - (Boolean) The user is allowed to use SSH to communicate with the instance.
     * `:allow_sudo` - (Boolean) The user is allowed to use sudo to elevate privileges.
+    * `:level` - (String) The user's permission level, which must be set to one of the following strings. You cannot set your own permissions level. deny show deploy manage iam_only For more information on the permissions associated with these levels, see Managing User Permissions
   @return [Core::Response]
 :set_time_based_auto_scaling: |-
   Calls the SetTimeBasedAutoScaling API operation.
@@ -869,6 +907,11 @@
       * `:shutdown` - (Array&lt;<String>) An array of custom recipe names to be run following a shutdown event.
     * `:install_updates_on_boot` - (Boolean) Whether to install operating system and package updates when the instance boots. The default value is  `true` . To control when updates are installed, set this value to  `false` . You must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the default value of  `true` , to ensure that your instances have the latest security updates.
   @return [Core::Response]
+:update_my_user_profile: |-
+  Calls the UpdateMyUserProfile API operation.
+  @param [Hash] options
+    * `:ssh_public_key` - (String) The user's SSH public key.
+  @return [Core::Response]
 :update_stack: "Calls the UpdateStack API operation.\n@param [Hash] options\n  * `:stack_id`
   - *required* - (String) The stack ID.\n  * `:name` - (String) The stack's new name.\n
   \ * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value
@@ -934,6 +977,7 @@
     * `:iam_user_arn` - *required* - (String) The user IAM ARN.
     * `:ssh_username` - (String) The user's new SSH user name.
     * `:ssh_public_key` - (String) The user's new SSH public key.
+    * `:allow_self_management` - (Boolean) Whether users can specify their own SSH public key through the My Settings page. For more information, see Managing User Permissions.
   @return [Core::Response]
 :update_volume: |-
   Calls the UpdateVolume API operation.
