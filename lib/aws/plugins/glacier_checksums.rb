@@ -23,7 +23,6 @@ module Aws
     class GlacierChecksums < Seahorse::Client::Plugin
 
       CHECKSUM_OPERATIONS = [
-        :complete_multipart_upload,
         :upload_archive,
         :upload_multipart_part,
       ]

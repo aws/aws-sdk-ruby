@@ -82,6 +82,11 @@
             "type": "integer",
             "location": "header",
             "serialized_name": "x-amz-archive-size"
+          },
+          "checksum": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-sha256-tree-hash"
           }
         }
       },

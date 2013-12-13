@@ -6,7 +6,6 @@ module Aws::Api::ServiceTranslators::Glacier
 
     def translate(api)
       apply_plugins(api)
-      remove_checksum(api)
       convert_types(api)
     end
 
@@ -14,12 +13,6 @@ module Aws::Api::ServiceTranslators::Glacier
       api.plugins << "Aws::Plugins::GlacierAccountId"
       api.plugins << "Aws::Plugins::GlacierApiVersion"
       api.plugins << "Aws::Plugins::GlacierChecksums"
-    end
-
-    # this checksum parameter - it must be calculated on xml that is not user
-    # supplied, so the sdk has to compute the checksum after building the xml
-    def remove_checksum(api)
-      api.operations[:complete_multipart_upload].input.members.delete(:checksum)
     end
 
     # Shapes that are bound to headers and the request URI are all typed as
