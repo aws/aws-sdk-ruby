@@ -8,7 +8,8 @@ module Aws
     class SignatureV4 < Seahorse::Client::Plugin
 
       option(:sigv4_name) do |config|
-        config.api.metadata['endpoint_prefix']
+        config.api.metadata['signing_name'] ||
+          config.api.metadata['endpoint_prefix']
       end
 
       option(:sigv4_region) do |config|
