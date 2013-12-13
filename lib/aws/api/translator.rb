@@ -141,8 +141,8 @@ module Aws
       end
 
       def set_endpoint_prefix(prefix)
-        data = MultiJson.load(File.read('apis/configuration/endpoints.json'))
-        region_names = data['services'][prefix]
+        data = MultiJson.load(File.read(File.join(GEM_ROOT, 'apis', 'configuration', 'endpoints.json')))
+        region_names = data['services'][prefix] || []
         regions = {}
         region_names.each do |region|
           regions[region] = data['regions'][region][prefix]['hostname']
