@@ -1,0 +1,8 @@
+operation: get_bucket_policy
+params:
+  :bucket: 'bucket-name'
+response:
+  status_code: 200
+  body: '{ "policy": "json-document" }'
+data:
+  :policy: '{ "policy": "json-document" }'

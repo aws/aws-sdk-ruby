@@ -189,7 +189,7 @@ module Seahorse
         # @return [Boolean] Returns `true` if the request input body
         #   should be sent as blob/raw data (e.g. from a file).
         def raw_payload?
-          payload_member.is_a?(BlobShape)
+          !payload_member.is_a?(StructureShape)
         end
 
         private
