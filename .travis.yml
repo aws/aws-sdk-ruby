@@ -10,7 +10,10 @@ rvm:
 env:
   - OX=1 OJ=1
   - NOKOGIRI=1
+gemfile:
+  - Gemfile
 matrix:
   exclude:
     - rvm: jruby
-    - env: OX=1 OJ=1
+      env: OX=1 OJ=1
+      gemfile: Gemfile
