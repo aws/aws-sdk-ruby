@@ -1,0 +1,23 @@
+# This test ensures the GetJobOutput operation correctly manages the
+# http status code response.
+operation: get_job_output
+params:
+  :vault_name: 'vault'
+  :job_id: 'id'
+response:
+  status_code: 200
+  headers:
+    "x-amz-sha256-tree-hash": 'checksum'
+    "Content-Range": 'range'
+    "Accept-Ranges": 'accept-ranges'
+    "Content-Type": 'content-type'
+    "x-amz-archive-description": 'desc'
+  body: '{ "job": "output" }'
+data:
+  :body: '{ "job": "output" }'
+  :checksum: 'checksum'
+  :content_range: 'range'
+  :accept_ranges: 'accept-ranges'
+  :content_type: 'content-type'
+  :status: 200
+  :archive_description: 'desc'

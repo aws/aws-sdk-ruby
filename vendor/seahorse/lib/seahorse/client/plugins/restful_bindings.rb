@@ -71,8 +71,16 @@ module Seahorse
           def parse_response(response)
             output = response.context.operation.output
             response.data ||= Aws::Structure.new(output.members.keys)
+            extract_status_code(response)
             extract_headers(response)
             extract_body(response)
+          end
+
+          def extract_status_code(response)
+            if member = response.context.operation.output.status_code_member
+              status_code = response.http_response.status_code
+              response.data[member.member_name] = status_code
+            end
           end
 
           def extract_headers(response)

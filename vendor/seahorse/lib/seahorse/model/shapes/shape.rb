@@ -170,6 +170,10 @@ module Seahorse
           member_map['body']
         end
 
+        def status_code_member
+          member_map['http_status'].values.first
+        end
+
         # @return [StructureShape] Returns a structure with each of the
         #   members that represent the request body.
         def payload_member
@@ -196,7 +200,12 @@ module Seahorse
 
         def member_map
           @member_map ||= begin
-            { 'header' => {}, 'uri' => {}, 'body' => {} }.tap do |map|
+            {
+              'http_status' => {},
+              'header' => {},
+              'uri' => {},
+              'body' => {} 
+            }.tap do |map|
               members.each do |member_name, member|
                 map[member.location][member_name] = member
               end
