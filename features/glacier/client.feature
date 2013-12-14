@@ -20,6 +20,11 @@ Feature: Amazon Glacier
     When I upload an archive from a 5.5MB large file
     Then I should be able to delete the archive
 
+  @multipart @upload @slow
+  Scenario: Using multipart upload interface
+    When I multipart-upload a 15.5MB file in 1048576 byte chunks
+    Then I should be able to delete the archive
+
   # There was an issue where the client would fail attempting to compute
   # a checksum of an empty body, this step ensures that the checksum
   # computation does not hang.

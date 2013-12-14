@@ -18,6 +18,7 @@ module Aws
   autoload :Service, "#{SRC}/service"
   autoload :Structure, "#{SRC}/structure"
   autoload :TimestampFormatter, "#{SRC}/timestamp_formatter"
+  autoload :TreeHash, "#{SRC}/tree_hash"
   autoload :Util, "#{SRC}/util"
   autoload :VERSION, "#{SRC}/version"
 

@@ -34,17 +34,18 @@ module Aws
 
         def call(context)
           unless context.http_request.headers[TREE_HASH]
-            populate_checksum_headers(context.http_request)
+            populate_checksum_headers(context)
           end
           @handler.call(context)
         end
 
         private
 
-        def populate_checksum_headers(http_req)
-          compute_checksums(http_req.body) do |hash, tree_hash|
-            http_req.headers[HASH] = hash
-            http_req.headers[TREE_HASH] = tree_hash
+        def populate_checksum_headers(context)
+          compute_checksums(context.http_request.body) do |hash, tree_hash|
+            context.http_request.headers[HASH] = hash
+            context.http_request.headers[TREE_HASH] = tree_hash.digest
+            context[:tree_hash] = tree_hash
           end
         end
 
@@ -54,45 +55,26 @@ module Aws
         # here so the sigv4 signer does not need to re-read the body.
         def compute_checksums(body, &block)
 
+          tree_hash = TreeHash.new
           digest = OpenSSL::Digest::Digest.new('sha256')
-          tree_digest = OpenSSL::Digest::Digest.new('sha256')
-          tree_parts = []
 
           # if the body is empty/EOF, then we should compute the
           # digests of the empty string
           if body.size == 0
-            tree_parts << tree_digest.update('').digest
+            tree_hash.update('')
             digest.update('')
           end
 
           until body.eof?
             chunk = body.read(1024 * 1024) # read 1MB
-            tree_parts << tree_digest.update(chunk).digest
-            tree_digest.reset
+            tree_hash.update(chunk)
             digest.update(chunk)
           end
 
           body.rewind
 
-          yield(digest.to_s, compute_tree_hash(tree_parts))
+          yield(digest.to_s, tree_hash)
 
-        end
-
-        def compute_tree_hash hashes
-          digest = OpenSSL::Digest::Digest.new('sha256')
-          until hashes.count == 1
-            hashes = hashes.each_slice(2).map do |h1,h2|
-              digest.reset
-              if h2
-                digest.update(h1)
-                digest.update(h2)
-                digest.digest
-              else
-                h1
-              end
-            end
-          end
-          hashes.first.bytes.map{|x| x.to_i.to_s(16).rjust(2,'0')}.join('')
         end
       end
 
