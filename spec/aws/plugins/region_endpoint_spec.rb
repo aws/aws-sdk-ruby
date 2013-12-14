@@ -20,14 +20,26 @@ module Aws
           expect(client_class.new(region: 'region').config.region).to eq('region')
         end
 
-        it 'defaults to ENV["AWS_REGION"]' do
-          env['AWS_REGION'] = 'env-region'
+        it 'defaults to ENV["AWS_DEFAULT_REGION"]' do
+          env['AWS_DEFAULT_REGION'] = 'env-region'
           expect(client_class.new.config.region).to eq('env-region')
         end
 
+        it 'defaults to ENV["AWS_REGION"]' do
+          env['AWS_REGION'] = 'env-fallback1'
+          expect(client_class.new.config.region).to eq('env-fallback1')
+        end
+
         it 'falls back to ENV["AMAZON_REGION"]' do
-          env['AMAZON_REGION'] = 'region-fallback'
-          expect(client_class.new.config.region).to eq('region-fallback')
+          env['AMAZON_REGION'] = 'region-fallback2'
+          expect(client_class.new.config.region).to eq('region-fallback2')
+        end
+
+        it 'prefers AWS_DEFAULT_REGION to AWS_REGION or AMAZON_REGION' do
+          env['AWS_DEFAULT_REGION'] = 'aws-default-region'
+          env['AWS_REGION'] = 'aws-region'
+          env['AMAZON_REGION'] = 'amazon-region'
+          expect(client_class.new.config.region).to eq('aws-default-region')
         end
 
         it 'prefers AWS_REGION to AMAZON_REGION' do
