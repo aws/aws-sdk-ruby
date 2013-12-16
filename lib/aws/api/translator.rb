@@ -106,6 +106,7 @@ module Aws
       metadata :xmlnamespace
 
       ignore :global_endpoint
+      metadata :regional_endpoints
 
       def set_type(type)
         plugins = @properties['plugins'] ||= []
