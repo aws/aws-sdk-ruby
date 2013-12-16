@@ -2,7 +2,7 @@ module Aws
   module Plugins
     class UserAgent < Seahorse::Client::Plugin
 
-      option(:user_agent_prefix)
+      option(:user_agent_suffix)
 
       # @api private
       class Handler < Seahorse::Client::Handler
@@ -13,12 +13,12 @@ module Aws
         end
 
         def set_user_agent(context)
-          ua = "%s aws-sdk-ruby/#{VERSION} %s/%s %s Seahorse/%s" % [
-            context.config.user_agent_prefix,
+          ua = "aws-sdk-ruby2/#{VERSION} %s/%s %s Seahorse/%s %s" % [
             (RUBY_ENGINE rescue nil or "ruby"),
             RUBY_VERSION,
             RUBY_PLATFORM,
             Seahorse::VERSION,
+            context.config.user_agent_suffix,
           ]
           context.http_request.headers['User-Agent'] = ua.strip
         end
