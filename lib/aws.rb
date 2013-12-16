@@ -155,7 +155,7 @@ module Aws
     # (class name) for the new service class and a list of client API
     # versions.
     #
-    #     Aws.add_servcie(:S3, ['apis/S3-2006-03-01.json'])
+    #     Aws.add_service(:S3, ['apis/S3-2006-03-01.json'])
     #
     # This method is called for each service defined in the apis directory of
     # this project.
