@@ -1,4 +1,3 @@
-
 module Seahorse
   module Model
     module Shapes
