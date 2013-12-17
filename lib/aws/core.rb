@@ -201,7 +201,6 @@ module AWS
     autoload :RESTResponseParser, "#{SRC}/core/rest_response_parser"
 
     autoload :ServiceInterface, "#{SRC}/core/service_interface"
-    autoload :Signer, "#{SRC}/core/signer"
     autoload :UriEscape, "#{SRC}/core/uri_escape"
 
     module Options
