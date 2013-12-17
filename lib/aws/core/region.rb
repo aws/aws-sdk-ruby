@@ -42,6 +42,7 @@ module AWS
     # @attr_reader [Glacier] glacier
     # @attr_reader [IAM] iam
     # @attr_reader [ImportExport] import_export
+    # @attr_reader [Kinesis] kinesis
     # @attr_reader [OpsWorks] ops_works
     # @attr_reader [RDS] rds
     # @attr_reader [Redshift] redshift
