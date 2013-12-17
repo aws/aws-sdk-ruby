@@ -33,9 +33,17 @@ module Seahorse
       # You can stream the raw HTTP response body to a File, or any IO-like
       # object, by passing the `:target` option.
       #
+      #     # create a new file at the given path
+      #     request.send_request(target: '/path/to/target/file')
+      #
+      #     # or provide an IO object to write to
       #     File.open('photo.jpg', 'wb') do |file|
       #       request.send_request(target: file)
       #     end
+      #
+      # **Please Note**: The target IO object may receive `#truncate(0)`
+      # if the request generates a networking error and bytes have already
+      # been written to the target.
       #
       # ## Block Streaming
       #
@@ -50,7 +58,13 @@ module Seahorse
       # **Please Note**: When streaming to a block, it is not possible to
       # retry failed requests.
       #
+      # @option options [String, IO] :target When specified, the HTTP response
+      #   body is written to target.  This is helpful when you are sending
+      #   a request that may return a large payload that you don't want to
+      #   load into memory.
+      #
       # @return [Response]
+      #
       def send_request(options = {}, &block)
         set_target(options, &block)
         resp = @handlers.to_stack.call(@context)
