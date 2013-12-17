@@ -137,12 +137,15 @@ The SDK currently supports the following services:
       <td>2012-08-10</td>
     </tr>
     <tr>
-      <td rowspan="2">AWS::EC2</td>
+      <td rowspan="3">AWS::EC2</td>
       <td>2013-08-15</td>
-      <td rowspan="2">Amazon Elastic Compute Cloud</td>
+      <td rowspan="3">Amazon Elastic Compute Cloud</td>
     </tr>
     <tr>
       <td>2013-10-01</td>
+    </tr>
+    <tr>
+      <td>2013-10-15</td>
     </tr>
     <tr>
       <td>AWS::ElastiCache</td>
@@ -183,6 +186,11 @@ The SDK currently supports the following services:
       <td>AWS::ImportExport</td>
       <td>2010-06-01</td>
       <td>AWS Import/Export</td>
+    </tr>
+    <tr>
+      <td>AWS::Kinesis</td>
+      <td>2013-11-04</td>
+      <td>Amazon Kinesis</td>
     </tr>
     <tr>
       <td>AWS::OpsWorks</td>
