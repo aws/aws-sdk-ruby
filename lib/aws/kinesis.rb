@@ -43,7 +43,6 @@ module AWS
 
     autoload :Client, 'aws/kinesis/client'
     autoload :Errors, 'aws/kinesis/errors'
-    autoload :Request, 'aws/kinesis/request'
 
     include Core::ServiceInterface
 
