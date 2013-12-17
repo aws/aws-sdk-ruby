@@ -12,6 +12,9 @@
 # language governing permissions and limitations under the License.
 
 module AWS
-  # Current version of the AWS SDK for Ruby
-  VERSION = '1.30.0'
+  class Kinesis
+    module Errors
+      extend Core::LazyErrorClasses
+    end
+  end
 end

@@ -53,6 +53,14 @@
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:step_ids` - (Array<String>)
+:add_tags: |-
+  Calls the AddTags API operation.
+  @param [Hash] options
+    * `:resource_id` - (String) The Amazon EMR resource identifier to which tags will be added. This value must be a cluster identifier.
+    * `:tags` - (Array&lt;<Hash>) A list of tags to associate with a cluster and propagate to Amazon EC2 instances. Tags are user-defined key/value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.
+      * `:key` - (String) A user-defined key, which is the minimum required information for a valid tag. For more information, see Tagging Amazon EMR Resources.
+      * `:value` - (String) A user-defined value, which is optional in a tag. For more information, see Tagging Amazon EMR Resources.
+  @return [Core::Response]
 :describe_cluster: |-
   Calls the DescribeCluster API operation.
   @param [Hash] options
@@ -87,6 +95,9 @@
         * `:version` - (String)
         * `:args` - (Array<String>)
         * `:additional_info` - (Hash<String,String>)
+      * `:tags` - (Array<Hash>)
+        * `:key` - (String)
+        * `:value` - (String)
 :describe_job_flows: |-
   Calls the DescribeJobFlows API operation.
   @param [Hash] options
@@ -191,8 +202,8 @@
 :list_bootstrap_actions: |-
   Calls the ListBootstrapActions API operation.
   @param [Hash] options
-    * `:cluster_id` - (String) The cluster identifier for the bootstrap actions to list .
-    * `:marker` - (String) The pagination token that indicates the next set of results to retrieve .
+    * `:cluster_id` - (String) The cluster identifier for the bootstrap actions to list.
+    * `:marker` - (String) The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:bootstrap_actions` - (Array<Hash>)
@@ -203,10 +214,10 @@
 :list_clusters: |-
   Calls the ListClusters API operation.
   @param [Hash] options
-    * `:created_after` - (String&lt;<ISO8601 datetime>) The creation date and time beginning value filter for listing clusters .
-    * `:created_before` - (String&lt;<ISO8601 datetime>) The creation date and time end value filter for listing clusters .
+    * `:created_after` - (String&lt;<ISO8601 datetime>) The creation date and time beginning value filter for listing clusters.
+    * `:created_before` - (String&lt;<ISO8601 datetime>) The creation date and time end value filter for listing clusters.
     * `:cluster_states` - (Array&lt;<String>) The cluster state filters to apply when listing clusters.
-    * `:marker` - (String) The pagination token that indicates the next set of results to retrieve.
+    * `:marker` - (String) The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:clusters` - (Array<Hash>)
@@ -226,7 +237,7 @@
   Calls the ListInstanceGroups API operation.
   @param [Hash] options
     * `:cluster_id` - (String) The identifier of the cluster for which to list the instance groups.
-    * `:marker` - (String) The pagination token that indicates the next set of results to retrieve.
+    * `:marker` - (String) The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:instance_groups` - (Array<Hash>)
@@ -254,7 +265,7 @@
     * `:cluster_id` - (String) The identifier of the cluster for which to list the instances.
     * `:instance_group_id` - (String) The identifier of the instance group for which to list the instances.
     * `:instance_group_types` - (Array&lt;<String>) The type of instance group for which to list the instances.
-    * `:marker` - (String) The pagination token that indicates the next set of results to retrieve.
+    * `:marker` - (String) The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:instances` - (Array<Hash>)
@@ -279,7 +290,7 @@
   @param [Hash] options
     * `:cluster_id` - (String) The identifier of the cluster for which to list the steps.
     * `:step_states` - (Array&lt;<String>) The filter to limit the step list based on certain states.
-    * `:marker` - (String) The pagination token that indicates the next set of results to retrieve.
+    * `:marker` - (String) The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:steps` - (Array<Hash>)
@@ -302,6 +313,12 @@
       * `:instance_group_id` - *required* - (String) Unique ID of the instance group to expand or shrink.
       * `:instance_count` - (Integer) Target size for the instance group.
       * `:ec2_instance_ids_to_terminate` - (Array&lt;<String>) The EC2 InstanceIds to terminate. For advanced users only. Once you terminate the instances, the instance group will not return to its original requested size.
+  @return [Core::Response]
+:remove_tags: |-
+  Calls the RemoveTags API operation.
+  @param [Hash] options
+    * `:resource_id` - (String) The Amazon EMR resource identifier from which tags will be removed. This value must be a cluster identifier.
+    * `:tag_keys` - (Array&lt;<String>) A list of tag keys to remove from a resource.
   @return [Core::Response]
 :run_job_flow: |-
   Calls the RunJobFlow API operation.
@@ -352,12 +369,15 @@
       * `:script_bootstrap_action` - *required* - (Hash) The script run by the bootstrap action.
         * `:path` - *required* - (String) Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.
         * `:args` - (Array&lt;<String>) A list of command line arguments to pass to the bootstrap action script.
-    * `:supported_products` - (Array&lt;<String>) A list of strings that indicates third-party software to use with the job flow. For more information, go to Use Third Party Applications with Amazon EMR. Currently supported values are: "karmasphere-enterprise-utility" - tag the job flow for management by Karmasphere. "mapr-m3" - launch the job flow using MapR M3 Edition. "mapr-m5" - launch the job flow using MapR M5 Edition.
-    * `:new_supported_products` - (Array&lt;<Hash>) A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see Launch a Job Flow on the MapR Distribution for Hadoop. Currently supported values are: "karmasphere-enterprise-utility" - tag the job flow for management by Karmasphere. "mapr-m3" - launch the job flow using MapR M3 Edition. "mapr-m5" - launch the job flow using MapR M5 Edition. "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.
+    * `:supported_products` - (Array&lt;<String>) A list of strings that indicates third-party software to use with the job flow. For more information, go to Use Third Party Applications with Amazon EMR. Currently supported values are: "mapr-m3" - launch the job flow using MapR M3 Edition. "mapr-m5" - launch the job flow using MapR M5 Edition.
+    * `:new_supported_products` - (Array&lt;<Hash>) A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see Launch a Job Flow on the MapR Distribution for Hadoop. Currently supported values are: "mapr-m3" - launch the job flow using MapR M3 Edition. "mapr-m5" - launch the job flow using MapR M5 Edition. "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.
       * `:name` - (String) The name of the product configuration.
       * `:args` - (Array&lt;<String>) The list of user-supplied arguments.
     * `:visible_to_all_users` - (Boolean) Whether the job flow is visible to all IAM users of the AWS account associated with the job flow. If this value is set to  `true` , all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the job flow. If it is set to  `false` , only the IAM user that created the job flow can view and manage it.
     * `:job_flow_role` - (String) An IAM role for the job flow. The EC2 instances of the job flow assume this role. The default role is EMRJobflowDefault. In order to use the default role, you must have already created it using the CLI.
+    * `:tags` - (Array&lt;<Hash>) A list of tags to associate with a cluster and propagate to Amazon EC2 instances.
+      * `:key` - (String) A user-defined key, which is the minimum required information for a valid tag. For more information, see Tagging Amazon EMR Resources.
+      * `:value` - (String) A user-defined value, which is optional in a tag. For more information, see Tagging Amazon EMR Resources.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:job_flow_id` - (String)

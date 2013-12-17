@@ -12,6 +12,22 @@
 # language governing permissions and limitations under the License.
 
 module AWS
-  # Current version of the AWS SDK for Ruby
-  VERSION = '1.30.0'
+  class Kinesis
+
+    # Client class for Amazon Kinesis.
+    class Client < Core::JSONClient
+
+      API_VERSION = '2013-11-04'
+
+      # @api private
+      CACHEABLE_REQUESTS = Set[]
+
+    end
+
+    class Client::V20131104 < Client
+
+      define_client_methods('2013-11-04')
+
+    end
+  end
 end

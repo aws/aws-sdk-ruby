@@ -381,6 +381,8 @@
     - :string
     SshPublicKey:
     - :string
+    AllowSelfManagement:
+    - :boolean
   :outputs:
     IamUserArn:
       :sym: :iam_user_arn
@@ -971,15 +973,33 @@
             LoadThreshold:
               :sym: :load_threshold
               :type: :float
+- :name: DescribeMyUserProfile
+  :method: :describe_my_user_profile
+  :inputs: {}
+  :outputs:
+    UserProfile:
+      :sym: :user_profile
+      :type: :hash
+      :members:
+        IamUserArn:
+          :sym: :iam_user_arn
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        SshUsername:
+          :sym: :ssh_username
+          :type: :string
+        SshPublicKey:
+          :sym: :ssh_public_key
+          :type: :string
 - :name: DescribePermissions
   :method: :describe_permissions
   :inputs:
     IamUserArn:
     - :string
-    - :required
     StackId:
     - :string
-    - :required
   :outputs:
     Permissions:
       :sym: :permissions
@@ -997,6 +1017,9 @@
         AllowSudo:
           :sym: :allow_sudo
           :type: :boolean
+        Level:
+          :sym: :level
+          :type: :string
 - :name: DescribeRaidArrays
   :method: :describe_raid_arrays
   :inputs:
@@ -1073,6 +1096,69 @@
         CreatedAt:
           :sym: :created_at
           :type: :string
+- :name: DescribeStackSummary
+  :method: :describe_stack_summary
+  :inputs:
+    StackId:
+    - :string
+    - :required
+  :outputs:
+    StackSummary:
+      :sym: :stack_summary
+      :type: :hash
+      :members:
+        StackId:
+          :sym: :stack_id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        LayersCount:
+          :sym: :layers_count
+          :type: :integer
+        AppsCount:
+          :sym: :apps_count
+          :type: :integer
+        InstancesCount:
+          :sym: :instances_count
+          :type: :hash
+          :members:
+            Booting:
+              :sym: :booting
+              :type: :integer
+            ConnectionLost:
+              :sym: :connection_lost
+              :type: :integer
+            Pending:
+              :sym: :pending
+              :type: :integer
+            Rebooting:
+              :sym: :rebooting
+              :type: :integer
+            Requested:
+              :sym: :requested
+              :type: :integer
+            RunningSetup:
+              :sym: :running_setup
+              :type: :integer
+            SetupFailed:
+              :sym: :setup_failed
+              :type: :integer
+            ShuttingDown:
+              :sym: :shutting_down
+              :type: :integer
+            StartFailed:
+              :sym: :start_failed
+              :type: :integer
+            Stopped:
+              :sym: :stopped
+              :type: :integer
+            Terminated:
+              :sym: :terminated
+              :type: :integer
+            Terminating:
+              :sym: :terminating
+              :type: :integer
 - :name: DescribeStacks
   :method: :describe_stacks
   :inputs:
@@ -1234,7 +1320,6 @@
     IamUserArns:
     - :list:
       - :string
-    - :required
   :outputs:
     UserProfiles:
       :sym: :user_profiles
@@ -1252,6 +1337,9 @@
         SshPublicKey:
           :sym: :ssh_public_key
           :type: :string
+        AllowSelfManagement:
+          :sym: :allow_self_management
+          :type: :boolean
 - :name: DescribeVolumes
   :method: :describe_volumes
   :inputs:
@@ -1414,6 +1502,8 @@
     - :boolean
     AllowSudo:
     - :boolean
+    Level:
+    - :string
   :outputs: {}
 - :name: SetTimeBasedAutoScaling
   :method: :set_time_based_auto_scaling
@@ -1648,6 +1738,12 @@
     InstallUpdatesOnBoot:
     - :boolean
   :outputs: {}
+- :name: UpdateMyUserProfile
+  :method: :update_my_user_profile
+  :inputs:
+    SshPublicKey:
+    - :string
+  :outputs: {}
 - :name: UpdateStack
   :method: :update_stack
   :inputs:
@@ -1713,6 +1809,8 @@
     - :string
     SshPublicKey:
     - :string
+    AllowSelfManagement:
+    - :boolean
   :outputs: {}
 - :name: UpdateVolume
   :method: :update_volume

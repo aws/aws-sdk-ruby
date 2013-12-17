@@ -85,6 +85,19 @@
     StepIds:
       :sym: :step_ids
       :type: :string
+- :name: AddTags
+  :method: :add_tags
+  :inputs:
+    ResourceId:
+    - :string
+    Tags:
+    - :list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
+  :outputs: {}
 - :name: DescribeCluster
   :method: :describe_cluster
   :inputs:
@@ -184,6 +197,16 @@
               :members:
                 :sym: :map_value
                 :type: :string
+        Tags:
+          :sym: :tags
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            Value:
+              :sym: :value
+              :type: :string
 - :name: DescribeJobFlows
   :method: :describe_job_flows
   :inputs:
@@ -768,6 +791,15 @@
           - :list:
             - :string
   :outputs: {}
+- :name: RemoveTags
+  :method: :remove_tags
+  :inputs:
+    ResourceId:
+    - :string
+    TagKeys:
+    - :list:
+      - :string
+  :outputs: {}
 - :name: RunJobFlow
   :method: :run_job_flow
   :inputs:
@@ -878,6 +910,13 @@
     - :boolean
     JobFlowRole:
     - :string
+    Tags:
+    - :list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
     JobFlowId:
       :sym: :job_flow_id

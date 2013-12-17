@@ -12,6 +12,15 @@
 # language governing permissions and limitations under the License.
 
 module AWS
-  # Current version of the AWS SDK for Ruby
-  VERSION = '1.30.0'
+  class Kinesis
+    # @api private
+    class Request < Core::Http::Request
+      include Core::Signature::Version4
+
+      def service
+        'kinesis'
+      end
+
+    end
+  end
 end
