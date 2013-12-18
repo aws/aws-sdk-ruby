@@ -1,0 +1,406 @@
+{
+  "version": "2013-12-02",
+  "metadata": {
+    "endpoint_prefix": "kinesis",
+    "json_target_prefix": "Kinesis_20131202",
+    "json_version": 1.1,
+    "service_abbreviation": "Kinesis",
+    "service_class_name": "Kinesis",
+    "service_full_name": "Amazon Kinesis"
+  },
+  "plugins": [
+    "Seahorse::Client::Plugins::Logging",
+    "Seahorse::Client::Plugins::RestfulBindings",
+    "Seahorse::Client::Plugins::ContentLength",
+    "Aws::Plugins::UserAgent",
+    "Aws::Plugins::RetryErrors",
+    "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::InstanceProfileCredentials",
+    "Aws::Plugins::ResponsePaging",
+    "Aws::Plugins::Credentials",
+    "Aws::Plugins::JsonProtocol",
+    "Aws::Plugins::JsonRpcHeaders",
+    "Aws::Plugins::SignatureV4"
+  ],
+  "operations": {
+    "create_stream": {
+      "name": "CreateStream",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stream_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StreamName"
+          },
+          "shard_count": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "ShardCount"
+          }
+        }
+      }
+    },
+    "delete_stream": {
+      "name": "DeleteStream",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stream_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StreamName"
+          }
+        }
+      }
+    },
+    "describe_stream": {
+      "name": "DescribeStream",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stream_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StreamName"
+          },
+          "limit": {
+            "type": "integer",
+            "serialized_name": "Limit"
+          },
+          "exclusive_start_shard_id": {
+            "type": "string",
+            "serialized_name": "ExclusiveStartShardId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "stream_description": {
+            "type": "structure",
+            "serialized_name": "StreamDescription",
+            "members": {
+              "stream_name": {
+                "type": "string",
+                "serialized_name": "StreamName"
+              },
+              "stream_arn": {
+                "type": "string",
+                "serialized_name": "StreamARN"
+              },
+              "stream_status": {
+                "type": "string",
+                "serialized_name": "StreamStatus",
+                "enum": [
+                  "CREATING",
+                  "DELETING",
+                  "ACTIVE",
+                  "UPDATING"
+                ]
+              },
+              "shards": {
+                "type": "list",
+                "serialized_name": "Shards",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "shard_id": {
+                      "type": "string",
+                      "serialized_name": "ShardId"
+                    },
+                    "parent_shard_id": {
+                      "type": "string",
+                      "serialized_name": "ParentShardId"
+                    },
+                    "adjacent_parent_shard_id": {
+                      "type": "string",
+                      "serialized_name": "AdjacentParentShardId"
+                    },
+                    "hash_key_range": {
+                      "type": "structure",
+                      "serialized_name": "HashKeyRange",
+                      "members": {
+                        "starting_hash_key": {
+                          "type": "string",
+                          "serialized_name": "StartingHashKey"
+                        },
+                        "ending_hash_key": {
+                          "type": "string",
+                          "serialized_name": "EndingHashKey"
+                        }
+                      }
+                    },
+                    "sequence_number_range": {
+                      "type": "structure",
+                      "serialized_name": "SequenceNumberRange",
+                      "members": {
+                        "starting_sequence_number": {
+                          "type": "string",
+                          "serialized_name": "StartingSequenceNumber"
+                        },
+                        "ending_sequence_number": {
+                          "type": "string",
+                          "serialized_name": "EndingSequenceNumber"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "has_more_shards": {
+                "type": "boolean",
+                "serialized_name": "HasMoreShards"
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_records": {
+      "name": "GetRecords",
+      "http_method": "POST",
+      "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "shard_iterator": "next_shard_iterat||"
+          }
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "shard_iterator": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ShardIterator"
+          },
+          "limit": {
+            "type": "integer",
+            "serialized_name": "Limit"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "records": {
+            "type": "list",
+            "serialized_name": "Records",
+            "members": {
+              "type": "structure",
+              "members": {
+                "sequence_number": {
+                  "type": "string",
+                  "serialized_name": "SequenceNumber"
+                },
+                "data": {
+                  "type": "blob",
+                  "serialized_name": "Data"
+                },
+                "partition_key": {
+                  "type": "string",
+                  "serialized_name": "PartitionKey"
+                }
+              }
+            }
+          },
+          "next_shard_iterator": {
+            "type": "string",
+            "serialized_name": "NextShardIterator"
+          }
+        }
+      }
+    },
+    "get_shard_iterator": {
+      "name": "GetShardIterator",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stream_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StreamName"
+          },
+          "shard_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ShardId"
+          },
+          "shard_iterator_type": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ShardIteratorType",
+            "enum": [
+              "AT_SEQUENCE_NUMBER",
+              "AFTER_SEQUENCE_NUMBER",
+              "TRIM_HORIZON",
+              "LATEST"
+            ]
+          },
+          "starting_sequence_number": {
+            "type": "string",
+            "serialized_name": "StartingSequenceNumber"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "shard_iterator": {
+            "type": "string",
+            "serialized_name": "ShardIterator"
+          }
+        }
+      }
+    },
+    "list_streams": {
+      "name": "ListStreams",
+      "http_method": "POST",
+      "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "exclusive_start_stream_name": "stream_names[-1].key"
+          },
+          "truncated_if": "has_more_streams"
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "limit": {
+            "type": "integer",
+            "serialized_name": "Limit"
+          },
+          "exclusive_start_stream_name": {
+            "type": "string",
+            "serialized_name": "ExclusiveStartStreamName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "stream_names": {
+            "type": "list",
+            "serialized_name": "StreamNames",
+            "members": {
+              "type": "string"
+            }
+          },
+          "has_more_streams": {
+            "type": "boolean",
+            "serialized_name": "HasMoreStreams"
+          }
+        }
+      }
+    },
+    "merge_shards": {
+      "name": "MergeShards",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stream_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StreamName"
+          },
+          "shard_to_merge": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ShardToMerge"
+          },
+          "adjacent_shard_to_merge": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "AdjacentShardToMerge"
+          }
+        }
+      }
+    },
+    "put_record": {
+      "name": "PutRecord",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stream_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StreamName"
+          },
+          "data": {
+            "type": "blob",
+            "required": true,
+            "serialized_name": "Data"
+          },
+          "partition_key": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "PartitionKey"
+          },
+          "explicit_hash_key": {
+            "type": "string",
+            "serialized_name": "ExplicitHashKey"
+          },
+          "sequence_number_for_ordering": {
+            "type": "string",
+            "serialized_name": "SequenceNumberForOrdering"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "shard_id": {
+            "type": "string",
+            "serialized_name": "ShardId"
+          },
+          "sequence_number": {
+            "type": "string",
+            "serialized_name": "SequenceNumber"
+          }
+        }
+      }
+    },
+    "split_shard": {
+      "name": "SplitShard",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stream_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StreamName"
+          },
+          "shard_to_split": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ShardToSplit"
+          },
+          "new_starting_hash_key": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "NewStartingHashKey"
+          }
+        }
+      }
+    }
+  }
+}
