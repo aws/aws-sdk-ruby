@@ -150,7 +150,7 @@ module Aws
         end
         @properties['metadata'] ||= {}
         @properties['metadata']['endpoint_prefix'] = prefix
-        @properties['metadata']['regional_endpoints'] = regions
+        @properties['metadata']['regional_endpoints'] = regions unless regions.empty?
       end
 
       def set_operations(operations)
