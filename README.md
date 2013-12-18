@@ -153,6 +153,7 @@ version.
 | Amazon Elastic Transcoder           | Aws::ElasticTranscoder    | 2012-09-25                     |
 | Amazon ElastiCache                  | Aws::ElastiCache          | 2012-11-15 &mdash; 2013-06-15  |
 | Amazon Glacier                      | Aws::Glacier              | 2012-06-01                     |
+| Amazon Kinesis                      | Aws::Kinesis              | 2013-12-02                     |
 | Amazon Redshift                     | Aws::Redshift             | 2012-12-01                     |
 | Amazon Relational Database Service  | Aws::RDS                  | 2013-01-10 &mdash; 2013-05-15  |
 | Amazon Route 53                     | Aws::Route53              | 2012-12-12                     |
