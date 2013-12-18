@@ -189,7 +189,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>AWS::Kinesis</td>
-      <td>2013-11-04</td>
+      <td>2013-12-02</td>
       <td>Amazon Kinesis</td>
     </tr>
     <tr>
