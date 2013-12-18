@@ -11,23 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module AWS
-  class Kinesis
+# language: en
+@kinesis @client
+Feature: AWS Kinesis
 
-    # Client class for Amazon Kinesis.
-    class Client < Core::JSONClient
-
-      API_VERSION = '2013-12-02'
-
-      # @api private
-      CACHEABLE_REQUESTS = Set[]
-
-    end
-
-    class Client::V20131202 < Client
-
-      define_client_methods('2013-12-02')
-
-    end
-  end
-end
+  Scenario: List Streams
+    When I list streams in kinesis
+    Then I should get back a response with stream names

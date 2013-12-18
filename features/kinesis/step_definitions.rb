@@ -11,23 +11,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-module AWS
-  class Kinesis
 
-    # Client class for Amazon Kinesis.
-    class Client < Core::JSONClient
+When(/^I list streams in kinesis$/) do
+  @kinesis = AWS.kinesis
+  @response = @kinesis.client.list_streams
+end
 
-      API_VERSION = '2013-12-02'
-
-      # @api private
-      CACHEABLE_REQUESTS = Set[]
-
-    end
-
-    class Client::V20131202 < Client
-
-      define_client_methods('2013-12-02')
-
-    end
-  end
+Then(/^I should get back a response with stream names$/) do
+  @response.data[:stream_names].should be_an(Array)
 end
