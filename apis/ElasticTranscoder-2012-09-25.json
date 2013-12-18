@@ -8,9 +8,7 @@
       "us-west-2": "elastictranscoder.us-west-2.amazonaws.com",
       "eu-west-1": "elastictranscoder.eu-west-1.amazonaws.com",
       "ap-northeast-1": "elastictranscoder.ap-northeast-1.amazonaws.com",
-      "ap-southeast-1": "elastictranscoder.ap-southeast-1.amazonaws.com",
-      "ap-southeast-2": "elastictranscoder.ap-southeast-2.amazonaws.com",
-      "sa-east-1": "elastictranscoder.sa-east-1.amazonaws.com"
+      "ap-southeast-1": "elastictranscoder.ap-southeast-1.amazonaws.com"
     },
     "service_class_name": "ElasticTranscoder",
     "service_full_name": "Amazon Elastic Transcoder"

@@ -4,6 +4,9 @@
     "endpoint_prefix": "kinesis",
     "json_target_prefix": "Kinesis_20131202",
     "json_version": 1.1,
+    "regional_endpoints": {
+      "us-east-1": "kinesis.us-east-1.amazonaws.com"
+    },
     "service_abbreviation": "Kinesis",
     "service_class_name": "Kinesis",
     "service_full_name": "Amazon Kinesis"

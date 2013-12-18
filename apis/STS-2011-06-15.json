@@ -10,7 +10,8 @@
       "ap-northeast-1": "sts.amazonaws.com",
       "ap-southeast-1": "sts.amazonaws.com",
       "ap-southeast-2": "sts.amazonaws.com",
-      "sa-east-1": "sts.amazonaws.com"
+      "sa-east-1": "sts.amazonaws.com",
+      "us-gov-west-1": "sts.us-gov-west-1.amazonaws.com"
     },
     "service_abbreviation": "AWS STS",
     "service_class_name": "STS",
