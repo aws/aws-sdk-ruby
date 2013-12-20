@@ -74,7 +74,7 @@ module AWS
 
           req.headers['authorization'] = authorization(req, key, datetime, content_sha256)
 
-          req.body_stream = chunk_signed_stream(req, drive_key(datetime)) if chunk_signing
+          req.body_stream = chunk_signed_stream(req, key) if chunk_signing
 
           req
         end
