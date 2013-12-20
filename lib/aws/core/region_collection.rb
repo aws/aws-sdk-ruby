@@ -72,7 +72,7 @@ module AWS
         regions = @service ?
           data['services'][@service.endpoint_prefix] :
           data['regions'].keys
-        regions.reject{|r| r =~ /us-gov/ }
+        regions.reject{ |r| r =~ /us-gov/ }.reject{ |r| r =~ /^cn-/ }
       end
 
       class << self
