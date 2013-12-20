@@ -19,7 +19,7 @@ module AWS
 
       API_VERSION = '2009-03-31'
 
-      signature_version :Version4, 'emr'
+      signature_version :Version4, 'elasticmapreduce'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]
