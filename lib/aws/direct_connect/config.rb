@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'DirectConnect', 'direct_connect', 'directconnect.%s.amazonaws.com'
+  add_service 'DirectConnect', 'direct_connect', 'directconnect'
 
 end

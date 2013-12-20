@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'SNS', 'sns', 'sns.%s.amazonaws.com'
+  add_service 'SNS', 'sns', 'sns'
 
 end

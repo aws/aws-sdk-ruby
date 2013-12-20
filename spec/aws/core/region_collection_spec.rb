@@ -35,10 +35,6 @@ module AWS
 
         let(:json) { File.read(File.join(AWS::ROOT, 'endpoints.json')) }
 
-        before(:each) { Net::HTTP.stub(:get).and_return(json) }
-
-        before(:each) { described_class.clear! }
-
         it 'should be enumerable' do
           regions.should be_an(Enumerable)
         end
@@ -52,21 +48,12 @@ module AWS
           yielded.should be(true)
         end
 
-        it 'loads data from the hosted endpoints.json file' do
+        it 'loads data from the bundled endpoints.json file' do
           host = 'aws-sdk-configurations.amazonwebservices.com'
           path = '/endpoints.json'
-          Net::HTTP.should_receive(:get).with(host, path).and_return(json)
-          regions.map(&:name)
-        end
-
-        it 'loads data from the hosted endpoints.json file behind a proxy' do
-          host = 'aws-sdk-configurations.amazonwebservices.com'
-          path = '/endpoints.json'
-          stub_proxy_uri = URI.parse('http://127.0.0.1:8080')
-          http = double "http"
-          AWS.config.stub(:proxy_uri) { stub_proxy_uri }
-          Net::HTTP.should_receive(:Proxy).with('127.0.0.1', 8080) { http }
-          http.should_receive(:get).with(host, path) { json }
+          File.should_receive(:read).
+            with(File.join(AWS::ROOT, 'endpoints.json')).
+            and_return(json)
           regions.map(&:name)
         end
 
@@ -78,7 +65,7 @@ module AWS
         end
 
         it 'caches the endpoints.json file' do
-          Net::HTTP.should_receive(:get).exactly(1).times.and_return(json)
+          File.should_receive(:read).exactly(1).times.and_return(json)
           regions.map(&:name)
           regions.map(&:name)
         end
@@ -88,7 +75,7 @@ module AWS
           it 'provides access to services with a global endpoint via any region' do
             AWS::IAM.global_endpoint?.should be(true)
             AWS::IAM.regions.map(&:name).should eq(['us-east-1'])
-            AWS.regions['fake-region'].iam.client.config.iam_region.should eq('us-east-1')
+            AWS.regions['us-west-2'].iam.client.config.iam_region.should eq('us-east-1')
           end
 
         end

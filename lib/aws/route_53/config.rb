@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'Route53', 'route_53', 'route53.amazonaws.com'
+  add_service 'Route53', 'route_53', 'route53'
 
 end

@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'CloudTrail', 'cloud_trail', 'cloudtrail.%s.amazonaws.com'
+  add_service 'CloudTrail', 'cloud_trail', 'cloudtrail'
 
 end

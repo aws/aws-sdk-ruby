@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'OpsWorks', 'ops_works', 'opsworks.%s.amazonaws.com'
+  add_service 'OpsWorks', 'ops_works', 'opsworks'
 
 end

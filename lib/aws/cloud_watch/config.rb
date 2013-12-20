@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'CloudWatch', 'cloud_watch', 'monitoring.%s.amazonaws.com'
+  add_service 'CloudWatch', 'cloud_watch', 'monitoring'
 
 end

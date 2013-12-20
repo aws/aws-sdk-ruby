@@ -392,7 +392,7 @@ module AWS
 
         end
 
-        def add_service name, ruby_name, endpoint_pattern = nil, &endpoint_builder
+        def add_service name, ruby_name, endpoint_prefix
 
           svc = SERVICES[name]
           svc_opt = svc.method_name
@@ -401,15 +401,12 @@ module AWS
           add_option(svc_opt, {})
 
           add_option :"#{ruby_name}_endpoint" do |config,value|
-            if value
-              value
-            elsif endpoint = config.send(svc_opt)[:endpoint]
-              endpoint
-            elsif endpoint_pattern
-              endpoint_pattern % config.endpoint_region(svc)
-            else
-              endpoint_builder.call(config.endpoint_region(svc))
-            end
+            region = config.endpoint_region(svc)
+            endpoint = value
+            endpoint ||= config.send(svc_opt)[:endpoint]
+            endpoint ||= Endpoints.hostname(region, endpoint_prefix)
+            endpoint ||= "#{endpoint_prefix}.#{region}.amazonaws.com"
+            endpoint
           end
 
           add_option(:"#{ruby_name}_port") do |config,value|

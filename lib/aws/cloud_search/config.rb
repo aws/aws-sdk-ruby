@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'CloudSearch', 'cloud_search', 'cloudsearch.%s.amazonaws.com'
+  add_service 'CloudSearch', 'cloud_search', 'cloudsearch'
 
 end

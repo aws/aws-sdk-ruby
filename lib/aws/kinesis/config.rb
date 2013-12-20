@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'Kinesis', 'kinesis', 'kinesis.%s.amazonaws.com'
+  add_service 'Kinesis', 'kinesis', 'kinesis'
 
 end

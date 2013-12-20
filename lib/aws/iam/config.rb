@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'IAM', 'iam', 'iam.amazonaws.com'
+  add_service 'IAM', 'iam', 'iam'
 
 end

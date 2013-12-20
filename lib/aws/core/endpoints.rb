@@ -11,14 +11,25 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS::Core::Configuration.module_eval do
+module AWS
+  module Core
+    # Provides a read-only interface to the bundled endpoints.json file.
+    module Endpoints
 
-  add_service 'DynamoDB', 'dynamo_db', 'dynamodb'
+      def hostname(region, endpoint_prefix)
+        region = endpoints["regions"][region] || {}
+        endpoint = region[endpoint_prefix] || {}
+        endpoint["hostname"]
+      end
+      module_function :hostname
 
-  add_option :dynamo_db_retry_throughput_errors, true, :boolean => true
+      def endpoints
+        @endpoints ||= begin
+          JSON.parse(File.read(File.join(AWS::ROOT, 'endpoints.json')))
+        end
+      end
+      module_function :endpoints
 
-  add_option :dynamo_db_big_decimals, true, :boolean => true
-
-  add_option :dynamo_db_crc32, true, :boolean => true
-
+    end
+  end
 end

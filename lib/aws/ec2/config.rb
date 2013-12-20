@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'EC2', 'ec2', 'ec2.%s.amazonaws.com'
+  add_service 'EC2', 'ec2', 'ec2'
 
 end

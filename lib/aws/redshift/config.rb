@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'Redshift', 'redshift', 'redshift.%s.amazonaws.com'
+  add_service 'Redshift', 'redshift', 'redshift'
 
 end

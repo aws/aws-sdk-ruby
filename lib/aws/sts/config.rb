@@ -13,12 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'STS', 'sts' do |region|
-    if region =~ /gov/
-      'sts.%s.amazonaws.com' % region
-    else
-      'sts.amazonaws.com'
-    end
-  end
-  
+  add_service 'STS', 'sts', 'sts'
+
 end

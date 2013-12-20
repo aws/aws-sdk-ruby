@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'ELB', 'elb', 'elasticloadbalancing.%s.amazonaws.com'
+  add_service 'ELB', 'elb', 'elasticloadbalancing'
 
 end

@@ -13,13 +13,7 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'SimpleDB', 'simple_db' do |region|
-    if region == 'us-east-1'
-      'sdb.amazonaws.com'
-    else
-      'sdb.%s.amazonaws.com' % region
-    end
-  end
+  add_service 'SimpleDB', 'simple_db', 'sdb'
 
   add_option :simple_db_consistent_reads, false, :boolean => true
 

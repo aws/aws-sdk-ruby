@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'ElastiCache', 'elasticache', 'elasticache.%s.amazonaws.com'
+  add_service 'ElastiCache', 'elasticache', 'elasticache'
 
 end
