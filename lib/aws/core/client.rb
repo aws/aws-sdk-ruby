@@ -48,7 +48,7 @@ module AWS
 
         # translate these into service specific configuration options,
         # e.g. :endpoint into :s3_endpoint
-        [:endpoint, :region, :port].each do |opt|
+        [:endpoint, :region, :port, :signature_version].each do |opt|
           if options[opt]
             options[:"#{service_ruby_name}_#{opt}"] = options.delete(opt)
           end
@@ -56,6 +56,8 @@ module AWS
 
         @config = (options.delete(:config) || AWS.config)
         @config = @config.with(options)
+
+        @region = @config.send(:"#{service_ruby_name}_region")
 
         @credential_provider = @config.credential_provider
         @http_handler = @config.http_handler
@@ -188,7 +190,7 @@ module AWS
 
       # @api private
       def new_request
-        eval(self.class.name.sub(/::Client.*$/, ''))::Request.new
+        Http::Request.new
       end
 
       def new_response(*args, &block)
@@ -480,7 +482,7 @@ module AWS
 
               response = new_response do
                 req = client.send(:build_request, name, options)
-                req.add_authorization!(credential_provider)
+                client.send(:sign_request, req)
                 req
               end
 
@@ -543,7 +545,7 @@ module AWS
         http_request.service_ruby_name = service_ruby_name
         http_request.host = endpoint
         http_request.port = port
-        http_request.region = config.send(:"#{service_ruby_name}_region")
+        http_request.region = @region
         http_request.use_ssl = config.use_ssl?
 
         send("configure_#{name}_request", http_request, opts)
@@ -563,6 +565,13 @@ module AWS
 
         http_request
 
+      end
+
+      # @param [Http::Request] req
+      # @return [Http::Request]
+      # @api private
+      def sign_request req
+        req
       end
 
       def user_agent_string
@@ -673,6 +682,23 @@ module AWS
           lib = File.dirname(File.dirname(__FILE__))
           path = "#{lib}/api_config/#{service_name}-#{api_version}.yml"
           YAML.load(File.read(path))
+        end
+
+        # @param [Symbol] version
+        # @param [String,nil] service_signing_name Required for `:Version4`
+        # @api private
+        def signature_version version, service_signing_name = nil
+          define_method(:sign_request) do |req|
+            @signer ||= begin
+              signer_class = AWS::Core::Signers.const_get(version)
+              signer_args = (version == :Version4) ?
+                [credential_provider, service_signing_name, @region] :
+                [credential_provider]
+              signer_class.new(*signer_args)
+            end
+            @signer.sign_request(req)
+            req
+          end
         end
 
         # Defines one method for each service operation described in

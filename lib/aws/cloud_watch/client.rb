@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION = '2010-08-01'
 
+      signature_version :Version4, 'monitoring'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_alarm_history,

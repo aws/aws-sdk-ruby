@@ -49,7 +49,6 @@ module AWS
     autoload :DBInstanceCollection, 'aws/rds/db_instance_collection'
     autoload :DBSnapshot, 'aws/rds/db_snapshot'
     autoload :DBSnapshotCollection, 'aws/rds/db_snapshot_collection'
-    autoload :Request, 'aws/rds/request'
 
     include Core::ServiceInterface
 

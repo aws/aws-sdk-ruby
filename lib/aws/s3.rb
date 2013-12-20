@@ -134,6 +134,7 @@ module AWS
     autoload :PrefixAndDelimiterCollection, 'aws/s3/prefix_and_delimiter_collection'
     autoload :PrefixedCollection, 'aws/s3/prefixed_collection'
     autoload :PresignedPost, 'aws/s3/presigned_post'
+    autoload :PresignV4, 'aws/s3/presign_v4'
     autoload :Request, 'aws/s3/request'
     autoload :S3Object, 'aws/s3/s3_object'
     autoload :Tree, 'aws/s3/tree'

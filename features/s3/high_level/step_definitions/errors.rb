@@ -13,7 +13,7 @@
 
 When /^I ask for the objects from a bucket that does not exist$/ do
   begin
-    @bucket_name = "!!$$$-#{Time.now.to_i}"
+    @bucket_name = "non-existent-bucket-#{Time.now.to_i}"
     @s3.buckets[@bucket_name].objects.to_a
   rescue => e
     @exception = e

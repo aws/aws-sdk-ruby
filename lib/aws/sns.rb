@@ -50,7 +50,6 @@ module AWS
     autoload :Errors, 'aws/sns/errors'
     autoload :Policy, 'aws/sns/policy'
     autoload :HasDeliveryPolicy, 'aws/sns/has_delivery_policy'
-    autoload :Request, 'aws/sns/request'
     autoload :Subscription, 'aws/sns/subscription'
     autoload :SubscriptionCollection, 'aws/sns/subscription_collection'
     autoload :Topic, 'aws/sns/topic'

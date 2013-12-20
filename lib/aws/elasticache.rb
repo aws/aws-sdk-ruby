@@ -39,7 +39,6 @@ module AWS
 
     autoload :Client, 'aws/elasticache/client'
     autoload :Errors, 'aws/elasticache/errors'
-    autoload :Request, 'aws/elasticache/request'
 
     include Core::ServiceInterface
 

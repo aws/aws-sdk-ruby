@@ -18,6 +18,8 @@ module AWS
 
       API_VERSION = '2012-09-25'
 
+      signature_version :Version4, 'elastictranscoder'
+
       # @api private
       def extract_error_details response
         if

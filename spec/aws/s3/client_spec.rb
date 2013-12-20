@@ -189,7 +189,7 @@ module AWS
             })
 
             request.http_method.should eq('PUT')
-            request.querystring.should eq('cors')
+            request.querystring.should eq('cors=')
             request.headers['content-md5'].should eq(client.send(:md5, request.body))
             request.body.xml_cleanup.should eq(xml)
 
@@ -202,7 +202,7 @@ module AWS
           it 'make a get request to the cors subresource' do
             req = get_request(:get_bucket_cors, :bucket_name => 'bucket')
             req.http_method.should eq('GET')
-            req.querystring.should eq('cors')
+            req.querystring.should eq('cors=')
             req.bucket.should eq('bucket')
             req.body.should eq(nil)
           end
@@ -227,7 +227,7 @@ module AWS
           it 'make a delete request to the cors subresource' do
             req = get_request(:delete_bucket_cors, :bucket_name => 'bucket')
             req.http_method.should eq('DELETE')
-            req.querystring.should eq('cors')
+            req.querystring.should eq('cors=')
             req.bucket.should eq('bucket')
             req.body.should eq(nil)
           end
@@ -297,7 +297,7 @@ module AWS
             })
 
             request.http_method.should eq('PUT')
-            request.querystring.should eq('logging')
+            request.querystring.should eq('logging=')
 
           end
           
@@ -308,7 +308,7 @@ module AWS
           it 'make a get request to the logging subresource' do
             req = get_request(:get_bucket_logging, :bucket_name => 'bucket')
             req.http_method.should eq('GET')
-            req.querystring.should eq('logging')
+            req.querystring.should eq('logging=')
             req.bucket.should eq('bucket')
             req.body.should eq(nil)
           end
@@ -387,7 +387,7 @@ module AWS
             })
 
             request.http_method.should eq('PUT')
-            request.querystring.should eq('tagging')
+            request.querystring.should eq('tagging=')
 
             # the array is differently sorted on Ruby 1.8
             unless RUBY_VERSION =~ /^1.8/
@@ -404,7 +404,7 @@ module AWS
           it 'make a get request to the tagging subresource' do
             req = get_request(:get_bucket_tagging, :bucket_name => 'bucket')
             req.http_method.should eq('GET')
-            req.querystring.should eq('tagging')
+            req.querystring.should eq('tagging=')
             req.bucket.should eq('bucket')
             req.body.should eq(nil)
           end
@@ -431,7 +431,7 @@ module AWS
           it 'make a delete request to the tagging subresource' do
             req = get_request(:delete_bucket_tagging, :bucket_name => 'bucket')
             req.http_method.should eq('DELETE')
-            req.querystring.should eq('tagging')
+            req.querystring.should eq('tagging=')
             req.bucket.should eq('bucket')
             req.body.should eq(nil)
           end

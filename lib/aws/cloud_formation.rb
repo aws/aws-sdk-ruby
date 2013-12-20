@@ -147,7 +147,6 @@ module AWS
 
     autoload :Client, 'aws/cloud_formation/client'
     autoload :Errors, 'aws/cloud_formation/errors'
-    autoload :Request, 'aws/cloud_formation/request'
     autoload :Stack, 'aws/cloud_formation/stack'
     autoload :StackCollection, 'aws/cloud_formation/stack_collection'
     autoload :StackEvent, 'aws/cloud_formation/stack_event'

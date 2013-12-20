@@ -70,7 +70,6 @@ module AWS
     autoload :Errors, 'aws/route_53/errors'
     autoload :HostedZone, 'aws/route_53/hosted_zone'
     autoload :HostedZoneCollection, 'aws/route_53/hosted_zone_collection'
-    autoload :Request, 'aws/route_53/request'
     autoload :ResourceRecordSet, 'aws/route_53/resource_record_set'
     autoload :ResourceRecordSetCollection, 'aws/route_53/resource_record_set_collection'
 

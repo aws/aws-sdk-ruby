@@ -63,7 +63,6 @@ module AWS
 
     autoload :Client,  'aws/cloud_front/client'
     autoload :Errors,  'aws/cloud_front/errors'
-    autoload :Request, 'aws/cloud_front/request'
 
     include Core::ServiceInterface
 

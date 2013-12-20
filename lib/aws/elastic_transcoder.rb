@@ -20,7 +20,6 @@ module AWS
 
     autoload :Client, 'aws/elastic_transcoder/client'
     autoload :Errors, 'aws/elastic_transcoder/errors'
-    autoload :Request, 'aws/elastic_transcoder/request'
 
     include Core::ServiceInterface
 

@@ -206,7 +206,6 @@ module AWS
     autoload :HistoryEvent, 'aws/simple_workflow/history_event'
     autoload :HistoryEventCollection, 'aws/simple_workflow/history_event_collection'
     autoload :OptionFormatters, 'aws/simple_workflow/option_formatters'
-    autoload :Request, 'aws/simple_workflow/request'
     autoload :Resource, 'aws/simple_workflow/resource'
     autoload :Type, 'aws/simple_workflow/type'
     autoload :TypeCollection, 'aws/simple_workflow/type_collection'

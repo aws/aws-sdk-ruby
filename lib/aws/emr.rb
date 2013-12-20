@@ -71,7 +71,6 @@ module AWS
     autoload :InstanceGroupCollection, 'aws/emr/instance_group_collection'
     autoload :JobFlow, 'aws/emr/job_flow'
     autoload :JobFlowCollection, 'aws/emr/job_flow_collection'
-    autoload :Request, 'aws/emr/request'
 
     include Core::ServiceInterface
 

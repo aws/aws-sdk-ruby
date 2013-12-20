@@ -17,7 +17,10 @@ module AWS
     # Client class for AWS Direct Connect.
     class Client < Core::JSONClient
 
+
       API_VERSION = '2012-10-25'
+
+      signature_version :Version4, 'directconnect'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]

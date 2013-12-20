@@ -42,7 +42,6 @@ module AWS
 
     autoload :Client, 'aws/redshift/client'
     autoload :Errors, 'aws/redshift/errors'
-    autoload :Request, 'aws/redshift/request'
 
     include Core::ServiceInterface
 

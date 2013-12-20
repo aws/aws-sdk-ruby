@@ -89,6 +89,7 @@ module AWS
         # @api private
         attr_accessor :continue_timeout
 
+        # @api private
         def endpoint
           scheme = use_ssl ? 'https' : 'http'
           port = case scheme
@@ -237,7 +238,7 @@ module AWS
           end
 
           def encoded
-            value ? "#{escape(name)}=#{escape(value)}" : escape(name)
+            value ? "#{escape(name)}=#{escape(value)}" : "#{escape(name)}="
           end
 
         end

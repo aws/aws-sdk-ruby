@@ -178,7 +178,6 @@ module AWS
     autoload :Identity, 'aws/simple_email_service/identity'
     autoload :IdentityCollection, 'aws/simple_email_service/identity_collection'
     autoload :Quotas, 'aws/simple_email_service/quotas'
-    autoload :Request, 'aws/simple_email_service/request'
 
     include Core::ServiceInterface
 

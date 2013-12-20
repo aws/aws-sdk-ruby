@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION = '2010-05-08'
 
+      signature_version :Version4, 'iam'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :get_group,

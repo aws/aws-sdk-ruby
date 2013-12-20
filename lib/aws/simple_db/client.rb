@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION = '2009-04-15'
 
+      signature_version :Version2
+
       # @api private
       REGION_US_E1 = 'sdb.amazonaws.com'
 

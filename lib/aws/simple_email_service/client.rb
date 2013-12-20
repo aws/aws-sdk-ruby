@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION = '2010-12-01'
 
+      signature_version :Version4, 'ses'
+
       REGION_US_E1 = 'email.us-east-1.amazonaws.com'
 
       # @api private

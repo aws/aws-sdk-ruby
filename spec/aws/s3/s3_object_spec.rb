@@ -920,9 +920,8 @@ module AWS
           end
 
           it "should make #{param} part of the string to sign" do
-            http_request.should_receive(:canonicalized_resource) do
-              http_request.params.map { |p| p.to_s }.
-                should include("#{param}=value")
+            Core::Signers::S3.should_receive(:canonicalized_resource) do |req|
+              req.params.map { |p| p.to_s }.should include("#{param}=value")
             end
             object.url_for(:get, Hash[[[name, "value"]]])
           end

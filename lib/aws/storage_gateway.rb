@@ -63,7 +63,6 @@ module AWS
 
     autoload :Client, 'aws/storage_gateway/client'
     autoload :Errors, 'aws/storage_gateway/errors'
-    autoload :Request, 'aws/storage_gateway/request'
 
     include Core::ServiceInterface
 

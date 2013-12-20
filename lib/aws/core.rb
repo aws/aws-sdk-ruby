@@ -201,7 +201,6 @@ module AWS
     autoload :RESTResponseParser, "#{SRC}/core/rest_response_parser"
 
     autoload :ServiceInterface, "#{SRC}/core/service_interface"
-    autoload :Signer, "#{SRC}/core/signer"
     autoload :UriEscape, "#{SRC}/core/uri_escape"
 
     module Options
@@ -210,11 +209,14 @@ module AWS
       autoload :Validator, "#{SRC}/core/options/validator"
     end
 
-    module Signature
-      autoload :Version2, "#{SRC}/core/signature/version_2"
-      autoload :Version3, "#{SRC}/core/signature/version_3"
-      autoload :Version3HTTPS, "#{SRC}/core/signature/version_3_https"
-      autoload :Version4, "#{SRC}/core/signature/version_4"
+    module Signers
+      autoload :Base, "#{SRC}/core/signers/base"
+      autoload :CloudFront, "#{SRC}/core/signers/cloud_front"
+      autoload :S3, "#{SRC}/core/signers/s3"
+      autoload :Version2, "#{SRC}/core/signers/version_2"
+      autoload :Version3, "#{SRC}/core/signers/version_3"
+      autoload :Version3Https, "#{SRC}/core/signers/version_3_https"
+      autoload :Version4, "#{SRC}/core/signers/version_4"
     end
 
     module XML

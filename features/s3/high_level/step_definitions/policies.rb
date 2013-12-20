@@ -19,7 +19,7 @@ Then /^the client should have made a "([^\"]*)" request to the bucket policy$/ d
   r = @http_handler.requests_made.last
   r.http_method.should == method
   r.host.should == "#@bucket_name.s3.amazonaws.com"
-  r.uri.should == "/?policy"
+  r.uri.should == "/?policy="
 end
 
 When /^I change the bucket policy using the OO interface$/ do

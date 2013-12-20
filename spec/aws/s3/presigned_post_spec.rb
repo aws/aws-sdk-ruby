@@ -483,7 +483,7 @@ module AWS
 
         context 'signature' do
 
-          let(:signer) { Core::Signer }
+          let(:signer) { Core::Signers::Base }
 
           before(:each) do
             signer.stub(:sign).and_return("SIGNATURE")

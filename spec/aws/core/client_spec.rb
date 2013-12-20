@@ -32,15 +32,16 @@ module AWS
 
             endpoint_prefix 'dummy', :global => true
 
-            class Request < Core::Http::Request
-              include Signature::Version2
-            end
-
             class Client < Core::Client
               API_VERSION = '2000-01-02'
             end
 
             class Client::V20000102 < Client
+
+              signature_version :Version4, 'dummy'
+
+              API_VERSION = Time.now.strftime('%Y-%m-%d')
+
               add_client_request_method(:sample_method) do
               end
             end

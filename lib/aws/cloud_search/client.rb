@@ -17,7 +17,10 @@ module AWS
     # Client class for Amazon Cloud Search.
     class Client < Core::QueryClient
 
+
       API_VERSION = '2011-02-01'
+
+      signature_version :Version4, 'cloudsearch'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]

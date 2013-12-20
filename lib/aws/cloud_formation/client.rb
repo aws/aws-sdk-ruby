@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION = '2010-05-15'
 
+      signature_version :Version4, 'cloudformation'
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_adjustment_types,

@@ -282,8 +282,8 @@ module AWS
         super
       end
 
-      # @api private
-      protected
+      private
+
       def each_member_in_page(page, &block)
         super
         page.contents.each do |content|
@@ -291,20 +291,14 @@ module AWS
         end
       end
 
-      # @api private
-      protected
       def list_request options
         client.list_objects(options)
       end
 
-      # @api private
-      protected
       def limit_param
         :max_keys
       end
 
-      # @api private
-      protected
       def next_markers page
         if page[:next_marker]
           marker = page[:next_marker]
@@ -344,7 +338,8 @@ module AWS
           process_batch unless @batch.empty?
         end
 
-        protected
+        private
+
         def process_batch
           response = @block.call(@batch)
           @after_batch.call(response) if @after_batch

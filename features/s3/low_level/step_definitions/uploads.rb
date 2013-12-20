@@ -28,7 +28,9 @@ When /^I ask the client to list the multipart uploads in the bucket$/ do
 end
 
 Then /^the result should include the upload ID I initiated$/ do
-  @result.uploads.map { |upload| upload.upload_id }.should include(@upload_id)
+  eventually(10) do
+    @result.uploads.map { |upload| upload.upload_id }.should include(@upload_id)
+  end
 end
 
 When /^I ask the client to upload a (\d+)(mb|kb) part for "([^\"]*)" containing "([^\"]*)" as part number (\d+)$/ do |size, unit, key, contents, number|
@@ -49,10 +51,18 @@ When /^I ask the client to complete the upload for "([^\"]*)"$/ do |key|
   @etags.keys.sort.each do |part_number|
     parts << { :part_number => part_number, :etag => @etags[part_number] }
   end
+
+  begin
   @result = @s3_client.complete_multipart_upload(:bucket_name => @bucket_name,
                                               :key => key,
                                               :upload_id => @upload_id,
                                               :parts => parts)
+  rescue => error
+    puts error.http_response.body
+    File.open('err.txt', 'w') {|f| f.write(error.http_response.body) }
+    raise error
+  end
+
 end
 
 Then /^the object "([^\"]*)" should eventually have a body including the following strings:$/ do |key, table|

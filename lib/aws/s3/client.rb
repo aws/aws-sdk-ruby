@@ -25,6 +25,8 @@ module AWS
     # Client class for Amazon Simple Storage Service (S3).
     class Client < Core::Client
 
+      signature_version :S3
+
       API_VERSION = '2006-03-01'
 
       XMLNS = "http://s3.amazonaws.com/doc/#{API_VERSION}/"
@@ -45,7 +47,40 @@ module AWS
       include DataOptions
       include Core::UriEscape
 
+      # @param [Core::Http::Request] request
+      # @api private
+      def sign_request request
+        version = @config.s3_signature_version ?
+          @config.s3_signature_version.to_sym :
+          (@region =~ /cn-/ ? :v4 : :v3)
+        case version
+        when :v4 then v4_signer.sign_request(request)
+        when :v3 then v3_signer.sign_request(request)
+        else
+          raise "invalid signature version #{version.inspect}"
+        end
+      end
+
       protected
+
+      # @return [Core::Signers::S3]
+      def v3_signer
+        @v3_signer ||= Core::Signers::S3.new(credential_provider)
+      end
+
+      # @return [Core::Signers::Version4]
+      def v4_signer
+        @v4_signer ||= begin
+          Core::Signers::Version4.new(credential_provider, 's3', @region)
+        end
+      end
+
+      # @param [Http::Request] req
+      # @return [Boolean]
+      def chunk_sign? req
+        req.http_method == 'PUT' &&
+        req.headers['content-length'].to_i > 2 * 1024 * 1024 # 2MB
+      end
 
       def self.bucket_method(method_name, verb, *args, &block)
 
@@ -100,6 +135,32 @@ module AWS
       end
 
       protected
+
+      def set_metadata request, options
+        if metadata = options[:metadata]
+          Array(metadata).each do |name, value|
+            request.headers["x-amz-meta-#{name}"] = value
+          end
+        end
+      end
+
+      def set_storage_class request, options
+        storage_class = options[:storage_class]
+        if storage_class.kind_of?(Symbol)
+          request.headers["x-amz-storage-class"] = storage_class.to_s.upcase
+        elsif storage_class
+          request.headers["x-amz-storage-class"] = storage_class
+        end
+      end
+
+      def set_server_side_encryption request, options
+        sse = options[:server_side_encryption]
+        if sse.is_a?(Symbol)
+          request.headers['x-amz-server-side-encryption'] = sse.to_s.upcase
+        elsif sse
+          request.headers['x-amz-server-side-encryption'] = sse
+        end
+      end
 
       def extract_error_details response
         if
@@ -1314,9 +1375,9 @@ module AWS
           options = compute_write_options(options)
           set_body_stream_and_content_length(request, options)
 
-          request.metadata = options[:metadata]
-          request.storage_class = options[:storage_class]
-          request.server_side_encryption = options[:server_side_encryption]
+          set_metadata(request, options)
+          set_storage_class(request, options)
+          set_server_side_encryption(request, options)
 
           super(request, options)
 
@@ -1563,9 +1624,9 @@ module AWS
                     }) do
 
         configure_request do |req, options|
-          req.metadata = options[:metadata]
-          req.storage_class = options[:storage_class]
-          req.server_side_encryption = options[:server_side_encryption]
+          set_metadata(req, options)
+          set_storage_class(req, options)
+          set_server_side_encryption(req, options)
           super(req, options)
         end
 
@@ -1805,9 +1866,9 @@ module AWS
 
           options = options.merge(:copy_source => escape_path(options[:copy_source]))
           super(req, options)
-          req.metadata = options[:metadata]
-          req.storage_class = options[:storage_class]
-          req.server_side_encryption = options[:server_side_encryption]
+          set_metadata(req, options)
+          set_storage_class(req, options)
+          set_server_side_encryption(req, options)
 
           if options[:version_id]
             req.headers['x-amz-copy-source'] += "?versionId=#{options[:version_id]}"
