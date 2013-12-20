@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'json'
+
 module AWS
   module Core
     # Provides a read-only interface to the bundled endpoints.json file.
