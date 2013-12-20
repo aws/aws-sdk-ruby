@@ -1229,28 +1229,25 @@ module AWS
       # @option options [String] :response_content_encoding Sets the
       #   Content-Encoding header of the response when performing an
       #   HTTP GET on the returned URL.
+      #
+      # @option options [:v3, :v4] :signature_version (:v3)
+      #
       # @return [URI::HTTP, URI::HTTPS]
       def url_for(method, options = {})
+
         options = options.dup
-        options[:secure] = config.use_ssl? unless options.key?(:secure)
         options[:expires] = expiration_timestamp(options[:expires])
-        options[:acl] = options[:acl].to_s.sub('_', '-') if options[:acl]
+        options[:secure] = config.use_ssl? unless options.key?(:secure)
+        options[:signature_version] ||= config.s3_signature_version
 
-        req = request_for_signing(options)
-        req.http_method = http_method(method)
-        req.add_param("AWSAccessKeyId", config.credential_provider.access_key_id)
-        req.add_param("versionId", options[:version_id]) if options[:version_id]
-        req.add_param("Signature", signature(req, options))
-        req.add_param("Expires", options[:expires])
-        req.add_param("x-amz-acl", options[:acl]) if options[:acl]
-        if config.credential_provider.session_token
-          req.add_param(
-            "x-amz-security-token",
-            config.credential_provider.session_token
-          )
+        case options[:signature_version]
+        when :v3 then presign_v3(method, options)
+        when :v4 then presign_v4(method, options)
+        else
+          msg = "invalid signature version, expected :v3 or :v4, got "
+          msg << options[:signature_version].inspect
+          raise ArgumentError, msg
         end
-
-        build_uri(req, options)
       end
 
       # Generates a public (not authenticated) URL for the object.
@@ -1296,6 +1293,30 @@ module AWS
       end
 
       private
+
+      def presign_v4(method, options)
+        PresignV4.new(self).presign(method, options)
+      end
+
+      def presign_v3(method, options)
+        options[:acl] = options[:acl].to_s.sub('_', '-') if options[:acl]
+
+        req = request_for_signing(options)
+        req.http_method = http_method(method)
+        req.add_param("AWSAccessKeyId", config.credential_provider.access_key_id)
+        req.add_param("versionId", options[:version_id]) if options[:version_id]
+        req.add_param("Signature", signature(req, options))
+        req.add_param("Expires", options[:expires])
+        req.add_param("x-amz-acl", options[:acl]) if options[:acl]
+        if config.credential_provider.session_token
+          req.add_param(
+            "x-amz-security-token",
+            config.credential_provider.session_token
+          )
+        end
+
+        build_uri(req, options)
+      end
 
       # Used to determine if the data needs to be copied in parts
       def use_multipart_copy? options

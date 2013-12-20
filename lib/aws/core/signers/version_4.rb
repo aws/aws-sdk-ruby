@@ -58,11 +58,12 @@ module AWS
           key = derive_key(datetime)
           token = credentials.session_token
           chunk_signing = !!options[:chunk_signing]
+          content_sha256 = req.headers['x-amz-content-sha256'] || body_digest(req, chunk_signing)
 
           req.headers['host'] = req.host
           req.headers['x-amz-date'] = datetime
           req.headers['x-amz-security-token'] = token if token
-          req.headers['x-amz-content-sha256'] ||= body_digest(req, chunk_signing)
+          req.headers['x-amz-content-sha256'] = content_sha256
 
           if chunk_signing
             orig_size = req.headers['content-length'].to_i
@@ -71,9 +72,28 @@ module AWS
             req.headers['x-amz-decoded-content-length'] = orig_size.to_s
           end
 
-          req.headers['authorization'] = authorization(req, key)
-          req.body_stream = chunk_signed_stream(req, key) if chunk_signing
+          req.headers['authorization'] = authorization(req, key, datetime, content_sha256)
+
+          req.body_stream = chunk_signed_stream(req, drive_key(datetime)) if chunk_signing
+
           req
+        end
+
+        def signature(request, key, datetime, content_sha256)
+          string = string_to_sign(request, datetime, content_sha256)
+          hexhmac(key, string)
+        end
+
+        def credential(datetime)
+          "#{credentials.access_key_id}/#{key_path(datetime)}"
+        end
+
+        def derive_key(datetime)
+          k_secret = credentials.secret_access_key
+          k_date = hmac("AWS4" + k_secret, datetime[0,8])
+          k_region = hmac(k_date, region)
+          k_service = hmac(k_region, service_name)
+          k_credentials = hmac(k_service, 'aws4_request')
         end
 
         private
@@ -95,44 +115,20 @@ module AWS
           ChunkSignedStream.new(*args)
         end
 
-        # @param [Http::Request] req
-        # @param [String] datetime
-        # @param [String] key
-        def authorization req, key
-          datetime = req.headers['x-amz-date']
-          akid = credentials.access_key_id
+        def authorization req, key, datetime, content_sha256
           parts = []
-          parts << "AWS4-HMAC-SHA256 Credential=#{akid}/#{key_path(datetime)}"
+          parts << "AWS4-HMAC-SHA256 Credential=#{credential(datetime)}"
           parts << "SignedHeaders=#{signed_headers(req)}"
-          parts << "Signature=#{signature(req, key, datetime)}"
+          parts << "Signature=#{signature(req, key, datetime, content_sha256)}"
           parts.join(', ')
         end
 
-        # @param [String] datetime The year month day digits of the request time.
-        # @return [String]
-        def derive_key datetime
-          k_secret = credentials.secret_access_key
-          k_date = hmac("AWS4" + k_secret, datetime[0,8])
-          k_region = hmac(k_date, region)
-          k_service = hmac(k_region, service_name)
-          k_credentials = hmac(k_service, 'aws4_request')
-        end
-
-        # @param [Http::Request] req
-        # @param [String] key
-        # @param [String] datetime
-        def signature req, key, datetime
-          hexhmac(key, string_to_sign(req, datetime))
-        end
-
-        # @param [Http::Request] req
-        # @param [String] datetime
-        def string_to_sign req, datetime
+        def string_to_sign req, datetime, content_sha256
           parts = []
           parts << 'AWS4-HMAC-SHA256'
           parts << datetime
           parts << key_path(datetime)
-          parts << hexdigest(canonical_request(req))
+          parts << hexdigest(canonical_request(req, content_sha256))
           parts.join("\n")
         end
 
@@ -148,14 +144,14 @@ module AWS
         end
 
         # @param [Http::Request] req
-        def canonical_request req
+        def canonical_request req, content_sha256
           parts = []
           parts << req.http_method
           parts << req.path
           parts << req.querystring
           parts << canonical_headers(req) + "\n"
           parts << signed_headers(req)
-          parts << req.headers['x-amz-content-sha256']
+          parts << content_sha256
           parts.join("\n")
         end
 
