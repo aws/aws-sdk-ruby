@@ -68,40 +68,11 @@ module AWS
       # @return [Array<String>] Returns an array of non-gov-cloud region names.
       def public_regions
         return ['us-east-1'] if @service and @service.global_endpoint?
-        data = self.class.data
+        data = Endpoints.endpoints
         regions = @service ?
           data['services'][@service.endpoint_prefix] :
           data['regions'].keys
         regions.reject{ |r| r =~ /us-gov/ }.reject{ |r| r =~ /^cn-/ }
-      end
-
-      class << self
-
-        # @return [nil]
-        # @api private
-        def clear!
-          @data = nil
-        end
-
-        # @return [Hash] Returns a hash of region metadata.
-        # @api private
-        def data
-          @data ||= load_data
-        end
-
-        private
-
-        # @return [Hash]
-        def load_data
-          #return JSON.parse(File.read(File.join(AWS::ROOT, 'endpoints.json')))
-          host = 'aws-sdk-configurations.amazonwebservices.com'
-          path = '/endpoints.json'
-          http = Net::HTTP
-          proxy = AWS.config.proxy_uri
-          http = Net::HTTP::Proxy(proxy.host, proxy.port) unless proxy.nil?
-          JSON.parse(http.get(host, path))
-        end
-
       end
 
     end

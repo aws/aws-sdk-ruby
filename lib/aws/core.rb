@@ -164,6 +164,7 @@ module AWS
     autoload :CredentialProviders, "#{SRC}/core/credential_providers"
     autoload :Data, "#{SRC}/core/data"
     autoload :Deprecations, "#{SRC}/core/deprecations"
+    autoload :Endpoints, "#{SRC}/core/endpoints"
     autoload :IndifferentHash, "#{SRC}/core/indifferent_hash"
     autoload :Inflection, "#{SRC}/core/inflection"
     autoload :JSONParser, "#{SRC}/core/json_parser"
