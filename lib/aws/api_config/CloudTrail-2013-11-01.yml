@@ -17,6 +17,16 @@
 - :name: CreateTrail
   :method: :create_trail
   :inputs:
+    Name:
+    - :string
+    S3BucketName:
+    - :string
+    S3KeyPrefix:
+    - :string
+    SnsTopicName:
+    - :string
+    IncludeGlobalServiceEvents:
+    - :boolean
     trail:
     - :structure:
         Name:
@@ -34,6 +44,8 @@
       CreateTrailResult:
         :ignore: true
         :children:
+          IncludeGlobalServiceEvents:
+            :type: :boolean
           trail:
             :children:
               IncludeGlobalServiceEvents:
@@ -43,6 +55,7 @@
   :inputs:
     Name:
     - :string
+    - :required
   :outputs:
     :children:
       DeleteTrailResult:
@@ -72,6 +85,7 @@
   :inputs:
     Name:
     - :string
+    - :required
   :outputs:
     :children:
       GetTrailStatusResult:
@@ -79,11 +93,20 @@
         :children:
           IsLogging:
             :type: :boolean
+          LatestDeliveryTime:
+            :type: :time
+          LatestNotificationTime:
+            :type: :time
+          StartLoggingTime:
+            :type: :time
+          StopLoggingTime:
+            :type: :time
 - :name: StartLogging
   :method: :start_logging
   :inputs:
     Name:
     - :string
+    - :required
   :outputs:
     :children:
       StartLoggingResult:
@@ -93,6 +116,7 @@
   :inputs:
     Name:
     - :string
+    - :required
   :outputs:
     :children:
       StopLoggingResult:
@@ -100,6 +124,16 @@
 - :name: UpdateTrail
   :method: :update_trail
   :inputs:
+    Name:
+    - :string
+    S3BucketName:
+    - :string
+    S3KeyPrefix:
+    - :string
+    SnsTopicName:
+    - :string
+    IncludeGlobalServiceEvents:
+    - :boolean
     trail:
     - :structure:
         Name:
@@ -117,6 +151,8 @@
       UpdateTrailResult:
         :ignore: true
         :children:
+          IncludeGlobalServiceEvents:
+            :type: :boolean
           trail:
             :children:
               IncludeGlobalServiceEvents:

@@ -15,14 +15,24 @@
 :create_trail: |-
   Calls the CreateTrail API operation.
   @param [Hash] options
-    * `:trail` - (Hash) Contains the Trail structure that specifies the settings for each trail.
-      * `:name` - (String) Name of the trail defined when you call when you call CreateTrail
-      * `:s3_bucket_name` - (String) Name of the Amazon S3 bucket into which CloudTrail delivers your trail files. Passed when you call CreateTrail.
-      * `:s3_key_prefix` - (String) Value of the Amazon S3 prefix
+    * `:name` - (String) Specifies the name of the trail.
+    * `:s3_bucket_name` - (String) Specifies the name of the Amazon S3 bucket designated for publishing log files.
+    * `:s3_key_prefix` - (String) Specifies the Amazon S3 key prefix that precedes the name of the bucket you have designated for log file delivery.
+    * `:sns_topic_name` - (String) Specifies the name of the Amazon SNS topic defined for notification of log file delivery.
+    * `:include_global_service_events` - (Boolean) Specifies whether the trail is publishing events from global services such as IAM to the log files.
+    * `:trail` - (Hash) Support for passing a Trail object in the CreateTrail or UpdateTrail actions will end as early as February 15, 2014. Instead of the Trail object and its members, use the parameters listed for these actions.
+      * `:name` - (String) Name of the trail set by calling CreateTrail.
+      * `:s3_bucket_name` - (String) Name of the Amazon S3 bucket into which CloudTrail delivers your trail files.
+      * `:s3_key_prefix` - (String) Value of the Amazon S3 prefix.
       * `:sns_topic_name` - (String) Name of the existing Amazon SNS topic that CloudTrail uses to notify the account owner when new CloudTrail log files have been delivered.
       * `:include_global_service_events` - (Boolean) Set to True to include AWS API calls from AWS global services such as IAM. Otherwise, False.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
+    * `:name` - (String)
+    * `:s3_bucket_name` - (String)
+    * `:s3_key_prefix` - (String)
+    * `:sns_topic_name` - (String)
+    * `:include_global_service_events` - (Boolean)
     * `:trail` - (Hash)
       * `:name` - (String)
       * `:s3_bucket_name` - (String)
@@ -32,12 +42,12 @@
 :delete_trail: |-
   Calls the DeleteTrail API operation.
   @param [Hash] options
-    * `:name` - (String) The name of a trail to be deleted.
+    * `:name` - *required* - (String) The name of a trail to be deleted.
   @return [Core::Response]
 :describe_trails: |-
   Calls the DescribeTrails API operation.
   @param [Hash] options
-    * `:trail_name_list` - (Array&lt;<String>) The list of Trail object names.
+    * `:trail_name_list` - (Array&lt;<String>) The list of trails.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:trail_list` - (Array<Hash>)
@@ -49,39 +59,53 @@
 :get_trail_status: |-
   Calls the GetTrailStatus API operation.
   @param [Hash] options
-    * `:name` - (String) The name of the trail for which you are requesting the current status.
+    * `:name` - *required* - (String) The name of the trail for which you are requesting the current status.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:is_logging` - (Boolean)
     * `:latest_delivery_error` - (String)
     * `:latest_notification_error` - (String)
+    * `:latest_delivery_time` - (Time)
+    * `:latest_notification_time` - (Time)
+    * `:start_logging_time` - (Time)
+    * `:stop_logging_time` - (Time)
     * `:latest_delivery_attempt_time` - (String)
-    * `:latest_delivery_attempt_succeeded` - (String)
     * `:latest_notification_attempt_time` - (String)
     * `:latest_notification_attempt_succeeded` - (String)
+    * `:latest_delivery_attempt_succeeded` - (String)
     * `:time_logging_started` - (String)
     * `:time_logging_stopped` - (String)
 :start_logging: |-
   Calls the StartLogging API operation.
   @param [Hash] options
-    * `:name` - (String) The name of the Trail for which CloudTrail logs AWS API calls.
+    * `:name` - *required* - (String) The name of the trail for which CloudTrail logs AWS API calls.
   @return [Core::Response]
 :stop_logging: |-
   Calls the StopLogging API operation.
   @param [Hash] options
-    * `:name` - (String) Communicates to CloudTrail the name of the Trail for which to stop logging AWS API calls.
+    * `:name` - *required* - (String) Communicates to CloudTrail the name of the trail for which to stop logging AWS API calls.
   @return [Core::Response]
 :update_trail: |-
   Calls the UpdateTrail API operation.
   @param [Hash] options
-    * `:trail` - (Hash) Represents the Trail structure that contains the CloudTrail setting for an account.
-      * `:name` - (String) Name of the trail defined when you call when you call CreateTrail
-      * `:s3_bucket_name` - (String) Name of the Amazon S3 bucket into which CloudTrail delivers your trail files. Passed when you call CreateTrail.
-      * `:s3_key_prefix` - (String) Value of the Amazon S3 prefix
+    * `:name` - (String) Specifies the name of the trail.
+    * `:s3_bucket_name` - (String) Specifies the name of the Amazon S3 bucket designated for publishing log files.
+    * `:s3_key_prefix` - (String) Specifies the Amazon S3 key prefix that precedes the name of the bucket you have designated for log file delivery.
+    * `:sns_topic_name` - (String) Specifies the name of the Amazon SNS topic defined for notification of log file delivery.
+    * `:include_global_service_events` - (Boolean) Specifies whether the trail is publishing events from global services such as IAM to the log files.
+    * `:trail` - (Hash) Support for passing a Trail object in the CreateTrail or UpdateTrail actions will end as early as February 15, 2014. Instead of the Trail object and its members, use the parameters listed for these actions.
+      * `:name` - (String) Name of the trail set by calling CreateTrail.
+      * `:s3_bucket_name` - (String) Name of the Amazon S3 bucket into which CloudTrail delivers your trail files.
+      * `:s3_key_prefix` - (String) Value of the Amazon S3 prefix.
       * `:sns_topic_name` - (String) Name of the existing Amazon SNS topic that CloudTrail uses to notify the account owner when new CloudTrail log files have been delivered.
       * `:include_global_service_events` - (Boolean) Set to True to include AWS API calls from AWS global services such as IAM. Otherwise, False.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
+    * `:name` - (String)
+    * `:s3_bucket_name` - (String)
+    * `:s3_key_prefix` - (String)
+    * `:sns_topic_name` - (String)
+    * `:include_global_service_events` - (Boolean)
     * `:trail` - (Hash)
       * `:name` - (String)
       * `:s3_bucket_name` - (String)
