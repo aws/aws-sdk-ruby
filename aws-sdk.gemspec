@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.files = [
     'ca-bundle.crt',
     'rails/init.rb',    # for compatability with older versions of rails
+    'endpoints.json',
     '.yardopts',
     'README.md',
     'LICENSE.txt',
