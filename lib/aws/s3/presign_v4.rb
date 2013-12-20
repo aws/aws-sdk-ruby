@@ -84,7 +84,7 @@ module AWS
         params = options.merge(
           :bucket_name => object.bucket.name,
           :key => object.key,
-          :data => '',
+          :data => ''
         )
         req = client.send(:build_request, operation_name(method), params)
         req.force_path_style = options.fetch(:force_path_style, path_style)
