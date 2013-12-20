@@ -286,15 +286,15 @@
   more than one output in a playlist, the value of SegmentDuration for all of the
   outputs must be the same.\n    * `:member` - (String) \n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:job` - (Hash)\n    * `:id` - (String)\n    * `:pipeline_id` - (String)\n    *
-  `:input` - (Hash)\n      * `:key` - (String)\n      * `:frame_rate` - (String)\n
-  \     * `:resolution` - (String)\n      * `:aspect_ratio` - (String)\n      * `:interlaced`
-  - (String)\n      * `:container` - (String)\n    * `:output` - (Hash)\n      * `:id`
-  - (String)\n      * `:key` - (String)\n      * `:thumbnail_pattern` - (String)\n
-  \     * `:rotate` - (String)\n      * `:preset_id` - (String)\n      * `:segment_duration`
-  - (String)\n      * `:status` - (String)\n      * `:status_detail` - (String)\n
-  \     * `:duration` - (Integer)\n      * `:width` - (Integer)\n      * `:height`
-  - (Integer)\n      * `:watermarks` - (Array<Hash>)\n        * `:preset_watermark_id`
+  \ * `:job` - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    * `:pipeline_id`
+  - (String)\n    * `:input` - (Hash)\n      * `:key` - (String)\n      * `:frame_rate`
+  - (String)\n      * `:resolution` - (String)\n      * `:aspect_ratio` - (String)\n
+  \     * `:interlaced` - (String)\n      * `:container` - (String)\n    * `:output`
+  - (Hash)\n      * `:id` - (String)\n      * `:key` - (String)\n      * `:thumbnail_pattern`
+  - (String)\n      * `:rotate` - (String)\n      * `:preset_id` - (String)\n      *
+  `:segment_duration` - (String)\n      * `:status` - (String)\n      * `:status_detail`
+  - (String)\n      * `:duration` - (Integer)\n      * `:width` - (Integer)\n      *
+  `:height` - (Integer)\n      * `:watermarks` - (Array<Hash>)\n        * `:preset_watermark_id`
   - (String)\n        * `:input_key` - (String)\n      * `:album_art` - (Hash)\n        *
   `:merge_policy` - (String)\n        * `:artwork` - (Array<Hash>)\n          * `:input_key`
   - (String)\n          * `:max_width` - (String)\n          * `:max_height` - (String)\n
@@ -730,7 +730,7 @@
   if any. In addition, MaxWidth and MaxHeight, if specified as a percentage, are calculated
   based on the borders of the video including black bars added by Elastic Transcoder,
   if any.\n  * `:audio` - (Hash) A section of the request body that specifies the
-  audio parameters.\n    * `:codec` - (String) the audio codec for the output file.
+  audio parameters.\n    * `:codec` - (String) The audio codec for the output file.
   Valid values include aac, mp3, and vorbis.\n    * `:sample_rate` - (String) The
   sample rate of the audio stream in the output file, in Hertz. Valid values include:
   auto, 22050, 32000, 44100, 48000, 96000 If you specify auto, Elastic Transcoder
@@ -738,18 +738,30 @@
   of the audio stream in the output file, in kilobits/second. Enter an integer between
   64 and 320, inclusive.\n    * `:channels` - (String) The number of audio channels
   in the output file. Valid values include: auto, 0, 1, 2 If you specify auto, Elastic
-  Transcoder automatically detects the number of channels in the input file.\n  *
-  `:thumbnails` - (Hash) A section of the request body that specifies the thumbnail
-  parameters, if any.\n    * `:format` - (String) The format of thumbnails, if any.
-  Valid values are jpg and png. You specify whether you want Elastic Transcoder to
-  create thumbnails when you create a job.\n    * `:interval` - (String) The number
-  of seconds between thumbnails. Specify an integer value.\n    * `:resolution` -
-  (String) To better control resolution and aspect ratio of thumbnails, we recommend
-  that you use the values MaxWidth, MaxHeight, SizingPolicy, and PaddingPolicy instead
-  of Resolution and AspectRatio. The two groups of settings are mutually exclusive.
-  Do not use them together. The width and height of thumbnail files in pixels. Specify
-  a value in the format width x height where both values are even integers. The values
-  cannot exceed the width and height that you specified in the Video:Resolution object.\n
+  Transcoder automatically detects the number of channels in the input file.\n    *
+  `:codec_options` - (Hash) If you specified AAC for Audio:Codec, this is the AAC
+  compression profile to use. Valid values include: auto, AAC-LC, HE-AAC, HE-AACv2
+  If you specify auto, Elastic Transcoder chooses a profile based on the bit rate
+  of the output file.\n      * `:profile` - (String) If you specified AAC for Audio:Codec,
+  choose the AAC profile for the output file. Elastic Transcoder supports the following
+  profiles: auto: If you specify auto, Elastic Transcoder will select the profile
+  based on the bit rate selected for the output file. AAC-LC: The most common AAC
+  profile. Use for bitrates larger than 64 kbps. HE-AAC: Not supported on some older
+  players and devices. Use for bitrates between 40 and 80 kbps. HE-AACv2: Not supported
+  on some players and devices. Use for bitrates less than 48 kbps. If you created
+  any presets before AAC profiles were added, Elastic Transcoder automatically updated
+  your presets to use AAC-LC. You can change the value as required.\n  * `:thumbnails`
+  - (Hash) A section of the request body that specifies the thumbnail parameters,
+  if any.\n    * `:format` - (String) The format of thumbnails, if any. Valid values
+  are jpg and png. You specify whether you want Elastic Transcoder to create thumbnails
+  when you create a job.\n    * `:interval` - (String) The number of seconds between
+  thumbnails. Specify an integer value.\n    * `:resolution` - (String) To better
+  control resolution and aspect ratio of thumbnails, we recommend that you use the
+  values MaxWidth, MaxHeight, SizingPolicy, and PaddingPolicy instead of Resolution
+  and AspectRatio. The two groups of settings are mutually exclusive. Do not use them
+  together. The width and height of thumbnail files in pixels. Specify a value in
+  the format width x height where both values are even integers. The values cannot
+  exceed the width and height that you specified in the Video:Resolution object.\n
   \   * `:aspect_ratio` - (String) To better control resolution and aspect ratio of
   thumbnails, we recommend that you use the values MaxWidth, MaxHeight, SizingPolicy,
   and PaddingPolicy instead of Resolution and AspectRatio. The two groups of settings
@@ -785,10 +797,11 @@
   of thumbnails to make the total size of the thumbnails match the values that you
   specified for thumbnail MaxWidth and MaxHeight settings.\n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:preset` - (Hash)\n    * `:id` - (String)\n    * `:name` - (String)\n    *
-  `:description` - (String)\n    * `:container` - (String)\n    * `:audio` - (Hash)\n
-  \     * `:codec` - (String)\n      * `:sample_rate` - (String)\n      * `:bit_rate`
-  - (String)\n      * `:channels` - (String)\n    * `:video` - (Hash)\n      * `:codec`
+  \ * `:preset` - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    * `:name`
+  - (String)\n    * `:description` - (String)\n    * `:container` - (String)\n    *
+  `:audio` - (Hash)\n      * `:codec` - (String)\n      * `:sample_rate` - (String)\n
+  \     * `:bit_rate` - (String)\n      * `:channels` - (String)\n      * `:codec_options`
+  - (Hash)\n        * `:profile` - (String)\n    * `:video` - (Hash)\n      * `:codec`
   - (String)\n      * `:codec_options` - (Hash<String,String>)\n      * `:keyframes_max_dist`
   - (String)\n      * `:fixed_gop` - (String)\n      * `:bit_rate` - (String)\n      *
   `:frame_rate` - (String)\n      * `:max_frame_rate` - (String)\n      * `:resolution`
@@ -824,6 +837,7 @@
 
     * `:jobs` - (Array<Hash>)
       * `:id` - (String)
+      * `:arn` - (String)
       * `:pipeline_id` - (String)
       * `:input` - (Hash)
         * `:key` - (String)
@@ -907,6 +921,7 @@
 
     * `:jobs` - (Array<Hash>)
       * `:id` - (String)
+      * `:arn` - (String)
       * `:pipeline_id` - (String)
       * `:input` - (Hash)
         * `:key` - (String)
@@ -983,6 +998,8 @@
 :list_pipelines: |-
   Calls the GET ListPipelines API operation.
   @param [Hash] options
+    * `:ascending` - (String) To list pipelines in chronological order by the date and time that they were created, enter  `true` . To list pipelines in reverse chronological order, enter  `false` .
+    * `:page_token` - (String) When Elastic Transcoder returns more than one page of results, use pageToken in subsequent GET requests to get each successive page of results.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:pipelines` - (Array<Hash>)
@@ -1012,13 +1029,17 @@
           * `:grantee_type` - (String)
           * `:grantee` - (String)
           * `:access` - (Array<String>)
+    * `:next_page_token` - (String)
 :list_presets: |-
   Calls the GET ListPresets API operation.
   @param [Hash] options
+    * `:ascending` - (String) To list presets in chronological order by the date and time that they were created, enter  `true` . To list presets in reverse chronological order, enter  `false` .
+    * `:page_token` - (String) When Elastic Transcoder returns more than one page of results, use pageToken in subsequent GET requests to get each successive page of results.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:presets` - (Array<Hash>)
       * `:id` - (String)
+      * `:arn` - (String)
       * `:name` - (String)
       * `:description` - (String)
       * `:container` - (String)
@@ -1027,6 +1048,8 @@
         * `:sample_rate` - (String)
         * `:bit_rate` - (String)
         * `:channels` - (String)
+        * `:codec_options` - (Hash)
+          * `:profile` - (String)
       * `:video` - (Hash)
         * `:codec` - (String)
         * `:codec_options` - (Hash<String,String>)
@@ -1063,6 +1086,7 @@
         * `:sizing_policy` - (String)
         * `:padding_policy` - (String)
       * `:type` - (String)
+    * `:next_page_token` - (String)
 :read_job: |-
   Calls the GET ReadJob API operation.
   @param [Hash] options
@@ -1071,6 +1095,7 @@
 
     * `:job` - (Hash)
       * `:id` - (String)
+      * `:arn` - (String)
       * `:pipeline_id` - (String)
       * `:input` - (Hash)
         * `:key` - (String)
@@ -1184,6 +1209,7 @@
 
     * `:preset` - (Hash)
       * `:id` - (String)
+      * `:arn` - (String)
       * `:name` - (String)
       * `:description` - (String)
       * `:container` - (String)
@@ -1192,6 +1218,8 @@
         * `:sample_rate` - (String)
         * `:bit_rate` - (String)
         * `:channels` - (String)
+        * `:codec_options` - (Hash)
+          * `:profile` - (String)
       * `:video` - (Hash)
         * `:codec` - (String)
         * `:codec_options` - (Hash<String,String>)

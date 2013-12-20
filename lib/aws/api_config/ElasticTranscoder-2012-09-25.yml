@@ -252,6 +252,9 @@
         Id:
           :sym: :id
           :type: :string
+        Arn:
+          :sym: :arn
+          :type: :string
         PipelineId:
           :sym: :pipeline_id
           :type: :string
@@ -784,6 +787,13 @@
         :channels:
           :name: Channels
           :type: :string
+        :codec_options:
+          :name: CodecOptions
+          :type: :hash
+          :members:
+            :profile:
+              :name: Profile
+              :type: :string
     :thumbnails:
       :name: Thumbnails
       :type: :hash
@@ -820,6 +830,9 @@
         Id:
           :sym: :id
           :type: :string
+        Arn:
+          :sym: :arn
+          :type: :string
         Name:
           :sym: :name
           :type: :string
@@ -845,6 +858,13 @@
             Channels:
               :sym: :channels
               :type: :string
+            CodecOptions:
+              :sym: :codec_options
+              :type: :hash
+              :members:
+                Profile:
+                  :sym: :profile
+                  :type: :string
         Video:
           :sym: :video
           :type: :hash
@@ -1004,6 +1024,9 @@
       :members:
         Id:
           :sym: :id
+          :type: :string
+        Arn:
+          :sym: :arn
           :type: :string
         PipelineId:
           :sym: :pipeline_id
@@ -1259,6 +1282,9 @@
         Id:
           :sym: :id
           :type: :string
+        Arn:
+          :sym: :arn
+          :type: :string
         PipelineId:
           :sym: :pipeline_id
           :type: :string
@@ -1496,8 +1522,12 @@
   :method: :list_pipelines
   :http:
     :verb: GET
-    :uri: /2012-09-25/pipelines
-  :inputs: {}
+    :uri: /2012-09-25/pipelines?Ascending=:ascending;PageToken=:page_token
+  :inputs:
+    :ascending:
+      :type: :string
+    :page_token:
+      :type: :string
   :outputs:
     Pipelines:
       :sym: :pipelines
@@ -1586,12 +1616,19 @@
                 Access:
                   :sym: :access
                   :type: :string
+    NextPageToken:
+      :sym: :next_page_token
+      :type: :string
 - :name: ListPresets
   :method: :list_presets
   :http:
     :verb: GET
-    :uri: /2012-09-25/presets
-  :inputs: {}
+    :uri: /2012-09-25/presets?Ascending=:ascending;PageToken=:page_token
+  :inputs:
+    :ascending:
+      :type: :string
+    :page_token:
+      :type: :string
   :outputs:
     Presets:
       :sym: :presets
@@ -1599,6 +1636,9 @@
       :members:
         Id:
           :sym: :id
+          :type: :string
+        Arn:
+          :sym: :arn
           :type: :string
         Name:
           :sym: :name
@@ -1625,6 +1665,13 @@
             Channels:
               :sym: :channels
               :type: :string
+            CodecOptions:
+              :sym: :codec_options
+              :type: :hash
+              :members:
+                Profile:
+                  :sym: :profile
+                  :type: :string
         Video:
           :sym: :video
           :type: :hash
@@ -1739,6 +1786,9 @@
         Type:
           :sym: :type
           :type: :string
+    NextPageToken:
+      :sym: :next_page_token
+      :type: :string
 - :name: ReadJob
   :method: :read_job
   :http:
@@ -1755,6 +1805,9 @@
       :members:
         Id:
           :sym: :id
+          :type: :string
+        Arn:
+          :sym: :arn
           :type: :string
         PipelineId:
           :sym: :pipeline_id
@@ -2100,6 +2153,9 @@
         Id:
           :sym: :id
           :type: :string
+        Arn:
+          :sym: :arn
+          :type: :string
         Name:
           :sym: :name
           :type: :string
@@ -2125,6 +2181,13 @@
             Channels:
               :sym: :channels
               :type: :string
+            CodecOptions:
+              :sym: :codec_options
+              :type: :hash
+              :members:
+                Profile:
+                  :sym: :profile
+                  :type: :string
         Video:
           :sym: :video
           :type: :hash
