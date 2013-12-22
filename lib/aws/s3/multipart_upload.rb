@@ -19,6 +19,13 @@ module AWS
     # Represents a multipart upload to an S3 object.  See
     # {S3Object#multipart_upload} for a convenient way to initiate a
     # multipart upload.
+    # 
+    # Note: After you initiate multipart upload and upload one or more 
+    # parts, you must either complete or abort multipart upload in order 
+    # to stop getting charged for storage of the uploaded parts. Only 
+    # after you either complete or abort multipart upload, Amazon S3 
+    # frees up the parts storage and stops charging you for the parts 
+    # storage.
     class MultipartUpload
 
       include Core::Model
