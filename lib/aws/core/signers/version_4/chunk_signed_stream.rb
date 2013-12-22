@@ -145,7 +145,7 @@ module AWS
           end
 
           def sign value
-            @digest ||= OpenSSL::Digest::Digest.new('sha256')
+            @digest ||= OpenSSL::Digest.new('sha256')
             OpenSSL::HMAC.hexdigest(@digest, @key, value)
           end
 

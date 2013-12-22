@@ -101,8 +101,8 @@ module AWS
       # but that requires reading the data a 2nd time. :(
       def compute_checksums data
 
-        digest = OpenSSL::Digest::Digest.new('sha256')
-        tree_digest = OpenSSL::Digest::Digest.new('sha256')
+        digest = OpenSSL::Digest.new('sha256')
+        tree_digest = OpenSSL::Digest.new('sha256')
         tree_parts = []
 
         until data.eof?
@@ -123,7 +123,7 @@ module AWS
 
       def compute_tree_hash hashes
 
-        digest = OpenSSL::Digest::Digest.new('sha256')
+        digest = OpenSSL::Digest.new('sha256')
 
         until hashes.count == 1
           hashes = hashes.each_slice(2).map do |h1,h2|

@@ -219,7 +219,7 @@ module AWS
         end
 
         def sha256_digest
-          OpenSSL::Digest::Digest.new('sha256')
+          OpenSSL::Digest.new('sha256')
         end
 
       end

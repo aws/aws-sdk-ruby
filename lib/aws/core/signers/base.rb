@@ -36,7 +36,7 @@ module AWS
         # @param [String] digest ('sha256')
         # @return [String]
         def hmac key, value, digest = 'sha256'
-          OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new(digest), key, value)
+          OpenSSL::HMAC.digest(OpenSSL::Digest.new(digest), key, value)
         end
         module_function :hmac
 
