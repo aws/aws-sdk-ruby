@@ -16,6 +16,12 @@ module AWS
 
     # Represents the uploads in progress for a bucket.
     #
+    # Note: After you initiate multipart upload and upload one or more 
+    # parts, you must either complete or abort multipart upload in order 
+    # to stop getting charged for storage of the uploaded parts. Only 
+    # after you either complete or abort multipart upload, Amazon S3 frees 
+    # up the parts storage and stops charging you for the parts storage.
+    #
     # @example Finding uploads by prefix
     #
     #   bucket.multipart_uploads.with_prefix("photos/").
