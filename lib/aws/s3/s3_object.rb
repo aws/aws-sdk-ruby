@@ -615,6 +615,13 @@ module AWS
       # part upload is handled.  Otherwise, {#write} is much simpler
       # to use.
       #
+      # Note: After you initiate multipart upload and upload one or 
+      # more parts, you must either complete or abort multipart 
+      # upload in order to stop getting charged for storage of the 
+      # uploaded parts. Only after you either complete or abort 
+      # multipart upload, Amazon S3 frees up the parts storage and 
+      # stops charging you for the parts storage.
+      #
       # @example Uploading an object in two parts
       #
       #   bucket.objects.myobject.multipart_upload do |upload|
