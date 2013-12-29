@@ -119,11 +119,11 @@ module Aws
       end
 
       def hmac(key, value)
-        OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha256'), key, value)
+        OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), key, value)
       end
 
       def hexhmac(key, value)
-        OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha256'), key, value)
+        OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), key, value)
       end
 
       private

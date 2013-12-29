@@ -56,7 +56,7 @@ module Aws
         def compute_checksums(body, &block)
 
           tree_hash = TreeHash.new
-          digest = OpenSSL::Digest::Digest.new('sha256')
+          digest = OpenSSL::Digest.new('sha256')
 
           # if the body is empty/EOF, then we should compute the
           # digests of the empty string
