@@ -18,7 +18,7 @@ module AWS
     #
     # You can use this to create a bucket:
     #
-    #     s3.buckets.create(:name => "mybucket")
+    #     s3.buckets.create("mybucket")
     #
     # You can get a handle for a specific bucket with indifferent
     # access:
