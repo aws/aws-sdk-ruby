@@ -169,7 +169,7 @@ module AWS
       # Status names may be symbolized (snake-cased) or upper-cased strings
       # (e.g. :create_in_progress, 'CREATE_IN_PROGRESS').
       #
-      # @param [Symbol,String] status_filter A status to filter stacks with.
+      # @param [Symbol,String] status_filters A status to filter stacks with.
       #   Valid values include:
       #
       #     * `:create_in_progress`
@@ -193,9 +193,8 @@ module AWS
       #   filters the stacks returned by the given status.
       #
       def with_status *status_filters
-        StackCollection.new(
-          :status_filters => status_filters.flatten.map(&:to_s).map(&:upcase),
-          :config => config)
+        filters = @status_filters + status_filters.flatten.map(&:to_s).map(&:upcase)
+        StackCollection.new(:status_filters => filters, :config => config)
       end
 
       protected
