@@ -11,7 +11,7 @@ module Aws
 
       def sha256_hmac(value)
         Base64.encode64(
-          OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha256'),
+          OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'),
             @credentials.secret_access_key, value)
         ).strip
       end

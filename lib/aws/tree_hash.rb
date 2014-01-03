@@ -31,7 +31,7 @@ module Aws
   class TreeHash
 
     def initialize(hashes = [])
-      @digest = OpenSSL::Digest::Digest.new('sha256')
+      @digest = OpenSSL::Digest.new('sha256')
       @hashes = hashes
     end
 
@@ -49,7 +49,7 @@ module Aws
 
     def digest
       hashes = @hashes
-      digest = OpenSSL::Digest::Digest.new('sha256')
+      digest = OpenSSL::Digest.new('sha256')
       until hashes.count == 1
         hashes = hashes.each_slice(2).map do |h1,h2|
           digest.reset

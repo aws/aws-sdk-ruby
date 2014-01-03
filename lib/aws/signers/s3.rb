@@ -69,7 +69,7 @@ module Aws
       end
 
       def hmac(key, value)
-        OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha1'), key, value)
+        OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha1'), key, value)
       end
 
       # From the S3 developer guide:
