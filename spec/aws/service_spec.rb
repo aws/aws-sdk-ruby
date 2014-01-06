@@ -235,11 +235,25 @@ module Aws
         expect(err_class.new).to be_kind_of(Errors::ServiceError)
       end
 
+    end
+
+    describe 'DynamicErrors module' do
+
       it 'allows you to create error classes named like Ruby classes' do
-        error_class = Aws::Errors.error_class('S3', 'Range')
+        mod = Module.new
+        mod.extend(Aws::Errors::DynamicErrors)
+        error_class = mod.error_class('Range')
         expect(error_class).not_to be(Range)
-        expect(error_class).to be(Aws::S3::Errors::Range)
+        expect(error_class).to be(mod::Range)
         expect(error_class.ancestors).to include(Errors::ServiceError)
+      end
+
+      it 'always returns the same error class given the same error code' do
+        mod = Module.new
+        mod.extend(Aws::Errors::DynamicErrors)
+        klass2 = mod.error_class(:Range)
+        klass1 = mod.error_class('Range')
+        expect(klass1).to be(klass2)
       end
 
     end

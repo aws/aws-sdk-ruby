@@ -24,9 +24,9 @@ module Aws
     private
 
     def error(context, code, message)
-      svc_class_name = context.config.api.metadata['service_class_name']
-      klass = Errors.error_class(svc_class_name, code)
-      Errors.error_class(svc_class_name, code).new(context, message)
+      svc = context.client.class.name.split('::')[1]
+      errors_module = Aws.const_get(svc).const_get(:Errors)
+      errors_module.error_class(code).new(context, message)
     end
 
     def empty_body?(response)

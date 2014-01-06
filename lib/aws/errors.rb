@@ -57,24 +57,18 @@ module Aws
         const_set(constant, Class.new(ServiceError))
       end
 
-    end
-
-    class << self
-
       # Given the name of a service and an error code, this method
       # returns an error class (that extends {ServiceError}.
       #
-      #     Aws::Errors.error_class('S3', 'NoSuchBucket').new
+      #     Aws::S3::Errors.error_class('NoSuchBucket').new
       #     #=> #<Aws::S3::Errors::NoSuchBucket>
       #
       # @api private
-      def error_class(svc_class_name, error_code)
-        constant = error_code.to_s.gsub(/\W+/, '').to_sym
-        errors = Aws.const_get(svc_class_name).const_get(:Errors)
-        if errors.constants.include?(constant)
-          errors.const_get(constant)
+      def error_class(contstant)
+        if constants.include?(contstant.to_sym)
+          const_get(contstant)
         else
-          errors.const_set(constant, Class.new(ServiceError))
+          const_set(contstant, Class.new(ServiceError))
         end
       end
 
