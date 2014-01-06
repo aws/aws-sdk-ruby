@@ -231,7 +231,6 @@ module AWS
     autoload :BlockDeviceMappings, 'aws/ec2/block_device_mappings'
     autoload :Client, 'aws/ec2/client'
     autoload :Collection, 'aws/ec2/collection'
-    autoload :ConfigTransform, 'aws/ec2/config_transform'
     autoload :CustomerGateway, 'aws/ec2/customer_gateway'
     autoload :CustomerGatewayCollection, 'aws/ec2/customer_gateway_collection'
     autoload :DHCPOptions, 'aws/ec2/dhcp_options'
