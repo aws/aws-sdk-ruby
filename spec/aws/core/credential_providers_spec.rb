@@ -382,6 +382,26 @@ module AWS
           provider.credentials.should == exptected
         end
 
+        it 'should not hit metadata service multiple times when fetching credentials from multiple threads concurrently' do
+          @mock_server.response_delay = 0.2
+          threads = []
+          credentials = []
+
+          5.times do
+            threads << Thread.new do
+              credentials << provider.credentials
+            end
+          end
+          threads.map(&:join)
+
+          credentials.should == [{
+            :access_key_id => 'akid-1',
+            :secret_access_key => 'secret-1',
+            :session_token => 'token-1',
+          }] * 5
+          @mock_server.request_count.should == 1
+        end
+
         it 'makes a new request for creds when refresh is called' do
           provider.credentials.should == {
             :access_key_id => 'akid-1',
