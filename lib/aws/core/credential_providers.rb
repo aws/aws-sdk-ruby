@@ -45,7 +45,12 @@ module AWS
         #   at least the `:access_key_id` and `:secret_access_key`.
         #
         def set?
-          @cached_credentials ||= get_credentials
+          @cache_mutex ||= Mutex.new
+          unless @cached_credentials
+            @cache_mutex.synchronize do
+              @cached_credentials ||= get_credentials
+            end
+          end
           @cached_credentials[:access_key_id] &&
             @cached_credentials[:secret_access_key]
         end

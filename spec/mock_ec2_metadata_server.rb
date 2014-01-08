@@ -41,13 +41,15 @@ class MockEC2MetadataServer
   # @private
   attr_accessor :request_count
 
+  attr_writer :response_delay
+
   def start
 
     @threads << Thread.new do
       loop do
         @threads << Thread.start(@tcp_server.accept) do |socket|
           loop do
-
+            sleep @response_delay if @response_delay
             uri = read_request(socket).split(/ /)[1]
 
             path = '/latest/meta-data/iam/security-credentials/'
