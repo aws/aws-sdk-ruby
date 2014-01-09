@@ -146,9 +146,18 @@ module AWS
   ].inject({}) { |h,svc| h[svc.class_name] = svc; h }
 
   # @api private
-  ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
-  SRC = ROOT + '/lib/aws'
+  # Handle being embedded in a jar (for certain jruby users)
+  if __FILE__.start_with?('jar:file:')
+    # Examples, for reference:
+    # __FILE__ = jar:file:/opt/company/library.jar!/aws/core.rb
+    # File.dirname(__FILE__) = jar:file:/opt/company/library.jar!/aws
+    ROOT = File.dirname(__FILE__)
+    SRC = ROOT
+  else
+    ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
+    SRC = ROOT + '/lib/aws'
+  end
 
   autoload :Errors, "#{SRC}/errors"
   autoload :Record, "#{SRC}/record"
