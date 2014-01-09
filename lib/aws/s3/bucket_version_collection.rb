@@ -53,7 +53,7 @@ module AWS
         super
         page.versions.each do |version|
           object_version = ObjectVersion.new(bucket.objects[version.key],
-            version.version_id, :delete_marker => version.delete_marker?)
+            version.version_id, :delete_marker => version.delete_marker?, :last_modified => version.last_modified)
           yield(object_version)
         end
       end
