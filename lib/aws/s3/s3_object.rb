@@ -1751,7 +1751,7 @@ module AWS
         resp = client.put_object(options)
 
         resp.data[:version_id] ?
-          ObjectVersion.new(self, resp.data[:version_id]) : self
+          ObjectVersion.new(self, resp.data[:version_id], {:last_modified => self.last_modified}) : self
       end
 
       def encryption_key_for options, &block
