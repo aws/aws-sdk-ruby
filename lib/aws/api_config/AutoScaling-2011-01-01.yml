@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -119,6 +119,14 @@
               - :string
               VolumeSize:
               - :integer
+              VolumeType:
+              - :string
+              DeleteOnTermination:
+              - :boolean
+              Iops:
+              - :integer
+          NoDevice:
+          - :boolean
     InstanceMonitoring:
     - :structure:
         Enabled:
@@ -238,6 +246,18 @@
     :children:
       DeleteTagsResult:
         :ignore: true
+- :name: DescribeAccountLimits
+  :method: :describe_account_limits
+  :inputs: {}
+  :outputs:
+    :children:
+      DescribeAccountLimitsResult:
+        :ignore: true
+        :children:
+          MaxNumberOfAutoScalingGroups:
+            :type: :integer
+          MaxNumberOfLaunchConfigurations:
+            :type: :integer
 - :name: DescribeAdjustmentTypes
   :method: :describe_adjustment_types
   :inputs: {}
@@ -405,6 +425,12 @@
                             :children:
                               VolumeSize:
                                 :type: :integer
+                              DeleteOnTermination:
+                                :type: :boolean
+                              Iops:
+                                :type: :integer
+                          NoDevice:
+                            :type: :boolean
                   InstanceMonitoring:
                     :children:
                       Enabled:
