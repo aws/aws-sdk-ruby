@@ -1,116 +1,253 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 ---
-:abort_multipart_upload: "Calls the DELETE AbortMultipartUpload API operation.\n@param
-  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
-  *required* - (String) \n  * `:upload_id` - *required* - (String) \n@return [Core::Response]"
+:abort_multipart_upload: |-
+  Calls the DELETE AbortMultipartUpload API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+    * `:upload_id` - *required* - (String) The upload ID of the multipart upload to delete.
+  @return [Core::Response]
 :complete_multipart_upload: "Calls the POST CompleteMultipartUpload API operation.\n@param
-  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
-  *required* - (String) \n  * `:upload_id` - *required* - (String) \n  * `:archive_size`
-  - (Integer) \n  * `:checksum` - *required* - (String) \n  * `:content_sha256` -
-  (String) \n@return [Core::Response]"
-:create_vault: "Calls the PUT CreateVault API operation.\n@param [Hash] options\n
-  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
-  \n@return [Core::Response]"
-:delete_archive: "Calls the DELETE DeleteArchive API operation.\n@param [Hash] options\n
-  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
-  \n  * `:archive_id` - *required* - (String) \n@return [Core::Response]"
-:delete_vault: "Calls the DELETE DeleteVault API operation.\n@param [Hash] options\n
-  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
-  \n@return [Core::Response]"
-:delete_vault_notifications: "Calls the DELETE DeleteVaultNotifications API operation.\n@param
-  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
-  *required* - (String) \n@return [Core::Response]"
-:describe_job: "Calls the GET DescribeJob API operation.\n@param [Hash] options\n
-  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
-  \n  * `:job_id` - *required* - (String) \n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:job_id`
-  - (String)\n  * `:job_description` - (String)\n  * `:action` - (String)\n  * `:archive_id`
-  - (String)\n  * `:vault_arn` - (String)\n  * `:creation_date` - (String)\n  * `:completed`
-  - (Boolean)\n  * `:status_code` - (String)\n  * `:status_message` - (String)\n  *
-  `:archive_size_in_bytes` - (Integer)\n  * `:inventory_size_in_bytes` - (Integer)\n
-  \ * `:sns_topic` - (String)\n  * `:completion_date` - (String)\n  * `:sha256_tree_hash`
-  - (String)"
-:describe_vault: "Calls the GET DescribeVault API operation.\n@param [Hash] options\n
-  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:vault_arn` - (String)\n  * `:vault_name`
-  - (String)\n  * `:creation_date` - (String)\n  * `:last_inventory_date` - (String)\n
-  \ * `:number_of_archives` - (Integer)\n  * `:size_in_bytes` - (Integer)"
-:get_job_output: "Calls the GET GetJobOutput API operation.\n@param [Hash] options\n
-  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
-  \n  * `:job_id` - *required* - (String) \n  * `:range` - (String) \n@return [Core::Response]"
-:get_vault_notifications: "Calls the GET GetVaultNotifications API operation.\n@param
-  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
-  *required* - (String) \n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:sns_topic` - (String)\n
-  \ * `:events` - (Array<String>)"
-:initiate_job: "Calls the POST InitiateJob API operation.\n@param [Hash] options\n
-  \ * `:account_id` - *required* - (String) \n  * `:vault_name` - *required* - (String)
-  \n  * `:job_parameters` - *required* - (Hash) \n    * `:format` - (String) \n    *
-  `:type` - (String) \n    * `:archive_id` - (String) \n    * `:description` - (String)
-  \n    * `:sns_topic` - (String) \n@return [Core::Response]"
-:initiate_multipart_upload: "Calls the POST InitiateMultipartUpload API operation.\n@param
-  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
-  *required* - (String) \n  * `:archive_description` - (String) \n  * `:part_size`
-  - (Integer) \n@return [Core::Response]"
-:list_jobs: "Calls the GET ListJobs API operation.\n@param [Hash] options\n  * `:account_id`
-  - *required* - (String) \n  * `:vault_name` - *required* - (String) \n  * `:limit`
-  - (Integer) \n  * `:marker` - (String) \n  * `:statuscode` - (String) \n  * `:completed`
-  - (String) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:job_list` - (Array<Hash>)\n
-  \   * `:job_id` - (String)\n    * `:job_description` - (String)\n    * `:action`
-  - (String)\n    * `:archive_id` - (String)\n    * `:vault_arn` - (String)\n    *
-  `:creation_date` - (String)\n    * `:completed` - (Boolean)\n    * `:status_code`
-  - (String)\n    * `:status_message` - (String)\n    * `:archive_size_in_bytes` -
-  (Integer)\n    * `:inventory_size_in_bytes` - (Integer)\n    * `:sns_topic` - (String)\n
-  \   * `:completion_date` - (String)\n    * `:sha256_tree_hash` - (String)\n  * `:marker`
-  - (String)"
-:list_multipart_uploads: "Calls the GET ListMultipartUploads API operation.\n@param
-  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
-  *required* - (String) \n  * `:upload_id_marker` - (String) \n  * `:limit` - (Integer)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:uploads_list` - (Array<Hash>)\n    * `:multipart_upload_id`
-  - (String)\n    * `:vault_arn` - (String)\n    * `:archive_description` - (String)\n
-  \   * `:part_size_in_bytes` - (Integer)\n    * `:creation_date` - (String)\n  *
-  `:marker` - (String)"
-:list_parts: "Calls the GET ListParts API operation.\n@param [Hash] options\n  * `:account_id`
-  - *required* - (String) \n  * `:vault_name` - *required* - (String) \n  * `:upload_id`
-  - *required* - (String) \n  * `:marker` - (String) \n  * `:limit` - (Integer) \n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:multipart_upload_id` - (String)\n  * `:vault_arn`
-  - (String)\n  * `:archive_description` - (String)\n  * `:part_size_in_bytes` - (Integer)\n
-  \ * `:creation_date` - (String)\n  * `:parts` - (Array<Hash>)\n    * `:range_in_bytes`
-  - (String)\n    * `:sha256_tree_hash` - (String)\n  * `:marker` - (String)"
-:list_vaults: "Calls the GET ListVaults API operation.\n@param [Hash] options\n  *
-  `:account_id` - *required* - (String) \n  * `:marker` - (String) \n  * `:limit`
-  - (Integer) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:vault_list` - (Array<Hash>)\n
-  \   * `:vault_arn` - (String)\n    * `:vault_name` - (String)\n    * `:creation_date`
-  - (String)\n    * `:last_inventory_date` - (String)\n    * `:number_of_archives`
-  - (Integer)\n    * `:size_in_bytes` - (Integer)\n  * `:marker` - (String)"
-:set_vault_notifications: "Calls the PUT SetVaultNotifications API operation.\n@param
-  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
-  *required* - (String) \n  * `:vault_notification_config` - *required* - (Hash) \n
-  \   * `:sns_topic` - (String) \n    * `:events` - (Array&lt;String>) \n    * `:member`
+  [Hash] options\n  * `:account_id` - *required* - (String) The AccountId is the AWS
+  Account ID. You can specify either the AWS Account ID or optionally a '-', in which
+  case Amazon Glacier uses the AWS Account ID associated with the credentials used
+  to sign the request. If you specify your Account ID, do not include hyphens in it.\n
+  \ * `:vault_name` - *required* - (String) The name of the vault.\n  * `:upload_id`
+  - *required* - (String) The upload ID of the multipart upload.\n  * `:archive_size`
+  - (Integer) The total size, in bytes, of the entire archive. This value should be
+  the sum of all the sizes of the individual parts that you uploaded.\n  * `:checksum`
+  - *required* - (String) The SHA256 tree hash of the entire archive. It is the tree
+  hash of SHA256 tree hash of the individual parts. If the value you specify in the
+  request does not match the SHA256 tree hash of the final assembled archive as computed
+  by Amazon Glacier, Amazon Glacier returns an error and the request fails.\n  * `:content_sha256`
   - (String) \n@return [Core::Response]"
+:create_vault: |-
+  Calls the PUT CreateVault API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+  @return [Core::Response]
+:delete_archive: |-
+  Calls the DELETE DeleteArchive API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+    * `:archive_id` - *required* - (String) The ID of the archive to delete.
+  @return [Core::Response]
+:delete_vault: |-
+  Calls the DELETE DeleteVault API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+  @return [Core::Response]
+:delete_vault_notifications: |-
+  Calls the DELETE DeleteVaultNotifications API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+  @return [Core::Response]
+:describe_job: |-
+  Calls the GET DescribeJob API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+    * `:job_id` - *required* - (String) The ID of the job to describe.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:job_id` - (String)
+    * `:job_description` - (String)
+    * `:action` - (String)
+    * `:archive_id` - (String)
+    * `:vault_arn` - (String)
+    * `:creation_date` - (String)
+    * `:completed` - (Boolean)
+    * `:status_code` - (String)
+    * `:status_message` - (String)
+    * `:archive_size_in_bytes` - (Integer)
+    * `:inventory_size_in_bytes` - (Integer)
+    * `:sns_topic` - (String)
+    * `:completion_date` - (String)
+    * `:sha256_tree_hash` - (String)
+    * `:archive_sha256_tree_hash` - (String)
+    * `:retrieval_byte_range` - (String)
+:describe_vault: |-
+  Calls the GET DescribeVault API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:vault_arn` - (String)
+    * `:vault_name` - (String)
+    * `:creation_date` - (String)
+    * `:last_inventory_date` - (String)
+    * `:number_of_archives` - (Integer)
+    * `:size_in_bytes` - (Integer)
+:get_job_output: |-
+  Calls the GET GetJobOutput API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+    * `:job_id` - *required* - (String) The job ID whose data is downloaded.
+    * `:range` - (String) The range of bytes to retrieve from the output. For example, if you want to download the first 1,048,576 bytes, specify "Range: bytes=0-1048575". By default, this operation downloads the entire output.
+  @return [Core::Response]
+:get_vault_notifications: |-
+  Calls the GET GetVaultNotifications API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:sns_topic` - (String)
+    * `:events` - (Array<String>)
+:initiate_job: "Calls the POST InitiateJob API operation.\n@param [Hash] options\n
+  \ * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You
+  can specify either the AWS Account ID or optionally a '-', in which case Amazon
+  Glacier uses the AWS Account ID associated with the credentials used to sign the
+  request. If you specify your Account ID, do not include hyphens in it.\n  * `:vault_name`
+  - *required* - (String) The name of the vault.\n  * `:job_parameters` - *required*
+  - (Hash) Provides options for specifying job information.\n    * `:format` - (String)
+  When initiating a job to retrieve a vault inventory, you can optionally add this
+  parameter to your request to specify the output format. If you are initiating an
+  inventory job and do not specify a Format field, JSON is the default format. Valid
+  Values are \"CSV\" and \"JSON\".\n    * `:type` - (String) The job type. You can
+  initiate a job to retrieve an archive or get an inventory of a vault. Valid Values
+  are \"archive-retrieval\" and \"inventory-retrieval\".\n    * `:archive_id` - (String)
+  The ID of the archive that you want to retrieve. This field is required only if
+  Type is set to archive-retrieval. An error occurs if you specify this request parameter
+  for an inventory retrieval job request.\n    * `:description` - (String) The optional
+  description for the job. The description must be less than or equal to 1,024 bytes.
+  The allowable characters are 7-bit ASCII without control codes-specifically, ASCII
+  values 32-126 decimal or 0x20-0x7E hexadecimal.\n    * `:sns_topic` - (String) The
+  Amazon SNS topic ARN to which Amazon Glacier sends a notification when the job is
+  completed and the output is ready for you to download. The specified topic publishes
+  the notification to its subscribers. The SNS topic must exist.\n    * `:retrieval_byte_range`
+  - (String) The byte range to retrieve for an archive retrieval. in the form \"StartByteValue-EndByteValue\"
+  If not specified, the whole archive is retrieved. If specified, the byte range must
+  be megabyte (1024*1024) aligned which means that StartByteValue must be divisible
+  by 1 MB and EndByteValue plus 1 must be divisible by 1 MB or be the end of the archive
+  specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte
+  aligned, this operation returns a 400 response. An error occurs if you specify this
+  field for an inventory retrieval job request.\n    * `:inventory_retrieval_parameters`
+  - (Hash) \n      * `:start_date` - (String) \n      * `:end_date` - (String) \n
+  \     * `:limit` - (String) \n      * `:marker` - (String) \n@return [Core::Response]"
+:initiate_multipart_upload: |-
+  Calls the POST InitiateMultipartUpload API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+    * `:archive_description` - (String) The archive description that you are uploading in parts. The part size must be a megabyte (1024 KB) multiplied by a power of 2—for example, 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable part size is 1 MB, and the maximum is 4 GB (4096 MB).
+    * `:part_size` - (Integer) The size of each part except the last, in bytes. The last part can be smaller than this part size.
+  @return [Core::Response]
+:list_jobs: |-
+  Calls the GET ListJobs API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+    * `:limit` - (Integer) Specifies that the response be limited to the specified number of items or fewer. If not specified, the List Jobs operation returns up to 1,000 jobs.
+    * `:marker` - (String) An opaque string used for pagination. This value specifies the job at which the listing of jobs should begin. Get the marker value from a previous List Jobs response. You need only include the marker if you are continuing the pagination of results started in a previous List Jobs request.
+    * `:statuscode` - (String) Specifies the type of job status to return. You can specify the following values: "InProgress", "Succeeded", or "Failed".
+    * `:completed` - (String) Specifies the state of the jobs to return. You can specify  `true`  or  `false` .
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:job_list` - (Array<Hash>)
+      * `:job_id` - (String)
+      * `:job_description` - (String)
+      * `:action` - (String)
+      * `:archive_id` - (String)
+      * `:vault_arn` - (String)
+      * `:creation_date` - (String)
+      * `:completed` - (Boolean)
+      * `:status_code` - (String)
+      * `:status_message` - (String)
+      * `:archive_size_in_bytes` - (Integer)
+      * `:inventory_size_in_bytes` - (Integer)
+      * `:sns_topic` - (String)
+      * `:completion_date` - (String)
+      * `:sha256_tree_hash` - (String)
+      * `:archive_sha256_tree_hash` - (String)
+      * `:retrieval_byte_range` - (String)
+    * `:marker` - (String)
+:list_multipart_uploads: |-
+  Calls the GET ListMultipartUploads API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+    * `:upload_id_marker` - (String) An opaque string used for pagination. This value specifies the upload at which the listing of uploads should begin. Get the marker value from a previous List Uploads response. You need only include the marker if you are continuing the pagination of results started in a previous List Uploads request.
+    * `:limit` - (Integer) Specifies the maximum number of uploads returned in the response body. If this value is not specified, the List Uploads operation returns up to 1,000 uploads.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:uploads_list` - (Array<Hash>)
+      * `:multipart_upload_id` - (String)
+      * `:vault_arn` - (String)
+      * `:archive_description` - (String)
+      * `:part_size_in_bytes` - (Integer)
+      * `:creation_date` - (String)
+    * `:marker` - (String)
+:list_parts: |-
+  Calls the GET ListParts API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:vault_name` - *required* - (String) The name of the vault.
+    * `:upload_id` - *required* - (String) The upload ID of the multipart upload.
+    * `:marker` - (String) An opaque string used for pagination. This value specifies the part at which the listing of parts should begin. Get the marker value from the response of a previous List Parts response. You need only include the marker if you are continuing the pagination of results started in a previous List Parts request.
+    * `:limit` - (Integer) Specifies the maximum number of parts returned in the response body. If this value is not specified, the List Parts operation returns up to 1,000 uploads.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:multipart_upload_id` - (String)
+    * `:vault_arn` - (String)
+    * `:archive_description` - (String)
+    * `:part_size_in_bytes` - (Integer)
+    * `:creation_date` - (String)
+    * `:parts` - (Array<Hash>)
+      * `:range_in_bytes` - (String)
+      * `:sha256_tree_hash` - (String)
+    * `:marker` - (String)
+:list_vaults: |-
+  Calls the GET ListVaults API operation.
+  @param [Hash] options
+    * `:account_id` - *required* - (String) The AccountId is the AWS Account ID. You can specify either the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS Account ID associated with the credentials used to sign the request. If you specify your Account ID, do not include hyphens in it.
+    * `:marker` - (String) A string used for pagination. The marker specifies the vault ARN after which the listing of vaults should begin.
+    * `:limit` - (Integer) The maximum number of items returned in the response. If you don't specify a value, the List Vaults operation returns up to 1,000 items.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:vault_list` - (Array<Hash>)
+      * `:vault_arn` - (String)
+      * `:vault_name` - (String)
+      * `:creation_date` - (String)
+      * `:last_inventory_date` - (String)
+      * `:number_of_archives` - (Integer)
+      * `:size_in_bytes` - (Integer)
+    * `:marker` - (String)
+:set_vault_notifications: "Calls the PUT SetVaultNotifications API operation.\n@param
+  [Hash] options\n  * `:account_id` - *required* - (String) The AccountId is the AWS
+  Account ID. You can specify either the AWS Account ID or optionally a '-', in which
+  case Amazon Glacier uses the AWS Account ID associated with the credentials used
+  to sign the request. If you specify your Account ID, do not include hyphens in it.\n
+  \ * `:vault_name` - *required* - (String) The name of the vault.\n  * `:vault_notification_config`
+  - *required* - (Hash) Provides options for specifying notification configuration.\n
+  \   * `:sns_topic` - (String) The Amazon Simple Notification Service (Amazon SNS)
+  topic Amazon Resource Name (ARN).\n    * `:events` - (Array&lt;String>) A list of
+  one or more events for which Amazon Glacier will send a notification to the specified
+  Amazon SNS topic.\n    * `:member` - (String) \n@return [Core::Response]"
 :upload_archive: "Calls the POST UploadArchive API operation.\n@param [Hash] options\n
-  \ * `:vault_name` - *required* - (String) \n  * `:account_id` - *required* - (String)
-  \n  * `:archive_description` - (String) \n  * `:checksum` - *required* - (String)
-  \n  * `:body` - *required* - (IO) \n  * `:content_sha256` - (String) \n@return [Core::Response]"
+  \ * `:vault_name` - *required* - (String) The name of the vault.\n  * `:account_id`
+  - *required* - (String) The AccountId is the AWS Account ID. You can specify either
+  the AWS Account ID or optionally a '-', in which case Amazon Glacier uses the AWS
+  Account ID associated with the credentials used to sign the request. If you specify
+  your Account ID, do not include hyphens in it.\n  * `:archive_description` - (String)
+  The optional description of the archive you are uploading.\n  * `:checksum` - *required*
+  - (String) The SHA256 checksum (a linear hash) of the payload.\n  * `:body` - *required*
+  - (IO) The data to upload.\n  * `:content_sha256` - (String) \n@return [Core::Response]"
 :upload_multipart_part: "Calls the PUT UploadMultipartPart API operation.\n@param
-  [Hash] options\n  * `:account_id` - *required* - (String) \n  * `:vault_name` -
-  *required* - (String) \n  * `:upload_id` - *required* - (String) \n  * `:checksum`
-  - *required* - (String) \n  * `:range` - (String) \n  * `:body` - *required* - (IO)
-  \n  * `:content_sha256` - (String) \n@return [Core::Response]"
+  [Hash] options\n  * `:account_id` - *required* - (String) The AccountId is the AWS
+  Account ID. You can specify either the AWS Account ID or optionally a '-', in which
+  case Amazon Glacier uses the AWS Account ID associated with the credentials used
+  to sign the request. If you specify your Account ID, do not include hyphens in it.\n
+  \ * `:vault_name` - *required* - (String) The name of the vault.\n  * `:upload_id`
+  - *required* - (String) The upload ID of the multipart upload.\n  * `:checksum`
+  - *required* - (String) The SHA256 tree hash of the data being uploaded.\n  * `:range`
+  - (String) Identifies the range of bytes in the assembled archive that will be uploaded
+  in this part. Amazon Glacier uses this information to assemble the archive in the
+  proper sequence. The format of this header follows RFC 2616. An example header is
+  Content-Range:bytes 0-4194303/*.\n  * `:body` - *required* - (IO) The data to upload.\n
+  \ * `:content_sha256` - (String) \n@return [Core::Response]"
