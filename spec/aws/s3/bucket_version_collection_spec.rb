@@ -94,9 +94,9 @@ module AWS
       context '#each' do
 
         let(:versions) {[
-          { :key => 'a', :version_id => 'v1', :delete_marker => true, :latest => true },
-          { :key => 'b', :version_id => 'v1', :delete_marker => false, :latest => false },
-          { :key => 'c', :version_id => 'v1', :delete_marker => false, :latest => true },
+          { :key => 'a', :version_id => 'v1', :delete_marker => true, :latest => true, :last_modified => Time.now },
+          { :key => 'b', :version_id => 'v1', :delete_marker => false, :latest => false, :last_modified => Time.now },
+          { :key => 'c', :version_id => 'v1', :delete_marker => false, :latest => true, :last_modified => Time.now },
         ]}
 
         let(:list) { client.new_stub_for(:list_object_versions) }
