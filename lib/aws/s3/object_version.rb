@@ -28,15 +28,21 @@ module AWS
       # @param [Hash] options
       # @option options [Boolean] :delete_marker Is this version a
       #   delete marker?
+      # @option options [DateTime] :last_modified Date and time the
+      #   object was last modified.
       def initialize(object, version_id, options = {})
         @object = object
         @version_id = version_id
         @delete_marker = options[:delete_marker]
+        @last_modified = options[:last_modified]
         super
       end
 
       # @return [S3Object] the object this is a version of.
       attr_reader :object
+
+      # @return [DateTime] timestamp of this version
+      attr_reader :last_modified
 
       def bucket
         object.bucket
