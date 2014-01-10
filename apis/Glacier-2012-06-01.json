@@ -516,6 +516,28 @@
               "retrieval_byte_range": {
                 "type": "string",
                 "serialized_name": "RetrievalByteRange"
+              },
+              "inventory_retrieval_parameters": {
+                "type": "structure",
+                "serialized_name": "InventoryRetrievalParameters",
+                "members": {
+                  "start_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "StartDate"
+                  },
+                  "end_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "EndDate"
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "serialized_name": "Limit"
+                  },
+                  "marker": {
+                    "type": "string",
+                    "serialized_name": "Marker"
+                  }
+                }
               }
             }
           }
