@@ -31,6 +31,28 @@
     "Aws::Plugins::SignatureV4"
   ],
   "operations": {
+    "attach_instances": {
+      "name": "AttachInstances",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "instance_ids": {
+            "type": "list",
+            "serialized_name": "InstanceIds",
+            "members": {
+              "type": "string"
+            }
+          },
+          "auto_scaling_group_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "AutoScalingGroupName"
+          }
+        }
+      }
+    },
     "create_auto_scaling_group": {
       "name": "CreateAutoScalingGroup",
       "http_method": "POST",
@@ -45,8 +67,11 @@
           },
           "launch_configuration_name": {
             "type": "string",
-            "required": true,
             "serialized_name": "LaunchConfigurationName"
+          },
+          "instance_id": {
+            "type": "string",
+            "serialized_name": "InstanceId"
           },
           "min_size": {
             "type": "integer",
@@ -150,7 +175,6 @@
           },
           "image_id": {
             "type": "string",
-            "required": true,
             "serialized_name": "ImageId"
           },
           "key_name": {
@@ -168,9 +192,12 @@
             "type": "string",
             "serialized_name": "UserData"
           },
+          "instance_id": {
+            "type": "string",
+            "serialized_name": "InstanceId"
+          },
           "instance_type": {
             "type": "string",
-            "required": true,
             "serialized_name": "InstanceType"
           },
           "kernel_id": {
@@ -207,8 +234,24 @@
                     "volume_size": {
                       "type": "integer",
                       "serialized_name": "VolumeSize"
+                    },
+                    "volume_type": {
+                      "type": "string",
+                      "serialized_name": "VolumeType"
+                    },
+                    "delete_on_termination": {
+                      "type": "boolean",
+                      "serialized_name": "DeleteOnTermination"
+                    },
+                    "iops": {
+                      "type": "integer",
+                      "serialized_name": "Iops"
                     }
                   }
+                },
+                "no_device": {
+                  "type": "boolean",
+                  "serialized_name": "NoDevice"
                 }
               }
             }
@@ -412,6 +455,27 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "describe_account_limits": {
+      "name": "DescribeAccountLimits",
+      "http_method": "POST",
+      "http_path": "/",
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeAccountLimitsResult"
+        },
+        "members": {
+          "max_number_of_auto_scaling_groups": {
+            "type": "integer",
+            "serialized_name": "MaxNumberOfAutoScalingGroups"
+          },
+          "max_number_of_launch_configurations": {
+            "type": "integer",
+            "serialized_name": "MaxNumberOfLaunchConfigurations"
           }
         }
       }
@@ -871,8 +935,24 @@
                           "volume_size": {
                             "type": "integer",
                             "serialized_name": "VolumeSize"
+                          },
+                          "volume_type": {
+                            "type": "string",
+                            "serialized_name": "VolumeType"
+                          },
+                          "delete_on_termination": {
+                            "type": "boolean",
+                            "serialized_name": "DeleteOnTermination"
+                          },
+                          "iops": {
+                            "type": "integer",
+                            "serialized_name": "Iops"
                           }
                         }
+                      },
+                      "no_device": {
+                        "type": "boolean",
+                        "serialized_name": "NoDevice"
                       }
                     }
                   }
