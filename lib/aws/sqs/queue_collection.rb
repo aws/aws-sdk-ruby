@@ -33,6 +33,10 @@ module AWS
     #   url = "http://sqs.us-west-2.amazonaws.com/123456789012/myqueue"
     #   sqs.queues[url].send_message("HELLO")
     #
+    # @example Accessing a queue in your account by name
+    #
+    #   sqs.queues.named("myqueue").send_message("HELLO")
+    #
     class QueueCollection
 
       include Core::Collection::Simple
