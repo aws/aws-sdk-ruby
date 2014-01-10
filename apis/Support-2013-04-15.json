@@ -75,7 +75,6 @@
           },
           "service_code": {
             "type": "string",
-            "required": true,
             "serialized_name": "serviceCode"
           },
           "severity_code": {
@@ -84,7 +83,6 @@
           },
           "category_code": {
             "type": "string",
-            "required": true,
             "serialized_name": "categoryCode"
           },
           "communication_body": {
