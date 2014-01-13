@@ -74,8 +74,14 @@ module AWS
 
         it 'raises an argument error when an invalid topic arn is passed' do
           lambda {
-            topics['arn']
+            topics['topic-name']
           }.should raise_error(ArgumentError, /invalid topic arn/)
+        end
+
+        it 'accepts topic arns for the China (Beijing) region' do
+          lambda {
+            topics['arn:aws-cn:sns:topic-name']
+          }.should_not raise_error
         end
 
       end

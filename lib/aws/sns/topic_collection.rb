@@ -32,7 +32,7 @@ module AWS
       #
       # @return [Topic] Returns a topic with the given Topic ARN.
       def [] topic_arn
-        unless topic_arn =~ /^arn:aws:sns:/
+        unless topic_arn =~ /^arn:aws/
           raise ArgumentError, "invalid topic arn `#{topic_arn}`"
         end
         Topic.new(topic_arn, :config => config)
