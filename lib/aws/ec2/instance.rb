@@ -40,7 +40,7 @@ module AWS
     # @attr [Boolean] ebs_optimized The instance must be in a stopped state to
     #   change the ebs_optimized state.
     #
-    # @attr [Boolean] api_termination_disabled True if the instance
+    # @attr [Boolean] api_termination_disabled? True if the instance
     #   cannot be terminated using the {#terminate} method.  This
     #   attribute can be changed at any time.
     #
