@@ -269,6 +269,13 @@ module AWS
                 should raise_error(ArgumentError, "expected a queue ARN")
             end
 
+            it 'accepts ARNs' do
+              lambda {
+                topic.subscribe("arn:aws-cn:sqs:foo:bar:baz")
+              }.should_not raise_error
+            end
+
+
           end
 
           context 'unrecognized endpoint protocol' do
