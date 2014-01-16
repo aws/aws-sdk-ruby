@@ -232,7 +232,7 @@ module Aws
 
       it 'lazily creates error classes' do
         err_class = errors.const_get(:AbcXyz)
-        expect(err_class.new).to be_kind_of(Errors::ServiceError)
+        expect(err_class.new(nil, nil)).to be_kind_of(Errors::ServiceError)
       end
 
     end

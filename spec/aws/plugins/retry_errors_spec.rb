@@ -20,32 +20,32 @@ module Aws
         describe '#expired_credentials?' do
 
           it 'returns true if the error code is InvalidClientTokenId' do
-            error = IAM::Errors::InvalidClientTokenId.new
+            error = IAM::Errors::InvalidClientTokenId.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
           it 'returns true if the error code is UnrecognizedClientException' do
-            error = SWF::Errors::UnrecognizedClientException.new
+            error = SWF::Errors::UnrecognizedClientException.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
           it 'returns true if the error code is InvalidAccessKeyId' do
-            error = S3::Errors::InvalidAccessKeyId.new
+            error = S3::Errors::InvalidAccessKeyId.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
           it 'returns true if the error code is AuthFailure' do
-            error = EC2::Errors::AuthFailure.new
+            error = EC2::Errors::AuthFailure.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
           it 'returns true if the error code matches /expired/' do
-            error = IAM::Errors::SomethingExpiredError.new
+            error = IAM::Errors::SomethingExpiredError.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(true)
           end
 
           it 'returns false for other errors' do
-            error = IAM::Errors::SomeRandomError.new
+            error = IAM::Errors::SomeRandomError.new(nil,nil)
             expect(inspector(error).expired_credentials?).to be(false)
           end
 
@@ -54,42 +54,42 @@ module Aws
         describe '#throttling_error?' do
 
           it 'returns true for Throttling' do
-            error = IAM::Errors::Throttling.new
+            error = IAM::Errors::Throttling.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
           end
 
           it 'returns true for ThrottlingException' do
-            error = SWF::Errors::ThrottlingException.new
+            error = SWF::Errors::ThrottlingException.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
           end
 
           it 'returns true for RequestThrottled' do
-            error = SQS::Errors::RequestThrottled.new
+            error = SQS::Errors::RequestThrottled.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
           end
 
           it 'returns true for ProvisionedThroughputExceededException' do
-            error = DynamoDB::Errors::ProvisionedThroughputExceededException.new
+            error = DynamoDB::Errors::ProvisionedThroughputExceededException.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
           end
 
           it 'returns true for RequestLimitExceeded' do
-            error = EC2::Errors::RequestLimitExceeded.new
+            error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
           end
 
           it 'returns true for BandwidthLimitExceeded' do
-            error = CloudSearch::Errors::BandwidthLimitExceeded.new
+            error = CloudSearch::Errors::BandwidthLimitExceeded.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
           end
 
           it 'returns true for error codes that match /throttl/' do
-            error = IAM::Errors::Throttled.new
+            error = IAM::Errors::Throttled.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
           end
 
           it 'returns false for other errors' do
-            error = IAM::Errors::SomeRandomError.new
+            error = IAM::Errors::SomeRandomError.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(false)
           end
 
@@ -103,7 +103,7 @@ module Aws
           end
 
           it 'returns true if the error is a crc32 error' do
-            error = DynamoDB::Errors::CRC32CheckFailed.new
+            error = DynamoDB::Errors::CRC32CheckFailed.new(nil,nil)
             expect(inspector(error).checksum?).to be(true)
           end
 
@@ -117,12 +117,12 @@ module Aws
         describe '#server?' do
 
           it 'returns true if the error is a 500 level error' do
-            error = EC2::Errors::RandomError.new
+            error = EC2::Errors::RandomError.new(nil,nil)
             expect(inspector(error, 500).server?).to be(true)
           end
 
           it 'returns false if the error is not a 500 level error' do
-            error = EC2::Errors::RandomError.new
+            error = EC2::Errors::RandomError.new(nil,nil)
             expect(inspector(error, 404).server?).to be(false)
           end
 
@@ -131,7 +131,7 @@ module Aws
         describe '#networking?' do
 
           it 'returns true if the error code is RequestTimeout' do
-            error = S3::Errors::RequestTimeout.new
+            error = S3::Errors::RequestTimeout.new(nil,nil)
             expect(inspector(error).networking?).to be(true)
           end
 
@@ -188,7 +188,7 @@ module Aws
         end
 
         it 'reties 3 times for a total of 4 attemps' do
-          resp.error = EC2::Errors::RequestLimitExceeded.new
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
           send_handler = double('send-handler')
           expect(send_handler).to receive(:call).
             exactly(4).times.
@@ -201,12 +201,12 @@ module Aws
           expect(Kernel).to receive(:sleep).with(0.3).ordered
           expect(Kernel).to receive(:sleep).with(0.6).ordered
           expect(Kernel).to receive(:sleep).with(1.2).ordered
-          resp.error = EC2::Errors::RequestLimitExceeded.new
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
           handle { |context| resp }
         end
 
         it 'increments the retry count on the context' do
-          resp.error = EC2::Errors::RequestLimitExceeded.new
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
           handle { |context| resp }
           expect(resp.context.retries).to eq(3)
         end
@@ -214,7 +214,7 @@ module Aws
         it 'rewinds the request body before each retry attempt' do
           body = resp.context.http_request.body
           expect(body).to receive(:rewind).exactly(3).times
-          resp.error = EC2::Errors::RequestLimitExceeded.new
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
           handle { |context| resp }
         end
 
@@ -222,26 +222,26 @@ module Aws
           body = double('truncatable-body', pos: 100, truncate: 0)
           resp.context.http_response.body = body
           expect(body).to receive(:truncate).with(0).exactly(3).times
-          resp.error = EC2::Errors::RequestLimitExceeded.new
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
           handle { |context| resp }
         end
 
         it 'skips retry if un-truncatable response body has received data' do
           resp.context.http_response.body = double('write-once-body', pos: 100)
-          resp.error = EC2::Errors::RequestLimitExceeded.new
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
           handle { |context| resp }
           expect(resp.context.retries).to eq(0)
         end
 
         it 'retries if creds expire and are refreshable' do
           expect(credentials).to receive(:refresh!).exactly(3).times
-          resp.error = EC2::Errors::AuthFailure.new
+          resp.error = EC2::Errors::AuthFailure.new(nil,nil)
           handle { |context| resp }
           expect(resp.context.retries).to eq(3)
         end
 
         it 'skips retry if creds expire and are not refreshable' do
-          resp.error = EC2::Errors::AuthFailure.new
+          resp.error = EC2::Errors::AuthFailure.new(nil,nil)
           handle { |context| resp }
           expect(resp.context.retries).to eq(0)
         end

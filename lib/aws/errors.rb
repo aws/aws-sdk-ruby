@@ -9,12 +9,8 @@ module Aws
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      def initialize(context = nil, message = nil)
-        if context.is_a?(String)
-          message = context
-        else
-          @context = context
-        end
+      def initialize(context, message)
+        @context = context
         super(message)
       end
 
@@ -65,7 +61,8 @@ module Aws
       #
       # @api private
       def error_class(error_code)
-        constant = error_code.gsub(/http:\/\/.*$/, '') # remove http namespaces
+        constant = error_code.to_s
+        constant = constant.gsub(/http:\/\/.*$/, '') # remove http namespaces
         constant = constant.gsub(/[^a-zA-Z0-9]/, '').to_sym
         if constants.include?(constant)
           const_get(constant)
