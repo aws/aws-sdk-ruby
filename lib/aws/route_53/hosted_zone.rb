@@ -50,26 +50,38 @@ module AWS
         "/hostedzone/#{id}"
       end
 
-      attribute :name, :static => true
+      define_attribute_type :list
 
-      attribute :caller_reference, :static => true
+      define_attribute_type :get
 
-      attribute :configuration, :from => :config, :static => true
+      list_attribute :name, :static => true
 
-      attribute :resource_record_set_count
+      list_attribute :caller_reference, :static => true
 
-      attribute :delegation_set, :static => true
+      list_attribute :configuration, :from => :config, :static => true
 
-      populates_from :create_hosted_zone do |resp|
-        resp[:hosted_zone] if resp[:hosted_zone][:id] == path
+      list_attribute :resource_record_set_count
+
+      get_attribute :delegation_set, :static => true
+
+      provider(:list_hosted_zones) do |provider|
+        provider.find do |resp|
+          resp.data[:hosted_zones].find do |detail|
+            detail[:hosted_zone][:id] == path
+          end
+        end
+        provider.provides *list_attributes.keys
       end
 
-      populates_from :get_hosted_zone do |resp|
-        resp[:hosted_zone] if resp[:hosted_zone][:id] == path
-      end
-
-      populates_from :list_hosted_zones do |resp|
-        resp.data[:hosted_zones].find { |detail| detail[:hosted_zone][:id] == path }
+      provider(:create_hosted_zone, :get_hosted_zone) do |provider|
+        provider.find do |resp|
+          if resp[:hosted_zone][:id] == path
+            resp[:hosted_zone][:delegation_set] = resp[:delegation_set]
+            resp[:hosted_zone]
+          end
+        end
+        provider.provides *list_attributes.keys
+        provider.provides *get_attributes.keys
       end
 
       # Deletes the hosted zone.
