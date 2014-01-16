@@ -23,17 +23,19 @@ module Aws
       def self.sign(context)
         new(
           context.config.credentials,
-          context.params
+          context.params,
+          context.config.force_path_style
         ).sign(context.http_request)
       end
 
       # @param [Credentials] credentials
-      def initialize(credentials, params)
+      def initialize(credentials, params, force_path_style)
         @credentials = credentials
         @params = Query::ParamList.new
         params.each_pair do |param_name, param_value|
           @params.set(param_name, param_value)
         end
+        @force_path_style = force_path_style
       end
 
       attr_reader :credentials, :params
@@ -44,14 +46,6 @@ module Aws
         end
         request.headers['Authorization'] = authorization(request)
       end
-
-      # @param [RequestContext] context
-      def self.sign(context)
-        new(context.config.credentials, context.params).
-          sign(context.http_request)
-      end
-
-      private
 
       def authorization(request)
         "AWS #{credentials.access_key_id}:#{signature(request)}"
@@ -87,7 +81,7 @@ module Aws
           request.headers.values_at('Content-Md5', 'Content-Type').join("\n"),
           signing_string_date(request),
           canonicalized_headers(request),
-          canonicalized_resource(request),
+          canonicalized_resource(request.endpoint),
         ].flatten.compact.join("\n")
       end
 
@@ -123,25 +117,27 @@ module Aws
       #       "?logging", or "?torrent"];
       #
       # @api private
-      def canonicalized_resource(request)
+      def canonicalized_resource(endpoint)
 
         parts = []
 
         # virtual hosted-style requests require the hostname to appear
         # in the canonicalized resource prefixed by a forward slash.
         if bucket = params[:bucket]
-          ssl = request.endpoint.https?
-          if Plugins::S3BucketDns.dns_compatible?(bucket.value, ssl)
+          ssl = endpoint.https?
+          if Plugins::S3BucketDns.dns_compatible?(bucket.value, ssl) &&
+            !@force_path_style
+          then
             parts << "/#{bucket.value}"
           end
         end
 
         # append the path name (no querystring)
-        parts << request.endpoint.path
+        parts << endpoint.path
 
         # lastly any sub resource querystring params need to be appened
         # in lexigraphical ordered joined by '&' and prefixed by '?'
-        params = signed_querystring_params(request)
+        params = signed_querystring_params(endpoint)
 
         unless params.empty?
           parts << '?'
@@ -151,8 +147,8 @@ module Aws
         parts.join
       end
 
-      def signed_querystring_params(request)
-        request.endpoint.querystring.to_s.split('&').select do |p|
+      def signed_querystring_params(endpoint)
+        endpoint.querystring.to_s.split('&').select do |p|
           SIGNED_QUERYSTRING_PARAMS.include?(p.split('=')[0])
         end.map { |p| URI.decode(p) }
       end

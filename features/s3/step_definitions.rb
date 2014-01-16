@@ -10,11 +10,19 @@ def create_bucket(options = {})
   @created_buckets << @bucket_name
 end
 
+When(/^I force path style requests$/) do
+  @s3 = Aws.s3(force_path_style:true)
+end
+
 Given(/^I am using the S3 "(.*?)" region$/) do |region|
   @s3 = Aws.s3(region: region)
 end
 
 When(/^I create a bucket$/) do
+  create_bucket
+end
+
+Given(/^I create a DNS compatible bucket$/) do
   create_bucket
 end
 
@@ -50,7 +58,7 @@ When(/^I put nothing to the key "(.*?)"$/) do |key|
 end
 
 When(/^I put "(.*?)" to the key "(.*?)"$/) do |data, key|
-  @s3.put_object(bucket: @bucket_name, key: key, body: data)
+  @response = @s3.put_object(bucket: @bucket_name, key: key, body: data)
 end
 
 When(/^I put the test png to the key "(.*?)"$/) do |key|
@@ -91,4 +99,14 @@ end
 
 Then(/^I should be able to delete the bucket$/) do
   @s3.delete_bucket(bucket: @bucket_name)
+end
+
+Then(/^the bucket name should be in the request path$/) do
+  endpoint = @response.context.http_request.endpoint
+  expect(endpoint.path).to include(@bucket_name)
+end
+
+Then(/^the bucket name should not be in the request host$/) do
+  endpoint = @response.context.http_request.endpoint
+  expect(endpoint.host).not_to include(@bucket_name)
 end

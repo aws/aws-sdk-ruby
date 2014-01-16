@@ -30,3 +30,11 @@ Feature: S3 Buckets
     Given I am using the S3 "http://s3.amazonaws.com" endpoint
     When I create a bucket with a DNS compatible name that contains a dot
     Then I should be able to delete the bucket
+
+  @force_path_style
+  Scenario: Operating on a bucket/object using path style
+    Given I force path style requests
+    And I create a DNS compatible bucket
+    When I put "abc" to the key "object-key"
+    Then the bucket name should be in the request path
+    And the bucket name should not be in the request host
