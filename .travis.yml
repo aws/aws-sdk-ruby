@@ -3,6 +3,7 @@ rvm:
   - 1.9.3
   - 1.9.2
   - 2.0.0
+  - 2.1.0
 #  - jruby      # Running out of memory on Travis
 #  - ruby-head  # RedCloth does not compile on head
 #  - 1.8.6      # unsupported
