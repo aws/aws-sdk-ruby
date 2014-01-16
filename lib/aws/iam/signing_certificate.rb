@@ -142,6 +142,18 @@ module AWS
         nil
       end
 
+      # @return [Boolean] Returns `true` if the resource exists.
+      def exists?
+        exists = false
+        SigningCertificateCollection.new(:config => config).each do |cert|
+          if cert.id == self.id
+            exists = true
+            break
+          end
+        end
+        exists
+      end
+
       # @api private
       protected
       def resource_identifiers
@@ -157,7 +169,7 @@ module AWS
       # have is fewer than one page of results.
       # @api private
       protected
-      def get_resource attribute
+      def get_resource attribute = nil
         options = user ? { :user_name => user.name } : {}
         client.list_signing_certificates(options)
       end
