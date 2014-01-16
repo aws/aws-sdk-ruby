@@ -64,11 +64,13 @@ module Aws
       #     #=> #<Aws::S3::Errors::NoSuchBucket>
       #
       # @api private
-      def error_class(contstant)
-        if constants.include?(contstant.to_sym)
-          const_get(contstant)
+      def error_class(error_code)
+        constant = error_code.gsub(/http:\/\/.*$/, '') # remove http namespaces
+        constant = constant.gsub(/[^a-zA-Z0-9]/, '').to_sym
+        if constants.include?(constant)
+          const_get(constant)
         else
-          const_set(contstant, Class.new(ServiceError))
+          const_set(constant, Class.new(ServiceError))
         end
       end
 
