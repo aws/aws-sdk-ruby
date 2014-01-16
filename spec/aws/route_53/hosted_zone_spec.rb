@@ -63,7 +63,6 @@ module AWS
       end
 
       it_behaves_like "hosted zone attribute", :name
-      it_behaves_like "hosted zone attribute", :caller_reference
       it_behaves_like "hosted zone attribute", :resource_record_set_count
       it_behaves_like "hosted zone attribute", :delegation_set
 

@@ -21,8 +21,6 @@ module AWS
     #
     # @attr_reader [String] name The hosted zone name.
     #
-    # @attr_reader [String] caller_reference
-    #
     # @attr_reader [Integer] resource_record_set_count
     #   The resource record set count.
     #
@@ -55,8 +53,6 @@ module AWS
       define_attribute_type :get
 
       list_attribute :name, :static => true
-
-      list_attribute :caller_reference, :static => true
 
       list_attribute :configuration, :from => :config, :static => true
 
@@ -111,7 +107,7 @@ module AWS
       protected
 
       def resource_identifiers
-        [[:id, id], [:name, name], [:caller_reference, caller_reference]]
+        [[:id, id], [:name, name]]
       end
 
       def get_resource attr_name = nil
