@@ -59,6 +59,10 @@ module Seahorse
           @data.delete(key.to_s.downcase)
         end
 
+        def clear
+          @data = {}
+        end
+
         # @return [Array<String>]
         def keys
           @data.keys

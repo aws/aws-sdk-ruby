@@ -43,9 +43,9 @@ module Seahorse
 
         # @param [#read, #size, #rewind] io
         def body=(io)
-          @body = case io
-            when nil then PlainStringIO.new('')
-            when String then PlainStringIO.new(io)
+          @body =case io
+            when nil then StringIO.new('')
+            when String then StringIO.new(io)
             else io
           end
         end

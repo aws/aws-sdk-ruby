@@ -3,49 +3,33 @@ require 'base64'
 
 module Aws
   module Xml
-    # @api private
     class Builder
 
-      include Seahorse::Model::Shapes
-      include TimestampFormatter
-
-      # @param [Seahorse::Model::Shapes::Shape] rules
-      def initialize(rules)
+      # @param [Seahorse::Model::Shapes::Structure] shape
+      def initialize(shape)
+        @shape = shape
         @xml = []
         @builder = ::Builder::XmlMarkup.new(target: @xml, indent: 2)
-        @rules = rules
       end
 
       # @param [Hash] params
       # @return [String] Returns an XML doc string.
       def to_xml(params)
-        structure(@rules.serialized_name, @rules, params) unless params.empty?
+        structure(@shape.location_name, @shape, params)
         @xml.join
-      end
-
-      class << self
-
-        # @param [Seahorse::Model::Shapes::Shape] rules
-        # @param [Hash] params
-        # @return [String] Returns an XML doc string.
-        def to_xml(rules, params)
-          new(rules).to_xml(params)
-        end
-        alias build to_xml
-
       end
 
       private
 
       def structure(name, shape, values)
         if values.empty?
-         node(name, shape)
+          node(name, shape)
         else
           node(name, shape, structure_attrs(shape, values)) do
-            shape.members.each_pair do |member_name, member_shape|
+            shape.members.each do |member_name, member_shape|
               unless values[member_name].nil?
                 next if xml_attribute?(member_shape)
-                mname = member_shape.serialized_name
+                mname = member_shape.location_name || member_name.to_s
                 member(mname, member_shape, values[member_name])
               end
             end
@@ -56,7 +40,7 @@ module Aws
       def structure_attrs(shape, values)
         shape.members.inject({}) do |attrs, (member_name, member_shape)|
           if xml_attribute?(member_shape) && values.key?(member_name)
-            attrs[member_shape.serialized_name] = values[member_name]
+            attrs[member_shape.location_name] = values[member_name]
           end
           attrs
         end
@@ -65,31 +49,26 @@ module Aws
       def list(name, shape, values)
         if flat?(shape)
           values.each do |value|
-            member(name, shape.members, value)
+            member(name, shape.member, value)
           end
         else
           node(name, shape) do
             values.each do |value|
-              mname = shape.members.serialized_name || 'member'
-              member(mname, shape.members, value)
+              mname = shape.member.location_name || 'member'
+              member(mname, shape.member, value)
             end
           end
         end
       end
 
       def member(name, shape, value)
-        case shape
-        when StructureShape then structure(name, shape, value)
-        when ListShape then list(name, shape, value)
-        else node(name, shape, format(shape, value))
-        end
-      end
-
-      def format(shape, value)
-        case shape
-        when TimestampShape then timestamp(shape, value.utc)
-        when BlobShape then Base64.strict_encode64(value)
-        else value.to_s
+        case shape.type
+        when 'structure' then structure(name, shape, value)
+        when 'list'      then list(name, shape, value)
+        when 'timestamp' then node(name, shape, shape.format_time(value, 'iso8601'))
+        when 'blob'      then node(name, shape, Base64.strict_encode64(value))
+        else
+          node(name, shape, value.to_s)
         end
       end
 
@@ -111,22 +90,23 @@ module Aws
       end
 
       def shape_attrs(shape)
-        if xmlns = shape.metadata['xmlns_uri']
-          prefix = shape.metadata['xmlns_prefix']
-          attribute = 'xmlns'
-          attribute += ':' + prefix if prefix
-          { attribute => xmlns }
+        if xmlns = shape.metadata('xmlNamespace')
+          if xmlns.is_a?(Hash)
+            { "xmlns:#{xmlns['prefix']}" => xmlns['uri'] }
+          else
+            { 'xmlns' => xmlns }
+          end
         else
           {}
         end
       end
 
       def xml_attribute?(shape)
-        !!shape.metadata['xmlattribute']
+        !!shape.metadata('xmlAttribute')
       end
 
       def flat?(shape)
-        FlatListShape === shape || FlatMapShape === shape
+        shape.metadata('flattened')
       end
 
     end

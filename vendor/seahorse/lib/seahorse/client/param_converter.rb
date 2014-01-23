@@ -7,30 +7,28 @@ module Seahorse
   module Client
     class ParamConverter
 
-      include Model::Shapes
-
       @converters = Hash.new { |h,k| h[k] = {} }
 
-      # @param [Model::Shapes::InputShape] rules
-      def initialize(rules)
-        @rules = rules
+      # @param [Model::Shapes::Shape] shape
+      def initialize(shape)
+        @shape = shape
       end
 
       # @param [Hash] params
       # @return [Hash]
       def convert(params)
-        structure(@rules, params)
+        structure(@shape, params)
       end
 
       private
 
-      def structure(rules, values)
-        values = c(rules, values)
+      def structure(structure, values)
+        values = c(structure, values)
         if values.is_a?(Hash)
           values.each do |k, v|
             unless v.nil?
-              if member_shape = rules.members[k]
-                values[k] = member(member_shape, v)
+              if structure.member?(k)
+                values[k] = member(structure.member(k), v)
               end
             end
           end
@@ -38,33 +36,32 @@ module Seahorse
         values
       end
 
-      def list(rules, values)
-        values = c(rules, values)
+      def list(list, values)
+        values = c(list, values)
         if values.is_a?(Array)
-          values.map { |v| c(rules.members, v) }
+          values.map { |v| c(list.member, v) }
         else
           values
         end
       end
 
-      def map(rules, values)
-        values = c(rules, values)
+      def map(map, values)
+        values = c(map, values)
         if values.is_a?(Hash)
-          values.inject({}) do |hash, (k, v)|
-            hash[c(rules.keys, k)] = c(rules.members, v)
-            hash
+          values.each.with_object({}) do |(key, value), hash|
+            hash[c(map.key, key)] = c(map.value, value)
           end
         else
           values
         end
       end
 
-      def member(rules, value)
-        case rules
-        when StructureShape then structure(rules, value)
-        when ListShape then list(rules, value)
-        when MapShape then map(rules, value)
-        else c(rules, value)
+      def member(shape, value)
+        case shape
+        when Model::Shapes::Structure then structure(shape, value)
+        when Model::Shapes::List then list(shape, value)
+        when Model::Shapes::Map then map(shape, value)
+        else c(shape, value)
         end
       end
 
@@ -74,11 +71,11 @@ module Seahorse
 
       class << self
 
-        # @param [Model::Shapes::InputShape] rules
+        # @param [Model::Shapes::InputShape] shape
         # @param [Hash] params
         # @return [Hash]
-        def convert(rules, params)
-          new(rules).convert(params)
+        def convert(shape, params)
+          new(shape).convert(params)
         end
 
         # Registers a new value converter.  Converters run in the context
@@ -140,25 +137,25 @@ module Seahorse
 
       end
 
-      add(StructureShape, Hash) { |h| h.dup }
-      add(StructureShape, Struct) do |s|
+      add(Model::Shapes::Structure, Hash) { |h| h.dup }
+      add(Model::Shapes::Structure, Struct) do |s|
         s.members.each.with_object({}) {|k,h| h[k] = s[k] }
       end
 
-      add(MapShape, Hash) { |h| h.dup }
-      add(MapShape, Struct) do |s|
+      add(Model::Shapes::Map, Hash) { |h| h.dup }
+      add(Model::Shapes::Map, Struct) do |s|
         s.members.each.with_object({}) {|k,h| h[k] = s[k] }
       end
 
-      add(ListShape, Array) { |a| a.dup }
-      add(ListShape, Enumerable) { |value| value.to_a }
+      add(Model::Shapes::List, Array) { |a| a.dup }
+      add(Model::Shapes::List, Enumerable) { |value| value.to_a }
 
-      add(StringShape, String)
-      add(StringShape, Symbol) { |sym| sym.to_s }
+      add(Model::Shapes::String, String)
+      add(Model::Shapes::String, Symbol) { |sym| sym.to_s }
 
-      add(IntegerShape, Integer)
-      add(IntegerShape, Float) { |f| f.to_i }
-      add(IntegerShape, String) do |str|
+      add(Model::Shapes::Integer, Integer)
+      add(Model::Shapes::Integer, Float) { |f| f.to_i }
+      add(Model::Shapes::Integer, String) do |str|
         begin
           Integer(str)
         rescue ArgumentError
@@ -166,9 +163,9 @@ module Seahorse
         end
       end
 
-      add(FloatShape, Float)
-      add(FloatShape, Integer) { |i| i.to_f }
-      add(FloatShape, String) do |str|
+      add(Model::Shapes::Float, Float)
+      add(Model::Shapes::Float, Integer) { |i| i.to_f }
+      add(Model::Shapes::Float, String) do |str|
         begin
           Float(str)
         rescue ArgumentError
@@ -176,11 +173,11 @@ module Seahorse
         end
       end
 
-      add(TimestampShape, Time)
-      add(TimestampShape, Date) { |d| d.to_time }
-      add(TimestampShape, DateTime) { |dt| dt.to_time }
-      add(TimestampShape, Integer) { |i| Time.at(i) }
-      add(TimestampShape, String) do |str|
+      add(Model::Shapes::Timestamp, Time)
+      add(Model::Shapes::Timestamp, Date) { |d| d.to_time }
+      add(Model::Shapes::Timestamp, DateTime) { |dt| dt.to_time }
+      add(Model::Shapes::Timestamp, Integer) { |i| Time.at(i) }
+      add(Model::Shapes::Timestamp, String) do |str|
         begin
           Time.parse(str)
         rescue ArgumentError
@@ -188,14 +185,16 @@ module Seahorse
         end
       end
 
-      add(BooleanShape, TrueClass)
-      add(BooleanShape, FalseClass)
-      add(BooleanShape, String) { |str| { 'true' => true, 'false' => false }[str] }
+      add(Model::Shapes::Boolean, TrueClass)
+      add(Model::Shapes::Boolean, FalseClass)
+      add(Model::Shapes::Boolean, String) do |str|
+        { 'true' => true, 'false' => false }[str]
+      end
 
-      add(BlobShape, IO)
-      add(BlobShape, Tempfile)
-      add(BlobShape, StringIO)
-      add(BlobShape, String)
+      add(Model::Shapes::Blob, IO)
+      add(Model::Shapes::Blob, Tempfile)
+      add(Model::Shapes::Blob, StringIO)
+      add(Model::Shapes::Blob, String)
 
     end
   end

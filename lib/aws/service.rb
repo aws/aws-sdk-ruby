@@ -51,25 +51,25 @@ module Aws
 
       # Registers a new API version for this client factory.  You need to
       # provide the API version in `YYYY-MM-DD` format and an API.
-      # The `api` may be a string path to an API on disk or a fully
-      # constructed `Seahorse::Model::Api` object.
       #
-      # @example Register a versioned client with a path to the JSON api.
-      #   Aws::S3::add_version('2013-01-02', '/path/to/api/src.json')
+      #     Aws::S3.add_version('2013-01-02', 'api' => '/path/to/api.json')
       #
-      # @example Register a versioned client with a hydrated API.
-      #   api = Seahorse::Model::Api.from_hash(api_src)
-      #   Aws::S3::add_version('2013-01-02', api)
+      # You can also provide paths to the paginator, waiter, and resource
+      # definitions.
       #
       # @param [String<YYYY-MM-DD>] api_version
-      # @param [String<Pathname>, Seahorse::Model::Api] api
+      # @param [Hash] definitions
+      # @option definitions [required,String] 'api'
+      # @option definitions [String] 'paginators'
+      # @option definitions [String] 'waiters'
+      # @option definitions [String] 'resources'
       # @return [void]
       # @see .api_versions
       # @see .default_api_version
       # @see .latest_api_version
       # @see .versioned_clients
-      def add_version(api_version, api)
-        apis[api_version] = api
+      def add_version(api_version, definitions)
+        versions[api_version] = definitions
       end
 
       # @return [Array<String>] Returns a list of supported API versions
@@ -80,7 +80,7 @@ module Aws
       # @see .default_client_class
       # @see .versioned_clients
       def api_versions
-        apis.keys.sort
+        versions.keys.sort
       end
 
       # @return [String<YYYY-MM-DD>] Returns the most current API version.
@@ -156,22 +156,18 @@ module Aws
       attr_accessor :identifier
 
       # @param [Symbol] identifier The downcased short name for this service.
-      # @param [Array<Api, String>] apis An array of client APIs for this
-      #   service.  Values may be string paths to API files or instances of
-      #   `Seahorse::Model::Api`.
+      # @param [Hash<YYYY-MM-DD,Hash>] versions A hash of API versions.  Hash
+      #   keys are API version dates, and values are hashes of:
+      #   * 'api' - path to API defintion
+      #   * 'paginators' - path to paginator defintion
       # @return [Class<Service>]
       # @api private
-      def define(identifier, apis = [])
+      def define(identifier, versions = {})
         klass = Class.new(self)
         klass.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
         klass.identifier = identifier.to_sym
-        apis.each do |api|
-          if api.is_a?(String)
-            yyyy_mm_dd = api.match(/\d{4}-\d{2}-\d{2}/)[0]
-            klass.add_version(yyyy_mm_dd, api)
-          else
-            klass.add_version(api.version, api)
-          end
+        versions.each do |date, definitions|
+          klass.add_version(date, definitions)
         end
         klass
       end
@@ -179,14 +175,39 @@ module Aws
       # @api private
       def const_missing(constant)
         if constant =~ /^V\d{8}$/
-          api = api(api_version(constant))
-          const_set(constant, Seahorse::Client.define(api: api))
+          const_set(constant, define_client_class(api_version(constant)))
         else
           super
         end
       end
 
       private
+
+      def define_client_class(version)
+        if definitions = versions[version]
+          api = build_api(definitions['api'])
+          apply_paging(api, definitions['paginators'])
+          client_class = Seahorse::Client::Base.define(api: api)
+          Api::ServiceCustomizations.apply(client_class)
+          client_class
+        else
+          msg = "API #{version} not defined for #{name}"
+          raise Errors::NoSuchApiVersionError, msg
+        end
+      end
+
+      def apply_paging(api, paging)
+        paging = case paging
+          when nil then PagingProvider.new
+          when PagingProvider then paging
+          when Hash then PagingProvider.new(paging)
+          when String
+            path = File.expand_path(paging, GEM_ROOT)
+            PagingProvider.new(MultiJson.load(File.read(path)))
+          else raise "unhandled paging format `#{paging}'"
+        end
+        api.definition['metadata']['paging'] = paging
+      end
 
       def svc_locked_version
         (Aws.config[identifier] || {})[:api_version]
@@ -202,35 +223,27 @@ module Aws
         const_get("V#{api_version.gsub('-', '')}")
       end
 
-      def apis
-        @apis ||= {}
+      def versions
+        @versions ||= {}
       end
 
-      def api(api_version)
-        api = apis[api_version]
+      def build_api(api)
         case api
-        when Seahorse::Model::Api then api
         when String then load_api(api)
-        else
-          msg = "API #{api_version} not defined for #{name}"
-          raise Errors::NoSuchApiVersionError, msg
+        when Hash then Seahorse::Model::Api.new(api)
+        when Seahorse::Model::Api then api
+        else raise "unhandled api format `#{api.class.name}'"
         end
       end
 
       def api_version(constant)
-        yyyy = constant[1,4]
-        mm = constant[5,2]
-        dd = constant[7,2]
-        [yyyy, mm, dd].join('-')
+        constant.to_s.match(/V(\d{4})(\d{2})(\d{2})/)[1..3].join('-')
       end
 
       def load_api(path)
+        path = File.expand_path(path, GEM_ROOT)
         api = MultiJson.load(File.read(path), max_nesting: false)
-        if api.key?('metadata')
-          Seahorse::Model::Api.from_hash(api)
-        else
-          Api::Translator.translate(api, documentation: false, errors: false)
-        end
+        Seahorse::Model::Api.new(api)
       end
 
     end

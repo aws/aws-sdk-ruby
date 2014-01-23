@@ -1,5 +1,4 @@
 require 'time'
-require 'digest/sha1'
 require 'openssl'
 
 module Aws
@@ -8,8 +7,8 @@ module Aws
 
       def self.sign(context)
         new(
-          context.config.credentials,
           context.config.sigv4_name,
+          context.config.credentials,
           context.config.sigv4_region
         ).sign(context.http_request)
       end
@@ -20,48 +19,94 @@ module Aws
       #   the endpoint prefix.
       # @param [String] region The region (e.g. 'us-west-1') the request
       #   will be made to.
-      def initialize(credentials, service_name, region)
-        @credentials = credentials
+      def initialize(service_name, credentials, region)
         @service_name = service_name
+        @credentials = credentials
         @region = region
       end
 
       # @param [Seahorse::Client::Http::Request] request
       # @return [Seahorse::Client::Http::Request] the signed request.
-      def sign(request)
+      def sign(req)
         datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
-        request.headers['X-Amz-Date'] = datetime
-        request.headers['Host'] = request.endpoint.host
-        request.headers['X-Amz-Security-Token'] = credentials.session_token if
+        body_digest = req.headers['X-Amz-Content-Sha256'] || hexdigest(req.body)
+        req.headers['X-Amz-Date'] = datetime
+        req.headers['Host'] = req.endpoint.host
+        req.headers['X-Amz-Security-Token'] = credentials.session_token if
           credentials.session_token
-        request.headers['X-Amz-Content-Sha256'] ||= hexdigest(request.body)
-        request.headers['Authorization'] = authorization(request, datetime)
-        request
+        req.headers['X-Amz-Content-Sha256'] ||= body_digest
+        req.headers['Authorization'] = authorization(req, datetime, body_digest)
+        req
       end
 
-      def authorization(request, datetime)
+      # Generates an returns a presigned URL.
+      # @param [Seahorse::Client::Http::Request] request
+      # @option options [required, Integer<Seconds>] :expires_in
+      # @option options [optional, String] :body_digest The SHA256 hexdigest of
+      #   the payload to sign.  For S3, this should be the string literal
+      #   `UNSIGNED-PALOAD`.
+      # @return [Seahorse::Client::Http::Request] the signed request.
+      # @api private
+      def presigned_url(request, options = {})
+        now = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
+        body_digest = options[:body_digest] || hexdigest(request.body)
+
+        params = Query::ParamList.new
+
+        request.headers['Host'] ||= request.endpoint.host
+        request.headers.each do |header_name, header_value|
+          if header_name.match(/^x-amz/)
+            params.set(header_name, header_value)
+          end
+          unless %w(host content-md5).include?(header_name)
+            request.headers.delete(header_name)
+          end
+        end
+
+        params.set("X-Amz-Algorithm", "AWS4-HMAC-SHA256")
+        params.set("X-Amz-Date", now)
+        params.set("X-Amz-SignedHeaders", signed_headers(request))
+        params.set("X-Amz-Expires", options[:expires_in].to_s)
+        params.set('X-Amz-Security-Token', credentials.session_token) if
+          credentials.session_token
+        params.set("X-Amz-Credential", credential(now))
+
+        endpoint = request.endpoint
+        if endpoint.querystring
+          endpoint.request_uri += '&' + params.to_s
+        else
+          endpoint.request_uri += '?' + params.to_s
+        end
+        endpoint.to_s + '&X-Amz-Signature=' + signature(request, now, body_digest)
+      end
+
+      def authorization(request, datetime, body_digest)
         parts = []
-        parts << "AWS4-HMAC-SHA256 Credential=#{credentials.access_key_id}/#{credential_scope(datetime)}"
+        parts << "AWS4-HMAC-SHA256 Credential=#{credential(datetime)}"
         parts << "SignedHeaders=#{signed_headers(request)}"
-        parts << "Signature=#{signature(request, datetime)}"
+        parts << "Signature=#{signature(request, datetime, body_digest)}"
         parts.join(', ')
       end
 
-      def signature(request, datetime)
+      def credential(datetime)
+        "#{credentials.access_key_id}/#{credential_scope(datetime)}"
+      end
+
+      def signature(request, datetime, body_digest)
         k_secret = credentials.secret_access_key
         k_date = hmac("AWS4" + k_secret, datetime[0,8])
         k_region = hmac(k_date, region)
         k_service = hmac(k_region, service_name)
         k_credentials = hmac(k_service, 'aws4_request')
-        hexhmac(k_credentials, string_to_sign(request, datetime))
+        hexhmac(k_credentials, string_to_sign(request, datetime, body_digest))
       end
 
-      def string_to_sign(request, datetime)
+      def string_to_sign(request, datetime, body_digest)
         parts = []
         parts << 'AWS4-HMAC-SHA256'
         parts << datetime
         parts << credential_scope(datetime)
-        parts << hexdigest(canonical_request(request))
+        parts << hexdigest(canonical_request(request, body_digest))
         parts.join("\n")
       end
 
@@ -74,15 +119,21 @@ module Aws
         parts.join("/")
       end
 
-      def canonical_request(request)
+      def canonical_request(request, body_digest)
         [
           request.http_method,
           request.endpoint.path,
-          request.endpoint.querystring,
+          normalized_querystring(request.endpoint.querystring),
           canonical_headers(request) + "\n",
           signed_headers(request),
-          request.headers['X-Amz-Content-Sha256']
+          body_digest
         ].join("\n")
+      end
+
+      def normalized_querystring(querystring)
+        if querystring
+          querystring.split('&').sort.join('&')
+        end
       end
 
       def signed_headers(request)
@@ -106,7 +157,7 @@ module Aws
       end
 
       def hexdigest(value)
-        digest = Digest::SHA256.new
+        digest = OpenSSL::Digest::SHA256.new
         if value.respond_to?(:read)
           chunk = nil
           chunk_size = 1024 * 1024 # 1 megabyte

@@ -1,3 +1,5 @@
+require 'openssl'
+
 Before("@s3") do
   @s3 = @client = Aws.s3
   @created_buckets = []
@@ -65,7 +67,7 @@ When(/^I delete the bucket$/) do
 end
 
 Then(/^the bucket should not exist$/) do
-  eventually do
+  eventually(upto: 60) do
     begin
       @s3.get_bucket_location(bucket: @bucket_name)
     rescue => @error
@@ -130,4 +132,34 @@ end
 Then(/^the bucket name should not be in the request host$/) do
   endpoint = @response.context.http_request.endpoint
   expect(endpoint.host).not_to include(@bucket_name)
+end
+
+When(/^I put "(.*?)" to the key "(.*?)" with an aes key$/) do |body, key|
+  @aes_key = OpenSSL::Cipher.new('aes-256-cbc').random_key
+  @s3.put_object(
+    bucket: @bucket_name,
+    key: key,
+    body: body,
+    sse_customer_algorithm: 'AES256',
+    sse_customer_key: @aes_key)
+end
+
+Then(/^I can download the key "(.*?)" with the aes key$/) do |key|
+  @s3.get_object(
+    bucket: @bucket_name,
+    key: key,
+    sse_customer_algorithm: 'AES256',
+    sse_customer_key: @aes_key)
+end
+
+When(/^I get the object with the key "(.*?)"$/) do |key|
+  @response = @s3.get_object(bucket: @bucket_name, key: key)
+end
+
+Then(/^the body should be an IO object$/) do
+  expect(@response.body).to be_kind_of(StringIO)
+end
+
+Then(/^the body\#read method should return "(.*?)"$/) do |str|
+  expect(@response.body.read).to eq(str)
 end

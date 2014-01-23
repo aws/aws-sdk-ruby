@@ -8,8 +8,9 @@ rvm:
 - 2.0.0
 - jruby
 env:
-  - OX=1 OJ=1
+  - PURE_RUBY=1
   - NOKOGIRI=1
+  - OX=1 OJ=1
 gemfile:
   - Gemfile
 matrix:

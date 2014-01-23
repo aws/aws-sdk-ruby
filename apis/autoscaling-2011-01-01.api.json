@@ -1,0 +1,2602 @@
+{
+  "metadata":{
+    "apiVersion":"2011-01-01",
+    "endpointPrefix":"autoscaling",
+    "serviceFullName":"Auto Scaling",
+    "signatureVersion":"v4",
+    "xmlNamespace":"http://autoscaling.amazonaws.com/doc/2011-01-01/",
+    "protocol":"query"
+  },
+  "documentation":"<fullname>Auto Scaling</fullname>\n        \n        <p>\n            Auto Scaling is a web service designed\n            to automatically launch or terminate Amazon Elastic Compute Cloud (Amazon EC2) instances based on\n            user-defined policies, schedules, and health checks. \n            This service is used in conjunction with Amazon CloudWatch \n            and Elastic Load Balancing services.\n        </p>\n        \n        <p>Auto Scaling provides APIs that you can call by submitting a Query Request. \n            Query requests are HTTP or HTTPS requests that use the HTTP verbs GET or POST and a Query parameter named <i>Action</i>\n            or <i>Operation</i> that specifies the API you are calling. Action is used throughout this documentation, although Operation \n            is also supported for backward compatibility with other Amazon Web Services (AWS) Query APIs. </p>\n        <p>Calling the API using a Query request is the most direct way to access the web service, but requires that your application handle\n            low-level details such as generating the hash to sign the request and error handling. The benefit of calling the service using a \n            Query request is that you are assured of having access to the complete functionality of the API. For information about signing a \n            a query request, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/api_requests.html\">Use Query Requests to Call Auto Scaling APIs</a></p>\n        <p>\n        This guide provides detailed information \n        about Auto Scaling actions, data types, parameters, and errors. For detailed information \n        about Auto Scaling features and their associated API actions, go to the \n        <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/\">Auto Scaling Developer Guide</a>.\n        </p>\n        \n        <p>This reference is based on the current WSDL, which is available at:</p>\n        <p><a href=\"http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl\">http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl</a>\n        </p>\n        <p><b>Endpoints</b></p>\n        <p>The examples in this guide assume that your instances are launched in the US East (Northern Virginia) region and use us-east-1 as the endpoint.</p>\n        <p>You can set up your Auto Scaling infrastructure in other AWS regions. For information about this product's regions and endpoints, see\n            <a href=\"http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html\">Regions and Endpoints</a> \n            in the Amazon Web Services General Reference.\n        </p>",
+  "operations":{
+    "AttachInstances":{
+      "name":"AttachInstances",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachInstancesQuery"},
+      "documentation":"<p>\n           Attaches one or more Amazon EC2 instances to an existing Auto Scaling group. \n           After the instance(s) is attached, it becomes a part of the Auto Scaling group.\n       </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-instance-asg.html\">Attach Amazon EC2 Instance(s) to Your Existing Auto Scaling Group</a>\n        in the <i>Auto Scaling Developer Guide</i>.</p>"
+    },
+    "CreateAutoScalingGroup":{
+      "name":"CreateAutoScalingGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreateAutoScalingGroupType",
+        "documentation":"<p>\n\n        </p>"
+      },
+      "errors":[
+        {
+          "shape":"AlreadyExistsFault",
+          "error":{
+            "code":"AlreadyExists",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The named Auto Scaling group or launch configuration already exists.\n        </p>"
+        },
+        {
+          "shape":"LimitExceededFault",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The quota for capacity groups or launch configurations\n        for this customer has already been reached.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n        Creates a new Auto Scaling group with the specified name and other attributes.\n        When the creation request is completed,\n        the Auto Scaling group is ready to be used in other calls.\n        </p>\n        <note>\n            The Auto Scaling group name must be unique within \n            the scope of your AWS account.\n        </note>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?AutoScalingGroupName=my-test-asg\n&AvailabilityZones.member.1=us-east-1a\n&AvailabilityZones.member.2=us-east-1b\n&MinSize=2\n&MaxSize=10\n&DesiredCapacity=2\n&LoadBalancerNames.member.1=my-test-asg-loadbalancer\n&HealthCheckType=ELB\n&HealthCheckGracePeriod=120\n&LaunchConfigurationName=my-test-lc\n&Version=2011-01-01\n&Action=CreateAutoScalingGroup\n&AUTHPARAMS </queryrequest>      \n<queryresponse><CreateAutoScalingGroupResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n<ResponseMetadata>\n<RequestId>8d798a29-f083-11e1-bdfb-cb223EXAMPLE</RequestId>\n</ResponseMetadata>\n</CreateAutoScalingGroupResponse> </queryresponse>\n        </examples>"
+    },
+    "CreateLaunchConfiguration":{
+      "name":"CreateLaunchConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreateLaunchConfigurationType",
+        "documentation":"<p>\n\n        </p>"
+      },
+      "errors":[
+        {
+          "shape":"AlreadyExistsFault",
+          "error":{
+            "code":"AlreadyExists",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The named Auto Scaling group or launch configuration already exists.\n        </p>"
+        },
+        {
+          "shape":"LimitExceededFault",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The quota for capacity groups or launch configurations\n        for this customer has already been reached.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n        Creates a new launch configuration. The launch configuration name \n        must be unique within the scope of the client's AWS account. The maximum limit\n        of launch configurations, which by default is 100, must not yet have been met; otherwise, \n        the call will fail. When created, the new launch configuration \n        is available for immediate use.\n        </p>       \n        \n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?LaunchConfigurationName=my-test-lc\n&AssociatePublicIpAddress=true\n&ImageId=ami-0078da69\n&InstanceType=m1.small\n&Action=CreateLaunchConfiguration\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><CreateLaunchConfigurationResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n<ResponseMetadata>\n   <RequestId>7c6e177f-f082-11e1-ac58-3714bEXAMPLE</RequestId>\n</ResponseMetadata>\n</CreateLaunchConfigurationResponse> </queryresponse>\n        </examples>"
+    },
+    "CreateOrUpdateTags":{
+      "name":"CreateOrUpdateTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"CreateOrUpdateTagsType",
+        "documentation":"<p>\n        </p>"
+      },
+      "errors":[
+        {
+          "shape":"LimitExceededFault",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The quota for capacity groups or launch configurations\n        for this customer has already been reached.\n        </p>"
+        },
+        {
+          "shape":"AlreadyExistsFault",
+          "error":{
+            "code":"AlreadyExists",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The named Auto Scaling group or launch configuration already exists.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Creates new tags or updates existing tags for an Auto Scaling group.\n        </p>\n        <note>\n            A tag's definition is composed of a resource ID, resource type, key and value, and the propagate flag. \n            Value and the propagate flag are optional parameters. See the Request Parameters for more information.\n            \n        </note>\n        <p>For information on creating tags for your Auto Scaling group, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html\">Tag Your Auto Scaling Groups and Amazon EC2 Instances</a>.</p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?Tags.member.1.ResourceId=my-test-asg\n&Tags.member.1.ResourceType=auto-scaling-group\n&Tags.member.1.Key=version\n&Tags.member.1.Value=1.0\n&Tags.member.1.PropagateAtLaunch=true\n&Version=2011-01-01\n&Action=CreateOrUpdateTags\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><CreateOrUpdateTagsResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <ResponseMetadata>\n    <RequestId>b0203919-bf1b-11e2-8a01-13263EXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateOrUpdateTagsResponse>\n </queryresponse>\n        </examples>"
+    },
+    "DeleteAutoScalingGroup":{
+      "name":"DeleteAutoScalingGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteAutoScalingGroupType",
+        "documentation":"<p>\n\n        </p>"
+      },
+      "errors":[
+        {
+          "shape":"ScalingActivityInProgressFault",
+          "error":{
+            "code":"ScalingActivityInProgress",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        You cannot delete an Auto Scaling group\n        while there are scaling activities in progress for that group.\n        </p>"
+        },
+        {
+          "shape":"ResourceInUseFault",
+          "error":{
+            "code":"ResourceInUse",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        This is returned when you cannot delete a launch\n        configuration or Auto Scaling group because it is being used.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n        Deletes the specified Auto Scaling group if the group has no\n        instances and no scaling activities in progress.\n        </p>\n        <note>\n            To remove all instances before calling <a>DeleteAutoScalingGroup</a>,\n            you can call <a>UpdateAutoScalingGroup</a> to set the minimum and \n            maximum size of the AutoScalingGroup to zero.\n        </note>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?AutoScalingGroupName=my-test-asg\n&ForceDelete=true\n&Version=2011-01-01\n&Action=DeleteAutoScalingGroup\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DeleteAutoScalingGroupResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <ResponseMetadata>\n    <RequestId>70a76d42-9665-11e2-9fdf-211deEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DeleteAutoScalingGroupResponse> </queryresponse>\n        </examples>"
+    },
+    "DeleteLaunchConfiguration":{
+      "name":"DeleteLaunchConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"LaunchConfigurationNameType",
+        "documentation":"<p>\n\n        </p>"
+      },
+      "errors":[
+        {
+          "shape":"ResourceInUseFault",
+          "error":{
+            "code":"ResourceInUse",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        This is returned when you cannot delete a launch\n        configuration or Auto Scaling group because it is being used.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n        Deletes the specified <a>LaunchConfiguration</a>.\n        </p>\n        <p>\n        The specified launch configuration must not be \n        attached to an Auto Scaling group. When this call completes,\n        the launch configuration is no longer available for use.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?LaunchConfigurationName=my-test-lc\n&Version=2011-01-01\n&Action=DeleteLaunchConfiguration\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DeleteLaunchConfigurationResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <ResponseMetadata>\n    <RequestId>7347261f-97df-11e2-8756-35eEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DeleteLaunchConfigurationResponse> </queryresponse>\n        </examples>"
+    },
+    "DeleteNotificationConfiguration":{
+      "name":"DeleteNotificationConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteNotificationConfigurationType",
+        "documentation":"<p></p>"
+      },
+      "documentation":"<p>Deletes notifications created by <a>PutNotificationConfiguration</a>.</p>"
+    },
+    "DeletePolicy":{
+      "name":"DeletePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeletePolicyType",
+        "documentation":"<p></p>"
+      },
+      "documentation":"<p>Deletes a policy created by <a>PutScalingPolicy</a>.</p>"
+    },
+    "DeleteScheduledAction":{
+      "name":"DeleteScheduledAction",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteScheduledActionType",
+        "documentation":"<p></p>"
+      },
+      "documentation":"<p>Deletes a scheduled action previously created using the <a>PutScheduledUpdateGroupAction</a>.</p>"
+    },
+    "DeleteTags":{
+      "name":"DeleteTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DeleteTagsType",
+        "documentation":"<p>\n            \n        </p>"
+      },
+      "documentation":"<p>Removes the specified tags or a set of tags from a set of resources.</p>"
+    },
+    "DescribeAccountLimits":{
+      "name":"DescribeAccountLimits",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{
+        "shape":"DescribeAccountLimitsAnswer",
+        "documentation":"<p>\n           The output of the <a>DescribeAccountLimitsResult</a> action.\n       </p>",
+        "resultWrapper":"DescribeAccountLimitsResult"
+      },
+      "documentation":"<p>\n            Returns the limits for the Auto Scaling resources currently allowed for your AWS account.\n        </p>\n        <p>Your AWS account comes with default limits on resources for Auto Scaling. \n            There is a default limit of <code>20</code> Auto Scaling groups and <code>100</code>\n            launch configurations per region.</p>\n        <p>If you reach the limits for the number of Auto Scaling groups or the launch configurations,\n            you can go to the <a href=\"https://aws.amazon.com/support/\">Support Center</a> and place a \n            request to raise the limits.</p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?Version=2011-01-01\n&Action=DescribeAccountLimits\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeAccountLimitsResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <DescribeAccountLimitsResult>\n    <MaxNumberOfLaunchConfigurations>100</MaxNumberOfLaunchConfigurations>\n    <MaxNumberOfAutoScalingGroups>20</MaxNumberOfAutoScalingGroups>\n  </DescribeAccountLimitsResult>\n  <ResponseMetadata>\n    <RequestId>a32bd184-519d-11e3-a8a4-c1c467cbcc3b</RequestId>\n  </ResponseMetadata>\n</DescribeAccountLimitsResponse> </queryresponse>\n        </examples>"
+    },
+    "DescribeAdjustmentTypes":{
+      "name":"DescribeAdjustmentTypes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{
+        "shape":"DescribeAdjustmentTypesAnswer",
+        "documentation":"<p>\n            The output of the <a>DescribeAdjustmentTypes</a> action.\n        </p>",
+        "resultWrapper":"DescribeAdjustmentTypesResult"
+      },
+      "documentation":"<p>\n            Returns policy adjustment types for use in the <a>PutScalingPolicy</a> action.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?Version=2011-01-01\n&Action=DescribeAdjustmentTypes\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeAdjustmentTypesResponse xmlns=\"http://autoscaling.amazonaws.com/doc/201-01-01/\">\n  <DescribeAdjustmentTypesResult>\n    <AdjustmentTypes>\n      <member>\n        <AdjustmentType>ChangeInCapacity</AdjustmentType>\n      </member>\n      <member>\n        <AdjustmentType>ExactCapacity</AdjustmentType>\n      </member>\n      <member>\n        <AdjustmentType>PercentChangeInCapacity</AdjustmentType>\n      </member>\n    </AdjustmentTypes>\n  </DescribeAdjustmentTypesResult>\n  <ResponseMetadata>\n    <RequestId>cc5f0337-b694-11e2-afc0-6544dEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeAdjustmentTypesResponse> </queryresponse>\n        </examples>"
+    },
+    "DescribeAutoScalingGroups":{
+      "name":"DescribeAutoScalingGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"AutoScalingGroupNamesType",
+        "documentation":"<p>\n            The <code>AutoScalingGroupNamesType</code> data type.\n        </p>"
+      },
+      "output":{
+        "shape":"AutoScalingGroupsType",
+        "documentation":"<p>\n            The <code>AutoScalingGroupsType</code> data type.\n        </p>",
+        "resultWrapper":"DescribeAutoScalingGroupsResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidNextToken",
+          "error":{
+            "code":"InvalidNextToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n         The <code>NextToken</code> value is invalid.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Returns a full description of each Auto Scaling group in the given list. \n            This includes all Amazon EC2 instances that are members of the group. \n            If a list of names is not provided, the service returns the\n            full details of all Auto Scaling groups.\n        </p>\n        <p>\n            This action supports pagination by returning a token if there are more pages to retrieve.\n            To get the next page, call this action again with the returned token as the <code>NextToken</code> parameter.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?AutoScalingGroupNames.member.1=my-test-asg-lbs\n&MaxRecords=20\n&Version=2011-01-01\n&Action=DescribeAutoScalingGroups\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeAutoScalingGroupsResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n<DescribeAutoScalingGroupsResult>\n    <AutoScalingGroups>\n      <member>\n        <Tags/>\n        <SuspendedProcesses/>\n        <AutoScalingGroupName>my-test-asg-lbs</AutoScalingGroupName>\n        <HealthCheckType>ELB</HealthCheckType>\n        <CreatedTime>2013-05-06T17:47:15.107Z</CreatedTime>\n        <EnabledMetrics/>\n        <LaunchConfigurationName>my-test-lc</LaunchConfigurationName>\n        <Instances/>\n        <DesiredCapacity>2</DesiredCapacity>\n        <AvailabilityZones>\n          <member>us-east-1b</member>\n          <member>us-east-1a</member>\n        </AvailabilityZones>\n        <LoadBalancerNames>\n          <member>my-test-asg-loadbalancer</member>\n        </LoadBalancerNames>\n        <MinSize>2</MinSize>\n        <VPCZoneIdentifier/>\n        <HealthCheckGracePeriod>120</HealthCheckGracePeriod>\n        <DefaultCooldown>300</DefaultCooldown>\n        <AutoScalingGroupARN>arn:aws:autoscaling:us-east-1:803981987763:autoScalingGroup:ca861182-c8f9-4ca7-b1eb-cd35505f5ebb\n        :autoScalingGroupName/my-test-asg-lbs</AutoScalingGroupARN>\n        <TerminationPolicies>\n          <member>Default</member>\n        </TerminationPolicies>\n        <MaxSize>10</MaxSize>\n      </member>\n    </AutoScalingGroups>\n  </DescribeAutoScalingGroupsResult>\n  <ResponseMetadata>\n    <RequestId>0f02a07d-b677-11e2-9eb0-dd50EXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeAutoScalingGroupsResponse> </queryresponse>\n        </examples>"
+    },
+    "DescribeAutoScalingInstances":{
+      "name":"DescribeAutoScalingInstances",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeAutoScalingInstancesType"},
+      "output":{
+        "shape":"AutoScalingInstancesType",
+        "documentation":"<p>\n            The <code>AutoScalingInstancesType</code> data type.\n        </p>",
+        "resultWrapper":"DescribeAutoScalingInstancesResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidNextToken",
+          "error":{
+            "code":"InvalidNextToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n         The <code>NextToken</code> value is invalid.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Returns a description of each Auto Scaling instance in the <code>InstanceIds</code> list.\n            If a list is not provided, the service returns the full details of all instances up to a maximum of 50. \n            By default, the service returns a list of 20 items.\n        </p>\n        <p>\n            This action supports pagination by returning a token if there are more pages to retrieve.\n            To get the next page, call this action again with the returned token as the <code>NextToken</code> parameter.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?MaxRecords=20\n&InstanceIds.member.1=i-78e0d40b\n&Version=2011-01-01\n&Action=DescribeAutoScalingInstances\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeAutoScalingInstancesResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <DescribeAutoScalingInstancesResult>\n    <AutoScalingInstances>\n      <member>\n        <HealthStatus>HEALTHY</HealthStatus>\n        <AutoScalingGroupName>my-test-asg</AutoScalingGroupName>\n        <AvailabilityZone>us-east-1e</AvailabilityZone>\n        <InstanceId>i-78e0d40b</InstanceId>\n        <LaunchConfigurationName>my-test-lc</LaunchConfigurationName>\n        <LifecycleState>InService</LifecycleState>\n      </member>\n    </AutoScalingInstances>\n  </DescribeAutoScalingInstancesResult>\n  <ResponseMetadata>\n    <RequestId>df992dc3-b72f-11e2-81e1-750aa6EXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeAutoScalingInstancesResponse>\n   </queryresponse>\n        </examples>"
+    },
+    "DescribeAutoScalingNotificationTypes":{
+      "name":"DescribeAutoScalingNotificationTypes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{
+        "shape":"DescribeAutoScalingNotificationTypesAnswer",
+        "documentation":"<p>The <code>AutoScalingNotificationTypes</code> data type.</p>",
+        "resultWrapper":"DescribeAutoScalingNotificationTypesResult"
+      },
+      "documentation":"<p>\n            Returns a list of all notification types that are supported by Auto Scaling.\n            \n        </p>"
+    },
+    "DescribeLaunchConfigurations":{
+      "name":"DescribeLaunchConfigurations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"LaunchConfigurationNamesType",
+        "documentation":"<p>\n            The <code>LaunchConfigurationNamesType</code> data type.\n        </p>"
+      },
+      "output":{
+        "shape":"LaunchConfigurationsType",
+        "documentation":"<p>\n            The <code>LaunchConfigurationsType</code> data type.\n        </p>",
+        "resultWrapper":"DescribeLaunchConfigurationsResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidNextToken",
+          "error":{
+            "code":"InvalidNextToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n         The <code>NextToken</code> value is invalid.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n        Returns a full description of the launch configurations, or the specified launch configurations,\n        if they exist.\n        </p>\n        <p>\n        If no name is specified, then the full details of\n        all launch configurations are returned.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?LaunchConfigurationNames.member.1=my-test-lc\n&MaxRecords=20\n&Version=2011-01-01\n&Action=DescribeLaunchConfigurations\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeLaunchConfigurationsResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <DescribeLaunchConfigurationsResult>\n    <LaunchConfigurations>\n      <member>\n        <AssociatePublicIpAddress>true</AssociatePublicIpAddress>\n        <SecurityGroups/>\n        <PlacementTenancy>dedicated</PlacementTenancy>\n        <CreatedTime>2013-01-21T23:04:42.200Z</CreatedTime>\n        <KernelId/>\n        <LaunchConfigurationName>my-test-lc</LaunchConfigurationName>\n        <UserData/>\n        <InstanceType>m1.small</InstanceType>\n        <LaunchConfigurationARN>arn:aws:autoscaling:us-east-1:803981987763:launchConfiguration:\n        9dbbbf87-6141-428a-a409-0752edbe6cad:launchConfigurationName/my-test-lc</LaunchConfigurationARN>\n        <BlockDeviceMappings/>\n        <ImageId>ami-514ac838</ImageId>\n        <KeyName/>\n        <RamdiskId/>\n        <InstanceMonitoring>\n          <Enabled>true</Enabled>\n        </InstanceMonitoring>\n        <EbsOptimized>false</EbsOptimized>\n      </member>\n    </LaunchConfigurations>\n  </DescribeLaunchConfigurationsResult>\n  <ResponseMetadata>\n    <RequestId>d05a22f8-b690-11e2-bf8e-2113fEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeLaunchConfigurationsResponse> </queryresponse>\n        </examples>"
+    },
+    "DescribeMetricCollectionTypes":{
+      "name":"DescribeMetricCollectionTypes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{
+        "shape":"DescribeMetricCollectionTypesAnswer",
+        "documentation":"<p>The output of the <a>DescribeMetricCollectionTypes</a> action.</p>",
+        "resultWrapper":"DescribeMetricCollectionTypesResult"
+      },
+      "documentation":"<p>\n            Returns a list of metrics and a corresponding list \n            of granularities for each metric.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?Version=2011-01-01&Action=DescribeMetricCollectionTypes\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeMetricCollectionTypesResponse xmlns=\"http://autoscaling.amazonaws.co\noc/2011-01-01/\">\n  <DescribeMetricCollectionTypesResult>\n    <Metrics>\n      <member>\n        <Metric>GroupMinSize</Metric>\n      </member>\n      <member>\n        <Metric>GroupMaxSize</Metric>\n      </member>\n      <member>\n        <Metric>GroupDesiredCapacity</Metric>\n      </member>\n      <member>\n        <Metric>GroupInServiceInstances</Metric>\n      </member>\n      <member>\n        <Metric>GroupPendingInstances</Metric>\n      </member>\n      <member>\n        <Metric>GroupTerminatingInstances</Metric>\n      </member>\n      <member>\n        <Metric>GroupTotalInstances</Metric>\n      </member>\n    </Metrics>\n    <Granularities>\n      <member>\n        <Granularity>1Minute</Granularity>\n      </member>\n    </Granularities>\n  </DescribeMetricCollectionTypesResult>\n  <ResponseMetadata>\n    <RequestId>07f3fea2-bf3c-11e2-9b6f-f3cdbb80c073</RequestId>\n  </ResponseMetadata>\n</DescribeMetricCollectionTypesResponse> </queryresponse>\n        </examples>"
+    },
+    "DescribeNotificationConfigurations":{
+      "name":"DescribeNotificationConfigurations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeNotificationConfigurationsType"},
+      "output":{
+        "shape":"DescribeNotificationConfigurationsAnswer",
+        "documentation":"<p>The output of the <a>DescribeNotificationConfigurations</a> action.</p>",
+        "resultWrapper":"DescribeNotificationConfigurationsResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidNextToken",
+          "error":{
+            "code":"InvalidNextToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n         The <code>NextToken</code> value is invalid.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Returns a list of notification actions associated with Auto Scaling groups \n            for specified events.\n        </p>"
+    },
+    "DescribePolicies":{
+      "name":"DescribePolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribePoliciesType"},
+      "output":{
+        "shape":"PoliciesType",
+        "documentation":"<p>\n            The <code>PoliciesType</code> data type.\n        </p>",
+        "resultWrapper":"DescribePoliciesResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidNextToken",
+          "error":{
+            "code":"InvalidNextToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n         The <code>NextToken</code> value is invalid.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Returns descriptions of what each policy does.\n            This action supports pagination. If the response includes a token, \n            there are more records available. To get the additional records, repeat\n            the request with the response token as the <code>NextToken</code> parameter.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?AutoScalingGroupName=my-test-asg\n&MaxRecords=20\n&Version=2011-01-01\n&Action=DescribePolicies\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribePoliciesResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <DescribePoliciesResult>\n    <ScalingPolicies>\n      <member>\n        <PolicyARN>arn:aws:autoscaling:us-east-1:803981987763:scalingPolicy:c322\n761b-3172-4d56-9a21-0ed9d6161d67:autoScalingGroupName/my-test-asg:policyName/MyScaleDownPolicy</PolicyARN>\n        <AdjustmentType>ChangeInCapacity</AdjustmentType>\n        <ScalingAdjustment>-1</ScalingAdjustment>\n        <PolicyName>MyScaleDownPolicy</PolicyName>\n        <AutoScalingGroupName>my-test-asg</AutoScalingGroupName>\n        <Cooldown>60</Cooldown>\n        <Alarms>\n          <member>\n            <AlarmName>TestQueue</AlarmName>\n            <AlarmARN>arn:aws:cloudwatch:us-east-1:803981987763:alarm:TestQueue</AlarmARN>\n          </member>\n        </Alarms>\n      </member>\n      <member>\n        <PolicyARN>arn:aws:autoscaling:us-east-1:803981987763:scalingPolicy:c55a5cdd-9be0-435b-b60b-a8dd313159f5:autoScalingGroupName/my-test-asg:policyName/MyScaleUpPolicy</PolicyARN>\n        <AdjustmentType>ChangeInCapacity</AdjustmentType>\n        <ScalingAdjustment>1</ScalingAdjustment>\n        <PolicyName>MyScaleUpPolicy</PolicyName>\n        <AutoScalingGroupName>my-test-asg</AutoScalingGroupName>\n        <Cooldown>60</Cooldown>\n        <Alarms>\n          <member>\n            <AlarmName>TestQueue</AlarmName>\n            <AlarmARN>arn:aws:cloudwatch:us-east-1:803981987763:alarm:TestQueue</AlarmARN>\n          </member>\n        </Alarms>\n      </member>\n    </ScalingPolicies>\n  </DescribePoliciesResult>\n  <ResponseMetadata>\n    <RequestId>ec3bffad-b739-11e2-b38d-15fbEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribePoliciesResponse> </queryresponse>\n        </examples>"
+    },
+    "DescribeScalingActivities":{
+      "name":"DescribeScalingActivities",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeScalingActivitiesType",
+        "documentation":"<p>\n\n        </p>"
+      },
+      "output":{
+        "shape":"ActivitiesType",
+        "documentation":"<p>\n            The output for the <a>DescribeScalingActivities</a> action.\n        </p>",
+        "resultWrapper":"DescribeScalingActivitiesResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidNextToken",
+          "error":{
+            "code":"InvalidNextToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n         The <code>NextToken</code> value is invalid.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Returns the scaling activities for the specified Auto Scaling group.\n        </p>\n        <p>\n            If the specified <code>ActivityIds</code> list is empty,\n            all the activities from the past six weeks are returned.\n            Activities are sorted by the start time.\n            Activities still in progress appear first on the list.\n        </p>\n        <p>\n            This action supports pagination. If the response includes a token, \n            there are more records available. To get the additional records, repeat\n            the request with the response token as the <code>NextToken</code> parameter.            \n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?AutoScalingGroupName=my-test-asg\n&MaxRecords=20\n&Version=2011-01-01\n&Action=DescribeScalingActivities\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeScalingActivitiesResponse xmlns=\"http://ec2.amazonaws.com/doc/2011-01-01/\">\n<DescribeScalingActivitiesResult>\n<Activities>\n   <member>\n     <StatusCode>Failed</StatusCode>\n     <Progress>0</Progress>\n     <ActivityId>063308ae-aa22-4a9b-94f4-9faeEXAMPLE</ActivityId>\n     <StartTime>2012-04-12T17:32:07.882Z</StartTime>\n     <AutoScalingGroupName>my-test-asg</AutoScalingGroupName>\n     <Cause>At 2012-04-12T17:31:30Z a user request created an AutoScalingGroup changing the desired capacity from 0 to 1.  At 2012-04-12T17:32:07Z an instance was started in response to a difference between desired and actual capacity, increasing the capacity from 0 to 1.</Cause>\n     <Details>{}</Details>\n     <Description>Launching a new EC2 instance.  Status Reason: The image id 'ami-4edb0327' does not exist. Launching EC2 instance failed.</Description>\n     <EndTime>2012-04-12T17:32:08Z</EndTime>\n     <StatusMessage>The image id 'ami-4edb0327' does not exist. Launching EC2 instance failed.</StatusMessage>\n   </member>\n</Activities>\n  </DescribeScalingActivitiesResult>\n  <ResponseMetadata>\n   <RequestId>7a641adc-84c5-11e1-a8a5-217ebEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeScalingActivitiesResponse> </queryresponse>\n        </examples>"
+    },
+    "DescribeScalingProcessTypes":{
+      "name":"DescribeScalingProcessTypes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{
+        "shape":"ProcessesType",
+        "documentation":"<p>\n            The output of the <a>DescribeScalingProcessTypes</a> action.\n        </p>",
+        "resultWrapper":"DescribeScalingProcessTypesResult"
+      },
+      "documentation":"<p>Returns scaling process types for use in the <a>ResumeProcesses</a> \n           and <a>SuspendProcesses</a> actions.</p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?Version=2011-01-01\n&Action=DescribeScalingProcessTypes\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeScalingProcessTypesResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <DescribeScalingProcessTypesResult>\n    <Processes>\n      <member>\n        <ProcessName>AZRebalance</ProcessName>\n      </member>\n      <member>\n        <ProcessName>AddToLoadBalancer</ProcessName>\n      </member>\n      <member>\n        <ProcessName>AlarmNotification</ProcessName>\n      </member>\n      <member>\n        <ProcessName>HealthCheck</ProcessName>\n      </member>\n      <member>\n        <ProcessName>Launch</ProcessName>\n      </member>\n      <member>\n        <ProcessName>ReplaceUnhealthy</ProcessName>\n      </member>\n      <member>\n        <ProcessName>ScheduledActions</ProcessName>\n      </member>\n      <member>\n        <ProcessName>Terminate</ProcessName>\n      </member>\n    </Processes>\n  </DescribeScalingProcessTypesResult>\n  <ResponseMetadata>\n    <RequestId>27f2eacc-b73f-11e2-ad99-c7aba3a9c963</RequestId>\n  </ResponseMetadata>\n</DescribeScalingProcessTypesResponse> </queryresponse>\n        </examples>"
+    },
+    "DescribeScheduledActions":{
+      "name":"DescribeScheduledActions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeScheduledActionsType"},
+      "output":{
+        "shape":"ScheduledActionsType",
+        "documentation":"<p>\n            A scaling action that is scheduled for a future time and date.\n            An action can be scheduled up to thirty days in advance.\n        </p>\n        <p>\n        \tStarting with API version 2011-01-01, you can use <code>recurrence</code> \n        \tto specify that a scaling action occurs regularly on a schedule. \n        </p>",
+        "resultWrapper":"DescribeScheduledActionsResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidNextToken",
+          "error":{
+            "code":"InvalidNextToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n         The <code>NextToken</code> value is invalid.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Lists all the actions scheduled for your Auto Scaling group that haven't been executed. To see a list of\n            actions already executed, see the activity record returned in <a>DescribeScalingActivities</a>.  \n        </p>"
+    },
+    "DescribeTags":{
+      "name":"DescribeTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"DescribeTagsType",
+        "documentation":"<p>\n        </p>"
+      },
+      "output":{
+        "shape":"TagsType",
+        "documentation":"<p>\n        </p>",
+        "resultWrapper":"DescribeTagsResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidNextToken",
+          "error":{
+            "code":"InvalidNextToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n         The <code>NextToken</code> value is invalid.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Lists the Auto Scaling group tags.  \n        </p>\n        <p>\n            You can use filters to limit results when describing tags. For example, you can query for \n            tags of a particular Auto Scaling group. You can specify multiple values for a filter. A \n            tag must match at least one of the specified values for it to be included in the results. \n        </p>\n        <p>\n            You can also specify multiple filters. The result includes information for a particular \n            tag only if it matches all your filters. If there's no match, no special message is returned.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?Version=2011-01-01&Action=DescribeTags\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeTagsResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <DescribeTagsResult>\n    <Tags>      \n      <member>\n        <ResourceId>my-test-asg</ResourceId>\n        <PropagateAtLaunch>true</PropagateAtLaunch>\n        <Value>1.0</Value>\n        <Key>version</Key>\n        <ResourceType>auto-scaling-group</ResourceType>\n      </member>\n    </Tags>\n  </DescribeTagsResult>\n  <ResponseMetadata>\n    <RequestId>086265fd-bf3e-11e2-85fc-fbb1EXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeTagsResponse> </queryresponse>\n        </examples>"
+    },
+    "DescribeTerminationPolicyTypes":{
+      "name":"DescribeTerminationPolicyTypes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{
+        "shape":"DescribeTerminationPolicyTypesAnswer",
+        "documentation":"<p>The <code>TerminationPolicyTypes</code> data type.</p>",
+        "resultWrapper":"DescribeTerminationPolicyTypesResult"
+      },
+      "documentation":"<p>\n          Returns a list of all termination policies supported by Auto Scaling.             \n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?Version=2011-01-01\n&Action=DescribeTerminationPolicyTypes\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeTerminationPolicyTypesResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <DescribeTerminationPolicyTypesResult>\n    <TerminationPolicyTypes>\n      <member>ClosestToNextInstanceHour</member>\n      <member>Default</member>\n      <member>NewestInstance</member>\n      <member>OldestInstance</member>\n      <member>OldestLaunchConfiguration</member>\n    </TerminationPolicyTypes>\n  </DescribeTerminationPolicyTypesResult>\n  <ResponseMetadata>\n    <RequestId>d9a05827-b735-11e2-a40c-c79a5EXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeTerminationPolicyTypesResponse> </queryresponse>\n        </examples>"
+    },
+    "DisableMetricsCollection":{
+      "name":"DisableMetricsCollection",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisableMetricsCollectionQuery"},
+      "documentation":"<p>\n            Disables monitoring of group metrics for the\n            Auto Scaling group specified in <code>AutoScalingGroupName</code>.\n            You can specify the list of affected metrics with the\n            <code>Metrics</code> parameter.\n        </p>"
+    },
+    "EnableMetricsCollection":{
+      "name":"EnableMetricsCollection",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"EnableMetricsCollectionQuery"},
+      "documentation":"<p>\n            Enables monitoring of group metrics for the\n            Auto Scaling group specified in <code>AutoScalingGroupName</code>.\n            You can specify the list of enabled metrics with the\n            <code>Metrics</code> parameter.\n        </p>\n        <p>\n            Auto Scaling metrics collection can be turned on only \n            if the <code>InstanceMonitoring</code> flag, \n            in the Auto Scaling group's launch configuration, \n            is set to <code>True</code>.\n        </p>"
+    },
+    "ExecutePolicy":{
+      "name":"ExecutePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ExecutePolicyType"},
+      "errors":[
+        {
+          "shape":"ScalingActivityInProgressFault",
+          "error":{
+            "code":"ScalingActivityInProgress",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        You cannot delete an Auto Scaling group\n        while there are scaling activities in progress for that group.\n        </p>"
+        }
+      ],
+      "documentation":"<p>Executes the specified policy. </p>"
+    },
+    "PutNotificationConfiguration":{
+      "name":"PutNotificationConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutNotificationConfigurationType"},
+      "errors":[
+        {
+          "shape":"LimitExceededFault",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The quota for capacity groups or launch configurations\n        for this customer has already been reached.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Configures an Auto Scaling group to send notifications when \n            specified events take place. Subscribers to this topic can have \n            messages for events delivered to an endpoint such as a web server \n            or email address. \n        </p>\n        <p>For more information  see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASGettingNotifications.html\">Get Email Notifications When Your Auto Scaling Group Changes</a></p>\n        <p>A new <code>PutNotificationConfiguration</code> overwrites an existing configuration. </p>"
+    },
+    "PutScalingPolicy":{
+      "name":"PutScalingPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutScalingPolicyType"},
+      "output":{
+        "shape":"PolicyARNType",
+        "documentation":"<p>\n            The <code>PolicyARNType</code> data type.\n        </p>",
+        "resultWrapper":"PutScalingPolicyResult"
+      },
+      "errors":[
+        {
+          "shape":"LimitExceededFault",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The quota for capacity groups or launch configurations\n        for this customer has already been reached.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Creates or updates a policy for an Auto Scaling group. \n            To update an existing policy, use the existing\n            policy name and set the parameter(s) you want to change. \n            Any existing parameter not changed in an update to an\n            existing policy is not changed in this update request.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?AutoScalingGroupName=my-test-asg\n&ScalingAdjustment=30\n&AdjustmentType=PercentChangeInCapacity\n&PolicyName=my-scaleout-policy\n&Version=2011-01-01\n&Action=PutScalingPolicy\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><PutScalingPolicyResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <PutScalingPolicyResult>\n    <PolicyARN>arn:aws:autoscaling:us-east-1:803981987763:scalingPolicy:b0dcf5e8\n-02e6-4e31-9719-0675d0dc31ae:autoScalingGroupName/my-test-asg:policyName/my-scal\neout-policy</PolicyARN>\n  </PutScalingPolicyResult>\n  <ResponseMetadata>\n    <RequestId>3cfc6fef-c08b-11e2-a697-2922EXAMPLE</RequestId>\n  </ResponseMetadata>\n</PutScalingPolicyResponse> </queryresponse>\n        </examples>"
+    },
+    "PutScheduledUpdateGroupAction":{
+      "name":"PutScheduledUpdateGroupAction",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutScheduledUpdateGroupActionType"},
+      "errors":[
+        {
+          "shape":"AlreadyExistsFault",
+          "error":{
+            "code":"AlreadyExists",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The named Auto Scaling group or launch configuration already exists.\n        </p>"
+        },
+        {
+          "shape":"LimitExceededFault",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The quota for capacity groups or launch configurations\n        for this customer has already been reached.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n            Creates or updates a scheduled scaling action for an Auto Scaling group. \n            When updating a scheduled scaling action, if you leave a parameter unspecified, the corresponding value \n            remains unchanged in the affected Auto Scaling group.\n        </p>\n        <p>For information on creating or updating a scheduled action for your Auto Scaling group, \n            see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/schedule_time.html\">Scale Based on a Schedule</a>.</p>\n        <note>\n            <p>Auto Scaling supports the date and time expressed in \"YYYY-MM-DDThh:mm:ssZ\" format in UTC/GMT only.</p>\n        </note>\n        <examples>\n            <example>\n                <name>Schedule based on a specific date and time</name>                 \n                <queryrequest>https://autoscaling.amazonaws.com/?AutoScalingGroupName=my-test-asg\n&ScheduledActionName=ScaleUp\n&StartTime=2013-05-25T08:00:00Z\n&DesiredCapacity=3\n&Version=2011-01-01\n&Action=PutScheduledUpdateGroupAction\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><PutScheduledUpdateGroupActionResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <ResponseMetadata>\n    <RequestId>3bc8c9bc-6a62-11e2-8a51-4b8a1EXAMPLE</RequestId>\n  </ResponseMetadata>\n  </PutScheduledUpdateGroupActionResponse></queryresponse>\n            </example> \n             <example>\n              <name>Recurring Schedule</name>                 \n            <queryrequest>https://autoscaling.amazonaws.com/?AutoScalingGroupName=my-test-asg\n&ScheduledActionName=scaleup-schedule-year\n&Recurrence=\"30 0 1 1,6,12 *\"\n&DesiredCapacity=3\n&Version=2011-01-01\n&Action=PutScheduledUpdateGroupAction\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><PutScheduledUpdateGroupActionResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <ResponseMetadata>\n    <RequestId>3bc8c9bc-6a62-11e2-8a51-4b8a1EXAMPLE</RequestId>\n  </ResponseMetadata>\n  </PutScheduledUpdateGroupActionResponse></queryresponse>\n             </example> \n        </examples>"
+    },
+    "ResumeProcesses":{
+      "name":"ResumeProcesses",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ScalingProcessQuery"},
+      "documentation":"<p>\n            Resumes all suspended Auto Scaling processes for an Auto Scaling group.\n            For information on suspending and resuming Auto Scaling process, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SuspendResume.html\">Suspend and Resume Auto Scaling Process</a>.\n        </p>"
+    },
+    "SetDesiredCapacity":{
+      "name":"SetDesiredCapacity",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"SetDesiredCapacityType",
+        "documentation":"<p>\n\n        </p>"
+      },
+      "errors":[
+        {
+          "shape":"ScalingActivityInProgressFault",
+          "error":{
+            "code":"ScalingActivityInProgress",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        You cannot delete an Auto Scaling group\n        while there are scaling activities in progress for that group.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n        Sets the desired size of the specified <a>AutoScalingGroup</a>. \n        </p>\n        <examples>\n            <queryrequest>https://autoscaling.amazonaws.com/?AutoScalingGroupName=my-test-asg\n&HonorCooldown=false\n&DesiredCapacity=2\n&Version=2011-01-01\n&Action=SetDesiredCapacity\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><SetDesiredCapacityResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <ResponseMetadata>\n    <RequestId>9fb7e2db-6998-11e2-a985-57c82EXAMPLE</RequestId>\n  </ResponseMetadata>\n</SetDesiredCapacityResponse></queryresponse>            \n        </examples>"
+    },
+    "SetInstanceHealth":{
+      "name":"SetInstanceHealth",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SetInstanceHealthQuery"},
+      "documentation":"<p>\n            Sets the health status of a specified instance that belongs to any of your Auto Scaling groups. \n        </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-configure-healthcheck.html\">Configure Health Checks for Your Auto Scaling group</a>.</p>"
+    },
+    "SuspendProcesses":{
+      "name":"SuspendProcesses",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ScalingProcessQuery"},
+      "documentation":"<p>\n            Suspends Auto Scaling processes for an Auto Scaling group.\n            To suspend specific process types, specify them by name\n            with the <code>ScalingProcesses.member.N</code> parameter.\n            To suspend all process types, omit the <code>ScalingProcesses.member.N</code>\n            parameter. \n        </p>\n        <important>\n            <p>\n                Suspending either of the two primary process types,\n                <code>Launch</code> or <code>Terminate</code>,\n                can prevent other process types from functioning\n                properly. \n            </p>\n        </important>\n        <p>\n            To resume processes that have been suspended,\n            use <a>ResumeProcesses</a> For more information on suspending and resuming Auto Scaling process, \n            see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SuspendResume.html\">Suspend and Resume Auto Scaling Process</a>.\n        </p>"
+    },
+    "TerminateInstanceInAutoScalingGroup":{
+      "name":"TerminateInstanceInAutoScalingGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"TerminateInstanceInAutoScalingGroupType",
+        "documentation":"<p>\n\n        </p>"
+      },
+      "output":{
+        "shape":"ActivityType",
+        "documentation":"<p>\n            The output for the <a>TerminateInstanceInAutoScalingGroup</a> action.\n        </p>",
+        "resultWrapper":"TerminateInstanceInAutoScalingGroupResult"
+      },
+      "errors":[
+        {
+          "shape":"ScalingActivityInProgressFault",
+          "error":{
+            "code":"ScalingActivityInProgress",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        You cannot delete an Auto Scaling group\n        while there are scaling activities in progress for that group.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n        Terminates the specified instance.\n        Optionally, the desired group size can be adjusted.\n        </p>\n        <note>\n        This call simply registers a termination request.\n        The termination of the instance cannot happen immediately.\n        </note>"
+    },
+    "UpdateAutoScalingGroup":{
+      "name":"UpdateAutoScalingGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateAutoScalingGroupType",
+        "documentation":"<p>\n            \n        </p>"
+      },
+      "errors":[
+        {
+          "shape":"ScalingActivityInProgressFault",
+          "error":{
+            "code":"ScalingActivityInProgress",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        You cannot delete an Auto Scaling group\n        while there are scaling activities in progress for that group.\n        </p>"
+        }
+      ],
+      "documentation":"<p>\n        Updates the configuration for the specified <a>AutoScalingGroup</a>.\n        </p>\n        <note>\n            <p>\n                To update an Auto Scaling group with a launch configuration\n                that has the <code>InstanceMonitoring</code> flag\n                set to <code>False</code>, you must first ensure that collection\n                of group metrics is disabled. Otherwise, calls to \n                <a>UpdateAutoScalingGroup</a> will fail.\n                If you have previously enabled group metrics collection, \n                you can disable collection of all group metrics\n                by calling <a>DisableMetricsCollection</a>.\n                \n            </p>\n        </note>\n        <p>\n        The new settings are registered upon the completion of this call.\n        Any launch configuration settings take effect on any triggers after\n        this call returns.\n        Scaling activities that are currently in progress aren't affected.\n        </p>\n        <note>\n            <ul>\n                <li>\n                    <p>If a new value is specified for <i>MinSize</i> without specifying the value for <i>DesiredCapacity</i>, \n                        and if the new <i>MinSize</i> is larger than the current size of the Auto Scaling Group, there\n                        will be an implicit call to <a>SetDesiredCapacity</a> to set the group to the new <i>MinSize</i>. </p>\n                </li>\n                <li>\n                    <p>If a new value is specified for <i>MaxSize</i> without specifying the value for <i>DesiredCapacity</i>, and \n                        the new <i>MaxSize</i> is smaller than the current size of the Auto Scaling Group, there will \n                        be an implicit call to <a>SetDesiredCapacity</a> to set the group to the new <i>MaxSize</i>. </p>\n                </li>\n                <li>\n                    <p>All other optional parameters are left unchanged if not passed in the request.</p>\n                </li>\n            </ul>\n        </note>\n        <examples>\n            <example>\n                <name>Update existing Auto Scaling group with ELB health check</name>\n                <queryrequest>https://autoscaling.amazonaws.com/?HealthCheckType=ELB\n&HealthCheckGracePeriod=300\n&AutoScalingGroupName=my-test-asg-lbs\n&Version=2011-01-01\n&Action=UpdateAutoScalingGroup\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><UpdateAutoScalingGroupResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <ResponseMetadata>\n    <RequestId>adafead0-ab8a-11e2-ba13-ab0ccEXAMPLE</RequestId>\n  </ResponseMetadata>\n</UpdateAutoScalingGroupResponse></queryresponse>\n            </example>\n            <example>\n                <name>Update existing Auto Scaling group with a new Availability Zone </name>\n                <queryrequest>https://autoscaling.amazonaws.com/?AutoScalingGroupName=my-test-asg-lbs\n&AvailabilityZones.member.1=us-east-1a\n&AvailabilityZones.member.2=us-east-1b\n&AvailabilityZones.member.3=us-east-1c\n&MinSize=3\n&Version=2011-01-01\n&Action=UpdateAutoScalingGroup\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><UpdateAutoScalingGroupResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <ResponseMetadata>\n    <RequestId>adafead0-ab8a-11e2-ba13-ab0ccEXAMPLE</RequestId>\n  </ResponseMetadata>\n</UpdateAutoScalingGroupResponse></queryresponse>\n            </example>            \n        </examples>"
+    }
+  },
+  "shapes":{
+    "Activities":{
+      "type":"list",
+      "member":{"shape":"Activity"}
+    },
+    "ActivitiesType":{
+      "type":"structure",
+      "required":["Activities"],
+      "members":{
+        "Activities":{
+          "shape":"Activities",
+          "documentation":"<p>\n        A list of the requested scaling activities.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n        Acts as a paging mechanism for large result sets.\n        Set to a non-empty string if there are additional\n        results waiting to be returned.\n        Pass this in to subsequent calls to return additional results.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The output for the <a>DescribeScalingActivities</a> action.\n        </p>"
+    },
+    "Activity":{
+      "type":"structure",
+      "required":[
+        "ActivityId",
+        "AutoScalingGroupName",
+        "Cause",
+        "StartTime",
+        "StatusCode"
+      ],
+      "members":{
+        "ActivityId":{
+          "shape":"XmlString",
+          "documentation":"<p>\n        Specifies the ID of the activity.\n        </p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of the Auto Scaling group.\n        </p>"
+        },
+        "Description":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            Contains a friendly, more verbose description of the scaling activity.\n        </p>"
+        },
+        "Cause":{
+          "shape":"XmlStringMaxLen1023",
+          "documentation":"<p>\n        Contains the reason the activity was begun.\n        </p>"
+        },
+        "StartTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>\n        Provides the start time of this activity.\n        </p>"
+        },
+        "EndTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>\n        Provides the end time of this activity.\n        </p>"
+        },
+        "StatusCode":{
+          "shape":"ScalingActivityStatusCode",
+          "documentation":"<p>\n        Contains the current status of the activity.\n        </p>"
+        },
+        "StatusMessage":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        Contains a friendly, more verbose description of the activity status.\n        </p>"
+        },
+        "Progress":{
+          "shape":"Progress",
+          "documentation":"<p>\n        Specifies a value between 0 and 100 that indicates the progress of the\n        activity.\n        </p>"
+        },
+        "Details":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            Contains details of the scaling activity.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            A scaling Activity is a long-running process that \n            represents a change to your AutoScalingGroup, \n            such as changing the size of the group. \n            It can also be a process to replace an instance, \n            or a process to perform any other long-running operations \n            supported by the API.\n        </p>"
+    },
+    "ActivityIds":{
+      "type":"list",
+      "member":{"shape":"XmlString"}
+    },
+    "ActivityType":{
+      "type":"structure",
+      "members":{
+        "Activity":{
+          "shape":"Activity",
+          "documentation":"<p>\n        A scaling Activity.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The output for the <a>TerminateInstanceInAutoScalingGroup</a> action.\n        </p>"
+    },
+    "AdjustmentType":{
+      "type":"structure",
+      "members":{
+        "AdjustmentType":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>A policy adjustment type. Valid values are <code>ChangeInCapacity</code>,\n            <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>.</p>"
+        }
+      },
+      "documentation":"<p>\n            Specifies whether the <a>PutScalingPolicy</a> \n            <code>ScalingAdjustment</code> parameter is \n            an absolute number or a percentage of the current\n            capacity. \n        </p>"
+    },
+    "AdjustmentTypes":{
+      "type":"list",
+      "member":{"shape":"AdjustmentType"}
+    },
+    "Alarm":{
+      "type":"structure",
+      "members":{
+        "AlarmName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>The name of the alarm.</p>"
+        },
+        "AlarmARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the alarm.</p>"
+        }
+      },
+      "documentation":"<p>The Alarm data type.</p>"
+    },
+    "Alarms":{
+      "type":"list",
+      "member":{"shape":"Alarm"}
+    },
+    "AlreadyExistsFault":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n\n        </p>"
+        }
+      },
+      "error":{
+        "code":"AlreadyExists",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>\n        The named Auto Scaling group or launch configuration already exists.\n        </p>"
+    },
+    "AssociatePublicIpAddress":{"type":"boolean"},
+    "AttachInstancesQuery":{
+      "type":"structure",
+      "required":["AutoScalingGroupName"],
+      "members":{
+        "InstanceIds":{
+          "shape":"InstanceIds",
+          "documentation":"<p>\n            One or more IDs of the Amazon EC2 instances to attach to the specified Auto Scaling group. \n            You must specify at least one instance ID. \n        </p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name of the Auto Scaling group to which to attach the specified instance(s). \n        </p>"
+        }
+      }
+    },
+    "AutoScalingGroup":{
+      "type":"structure",
+      "required":[
+        "AutoScalingGroupName",
+        "LaunchConfigurationName",
+        "MinSize",
+        "MaxSize",
+        "DesiredCapacity",
+        "DefaultCooldown",
+        "AvailabilityZones",
+        "HealthCheckType",
+        "CreatedTime"
+      ],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        Specifies the name of the group.\n        </p>"
+        },
+        "AutoScalingGroupARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The Amazon Resource Name (ARN) of the Auto Scaling group.\n        </p>"
+        },
+        "LaunchConfigurationName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        Specifies the name of the associated <a>LaunchConfiguration</a>.\n        </p>"
+        },
+        "MinSize":{
+          "shape":"AutoScalingGroupMinSize",
+          "documentation":"<p>\n        Contains the minimum size of the Auto Scaling group.\n        </p>"
+        },
+        "MaxSize":{
+          "shape":"AutoScalingGroupMaxSize",
+          "documentation":"<p>\n        Contains the maximum size of the Auto Scaling group.\n        </p>"
+        },
+        "DesiredCapacity":{
+          "shape":"AutoScalingGroupDesiredCapacity",
+          "documentation":"<p>\n        Specifies the desired capacity for the Auto Scaling group.\n        </p>"
+        },
+        "DefaultCooldown":{
+          "shape":"Cooldown",
+          "documentation":"<p>\n        The number of seconds after a scaling activity completes\n        before any further scaling activities can start.\n        </p>"
+        },
+        "AvailabilityZones":{
+          "shape":"AvailabilityZones",
+          "documentation":"<p>\n        Contains a list of Availability Zones for the group.\n        </p>"
+        },
+        "LoadBalancerNames":{
+          "shape":"LoadBalancerNames",
+          "documentation":"<p>\n            A list of load balancers associated with this Auto Scaling group.\n        </p>"
+        },
+        "HealthCheckType":{
+          "shape":"XmlStringMaxLen32",
+          "documentation":"<p>\n            The service of interest for the health status check,\n            either \"EC2\" for Amazon EC2 or \"ELB\" for Elastic Load Balancing.\n        </p>"
+        },
+        "HealthCheckGracePeriod":{
+          "shape":"HealthCheckGracePeriod",
+          "documentation":"<p>\n            The length of time that Auto Scaling waits\n            before checking an instance's health status.\n            The grace period begins when an instance\n            comes into service.\n        </p>"
+        },
+        "Instances":{
+          "shape":"Instances",
+          "documentation":"<p>\n        Provides a summary list of Amazon EC2 instances.\n        </p>"
+        },
+        "CreatedTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>\n        Specifies the date and time the Auto Scaling group was created.\n        </p>"
+        },
+        "SuspendedProcesses":{
+          "shape":"SuspendedProcesses",
+          "documentation":"<p>\n            Suspended processes associated with this Auto Scaling group.\n        </p>"
+        },
+        "PlacementGroup":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of the cluster placement group, if applicable. For\n            more information, go to \n            <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\">\n                Using Cluster Instances</a> in the Amazon EC2 User Guide.\n        </p>"
+        },
+        "VPCZoneIdentifier":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The subnet identifier for the Amazon VPC connection, if applicable. You can specify several subnets in a \n            comma-separated list. \n        </p>\n        <p>\n            When you specify <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, ensure that the \n            subnets' Availability Zones match the values you specify for <code>AvailabilityZones</code>.\n        </p>"
+        },
+        "EnabledMetrics":{
+          "shape":"EnabledMetrics",
+          "documentation":"<p>\n            A list of metrics enabled for this Auto Scaling group.\n        </p>"
+        },
+        "Status":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n\t\t    The current state of the Auto Scaling group when a <a>DeleteAutoScalingGroup</a> action is in progress.\n        </p>"
+        },
+        "Tags":{
+          "shape":"TagDescriptionList",
+          "documentation":"<p>\n            A list of tags for the Auto Scaling group.\n        </p>"
+        },
+        "TerminationPolicies":{
+          "shape":"TerminationPolicies",
+          "documentation":"<p>\n         A standalone termination policy or a list of termination policies for this Auto Scaling group.\n     </p>"
+        }
+      },
+      "documentation":"<p>\n        The AutoScalingGroup data type.\n        </p>"
+    },
+    "AutoScalingGroupDesiredCapacity":{"type":"integer"},
+    "AutoScalingGroupMaxSize":{"type":"integer"},
+    "AutoScalingGroupMinSize":{"type":"integer"},
+    "AutoScalingGroupNames":{
+      "type":"list",
+      "member":{"shape":"ResourceName"}
+    },
+    "AutoScalingGroupNamesType":{
+      "type":"structure",
+      "members":{
+        "AutoScalingGroupNames":{
+          "shape":"AutoScalingGroupNames",
+          "documentation":"<p>\n           A list of Auto Scaling group names.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that marks the start of the next batch of returned results.            \n        </p>"
+        },
+        "MaxRecords":{
+          "shape":"MaxRecords",
+          "documentation":"<p>\n            The maximum number of records to return.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>AutoScalingGroupNamesType</code> data type.\n        </p>"
+    },
+    "AutoScalingGroups":{
+      "type":"list",
+      "member":{"shape":"AutoScalingGroup"}
+    },
+    "AutoScalingGroupsType":{
+      "type":"structure",
+      "required":["AutoScalingGroups"],
+      "members":{
+        "AutoScalingGroups":{
+          "shape":"AutoScalingGroups",
+          "documentation":"<p>\n            A list of Auto Scaling groups.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that marks the start of the next batch of returned results.            \n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>AutoScalingGroupsType</code> data type.\n        </p>"
+    },
+    "AutoScalingInstanceDetails":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "AutoScalingGroupName",
+        "AvailabilityZone",
+        "LifecycleState",
+        "HealthStatus",
+        "LaunchConfigurationName"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"XmlStringMaxLen16",
+          "documentation":"<p>\n            The instance ID of the Amazon EC2 instance.\n        </p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of the Auto Scaling group associated with this instance.\n        </p>"
+        },
+        "AvailabilityZone":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The Availability Zone in which this instance resides.\n        </p>"
+        },
+        "LifecycleState":{
+          "shape":"XmlStringMaxLen32",
+          "documentation":"<p>\n            The life cycle state of this instance. for more information, see\n            <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AS_Concepts.html#instance-lifecycle\">Instance Lifecycle State</a>\n            in the <i>Auto Scaling Developer Guide</i>. </p>"
+        },
+        "HealthStatus":{
+          "shape":"XmlStringMaxLen32",
+          "documentation":"<p>\n            The health status of this instance. \n            \"Healthy\" means that the instance is healthy and should\n            remain in service.\n            \"Unhealthy\" means that the instance is unhealthy. Auto\n            Scaling should terminate and replace it.            \n        </p>"
+        },
+        "LaunchConfigurationName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The launch configuration associated with this instance.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>AutoScalingInstanceDetails</code> data type.\n        </p>"
+    },
+    "AutoScalingInstances":{
+      "type":"list",
+      "member":{"shape":"AutoScalingInstanceDetails"}
+    },
+    "AutoScalingInstancesType":{
+      "type":"structure",
+      "members":{
+        "AutoScalingInstances":{
+          "shape":"AutoScalingInstances",
+          "documentation":"<p>\n            A list of Auto Scaling instances.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that marks the start of the next batch of returned results.                        \n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>AutoScalingInstancesType</code> data type.\n        </p>"
+    },
+    "AutoScalingNotificationTypes":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen255"}
+    },
+    "AvailabilityZones":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen255"},
+      "min":1
+    },
+    "BlockDeviceEbsDeleteOnTermination":{"type":"boolean"},
+    "BlockDeviceEbsIops":{
+      "type":"integer",
+      "min":100,
+      "max":4000
+    },
+    "BlockDeviceEbsVolumeSize":{
+      "type":"integer",
+      "min":1,
+      "max":1024
+    },
+    "BlockDeviceEbsVolumeType":{
+      "type":"string",
+      "min":1,
+      "max":255
+    },
+    "BlockDeviceMapping":{
+      "type":"structure",
+      "required":["DeviceName"],
+      "members":{
+        "VirtualName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>The virtual name associated with the device.\n        </p>"
+        },
+        "DeviceName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        The name of the device within Amazon EC2 (for example, /dev/sdh or xvdh).\n        </p>"
+        },
+        "Ebs":{
+          "shape":"Ebs",
+          "documentation":"<p>\n        The Elastic Block Storage volume information.\n        </p>"
+        },
+        "NoDevice":{
+          "shape":"NoDevice",
+          "documentation":"<p>\n            Suppresses the device mapping.            \n        </p>\n        <note>If <code>NoDevice</code> is set to <code>true</code> for the root device, the instance might fail the EC2 health check. \n            Auto Scaling launches a replacement instance if the instance fails the health check.</note>"
+        }
+      },
+      "documentation":"<p>\n        The <code>BlockDeviceMapping</code> data type.\n        </p>"
+    },
+    "BlockDeviceMappings":{
+      "type":"list",
+      "member":{"shape":"BlockDeviceMapping"}
+    },
+    "Cooldown":{"type":"integer"},
+    "CreateAutoScalingGroupType":{
+      "type":"structure",
+      "required":[
+        "AutoScalingGroupName",
+        "MinSize",
+        "MaxSize"
+      ],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        The name of the Auto Scaling group.\n        </p>"
+        },
+        "LaunchConfigurationName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name of an existing launch configuration to use to launch new instances. Use this attribute \n            if you want to create an Auto Scaling group using an existing launch configuration instead of an EC2 instance.\n        </p>"
+        },
+        "InstanceId":{
+          "shape":"XmlStringMaxLen16",
+          "documentation":"<p>\n        The ID of the Amazon EC2 instance you want to use to create the Auto Scaling group. Use this attribute\n        if you want to create an Auto Scaling group using an EC2 instance instead of a launch configuration. \n    </p> \n         <p>\n            When you use an instance to create an Auto Scaling group, a new launch configuration is first created \n            and then associated with the Auto Scaling group. The new launch configuration derives \n            all its attributes from the instance that is used to create the Auto Scaling group, \n            with the exception of <code>BlockDeviceMapping</code>.            \n         </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-asg-from-instance.html\">Create an Auto Scaling Group Using EC2 Instance</a>\n            in the <i>Auto Scaling Developer Guide</i>.</p>"
+        },
+        "MinSize":{
+          "shape":"AutoScalingGroupMinSize",
+          "documentation":"<p>\n            The minimum size of the Auto Scaling group.\n        </p>"
+        },
+        "MaxSize":{
+          "shape":"AutoScalingGroupMaxSize",
+          "documentation":"<p>\n            The maximum size of the Auto Scaling group.\n        </p>"
+        },
+        "DesiredCapacity":{
+          "shape":"AutoScalingGroupDesiredCapacity",
+          "documentation":"<p>\n            The number of Amazon EC2 instances that should be\n            running in the group. The desired capacity must be greater than or equal to the minimum size and less than or \n            equal to the maximum size specified for the Auto Scaling group. \n        </p>"
+        },
+        "DefaultCooldown":{
+          "shape":"Cooldown",
+          "documentation":"<p>\n            The amount of time, in seconds, between a successful scaling activity and the succeeding scaling activity.</p>\n            <p>If a <code>DefaultCooldown</code>\n            period is not specified, Auto Scaling uses the default value of 300 as the default cool down period for the Auto Scaling group. For more information, \n            see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AS_Concepts.html#Cooldown\">Cooldown Period</a>\n        </p>"
+        },
+        "AvailabilityZones":{
+          "shape":"AvailabilityZones",
+          "documentation":"<p>\n            A list of Availability Zones for the Auto Scaling group.\n            This is required unless you have specified subnets.\n        </p>"
+        },
+        "LoadBalancerNames":{
+          "shape":"LoadBalancerNames",
+          "documentation":"<p> A list of existing Elastic Load Balancing load balancers to use. The load balancers must be associated with the AWS account. </p>\n        <p>For information on using load balancers, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SetUpASLBApp.html\">Use Load Balancer to Load Balance Your Auto Scaling Group</a>\n            in the <i>Auto Scaling Developer Guide</i>.</p>"
+        },
+        "HealthCheckType":{
+          "shape":"XmlStringMaxLen32",
+          "documentation":"<p>The service you want the health checks from,\n            Amazon EC2 or Elastic Load Balancer. Valid values are <code>EC2</code> or <code>ELB</code>.</p>\n        <p>By default, the Auto Scaling health check uses the results of Amazon EC2 instance status checks to determine the health of an instance. For more information, \n            see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AS_Concepts.html#healthcheck\">Health Check</a>.</p>"
+        },
+        "HealthCheckGracePeriod":{
+          "shape":"HealthCheckGracePeriod",
+          "documentation":"<p>Length of time in seconds after a new Amazon EC2\n            instance comes into service that Auto Scaling\n            starts checking its health. During this time any health check failure for the that instance is ignored.</p>\n        <p>This is required if you are adding <code>ELB</code> health check. Frequently, new instances need to warm up, briefly, \n            before they can pass a health check. To provide ample warm-up time, set the health check grace period of the group to \n            match the expected startup period of your application.</p>"
+        },
+        "PlacementGroup":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>Physical location of an existing cluster placement group\n            into which you want to launch your instances. For information about cluster placement group, see \n            <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\">Using Cluster Instances</a></p>"
+        },
+        "VPCZoneIdentifier":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>A comma-separated list of subnet identifiers of Amazon Virtual Private Clouds (Amazon VPCs).</p>\n        <p>If you specify subnets and Availability Zones with this call, ensure that the subnets' Availability Zones \n            match the Availability Zones specified.\n        </p>\n        <p>For information on launching your Auto Scaling group into Amazon VPC subnets, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Launch Auto Scaling Instances into Amazon VPC</a>\n            in the <i>Auto Scaling Developer Guide</i>\n            .</p>"
+        },
+        "TerminationPolicies":{
+          "shape":"TerminationPolicies",
+          "documentation":"<p>A standalone termination policy or a list of termination policies used to select the instance to terminate. \n            The policies are executed in the order that they are listed.\n        </p>\n        <p>\n            For more information on configuring a termination policy for your Auto Scaling group, see \n            <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-termination-policy.html\">Instance Termination Policy for Your Auto Scaling Group</a> in \n            the <i>Auto Scaling Developer Guide</i>.    \n        </p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>\n            The tag to be created or updated. Each tag should be defined by its resource type, resource ID, key, value, \n            and a propagate flag. Valid values: key=<i>value</i>, value=<i>value</i>, propagate=<i>true</i> or <i>false</i>.  Value and propagate are optional parameters.</p>\n            <p>For information about using tags, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html\">Tag Your Auto Scaling Groups and Amazon EC2 Instances</a>\n                in the <i>Auto Scaling Developer Guide</i>.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n\n        </p>"
+    },
+    "CreateLaunchConfigurationType":{
+      "type":"structure",
+      "required":["LaunchConfigurationName"],
+      "members":{
+        "LaunchConfigurationName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        The name of the launch configuration to create.\n        </p>"
+        },
+        "ImageId":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            Unique ID of the Amazon Machine Image (AMI) you want to use to launch your EC2 instances.\n            For information about finding Amazon EC2 AMIs,\n             see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Finding a Suitable AMI</a>\n            in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+        },
+        "KeyName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of the Amazon EC2 key pair. \n            For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/generating-a-keypair.html\">Getting a Key Pair</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.\n        </p>"
+        },
+        "SecurityGroups":{
+          "shape":"SecurityGroups",
+          "documentation":"<p>\n        The security groups with which to associate Amazon EC2 or Amazon VPC \n        instances.</p>\n        <p>If your instances are launched in EC2, you can either specify Amazon EC2 security group names or the security group IDs.\n            For more information about Amazon EC2 security groups, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/index.html?using-network-security.html\"> Using Security Groups</a> \n            in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>      \n           <p>If your instances are launched within VPC, specify Amazon VPC security group IDs.        \n       For more information about Amazon VPC security groups, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/index.html?VPC_SecurityGroups.html\">Security Groups</a>\n        in the <i>Amazon Virtual Private Cloud User Guide</i>. </p>"
+        },
+        "UserData":{
+          "shape":"XmlStringUserData",
+          "documentation":"<p>\n        The user data to make available to the launched Amazon EC2 instances.\n        For more information about Amazon EC2 user data,\n        see  <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html#instancedata-user-data-retrieval\">User Data Retrieval</a>\n            in the <i>Amazon Elastic Compute Cloud User Guide</i>.\n        </p>\n        <note>\n            At this time, Auto Scaling launch configurations don't support compressed \n            (e.g. zipped) user data files.\n        </note>"
+        },
+        "InstanceId":{
+          "shape":"XmlStringMaxLen16",
+          "documentation":"<p>\n            The ID of the Amazon EC2 instance you want to use to create the launch configuration. Use this attribute if you want \n            the launch configuration to derive its attributes from an EC2 instance. \n        </p> \n        <p>\n            When you use an instance to create a launch configuration, all you need to specify is the <code>InstanceId</code>. \n            The new launch configuration, by default, derives all the attributes from the specified instance with the exception \n            of <code>BlockDeviceMapping</code>.           \n        </p>\n        <p>If you want to create a launch configuration with <code>BlockDeviceMapping</code> or override any other instance \n            attributes, specify them as part of the same request.</p>\n        <p>For more information on using an InstanceID to create a launch configuration, see \n            <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-lc-with-instanceID.html\">Create a Launch Configuration Using an Amazon EC2 Instance</a> in \n            the <i>Auto Scaling Developer Guide</i>.</p>"
+        },
+        "InstanceType":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The instance type of the Amazon EC2 instance.\n            For information about available Amazon EC2 instance types,\n            see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">\n                Available Instance Types</a> in the <i>Amazon Elastic Cloud Compute User Guide.</i>\n        </p>"
+        },
+        "KernelId":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The ID of the kernel associated with the Amazon EC2 AMI.\n        </p>"
+        },
+        "RamdiskId":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The ID of the RAM disk associated with the Amazon EC2 AMI.\n        </p>"
+        },
+        "BlockDeviceMappings":{
+          "shape":"BlockDeviceMappings",
+          "documentation":"<p>\n            A list of mappings that specify how block devices are exposed to the instance.\n            Each mapping is made up of a <i>VirtualName</i>, a <i>DeviceName</i>,\n            and an <i>ebs</i> data structure that contains information about the\n            associated Elastic Block Storage volume.\n            For more information about Amazon EC2 BlockDeviceMappings,\n            go to\n            <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/index.html?block-device-mapping-concepts.html\">\n                Block Device Mapping</a> in the Amazon EC2 product documentation.\n        </p>"
+        },
+        "InstanceMonitoring":{
+          "shape":"InstanceMonitoring",
+          "documentation":"<p>Enables detailed monitoring if it is disabled. Detailed monitoring is enabled by default.</p>\n        <p>\n            When detailed monitoring is enabled, Amazon Cloudwatch will generate metrics every minute and your account will be charged a fee. \n            When you disable detailed monitoring, by specifying <code>False</code>, Cloudwatch will generate metrics every 5 minutes. \n            For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-instance-monitoring.html\">Monitor Your Auto Scaling Instances</a>.\n            For information about Amazon CloudWatch, see the <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/Welcome.html\">Amazon CloudWatch Developer Guide</a>. \n        </p>"
+        },
+        "SpotPrice":{
+          "shape":"SpotPrice",
+          "documentation":"<p>The maximum hourly price to be paid for any Spot Instance launched to fulfill the request. Spot Instances are launched when the \n    price you specify exceeds the current Spot market price. For more information on launching Spot Instances, see\n        <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US-SpotInstances.html\"> Using Auto Scaling to Launch Spot Instances</a> in the <i>Auto Scaling Developer Guide</i>.\n    </p>"
+        },
+        "IamInstanceProfile":{
+          "shape":"XmlStringMaxLen1600",
+          "documentation":"<p>The name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance.</p>\n        <p>Amazon EC2 instances launched with an IAM role will \n            automatically have AWS security credentials available. You can use IAM roles with Auto Scaling to automatically enable applications running on your Amazon EC2 instances \n            to securely access other AWS resources. For information on launching EC2 instances with an IAM role, go to <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-iam-role.html\">Launching Auto Scaling Instances With an IAM Role</a>\n            in the <i>Auto Scaling Developer Guide</i>.</p>"
+        },
+        "EbsOptimized":{
+          "shape":"EbsOptimized",
+          "documentation":"<p>\n            Whether the instance is optimized for EBS I/O.  The optimization provides \n            dedicated throughput to Amazon EBS and an optimized configuration stack to provide \n            optimal EBS I/O performance. This optimization is not available with all instance \n            types. Additional usage charges apply when using an EBS Optimized instance.  By default\n            the instance is not optimized for EBS I/O. \n            For information about EBS-optimized instances, go to <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#EBSOptimized\">EBS-Optimized Instances</a>            \n       in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>"
+        },
+        "AssociatePublicIpAddress":{
+          "shape":"AssociatePublicIpAddress",
+          "documentation":"<p>Used for Auto Scaling groups that launch instances into an Amazon Virtual Private Cloud (Amazon VPC). Specifies whether to assign a public IP address to each instance launched in a Amazon VPC.</p> \n         <note>\n             <p>If you specify a value for this parameter, be sure to specify at least one VPC subnet \n                 using the <i>VPCZoneIdentifier</i> parameter when you create your Auto Scaling group. </p>\n         </note>        \n        <p>Default: If the instance is launched into a default subnet in a default VPC, the default is <code>true</code>. \n                    If the instance is launched into a nondefault subnet in a VPC, the default is <code>false</code>.  \n                    For information about the platforms supported by Auto Scaling, see \n                    <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_BasicSetup.html\">Get Started with Auto Scaling Using the Command Line Interface</a>.</p>"
+        },
+        "PlacementTenancy":{
+          "shape":"XmlStringMaxLen64",
+          "documentation":"<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware and can only be launched into a VPC.</p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Auto Scaling in Amazon Virtual Private Cloud</a> in the <i>Auto Scaling Developer Guide</i>. </p>\n        <p>Valid values: <code>default</code> | <code>dedicated</code></p>"
+        }
+      },
+      "documentation":"<p>\n\n        </p>"
+    },
+    "CreateOrUpdateTagsType":{
+      "type":"structure",
+      "required":["Tags"],
+      "members":{
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>\n            The tag to be created or updated. Each tag should be defined by its resource type, resource ID, key, value, \n            and a propagate flag. The resource type and resource ID identify the type and name of resource for which the \n            tag is created. Currently, <code>auto-scaling-group</code> is the only supported resource type. The valid \n            value for the resource ID is <i>groupname</i>.\n        </p>\n                \n        <p>The <code>PropagateAtLaunch</code> flag defines whether the new tag will be applied to instances launched by \n            the Auto Scaling group. Valid values are <code>true</code> or <code>false</code>. However, instances that are already \n            running will not get the new or updated tag. Likewise, when you modify a tag, the updated version will be \n            applied only to new instances launched by the Auto Scaling group after the change. Running instances that had \n            the previous version of the tag will continue to have the older tag. \n        </p>\n        <p>When you create a tag and a tag of the same name already exists, the operation overwrites the previous tag \n            definition, but you will not get an error message.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n        </p>"
+    },
+    "DeleteAutoScalingGroupType":{
+      "type":"structure",
+      "required":["AutoScalingGroupName"],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n        The name of the Auto Scaling group to delete.\n        </p>"
+        },
+        "ForceDelete":{
+          "shape":"ForceDelete",
+          "documentation":"<p>Starting with API version 2011-01-01, specifies that the Auto Scaling group will be deleted along with all instances \n          associated with the group, without waiting for all instances to be terminated. \n        </p>"
+        }
+      },
+      "documentation":"<p>\n\n        </p>"
+    },
+    "DeleteNotificationConfigurationType":{
+      "type":"structure",
+      "required":[
+        "AutoScalingGroupName",
+        "TopicARN"
+      ],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
+        },
+        "TopicARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.</p>"
+        }
+      },
+      "documentation":"<p></p>"
+    },
+    "DeletePolicyType":{
+      "type":"structure",
+      "required":["PolicyName"],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
+        },
+        "PolicyName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name or PolicyARN of the policy you want to delete.</p>"
+        }
+      },
+      "documentation":"<p></p>"
+    },
+    "DeleteScheduledActionType":{
+      "type":"structure",
+      "required":["ScheduledActionName"],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
+        },
+        "ScheduledActionName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the action you want to delete.</p>"
+        }
+      },
+      "documentation":"<p></p>"
+    },
+    "DeleteTagsType":{
+      "type":"structure",
+      "required":["Tags"],
+      "members":{
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>Each tag should be defined by its resource type, resource ID, key, value, and a propagate flag. \n            Valid values are: Resource type = <i>auto-scaling-group</i>, Resource ID = <i>AutoScalingGroupName</i>, \n            key=<i>value</i>, value=<i>value</i>, propagate=<i>true</i> or <i>false</i>.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            \n        </p>"
+    },
+    "DescribeAccountLimitsAnswer":{
+      "type":"structure",
+      "members":{
+        "MaxNumberOfAutoScalingGroups":{
+          "shape":"MaxNumberOfAutoScalingGroups",
+          "documentation":"<p>\n            The maximum number of Auto Scaling groups allowed for your AWS account.\n        </p>"
+        },
+        "MaxNumberOfLaunchConfigurations":{
+          "shape":"MaxNumberOfLaunchConfigurations",
+          "documentation":"<p>\n            The maximum number of launch configurations allowed for your AWS account.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n           The output of the <a>DescribeAccountLimitsResult</a> action.\n       </p>"
+    },
+    "DescribeAdjustmentTypesAnswer":{
+      "type":"structure",
+      "members":{
+        "AdjustmentTypes":{
+          "shape":"AdjustmentTypes",
+          "documentation":"<p>\n            A list of specific policy adjustment types.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The output of the <a>DescribeAdjustmentTypes</a> action.\n        </p>"
+    },
+    "DescribeAutoScalingInstancesType":{
+      "type":"structure",
+      "members":{
+        "InstanceIds":{
+          "shape":"InstanceIds",
+          "documentation":"<p>\n            The list of Auto Scaling instances to describe. \n            If this list is omitted, all auto scaling instances are described. \n            The list of requested instances cannot contain more than\n            50 items. If unknown instances are requested,\n            they are ignored with no error.\n        </p>"
+        },
+        "MaxRecords":{
+          "shape":"MaxRecords",
+          "documentation":"<p>\n            The maximum number of Auto Scaling instances to be described\n            with each call.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            The token returned by a previous call \n            to indicate that there is more data available.\n        </p>"
+        }
+      }
+    },
+    "DescribeAutoScalingNotificationTypesAnswer":{
+      "type":"structure",
+      "members":{
+        "AutoScalingNotificationTypes":{
+          "shape":"AutoScalingNotificationTypes",
+          "documentation":"<p>Returns a list of all notification types supported by Auto Scaling. They are:</p> \n        <ul>\n            <li><p><code>autoscaling:EC2_INSTANCE_LAUNCH</code></p></li>\n            <li><p><code>autoscaling:EC2_INSTANCE_LAUNCH_ERROR</code></p></li>\n            <li><p><code>autoscaling:EC2_INSTANCE_TERMINATE</code></p></li>\n            <li><p><code>autoscaling:EC2_INSTANCE_TERMINATE_ERROR</code></p></li>\n            <li><p><code>autoscaling:TEST_NOTIFICATION</code></p></li>        \n        </ul>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?Version=2011-01-01&Action=DescribeAutoScalingNotificationTypes\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeAutoScalingNotificationTypesResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <DescribeAutoScalingNotificationTypesResult>\n    <AutoScalingNotificationTypes>\n      <member>autoscaling:EC2_INSTANCE_LAUNCH</member>\n      <member>autoscaling:EC2_INSTANCE_LAUNCH_ERROR</member>\n      <member>autoscaling:EC2_INSTANCE_TERMINATE</member>\n      <member>autoscaling:EC2_INSTANCE_TERMINATE_ERROR</member>\n      <member>autoscaling:TEST_NOTIFICATION</member>\n    </AutoScalingNotificationTypes>\n  </DescribeAutoScalingNotificationTypesResult>\n  <ResponseMetadata>\n    <RequestId>42fc6794-bf21-11e2-a1cf-ff3dEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeAutoScalingNotificationTypesResponse></queryresponse>\n        </examples>"
+        }
+      },
+      "documentation":"<p>The <code>AutoScalingNotificationTypes</code> data type.</p>"
+    },
+    "DescribeMetricCollectionTypesAnswer":{
+      "type":"structure",
+      "members":{
+        "Metrics":{
+          "shape":"MetricCollectionTypes",
+          "documentation":"<p>The list of Metrics collected. The following metrics are supported:\n        </p>\n        <ul>\n            <li><p>GroupMinSize</p></li>\n            <li><p>GroupMaxSize</p></li>\n            <li><p>GroupDesiredCapacity</p></li>\n            <li><p>GroupInServiceInstances</p></li>\n            <li><p>GroupPendingInstances</p></li>\n            <li><p>GroupTerminatingInstances</p></li>\n            <li><p>GroupTotalInstances</p></li>\n        </ul>"
+        },
+        "Granularities":{
+          "shape":"MetricGranularityTypes",
+          "documentation":"<p>A list of granularities for the listed Metrics.</p>"
+        }
+      },
+      "documentation":"<p>The output of the <a>DescribeMetricCollectionTypes</a> action.</p>"
+    },
+    "DescribeNotificationConfigurationsAnswer":{
+      "type":"structure",
+      "required":["NotificationConfigurations"],
+      "members":{
+        "NotificationConfigurations":{
+          "shape":"NotificationConfigurations",
+          "documentation":"<p>The list of notification configurations.</p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>A string that is used to mark the start of the next\n            batch of returned results for pagination.</p>"
+        }
+      },
+      "documentation":"<p>The output of the <a>DescribeNotificationConfigurations</a> action.</p>"
+    },
+    "DescribeNotificationConfigurationsType":{
+      "type":"structure",
+      "members":{
+        "AutoScalingGroupNames":{
+          "shape":"AutoScalingGroupNames",
+          "documentation":"<p>\n            The name of the Auto Scaling group.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that is used to mark the start of the next\n            batch of returned results for pagination.\n        </p>"
+        },
+        "MaxRecords":{
+          "shape":"MaxRecords",
+          "documentation":"<p>Maximum number of records to be returned.\n        </p>"
+        }
+      }
+    },
+    "DescribePoliciesType":{
+      "type":"structure",
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name of the Auto Scaling group.\n        </p>"
+        },
+        "PolicyNames":{
+          "shape":"PolicyNames",
+          "documentation":"<p>\n            A list of policy names or policy ARNs to be\n            described. If this list is omitted, all policy names\n            are described. If an auto scaling group name is\n            provided, the results are limited to that group. The\n            list of requested policy names cannot contain more\n            than 50 items. If unknown policy names are\n            requested, they are ignored with no error.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that is used to mark the start of the next\n            batch of returned results for pagination.\n        </p>"
+        },
+        "MaxRecords":{
+          "shape":"MaxRecords",
+          "documentation":"<p>\n            The maximum number of policies that will be described\n            with each call.\n        </p>"
+        }
+      }
+    },
+    "DescribeScalingActivitiesType":{
+      "type":"structure",
+      "members":{
+        "ActivityIds":{
+          "shape":"ActivityIds",
+          "documentation":"<p>\n            A list containing the activity IDs of the desired scaling activities.\n            If this list is omitted, all activities are described. \n            If an <code>AutoScalingGroupName</code> is provided, the results\n            are limited to that group. The list of requested\n            activities cannot contain more than 50 items. If\n            unknown activities are requested, they are ignored\n            with no error.\n        </p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n        The name of the <a>AutoScalingGroup</a>.\n        </p>"
+        },
+        "MaxRecords":{
+          "shape":"MaxRecords",
+          "documentation":"<p>\n        The maximum number of scaling activities to return.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that marks the start of the next batch of returned results for pagination.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n\n        </p>"
+    },
+    "DescribeScheduledActionsType":{
+      "type":"structure",
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name of the Auto Scaling group.\n        </p>"
+        },
+        "ScheduledActionNames":{
+          "shape":"ScheduledActionNames",
+          "documentation":"<p>\n            A list of scheduled actions to be described. If this\n            list is omitted, all scheduled actions are described.\n            The list of requested scheduled actions cannot\n            contain more than 50 items. If an auto scaling\n            group name is provided, the results are limited to\n            that group. If unknown scheduled actions are\n            requested, they are ignored with no error.\n        </p>"
+        },
+        "StartTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>\n            The earliest scheduled start time to return. If scheduled\n            action names are provided, this field will be ignored.\n        </p>"
+        },
+        "EndTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>\n            The latest scheduled start time to return. If scheduled\n            action names are provided, this field is ignored.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that marks the start of the next batch of returned results.\n        </p>"
+        },
+        "MaxRecords":{
+          "shape":"MaxRecords",
+          "documentation":"<p>\n            The maximum number of scheduled actions to return.\n        </p>"
+        }
+      }
+    },
+    "DescribeTagsType":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"Filters",
+          "documentation":"<p>\n            The value of the filter type used to identify the tags \n            to be returned. For example, you can filter so that tags are returned \n            according to Auto Scaling group, the key and value, or whether \n            the new tag will be applied to instances launched after the \n            tag is created (PropagateAtLaunch).           \n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that marks the start of the next batch \n            of returned results.\n        </p>"
+        },
+        "MaxRecords":{
+          "shape":"MaxRecords",
+          "documentation":"<p>\n            The maximum number of records to return.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n        </p>"
+    },
+    "DescribeTerminationPolicyTypesAnswer":{
+      "type":"structure",
+      "members":{
+        "TerminationPolicyTypes":{
+          "shape":"TerminationPolicies",
+          "documentation":"<p>\n         Termination policies supported by Auto Scaling. They are:\n         <code>OldestInstance</code>, <code>OldestLaunchConfiguration</code>, <code>NewestInstance</code>, <code>ClosestToNextInstanceHour</code>, \n         <code>Default</code>\n     </p>"
+        }
+      },
+      "documentation":"<p>The <code>TerminationPolicyTypes</code> data type.</p>"
+    },
+    "DisableMetricsCollectionQuery":{
+      "type":"structure",
+      "required":["AutoScalingGroupName"],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name or ARN of the Auto Scaling Group. </p>"
+        },
+        "Metrics":{
+          "shape":"Metrics",
+          "documentation":"<p>\n            The list of metrics to disable.\n            If no metrics are specified, all metrics are disabled.\n            The following metrics are supported:\n        </p>\n        <ul>\n            <li><p>GroupMinSize</p></li>\n            <li><p>GroupMaxSize</p></li>\n            <li><p>GroupDesiredCapacity</p></li>\n            <li><p>GroupInServiceInstances</p></li>\n            <li><p>GroupPendingInstances</p></li>\n            <li><p>GroupTerminatingInstances</p></li>\n            <li><p>GroupTotalInstances</p></li>\n        </ul>"
+        }
+      }
+    },
+    "Ebs":{
+      "type":"structure",
+      "members":{
+        "SnapshotId":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The snapshot ID.\n        </p>"
+        },
+        "VolumeSize":{
+          "shape":"BlockDeviceEbsVolumeSize",
+          "documentation":"<p>The volume size, in gigabytes.</p>\n        <p>Valid values: If the volume type is <code>io1</code>, the minimum size of the volume is 10.</p>\n        <p>Default: If you're creating the volume from a snapshot, and you don't specify a volume size, the default is the snapshot size.</p>\n        <p>Required: Required when the volume type is <code>io1</code>. </p>"
+        },
+        "VolumeType":{
+          "shape":"BlockDeviceEbsVolumeType",
+          "documentation":"<p>The volume type.</p>\n         <p>Valid values: <code>standard | io1</code></p>\n         <p>Default: <code>standard</code></p>"
+        },
+        "DeleteOnTermination":{
+          "shape":"BlockDeviceEbsDeleteOnTermination",
+          "documentation":"<p>Indicates whether to delete the volume on instance termination. </p>\n        <p>Default: <code>true</code> </p>"
+        },
+        "Iops":{
+          "shape":"BlockDeviceEbsIops",
+          "documentation":"<p>The number of I/O operations per second (IOPS) that the volume supports.</p>\n        <p>The maximum ratio of IOPS to volume size is 30.0</p>        \n        <p>Valid Values: Range is 100 to 4000.</p>\n        <p>Default: None.</p>"
+        }
+      },
+      "documentation":"<p>The Ebs data type.</p>"
+    },
+    "EbsOptimized":{"type":"boolean"},
+    "EnableMetricsCollectionQuery":{
+      "type":"structure",
+      "required":[
+        "AutoScalingGroupName",
+        "Granularity"
+      ],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name or ARN of the Auto Scaling group.</p>"
+        },
+        "Metrics":{
+          "shape":"Metrics",
+          "documentation":"<p>\n            The list of metrics to collect.\n            If no metrics are specified, all metrics are enabled.\n            The following metrics are supported:\n        </p>\n        <ul>\n            <li><p>GroupMinSize</p></li>\n            <li><p>GroupMaxSize</p></li>\n            <li><p>GroupDesiredCapacity</p></li>\n            <li><p>GroupInServiceInstances</p></li>\n            <li><p>GroupPendingInstances</p></li>\n            <li><p>GroupTerminatingInstances</p></li>\n            <li><p>GroupTotalInstances</p></li>\n        </ul>"
+        },
+        "Granularity":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The granularity to associate with the metrics to collect.\n            Currently, the only legal granularity is \"1Minute\".\n        </p>"
+        }
+      }
+    },
+    "EnabledMetric":{
+      "type":"structure",
+      "members":{
+        "Metric":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of the enabled metric.\n        </p>"
+        },
+        "Granularity":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The granularity of the enabled metric. \n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>EnabledMetric</code> data type.\n        </p>"
+    },
+    "EnabledMetrics":{
+      "type":"list",
+      "member":{"shape":"EnabledMetric"}
+    },
+    "ExecutePolicyType":{
+      "type":"structure",
+      "required":["PolicyName"],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name or the Amazon Resource Name (ARN) of the Auto Scaling group.\n        </p>"
+        },
+        "PolicyName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name or ARN of the policy you want to run.\n        </p>"
+        },
+        "HonorCooldown":{
+          "shape":"HonorCooldown",
+          "documentation":"<p>Set to <code>True</code> if you want Auto Scaling to wait \n            for the cooldown period associated with the Auto Scaling group \n            to complete before executing the policy.</p>\n       <p>Set to <code>False</code> if you want Auto Scaling to \n           circumvent the cooldown period associated with the \n           Auto Scaling group and execute the policy before the \n           cooldown period ends.           \n       </p>\n        <p>For information about cooldown period, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AS_Concepts.html#Cooldown\">Cooldown Period</a> \n            in the <i>Auto Scaling Developer Guide</i>.</p>"
+        }
+      }
+    },
+    "Filter":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            The name of the filter. Valid Name values are: \n            <code>\"auto-scaling-group\"</code>, <code>\"key\"</code>, <code>\"value\"</code>, and <code>\"propagate-at-launch\"</code>.\n        </p>"
+        },
+        "Values":{
+          "shape":"Values",
+          "documentation":"<p>\n            The value of the filter.\n        </p>"
+        }
+      },
+      "documentation":"<p>The <code>Filter</code> data type.</p>"
+    },
+    "Filters":{
+      "type":"list",
+      "member":{"shape":"Filter"}
+    },
+    "ForceDelete":{"type":"boolean"},
+    "HealthCheckGracePeriod":{"type":"integer"},
+    "HonorCooldown":{"type":"boolean"},
+    "Instance":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "AvailabilityZone",
+        "LifecycleState",
+        "HealthStatus",
+        "LaunchConfigurationName"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"XmlStringMaxLen16",
+          "documentation":"<p>\n        Specifies the ID of the Amazon EC2 instance.\n        </p>"
+        },
+        "AvailabilityZone":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            Availability Zones associated with this instance.\n        </p>"
+        },
+        "LifecycleState":{
+          "shape":"LifecycleState",
+          "documentation":"<p>\n        Contains a description of the current <i>lifecycle</i> state.           \n        </p>\n        <note>\n            <p>The <code>Quarantined</code> lifecycle state is currently not used.</p>\n        </note>"
+        },
+        "HealthStatus":{
+          "shape":"XmlStringMaxLen32",
+          "documentation":"<p>\n            The instance's health status.\n        </p>"
+        },
+        "LaunchConfigurationName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The launch configuration associated with this instance.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n        The <code>Instance</code> data type.\n        </p>"
+    },
+    "InstanceIds":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen16"}
+    },
+    "InstanceMonitoring":{
+      "type":"structure",
+      "members":{
+        "Enabled":{
+          "shape":"MonitoringEnabled",
+          "documentation":"<p>\n            If <code>True</code>, instance monitoring is enabled.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>InstanceMonitoring</code> data type.\n        </p>"
+    },
+    "Instances":{
+      "type":"list",
+      "member":{"shape":"Instance"}
+    },
+    "InvalidNextToken":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n\n        </p>"
+        }
+      },
+      "error":{
+        "code":"InvalidNextToken",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>\n         The <code>NextToken</code> value is invalid.\n        </p>"
+    },
+    "LaunchConfiguration":{
+      "type":"structure",
+      "required":[
+        "LaunchConfigurationName",
+        "ImageId",
+        "InstanceType",
+        "CreatedTime"
+      ],
+      "members":{
+        "LaunchConfigurationName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        Specifies the name of the launch configuration.\n        </p>"
+        },
+        "LaunchConfigurationARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The launch configuration's Amazon Resource Name (ARN).\n        </p>"
+        },
+        "ImageId":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        Provides the unique ID of the <i>Amazon Machine Image</i> (AMI)\n        that was assigned during registration.\n        </p>"
+        },
+        "KeyName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        Provides the name of the Amazon EC2 key pair.\n        </p>"
+        },
+        "SecurityGroups":{
+          "shape":"SecurityGroups",
+          "documentation":"<p>\n        A description of the security\n        groups to associate with the Amazon EC2 instances.\n        </p>"
+        },
+        "UserData":{
+          "shape":"XmlStringUserData",
+          "documentation":"<p>\n        The user data available to the launched Amazon EC2 instances.\n        </p>"
+        },
+        "InstanceType":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        Specifies the instance type of the Amazon EC2 instance.\n        </p>"
+        },
+        "KernelId":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        Provides the ID of the kernel associated with the Amazon EC2 AMI.\n        </p>"
+        },
+        "RamdiskId":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        Provides ID of the RAM disk associated with the Amazon EC2 AMI.\n        </p>"
+        },
+        "BlockDeviceMappings":{
+          "shape":"BlockDeviceMappings",
+          "documentation":"<p>\n        Specifies how block devices are exposed to the instance.\n        Each mapping is made up of a <i>virtualName</i> and a <i>deviceName</i>.\n        </p>"
+        },
+        "InstanceMonitoring":{
+          "shape":"InstanceMonitoring",
+          "documentation":"<p>\n        Controls whether instances in this group are launched with\n        detailed monitoring or not.            \n        </p>"
+        },
+        "SpotPrice":{
+          "shape":"SpotPrice",
+          "documentation":"<p>Specifies the price to bid when launching Spot Instances.</p>"
+        },
+        "IamInstanceProfile":{
+          "shape":"XmlStringMaxLen1600",
+          "documentation":"<p>Provides the name or the Amazon Resource Name (ARN) of the \n            instance profile associated with the IAM role for the instance. \n            The instance profile contains the IAM role.\n        </p>"
+        },
+        "CreatedTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>\n        Provides the creation date and time for this launch configuration.\n        </p>"
+        },
+        "EbsOptimized":{
+          "shape":"EbsOptimized",
+          "documentation":"<p>Specifies whether the instance is optimized for EBS I/O (<i>true</i>) or not (<i>false</i>).</p>"
+        },
+        "AssociatePublicIpAddress":{
+          "shape":"AssociatePublicIpAddress",
+          "documentation":"<p>Specifies whether the instance is associated with a public IP address (<code>true</code>) or not (<code>false</code>).</p>"
+        },
+        "PlacementTenancy":{
+          "shape":"XmlStringMaxLen64",
+          "documentation":"<p>Specifies the tenancy of the instance. It can be either <code>default</code> or <code>dedicated</code>. \n            An instance with <code>dedicated</code> tenancy runs in an isolated, single-tenant hardware and it can only be launched in a VPC.</p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>LaunchConfiguration</code> data type.\n        </p>"
+    },
+    "LaunchConfigurationNameType":{
+      "type":"structure",
+      "required":["LaunchConfigurationName"],
+      "members":{
+        "LaunchConfigurationName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name of the launch configuration.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n\n        </p>"
+    },
+    "LaunchConfigurationNames":{
+      "type":"list",
+      "member":{"shape":"ResourceName"}
+    },
+    "LaunchConfigurationNamesType":{
+      "type":"structure",
+      "members":{
+        "LaunchConfigurationNames":{
+          "shape":"LaunchConfigurationNames",
+          "documentation":"<p>\n            A list of launch configuration names.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that marks the start of the next batch of returned results.            \n        </p>"
+        },
+        "MaxRecords":{
+          "shape":"MaxRecords",
+          "documentation":"<p>\n            The maximum number of launch configurations. The default is 100.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>LaunchConfigurationNamesType</code> data type.\n        </p>"
+    },
+    "LaunchConfigurations":{
+      "type":"list",
+      "member":{"shape":"LaunchConfiguration"}
+    },
+    "LaunchConfigurationsType":{
+      "type":"structure",
+      "required":["LaunchConfigurations"],
+      "members":{
+        "LaunchConfigurations":{
+          "shape":"LaunchConfigurations",
+          "documentation":"<p>\n            A list of launch configurations.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that marks the start of the next batch of returned results.            \n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>LaunchConfigurationsType</code> data type.\n        </p>"
+    },
+    "LifecycleState":{
+      "type":"string",
+      "enum":[
+        "Pending",
+        "Quarantined",
+        "InService",
+        "Terminating",
+        "Terminated"
+      ]
+    },
+    "LimitExceededFault":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n\n        </p>"
+        }
+      },
+      "error":{
+        "code":"LimitExceeded",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>\n        The quota for capacity groups or launch configurations\n        for this customer has already been reached.\n        </p>"
+    },
+    "LoadBalancerNames":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen255"}
+    },
+    "MaxNumberOfAutoScalingGroups":{"type":"integer"},
+    "MaxNumberOfLaunchConfigurations":{"type":"integer"},
+    "MaxRecords":{"type":"integer"},
+    "MetricCollectionType":{
+      "type":"structure",
+      "members":{
+        "Metric":{"shape":"XmlStringMaxLen255"}
+      },
+      "documentation":"<p>\n            The MetricCollectionType data type.\n        </p>"
+    },
+    "MetricCollectionTypes":{
+      "type":"list",
+      "member":{"shape":"MetricCollectionType"}
+    },
+    "MetricGranularityType":{
+      "type":"structure",
+      "members":{
+        "Granularity":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The granularity of a Metric.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The MetricGranularityType data type.\n        </p>"
+    },
+    "MetricGranularityTypes":{
+      "type":"list",
+      "member":{"shape":"MetricGranularityType"}
+    },
+    "Metrics":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen255"}
+    },
+    "MinAdjustmentStep":{"type":"integer"},
+    "MonitoringEnabled":{"type":"boolean"},
+    "NoDevice":{"type":"boolean"},
+    "NotificationConfiguration":{
+      "type":"structure",
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n        Specifies the Auto Scaling group name.\n        </p>"
+        },
+        "TopicARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n        The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.\n        </p>"
+        },
+        "NotificationType":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n        The types of events for an action to start.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>NotificationConfiguration</code> data type.\n        </p>"
+    },
+    "NotificationConfigurations":{
+      "type":"list",
+      "member":{"shape":"NotificationConfiguration"}
+    },
+    "PoliciesType":{
+      "type":"structure",
+      "members":{
+        "ScalingPolicies":{
+          "shape":"ScalingPolicies",
+          "documentation":"<p>\n            A list of scaling policies.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that marks the start of the next batch of returned results.             \n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>PoliciesType</code> data type.\n        </p>"
+    },
+    "PolicyARNType":{
+      "type":"structure",
+      "members":{
+        "PolicyARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            A policy's Amazon Resource Name (ARN).\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>PolicyARNType</code> data type.\n        </p>"
+    },
+    "PolicyIncrement":{"type":"integer"},
+    "PolicyNames":{
+      "type":"list",
+      "member":{"shape":"ResourceName"}
+    },
+    "ProcessNames":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen255"}
+    },
+    "ProcessType":{
+      "type":"structure",
+      "required":["ProcessName"],
+      "members":{
+        "ProcessName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of a process.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            There are two primary Auto Scaling process types--<code>Launch</code>\n            and <code>Terminate</code>. The <code>Launch</code> process creates a new\n            Amazon EC2 instance for an Auto Scaling group, and the <code>Terminate</code>\n            process removes an existing Amazon EC2 instance.\n        </p>\n        <p>\n            The remaining Auto Scaling process types relate to specific Auto Scaling features:\n            <ul>\n                <li>AddToLoadBalancer</li>\n                <li>AlarmNotification</li>\n                <li>AZRebalance</li>\n                <li>HealthCheck</li>\n                <li>ReplaceUnhealthy</li>\n                <li>ScheduledActions</li>\n            </ul>\n        </p>\n        <important>\n            <p>\n                If you suspend <code>Launch</code> or <code>Terminate</code>,\n                all other process types are affected to varying degrees.\n                The following descriptions discuss how each process type\n                is affected by a suspension of <code>Launch</code> or\n                <code>Terminate</code>.\n            </p>\n        </important>\n        <p>\n            The <code>AddToLoadBalancer</code> process type adds instances to the load balancer \n            when the instances are launched. If you suspend this process, Auto Scaling will launch \n            the instances but will not add them to the load balancer. If you resume the \n            <code>AddToLoadBalancer</code> process, Auto Scaling will also resume adding new instances to the load \n            balancer when they are launched. However, Auto Scaling will not add running instances that\n            were launched while the process was suspended; those instances must be added manually using the \n            the <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_RegisterInstancesWithLoadBalancer.html\">\n        RegisterInstancesWithLoadBalancer</a> call in the <i>Elastic Load Balancing API Reference</i>.\n        </p>\n        <p>\n            The <code>AlarmNotification</code> process type accepts notifications from\n            Amazon CloudWatch alarms that are associated with the Auto Scaling group. If you\n            suspend the <code>AlarmNotification</code> process type, Auto Scaling will not\n            automatically execute scaling policies that would be triggered by alarms.\n        </p>\n        <p>\n            Although the <code>AlarmNotification</code> process type is not directly\n            affected by a suspension of <code>Launch</code> or <code>Terminate</code>,\n            alarm notifications are often used to signal that a change in the size\n            of the Auto Scaling group is warranted. If you suspend <code>Launch</code>\n            or <code>Terminate</code>, Auto Scaling might not be able to implement the alarm's\n            associated policy.\n        </p>\n        <p>\n            The <code>AZRebalance</code> process type seeks to maintain a balanced number of \n            instances across Availability Zones within a Region. If you remove an Availability\n            Zone from your Auto Scaling group or an Availability Zone otherwise\n            becomes unhealthy or unavailable, Auto Scaling launches new instances in an \n            unaffected Availability Zone before terminating the unhealthy or unavailable instances. \n            When the unhealthy Availability Zone returns to a healthy state, Auto Scaling automatically\n            redistributes the application instances evenly across all of the designated Availability Zones.\n        </p>\n        <important>\n            <p>\n                If you call <a>SuspendProcesses</a> on the <code>launch</code> process type, the <code>AZRebalance</code>\n                process will neither launch new instances nor terminate existing instances. \n                This is because the <code>AZRebalance</code> process terminates existing instances only\n                after launching the replacement instances. \n            </p>\n            <p>\n                If you call <a>SuspendProcesses</a> on the <code>terminate</code> process type, the <code>AZRebalance</code>\n                process can cause your Auto Scaling group to grow up to ten percent larger than\n                the maximum size. This is because Auto Scaling allows groups to temporarily grow\n                larger than the maximum size during rebalancing activities.\n                If Auto Scaling cannot terminate instances, your Auto Scaling group could remain\n                up to ten percent larger than the maximum size until you resume the <code>terminate</code>\n                process type.\n            </p>\n        </important>\n        <p>\n            The <code>HealthCheck</code> process type checks the health of the instances.\n            Auto Scaling marks an instance as unhealthy if Amazon EC2 or Elastic Load Balancing \n            informs Auto Scaling that the instance is unhealthy. The <code>HealthCheck</code>\n            process can override the health status of an instance that you set with <a>SetInstanceHealth</a>.\n        </p>\n        <p>\n            The <code>ReplaceUnhealthy</code> process type terminates instances that are marked\n            as unhealthy and subsequently creates new instances to replace them. This process\n            calls both of the primary process types--first <code>Terminate</code> and\n            then <code>Launch</code>. \n        </p>\n        <important>\n            <p>\n                The <code>HealthCheck</code> process type works in conjunction with the \n                <code>ReplaceUnhealthly</code> process type to provide health check functionality.\n                If you suspend either <code>Launch</code> or <code>Terminate</code>, the\n                <code>ReplaceUnhealthy</code> process type will not function properly.\n            </p>\n        </important>\n        <p>\n            The <code>ScheduledActions</code> process type performs scheduled actions that you\n            create with <a>PutScheduledUpdateGroupAction</a>. Scheduled actions often involve\n            launching new instances or terminating existing instances. If you suspend either \n            <code>Launch</code> or <code>Terminate</code>, your scheduled actions might not\n            function as expected.\n        </p>"
+    },
+    "Processes":{
+      "type":"list",
+      "member":{"shape":"ProcessType"}
+    },
+    "ProcessesType":{
+      "type":"structure",
+      "members":{
+        "Processes":{
+          "shape":"Processes",
+          "documentation":"<p>\n            A list of <a>ProcessType</a> names.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The output of the <a>DescribeScalingProcessTypes</a> action.\n        </p>"
+    },
+    "Progress":{"type":"integer"},
+    "PropagateAtLaunch":{"type":"boolean"},
+    "PutNotificationConfigurationType":{
+      "type":"structure",
+      "required":[
+        "AutoScalingGroupName",
+        "TopicARN",
+        "NotificationTypes"
+      ],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name of the Auto Scaling group.\n        </p>"
+        },
+        "TopicARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.\n        </p>"
+        },
+        "NotificationTypes":{
+          "shape":"AutoScalingNotificationTypes",
+          "documentation":"<p>The type of event that will cause the notification to be sent. For details \n            about notification types supported by Auto Scaling, see <a>DescribeAutoScalingNotificationTypes</a>.</p>"
+        }
+      }
+    },
+    "PutScalingPolicyType":{
+      "type":"structure",
+      "required":[
+        "AutoScalingGroupName",
+        "PolicyName",
+        "ScalingAdjustment",
+        "AdjustmentType"
+      ],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name or ARN of the Auto Scaling group.\n        </p>"
+        },
+        "PolicyName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>The name of the policy you want to create or update.</p>"
+        },
+        "ScalingAdjustment":{
+          "shape":"PolicyIncrement",
+          "documentation":"<p>\n            The number of instances by which to scale. \n            <code>AdjustmentType</code> determines the interpretation\n            of this number (e.g., as an absolute number or as\n            a percentage of the existing Auto Scaling group\n            size). A positive increment adds to the current\n            capacity and a negative value removes from the\n            current capacity.\n        </p>"
+        },
+        "AdjustmentType":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            Specifies whether the <code>ScalingAdjustment</code> is \n            an absolute number or a percentage of the current\n            capacity. Valid values are <code>ChangeInCapacity</code>,\n            <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>.\n        </p>\n        <p>For more information about the adjustment types supported by Auto Scaling, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-scale-based-on-demand.html\">Scale Based on Demand</a>.</p>"
+        },
+        "Cooldown":{
+          "shape":"Cooldown",
+          "documentation":"<p>\n            The amount of time, in seconds, after a scaling \n            activity completes and before the next scaling activity can start.\n        </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AS_Concepts.html#Cooldown\">Cooldown Period</a></p>"
+        },
+        "MinAdjustmentStep":{
+          "shape":"MinAdjustmentStep",
+          "documentation":"<p>\n     Used with <code>AdjustmentType</code> with the value <code>PercentChangeInCapacity</code>, \n        the scaling policy changes the <code>DesiredCapacity</code> of the Auto Scaling group by at least the number of instances specified in the value.\n     </p>\n     <p>\n         You will get a <code>ValidationError</code> if you use <code>MinAdjustmentStep</code> on a policy with an <code>AdjustmentType</code>\n         other than <code>PercentChangeInCapacity</code>.\n     </p>"
+        }
+      }
+    },
+    "PutScheduledUpdateGroupActionType":{
+      "type":"structure",
+      "required":[
+        "AutoScalingGroupName",
+        "ScheduledActionName"
+      ],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name or ARN of the Auto Scaling group.\n        </p>"
+        },
+        "ScheduledActionName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of this scaling action.\n        </p>"
+        },
+        "Time":{
+          "shape":"TimestampType",
+          "documentation":"<p><code>Time</code> is deprecated.</p>\n        <p>The time for this action to start. <code>Time</code> is an alias for <code>StartTime</code> \n        and can be specified instead of <code>StartTime</code>, \n        or vice versa. If both <code>Time</code> and <code>StartTime</code> are specified, \n        their values should be identical. Otherwise,\n        <code>PutScheduledUpdateGroupAction</code> will return an error.</p>"
+        },
+        "StartTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>The time for this action to start, as in <code>--start-time 2010-06-01T00:00:00Z</code>.</p>\n        <p>If you try to schedule your action in the past, Auto Scaling returns an error message. </p>\n        <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring\n            action will start and stop.</p>"
+        },
+        "EndTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>The time for this action to end.</p>"
+        },
+        "Recurrence":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n\t\tThe time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. For information \n\t\tabout cron syntax, go to <a href=\"http://en.wikipedia.org/wiki/Cron\">Wikipedia, The Free Encyclopedia</a>.</p>\n         <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring\n         action will start and stop.</p>"
+        },
+        "MinSize":{
+          "shape":"AutoScalingGroupMinSize",
+          "documentation":"<p>\n            The minimum size for the new Auto Scaling group.\n        </p>"
+        },
+        "MaxSize":{
+          "shape":"AutoScalingGroupMaxSize",
+          "documentation":"<p>\n            The maximum size for the Auto Scaling group.\n        </p>"
+        },
+        "DesiredCapacity":{
+          "shape":"AutoScalingGroupDesiredCapacity",
+          "documentation":"<p>\n            The number of Amazon EC2 instances that should be running in the group.\n        </p>"
+        }
+      }
+    },
+    "ResourceInUseFault":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n\n        </p>"
+        }
+      },
+      "error":{
+        "code":"ResourceInUse",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>\n        This is returned when you cannot delete a launch\n        configuration or Auto Scaling group because it is being used.\n        </p>"
+    },
+    "ResourceName":{
+      "type":"string",
+      "min":1,
+      "max":1600,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "ScalingActivityInProgressFault":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n\n        </p>"
+        }
+      },
+      "error":{
+        "code":"ScalingActivityInProgress",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>\n        You cannot delete an Auto Scaling group\n        while there are scaling activities in progress for that group.\n        </p>"
+    },
+    "ScalingActivityStatusCode":{
+      "type":"string",
+      "enum":[
+        "WaitingForSpotInstanceRequestId",
+        "WaitingForSpotInstanceId",
+        "WaitingForInstanceId",
+        "PreInService",
+        "InProgress",
+        "Successful",
+        "Failed",
+        "Cancelled"
+      ]
+    },
+    "ScalingPolicies":{
+      "type":"list",
+      "member":{"shape":"ScalingPolicy"}
+    },
+    "ScalingPolicy":{
+      "type":"structure",
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of the Auto Scaling group associated with this scaling policy.\n        </p>"
+        },
+        "PolicyName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of the scaling policy.\n        </p>"
+        },
+        "ScalingAdjustment":{
+          "shape":"PolicyIncrement",
+          "documentation":"<p>\n            The number associated with the specified \n            adjustment type.\n            A positive value adds to the current capacity\n            and a negative value removes from the current capacity.\n        </p>"
+        },
+        "AdjustmentType":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            Specifies whether the <code>ScalingAdjustment</code> is \n            an absolute number or a percentage of the current\n            capacity. Valid values are <code>ChangeInCapacity</code>,\n            <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>.\n        </p>"
+        },
+        "Cooldown":{
+          "shape":"Cooldown",
+          "documentation":"<p>\n            The amount of time, in seconds, after a scaling activity\n            completes before any further trigger-related scaling activities\n            can start.\n        </p>"
+        },
+        "PolicyARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The Amazon Resource Name (ARN) of the policy.\n        </p>"
+        },
+        "Alarms":{
+          "shape":"Alarms",
+          "documentation":"<p>\n            A list of CloudWatch Alarms related to the policy.\n        </p>"
+        },
+        "MinAdjustmentStep":{
+          "shape":"MinAdjustmentStep",
+          "documentation":"<p>\n             Changes the <code>DesiredCapacity</code> of the Auto Scaling group by at least the specified number of instances.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The <code>ScalingPolicy</code> data type.\n        </p>"
+    },
+    "ScalingProcessQuery":{
+      "type":"structure",
+      "required":["AutoScalingGroupName"],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name or Amazon Resource Name (ARN) of the Auto Scaling group.\n        </p>"
+        },
+        "ScalingProcesses":{
+          "shape":"ProcessNames",
+          "documentation":"<p>\n            The processes that you want to suspend or resume,\n            which can include one or more of the following:\n        </p>\n        <ul>\n            <li>Launch</li>\n            <li>Terminate</li>\n            <li>HealthCheck</li>\n            <li>ReplaceUnhealthy</li>\n            <li>AZRebalance</li>\n            <li>AlarmNotification</li>\n            <li>ScheduledActions</li>\n            <li>AddToLoadBalancer</li>\n        </ul>\n        <p>\n            To suspend all process types, omit this parameter.\n        </p>"
+        }
+      }
+    },
+    "ScheduledActionNames":{
+      "type":"list",
+      "member":{"shape":"ResourceName"}
+    },
+    "ScheduledActionsType":{
+      "type":"structure",
+      "members":{
+        "ScheduledUpdateGroupActions":{
+          "shape":"ScheduledUpdateGroupActions",
+          "documentation":"<p>\n            A list of scheduled actions designed to update an Auto Scaling group.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string that marks the start of the next batch of returned results.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            A scaling action that is scheduled for a future time and date.\n            An action can be scheduled up to thirty days in advance.\n        </p>\n        <p>\n        \tStarting with API version 2011-01-01, you can use <code>recurrence</code> \n        \tto specify that a scaling action occurs regularly on a schedule. \n        </p>"
+    },
+    "ScheduledUpdateGroupAction":{
+      "type":"structure",
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of the Auto Scaling group to be updated.\n        </p>"
+        },
+        "ScheduledActionName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of this scheduled action.\n        </p>"
+        },
+        "ScheduledActionARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The Amazon Resource Name (ARN) of this scheduled action.\n        </p>"
+        },
+        "Time":{
+          "shape":"TimestampType",
+          "documentation":"<p>\n            <code>Time</code> is deprecated.</p>\n        <p>The time that the action is scheduled to begin.\n            <code>Time</code> is an alias for <code>StartTime</code>.\n        </p>"
+        },
+        "StartTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>\n            The time that the action is scheduled to begin.\n            This value can be up to one month in the future.\n        </p>\n        <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring\n            action will start and stop.</p>"
+        },
+        "EndTime":{
+          "shape":"TimestampType",
+          "documentation":"<p>\n            The time that the action is scheduled to end.\n            This value can be up to one month in the future.\n        </p>"
+        },
+        "Recurrence":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The regular schedule that an action occurs.\n        </p>"
+        },
+        "MinSize":{
+          "shape":"AutoScalingGroupMinSize",
+          "documentation":"<p>\n            The minimum size of the Auto Scaling group.\n        </p>"
+        },
+        "MaxSize":{
+          "shape":"AutoScalingGroupMaxSize",
+          "documentation":"<p>\n            The maximum size of the Auto Scaling group.\n        </p>"
+        },
+        "DesiredCapacity":{
+          "shape":"AutoScalingGroupDesiredCapacity",
+          "documentation":"<p>\n            The number of instances you prefer to maintain in your\n            Auto Scaling group.            \n        </p>"
+        }
+      },
+      "documentation":"<p>\n            This data type stores information about a\n            scheduled update to an Auto Scaling group.\n        </p>"
+    },
+    "ScheduledUpdateGroupActions":{
+      "type":"list",
+      "member":{"shape":"ScheduledUpdateGroupAction"}
+    },
+    "SecurityGroups":{
+      "type":"list",
+      "member":{"shape":"XmlString"}
+    },
+    "SetDesiredCapacityType":{
+      "type":"structure",
+      "required":[
+        "AutoScalingGroupName",
+        "DesiredCapacity"
+      ],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n        The name of the Auto Scaling group.\n        </p>"
+        },
+        "DesiredCapacity":{
+          "shape":"AutoScalingGroupDesiredCapacity",
+          "documentation":"<p>\n        The new capacity setting for the Auto Scaling group.\n        </p>"
+        },
+        "HonorCooldown":{
+          "shape":"HonorCooldown",
+          "documentation":"<p>\n            By default, <code>SetDesiredCapacity</code> overrides\n            any cooldown period associated with the Auto Scaling group. Set to \n            <code>True</code> if you want Auto Scaling to wait for the cooldown \n            period associated with the Auto Scaling group to complete before \n            initiating a scaling activity to set your Auto Scaling group\n            to the new capacity setting.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n\n        </p>"
+    },
+    "SetInstanceHealthQuery":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "HealthStatus"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"XmlStringMaxLen16",
+          "documentation":"<p>\n            The identifier of the Amazon EC2 instance.\n        </p>"
+        },
+        "HealthStatus":{
+          "shape":"XmlStringMaxLen32",
+          "documentation":"<p>\n            The health status of the instance. \n            Set to <code>Healthy</code> if you want the instance to remain in service.\n            Set to <code>Unhealthy</code> if you want the instance to be out of service. Auto\n            Scaling will terminate and replace the unhealthy instance.\n        </p>"
+        },
+        "ShouldRespectGracePeriod":{
+          "shape":"ShouldRespectGracePeriod",
+          "documentation":"<p>If the Auto Scaling group of the specified instance has a <code>HealthCheckGracePeriod</code> \n            specified for the group, by default, this call will respect the grace period. Set this \n            to <code>False</code>, if you do not want the call to respect the grace period associated \n            with the group.</p>\n        <p>For more information, see the <code>HealthCheckGracePeriod</code> parameter description in the \n            <a>CreateAutoScalingGroup</a> action. </p>"
+        }
+      }
+    },
+    "ShouldDecrementDesiredCapacity":{"type":"boolean"},
+    "ShouldRespectGracePeriod":{"type":"boolean"},
+    "SpotPrice":{
+      "type":"string",
+      "min":1,
+      "max":255
+    },
+    "SuspendedProcess":{
+      "type":"structure",
+      "members":{
+        "ProcessName":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of the suspended process.\n        </p>"
+        },
+        "SuspensionReason":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The reason that the process was suspended.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            An Auto Scaling process that has been suspended.\n            For more information, see <a>ProcessType</a>.\n        </p>"
+    },
+    "SuspendedProcesses":{
+      "type":"list",
+      "member":{"shape":"SuspendedProcess"}
+    },
+    "Tag":{
+      "type":"structure",
+      "required":["Key"],
+      "members":{
+        "ResourceId":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            The name of the Auto Scaling group.\n        </p>"
+        },
+        "ResourceType":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            The kind of resource to which the tag is applied. Currently, Auto Scaling \n            supports the <code>auto-scaling-group</code> resource type.\n        </p>"
+        },
+        "Key":{
+          "shape":"TagKey",
+          "documentation":"<p>\n            The key of the tag.\n        </p>"
+        },
+        "Value":{
+          "shape":"TagValue",
+          "documentation":"<p>\n            The value of the tag. \n        </p>"
+        },
+        "PropagateAtLaunch":{
+          "shape":"PropagateAtLaunch",
+          "documentation":"<p>\n            Specifies whether the new tag will be applied to instances launched after \n            the tag is created. The same behavior applies to updates: If you change a \n            tag, the changed tag will be applied to all instances launched after you made \n            the change.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The tag applied to an Auto Scaling group.\n        </p>"
+    },
+    "TagDescription":{
+      "type":"structure",
+      "members":{
+        "ResourceId":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            The name of the Auto Scaling group.\n        </p>"
+        },
+        "ResourceType":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            The kind of resource to which the tag is applied. Currently, Auto Scaling \n            supports the <code>auto-scaling-group</code> resource type.\n        </p>"
+        },
+        "Key":{
+          "shape":"TagKey",
+          "documentation":"<p>\n            The key of the tag.\n        </p>"
+        },
+        "Value":{
+          "shape":"TagValue",
+          "documentation":"<p>\n            The value of the tag.\n        </p>"
+        },
+        "PropagateAtLaunch":{
+          "shape":"PropagateAtLaunch",
+          "documentation":"<p>\n            Specifies whether the new tag will be applied to instances launched after \n            the tag is created. The same behavior applies to updates: If you change a \n            tag, the changed tag will be applied to all instances launched after you made \n            the change.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n            The tag applied to an Auto Scaling group.\n        </p>"
+    },
+    "TagDescriptionList":{
+      "type":"list",
+      "member":{"shape":"TagDescription"}
+    },
+    "TagKey":{
+      "type":"string",
+      "min":1,
+      "max":128,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "TagValue":{
+      "type":"string",
+      "min":0,
+      "max":256,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "Tags":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
+    "TagsType":{
+      "type":"structure",
+      "members":{
+        "Tags":{
+          "shape":"TagDescriptionList",
+          "documentation":"<p>\n           The list of tags.\n        </p>"
+        },
+        "NextToken":{
+          "shape":"XmlString",
+          "documentation":"<p>\n            A string used to mark the start of the next\n            batch of returned results. \n        </p>"
+        }
+      },
+      "documentation":"<p>\n        </p>"
+    },
+    "TerminateInstanceInAutoScalingGroupType":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "ShouldDecrementDesiredCapacity"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"XmlStringMaxLen16",
+          "documentation":"<p>\n        The ID of the Amazon EC2 instance to be terminated.\n        </p>"
+        },
+        "ShouldDecrementDesiredCapacity":{
+          "shape":"ShouldDecrementDesiredCapacity",
+          "documentation":"<p>\n        Specifies whether (<i>true</i>) or not (<i>false</i>)\n        terminating this instance should also decrement the\n        size of the <a>AutoScalingGroup</a>.\n        </p>"
+        }
+      },
+      "documentation":"<p>\n\n        </p>"
+    },
+    "TerminationPolicies":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen1600"}
+    },
+    "TimestampType":{"type":"timestamp"},
+    "UpdateAutoScalingGroupType":{
+      "type":"structure",
+      "required":["AutoScalingGroupName"],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name of the Auto Scaling group.\n        </p>"
+        },
+        "LaunchConfigurationName":{
+          "shape":"ResourceName",
+          "documentation":"<p>\n            The name of the launch configuration.\n        </p>"
+        },
+        "MinSize":{
+          "shape":"AutoScalingGroupMinSize",
+          "documentation":"<p>\n            The minimum size of the Auto Scaling group.\n        </p>"
+        },
+        "MaxSize":{
+          "shape":"AutoScalingGroupMaxSize",
+          "documentation":"<p>\n            The maximum size of the Auto Scaling group.\n        </p>"
+        },
+        "DesiredCapacity":{
+          "shape":"AutoScalingGroupDesiredCapacity",
+          "documentation":"<p>\n            The desired capacity for the Auto Scaling group.\n        </p>"
+        },
+        "DefaultCooldown":{
+          "shape":"Cooldown",
+          "documentation":"<p>\n            The amount of time, in seconds, after a scaling activity \n            completes before any further scaling activities can start.\n            For more information, \n            see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AS_Concepts.html#Cooldown\">Cooldown Period</a>. \n        </p>"
+        },
+        "AvailabilityZones":{
+          "shape":"AvailabilityZones",
+          "documentation":"<p>\n            Availability Zones for the group.\n        </p>"
+        },
+        "HealthCheckType":{
+          "shape":"XmlStringMaxLen32",
+          "documentation":"<p>\n            The type of health check for the instances in the Auto Scaling group. \n            The health check type can either be <code>EC2</code> for Amazon EC2 or <code>ELB</code> for Elastic Load Balancing.\n        </p>"
+        },
+        "HealthCheckGracePeriod":{
+          "shape":"HealthCheckGracePeriod",
+          "documentation":"<p>\n            The length of time that Auto Scaling waits\n            before checking an instance's health status.\n            The grace period begins when the instance passes System Status and the Instance Status checks from Amazon EC2. For more information, see   \n            <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeInstanceStatus.html\">DescribeInstanceStatus</a>.\n        </p>"
+        },
+        "PlacementGroup":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The name of the cluster placement group, if applicable. For\n            more information, go to \n            <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html\">\n            Using Cluster Instances</a>\n            in the Amazon EC2 User Guide.\n        </p>"
+        },
+        "VPCZoneIdentifier":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>\n            The subnet identifier for the Amazon VPC connection, if applicable. You can specify several subnets in a \n            comma-separated list. \n        </p>\n        <p>\n            When you specify <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, ensure that the \n            subnets' Availability Zones match the values you specify for <code>AvailabilityZones</code>.\n        </p>\n        <p>\n            For more information on creating your Auto Scaling group in Amazon VPC by specifying subnets, see \n            <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Launch Auto Scaling Instances into Amazon VPC</a> in the \n            the <i>Auto Scaling Developer Guide</i>.\n        </p>"
+        },
+        "TerminationPolicies":{
+          "shape":"TerminationPolicies",
+          "documentation":"<p>\n              A standalone termination policy or a list of termination policies used to select the instance to terminate. \n                The policies are executed in the order that they are listed. \n          </p>\n          <p>\n              For more information on creating a termination policy for your Auto Scaling group, go to \n              <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-termination-policy.html\">Instance Termination Policy for Your Auto Scaling Group</a> in the \n              the <i>Auto Scaling Developer Guide</i>.\n          </p>"
+        }
+      },
+      "documentation":"<p>\n            \n        </p>"
+    },
+    "Values":{
+      "type":"list",
+      "member":{"shape":"XmlString"}
+    },
+    "XmlString":{
+      "type":"string",
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMaxLen1023":{
+      "type":"string",
+      "min":1,
+      "max":1023,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMaxLen16":{
+      "type":"string",
+      "min":1,
+      "max":16,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMaxLen1600":{
+      "type":"string",
+      "min":1,
+      "max":1600,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMaxLen255":{
+      "type":"string",
+      "min":1,
+      "max":255,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMaxLen32":{
+      "type":"string",
+      "min":1,
+      "max":32,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMaxLen64":{
+      "type":"string",
+      "min":1,
+      "max":64,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringUserData":{
+      "type":"string",
+      "max":21847,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    }
+  }
+}

@@ -4,11 +4,11 @@ module Seahorse
   module Client
     module Plugins
       describe Endpoint do
+
         let(:client_class) do
           client_class = Client::Base.define api: {
-            'endpoint' => 'foo.com',
             'operations' => {
-              'operation' => {},
+              'Operation' => { 'name' => 'Operation' },
             }
           }
           client_class.clear_plugins
@@ -16,13 +16,13 @@ module Seahorse
           client_class
         end
 
-        def client(opts = {}) @client ||= client_class.new(opts) end
-
         it 'adds an #endpoint option to config' do
+          client = client_class.new(endpoint:'foo.com')
           expect(client.config.endpoint).to eq('foo.com')
         end
 
         it 'populates the http request endpoint' do
+          client = client_class.new(endpoint:'foo.com')
           resp = client.build_request('operation').send_request
           expect(resp.context.http_request.endpoint).to eq('https://foo.com/')
         end

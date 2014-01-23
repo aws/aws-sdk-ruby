@@ -3,19 +3,22 @@ require 'spec_helper'
 module Aws
   describe Service do
 
+    before(:each) do
+      stub_const('Aws::Api::ServiceCustomizations::DEFAULT_PLUGINS', [])
+    end
+
     let(:api_older) {
-      api = Seahorse::Model::Api.new
-      api.version = '2013-01-01'
-      api
+      Seahorse::Model::Api.new('metadata' => { 'apiVersion' => '2013-01-01'})
     }
 
     let(:api_newer) {
-      api = Seahorse::Model::Api.new
-      api.version = '2013-02-02'
-      api
+      Seahorse::Model::Api.new('metadata' => { 'apiVersion' => '2013-02-02'})
     }
 
-    let(:apis) { [api_newer, api_older] }
+    let(:apis) {{
+      api_newer.version => { 'api' => api_newer },
+      api_older.version => { 'api' => api_older },
+    }}
 
     describe 'default_client_class' do
 
@@ -83,41 +86,45 @@ module Aws
 
       let(:apis) { [] }
 
-      let(:svc) {
-        svc = Service.define(:svc, apis)
-        svc.remove_plugin(Plugins::GlobalConfiguration)
-        svc.remove_plugin(Plugins::RegionalEndpoint)
-        svc
-      }
+      let(:svc) { Aws.add_service(:SvcName, apis) }
+
+      before(:each) do
+        Aws.send(:remove_const, :SvcName) if Aws.const_defined?(:SvcName)
+      end
 
       it 'defines a new client factory' do
         expect(svc.ancestors).to include(Service)
       end
 
       it 'populates the method name' do
-        expect(svc.identifier).to eq(:svc)
+        expect(svc.identifier).to eq(:svcname)
       end
 
-      it 'accepts apis as a path to a translated api' do
-        apis << 'apis/S3-2006-03-01.json'
-        client_class = svc.const_get(:V20060301)
-        allow(client_class).to receive(:svc).and_return('Aws::Svc::V20060301')
-        client = client_class.new(credentials: dummy_credentials)
-        expect(client.config.api.version).to eq('2006-03-01')
+      it 'accepts apis as a path to an api' do
+        today = Time.now.strftime('%Y-%m-%d')
+        svc.add_version(today, 'api' => 'apis/s3-2006-03-01.api.json')
+        svc.new(api_version: today)
       end
 
-      it 'accepts apis as a path to an un-translated api' do
-        apis << 'apis/source/s3-2006-03-01.json'
-        client_class = svc.const_get(:V20060301)
-        allow(client_class).to receive(:svc).and_return('Aws::Svc::V20060301')
-        client = client_class.new(credentials: dummy_credentials)
-        expect(client.config.api.version).to eq('2006-03-01')
+      it 'accepts apis as a hash' do
+        today = Time.now.strftime('%Y-%m-%d')
+        api = MultiJson.load(File.read('apis/s3-2006-03-01.api.json'))
+        svc.add_version(today, 'api' => api)
+        svc.new(api_version: today)
+      end
+
+      it 'accepts apis as a hash' do
+        today = Time.now.strftime('%Y-%m-%d')
+        api = MultiJson.load(File.read('apis/s3-2006-03-01.api.json'))
+        svc.add_version(today, 'api' => api)
+        svc.new(api_version: today)
       end
 
       it 'accepts apis as Seahorse::Model::Api' do
-        api = Seahorse::Model::Api.new
-        api.version = '2013-01-02'
-        svc = Service.define(:svc, [api])
+        api = Seahorse::Model::Api.new('metadata' => {
+          'apiVersion' => '2013-01-02'
+        })
+        svc = Service.define(:svc, { api.version => { 'api' => api }})
         expect(svc.const_get(:V20130102).new.config.api).to be(api)
       end
 
@@ -125,26 +132,30 @@ module Aws
 
     describe 'new' do
 
+      before(:each) do
+        Aws.send(:remove_const, :SvcName) if Aws.const_defined?(:SvcName)
+      end
+
       after(:each) do
         Aws.config = {}
       end
 
       it 'builds the client class with the latest api version by default' do
-        svc = Service.define(:name, apis)
+        svc = Aws.add_service(:SvcName, apis)
         expect(svc.new.config.api).to be(api_newer)
         expect(svc.new).to be_kind_of(svc.const_get(:V20130202))
       end
 
       it 'defaults to the global configured version for the client' do
-        Aws.config[:client_name] = { api_version: api_older.version }
-        svc = Service.define(:client_name, apis)
+        Aws.config[:svcname] = { api_version: api_older.version }
+        svc = Aws.add_service(:SvcName, apis)
         expect(svc.new.config.api).to be(api_older)
         expect(svc.new).to be_kind_of(svc.const_get(:V20130101))
       end
 
       it 'accepts the api verison as a constructor option' do
-        Aws.config[:client_name] = { api_version: api_older.version }
-        svc = Service.define(:client_name, apis)
+        Aws.config[:svcname] = { api_version: api_older.version }
+        svc = Aws.add_service(:SvcName, apis)
         client = svc.new(api_version: api_newer.version)
         expect(client.config.api).to be(api_newer)
         expect(client).to be_kind_of(svc.const_get(:V20130202))
@@ -152,28 +163,33 @@ module Aws
 
       it 'uses the closest version without going over' do
         Aws.config[:api_version] = '2013-01-15'
-        svc = Service.define(:client_name, apis)
+        svc = Aws.add_service(:SvcName, apis)
         expect(svc.new.class).to be(svc.const_get(:V20130101))
       end
 
       it 'raises an error if the global version is preceedes all versions' do
         Aws.config[:api_version] = '2000-00-00'
-        svc = Service.define(:client_name, apis)
+        svc = Aws.add_service(:SvcName, apis)
         expect {
           expect(svc.new)
         }.to raise_error(Errors::NoSuchApiVersionError, /2000-00-00/)
       end
 
       it 'merges global defaults options when constructing the client' do
+        Aws::EC2.add_plugin(Plugins::GlobalConfiguration)
+        Aws::EC2.add_plugin(Plugins::RegionalEndpoint)
+        Aws::S3.add_plugin(Plugins::GlobalConfiguration)
+        Aws::S3.add_plugin(Plugins::RegionalEndpoint)
+
         # shared default
-        Aws.config = { region: 'us-east-1', credentials: dummy_credentials }
+        Aws.config = { region: 'us-east-1' }
         expect(Aws::EC2.new.config.region).to eq('us-east-1')
         expect(Aws::S3.new.config.region).to eq('us-east-1')
+
         # default enabled, s3 disables
         Aws.config = {
-          credentials: dummy_credentials,
-          region: 'us-east-1', 
-          s3: { region: 'us-west-2' } 
+          region: 'us-east-1',
+          s3: { region: 'us-west-2' }
         }
         expect(Aws::EC2.new.config.region).to eq('us-east-1')
         expect(Aws::S3.new.config.region).to eq('us-west-2')

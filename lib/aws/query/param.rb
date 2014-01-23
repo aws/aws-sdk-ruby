@@ -17,7 +17,7 @@ module Aws
 
       # @return [String]
       def to_s
-        value ? "#{escape(name)}=#{escape(value)}" : escape(name)
+        value ? "#{escape(name)}=#{escape(value)}" : "#{escape(name)}="
       end
 
       # @api private

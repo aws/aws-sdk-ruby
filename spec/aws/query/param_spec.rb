@@ -31,6 +31,11 @@ module Aws
           expect(param.to_s).to eq('param%20name=val%3Du%21')
         end
 
+        it 'leaves the trailing = when value is nil' do
+          param = Param.new('key')
+          expect(param.to_s).to eq('key=')
+        end
+
       end
 
       describe '#==' do

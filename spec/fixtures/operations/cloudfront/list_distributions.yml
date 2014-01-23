@@ -1,13 +1,13 @@
 # CloudFront uses a target payload.  This test ensures the response elements
 # are correctly deserialized
 config:
-  api_version: '2013-05-12'
+  api_version: '2014-01-31'
 operation: list_distributions
 response:
   status_code: 200
   body: |
     <?xml version="1.0"?>
-    <DistributionList xmlns="http://cloudfront.amazonaws.com/doc/2013-05-12/">
+    <DistributionList xmlns="http://cloudfront.amazonaws.com/doc/2014-01-31/">
       <Marker />
       <MaxItems>100</MaxItems>
       <IsTruncated>false</IsTruncated>
@@ -130,7 +130,7 @@ data:
     :items:
       - :id: EDFDVBD6EXAMPLE
         :status: Deployed
-        :last_modified_time: 2012-05-19 19:37:58 UTC
+        :last_modified_time: 2012-05-19 19:37:58 Z
         :domain_name: d111111abcdef8.cloudfront.net
         :aliases:
           :quantity: 1
@@ -143,10 +143,8 @@ data:
             :domain_name: myawsbucket.s3.amazonaws.com
             :s3_origin_config:
               :origin_access_identity: origin-access-identity/cloudfront/E74FTE3AEXAMPLE
-            :custom_origin_config: {}
           - :id: example-custom-origin
             :domain_name: example.com
-            :s3_origin_config: {}
             :custom_origin_config:
               :http_port: 80
               :https_port: 443
@@ -179,7 +177,6 @@ data:
               :query_string: false
               :cookies:
                 :forward: all
-                :whitelisted_names: {}
             :trusted_signers:
               :enabled: true
               :quantity: 2
@@ -188,6 +185,13 @@ data:
               - '111122223333'
             :viewer_protocol_policy: allow-all
             :min_ttl: 86400
+        :custom_error_responses:
+          :quantity: 1
+          :items:
+          - :error_code: 404
+            :response_page_path: "/error-pages/custom-404.html"
+            :response_code: "200"
+            :error_caching_min_ttl: 30
         :comment: example comment
         :price_class: PriceClass_All
         :enabled: true

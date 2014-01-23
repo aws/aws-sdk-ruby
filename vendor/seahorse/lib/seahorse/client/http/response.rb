@@ -9,7 +9,7 @@ module Seahorse
         def initialize(options = {})
           @status_code = options[:status_code] || 0
           @headers = options[:headers] || Headers.new
-          @body = options[:body] || PlainStringIO.new
+          @body = options[:body] || StringIO.new
         end
 
         # @return [Integer] Returns `0` if the request failed to generate
@@ -25,8 +25,8 @@ module Seahorse
         # @param [#read, #size, #rewind] io
         def body=(io)
           @body = case io
-            when nil then PlainStringIO.new('')
-            when String then PlainStringIO.new(io)
+            when nil then StringIO.new('')
+            when String then StringIO.new(io)
             else io
           end
         end

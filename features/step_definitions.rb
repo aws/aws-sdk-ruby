@@ -1,4 +1,5 @@
-def eventually(seconds = 15, &block)
+def eventually(options = {}, &block)
+  seconds = options[:upto] || 15
   delays = [1]
   while delays.inject(0) { |sum, i| sum + i } < seconds
     delays << delays.last * 1.2
@@ -42,8 +43,13 @@ When(/^I call the "(.*?)" API$/) do |api|
   @response = @client.send(underscore(api))
 end
 
-When(/^I (attempt to )?call the "(.*?)" API with:$/) do |_, api, params|
-  params = @raw_json ? raw_params(params) : symbolized_params(params)
+When(/^I call the "(.*?)" API with:$/) do |api, params|
+  params = @simple_json ? raw_params(params) : symbolized_params(params)
+  @response = @client.send(underscore(api), params)
+end
+
+When(/^I attempt to call the "(.*?)" API with:$/) do |api, params|
+  params = @simple_json ? raw_params(params) : symbolized_params(params)
   begin
     @response = @client.send(underscore(api), params)
   rescue => @error

@@ -60,7 +60,9 @@ module Aws
     end
 
     it 'adds a helper method that constructs a service and client object' do
-      Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
+      Aws.add_service('DummyService', {
+        '2006-03-01' => { 'api' => 'apis/S3-2006-03-01.api.json' },
+      })
       svc = Aws.dummyservice(http_wire_trace: true, credentials: dummy_credentials)
       expect(Aws::DummyService.api_versions).to eq(['2006-03-01'])
       expect(svc).to be_kind_of(Seahorse::Client::Base)
@@ -75,24 +77,13 @@ module Aws
     end
 
     it 'filters the :api_version option from the client constructor' do
-      Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
+      Aws.add_service('DummyService', {
+        '2006-03-01' => { 'api' => 'apis/S3-2006-03-01.api.json' },
+      })
       Aws.config[:api_version] = '2007-01-01'
       Aws.config[:credentials] = dummy_credentials
       expect { Aws.dummyservice }.not_to raise_error
       expect { Aws.dummyservice(api_version: '2006-03-01') }.not_to raise_error
-    end
-
-    it 'translates apis' do
-      api = Seahorse::Model::Api.new
-
-      api_path = 'apis/source/s3-2006-03-01.json'
-      expect(Api::Translator).to receive(:translate).
-        with(MultiJson.load(File.read(api_path)),
-          documentation: false, errors: false).and_return(api)
-
-      Aws.add_service(:DummyService, [api_path])
-      Aws::DummyService::V20060301.clear_plugins
-      expect(Aws.dummyservice.config.api).to be(api)
     end
 
   end

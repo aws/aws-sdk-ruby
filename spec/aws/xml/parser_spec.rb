@@ -5,15 +5,14 @@ module Aws
   module Xml
     describe Parser do
 
-      let(:rules) {{
-        'type' => 'output',
-        'members' => {},
-      }}
+      let(:members) { {} }
 
-      let(:shape) { Seahorse::Model::Shapes::Shape.from_hash(rules) }
+      let(:definition) {{ 'type' => 'structure', 'members' => members }}
+
+      let(:shape) { Seahorse::Model::Shapes::Structure.new(definition) }
 
       def parse(xml)
-        Parser.new.parse(shape, xml).to_hash
+        Parser.new(shape).parse(xml).to_hash
       end
 
       it 'returns an empty hash when the XML is empty' do
@@ -25,34 +24,31 @@ module Aws
       end
 
       it 'ignores xml elements when the rules are empty' do
-        rules['members'] = {}
         expect(parse('<xml><foo>bar</foo></xml>')).to eq({})
       end
 
       it 'returns an instance of Struct' do
-        expect(Parser.parse(shape, '<xml/>')).to be_kind_of(Aws::Structure)
+        expect(Parser.new(shape).parse('<xml/>')).to be_kind_of(Aws::Structure)
       end
 
       describe 'structures' do
 
         it 'parses structure members' do
-          rules['members'] = {
-            'first' => { 'type' => 'string' },
-            'last' => { 'type' => 'string' }
-          }
+          members['First'] = { 'type' => 'string' }
+          members['Last'] = { 'type' => 'string' }
           xml = <<-XML
             <xml>
-              <first>abc</first>
-              <last>xyz</last>
+              <First>abc</First>
+              <Last>xyz</Last>
             </xml>
           XML
           expect(parse(xml)).to eq(first: 'abc', last: 'xyz')
         end
 
-        it 'parses members using their serialized name' do
-          rules['members'] = {
-            'first' => { 'type' => 'string', 'serialized_name' => 'FirstName' },
-            'last' => { 'type' => 'string', 'serialized_name' => 'LastName' }
+        it 'parses members using their location name' do
+          definition['members'] = {
+            'first' => { 'type' => 'string', 'locationName' => 'FirstName' },
+            'last' => { 'type' => 'string', 'locationName' => 'LastName' }
           }
           xml = <<-XML
             <xml>
@@ -64,7 +60,7 @@ module Aws
         end
 
         it 'parses structures of structures' do
-          rules['members'] = {
+          definition['members'] = {
             'config' => {
               'type' => 'structure',
               'members' => {
@@ -89,110 +85,110 @@ module Aws
       describe 'non-flattened lists' do
 
         it 'returns missing lists as []' do
-          rules['members'] = {
-            'items' => {
+          definition['members'] = {
+            'Values' => {
               'type' => 'list',
-              'members' => { 'type' => 'string' }
+              'member' => { 'type' => 'string' }
             }
           }
           xml = "<xml/>"
-          expect(parse(xml)[:items]).to eq([])
+          expect(parse(xml)[:values]).to eq([])
         end
 
         it 'returns empty list elements as []' do
-          rules['members'] = {
-            'items' => {
+          definition['members'] = {
+            'Values' => {
               'type' => 'list',
-              'members' => { 'type' => 'string' }
+              'member' => { 'type' => 'string' }
             }
           }
-          xml = "<xml><items/></xml>"
-          expect(parse(xml)[:items]).to eq([])
+          xml = "<xml><Values/></xml>"
+          expect(parse(xml)[:values]).to eq([])
         end
 
         it 'converts lists of strings into arrays of strings' do
-          rules['members'] = {
-            'items' => {
+          definition['members'] = {
+            'Values' => {
               'type' => 'list',
-              'members' => { 'type' => 'string' }
+              'member' => { 'type' => 'string' }
             }
           }
           xml = <<-XML
             <xml>
-              <items>
+              <Values>
                 <member>abc</member>
                 <member>mno</member>
                 <member>xyz</member>
-              </items>
+              </Values>
             </xml>
           XML
-          expect(parse(xml)[:items]).to eq(%w(abc mno xyz))
+          expect(parse(xml)[:values]).to eq(%w(abc mno xyz))
         end
 
         it 'accepts lists of single elements' do
-          rules['members'] = {
-            'items' => {
+          definition['members'] = {
+            'Values' => {
               'type' => 'list',
-              'members' => {
+              'member' => {
                 'type' => 'structure',
                 'members' => {
-                  'enabled' => { 'type' => 'boolean' }
+                  'Enabled' => { 'type' => 'boolean' }
                 }
               }
             }
           }
           xml = <<-XML
             <xml>
-              <items>
+              <Values>
                 <member>
-                  <enabled>true</enabled>
+                  <Enabled>true</Enabled>
                 </member>
-              </items>
+              </Values>
             </xml>
           XML
-          expect(parse(xml)[:items]).to eq([{ enabled: true }])
+          expect(parse(xml)[:values]).to eq([{ enabled: true }])
         end
 
-        it 'observes the list member serialization name when present' do
-          rules['members'] = {
-            'items' => {
+        it 'observes the list member location name when present' do
+          definition['members'] = {
+            'Values' => {
               'type' => 'list',
-              'members' => { 'type' => 'string', 'serialized_name' => 'item' }
+              'member' => { 'type' => 'string', 'locationName' => 'Value' }
             }
           }
           xml = <<-XML
             <xml>
-              <items>
-                <item>abc</item>
-                <item>mno</item>
-                <item>xyz</item>
-              </items>
+              <Values>
+                <Value>abc</Value>
+                <Value>mno</Value>
+                <Value>xyz</Value>
+              </Values>
             </xml>
           XML
-          expect(parse(xml)[:items]).to eq(%w(abc mno xyz))
+          expect(parse(xml)[:values]).to eq(%w(abc mno xyz))
         end
 
         it 'can parse lists of complex types' do
-          rules['members'] = {
-            'items' => {
+          definition['members'] = {
+            'Values' => {
               'type' => 'list',
-              'members' => {
+              'member' => {
                 'type' => 'structure',
-                'serialized_name' => 'item',
-                'members' => { 'name' => { 'type' => 'string' } }
+                'locationName' => 'item',
+                'members' => { 'Name' => { 'type' => 'string' } }
               }
             }
           }
           xml = <<-XML
             <xml>
-              <items>
-                <item><name>abc</name></item>
-                <item><name>mno</name></item>
-                <item><name>xyz</name></item>
-              </items>
+              <Values>
+                <item><Name>abc</Name></item>
+                <item><Name>mno</Name></item>
+                <item><Name>xyz</Name></item>
+              </Values>
             </xml>
           XML
-          expect(parse(xml)[:items]).to eq([
+          expect(parse(xml)[:values]).to eq([
             { name: 'abc' },
             { name: 'mno' },
             { name: 'xyz' }
@@ -204,87 +200,93 @@ module Aws
       describe 'flattened lists' do
 
         it 'returns missing lists as []' do
-          rules['members'] = {
-            'items' => {
-              'type' => 'flat_list',
-              'members' => { 'type' => 'string' }
+          definition['members'] = {
+            'Values' => {
+              'type' => 'list',
+              'member' => { 'type' => 'string' },
+              'flattened' => true
             }
           }
           xml = "<xml/>"
-          expect(parse(xml)[:items]).to eq([])
+          expect(parse(xml)[:values]).to eq([])
         end
 
         it 'returns empty list elements as []' do
-          rules['members'] = {
-            'items' => {
-              'type' => 'flat_list',
-              'members' => { 'type' => 'string' }
+          definition['members'] = {
+            'Values' => {
+              'type' => 'list',
+              'member' => { 'type' => 'string' },
+              'flattened' => true
             }
           }
-          xml = "<xml><items/></xml>"
-          expect(parse(xml)[:items]).to eq([])
+          xml = "<xml><Values/></xml>"
+          expect(parse(xml)[:values]).to eq([])
         end
 
         it 'converts lists of strings into arrays of strings' do
-          rules['members'] = {
-            'items' => {
-              'type' => 'flat_list',
-              'members' => { 'type' => 'string' }
+          definition['members'] = {
+            'Values' => {
+              'type' => 'list',
+              'member' => { 'type' => 'string' },
+              'flattened' => true
             }
           }
           xml = <<-XML
             <xml>
-              <items>abc</items>
-              <items>mno</items>
-              <items>xyz</items>
+              <Values>abc</Values>
+              <Values>mno</Values>
+              <Values>xyz</Values>
             </xml>
           XML
-          expect(parse(xml)[:items]).to eq(%w(abc mno xyz))
+          expect(parse(xml)[:values]).to eq(%w(abc mno xyz))
         end
 
         it 'accepts lists of a single element' do
-          rules['members'] = {
-            'items' => {
-              'type' => 'flat_list',
-              'members' => { 'type' => 'string' }
+          definition['members'] = {
+            'Values' => {
+              'type' => 'list',
+              'member' => { 'type' => 'string' },
+              'flattened' => true
             }
           }
           xml = <<-XML
             <xml>
-              <items>abc</items>
+              <Values>abc</Values>
             </xml>
           XML
-          expect(parse(xml)[:items]).to eq(['abc'])
+          expect(parse(xml)[:values]).to eq(['abc'])
         end
 
         it 'observes the list serialization name when present' do
-          rules['members'] = {
-            'items' => {
-              'type' => 'flat_list',
-              'members' => { 'type' => 'string', 'serialized_name' => 'item' }
+          definition['members'] = {
+            'Values' => {
+              'type' => 'list',
+              'member' => { 'type' => 'string', 'locationName' => 'Item' },
+              'flattened' => true
             }
           }
           xml = <<-XML
             <xml>
-              <item>abc</item>
-              <item>mno</item>
-              <item>xyz</item>
+              <Item>abc</Item>
+              <Item>mno</Item>
+              <Item>xyz</Item>
             </xml>
           XML
-          expect(parse(xml)[:items]).to eq(%w(abc mno xyz))
+          expect(parse(xml)[:values]).to eq(%w(abc mno xyz))
         end
 
         it 'can parse lists of complex types' do
-          rules['members'] = {
-            'people' => {
-              'type' => 'flat_list',
-              'serialized_name' => 'Person',
-              'members' => {
+          definition['members'] = {
+            'People' => {
+              'type' => 'list',
+              'locationName' => 'Person',
+              'member' => {
                 'type' => 'structure',
                 'members' => {
-                  'name' => { 'type' => 'string', 'serialized_name' => 'Name' }
+                  'Handle' => { 'type' => 'string', 'locationName' => 'Name' }
                 }
-              }
+              },
+              'flattened' => true
             }
           }
           xml = <<-XML
@@ -295,9 +297,9 @@ module Aws
             </xml>
           XML
           expect(parse(xml)[:people]).to eq([
-            { name: 'abc' },
-            { name: 'mno' },
-            { name: 'xyz' }
+            { handle: 'abc' },
+            { handle: 'mno' },
+            { handle: 'xyz' }
           ])
         end
 
@@ -306,11 +308,11 @@ module Aws
       describe 'non-flattened maps' do
 
         it 'returns missing maps as {}' do
-          rules['members'] = {
-            'attributes' => {
+          definition['members'] = {
+            'Attributes' => {
               'type' => 'map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'string' }
+              'key' => { 'type' => 'string' },
+              'value' => { 'type' => 'string' }
             }
           }
           xml = "<xml/>"
@@ -318,28 +320,28 @@ module Aws
         end
 
         it 'returns empty maps as {}' do
-          rules['members'] = {
-            'attributes' => {
+          definition['members'] = {
+            'Attributes' => {
               'type' => 'map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'string' }
+              'key' => { 'type' => 'string' },
+              'value' => { 'type' => 'string' }
             }
           }
-          xml = "<xml><attributes/></xml>"
+          xml = "<xml><Attributes/></xml>"
           expect(parse(xml)[:attributes]).to eq({})
         end
 
         it 'expects entry, key and value tags by default' do
-          rules['members'] = {
-            'attributes' => {
+          definition['members'] = {
+            'Attributes' => {
               'type' => 'map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'string' }
+              'key' => { 'type' => 'string' },
+              'value' => { 'type' => 'string' }
             }
           }
           xml = <<-XML
             <xml>
-              <attributes>
+              <Attributes>
                 <entry>
                   <key>Color</key>
                   <value>red</value>
@@ -348,7 +350,7 @@ module Aws
                   <key>Size</key>
                   <value>large</value>
                 </entry>
-              </attributes>
+              </Attributes>
             </xml>
           XML
           expect(parse(xml)[:attributes]).to eq({
@@ -358,37 +360,37 @@ module Aws
         end
 
         it 'accepts maps with a single entry' do
-          rules['members'] = {
-            'attributes' => {
+          definition['members'] = {
+            'Attributes' => {
               'type' => 'map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'string' }
+              'key' => { 'type' => 'string' },
+              'value' => { 'type' => 'string' }
             }
           }
           xml = <<-XML
             <xml>
-              <attributes>
+              <Attributes>
                 <entry>
                   <key>Color</key>
                   <value>red</value>
                 </entry>
-              </attributes>
+              </Attributes>
             </xml>
           XML
           expect(parse(xml)[:attributes]).to eq('Color' => 'red')
         end
 
         it 'accepts alternate key and value names' do
-          rules['members'] = {
-            'attributes' => {
+          definition['members'] = {
+            'Attributes' => {
               'type' => 'map',
-              'keys' => { 'type' => 'string', 'serialized_name' => 'attr' },
-              'members' => { 'type' => 'string', 'serialized_name' => 'val' }
+              'key' => { 'type' => 'string', 'locationName' => 'attr' },
+              'value' => { 'type' => 'string', 'locationName' => 'val' }
             }
           }
           xml = <<-XML
             <xml>
-              <attributes>
+              <Attributes>
                 <entry>
                   <attr>hue</attr>
                   <val>red</val>
@@ -397,7 +399,7 @@ module Aws
                   <attr>size</attr>
                   <val>med</val>
                 </entry>
-              </attributes>
+              </Attributes>
             </xml>
           XML
           expect(parse(xml)[:attributes]).to eq('hue' => 'red', 'size' => 'med')
@@ -408,11 +410,12 @@ module Aws
       describe 'flattened maps' do
 
         it 'returns missing maps as {}' do
-          rules['members'] = {
-            'attributes' => {
-              'type' => 'flat_map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'string' }
+          definition['members'] = {
+            'Attributes' => {
+              'type' => 'map',
+              'key' => { 'type' => 'string' },
+              'value' => { 'type' => 'string' },
+              'flattened' => true
             }
           }
           xml = "<xml/>"
@@ -420,35 +423,37 @@ module Aws
         end
 
         it 'returns empty maps as {}' do
-          rules['members'] = {
-            'attributes' => {
-              'type' => 'flat_map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'string' }
+          definition['members'] = {
+            'Attributes' => {
+              'type' => 'map',
+              'key' => { 'type' => 'string' },
+              'value' => { 'type' => 'string' },
+              'flattened' => true
             }
           }
-          xml = "<xml><attributes/></xml>"
+          xml = "<xml><Attributes/></xml>"
           expect(parse(xml)[:attributes]).to eq({})
         end
 
         it 'expects key and value tags by default' do
-          rules['members'] = {
-            'attributes' => {
-              'type' => 'flat_map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'string' }
+          definition['members'] = {
+            'Attributes' => {
+              'type' => 'map',
+              'key' => { 'type' => 'string' },
+              'value' => { 'type' => 'string' },
+              'flattened' => true
             }
           }
           xml = <<-XML
             <xml>
-              <attributes>
+              <Attributes>
                 <key>Color</key>
                 <value>red</value>
-              </attributes>
-              <attributes>
+              </Attributes>
+              <Attributes>
                 <key>Size</key>
                 <value>large</value>
-              </attributes>
+              </Attributes>
             </xml>
           XML
           expect(parse(xml)[:attributes]).to eq({
@@ -458,42 +463,44 @@ module Aws
         end
 
         it 'accepts maps with a single entry' do
-          rules['members'] = {
-            'attributes' => {
-              'type' => 'flat_map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'string' }
+          definition['members'] = {
+            'Attributes' => {
+              'type' => 'map',
+              'key' => { 'type' => 'string' },
+              'value' => { 'type' => 'string' },
+              'flattened' => true
             }
           }
           xml = <<-XML
             <xml>
-              <attributes>
+              <Attributes>
                 <key>Color</key>
                 <value>red</value>
-              </attributes>
+              </Attributes>
             </xml>
           XML
           expect(parse(xml)[:attributes]).to eq('Color' => 'red')
         end
 
         it 'accepts alternate key and value names' do
-          rules['members'] = {
-            'attributes' => {
-              'type' => 'flat_map',
-              'keys' => { 'type' => 'string', 'serialized_name' => 'attr' },
-              'members' => { 'type' => 'string', 'serialized_name' => 'val' }
+          definition['members'] = {
+            'Attributes' => {
+              'type' => 'map',
+              'key' => { 'type' => 'string', 'locationName' => 'attr' },
+              'value' => { 'type' => 'string', 'locationName' => 'val' },
+              'flattened' => true
             }
           }
           xml = <<-XML
             <xml>
-              <attributes>
+              <Attributes>
                 <attr>hue</attr>
                 <val>red</val>
-              </attributes>
-              <attributes>
+              </Attributes>
+              <Attributes>
                 <attr>size</attr>
                 <val>med</val>
-              </attributes>
+              </Attributes>
             </xml>
           XML
           expect(parse(xml)[:attributes]).to eq('hue' => 'red', 'size' => 'med')
@@ -504,7 +511,7 @@ module Aws
       describe 'booleans' do
 
         before(:each) do
-          rules['members'] = { 'enabled' => { 'type' => 'boolean' } }
+          definition['members'] = { 'enabled' => { 'type' => 'boolean' } }
         end
 
         it 'converts boolean true values' do
@@ -527,23 +534,23 @@ module Aws
       describe 'timestamps' do
 
         before(:each) do
-          rules['members'] = {
-            'created_at' => {
+          definition['members'] = {
+            'CreatedAt' => {
               'type' => 'timestamp',
-              'serialized_name' => 'CreatedAt',
+              'locationName' => 'Created',
             }
           }
         end
 
         it 'returns an empty element as nil' do
-          xml = "<xml><CreatedAt/></xml>"
+          xml = "<xml><Created/></xml>"
           expect(parse(xml)[:created_at]).to be(nil)
         end
 
         it 'can parse unix timestamps' do
           timestamp = 1349908100
           time = Time.at(timestamp)
-          xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+          xml = "<xml><Created>#{timestamp}</Created></xml>"
           data = parse(xml)
           expect(data[:created_at]).to be_a(Time)
           expect(data[:created_at]).to eq(time)
@@ -552,7 +559,7 @@ module Aws
         it 'understands basic iso8601 strings' do
           timestamp = '2012-09-10T15:47:10.001Z'
           time = Time.parse(timestamp).to_time.utc
-          xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+          xml = "<xml><Created>#{timestamp}</Created></xml>"
           data = parse(xml)
           expect(data[:created_at]).to be_a(Time)
           expect(data[:created_at]).to eq(time)
@@ -561,7 +568,7 @@ module Aws
         it 'understands basic rfc822 strings' do
           timestamp = 'Wed, 10 Oct 2012 15:59:55 UTC'
           time = Time.parse(timestamp).to_time.utc
-          xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+          xml = "<xml><Created>#{timestamp}</Created></xml>"
           data = parse(xml)
           expect(data[:created_at]).to be_a(Time)
           expect(data[:created_at]).to eq(time)
@@ -569,7 +576,7 @@ module Aws
 
         it 'throws an error when unable to determine the format' do
           timestamp = 'bad-date-format'
-          xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+          xml = "<xml><Created>#{timestamp}</Created></xml>"
           expect {
             parse(xml)
           }.to raise_error("unhandled timestamp format `#{timestamp}'")
@@ -580,7 +587,7 @@ module Aws
       describe 'integers' do
 
         before(:each) do
-          rules['members'] = { 'count' => { 'type' => 'integer' } }
+          definition['members'] = { 'count' => { 'type' => 'integer' } }
         end
 
         it 'parses integer elements' do
@@ -598,7 +605,7 @@ module Aws
       describe 'floats' do
 
         before(:each) do
-          rules['members'] = { 'price' => { 'type' => 'float' } }
+          definition['members'] = { 'price' => { 'type' => 'float' } }
         end
 
         it 'parses float elements' do
@@ -616,7 +623,7 @@ module Aws
       describe 'strings' do
 
         it 'returns nil for empty elements' do
-          rules['members'] = {
+          definition['members'] = {
             'data' => { 'type' => 'string' }
           }
           xml = "<xml><data/></xml>"
@@ -624,7 +631,7 @@ module Aws
         end
 
         it 'base64 decodes strings when encoding attribute is present' do
-          rules['members'] = {
+          definition['members'] = {
             'encoded' => { 'type' => 'string' },
             'not_encoded' => { 'type' => 'string' },
             'nested' => {
@@ -654,7 +661,7 @@ module Aws
       describe 'blobs' do
 
         it 'returns nil for empty elements' do
-          rules['members'] = {
+          definition['members'] = {
             'data' => { 'type' => 'blob' }
           }
           xml = "<xml><data/></xml>"
@@ -662,7 +669,7 @@ module Aws
         end
 
         it 'base64 decodes blob elements' do
-          rules['members'] = {
+          definition['members'] = {
             'data' => { 'type' => 'blob' }
           }
           xml = "<xml><data>aGVsbG8=</data></xml>"
@@ -674,7 +681,7 @@ module Aws
       describe 'xml attributes' do
 
         it 'omits attributes that are not members' do
-          rules['members'] = {
+          definition['members'] = {
             'config' => {
               'type' => 'structure',
               'members' => {
@@ -687,7 +694,7 @@ module Aws
         end
 
         it 'merges xml attributes that are members' do
-          rules['members'] = {
+          definition['members'] = {
             'config' => {
               'type' => 'structure',
               'members' => {

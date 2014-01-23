@@ -77,7 +77,7 @@ module Seahorse
 
           it 'can be set as a string in the constructor' do
             req = request(body: 'body')
-            expect(req.body).to be_a(PlainStringIO)
+            expect(req.body).to be_a(StringIO)
             expect(req.body.read).to eq('body')
           end
 
@@ -90,7 +90,7 @@ module Seahorse
           it 'can be set as a string in accessor' do
             req = request
             req.body = 'body'
-            expect(req.body).to be_a(PlainStringIO)
+            expect(req.body).to be_a(StringIO)
             expect(req.body.read).to eq('body')
           end
 

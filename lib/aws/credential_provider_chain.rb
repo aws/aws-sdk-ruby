@@ -1,9 +1,8 @@
 module Aws
   class CredentialProviderChain
 
-    def initialize(config, foo=nil)
+    def initialize(config)
       @config = config
-      @foo = foo
     end
 
     def resolve

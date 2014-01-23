@@ -132,7 +132,7 @@ module Aws
         end
 
         it 'raises an error if you construct a client without credentials' do
-          client_class = Seahorse::Client.define
+          client_class = Seahorse::Client::Base.define
           client_class.add_plugin(Credentials)
           expect { client_class.new }.to raise_error(Errors::MissingCredentialsError)
         end

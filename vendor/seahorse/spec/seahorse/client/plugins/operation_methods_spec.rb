@@ -4,20 +4,22 @@ module Seahorse
   module Client
     module Plugins
       describe OperationMethods do
+
         let(:client_class) do
-          Client::Base.define api: {
-            'plugins' => [DummySendPlugin],
+          klass = Client::Base.define(api: {
             'operations' => {
-              'operation1' => { 'name' => 'operation1' },
-              'operation2' => { 'name' => 'operation2' },
-              'operation3' => { 'name' => 'operation3' }
+              'Operation1' => { 'name' => 'Operation1' },
+              'Operation2' => { 'name' => 'Operation2' },
+              'Operation3' => { 'name' => 'Operation3' }
             }
-          }
+          })
+          klass.add_plugin(DummySendPlugin)
+          klass
         end
 
         let(:client) { client_class.new endpoint: 'localhost' }
 
-        let(:operations) { %w(operation1 operation2 operation3) }
+        let(:operations) { [:operation_1, :operation_2, :operation_3] }
 
         it 'adds methods for every operation in the API model' do
           expect(client.methods).to include(*operations.map(&:to_sym))
@@ -26,8 +28,8 @@ module Seahorse
         it 'sets up the method to call build_request and sends it' do
           client_class.remove_plugin(ParamValidation)
           expect(client).to receive(:build_request).
-            with('operation1', param: 'X').and_call_original
-          expect(client.operation1(param: 'X').data).to eq(result: 'success')
+            with(:operation_1, param: 'X').and_call_original
+          expect(client.operation_1(param: 'X').data).to eq(result: 'success')
         end
 
         it 'passes block arguments to the #send_request method' do
@@ -39,7 +41,7 @@ module Seahorse
             and_yield('chunk3')
 
           chunks = []
-          client.operation1 do |chunk|
+          client.operation_1 do |chunk|
             chunks << chunk
           end
           expect(chunks).to eq(%w(chunk1 chunk2 chunk3))

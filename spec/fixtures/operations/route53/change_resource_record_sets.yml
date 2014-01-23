@@ -8,9 +8,9 @@ params:
   :change_batch:
     :changes: []
 request:
-  path: '/2013-04-01/hostedzone/ZONE-ID/rrset/'
+  path: !ruby/regexp /^\/\d{4}-\d{2}-\d{2}\/hostedzone\/ZONE-ID\/rrset\//
   body: |
-    <ChangeResourceRecordSetsRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/">
+    <ChangeResourceRecordSetsRequest xmlns="https://route53.amazonaws.com/doc/2012-12-12/">
       <ChangeBatch>
         <Changes>
         </Changes>

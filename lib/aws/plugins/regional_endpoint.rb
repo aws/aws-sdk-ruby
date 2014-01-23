@@ -6,12 +6,8 @@ module Aws
     #   the client endpoint.  Defaults to `ENV['AWS_DEFAULT_REGION']`.
     #   Also checks `AWS_REGION` and `AMAZON_REGION`.
     #
-    # @seahorse.client.option [String] :endpoint
-    #   The HTTP endpoint for this client. Normally you should not need
-    #   to configure the `:endpoint` directly.  It is constructed from
-    #   the `:region` option.  However, sometime you need to specify
-    #   the full endpoint, especially when connecting to test
-    #   endpoints.
+    # @seahorse.client.option [String] :endpoint A default endpoint is
+    #   constructed from the `:region`.
     #
     class RegionalEndpoint < Seahorse::Client::Plugin
 
@@ -19,21 +15,24 @@ module Aws
       MISSING_REGION = 'missing required configuration option :region'
 
       option(:region) {
-        keys = %w(AWS_DEFAULT_REGION AWS_REGION AMAZON_REGION)
+        keys = %w(AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION)
         ENV.values_at(*keys).compact.first
       }
 
+      option(:endpoint_provider) { EndpointProvider.default_provider }
+
       option(:endpoint) do |cfg|
-        endpoints = cfg.api.metadata['regional_endpoints']
-        if endpoints && endpoints[cfg.region]
-          endpoints[cfg.region]
-        else
-          "#{cfg.api.metadata['endpoint_prefix']}.#{cfg.region}.amazonaws.com"
-        end
+        cfg.endpoint_provider.resolve(
+          service: cfg.api.metadata('endpointPrefix'),
+          region: cfg.region,
+          scheme: 'https'
+        )
       end
 
       def after_initialize(client)
-        raise Errors::MissingRegionError unless client.config.region
+        if client.config.region.nil? or client.config.region == ''
+          raise Errors::MissingRegionError
+        end
       end
 
     end

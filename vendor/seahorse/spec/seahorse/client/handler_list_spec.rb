@@ -86,8 +86,8 @@ module Seahorse
         describe 'errors' do
 
           it 'raises an error if :step is not valid' do
-            msg = "invalid :step `:bogus', must be one of :validate, :build, "
-            msg << ":sign or :send"
+            msg = "invalid :step `:bogus', must be one of :initialize, "
+            msg << ":validate, :build, :sign or :send"
             expect {
               handlers.add('handler', step: :bogus)
             }.to raise_error(ArgumentError, msg)
@@ -226,18 +226,7 @@ module Seahorse
           expect(handlers.to_stack).to eq(3)
         end
 
-        it 'does not construct handlers that are not classes' do
-          handler1 = double('handler1')
-          handler2 = double('handler2')
-          expect(handler2).to receive(:handler=).with(nil)
-          expect(handler1).to receive(:handler=).with(handler2)
-          handlers.add(handler1)
-          handlers.add(handler2)
-          handlers.to_stack
-        end
-
       end
-
     end
   end
 end

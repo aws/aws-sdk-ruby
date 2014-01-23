@@ -28,13 +28,14 @@ module Seahorse
         def after_initialize(client)
           unless client.respond_to?(:operation_names)
             client.class.mutex.synchronize do
-              add_operation_helpers(client, client.config.api.operations.keys)
+              unless client.respond_to?(:operation_names)
+                add_operation_helpers(client, client.config.api.operation_names)
+              end
             end
           end
         end
 
         def add_operation_helpers(client, operations)
-          client.class.send(:define_method, :operation_names) { operations }
           operations.each do |name|
             client.class.send(:define_method, name) do |*args, &block|
               params = args[0] || {}
@@ -42,6 +43,7 @@ module Seahorse
               build_request(name, params).send_request(send_options, &block)
             end
           end
+          client.class.send(:define_method, :operation_names) { operations }
         end
 
       end

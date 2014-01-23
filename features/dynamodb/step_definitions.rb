@@ -6,6 +6,6 @@ After("@dynamodb") do
 end
 
 Given(/^I disable translation features Aws::DynamoDB$/) do
-  @raw_json = true
-  @dynamodb = @client = Aws.dynamodb(raw_json: true)
+  @simple_json = true
+  @dynamodb = @client = Aws.dynamodb(simple_json: true)
 end

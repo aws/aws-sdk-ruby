@@ -19,14 +19,14 @@ module Aws
       private
 
       def params
-        return '' if @operation.input.members.empty?
+        return '' if @operation.input.nil?
         structure(@operation.input, '')
       end
 
       def structure(shape, i)
         lines = ['{']
         shape.members.each do |member_name, member_shape|
-          if member_shape.required
+          if shape.required.include?(member_name)
             lines << "#{i}  # required"
           end
           lines << "#{i}  #{member_name}: #{member(member_shape, i + '  ')},"
@@ -36,32 +36,32 @@ module Aws
       end
 
       def map(shape, i)
-        if multiline?(shape.members)
+        if multiline?(shape.values)
           multiline_map(shape, i)
         else
-          "{ #{key_name(shape)} => #{value(shape.members)} }"
+          "{ #{key_name(shape)} => #{value(shape.values)} }"
         end
       end
 
       def multiline_map(shape, i)
         lines = ["{"]
-        lines << "#{i}  #{key_name(shape)} => #{member(shape.members, i + '  ')},"
+        lines << "#{i}  #{key_name(shape)} => #{member(shape.values, i + '  ')},"
         lines << "#{i}  # repeated ..."
         lines << "#{i}}"
         lines.join("\n")
       end
 
       def list(shape, i)
-        if multiline?(shape.members)
+        if multiline?(shape.items)
           multiline_list(shape, i)
         else
-          "[#{value(shape.members)}, '...']"
+          "[#{value(shape.items)}, '...']"
         end
       end
 
       def multiline_list(shape, i)
         lines = ["["]
-        lines << "#{i}  #{member(shape.members, i + '  ')},"
+        lines << "#{i}  #{member(shape.items, i + '  ')},"
         lines << "#{i}  # repeated ... "
         lines << "#{i}]"
         lines.join("\n")
@@ -69,41 +69,41 @@ module Aws
 
       def member(shape, i)
         case shape
-        when StructureShape then structure(shape, i)
-        when MapShape then map(shape, i)
-        when ListShape then list(shape, i)
+        when Seahorse::Model::Shapes::Structure then structure(shape, i)
+        when Seahorse::Model::Shapes::Map then map(shape, i)
+        when Seahorse::Model::Shapes::List then list(shape, i)
         else value(shape)
         end
       end
 
       def value(shape)
         case shape
-        when StringShape then string_value(shape)
-        when IntegerShape then 'Integer'
-        when FloatShape then 'Float'
-        when BooleanShape then 'true || false'
-        when TimestampShape then '<Time,DateTime,Date,Integer,String>'.inspect
-        when BlobShape then "#{shape_name(shape, false)}<String,IO>".inspect
+        when Seahorse::Model::Shapes::String then string_value(shape)
+        when Seahorse::Model::Shapes::Integer then 1
+        when Seahorse::Model::Shapes::Float then 1.1
+        when Seahorse::Model::Shapes::Boolean then true
+        when Seahorse::Model::Shapes::Timestamp then 'Time.now'
+        when Seahorse::Model::Shapes::Blob then "#{shape_name(shape, false)}<String,IO>".inspect
         else raise "unhandled shape type `#{shape.type}'"
         end
       end
 
       def string_value(shape)
         if shape.enum
-          shape.enum.join('|').inspect
+          shape.enum.to_a.join('|').inspect
         else
           shape_name(shape)
         end
       end
 
       def multiline?(shape)
-        shape.is_a?(StructureShape) or
-        shape.is_a?(MapShape) or
-        shape.is_a?(ListShape)
+        Seahorse::Model::Shapes::Structure === shape ||
+        Seahorse::Model::Shapes::List === shape ||
+        Seahorse::Model::Shapes::Map === shape
       end
 
       def shape_name(shape, inspect = true)
-        value = shape.metadata['shape_name']
+        value = shape.name
         inspect ? value.inspect : value
       end
 

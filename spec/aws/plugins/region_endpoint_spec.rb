@@ -4,10 +4,15 @@ module Aws
   module Plugins
     describe RegionalEndpoint do
 
-      let(:env) { {} }
+      let(:env) {{}}
+
+      let(:metadata) {{}}
 
       let(:client_class) {
-        Seahorse::Client.define(plugins: [RegionalEndpoint])
+        Seahorse::Client::Base.define(
+          plugins: [RegionalEndpoint],
+          api: { 'metadata' => metadata }
+        )
       }
 
       before do
@@ -36,10 +41,10 @@ module Aws
         end
 
         it 'prefers AWS_DEFAULT_REGION to AWS_REGION or AMAZON_REGION' do
-          env['AWS_DEFAULT_REGION'] = 'aws-default-region'
           env['AWS_REGION'] = 'aws-region'
           env['AMAZON_REGION'] = 'amazon-region'
-          expect(client_class.new.config.region).to eq('aws-default-region')
+          env['AWS_DEFAULT_REGION'] = 'aws-default-region'
+          expect(client_class.new.config.region).to eq('aws-region')
         end
 
         it 'prefers AWS_REGION to AMAZON_REGION' do
@@ -54,13 +59,13 @@ module Aws
         end
 
         it 'raises an argument error when not set' do
-          client = Seahorse::Client.define
+          client = Seahorse::Client::Base.define
           client.add_plugin(RegionalEndpoint)
           expect { client.new }.to raise_error(Errors::MissingRegionError)
         end
 
         it 'raises an argument error when set to nil' do
-          client = Seahorse::Client.define
+          client = Seahorse::Client::Base.define
           client.add_plugin(RegionalEndpoint)
           expect { client.new(region:nil) }.to raise_error(Errors::MissingRegionError)
         end
@@ -70,17 +75,9 @@ module Aws
       describe 'endpoint option' do
 
         it 'defaults the endpoint to PREFIX.REGION.amazonaws.com' do
-          client_class.api.metadata['endpoint_prefix'] = 'PREFIX'
+          metadata['endpointPrefix'] = 'PREFIX'
           client = client_class.new(region: 'REGION')
-          expect(client.config.endpoint).to eq('PREFIX.REGION.amazonaws.com')
-        end
-
-        it 'uses the endpoint defined in metadata if present' do
-          client_class.api.metadata['regional_endpoints'] = {
-            'region-name' => 'ENDPOINT'
-          }
-          client = client_class.new(region: 'region-name')
-          expect(client.config.endpoint).to eq('ENDPOINT')
+          expect(client.config.endpoint).to eq('https://PREFIX.REGION.amazonaws.com')
         end
 
       end

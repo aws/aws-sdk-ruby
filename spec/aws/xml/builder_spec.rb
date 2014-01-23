@@ -4,64 +4,51 @@ module Aws
   module Xml
     describe Builder do
 
-      let(:rules) {{
-        'type' => 'input',
-        'serialized_name' => 'xml',
-        'members' => {},
-      }}
+
+      let(:members) { {} }
+
+      let(:rules) {{ 'locationName' => 'xml', 'members' => members }}
 
       def xml(params)
-        shape = Seahorse::Model::Shapes::Shape.from_hash(rules)
-        Builder.to_xml(shape, params)
+        shape = Seahorse::Model::Shapes::Structure.new(rules)
+        Builder.new(shape).to_xml(params)
       end
 
       describe 'structures' do
 
-        it 'returns an empty string when there are no params' do
-          expect(xml({})).to eq('')
-        end
-
-        it 'omits members that are not present in the params' do
-          rules['members'] = {
-            'abc' => { 'type' => 'string' },
-            'mno' => { 'type' => 'string' },
-          }
-          expect(xml({})).to eq('')
-        end
-
         it 'includes members that are present in the params' do
           rules['members'] = {
-            'abc' => { 'type' => 'string' },
-            'mno' => { 'type' => 'string' },
+            'Abc' => { 'type' => 'string' },
+            'Mno' => { 'type' => 'string' },
           }
           expect(xml(:mno => 'value')).to eq(<<-XML)
 <xml>
-  <mno>value</mno>
+  <Mno>value</Mno>
 </xml>
           XML
         end
 
         it 'orders members by rule order, not param order' do
           rules['members'] = {
-            'mno' => { 'type' => 'string' },
-            'abc' => { 'type' => 'string' },
+            'Mno' => { 'type' => 'string' },
+            'Abc' => { 'type' => 'string' },
           }
           expect(xml(:abc => 'v2', :mno => 'v1')).to eq(<<-XML)
 <xml>
-  <mno>v1</mno>
-  <abc>v2</abc>
+  <Mno>v1</Mno>
+  <Abc>v2</Abc>
 </xml>
           XML
         end
 
         it 'serializes nested structures' do
           rules['members'] = {
-            'name' => { 'type' => 'string' },
-            'details' => {
+            'Name' => { 'type' => 'string' },
+            'Details' => {
               'type' => 'structure',
               'members' => {
-                'size' => { 'type' => 'string' },
-                'color' => { 'type' => 'string' },
+                'Size' => { 'type' => 'string' },
+                'Color' => { 'type' => 'string' },
               }
             },
           }
@@ -74,43 +61,45 @@ module Aws
           }
           expect(xml(params)).to eq(<<-XML)
 <xml>
-  <name>Name</name>
-  <details>
-    <size>large</size>
-    <color>red</color>
-  </details>
+  <Name>Name</Name>
+  <Details>
+    <Size>large</Size>
+    <Color>red</Color>
+  </Details>
 </xml>
           XML
         end
 
         it 'serializes empty structures as empty nodes' do
           rules['members'] = {
-            'name' => { 'type' => 'string' },
-            'details' => {
+            'Name' => { 'type' => 'string' },
+            'Details' => {
               'type' => 'structure',
-              'members' => { 'size' => { 'type' => 'string' } }
+              'members' => {
+                'Size' => { 'type' => 'string' }
+              }
             },
           }
           params = { name: 'Name', details: {} }
           expect(xml(params)).to eq(<<-XML)
 <xml>
-  <name>Name</name>
-  <details/>
+  <Name>Name</Name>
+  <Details/>
 </xml>
           XML
         end
 
         it 'applies xml attribute members to the structure' do
           rules['members'] = {
-            'config' => {
+            'Config' => {
               'type' => 'structure',
               'members' => {
-                'encoding' => {
+                'Encoding' => {
                   'type' => 'string',
-                  'metadata' => { 'xmlattribute' => true },
-                  'serialized_name' => 'encode',
+                  'xmlAttribute' => true,
+                  'locationName' => 'encode',
                 },
-                'description' => { 'type' => 'string' },
+                'Description' => { 'type' => 'string' },
               }
             }
           }
@@ -122,9 +111,9 @@ module Aws
           }
           expect(xml(params)).to eq(<<-XML)
 <xml>
-  <config encode="base64">
-    <description>optional</description>
-  </config>
+  <Config encode="base64">
+    <Description>optional</Description>
+  </Config>
 </xml>
           XML
         end
@@ -135,30 +124,30 @@ module Aws
 
         it 'serializes lists members as "member" by default' do
           rules['members'] = {
-            'items' => {
+            'Values' => {
               'type' => 'list',
-              'members' => { 'type' => 'string' }
+              'member' => { 'type' => 'string' }
             }
           }
-          expect(xml(items: %w(abc xyz))).to eq(<<-XML)
+          expect(xml(values: %w(abc xyz))).to eq(<<-XML)
 <xml>
-  <items>
+  <Values>
     <member>abc</member>
     <member>xyz</member>
-  </items>
+  </Values>
 </xml>
           XML
         end
 
         it 'applies xmlnames to the list wrapper and member entries' do
           rules['members'] = {
-            'items' => {
+            'Values' => {
               'type' => 'list',
-              'serialized_name' => 'ItemList',
-              'members' => { 'type' => 'string', 'serialized_name' => 'Item' }
+              'locationName' => 'ItemList',
+              'member' => { 'type' => 'string', 'locationName' => 'Item' }
             }
           }
-          expect(xml(items: %w(abc xyz))).to eq(<<-XML)
+          expect(xml(values: %w(abc xyz))).to eq(<<-XML)
 <xml>
   <ItemList>
     <Item>abc</Item>
@@ -170,26 +159,26 @@ module Aws
 
         it 'can serialize lists of complex types' do
           rules['members'] = {
-            'items' => {
+            'Values' => {
               'type' => 'list',
-              'members' => {
+              'member' => {
                 'type' => 'structure',
                 'members' => {
-                  'name' => { 'type' => 'string' }
+                  'Name' => { 'type' => 'string' }
                 }
               }
             }
           }
-          expect(xml(items: [{ name: 'abc' }, { name: 'mno' }])).to eq(<<-XML)
+          expect(xml(values: [{ name: 'abc' }, { name: 'mno' }])).to eq(<<-XML)
 <xml>
-  <items>
+  <Values>
     <member>
-      <name>abc</name>
+      <Name>abc</Name>
     </member>
     <member>
-      <name>mno</name>
+      <Name>mno</Name>
     </member>
-  </items>
+  </Values>
 </xml>
           XML
         end
@@ -200,29 +189,31 @@ module Aws
 
         it 'serializes lists without a wrapping element' do
           rules['members'] = {
-            'items' => {
-              'type' => 'flat_list',
-              'members' => { 'type' => 'string' }
+            'Values' => {
+              'type' => 'list',
+              'member' => { 'type' => 'string' },
+              'flattened' => true
             }
           }
-          expect(xml(items: %w(abc mno xyz))).to eq(<<-XML)
+          expect(xml(values: %w(abc mno xyz))).to eq(<<-XML)
 <xml>
-  <items>abc</items>
-  <items>mno</items>
-  <items>xyz</items>
+  <Values>abc</Values>
+  <Values>mno</Values>
+  <Values>xyz</Values>
 </xml>
           XML
         end
 
         it 'applies xmlnames to the list elements' do
           rules['members'] = {
-            'items' => {
-              'type' => 'flat_list',
-              'serialized_name' => 'item',
-              'members' => { 'type' => 'string' }
+            'Values' => {
+              'type' => 'list',
+              'locationName' => 'item',
+              'member' => { 'type' => 'string' },
+              'flattened' => true
             }
           }
-          expect(xml(items: %w(abc mno xyz))).to eq(<<-XML)
+          expect(xml(values: %w(abc mno xyz))).to eq(<<-XML)
 <xml>
   <item>abc</item>
   <item>mno</item>
@@ -233,24 +224,25 @@ module Aws
 
         it 'can serialize a list of complex types' do
           rules['members'] = {
-            'items' => {
-              'type' => 'flat_list',
-              'serialized_name' => 'item',
-              'members' => {
+            'Values' => {
+              'type' => 'list',
+              'locationName' => 'item',
+              'member' => {
                 'type' => 'structure',
                 'members' => {
-                  'name' => { 'type' => 'string' }
+                  'Name' => { 'type' => 'string' }
                 }
-              }
+              },
+              'flattened' => true
             }
           }
-          expect(xml(items: [{ name: 'abc' }, { name: 'mno' }])).to eq(<<-XML)
+          expect(xml(values: [{ name: 'abc' }, { name: 'mno' }])).to eq(<<-XML)
 <xml>
   <item>
-    <name>abc</name>
+    <Name>abc</Name>
   </item>
   <item>
-    <name>mno</name>
+    <Name>mno</Name>
   </item>
 </xml>
           XML
@@ -261,44 +253,44 @@ module Aws
       describe 'scalars' do
 
         it 'serializes integers to string' do
-          rules['members']['count'] = { 'type' => 'integer' }
+          rules['members']['Count'] = { 'type' => 'integer' }
           expect(xml(count: 123)).to eq(<<-XML)
 <xml>
-  <count>123</count>
+  <Count>123</Count>
 </xml>
           XML
         end
 
         it 'serializes floats to string' do
           value = double('value', :to_s => '123.123')
-          rules['members']['price'] = { 'type' => 'float' }
+          rules['members']['Price'] = { 'type' => 'float' }
           expect(xml(price: value)).to eq(<<-XML)
 <xml>
-  <price>#{value.to_s}</price>
+  <Price>#{value.to_s}</Price>
 </xml>
           XML
         end
 
         it 'serializes booleans as `true` and `false`' do
           rules['members'] = {
-            'abc' => { 'type' => 'boolean' },
-            'xyz' => { 'type' => 'boolean' }
+            'Abc' => { 'type' => 'boolean' },
+            'Xyz' => { 'type' => 'boolean' }
           }
           expect(xml(abc: true, xyz: false)).to eq(<<-XML)
 <xml>
-  <abc>true</abc>
-  <xyz>false</xyz>
+  <Abc>true</Abc>
+  <Xyz>false</Xyz>
 </xml>
           XML
         end
 
         it 'serialzies blobs as base64 encoded strings' do
           rules['members'] = {
-            'data' => { 'type' => 'blob' }
+            'Data' => { 'type' => 'blob' }
           }
           expect(xml(data: 'hello')).to eq(<<-XML)
 <xml>
-  <data>aGVsbG8=</data>
+  <Data>aGVsbG8=</Data>
 </xml>
           XML
         end
@@ -306,11 +298,14 @@ module Aws
         it 'serializes is8601 timestamp' do
           now = Time.now
           rules['members'] = {
-            'when' => { 'type' => 'iso8601_timestamp' }
+            'When' => {
+              'type' => 'timestamp',
+              'timestampFormat' => 'iso8601'
+            }
           }
           expect(xml(when: now)).to eq(<<-XML)
 <xml>
-  <when>#{now.utc.iso8601}</when>
+  <When>#{now.utc.iso8601}</When>
 </xml>
           XML
         end
@@ -318,22 +313,24 @@ module Aws
         it 'can serialize a timestamp as an rfc822 string' do
           now = Time.now
           rules['members'] = {
-            'when' => {
-              'type' => 'rfc822_timestamp'
+            'When' => {
+              'type' => 'timestamp',
+              'timestampFormat' => 'rfc822'
             }
           }
           expect(xml(when: now)).to eq(<<-XML)
 <xml>
-  <when>#{now.utc.rfc822}</when>
+  <When>#{now.utc.rfc822}</When>
 </xml>
           XML
         end
 
-        it 'raises an error when the timestamp format is not specified' do
+        it 'raises an error when the timestamp format is unknown' do
           now = Time.now
           rules['members'] = {
-            'when' => {
+            'When' => {
               'type' => 'timestamp',
+              'timestampFormat' => 'abc'
             }
           }
           expect { xml(when:now) }.to raise_error(/invalid timestamp/)
@@ -342,13 +339,14 @@ module Aws
         it 'can serialize a timestamp as an unixtimestamp string' do
           now = Time.now
           rules['members'] = {
-            'when' => {
-              'type' => 'unix_timestamp'
+            'When' => {
+              'type' => 'timestamp',
+              'timestampFormat' => 'unixTimestamp'
             }
           }
           expect(xml(when: now)).to eq(<<-XML)
 <xml>
-  <when>#{now.utc.to_i}</when>
+  <When>#{now.utc.to_i}</When>
 </xml>
           XML
         end
@@ -357,27 +355,37 @@ module Aws
 
       describe 'namespaces' do
 
-        it 'applies xml namespaces to any shape' do
-          ns = {
-            'xmlns_prefix' => 'prefix',
-            'xmlns_uri' => 'http://xmlns.com/uri'
-          }
+        it 'applies xml namespace to the root node' do
+          rules['locationName'] = 'FooRequest'
+          rules['xmlNamespace'] = 'http://foo.com'
           rules['members'] = {
-            'scalar' => {
+            'Item' => { 'type' => 'string' }
+          }
+          expect(xml(item:'value')).to eq(<<-XML)
+<FooRequest xmlns="http://foo.com">
+  <Item>value</Item>
+</FooRequest>
+          XML
+        end
+
+        it 'applies xml namespaces to any shape' do
+          ns = { 'xmlNamespace' => {
+            'prefix' => 'xsi',
+            'uri' => 'http://xmlns.com/uri'
+          }}
+          rules['members'] = {
+            'Scalar' => {
               'type' => 'string',
-              'metadata' => ns,
-            },
-            'struct' => {
+            }.merge(ns),
+            'Struct' => {
               'type' => 'structure',
-              'metadata' => ns,
               'members' => {
-                'list' => {
+                'List' => {
                   'type' => 'list',
-                  'metadata' => ns,
-                  'members' => { 'type' => 'string', 'serialized_name' => 'item' }
-                },
+                  'member' => { 'type' => 'string', 'locationName' => 'Item' }
+                }.merge(ns),
               }
-            }
+            }.merge(ns)
           }
           params = {
             scalar: 'value',
@@ -387,13 +395,13 @@ module Aws
           }
           expect(xml(params)).to eq(<<-XML)
 <xml>
-  <scalar xmlns:prefix="http://xmlns.com/uri">value</scalar>
-  <struct xmlns:prefix="http://xmlns.com/uri">
-    <list xmlns:prefix="http://xmlns.com/uri">
-      <item>a</item>
-      <item>b</item>
-    </list>
-  </struct>
+  <Scalar xmlns:xsi="http://xmlns.com/uri">value</Scalar>
+  <Struct xmlns:xsi="http://xmlns.com/uri">
+    <List xmlns:xsi="http://xmlns.com/uri">
+      <Item>a</Item>
+      <Item>b</Item>
+    </List>
+  </Struct>
 </xml>
           XML
         end

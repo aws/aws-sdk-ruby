@@ -16,9 +16,9 @@ module Seahorse
         class Handler < Client::Handler
 
           def call(context)
-            context.params = ParamConverter.convert(
-              context.operation.input,
-              context.params)
+            if input = context.operation.input
+              context.params = ParamConverter.convert(input, context.params)
+            end
             @handler.call(context)
           end
 

@@ -9,22 +9,24 @@ module Aws
       end
 
       before(:each) do
-        api = Seahorse::Model::Api.new
-        api.metadata['service_class_name'] = 'Svc'
-        api.version = '2013-01-01'
-        Aws.add_service(:Svc, [api])
+        # to silence warnings about Svc getting redefined each pass
+        Aws.send(:remove_const, :Svc) if Aws.const_defined?(:Svc)
+      end
+
+      before(:each) do
+        api = Seahorse::Model::Api.new('metadata' => {
+          'apiVersion' => '2013-01-01',
+          'protocol' => 'json',
+          'signatureVersion' => 'v4',
+        })
+        Aws.add_service(:Svc)
+        Aws::Svc.add_version(api.version, 'api' => api)
+        Aws::Svc.remove_plugin(RegionalEndpoint)
+        Aws::Svc.remove_plugin(Protocols::JsonRpc)
+        Aws::Svc.remove_plugin(SignatureV4)
         Aws::Svc.add_plugin(GlobalConfiguration)
         Aws::Svc.add_plugin(plugin { option(:property, 'plugin-default') })
         allow(Aws).to receive(:config).and_return({})
-      end
-
-      after(:each) do
-        # to silence warnings about Svc getting redefined each pass
-        Aws.send(:remove_const, :Svc)
-      end
-
-      it 'does not interfere with plugins and their defaults' do
-        expect(Aws.svc.config.property).to eq('plugin-default')
       end
 
       it 'gives priority to Aws.config over plugin defaults' do

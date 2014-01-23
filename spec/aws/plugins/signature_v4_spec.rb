@@ -7,9 +7,9 @@ module Aws
       let(:plugin) { SignatureV4.new }
 
       let(:api) {
-        api = Seahorse::Model::Api.new
-        api.metadata['endpoint_prefix'] = 'svc-name'
-        api
+        Seahorse::Model::Api.new(
+          'metadata' => { 'endpointPrefix' => 'svc-name' }
+        )
       }
 
       let(:config) {
@@ -33,9 +33,8 @@ module Aws
         end
 
         it 'prefers the signing_name metdata to endpoint_prefix' do
-          api.metadata['signing_name'] = 'signing-name'
           plugin.add_options(config)
-          expect(config.build!.sigv4_name).to eq('signing-name')
+          expect(config.build!.sigv4_name).to eq('svc-name')
         end
 
       end
