@@ -67,7 +67,13 @@ module AWS
       # @return [nil]
       def const_missing constant
         const_missing_mutex.synchronize do
-          const_set(constant, Class.new(Errors::Base) { extend LazyErrorClasses })
+          # It's possible the constant was defined by another thread while
+          # this thread was waiting on the mutex, check before setting.
+          if error_const_set?(constant)
+            const_get(constant)
+          else
+            const_set(constant, Class.new(Errors::Base) { extend LazyErrorClasses })
+          end
         end
       end
 
@@ -84,7 +90,19 @@ module AWS
         module_eval("#{self}::#{code.gsub('.Range','Range').gsub(".","::")}")
       end
 
-    end
+      private
 
+      # @return [Boolean] Returns true if the constant is defined in the
+      #   current module.
+      def error_const_set?(constant)
+        # Not using #const_defined? because in Ruby 1.9+, it returns true for
+        # constants not defined directly on the current module.
+        constant = constant.to_sym
+        # In Ruby 1.8, #constants returns an array of strings,
+        # in Ruby 1.9+, #constants returns an array of symbols.
+        constants.any? { |c| c.to_sym == constant }
+      end
+
+    end
   end
 end

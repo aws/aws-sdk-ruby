@@ -59,7 +59,18 @@ module AWS
 
       end
 
-    end
+      context '#const_missing' do
 
+        it 'will not redefine a constant that has already been set' do
+          error_class = mod::FooError
+          # Ruby 1.8 uses string constant names
+          error_class.should be(mod.const_missing('FooError'))
+          # Ruby 1.9+ uses symbolized constant names
+          error_class.should be(mod.const_missing(:FooError))
+        end
+
+      end
+
+    end
   end
 end
