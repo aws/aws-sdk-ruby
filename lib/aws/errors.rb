@@ -1,3 +1,5 @@
+require 'thread'
+
 module Aws
   module Errors
 
@@ -49,8 +51,12 @@ module Aws
     # @api private
     module DynamicErrors
 
+      def self.extended(submodule)
+        submodule.instance_variable_set("@const_set_mutex", Mutex.new)
+      end
+
       def const_missing(constant)
-        const_set(constant, Class.new(ServiceError))
+        set_error_constant(constant)
       end
 
       # Given the name of a service and an error code, this method
@@ -64,11 +70,30 @@ module Aws
         constant = error_code.to_s
         constant = constant.gsub(/http:\/\/.*$/, '') # remove http namespaces
         constant = constant.gsub(/[^a-zA-Z0-9]/, '').to_sym
-        if constants.include?(constant)
+        if error_const_set?(constant)
           const_get(constant)
         else
-          const_set(constant, Class.new(ServiceError))
+          set_error_constant(constant)
         end
+      end
+
+      private
+
+      def set_error_constant(constant)
+        @const_set_mutex.synchronize do
+          # Ensure the const was not defined while blocked by the mutex
+          if error_const_set?(constant)
+            const_get(constant)
+          else
+            const_set(constant , Class.new(ServiceError))
+          end
+        end
+      end
+
+      def error_const_set?(constant)
+        # Purposefully not using #const_defined? as that method returns true
+        # for constants not defined directly in the current module.
+        constants.include?(constant.to_sym)
       end
 
     end

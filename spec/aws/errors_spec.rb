@@ -22,6 +22,18 @@ module Aws
         expect(mod.error_class('ErrorClass:http://foo.com')).to be(mod::ErrorClass)
       end
 
+      it 'prevents #const_missing from re-setting the error constant' do
+        error_class = mod::FooError
+        expect(mod.const_missing(:FooError)).to be(error_class)
+        expect(mod.const_missing('FooError')).to be(error_class)
+      end
+
+      it 'prevents #const_missing from re-setting the error constant' do
+        error_class = mod::FooError
+        expect(mod.const_missing(:FooError)).to be(error_class)
+        expect(mod.const_missing('FooError')).to be(error_class)
+      end
+
     end
   end
 end
