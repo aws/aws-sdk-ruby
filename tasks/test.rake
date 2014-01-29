@@ -1,27 +1,15 @@
-def execute_cmd cmd
-  puts cmd if Rake.application.options.trace
-  system(cmd)
-  unless $?.to_i == 0
-    $stderr.puts "Command failed (#{$?}): #{cmd}"
-    exit($? >> 8)
-  end
-end
+require 'rspec/core/rake_task'
+require 'cucumber/rake/task'
 
 namespace :test do
 
   desc "Runs unit tests"
-  task :unit do
-    opts = ['bundle exec rspec']
-    opts += FileList[ENV['FILES'] || 'spec/**/*_spec.rb'].sort
-    execute_cmd(opts.join(' '))
+  RSpec::Core::RakeTask.new(:unit) do |t|
+    t.pattern = "spec"
   end
 
-  desc "Runs integration tests"
-  task :integration do
-    tags = []
-    tags << "--tags ~@pending"
-    tags << "--tags #{ENV['TAGS']}" if ENV['TAGS']
-    execute_cmd("bundle exec cucumber #{tags.join(' ')}".strip)
+  Cucumber::Rake::Task.new(:integration) do |t|
+    t.cucumber_opts = "features --tags ~@pending"
   end
 
 end
