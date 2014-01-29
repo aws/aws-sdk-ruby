@@ -35,6 +35,15 @@ module AWS
         end
       end
 
+      # Two STS operations are un-signed
+      alias do_sign_request sign_request
+      def sign_request(req)
+        action = req.params.find { |param| param.name == 'Action' }.value
+        unsigned = %w( AssumeRoleWithWebIdentity AssumeRoleWithSAML )
+        do_sign_request(req) unless unsigned.include?(action)
+        req
+      end
+
     end
 
     class Client::V20110615 < Client
