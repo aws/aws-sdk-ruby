@@ -1,5 +1,5 @@
 Before("@sdb") do
-  @sdb = Aws.sdb
+  @sdb = @client = Aws.sdb
 end
 
 After("@sdb") do

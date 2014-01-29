@@ -3,14 +3,12 @@
 Feature: AWS OpsWorks
 
   Scenario: Making a basic request
-    When I call "describe_stacks" on "opsworks"
-    Then the response "stacks" should be an array
+    When I call the "DescribeStacks" API
+    Then the response should contain a list of "Stacks"
 
   Scenario: Error handling
-    Given I call "describe_layers" on "opsworks" with:
-    """
-    { stack_id: 'fake_stack' }
-    """
+    When I attempt to call the "DescribeLayers" API with:
+    | StackId | fake_stack |
     Then I expect the response error code to be "ResourceNotFoundException"
     And I expect the response error message to include:
     """

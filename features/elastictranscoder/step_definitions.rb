@@ -1,5 +1,5 @@
 Before("@elastictranscoder") do
-  @elastictranscoder = Aws.elastictranscoder
+  @elastictranscoder = @client = Aws.elastictranscoder
 end
 
 After("@elastictranscoder") do

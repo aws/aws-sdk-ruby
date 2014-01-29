@@ -3,14 +3,12 @@
 Feature: Amazon SimpleDB
 
   Scenario: Making a basic request
-    When I call "list_domains" on "sdb"
-    Then the response "domain_names" should be an array
+    When I call the "ListDomains" API
+    Then the response should contain a list of "DomainNames"
 
   Scenario: Error handling
-    Given I call "domain_metadata" on "sdb" with:
-    """
-    { domain_name: 'fake-domain' }
-    """
+    When I attempt to call the "DomainMetadata" API with:
+    | DomainName | fake-domain |
     Then I expect the response error code to be "NoSuchDomain"
     And I expect the response error message to include:
     """

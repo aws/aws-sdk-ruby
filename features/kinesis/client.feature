@@ -3,14 +3,12 @@
 Feature: AWS Kinesis
 
   Scenario: Making a basic request
-    When I call "list_streams" on "kinesis"
-    Then the response "stream_names" should be an array
+    When I call the "ListStreams" API
+    Then the response should contain a list of "StreamNames"
 
   Scenario: Error handling
-    Given I call "describe_stream" on "kinesis" with:
-    """
-    { stream_name: 'bogus-stream-name' }
-    """
+    When I attempt to call the "DescribeStream" API with:
+    | StreamName | bogus-stream-name |
     Then I expect the response error code to be "ResourceNotFoundException"
     And I expect the response error message to include:
     """

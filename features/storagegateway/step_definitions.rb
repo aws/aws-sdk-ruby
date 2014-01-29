@@ -1,5 +1,5 @@
 Before("@storagegateway") do
-  @storagegateway = Aws.storagegateway
+  @storagegateway = @client = Aws.storagegateway
 end
 
 After("@storagegateway") do

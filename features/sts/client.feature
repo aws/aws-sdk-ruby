@@ -3,14 +3,13 @@
 Feature: AWS STS
 
   Scenario: Making a basic request
-    When I call "get_session_token" on "sts"
-    Then the response data should include "credentials"
+    When I call the "GetSessionToken" API
+    Then the response should contain a "Credentials" member
 
   Scenario: Error handling
-    Given I call "get_federation_token" on "sts" with:
-    """
-    { name: 'temp', policy: '' }
-    """
+    When I attempt to call the "GetFederationToken" API with:
+    | Name   | temp |
+    | Policy |      |
     Then I expect the response error code to be "ValidationError"
     And I expect the response error message to include:
     """

@@ -1,5 +1,5 @@
 Before("@iam") do
-  @iam = Aws.iam
+  @iam = @client = Aws.iam
 end
 
 After("@iam") do

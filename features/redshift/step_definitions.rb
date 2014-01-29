@@ -1,5 +1,5 @@
 Before("@redshift") do
-  @redshift = Aws.redshift
+  @redshift = @client = Aws.redshift
 end
 
 After("@redshift") do

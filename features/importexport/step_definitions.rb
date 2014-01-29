@@ -1,5 +1,5 @@
 Before("@importexport") do
-  @importexport = Aws.importexport
+  @importexport = @client = Aws.importexport
 end
 
 After("@importexport") do

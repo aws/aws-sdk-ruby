@@ -1,5 +1,5 @@
 Before("@ses") do
-  @ses = Aws.ses
+  @ses = @client = Aws.ses
 end
 
 After("@ses") do

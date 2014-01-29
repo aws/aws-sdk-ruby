@@ -1,5 +1,5 @@
 Before("@kinesis") do
-  @kinesis = Aws.kinesis
+  @kinesis = @client = Aws.kinesis
 end
 
 After("@kinesis") do

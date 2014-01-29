@@ -1,3 +1,21 @@
+Before("@s3") do
+  @s3 = @client = Aws.s3
+  @created_buckets = []
+end
+
+After("@s3") do
+  @created_buckets.each do |bucket|
+    loop do
+      objects = @s3.list_object_versions(bucket: bucket).data.versions.map do |v|
+        { key: v.key, version_id: v.version_id }
+      end
+      break if objects.empty?
+      @s3.delete_objects(bucket: bucket, delete: { objects: objects })
+    end
+    @s3.delete_bucket(bucket: bucket)
+  end
+end
+
 def create_bucket(options = {})
   @bucket_name = "aws-sdk-test-#{Time.now.to_i}-#{rand(1000)}"
   options[:bucket] = @bucket_name
@@ -48,8 +66,11 @@ end
 
 Then(/^the bucket should not exist$/) do
   eventually do
-    resp = @s3.get_bucket_location(bucket: @bucket_name)
-    expect(resp.error).to be_kind_of(Aws::S3::Errors::NoSuchBucket)
+    begin
+      @s3.get_bucket_location(bucket: @bucket_name)
+    rescue => @error
+    end
+    expect(@error).to be_kind_of(Aws::S3::Errors::NoSuchBucket)
   end
 end
 

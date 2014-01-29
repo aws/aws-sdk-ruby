@@ -1,49 +1,78 @@
-def call_request(service, operation_name, params = {})
-  service = instance_variable_get("@#{service}")
-  @response = service.build_request(operation_name, params).send_request
-  @error = @response.error
-  @response
-end
-
 def eventually(seconds = 15, &block)
-
-  # generate a list of times-to-sleep that add up to less than `seconds'
-  sleeps = [1]
-  while sleeps.inject(0) { |sum, i| sum + i } < seconds
-    sleeps << sleeps.last * 1.2
+  delays = [1]
+  while delays.inject(0) { |sum, i| sum + i } < seconds
+    delays << delays.last * 1.2
   end
-
   begin
     yield
-  rescue => error
-    unless sleeps.empty?
-      sleep(sleeps.shift)
+  rescue StandardError, RSpec::Expectations::ExpectationNotMetError => error
+    unless delays.empty?
+      sleep(delays.shift)
       retry
     end
     raise error # terminal case
   end
-
 end
 
-When(/^I call "(.*?)" on "(.*?)"$/) do |operation, service|
-  call_request(service, operation)
+def underscore(str)
+  Aws::Util.underscore(str)
 end
 
-When(/^I call "(.*?)" on "(.*?)" with:$/) do |operation, service, params|
-  call_request(service, operation, eval(params))
+def symbolized_params(table)
+  table.rows_hash.each_with_object({}) do |(key,value), hash|
+    hash[underscore(key).to_sym] = param_value(value)
+  end
 end
 
-Then(/^the response data should include "(.*?)"$/) do |member_name|
-  expect(@response.data.members).to include(member_name.to_sym)
+def raw_params(table)
+  table.rows_hash.each_with_object({}) do |(key,value), hash|
+    hash[key] = param_value(value)
+  end
 end
 
-Then(/^the response "(.*?)" should be an array$/) do |expression|
-  item = eval("@response.#{expression}")
-  expect(item).to be_an(Array)
+def param_value(value)
+  case value
+  when /^\d+$/ then value.to_i
+  when /^\[(.*)\]$/ then $1.split(',').map { |str| str[1..-2] }
+  else value
+  end
+end
+
+When(/^I call the "(.*?)" API$/) do |api|
+  @response = @client.send(underscore(api))
+end
+
+When(/^I (attempt to )?call the "(.*?)" API with:$/) do |_, api, params|
+  params = @raw_json ? raw_params(params) : symbolized_params(params)
+  begin
+    @response = @client.send(underscore(api), params)
+  rescue => @error
+  end
+end
+
+Then(/^the response should contain a (list of )?"(\w+?)"$/) do |_,member_name|
+  data = @response.data
+  data = data[underscore(member_name)]
+  expect(data).to be_an(Array)
+end
+
+Then(/^the response should contain a "(\w+?)" with a list of "(\w+?)"$/) do |member1, member2|
+  data = @response.data
+  data = data[underscore(member1)]
+  data = data[underscore(member2)]
+  expect(data).to be_an(Array)
+end
+
+Then(/^I expect the response error code to be "(.*?)"$/) do |error_code|
+  expect(@error.class.name.split('::').last).to eq(error_code)
+end
+
+Then(/^I expect the response error message to include:$/) do |error_message|
+  expect(@error.message).to include(error_message)
 end
 
 Then(/^the HTTP request body should be:$/) do |string|
-  expect(@response.http_request.body_contents).to eq(string)
+  expect(@response.context.http_request.body_contents).to eq(string)
 end
 
 Then(/^I expect response data to be a hash$/) do
@@ -54,10 +83,6 @@ Then(/^I expect response data\["(.*?)"\] to be an array$/) do |key|
   expect(@response.data[key]).to be_an(Array)
 end
 
-Then(/^I expect the response error code to be "(.*?)"$/) do |error_class|
-  expect(@error.class.name).to match(error_class)
-end
-
-Then(/^I expect the response error message to include:$/) do |message|
-  expect(@error.message).to include(message)
+Then(/^the response should contain a "(.*?)" member$/) do |member_name|
+  expect(@response.data[underscore(member_name)]).not_to be_nil
 end

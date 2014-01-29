@@ -3,14 +3,12 @@
 Feature: Amazon Route 53
 
   Scenario: Making a basic request
-    When I call "list_hosted_zones" on "route53"
-    Then the response "hosted_zones" should be an array
+    When I call the "ListHostedZones" API
+    Then the response should contain a list of "HostedZones"
 
   Scenario: Error handling
-    Given I call "get_hosted_zone" on "route53" with:
-    """
-    { id: 'fake-zone' }
-    """
+    When I attempt to call the "GetHostedZone" API with:
+    | Id | fake-zone |
     Then I expect the response error code to be "NoSuchHostedZone"
     And I expect the response error message to include:
     """

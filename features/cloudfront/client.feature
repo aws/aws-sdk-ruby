@@ -3,17 +3,13 @@
 Feature: Amazon CloudFront
 
   Scenario: Making a basic request
-    When I call "list_distributions" on "cloudfront" with:
-    """
-    { max_items: 1 }
-    """
-    Then the response "distribution_list.items" should be an array
+    When I call the "ListDistributions" API with:
+    | MaxItems | 1 |
+    Then the response should contain a "DistributionList" with a list of "Items"
 
   Scenario: Error handling
-    Given I call "get_distribution" on "cloudfront" with:
-    """
-    { id: '123' }
-    """
+    When I attempt to call the "GetDistribution" API with:
+    | Id | fake-id |
     Then I expect the response error code to be "NoSuchDistribution"
     And I expect the response error message to include:
     """

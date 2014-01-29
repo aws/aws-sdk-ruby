@@ -1,5 +1,5 @@
 Before("@cloudwatch") do
-  @cloudwatch = Aws.cloudwatch
+  @cloudwatch = @client = Aws.cloudwatch
 end
 
 After("@cloudwatch") do

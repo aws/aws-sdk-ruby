@@ -3,16 +3,14 @@
 Feature: AWS Direct Connect
 
   Scenario: Making a basic request
-    When I call "describe_offerings" on "directconnect"
-    Then the response "offerings" should be an array
+    When I call the "DescribeOfferings" API
+    Then the response should contain a list of "Offerings"
 
   Scenario: Error handling
-    Given I call "describe_offering_detail" on "directconnect" with:
-    """
-    { offering_id: 'fake_offering' }
-    """
+    When I attempt to call the "DescribeOfferingDetail" API with:
+    | OfferingId | fake-offering |
     Then I expect the response error code to be "DirectConnectClientException"
     And I expect the response error message to include:
     """
-    Offering not found: fake_offering
+    Offering not found: fake-offering
     """

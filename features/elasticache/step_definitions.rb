@@ -1,5 +1,5 @@
 Before("@elasticache") do
-  @elasticache = Aws.elasticache
+  @elasticache = @client = Aws.elasticache
 end
 
 After("@elasticache") do

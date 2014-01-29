@@ -1,5 +1,5 @@
 Before("@datapipeline") do
-  @datapipeline = Aws.datapipeline
+  @datapipeline = @client = Aws.datapipeline
 end
 
 After("@datapipeline") do

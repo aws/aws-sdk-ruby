@@ -3,14 +3,13 @@
 Feature: AWS CloudFormation
 
   Scenario: Making a basic request
-    When I call "list_stacks" on "cloudformation"
-    Then the response "stack_summaries" should be an array
+    When I call the "ListStacks" API
+    Then the response should contain a list of "StackSummaries"
 
   Scenario: Error handling
-    Given I call "create_stack" on "cloudformation" with:
-    """
-    { stack_name: "fakestack", template_url: "http://s3.amazonaws.com/foo/bar" }
-    """
+    When I attempt to call the "CreateStack" API with:
+    | StackName   | fakestack                       |
+    | TemplateURL | http://s3.amazonaws.com/foo/bar |
     Then I expect the response error code to be "ValidationError"
     And I expect the response error message to include:
     """

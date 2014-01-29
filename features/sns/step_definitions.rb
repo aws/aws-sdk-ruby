@@ -1,5 +1,5 @@
 Before("@sns") do
-  @sns = Aws.sns
+  @sns = @client = Aws.sns
 end
 
 After("@sns") do

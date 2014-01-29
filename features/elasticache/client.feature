@@ -3,14 +3,12 @@
 Feature: ElastiCache
 
   Scenario: Making a basic request
-    When I call "describe_events" on "elasticache"
-    Then the response "events" should be an array
+    When I call the "DescribeEvents" API
+    Then the response should contain a list of "Events"
 
   Scenario: Error handling
-    Given I call "describe_cache_clusters" on "elasticache" with:
-    """
-    { cache_cluster_id: 'fake_cluster' }
-    """
+    When I attempt to call the "DescribeCacheClusters" API with:
+    | CacheClusterId | fake_cluster |
     Then I expect the response error code to be "InvalidParameterValue"
     And I expect the response error message to include:
     """

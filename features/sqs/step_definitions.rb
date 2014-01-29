@@ -1,3 +1,14 @@
+Before("@sqs") do
+  @sqs = @client = Aws.sqs
+  @sqs_created_queues = []
+end
+
+After("@sqs") do
+  @sqs_created_queues.each do |url|
+    @sqs.delete_delete_queue(queue_url: url)
+  end
+end
+
 Given(/^I create a queue in "(.*?)"$/) do |region|
   name = "aws-sdk-core-integration-test-#{Time.now.to_i}-#{rand(1000)}"
   resp = Aws.sqs(region: region).create_queue(queue_name: name)

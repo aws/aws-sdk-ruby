@@ -1,5 +1,5 @@
 Before("@elasticbeanstalk") do
-  @elasticbeanstalk = Aws.elasticbeanstalk
+  @elasticbeanstalk = @client = Aws.elasticbeanstalk
 end
 
 After("@elasticbeanstalk") do

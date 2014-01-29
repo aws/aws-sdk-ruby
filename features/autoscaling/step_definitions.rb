@@ -1,5 +1,5 @@
 Before("@autoscaling") do
-  @autoscaling = Aws.autoscaling
+  @autoscaling = @client = Aws.autoscaling
 end
 
 After("@autoscaling") do

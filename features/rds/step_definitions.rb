@@ -1,5 +1,5 @@
 Before("@rds") do
-  @rds = Aws.rds
+  @rds = @client = Aws.rds
 end
 
 After("@rds") do

@@ -3,14 +3,12 @@
 Feature: Amazon CloudSearch
 
   Scenario: Making a basic request
-    When I call "describe_domains" on "cloudsearch"
-    Then the response "domain_status_list" should be an array
+    When I call the "DescribeDomains" API
+    Then the response should contain a "DomainStatusList"
 
   Scenario: Error handling
-    Given I call "describe_index_fields" on "cloudsearch" with:
-    """
-    { domain_name: "fakedomain" }
-    """
+    When I attempt to call the "DescribeIndexFields" API with:
+    | DomainName | fakedomain |
     Then I expect the response error code to be "ResourceNotFound"
     And I expect the response error message to include:
     """

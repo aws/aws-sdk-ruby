@@ -3,14 +3,12 @@
 Feature: Amazon RDS
 
   Scenario: Making a basic request
-    When I call "describe_db_engine_versions" on "rds"
-    Then the response "db_engine_versions" should be an array
+    When I call the "DescribeDbEngineVersions" API
+    Then the response should contain a list of "DbEngineVersions"
 
   Scenario: Error handling
-    Given I call "describe_db_instances" on "rds" with:
-    """
-    { db_instance_identifier: 'fake-id' }
-    """
+    When I attempt to call the "DescribeDbInstances" API with:
+    | DbInstanceIdentifier | fake-id |
     Then I expect the response error code to be "DBInstanceNotFound"
     And I expect the response error message to include:
     """

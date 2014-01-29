@@ -1,5 +1,5 @@
 Before("@cloudfront") do
-  @cloudfront = Aws.cloudfront
+  @cloudfront = @client = Aws.cloudfront
 end
 
 After("@cloudfront") do

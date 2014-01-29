@@ -1,8 +1,15 @@
+Before("@glacier") do
+  @glacier = @client = Aws.glacier
+end
+
+After("@glacier") do
+end
+
 def upload_glacier_archive(contents)
-  resp = call_request('glacier', 'upload_archive', {
+  resp = @glacier.upload_archive(
     vault_name: @vault_name,
-    body: contents,
-  })
+    body: contents
+  )
   @archive_id = resp.data.archive_id if resp.data
 end
 
@@ -17,8 +24,21 @@ def bytes(megabytes)
   megabytes.to_f * 1024 * 1024
 end
 
+Given(/^I have a vault ready to receive uploads$/) do
+  # ensure we have a suitable vault for testing with
+  @vault_name = 'aws-sdk-core-integration-test-vault'
+  begin
+    @glacier.describe_vault(vault_name: @vault_name, account_id: '-')
+  rescue Aws::Glacier::Errors::ResourceNotFoundException
+    @glacier.create_vault(vault_name: @vault_name, account_id: '-')
+  end
+end
+
 When(/^I upload an archive with the contents "(.*?)"$/) do |contents|
-  upload_glacier_archive(contents)
+  begin
+    upload_glacier_archive(contents)
+  rescue => @error
+  end
 end
 
 When(/^I upload an archive from a ([0-9\.]+)MB large file$/) do |size_in_mb|
@@ -69,8 +89,5 @@ When(/^I multipart\-upload a ([0-9\.]+)MB file in ([0-9\.]+) byte chunks$/) do |
 end
 
 Then(/^I should be able to delete the archive$/) do
-  call_request('glacier', 'delete_archive', {
-    vault_name: @vault_name,
-    archive_id: @archive_id,
-  })
+  @glacier.delete_archive(vault_name: @vault_name, archive_id: @archive_id)
 end
