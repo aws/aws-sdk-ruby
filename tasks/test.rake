@@ -9,7 +9,7 @@ namespace :test do
   end
 
   Cucumber::Rake::Task.new(:integration) do |t|
-    t.cucumber_opts = "features --tags ~@pending"
+    t.cucumber_opts = "features"
   end
 
 end

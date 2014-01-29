@@ -3,14 +3,12 @@
 Feature: Elastic Load Balancing
 
   Scenario: Making a basic request
-    When I call "describe_load_balancers" on "elasticloadbalancing"
-    Then the response "load_balancer_descriptions" should be an array
+    When I call the "DescribeLoadBalancers" API
+    Then the response should contain a list of "LoadBalancerDescriptions"
 
   Scenario: Error handling
-    Given I call "describe_load_balancers" on "elasticloadbalancing" with:
-    """
-    { load_balancer_names: ['fake_load_balancer'] }
-    """
+    When I attempt to call the "DescribeLoadBalancers" API with:
+    | LoadBalancerNames | ['fake_load_balancer'] |
     Then I expect the response error code to be "ValidationError"
     And I expect the response error message to include:
     """
