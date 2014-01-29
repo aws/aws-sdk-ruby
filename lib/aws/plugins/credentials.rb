@@ -3,13 +3,16 @@ module Aws
 
     # @seahorse.client.option [String] :access_key_id Your AWS account
     #   access key ID.  Defaults to `ENV['AWS_ACCESS_KEY']`.
+    #   Also checks `AWS_ACCESS_KEY_ID` and `AMAZON_ACCESS_KEY_ID`.
     #
     # @seahorse.client.option [String] :secret_access_key Your AWS account
     #   secret access key.  Defaults to `ENV['AWS_SECRET_KEY']`.
+    #   Also checks `AWS_SECRET_ACCESS_KEY` and `AMAZON_SECRET_ACCESS_KEY`.
     #
     # @seahorse.client.option [String] :session_token If your credentials
     #   are temporary session credentials, this should be the
     #   session token.  Defaults to `ENV['AWS_SESSION_TOKEN']`.
+    #   Also checks `AMAZON_SESSION_TOKEN`.
     #
     # @seahorse.client.option [Credentials] :credentials
     #   Your AWS account credentials.  Defaults to a new {Credentials} object
