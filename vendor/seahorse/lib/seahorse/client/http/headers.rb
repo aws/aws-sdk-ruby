@@ -1,6 +1,26 @@
 module Seahorse
   module Client
     module Http
+
+      # Provides a Hash-like interface for HTTP headers.  Header names
+      # are treated indifferently as lower-cased strings.  Header values
+      # are cast to strings.
+      #
+      #     headers = Http::Headers.new
+      #     headers['Content-Length'] = 100
+      #     headers[:Authorization] = 'Abc'
+      #
+      #     headers.keys
+      #     #=> ['content-length', 'authorization']]
+      #
+      #     headers.values
+      #     #=> ['100', 'Abc']
+      #
+      # You can get the header values as a vanilla hash by calling {#to_h}:
+      #
+      #     headers.to_h
+      #     #=> { 'content-length' => '100', 'authorization' => 'Abc' }
+      #
       class Headers
 
         include Enumerable
