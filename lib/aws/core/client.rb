@@ -186,6 +186,12 @@ module AWS
         "#<#{self.class.name}>"
       end
 
+      # @api private
+      def to_yaml_properties
+        skip = %w(@config @credential_provider @http_handler)
+        instance_variables.map(&:to_s) - skip
+      end
+
       protected
 
       # @api private

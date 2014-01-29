@@ -52,6 +52,11 @@ module AWS
         "<#{self.class}>"
       end
 
+      # @api private
+      def to_yaml_properties
+        instance_variables.map(&:to_s) - %w(@config)
+      end
+
     end
   end
 end
