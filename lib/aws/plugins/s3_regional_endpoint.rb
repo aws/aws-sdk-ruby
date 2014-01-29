@@ -3,8 +3,6 @@ module Aws
   module Plugins
     class S3RegionalEndpoint < RegionalEndpoint
 
-      option(:region) { ENV['AWS_REGION'] || ENV['AMAZON_REGION'] }
-
       option(:endpoint) do |config|
         raise ArgumentError, MISSING_REGION unless config.region
         if config.region == 'us-east-1'

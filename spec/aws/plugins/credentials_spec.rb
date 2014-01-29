@@ -26,6 +26,18 @@ module Aws
           expect(config.build!.credentials).to be(nil)
         end
 
+        it 'hydrates credentials from the cmdline env (AWS_)' do
+          env['AWS_ACCESS_KEY'] = 'akid'
+          env['AWS_SECRET_KEY'] = 'secret'
+          env['AWS_SESSION_TOKEN'] = 'token'
+          plugin.add_options(config)
+          cfg = config.build!
+          expect(cfg.credentials.set?).to be(true)
+          expect(cfg.credentials.access_key_id).to eq('akid')
+          expect(cfg.credentials.secret_access_key).to eq('secret')
+          expect(cfg.credentials.session_token).to eq('token')
+        end
+
         it 'hydrates credentials from the env (AWS_)' do
           env['AWS_ACCESS_KEY_ID'] = 'akid'
           env['AWS_SECRET_ACCESS_KEY'] = 'secret'
