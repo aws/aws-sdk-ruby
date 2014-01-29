@@ -1,9 +1,9 @@
 module Aws
   module Plugins
 
-    # @seahorse.client.option [String] :region The AWS region to connect
-    #   to.  The region is used to construct the client endpoint.  Defaults
-    #   to `ENV['AWS_DEFAULT_REGION']` (or `ENV['AWS_REGION']`).
+    # @seahorse.client.option [String] :region (ENV['AWS_REGION'])
+    #   The AWS region to connect to.  The region is used to construct
+    #   the client endpoint.
     #
     # @seahorse.client.option [String] :endpoint
     #   The HTTP endpoint for this client. Normally you should not need
@@ -17,8 +17,10 @@ module Aws
       # raised when region is not configured
       MISSING_REGION = 'missing required configuration option :region'
 
-      option(:region) { ENV['AWS_DEFAULT_REGION'] || ENV['AWS_REGION'] ||
-        ENV['AMAZON_REGION'] }
+      option(:region) {
+        keys = %w(AWS_DEFAULT_REGION AWS_REGION AMAZON_REGION)
+        ENV.values_at(*keys).compact.first
+      }
 
       option(:endpoint) do |cfg|
         endpoints = cfg.api.metadata['regional_endpoints']
