@@ -20,12 +20,17 @@ module Aws
 
     def serialize_params(context)
       input = context.operation.input
+      rules = input.payload_member
       if input.payload
-        rules = input.payload_member
         params = context.params[input.payload] || {}
       else
-        rules = input
-        params = context.params
+        params = {}
+        rules.members.keys.each do |param_name|
+          param_name = param_name.to_sym
+          if context.params.include?(param_name)
+            params[param_name] = context.params[param_name]
+          end
+        end
       end
       @serializer.serialize_params(context, rules, params)
     end
