@@ -4055,7 +4055,7 @@
               - :rename: groups
               DeleteOnTermination:
               - :boolean
-              PrivateIpAddressesSet:
+              PrivateIpAddresses:
               - :list:
                 - :structure:
                     PrivateIpAddress:
