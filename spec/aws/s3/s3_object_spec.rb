@@ -892,6 +892,16 @@ module AWS
           object.url_for(:read, :version_id => 'version-id-string')
         end
 
+        it 'raises an ArgumentError if attempting to presign using v4 more than 1 week out' do
+          in_eight_days = Time.now + (8 * 60 * 60 * 24)
+          lambda {
+            object.url_for(:read, :expires => in_eight_days)
+          }.should_not raise_error
+          lambda {
+            object.url_for(:read, :expires => in_eight_days, :signature_version => :v4)
+          }.should raise_error(ArgumentError, /one week/)
+        end
+
         context 'federated sessions' do
 
           let(:credential_provider) {

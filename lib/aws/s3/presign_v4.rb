@@ -41,6 +41,12 @@ module AWS
 
         now = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
 
+        one_week = 60 * 60 * 24 * 7
+        if options[:expires] - now.to_i > one_week
+          msg = "presigned URLs using sigv4 may not expire more than one week out"
+          raise ArgumentError, msg
+        end
+
         request = build_request(method, options)
 
         request.headers.clear
