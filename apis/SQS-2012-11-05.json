@@ -215,7 +215,8 @@
                 "QueueArn",
                 "ApproximateNumberOfMessagesDelayed",
                 "DelaySeconds",
-                "ReceiveMessageWaitTimeSeconds"
+                "ReceiveMessageWaitTimeSeconds",
+                "RedrivePolicy"
               ]
             },
             "members": {
@@ -387,7 +388,8 @@
                 "QueueArn",
                 "ApproximateNumberOfMessagesDelayed",
                 "DelaySeconds",
-                "ReceiveMessageWaitTimeSeconds"
+                "ReceiveMessageWaitTimeSeconds",
+                "RedrivePolicy"
               ]
             }
           }
@@ -417,7 +419,8 @@
                 "QueueArn",
                 "ApproximateNumberOfMessagesDelayed",
                 "DelaySeconds",
-                "ReceiveMessageWaitTimeSeconds"
+                "ReceiveMessageWaitTimeSeconds",
+                "RedrivePolicy"
               ]
             },
             "members": {
@@ -455,6 +458,37 @@
           "queue_url": {
             "type": "string",
             "serialized_name": "QueueUrl"
+          }
+        }
+      }
+    },
+    "list_dead_letter_source_queues": {
+      "name": "ListDeadLetterSourceQueues",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "queue_url": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "QueueUrl"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListDeadLetterSourceQueuesResult"
+        },
+        "members": {
+          "queue_urls": {
+            "type": "flat_list",
+            "serialized_name": "queueUrls",
+            "members": {
+              "type": "string",
+              "serialized_name": "QueueUrl"
+            }
           }
         }
       }
@@ -519,7 +553,8 @@
                 "QueueArn",
                 "ApproximateNumberOfMessagesDelayed",
                 "DelaySeconds",
-                "ReceiveMessageWaitTimeSeconds"
+                "ReceiveMessageWaitTimeSeconds",
+                "RedrivePolicy"
               ]
             }
           },
@@ -584,7 +619,8 @@
                       "QueueArn",
                       "ApproximateNumberOfMessagesDelayed",
                       "DelaySeconds",
-                      "ReceiveMessageWaitTimeSeconds"
+                      "ReceiveMessageWaitTimeSeconds",
+                      "RedrivePolicy"
                     ]
                   },
                   "members": {
@@ -785,7 +821,8 @@
                 "QueueArn",
                 "ApproximateNumberOfMessagesDelayed",
                 "DelaySeconds",
-                "ReceiveMessageWaitTimeSeconds"
+                "ReceiveMessageWaitTimeSeconds",
+                "RedrivePolicy"
               ]
             },
             "members": {

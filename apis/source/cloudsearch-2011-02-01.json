@@ -5,8 +5,8 @@
   "signature_version": "v4",
   "service_full_name": "Amazon CloudSearch",
   "endpoint_prefix": "cloudsearch",
-  "xmlnamespace": "http://cloudsearch.amazonaws.com/doc/2011-02-01",
-  "documentation": "\n    <fullname>Amazon CloudSearch Configuration Service</fullname>\n    <p>You use the Configuration Service to create, configure, and manage search domains. \n      Amazon CloudSearch configuration requests are submitted to <code>cloudsearch.us-east-1.amazonaws.com</code>\n      using the AWS Query protocol. </p>\n  ",
+  "xmlnamespace": "http://cloudsearch.amazonaws.com/doc/2011-02-01/",
+  "documentation": "\n    <fullname>Amazon CloudSearch Configuration Service</fullname>\n    <p>You use the configuration service to create, configure, and manage search domains. \n       Configuration service  requests are submitted using the AWS Query protocol. AWS Query requests\n       are HTTP or HTTPS requests submitted via HTTP GET or POST with a query parameter named Action.</p>\n    <p>The endpoint for configuration service requests is region-specific: cloudsearch.<i>region</i>.amazonaws.com.\n       For example, cloudsearch.us-east-1.amazonaws.com. For a current list of supported regions and endpoints,\n       see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region\">Regions and Endpoints</a>.</p>\n  ",
   "operations": {
     "CreateDomain": {
       "name": "CreateDomain",
@@ -62,7 +62,7 @@
                 "documentation": "\n  <p>True if the search domain has been deleted.  The system must clean up resources dedicated to the search domain when <a>DeleteDomain</a> is called.  Newly deleted search domains are returned from <a>DescribeDomains</a> with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>\n  "
               },
               "NumSearchableDocs": {
-                "shape_name": "UIntValue",
+                "shape_name": "DocumentCount",
                 "type": "integer",
                 "min_length": 0,
                 "documentation": "\n    <p>The number of documents that have been submitted to the domain and indexed.</p>\n  "
@@ -74,7 +74,7 @@
                   "Arn": {
                     "shape_name": "Arn",
                     "type": "string",
-                    "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
+                    "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
                   },
                   "Endpoint": {
                     "shape_name": "ServiceUrl",
@@ -91,7 +91,7 @@
                   "Arn": {
                     "shape_name": "Arn",
                     "type": "string",
-                    "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
+                    "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
                   },
                   "Endpoint": {
                     "shape_name": "ServiceUrl",
@@ -152,13 +152,6 @@
             }
           },
           "documentation": "\n    <p>An error occurred while processing the request.</p>\n  "
-        },
-        {
-          "shape_name": "InternalException",
-          "type": "structure",
-          "members": {
-          },
-          "documentation": "\n    <p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>\n  "
         },
         {
           "shape_name": "InternalException",
@@ -977,7 +970,7 @@
                 "documentation": "\n  <p>True if the search domain has been deleted.  The system must clean up resources dedicated to the search domain when <a>DeleteDomain</a> is called.  Newly deleted search domains are returned from <a>DescribeDomains</a> with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>\n  "
               },
               "NumSearchableDocs": {
-                "shape_name": "UIntValue",
+                "shape_name": "DocumentCount",
                 "type": "integer",
                 "min_length": 0,
                 "documentation": "\n    <p>The number of documents that have been submitted to the domain and indexed.</p>\n  "
@@ -989,7 +982,7 @@
                   "Arn": {
                     "shape_name": "Arn",
                     "type": "string",
-                    "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
+                    "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
                   },
                   "Endpoint": {
                     "shape_name": "ServiceUrl",
@@ -1006,7 +999,7 @@
                   "Arn": {
                     "shape_name": "Arn",
                     "type": "string",
-                    "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
+                    "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
                   },
                   "Endpoint": {
                     "shape_name": "ServiceUrl",
@@ -1759,7 +1752,7 @@
                   "documentation": "\n  <p>True if the search domain has been deleted.  The system must clean up resources dedicated to the search domain when <a>DeleteDomain</a> is called.  Newly deleted search domains are returned from <a>DescribeDomains</a> with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>\n  "
                 },
                 "NumSearchableDocs": {
-                  "shape_name": "UIntValue",
+                  "shape_name": "DocumentCount",
                   "type": "integer",
                   "min_length": 0,
                   "documentation": "\n    <p>The number of documents that have been submitted to the domain and indexed.</p>\n  "
@@ -1771,7 +1764,7 @@
                     "Arn": {
                       "shape_name": "Arn",
                       "type": "string",
-                      "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
+                      "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
                     },
                     "Endpoint": {
                       "shape_name": "ServiceUrl",
@@ -1788,7 +1781,7 @@
                     "Arn": {
                       "shape_name": "Arn",
                       "type": "string",
-                      "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
+                      "documentation": "\n  <p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>\n  "
                     },
                     "Endpoint": {
                       "shape_name": "ServiceUrl",
@@ -2397,7 +2390,7 @@
               "Options": {
                 "shape_name": "PolicyDocument",
                 "type": "string",
-                "documentation": "\n  <p>An IAM access policy as described in <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p>\n  <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:search/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }},\n               {\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:documents/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }}\n              ]\n}</code></p>\n  ",
+                "documentation": "\n  <p>An IAM access policy as described in <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p>\n  <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:search/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { \"aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }},\n               {\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:documents/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { \"aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }}\n              ]\n}</code></p>\n  ",
                 "required": true
               },
               "Status": {
@@ -2923,7 +2916,7 @@
           "DefaultSearchField": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n    <p>The <code>IndexField</code> to use for search requests issued with the <code>q</code> parameter. The default is an empty string, which automatically searches all text fields.</p>\n  ",
+            "documentation": "\n    <p>The text field to search if the search request does not specify which field to search. The default search field is used when search terms are specified with the <code>q</code> parameter, or if a match expression specified with the <code>bq</code> parameter does not contstrain the search to a particular field. The default is an empty string, which automatically searches all text fields.</p>\n  ",
             "required": true
           }
         },
@@ -3035,7 +3028,7 @@
           "documentation": "\n  <p>The request was rejected because it attempted to reference a resource that does not exist.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Configures the default search field for the search domain. The default search field is used when a search request does not specify which fields to search. By default, it is configured to include the contents of all of the domain's text fields.</p>\n  "
+      "documentation": "\n    <p>Configures the default search field for the search domain. The default search field is the text field that is searched when a search request does not specify which fields to search. By default, it is configured to include the contents of all of the domain's text fields. </p>\n  "
     },
     "UpdateServiceAccessPolicies": {
       "name": "UpdateServiceAccessPolicies",
@@ -3055,7 +3048,7 @@
           "AccessPolicies": {
             "shape_name": "PolicyDocument",
             "type": "string",
-            "documentation": "\n  <p>An IAM access policy as described in <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p>\n  <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:search/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }},\n               {\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:documents/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }}\n              ]\n}</code></p>\n  ",
+            "documentation": "\n  <p>An IAM access policy as described in <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p>\n  <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:search/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { \"aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }},\n               {\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:documents/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { \"aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }}\n              ]\n}</code></p>\n  ",
             "required": true
           }
         },
@@ -3072,7 +3065,7 @@
               "Options": {
                 "shape_name": "PolicyDocument",
                 "type": "string",
-                "documentation": "\n  <p>An IAM access policy as described in <a href=\"http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p>\n  <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:search/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }},\n               {\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:documents/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }}\n              ]\n}</code></p>\n  ",
+                "documentation": "\n  <p>An IAM access policy as described in <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p>\n  <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:search/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { \"aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }},\n               {\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:documents/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { \"aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }}\n              ]\n}</code></p>\n  ",
                 "required": true
               },
               "Status": {

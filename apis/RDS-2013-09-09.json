@@ -1,5 +1,5 @@
 {
-  "version": "2013-02-12",
+  "version": "2013-09-09",
   "metadata": {
     "endpoint_prefix": "rds",
     "regional_endpoints": {
@@ -271,6 +271,24 @@
             "type": "string",
             "required": true,
             "serialized_name": "TargetDBSnapshotIdentifier"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -350,6 +368,14 @@
               "option_group_name": {
                 "type": "string",
                 "serialized_name": "OptionGroupName"
+              },
+              "percent_progress": {
+                "type": "integer",
+                "serialized_name": "PercentProgress"
+              },
+              "source_region": {
+                "type": "string",
+                "serialized_name": "SourceRegion"
               }
             }
           }
@@ -472,6 +498,24 @@
           "publicly_accessible": {
             "type": "boolean",
             "serialized_name": "PubliclyAccessible"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -771,6 +815,32 @@
               "publicly_accessible": {
                 "type": "boolean",
                 "serialized_name": "PubliclyAccessible"
+              },
+              "status_infos": {
+                "type": "list",
+                "serialized_name": "StatusInfos",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "DBInstanceStatusInfo",
+                  "members": {
+                    "status_type": {
+                      "type": "string",
+                      "serialized_name": "StatusType"
+                    },
+                    "normal": {
+                      "type": "boolean",
+                      "serialized_name": "Normal"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "message": {
+                      "type": "string",
+                      "serialized_name": "Message"
+                    }
+                  }
+                }
               }
             }
           }
@@ -821,6 +891,24 @@
           "publicly_accessible": {
             "type": "boolean",
             "serialized_name": "PubliclyAccessible"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1120,6 +1208,32 @@
               "publicly_accessible": {
                 "type": "boolean",
                 "serialized_name": "PubliclyAccessible"
+              },
+              "status_infos": {
+                "type": "list",
+                "serialized_name": "StatusInfos",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "DBInstanceStatusInfo",
+                  "members": {
+                    "status_type": {
+                      "type": "string",
+                      "serialized_name": "StatusType"
+                    },
+                    "normal": {
+                      "type": "boolean",
+                      "serialized_name": "Normal"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "message": {
+                      "type": "string",
+                      "serialized_name": "Message"
+                    }
+                  }
+                }
               }
             }
           }
@@ -1147,6 +1261,24 @@
             "type": "string",
             "required": true,
             "serialized_name": "Description"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1196,6 +1328,24 @@
             "type": "string",
             "required": true,
             "serialized_name": "DBSecurityGroupDescription"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1293,6 +1443,24 @@
             "type": "string",
             "required": true,
             "serialized_name": "DBInstanceIdentifier"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1372,6 +1540,14 @@
               "option_group_name": {
                 "type": "string",
                 "serialized_name": "OptionGroupName"
+              },
+              "percent_progress": {
+                "type": "integer",
+                "serialized_name": "PercentProgress"
+              },
+              "source_region": {
+                "type": "string",
+                "serialized_name": "SourceRegion"
               }
             }
           }
@@ -1402,6 +1578,24 @@
             "members": {
               "type": "string",
               "serialized_name": "SubnetIdentifier"
+            }
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
             }
           }
         }
@@ -1515,6 +1709,24 @@
           "enabled": {
             "type": "boolean",
             "serialized_name": "Enabled"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1606,6 +1818,24 @@
             "type": "string",
             "required": true,
             "serialized_name": "OptionGroupDescription"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -1656,6 +1886,10 @@
                     "persistent": {
                       "type": "boolean",
                       "serialized_name": "Persistent"
+                    },
+                    "permanent": {
+                      "type": "boolean",
+                      "serialized_name": "Permanent"
                     },
                     "port": {
                       "type": "integer",
@@ -2077,6 +2311,32 @@
               "publicly_accessible": {
                 "type": "boolean",
                 "serialized_name": "PubliclyAccessible"
+              },
+              "status_infos": {
+                "type": "list",
+                "serialized_name": "StatusInfos",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "DBInstanceStatusInfo",
+                  "members": {
+                    "status_type": {
+                      "type": "string",
+                      "serialized_name": "StatusType"
+                    },
+                    "normal": {
+                      "type": "boolean",
+                      "serialized_name": "Normal"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "message": {
+                      "type": "string",
+                      "serialized_name": "Message"
+                    }
+                  }
+                }
               }
             }
           }
@@ -2203,6 +2463,14 @@
               "option_group_name": {
                 "type": "string",
                 "serialized_name": "OptionGroupName"
+              },
+              "percent_progress": {
+                "type": "integer",
+                "serialized_name": "PercentProgress"
+              },
+              "source_region": {
+                "type": "string",
+                "serialized_name": "SourceRegion"
               }
             }
           }
@@ -2451,6 +2719,30 @@
           "db_instance_identifier": {
             "type": "string",
             "serialized_name": "DBInstanceIdentifier"
+          },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
           },
           "max_records": {
             "type": "integer",
@@ -2765,6 +3057,32 @@
                 "publicly_accessible": {
                   "type": "boolean",
                   "serialized_name": "PubliclyAccessible"
+                },
+                "status_infos": {
+                  "type": "list",
+                  "serialized_name": "StatusInfos",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "DBInstanceStatusInfo",
+                    "members": {
+                      "status_type": {
+                        "type": "string",
+                        "serialized_name": "StatusType"
+                      },
+                      "normal": {
+                        "type": "boolean",
+                        "serialized_name": "Normal"
+                      },
+                      "status": {
+                        "type": "string",
+                        "serialized_name": "Status"
+                      },
+                      "message": {
+                        "type": "string",
+                        "serialized_name": "Message"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2865,6 +3183,30 @@
           "db_parameter_group_name": {
             "type": "string",
             "serialized_name": "DBParameterGroupName"
+          },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
           },
           "max_records": {
             "type": "integer",
@@ -3032,6 +3374,30 @@
             "type": "string",
             "serialized_name": "DBSecurityGroupName"
           },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
+          },
           "max_records": {
             "type": "integer",
             "serialized_name": "MaxRecords"
@@ -3154,6 +3520,30 @@
             "type": "string",
             "serialized_name": "SnapshotType"
           },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
+          },
           "max_records": {
             "type": "integer",
             "serialized_name": "MaxRecords"
@@ -3247,6 +3637,14 @@
                 "option_group_name": {
                   "type": "string",
                   "serialized_name": "OptionGroupName"
+                },
+                "percent_progress": {
+                  "type": "integer",
+                  "serialized_name": "PercentProgress"
+                },
+                "source_region": {
+                  "type": "string",
+                  "serialized_name": "SourceRegion"
                 }
               }
             }
@@ -3271,6 +3669,30 @@
           "db_subnet_group_name": {
             "type": "string",
             "serialized_name": "DBSubnetGroupName"
+          },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
           },
           "max_records": {
             "type": "integer",
@@ -3532,6 +3954,30 @@
           "subscription_name": {
             "type": "string",
             "serialized_name": "SubscriptionName"
+          },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
           },
           "max_records": {
             "type": "integer",
@@ -3810,6 +4256,10 @@
                   "type": "boolean",
                   "serialized_name": "Persistent"
                 },
+                "permanent": {
+                  "type": "boolean",
+                  "serialized_name": "Permanent"
+                },
                 "option_group_option_settings": {
                   "type": "list",
                   "serialized_name": "OptionGroupOptionSettings",
@@ -3871,6 +4321,30 @@
           "option_group_name": {
             "type": "string",
             "serialized_name": "OptionGroupName"
+          },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
           },
           "marker": {
             "type": "string",
@@ -3940,6 +4414,10 @@
                       "persistent": {
                         "type": "boolean",
                         "serialized_name": "Persistent"
+                      },
+                      "permanent": {
+                        "type": "boolean",
+                        "serialized_name": "Permanent"
                       },
                       "port": {
                         "type": "integer",
@@ -4209,6 +4687,30 @@
           "multi_az": {
             "type": "boolean",
             "serialized_name": "MultiAZ"
+          },
+          "filters": {
+            "type": "list",
+            "serialized_name": "Filters",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Filter",
+              "members": {
+                "filter_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "FilterName"
+                },
+                "filter_value": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "FilterValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "Value"
+                  }
+                }
+              }
+            }
           },
           "max_records": {
             "type": "integer",
@@ -4933,6 +5435,32 @@
               "publicly_accessible": {
                 "type": "boolean",
                 "serialized_name": "PubliclyAccessible"
+              },
+              "status_infos": {
+                "type": "list",
+                "serialized_name": "StatusInfos",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "DBInstanceStatusInfo",
+                  "members": {
+                    "status_type": {
+                      "type": "string",
+                      "serialized_name": "StatusType"
+                    },
+                    "normal": {
+                      "type": "boolean",
+                      "serialized_name": "Normal"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "message": {
+                      "type": "string",
+                      "serialized_name": "Message"
+                    }
+                  }
+                }
               }
             }
           }
@@ -5367,6 +5895,10 @@
                       "type": "boolean",
                       "serialized_name": "Persistent"
                     },
+                    "permanent": {
+                      "type": "boolean",
+                      "serialized_name": "Permanent"
+                    },
                     "port": {
                       "type": "integer",
                       "serialized_name": "Port"
@@ -5787,6 +6319,32 @@
               "publicly_accessible": {
                 "type": "boolean",
                 "serialized_name": "PubliclyAccessible"
+              },
+              "status_infos": {
+                "type": "list",
+                "serialized_name": "StatusInfos",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "DBInstanceStatusInfo",
+                  "members": {
+                    "status_type": {
+                      "type": "string",
+                      "serialized_name": "StatusType"
+                    },
+                    "normal": {
+                      "type": "boolean",
+                      "serialized_name": "Normal"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "message": {
+                      "type": "string",
+                      "serialized_name": "Message"
+                    }
+                  }
+                }
               }
             }
           }
@@ -5812,6 +6370,24 @@
           "db_instance_count": {
             "type": "integer",
             "serialized_name": "DBInstanceCount"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -6220,6 +6796,32 @@
               "publicly_accessible": {
                 "type": "boolean",
                 "serialized_name": "PubliclyAccessible"
+              },
+              "status_infos": {
+                "type": "list",
+                "serialized_name": "StatusInfos",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "DBInstanceStatusInfo",
+                  "members": {
+                    "status_type": {
+                      "type": "string",
+                      "serialized_name": "StatusType"
+                    },
+                    "normal": {
+                      "type": "boolean",
+                      "serialized_name": "Normal"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "message": {
+                      "type": "string",
+                      "serialized_name": "Message"
+                    }
+                  }
+                }
               }
             }
           }
@@ -6479,6 +7081,24 @@
           "option_group_name": {
             "type": "string",
             "serialized_name": "OptionGroupName"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -6778,6 +7398,32 @@
               "publicly_accessible": {
                 "type": "boolean",
                 "serialized_name": "PubliclyAccessible"
+              },
+              "status_infos": {
+                "type": "list",
+                "serialized_name": "StatusInfos",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "DBInstanceStatusInfo",
+                  "members": {
+                    "status_type": {
+                      "type": "string",
+                      "serialized_name": "StatusType"
+                    },
+                    "normal": {
+                      "type": "boolean",
+                      "serialized_name": "Normal"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "message": {
+                      "type": "string",
+                      "serialized_name": "Message"
+                    }
+                  }
+                }
               }
             }
           }
@@ -6856,6 +7502,24 @@
           "option_group_name": {
             "type": "string",
             "serialized_name": "OptionGroupName"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "serialized_name": "Tag",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },
@@ -7155,6 +7819,32 @@
               "publicly_accessible": {
                 "type": "boolean",
                 "serialized_name": "PubliclyAccessible"
+              },
+              "status_infos": {
+                "type": "list",
+                "serialized_name": "StatusInfos",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "DBInstanceStatusInfo",
+                  "members": {
+                    "status_type": {
+                      "type": "string",
+                      "serialized_name": "StatusType"
+                    },
+                    "normal": {
+                      "type": "boolean",
+                      "serialized_name": "Normal"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    },
+                    "message": {
+                      "type": "string",
+                      "serialized_name": "Message"
+                    }
+                  }
+                }
               }
             }
           }

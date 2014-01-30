@@ -38,9 +38,9 @@
     },
     "DescribeEngineDefaultParameters": {
       "input_token": "Marker",
-      "output_token": "Marker",
+      "output_token": "EngineDefaults.Marker",
       "limit_key": "MaxRecords",
-      "result_key": "Parameters"
+      "result_key": "EngineDefaults.Parameters"
     },
     "DescribeEvents": {
       "input_token": "Marker",
@@ -59,6 +59,12 @@
       "output_token": "Marker",
       "limit_key": "MaxRecords",
       "result_key": "ReservedCacheNodesOfferings"
+    },
+    "DescribeReplicationGroups": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "MaxRecords",
+      "result_key": "ReplicationGroups"
     }
   }
 }

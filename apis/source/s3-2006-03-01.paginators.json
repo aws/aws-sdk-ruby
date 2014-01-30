@@ -1,5 +1,8 @@
 {
   "pagination": {
+    "ListBuckets": {
+      "result_key": "Buckets"
+    },
     "ListMultipartUploads": {
       "limit_key": "MaxUploads",
       "more_results": "IsTruncated",
@@ -11,7 +14,10 @@
         "KeyMarker",
         "UploadIdMarker"
       ],
-      "result_key": "Uploads"
+      "result_key": [
+        "Uploads",
+        "CommonPrefixes"
+      ]
     },
     "ListObjectVersions": {
       "more_results": "IsTruncated",
@@ -24,7 +30,11 @@
         "KeyMarker",
         "VersionIdMarker"
       ],
-      "result_key": "Versions"
+      "result_key": [
+        "Versions",
+        "DeleteMarkers",
+        "CommonPrefixes"
+      ]
     },
     "ListObjects": {
       "more_results": "IsTruncated",
@@ -37,7 +47,8 @@
       ]
     },
     "ListParts": {
-      "limit_key": "IsTruncated",
+      "more_results": "IsTruncated",
+      "limit_key": "MaxParts",
       "output_token": "NextPartNumberMarker",
       "input_token": "PartNumberMarker",
       "result_key": "Parts"

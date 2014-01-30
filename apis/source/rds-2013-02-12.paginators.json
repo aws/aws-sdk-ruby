@@ -51,7 +51,8 @@
     "DescribeEngineDefaultParameters": {
       "input_token": "Marker",
       "output_token": "EngineDefaults.Marker",
-      "limit_key": "MaxRecords"
+      "limit_key": "MaxRecords",
+      "result_key": "EngineDefaults.Parameters"
     },
     "DescribeEventSubscriptions": {
       "input_token": "Marker",
@@ -97,7 +98,10 @@
     },
     "DownloadDBLogFilePortion": {
       "input_token": "Marker",
-      "output_token": "Marker"
+      "output_token": "Marker",
+      "limit_key": "NumberOfLines",
+      "more_results": "AdditionalDataPending",
+      "result_key": "LogFileData"
     },
     "ListTagsForResource": {
       "result_key": "TagList"

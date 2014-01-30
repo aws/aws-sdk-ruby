@@ -2,14 +2,14 @@
   "pagination": {
     "ListHealthChecks": {
       "input_token": "Marker",
-      "output_token": "Marker",
+      "output_token": "NextMarker",
       "more_results": "IsTruncated",
       "limit_key": "MaxItems",
       "result_key": "HealthChecks"
     },
     "ListHostedZones": {
       "input_token": "Marker",
-      "output_token": "Marker",
+      "output_token": "NextMarker",
       "more_results": "IsTruncated",
       "limit_key": "MaxItems",
       "result_key": "HostedZones"

@@ -6,6 +6,30 @@
     "DescribeStorediSCSIVolumes": {
       "result_key": "StorediSCSIVolumes"
     },
+    "DescribeTapeArchives": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "Limit",
+      "result_key": "TapeArchives"
+    },
+    "DescribeTapeRecoveryPoints": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "Limit",
+      "result_key": "TapeRecoveryPointInfos"
+    },
+    "DescribeTapes": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "Limit",
+      "result_key": "Tapes"
+    },
+    "DescribeVTLDevices": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "Limit",
+      "result_key": "VTLDevices"
+    },
     "ListGateways": {
       "input_token": "Marker",
       "output_token": "Marker",

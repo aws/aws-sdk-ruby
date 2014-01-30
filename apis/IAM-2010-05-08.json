@@ -402,6 +402,38 @@
         }
       }
     },
+    "create_saml_provider": {
+      "name": "CreateSAMLProvider",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "saml_metadata_document": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SAMLMetadataDocument"
+          },
+          "name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Name"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateSAMLProviderResult"
+        },
+        "members": {
+          "saml_provider_arn": {
+            "type": "string",
+            "serialized_name": "SAMLProviderArn"
+          }
+        }
+      }
+    },
     "create_user": {
       "name": "CreateUser",
       "http_method": "POST",
@@ -689,6 +721,21 @@
         }
       }
     },
+    "delete_saml_provider": {
+      "name": "DeleteSAMLProvider",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "saml_provider_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SAMLProviderArn"
+          }
+        }
+      }
+    },
     "delete_server_certificate": {
       "name": "DeleteServerCertificate",
       "http_method": "POST",
@@ -840,6 +887,14 @@
               "allow_users_to_change_password": {
                 "type": "boolean",
                 "serialized_name": "AllowUsersToChangePassword"
+              },
+              "expire_passwords": {
+                "type": "boolean",
+                "serialized_name": "ExpirePasswords"
+              },
+              "max_password_age": {
+                "type": "integer",
+                "serialized_name": "MaxPasswordAge"
               }
             }
           }
@@ -1235,6 +1290,41 @@
           "policy_document": {
             "type": "string",
             "serialized_name": "PolicyDocument"
+          }
+        }
+      }
+    },
+    "get_saml_provider": {
+      "name": "GetSAMLProvider",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "saml_provider_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SAMLProviderArn"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "GetSAMLProviderResult"
+        },
+        "members": {
+          "saml_metadata_document": {
+            "type": "string",
+            "serialized_name": "SAMLMetadataDocument"
+          },
+          "create_date": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "CreateDate"
+          },
+          "valid_until": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "ValidUntil"
           }
         }
       }
@@ -2136,6 +2226,40 @@
         }
       }
     },
+    "list_saml_providers": {
+      "name": "ListSAMLProviders",
+      "http_method": "POST",
+      "http_path": "/",
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ListSAMLProvidersResult"
+        },
+        "members": {
+          "saml_provider_list": {
+            "type": "list",
+            "serialized_name": "SAMLProviderList",
+            "members": {
+              "type": "structure",
+              "members": {
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "valid_until": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "ValidUntil"
+                },
+                "create_date": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "CreateDate"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "list_server_certificates": {
       "name": "ListServerCertificates",
       "http_method": "POST",
@@ -2787,6 +2911,38 @@
             "type": "string",
             "required": true,
             "serialized_name": "Password"
+          }
+        }
+      }
+    },
+    "update_saml_provider": {
+      "name": "UpdateSAMLProvider",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "saml_metadata_document": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SAMLMetadataDocument"
+          },
+          "saml_provider_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SAMLProviderArn"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "UpdateSAMLProviderResult"
+        },
+        "members": {
+          "saml_provider_arn": {
+            "type": "string",
+            "serialized_name": "SAMLProviderArn"
           }
         }
       }

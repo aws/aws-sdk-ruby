@@ -27,7 +27,7 @@
     "Aws::Plugins::ResponsePaging",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::QueryProtocol",
-    "Aws::Plugins::SignatureV2"
+    "Aws::Plugins::SignatureV4"
   ],
   "operations": {
     "authorize_cache_security_group_ingress": {
@@ -124,17 +124,14 @@
           },
           "num_cache_nodes": {
             "type": "integer",
-            "required": true,
             "serialized_name": "NumCacheNodes"
           },
           "cache_node_type": {
             "type": "string",
-            "required": true,
             "serialized_name": "CacheNodeType"
           },
           "engine": {
             "type": "string",
-            "required": true,
             "serialized_name": "Engine"
           },
           "engine_version": {
@@ -1061,6 +1058,10 @@
             "type": "string",
             "required": true,
             "serialized_name": "ReplicationGroupId"
+          },
+          "retain_primary_cluster": {
+            "type": "boolean",
+            "serialized_name": "RetainPrimaryCluster"
           }
         }
       },
@@ -1926,7 +1927,7 @@
       "metadata": {
         "paging": {
           "tokens": {
-            "marker": "marker"
+            "marker": "engine_defaults.marker"
           }
         }
       },
@@ -2171,6 +2172,13 @@
       "name": "DescribeReplicationGroups",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

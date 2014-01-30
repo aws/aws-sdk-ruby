@@ -681,7 +681,7 @@
       "metadata": {
         "paging": {
           "tokens": {
-            "marker": "marker"
+            "marker": "next_marker"
           },
           "truncated_if": "is_truncated"
         }
@@ -776,7 +776,7 @@
       "metadata": {
         "paging": {
           "tokens": {
-            "marker": "marker"
+            "marker": "next_marker"
           },
           "truncated_if": "is_truncated"
         }

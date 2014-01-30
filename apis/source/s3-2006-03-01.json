@@ -9,12 +9,9 @@
   "global_endpoint": "s3.amazonaws.com",
   "endpoint_prefix": "s3",
   "xmlnamespace": "http://s3.amazonaws.com/doc/2006-03-01/",
-  "documentation": "",
   "operations": {
     "AbortMultipartUpload": {
       "name": "AbortMultipartUpload",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html",
-      "documentation": "Aborts a multipart upload.",
       "http": {
         "method": "DELETE",
         "uri": "/{Bucket}/{Key}?uploadId={UploadId}"
@@ -42,16 +39,16 @@
       "output": null,
       "errors": [
         {
-          "documentation": "The specified multipart upload does not exist.",
           "shape_name": "NoSuchUpload",
-          "type": "structure"
+          "type": "structure",
+          "documentation": "The specified multipart upload does not exist."
         }
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadAbort.html",
+      "documentation": "<p>Aborts a multipart upload.</p><p>To verify that all parts have been removed, so you don't get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.</p>"
     },
     "CompleteMultipartUpload": {
       "name": "CompleteMultipartUpload",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadComplete.html",
-      "documentation": "Completes a multipart upload by assembling previously uploaded parts.",
       "http": {
         "method": "POST",
         "uri": "/{Bucket}/{Key}?uploadId={UploadId}"
@@ -76,7 +73,6 @@
             "members": {
               "Parts": {
                 "type": "list",
-                "flattened": true,
                 "xmlname": "Part",
                 "members": {
                   "type": "structure",
@@ -90,7 +86,8 @@
                       "documentation": "Part number that identifies the part."
                     }
                   }
-                }
+                },
+                "flattened": true
               }
             }
           },
@@ -102,16 +99,15 @@
         }
       },
       "output": {
+        "shape_name": "CompleteMultipartUploadOutput",
         "type": "structure",
         "members": {
-          "Location": {
-            "type": "string"
-          },
           "Bucket": {
             "type": "string"
           },
-          "Key": {
-            "type": "string"
+          "ETag": {
+            "type": "string",
+            "documentation": "Entity tag of the object."
           },
           "Expiration": {
             "type": "timestamp",
@@ -119,9 +115,11 @@
             "location_name": "x-amz-expiration",
             "documentation": "If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded."
           },
-          "ETag": {
-            "type": "string",
-            "documentation": "Entity tag of the object."
+          "Key": {
+            "type": "string"
+          },
+          "Location": {
+            "type": "string"
           },
           "ServerSideEncryption": {
             "type": "string",
@@ -138,18 +136,17 @@
             "location_name": "x-amz-version-id",
             "documentation": "Version of the object."
           }
-        },
-        "shape_name": "CompleteMultipartUploadOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadComplete.html",
+      "documentation": "Completes a multipart upload by assembling previously uploaded parts."
     },
     "CopyObject": {
       "name": "CopyObject",
       "alias": "PutObjectCopy",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectCOPY.html",
-      "documentation": "Creates a copy of an object that is already stored in Amazon S3.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}/{Key}"
@@ -159,6 +156,8 @@
         "members": {
           "ACL": {
             "type": "string",
+            "location": "header",
+            "location_name": "x-amz-acl",
             "enum": [
               "private",
               "public-read",
@@ -167,8 +166,6 @@
               "bucket-owner-read",
               "bucket-owner-full-control"
             ],
-            "location": "header",
-            "location_name": "x-amz-acl",
             "documentation": "The canned ACL to apply to the object."
           },
           "Bucket": {
@@ -208,11 +205,11 @@
           },
           "CopySource": {
             "type": "string",
+            "required": true,
             "location": "header",
             "location_name": "x-amz-copy-source",
-            "required": true,
-            "pattern": "\\/.+\\/.+",
-            "documentation": "The name of the source bucket and key name of the source object, separated by a slash (/). Must be URL-encoded."
+            "documentation": "The name of the source bucket and key name of the source object, separated by a slash (/). Must be URL-encoded.",
+            "pattern": "\\/.+\\/.+"
           },
           "CopySourceIfMatch": {
             "type": "timestamp",
@@ -277,25 +274,25 @@
             "type": "map",
             "location": "header",
             "location_name": "x-amz-meta-",
+            "members": {
+              "type": "string",
+              "documentation": "The metadata value."
+            },
             "documentation": "A map of metadata to store with the object in S3.",
             "keys": {
               "type": "string",
               "documentation": "The metadata key. This will be prefixed with x-amz-meta- before sending to S3 as a header. The x-amz-meta- header will be stripped from the key when retrieving headers."
-            },
-            "members": {
-              "type": "string",
-              "documentation": "The metadata value."
             }
           },
           "MetadataDirective": {
             "type": "string",
             "location": "header",
             "location_name": "x-amz-metadata-directive",
-            "documentation": "Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.",
             "enum": [
               "COPY",
               "REPLACE"
-            ]
+            ],
+            "documentation": "Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request."
           },
           "ServerSideEncryption": {
             "type": "string",
@@ -308,12 +305,12 @@
           },
           "StorageClass": {
             "type": "string",
+            "location": "header",
+            "location_name": "x-amz-storage-class",
             "enum": [
               "STANDARD",
               "REDUCED_REDUNDANCY"
             ],
-            "location": "header",
-            "location_name": "x-amz-storage-class",
             "documentation": "The type of storage to use for the object. Defaults to 'STANDARD'."
           },
           "WebsiteRedirectLocation": {
@@ -325,6 +322,7 @@
         }
       },
       "output": {
+        "shape_name": "CopyObjectOutput",
         "type": "structure",
         "members": {
           "CopyObjectResult": {
@@ -339,16 +337,16 @@
               }
             }
           },
+          "CopySourceVersionId": {
+            "type": "string",
+            "location": "header",
+            "location_name": "x-amz-copy-source-version-id"
+          },
           "Expiration": {
             "type": "string",
             "location": "header",
             "location_name": "x-amz-expiration",
             "documentation": "If the object expiration is configured, the response includes this header."
-          },
-          "CopySourceVersionId": {
-            "type": "string",
-            "location": "header",
-            "location_name": "x-amz-copy-source-version-id"
           },
           "ServerSideEncryption": {
             "type": "string",
@@ -359,22 +357,21 @@
             ],
             "documentation": "The Server-side encryption algorithm used when storing this object in S3."
           }
-        },
-        "shape_name": "CopyObjectOutput"
+        }
       },
       "errors": [
         {
-          "documentation": "The source object of the COPY operation is not in the active tier and is only stored in Amazon Glacier.",
           "shape_name": "ObjectNotInActiveTierError",
-          "type": "structure"
+          "type": "structure",
+          "documentation": "The source object of the COPY operation is not in the active tier and is only stored in Amazon Glacier."
         }
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html",
+      "documentation": "Creates a copy of an object that is already stored in Amazon S3."
     },
     "CreateBucket": {
       "name": "CreateBucket",
       "alias": "PutBucket",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUT.html",
-      "documentation": "Creates a new bucket.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}"
@@ -384,7 +381,8 @@
         "members": {
           "ACL": {
             "type": "string",
-            "documentation": "The canned ACL to apply to the bucket.",
+            "location": "header",
+            "location_name": "x-amz-acl",
             "enum": [
               "private",
               "public-read",
@@ -393,8 +391,7 @@
               "bucket-owner-read",
               "bucket-owner-full-control"
             ],
-            "location": "header",
-            "location_name": "x-amz-acl"
+            "documentation": "The canned ACL to apply to the bucket."
           },
           "Bucket": {
             "type": "string",
@@ -407,7 +404,6 @@
             "members": {
               "LocationConstraint": {
                 "type": "string",
-                "documentation": "Specifies the region where the bucket will be created.",
                 "enum": [
                   "EU",
                   "eu-west-1",
@@ -418,43 +414,45 @@
                   "ap-northeast-1",
                   "sa-east-1",
                   ""
-                ]
+                ],
+                "documentation": "Specifies the region where the bucket will be created."
               }
             }
           },
           "GrantFullControl": {
             "type": "string",
-            "documentation": "Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-full-control"
+            "location_name": "x-amz-grant-full-control",
+            "documentation": "Allows grantee the read, write, read ACP, and write ACP permissions on the bucket."
           },
           "GrantRead": {
             "type": "string",
-            "documentation": "Allows grantee to list the objects in the bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-read"
+            "location_name": "x-amz-grant-read",
+            "documentation": "Allows grantee to list the objects in the bucket."
           },
           "GrantReadACP": {
             "type": "string",
-            "documentation": "Allows grantee to read the bucket ACL.",
             "location": "header",
-            "location_name": "x-amz-grant-read-acp"
+            "location_name": "x-amz-grant-read-acp",
+            "documentation": "Allows grantee to read the bucket ACL."
           },
           "GrantWrite": {
             "type": "string",
-            "documentation": "Allows grantee to create, overwrite, and delete any object in the bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-write"
+            "location_name": "x-amz-grant-write",
+            "documentation": "Allows grantee to create, overwrite, and delete any object in the bucket."
           },
           "GrantWriteACP": {
             "type": "string",
-            "documentation": "Allows grantee to write the ACL for the applicable bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-write-acp"
+            "location_name": "x-amz-grant-write-acp",
+            "documentation": "Allows grantee to write the ACL for the applicable bucket."
           }
         }
       },
       "output": {
+        "shape_name": "CreateBucketOutput",
         "type": "structure",
         "members": {
           "Location": {
@@ -462,22 +460,21 @@
             "location": "header",
             "location_name": "Location"
           }
-        },
-        "shape_name": "CreateBucketOutput"
+        }
       },
       "errors": [
         {
-          "documentation": "The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.",
           "shape_name": "BucketAlreadyExists",
-          "type": "structure"
+          "type": "structure",
+          "documentation": "The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again."
         }
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html",
+      "documentation": "Creates a new bucket."
     },
     "CreateMultipartUpload": {
       "name": "CreateMultipartUpload",
       "alias": "InitiateMultipartUpload",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html",
-      "documentation": "Initiates a multipart upload and returns an upload ID.",
       "http": {
         "method": "POST",
         "uri": "/{Bucket}/{Key}?uploads"
@@ -487,6 +484,8 @@
         "members": {
           "ACL": {
             "type": "string",
+            "location": "header",
+            "location_name": "x-amz-acl",
             "enum": [
               "private",
               "public-read",
@@ -495,8 +494,6 @@
               "bucket-owner-read",
               "bucket-owner-full-control"
             ],
-            "location": "header",
-            "location_name": "x-amz-acl",
             "documentation": "The canned ACL to apply to the object."
           },
           "Bucket": {
@@ -573,14 +570,14 @@
             "type": "map",
             "location": "header",
             "location_name": "x-amz-meta-",
+            "members": {
+              "type": "string",
+              "documentation": "The metadata value."
+            },
             "documentation": "A map of metadata to store with the object in S3.",
             "keys": {
               "type": "string",
               "documentation": "The metadata key. This will be prefixed with x-amz-meta- before sending to S3 as a header. The x-amz-meta- header will be stripped from the key when retrieving headers."
-            },
-            "members": {
-              "type": "string",
-              "documentation": "The metadata value."
             }
           },
           "ServerSideEncryption": {
@@ -594,12 +591,12 @@
           },
           "StorageClass": {
             "type": "string",
+            "location": "header",
+            "location_name": "x-amz-storage-class",
             "enum": [
               "STANDARD",
               "REDUCED_REDUNDANCY"
             ],
-            "location": "header",
-            "location_name": "x-amz-storage-class",
             "documentation": "The type of storage to use for the object. Defaults to 'STANDARD'."
           },
           "WebsiteRedirectLocation": {
@@ -611,6 +608,7 @@
         }
       },
       "output": {
+        "shape_name": "CreateMultipartUploadOutput",
         "type": "structure",
         "members": {
           "Bucket": {
@@ -622,10 +620,6 @@
             "type": "string",
             "documentation": "Object key for which the multipart upload was initiated."
           },
-          "UploadId": {
-            "type": "string",
-            "documentation": "ID for the initiated multipart upload."
-          },
           "ServerSideEncryption": {
             "type": "string",
             "location": "header",
@@ -634,18 +628,21 @@
               "AES256"
             ],
             "documentation": "The Server-side encryption algorithm used when storing this object in S3."
+          },
+          "UploadId": {
+            "type": "string",
+            "documentation": "ID for the initiated multipart upload."
           }
-        },
-        "shape_name": "CreateMultipartUploadOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html",
+      "documentation": "<p>Initiates a multipart upload and returns an upload ID.</p><p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p>"
     },
     "DeleteBucket": {
       "name": "DeleteBucket",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html",
-      "documentation": "Deletes the bucket. All objects (including all object versions and Delete Markers) in the bucket must be deleted before the bucket itself can be deleted.",
       "http": {
         "method": "DELETE",
         "uri": "/{Bucket}"
@@ -663,12 +660,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html",
+      "documentation": "Deletes the bucket. All objects (including all object versions and Delete Markers) in the bucket must be deleted before the bucket itself can be deleted."
     },
     "DeleteBucketCors": {
       "name": "DeleteBucketCors",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html",
-      "documentation": "Deletes the cors configuration information set for the bucket.",
       "http": {
         "method": "DELETE",
         "uri": "/{Bucket}?cors"
@@ -686,12 +683,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEcors.html",
+      "documentation": "Deletes the cors configuration information set for the bucket."
     },
     "DeleteBucketLifecycle": {
       "name": "DeleteBucketLifecycle",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html",
-      "documentation": "Deletes the lifecycle configuration from the bucket.",
       "http": {
         "method": "DELETE",
         "uri": "/{Bucket}?lifecycle"
@@ -709,12 +706,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html",
+      "documentation": "Deletes the lifecycle configuration from the bucket."
     },
     "DeleteBucketPolicy": {
       "name": "DeleteBucketPolicy",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html",
-      "documentation": "Deletes the policy from the bucket.",
       "http": {
         "method": "DELETE",
         "uri": "/{Bucket}?policy"
@@ -732,12 +729,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html",
+      "documentation": "Deletes the policy from the bucket."
     },
     "DeleteBucketTagging": {
       "name": "DeleteBucketTagging",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html",
-      "documentation": "Deletes the tags from the bucket.",
       "http": {
         "method": "DELETE",
         "uri": "/{Bucket}?tagging"
@@ -755,12 +752,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html",
+      "documentation": "Deletes the tags from the bucket."
     },
     "DeleteBucketWebsite": {
       "name": "DeleteBucketWebsite",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html",
-      "documentation": "This operation removes the website configuration from the bucket.",
       "http": {
         "method": "DELETE",
         "uri": "/{Bucket}?website"
@@ -778,12 +775,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html",
+      "documentation": "This operation removes the website configuration from the bucket."
     },
     "DeleteObject": {
       "name": "DeleteObject",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html",
-      "documentation": "Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects.",
       "http": {
         "method": "DELETE",
         "uri": "/{Bucket}/{Key}?versionId={VersionId}"
@@ -803,9 +800,9 @@
           },
           "MFA": {
             "type": "string",
-            "documentation": "The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.",
             "location": "header",
-            "location_name": "x-amz-mfa"
+            "location_name": "x-amz-mfa",
+            "documentation": "The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device."
           },
           "VersionId": {
             "type": "string",
@@ -815,6 +812,7 @@
         }
       },
       "output": {
+        "shape_name": "DeleteObjectOutput",
         "type": "structure",
         "members": {
           "DeleteMarker": {
@@ -829,18 +827,17 @@
             "location_name": "x-amz-version-id",
             "documentation": "Returns the version ID of the delete marker created as a result of the DELETE operation."
           }
-        },
-        "shape_name": "DeleteObjectOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html",
+      "documentation": "Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects."
     },
     "DeleteObjects": {
       "name": "DeleteObjects",
       "alias": "DeleteMultipleObjects",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/multiobjectdeleteapi.html",
-      "documentation": "This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.",
       "http": {
         "method": "POST",
         "uri": "/{Bucket}?delete"
@@ -855,14 +852,13 @@
           },
           "Delete": {
             "type": "structure",
-            "required": true,
             "payload": true,
+            "required": true,
             "members": {
               "Objects": {
                 "type": "list",
-                "flattened": true,
-                "xmlname": "Object",
                 "required": true,
+                "xmlname": "Object",
                 "members": {
                   "type": "structure",
                   "members": {
@@ -876,7 +872,8 @@
                       "documentation": "VersionId for the specific version of the object to delete."
                     }
                   }
-                }
+                },
+                "flattened": true
               },
               "Quiet": {
                 "type": "boolean",
@@ -886,69 +883,69 @@
           },
           "MFA": {
             "type": "string",
-            "documentation": "The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.",
             "location": "header",
-            "location_name": "x-amz-mfa"
+            "location_name": "x-amz-mfa",
+            "documentation": "The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device."
           }
         }
       },
       "output": {
+        "shape_name": "DeleteObjectsOutput",
         "type": "structure",
         "members": {
           "Deleted": {
             "type": "list",
-            "flattened": true,
             "members": {
               "type": "structure",
               "members": {
-                "Key": {
-                  "type": "string"
-                },
-                "VersionId": {
-                  "type": "string"
-                },
                 "DeleteMarker": {
                   "type": "boolean"
                 },
                 "DeleteMarkerVersionId": {
                   "type": "string"
-                }
-              }
-            }
-          },
-          "Errors": {
-            "type": "list",
-            "flattened": true,
-            "xmlname": "Error",
-            "members": {
-              "type": "structure",
-              "members": {
+                },
                 "Key": {
                   "type": "string"
                 },
                 "VersionId": {
                   "type": "string"
-                },
+                }
+              }
+            },
+            "flattened": true
+          },
+          "Errors": {
+            "type": "list",
+            "xmlname": "Error",
+            "members": {
+              "type": "structure",
+              "members": {
                 "Code": {
+                  "type": "string"
+                },
+                "Key": {
                   "type": "string"
                 },
                 "Message": {
                   "type": "string"
+                },
+                "VersionId": {
+                  "type": "string"
                 }
               }
-            }
+            },
+            "flattened": true
           }
-        },
-        "shape_name": "DeleteObjectsOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html",
+      "documentation": "This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys."
     },
     "GetBucketAcl": {
       "name": "GetBucketAcl",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html",
-      "documentation": "Gets the access control policy for the bucket.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?acl"
@@ -964,49 +961,23 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketAclOutput",
         "type": "structure",
         "members": {
-          "Owner": {
-            "type": "structure",
-            "members": {
-              "ID": {
-                "type": "string"
-              },
-              "DisplayName": {
-                "type": "string"
-              }
-            }
-          },
           "Grants": {
             "type": "list",
-            "documentation": "A list of grants.",
             "xmlname": "AccessControlList",
             "members": {
               "type": "structure",
               "xmlname": "Grant",
               "members": {
                 "Grantee": {
-                  "type": "structure",
                   "xmlnamespace": {
-                    "prefix": "xsi",
-                    "uri": "http://www.w3.org/2001/XMLSchema-instance"
+                    "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                    "prefix": "xsi"
                   },
+                  "type": "structure",
                   "members": {
-                    "Type": {
-                      "type": "string",
-                      "xmlattribute": true,
-                      "xmlname": "xsi:type",
-                      "documentation": "Type of grantee",
-                      "enum": [
-                        "CanonicalUser",
-                        "AmazonCustomerByEmail",
-                        "Group"
-                      ]
-                    },
-                    "ID": {
-                      "type": "string",
-                      "documentation": "The canonical user ID of the grantee."
-                    },
                     "DisplayName": {
                       "type": "string",
                       "documentation": "Screen name of the grantee."
@@ -1014,6 +985,21 @@
                     "EmailAddress": {
                       "type": "string",
                       "documentation": "Email address of the grantee."
+                    },
+                    "ID": {
+                      "type": "string",
+                      "documentation": "The canonical user ID of the grantee."
+                    },
+                    "Type": {
+                      "type": "string",
+                      "xmlname": "xsi:type",
+                      "xmlattribute": true,
+                      "enum": [
+                        "CanonicalUser",
+                        "AmazonCustomerByEmail",
+                        "Group"
+                      ],
+                      "documentation": "Type of grantee"
                     },
                     "URI": {
                       "type": "string",
@@ -1023,29 +1009,40 @@
                 },
                 "Permission": {
                   "type": "string",
-                  "documentation": "Specifies the permission given to the grantee.",
                   "enum": [
                     "FULL_CONTROL",
                     "WRITE",
                     "WRITE_ACP",
                     "READ",
                     "READ_ACP"
-                  ]
+                  ],
+                  "documentation": "Specifies the permission given to the grantee."
                 }
+              }
+            },
+            "documentation": "A list of grants."
+          },
+          "Owner": {
+            "type": "structure",
+            "members": {
+              "DisplayName": {
+                "type": "string"
+              },
+              "ID": {
+                "type": "string"
               }
             }
           }
-        },
-        "shape_name": "GetBucketAclOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETacl.html",
+      "documentation": "Gets the access control policy for the bucket."
     },
     "GetBucketCors": {
       "name": "GetBucketCors",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html",
-      "documentation": "Returns the cors configuration for the bucket.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?cors"
@@ -1061,69 +1058,69 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketCorsOutput",
         "type": "structure",
         "members": {
           "CORSRules": {
             "type": "list",
-            "flattened": true,
             "xmlname": "CORSRule",
             "members": {
               "type": "structure",
               "members": {
                 "AllowedHeaders": {
                   "type": "list",
-                  "flattened": true,
                   "xmlname": "AllowedHeader",
+                  "members": {
+                    "type": "string"
+                  },
                   "documentation": "Specifies which headers are allowed in a pre-flight OPTIONS request.",
-                  "members": {
-                    "type": "string"
-                  }
-                },
-                "AllowedOrigins": {
-                  "type": "list",
-                  "flattened": true,
-                  "xmlname": "AllowedOrigin",
-                  "documentation": "One or more origins you want customers to be able to access the bucket from.",
-                  "members": {
-                    "type": "string"
-                  }
+                  "flattened": true
                 },
                 "AllowedMethods": {
                   "type": "list",
-                  "flattened": true,
                   "xmlname": "AllowedMethod",
-                  "documentation": "Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.",
                   "members": {
                     "type": "string"
-                  }
+                  },
+                  "documentation": "Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.",
+                  "flattened": true
+                },
+                "AllowedOrigins": {
+                  "type": "list",
+                  "xmlname": "AllowedOrigin",
+                  "members": {
+                    "type": "string"
+                  },
+                  "documentation": "One or more origins you want customers to be able to access the bucket from.",
+                  "flattened": true
+                },
+                "ExposeHeaders": {
+                  "type": "list",
+                  "xmlname": "ExposeHeader",
+                  "members": {
+                    "type": "string"
+                  },
+                  "documentation": "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
+                  "flattened": true
                 },
                 "MaxAgeSeconds": {
                   "type": "integer",
                   "documentation": "The time in seconds that your browser is to cache the preflight response for the specified resource."
-                },
-                "ExposeHeaders": {
-                  "type": "list",
-                  "flattened": true,
-                  "xmlname": "ExposeHeader",
-                  "documentation": "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
-                  "members": {
-                    "type": "string"
-                  }
                 }
               }
-            }
+            },
+            "flattened": true
           }
-        },
-        "shape_name": "GetBucketCorsOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETcors.html",
+      "documentation": "Returns the cors configuration for the bucket."
     },
     "GetBucketLifecycle": {
       "name": "GetBucketLifecycle",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html",
-      "documentation": "Returns the lifecycle configuration information set on the bucket.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?lifecycle"
@@ -1139,15 +1136,29 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketLifecycleOutput",
         "type": "structure",
         "members": {
           "Rules": {
             "type": "list",
-            "flattened": true,
             "xmlname": "Rule",
             "members": {
               "type": "structure",
               "members": {
+                "Expiration": {
+                  "type": "structure",
+                  "members": {
+                    "Date": {
+                      "type": "timestamp",
+                      "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.",
+                      "timestamp_format": "iso8601"
+                    },
+                    "Days": {
+                      "type": "integer",
+                      "documentation": "Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer."
+                    }
+                  }
+                },
                 "ID": {
                   "type": "string",
                   "documentation": "Unique identifier for the rule. The value cannot be longer than 255 characters."
@@ -1158,23 +1169,23 @@
                 },
                 "Status": {
                   "type": "string",
-                  "documentation": "If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.",
                   "enum": [
                     "Enabled",
                     "Disabled"
-                  ]
+                  ],
+                  "documentation": "If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied."
                 },
                 "Transition": {
                   "type": "structure",
                   "members": {
+                    "Date": {
+                      "type": "timestamp",
+                      "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.",
+                      "timestamp_format": "iso8601"
+                    },
                     "Days": {
                       "type": "integer",
                       "documentation": "Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer."
-                    },
-                    "Date": {
-                      "type": "timestamp",
-                      "timestamp_format": "iso8601",
-                      "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format."
                     },
                     "StorageClass": {
                       "type": "string",
@@ -1186,35 +1197,21 @@
                       "documentation": "The class of storage used to store the object."
                     }
                   }
-                },
-                "Expiration": {
-                  "type": "structure",
-                  "members": {
-                    "Days": {
-                      "type": "integer",
-                      "documentation": "Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer."
-                    },
-                    "Date": {
-                      "type": "timestamp",
-                      "timestamp_format": "iso8601",
-                      "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format."
-                    }
-                  }
                 }
               }
-            }
+            },
+            "flattened": true
           }
-        },
-        "shape_name": "GetBucketLifecycleOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html",
+      "documentation": "Returns the lifecycle configuration information set on the bucket."
     },
     "GetBucketLocation": {
       "name": "GetBucketLocation",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlocation.html",
-      "documentation": "Returns the region the bucket resides in.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?location"
@@ -1230,22 +1227,22 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketLocationOutput",
         "type": "structure",
         "members": {
           "LocationConstraint": {
             "type": "string"
           }
-        },
-        "shape_name": "GetBucketLocationOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html",
+      "documentation": "Returns the region the bucket resides in."
     },
     "GetBucketLogging": {
       "name": "GetBucketLogging",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlogging.html",
-      "documentation": "Returns the logging status of a bucket and the permissions users have to view and modify that status. To use GET, you must be the bucket owner.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?logging"
@@ -1261,6 +1258,7 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketLoggingOutput",
         "type": "structure",
         "members": {
           "LoggingEnabled": {
@@ -1270,10 +1268,6 @@
                 "type": "string",
                 "documentation": "Specifies the bucket where you want Amazon S3 to store server access logs. You can have your logs delivered to any bucket that you own, including the same bucket that is being logged. You can also configure multiple buckets to deliver their logs to the same target bucket. In this case you should choose a different TargetPrefix for each source bucket so that the delivered log files can be distinguished by key."
               },
-              "TargetPrefix": {
-                "type": "string",
-                "documentation": "This element lets you specify a prefix for the keys that the log files will be stored under."
-              },
               "TargetGrants": {
                 "type": "list",
                 "members": {
@@ -1281,27 +1275,12 @@
                   "xmlname": "Grant",
                   "members": {
                     "Grantee": {
-                      "type": "structure",
                       "xmlnamespace": {
-                        "prefix": "xsi",
-                        "uri": "http://www.w3.org/2001/XMLSchema-instance"
+                        "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                        "prefix": "xsi"
                       },
+                      "type": "structure",
                       "members": {
-                        "Type": {
-                          "type": "string",
-                          "xmlattribute": true,
-                          "xmlname": "xsi:type",
-                          "documentation": "Type of grantee",
-                          "enum": [
-                            "CanonicalUser",
-                            "AmazonCustomerByEmail",
-                            "Group"
-                          ]
-                        },
-                        "ID": {
-                          "type": "string",
-                          "documentation": "The canonical user ID of the grantee."
-                        },
                         "DisplayName": {
                           "type": "string",
                           "documentation": "Screen name of the grantee."
@@ -1309,6 +1288,21 @@
                         "EmailAddress": {
                           "type": "string",
                           "documentation": "Email address of the grantee."
+                        },
+                        "ID": {
+                          "type": "string",
+                          "documentation": "The canonical user ID of the grantee."
+                        },
+                        "Type": {
+                          "type": "string",
+                          "xmlname": "xsi:type",
+                          "xmlattribute": true,
+                          "enum": [
+                            "CanonicalUser",
+                            "AmazonCustomerByEmail",
+                            "Group"
+                          ],
+                          "documentation": "Type of grantee"
                         },
                         "URI": {
                           "type": "string",
@@ -1321,20 +1315,23 @@
                     }
                   }
                 }
+              },
+              "TargetPrefix": {
+                "type": "string",
+                "documentation": "This element lets you specify a prefix for the keys that the log files will be stored under."
               }
             }
           }
-        },
-        "shape_name": "GetBucketLoggingOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlogging.html",
+      "documentation": "Returns the logging status of a bucket and the permissions users have to view and modify that status. To use GET, you must be the bucket owner."
     },
     "GetBucketNotification": {
       "name": "GetBucketNotification",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html",
-      "documentation": "Return the notification configuration of a bucket.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?notification"
@@ -1350,35 +1347,35 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketNotificationOutput",
         "type": "structure",
         "members": {
           "TopicConfiguration": {
             "type": "structure",
             "members": {
-              "Topic": {
-                "type": "string",
-                "documentation": "Amazon SNS topic to which Amazon S3 will publish a message to report the specified events for the bucket."
-              },
               "Event": {
                 "type": "string",
                 "enum": [
                   "s3:ReducedRedundancyLostObject"
                 ],
                 "documentation": "Bucket event for which to send notifications."
+              },
+              "Topic": {
+                "type": "string",
+                "documentation": "Amazon SNS topic to which Amazon S3 will publish a message to report the specified events for the bucket."
               }
             }
           }
-        },
-        "shape_name": "GetBucketNotificationOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETnotification.html",
+      "documentation": "Return the notification configuration of a bucket."
     },
     "GetBucketPolicy": {
       "name": "GetBucketPolicy",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETpolicy.html",
-      "documentation": "Returns the policy of a specified bucket.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?policy"
@@ -1394,6 +1391,7 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketPolicyOutput",
         "type": "structure",
         "members": {
           "Policy": {
@@ -1401,17 +1399,16 @@
             "payload": true,
             "documentation": "The bucket policy as a JSON document."
           }
-        },
-        "shape_name": "GetBucketPolicyOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETpolicy.html",
+      "documentation": "Returns the policy of a specified bucket."
     },
     "GetBucketRequestPayment": {
       "name": "GetBucketRequestPayment",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentGET.html",
-      "documentation": "Returns the request payment configuration of a bucket.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?requestPayment"
@@ -1427,6 +1424,7 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketRequestPaymentOutput",
         "type": "structure",
         "members": {
           "Payer": {
@@ -1437,17 +1435,16 @@
             ],
             "documentation": "Specifies who pays for the download and request fees."
           }
-        },
-        "shape_name": "GetBucketRequestPaymentOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentGET.html",
+      "documentation": "Returns the request payment configuration of a bucket."
     },
     "GetBucketTagging": {
       "name": "GetBucketTagging",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETtagging.html",
-      "documentation": "Returns the tag set associated with the bucket.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?tagging"
@@ -1463,6 +1460,7 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketTaggingOutput",
         "type": "structure",
         "members": {
           "TagSet": {
@@ -1482,17 +1480,16 @@
               }
             }
           }
-        },
-        "shape_name": "GetBucketTaggingOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETtagging.html",
+      "documentation": "Returns the tag set associated with the bucket."
     },
     "GetBucketVersioning": {
       "name": "GetBucketVersioning",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html",
-      "documentation": "Returns the versioning state of a bucket.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?versioning"
@@ -1508,16 +1505,9 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketVersioningOutput",
         "type": "structure",
         "members": {
-          "Status": {
-            "type": "string",
-            "enum": [
-              "Enabled",
-              "Suspended"
-            ],
-            "documentation": "The versioning state of the bucket."
-          },
           "MFADelete": {
             "type": "string",
             "enum": [
@@ -1525,18 +1515,25 @@
               "Disabled"
             ],
             "documentation": "Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned."
+          },
+          "Status": {
+            "type": "string",
+            "enum": [
+              "Enabled",
+              "Suspended"
+            ],
+            "documentation": "The versioning state of the bucket."
           }
-        },
-        "shape_name": "GetBucketVersioningOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html",
+      "documentation": "Returns the versioning state of a bucket."
     },
     "GetBucketWebsite": {
       "name": "GetBucketWebsite",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETwebsite.html",
-      "documentation": "Returns the website configuration for a bucket.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}?website"
@@ -1552,8 +1549,27 @@
         }
       },
       "output": {
+        "shape_name": "GetBucketWebsiteOutput",
         "type": "structure",
         "members": {
+          "ErrorDocument": {
+            "type": "structure",
+            "members": {
+              "Key": {
+                "type": "string",
+                "documentation": "The object key name to use when a 4XX class error occurs."
+              }
+            }
+          },
+          "IndexDocument": {
+            "type": "structure",
+            "members": {
+              "Suffix": {
+                "type": "string",
+                "documentation": "A suffix that is appended to a request that is for a directory on the website endpoint (e.g. if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character."
+              }
+            }
+          },
           "RedirectAllRequestsTo": {
             "type": "structure",
             "members": {
@@ -1571,24 +1587,6 @@
               }
             }
           },
-          "IndexDocument": {
-            "type": "structure",
-            "members": {
-              "Suffix": {
-                "type": "string",
-                "documentation": "A suffix that is appended to a request that is for a directory on the website endpoint (e.g. if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character."
-              }
-            }
-          },
-          "ErrorDocument": {
-            "type": "structure",
-            "members": {
-              "Key": {
-                "type": "string",
-                "documentation": "The object key name to use when a 4XX class error occurs."
-              }
-            }
-          },
           "RoutingRules": {
             "type": "list",
             "members": {
@@ -1597,33 +1595,24 @@
               "members": {
                 "Condition": {
                   "type": "structure",
-                  "documentation": "A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error.",
                   "members": {
-                    "KeyPrefixEquals": {
-                      "type": "string",
-                      "documentation": "The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied."
-                    },
                     "HttpErrorCodeReturnedEquals": {
                       "type": "string",
                       "documentation": "The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied. Required when parent element Condition is specified and sibling KeyPrefixEquals is not specified. If both are specified, then both must be true for the redirect to be applied."
+                    },
+                    "KeyPrefixEquals": {
+                      "type": "string",
+                      "documentation": "The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied."
                     }
-                  }
+                  },
+                  "documentation": "A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error."
                 },
                 "Redirect": {
                   "type": "structure",
-                  "documentation": "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return.",
                   "members": {
                     "HostName": {
                       "type": "string",
                       "documentation": "The host name to use in the redirect request."
-                    },
-                    "ReplaceKeyPrefixWith": {
-                      "type": "string",
-                      "documentation": "The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/ (objects in the docs/ folder) to documents/, you can set a condition block with KeyPrefixEquals set to docs/ and in the Redirect set ReplaceKeyPrefixWith to /documents. Not required if one of the siblings is present. Can be present only if ReplaceKeyWith is not provided."
-                    },
-                    "ReplaceKeyWith": {
-                      "type": "string",
-                      "documentation": "The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided."
                     },
                     "HttpRedirectCode": {
                       "type": "string",
@@ -1636,23 +1625,31 @@
                         "https"
                       ],
                       "documentation": "Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request."
+                    },
+                    "ReplaceKeyPrefixWith": {
+                      "type": "string",
+                      "documentation": "The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/ (objects in the docs/ folder) to documents/, you can set a condition block with KeyPrefixEquals set to docs/ and in the Redirect set ReplaceKeyPrefixWith to /documents. Not required if one of the siblings is present. Can be present only if ReplaceKeyWith is not provided."
+                    },
+                    "ReplaceKeyWith": {
+                      "type": "string",
+                      "documentation": "The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided."
                     }
-                  }
+                  },
+                  "documentation": "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return."
                 }
               }
             }
           }
-        },
-        "shape_name": "GetBucketWebsiteOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETwebsite.html",
+      "documentation": "Returns the website configuration for a bucket."
     },
     "GetObject": {
       "name": "GetObject",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGET.html",
-      "documentation": "Retrieves objects from Amazon S3.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}/{Key}?versionId={VersionId}&response-content-type={ResponseContentType}&response-content-language={ResponseContentLanguage}&response-expires={ResponseExpires}&response-cache-control={ResponseCacheControl}&response-content-disposition={ResponseContentDisposition}&response-content-encoding={ResponseContentEncoding}"
@@ -1738,66 +1735,19 @@
         }
       },
       "output": {
+        "shape_name": "GetObjectOutput",
         "type": "structure",
         "members": {
-          "Body": {
-            "payload": true,
-            "type": "blob",
-            "streaming": true,
-            "documentation": "Object data."
-          },
-          "DeleteMarker": {
-            "type": "boolean",
-            "location": "header",
-            "location_name": "x-amz-delete-marker",
-            "documentation": "Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response."
-          },
           "AcceptRanges": {
             "type": "string",
             "location": "header",
             "location_name": "accept-ranges"
           },
-          "Expiration": {
-            "type": "string",
-            "location": "header",
-            "location_name": "x-amz-expiration",
-            "documentation": "If the object expiration is configured (see PUT Bucket lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
-          },
-          "Restore": {
-            "type": "string",
-            "location": "header",
-            "location_name": "x-amz-restore",
-            "documentation": "Provides information about object restoration operation and expiration time of the restored object copy."
-          },
-          "LastModified": {
-            "type": "timestamp",
-            "location": "header",
-            "location_name": "Last-Modified",
-            "documentation": "Last modified date of the object"
-          },
-          "ContentLength": {
-            "type": "integer",
-            "location": "header",
-            "location_name": "Content-Length",
-            "documentation": "Size of the body in bytes."
-          },
-          "ETag": {
-            "type": "string",
-            "location": "header",
-            "location_name": "ETag",
-            "documentation": "An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
-          },
-          "MissingMeta": {
-            "type": "integer",
-            "location": "header",
-            "location_name": "x-amz-missing-meta",
-            "documentation": "This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers."
-          },
-          "VersionId": {
-            "type": "string",
-            "location": "header",
-            "location_name": "x-amz-version-id",
-            "documentation": "Version of the object."
+          "Body": {
+            "type": "blob",
+            "payload": true,
+            "documentation": "Object data.",
+            "streaming": true
           },
           "CacheControl": {
             "type": "string",
@@ -1823,11 +1773,35 @@
             "location_name": "Content-Language",
             "documentation": "The language the content is in."
           },
+          "ContentLength": {
+            "type": "integer",
+            "location": "header",
+            "location_name": "Content-Length",
+            "documentation": "Size of the body in bytes."
+          },
           "ContentType": {
             "type": "string",
             "location": "header",
             "location_name": "Content-Type",
             "documentation": "A standard MIME type describing the format of the object data."
+          },
+          "DeleteMarker": {
+            "type": "boolean",
+            "location": "header",
+            "location_name": "x-amz-delete-marker",
+            "documentation": "Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response."
+          },
+          "ETag": {
+            "type": "string",
+            "location": "header",
+            "location_name": "ETag",
+            "documentation": "An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
+          },
+          "Expiration": {
+            "type": "string",
+            "location": "header",
+            "location_name": "x-amz-expiration",
+            "documentation": "If the object expiration is configured (see PUT Bucket lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
           },
           "Expires": {
             "type": "timestamp",
@@ -1835,11 +1809,37 @@
             "location_name": "Expires",
             "documentation": "The date and time at which the object is no longer cacheable."
           },
-          "WebsiteRedirectLocation": {
+          "LastModified": {
+            "type": "timestamp",
+            "location": "header",
+            "location_name": "Last-Modified",
+            "documentation": "Last modified date of the object"
+          },
+          "Metadata": {
+            "type": "map",
+            "location": "header",
+            "location_name": "x-amz-meta-",
+            "members": {
+              "type": "string",
+              "documentation": "The metadata value."
+            },
+            "documentation": "A map of metadata to store with the object in S3.",
+            "keys": {
+              "type": "string",
+              "documentation": "The metadata key. This will be prefixed with x-amz-meta- before sending to S3 as a header. The x-amz-meta- header will be stripped from the key when retrieving headers."
+            }
+          },
+          "MissingMeta": {
+            "type": "integer",
+            "location": "header",
+            "location_name": "x-amz-missing-meta",
+            "documentation": "This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers."
+          },
+          "Restore": {
             "type": "string",
             "location": "header",
-            "location_name": "x-amz-website-redirect-location",
-            "documentation": "If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata."
+            "location_name": "x-amz-restore",
+            "documentation": "Provides information about object restoration operation and expiration time of the restored object copy."
           },
           "ServerSideEncryption": {
             "type": "string",
@@ -1850,35 +1850,32 @@
             ],
             "documentation": "The Server-side encryption algorithm used when storing this object in S3."
           },
-          "Metadata": {
-            "type": "map",
+          "VersionId": {
+            "type": "string",
             "location": "header",
-            "location_name": "x-amz-meta-",
-            "documentation": "A map of metadata to store with the object in S3.",
-            "keys": {
-              "type": "string",
-              "documentation": "The metadata key. This will be prefixed with x-amz-meta- before sending to S3 as a header. The x-amz-meta- header will be stripped from the key when retrieving headers."
-            },
-            "members": {
-              "type": "string",
-              "documentation": "The metadata value."
-            }
+            "location_name": "x-amz-version-id",
+            "documentation": "Version of the object."
+          },
+          "WebsiteRedirectLocation": {
+            "type": "string",
+            "location": "header",
+            "location_name": "x-amz-website-redirect-location",
+            "documentation": "If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata."
           }
-        },
-        "shape_name": "GetObjectOutput"
+        }
       },
       "errors": [
         {
-          "documentation": "The specified key does not exist.",
           "shape_name": "NoSuchKey",
-          "type": "structure"
+          "type": "structure",
+          "documentation": "The specified key does not exist."
         }
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html",
+      "documentation": "Retrieves objects from Amazon S3."
     },
     "GetObjectAcl": {
       "name": "GetObjectAcl",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html",
-      "documentation": "Returns the access control list (ACL) of an object.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}/{Key}?acl&versionId={VersionId}"
@@ -1904,49 +1901,23 @@
         }
       },
       "output": {
+        "shape_name": "GetObjectAclOutput",
         "type": "structure",
         "members": {
-          "Owner": {
-            "type": "structure",
-            "members": {
-              "ID": {
-                "type": "string"
-              },
-              "DisplayName": {
-                "type": "string"
-              }
-            }
-          },
           "Grants": {
             "type": "list",
-            "documentation": "A list of grants.",
             "xmlname": "AccessControlList",
             "members": {
               "type": "structure",
               "xmlname": "Grant",
               "members": {
                 "Grantee": {
-                  "type": "structure",
                   "xmlnamespace": {
-                    "prefix": "xsi",
-                    "uri": "http://www.w3.org/2001/XMLSchema-instance"
+                    "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                    "prefix": "xsi"
                   },
+                  "type": "structure",
                   "members": {
-                    "Type": {
-                      "type": "string",
-                      "xmlattribute": true,
-                      "xmlname": "xsi:type",
-                      "documentation": "Type of grantee",
-                      "enum": [
-                        "CanonicalUser",
-                        "AmazonCustomerByEmail",
-                        "Group"
-                      ]
-                    },
-                    "ID": {
-                      "type": "string",
-                      "documentation": "The canonical user ID of the grantee."
-                    },
                     "DisplayName": {
                       "type": "string",
                       "documentation": "Screen name of the grantee."
@@ -1954,6 +1925,21 @@
                     "EmailAddress": {
                       "type": "string",
                       "documentation": "Email address of the grantee."
+                    },
+                    "ID": {
+                      "type": "string",
+                      "documentation": "The canonical user ID of the grantee."
+                    },
+                    "Type": {
+                      "type": "string",
+                      "xmlname": "xsi:type",
+                      "xmlattribute": true,
+                      "enum": [
+                        "CanonicalUser",
+                        "AmazonCustomerByEmail",
+                        "Group"
+                      ],
+                      "documentation": "Type of grantee"
                     },
                     "URI": {
                       "type": "string",
@@ -1963,33 +1949,44 @@
                 },
                 "Permission": {
                   "type": "string",
-                  "documentation": "Specifies the permission given to the grantee.",
                   "enum": [
                     "FULL_CONTROL",
                     "WRITE",
                     "WRITE_ACP",
                     "READ",
                     "READ_ACP"
-                  ]
+                  ],
+                  "documentation": "Specifies the permission given to the grantee."
                 }
+              }
+            },
+            "documentation": "A list of grants."
+          },
+          "Owner": {
+            "type": "structure",
+            "members": {
+              "DisplayName": {
+                "type": "string"
+              },
+              "ID": {
+                "type": "string"
               }
             }
           }
-        },
-        "shape_name": "GetObjectAclOutput"
+        }
       },
       "errors": [
         {
-          "documentation": "The specified key does not exist.",
           "shape_name": "NoSuchKey",
-          "type": "structure"
+          "type": "structure",
+          "documentation": "The specified key does not exist."
         }
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETacl.html",
+      "documentation": "Returns the access control list (ACL) of an object."
     },
     "GetObjectTorrent": {
       "name": "GetObjectTorrent",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETtorrent.html",
-      "documentation": "Return torrent files from a bucket.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}/{Key}?torrent"
@@ -2010,24 +2007,24 @@
         }
       },
       "output": {
+        "shape_name": "GetObjectTorrentOutput",
         "type": "structure",
         "members": {
           "Body": {
+            "type": "blob",
             "payload": true,
-            "streaming": true,
-            "type": "blob"
+            "streaming": true
           }
-        },
-        "shape_name": "GetObjectTorrentOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html",
+      "documentation": "Return torrent files from a bucket."
     },
     "HeadBucket": {
       "name": "HeadBucket",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketHEAD.html",
-      "documentation": "This operation is useful to determine if a bucket exists and you have permission to access it.",
       "http": {
         "method": "HEAD",
         "uri": "/{Bucket}"
@@ -2045,16 +2042,16 @@
       "output": null,
       "errors": [
         {
-          "documentation": "The specified bucket does not exist.",
           "shape_name": "NoSuchBucket",
-          "type": "structure"
+          "type": "structure",
+          "documentation": "The specified bucket does not exist."
         }
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketHEAD.html",
+      "documentation": "This operation is useful to determine if a bucket exists and you have permission to access it."
     },
     "HeadObject": {
       "name": "HeadObject",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectHEAD.html",
-      "documentation": "The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object.",
       "http": {
         "method": "HEAD",
         "uri": "/{Bucket}/{Key}?versionId={VersionId}"
@@ -2110,60 +2107,13 @@
         }
       },
       "output": {
+        "shape_name": "HeadObjectOutput",
         "type": "structure",
         "members": {
-          "DeleteMarker": {
-            "type": "boolean",
-            "location": "header",
-            "location_name": "x-amz-delete-marker",
-            "documentation": "Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response."
-          },
           "AcceptRanges": {
             "type": "string",
             "location": "header",
             "location_name": "accept-ranges"
-          },
-          "Expiration": {
-            "type": "string",
-            "location": "header",
-            "location_name": "x-amz-expiration",
-            "documentation": "If the object expiration is configured (see PUT Bucket lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
-          },
-          "Restore": {
-            "type": "string",
-            "location": "header",
-            "location_name": "x-amz-restore",
-            "documentation": "Provides information about object restoration operation and expiration time of the restored object copy."
-          },
-          "LastModified": {
-            "type": "timestamp",
-            "location": "header",
-            "location_name": "Last-Modified",
-            "documentation": "Last modified date of the object"
-          },
-          "ContentLength": {
-            "type": "integer",
-            "location": "header",
-            "location_name": "Content-Length",
-            "documentation": "Size of the body in bytes."
-          },
-          "ETag": {
-            "type": "string",
-            "location": "header",
-            "location_name": "ETag",
-            "documentation": "An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
-          },
-          "MissingMeta": {
-            "type": "integer",
-            "location": "header",
-            "location_name": "x-amz-missing-meta",
-            "documentation": "This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers."
-          },
-          "VersionId": {
-            "type": "string",
-            "location": "header",
-            "location_name": "x-amz-version-id",
-            "documentation": "Version of the object."
           },
           "CacheControl": {
             "type": "string",
@@ -2189,11 +2139,35 @@
             "location_name": "Content-Language",
             "documentation": "The language the content is in."
           },
+          "ContentLength": {
+            "type": "integer",
+            "location": "header",
+            "location_name": "Content-Length",
+            "documentation": "Size of the body in bytes."
+          },
           "ContentType": {
             "type": "string",
             "location": "header",
             "location_name": "Content-Type",
             "documentation": "A standard MIME type describing the format of the object data."
+          },
+          "DeleteMarker": {
+            "type": "boolean",
+            "location": "header",
+            "location_name": "x-amz-delete-marker",
+            "documentation": "Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response."
+          },
+          "ETag": {
+            "type": "string",
+            "location": "header",
+            "location_name": "ETag",
+            "documentation": "An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
+          },
+          "Expiration": {
+            "type": "string",
+            "location": "header",
+            "location_name": "x-amz-expiration",
+            "documentation": "If the object expiration is configured (see PUT Bucket lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
           },
           "Expires": {
             "type": "timestamp",
@@ -2201,11 +2175,37 @@
             "location_name": "Expires",
             "documentation": "The date and time at which the object is no longer cacheable."
           },
-          "WebsiteRedirectLocation": {
+          "LastModified": {
+            "type": "timestamp",
+            "location": "header",
+            "location_name": "Last-Modified",
+            "documentation": "Last modified date of the object"
+          },
+          "Metadata": {
+            "type": "map",
+            "location": "header",
+            "location_name": "x-amz-meta-",
+            "members": {
+              "type": "string",
+              "documentation": "The metadata value."
+            },
+            "documentation": "A map of metadata to store with the object in S3.",
+            "keys": {
+              "type": "string",
+              "documentation": "The metadata key. This will be prefixed with x-amz-meta- before sending to S3 as a header. The x-amz-meta- header will be stripped from the key when retrieving headers."
+            }
+          },
+          "MissingMeta": {
+            "type": "integer",
+            "location": "header",
+            "location_name": "x-amz-missing-meta",
+            "documentation": "This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers."
+          },
+          "Restore": {
             "type": "string",
             "location": "header",
-            "location_name": "x-amz-website-redirect-location",
-            "documentation": "If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata."
+            "location_name": "x-amz-restore",
+            "documentation": "Provides information about object restoration operation and expiration time of the restored object copy."
           },
           "ServerSideEncryption": {
             "type": "string",
@@ -2216,42 +2216,40 @@
             ],
             "documentation": "The Server-side encryption algorithm used when storing this object in S3."
           },
-          "Metadata": {
-            "type": "map",
+          "VersionId": {
+            "type": "string",
             "location": "header",
-            "location_name": "x-amz-meta-",
-            "documentation": "A map of metadata to store with the object in S3.",
-            "keys": {
-              "type": "string",
-              "documentation": "The metadata key. This will be prefixed with x-amz-meta- before sending to S3 as a header. The x-amz-meta- header will be stripped from the key when retrieving headers."
-            },
-            "members": {
-              "type": "string",
-              "documentation": "The metadata value."
-            }
+            "location_name": "x-amz-version-id",
+            "documentation": "Version of the object."
+          },
+          "WebsiteRedirectLocation": {
+            "type": "string",
+            "location": "header",
+            "location_name": "x-amz-website-redirect-location",
+            "documentation": "If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata."
           }
-        },
-        "shape_name": "HeadObjectOutput"
+        }
       },
       "errors": [
         {
-          "documentation": "The specified key does not exist.",
           "shape_name": "NoSuchKey",
-          "type": "structure"
+          "type": "structure",
+          "documentation": "The specified key does not exist."
         }
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html",
+      "documentation": "The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object."
     },
     "ListBuckets": {
       "name": "ListBuckets",
       "alias": "GetService",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTServiceGET.html",
-      "documentation": "Returns a list of all buckets owned by the authenticated sender of the request.",
       "http": {
         "method": "GET",
         "uri": "/"
       },
       "input": null,
       "output": {
+        "shape_name": "ListBucketsOutput",
         "type": "structure",
         "members": {
           "Buckets": {
@@ -2260,13 +2258,13 @@
               "type": "structure",
               "xmlname": "Bucket",
               "members": {
-                "Name": {
-                  "type": "string",
-                  "documentation": "The name of the bucket."
-                },
                 "CreationDate": {
                   "type": "timestamp",
                   "documentation": "Date the bucket was created."
+                },
+                "Name": {
+                  "type": "string",
+                  "documentation": "The name of the bucket."
                 }
               }
             }
@@ -2274,28 +2272,27 @@
           "Owner": {
             "type": "structure",
             "members": {
-              "ID": {
+              "DisplayName": {
                 "type": "string"
               },
-              "DisplayName": {
+              "ID": {
                 "type": "string"
               }
             }
           }
-        },
-        "shape_name": "ListBucketsOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html",
+      "documentation": "Returns a list of all buckets owned by the authenticated sender of the request."
     },
     "ListMultipartUploads": {
       "name": "ListMultipartUploads",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListMPUpload.html",
-      "documentation": "This operation lists in-progress multipart uploads.",
       "http": {
         "method": "GET",
-        "uri": "/{Bucket}?uploads&prefix={Prefix}&delimiter={Delimiter}&max-uploads={MaxUploads}&key-marker={KeyMarker}&upload-id-marker={UploadIdMarker}"
+        "uri": "/{Bucket}?uploads&prefix={Prefix}&delimiter={Delimiter}&max-uploads={MaxUploads}&key-marker={KeyMarker}&upload-id-marker={UploadIdMarker}&encoding-type={EncodingType}"
       },
       "input": {
         "type": "structure",
@@ -2307,83 +2304,131 @@
           },
           "Delimiter": {
             "type": "string",
-            "documentation": "Character you use to group keys.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Character you use to group keys."
+          },
+          "EncodingType": {
+            "type": "string",
+            "location": "uri",
+            "enum": [
+              "url"
+            ],
+            "documentation": "Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response."
           },
           "KeyMarker": {
             "type": "string",
-            "documentation": "Together with upload-id-marker, this parameter specifies the multipart upload after which listing should begin.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Together with upload-id-marker, this parameter specifies the multipart upload after which listing should begin."
           },
           "MaxUploads": {
             "type": "integer",
-            "documentation": "Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the response body. 1,000 is the maximum number of uploads that can be returned in a response.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the response body. 1,000 is the maximum number of uploads that can be returned in a response."
           },
           "Prefix": {
             "type": "string",
-            "documentation": "Lists in-progress uploads only for those keys that begin with the specified prefix.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Lists in-progress uploads only for those keys that begin with the specified prefix."
           },
           "UploadIdMarker": {
             "type": "string",
-            "documentation": "Together with key-marker, specifies the multipart upload after which listing should begin. If key-marker is not specified, the upload-id-marker parameter is ignored.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Together with key-marker, specifies the multipart upload after which listing should begin. If key-marker is not specified, the upload-id-marker parameter is ignored."
           }
         }
       },
       "output": {
+        "shape_name": "ListMultipartUploadsOutput",
         "type": "structure",
         "members": {
           "Bucket": {
             "type": "string",
             "documentation": "Name of the bucket to which the multipart upload was initiated."
           },
-          "KeyMarker": {
+          "CommonPrefixes": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "Prefix": {
+                  "type": "string"
+                }
+              }
+            },
+            "flattened": true
+          },
+          "EncodingType": {
             "type": "string",
-            "documentation": "The key at or after which the listing began."
-          },
-          "UploadIdMarker": {
-            "type": "string",
-            "documentation": "Upload ID after which listing began."
-          },
-          "NextKeyMarker": {
-            "type": "string",
-            "documentation": "When a list is truncated, this element specifies the value that should be used for the key-marker request parameter in a subsequent request."
-          },
-          "Prefix": {
-            "type": "string"
-          },
-          "NextUploadIdMarker": {
-            "type": "string",
-            "documentation": "When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request."
-          },
-          "MaxUploads": {
-            "type": "integer",
-            "documentation": "Maximum number of multipart uploads that could have been included in the response."
+            "location": "header",
+            "location_name": "Encoding-Type",
+            "documentation": "Encoding type used by Amazon S3 to encode object keys in the response."
           },
           "IsTruncated": {
             "type": "boolean",
             "documentation": "Indicates whether the returned list of multipart uploads is truncated. A value of true indicates that the list was truncated. The list can be truncated if the number of multipart uploads exceeds the limit allowed or specified by max uploads."
           },
+          "KeyMarker": {
+            "type": "string",
+            "documentation": "The key at or after which the listing began."
+          },
+          "MaxUploads": {
+            "type": "integer",
+            "documentation": "Maximum number of multipart uploads that could have been included in the response."
+          },
+          "NextKeyMarker": {
+            "type": "string",
+            "documentation": "When a list is truncated, this element specifies the value that should be used for the key-marker request parameter in a subsequent request."
+          },
+          "NextUploadIdMarker": {
+            "type": "string",
+            "documentation": "When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request."
+          },
+          "Prefix": {
+            "type": "string",
+            "documentation": "When a prefix is provided in the request, this field contains the specified prefix. The result contains only keys starting with the specified prefix."
+          },
+          "UploadIdMarker": {
+            "type": "string",
+            "documentation": "Upload ID after which listing began."
+          },
           "Uploads": {
             "type": "list",
-            "flattened": true,
             "xmlname": "Upload",
             "members": {
               "type": "structure",
               "members": {
-                "UploadId": {
-                  "type": "string",
-                  "documentation": "Upload ID that identifies the multipart upload."
+                "Initiated": {
+                  "type": "timestamp",
+                  "documentation": "Date and time at which the multipart upload was initiated."
+                },
+                "Initiator": {
+                  "type": "structure",
+                  "members": {
+                    "DisplayName": {
+                      "type": "string",
+                      "documentation": "Name of the Principal."
+                    },
+                    "ID": {
+                      "type": "string",
+                      "documentation": "If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value."
+                    }
+                  },
+                  "documentation": "Identifies who initiated the multipart upload."
                 },
                 "Key": {
                   "type": "string",
                   "documentation": "Key of the object for which the multipart upload was initiated."
                 },
-                "Initiated": {
-                  "type": "timestamp",
-                  "documentation": "Date and time at which the multipart upload was initiated."
+                "Owner": {
+                  "type": "structure",
+                  "members": {
+                    "DisplayName": {
+                      "type": "string"
+                    },
+                    "ID": {
+                      "type": "string"
+                    }
+                  }
                 },
                 "StorageClass": {
                   "type": "string",
@@ -2394,61 +2439,28 @@
                   ],
                   "documentation": "The class of storage used to store the object."
                 },
-                "Owner": {
-                  "type": "structure",
-                  "members": {
-                    "ID": {
-                      "type": "string"
-                    },
-                    "DisplayName": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "Initiator": {
-                  "type": "structure",
-                  "documentation": "Identifies who initiated the multipart upload.",
-                  "members": {
-                    "ID": {
-                      "type": "string",
-                      "documentation": "If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value."
-                    },
-                    "DisplayName": {
-                      "type": "string",
-                      "documentation": "Name of the Principal."
-                    }
-                  }
+                "UploadId": {
+                  "type": "string",
+                  "documentation": "Upload ID that identifies the multipart upload."
                 }
               }
-            }
-          },
-          "CommonPrefixes": {
-            "type": "list",
-            "flattened": true,
-            "members": {
-              "type": "structure",
-              "members": {
-                "Prefix": {
-                  "type": "string"
-                }
-              }
-            }
+            },
+            "flattened": true
           }
-        },
-        "shape_name": "ListMultipartUploadsOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListMPUpload.html",
+      "documentation": "This operation lists in-progress multipart uploads."
     },
     "ListObjectVersions": {
       "name": "ListObjectVersions",
       "alias": "GetBucketObjectVersions",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETVersion.html",
-      "documentation": "Returns metadata about all of the versions of objects in a bucket.",
       "http": {
         "method": "GET",
-        "uri": "/{Bucket}?versions&delimiter={Delimiter}&key-marker={KeyMarker}&max-keys={MaxKeys}&prefix={Prefix}&version-id-marker={VersionIdMarker}"
+        "uri": "/{Bucket}?versions&delimiter={Delimiter}&key-marker={KeyMarker}&max-keys={MaxKeys}&prefix={Prefix}&version-id-marker={VersionIdMarker}&encoding-type={EncodingType}"
       },
       "input": {
         "type": "structure",
@@ -2460,34 +2472,98 @@
           },
           "Delimiter": {
             "type": "string",
-            "documentation": "A delimiter is a character you use to group keys.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "A delimiter is a character you use to group keys."
+          },
+          "EncodingType": {
+            "type": "string",
+            "location": "uri",
+            "enum": [
+              "url"
+            ],
+            "documentation": "Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response."
           },
           "KeyMarker": {
             "type": "string",
-            "documentation": "Specifies the key to start with when listing objects in a bucket.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Specifies the key to start with when listing objects in a bucket."
           },
           "MaxKeys": {
             "type": "integer",
-            "documentation": "Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more."
           },
           "Prefix": {
             "type": "string",
-            "documentation": "Limits the response to keys that begin with the specified prefix.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Limits the response to keys that begin with the specified prefix."
           },
           "VersionIdMarker": {
             "type": "string",
-            "documentation": "Specifies the object version you want to start listing from.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Specifies the object version you want to start listing from."
           }
         }
       },
       "output": {
+        "shape_name": "ListObjectVersionsOutput",
         "type": "structure",
         "members": {
+          "CommonPrefixes": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "Prefix": {
+                  "type": "string"
+                }
+              }
+            },
+            "flattened": true
+          },
+          "DeleteMarkers": {
+            "type": "list",
+            "xmlname": "DeleteMarker",
+            "members": {
+              "type": "structure",
+              "members": {
+                "IsLatest": {
+                  "type": "boolean",
+                  "documentation": "Specifies whether the object is (true) or is not (false) the latest version of an object."
+                },
+                "Key": {
+                  "type": "string",
+                  "documentation": "The object key."
+                },
+                "LastModified": {
+                  "type": "timestamp",
+                  "documentation": "Date and time the object was last modified."
+                },
+                "Owner": {
+                  "type": "structure",
+                  "members": {
+                    "DisplayName": {
+                      "type": "string"
+                    },
+                    "ID": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "VersionId": {
+                  "type": "string",
+                  "documentation": "Version ID of an object."
+                }
+              }
+            },
+            "flattened": true
+          },
+          "EncodingType": {
+            "type": "string",
+            "location": "header",
+            "location_name": "Encoding-Type",
+            "documentation": "Encoding type used by Amazon S3 to encode object keys in the response."
+          },
           "IsTruncated": {
             "type": "boolean",
             "documentation": "A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria. If your results were truncated, you can make a follow-up paginated request using the NextKeyMarker and NextVersionIdMarker response parameters as a starting place in another request to return the rest of the results."
@@ -2496,7 +2572,10 @@
             "type": "string",
             "documentation": "Marks the last Key returned in a truncated response."
           },
-          "VersionIdMarker": {
+          "MaxKeys": {
+            "type": "integer"
+          },
+          "Name": {
             "type": "string"
           },
           "NextKeyMarker": {
@@ -2507,15 +2586,43 @@
             "type": "string",
             "documentation": "Use this value for the next version id marker parameter in a subsequent request."
           },
+          "Prefix": {
+            "type": "string"
+          },
+          "VersionIdMarker": {
+            "type": "string"
+          },
           "Versions": {
             "type": "list",
-            "flattened": true,
             "xmlname": "Version",
             "members": {
               "type": "structure",
               "members": {
                 "ETag": {
                   "type": "string"
+                },
+                "IsLatest": {
+                  "type": "boolean",
+                  "documentation": "Specifies whether the object is (true) or is not (false) the latest version of an object."
+                },
+                "Key": {
+                  "type": "string",
+                  "documentation": "The object key."
+                },
+                "LastModified": {
+                  "type": "timestamp",
+                  "documentation": "Date and time the object was last modified."
+                },
+                "Owner": {
+                  "type": "structure",
+                  "members": {
+                    "DisplayName": {
+                      "type": "string"
+                    },
+                    "ID": {
+                      "type": "string"
+                    }
+                  }
                 },
                 "Size": {
                   "type": "string",
@@ -2530,109 +2637,28 @@
                   ],
                   "documentation": "The class of storage used to store the object."
                 },
-                "Key": {
-                  "type": "string",
-                  "documentation": "The object key."
-                },
                 "VersionId": {
                   "type": "string",
                   "documentation": "Version ID of an object."
-                },
-                "IsLatest": {
-                  "type": "boolean",
-                  "documentation": "Specifies whether the object is (true) or is not (false) the latest version of an object."
-                },
-                "LastModified": {
-                  "type": "timestamp",
-                  "documentation": "Date and time the object was last modified."
-                },
-                "Owner": {
-                  "type": "structure",
-                  "members": {
-                    "ID": {
-                      "type": "string"
-                    },
-                    "DisplayName": {
-                      "type": "string"
-                    }
-                  }
                 }
               }
-            }
-          },
-          "DeleteMarkers": {
-            "type": "list",
-            "flattened": true,
-            "xmlname": "DeleteMarker",
-            "members": {
-              "type": "structure",
-              "members": {
-                "Owner": {
-                  "type": "structure",
-                  "members": {
-                    "ID": {
-                      "type": "string"
-                    },
-                    "DisplayName": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "Key": {
-                  "type": "string",
-                  "documentation": "The object key."
-                },
-                "VersionId": {
-                  "type": "string",
-                  "documentation": "Version ID of an object."
-                },
-                "IsLatest": {
-                  "type": "boolean",
-                  "documentation": "Specifies whether the object is (true) or is not (false) the latest version of an object."
-                },
-                "LastModified": {
-                  "type": "timestamp",
-                  "documentation": "Date and time the object was last modified."
-                }
-              }
-            }
-          },
-          "Name": {
-            "type": "string"
-          },
-          "Prefix": {
-            "type": "string"
-          },
-          "MaxKeys": {
-            "type": "integer"
-          },
-          "CommonPrefixes": {
-            "type": "list",
-            "flattened": true,
-            "members": {
-              "type": "structure",
-              "members": {
-                "Prefix": {
-                  "type": "string"
-                }
-              }
-            }
+            },
+            "flattened": true
           }
-        },
-        "shape_name": "ListObjectVersionsOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETVersion.html",
+      "documentation": "Returns metadata about all of the versions of objects in a bucket."
     },
     "ListObjects": {
       "name": "ListObjects",
       "alias": "GetBucket",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGET.html",
-      "documentation": "Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket.",
       "http": {
         "method": "GET",
-        "uri": "/{Bucket}?delimiter={Delimiter}&marker={Marker}&max-keys={MaxKeys}&prefix={Prefix}"
+        "uri": "/{Bucket}?delimiter={Delimiter}&marker={Marker}&max-keys={MaxKeys}&prefix={Prefix}&encoding-type={EncodingType}"
       },
       "input": {
         "type": "structure",
@@ -2644,53 +2670,74 @@
           },
           "Delimiter": {
             "type": "string",
-            "documentation": "A delimiter is a character you use to group keys.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "A delimiter is a character you use to group keys."
+          },
+          "EncodingType": {
+            "type": "string",
+            "location": "uri",
+            "enum": [
+              "url"
+            ],
+            "documentation": "Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response."
           },
           "Marker": {
             "type": "string",
-            "documentation": "Specifies the key to start with when listing objects in a bucket.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Specifies the key to start with when listing objects in a bucket."
           },
           "MaxKeys": {
             "type": "integer",
-            "documentation": "Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more."
           },
           "Prefix": {
             "type": "string",
-            "documentation": "Limits the response to keys that begin with the specified prefix.",
-            "location": "uri"
+            "location": "uri",
+            "documentation": "Limits the response to keys that begin with the specified prefix."
           }
         }
       },
       "output": {
+        "shape_name": "ListObjectsOutput",
         "type": "structure",
         "members": {
-          "IsTruncated": {
-            "type": "boolean",
-            "documentation": "A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria."
-          },
-          "Marker": {
-            "type": "string"
-          },
-          "NextMarker": {
-            "type": "string"
-          },
-          "Contents": {
+          "CommonPrefixes": {
             "type": "list",
-            "flattened": true,
             "members": {
               "type": "structure",
               "members": {
+                "Prefix": {
+                  "type": "string"
+                }
+              }
+            },
+            "flattened": true
+          },
+          "Contents": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "ETag": {
+                  "type": "string"
+                },
                 "Key": {
                   "type": "string"
                 },
                 "LastModified": {
                   "type": "timestamp"
                 },
-                "ETag": {
-                  "type": "string"
+                "Owner": {
+                  "type": "structure",
+                  "members": {
+                    "DisplayName": {
+                      "type": "string"
+                    },
+                    "ID": {
+                      "type": "string"
+                    }
+                  }
                 },
                 "Size": {
                   "type": "integer"
@@ -2703,57 +2750,51 @@
                     "GLACIER"
                   ],
                   "documentation": "The class of storage used to store the object."
-                },
-                "Owner": {
-                  "type": "structure",
-                  "members": {
-                    "ID": {
-                      "type": "string"
-                    },
-                    "DisplayName": {
-                      "type": "string"
-                    }
-                  }
                 }
               }
-            }
+            },
+            "flattened": true
           },
-          "Name": {
-            "type": "string"
+          "EncodingType": {
+            "type": "string",
+            "location": "header",
+            "location_name": "Encoding-Type",
+            "documentation": "Encoding type used by Amazon S3 to encode object keys in the response."
           },
-          "Prefix": {
+          "IsTruncated": {
+            "type": "boolean",
+            "documentation": "A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria."
+          },
+          "Marker": {
             "type": "string"
           },
           "MaxKeys": {
             "type": "integer"
           },
-          "CommonPrefixes": {
-            "type": "list",
-            "flattened": true,
-            "members": {
-              "type": "structure",
-              "members": {
-                "Prefix": {
-                  "type": "string"
-                }
-              }
-            }
+          "Name": {
+            "type": "string"
+          },
+          "NextMarker": {
+            "type": "string",
+            "documentation": "When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys."
+          },
+          "Prefix": {
+            "type": "string"
           }
-        },
-        "shape_name": "ListObjectsOutput"
+        }
       },
       "errors": [
         {
-          "documentation": "The specified bucket does not exist.",
           "shape_name": "NoSuchBucket",
-          "type": "structure"
+          "type": "structure",
+          "documentation": "The specified bucket does not exist."
         }
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html",
+      "documentation": "Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket."
     },
     "ListParts": {
       "name": "ListParts",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListParts.html",
-      "documentation": "Lists the parts that have been uploaded for a specific multipart upload.",
       "http": {
         "method": "GET",
         "uri": "/{Bucket}/{Key}?uploadId={UploadId}&max-parts={MaxParts}&part-number-marker={PartNumberMarker}"
@@ -2777,7 +2818,7 @@
             "documentation": "Sets the maximum number of parts to return."
           },
           "PartNumberMarker": {
-            "type": "string",
+            "type": "integer",
             "location": "uri",
             "documentation": "Specifies the part after which listing should begin. Only parts with higher part numbers will be listed."
           },
@@ -2790,86 +2831,83 @@
         }
       },
       "output": {
+        "shape_name": "ListPartsOutput",
         "type": "structure",
         "members": {
           "Bucket": {
             "type": "string",
             "documentation": "Name of the bucket to which the multipart upload was initiated."
           },
-          "Key": {
-            "type": "string",
-            "documentation": "Object key for which the multipart upload was initiated."
-          },
-          "UploadId": {
-            "type": "string",
-            "documentation": "Upload ID identifying the multipart upload whose parts are being listed."
-          },
-          "PartNumberMarker": {
-            "type": "integer",
-            "documentation": "Part number after which listing begins."
-          },
-          "NextPartNumberMarker": {
-            "type": "integer",
-            "documentation": "When a list is truncated, this element specifies the last part in the list, as well as the value to use for the part-number-marker request parameter in a subsequent request."
-          },
-          "MaxParts": {
-            "type": "integer",
-            "documentation": "Maximum number of parts that were allowed in the response."
+          "Initiator": {
+            "type": "structure",
+            "members": {
+              "DisplayName": {
+                "type": "string",
+                "documentation": "Name of the Principal."
+              },
+              "ID": {
+                "type": "string",
+                "documentation": "If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value."
+              }
+            },
+            "documentation": "Identifies who initiated the multipart upload."
           },
           "IsTruncated": {
             "type": "boolean",
             "documentation": "Indicates whether the returned list of parts is truncated."
           },
+          "Key": {
+            "type": "string",
+            "documentation": "Object key for which the multipart upload was initiated."
+          },
+          "MaxParts": {
+            "type": "integer",
+            "documentation": "Maximum number of parts that were allowed in the response."
+          },
+          "NextPartNumberMarker": {
+            "type": "integer",
+            "documentation": "When a list is truncated, this element specifies the last part in the list, as well as the value to use for the part-number-marker request parameter in a subsequent request."
+          },
+          "Owner": {
+            "type": "structure",
+            "members": {
+              "DisplayName": {
+                "type": "string"
+              },
+              "ID": {
+                "type": "string"
+              }
+            }
+          },
+          "PartNumberMarker": {
+            "type": "integer",
+            "documentation": "Part number after which listing begins."
+          },
           "Parts": {
             "type": "list",
-            "flattened": true,
             "xmlname": "Part",
             "members": {
               "type": "structure",
               "members": {
-                "PartNumber": {
-                  "type": "integer",
-                  "documentation": "Part number identifying the part."
+                "ETag": {
+                  "type": "string",
+                  "documentation": "Entity tag returned when the part was uploaded."
                 },
                 "LastModified": {
                   "type": "timestamp",
                   "documentation": "Date and time at which the part was uploaded."
                 },
-                "ETag": {
-                  "type": "string",
-                  "documentation": "Entity tag returned when the part was uploaded."
+                "PartNumber": {
+                  "type": "integer",
+                  "documentation": "Part number identifying the part."
                 },
                 "Size": {
                   "type": "integer",
                   "documentation": "Size of the uploaded part data."
                 }
               }
-            }
-          },
-          "Initiator": {
-            "type": "structure",
-            "documentation": "Identifies who initiated the multipart upload.",
-            "members": {
-              "ID": {
-                "type": "string",
-                "documentation": "If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value."
-              },
-              "DisplayName": {
-                "type": "string",
-                "documentation": "Name of the Principal."
-              }
-            }
-          },
-          "Owner": {
-            "type": "structure",
-            "members": {
-              "ID": {
-                "type": "string"
-              },
-              "DisplayName": {
-                "type": "string"
-              }
-            }
+            },
+            "flattened": true
           },
           "StorageClass": {
             "type": "string",
@@ -2879,18 +2917,21 @@
               "GLACIER"
             ],
             "documentation": "The class of storage used to store the object."
+          },
+          "UploadId": {
+            "type": "string",
+            "documentation": "Upload ID identifying the multipart upload whose parts are being listed."
           }
-        },
-        "shape_name": "ListPartsOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListParts.html",
+      "documentation": "Lists the parts that have been uploaded for a specific multipart upload."
     },
     "PutBucketAcl": {
       "name": "PutBucketAcl",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTacl.html",
-      "documentation": "Sets the permissions on a bucket using access control lists (ACL).",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}?acl"
@@ -2900,7 +2941,8 @@
         "members": {
           "ACL": {
             "type": "string",
-            "documentation": "The canned ACL to apply to the bucket.",
+            "location": "header",
+            "location_name": "x-amz-acl",
             "enum": [
               "private",
               "public-read",
@@ -2909,8 +2951,7 @@
               "bucket-owner-read",
               "bucket-owner-full-control"
             ],
-            "location": "header",
-            "location_name": "x-amz-acl"
+            "documentation": "The canned ACL to apply to the bucket."
           },
           "AccessControlPolicy": {
             "type": "structure",
@@ -2918,18 +2959,17 @@
             "members": {
               "Grants": {
                 "type": "list",
-                "documentation": "A list of grants.",
                 "xmlname": "AccessControlList",
                 "members": {
                   "type": "structure",
                   "xmlname": "Grant",
                   "members": {
                     "Grantee": {
-                      "type": "structure",
                       "xmlnamespace": {
-                        "prefix": "xsi",
-                        "uri": "http://www.w3.org/2001/XMLSchema-instance"
+                        "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                        "prefix": "xsi"
                       },
+                      "type": "structure",
                       "members": {
                         "DisplayName": {
                           "type": "string",
@@ -2946,14 +2986,14 @@
                         "Type": {
                           "type": "string",
                           "required": true,
-                          "xmlattribute": true,
                           "xmlname": "xsi:type",
-                          "documentation": "Type of grantee",
+                          "xmlattribute": true,
                           "enum": [
                             "CanonicalUser",
                             "AmazonCustomerByEmail",
                             "Group"
-                          ]
+                          ],
+                          "documentation": "Type of grantee"
                         },
                         "URI": {
                           "type": "string",
@@ -2963,17 +3003,18 @@
                     },
                     "Permission": {
                       "type": "string",
-                      "documentation": "Specifies the permission given to the grantee.",
                       "enum": [
                         "FULL_CONTROL",
                         "WRITE",
                         "WRITE_ACP",
                         "READ",
                         "READ_ACP"
-                      ]
+                      ],
+                      "documentation": "Specifies the permission given to the grantee."
                     }
                   }
-                }
+                },
+                "documentation": "A list of grants."
               },
               "Owner": {
                 "type": "structure",
@@ -3000,45 +3041,45 @@
           },
           "GrantFullControl": {
             "type": "string",
-            "documentation": "Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-full-control"
+            "location_name": "x-amz-grant-full-control",
+            "documentation": "Allows grantee the read, write, read ACP, and write ACP permissions on the bucket."
           },
           "GrantRead": {
             "type": "string",
-            "documentation": "Allows grantee to list the objects in the bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-read"
+            "location_name": "x-amz-grant-read",
+            "documentation": "Allows grantee to list the objects in the bucket."
           },
           "GrantReadACP": {
             "type": "string",
-            "documentation": "Allows grantee to read the bucket ACL.",
             "location": "header",
-            "location_name": "x-amz-grant-read-acp"
+            "location_name": "x-amz-grant-read-acp",
+            "documentation": "Allows grantee to read the bucket ACL."
           },
           "GrantWrite": {
             "type": "string",
-            "documentation": "Allows grantee to create, overwrite, and delete any object in the bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-write"
+            "location_name": "x-amz-grant-write",
+            "documentation": "Allows grantee to create, overwrite, and delete any object in the bucket."
           },
           "GrantWriteACP": {
             "type": "string",
-            "documentation": "Allows grantee to write the ACL for the applicable bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-write-acp"
+            "location_name": "x-amz-grant-write-acp",
+            "documentation": "Allows grantee to write the ACL for the applicable bucket."
           }
         }
       },
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTacl.html",
+      "documentation": "Sets the permissions on a bucket using access control lists (ACL)."
     },
     "PutBucketCors": {
       "name": "PutBucketCors",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTcors.html",
-      "documentation": "Sets the cors configuration for a bucket.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}?cors"
@@ -3057,53 +3098,53 @@
             "members": {
               "CORSRules": {
                 "type": "list",
-                "flattened": true,
                 "xmlname": "CORSRule",
                 "members": {
                   "type": "structure",
                   "members": {
                     "AllowedHeaders": {
                       "type": "list",
-                      "flattened": true,
                       "xmlname": "AllowedHeader",
-                      "documentation": "Specifies which headers are allowed in a pre-flight OPTIONS request.",
                       "members": {
                         "type": "string"
-                      }
+                      },
+                      "documentation": "Specifies which headers are allowed in a pre-flight OPTIONS request.",
+                      "flattened": true
                     },
                     "AllowedMethods": {
                       "type": "list",
-                      "flattened": true,
                       "xmlname": "AllowedMethod",
-                      "documentation": "Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.",
                       "members": {
                         "type": "string"
-                      }
+                      },
+                      "documentation": "Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.",
+                      "flattened": true
                     },
                     "AllowedOrigins": {
                       "type": "list",
-                      "flattened": true,
                       "xmlname": "AllowedOrigin",
-                      "documentation": "One or more origins you want customers to be able to access the bucket from.",
                       "members": {
                         "type": "string"
-                      }
+                      },
+                      "documentation": "One or more origins you want customers to be able to access the bucket from.",
+                      "flattened": true
                     },
                     "ExposeHeaders": {
                       "type": "list",
-                      "flattened": true,
                       "xmlname": "ExposeHeader",
-                      "documentation": "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
                       "members": {
                         "type": "string"
-                      }
+                      },
+                      "documentation": "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
+                      "flattened": true
                     },
                     "MaxAgeSeconds": {
                       "type": "integer",
                       "documentation": "The time in seconds that your browser is to cache the preflight response for the specified resource."
                     }
                   }
-                }
+                },
+                "flattened": true
               }
             }
           },
@@ -3117,12 +3158,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTcors.html",
+      "documentation": "Sets the cors configuration for a bucket."
     },
     "PutBucketLifecycle": {
       "name": "PutBucketLifecycle",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html",
-      "documentation": "Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}?lifecycle"
@@ -3146,9 +3187,8 @@
             "members": {
               "Rules": {
                 "type": "list",
-                "flattened": true,
-                "xmlname": "Rule",
                 "required": true,
+                "xmlname": "Rule",
                 "members": {
                   "type": "structure",
                   "members": {
@@ -3157,8 +3197,8 @@
                       "members": {
                         "Date": {
                           "type": "timestamp",
-                          "timestamp_format": "iso8601",
-                          "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format."
+                          "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.",
+                          "timestamp_format": "iso8601"
                         },
                         "Days": {
                           "type": "integer",
@@ -3178,19 +3218,19 @@
                     "Status": {
                       "type": "string",
                       "required": true,
-                      "documentation": "If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.",
                       "enum": [
                         "Enabled",
                         "Disabled"
-                      ]
+                      ],
+                      "documentation": "If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied."
                     },
                     "Transition": {
                       "type": "structure",
                       "members": {
                         "Date": {
                           "type": "timestamp",
-                          "timestamp_format": "iso8601",
-                          "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format."
+                          "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.",
+                          "timestamp_format": "iso8601"
                         },
                         "Days": {
                           "type": "integer",
@@ -3208,7 +3248,8 @@
                       }
                     }
                   }
-                }
+                },
+                "flattened": true
               }
             }
           }
@@ -3217,12 +3258,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html",
+      "documentation": "Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it."
     },
     "PutBucketLogging": {
       "name": "PutBucketLogging",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlogging.html",
-      "documentation": "Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. To set the logging status of a bucket, you must be the bucket owner.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}?logging"
@@ -3237,12 +3278,11 @@
           },
           "BucketLoggingStatus": {
             "type": "structure",
-            "required": true,
             "payload": true,
+            "required": true,
             "members": {
               "LoggingEnabled": {
                 "type": "structure",
-                "required": false,
                 "members": {
                   "TargetBucket": {
                     "type": "string",
@@ -3255,11 +3295,11 @@
                       "xmlname": "Grant",
                       "members": {
                         "Grantee": {
-                          "type": "structure",
                           "xmlnamespace": {
-                            "prefix": "xsi",
-                            "uri": "http://www.w3.org/2001/XMLSchema-instance"
+                            "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                            "prefix": "xsi"
                           },
+                          "type": "structure",
                           "members": {
                             "DisplayName": {
                               "type": "string",
@@ -3276,14 +3316,14 @@
                             "Type": {
                               "type": "string",
                               "required": true,
-                              "xmlattribute": true,
                               "xmlname": "xsi:type",
-                              "documentation": "Type of grantee",
+                              "xmlattribute": true,
                               "enum": [
                                 "CanonicalUser",
                                 "AmazonCustomerByEmail",
                                 "Group"
-                              ]
+                              ],
+                              "documentation": "Type of grantee"
                             },
                             "URI": {
                               "type": "string",
@@ -3315,12 +3355,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html",
+      "documentation": "Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. To set the logging status of a bucket, you must be the bucket owner."
     },
     "PutBucketNotification": {
       "name": "PutBucketNotification",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTnotification.html",
-      "documentation": "Enables notifications of specified events for a bucket.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}?notification"
@@ -3340,8 +3380,8 @@
           },
           "NotificationConfiguration": {
             "type": "structure",
-            "required": true,
             "payload": true,
+            "required": true,
             "members": {
               "TopicConfiguration": {
                 "type": "structure",
@@ -3367,12 +3407,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTnotification.html",
+      "documentation": "Enables notifications of specified events for a bucket."
     },
     "PutBucketPolicy": {
       "name": "PutBucketPolicy",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html",
-      "documentation": "Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}?policy"
@@ -3392,8 +3432,8 @@
           },
           "Policy": {
             "type": "string",
-            "required": true,
             "payload": true,
+            "required": true,
             "documentation": "The bucket policy as a JSON document."
           }
         }
@@ -3401,12 +3441,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html",
+      "documentation": "Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it."
     },
     "PutBucketRequestPayment": {
       "name": "PutBucketRequestPayment",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html",
-      "documentation": "Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person requesting the download will be charged for the download.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}?requestPayment"
@@ -3426,8 +3466,8 @@
           },
           "RequestPaymentConfiguration": {
             "type": "structure",
-            "required": true,
             "payload": true,
+            "required": true,
             "members": {
               "Payer": {
                 "type": "string",
@@ -3445,12 +3485,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html",
+      "documentation": "Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person requesting the download will be charged for the download."
     },
     "PutBucketTagging": {
       "name": "PutBucketTagging",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTtagging.html",
-      "documentation": "Sets the tags for a bucket.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}?tagging"
@@ -3470,16 +3510,16 @@
           },
           "Tagging": {
             "type": "structure",
-            "required": true,
             "payload": true,
+            "required": true,
             "members": {
               "TagSet": {
                 "type": "list",
                 "required": true,
                 "members": {
                   "type": "structure",
-                  "xmlname": "Tag",
                   "required": true,
+                  "xmlname": "Tag",
                   "members": {
                     "Key": {
                       "type": "string",
@@ -3501,12 +3541,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTtagging.html",
+      "documentation": "Sets the tags for a bucket."
     },
     "PutBucketVersioning": {
       "name": "PutBucketVersioning",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html",
-      "documentation": "Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}?versioning"
@@ -3526,14 +3566,14 @@
           },
           "MFA": {
             "type": "string",
-            "documentation": "The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.",
             "location": "header",
-            "location_name": "x-amz-mfa"
+            "location_name": "x-amz-mfa",
+            "documentation": "The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device."
           },
           "VersioningConfiguration": {
             "type": "structure",
-            "required": true,
             "payload": true,
+            "required": true,
             "members": {
               "MFADelete": {
                 "type": "string",
@@ -3558,12 +3598,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html",
+      "documentation": "Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner."
     },
     "PutBucketWebsite": {
       "name": "PutBucketWebsite",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html",
-      "documentation": "Set the website configuration for a bucket.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}?website"
@@ -3583,8 +3623,8 @@
           },
           "WebsiteConfiguration": {
             "type": "structure",
-            "required": true,
             "payload": true,
+            "required": true,
             "members": {
               "ErrorDocument": {
                 "type": "structure",
@@ -3632,7 +3672,6 @@
                   "members": {
                     "Condition": {
                       "type": "structure",
-                      "documentation": "A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error.",
                       "members": {
                         "HttpErrorCodeReturnedEquals": {
                           "type": "string",
@@ -3642,12 +3681,12 @@
                           "type": "string",
                           "documentation": "The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied."
                         }
-                      }
+                      },
+                      "documentation": "A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error."
                     },
                     "Redirect": {
                       "type": "structure",
                       "required": true,
-                      "documentation": "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return.",
                       "members": {
                         "HostName": {
                           "type": "string",
@@ -3673,7 +3712,8 @@
                           "type": "string",
                           "documentation": "The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided."
                         }
-                      }
+                      },
+                      "documentation": "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return."
                     }
                   }
                 }
@@ -3685,12 +3725,12 @@
       "output": null,
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html",
+      "documentation": "Set the website configuration for a bucket."
     },
     "PutObject": {
       "name": "PutObject",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUT.html",
-      "documentation": "Adds an object to a bucket.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}/{Key}"
@@ -3700,6 +3740,8 @@
         "members": {
           "ACL": {
             "type": "string",
+            "location": "header",
+            "location_name": "x-amz-acl",
             "enum": [
               "private",
               "public-read",
@@ -3708,8 +3750,6 @@
               "bucket-owner-read",
               "bucket-owner-full-control"
             ],
-            "location": "header",
-            "location_name": "x-amz-acl",
             "documentation": "The canned ACL to apply to the object."
           },
           "Body": {
@@ -3802,14 +3842,14 @@
             "type": "map",
             "location": "header",
             "location_name": "x-amz-meta-",
+            "members": {
+              "type": "string",
+              "documentation": "The metadata value."
+            },
             "documentation": "A map of metadata to store with the object in S3.",
             "keys": {
               "type": "string",
               "documentation": "The metadata key. This will be prefixed with x-amz-meta- before sending to S3 as a header. The x-amz-meta- header will be stripped from the key when retrieving headers."
-            },
-            "members": {
-              "type": "string",
-              "documentation": "The metadata value."
             }
           },
           "ServerSideEncryption": {
@@ -3823,12 +3863,12 @@
           },
           "StorageClass": {
             "type": "string",
+            "location": "header",
+            "location_name": "x-amz-storage-class",
             "enum": [
               "STANDARD",
               "REDUCED_REDUNDANCY"
             ],
-            "location": "header",
-            "location_name": "x-amz-storage-class",
             "documentation": "The type of storage to use for the object. Defaults to 'STANDARD'."
           },
           "WebsiteRedirectLocation": {
@@ -3840,19 +3880,20 @@
         }
       },
       "output": {
+        "shape_name": "PutObjectOutput",
         "type": "structure",
         "members": {
-          "Expiration": {
-            "type": "timestamp",
-            "location": "header",
-            "location_name": "x-amz-expiration",
-            "documentation": "If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded."
-          },
           "ETag": {
             "type": "string",
             "location": "header",
             "location_name": "ETag",
             "documentation": "Entity tag for the uploaded object."
+          },
+          "Expiration": {
+            "type": "timestamp",
+            "location": "header",
+            "location_name": "x-amz-expiration",
+            "documentation": "If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded."
           },
           "ServerSideEncryption": {
             "type": "string",
@@ -3869,17 +3910,16 @@
             "location_name": "x-amz-version-id",
             "documentation": "Version of the object."
           }
-        },
-        "shape_name": "PutObjectOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html",
+      "documentation": "Adds an object to a bucket."
     },
     "PutObjectAcl": {
       "name": "PutObjectAcl",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUTacl.html",
-      "documentation": "uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}/{Key}?acl"
@@ -3889,7 +3929,8 @@
         "members": {
           "ACL": {
             "type": "string",
-            "documentation": "The canned ACL to apply to the bucket.",
+            "location": "header",
+            "location_name": "x-amz-acl",
             "enum": [
               "private",
               "public-read",
@@ -3898,8 +3939,7 @@
               "bucket-owner-read",
               "bucket-owner-full-control"
             ],
-            "location": "header",
-            "location_name": "x-amz-acl"
+            "documentation": "The canned ACL to apply to the bucket."
           },
           "AccessControlPolicy": {
             "type": "structure",
@@ -3907,18 +3947,17 @@
             "members": {
               "Grants": {
                 "type": "list",
-                "documentation": "A list of grants.",
                 "xmlname": "AccessControlList",
                 "members": {
                   "type": "structure",
                   "xmlname": "Grant",
                   "members": {
                     "Grantee": {
-                      "type": "structure",
                       "xmlnamespace": {
-                        "prefix": "xsi",
-                        "uri": "http://www.w3.org/2001/XMLSchema-instance"
+                        "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                        "prefix": "xsi"
                       },
+                      "type": "structure",
                       "members": {
                         "DisplayName": {
                           "type": "string",
@@ -3935,14 +3974,14 @@
                         "Type": {
                           "type": "string",
                           "required": true,
-                          "xmlattribute": true,
                           "xmlname": "xsi:type",
-                          "documentation": "Type of grantee",
+                          "xmlattribute": true,
                           "enum": [
                             "CanonicalUser",
                             "AmazonCustomerByEmail",
                             "Group"
-                          ]
+                          ],
+                          "documentation": "Type of grantee"
                         },
                         "URI": {
                           "type": "string",
@@ -3952,17 +3991,18 @@
                     },
                     "Permission": {
                       "type": "string",
-                      "documentation": "Specifies the permission given to the grantee.",
                       "enum": [
                         "FULL_CONTROL",
                         "WRITE",
                         "WRITE_ACP",
                         "READ",
                         "READ_ACP"
-                      ]
+                      ],
+                      "documentation": "Specifies the permission given to the grantee."
                     }
                   }
-                }
+                },
+                "documentation": "A list of grants."
               },
               "Owner": {
                 "type": "structure",
@@ -3989,33 +4029,33 @@
           },
           "GrantFullControl": {
             "type": "string",
-            "documentation": "Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-full-control"
+            "location_name": "x-amz-grant-full-control",
+            "documentation": "Allows grantee the read, write, read ACP, and write ACP permissions on the bucket."
           },
           "GrantRead": {
             "type": "string",
-            "documentation": "Allows grantee to list the objects in the bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-read"
+            "location_name": "x-amz-grant-read",
+            "documentation": "Allows grantee to list the objects in the bucket."
           },
           "GrantReadACP": {
             "type": "string",
-            "documentation": "Allows grantee to read the bucket ACL.",
             "location": "header",
-            "location_name": "x-amz-grant-read-acp"
+            "location_name": "x-amz-grant-read-acp",
+            "documentation": "Allows grantee to read the bucket ACL."
           },
           "GrantWrite": {
             "type": "string",
-            "documentation": "Allows grantee to create, overwrite, and delete any object in the bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-write"
+            "location_name": "x-amz-grant-write",
+            "documentation": "Allows grantee to create, overwrite, and delete any object in the bucket."
           },
           "GrantWriteACP": {
             "type": "string",
-            "documentation": "Allows grantee to write the ACL for the applicable bucket.",
             "location": "header",
-            "location_name": "x-amz-grant-write-acp"
+            "location_name": "x-amz-grant-write-acp",
+            "documentation": "Allows grantee to write the ACL for the applicable bucket."
           },
           "Key": {
             "type": "string",
@@ -4027,17 +4067,17 @@
       "output": null,
       "errors": [
         {
-          "documentation": "The specified key does not exist.",
           "shape_name": "NoSuchKey",
-          "type": "structure"
+          "type": "structure",
+          "documentation": "The specified key does not exist."
         }
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html",
+      "documentation": "uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket"
     },
     "RestoreObject": {
       "name": "RestoreObject",
       "alias": "PostObjectRestore",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectRestore.html",
-      "documentation": "Restores an archived copy of an object back into Amazon S3",
       "http": {
         "method": "POST",
         "uri": "/{Bucket}/{Key}?restore"
@@ -4061,8 +4101,8 @@
             "members": {
               "Days": {
                 "type": "integer",
-                "documentation": "Lifetime of the active copy in days",
-                "required": true
+                "required": true,
+                "documentation": "Lifetime of the active copy in days"
               }
             }
           }
@@ -4071,16 +4111,16 @@
       "output": null,
       "errors": [
         {
-          "documentation": "This operation is not allowed against this storage tier",
           "shape_name": "ObjectAlreadyInActiveTierError",
-          "type": "structure"
+          "type": "structure",
+          "documentation": "This operation is not allowed against this storage tier"
         }
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectRestore.html",
+      "documentation": "Restores an archived copy of an object back into Amazon S3"
     },
     "UploadPart": {
       "name": "UploadPart",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPart.html",
-      "documentation": "Uploads a part in a multipart upload.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}"
@@ -4104,13 +4144,18 @@
             "location_name": "Content-Length",
             "documentation": "Size of the body in bytes. This parameter is useful when the size of the body cannot be determined automatically."
           },
+          "ContentMD5": {
+            "type": "string",
+            "location": "header",
+            "location_name": "Content-MD5"
+          },
           "Key": {
             "type": "string",
             "required": true,
             "location": "uri"
           },
           "PartNumber": {
-            "type": "string",
+            "type": "integer",
             "required": true,
             "location": "uri",
             "documentation": "Part number of part being uploaded."
@@ -4124,8 +4169,15 @@
         }
       },
       "output": {
+        "shape_name": "UploadPartOutput",
         "type": "structure",
         "members": {
+          "ETag": {
+            "type": "string",
+            "location": "header",
+            "location_name": "ETag",
+            "documentation": "Entity tag for the uploaded object."
+          },
           "ServerSideEncryption": {
             "type": "string",
             "location": "header",
@@ -4134,24 +4186,17 @@
               "AES256"
             ],
             "documentation": "The Server-side encryption algorithm used when storing this object in S3."
-          },
-          "ETag": {
-            "type": "string",
-            "location": "header",
-            "location_name": "ETag",
-            "documentation": "Entity tag for the uploaded object."
           }
-        },
-        "shape_name": "UploadPartOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPart.html",
+      "documentation": "<p>Uploads a part in a multipart upload.</p><p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p>"
     },
     "UploadPartCopy": {
       "name": "UploadPartCopy",
-      "documentation_url": "http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html",
-      "documentation": "Uploads a part by copying data from an existing object as data source.",
       "http": {
         "method": "PUT",
         "uri": "/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}"
@@ -4166,11 +4211,11 @@
           },
           "CopySource": {
             "type": "string",
+            "required": true,
             "location": "header",
             "location_name": "x-amz-copy-source",
-            "required": true,
-            "pattern": "\\/.+\\/.+",
-            "documentation": "The name of the source bucket and key name of the source object, separated by a slash (/). Must be URL-encoded."
+            "documentation": "The name of the source bucket and key name of the source object, separated by a slash (/). Must be URL-encoded.",
+            "pattern": "\\/.+\\/.+"
           },
           "CopySourceIfMatch": {
             "type": "timestamp",
@@ -4208,7 +4253,7 @@
             "location": "uri"
           },
           "PartNumber": {
-            "type": "string",
+            "type": "integer",
             "required": true,
             "location": "uri",
             "documentation": "Part number of part being copied."
@@ -4222,14 +4267,9 @@
         }
       },
       "output": {
+        "shape_name": "UploadPartCopyOutput",
         "type": "structure",
         "members": {
-          "CopySourceVersionId": {
-            "type": "string",
-            "location": "header",
-            "location_name": "x-amz-copy-source-version-id",
-            "documentation": "The version of the source object that was copied, if you have enabled versioning on the source bucket."
-          },
           "CopyPartResult": {
             "type": "structure",
             "payload": true,
@@ -4244,6 +4284,12 @@
               }
             }
           },
+          "CopySourceVersionId": {
+            "type": "string",
+            "location": "header",
+            "location_name": "x-amz-copy-source-version-id",
+            "documentation": "The version of the source object that was copied, if you have enabled versioning on the source bucket."
+          },
           "ServerSideEncryption": {
             "type": "string",
             "location": "header",
@@ -4253,12 +4299,13 @@
             ],
             "documentation": "The Server-side encryption algorithm used when storing this object in S3."
           }
-        },
-        "shape_name": "UploadPartCopyOutput"
+        }
       },
       "errors": [
 
-      ]
+      ],
+      "documentation_url": "http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html",
+      "documentation": "Uploads a part by copying data from an existing object as data source."
     }
   }
 }

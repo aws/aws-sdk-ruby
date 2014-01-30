@@ -33,27 +33,47 @@
     "Aws::Plugins::SignatureV4"
   ],
   "operations": {
-    "create_connection": {
-      "name": "CreateConnection",
+    "allocate_connection_on_interconnect": {
+      "name": "AllocateConnectionOnInterconnect",
       "http_method": "POST",
       "http_path": "/",
       "input": {
         "type": "input",
         "members": {
-          "offering_id": {
+          "bandwidth": {
             "type": "string",
-            "serialized_name": "offeringId"
+            "required": true,
+            "serialized_name": "bandwidth"
           },
           "connection_name": {
             "type": "string",
             "required": true,
             "serialized_name": "connectionName"
+          },
+          "owner_account": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ownerAccount"
+          },
+          "interconnect_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "interconnectId"
+          },
+          "vlan": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "vlan"
           }
         }
       },
       "output": {
         "type": "output",
         "members": {
+          "owner_account": {
+            "type": "string",
+            "serialized_name": "ownerAccount"
+          },
           "connection_id": {
             "type": "string",
             "serialized_name": "connectionId"
@@ -66,11 +86,14 @@
             "type": "string",
             "serialized_name": "connectionState",
             "enum": [
+              "ordering",
               "requested",
               "pending",
               "available",
               "down",
-              "deleted"
+              "deleting",
+              "deleted",
+              "rejected"
             ]
           },
           "region": {
@@ -80,12 +103,24 @@
           "location": {
             "type": "string",
             "serialized_name": "location"
+          },
+          "bandwidth": {
+            "type": "string",
+            "serialized_name": "bandwidth"
+          },
+          "vlan": {
+            "type": "integer",
+            "serialized_name": "vlan"
+          },
+          "partner_name": {
+            "type": "string",
+            "serialized_name": "partnerName"
           }
         }
       }
     },
-    "create_private_virtual_interface": {
-      "name": "CreatePrivateVirtualInterface",
+    "allocate_private_virtual_interface": {
+      "name": "AllocatePrivateVirtualInterface",
       "http_method": "POST",
       "http_path": "/",
       "input": {
@@ -93,22 +128,32 @@
         "members": {
           "connection_id": {
             "type": "string",
+            "required": true,
             "serialized_name": "connectionId"
           },
-          "new_private_virtual_interface": {
+          "owner_account": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ownerAccount"
+          },
+          "new_private_virtual_interface_allocation": {
             "type": "structure",
-            "serialized_name": "newPrivateVirtualInterface",
+            "required": true,
+            "serialized_name": "newPrivateVirtualInterfaceAllocation",
             "members": {
               "virtual_interface_name": {
                 "type": "string",
+                "required": true,
                 "serialized_name": "virtualInterfaceName"
               },
               "vlan": {
                 "type": "integer",
+                "required": true,
                 "serialized_name": "vlan"
               },
               "asn": {
                 "type": "integer",
+                "required": true,
                 "serialized_name": "asn"
               },
               "auth_key": {
@@ -122,10 +167,6 @@
               "customer_address": {
                 "type": "string",
                 "serialized_name": "customerAddress"
-              },
-              "virtual_gateway_id": {
-                "type": "string",
-                "serialized_name": "virtualGatewayId"
               }
             }
           }
@@ -134,6 +175,10 @@
       "output": {
         "type": "output",
         "members": {
+          "owner_account": {
+            "type": "string",
+            "serialized_name": "ownerAccount"
+          },
           "virtual_interface_id": {
             "type": "string",
             "serialized_name": "virtualInterfaceId"
@@ -178,11 +223,546 @@
             "type": "string",
             "serialized_name": "virtualInterfaceState",
             "enum": [
+              "confirming",
               "verifying",
               "pending",
               "available",
               "deleting",
+              "deleted",
+              "rejected"
+            ]
+          },
+          "customer_router_config": {
+            "type": "string",
+            "serialized_name": "customerRouterConfig"
+          },
+          "virtual_gateway_id": {
+            "type": "string",
+            "serialized_name": "virtualGatewayId"
+          },
+          "route_filter_prefixes": {
+            "type": "list",
+            "serialized_name": "routeFilterPrefixes",
+            "members": {
+              "type": "structure",
+              "members": {
+                "cidr": {
+                  "type": "string",
+                  "serialized_name": "cidr"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "allocate_public_virtual_interface": {
+      "name": "AllocatePublicVirtualInterface",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "connection_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "connectionId"
+          },
+          "owner_account": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ownerAccount"
+          },
+          "new_public_virtual_interface_allocation": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "newPublicVirtualInterfaceAllocation",
+            "members": {
+              "virtual_interface_name": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "virtualInterfaceName"
+              },
+              "vlan": {
+                "type": "integer",
+                "required": true,
+                "serialized_name": "vlan"
+              },
+              "asn": {
+                "type": "integer",
+                "required": true,
+                "serialized_name": "asn"
+              },
+              "auth_key": {
+                "type": "string",
+                "serialized_name": "authKey"
+              },
+              "amazon_address": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "amazonAddress"
+              },
+              "customer_address": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "customerAddress"
+              },
+              "route_filter_prefixes": {
+                "type": "list",
+                "required": true,
+                "serialized_name": "routeFilterPrefixes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "cidr": {
+                      "type": "string",
+                      "serialized_name": "cidr"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "owner_account": {
+            "type": "string",
+            "serialized_name": "ownerAccount"
+          },
+          "virtual_interface_id": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceId"
+          },
+          "location": {
+            "type": "string",
+            "serialized_name": "location"
+          },
+          "connection_id": {
+            "type": "string",
+            "serialized_name": "connectionId"
+          },
+          "virtual_interface_type": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceType"
+          },
+          "virtual_interface_name": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceName"
+          },
+          "vlan": {
+            "type": "integer",
+            "serialized_name": "vlan"
+          },
+          "asn": {
+            "type": "integer",
+            "serialized_name": "asn"
+          },
+          "auth_key": {
+            "type": "string",
+            "serialized_name": "authKey"
+          },
+          "amazon_address": {
+            "type": "string",
+            "serialized_name": "amazonAddress"
+          },
+          "customer_address": {
+            "type": "string",
+            "serialized_name": "customerAddress"
+          },
+          "virtual_interface_state": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceState",
+            "enum": [
+              "confirming",
+              "verifying",
+              "pending",
+              "available",
+              "deleting",
+              "deleted",
+              "rejected"
+            ]
+          },
+          "customer_router_config": {
+            "type": "string",
+            "serialized_name": "customerRouterConfig"
+          },
+          "virtual_gateway_id": {
+            "type": "string",
+            "serialized_name": "virtualGatewayId"
+          },
+          "route_filter_prefixes": {
+            "type": "list",
+            "serialized_name": "routeFilterPrefixes",
+            "members": {
+              "type": "structure",
+              "members": {
+                "cidr": {
+                  "type": "string",
+                  "serialized_name": "cidr"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "confirm_connection": {
+      "name": "ConfirmConnection",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "connection_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "connectionId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "connection_state": {
+            "type": "string",
+            "serialized_name": "connectionState",
+            "enum": [
+              "ordering",
+              "requested",
+              "pending",
+              "available",
+              "down",
+              "deleting",
+              "deleted",
+              "rejected"
+            ]
+          }
+        }
+      }
+    },
+    "confirm_private_virtual_interface": {
+      "name": "ConfirmPrivateVirtualInterface",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "virtual_interface_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "virtualInterfaceId"
+          },
+          "virtual_gateway_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "virtualGatewayId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "virtual_interface_state": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceState",
+            "enum": [
+              "confirming",
+              "verifying",
+              "pending",
+              "available",
+              "deleting",
+              "deleted",
+              "rejected"
+            ]
+          }
+        }
+      }
+    },
+    "confirm_public_virtual_interface": {
+      "name": "ConfirmPublicVirtualInterface",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "virtual_interface_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "virtualInterfaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "virtual_interface_state": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceState",
+            "enum": [
+              "confirming",
+              "verifying",
+              "pending",
+              "available",
+              "deleting",
+              "deleted",
+              "rejected"
+            ]
+          }
+        }
+      }
+    },
+    "create_connection": {
+      "name": "CreateConnection",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "location": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "location"
+          },
+          "bandwidth": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "bandwidth"
+          },
+          "connection_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "connectionName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "owner_account": {
+            "type": "string",
+            "serialized_name": "ownerAccount"
+          },
+          "connection_id": {
+            "type": "string",
+            "serialized_name": "connectionId"
+          },
+          "connection_name": {
+            "type": "string",
+            "serialized_name": "connectionName"
+          },
+          "connection_state": {
+            "type": "string",
+            "serialized_name": "connectionState",
+            "enum": [
+              "ordering",
+              "requested",
+              "pending",
+              "available",
+              "down",
+              "deleting",
+              "deleted",
+              "rejected"
+            ]
+          },
+          "region": {
+            "type": "string",
+            "serialized_name": "region"
+          },
+          "location": {
+            "type": "string",
+            "serialized_name": "location"
+          },
+          "bandwidth": {
+            "type": "string",
+            "serialized_name": "bandwidth"
+          },
+          "vlan": {
+            "type": "integer",
+            "serialized_name": "vlan"
+          },
+          "partner_name": {
+            "type": "string",
+            "serialized_name": "partnerName"
+          }
+        }
+      }
+    },
+    "create_interconnect": {
+      "name": "CreateInterconnect",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "interconnect_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "interconnectName"
+          },
+          "bandwidth": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "bandwidth"
+          },
+          "location": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "location"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "interconnect_id": {
+            "type": "string",
+            "serialized_name": "interconnectId"
+          },
+          "interconnect_name": {
+            "type": "string",
+            "serialized_name": "interconnectName"
+          },
+          "interconnect_state": {
+            "type": "string",
+            "serialized_name": "interconnectState",
+            "enum": [
+              "requested",
+              "pending",
+              "available",
+              "down",
+              "deleting",
               "deleted"
+            ]
+          },
+          "region": {
+            "type": "string",
+            "serialized_name": "region"
+          },
+          "location": {
+            "type": "string",
+            "serialized_name": "location"
+          },
+          "bandwidth": {
+            "type": "string",
+            "serialized_name": "bandwidth"
+          }
+        }
+      }
+    },
+    "create_private_virtual_interface": {
+      "name": "CreatePrivateVirtualInterface",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "connection_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "connectionId"
+          },
+          "new_private_virtual_interface": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "newPrivateVirtualInterface",
+            "members": {
+              "virtual_interface_name": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "virtualInterfaceName"
+              },
+              "vlan": {
+                "type": "integer",
+                "required": true,
+                "serialized_name": "vlan"
+              },
+              "asn": {
+                "type": "integer",
+                "required": true,
+                "serialized_name": "asn"
+              },
+              "auth_key": {
+                "type": "string",
+                "serialized_name": "authKey"
+              },
+              "amazon_address": {
+                "type": "string",
+                "serialized_name": "amazonAddress"
+              },
+              "customer_address": {
+                "type": "string",
+                "serialized_name": "customerAddress"
+              },
+              "virtual_gateway_id": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "virtualGatewayId"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "owner_account": {
+            "type": "string",
+            "serialized_name": "ownerAccount"
+          },
+          "virtual_interface_id": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceId"
+          },
+          "location": {
+            "type": "string",
+            "serialized_name": "location"
+          },
+          "connection_id": {
+            "type": "string",
+            "serialized_name": "connectionId"
+          },
+          "virtual_interface_type": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceType"
+          },
+          "virtual_interface_name": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceName"
+          },
+          "vlan": {
+            "type": "integer",
+            "serialized_name": "vlan"
+          },
+          "asn": {
+            "type": "integer",
+            "serialized_name": "asn"
+          },
+          "auth_key": {
+            "type": "string",
+            "serialized_name": "authKey"
+          },
+          "amazon_address": {
+            "type": "string",
+            "serialized_name": "amazonAddress"
+          },
+          "customer_address": {
+            "type": "string",
+            "serialized_name": "customerAddress"
+          },
+          "virtual_interface_state": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceState",
+            "enum": [
+              "confirming",
+              "verifying",
+              "pending",
+              "available",
+              "deleting",
+              "deleted",
+              "rejected"
             ]
           },
           "customer_router_config": {
@@ -218,22 +798,27 @@
         "members": {
           "connection_id": {
             "type": "string",
+            "required": true,
             "serialized_name": "connectionId"
           },
           "new_public_virtual_interface": {
             "type": "structure",
+            "required": true,
             "serialized_name": "newPublicVirtualInterface",
             "members": {
               "virtual_interface_name": {
                 "type": "string",
+                "required": true,
                 "serialized_name": "virtualInterfaceName"
               },
               "vlan": {
                 "type": "integer",
+                "required": true,
                 "serialized_name": "vlan"
               },
               "asn": {
                 "type": "integer",
+                "required": true,
                 "serialized_name": "asn"
               },
               "auth_key": {
@@ -242,14 +827,17 @@
               },
               "amazon_address": {
                 "type": "string",
+                "required": true,
                 "serialized_name": "amazonAddress"
               },
               "customer_address": {
                 "type": "string",
+                "required": true,
                 "serialized_name": "customerAddress"
               },
               "route_filter_prefixes": {
                 "type": "list",
+                "required": true,
                 "serialized_name": "routeFilterPrefixes",
                 "members": {
                   "type": "structure",
@@ -268,6 +856,10 @@
       "output": {
         "type": "output",
         "members": {
+          "owner_account": {
+            "type": "string",
+            "serialized_name": "ownerAccount"
+          },
           "virtual_interface_id": {
             "type": "string",
             "serialized_name": "virtualInterfaceId"
@@ -312,11 +904,13 @@
             "type": "string",
             "serialized_name": "virtualInterfaceState",
             "enum": [
+              "confirming",
               "verifying",
               "pending",
               "available",
               "deleting",
-              "deleted"
+              "deleted",
+              "rejected"
             ]
           },
           "customer_router_config": {
@@ -360,6 +954,10 @@
       "output": {
         "type": "output",
         "members": {
+          "owner_account": {
+            "type": "string",
+            "serialized_name": "ownerAccount"
+          },
           "connection_id": {
             "type": "string",
             "serialized_name": "connectionId"
@@ -372,88 +970,14 @@
             "type": "string",
             "serialized_name": "connectionState",
             "enum": [
+              "ordering",
               "requested",
               "pending",
               "available",
               "down",
-              "deleted"
-            ]
-          },
-          "region": {
-            "type": "string",
-            "serialized_name": "region"
-          },
-          "location": {
-            "type": "string",
-            "serialized_name": "location"
-          }
-        }
-      }
-    },
-    "delete_virtual_interface": {
-      "name": "DeleteVirtualInterface",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "virtual_interface_id": {
-            "type": "string",
-            "serialized_name": "virtualInterfaceId"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "virtual_interface_state": {
-            "type": "string",
-            "serialized_name": "virtualInterfaceState",
-            "enum": [
-              "verifying",
-              "pending",
-              "available",
               "deleting",
-              "deleted"
-            ]
-          }
-        }
-      }
-    },
-    "describe_connection_detail": {
-      "name": "DescribeConnectionDetail",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "connection_id": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "connectionId"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "connection_id": {
-            "type": "string",
-            "serialized_name": "connectionId"
-          },
-          "connection_name": {
-            "type": "string",
-            "serialized_name": "connectionName"
-          },
-          "connection_state": {
-            "type": "string",
-            "serialized_name": "connectionState",
-            "enum": [
-              "requested",
-              "pending",
-              "available",
-              "down",
-              "deleted"
+              "deleted",
+              "rejected"
             ]
           },
           "region": {
@@ -467,6 +991,79 @@
           "bandwidth": {
             "type": "string",
             "serialized_name": "bandwidth"
+          },
+          "vlan": {
+            "type": "integer",
+            "serialized_name": "vlan"
+          },
+          "partner_name": {
+            "type": "string",
+            "serialized_name": "partnerName"
+          }
+        }
+      }
+    },
+    "delete_interconnect": {
+      "name": "DeleteInterconnect",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "interconnect_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "interconnectId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "interconnect_state": {
+            "type": "string",
+            "serialized_name": "interconnectState",
+            "enum": [
+              "requested",
+              "pending",
+              "available",
+              "down",
+              "deleting",
+              "deleted"
+            ]
+          }
+        }
+      }
+    },
+    "delete_virtual_interface": {
+      "name": "DeleteVirtualInterface",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "virtual_interface_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "virtualInterfaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "virtual_interface_state": {
+            "type": "string",
+            "serialized_name": "virtualInterfaceState",
+            "enum": [
+              "confirming",
+              "verifying",
+              "pending",
+              "available",
+              "deleting",
+              "deleted",
+              "rejected"
+            ]
           }
         }
       }
@@ -493,6 +1090,10 @@
             "members": {
               "type": "structure",
               "members": {
+                "owner_account": {
+                  "type": "string",
+                  "serialized_name": "ownerAccount"
+                },
                 "connection_id": {
                   "type": "string",
                   "serialized_name": "connectionId"
@@ -505,10 +1106,156 @@
                   "type": "string",
                   "serialized_name": "connectionState",
                   "enum": [
+                    "ordering",
                     "requested",
                     "pending",
                     "available",
                     "down",
+                    "deleting",
+                    "deleted",
+                    "rejected"
+                  ]
+                },
+                "region": {
+                  "type": "string",
+                  "serialized_name": "region"
+                },
+                "location": {
+                  "type": "string",
+                  "serialized_name": "location"
+                },
+                "bandwidth": {
+                  "type": "string",
+                  "serialized_name": "bandwidth"
+                },
+                "vlan": {
+                  "type": "integer",
+                  "serialized_name": "vlan"
+                },
+                "partner_name": {
+                  "type": "string",
+                  "serialized_name": "partnerName"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_connections_on_interconnect": {
+      "name": "DescribeConnectionsOnInterconnect",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "interconnect_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "interconnectId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "connections": {
+            "type": "list",
+            "serialized_name": "connections",
+            "members": {
+              "type": "structure",
+              "members": {
+                "owner_account": {
+                  "type": "string",
+                  "serialized_name": "ownerAccount"
+                },
+                "connection_id": {
+                  "type": "string",
+                  "serialized_name": "connectionId"
+                },
+                "connection_name": {
+                  "type": "string",
+                  "serialized_name": "connectionName"
+                },
+                "connection_state": {
+                  "type": "string",
+                  "serialized_name": "connectionState",
+                  "enum": [
+                    "ordering",
+                    "requested",
+                    "pending",
+                    "available",
+                    "down",
+                    "deleting",
+                    "deleted",
+                    "rejected"
+                  ]
+                },
+                "region": {
+                  "type": "string",
+                  "serialized_name": "region"
+                },
+                "location": {
+                  "type": "string",
+                  "serialized_name": "location"
+                },
+                "bandwidth": {
+                  "type": "string",
+                  "serialized_name": "bandwidth"
+                },
+                "vlan": {
+                  "type": "integer",
+                  "serialized_name": "vlan"
+                },
+                "partner_name": {
+                  "type": "string",
+                  "serialized_name": "partnerName"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_interconnects": {
+      "name": "DescribeInterconnects",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "interconnect_id": {
+            "type": "string",
+            "serialized_name": "interconnectId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "interconnects": {
+            "type": "list",
+            "serialized_name": "interconnects",
+            "members": {
+              "type": "structure",
+              "members": {
+                "interconnect_id": {
+                  "type": "string",
+                  "serialized_name": "interconnectId"
+                },
+                "interconnect_name": {
+                  "type": "string",
+                  "serialized_name": "interconnectName"
+                },
+                "interconnect_state": {
+                  "type": "string",
+                  "serialized_name": "interconnectState",
+                  "enum": [
+                    "requested",
+                    "pending",
+                    "available",
+                    "down",
+                    "deleting",
                     "deleted"
                   ]
                 },
@@ -519,172 +1266,37 @@
                 "location": {
                   "type": "string",
                   "serialized_name": "location"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "describe_offering_detail": {
-      "name": "DescribeOfferingDetail",
-      "http_method": "POST",
-      "http_path": "/",
-      "input": {
-        "type": "input",
-        "members": {
-          "offering_id": {
-            "type": "string",
-            "required": true,
-            "serialized_name": "offeringId"
-          }
-        }
-      },
-      "output": {
-        "type": "output",
-        "members": {
-          "offering_id": {
-            "type": "string",
-            "serialized_name": "offeringId"
-          },
-          "region": {
-            "type": "string",
-            "serialized_name": "region"
-          },
-          "location": {
-            "type": "string",
-            "serialized_name": "location"
-          },
-          "offering_name": {
-            "type": "string",
-            "serialized_name": "offeringName"
-          },
-          "description": {
-            "type": "string",
-            "serialized_name": "description"
-          },
-          "bandwidth": {
-            "type": "string",
-            "serialized_name": "bandwidth"
-          },
-          "connection_costs": {
-            "type": "list",
-            "serialized_name": "connectionCosts",
-            "members": {
-              "type": "structure",
-              "members": {
-                "name": {
-                  "type": "string",
-                  "serialized_name": "name"
-                },
-                "unit": {
-                  "type": "string",
-                  "serialized_name": "unit"
-                },
-                "currency_code": {
-                  "type": "string",
-                  "serialized_name": "currencyCode"
-                },
-                "amount": {
-                  "type": "string",
-                  "serialized_name": "amount"
-                }
-              }
-            }
-          },
-          "order_steps": {
-            "type": "list",
-            "serialized_name": "orderSteps",
-            "members": {
-              "type": "structure",
-              "members": {
-                "number": {
-                  "type": "string",
-                  "serialized_name": "number"
-                },
-                "name": {
-                  "type": "string",
-                  "serialized_name": "name"
-                },
-                "description": {
-                  "type": "string",
-                  "serialized_name": "description"
-                },
-                "owner": {
-                  "type": "string",
-                  "serialized_name": "owner"
-                },
-                "sla": {
-                  "type": "integer",
-                  "serialized_name": "sla"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "describe_offerings": {
-      "name": "DescribeOfferings",
-      "http_method": "POST",
-      "http_path": "/",
-      "output": {
-        "type": "output",
-        "members": {
-          "offerings": {
-            "type": "list",
-            "serialized_name": "offerings",
-            "members": {
-              "type": "structure",
-              "members": {
-                "offering_id": {
-                  "type": "string",
-                  "serialized_name": "offeringId"
-                },
-                "region": {
-                  "type": "string",
-                  "serialized_name": "region"
-                },
-                "location": {
-                  "type": "string",
-                  "serialized_name": "location"
-                },
-                "offering_name": {
-                  "type": "string",
-                  "serialized_name": "offeringName"
-                },
-                "description": {
-                  "type": "string",
-                  "serialized_name": "description"
                 },
                 "bandwidth": {
                   "type": "string",
                   "serialized_name": "bandwidth"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_locations": {
+      "name": "DescribeLocations",
+      "http_method": "POST",
+      "http_path": "/",
+      "output": {
+        "type": "output",
+        "members": {
+          "locations": {
+            "type": "list",
+            "serialized_name": "locations",
+            "members": {
+              "type": "structure",
+              "members": {
+                "location_code": {
+                  "type": "string",
+                  "serialized_name": "locationCode"
                 },
-                "connection_costs": {
-                  "type": "list",
-                  "serialized_name": "connectionCosts",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "name": {
-                        "type": "string",
-                        "serialized_name": "name"
-                      },
-                      "unit": {
-                        "type": "string",
-                        "serialized_name": "unit"
-                      },
-                      "currency_code": {
-                        "type": "string",
-                        "serialized_name": "currencyCode"
-                      },
-                      "amount": {
-                        "type": "string",
-                        "serialized_name": "amount"
-                      }
-                    }
-                  }
+                "location_name": {
+                  "type": "string",
+                  "serialized_name": "locationName"
                 }
               }
             }
@@ -745,6 +1357,10 @@
             "members": {
               "type": "structure",
               "members": {
+                "owner_account": {
+                  "type": "string",
+                  "serialized_name": "ownerAccount"
+                },
                 "virtual_interface_id": {
                   "type": "string",
                   "serialized_name": "virtualInterfaceId"
@@ -789,11 +1405,13 @@
                   "type": "string",
                   "serialized_name": "virtualInterfaceState",
                   "enum": [
+                    "confirming",
                     "verifying",
                     "pending",
                     "available",
                     "deleting",
-                    "deleted"
+                    "deleted",
+                    "rejected"
                   ]
                 },
                 "customer_router_config": {

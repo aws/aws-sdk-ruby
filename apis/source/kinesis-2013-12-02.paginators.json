@@ -1,17 +1,23 @@
 {
   "pagination": {
-    "GetRecords": {
+    "DescribeStream": {
+      "input_token": "ExclusiveStartShardId",
+      "output_token": "Shards[-1].ShardId",
+      "more_results": "HasMoreShards",
       "limit_key": "Limit",
+      "result_key": "Shards"
+    },
+    "GetRecords": {
       "input_token": "ShardIterator",
       "output_token": "NextShardIterator",
+      "limit_key": "Limit",
       "result_key": "Records"
     },
     "ListStreams": {
-      "limit_key": "Limit",
       "input_token": "ExclusiveStartStreamName",
-      "output_token": "NextShardIterator",
-      "output_token": "StreamNames[-1].Key",
+      "output_token": "StreamNames[-1]",
       "more_results": "HasMoreStreams",
+      "limit_key": "Limit",
       "result_key": "StreamNames"
     }
   }

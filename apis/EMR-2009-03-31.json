@@ -204,6 +204,37 @@
         }
       }
     },
+    "add_tags": {
+      "name": "AddTags",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "resource_id": {
+            "type": "string",
+            "serialized_name": "ResourceId"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "describe_cluster": {
       "name": "DescribeCluster",
       "http_method": "POST",
@@ -368,6 +399,23 @@
                       "members": {
                         "type": "string"
                       }
+                    }
+                  }
+                }
+              },
+              "tags": {
+                "type": "list",
+                "serialized_name": "Tags",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "key": {
+                      "type": "string",
+                      "serialized_name": "Key"
+                    },
+                    "value": {
+                      "type": "string",
+                      "serialized_name": "Value"
                     }
                   }
                 }
@@ -1545,6 +1593,27 @@
         }
       }
     },
+    "remove_tags": {
+      "name": "RemoveTags",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "resource_id": {
+            "type": "string",
+            "serialized_name": "ResourceId"
+          },
+          "tag_keys": {
+            "type": "list",
+            "serialized_name": "TagKeys",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "run_job_flow": {
       "name": "RunJobFlow",
       "http_method": "POST",
@@ -1795,6 +1864,23 @@
           "job_flow_role": {
             "type": "string",
             "serialized_name": "JobFlowRole"
+          },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
           }
         }
       },

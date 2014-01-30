@@ -8,6 +8,7 @@
   "service_abbreviation": "Amazon EMR",
   "timestamp_format": "unixTimestamp",
   "endpoint_prefix": "elasticmapreduce",
+  "xmlnamespace": "http://elasticmapreduce.amazonaws.com/doc/2009-03-31",
   "documentation": "\n      <p> This is the <i>Amazon Elastic MapReduce API Reference</i>. This guide provides descriptions and\n         samples of the Amazon Elastic MapReduce APIs.</p>\n\n      <p>Amazon Elastic MapReduce (Amazon EMR) is a web service that makes it easy to process large amounts of\n         data efficiently. Amazon EMR uses Hadoop processing combined with several AWS\n         products to do tasks such as web indexing, data mining, log file analysis, machine\n         learning, scientific simulation, and data warehousing.</p>\n\n   ",
   "operations": {
     "AddInstanceGroups": {
@@ -279,6 +280,84 @@
       ],
       "documentation": "\n      <p> AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed\n      in each job flow. </p>\n      <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p>\n      <p> A step specifies the location of a JAR file stored either on the master node of the job\n         flow or in Amazon S3. Each step is performed by the main function of the main class of the\n         JAR file. The main class can be specified either in the manifest of the JAR or by using the\n         MainFunction parameter of the step. </p>\n      <p> Elastic MapReduce executes each step in the order listed. For a step to be considered\n         complete, the main function must exit with a zero exit code and all Hadoop jobs started\n         while the step was running must have completed and run successfully. </p>\n      <p> You can only add steps to a job flow that is in one of the following states: STARTING,\n      BOOTSTRAPPING, RUNNING, or WAITING.</p>\n\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.AddJobFlowSteps\nContent-Length: 426\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130716T210948Z\nX-Amz-Content-Sha256: 9e5ad0a93c22224947ce98eea94f766103d91b28fa82eb60d0cb8b6f9555a6b2\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130716/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=2a2393390760ae85eb74ee3a539e1d758bfdd8815a1a6d6f14d4a2fbcfdcd5b7\nAccept: */*\n\n{\n    \"JobFlowId\": \"j-3TS0OIYO4NFN\",\n    \"Steps\": [{\n        \"Name\": \"Example Jar Step\",\n        \"ActionOnFailure\": \"CANCEL_AND_WAIT\",\n        \"HadoopJarStep\": {\n            \"Jar\": \"s3n:\\\\/\\\\/elasticmapreduce\\\\/samples\\\\/cloudburst\\\\/cloudburst.jar\",\n            \"Args\": [\n                \"s3n:\\\\/\\\\/elasticmapreduce\\\\/samples\\\\/cloudburst\\\\/input\\\\/s_suis.br\",\n                \"s3n:\\\\/\\\\/elasticmapreduce\\\\/samples\\\\/cloudburst\\\\/input\\\\/100k.br\",\n                \"s3n:\\\\/\\\\/examples-bucket\\\\/cloudburst\\\\/output\",\n                \"36\",\n                \"3\",\n                \"0\",\n                \"1\",\n                \"240\",\n                \"48\",\n                \"24\",\n                \"24\",\n                \"128\",\n                \"16\"\n            ]\n        }\n    }]\n}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 6514261f-ee5b-11e2-9345-5332e9ab2e6d\nContent-Type: application/x-amz-json-1.1\nContent-Length: 0\nDate: Tue, 16 Jul 2013 21:05:07 GMT\n\n         </queryresponse>\n      </examples>\n   "
     },
+    "AddTags": {
+      "name": "AddTags",
+      "input": {
+        "shape_name": "AddTagsInput",
+        "type": "structure",
+        "members": {
+          "ResourceId": {
+            "shape_name": "ResourceId",
+            "type": "string",
+            "documentation": "\n      <p>The Amazon EMR resource identifier to which tags will be added. This value must be a cluster identifier.</p>\n   "
+          },
+          "Tags": {
+            "shape_name": "TagList",
+            "type": "list",
+            "members": {
+              "shape_name": "Tag",
+              "type": "structure",
+              "members": {
+                "Key": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": "\n      <p>A user-defined key, which is the minimum required information for a valid tag.\n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p> \n   "
+                },
+                "Value": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": "\n      <p>A user-defined value, which is optional in a tag.\n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p> \n   "
+                }
+              },
+              "documentation": "\n      <p>A key/value pair that contains user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p> \n   "
+            },
+            "documentation": "\n      <p>A list of tags to associate with a cluster and propagate to Amazon EC2 instances. Tags are user-defined key/value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This input identifies a cluster and a list of tags to attach.\n      </p> \n   "
+      },
+      "output": {
+        "shape_name": "AddTagsOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n      <p>This output indicates the result of adding tags to a resource.  \n      </p> \n   "
+      },
+      "errors": [
+        {
+          "shape_name": "InternalServerException",
+          "type": "structure",
+          "members": {
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is an internal failure in the EMR service.</p>      \n      \n   "
+        },
+        {
+          "shape_name": "InvalidRequestException",
+          "type": "structure",
+          "members": {
+            "ErrorCode": {
+              "shape_name": "ErrorCode",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 256,
+              "documentation": "\n      <p>The error code associated with the exception.</p>      \n      \n   "
+            },
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is something wrong with user input.</p>      \n      \n   "
+        }
+      ],
+      "documentation": "\n      <p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p> \n   "
+    },
     "DescribeCluster": {
       "name": "DescribeCluster",
       "input": {
@@ -288,8 +367,6 @@
           "ClusterId": {
             "shape_name": "ClusterId",
             "type": "string",
-            "min_length": 1,
-            "max_length": 64,
             "documentation": "\n      <p>The identifier of the cluster to describe.</p>\n   "
           }
         },
@@ -306,15 +383,11 @@
               "Id": {
                 "shape_name": "ClusterId",
                 "type": "string",
-                "min_length": 1,
-                "max_length": 64,
                 "documentation": "\n      <p>The unique identifier for the cluster.</p>"
               },
               "Name": {
-                "shape_name": "StringMaxLen256",
+                "shape_name": "String",
                 "type": "string",
-                "min_length": 0,
-                "max_length": 256,
                 "documentation": "\n      <p>The name of the cluster.</p>"
               },
               "Status": {
@@ -391,31 +464,23 @@
                 "type": "structure",
                 "members": {
                   "Ec2KeyName": {
-                    "shape_name": "StringMaxLen256",
+                    "shape_name": "String",
                     "type": "string",
-                    "min_length": 0,
-                    "max_length": 256,
                     "documentation": "\n      <p>The name of the Amazon EC2 key pair to use when connecting with SSH into the master node as\n         a user named \"hadoop\".</p>\n   "
                   },
                   "Ec2SubnetId": {
-                    "shape_name": "StringMaxLen256",
+                    "shape_name": "String",
                     "type": "string",
-                    "min_length": 0,
-                    "max_length": 256,
                     "documentation": "\n      <p>\n         To launch the job flow in Amazon VPC, set this parameter to the identifier of the Amazon VPC subnet where \n         you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal AWS cloud, outside of \n         a VPC. \n      </p>\n      <p>\n         Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances.  \n         Thus, you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a VPC.\n      </p>\n   "
                   },
                   "Ec2AvailabilityZone": {
-                    "shape_name": "StringMaxLen256",
+                    "shape_name": "String",
                     "type": "string",
-                    "min_length": 0,
-                    "max_length": 256,
                     "documentation": "\n      <p>The Availability Zone in which the cluster will run.</p>\n   "
                   },
                   "IamInstanceProfile": {
-                    "shape_name": "StringMaxLen256",
+                    "shape_name": "String",
                     "type": "string",
-                    "min_length": 0,
-                    "max_length": 256,
                     "documentation": "\n      <p>The IAM role that was specified when the job flow was launched. The EC2 instances of the job flow assume this role.</p>\n   "
                   }
                 },
@@ -427,17 +492,13 @@
                 "documentation": "\n      <p>The path to the Amazon S3 location where logs for this cluster are stored.</p> \n   "
               },
               "RequestedAmiVersion": {
-                "shape_name": "StringMaxLen256",
+                "shape_name": "String",
                 "type": "string",
-                "min_length": 0,
-                "max_length": 256,
                 "documentation": "\n      <p>The AMI version requested for this cluster.<!-- For more information, see <a>JobFlowDetail$AmiVersion</a>.--></p>\n   "
               },
               "RunningAmiVersion": {
-                "shape_name": "StringMaxLen256",
+                "shape_name": "String",
                 "type": "string",
-                "min_length": 0,
-                "max_length": 256,
                 "documentation": "\n      <p>The AMI version running on this cluster. This differs from the requested version only if the requested version is a meta version, such as \"latest\". <!--For more information, see <a>JobFlowDetail$AmiVersion</a>.--></p>\n   "
               },
               "AutoTerminate": {
@@ -463,17 +524,13 @@
                   "type": "structure",
                   "members": {
                     "Name": {
-                      "shape_name": "StringMaxLen256",
+                      "shape_name": "String",
                       "type": "string",
-                      "min_length": 0,
-                      "max_length": 256,
                       "documentation": "\n      <p>The name of the application.</p>"
                     },
                     "Version": {
-                      "shape_name": "StringMaxLen256",
+                      "shape_name": "String",
                       "type": "string",
-                      "min_length": 0,
-                      "max_length": 256,
                       "documentation": "\n      <p>The version of the application.</p>"
                     },
                     "Args": {
@@ -490,10 +547,8 @@
                       "shape_name": "StringMap",
                       "type": "map",
                       "keys": {
-                        "shape_name": "StringMaxLen256",
+                        "shape_name": "String",
                         "type": "string",
-                        "min_length": 0,
-                        "max_length": 256,
                         "documentation": null
                       },
                       "members": {
@@ -504,9 +559,31 @@
                       "documentation": "\n      <p>This option is for advanced users only. This is meta information about third-party applications that third-party vendors use for testing purposes.</p>"
                     }
                   },
-                  "documentation": "\n      <p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p>\n      <ul>\n         <li>\"karmasphere-enterprise-utility\" - tag the \n            job flow for management by <a href=\"http://aws.amazon.com/elasticmapreduce/karmasphere/\">Karmasphere</a>.</li>\n         <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n         <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition, respectively.</li>\n      </ul>\n   "
+                  "documentation": "\n      <p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p>\n      <ul>         \n         <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n         <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition, respectively.</li>\n      </ul>\n   "
                 },
                 "documentation": "\n      <p>The applications installed on this cluster.</p>\n   "
+              },
+              "Tags": {
+                "shape_name": "TagList",
+                "type": "list",
+                "members": {
+                  "shape_name": "Tag",
+                  "type": "structure",
+                  "members": {
+                    "Key": {
+                      "shape_name": "String",
+                      "type": "string",
+                      "documentation": "\n      <p>A user-defined key, which is the minimum required information for a valid tag.\n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p> \n   "
+                    },
+                    "Value": {
+                      "shape_name": "String",
+                      "type": "string",
+                      "documentation": "\n      <p>A user-defined value, which is optional in a tag.\n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p> \n   "
+                    }
+                  },
+                  "documentation": "\n      <p>A key/value pair that contains user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p> \n   "
+                },
+                "documentation": "\n      <p>A list of tags associated with cluster.</p>"
               }
             },
             "documentation": "\n      <p>This output contains the details for the requested cluster.</p>\n   "
@@ -1192,15 +1269,11 @@
           "ClusterId": {
             "shape_name": "ClusterId",
             "type": "string",
-            "min_length": 1,
-            "max_length": 64,
             "documentation": "\n      <p>The identifier of the cluster with steps to describe.</p>\n   "
           },
           "StepId": {
             "shape_name": "StepId",
             "type": "string",
-            "min_length": 1,
-            "max_length": 64,
             "documentation": "\n      <p>The identifier of the step to describe.</p>\n   "
           }
         },
@@ -1217,15 +1290,11 @@
               "Id": {
                 "shape_name": "StepId",
                 "type": "string",
-                "min_length": 1,
-                "max_length": 64,
                 "documentation": "\n      <p>The identifier of the cluster step.</p>\n   "
               },
               "Name": {
-                "shape_name": "StringMaxLen256",
+                "shape_name": "String",
                 "type": "string",
-                "min_length": 0,
-                "max_length": 256,
                 "documentation": "\n      <p>The name of the cluster step.</p>\n   "
               },
               "Config": {
@@ -1241,10 +1310,8 @@
                     "shape_name": "StringMap",
                     "type": "map",
                     "keys": {
-                      "shape_name": "StringMaxLen256",
+                      "shape_name": "String",
                       "type": "string",
-                      "min_length": 0,
-                      "max_length": 256,
                       "documentation": null
                     },
                     "members": {
@@ -1395,16 +1462,12 @@
           "ClusterId": {
             "shape_name": "ClusterId",
             "type": "string",
-            "min_length": 1,
-            "max_length": 64,
-            "documentation": "\n      <p>The cluster identifier for the bootstrap actions to list\n      .</p>\n   "
+            "documentation": "\n      <p>The cluster identifier for the bootstrap actions to list.</p>\n   "
           },
           "Marker": {
             "shape_name": "Marker",
             "type": "string",
-            "min_length": 1,
-            "max_length": 512,
-            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve\n         .</p>\n   "
+            "documentation": "\n      <p>The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>\n   "
           }
         },
         "documentation": "\n      <p>This input determines which bootstrap actions to retrieve.</p>\n   "
@@ -1421,10 +1484,8 @@
               "type": "structure",
               "members": {
                 "Name": {
-                  "shape_name": "StringMaxLen256",
+                  "shape_name": "String",
                   "type": "string",
-                  "min_length": 0,
-                  "max_length": 256,
                   "documentation": "\n      <p>The name of the command.</p>\n   "
                 },
                 "ScriptPath": {
@@ -1445,17 +1506,15 @@
               },
               "documentation": "\n      <p>An entity describing an executable that runs on a cluster.</p>\n   "
             },
-            "documentation": "\n      <p>The bootstrap actions associated with the cluster\n      .</p>\n   "
+            "documentation": "\n      <p>The bootstrap actions associated with the cluster.</p>\n   "
           },
           "Marker": {
             "shape_name": "Marker",
             "type": "string",
-            "min_length": 1,
-            "max_length": 512,
-            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve\n      .</p>\n   "
+            "documentation": "\n      <p>The pagination token is a random string indicating whether there are more results to fetch. Use the pagination token in later API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>\n   "
           }
         },
-        "documentation": "\n      <p>This output contains the boostrap actions detail\n      .</p>\n   "
+        "documentation": "\n      <p>This output contains the bootstrap actions detail.</p>\n   "
       },
       "errors": [
         {
@@ -1501,12 +1560,12 @@
           "CreatedAfter": {
             "shape_name": "Date",
             "type": "timestamp",
-            "documentation": "\n      <p>The creation date and time beginning value filter for listing clusters\n      .</p>\n   "
+            "documentation": "\n      <p>The creation date and time beginning value filter for listing clusters.</p>\n   "
           },
           "CreatedBefore": {
             "shape_name": "Date",
             "type": "timestamp",
-            "documentation": "\n      <p>The creation date and time end value filter for listing clusters\n      .</p>\n   "
+            "documentation": "\n      <p>The creation date and time end value filter for listing clusters.</p>\n   "
           },
           "ClusterStates": {
             "shape_name": "ClusterStateList",
@@ -1530,9 +1589,7 @@
           "Marker": {
             "shape_name": "Marker",
             "type": "string",
-            "min_length": 1,
-            "max_length": 512,
-            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.\n      </p>\n   "
+            "documentation": "\n      <p>The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.\n      </p>\n   "
           }
         },
         "documentation": "\n      <p>This input determines how the ListClusters action filters the list of clusters that it returns.</p>      \n   "
@@ -1551,15 +1608,11 @@
                 "Id": {
                   "shape_name": "ClusterId",
                   "type": "string",
-                  "min_length": 1,
-                  "max_length": 64,
                   "documentation": "\n      <p>The unique identifier for the cluster.</p>\n   "
                 },
                 "Name": {
-                  "shape_name": "StringMaxLen256",
+                  "shape_name": "String",
                   "type": "string",
-                  "min_length": 0,
-                  "max_length": 256,
                   "documentation": "\n      <p>The name of the cluster.</p>\n   "
                 },
                 "Status": {
@@ -1639,9 +1692,7 @@
           "Marker": {
             "shape_name": "Marker",
             "type": "string",
-            "min_length": 1,
-            "max_length": 512,
-            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.\n      </p>\n   "
+            "documentation": "\n      <p>The pagination token is a random string indicating whether there are more results to fetch. Use the pagination token in later API calls to retrieve the next page of results. When the value is null, all results have been returned. \n      </p>\n   "
           }
         },
         "documentation": "\n      <p>This contains a ClusterSummaryList with the cluster details; for example, the cluster IDs, names, and status.</p>      \n   "
@@ -1690,16 +1741,12 @@
           "ClusterId": {
             "shape_name": "ClusterId",
             "type": "string",
-            "min_length": 1,
-            "max_length": 64,
             "documentation": "\n      <p>The identifier of the cluster for which to list the instance groups.</p>\n   "
           },
           "Marker": {
             "shape_name": "Marker",
             "type": "string",
-            "min_length": 1,
-            "max_length": 512,
-            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+            "documentation": "\n      <p>The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>\n   "
           }
         },
         "documentation": "\n      <p>This input determines which instance groups to retrieve.</p>\n   "
@@ -1718,15 +1765,11 @@
                 "Id": {
                   "shape_name": "InstanceGroupId",
                   "type": "string",
-                  "min_length": 1,
-                  "max_length": 64,
                   "documentation": "\n      <p>The identifier of the instance group.</p>\n   "
                 },
                 "Name": {
-                  "shape_name": "StringMaxLen256",
+                  "shape_name": "String",
                   "type": "string",
-                  "min_length": 0,
-                  "max_length": 256,
                   "documentation": "\n      <p>The name of the instance group.</p>\n   "
                 },
                 "Market": {
@@ -1749,10 +1792,8 @@
                   "documentation": "\n      <p>The type of the instance group. Valid values are MASTER, CORE or TASK.</p>\n   "
                 },
                 "BidPrice": {
-                  "shape_name": "StringMaxLen256",
+                  "shape_name": "String",
                   "type": "string",
-                  "min_length": 0,
-                  "max_length": 256,
                   "documentation": "\n      <p>The bid price for each EC2 instance in the\n         instance group when launching nodes as Spot Instances, expressed in USD.</p>\n   "
                 },
                 "InstanceType": {
@@ -1850,9 +1891,7 @@
           "Marker": {
             "shape_name": "Marker",
             "type": "string",
-            "min_length": 1,
-            "max_length": 512,
-            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+            "documentation": "\n      <p>The pagination token is a random string indicating whether there are more results to fetch. Use the pagination token in later API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>\n   "
           }
         },
         "documentation": "\n      <p>This input determines which instance groups to retrieve.</p>\n   "
@@ -1901,15 +1940,11 @@
           "ClusterId": {
             "shape_name": "ClusterId",
             "type": "string",
-            "min_length": 1,
-            "max_length": 64,
             "documentation": "\n      <p>The identifier of the cluster for which to list the instances.</p>\n   "
           },
           "InstanceGroupId": {
             "shape_name": "InstanceGroupId",
             "type": "string",
-            "min_length": 1,
-            "max_length": 64,
             "documentation": "\n      <p>The identifier of the instance group for which to list the instances.</p>\n   "
           },
           "InstanceGroupTypes": {
@@ -1930,9 +1965,7 @@
           "Marker": {
             "shape_name": "Marker",
             "type": "string",
-            "min_length": 1,
-            "max_length": 512,
-            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+            "documentation": "\n      <p>The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>\n   "
           }
         },
         "documentation": "\n      <p>This input determines which instances to list.</p>\n   "
@@ -1951,43 +1984,31 @@
                 "Id": {
                   "shape_name": "InstanceId",
                   "type": "string",
-                  "min_length": 1,
-                  "max_length": 64,
                   "documentation": "\n      <p>The unique identifier for the instance in Amazon EMR.</p>\n   "
                 },
                 "Ec2InstanceId": {
                   "shape_name": "InstanceId",
                   "type": "string",
-                  "min_length": 1,
-                  "max_length": 64,
                   "documentation": "\n      <p>The unique identifier of the instance in Amazon EC2.</p>\n   "
                 },
                 "PublicDnsName": {
-                  "shape_name": "StringMaxLen256",
+                  "shape_name": "String",
                   "type": "string",
-                  "min_length": 0,
-                  "max_length": 256,
                   "documentation": "\n      <p>The public DNS name of the instance.</p>\n   "
                 },
                 "PublicIpAddress": {
-                  "shape_name": "StringMaxLen256",
+                  "shape_name": "String",
                   "type": "string",
-                  "min_length": 0,
-                  "max_length": 256,
                   "documentation": "\n      <p>The public IP address of the instance.</p>\n   "
                 },
                 "PrivateDnsName": {
-                  "shape_name": "StringMaxLen256",
+                  "shape_name": "String",
                   "type": "string",
-                  "min_length": 0,
-                  "max_length": 256,
                   "documentation": "\n      <p>The private DNS name of the instance.</p>\n   "
                 },
                 "PrivateIpAddress": {
-                  "shape_name": "StringMaxLen256",
+                  "shape_name": "String",
                   "type": "string",
-                  "min_length": 0,
-                  "max_length": 256,
                   "documentation": "\n      <p>The private IP address of the instance.</p>\n   "
                 },
                 "Status": {
@@ -2063,9 +2084,7 @@
           "Marker": {
             "shape_name": "Marker",
             "type": "string",
-            "min_length": 1,
-            "max_length": 512,
-            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+            "documentation": "\n      <p>The pagination token is a random string indicating whether there are more results to fetch. Use the pagination token in later API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>\n   "
           }
         },
         "documentation": "\n      <p>This output contains the list of instances.</p>\n   "
@@ -2114,8 +2133,6 @@
           "ClusterId": {
             "shape_name": "ClusterId",
             "type": "string",
-            "min_length": 1,
-            "max_length": 64,
             "documentation": "\n      <p>The identifier of the cluster for which to list the steps.</p>\n   "
           },
           "StepStates": {
@@ -2139,9 +2156,7 @@
           "Marker": {
             "shape_name": "Marker",
             "type": "string",
-            "min_length": 1,
-            "max_length": 512,
-            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+            "documentation": "\n      <p>The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>\n   "
           }
         },
         "documentation": "\n      <p>This input determines which steps to list.</p>\n   "
@@ -2160,15 +2175,11 @@
                 "Id": {
                   "shape_name": "StepId",
                   "type": "string",
-                  "min_length": 1,
-                  "max_length": 64,
                   "documentation": "\n      <p>The identifier of the cluster step.\n      </p>\n   "
                 },
                 "Name": {
-                  "shape_name": "StringMaxLen256",
+                  "shape_name": "String",
                   "type": "string",
-                  "min_length": 0,
-                  "max_length": 256,
                   "documentation": "\n      <p>The name of the cluster step.\n      </p>\n   "
                 },
                 "Status": {
@@ -2241,9 +2252,7 @@
           "Marker": {
             "shape_name": "Marker",
             "type": "string",
-            "min_length": 1,
-            "max_length": 512,
-            "documentation": "\n      <p>The pagination token that indicates the next set of results to retrieve.</p>\n   "
+            "documentation": "\n      <p>The pagination token is a random string indicating whether there are more results to fetch. Use the pagination token in later API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>\n   "
           }
         },
         "documentation": "\n      <p>This output contains the list of steps.</p>\n   "
@@ -2316,8 +2325,6 @@
                   "members": {
                     "shape_name": "InstanceId",
                     "type": "string",
-                    "min_length": 1,
-                    "max_length": 64,
                     "documentation": null
                   },
                   "documentation": "\n      <p>The EC2 InstanceIds to terminate. For advanced users only. \n         Once you terminate the instances, the instance group will not return to its original requested size.</p>\n   "
@@ -2341,6 +2348,72 @@
         }
       ],
       "documentation": "\n      <p>ModifyInstanceGroups modifies the number of nodes and configuration settings of an instance\n         group. The input parameters include the new target instance count for the group and the\n         instance group ID. The call will either succeed or fail atomically.</p>\n\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.ModifyInstanceGroups\nContent-Length: 77\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130716T205843Z\nX-Amz-Content-Sha256: bb1af3d0c6c6a1a09f21ccd7f04a0e2e6c9ce5b5810b0f6777560fe4f81bda8c\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130716/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=17bbbb4448a1f47a14d5657445e9de5cadf16bed58b850585f80865882133b33\nAccept: */*\n\n{\"InstanceGroups\": [{\n    \"InstanceGroupId\": \"ig-1S8NWT31S2OVG\",\n    \"InstanceCount\": 5\n}]}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 80a74808-ee5a-11e2-90db-69a5154aeb8d\nContent-Type: application/x-amz-json-1.1\nContent-Length: 0\nDate: Tue, 16 Jul 2013 20:58:44 GMT\n\n         </queryresponse>\n      </examples>\n      \n   "
+    },
+    "RemoveTags": {
+      "name": "RemoveTags",
+      "input": {
+        "shape_name": "RemoveTagsInput",
+        "type": "structure",
+        "members": {
+          "ResourceId": {
+            "shape_name": "ResourceId",
+            "type": "string",
+            "documentation": "\n      <p>The Amazon EMR resource identifier from which tags will be removed. This value must be a cluster identifier.</p>\n   "
+          },
+          "TagKeys": {
+            "shape_name": "StringList",
+            "type": "list",
+            "members": {
+              "shape_name": "String",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n      <p>A list of tag keys to remove from a resource.</p>\n   "
+          }
+        },
+        "documentation": "\n      <p>This input identifies a cluster and a list of tags to remove.    \n      </p> \n   "
+      },
+      "output": {
+        "shape_name": "RemoveTagsOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n      <p>This output indicates the result of removing tags from a resource.       \n      </p> \n   "
+      },
+      "errors": [
+        {
+          "shape_name": "InternalServerException",
+          "type": "structure",
+          "members": {
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is an internal failure in the EMR service.</p>      \n      \n   "
+        },
+        {
+          "shape_name": "InvalidRequestException",
+          "type": "structure",
+          "members": {
+            "ErrorCode": {
+              "shape_name": "ErrorCode",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 256,
+              "documentation": "\n      <p>The error code associated with the exception.</p>      \n      \n   "
+            },
+            "Message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n      <p>The message associated with the exception.</p>      \n      \n   "
+            }
+          },
+          "documentation": "\n      <p>This exception occurs when there is something wrong with user input.</p>      \n      \n   "
+        }
+      ],
+      "documentation": "\n      <p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.         \n      </p>      \n      \n   "
     },
     "RunJobFlow": {
       "name": "RunJobFlow",
@@ -2683,7 +2756,7 @@
               "max_length": 256,
               "documentation": null
             },
-            "documentation": "\n      <p>A list of strings that indicates third-party software to use with the job flow. For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html\">Use Third Party Applications with Amazon EMR</a>. Currently supported values are:</p>\n         <ul>\n            <li>\"karmasphere-enterprise-utility\" - tag the \n               job flow for management by <a href=\"http://aws.amazon.com/elasticmapreduce/karmasphere/\">Karmasphere.</a>\n</li>\n            <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n            <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         </ul>\n   "
+            "documentation": "\n      <p>A list of strings that indicates third-party software to use with the job flow. For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html\">Use Third Party Applications with Amazon EMR</a>. Currently supported values are:</p>\n         <ul>            \n            <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n            <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         </ul>\n   "
           },
           "NewSupportedProducts": {
             "shape_name": "NewSupportedProductsList",
@@ -2716,7 +2789,7 @@
               },
               "documentation": "\n      <p>The list of supported product configurations which allow user-supplied arguments. EMR accepts these arguments and forwards them to the corresponding installation script as bootstrap action arguments. </p>\n   "
             },
-            "documentation": "\n      <p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action arguments. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p>\n      <ul>\n         <li>\"karmasphere-enterprise-utility\" - tag the \n            job flow for management by <a href=\"http://aws.amazon.com/elasticmapreduce/karmasphere/\">Karmasphere.</a>\n</li>\n         <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n         <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition respectively.</li>\n      </ul>\n   "
+            "documentation": "\n      <p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action arguments. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p>\n      <ul>\n         <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n         <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition respectively.</li>\n      </ul>\n   "
           },
           "VisibleToAllUsers": {
             "shape_name": "Boolean",
@@ -2730,6 +2803,28 @@
             "min_length": 0,
             "max_length": 10280,
             "documentation": "\n      <p>An IAM role for the job flow. The EC2 instances of the job flow assume this role. The default role is <code>EMRJobflowDefault</code>. In order to use the default role, you must have already created it using the CLI.</p>\n   "
+          },
+          "Tags": {
+            "shape_name": "TagList",
+            "type": "list",
+            "members": {
+              "shape_name": "Tag",
+              "type": "structure",
+              "members": {
+                "Key": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": "\n      <p>A user-defined key, which is the minimum required information for a valid tag.\n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p> \n   "
+                },
+                "Value": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": "\n      <p>A user-defined value, which is optional in a tag.\n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p> \n   "
+                }
+              },
+              "documentation": "\n      <p>A key/value pair that contains user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p> \n   "
+            },
+            "documentation": "\n      <p>A list of tags to associate with a cluster and propagate to Amazon EC2 instances.</p>\n   "
           }
         },
         "documentation": "\n      <p> Input to the <a>RunJobFlow</a> operation. </p>\n   "

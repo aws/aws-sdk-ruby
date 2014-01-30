@@ -127,6 +127,7 @@
             "type": "string",
             "serialized_name": "ReturnConsumedCapacity",
             "enum": [
+              "INDEXES",
               "TOTAL",
               "NONE"
             ]
@@ -274,6 +275,48 @@
                 "capacity_units": {
                   "type": "float",
                   "serialized_name": "CapacityUnits"
+                },
+                "table": {
+                  "type": "structure",
+                  "serialized_name": "Table",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                },
+                "local_secondary_indexes": {
+                  "type": "map",
+                  "serialized_name": "LocalSecondaryIndexes",
+                  "keys": {
+                    "type": "string"
+                  },
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "capacity_units": {
+                        "type": "float",
+                        "serialized_name": "CapacityUnits"
+                      }
+                    }
+                  }
+                },
+                "global_secondary_indexes": {
+                  "type": "map",
+                  "serialized_name": "GlobalSecondaryIndexes",
+                  "keys": {
+                    "type": "string"
+                  },
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "capacity_units": {
+                        "type": "float",
+                        "serialized_name": "CapacityUnits"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -412,6 +455,7 @@
             "type": "string",
             "serialized_name": "ReturnConsumedCapacity",
             "enum": [
+              "INDEXES",
               "TOTAL",
               "NONE"
             ]
@@ -626,6 +670,48 @@
                 "capacity_units": {
                   "type": "float",
                   "serialized_name": "CapacityUnits"
+                },
+                "table": {
+                  "type": "structure",
+                  "serialized_name": "Table",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                },
+                "local_secondary_indexes": {
+                  "type": "map",
+                  "serialized_name": "LocalSecondaryIndexes",
+                  "keys": {
+                    "type": "string"
+                  },
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "capacity_units": {
+                        "type": "float",
+                        "serialized_name": "CapacityUnits"
+                      }
+                    }
+                  }
+                },
+                "global_secondary_indexes": {
+                  "type": "map",
+                  "serialized_name": "GlobalSecondaryIndexes",
+                  "keys": {
+                    "type": "string"
+                  },
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "capacity_units": {
+                        "type": "float",
+                        "serialized_name": "CapacityUnits"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -749,6 +835,84 @@
                       "members": {
                         "type": "string"
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "global_secondary_indexes": {
+            "type": "list",
+            "serialized_name": "GlobalSecondaryIndexes",
+            "members": {
+              "type": "structure",
+              "members": {
+                "index_name": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "IndexName"
+                },
+                "key_schema": {
+                  "type": "list",
+                  "required": true,
+                  "serialized_name": "KeySchema",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "attribute_name": {
+                        "type": "string",
+                        "required": true,
+                        "serialized_name": "AttributeName"
+                      },
+                      "key_type": {
+                        "type": "string",
+                        "required": true,
+                        "serialized_name": "KeyType",
+                        "enum": [
+                          "HASH",
+                          "RANGE"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "projection": {
+                  "type": "structure",
+                  "required": true,
+                  "serialized_name": "Projection",
+                  "members": {
+                    "projection_type": {
+                      "type": "string",
+                      "serialized_name": "ProjectionType",
+                      "enum": [
+                        "ALL",
+                        "KEYS_ONLY",
+                        "INCLUDE"
+                      ]
+                    },
+                    "non_key_attributes": {
+                      "type": "list",
+                      "serialized_name": "NonKeyAttributes",
+                      "members": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "provisioned_throughput": {
+                  "type": "structure",
+                  "required": true,
+                  "serialized_name": "ProvisionedThroughput",
+                  "members": {
+                    "read_capacity_units": {
+                      "type": "integer",
+                      "required": true,
+                      "serialized_name": "ReadCapacityUnits"
+                    },
+                    "write_capacity_units": {
+                      "type": "integer",
+                      "required": true,
+                      "serialized_name": "WriteCapacityUnits"
                     }
                   }
                 }
@@ -939,6 +1103,106 @@
                     }
                   }
                 }
+              },
+              "global_secondary_indexes": {
+                "type": "list",
+                "serialized_name": "GlobalSecondaryIndexes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "index_name": {
+                      "type": "string",
+                      "serialized_name": "IndexName"
+                    },
+                    "key_schema": {
+                      "type": "list",
+                      "serialized_name": "KeySchema",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "attribute_name": {
+                            "type": "string",
+                            "serialized_name": "AttributeName"
+                          },
+                          "key_type": {
+                            "type": "string",
+                            "serialized_name": "KeyType",
+                            "enum": [
+                              "HASH",
+                              "RANGE"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "projection": {
+                      "type": "structure",
+                      "serialized_name": "Projection",
+                      "members": {
+                        "projection_type": {
+                          "type": "string",
+                          "serialized_name": "ProjectionType",
+                          "enum": [
+                            "ALL",
+                            "KEYS_ONLY",
+                            "INCLUDE"
+                          ]
+                        },
+                        "non_key_attributes": {
+                          "type": "list",
+                          "serialized_name": "NonKeyAttributes",
+                          "members": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "index_status": {
+                      "type": "string",
+                      "serialized_name": "IndexStatus",
+                      "enum": [
+                        "CREATING",
+                        "UPDATING",
+                        "DELETING",
+                        "ACTIVE"
+                      ]
+                    },
+                    "provisioned_throughput": {
+                      "type": "structure",
+                      "serialized_name": "ProvisionedThroughput",
+                      "members": {
+                        "last_increase_date_time": {
+                          "type": "iso8601_timestamp",
+                          "serialized_name": "LastIncreaseDateTime"
+                        },
+                        "last_decrease_date_time": {
+                          "type": "iso8601_timestamp",
+                          "serialized_name": "LastDecreaseDateTime"
+                        },
+                        "number_of_decreases_today": {
+                          "type": "integer",
+                          "serialized_name": "NumberOfDecreasesToday"
+                        },
+                        "read_capacity_units": {
+                          "type": "integer",
+                          "serialized_name": "ReadCapacityUnits"
+                        },
+                        "write_capacity_units": {
+                          "type": "integer",
+                          "serialized_name": "WriteCapacityUnits"
+                        }
+                      }
+                    },
+                    "index_size_bytes": {
+                      "type": "integer",
+                      "serialized_name": "IndexSizeBytes"
+                    },
+                    "item_count": {
+                      "type": "integer",
+                      "serialized_name": "ItemCount"
+                    }
+                  }
+                }
               }
             }
           }
@@ -1073,6 +1337,7 @@
             "type": "string",
             "serialized_name": "ReturnConsumedCapacity",
             "enum": [
+              "INDEXES",
               "TOTAL",
               "NONE"
             ]
@@ -1146,6 +1411,48 @@
               "capacity_units": {
                 "type": "float",
                 "serialized_name": "CapacityUnits"
+              },
+              "table": {
+                "type": "structure",
+                "serialized_name": "Table",
+                "members": {
+                  "capacity_units": {
+                    "type": "float",
+                    "serialized_name": "CapacityUnits"
+                  }
+                }
+              },
+              "local_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "LocalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
+              },
+              "global_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "GlobalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
               }
             }
           },
@@ -1389,6 +1696,106 @@
                     }
                   }
                 }
+              },
+              "global_secondary_indexes": {
+                "type": "list",
+                "serialized_name": "GlobalSecondaryIndexes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "index_name": {
+                      "type": "string",
+                      "serialized_name": "IndexName"
+                    },
+                    "key_schema": {
+                      "type": "list",
+                      "serialized_name": "KeySchema",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "attribute_name": {
+                            "type": "string",
+                            "serialized_name": "AttributeName"
+                          },
+                          "key_type": {
+                            "type": "string",
+                            "serialized_name": "KeyType",
+                            "enum": [
+                              "HASH",
+                              "RANGE"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "projection": {
+                      "type": "structure",
+                      "serialized_name": "Projection",
+                      "members": {
+                        "projection_type": {
+                          "type": "string",
+                          "serialized_name": "ProjectionType",
+                          "enum": [
+                            "ALL",
+                            "KEYS_ONLY",
+                            "INCLUDE"
+                          ]
+                        },
+                        "non_key_attributes": {
+                          "type": "list",
+                          "serialized_name": "NonKeyAttributes",
+                          "members": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "index_status": {
+                      "type": "string",
+                      "serialized_name": "IndexStatus",
+                      "enum": [
+                        "CREATING",
+                        "UPDATING",
+                        "DELETING",
+                        "ACTIVE"
+                      ]
+                    },
+                    "provisioned_throughput": {
+                      "type": "structure",
+                      "serialized_name": "ProvisionedThroughput",
+                      "members": {
+                        "last_increase_date_time": {
+                          "type": "iso8601_timestamp",
+                          "serialized_name": "LastIncreaseDateTime"
+                        },
+                        "last_decrease_date_time": {
+                          "type": "iso8601_timestamp",
+                          "serialized_name": "LastDecreaseDateTime"
+                        },
+                        "number_of_decreases_today": {
+                          "type": "integer",
+                          "serialized_name": "NumberOfDecreasesToday"
+                        },
+                        "read_capacity_units": {
+                          "type": "integer",
+                          "serialized_name": "ReadCapacityUnits"
+                        },
+                        "write_capacity_units": {
+                          "type": "integer",
+                          "serialized_name": "WriteCapacityUnits"
+                        }
+                      }
+                    },
+                    "index_size_bytes": {
+                      "type": "integer",
+                      "serialized_name": "IndexSizeBytes"
+                    },
+                    "item_count": {
+                      "type": "integer",
+                      "serialized_name": "ItemCount"
+                    }
+                  }
+                }
               }
             }
           }
@@ -1574,6 +1981,106 @@
                     }
                   }
                 }
+              },
+              "global_secondary_indexes": {
+                "type": "list",
+                "serialized_name": "GlobalSecondaryIndexes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "index_name": {
+                      "type": "string",
+                      "serialized_name": "IndexName"
+                    },
+                    "key_schema": {
+                      "type": "list",
+                      "serialized_name": "KeySchema",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "attribute_name": {
+                            "type": "string",
+                            "serialized_name": "AttributeName"
+                          },
+                          "key_type": {
+                            "type": "string",
+                            "serialized_name": "KeyType",
+                            "enum": [
+                              "HASH",
+                              "RANGE"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "projection": {
+                      "type": "structure",
+                      "serialized_name": "Projection",
+                      "members": {
+                        "projection_type": {
+                          "type": "string",
+                          "serialized_name": "ProjectionType",
+                          "enum": [
+                            "ALL",
+                            "KEYS_ONLY",
+                            "INCLUDE"
+                          ]
+                        },
+                        "non_key_attributes": {
+                          "type": "list",
+                          "serialized_name": "NonKeyAttributes",
+                          "members": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "index_status": {
+                      "type": "string",
+                      "serialized_name": "IndexStatus",
+                      "enum": [
+                        "CREATING",
+                        "UPDATING",
+                        "DELETING",
+                        "ACTIVE"
+                      ]
+                    },
+                    "provisioned_throughput": {
+                      "type": "structure",
+                      "serialized_name": "ProvisionedThroughput",
+                      "members": {
+                        "last_increase_date_time": {
+                          "type": "iso8601_timestamp",
+                          "serialized_name": "LastIncreaseDateTime"
+                        },
+                        "last_decrease_date_time": {
+                          "type": "iso8601_timestamp",
+                          "serialized_name": "LastDecreaseDateTime"
+                        },
+                        "number_of_decreases_today": {
+                          "type": "integer",
+                          "serialized_name": "NumberOfDecreasesToday"
+                        },
+                        "read_capacity_units": {
+                          "type": "integer",
+                          "serialized_name": "ReadCapacityUnits"
+                        },
+                        "write_capacity_units": {
+                          "type": "integer",
+                          "serialized_name": "WriteCapacityUnits"
+                        }
+                      }
+                    },
+                    "index_size_bytes": {
+                      "type": "integer",
+                      "serialized_name": "IndexSizeBytes"
+                    },
+                    "item_count": {
+                      "type": "integer",
+                      "serialized_name": "ItemCount"
+                    }
+                  }
+                }
               }
             }
           }
@@ -1653,6 +2160,7 @@
             "type": "string",
             "serialized_name": "ReturnConsumedCapacity",
             "enum": [
+              "INDEXES",
               "TOTAL",
               "NONE"
             ]
@@ -1718,6 +2226,48 @@
               "capacity_units": {
                 "type": "float",
                 "serialized_name": "CapacityUnits"
+              },
+              "table": {
+                "type": "structure",
+                "serialized_name": "Table",
+                "members": {
+                  "capacity_units": {
+                    "type": "float",
+                    "serialized_name": "CapacityUnits"
+                  }
+                }
+              },
+              "local_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "LocalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
+              },
+              "global_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "GlobalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
               }
             }
           }
@@ -1893,6 +2443,7 @@
             "type": "string",
             "serialized_name": "ReturnConsumedCapacity",
             "enum": [
+              "INDEXES",
               "TOTAL",
               "NONE"
             ]
@@ -1966,6 +2517,48 @@
               "capacity_units": {
                 "type": "float",
                 "serialized_name": "CapacityUnits"
+              },
+              "table": {
+                "type": "structure",
+                "serialized_name": "Table",
+                "members": {
+                  "capacity_units": {
+                    "type": "float",
+                    "serialized_name": "CapacityUnits"
+                  }
+                }
+              },
+              "local_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "LocalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
+              },
+              "global_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "GlobalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
               }
             }
           },
@@ -2205,6 +2798,7 @@
             "type": "string",
             "serialized_name": "ReturnConsumedCapacity",
             "enum": [
+              "INDEXES",
               "TOTAL",
               "NONE"
             ]
@@ -2322,6 +2916,48 @@
               "capacity_units": {
                 "type": "float",
                 "serialized_name": "CapacityUnits"
+              },
+              "table": {
+                "type": "structure",
+                "serialized_name": "Table",
+                "members": {
+                  "capacity_units": {
+                    "type": "float",
+                    "serialized_name": "CapacityUnits"
+                  }
+                }
+              },
+              "local_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "LocalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
+              },
+              "global_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "GlobalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
               }
             }
           }
@@ -2491,6 +3127,7 @@
             "type": "string",
             "serialized_name": "ReturnConsumedCapacity",
             "enum": [
+              "INDEXES",
               "TOTAL",
               "NONE"
             ]
@@ -2620,6 +3257,48 @@
               "capacity_units": {
                 "type": "float",
                 "serialized_name": "CapacityUnits"
+              },
+              "table": {
+                "type": "structure",
+                "serialized_name": "Table",
+                "members": {
+                  "capacity_units": {
+                    "type": "float",
+                    "serialized_name": "CapacityUnits"
+                  }
+                }
+              },
+              "local_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "LocalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
+              },
+              "global_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "GlobalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
               }
             }
           }
@@ -2814,6 +3493,7 @@
             "type": "string",
             "serialized_name": "ReturnConsumedCapacity",
             "enum": [
+              "INDEXES",
               "TOTAL",
               "NONE"
             ]
@@ -2887,6 +3567,48 @@
               "capacity_units": {
                 "type": "float",
                 "serialized_name": "CapacityUnits"
+              },
+              "table": {
+                "type": "structure",
+                "serialized_name": "Table",
+                "members": {
+                  "capacity_units": {
+                    "type": "float",
+                    "serialized_name": "CapacityUnits"
+                  }
+                }
+              },
+              "local_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "LocalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
+              },
+              "global_secondary_indexes": {
+                "type": "map",
+                "serialized_name": "GlobalSecondaryIndexes",
+                "keys": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "capacity_units": {
+                      "type": "float",
+                      "serialized_name": "CapacityUnits"
+                    }
+                  }
+                }
               }
             }
           },
@@ -2965,7 +3687,6 @@
           },
           "provisioned_throughput": {
             "type": "structure",
-            "required": true,
             "serialized_name": "ProvisionedThroughput",
             "members": {
               "read_capacity_units": {
@@ -2977,6 +3698,43 @@
                 "type": "integer",
                 "required": true,
                 "serialized_name": "WriteCapacityUnits"
+              }
+            }
+          },
+          "global_secondary_index_updates": {
+            "type": "list",
+            "serialized_name": "GlobalSecondaryIndexUpdates",
+            "members": {
+              "type": "structure",
+              "members": {
+                "update": {
+                  "type": "structure",
+                  "serialized_name": "Update",
+                  "members": {
+                    "index_name": {
+                      "type": "string",
+                      "required": true,
+                      "serialized_name": "IndexName"
+                    },
+                    "provisioned_throughput": {
+                      "type": "structure",
+                      "required": true,
+                      "serialized_name": "ProvisionedThroughput",
+                      "members": {
+                        "read_capacity_units": {
+                          "type": "integer",
+                          "required": true,
+                          "serialized_name": "ReadCapacityUnits"
+                        },
+                        "write_capacity_units": {
+                          "type": "integer",
+                          "required": true,
+                          "serialized_name": "WriteCapacityUnits"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -3134,6 +3892,106 @@
                           "members": {
                             "type": "string"
                           }
+                        }
+                      }
+                    },
+                    "index_size_bytes": {
+                      "type": "integer",
+                      "serialized_name": "IndexSizeBytes"
+                    },
+                    "item_count": {
+                      "type": "integer",
+                      "serialized_name": "ItemCount"
+                    }
+                  }
+                }
+              },
+              "global_secondary_indexes": {
+                "type": "list",
+                "serialized_name": "GlobalSecondaryIndexes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "index_name": {
+                      "type": "string",
+                      "serialized_name": "IndexName"
+                    },
+                    "key_schema": {
+                      "type": "list",
+                      "serialized_name": "KeySchema",
+                      "members": {
+                        "type": "structure",
+                        "members": {
+                          "attribute_name": {
+                            "type": "string",
+                            "serialized_name": "AttributeName"
+                          },
+                          "key_type": {
+                            "type": "string",
+                            "serialized_name": "KeyType",
+                            "enum": [
+                              "HASH",
+                              "RANGE"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "projection": {
+                      "type": "structure",
+                      "serialized_name": "Projection",
+                      "members": {
+                        "projection_type": {
+                          "type": "string",
+                          "serialized_name": "ProjectionType",
+                          "enum": [
+                            "ALL",
+                            "KEYS_ONLY",
+                            "INCLUDE"
+                          ]
+                        },
+                        "non_key_attributes": {
+                          "type": "list",
+                          "serialized_name": "NonKeyAttributes",
+                          "members": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "index_status": {
+                      "type": "string",
+                      "serialized_name": "IndexStatus",
+                      "enum": [
+                        "CREATING",
+                        "UPDATING",
+                        "DELETING",
+                        "ACTIVE"
+                      ]
+                    },
+                    "provisioned_throughput": {
+                      "type": "structure",
+                      "serialized_name": "ProvisionedThroughput",
+                      "members": {
+                        "last_increase_date_time": {
+                          "type": "iso8601_timestamp",
+                          "serialized_name": "LastIncreaseDateTime"
+                        },
+                        "last_decrease_date_time": {
+                          "type": "iso8601_timestamp",
+                          "serialized_name": "LastDecreaseDateTime"
+                        },
+                        "number_of_decreases_today": {
+                          "type": "integer",
+                          "serialized_name": "NumberOfDecreasesToday"
+                        },
+                        "read_capacity_units": {
+                          "type": "integer",
+                          "serialized_name": "ReadCapacityUnits"
+                        },
+                        "write_capacity_units": {
+                          "type": "integer",
+                          "serialized_name": "WriteCapacityUnits"
                         }
                       }
                     },

@@ -601,7 +601,12 @@
                 "ManageBundler",
                 "BundlerVersion",
                 "RailsStack",
-                "PassengerVersion"
+                "PassengerVersion",
+                "Jvm",
+                "JvmVersion",
+                "JvmOptions",
+                "JavaAppServer",
+                "JavaAppServerVersion"
               ]
             },
             "members": {
@@ -884,6 +889,10 @@
           "ssh_public_key": {
             "type": "string",
             "serialized_name": "SshPublicKey"
+          },
+          "allow_self_management": {
+            "type": "boolean",
+            "serialized_name": "AllowSelfManagement"
           }
         }
       },
@@ -1752,7 +1761,12 @@
                       "ManageBundler",
                       "BundlerVersion",
                       "RailsStack",
-                      "PassengerVersion"
+                      "PassengerVersion",
+                      "Jvm",
+                      "JvmVersion",
+                      "JvmOptions",
+                      "JavaAppServer",
+                      "JavaAppServerVersion"
                     ]
                   },
                   "members": {
@@ -2017,6 +2031,38 @@
         }
       }
     },
+    "describe_my_user_profile": {
+      "name": "DescribeMyUserProfile",
+      "http_method": "POST",
+      "http_path": "/",
+      "output": {
+        "type": "output",
+        "members": {
+          "user_profile": {
+            "type": "structure",
+            "serialized_name": "UserProfile",
+            "members": {
+              "iam_user_arn": {
+                "type": "string",
+                "serialized_name": "IamUserArn"
+              },
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "ssh_username": {
+                "type": "string",
+                "serialized_name": "SshUsername"
+              },
+              "ssh_public_key": {
+                "type": "string",
+                "serialized_name": "SshPublicKey"
+              }
+            }
+          }
+        }
+      }
+    },
     "describe_permissions": {
       "name": "DescribePermissions",
       "http_method": "POST",
@@ -2026,12 +2072,10 @@
         "members": {
           "iam_user_arn": {
             "type": "string",
-            "required": true,
             "serialized_name": "IamUserArn"
           },
           "stack_id": {
             "type": "string",
-            "required": true,
             "serialized_name": "StackId"
           }
         }
@@ -2060,6 +2104,10 @@
                 "allow_sudo": {
                   "type": "boolean",
                   "serialized_name": "AllowSudo"
+                },
+                "level": {
+                  "type": "string",
+                  "serialized_name": "Level"
                 }
               }
             }
@@ -2198,6 +2246,102 @@
                 "created_at": {
                   "type": "string",
                   "serialized_name": "CreatedAt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_stack_summary": {
+      "name": "DescribeStackSummary",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stack_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StackId"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "stack_summary": {
+            "type": "structure",
+            "serialized_name": "StackSummary",
+            "members": {
+              "stack_id": {
+                "type": "string",
+                "serialized_name": "StackId"
+              },
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "layers_count": {
+                "type": "integer",
+                "serialized_name": "LayersCount"
+              },
+              "apps_count": {
+                "type": "integer",
+                "serialized_name": "AppsCount"
+              },
+              "instances_count": {
+                "type": "structure",
+                "serialized_name": "InstancesCount",
+                "members": {
+                  "booting": {
+                    "type": "integer",
+                    "serialized_name": "Booting"
+                  },
+                  "connection_lost": {
+                    "type": "integer",
+                    "serialized_name": "ConnectionLost"
+                  },
+                  "pending": {
+                    "type": "integer",
+                    "serialized_name": "Pending"
+                  },
+                  "rebooting": {
+                    "type": "integer",
+                    "serialized_name": "Rebooting"
+                  },
+                  "requested": {
+                    "type": "integer",
+                    "serialized_name": "Requested"
+                  },
+                  "running_setup": {
+                    "type": "integer",
+                    "serialized_name": "RunningSetup"
+                  },
+                  "setup_failed": {
+                    "type": "integer",
+                    "serialized_name": "SetupFailed"
+                  },
+                  "shutting_down": {
+                    "type": "integer",
+                    "serialized_name": "ShuttingDown"
+                  },
+                  "start_failed": {
+                    "type": "integer",
+                    "serialized_name": "StartFailed"
+                  },
+                  "stopped": {
+                    "type": "integer",
+                    "serialized_name": "Stopped"
+                  },
+                  "terminated": {
+                    "type": "integer",
+                    "serialized_name": "Terminated"
+                  },
+                  "terminating": {
+                    "type": "integer",
+                    "serialized_name": "Terminating"
+                  }
                 }
               }
             }
@@ -2484,7 +2628,6 @@
         "members": {
           "iam_user_arns": {
             "type": "list",
-            "required": true,
             "serialized_name": "IamUserArns",
             "members": {
               "type": "string"
@@ -2516,6 +2659,10 @@
                 "ssh_public_key": {
                   "type": "string",
                   "serialized_name": "SshPublicKey"
+                },
+                "allow_self_management": {
+                  "type": "boolean",
+                  "serialized_name": "AllowSelfManagement"
                 }
               }
             }
@@ -2848,6 +2995,10 @@
           "allow_sudo": {
             "type": "boolean",
             "serialized_name": "AllowSudo"
+          },
+          "level": {
+            "type": "string",
+            "serialized_name": "Level"
           }
         }
       }
@@ -3259,7 +3410,12 @@
                 "ManageBundler",
                 "BundlerVersion",
                 "RailsStack",
-                "PassengerVersion"
+                "PassengerVersion",
+                "Jvm",
+                "JvmVersion",
+                "JvmOptions",
+                "JavaAppServer",
+                "JavaAppServerVersion"
               ]
             },
             "members": {
@@ -3368,6 +3524,20 @@
           "install_updates_on_boot": {
             "type": "boolean",
             "serialized_name": "InstallUpdatesOnBoot"
+          }
+        }
+      }
+    },
+    "update_my_user_profile": {
+      "name": "UpdateMyUserProfile",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "ssh_public_key": {
+            "type": "string",
+            "serialized_name": "SshPublicKey"
           }
         }
       }
@@ -3517,6 +3687,10 @@
           "ssh_public_key": {
             "type": "string",
             "serialized_name": "SshPublicKey"
+          },
+          "allow_self_management": {
+            "type": "boolean",
+            "serialized_name": "AllowSelfManagement"
           }
         }
       }

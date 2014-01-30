@@ -63,14 +63,6 @@
           "gateway_type": {
             "type": "string",
             "serialized_name": "GatewayType"
-          },
-          "tape_drive_type": {
-            "type": "string",
-            "serialized_name": "TapeDriveType"
-          },
-          "medium_changer_type": {
-            "type": "string",
-            "serialized_name": "MediumChangerType"
           }
         }
       },
@@ -1107,6 +1099,13 @@
       "name": "DescribeTapeArchives",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1174,6 +1173,13 @@
       "name": "DescribeTapeRecoveryPoints",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1216,10 +1222,6 @@
                 "tape_size_in_bytes": {
                   "type": "integer",
                   "serialized_name": "TapeSizeInBytes"
-                },
-                "tape_status": {
-                  "type": "string",
-                  "serialized_name": "TapeStatus"
                 }
               }
             }
@@ -1235,6 +1237,13 @@
       "name": "DescribeTapes",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1346,6 +1355,13 @@
       "name": "DescribeVTLDevices",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -1387,18 +1403,6 @@
                 "vtl_device_arn": {
                   "type": "string",
                   "serialized_name": "VTLDeviceARN"
-                },
-                "vtl_device_type": {
-                  "type": "string",
-                  "serialized_name": "VTLDeviceType"
-                },
-                "vtl_device_vendor": {
-                  "type": "string",
-                  "serialized_name": "VTLDeviceVendor"
-                },
-                "vtl_device_product_identifier": {
-                  "type": "string",
-                  "serialized_name": "VTLDeviceProductIdentifier"
                 },
                 "devicei_scsi_attributes": {
                   "type": "structure",
@@ -1535,10 +1539,6 @@
                 "gateway_type": {
                   "type": "string",
                   "serialized_name": "GatewayType"
-                },
-                "gateway_operational_state": {
-                  "type": "string",
-                  "serialized_name": "GatewayOperationalState"
                 }
               }
             }

@@ -36,6 +36,7 @@ module Aws
       ignore :member_order
       ignore :box
       ignore :streaming
+      ignore :sensitive
 
       # validation properties
       ignore :pattern

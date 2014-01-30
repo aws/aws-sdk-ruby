@@ -216,6 +216,10 @@
                 "type": "boolean",
                 "serialized_name": "Encrypted"
               },
+              "encrypted_with_hsm": {
+                "type": "boolean",
+                "serialized_name": "EncryptedWithHSM"
+              },
               "accounts_with_restore_access": {
                 "type": "list",
                 "serialized_name": "AccountsWithRestoreAccess",
@@ -257,6 +261,10 @@
               "elapsed_time_in_seconds": {
                 "type": "integer",
                 "serialized_name": "ElapsedTimeInSeconds"
+              },
+              "source_region": {
+                "type": "string",
+                "serialized_name": "SourceRegion"
               }
             }
           }
@@ -359,6 +367,10 @@
                 "type": "boolean",
                 "serialized_name": "Encrypted"
               },
+              "encrypted_with_hsm": {
+                "type": "boolean",
+                "serialized_name": "EncryptedWithHSM"
+              },
               "accounts_with_restore_access": {
                 "type": "list",
                 "serialized_name": "AccountsWithRestoreAccess",
@@ -400,6 +412,10 @@
               "elapsed_time_in_seconds": {
                 "type": "integer",
                 "serialized_name": "ElapsedTimeInSeconds"
+              },
+              "source_region": {
+                "type": "string",
+                "serialized_name": "SourceRegion"
               }
             }
           }
@@ -500,6 +516,18 @@
           "encrypted": {
             "type": "boolean",
             "serialized_name": "Encrypted"
+          },
+          "hsm_client_certificate_identifier": {
+            "type": "string",
+            "serialized_name": "HsmClientCertificateIdentifier"
+          },
+          "hsm_configuration_identifier": {
+            "type": "string",
+            "serialized_name": "HsmConfigurationIdentifier"
+          },
+          "elastic_ip": {
+            "type": "string",
+            "serialized_name": "ElasticIp"
           }
         }
       },
@@ -709,6 +737,77 @@
                   "estimated_time_to_completion_in_seconds": {
                     "type": "integer",
                     "serialized_name": "EstimatedTimeToCompletionInSeconds"
+                  }
+                }
+              },
+              "hsm_status": {
+                "type": "structure",
+                "serialized_name": "HsmStatus",
+                "members": {
+                  "hsm_client_certificate_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmClientCertificateIdentifier"
+                  },
+                  "hsm_configuration_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmConfigurationIdentifier"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              },
+              "cluster_snapshot_copy_status": {
+                "type": "structure",
+                "serialized_name": "ClusterSnapshotCopyStatus",
+                "members": {
+                  "destination_region": {
+                    "type": "string",
+                    "serialized_name": "DestinationRegion"
+                  },
+                  "retention_period": {
+                    "type": "integer",
+                    "serialized_name": "RetentionPeriod"
+                  }
+                }
+              },
+              "cluster_public_key": {
+                "type": "string",
+                "serialized_name": "ClusterPublicKey"
+              },
+              "cluster_nodes": {
+                "type": "list",
+                "serialized_name": "ClusterNodes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "node_role": {
+                      "type": "string",
+                      "serialized_name": "NodeRole"
+                    },
+                    "private_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PrivateIPAddress"
+                    },
+                    "public_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PublicIPAddress"
+                    }
+                  }
+                }
+              },
+              "elastic_ip_status": {
+                "type": "structure",
+                "serialized_name": "ElasticIpStatus",
+                "members": {
+                  "elastic_ip": {
+                    "type": "string",
+                    "serialized_name": "ElasticIp"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
                   }
                 }
               }
@@ -948,6 +1047,10 @@
                 "type": "boolean",
                 "serialized_name": "Encrypted"
               },
+              "encrypted_with_hsm": {
+                "type": "boolean",
+                "serialized_name": "EncryptedWithHSM"
+              },
               "accounts_with_restore_access": {
                 "type": "list",
                 "serialized_name": "AccountsWithRestoreAccess",
@@ -989,6 +1092,10 @@
               "elapsed_time_in_seconds": {
                 "type": "integer",
                 "serialized_name": "ElapsedTimeInSeconds"
+              },
+              "source_region": {
+                "type": "string",
+                "serialized_name": "SourceRegion"
               }
             }
           }
@@ -1082,6 +1189,232 @@
                     }
                   }
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_event_subscription": {
+      "name": "CreateEventSubscription",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "subscription_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SubscriptionName"
+          },
+          "sns_topic_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SnsTopicArn"
+          },
+          "source_type": {
+            "type": "string",
+            "serialized_name": "SourceType"
+          },
+          "source_ids": {
+            "type": "list",
+            "serialized_name": "SourceIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SourceId"
+            }
+          },
+          "event_categories": {
+            "type": "list",
+            "serialized_name": "EventCategories",
+            "members": {
+              "type": "string",
+              "serialized_name": "EventCategory"
+            }
+          },
+          "severity": {
+            "type": "string",
+            "serialized_name": "Severity"
+          },
+          "enabled": {
+            "type": "boolean",
+            "serialized_name": "Enabled"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateEventSubscriptionResult"
+        },
+        "members": {
+          "event_subscription": {
+            "type": "structure",
+            "serialized_name": "EventSubscription",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "customer_aws_id": {
+                "type": "string",
+                "serialized_name": "CustomerAwsId"
+              },
+              "cust_subscription_id": {
+                "type": "string",
+                "serialized_name": "CustSubscriptionId"
+              },
+              "sns_topic_arn": {
+                "type": "string",
+                "serialized_name": "SnsTopicArn"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "subscription_creation_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "SubscriptionCreationTime"
+              },
+              "source_type": {
+                "type": "string",
+                "serialized_name": "SourceType"
+              },
+              "source_ids_list": {
+                "type": "list",
+                "serialized_name": "SourceIdsList",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "SourceId"
+                }
+              },
+              "event_categories_list": {
+                "type": "list",
+                "serialized_name": "EventCategoriesList",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "EventCategory"
+                }
+              },
+              "severity": {
+                "type": "string",
+                "serialized_name": "Severity"
+              },
+              "enabled": {
+                "type": "boolean",
+                "serialized_name": "Enabled"
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_hsm_client_certificate": {
+      "name": "CreateHsmClientCertificate",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "hsm_client_certificate_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "HsmClientCertificateIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateHsmClientCertificateResult"
+        },
+        "members": {
+          "hsm_client_certificate": {
+            "type": "structure",
+            "serialized_name": "HsmClientCertificate",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "hsm_client_certificate_identifier": {
+                "type": "string",
+                "serialized_name": "HsmClientCertificateIdentifier"
+              },
+              "hsm_client_certificate_public_key": {
+                "type": "string",
+                "serialized_name": "HsmClientCertificatePublicKey"
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_hsm_configuration": {
+      "name": "CreateHsmConfiguration",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "hsm_configuration_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "HsmConfigurationIdentifier"
+          },
+          "description": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Description"
+          },
+          "hsm_ip_address": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "HsmIpAddress"
+          },
+          "hsm_partition_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "HsmPartitionName"
+          },
+          "hsm_partition_password": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "HsmPartitionPassword"
+          },
+          "hsm_server_public_certificate": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "HsmServerPublicCertificate"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "CreateHsmConfigurationResult"
+        },
+        "members": {
+          "hsm_configuration": {
+            "type": "structure",
+            "serialized_name": "HsmConfiguration",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "hsm_configuration_identifier": {
+                "type": "string",
+                "serialized_name": "HsmConfigurationIdentifier"
+              },
+              "description": {
+                "type": "string",
+                "serialized_name": "Description"
+              },
+              "hsm_ip_address": {
+                "type": "string",
+                "serialized_name": "HsmIpAddress"
+              },
+              "hsm_partition_name": {
+                "type": "string",
+                "serialized_name": "HsmPartitionName"
               }
             }
           }
@@ -1318,6 +1651,77 @@
                     "serialized_name": "EstimatedTimeToCompletionInSeconds"
                   }
                 }
+              },
+              "hsm_status": {
+                "type": "structure",
+                "serialized_name": "HsmStatus",
+                "members": {
+                  "hsm_client_certificate_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmClientCertificateIdentifier"
+                  },
+                  "hsm_configuration_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmConfigurationIdentifier"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              },
+              "cluster_snapshot_copy_status": {
+                "type": "structure",
+                "serialized_name": "ClusterSnapshotCopyStatus",
+                "members": {
+                  "destination_region": {
+                    "type": "string",
+                    "serialized_name": "DestinationRegion"
+                  },
+                  "retention_period": {
+                    "type": "integer",
+                    "serialized_name": "RetentionPeriod"
+                  }
+                }
+              },
+              "cluster_public_key": {
+                "type": "string",
+                "serialized_name": "ClusterPublicKey"
+              },
+              "cluster_nodes": {
+                "type": "list",
+                "serialized_name": "ClusterNodes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "node_role": {
+                      "type": "string",
+                      "serialized_name": "NodeRole"
+                    },
+                    "private_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PrivateIPAddress"
+                    },
+                    "public_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PublicIPAddress"
+                    }
+                  }
+                }
+              },
+              "elastic_ip_status": {
+                "type": "structure",
+                "serialized_name": "ElasticIpStatus",
+                "members": {
+                  "elastic_ip": {
+                    "type": "string",
+                    "serialized_name": "ElasticIp"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
               }
             }
           }
@@ -1445,6 +1849,10 @@
                 "type": "boolean",
                 "serialized_name": "Encrypted"
               },
+              "encrypted_with_hsm": {
+                "type": "boolean",
+                "serialized_name": "EncryptedWithHSM"
+              },
               "accounts_with_restore_access": {
                 "type": "list",
                 "serialized_name": "AccountsWithRestoreAccess",
@@ -1486,6 +1894,10 @@
               "elapsed_time_in_seconds": {
                 "type": "integer",
                 "serialized_name": "ElapsedTimeInSeconds"
+              },
+              "source_region": {
+                "type": "string",
+                "serialized_name": "SourceRegion"
               }
             }
           }
@@ -1503,6 +1915,51 @@
             "type": "string",
             "required": true,
             "serialized_name": "ClusterSubnetGroupName"
+          }
+        }
+      }
+    },
+    "delete_event_subscription": {
+      "name": "DeleteEventSubscription",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "subscription_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SubscriptionName"
+          }
+        }
+      }
+    },
+    "delete_hsm_client_certificate": {
+      "name": "DeleteHsmClientCertificate",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "hsm_client_certificate_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "HsmClientCertificateIdentifier"
+          }
+        }
+      }
+    },
+    "delete_hsm_configuration": {
+      "name": "DeleteHsmConfiguration",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "hsm_configuration_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "HsmConfigurationIdentifier"
           }
         }
       }
@@ -1891,6 +2348,10 @@
                   "type": "boolean",
                   "serialized_name": "Encrypted"
                 },
+                "encrypted_with_hsm": {
+                  "type": "boolean",
+                  "serialized_name": "EncryptedWithHSM"
+                },
                 "accounts_with_restore_access": {
                   "type": "list",
                   "serialized_name": "AccountsWithRestoreAccess",
@@ -1932,6 +2393,10 @@
                 "elapsed_time_in_seconds": {
                   "type": "integer",
                   "serialized_name": "ElapsedTimeInSeconds"
+                },
+                "source_region": {
+                  "type": "string",
+                  "serialized_name": "SourceRegion"
                 }
               }
             }
@@ -2350,6 +2815,77 @@
                       "serialized_name": "EstimatedTimeToCompletionInSeconds"
                     }
                   }
+                },
+                "hsm_status": {
+                  "type": "structure",
+                  "serialized_name": "HsmStatus",
+                  "members": {
+                    "hsm_client_certificate_identifier": {
+                      "type": "string",
+                      "serialized_name": "HsmClientCertificateIdentifier"
+                    },
+                    "hsm_configuration_identifier": {
+                      "type": "string",
+                      "serialized_name": "HsmConfigurationIdentifier"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                },
+                "cluster_snapshot_copy_status": {
+                  "type": "structure",
+                  "serialized_name": "ClusterSnapshotCopyStatus",
+                  "members": {
+                    "destination_region": {
+                      "type": "string",
+                      "serialized_name": "DestinationRegion"
+                    },
+                    "retention_period": {
+                      "type": "integer",
+                      "serialized_name": "RetentionPeriod"
+                    }
+                  }
+                },
+                "cluster_public_key": {
+                  "type": "string",
+                  "serialized_name": "ClusterPublicKey"
+                },
+                "cluster_nodes": {
+                  "type": "list",
+                  "serialized_name": "ClusterNodes",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "node_role": {
+                        "type": "string",
+                        "serialized_name": "NodeRole"
+                      },
+                      "private_ip_address": {
+                        "type": "string",
+                        "serialized_name": "PrivateIPAddress"
+                      },
+                      "public_ip_address": {
+                        "type": "string",
+                        "serialized_name": "PublicIPAddress"
+                      }
+                    }
+                  }
+                },
+                "elastic_ip_status": {
+                  "type": "structure",
+                  "serialized_name": "ElasticIpStatus",
+                  "members": {
+                    "elastic_ip": {
+                      "type": "string",
+                      "serialized_name": "ElasticIp"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
                 }
               }
             }
@@ -2364,7 +2900,7 @@
       "metadata": {
         "paging": {
           "tokens": {
-            "marker": "marker"
+            "marker": "default_cluster_parameters.marker"
           }
         }
       },
@@ -2447,6 +2983,180 @@
                       "serialized_name": "MinimumEngineVersion"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_event_categories": {
+      "name": "DescribeEventCategories",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "source_type": {
+            "type": "string",
+            "serialized_name": "SourceType"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeEventCategoriesResult"
+        },
+        "members": {
+          "event_categories_map_list": {
+            "type": "list",
+            "serialized_name": "EventCategoriesMapList",
+            "members": {
+              "type": "structure",
+              "serialized_name": "EventCategoriesMap",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "source_type": {
+                  "type": "string",
+                  "serialized_name": "SourceType"
+                },
+                "events": {
+                  "type": "list",
+                  "serialized_name": "Events",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "EventInfoMap",
+                    "metadata": {
+                      "wrapper": true
+                    },
+                    "members": {
+                      "event_id": {
+                        "type": "string",
+                        "serialized_name": "EventId"
+                      },
+                      "event_categories": {
+                        "type": "list",
+                        "serialized_name": "EventCategories",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "EventCategory"
+                        }
+                      },
+                      "event_description": {
+                        "type": "string",
+                        "serialized_name": "EventDescription"
+                      },
+                      "severity": {
+                        "type": "string",
+                        "serialized_name": "Severity"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_event_subscriptions": {
+      "name": "DescribeEventSubscriptions",
+      "http_method": "POST",
+      "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "subscription_name": {
+            "type": "string",
+            "serialized_name": "SubscriptionName"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeEventSubscriptionsResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "event_subscriptions_list": {
+            "type": "list",
+            "serialized_name": "EventSubscriptionsList",
+            "members": {
+              "type": "structure",
+              "serialized_name": "EventSubscription",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "customer_aws_id": {
+                  "type": "string",
+                  "serialized_name": "CustomerAwsId"
+                },
+                "cust_subscription_id": {
+                  "type": "string",
+                  "serialized_name": "CustSubscriptionId"
+                },
+                "sns_topic_arn": {
+                  "type": "string",
+                  "serialized_name": "SnsTopicArn"
+                },
+                "status": {
+                  "type": "string",
+                  "serialized_name": "Status"
+                },
+                "subscription_creation_time": {
+                  "type": "iso8601_timestamp",
+                  "serialized_name": "SubscriptionCreationTime"
+                },
+                "source_type": {
+                  "type": "string",
+                  "serialized_name": "SourceType"
+                },
+                "source_ids_list": {
+                  "type": "list",
+                  "serialized_name": "SourceIdsList",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "SourceId"
+                  }
+                },
+                "event_categories_list": {
+                  "type": "list",
+                  "serialized_name": "EventCategoriesList",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "EventCategory"
+                  }
+                },
+                "severity": {
+                  "type": "string",
+                  "serialized_name": "Severity"
+                },
+                "enabled": {
+                  "type": "boolean",
+                  "serialized_name": "Enabled"
                 }
               }
             }
@@ -2539,12 +3249,207 @@
                   "type": "string",
                   "serialized_name": "Message"
                 },
+                "event_categories": {
+                  "type": "list",
+                  "serialized_name": "EventCategories",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "EventCategory"
+                  }
+                },
+                "severity": {
+                  "type": "string",
+                  "serialized_name": "Severity"
+                },
                 "date": {
                   "type": "iso8601_timestamp",
                   "serialized_name": "Date"
+                },
+                "event_id": {
+                  "type": "string",
+                  "serialized_name": "EventId"
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "describe_hsm_client_certificates": {
+      "name": "DescribeHsmClientCertificates",
+      "http_method": "POST",
+      "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "hsm_client_certificate_identifier": {
+            "type": "string",
+            "serialized_name": "HsmClientCertificateIdentifier"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeHsmClientCertificatesResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "hsm_client_certificates": {
+            "type": "list",
+            "serialized_name": "HsmClientCertificates",
+            "members": {
+              "type": "structure",
+              "serialized_name": "HsmClientCertificate",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "hsm_client_certificate_identifier": {
+                  "type": "string",
+                  "serialized_name": "HsmClientCertificateIdentifier"
+                },
+                "hsm_client_certificate_public_key": {
+                  "type": "string",
+                  "serialized_name": "HsmClientCertificatePublicKey"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_hsm_configurations": {
+      "name": "DescribeHsmConfigurations",
+      "http_method": "POST",
+      "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "hsm_configuration_identifier": {
+            "type": "string",
+            "serialized_name": "HsmConfigurationIdentifier"
+          },
+          "max_records": {
+            "type": "integer",
+            "serialized_name": "MaxRecords"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeHsmConfigurationsResult"
+        },
+        "members": {
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "hsm_configurations": {
+            "type": "list",
+            "serialized_name": "HsmConfigurations",
+            "members": {
+              "type": "structure",
+              "serialized_name": "HsmConfiguration",
+              "metadata": {
+                "wrapper": true
+              },
+              "members": {
+                "hsm_configuration_identifier": {
+                  "type": "string",
+                  "serialized_name": "HsmConfigurationIdentifier"
+                },
+                "description": {
+                  "type": "string",
+                  "serialized_name": "Description"
+                },
+                "hsm_ip_address": {
+                  "type": "string",
+                  "serialized_name": "HsmIpAddress"
+                },
+                "hsm_partition_name": {
+                  "type": "string",
+                  "serialized_name": "HsmPartitionName"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_logging_status": {
+      "name": "DescribeLoggingStatus",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ClusterIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeLoggingStatusResult"
+        },
+        "members": {
+          "logging_enabled": {
+            "type": "boolean",
+            "serialized_name": "LoggingEnabled"
+          },
+          "bucket_name": {
+            "type": "string",
+            "serialized_name": "BucketName"
+          },
+          "s3_key_prefix": {
+            "type": "string",
+            "serialized_name": "S3KeyPrefix"
+          },
+          "last_successful_delivery_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "LastSuccessfulDeliveryTime"
+          },
+          "last_failure_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "LastFailureTime"
+          },
+          "last_failure_message": {
+            "type": "string",
+            "serialized_name": "LastFailureMessage"
           }
         }
       }
@@ -2918,6 +3823,716 @@
         }
       }
     },
+    "disable_logging": {
+      "name": "DisableLogging",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ClusterIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DisableLoggingResult"
+        },
+        "members": {
+          "logging_enabled": {
+            "type": "boolean",
+            "serialized_name": "LoggingEnabled"
+          },
+          "bucket_name": {
+            "type": "string",
+            "serialized_name": "BucketName"
+          },
+          "s3_key_prefix": {
+            "type": "string",
+            "serialized_name": "S3KeyPrefix"
+          },
+          "last_successful_delivery_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "LastSuccessfulDeliveryTime"
+          },
+          "last_failure_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "LastFailureTime"
+          },
+          "last_failure_message": {
+            "type": "string",
+            "serialized_name": "LastFailureMessage"
+          }
+        }
+      }
+    },
+    "disable_snapshot_copy": {
+      "name": "DisableSnapshotCopy",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ClusterIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DisableSnapshotCopyResult"
+        },
+        "members": {
+          "cluster": {
+            "type": "structure",
+            "serialized_name": "Cluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cluster_identifier": {
+                "type": "string",
+                "serialized_name": "ClusterIdentifier"
+              },
+              "node_type": {
+                "type": "string",
+                "serialized_name": "NodeType"
+              },
+              "cluster_status": {
+                "type": "string",
+                "serialized_name": "ClusterStatus"
+              },
+              "modify_status": {
+                "type": "string",
+                "serialized_name": "ModifyStatus"
+              },
+              "master_username": {
+                "type": "string",
+                "serialized_name": "MasterUsername"
+              },
+              "db_name": {
+                "type": "string",
+                "serialized_name": "DBName"
+              },
+              "endpoint": {
+                "type": "structure",
+                "serialized_name": "Endpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "cluster_create_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "ClusterCreateTime"
+              },
+              "automated_snapshot_retention_period": {
+                "type": "integer",
+                "serialized_name": "AutomatedSnapshotRetentionPeriod"
+              },
+              "cluster_security_groups": {
+                "type": "list",
+                "serialized_name": "ClusterSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "ClusterSecurityGroup",
+                  "members": {
+                    "cluster_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "ClusterSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "vpc_security_groups": {
+                "type": "list",
+                "serialized_name": "VpcSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "VpcSecurityGroup",
+                  "members": {
+                    "vpc_security_group_id": {
+                      "type": "string",
+                      "serialized_name": "VpcSecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cluster_parameter_groups": {
+                "type": "list",
+                "serialized_name": "ClusterParameterGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "ClusterParameterGroup",
+                  "members": {
+                    "parameter_group_name": {
+                      "type": "string",
+                      "serialized_name": "ParameterGroupName"
+                    },
+                    "parameter_apply_status": {
+                      "type": "string",
+                      "serialized_name": "ParameterApplyStatus"
+                    }
+                  }
+                }
+              },
+              "cluster_subnet_group_name": {
+                "type": "string",
+                "serialized_name": "ClusterSubnetGroupName"
+              },
+              "vpc_id": {
+                "type": "string",
+                "serialized_name": "VpcId"
+              },
+              "availability_zone": {
+                "type": "string",
+                "serialized_name": "AvailabilityZone"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "master_user_password": {
+                    "type": "string",
+                    "serialized_name": "MasterUserPassword"
+                  },
+                  "node_type": {
+                    "type": "string",
+                    "serialized_name": "NodeType"
+                  },
+                  "number_of_nodes": {
+                    "type": "integer",
+                    "serialized_name": "NumberOfNodes"
+                  },
+                  "cluster_type": {
+                    "type": "string",
+                    "serialized_name": "ClusterType"
+                  },
+                  "cluster_version": {
+                    "type": "string",
+                    "serialized_name": "ClusterVersion"
+                  },
+                  "automated_snapshot_retention_period": {
+                    "type": "integer",
+                    "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  }
+                }
+              },
+              "cluster_version": {
+                "type": "string",
+                "serialized_name": "ClusterVersion"
+              },
+              "allow_version_upgrade": {
+                "type": "boolean",
+                "serialized_name": "AllowVersionUpgrade"
+              },
+              "number_of_nodes": {
+                "type": "integer",
+                "serialized_name": "NumberOfNodes"
+              },
+              "publicly_accessible": {
+                "type": "boolean",
+                "serialized_name": "PubliclyAccessible"
+              },
+              "encrypted": {
+                "type": "boolean",
+                "serialized_name": "Encrypted"
+              },
+              "restore_status": {
+                "type": "structure",
+                "serialized_name": "RestoreStatus",
+                "members": {
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  },
+                  "current_restore_rate_in_mega_bytes_per_second": {
+                    "type": "float",
+                    "serialized_name": "CurrentRestoreRateInMegaBytesPerSecond"
+                  },
+                  "snapshot_size_in_mega_bytes": {
+                    "type": "integer",
+                    "serialized_name": "SnapshotSizeInMegaBytes"
+                  },
+                  "progress_in_mega_bytes": {
+                    "type": "integer",
+                    "serialized_name": "ProgressInMegaBytes"
+                  },
+                  "elapsed_time_in_seconds": {
+                    "type": "integer",
+                    "serialized_name": "ElapsedTimeInSeconds"
+                  },
+                  "estimated_time_to_completion_in_seconds": {
+                    "type": "integer",
+                    "serialized_name": "EstimatedTimeToCompletionInSeconds"
+                  }
+                }
+              },
+              "hsm_status": {
+                "type": "structure",
+                "serialized_name": "HsmStatus",
+                "members": {
+                  "hsm_client_certificate_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmClientCertificateIdentifier"
+                  },
+                  "hsm_configuration_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmConfigurationIdentifier"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              },
+              "cluster_snapshot_copy_status": {
+                "type": "structure",
+                "serialized_name": "ClusterSnapshotCopyStatus",
+                "members": {
+                  "destination_region": {
+                    "type": "string",
+                    "serialized_name": "DestinationRegion"
+                  },
+                  "retention_period": {
+                    "type": "integer",
+                    "serialized_name": "RetentionPeriod"
+                  }
+                }
+              },
+              "cluster_public_key": {
+                "type": "string",
+                "serialized_name": "ClusterPublicKey"
+              },
+              "cluster_nodes": {
+                "type": "list",
+                "serialized_name": "ClusterNodes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "node_role": {
+                      "type": "string",
+                      "serialized_name": "NodeRole"
+                    },
+                    "private_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PrivateIPAddress"
+                    },
+                    "public_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PublicIPAddress"
+                    }
+                  }
+                }
+              },
+              "elastic_ip_status": {
+                "type": "structure",
+                "serialized_name": "ElasticIpStatus",
+                "members": {
+                  "elastic_ip": {
+                    "type": "string",
+                    "serialized_name": "ElasticIp"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "enable_logging": {
+      "name": "EnableLogging",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ClusterIdentifier"
+          },
+          "bucket_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "BucketName"
+          },
+          "s3_key_prefix": {
+            "type": "string",
+            "serialized_name": "S3KeyPrefix"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "EnableLoggingResult"
+        },
+        "members": {
+          "logging_enabled": {
+            "type": "boolean",
+            "serialized_name": "LoggingEnabled"
+          },
+          "bucket_name": {
+            "type": "string",
+            "serialized_name": "BucketName"
+          },
+          "s3_key_prefix": {
+            "type": "string",
+            "serialized_name": "S3KeyPrefix"
+          },
+          "last_successful_delivery_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "LastSuccessfulDeliveryTime"
+          },
+          "last_failure_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "LastFailureTime"
+          },
+          "last_failure_message": {
+            "type": "string",
+            "serialized_name": "LastFailureMessage"
+          }
+        }
+      }
+    },
+    "enable_snapshot_copy": {
+      "name": "EnableSnapshotCopy",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ClusterIdentifier"
+          },
+          "destination_region": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "DestinationRegion"
+          },
+          "retention_period": {
+            "type": "integer",
+            "serialized_name": "RetentionPeriod"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "EnableSnapshotCopyResult"
+        },
+        "members": {
+          "cluster": {
+            "type": "structure",
+            "serialized_name": "Cluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cluster_identifier": {
+                "type": "string",
+                "serialized_name": "ClusterIdentifier"
+              },
+              "node_type": {
+                "type": "string",
+                "serialized_name": "NodeType"
+              },
+              "cluster_status": {
+                "type": "string",
+                "serialized_name": "ClusterStatus"
+              },
+              "modify_status": {
+                "type": "string",
+                "serialized_name": "ModifyStatus"
+              },
+              "master_username": {
+                "type": "string",
+                "serialized_name": "MasterUsername"
+              },
+              "db_name": {
+                "type": "string",
+                "serialized_name": "DBName"
+              },
+              "endpoint": {
+                "type": "structure",
+                "serialized_name": "Endpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "cluster_create_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "ClusterCreateTime"
+              },
+              "automated_snapshot_retention_period": {
+                "type": "integer",
+                "serialized_name": "AutomatedSnapshotRetentionPeriod"
+              },
+              "cluster_security_groups": {
+                "type": "list",
+                "serialized_name": "ClusterSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "ClusterSecurityGroup",
+                  "members": {
+                    "cluster_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "ClusterSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "vpc_security_groups": {
+                "type": "list",
+                "serialized_name": "VpcSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "VpcSecurityGroup",
+                  "members": {
+                    "vpc_security_group_id": {
+                      "type": "string",
+                      "serialized_name": "VpcSecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cluster_parameter_groups": {
+                "type": "list",
+                "serialized_name": "ClusterParameterGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "ClusterParameterGroup",
+                  "members": {
+                    "parameter_group_name": {
+                      "type": "string",
+                      "serialized_name": "ParameterGroupName"
+                    },
+                    "parameter_apply_status": {
+                      "type": "string",
+                      "serialized_name": "ParameterApplyStatus"
+                    }
+                  }
+                }
+              },
+              "cluster_subnet_group_name": {
+                "type": "string",
+                "serialized_name": "ClusterSubnetGroupName"
+              },
+              "vpc_id": {
+                "type": "string",
+                "serialized_name": "VpcId"
+              },
+              "availability_zone": {
+                "type": "string",
+                "serialized_name": "AvailabilityZone"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "master_user_password": {
+                    "type": "string",
+                    "serialized_name": "MasterUserPassword"
+                  },
+                  "node_type": {
+                    "type": "string",
+                    "serialized_name": "NodeType"
+                  },
+                  "number_of_nodes": {
+                    "type": "integer",
+                    "serialized_name": "NumberOfNodes"
+                  },
+                  "cluster_type": {
+                    "type": "string",
+                    "serialized_name": "ClusterType"
+                  },
+                  "cluster_version": {
+                    "type": "string",
+                    "serialized_name": "ClusterVersion"
+                  },
+                  "automated_snapshot_retention_period": {
+                    "type": "integer",
+                    "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  }
+                }
+              },
+              "cluster_version": {
+                "type": "string",
+                "serialized_name": "ClusterVersion"
+              },
+              "allow_version_upgrade": {
+                "type": "boolean",
+                "serialized_name": "AllowVersionUpgrade"
+              },
+              "number_of_nodes": {
+                "type": "integer",
+                "serialized_name": "NumberOfNodes"
+              },
+              "publicly_accessible": {
+                "type": "boolean",
+                "serialized_name": "PubliclyAccessible"
+              },
+              "encrypted": {
+                "type": "boolean",
+                "serialized_name": "Encrypted"
+              },
+              "restore_status": {
+                "type": "structure",
+                "serialized_name": "RestoreStatus",
+                "members": {
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  },
+                  "current_restore_rate_in_mega_bytes_per_second": {
+                    "type": "float",
+                    "serialized_name": "CurrentRestoreRateInMegaBytesPerSecond"
+                  },
+                  "snapshot_size_in_mega_bytes": {
+                    "type": "integer",
+                    "serialized_name": "SnapshotSizeInMegaBytes"
+                  },
+                  "progress_in_mega_bytes": {
+                    "type": "integer",
+                    "serialized_name": "ProgressInMegaBytes"
+                  },
+                  "elapsed_time_in_seconds": {
+                    "type": "integer",
+                    "serialized_name": "ElapsedTimeInSeconds"
+                  },
+                  "estimated_time_to_completion_in_seconds": {
+                    "type": "integer",
+                    "serialized_name": "EstimatedTimeToCompletionInSeconds"
+                  }
+                }
+              },
+              "hsm_status": {
+                "type": "structure",
+                "serialized_name": "HsmStatus",
+                "members": {
+                  "hsm_client_certificate_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmClientCertificateIdentifier"
+                  },
+                  "hsm_configuration_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmConfigurationIdentifier"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              },
+              "cluster_snapshot_copy_status": {
+                "type": "structure",
+                "serialized_name": "ClusterSnapshotCopyStatus",
+                "members": {
+                  "destination_region": {
+                    "type": "string",
+                    "serialized_name": "DestinationRegion"
+                  },
+                  "retention_period": {
+                    "type": "integer",
+                    "serialized_name": "RetentionPeriod"
+                  }
+                }
+              },
+              "cluster_public_key": {
+                "type": "string",
+                "serialized_name": "ClusterPublicKey"
+              },
+              "cluster_nodes": {
+                "type": "list",
+                "serialized_name": "ClusterNodes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "node_role": {
+                      "type": "string",
+                      "serialized_name": "NodeRole"
+                    },
+                    "private_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PrivateIPAddress"
+                    },
+                    "public_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PublicIPAddress"
+                    }
+                  }
+                }
+              },
+              "elastic_ip_status": {
+                "type": "structure",
+                "serialized_name": "ElasticIpStatus",
+                "members": {
+                  "elastic_ip": {
+                    "type": "string",
+                    "serialized_name": "ElasticIp"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "modify_cluster": {
       "name": "ModifyCluster",
       "http_method": "POST",
@@ -2981,6 +4596,14 @@
           "allow_version_upgrade": {
             "type": "boolean",
             "serialized_name": "AllowVersionUpgrade"
+          },
+          "hsm_client_certificate_identifier": {
+            "type": "string",
+            "serialized_name": "HsmClientCertificateIdentifier"
+          },
+          "hsm_configuration_identifier": {
+            "type": "string",
+            "serialized_name": "HsmConfigurationIdentifier"
           }
         }
       },
@@ -3192,6 +4815,77 @@
                     "serialized_name": "EstimatedTimeToCompletionInSeconds"
                   }
                 }
+              },
+              "hsm_status": {
+                "type": "structure",
+                "serialized_name": "HsmStatus",
+                "members": {
+                  "hsm_client_certificate_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmClientCertificateIdentifier"
+                  },
+                  "hsm_configuration_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmConfigurationIdentifier"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              },
+              "cluster_snapshot_copy_status": {
+                "type": "structure",
+                "serialized_name": "ClusterSnapshotCopyStatus",
+                "members": {
+                  "destination_region": {
+                    "type": "string",
+                    "serialized_name": "DestinationRegion"
+                  },
+                  "retention_period": {
+                    "type": "integer",
+                    "serialized_name": "RetentionPeriod"
+                  }
+                }
+              },
+              "cluster_public_key": {
+                "type": "string",
+                "serialized_name": "ClusterPublicKey"
+              },
+              "cluster_nodes": {
+                "type": "list",
+                "serialized_name": "ClusterNodes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "node_role": {
+                      "type": "string",
+                      "serialized_name": "NodeRole"
+                    },
+                    "private_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PrivateIPAddress"
+                    },
+                    "public_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PublicIPAddress"
+                    }
+                  }
+                }
+              },
+              "elastic_ip_status": {
+                "type": "structure",
+                "serialized_name": "ElasticIpStatus",
+                "members": {
+                  "elastic_ip": {
+                    "type": "string",
+                    "serialized_name": "ElasticIp"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
               }
             }
           }
@@ -3356,6 +5050,422 @@
                       "type": "string",
                       "serialized_name": "SubnetStatus"
                     }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "modify_event_subscription": {
+      "name": "ModifyEventSubscription",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "subscription_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SubscriptionName"
+          },
+          "sns_topic_arn": {
+            "type": "string",
+            "serialized_name": "SnsTopicArn"
+          },
+          "source_type": {
+            "type": "string",
+            "serialized_name": "SourceType"
+          },
+          "source_ids": {
+            "type": "list",
+            "serialized_name": "SourceIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "SourceId"
+            }
+          },
+          "event_categories": {
+            "type": "list",
+            "serialized_name": "EventCategories",
+            "members": {
+              "type": "string",
+              "serialized_name": "EventCategory"
+            }
+          },
+          "severity": {
+            "type": "string",
+            "serialized_name": "Severity"
+          },
+          "enabled": {
+            "type": "boolean",
+            "serialized_name": "Enabled"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ModifyEventSubscriptionResult"
+        },
+        "members": {
+          "event_subscription": {
+            "type": "structure",
+            "serialized_name": "EventSubscription",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "customer_aws_id": {
+                "type": "string",
+                "serialized_name": "CustomerAwsId"
+              },
+              "cust_subscription_id": {
+                "type": "string",
+                "serialized_name": "CustSubscriptionId"
+              },
+              "sns_topic_arn": {
+                "type": "string",
+                "serialized_name": "SnsTopicArn"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status"
+              },
+              "subscription_creation_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "SubscriptionCreationTime"
+              },
+              "source_type": {
+                "type": "string",
+                "serialized_name": "SourceType"
+              },
+              "source_ids_list": {
+                "type": "list",
+                "serialized_name": "SourceIdsList",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "SourceId"
+                }
+              },
+              "event_categories_list": {
+                "type": "list",
+                "serialized_name": "EventCategoriesList",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "EventCategory"
+                }
+              },
+              "severity": {
+                "type": "string",
+                "serialized_name": "Severity"
+              },
+              "enabled": {
+                "type": "boolean",
+                "serialized_name": "Enabled"
+              }
+            }
+          }
+        }
+      }
+    },
+    "modify_snapshot_copy_retention_period": {
+      "name": "ModifySnapshotCopyRetentionPeriod",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ClusterIdentifier"
+          },
+          "retention_period": {
+            "type": "integer",
+            "required": true,
+            "serialized_name": "RetentionPeriod"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ModifySnapshotCopyRetentionPeriodResult"
+        },
+        "members": {
+          "cluster": {
+            "type": "structure",
+            "serialized_name": "Cluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cluster_identifier": {
+                "type": "string",
+                "serialized_name": "ClusterIdentifier"
+              },
+              "node_type": {
+                "type": "string",
+                "serialized_name": "NodeType"
+              },
+              "cluster_status": {
+                "type": "string",
+                "serialized_name": "ClusterStatus"
+              },
+              "modify_status": {
+                "type": "string",
+                "serialized_name": "ModifyStatus"
+              },
+              "master_username": {
+                "type": "string",
+                "serialized_name": "MasterUsername"
+              },
+              "db_name": {
+                "type": "string",
+                "serialized_name": "DBName"
+              },
+              "endpoint": {
+                "type": "structure",
+                "serialized_name": "Endpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "cluster_create_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "ClusterCreateTime"
+              },
+              "automated_snapshot_retention_period": {
+                "type": "integer",
+                "serialized_name": "AutomatedSnapshotRetentionPeriod"
+              },
+              "cluster_security_groups": {
+                "type": "list",
+                "serialized_name": "ClusterSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "ClusterSecurityGroup",
+                  "members": {
+                    "cluster_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "ClusterSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "vpc_security_groups": {
+                "type": "list",
+                "serialized_name": "VpcSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "VpcSecurityGroup",
+                  "members": {
+                    "vpc_security_group_id": {
+                      "type": "string",
+                      "serialized_name": "VpcSecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cluster_parameter_groups": {
+                "type": "list",
+                "serialized_name": "ClusterParameterGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "ClusterParameterGroup",
+                  "members": {
+                    "parameter_group_name": {
+                      "type": "string",
+                      "serialized_name": "ParameterGroupName"
+                    },
+                    "parameter_apply_status": {
+                      "type": "string",
+                      "serialized_name": "ParameterApplyStatus"
+                    }
+                  }
+                }
+              },
+              "cluster_subnet_group_name": {
+                "type": "string",
+                "serialized_name": "ClusterSubnetGroupName"
+              },
+              "vpc_id": {
+                "type": "string",
+                "serialized_name": "VpcId"
+              },
+              "availability_zone": {
+                "type": "string",
+                "serialized_name": "AvailabilityZone"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "master_user_password": {
+                    "type": "string",
+                    "serialized_name": "MasterUserPassword"
+                  },
+                  "node_type": {
+                    "type": "string",
+                    "serialized_name": "NodeType"
+                  },
+                  "number_of_nodes": {
+                    "type": "integer",
+                    "serialized_name": "NumberOfNodes"
+                  },
+                  "cluster_type": {
+                    "type": "string",
+                    "serialized_name": "ClusterType"
+                  },
+                  "cluster_version": {
+                    "type": "string",
+                    "serialized_name": "ClusterVersion"
+                  },
+                  "automated_snapshot_retention_period": {
+                    "type": "integer",
+                    "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  }
+                }
+              },
+              "cluster_version": {
+                "type": "string",
+                "serialized_name": "ClusterVersion"
+              },
+              "allow_version_upgrade": {
+                "type": "boolean",
+                "serialized_name": "AllowVersionUpgrade"
+              },
+              "number_of_nodes": {
+                "type": "integer",
+                "serialized_name": "NumberOfNodes"
+              },
+              "publicly_accessible": {
+                "type": "boolean",
+                "serialized_name": "PubliclyAccessible"
+              },
+              "encrypted": {
+                "type": "boolean",
+                "serialized_name": "Encrypted"
+              },
+              "restore_status": {
+                "type": "structure",
+                "serialized_name": "RestoreStatus",
+                "members": {
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  },
+                  "current_restore_rate_in_mega_bytes_per_second": {
+                    "type": "float",
+                    "serialized_name": "CurrentRestoreRateInMegaBytesPerSecond"
+                  },
+                  "snapshot_size_in_mega_bytes": {
+                    "type": "integer",
+                    "serialized_name": "SnapshotSizeInMegaBytes"
+                  },
+                  "progress_in_mega_bytes": {
+                    "type": "integer",
+                    "serialized_name": "ProgressInMegaBytes"
+                  },
+                  "elapsed_time_in_seconds": {
+                    "type": "integer",
+                    "serialized_name": "ElapsedTimeInSeconds"
+                  },
+                  "estimated_time_to_completion_in_seconds": {
+                    "type": "integer",
+                    "serialized_name": "EstimatedTimeToCompletionInSeconds"
+                  }
+                }
+              },
+              "hsm_status": {
+                "type": "structure",
+                "serialized_name": "HsmStatus",
+                "members": {
+                  "hsm_client_certificate_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmClientCertificateIdentifier"
+                  },
+                  "hsm_configuration_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmConfigurationIdentifier"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              },
+              "cluster_snapshot_copy_status": {
+                "type": "structure",
+                "serialized_name": "ClusterSnapshotCopyStatus",
+                "members": {
+                  "destination_region": {
+                    "type": "string",
+                    "serialized_name": "DestinationRegion"
+                  },
+                  "retention_period": {
+                    "type": "integer",
+                    "serialized_name": "RetentionPeriod"
+                  }
+                }
+              },
+              "cluster_public_key": {
+                "type": "string",
+                "serialized_name": "ClusterPublicKey"
+              },
+              "cluster_nodes": {
+                "type": "list",
+                "serialized_name": "ClusterNodes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "node_role": {
+                      "type": "string",
+                      "serialized_name": "NodeRole"
+                    },
+                    "private_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PrivateIPAddress"
+                    },
+                    "public_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PublicIPAddress"
+                    }
+                  }
+                }
+              },
+              "elastic_ip_status": {
+                "type": "structure",
+                "serialized_name": "ElasticIpStatus",
+                "members": {
+                  "elastic_ip": {
+                    "type": "string",
+                    "serialized_name": "ElasticIp"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
                   }
                 }
               }
@@ -3687,6 +5797,77 @@
                     "serialized_name": "EstimatedTimeToCompletionInSeconds"
                   }
                 }
+              },
+              "hsm_status": {
+                "type": "structure",
+                "serialized_name": "HsmStatus",
+                "members": {
+                  "hsm_client_certificate_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmClientCertificateIdentifier"
+                  },
+                  "hsm_configuration_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmConfigurationIdentifier"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              },
+              "cluster_snapshot_copy_status": {
+                "type": "structure",
+                "serialized_name": "ClusterSnapshotCopyStatus",
+                "members": {
+                  "destination_region": {
+                    "type": "string",
+                    "serialized_name": "DestinationRegion"
+                  },
+                  "retention_period": {
+                    "type": "integer",
+                    "serialized_name": "RetentionPeriod"
+                  }
+                }
+              },
+              "cluster_public_key": {
+                "type": "string",
+                "serialized_name": "ClusterPublicKey"
+              },
+              "cluster_nodes": {
+                "type": "list",
+                "serialized_name": "ClusterNodes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "node_role": {
+                      "type": "string",
+                      "serialized_name": "NodeRole"
+                    },
+                    "private_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PrivateIPAddress"
+                    },
+                    "public_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PublicIPAddress"
+                    }
+                  }
+                }
+              },
+              "elastic_ip_status": {
+                "type": "structure",
+                "serialized_name": "ElasticIpStatus",
+                "members": {
+                  "elastic_ip": {
+                    "type": "string",
+                    "serialized_name": "ElasticIp"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
               }
             }
           }
@@ -3814,6 +5995,18 @@
           "owner_account": {
             "type": "string",
             "serialized_name": "OwnerAccount"
+          },
+          "hsm_client_certificate_identifier": {
+            "type": "string",
+            "serialized_name": "HsmClientCertificateIdentifier"
+          },
+          "hsm_configuration_identifier": {
+            "type": "string",
+            "serialized_name": "HsmConfigurationIdentifier"
+          },
+          "elastic_ip": {
+            "type": "string",
+            "serialized_name": "ElasticIp"
           }
         }
       },
@@ -4025,6 +6218,77 @@
                     "serialized_name": "EstimatedTimeToCompletionInSeconds"
                   }
                 }
+              },
+              "hsm_status": {
+                "type": "structure",
+                "serialized_name": "HsmStatus",
+                "members": {
+                  "hsm_client_certificate_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmClientCertificateIdentifier"
+                  },
+                  "hsm_configuration_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmConfigurationIdentifier"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              },
+              "cluster_snapshot_copy_status": {
+                "type": "structure",
+                "serialized_name": "ClusterSnapshotCopyStatus",
+                "members": {
+                  "destination_region": {
+                    "type": "string",
+                    "serialized_name": "DestinationRegion"
+                  },
+                  "retention_period": {
+                    "type": "integer",
+                    "serialized_name": "RetentionPeriod"
+                  }
+                }
+              },
+              "cluster_public_key": {
+                "type": "string",
+                "serialized_name": "ClusterPublicKey"
+              },
+              "cluster_nodes": {
+                "type": "list",
+                "serialized_name": "ClusterNodes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "node_role": {
+                      "type": "string",
+                      "serialized_name": "NodeRole"
+                    },
+                    "private_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PrivateIPAddress"
+                    },
+                    "public_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PublicIPAddress"
+                    }
+                  }
+                }
+              },
+              "elastic_ip_status": {
+                "type": "structure",
+                "serialized_name": "ElasticIpStatus",
+                "members": {
+                  "elastic_ip": {
+                    "type": "string",
+                    "serialized_name": "ElasticIp"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
               }
             }
           }
@@ -4219,6 +6483,10 @@
                 "type": "boolean",
                 "serialized_name": "Encrypted"
               },
+              "encrypted_with_hsm": {
+                "type": "boolean",
+                "serialized_name": "EncryptedWithHSM"
+              },
               "accounts_with_restore_access": {
                 "type": "list",
                 "serialized_name": "AccountsWithRestoreAccess",
@@ -4260,6 +6528,309 @@
               "elapsed_time_in_seconds": {
                 "type": "integer",
                 "serialized_name": "ElapsedTimeInSeconds"
+              },
+              "source_region": {
+                "type": "string",
+                "serialized_name": "SourceRegion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "rotate_encryption_key": {
+      "name": "RotateEncryptionKey",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "cluster_identifier": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "ClusterIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "RotateEncryptionKeyResult"
+        },
+        "members": {
+          "cluster": {
+            "type": "structure",
+            "serialized_name": "Cluster",
+            "metadata": {
+              "wrapper": true
+            },
+            "members": {
+              "cluster_identifier": {
+                "type": "string",
+                "serialized_name": "ClusterIdentifier"
+              },
+              "node_type": {
+                "type": "string",
+                "serialized_name": "NodeType"
+              },
+              "cluster_status": {
+                "type": "string",
+                "serialized_name": "ClusterStatus"
+              },
+              "modify_status": {
+                "type": "string",
+                "serialized_name": "ModifyStatus"
+              },
+              "master_username": {
+                "type": "string",
+                "serialized_name": "MasterUsername"
+              },
+              "db_name": {
+                "type": "string",
+                "serialized_name": "DBName"
+              },
+              "endpoint": {
+                "type": "structure",
+                "serialized_name": "Endpoint",
+                "members": {
+                  "address": {
+                    "type": "string",
+                    "serialized_name": "Address"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "serialized_name": "Port"
+                  }
+                }
+              },
+              "cluster_create_time": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "ClusterCreateTime"
+              },
+              "automated_snapshot_retention_period": {
+                "type": "integer",
+                "serialized_name": "AutomatedSnapshotRetentionPeriod"
+              },
+              "cluster_security_groups": {
+                "type": "list",
+                "serialized_name": "ClusterSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "ClusterSecurityGroup",
+                  "members": {
+                    "cluster_security_group_name": {
+                      "type": "string",
+                      "serialized_name": "ClusterSecurityGroupName"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "vpc_security_groups": {
+                "type": "list",
+                "serialized_name": "VpcSecurityGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "VpcSecurityGroup",
+                  "members": {
+                    "vpc_security_group_id": {
+                      "type": "string",
+                      "serialized_name": "VpcSecurityGroupId"
+                    },
+                    "status": {
+                      "type": "string",
+                      "serialized_name": "Status"
+                    }
+                  }
+                }
+              },
+              "cluster_parameter_groups": {
+                "type": "list",
+                "serialized_name": "ClusterParameterGroups",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "ClusterParameterGroup",
+                  "members": {
+                    "parameter_group_name": {
+                      "type": "string",
+                      "serialized_name": "ParameterGroupName"
+                    },
+                    "parameter_apply_status": {
+                      "type": "string",
+                      "serialized_name": "ParameterApplyStatus"
+                    }
+                  }
+                }
+              },
+              "cluster_subnet_group_name": {
+                "type": "string",
+                "serialized_name": "ClusterSubnetGroupName"
+              },
+              "vpc_id": {
+                "type": "string",
+                "serialized_name": "VpcId"
+              },
+              "availability_zone": {
+                "type": "string",
+                "serialized_name": "AvailabilityZone"
+              },
+              "preferred_maintenance_window": {
+                "type": "string",
+                "serialized_name": "PreferredMaintenanceWindow"
+              },
+              "pending_modified_values": {
+                "type": "structure",
+                "serialized_name": "PendingModifiedValues",
+                "members": {
+                  "master_user_password": {
+                    "type": "string",
+                    "serialized_name": "MasterUserPassword"
+                  },
+                  "node_type": {
+                    "type": "string",
+                    "serialized_name": "NodeType"
+                  },
+                  "number_of_nodes": {
+                    "type": "integer",
+                    "serialized_name": "NumberOfNodes"
+                  },
+                  "cluster_type": {
+                    "type": "string",
+                    "serialized_name": "ClusterType"
+                  },
+                  "cluster_version": {
+                    "type": "string",
+                    "serialized_name": "ClusterVersion"
+                  },
+                  "automated_snapshot_retention_period": {
+                    "type": "integer",
+                    "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  }
+                }
+              },
+              "cluster_version": {
+                "type": "string",
+                "serialized_name": "ClusterVersion"
+              },
+              "allow_version_upgrade": {
+                "type": "boolean",
+                "serialized_name": "AllowVersionUpgrade"
+              },
+              "number_of_nodes": {
+                "type": "integer",
+                "serialized_name": "NumberOfNodes"
+              },
+              "publicly_accessible": {
+                "type": "boolean",
+                "serialized_name": "PubliclyAccessible"
+              },
+              "encrypted": {
+                "type": "boolean",
+                "serialized_name": "Encrypted"
+              },
+              "restore_status": {
+                "type": "structure",
+                "serialized_name": "RestoreStatus",
+                "members": {
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  },
+                  "current_restore_rate_in_mega_bytes_per_second": {
+                    "type": "float",
+                    "serialized_name": "CurrentRestoreRateInMegaBytesPerSecond"
+                  },
+                  "snapshot_size_in_mega_bytes": {
+                    "type": "integer",
+                    "serialized_name": "SnapshotSizeInMegaBytes"
+                  },
+                  "progress_in_mega_bytes": {
+                    "type": "integer",
+                    "serialized_name": "ProgressInMegaBytes"
+                  },
+                  "elapsed_time_in_seconds": {
+                    "type": "integer",
+                    "serialized_name": "ElapsedTimeInSeconds"
+                  },
+                  "estimated_time_to_completion_in_seconds": {
+                    "type": "integer",
+                    "serialized_name": "EstimatedTimeToCompletionInSeconds"
+                  }
+                }
+              },
+              "hsm_status": {
+                "type": "structure",
+                "serialized_name": "HsmStatus",
+                "members": {
+                  "hsm_client_certificate_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmClientCertificateIdentifier"
+                  },
+                  "hsm_configuration_identifier": {
+                    "type": "string",
+                    "serialized_name": "HsmConfigurationIdentifier"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
+              },
+              "cluster_snapshot_copy_status": {
+                "type": "structure",
+                "serialized_name": "ClusterSnapshotCopyStatus",
+                "members": {
+                  "destination_region": {
+                    "type": "string",
+                    "serialized_name": "DestinationRegion"
+                  },
+                  "retention_period": {
+                    "type": "integer",
+                    "serialized_name": "RetentionPeriod"
+                  }
+                }
+              },
+              "cluster_public_key": {
+                "type": "string",
+                "serialized_name": "ClusterPublicKey"
+              },
+              "cluster_nodes": {
+                "type": "list",
+                "serialized_name": "ClusterNodes",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "node_role": {
+                      "type": "string",
+                      "serialized_name": "NodeRole"
+                    },
+                    "private_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PrivateIPAddress"
+                    },
+                    "public_ip_address": {
+                      "type": "string",
+                      "serialized_name": "PublicIPAddress"
+                    }
+                  }
+                }
+              },
+              "elastic_ip_status": {
+                "type": "structure",
+                "serialized_name": "ElasticIpStatus",
+                "members": {
+                  "elastic_ip": {
+                    "type": "string",
+                    "serialized_name": "ElasticIp"
+                  },
+                  "status": {
+                    "type": "string",
+                    "serialized_name": "Status"
+                  }
+                }
               }
             }
           }

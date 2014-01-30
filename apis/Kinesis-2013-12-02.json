@@ -66,6 +66,14 @@
       "name": "DescribeStream",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "exclusive_start_shard_id": "shards[-1].shard_id"
+          },
+          "truncated_if": "has_more_shards"
+        }
+      },
       "input": {
         "type": "input",
         "members": {
@@ -274,7 +282,7 @@
       "metadata": {
         "paging": {
           "tokens": {
-            "exclusive_start_stream_name": "stream_names[-1].key"
+            "exclusive_start_stream_name": "stream_names[-1]"
           },
           "truncated_if": "has_more_streams"
         }

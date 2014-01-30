@@ -360,14 +360,40 @@
             "required": true,
             "serialized_name": "ApplicationName"
           },
-          "version_label": {
-            "type": "string",
-            "serialized_name": "VersionLabel"
-          },
           "environment_name": {
             "type": "string",
             "required": true,
             "serialized_name": "EnvironmentName"
+          },
+          "description": {
+            "type": "string",
+            "serialized_name": "Description"
+          },
+          "cname_prefix": {
+            "type": "string",
+            "serialized_name": "CNAMEPrefix"
+          },
+          "tier": {
+            "type": "structure",
+            "serialized_name": "Tier",
+            "members": {
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "type": {
+                "type": "string",
+                "serialized_name": "Type"
+              },
+              "version": {
+                "type": "string",
+                "serialized_name": "Version"
+              }
+            }
+          },
+          "version_label": {
+            "type": "string",
+            "serialized_name": "VersionLabel"
           },
           "template_name": {
             "type": "string",
@@ -376,14 +402,6 @@
           "solution_stack_name": {
             "type": "string",
             "serialized_name": "SolutionStackName"
-          },
-          "cname_prefix": {
-            "type": "string",
-            "serialized_name": "CNAMEPrefix"
-          },
-          "description": {
-            "type": "string",
-            "serialized_name": "Description"
           },
           "option_settings": {
             "type": "list",
@@ -530,6 +548,24 @@
                     }
                   }
                 }
+              }
+            }
+          },
+          "tier": {
+            "type": "structure",
+            "serialized_name": "Tier",
+            "members": {
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "type": {
+                "type": "string",
+                "serialized_name": "Type"
+              },
+              "version": {
+                "type": "string",
+                "serialized_name": "Version"
               }
             }
           }
@@ -1090,6 +1126,23 @@
                     }
                   }
                 }
+              },
+              "queues": {
+                "type": "list",
+                "serialized_name": "Queues",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "name": {
+                      "type": "string",
+                      "serialized_name": "Name"
+                    },
+                    "url": {
+                      "type": "string",
+                      "serialized_name": "URL"
+                    }
+                  }
+                }
               }
             }
           }
@@ -1246,6 +1299,24 @@
                           }
                         }
                       }
+                    }
+                  }
+                },
+                "tier": {
+                  "type": "structure",
+                  "serialized_name": "Tier",
+                  "members": {
+                    "name": {
+                      "type": "string",
+                      "serialized_name": "Name"
+                    },
+                    "type": {
+                      "type": "string",
+                      "serialized_name": "Type"
+                    },
+                    "version": {
+                      "type": "string",
+                      "serialized_name": "Version"
                     }
                   }
                 }
@@ -1703,6 +1774,24 @@
                 }
               }
             }
+          },
+          "tier": {
+            "type": "structure",
+            "serialized_name": "Tier",
+            "members": {
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "type": {
+                "type": "string",
+                "serialized_name": "Type"
+              },
+              "version": {
+                "type": "string",
+                "serialized_name": "Version"
+              }
+            }
           }
         }
       }
@@ -1985,6 +2074,28 @@
             "type": "string",
             "serialized_name": "EnvironmentName"
           },
+          "description": {
+            "type": "string",
+            "serialized_name": "Description"
+          },
+          "tier": {
+            "type": "structure",
+            "serialized_name": "Tier",
+            "members": {
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "type": {
+                "type": "string",
+                "serialized_name": "Type"
+              },
+              "version": {
+                "type": "string",
+                "serialized_name": "Version"
+              }
+            }
+          },
           "version_label": {
             "type": "string",
             "serialized_name": "VersionLabel"
@@ -1992,10 +2103,6 @@
           "template_name": {
             "type": "string",
             "serialized_name": "TemplateName"
-          },
-          "description": {
-            "type": "string",
-            "serialized_name": "Description"
           },
           "option_settings": {
             "type": "list",
@@ -2142,6 +2249,24 @@
                     }
                   }
                 }
+              }
+            }
+          },
+          "tier": {
+            "type": "structure",
+            "serialized_name": "Tier",
+            "members": {
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "type": {
+                "type": "string",
+                "serialized_name": "Type"
+              },
+              "version": {
+                "type": "string",
+                "serialized_name": "Version"
               }
             }
           }

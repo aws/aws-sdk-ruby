@@ -112,6 +112,87 @@
         }
       }
     },
+    "assume_role_with_saml": {
+      "name": "AssumeRoleWithSAML",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "role_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RoleArn"
+          },
+          "principal_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "PrincipalArn"
+          },
+          "saml_assertion": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "SAMLAssertion"
+          },
+          "policy": {
+            "type": "string",
+            "serialized_name": "Policy"
+          },
+          "duration_seconds": {
+            "type": "integer",
+            "serialized_name": "DurationSeconds"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "AssumeRoleWithSAMLResult"
+        },
+        "members": {
+          "credentials": {
+            "type": "structure",
+            "serialized_name": "Credentials",
+            "members": {
+              "access_key_id": {
+                "type": "string",
+                "serialized_name": "AccessKeyId"
+              },
+              "secret_access_key": {
+                "type": "string",
+                "serialized_name": "SecretAccessKey"
+              },
+              "session_token": {
+                "type": "string",
+                "serialized_name": "SessionToken"
+              },
+              "expiration": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "Expiration"
+              }
+            }
+          },
+          "assumed_role_user": {
+            "type": "structure",
+            "serialized_name": "AssumedRoleUser",
+            "members": {
+              "assumed_role_id": {
+                "type": "string",
+                "serialized_name": "AssumedRoleId"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              }
+            }
+          },
+          "packed_policy_size": {
+            "type": "integer",
+            "serialized_name": "PackedPolicySize"
+          }
+        }
+      }
+    },
     "assume_role_with_web_identity": {
       "name": "AssumeRoleWithWebIdentity",
       "http_method": "POST",

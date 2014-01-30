@@ -2,7 +2,7 @@
   "api_version": "2013-06-15",
   "type": "query",
   "result_wrapped": true,
-  "signature_version": "v2",
+  "signature_version": "v4",
   "service_full_name": "Amazon ElastiCache",
   "endpoint_prefix": "elasticache",
   "xmlnamespace": "http://elasticache.amazonaws.com/doc/2013-06-15/",
@@ -161,20 +161,17 @@
           "NumCacheNodes": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>The initial number of cache nodes that the cache cluster will have.</p>\n        <p>For a Memcached cluster, valid values are between 1 and 20. If you need to exceed this\n            limit, please fill out the ElastiCache Limit Increase Request form at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request/\"></a> .</p>\n        <p>For Redis, only single-node cache clusters are supported at this time, so the value for\n            this parameter must be 1.</p>\n    ",
-            "required": true
+            "documentation": "\n        <p>The initial number of cache nodes that the cache cluster will have.</p>\n        <p>For a Memcached cluster, valid values are between 1 and 20. If you need to exceed this\n            limit, please fill out the ElastiCache Limit Increase Request form at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request/\"></a> .</p>\n        <p>For Redis, only single-node cache clusters are supported at this time, so the value for\n            this parameter must be 1.</p>\n    "
           },
           "CacheNodeType": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>The compute and memory capacity of the nodes in the cache cluster.</p> \n<p>Valid values for Memcached:</p>\n    <p>\n        <code>cache.t1.micro</code> |  \n        <code>cache.m1.small</code> | \n        <code>cache.m1.medium</code> |\n        <code>cache.m1.large</code> | \n        <code>cache.m1.xlarge</code> | \n        <code>cache.m3.xlarge</code> | \n        <code>cache.m3.2xlarge</code> | \n        <code>cache.m2.xlarge</code> | \n        <code>cache.m2.2xlarge</code> |\n        <code>cache.m2.4xlarge</code> | \n        <code>cache.c1.xlarge</code>\n    </p>\n    <p>Valid values for Redis:</p>\n    <p>\n       <code>cache.t1.micro</code> | \n       <code>cache.m1.small</code> | \n       <code>cache.m1.medium</code> |\n       <code>cache.m1.large</code> | \n       <code>cache.m1.xlarge</code> |  \n       <code>cache.m2.xlarge</code> | \n       <code>cache.m2.2xlarge</code> | \n       <code>cache.m2.4xlarge</code> | \n       <code>cache.c1.xlarge</code>\n    </p>\n<p>For a complete listing of cache node types and specifications, see <a href=\"http://aws.amazon.com/elasticache/\"/>.</p>\n ",
-            "required": true
+            "documentation": "\n        <p>The compute and memory capacity of the nodes in the cache cluster.</p> \n<p>Valid values for Memcached:</p>\n    <p>\n        <code>cache.t1.micro</code> |  \n        <code>cache.m1.small</code> | \n        <code>cache.m1.medium</code> |\n        <code>cache.m1.large</code> | \n        <code>cache.m1.xlarge</code> | \n        <code>cache.m3.xlarge</code> | \n        <code>cache.m3.2xlarge</code> | \n        <code>cache.m2.xlarge</code> | \n        <code>cache.m2.2xlarge</code> |\n        <code>cache.m2.4xlarge</code> | \n        <code>cache.c1.xlarge</code>\n    </p>\n    <p>Valid values for Redis:</p>\n    <p>\n       <code>cache.t1.micro</code> | \n       <code>cache.m1.small</code> | \n       <code>cache.m1.medium</code> |\n       <code>cache.m1.large</code> | \n       <code>cache.m1.xlarge</code> |  \n       <code>cache.m2.xlarge</code> | \n       <code>cache.m2.2xlarge</code> | \n       <code>cache.m2.4xlarge</code> | \n       <code>cache.c1.xlarge</code>\n    </p>\n<p>For a complete listing of cache node types and specifications, see <a href=\"http://aws.amazon.com/elasticache/\"/>.</p>\n "
           },
           "Engine": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>The name of the cache engine to be used for this cache cluster.</p>\n        <p>Valid values for this parameter are:</p>\n            <p><code>memcached</code> | <code>redis</code></p>\n    ",
-            "required": true
+            "documentation": "\n        <p>The name of the cache engine to be used for this cache cluster.</p>\n        <p>Valid values for this parameter are:</p>\n            <p><code>memcached</code> | <code>redis</code></p>\n    "
           },
           "EngineVersion": {
             "shape_name": "String",
@@ -1681,6 +1678,11 @@
             "type": "string",
             "documentation": "\n        <p>The identifier for the replication group to be deleted. This parameter is not case\n            sensitive.</p>\n    ",
             "required": true
+          },
+          "RetainPrimaryCluster": {
+            "shape_name": "BooleanOptional",
+            "type": "boolean",
+            "documentation": "\n        <p>If set to <i>true</i>, all of the read replicas will be deleted, but the primary \n        cache cluster will be retained.</p>\n    "
           }
         },
         "documentation": "\n        <p>Represents the input of a <i>DeleteReplicationGroup</i> operation.</p>\n    "
@@ -1867,7 +1869,7 @@
           "documentation": "\n        <p>Two or more incompatible parameters were specified.</p>\n    "
         }
       ],
-      "documentation": "\n        <p>The <i>DeleteReplicationGroup</i> operation deletes an existing replication group.\n            <i>DeleteReplicationGroup</i> deletes the primary cache cluster and all of the read replicas in the replication\n            group. When you receive a successful response\n            from this operation, Amazon ElastiCache immediately begins deleting the entire replication group; you\n            cannot cancel or revert this operation.</p>\n    "
+      "documentation": "\n        <p>The <i>DeleteReplicationGroup</i> operation deletes an existing replication group.  \n        By default, this operation deletes the entire replication group, including the primary \n        cache cluster and all of the read replicas. You can optionally delete only the read \n        replicas, while retaining the primary cache cluster.</p>\n        <p>When you receive a successful response from this operation, Amazon ElastiCache immediately \n        begins deleting the selected resources; you cannot cancel or revert this operation.</p>\n    "
     },
     "DescribeCacheClusters": {
       "name": "DescribeCacheClusters",
