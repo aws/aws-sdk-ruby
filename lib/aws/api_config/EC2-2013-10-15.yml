@@ -14,18 +14,6 @@
 ---
 :api_version: '2013-10-15'
 :operations:
-- :name: ActivateLicense
-  :method: :activate_license
-  :inputs:
-    DryRun:
-    - :boolean
-    LicenseId:
-    - :string
-    - :required
-    Capacity:
-    - :integer
-    - :required
-  :outputs: {}
 - :name: AllocateAddress
   :method: :allocate_address
   :inputs:
@@ -1121,18 +1109,6 @@
                 :list: true
           type:
             :rename: :vpn_type
-- :name: DeactivateLicense
-  :method: :deactivate_license
-  :inputs:
-    DryRun:
-    - :boolean
-    LicenseId:
-    - :string
-    - :required
-    Capacity:
-    - :integer
-    - :required
-  :outputs: {}
 - :name: DeleteCustomerGateway
   :method: :delete_customer_gateway
   :inputs:
@@ -2044,53 +2020,6 @@
             :index:
               :key: :key_name
               :name: :key_index
-- :name: DescribeLicenses
-  :method: :describe_licenses
-  :inputs:
-    DryRun:
-    - :boolean
-    LicenseId:
-    - :list:
-      - :string
-    - :rename: licenseIds
-    Filter:
-    - :list:
-      - :structure:
-          Name:
-          - :string
-          Value:
-          - :list:
-            - :string
-          - :rename: Values
-    - :rename: filters
-  :outputs:
-    :children:
-      licenseSet:
-        :ignore: true
-        :children:
-          item:
-            :rename: :license_set
-            :list: true
-            :children:
-              capacitySet:
-                :ignore: true
-                :children:
-                  item:
-                    :rename: :capacity_set
-                    :list: true
-                    :children:
-                      capacity:
-                        :type: :integer
-                      instanceCapacity:
-                        :type: :integer
-                      earliestAllowedDeactivationTime:
-                        :type: :time
-              tagSet:
-                :ignore: true
-                :children:
-                  item:
-                    :rename: :tag_set
-                    :list: true
 - :name: DescribeNetworkAcls
   :method: :describe_network_acls
   :inputs:
@@ -4468,10 +4397,6 @@
     - :boolean
     InstanceInitiatedShutdownBehavior:
     - :string
-    License:
-    - :structure:
-        Pool:
-        - :string
     PrivateIpAddress:
     - :string
     ClientToken:
