@@ -155,11 +155,11 @@ module Seahorse
         end
 
         def _http_request_headers(response)
-          response.http_request.headers.inspect
+          response.context.http_request.headers.inspect
         end
 
         def _http_request_body(response)
-          summarize_value(response.http_request.body_contents)
+          summarize_value(response.context.http_request.body_contents)
         end
 
         def _http_response_status_code(response)

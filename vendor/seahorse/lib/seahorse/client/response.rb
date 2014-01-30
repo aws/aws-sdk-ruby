@@ -19,12 +19,6 @@ module Seahorse
       # @return [RequestContext]
       attr_reader :context
 
-      # @return [Http::Request]
-      attr_reader :http_request
-
-      # @return [Http::Response]
-      attr_reader :http_response
-
       # @return The response data.  This may be `nil` if the response contains
       #   an {#error}.
       attr_accessor :data

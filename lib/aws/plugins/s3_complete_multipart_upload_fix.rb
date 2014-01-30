@@ -8,20 +8,20 @@ module Aws
 
         def call(context)
           @handler.call(context).on(200) do |response|
-            if error = check_for_error(response)
-              response.http_response.status_code = 500
+            if error = check_for_error(context)
+              context.http_response.status_code = 500
               response.data = nil
               response.error = error
             end
           end
         end
 
-        def check_for_error(response)
-          xml = MultiXml.parse(response.http_response.body_contents)
+        def check_for_error(context)
+          xml = MultiXml.parse(context.http_response.body_contents)
           if xml['Error']
             error_code = xml['Error']['Code']
             error_message = xml['Error']['Message']
-            S3::Errors.error_class(error_code).new(response.context, error_message)
+            S3::Errors.error_class(error_code).new(context, error_message)
           end
         end
 

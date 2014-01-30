@@ -210,17 +210,19 @@ module Seahorse
 
             it 'populates the status code' do
               stub_request(:any, endpoint).to_return(status: 200)
-              expect(make_request.http_response.status_code).to eq(200)
+              resp = make_request
+              expect(resp.context.http_response.status_code).to eq(200)
             end
 
             it 'populates the headers' do
               stub_request(:any, endpoint).to_return(headers: { foo: 'bar' })
-              expect(make_request.http_response.headers['foo']).to eq('bar')
+              resp = make_request
+              expect(resp.context.http_response.headers['foo']).to eq('bar')
             end
 
             it 'populates the response body' do
               stub_request(:any, endpoint).to_return(body: 'response-body')
-              resp_body = make_request.http_response.body
+              resp_body = make_request.context.http_response.body
               resp_body.rewind
               expect(resp_body.read).to eq('response-body')
             end

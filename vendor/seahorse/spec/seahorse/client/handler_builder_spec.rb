@@ -101,7 +101,7 @@ module Seahorse
         it 'is called when the response is signaled complete' do
           called = false
           handler = obj.handle_response { |response| called = true }
-          handler.new(->(_) { Response.new.tap {|r| r.http_response.status_code = 200 } }).call(nil)
+          handler.new(->(_) { Response.new.tap {|r| r.context.http_response.status_code = 200 } }).call(nil)
           expect(called).to be(true)
         end
 

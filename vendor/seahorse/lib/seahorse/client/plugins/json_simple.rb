@@ -20,7 +20,7 @@ module Seahorse
           def call(context)
             context.http_request.body = MultiJson.dump(context.params)
             @handler.call(context).on(200..299) do |resp|
-              resp.data = MultiJson.load(resp.http_response.body_contents)
+              resp.data = MultiJson.load(context.http_response.body_contents)
             end
           end
 

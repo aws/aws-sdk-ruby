@@ -134,7 +134,7 @@ module Aws
             # send the request
             resp = req.send_request
 
-            request_assertions(f, resp.http_request)
+            request_assertions(f, resp.context.http_request)
             response_assertions(f, resp)
 
           end

@@ -78,13 +78,13 @@ module Seahorse
 
           def extract_status_code(response)
             if member = response.context.operation.output.status_code_member
-              status_code = response.http_response.status_code
+              status_code = response.context.http_response.status_code
               response.data[member.member_name] = status_code
             end
           end
 
           def extract_headers(response)
-            headers = response.http_response.headers
+            headers = response.context.http_response.headers
             rules = response.context.operation.output.header_members
             rules.each do |member_name, member|
               response.data[member_name] = header_value(member, headers)
@@ -125,7 +125,7 @@ module Seahorse
           def extract_body(response)
             output = response.context.operation.output
             if output.raw_payload?
-              response.data[output.payload] = response.http_response.body
+              response.data[output.payload] = response.context.http_response.body
             end
           end
 

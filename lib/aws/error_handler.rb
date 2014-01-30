@@ -10,8 +10,8 @@ module Aws
 
     def call(context)
       @handler.call(context).on(300..599) do |response|
-        if empty_body?(response)
-          error_code = error_code_for_empty_response(response)
+        if empty_body?(context.http_response)
+          error_code = error_code_for_empty_response(context.http_response)
           error_message = ''
         else
           error_code, error_message = @parser.extract_error(response)
@@ -29,19 +29,19 @@ module Aws
       errors_module.error_class(code).new(context, message)
     end
 
-    def empty_body?(response)
-      response.http_response.body_contents.empty?
+    def empty_body?(http_resp)
+      http_resp.body_contents.empty?
     end
 
-    def error_code_for_empty_response(response)
-      error_code = response.http_response.status_code
+    def error_code_for_empty_response(http_resp)
+      status_code = http_resp.status_code
       {
         302 => 'MovedTemporarily',
         304 => 'NotModified',
         400 => 'BadRequest',
         403 => 'Forbidden',
         404 => 'NotFound',
-      }[error_code] || "#{error_code}Error"
+      }[status_code] || "#{status_code}Error"
     end
 
   end

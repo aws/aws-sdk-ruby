@@ -3,7 +3,7 @@ module Aws
     class ErrorParser
 
       def extract_error(response)
-        error = MultiXml.parse(response.http_response.body_contents)
+        error = MultiXml.parse(response.context.http_response.body_contents)
         %w(Response ErrorResponse Errors Error).each do |wrapper|
           error = error[wrapper] if error[wrapper]
         end

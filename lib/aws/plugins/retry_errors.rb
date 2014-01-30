@@ -96,7 +96,8 @@ module Aws
         end
 
         def error_for(response)
-          ErrorInspector.new(response.error, response.http_response.status_code)
+          status_code = response.context.http_response.status_code
+          ErrorInspector.new(response.error, status_code)
         end
 
         def retry_request(context, error)

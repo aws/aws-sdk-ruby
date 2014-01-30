@@ -135,12 +135,12 @@ module Seahorse
 
           it 'counts the bytes yielded' do
             resp = request.send_request { |chunk| }
-            expect(resp.http_response.body.size).to eq(15)
+            expect(resp.context.http_response.body.size).to eq(15)
           end
 
           it 'does not buffer the response chunks' do
             response = request.send_request { |chunk| }
-            body = response.http_response.body
+            body = response.context.http_response.body
             expect(body.read).to eq('')
             expect(body).not_to respond_to(:truncate)
           end

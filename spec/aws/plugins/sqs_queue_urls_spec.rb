@@ -19,7 +19,7 @@ module Aws
 
       it 'moves the queue url param to the http request endpoint' do
         resp = send_request
-        expect(resp.http_request.endpoint).to eq('http://foo.com/')
+        expect(resp.context.http_request.endpoint).to eq('http://foo.com/')
       end
 
       it 'resets the configured region based on the queue url' do
