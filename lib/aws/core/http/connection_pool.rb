@@ -277,8 +277,18 @@ module AWS
           args << endpoint.port
           args << proxy_uri.host
           args << proxy_uri.port
-          args << proxy_uri.user
-          args << proxy_uri.password
+          
+          if proxy_uri.user
+            args << URI::decode(proxy_uri.user)
+          else
+            args << nil
+          end
+          
+          if proxy_uri.password
+            args << URI::decode(proxy_uri.password)
+          else 
+            args << nil
+          end
 
           http = Net::HTTP.new(*args.compact)
           http.extend(SessionExtensions)
