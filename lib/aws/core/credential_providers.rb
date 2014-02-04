@@ -313,7 +313,7 @@ module AWS
         #   `:access_key_id` or the `:secret_access_key` can not be found.
         #
         def credentials
-          if @credentials_expiration && @credentials_expiration.utc <= Time.now.utc - 5 * 60
+          if @credentials_expiration && @credentials_expiration.utc <= (Time.now.utc + (15 * 60))
             refresh
           end
           super

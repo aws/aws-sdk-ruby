@@ -402,18 +402,21 @@ module AWS
           }
         end
 
-        it 'refresh the credentials when cached one is expired' do
-          provider.credentials.should == {
+        it 'refresh the credentials when expiration is within 15 minutes' do
+          creds1 = {
             :access_key_id => 'akid-1',
             :secret_access_key => 'secret-1',
             :session_token => 'token-1',
           }
-          provider.credentials_expiration = Time.now - 5 * 60
-          provider.credentials.should == {
+          creds2 = {
             :access_key_id => 'akid-2',
             :secret_access_key => 'secret-2',
             :session_token => 'token-2',
           }
+          provider.credentials_expiration = Time.now + (20 * 60)
+          provider.credentials.should == creds1
+          provider.credentials_expiration = Time.now + (10 * 60)
+          provider.credentials.should == creds2
         end
       end
 
