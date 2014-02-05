@@ -37,12 +37,18 @@ module AWS
         #   `:access_key_id` or the `:secret_access_key` can not be found.
         #
         def credentials
-          @cached_credentials ||= begin
-            creds = get_credentials
-            unless creds[:access_key_id] and creds[:secret_access_key]
-              raise Errors::MissingCredentialsError
+          @cache_mutex ||= Mutex.new
+
+          unless @cached_credentials
+            @cache_mutex.synchronize do
+              @cached_credentials ||= begin
+                creds = get_credentials
+                unless creds[:access_key_id] and creds[:secret_access_key]
+                  raise Errors::MissingCredentialsError
+                end
+                creds
+              end
             end
-            creds
           end
           @cached_credentials.dup
         end
