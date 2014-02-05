@@ -1,0 +1,1077 @@
+{
+  "version": "2013-04-01",
+  "metadata": {
+    "endpoint_prefix": "route53",
+    "regional_endpoints": {
+      "us-east-1": "route53.amazonaws.com",
+      "us-west-1": "route53.amazonaws.com",
+      "us-west-2": "route53.amazonaws.com",
+      "eu-west-1": "route53.amazonaws.com",
+      "ap-northeast-1": "route53.amazonaws.com",
+      "ap-southeast-1": "route53.amazonaws.com",
+      "ap-southeast-2": "route53.amazonaws.com",
+      "sa-east-1": "route53.amazonaws.com"
+    },
+    "service_abbreviation": "Route 53",
+    "service_class_name": "Route53",
+    "service_full_name": "Amazon Route 53"
+  },
+  "plugins": [
+    "Seahorse::Client::Plugins::Logging",
+    "Seahorse::Client::Plugins::RestfulBindings",
+    "Seahorse::Client::Plugins::ContentLength",
+    "Aws::Plugins::UserAgent",
+    "Aws::Plugins::RetryErrors",
+    "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::InstanceProfileCredentials",
+    "Aws::Plugins::ResponsePaging",
+    "Aws::Plugins::Credentials",
+    "Aws::Plugins::XmlProtocol",
+    "Aws::Plugins::SignatureV3"
+  ],
+  "operations": {
+    "change_resource_record_sets": {
+      "name": "ChangeResourceRecordSets",
+      "http_method": "POST",
+      "http_path": "/2013-04-01/hostedzone/{hosted_zone_id}/rrset/",
+      "input": {
+        "type": "input",
+        "serialized_name": "ChangeResourceRecordSetsRequest",
+        "metadata": {
+          "xmlns_uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "members": {
+          "hosted_zone_id": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "change_batch": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "ChangeBatch",
+            "members": {
+              "comment": {
+                "type": "string",
+                "serialized_name": "Comment"
+              },
+              "changes": {
+                "type": "list",
+                "required": true,
+                "serialized_name": "Changes",
+                "members": {
+                  "type": "structure",
+                  "serialized_name": "Change",
+                  "members": {
+                    "action": {
+                      "type": "string",
+                      "required": true,
+                      "serialized_name": "Action",
+                      "enum": [
+                        "CREATE",
+                        "DELETE",
+                        "UPSERT"
+                      ]
+                    },
+                    "resource_record_set": {
+                      "type": "structure",
+                      "required": true,
+                      "serialized_name": "ResourceRecordSet",
+                      "members": {
+                        "name": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "Name"
+                        },
+                        "type": {
+                          "type": "string",
+                          "required": true,
+                          "serialized_name": "Type",
+                          "enum": [
+                            "SOA",
+                            "A",
+                            "TXT",
+                            "NS",
+                            "CNAME",
+                            "MX",
+                            "PTR",
+                            "SRV",
+                            "SPF",
+                            "AAAA"
+                          ]
+                        },
+                        "set_identifier": {
+                          "type": "string",
+                          "serialized_name": "SetIdentifier"
+                        },
+                        "weight": {
+                          "type": "integer",
+                          "serialized_name": "Weight"
+                        },
+                        "region": {
+                          "type": "string",
+                          "serialized_name": "Region",
+                          "enum": [
+                            "us-east-1",
+                            "us-west-1",
+                            "us-west-2",
+                            "eu-west-1",
+                            "ap-southeast-1",
+                            "ap-southeast-2",
+                            "ap-northeast-1",
+                            "sa-east-1",
+                            "cn-north-1"
+                          ]
+                        },
+                        "failover": {
+                          "type": "string",
+                          "serialized_name": "Failover",
+                          "enum": [
+                            "PRIMARY",
+                            "SECONDARY"
+                          ]
+                        },
+                        "ttl": {
+                          "type": "integer",
+                          "serialized_name": "TTL"
+                        },
+                        "resource_records": {
+                          "type": "list",
+                          "serialized_name": "ResourceRecords",
+                          "members": {
+                            "type": "structure",
+                            "serialized_name": "ResourceRecord",
+                            "members": {
+                              "value": {
+                                "type": "string",
+                                "required": true,
+                                "serialized_name": "Value"
+                              }
+                            }
+                          }
+                        },
+                        "alias_target": {
+                          "type": "structure",
+                          "serialized_name": "AliasTarget",
+                          "members": {
+                            "hosted_zone_id": {
+                              "type": "string",
+                              "required": true,
+                              "serialized_name": "HostedZoneId"
+                            },
+                            "dns_name": {
+                              "type": "string",
+                              "required": true,
+                              "serialized_name": "DNSName"
+                            },
+                            "evaluate_target_health": {
+                              "type": "boolean",
+                              "required": true,
+                              "serialized_name": "EvaluateTargetHealth"
+                            }
+                          }
+                        },
+                        "health_check_id": {
+                          "type": "string",
+                          "serialized_name": "HealthCheckId"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "change_info": {
+            "type": "structure",
+            "serialized_name": "ChangeInfo",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status",
+                "enum": [
+                  "PENDING",
+                  "INSYNC"
+                ]
+              },
+              "submitted_at": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "SubmittedAt"
+              },
+              "comment": {
+                "type": "string",
+                "serialized_name": "Comment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "create_health_check": {
+      "name": "CreateHealthCheck",
+      "http_method": "POST",
+      "http_path": "/2013-04-01/healthcheck",
+      "input": {
+        "type": "input",
+        "serialized_name": "CreateHealthCheckRequest",
+        "metadata": {
+          "xmlns_uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "members": {
+          "caller_reference": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CallerReference"
+          },
+          "health_check_config": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "HealthCheckConfig",
+            "members": {
+              "ip_address": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "IPAddress"
+              },
+              "port": {
+                "type": "integer",
+                "serialized_name": "Port"
+              },
+              "type": {
+                "type": "string",
+                "required": true,
+                "serialized_name": "Type",
+                "enum": [
+                  "HTTP",
+                  "HTTPS",
+                  "HTTP_STR_MATCH",
+                  "HTTPS_STR_MATCH",
+                  "TCP"
+                ]
+              },
+              "resource_path": {
+                "type": "string",
+                "serialized_name": "ResourcePath"
+              },
+              "fully_qualified_domain_name": {
+                "type": "string",
+                "serialized_name": "FullyQualifiedDomainName"
+              },
+              "search_string": {
+                "type": "string",
+                "serialized_name": "SearchString"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "health_check": {
+            "type": "structure",
+            "serialized_name": "HealthCheck",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "caller_reference": {
+                "type": "string",
+                "serialized_name": "CallerReference"
+              },
+              "health_check_config": {
+                "type": "structure",
+                "serialized_name": "HealthCheckConfig",
+                "members": {
+                  "ip_address": {
+                    "type": "string",
+                    "serialized_name": "IPAddress"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "serialized_name": "Port"
+                  },
+                  "type": {
+                    "type": "string",
+                    "serialized_name": "Type",
+                    "enum": [
+                      "HTTP",
+                      "HTTPS",
+                      "HTTP_STR_MATCH",
+                      "HTTPS_STR_MATCH",
+                      "TCP"
+                    ]
+                  },
+                  "resource_path": {
+                    "type": "string",
+                    "serialized_name": "ResourcePath"
+                  },
+                  "fully_qualified_domain_name": {
+                    "type": "string",
+                    "serialized_name": "FullyQualifiedDomainName"
+                  },
+                  "search_string": {
+                    "type": "string",
+                    "serialized_name": "SearchString"
+                  }
+                }
+              }
+            }
+          },
+          "location": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "Location"
+          }
+        }
+      }
+    },
+    "create_hosted_zone": {
+      "name": "CreateHostedZone",
+      "http_method": "POST",
+      "http_path": "/2013-04-01/hostedzone",
+      "input": {
+        "type": "input",
+        "serialized_name": "CreateHostedZoneRequest",
+        "metadata": {
+          "xmlns_uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "members": {
+          "name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Name"
+          },
+          "caller_reference": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "CallerReference"
+          },
+          "hosted_zone_config": {
+            "type": "structure",
+            "serialized_name": "HostedZoneConfig",
+            "members": {
+              "comment": {
+                "type": "string",
+                "serialized_name": "Comment"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "hosted_zone": {
+            "type": "structure",
+            "serialized_name": "HostedZone",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "caller_reference": {
+                "type": "string",
+                "serialized_name": "CallerReference"
+              },
+              "config": {
+                "type": "structure",
+                "serialized_name": "Config",
+                "members": {
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  }
+                }
+              },
+              "resource_record_set_count": {
+                "type": "integer",
+                "serialized_name": "ResourceRecordSetCount"
+              }
+            }
+          },
+          "change_info": {
+            "type": "structure",
+            "serialized_name": "ChangeInfo",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status",
+                "enum": [
+                  "PENDING",
+                  "INSYNC"
+                ]
+              },
+              "submitted_at": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "SubmittedAt"
+              },
+              "comment": {
+                "type": "string",
+                "serialized_name": "Comment"
+              }
+            }
+          },
+          "delegation_set": {
+            "type": "structure",
+            "serialized_name": "DelegationSet",
+            "members": {
+              "name_servers": {
+                "type": "list",
+                "serialized_name": "NameServers",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "NameServer"
+                }
+              }
+            }
+          },
+          "location": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "Location"
+          }
+        }
+      }
+    },
+    "delete_health_check": {
+      "name": "DeleteHealthCheck",
+      "http_method": "DELETE",
+      "http_path": "/2013-04-01/healthcheck/{health_check_id}",
+      "input": {
+        "type": "input",
+        "members": {
+          "health_check_id": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      }
+    },
+    "delete_hosted_zone": {
+      "name": "DeleteHostedZone",
+      "http_method": "DELETE",
+      "http_path": "/2013-04-01/hostedzone/{id}",
+      "input": {
+        "type": "input",
+        "members": {
+          "id": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "change_info": {
+            "type": "structure",
+            "serialized_name": "ChangeInfo",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status",
+                "enum": [
+                  "PENDING",
+                  "INSYNC"
+                ]
+              },
+              "submitted_at": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "SubmittedAt"
+              },
+              "comment": {
+                "type": "string",
+                "serialized_name": "Comment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_change": {
+      "name": "GetChange",
+      "http_method": "GET",
+      "http_path": "/2013-04-01/change/{id}",
+      "input": {
+        "type": "input",
+        "members": {
+          "id": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "change_info": {
+            "type": "structure",
+            "serialized_name": "ChangeInfo",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "status": {
+                "type": "string",
+                "serialized_name": "Status",
+                "enum": [
+                  "PENDING",
+                  "INSYNC"
+                ]
+              },
+              "submitted_at": {
+                "type": "iso8601_timestamp",
+                "serialized_name": "SubmittedAt"
+              },
+              "comment": {
+                "type": "string",
+                "serialized_name": "Comment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_health_check": {
+      "name": "GetHealthCheck",
+      "http_method": "GET",
+      "http_path": "/2013-04-01/healthcheck/{health_check_id}",
+      "input": {
+        "type": "input",
+        "members": {
+          "health_check_id": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "health_check": {
+            "type": "structure",
+            "serialized_name": "HealthCheck",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "caller_reference": {
+                "type": "string",
+                "serialized_name": "CallerReference"
+              },
+              "health_check_config": {
+                "type": "structure",
+                "serialized_name": "HealthCheckConfig",
+                "members": {
+                  "ip_address": {
+                    "type": "string",
+                    "serialized_name": "IPAddress"
+                  },
+                  "port": {
+                    "type": "integer",
+                    "serialized_name": "Port"
+                  },
+                  "type": {
+                    "type": "string",
+                    "serialized_name": "Type",
+                    "enum": [
+                      "HTTP",
+                      "HTTPS",
+                      "HTTP_STR_MATCH",
+                      "HTTPS_STR_MATCH",
+                      "TCP"
+                    ]
+                  },
+                  "resource_path": {
+                    "type": "string",
+                    "serialized_name": "ResourcePath"
+                  },
+                  "fully_qualified_domain_name": {
+                    "type": "string",
+                    "serialized_name": "FullyQualifiedDomainName"
+                  },
+                  "search_string": {
+                    "type": "string",
+                    "serialized_name": "SearchString"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_hosted_zone": {
+      "name": "GetHostedZone",
+      "http_method": "GET",
+      "http_path": "/2013-04-01/hostedzone/{id}",
+      "input": {
+        "type": "input",
+        "members": {
+          "id": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "hosted_zone": {
+            "type": "structure",
+            "serialized_name": "HostedZone",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "Id"
+              },
+              "name": {
+                "type": "string",
+                "serialized_name": "Name"
+              },
+              "caller_reference": {
+                "type": "string",
+                "serialized_name": "CallerReference"
+              },
+              "config": {
+                "type": "structure",
+                "serialized_name": "Config",
+                "members": {
+                  "comment": {
+                    "type": "string",
+                    "serialized_name": "Comment"
+                  }
+                }
+              },
+              "resource_record_set_count": {
+                "type": "integer",
+                "serialized_name": "ResourceRecordSetCount"
+              }
+            }
+          },
+          "delegation_set": {
+            "type": "structure",
+            "serialized_name": "DelegationSet",
+            "members": {
+              "name_servers": {
+                "type": "list",
+                "serialized_name": "NameServers",
+                "members": {
+                  "type": "string",
+                  "serialized_name": "NameServer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "list_health_checks": {
+      "name": "ListHealthChecks",
+      "http_method": "GET",
+      "http_path": "/2013-04-01/healthcheck?marker={marker}&maxitems={max_items}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "next_marker"
+          },
+          "truncated_if": "is_truncated"
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "marker": {
+            "type": "string",
+            "location": "uri"
+          },
+          "max_items": {
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "health_checks": {
+            "type": "list",
+            "serialized_name": "HealthChecks",
+            "members": {
+              "type": "structure",
+              "serialized_name": "HealthCheck",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
+                },
+                "caller_reference": {
+                  "type": "string",
+                  "serialized_name": "CallerReference"
+                },
+                "health_check_config": {
+                  "type": "structure",
+                  "serialized_name": "HealthCheckConfig",
+                  "members": {
+                    "ip_address": {
+                      "type": "string",
+                      "serialized_name": "IPAddress"
+                    },
+                    "port": {
+                      "type": "integer",
+                      "serialized_name": "Port"
+                    },
+                    "type": {
+                      "type": "string",
+                      "serialized_name": "Type",
+                      "enum": [
+                        "HTTP",
+                        "HTTPS",
+                        "HTTP_STR_MATCH",
+                        "HTTPS_STR_MATCH",
+                        "TCP"
+                      ]
+                    },
+                    "resource_path": {
+                      "type": "string",
+                      "serialized_name": "ResourcePath"
+                    },
+                    "fully_qualified_domain_name": {
+                      "type": "string",
+                      "serialized_name": "FullyQualifiedDomainName"
+                    },
+                    "search_string": {
+                      "type": "string",
+                      "serialized_name": "SearchString"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "next_marker": {
+            "type": "string",
+            "serialized_name": "NextMarker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      }
+    },
+    "list_hosted_zones": {
+      "name": "ListHostedZones",
+      "http_method": "GET",
+      "http_path": "/2013-04-01/hostedzone?marker={marker}&maxitems={max_items}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "next_marker"
+          },
+          "truncated_if": "is_truncated"
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "marker": {
+            "type": "string",
+            "location": "uri"
+          },
+          "max_items": {
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "hosted_zones": {
+            "type": "list",
+            "serialized_name": "HostedZones",
+            "members": {
+              "type": "structure",
+              "serialized_name": "HostedZone",
+              "members": {
+                "id": {
+                  "type": "string",
+                  "serialized_name": "Id"
+                },
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "caller_reference": {
+                  "type": "string",
+                  "serialized_name": "CallerReference"
+                },
+                "config": {
+                  "type": "structure",
+                  "serialized_name": "Config",
+                  "members": {
+                    "comment": {
+                      "type": "string",
+                      "serialized_name": "Comment"
+                    }
+                  }
+                },
+                "resource_record_set_count": {
+                  "type": "integer",
+                  "serialized_name": "ResourceRecordSetCount"
+                }
+              }
+            }
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "next_marker": {
+            "type": "string",
+            "serialized_name": "NextMarker"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      }
+    },
+    "list_resource_record_sets": {
+      "name": "ListResourceRecordSets",
+      "http_method": "GET",
+      "http_path": "/2013-04-01/hostedzone/{hosted_zone_id}/rrset?type={start_record_type}&name={start_record_name}&identifier={start_record_identifier}&maxitems={max_items}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "start_record_name": "next_rec||d_name",
+            "start_record_type": "next_rec||d_type",
+            "start_record_identifier": "next_rec||d_identifier"
+          },
+          "truncated_if": "is_truncated"
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "hosted_zone_id": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "start_record_name": {
+            "type": "string",
+            "location": "uri"
+          },
+          "start_record_type": {
+            "type": "string",
+            "location": "uri",
+            "enum": [
+              "SOA",
+              "A",
+              "TXT",
+              "NS",
+              "CNAME",
+              "MX",
+              "PTR",
+              "SRV",
+              "SPF",
+              "AAAA"
+            ]
+          },
+          "start_record_identifier": {
+            "type": "string",
+            "location": "uri"
+          },
+          "max_items": {
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "resource_record_sets": {
+            "type": "list",
+            "serialized_name": "ResourceRecordSets",
+            "members": {
+              "type": "structure",
+              "serialized_name": "ResourceRecordSet",
+              "members": {
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "type": {
+                  "type": "string",
+                  "serialized_name": "Type",
+                  "enum": [
+                    "SOA",
+                    "A",
+                    "TXT",
+                    "NS",
+                    "CNAME",
+                    "MX",
+                    "PTR",
+                    "SRV",
+                    "SPF",
+                    "AAAA"
+                  ]
+                },
+                "set_identifier": {
+                  "type": "string",
+                  "serialized_name": "SetIdentifier"
+                },
+                "weight": {
+                  "type": "integer",
+                  "serialized_name": "Weight"
+                },
+                "region": {
+                  "type": "string",
+                  "serialized_name": "Region",
+                  "enum": [
+                    "us-east-1",
+                    "us-west-1",
+                    "us-west-2",
+                    "eu-west-1",
+                    "ap-southeast-1",
+                    "ap-southeast-2",
+                    "ap-northeast-1",
+                    "sa-east-1",
+                    "cn-north-1"
+                  ]
+                },
+                "failover": {
+                  "type": "string",
+                  "serialized_name": "Failover",
+                  "enum": [
+                    "PRIMARY",
+                    "SECONDARY"
+                  ]
+                },
+                "ttl": {
+                  "type": "integer",
+                  "serialized_name": "TTL"
+                },
+                "resource_records": {
+                  "type": "list",
+                  "serialized_name": "ResourceRecords",
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "ResourceRecord",
+                    "members": {
+                      "value": {
+                        "type": "string",
+                        "serialized_name": "Value"
+                      }
+                    }
+                  }
+                },
+                "alias_target": {
+                  "type": "structure",
+                  "serialized_name": "AliasTarget",
+                  "members": {
+                    "hosted_zone_id": {
+                      "type": "string",
+                      "serialized_name": "HostedZoneId"
+                    },
+                    "dns_name": {
+                      "type": "string",
+                      "serialized_name": "DNSName"
+                    },
+                    "evaluate_target_health": {
+                      "type": "boolean",
+                      "serialized_name": "EvaluateTargetHealth"
+                    }
+                  }
+                },
+                "health_check_id": {
+                  "type": "string",
+                  "serialized_name": "HealthCheckId"
+                }
+              }
+            }
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "next_record_name": {
+            "type": "string",
+            "serialized_name": "NextRecordName"
+          },
+          "next_record_type": {
+            "type": "string",
+            "serialized_name": "NextRecordType",
+            "enum": [
+              "SOA",
+              "A",
+              "TXT",
+              "NS",
+              "CNAME",
+              "MX",
+              "PTR",
+              "SRV",
+              "SPF",
+              "AAAA"
+            ]
+          },
+          "next_record_identifier": {
+            "type": "string",
+            "serialized_name": "NextRecordIdentifier"
+          },
+          "max_items": {
+            "type": "integer",
+            "serialized_name": "MaxItems"
+          }
+        }
+      }
+    }
+  }
+}
