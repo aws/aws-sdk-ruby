@@ -70,7 +70,7 @@ module AWS
           stack_resource = StackResource.new_from(
             :describe_stack_resources,
             details,
-            self,
+            stack,
             details.logical_resource_id)
 
           yield(stack_resource)
