@@ -66,8 +66,8 @@ module AWS::Core
         end
 
         it 'should use a UUID to generate an alphanumeric ID' do
-          UUIDTools::UUID.stub(:timestamp_create).
-            and_return(UUIDTools::UUID.parse("934257b4-452e-11e0-8f5e-00254bfffeb7"))
+           SecureRandom.stub(:uuid).
+            and_return("934257b4-452e-11e0-8f5e-00254bfffeb7")
           hash["Id"].should == "934257b4452e11e08f5e00254bfffeb7"
         end
 

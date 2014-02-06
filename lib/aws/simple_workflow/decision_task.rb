@@ -255,7 +255,7 @@ module AWS
       #
       def schedule_activity_task activity_type, options = {}
 
-        options[:activity_id] ||= UUIDTools::UUID.random_create.to_s
+        options[:activity_id] ||= SecureRandom.uuid
 
         options[:activity_type] = case activity_type
         when Hash
@@ -448,7 +448,7 @@ module AWS
       # @return [String] Returns the id of the timer.
       #
       def start_timer start_to_fire_timeout, options = {}
-        options[:timer_id] ||= UUIDTools::UUID.random_create.to_s
+        options[:timer_id] ||= SecureRandom.uuid
         options[:start_to_fire_timeout] = start_to_fire_timeout
         duration_opts(options, :start_to_fire_timeout)
         add_decision :start_timer, options

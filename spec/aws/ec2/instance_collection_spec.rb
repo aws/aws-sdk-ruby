@@ -340,8 +340,7 @@ module AWS
 
             it 'should provide a UUID client token' do
               uuid = "ee819144-6d1f-11e0-bf36-00254bfffeb7"
-              UUIDTools::UUID.stub(:timestamp_create).
-                and_return(uuid)
+              SecureRandom.stub(:uuid).and_return(uuid)
               client.should_receive(:run_instances).
                 with(hash_including(:client_token => uuid)).
                 and_return(resp)

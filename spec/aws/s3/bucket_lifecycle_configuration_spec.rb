@@ -28,7 +28,7 @@ module AWS
       let(:uuid) { 'abc-xyz-123-456' }
 
       before(:each) do
-        UUIDTools::UUID.stub(:random_create).and_return(uuid)
+        SecureRandom.stub(:uuid).and_return(uuid)
       end
 
       context '#rules' do

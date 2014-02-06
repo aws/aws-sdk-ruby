@@ -136,7 +136,7 @@ unless options[:repl] == 'irb'
   # we require them up front to squelch warnings from pry
   require 'nokogiri'
   require 'json'
-  require 'uuidtools'
+  require 'securerandom'
 end
 
 class PryNotAvailable < StandardError; end
