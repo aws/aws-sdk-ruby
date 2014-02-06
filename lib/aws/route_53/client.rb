@@ -17,7 +17,7 @@ module AWS
     # Client class for Route53.
     class Client < Core::RESTXMLClient
 
-      API_VERSION = '2012-12-12'
+      API_VERSION = '2013-04-01'
 
       signature_version :Version3Https
 
@@ -27,9 +27,12 @@ module AWS
     end
 
     class Client::V20121212 < Client
-
       define_client_methods('2012-12-12')
-
     end
+
+    class Client::V20130401 < Client
+      define_client_methods('2013-04-01')
+    end
+
   end
 end
