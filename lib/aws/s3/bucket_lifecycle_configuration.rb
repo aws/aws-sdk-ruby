@@ -12,7 +12,6 @@
 # language governing permissions and limitations under the License.
 
 require 'nokogiri'
-require 'securerandom'
 
 module AWS
   class S3

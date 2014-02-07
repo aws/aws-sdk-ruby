@@ -12,7 +12,6 @@
 # language governing permissions and limitations under the License.
 
 require 'base64'
-require 'securerandom'
 
 module AWS
   class EC2
