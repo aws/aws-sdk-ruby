@@ -1834,6 +1834,12 @@ module AWS
       #     Controls whether Reduced Redundancy Storage is enabled for
       #     the object.  Valid values are 'STANDARD' and
       #     'REDUCED_REDUNDANCY'.
+      #   @option options [String] :metadata_directive ('COPY') Specify 'COPY' or
+      #     'REPLACE'.
+      #   @option options [String] :content_type
+      #   @option options [String] :content_encoding
+      #   @option options [String] :content_disposition
+      #   @option options [String] :cache_control
       #   @option options [String] :expires The date and time at which the
       #     object is no longer cacheable.
       #   @option options [String] :grant_read
