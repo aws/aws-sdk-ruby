@@ -1854,6 +1854,7 @@ module AWS
         :cache_control => 'Cache-Control',
         :metadata_directive => 'x-amz-metadata-directive',
         :content_type => 'Content-Type',
+        :content_encoding => 'Content-Encoding',
         :content_disposition => 'Content-Disposition',
         :expires => 'Expires',
       }) do
