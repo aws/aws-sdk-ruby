@@ -51,9 +51,13 @@ module AWS
       include TaggedCollection
       include Core::Collection::Simple
 
-      # Creates a Subnet.  Subnets require a valid CIDR block and
-      # are created inside a VPC.  If this collection does not
-      # have a
+      # Creates a Subnet.  Subnets require a valid CIDR block and are created
+      # inside an existing VPC. If you do not set an AvailabilityZone, then
+      # Amazon EC2 will select one for you (this is recommended).
+      #
+      # For complete information about creating subnets, see
+      # {http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateSubnet.html
+      # CreateSubnet} in the Amazon EC2 API Reference.
       #
       # @param [String] cidr_block The CIDR block you want the subnet to
       #   cover (e.g., 10.0.0.0/24).
