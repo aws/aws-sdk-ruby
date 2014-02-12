@@ -290,6 +290,14 @@ module AWS
 
         end
 
+        it 'raises correct error if passed invalid object' do
+
+          lambda {
+            collection.delete([:not_a_valid_object])
+          }.should raise_error(ArgumentError, /got Symbol/)
+
+        end
+
       end
 
       context '#delete_if' do
