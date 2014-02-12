@@ -159,7 +159,7 @@ module AWS
           else
             msg = "objects must be keys (strings or hashes with :key and " +
                   ":version_id), S3Objects or ObjectVersions, got " +
-                  object.class.name
+                  obj.class.name
             raise ArgumentError, msg
           end
         end
