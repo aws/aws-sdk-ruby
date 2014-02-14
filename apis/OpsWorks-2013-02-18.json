@@ -1495,7 +1495,7 @@
                     "type": "string"
                   }
                 },
-                "ec_2_instance_ids": {
+                "ec2_instance_ids": {
                   "type": "list",
                   "serialized_name": "Ec2InstanceIds",
                   "members": {

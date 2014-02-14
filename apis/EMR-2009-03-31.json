@@ -323,7 +323,7 @@
                   }
                 }
               },
-              "ec_2_instance_attributes": {
+              "ec2_instance_attributes": {
                 "type": "structure",
                 "serialized_name": "Ec2InstanceAttributes",
                 "members": {
@@ -335,7 +335,7 @@
                     "type": "string",
                     "serialized_name": "Ec2SubnetId"
                   },
-                  "ec_2_availability_zone": {
+                  "ec2_availability_zone": {
                     "type": "string",
                     "serialized_name": "Ec2AvailabilityZone"
                   },

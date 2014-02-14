@@ -1620,7 +1620,7 @@
         }
       }
     },
-    "swap_environment_cnam_es": {
+    "swap_environment_cnames": {
       "name": "SwapEnvironmentCNAMEs",
       "http_method": "POST",
       "http_path": "/",

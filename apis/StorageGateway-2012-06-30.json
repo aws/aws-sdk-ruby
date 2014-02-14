@@ -209,7 +209,7 @@
         }
       }
     },
-    "create_cachedi_scsi_volume": {
+    "create_cached_iscsi_volume": {
       "name": "CreateCachediSCSIVolume",
       "http_method": "POST",
       "http_path": "/",
@@ -331,7 +331,7 @@
         }
       }
     },
-    "create_storedi_scsi_volume": {
+    "create_stored_iscsi_volume": {
       "name": "CreateStorediSCSIVolume",
       "http_method": "POST",
       "http_path": "/",
@@ -609,14 +609,14 @@
         }
       }
     },
-    "describe_cachedi_scsi_volumes": {
+    "describe_cached_iscsi_volumes": {
       "name": "DescribeCachediSCSIVolumes",
       "http_method": "POST",
       "http_path": "/",
       "input": {
         "type": "input",
         "members": {
-          "volume_ar_ns": {
+          "volume_arns": {
             "type": "list",
             "required": true,
             "serialized_name": "VolumeARNs",
@@ -629,7 +629,7 @@
       "output": {
         "type": "output",
         "members": {
-          "cachedi_scsi_volumes": {
+          "cached_iscsi_volumes": {
             "type": "list",
             "serialized_name": "CachediSCSIVolumes",
             "members": {
@@ -679,7 +679,7 @@
                   "type": "string",
                   "serialized_name": "SourceSnapshotId"
                 },
-                "volumei_scsi_attributes": {
+                "volume_iscsi_attributes": {
                   "type": "structure",
                   "serialized_name": "VolumeiSCSIAttributes",
                   "members": {
@@ -1008,14 +1008,14 @@
         }
       }
     },
-    "describe_storedi_scsi_volumes": {
+    "describe_stored_iscsi_volumes": {
       "name": "DescribeStorediSCSIVolumes",
       "http_method": "POST",
       "http_path": "/",
       "input": {
         "type": "input",
         "members": {
-          "volume_ar_ns": {
+          "volume_arns": {
             "type": "list",
             "required": true,
             "serialized_name": "VolumeARNs",
@@ -1028,7 +1028,7 @@
       "output": {
         "type": "output",
         "members": {
-          "storedi_scsi_volumes": {
+          "stored_iscsi_volumes": {
             "type": "list",
             "serialized_name": "StorediSCSIVolumes",
             "members": {
@@ -1086,7 +1086,7 @@
                   "type": "boolean",
                   "serialized_name": "PreservedExistingData"
                 },
-                "volumei_scsi_attributes": {
+                "volume_iscsi_attributes": {
                   "type": "structure",
                   "serialized_name": "VolumeiSCSIAttributes",
                   "members": {
