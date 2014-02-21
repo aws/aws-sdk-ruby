@@ -199,6 +199,8 @@ module AWS
       #   *NOTE:* EBS Optimized instances incur an additional service charge. This
       #   optional is only valid for certain instance types.
       #
+      # @option options [Boolean] :associate_public_ip_address (false)
+      #
       # @return [Instance or Array] If a single instance is being created,
       #   this returns an {EC2::Instance} to represent the newly
       #   created instance.  Otherwise it returns an array of instance
