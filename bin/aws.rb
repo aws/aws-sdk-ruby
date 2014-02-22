@@ -18,13 +18,13 @@ end
 
 # setup default options, check ENV for most
 options = {
-  :repl => env_bool('AWSRB', nil),
-  :log => env_bool('AWSRB_LOG', true),
-  :color => env_bool('AWSRB_COLOR', true),
-  :debug => env_bool('AWSRB_DEBUG', false),
-  :load_paths => [],
-  :require => [],
-  :execute => [],
+  repl: env_bool('AWSRB', nil),
+  log: env_bool('AWSRB_LOG', true),
+  color: env_bool('AWSRB_COLOR', true),
+  debug: env_bool('AWSRB_DEBUG', false),
+  load_paths: [],
+  require: [],
+  execute: [],
 }
 
 OptionParser.new do |opts|
