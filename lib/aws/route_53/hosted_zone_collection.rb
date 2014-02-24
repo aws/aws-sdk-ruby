@@ -24,7 +24,8 @@ module AWS
     # # Find existing hosted zone
     #
     #     r53 = AWS::Route53.new
-    #     hosted_zone = r53.hosted_zones['example.com.']
+    #     # to lookup a route53 hosted zone, you need to use the zone id (i.e hosted_zone.id)
+    #     hosted_zone = r53.hosted_zones['Zabcdefghijklm']
     #
     class HostedZoneCollection
 
