@@ -3,12 +3,12 @@
   "metadata": {
     "endpoint_prefix": "elastictranscoder",
     "regional_endpoints": {
+      "ap-northeast-1": "elastictranscoder.ap-northeast-1.amazonaws.com",
+      "ap-southeast-1": "elastictranscoder.ap-southeast-1.amazonaws.com",
+      "eu-west-1": "elastictranscoder.eu-west-1.amazonaws.com",
       "us-east-1": "elastictranscoder.us-east-1.amazonaws.com",
       "us-west-1": "elastictranscoder.us-west-1.amazonaws.com",
-      "us-west-2": "elastictranscoder.us-west-2.amazonaws.com",
-      "eu-west-1": "elastictranscoder.eu-west-1.amazonaws.com",
-      "ap-northeast-1": "elastictranscoder.ap-northeast-1.amazonaws.com",
-      "ap-southeast-1": "elastictranscoder.ap-southeast-1.amazonaws.com"
+      "us-west-2": "elastictranscoder.us-west-2.amazonaws.com"
     },
     "service_class_name": "ElasticTranscoder",
     "service_full_name": "Amazon Elastic Transcoder"
