@@ -892,13 +892,26 @@ module AWS
           object.url_for(:read, :version_id => 'version-id-string')
         end
 
-        it 'raises an ArgumentError if attempting to presign using v4 more than 1 week out' do
+        it 'raises an ArgumentError if attempting to presign using v4 more than 1 week out with v4' do
           in_eight_days = Time.now + (8 * 60 * 60 * 24)
+          in_six_days = Time.now + (6 * 60 * 60 * 24)
+          # v2 - 8 days out - okay
           lambda {
             object.url_for(:read, :expires => in_eight_days)
           }.should_not raise_error
+
+          # v4 - 6 days out - okay
           lambda {
-            object.url_for(:read, :expires => in_eight_days, :signature_version => :v4)
+            object.url_for(:read,
+              :expires => in_six_days,
+              :signature_version => :v4)
+          }.should_not raise_error
+
+          # v4 - 8 days out - bad
+          lambda {
+            object.url_for(:read,
+              :expires => in_eight_days,
+              :signature_version => :v4)
           }.should raise_error(ArgumentError, /one week/)
         end
 
