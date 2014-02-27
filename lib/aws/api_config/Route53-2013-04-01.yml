@@ -182,6 +182,14 @@
           :name: SearchString
           :type: :string
           :position: 5
+        :request_interval:
+          :name: RequestInterval
+          :type: :integer
+          :position: 6
+        :failure_threshold:
+          :name: FailureThreshold
+          :type: :integer
+          :position: 7
   :outputs:
     :children:
       HealthCheck:
@@ -204,6 +212,10 @@
                 :type: :string
               SearchString:
                 :type: :string
+              RequestInterval:
+                :type: :integer
+              FailureThreshold:
+                :type: :integer
 - :name: CreateHostedZone
   :method: :create_hosted_zone
   :http:
@@ -356,6 +368,10 @@
                 :type: :string
               SearchString:
                 :type: :string
+              RequestInterval:
+                :type: :integer
+              FailureThreshold:
+                :type: :integer
 - :name: GetHostedZone
   :method: :get_hosted_zone
   :http:
@@ -431,6 +447,10 @@
                     :type: :string
                   SearchString:
                     :type: :string
+                  RequestInterval:
+                    :type: :integer
+                  FailureThreshold:
+                    :type: :integer
       Marker:
         :type: :string
       IsTruncated:

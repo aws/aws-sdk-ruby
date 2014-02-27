@@ -85,6 +85,8 @@
       * `:resource_path` - (String) Path to ping on the instance to check the health. Required for HTTP and HTTPS health checks, HTTP request is issued to the instance on the given port and path.
       * `:fully_qualified_domain_name` - (String) Fully qualified domain name of the instance to be health checked.
       * `:search_string` - (String) A string to search for in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH health checks.
+      * `:request_interval` - (Integer) The number of seconds between the time that Route 53 gets a response from your endpoint and the time that it sends the next health-check request. Each Route 53 health checker makes requests at this interval. Valid values are 10 and 30. The default value is 30.
+      * `:failure_threshold` - (Integer) The number of consecutive health checks that an endpoint must pass or fail for Route 53 to change the current status of the endpoint from unhealthy to healthy or vice versa. Valid values are integers between 1 and 10. For more information, see "How Amazon Route 53 Determines Whether an Endpoint Is Healthy" in the Amazon Route 53 Developer Guide.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:health_check` - (Hash)
@@ -97,6 +99,8 @@
         * `:resource_path` - (String)
         * `:fully_qualified_domain_name` - (String)
         * `:search_string` - (String)
+        * `:request_interval` - (Integer)
+        * `:failure_threshold` - (Integer)
 :create_hosted_zone: |-
   Calls the POST CreateHostedZone API operation.
   @param [Hash] options
@@ -163,6 +167,8 @@
         * `:resource_path` - (String)
         * `:fully_qualified_domain_name` - (String)
         * `:search_string` - (String)
+        * `:request_interval` - (Integer)
+        * `:failure_threshold` - (Integer)
 :get_hosted_zone: |-
   Calls the GET GetHostedZone API operation.
   @param [Hash] options
@@ -195,6 +201,8 @@
         * `:resource_path` - (String)
         * `:fully_qualified_domain_name` - (String)
         * `:search_string` - (String)
+        * `:request_interval` - (Integer)
+        * `:failure_threshold` - (Integer)
     * `:marker` - (String)
     * `:is_truncated` - (Boolean)
     * `:next_marker` - (String)
