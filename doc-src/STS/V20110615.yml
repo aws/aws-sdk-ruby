@@ -1,26 +1,13 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 ---
 :assume_role: "Calls the AssumeRole API operation.\n@param [Hash] options\n  * `:role_arn`
   - *required* - (String) \n  * `:role_session_name` - *required* - (String) \n  *
   `:policy` - (String) \n  * `:duration_seconds` - (Integer) \n  * `:external_id`
-  - (String) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:credentials` - (Hash)\n    *
-  `:access_key_id` - (String)\n    * `:secret_access_key` - (String)\n    * `:session_token`
-  - (String)\n    * `:expiration` - (Time)\n  * `:assumed_role_user` - (Hash)\n    *
-  `:assumed_role_id` - (String)\n    * `:arn` - (String)\n  * `:packed_policy_size`
-  - (Integer)"
+  - (String) \n  * `:serial_number` - (String) \n  * `:token_code` - (String) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:credentials` - (Hash)\n    * `:access_key_id` - (String)\n
+  \   * `:secret_access_key` - (String)\n    * `:session_token` - (String)\n    *
+  `:expiration` - (Time)\n  * `:assumed_role_user` - (Hash)\n    * `:assumed_role_id`
+  - (String)\n    * `:arn` - (String)\n  * `:packed_policy_size` - (Integer)"
 :assume_role_with_saml: "Calls the AssumeRoleWithSAML API operation.\n@param [Hash]
   options\n  * `:role_arn` - *required* - (String) \n  * `:principal_arn` - *required*
   - (String) \n  * `:saml_assertion` - *required* - (String) \n  * `:policy` - (String)
