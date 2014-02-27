@@ -12,5 +12,5 @@ Feature: AWS Data Pipeline
     Then I expect the response error code to be "PipelineNotFoundException"
     And I expect the response error message to include:
     """
-    fake-id pipeline does not exist
+    Pipeline with id: fake-id does not exist
     """
