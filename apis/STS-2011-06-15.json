@@ -61,6 +61,14 @@
           "external_id": {
             "type": "string",
             "serialized_name": "ExternalId"
+          },
+          "serial_number": {
+            "type": "string",
+            "serialized_name": "SerialNumber"
+          },
+          "token_code": {
+            "type": "string",
+            "serialized_name": "TokenCode"
           }
         }
       },
