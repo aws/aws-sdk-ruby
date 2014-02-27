@@ -29,18 +29,15 @@ module AWS
         # The list of possible keys in the hash returned by {#credentials}.
         KEYS = Set[:access_key_id, :secret_access_key, :session_token]
 
-        # @return [Hash] Returns a hash of credentials containg at least
+        # @return [Hash,nil] Returns a hash of credentials containg at least
         #   the `:access_key_id` and `:secret_access_key`.  The hash may
-        #   also contain a `:session_token`.
-        #
-        # @raise [Errors::MissingCredentialsError] Raised when the
-        #   `:access_key_id` or the `:secret_access_key` can not be found.
-        #
+        #   also contain a `:session_token`. Returns nil if no
+        #   credentials found.
         def credentials
           @cached_credentials ||= begin
             creds = get_credentials
             unless creds[:access_key_id] and creds[:secret_access_key]
-              raise Errors::MissingCredentialsError
+              return nil
             end
             creds
           end
@@ -117,9 +114,8 @@ module AWS
 
         def credentials
           providers.each do |provider|
-            begin
-              return provider.credentials
-            rescue Errors::MissingCredentialsError
+            if creds = provider.credentials
+              return creds
             end
           end
           raise Errors::MissingCredentialsError
@@ -305,13 +301,9 @@ module AWS
         attr_accessor :credentials_expiration
 
         # Refresh provider if existing credentials will be expired in 5 min
-        # @return [Hash] Returns a hash of credentials containg at least
+        # @return [Hash,nil] Returns a hash of credentials containg at least
         #   the `:access_key_id` and `:secret_access_key`.  The hash may
-        #   also contain a `:session_token`.
-        #
-        # @raise [Errors::MissingCredentialsError] Raised when the
-        #   `:access_key_id` or the `:secret_access_key` can not be found.
-        #
+        #   also contain a `:session_token`. Returns nil if no credentials found.
         def credentials
           if @credentials_expiration && @credentials_expiration.utc <= (Time.now.utc + (15 * 60))
             refresh

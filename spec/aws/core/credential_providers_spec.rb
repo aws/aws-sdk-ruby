@@ -52,7 +52,7 @@ module AWS
           p1 = double('provider-1')
           p2 = double('provider-2')
 
-          p1.should_receive(:credentials).and_raise(Errors::MissingCredentialsError)
+          p1.should_receive(:credentials).and_return(nil)
           p2.should_receive(:credentials).and_return(creds)
 
           provider = DefaultProvider.new
@@ -112,10 +112,8 @@ module AWS
 
       describe StaticProvider do
 
-        it 'raises an error when no credentials are present' do
-          lambda {
-            StaticProvider.new({}).credentials
-          }.should raise_error(Errors::MissingCredentialsError)
+        it 'returns nil when no credentials are present' do
+          StaticProvider.new({}).credentials.should be_nil
         end
 
         it 'returns credentials when provided' do
@@ -183,10 +181,8 @@ module AWS
           ENVProvider.new('AMAZON').prefix.should == 'AMAZON'
         end
 
-        it 'raises an error when no credentials are present' do
-          lambda {
-            ENVProvider.new('AMAZON').credentials
-          }.should raise_error(Errors::MissingCredentialsError)
+        it 'returns nil when no credentials are present' do
+          ENVProvider.new('AMAZON').credentials.should be_nil
         end
 
         it 'returns credentials when provided' do
@@ -257,10 +253,8 @@ module AWS
 
         let(:mock_credential_file) { File.expand_path('../../../mock-credential-file.txt', __FILE__) }
 
-        it 'raises an error when no credentials are present' do
-          lambda {
-            CredentialFileProvider.new('/no/file/here').credentials
-          }.should raise_error(Errors::MissingCredentialsError)
+        it 'returns nil when no credentials are present' do
+          CredentialFileProvider.new('/no/file/here').credentials.should be_nil
         end
 
         it 'reads credentials from a credential file' do
