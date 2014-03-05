@@ -5,8 +5,8 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          s3_endpoint = context.config[:endpoint]
-          region = context.config[:region]
+          s3_endpoint = context.config.endpoint
+          region = context.config.region
           create_bucket_params = context.params[:create_bucket_configuration]
           location_constraint = nil
 
