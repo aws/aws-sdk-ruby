@@ -61,7 +61,7 @@ module AWS
     endpoint_prefix 'glacier'
 
     # @option options[String] :account_id ('-')
-    def intialize options = {}
+    def initialize options = {}
       @account_id = options[:account_id] || '-'
       super
     end
