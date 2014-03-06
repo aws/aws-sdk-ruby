@@ -33,8 +33,7 @@ module AWS
       # @api private
       class ConnectionPool
 
-        @pools_mutex = Mutex.new
-        @pools = {}
+        @pools = []
 
         # @api private
         OPTIONS = [
@@ -226,16 +225,15 @@ module AWS
           #
           # @return [ConnectionPool]
           def new options = {}
-            options = pool_options(options)
-            @pools_mutex.synchronize do
-              @pools[options] ||= super(options)
-            end
+            pool = super(pool_options(options))
+            @pools << pool
+            pool
           end
 
           # @return [Array<ConnectionPool>] Returns a list of of the constructed
           #   connection pools.
           def pools
-            @pools.values
+            @pools.dup
           end
 
           private
