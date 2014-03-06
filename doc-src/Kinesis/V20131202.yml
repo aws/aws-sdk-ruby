@@ -1,22 +1,9 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 ---
 :create_stream: |-
   Calls the CreateStream API operation.
   @param [Hash] options
     * `:stream_name` - *required* - (String) A name to identify the stream. The stream name is scoped to the AWS account used by the application that creates the stream. It is also scoped by region. That is, two streams in two different AWS accounts can have the same name, and two streams in the same AWS account, but in two different regions, can have the same name.
-    * `:shard_count` - *required* - (Integer) The number of shards that the stream will use. The throughput of the stream is a function of the number of shards; more shards are required for greater provisioned throughput. Note: The default limit for an AWS account is two shards per stream. If you need to create a stream with more than two shards, contact AWS Support to increase the limit on your account.
+    * `:shard_count` - *required* - (Integer) The number of shards that the stream will use. The throughput of the stream is a function of the number of shards; more shards are required for greater provisioned throughput. Note: The default limit for an AWS account is five shards per stream. If you need to create a stream with more than five shards, contact AWS Support to increase the limit on your account.
   @return [Core::Response]
 :delete_stream: |-
   Calls the DeleteStream API operation.
@@ -95,7 +82,7 @@
     * `:data` - *required* - (String) The data blob to put into the record, which must be Base64 encoded. The maximum size of the data blob is 50 kilobytes (KB).
     * `:partition_key` - *required* - (String) Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 bytes. Amazon Kinesis uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key will map to the same shard within the stream.
     * `:explicit_hash_key` - (String) The hash value used to explicitly determine the shard the data record is assigned to by overriding the partition key hash.
-    * `:sequence_number_for_ordering` - (String) The sequence number to use as the initial number for the partition key. Subsequent calls to PutRecord from the same client and for the same partition key will increase from the SequenceNumberForOrdering value.
+    * `:sequence_number_for_ordering` - (String) Guarantees strictly increasing sequence numbers, for puts from the same client and to the same partition key. Usage: set the SequenceNumberForOrdering of record n to the sequence number of record n-1 (as returned in the PutRecordResult when putting record n-1). If this parameter is not set, records will be coarsely ordered based on arrival time.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:shard_id` - (String)
