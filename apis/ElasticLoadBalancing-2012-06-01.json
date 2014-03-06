@@ -582,6 +582,67 @@
         }
       }
     },
+    "describe_load_balancer_attributes": {
+      "name": "DescribeLoadBalancerAttributes",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "load_balancer_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "LoadBalancerName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeLoadBalancerAttributesResult"
+        },
+        "members": {
+          "load_balancer_attributes": {
+            "type": "structure",
+            "serialized_name": "LoadBalancerAttributes",
+            "members": {
+              "cross_zone_load_balancing": {
+                "type": "structure",
+                "serialized_name": "CrossZoneLoadBalancing",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  }
+                }
+              },
+              "access_log": {
+                "type": "structure",
+                "serialized_name": "AccessLog",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "s3_bucket_name": {
+                    "type": "string",
+                    "serialized_name": "S3BucketName"
+                  },
+                  "emit_interval": {
+                    "type": "integer",
+                    "serialized_name": "EmitInterval"
+                  },
+                  "s3_bucket_prefix": {
+                    "type": "string",
+                    "serialized_name": "S3BucketPrefix"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "describe_load_balancer_policies": {
       "name": "DescribeLoadBalancerPolicies",
       "http_method": "POST",
@@ -1085,6 +1146,112 @@
             "serialized_name": "AvailabilityZones",
             "members": {
               "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "modify_load_balancer_attributes": {
+      "name": "ModifyLoadBalancerAttributes",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "load_balancer_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "LoadBalancerName"
+          },
+          "load_balancer_attributes": {
+            "type": "structure",
+            "required": true,
+            "serialized_name": "LoadBalancerAttributes",
+            "members": {
+              "cross_zone_load_balancing": {
+                "type": "structure",
+                "serialized_name": "CrossZoneLoadBalancing",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "required": true,
+                    "serialized_name": "Enabled"
+                  }
+                }
+              },
+              "access_log": {
+                "type": "structure",
+                "serialized_name": "AccessLog",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "required": true,
+                    "serialized_name": "Enabled"
+                  },
+                  "s3_bucket_name": {
+                    "type": "string",
+                    "serialized_name": "S3BucketName"
+                  },
+                  "emit_interval": {
+                    "type": "integer",
+                    "serialized_name": "EmitInterval"
+                  },
+                  "s3_bucket_prefix": {
+                    "type": "string",
+                    "serialized_name": "S3BucketPrefix"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "ModifyLoadBalancerAttributesResult"
+        },
+        "members": {
+          "load_balancer_name": {
+            "type": "string",
+            "serialized_name": "LoadBalancerName"
+          },
+          "load_balancer_attributes": {
+            "type": "structure",
+            "serialized_name": "LoadBalancerAttributes",
+            "members": {
+              "cross_zone_load_balancing": {
+                "type": "structure",
+                "serialized_name": "CrossZoneLoadBalancing",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  }
+                }
+              },
+              "access_log": {
+                "type": "structure",
+                "serialized_name": "AccessLog",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "s3_bucket_name": {
+                    "type": "string",
+                    "serialized_name": "S3BucketName"
+                  },
+                  "emit_interval": {
+                    "type": "integer",
+                    "serialized_name": "EmitInterval"
+                  },
+                  "s3_bucket_prefix": {
+                    "type": "string",
+                    "serialized_name": "S3BucketPrefix"
+                  }
+                }
+              }
             }
           }
         }
