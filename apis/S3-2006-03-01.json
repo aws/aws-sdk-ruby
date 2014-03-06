@@ -36,7 +36,8 @@
     "Aws::Plugins::S3CompleteMultipartUploadFix",
     "Aws::Plugins::S3GetBucketLocationFix",
     "Aws::Plugins::S3Md5s",
-    "Aws::Plugins::S3Redirects"
+    "Aws::Plugins::S3Redirects",
+    "Aws::Plugins::S3LocationConstraint"
   ],
   "operations": {
     "abort_multipart_upload": {
