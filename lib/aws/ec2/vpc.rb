@@ -48,6 +48,14 @@ module AWS
         resp.vpc_set.find{|v| v.vpc_id == vpc_id }
       end
 
+      # @return [Boolean] Returns `true` if the resource exists.
+      def exists?
+        get_resource
+        true
+      rescue Errors::InvalidVpcID::NotFound
+        false
+      end
+
       # Deletes the current VPC.  The VPC must be empty before it can
       # be deleted.
       # @return [nil]
