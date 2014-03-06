@@ -22,15 +22,13 @@ module Aws
         end
 
         def set_location_constraint(context, region)
-          if context.params[:create_bucket_configuration].nil?
-            context.params[:create_bucket_configuration] = {}
-          end
+          context.params[:create_bucket_configuration] ||= {}
           context.params[:create_bucket_configuration][:location_constraint] = region
         end
 
       end
 
-      handler(Handler, priority: 90, operations: [:create_bucket])
+      handler(Handler, step: :initialize, operations: [:create_bucket])
 
     end
   end
