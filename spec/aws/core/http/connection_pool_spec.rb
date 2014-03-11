@@ -16,8 +16,7 @@ require 'spec_helper'
 describe AWS::Core::Http::ConnectionPool do
 
   def pool options = {}
-    @pools ||= {}
-    @pools[options] ||= AWS::Core::Http::ConnectionPool.new(options)
+    AWS::Core::Http::ConnectionPool.new(options)
   end
 
   let(:endpoint) { 'http://foo.com' }
@@ -38,15 +37,15 @@ describe AWS::Core::Http::ConnectionPool do
     end
 
     it 'returns a new pool for different options' do
-      p1 = AWS::Core::Http::ConnectionPool.new(:http_read_timeout => 10)
-      p2 = AWS::Core::Http::ConnectionPool.new(:http_read_timeout => 20)
+      p1 = pool(:http_read_timeout => 10)
+      p2 = pool(:http_read_timeout => 20)
       p1.should_not be(p2)
     end
 
-    it 'returns a new pool when called with the same options' do
-      p1 = AWS::Core::Http::ConnectionPool.new(:http_read_timeout => 10)
-      p2 = AWS::Core::Http::ConnectionPool.new(:http_read_timeout => 10)
-      p1.should_not be(p2)
+    it 'returns the same pool when called with the same options' do
+      p1 = pool(:http_read_timeout => 10)
+      p2 = pool(:http_read_timeout => 10)
+      p1.should be(p2)
     end
 
   end
