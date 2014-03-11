@@ -29,7 +29,7 @@ module AWS
     #   snapshot.exists?
     #
     # @example Get a map of snapshot IDs to snapshot status
-    #   ec2.snapshots.inject({}) { |m, s| m[i.id] = s.status; m }
+    #   ec2.snapshots.inject({}) { |m, s| m[s.id] = s.status; m }
     #   # => { "snap-12345678" => :pending, "snap-87654321" => :completed }
     class SnapshotCollection < Collection
 
