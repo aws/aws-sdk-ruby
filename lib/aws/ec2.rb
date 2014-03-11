@@ -123,7 +123,7 @@ module AWS
   # In the following example we release all elastic IP addresses that are
   # not currently associated with an instance:
   #
-  #     ec2.select{|ip| !ip.associated? }.each(&:release)
+  #     ec2.elastic_ips.select{|ip| !ip.associated? }.each(&:release)
   #
   # ## Key Pairs
   #
