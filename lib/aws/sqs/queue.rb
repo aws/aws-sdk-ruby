@@ -95,12 +95,12 @@ module AWS
       #   characters not included in the list, your request will be
       #   rejected.
       #
-      #   * #x9
-      #   * #xA
-      #   * #xD
-      #   * #x20 to #xD7FF
-      #   * #xE000 to #xFFFD
-      #   * #x10000 to #x10FFFF
+      #   * `#x9`
+      #   * `#xA`
+      #   * `#xD`
+      #   * `#x20` to `#xD7FF`
+      #   * `#xE000` to `#xFFFD`
+      #   * `#x10000` to `#x10FFFF`
       #
       # @param [Hash] options
       #
