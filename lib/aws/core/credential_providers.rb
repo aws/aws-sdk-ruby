@@ -29,19 +29,25 @@ module AWS
         # The list of possible keys in the hash returned by {#credentials}.
         KEYS = Set[:access_key_id, :secret_access_key, :session_token]
 
-        # @return [Hash,nil] Returns a hash of credentials containg at least
+        # @return [Hash] Returns a hash of credentials containg at least
         #   the `:access_key_id` and `:secret_access_key`.  The hash may
-        #   also contain a `:session_token`. Returns nil if no
-        #   credentials found.
+        #   also contain a `:session_token`.
+        #
+        # @raise [Errors::MissingCredentialsError] Raised when the
+        #   `:access_key_id` or the `:secret_access_key` can not be found.
+        #
         def credentials
-          @cached_credentials ||= begin
-            creds = get_credentials
-            unless creds[:access_key_id] and creds[:secret_access_key]
-              return nil
-            end
-            creds
-          end
+          raise Errors::MissingCredentialsError unless set?
           @cached_credentials.dup
+        end
+
+        # @return [Boolean] Returns true if has credentials and it contains
+        #   at least the `:access_key_id` and `:secret_access_key`.
+        #
+        def set?
+          @cached_credentials ||= get_credentials
+          @cached_credentials[:access_key_id] &&
+            @cached_credentials[:secret_access_key]
         end
 
         # @return [String] Returns the AWS access key id.
@@ -114,11 +120,15 @@ module AWS
 
         def credentials
           providers.each do |provider|
-            if creds = provider.credentials
-              return creds
+            if provider.set?
+              return provider.credentials
             end
           end
           raise Errors::MissingCredentialsError
+        end
+
+        def set?
+          providers.any?(&:set?)
         end
 
         def refresh
@@ -301,9 +311,13 @@ module AWS
         attr_accessor :credentials_expiration
 
         # Refresh provider if existing credentials will be expired in 5 min
-        # @return [Hash,nil] Returns a hash of credentials containg at least
+        # @return [Hash] Returns a hash of credentials containg at least
         #   the `:access_key_id` and `:secret_access_key`.  The hash may
-        #   also contain a `:session_token`. Returns nil if no credentials found.
+        #   also contain a `:session_token`.
+        #
+        # @raise [Errors::MissingCredentialsError] Raised when the
+        #   `:access_key_id` or the `:secret_access_key` can not be found.
+        #
         def credentials
           if @credentials_expiration && @credentials_expiration.utc <= (Time.now.utc + (15 * 60))
             refresh
