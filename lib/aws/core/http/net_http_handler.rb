@@ -24,7 +24,7 @@ module AWS
       class NetHttpHandler
 
         class TruncatedBodyError < IOError; end
-        
+
         # @api private
         NETWORK_ERRORS = [
           SocketError, EOFError, IOError, Timeout::Error,
@@ -34,7 +34,7 @@ module AWS
 
         # (see ConnectionPool.new)
         def initialize options = {}
-          @pool = ConnectionPool.new(options)
+          @pool = options[:connection_pool] || ConnectionPool.new(options)
           @verify_content_length = options[:verify_response_body_content_length]
         end
 

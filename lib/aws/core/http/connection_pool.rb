@@ -228,8 +228,18 @@ module AWS
           def new options = {}
             options = pool_options(options)
             @pools_mutex.synchronize do
-              @pools[options] ||= super(options)
+              @pools[options] ||= build(options)
             end
+          end
+
+          # Constructs and returns a new connection pool.  This pool is never
+          # shared.
+          # @option (see new)
+          # @return [ConnectionPool]
+          def build(options = {})
+            pool = allocate
+            pool.send(:initialize, pool_options(options))
+            pool
           end
 
           # @return [Array<ConnectionPool>] Returns a list of of the constructed
