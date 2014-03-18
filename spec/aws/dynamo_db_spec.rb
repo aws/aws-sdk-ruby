@@ -26,6 +26,25 @@ module AWS
     it_behaves_like 'a class that accepts configuration',
       :dynamo_db_client
 
+    context '#new' do
+
+      context 'with api_version' do
+        let(:dynamo_db) { DynamoDB.new(:dynamo_db => { :api_version => api_version }) }
+
+        context '"2011-12-05" should return V20111205' do
+          let(:api_version) { '2011-12-05' }
+          it { expect(client).to be_a(AWS::DynamoDB::Client::V20111205) }
+        end
+
+        context '"2012-08-10" should return V20120810' do
+          let(:api_version) { '2012-08-10' }
+          it { expect(client).to be_a(AWS::DynamoDB::Client::V20120810) }
+        end
+
+      end
+
+    end
+
     context '#tables' do
 
       it 'should return a tables collection' do
