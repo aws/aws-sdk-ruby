@@ -168,6 +168,10 @@
             "type": "boolean",
             "serialized_name": "UseCustomCookbooks"
           },
+          "use_opsworks_security_groups": {
+            "type": "boolean",
+            "serialized_name": "UseOpsworksSecurityGroups"
+          },
           "custom_cookbooks_source": {
             "type": "structure",
             "serialized_name": "CustomCookbooksSource",
@@ -526,6 +530,10 @@
           "install_updates_on_boot": {
             "type": "boolean",
             "serialized_name": "InstallUpdatesOnBoot"
+          },
+          "ebs_optimized": {
+            "type": "boolean",
+            "serialized_name": "EbsOptimized"
           }
         }
       },
@@ -655,6 +663,14 @@
                   "type": "integer",
                   "required": true,
                   "serialized_name": "Size"
+                },
+                "volume_type": {
+                  "type": "string",
+                  "serialized_name": "VolumeType"
+                },
+                "iops": {
+                  "type": "integer",
+                  "serialized_name": "Iops"
                 }
               }
             }
@@ -715,6 +731,10 @@
           "install_updates_on_boot": {
             "type": "boolean",
             "serialized_name": "InstallUpdatesOnBoot"
+          },
+          "use_ebs_optimized_instances": {
+            "type": "boolean",
+            "serialized_name": "UseEbsOptimizedInstances"
           }
         }
       },
@@ -809,6 +829,10 @@
           "use_custom_cookbooks": {
             "type": "boolean",
             "serialized_name": "UseCustomCookbooks"
+          },
+          "use_opsworks_security_groups": {
+            "type": "boolean",
+            "serialized_name": "UseOpsworksSecurityGroups"
           },
           "custom_cookbooks_source": {
             "type": "structure",
@@ -1670,6 +1694,10 @@
                 "install_updates_on_boot": {
                   "type": "boolean",
                   "serialized_name": "InstallUpdatesOnBoot"
+                },
+                "ebs_optimized": {
+                  "type": "boolean",
+                  "serialized_name": "EbsOptimized"
                 }
               }
             }
@@ -1819,6 +1847,14 @@
                       "size": {
                         "type": "integer",
                         "serialized_name": "Size"
+                      },
+                      "volume_type": {
+                        "type": "string",
+                        "serialized_name": "VolumeType"
+                      },
+                      "iops": {
+                        "type": "integer",
+                        "serialized_name": "Iops"
                       }
                     }
                   }
@@ -1924,6 +1960,10 @@
                 "install_updates_on_boot": {
                   "type": "boolean",
                   "serialized_name": "InstallUpdatesOnBoot"
+                },
+                "use_ebs_optimized_instances": {
+                  "type": "boolean",
+                  "serialized_name": "UseEbsOptimizedInstances"
                 }
               }
             }
@@ -2183,6 +2223,14 @@
                 "created_at": {
                   "type": "string",
                   "serialized_name": "CreatedAt"
+                },
+                "volume_type": {
+                  "type": "string",
+                  "serialized_name": "VolumeType"
+                },
+                "iops": {
+                  "type": "integer",
+                  "serialized_name": "Iops"
                 }
               }
             }
@@ -2282,6 +2330,10 @@
                 "type": "string",
                 "serialized_name": "Name"
               },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
               "layers_count": {
                 "type": "integer",
                 "serialized_name": "LayersCount"
@@ -2301,6 +2353,10 @@
                   "connection_lost": {
                     "type": "integer",
                     "serialized_name": "ConnectionLost"
+                  },
+                  "online": {
+                    "type": "integer",
+                    "serialized_name": "Online"
                   },
                   "pending": {
                     "type": "integer",
@@ -2333,6 +2389,10 @@
                   "stopped": {
                     "type": "integer",
                     "serialized_name": "Stopped"
+                  },
+                  "stopping": {
+                    "type": "integer",
+                    "serialized_name": "Stopping"
                   },
                   "terminated": {
                     "type": "integer",
@@ -2381,6 +2441,10 @@
                 "name": {
                   "type": "string",
                   "serialized_name": "Name"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
                 },
                 "region": {
                   "type": "string",
@@ -2448,6 +2512,10 @@
                 "use_custom_cookbooks": {
                   "type": "boolean",
                   "serialized_name": "UseCustomCookbooks"
+                },
+                "use_opsworks_security_groups": {
+                  "type": "boolean",
+                  "serialized_name": "UseOpsworksSecurityGroups"
                 },
                 "custom_cookbooks_source": {
                   "type": "structure",
@@ -2750,6 +2818,14 @@
                 "availability_zone": {
                   "type": "string",
                   "serialized_name": "AvailabilityZone"
+                },
+                "volume_type": {
+                  "type": "string",
+                  "serialized_name": "VolumeType"
+                },
+                "iops": {
+                  "type": "integer",
+                  "serialized_name": "Iops"
                 }
               }
             }
@@ -3464,6 +3540,14 @@
                   "type": "integer",
                   "required": true,
                   "serialized_name": "Size"
+                },
+                "volume_type": {
+                  "type": "string",
+                  "serialized_name": "VolumeType"
+                },
+                "iops": {
+                  "type": "integer",
+                  "serialized_name": "Iops"
                 }
               }
             }
@@ -3524,6 +3608,10 @@
           "install_updates_on_boot": {
             "type": "boolean",
             "serialized_name": "InstallUpdatesOnBoot"
+          },
+          "use_ebs_optimized_instances": {
+            "type": "boolean",
+            "serialized_name": "UseEbsOptimizedInstances"
           }
         }
       }
@@ -3664,6 +3752,10 @@
               "ebs",
               "instance-store"
             ]
+          },
+          "use_opsworks_security_groups": {
+            "type": "boolean",
+            "serialized_name": "UseOpsworksSecurityGroups"
           }
         }
       }

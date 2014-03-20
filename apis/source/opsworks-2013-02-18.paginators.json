@@ -24,6 +24,9 @@
     "DescribeLoadBasedAutoScaling": {
       "result_key": "LoadBasedAutoScalingConfigurations"
     },
+    "DescribePermissions": {
+      "result_key": "Permissions"
+    },
     "DescribeRaidArrays": {
       "result_key": "RaidArrays"
     },

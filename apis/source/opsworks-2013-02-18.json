@@ -155,7 +155,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Attaches an Elastic Load Balancing load balancer to a specified layer.</p>\n  <note>\n      <p>You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For\n        more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html\">\n          Elastic Load Balancing Developer Guide</a>.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Attaches an Elastic Load Balancing load balancer to a specified layer. For more information, see \n    <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/load-balancer-elb.html\">Elastic Load Balancing</a>.</p>\n  <note>\n      <p>You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For\n        more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html\">\n          Elastic Load Balancing Developer Guide</a>.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "CloneStack": {
       "name": "CloneStack",
@@ -261,6 +261,12 @@
             "box": true,
             "documentation": "\n  <p>Whether to use custom cookbooks.</p>\n  "
           },
+          "UseOpsworksSecurityGroups": {
+            "shape_name": "Boolean",
+            "type": "boolean",
+            "box": true,
+            "documentation": null
+          },
           "CustomCookbooksSource": {
             "shape_name": "Source",
             "type": "structure",
@@ -284,12 +290,12 @@
               "Username": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate AWS access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate IAM access key ID.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
               },
               "Password": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate AWS secret key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
               },
               "SshKey": {
                 "shape_name": "String",
@@ -441,12 +447,12 @@
               "Username": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate AWS access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate IAM access key ID.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
               },
               "Password": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate AWS secret key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
               },
               "SshKey": {
                 "shape_name": "String",
@@ -610,7 +616,7 @@
                   "restart",
                   "undeploy"
                 ],
-                "documentation": "\n  <p>Specifies the deployment operation. You can specify only one command.</p>\n  <p>For stacks, the available commands are:</p>\n  <ul>\n    <li>\n<code>execute_recipes</code>: Execute the recipes that are specified by the <code>Args</code> parameter.</li>\n    <li>\n<code>install_dependencies</code>: Installs the stack's dependencies.</li>\n    <li>\n<code>update_custom_cookbooks</code>: Update the stack's custom cookbooks.</li>\n    <li>\n<code>update_dependencies</code>: Update the stack's dependencies.</li>\n  </ul>\n  <p>For apps, the available commands are:</p>\n  <ul>\n  <li>\n<code>deploy</code>: Deploy the app.</li>\n  <li>\n<code>rollback</code> Roll the app back to the previous version. When you update an app, AWS OpsWorks stores the previous version,\n            up to a maximum of five versions. You can use this command to roll an app back as many as four versions.</li>\n  <li>\n<code>start</code>: Start the app's web or application server.</li>\n  <li>\n<code>stop</code>: Stop the app's web or application server.</li>\n  <li>\n<code>restart</code>: Restart the app's web or application server.</li>\n  <li>\n<code>undeploy</code>: Undeploy the app.</li>\n  </ul>\n  ",
+                "documentation": "\n  <p>Specifies the operation. You can specify only one command.</p>\n  <p>For stacks, the following commands are available:</p>\n  <ul>\n    <li>\n<code>execute_recipes</code>: Execute one or more recipes. To specify the recipes, set an <code>Args</code> parameter named\n      <code>recipes</code> to the list of recipes to be executed. For example, to\n      execute <code>phpapp::appsetup</code>, set <code>Args</code> to <code>{\"recipes\":[\"phpapp::appsetup\"]}</code>.</li>\n    <li>\n<code>install_dependencies</code>: Install the stack's dependencies.</li>\n    <li>\n<code>update_custom_cookbooks</code>: Update the stack's custom cookbooks.</li>\n    <li>\n<code>update_dependencies</code>: Update the stack's dependencies.</li>\n  </ul>\n  <p>For apps, the following commands are available:</p>\n  <ul>\n  <li>\n<code>deploy</code>: Deploy an app. Rails apps have an optional <code>Args</code> parameter named <code>migrate</code>.\n    Set <code>Args</code> to {\"migrate\":[\"true\"]} to migrate the database. The default setting is {\"migrate\":[\"false\"]}.</li>\n  <li>\n<code>rollback</code> Roll the app back to the previous version. When you update an app, AWS OpsWorks stores the previous version,\n            up to a maximum of five versions. You can use this command to roll an app back as many as four versions.</li>\n  <li>\n<code>start</code>: Start the app's web or application server.</li>\n  <li>\n<code>stop</code>: Stop the app's web or application server.</li>\n  <li>\n<code>restart</code>: Restart the app's web or application server.</li>\n  <li>\n<code>undeploy</code>: Undeploy the app.</li>\n  </ul>\n  ",
                 "required": true
               },
               "Args": {
@@ -631,7 +637,7 @@
                   },
                   "documentation": null
                 },
-                "documentation": "\n  <p>An array of command arguments. This parameter is currently used only to specify the list of recipes to be executed by the <code>ExecuteRecipes</code>\n      command.</p>\n  "
+                "documentation": "\n  <p>The arguments of those commands that take arguments.\n    It should be set to a JSON object with the following format:</p>\n    <p><code>{\"arg_name\":[\"value1\", \"value2\", ...]}</code></p>\n  "
               }
             },
             "documentation": "\n  <p>A <code>DeploymentCommand</code> object that specifies the deployment command and any associated arguments.</p>\n  ",
@@ -781,6 +787,12 @@
             "type": "boolean",
             "box": true,
             "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
+          },
+          "EbsOptimized": {
+            "shape_name": "Boolean",
+            "type": "boolean",
+            "box": true,
+            "documentation": null
           }
         },
         "documentation": null
@@ -851,7 +863,7 @@
               "monitoring-master",
               "custom"
             ],
-            "documentation": "\n  <p>The layer type. A stack cannot have more than one layer of the same type. This parameter must be set to one of the following:</p>\n  <ul>\n  <li>lb: An HAProxy layer</li>\n  <li>web: A Static Web Server layer</li>\n  <li>rails-app: A Rails App Server layer</li>\n  <li>php-app: A PHP App Server layer</li>\n  <li>nodejs-app: A Node.js App Server layer</li>\n  <li>memcached: A Memcached layer</li>\n  <li>db-master: A MySQL layer</li>\n  <li>monitoring-master: A Ganglia layer</li>\n  <li>custom: A custom layer</li>\n  </ul>\n  ",
+            "documentation": "\n  <p>The layer type. A stack cannot have more than one built-in layer of the same type. It can have any number of custom layers.\n    This parameter must be set to one of the following:</p>\n  <ul>\n    <li>custom: A custom layer</li>\n    <li>db-master: A MySQL layer</li>\n    <li>java-app: A Java App Server layer</li>\n    <li>lb: An HAProxy layer</li>\n    <li>memcached: A Memcached layer</li>\n    <li>monitoring-master: A Ganglia layer</li>\n    <li>nodejs-app: A Node.js App Server layer</li>\n    <li>php-app: A PHP App Server layer</li>\n    <li>rails-app: A Rails App Server layer</li>\n    <li>web: A Static Web Server layer</li>\n  </ul>\n  ",
             "required": true
           },
           "Name": {
@@ -964,6 +976,17 @@
                   "box": true,
                   "documentation": "\n  <p>The volume size.</p>\n  ",
                   "required": true
+                },
+                "VolumeType": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": null
+                },
+                "Iops": {
+                  "shape_name": "Integer",
+                  "type": "integer",
+                  "box": true,
+                  "documentation": null
                 }
               },
               "documentation": "\n  <p>Describes an Amazon EBS volume configuration.</p> \n  "
@@ -1050,6 +1073,12 @@
             "type": "boolean",
             "box": true,
             "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
+          },
+          "UseEbsOptimizedInstances": {
+            "shape_name": "Boolean",
+            "type": "boolean",
+            "box": true,
+            "documentation": null
           }
         },
         "documentation": null
@@ -1195,6 +1224,12 @@
             "box": true,
             "documentation": "\n  <p>Whether the stack uses custom cookbooks.</p>\n  "
           },
+          "UseOpsworksSecurityGroups": {
+            "shape_name": "Boolean",
+            "type": "boolean",
+            "box": true,
+            "documentation": null
+          },
           "CustomCookbooksSource": {
             "shape_name": "Source",
             "type": "structure",
@@ -1218,12 +1253,12 @@
               "Username": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate AWS access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate IAM access key ID.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
               },
               "Password": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate AWS secret key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
               },
               "SshKey": {
                 "shape_name": "String",
@@ -1250,7 +1285,7 @@
               "ebs",
               "instance-store"
             ],
-            "documentation": "\n  <p>The default root device type. This value is used by default for all instances in the cloned stack,\n         but you can override it when you create an instance. The default option is <code>instance-store</code>. For more information, see \n  <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>\n  "
+            "documentation": "\n  <p>The default root device type. This value is used by default for all instances in the stack,\n         but you can override it when you create an instance. The default option is <code>instance-store</code>. For more information, see \n  <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>\n  "
           }
         },
         "documentation": null
@@ -1298,7 +1333,7 @@
           "SshUsername": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n  <p>The user's SSH user name.</p>\n  "
+            "documentation": "\n  <p>The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation\n    marks, AWS OpsWorks removes them. For example, <code>my.name</code> will be changed to <code>myname</code>.\n    If you do not specify an SSH user name, AWS OpsWorks generates one from the IAM user name.\n  </p>\n  "
           },
           "SshPublicKey": {
             "shape_name": "String",
@@ -1757,12 +1792,12 @@
                     "Username": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate AWS access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
+                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate IAM access key ID.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
                     },
                     "Password": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate AWS secret key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
                     },
                     "SshKey": {
                       "shape_name": "String",
@@ -2105,7 +2140,7 @@
                         "restart",
                         "undeploy"
                       ],
-                      "documentation": "\n  <p>Specifies the deployment operation. You can specify only one command.</p>\n  <p>For stacks, the available commands are:</p>\n  <ul>\n    <li>\n<code>execute_recipes</code>: Execute the recipes that are specified by the <code>Args</code> parameter.</li>\n    <li>\n<code>install_dependencies</code>: Installs the stack's dependencies.</li>\n    <li>\n<code>update_custom_cookbooks</code>: Update the stack's custom cookbooks.</li>\n    <li>\n<code>update_dependencies</code>: Update the stack's dependencies.</li>\n  </ul>\n  <p>For apps, the available commands are:</p>\n  <ul>\n  <li>\n<code>deploy</code>: Deploy the app.</li>\n  <li>\n<code>rollback</code> Roll the app back to the previous version. When you update an app, AWS OpsWorks stores the previous version,\n            up to a maximum of five versions. You can use this command to roll an app back as many as four versions.</li>\n  <li>\n<code>start</code>: Start the app's web or application server.</li>\n  <li>\n<code>stop</code>: Stop the app's web or application server.</li>\n  <li>\n<code>restart</code>: Restart the app's web or application server.</li>\n  <li>\n<code>undeploy</code>: Undeploy the app.</li>\n  </ul>\n  ",
+                      "documentation": "\n  <p>Specifies the operation. You can specify only one command.</p>\n  <p>For stacks, the following commands are available:</p>\n  <ul>\n    <li>\n<code>execute_recipes</code>: Execute one or more recipes. To specify the recipes, set an <code>Args</code> parameter named\n      <code>recipes</code> to the list of recipes to be executed. For example, to\n      execute <code>phpapp::appsetup</code>, set <code>Args</code> to <code>{\"recipes\":[\"phpapp::appsetup\"]}</code>.</li>\n    <li>\n<code>install_dependencies</code>: Install the stack's dependencies.</li>\n    <li>\n<code>update_custom_cookbooks</code>: Update the stack's custom cookbooks.</li>\n    <li>\n<code>update_dependencies</code>: Update the stack's dependencies.</li>\n  </ul>\n  <p>For apps, the following commands are available:</p>\n  <ul>\n  <li>\n<code>deploy</code>: Deploy an app. Rails apps have an optional <code>Args</code> parameter named <code>migrate</code>.\n    Set <code>Args</code> to {\"migrate\":[\"true\"]} to migrate the database. The default setting is {\"migrate\":[\"false\"]}.</li>\n  <li>\n<code>rollback</code> Roll the app back to the previous version. When you update an app, AWS OpsWorks stores the previous version,\n            up to a maximum of five versions. You can use this command to roll an app back as many as four versions.</li>\n  <li>\n<code>start</code>: Start the app's web or application server.</li>\n  <li>\n<code>stop</code>: Stop the app's web or application server.</li>\n  <li>\n<code>restart</code>: Restart the app's web or application server.</li>\n  <li>\n<code>undeploy</code>: Undeploy the app.</li>\n  </ul>\n  ",
                       "required": true
                     },
                     "Args": {
@@ -2126,7 +2161,7 @@
                         },
                         "documentation": null
                       },
-                      "documentation": "\n  <p>An array of command arguments. This parameter is currently used only to specify the list of recipes to be executed by the <code>ExecuteRecipes</code>\n      command.</p>\n  "
+                      "documentation": "\n  <p>The arguments of those commands that take arguments.\n    It should be set to a JSON object with the following format:</p>\n    <p><code>{\"arg_name\":[\"value1\", \"value2\", ...]}</code></p>\n  "
                     }
                   },
                   "documentation": "\n  <p>Used to specify a deployment operation.</p>\n  "
@@ -2621,6 +2656,12 @@
                   "type": "boolean",
                   "box": true,
                   "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         If this value is set to <code>false</code>, you must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
+                },
+                "EbsOptimized": {
+                  "shape_name": "Boolean",
+                  "type": "boolean",
+                  "box": true,
+                  "documentation": null
                 }
               },
               "documentation": "\n    <p>Describes an instance.</p>\n  "
@@ -2837,6 +2878,17 @@
                         "box": true,
                         "documentation": "\n  <p>The volume size.</p>\n  ",
                         "required": true
+                      },
+                      "VolumeType": {
+                        "shape_name": "String",
+                        "type": "string",
+                        "documentation": null
+                      },
+                      "Iops": {
+                        "shape_name": "Integer",
+                        "type": "integer",
+                        "box": true,
+                        "documentation": null
                       }
                     },
                     "documentation": "\n  <p>Describes an Amazon EBS volume configuration.</p> \n  "
@@ -2985,6 +3037,12 @@
                   "type": "boolean",
                   "box": true,
                   "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         If this value is set to <code>false</code>, you must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
+                },
+                "UseEbsOptimizedInstances": {
+                  "shape_name": "Boolean",
+                  "type": "boolean",
+                  "box": true,
+                  "documentation": null
                 }
               },
               "documentation": "\n    <p>Describes a layer.</p>\n  "
@@ -3412,6 +3470,17 @@
                   "shape_name": "DateTime",
                   "type": "string",
                   "documentation": "\n  <p>When the RAID array was created.</p>\n  "
+                },
+                "VolumeType": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": null
+                },
+                "Iops": {
+                  "shape_name": "Integer",
+                  "type": "integer",
+                  "box": true,
+                  "documentation": null
                 }
               },
               "documentation": "\n  <p>Describes an instance's RAID array.</p>\n  "
@@ -3588,6 +3657,11 @@
                 "type": "string",
                 "documentation": "\n    <p>The stack name.</p>\n  "
               },
+              "Arn": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": null
+              },
               "LayersCount": {
                 "shape_name": "Integer",
                 "type": "integer",
@@ -3615,6 +3689,12 @@
                     "type": "integer",
                     "box": true,
                     "documentation": "\n    <p>The number of instances with <code>connection_lost</code> status.</p>\n  "
+                  },
+                  "Online": {
+                    "shape_name": "Integer",
+                    "type": "integer",
+                    "box": true,
+                    "documentation": null
                   },
                   "Pending": {
                     "shape_name": "Integer",
@@ -3663,6 +3743,12 @@
                     "type": "integer",
                     "box": true,
                     "documentation": "\n    <p>The number of instances with <code>stopped</code> status.</p>\n  "
+                  },
+                  "Stopping": {
+                    "shape_name": "Integer",
+                    "type": "integer",
+                    "box": true,
+                    "documentation": null
                   },
                   "Terminated": {
                     "shape_name": "Integer",
@@ -3753,6 +3839,11 @@
                   "type": "string",
                   "documentation": "\n  <p>The stack name.</p>\n  "
                 },
+                "Arn": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": null
+                },
                 "Region": {
                   "shape_name": "String",
                   "type": "string",
@@ -3839,6 +3930,12 @@
                   "box": true,
                   "documentation": "\n  <p>Whether the stack uses custom cookbooks.</p>\n  "
                 },
+                "UseOpsworksSecurityGroups": {
+                  "shape_name": "Boolean",
+                  "type": "boolean",
+                  "box": true,
+                  "documentation": null
+                },
                 "CustomCookbooksSource": {
                   "shape_name": "Source",
                   "type": "structure",
@@ -3862,12 +3959,12 @@
                     "Username": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate AWS access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
+                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate IAM access key ID.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
                     },
                     "Password": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate AWS secret key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
                     },
                     "SshKey": {
                       "shape_name": "String",
@@ -3899,7 +3996,7 @@
                     "ebs",
                     "instance-store"
                   ],
-                  "documentation": "\n  <p>The default root device type. This value is used by default for all instances in the cloned stack,\n         but you can override it when you create an instance. For more information, see\n  <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>\n  "
+                  "documentation": "\n  <p>The default root device type. This value is used by default for all instances in the stack,\n         but you can override it when you create an instance. For more information, see\n  <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>\n  "
                 }
               },
               "documentation": "\n  <p>Describes a stack.</p>\n  "
@@ -4313,6 +4410,17 @@
                   "shape_name": "String",
                   "type": "string",
                   "documentation": " \n  <p>The volume Availability Zone. For more information, see\n  <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html\">Regions and Endpoints</a>.</p>\n  "
+                },
+                "VolumeType": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": null
+                },
+                "Iops": {
+                  "shape_name": "Integer",
+                  "type": "integer",
+                  "box": true,
+                  "documentation": null
                 }
               },
               "documentation": "\n  <p>Describes an instance's Amazon EBS volume.</p> \n  "
@@ -4862,7 +4970,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Specifies a stack's permissions.  For more information, see\n  <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html\">Security and Permissions</a>.</p>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Specifies a user's permissions.  For more information, see\n  <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html\">Security and Permissions</a>.</p>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "SetTimeBasedAutoScaling": {
       "name": "SetTimeBasedAutoScaling",
@@ -5106,7 +5214,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Starts stack's instances. </p>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Starts a stack's instances. </p>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "StopInstance": {
       "name": "StopInstance",
@@ -5297,12 +5405,12 @@
               "Username": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate AWS access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate IAM access key ID.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
               },
               "Password": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate AWS secret key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
               },
               "SshKey": {
                 "shape_name": "String",
@@ -5681,6 +5789,17 @@
                   "box": true,
                   "documentation": "\n  <p>The volume size.</p>\n  ",
                   "required": true
+                },
+                "VolumeType": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": null
+                },
+                "Iops": {
+                  "shape_name": "Integer",
+                  "type": "integer",
+                  "box": true,
+                  "documentation": null
                 }
               },
               "documentation": "\n  <p>Describes an Amazon EBS volume configuration.</p> \n  "
@@ -5767,6 +5886,12 @@
             "type": "boolean",
             "box": true,
             "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
+          },
+          "UseEbsOptimizedInstances": {
+            "shape_name": "Boolean",
+            "type": "boolean",
+            "box": true,
+            "documentation": null
           }
         },
         "documentation": null
@@ -5947,12 +6072,12 @@
               "Username": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate AWS access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Username</code> to the appropriate IAM access key ID.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</li>\n  </ul>\n  "
               },
               "Password": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate AWS secret key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
               },
               "SshKey": {
                 "shape_name": "String",
@@ -5979,7 +6104,13 @@
               "ebs",
               "instance-store"
             ],
-            "documentation": "\n  <p>The default root device type. This value is used by default for all instances in the cloned stack,\n         but you can override it when you create an instance.\n         For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>\n  "
+            "documentation": "\n  <p>The default root device type. This value is used by default for all instances in the stack,\n         but you can override it when you create an instance.\n         For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>\n  "
+          },
+          "UseOpsworksSecurityGroups": {
+            "shape_name": "Boolean",
+            "type": "boolean",
+            "box": true,
+            "documentation": null
           }
         },
         "documentation": null
@@ -6028,7 +6159,7 @@
           "SshUsername": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n  <p>The user's new SSH user name.</p>\n  "
+            "documentation": "\n  <p>The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation\n    marks, AWS OpsWorks removes them. For example, <code>my.name</code> will be changed to <code>myname</code>.\n    If you do not specify an SSH user name, AWS OpsWorks generates one from the IAM user name.\n  </p>\n  "
           },
           "SshPublicKey": {
             "shape_name": "String",
