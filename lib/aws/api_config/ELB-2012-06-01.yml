@@ -319,6 +319,12 @@
                     :type: :boolean
                   EmitInterval:
                     :type: :integer
+              ConnectionDraining:
+                :children:
+                  Enabled:
+                    :type: :boolean
+                  Timeout:
+                    :type: :integer
 - :name: DescribeLoadBalancerPolicies
   :method: :describe_load_balancer_policies
   :inputs:
@@ -569,6 +575,13 @@
             - :integer
             S3BucketPrefix:
             - :string
+        ConnectionDraining:
+        - :structure:
+            Enabled:
+            - :boolean
+            - :required
+            Timeout:
+            - :integer
     - :required
   :outputs:
     :children:
@@ -586,6 +599,12 @@
                   Enabled:
                     :type: :boolean
                   EmitInterval:
+                    :type: :integer
+              ConnectionDraining:
+                :children:
+                  Enabled:
+                    :type: :boolean
+                  Timeout:
                     :type: :integer
 - :name: RegisterInstancesWithLoadBalancer
   :method: :register_instances_with_load_balancer

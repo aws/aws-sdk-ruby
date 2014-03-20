@@ -139,6 +139,9 @@
         * `:s3_bucket_name` - (String)
         * `:emit_interval` - (Integer)
         * `:s3_bucket_prefix` - (String)
+      * `:connection_draining` - (Hash)
+        * `:enabled` - (Boolean)
+        * `:timeout` - (Integer)
 :describe_load_balancer_policies: |-
   Calls the DescribeLoadBalancerPolicies API operation.
   @param [Hash] options
@@ -245,13 +248,16 @@
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name of the load balancer.
     * `:load_balancer_attributes` - *required* - (Hash) Attributes of the load balancer.
-      * `:cross_zone_load_balancing` - (Hash) The name of the load balancer attribute.
+      * `:cross_zone_load_balancing` - (Hash) The name of the load balancer attribute. If enabled, the load balancer routes the request traffic evenly across all back-end instances regardless of the Availability Zones. For more information, see Enable Cross-Zone Load Balancing.
         * `:enabled` - *required* - (Boolean) Specifies whether cross-zone load balancing is enabled for the load balancer.
-      * `:access_log` - (Hash) The name of the load balancer attribute.
+      * `:access_log` - (Hash) The name of the load balancer attribute. If enabled, the load balancer captures detailed information of all the requests and delivers the information to the Amazon S3 bucket you specify. For more information, see Enable Access Logs.
         * `:enabled` - *required* - (Boolean) Specifies whether access log is enabled for the load balancer.
         * `:s3_bucket_name` - (String) The name of the Amazon S3 bucket where the access logs are stored.
         * `:emit_interval` - (Integer) The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes. Default: 60 minutes
-        * `:s3_bucket_prefix` - (String) The logical hierarchy you created for your Amazon S3 bucket, for example /my-bucket-prefix/prod. If the prefix is not provided, the log is placed at the root level of the bucket.
+        * `:s3_bucket_prefix` - (String) The logical hierarchy you created for your Amazon S3 bucket, for example my-bucket-prefix/prod. If the prefix is not provided, the log is placed at the root level of the bucket.
+      * `:connection_draining` - (Hash) The name of the load balancer attribute. If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy back-end instance. For more information, see Enable Connection Draining.
+        * `:enabled` - *required* - (Boolean) Specifies whether connection draining is enabled for the load balancer.
+        * `:timeout` - (Integer) Specifies the maximum time (in seconds) to keep the existing connections open before deregistering the instances.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:load_balancer_name` - (String)
@@ -263,6 +269,9 @@
         * `:s3_bucket_name` - (String)
         * `:emit_interval` - (Integer)
         * `:s3_bucket_prefix` - (String)
+      * `:connection_draining` - (Hash)
+        * `:enabled` - (Boolean)
+        * `:timeout` - (Integer)
 :register_instances_with_load_balancer: |-
   Calls the RegisterInstancesWithLoadBalancer API operation.
   @param [Hash] options
