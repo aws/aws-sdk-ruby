@@ -5,8 +5,10 @@
     "resultWrapped":true,
     "serviceFullName":"Elastic Load Balancing",
     "signatureVersion":"v4",
-    "type":"query"
+    "type":"query",
+    "xmlNamespace":"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/"
   },
+  "documentation":"<fullname>Elastic Load Balancing</fullname>\n        \n        <p>\n        Elastic Load Balancing is a cost-effective and easy\n        to use web service to help you improve the availability and\n        scalability of your application running on Amazon Elastic Cloud Compute (Amazon EC2). It makes it easy for\n        you to distribute application loads between two or more\n        EC2 instances. Elastic Load Balancing supports the growth in traffic of your application by enabling availability through redundancy.\n        </p>\n        \n        <p>This guide provides detailed information about Elastic Load Balancing \n            actions, data types, and parameters that can be used for sending a \n            query request. Query requests are HTTP or HTTPS requests that use the \n            HTTP verb GET or POST and a query parameter named Action or Operation. \n            Action is used throughout this documentation, although Operation is \n            supported for backward compatibility with other AWS Query APIs.</p>\n                \n        <p>For detailed information on constructing a query request using the actions, data types, and parameters mentioned in this guide,\n            go to <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/using-query-api.html\">Using the Query API</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n                   \n        <p>For detailed information about Elastic Load Balancing features and their associated actions, go to \n            <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenarios.html\">Using Elastic Load Balancing</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        \n        <p>This reference guide is based on the current WSDL, which is available at:\n            <a href=\"http://ec2-downloads.s3.amazonaws.com/ElasticLoadBalancing.wsdl\"></a>   \n        </p>\n        <p><b>Endpoints</b></p>\n        <p>The examples in this guide assume that your load balancers are created in the US East (Northern Virginia) region and use us-east-1 as the endpoint.</p>\n        <p>You can create your load balancers in other AWS regions. For information about regions and endpoints supported by Elastic Load Balancing, see \n            <a href=\"http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html\">Regions and Endpoints</a> \n            in the Amazon Web Services General Reference.\n        </p>",
   "operations":{
     "ApplySecurityGroupsToLoadBalancer":{
       "http":{
@@ -14,24 +16,27 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["ApplySecurityGroupsToLoadBalancerInput"],
+        "shape":"ApplySecurityGroupsToLoadBalancerInput",
         "documentation":"<p>\n            The input for the <a>ApplySecurityGroupsToLoadBalancer</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["ApplySecurityGroupsToLoadBalancerOutput"],
+        "shape":"ApplySecurityGroupsToLoadBalancerOutput",
         "documentation":"<p>\n            The out for the <a>ApplySecurityGroupsToLoadBalancer</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         },
         {
-          "$extends":["InvalidSecurityGroupException"],
+          "shape":"InvalidSecurityGroupException",
+          "exception":true,
           "documentation":"<p>\n            One or more specified security groups do not exist.  \n        </p>"
         }
       ],
@@ -43,28 +48,32 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["AttachLoadBalancerToSubnetsInput"],
+        "shape":"AttachLoadBalancerToSubnetsInput",
         "documentation":"<p>\n            The input for the <a>AttachLoadBalancerToSubnets</a> action.  \n        </p>"
       },
       "output":{
-        "$extends":["AttachLoadBalancerToSubnetsOutput"],
+        "shape":"AttachLoadBalancerToSubnetsOutput",
         "documentation":"<p>\n            The output for the <a>AttachLoadBalancerToSubnets</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         },
         {
-          "$extends":["SubnetNotFoundException"],
+          "shape":"SubnetNotFoundException",
+          "exception":true,
           "documentation":"<p>\n          One or more subnets were not found.\n        </p>"
         },
         {
-          "$extends":["InvalidSubnetException"],
+          "shape":"InvalidSubnetException",
+          "exception":true,
           "documentation":"<p>\n            The VPC has no Internet gateway. \n        </p>"
         }
       ],
@@ -76,17 +85,20 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["ConfigureHealthCheckInput"],
+        "shape":"ConfigureHealthCheckInput",
         "documentation":"<p>\n            Input for the <a>ConfigureHealthCheck</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["ConfigureHealthCheckOutput"],
+        "shape":"ConfigureHealthCheckOutput",
         "documentation":"<p>\n            The output for the <a>ConfigureHealthCheck</a> action.\n        </p>"
       },
-      "errors":[{
-          "$extends":["AccessPointNotFoundException"],
+      "errors":[
+        {
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
-        }],
+        }
+      ],
       "documentation":"<p>\n            Specifies the health check settings to use for evaluating the health state of your back-end instances.            \n        </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#healthcheck\">Health Check</a> in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <examples>      \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?HealthCheck.HealthyThreshold=2\n&HealthCheck.UnhealthyThreshold=2\n&LoadBalancerName=MyLoadBalancer\n&HealthCheck.Target=HTTP:80/ping\n&HealthCheck.Interval=30\n&HealthCheck.Timeout=3\n&Version=2012-06-01\n&Action=ConfigureHealthCheck\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><ConfigureHealthCheckResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ConfigureHealthCheckResult>\n    <HealthCheck>\n      <Interval>30</Interval>\n      <Target>HTTP:80/ping</Target>\n      <HealthyThreshold>2</HealthyThreshold>\n      <Timeout>3</Timeout>\n      <UnhealthyThreshold>2</UnhealthyThreshold>\n    </HealthCheck>\n</ConfigureHealthCheckResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ConfigureHealthCheckResponse>\n </queryresponse>\n        </examples>"
     },
     "CreateAppCookieStickinessPolicy":{
@@ -95,28 +107,32 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["CreateAppCookieStickinessPolicyInput"],
+        "shape":"CreateAppCookieStickinessPolicyInput",
         "documentation":"<p>\n            The input for the <a>CreateAppCookieStickinessPolicy</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["CreateAppCookieStickinessPolicyOutput"],
+        "shape":"CreateAppCookieStickinessPolicyOutput",
         "documentation":"<p>\n            The output for the <a>CreateAppCookieStickinessPolicy</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["DuplicatePolicyNameException"],
+          "shape":"DuplicatePolicyNameException",
+          "exception":true,
           "documentation":"<p>\n            Policy with the same name exists for this load balancer.\n            Please choose another name.\n        </p>"
         },
         {
-          "$extends":["TooManyPoliciesException"],
+          "shape":"TooManyPoliciesException",
+          "exception":true,
           "documentation":"<p>\n            Quota for number of policies for this load balancer\n            has already been reached.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
@@ -128,28 +144,32 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["CreateLBCookieStickinessPolicyInput"],
+        "shape":"CreateLBCookieStickinessPolicyInput",
         "documentation":"<p>\n            The input for the <a>CreateLBCookieStickinessPolicy</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["CreateLBCookieStickinessPolicyOutput"],
+        "shape":"CreateLBCookieStickinessPolicyOutput",
         "documentation":"<p>\n            The output for the <a>CreateLBCookieStickinessPolicy</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["DuplicatePolicyNameException"],
+          "shape":"DuplicatePolicyNameException",
+          "exception":true,
           "documentation":"<p>\n            Policy with the same name exists for this load balancer.\n            Please choose another name.\n        </p>"
         },
         {
-          "$extends":["TooManyPoliciesException"],
+          "shape":"TooManyPoliciesException",
+          "exception":true,
           "documentation":"<p>\n            Quota for number of policies for this load balancer\n            has already been reached.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
@@ -161,44 +181,52 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["CreateAccessPointInput"],
+        "shape":"CreateAccessPointInput",
         "documentation":"<p>\n            The input for the <a>CreateLoadBalancer</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["CreateAccessPointOutput"],
+        "shape":"CreateAccessPointOutput",
         "documentation":"<p>\n            The output for the <a>CreateLoadBalancer</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["DuplicateAccessPointNameException"],
+          "shape":"DuplicateAccessPointNameException",
+          "exception":true,
           "documentation":"<p>\n            Load balancer name already exists for this account.\n            Please choose another name.\n        </p>"
         },
         {
-          "$extends":["TooManyAccessPointsException"],
+          "shape":"TooManyAccessPointsException",
+          "exception":true,
           "documentation":"<p>\n            The quota for the number of load balancers has already been reached.\n        </p>"
         },
         {
-          "$extends":["CertificateNotFoundException"],
+          "shape":"CertificateNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified SSL ID does not refer to a valid SSL certificate \n            in the AWS Identity and Access Management Service.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         },
         {
-          "$extends":["SubnetNotFoundException"],
+          "shape":"SubnetNotFoundException",
+          "exception":true,
           "documentation":"<p>\n          One or more subnets were not found.\n        </p>"
         },
         {
-          "$extends":["InvalidSubnetException"],
+          "shape":"InvalidSubnetException",
+          "exception":true,
           "documentation":"<p>\n            The VPC has no Internet gateway. \n        </p>"
         },
         {
-          "$extends":["InvalidSecurityGroupException"],
+          "shape":"InvalidSecurityGroupException",
+          "exception":true,
           "documentation":"<p>\n            One or more specified security groups do not exist.  \n        </p>"
         },
         {
-          "$extends":["InvalidSchemeException"],
+          "shape":"InvalidSchemeException",
+          "exception":true,
           "documentation":"<p>\n            Invalid value for scheme. Scheme can only be specified for load balancers in VPC.         \n        </p>"
         }
       ],
@@ -210,28 +238,32 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["CreateLoadBalancerListenerInput"],
+        "shape":"CreateLoadBalancerListenerInput",
         "documentation":"<p>\n            The input for the <a>CreateLoadBalancerListeners</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["CreateLoadBalancerListenerOutput"],
+        "shape":"CreateLoadBalancerListenerOutput",
         "documentation":"<p>\n            The output for the <a>CreateLoadBalancerListeners</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["DuplicateListenerException"],
+          "shape":"DuplicateListenerException",
+          "exception":true,
           "documentation":"<p>\n            A <code>Listener</code> already exists for the given \n            <code>LoadBalancerName</code> and <code>LoadBalancerPort</code>, \n            but with a different <code>InstancePort</code>, <code>Protocol</code>, \n            or <code>SSLCertificateId</code>.   \t\n        </p>"
         },
         {
-          "$extends":["CertificateNotFoundException"],
+          "shape":"CertificateNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified SSL ID does not refer to a valid SSL certificate \n            in the AWS Identity and Access Management Service.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
@@ -242,30 +274,35 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{"$extends":["CreateLoadBalancerPolicyInput"]},
+      "input":{"shape":"CreateLoadBalancerPolicyInput"},
       "output":{
-        "$extends":["CreateLoadBalancerPolicyOutput"],
+        "shape":"CreateLoadBalancerPolicyOutput",
         "documentation":"<p>The output for the <a>CreateLoadBalancerPolicy</a> action.\n    </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["PolicyTypeNotFoundException"],
+          "shape":"PolicyTypeNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            One or more of the specified policy types do not exist.\n        </p>"
         },
         {
-          "$extends":["DuplicatePolicyNameException"],
+          "shape":"DuplicatePolicyNameException",
+          "exception":true,
           "documentation":"<p>\n            Policy with the same name exists for this load balancer.\n            Please choose another name.\n        </p>"
         },
         {
-          "$extends":["TooManyPoliciesException"],
+          "shape":"TooManyPoliciesException",
+          "exception":true,
           "documentation":"<p>\n            Quota for number of policies for this load balancer\n            has already been reached.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
@@ -277,11 +314,11 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["DeleteAccessPointInput"],
+        "shape":"DeleteAccessPointInput",
         "documentation":"<p>\n            The input for the <a>DeleteLoadBalancer</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["DeleteAccessPointOutput"],
+        "shape":"DeleteAccessPointOutput",
         "documentation":"<p>\n            The output for the <a>DeleteLoadBalancer</a> action.\n        </p>"
       },
       "documentation":"<p>\n            Deletes the specified load balancer.\n        </p>\n        <p>\n            If attempting to recreate the load balancer,\n            you must reconfigure all the settings.\n            The DNS name associated with a deleted load balancer\n            will no longer be usable.\n            Once deleted, the name and associated DNS record of the\n            load balancer no longer exist and traffic sent to any of its\n            IP addresses will no longer be delivered to back-end instances.            \n        </p>\n        <p>\n            To successfully call this API, you must provide the same\n            account credentials as were used to create the load balancer.\n        </p>\n        <note>\n            By design, if the load balancer does not exist or has already been deleted, a call to\n            <code>DeleteLoadBalancer</code> action still succeeds.\n        </note>"
@@ -292,17 +329,20 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["DeleteLoadBalancerListenerInput"],
+        "shape":"DeleteLoadBalancerListenerInput",
         "documentation":"<p>\n            The input for the <a>DeleteLoadBalancerListeners</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["DeleteLoadBalancerListenerOutput"],
+        "shape":"DeleteLoadBalancerListenerOutput",
         "documentation":"<p>\n            The output for the <a>DeleteLoadBalancerListeners</a> action.\n        </p>"
       },
-      "errors":[{
-          "$extends":["AccessPointNotFoundException"],
+      "errors":[
+        {
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
-        }],
+        }
+      ],
       "documentation":"<p>\n            Deletes listeners from the load balancer for the specified port.\n        </p>"
     },
     "DeleteLoadBalancerPolicy":{
@@ -311,20 +351,22 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["DeleteLoadBalancerPolicyInput"],
+        "shape":"DeleteLoadBalancerPolicyInput",
         "documentation":"<p>\n            The input for the <a>DeleteLoadBalancerPolicy</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["DeleteLoadBalancerPolicyOutput"],
+        "shape":"DeleteLoadBalancerPolicyOutput",
         "documentation":"<p>\n            The output for the <a>DeleteLoadBalancerPolicy</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
@@ -336,20 +378,22 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["DeregisterEndPointsInput"],
+        "shape":"DeregisterEndPointsInput",
         "documentation":"<p>\n            The input for the <a>DeregisterInstancesFromLoadBalancer</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["DeregisterEndPointsOutput"],
+        "shape":"DeregisterEndPointsOutput",
         "documentation":"<p>\n            The output for the <a>DeregisterInstancesFromLoadBalancer</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["InvalidEndPointException"],
+          "shape":"InvalidEndPointException",
+          "exception":true,
           "documentation":"<p>\n            The specified EndPoint is not valid.\n        </p>"
         }
       ],
@@ -361,20 +405,22 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["DescribeEndPointStateInput"],
+        "shape":"DescribeEndPointStateInput",
         "documentation":"<p>\n        The input for the <a>DescribeEndPointState</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["DescribeEndPointStateOutput"],
+        "shape":"DescribeEndPointStateOutput",
         "documentation":"<p>\n\t\tThe output for the <a>DescribeInstanceHealth</a> action.\n\t\t</p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["InvalidEndPointException"],
+          "shape":"InvalidEndPointException",
+          "exception":true,
           "documentation":"<p>\n            The specified EndPoint is not valid.\n        </p>"
         }
       ],
@@ -386,42 +432,46 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["DescribeLoadBalancerAttributesInput"],
+        "shape":"DescribeLoadBalancerAttributesInput",
         "documentation":"<p>The input for the <a>DescribeLoadBalancerAttributes</a> action.</p>"
       },
       "output":{
-        "$extends":["DescribeLoadBalancerAttributesOutput"],
+        "shape":"DescribeLoadBalancerAttributesOutput",
         "documentation":"<p>The following element is returned in a structure named <code>DescribeLoadBalancerAttributesResult</code>.</p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["LoadBalancerAttributeNotFoundException"],
+          "shape":"LoadBalancerAttributeNotFoundException",
+          "exception":true,
           "documentation":"<p>The specified load balancer attribute could not be found.</p>"
         }
       ],
-      "documentation":"<p>Returns detailed information about all of the attributes associated with the specified load balancer.</p>  \n        <examples>\n            <example>                           \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&Version=2012-06-01\n&Action=DescribeLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DescribeLoadBalancerAttributesResponse  xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n <DescribeLoadBalancerAttributesResult>\n    <LoadBalancerAttributes>\n    <AccessLog>\n        <Enabled>true</Enabled>\n        <S3BucketName>my-loadbalancer-logs</S3BucketName>\n        <S3BucketPrefix>testprefix</S3BucketPrefix>\n        <EmitInterval>5</EmitInterval>\n      </AccessLog>\n      <CrossZoneLoadBalancing>\n        <Enabled>true</Enabled>\n      </CrossZoneLoadBalancing>\n    </LoadBalancerAttributes>\n  </DescribeLoadBalancerAttributesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</DescribeLoadBalancerAttributesResponse>\n </queryresponse>\n            </example>\n        </examples>"
+      "documentation":"<p>Returns detailed information about all of the attributes associated with the specified load balancer.</p>  \n        <examples>\n            <example>                           \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&Version=2012-06-01\n&Action=DescribeLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DescribeLoadBalancerAttributesResponse  xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n <DescribeLoadBalancerAttributesResult>\n    <LoadBalancerAttributes>\n    <AccessLog>\n        <Enabled>true</Enabled>\n        <S3BucketName>my-loadbalancer-logs</S3BucketName>\n        <S3BucketPrefix>testprefix</S3BucketPrefix>\n        <EmitInterval>5</EmitInterval>\n      </AccessLog>\n      <CrossZoneLoadBalancing>\n        <Enabled>true</Enabled>\n      </CrossZoneLoadBalancing>\n      <ConnectionDraining>\n        <Enabled>true</Enabled>\n        <Timeout>60</Timeout>\n     </ConnectionDraining> \n    </LoadBalancerAttributes>\n  </DescribeLoadBalancerAttributesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</DescribeLoadBalancerAttributesResponse>\n </queryresponse>\n            </example>\n        </examples>"
     },
     "DescribeLoadBalancerPolicies":{
       "http":{
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{"$extends":["DescribeLoadBalancerPoliciesInput"]},
+      "input":{"shape":"DescribeLoadBalancerPoliciesInput"},
       "output":{
-        "$extends":["DescribeLoadBalancerPoliciesOutput"],
+        "shape":"DescribeLoadBalancerPoliciesOutput",
         "documentation":"<p>The output for the <a>DescribeLoadBalancerPolicies</a> action.\n     </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["PolicyNotFoundException"],
+          "shape":"PolicyNotFoundException",
+          "exception":true,
           "documentation":"<p>\n        One or more specified policies were not found.\n        </p>"
         }
       ],
@@ -432,15 +482,18 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{"$extends":["DescribeLoadBalancerPolicyTypesInput"]},
+      "input":{"shape":"DescribeLoadBalancerPolicyTypesInput"},
       "output":{
-        "$extends":["DescribeLoadBalancerPolicyTypesOutput"],
+        "shape":"DescribeLoadBalancerPolicyTypesOutput",
         "documentation":"<p>\n   \tThe output for the <a>DescribeLoadBalancerPolicyTypes</a> action.\n   \t</p>"
       },
-      "errors":[{
-          "$extends":["PolicyTypeNotFoundException"],
+      "errors":[
+        {
+          "shape":"PolicyTypeNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            One or more of the specified policy types do not exist.\n        </p>"
-        }],
+        }
+      ],
       "documentation":"<p>\n   \tReturns meta-information on the specified load balancer policies defined by the\n   \tElastic Load Balancing service.  The policy types that are\n   \treturned from this action can be used in a <a>CreateLoadBalancerPolicy</a> action to\n   \tinstantiate specific policy configurations that will be applied to a load balancer.\n   \t</p>\n       <examples>\n          <example>\n            <name>Partial description of all the policy types defined by Elastic Load Balancing for your account</name>              \n           <queryrequest>https://elasticloadbalancing.amazonaws.com/?Version=2012-06-01\n&Action=DescribeLoadBalancerPolicyTypes\n&AUTHPARAMS </queryrequest>      \n           <queryresponse><DescribeLoadBalancerPolicyTypesResponse  xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<DescribeLoadBalancerPolicyTypesResult>\n  <PolicyTypeName>SSLNegotiationPolicyType</PolicyTypeName>\n       < . . . .>\n   <PolicyTypeName>BackendServerAuthenticationPolicyType</PolicyTypeName>\n      < . . . .>\n   <PolicyTypeName>PublicKeyPolicyType</PolicyTypeName>\n     < . . . .>\n   <PolicyTypeName>AppCookieStickinessPolicyType</PolicyTypeName>\n   < . . . .>\n   <PolicyTypeName>LBCookieStickinessPolicyType</PolicyTypeName>\n     < . . . .>\n   <PolicyTypeName>ProxyProtocolPolicyType</PolicyTypeName>\n     < . . . .>\n</DescribeLoadBalancerPolicyTypesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ DescribeLoadBalancerPolicyTypesResponse >\t\n </queryresponse>\n          </example> \n           <example>\n               <name>Description of ProxyProtocolPolicyType</name>                \n               <queryrequest>https://elasticloadbalancing.amazonaws.com/?PolicyTypeNames.member.1=ProxyProtocolPolicyType\n&Version=2012-06-01\n&Action=DescribeLoadBalancerPolicyTypes\n&AUTHPARAMS </queryrequest>      \n               <queryresponse><DescribeLoadBalancerPolicyTypesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <DescribeLoadBalancerPolicyTypesResult>\n    <PolicyTypeDescriptions>\n      <member>\n        <PolicyAttributeTypeDescriptions>\n          <member>\n            <AttributeName>ProxyProtocol</AttributeName>\n            <AttributeType>Boolean</AttributeType>\n            <Cardinality>ONE</Cardinality>\n          </member>\n        </PolicyAttributeTypeDescriptions>\n        <PolicyTypeName>ProxyProtocolPolicyType</PolicyTypeName>\n        <Description>Policy that controls whether to include the IP address and port of the originating request for TCP messages.\n        This policy operates on TCP/SSL listeners only</Description>\n      </member>\n    </PolicyTypeDescriptions>\n  </DescribeLoadBalancerPolicyTypesResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeLoadBalancerPolicyTypesResponse>\n </queryresponse>\n           </example> \n       </examples>"
     },
     "DescribeLoadBalancers":{
@@ -449,17 +502,20 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["DescribeAccessPointsInput"],
+        "shape":"DescribeAccessPointsInput",
         "documentation":"<p>\n\t\tThe input for the <a>DescribeLoadBalancers</a> action.\n\t\t</p>"
       },
       "output":{
-        "$extends":["DescribeAccessPointsOutput"],
+        "shape":"DescribeAccessPointsOutput",
         "documentation":"<p>\n\t\tThe output for the <a>DescribeLoadBalancers</a> action.\n\t\t</p>"
       },
-      "errors":[{
-          "$extends":["AccessPointNotFoundException"],
+      "errors":[
+        {
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
-        }],
+        }
+      ],
       "documentation":"<p>\n        Returns detailed configuration information for all the load balancers created for the account.\n        If you specify load balancer names, the action returns configuration information of the specified\n        load balancers. </p>\n        <note>\n            In order to retrieve this information, you must provide the same account credentials \n            that was used to create the load balancer.</note>\n        <examples>\n            <example>\n                <name>Description of a specified load balancer</name>              \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerNames.member.1=MyLoadBalancer\n&Version=2012-06-01\n&Action=DescribeLoadBalancers\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DescribeLoadBalancersResult>\n    <LoadBalancerDescriptions>\n      <member>\n        <SecurityGroups/>\n        <LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n        <CreatedTime>2013-05-24T21:15:31.280Z</CreatedTime>\n        <HealthCheck>\n          <Interval>90</Interval>\n          <Target>HTTP:80/</Target>\n          <HealthyThreshold>2</HealthyThreshold>\n          <Timeout>60</Timeout>\n          <UnhealthyThreshold>10</UnhealthyThreshold>\n        </HealthCheck>\n        <ListenerDescriptions>\n          <member>\n            <PolicyNames/>\n            <Listener>\n              <Protocol>HTTP</Protocol>\n              <LoadBalancerPort>80</LoadBalancerPort>\n              <InstanceProtocol>HTTP</InstanceProtocol>\n              <InstancePort>80</InstancePort>\n            </Listener>\n          </member>\n        </ListenerDescriptions>\n        <Instances>\n          <member>\n            <InstanceId>i-e4cbe38d</InstanceId>\n          </member>\n        </Instances>\n        <Policies>\n          <AppCookieStickinessPolicies/>\n          <OtherPolicies/>\n          <LBCookieStickinessPolicies/>\n        </Policies>\n        <AvailabilityZones>\n          <member>us-east-1a</member>\n        </AvailabilityZones>\n        <CanonicalHostedZoneNameID>ZZZZZZZZZZZ123X</CanonicalHostedZoneNameID>\n        <CanonicalHostedZoneName>MyLoadBalancer-123456789.us-east-1.elb.amazonaws.com</CanonicalHostedZoneName>\n        <Scheme>internet-facing</Scheme>\n        <SourceSecurityGroup>\n          <OwnerAlias>amazon-elb</OwnerAlias>\n          <GroupName>amazon-elb-sg</GroupName>\n        </SourceSecurityGroup>\n        <DNSName>MyLoadBalancer-123456789.us-east-1.elb.amazonaws.com</DNSName>\n        <BackendServerDescriptions/>\n        <Subnets/>\n      </member>\n    </LoadBalancerDescriptions>\n  </DescribeLoadBalancersResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ DescribeLoadBalancerPolicyTypesResponse >\t\n </queryresponse>\n            </example>\n     </examples>"
     },
     "DetachLoadBalancerFromSubnets":{
@@ -468,20 +524,22 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["DetachLoadBalancerFromSubnetsInput"],
+        "shape":"DetachLoadBalancerFromSubnetsInput",
         "documentation":"<p>\n            The input for the <a>DetachLoadBalancerFromSubnets</a> action. \n        </p>"
       },
       "output":{
-        "$extends":["DetachLoadBalancerFromSubnetsOutput"],
+        "shape":"DetachLoadBalancerFromSubnetsOutput",
         "documentation":"<p>\n            The output for the <a>DetachLoadBalancerFromSubnets</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
@@ -493,20 +551,22 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["RemoveAvailabilityZonesInput"],
+        "shape":"RemoveAvailabilityZonesInput",
         "documentation":"<p>\n\t\tThe input for the <a>DisableAvailabilityZonesForLoadBalancer</a> action.\n\t\t</p>"
       },
       "output":{
-        "$extends":["RemoveAvailabilityZonesOutput"],
+        "shape":"RemoveAvailabilityZonesOutput",
         "documentation":"<p>\n\t\tThe output for the <a>DisableAvailabilityZonesForLoadBalancer</a> action.\n\t\t</p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
@@ -518,17 +578,20 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["AddAvailabilityZonesInput"],
+        "shape":"AddAvailabilityZonesInput",
         "documentation":"<p>\n\t\tThe input for the <a>EnableAvailabilityZonesForLoadBalancer</a> action.\n\t\t</p>"
       },
       "output":{
-        "$extends":["AddAvailabilityZonesOutput"],
+        "shape":"AddAvailabilityZonesOutput",
         "documentation":"<p>\n\t\tThe output for the <a>EnableAvailabilityZonesForLoadBalancer</a> action.\n\t\t</p>"
       },
-      "errors":[{
-          "$extends":["AccessPointNotFoundException"],
+      "errors":[
+        {
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
-        }],
+        }
+      ],
       "documentation":"<p>\n        Adds one or more EC2 Availability Zones to the load balancer.\n        </p>\n        <p>\n        The load balancer evenly distributes requests across all\n        its registered Availability Zones that contain instances.        \n        </p>\n        <note>\n        The new EC2 Availability Zones to be added must be in the same\n        EC2 Region as the Availability Zones for which the\n        load balancer was created.\n        </note>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_AddLBAvailabilityZone.html\">Expand a Load Balanced Application to an Additional Availability Zone</a>\n        in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <examples>\n            <example>\n                <name>Enable Availability Zone <i>us-east-1c</i> for <i>my-test-loadbalancer</i>.</name>                \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?AvailabilityZones.member.1=us-east-1c\n&LoadBalancerName=my-test-loadbalancer\n&Version=2012-06-01\n&Action=EnableAvailabilityZonesForLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><EnableAvailabilityZonesForLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <EnableAvailabilityZonesForLoadBalancerResult>\n    <AvailabilityZones>\n      <member>us-east-1a</member>\n      <member>us-east-1c</member>\n    </AvailabilityZones>\n  </EnableAvailabilityZonesForLoadBalancerResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</EnableAvailabilityZonesForLoadBalancerResponse>\n </queryresponse>\n            </example>\n        </examples>"
     },
     "ModifyLoadBalancerAttributes":{
@@ -537,28 +600,31 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["ModifyLoadBalancerAttributesInput"],
+        "shape":"ModifyLoadBalancerAttributesInput",
         "documentation":"<p>The input for the <a>ModifyLoadBalancerAttributes</a> action.</p>"
       },
       "output":{
-        "$extends":["ModifyLoadBalancerAttributesOutput"],
+        "shape":"ModifyLoadBalancerAttributesOutput",
         "documentation":"<p>The output for the <a>ModifyLoadBalancerAttributes</a> action.</p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["LoadBalancerAttributeNotFoundException"],
+          "shape":"LoadBalancerAttributeNotFoundException",
+          "exception":true,
           "documentation":"<p>The specified load balancer attribute could not be found.</p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
-      "documentation":"<p>Modifies the attributes of a specified load balancer.</p> \n        <p>You can modify the attributes, such as cross-zone load balancing and access logs, \n            by either enabling or disabling them.</p>\n        \n        <p>For information on modifying the cross-zone load balancing attribute, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-disable-crosszone-lb.html\">Enable or Disable Cross-Zone Load Balancing for Your Load balancer</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <p>For information on modifying the access log attribute, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/access-log-collection.html\">Enable or Disable Access Log Collection for Your Load Balancer</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <examples>\n            <example>\n                  <name>Enable Cross-Zone Load Balancing</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.CrossZoneLoadBalancing.Enabled=true                    \n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult> \n<LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <CrossZoneLoadBalancing>\n        <Enabled>true</Enabled>\n      </CrossZoneLoadBalancing>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n            </example>\n            <example>\n                <name>Enable Access Log</name>\n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.AccessLog.Enabled=true \n&LoadBalancerAttributes.AccessLog.S3BucketName=my-loadbalancer-logs\n&LoadBalancerAttributes.AccessLog.S3BucketPrefix=my-bucket-prefix/prod\n&LoadBalancerAttributes.AccessLog.EmitInterval=5\n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>\n                \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult>\n    <LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <AccessLog>\n        <Enabled>true</Enabled>\n        <S3BucketName>my-loadbalancer-logs</S3BucketName>\n        <S3BucketPrefix>my-bucket-prefix/prod</S3BucketPrefix>\n        <EmitInterval>5</EmitInterval>\n      </AccessLog>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult>\n \n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n                \n            </example>\n        </examples>"
+      "documentation":"<p>Modifies the attributes of a specified load balancer.</p> \n        <p>You can modify the load balancer attributes, such as <code>AccessLogs</code>, <code>ConnectionDraining</code>, and \n            <code>CrossZoneLoadBalancing</code> by either enabling or disabling them.</p> \n         <p>For information on cross-zone load balancing, see <b>Request Routing</b> and for information on connection draining, see <b>Connection Draining</b>\n             in the <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html\">Concepts</a> section of the\n             <i>Elastic Load Balancer Developer Guide</i>. For information on access logs, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/access-log-collection.html\">Access Logs</a>.</p>   \n               \n        <examples>\n            <example>\n                  <name>Enable Cross-Zone Load Balancing</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.CrossZoneLoadBalancing.Enabled=true                    \n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult> \n<LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <CrossZoneLoadBalancing>\n        <Enabled>true</Enabled>\n      </CrossZoneLoadBalancing>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n            </example>\n            <example>\n                <name>Enable Access Log</name>\n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.AccessLog.Enabled=true \n&LoadBalancerAttributes.AccessLog.S3BucketName=my-loadbalancer-logs\n&LoadBalancerAttributes.AccessLog.S3BucketPrefix=my-bucket-prefix/prod\n&LoadBalancerAttributes.AccessLog.EmitInterval=60\n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>\n                \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult>\n    <LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <AccessLog>\n        <Enabled>true</Enabled>\n        <S3BucketName>my-loadbalancer-logs</S3BucketName>\n        <S3BucketPrefix>my-bucket-prefix/prod</S3BucketPrefix>\n        <EmitInterval>60</EmitInterval>\n      </AccessLog>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult> \n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n                \n            </example>\n            <example>\n                <name>Enable Connection Draining</name>\n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.ConnectionDraining.Enabled=true \n&LoadBalancerAttributes.ConnectionDraining.Timeout=60\n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>\n                \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult>\n    <LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <ConnectionDraining>\n        <Enabled>true</Enabled>\n        <Timeout>60</Timeout>        \n      </ConnectionDraining>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult> \n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n                \n            </example>\n        </examples>"
     },
     "RegisterInstancesWithLoadBalancer":{
       "http":{
@@ -566,20 +632,22 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["RegisterEndPointsInput"],
+        "shape":"RegisterEndPointsInput",
         "documentation":"<p>\n\t\tThe input for the <a>RegisterInstancesWithLoadBalancer</a> action.\n\t\t</p>"
       },
       "output":{
-        "$extends":["RegisterEndPointsOutput"],
+        "shape":"RegisterEndPointsOutput",
         "documentation":"<p>\n\t\tThe output for the <a>RegisterInstancesWithLoadBalancer</a> action.\n\t\t</p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["InvalidEndPointException"],
+          "shape":"InvalidEndPointException",
+          "exception":true,
           "documentation":"<p>\n            The specified EndPoint is not valid.\n        </p>"
         }
       ],
@@ -591,28 +659,32 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["SetLoadBalancerListenerSSLCertificateInput"],
+        "shape":"SetLoadBalancerListenerSSLCertificateInput",
         "documentation":"<p>\n            The input for the <a>SetLoadBalancerListenerSSLCertificate</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["SetLoadBalancerListenerSSLCertificateOutput"],
+        "shape":"SetLoadBalancerListenerSSLCertificateOutput",
         "documentation":"<p>\n            The output for the <a>SetLoadBalancerListenerSSLCertificate</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["CertificateNotFoundException"],
+          "shape":"CertificateNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified SSL ID does not refer to a valid SSL certificate \n            in the AWS Identity and Access Management Service.\n        </p>"
         },
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["ListenerNotFoundException"],
+          "shape":"ListenerNotFoundException",
+          "exception":true,
           "documentation":"<p>\n        Load balancer does not have a listener configured at the given port.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
@@ -623,22 +695,25 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{"$extends":["SetLoadBalancerPoliciesForBackendServerInput"]},
+      "input":{"shape":"SetLoadBalancerPoliciesForBackendServerInput"},
       "output":{
-        "$extends":["SetLoadBalancerPoliciesForBackendServerOutput"],
+        "shape":"SetLoadBalancerPoliciesForBackendServerOutput",
         "documentation":"<p>\n            The output for the <a>SetLoadBalancerPoliciesForBackendServer</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["PolicyNotFoundException"],
+          "shape":"PolicyNotFoundException",
+          "exception":true,
           "documentation":"<p>\n        One or more specified policies were not found.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
@@ -650,54 +725,58 @@
         "requestUri":"/"
       },
       "input":{
-        "$extends":["SetLoadBalancerPoliciesOfListenerInput"],
+        "shape":"SetLoadBalancerPoliciesOfListenerInput",
         "documentation":"<p>\n            The input for the <a>SetLoadBalancerPoliciesOfListener</a> action.\n        </p>"
       },
       "output":{
-        "$extends":["SetLoadBalancerPoliciesOfListenerOutput"],
+        "shape":"SetLoadBalancerPoliciesOfListenerOutput",
         "documentation":"<p>\n            The output for the <a>SetLoadBalancerPoliciesOfListener</a> action.\n        </p>"
       },
       "errors":[
         {
-          "$extends":["AccessPointNotFoundException"],
+          "shape":"AccessPointNotFoundException",
+          "exception":true,
           "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
         },
         {
-          "$extends":["PolicyNotFoundException"],
+          "shape":"PolicyNotFoundException",
+          "exception":true,
           "documentation":"<p>\n        One or more specified policies were not found.\n        </p>"
         },
         {
-          "$extends":["ListenerNotFoundException"],
+          "shape":"ListenerNotFoundException",
+          "exception":true,
           "documentation":"<p>\n        Load balancer does not have a listener configured at the given port.\n        </p>"
         },
         {
-          "$extends":["InvalidConfigurationRequestException"],
+          "shape":"InvalidConfigurationRequestException",
+          "exception":true,
           "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
         }
       ],
       "documentation":"<p>\n            Associates, updates, or disables a policy with a listener on the load balancer. \n            You can associate multiple policies with a listener. \n        </p>\n        <examples>\n            <name>Associate <i>MySSLNegotiationPolicy</i> with the load balancer port <i>443</i> on the <i>MyInternalLoadbalancer</i> load balancer.</name>            \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?PolicyNames.member.1=MySSLNegotiationPolicy\n&LoadBalancerName=MyInternalLoadBalancer\n&LoadBalancerPort=443\n&Version=2012-06-01\n&Action=SetLoadBalancerPoliciesOfListener\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><SetLoadBalancerPoliciesOfListenerResponse xmlns=\"http://elasticloadbalancing.am\nazonaws.com/doc/2012-06-01/\">\n  <SetLoadBalancerPoliciesOfListenerResult/>\n  <ResponseMetadata>\n    <RequestId>07b1ecbc-1100-11e3-acaf-dd7edEXAMPLE</RequestId>\n  </ResponseMetadata>\n</SetLoadBalancerPoliciesOfListenerResponse>\n </queryresponse>\n        </examples>"
     }
   },
-  "definitions":{
+  "shapes":{
     "AccessLog":{
       "type":"structure",
       "required":["Enabled"],
       "members":{
         "Enabled":{
-          "$extends":["AccessLogEnabled"],
+          "shape":"AccessLogEnabled",
           "documentation":"<p>Specifies whether access log is enabled for the load balancer.</p>"
         },
         "S3BucketName":{
-          "$extends":["S3BucketName"],
+          "shape":"S3BucketName",
           "documentation":"<p>The name of the Amazon S3 bucket where the access logs are stored.</p>"
         },
         "EmitInterval":{
-          "$extends":["AccessLogInterval"],
+          "shape":"AccessLogInterval",
           "documentation":"<p>The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.</p>\n        <p>Default: 60 minutes</p>"
         },
         "S3BucketPrefix":{
-          "$extends":["AccessLogPrefix"],
-          "documentation":"<p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>/my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>"
+          "shape":"AccessLogPrefix",
+          "documentation":"<p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>"
         }
       },
       "documentation":"<p>The <code>AccessLog</code> data type.</p>"
@@ -710,6 +789,7 @@
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            The specified load balancer could not be found.\n        </p>"
     },
     "AccessPointPort":{"type":"integer"},
@@ -721,11 +801,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n        The name associated with the load balancer.       \n        </p>"
         },
         "AvailabilityZones":{
-          "$extends":["AvailabilityZones"],
+          "shape":"AvailabilityZones",
           "documentation":"<p>\n        A list of new Availability Zones for the load balancer.\n        Each Availability Zone must be in the same region as the load balancer.\n        </p>"
         }
       },
@@ -733,25 +813,27 @@
     },
     "AddAvailabilityZonesOutput":{
       "type":"structure",
-      "members":{"AvailabilityZones":{
-          "$extends":["AvailabilityZones"],
+      "members":{
+        "AvailabilityZones":{
+          "shape":"AvailabilityZones",
           "documentation":"<p>\n        An updated list of Availability Zones for the load balancer.\n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n\t\tThe output for the <a>EnableAvailabilityZonesForLoadBalancer</a> action.\n\t\t</p>"
     },
     "AppCookieStickinessPolicies":{
       "type":"list",
-      "member":{"$extends":["AppCookieStickinessPolicy"]}
+      "member":{"shape":"AppCookieStickinessPolicy"}
     },
     "AppCookieStickinessPolicy":{
       "type":"structure",
       "members":{
         "PolicyName":{
-          "$extends":["PolicyName"],
+          "shape":"PolicyName",
           "documentation":"<p>The mnemonic name for the policy being created. The name must be unique within a set of policies for this load balancer.\n        </p>"
         },
         "CookieName":{
-          "$extends":["CookieName"],
+          "shape":"CookieName",
           "documentation":"<p>The name of the application cookie used for stickiness.\n        </p>"
         }
       },
@@ -765,11 +847,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name associated with the load balancer.\n            The name must be unique within the set of load balancers associated with your AWS account. \n        </p>"
         },
         "SecurityGroups":{
-          "$extends":["SecurityGroups"],
+          "shape":"SecurityGroups",
           "documentation":"<p>\n            A list of security group IDs to associate with your load balancer in VPC. The security\n            group IDs must be provided as the ID and not the security group name (For example, sg-1234).\n        </p>"
         }
       },
@@ -777,10 +859,12 @@
     },
     "ApplySecurityGroupsToLoadBalancerOutput":{
       "type":"structure",
-      "members":{"SecurityGroups":{
-          "$extends":["SecurityGroups"],
+      "members":{
+        "SecurityGroups":{
+          "shape":"SecurityGroups",
           "documentation":"<p>\n            A list of security group IDs associated with your load balancer.\n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n            The out for the <a>ApplySecurityGroupsToLoadBalancer</a> action.\n        </p>"
     },
     "AttachLoadBalancerToSubnetsInput":{
@@ -791,11 +875,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name associated with the load balancer.\n            The name must be unique within the set of load balancers associated with your AWS account.\n        </p>"
         },
         "Subnets":{
-          "$extends":["Subnets"],
+          "shape":"Subnets",
           "documentation":"<p>\n            A list of subnet IDs to add for the load balancer. You can add only one subnet per Availability Zone.\n        </p>"
         }
       },
@@ -803,10 +887,12 @@
     },
     "AttachLoadBalancerToSubnetsOutput":{
       "type":"structure",
-      "members":{"Subnets":{
-          "$extends":["Subnets"],
+      "members":{
+        "Subnets":{
+          "shape":"Subnets",
           "documentation":"<p>\n            A list of subnet IDs attached to the load balancer.  \n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n            The output for the <a>AttachLoadBalancerToSubnets</a> action.\n        </p>"
     },
     "AttributeName":{"type":"string"},
@@ -815,17 +901,17 @@
     "AvailabilityZone":{"type":"string"},
     "AvailabilityZones":{
       "type":"list",
-      "member":{"$extends":["AvailabilityZone"]}
+      "member":{"shape":"AvailabilityZone"}
     },
     "BackendServerDescription":{
       "type":"structure",
       "members":{
         "InstancePort":{
-          "$extends":["InstancePort"],
+          "shape":"InstancePort",
           "documentation":"<p>\n            Provides the port on which the back-end server is listening.\n        </p>"
         },
         "PolicyNames":{
-          "$extends":["PolicyNames"],
+          "shape":"PolicyNames",
           "documentation":"<p>\n            Provides a list of policy names enabled for the back-end server.\n        </p>"
         }
       },
@@ -833,13 +919,14 @@
     },
     "BackendServerDescriptions":{
       "type":"list",
-      "member":{"$extends":["BackendServerDescription"]}
+      "member":{"shape":"BackendServerDescription"}
     },
     "Cardinality":{"type":"string"},
     "CertificateNotFoundException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            The specified SSL ID does not refer to a valid SSL certificate \n            in the AWS Identity and Access Management Service.\n        </p>"
     },
     "ConfigureHealthCheckInput":{
@@ -850,11 +937,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The mnemonic name associated with the load balancer.\n            The name must be unique within the set of load balancers associated with your AWS account.\n        </p>"
         },
         "HealthCheck":{
-          "$extends":["HealthCheck"],
+          "shape":"HealthCheck",
           "documentation":"<p>\n            A structure containing the configuration information\n            for the new healthcheck.\n        </p>"
         }
       },
@@ -862,12 +949,31 @@
     },
     "ConfigureHealthCheckOutput":{
       "type":"structure",
-      "members":{"HealthCheck":{
-          "$extends":["HealthCheck"],
+      "members":{
+        "HealthCheck":{
+          "shape":"HealthCheck",
           "documentation":"<p>\n            The updated healthcheck for the instances.\n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n            The output for the <a>ConfigureHealthCheck</a> action.\n        </p>"
     },
+    "ConnectionDraining":{
+      "type":"structure",
+      "required":["Enabled"],
+      "members":{
+        "Enabled":{
+          "shape":"ConnectionDrainingEnabled",
+          "documentation":"<p>Specifies whether connection draining is enabled for the load balancer.</p>"
+        },
+        "Timeout":{
+          "shape":"ConnectionDrainingTimeout",
+          "documentation":"<p>Specifies the maximum time (in seconds) to keep the existing connections open before deregistering the instances.</p>"
+        }
+      },
+      "documentation":"<p>The <code>ConnectionDraining</code> data type.</p>"
+    },
+    "ConnectionDrainingEnabled":{"type":"boolean"},
+    "ConnectionDrainingTimeout":{"type":"integer"},
     "CookieExpirationPeriod":{"type":"long"},
     "CookieName":{"type":"string"},
     "CreateAccessPointInput":{
@@ -878,27 +984,27 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name associated with the load balancer.\n            The name must be unique within your set of load balancers.\n        </p>"
         },
         "Listeners":{
-          "$extends":["Listeners"],
+          "shape":"Listeners",
           "documentation":"<p>\n            A list of the following tuples:\n            LoadBalancerPort, InstancePort, and Protocol.\n        </p>"
         },
         "AvailabilityZones":{
-          "$extends":["AvailabilityZones"],
+          "shape":"AvailabilityZones",
           "documentation":"<p>\n            A list of Availability Zones.\n        </p>\n        <p>\n            At least one Availability Zone must be specified.\n            Specified Availability Zones must be in the same EC2 Region\n            as the load balancer.\n            Traffic will be equally distributed across all zones.\n        </p>\n        <p>\n            You can later add more Availability Zones after the creation of the \n            load balancer by calling <a>EnableAvailabilityZonesForLoadBalancer</a> action.\n        </p>"
         },
         "Subnets":{
-          "$extends":["Subnets"],
+          "shape":"Subnets",
           "documentation":"<p>\n            A list of subnet IDs in your VPC to attach to your load balancer.\n            Specify one subnet per Availability Zone.\n        </p>"
         },
         "SecurityGroups":{
-          "$extends":["SecurityGroups"],
+          "shape":"SecurityGroups",
           "documentation":"<p>\n            The security groups to assign to your load balancer within your VPC.\n        </p>"
         },
         "Scheme":{
-          "$extends":["LoadBalancerScheme"],
+          "shape":"LoadBalancerScheme",
           "documentation":"<p>The type of a load balancer. </p>          \n        \n        <p>By default, Elastic Load Balancing creates an Internet-facing load balancer\n            with a publicly resolvable DNS name, which resolves to public IP addresses.\n            For more informationabout Internet-facing and Internal load balancers, \n            see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/vpc-loadbalancer-types.html\">Internet-facing and Internal Load Balancers</a>.</p>\n        \n        <p>Specify the value <code>internal</code> for this option to create an internal load balancer\n            with a DNS name that resolves to private IP addresses.</p>\n        <note>\n            <p>This option is only available for load balancers created within EC2-VPC.</p>\n        </note>"
         }
       },
@@ -906,10 +1012,12 @@
     },
     "CreateAccessPointOutput":{
       "type":"structure",
-      "members":{"DNSName":{
-          "$extends":["DNSName"],
+      "members":{
+        "DNSName":{
+          "shape":"DNSName",
           "documentation":"<p>\n            The DNS name for the load balancer.\n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n            The output for the <a>CreateLoadBalancer</a> action.\n        </p>"
     },
     "CreateAppCookieStickinessPolicyInput":{
@@ -921,15 +1029,15 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name of the load balancer.            \n        </p>"
         },
         "PolicyName":{
-          "$extends":["PolicyName"],
+          "shape":"PolicyName",
           "documentation":"<p>\n            The name of the policy being created. \n            The name must be unique within the set of policies for this load balancer.    \n        </p>"
         },
         "CookieName":{
-          "$extends":["CookieName"],
+          "shape":"CookieName",
           "documentation":"<p>\n            Name of the application cookie used for stickiness. \n        </p>"
         }
       },
@@ -949,15 +1057,15 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name associated with the load balancer.            \n        </p>"
         },
         "PolicyName":{
-          "$extends":["PolicyName"],
+          "shape":"PolicyName",
           "documentation":"<p>\n            The name of the policy being created. \n            The name must be unique within the set of policies for this load balancer.    \n        </p>"
         },
         "CookieExpirationPeriod":{
-          "$extends":["CookieExpirationPeriod"],
+          "shape":"CookieExpirationPeriod",
           "documentation":"<p>\n            The time period in seconds after which the cookie should be considered stale. \n            Not specifying this parameter indicates that the sticky session will last for the duration \n            of the browser session. \n        </p>"
         }
       },
@@ -977,11 +1085,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name of the load balancer.  \n        </p>"
         },
         "Listeners":{
-          "$extends":["Listeners"],
+          "shape":"Listeners",
           "documentation":"<p>\n            A list of <code>LoadBalancerPort</code>, \n            <code>InstancePort</code>, \n            <code>Protocol</code>, and \n            <code>SSLCertificateId</code> items.   \t\n        </p>"
         }
       },
@@ -1002,19 +1110,19 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n   \tThe name associated with the LoadBalancer for which the policy is being created.   \t\n   \t</p>"
         },
         "PolicyName":{
-          "$extends":["PolicyName"],
+          "shape":"PolicyName",
           "documentation":"<p>\n   \tThe name of the load balancer policy being created.\n   \tThe name must be unique within the set of policies for this load balancer.\n   \t</p>"
         },
         "PolicyTypeName":{
-          "$extends":["PolicyTypeName"],
+          "shape":"PolicyTypeName",
           "documentation":"<p>\n   \tThe name of the base policy type being used to create this policy.\n   \tTo get the list of policy types, use the <a>DescribeLoadBalancerPolicyTypes</a> action.\n   \t</p>"
         },
         "PolicyAttributes":{
-          "$extends":["PolicyAttributes"],
+          "shape":"PolicyAttributes",
           "documentation":"<p>\n   \tA list of attributes associated with the policy being created.\n   \t</p>"
         }
       }
@@ -1029,10 +1137,12 @@
     "CrossZoneLoadBalancing":{
       "type":"structure",
       "required":["Enabled"],
-      "members":{"Enabled":{
-          "$extends":["CrossZoneLoadBalancingEnabled"],
+      "members":{
+        "Enabled":{
+          "shape":"CrossZoneLoadBalancingEnabled",
           "documentation":"<p>Specifies whether cross-zone load balancing is enabled for the load balancer.</p>"
-        }},
+        }
+      },
       "documentation":"<p>The <code>CrossZoneLoadBalancing</code> data type.</p>"
     },
     "CrossZoneLoadBalancingEnabled":{"type":"boolean"},
@@ -1041,10 +1151,12 @@
     "DeleteAccessPointInput":{
       "type":"structure",
       "required":["LoadBalancerName"],
-      "members":{"LoadBalancerName":{
-          "$extends":["AccessPointName"],
+      "members":{
+        "LoadBalancerName":{
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name associated with the load balancer.            \n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n            The input for the <a>DeleteLoadBalancer</a> action.\n        </p>"
     },
     "DeleteAccessPointOutput":{
@@ -1061,11 +1173,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The mnemonic name associated with the load balancer. \n        </p>"
         },
         "LoadBalancerPorts":{
-          "$extends":["Ports"],
+          "shape":"Ports",
           "documentation":"<p>\n            The client port number(s) of the load balancer listener(s) to be removed. \n        </p>"
         }
       },
@@ -1085,11 +1197,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The mnemonic name associated with the load balancer.             \n        </p>"
         },
         "PolicyName":{
-          "$extends":["PolicyName"],
+          "shape":"PolicyName",
           "documentation":"<p>\n            The mnemonic name for the policy being deleted. \n        </p>"
         }
       },
@@ -1109,11 +1221,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name associated with the load balancer.            \n        </p>"
         },
         "Instances":{
-          "$extends":["Instances"],
+          "shape":"Instances",
           "documentation":"<p>\n            A list of EC2 instance IDs consisting of all\n            instances to be deregistered.\n        </p>"
         }
       },
@@ -1121,21 +1233,23 @@
     },
     "DeregisterEndPointsOutput":{
       "type":"structure",
-      "members":{"Instances":{
-          "$extends":["Instances"],
+      "members":{
+        "Instances":{
+          "shape":"Instances",
           "documentation":"<p>\n            An updated list of remaining instances\n            registered with the load balancer.\n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n            The output for the <a>DeregisterInstancesFromLoadBalancer</a> action.\n        </p>"
     },
     "DescribeAccessPointsInput":{
       "type":"structure",
       "members":{
         "LoadBalancerNames":{
-          "$extends":["LoadBalancerNames"],
+          "shape":"LoadBalancerNames",
           "documentation":"<p>\n            A list of load balancer names associated with the account.\n        </p>"
         },
         "Marker":{
-          "$extends":["Marker"],
+          "shape":"Marker",
           "documentation":"<p>\n            An optional parameter reserved for future use.\n        </p>"
         }
       },
@@ -1145,11 +1259,11 @@
       "type":"structure",
       "members":{
         "LoadBalancerDescriptions":{
-          "$extends":["LoadBalancerDescriptions"],
+          "shape":"LoadBalancerDescriptions",
           "documentation":"<p>\n            A list of load balancer description structures.\n        </p>"
         },
         "NextMarker":{
-          "$extends":["Marker"],
+          "shape":"Marker",
           "documentation":"<p>\n            An optional parameter reserved for future use.\n        </p>"
         }
       },
@@ -1160,11 +1274,11 @@
       "required":["LoadBalancerName"],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n        The name of the load balancer.       \n        </p>"
         },
         "Instances":{
-          "$extends":["Instances"],
+          "shape":"Instances",
           "documentation":"<p>\n        A list of instance IDs whose states are being queried.\n        </p>"
         }
       },
@@ -1172,63 +1286,75 @@
     },
     "DescribeEndPointStateOutput":{
       "type":"structure",
-      "members":{"InstanceStates":{
-          "$extends":["InstanceStates"],
+      "members":{
+        "InstanceStates":{
+          "shape":"InstanceStates",
           "documentation":"<p>\n        A list containing health information\n        for the specified instances.\n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n\t\tThe output for the <a>DescribeInstanceHealth</a> action.\n\t\t</p>"
     },
     "DescribeLoadBalancerAttributesInput":{
       "type":"structure",
       "required":["LoadBalancerName"],
-      "members":{"LoadBalancerName":{
-          "$extends":["AccessPointName"],
+      "members":{
+        "LoadBalancerName":{
+          "shape":"AccessPointName",
           "documentation":"<p>The name of the load balancer.</p>"
-        }},
+        }
+      },
       "documentation":"<p>The input for the <a>DescribeLoadBalancerAttributes</a> action.</p>"
     },
     "DescribeLoadBalancerAttributesOutput":{
       "type":"structure",
-      "members":{"LoadBalancerAttributes":{
-          "$extends":["LoadBalancerAttributes"],
+      "members":{
+        "LoadBalancerAttributes":{
+          "shape":"LoadBalancerAttributes",
           "documentation":"<p>The load balancer attributes structure.</p>"
-        }},
+        }
+      },
       "documentation":"<p>The following element is returned in a structure named <code>DescribeLoadBalancerAttributesResult</code>.</p>"
     },
     "DescribeLoadBalancerPoliciesInput":{
       "type":"structure",
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n   \tThe mnemonic name associated with the load balancer.\n   \tIf no name is specified, the operation returns the attributes of either all the sample policies pre-defined by Elastic Load Balancing or the specified sample polices.\n   \t</p>"
         },
         "PolicyNames":{
-          "$extends":["PolicyNames"],
+          "shape":"PolicyNames",
           "documentation":"<p>\n   \t  The names of load balancer policies you've created or Elastic Load Balancing sample policy names.\n   \t</p>"
         }
       }
     },
     "DescribeLoadBalancerPoliciesOutput":{
       "type":"structure",
-      "members":{"PolicyDescriptions":{
-          "$extends":["PolicyDescriptions"],
+      "members":{
+        "PolicyDescriptions":{
+          "shape":"PolicyDescriptions",
           "documentation":"<p>\n   \tA list of policy description structures.\n   \t</p>"
-        }},
+        }
+      },
       "documentation":"<p>The output for the <a>DescribeLoadBalancerPolicies</a> action.\n     </p>"
     },
     "DescribeLoadBalancerPolicyTypesInput":{
       "type":"structure",
-      "members":{"PolicyTypeNames":{
-          "$extends":["PolicyTypeNames"],
+      "members":{
+        "PolicyTypeNames":{
+          "shape":"PolicyTypeNames",
           "documentation":"<p>\n   \tSpecifies the name of the policy types.  If no names are specified,\n   \treturns the description of all\n   \tthe policy types defined by Elastic Load Balancing service.\n   \t</p>"
-        }}
+        }
+      }
     },
     "DescribeLoadBalancerPolicyTypesOutput":{
       "type":"structure",
-      "members":{"PolicyTypeDescriptions":{
-          "$extends":["PolicyTypeDescriptions"],
+      "members":{
+        "PolicyTypeDescriptions":{
+          "shape":"PolicyTypeDescriptions",
           "documentation":"<p>\n   \tList of policy type description structures of the specified policy type.\n   \tIf no policy type names are specified,\n   \treturns the description of all the policy types defined by Elastic Load Balancing service.\n   \t</p>"
-        }},
+        }
+      },
       "documentation":"<p>\n   \tThe output for the <a>DescribeLoadBalancerPolicyTypes</a> action.\n   \t</p>"
     },
     "Description":{"type":"string"},
@@ -1240,11 +1366,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name associated with the load balancer to be detached.            \n        </p>"
         },
         "Subnets":{
-          "$extends":["Subnets"],
+          "shape":"Subnets",
           "documentation":"<p>\n            A list of subnet IDs to remove from the set of configured subnets for the load balancer.\n        </p>"
         }
       },
@@ -1252,28 +1378,33 @@
     },
     "DetachLoadBalancerFromSubnetsOutput":{
       "type":"structure",
-      "members":{"Subnets":{
-          "$extends":["Subnets"],
+      "members":{
+        "Subnets":{
+          "shape":"Subnets",
           "documentation":"<p>\n            A list of subnet IDs the load balancer is now attached to.  \n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n            The output for the <a>DetachLoadBalancerFromSubnets</a> action.\n        </p>"
     },
     "DuplicateAccessPointNameException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            Load balancer name already exists for this account.\n            Please choose another name.\n        </p>"
     },
     "DuplicateListenerException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            A <code>Listener</code> already exists for the given \n            <code>LoadBalancerName</code> and <code>LoadBalancerPort</code>, \n            but with a different <code>InstancePort</code>, <code>Protocol</code>, \n            or <code>SSLCertificateId</code>.   \t\n        </p>"
     },
     "DuplicatePolicyNameException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            Policy with the same name exists for this load balancer.\n            Please choose another name.\n        </p>"
     },
     "EndPointPort":{"type":"integer"},
@@ -1288,23 +1419,23 @@
       ],
       "members":{
         "Target":{
-          "$extends":["HealthCheckTarget"],
+          "shape":"HealthCheckTarget",
           "documentation":"<p>\n        Specifies the instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL.\n        The range of valid ports is one (1) through 65535.\n        </p>\n        <note>\n            <p>\n            TCP is the default, specified as a TCP: port pair,\n            for example \"TCP:5000\". In this case a healthcheck simply\n            attempts to open a TCP connection to the instance on the\n            specified port. Failure to connect within the configured\n            timeout is considered unhealthy.\n            </p>\n            <p>SSL is also specified as SSL: port pair, for example, SSL:5000.</p>\n            <p>\n            For HTTP or HTTPS protocol, the situation is different. You have to include a ping path in the string. HTTP is specified\n            as a HTTP:port;/;PathToPing; grouping, for example\n            \"HTTP:80/weather/us/wa/seattle\". In this case, a HTTP GET\n            request is issued to the instance on the given port and path.\n            Any answer other than \"200 OK\" within the timeout period is\n            considered unhealthy.\n            </p>\n            <p>\n            The total length of the HTTP ping target needs to\n            be 1024 16-bit Unicode characters or less.\n            </p>\n        </note>"
         },
         "Interval":{
-          "$extends":["HealthCheckInterval"],
+          "shape":"HealthCheckInterval",
           "documentation":"<p>\n        Specifies the approximate interval, in seconds,\n        between health checks of an individual instance.\n        </p>"
         },
         "Timeout":{
-          "$extends":["HealthCheckTimeout"],
+          "shape":"HealthCheckTimeout",
           "documentation":"<p>\n        Specifies the amount of time, in seconds, during which no response\n        means a failed health probe.\n        </p>\n        <note>\n        This value must be less than the <i>Interval</i> value.\n        </note>"
         },
         "UnhealthyThreshold":{
-          "$extends":["UnhealthyThreshold"],
+          "shape":"UnhealthyThreshold",
           "documentation":"<p>\n        Specifies the number of consecutive health probe failures required\n        before moving the instance to the <i>Unhealthy</i> state.\n        </p>"
         },
         "HealthyThreshold":{
-          "$extends":["HealthyThreshold"],
+          "shape":"HealthyThreshold",
           "documentation":"<p>\n        Specifies the number of consecutive health probe successes required before\n        moving the instance to the <i>Healthy</i> state.\n        </p>"
         }
       },
@@ -1328,10 +1459,12 @@
     },
     "Instance":{
       "type":"structure",
-      "members":{"InstanceId":{
-          "$extends":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
           "documentation":"<p>\n        Provides an EC2 instance ID.\n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n        The Instance data type.\n        </p>"
     },
     "InstanceId":{"type":"string"},
@@ -1344,19 +1477,19 @@
       "type":"structure",
       "members":{
         "InstanceId":{
-          "$extends":["InstanceId"],
+          "shape":"InstanceId",
           "documentation":"<p>\n        Provides an EC2 instance ID.\n        </p>"
         },
         "State":{
-          "$extends":["State"],
+          "shape":"State",
           "documentation":"<p>Specifies the current state of the instance.</p>\n        \n        <p>Valid value: <code>InService</code>|<code>OutOfService</code></p>"
         },
         "ReasonCode":{
-          "$extends":["ReasonCode"],
+          "shape":"ReasonCode",
           "documentation":"<p>\n        Provides information about the cause of <i>OutOfService</i> instances.\n        Specifically, it indicates whether the cause is Elastic Load Balancing\n        or the instance behind the load balancer.\n        </p>\n        <p>Valid value: <code>ELB</code>|<code>Instance</code>|<code>N/A</code></p>"
         },
         "Description":{
-          "$extends":["Description"],
+          "shape":"Description",
           "documentation":"<p>\n            Provides a description of the instance state.\n        </p>"
         }
       },
@@ -1364,55 +1497,60 @@
     },
     "InstanceStates":{
       "type":"list",
-      "member":{"$extends":["InstanceState"]}
+      "member":{"shape":"InstanceState"}
     },
     "Instances":{
       "type":"list",
-      "member":{"$extends":["Instance"]}
+      "member":{"shape":"Instance"}
     },
     "InvalidConfigurationRequestException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n        Requested configuration change is invalid.\n        </p>"
     },
     "InvalidEndPointException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            The specified EndPoint is not valid.\n        </p>"
     },
     "InvalidSchemeException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            Invalid value for scheme. Scheme can only be specified for load balancers in VPC.         \n        </p>"
     },
     "InvalidSecurityGroupException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            One or more specified security groups do not exist.  \n        </p>"
     },
     "InvalidSubnetException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            The VPC has no Internet gateway. \n        </p>"
     },
     "LBCookieStickinessPolicies":{
       "type":"list",
-      "member":{"$extends":["LBCookieStickinessPolicy"]}
+      "member":{"shape":"LBCookieStickinessPolicy"}
     },
     "LBCookieStickinessPolicy":{
       "type":"structure",
       "members":{
         "PolicyName":{
-          "$extends":["PolicyName"],
+          "shape":"PolicyName",
           "documentation":"<p>The name for the policy being created. The name must be unique within the set of policies for this load balancer.\n        </p>"
         },
         "CookieExpirationPeriod":{
-          "$extends":["CookieExpirationPeriod"],
+          "shape":"CookieExpirationPeriod",
           "documentation":"<p>The time period in seconds after which the cookie should be considered stale. Not specifying this parameter indicates that the stickiness session will last for the duration of the browser session.\n        </p>"
         }
       },
@@ -1427,23 +1565,23 @@
       ],
       "members":{
         "Protocol":{
-          "$extends":["Protocol"],
+          "shape":"Protocol",
           "documentation":"<p>\n        Specifies the load balancer transport protocol to use for routing\n        - HTTP, HTTPS, TCP or SSL.\n        This property cannot be modified for the life of the load balancer.\n        </p>"
         },
         "LoadBalancerPort":{
-          "$extends":["AccessPointPort"],
+          "shape":"AccessPointPort",
           "documentation":"<p>\n        Specifies the external load balancer port number.\n        This property cannot be modified for the life of the load balancer.\n        </p>"
         },
         "InstanceProtocol":{
-          "$extends":["Protocol"],
+          "shape":"Protocol",
           "documentation":"<p>\n   \tSpecifies the protocol to use for routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL.\n   \tThis property cannot be modified for the life of the load balancer.\n   \t</p>\n   \t<note>\n   \tIf the front-end protocol is HTTP or HTTPS, <code>InstanceProtocol</code> has to be at the same protocol layer,\n   \t    i.e., HTTP or HTTPS. Likewise, if the front-end protocol is TCP or SSL, InstanceProtocol has to be TCP or SSL.\n   \t</note>\n   \t<note>\n   \tIf there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is secure,\n   \ti.e., HTTPS or SSL, the listener's <code>InstanceProtocol</code> has to be secure, i.e., HTTPS or SSL. \n    If there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is HTTP or TCP,\n    the listener's <code>InstanceProtocol</code> must be either HTTP or TCP. \n   \t</note>"
         },
         "InstancePort":{
-          "$extends":["InstancePort"],
+          "shape":"InstancePort",
           "documentation":"<p>\n        Specifies the TCP port on which the instance server is listening.\n        This property cannot be modified for the life of the load balancer.\n        </p>"
         },
         "SSLCertificateId":{
-          "$extends":["SSLCertificateId"],
+          "shape":"SSLCertificateId",
           "documentation":"<p>\n            The ARN string of the server certificate. \n            To get the ARN of the server certificate, call the AWS Identity and Access Management  \n            <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/index.html?API_UploadServerCertificate.html\">UploadServerCertificate   \t\n            </a> API. </p>"
         }
       },
@@ -1452,9 +1590,9 @@
     "ListenerDescription":{
       "type":"structure",
       "members":{
-        "Listener":{"$extends":["Listener"]},
+        "Listener":{"shape":"Listener"},
         "PolicyNames":{
-          "$extends":["PolicyNames"],
+          "shape":"PolicyNames",
           "documentation":"<p>\n            A list of policies enabled for this listener. \n            An empty list indicates that no policies are enabled.\n        </p>"
         }
       },
@@ -1462,34 +1600,40 @@
     },
     "ListenerDescriptions":{
       "type":"list",
-      "member":{"$extends":["ListenerDescription"]}
+      "member":{"shape":"ListenerDescription"}
     },
     "ListenerNotFoundException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n        Load balancer does not have a listener configured at the given port.\n        </p>"
     },
     "Listeners":{
       "type":"list",
-      "member":{"$extends":["Listener"]}
+      "member":{"shape":"Listener"}
     },
     "LoadBalancerAttributeNotFoundException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>The specified load balancer attribute could not be found.</p>"
     },
     "LoadBalancerAttributes":{
       "type":"structure",
       "members":{
         "CrossZoneLoadBalancing":{
-          "$extends":["CrossZoneLoadBalancing"],
-          "documentation":"<p>The name of the load balancer attribute.</p>"
+          "shape":"CrossZoneLoadBalancing",
+          "documentation":"<p>The name of the load balancer attribute. \n       If enabled, the load balancer routes the request traffic evenly across all back-end instances regardless of the Availability Zones.</p> \n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-disable-crosszone-lb.html\">Enable Cross-Zone Load Balancing</a>.</p>"
         },
         "AccessLog":{
-          "$extends":["AccessLog"],
-          "documentation":"<p>The name of the load balancer attribute.</p>"
+          "shape":"AccessLog",
+          "documentation":"<p>The name of the load balancer attribute.\n        If enabled, the load balancer captures detailed information of all the requests and delivers the information to the Amazon S3 bucket you specify.</p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-access-logs.html\">Enable Access Logs</a>.</p>"
+        },
+        "ConnectionDraining":{
+          "shape":"ConnectionDraining",
+          "documentation":"<p>The name of the load balancer attribute.\n        If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy back-end instance. </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/config-conn-drain.html\">Enable Connection Draining</a>.</p>"
         }
       },
       "documentation":"<p>The <code>LoadBalancerAttributes</code> data type.</p>"
@@ -1498,67 +1642,67 @@
       "type":"structure",
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n        Specifies the name associated with the load balancer.\n        </p>"
         },
         "DNSName":{
-          "$extends":["DNSName"],
+          "shape":"DNSName",
           "documentation":"<p>\n        Specifies the external DNS name associated with the load balancer.\n        </p>"
         },
         "CanonicalHostedZoneName":{
-          "$extends":["DNSName"],
+          "shape":"DNSName",
           "documentation":"<p>\n        Provides the name of the Amazon Route 53 hosted zone that is associated\n        with the load balancer. For information on how to associate your load\n        balancer with a hosted zone, go to <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/using-domain-names-with-elb.html\">Using Domain Names With Elastic Load Balancing</a>\n        in the <i>Elastic Load Balancing Developer Guide</i>.\n        </p>"
         },
         "CanonicalHostedZoneNameID":{
-          "$extends":["DNSName"],
+          "shape":"DNSName",
           "documentation":"<p>\n        Provides the ID of the Amazon Route 53 hosted zone name that is associated\n        with the load balancer. For information on how to associate or disassociate your load\n        balancer with a hosted zone, go to <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/using-domain-names-with-elb.html\">Using Domain Names With Elastic Load Balancing</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>. \n        </p>"
         },
         "ListenerDescriptions":{
-          "$extends":["ListenerDescriptions"],
+          "shape":"ListenerDescriptions",
           "documentation":"<p>\n        LoadBalancerPort, InstancePort, Protocol, InstanceProtocol, and PolicyNames are returned\n        in a list of tuples in the ListenerDescriptions element.\n        </p>"
         },
         "Policies":{
-          "$extends":["Policies"],
+          "shape":"Policies",
           "documentation":"<p>\n   \t\tProvides a list of policies defined for the load balancer.\n   \t\t</p>"
         },
         "BackendServerDescriptions":{
-          "$extends":["BackendServerDescriptions"],
+          "shape":"BackendServerDescriptions",
           "documentation":"<p>\n            Contains a list of back-end server descriptions.\n        </p>"
         },
         "AvailabilityZones":{
-          "$extends":["AvailabilityZones"],
+          "shape":"AvailabilityZones",
           "documentation":"<p>\n        Specifies a list of Availability Zones.\n        </p>"
         },
         "Subnets":{
-          "$extends":["Subnets"],
+          "shape":"Subnets",
           "documentation":"<p>\n          Provides a list of VPC subnet IDs for the load balancer.\n      </p>"
         },
         "VPCId":{
-          "$extends":["VPCId"],
+          "shape":"VPCId",
           "documentation":"<p>\n          Provides the ID of the VPC attached to the load balancer.\n      </p>"
         },
         "Instances":{
-          "$extends":["Instances"],
+          "shape":"Instances",
           "documentation":"<p>\n        Provides a list of EC2 instance IDs for the load balancer.\n        </p>"
         },
         "HealthCheck":{
-          "$extends":["HealthCheck"],
+          "shape":"HealthCheck",
           "documentation":"<p>\n        Specifies information regarding the\n        various health probes conducted on the load balancer.\n        </p>"
         },
         "SourceSecurityGroup":{
-          "$extends":["SourceSecurityGroup"],
+          "shape":"SourceSecurityGroup",
           "documentation":"<p>\n            The security group that you can use as part of your inbound rules for \n            your load balancer's back-end Amazon EC2 application instances.  \n            To only allow traffic from load balancers, add a security group rule to your back end instance that specifies this\n            source security group as the inbound source. \n        </p>"
         },
         "SecurityGroups":{
-          "$extends":["SecurityGroups"],
+          "shape":"SecurityGroups",
           "documentation":"<p>\n          The security groups the load balancer is a member of (VPC only).\n       </p>"
         },
         "CreatedTime":{
-          "$extends":["CreatedTime"],
+          "shape":"CreatedTime",
           "documentation":"<p>\n        Provides the date and time the load balancer was created.\n        </p>"
         },
         "Scheme":{
-          "$extends":["LoadBalancerScheme"],
+          "shape":"LoadBalancerScheme",
           "documentation":"<p>Specifies the type of load balancer.</p>\n\n        <p>If the <code>Scheme</code>  is <code>internet-facing</code>, the load balancer\n        has a publicly resolvable DNS name that resolves to public IP addresses.</p>\n        \n        <p>If the <code>Scheme</code>  is <code>internal</code>, the load balancer has a publicly resolvable\n           DNS name that resolves to private IP addresses.</p>\n          \n         <p> This option is only available for load balancers attached to an Amazon VPC. </p>"
         }
       },
@@ -1566,11 +1710,11 @@
     },
     "LoadBalancerDescriptions":{
       "type":"list",
-      "member":{"$extends":["LoadBalancerDescription"]}
+      "member":{"shape":"LoadBalancerDescription"}
     },
     "LoadBalancerNames":{
       "type":"list",
-      "member":{"$extends":["AccessPointName"]}
+      "member":{"shape":"AccessPointName"}
     },
     "LoadBalancerScheme":{"type":"string"},
     "Marker":{"type":"string"},
@@ -1582,11 +1726,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>The name of the load balancer.</p>"
         },
         "LoadBalancerAttributes":{
-          "$extends":["LoadBalancerAttributes"],
+          "shape":"LoadBalancerAttributes",
           "documentation":"<p>Attributes of the load balancer.</p>"
         }
       },
@@ -1596,10 +1740,10 @@
       "type":"structure",
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>The name of the load balancer.</p>"
         },
-        "LoadBalancerAttributes":{"$extends":["LoadBalancerAttributes"]}
+        "LoadBalancerAttributes":{"shape":"LoadBalancerAttributes"}
       },
       "documentation":"<p>The output for the <a>ModifyLoadBalancerAttributes</a> action.</p>"
     },
@@ -1607,15 +1751,15 @@
       "type":"structure",
       "members":{
         "AppCookieStickinessPolicies":{
-          "$extends":["AppCookieStickinessPolicies"],
+          "shape":"AppCookieStickinessPolicies",
           "documentation":"<p>\n            A list of the <a>AppCookieStickinessPolicy</a> objects created with <a>CreateAppCookieStickinessPolicy</a>.\n        </p>"
         },
         "LBCookieStickinessPolicies":{
-          "$extends":["LBCookieStickinessPolicies"],
+          "shape":"LBCookieStickinessPolicies",
           "documentation":"<p>\n            A list of <a>LBCookieStickinessPolicy</a> objects created with <a>CreateAppCookieStickinessPolicy</a>.\n        </p>"
         },
         "OtherPolicies":{
-          "$extends":["PolicyNames"],
+          "shape":"PolicyNames",
           "documentation":"<p>\n            A list of policy names other than the stickiness policies.\n        </p>"
         }
       },
@@ -1625,11 +1769,11 @@
       "type":"structure",
       "members":{
         "AttributeName":{
-          "$extends":["AttributeName"],
+          "shape":"AttributeName",
           "documentation":"<p>\n            The name of the attribute associated with the policy.\n        </p>"
         },
         "AttributeValue":{
-          "$extends":["AttributeValue"],
+          "shape":"AttributeValue",
           "documentation":"<p>\n            The value of the attribute associated with the policy.\n        </p>"
         }
       },
@@ -1639,11 +1783,11 @@
       "type":"structure",
       "members":{
         "AttributeName":{
-          "$extends":["AttributeName"],
+          "shape":"AttributeName",
           "documentation":"<p>\n            The name of the attribute associated with the policy.\n        </p>"
         },
         "AttributeValue":{
-          "$extends":["AttributeValue"],
+          "shape":"AttributeValue",
           "documentation":"<p>\n            The value of the attribute associated with the policy.\n        </p>"
         }
       },
@@ -1651,29 +1795,29 @@
     },
     "PolicyAttributeDescriptions":{
       "type":"list",
-      "member":{"$extends":["PolicyAttributeDescription"]}
+      "member":{"shape":"PolicyAttributeDescription"}
     },
     "PolicyAttributeTypeDescription":{
       "type":"structure",
       "members":{
         "AttributeName":{
-          "$extends":["AttributeName"],
+          "shape":"AttributeName",
           "documentation":"<p>\n            The name of the attribute associated with the policy type.\n        </p>"
         },
         "AttributeType":{
-          "$extends":["AttributeType"],
+          "shape":"AttributeType",
           "documentation":"<p>\n            The type of attribute.  For example, Boolean, Integer, etc.\n        </p>"
         },
         "Description":{
-          "$extends":["Description"],
+          "shape":"Description",
           "documentation":"<p>\n            A human-readable description of the attribute.\n        </p>"
         },
         "DefaultValue":{
-          "$extends":["DefaultValue"],
+          "shape":"DefaultValue",
           "documentation":"<p>\n            The default value of the attribute, if applicable.\n        </p>"
         },
         "Cardinality":{
-          "$extends":["Cardinality"],
+          "shape":"Cardinality",
           "documentation":"<p>\n            The cardinality of the attribute.  Valid Values:\n            <ul>\n                <li>ONE(1) : Single value required</li>\n                <li>ZERO_OR_ONE(0..1) : Up to one value can be supplied</li>\n                <li>ZERO_OR_MORE(0..*) : Optional. Multiple values are allowed</li>\n                <li>ONE_OR_MORE(1..*0) : Required.  Multiple values are allowed</li>\n            </ul>\n        </p>"
         }
       },
@@ -1681,25 +1825,25 @@
     },
     "PolicyAttributeTypeDescriptions":{
       "type":"list",
-      "member":{"$extends":["PolicyAttributeTypeDescription"]}
+      "member":{"shape":"PolicyAttributeTypeDescription"}
     },
     "PolicyAttributes":{
       "type":"list",
-      "member":{"$extends":["PolicyAttribute"]}
+      "member":{"shape":"PolicyAttribute"}
     },
     "PolicyDescription":{
       "type":"structure",
       "members":{
         "PolicyName":{
-          "$extends":["PolicyName"],
+          "shape":"PolicyName",
           "documentation":"<p>\n            The name of the policy associated with the load balancer.\n        </p>"
         },
         "PolicyTypeName":{
-          "$extends":["PolicyTypeName"],
+          "shape":"PolicyTypeName",
           "documentation":"<p>\n            The name of the policy type associated with the load balancer.\n        </p>"
         },
         "PolicyAttributeDescriptions":{
-          "$extends":["PolicyAttributeDescriptions"],
+          "shape":"PolicyAttributeDescriptions",
           "documentation":"<p>\n            A list of policy attribute description structures.\n        </p>"
         }
       },
@@ -1707,32 +1851,33 @@
     },
     "PolicyDescriptions":{
       "type":"list",
-      "member":{"$extends":["PolicyDescription"]}
+      "member":{"shape":"PolicyDescription"}
     },
     "PolicyName":{"type":"string"},
     "PolicyNames":{
       "type":"list",
-      "member":{"$extends":["PolicyName"]}
+      "member":{"shape":"PolicyName"}
     },
     "PolicyNotFoundException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n        One or more specified policies were not found.\n        </p>"
     },
     "PolicyTypeDescription":{
       "type":"structure",
       "members":{
         "PolicyTypeName":{
-          "$extends":["PolicyTypeName"],
+          "shape":"PolicyTypeName",
           "documentation":"<p>\n            The name of the policy type.\n        </p>"
         },
         "Description":{
-          "$extends":["Description"],
+          "shape":"Description",
           "documentation":"<p>\n            A human-readable description of the policy type.\n        </p>"
         },
         "PolicyAttributeTypeDescriptions":{
-          "$extends":["PolicyAttributeTypeDescriptions"],
+          "shape":"PolicyAttributeTypeDescriptions",
           "documentation":"<p>\n            The description of the policy attributes associated with the load balancer policies defined by the Elastic Load Balancing service.\n        </p>"
         }
       },
@@ -1740,22 +1885,23 @@
     },
     "PolicyTypeDescriptions":{
       "type":"list",
-      "member":{"$extends":["PolicyTypeDescription"]}
+      "member":{"shape":"PolicyTypeDescription"}
     },
     "PolicyTypeName":{"type":"string"},
     "PolicyTypeNames":{
       "type":"list",
-      "member":{"$extends":["PolicyTypeName"]}
+      "member":{"shape":"PolicyTypeName"}
     },
     "PolicyTypeNotFoundException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            One or more of the specified policy types do not exist.\n        </p>"
     },
     "Ports":{
       "type":"list",
-      "member":{"$extends":["AccessPointPort"]}
+      "member":{"shape":"AccessPointPort"}
     },
     "Protocol":{"type":"string"},
     "ReasonCode":{"type":"string"},
@@ -1767,11 +1913,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n        The name associated with the load balancer.\n        The name must be unique within your set of load balancers.        \n        </p>"
         },
         "Instances":{
-          "$extends":["Instances"],
+          "shape":"Instances",
           "documentation":"<p>\n        A list of instance IDs that should be registered with the load balancer.</p>"
         }
       },
@@ -1779,10 +1925,12 @@
     },
     "RegisterEndPointsOutput":{
       "type":"structure",
-      "members":{"Instances":{
-          "$extends":["Instances"],
+      "members":{
+        "Instances":{
+          "shape":"Instances",
           "documentation":"<p>\n        An updated list of instances for the load balancer.\n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n\t\tThe output for the <a>RegisterInstancesWithLoadBalancer</a> action.\n\t\t</p>"
     },
     "RemoveAvailabilityZonesInput":{
@@ -1793,11 +1941,11 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n        The name associated with the load balancer.        \n        </p>"
         },
         "AvailabilityZones":{
-          "$extends":["AvailabilityZones"],
+          "shape":"AvailabilityZones",
           "documentation":"<p>\n        A list of Availability Zones to be removed from the load balancer.\n        </p>\n        <note>\n        There must be at least one Availability Zone\n        registered with a load balancer at all times.       \n        Specified Availability Zones must be in the same region.\n        </note>"
         }
       },
@@ -1805,10 +1953,12 @@
     },
     "RemoveAvailabilityZonesOutput":{
       "type":"structure",
-      "members":{"AvailabilityZones":{
-          "$extends":["AvailabilityZones"],
+      "members":{
+        "AvailabilityZones":{
+          "shape":"AvailabilityZones",
           "documentation":"<p>\n        A list of updated Availability Zones for the load balancer.\n        </p>"
-        }},
+        }
+      },
       "documentation":"<p>\n\t\tThe output for the <a>DisableAvailabilityZonesForLoadBalancer</a> action.\n\t\t</p>"
     },
     "S3BucketName":{"type":"string"},
@@ -1818,7 +1968,7 @@
     "SecurityGroupOwnerAlias":{"type":"string"},
     "SecurityGroups":{
       "type":"list",
-      "member":{"$extends":["SecurityGroupId"]}
+      "member":{"shape":"SecurityGroupId"}
     },
     "SetLoadBalancerListenerSSLCertificateInput":{
       "type":"structure",
@@ -1829,15 +1979,15 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name of the load balancer. \n        </p>"
         },
         "LoadBalancerPort":{
-          "$extends":["AccessPointPort"],
+          "shape":"AccessPointPort",
           "documentation":"<p>\n            The port that uses the specified SSL certificate. \n        </p>"
         },
         "SSLCertificateId":{
-          "$extends":["SSLCertificateId"],
+          "shape":"SSLCertificateId",
           "documentation":"<p>\n            The Amazon Resource Number (ARN) of the SSL certificate chain to use. \n            For more information on SSL certificates, see \n            <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingServerCerts.html\">\n                Managing Server Certificates</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>"
         }
       },
@@ -1858,15 +2008,15 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The mnemonic name associated with the load balancer.\n            This name must be unique within the set of your load balancers.\n        </p>"
         },
         "InstancePort":{
-          "$extends":["EndPointPort"],
+          "shape":"EndPointPort",
           "documentation":"<p>\n            The port number associated with the back-end server.\n        </p>"
         },
         "PolicyNames":{
-          "$extends":["PolicyNames"],
+          "shape":"PolicyNames",
           "documentation":"<p>\n            List of policy names to be set.  If the list is empty, then all current polices are\n            removed from the back-end server.\n        </p>"
         }
       }
@@ -1886,15 +2036,15 @@
       ],
       "members":{
         "LoadBalancerName":{
-          "$extends":["AccessPointName"],
+          "shape":"AccessPointName",
           "documentation":"<p>\n            The name of the load balancer.            \n        </p>"
         },
         "LoadBalancerPort":{
-          "$extends":["AccessPointPort"],
+          "shape":"AccessPointPort",
           "documentation":"<p>\n            The external port of the load balancer to associate the policy.  \n        </p>"
         },
         "PolicyNames":{
-          "$extends":["PolicyNames"],
+          "shape":"PolicyNames",
           "documentation":"<p>\n            List of policies to be associated with the listener. If the list is empty, the current policy is removed from the listener.\n        </p>"
         }
       },
@@ -1910,11 +2060,11 @@
       "type":"structure",
       "members":{
         "OwnerAlias":{
-          "$extends":["SecurityGroupOwnerAlias"],
+          "shape":"SecurityGroupOwnerAlias",
           "documentation":"<p>\n            Owner of the source security group. Use this value for the \n            <code>--source-group-user</code> parameter of the <code>ec2-authorize</code>\n            command in the Amazon EC2 command line tool.\n        </p>"
         },
         "GroupName":{
-          "$extends":["SecurityGroupName"],
+          "shape":"SecurityGroupName",
           "documentation":"<p>\n            Name of the source security group. Use this value for the \n            <code>--source-group</code> parameter of the <code>ec2-authorize</code>\n            command in the Amazon EC2 command line tool.\n        </p>"
         }
       },
@@ -1926,22 +2076,25 @@
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n          One or more subnets were not found.\n        </p>"
     },
     "Subnets":{
       "type":"list",
-      "member":{"$extends":["SubnetId"]}
+      "member":{"shape":"SubnetId"}
     },
     "TooManyAccessPointsException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            The quota for the number of load balancers has already been reached.\n        </p>"
     },
     "TooManyPoliciesException":{
       "type":"structure",
       "members":{
       },
+      "exception":true,
       "documentation":"<p>\n            Quota for number of policies for this load balancer\n            has already been reached.\n        </p>"
     },
     "UnhealthyThreshold":{

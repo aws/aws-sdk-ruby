@@ -1078,7 +1078,7 @@
                     "required": true
                   }
                 },
-                "documentation": "\n       <p>The name of the load balancer attribute.</p> \n    "
+                "documentation": "\n       <p>The name of the load balancer attribute. \n       If enabled, the load balancer routes the request traffic evenly across all back-end instances regardless of the Availability Zones.</p> \n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-disable-crosszone-lb.html\">Enable Cross-Zone Load Balancing</a>.</p>\n    "
               },
               "AccessLog": {
                 "shape_name": "AccessLog",
@@ -1103,10 +1103,28 @@
                   "S3BucketPrefix": {
                     "shape_name": "AccessLogPrefix",
                     "type": "string",
-                    "documentation": "\n        <p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>/my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>\n    "
+                    "documentation": "\n        <p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>\n    "
                   }
                 },
-                "documentation": "\n        <p>The name of the load balancer attribute.</p> \n    "
+                "documentation": "\n        <p>The name of the load balancer attribute.\n        If enabled, the load balancer captures detailed information of all the requests and delivers the information to the Amazon S3 bucket you specify.</p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-access-logs.html\">Enable Access Logs</a>.</p>\n    "
+              },
+              "ConnectionDraining": {
+                "shape_name": "ConnectionDraining",
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "shape_name": "ConnectionDrainingEnabled",
+                    "type": "boolean",
+                    "documentation": "\n        <p>Specifies whether connection draining is enabled for the load balancer.</p>\n    ",
+                    "required": true
+                  },
+                  "Timeout": {
+                    "shape_name": "ConnectionDrainingTimeout",
+                    "type": "integer",
+                    "documentation": "\n        <p>Specifies the maximum time (in seconds) to keep the existing connections open before deregistering the instances.</p>\n    "
+                  }
+                },
+                "documentation": "\n        <p>The name of the load balancer attribute.\n        If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy back-end instance. </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/config-conn-drain.html\">Enable Connection Draining</a>.</p>\n        \n    "
               }
             },
             "documentation": "\n      <p>The load balancer attributes structure.</p>  \n    "
@@ -1130,7 +1148,7 @@
           "documentation": "\n        <p>The specified load balancer attribute could not be found.</p>  \n    "
         }
       ],
-      "documentation": "\n        <p>Returns detailed information about all of the attributes associated with the specified load balancer.</p>  \n        <examples>\n            <example>                           \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&Version=2012-06-01\n&Action=DescribeLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DescribeLoadBalancerAttributesResponse  xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n <DescribeLoadBalancerAttributesResult>\n    <LoadBalancerAttributes>\n    <AccessLog>\n        <Enabled>true</Enabled>\n        <S3BucketName>my-loadbalancer-logs</S3BucketName>\n        <S3BucketPrefix>testprefix</S3BucketPrefix>\n        <EmitInterval>5</EmitInterval>\n      </AccessLog>\n      <CrossZoneLoadBalancing>\n        <Enabled>true</Enabled>\n      </CrossZoneLoadBalancing>\n    </LoadBalancerAttributes>\n  </DescribeLoadBalancerAttributesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</DescribeLoadBalancerAttributesResponse>\n </queryresponse>\n            </example>\n        </examples>             \n    "
+      "documentation": "\n        <p>Returns detailed information about all of the attributes associated with the specified load balancer.</p>  \n        <examples>\n            <example>                           \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&Version=2012-06-01\n&Action=DescribeLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DescribeLoadBalancerAttributesResponse  xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n <DescribeLoadBalancerAttributesResult>\n    <LoadBalancerAttributes>\n    <AccessLog>\n        <Enabled>true</Enabled>\n        <S3BucketName>my-loadbalancer-logs</S3BucketName>\n        <S3BucketPrefix>testprefix</S3BucketPrefix>\n        <EmitInterval>5</EmitInterval>\n      </AccessLog>\n      <CrossZoneLoadBalancing>\n        <Enabled>true</Enabled>\n      </CrossZoneLoadBalancing>\n      <ConnectionDraining>\n        <Enabled>true</Enabled>\n        <Timeout>60</Timeout>\n     </ConnectionDraining> \n    </LoadBalancerAttributes>\n  </DescribeLoadBalancerAttributesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</DescribeLoadBalancerAttributesResponse>\n </queryresponse>\n            </example>\n        </examples>             \n    "
     },
     "DescribeLoadBalancerPolicies": {
       "name": "DescribeLoadBalancerPolicies",
@@ -1876,7 +1894,7 @@
                     "required": true
                   }
                 },
-                "documentation": "\n       <p>The name of the load balancer attribute.</p> \n    "
+                "documentation": "\n       <p>The name of the load balancer attribute. \n       If enabled, the load balancer routes the request traffic evenly across all back-end instances regardless of the Availability Zones.</p> \n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-disable-crosszone-lb.html\">Enable Cross-Zone Load Balancing</a>.</p>\n    "
               },
               "AccessLog": {
                 "shape_name": "AccessLog",
@@ -1901,10 +1919,28 @@
                   "S3BucketPrefix": {
                     "shape_name": "AccessLogPrefix",
                     "type": "string",
-                    "documentation": "\n        <p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>/my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>\n    "
+                    "documentation": "\n        <p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>\n    "
                   }
                 },
-                "documentation": "\n        <p>The name of the load balancer attribute.</p> \n    "
+                "documentation": "\n        <p>The name of the load balancer attribute.\n        If enabled, the load balancer captures detailed information of all the requests and delivers the information to the Amazon S3 bucket you specify.</p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-access-logs.html\">Enable Access Logs</a>.</p>\n    "
+              },
+              "ConnectionDraining": {
+                "shape_name": "ConnectionDraining",
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "shape_name": "ConnectionDrainingEnabled",
+                    "type": "boolean",
+                    "documentation": "\n        <p>Specifies whether connection draining is enabled for the load balancer.</p>\n    ",
+                    "required": true
+                  },
+                  "Timeout": {
+                    "shape_name": "ConnectionDrainingTimeout",
+                    "type": "integer",
+                    "documentation": "\n        <p>Specifies the maximum time (in seconds) to keep the existing connections open before deregistering the instances.</p>\n    "
+                  }
+                },
+                "documentation": "\n        <p>The name of the load balancer attribute.\n        If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy back-end instance. </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/config-conn-drain.html\">Enable Connection Draining</a>.</p>\n        \n    "
               }
             },
             "documentation": "\n      <p>Attributes of the load balancer.</p>  \n    ",
@@ -1937,7 +1973,7 @@
                     "required": true
                   }
                 },
-                "documentation": "\n       <p>The name of the load balancer attribute.</p> \n    "
+                "documentation": "\n       <p>The name of the load balancer attribute. \n       If enabled, the load balancer routes the request traffic evenly across all back-end instances regardless of the Availability Zones.</p> \n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-disable-crosszone-lb.html\">Enable Cross-Zone Load Balancing</a>.</p>\n    "
               },
               "AccessLog": {
                 "shape_name": "AccessLog",
@@ -1962,10 +1998,28 @@
                   "S3BucketPrefix": {
                     "shape_name": "AccessLogPrefix",
                     "type": "string",
-                    "documentation": "\n        <p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>/my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>\n    "
+                    "documentation": "\n        <p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>\n    "
                   }
                 },
-                "documentation": "\n        <p>The name of the load balancer attribute.</p> \n    "
+                "documentation": "\n        <p>The name of the load balancer attribute.\n        If enabled, the load balancer captures detailed information of all the requests and delivers the information to the Amazon S3 bucket you specify.</p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-access-logs.html\">Enable Access Logs</a>.</p>\n    "
+              },
+              "ConnectionDraining": {
+                "shape_name": "ConnectionDraining",
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "shape_name": "ConnectionDrainingEnabled",
+                    "type": "boolean",
+                    "documentation": "\n        <p>Specifies whether connection draining is enabled for the load balancer.</p>\n    ",
+                    "required": true
+                  },
+                  "Timeout": {
+                    "shape_name": "ConnectionDrainingTimeout",
+                    "type": "integer",
+                    "documentation": "\n        <p>Specifies the maximum time (in seconds) to keep the existing connections open before deregistering the instances.</p>\n    "
+                  }
+                },
+                "documentation": "\n        <p>The name of the load balancer attribute.\n        If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy back-end instance. </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/config-conn-drain.html\">Enable Connection Draining</a>.</p>\n        \n    "
               }
             },
             "documentation": "\n        <p>The <code>LoadBalancerAttributes</code> data type.</p>\n    "
@@ -1996,7 +2050,7 @@
           "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>Modifies the attributes of a specified load balancer.</p> \n        <p>You can modify the attributes, such as cross-zone load balancing and access logs, \n            by either enabling or disabling them.</p>\n        \n        <p>For information on modifying the cross-zone load balancing attribute, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-disable-crosszone-lb.html\">Enable or Disable Cross-Zone Load Balancing for Your Load balancer</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <p>For information on modifying the access log attribute, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/access-log-collection.html\">Enable or Disable Access Log Collection for Your Load Balancer</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <examples>\n            <example>\n                  <name>Enable Cross-Zone Load Balancing</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.CrossZoneLoadBalancing.Enabled=true                    \n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult> \n<LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <CrossZoneLoadBalancing>\n        <Enabled>true</Enabled>\n      </CrossZoneLoadBalancing>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n            </example>\n            <example>\n                <name>Enable Access Log</name>\n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.AccessLog.Enabled=true \n&LoadBalancerAttributes.AccessLog.S3BucketName=my-loadbalancer-logs\n&LoadBalancerAttributes.AccessLog.S3BucketPrefix=my-bucket-prefix/prod\n&LoadBalancerAttributes.AccessLog.EmitInterval=5\n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>\n                \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult>\n    <LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <AccessLog>\n        <Enabled>true</Enabled>\n        <S3BucketName>my-loadbalancer-logs</S3BucketName>\n        <S3BucketPrefix>my-bucket-prefix/prod</S3BucketPrefix>\n        <EmitInterval>5</EmitInterval>\n      </AccessLog>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult>\n \n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n                \n            </example>\n        </examples>             \n    "
+      "documentation": "\n        <p>Modifies the attributes of a specified load balancer.</p> \n        <p>You can modify the load balancer attributes, such as <code>AccessLogs</code>, <code>ConnectionDraining</code>, and \n            <code>CrossZoneLoadBalancing</code> by either enabling or disabling them.</p> \n         <p>For information on cross-zone load balancing, see <b>Request Routing</b> and for information on connection draining, see <b>Connection Draining</b>\n             in the <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html\">Concepts</a> section of the\n             <i>Elastic Load Balancer Developer Guide</i>. For information on access logs, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/access-log-collection.html\">Access Logs</a>.</p>   \n               \n        <examples>\n            <example>\n                  <name>Enable Cross-Zone Load Balancing</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.CrossZoneLoadBalancing.Enabled=true                    \n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult> \n<LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <CrossZoneLoadBalancing>\n        <Enabled>true</Enabled>\n      </CrossZoneLoadBalancing>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n            </example>\n            <example>\n                <name>Enable Access Log</name>\n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.AccessLog.Enabled=true \n&LoadBalancerAttributes.AccessLog.S3BucketName=my-loadbalancer-logs\n&LoadBalancerAttributes.AccessLog.S3BucketPrefix=my-bucket-prefix/prod\n&LoadBalancerAttributes.AccessLog.EmitInterval=60\n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>\n                \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult>\n    <LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <AccessLog>\n        <Enabled>true</Enabled>\n        <S3BucketName>my-loadbalancer-logs</S3BucketName>\n        <S3BucketPrefix>my-bucket-prefix/prod</S3BucketPrefix>\n        <EmitInterval>60</EmitInterval>\n      </AccessLog>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult> \n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n                \n            </example>\n            <example>\n                <name>Enable Connection Draining</name>\n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.ConnectionDraining.Enabled=true \n&LoadBalancerAttributes.ConnectionDraining.Timeout=60\n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>\n                \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult>\n    <LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <ConnectionDraining>\n        <Enabled>true</Enabled>\n        <Timeout>60</Timeout>        \n      </ConnectionDraining>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult> \n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n                \n            </example>\n        </examples>             \n    "
     },
     "RegisterInstancesWithLoadBalancer": {
       "name": "RegisterInstancesWithLoadBalancer",

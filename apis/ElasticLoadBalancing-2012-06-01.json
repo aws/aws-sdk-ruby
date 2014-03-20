@@ -637,6 +637,20 @@
                     "serialized_name": "S3BucketPrefix"
                   }
                 }
+              },
+              "connection_draining": {
+                "type": "structure",
+                "serialized_name": "ConnectionDraining",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "timeout": {
+                    "type": "integer",
+                    "serialized_name": "Timeout"
+                  }
+                }
               }
             }
           }
@@ -1201,6 +1215,21 @@
                     "serialized_name": "S3BucketPrefix"
                   }
                 }
+              },
+              "connection_draining": {
+                "type": "structure",
+                "serialized_name": "ConnectionDraining",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "required": true,
+                    "serialized_name": "Enabled"
+                  },
+                  "timeout": {
+                    "type": "integer",
+                    "serialized_name": "Timeout"
+                  }
+                }
               }
             }
           }
@@ -1249,6 +1278,20 @@
                   "s3_bucket_prefix": {
                     "type": "string",
                     "serialized_name": "S3BucketPrefix"
+                  }
+                }
+              },
+              "connection_draining": {
+                "type": "structure",
+                "serialized_name": "ConnectionDraining",
+                "members": {
+                  "enabled": {
+                    "type": "boolean",
+                    "serialized_name": "Enabled"
+                  },
+                  "timeout": {
+                    "type": "integer",
+                    "serialized_name": "Timeout"
                   }
                 }
               }
