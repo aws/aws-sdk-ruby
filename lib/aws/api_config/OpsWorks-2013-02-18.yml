@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -84,6 +84,8 @@
         Version:
         - :string
     UseCustomCookbooks:
+    - :boolean
+    UseOpsworksSecurityGroups:
     - :boolean
     CustomCookbooksSource:
     - :structure:
@@ -232,6 +234,8 @@
     - :string
     InstallUpdatesOnBoot:
     - :boolean
+    EbsOptimized:
+    - :boolean
   :outputs:
     InstanceId:
       :sym: :instance_id
@@ -279,6 +283,10 @@
           Size:
           - :integer
           - :required
+          VolumeType:
+          - :string
+          Iops:
+          - :integer
     EnableAutoHealing:
     - :boolean
     AutoAssignElasticIps:
@@ -303,6 +311,8 @@
         - :list:
           - :string
     InstallUpdatesOnBoot:
+    - :boolean
+    UseEbsOptimizedInstances:
     - :boolean
   :outputs:
     LayerId:
@@ -348,6 +358,8 @@
         Version:
         - :string
     UseCustomCookbooks:
+    - :boolean
+    UseOpsworksSecurityGroups:
     - :boolean
     CustomCookbooksSource:
     - :structure:
@@ -796,6 +808,9 @@
         InstallUpdatesOnBoot:
           :sym: :install_updates_on_boot
           :type: :boolean
+        EbsOptimized:
+          :sym: :ebs_optimized
+          :type: :boolean
 - :name: DescribeLayers
   :method: :describe_layers
   :inputs:
@@ -858,6 +873,12 @@
             Size:
               :sym: :size
               :type: :integer
+            VolumeType:
+              :sym: :volume_type
+              :type: :string
+            Iops:
+              :sym: :iops
+              :type: :integer
         EnableAutoHealing:
           :sym: :enable_auto_healing
           :type: :boolean
@@ -910,6 +931,9 @@
           :type: :string
         InstallUpdatesOnBoot:
           :sym: :install_updates_on_boot
+          :type: :boolean
+        UseEbsOptimizedInstances:
+          :sym: :use_ebs_optimized_instances
           :type: :boolean
 - :name: DescribeLoadBasedAutoScaling
   :method: :describe_load_based_auto_scaling
@@ -1063,6 +1087,12 @@
         CreatedAt:
           :sym: :created_at
           :type: :string
+        VolumeType:
+          :sym: :volume_type
+          :type: :string
+        Iops:
+          :sym: :iops
+          :type: :integer
 - :name: DescribeServiceErrors
   :method: :describe_service_errors
   :inputs:
@@ -1113,6 +1143,9 @@
         Name:
           :sym: :name
           :type: :string
+        Arn:
+          :sym: :arn
+          :type: :string
         LayersCount:
           :sym: :layers_count
           :type: :integer
@@ -1128,6 +1161,9 @@
               :type: :integer
             ConnectionLost:
               :sym: :connection_lost
+              :type: :integer
+            Online:
+              :sym: :online
               :type: :integer
             Pending:
               :sym: :pending
@@ -1153,6 +1189,9 @@
             Stopped:
               :sym: :stopped
               :type: :integer
+            Stopping:
+              :sym: :stopping
+              :type: :integer
             Terminated:
               :sym: :terminated
               :type: :integer
@@ -1175,6 +1214,9 @@
           :type: :string
         Name:
           :sym: :name
+          :type: :string
+        Arn:
+          :sym: :arn
           :type: :string
         Region:
           :sym: :region
@@ -1221,6 +1263,9 @@
               :type: :string
         UseCustomCookbooks:
           :sym: :use_custom_cookbooks
+          :type: :boolean
+        UseOpsworksSecurityGroups:
+          :sym: :use_opsworks_security_groups
           :type: :boolean
         CustomCookbooksSource:
           :sym: :custom_cookbooks_source
@@ -1390,6 +1435,12 @@
         AvailabilityZone:
           :sym: :availability_zone
           :type: :string
+        VolumeType:
+          :sym: :volume_type
+          :type: :string
+        Iops:
+          :sym: :iops
+          :type: :integer
 - :name: DetachElasticLoadBalancer
   :method: :detach_elastic_load_balancer
   :inputs:
@@ -1712,6 +1763,10 @@
           Size:
           - :integer
           - :required
+          VolumeType:
+          - :string
+          Iops:
+          - :integer
     EnableAutoHealing:
     - :boolean
     AutoAssignElasticIps:
@@ -1736,6 +1791,8 @@
         - :list:
           - :string
     InstallUpdatesOnBoot:
+    - :boolean
+    UseEbsOptimizedInstances:
     - :boolean
   :outputs: {}
 - :name: UpdateMyUserProfile
@@ -1798,6 +1855,8 @@
     - :string
     DefaultRootDeviceType:
     - :string
+    UseOpsworksSecurityGroups:
+    - :boolean
   :outputs: {}
 - :name: UpdateUserProfile
   :method: :update_user_profile
