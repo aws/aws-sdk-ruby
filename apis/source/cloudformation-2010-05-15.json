@@ -45,14 +45,14 @@
             "shape_name": "TemplateBody",
             "type": "string",
             "min_length": 1,
-            "documentation": "\n      <p>Structure containing the template body. (For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.)</p>\n      <p>Conditional: You must pass <code>TemplateBody</code> or <code>TemplateURL</code>. If both are passed, only\n         <code>TemplateBody</code> is used.</p>\n   "
+            "documentation": "\n      <p>Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p>\n      <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>\n   "
           },
           "TemplateURL": {
             "shape_name": "TemplateURL",
             "type": "string",
             "min_length": 1,
             "max_length": 1024,
-            "documentation": "\n      <p>Location of file containing the template body. The URL must point to a template (max size: 307,200 bytes)\n         located in an S3 bucket in the same region as the stack. For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p>\n      <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only\n         <code>TemplateBody</code> is used.</p>\n   "
+            "documentation": "\n      <p>Location of file containing the template body. The URL must point to a template (max size: 307,200 bytes)\n         located in an S3 bucket in the same region as the stack. For more information, go to the <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p>\n      <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>\n   "
           },
           "Parameters": {
             "shape_name": "Parameters",
@@ -126,14 +126,14 @@
             "type": "string",
             "min_length": 1,
             "max_length": 16384,
-            "documentation": "\n       <p>Structure containing the stack policy body. (For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html\">\n          Prevent Updates to Stack Resources</a> in the AWS CloudFormation User Guide.)</p>\n      <p>If you pass <code>StackPolicyBody</code> and <code>StackPolicyURL</code>, only\n         <code>StackPolicyBody</code> is used.</p>\n   "
+            "documentation": "\n       <p>Structure containing the stack policy body. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html\">\n          Prevent Updates to Stack Resources</a> in the AWS CloudFormation User Guide.\n      You can specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code> parameter, but not both.</p>\n   "
           },
           "StackPolicyURL": {
             "shape_name": "StackPolicyURL",
             "type": "string",
             "min_length": 1,
             "max_length": 1350,
-            "documentation": "\n      <p>Location of a file containing the stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack. If you pass <code>StackPolicyBody</code> and <code>StackPolicyURL</code>, only\n         <code>StackPolicyBody</code> is used.</p>\n   "
+            "documentation": "\n      <p>Location of a file containing the stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack.\n      You can specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code> parameter, but not both.</p>\n   "
           },
           "Tags": {
             "shape_name": "Tags",
@@ -195,7 +195,7 @@
           "documentation": "\n      <p>The template contains resources with capabilities that were not specified in the Capabilities parameter.</p>\n   "
         }
       ],
-      "documentation": "\n      <p>Creates a stack as specified in the template. After the call completes successfully, the stack creation\n         starts. You can check the status of the stack via the <a>DescribeStacks</a> API.</p>\n      <note> Currently, the limit for stacks is 20 stacks per account per region. </note>\n\n      <examples>\n         <queryrequest>\nhttps://cloudformation.us-east-1.amazonaws.com/\n ?Action=CreateStack\n &StackName=MyStack\n &TemplateBody=[Template Document]\n &NotificationARNs.member.1=arn:aws:sns:us-east-1:1234567890:my-topic\n &Parameters.member.1.ParameterKey=AvailabilityZone\n &Parameters.member.1.ParameterValue=us-east-1a\n &Version=2010-05-15\n &SignatureVersion=2\n &Timestamp=2010-07-27T22%3A26%3A28.000Z\n &AWSAccessKeyId=[AWS Access KeyID]\n &Signature=[Signature]</queryrequest>\n\n         <queryresponse>\n<CreateStackResult>\n  <StackId>arn:aws:cloudformation:us-east-1:123456789:stack/MyStack/aaf549a0-a413-11df-adb3-5081b3858e83</StackId>\n</CreateStackResult></queryresponse>\n      </examples>\n   "
+      "documentation": "\n      <p>Creates a stack as specified in the template. After the call completes successfully, the stack creation\n         starts. You can check the status of the stack via the <a>DescribeStacks</a> API.</p>\n      <examples>\n         <queryrequest>\nhttps://cloudformation.us-east-1.amazonaws.com/\n ?Action=CreateStack\n &StackName=MyStack\n &TemplateBody=[Template Document]\n &NotificationARNs.member.1=arn:aws:sns:us-east-1:1234567890:my-topic\n &Parameters.member.1.ParameterKey=AvailabilityZone\n &Parameters.member.1.ParameterValue=us-east-1a\n &Version=2010-05-15\n &SignatureVersion=2\n &Timestamp=2010-07-27T22%3A26%3A28.000Z\n &AWSAccessKeyId=[AWS Access KeyID]\n &Signature=[Signature]</queryrequest>\n\n         <queryresponse>\n<CreateStackResult>\n  <StackId>arn:aws:cloudformation:us-east-1:123456789:stack/MyStack/aaf549a0-a413-11df-adb3-5081b3858e83</StackId>\n</CreateStackResult></queryresponse>\n      </examples>\n   "
     },
     "DeleteStack": {
       "name": "DeleteStack",
@@ -772,7 +772,7 @@
             "shape_name": "TemplateBody",
             "type": "string",
             "min_length": 1,
-            "documentation": "\n      <p>Structure containing the template body. (For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.)</p>\n      <p>Conditional: You must pass <code>TemplateBody</code> or <code>TemplateURL</code>. If both are passed, only\n            <code>TemplateBody</code> is used.</p>\n   "
+            "documentation": "\n      <p>Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. (For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.)</p>\n      <p>Conditional: You must pass <code>TemplateBody</code> or <code>TemplateURL</code>. If both are passed, only\n            <code>TemplateBody</code> is used.</p>\n   "
           },
           "TemplateURL": {
             "shape_name": "TemplateURL",
@@ -855,7 +855,7 @@
       "errors": [
 
       ],
-      "documentation": "\n       <p>Returns the stack policy for a specified stack. If a stack doesn't have a policy, a null value is returned.</p>\n       <examples>\n           <queryrequest>\nhttps://cloudformation.us-east-1.amazonaws.com/\n ?Action=GetStackPolicy\n &StackName=MyStack\n &Version=2010-05-15\n &SignatureVersion=2\n &Timestamp=2010-07-27T22%3A26%3A28.000Z\n &AWSAccessKeyId=[AWS Access KeyID]\n &Signature=[Signature]</queryrequest>\n           <queryresponse>\n<GetTemplateResult>\n    <StackPolicyBody>\"{\n    \"Statement\" : [\n      {\n        \"Effect\" : \"Deny\",\n        \"Action\" : \"Update*\",\n        \"Principal\" : \"*\",\n        \"Resource\" : \"LogicalResourceId/ProductionDatabase\"\n      },\n      {\n        \"Effect\" : \"Allow\",\n        \"Action\" : \"Update:*\",\n        \"Principal\" : \"*\",\n        \"Resource\" : \"*\"\n      }\n    ]\n  }</StackPolicyBody>\n</GetTemplateResult></queryresponse>\n       </examples>\n   "
+      "documentation": "\n       <p>Returns the stack policy for a specified stack. If a stack doesn't have a policy, a null value is returned.</p>\n       <examples>\n           <queryrequest>\nhttps://cloudformation.us-east-1.amazonaws.com/\n ?Action=GetStackPolicy\n &StackName=MyStack\n &Version=2010-05-15\n &SignatureVersion=2\n &Timestamp=2010-07-27T22%3A26%3A28.000Z\n &AWSAccessKeyId=[AWS Access KeyID]\n &Signature=[Signature]</queryrequest>\n           <queryresponse>\n<GetStackPolicyResult>\n    <StackPolicyBody>\"{\n    \"Statement\" : [\n      {\n        \"Effect\" : \"Deny\",\n        \"Action\" : \"Update:*\",\n        \"Principal\" : \"*\",\n        \"Resource\" : \"LogicalResourceId/ProductionDatabase\"\n      },\n      {\n        \"Effect\" : \"Allow\",\n        \"Action\" : \"Update:*\",\n        \"Principal\" : \"*\",\n        \"Resource\" : \"*\"\n      }\n    ]\n  }</StackPolicyBody>\n</GetStackPolicyResult></queryresponse>\n       </examples>\n   "
     },
     "GetTemplate": {
       "name": "GetTemplate",
@@ -1141,14 +1141,14 @@
             "type": "string",
             "min_length": 1,
             "max_length": 16384,
-            "documentation": "\n      <p>Structure containing the stack policy body. (For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html\">\n         Prevent Updates to Stack Resources</a> in the AWS CloudFormation User Guide.)</p>\n      <p>You must pass <code>StackPolicyBody</code> or <code>StackPolicyURL</code>. If both are passed, only\n         <code>StackPolicyBody</code> is used.</p>\n   "
+            "documentation": "\n      <p>Structure containing the stack policy body. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html\">\n         Prevent Updates to Stack Resources</a> in the AWS CloudFormation User Guide.\n         You can specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code> parameter, but not both.</p>\n   "
           },
           "StackPolicyURL": {
             "shape_name": "StackPolicyURL",
             "type": "string",
             "min_length": 1,
             "max_length": 1350,
-            "documentation": "\n      <p>Location of a file containing the stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack. You must pass <code>StackPolicyBody</code> or <code>StackPolicyURL</code>. If both are passed, only\n         <code>StackPolicyBody</code> is used.</p>\n   "
+            "documentation": "\n      <p>Location of a file containing the stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack.\n      You can specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code> parameter, but not both.</p>\n   "
           }
         },
         "documentation": "\n       <p>The input for the <a>SetStackPolicy</a> action.</p>\n   "
@@ -1157,7 +1157,7 @@
       "errors": [
 
       ],
-      "documentation": "\n       <p>Sets a stack policy for a specified stack.</p>\n   "
+      "documentation": "\n       <p>Sets a stack policy for a specified stack.</p>\n      <examples>\n         <queryrequest>\nhttps://cloudformation.us-east-1.amazonaws.com/\n ?Action=SetStackPolicy\n &StackName=MyStack\n &StackPolicyBody=[Stack Policy Document]\n &Version=2010-05-15\n &SignatureVersion=2\n &Timestamp=2010-07-27T22%3A26%3A28.000Z\n &AWSAccessKeyId=[AWS Access KeyID]\n &Signature=[Signature]</queryrequest>\n         <queryresponse>\n<SetStackPolicyResponse/></queryresponse>\n      </examples>\n   "
     },
     "UpdateStack": {
       "name": "UpdateStack",
@@ -1175,28 +1175,28 @@
             "shape_name": "TemplateBody",
             "type": "string",
             "min_length": 1,
-            "documentation": "\n      <p>Structure containing the template body. (For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.)</p>\n      <p>Conditional: You must pass <code>TemplateBody</code> or <code>TemplateURL</code>. If both are passed, only\n            <code>TemplateBody</code> is used.</p>\n   "
+            "documentation": "\n      <p>Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. (For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.)</p>\n      <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>\n   "
           },
           "TemplateURL": {
             "shape_name": "TemplateURL",
             "type": "string",
             "min_length": 1,
             "max_length": 1024,
-            "documentation": "\n      <p>Location of file containing the template body. The URL must point to a template located in an S3 bucket in the\n         same region as the stack. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n      <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only\n            <code>TemplateBody</code> is used.</p>\n   "
+            "documentation": "\n      <p>Location of file containing the template body. The URL must point to a template located in an S3 bucket in the\n         same region as the stack. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n      <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>\n   "
           },
           "StackPolicyDuringUpdateBody": {
             "shape_name": "StackPolicyDuringUpdateBody",
             "type": "string",
             "min_length": 1,
             "max_length": 16384,
-            "documentation": "\n      <p>Structure containing the temporary overriding stack policy body. If you pass <code>StackPolicyDuringUpdateBody</code> and <code>StackPolicyDuringUpdateURL</code>, only\n         <code>StackPolicyDuringUpdateBody</code> is used.</p>\n       <p>If you want to update protected resources, specify a temporary overriding stack policy during this update. If you do not specify a stack policy, the current policy that associated with the stack will be used.</p>\n   "
+            "documentation": "\n      <p>Structure containing the temporary overriding stack policy body. You can specify either the <code>StackPolicyDuringUpdateBody</code> or the <code>StackPolicyDuringUpdateURL</code> parameter, but not both.</p>\n      <p>If you want to update protected resources, specify a temporary overriding stack policy during this update. If you do not specify a stack policy, the current policy that is associated with the stack will be used.</p>\n   "
           },
           "StackPolicyDuringUpdateURL": {
             "shape_name": "StackPolicyDuringUpdateURL",
             "type": "string",
             "min_length": 1,
             "max_length": 1350,
-            "documentation": "\n      <p>Location of a file containing the temporary overriding stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack. If you pass <code>StackPolicyDuringUpdateBody</code> and <code>StackPolicyDuringUpdateURL</code>, only\n          <code>StackPolicyDuringUpdateBody</code> is used.</p>\n       <p>If you want to update protected resources, specify a temporary overriding stack policy during this update. If you do not specify a stack policy, the current policy that is associated with the stack will be used.</p>\n   "
+            "documentation": "\n      <p>Location of a file containing the temporary overriding stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack.\n         You can specify either the <code>StackPolicyDuringUpdateBody</code> or the <code>StackPolicyDuringUpdateURL</code> parameter, but not both.</p>\n       <p>If you want to update protected resources, specify a temporary overriding stack policy during this update. If you do not specify a stack policy, the current policy that is associated with the stack will be used.</p>\n   "
           },
           "Parameters": {
             "shape_name": "Parameters",
@@ -1238,14 +1238,14 @@
             "type": "string",
             "min_length": 1,
             "max_length": 16384,
-            "documentation": "\n      <p>Structure containing the updated stack policy body. If you pass <code>StackPolicyBody</code> and <code>StackPolicyURL</code>, only\n         <code>StackPolicyBody</code> is used.</p>\n       <p>If you want to update a stack policy during a stack update, specify an updated stack policy. For example, you can include an updated stack policy to protect a new resource created in the stack update. If you do not specify a stack policy, the current policy that is associated with the stack is unchanged.</p>\n   "
+            "documentation": "\n      <p>Structure containing a new stack policy body. You can specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code> parameter, but not both.</p>\n      <p>You might update the stack policy, for example, in order to protect a new resource that you created during a stack update. If you do not specify a stack policy, the current policy that is associated with the stack is unchanged.</p>\n   "
           },
           "StackPolicyURL": {
             "shape_name": "StackPolicyURL",
             "type": "string",
             "min_length": 1,
             "max_length": 1350,
-            "documentation": "\n      <p>Location of a file containing the updated stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack. If you pass <code>StackPolicyBody</code> and <code>StackPolicyURL</code>, only\n         <code>StackPolicyBody</code> is used.</p>\n       <p>If you want to update a stack policy during a stack update, specify an updated stack policy. For example, you can include an updated stack policy to protect a new resource created in the stack update. If you do not specify a stack policy, the current policy that is associated with the stack is unchanged.</p>\n   "
+            "documentation": "\n      <p>Location of a file containing the updated stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack.\n         You can specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code> parameter, but not both.</p>\n      <p>You might update the stack policy, for example, in order to protect a new resource that you created during a stack update. If you do not specify a stack policy, the current policy that is associated with the stack is unchanged.</p>\n   "
           }
         },
         "documentation": "\n      <p>The input for <a>UpdateStack</a> action.</p>\n   "
@@ -1271,7 +1271,7 @@
           "documentation": "\n      <p>The template contains resources with capabilities that were not specified in the Capabilities parameter.</p>\n   "
         }
       ],
-      "documentation": "\n      <p>Updates a stack as specified in the template. After the call completes successfully, the stack update starts.\n         You can check the status of the stack via the <a>DescribeStacks</a> action.</p>\n      <p></p>\n      <p><b>Note: </b>You cannot update <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html\">AWS::S3::Bucket</a>\n         resources, for example, to add or modify tags.</p>\n      <p></p>\n      <p>To get a copy of the template for an existing stack, you can use the <a>GetTemplate</a> action.</p>\n      <p>Tags that were associated with this stack during creation time will still be associated with the stack after an\n      <code>UpdateStack</code> operation.</p>\n      <p>For more information about creating an update template, updating a stack, and monitoring the progress of the\n         update, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html\">Updating a Stack</a>.</p>\n\n      <examples>\n         <queryrequest>\nhttps://cloudformation.us-east-1.amazonaws.com/\n ?Action=UpdateStack\n &StackName=MyStack\n &TemplateBody=[Template Document]\n &Parameters.member.1.ParameterKey=AvailabilityZone\n &Parameters.member.1.ParameterValue=us-east-1a\n &Version=2010-05-15\n &SignatureVersion=2\n &Timestamp=2010-07-27T22%3A26%3A28.000Z\n &AWSAccessKeyId=[AWS Access KeyID]\n &Signature=[Signature]</queryrequest>\n\n         <queryresponse>\n<UpdateStackResult>\n  <StackId>arn:aws:cloudformation:us-east-1:123456789:stack/MyStack/aaf549a0-a413-11df-adb3-5081b3858e83</StackId>\n</UpdateStackResult></queryresponse>\n      </examples>\n   "
+      "documentation": "\n      <p>Updates a stack as specified in the template. After the call completes successfully, the stack update starts.\n         You can check the status of the stack via the <a>DescribeStacks</a> action.</p>\n      <p>To get a copy of the template for an existing stack, you can use the <a>GetTemplate</a> action.</p>\n      <p>Tags that were associated with this stack during creation time will still be associated with the stack after an\n      <code>UpdateStack</code> operation.</p>\n      <p>For more information about creating an update template, updating a stack, and monitoring the progress of the\n         update, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html\">Updating a Stack</a>.</p>\n\n      <examples>\n         <queryrequest>\nhttps://cloudformation.us-east-1.amazonaws.com/\n ?Action=UpdateStack\n &StackName=MyStack\n &TemplateBody=[Template Document]\n &Parameters.member.1.ParameterKey=AvailabilityZone\n &Parameters.member.1.ParameterValue=us-east-1a\n &Version=2010-05-15\n &SignatureVersion=2\n &Timestamp=2010-07-27T22%3A26%3A28.000Z\n &AWSAccessKeyId=[AWS Access KeyID]\n &Signature=[Signature]</queryrequest>\n\n         <queryresponse>\n<UpdateStackResult>\n  <StackId>arn:aws:cloudformation:us-east-1:123456789:stack/MyStack/aaf549a0-a413-11df-adb3-5081b3858e83</StackId>\n</UpdateStackResult></queryresponse>\n      </examples>\n   "
     },
     "ValidateTemplate": {
       "name": "ValidateTemplate",
