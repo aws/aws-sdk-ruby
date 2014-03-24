@@ -144,19 +144,19 @@ version.
 
 | Service Name                        | Service Class             | API Versions                   |
 | ----------------------------------- | ------------------------- | ------------------------------ |
-| Amazon CloudFront                   | Aws::CloudFront           | 2012-05-05 &mdash; 2013-08-26  |
+| Amazon CloudFront                   | Aws::CloudFront           | 2012-05-05 &mdash; 2014-01-31  |
 | Amazon CloudSearch                  | Aws::CloudSearch          | 2011-02-01                     |
 | Amazon CloudWatch                   | Aws::CloudWatch           | 2010-08-01                     |
 | Amazon DynamoDB                     | Aws::DynamoDB             | 2011-12-05 &mdash; 2012-08-10  |
-| Amazon Elastic Compute Cloud        | Aws::EC2                  | 2013-06-15 &mdash; 2013-10-01  |
+| Amazon Elastic Compute Cloud        | Aws::EC2                  | 2013-06-15 &mdash; 2013-10-15  |
 | Amazon Elastic MapReduce            | Aws::EMR                  | 2009-03-31                     |
 | Amazon Elastic Transcoder           | Aws::ElasticTranscoder    | 2012-09-25                     |
 | Amazon ElastiCache                  | Aws::ElastiCache          | 2012-11-15 &mdash; 2013-06-15  |
 | Amazon Glacier                      | Aws::Glacier              | 2012-06-01                     |
 | Amazon Kinesis                      | Aws::Kinesis              | 2013-12-02                     |
 | Amazon Redshift                     | Aws::Redshift             | 2012-12-01                     |
-| Amazon Relational Database Service  | Aws::RDS                  | 2013-01-10 &mdash; 2013-05-15  |
-| Amazon Route 53                     | Aws::Route53              | 2012-12-12                     |
+| Amazon Relational Database Service  | Aws::RDS                  | 2013-01-10 &mdash; 2013-09-09  |
+| Amazon Route 53                     | Aws::Route53              | 2012-12-12 &mdash; 2013-04-01  |
 | Amazon Simple Email Service         | Aws::SES                  | 2010-12-01                     |
 | Amazon Simple Notification Service  | Aws::SNS                  | 2010-03-31                     |
 | Amazon Simple Queue Service         | Aws::SQS                  | 2012-11-05                     |
