@@ -810,6 +810,10 @@
                     "serialized_name": "Status"
                   }
                 }
+              },
+              "cluster_revision_number": {
+                "type": "string",
+                "serialized_name": "ClusterRevisionNumber"
               }
             }
           }
@@ -1722,6 +1726,10 @@
                     "serialized_name": "Status"
                   }
                 }
+              },
+              "cluster_revision_number": {
+                "type": "string",
+                "serialized_name": "ClusterRevisionNumber"
               }
             }
           }
@@ -2886,6 +2894,10 @@
                       "serialized_name": "Status"
                     }
                   }
+                },
+                "cluster_revision_number": {
+                  "type": "string",
+                  "serialized_name": "ClusterRevisionNumber"
                 }
               }
             }
@@ -3819,6 +3831,26 @@
             "members": {
               "type": "string"
             }
+          },
+          "avg_resize_rate_in_mega_bytes_per_second": {
+            "type": "float",
+            "serialized_name": "AvgResizeRateInMegaBytesPerSecond"
+          },
+          "total_resize_data_in_mega_bytes": {
+            "type": "integer",
+            "serialized_name": "TotalResizeDataInMegaBytes"
+          },
+          "progress_in_mega_bytes": {
+            "type": "integer",
+            "serialized_name": "ProgressInMegaBytes"
+          },
+          "elapsed_time_in_seconds": {
+            "type": "integer",
+            "serialized_name": "ElapsedTimeInSeconds"
+          },
+          "estimated_time_to_completion_in_seconds": {
+            "type": "integer",
+            "serialized_name": "EstimatedTimeToCompletionInSeconds"
           }
         }
       }
@@ -4163,6 +4195,10 @@
                     "serialized_name": "Status"
                   }
                 }
+              },
+              "cluster_revision_number": {
+                "type": "string",
+                "serialized_name": "ClusterRevisionNumber"
               }
             }
           }
@@ -4527,6 +4563,10 @@
                     "serialized_name": "Status"
                   }
                 }
+              },
+              "cluster_revision_number": {
+                "type": "string",
+                "serialized_name": "ClusterRevisionNumber"
               }
             }
           }
@@ -4886,6 +4926,10 @@
                     "serialized_name": "Status"
                   }
                 }
+              },
+              "cluster_revision_number": {
+                "type": "string",
+                "serialized_name": "ClusterRevisionNumber"
               }
             }
           }
@@ -5468,6 +5512,10 @@
                     "serialized_name": "Status"
                   }
                 }
+              },
+              "cluster_revision_number": {
+                "type": "string",
+                "serialized_name": "ClusterRevisionNumber"
               }
             }
           }
@@ -5868,6 +5916,10 @@
                     "serialized_name": "Status"
                   }
                 }
+              },
+              "cluster_revision_number": {
+                "type": "string",
+                "serialized_name": "ClusterRevisionNumber"
               }
             }
           }
@@ -6289,6 +6341,10 @@
                     "serialized_name": "Status"
                   }
                 }
+              },
+              "cluster_revision_number": {
+                "type": "string",
+                "serialized_name": "ClusterRevisionNumber"
               }
             }
           }
@@ -6831,6 +6887,10 @@
                     "serialized_name": "Status"
                   }
                 }
+              },
+              "cluster_revision_number": {
+                "type": "string",
+                "serialized_name": "ClusterRevisionNumber"
               }
             }
           }

@@ -976,6 +976,70 @@
         }
       }
     },
+    "describe_availability_options": {
+      "name": "DescribeAvailabilityOptions",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "domain_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "DomainName"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "DescribeAvailabilityOptionsResult"
+        },
+        "members": {
+          "availability_options": {
+            "type": "structure",
+            "serialized_name": "AvailabilityOptions",
+            "members": {
+              "options": {
+                "type": "boolean",
+                "serialized_name": "Options"
+              },
+              "status": {
+                "type": "structure",
+                "serialized_name": "Status",
+                "members": {
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
+                  },
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "describe_default_search_field": {
       "name": "DescribeDefaultSearchField",
       "http_method": "POST",
@@ -1728,6 +1792,75 @@
             "serialized_name": "FieldNames",
             "members": {
               "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "update_availability_options": {
+      "name": "UpdateAvailabilityOptions",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "domain_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "DomainName"
+          },
+          "multi_az": {
+            "type": "boolean",
+            "required": true,
+            "serialized_name": "MultiAZ"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "metadata": {
+          "wrapper": "UpdateAvailabilityOptionsResult"
+        },
+        "members": {
+          "availability_options": {
+            "type": "structure",
+            "serialized_name": "AvailabilityOptions",
+            "members": {
+              "options": {
+                "type": "boolean",
+                "serialized_name": "Options"
+              },
+              "status": {
+                "type": "structure",
+                "serialized_name": "Status",
+                "members": {
+                  "creation_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "CreationDate"
+                  },
+                  "update_date": {
+                    "type": "iso8601_timestamp",
+                    "serialized_name": "UpdateDate"
+                  },
+                  "update_version": {
+                    "type": "integer",
+                    "serialized_name": "UpdateVersion"
+                  },
+                  "state": {
+                    "type": "string",
+                    "serialized_name": "State",
+                    "enum": [
+                      "RequiresIndexDocuments",
+                      "Processing",
+                      "Active"
+                    ]
+                  },
+                  "pending_deletion": {
+                    "type": "boolean",
+                    "serialized_name": "PendingDeletion"
+                  }
+                }
+              }
             }
           }
         }
