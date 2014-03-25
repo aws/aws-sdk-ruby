@@ -1,16 +1,3 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 ---
 :authorize_cluster_security_group_ingress: |-
   Calls the AuthorizeClusterSecurityGroupIngress API operation.
@@ -147,7 +134,9 @@
   A 30-minute window selected at random from an 8-hour block of time per region, occurring
   on a random day of the week. The following list shows the time blocks for each region
   from which the default maintenance windows are assigned. US-East (Northern Virginia)
-  Region: 03:00-11:00 UTC US-West (Oregon) Region 06:00-14:00 UTC Valid Days: Mon
+  Region: 03:00-11:00 UTC US-West (Oregon) Region 06:00-14:00 UTC EU (Ireland) Region
+  22:00-06:00 UTC Asia Pacific (Singapore) Region 14:00-22:00 UTC Asia Pacific (Sydney)
+  Region 12:00-20:00 UTC Asia Pacific (Tokyo) Region 17:00-03:00 UTC Valid Days: Mon
   | Tue | Wed | Thu | Fri | Sat | Sun Constraints: Minimum 30-minute window.\n  *
   `:cluster_parameter_group_name` - (String) The name of the parameter group to be
   associated with this cluster. Default: The default Amazon Redshift cluster parameter
@@ -214,7 +203,7 @@
   \ * `:cluster_public_key` - (String)\n  * `:cluster_nodes` - (Array<Hash>)\n    *
   `:node_role` - (String)\n    * `:private_ip_address` - (String)\n    * `:public_ip_address`
   - (String)\n  * `:elastic_ip_status` - (Hash)\n    * `:elastic_ip` - (String)\n
-  \   * `:status` - (String)"
+  \   * `:status` - (String)\n  * `:cluster_revision_number` - (String)"
 :create_cluster_parameter_group: |-
   Calls the CreateClusterParameterGroup API operation.
   @param [Hash] options
@@ -317,7 +306,7 @@
 :create_hsm_client_certificate: |-
   Calls the CreateHsmClientCertificate API operation.
   @param [Hash] options
-    * `:hsm_client_certificate_identifier` - *required* - (String) The identifier to be assigned to the new HSM client certificate that the cluster will use to connect to the HSM to retrieve the database encryption keys.
+    * `:hsm_client_certificate_identifier` - *required* - (String) The identifier to be assigned to the new HSM client certificate that the cluster will use to connect to the HSM to use the database encryption keys.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:hsm_client_certificate_identifier` - (String)
@@ -330,7 +319,7 @@
     * `:hsm_ip_address` - *required* - (String) The IP address that the Amazon Redshift cluster must use to access the HSM.
     * `:hsm_partition_name` - *required* - (String) The name of the partition in the HSM where the Amazon Redshift clusters will store their database encryption keys.
     * `:hsm_partition_password` - *required* - (String) The password required to access the HSM partition.
-    * `:hsm_server_public_certificate` - *required* - (String) The public key used to access the HSM client certificate, which was created by calling the Amazon Redshift create HSM certificate command.
+    * `:hsm_server_public_certificate` - *required* - (String) The HSMs public certificate file. When using Cloud HSM, the file name is server.pem.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:hsm_configuration_identifier` - (String)
@@ -377,7 +366,8 @@
   - (String)\n    * `:retention_period` - (Integer)\n  * `:cluster_public_key` - (String)\n
   \ * `:cluster_nodes` - (Array<Hash>)\n    * `:node_role` - (String)\n    * `:private_ip_address`
   - (String)\n    * `:public_ip_address` - (String)\n  * `:elastic_ip_status` - (Hash)\n
-  \   * `:elastic_ip` - (String)\n    * `:status` - (String)"
+  \   * `:elastic_ip` - (String)\n    * `:status` - (String)\n  * `:cluster_revision_number`
+  - (String)"
 :delete_cluster_parameter_group: |-
   Calls the DeleteClusterParameterGroup API operation.
   @param [Hash] options
@@ -634,6 +624,7 @@
       * `:elastic_ip_status` - (Hash)
         * `:elastic_ip` - (String)
         * `:status` - (String)
+      * `:cluster_revision_number` - (String)
 :describe_default_cluster_parameters: |-
   Calls the DescribeDefaultClusterParameters API operation.
   @param [Hash] options
@@ -714,9 +705,9 @@
 :describe_hsm_client_certificates: |-
   Calls the DescribeHsmClientCertificates API operation.
   @param [Hash] options
-    * `:hsm_client_certificate_identifier` - (String) The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates associated with Amazon Redshift clusters owned by your AWS customer account.
+    * `:hsm_client_certificate_identifier` - (String) The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates owned by your AWS customer account.
     * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results may be retrieved. Default: 100 Constraints: minimum 20, maximum 100.
-    * `:marker` - (String) An optional marker returned from a previous DescribeOrderableClusterOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+    * `:marker` - (String) An optional marker returned from a previous DescribeHsmClientCertificates request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:marker` - (String)
@@ -728,7 +719,7 @@
   @param [Hash] options
     * `:hsm_configuration_identifier` - (String) The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your AWS customer account.
     * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results may be retrieved. Default: 100 Constraints: minimum 20, maximum 100.
-    * `:marker` - (String) An optional marker returned from a previous DescribeOrderableClusterOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+    * `:marker` - (String) An optional marker returned from a previous DescribeHsmConfigurations request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:marker` - (String)
@@ -822,6 +813,11 @@
     * `:import_tables_completed` - (Array<String>)
     * `:import_tables_in_progress` - (Array<String>)
     * `:import_tables_not_started` - (Array<String>)
+    * `:avg_resize_rate_in_mega_bytes_per_second` - (Numeric)
+    * `:total_resize_data_in_mega_bytes` - (Integer)
+    * `:progress_in_mega_bytes` - (Integer)
+    * `:elapsed_time_in_seconds` - (Integer)
+    * `:estimated_time_to_completion_in_seconds` - (Integer)
 :disable_logging: |-
   Calls the DisableLogging API operation.
   @param [Hash] options
@@ -898,6 +894,7 @@
     * `:elastic_ip_status` - (Hash)
       * `:elastic_ip` - (String)
       * `:status` - (String)
+    * `:cluster_revision_number` - (String)
 :enable_logging: |-
   Calls the EnableLogging API operation.
   @param [Hash] options
@@ -978,6 +975,7 @@
     * `:elastic_ip_status` - (Hash)
       * `:elastic_ip` - (String)
       * `:status` - (String)
+    * `:cluster_revision_number` - (String)
 :modify_cluster: "Calls the ModifyCluster API operation.\n@param [Hash] options\n
   \ * `:cluster_identifier` - *required* - (String) The unique identifier of the cluster
   to be modified. Example: examplecluster\n  * `:cluster_type` - (String) The new
@@ -1077,7 +1075,8 @@
   - (String)\n    * `:retention_period` - (Integer)\n  * `:cluster_public_key` - (String)\n
   \ * `:cluster_nodes` - (Array<Hash>)\n    * `:node_role` - (String)\n    * `:private_ip_address`
   - (String)\n    * `:public_ip_address` - (String)\n  * `:elastic_ip_status` - (Hash)\n
-  \   * `:elastic_ip` - (String)\n    * `:status` - (String)"
+  \   * `:elastic_ip` - (String)\n    * `:status` - (String)\n  * `:cluster_revision_number`
+  - (String)"
 :modify_cluster_parameter_group: |-
   Calls the ModifyClusterParameterGroup API operation.
   @param [Hash] options
@@ -1199,6 +1198,7 @@
     * `:elastic_ip_status` - (Hash)
       * `:elastic_ip` - (String)
       * `:status` - (String)
+    * `:cluster_revision_number` - (String)
 :purchase_reserved_node_offering: |-
   Calls the PurchaseReservedNodeOffering API operation.
   @param [Hash] options
@@ -1284,6 +1284,7 @@
     * `:elastic_ip_status` - (Hash)
       * `:elastic_ip` - (String)
       * `:status` - (String)
+    * `:cluster_revision_number` - (String)
 :reset_cluster_parameter_group: "Calls the ResetClusterParameterGroup API operation.\n@param
   [Hash] options\n  * `:parameter_group_name` - *required* - (String) The name of
   the cluster parameter group to be reset.\n  * `:reset_all_parameters` - (Boolean)
@@ -1359,7 +1360,7 @@
   \ * `:cluster_public_key` - (String)\n  * `:cluster_nodes` - (Array<Hash>)\n    *
   `:node_role` - (String)\n    * `:private_ip_address` - (String)\n    * `:public_ip_address`
   - (String)\n  * `:elastic_ip_status` - (Hash)\n    * `:elastic_ip` - (String)\n
-  \   * `:status` - (String)"
+  \   * `:status` - (String)\n  * `:cluster_revision_number` - (String)"
 :revoke_cluster_security_group_ingress: |-
   Calls the RevokeClusterSecurityGroupIngress API operation.
   @param [Hash] options
@@ -1476,3 +1477,4 @@
     * `:elastic_ip_status` - (Hash)
       * `:elastic_ip` - (String)
       * `:status` - (String)
+    * `:cluster_revision_number` - (String)
