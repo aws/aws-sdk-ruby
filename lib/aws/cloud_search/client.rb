@@ -17,7 +17,8 @@ module AWS
     # Client class for Amazon Cloud Search.
     class Client < Core::QueryClient
 
-
+      # The 2013 API is not backwards compatible with the 2011 API,
+      # so we continue to default to the older version.
       API_VERSION = '2011-02-01'
 
       signature_version :Version4, 'cloudsearch'
@@ -28,9 +29,12 @@ module AWS
     end
 
     class Client::V20110201 < Client
-
       define_client_methods('2011-02-01')
-
     end
+
+    class Client::V20130101 < Client
+      define_client_methods('2013-01-01')
+    end
+
   end
 end

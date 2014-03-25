@@ -1,0 +1,364 @@
+---
+:create_domain: |-
+  Calls the CreateDomain API operation.
+  @param [Hash] options
+    * `:domain_name` - *required* - (String) A name for the domain you are creating. Allowed characters are a-z (lower-case letters), 0-9, and hyphen (-). Domain names must start with a letter or number and be at least 3 and no more than 28 characters long.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:domain_status` - (Hash)
+      * `:domain_id` - (String)
+      * `:domain_name` - (String)
+      * `:created` - (Boolean)
+      * `:deleted` - (Boolean)
+      * `:num_searchable_docs` - (Integer)
+      * `:doc_service` - (Hash)
+        * `:arn` - (String)
+        * `:endpoint` - (String)
+      * `:search_service` - (Hash)
+        * `:arn` - (String)
+        * `:endpoint` - (String)
+      * `:requires_index_documents` - (Boolean)
+      * `:processing` - (Boolean)
+      * `:search_instance_type` - (String)
+      * `:search_partition_count` - (Integer)
+      * `:search_instance_count` - (Integer)
+:define_index_field: "Calls the DefineIndexField API operation.\n@param [Hash] options\n
+  \ * `:domain_name` - *required* - (String) \n  * `:index_field` - *required* - (Hash)
+  The index field and field options you want to configure.\n    * `:index_field_name`
+  - *required* - (String) The name of a field in the search index. Field names must
+  begin with a letter and can contain the following characters: a-z (lowercase), 0-9,
+  and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\",
+  \"docid\", and \"text_relevance\" are reserved and cannot be specified as field
+  or rank expression names.\n    * `:index_field_type` - *required* - (String) The
+  type of field. Based on this type, exactly one of the UIntOptions, LiteralOptions
+  or TextOptions must be present.  Valid values include:\n      * `uint`\n      *
+  `literal`\n      * `text`\n    * `:u_int_options` - (Hash) Options for an unsigned
+  integer field. Present if IndexFieldType specifies the field is of type unsigned
+  integer.\n      * `:default_value` - (Integer) The default value for an unsigned
+  integer field. Optional.\n    * `:literal_options` - (Hash) Options for literal
+  field. Present if IndexFieldType specifies the field is of type literal.\n      *
+  `:default_value` - (String) The default value for a literal field. Optional.\n      *
+  `:search_enabled` - (Boolean) Specifies whether search is enabled for this field.
+  Default: False.\n      * `:facet_enabled` - (Boolean) Specifies whether facets are
+  enabled for this field. Default: False.\n      * `:result_enabled` - (Boolean) Specifies
+  whether values of this field can be returned in search results and used for ranking.
+  Default: False.\n    * `:text_options` - (Hash) Options for text field. Present
+  if IndexFieldType specifies the field is of type text.\n      * `:default_value`
+  - (String) The default value for a text field. Optional.\n      * `:facet_enabled`
+  - (Boolean) Specifies whether facets are enabled for this field. Default: False.\n
+  \     * `:result_enabled` - (Boolean) Specifies whether values of this field can
+  be returned in search results and used for ranking. Default: False.\n      * `:text_processor`
+  - (String) The text processor to apply to this field. Optional. Possible values:
+  cs_text_no_stemming: turns off stemming for the field. Default: none\n    * `:source_attributes`
+  - (Array&lt;<Hash>) An optional list of source attributes that provide data for
+  this index field. If not specified, the data is pulled from a source attribute with
+  the same name as this IndexField. When one or more source attributes are specified,
+  an optional data transformation can be applied to the source data when populating
+  the index field. You can configure a maximum of 20 sources for an IndexField.\n
+  \     * `:source_data_function` - *required* - (String) Identifies the transformation
+  to apply when copying data from a source attribute.  Valid values include:\n        *
+  `Copy`\n        * `TrimTitle`\n        * `Map`\n      * `:source_data_copy` - (Hash)
+  Copies data from a source document attribute to an IndexField.\n        * `:source_name`
+  - *required* - (String) The name of the document source field to add to this IndexField.\n
+  \       * `:default_value` - (String) The default value to use if the source attribute
+  is not specified in a document. Optional.\n      * `:source_data_trim_title` - (Hash)
+  Trims common title words from a source document attribute when populating an IndexField.
+  This can be used to create an IndexField you can use for sorting.\n        * `:source_name`
+  - *required* - (String) The name of the document source field to add to this IndexField.\n
+  \       * `:default_value` - (String) The default value to use if the source attribute
+  is not specified in a document. Optional.\n        * `:separator` - (String) The
+  separator that follows the text to trim.\n        * `:language` - (String) \n      *
+  `:source_data_map` - (Hash) Maps source document attribute values to new values
+  when populating the IndexField.\n        * `:source_name` - *required* - (String)
+  The name of the document source field to add to this IndexField.\n        * `:default_value`
+  - (String) The default value to use if the source attribute is not specified in
+  a document. Optional.\n        * `:cases` - (Hash&lt;<String,String>) A map that
+  translates source field values to custom values.\n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:index_field` - (Hash)\n    * `:options` - (Hash)\n      * `:index_field_name`
+  - (String)\n      * `:index_field_type` - (String)\n      * `:u_int_options` - (Hash)\n
+  \       * `:default_value` - (Integer)\n      * `:literal_options` - (Hash)\n        *
+  `:default_value` - (String)\n        * `:search_enabled` - (Boolean)\n        *
+  `:facet_enabled` - (Boolean)\n        * `:result_enabled` - (Boolean)\n      * `:text_options`
+  - (Hash)\n        * `:default_value` - (String)\n        * `:facet_enabled` - (Boolean)\n
+  \       * `:result_enabled` - (Boolean)\n        * `:text_processor` - (String)\n
+  \     * `:source_attributes` - (Array<Hash>)\n        * `:source_data_function`
+  - (String)\n        * `:source_data_copy` - (Hash)\n          * `:source_name` -
+  (String)\n          * `:default_value` - (String)\n        * `:source_data_trim_title`
+  - (Hash)\n          * `:source_name` - (String)\n          * `:default_value` -
+  (String)\n          * `:separator` - (String)\n          * `:language` - (String)\n
+  \       * `:source_data_map` - (Hash)\n          * `:source_name` - (String)\n          *
+  `:default_value` - (String)\n          * `:cases` - (Hash<String,String>)\n    *
+  `:status` - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date` -
+  (Time)\n      * `:update_version` - (Integer)\n      * `:state` - (String)\n      *
+  `:pending_deletion` - (Boolean)"
+:define_rank_expression: "Calls the DefineRankExpression API operation.\n@param [Hash]
+  options\n  * `:domain_name` - *required* - (String) \n  * `:rank_expression` - *required*
+  - (Hash) \n    * `:rank_name` - *required* - (String) The name of a rank expression.
+  Rank expression names must begin with a letter and can contain the following characters:
+  a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not
+  allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and
+  cannot be specified as field or rank expression names.\n    * `:rank_expression`
+  - *required* - (String) The expression to evaluate for ranking or thresholding while
+  processing a search request. The RankExpression syntax is based on JavaScript expressions
+  and supports: Integer, floating point, hex and octal literals Shortcut evaluation
+  of logical operators such that an expression a || b evaluates to the value a, if
+  a is  `true` , without evaluating b at all JavaScript order of precedence for operators
+  Arithmetic operators: + - * / % Boolean operators (including the ternary operator)
+  Bitwise operators Comparison operators Common mathematic functions: abs ceil erf
+  exp floor lgamma ln log2 log10 max min sqrt pow Trigonometric library functions:
+  acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan Random generation of
+  a number between 0 and 1: rand Current time in epoch: time The min max functions
+  that operate on a variable argument list Intermediate results are calculated as
+  double precision floating point values. The final return value of a RankExpression
+  is automatically converted from floating point to a 32-bit unsigned integer by rounding
+  to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t),
+  4294967295. Mathematical errors such as dividing by 0 will fail during evaluation
+  and return a value of 0. The source data for a RankExpression can be the name of
+  an IndexField of type uint, another RankExpression or the reserved name text_relevance.
+  The text_relevance source is defined to return an integer from 0 to 1000 (inclusive)
+  to indicate how relevant a document is to the search request, taking into account
+  repetition of search terms in the document and proximity of search terms to each
+  other in each matching IndexField in the document. For more information about using
+  rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:rank_expression` - (Hash)\n    * `:options` - (Hash)\n
+  \     * `:rank_name` - (String)\n      * `:rank_expression` - (String)\n    * `:status`
+  - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      *
+  `:update_version` - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion`
+  - (Boolean)"
+:delete_domain: |-
+  Calls the DeleteDomain API operation.
+  @param [Hash] options
+    * `:domain_name` - *required* - (String) The name of the domain you want to permanently delete.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:domain_status` - (Hash)
+      * `:domain_id` - (String)
+      * `:domain_name` - (String)
+      * `:created` - (Boolean)
+      * `:deleted` - (Boolean)
+      * `:num_searchable_docs` - (Integer)
+      * `:doc_service` - (Hash)
+        * `:arn` - (String)
+        * `:endpoint` - (String)
+      * `:search_service` - (Hash)
+        * `:arn` - (String)
+        * `:endpoint` - (String)
+      * `:requires_index_documents` - (Boolean)
+      * `:processing` - (Boolean)
+      * `:search_instance_type` - (String)
+      * `:search_partition_count` - (Integer)
+      * `:search_instance_count` - (Integer)
+:delete_index_field: "Calls the DeleteIndexField API operation.\n@param [Hash] options\n
+  \ * `:domain_name` - *required* - (String) \n  * `:index_field_name` - *required*
+  - (String) The name of the index field your want to remove from the domain's indexing
+  options.\n@return [Core::Response] The `#data` method of the response object returns
+  a hash with the following structure:\n\n  * `:index_field` - (Hash)\n    * `:options`
+  - (Hash)\n      * `:index_field_name` - (String)\n      * `:index_field_type` -
+  (String)\n      * `:u_int_options` - (Hash)\n        * `:default_value` - (Integer)\n
+  \     * `:literal_options` - (Hash)\n        * `:default_value` - (String)\n        *
+  `:search_enabled` - (Boolean)\n        * `:facet_enabled` - (Boolean)\n        *
+  `:result_enabled` - (Boolean)\n      * `:text_options` - (Hash)\n        * `:default_value`
+  - (String)\n        * `:facet_enabled` - (Boolean)\n        * `:result_enabled`
+  - (Boolean)\n        * `:text_processor` - (String)\n      * `:source_attributes`
+  - (Array<Hash>)\n        * `:source_data_function` - (String)\n        * `:source_data_copy`
+  - (Hash)\n          * `:source_name` - (String)\n          * `:default_value` -
+  (String)\n        * `:source_data_trim_title` - (Hash)\n          * `:source_name`
+  - (String)\n          * `:default_value` - (String)\n          * `:separator` -
+  (String)\n          * `:language` - (String)\n        * `:source_data_map` - (Hash)\n
+  \         * `:source_name` - (String)\n          * `:default_value` - (String)\n
+  \         * `:cases` - (Hash<String,String>)\n    * `:status` - (Hash)\n      *
+  `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      * `:update_version`
+  - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+:delete_rank_expression: "Calls the DeleteRankExpression API operation.\n@param [Hash]
+  options\n  * `:domain_name` - *required* - (String) \n  * `:rank_name` - *required*
+  - (String) The name of the RankExpression to delete.\n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:rank_expression` - (Hash)\n    * `:options` - (Hash)\n      * `:rank_name`
+  - (String)\n      * `:rank_expression` - (String)\n    * `:status` - (Hash)\n      *
+  `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      * `:update_version`
+  - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+:describe_availability_options: |-
+  Calls the DescribeAvailabilityOptions API operation.
+  @param [Hash] options
+    * `:domain_name` - *required* - (String) The name of the domain you want to describe.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:availability_options` - (Hash)
+      * `:options` - (Boolean)
+      * `:status` - (Hash)
+        * `:creation_date` - (Time)
+        * `:update_date` - (Time)
+        * `:update_version` - (Integer)
+        * `:state` - (String)
+        * `:pending_deletion` - (Boolean)
+:describe_default_search_field: "Calls the DescribeDefaultSearchField API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:default_search_field` - (Hash)\n    * `:options` - (String)\n    * `:status`
+  - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      *
+  `:update_version` - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion`
+  - (Boolean)"
+:describe_domains: |-
+  Calls the DescribeDomains API operation.
+  @param [Hash] options
+    * `:domain_names` - (Array&lt;<String>) Limits the DescribeDomains response to the specified search domains.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:domain_status_list` - (Array<Hash>)
+      * `:domain_id` - (String)
+      * `:domain_name` - (String)
+      * `:created` - (Boolean)
+      * `:deleted` - (Boolean)
+      * `:num_searchable_docs` - (Integer)
+      * `:doc_service` - (Hash)
+        * `:arn` - (String)
+        * `:endpoint` - (String)
+      * `:search_service` - (Hash)
+        * `:arn` - (String)
+        * `:endpoint` - (String)
+      * `:requires_index_documents` - (Boolean)
+      * `:processing` - (Boolean)
+      * `:search_instance_type` - (String)
+      * `:search_partition_count` - (Integer)
+      * `:search_instance_count` - (Integer)
+:describe_index_fields: |-
+  Calls the DescribeIndexFields API operation.
+  @param [Hash] options
+    * `:domain_name` - *required* - (String) The name of the domain you want to describe.
+    * `:field_names` - (Array&lt;<String>) Limits the DescribeIndexFields response to the specified fields.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:index_fields` - (Array<Hash>)
+      * `:options` - (Hash)
+        * `:index_field_name` - (String)
+        * `:index_field_type` - (String)
+        * `:u_int_options` - (Hash)
+          * `:default_value` - (Integer)
+        * `:literal_options` - (Hash)
+          * `:default_value` - (String)
+          * `:search_enabled` - (Boolean)
+          * `:facet_enabled` - (Boolean)
+          * `:result_enabled` - (Boolean)
+        * `:text_options` - (Hash)
+          * `:default_value` - (String)
+          * `:facet_enabled` - (Boolean)
+          * `:result_enabled` - (Boolean)
+          * `:text_processor` - (String)
+        * `:source_attributes` - (Array<Hash>)
+          * `:source_data_function` - (String)
+          * `:source_data_copy` - (Hash)
+            * `:source_name` - (String)
+            * `:default_value` - (String)
+          * `:source_data_trim_title` - (Hash)
+            * `:source_name` - (String)
+            * `:default_value` - (String)
+            * `:separator` - (String)
+            * `:language` - (String)
+          * `:source_data_map` - (Hash)
+            * `:source_name` - (String)
+            * `:default_value` - (String)
+            * `:cases` - (Hash<String,String>)
+      * `:status` - (Hash)
+        * `:creation_date` - (Time)
+        * `:update_date` - (Time)
+        * `:update_version` - (Integer)
+        * `:state` - (String)
+        * `:pending_deletion` - (Boolean)
+:describe_rank_expressions: "Calls the DescribeRankExpressions API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:rank_names` -
+  (Array&lt;<String>) Limits the DescribeRankExpressions response to the specified
+  fields.\n@return [Core::Response] The `#data` method of the response object returns
+  a hash with the following structure:\n\n  * `:rank_expressions` - (Array<Hash>)\n
+  \   * `:options` - (Hash)\n      * `:rank_name` - (String)\n      * `:rank_expression`
+  - (String)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
+  `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
+  - (String)\n      * `:pending_deletion` - (Boolean)"
+:describe_service_access_policies: |-
+  Calls the DescribeServiceAccessPolicies API operation.
+  @param [Hash] options
+    * `:domain_name` - *required* - (String) The name of the domain you want to describe.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:access_policies` - (Hash)
+      * `:options` - (String)
+      * `:status` - (Hash)
+        * `:creation_date` - (Time)
+        * `:update_date` - (Time)
+        * `:update_version` - (Integer)
+        * `:state` - (String)
+        * `:pending_deletion` - (Boolean)
+:describe_stemming_options: "Calls the DescribeStemmingOptions API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:stems` - (Hash)\n    * `:options` - (String)\n    * `:status` - (Hash)\n      *
+  `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      * `:update_version`
+  - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+:describe_stopword_options: "Calls the DescribeStopwordOptions API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:stopwords` - (Hash)\n    * `:options` - (String)\n    * `:status` - (Hash)\n
+  \     * `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      * `:update_version`
+  - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+:describe_synonym_options: "Calls the DescribeSynonymOptions API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:synonyms` - (Hash)\n    * `:options` - (String)\n    * `:status` - (Hash)\n
+  \     * `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      * `:update_version`
+  - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+:index_documents: "Calls the IndexDocuments API operation.\n@param [Hash] options\n
+  \ * `:domain_name` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:field_names` - (Array<String>)"
+:update_availability_options: "Calls the UpdateAvailabilityOptions API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:multi_az` - *required*
+  - (Boolean) You expand an existing search domain to a second Availability Zone by
+  setting the Multi-AZ option to  `true` . Similarly, you can turn off the Multi-AZ
+  option to downgrade the domain to a single Availability Zone by setting the Multi-AZ
+  option to  `false` .\n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:availability_options`
+  - (Hash)\n    * `:options` - (Boolean)\n    * `:status` - (Hash)\n      * `:creation_date`
+  - (Time)\n      * `:update_date` - (Time)\n      * `:update_version` - (Integer)\n
+  \     * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+:update_default_search_field: "Calls the UpdateDefaultSearchField API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:default_search_field`
+  - *required* - (String) The text field to search if the search request does not
+  specify which field to search. The default search field is used when search terms
+  are specified with the q parameter, or if a match expression specified with the
+  bq parameter does not constrain the search to a particular field. The default is
+  an empty string, which automatically searches all text fields.\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:default_search_field` - (Hash)\n    * `:options` - (String)\n    * `:status`
+  - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      *
+  `:update_version` - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion`
+  - (Boolean)"
+:update_service_access_policies: "Calls the UpdateServiceAccessPolicies API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:access_policies`
+  - *required* - (String) The access rules you want to configure. These rules replace
+  any existing rules.\n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:access_policies` -
+  (Hash)\n    * `:options` - (String)\n    * `:status` - (Hash)\n      * `:creation_date`
+  - (Time)\n      * `:update_date` - (Time)\n      * `:update_version` - (Integer)\n
+  \     * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+:update_stemming_options: "Calls the UpdateStemmingOptions API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:stems` - *required*
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:stems` - (Hash)\n    * `:options`
+  - (String)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
+  `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
+  - (String)\n      * `:pending_deletion` - (Boolean)"
+:update_stopword_options: "Calls the UpdateStopwordOptions API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:stopwords` -
+  *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:stopwords` - (Hash)\n
+  \   * `:options` - (String)\n    * `:status` - (Hash)\n      * `:creation_date`
+  - (Time)\n      * `:update_date` - (Time)\n      * `:update_version` - (Integer)\n
+  \     * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+:update_synonym_options: "Calls the UpdateSynonymOptions API operation.\n@param [Hash]
+  options\n  * `:domain_name` - *required* - (String) \n  * `:synonyms` - *required*
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:synonyms` - (Hash)\n    *
+  `:options` - (String)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n
+  \     * `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      *
+  `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
