@@ -197,7 +197,7 @@
               "Status": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
+                "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", \"final snapshot\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
               },
               "Port": {
                 "shape_name": "Integer",
@@ -400,7 +400,7 @@
               "Status": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
+                "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", \"final snapshot\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
               },
               "Port": {
                 "shape_name": "Integer",
@@ -556,7 +556,7 @@
           "documentation": "\n        <p>\n            The request would result in the user exceeding the allowed number of cluster snapshots.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n        Copies the specified automated cluster snapshot to a new manual cluster snapshot. \n        The source must be an automated snapshot and it must be in the available state.\n        </p>\n        <p>\n            When you delete a cluster, Amazon Redshift deletes any automated snapshots \n            of the cluster. Also, when the retention period of the snapshot expires,\n            Amazon Redshift automatically deletes it. If you want to keep an \n            automated snapshot for a longer period, you can make a manual\n            copy of the snapshot. Manual snapshots are retained until you delete them. \n        </p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=CopyClusterSnapshot\n    &SourceSnapshotIdentifier=cm:examplecluster-2013-01-22-19-27-58\n    &TargetSnapshotIdentifier=my-snapshot-456\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T014618Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><CopyClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <CopyClusterSnapshotResult>\n    <Snapshot>\n      <Port>5439</Port>\n      <SnapshotIdentifier>my-snapshot-456</SnapshotIdentifier>\n      <Status>available</Status>\n      <SnapshotType>manual</SnapshotType>\n      <ClusterVersion>1.0</ClusterVersion>\n      <SnapshotCreateTime>2013-01-22T19:27:58.931Z</SnapshotCreateTime>\n      <NumberOfNodes>2</NumberOfNodes>\n      <DBName>dev</DBName>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw.hs1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <MasterUsername>adminuser</MasterUsername>\n    </Snapshot>\n  </CopyClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>aebb56f5-64fe-11e2-88c5-53eb05787dfb</RequestId>\n  </ResponseMetadata>\n</CopyClusterSnapshotResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>\n        Copies the specified automated cluster snapshot to a new manual cluster snapshot. \n        The source must be an automated snapshot and it must be in the available state.\n        </p>\n        <p>\n            When you delete a cluster, Amazon Redshift deletes any automated snapshots \n            of the cluster. Also, when the retention period of the snapshot expires,\n            Amazon Redshift automatically deletes it. If you want to keep an \n            automated snapshot for a longer period, you can make a manual\n            copy of the snapshot. Manual snapshots are retained until you delete them. \n        </p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=CopyClusterSnapshot\n    &SourceSnapshotIdentifier=cm:examplecluster-2013-01-22-19-27-58\n    &TargetSnapshotIdentifier=my-snapshot-456\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T014618Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><CopyClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <CopyClusterSnapshotResult>\n    <Snapshot>\n      <Port>5439</Port>\n      <SnapshotIdentifier>my-snapshot-456</SnapshotIdentifier>\n      <Status>available</Status>\n      <SnapshotType>manual</SnapshotType>\n      <ClusterVersion>1.0</ClusterVersion>\n      <SnapshotCreateTime>2013-01-22T19:27:58.931Z</SnapshotCreateTime>\n      <NumberOfNodes>2</NumberOfNodes>\n      <DBName>dev</DBName>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <MasterUsername>adminuser</MasterUsername>\n    </Snapshot>\n  </CopyClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>aebb56f5-64fe-11e2-88c5-53eb05787dfb</RequestId>\n  </ResponseMetadata>\n</CopyClusterSnapshotResponse></queryresponse>\n        </examples>\n    "
     },
     "CreateCluster": {
       "name": "CreateCluster",
@@ -583,7 +583,7 @@
           "NodeType": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n        The node type to be provisioned for the cluster. \n        For information about node types, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\">\n            Working with Clusters</a> in the <i>Amazon Redshift Management Guide</i>. </p>        \n        <p>\n            Valid Values: <code>dw.hs1.xlarge</code> | <code>dw.hs1.8xlarge</code>. \n        </p>\n    ",
+            "documentation": "\n        <p>\n        The node type to be provisioned for the cluster. \n        For information about node types, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\">\n            Working with Clusters</a> in the <i>Amazon Redshift Management Guide</i>. </p>        \n        <p>\n            Valid Values: <code>dw1.xlarge</code> | <code>dw1.8xlarge</code> | <code>dw2.large</code> | <code>dw2.8xlarge</code>. \n        </p>\n    ",
             "required": true
           },
           "MasterUsername": {
@@ -633,7 +633,7 @@
           "PreferredMaintenanceWindow": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n        The weekly time range (in UTC) during which automated cluster maintenance can occur.\n        </p>\n        <p>\n            Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n        </p>\n        <p>\n            Default: A 30-minute window selected at random from an\n            8-hour block of time per region, occurring on a random day of the\n            week. The following list shows the time blocks for each region \n            from which the default maintenance windows are assigned.\n        </p>\n        <ul>\n            <li>\n<b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC</li>\n            <li>\n<b>US-West (Oregon) Region</b> 06:00-14:00 UTC</li>\n        </ul>\n        <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p>\n        <p>Constraints: Minimum 30-minute window.</p>\n    "
+            "documentation": "\n        <p>\n        The weekly time range (in UTC) during which automated cluster maintenance can occur.\n        </p>\n        <p>\n            Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n        </p>\n        <p>\n            Default: A 30-minute window selected at random from an\n            8-hour block of time per region, occurring on a random day of the\n            week. The following list shows the time blocks for each region \n            from which the default maintenance windows are assigned.\n        </p>\n        <ul>\n            <li>\n<b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC</li>\n            <li>\n<b>US-West (Oregon) Region</b> 06:00-14:00 UTC</li>\n            <li>\n<b>EU (Ireland) Region</b> 22:00-06:00 UTC</li>\n            <li>\n<b>Asia Pacific (Singapore) Region</b> 14:00-22:00 UTC</li>\n            <li>\n<b>Asia Pacific (Sydney) Region</b> 12:00-20:00 UTC</li>\n            <li>\n<b>Asia Pacific (Tokyo) Region</b> 17:00-03:00 UTC</li>\n        </ul>\n        <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p>\n        <p>Constraints: Minimum 30-minute window.</p>\n    "
           },
           "ClusterParameterGroupName": {
             "shape_name": "String",
@@ -854,7 +854,7 @@
                   "MasterUserPassword": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": "\n        <p>\n        The pending or in-progress change of the master password for the cluster.\n        </p>\n    "
+                    "documentation": "\n        <p>\n        The pending or in-progress change of the master user password for the cluster.\n        </p>\n    "
                   },
                   "NodeType": {
                     "shape_name": "String",
@@ -1033,6 +1033,11 @@
                   }
                 },
                 "documentation": "\n        <p>Describes the status of the elastic IP (EIP) address.</p>\n    "
+              },
+              "ClusterRevisionNumber": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n        <p>The specific revision number of the database in the cluster.</p>\n    "
               }
             },
             "wrapper": true,
@@ -1147,7 +1152,7 @@
           "documentation": "\n        <p>The Elastic IP (EIP) is invalid or cannot be found.</p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n            Creates a new cluster. To create the cluster in virtual private cloud (VPC), you must provide cluster subnet group name. If \n            you don't provide a cluster subnet group name or the cluster security group parameter, Amazon Redshift \n            creates a non-VPC cluster, it associates the default cluster security group with the cluster.\n            \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n.\n        </p>\n        <examples>\n            <example>\n                <description>Create a non-VPC cluster.</description>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n   ?Action=CreateCluster\n   &ClusterIdentifier=examplecluster\n   &MasterUsername=masteruser\n   &MasterUserPassword=12345678Aa\n   &NumberOfNodes=2   \n   &NodeType=dw.hs1.xlarge\n   &Version=2012-12-01\n   &x-amz-algorithm=AWS4-HMAC-SHA256\n   &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n   &x-amz-date=20130123T000028Z\n   &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><CreateClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <CreateClusterResult>\n    <Cluster>\n      <PendingModifiedValues>\n        <MasterUserPassword>****</MasterUserPassword>\n      </PendingModifiedValues>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <ClusterStatus>creating</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sun:10:30-sun:11:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <NodeType>dw.hs1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>masteruser</MasterUsername>\n    </Cluster>\n  </CreateClusterResult>\n  <ResponseMetadata>\n    <RequestId>e69b1294-64ef-11e2-b07c-f7fbdd006c67</RequestId>\n  </ResponseMetadata>\n</CreateClusterResponse></queryresponse>\n            </example>\n            <example>\n                <description>Create cluster in virtual private cloud (VPC). This example request specifies a ClusterSubnetGroup in the request.</description>\n                <queryrequest>https://redshift.us-east-1.amazonaws.com/\n ?Action=CreateCluster\n&ClusterIdentifier=exampleclusterinvpc\n&MasterUsername=master\n&MasterUserPassword=1234abcdA\n&NodeType=dw.hs1.xlarge\n&NumberOfNodes=2\n&ClusterSubnetGroupName=mysubnetgroup1\n   &Version=2012-12-01\n   &x-amz-algorithm=AWS4-HMAC-SHA256\n   &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n   &x-amz-date=20130123T000028Z\n   &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n                <queryresponse><CreateClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <CreateClusterResult>\n    <Cluster>\n      <PendingModifiedValues>\n        <MasterUserPassword>****</MasterUserPassword>\n      </PendingModifiedValues>\n      <ClusterSubnetGroupName>mysubnetgroup1</ClusterSubnetGroupName>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <ClusterStatus>creating</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>false</PubliclyAccessible>\n      <Encrpyted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sat:08:30-sat:09:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <VpcId>vpc-796a5913</VpcId>\n      <ClusterSecurityGroups/>\n      <NodeType>dw.hs1.xlarge</NodeType>\n      <ClusterIdentifier>exampleclusterinvpc</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>master</MasterUsername>\n    </Cluster>\n  </CreateClusterResult>\n  <ResponseMetadata>\n    <RequestId>fa337bb4-6a4d-11e2-a12a-cb8076a904bd</RequestId>\n  </ResponseMetadata>\n</CreateClusterResponse></queryresponse>\n            </example>\n        </examples>\n    "
+      "documentation": "\n        <p>\n            Creates a new cluster. To create the cluster in virtual private cloud (VPC), you must provide cluster subnet group name. If \n            you don't provide a cluster subnet group name or the cluster security group parameter, Amazon Redshift \n            creates a non-VPC cluster, it associates the default cluster security group with the cluster.\n            \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n.\n        </p>\n        <examples>\n            <example>\n                <description>Create a non-VPC cluster.</description>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n   ?Action=CreateCluster\n   &ClusterIdentifier=examplecluster\n   &MasterUsername=masteruser\n   &MasterUserPassword=12345678Aa\n   &NumberOfNodes=2   \n   &NodeType=dw1.xlarge\n   &Version=2012-12-01\n   &x-amz-algorithm=AWS4-HMAC-SHA256\n   &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n   &x-amz-date=20130123T000028Z\n   &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><CreateClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <CreateClusterResult>\n    <Cluster>\n      <PendingModifiedValues>\n        <MasterUserPassword>****</MasterUserPassword>\n      </PendingModifiedValues>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <ClusterStatus>creating</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sun:10:30-sun:11:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>masteruser</MasterUsername>\n    </Cluster>\n  </CreateClusterResult>\n  <ResponseMetadata>\n    <RequestId>e69b1294-64ef-11e2-b07c-f7fbdd006c67</RequestId>\n  </ResponseMetadata>\n</CreateClusterResponse></queryresponse>\n            </example>\n            <example>\n                <description>Create cluster in virtual private cloud (VPC). This example request specifies a ClusterSubnetGroup in the request.</description>\n                <queryrequest>https://redshift.us-east-1.amazonaws.com/\n ?Action=CreateCluster\n&ClusterIdentifier=exampleclusterinvpc\n&MasterUsername=master\n&MasterUserPassword=1234abcdA\n&NodeType=dw1.xlarge\n&NumberOfNodes=2\n&ClusterSubnetGroupName=mysubnetgroup1\n   &Version=2012-12-01\n   &x-amz-algorithm=AWS4-HMAC-SHA256\n   &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n   &x-amz-date=20130123T000028Z\n   &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n                <queryresponse><CreateClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <CreateClusterResult>\n    <Cluster>\n      <PendingModifiedValues>\n        <MasterUserPassword>****</MasterUserPassword>\n      </PendingModifiedValues>\n      <ClusterSubnetGroupName>mysubnetgroup1</ClusterSubnetGroupName>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <ClusterStatus>creating</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>false</PubliclyAccessible>\n      <Encrpyted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sat:08:30-sat:09:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <VpcId>vpc-796a5913</VpcId>\n      <ClusterSecurityGroups/>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>exampleclusterinvpc</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>master</MasterUsername>\n    </Cluster>\n  </CreateClusterResult>\n  <ResponseMetadata>\n    <RequestId>fa337bb4-6a4d-11e2-a12a-cb8076a904bd</RequestId>\n  </ResponseMetadata>\n</CreateClusterResponse></queryresponse>\n            </example>\n        </examples>\n    "
     },
     "CreateClusterParameterGroup": {
       "name": "CreateClusterParameterGroup",
@@ -1384,7 +1389,7 @@
               "Status": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
+                "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", \"final snapshot\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
               },
               "Port": {
                 "shape_name": "Integer",
@@ -1540,7 +1545,7 @@
           "documentation": "\n        <p>\n            The request would result in the user exceeding the allowed number of cluster snapshots.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n        Creates a manual snapshot of the specified cluster. \n        The cluster must be in the \"available\" state.\n        </p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=CreateClusterSnapshot\n    &ClusterIdentifier=examplecluster\n    &SnapshotIdentifier=snapshot-1234\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T010824Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><CreateClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <CreateClusterSnapshotResult>\n    <Snapshot>\n      <Port>5439</Port>\n      <SnapshotIdentifier>my-snapshot-123</SnapshotIdentifier>\n      <Status>creating</Status>\n      <SnapshotType>manual</SnapshotType>\n      <ClusterVersion>1.0</ClusterVersion>\n      <SnapshotCreateTime>2013-01-23T01:08:29.142Z</SnapshotCreateTime>\n      <NumberOfNodes>2</NumberOfNodes>\n      <DBName>dev</DBName>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw.hs1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <MasterUsername>adminuser</MasterUsername>\n    </Snapshot>\n  </CreateClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>65baef14-64f9-11e2-bea9-49e0ce183f07</RequestId>\n  </ResponseMetadata>\n</CreateClusterSnapshotResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>\n        Creates a manual snapshot of the specified cluster. \n        The cluster must be in the \"available\" state.\n        </p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=CreateClusterSnapshot\n    &ClusterIdentifier=examplecluster\n    &SnapshotIdentifier=snapshot-1234\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T010824Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><CreateClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <CreateClusterSnapshotResult>\n    <Snapshot>\n      <Port>5439</Port>\n      <SnapshotIdentifier>my-snapshot-123</SnapshotIdentifier>\n      <Status>creating</Status>\n      <SnapshotType>manual</SnapshotType>\n      <ClusterVersion>1.0</ClusterVersion>\n      <SnapshotCreateTime>2013-01-23T01:08:29.142Z</SnapshotCreateTime>\n      <NumberOfNodes>2</NumberOfNodes>\n      <DBName>dev</DBName>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <MasterUsername>adminuser</MasterUsername>\n    </Snapshot>\n  </CreateClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>65baef14-64f9-11e2-bea9-49e0ce183f07</RequestId>\n  </ResponseMetadata>\n</CreateClusterSnapshotResponse></queryresponse>\n        </examples>\n    "
     },
     "CreateClusterSubnetGroup": {
       "name": "CreateClusterSubnetGroup",
@@ -1883,7 +1888,7 @@
           "documentation": "\n        <p>The specified Amazon Redshift event source could not be found.</p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n            Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of\n            an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the \n            Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic.\n            The ARN is displayed in the SNS console.\n        </p>\n        <p>\n            You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities.\n            Notifications will be sent for all events you want that match those criteria. For example, you can specify\n            source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and\n            severity = ERROR. The subsription will only send notifications for those ERROR events in the Availability and\n            Backup categores for the specified clusters.\n        </p>\n        <p>\n            If you specify both the source type and source IDs, such as source type = cluster and source identifier = \n            my-cluster-1, notifiactions will be sent for all the cluster events for my-cluster-1. If you specify a source type\n            but do not specify a source identifier, you will receive notice of the events for the objects of that type in your\n            AWS account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events\n            generated from all Amazon Redshift sources belonging to your AWS account. You must specify a source type if you\n            specify a source ID.\n        </p>\n    "
+      "documentation": "\n        <p>\n            Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of\n            an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the \n            Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic.\n            The ARN is displayed in the SNS console.\n        </p>\n        <p>\n            You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities.\n            Notifications will be sent for all events you want that match those criteria. For example, you can specify\n            source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and\n            severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and\n            Backup categories for the specified clusters.\n        </p>\n        <p>\n            If you specify both the source type and source IDs, such as source type = cluster and source identifier = \n            my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type\n            but do not specify a source identifier, you will receive notice of the events for the objects of that type in your\n            AWS account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events\n            generated from all Amazon Redshift sources belonging to your AWS account. You must specify a source type if you\n            specify a source ID.\n        </p>\n    "
     },
     "CreateHsmClientCertificate": {
       "name": "CreateHsmClientCertificate",
@@ -1894,7 +1899,7 @@
           "HsmClientCertificateIdentifier": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>The identifier to be assigned to the new HSM client certificate that the cluster\n            will use to connect to the HSM to retrieve the database encryption keys.</p>\n    ",
+            "documentation": "\n        <p>The identifier to be assigned to the new HSM client certificate that the cluster\n            will use to connect to the HSM to use the database encryption keys.</p>\n    ",
             "required": true
           }
         },
@@ -1916,7 +1921,7 @@
               "HsmClientCertificatePublicKey": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>The public key that the Amazon Redshift cluster will use to retrieve the client certificate from the HSM. \n           You must register the public key in the HSM.</p>\n    "
+                "documentation": "\n        <p>The public key that the Amazon Redshift cluster will use to connect to the HSM. \n           You must register the public key in the HSM.</p>\n    "
               }
             },
             "wrapper": true,
@@ -1940,7 +1945,7 @@
           "documentation": "\n        <p>\n            The quota for HSM client certificates has been reached. \nFor information about increasing your quota, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Management Guide</i>.\n\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client's HSM\n            in order to store and retrieve the keys used to encrypt the cluster databases.</p>\n        <p>The command returns a public key, which you must store in the HSM. After creating the HSM certificate,\n            you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to\n            store and retrieve database encryption keys in the HSM. For more information, go to\n            aLinkToHSMTopic in the Amazon Redshift Management Guide.</p>\n    "
+      "documentation": "\n        <p>Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client's HSM\n            in order to store and retrieve the keys used to encrypt the cluster databases.</p>\n        <p>The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate,\n            you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to\n            store and use encryption keys in the HSM. For more information, go to\n            <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html\">Hardware Security Modules</a> in the Amazon Redshift Management Guide.</p>\n    "
     },
     "CreateHsmConfiguration": {
       "name": "CreateHsmConfiguration",
@@ -1981,7 +1986,7 @@
           "HsmServerPublicCertificate": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>The public key used to access the HSM client certificate, which was created by calling\n            the Amazon Redshift create HSM certificate command.</p>   \n    ",
+            "documentation": "\n        <p>The HSMs public certificate file. When using Cloud HSM, the file name is server.pem.</p>   \n    ",
             "required": true
           }
         },
@@ -2037,7 +2042,7 @@
           "documentation": "\n        <p>\n            The quota for HSM configurations has been reached. \nFor information about increasing your quota, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Management Guide</i>.\n\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>Creates an HSM configuration that contains the information required by an Amazon Redshift cluster\n            to store and retrieve database encryption keys in a Hardware Storeage Module (HSM). After\n            creating the HSM configuration, you can specify it as a parameter when creating a cluster.\n            The cluster will then store its encryption keys in the HSM.</p>\n        <p>Before creating an HSM configuration, you must have first created an HSM client certificate.\n            For more information, go to aLinkToHSMTopic in the Amazon Redshift Management Guide.</p>\n    "
+      "documentation": "\n        <p>Creates an HSM configuration that contains the information required by an Amazon Redshift cluster\n            to store and use database encryption keys in a Hardware Security Module (HSM). After\n            creating the HSM configuration, you can specify it as a parameter when creating a cluster.\n            The cluster will then store its encryption keys in the HSM.</p>\n        <p>In addition to creating an HSM configuration, you must also create an HSM client certificate.\n            For more information, go to\n            <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html\">Hardware Security Modules</a> in the Amazon Redshift Management Guide.</p>\n    "
     },
     "DeleteCluster": {
       "name": "DeleteCluster",
@@ -2225,7 +2230,7 @@
                   "MasterUserPassword": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": "\n        <p>\n        The pending or in-progress change of the master password for the cluster.\n        </p>\n    "
+                    "documentation": "\n        <p>\n        The pending or in-progress change of the master user password for the cluster.\n        </p>\n    "
                   },
                   "NodeType": {
                     "shape_name": "String",
@@ -2404,6 +2409,11 @@
                   }
                 },
                 "documentation": "\n        <p>Describes the status of the elastic IP (EIP) address.</p>\n    "
+              },
+              "ClusterRevisionNumber": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n        <p>The specific revision number of the database in the cluster.</p>\n    "
               }
             },
             "wrapper": true,
@@ -2441,7 +2451,7 @@
           "documentation": "\n        <p>\n            The request would result in the user exceeding the allowed number of cluster snapshots.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n            Deletes a previously provisioned cluster. A successful response\n            from the web service indicates that the request was received correctly. If a final cluster snapshot is requested\n            the status of the cluster will be \"final-snapshot\" while the snapshot is being taken, then it's \"deleting\" once Amazon Redshift begins deleting the cluster. Use <a>DescribeClusters</a> \n            to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. \n            \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n.\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DeleteCluster\n    &ClusterIdentifier=examplecluster2\n    &SkipFinalClusterSnapshot=true\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T022400Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DeleteClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DeleteClusterResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <Endpoint>\n        <Port>5439</Port>\n        <Address>examplecluster2.cobbanlpscsn.us-east-1.redshift.amazonaws.com</Address>\n      </Endpoint>\n      <ClusterStatus>deleting</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>true</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sun:10:30-sun:11:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterCreateTime>2013-01-23T00:11:32.804Z</ClusterCreateTime>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <NodeType>dw.hs1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster2</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>masteruser</MasterUsername>\n    </Cluster>\n  </DeleteClusterResult>\n  <ResponseMetadata>\n    <RequestId>f2e6b87e-6503-11e2-b343-393adc3f0a21</RequestId>\n  </ResponseMetadata>\n</DeleteClusterResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>\n            Deletes a previously provisioned cluster. A successful response\n            from the web service indicates that the request was received correctly. If a final cluster snapshot is requested\n            the status of the cluster will be \"final-snapshot\" while the snapshot is being taken, then it's \"deleting\" once Amazon Redshift begins deleting the cluster. Use <a>DescribeClusters</a> \n            to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. \n            \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n.\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DeleteCluster\n    &ClusterIdentifier=examplecluster2\n    &SkipFinalClusterSnapshot=true\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T022400Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DeleteClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DeleteClusterResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <Endpoint>\n        <Port>5439</Port>\n        <Address>examplecluster2.cobbanlpscsn.us-east-1.redshift.amazonaws.com</Address>\n      </Endpoint>\n      <ClusterStatus>deleting</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>true</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sun:10:30-sun:11:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterCreateTime>2013-01-23T00:11:32.804Z</ClusterCreateTime>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster2</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>masteruser</MasterUsername>\n    </Cluster>\n  </DeleteClusterResult>\n  <ResponseMetadata>\n    <RequestId>f2e6b87e-6503-11e2-b343-393adc3f0a21</RequestId>\n  </ResponseMetadata>\n</DeleteClusterResponse></queryresponse>\n        </examples>\n    "
     },
     "DeleteClusterParameterGroup": {
       "name": "DeleteClusterParameterGroup",
@@ -2557,7 +2567,7 @@
               "Status": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
+                "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", \"final snapshot\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
               },
               "Port": {
                 "shape_name": "Integer",
@@ -2699,7 +2709,7 @@
           "documentation": "\n        <p>\n        The snapshot identifier does not refer to an existing cluster snapshot.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n            Deletes the specified manual snapshot. The snapshot must be in the \"available\" state, with no other users authorized to access the snapshot. \n        </p>\n        <p>\n            Unlike automated snapshots, manual snapshots are retained even after you \n            delete your cluster.           \n            Amazon Redshift does not delete your manual snapshots. You must delete manual snapshot \n            explicitly to avoid getting charged.\n            If other accounts are authorized to access the snapshot, you must revoke all of the authorizations before you can delete the snapshot.\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DeleteClusterSnapshot\n    &SnapshotIdentifier=snapshot-1234\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20121208/us-east-1/redshift/aws4_request\n    &x-amz-date=20121208T005225Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DeleteClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DeleteClusterSnapshotResult>\n    <Snapshot>\n      <SnapshotCreateTime>2012-12-07T23:31:02.372Z</SnapshotCreateTime>\n      <Port>5439</Port>\n      <SnapshotIdentifier>snapshot-1234</SnapshotIdentifier>\n      <Status>deleted</Status>\n      <ClusterCreateTime>2012-12-06T23:09:01.475Z</ClusterCreateTime>\n      <SnapshotType>manual</SnapshotType>\n      <ClusterVersion>1.0</ClusterVersion>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <MasterUsername>masteruser</MasterUsername>\n      <NodeType>dw.hs1.xlarge</NodeType>\n      <DBName>mydb</DBName>\n      <NumberOfNodes>3</NumberOfNodes>\n    </Snapshot>\n  </DeleteClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>88a31de4-40d1-11e2-8a25-eb010998df4e</RequestId>\n  </ResponseMetadata>\n</DeleteClusterSnapshotResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>\n            Deletes the specified manual snapshot. The snapshot must be in the \"available\" state, with no other users authorized to access the snapshot. \n        </p>\n        <p>\n            Unlike automated snapshots, manual snapshots are retained even after you \n            delete your cluster.           \n            Amazon Redshift does not delete your manual snapshots. You must delete manual snapshot \n            explicitly to avoid getting charged.\n            If other accounts are authorized to access the snapshot, you must revoke all of the authorizations before you can delete the snapshot.\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DeleteClusterSnapshot\n    &SnapshotIdentifier=snapshot-1234\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20121208/us-east-1/redshift/aws4_request\n    &x-amz-date=20121208T005225Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DeleteClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DeleteClusterSnapshotResult>\n    <Snapshot>\n      <SnapshotCreateTime>2012-12-07T23:31:02.372Z</SnapshotCreateTime>\n      <Port>5439</Port>\n      <SnapshotIdentifier>snapshot-1234</SnapshotIdentifier>\n      <Status>deleted</Status>\n      <ClusterCreateTime>2012-12-06T23:09:01.475Z</ClusterCreateTime>\n      <SnapshotType>manual</SnapshotType>\n      <ClusterVersion>1.0</ClusterVersion>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <MasterUsername>masteruser</MasterUsername>\n      <NodeType>dw1.xlarge</NodeType>\n      <DBName>mydb</DBName>\n      <NumberOfNodes>3</NumberOfNodes>\n    </Snapshot>\n  </DeleteClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>88a31de4-40d1-11e2-8a25-eb010998df4e</RequestId>\n  </ResponseMetadata>\n</DeleteClusterSnapshotResponse></queryresponse>\n        </examples>\n    "
     },
     "DeleteClusterSubnetGroup": {
       "name": "DeleteClusterSubnetGroup",
@@ -2851,12 +2861,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n        The maximum number of parameter group records to include in the response.\n        If more records exist than the specified <code>MaxRecords</code> value,\n        the response includes a marker that you can use in a subsequent \n            <a>DescribeClusterParameterGroups</a> request \n        to retrieve the next set of records.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: Value must be at least 20 and no more than 100.</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            An optional marker returned by a previous <a>DescribeClusterParameterGroups</a> request\n            to indicate the first parameter group that the current request will return.\n        </p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeClusterParameterGroups</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p>\n\n        </p>\n    "
@@ -2868,7 +2878,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            A marker at which to continue listing cluster parameter groups in a new request.   \n            The response returns a marker if there are more parameter groups to list than \n            returned in the response.            \n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           },
           "ParameterGroups": {
             "shape_name": "ParameterGroupList",
@@ -2933,12 +2943,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n        The maximum number of records to include in the response.\n        If more records exist than the specified <code>MaxRecords</code> value,\n        response includes a marker that you can specify in your subsequent request \n        to retrieve remaining result.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: Value must be at least 20 and no more than 100.</p>        \n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>     \n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            An optional marker returned from a previous <b>DescribeClusterParameters</b> request.\n            If this parameter is specified, the response includes\n        only records beyond the specified marker,\n        up to the value specified by <code>MaxRecords</code>. \n        </p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeClusterParameters</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n    "
           }
         },
         "documentation": "\n\n    "
@@ -3003,7 +3013,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            A marker that indicates the first parameter group that a subsequent\n            <a>DescribeClusterParameterGroups</a> request will return.\n            The response returns a marker only if there are more parameter groups details to list than \n            the current response can return.\n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p>\n\t\tContains the output from the <a>DescribeClusterParameters</a> action.\n        </p>\n    "
@@ -3033,12 +3043,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n            The maximum number of records to be included in the response.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a marker is included in the response, which you can use\n            in a subsequent <a>DescribeClusterSecurityGroups</a> request. \n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: Value must be at least 20 and no more than 100.</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            An optional marker returned by a previous <a>DescribeClusterSecurityGroups</a> request\n            to indicate the first security group that the current request will return.\n            You can specify either the <b>Marker</b> parameter or a <b>ClusterSecurityGroupName</b>\n            parameter, but not both.\n        </p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeClusterSecurityGroups</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n        <p>\n            Constraints: You can specify either the <b>ClusterSecurityGroupName</b> parameter or the <b>Marker</b> parameter, but not both.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p>???</p>\n    "
@@ -3050,7 +3060,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            A marker at which to continue listing cluster security groups in a new request.\n            The response returns a marker if there are more security groups to list than \n            could be returned in the response.\n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           },
           "ClusterSecurityGroups": {
             "shape_name": "ClusterSecurityGroups",
@@ -3175,12 +3185,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n        The maximum number of snapshot records to include in the response.\n        If more records exist than the specified <code>MaxRecords</code> value,\n            the response returns a marker that you can use in a subsequent <a>DescribeClusterSnapshots</a> \n            request in order to retrieve the next set of snapshot records.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: Must be at least 20 and no more than 100.</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            An optional marker returned by a previous <a>DescribeClusterSnapshots</a> request\n            to indicate the first snapshot that the request will return.\n        </p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeClusterSnapshots</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n    "
           },
           "OwnerAccount": {
             "shape_name": "String",
@@ -3197,7 +3207,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n        A marker that indicates the first snapshot that a\n        subsequent <a>DescribeClusterSnapshots</a> request will return. \n        The response returns a marker only if there are more snapshots to list than \n        the current response can return. \n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           },
           "Snapshots": {
             "shape_name": "SnapshotList",
@@ -3224,7 +3234,7 @@
                 "Status": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
+                  "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", \"final snapshot\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
                 },
                 "Port": {
                   "shape_name": "Integer",
@@ -3363,7 +3373,7 @@
           "documentation": "\n        <p>\n        The snapshot identifier does not refer to an existing cluster snapshot.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n        Returns one or more snapshot objects, which contain metadata about your cluster snapshots.\n        By default, this operation returns information about all snapshots of all clusters that are\n        owned by you AWS customer account. No information is returned for snapshots owned by inactive AWS customer accounts.\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DescribeClusterSnapshots\n    &ClusterIdentifier=examplecluster\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T011512Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DescribeClusterSnapshotsResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeClusterSnapshotsResult>\n    <Snapshots>\n      <Snapshot>\n        <Port>5439</Port>\n        <SnapshotIdentifier>cm:examplecluster-2013-01-22-19-27-58</SnapshotIdentifier>\n        <Status>available</Status>\n        <SnapshotType>automated</SnapshotType>\n        <ClusterVersion>1.0</ClusterVersion>\n        <SnapshotCreateTime>2013-01-22T19:27:58.931Z</SnapshotCreateTime>\n        <NumberOfNodes>2</NumberOfNodes>\n        <DBName>dev</DBName>\n        <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n        <AvailabilityZone>us-east-1c</AvailabilityZone>\n        <NodeType>dw.hs1.xlarge</NodeType>\n        <ClusterIdentifier>examplecluster</ClusterIdentifier>\n        <MasterUsername>adminuser</MasterUsername>\n      </Snapshot>\n      <Snapshot>\n        <Port>5439</Port>\n        <SnapshotIdentifier>my-snapshot-123</SnapshotIdentifier>\n        <Status>available</Status>\n        <SnapshotType>manual</SnapshotType>\n        <ClusterVersion>1.0</ClusterVersion>\n        <SnapshotCreateTime>2013-01-23T01:09:03.149Z</SnapshotCreateTime>\n        <NumberOfNodes>2</NumberOfNodes>\n        <DBName>dev</DBName>\n        <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n        <AvailabilityZone>us-east-1c</AvailabilityZone>\n        <NodeType>dw.hs1.xlarge</NodeType>\n        <ClusterIdentifier>examplecluster</ClusterIdentifier>\n        <MasterUsername>adminuser</MasterUsername>\n      </Snapshot>\n    </Snapshots>\n  </DescribeClusterSnapshotsResult>\n  <ResponseMetadata>\n    <RequestId>56a9daf4-64fa-11e2-a8da-655adc216806</RequestId>\n  </ResponseMetadata>\n</DescribeClusterSnapshotsResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>\n        Returns one or more snapshot objects, which contain metadata about your cluster snapshots.\n        By default, this operation returns information about all snapshots of all clusters that are\n        owned by you AWS customer account. No information is returned for snapshots owned by inactive AWS customer accounts.\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DescribeClusterSnapshots\n    &ClusterIdentifier=examplecluster\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T011512Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DescribeClusterSnapshotsResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeClusterSnapshotsResult>\n    <Snapshots>\n      <Snapshot>\n        <Port>5439</Port>\n        <SnapshotIdentifier>cm:examplecluster-2013-01-22-19-27-58</SnapshotIdentifier>\n        <Status>available</Status>\n        <SnapshotType>automated</SnapshotType>\n        <ClusterVersion>1.0</ClusterVersion>\n        <SnapshotCreateTime>2013-01-22T19:27:58.931Z</SnapshotCreateTime>\n        <NumberOfNodes>2</NumberOfNodes>\n        <DBName>dev</DBName>\n        <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n        <AvailabilityZone>us-east-1c</AvailabilityZone>\n        <NodeType>dw1.xlarge</NodeType>\n        <ClusterIdentifier>examplecluster</ClusterIdentifier>\n        <MasterUsername>adminuser</MasterUsername>\n      </Snapshot>\n      <Snapshot>\n        <Port>5439</Port>\n        <SnapshotIdentifier>my-snapshot-123</SnapshotIdentifier>\n        <Status>available</Status>\n        <SnapshotType>manual</SnapshotType>\n        <ClusterVersion>1.0</ClusterVersion>\n        <SnapshotCreateTime>2013-01-23T01:09:03.149Z</SnapshotCreateTime>\n        <NumberOfNodes>2</NumberOfNodes>\n        <DBName>dev</DBName>\n        <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n        <AvailabilityZone>us-east-1c</AvailabilityZone>\n        <NodeType>dw1.xlarge</NodeType>\n        <ClusterIdentifier>examplecluster</ClusterIdentifier>\n        <MasterUsername>adminuser</MasterUsername>\n      </Snapshot>\n    </Snapshots>\n  </DescribeClusterSnapshotsResult>\n  <ResponseMetadata>\n    <RequestId>56a9daf4-64fa-11e2-a8da-655adc216806</RequestId>\n  </ResponseMetadata>\n</DescribeClusterSnapshotsResponse></queryresponse>\n        </examples>\n    "
     },
     "DescribeClusterSubnetGroups": {
       "name": "DescribeClusterSubnetGroups",
@@ -3379,12 +3389,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>The maximum number of cluster subnet group records to include in the response. \n            If more records exist than the specified <code>MaxRecords</code> value, the response \n            returns a marker that you can use in a subsequent <a>DescribeClusterSubnetGroups</a>\n            request in order to retrieve the next set of cluster subnet group records.</p>\n        <p>Default: 100</p>\n        <p>Constraints: Must be at least 20 and no more than 100.</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>An optional marker returned by a previous <a>DescribeClusterSubnetGroups</a> request to indicate the first \n            cluster subnet group that the current request will return.</p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeClusterSubnetGroups</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p>\n        </p>\n    "
@@ -3396,7 +3406,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            A marker at which to continue listing cluster subnet groups in a new request.\n            A marker is returned if there are more cluster subnet groups to list than were returned in the response.            \n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           },
           "ClusterSubnetGroups": {
             "shape_name": "ClusterSubnetGroups",
@@ -3501,12 +3511,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n    <p>\n    The maximum number of records to include in the response.\n    If more than the <code>MaxRecords</code> value is available, a marker is\n    included in the response so that the following results can be retrieved.\n    </p>\n       <p>Default: <code>100</code></p>\n    <p>Constraints: Value must be at least 20 and no more than 100.</p>\n   "
+            "documentation": "\n       <p>\n           The maximum number of response records to return in each call. \n           If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n           a value is returned in a <code>marker</code> field of the response. \n           You can retrieve the next set of records by retrying the command with the returned marker value.\n       </p>\n       <p>Default: <code>100</code></p>\n       <p>Constraints: minimum 20, maximum 100.</p>\n   "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n    <p>\n    The marker returned from a previous request.\n    If this parameter is specified, the response includes records\n    beyond the marker only, up to <code>MaxRecords</code>.\n    </p>\n   "
+            "documentation": "\n       <p>\n           An optional parameter that specifies the starting point to return a set of response records. \n           When the results of a <a>DescribeClusterVersions</a> request exceed the value specified in <code>MaxRecords</code>, \n           AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n           response records by providing the returned marker value in the <code>Marker</code> parameter and \n           retrying the request.\n       </p>\n   "
           }
         },
         "documentation": "\n   "
@@ -3518,7 +3528,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n    <p>\n    The identifier returned to allow retrieval of paginated results.\n    </p>\n   "
+            "documentation": "\n       <p>\n           A value that indicates the starting point for the next set of response records in a subsequent request. \n           If a value is returned in a response, you can retrieve the next set of records by providing this returned \n           marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n           is empty, all response records have been retrieved for the request.\n       </p>\n   "
           },
           "ClusterVersions": {
             "shape_name": "ClusterVersionList",
@@ -3565,17 +3575,17 @@
           "ClusterIdentifier": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            The unique identifier of a cluster whose properties you are requesting.\n            This parameter isn't case sensitive.\n        </p>        \n        <p>The default is that all clusters defined for an account are returned.\n        </p>\n        \n    "
+            "documentation": "\n        <p>\n            The unique identifier of a cluster whose properties you are requesting.\n            This parameter is case sensitive.\n        </p>        \n        <p>The default is that all clusters defined for an account are returned.\n        </p>\n        \n    "
           },
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n            The maximum number of records that the response can include.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a <code>marker</code> is included in the response that can be used in a\n            new <b>DescribeClusters</b> request to continue listing results.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: Value must be at least 20 and no more than 100.</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            An optional marker returned by a previous\n            <b>DescribeClusters</b> request to indicate the\n            first cluster that the current <b>DescribeClusters</b> request will return.\n        </p>\n        <p>You can specify either a <b>Marker</b> parameter or a <b>ClusterIdentifier</b> parameter in a\n            <b>DescribeClusters</b> request, but not both.</p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeClusters</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n        <p>\n            Constraints: You can specify either the <b>ClusterIdentifier</b> parameter or the <b>Marker</b> parameter, but not both.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p>\n            \n        </p>\n    "
@@ -3587,7 +3597,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            A marker at which to continue listing clusters in a new request.\n            A marker is returned if there are more clusters to list than were\n            returned in the response.\n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           },
           "Clusters": {
             "shape_name": "ClusterList",
@@ -3749,7 +3759,7 @@
                     "MasterUserPassword": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": "\n        <p>\n        The pending or in-progress change of the master password for the cluster.\n        </p>\n    "
+                      "documentation": "\n        <p>\n        The pending or in-progress change of the master user password for the cluster.\n        </p>\n    "
                     },
                     "NodeType": {
                       "shape_name": "String",
@@ -3928,6 +3938,11 @@
                     }
                   },
                   "documentation": "\n        <p>Describes the status of the elastic IP (EIP) address.</p>\n    "
+                },
+                "ClusterRevisionNumber": {
+                  "shape_name": "String",
+                  "type": "string",
+                  "documentation": "\n        <p>The specific revision number of the database in the cluster.</p>\n    "
                 }
               },
               "wrapper": true,
@@ -3948,7 +3963,7 @@
           "documentation": "\n        <p>\n        The <i>ClusterIdentifier</i> parameter does not refer to an existing cluster.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n            Returns properties of provisioned clusters including general cluster properties, cluster database properties,\n            maintenance and backup properties, and security and access properties. This operation supports pagination. \n            \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n.\n        </p>\n        <examples>\n            <example>\n                <name>Describing All Clusters</name>\n                <description> The following example shows a request that describes all clusters.</description>\n                <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DescribeClusters\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T000452Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n                <queryresponse><DescribeClustersResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeClustersResult>\n    <Clusters>\n      <Cluster>\n        <PendingModifiedValues>\n          <MasterUserPassword>****</MasterUserPassword>\n        </PendingModifiedValues>\n        <ClusterVersion>1.0</ClusterVersion>\n        <VpcSecurityGroups/>\n        <ClusterStatus>creating</ClusterStatus>\n        <NumberOfNodes>2</NumberOfNodes>\n        <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n        <PubliclyAccessible>true</PubliclyAccessible>\n        <Encrypted>false</Encrypted>\n        <DBName>dev</DBName>\n        <PreferredMaintenanceWindow>sun:10:30-sun:11:00</PreferredMaintenanceWindow>\n        <ClusterParameterGroups>\n          <ClusterParameterGroup>\n            <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n            <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n          </ClusterParameterGroup>\n        </ClusterParameterGroups>\n        <ClusterSecurityGroups>\n          <ClusterSecurityGroup>\n            <Status>active</Status>\n            <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n          </ClusterSecurityGroup>\n        </ClusterSecurityGroups>\n        <AvailabilityZone>us-east-1a</AvailabilityZone>\n        <NodeType>dw.hs1.xlarge</NodeType>\n        <ClusterIdentifier>examplecluster</ClusterIdentifier>\n        <AllowVersionUpgrade>true</AllowVersionUpgrade>\n        <MasterUsername>masteruser</MasterUsername>\n      </Cluster>\n    </Clusters>\n  </DescribeClustersResult>\n  <ResponseMetadata>\n    <RequestId>837d45d6-64f0-11e2-b07c-f7fbdd006c67</RequestId>\n  </ResponseMetadata>\n</DescribeClustersResponse></queryresponse>\n            </example>\n        </examples>\n    "
+      "documentation": "\n        <p>\n            Returns properties of provisioned clusters including general cluster properties, cluster database properties,\n            maintenance and backup properties, and security and access properties. This operation supports pagination. \n            \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n.\n        </p>\n        <examples>\n            <example>\n                <name>Describing All Clusters</name>\n                <description> The following example shows a request that describes all clusters.</description>\n                <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DescribeClusters\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T000452Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n                <queryresponse><DescribeClustersResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeClustersResult>\n    <Clusters>\n      <Cluster>\n        <PendingModifiedValues>\n          <MasterUserPassword>****</MasterUserPassword>\n        </PendingModifiedValues>\n        <ClusterVersion>1.0</ClusterVersion>\n        <VpcSecurityGroups/>\n        <ClusterStatus>creating</ClusterStatus>\n        <NumberOfNodes>2</NumberOfNodes>\n        <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n        <PubliclyAccessible>true</PubliclyAccessible>\n        <Encrypted>false</Encrypted>\n        <DBName>dev</DBName>\n        <PreferredMaintenanceWindow>sun:10:30-sun:11:00</PreferredMaintenanceWindow>\n        <ClusterParameterGroups>\n          <ClusterParameterGroup>\n            <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n            <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n          </ClusterParameterGroup>\n        </ClusterParameterGroups>\n        <ClusterSecurityGroups>\n          <ClusterSecurityGroup>\n            <Status>active</Status>\n            <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n          </ClusterSecurityGroup>\n        </ClusterSecurityGroups>\n        <AvailabilityZone>us-east-1a</AvailabilityZone>\n        <NodeType>dw1.xlarge</NodeType>\n        <ClusterIdentifier>examplecluster</ClusterIdentifier>\n        <AllowVersionUpgrade>true</AllowVersionUpgrade>\n        <MasterUsername>masteruser</MasterUsername>\n      </Cluster>\n    </Clusters>\n  </DescribeClustersResult>\n  <ResponseMetadata>\n    <RequestId>837d45d6-64f0-11e2-b07c-f7fbdd006c67</RequestId>\n  </ResponseMetadata>\n</DescribeClustersResponse></queryresponse>\n            </example>\n        </examples>\n    "
     },
     "DescribeDefaultClusterParameters": {
       "name": "DescribeDefaultClusterParameters",
@@ -3965,12 +3980,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n        The maximum number of records to include in the response.\n        If more records exist than the specified <code>MaxRecords</code> value,\n        a marker is included in the response so that the remaining\n        results may be retrieved.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: Value must be at least 20 and no more than 100.</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n        An optional marker returned from a previous\n            <b>DescribeDefaultClusterParameters</b> request.\n        If this parameter is specified, the response includes\n        only records beyond the marker,\n        up to the value specified by <code>MaxRecords</code>.\n        </p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeDefaultClusterParameters</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p>\n\n        </p>\n    "
@@ -3991,7 +4006,7 @@
               "Marker": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>\n        An identifier to allow retrieval of paginated results.\n        </p>\n    "
+                "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
               },
               "Parameters": {
                 "shape_name": "ParametersList",
@@ -4156,12 +4171,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value,\n            a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p>\n        <p>Default: 100</p>\n        <p>Constraints: minimum 20, maximum 100</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>An optional pagination token provided by a previous DescribeOrderableClusterOptions request. If this parameter is\n            specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.</p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeEventSubscriptions</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p></p>\n    "
@@ -4173,7 +4188,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>An optional pagination token provided by a previous DescribeOrderableClusterOptions request. If this parameter is\n            specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.\n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           },
           "EventSubscriptionsList": {
             "shape_name": "EventSubscriptionsList",
@@ -4305,12 +4320,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n        The maximum number of records to include in the response.\n        If more records exist than the specified <code>MaxRecords</code> value,\n        a marker is included in the response so that the remaining\n        results may be retrieved.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: Value must be at least 20 and no more than 100.</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n        An optional marker returned from a previous\n            <b>DescribeEvents</b> request.\n        If this parameter is specified, the response includes\n        only records beyond the marker,\n        up to the value specified by <code>MaxRecords</code>.\n        </p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeEvents</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p>\n\n        </p>\n    "
@@ -4322,7 +4337,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            A marker at which to continue listing events in a new request.\n            The response returns a marker if there are more events to list than \n            returned in the response.\n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           },
           "Events": {
             "shape_name": "EventList",
@@ -4401,17 +4416,17 @@
           "HsmClientCertificateIdentifier": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>The identifier of a specific HSM client certificate for which you want information. If no\n            identifier is specified, information is returned for all HSM client certificates associated\n            with Amazon Redshift clusters owned by your AWS customer account.</p>   \n    "
+            "documentation": "\n        <p>The identifier of a specific HSM client certificate for which you want information. If no\n            identifier is specified, information is returned for all HSM client certificates owned by your AWS customer account.</p>   \n    "
           },
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n            The maximum number of records to include in the response.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a marker is included in the response so that the remaining\n            results may be retrieved.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            An optional marker returned from a previous\n            <b>DescribeOrderableClusterOptions</b> request.\n            If this parameter is specified, the response includes\n            only records beyond the marker,\n            up to the value specified by <code>MaxRecords</code>.\n        </p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeHsmClientCertificates</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p></p>   \n    "
@@ -4423,7 +4438,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            A marker at which to continue listing events in a new request.\n            The response returns a marker if there are more events to list than \n            returned in the response.\n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           },
           "HsmClientCertificates": {
             "shape_name": "HsmClientCertificateList",
@@ -4440,7 +4455,7 @@
                 "HsmClientCertificatePublicKey": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": "\n        <p>The public key that the Amazon Redshift cluster will use to retrieve the client certificate from the HSM. \n           You must register the public key in the HSM.</p>\n    "
+                  "documentation": "\n        <p>The public key that the Amazon Redshift cluster will use to connect to the HSM. \n           You must register the public key in the HSM.</p>\n    "
                 }
               },
               "wrapper": true,
@@ -4477,12 +4492,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n            The maximum number of records to include in the response.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a marker is included in the response so that the remaining\n            results may be retrieved.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            An optional marker returned from a previous\n            <b>DescribeOrderableClusterOptions</b> request.\n            If this parameter is specified, the response includes\n            only records beyond the marker,\n            up to the value specified by <code>MaxRecords</code>.\n        </p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeHsmConfigurations</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p></p>   \n    "
@@ -4494,7 +4509,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            A marker at which to continue listing HSM configurations in a new request.\n            The response returns a marker if there are more HSM configurations to list than \n            returned in the response.\n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           },
           "HsmConfigurations": {
             "shape_name": "HsmConfigurationList",
@@ -4626,12 +4641,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n            The maximum number of records to include in the response.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a marker is included in the response so that the remaining\n            results may be retrieved.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
+            "documentation": "\n        <p>\n            The maximum number of response records to return in each call. \n            If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n            a value is returned in a <code>marker</code> field of the response. \n            You can retrieve the next set of records by retrying the command with the returned marker value.\n        </p>\n        <p>Default: <code>100</code></p>\n        <p>Constraints: minimum 20, maximum 100.</p>\n    "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            An optional marker returned from a previous\n            <b>DescribeOrderableClusterOptions</b> request.\n            If this parameter is specified, the response includes\n            only records beyond the marker,\n            up to the value specified by <code>MaxRecords</code>.\n        </p>\n    "
+            "documentation": "\n        <p>\n            An optional parameter that specifies the starting point to return a set of response records. \n            When the results of a <a>DescribeOrderableClusterOptions</a> request exceed the value specified in <code>MaxRecords</code>, \n            AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n            response records by providing the returned marker value in the <code>Marker</code> parameter and \n            retrying the request.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p> </p>\n    "
@@ -4691,7 +4706,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n            A marker that can be used to retrieve paginated results.\n        </p>\n    "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n    "
           }
         },
         "documentation": "\n        <p>\n            Contains the output from the <a>DescribeOrderableClusterOptions</a> action. \n        </p>\n    "
@@ -4699,7 +4714,7 @@
       "errors": [
 
       ],
-      "documentation": "\n        <p> Returns a list of orderable cluster options. Before you create a \n        new cluster you can use this operation to find what options are \n        available, such as the EC2 Availability Zones (AZ) in the specific \n        AWS region that you can specify,  \n       and the node types you can request. The node types differ by available \n        storage, memory, CPU and price. With the cost involved you might want to \n        obtain a list of cluster options in the specific region and specify values \n        when creating a cluster. \n        \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DescribeOrderableClusterOptions\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20121207/us-east-1/redshift/aws4_request\n    &x-amz-date=20121207T225314Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DescribeOrderableClusterOptionsResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeOrderableClusterOptionsResult>\n    <OrderableClusterOptions>\n      <OrderableClusterOption>\n        <ClusterVersion>1.0</ClusterVersion>\n        <ClusterType>multi-node</ClusterType>\n        <NodeType>dw.hs1.8xlarge</NodeType>\n        <AvailabilityZones>\n          <AvailabilityZone>\n            <Name>us-east-1a</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1c</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1d</Name>\n          </AvailabilityZone>\n        </AvailabilityZones>\n      </OrderableClusterOption>\n      <OrderableClusterOption>\n        <ClusterVersion>1.0</ClusterVersion>\n        <ClusterType>multi-node</ClusterType>\n        <NodeType>dw.hs1.xlarge</NodeType>\n        <AvailabilityZones>\n          <AvailabilityZone>\n            <Name>us-east-1a</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1c</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1d</Name>\n          </AvailabilityZone>\n        </AvailabilityZones>\n      </OrderableClusterOption>\n      <OrderableClusterOption>\n        <ClusterVersion>1.0</ClusterVersion>\n        <ClusterType>single-node</ClusterType>\n        <NodeType>dw.hs1.xlarge</NodeType>\n        <AvailabilityZones>\n          <AvailabilityZone>\n            <Name>us-east-1a</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1c</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1d</Name>\n          </AvailabilityZone>\n        </AvailabilityZones>\n      </OrderableClusterOption>\n    </OrderableClusterOptions>\n  </DescribeOrderableClusterOptionsResult>\n  <ResponseMetadata>\n    <RequestId>e37414cc-40c0-11e2-b6a0-df98b1a86860</RequestId>\n  </ResponseMetadata>\n</DescribeOrderableClusterOptionsResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p> Returns a list of orderable cluster options. Before you create a \n        new cluster you can use this operation to find what options are \n        available, such as the EC2 Availability Zones (AZ) in the specific \n        AWS region that you can specify,  \n       and the node types you can request. The node types differ by available \n        storage, memory, CPU and price. With the cost involved you might want to \n        obtain a list of cluster options in the specific region and specify values \n        when creating a cluster. \n        \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DescribeOrderableClusterOptions\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20121207/us-east-1/redshift/aws4_request\n    &x-amz-date=20121207T225314Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DescribeOrderableClusterOptionsResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeOrderableClusterOptionsResult>\n    <OrderableClusterOptions>\n      <OrderableClusterOption>\n        <ClusterVersion>1.0</ClusterVersion>\n        <ClusterType>multi-node</ClusterType>\n        <NodeType>dw1.8xlarge</NodeType>\n        <AvailabilityZones>\n          <AvailabilityZone>\n            <Name>us-east-1a</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1c</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1d</Name>\n          </AvailabilityZone>\n        </AvailabilityZones>\n      </OrderableClusterOption>\n      <OrderableClusterOption>\n        <ClusterVersion>1.0</ClusterVersion>\n        <ClusterType>multi-node</ClusterType>\n        <NodeType>dw1.xlarge</NodeType>\n        <AvailabilityZones>\n          <AvailabilityZone>\n            <Name>us-east-1a</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1c</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1d</Name>\n          </AvailabilityZone>\n        </AvailabilityZones>\n      </OrderableClusterOption>\n      <OrderableClusterOption>\n        <ClusterVersion>1.0</ClusterVersion>\n        <ClusterType>single-node</ClusterType>\n        <NodeType>dw1.xlarge</NodeType>\n        <AvailabilityZones>\n          <AvailabilityZone>\n            <Name>us-east-1a</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1c</Name>\n          </AvailabilityZone>\n          <AvailabilityZone>\n            <Name>us-east-1d</Name>\n          </AvailabilityZone>\n        </AvailabilityZones>\n      </OrderableClusterOption>\n    </OrderableClusterOptions>\n  </DescribeOrderableClusterOptionsResult>\n  <ResponseMetadata>\n    <RequestId>e37414cc-40c0-11e2-b6a0-df98b1a86860</RequestId>\n  </ResponseMetadata>\n</DescribeOrderableClusterOptionsResponse></queryresponse>\n        </examples>\n    "
     },
     "DescribeReservedNodeOfferings": {
       "name": "DescribeReservedNodeOfferings",
@@ -4715,12 +4730,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n       <p>\n           The maximum number of records to include in the response.\n           If more records exist than the specified <code>MaxRecords</code> value,\n           a marker is included in the response so that the remaining\n           results may be retrieved.\n       </p>\n       <p>Default: <code>100</code></p>\n       <p>Constraints: minimum 20, maximum 100.</p>\n   "
+            "documentation": "\n       <p>\n           The maximum number of response records to return in each call. \n           If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n           a value is returned in a <code>marker</code> field of the response. \n           You can retrieve the next set of records by retrying the command with the returned marker value.\n       </p>\n       <p>Default: <code>100</code></p>\n       <p>Constraints: minimum 20, maximum 100.</p>\n   "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n       <p>\n           An optional marker returned by a previous\n           <a>DescribeReservedNodeOfferings</a> request to indicate the first offering that the \n           request will return.\n       </p>\n       <p>You can specify either a <b>Marker</b> parameter or a <b>ClusterIdentifier</b> parameter in a\n           <a>DescribeClusters</a> request, but not both.</p>\n   "
+            "documentation": "\n       <p>\n           An optional parameter that specifies the starting point to return a set of response records. \n           When the results of a <a>DescribeReservedNodeOfferings</a> request exceed the value specified in <code>MaxRecords</code>, \n           AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n           response records by providing the returned marker value in the <code>Marker</code> parameter and \n           retrying the request.\n       </p>\n   "
           }
         },
         "documentation": "\n        <p>to be provided.</p>\n    "
@@ -4732,7 +4747,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>An optional marker returned by a previous <a>DescribeReservedNodeOfferings</a> request \n            to indicate the first reserved node offering that the request will return. </p>\n   "
+            "documentation": "\n        <p>\n            A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned \n            marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n            is empty, all response records have been retrieved for the request.\n        </p>\n   "
           },
           "ReservedNodeOfferings": {
             "shape_name": "ReservedNodeOfferingList",
@@ -4819,7 +4834,7 @@
           "documentation": "\n    <p>\n    Specified offering does not exist.\n    </p>\n   "
         }
       ],
-      "documentation": "\n        <p>  \n            Returns a list of the\n            available reserved node offerings by Amazon Redshift with their descriptions including \n            the node type, the fixed and recurring costs of reserving the node and duration the node will \n            be reserved for you. These descriptions help you \n            determine which reserve node offering you want to purchase. You then use the unique offering ID \n            in you call to <a>PurchaseReservedNodeOffering</a> to reserve one or more nodes for your \n            Amazon Redshift cluster.\n        </p>\n        <p>\n            \nFor more information about managing parameter groups, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html\">Purchasing Reserved Nodes</a> \nin the <i>Amazon Redshift Management Guide</i>.\n             \n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n   ?Action=DescribeReservedNodeOfferings\n   &Version=2012-12-01\n   &x-amz-algorithm=AWS4-HMAC-SHA256\n   &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130117/us-east-1/redshift/aws4_request\n   &x-amz-date=20130117T232351Z\n   &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DescribeReservedNodeOfferingsResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeReservedNodeOfferingsResult>\n    <ReservedNodeOfferings>\n      <ReservedNodeOffering>\n        <OfferingType>Heavy Utilization</OfferingType>\n        <Duration>94608000</Duration>\n        <RecurringCharges>\n          <RecurringCharge>\n            <RecurringChargeFrequency>Hourly</RecurringChargeFrequency>\n            <RecurringChargeAmount>0.21</RecurringChargeAmount>\n          </RecurringCharge>\n        </RecurringCharges>\n        <FixedPrice>12452.0</FixedPrice>\n        <ReservedNodeOfferingId>3a98bf7d-979a-49cc-b568-18f24315baf0</ReservedNodeOfferingId>\n        <UsagePrice>0.0</UsagePrice>\n        <NodeType>dw.hs1.8xlarge</NodeType>\n      </ReservedNodeOffering>\n      <ReservedNodeOffering>\n        <OfferingType>Heavy Utilization</OfferingType>\n        <Duration>31536000</Duration>\n        <RecurringCharges>\n          <RecurringCharge>\n            <RecurringChargeFrequency>Hourly</RecurringChargeFrequency>\n            <RecurringChargeAmount>0.09</RecurringChargeAmount>\n          </RecurringCharge>\n        </RecurringCharges>\n        <FixedPrice>1815.0</FixedPrice>\n        <ReservedNodeOfferingId>d586503b-289f-408b-955b-9c95005d6908</ReservedNodeOfferingId>\n        <UsagePrice>0.0</UsagePrice>\n        <NodeType>dw.hs1.xlarge</NodeType>\n      </ReservedNodeOffering>\n  </DescribeReservedNodeOfferingsResult>\n  <ResponseMetadata>\n    <RequestId>f4a07e06-60fc-11e2-95d9-658e9466d117</RequestId>\n  </ResponseMetadata>\n</DescribeReservedNodeOfferingsResponse></queryresponse>\n        </examples>\n   "
+      "documentation": "\n        <p>  \n            Returns a list of the\n            available reserved node offerings by Amazon Redshift with their descriptions including \n            the node type, the fixed and recurring costs of reserving the node and duration the node will \n            be reserved for you. These descriptions help you \n            determine which reserve node offering you want to purchase. You then use the unique offering ID \n            in you call to <a>PurchaseReservedNodeOffering</a> to reserve one or more nodes for your \n            Amazon Redshift cluster.\n        </p>\n        <p>\n            \nFor more information about managing parameter groups, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html\">Purchasing Reserved Nodes</a> \nin the <i>Amazon Redshift Management Guide</i>.\n             \n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n   ?Action=DescribeReservedNodeOfferings\n   &Version=2012-12-01\n   &x-amz-algorithm=AWS4-HMAC-SHA256\n   &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130117/us-east-1/redshift/aws4_request\n   &x-amz-date=20130117T232351Z\n   &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DescribeReservedNodeOfferingsResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeReservedNodeOfferingsResult>\n    <ReservedNodeOfferings>\n      <ReservedNodeOffering>\n        <OfferingType>Heavy Utilization</OfferingType>\n        <Duration>94608000</Duration>\n        <RecurringCharges>\n          <RecurringCharge>\n            <RecurringChargeFrequency>Hourly</RecurringChargeFrequency>\n            <RecurringChargeAmount>0.21</RecurringChargeAmount>\n          </RecurringCharge>\n        </RecurringCharges>\n        <FixedPrice>12452.0</FixedPrice>\n        <ReservedNodeOfferingId>3a98bf7d-979a-49cc-b568-18f24315baf0</ReservedNodeOfferingId>\n        <UsagePrice>0.0</UsagePrice>\n        <NodeType>dw1.8xlarge</NodeType>\n      </ReservedNodeOffering>\n      <ReservedNodeOffering>\n        <OfferingType>Heavy Utilization</OfferingType>\n        <Duration>31536000</Duration>\n        <RecurringCharges>\n          <RecurringCharge>\n            <RecurringChargeFrequency>Hourly</RecurringChargeFrequency>\n            <RecurringChargeAmount>0.09</RecurringChargeAmount>\n          </RecurringCharge>\n        </RecurringCharges>\n        <FixedPrice>1815.0</FixedPrice>\n        <ReservedNodeOfferingId>d586503b-289f-408b-955b-9c95005d6908</ReservedNodeOfferingId>\n        <UsagePrice>0.0</UsagePrice>\n        <NodeType>dw1.xlarge</NodeType>\n      </ReservedNodeOffering>\n  </DescribeReservedNodeOfferingsResult>\n  <ResponseMetadata>\n    <RequestId>f4a07e06-60fc-11e2-95d9-658e9466d117</RequestId>\n  </ResponseMetadata>\n</DescribeReservedNodeOfferingsResponse></queryresponse>\n        </examples>\n   "
     },
     "DescribeReservedNodes": {
       "name": "DescribeReservedNodes",
@@ -4835,12 +4850,12 @@
           "MaxRecords": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n       <p>\n           The maximum number of records to include in the response.\n           If more records exist than the specified <code>MaxRecords</code> value,\n           a marker is included in the response so that the remaining\n           results may be retrieved.\n       </p>\n       <p>Default: <code>100</code></p>\n       <p>Constraints: minimum 20, maximum 100.</p>\n   "
+            "documentation": "\n       <p>\n           The maximum number of response records to return in each call. \n           If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, \n           a value is returned in a <code>marker</code> field of the response. \n           You can retrieve the next set of records by retrying the command with the returned marker value.\n       </p>\n       <p>Default: <code>100</code></p>\n       <p>Constraints: minimum 20, maximum 100.</p>\n   "
           },
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n       <p>An optional marker returned by a previous <a>DescribeReservedNodes</a> request \n           to indicate the first parameter group that the current request will return.</p>\n   "
+            "documentation": "\n       <p>\n           An optional parameter that specifies the starting point to return a set of response records. \n           When the results of a <a>DescribeReservedNodes</a> request exceed the value specified in <code>MaxRecords</code>, \n           AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of \n           response records by providing the returned marker value in the <code>Marker</code> parameter and \n           retrying the request.\n       </p>\n   "
           }
         },
         "documentation": "\n        <p>            \n        </p>\n    "
@@ -4852,7 +4867,7 @@
           "Marker": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n       <p>A marker that can be used to retrieve paginated results.</p>\n   "
+            "documentation": "\n       <p>\n           A value that indicates the starting point for the next set of response records in a subsequent request. \n           If a value is returned in a response, you can retrieve the next set of records by providing this returned \n           marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field\n           is empty, all response records have been retrieved for the request.\n       </p>\n   "
           },
           "ReservedNodes": {
             "shape_name": "ReservedNodeList",
@@ -4959,7 +4974,7 @@
           "documentation": "\n    <p>\n    The specified reserved compute node not found.\n    </p>\n   "
         }
       ],
-      "documentation": "\n    <p>\n        Returns the descriptions of the reserved nodes.\n    </p>\n       <examples>\n           <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DescribeReservedNodes\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130125/us-east-1/redshift/aws4_request\n    &x-amz-date=20130125T202355Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n           <queryresponse><DescribeReservedNodesResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeReservedNodesResult>\n    <ReservedNodes>\n      <ReservedNode>\n        <StartTime>2013-01-22T18:46:48.600Z</StartTime>\n        <OfferingType>Medium Utilization</OfferingType>\n        <Duration>31536000</Duration>\n        <RecurringCharges/>\n        <FixedPrice>800.0</FixedPrice>\n        <UsagePrice>0.158</UsagePrice>\n        <State>payment-pending</State>\n        <NodeType>dw.hs1.xlarge</NodeType>\n        <NodeCount>1</NodeCount>\n        <ReservedNodeId>4357912c-9266-469d-beb0-0f1b775e1bc9</ReservedNodeId>\n      </ReservedNode>\n      <ReservedNode>\n        <StartTime>2013-01-22T20:09:16.630Z</StartTime>\n        <OfferingType>Heavy Utilization</OfferingType>\n        <Duration>94608000</Duration>\n        <RecurringCharges>\n          <RecurringCharge>\n            <RecurringChargeFrequency>Hourly</RecurringChargeFrequency>\n            <RecurringChargeAmount>0.21</RecurringChargeAmount>\n          </RecurringCharge>\n        </RecurringCharges>\n        <FixedPrice>12452.0</FixedPrice>\n        <UsagePrice>0.0</UsagePrice>\n        <State>payment-pending</State>\n        <NodeType>dw.hs1.8xlarge</NodeType>\n        <NodeCount>2</NodeCount>\n        <ReservedNodeId>93bbbca2-e88c-4b8b-a600-b64eaabf18a3</ReservedNodeId>\n      </ReservedNode>\n      <ReservedNode>\n        <StartTime>2013-01-23T21:49:32.517Z</StartTime>\n        <OfferingType>Medium Utilization</OfferingType>\n        <Duration>31536000</Duration>\n        <RecurringCharges/>\n        <FixedPrice>800.0</FixedPrice>\n        <UsagePrice>0.158</UsagePrice>\n        <State>payment-pending</State>\n        <NodeType>dw.hs1.xlarge</NodeType>\n        <NodeCount>1</NodeCount>\n        <ReservedNodeId>bbcd9749-f2ea-4d01-9b1b-b576f618eb4e</ReservedNodeId>\n      </ReservedNode>\n    </ReservedNodes>\n  </DescribeReservedNodesResult>\n  <ResponseMetadata>\n    <RequestId>24dc90c8-672d-11e2-b2e1-8f41f0379151</RequestId>\n  </ResponseMetadata>\n</DescribeReservedNodesResponse></queryresponse>\n       </examples>\n   "
+      "documentation": "\n    <p>\n        Returns the descriptions of the reserved nodes.\n    </p>\n       <examples>\n           <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DescribeReservedNodes\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130125/us-east-1/redshift/aws4_request\n    &x-amz-date=20130125T202355Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n           <queryresponse><DescribeReservedNodesResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeReservedNodesResult>\n    <ReservedNodes>\n      <ReservedNode>\n        <StartTime>2013-01-22T18:46:48.600Z</StartTime>\n        <OfferingType>Medium Utilization</OfferingType>\n        <Duration>31536000</Duration>\n        <RecurringCharges/>\n        <FixedPrice>800.0</FixedPrice>\n        <UsagePrice>0.158</UsagePrice>\n        <State>payment-pending</State>\n        <NodeType>dw1.xlarge</NodeType>\n        <NodeCount>1</NodeCount>\n        <ReservedNodeId>4357912c-9266-469d-beb0-0f1b775e1bc9</ReservedNodeId>\n      </ReservedNode>\n      <ReservedNode>\n        <StartTime>2013-01-22T20:09:16.630Z</StartTime>\n        <OfferingType>Heavy Utilization</OfferingType>\n        <Duration>94608000</Duration>\n        <RecurringCharges>\n          <RecurringCharge>\n            <RecurringChargeFrequency>Hourly</RecurringChargeFrequency>\n            <RecurringChargeAmount>0.21</RecurringChargeAmount>\n          </RecurringCharge>\n        </RecurringCharges>\n        <FixedPrice>12452.0</FixedPrice>\n        <UsagePrice>0.0</UsagePrice>\n        <State>payment-pending</State>\n        <NodeType>dw1.8xlarge</NodeType>\n        <NodeCount>2</NodeCount>\n        <ReservedNodeId>93bbbca2-e88c-4b8b-a600-b64eaabf18a3</ReservedNodeId>\n      </ReservedNode>\n      <ReservedNode>\n        <StartTime>2013-01-23T21:49:32.517Z</StartTime>\n        <OfferingType>Medium Utilization</OfferingType>\n        <Duration>31536000</Duration>\n        <RecurringCharges/>\n        <FixedPrice>800.0</FixedPrice>\n        <UsagePrice>0.158</UsagePrice>\n        <State>payment-pending</State>\n        <NodeType>dw1.xlarge</NodeType>\n        <NodeCount>1</NodeCount>\n        <ReservedNodeId>bbcd9749-f2ea-4d01-9b1b-b576f618eb4e</ReservedNodeId>\n      </ReservedNode>\n    </ReservedNodes>\n  </DescribeReservedNodesResult>\n  <ResponseMetadata>\n    <RequestId>24dc90c8-672d-11e2-b2e1-8f41f0379151</RequestId>\n  </ResponseMetadata>\n</DescribeReservedNodesResponse></queryresponse>\n       </examples>\n   "
     },
     "DescribeResize": {
       "name": "DescribeResize",
@@ -4983,17 +4998,17 @@
           "TargetNodeType": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>The node type that the cluster will have after the resize is complete.</p>\n    "
+            "documentation": "\n        <p>The node type that the cluster will have after the resize operation is complete.</p>\n    "
           },
           "TargetNumberOfNodes": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>The number of nodes that the cluster will have after the resize is complete.</p>\n    "
+            "documentation": "\n        <p>The number of nodes that the cluster will have after the resize operation is complete.</p>\n    "
           },
           "TargetClusterType": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>The cluster type after the resize is complete.</p>\n        <p>Valid Values: <code>multi-node</code> | <code>single-node</code></p>\n    "
+            "documentation": "\n        <p>The cluster type after the resize operation is complete.</p>\n        <p>Valid Values: <code>multi-node</code> | <code>single-node</code></p>\n    "
           },
           "Status": {
             "shape_name": "String",
@@ -5029,6 +5044,31 @@
               "documentation": null
             },
             "documentation": "\n        <p>The names of tables that have not been yet imported.</p>\n        <p>Valid Values: List of table names</p>\n    "
+          },
+          "AvgResizeRateInMegaBytesPerSecond": {
+            "shape_name": "DoubleOptional",
+            "type": "double",
+            "documentation": "\n        <p>The average rate of the resize operation over the last few minutes, measured in megabytes per second. \n            After the resize operation completes, this value shows the average rate of the entire resize operation.</p>\n    "
+          },
+          "TotalResizeDataInMegaBytes": {
+            "shape_name": "LongOptional",
+            "type": "long",
+            "documentation": "\n        <p>The estimated total amount of data, in megabytes, on the cluster before the resize operation began.</p>\n    "
+          },
+          "ProgressInMegaBytes": {
+            "shape_name": "LongOptional",
+            "type": "long",
+            "documentation": "\n        <p>While the resize operation is in progress, this value shows the current amount of data, in megabytes, that has been processed so far. \n            When the resize operation is complete, this value shows the total amount of data, in megabytes, on the cluster, \n            which may be more or less than TotalResizeDataInMegaBytes (the estimated total amount of data before resize). </p>\n    "
+          },
+          "ElapsedTimeInSeconds": {
+            "shape_name": "LongOptional",
+            "type": "long",
+            "documentation": "\n        <p>The amount of seconds that have elapsed since the resize operation began. \n            After the resize operation completes, this value shows the total actual time, in seconds, for the resize operation. </p>\n    "
+          },
+          "EstimatedTimeToCompletionInSeconds": {
+            "shape_name": "LongOptional",
+            "type": "long",
+            "documentation": "\n        <p>The estimated time remaining, in seconds, until the resize operation is complete. This value is calculated based on the average resize rate \n            and the estimated amount of data remaining to be processed. Once the resize operation is complete, this value will be 0. </p>\n    "
           }
         },
         "documentation": "\n        <p>Describes the result of a cluster resize operation.</p>\n    "
@@ -5049,7 +5089,7 @@
           "documentation": "\n     <p>A resize operation for the specified cluster is not found.</p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n        Returns information about the last resize operation for the specified cluster. \n        If no resize operation has ever been initiated for the specified cluster, a <code>HTTP 404</code> error is returned.\n            If a resize operation was initiated and completed, the status of the resize remains as <code>SUCCEEDED</code> until\n            the next resize.\n        </p>\n       <p>\n            A resize operation can be requested using \n        <a>ModifyCluster</a> and specifying a different number or type of nodes for the cluster.\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n   ?Action=DescribeResize\n   &ClusterIdentifier=examplecluster\n   &Version=2012-12-01\n   &x-amz-algorithm=AWS4-HMAC-SHA256\n   &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20121207/us-east-1/redshift/aws4_request\n   &x-amz-date=20121207T232427Z\n   &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DescribeResizeResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeResizeResult>\n    <TargetClusterType>multi-node</TargetClusterType>\n    <Status>SUCCEEDED</Status>\n    <ImportTablesCompleted>\n      <member>users</member>\n      <member>venue</member>\n      <member>sales</member>\n      <member>listing</member>\n      <member>event</member>\n      <member>date</member>\n      <member>category</member>\n    </ImportTablesCompleted>\n    <TargetNodeType>dw.hs1.xlarge</TargetNodeType>\n    <TargetNumberOfNodes>2</TargetNumberOfNodes>\n  </DescribeResizeResult>\n  <ResponseMetadata>\n    <RequestId>a6d59c61-a162-11e2-b2bc-fb54c9d11e09</RequestId>\n  </ResponseMetadata>\n</DescribeResizeResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>\n        Returns information about the last resize operation for the specified cluster. \n        If no resize operation has ever been initiated for the specified cluster, a <code>HTTP 404</code> error is returned.\n            If a resize operation was initiated and completed, the status of the resize remains as <code>SUCCEEDED</code> until\n            the next resize.\n        </p>\n       <p>\n            A resize operation can be requested using \n        <a>ModifyCluster</a> and specifying a different number or type of nodes for the cluster.\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n   ?Action=DescribeResize\n   &ClusterIdentifier=examplecluster\n   &Version=2012-12-01\n   &x-amz-algorithm=AWS4-HMAC-SHA256\n   &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20121207/us-east-1/redshift/aws4_request\n   &x-amz-date=20121207T232427Z\n   &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DescribeResizeResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DescribeResizeResult>\n    <TargetClusterType>multi-node</TargetClusterType>\n    <Status>SUCCEEDED</Status>\n    <AvgResizeRateInMegaBytesPerSecond>6.5263</AvgResizeRateInMegaBytesPerSecond>\n    <ProgressInMegaBytes>66922</ProgressInMegaBytes>\n    <EstimatedTimeToCompletionInSeconds>0</EstimatedTimeToCompletionInSeconds>\n    <ImportTablesCompleted>\n      <member>users</member>\n      <member>venue</member>\n      <member>sales</member>\n      <member>listing</member>\n      <member>event</member>\n      <member>date</member>\n      <member>category</member>\n    </ImportTablesCompleted>\n    <ElapsedTimeInSeconds>10254</ElapsedTimeInSeconds>\n    <TargetNodeType>dw1.xlarge</TargetNodeType>\n    <TargetNumberOfNodes>2</TargetNumberOfNodes>\n  </DescribeResizeResult>\n  <ResponseMetadata>\n    <RequestId>a6d59c61-a162-11e2-b2bc-fb54c9d11e09</RequestId>\n  </ResponseMetadata>\n</DescribeResizeResponse></queryresponse>\n        </examples>\n    "
     },
     "DisableLogging": {
       "name": "DisableLogging",
@@ -5290,7 +5330,7 @@
                   "MasterUserPassword": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": "\n        <p>\n        The pending or in-progress change of the master password for the cluster.\n        </p>\n    "
+                    "documentation": "\n        <p>\n        The pending or in-progress change of the master user password for the cluster.\n        </p>\n    "
                   },
                   "NodeType": {
                     "shape_name": "String",
@@ -5469,6 +5509,11 @@
                   }
                 },
                 "documentation": "\n        <p>Describes the status of the elastic IP (EIP) address.</p>\n    "
+              },
+              "ClusterRevisionNumber": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n        <p>The specific revision number of the database in the cluster.</p>\n    "
               }
             },
             "wrapper": true,
@@ -5490,6 +5535,13 @@
           "members": {
           },
           "documentation": "\n        <p>\n            The cluster already has cross-region snapshot copy disabled.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidClusterStateFault",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>\n    "
         },
         {
           "shape_name": "UnauthorizedOperation",
@@ -5790,7 +5842,7 @@
                   "MasterUserPassword": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": "\n        <p>\n        The pending or in-progress change of the master password for the cluster.\n        </p>\n    "
+                    "documentation": "\n        <p>\n        The pending or in-progress change of the master user password for the cluster.\n        </p>\n    "
                   },
                   "NodeType": {
                     "shape_name": "String",
@@ -5969,6 +6021,11 @@
                   }
                 },
                 "documentation": "\n        <p>Describes the status of the elastic IP (EIP) address.</p>\n    "
+              },
+              "ClusterRevisionNumber": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n        <p>The specific revision number of the database in the cluster.</p>\n    "
               }
             },
             "wrapper": true,
@@ -6049,7 +6106,7 @@
           "NodeType": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n        The new node type of the cluster. If you specify a new node type, \n        you must also specify the number of nodes parameter also.\n        </p>\n        <p>\n            When you submit your request to resize a cluster, \n            Amazon Redshift sets access permissions for the cluster to read-only.\n            After Amazon Redshift provisions a new cluster according to your \n            resize requirements, there will be a temporary outage while the old cluster is \n            deleted and your connection is switched to the new cluster. When\n            the new connection is complete, the original access permissions for the\n            cluster are restored.\n            You can use the <a>DescribeResize</a> to track the progress of the resize request.\n        </p>\n        <p>Valid Values: <code> dw.hs1.xlarge</code> | <code>dw.hs1.8xlarge</code></p>\n    "
+            "documentation": "\n        <p>\n        The new node type of the cluster. If you specify a new node type, \n        you must also specify the number of nodes parameter also.\n        </p>\n        <p>\n            When you submit your request to resize a cluster, \n            Amazon Redshift sets access permissions for the cluster to read-only.\n            After Amazon Redshift provisions a new cluster according to your \n            resize requirements, there will be a temporary outage while the old cluster is \n            deleted and your connection is switched to the new cluster. When\n            the new connection is complete, the original access permissions for the\n            cluster are restored.\n            You can use the <a>DescribeResize</a> to track the progress of the resize request.\n        </p>\n        <p>Valid Values: <code> dw1.xlarge</code> | <code>dw1.8xlarge</code> | <code>dw2.large</code> | <code>dw2.8xlarge</code>.</p>\n    "
           },
           "NumberOfNodes": {
             "shape_name": "IntegerOptional",
@@ -6282,7 +6339,7 @@
                   "MasterUserPassword": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": "\n        <p>\n        The pending or in-progress change of the master password for the cluster.\n        </p>\n    "
+                    "documentation": "\n        <p>\n        The pending or in-progress change of the master user password for the cluster.\n        </p>\n    "
                   },
                   "NodeType": {
                     "shape_name": "String",
@@ -6461,6 +6518,11 @@
                   }
                 },
                 "documentation": "\n        <p>Describes the status of the elastic IP (EIP) address.</p>\n    "
+              },
+              "ClusterRevisionNumber": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n        <p>The specific revision number of the database in the cluster.</p>\n    "
               }
             },
             "wrapper": true,
@@ -6547,7 +6609,7 @@
           "documentation": "\n        <p>There is no Amazon Redshift HSM configuration with the specified identifier.</p>  \n    "
         }
       ],
-      "documentation": "\n        <p>      \n        Modifies the settings for a cluster. \n        For example, you can add another security or parameter group, \n        update the preferred maintenance window, or change the master user password.  \n        Resetting a cluster password or modifying the security groups associated \n        with a cluster do not need a reboot. However, modifying parameter group \n        requires a reboot for parameters to take effect.        \n        \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n\n        </p>\n        <p>You can also change node type and the number of nodes to scale up or down the cluster. \n            When resizing a cluster, you must specify\n            both the number of nodes and the node type even if one of the parameters does \n            not change. If you specify\n        the same number of nodes and node type that are already configured for the cluster, \n        an error is returned.</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=ModifyCluster\n    &AllowVersionUpgrade=true\n    &AutomatedSnapshotRetentionPeriod=2\n    &ClusterIdentifier=examplecluster\n    &ClusterParameterGroupName=parametergroup1\n    &PreferredMaintenanceWindow=wed:07:30-wed:08:00\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T022911Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><ModifyClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <ModifyClusterResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <Endpoint>\n        <Port>5439</Port>\n        <Address>examplecluster.coqoarplqhsn.us-east-1.redshift.amazonaws.com</Address>\n      </Endpoint>\n      <ClusterStatus>available</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>2</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>wed:07:30-wed:08:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>applying</ParameterApplyStatus>\n          <ParameterGroupName>parametergroup1</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw.hs1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>adminuser</MasterUsername>\n    </Cluster>\n  </ModifyClusterResult>\n  <ResponseMetadata>\n    <RequestId>acbc43d5-6504-11e2-bea9-49e0ce183f07</RequestId>\n  </ResponseMetadata>\n</ModifyClusterResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>      \n        Modifies the settings for a cluster. \n        For example, you can add another security or parameter group, \n        update the preferred maintenance window, or change the master user password.  \n        Resetting a cluster password or modifying the security groups associated \n        with a cluster do not need a reboot. However, modifying parameter group \n        requires a reboot for parameters to take effect.        \n        \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n\n        </p>\n        <p>You can also change node type and the number of nodes to scale up or down the cluster. \n            When resizing a cluster, you must specify\n            both the number of nodes and the node type even if one of the parameters does \n            not change. If you specify\n        the same number of nodes and node type that are already configured for the cluster, \n        an error is returned.</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=ModifyCluster\n    &AllowVersionUpgrade=true\n    &AutomatedSnapshotRetentionPeriod=2\n    &ClusterIdentifier=examplecluster\n    &ClusterParameterGroupName=parametergroup1\n    &PreferredMaintenanceWindow=wed:07:30-wed:08:00\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T022911Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><ModifyClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <ModifyClusterResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <Endpoint>\n        <Port>5439</Port>\n        <Address>examplecluster.coqoarplqhsn.us-east-1.redshift.amazonaws.com</Address>\n      </Endpoint>\n      <ClusterStatus>available</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>2</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>wed:07:30-wed:08:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>applying</ParameterApplyStatus>\n          <ParameterGroupName>parametergroup1</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>adminuser</MasterUsername>\n    </Cluster>\n  </ModifyClusterResult>\n  <ResponseMetadata>\n    <RequestId>acbc43d5-6504-11e2-bea9-49e0ce183f07</RequestId>\n  </ResponseMetadata>\n</ModifyClusterResponse></queryresponse>\n        </examples>\n    "
     },
     "ModifyClusterParameterGroup": {
       "name": "ModifyClusterParameterGroup",
@@ -7169,7 +7231,7 @@
                   "MasterUserPassword": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": "\n        <p>\n        The pending or in-progress change of the master password for the cluster.\n        </p>\n    "
+                    "documentation": "\n        <p>\n        The pending or in-progress change of the master user password for the cluster.\n        </p>\n    "
                   },
                   "NodeType": {
                     "shape_name": "String",
@@ -7348,6 +7410,11 @@
                   }
                 },
                 "documentation": "\n        <p>Describes the status of the elastic IP (EIP) address.</p>\n    "
+              },
+              "ClusterRevisionNumber": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n        <p>The specific revision number of the database in the cluster.</p>\n    "
               }
             },
             "wrapper": true,
@@ -7376,6 +7443,13 @@
           "members": {
           },
           "documentation": "\n        <p>\n            Your account is not authorized to perform the requested operation.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidClusterStateFault",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n            Modifies the number of days to retain automated snapshots in the destination region after they are copied from the source region.\n        </p>\n    "
@@ -7516,7 +7590,7 @@
           "documentation": "\n    <p>\n        Request would exceed the user's compute node quota. \nFor information about increasing your quota, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Management Guide</i>.\n\n    </p>\n   "
         }
       ],
-      "documentation": "\n       <p>  \n           Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings.\n           You can purchase one of the offerings. You can call the\n           <a>DescribeReservedNodeOfferings</a> API to obtain the available reserved node offerings. You can call this \n           API by providing a specific reserved node offering and the number of nodes you want to reserve.\n       </p>\n       <p>\n           \nFor more information about managing parameter groups, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html\">Purchasing Reserved Nodes</a> \nin the <i>Amazon Redshift Management Guide</i>.\n             \n       </p>\n       <examples>\n           <queryrequest>https://redshift.us-east-1.amazonaws.com/\n   ?Action=PurchaseReservedNodeOffering\n   &ReservedNodeOfferingId=3a98bf7d-979a-49cc-b568-18f24315baf0\n   &NodeCount=2\n   &Version=2012-12-01\n   &x-amz-algorithm=AWS4-HMAC-SHA256\n   &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130117/us-east-1/redshift/aws4_request\n   &x-amz-date=20130117T232351Z\n   &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n           <queryresponse><PurchaseReservedNodeOfferingResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <PurchaseReservedNodeOfferingResult>\n    <ReservedNode>\n      <StartTime>2013-01-18T21:42:44.402Z</StartTime>\n      <OfferingType>Heavy Utilization</OfferingType>\n      <Duration>94608000</Duration>\n      <RecurringCharges>\n        <RecurringCharge>\n          <RecurringChargeFrequency>Hourly</RecurringChargeFrequency>\n          <RecurringChargeAmount>0.21</RecurringChargeAmount>\n        </RecurringCharge>\n      </RecurringCharges>\n      <FixedPrice>12452.0</FixedPrice>\n      <UsagePrice>0.0</UsagePrice>\n      <State>payment-pending</State>\n      <NodeType>dw.hs1.8xlarge</NodeType>\n      <NodeCount>2</NodeCount>\n      <ReservedNodeId>1ba8e2e3-dacf-48d9-841f-cc675182a8a6</ReservedNodeId>\n    </ReservedNode>\n  </PurchaseReservedNodeOfferingResult>\n  <ResponseMetadata>\n    <RequestId>fcb117cc-61b7-11e2-b6e9-87e586e4ca38</RequestId>\n  </ResponseMetadata>\n</PurchaseReservedNodeOfferingResponse></queryresponse>\n       </examples>\n   "
+      "documentation": "\n       <p>  \n           Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings.\n           You can purchase one of the offerings. You can call the\n           <a>DescribeReservedNodeOfferings</a> API to obtain the available reserved node offerings. You can call this \n           API by providing a specific reserved node offering and the number of nodes you want to reserve.\n       </p>\n       <p>\n           \nFor more information about managing parameter groups, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html\">Purchasing Reserved Nodes</a> \nin the <i>Amazon Redshift Management Guide</i>.\n             \n       </p>\n       <examples>\n           <queryrequest>https://redshift.us-east-1.amazonaws.com/\n   ?Action=PurchaseReservedNodeOffering\n   &ReservedNodeOfferingId=3a98bf7d-979a-49cc-b568-18f24315baf0\n   &NodeCount=2\n   &Version=2012-12-01\n   &x-amz-algorithm=AWS4-HMAC-SHA256\n   &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130117/us-east-1/redshift/aws4_request\n   &x-amz-date=20130117T232351Z\n   &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n           <queryresponse><PurchaseReservedNodeOfferingResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <PurchaseReservedNodeOfferingResult>\n    <ReservedNode>\n      <StartTime>2013-01-18T21:42:44.402Z</StartTime>\n      <OfferingType>Heavy Utilization</OfferingType>\n      <Duration>94608000</Duration>\n      <RecurringCharges>\n        <RecurringCharge>\n          <RecurringChargeFrequency>Hourly</RecurringChargeFrequency>\n          <RecurringChargeAmount>0.21</RecurringChargeAmount>\n        </RecurringCharge>\n      </RecurringCharges>\n      <FixedPrice>12452.0</FixedPrice>\n      <UsagePrice>0.0</UsagePrice>\n      <State>payment-pending</State>\n      <NodeType>dw1.8xlarge</NodeType>\n      <NodeCount>2</NodeCount>\n      <ReservedNodeId>1ba8e2e3-dacf-48d9-841f-cc675182a8a6</ReservedNodeId>\n    </ReservedNode>\n  </PurchaseReservedNodeOfferingResult>\n  <ResponseMetadata>\n    <RequestId>fcb117cc-61b7-11e2-b6e9-87e586e4ca38</RequestId>\n  </ResponseMetadata>\n</PurchaseReservedNodeOfferingResponse></queryresponse>\n       </examples>\n   "
     },
     "RebootCluster": {
       "name": "RebootCluster",
@@ -7694,7 +7768,7 @@
                   "MasterUserPassword": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": "\n        <p>\n        The pending or in-progress change of the master password for the cluster.\n        </p>\n    "
+                    "documentation": "\n        <p>\n        The pending or in-progress change of the master user password for the cluster.\n        </p>\n    "
                   },
                   "NodeType": {
                     "shape_name": "String",
@@ -7873,6 +7947,11 @@
                   }
                 },
                 "documentation": "\n        <p>Describes the status of the elastic IP (EIP) address.</p>\n    "
+              },
+              "ClusterRevisionNumber": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n        <p>The specific revision number of the database in the cluster.</p>\n    "
               }
             },
             "wrapper": true,
@@ -7896,7 +7975,7 @@
           "documentation": "\n        <p>\n        The <i>ClusterIdentifier</i> parameter does not refer to an existing cluster.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n        Reboots a cluster. \n        This action is taken as soon as possible. It results in a momentary outage to the cluster,\n        during which the cluster status is set to <code>rebooting</code>. A cluster event is created\n            when the reboot is completed.        \n            Any pending cluster modifications (see <a>ModifyCluster</a>) are applied at this reboot.\n        \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=RebootCluster\n    &ClusterIdentifier=examplecluster\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T021951Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><RebootClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <RebootClusterResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <Endpoint>\n        <Port>5439</Port>\n        <Address>examplecluster.cobaosmlqshn.us-east-1.redshift.amazonaws.com</Address>\n      </Endpoint>\n      <ClusterStatus>rebooting</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sun:06:30-sun:07:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw.hs1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>adminuser</MasterUsername>\n    </Cluster>\n  </RebootClusterResult>\n  <ResponseMetadata>\n    <RequestId>5edee79e-6503-11e2-9e70-918437dd236d</RequestId>\n  </ResponseMetadata>\n</RebootClusterResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>\n        Reboots a cluster. \n        This action is taken as soon as possible. It results in a momentary outage to the cluster,\n        during which the cluster status is set to <code>rebooting</code>. A cluster event is created\n            when the reboot is completed.        \n            Any pending cluster modifications (see <a>ModifyCluster</a>) are applied at this reboot.\n        \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=RebootCluster\n    &ClusterIdentifier=examplecluster\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T021951Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><RebootClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <RebootClusterResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <Endpoint>\n        <Port>5439</Port>\n        <Address>examplecluster.cobaosmlqshn.us-east-1.redshift.amazonaws.com</Address>\n      </Endpoint>\n      <ClusterStatus>rebooting</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sun:06:30-sun:07:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>adminuser</MasterUsername>\n    </Cluster>\n  </RebootClusterResult>\n  <ResponseMetadata>\n    <RequestId>5edee79e-6503-11e2-9e70-918437dd236d</RequestId>\n  </ResponseMetadata>\n</RebootClusterResponse></queryresponse>\n        </examples>\n    "
     },
     "ResetClusterParameterGroup": {
       "name": "ResetClusterParameterGroup",
@@ -8238,7 +8317,7 @@
                   "MasterUserPassword": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": "\n        <p>\n        The pending or in-progress change of the master password for the cluster.\n        </p>\n    "
+                    "documentation": "\n        <p>\n        The pending or in-progress change of the master user password for the cluster.\n        </p>\n    "
                   },
                   "NodeType": {
                     "shape_name": "String",
@@ -8417,6 +8496,11 @@
                   }
                 },
                 "documentation": "\n        <p>Describes the status of the elastic IP (EIP) address.</p>\n    "
+              },
+              "ClusterRevisionNumber": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n        <p>The specific revision number of the database in the cluster.</p>\n    "
               }
             },
             "wrapper": true,
@@ -8545,7 +8629,7 @@
           "documentation": "\n        <p>The Elastic IP (EIP) is invalid or cannot be found.</p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n        \n        Creates a new cluster from a snapshot. Amazon Redshift creates the resulting cluster \n        with the same configuration as the original cluster from which the snapshot was created, \n        except that the new cluster\n        is created with the default cluster security and parameter group. \n        \n        After Amazon Redshift creates the cluster you can use the <a>ModifyCluster</a> \n            API to associate a different security group and different parameter group with the\n            restored cluster.\n        \n       \n        </p>\n        <p> If a snapshot is taken of a cluster in VPC, you can restore it only in VPC. \n            In this case, you must provide a cluster subnet group where you want the cluster \n            restored. If snapshot is taken of a cluster outside VPC, then you can \n        restore it only outside VPC.</p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=RestoreFromClusterSnapshot\n    &ClusterIdentifier=examplecluster-restored\n    &SnapshotIdentifier=cm:examplecluster-2013-01-22-19-27-58\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T023350Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><RestoreFromClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <RestoreFromClusterSnapshotResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <ClusterStatus>creating</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sun:06:30-sun:07:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <NodeType>dw.hs1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster-restored</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>adminuser</MasterUsername>\n    </Cluster>\n  </RestoreFromClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>52a9aee8-6505-11e2-bec0-17624ad140dd</RequestId>\n  </ResponseMetadata>\n</RestoreFromClusterSnapshotResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>\n        \n        Creates a new cluster from a snapshot. Amazon Redshift creates the resulting cluster \n        with the same configuration as the original cluster from which the snapshot was created, \n        except that the new cluster\n        is created with the default cluster security and parameter group. \n        \n        After Amazon Redshift creates the cluster you can use the <a>ModifyCluster</a> \n            API to associate a different security group and different parameter group with the\n            restored cluster.\n        \n       \n        </p>\n        <p> If a snapshot is taken of a cluster in VPC, you can restore it only in VPC. \n            In this case, you must provide a cluster subnet group where you want the cluster \n            restored. If snapshot is taken of a cluster outside VPC, then you can \n        restore it only outside VPC.</p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=RestoreFromClusterSnapshot\n    &ClusterIdentifier=examplecluster-restored\n    &SnapshotIdentifier=cm:examplecluster-2013-01-22-19-27-58\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T023350Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><RestoreFromClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <RestoreFromClusterSnapshotResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <ClusterStatus>creating</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sun:06:30-sun:07:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster-restored</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>adminuser</MasterUsername>\n    </Cluster>\n  </RestoreFromClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>52a9aee8-6505-11e2-bec0-17624ad140dd</RequestId>\n  </ResponseMetadata>\n</RestoreFromClusterSnapshotResponse></queryresponse>\n        </examples>\n    "
     },
     "RevokeClusterSecurityGroupIngress": {
       "name": "RevokeClusterSecurityGroupIngress",
@@ -8729,7 +8813,7 @@
               "Status": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
+                "documentation": "\n        <p>\n        The snapshot status. The value of the status depends on the API operation used.\n            <ul>\n                <li>\n<a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as \"creating\". </li>\n                <li>\n<a>DescribeClusterSnapshots</a> returns status as  \n                    \"creating\", \"available\", \"final snapshot\", or \"failed\".</li>\n                <li>\n<a>DeleteClusterSnapshot</a> returns status as \"deleted\".</li>\n            </ul>\n        </p>\n    "
               },
               "Port": {
                 "shape_name": "Integer",
@@ -9056,7 +9140,7 @@
                   "MasterUserPassword": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": "\n        <p>\n        The pending or in-progress change of the master password for the cluster.\n        </p>\n    "
+                    "documentation": "\n        <p>\n        The pending or in-progress change of the master user password for the cluster.\n        </p>\n    "
                   },
                   "NodeType": {
                     "shape_name": "String",
@@ -9235,6 +9319,11 @@
                   }
                 },
                 "documentation": "\n        <p>Describes the status of the elastic IP (EIP) address.</p>\n    "
+              },
+              "ClusterRevisionNumber": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n        <p>The specific revision number of the database in the cluster.</p>\n    "
               }
             },
             "wrapper": true,
