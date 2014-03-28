@@ -267,7 +267,7 @@ module AWS
 
       describe_call_attribute :client_token
 
-      describe_call_attribute :image_id
+      describe_call_attribute :image_id, :static => true
 
       describe_call_attribute :key_name, :static => true
 

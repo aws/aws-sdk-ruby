@@ -31,11 +31,11 @@ module AWS
             [double("reservation 1",
                     :instances_set =>
                     [double("inst 1",
-                            :instance_id => "i-123")]),
+                            :instance_id => "i-123", :image_id => 'img-123').as_null_object]),
              double("reservation 2",
                     :instances_set =>
                     [double("inst 2",
-                            :instance_id => "i-123")])]
+                            :instance_id => "i-123").as_null_object])]
           resp.stub(:reservation_set).and_return(reservations)
         end
 

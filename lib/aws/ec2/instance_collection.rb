@@ -318,7 +318,9 @@ module AWS
         response = filtered_request(:describe_instances)
         response.reservation_set.each do |reservation|
           reservation.instances_set.each do |i|
-            yield(Instance.new(i.instance_id, :config => config))
+            instance = Instance.new_from(:describe_instances, i,
+              i.instance_id, :config => config)
+            yield(instance)
           end
         end
       end
