@@ -302,6 +302,17 @@ module AWS
                 :dedicated_tenancy => true)
             end
 
+            it 'should send Placement.GroupName' do
+
+              client.should_receive(:run_instances).
+                with(hash_including(:placement => { :group_name => "pg-1" })).
+                and_return(resp)
+
+              collection.create(
+                :image_id => "ami-123",
+                :placement_group => "pg-1")
+            end
+
             it 'should accept tenancy with an availability zone' do
               client.should_receive(:run_instances).
                 with(hash_including(:placement => {
