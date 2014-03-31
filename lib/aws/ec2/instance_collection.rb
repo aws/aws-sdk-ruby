@@ -257,6 +257,11 @@ module AWS
           options.delete(:availability_zone)
         end
 
+        if options[:placement_group]
+          placement[:group_name] = options[:placement_group].to_s
+          options.delete(:placement_group)
+        end
+
         if options[:dedicated_tenancy]
           placement[:tenancy] = 'dedicated'
           options.delete(:dedicated_tenancy)
