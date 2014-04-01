@@ -512,7 +512,7 @@ module AWS
       #   and optionally `:delay_seconds`.
       #
       # @raise [Errors::BatchSendError] Raises this error when one or more
-      #   of the messages failed to send, but others didn't.  On the raised
+      #   of the messages failed to send, but others did not.  On the raised
       #   object you can access a list of the messages that failed, and
       #   a list of messages that succeeded.
       #
