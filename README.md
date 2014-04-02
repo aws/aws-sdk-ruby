@@ -93,9 +93,9 @@ The SDK currently supports the following services:
       <td>AWS CloudFormation</td>
     </tr>
     <tr>
-      <td rowspan="4">AWS::CloudFront</td>
+      <td rowspan="6">AWS::CloudFront</td>
       <td>2013-05-12</td>
-      <td rowspan="4">Amazon CloudFront</td>
+      <td rowspan="6">Amazon CloudFront</td>
     </tr>
     <tr>
       <td>2013-08-26</td>
@@ -107,9 +107,18 @@ The SDK currently supports the following services:
       <td>2013-11-11</td>
     </tr>
     <tr>
-      <td>AWS::CloudSearch</td>
+      <td>2013-11-22</td>
+    </tr>
+    <tr>
+      <td>2014-01-31</td>
+    </tr>
+    <tr>
+      <td rowspan="2">AWS::CloudSearch</td>
       <td>2011-02-01</td>
-      <td>Amazon CloudSearch</td>
+      <td rowspan="2">Amazon CloudSearch</td>
+    </tr>
+    <tr>
+      <td>2013-01-01</td>
     </tr>
     <tr>
       <td>AWS::CloudTrail</td>
@@ -140,15 +149,18 @@ The SDK currently supports the following services:
       <td>2012-08-10</td>
     </tr>
     <tr>
-      <td rowspan="3">AWS::EC2</td>
+      <td rowspan="4">AWS::EC2</td>
       <td>2013-08-15</td>
-      <td rowspan="3">Amazon Elastic Compute Cloud</td>
+      <td rowspan="4">Amazon Elastic Compute Cloud</td>
     </tr>
     <tr>
       <td>2013-10-01</td>
     </tr>
     <tr>
       <td>2013-10-15</td>
+    </tr>
+    <tr>
+      <td>2014-02-01</td>
     </tr>
     <tr>
       <td>AWS::ElastiCache</td>
@@ -214,9 +226,12 @@ The SDK currently supports the following services:
       <td>Amazon Redshift</td>
     </tr>
     <tr>
-      <td>AWS::Route53</td>
+      <td rowspan="2">AWS::Route53</td>
       <td>2012-12-12</td>
-      <td>Amazon Route 53</td>
+      <td rowspan="2">Amazon Route 53</td>
+    </tr>
+    <tr>
+      <td>2013-04-01</td>
     </tr>
     <tr>
       <td>AWS::S3</td>
