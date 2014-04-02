@@ -118,6 +118,9 @@ module AWS
       #   availability zone where the instance should run.  Without
       #   this option, EC2 will choose an availability zone for you.
       #
+      # @option options [String] :placement_group Specifies the
+      #   cluster placement group where the instance should run.
+      #
       # @option options [String] :image_id ID of the AMI you want to
       #   launch.
       #
@@ -255,6 +258,11 @@ module AWS
         if options[:availability_zone]
           placement[:availability_zone] = options[:availability_zone].to_s
           options.delete(:availability_zone)
+        end
+
+        if options[:placement_group]
+          placement[:group_name] = options[:placement_group].to_s
+          options.delete(:placement_group)
         end
 
         if options[:dedicated_tenancy]
