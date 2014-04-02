@@ -154,15 +154,11 @@ module AWS
         end
       end
 
+      # Updates the provisioned throughput for this table.
       # @param [Hash] options
-      #
-      # @option options [Integer] :read_capacity_units
-      #
-      # @option options [Integer] :write_capacity_units
-      #
-      # @return [Hash] Returns a hash with the current throughput
-      #   provisioning (`:read_capacity_units` and `:write_capacity_units`).
-      #
+      # @option options [Integer] :read_capacity_units The desired read capacity units.
+      # @option options [Integer] :write_capacity_units The desired write capacity units.
+      # @return [Hash] Returns the given `options` hash.
       def provision_throughput options = {}
 
         options[:read_capacity_units] ||= read_capacity_units
