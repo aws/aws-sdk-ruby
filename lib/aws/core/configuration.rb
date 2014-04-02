@@ -483,7 +483,7 @@ module AWS
       add_option :session_token
 
       add_option :region do |cfg,region|
-        region || ENV['AWS_REGION'] || ENV['AMAZON_REGION'] || 'us-east-1'
+        region || ENV['AWS_REGION'] || ENV['AMAZON_REGION'] || ENV['AWS_DEFAULT_REGION'] ||  'us-east-1'
       end
 
       add_option_with_needs :credential_provider,
