@@ -546,6 +546,7 @@ module AWS
 
         http_request = new_request
         http_request.access_key_id = credential_provider.access_key_id
+        http_request.service = self.class.name.split('::')[1]
 
         # configure the http request
         http_request.service_ruby_name = service_ruby_name

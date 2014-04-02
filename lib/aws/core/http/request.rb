@@ -54,6 +54,9 @@ module AWS
         #   to be populated for requests against signature v4 endpoints.
         attr_accessor :region
 
+        # @api private
+        attr_accessor :service
+
         # @return [String] Returns the AWS access key ID used to authorize the
         #   request.
         # @api private

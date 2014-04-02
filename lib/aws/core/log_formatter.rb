@@ -154,7 +154,7 @@ module AWS
       end
 
       def _service response
-        response.http_request.class.name.split('::')[1]
+        response.http_request.service
       end
 
       def _region response
