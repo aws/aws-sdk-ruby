@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-
+require 'aws-sdk'
 require 'yaml'
 
 YARD::Templates::Engine.register_template_path(File.dirname(__FILE__) + '/templates')
@@ -21,7 +21,7 @@ YARD::Parser::SourceParser.after_parse_list do
     if klass.name =~ /V\d{8}/
       add_methods(klass, "doc-src/#{svc(klass)}/#{klass.name}.yml")
     elsif klass.name == :Client && klass.path != 'AWS::Core::Client'
-      if doc_src = oldest_api_version(klass)
+      if doc_src = default_api_version(klass)
         add_methods(klass, doc_src)
       end
     end
@@ -44,6 +44,8 @@ def svc(klass)
   klass.path.split('::')[1]
 end
 
-def oldest_api_version(klass)
-  Dir.glob("doc-src/#{svc(klass)}/*.yml").sort.first
+def default_api_version(klass)
+  klass_obj = klass.path.split('::').inject(Kernel) { |mod,const| mod.const_get(const) }
+  api_version = klass_obj::API_VERSION
+  "doc-src/#{svc(klass)}/V#{api_version.gsub('-', '')}.yml"
 end
