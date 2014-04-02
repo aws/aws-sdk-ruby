@@ -175,7 +175,7 @@ module AWS
       #
       def ec2_instances
         instances = EC2::InstanceCollection.new(:config => config)
-        instances.tagged('aws:autoscaling:groupName').tagged_values(name)
+        instances.filter('tag:aws:autoscaling:groupName', name)
       end
 
       # @return [Array<EC2::Subnet>]

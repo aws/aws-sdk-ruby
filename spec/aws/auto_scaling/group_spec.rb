@@ -175,8 +175,10 @@ module AWS
           inst_resp = ec2_client.stub_for(:describe_instances)
           ec2_client.should_receive(:describe_instances).
             with(:filters=>[
-              { :name => "tag-key", :values => ["aws:autoscaling:groupName"] },
-              { :name => "tag-value", :values => [group.name] },
+              {
+                :name => "tag:aws:autoscaling:groupName",
+                :values => [group.name],
+              },
             ]).and_return(inst_resp)
 
           group.ec2_instances.to_a
