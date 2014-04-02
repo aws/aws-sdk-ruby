@@ -69,7 +69,7 @@ module AWS
 
       # @return [ArchiveCollection]
       def archives
-        ArchiveCollection.new(self)
+        ArchiveCollection.new(self, :account_id => account_id)
       end
 
       # @param [String,SNS::Topic] topic The SNS topic ARN string or an
