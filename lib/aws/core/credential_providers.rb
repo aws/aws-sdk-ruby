@@ -37,14 +37,17 @@ module AWS
         #   `:access_key_id` or the `:secret_access_key` can not be found.
         #
         def credentials
-          @cached_credentials ||= begin
-            creds = get_credentials
-            unless creds[:access_key_id] and creds[:secret_access_key]
-              raise Errors::MissingCredentialsError
-            end
-            creds
-          end
+          raise Errors::MissingCredentialsError unless set?
           @cached_credentials.dup
+        end
+
+        # @return [Boolean] Returns true if has credentials and it contains
+        #   at least the `:access_key_id` and `:secret_access_key`.
+        #
+        def set?
+          @cached_credentials ||= get_credentials
+          @cached_credentials[:access_key_id] &&
+            @cached_credentials[:secret_access_key]
         end
 
         # @return [String] Returns the AWS access key id.
@@ -117,12 +120,15 @@ module AWS
 
         def credentials
           providers.each do |provider|
-            begin
+            if provider.set?
               return provider.credentials
-            rescue Errors::MissingCredentialsError
             end
           end
           raise Errors::MissingCredentialsError
+        end
+
+        def set?
+          providers.any?(&:set?)
         end
 
         def refresh
