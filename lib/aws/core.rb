@@ -657,6 +657,7 @@ module AWS
           end
         end
       end
+      visited
     end
 
     # Patches Net::HTTP, fixing a bug in how it handles non 100-continue
