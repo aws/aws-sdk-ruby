@@ -706,13 +706,10 @@ end
 unless SecureRandom.respond_to?(:uuid)
   module SecureRandom
     def self.uuid
-      [
-        rand(2 ** 32),
-        rand(2 ** 16),
-        rand(2 ** 12) | (0x04 << 12),
-        (rand(2 ** 16) & 0x3fff) | 0x0800,
-        rand(2 ** 48)
-      ].map { |i| i.to_s(16) }.join('-')
+      ary = random_bytes(16).unpack("NnnnnN")
+      ary[2] = (ary[2] & 0x0fff) | 0x4000
+      ary[3] = (ary[3] & 0x3fff) | 0x8000
+      "%08x-%04x-%04x-%04x-%04x%08x" % ary
     end
   end
 end

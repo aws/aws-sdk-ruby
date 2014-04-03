@@ -65,7 +65,7 @@ module AWS
           end
 
           it 'replaces :service with the request class service name' do
-            http_request.stub_chain(:class, :name).and_return('AWS::EC2::Request')
+            http_request.service = 'EC2'
             message_for(':service').should == 'EC2'
           end
 
