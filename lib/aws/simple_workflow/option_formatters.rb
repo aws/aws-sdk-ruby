@@ -44,7 +44,7 @@ module AWS
 
         if workflow_type
 
-          options[:workflow_id] ||= UUIDTools::UUID.random_create.to_s
+          options[:workflow_id] ||= SecureRandom.uuid
 
           if workflow_type.is_a?(WorkflowType)
             options[:workflow_type] = {}

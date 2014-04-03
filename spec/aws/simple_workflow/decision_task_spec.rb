@@ -128,7 +128,7 @@ module AWS
       context 'decisions' do
 
         before(:each) do
-          UUIDTools::UUID.stub(:random_create).and_return('uuid')
+          SecureRandom.stub(:uuid).and_return('uuid')
         end
 
         let(:activity_type) { domain.activity_types['name','version'] }

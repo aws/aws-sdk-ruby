@@ -12,7 +12,6 @@
 # language governing permissions and limitations under the License.
 
 require 'base64'
-require 'uuidtools'
 
 module AWS
   class EC2
@@ -299,7 +298,7 @@ module AWS
 
         security_group_opts(options)
 
-        options[:client_token] = UUIDTools::UUID.timestamp_create.to_s
+        options[:client_token] = SecureRandom.uuid
 
         resp = client.run_instances(options)
 

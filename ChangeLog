@@ -1061,7 +1061,7 @@
 
       class Book < AWS::Record::HashModel
         string_attr :isbn, :default_value => lambda {
-  UUIDTools::UUID.random_create }
+  SecureRandom.uuid }
       end
 
   * lib/aws/record/abstract_base.rb, lib/aws/record/hash_model.rb,

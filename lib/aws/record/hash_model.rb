@@ -140,7 +140,7 @@ module AWS
       def populate_id
         hash_key = self.class.hash_key_attribute
         if hash_key.options[:default_hash_key_attribute]
-          self[hash_key.name] = UUIDTools::UUID.random_create.to_s.downcase
+          self[hash_key.name] = SecureRandom.uuid
         end
       end
 

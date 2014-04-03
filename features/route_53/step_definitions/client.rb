@@ -14,7 +14,7 @@
 When /^I call \#create_hosted_zone$/ do
 
   @name = "ruby-integration-test-#{Time.now.to_i}-#{rand(1000)}.com"
-  @caller_reference = UUIDTools::UUID.random_create.to_s
+  @caller_reference = SecureRandom.uuid
 
   @response = @route_53_client.create_hosted_zone(
     :name => @name,
