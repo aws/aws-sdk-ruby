@@ -68,6 +68,12 @@ module Aws
       expect(svc.config.http_wire_trace).to be(true)
     end
 
+    it 'adds the helper method to Aws (not Module)' do
+      Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
+      expect(Aws).to respond_to(:dummyservice)
+      expect(Aws.class).not_to respond_to(:dummyservice)
+    end
+
     it 'filters the :api_version option from the client constructor' do
       Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
       Aws.config[:api_version] = '2007-01-01'
