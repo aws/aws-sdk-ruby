@@ -167,20 +167,29 @@ module Aws
     # @param [Array<String, Seahorse::Model::Api>] apis
     # @return [Class<Service>]
     def add_service(name, apis = [])
-
       svc_class = const_set(name, Service.define(name.downcase.to_sym, apis))
-      method_name = svc_class.identifier
+      add_helper(svc_class.identifier, svc_class)
+      svc_class
+    end
 
+    private
+
+    # Defines a `Aws.svcname` helper method.  This method accepts a hash
+    # of configuration options.
+    #
+    #    s3 = Aws.s3(http_wire_trace:true)
+    #    #=> Aws::S3::V20060301
+    #
+    #    s3.config.http_wire_trace
+    #    #=> true
+    #
+    def add_helper(method_name, svc_class)
       service_classes[method_name] = svc_class
       define_method(method_name) do |options = {}|
         svc_class.new(options)
       end
       module_function(method_name)
-
-      svc_class
     end
-
-    private
 
     # @return Returns a hash of API paths grouped by their service class names.
     def bundled_apis
