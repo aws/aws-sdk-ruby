@@ -14,6 +14,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'Glacier', 'glacier', 'glacier.us-east-1.amazonaws.com'
+  add_service 'Glacier', 'glacier', 'glacier'
 
 end

@@ -12,19 +12,18 @@
 # language governing permissions and limitations under the License.
 
 require 'aws/core'
-require 'aws/glacier/config'
+require 'aws/elastic_transcoder/config'
 
 module AWS
 
   class ElasticTranscoder
 
-    AWS.register_autoloads(self, 'aws/elastic_transcoder') do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/elastic_transcoder/client'
+    autoload :Errors, 'aws/elastic_transcoder/errors'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'elastictranscoder'
 
   end
 end

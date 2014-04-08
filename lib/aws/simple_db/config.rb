@@ -13,7 +13,7 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'SimpleDB', 'simple_db', 'sdb.amazonaws.com'
+  add_service 'SimpleDB', 'simple_db', 'sdb'
 
   add_option :simple_db_consistent_reads, false, :boolean => true
 

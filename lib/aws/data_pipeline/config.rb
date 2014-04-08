@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'DataPipeline', 'data_pipeline', 'datapipeline.us-east-1.amazonaws.com'
+  add_service 'DataPipeline', 'data_pipeline', 'datapipeline'
 
 end

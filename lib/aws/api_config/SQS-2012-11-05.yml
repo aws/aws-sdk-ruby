@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -100,6 +100,7 @@
         - :string
         :key_param: Name
         :value_param: Value
+        :flattened: true
     - :rename: attributes
   :outputs:
     :children:
@@ -191,6 +192,20 @@
     :children:
       GetQueueUrlResult:
         :ignore: true
+- :name: ListDeadLetterSourceQueues
+  :method: :list_dead_letter_source_queues
+  :inputs:
+    QueueUrl:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      ListDeadLetterSourceQueuesResult:
+        :ignore: true
+        :children:
+          QueueUrl:
+            :list: true
+            :rename: :queue_urls
 - :name: ListQueues
   :method: :list_queues
   :inputs:
@@ -309,6 +324,7 @@
         - :string
         :key_param: Name
         :value_param: Value
+        :flattened: true
     - :required
     - :rename: attributes
   :outputs:

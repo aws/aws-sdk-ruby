@@ -12,7 +12,6 @@
 # language governing permissions and limitations under the License.
 
 require 'nokogiri'
-require 'uuidtools'
 
 module AWS
   class S3
@@ -21,7 +20,7 @@ module AWS
     # Amazon S3 stores objects. The rules apply to objects whose keys match
     # the rule's prefix.
     #
-    # == Rules
+    # ## Rules
     #
     # A rule is comprised primarily of an id, prefix and set of
     # configuration options. Configuration options on the rules can specify:
@@ -33,89 +32,89 @@ module AWS
     # See {Rule} for more information on all of the attributes and methods
     # available for rules.
     #
-    # == Expiring Objects
+    # ## Expiring Objects
     #
     # You can add a rule to a bucket lifecycle configuration using {#add_rule}
     # inside of an {#update} block that will expire an object after a given
     # number of days:
     #
-    #   # delete backups after they are 1 year old
-    #   bucket.lifecycle_configuration.update do
-    #     add_rule('backups/', :expiration_time => 365)
-    #   end
+    #     # delete backups after they are 1 year old
+    #     bucket.lifecycle_configuration.update do
+    #       add_rule('backups/', :expiration_time => 365)
+    #     end
     #
     # You can also define the rule to expire objects at a specific date:
     #
-    #   # delete backups on January 1st of next year
-    #   bucket.lifecycle_configuration.update do
-    #     date = Date.new(Time.now.year + 1, 01, 01)
-    #     add_rule('backups/', :expiration_time => date)
-    #   end
+    #     # delete backups on January 1st of next year
+    #     bucket.lifecycle_configuration.update do
+    #       date = Date.new(Time.now.year + 1, 01, 01)
+    #       add_rule('backups/', :expiration_time => date)
+    #     end
     #
-    # == Transitioning Objects to Glacier
+    # ## Transitioning Objects to Glacier
     #
     # You can add a rule to a bucket lifecycle configuration using {#add_rule}
     # inside of an {#update} block that will transition objects to Glacier
     # after a given number of days:
     #
-    #   # move backups to Glacier after 3 days
-    #   bucket.lifecycle_configuration.update do
-    #     add_rule('backups/', :glacier_transition_time => 3)
-    #   end
+    #     # move backups to Glacier after 3 days
+    #     bucket.lifecycle_configuration.update do
+    #       add_rule('backups/', :glacier_transition_time => 3)
+    #     end
     #
     # You can also define the rule to transition objects at a specific date:
     #
-    #   # transition all backups on January 1st of next year
-    #   bucket.lifecycle_configuration.update do
-    #     date = Date.new(Time.now.year + 1, 01, 01)
-    #     add_rule('backups/', :glacier_transition_time => date)
-    #   end
+    #     # transition all backups on January 1st of next year
+    #     bucket.lifecycle_configuration.update do
+    #       date = Date.new(Time.now.year + 1, 01, 01)
+    #       add_rule('backups/', :glacier_transition_time => date)
+    #     end
     #
-    # == Replacing Rules
+    # ## Replacing Rules
     #
     # If you prefer to completely replace a lifecycle configuration, call
-    # {#add_rule} inside a {#replace} block instead of an +#update+ block:
+    # {#add_rule} inside a {#replace} block instead of an `#update` block:
     #
-    #   # replace all existing rules with the following
-    #   bucket.lifecycle_configuration.replace do
-    #     add_rule('backups/', :glacier_transition_time => 10)
-    #     add_rule('temp/', :expiration_time => 30)
-    #   end
+    #     # replace all existing rules with the following
+    #     bucket.lifecycle_configuration.replace do
+    #       add_rule('backups/', :glacier_transition_time => 10)
+    #       add_rule('temp/', :expiration_time => 30)
+    #     end
     #
-    # == Removing Rules
+    # ## Removing Rules
     #
     # You can delete specific rules with {#remove_rule}.
     #
-    #   # delete all disabled rules
-    #   bucket.lifecycle_configuration.update do
-    #     rules.each do |rule|
-    #       remove_rule(rule) if rule.disabled?
+    #     # delete all disabled rules
+    #     bucket.lifecycle_configuration.update do
+    #       rules.each do |rule|
+    #         remove_rule(rule) if rule.disabled?
+    #       end
     #     end
-    #   end
     #
     # You can also remove all rules in a single call with {#clear}:
     #
-    #   # remove all rules from this lifecycle configuration
-    #   bucket.lifecycle_configuration.clear
+    #     # remove all rules from this lifecycle configuration
+    #     bucket.lifecycle_configuration.clear
     #
-    # == Editing Existing Rules
+    # ## Editing Existing Rules
     #
     # You can also make changes to existing rules.
     #
-    #   # change the expiration days to 10 for EVERY rule
-    #   bucket.lifecycle_configuration.update do
-    #     rules.each do |rule|
-    #       rule.expiration_time = 10
+    #     # change the expiration days to 10 for EVERY rule
+    #     bucket.lifecycle_configuration.update do
+    #       rules.each do |rule|
+    #         rule.expiration_time = 10
+    #       end
     #     end
-    #   end
     #
     # Please be aware, if you add, remove or edit rules outside of an
-    # {#update} or {#replace} block, then you must call +#update+ yourself
+    # {#update} or {#replace} block, then you must call `#update` yourself
     # or the changes will not be persisted.
     #
     class BucketLifecycleConfiguration
 
-      # @private
+      # @api private
       def initialize bucket, options = {}
         @bucket = bucket
         @rules = parse_xml(options[:xml]) if options[:xml]
@@ -148,7 +147,7 @@ module AWS
       #
       #   @option options [Boolean] :disabled (false) By default, all rules
       #     will have the status of enabled.  You can override this default
-      #     by passing +:disabled+ => true.
+      #     by passing `:disabled` => true.
       #
       #   @option options [Date, Integer] :expiration_time (nil) Indicates
       #     the lifetime for objects matching the given prefix.
@@ -165,7 +164,7 @@ module AWS
           options[:expiration_time] = expiration_time
         end
 
-        id = options[:id] || UUIDTools::UUID.random_create.to_s
+        id = options[:id] || SecureRandom.uuid
         opts = {
           :status => options[:disabled] == true ? 'Disabled' : 'Enabled',
           :expiration_time => options[:expiration_time],
@@ -179,17 +178,17 @@ module AWS
       # Removes a single rule.  You can pass a rule id or a {Rule}
       # object.
       #
-      #   # remove a single rule by its ID
-      #   bucket.lifecycle_configuration.update do
-      #     remove_rule('rule-id')
-      #   end
-      #
-      #   # remove all disabled rules
-      #   bucket.lifecycle_configuration.update do
-      #     rules.each do |rule|
-      #       remove_rule(rule) if rule.disabled?
+      #     # remove a single rule by its ID
+      #     bucket.lifecycle_configuration.update do
+      #       remove_rule('rule-id')
       #     end
-      #   end
+      #
+      #     # remove all disabled rules
+      #     bucket.lifecycle_configuration.update do
+      #       rules.each do |rule|
+      #         remove_rule(rule) if rule.disabled?
+      #       end
+      #     end
       #
       # If you call #remove_rule outside an update block
       # you need to call #update to save the changes.
@@ -210,34 +209,34 @@ module AWS
 
       # Saves changes made to this lifecycle configuration.
       #
-      #   # set the number of days before expiration for all rules to 10
-      #   config = bucket.lifecycle_configuration
-      #   config.rules.each do |rule|
-      #     rule.expiration_time = 10
-      #   end
-      #   config.update
+      #     # set the number of days before expiration for all rules to 10
+      #     config = bucket.lifecycle_configuration
+      #     config.rules.each do |rule|
+      #       rule.expiration_time = 10
+      #     end
+      #     config.update
       #
       # You can call #update with a block.  Changes are persisted at the
       # end of the block.
       #
-      #   # shorter version of the example above
-      #   bucket.lifecycle_configuration.update do
-      #     rules.each {|rule| rule.expiration_time = 10 }
-      #   end
+      #     # shorter version of the example above
+      #     bucket.lifecycle_configuration.update do
+      #       rules.each {|rule| rule.expiration_time = 10 }
+      #     end
       #
       # A block method for updating a BucketLifecycleConfiguration.
       # All modifications made inside the block are persisted at the end of
       # the block.
       #
-      #  # 1 request
-      #  bucket.lifecycle_configuration.update do
-      #    add_rule 'prefix/a', 10
-      #    add_rule 'prefix/b', 5
-      #  end
+      #     # 1 request
+      #     bucket.lifecycle_configuration.update do
+      #       add_rule 'prefix/a', 10
+      #       add_rule 'prefix/b', 5
+      #     end
       #
-      #  # 2 requests
-      #  bucket.lifecycle_configuration.add_rule 'prefix/a', 10
-      #  bucket.lifecycle_configuration.add_rule 'prefix/b', 5
+      #     # 2 requests
+      #     bucket.lifecycle_configuration.add_rule 'prefix/a', 10
+      #     bucket.lifecycle_configuration.add_rule 'prefix/b', 5
       #
       # @return [nil]
       #
@@ -259,15 +258,14 @@ module AWS
       # When the block is complete, a single call will be made to save
       # the new rules.
       #
-      #   bucket.lifecycle_configuration.rules.size #=> 3
+      #     bucket.lifecycle_configuration.rules.size #=> 3
       #
-      #   # replace the existing 3 rules with a single rule
-      #   bucket.lifecycle_configuration.replace
-      #     add_rule 'temp/', 10
-      #   end
+      #     # replace the existing 3 rules with a single rule
+      #     bucket.lifecycle_configuration.replace
+      #       add_rule 'temp/', 10
+      #     end
       #
-      #   bucket.lifecycle_configuration.rules.size #=> 1
-      #
+      #     bucket.lifecycle_configuration.rules.size #=> 1
       def replace &block
         @rules = []
         update(&block)
@@ -326,16 +324,16 @@ module AWS
       # Represents a single rule from an Amazon S3 bucket lifecycle
       # configuration.
       #
-      #   # delete all objects with the prefix 'temporary/' after 10 days
-      #   bucket.lifecycle_configuration.add_rule 'temporary/', 10
+      #     # delete all objects with the prefix 'temporary/' after 10 days
+      #     bucket.lifecycle_configuration.add_rule 'temporary/', 10
       #
-      #   # remove the rule created above
-      #   bucket.lifecycle_configuration.remove_rule 'temporary/'
+      #     # remove the rule created above
+      #     bucket.lifecycle_configuration.remove_rule 'temporary/'
       #
       #
       class Rule
 
-        # @private
+        # @api private
         def initialize configuration, id, prefix, expiration_time = nil, status = nil
           @configuration = configuration
           @id = id
@@ -405,7 +403,7 @@ module AWS
           self.status = 'Disabled'
         end
 
-        # @private
+        # @api private
         def eql? other
           other.is_a?(Rule) and
           other.configuration.bucket == configuration.bucket and

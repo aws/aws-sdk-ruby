@@ -15,7 +15,7 @@ module AWS
   module Core
     module XML
 
-      # @private
+      # @api private
       module FrameStack
 
         # @param [Hash] rules A hash of parser rules.  These
@@ -36,7 +36,7 @@ module AWS
           sax_parse(xml)
           @frame.value
         end
-    
+
         # Increase the frame stack level by one.
         # @param [String] element_name The name of the xml opening tag.
         # @param [Hash] attributes A hash of xml element attributes.
@@ -75,7 +75,7 @@ module AWS
         # Adds text to the current frame.  Frames that only contain
         # text and no child elements are leaf nodes and have
         # raw string values.
-        def text text
+        def set_text text
           @frame.add_text(text) if @frame
         end
 

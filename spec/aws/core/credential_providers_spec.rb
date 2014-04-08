@@ -52,7 +52,8 @@ module AWS
           p1 = double('provider-1')
           p2 = double('provider-2')
 
-          p1.should_receive(:credentials).and_raise(Errors::MissingCredentialsError)
+          p1.should_receive(:set?).and_return(false)
+          p2.should_receive(:set?).and_return(true)
           p2.should_receive(:credentials).and_return(creds)
 
           provider = DefaultProvider.new
@@ -61,6 +62,19 @@ module AWS
           provider.providers << p2
           provider.credentials.should == creds
 
+        end
+
+        it "has credentials set when any provider has credentials" do
+          provider = DefaultProvider.new
+          provider.providers.clear
+          provider.providers << double('provider-1', :set? => false)
+          provider.providers << double('provider-2', :set? => false)
+          provider.set?.should be_false
+
+          provider.providers.clear
+          provider.providers << double('provider-1', :set? => false)
+          provider.providers << double('provider-2', :set? => true)
+          provider.set?.should be_true
         end
 
         it 'refreshes its provider chain' do
@@ -76,6 +90,7 @@ module AWS
         it 'should not cache credentials as EC2Provider may refresh the credentials when the security token is expired' do
           dp = DefaultProvider.new
           ec2_provider = dp.providers[0] = EC2Provider.new
+          ec2_provider.stub(:set? => true)
           ec2_provider.stub(:credentials => {
                               :access_key_id => 'akid-1',
                               :secret_access_key => 'secret-1',
@@ -101,7 +116,7 @@ module AWS
         it 'should not hide real error of fetching credentials' do
           dp = DefaultProvider.new
           ec2_provider = dp.providers[0] = EC2Provider.new
-          ec2_provider.stub(:credentials) do
+          ec2_provider.stub(:set?) do
             raise "Something wrong"
           end
           lambda {
@@ -126,7 +141,7 @@ module AWS
 
         it 'returns credentials with session tokens when provided' do
           creds = {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => 'session' }
           provider = StaticProvider.new(creds)
@@ -135,26 +150,40 @@ module AWS
 
         it 'ommits nil values from credentials' do
           creds = {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => nil }
           provider = StaticProvider.new(creds)
           provider.credentials.should == {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret' }
         end
 
         it 'protects static credetials from downstream changes' do
           creds = {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => 'session' }
           provider = StaticProvider.new(creds)
           provider.credentials.delete(:access_key_id)
           provider.credentials.should == {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret',
             :session_token => 'session' }
+        end
+
+        it 'is set when credentails is valid' do
+          creds = {
+            :access_key_id => 'akid',
+            :secret_access_key => 'secret'}
+          provider = StaticProvider.new(creds)
+          provider.set?.should be_true
+        end
+
+        it 'is not set when key_id or access_key is missing' do
+          StaticProvider.new({}).set?.should be_false
+          StaticProvider.new({:access_key_id => 'akid'}).set?.should be_false
+          StaticProvider.new({:secret_access_key => 'secret'}).set?.should be_false
         end
 
         it 'raises an error if you pass an unexpected option' do
@@ -171,6 +200,8 @@ module AWS
           'AWS_ACCESS_KEY_ID' => 'akid',
           'AWS_SECRET_ACCESS_KEY' => 'secret',
         }}
+
+        let(:mock_credential_file) { File.expand_path('../../../mock-credential-file.txt', __FILE__) }
 
         before(:each) do
           ENV.stub(:[]).and_return{|key| env_variables[key] }
@@ -211,6 +242,24 @@ module AWS
           }
         end
 
+        it 'reads credentials from {PREFIX}_CREDENTIAL_FILE environment variable' do
+          env_variables['AMAZON_CREDENTIAL_FILE'] = mock_credential_file
+          ENVProvider.new('AMAZON').credentials.should == {
+            :access_key_id => 'cred_file_key',
+            :secret_access_key => 'cred_file_secret',
+          }
+        end
+
+        it 'preferences {PREFIX}_CREDENTIAL_FILE environment data when merging it in' do
+          env_variables['AWS_CREDENTIAL_FILE'] = mock_credential_file
+          env_variables['AWS_SESSION_TOKEN'] = 'token'
+          ENVProvider.new('AWS').credentials.should == {
+            :access_key_id => 'cred_file_key',
+            :secret_access_key => 'cred_file_secret',
+            :session_token => 'token',
+          }
+        end
+
         it 'does not access/cache credentials until asked' do
           provider = ENVProvider.new('AWS')
           env_variables['AWS_ACCESS_KEY_ID'] = 'new-akid'
@@ -223,14 +272,76 @@ module AWS
           }
         end
 
-        it 'protects static credetials from downstream changes' do
+        it 'protects static credentials from downstream changes' do
           provider = ENVProvider.new('AWS')
           provider.credentials.delete(:access_key_id)
           provider.credentials.should == {
-            :access_key_id => 'akid', 
+            :access_key_id => 'akid',
             :secret_access_key => 'secret' }
         end
 
+        it 'is set when credentails is valid' do
+          provider = ENVProvider.new('AWS')
+          env_variables['AWS_ACCESS_KEY_ID'] = 'new-akid'
+          env_variables['AWS_SECRET_ACCESS_KEY'] = 'new-secret'
+          provider.set?.should be_true
+        end
+
+        it 'is not set when key_id or access_key is missing' do
+          provider = ENVProvider.new('AWS')
+          env_variables['AWS_ACCESS_KEY_ID'] = nil
+          env_variables['AWS_SECRET_ACCESS_KEY'] = nil
+          provider.set?.should be_false
+          env_variables['AWS_ACCESS_KEY_ID'] = 'new-akid'
+          env_variables['AWS_SECRET_ACCESS_KEY'] = nil
+          provider.set?.should be_false
+          env_variables['AWS_ACCESS_KEY_ID'] = nil
+          env_variables['AWS_SECRET_ACCESS_KEY'] = 'new-secret'
+          provider.set?.should be_false
+        end
+
+
+      end
+
+      describe CredentialFileProvider do
+
+        let(:mock_credential_file) { File.expand_path('../../../mock-credential-file.txt', __FILE__) }
+
+        it 'raises an error when no credentials are present' do
+          lambda {
+            CredentialFileProvider.new('/no/file/here').credentials
+          }.should raise_error(Errors::MissingCredentialsError)
+        end
+
+        it 'reads credentials from a credential file' do
+          provider = CredentialFileProvider.new(mock_credential_file)
+          provider.credentials.should == {
+            :access_key_id => 'cred_file_key',
+            :secret_access_key => 'cred_file_secret' }
+        end
+
+        it 'should return an empty hash from a bad file' do
+          provider = CredentialFileProvider.new('/no/file/here')
+          provider.get_credentials.should == {}
+        end
+
+        it 'protects static credentials from downstream changes' do
+          provider = CredentialFileProvider.new(mock_credential_file)
+          provider.credentials.delete(:access_key_id)
+          provider.credentials.should == {
+            :access_key_id => 'cred_file_key',
+            :secret_access_key => 'cred_file_secret' }
+        end
+
+        it 'is set when credentails is valid' do
+          provider = CredentialFileProvider.new(mock_credential_file)
+          provider.set?.should be_true
+        end
+
+        it 'is not set when key_id or access_key is missing' do
+          provider = CredentialFileProvider.new('/no/file/here')
+          provider.set?.should be_false
+        end
       end
 
       describe EC2Provider do
@@ -307,7 +418,7 @@ module AWS
               :secret_access_key => "secret-3",
               :session_token => "token-3",
             }
-            
+
           end
 
         end
@@ -330,6 +441,26 @@ module AWS
           provider.credentials.should == exptected
         end
 
+        it 'should not hit metadata service multiple times when fetching credentials from multiple threads concurrently' do
+          @mock_server.response_delay = 0.2
+          threads = []
+          credentials = []
+
+          5.times do
+            threads << Thread.new do
+              credentials << provider.credentials
+            end
+          end
+          threads.map(&:join)
+
+          credentials.should == [{
+            :access_key_id => 'akid-1',
+            :secret_access_key => 'secret-1',
+            :session_token => 'token-1',
+          }] * 5
+          @mock_server.request_count.should == 1
+        end
+
         it 'makes a new request for creds when refresh is called' do
           provider.credentials.should == {
             :access_key_id => 'akid-1',
@@ -350,23 +481,39 @@ module AWS
           }
         end
 
-        it 'refresh the credentials when cached one is expired' do
-          provider.credentials.should == {
+        it 'refresh the credentials when expiration is within 15 minutes' do
+          creds1 = {
             :access_key_id => 'akid-1',
             :secret_access_key => 'secret-1',
             :session_token => 'token-1',
           }
-          provider.credentials_expiration = Time.now - 5 * 60
-          provider.credentials.should == {
+          creds2 = {
             :access_key_id => 'akid-2',
             :secret_access_key => 'secret-2',
             :session_token => 'token-2',
           }
+          provider.credentials_expiration = Time.now + (20 * 60)
+          provider.credentials.should == creds1
+          provider.credentials_expiration = Time.now + (10 * 60)
+          provider.credentials.should == creds2
         end
+
+        it 'is set when credentails is valid' do
+          provider.set?.should be_true
+        end
+
+        it 'is not set when key_id or access_key is missing' do
+          http = double('http').as_null_object
+          http.should_receive(:start).and_raise(Errno::ECONNREFUSED)
+          Net::HTTP.stub(:new).and_return(http)
+
+          provider.set?.should be_false
+        end
+
       end
 
       describe SessionProvider do
-        
+
         let(:long_term_creds) {{
           :access_key_id => 'akid',
           :secret_access_key => 'secret',
@@ -467,8 +614,19 @@ module AWS
 
         end
 
-      end
+        it 'is set when credentails is valid' do
+          session_creds = {
+            :access_key_id => 'session-akid',
+            :secret_access_key => 'session-secret',
+            :session_token => 'session-token' }
 
+          AWS::STS.stub_chain(:new, :new_session, :credentials).
+            and_return(session_creds)
+
+          provider = SessionProvider.for(long_term_creds)
+          provider.set?.should be_true
+        end
+      end
     end
   end
 end

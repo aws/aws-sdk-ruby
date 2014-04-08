@@ -16,32 +16,32 @@ module AWS
     # This is the primary interface for uploading X.509 signing certificates
     # to an AWS account or an IAM user.
     #
-    #   iam = AWS::IAM.new
+    #     iam = AWS::IAM.new
     #
-    #   # upload a certificate for the AWS account:
-    #   iam.signing_certificates.upload(<<-CERT)
-    #   -----BEGIN CERTIFICATE-----
-    #   MIICdzCCAeCgAwIBAgIFGS4fY6owDQYJKoZIhvcNAQEFBQAwUzELMAkGA1UEBhMC
-    #   ......
-    #   Glli79yh87PRi0vNDlFEoHXNynkvC/c4TiWruZ4haM9BR9EdWr1DBNNu73ui093K
-    #   F9TbdXSWdgMl7E0=
-    #   -----END CERTIFICATE-----
-    #   CERT
+    #     # upload a certificate for the AWS account:
+    #     iam.signing_certificates.upload(<<-CERT)
+    #     -----BEGIN CERTIFICATE-----
+    #     MIICdzCCAeCgAwIBAgIFGS4fY6owDQYJKoZIhvcNAQEFBQAwUzELMAkGA1UEBhMC
+    #     ......
+    #     Glli79yh87PRi0vNDlFEoHXNynkvC/c4TiWruZ4haM9BR9EdWr1DBNNu73ui093K
+    #     F9TbdXSWdgMl7E0=
+    #     -----END CERTIFICATE-----
+    #     CERT
     #
     # If you want to work with an IAM user's certificates just use the
     # signing certificate interface on a user:
     #
-    #   user = iam.users['someuser']
-    #   user.signing_certificates.upload(cert_body)
+    #     user = iam.users['someuser']
+    #     user.signing_certificates.upload(cert_body)
     #
     class SigningCertificateCollection
 
       include Collection
 
       # @param [Hash] options
-      # @option options [User] :user (nil) When +:user+ is provided the
+      # @option options [User] :user (nil) When `:user` is provided the
       #   collection will represents the signing certificates belonging only
-      #   to that user.  When +:user+ is omitted the collection will manage
+      #   to that user.  When `:user` is omitted the collection will manage
       #   root credentials on the AWS account (instead those belonging to a
       #   particular user).
       def initialize options = {}
@@ -49,13 +49,13 @@ module AWS
         @user ? super(@user, options) : super(options)
       end
 
-      # @return [User,nil] Returns the user this collection belongs to.  
-      #   Returns +nil+ if the collection represents the root credentials
-      #   for the account.  If the configured credentials belong to an 
+      # @return [User,nil] Returns the user this collection belongs to.
+      #   Returns `nil` if the collection represents the root credentials
+      #   for the account.  If the configured credentials belong to an
       #   IAM user, then that user is the implied owner.
       attr_reader :user
 
-      # @param [String] certificate_body The contents of the signing 
+      # @param [String] certificate_body The contents of the signing
       #   certificate.
       # @return [SigningCertificate] Returns the newly created signing
       #   certificate.
@@ -67,7 +67,7 @@ module AWS
 
         resp = client.upload_signing_certificate(options)
 
-        SigningCertificate.new_from(:upload_signing_certificate, 
+        SigningCertificate.new_from(:upload_signing_certificate,
           resp.certificate, resp.certificate.certificate_id, new_options)
 
       end
@@ -92,14 +92,14 @@ module AWS
 
       # Yields once for each signing certificate.
       #
-      # You can limit the number of certificates yielded using +:limit+.
+      # You can limit the number of certificates yielded using `:limit`.
       #
       # @param [Hash] options
       # @option options [Integer] :limit The maximum number of certificates
       #   to yield.
-      # @option options [Integer] :batch_size The maximum number of 
+      # @option options [Integer] :batch_size The maximum number of
       #   certificates received each service reqeust.
-      # @yieldparam [SigningCertificate] signing_certificate 
+      # @yieldparam [SigningCertificate] signing_certificate
       # @return [nil]
       def each options = {}, &block
         each_options = options.dup
@@ -107,12 +107,12 @@ module AWS
         super(each_options, &block)
       end
 
-      # @private
+      # @api private
       protected
       def each_item response, &block
         response.certificates.each do |item|
 
-          cert = SigningCertificate.new_from(:list_signing_certificates, 
+          cert = SigningCertificate.new_from(:list_signing_certificates,
             item, item.certificate_id, new_options)
 
           yield(cert)
@@ -120,7 +120,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def new_options
         user ? { :user => user } : { :config => config }

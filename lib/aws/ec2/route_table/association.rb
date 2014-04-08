@@ -22,55 +22,55 @@ module AWS
       # * enumerating associations from a route table
       # * Asking a subnet for its route table association
       #
-      # == Enumerating Associations
+      # ## Enumerating Associations
       #
       # Given a route table:
       #
-      #   route_table.associations.each do |assoc|
-      #     if assoc.main? # main association does not have a subnet
-      #       puts "#{assoc.id} : main association"
-      #     else
-      #       puts "#{assoc.id} : #{assoc.subnet.id}"
+      #     route_table.associations.each do |assoc|
+      #       if assoc.main? # main association does not have a subnet
+      #         puts "#{assoc.id} : main association"
+      #       else
+      #         puts "#{assoc.id} : #{assoc.subnet.id}"
+      #       end
       #     end
-      #   end
       #
-      # == Getting a Subnet Route Table Association
+      # ## Getting a Subnet Route Table Association
       #
       # All subnets are associated with a route table.  If the association
       # was never explicitly created, then they are associated by default
       # with the main route table.
       #
-      #   subnet.route_table_association #=> AWS::EC2::RouteTable::Association
+      #     subnet.route_table_association #=> AWS::EC2::RouteTable::Association
       #
-      #   subnet.route_table_association.main? #=> true/false
+      #     subnet.route_table_association.main? #=> true/false
       #
-      # == Creating and Replacing a Route Table Association
+      # ## Creating and Replacing a Route Table Association
       #
       # To replace a route table association start at the subnet end:
       #
-      #   subnet.route_table = some_other_route_table
+      #     subnet.route_table = some_other_route_table
       #
       # If this route table is associated (by default) to the main route
       # table via the main (default) association a new association is created.
       # If it was previously associated directly to a different route table
       # then that association will be repalced.
       #
-      # == Deleting an Association
+      # ## Deleting an Association
       #
       # You can delete all but the main route table association.  When you
       # delete an association, the subnet becomes associated with the
       # main route table.
       #
-      #   # delete all explicit route table associations -- as a result 
-      #   # all subnets will default to the main route table
-      #   vpc.subnets.each do |subnet|
-      #     assoc = subnet.route_table_association
-      #     assoc.delete unless assoc.main?
-      #   end
-      #   
+      #     # delete all explicit route table associations -- as a result
+      #     # all subnets will default to the main route table
+      #     vpc.subnets.each do |subnet|
+      #       assoc = subnet.route_table_association
+      #       assoc.delete unless assoc.main?
+      #     end
+      #
       class Association
 
-        # @private
+        # @api private
         def initialize route_table, association_id, subnet_id
           @route_table = route_table
           @association_id = association_id
@@ -83,7 +83,7 @@ module AWS
           end
         end
 
-        # @return [String] An identifier representing the association 
+        # @return [String] An identifier representing the association
         #   between the network ACL and subnet.
         attr_reader :association_id
 
@@ -93,7 +93,7 @@ module AWS
         attr_reader :route_table
 
         # @return [Subnet,nil] Returns the subnet this association belongs.
-        #   If this is the main (default) association, then this method 
+        #   If this is the main (default) association, then this method
         #   returns nil.
         attr_reader :subnet
 

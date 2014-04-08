@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,6 +16,34 @@
 :target_prefix: OpsWorks_20130218.
 :api_version: '2013-02-18'
 :operations:
+- :name: AssignVolume
+  :method: :assign_volume
+  :inputs:
+    VolumeId:
+    - :string
+    - :required
+    InstanceId:
+    - :string
+  :outputs: {}
+- :name: AssociateElasticIp
+  :method: :associate_elastic_ip
+  :inputs:
+    ElasticIp:
+    - :string
+    - :required
+    InstanceId:
+    - :string
+  :outputs: {}
+- :name: AttachElasticLoadBalancer
+  :method: :attach_elastic_load_balancer
+  :inputs:
+    ElasticLoadBalancerName:
+    - :string
+    - :required
+    LayerId:
+    - :string
+    - :required
+  :outputs: {}
 - :name: CloneStack
   :method: :clone_stack
   :inputs:
@@ -25,6 +53,8 @@
     Name:
     - :string
     Region:
+    - :string
+    VpcId:
     - :string
     Attributes:
     - :map:
@@ -43,9 +73,19 @@
     - :string
     DefaultAvailabilityZone:
     - :string
+    DefaultSubnetId:
+    - :string
     CustomJson:
     - :string
+    ConfigurationManager:
+    - :structure:
+        Name:
+        - :string
+        Version:
+        - :string
     UseCustomCookbooks:
+    - :boolean
+    UseOpsworksSecurityGroups:
     - :boolean
     CustomCookbooksSource:
     - :structure:
@@ -68,6 +108,8 @@
     CloneAppIds:
     - :list:
       - :string
+    DefaultRootDeviceType:
+    - :string
   :outputs:
     StackId:
       :sym: :stack_id
@@ -78,6 +120,8 @@
     StackId:
     - :string
     - :required
+    Shortname:
+    - :string
     Name:
     - :string
     - :required
@@ -176,10 +220,22 @@
     - :string
     Os:
     - :string
+    AmiId:
+    - :string
     SshKeyName:
     - :string
     AvailabilityZone:
     - :string
+    SubnetId:
+    - :string
+    Architecture:
+    - :string
+    RootDeviceType:
+    - :string
+    InstallUpdatesOnBoot:
+    - :boolean
+    EbsOptimized:
+    - :boolean
   :outputs:
     InstanceId:
       :sym: :instance_id
@@ -227,9 +283,15 @@
           Size:
           - :integer
           - :required
+          VolumeType:
+          - :string
+          Iops:
+          - :integer
     EnableAutoHealing:
     - :boolean
     AutoAssignElasticIps:
+    - :boolean
+    AutoAssignPublicIps:
     - :boolean
     CustomRecipes:
     - :structure:
@@ -248,6 +310,10 @@
         Shutdown:
         - :list:
           - :string
+    InstallUpdatesOnBoot:
+    - :boolean
+    UseEbsOptimizedInstances:
+    - :boolean
   :outputs:
     LayerId:
       :sym: :layer_id
@@ -261,6 +327,8 @@
     Region:
     - :string
     - :required
+    VpcId:
+    - :string
     Attributes:
     - :map:
         :key:
@@ -279,9 +347,19 @@
     - :string
     DefaultAvailabilityZone:
     - :string
+    DefaultSubnetId:
+    - :string
     CustomJson:
     - :string
+    ConfigurationManager:
+    - :structure:
+        Name:
+        - :string
+        Version:
+        - :string
     UseCustomCookbooks:
+    - :boolean
+    UseOpsworksSecurityGroups:
     - :boolean
     CustomCookbooksSource:
     - :structure:
@@ -299,6 +377,8 @@
         - :string
     DefaultSshKeyName:
     - :string
+    DefaultRootDeviceType:
+    - :string
   :outputs:
     StackId:
       :sym: :stack_id
@@ -313,6 +393,8 @@
     - :string
     SshPublicKey:
     - :string
+    AllowSelfManagement:
+    - :boolean
   :outputs:
     IamUserArn:
       :sym: :iam_user_arn
@@ -356,6 +438,20 @@
     - :string
     - :required
   :outputs: {}
+- :name: DeregisterElasticIp
+  :method: :deregister_elastic_ip
+  :inputs:
+    ElasticIp:
+    - :string
+    - :required
+  :outputs: {}
+- :name: DeregisterVolume
+  :method: :deregister_volume
+  :inputs:
+    VolumeId:
+    - :string
+    - :required
+  :outputs: {}
 - :name: DescribeApps
   :method: :describe_apps
   :inputs:
@@ -374,6 +470,9 @@
           :type: :string
         StackId:
           :sym: :stack_id
+          :type: :string
+        Shortname:
+          :sym: :shortname
           :type: :string
         Name:
           :sym: :name
@@ -545,6 +644,8 @@
   :inputs:
     InstanceId:
     - :string
+    StackId:
+    - :string
     Ips:
     - :list:
       - :string
@@ -559,8 +660,54 @@
         Name:
           :sym: :name
           :type: :string
+        Domain:
+          :sym: :domain
+          :type: :string
         Region:
           :sym: :region
+          :type: :string
+        InstanceId:
+          :sym: :instance_id
+          :type: :string
+- :name: DescribeElasticLoadBalancers
+  :method: :describe_elastic_load_balancers
+  :inputs:
+    StackId:
+    - :string
+    LayerIds:
+    - :list:
+      - :string
+  :outputs:
+    ElasticLoadBalancers:
+      :sym: :elastic_load_balancers
+      :type: :hash
+      :members:
+        ElasticLoadBalancerName:
+          :sym: :elastic_load_balancer_name
+          :type: :string
+        Region:
+          :sym: :region
+          :type: :string
+        DnsName:
+          :sym: :dns_name
+          :type: :string
+        StackId:
+          :sym: :stack_id
+          :type: :string
+        LayerId:
+          :sym: :layer_id
+          :type: :string
+        VpcId:
+          :sym: :vpc_id
+          :type: :string
+        AvailabilityZones:
+          :sym: :availability_zones
+          :type: :string
+        SubnetIds:
+          :sym: :subnet_ids
+          :type: :string
+        Ec2InstanceIds:
+          :sym: :ec_2_instance_ids
           :type: :string
 - :name: DescribeInstances
   :method: :describe_instances
@@ -568,8 +715,6 @@
     StackId:
     - :string
     LayerId:
-    - :string
-    AppId:
     - :string
     InstanceIds:
     - :list:
@@ -609,8 +754,14 @@
         Os:
           :sym: :os
           :type: :string
+        AmiId:
+          :sym: :ami_id
+          :type: :string
         AvailabilityZone:
           :sym: :availability_zone
+          :type: :string
+        SubnetId:
+          :sym: :subnet_id
           :type: :string
         PublicDns:
           :sym: :public_dns
@@ -645,12 +796,26 @@
         LastServiceErrorId:
           :sym: :last_service_error_id
           :type: :string
+        Architecture:
+          :sym: :architecture
+          :type: :string
+        RootDeviceType:
+          :sym: :root_device_type
+          :type: :string
+        RootDeviceVolumeId:
+          :sym: :root_device_volume_id
+          :type: :string
+        InstallUpdatesOnBoot:
+          :sym: :install_updates_on_boot
+          :type: :boolean
+        EbsOptimized:
+          :sym: :ebs_optimized
+          :type: :boolean
 - :name: DescribeLayers
   :method: :describe_layers
   :inputs:
     StackId:
     - :string
-    - :required
     LayerIds:
     - :list:
       - :string
@@ -708,11 +873,20 @@
             Size:
               :sym: :size
               :type: :integer
+            VolumeType:
+              :sym: :volume_type
+              :type: :string
+            Iops:
+              :sym: :iops
+              :type: :integer
         EnableAutoHealing:
           :sym: :enable_auto_healing
           :type: :boolean
         AutoAssignElasticIps:
           :sym: :auto_assign_elastic_ips
+          :type: :boolean
+        AutoAssignPublicIps:
+          :sym: :auto_assign_public_ips
           :type: :boolean
         DefaultRecipes:
           :sym: :default_recipes
@@ -755,6 +929,12 @@
         CreatedAt:
           :sym: :created_at
           :type: :string
+        InstallUpdatesOnBoot:
+          :sym: :install_updates_on_boot
+          :type: :boolean
+        UseEbsOptimizedInstances:
+          :sym: :use_ebs_optimized_instances
+          :type: :boolean
 - :name: DescribeLoadBasedAutoScaling
   :method: :describe_load_based_auto_scaling
   :inputs:
@@ -817,15 +997,33 @@
             LoadThreshold:
               :sym: :load_threshold
               :type: :float
+- :name: DescribeMyUserProfile
+  :method: :describe_my_user_profile
+  :inputs: {}
+  :outputs:
+    UserProfile:
+      :sym: :user_profile
+      :type: :hash
+      :members:
+        IamUserArn:
+          :sym: :iam_user_arn
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        SshUsername:
+          :sym: :ssh_username
+          :type: :string
+        SshPublicKey:
+          :sym: :ssh_public_key
+          :type: :string
 - :name: DescribePermissions
   :method: :describe_permissions
   :inputs:
     IamUserArn:
     - :string
-    - :required
     StackId:
     - :string
-    - :required
   :outputs:
     Permissions:
       :sym: :permissions
@@ -843,6 +1041,9 @@
         AllowSudo:
           :sym: :allow_sudo
           :type: :boolean
+        Level:
+          :sym: :level
+          :type: :string
 - :name: DescribeRaidArrays
   :method: :describe_raid_arrays
   :inputs:
@@ -886,6 +1087,12 @@
         CreatedAt:
           :sym: :created_at
           :type: :string
+        VolumeType:
+          :sym: :volume_type
+          :type: :string
+        Iops:
+          :sym: :iops
+          :type: :integer
 - :name: DescribeServiceErrors
   :method: :describe_service_errors
   :inputs:
@@ -919,6 +1126,78 @@
         CreatedAt:
           :sym: :created_at
           :type: :string
+- :name: DescribeStackSummary
+  :method: :describe_stack_summary
+  :inputs:
+    StackId:
+    - :string
+    - :required
+  :outputs:
+    StackSummary:
+      :sym: :stack_summary
+      :type: :hash
+      :members:
+        StackId:
+          :sym: :stack_id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Arn:
+          :sym: :arn
+          :type: :string
+        LayersCount:
+          :sym: :layers_count
+          :type: :integer
+        AppsCount:
+          :sym: :apps_count
+          :type: :integer
+        InstancesCount:
+          :sym: :instances_count
+          :type: :hash
+          :members:
+            Booting:
+              :sym: :booting
+              :type: :integer
+            ConnectionLost:
+              :sym: :connection_lost
+              :type: :integer
+            Online:
+              :sym: :online
+              :type: :integer
+            Pending:
+              :sym: :pending
+              :type: :integer
+            Rebooting:
+              :sym: :rebooting
+              :type: :integer
+            Requested:
+              :sym: :requested
+              :type: :integer
+            RunningSetup:
+              :sym: :running_setup
+              :type: :integer
+            SetupFailed:
+              :sym: :setup_failed
+              :type: :integer
+            ShuttingDown:
+              :sym: :shutting_down
+              :type: :integer
+            StartFailed:
+              :sym: :start_failed
+              :type: :integer
+            Stopped:
+              :sym: :stopped
+              :type: :integer
+            Stopping:
+              :sym: :stopping
+              :type: :integer
+            Terminated:
+              :sym: :terminated
+              :type: :integer
+            Terminating:
+              :sym: :terminating
+              :type: :integer
 - :name: DescribeStacks
   :method: :describe_stacks
   :inputs:
@@ -936,8 +1215,14 @@
         Name:
           :sym: :name
           :type: :string
+        Arn:
+          :sym: :arn
+          :type: :string
         Region:
           :sym: :region
+          :type: :string
+        VpcId:
+          :sym: :vpc_id
           :type: :string
         Attributes:
           :sym: :attributes
@@ -960,11 +1245,27 @@
         DefaultAvailabilityZone:
           :sym: :default_availability_zone
           :type: :string
+        DefaultSubnetId:
+          :sym: :default_subnet_id
+          :type: :string
         CustomJson:
           :sym: :custom_json
           :type: :string
+        ConfigurationManager:
+          :sym: :configuration_manager
+          :type: :hash
+          :members:
+            Name:
+              :sym: :name
+              :type: :string
+            Version:
+              :sym: :version
+              :type: :string
         UseCustomCookbooks:
           :sym: :use_custom_cookbooks
+          :type: :boolean
+        UseOpsworksSecurityGroups:
+          :sym: :use_opsworks_security_groups
           :type: :boolean
         CustomCookbooksSource:
           :sym: :custom_cookbooks_source
@@ -993,6 +1294,9 @@
           :type: :string
         CreatedAt:
           :sym: :created_at
+          :type: :string
+        DefaultRootDeviceType:
+          :sym: :default_root_device_type
           :type: :string
 - :name: DescribeTimeBasedAutoScaling
   :method: :describe_time_based_auto_scaling
@@ -1061,7 +1365,6 @@
     IamUserArns:
     - :list:
       - :string
-    - :required
   :outputs:
     UserProfiles:
       :sym: :user_profiles
@@ -1079,10 +1382,15 @@
         SshPublicKey:
           :sym: :ssh_public_key
           :type: :string
+        AllowSelfManagement:
+          :sym: :allow_self_management
+          :type: :boolean
 - :name: DescribeVolumes
   :method: :describe_volumes
   :inputs:
     InstanceId:
+    - :string
+    StackId:
     - :string
     RaidArrayId:
     - :string
@@ -1127,6 +1435,29 @@
         AvailabilityZone:
           :sym: :availability_zone
           :type: :string
+        VolumeType:
+          :sym: :volume_type
+          :type: :string
+        Iops:
+          :sym: :iops
+          :type: :integer
+- :name: DetachElasticLoadBalancer
+  :method: :detach_elastic_load_balancer
+  :inputs:
+    ElasticLoadBalancerName:
+    - :string
+    - :required
+    LayerId:
+    - :string
+    - :required
+  :outputs: {}
+- :name: DisassociateElasticIp
+  :method: :disassociate_elastic_ip
+  :inputs:
+    ElasticIp:
+    - :string
+    - :required
+  :outputs: {}
 - :name: GetHostnameSuggestion
   :method: :get_hostname_suggestion
   :inputs:
@@ -1147,6 +1478,31 @@
     - :string
     - :required
   :outputs: {}
+- :name: RegisterElasticIp
+  :method: :register_elastic_ip
+  :inputs:
+    ElasticIp:
+    - :string
+    - :required
+    StackId:
+    - :string
+    - :required
+  :outputs:
+    ElasticIp:
+      :sym: :elastic_ip
+      :type: :string
+- :name: RegisterVolume
+  :method: :register_volume
+  :inputs:
+    Ec2VolumeId:
+    - :string
+    StackId:
+    - :string
+    - :required
+  :outputs:
+    VolumeId:
+      :sym: :volume_id
+      :type: :string
 - :name: SetLoadBasedAutoScaling
   :method: :set_load_based_auto_scaling
   :inputs:
@@ -1197,6 +1553,8 @@
     - :boolean
     AllowSudo:
     - :boolean
+    Level:
+    - :string
   :outputs: {}
 - :name: SetTimeBasedAutoScaling
   :method: :set_time_based_auto_scaling
@@ -1277,6 +1635,13 @@
     - :string
     - :required
   :outputs: {}
+- :name: UnassignVolume
+  :method: :unassign_volume
+  :inputs:
+    VolumeId:
+    - :string
+    - :required
+  :outputs: {}
 - :name: UpdateApp
   :method: :update_app
   :inputs:
@@ -1325,6 +1690,15 @@
         :value:
         - :string
   :outputs: {}
+- :name: UpdateElasticIp
+  :method: :update_elastic_ip
+  :inputs:
+    ElasticIp:
+    - :string
+    - :required
+    Name:
+    - :string
+  :outputs: {}
 - :name: UpdateInstance
   :method: :update_instance
   :inputs:
@@ -1342,8 +1716,14 @@
     - :string
     Os:
     - :string
+    AmiId:
+    - :string
     SshKeyName:
     - :string
+    Architecture:
+    - :string
+    InstallUpdatesOnBoot:
+    - :boolean
   :outputs: {}
 - :name: UpdateLayer
   :method: :update_layer
@@ -1383,9 +1763,15 @@
           Size:
           - :integer
           - :required
+          VolumeType:
+          - :string
+          Iops:
+          - :integer
     EnableAutoHealing:
     - :boolean
     AutoAssignElasticIps:
+    - :boolean
+    AutoAssignPublicIps:
     - :boolean
     CustomRecipes:
     - :structure:
@@ -1404,6 +1790,16 @@
         Shutdown:
         - :list:
           - :string
+    InstallUpdatesOnBoot:
+    - :boolean
+    UseEbsOptimizedInstances:
+    - :boolean
+  :outputs: {}
+- :name: UpdateMyUserProfile
+  :method: :update_my_user_profile
+  :inputs:
+    SshPublicKey:
+    - :string
   :outputs: {}
 - :name: UpdateStack
   :method: :update_stack
@@ -1429,8 +1825,16 @@
     - :string
     DefaultAvailabilityZone:
     - :string
+    DefaultSubnetId:
+    - :string
     CustomJson:
     - :string
+    ConfigurationManager:
+    - :structure:
+        Name:
+        - :string
+        Version:
+        - :string
     UseCustomCookbooks:
     - :boolean
     CustomCookbooksSource:
@@ -1449,6 +1853,10 @@
         - :string
     DefaultSshKeyName:
     - :string
+    DefaultRootDeviceType:
+    - :string
+    UseOpsworksSecurityGroups:
+    - :boolean
   :outputs: {}
 - :name: UpdateUserProfile
   :method: :update_user_profile
@@ -1459,5 +1867,18 @@
     SshUsername:
     - :string
     SshPublicKey:
+    - :string
+    AllowSelfManagement:
+    - :boolean
+  :outputs: {}
+- :name: UpdateVolume
+  :method: :update_volume
+  :inputs:
+    VolumeId:
+    - :string
+    - :required
+    Name:
+    - :string
+    MountPoint:
     - :string
   :outputs: {}

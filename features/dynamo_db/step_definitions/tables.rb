@@ -91,7 +91,7 @@ end
 
 When /^I update the provisioning throughput to (\d+) rcu and (\d+) wcu$/ do |rcu, wcu|
   @table.provision_throughput(
-    :read_capacity_units => rcu.to_i, 
+    :read_capacity_units => rcu.to_i,
     :write_capacity_units => wcu.to_i)
 end
 
@@ -101,4 +101,14 @@ end
 
 Then /^the table should support (\d+) write capacity units$/ do |wcu|
   @table.write_capacity_units.should == wcu.to_i
+end
+
+Then(/^I should be able to view table attributes as method calls$/) do
+  @table.creation_date_time.should be_a_kind_of(Time)
+  @table.item_count.should be_a_kind_of(Fixnum)
+  @table.name.should be_a_kind_of(String)
+  @table.size_bytes.should be_a_kind_of(Fixnum)
+  @table.status.should be_a_kind_of(Symbol)
+  @table.read_capacity_units.should be_a_kind_of(Fixnum)
+  @table.write_capacity_units.should be_a_kind_of(Fixnum)
 end

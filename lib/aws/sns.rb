@@ -13,52 +13,52 @@
 
 require 'aws/core'
 require 'aws/sns/config'
+require 'aws/sns/message'
 
 module AWS
 
-  # This class is the starting point for working with Amazon Simple 
+  # This class is the starting point for working with Amazon Simple
   # Notification Service (SNS).
   #
-  # To use Amazon SNS you must first {sign up here}[http://aws.amazon.com/sns/].
+  # To use Amazon SNS you must first [sign up here](http://aws.amazon.com/sns/).
   #
   # For more information about Amazon SNS:
   #
-  # * {Amazon SNS}[http://aws.amazon.com/sns/]
-  # * {Amazon SNS Documentation}[http://aws.amazon.com/documentation/sns/]
+  # * [Amazon SNS](http://aws.amazon.com/sns/)
+  # * [Amazon SNS Documentation](http://aws.amazon.com/documentation/sns/)
   #
-  # = Credentials
+  # # Credentials
   #
-  # You can setup default credentials for all AWS services via 
+  # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
-  # 
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #
   # Or you can set them directly on the SNS interface:
   #
-  #   sns = AWS::SNS.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     sns = AWS::SNS.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # @!attribute [r] client
   #   @return [Client] the low-level SNS client object
   class SNS
 
-    AWS.register_autoloads(self) do
-      autoload :Client,                      'client'
-      autoload :Errors,                      'errors'
-      autoload :Policy,                      'policy'
-      autoload :HasDeliveryPolicy,           'has_delivery_policy'
-      autoload :Request,                     'request'
-      autoload :Subscription,                'subscription'
-      autoload :SubscriptionCollection,      'subscription_collection'
-      autoload :Topic,                       'topic'
-      autoload :TopicCollection,             'topic_collection'
-      autoload :TopicSubscriptionCollection, 'topic_subscription_collection'
-    end
+    autoload :Client, 'aws/sns/client'
+    autoload :Errors, 'aws/sns/errors'
+    autoload :Policy, 'aws/sns/policy'
+    autoload :HasDeliveryPolicy, 'aws/sns/has_delivery_policy'
+    autoload :Subscription, 'aws/sns/subscription'
+    autoload :SubscriptionCollection, 'aws/sns/subscription_collection'
+    autoload :Topic, 'aws/sns/topic'
+    autoload :TopicCollection, 'aws/sns/topic_collection'
+    autoload :TopicSubscriptionCollection, 'aws/sns/topic_subscription_collection'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'sns'
 
     # @return [TopicCollection] Returns a topic collection for managing
     #   SNS topics.

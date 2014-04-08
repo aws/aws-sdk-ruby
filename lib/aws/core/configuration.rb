@@ -19,39 +19,39 @@ module AWS
 
     # A configuration object for AWS interfaces and clients.
     #
-    # == Configuring Credentials
+    # ## Configuring Credentials
     #
     # In order to do anything with AWS you will need to assign credentials.
     # The simplest method is to assign your credentials into the default
     # configuration:
     #
-    #   AWS.config(:access_key_id => 'KEY', :secret_access_key => 'SECRET')
+    #     AWS.config(:access_key_id => 'KEY', :secret_access_key => 'SECRET')
     #
     # You can also export them into your environment and they will be picked up
     # automatically:
     #
-    #   export AWS_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
-    #   export AWS_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
+    #     export AWS_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
+    #     export AWS_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
     #
     # For compatability with other AWS gems, the credentials can also be
     # exported like:
     #
-    #   export AMAZON_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
-    #   export AMAZON_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
+    #     export AMAZON_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
+    #     export AMAZON_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
     #
-    # == Modifying a Configuration
+    # ## Modifying a Configuration
     #
     # Configuration objects are read-only.  If you need a different set of
     # configuration values, call {#with}, passing in the updates
     # and a new configuration object will be returned.
     #
-    #   config = Configuration.new(:max_retires => 3)
-    #   new_config = config.with(:max_retries => 2)
+    #     config = Configuration.new(:max_retries => 3)
+    #     new_config = config.with(:max_retries => 2)
     #
-    #   config.max_retries #=> 3
-    #   new_config.max_retries #=> 2
+    #     config.max_retries #=> 3
+    #     new_config.max_retries #=> 2
     #
-    # == Global Configuration
+    # ## Global Configuration
     #
     # The global default configuration can be found at {AWS.config}
     #
@@ -63,50 +63,37 @@ module AWS
     #
     # @attr_reader [String,nil] session_token (nil) AWS secret token credential.
     #
-    # @attr_reader [String] auto_scaling_endpoint ('autoscaling.us-east-1.amazonaws.com')
-    #   The service endpoint for Auto Scaling.
+    # @attr_reader [String] region
+    #   The AWS region used for requests. The default is `us-east-1`.
     #
-    # @attr_reader [String] cloud_formation_endpoint ('cloudformation.us-east-1.amazonaws.com')
-    #   The service endpoint for AWS CloudFormation.
-    #
-    # @attr_reader [String] cloud_front_endpoint ('cloudfront.amazonaws.com')
-    #   The service endpoint for Amazon CloudFront.
-    #
-    # @attr_reader [String] cloud_search ('cloudsearch.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon CloudSearch.
-    #
-    # @attr_reader [String] cloud_watch_endpoint ('monitoring.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon CloudWatch.
-    #
-    # @attr_reader [Boolean] dynamo_db_big_decimals (true) When +true+,
+    # @attr_reader [Boolean] dynamo_db_big_decimals (true) When `true`,
     #   {DynamoDB} will convert number values returned by {DynamoDB::Client}
-    #   from strings to BigDecimal objects.  If you set this to +false+,
+    #   from strings to BigDecimal objects.  If you set this to `false`,
     #   they will be converted from strings into floats (with a potential
     #   loss of precision).
-    #
-    # @attr_reader [String] dynamo_db_endpoint ('dynamodb.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon DynamoDB.
     #
     # @attr_reader [Boolean] dynamo_db_retry_throughput_errors (true) When
     #   true, AWS::DynamoDB::Errors::ProvisionedThroughputExceededException
     #   errors will be retried.
     #
-    # @attr_reader [String] ec2_endpoint ('ec2.amazonaws.com')
-    #   The service endpoint for Amazon EC2.
+    # @attr_reader [Float] http_continue_timeout (1) The number of
+    #   seconds to wait for a "100-continue" response before sending the request
+    #   payload.  **This option has no effect unless the {#http_continue_threshold}
+    #   is configured to a positive integer and the payload exeedes the
+    #   threshold.** NOTE: currently there is a bug in Net::HTTP.
+    #   You must call `AWS.patch_net_http_100_continue!` for this feature to work.
+    #   Not supported in Ruby < 1.9.
     #
-    # @attr_reader [String] elasticache_endpoint ('elasticache.us-east-1.amazonaws.com')
-    #
-    # @attr_reader [String] elastic_beanstalk_endpoint ('elasticbeanstalk.us-east-1.amazonaws.com')
-    #   The service endpoint for AWS Elastic Beanstalk.
-    #
-    # @attr_reader [String] elastic_transcoder_endpoint ('elastictranscoder.us-east-1.amazonaws.com')
-    #   The service endpoint for Elastic Transcoder.
-    #
-    # @attr_reader [String] elb_endpoint ('elasticloadbalancing.us-east-1.amazonaws.com')
-    #   The service endpoint for Elastic Load Balancing.
-    #
-    # @attr_reader [String] glacier_endpoint ('glacier.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon Glacier.
+    # @attr_reader [Integer,false] http_continue_threshold (false) If a request
+    #   body exceedes the {#http_continue_threshold} size (in bytes), then
+    #   an "Expect" header will be added to the request with the value of
+    #   "100-continue".  This will cause the SDK to wait up to
+    #   {#http_continue_timeout} seconds for a 100 Contiue HTTP response
+    #   before sending the request payload.  By default, this feature
+    #   is disbled.  Set this option to a positive number of bytes
+    #   to enable 100 continues.  NOTE: currently there is a bug in Net::HTTP.
+    #   You must call `AWS.patch_net_http_100_continue!` for this feature to work.
+    #   Not supported in Ruby < 1.9.
     #
     # @attr_reader [Object] http_handler The http handler that sends requests
     #   to AWS.  Defaults to an HTTP handler built on net/http.
@@ -116,22 +103,16 @@ module AWS
     #   longer be used.
     #
     # @attr_reader [Integer] http_open_timeout The number of seconds before
-    #   the +http_handler+ should timeout while trying to open a new HTTP
+    #   the `http_handler` should timeout while trying to open a new HTTP
     #   session.
     #
     # @attr_reader [Integer] http_read_timeout The number of seconds before
-    #   the +http_handler+ should timeout while waiting for a HTTP
+    #   the `http_handler` should timeout while waiting for a HTTP
     #   response.
     #
-    # @attr_reader [Boolean] http_wire_trace When +true+, the http handler
-    #   will log all wire traces to the +:logger+.  If a +:logger+ is not
+    # @attr_reader [Boolean] http_wire_trace When `true`, the http handler
+    #   will log all wire traces to the `:logger`.  If a `:logger` is not
     #   configured, then wire traces will be sent to standard out.
-    #
-    # @attr_reader [String] iam_endpoint ('iam.amazonaws.com')
-    #   The service endpoint for AWS Identity Access Management (IAM).
-    #
-    # @attr_reader [String] import_export_endpoint ('importexport.amazonaws.com')
-    #   The service endpoint for AWS Import/Export.
     #
     # @attr_reader [Logger,nil] logger (nil) The logging interface.
     #
@@ -140,30 +121,15 @@ module AWS
     # @attr_reader [LogFormatter] log_formatter The log message formatter.
     #
     # @attr_reader [Integer] max_retries (3) The maximum number of times
-    #   service errors (500) should be retried.  There is an exponential
-    #   backoff in between service request retries, so the more retries the
+    #   service errors (500) and throttling errors should be retried. There is
+    #   an exponential backoff in between retries, so the more retries the
     #   longer it can take to fail.
     #
     # @attr_reader [URI,nil] proxy_uri (nil) The URI of the proxy
     #    to send service requests through.
     #
-    # @attr_reader [URI,nil] route_53_endpoint ('route53.amazonaws.com')
-    #   The service endpoint for Amazon Route 53.
-    #
-    # @attr_reader [URI,nil] ops_works_endpoint ('opsworks.us-east-1.amazonaws.com')
-    #   The service endpoint for AWS OpsWorks.
-    #
-    # @attr_reader [URI,nil] redshift_endpoint ('redshift.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon Redshift.
-    #
-    # @attr_reader [URI,nil] rds_endpoint ('rds.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon Relational Database Service (RDS).
-    #
-    # @attr_reader [String] s3_endpoint ('s3.amazonaws.com')
-    #   The service endpoint for Amazon S3.
-    #
     # @attr_reader [Boolean] s3_force_path_style (false) When
-    #   +true+, requests will always use path style.  This can be useful
+    #   `true`, requests will always use path style.  This can be useful
     #   for testing environments.
     #
     # @attr_reader [Integer] s3_multipart_max_parts (10000)
@@ -172,9 +138,9 @@ module AWS
     #
     # @attr_reader [Integer] s3_multipart_threshold (16777216) When uploading
     #   data to S3, if the number of bytes to send exceeds
-    #   +:s3_multipart_threshold+ then a multi part session is automatically
+    #   `:s3_multipart_threshold` then a multi part session is automatically
     #   started and the data is sent up in chunks.  The size of each part
-    #   is specified by +:s3_multipart_min_part_size+. Defaults to
+    #   is specified by `:s3_multipart_min_part_size`. Defaults to
     #   16777216 (16MB).
     #
     # @attr_reader [Integer] s3_multipart_min_part_size (5242880)
@@ -183,23 +149,23 @@ module AWS
     #
     # @attr_reader [Symbol] s3_server_side_encryption The algorithm to
     #   use when encrypting object data on the server side.  The only
-    #   valid value is +:aes256+, which specifies that the object
+    #   valid value is `:aes256`, which specifies that the object
     #   should be stored using the AES encryption algorithm with 256
-    #   bit keys.  Defaults to +nil+, meaning server side encryption
+    #   bit keys.  Defaults to `nil`, meaning server side encryption
     #   is not used unless specified on each individual call to upload
     #   an object.  This option controls the default behavior for the
     #   following method:
     #
-    #   * {S3::S3Object#write}
-    #   * {S3::S3Object#multipart_upload}
-    #   * {S3::S3Object#copy_from} and {S3::S3Object#copy_to}
-    #   * {S3::S3Object#presigned_post}
-    #   * {S3::Bucket#presigned_post}
+    #     * {S3::S3Object#write}
+    #     * {S3::S3Object#multipart_upload}
+    #     * {S3::S3Object#copy_from} and {S3::S3Object#copy_to}
+    #     * {S3::S3Object#presigned_post}
+    #     * {S3::Bucket#presigned_post}
     #
     #   You can construct an interface to Amazon S3 which always
     #   stores data using server side encryption as follows:
     #
-    #     s3 = AWS::S3.new(:s3_server_side_encryption => :aes256)
+    #       s3 = AWS::S3.new(:s3_server_side_encryption => :aes256)
     #
     # @attr_reader [OpenSSL::PKey::RSA, String] s3_encryption_key
     #   If this is set, AWS::S3::S3Object #read and #write methods will always
@@ -208,22 +174,17 @@ module AWS
     #   means that client-side encryption will not be used.
     #
     # @attr_reader [Symbol] s3_encryption_materials_location
-    #   When set to +:instruction_file+, AWS::S3::S3Object will store
+    #   When set to `:instruction_file`, AWS::S3::S3Object will store
     #   encryption materials in a separate object, instead of the object
     #   metadata.
-    #
-    # @attr_reader [String] simple_db_endpoint ('sdb.amazonaws.com')
-    #   The service endpoint for Amazon SimpleDB.
     #
     # @attr_reader [Boolean] simple_db_consistent_reads (false) Determines
     #   if all SimpleDB read requests should be done consistently.
     #   Consistent reads are slower, but reflect all changes to SDB.
     #
-    # @attr_reader [String] simple_email_service_endpoint ('email.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon Simple Email Service.
-    #
-    # @attr_reader [String] simple_workflow_endpoint ('swf.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon Simple Workflow Service.
+    # @attr_reader [Boolean] sqs_verify_checksums (true)
+    #   When `true` all SQS operations will check body content against
+    #   MD5 checksums, raising an exception if there is a mismatch.
     #
     # @attr_reader [CredentialProvider::Provider] credential_provider
     #   Returns the object that is responsible for loading credentials.
@@ -231,7 +192,7 @@ module AWS
     # @attr_reader [String] ssl_ca_file The path to a CA cert bundle in
     #   PEM format.
     #
-    #   If +ssl_verify_peer+ is true (the default) this bundle will be
+    #   If `ssl_verify_peer` is true (the default) this bundle will be
     #   used to validate the server certificate in each HTTPS request.
     #   The AWS SDK for Ruby ships with a CA cert bundle, which is the
     #   default value for this option.
@@ -239,36 +200,30 @@ module AWS
     # @attr_reader [String] ssl_ca_path (nil)
     #   The path the a CA cert directory.
     #
-    # @attr_reader [Boolean] ssl_verify_peer (true) When +true+
+    # @attr_reader [Boolean] ssl_verify_peer (true) When `true`
     #   the HTTP handler validate server certificates for HTTPS requests.
     #
     #   This option should only be disabled for diagnostic purposes;
-    #   leaving this option set to +false+ exposes your application to
+    #   leaving this option set to `false` exposes your application to
     #   man-in-the-middle attacks and can pose a serious security
     #   risk.
     #
-    # @attr_reader [Boolean] stub_requests (false) When +true+ requests are not
+    # @attr_reader [Boolean] stub_requests (false) When `true` requests are not
     #   sent to AWS, instead empty responses are generated and returned to
     #   each service request.
     #
-    # @attr_reader [String] sns_endpoint ('sns.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon SNS.
-    #
-    # @attr_reader [String] sqs_endpoint ('sqs.us-east-1.amazonaws.com')
-    #   The service endpoint for Amazon SQS.
-    #
-    # @attr_reader [String] :storage_gateway_endpoint ('storagegateway.us-east-1.amazonaws.com')
-    #   The service endpoint for AWS Storage Gateway.
-    #
-    # @attr_reader [String] sts_endpoint ('sts.amazonaws.com')
-    #   The service endpoint for AWS Security Token Service.
-    #
-    # @attr_reader [Boolean] use_ssl (true) When +true+, all requests
+    # @attr_reader [Boolean] use_ssl (true) When `true`, all requests
     #   to AWS are sent using HTTPS instead vanilla HTTP.
     #
     # @attr_reader [String] user_agent_prefix (nil) A string prefix to
     #   append to all requests against AWS services.  This should be set
     #   for clients and applications built on top of the aws-sdk gem.
+    #
+    # @attr_reader [Boolean] verify_response_body_content_length (true)
+    #   When `true` all HTTP handlers will perform a check to ensure
+    #   that response bodies match the content-length specified in the
+    #   response header, if present. Note that some HTTP handlers will
+    #   always do this whether or not this value is true.
     #
     class Configuration
 
@@ -289,6 +244,11 @@ module AWS
         options.each_pair do |opt_name, value|
           opt_name = opt_name.to_sym
           if self.class.accepted_options.include?(opt_name)
+            #if opt_name.to_s =~ /_endpoint$/
+            #  warning = ":#{opt_name} is a deprecated AWS configuration option, "
+            #  warning << "use :region instead"
+            #  warn(warning)
+            #end
             supplied[opt_name] = value
           end
         end
@@ -309,23 +269,23 @@ module AWS
       # Used to create a new Configuration object with the given modifications.
       # The current configuration object is not modified.
       #
-      #   AWS.config(:max_retries => 2)
+      #     AWS.config(:max_retries => 2)
       #
-      #   no_retries_config = AWS.config.with(:max_retries => 0)
+      #     no_retries_config = AWS.config.with(:max_retries => 0)
       #
-      #   AWS.config.max_retries        #=> 2
-      #   no_retries_config.max_retries #=> 0
+      #     AWS.config.max_retries        #=> 2
+      #     no_retries_config.max_retries #=> 0
       #
       # You can use these configuration objects returned by #with to create
       # AWS objects:
       #
-      #   AWS::S3.new(:config => no_retries_config)
-      #   AWS::SQS.new(:config => no_retries_config)
+      #     AWS::S3.new(:config => no_retries_config)
+      #     AWS::SQS.new(:config => no_retries_config)
       #
       # @param options (see AWS.config)
       # @option options (see AWS.config)
       # @return [Configuration] Copies the current configuration and returns
-      #   a new one with modifications as provided in +:options+.
+      #   a new one with modifications as provided in `:options`.
       def with options = {}
 
         # symbolize option keys
@@ -356,9 +316,16 @@ module AWS
       end
       alias_method :==, :eql?
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class.name}>"
+      end
+
+      # @api private
+      def endpoint_region(svc)
+        (supplied[svc.method_name] || {})[:region] or
+        supplied[:"#{svc.old_name}_region"] or
+        region
       end
 
       protected
@@ -369,12 +336,12 @@ module AWS
 
       class << self
 
-        # @private
+        # @api private
         def accepted_options
           @options ||= Set.new
         end
 
-        # @private
+        # @api private
         def add_option name, default_value = nil, options = {}, &transform
 
           accepted_options << name
@@ -401,7 +368,7 @@ module AWS
         # Configuration options that have dependencies are re-recreated
         # anytime one of their dependent configuration values are
         # changed.
-        # @private
+        # @api private
         def add_option_with_needs name, needs, &create_block
 
           accepted_options << name
@@ -413,9 +380,10 @@ module AWS
             needed = needs.inject({}) {|h,need| h.merge(need => send(need)) }
 
             unless @created.key?(name) and @created[name][:needed] == needed
-              @created[name] = {}
-              @created[name][:object] = create_block.call(self,needed)
-              @created[name][:needed] = needed
+              created = {}
+              created[:object] = create_block.call(self,needed)
+              created[:needed] = needed
+              @created[name] = created
             end
 
             @created[name][:object]
@@ -424,18 +392,41 @@ module AWS
 
         end
 
-        def add_service name, ruby_name, default_endpoint
+        def add_service name, ruby_name, endpoint_prefix
 
-          add_option :"#{ruby_name}_endpoint", default_endpoint
+          svc = SERVICES[name]
+          svc_opt = svc.method_name
+          ruby_name = svc.old_name
+
+          add_option(svc_opt, {})
+
+          add_option :"#{ruby_name}_endpoint" do |config,value|
+            region = config.endpoint_region(svc)
+            endpoint = value
+            endpoint ||= config.send(svc_opt)[:endpoint]
+            endpoint ||= Endpoints.hostname(region, endpoint_prefix)
+            endpoint ||= "#{endpoint_prefix}.#{region}.amazonaws.com"
+            endpoint
+          end
 
           add_option(:"#{ruby_name}_port") do |config,value|
-            value || (config.use_ssl? ? 443 : 80)
+            if value
+              value
+            elsif port = config.send(svc_opt)[:port]
+              port
+            else
+              config.use_ssl? ? 443 : 80
+            end
           end
 
           # users only need to specify service regions when they use
           # a test endpoint with a sigv4 service
           add_option(:"#{ruby_name}_region") do |config,value|
-            value || begin
+            if value
+              value
+            elsif region = config.send(svc_opt)[:region]
+              region
+            else
               endpoint = config.send("#{ruby_name}_endpoint")
               if endpoint =~ /us-gov/
                 if matches = endpoint.match(/(us-gov-west-\d+)/)
@@ -443,21 +434,24 @@ module AWS
                 else
                   'us-gov-west-1' # e.g. iam.us-gov.amazonaws.com
                 end
-              elsif matches = endpoint.match(/^.+\.(.+)\.amazonaws.com$/)
+              elsif matches = endpoint.match(/^.+?[.-](.+)\.amazonaws.com/)
                 matches[1]
               else
-                'us-east-1'
+                AWS.const_get(name).global_endpoint? ? 'us-east-1' : config.region
               end
             end
           end
 
           needs = [
+            :"#{svc_opt}",
             :"#{ruby_name}_endpoint",
             :"#{ruby_name}_port",
             :"#{ruby_name}_region",
             :credential_provider,
             :http_handler,
             :http_read_timeout,
+            :http_continue_timeout,
+            :http_continue_threshold,
             :log_formatter,
             :log_level,
             :logger,
@@ -472,7 +466,8 @@ module AWS
           ]
 
           create_block = lambda do |config,client_options|
-            AWS.const_get(name)::Client.new(:config => config)
+            options = client_options[:"#{svc_opt}"]
+            AWS.const_get(name)::Client.new(options.merge(:config => config))
           end
 
           add_option_with_needs :"#{ruby_name}_client", needs, &create_block
@@ -487,6 +482,10 @@ module AWS
 
       add_option :session_token
 
+      add_option :region do |cfg,region|
+        region || ENV['AWS_REGION'] || ENV['AMAZON_REGION'] || ENV['AWS_DEFAULT_REGION'] || 'us-east-1'
+      end
+
       add_option_with_needs :credential_provider,
         [:access_key_id, :secret_access_key, :session_token] do |cfg,static_creds|
 
@@ -498,20 +497,18 @@ module AWS
 
       add_option :http_read_timeout, 60
 
-      add_option :http_idle_timeout, 60
+      add_option :http_continue_timeout, 1
+
+      add_option :http_continue_threshold, false
+
+      add_option :http_idle_timeout, 5
 
       add_option :http_wire_trace, false, :boolean => true
 
-      add_option_with_needs :http_handler,
-        [
-          :http_open_timeout,
-          :http_idle_timeout,
-          :http_wire_trace,
-          :logger,
-        ] do |config,handler_options|
-
-        Http::NetHttpHandler.new(handler_options)
-
+      add_option_with_needs(:http_handler,
+        AWS::Core::Http::ConnectionPool::OPTIONS + [:verify_response_body_content_length]
+      ) do |config,options|
+        AWS::Core::Http::NetHttpHandler.new(options)
       end
 
       add_option :logger
@@ -537,6 +534,8 @@ module AWS
 
       add_option :user_agent_prefix
 
+      add_option :verify_response_body_content_length, true, :boolean => true
+      
     end
   end
 end

@@ -24,7 +24,7 @@ module AWS
 
       let(:batch) { BatchWrite.new(:config => config) }
 
-      let(:response) { 
+      let(:response) {
         resp = client.stub_for(:batch_write_item)
         resp.data['UnprocessedItems'] = {}
         resp
@@ -70,7 +70,7 @@ module AWS
               {:delete_request=>{:key=>{:hash_key_element=>{:s=>"id6"}}}},
             ]
           }).and_return(response)
-          
+
           batch.put('table1', [{:id=>'id1'},{:id=>'id2'},{:id=>'id3'}])
           batch.delete('table1', %w(id4 id5 id6))
           batch.process!
@@ -79,11 +79,11 @@ module AWS
         it 'can build a batch over multiple calls' do
           client.should_receive(:batch_write_item).with(:request_items => {
             "table1"=>[
-              {:put_request=>{:item=>{"id"=>{:s=>"id1"}}}}, 
+              {:put_request=>{:item=>{"id"=>{:s=>"id1"}}}},
               {:put_request=>{:item=>{"id"=>{:s=>"id2"}}}},
               {:delete_request=>{:key=>{:hash_key_element=>{:s=>"id3"}}}},
               {:delete_request=>{:key=>{:hash_key_element=>{:s=>"id4"}}}}
-            ], 
+            ],
             "table2"=>[
               {:put_request=>{:item=>{"id"=>{:s=>"id1"}}}},
               {:put_request=>{:item=>{"id"=>{:s=>"id2"}}}},
@@ -112,7 +112,7 @@ module AWS
       context 'unprocessed items' do
 
         it 'calls #batch_write_item again with converted unprocessed items' do
-          
+
           # return a mix of puts and deletes across multiple tables
 
           continue_resp = client.new_stub_for(:batch_write_item)

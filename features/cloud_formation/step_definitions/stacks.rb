@@ -73,7 +73,7 @@ Then /^the stack status should eventually be "([^"]*)"$/ do |status|
 end
 
 Then /^I should be able to locate the stack in the summarized stacks$/ do
-  @cloud_formation.stack_summaries.map{|s| s[:stack_name] }.should 
+  @cloud_formation.stack_summaries.map{|s| s[:stack_name] }.should
     include(@stack.name)
 end
 
@@ -119,7 +119,7 @@ When /^I create a stack with parameters$/ do
     'SecurityGroup' => @security_group.name,
     'InstanceType' => 'm1.large',
   }
-  @stack = @cloud_formation.stacks.create(@stack_name, @template, 
+  @stack = @cloud_formation.stacks.create(@stack_name, @template,
     :parameters => @stack_params)
   @created_stacks << @stack
 end
@@ -132,4 +132,14 @@ Then /^the stack should eventually have some events$/ do
   eventually do
     @stack.events.count.should > 0
   end
+end
+
+Given(/^I filter stacks by "(.*?)"$/) do |status|
+  @stacks ||= @cloud_formation.stacks
+  @stacks = @stacks.with_status(status)
+end
+
+When(/^I enumerate stacks$/) do
+  @stacks ||= @cloud_formation.stacks
+  @stacks.each {|stack|}
 end

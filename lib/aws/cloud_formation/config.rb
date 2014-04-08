@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'CloudFormation', 'cloud_formation', 'cloudformation.us-east-1.amazonaws.com'
+  add_service 'CloudFormation', 'cloud_formation', 'cloudformation'
 
 end

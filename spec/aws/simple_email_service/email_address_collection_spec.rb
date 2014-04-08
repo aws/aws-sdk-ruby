@@ -16,7 +16,7 @@ require 'spec_helper'
 module AWS
   class SimpleEmailService
     describe EmailAddressCollection do
-    
+
       let(:config) { stub_config }
 
       let(:client) { config.simple_email_service_client }
@@ -26,7 +26,7 @@ module AWS
       it_behaves_like 'enumerable'
 
       context '#create' do
-        
+
         it 'calls verify_email_address on the client' do
           client.should_receive(:verify_email_address).
             with(:email_address => 'foo@bar.com')
@@ -36,7 +36,7 @@ module AWS
       end
 
       context '#verify' do
-        
+
         it 'is an alias for #include?' do
           collection.method(:verify).should == collection.method(:create)
         end
@@ -44,7 +44,7 @@ module AWS
       end
 
       context '#verified?' do
-        
+
         it 'is an alias for #include?' do
           collection.method(:verified?).should == collection.method(:include?)
         end
@@ -52,7 +52,7 @@ module AWS
       end
 
       context '#delete' do
-        
+
         it 'calls delete_verified_email_address on the client' do
           client.should_receive(:delete_verified_email_address).
             with(:email_address => 'foo@bar.com')

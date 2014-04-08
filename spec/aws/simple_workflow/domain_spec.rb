@@ -52,7 +52,7 @@ module AWS
       end
 
       context '#exists?' do
-        
+
         it 'returns true when the domain can be described' do
           domain.exists?.should == true
         end
@@ -85,7 +85,7 @@ module AWS
           domain_desc['configuration']['workflowExecutionRetentionPeriodInDays'] = 'NONE'
           domain.retention_period.should == :none
         end
-        
+
       end
 
       context '#description' do
@@ -129,7 +129,7 @@ module AWS
             and_return(response)
           domain.status.should == :registered
         end
-        
+
         it 'returns the status as a symbol' do
           domain.status.should == :registered
         end

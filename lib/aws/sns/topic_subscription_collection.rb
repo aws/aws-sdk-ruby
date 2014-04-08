@@ -17,18 +17,18 @@ module AWS
     # Represents the collection of all subscriptions for a particular
     # topic.  For example:
     #
-    #  # get the e-mail addressess that receive plain-text
-    #  # messages sent to the topic
-    #  topic.subscriptions.
-    #    select { |s| s.protocol == :email }.
-    #    map(&:endpoint)
+    #     # get the e-mail addressess that receive plain-text
+    #     # messages sent to the topic
+    #     topic.subscriptions.
+    #       select { |s| s.protocol == :email }.
+    #       map(&:endpoint)
     #
     class TopicSubscriptionCollection < SubscriptionCollection
 
       include Core::Model
       include Enumerable
 
-      # @private
+      # @api private
       def initialize(topic, opts = {})
         @topic = topic
         super

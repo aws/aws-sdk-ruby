@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 AWS::Core::Configuration.module_eval do
-  
-  add_service 'IAM', 'iam', 'iam.amazonaws.com'
-  
+
+  add_service 'IAM', 'iam', 'iam'
+
 end

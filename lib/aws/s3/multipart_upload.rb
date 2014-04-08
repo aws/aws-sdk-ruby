@@ -19,11 +19,18 @@ module AWS
     # Represents a multipart upload to an S3 object.  See
     # {S3Object#multipart_upload} for a convenient way to initiate a
     # multipart upload.
+    # 
+    # Note: After you initiate multipart upload and upload one or more 
+    # parts, you must either complete or abort multipart upload in order 
+    # to stop getting charged for storage of the uploaded parts. Only 
+    # after you either complete or abort multipart upload, Amazon S3 
+    # frees up the parts storage and stops charging you for the parts 
+    # storage.
     class MultipartUpload
 
       include Core::Model
 
-      # @private
+      # @api private
       def initialize(object, id, options = {})
         @id = id
         @object = object
@@ -70,17 +77,17 @@ module AWS
         true
       end
 
-      # @return The upload initiator.  This object will have +:id+
-      #   and +:display_name+ methods; if the initiator is an IAM
-      #   user, the +:id+ method will return the ARN of the user, and
+      # @return The upload initiator.  This object will have `:id`
+      #   and `:display_name` methods; if the initiator is an IAM
+      #   user, the `:id` method will return the ARN of the user, and
       #   if the initiator is an AWS account, this method will return
       #   the same data as {#owner}.
       def initiator
         client.list_parts(base_opts).initiator
       end
 
-      # @return The upload owner.  This object will have +:id+
-      #   and +:display_name+ methods.
+      # @return The upload owner.  This object will have `:id`
+      #   and `:display_name` methods.
       def owner
         client.list_parts(base_opts).owner
       end
@@ -88,8 +95,8 @@ module AWS
       # @return [Symbol] The class of storage used to store the
       #   uploaded object.  Possible values:
       #
-      #   * +:standard+
-      #   * +:reduced_redundancy?+
+      #   * `:standard`
+      #   * `:reduced_redundancy?`
       def storage_class
         client.list_parts(base_opts).storage_class.downcase.to_sym
       end
@@ -129,57 +136,54 @@ module AWS
       #
       # @overload add_part(data, options = {})
       #
-      #   @param data The data to upload.  Valid values include:
+      #   @param data The data to upload.
+      #     Valid values include:
       #
-      #     * A string
+      #       * A string
+      #       * A Pathname object
+      #       * Any object responding to `read` and `eof?`; the object
+      #         must support the following access methods:
       #
-      #     * A Pathname object
+      #             read                     # all at once
+      #             read(length) until eof?  # in chunks
       #
-      #     * Any object responding to +read+ and +eof?+; the object
-      #       must support the following access methods:
-      #
-      #        read                     # all at once
-      #        read(length) until eof?  # in chunks
-      #
-      #       If you specify data this way, you must also include
-      #       the +:content_length+ option.
+      #         If you specify data this way, you must also include
+      #         the `:content_length` option.
       #
       #   @param [Hash] options Additional options for the upload.
       #
       #   @option options [Integer] :content_length If provided,
       #     this option must match the total number of bytes written
       #     to S3 during the operation.  This option is required if
-      #     +:data+ is an IO-like object without a +size+ method.
+      #     `:data` is an IO-like object without a `size` method.
       #
       # @overload add_part(options)
       #
       #   @param [Hash] options Options for the upload.  Either
-      #     +:data+ or +:file+ is required.
+      #     `:data` or `:file` is required.
       #
       #   @option options :data The data to upload.  Valid values
       #     include:
       #
-      #     * A string
+      #       * A string
+      #       * A Pathname object
+      #       * Any object responding to `read` and `eof?`; the object
+      #         must support the following access methods:
       #
-      #     * A Pathname object
+      #              read                     # all at once
+      #              read(length) until eof?  # in chunks
       #
-      #     * Any object responding to +read+ and +eof?+; the object
-      #       must support the following access methods:
-      #
-      #        read                     # all at once
-      #        read(length) until eof?  # in chunks
-      #
-      #       If you specify data this way, you must also include
-      #       the +:content_length+ option.
+      #         If you specify data this way, you must also include
+      #         the `:content_length` option.
       #
       #   @option options [String] :file Can be specified instead of
-      #     +:data+; its value specifies the path of a file to
+      #     `:data`; its value specifies the path of a file to
       #     upload.
       #
       #   @option options [Integer] :content_length If provided,
       #     this option must match the total number of bytes written
       #     to S3 during the operation.  This option is required if
-      #     +:data+ is an IO-like object without a +size+ method.
+      #     `:data` is an IO-like object without a `size` method.
       #
       #   @option options [Integer] :part_number The part number.
       def add_part(data_or_options, options = {})
@@ -202,6 +206,36 @@ module AWS
           @completed_parts[part_number] = {
             :part_number => part_number,
             :etag => resp.etag
+          }
+        end
+        UploadedPart.new(self, part_number)
+      end
+
+      # Copies a part.
+      #
+      #   @param [string] copy_source Full S3 name of source, ie bucket/key
+      #
+      #   @param [Hash] options Additional options for the copy.
+      #
+      #   @option options [Integer] :part_number The part number.
+      #
+      #   @option options [Integer] :copy_source_range Range of bytes to copy, ie bytes=0-45687
+      def copy_part(copy_source, options = {})
+        part_options = base_opts.merge(options)
+        part_options.merge!(:copy_source => copy_source)
+
+        unless part_options[:part_number]
+          @increment_mutex.synchronize do
+            part_options[:part_number] = (@last_part += 1)
+          end
+        end
+        part_number = part_options[:part_number]
+
+        resp = client.copy_part(part_options)
+        @completed_mutex.synchronize do
+          @completed_parts[part_number] = {
+            :part_number => part_number,
+            :etag => resp[:etag]
           }
         end
         UploadedPart.new(self, part_number)
@@ -257,7 +291,7 @@ module AWS
       #   enabled, returns the {ObjectVersion} representing the
       #   version that was uploaded.  If versioning is disabled,
       #   returns the object.  If no upload was attempted (e.g. if it
-      #   was aborted or if no parts were uploaded), returns +nil+.
+      #   was aborted or if no parts were uploaded), returns `nil`.
       def close
         if aborted?
           nil
@@ -274,37 +308,34 @@ module AWS
         UploadedPartCollection.new(self)
       end
 
-      # @private
+      # @api private
       def completed_parts
         @completed_parts.values.
           sort { |a, b| a[:part_number] <=> b[:part_number] }
       end
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class}:#{object.bucket.name}/#{object.key}:#{id}>"
       end
 
-      # @private
       private
+
       def get_complete_opts(part_numbers = nil)
-        parts_resp = client.list_parts(base_opts)
-        complete_opts =
-          base_opts.merge(:parts =>
-                          parts_resp.parts.map do |part|
-                            { :part_number => part.part_number,
-                              :etag => part.etag }
-                          end)
+        parts = []
+        self.parts.each do |part|
+          parts << { :part_number => part.part_number, :etag => part.etag }
+        end
 
-        complete_opts[:parts].reject! do |part|
-          !part_numbers.include?(part[:part_number])
-        end if part_numbers
+        if part_numbers
+          parts.reject! do |part|
+            !part_numbers.include?(part[:part_number])
+          end
+        end
 
-        complete_opts
+        base_opts.merge(:parts => parts)
       end
 
-      # @private
-      private
       def base_opts
         opts = {
           :bucket_name => object.bucket.name,

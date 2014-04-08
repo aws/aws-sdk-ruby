@@ -13,25 +13,25 @@
 
 module AWS
   module Core
-  
+
     # Mixin that provides a generic callback facility for asynchronous
     # tasks that can either succeed or fail.
     module AsyncHandle
-  
+
       # Called to signal success and fire off the success and complete callbacks.
       def signal_success
         __send_signal(:success)
       end
-  
+
       # Called to signal failure and fire off the failure and complete callbacks.
       def signal_failure
         __send_signal(:failure)
       end
-  
+
       # Registers a callback to be called on successful completion of
       # the task.
       #
-      #  handle.on_success { puts "It worked!" }
+      #     handle.on_success { puts "It worked!" }
       #
       # If this is called when the task has already completed
       # successfully, it will call the callback immediately.
@@ -42,10 +42,10 @@ module AWS
           (@_async_callbacks ||= []) << { :success => block }
         end
       end
-  
+
       # Registers a callback to be called when the task fails.
       #
-      #  handle.on_failure { puts "It didn't work!" }
+      #     handle.on_failure { puts "It didn't work!" }
       #
       # If this is called when the task has already failed, it will
       # call the callback immediately.
@@ -56,13 +56,13 @@ module AWS
           (@_async_callbacks ||= []) << { :failure => block }
         end
       end
-  
+
       # Registers a callback to be called when the task is complete,
       # regardless of its status.  Yields the status to the block.
       #
-      #  handle.on_complete do |status|
-      #    puts "It #{status == :success ? 'did' : 'did not'} work!"
-      #  end
+      #     handle.on_complete do |status|
+      #       puts "It #{status == :success ? 'did' : 'did not'} work!"
+      #     end
       #
       # If this is called when the task has already completed, it will
       # call the callback immediately.
@@ -76,7 +76,7 @@ module AWS
           }
         end
       end
-  
+
       private
       def __send_signal(kind)
         @_async_status = kind
@@ -84,7 +84,7 @@ module AWS
           cb[kind]
         end.compact.each {|block| block.call } if @_async_callbacks
       end
-  
+
     end
   end
 end

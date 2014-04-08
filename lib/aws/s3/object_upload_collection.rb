@@ -29,7 +29,7 @@ module AWS
       # @return [S3Object] The object to which the uploads belong.
       attr_reader :object
 
-      # @private
+      # @api private
       def initialize(object, opts = {})
         @all_uploads =
           MultipartUploadCollection.new(object.bucket).

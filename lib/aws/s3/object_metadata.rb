@@ -35,8 +35,8 @@ module AWS
       # Returns the value for the given name stored in the S3Object's
       # metadata:
       #
-      #   bucket.objects['myobject'].metadata['purpose']
-      #   # returns nil if the given metadata key has not been set
+      #     bucket.objects['myobject'].metadata['purpose']
+      #     # returns nil if the given metadata key has not been set
       #
       # @param [String,Symbol] name The name of the metadata field to
       #   get.
@@ -49,9 +49,16 @@ module AWS
       # Changes the value of the given name stored in the S3Object's
       # metadata:
       #
-      #   object = bucket.object['myobject']
-      #   object.metadata['purpose'] = 'research'
-      #   object.metadata['purpose']               # => 'research'
+      #     object = bucket.object['myobject']
+      #     object.metadata['purpose'] = 'research'
+      #     object.metadata['purpose']               # => 'research'
+      #
+      # @deprecated In order to safely update an S3 object's metadata, you
+      #   should use {S3Object#copy_from}. This operation does not preserve
+      #   the ACL, storage class (standard vs. reduced redundancy) or server
+      #   side encryption settings. Using this method on anything other than
+      #   vanilla S3 objects risks clobbering other metadata values set on the
+      #   object.
       #
       # @note The name and value of each metadata field must conform
       #   to US-ASCII.
@@ -80,7 +87,7 @@ module AWS
         self[name]
       end
 
-      # @return [Hash] Returns the user-generated metadata stored with 
+      # @return [Hash] Returns the user-generated metadata stored with
       #   this S3 Object.
       def to_h
         options = {}

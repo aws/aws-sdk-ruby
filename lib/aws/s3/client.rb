@@ -25,15 +25,15 @@ module AWS
     # Client class for Amazon Simple Storage Service (S3).
     class Client < Core::Client
 
+      signature_version :S3
+
       API_VERSION = '2006-03-01'
 
       XMLNS = "http://s3.amazonaws.com/doc/#{API_VERSION}/"
 
-      AWS.register_autoloads(self) do
-        autoload :XML, 'xml'
-      end
+      autoload :XML, 'aws/s3/client/xml'
 
-      # @private
+      # @api private
       EMPTY_BODY_ERRORS = {
         304 => Errors::NotModified,
         403 => Errors::Forbidden,
@@ -41,13 +41,46 @@ module AWS
         404 => Errors::NoSuchKey,
       }
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       include DataOptions
       include Core::UriEscape
 
+      # @param [Core::Http::Request] request
+      # @api private
+      def sign_request request
+        version = @config.s3_signature_version ?
+          @config.s3_signature_version.to_sym :
+          (@region =~ /cn-/ ? :v4 : :v3)
+        case version
+        when :v4 then v4_signer.sign_request(request)
+        when :v3 then v3_signer.sign_request(request)
+        else
+          raise "invalid signature version #{version.inspect}"
+        end
+      end
+
       protected
+
+      # @return [Core::Signers::S3]
+      def v3_signer
+        @v3_signer ||= Core::Signers::S3.new(credential_provider)
+      end
+
+      # @return [Core::Signers::Version4]
+      def v4_signer
+        @v4_signer ||= begin
+          Core::Signers::Version4.new(credential_provider, 's3', @region)
+        end
+      end
+
+      # @param [Http::Request] req
+      # @return [Boolean]
+      def chunk_sign? req
+        req.http_method == 'PUT' &&
+        req.headers['content-length'].to_i > 2 * 1024 * 1024 # 2MB
+      end
 
       def self.bucket_method(method_name, verb, *args, &block)
 
@@ -100,6 +133,408 @@ module AWS
 
         end
       end
+
+      protected
+
+      def set_metadata request, options
+        if metadata = options[:metadata]
+          Array(metadata).each do |name, value|
+            request.headers["x-amz-meta-#{name}"] = value
+          end
+        end
+      end
+
+      def set_storage_class request, options
+        storage_class = options[:storage_class]
+        if storage_class.kind_of?(Symbol)
+          request.headers["x-amz-storage-class"] = storage_class.to_s.upcase
+        elsif storage_class
+          request.headers["x-amz-storage-class"] = storage_class
+        end
+      end
+
+      def set_server_side_encryption request, options
+        sse = options[:server_side_encryption]
+        if sse.is_a?(Symbol)
+          request.headers['x-amz-server-side-encryption'] = sse.to_s.upcase
+        elsif sse
+          request.headers['x-amz-server-side-encryption'] = sse
+        end
+      end
+
+      def extract_error_details response
+        if
+          (response.http_response.status >= 300 ||
+            response.request_type == :complete_multipart_upload) and
+          body = response.http_response.body and
+          error = Core::XML::Parser.parse(body) and
+          error[:code]
+        then
+          [error[:code], error[:message]]
+        end
+      end
+
+      def empty_response_body? response_body
+        response_body.nil? or response_body == ''
+      end
+
+      # There are a few of s3 requests that can generate empty bodies and
+      # yet still be errors.  These return empty bodies to comply with the
+      # HTTP spec.  We have to detect these errors specially.
+      def populate_error resp
+        code = resp.http_response.status
+        if EMPTY_BODY_ERRORS.include?(code) and empty_response_body?(resp.http_response.body)
+          error_class = EMPTY_BODY_ERRORS[code]
+          resp.error = error_class.new(resp.http_request, resp.http_response)
+        else
+          super
+        end
+      end
+
+      def retryable_error? response
+        super or
+        failed_multipart_upload?(response) or
+        response.error.is_a?(Errors::RequestTimeout)
+      end
+
+      # S3 may return a 200 response code in response to complete_multipart_upload
+      # and then start streaming whitespace until it knows the final result.
+      # At that time it sends an XML message with success or failure.
+      def failed_multipart_upload? response
+        response.request_type == :complete_multipart_upload &&
+        extract_error_details(response)
+      end
+
+      def new_request
+        req = S3::Request.new
+        req.force_path_style = config.s3_force_path_style?
+        req
+      end
+
+      # Previously the access control policy could be specified via :acl
+      # as a string or an object that responds to #to_xml.  The prefered
+      # method now is to pass :access_control_policy an xml document.
+      def move_access_control_policy options
+        if acl = options[:acl]
+          if acl.is_a?(String) and is_xml?(acl)
+            options[:access_control_policy] = options.delete(:acl)
+          elsif acl.respond_to?(:to_xml)
+            options[:access_control_policy] = options.delete(:acl).to_xml
+          end
+        end
+      end
+
+      # @param [String] possible_xml
+      # @return [Boolean] Returns `true` if the given string is a valid xml
+      #   document.
+      def is_xml? possible_xml
+        begin
+          REXML::Document.new(possible_xml).has_elements?
+        rescue
+          false
+        end
+      end
+
+      def md5 str
+        Base64.encode64(Digest::MD5.digest(str)).strip
+      end
+
+      def parse_copy_part_response resp
+        doc = REXML::Document.new(resp.http_response.body)
+        resp[:etag] = doc.root.elements["ETag"].text
+        resp[:last_modified] = doc.root.elements["LastModified"].text
+        if header = resp.http_response.headers['x-amzn-requestid']
+          data[:request_id] = [header].flatten.first
+        end
+      end
+
+      def extract_object_headers resp
+        meta = {}
+        resp.http_response.headers.each_pair do |name,value|
+          if name =~ /^x-amz-meta-(.+)$/i
+            meta[$1] = [value].flatten.join
+          end
+        end
+        resp.data[:meta] = meta
+
+        if expiry = resp.http_response.headers['x-amz-expiration']
+          expiry.first =~ /^expiry-date="(.+)", rule-id="(.+)"$/
+          exp_date = DateTime.parse($1)
+          exp_rule_id = $2
+        else
+          exp_date = nil
+          exp_rule_id = nil
+        end
+        resp.data[:expiration_date] = exp_date if exp_date
+        resp.data[:expiration_rule_id] = exp_rule_id if exp_rule_id
+
+        restoring = false
+        restore_date = nil
+
+        if restore = resp.http_response.headers['x-amz-restore']
+          if restore.first =~ /ongoing-request="(.+?)", expiry-date="(.+?)"/
+            restoring = $1 == "true"
+            restore_date = $2 && DateTime.parse($2)
+          elsif restore.first =~ /ongoing-request="(.+?)"/
+            restoring = $1 == "true"
+          end
+        end
+        resp.data[:restore_in_progress] = restoring
+        resp.data[:restore_expiration_date] = restore_date if restore_date
+
+        {
+          'x-amz-version-id' => :version_id,
+          'content-type' => :content_type,
+          'content-encoding' => :content_encoding,
+          'cache-control' => :cache_control,
+          'expires' => :expires,
+          'etag' => :etag,
+          'x-amz-website-redirect-location' => :website_redirect_location,
+          'accept-ranges' => :accept_ranges,
+        }.each_pair do |header,method|
+          if value = resp.http_response.header(header)
+            resp.data[method] = value
+          end
+        end
+
+        if time = resp.http_response.header('Last-Modified')
+          resp.data[:last_modified] = Time.parse(time)
+        end
+
+        if length = resp.http_response.header('content-length')
+          resp.data[:content_length] = length.to_i
+        end
+
+        if sse = resp.http_response.header('x-amz-server-side-encryption')
+          resp.data[:server_side_encryption] = sse.downcase.to_sym
+        end
+
+      end
+
+      module Validators
+
+        # @return [Boolean] Returns true if the given bucket name is valid.
+        def valid_bucket_name?(bucket_name)
+          validate_bucket_name!(bucket_name) rescue false
+        end
+
+        # Returns true if the given `bucket_name` is DNS compatible.
+        #
+        # DNS compatible bucket names may be accessed like:
+        #
+        #     http://dns.compat.bucket.name.s3.amazonaws.com/
+        #
+        # Whereas non-dns compatible bucket names must place the bucket
+        # name in the url path, like:
+        #
+        #     http://s3.amazonaws.com/dns_incompat_bucket_name/
+        #
+        # @return [Boolean] Returns true if the given bucket name may be
+        #   is dns compatible.
+        #   this bucket n
+        #
+        def dns_compatible_bucket_name?(bucket_name)
+          return false if
+            !valid_bucket_name?(bucket_name) or
+
+            # Bucket names should be between 3 and 63 characters long
+            bucket_name.size > 63 or
+
+            # Bucket names must only contain lowercase letters, numbers, dots, and dashes
+            # and must start and end with a lowercase letter or a number
+            bucket_name !~ /^[a-z0-9][a-z0-9.-]+[a-z0-9]$/ or
+
+            # Bucket names should not be formatted like an IP address (e.g., 192.168.5.4)
+            bucket_name =~ /(\d+\.){3}\d+/ or
+
+            # Bucket names cannot contain two, adjacent periods
+            bucket_name['..'] or
+
+            # Bucket names cannot contain dashes next to periods
+            # (e.g., "my-.bucket.com" and "my.-bucket" are invalid)
+            (bucket_name['-.'] || bucket_name['.-'])
+
+          true
+        end
+
+        # Returns true if the bucket name must be used in the request
+        # path instead of as a sub-domain when making requests against
+        # S3.
+        #
+        # This can be an issue if the bucket name is DNS compatible but
+        # contains '.' (periods).  These cause the SSL certificate to
+        # become invalid when making authenticated requets over SSL to the
+        # bucket name.  The solution is to send this as a path argument
+        # instead.
+        #
+        # @return [Boolean] Returns true if the bucket name should be used
+        #   as a path segement instead of dns prefix when making requests
+        #   against s3.
+        #
+        def path_style_bucket_name? bucket_name
+          if dns_compatible_bucket_name?(bucket_name)
+            bucket_name =~ /\./ ? true : false
+          else
+            true
+          end
+        end
+
+        def validate! name, value, &block
+          if error_msg = yield
+            raise ArgumentError, "#{name} #{error_msg}"
+          end
+          value
+        end
+
+        def validate_key!(key)
+          validate!('key', key) do
+            case
+            when key.nil? || key == ''
+              'may not be blank'
+            end
+          end
+        end
+
+        def require_bucket_name! bucket_name
+          if [nil, ''].include?(bucket_name)
+            raise ArgumentError, "bucket_name may not be blank"
+          end
+        end
+
+        # Returns true if the given bucket name is valid.  If the name
+        # is invalid, an ArgumentError is raised.
+        def validate_bucket_name!(bucket_name)
+          validate!('bucket_name', bucket_name) do
+            case
+            when bucket_name.nil? || bucket_name == ''
+              'may not be blank'
+            when bucket_name !~ /^[A-Za-z0-9._\-]+$/
+              'may only contain uppercase letters, lowercase letters, numbers, periods (.), ' +
+              'underscores (_), and dashes (-)'
+            when !(3..255).include?(bucket_name.size)
+              'must be between 3 and 255 characters long'
+            when bucket_name =~ /\n/
+              'must not contain a newline character'
+            end
+          end
+        end
+
+        def require_policy!(policy)
+          validate!('policy', policy) do
+            case
+            when policy.nil? || policy == ''
+              'may not be blank'
+            else
+              json_validation_message(policy)
+            end
+          end
+        end
+
+        def require_acl! options
+          acl_options = [
+            :acl,
+            :grant_read,
+            :grant_write,
+            :grant_read_acp,
+            :grant_write_acp,
+            :grant_full_control,
+            :access_control_policy,
+          ]
+          unless options.keys.any?{|opt| acl_options.include?(opt) }
+            msg = "missing a required ACL option, must provide an ACL " +
+                  "via :acl, :grant_* or :access_control_policy"
+            raise ArgumentError, msg
+          end
+        end
+
+        def set_body_stream_and_content_length request, options
+
+          unless options[:content_length]
+            msg = "S3 requires a content-length header, unable to determine "
+            msg << "the content length of the data provided, please set "
+            msg << ":content_length"
+            raise ArgumentError, msg
+          end
+
+          request.headers['content-length'] = options[:content_length]
+          request.body_stream = options[:data]
+
+        end
+
+        def require_upload_id!(upload_id)
+          validate!("upload_id", upload_id) do
+            "must not be blank" if upload_id.to_s.empty?
+          end
+        end
+
+        def require_part_number! part_number
+          validate!("part_number", part_number) do
+            "must not be blank" if part_number.to_s.empty?
+          end
+        end
+
+        def validate_parts!(parts)
+          validate!("parts", parts) do
+            if !parts.kind_of?(Array)
+              "must not be blank"
+            elsif parts.empty?
+              "must contain at least one entry"
+            elsif !parts.all? { |p| p.kind_of?(Hash) }
+              "must be an array of hashes"
+            elsif !parts.all? { |p| p[:part_number] }
+              "must contain part_number for each part"
+            elsif !parts.all? { |p| p[:etag] }
+              "must contain etag for each part"
+            elsif parts.any? { |p| p[:part_number].to_i < 1 }
+              "must not have part numbers less than 1"
+            end
+          end
+        end
+
+        def json_validation_message(obj)
+          if obj.respond_to?(:to_str)
+            obj = obj.to_str
+          elsif obj.respond_to?(:to_json)
+            obj = obj.to_json
+          end
+
+          error = nil
+          begin
+            JSON.parse(obj)
+          rescue => e
+            error = e
+          end
+          "contains invalid JSON: #{error}" if error
+        end
+
+        def require_allowed_methods!(allowed_methods)
+          validate!("allowed_methods", allowed_methods) do
+            if !allowed_methods.kind_of?(Array)
+              "must be an array"
+            elsif !allowed_methods.all? { |x| x.kind_of?(String) }
+              "must be an array of strings"
+            end
+          end
+        end
+
+        def require_allowed_origins!(allowed_origins)
+          validate!("allowed_origins", allowed_origins) do
+            if !allowed_origins.kind_of?(Array)
+              "must be an array"
+            elsif !allowed_origins.all? { |x| x.kind_of?(String) }
+              "must be an array of strings"
+            end
+          end
+        end
+
+      end
+
+      include Validators
+      extend Validators
+
+    end
+
+    class Client::V20060301 < Client
 
       def self.object_method(method_name, verb, *args, &block)
         bucket_method(method_name, verb, *args) do
@@ -161,7 +596,6 @@ module AWS
       bucket_method(:put_bucket_website, :put, 'website') do
 
         configure_request do |req, options|
-          validate_bucket_name!(options[:bucket_name])
           req.body = Nokogiri::XML::Builder.new do |xml|
             xml.WebsiteConfiguration(:xmlns => XMLNS) do
 
@@ -184,7 +618,8 @@ module AWS
                 end
               end
 
-              if rules = options[:routing_rules]
+              rules = options[:routing_rules]
+              if rules.is_a?(Array) && !rules.empty?
                 xml.RoutingRules do
                   rules.each do |rule|
                     xml.RoutingRule do
@@ -221,10 +656,10 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @return [Core::Response]
-      #     * +:index_document+ - (Hash)
-      #       * +:suffix+ - (String)
-      #     * +:error_document+ - (Hash)
-      #       * +:key+ - (String)
+      #     * `:index_document` - (Hash)
+      #       * `:suffix` - (String)
+      #     * `:error_document` - (Hash)
+      #       * `:key` - (String)
       bucket_method(:get_bucket_website, :get, 'website', XML::GetBucketWebsite)
 
       # @overload delete_bucket_website(options = {})
@@ -292,16 +727,16 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @option options [required,Array<Hash>] :rules An array of rule hashes.
-      #     * +:id+ - (String) A unique identifier for the rule. The ID
+      #     * `:id` - (String) A unique identifier for the rule. The ID
       #       value can be up to 255 characters long. The IDs help you find
       #       a rule in the configuration.
-      #     * +:allowed_methods+ - (required,Array<String>) A list of HTTP
+      #     * `:allowed_methods` - (required,Array<String>) A list of HTTP
       #       methods that you want to allow the origin to execute.
       #       Each rule must identify at least one method.
-      #     * +:allowed_origins+ - (required,Array<String>) A list of origins
+      #     * `:allowed_origins` - (required,Array<String>) A list of origins
       #       you want to allow cross-domain requests from. This can
       #       contain at most one * wild character.
-      #     * +:allowed_headers+ - (Array<String>) A list of headers allowed
+      #     * `:allowed_headers` - (Array<String>) A list of headers allowed
       #       in a pre-flight OPTIONS request via the
       #       Access-Control-Request-Headers header. Each header name
       #       specified in the Access-Control-Request-Headers header must
@@ -309,10 +744,10 @@ module AWS
       #       Amazon S3 will send only the allowed headers in a response
       #       that were requested. This can contain at most one * wild
       #       character.
-      #     * +:max_age_seconds+ - (Integer) The time in seconds that your
+      #     * `:max_age_seconds` - (Integer) The time in seconds that your
       #       browser is to cache the preflight response for the specified
       #       resource.
-      #     * +:expose_headers+ - (Array<String>) One or more headers in
+      #     * `:expose_headers` - (Array<String>) One or more headers in
       #       the response that you want customers to be able to access
       #       from their applications (for example, from a JavaScript
       #       XMLHttpRequest object).
@@ -321,6 +756,11 @@ module AWS
         configure_request do |req, options|
 
           req.add_param('cors')
+
+          options[:rules].each do |rule|
+            require_allowed_methods!(rule[:allowed_methods])
+            require_allowed_origins!(rule[:allowed_origins])
+          end
 
           xml = Nokogiri::XML::Builder.new do |xml|
             xml.CORSConfiguration do
@@ -472,7 +912,7 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :policy This can be a String
-      #     or any object that responds to +#to_json+.
+      #     or any object that responds to `#to_json`.
       #   @return [Core::Response]
       bucket_method(:set_bucket_policy, :put, 'policy') do
 
@@ -552,6 +992,90 @@ module AWS
 
       end
 
+      # @overload put_bucket_logging(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @option options [Boolean] :logging_enabled Set to true if turning on
+      #     bucket logging. If not set or false, all of the following options
+      #     will be ignored.
+      #   @option options [String] :target_bucket The name of the bucket in
+      #     which you want Amazon S3 to store server access logs. You can push
+      #     logs to any bucket you own, including the bucket being logged.
+      #   @option options [String] :target_prefix Allows you to specify a prefix
+      #     for the keys that the log files will be stored under. Recommended
+      #     if you will be writing logs from multiple buckets to the same target
+      #     bucket.
+      #   @option options [Array<Hash>] :grants An array of hashes specifying
+      #     permission grantees. For each hash, specify ONLY ONE of :id, :uri,
+      #     or :email_address.
+      #     * `:email_address` - (String) E-mail address of the person being
+      #       granted logging permissions.
+      #     * `:id` - (String) The canonical user ID of the grantee.
+      #     * `:uri` - (String) URI of the grantee group.
+      #     * `:permission` - (String) Logging permissions given to the Grantee
+      #          for the bucket. The bucket owner is automatically granted FULL_CONTROL
+      #          to all logs delivered to the bucket. This optional element enables
+      #          you grant access to others. Valid Values: FULL_CONTROL | READ | WRITE 
+      #   @return [Core::Response]
+      bucket_method(:put_bucket_logging, :put) do
+        configure_request do |req, options|
+
+          req.add_param('logging')
+
+          xml = Nokogiri::XML::Builder.new
+          xml.BucketLoggingStatus('xmlns' => XMLNS) do |xml|
+            if options[:logging_enabled] == true
+              xml.LoggingEnabled do
+                xml.TargetBucket(options[:target_bucket])
+                xml.TargetPrefix(options[:target_prefix])
+                unless options[:grants].nil?
+
+                  xml.TargetGrants do
+                    options[:grants].each do |grant|
+                      xml.Grant do
+                        if !grant[:email_address].nil?
+                          xml.Grantee('xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+                                  'xsi:type' => 'AmazonCustomerByEmail') do
+                            xml.EmailAddress(grant[:email_address])
+                          end
+                        elsif !grant[:uri].nil?
+                          xml.Grantee('xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+                                  'xsi:type' => 'Group') do
+                            xml.URI(grant[:uri])
+                          end
+                        elsif !grant[:id].nil?
+                          xml.Grantee('xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+                                  'xsi:type' => 'CanonicalUser') do
+                            xml.ID(grant[:id])
+                          end
+                        end
+
+                        xml.Permission(grant[:permission])
+                      end
+                    end
+                  end
+                end
+              end
+            end
+          end
+
+          xml = xml.doc.root.to_xml
+          req.body = xml
+          req.headers['content-md5'] = md5(xml)
+          
+          super(req, options)
+
+        end
+      end
+
+      # Gets the bucket's logging status.
+      # @overload get_bucket_logging(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @return [Core::Response]
+      bucket_method(:get_bucket_logging, :get, 'logging',
+        XML::GetBucketLogging)
+
       # @overload get_bucket_versioning(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
@@ -586,9 +1110,9 @@ module AWS
       # Sets the access control list for a bucket.  You must specify an ACL
       # via one of the following methods:
       #
-      # * as a canned ACL (via +:acl+)
-      # * as a list of grants (via the +:grant_*+ options)
-      # * as an access control policy document (via +:access_control_policy+)
+      # * as a canned ACL (via `:acl`)
+      # * as a list of grants (via the `:grant_*` options)
+      # * as an access control policy document (via `:access_control_policy`)
       #
       # @example Using a canned acl
       #   s3_client.put_bucket_acl(
@@ -675,9 +1199,9 @@ module AWS
       # Sets the access control list for an object.  You must specify an ACL
       # via one of the following methods:
       #
-      # * as a canned ACL (via +:acl+)
-      # * as a list of grants (via the +:grant_*+ options)
-      # * as an access control policy document (via +:access_control_policy+)
+      # * as a canned ACL (via `:acl`)
+      # * as a list of grants (via the `:grant_*` options)
+      # * as an access control policy document (via `:access_control_policy`)
       #
       # @example Using a canned acl
       #   s3_client.put_object_acl(
@@ -774,33 +1298,6 @@ module AWS
       #     :data => 'This is the readme for ...',
       #   })
       #
-      # == Block Form
-      #
-      # In block form, this method yields a stream to the block that
-      # accepts data chunks.  For example:
-      #
-      #   s3_client.put_object(
-      #     :bucket_name => 'mybucket',
-      #     :key => 'some/key'
-      #     :content_length => File.size('myfile')
-      #   ) do |buffer|
-      #
-      #     File.open('myfile') do |io|
-      #       buffer.write(io.read(length)) until io.eof?
-      #     end
-      #
-      #   end
-      #
-      # This form is useful if you need finer control over how
-      # potentially large amounts of data are read from another
-      # source before being sent to S3; for example, if you are
-      # using a non-blocking IO model and reading from a large file
-      # on disk or from another network stream.  Some HTTP handlers
-      # do not support streaming request bodies, so if you plan to
-      # upload large objects using this interface you should make
-      # sure the HTTP handler you configure for the client meets
-      # your needs.
-      #
       # @overload put_object(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
@@ -808,24 +1305,24 @@ module AWS
       #   @option options [required,String,Pathname,File,IO] :data
       #     The data to upload.  This can be provided as a string,
       #     a Pathname object, or any object that responds to
-      #     +#read+ and +#eof?+ (e.g. IO, File, Tempfile, StringIO, etc).
+      #     `#read` and `#eof?` (e.g. IO, File, Tempfile, StringIO, etc).
       #   @option options [Integer] :content_length
       #     Required if you are using block form to write data or if it is
-      #     not possible to determine the size of +:data+.  A best effort
+      #     not possible to determine the size of `:data`.  A best effort
       #     is made to determine the content length of strings, files,
       #     tempfiles, io objects, and any object that responds
-      #     to +#length+ or +#size+.
+      #     to `#length` or `#size`.
       #   @option options [String] :website_redirect_location If the bucket is
       #     configured as a website, redirects requests for this object to
       #     another object in the same bucket or to an external URL.
       #   @option options [Hash] :metadata
       #     A hash of metadata to be included with the
       #     object.  These will be sent to S3 as headers prefixed with
-      #     +x-amz-meta+.
+      #     `x-amz-meta`.
       #   @option options [Symbol] :acl (:private) A canned access
       #     control policy.  Accepted values include:
-      #     * +:private+
-      #     * +:public_read+
+      #     * `:private`
+      #     * `:public_read`
       #     * ...
       #   @option options [String] :storage_class+ ('STANDARD')
       #     Controls whether Reduced Redundancy Storage is enabled for
@@ -834,7 +1331,7 @@ module AWS
       #   @option options [Symbol,String] :server_side_encryption (nil) The
       #     algorithm used to encrypt the object on the server side
       #     (e.g. :aes256).
-      #   object on the server side, e.g. +:aes256+)
+      #   object on the server side, e.g. `:aes256`)
       #   @option options [String] :cache_control
       #     Can be used to specify caching behavior.
       #   @option options [String] :content_disposition
@@ -842,7 +1339,7 @@ module AWS
       #   @option options [String] :content_encoding
       #     Specifies the content encoding.
       #   @option options [String] :content_md5
-      #     The base64 encoded content md5 of the +:data+.
+      #     The base64 encoded content md5 of the `:data`.
       #   @option options [String] :content_type
       #     Specifies the content type.
       #   @option options [String] :expires The date and time at which the
@@ -878,9 +1375,9 @@ module AWS
           options = compute_write_options(options)
           set_body_stream_and_content_length(request, options)
 
-          request.metadata = options[:metadata]
-          request.storage_class = options[:storage_class]
-          request.server_side_encryption = options[:server_side_encryption]
+          set_metadata(request, options)
+          set_storage_class(request, options)
+          set_server_side_encryption(request, options)
 
           super(request, options)
 
@@ -903,25 +1400,25 @@ module AWS
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
       #   @option options [Time] :if_modified_since If specified, the
-      #     response will contain an additional +:modified+ value that
+      #     response will contain an additional `:modified` value that
       #     returns true if the object was modified after the given
-      #     time.  If +:modified+ is false, then the response
-      #     +:data+ value will be +nil+.
+      #     time.  If `:modified` is false, then the response
+      #     `:data` value will be `nil`.
       #   @option options [Time] :if_unmodified_since If specified, the
-      #     response will contain an additional +:unmodified+ value
+      #     response will contain an additional `:unmodified` value
       #     that is true if the object was not modified after the
-      #     given time.  If +:unmodified+ returns false, the +:data+
-      #     value will be +nil+.
+      #     given time.  If `:unmodified` returns false, the `:data`
+      #     value will be `nil`.
       #   @option options [String] :if_match If specified, the response
-      #     will contain an additional +:matches+ value that is true
+      #     will contain an additional `:matches` value that is true
       #     if the object ETag matches the value for this option.  If
-      #     +:matches+ is false, the +:data+ value of the
-      #     response will be +nil+.
+      #     `:matches` is false, the `:data` value of the
+      #     response will be `nil`.
       #   @option options [String] :if_none_match If specified, the
-      #     response will contain an additional +:matches+ value that
+      #     response will contain an additional `:matches` value that
       #     is true if and only if the object ETag matches the value for
-      #     this option.  If +:matches+ is true, the +:data+ value
-      #     of the response will be +nil+.
+      #     this option.  If `:matches` is true, the `:data` value
+      #     of the response will be `nil`.
       #   @option options [Range<Integer>] :range A byte range of data to request.
       #   @return [Core::Response]
       #
@@ -952,7 +1449,10 @@ module AWS
 
           if options[:range]
             range = options[:range]
-            range = "bytes=#{range.first}-#{range.last}" if range.is_a?(Range)
+            if range.is_a?(Range)
+              offset = range.exclude_end? ? -1 : 0
+              range = "bytes=#{range.first}-#{range.last + offset}"
+            end
             req.headers['Range'] = range
           end
 
@@ -963,6 +1463,20 @@ module AWS
           resp.data[:data] = resp.http_response.body
         end
 
+      end
+
+      # Gets the torrent for a key.
+      # @overload get_object_torrent(options = {})
+      #   @param [Hash] options
+      #   @option options [required,String] :bucket_name
+      #   @option options [required,String] :key
+      #   @return [Core::Response]
+      #
+      object_method(:get_object_torrent, :get, 'torrent') do
+        process_response do |resp|
+          extract_object_headers(resp)
+          resp.data[:data] = resp.http_response.body
+        end
       end
 
       # @overload head_object(options = {})
@@ -1110,9 +1624,9 @@ module AWS
                     }) do
 
         configure_request do |req, options|
-          req.metadata = options[:metadata]
-          req.storage_class = options[:storage_class]
-          req.server_side_encryption = options[:server_side_encryption]
+          set_metadata(req, options)
+          set_storage_class(req, options)
+          set_server_side_encryption(req, options)
           super(req, options)
         end
 
@@ -1150,31 +1664,34 @@ module AWS
       # @overload delete_objects(options = {})
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
-      #   @option options [required,Array<String>] :keys
+      #   @option options [required,Array<Hash>] :objects Each entry should be
+      #     a hash with the following keys:
+      #     * `:key` - *required*
+      #     * `:version_id`
       #   @option options [Boolean] :quiet (true)
       #   @option options [String] :mfa
       #   @return [Core::Response]
-      bucket_method(:delete_objects, :post, 'delete', XML::DeleteObjects, :header_options => { :mfa => "x-amz-mfa" }) do
+      bucket_method(:delete_objects, :post, 'delete', XML::DeleteObjects,
+        :header_options => { :mfa => "x-amz-mfa" }
+      ) do
+
         configure_request do |req, options|
 
           super(req, options)
 
-          quiet = options.key?(:quiet) ? options[:quiet] : true
+          req.body = Nokogiri::XML::Builder.new do |xml|
+            xml.Delete do
+              xml.Quiet(options.key?(:quiet) ? options[:quiet] : true)
+              (options[:objects] || options[:keys]).each do |obj|
+                xml.Object do
+                  xml.Key(obj[:key])
+                  xml.VersionId(obj[:version_id]) if obj[:version_id]
+                end
+              end
+            end
+          end.doc.root.to_xml
 
-          # previously named this option :objects, since renamed
-          keys = options[:objects] || options[:keys]
-
-          objects = keys.inject('') do |xml,o|
-            xml << "<Object><Key>#{REXML::Text.normalize(o[:key])}</Key>"
-            xml << "<VersionId>#{o[:version_id]}</VersionId>" if o[:version_id]
-            xml << "</Object>"
-          end
-
-          xml = '<?xml version="1.0" encoding="UTF-8"?>'
-          xml << "<Delete><Quiet>#{quiet}</Quiet>#{objects}</Delete>"
-
-          req.body = xml
-          req.headers['content-md5'] = md5(xml)
+          req.headers['content-md5'] = md5(req.body)
 
         end
       end
@@ -1188,7 +1705,7 @@ module AWS
       #   @option options [required,String,Pathname,File,IO] :data
       #     The data to upload.  This can be provided as a string,
       #     a Pathname object, or any object that responds to
-      #     +#read+ and +#eof?+ (e.g. IO, File, Tempfile, StringIO, etc).
+      #     `#read` and `#eof?` (e.g. IO, File, Tempfile, StringIO, etc).
       #   @return [Core::Response]
       object_method(:upload_part, :put,
                     :header_options => {
@@ -1223,7 +1740,10 @@ module AWS
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
       #   @option options [required,String] :upload_id
-      #   @option options [required,Array<String>] :parts
+      #   @option options [required,Array<Hash>] :parts An array of hashes
+      #     with the following keys:
+      #     * `:part_number` [Integer] - *required*
+      #     * `:etag` [String] - *required*
       #   @return [Core::Response]
       object_method(:complete_multipart_upload, :post,
                     XML::CompleteMultipartUpload) do
@@ -1232,14 +1752,18 @@ module AWS
           validate_parts!(options[:parts])
           super(req, options)
           req.add_param('uploadId', options[:upload_id])
-          parts_xml = options[:parts].map do |part|
-            "<Part>"+
-              "<PartNumber>#{part[:part_number].to_i}</PartNumber>"+
-              "<ETag>#{REXML::Text.normalize(part[:etag].to_s)}</ETag>"+
-              "</Part>"
-          end.join
-          req.body =
-            "<CompleteMultipartUpload>#{parts_xml}</CompleteMultipartUpload>"
+
+          req.body = Nokogiri::XML::Builder.new do |xml|
+            xml.CompleteMultipartUpload do
+              options[:parts].each do |part|
+                xml.Part do
+                  xml.PartNumber(part[:part_number])
+                  xml.ETag(part[:etag])
+                end
+              end
+            end
+          end.doc.root.to_xml
+
         end
 
         process_response do |resp|
@@ -1310,6 +1834,12 @@ module AWS
       #     Controls whether Reduced Redundancy Storage is enabled for
       #     the object.  Valid values are 'STANDARD' and
       #     'REDUCED_REDUNDANCY'.
+      #   @option options [String] :metadata_directive ('COPY') Specify 'COPY' or
+      #     'REPLACE'.
+      #   @option options [String] :content_type
+      #   @option options [String] :content_encoding
+      #   @option options [String] :content_disposition
+      #   @option options [String] :cache_control
       #   @option options [String] :expires The date and time at which the
       #     object is no longer cacheable.
       #   @option options [String] :grant_read
@@ -1330,6 +1860,7 @@ module AWS
         :cache_control => 'Cache-Control',
         :metadata_directive => 'x-amz-metadata-directive',
         :content_type => 'Content-Type',
+        :content_encoding => 'Content-Encoding',
         :content_disposition => 'Content-Disposition',
         :expires => 'Expires',
       }) do
@@ -1342,14 +1873,13 @@ module AWS
 
           options = options.merge(:copy_source => escape_path(options[:copy_source]))
           super(req, options)
-          req.metadata = options[:metadata]
-          req.storage_class = options[:storage_class]
-          req.server_side_encryption = options[:server_side_encryption]
+          set_metadata(req, options)
+          set_storage_class(req, options)
+          set_server_side_encryption(req, options)
 
           if options[:version_id]
             req.headers['x-amz-copy-source'] += "?versionId=#{options[:version_id]}"
           end
-          req.headers['transfer-encoding'] = ''
         end
 
         process_response do |resp|
@@ -1358,343 +1888,39 @@ module AWS
 
       end
 
-      protected
+      object_method(:copy_part, :put, XML::CopyPart, :header_options => {
+        :copy_source => 'x-amz-copy-source',
+        :copy_source_range => 'x-amz-copy-source-range',
+      }) do
 
-      def extract_error_details response
-        if
-          (response.http_response.status >= 300 ||
-            response.request_type == :complete_multipart_upload) and
-          body = response.http_response.body and
-          error = Core::XML::Parser.parse(body) and
-          error[:code]
-        then
-          [error[:code], error[:message]]
-        end
-      end
+        configure_request do |request, options|
 
-      # There are a few of s3 requests that can generate empty bodies and
-      # yet still be errors.  These return empty bodies to comply with the
-      # HTTP spec.  We have to detect these errors specially.
-      def populate_error resp
-        code = resp.http_response.status
-        if EMPTY_BODY_ERRORS.include?(code) and resp.http_response.body.nil?
-          error_class = EMPTY_BODY_ERRORS[code]
-          resp.error = error_class.new(resp.http_request, resp.http_response)
-        else
-          super
-        end
-      end
-
-      def retryable_error? response
-        super or
-          (response.request_type == :complete_multipart_upload &&
-          extract_error_details(response))
-          # complete multipart upload can return an error inside a
-          # 200 level response -- this forces us to parse the
-          # response for errors every time
-      end
-
-      def new_request
-        req = S3::Request.new
-        req.force_path_style = config.s3_force_path_style?
-        req
-      end
-
-      # Previously the access control policy could be specified via :acl
-      # as a string or an object that responds to #to_xml.  The prefered
-      # method now is to pass :access_control_policy an xml document.
-      def move_access_control_policy options
-        if acl = options[:acl]
-          if acl.is_a?(String) and is_xml?(acl)
-            options[:access_control_policy] = options.delete(:acl)
-          elsif acl.respond_to?(:to_xml)
-            options[:access_control_policy] = options.delete(:acl).to_xml
+          validate!(:copy_source, options[:copy_source]) do
+            "may not be blank" if options[:copy_source].to_s.empty?
           end
-        end
-      end
 
-      # @param [String] possible_xml
-      # @return [Boolean] Returns +true+ if the given string is a valid xml
-      #   document.
-      def is_xml? possible_xml
-        begin
-          REXML::Document.new(possible_xml).has_elements?
-        rescue
-          false
-        end
-      end
-
-      def md5 str
-        Base64.encode64(Digest::MD5.digest(str)).strip
-      end
-
-      def extract_object_headers resp
-        meta = {}
-        resp.http_response.headers.each_pair do |name,value|
-          if name =~ /^x-amz-meta-(.+)$/i
-            meta[$1] = [value].flatten.join
+          validate!(:copy_source_range, options[:copy_source_range]) do
+            "must start with bytes=" if options[:copy_source_range] && !options[:copy_source_range].start_with?("bytes=")
           end
-        end
-        resp.data[:meta] = meta
 
-        if expiry = resp.http_response.headers['x-amz-expiration']
-          expiry.first =~ /^expiry-date="(.+)", rule-id="(.+)"$/
-          exp_date = DateTime.parse($1)
-          exp_rule_id = $2
-        else
-          exp_date = nil
-          exp_rule_id = nil
-        end
-        resp.data[:expiration_date] = exp_date if exp_date
-        resp.data[:expiration_rule_id] = exp_rule_id if exp_rule_id
+          options = options.merge(:copy_source => escape_path(options[:copy_source]))
 
-        restoring = false
-        restore_date = nil
+          require_upload_id!(options[:upload_id])
+          request.add_param('uploadId', options[:upload_id])
 
-        if restore = resp.http_response.headers['x-amz-restore']
-          if restore.first =~ /ongoing-request="(.+?)", expiry-date="(.+?)"/
-            restoring = $1 == "true"
-            restore_date = $2 && DateTime.parse($2)
-          elsif restore.first =~ /ongoing-request="(.+?)"/
-            restoring = $1 == "true"
+          require_part_number!(options[:part_number])
+          request.add_param('partNumber', options[:part_number])
+
+          super(request, options)
+
+          if options[:version_id]
+            req.headers['x-amz-copy-source'] += "?versionId=#{options[:version_id]}"
           end
-        end
-        resp.data[:restore_in_progress] = restoring
-        resp.data[:restore_expiration_date] = restore_date if restore_date
 
-        {
-          'x-amz-version-id' => :version_id,
-          'content-type' => :content_type,
-          'content-encoding' => :content_encoding,
-          'cache-control' => :cache_control,
-          'etag' => :etag,
-          'x-amz-website-redirect-location' => :website_redirect_location,
-          'accept-ranges' => :accept_ranges,
-        }.each_pair do |header,method|
-          if value = resp.http_response.header(header)
-            resp.data[method] = value
-          end
-        end
-
-        if time = resp.http_response.header('Last-Modified')
-          resp.data[:last_modified] = Time.parse(time)
-        end
-
-        if length = resp.http_response.header('content-length')
-          resp.data[:content_length] = length.to_i
-        end
-
-        if sse = resp.http_response.header('x-amz-server-side-encryption')
-          resp.data[:server_side_encryption] = sse.downcase.to_sym
         end
 
       end
-
-      module Validators
-
-        # @return [Boolean] Returns true if the given bucket name is valid.
-        def valid_bucket_name?(bucket_name)
-          validate_bucket_name!(bucket_name) rescue false
-        end
-
-        # Returns true if the given +bucket_name+ is DNS compatible.
-        #
-        # DNS compatible bucket names may be accessed like:
-        #
-        #   http://dns.compat.bucket.name.s3.amazonaws.com/
-        #
-        # Whereas non-dns compatible bucket names must place the bucket
-        # name in the url path, like:
-        #
-        #   http://s3.amazonaws.com/dns_incompat_bucket_name/
-        #
-        # @return [Boolean] Returns true if the given bucket name may be
-        #   is dns compatible.
-        #   this bucket n
-        #
-        def dns_compatible_bucket_name?(bucket_name)
-          return false if
-            !valid_bucket_name?(bucket_name) or
-
-            # Bucket names should not contain underscores (_)
-            bucket_name["_"] or
-
-            # Bucket names should be between 3 and 63 characters long
-            bucket_name.size > 63 or
-
-            # Bucket names should not end with a dash
-            bucket_name[-1,1] == '-' or
-
-            # Bucket names cannot contain two, adjacent periods
-            bucket_name['..'] or
-
-            # Bucket names cannot contain dashes next to periods
-            # (e.g., "my-.bucket.com" and "my.-bucket" are invalid)
-            (bucket_name['-.'] || bucket_name['.-'])
-
-          true
-        end
-
-        # Returns true if the bucket name must be used in the request
-        # path instead of as a sub-domain when making requests against
-        # S3.
-        #
-        # This can be an issue if the bucket name is DNS compatible but
-        # contains '.' (periods).  These cause the SSL certificate to
-        # become invalid when making authenticated requets over SSL to the
-        # bucket name.  The solution is to send this as a path argument
-        # instead.
-        #
-        # @return [Boolean] Returns true if the bucket name should be used
-        #   as a path segement instead of dns prefix when making requests
-        #   against s3.
-        #
-        def path_style_bucket_name? bucket_name
-          if dns_compatible_bucket_name?(bucket_name)
-            bucket_name =~ /\./ ? true : false
-          else
-            true
-          end
-        end
-
-        def validate! name, value, &block
-          if error_msg = yield
-            raise ArgumentError, "#{name} #{error_msg}"
-          end
-          value
-        end
-
-        def validate_key!(key)
-          validate!('key', key) do
-            case
-            when key.nil? || key == ''
-              'may not be blank'
-            end
-          end
-        end
-
-        def require_bucket_name! bucket_name
-          if [nil, ''].include?(bucket_name)
-            raise ArgumentError, "bucket_name may not be blank"
-          end
-        end
-
-        # Returns true if the given bucket name is valid.  If the name
-        # is invalid, an ArgumentError is raised.
-        def validate_bucket_name!(bucket_name)
-          validate!('bucket_name', bucket_name) do
-            case
-            when bucket_name.nil? || bucket_name == ''
-              'may not be blank'
-            when bucket_name !~ /^[a-z0-9._\-]+$/
-              'may only contain lowercase letters, numbers, periods (.), ' +
-              'underscores (_), and dashes (-)'
-            when bucket_name !~ /^[a-z0-9]/
-              'must start with a letter or a number'
-            when !(3..255).include?(bucket_name.size)
-              'must be between 3 and 255 characters long'
-            when bucket_name =~ /(\d+\.){3}\d+/
-              'must not be formatted like an IP address (e.g., 192.168.5.4)'
-            when bucket_name =~ /\n/
-              'must not contain a newline character'
-            end
-          end
-        end
-
-        def require_policy!(policy)
-          validate!('policy', policy) do
-            case
-            when policy.nil? || policy == ''
-              'may not be blank'
-            else
-              json_validation_message(policy)
-            end
-          end
-        end
-
-        def require_acl! options
-          acl_options = [
-            :acl,
-            :grant_read,
-            :grant_write,
-            :grant_read_acp,
-            :grant_write_acp,
-            :grant_full_control,
-            :access_control_policy,
-          ]
-          unless options.keys.any?{|opt| acl_options.include?(opt) }
-            msg = "missing a required ACL option, must provide an ACL " +
-                  "via :acl, :grant_* or :access_control_policy"
-            raise ArgumentError, msg
-          end
-        end
-
-        def set_body_stream_and_content_length request, options
-
-          unless options[:content_length]
-            msg = "S3 requires a content-length header, unable to determine "
-            msg << "the content length of the data provided, please set "
-            msg << ":content_length"
-            raise ArgumentError, msg
-          end
-
-          request.headers['content-length'] = options[:content_length]
-          request.body_stream = options[:data]
-
-        end
-
-        def require_upload_id!(upload_id)
-          validate!("upload_id", upload_id) do
-            "must not be blank" if upload_id.to_s.empty?
-          end
-        end
-
-        def require_part_number! part_number
-          validate!("part_number", part_number) do
-            "must not be blank" if part_number.to_s.empty?
-          end
-        end
-
-        def validate_parts!(parts)
-          validate!("parts", parts) do
-            if !parts.kind_of?(Array)
-              "must not be blank"
-            elsif parts.empty?
-              "must contain at least one entry"
-            elsif !parts.all? { |p| p.kind_of?(Hash) }
-              "must be an array of hashes"
-            elsif !parts.all? { |p| p[:part_number] }
-              "must contain part_number for each part"
-            elsif !parts.all? { |p| p[:etag] }
-              "must contain etag for each part"
-            elsif parts.any? { |p| p[:part_number].to_i < 1 }
-              "must not have part numbers less than 1"
-            end
-          end
-        end
-
-        def json_validation_message(obj)
-          if obj.respond_to?(:to_str)
-            obj = obj.to_str
-          elsif obj.respond_to?(:to_json)
-            obj = obj.to_json
-          end
-
-          error = nil
-          begin
-            JSON.parse(obj)
-          rescue => e
-            error = e
-          end
-          "contains invalid JSON: #{error}" if error
-        end
-
-      end
-
-      include Validators
-      extend Validators
 
     end
-
   end
 end

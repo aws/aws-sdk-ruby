@@ -14,10 +14,10 @@
 module AWS
   class SimpleDB
 
-    # @private
+    # @api private
     module ExpectConditionOption
 
-      # @private
+      # @api private
       protected
       def expect_condition_opts(opts)
         expected = []

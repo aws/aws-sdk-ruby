@@ -11,12 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/validator'
-
 module AWS
   module Record
-    
-    # @private
+
+    # @api private
     class ConfirmationValidator < Validator
 
       ACCEPTED_OPTIONS = [:message, :on, :if, :unless]

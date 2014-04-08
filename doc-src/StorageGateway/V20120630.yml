@@ -1,0 +1,221 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:activate_gateway: "Calls the ActivateGateway API operation.\n@param [Hash] options\n
+  \ * `:activation_key` - *required* - (String) \n  * `:gateway_name` - *required*
+  - (String) \n  * `:gateway_timezone` - *required* - (String) Valid values include:\n
+  \   * `GMT-12:00`\n    * `GMT-11:00`\n    * `GMT-10:00`\n    * `GMT-9:00`\n    *
+  `GMT-8:00`\n    * `GMT-7:00`\n    * `GMT-6:00`\n    * `GMT-5:00`\n    * `GMT-4:00`\n
+  \   * `GMT-3:30`\n    * `GMT-3:00`\n    * `GMT-2:00`\n    * `GMT-1:00`\n    * `GMT`\n
+  \   * `GMT+1:00`\n    * `GMT+2:00`\n    * `GMT+3:00`\n    * `GMT+3:30`\n    * `GMT+4:00`\n
+  \   * `GMT+4:30`\n    * `GMT+5:00`\n    * `GMT+5:30`\n    * `GMT+5:45`\n    * `GMT+6:00`\n
+  \   * `GMT+7:00`\n    * `GMT+8:00`\n    * `GMT+9:00`\n    * `GMT+9:30`\n    * `GMT+10:00`\n
+  \   * `GMT+11:00`\n    * `GMT+12:00`\n  * `:gateway_region` - *required* - (String)
+  \n  * `:gateway_type` - (String) Valid values include:\n    * `STORED`\n    * `CACHED`\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:gateway_arn` - (String)"
+:add_cache: "Calls the AddCache API operation.\n@param [Hash] options\n  * `:gateway_arn`
+  - *required* - (String) \n  * `:disk_ids` - *required* - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:gateway_arn` - (String)"
+:add_upload_buffer: "Calls the AddUploadBuffer API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n  * `:disk_ids` - *required* - (Array&lt;<String>)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:gateway_arn` - (String)"
+:add_working_storage: "Calls the AddWorkingStorage API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n  * `:disk_ids` - *required* - (Array&lt;<String>)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:gateway_arn` - (String)"
+:create_cachedi_scsi_volume: "Calls the CreateCachediSCSIVolume API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:volume_size_in_bytes`
+  - *required* - (Integer) \n  * `:snapshot_id` - (String) \n  * `:target_name` -
+  *required* - (String) \n  * `:network_interface_id` - *required* - (String) \n  *
+  `:client_token` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:volume_arn`
+  - (String)\n  * `:target_arn` - (String)"
+:create_snapshot: "Calls the CreateSnapshot API operation.\n@param [Hash] options\n
+  \ * `:volume_arn` - *required* - (String) \n  * `:snapshot_description` - *required*
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:volume_arn` - (String)\n  *
+  `:snapshot_id` - (String)"
+:create_snapshot_from_volume_recovery_point: "Calls the CreateSnapshotFromVolumeRecoveryPoint
+  API operation.\n@param [Hash] options\n  * `:volume_arn` - *required* - (String)
+  \n  * `:snapshot_description` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:snapshot_id` - (String)\n  * `:volume_arn` - (String)\n  * `:volume_recovery_point_time`
+  - (String)"
+:create_storedi_scsi_volume: "Calls the CreateStorediSCSIVolume API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:disk_id` - *required*
+  - (String) \n  * `:snapshot_id` - (String) \n  * `:preserve_existing_data` - *required*
+  - (Boolean) \n  * `:target_name` - *required* - (String) \n  * `:network_interface_id`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:volume_arn` - (String)\n
+  \ * `:volume_size_in_bytes` - (Integer)\n  * `:target_arn` - (String)"
+:delete_bandwidth_rate_limit: "Calls the DeleteBandwidthRateLimit API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:bandwidth_type`
+  - *required* - (String) Valid values include:\n    * `UPLOAD`\n    * `DOWNLOAD`\n
+  \   * `ALL`\n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:gateway_arn` - (String)"
+:delete_chap_credentials: "Calls the DeleteChapCredentials API operation.\n@param
+  [Hash] options\n  * `:target_arn` - *required* - (String) \n  * `:initiator_name`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:target_arn` - (String)\n
+  \ * `:initiator_name` - (String)"
+:delete_gateway: "Calls the DeleteGateway API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateway_arn` - (String)"
+:delete_snapshot_schedule: "Calls the DeleteSnapshotSchedule API operation.\n@param
+  [Hash] options\n  * `:volume_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:volume_arn` - (String)"
+:delete_volume: "Calls the DeleteVolume API operation.\n@param [Hash] options\n  *
+  `:volume_arn` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:volume_arn`
+  - (String)"
+:describe_bandwidth_rate_limit: "Calls the DescribeBandwidthRateLimit API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:average_upload_rate_limit_in_bits_per_sec`
+  - (Integer)\n  * `:average_download_rate_limit_in_bits_per_sec` - (Integer)"
+:describe_cache: "Calls the DescribeCache API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateway_arn` - (String)\n  * `:disk_ids` - (Array<String>)\n  * `:cache_allocated_in_bytes`
+  - (Integer)\n  * `:cache_used_percentage` - (Numeric)\n  * `:cache_dirty_percentage`
+  - (Numeric)\n  * `:cache_hit_percentage` - (Numeric)\n  * `:cache_miss_percentage`
+  - (Numeric)"
+:describe_cachedi_scsi_volumes: "Calls the DescribeCachediSCSIVolumes API operation.\n@param
+  [Hash] options\n  * `:volume_ar_ns` - *required* - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:cachedi_scsi_volumes` - (Array<Hash>)\n    * `:volume_arn`
+  - (String)\n    * `:volume_id` - (String)\n    * `:volume_type` - (String)\n    *
+  `:volume_status` - (String)\n    * `:volume_size_in_bytes` - (Integer)\n    * `:volume_progress`
+  - (Numeric)\n    * `:source_snapshot_id` - (String)\n    * `:volumei_scsi_attributes`
+  - (Hash)\n      * `:target_arn` - (String)\n      * `:network_interface_id` - (String)\n
+  \     * `:network_interface_port` - (Integer)\n      * `:lun_number` - (Integer)\n
+  \     * `:chap_enabled` - (Boolean)"
+:describe_chap_credentials: "Calls the DescribeChapCredentials API operation.\n@param
+  [Hash] options\n  * `:target_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:chap_credentials` - (Array<Hash>)\n    * `:target_arn` - (String)\n    * `:secret_to_authenticate_initiator`
+  - (String)\n    * `:initiator_name` - (String)\n    * `:secret_to_authenticate_target`
+  - (String)"
+:describe_gateway_information: "Calls the DescribeGatewayInformation API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:gateway_id` - (String)\n  * `:gateway_timezone`
+  - (String)\n  * `:gateway_state` - (String)\n  * `:gateway_network_interfaces` -
+  (Array<Hash>)\n    * `:ipv_4_address` - (String)\n    * `:mac_address` - (String)\n
+  \   * `:ipv_6_address` - (String)\n  * `:gateway_type` - (String)\n  * `:next_update_availability_date`
+  - (String)"
+:describe_maintenance_start_time: "Calls the DescribeMaintenanceStartTime API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:hour_of_day` - (Integer)\n  * `:minute_of_hour`
+  - (Integer)\n  * `:day_of_week` - (Integer)\n  * `:timezone` - (String)"
+:describe_snapshot_schedule: "Calls the DescribeSnapshotSchedule API operation.\n@param
+  [Hash] options\n  * `:volume_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:volume_arn` - (String)\n  * `:start_at` - (Integer)\n  * `:recurrence_in_hours`
+  - (Integer)\n  * `:description` - (String)\n  * `:timezone` - (String)"
+:describe_storedi_scsi_volumes: "Calls the DescribeStorediSCSIVolumes API operation.\n@param
+  [Hash] options\n  * `:volume_ar_ns` - *required* - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:storedi_scsi_volumes` - (Array<Hash>)\n    * `:volume_arn`
+  - (String)\n    * `:volume_id` - (String)\n    * `:volume_type` - (String)\n    *
+  `:volume_status` - (String)\n    * `:volume_size_in_bytes` - (Integer)\n    * `:volume_progress`
+  - (Numeric)\n    * `:volume_disk_id` - (String)\n    * `:source_snapshot_id` - (String)\n
+  \   * `:preserved_existing_data` - (Boolean)\n    * `:volumei_scsi_attributes` -
+  (Hash)\n      * `:target_arn` - (String)\n      * `:network_interface_id` - (String)\n
+  \     * `:network_interface_port` - (Integer)\n      * `:lun_number` - (Integer)\n
+  \     * `:chap_enabled` - (Boolean)"
+:describe_upload_buffer: "Calls the DescribeUploadBuffer API operation.\n@param [Hash]
+  options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:disk_ids` - (Array<String>)\n  * `:upload_buffer_used_in_bytes`
+  - (Integer)\n  * `:upload_buffer_allocated_in_bytes` - (Integer)"
+:describe_working_storage: "Calls the DescribeWorkingStorage API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:disk_ids` - (Array<String>)\n  * `:working_storage_used_in_bytes`
+  - (Integer)\n  * `:working_storage_allocated_in_bytes` - (Integer)"
+:list_gateways: "Calls the ListGateways API operation.\n@param [Hash] options\n  *
+  `:marker` - (String) \n  * `:limit` - (Integer) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateways` - (Array<Hash>)\n    * `:gateway_arn` - (String)\n  * `:marker` - (String)"
+:list_local_disks: "Calls the ListLocalDisks API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateway_arn` - (String)\n  * `:disks` - (Array<Hash>)\n    * `:disk_id` - (String)\n
+  \   * `:disk_path` - (String)\n    * `:disk_node` - (String)\n    * `:disk_size_in_bytes`
+  - (Integer)\n    * `:disk_allocation_type` - (String)\n    * `:disk_allocation_resource`
+  - (String)"
+:list_volume_recovery_points: "Calls the ListVolumeRecoveryPoints API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:volume_recovery_point_infos` - (Array<Hash>)\n
+  \   * `:volume_arn` - (String)\n    * `:volume_size_in_bytes` - (Integer)\n    *
+  `:volume_usage_in_bytes` - (Integer)\n    * `:volume_recovery_point_time` - (String)"
+:list_volumes: "Calls the ListVolumes API operation.\n@param [Hash] options\n  * `:gateway_arn`
+  - *required* - (String) \n  * `:marker` - (String) \n  * `:limit` - (Integer) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:gateway_arn` - (String)\n  * `:marker` - (String)\n
+  \ * `:volume_infos` - (Array<Hash>)\n    * `:volume_arn` - (String)\n    * `:volume_type`
+  - (String)"
+:shutdown_gateway: "Calls the ShutdownGateway API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateway_arn` - (String)"
+:start_gateway: "Calls the StartGateway API operation.\n@param [Hash] options\n  *
+  `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:gateway_arn`
+  - (String)"
+:update_bandwidth_rate_limit: "Calls the UpdateBandwidthRateLimit API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:average_upload_rate_limit_in_bits_per_sec`
+  - (Integer) \n  * `:average_download_rate_limit_in_bits_per_sec` - (Integer) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:gateway_arn` - (String)"
+:update_chap_credentials: "Calls the UpdateChapCredentials API operation.\n@param
+  [Hash] options\n  * `:target_arn` - *required* - (String) \n  * `:secret_to_authenticate_initiator`
+  - *required* - (String) \n  * `:initiator_name` - *required* - (String) \n  * `:secret_to_authenticate_target`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:target_arn` - (String)\n  *
+  `:initiator_name` - (String)"
+:update_gateway_information: "Calls the UpdateGatewayInformation API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:gateway_name`
+  - (String) \n  * `:gateway_timezone` - (String) Valid values include:\n    * `GMT-12:00`\n
+  \   * `GMT-11:00`\n    * `GMT-10:00`\n    * `GMT-9:00`\n    * `GMT-8:00`\n    *
+  `GMT-7:00`\n    * `GMT-6:00`\n    * `GMT-5:00`\n    * `GMT-4:00`\n    * `GMT-3:30`\n
+  \   * `GMT-3:00`\n    * `GMT-2:00`\n    * `GMT-1:00`\n    * `GMT`\n    * `GMT+1:00`\n
+  \   * `GMT+2:00`\n    * `GMT+3:00`\n    * `GMT+3:30`\n    * `GMT+4:00`\n    * `GMT+4:30`\n
+  \   * `GMT+5:00`\n    * `GMT+5:30`\n    * `GMT+5:45`\n    * `GMT+6:00`\n    * `GMT+7:00`\n
+  \   * `GMT+8:00`\n    * `GMT+9:00`\n    * `GMT+9:30`\n    * `GMT+10:00`\n    * `GMT+11:00`\n
+  \   * `GMT+12:00`\n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:gateway_arn` - (String)"
+:update_gateway_software_now: "Calls the UpdateGatewaySoftwareNow API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)"
+:update_maintenance_start_time: "Calls the UpdateMaintenanceStartTime API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:hour_of_day`
+  - *required* - (Integer) \n  * `:minute_of_hour` - *required* - (Integer) \n  *
+  `:day_of_week` - *required* - (Integer) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:gateway_arn`
+  - (String)"
+:update_snapshot_schedule: "Calls the UpdateSnapshotSchedule API operation.\n@param
+  [Hash] options\n  * `:volume_arn` - *required* - (String) \n  * `:start_at` - *required*
+  - (Integer) \n  * `:recurrence_in_hours` - *required* - (Integer) \n  * `:description`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:volume_arn` - (String)"

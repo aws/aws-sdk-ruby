@@ -42,9 +42,10 @@ module AWS
     describe Client do
 
       def parse method, xml
+        client_class = AWS::EC2::Client.new.class
         response = double('response')
         response.stub_chain(:http_response, :body).and_return(xml)
-        Core::Data.new(Client.response_parsers[method].extract_data(response))
+        Core::Data.new(client_class.response_parsers[method].extract_data(response))
       end
 
       context 'RunInstances' do
@@ -217,7 +218,7 @@ module AWS
         end
 
         it 'should have a reservation_index' do
-          resp.reservation_index.keys.sort.should == 
+          resp.reservation_index.keys.sort.should ==
             ["i-123", "i-321", "i-456", "i-654"]
           resp.reservation_index.each do |id, reservation|
             reservation.instances_set.map { |i| i.instance_id }.

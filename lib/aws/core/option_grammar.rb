@@ -17,13 +17,13 @@ require 'json'
 module AWS
   module Core
 
-    # @private
+    # @api private
     class OptionGrammar
 
-      # @private
+      # @api private
       class DefaultOption; end
 
-      # @private
+      # @api private
       class FormatError < ArgumentError
         attr_accessor :expectation
         attr_accessor :context_description
@@ -38,10 +38,10 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       module Descriptors
 
-        # @private
+        # @api private
         module NoArgs
           def apply(option)
             option.extend self
@@ -84,7 +84,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         module String
 
           extend NoArgs
@@ -100,7 +100,7 @@ module AWS
 
         end
 
-        # @private
+        # @api private
         module Blob
 
           extend NoArgs
@@ -120,7 +120,7 @@ module AWS
 
         end
 
-        # @private
+        # @api private
         module Integer
 
           extend NoArgs
@@ -138,7 +138,7 @@ module AWS
 
         Long = Integer
 
-        # @private
+        # @api private
         module Boolean
 
           extend NoArgs
@@ -154,7 +154,7 @@ module AWS
 
         end
 
-        # @private
+        # @api private
         module Required
           extend NoArgs
           def required?; true; end
@@ -164,7 +164,7 @@ module AWS
           def self.apply *args; end
         end
 
-        # @private
+        # @api private
         module Float
 
           extend NoArgs
@@ -183,7 +183,7 @@ module AWS
 
         Double = Float
 
-        # @private
+        # @api private
         module Rename
           def self.apply(option, new_name)
             new_name = Inflection.ruby_name(new_name)
@@ -191,7 +191,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         module Pattern
 
   #         def validate value, context = nil
@@ -210,7 +210,7 @@ module AWS
 
         end
 
-        # @private
+        # @api private
         module ListMethods
 
           module ClassMethods
@@ -304,7 +304,7 @@ module AWS
 
         end
 
-        # @private
+        # @api private
         module Structure
 
           extend NoArgs
@@ -393,6 +393,9 @@ module AWS
             key_option.param_name = members[:key_param] if members[:key_param]
             value_option.param_name = members[:value_param] if members[:value_param]
 
+            separator = members[:flattened] ? '.' : '.entry.'
+            MetaUtils.extend_method(option, :separator) { separator }
+
           end
 
           def validate(value, context = nil)
@@ -413,7 +416,7 @@ module AWS
             values.inject([]) do |params, (key,value)|
 
               index = params.size / 2 + 1
-              common_prefix = "#{prefixed_name(prefix)}.#{index}."
+              common_prefix = "#{prefixed_name(prefix)}#{separator}#{index}."
 
               key_name = common_prefix + key_option.param_name
               value_name = common_prefix + value_option.param_name
@@ -459,7 +462,7 @@ module AWS
 
         end
 
-        # @private
+        # @api private
         module Boolean
           extend NoArgs
         end
@@ -533,7 +536,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       module ModuleMethods
 
         include Inflection

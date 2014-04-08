@@ -442,6 +442,12 @@ module AWS
           identity.domain?.should == false
         end
 
+        context '#verify_dkim' do
+          it 'raises a RuntimeError' do
+            expect { identity.verify_dkim }.to raise_exception(RuntimeError)
+          end
+        end
+
       end
 
       context 'domains' do
@@ -456,6 +462,34 @@ module AWS
 
         it 'returns true from #domain?' do
           identity.domain?.should == true
+        end
+
+        context '#verify_dkim' do
+          let(:resp) { client.stub_for(:verify_domain_dkim) }
+
+          let(:attributes) { ['TOKEN1', 'TOKEN2'] }
+
+          before(:each) do
+            resp.data[:dkim_tokens] = attributes
+            client.stub(:verify_domain_dkim).and_return(resp)
+          end
+
+
+          it 'calls #verify_domain_dkim on the client' do
+
+            client.should_receive(:verify_domain_dkim).
+              with(:domain => identity.identity).
+              and_return(resp)
+              
+            identity.verify_dkim
+
+          end
+
+          it 'returns the dkim tokens' do
+
+            identity.verify_dkim.should eq(attributes)
+
+          end
         end
 
       end

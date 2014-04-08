@@ -14,7 +14,7 @@
 module AWS
   class IAM
 
-    # @private
+    # @api private
     #
     # Currently IAM exposes the account alias in a collection, as if you
     # could create/manage multiple aliases for a single account.  However,
@@ -37,7 +37,7 @@ module AWS
 
       # Creates an AWS account alias.
       #
-      #   iam.account_aliases.create('myaccountalias')
+      #     iam.account_aliases.create('myaccountalias')
       #
       # For information about account alias restrictions and usage,
       # see http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccountAlias.html.
@@ -51,7 +51,7 @@ module AWS
 
       # Delete an AWS account alias.
       #
-      #   iam.account_aliases.delete('myaccountalias')
+      #     iam.account_aliases.delete('myaccountalias')
       #
       # @param [String] account_alias The account alias to delete.
       # @return [nil]
@@ -60,13 +60,13 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       protected
       def request_method
         :list_account_aliases
       end
 
-      # @private
+      # @api private
       protected
       def each_item response, &block
         response.data[:account_aliases].each do |account_alias|

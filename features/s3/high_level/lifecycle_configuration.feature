@@ -15,7 +15,7 @@
 @s3 @lifecycle_configuration
 Feature: Bucket Lifecycle Configuration
 
-  Scenario: 
+  Scenario:
     Given I create a new bucket
     Then the lifecycle configuration should have 0 rules
 
@@ -25,13 +25,13 @@ Feature: Bucket Lifecycle Configuration
     And I add a rule with the prefix "xyz" that expires in 5 days
     And I update the lifecycle configuration
     Then 1 request should have been made like:
-    | TYPE   | NAME          | VALUE       |
-    | http   | verb          | GET         |
-    | http   | uri           | /?lifecycle |
+    | TYPE   | NAME          | VALUE        |
+    | http   | verb          | GET          |
+    | http   | uri           | /?lifecycle= |
     And 1 request should have been made like:
-    | TYPE   | NAME          | VALUE       |
-    | http   | verb          | PUT         |
-    | http   | uri           | /?lifecycle |
+    | TYPE   | NAME          | VALUE        |
+    | http   | verb          | PUT          |
+    | http   | uri           | /?lifecycle= |
 
   @expiration_date
   Scenario: Adding expiration rule with date time
@@ -47,9 +47,9 @@ Feature: Bucket Lifecycle Configuration
     | ID   | PREFIX   | EXP        | STATUS   |
     | id-1 | prefix/a | 2013-01-03 | Enabled  |
     And 1 request should have been made like:
-    | TYPE   | NAME          | VALUE       |
-    | http   | verb          | PUT         |
-    | http   | uri           | /?lifecycle |
+    | TYPE   | NAME          | VALUE        |
+    | http   | verb          | PUT          |
+    | http   | uri           | /?lifecycle= |
 
   @tiered_storage
   Scenario: Adding Amazon Glacier transition rule
@@ -68,9 +68,9 @@ Feature: Bucket Lifecycle Configuration
     | id-1 | prefix/a | 2013-01-03 | Enabled  |
     | id-2 | prefix/b | 15         | Enabled  |
     And 1 request should have been made like:
-    | TYPE   | NAME          | VALUE       |
-    | http   | verb          | PUT         |
-    | http   | uri           | /?lifecycle |
+    | TYPE   | NAME          | VALUE        |
+    | http   | verb          | PUT          |
+    | http   | uri           | /?lifecycle= |
 
   Scenario: Updating a lifecycle configuration (block style)
     Given I create a new bucket
@@ -86,9 +86,9 @@ Feature: Bucket Lifecycle Configuration
     | id-1 | prefix/a | 4   | Enabled  |
     | id-2 | prefix/b | 5   | Disabled |
     And 1 request should have been made like:
-    | TYPE   | NAME          | VALUE       |
-    | http   | verb          | PUT         |
-    | http   | uri           | /?lifecycle |
+    | TYPE   | NAME          | VALUE        |
+    | http   | verb          | PUT          |
+    | http   | uri           | /?lifecycle= |
 
   Scenario: Removing a rule
     Given I create a new bucket

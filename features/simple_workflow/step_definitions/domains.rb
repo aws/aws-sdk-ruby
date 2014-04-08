@@ -11,10 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'uuidtools'
-
 When /^I register a simple workflow domain$/ do
-  name = "ruby-integration-test-#{UUIDTools::UUID.random_create}"
+  name = "ruby-integration-test-#{SecureRandom.uuid}"
   @domain = @swf.domains.create(name, 1)
   @registered_domains << @domain
 end

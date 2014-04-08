@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/attributes.rb'
-
 module AWS
   module Record
     class HashModel
@@ -29,7 +27,7 @@ module AWS
         #   recipe = Recipe.new(:name => "Buttermilk Pancakes")
         #   recipe.name #=> 'Buttermilk Pancakes'
         #
-        # @example A string attribute with +:set+ set to true
+        # @example A string attribute with `:set` set to true
         #
         #   class Recipe < AWS::Record::HashModel
         #     string_attr :tags, :set => true
@@ -48,12 +46,12 @@ module AWS
 
         # Adds an integer attribute to this class.
         #
-        #   class Recipe < AWS::Record::HashModel
-        #     integer_attr :servings
-        #   end
+        #     class Recipe < AWS::Record::HashModel
+        #       integer_attr :servings
+        #     end
         #
-        #   recipe = Recipe.new(:servings => '10')
-        #   recipe.servings #=> 10
+        #     recipe = Recipe.new(:servings => '10')
+        #     recipe.servings #=> 10
         #
         # @param [Symbol] name The name of the attribute.
         # @param [Hash] options
@@ -65,12 +63,12 @@ module AWS
 
         # Adds a float attribute to this class.
         #
-        #   class Listing < AWS::Record::HashModel
-        #     float_attr :score
-        #   end
+        #     class Listing < AWS::Record::HashModel
+        #       float_attr :score
+        #     end
         #
-        #   listing = Listing.new(:score => '123.456')
-        #   listing.score # => 123.456
+        #     listing = Listing.new(:score => '123.456')
+        #     listing.score # => 123.456
         #
         # @param [Symbol] name The name of the attribute.
         # @param [Hash] options
@@ -119,7 +117,7 @@ module AWS
         #   recipe = Recipe.new(:invented => Time.now)
         #   recipe.invented #=> <DateTime ...>
         #
-        # If you add a datetime_attr for +:created_at+ and/or +:updated_at+ those
+        # If you add a datetime_attr for `:created_at` and/or `:updated_at` those
         # will be automanaged.
         #
         # @param [Symbol] name The name of the attribute.
@@ -172,7 +170,7 @@ module AWS
         end
 
         # A convenience method for adding the standard two datetime attributes
-        # +:created_at+ and +:updated_at+.
+        # `:created_at` and `:updated_at`.
         #
         # @example
         #

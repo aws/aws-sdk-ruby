@@ -47,7 +47,7 @@ module AWS
             :statistic => 'Average',
             :threshold => 50)
 
-          alarms.create('alarm_name', 
+          alarms.create('alarm_name',
             :comparison_operator => 'GreaterThanThreshold',
             :evaluation_periods => 60,
             :metric_name => 'metric_name',
@@ -127,7 +127,7 @@ module AWS
       end
 
       context 'chainable filter methods' do
-        
+
         let(:collection) { alarms }
         let(:client_method) { :describe_alarms }
 
@@ -151,24 +151,24 @@ module AWS
 
         end
 
-        it_behaves_like "a filterable collection method", 
+        it_behaves_like "a filterable collection method",
           :with_action_prefix, :action_prefix
 
-        it_behaves_like "a filterable collection method", 
+        it_behaves_like "a filterable collection method",
           :with_name_prefix, :alarm_name_prefix
 
-        it_behaves_like "a filterable collection method", 
-          :with_name, :alarm_names do 
+        it_behaves_like "a filterable collection method",
+          :with_name, :alarm_names do
           let(:value) { 'single-name' }
           let(:translated_value) { ['single-name'] }
         end
 
-        it_behaves_like "a filterable collection method", 
-          :with_name, :alarm_names do 
+        it_behaves_like "a filterable collection method",
+          :with_name, :alarm_names do
           let(:value) { %w(abc xyz mno) }
         end
 
-        it_behaves_like "a filterable collection method", 
+        it_behaves_like "a filterable collection method",
           :with_state_value, :state_value
 
       end

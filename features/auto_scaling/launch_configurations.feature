@@ -31,4 +31,4 @@ Feature: Auto Scaling Launch Configurations
     And I create a launch configuration with options
     When I get the launch configuraiton by name
     Then the launch configuraiton should have the same attributes
-    
+

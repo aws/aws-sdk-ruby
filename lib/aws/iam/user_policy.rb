@@ -33,7 +33,7 @@ module AWS
       # @return [String] Returns the name of this user policy.
       attr_reader :name
 
-      # @private
+      # @api private
       module PolicyProxy
 
         attr_accessor :user_policy

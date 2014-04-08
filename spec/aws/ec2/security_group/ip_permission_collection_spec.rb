@@ -104,7 +104,7 @@ module AWS
           end
 
           context 'vpc security group without ports' do
-            
+
             let(:ip_permissions) do
               [
                 {

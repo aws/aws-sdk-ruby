@@ -16,15 +16,23 @@ module AWS
 
     # Represents the uploads in progress for a bucket.
     #
+    # Note: After you initiate multipart upload and upload one or more 
+    # parts, you must either complete or abort multipart upload in order 
+    # to stop getting charged for storage of the uploaded parts. Only 
+    # after you either complete or abort multipart upload, Amazon S3 frees 
+    # up the parts storage and stops charging you for the parts storage.
+    #
     # @example Finding uploads by prefix
-    #  bucket.multipart_uploads.with_prefix("photos/").
-    #    map { |upload| upload.object.key }
-    #  # => ["photos/1.jpg", "photos/2.jpg", ...]
+    #
+    #   bucket.multipart_uploads.with_prefix("photos/").
+    #     map { |upload| upload.object.key }
+    #   # => ["photos/1.jpg", "photos/2.jpg", ...]
     #
     # @example Browsing with a tree interface
-    #  bucket.multipart_uploads.with_prefix("photos").as_tree.
-    #    children.select(&:branch?).map(&:prefix)
-    #  # => ["photos/2010", "photos/2011", ...]
+    #
+    #   bucket.multipart_uploads.with_prefix("photos").as_tree.
+    #     children.select(&:branch?).map(&:prefix)
+    #   # => ["photos/2010", "photos/2011", ...]
     #
     # @see Tree
     class MultipartUploadCollection
@@ -37,7 +45,7 @@ module AWS
       #   place.
       attr_reader :bucket
 
-      # @private
+      # @api private
       def initialize(bucket, opts = {})
         @bucket = bucket
         super

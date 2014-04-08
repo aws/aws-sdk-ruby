@@ -14,7 +14,7 @@
 module AWS
   class SimpleWorkflow
 
-    # This collection represents the history events ({HistoryEvent}) for a 
+    # This collection represents the history events ({HistoryEvent}) for a
     # single workflow execution.
     #
     # See {Core::Collection} for documentation on the standard enumerable
@@ -24,7 +24,7 @@ module AWS
 
       include Core::Collection::WithLimitAndNextToken
 
-      # @param [WorkflowExecution] workflow_execution The execution this 
+      # @param [WorkflowExecution] workflow_execution The execution this
       #   history event belongs to.
       #
       # @param [Hash] options
@@ -58,7 +58,7 @@ module AWS
         }
         options[:maximum_page_size] = limit if limit
         options[:next_page_token] = next_token if next_token
-        options[:reverse_order] = @reverse_order unless 
+        options[:reverse_order] = @reverse_order unless
           options.has_key?(:reverse_order)
 
         response = client.get_workflow_execution_history(options)

@@ -134,11 +134,12 @@ def execute_post(form, opts = {})
     fields = fields.to_a + [["file", file]]
 
     req = Net::HTTP::Post::Multipart.new(form.url.path, fields)
+    req.delete('Accept-Encoding')
     resp = http.request(req)
     @result = resp
 
-    unless 
-      resp.kind_of?(Net::HTTPSuccess) or 
+    unless
+      resp.kind_of?(Net::HTTPSuccess) or
       resp.kind_of?(Net::HTTPRedirection) or
       resp.kind_of?(Net::HTTPForbidden)
     then

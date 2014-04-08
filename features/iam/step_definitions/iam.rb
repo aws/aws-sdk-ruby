@@ -70,7 +70,7 @@ After("@iam") do
       # some tests delete the aliases they create
     end
   end
-  
+
   @created_user_policies.each do |user_policy|
     user_policy.delete
   end

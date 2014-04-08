@@ -47,7 +47,7 @@ module AWS
         end
 
         it 'stringifies the name' do
-          KeyPair.new(:foo).name.should == 'foo' 
+          KeyPair.new(:foo).name.should == 'foo'
         end
 
       end
@@ -77,7 +77,7 @@ module AWS
         context 'populate from create_key_pair' do
 
           let(:response) { client.stub_for(:create_key_pair) }
-          
+
           let(:attributes) { keypair.attributes_from_response(response) }
 
           before(:each) do

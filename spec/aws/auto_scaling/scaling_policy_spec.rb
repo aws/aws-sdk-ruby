@@ -95,7 +95,7 @@ module AWS
       end
 
       context '#alarms' do
-        
+
         it 'returns the alarms in a hash' do
           policy.alarms.should == {
             'name1' => 'arn1',
@@ -106,7 +106,7 @@ module AWS
       end
 
       context '#update' do
-        
+
         it 'calls #put_scaling_policy on the client' do
           resp = client.stub_for(:put_scaling_policy)
           resp.data[:policy_arn] = 'arn'
@@ -162,7 +162,7 @@ module AWS
       end
 
       context '#exists' do
-        
+
         let(:response) { client.stub_for(:describe_policies) }
 
         before(:each) do

@@ -14,7 +14,7 @@
 module AWS
   module Core
 
-    # @private
+    # @api private
     class JSONRequestBuilder
 
       def initialize api, operation

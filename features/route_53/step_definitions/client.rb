@@ -11,10 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-When /^I call \#create_hosted_zone on the client$/ do
+When /^I call \#create_hosted_zone$/ do
 
   @name = "ruby-integration-test-#{Time.now.to_i}-#{rand(1000)}.com"
-  @caller_reference = UUIDTools::UUID.random_create.to_s
+  @caller_reference = SecureRandom.uuid
 
   @response = @route_53_client.create_hosted_zone(
     :name => @name,
@@ -42,13 +42,13 @@ Then /^\#get_hosted_zone should raise "([^"]*)"$/ do |error_class_name|
   end
 end
 
-Given /^I call \#create_hosted_zone on the client (\d+) times$/ do |count|
+Given /^I call \#create_hosted_zone (\d+) times$/ do |count|
   count.to_i.times do
-    step "I call #create_hosted_zone on the client"
+    step "I call #create_hosted_zone"
   end
 end
 
-When /^I call \#list_hosted_zone on the client$/ do
+When /^I call \#list_hosted_zone$/ do
   @response = @route_53_client.list_hosted_zones
 end
 

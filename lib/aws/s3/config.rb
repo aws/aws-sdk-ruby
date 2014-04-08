@@ -13,7 +13,7 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'S3', 's3', 's3.amazonaws.com'
+  add_service 'S3', 's3', 's3'
 
   add_option :s3_force_path_style, false, :boolean => true
 
@@ -32,5 +32,17 @@ AWS::Core::Configuration.module_eval do
   add_option :s3_encryption_matdesc, '{}'
 
   add_option :s3_storage_class, 'STANDARD'
+
+  add_option :s3_signature_version do |config, value|
+    if config.s3_region.match(/^cn-/)
+      :v4
+    elsif value
+      value
+    elsif config.s3 && config.s3[:signature_version]
+      config.s3[:signature_version]
+    else
+      :v3
+    end
+  end
 
 end

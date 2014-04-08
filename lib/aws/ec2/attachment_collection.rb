@@ -25,7 +25,7 @@ module AWS
 
       attr_reader :volume
 
-      # @private
+      # @api private
       def initialize volume, options = {}
         @volume = volume
         super
@@ -39,7 +39,7 @@ module AWS
 
           instance = Instance.new(item.instance_id, :config => config)
 
-          attachment = Attachment.new(self.volume, instance, item.device, 
+          attachment = Attachment.new(self.volume, instance, item.device,
             :config => config)
 
           yield(attachment)

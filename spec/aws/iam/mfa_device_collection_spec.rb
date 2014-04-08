@@ -35,8 +35,8 @@ module AWS
       end
 
       context '#enable' do
-        
-        it 'call enable_mfa_device create_user on the client' do 
+
+        it 'call enable_mfa_device create_user on the client' do
           client.should_receive(:enable_mfa_device).with(
             :user_name => 'username',
             :serial_number => 'ABCXYZ123',

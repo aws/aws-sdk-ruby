@@ -1,0 +1,96 @@
+---
+:create_stream: |-
+  Calls the CreateStream API operation.
+  @param [Hash] options
+    * `:stream_name` - *required* - (String) A name to identify the stream. The stream name is scoped to the AWS account used by the application that creates the stream. It is also scoped by region. That is, two streams in two different AWS accounts can have the same name, and two streams in the same AWS account, but in two different regions, can have the same name.
+    * `:shard_count` - *required* - (Integer) The number of shards that the stream will use. The throughput of the stream is a function of the number of shards; more shards are required for greater provisioned throughput. Note: The default limit for an AWS account is 10 shards per stream. If you need to create a stream with more than 10 shards, contact AWS Support to increase the limit on your account.
+  @return [Core::Response]
+:delete_stream: |-
+  Calls the DeleteStream API operation.
+  @param [Hash] options
+    * `:stream_name` - *required* - (String) The name of the stream to delete.
+  @return [Core::Response]
+:describe_stream: |-
+  Calls the DescribeStream API operation.
+  @param [Hash] options
+    * `:stream_name` - *required* - (String) The name of the stream to describe.
+    * `:limit` - (Integer) The maximum number of shards to return.
+    * `:exclusive_start_shard_id` - (String) The shard ID of the shard to start with for the stream description.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:stream_description` - (Hash)
+      * `:stream_name` - (String)
+      * `:stream_arn` - (String)
+      * `:stream_status` - (String)
+      * `:shards` - (Array<Hash>)
+        * `:shard_id` - (String)
+        * `:parent_shard_id` - (String)
+        * `:adjacent_parent_shard_id` - (String)
+        * `:hash_key_range` - (Hash)
+          * `:starting_hash_key` - (String)
+          * `:ending_hash_key` - (String)
+        * `:sequence_number_range` - (Hash)
+          * `:starting_sequence_number` - (String)
+          * `:ending_sequence_number` - (String)
+      * `:has_more_shards` - (Boolean)
+:get_records: |-
+  Calls the GetRecords API operation.
+  @param [Hash] options
+    * `:shard_iterator` - *required* - (String) The position in the shard from which you want to start sequentially reading data records.
+    * `:limit` - (Integer) The maximum number of records to return, which can be set to a value of up to 10,000.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:records` - (Array<Hash>)
+      * `:sequence_number` - (String)
+      * `:data` - (String)
+      * `:partition_key` - (String)
+    * `:next_shard_iterator` - (String)
+:get_shard_iterator: |-
+  Calls the GetShardIterator API operation.
+  @param [Hash] options
+    * `:stream_name` - *required* - (String) The name of the stream.
+    * `:shard_id` - *required* - (String) The shard ID of the shard to get the iterator for.
+    * `:shard_iterator_type` - *required* - (String) Determines how the shard iterator is used to start reading data records from the shard. The following are the valid shard iterator types: AT_SEQUENCE_NUMBER - Start reading exactly from the position denoted by a specific sequence number. AFTER_SEQUENCE_NUMBER - Start reading right after the position denoted by a specific sequence number. TRIM_HORIZON - Start reading at the last untrimmed record in the shard in the system, which is the oldest data record in the shard. LATEST - Start reading just after the most recent record in the shard, so that you always read the most recent data in the shard.  Valid values include:
+      * `AT_SEQUENCE_NUMBER`
+      * `AFTER_SEQUENCE_NUMBER`
+      * `TRIM_HORIZON`
+      * `LATEST`
+    * `:starting_sequence_number` - (String) The sequence number of the data record in the shard from which to start reading from.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:shard_iterator` - (String)
+:list_streams: |-
+  Calls the ListStreams API operation.
+  @param [Hash] options
+    * `:limit` - (Integer) The maximum number of streams to list.
+    * `:exclusive_start_stream_name` - (String) The name of the stream to start the list with.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:stream_names` - (Array<String>)
+    * `:has_more_streams` - (Boolean)
+:merge_shards: |-
+  Calls the MergeShards API operation.
+  @param [Hash] options
+    * `:stream_name` - *required* - (String) The name of the stream for the merge.
+    * `:shard_to_merge` - *required* - (String) The shard ID of the shard to combine with the adjacent shard for the merge.
+    * `:adjacent_shard_to_merge` - *required* - (String) The shard ID of the adjacent shard for the merge.
+  @return [Core::Response]
+:put_record: |-
+  Calls the PutRecord API operation.
+  @param [Hash] options
+    * `:stream_name` - *required* - (String) The name of the stream to put the data record into.
+    * `:data` - *required* - (String) The data blob to put into the record, which is Base64-encoded when the blob is serialized. The maximum size of the data blob (the payload after Base64-decoding) is 50 kilobytes (KB)
+    * `:partition_key` - *required* - (String) Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 bytes. Amazon Kinesis uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key will map to the same shard within the stream.
+    * `:explicit_hash_key` - (String) The hash value used to explicitly determine the shard the data record is assigned to by overriding the partition key hash.
+    * `:sequence_number_for_ordering` - (String) Guarantees strictly increasing sequence numbers, for puts from the same client and to the same partition key. Usage: set the SequenceNumberForOrdering of record n to the sequence number of record n-1 (as returned in the PutRecordResult when putting record n-1). If this parameter is not set, records will be coarsely ordered based on arrival time.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:shard_id` - (String)
+    * `:sequence_number` - (String)
+:split_shard: |-
+  Calls the SplitShard API operation.
+  @param [Hash] options
+    * `:stream_name` - *required* - (String) The name of the stream for the shard split.
+    * `:shard_to_split` - *required* - (String) The shard ID of the shard to split.
+    * `:new_starting_hash_key` - *required* - (String) A hash key value for the starting hash key of one of the child shards created by the split. The hash key range for a given shard constitutes a set of ordered contiguous positive integers. The value for NewStartingHashKey must be in the range of hash keys being mapped into the shard. The NewStartingHashKey hash key value and all higher hash key values in hash key range are distributed to one of the child shards. All the lower hash key values in the range are distributed to the other child shard.
+  @return [Core::Response]

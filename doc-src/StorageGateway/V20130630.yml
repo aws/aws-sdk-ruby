@@ -1,0 +1,334 @@
+# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:activate_gateway: "Calls the ActivateGateway API operation.\n@param [Hash] options\n
+  \ * `:activation_key` - *required* - (String) Your gateway activation key. You can
+  obtain the activation key by sending an HTTP GET request with redirects enabled
+  to the gateway IP address (port 80). The redirect URL returned in the response provides
+  you the activation key for your gateway in the query string parameter activationKey.
+  It may also include other activation-related parameters, however, these are merely
+  defaults -- the arguments you pass to the ActivateGateway API call determine the
+  actual configuration of your gateway.\n  * `:gateway_name` - *required* - (String)
+  \n  * `:gateway_timezone` - *required* - (String) One of the values that indicates
+  the time zone you want to set for the gateway. The time zone is used, for example,
+  for scheduling snapshots and your gateway's maintenance schedule.\n  * `:gateway_region`
+  - *required* - (String) One of the values that indicates the region where you want
+  to store the snapshot backups. The gateway region specified must be the same region
+  as the region in your Host header in the request. For more information about available
+  regions and endpoints for AWS Storage Gateway, see Regions and Endpoints in the
+  Amazon Web Services Glossary. Valid Values: \"us-east-1\", \"us-west-1\", \"us-west-2\",
+  \"eu-west-1\", \"ap-northeast-1\", \"ap-southest-1\", \"sa-east-1\"\n  * `:gateway_type`
+  - (String) One of the values that defines the type of gateway to activate. The type
+  specified is critical to all later functions of the gateway and cannot be changed
+  after activation. The default value is STORED.\n  * `:tape_drive_type` - (String)
+  \n  * `:medium_changer_type` - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:gateway_arn`
+  - (String)"
+:add_cache: "Calls the AddCache API operation.\n@param [Hash] options\n  * `:gateway_arn`
+  - *required* - (String) \n  * `:disk_ids` - *required* - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:gateway_arn` - (String)"
+:add_upload_buffer: "Calls the AddUploadBuffer API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n  * `:disk_ids` - *required* - (Array&lt;<String>)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:gateway_arn` - (String)"
+:add_working_storage: "Calls the AddWorkingStorage API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n  * `:disk_ids` - *required* - (Array&lt;<String>)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:gateway_arn` - (String)"
+:cancel_archival: "Calls the CancelArchival API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n  * `:tape_arn` - *required* - (String)
+  The Amazon Resource Name (ARN) of the virtual tape you want to cancel archiving
+  for.\n@return [Core::Response] The `#data` method of the response object returns
+  a hash with the following structure:\n\n  * `:tape_arn` - (String)"
+:cancel_retrieval: "Calls the CancelRetrieval API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n  * `:tape_arn` - *required* - (String)
+  The Amazon Resource Name (ARN) of the virtual tape you want to cancel retrieval
+  for.\n@return [Core::Response] The `#data` method of the response object returns
+  a hash with the following structure:\n\n  * `:tape_arn` - (String)"
+:create_cachedi_scsi_volume: "Calls the CreateCachediSCSIVolume API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:volume_size_in_bytes`
+  - *required* - (Integer) \n  * `:snapshot_id` - (String) \n  * `:target_name` -
+  *required* - (String) \n  * `:network_interface_id` - *required* - (String) \n  *
+  `:client_token` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:volume_arn`
+  - (String)\n  * `:target_arn` - (String)"
+:create_snapshot: "Calls the CreateSnapshot API operation.\n@param [Hash] options\n
+  \ * `:volume_arn` - *required* - (String) \n  * `:snapshot_description` - *required*
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:volume_arn` - (String)\n  *
+  `:snapshot_id` - (String)"
+:create_snapshot_from_volume_recovery_point: "Calls the CreateSnapshotFromVolumeRecoveryPoint
+  API operation.\n@param [Hash] options\n  * `:volume_arn` - *required* - (String)
+  \n  * `:snapshot_description` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:snapshot_id` - (String)\n  * `:volume_arn` - (String)\n  * `:volume_recovery_point_time`
+  - (String)"
+:create_storedi_scsi_volume: "Calls the CreateStorediSCSIVolume API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:disk_id` - *required*
+  - (String) \n  * `:snapshot_id` - (String) \n  * `:preserve_existing_data` - *required*
+  - (Boolean) \n  * `:target_name` - *required* - (String) \n  * `:network_interface_id`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:volume_arn` - (String)\n
+  \ * `:volume_size_in_bytes` - (Integer)\n  * `:target_arn` - (String)"
+:create_tapes: |-
+  Calls the CreateTapes API operation.
+  @param [Hash] options
+    * `:gateway_arn` - *required* - (String) The unique Amazon Resource Name(ARN) that represents the gateway to associate the virtual tapes with. Use the ListGateways operation to return a list of gateways for your account and region.
+    * `:tape_size_in_bytes` - *required* - (Integer) The size, in bytes, of the virtual tapes you want to create. The size must be gigabyte (1024*1024*1024 byte) aligned.
+    * `:client_token` - *required* - (String) A unique identifier that you use to retry a request. If you retry a request, use the same ClientToken you specified in the initial request. Using the same ClientToken prevents creating the tape multiple times.
+    * `:num_tapes_to_create` - *required* - (Integer) The number of virtual tapes you want to create.
+    * `:tape_barcode_prefix` - *required* - (String) A prefix you append to the barcode of the virtual tape you are creating. This makes a barcode unique. The prefix must be 1 to 4 characters in length and must be upper-case letters A-Z.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:tape_ar_ns` - (Array<String>)
+:delete_bandwidth_rate_limit: "Calls the DeleteBandwidthRateLimit API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:bandwidth_type`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:gateway_arn` - (String)"
+:delete_chap_credentials: "Calls the DeleteChapCredentials API operation.\n@param
+  [Hash] options\n  * `:target_arn` - *required* - (String) \n  * `:initiator_name`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:target_arn` - (String)\n
+  \ * `:initiator_name` - (String)"
+:delete_gateway: "Calls the DeleteGateway API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateway_arn` - (String)"
+:delete_snapshot_schedule: "Calls the DeleteSnapshotSchedule API operation.\n@param
+  [Hash] options\n  * `:volume_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:volume_arn` - (String)"
+:delete_tape: |-
+  Calls the DeleteTape API operation.
+  @param [Hash] options
+    * `:gateway_arn` - *required* - (String) The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is associated with. Use the ListGateways operation to return a list of gateways for your account and region.
+    * `:tape_arn` - *required* - (String) The Amazon Resource Name (ARN) of the virtual tape to delete.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:tape_arn` - (String)
+:delete_tape_archive: |-
+  Calls the DeleteTapeArchive API operation.
+  @param [Hash] options
+    * `:tape_arn` - *required* - (String) The Amazon Resource Name (ARN) of the virtual tape to delete from the virtual tape shelf (VTS).
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:tape_arn` - (String)
+:delete_volume: "Calls the DeleteVolume API operation.\n@param [Hash] options\n  *
+  `:volume_arn` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:volume_arn`
+  - (String)"
+:describe_bandwidth_rate_limit: "Calls the DescribeBandwidthRateLimit API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:average_upload_rate_limit_in_bits_per_sec`
+  - (Integer)\n  * `:average_download_rate_limit_in_bits_per_sec` - (Integer)"
+:describe_cache: "Calls the DescribeCache API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateway_arn` - (String)\n  * `:disk_ids` - (Array<String>)\n  * `:cache_allocated_in_bytes`
+  - (Integer)\n  * `:cache_used_percentage` - (Numeric)\n  * `:cache_dirty_percentage`
+  - (Numeric)\n  * `:cache_hit_percentage` - (Numeric)\n  * `:cache_miss_percentage`
+  - (Numeric)"
+:describe_cachedi_scsi_volumes: "Calls the DescribeCachediSCSIVolumes API operation.\n@param
+  [Hash] options\n  * `:volume_ar_ns` - *required* - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:cachedi_scsi_volumes` - (Array<Hash>)\n    * `:volume_arn`
+  - (String)\n    * `:volume_id` - (String)\n    * `:volume_type` - (String)\n    *
+  `:volume_status` - (String)\n    * `:volume_size_in_bytes` - (Integer)\n    * `:volume_progress`
+  - (Numeric)\n    * `:source_snapshot_id` - (String)\n    * `:volumei_scsi_attributes`
+  - (Hash)\n      * `:target_arn` - (String)\n      * `:network_interface_id` - (String)\n
+  \     * `:network_interface_port` - (Integer)\n      * `:lun_number` - (Integer)\n
+  \     * `:chap_enabled` - (Boolean)"
+:describe_chap_credentials: "Calls the DescribeChapCredentials API operation.\n@param
+  [Hash] options\n  * `:target_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:chap_credentials` - (Array<Hash>)\n    * `:target_arn` - (String)\n    * `:secret_to_authenticate_initiator`
+  - (String)\n    * `:initiator_name` - (String)\n    * `:secret_to_authenticate_target`
+  - (String)"
+:describe_gateway_information: "Calls the DescribeGatewayInformation API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:gateway_id` - (String)\n  * `:gateway_timezone`
+  - (String)\n  * `:gateway_state` - (String)\n  * `:gateway_network_interfaces` -
+  (Array<Hash>)\n    * `:ipv_4_address` - (String)\n    * `:mac_address` - (String)\n
+  \   * `:ipv_6_address` - (String)\n  * `:gateway_type` - (String)\n  * `:next_update_availability_date`
+  - (String)"
+:describe_maintenance_start_time: "Calls the DescribeMaintenanceStartTime API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:hour_of_day` - (Integer)\n  * `:minute_of_hour`
+  - (Integer)\n  * `:day_of_week` - (Integer)\n  * `:timezone` - (String)"
+:describe_snapshot_schedule: "Calls the DescribeSnapshotSchedule API operation.\n@param
+  [Hash] options\n  * `:volume_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:volume_arn` - (String)\n  * `:start_at` - (Integer)\n  * `:recurrence_in_hours`
+  - (Integer)\n  * `:description` - (String)\n  * `:timezone` - (String)"
+:describe_storedi_scsi_volumes: "Calls the DescribeStorediSCSIVolumes API operation.\n@param
+  [Hash] options\n  * `:volume_ar_ns` - *required* - (Array&lt;<String>) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:storedi_scsi_volumes` - (Array<Hash>)\n    * `:volume_arn`
+  - (String)\n    * `:volume_id` - (String)\n    * `:volume_type` - (String)\n    *
+  `:volume_status` - (String)\n    * `:volume_size_in_bytes` - (Integer)\n    * `:volume_progress`
+  - (Numeric)\n    * `:volume_disk_id` - (String)\n    * `:source_snapshot_id` - (String)\n
+  \   * `:preserved_existing_data` - (Boolean)\n    * `:volumei_scsi_attributes` -
+  (Hash)\n      * `:target_arn` - (String)\n      * `:network_interface_id` - (String)\n
+  \     * `:network_interface_port` - (Integer)\n      * `:lun_number` - (Integer)\n
+  \     * `:chap_enabled` - (Boolean)"
+:describe_tape_archives: |-
+  Calls the DescribeTapeArchives API operation.
+  @param [Hash] options
+    * `:tape_ar_ns` - (Array&lt;<String>) Specifies one or more unique Amazon Resource Names (ARNs) that represent the virtual tapes you want to describe.
+    * `:marker` - (String) An opaque string that indicates the position at which to begin describing virtual tapes.
+    * `:limit` - (Integer) Specifies that the number of virtual tapes descried be limited to the specified number.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:tape_archives` - (Array<Hash>)
+      * `:tape_arn` - (String)
+      * `:tape_barcode` - (String)
+      * `:tape_size_in_bytes` - (Integer)
+      * `:completion_time` - (Time)
+      * `:retrieved_to` - (String)
+      * `:tape_status` - (String)
+    * `:marker` - (String)
+:describe_tape_recovery_points: "Calls the DescribeTapeRecoveryPoints API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:marker` - (String)
+  An opaque string that indicates the position at which to begin describing the virtual
+  tape recovery points.\n  * `:limit` - (Integer) Specifies that the number of virtual
+  tape recovery points that are described be limited to the specified number.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:gateway_arn` - (String)\n  * `:tape_recovery_point_infos`
+  - (Array<Hash>)\n    * `:tape_arn` - (String)\n    * `:tape_recovery_point_time`
+  - (Time)\n    * `:tape_size_in_bytes` - (Integer)\n    * `:tape_status` - (String)\n
+  \ * `:marker` - (String)"
+:describe_tapes: "Calls the DescribeTapes API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n  * `:tape_ar_ns` - (Array&lt;<String>)
+  Specifies one or more unique Amazon Resource Names (ARNs) that represent the virtual
+  tapes you want to describe. If this parameter is not specified, AWS Storage Gateway
+  returns a description of all virtual tapes associated with the specified gateway.\n
+  \ * `:marker` - (String) A marker value, obtained in a previous call to DescribeTapes.
+  This marker indicates which page of results to retrieve. If not specified, the first
+  page of results is retrieved.\n  * `:limit` - (Integer) Specifies that the number
+  of virtual tapes described be limited to the specified number. Amazon Web Services
+  may impose its own limit, if this field is not set.\n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:tapes` - (Array<Hash>)\n    * `:tape_arn` - (String)\n    * `:tape_barcode`
+  - (String)\n    * `:tape_size_in_bytes` - (Integer)\n    * `:tape_status` - (String)\n
+  \   * `:vtl_device` - (String)\n    * `:progress` - (Numeric)\n  * `:marker` - (String)"
+:describe_upload_buffer: "Calls the DescribeUploadBuffer API operation.\n@param [Hash]
+  options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:disk_ids` - (Array<String>)\n  * `:upload_buffer_used_in_bytes`
+  - (Integer)\n  * `:upload_buffer_allocated_in_bytes` - (Integer)"
+:describe_vtl_devices: "Calls the DescribeVTLDevices API operation.\n@param [Hash]
+  options\n  * `:gateway_arn` - *required* - (String) \n  * `:vtl_device_ar_ns` -
+  (Array&lt;<String>) An array of strings, where each string represents the Amazon
+  Resource Name (ARN) of a VTL device. All of the specified VTL devices must be from
+  the same gateway. If no VTL devices are specified, the result will contain all devices
+  on the specified gateway.\n  * `:marker` - (String) An opaque string that indicates
+  the position at which to begin describing the VTL devices.\n  * `:limit` - (Integer)
+  Specifies that the number of VTL devices described be limited to the specified number.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:gateway_arn` - (String)\n  * `:vtl_devices` - (Array<Hash>)\n
+  \   * `:vtl_device_arn` - (String)\n    * `:vtl_device_type` - (String)\n    * `:vtl_device_vendor`
+  - (String)\n    * `:vtl_device_product_identifier` - (String)\n    * `:devicei_scsi_attributes`
+  - (Hash)\n      * `:target_arn` - (String)\n      * `:network_interface_id` - (String)\n
+  \     * `:network_interface_port` - (Integer)\n      * `:chap_enabled` - (Boolean)\n
+  \ * `:marker` - (String)"
+:describe_working_storage: "Calls the DescribeWorkingStorage API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:disk_ids` - (Array<String>)\n  * `:working_storage_used_in_bytes`
+  - (Integer)\n  * `:working_storage_allocated_in_bytes` - (Integer)"
+:disable_gateway: "Calls the DisableGateway API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateway_arn` - (String)"
+:list_gateways: "Calls the ListGateways API operation.\n@param [Hash] options\n  *
+  `:marker` - (String) \n  * `:limit` - (Integer) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateways` - (Array<Hash>)\n    * `:gateway_arn` - (String)\n    * `:gateway_type`
+  - (String)\n    * `:gateway_operational_state` - (String)\n  * `:marker` - (String)"
+:list_local_disks: "Calls the ListLocalDisks API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateway_arn` - (String)\n  * `:disks` - (Array<Hash>)\n    * `:disk_id` - (String)\n
+  \   * `:disk_path` - (String)\n    * `:disk_node` - (String)\n    * `:disk_size_in_bytes`
+  - (Integer)\n    * `:disk_allocation_type` - (String)\n    * `:disk_allocation_resource`
+  - (String)"
+:list_volume_recovery_points: "Calls the ListVolumeRecoveryPoints API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)\n  * `:volume_recovery_point_infos` - (Array<Hash>)\n
+  \   * `:volume_arn` - (String)\n    * `:volume_size_in_bytes` - (Integer)\n    *
+  `:volume_usage_in_bytes` - (Integer)\n    * `:volume_recovery_point_time` - (String)"
+:list_volumes: "Calls the ListVolumes API operation.\n@param [Hash] options\n  * `:gateway_arn`
+  - *required* - (String) \n  * `:marker` - (String) \n  * `:limit` - (Integer) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:gateway_arn` - (String)\n  * `:marker` - (String)\n
+  \ * `:volume_infos` - (Array<Hash>)\n    * `:volume_arn` - (String)\n    * `:volume_type`
+  - (String)"
+:retrieve_tape_archive: |-
+  Calls the RetrieveTapeArchive API operation.
+  @param [Hash] options
+    * `:tape_arn` - *required* - (String) The Amazon Resource Name (ARN) of the virtual tape you want to retrieve from the virtual tape shelf (VTS).
+    * `:gateway_arn` - *required* - (String) The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the ListGateways operation to return a list of gateways for your account and region. You retrieve archived virtual tapes to only one gateway and the gateway must be a gateway-VTL.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:tape_arn` - (String)
+:retrieve_tape_recovery_point: "Calls the RetrieveTapeRecoveryPoint API operation.\n@param
+  [Hash] options\n  * `:tape_arn` - *required* - (String) The Amazon Resource Name
+  (ARN) of the virtual tape for which you want to retrieve the recovery point.\n  *
+  `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:tape_arn`
+  - (String)"
+:shutdown_gateway: "Calls the ShutdownGateway API operation.\n@param [Hash] options\n
+  \ * `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateway_arn` - (String)"
+:start_gateway: "Calls the StartGateway API operation.\n@param [Hash] options\n  *
+  `:gateway_arn` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:gateway_arn`
+  - (String)"
+:update_bandwidth_rate_limit: "Calls the UpdateBandwidthRateLimit API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:average_upload_rate_limit_in_bits_per_sec`
+  - (Integer) \n  * `:average_download_rate_limit_in_bits_per_sec` - (Integer) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:gateway_arn` - (String)"
+:update_chap_credentials: "Calls the UpdateChapCredentials API operation.\n@param
+  [Hash] options\n  * `:target_arn` - *required* - (String) \n  * `:secret_to_authenticate_initiator`
+  - *required* - (String) \n  * `:initiator_name` - *required* - (String) \n  * `:secret_to_authenticate_target`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:target_arn` - (String)\n  *
+  `:initiator_name` - (String)"
+:update_gateway_information: "Calls the UpdateGatewayInformation API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:gateway_name`
+  - (String) \n  * `:gateway_timezone` - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:gateway_arn` - (String)"
+:update_gateway_software_now: "Calls the UpdateGatewaySoftwareNow API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:gateway_arn` - (String)"
+:update_maintenance_start_time: "Calls the UpdateMaintenanceStartTime API operation.\n@param
+  [Hash] options\n  * `:gateway_arn` - *required* - (String) \n  * `:hour_of_day`
+  - *required* - (Integer) \n  * `:minute_of_hour` - *required* - (Integer) \n  *
+  `:day_of_week` - *required* - (Integer) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:gateway_arn`
+  - (String)"
+:update_snapshot_schedule: "Calls the UpdateSnapshotSchedule API operation.\n@param
+  [Hash] options\n  * `:volume_arn` - *required* - (String) \n  * `:start_at` - *required*
+  - (Integer) \n  * `:recurrence_in_hours` - *required* - (Integer) \n  * `:description`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:volume_arn` - (String)"

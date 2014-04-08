@@ -1,0 +1,201 @@
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+
+---
+:json_version: '1.1'
+:target_prefix: Kinesis_20131202.
+:api_version: '2013-12-02'
+:operations:
+- :name: CreateStream
+  :method: :create_stream
+  :inputs:
+    StreamName:
+    - :string
+    - :required
+    ShardCount:
+    - :integer
+    - :required
+  :outputs: {}
+- :name: DeleteStream
+  :method: :delete_stream
+  :inputs:
+    StreamName:
+    - :string
+    - :required
+  :outputs: {}
+- :name: DescribeStream
+  :method: :describe_stream
+  :inputs:
+    StreamName:
+    - :string
+    - :required
+    Limit:
+    - :integer
+    ExclusiveStartShardId:
+    - :string
+  :outputs:
+    StreamDescription:
+      :sym: :stream_description
+      :type: :hash
+      :members:
+        StreamName:
+          :sym: :stream_name
+          :type: :string
+        StreamARN:
+          :sym: :stream_arn
+          :type: :string
+        StreamStatus:
+          :sym: :stream_status
+          :type: :string
+        Shards:
+          :sym: :shards
+          :type: :hash
+          :members:
+            ShardId:
+              :sym: :shard_id
+              :type: :string
+            ParentShardId:
+              :sym: :parent_shard_id
+              :type: :string
+            AdjacentParentShardId:
+              :sym: :adjacent_parent_shard_id
+              :type: :string
+            HashKeyRange:
+              :sym: :hash_key_range
+              :type: :hash
+              :members:
+                StartingHashKey:
+                  :sym: :starting_hash_key
+                  :type: :string
+                EndingHashKey:
+                  :sym: :ending_hash_key
+                  :type: :string
+            SequenceNumberRange:
+              :sym: :sequence_number_range
+              :type: :hash
+              :members:
+                StartingSequenceNumber:
+                  :sym: :starting_sequence_number
+                  :type: :string
+                EndingSequenceNumber:
+                  :sym: :ending_sequence_number
+                  :type: :string
+        HasMoreShards:
+          :sym: :has_more_shards
+          :type: :boolean
+- :name: GetRecords
+  :method: :get_records
+  :inputs:
+    ShardIterator:
+    - :string
+    - :required
+    Limit:
+    - :integer
+  :outputs:
+    Records:
+      :sym: :records
+      :type: :hash
+      :members:
+        SequenceNumber:
+          :sym: :sequence_number
+          :type: :string
+        Data:
+          :sym: :data
+          :type: :blob
+        PartitionKey:
+          :sym: :partition_key
+          :type: :string
+    NextShardIterator:
+      :sym: :next_shard_iterator
+      :type: :string
+- :name: GetShardIterator
+  :method: :get_shard_iterator
+  :inputs:
+    StreamName:
+    - :string
+    - :required
+    ShardId:
+    - :string
+    - :required
+    ShardIteratorType:
+    - :string
+    - :required
+    StartingSequenceNumber:
+    - :string
+  :outputs:
+    ShardIterator:
+      :sym: :shard_iterator
+      :type: :string
+- :name: ListStreams
+  :method: :list_streams
+  :inputs:
+    Limit:
+    - :integer
+    ExclusiveStartStreamName:
+    - :string
+  :outputs:
+    StreamNames:
+      :sym: :stream_names
+      :type: :string
+    HasMoreStreams:
+      :sym: :has_more_streams
+      :type: :boolean
+- :name: MergeShards
+  :method: :merge_shards
+  :inputs:
+    StreamName:
+    - :string
+    - :required
+    ShardToMerge:
+    - :string
+    - :required
+    AdjacentShardToMerge:
+    - :string
+    - :required
+  :outputs: {}
+- :name: PutRecord
+  :method: :put_record
+  :inputs:
+    StreamName:
+    - :string
+    - :required
+    Data:
+    - :blob
+    - :required
+    PartitionKey:
+    - :string
+    - :required
+    ExplicitHashKey:
+    - :string
+    SequenceNumberForOrdering:
+    - :string
+  :outputs:
+    ShardId:
+      :sym: :shard_id
+      :type: :string
+    SequenceNumber:
+      :sym: :sequence_number
+      :type: :string
+- :name: SplitShard
+  :method: :split_shard
+  :inputs:
+    StreamName:
+    - :string
+    - :required
+    ShardToSplit:
+    - :string
+    - :required
+    NewStartingHashKey:
+    - :string
+    - :required
+  :outputs: {}

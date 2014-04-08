@@ -112,7 +112,7 @@ module AWS
       end
 
       context '#delete' do
-        
+
         it 'calls #delete_load_balancer on the client' do
           client.should_receive(:delete_load_balancer).
             with(:load_balancer_name => load_balancer.name)
@@ -152,7 +152,7 @@ module AWS
         end
 
         it 'returns the canonical hosted zone name id as a string' do
-          load_balancer.canonical_hosted_zone_name_id.should == 
+          load_balancer.canonical_hosted_zone_name_id.should ==
             'hosted-zone-name-id'
         end
 
@@ -175,7 +175,7 @@ module AWS
       context '#availability_zones' do
 
         it 'returns an az collection' do
-          load_balancer.availability_zones.should 
+          load_balancer.availability_zones.should
             be_an(AvailabilityZoneCollection)
         end
 
@@ -254,13 +254,13 @@ module AWS
           balancer = {
             :load_balancer_name => load_balancer.name,
             :source_security_group => source_sg }
-            
+
           response.data[:load_balancer_descriptions] = [balancer]
 
         end
 
         it 'returns a hash for the group name and owner alias' do
-          load_balancer.source_security_group.should == 
+          load_balancer.source_security_group.should ==
             { :group_name => 'lb-group-name', :user_id => 'lb-owner-alias' }
         end
 
@@ -290,7 +290,7 @@ module AWS
           :load_balancer_name => load_balancer.name,
           :health_check => config_a,
         }}
-        
+
         before(:each) do
           response.data[:load_balancer_descriptions] = [balancer_description]
         end

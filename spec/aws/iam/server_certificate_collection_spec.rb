@@ -31,7 +31,7 @@ module AWS
         let(:resp) { client.stub_for(:upload_server_certificate) }
 
         before(:each) do
-          resp.data[:server_certificate_metadata] = 
+          resp.data[:server_certificate_metadata] =
             { :server_certificate_name => "MyCert" }
           client.stub(:upload_server_certificate).and_return(resp)
         end

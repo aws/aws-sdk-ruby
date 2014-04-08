@@ -13,6 +13,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'ElasticBeanstalk', 'elastic_beanstalk', 'elasticbeanstalk.us-east-1.amazonaws.com'
+  add_service 'ElasticBeanstalk', 'elastic_beanstalk', 'elasticbeanstalk'
 
 end

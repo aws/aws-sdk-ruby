@@ -23,6 +23,47 @@ module AWS
 
       let(:metrics) { MetricCollection.new(:config => config) }
 
+      let(:response) { client.stub_for(:list_metrics) }
+
+      context '#with_dimension' do
+
+        it 'incrementially builds up a list of dimensions' do
+          client.should_receive(:list_metrics).with(:dimensions => [
+            { :name => 'd1', :value => 'v1' },
+            { :name => 'd2', :value => 'v2' },
+            { :name => 'd3', :value => 'v3' },
+          ]).and_return(response)
+          metrics.
+            with_dimension('d1', 'v1').
+            with_dimension('d2', 'v2').
+            with_dimension('d3', 'v3').to_a
+        end
+
+      end
+
+      context '#with_dimensions' do
+
+        it 'passes dimensions to the client' do
+          dimensions = [{:name => 'd1', :value => 'v1'}]
+          client.should_receive(:list_metrics).
+            with(:dimensions => dimensions).
+            and_return(response)
+          metrics.with_dimensions(dimensions).to_a
+        end
+
+        it 'can be chained' do
+          client.should_receive(:list_metrics).with(:dimensions => [
+            { :name => 'd1', :value => 'v1' },
+            { :name => 'd2', :value => 'v2' },
+          ]).and_return(response)
+          metrics.
+            with_dimensions([{ :name => 'd1', :value => 'v1' }]).
+            with_dimensions([{ :name => 'd2', :value => 'v2' }]).
+            to_a
+        end
+
+      end
+
       it_behaves_like "a pageable collection" do
 
         let(:collection)      { metrics }

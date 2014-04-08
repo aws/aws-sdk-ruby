@@ -17,39 +17,39 @@ module AWS
 
       # Represents the attachment between an internet gateway and a VPC.
       #
-      # == Creating Attachments
+      # ## Creating Attachments
       #
       # To create an attachment, just assign an internet gateway to a VPC
       # or visa versa.
       #
-      #   # attaches a gateway to a vpc
-      #   internet_gateway.vpc = vpc
+      #     # attaches a gateway to a vpc
+      #     internet_gateway.vpc = vpc
       #
-      #   # this can also be done in reverse
-      #   vpc.internet_gateway = internet_gateway
+      #     # this can also be done in reverse
+      #     vpc.internet_gateway = internet_gateway
       #
-      # == Enumerating Attachments
+      # ## Enumerating Attachments
       #
       # You can enumerate the attachments for an {InternetGateway} like so:
       #
-      #   internet_gateway.attachments.each do |attachment|
-      #      puts "#{attachment.internet_gateway.id} => #{attachment.vpc.id}"
-      #   end
+      #     internet_gateway.attachments.each do |attachment|
+      #        puts "#{attachment.internet_gateway.id} => #{attachment.vpc.id}"
+      #     end
       #
-      # == Deleting Attachments
+      # ## Deleting Attachments
       #
       # You can delete an attachment from the Attachment object:
       #
-      #   internet_gateway.attachments.each(&:delete)
+      #     internet_gateway.attachments.each(&:delete)
       #
       # You can also delete an attachment by assigning a nil value:
       #
-      #   # removes the current attachment to the vpc is one exists
-      #   internet_gateway.vpc = nil
+      #     # removes the current attachment to the vpc is one exists
+      #     internet_gateway.vpc = nil
       #
       class Attachment
 
-        # @private
+        # @api private
         def initialize internet_gateway, details
           @internet_gateway = internet_gateway
           @vpc = VPC.new(details.vpc_id, :config => internet_gateway.config)

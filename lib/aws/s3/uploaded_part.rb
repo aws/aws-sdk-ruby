@@ -29,10 +29,11 @@ module AWS
       # @return [Integer] The part number.
       attr_reader :part_number
 
-      # @private
+      # @api private
       def initialize(upload, part_number, opts = {})
         @upload = upload
         @part_number = part_number
+        @etag = opts[:etag]
         super
       end
 
@@ -57,10 +58,11 @@ module AWS
 
       # @return [String] The ETag of the part.
       def etag
-        get_attribute(:etag)
+        @etag ||= get_attribute(:etag)
+        @etag
       end
 
-      # @private
+      # @api private
       private
       def get_attribute(name)
         (resp = client.list_parts(:bucket_name => upload.object.bucket.name,
@@ -71,7 +73,7 @@ module AWS
          part = resp.parts.first and
          part.part_number == part_number and
          part.send(name)) or
-          raise "part 3 of upload abc123 does not exist"
+          raise "part #{part_number} of upload #{upload.id} does not exist"
       end
 
     end

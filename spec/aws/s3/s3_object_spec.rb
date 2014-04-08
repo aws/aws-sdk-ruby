@@ -170,6 +170,13 @@ module AWS
 
         end
 
+        context 'with a frozen string' do
+          it 'should not raise an Exception' do
+            client.should_receive(:put_object).and_return(client.stub_for(:put_object))
+            expect { object.write("HELLO".freeze) }.to_not raise_error
+          end
+        end
+
         context 'with a file path' do
 
           it 'should call put_object with the bucket, key and data' do
@@ -364,19 +371,19 @@ module AWS
           context 'string' do
 
             it 'should split the upload into parts' do
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
-              object.write("aabb",
-                           :multipart_threshold => 2,
-                           :multipart_min_part_size => 2)
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
+              object.write('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb',
+                :multipart_threshold => 2,
+                :multipart_min_part_size => 2)
             end
 
             it 'should default to the configured multipart_min_part_size' do
               config.stub(:s3_multipart_min_part_size).and_return(2)
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
-              object.write("aabb",
-                           :multipart_threshold => 2)
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
+              object.write('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb',
+                :multipart_threshold => 2)
             end
 
           end
@@ -384,11 +391,11 @@ module AWS
           context 'stream' do
 
             it 'should split the upload into parts' do
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
-              object.write(StringIO.new("aabb"),
-                           :multipart_threshold => 2,
-                           :multipart_min_part_size => 2)
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
+              object.write(StringIO.new('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb'),
+                :multipart_threshold => 2,
+                :multipart_min_part_size => 2)
             end
 
           end
@@ -396,14 +403,14 @@ module AWS
           context 'file' do
 
             it 'should split the upload into parts' do
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
               f = Tempfile.new("foo")
-              f.write("aabb")
+              f.write('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb')
               f.close
               object.write(:file => f.path,
-                           :multipart_threshold => 2,
-                           :multipart_min_part_size => 2)
+                :multipart_threshold => 2,
+                :multipart_min_part_size => 2)
             end
 
           end
@@ -885,6 +892,29 @@ module AWS
           object.url_for(:read, :version_id => 'version-id-string')
         end
 
+        it 'raises an ArgumentError if attempting to presign using v4 more than 1 week out with v4' do
+          in_eight_days = Time.now + (8 * 60 * 60 * 24)
+          in_six_days = Time.now + (6 * 60 * 60 * 24)
+          # v2 - 8 days out - okay
+          lambda {
+            object.url_for(:read, :expires => in_eight_days)
+          }.should_not raise_error
+
+          # v4 - 6 days out - okay
+          lambda {
+            object.url_for(:read,
+              :expires => in_six_days,
+              :signature_version => :v4)
+          }.should_not raise_error
+
+          # v4 - 8 days out - bad
+          lambda {
+            object.url_for(:read,
+              :expires => in_eight_days,
+              :signature_version => :v4)
+          }.should raise_error(ArgumentError, /one week/)
+        end
+
         context 'federated sessions' do
 
           let(:credential_provider) {
@@ -913,9 +943,8 @@ module AWS
           end
 
           it "should make #{param} part of the string to sign" do
-            http_request.should_receive(:canonicalized_resource) do
-              http_request.params.map { |p| p.to_s }.
-                should include("#{param}=value")
+            Core::Signers::S3.should_receive(:canonicalized_resource) do |req|
+              req.params.map { |p| p.to_s }.should include("#{param}=value")
             end
             object.url_for(:get, Hash[[[name, "value"]]])
           end

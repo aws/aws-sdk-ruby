@@ -17,7 +17,7 @@ module AWS
 
       extend Core::LazyErrorClasses
 
-      # @private
+      # @api private
       def self.error_class(code)
         super(code.sub(/^AWS\.SimpleQueueService\./, ''))
       end
@@ -38,10 +38,10 @@ module AWS
         #   contains information about one message that failed to delete.
         #   Hash keys include:
         #
-        #   * +:error_code+
-        #   * +:error_message+
-        #   * +:sender_fault+
-        #   * +:receipt_handle+
+        #   * `:error_code`
+        #   * `:error_message`
+        #   * `:sender_fault`
+        #   * `:receipt_handle`
         #
         attr_reader :failures
 
@@ -63,10 +63,10 @@ module AWS
         #   contains information about one message that failed to change
         #   visibility. Hash keys include:
         #
-        #   * +:error_code+
-        #   * +:error_message+
-        #   * +:sender_fault+
-        #   * +:receipt_handle+
+        #   * `:error_code`
+        #   * `:error_message`
+        #   * `:sender_fault`
+        #   * `:receipt_handle`
         #
         attr_reader :failures
 
@@ -85,17 +85,41 @@ module AWS
         attr_reader :sent
 
         # @return [Array<Hash>] Returns a list of hashes.  Each hash
-        #   contains information about one message that failed to change
-        #   visibility. Hash keys include:
+        #   contains information about one message that was not sent.   
         #
-        #   * +:error_code+
-        #   * +:error_message+
-        #   * +:sender_fault+
-        #   * +:receipt_handle+
+        #   * `:error_code` - identifies the type of failure
+        #   * `:error_message` - human readable description of the failure
+        #   * `:sender_fault` - whether the failure was caused by a server fault
+        #   * `:message_body` - the message body as passed to `:batch_send`
+        #   * `:batch_index` - the index in the list of messages passed 
+        #      to `batch_send` of the failed message.
         #
         attr_reader :failures
 
       end
+
+      class ChecksumError < StandardError
+
+        def initialize failures
+          # failures can also be a single failure, always generate an array
+          @failures = failures.is_a?(Array) ? failures : [failures]
+          super("#{@failures.size} messages failed checksum verification")
+        end
+
+        attr_reader :failures
+      end
+
+      class BatchSendMultiError < StandardError
+        def initialize *error_set
+          @errors = []
+          error_set.each do |error|
+            @errors << error
+          end
+        end
+
+        attr_reader :errors
+      end
+
     end
   end
 end

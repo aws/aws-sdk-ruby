@@ -137,7 +137,7 @@ module AWS
             provider_opts[:size] = 30
             provider_opts[:batch_size] = 10
 
-            opts = { 
+            opts = {
               :limit => 10,
               :next_token => { :offset => 9 },
             }

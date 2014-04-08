@@ -11,45 +11,55 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/abstract_base'
-require 'aws/record/hash_model/scope'
-require 'aws/record/hash_model/attributes'
-require 'aws/record/hash_model/finder_methods'
-
 module AWS
   module Record
     class HashModel
 
+      require 'aws/record/hash_model/attributes'
+      require 'aws/record/hash_model/finder_methods'
+      require 'aws/record/hash_model/scope'
+
       extend AbstractBase
+
+      def self.inherited(sub_class)
+        sub_class.string_attr :id,
+          :hash_key => true,
+          :default_hash_key_attribute => true
+      end
+
+      # @return [String,nil]
+      def hash_key
+        self[self.class.hash_key]
+      end
 
       class << self
 
         # Creates the DynamoDB table that is configured for this class.
         #
-        #   class Product < AWS::Record::HashModel
-        #   end
+        #     class Product < AWS::Record::HashModel
+        #     end
         #
-        #   # create the table 'Product' with 10 read/write capacity units
-        #   Product.create_table 10, 10
+        #     # create the table 'Product' with 10 read/write capacity units
+        #     Product.create_table 10, 10
         #
         # If you shard you data across multiple tables, you can specify the
         # shard name:
         #
-        #   # create two tables, with the given names
-        #   Product.create_table 500, 10, :shard_name => 'products-1'
-        #   Product.create_table 500, 10, :shard_name => 'products-2'
+        #     # create two tables, with the given names
+        #     Product.create_table 500, 10, :shard_name => 'products-1'
+        #     Product.create_table 500, 10, :shard_name => 'products-2'
         #
         # If you share a single AWS account with multiple applications, you
         # can provide a table prefix to group tables and to avoid name
         # collisions:
         #
-        #   AWS::Record.table_prefix = 'myapp-'
+        #     AWS::Record.table_prefix = 'myapp-'
         #
-        #   # creates the table 'myapp-Product'
-        #   Product.create_table 250, 50
+        #     # creates the table 'myapp-Product'
+        #     Product.create_table 250, 50
         #
-        #   # creates the table 'myapp-products-1'
-        #   Product.create_table 250, 50, :shard_name => 'products-1'
+        #     # creates the table 'myapp-products-1'
+        #     Product.create_table 250, 50, :shard_name => 'products-1'
         #
         # @param [Integer] read_capacity_units
         #   See {DynamoDB::TableCollection#create} for more information.
@@ -70,42 +80,76 @@ module AWS
           table_name = dynamo_db_table_name(options[:shard_name])
 
           create_opts = {}
-          create_opts[:hash_key] = { :id => :string }
+          create_opts[:hash_key] = { hash_key => :string }
 
           dynamo_db.tables.create(
-            table_name, 
-            read_capacity_units, 
-            write_capacity_units, 
+            table_name,
+            read_capacity_units,
+            write_capacity_units,
             create_opts)
 
         end
 
         # @return [DynamoDB::Table]
-        # @private
+        # @api private
         def dynamo_db_table shard_name = nil
           table = dynamo_db.tables[dynamo_db_table_name(shard_name)]
-          table.hash_key = [:id, :string]
+          table.hash_key = [hash_key, :string]
           table
         end
 
-        protected
+        # @api private
+        def hash_key
+          hash_key_attribute.name
+        end
+
+        # @api private
+        def hash_key_attribute
+          @hash_key_attribute
+        end
+
+        private
+
+        def set_hash_key_attribute(attribute)
+          if
+            hash_key_attribute and
+            hash_key_attribute.options[:default_hash_key_attribute]
+          then
+            remove_attribute(hash_key_attribute)
+          end
+          @hash_key_attribute = attribute
+        end
+
         def dynamo_db_table_name shard_name = nil
           "#{Record.table_prefix}#{self.shard_name(shard_name)}"
         end
 
-        protected
         def dynamo_db
           AWS::DynamoDB.new
         end
 
+        def add_attribute(attribute)
+          set_hash_key_attribute(attribute) if attribute.options[:hash_key]
+          super(attribute)
+        end
+
       end
 
-      # @return [DynamoDB::Item] Returns a reference to the item as stored in 
+      private
+
+      def populate_id
+        hash_key = self.class.hash_key_attribute
+        if hash_key.options[:default_hash_key_attribute]
+          self[hash_key.name] = SecureRandom.uuid
+        end
+      end
+
+      # @return [DynamoDB::Item] Returns a reference to the item as stored in
       #   simple db.
-      # @private
+      # @api private
       private
       def dynamo_db_item
-        dynamo_db_table.items[id]
+        dynamo_db_table.items[hash_key]
       end
 
       # @return [SimpleDB::Domain] Returns the domain this record is
@@ -117,8 +161,7 @@ module AWS
 
       private
       def create_storage
-        attributes = serialize_attributes.merge('id' => @_id)
-        dynamo_db_table.items.create(attributes, opt_lock_conditions)
+        dynamo_db_table.items.create(serialize_attributes, opt_lock_conditions)
       end
 
       private

@@ -14,7 +14,7 @@
 module AWS
   class S3
 
-    # @private
+    # @api private
     module PrefixAndDelimiterCollection
 
       include PrefixedCollection
@@ -24,7 +24,7 @@ module AWS
         Tree.new(self, { :prefix => prefix }.merge(options))
       end
 
-      # @private
+      # @api private
       protected
       def each_member_in_page(page, &block)
         super
@@ -33,7 +33,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       protected
       def list_options(options)
         opts = super

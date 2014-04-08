@@ -57,7 +57,7 @@ module AWS
           action = actions.create('name', :group => group)
           action.group.should == group
         end
-        
+
         it 'accepts a group option via the filters' do
           client.should_receive(:put_scheduled_update_group_action).with(
             hash_including(:auto_scaling_group_name => 'group'))
@@ -83,10 +83,14 @@ module AWS
       context '#[]' do
 
         it 'returns a scheduled action' do
-          action = actions['name']
+          action = actions.filter(:group => 'group-name')['name']
           action.should be_a(ScheduledAction)
           action.name.should == 'name'
           action.config.should == config
+        end
+
+        it 'raises an error if the collection is not filtered by a group' do
+          lambda { actions['name'] }.should raise_error
         end
 
       end
@@ -101,7 +105,7 @@ module AWS
 
         it 'applies filter options to the colleciton when enumerating' do
           client.should_receive(method).with(
-            :auto_scaling_group_name => 'abc'  
+            :auto_scaling_group_name => 'abc'
           ).and_return(resp)
           actions.filter(:group => 'abc').to_a
         end
@@ -114,7 +118,7 @@ module AWS
             :end_time => now.iso8601
           ).and_return(resp)
           actions.filter(
-            :group => 'abc', 
+            :group => 'abc',
             :scheduled_actions => %w(1 2 3),
             :start_time => now,
             :end_time => now
@@ -155,7 +159,10 @@ module AWS
 
         def stub_n_members response, n
           response.data[:scheduled_update_group_actions] = (1..n).map{|i|
-            { :scheduled_action_name => i.to_s }
+            {
+              :scheduled_action_name => i.to_s,
+              :auto_scaling_group_name => 'group-name',
+            }
           }
         end
 

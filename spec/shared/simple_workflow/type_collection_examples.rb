@@ -83,12 +83,12 @@ module AWS
         let(:limit_key)       { :maximum_page_size }
         let(:now)             { Time.now }
         let(:one_hour_ago)    { now - 3600 }
-        let(:request_options) {{ 
-          :registration_status => 'REGISTERED', 
+        let(:request_options) {{
+          :registration_status => 'REGISTERED',
           :reverse_order => false,
           :domain => domain.name,
         }}
-        let(:type_key) { 
+        let(:type_key) {
           key = described_class.name.split(/::/).last
           key = key.sub /Collection/, ''
           key[0] = key[0,1].downcase
@@ -147,7 +147,7 @@ module AWS
           types.each(:reverse_order => true) {|d|}
         end
 
-        it 'can mix filters' do 
+        it 'can mix filters' do
           client.should_receive(list_method).with(request_options.merge(
             :registration_status => 'DEPRECATED',
             :reverse_order => true,
@@ -168,7 +168,7 @@ module AWS
         end
 
         it_behaves_like "a collection that yields models" do
-          
+
           let(:member_class) { type_class }
 
           it 'yields types with populated names' do

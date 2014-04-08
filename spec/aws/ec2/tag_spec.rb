@@ -28,7 +28,7 @@ module AWS
 
       let(:tag) { Tag.new(resource, 'key') }
 
-      it_should_behave_like "an ec2 model object", 'resource', 'key', {} 
+      it_should_behave_like "an ec2 model object", 'resource', 'key', {}
 
       context '#resource' do
 
@@ -45,7 +45,7 @@ module AWS
         end
 
         it 'stringifies the key' do
-          Tag.new(resource, :key).key.should == 'key' 
+          Tag.new(resource, :key).key.should == 'key'
         end
 
       end
@@ -110,7 +110,7 @@ module AWS
             end
 
             before(:each) do
-              resp.tag_index["resource-object:resource-id:key"] = 
+              resp.tag_index["resource-object:resource-id:key"] =
                 { :value => 'value' }
             end
 

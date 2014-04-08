@@ -18,6 +18,34 @@ Feature: DynamoDB Scan
   As a customer of DynamoDB
   I want to conduct full table scans of my items with potentially complex conditions
 
+  Scenario: Scan DynamoDB items with conditions and first
+    Given I have an empty DynamoDB table with options:
+    """
+    { :hash_key => { :id => :string } }
+    """
+    And I put an item with the following attributes:
+    """
+    { "id" => "1",
+      "name" => "abc",
+      "age" => 3 }
+    """
+    And I put an item with the following attributes:
+    """
+    { "id" => "2",
+      "name" => "mno",
+      "age" => 5 }
+    """
+    And I put an item with the following attributes:
+    """
+    { "id" => "3",
+      "name" => "xyz",
+      "age" => 1 }
+    """
+    When I scan the the first item with the name "xyz"
+    Then 1 request should have been made like:
+    | TYPE   | NAME                | VALUE                   |
+    | header | x-amz-target        | DynamoDB_20111205.Scan  |
+
   Scenario: Scan DynamoDB items with equality conditions
     Given I have an empty DynamoDB table with options:
     """

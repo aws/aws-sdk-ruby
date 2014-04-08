@@ -52,6 +52,7 @@ module AWS
       it 'should request the next page for a truncated response' do
         truncated_resp = client.new_stub_for(list_method)
         truncated_resp.data[:truncated] = true
+        truncated_resp.data[:next_marker] = nil
         stub_markers(truncated_resp, "first")
         client.should_receive(list_method).
           and_return(truncated_resp)
@@ -65,6 +66,7 @@ module AWS
 
         before(:each) do
           truncated_resp.data[:truncated] = true
+          truncated_resp.data[:next_marker] = nil
           stub_markers(truncated_resp, "first")
         end
 
@@ -95,6 +97,10 @@ module AWS
         results[1].data[:truncated] = true
         results[2].data[:truncated] = false
 
+        results.each do |result|
+          result.data[:next_marker] = nil
+        end
+        
         ["first", "second", "third"].zip(results).each do |name, result|
           stub_markers(result, name)
         end

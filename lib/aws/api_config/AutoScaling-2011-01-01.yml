@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -14,6 +14,19 @@
 ---
 :api_version: '2011-01-01'
 :operations:
+- :name: AttachInstances
+  :method: :attach_instances
+  :inputs:
+    InstanceIds:
+    - :membered_list:
+      - :string
+    AutoScalingGroupName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      AttachInstancesResult:
+        :ignore: true
 - :name: CreateAutoScalingGroup
   :method: :create_auto_scaling_group
   :inputs:
@@ -22,7 +35,8 @@
     - :required
     LaunchConfigurationName:
     - :string
-    - :required
+    InstanceId:
+    - :string
     MinSize:
     - :integer
     - :required
@@ -76,7 +90,6 @@
     - :required
     ImageId:
     - :string
-    - :required
     KeyName:
     - :string
     SecurityGroups:
@@ -84,9 +97,10 @@
       - :string
     UserData:
     - :string
+    InstanceId:
+    - :string
     InstanceType:
     - :string
-    - :required
     KernelId:
     - :string
     RamdiskId:
@@ -105,6 +119,14 @@
               - :string
               VolumeSize:
               - :integer
+              VolumeType:
+              - :string
+              DeleteOnTermination:
+              - :boolean
+              Iops:
+              - :integer
+          NoDevice:
+          - :boolean
     InstanceMonitoring:
     - :structure:
         Enabled:
@@ -114,6 +136,8 @@
     IamInstanceProfile:
     - :string
     EbsOptimized:
+    - :boolean
+    AssociatePublicIpAddress:
     - :boolean
   :outputs:
     :children:
@@ -222,6 +246,18 @@
     :children:
       DeleteTagsResult:
         :ignore: true
+- :name: DescribeAccountLimits
+  :method: :describe_account_limits
+  :inputs: {}
+  :outputs:
+    :children:
+      DescribeAccountLimitsResult:
+        :ignore: true
+        :children:
+          MaxNumberOfAutoScalingGroups:
+            :type: :integer
+          MaxNumberOfLaunchConfigurations:
+            :type: :integer
 - :name: DescribeAdjustmentTypes
   :method: :describe_adjustment_types
   :inputs: {}
@@ -389,6 +425,12 @@
                             :children:
                               VolumeSize:
                                 :type: :integer
+                              DeleteOnTermination:
+                                :type: :boolean
+                              Iops:
+                                :type: :integer
+                          NoDevice:
+                            :type: :boolean
                   InstanceMonitoring:
                     :children:
                       Enabled:
@@ -396,6 +438,8 @@
                   CreatedTime:
                     :type: :time
                   EbsOptimized:
+                    :type: :boolean
+                  AssociatePublicIpAddress:
                     :type: :boolean
 - :name: DescribeMetricCollectionTypes
   :method: :describe_metric_collection_types

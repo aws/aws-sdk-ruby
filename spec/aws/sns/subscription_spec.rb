@@ -87,7 +87,7 @@ module AWS
       context '#exists?' do
 
         it 'calls #get_subscription_attributes on the client' do
-          
+
           client.should_receive(:get_subscription_attributes).
             with(:subscription_arn => subscription.arn).
             and_return(client.stub_for(:get_subscription_attributes))
@@ -108,6 +108,39 @@ module AWS
         it 'returns false if the client raises an invalid parameter error' do
           client.stub(:get_subscription_attributes).and_raise(Errors::InvalidParameter)
           subscription.exists?.should == false
+        end
+
+      end
+
+      context '#raw_message_delivery' do
+
+        def stub_raw_message_delivery value
+          client.stub(:get_subscription_attributes =>
+            double("Attributes", :attributes => {"RawMessageDelivery" => value}))
+        end
+
+        it 'returns true if the RawMessageDelivery attribute is true' do
+          stub_raw_message_delivery('true')
+          client.should_receive(:get_subscription_attributes)
+          subscription.raw_message_delivery.should == true
+        end
+
+        it 'returns false if the RawMessageDelivery is false' do
+          stub_raw_message_delivery('false')
+          client.should_receive(:get_subscription_attributes)
+          subscription.raw_message_delivery.should == false
+        end
+
+      end
+
+      context '#raw_message_delivery=' do
+
+        it 'updates the client with the RawMessageDelivery attribute' do
+          client.should_receive(:set_subscription_attributes).
+            with(:attribute_name => 'RawMessageDelivery',
+                 :attribute_value => 'true',
+                 :subscription_arn => arn)
+          subscription.raw_message_delivery = true
         end
 
       end

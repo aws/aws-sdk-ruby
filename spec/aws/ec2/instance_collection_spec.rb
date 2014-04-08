@@ -31,11 +31,11 @@ module AWS
             [double("reservation 1",
                     :instances_set =>
                     [double("inst 1",
-                            :instance_id => "i-123")]),
+                            :instance_id => "i-123", :image_id => 'img-123').as_null_object]),
              double("reservation 2",
                     :instances_set =>
                     [double("inst 2",
-                            :instance_id => "i-123")])]
+                            :instance_id => "i-123").as_null_object])]
           resp.stub(:reservation_set).and_return(reservations)
         end
 
@@ -298,15 +298,26 @@ module AWS
                 and_return(resp)
 
               collection.create(
-                :image_id => "ami-123", 
+                :image_id => "ami-123",
                 :dedicated_tenancy => true)
+            end
+
+            it 'should send Placement.GroupName' do
+
+              client.should_receive(:run_instances).
+                with(hash_including(:placement => { :group_name => "pg-1" })).
+                and_return(resp)
+
+              collection.create(
+                :image_id => "ami-123",
+                :placement_group => "pg-1")
             end
 
             it 'should accept tenancy with an availability zone' do
               client.should_receive(:run_instances).
-                with(hash_including(:placement => { 
+                with(hash_including(:placement => {
                   :tenancy => "dedicated",
-                  :availability_zone => "us-east-1a" 
+                  :availability_zone => "us-east-1a"
                 })).and_return(resp)
               collection.create(:image_id => "ami-123",
                 :availability_zone => AvailabilityZone.new("us-east-1a"),
@@ -340,8 +351,7 @@ module AWS
 
             it 'should provide a UUID client token' do
               uuid = "ee819144-6d1f-11e0-bf36-00254bfffeb7"
-              UUIDTools::UUID.stub(:timestamp_create).
-                and_return(uuid)
+              SecureRandom.stub(:uuid).and_return(uuid)
               client.should_receive(:run_instances).
                 with(hash_including(:client_token => uuid)).
                 and_return(resp)
@@ -369,7 +379,7 @@ module AWS
             end
 
             context 'non-vpc' do
-              
+
               it 'accepts singular ids' do
                 should_receive_sg_ids('sg-123')
                 run_instance(:security_group_ids => 'sg-123')
@@ -442,7 +452,7 @@ module AWS
                 g1 = SecurityGroup.new('sg-id1')
                 g2 = SecurityGroup.new('sg-id2')
                 should_receive_sg_ids('sg-id1', 'sg-id2')
-                run_instance(:subnet_id => 's', 
+                run_instance(:subnet_id => 's',
                   :security_groups => [g1, g2])
               end
 
@@ -453,14 +463,14 @@ module AWS
                 sg_collection.should_receive(:filter).
                   with('group-name', ['name1', 'name2']).
                   and_return([
-                    SecurityGroup.new('sg-id1'), 
+                    SecurityGroup.new('sg-id1'),
                     SecurityGroup.new('sg-id2')])
-                
+
                 EC2.stub_chain(:new, :security_groups).and_return(sg_collection)
 
                 should_receive_sg_ids('sg-id1', 'sg-id2')
 
-                run_instance(:subnet_id => 's', 
+                run_instance(:subnet_id => 's',
                   :security_groups => %w(name1 name2))
 
               end
@@ -537,11 +547,11 @@ module AWS
 
             context 'badly formatted input' do
 
-              it 'should reject an array' do
+              it 'should accepts an array' do
                 lambda do
                   collection.create(:image_id => "ami-123",
                                     :block_device_mappings => [])
-                end.should raise_error(ArgumentError, "block_device_mappings must be a hash")
+                end.should_not raise_error
               end
 
               it 'should reject non-string keys' do

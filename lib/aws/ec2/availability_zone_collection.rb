@@ -31,7 +31,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       protected
       def member_class
         AvailabilityZone

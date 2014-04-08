@@ -15,7 +15,7 @@
 Feature: EC2 VPC Customer Gateways
 
   Scenario: Create a customer gateway
-    When I create a customer gateway 
+    When I create a customer gateway
     Then the customer gateway should exist
     And the customer gateway should eventually have the state "available"
 
@@ -26,10 +26,10 @@ Feature: EC2 VPC Customer Gateways
     And the customer gateway should have the ip address of "1.2.3.4"
 
   Scenario: Delete an internet gateway
-    Given I create a customer gateway 
+    Given I create a customer gateway
     When I delete the customer gateway
     And the customer gateway should eventually have the state "deleted"
 
   Scenario: Enumerating Gateways
-    Given I create a customer gateway 
+    Given I create a customer gateway
     Then the account customer gatways should include the gateway

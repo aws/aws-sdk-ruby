@@ -130,6 +130,28 @@ module AWS
             end
           end
 
+          # The enveloped encryption uses a 256bit key, using a 128bit key to
+          # encrypt the 256bit key could lead to halving the strength of the
+          # 256bit key (due to properties of ECB).
+          context 'with a key shorter than 256 bits' do
+
+            it 'should warn that the encryption will be unsafe' do
+              object.should_receive(:warn).
+                  with("Unsafe encryption, data is longer than key length")
+
+              begin
+                # Temporarily silence stderr
+                real_stderr, $stderr = $stderr, StringIO.new
+                object.write("HELLO",
+                            :encryption_key => "YELLOW SUBMARINE") # 128bit key
+
+              ensure
+                $stderr = real_stderr
+              end
+            end
+            
+          end
+
           context 'with incorrect arguments' do
 
             it 'should call put_object with  an invalid length symmetric key' do
@@ -268,7 +290,7 @@ module AWS
                 and_return(client.stub_for(:put_object))
 
               object.write("HELLO",
-                           :encryption_key  => "0123456789012345",
+                           :encryption_key  => "01234567890123456789012345678901",
                            :encryption_materials_location => :instruction_file)
             end
 
@@ -282,7 +304,7 @@ module AWS
               msg << ":estimated_content_length"
               lambda do
                 object.write(IO_proxy.new("HELLO"),
-                             :encryption_key  => "0123456789012345",
+                             :encryption_key  => "01234567890123456789012345678901",
                              :encryption_materials_location => :instruction_file)
               end.should raise_error(msg)
             end
@@ -308,7 +330,7 @@ module AWS
 
               object.write(IO_proxy.new("HELLO"),
                            :estimated_content_length => 10,
-                           :encryption_key  => "0123456789012345",
+                           :encryption_key  => "01234567890123456789012345678901",
                            :encryption_materials_location => :instruction_file)
             end
 
@@ -330,7 +352,7 @@ module AWS
                 and_return(client.stub_for(:put_object))
               eof = false
               object.write(:estimated_content_length => 10,
-                           :encryption_key  => "0123456789012345",
+                           :encryption_key  => "01234567890123456789012345678901",
                            :encryption_materials_location => :instruction_file) do |buffer, bytes|
                              unless eof
                                buffer << "HELLO"
@@ -367,7 +389,7 @@ module AWS
                 and_return(client.stub_for(:put_object))
 
               object.write("HELLO",
-                           :encryption_key  => "123456789012345678901234",
+                           :encryption_key  => "01234567890123456789012345678901",
                            :encryption_materials_location => :instruction_file,
                            :content_md5 => "I wish I were an md5")
             end
@@ -424,19 +446,19 @@ module AWS
           context 'string' do
 
             it 'should split the upload into parts' do
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
-              object.write("aabb",
-                           :multipart_threshold => 2,
-                           :multipart_min_part_size => 2)
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
+              object.write('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb',
+                :multipart_threshold => 2,
+                :multipart_min_part_size => 2)
             end
 
             it 'should default to the configured multipart_min_part_size' do
               config.stub(:s3_multipart_min_part_size).and_return(2)
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
-              object.write("aabb",
-                           :multipart_threshold => 2)
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
+              object.write('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb',
+                :multipart_threshold => 2)
             end
 
           end
@@ -444,11 +466,11 @@ module AWS
           context 'stream' do
 
             it 'should split the upload into parts' do
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
-              object.write(StringIO.new("aabb"),
-                           :multipart_threshold => 2,
-                           :multipart_min_part_size => 2)
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
+              object.write(StringIO.new('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb'),
+                :multipart_threshold => 2,
+                :multipart_min_part_size => 2)
             end
 
           end
@@ -456,14 +478,14 @@ module AWS
           context 'file' do
 
             it 'should split the upload into parts' do
-              upload.should_receive(:add_part).ordered.with("aa")
-              upload.should_receive(:add_part).ordered.with("bb")
+              upload.should_receive(:add_part).ordered.with("a" * 16)
+              upload.should_receive(:add_part).ordered.with("b" * 16)
               f = Tempfile.new("foo")
-              f.write("aabb")
+              f.write('aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb')
               f.close
               object.write(:file => f.path,
-                           :multipart_threshold => 2,
-                           :multipart_min_part_size => 2)
+                :multipart_threshold => 2,
+                :multipart_min_part_size => 2)
             end
 
           end
@@ -623,15 +645,17 @@ module AWS
           end
 
           it 'should call get_object with instruction material location and decrypt with block' do
-            client.should_receive(:get_object).with(:bucket_name => "foobucket",
-                                                    :key => "foo.instruction").
-                                  and_return(inst_response)
-            client.should_receive(:get_object).with(:bucket_name => "foobucket",
-                                                    :key => "foo").
-                                                    and_yield(encrypted_data)
+            client.should_receive(:get_object).
+              with(:bucket_name => "foobucket", :key => "foo.instruction").
+              and_return(inst_response)
+
+            client.should_receive(:get_object).
+              with(:bucket_name => "foobucket", :key => "foo").
+              and_yield(encrypted_data).
+              and_return(response)
+
             out = StringIO.new
-            object.read(:encryption_key => rsa_key,
-                        :encryption_materials_location => :instruction_file) do |chunk|
+            object.read(:encryption_key => rsa_key, :encryption_materials_location => :instruction_file) do |chunk|
               out << chunk
             end
             out.rewind

@@ -12,13 +12,15 @@
 # language governing permissions and limitations under the License.
 
 ---
+:json_version: '1.1'
+:target_prefix: ElasticMapReduce.
 :api_version: '2009-03-31'
 :operations:
 - :name: AddInstanceGroups
   :method: :add_instance_groups
   :inputs:
     InstanceGroups:
-    - :membered_list:
+    - :list:
       - :structure:
           Name:
           - :string
@@ -40,16 +42,12 @@
     - :string
     - :required
   :outputs:
-    :children:
-      AddInstanceGroupsResult:
-        :ignore: true
-        :children:
-          InstanceGroupIds:
-            :ignore: true
-            :children:
-              member:
-                :rename: :instance_group_ids
-                :list: true
+    JobFlowId:
+      :sym: :job_flow_id
+      :type: :string
+    InstanceGroupIds:
+      :sym: :instance_group_ids
+      :type: :string
 - :name: AddJobFlowSteps
   :method: :add_job_flow_steps
   :inputs:
@@ -57,7 +55,7 @@
     - :string
     - :required
     Steps:
-    - :membered_list:
+    - :list:
       - :structure:
           Name:
           - :string
@@ -67,7 +65,7 @@
           HadoopJarStep:
           - :structure:
               Properties:
-              - :membered_list:
+              - :list:
                 - :structure:
                     Key:
                     - :string
@@ -79,14 +77,136 @@
               MainClass:
               - :string
               Args:
-              - :membered_list:
+              - :list:
                 - :string
           - :required
     - :required
   :outputs:
-    :children:
-      AddJobFlowStepsResult:
-        :ignore: true
+    StepIds:
+      :sym: :step_ids
+      :type: :string
+- :name: AddTags
+  :method: :add_tags
+  :inputs:
+    ResourceId:
+    - :string
+    Tags:
+    - :list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
+  :outputs: {}
+- :name: DescribeCluster
+  :method: :describe_cluster
+  :inputs:
+    ClusterId:
+    - :string
+  :outputs:
+    Cluster:
+      :sym: :cluster
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :hash
+          :members:
+            State:
+              :sym: :state
+              :type: :string
+            StateChangeReason:
+              :sym: :state_change_reason
+              :type: :hash
+              :members:
+                Code:
+                  :sym: :code
+                  :type: :string
+                Message:
+                  :sym: :message
+                  :type: :string
+            Timeline:
+              :sym: :timeline
+              :type: :hash
+              :members:
+                CreationDateTime:
+                  :sym: :creation_date_time
+                  :type: :time
+                ReadyDateTime:
+                  :sym: :ready_date_time
+                  :type: :time
+                EndDateTime:
+                  :sym: :end_date_time
+                  :type: :time
+        Ec2InstanceAttributes:
+          :sym: :ec_2_instance_attributes
+          :type: :hash
+          :members:
+            Ec2KeyName:
+              :sym: :ec2_key_name
+              :type: :string
+            Ec2SubnetId:
+              :sym: :ec2_subnet_id
+              :type: :string
+            Ec2AvailabilityZone:
+              :sym: :ec_2_availability_zone
+              :type: :string
+            IamInstanceProfile:
+              :sym: :iam_instance_profile
+              :type: :string
+        LogUri:
+          :sym: :log_uri
+          :type: :string
+        RequestedAmiVersion:
+          :sym: :requested_ami_version
+          :type: :string
+        RunningAmiVersion:
+          :sym: :running_ami_version
+          :type: :string
+        AutoTerminate:
+          :sym: :auto_terminate
+          :type: :boolean
+        TerminationProtected:
+          :sym: :termination_protected
+          :type: :boolean
+        VisibleToAllUsers:
+          :sym: :visible_to_all_users
+          :type: :boolean
+        Applications:
+          :sym: :applications
+          :type: :hash
+          :members:
+            Name:
+              :sym: :name
+              :type: :string
+            Version:
+              :sym: :version
+              :type: :string
+            Args:
+              :sym: :args
+              :type: :string
+            AdditionalInfo:
+              :sym: :additional_info
+              :type: :map
+              :members:
+                :sym: :map_value
+                :type: :string
+        Tags:
+          :sym: :tags
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            Value:
+              :sym: :value
+              :type: :string
 - :name: DescribeJobFlows
   :method: :describe_job_flows
   :inputs:
@@ -95,134 +215,591 @@
     CreatedBefore:
     - :timestamp
     JobFlowIds:
-    - :membered_list:
+    - :list:
       - :string
     JobFlowStates:
-    - :membered_list:
+    - :list:
       - :string
   :outputs:
-    :children:
-      DescribeJobFlowsResult:
-        :ignore: true
-        :children:
-          JobFlows:
-            :ignore: true
-            :children:
-              member:
-                :rename: :job_flows
-                :list: true
-                :children:
-                  ExecutionStatusDetail:
-                    :children:
-                      CreationDateTime:
-                        :type: :time
-                      StartDateTime:
-                        :type: :time
-                      ReadyDateTime:
-                        :type: :time
-                      EndDateTime:
-                        :type: :time
-                  Instances:
-                    :children:
-                      InstanceCount:
-                        :type: :integer
-                      InstanceGroups:
-                        :ignore: true
-                        :children:
-                          member:
-                            :rename: :instance_groups
-                            :list: true
-                            :children:
-                              InstanceRequestCount:
-                                :type: :integer
-                              InstanceRunningCount:
-                                :type: :integer
-                              CreationDateTime:
-                                :type: :time
-                              StartDateTime:
-                                :type: :time
-                              ReadyDateTime:
-                                :type: :time
-                              EndDateTime:
-                                :type: :time
-                      NormalizedInstanceHours:
-                        :type: :integer
-                      KeepJobFlowAliveWhenNoSteps:
-                        :type: :boolean
-                      TerminationProtected:
-                        :type: :boolean
-                  Steps:
-                    :ignore: true
-                    :children:
-                      member:
-                        :rename: :steps
-                        :list: true
-                        :children:
-                          StepConfig:
-                            :children:
-                              HadoopJarStep:
-                                :children:
-                                  Properties:
-                                    :ignore: true
-                                    :children:
-                                      member:
-                                        :rename: :properties
-                                        :list: true
-                                  Args:
-                                    :ignore: true
-                                    :children:
-                                      member:
-                                        :rename: :args
-                                        :list: true
-                          ExecutionStatusDetail:
-                            :children:
-                              CreationDateTime:
-                                :type: :time
-                              StartDateTime:
-                                :type: :time
-                              EndDateTime:
-                                :type: :time
-                  BootstrapActions:
-                    :ignore: true
-                    :children:
-                      member:
-                        :rename: :bootstrap_actions
-                        :list: true
-                        :children:
-                          BootstrapActionConfig:
-                            :children:
-                              ScriptBootstrapAction:
-                                :children:
-                                  Args:
-                                    :ignore: true
-                                    :children:
-                                      member:
-                                        :rename: :args
-                                        :list: true
-                  SupportedProducts:
-                    :ignore: true
-                    :children:
-                      member:
-                        :rename: :supported_products
-                        :list: true
-                  VisibleToAllUsers:
-                    :type: :boolean
+    JobFlows:
+      :sym: :job_flows
+      :type: :hash
+      :members:
+        JobFlowId:
+          :sym: :job_flow_id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        LogUri:
+          :sym: :log_uri
+          :type: :string
+        AmiVersion:
+          :sym: :ami_version
+          :type: :string
+        ExecutionStatusDetail:
+          :sym: :execution_status_detail
+          :type: :hash
+          :members:
+            State:
+              :sym: :state
+              :type: :string
+            CreationDateTime:
+              :sym: :creation_date_time
+              :type: :time
+            StartDateTime:
+              :sym: :start_date_time
+              :type: :time
+            ReadyDateTime:
+              :sym: :ready_date_time
+              :type: :time
+            EndDateTime:
+              :sym: :end_date_time
+              :type: :time
+            LastStateChangeReason:
+              :sym: :last_state_change_reason
+              :type: :string
+        Instances:
+          :sym: :instances
+          :type: :hash
+          :members:
+            MasterInstanceType:
+              :sym: :master_instance_type
+              :type: :string
+            MasterPublicDnsName:
+              :sym: :master_public_dns_name
+              :type: :string
+            MasterInstanceId:
+              :sym: :master_instance_id
+              :type: :string
+            SlaveInstanceType:
+              :sym: :slave_instance_type
+              :type: :string
+            InstanceCount:
+              :sym: :instance_count
+              :type: :integer
+            InstanceGroups:
+              :sym: :instance_groups
+              :type: :hash
+              :members:
+                InstanceGroupId:
+                  :sym: :instance_group_id
+                  :type: :string
+                Name:
+                  :sym: :name
+                  :type: :string
+                Market:
+                  :sym: :market
+                  :type: :string
+                InstanceRole:
+                  :sym: :instance_role
+                  :type: :string
+                BidPrice:
+                  :sym: :bid_price
+                  :type: :string
+                InstanceType:
+                  :sym: :instance_type
+                  :type: :string
+                InstanceRequestCount:
+                  :sym: :instance_request_count
+                  :type: :integer
+                InstanceRunningCount:
+                  :sym: :instance_running_count
+                  :type: :integer
+                State:
+                  :sym: :state
+                  :type: :string
+                LastStateChangeReason:
+                  :sym: :last_state_change_reason
+                  :type: :string
+                CreationDateTime:
+                  :sym: :creation_date_time
+                  :type: :time
+                StartDateTime:
+                  :sym: :start_date_time
+                  :type: :time
+                ReadyDateTime:
+                  :sym: :ready_date_time
+                  :type: :time
+                EndDateTime:
+                  :sym: :end_date_time
+                  :type: :time
+            NormalizedInstanceHours:
+              :sym: :normalized_instance_hours
+              :type: :integer
+            Ec2KeyName:
+              :sym: :ec2_key_name
+              :type: :string
+            Ec2SubnetId:
+              :sym: :ec2_subnet_id
+              :type: :string
+            Placement:
+              :sym: :placement
+              :type: :hash
+              :members:
+                AvailabilityZone:
+                  :sym: :availability_zone
+                  :type: :string
+            KeepJobFlowAliveWhenNoSteps:
+              :sym: :keep_job_flow_alive_when_no_steps
+              :type: :boolean
+            TerminationProtected:
+              :sym: :termination_protected
+              :type: :boolean
+            HadoopVersion:
+              :sym: :hadoop_version
+              :type: :string
+        Steps:
+          :sym: :steps
+          :type: :hash
+          :members:
+            StepConfig:
+              :sym: :step_config
+              :type: :hash
+              :members:
+                Name:
+                  :sym: :name
+                  :type: :string
+                ActionOnFailure:
+                  :sym: :action_on_failure
+                  :type: :string
+                HadoopJarStep:
+                  :sym: :hadoop_jar_step
+                  :type: :hash
+                  :members:
+                    Properties:
+                      :sym: :properties
+                      :type: :hash
+                      :members:
+                        Key:
+                          :sym: :key
+                          :type: :string
+                        Value:
+                          :sym: :value
+                          :type: :string
+                    Jar:
+                      :sym: :jar
+                      :type: :string
+                    MainClass:
+                      :sym: :main_class
+                      :type: :string
+                    Args:
+                      :sym: :args
+                      :type: :string
+            ExecutionStatusDetail:
+              :sym: :execution_status_detail
+              :type: :hash
+              :members:
+                State:
+                  :sym: :state
+                  :type: :string
+                CreationDateTime:
+                  :sym: :creation_date_time
+                  :type: :time
+                StartDateTime:
+                  :sym: :start_date_time
+                  :type: :time
+                EndDateTime:
+                  :sym: :end_date_time
+                  :type: :time
+                LastStateChangeReason:
+                  :sym: :last_state_change_reason
+                  :type: :string
+        BootstrapActions:
+          :sym: :bootstrap_actions
+          :type: :hash
+          :members:
+            BootstrapActionConfig:
+              :sym: :bootstrap_action_config
+              :type: :hash
+              :members:
+                Name:
+                  :sym: :name
+                  :type: :string
+                ScriptBootstrapAction:
+                  :sym: :script_bootstrap_action
+                  :type: :hash
+                  :members:
+                    Path:
+                      :sym: :path
+                      :type: :string
+                    Args:
+                      :sym: :args
+                      :type: :string
+        SupportedProducts:
+          :sym: :supported_products
+          :type: :string
+        VisibleToAllUsers:
+          :sym: :visible_to_all_users
+          :type: :boolean
+        JobFlowRole:
+          :sym: :job_flow_role
+          :type: :string
+- :name: DescribeStep
+  :method: :describe_step
+  :inputs:
+    ClusterId:
+    - :string
+    StepId:
+    - :string
+  :outputs:
+    Step:
+      :sym: :step
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Config:
+          :sym: :config
+          :type: :hash
+          :members:
+            Jar:
+              :sym: :jar
+              :type: :string
+            Properties:
+              :sym: :properties
+              :type: :map
+              :members:
+                :sym: :map_value
+                :type: :string
+            MainClass:
+              :sym: :main_class
+              :type: :string
+            Args:
+              :sym: :args
+              :type: :string
+        ActionOnFailure:
+          :sym: :action_on_failure
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :hash
+          :members:
+            State:
+              :sym: :state
+              :type: :string
+            StateChangeReason:
+              :sym: :state_change_reason
+              :type: :hash
+              :members:
+                Code:
+                  :sym: :code
+                  :type: :string
+                Message:
+                  :sym: :message
+                  :type: :string
+            Timeline:
+              :sym: :timeline
+              :type: :hash
+              :members:
+                CreationDateTime:
+                  :sym: :creation_date_time
+                  :type: :time
+                StartDateTime:
+                  :sym: :start_date_time
+                  :type: :time
+                EndDateTime:
+                  :sym: :end_date_time
+                  :type: :time
+- :name: ListBootstrapActions
+  :method: :list_bootstrap_actions
+  :inputs:
+    ClusterId:
+    - :string
+    Marker:
+    - :string
+  :outputs:
+    BootstrapActions:
+      :sym: :bootstrap_actions
+      :type: :hash
+      :members:
+        Name:
+          :sym: :name
+          :type: :string
+        ScriptPath:
+          :sym: :script_path
+          :type: :string
+        Args:
+          :sym: :args
+          :type: :string
+    Marker:
+      :sym: :marker
+      :type: :string
+- :name: ListClusters
+  :method: :list_clusters
+  :inputs:
+    CreatedAfter:
+    - :timestamp
+    CreatedBefore:
+    - :timestamp
+    ClusterStates:
+    - :list:
+      - :string
+    Marker:
+    - :string
+  :outputs:
+    Clusters:
+      :sym: :clusters
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :hash
+          :members:
+            State:
+              :sym: :state
+              :type: :string
+            StateChangeReason:
+              :sym: :state_change_reason
+              :type: :hash
+              :members:
+                Code:
+                  :sym: :code
+                  :type: :string
+                Message:
+                  :sym: :message
+                  :type: :string
+            Timeline:
+              :sym: :timeline
+              :type: :hash
+              :members:
+                CreationDateTime:
+                  :sym: :creation_date_time
+                  :type: :time
+                ReadyDateTime:
+                  :sym: :ready_date_time
+                  :type: :time
+                EndDateTime:
+                  :sym: :end_date_time
+                  :type: :time
+    Marker:
+      :sym: :marker
+      :type: :string
+- :name: ListInstanceGroups
+  :method: :list_instance_groups
+  :inputs:
+    ClusterId:
+    - :string
+    Marker:
+    - :string
+  :outputs:
+    InstanceGroups:
+      :sym: :instance_groups
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Market:
+          :sym: :market
+          :type: :string
+        InstanceGroupType:
+          :sym: :instance_group_type
+          :type: :string
+        BidPrice:
+          :sym: :bid_price
+          :type: :string
+        InstanceType:
+          :sym: :instance_type
+          :type: :string
+        RequestedInstanceCount:
+          :sym: :requested_instance_count
+          :type: :integer
+        RunningInstanceCount:
+          :sym: :running_instance_count
+          :type: :integer
+        Status:
+          :sym: :status
+          :type: :hash
+          :members:
+            State:
+              :sym: :state
+              :type: :string
+            StateChangeReason:
+              :sym: :state_change_reason
+              :type: :hash
+              :members:
+                Code:
+                  :sym: :code
+                  :type: :string
+                Message:
+                  :sym: :message
+                  :type: :string
+            Timeline:
+              :sym: :timeline
+              :type: :hash
+              :members:
+                CreationDateTime:
+                  :sym: :creation_date_time
+                  :type: :time
+                ReadyDateTime:
+                  :sym: :ready_date_time
+                  :type: :time
+                EndDateTime:
+                  :sym: :end_date_time
+                  :type: :time
+    Marker:
+      :sym: :marker
+      :type: :string
+- :name: ListInstances
+  :method: :list_instances
+  :inputs:
+    ClusterId:
+    - :string
+    InstanceGroupId:
+    - :string
+    InstanceGroupTypes:
+    - :list:
+      - :string
+    Marker:
+    - :string
+  :outputs:
+    Instances:
+      :sym: :instances
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Ec2InstanceId:
+          :sym: :ec2_instance_id
+          :type: :string
+        PublicDnsName:
+          :sym: :public_dns_name
+          :type: :string
+        PublicIpAddress:
+          :sym: :public_ip_address
+          :type: :string
+        PrivateDnsName:
+          :sym: :private_dns_name
+          :type: :string
+        PrivateIpAddress:
+          :sym: :private_ip_address
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :hash
+          :members:
+            State:
+              :sym: :state
+              :type: :string
+            StateChangeReason:
+              :sym: :state_change_reason
+              :type: :hash
+              :members:
+                Code:
+                  :sym: :code
+                  :type: :string
+                Message:
+                  :sym: :message
+                  :type: :string
+            Timeline:
+              :sym: :timeline
+              :type: :hash
+              :members:
+                CreationDateTime:
+                  :sym: :creation_date_time
+                  :type: :time
+                ReadyDateTime:
+                  :sym: :ready_date_time
+                  :type: :time
+                EndDateTime:
+                  :sym: :end_date_time
+                  :type: :time
+    Marker:
+      :sym: :marker
+      :type: :string
+- :name: ListSteps
+  :method: :list_steps
+  :inputs:
+    ClusterId:
+    - :string
+    StepStates:
+    - :list:
+      - :string
+    Marker:
+    - :string
+  :outputs:
+    Steps:
+      :sym: :steps
+      :type: :hash
+      :members:
+        Id:
+          :sym: :id
+          :type: :string
+        Name:
+          :sym: :name
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :hash
+          :members:
+            State:
+              :sym: :state
+              :type: :string
+            StateChangeReason:
+              :sym: :state_change_reason
+              :type: :hash
+              :members:
+                Code:
+                  :sym: :code
+                  :type: :string
+                Message:
+                  :sym: :message
+                  :type: :string
+            Timeline:
+              :sym: :timeline
+              :type: :hash
+              :members:
+                CreationDateTime:
+                  :sym: :creation_date_time
+                  :type: :time
+                StartDateTime:
+                  :sym: :start_date_time
+                  :type: :time
+                EndDateTime:
+                  :sym: :end_date_time
+                  :type: :time
+    Marker:
+      :sym: :marker
+      :type: :string
 - :name: ModifyInstanceGroups
   :method: :modify_instance_groups
   :inputs:
     InstanceGroups:
-    - :membered_list:
+    - :list:
       - :structure:
           InstanceGroupId:
           - :string
           - :required
           InstanceCount:
           - :integer
-          - :required
-  :outputs:
-    :children:
-      ModifyInstanceGroupsResult:
-        :ignore: true
+          EC2InstanceIdsToTerminate:
+          - :list:
+            - :string
+  :outputs: {}
+- :name: RemoveTags
+  :method: :remove_tags
+  :inputs:
+    ResourceId:
+    - :string
+    TagKeys:
+    - :list:
+      - :string
+  :outputs: {}
 - :name: RunJobFlow
   :method: :run_job_flow
   :inputs:
@@ -244,7 +821,7 @@
         InstanceCount:
         - :integer
         InstanceGroups:
-        - :membered_list:
+        - :list:
           - :structure:
               Name:
               - :string
@@ -278,7 +855,7 @@
         - :string
     - :required
     Steps:
-    - :membered_list:
+    - :list:
       - :structure:
           Name:
           - :string
@@ -288,7 +865,7 @@
           HadoopJarStep:
           - :structure:
               Properties:
-              - :membered_list:
+              - :list:
                 - :structure:
                     Key:
                     - :string
@@ -300,11 +877,11 @@
               MainClass:
               - :string
               Args:
-              - :membered_list:
+              - :list:
                 - :string
           - :required
     BootstrapActions:
-    - :membered_list:
+    - :list:
       - :structure:
           Name:
           - :string
@@ -315,56 +892,62 @@
               - :string
               - :required
               Args:
-              - :membered_list:
+              - :list:
                 - :string
           - :required
     SupportedProducts:
-    - :membered_list:
+    - :list:
       - :string
+    NewSupportedProducts:
+    - :list:
+      - :structure:
+          Name:
+          - :string
+          Args:
+          - :list:
+            - :string
     VisibleToAllUsers:
     - :boolean
     JobFlowRole:
     - :string
+    Tags:
+    - :list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
-    :children:
-      RunJobFlowResult:
-        :ignore: true
+    JobFlowId:
+      :sym: :job_flow_id
+      :type: :string
 - :name: SetTerminationProtection
   :method: :set_termination_protection
   :inputs:
     JobFlowIds:
-    - :membered_list:
+    - :list:
       - :string
     - :required
     TerminationProtected:
     - :boolean
     - :required
-  :outputs:
-    :children:
-      SetTerminationProtectionResult:
-        :ignore: true
+  :outputs: {}
 - :name: SetVisibleToAllUsers
   :method: :set_visible_to_all_users
   :inputs:
     JobFlowIds:
-    - :membered_list:
+    - :list:
       - :string
     - :required
     VisibleToAllUsers:
     - :boolean
     - :required
-  :outputs:
-    :children:
-      SetVisibleToAllUsersResult:
-        :ignore: true
+  :outputs: {}
 - :name: TerminateJobFlows
   :method: :terminate_job_flows
   :inputs:
     JobFlowIds:
-    - :membered_list:
+    - :list:
       - :string
     - :required
-  :outputs:
-    :children:
-      TerminateJobFlowsResult:
-        :ignore: true
+  :outputs: {}

@@ -14,7 +14,7 @@
 module AWS
   class S3
     class Tree
-      # @private
+      # @api private
       class Node
       end
     end

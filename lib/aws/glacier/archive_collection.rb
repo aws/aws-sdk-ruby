@@ -37,7 +37,7 @@ module AWS
 
       # Creates an archive by uploading a file to a vault.
       # @param [File,Pathname,IO,String] data The data to upload.
-      #   If +data+ is a string, this is treated as a path to a file
+      #   If `data` is a string, this is treated as a path to a file
       #   on disk.
       # @param [Hash] options
       # @option options [String] description
@@ -81,7 +81,7 @@ module AWS
         raise ArgumentError, msg
       end
 
-      # @return [Boolean] Returns +tue+ if data acts like a file.
+      # @return [Boolean] Returns `tue` if data acts like a file.
       def io_like? data
         data.respond_to?(:read) and
         data.respond_to?(:eof?) and
@@ -101,8 +101,8 @@ module AWS
       # but that requires reading the data a 2nd time. :(
       def compute_checksums data
 
-        digest = OpenSSL::Digest::Digest.new('sha256')
-        tree_digest = OpenSSL::Digest::Digest.new('sha256')
+        digest = OpenSSL::Digest.new('sha256')
+        tree_digest = OpenSSL::Digest.new('sha256')
         tree_parts = []
 
         until data.eof?
@@ -123,7 +123,7 @@ module AWS
 
       def compute_tree_hash hashes
 
-        digest = OpenSSL::Digest::Digest.new('sha256')
+        digest = OpenSSL::Digest.new('sha256')
 
         until hashes.count == 1
           hashes = hashes.each_slice(2).map do |h1,h2|

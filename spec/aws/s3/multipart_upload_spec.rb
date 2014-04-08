@@ -439,7 +439,8 @@ module AWS
             client.should_receive(:list_parts).
               with(:bucket_name => "foobucket",
                    :key => "foo",
-                   :upload_id => "abc123").
+                   :upload_id => "abc123",
+                   :max_parts => 1000).
               and_return(resp)
             upload.complete(:remote_parts)
           end
@@ -492,7 +493,8 @@ module AWS
             client.should_receive(:list_parts).
               with(:bucket_name => "foobucket",
                    :key => "foo",
-                   :upload_id => "abc123").
+                   :upload_id => "abc123",
+                   :max_parts => 1000).
               and_return(resp)
             upload.complete(1, 3)
           end

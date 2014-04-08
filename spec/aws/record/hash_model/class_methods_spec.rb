@@ -38,21 +38,28 @@ module AWS
 
         it 'calls create on the table collection' do
           tables.should_receive(:create).with(
-            klass.name, 11, 12, :hash_key => { :id => :string })
+            klass.name, 11, 12, :hash_key => { 'id' => :string })
           klass.create_table 11, 12
         end
 
         it 'accepts an optional :shard_name' do
           tables.should_receive(:create).with(
-            'products-2', 100, 200, :hash_key => { :id => :string })
+            'products-2', 100, 200, :hash_key => { 'id' => :string })
           klass.create_table 100, 200, :shard_name => 'products-2'
         end
 
         it 'prefixes the shard name with AWS::Record.table_prefix' do
           AWS::Record.stub(:table_prefix).and_return('prefix-')
           tables.should_receive(:create).with(
-            "prefix-#{klass.name}", 100, 200, :hash_key => { :id => :string })
+            "prefix-#{klass.name}", 100, 200, :hash_key => { 'id' => :string })
           klass.create_table 100, 200
+        end
+
+        it 'accepts an assignable hash key' do
+          klass.string_attr :isbn, :hash_key => true
+          tables.should_receive(:create).with(
+            klass.name, 10, 5, :hash_key => { 'isbn' => :string })
+          klass.create_table(10, 5)
         end
 
       end
@@ -81,20 +88,20 @@ module AWS
       end
 
       context '[]' do
-  
+
         let(:data) {{
           'id' => 'item-name',
         }}
 
-        let(:table) { 
+        let(:table) {
           DynamoDB::Table.new('shard-name', :config => stub_config)
         }
-  
+
         before(:each) do
           klass.stub(:dynamo_db_table).and_return(table)
           table.stub_chain(:items, :[], :attributes, :to_h).and_return(data)
         end
-  
+
         it 'returns an existing record' do
           klass['item-name'].should be_a(klass)
         end
@@ -103,7 +110,7 @@ module AWS
           klass['item-name'].shard.should == table.name
         end
 
-        it 'removes the table prefix' do 
+        it 'removes the table prefix' do
           AWS::Record.stub(:table_prefix).and_return('prefixed-')
           table.stub(:name).and_return('prefixed-shard-name')
           klass['item-name'].shard.should == 'shard-name'

@@ -21,7 +21,7 @@ Before("@ses") do
 end
 
 After("@ses") do
-  
+
   @created_identities.each do |identity|
     identity.delete
   end

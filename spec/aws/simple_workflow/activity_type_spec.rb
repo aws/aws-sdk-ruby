@@ -23,7 +23,7 @@ module AWS
         :default_task_start_to_close_timeout,
       ]
 
-      it_should_behave_like("a simple workflow type", config_attributes) do 
+      it_should_behave_like("a simple workflow type", config_attributes) do
 
         let(:config) { stub_config }
         let(:client) { config.simple_workflow_client }

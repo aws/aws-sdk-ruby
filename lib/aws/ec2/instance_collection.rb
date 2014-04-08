@@ -12,29 +12,27 @@
 # language governing permissions and limitations under the License.
 
 require 'base64'
-require 'uuidtools'
 
 module AWS
   class EC2
 
-    ##
     # Represents a collection of EC2 instances.  Typically you
     # should get an instance of this class by calling
     # {EC2#instances}.
     #
     # To run an instance:
     #
-    #   ec2.instances.create(:image_id => "ami-1b814f72")
+    #     ec2.instances.create(:image_id => "ami-1b814f72")
     #
     # To get an instance by ID:
     #
-    #   i = ec2.instances["i-12345678"]
-    #   i.exists?
+    #     i = ec2.instances["i-12345678"]
+    #     i.exists?
     #
     # To get a map of instance IDs to instance status:
     #
-    #   ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
-    #   # => { "i-12345678" => :running, "i-87654321" => :shutting_down }
+    #      ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
+    #     # => { "i-12345678" => :running, "i-87654321" => :shutting_down }
     #
     class InstanceCollection < Collection
 
@@ -53,18 +51,19 @@ module AWS
       #     :image_id => "ami-8c1fece5",
       #     :count => 10)
       #
-      #  sleep 1 while instances.any? {|i| i.status == :pending }
+      #   sleep 1 while instances.any? {|i| i.status == :pending }
       #
       # @example Specifying block device mappings
       #
       #   ec2.instances.create({
       #     :image_id => "ami-8c1fece5",
-      #     :block_device_mappings => {
-      #       "/dev/sda2" => {
+      #     :block_device_mappings => [{
+      #       :device_name => "/dev/sda2",
+      #       :ebs => {
       #         :volume_size => 15, # 15 GiB
       #         :delete_on_termination => true
       #       }
-      #     }
+      #     }]
       #   })
       #
       # @example Launching in an Amazon VPC subnet
@@ -73,7 +72,7 @@ module AWS
       #     :image_id => "ami-8c1fece5",
       #     :subnet => "subnet-abc123ef")
       #
-      # @param [Hash] options Options for new instance.  +:image_id+ is
+      # @param [Hash] options Options for new instance.  `:image_id` is
       #   the only required option.
       #
       # @option options [Integer] :count How many instances to request.  By
@@ -87,39 +86,39 @@ module AWS
       #   ARN of an IAM instance profile.  This provides credentials
       #   to the EC2 instance(s) via the instance metadata service.
       #
-      # @option options [Hash] :block_device_mappings This must be a
-      #   hash; the keys are device names to map, and the value for
-      #   each entry determines how that device is mapped.  Valid
-      #   values include:
       #
-      #   * A string, which is interpreted as a virtual device name.
+      # @option options [Array<Hash>] :block_device_mappings Specifies how block
+      #   devices are exposed to the instance. Each mapping is made up of a
+      #   virtualName and a deviceName.
       #
-      #   * The symbol :no_device, which overrides the default
-      #     mapping for a device so that it is not mapped to anything.
-      #
-      #   * A hash with any of the following options.  One of
-      #     +:snapshot+, +:snapshot_id+ or +:volume_size+ is
-      #     required.
-      #
-      #     [:snapshot] A snapshot to use when creating the block
-      #                 device.
-      #
-      #     [:snapshot_id] The ID of a snapshot to use when creating
-      #                    the block device.
-      #
-      #     [:volume_size] The size of volume to create, in gigabytes.
-      #
-      #     [:delete_on_termination] Setting this to true causes EC2
-      #                              to delete the volume when the
-      #                              instance is terminated.
+      #     * `:virtual_name` - (String) Specifies the virtual device name.
+      #     * `:device_name` - (String) Specifies the device name (e.g.,
+      #       /dev/sdh).
+      #     * `:ebs` - (Hash) Specifies parameters used to automatically setup
+      #       Amazon EBS volumes when the instance is launched.
+      #       * `:snapshot_id` - (String) The ID of the snapshot from which the
+      #         volume will be created.
+      #       * `:volume_size` - (Integer) The size of the volume, in
+      #         gigabytes.
+      #       * `:delete_on_termination` - (Boolean) Specifies whether the
+      #         Amazon EBS volume is deleted on instance termination.
+      #       * `:volume_type` - (String) Valid values include:
+      #         * `standard`
+      #         * `io1`
+      #       * `:iops` - (Integer)
+      #     * `:no_device` - (String) Specifies the device name to suppress
+      #       during instance launch.
       #
       # @option options [Boolean] :monitoring_enabled Setting this to
-      #   +true+ enables CloudWatch monitoring on the instances once they
+      #   `true` enables CloudWatch monitoring on the instances once they
       #   are started.
       #
       # @option options [String] :availability_zone Specifies the
       #   availability zone where the instance should run.  Without
       #   this option, EC2 will choose an availability zone for you.
+      #
+      # @option options [String] :placement_group Specifies the
+      #   cluster placement group where the instance should run.
       #
       # @option options [String] :image_id ID of the AMI you want to
       #   launch.
@@ -133,12 +132,12 @@ module AWS
       #
       # @option options [Array] :security_groups Security groups are used
       #   to determine network access rules for the instances.
-      #   +:security_groups+ can be a single value or an array of values.
+      #   `:security_groups` can be a single value or an array of values.
       #   Values should be group name strings or {SecurityGroup} objects.
       #
       # @option options [Array<String>] :security_group_ids Security groups
       #   are used to determine network access rules for the instances.
-      #   +:security_group_ids+ accepts a single ID or an array of security
+      #   `:security_group_ids` accepts a single ID or an array of security
       #   group IDs.
       #
       # @option options [String] :user_data Arbitrary user data.  You
@@ -165,12 +164,12 @@ module AWS
       #   you later want to terminate the instance, you must first
       #   enable API termination.  For example:
       #
-      #     i = ec2.instances.create(:image_id => "ami-8c1fece5",
-      #                              :disable_api_termination => true)
-      #     i.api_termination_disabled?        # => true
-      #     i.terminate                        # raises an exception
-      #     i.api_termination_disabled = false
-      #     i.terminate                        # terminates the instance
+      #       i = ec2.instances.create(:image_id => "ami-8c1fece5",
+      #                                :disable_api_termination => true)
+      #       i.api_termination_disabled?        # => true
+      #       i.terminate                        # raises an exception
+      #       i.api_termination_disabled = false
+      #       i.terminate                        # terminates the instance
       #
       # @option options [String] :instance_initiated_shutdown_behavior
       #   Determines whether the instance stops or terminates on
@@ -192,15 +191,17 @@ module AWS
       #   valid for instances launched outside a VPC (e.g. those
       #   launched without the :subnet option).
       #
-      # @option options [Boolean] :ebs_optimized (false) EBS-Optimized instances 
-      #   enable Amazon EC2 instances to fully utilize the IOPS provisioned on 
-      #   an EBS volume. EBS-optimized instances deliver dedicated throughput 
+      # @option options [Boolean] :ebs_optimized (false) EBS-Optimized instances
+      #   enable Amazon EC2 instances to fully utilize the IOPS provisioned on
+      #   an EBS volume. EBS-optimized instances deliver dedicated throughput
       #   between Amazon EC2 and Amazon EBS, with options between 500 Mbps and
-      #   1000 Mbps depending on the instance type used. When attached to 
-      #   EBS-Optimized instances, Provisioned IOPS volumes are designed 
-      #   to deliver within 10% of their provisioned performance 99.9% of the time. 
+      #   1000 Mbps depending on the instance type used. When attached to
+      #   EBS-Optimized instances, Provisioned IOPS volumes are designed
+      #   to deliver within 10% of their provisioned performance 99.9% of the time.
       #   *NOTE:* EBS Optimized instances incur an additional service charge. This
       #   optional is only valid for certain instance types.
+      #
+      # @option options [Boolean] :associate_public_ip_address (false)
       #
       # @return [Instance or Array] If a single instance is being created,
       #   this returns an {EC2::Instance} to represent the newly
@@ -242,9 +243,10 @@ module AWS
         options[:user_data] = Base64.encode64(options[:user_data]).strip if
           options[:user_data]
 
-        options[:block_device_mappings] =
-          translate_block_device_mappings(options[:block_device_mappings]) if
-          options[:block_device_mappings]
+        if options[:block_device_mappings].is_a?(Hash)
+          options[:block_device_mappings] =
+            translate_block_device_mappings(options[:block_device_mappings])
+        end
 
         options[:monitoring] = { :enabled => true } if
           options[:monitoring_enabled]
@@ -257,6 +259,11 @@ module AWS
           options.delete(:availability_zone)
         end
 
+        if options[:placement_group]
+          placement[:group_name] = options[:placement_group].to_s
+          options.delete(:placement_group)
+        end
+
         if options[:dedicated_tenancy]
           placement[:tenancy] = 'dedicated'
           options.delete(:dedicated_tenancy)
@@ -264,13 +271,34 @@ module AWS
 
         options[:placement] = placement unless placement.empty?
 
+        network_interface = {}
+
+        if options[:associate_public_ip_address]
+          if subnet_id = subnet_id_option(options)
+            network_interface[:subnet_id] = subnet_id
+            options.delete(:subnet)
+            options.delete(:subnet_id)
+          end
+          if private_ip_address = options.delete(:private_ip_address)
+            network_interface[:private_ip_address] = private_ip_address
+          end
+          if security_group_ids = options.delete(:security_group_ids)
+            network_interface[:groups] = Array(security_group_ids)
+          end
+          network_interface[:associate_public_ip_address] = true
+          network_interface[:device_index] = 0
+        end
+        options.delete(:associate_public_ip_address)
+
+        options[:network_interfaces] = [network_interface] unless network_interface.empty?
+
         if subnet_id = subnet_id_option(options)
           options[:subnet_id] = subnet_id
         end
 
         security_group_opts(options)
 
-        options[:client_token] = UUIDTools::UUID.timestamp_create.to_s
+        options[:client_token] = SecureRandom.uuid
 
         resp = client.run_instances(options)
 
@@ -289,7 +317,9 @@ module AWS
         response = filtered_request(:describe_instances)
         response.reservation_set.each do |reservation|
           reservation.instances_set.each do |i|
-            yield(Instance.new(i.instance_id, :config => config))
+            instance = Instance.new_from(:describe_instances, i,
+              i.instance_id, :config => config)
+            yield(instance)
           end
         end
       end
@@ -300,13 +330,13 @@ module AWS
         super
       end
 
-      # @private
+      # @api private
       protected
       def member_class
         Instance
       end
 
-      # @private
+      # @api private
       private
       def count_options options
         min = max = 1
@@ -321,7 +351,7 @@ module AWS
         { :min_count => min, :max_count => max }
       end
 
-      # @private
+      # @api private
       private
       def security_group_opts options
 

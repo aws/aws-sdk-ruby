@@ -62,7 +62,7 @@ When /^I deprecate the activity type$/ do
 end
 
 Then /^deprecated activity types should include the activity type$/ do
-  eventually do 
+  eventually do
     @domain.activity_types.deprecated.should include(@activity_type)
   end
 end

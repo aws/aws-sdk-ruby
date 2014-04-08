@@ -148,7 +148,7 @@ module AWS
       end
 
       # Modifies the database instance.
-      # @note You do not need to set +:db_instance_identifier+.
+      # @note You do not need to set `:db_instance_identifier`.
       # @see Client#modify_db_instance
       # @param (see Client#modify_db_instance)
       def modify options = {}
@@ -175,9 +175,9 @@ module AWS
 
       # Reboots this databse instance.
       # @param [Hash] options
-      # @option options [Boolean] :force_failover When +true+, the reboot will be
+      # @option options [Boolean] :force_failover When `true`, the reboot will be
       #   conducted through a MultiAZ failover. Constraint: You cannot
-      #   specify +true+ if the instance is not configured for MultiAZ.
+      #   specify `true` if the instance is not configured for MultiAZ.
       # @return [nil]
       def reboot options = {}
         client.reboot_db_instance(options.merge(:db_instance_identifier => id))
@@ -191,7 +191,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] Returns +true+ if the db instance exists.
+      # @return [Boolean] Returns `true` if the db instance exists.
       def exists?
         begin
           get_resource

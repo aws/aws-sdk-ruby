@@ -35,7 +35,7 @@ After("@auto_scaling") do
     begin
       launch_config.delete
     rescue AWS::AutoScaling::Errors::ValidationError
-      # throws a name validation error when it cant find a launch 
+      # throws a name validation error when it cant find a launch
       # configuration with the given name -- already deleted
     end
   end

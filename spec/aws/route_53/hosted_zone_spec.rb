@@ -35,14 +35,14 @@ module AWS
           :comment => 'this is an example.',
         },
         :resource_record_set_count => 108,
-        :delegation_set => [
-          'ns1.example.com.',
-          'ns2.example.com.',
-        ],
       }}
 
       before(:each) do
         response.data[:hosted_zone] = details
+        response.data[:delegation_set] = [
+          'ns1.example.com.',
+          'ns2.example.com.',
+        ]
         client.stub(:get_hosted_zone).and_return(response)
       end
 
@@ -63,7 +63,6 @@ module AWS
       end
 
       it_behaves_like "hosted zone attribute", :name
-      it_behaves_like "hosted zone attribute", :caller_reference
       it_behaves_like "hosted zone attribute", :resource_record_set_count
       it_behaves_like "hosted zone attribute", :delegation_set
 

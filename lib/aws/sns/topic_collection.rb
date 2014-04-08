@@ -28,11 +28,11 @@ module AWS
       # @param [String] topic_arn An AWS SNS Topic ARN.  It should be
       #   formatted something like:
       #
-      #     arn:aws:sns:us-east-1:123456789012:TopicName
-      # 
+      #       arn:aws:sns:us-west-2:123456789012:TopicName
+      #
       # @return [Topic] Returns a topic with the given Topic ARN.
       def [] topic_arn
-        unless topic_arn =~ /^arn:aws:sns:/
+        unless topic_arn =~ /^arn:aws/
           raise ArgumentError, "invalid topic arn `#{topic_arn}`"
         end
         Topic.new(topic_arn, :config => config)

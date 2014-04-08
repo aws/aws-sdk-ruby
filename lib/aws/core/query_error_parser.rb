@@ -14,7 +14,7 @@
 module AWS
   module Core
 
-    # @private
+    # @api private
     module QueryErrorParser
 
 

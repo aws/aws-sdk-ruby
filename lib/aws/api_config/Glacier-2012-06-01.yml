@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -182,6 +182,12 @@
     SHA256TreeHash:
       :sym: :sha256_tree_hash
       :type: :string
+    ArchiveSHA256TreeHash:
+      :sym: :archive_sha256_tree_hash
+      :type: :string
+    RetrievalByteRange:
+      :sym: :retrieval_byte_range
+      :type: :string
 - :name: DescribeVault
   :method: :describe_vault
   :http:
@@ -297,6 +303,25 @@
         :sns_topic:
           :name: SNSTopic
           :type: :string
+        :retrieval_byte_range:
+          :name: RetrievalByteRange
+          :type: :string
+        :inventory_retrieval_parameters:
+          :name: InventoryRetrievalParameters
+          :type: :hash
+          :members:
+            :start_date:
+              :name: StartDate
+              :type: :string
+            :end_date:
+              :name: EndDate
+              :type: :string
+            :limit:
+              :name: Limit
+              :type: :string
+            :marker:
+              :name: Marker
+              :type: :string
   :outputs: {}
 - :name: InitiateMultipartUpload
   :method: :initiate_multipart_upload
@@ -388,6 +413,12 @@
           :type: :string
         SHA256TreeHash:
           :sym: :sha256_tree_hash
+          :type: :string
+        ArchiveSHA256TreeHash:
+          :sym: :archive_sha256_tree_hash
+          :type: :string
+        RetrievalByteRange:
+          :sym: :retrieval_byte_range
           :type: :string
     Marker:
       :sym: :marker

@@ -14,33 +14,33 @@
 module AWS
   class CloudWatch
 
-    # = AlarmCollection
-    # 
+    # # AlarmCollection
+    #
     # Represents alarms for an AWS account.
     #
-    # == Getting an alarm by name
+    # ## Getting an alarm by name
     #
     # If you know the name of the alarm, you can get a reference using
     # the {#[]} method.
     #
-    #   cw = AWS::CloudWatch.new
-    #   alarm = cw.alarms['alarm-name']
+    #     cw = AWS::CloudWatch.new
+    #     alarm = cw.alarms['alarm-name']
     #
-    # == Enumerating Alarms
+    # ## Enumerating Alarms
     #
     # You can enumerate all alarms using each (or any of the
     # methods defined in {Core::Collection}).
     #
-    #   cw.alarms.each do |alarm|
-    #     puts alarm.name
-    #   end
+    #     cw.alarms.each do |alarm|
+    #       puts alarm.name
+    #     end
     #
-    # == Filtering Alarms
+    # ## Filtering Alarms
     #
     # Use one of the filtering methods to reduce the number of alarms
     # returned.
     #
-    #   cw.alarms.with_name_prefix('some-prefix-').each {|alarm| ... }
+    #     cw.alarms.with_name_prefix('some-prefix-').each {|alarm| ... }
     #
     class AlarmCollection
 
@@ -59,16 +59,16 @@ module AWS
 
       # Creates an alarm and associates it with the specified metric.
       #
-      # @param [String] alarm_name The descriptive name for the alarm. 
+      # @param [String] alarm_name The descriptive name for the alarm.
       #   This name must be unique within the user's AWS account.
       # @param [Hash] options
-      # @option options [String,required] :namespace The namespace for the 
+      # @option options [String,required] :namespace The namespace for the
       #   alarm's associated metric.
-      # @option options [String,required] :metric_name The name for the 
+      # @option options [String,required] :metric_name The name for the
       #   alarm's associated metric.
-      # @option options [Array<Hash>] :dimensions The dimensions for the 
+      # @option options [Array<Hash>] :dimensions The dimensions for the
       #   alarm's associated metric.  Each dimension must specify a
-      #   +:name+ and a +:value+.
+      #   `:name` and a `:value`.
       # @option (see Alarm#update)
       # @return [Alarm]
       def create alarm_name, options = {}
@@ -79,7 +79,7 @@ module AWS
 
       # Delete one or more alarms by name.
       #
-      #   cloud_watch.alarms.delete('alarm1', 'alarm2')
+      #     cloud_watch.alarms.delete('alarm1', 'alarm2')
       #
       # @param [String,Array<String>] alarm_names
       # @return [nil]
@@ -136,7 +136,7 @@ module AWS
 
           alarm = Alarm.new_from(
             :describe_alarms,
-            details, 
+            details,
             details[:alarm_name],
             :config => config)
 

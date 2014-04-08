@@ -19,41 +19,41 @@ module AWS
   # This class is the starting point for working with Amazon Route 53.
   #
   # To use Amazon Route 53 you must first
-  # {sign up here}[http://aws.amazon.com/route53/].
+  # [sign up here](http://aws.amazon.com/route53/).
   #
   # For more information about Amazon Route 53:
   #
-  # * {Amazon Route 53}[http://aws.amazon.com/route53/]
-  # * {Amazon Route 53 Documentation}[http://aws.amazon.com/documentation/route53/]
+  # * [Amazon Route 53](http://aws.amazon.com/route53/)
+  # * [Amazon Route 53 Documentation](http://aws.amazon.com/documentation/route53/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the AWS::Route53 interface:
   #
-  #   r53 = AWS::Route53.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     r53 = AWS::Route53.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
-  # = Using the Client
+  # # Using the Client
   #
   # AWS::Route53 does not provide higher level abstractions for Route 53 at
   # this time.  You can still access all of the API methods using
   # {AWS::Route53::Client}.  Here is how you access the client and make
   # a simple request:
   #
-  #   r53 = AWS::Route53.new
+  #       r53 = AWS::Route53.new
   #
-  #   resp = r53.client.list_hosted_zones
-  #   resp[:hosted_zones].each do |zone|
-  #     # ...
-  #   end
+  #     resp = r53.client.list_hosted_zones
+  #     resp[:hosted_zones].each do |zone|
+  #       # ...
+  #     end
   #
   # See {Client} for documentation on all of the supported operations.
   #
@@ -61,22 +61,21 @@ module AWS
   #   @return [Client] the low-level Route53 client object
   class Route53
 
-    AWS.register_autoloads(self, 'aws/route_53') do
-      autoload :ChangeRequest, 'change_batch'
-      autoload :ChangeBatch, 'change_batch'
-      autoload :ChangeInfo, 'change_info'
-      autoload :Client, 'client'
-      autoload :CreateRequest, 'change_batch'
-      autoload :DeleteRequest, 'change_batch'
-      autoload :Errors, 'errors'
-      autoload :HostedZone, 'hosted_zone'
-      autoload :HostedZoneCollection, 'hosted_zone_collection'
-      autoload :Request, 'request'
-      autoload :ResourceRecordSet, 'resource_record_set'
-      autoload :ResourceRecordSetCollection, 'resource_record_set_collection'
-    end
+    autoload :ChangeRequest, 'aws/route_53/change_batch'
+    autoload :ChangeBatch, 'aws/route_53/change_batch'
+    autoload :ChangeInfo, 'aws/route_53/change_info'
+    autoload :Client, 'aws/route_53/client'
+    autoload :CreateRequest, 'aws/route_53/change_batch'
+    autoload :DeleteRequest, 'aws/route_53/change_batch'
+    autoload :Errors, 'aws/route_53/errors'
+    autoload :HostedZone, 'aws/route_53/hosted_zone'
+    autoload :HostedZoneCollection, 'aws/route_53/hosted_zone_collection'
+    autoload :ResourceRecordSet, 'aws/route_53/resource_record_set'
+    autoload :ResourceRecordSetCollection, 'aws/route_53/resource_record_set_collection'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'route53', :global => true
 
     # @return [HostedZoneCollection]
     def hosted_zones

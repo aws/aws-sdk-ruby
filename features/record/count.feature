@@ -16,7 +16,7 @@
 Feature: Scoped counts
 
   As an ORM user
-  I want to use an expressive interface 
+  I want to use an expressive interface
   So that I can count records.
 
   @query @where

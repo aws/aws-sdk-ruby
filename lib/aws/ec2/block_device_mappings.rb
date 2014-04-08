@@ -14,10 +14,10 @@
 module AWS
   class EC2
 
-    # @private
+    # @api private
     module BlockDeviceMappings
 
-      # @private
+      # @api private
       private
       def translate_block_device_mappings(mapping)
         raise ArgumentError.new("block_device_mappings must be a hash") unless

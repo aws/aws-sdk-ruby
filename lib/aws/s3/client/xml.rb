@@ -15,7 +15,7 @@ module AWS
   class S3
     class Client < Core::Client
 
-      # @private
+      # @api private
       module XML
 
         BaseGrammar = Core::XML::Grammar.new({}, :inflect_rename => true)
@@ -69,6 +69,24 @@ module AWS
             collect_values
           end
 
+        end
+
+        GetBucketLogging = BaseGrammar.customize do
+          element("LoggingEnabled") do
+            element("TargetBucket") { }
+            element("TargetPrefix") { }
+            element("TargetGrants") do
+              list "Grant"
+              element("Grant") do
+                element("Grantee") do
+                  element("EmailAddress") { }
+                  element("ID") { }
+                  element("URI") { }
+                end
+                element("Permission") { }
+              end
+            end
+          end
         end
 
         GetBucketVersioning = BaseGrammar.customize do
@@ -141,7 +159,7 @@ module AWS
             element("DeleteMarker") { boolean_value }
             list
           end
-          element("Error") { list; rename(:errors) }  
+          element("Error") { list; rename(:errors) }
         end
 
         CompleteMultipartUpload = BaseGrammar.customize
@@ -222,6 +240,16 @@ module AWS
           end
           element "RoutingRules" do
             list("RoutingRule")
+          end
+        end
+
+        CopyPart = BaseGrammar.customize do
+          element "ETag" do
+            rename :etag
+          end
+          element "LastModified" do
+            datetime_value
+            rename :last_modified
           end
         end
 

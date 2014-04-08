@@ -25,14 +25,12 @@ module AWS
       # A subsequent call to #each will limit the results returned
       # by provided filters.
       #
-      # * Chain multiple calls of #filter together to AND multiple conditions
-      #   together.
-      #
-      # * Supply multiple values to a singler #filter call to OR those
-      #   value conditions together.
-      #
-      # * '*' matches one or more characters and '?' matches any one
-      #   character.
+      #   * Chain multiple calls of #filter together to AND multiple conditions
+      #     together.
+      #   * Supply multiple values to a singler #filter call to OR those
+      #     value conditions together.
+      #   * '*' matches one or more characters and '?' matches any one
+      #     character.
       #
       def filter filter_name, *values
         filters = @filters.dup
@@ -40,7 +38,7 @@ module AWS
         collection_with(:filters => filters)
       end
 
-      # @private
+      # @api private
       def filtered_request client_method, options = {}, &block
         options[:filters] = @filters unless @filters.empty?
         client.send(client_method, options)
@@ -72,13 +70,13 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       protected
       def preserved_options
         { :config => config, :filters => @filters }
       end
 
-      # @private
+      # @api private
       protected
       def collection_with(options = {})
         self.class.new(preserved_options.merge(options))

@@ -16,41 +16,52 @@ module AWS
 
     # Respresents a server certificate.
     #
-    #   certificate = iam.server_certificates["MyCert"]
+    #     certificate = iam.server_certificates["MyCert"]
     #
     # You can use this class to get information about a certificate
     # and to delete it.
+    #
+    # @attr [String] The name that identifies the server certificate.
+    #
+    # @attr_reader [String] The stable and unique string identifying
+    #   the server certificate.
+    #
+    # @attr_reader [Time] The date when the server certificate was
+    #   uploaded.
+    #
+    # @attr_reader [String] The Amazon Resource Name (ARN)
+    #   specifying the server certificate. For more information
+    #   about ARNs and how to use them in policies, see
+    #   {http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
+    #   Identifiers for IAM Entities} in <i>Using AWS Identity and
+    #   Access Management</i>.
+    #
+    # @attr [String] Path to the server certificate.
+    #
+    # @attr_reader [String] The contents of the public key
+    #   certificate.
+    #
+    # @attr_reader [String] The contents of the public key
+    #   certificate chain.
+    #
     class ServerCertificate < Resource
 
       prefix_update_attributes
 
-      # @private
+      # @api private
       def initialize(name, opts={})
         opts[:name] = name
         super(opts)
       end
 
-      # @attr [String] The name that identifies the server
-      #   certificate.
       mutable_attribute :name, :static => true, :from => :server_certificate_name
 
-      # @attr_reader [String] The stable and unique string identifying
-      #   the server certificate.
       attribute :id, :static => true, :from => :server_certificate_id
 
-      # @attr_reader [Time] The date when the server certificate was
-      #   uploaded.
       attribute :upload_date, :static => true
 
-      # @attr_reader [String] The Amazon Resource Name (ARN)
-      #   specifying the server certificate. For more information
-      #   about ARNs and how to use them in policies, see
-      #   {http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
-      #   Identifiers for IAM Entities} in <i>Using AWS Identity and
-      #   Access Management</i>.
       attribute :arn
 
-      # @attr [String] Path to the server certificate.
       mutable_attribute :path do
         translates_input do |path|
           path = "/#{path}" unless path[0] == ?/
@@ -59,12 +70,8 @@ module AWS
         end
       end
 
-      # @attr_reader [String] The contents of the public key
-      #   certificate.
       attribute :certificate_body
 
-      # @attr_reader [String] The contents of the public key
-      #   certificate chain.
       attribute :certificate_chain
 
       provider(:get_server_certificate) do |provider|
@@ -117,7 +124,7 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       protected
       def resource_identifiers
         [[:server_certificate_name, name]]

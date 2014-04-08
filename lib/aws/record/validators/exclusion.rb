@@ -11,12 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'aws/record/validators/inclusion'
-
 module AWS
   module Record
-    
-    # @private
+
+    # @api private
     class ExclusionValidator < InclusionValidator
 
       ACCEPTED_OPTIONS = [:in, :message, :allow_nil, :allow_blank, :on, :if, :unless]
@@ -29,7 +27,7 @@ module AWS
       def validate_attribute record, attribute_name, value_or_values
         each_value(value_or_values) do |value|
           included = value_included?(value)
-          record.errors.add(attribute_name, message) if included 
+          record.errors.add(attribute_name, message) if included
         end
       end
 

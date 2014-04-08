@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -52,6 +52,10 @@
     - :membered_list:
       - :string
     OnFailure:
+    - :string
+    StackPolicyBody:
+    - :string
+    StackPolicyURL:
     - :string
     Tags:
     - :membered_list:
@@ -211,6 +215,16 @@
     :children:
       EstimateTemplateCostResult:
         :ignore: true
+- :name: GetStackPolicy
+  :method: :get_stack_policy
+  :inputs:
+    StackName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetStackPolicyResult:
+        :ignore: true
 - :name: GetTemplate
   :method: :get_template
   :inputs:
@@ -269,6 +283,20 @@
                     :type: :time
                   DeletionTime:
                     :type: :time
+- :name: SetStackPolicy
+  :method: :set_stack_policy
+  :inputs:
+    StackName:
+    - :string
+    - :required
+    StackPolicyBody:
+    - :string
+    StackPolicyURL:
+    - :string
+  :outputs:
+    :children:
+      SetStackPolicyResult:
+        :ignore: true
 - :name: UpdateStack
   :method: :update_stack
   :inputs:
@@ -278,6 +306,10 @@
     TemplateBody:
     - :string
     TemplateURL:
+    - :string
+    StackPolicyDuringUpdateBody:
+    - :string
+    StackPolicyDuringUpdateURL:
     - :string
     Parameters:
     - :membered_list:
@@ -289,6 +321,10 @@
     Capabilities:
     - :membered_list:
       - :string
+    StackPolicyBody:
+    - :string
+    StackPolicyURL:
+    - :string
   :outputs:
     :children:
       UpdateStackResult:

@@ -32,7 +32,7 @@ module AWS
         it 'requires a domain and name' do
           lambda { Item.new }.should raise_error(ArgumentError)
         end
-        
+
         it 'accepts a domain and name' do
           lambda { Item.new(domain, 'car') }.should_not raise_error
         end
@@ -40,14 +40,14 @@ module AWS
       end
 
       context '#domain' do
-        
+
         it 'returns the domain passed to #initialize' do
           item.domain.should == domain
         end
       end
 
       context '#name' do
-        
+
         it 'returns the proper name' do
           item.name.should == 'car'
         end
@@ -55,7 +55,7 @@ module AWS
       end
 
       context '#attributes' do
-        
+
         it 'returns an attributes collection' do
           item.attributes.should be_an(AttributeCollection)
         end

@@ -16,40 +16,42 @@ module AWS
     # Signing certificates can be activated and deactivated.
     # By default, newly-uploaded certifictes are active.
     #
-    #   certificate = iam.signing_certificates.upload(cert_body)
-    #   certificate.status
-    #   #=> :active
+    #     certificate = iam.signing_certificates.upload(cert_body)
+    #     certificate.status
+    #     #=> :active
     #
-    #   certificate.deactivate!
-    #   certificate.active?
-    #   #=> false
+    #     certificate.deactivate!
+    #     certificate.active?
+    #     #=> false
     #
-    # == Contents
+    # ## Contents
     #
     # You can access the certificate contents you uploaded:
     #
-    #   > puts certificate.contents
-    #   -----BEGIN CERTIFICATE-----
-    #   MIICdzCCAeCgAwIBAgIFGS4fY6owDQYJKoZIhvcNAQEFBQAwUzELMAkGA1UEBhMC
-    #   ......
-    #   Glli79yh87PRi0vNDlFEoHXNynkvC/c4TiWruZ4haM9BR9EdWr1DBNNu73ui093K
-    #   F9TbdXSWdgMl7E0=
-    #   -----END CERTIFICATE-----
+    #     > puts certificate.contents
+    #     -----BEGIN CERTIFICATE-----
+    #     MIICdzCCAeCgAwIBAgIFGS4fY6owDQYJKoZIhvcNAQEFBQAwUzELMAkGA1UEBhMC
+    #     ......
+    #     Glli79yh87PRi0vNDlFEoHXNynkvC/c4TiWruZ4haM9BR9EdWr1DBNNu73ui093K
+    #     F9TbdXSWdgMl7E0=
+    #     -----END CERTIFICATE-----
     #
-    # == User
+    # ## User
     #
     # A certificate can also return the user it belongs to.  If the certificate
-    # belongs to the AWS account, then {#user} will return +nil+.
+    # belongs to the AWS account, then {#user} will return `nil`.
     #
-    #   user = iam.users['someuser'].signing_certificates.first
-    #   user.name
-    #   #=> 'someuser'
+    #     user = iam.users['someuser'].signing_certificates.first
+    #     user.name
+    #     #=> 'someuser'
     #
-    # @attr_reader [String] contents Returns the contents of this 
+    # @attr_reader [String] contents Returns the contents of this
     #   signing certificate.
     #
+    # @attr_reader [Time] upload_date
+    #
     # @attr_reader [Symbol] status The status of this signing
-    #   certificate.  Status may be +:active+ or +:inactive+.
+    #   certificate.  Status may be `:active` or `:inactive`.
     #
     class SigningCertificate < Resource
 
@@ -65,20 +67,23 @@ module AWS
       # @return [String] Returns the signing certificate's ID.
       attr_reader :id
 
-      # @return [User,nil] Returns the user this cerficiate belongs to.  
-      #   Returns +nil+ if the cerficiate is a root credential for the 
-      #   account.  If the configured credentials belong to an IAM user, 
+      # @return [User,nil] Returns the user this cerficiate belongs to.
+      #   Returns `nil` if the cerficiate is a root credential for the
+      #   account.  If the configured credentials belong to an IAM user,
       #   then that user is the implied owner.
       attr_reader :user
 
       attribute :contents, :from => :certificate_body, :static => true
+
+      # @attr_reader [Time] upload_date
+      attribute :upload_date, :static => true
 
       mutable_attribute :status, :to_sym => true
 
       protected :status=
 
       populates_from(
-        :upload_signing_certificate, 
+        :upload_signing_certificate,
         :update_signing_certificate
       ) do |resp|
         resp.certificate if matches_response_object?(resp.certificate)
@@ -89,7 +94,7 @@ module AWS
       end
 
       # @return [String,nil] Returns the name of the user this certificate
-      #   belogns to.  If the certificate belongs to the account, +nil+ is
+      #   belogns to.  If the certificate belongs to the account, `nil` is
       #   returned.
       def user_name
         @user ? @user.name : nil
@@ -137,7 +142,19 @@ module AWS
         nil
       end
 
-      # @private
+      # @return [Boolean] Returns `true` if the resource exists.
+      def exists?
+        exists = false
+        SigningCertificateCollection.new(:config => config).each do |cert|
+          if cert.id == self.id
+            exists = true
+            break
+          end
+        end
+        exists
+      end
+
+      # @api private
       protected
       def resource_identifiers
         identifiers = []
@@ -146,18 +163,18 @@ module AWS
         identifiers
       end
 
-      # IAM does not provide a request for "get signing certificate".  
-      # Also note, we do not page the response. This is because 
-      # restrictions on how many certificates an account / user may 
+      # IAM does not provide a request for "get signing certificate".
+      # Also note, we do not page the response. This is because
+      # restrictions on how many certificates an account / user may
       # have is fewer than one page of results.
-      # @private
+      # @api private
       protected
-      def get_resource attribute
+      def get_resource attribute = nil
         options = user ? { :user_name => user.name } : {}
         client.list_signing_certificates(options)
       end
 
-      # @private
+      # @api private
       protected
       def matches_response_object? obj
         user_name = obj.respond_to?(:user_name) ? obj.user_name : nil

@@ -19,14 +19,14 @@ module AWS
       include TaggedCollection
       include Core::Collection::Simple
 
-      # Creates a new Internet gateway in your AWS account. After creating 
+      # Creates a new Internet gateway in your AWS account. After creating
       # the gateway you can attach it to a VPC.
       #
       # @return [InternetGateway]
       #
       def create
         response = client.create_internet_gateway
-        self[response.internet_gateway.internet_gateway_id] 
+        self[response.internet_gateway.internet_gateway_id]
       end
 
       # @param [String] internet_gateway_id
@@ -41,7 +41,7 @@ module AWS
         response = filtered_request(:describe_internet_gateways, options, &block)
         response.internet_gateway_set.each do |g|
 
-          gateway = InternetGateway.new_from(:describe_internet_gateways, g, 
+          gateway = InternetGateway.new_from(:describe_internet_gateways, g,
             g.internet_gateway_id, :config => config)
 
           yield(gateway)

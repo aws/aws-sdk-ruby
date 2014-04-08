@@ -54,11 +54,11 @@ module AWS
           hash['key'] = 1
           hash[:key].should == 1
         end
-        
+
       end
 
       context '#merge!' do
-        
+
         it 'modifies the hash in place' do
           hash.merge!(:a => 1)
           hash.should == { 'a' => 1 }
@@ -67,7 +67,7 @@ module AWS
       end
 
       context '#update' do
-        
+
         it 'should be an alias of #merge!' do
           hash.method(:update).should == hash.method(:merge!)
         end
@@ -75,7 +75,7 @@ module AWS
       end
 
       context '#merge' do
-        
+
         it 'modifies the hash in place' do
           hash.merge!(:a => 1)
           hash.should == { 'a' => 1 }
@@ -119,7 +119,7 @@ module AWS
           hash.delete(:b)
           hash.should == { 'a' => 1 }
         end
-        
+
       end
 
     end

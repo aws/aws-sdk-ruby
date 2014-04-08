@@ -22,6 +22,8 @@ module AWS
     # Base client class for all of the Amazon AWS service clients.
     class Client
 
+      extend Deprecations
+
       # Raised when a request failed due to a networking issue (e.g.
       # EOFError, IOError, Errno::ECONNRESET, Errno::EPIPE,
       # Timeout::Error, etc)
@@ -29,7 +31,7 @@ module AWS
 
       extend Naming
 
-      # @private
+      # @api private
       CACHEABLE_REQUESTS = Set[]
 
       # Creates a new low-level client.
@@ -46,7 +48,7 @@ module AWS
 
         # translate these into service specific configuration options,
         # e.g. :endpoint into :s3_endpoint
-        [:endpoint, :region, :port].each do |opt|
+        [:endpoint, :region, :port, :signature_version].each do |opt|
           if options[opt]
             options[:"#{service_ruby_name}_#{opt}"] = options.delete(opt)
           end
@@ -55,12 +57,15 @@ module AWS
         @config = (options.delete(:config) || AWS.config)
         @config = @config.with(options)
 
+        @region = @config.send(:"#{service_ruby_name}_region")
+
         @credential_provider = @config.credential_provider
         @http_handler = @config.http_handler
         @endpoint = config.send(:"#{service_ruby_name}_endpoint")
         @port = config.send(:"#{service_ruby_name}_port")
-        @http_read_timeout = @config.http_read_timeout
 
+        # deprecated attributes
+        @http_read_timeout = @config.http_read_timeout
       end
 
       # @return [Configuration] This clients configuration.
@@ -68,25 +73,27 @@ module AWS
 
       # @return [CredentialProviders::Provider] Returns the credential
       #   provider for this client.
-      # @private
+      # @api private
       attr_reader :credential_provider
 
       # @return [String] The snake-cased ruby name for the service
       #   (e.g. 's3', 'iam', 'dynamo_db', etc).
-      # @private
+      # @api private
       attr_reader :service_ruby_name
 
       # @return [Integer] What port this client makes requests via.
-      # @private
+      # @api private
       attr_reader :port
 
       # @return [Integer] The number of seconds before requests made by
       #   this client should timeout if they have not received a response.
+      # @api private
       attr_reader :http_read_timeout
+      deprecated :http_read_timeout, :use => 'config.http_read_timeout'
 
       # @return [String] Returns the service endpoint (hostname) this client
       #   makes requests against.
-      # @private
+      # @api private
       attr_reader :endpoint
 
       # @return (see Client.operations)
@@ -105,7 +112,7 @@ module AWS
       #   end
       #
       # The block executes in the context of an HttpHandler
-      # instance, and +super+ delegates to the HTTP handler used by
+      # instance, and `super` delegates to the HTTP handler used by
       # this client.  This provides an easy way to spy on requests
       # and responses.  See HttpHandler, HttpRequest, and
       # HttpResponse for more details on how to implement a fully
@@ -135,14 +142,14 @@ module AWS
       # @param [Configuration] config The configuration object to use.
       # @return [Core::Client] Returns a new client object with the given
       #   configuration.
-      # @private
+      # @api private
       def with_config config
         self.class.new(:config => config)
       end
 
       # The stub returned is memoized.
       # @see new_stub_for
-      # @private
+      # @api private
       def stub_for method_name
         @stubs ||= {}
         @stubs[method_name] ||= new_stub_for(method_name)
@@ -151,7 +158,7 @@ module AWS
       # Primarily used for testing, this method returns an empty pseudo
       # service response without making a request.  Its used primarily for
       # testing the lighter level service interfaces.
-      # @private
+      # @api private
       def new_stub_for method_name
         response = Response.new(Http::Request.new, Http::Response.new)
         response.request_type = method_name
@@ -174,14 +181,28 @@ module AWS
         nil
       end
 
+      # @api private
+      def inspect
+        "#<#{self.class.name}>"
+      end
+
+      # @api private
+      def to_yaml_properties
+        skip = %w(@config @credential_provider @http_handler)
+        instance_variables.map(&:to_s) - skip
+      end
+
       protected
 
+      # @api private
       def new_request
-        eval(self.class.name.sub(/::Client$/, ''))::Request.new
+        Http::Request.new
       end
 
       def new_response(*args, &block)
-        Response.new(*args, &block)
+        resp = Response.new(*args, &block)
+        resp.config = config
+        resp
       end
 
       def make_async_request response
@@ -315,18 +336,32 @@ module AWS
         response.error.kind_of?(Errors::ServerError)
       end
 
-      # @return [Boolean] Returns +true+ if the response contains an
+      # @return [Boolean] Returns `true` if the response contains an
       #   error message that indicates credentials have expired.
       def expired_credentials? response
         response.error and
         response.error.respond_to?(:code) and
-        (response.error.code == 'ExpiredTokenException' || response.error.code == 'ExpiredToken')
+        (
+          response.error.code.to_s.match(/expired/i) or # session credentials
+          response.error.code == 'InvalidClientTokenId' or # query services
+          response.error.code == 'UnrecognizedClientException' or # json services
+          response.error.code == 'InvalidAccessKeyId' or # s3
+          response.error.code == 'AuthFailure' # ec2
+        )
       end
 
       def throttled? response
         response.error and
         response.error.respond_to?(:code) and
-        response.error.code.to_s.match(/Throttling/i)
+        (
+          response.error.code.to_s.match(/throttl/i) or
+          #response.error.code == 'Throttling' or # most query services
+          #response.error.code == 'ThrottlingException' or # json services
+          #response.error.code == 'RequestThrottled' or # sqs
+          response.error.code == 'ProvisionedThroughputExceededException' or # ddb
+          response.error.code == 'RequestLimitExceeded' or # ec2
+          response.error.code == 'BandwidthLimitExceeded' # cloud search
+        )
       end
 
       def redirected? response
@@ -405,15 +440,15 @@ module AWS
       # in sub-classes (e.g. QueryClient, RESTClient, etc).
       # @param [Response] response
       # @return [Array<Code,Message>,nil] Should return an array with an
-      #   error code and message, or +nil+.
+      #   error code and message, or `nil`.
       def extract_error_details response
         raise NotImplementedError
       end
 
       # Given an error code string, this method will return an error class.
       #
-      #   AWS::EC2::Client.new.send(:error_code, 'InvalidInstanceId')
-      #   #=> AWS::EC2::Errors::InvalidInstanceId
+      #     AWS::EC2::Client.new.send(:error_code, 'InvalidInstanceId')
+      #     #=> AWS::EC2::Errors::InvalidInstanceId
       #
       # @param [String] error_code The error code string as returned by
       #   the service.  If this class contains periods, they will be
@@ -427,8 +462,8 @@ module AWS
 
       # Returns the ::Errors module for the current client.
       #
-      #   AWS::S3::Client.new.errors_module
-      #   #=> AWS::S3::Errors
+      #     AWS::S3::Client.new.errors_module
+      #     #=> AWS::S3::Errors
       #
       # @return [Module]
       #
@@ -452,7 +487,9 @@ module AWS
               client = self
 
               response = new_response do
-                client.send(:build_request, name, options)
+                req = client.send(:build_request, name, options)
+                client.send(:sign_request, req)
+                req
               end
 
               response.request_type = name
@@ -466,6 +503,7 @@ module AWS
                 cached_response.cached = true
                 cached_response
               else
+
                 # process the http request
                 options[:async] ?
                 make_async_request(response, &read_block) :
@@ -508,26 +546,39 @@ module AWS
 
         http_request = new_request
         http_request.access_key_id = credential_provider.access_key_id
+        http_request.service = self.class.name.split('::')[1]
 
         # configure the http request
         http_request.service_ruby_name = service_ruby_name
-        http_request.default_read_timeout = http_read_timeout
         http_request.host = endpoint
         http_request.port = port
-        http_request.region = config.send(:"#{service_ruby_name}_region")
-        http_request.proxy_uri = config.proxy_uri
+        http_request.region = @region
         http_request.use_ssl = config.use_ssl?
-        http_request.ssl_verify_peer = config.ssl_verify_peer?
-        http_request.ssl_ca_file = config.ssl_ca_file if config.ssl_ca_file
-        http_request.ssl_ca_path = config.ssl_ca_path if config.ssl_ca_path
 
         send("configure_#{name}_request", http_request, opts)
 
         http_request.headers["user-agent"] = user_agent_string
-        http_request.add_authorization!(credential_provider)
+
+        if
+          @config.http_continue_threshold and
+          http_request.headers['content-length'] and
+          http_request.headers['content-length'].to_i > @config.http_continue_threshold
+        then
+          http_request.headers["expect"] = "100-continue"
+          http_request.continue_timeout = @config.http_continue_timeout
+        else
+          http_request.continue_timeout = nil
+        end
 
         http_request
 
+      end
+
+      # @param [Http::Request] req
+      # @return [Http::Request]
+      # @api private
+      def sign_request req
+        req
       end
 
       def user_agent_string
@@ -545,18 +596,53 @@ module AWS
 
         # @return [Array<Symbol>] Returns a list of service operations as
         #   method names supported by this client.
-        def operations
-          @operations ||= []
+        # @api private
+        def operations(options = {})
+          if name.match(/V\d{8}$/)
+            @operations ||= []
+          else
+            client_class(options).operations
+          end
         end
 
-        # @private
+        # @api private
         def request_builders
           @request_builders ||= {}
         end
 
-        # @private
+        # @api private
         def response_parsers
           @response_parsers ||= {}
+        end
+
+        # @api private
+        def new(*args, &block)
+          options = args.last.is_a?(Hash) ? args.last : {}
+          client = client_class(options).allocate
+          client.send(:initialize, *args, &block)
+          client
+        end
+
+        private
+
+        def client_class(options)
+          if name =~ /Client::V\d+$/
+            self
+          else
+            const_get("V#{client_api_version(options).gsub(/-/, '')}")
+          end
+        end
+
+        def client_api_version(options)
+          api_version = options[:api_version]
+          api_version ||= configured_version(options[:config]) if options[:config]
+          api_version ||= configured_version(AWS.config)
+          api_version || const_get(:API_VERSION)
+        end
+
+        def configured_version(config = AWS.config)
+          svc_opt = AWS::SERVICES[name.split('::')[1]].method_name
+          config.send(svc_opt)[:api_version]
         end
 
         protected
@@ -605,6 +691,23 @@ module AWS
           YAML.load(File.read(path))
         end
 
+        # @param [Symbol] version
+        # @param [String,nil] service_signing_name Required for `:Version4`
+        # @api private
+        def signature_version version, service_signing_name = nil
+          define_method(:sign_request) do |req|
+            @signer ||= begin
+              signer_class = AWS::Core::Signers.const_get(version)
+              signer_args = (version == :Version4) ?
+                [credential_provider, service_signing_name, @region] :
+                [credential_provider]
+              signer_class.new(*signer_args)
+            end
+            @signer.sign_request(req)
+            req
+          end
+        end
+
         # Defines one method for each service operation described in
         # the API configuration.
         # @param [String] api_version
@@ -648,7 +751,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       class ClientRequestMethodBuilder
 
         def initialize client_class, method_name, &block

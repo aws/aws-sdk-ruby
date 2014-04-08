@@ -15,16 +15,16 @@
 module AWS
   module Core
 
-    # @private
+    # @api private
     class Resource
 
       include Model
       include Cacheable
 
-      # @private
+      # @api private
       class NotFound < StandardError; end
 
-      # @private
+      # @api private
       def initialize *args
 
         super
@@ -67,13 +67,13 @@ module AWS
       end
       alias_method :==, :eql?
 
-      # @private
+      # @api private
       protected
       def get_resource attr_name
         raise NotImplementedError
       end
 
-      # @private
+      # @api private
       protected
       def update_resource attr, value
         raise NotImplementedError
@@ -82,13 +82,13 @@ module AWS
       # Overide this method is subclasses of Resource.  This method should
       # return an array of identifying key/value pairs.
       #
-      #   # @private
-      #   protected
-      #   def resource_identifiers
-      #     [[:user_name, name]]
-      #   end
+      #     # @api private
+      #     protected
+      #     def resource_identifiers
+      #       [[:user_name, name]]
+      #     end
       #
-      # @private
+      # @api private
       protected
       def resource_identifiers
         raise NotImplementedError
@@ -100,25 +100,25 @@ module AWS
         Hash[resource_identifiers].merge(additional)
       end
 
-      # @private
+      # @api private
       protected
       def local_cache_key
         resource_identifiers.collect{|name,value| value.to_s }.join(":")
       end
 
-      # @private
+      # @api private
       protected
       def static_attributes
         @static_attributes ||= {}
       end
 
-      # @private
+      # @api private
       protected
       def ruby_name
         @ruby_name ||= Inflection.ruby_name(self.class.name)
       end
 
-      # @private
+      # @api private
       public
       def attributes_from_response resp
 
@@ -149,7 +149,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       protected
       def cache_static_attributes request_type, resp_obj
         self.class.attribute_providers_for(request_type).each do |provider|
@@ -164,7 +164,7 @@ module AWS
 
       class << self
 
-        # @private
+        # @api private
         def define_attribute_type type_name
           class_eval <<-METHODS
 
@@ -180,33 +180,33 @@ module AWS
           METHODS
         end
 
-        # @private
+        # @api private
         def new_from request_type, resp_obj, *args
           resource = new(*args)
           resource.send(:cache_static_attributes, request_type, resp_obj)
           resource
         end
 
-        # @private
+        # @api private
         def attributes
           @attributes ||= Hash.new do |hash,attr_name|
             raise "uknown attribute #{attr_name}"
           end
         end
 
-        # @private
+        # @api private
         def attribute_providers
           @attribute_providers ||= []
         end
 
-        # @private
+        # @api private
         def attribute_providers_for request_type
           attribute_providers.select do |provider|
             provider.request_types.include?(request_type)
           end
         end
 
-        # @private
+        # @api private
         protected
         def attribute name, options = {}, &block
           attr = Attribute.new(name, options)
@@ -217,13 +217,13 @@ module AWS
           attributes[attr.name] = attr
         end
 
-        # @private
+        # @api private
         protected
         def mutable_attribute name, options = {}, &block
           attribute(name, options.merge(:mutable => true), &block)
         end
 
-        # @private
+        # @api private
         protected
         def define_attribute_getter attribute
           define_method(attribute.name) do
@@ -241,7 +241,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         protected
         def define_attribute_setter attribute
           setter = attribute.name.to_s.sub(/\?/, '') + '='
@@ -255,7 +255,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         protected
         def populates_from *request_types, &block
           provider = provider(*request_types)
@@ -264,7 +264,7 @@ module AWS
           provider
         end
 
-        # @private
+        # @api private
         protected
         def provider *request_types, &block
           provider = AttributeProvider.new(self, request_types)
@@ -277,7 +277,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       class Attribute
 
         def initialize name, options = {}
@@ -335,7 +335,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       class AttributeProvider
 
         def initialize klass, request_types

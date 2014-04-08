@@ -16,8 +16,6 @@ require 'time'
 module AWS
   class AutoScaling
 
-    # @attr_reader [String] auto_scaling_group_name
-    #
     # @attr_reader [Integer] desired_capacity
     #
     # @attr_reader [String] recurrence
@@ -34,8 +32,9 @@ module AWS
     #
     class ScheduledAction < Core::Resource
 
-      # @private
-      def initialize name, options = {}
+      # @api private
+      def initialize group, name, options = {}
+        @group = group
         @name = name
         super
       end
@@ -43,9 +42,14 @@ module AWS
       # @return [String]
       attr_reader :name
 
-      attribute :arn, :from => :scheduled_action_arn
+      attr_reader :group
 
-      attribute :auto_scaling_group_name, :static => true
+      # @return [String]
+      def auto_scaling_group_name
+        group.name
+      end
+
+      attribute :arn, :from => :scheduled_action_arn
 
       attribute :desired_capacity
 
@@ -65,13 +69,8 @@ module AWS
         end
       end
 
-      # @return [Group]
-      def group
-        Group.new(auto_scaling_group_name, :config => config)
-      end
-
       # Updates the scheduled action.  If you omit an option,
-      # the corresponding value remains unchanged in the Auto 
+      # the corresponding value remains unchanged in the Auto
       # Scaling group.
       #
       # @param [Hash] options
@@ -91,52 +90,49 @@ module AWS
       # @return [nil]
       #
       def update options = {}
-
-        client_opts = options.dup
-        client_opts[:scheduled_action_name] = name
-        client_opts[:auto_scaling_group_name] = auto_scaling_group_name
-
-        # convert these options to timestamps 
+        options.update(resource_options)
+        # convert times to formatted strings
         [:start_time, :end_time].each do |opt|
-          if client_opts[opt].is_a?(Time)
-            client_opts[opt] = client_opts[opt].iso8601
+          if options[opt].is_a?(Time)
+            options[opt] = options[opt].iso8601
           end
         end
-
-        client.put_scheduled_update_group_action(client_opts)
-
+        client.put_scheduled_update_group_action(options)
         nil
-
       end
       alias_method :put, :update
 
       # @return [Boolean]
       def exists?
-        client_opts = {}  
+        client_opts = {}
         client_opts[:scheduled_action_names] = [name]
+        client_opts[:auto_scaling_group_name] = auto_scaling_group_name
         resp = client.describe_scheduled_actions(client_opts)
         !resp.scheduled_update_group_actions.empty?
+      rescue Errors::ValidationError
+        false
       end
 
       # Deletes the current scheduled action.
       # @return [nil]
       def delete
-        client_opts = {}
-        client_opts[:scheduled_action_name] = name
-        client_opts[:auto_scaling_group_name] = auto_scaling_group_name
-        client.delete_scheduled_action(client_opts)
+        client.delete_scheduled_action(resource_options)
         nil
       end
 
       protected
 
       def resource_identifiers
-        [[:name, name]]
+        [
+          [:auto_scaling_group_name, auto_scaling_group_name],
+          [:scheduled_action_name, name],
+        ]
       end
 
       def get_resource attr_name = nil
         client_opts = {}
         client_opts[:scheduled_action_names] = [name]
+        client_opts[:auto_scaling_group_name] = auto_scaling_group_name
         client.describe_scheduled_actions(client_opts)
       end
 

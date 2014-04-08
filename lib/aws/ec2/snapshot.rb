@@ -31,9 +31,9 @@ module AWS
     # @attr_reader [Symbol] status The status of the snapshot.
     #   Possible values:
     #
-    #   * +:pending+
-    #   * +:completed+
-    #   * +:error+
+    #     * `:pending`
+    #     * `:completed`
+    #     * `:error`
     #
     # @attr_reader [Time] start_time The time at which the snapshot
     #   was initiated.
@@ -54,7 +54,7 @@ module AWS
       include TaggedItem
       include HasPermissions
 
-      # @private
+      # @api private
       def initialize id, options = {}
         @id = id
         super(options)
@@ -132,7 +132,7 @@ module AWS
         Volume.new(volume_id, :config => config) if volume_id
       end
 
-      # @private
+      # @api private
       def __permissions_attribute__
         "createVolumePermission"
       end

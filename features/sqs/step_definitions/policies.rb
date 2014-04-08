@@ -14,8 +14,8 @@
 When /^I set the queue policy$/ do
   @policy = AWS::SQS::Policy.new
   @policy.allow(
-    :actions => :any, 
-    :principles => ["arn:aws:iam::681294939609:root"], 
+    :actions => :any,
+    :principles => ["arn:aws:iam::681294939609:root"],
     :resources => @queue)
   @queue.policy = @policy
 end

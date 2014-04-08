@@ -291,6 +291,33 @@ module AWS
 
       end
 
+      context '#with_status' do
+
+        let(:response) { client.stub_for(:list_stacks) }
+
+        it 'filters the stacks using #list_stacks' do
+          client.should_receive(:list_stacks).
+            with(:stack_status_filter => ['UPDATE_COMPLETE']).
+            and_return(response)
+          stacks.with_status(:update_complete).first
+        end
+
+        it 'accepts multiple statuses' do
+          client.should_receive(:list_stacks).
+            with(:stack_status_filter => ['STATUS_A', 'STATUS_B']).
+            and_return(response)
+          stacks.with_status(:status_a, :status_b).first
+        end
+
+        it 'can be chained' do
+          client.should_receive(:list_stacks).
+            with(:stack_status_filter => ['STATUS_A', 'STATUS_B']).
+            and_return(response)
+          stacks.with_status(:status_a).with_status(:status_b).first
+        end
+
+      end
+
       it_behaves_like "a pageable collection" do
 
         let(:collection)      { stacks }
@@ -304,7 +331,6 @@ module AWS
         end
 
       end
-
     end
   end
 end

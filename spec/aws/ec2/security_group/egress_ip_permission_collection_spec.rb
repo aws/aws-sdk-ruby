@@ -23,8 +23,8 @@ module AWS
 
         let(:client) { config.ec2_client }
 
-        let(:security_group) { 
-          SecurityGroup.new("sg-123", :vpc_id => "vpc-123", :config => config) 
+        let(:security_group) {
+          SecurityGroup.new("sg-123", :vpc_id => "vpc-123", :config => config)
         }
 
         let(:collection) { described_class.new(security_group, :config => config) }
@@ -96,7 +96,7 @@ module AWS
             p1.port_range.should == nil
             p1.ip_ranges.should == %w(1.1.1.1/1)
             p1.groups.should == []
-            
+
             p2 = collection.to_a[1]
             p2.protocol.should == :tcp
             p2.port_range.should == (80..81)

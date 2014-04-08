@@ -169,6 +169,7 @@ module AWS
         end
 
         it 'returns false when it is not found' do
+          response.data[:job_flows] = []
           instance_group.exists?.should eq(false)
         end
 

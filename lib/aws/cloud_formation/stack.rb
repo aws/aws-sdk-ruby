@@ -15,25 +15,25 @@
 module AWS
   class CloudFormation
 
-    # @attr_reader [String] template Returns the stack's template as a JSON 
+    # @attr_reader [String] template Returns the stack's template as a JSON
     #   string.
     #
     # @attr_reader [Time] creation_time The time the stack was created.
     #
-    # @attr_reader [Time,nil] last_updated_time The time the stack was 
+    # @attr_reader [Time,nil] last_updated_time The time the stack was
     #   last updated.
     #
     # @attr_reader [String] stack_id Unique stack identifier.
     #
     # @attr_reader [String] status The status of the stack.
     #
-    # @attr_reader [String] status_reason Success/Failure message 
-    #   associated with the +status+.
+    # @attr_reader [String] status_reason Success/Failure message
+    #   associated with the `status`.
     #
-    # @attr_reader [Array<String>] capabilities The capabilities 
+    # @attr_reader [Array<String>] capabilities The capabilities
     #   allowed in the stack.
     #
-    # @attr_reader [String] description User defined description 
+    # @attr_reader [String] description User defined description
     #   associated with the stack.
     #
     # @attr_reader [Boolean] disable_rollback Specifies if the stack
@@ -51,7 +51,7 @@ module AWS
 
       include StackOptions
 
-      # @private
+      # @api private
       def initialize name, options = {}
         @name = name
         super
@@ -62,25 +62,29 @@ module AWS
 
       define_attribute_type :template
 
+      define_attribute_type :list
+
       define_attribute_type :describe
 
-      ## returned by GetTemplate
+      # returned by GetTemplate
 
       template_attribute :template, :from => :template_body
 
       alias_method :template_body, :template
 
-      ## returned by DescribeStacks
+      # returned by ListStacks & DescribeStacks
 
-      describe_attribute :creation_time, :static => true
+      list_attribute :creation_time, :static => true
 
-      describe_attribute :last_updated_time
+      list_attribute :last_updated_time
 
-      describe_attribute :stack_id, :static => true
+      list_attribute :stack_id, :static => true
 
-      describe_attribute :status, :from => :stack_status
+      list_attribute :status, :from => :stack_status
 
-      describe_attribute :status_reason, :from => :stack_status_reason
+      list_attribute :status_reason, :from => :stack_status_reason
+
+      # returned by DescribeStacks
 
       describe_attribute :capabilities
 
@@ -96,7 +100,7 @@ module AWS
 
       protected :output_details
 
-      describe_attribute :parameters do 
+      describe_attribute :parameters do
         translates_output do |params|
           params.inject({}) do |hash,param|
             hash.merge(param[:parameter_key] => param[:parameter_value])
@@ -108,13 +112,20 @@ module AWS
 
       alias_method :timeout_in_minutes, :timeout
 
-      ## attribute providers
+      # attribute providers
 
       provider(:describe_stacks) do |provider|
         provider.find do |resp|
           resp.data[:stacks].find{|stack| stack[:stack_name] == name }
         end
-        provider.provides *describe_attributes.keys
+        provider.provides(*(list_attributes.keys + describe_attributes.keys))
+      end
+
+      provider(:list_stacks) do |provider|
+        provider.find do |resp|
+          resp.data[:stack_summaries].find{|stack| stack[:stack_name] == name }
+        end
+        provider.provides *list_attributes.keys
       end
 
       provider(:get_template) do |provider|
@@ -139,16 +150,16 @@ module AWS
       end
 
       # Returns a stack resource collection that enumerates all resources
-      # for this stack.  
+      # for this stack.
       #
-      #   stack.resources.each do |resource|
-      #     puts "#{resource.resource_type}: #{resource.physical_resource_id}"
-      #   end
+      #     stack.resources.each do |resource|
+      #       puts "#{resource.resource_type}: #{resource.physical_resource_id}"
+      #     end
       #
       # If you want a specific resource and you know its logical resource
       # id, you can use this collection to return a reference to it.
       #
-      #   resource = stack.resources['logical-resource-id']
+      #     resource = stack.resources['logical-resource-id']
       #
       # @return [StackResourceCollection]
       #
@@ -159,12 +170,12 @@ module AWS
       # Returns a stack resource summary collection, that when enumerated
       # yields summary hashes.  Each hash has the following keys:
       #
-      # * +:last_updated_timestamp+
-      # * +:logical_resource_id+
-      # * +:physical_resource_id+
-      # * +:resource_status+
-      # * +:resource_status_reason+
-      # * +:resource_type+
+      # * `:last_updated_timestamp`
+      # * `:logical_resource_id`
+      # * `:physical_resource_id`
+      # * `:resource_status`
+      # * `:resource_status_reason`
+      # * `:resource_type`
       #
       # @return [StackResourceSummaryCollection]
       #
@@ -174,30 +185,30 @@ module AWS
 
       # @param [Hash] options
       #
-      # @option options [String,URI,S3::S3Object,Object] :template 
+      # @option options [String,URI,S3::S3Object,Object] :template
       #   A new stack template.  This may be provided in a number of formats
       #   including:
       #
-      #   * a String, containing the template as a JSON document.
-      #   * a URL String pointing to the document in S3.
-      #   * a URI object pointing to the document in S3.
-      #   * an {S3::S3Object} which contains the template.
-      #   * an Object which responds to #to_json and returns the template.
+      #     * a String, containing the template as a JSON document.
+      #     * a URL String pointing to the document in S3.
+      #     * a URI object pointing to the document in S3.
+      #     * an {S3::S3Object} which contains the template.
+      #     * an Object which responds to #to_json and returns the template.
       #
       # @option options [Hash] :parameters A hash that specifies the
       #   input parameters of the new stack.
       #
       # @option options[Array<String>] :capabilities The list of capabilities
-      #   that you want to allow in the stack. If your stack contains IAM 
-      #   resources, you must specify the CAPABILITY_IAM value for this 
-      #   parameter; otherwise, this action returns an 
-      #   InsufficientCapabilities error. IAM resources are the following: 
+      #   that you want to allow in the stack. If your stack contains IAM
+      #   resources, you must specify the CAPABILITY_IAM value for this
+      #   parameter; otherwise, this action returns an
+      #   InsufficientCapabilities error. IAM resources are the following:
       #
-      #   * AWS::IAM::AccessKey
-      #   * AWS::IAM::Group
-      #   * AWS::IAM::Policy
-      #   * AWS::IAM::User
-      #   * AWS::IAM::UserToGroupAddition
+      #     * AWS::IAM::AccessKey
+      #     * AWS::IAM::Group
+      #     * AWS::IAM::Policy
+      #     * AWS::IAM::User
+      #     * AWS::IAM::UserToGroupAddition
       #
       # @return [nil]
       #
@@ -215,7 +226,7 @@ module AWS
 
       # @return (see CloudFormation#estimate_template_cost)
       def estimate_template_cost
-        cloud_formation = CloudFormation.new(:config => config)  
+        cloud_formation = CloudFormation.new(:config => config)
         cloud_formation.estimate_template_cost(template, parameters)
       end
 

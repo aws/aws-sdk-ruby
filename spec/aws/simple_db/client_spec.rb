@@ -36,7 +36,7 @@ module AWS
 
       it 'should be accessible from the configuration' do
         config = AWS.config.with(
-          :access_key_id => 'foo', 
+          :access_key_id => 'foo',
           :secret_access_key => 'bar'
         )
         config.simple_db_client.should be_a(SimpleDB::Client)
@@ -64,7 +64,7 @@ module AWS
 
         it 'should have the correct action param' do
           action = nil
-          client.with_http_handler {|req, resp| 
+          client.with_http_handler {|req, resp|
             action = req.body.match(/Action=(\w+)\b/)[1]
           }.send(method, opts)
           action.should == method.to_s.split(/_/).collect{|s| s.capitalize }.join
@@ -72,7 +72,7 @@ module AWS
 
         it 'should have version param' do
           api_version = nil
-          client.with_http_handler {|req, resp| 
+          client.with_http_handler {|req, resp|
             api_version = req.body.match(/Version=(#{Client::API_VERSION})\b/)[1]
           }.send(method, opts)
           api_version.should == Client::API_VERSION
@@ -81,7 +81,7 @@ module AWS
         it 'should have a timestamp param' do
           regex = '\d{4}-\d\d-\d\dT\d\d%3A\d\d%3A\d\dZ'
           timestamp = nil
-          client.with_http_handler {|req, resp| 
+          client.with_http_handler {|req, resp|
             timestamp = req.body.match(/Timestamp=(#{regex})/)[1]
           }.send(method, opts)
           timestamp.should match(/^#{regex}$/)
@@ -89,7 +89,7 @@ module AWS
 
         it 'should be a post request' do
           http_method = nil
-          client.with_http_handler {|req, resp| 
+          client.with_http_handler {|req, resp|
             http_method = req.http_method
           }.send(method, opts)
           http_method.should == 'POST'
@@ -97,7 +97,7 @@ module AWS
 
         it 'should have a form url encoded content type' do
           content_type = nil
-          client.with_http_handler {|req, resp| 
+          client.with_http_handler {|req, resp|
             content_type = req.headers['Content-Type']
           }.send(method, opts)
           content_type.should == 'application/x-www-form-urlencoded; charset=utf-8'
@@ -176,7 +176,7 @@ module AWS
       context '#create_domain' do
 
         let(:method) { :create_domain }
-        
+
         let(:opts) { { :domain_name => 'sample-domain' } }
 
         it_should_behave_like "an aws http request", 'POST'
@@ -190,7 +190,7 @@ module AWS
       context '#list_domains' do
 
         let(:method) { :list_domains }
-        
+
         let(:opts) { {} }
 
         it_should_behave_like "an aws http request", 'POST'
@@ -233,7 +233,7 @@ module AWS
         }
 
         context 'response#domain_names' do
-          
+
           it 'should be an array of domain name strings' do
             response.domain_names.should == %w(foo bar yuck)
           end
@@ -245,7 +245,7 @@ module AWS
       context '#delete_domain' do
 
         let(:method) { :delete_domain }
-        
+
         let(:opts) { { :domain_name => 'sample-domain' } }
 
         it_should_behave_like "an aws http request", 'POST'
@@ -259,7 +259,7 @@ module AWS
       context '#domain_metadata' do
 
         let(:method) { :domain_metadata }
-        
+
         let(:opts) { { :domain_name => 'sample-domain' } }
 
         it_should_behave_like "an aws http request", 'POST'

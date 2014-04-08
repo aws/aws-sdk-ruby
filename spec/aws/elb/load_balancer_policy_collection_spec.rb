@@ -29,7 +29,7 @@ module AWS
       context '#create' do
 
         it 'calls #create_load_balancer_policy' do
-          
+
           client.should_receive(:create_load_balancer_policy).with do |opts|
             opts[:load_balancer_name].should ==  load_balancer.name
             opts[:policy_name].should == 'policy-name'
@@ -121,7 +121,7 @@ module AWS
           ).and_return(response)
 
           policies.each(:policy_type_names => ['abc-policy', 'xyz-policy']) {|p|}
-          
+
         end
 
         it 'yield load balancer policies' do

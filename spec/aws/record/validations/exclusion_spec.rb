@@ -101,7 +101,7 @@ module AWS
           end
 
           context 'multi-valued attributes' do
-            
+
             it 'validates all values' do
               klass.string_attr :tags, :set => true
               klass.validates_exclusion_of :tags, :in => %w(abc xyz)

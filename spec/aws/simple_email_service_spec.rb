@@ -15,18 +15,18 @@ require 'spec_helper'
 
 module AWS
   describe SimpleEmailService do
-    
+
     let(:config) { stub_config }
 
     let(:client) { config.simple_email_service_client }
 
     let(:ses) { SimpleEmailService.new(:config => config) }
 
-    it_behaves_like 'a class that accepts configuration', 
+    it_behaves_like 'a class that accepts configuration',
       :simple_email_service_client
 
     context '#email_addresses' do
-      
+
       it 'returns an email address collection' do
         ses.email_addresses.should be_a(SimpleEmailService::EmailAddressCollection)
       end
@@ -102,23 +102,23 @@ module AWS
     end
 
     context '#send_email' do
-      
+
       let(:send_opt_keys) {
         %w(
-           subject subject_charset 
-           from reply_to return_path 
-           to cc bcc 
-           body_text body_text_charset 
+           subject subject_charset
+           from reply_to return_path
+           to cc bcc
+           body_text body_text_charset
            body_html body_html_charset
         ).collect{|k| k.to_sym }
       }
-        
+
       let(:send_opts) { send_opt_keys.inject({}) {|h,k| h[k] = k.to_s; h }}
 
-      it 'returns nil' do
-        ses.send_email(send_opts).should == nil
+      it 'returns a Response' do
+        ses.send_email(send_opts).should be_a Core::Response
       end
-      
+
       it 'calls send email on the client' do
 
         client.should_receive(:send_email).with({
@@ -178,8 +178,21 @@ module AWS
 
     context '#send_raw_email' do
 
-      it 'returns nil' do
-        ses.send_raw_email('raw').should == nil
+      let(:resp) { client.stub_for(:send_raw_email) }
+
+      before(:each) {
+        client.stub(:send_raw_email).and_return(resp)
+      }
+
+      it 'sets a message_id attribute on the raw message' do
+        resp.data[:message_id] = 'MSG-ID'
+        raw = double('raw-message')
+        raw.should_receive(:message_id=).with('MSG-ID@email.amazonses.com')
+        ses.send_raw_email(raw)
+      end
+
+      it 'returns a Response' do
+        ses.send_raw_email('raw').should be_a Core::Response
       end
 
       it 'calls #send_raw_email on the client' do
@@ -217,7 +230,7 @@ module AWS
       context 'with an object as input, that understands destinations (e.g. Mail::Message)' do
         let(:raw) do
           r = "raw"
-          r.stub!(:destinations => ['bcc'])
+          r.stub(:destinations => ['bcc'])
           r
         end
 

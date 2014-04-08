@@ -16,27 +16,27 @@
 Feature: Route 53 Client
 
   Scenario: CreateHostedZone
-    When I call #create_hosted_zone on the client
+    When I call #create_hosted_zone
     Then a request should have been made like:
     | TYPE | NAME | VALUE                  |
     | http | verb | POST                   |
-    | http | uri  | /2012-02-29/hostedzone |
+    | http | uri  | /2013-04-01/hostedzone |
 
   Scenario: DeleteHostedZone
-    Given I call #create_hosted_zone on the client
+    Given I call #create_hosted_zone
     When I call #delete_hosted_zone on the client with the zone id
     Then #get_hosted_zone should raise "AWS::Route53::Errors::NoSuchHostedZone"
 
   Scenario: GetHostedZone
-    Given I call #create_hosted_zone on the client
+    Given I call #create_hosted_zone
     When I call #get_hosted_zone on the client with the zone id
     Then a request should have been made like:
     | TYPE   | NAME      | VALUE                         |
     | http   | verb      | GET                           |
-    | http   | uri_match | ^\/2012-02-29\/hostedzone\/.+ |
+    | http   | uri_match | ^\/2013-04-01\/hostedzone\/.+ |
 
   Scenario: ListHostedZones
-    Given I call #create_hosted_zone on the client 3 times
-    When I call #list_hosted_zone on the client
+    Given I call #create_hosted_zone 3 times
+    When I call #list_hosted_zone
     Then the response should contain the created hosted zone ids
 

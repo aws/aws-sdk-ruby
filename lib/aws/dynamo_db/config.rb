@@ -13,7 +13,7 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'DynamoDB', 'dynamo_db', 'dynamodb.us-east-1.amazonaws.com'
+  add_service 'DynamoDB', 'dynamo_db', 'dynamodb'
 
   add_option :dynamo_db_retry_throughput_errors, true, :boolean => true
 

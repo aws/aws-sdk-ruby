@@ -1,0 +1,494 @@
+---
+:attach_instances: |-
+  Calls the AttachInstances API operation.
+  @param [Hash] options
+    * `:instance_ids` - (Array&lt;<String>) One or more IDs of the Amazon EC2 instances to attach to the specified Auto Scaling group. You must specify at least one instance ID.
+    * `:auto_scaling_group_name` - *required* - (String) The name of the Auto Scaling group to which to attach the specified instance(s).
+  @return [Core::Response]
+:create_auto_scaling_group: |-
+  Calls the CreateAutoScalingGroup API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name of the Auto Scaling group.
+    * `:launch_configuration_name` - (String) The name of the launch configuration to use with the Auto Scaling group.
+    * `:instance_id` - (String) The ID of the Amazon EC2 instance you want to use to create the Auto Scaling group. Use this attribute if you want to create an Auto Scaling group using an EC2 instance instead of a launch configuration. When you use an instance to create an Auto Scaling group, a new launch configuration is first created and then associated with the Auto Scaling group. The new launch configuration derives all its attributes from the instance that is used to create the Auto Scaling group, with the exception of BlockDeviceMapping. For more information, see Create an Auto Scaling Group Using EC2 Instance in the Auto Scaling Developer Guide.
+    * `:min_size` - *required* - (Integer) The minimum size of the Auto Scaling group.
+    * `:max_size` - *required* - (Integer) The maximum size of the Auto Scaling group.
+    * `:desired_capacity` - (Integer) The number of EC2 instances that should be running in the group. For more information, see SetDesiredCapacity.
+    * `:default_cooldown` - (Integer) The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start.
+    * `:availability_zones` - (Array&lt;<String>) A list of availability zones for the Auto Scaling group.
+    * `:load_balancer_names` - (Array&lt;<String>) A list of LoadBalancers to use.
+    * `:health_check_type` - (String) The service you want the health status from, Amazon EC2 or Elastic Load Balancer. Valid values are "EC2" or "ELB."
+    * `:health_check_grace_period` - (Integer) Length of time in seconds after a new EC2 instance comes into service that Auto Scaling starts checking its health.
+    * `:placement_group` - (String) Physical location of your cluster placement group created in Amazon EC2.
+    * `:vpc_zone_identifier` - (String) The subnet identifier of the Virtual Private Cloud.
+    * `:termination_policies` - (Array&lt;<String>) A standalone termination policy or a list of termination policies used to select the instance to terminate. The policies are executed in the order that they are listed. For more information on configuring a termination policy for your Auto Scaling group, see Instance Termination Policy for Your Auto Scaling Group in the Auto Scaling Developer Guide.
+    * `:tags` - (Array&lt;<Hash>) The tag to be created or updated. Each tag should be defined by its resource type, resource ID, key, value, and a propagate flag. Valid values: key=value, value=value, propagate= `true`  or  `false` . Value and propagate are optional parameters. For information about using tags, see Tag Your Auto Scaling Groups and Amazon EC2 Instances in the Auto Scaling Developer Guide.
+      * `:resource_id` - (String) The name of the Auto Scaling group.
+      * `:resource_type` - (String) The kind of resource to which the tag is applied. Currently, Auto Scaling supports the auto-scaling-group resource type.
+      * `:key` - *required* - (String) The key of the tag.
+      * `:value` - (String) The value of the tag.
+      * `:propagate_at_launch` - (Boolean) Specifies whether the new tag will be applied to instances launched after the tag is created. The same behavior applies to updates: If you change a tag, the changed tag will be applied to all instances launched after you made the change.
+  @return [Core::Response]
+:create_launch_configuration: "Calls the CreateLaunchConfiguration API operation.\n@param
+  [Hash] options\n  * `:launch_configuration_name` - *required* - (String) The name
+  of the launch configuration to create.\n  * `:image_id` - (String) Unique ID of
+  the Amazon Machine Image (AMI) which was assigned during registration. For more
+  information about Amazon EC2 images, please go to Using AMIs in the Amazon EC2 User
+  Guide\n  * `:key_name` - (String) The name of the EC2 key pair.\n  * `:security_groups`
+  - (Array&lt;<String>) The names of the security groups with which to associate EC2
+  instances. For more information about Amazon EC2 security groups, go to Using Security
+  Groups in the Amazon EC2 User Guide.\n  * `:user_data` - (String) The user data
+  available to the launched EC2 instances. For more information about Amazon EC2 user
+  data, please go to Using Instances in the Amazon EC2 User Guide.\n  * `:instance_id`
+  - (String) The ID of the Amazon EC2 instance you want to use to create the launch
+  configuration. Use this attribute if you want the launch configuration to derive
+  its attributes from an EC2 instance. When you use an instance to create a launch
+  configuration, all you need to specify is the InstanceId. The new launch configuration,
+  by default, derives all the attributes from the specified instance with the exception
+  of BlockDeviceMapping. If you want to create a launch configuration with BlockDeviceMapping
+  or override any other instance attributes, specify them as part of the same request.
+  For more information on using an InstanceID to create a launch configuration, see
+  Create a Launch Configuration Using an Amazon EC2 Instance in the Auto Scaling Developer
+  Guide.\n  * `:instance_type` - (String) The instance type of the EC2 instance. For
+  more information about Amazon EC2 instance types, please go to Using Instances in
+  the Amazon EC2 User Guide.\n  * `:kernel_id` - (String) The ID of the kernel associated
+  with the EC2 AMI.\n  * `:ramdisk_id` - (String) The ID of the RAM disk associated
+  with the EC2 AMI.\n  * `:block_device_mappings` - (Array&lt;<Hash>) A list of mappings
+  that specify how block devices are exposed to the instance. Each mapping is made
+  up of a VirtualName, a DeviceName, and an ebs data structure that contains information
+  about the associated Elastic Block Storage volume. For more information about Amazon
+  EC2 BlockDeviceMappings, please go to Block Device Mapping in the Amazon EC2 User
+  Guide.\n    * `:virtual_name` - (String) The virtual name associated with the device.\n
+  \   * `:device_name` - *required* - (String) The name of the device within Amazon
+  EC2.\n    * `:ebs` - (Hash) The Elastic Block Storage volume information.\n      *
+  `:snapshot_id` - (String) The Snapshot ID.\n      * `:volume_size` - (Integer) The
+  volume size, in GigaBytes.\n      * `:volume_type` - (String) The volume type. Valid
+  values: standard | io1 Default: standard\n      * `:delete_on_termination` - (Boolean)
+  Indicates whether to delete the volume on instance termination. Default:  `true`
+  \n      * `:iops` - (Integer) The number of I/O operations per second (IOPS) that
+  the volume supports. The maximum ratio of IOPS to volume size is 30.0 Valid Values:
+  Range is 100 to 4000. Default: None.\n    * `:no_device` - (Boolean) Suppresses
+  the device mapping. If NoDevice is set to  `true`  for the root device, the instance
+  might fail the EC2 health check. Auto Scaling launches a replacement instance if
+  the instance fails the health check.\n  * `:instance_monitoring` - (Hash) Enables
+  detailed monitoring.\n    * `:enabled` - (Boolean) If  `true` , instance monitoring
+  is enabled.\n  * `:spot_price` - (String) The maximum hourly price to be paid for
+  any Spot Instance launched to fulfill the request. Spot Instances are launched when
+  the price you specify exceeds the current Spot market price. For more information
+  on launching Spot Instances, see Using Auto Scaling to Launch Spot Instances in
+  the Auto Scaling Developer Guide.\n  * `:iam_instance_profile` - (String) The name
+  or the Amazon Resource Name (ARN) of the instance profile associated with the IAM
+  role for the instance. Amazon EC2 instances launched with an IAM role will automatically
+  have AWS security credentials available. You can use IAM roles with Auto Scaling
+  to automatically enable applications running on your Amazon EC2 instances to securely
+  access other AWS resources. For information on launching EC2 instances with an IAM
+  role, go to Launching Auto Scaling Instances With an IAM Role in the Auto Scaling
+  Developer Guide.\n  * `:ebs_optimized` - (Boolean) Whether the instance is optimized
+  for EBS I/O. The optimization provides dedicated throughput to Amazon EBS and an
+  optimized configuration stack to provide optimal EBS I/O performance. This optimization
+  is not available with all instance types. Additional usage charges apply when using
+  an EBS Optimized instance. By default the instance is not optimized for EBS I/O.
+  For information about EBS-optimized instances, go to EBS-Optimized Instances in
+  the Amazon Elastic Compute Cloud User Guide.\n  * `:associate_public_ip_address`
+  - (Boolean) Used for Auto Scaling groups that launch instances into an Amazon Virtual
+  Private Cloud (Amazon VPC). Specifies whether to assign a public IP address to each
+  instance launched in a Amazon VPC. If you specify a value for this parameter, be
+  sure to specify at least one VPC subnet using the VPCZoneIdentifier parameter when
+  you create your Auto Scaling group. Default: If the instance is launched in default
+  VPC, the default is  `true` . If the instance is launched in a nondefault VPC (EC2-VPC),
+  the default is  `false` . For more information about the platforms supported by
+  Auto Scaling, see Basic Auto Scaling Configuration.\n@return [Core::Response]"
+:create_or_update_tags: |-
+  Calls the CreateOrUpdateTags API operation.
+  @param [Hash] options
+    * `:tags` - *required* - (Array&lt;<Hash>) The tag to be created or updated. Each tag should be defined by its resource type, resource ID, key, value, and a propagate flag. The resource type and resource ID identify the type and name of resource for which the tag is created. Currently, auto-scaling-group is the only supported resource type. The valid value for the resource ID is groupname. The PropagateAtLaunch flag defines whether the new tag will be applied to instances launched by the Auto Scaling group. Valid values are  `true`  or  `false` . However, instances that are already running will not get the new or updated tag. Likewise, when you modify a tag, the updated version will be applied only to new instances launched by the Auto Scaling group after the change. Running instances that had the previous version of the tag will continue to have the older tag. When you create a tag and a tag of the same name already exists, the operation overwrites the previous tag definition, but you will not get an error message.
+      * `:resource_id` - (String) The name of the Auto Scaling group.
+      * `:resource_type` - (String) The kind of resource to which the tag is applied. Currently, Auto Scaling supports the auto-scaling-group resource type.
+      * `:key` - *required* - (String) The key of the tag.
+      * `:value` - (String) The value of the tag.
+      * `:propagate_at_launch` - (Boolean) Specifies whether the new tag will be applied to instances launched after the tag is created. The same behavior applies to updates: If you change a tag, the changed tag will be applied to all instances launched after you made the change.
+  @return [Core::Response]
+:delete_auto_scaling_group: |-
+  Calls the DeleteAutoScalingGroup API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name of the Auto Scaling group to delete.
+    * `:force_delete` - (Boolean) Starting with API version 2011-01-01, specifies that the Auto Scaling group will be deleted along with all instances associated with the group, without waiting for all instances to be terminated.
+  @return [Core::Response]
+:delete_launch_configuration: |-
+  Calls the DeleteLaunchConfiguration API operation.
+  @param [Hash] options
+    * `:launch_configuration_name` - *required* - (String) The name of the launch configuration.
+  @return [Core::Response]
+:delete_notification_configuration: |-
+  Calls the DeleteNotificationConfiguration API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name of the Auto Scaling group.
+    * `:topic_arn` - *required* - (String) The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.
+  @return [Core::Response]
+:delete_policy: |-
+  Calls the DeletePolicy API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - (String) The name of the Auto Scaling group.
+    * `:policy_name` - *required* - (String) The name or PolicyARN of the policy you want to delete
+  @return [Core::Response]
+:delete_scheduled_action: |-
+  Calls the DeleteScheduledAction API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - (String) The name of the Auto Scaling group
+    * `:scheduled_action_name` - *required* - (String) The name of the action you want to delete.
+  @return [Core::Response]
+:delete_tags: |-
+  Calls the DeleteTags API operation.
+  @param [Hash] options
+    * `:tags` - *required* - (Array&lt;<Hash>) Each tag should be defined by its resource type, resource ID, key, value, and a propagate flag. Valid values are: Resource type = auto-scaling-group, Resource ID = AutoScalingGroupName, key=value, value=value, propagate= `true`  or  `false` .
+      * `:resource_id` - (String) The name of the Auto Scaling group.
+      * `:resource_type` - (String) The kind of resource to which the tag is applied. Currently, Auto Scaling supports the auto-scaling-group resource type.
+      * `:key` - *required* - (String) The key of the tag.
+      * `:value` - (String) The value of the tag.
+      * `:propagate_at_launch` - (Boolean) Specifies whether the new tag will be applied to instances launched after the tag is created. The same behavior applies to updates: If you change a tag, the changed tag will be applied to all instances launched after you made the change.
+  @return [Core::Response]
+:describe_account_limits: |-
+  Calls the DescribeAccountLimits API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:max_number_of_auto_scaling_groups` - (Integer)
+    * `:max_number_of_launch_configurations` - (Integer)
+:describe_adjustment_types: |-
+  Calls the DescribeAdjustmentTypes API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:adjustment_types` - (Array<Hash>)
+      * `:adjustment_type` - (String)
+:describe_auto_scaling_groups: |-
+  Calls the DescribeAutoScalingGroups API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_names` - (Array&lt;<String>) A list of Auto Scaling group names.
+    * `:next_token` - (String) A string that marks the start of the next batch of returned results.
+    * `:max_records` - (Integer) The maximum number of records to return.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:auto_scaling_groups` - (Array<Hash>)
+      * `:auto_scaling_group_name` - (String)
+      * `:auto_scaling_group_arn` - (String)
+      * `:launch_configuration_name` - (String)
+      * `:min_size` - (Integer)
+      * `:max_size` - (Integer)
+      * `:desired_capacity` - (Integer)
+      * `:default_cooldown` - (Integer)
+      * `:availability_zones` - (Array<String>)
+      * `:load_balancer_names` - (Array<String>)
+      * `:health_check_type` - (String)
+      * `:health_check_grace_period` - (Integer)
+      * `:instances` - (Array<Hash>)
+        * `:instance_id` - (String)
+        * `:availability_zone` - (String)
+        * `:lifecycle_state` - (String)
+        * `:health_status` - (String)
+        * `:launch_configuration_name` - (String)
+      * `:created_time` - (Time)
+      * `:suspended_processes` - (Array<Hash>)
+        * `:process_name` - (String)
+        * `:suspension_reason` - (String)
+      * `:placement_group` - (String)
+      * `:vpc_zone_identifier` - (String)
+      * `:enabled_metrics` - (Array<Hash>)
+        * `:metric` - (String)
+        * `:granularity` - (String)
+      * `:status` - (String)
+      * `:tags` - (Array<Hash>)
+        * `:resource_id` - (String)
+        * `:resource_type` - (String)
+        * `:key` - (String)
+        * `:value` - (String)
+        * `:propagate_at_launch` - (Boolean)
+      * `:termination_policies` - (Array<String>)
+    * `:next_token` - (String)
+:describe_auto_scaling_instances: |-
+  Calls the DescribeAutoScalingInstances API operation.
+  @param [Hash] options
+    * `:instance_ids` - (Array&lt;<String>) The list of Auto Scaling instances to describe. If this list is omitted, all auto scaling instances are described. The list of requested instances cannot contain more than 50 items. If unknown instances are requested, they are ignored with no error.
+    * `:max_records` - (Integer) The maximum number of Auto Scaling instances to be described with each call.
+    * `:next_token` - (String) The token returned by a previous call to indicate that there is more data available.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:auto_scaling_instances` - (Array<Hash>)
+      * `:instance_id` - (String)
+      * `:auto_scaling_group_name` - (String)
+      * `:availability_zone` - (String)
+      * `:lifecycle_state` - (String)
+      * `:health_status` - (String)
+      * `:launch_configuration_name` - (String)
+    * `:next_token` - (String)
+:describe_auto_scaling_notification_types: |-
+  Calls the DescribeAutoScalingNotificationTypes API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:auto_scaling_notification_types` - (Array<String>)
+:describe_launch_configurations: |-
+  Calls the DescribeLaunchConfigurations API operation.
+  @param [Hash] options
+    * `:launch_configuration_names` - (Array&lt;<String>) A list of launch configuration names.
+    * `:next_token` - (String) A string that marks the start of the next batch of returned results.
+    * `:max_records` - (Integer) The maximum number of launch configurations.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:launch_configurations` - (Array<Hash>)
+      * `:launch_configuration_name` - (String)
+      * `:launch_configuration_arn` - (String)
+      * `:image_id` - (String)
+      * `:key_name` - (String)
+      * `:security_groups` - (Array<String>)
+      * `:user_data` - (String)
+      * `:instance_type` - (String)
+      * `:kernel_id` - (String)
+      * `:ramdisk_id` - (String)
+      * `:block_device_mappings` - (Array<Hash>)
+        * `:virtual_name` - (String)
+        * `:device_name` - (String)
+        * `:ebs` - (Hash)
+          * `:snapshot_id` - (String)
+          * `:volume_size` - (Integer)
+          * `:volume_type` - (String)
+          * `:delete_on_termination` - (Boolean)
+          * `:iops` - (Integer)
+        * `:no_device` - (Boolean)
+      * `:instance_monitoring` - (Hash)
+        * `:enabled` - (Boolean)
+      * `:spot_price` - (String)
+      * `:iam_instance_profile` - (String)
+      * `:created_time` - (Time)
+      * `:ebs_optimized` - (Boolean)
+      * `:associate_public_ip_address` - (Boolean)
+    * `:next_token` - (String)
+:describe_metric_collection_types: |-
+  Calls the DescribeMetricCollectionTypes API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:metrics` - (Array<Hash>)
+      * `:metric` - (String)
+    * `:granularities` - (Array<Hash>)
+      * `:granularity` - (String)
+:describe_notification_configurations: |-
+  Calls the DescribeNotificationConfigurations API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_names` - (Array&lt;<String>) The name of the Auto Scaling group.
+    * `:next_token` - (String) A string that is used to mark the start of the next batch of returned results for pagination.
+    * `:max_records` - (Integer) Maximum number of records to be returned.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:notification_configurations` - (Array<Hash>)
+      * `:auto_scaling_group_name` - (String)
+      * `:topic_arn` - (String)
+      * `:notification_type` - (String)
+    * `:next_token` - (String)
+:describe_policies: |-
+  Calls the DescribePolicies API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - (String) The name of the Auto Scaling group.
+    * `:policy_names` - (Array&lt;<String>) A list of policy names or policy ARNs to be described. If this list is omitted, all policy names are described. If an auto scaling group name is provided, the results are limited to that group.The list of requested policy names cannot contain more than 50 items. If unknown policy names are requested, they are ignored with no error.
+    * `:next_token` - (String) A string that is used to mark the start of the next batch of returned results for pagination.
+    * `:max_records` - (Integer) The maximum number of policies that will be described with each call.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:scaling_policies` - (Array<Hash>)
+      * `:auto_scaling_group_name` - (String)
+      * `:policy_name` - (String)
+      * `:scaling_adjustment` - (Integer)
+      * `:adjustment_type` - (String)
+      * `:cooldown` - (Integer)
+      * `:policy_arn` - (String)
+      * `:alarms` - (Array<Hash>)
+        * `:alarm_name` - (String)
+        * `:alarm_arn` - (String)
+      * `:min_adjustment_step` - (Integer)
+    * `:next_token` - (String)
+:describe_scaling_activities: |-
+  Calls the DescribeScalingActivities API operation.
+  @param [Hash] options
+    * `:activity_ids` - (Array&lt;<String>) A list containing the activity IDs of the desired scaling activities. If this list is omitted, all activities are described. If an AutoScalingGroupName is provided, the results are limited to that group. The list of requested activities cannot contain more than 50 items. If unknown activities are requested, they are ignored with no error.
+    * `:auto_scaling_group_name` - (String) The name of the AutoScalingGroup.
+    * `:max_records` - (Integer) The maximum number of scaling activities to return.
+    * `:next_token` - (String) A string that marks the start of the next batch of returned results for pagination.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:activities` - (Array<Hash>)
+      * `:activity_id` - (String)
+      * `:auto_scaling_group_name` - (String)
+      * `:description` - (String)
+      * `:cause` - (String)
+      * `:start_time` - (Time)
+      * `:end_time` - (Time)
+      * `:status_code` - (String)
+      * `:status_message` - (String)
+      * `:progress` - (Integer)
+      * `:details` - (String)
+    * `:next_token` - (String)
+:describe_scaling_process_types: |-
+  Calls the DescribeScalingProcessTypes API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:processes` - (Array<Hash>)
+      * `:process_name` - (String)
+:describe_scheduled_actions: |-
+  Calls the DescribeScheduledActions API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - (String) The name of the Auto Scaling group.
+    * `:scheduled_action_names` - (Array&lt;<String>) A list of scheduled actions to be described. If this list is omitted, all scheduled actions are described. The list of requested scheduled actions cannot contain more than 50 items. If an auto scaling group name is provided, the results are limited to that group. If unknown scheduled actions are requested, they are ignored with no error.
+    * `:start_time` - (String&lt;<ISO8601 datetime>) The earliest scheduled start time to return. If scheduled action names are provided, this field will be ignored.
+    * `:end_time` - (String&lt;<ISO8601 datetime>) The latest scheduled start time to return. If scheduled action names are provided, this field will be ignored.
+    * `:next_token` - (String) A string that marks the start of the next batch of returned results.
+    * `:max_records` - (Integer) The maximum number of scheduled actions to return.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:scheduled_update_group_actions` - (Array<Hash>)
+      * `:auto_scaling_group_name` - (String)
+      * `:scheduled_action_name` - (String)
+      * `:scheduled_action_arn` - (String)
+      * `:time` - (Time)
+      * `:start_time` - (Time)
+      * `:end_time` - (Time)
+      * `:recurrence` - (String)
+      * `:min_size` - (Integer)
+      * `:max_size` - (Integer)
+      * `:desired_capacity` - (Integer)
+    * `:next_token` - (String)
+:describe_tags: |-
+  Calls the DescribeTags API operation.
+  @param [Hash] options
+    * `:filters` - (Array&lt;<Hash>) The value of the filter type used to identify the tags to be returned. For example, you can filter so that tags are returned according to Auto Scaling group, the key and value, or whether the new tag will be applied to instances launched after the tag is created (PropagateAtLaunch).
+      * `:name` - (String) The name of the filter. Valid Name values are: "auto-scaling-group", "key", "value", and "propagate-at-launch".
+      * `:values` - (Array&lt;<String>) The value of the filter.
+    * `:next_token` - (String) A string that marks the start of the next batch of returned results.
+    * `:max_records` - (Integer) The maximum number of records to return.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:tags` - (Array<Hash>)
+      * `:resource_id` - (String)
+      * `:resource_type` - (String)
+      * `:key` - (String)
+      * `:value` - (String)
+      * `:propagate_at_launch` - (Boolean)
+    * `:next_token` - (String)
+:describe_termination_policy_types: |-
+  Calls the DescribeTerminationPolicyTypes API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:termination_policy_types` - (Array<String>)
+:disable_metrics_collection: |-
+  Calls the DisableMetricsCollection API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name or ARN of the Auto Scaling Group.
+    * `:metrics` - (Array&lt;<String>) The list of metrics to disable. If no metrics are specified, all metrics are disabled. The following metrics are supported: GroupMinSize GroupMaxSize GroupDesiredCapacity GroupInServiceInstances GroupPendingInstances GroupTerminatingInstances GroupTotalInstances
+  @return [Core::Response]
+:enable_metrics_collection: |-
+  Calls the EnableMetricsCollection API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name or ARN of the Auto Scaling Group.
+    * `:metrics` - (Array&lt;<String>) The list of metrics to collect. If no metrics are specified, all metrics are enabled. The following metrics are supported: GroupMinSize GroupMaxSize GroupDesiredCapacity GroupInServiceInstances GroupPendingInstances GroupTerminatingInstances GroupTotalInstances
+    * `:granularity` - *required* - (String) The granularity to associate with the metrics to collect. Currently, the only legal granularity is "1Minute".
+  @return [Core::Response]
+:execute_policy: |-
+  Calls the ExecutePolicy API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - (String) The name or ARN of the Auto Scaling Group.
+    * `:policy_name` - *required* - (String) The name or PolicyARN of the policy you want to run.
+    * `:honor_cooldown` - (Boolean) Set to True if you want Auto Scaling to reject this request if the Auto Scaling group is in cooldown.
+  @return [Core::Response]
+:put_notification_configuration: |-
+  Calls the PutNotificationConfiguration API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name of the Auto Scaling group.
+    * `:topic_arn` - *required* - (String) The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.
+    * `:notification_types` - *required* - (Array&lt;<String>) The type of event that will cause the notification to be sent. For details about notification types supported by Auto Scaling, see DescribeAutoScalingNotificationTypes.
+  @return [Core::Response]
+:put_scaling_policy: |-
+  Calls the PutScalingPolicy API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name or ARN of the Auto Scaling Group.
+    * `:policy_name` - *required* - (String) The name of the policy you want to create or update.
+    * `:scaling_adjustment` - *required* - (Integer) The number of instances by which to scale. AdjustmentType determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
+    * `:adjustment_type` - *required* - (String) Specifies whether the ScalingAdjustment is an absolute number or a percentage of the current capacity. Valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.
+    * `:cooldown` - (Integer) The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start.
+    * `:min_adjustment_step` - (Integer) Used with AdjustmentType with the value PercentChangeInCapacity, the scaling policy changes the DesiredCapacity of the Auto Scaling group by at least the number of instances specified in the value. You will get a ValidationError if you use MinAdjustmentStep on a policy with an AdjustmentType other than PercentChangeInCapacity.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:policy_arn` - (String)
+:put_scheduled_update_group_action: |-
+  Calls the PutScheduledUpdateGroupAction API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name or ARN of the Auto Scaling Group.
+    * `:scheduled_action_name` - *required* - (String) The name of this scaling action.
+    * `:time` - (String&lt;<ISO8601 datetime>) The time for this action to start.
+    * `:start_time` - (String&lt;<ISO8601 datetime>) The time for this action to start, as in --start-time 2010-06-01T00:00:00Z. If you try to schedule your action in the past, Auto Scaling returns an error message. When StartTime and EndTime are specified with Recurrence, they form the boundaries of when the recurring action will start and stop.
+    * `:end_time` - (String&lt;<ISO8601 datetime>) The time for this action to end.
+    * `:recurrence` - (String) The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. For information about cron syntax, go to Wikipedia, The Free Encyclopedia. When StartTime and EndTime are specified with Recurrence, they form the boundaries of when the recurring action will start and stop.
+    * `:min_size` - (Integer) The minimum size for the new Auto Scaling group.
+    * `:max_size` - (Integer) The maximum size for the Auto Scaling group.
+    * `:desired_capacity` - (Integer) The number of EC2 instances that should be running in the group.
+  @return [Core::Response]
+:resume_processes: |-
+  Calls the ResumeProcesses API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+    * `:scaling_processes` - (Array&lt;<String>) The processes that you want to suspend or resume, which can include one or more of the following: Launch Terminate HealthCheck ReplaceUnhealthy AZRebalance AlarmNotifications ScheduledActions To suspend all process types, omit this parameter.
+  @return [Core::Response]
+:set_desired_capacity: |-
+  Calls the SetDesiredCapacity API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name of the AutoScalingGroup.
+    * `:desired_capacity` - *required* - (Integer) The new capacity setting for the AutoScalingGroup.
+    * `:honor_cooldown` - (Boolean) By default, SetDesiredCapacity overrides any cooldown period. Set to True if you want Auto Scaling to reject this request if the Auto Scaling group is in cooldown.
+  @return [Core::Response]
+:set_instance_health: |-
+  Calls the SetInstanceHealth API operation.
+  @param [Hash] options
+    * `:instance_id` - *required* - (String) The identifier of the EC2 instance.
+    * `:health_status` - *required* - (String) The health status of the instance. "Healthy" means that the instance is healthy and should remain in service. "Unhealthy" means that the instance is unhealthy. Auto Scaling should terminate and replace it.
+    * `:should_respect_grace_period` - (Boolean) If True, this call should respect the grace period associated with the group.
+  @return [Core::Response]
+:suspend_processes: |-
+  Calls the SuspendProcesses API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+    * `:scaling_processes` - (Array&lt;<String>) The processes that you want to suspend or resume, which can include one or more of the following: Launch Terminate HealthCheck ReplaceUnhealthy AZRebalance AlarmNotifications ScheduledActions To suspend all process types, omit this parameter.
+  @return [Core::Response]
+:terminate_instance_in_auto_scaling_group: |-
+  Calls the TerminateInstanceInAutoScalingGroup API operation.
+  @param [Hash] options
+    * `:instance_id` - *required* - (String) The ID of the EC2 instance to be terminated.
+    * `:should_decrement_desired_capacity` - *required* - (Boolean) Specifies whether ( `true` ) or not ( `false` ) terminating this instance should also decrement the size of the AutoScalingGroup.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:activity` - (Hash)
+      * `:activity_id` - (String)
+      * `:auto_scaling_group_name` - (String)
+      * `:description` - (String)
+      * `:cause` - (String)
+      * `:start_time` - (Time)
+      * `:end_time` - (Time)
+      * `:status_code` - (String)
+      * `:status_message` - (String)
+      * `:progress` - (Integer)
+      * `:details` - (String)
+:update_auto_scaling_group: |-
+  Calls the UpdateAutoScalingGroup API operation.
+  @param [Hash] options
+    * `:auto_scaling_group_name` - *required* - (String) The name of the Auto Scaling group.
+    * `:launch_configuration_name` - (String) The name of the launch configuration.
+    * `:min_size` - (Integer) The minimum size of the Auto Scaling group.
+    * `:max_size` - (Integer) The maximum size of the Auto Scaling group.
+    * `:desired_capacity` - (Integer) The desired capacity for the Auto Scaling group.
+    * `:default_cooldown` - (Integer) The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start.
+    * `:availability_zones` - (Array&lt;<String>) Availability zones for the group.
+    * `:health_check_type` - (String) The service of interest for the health status check, either "EC2" for Amazon EC2 or "ELB" for Elastic Load Balancing.
+    * `:health_check_grace_period` - (Integer) The length of time that Auto Scaling waits before checking an instance's health status. The grace period begins when an instance comes into service.
+    * `:placement_group` - (String) The name of the cluster placement group, if applicable. For more information, go to Using Cluster Instances in the Amazon EC2 User Guide.
+    * `:vpc_zone_identifier` - (String) The identifier for the VPC connection, if applicable.
+    * `:termination_policies` - (Array&lt;<String>) A standalone termination policy or a list of termination policies used to select the instance to terminate. The policies are executed in the order that they are listed. For more information on creating a termination policy for your Auto Scaling group, go to Instance Termination Policy for Your Auto Scaling Group in the the Auto Scaling Developer Guide.
+  @return [Core::Response]

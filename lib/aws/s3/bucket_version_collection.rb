@@ -47,28 +47,30 @@ module AWS
       #
       def each options = {}, &block; super; end
 
-      # @private
+      # @api private
       protected
       def each_member_in_page(page, &block)
         super
         page.versions.each do |version|
           object_version = ObjectVersion.new(bucket.objects[version.key],
-            version.version_id, :delete_marker => version.delete_marker?)
+                                             version.version_id, 
+                                             :delete_marker => version.delete_marker?, 
+                                             :last_modified => version.last_modified)
           yield(object_version)
         end
       end
 
-      # @private
+      # @api private
       protected
       def list_request(options)
         client.list_object_versions(options)
       end
 
-      # @private
+      # @api private
       protected
       def limit_param; :max_keys; end
 
-      # @private
+      # @api private
       protected
       def pagination_markers; super + [:version_id_marker]; end
 

@@ -15,7 +15,7 @@ module AWS
   class AutoScaling
     class NotificationConfiguration
 
-      # @private
+      # @api private
       def initialize auto_scaling_group, topic_arn, notification_types = []
         @group = auto_scaling_group
         @topic_arn = topic_arn
@@ -40,8 +40,8 @@ module AWS
 
       # Updates the notification configuration with a new list of types:
       #
-      #   config = auto_scaling_group.notification_configurations.first
-      #   config.notification_types = %w(autoscaling:EC2_INSTANCE_LAUNCH)
+      #     config = auto_scaling_group.notification_configurations.first
+      #     config.notification_types = %w(autoscaling:EC2_INSTANCE_LAUNCH)
       #
       # @return [nil]
       #
@@ -74,7 +74,7 @@ module AWS
 
       end
 
-      # @private
+      # @api private
       def eql? other
         other.is_a?(NotificationConfiguration) and
         other.group == group and

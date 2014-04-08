@@ -21,10 +21,14 @@ module AWS
 
       let(:http_response) { Http::Response.new }
 
-      let(:response) { Response.new(http_request, http_response) }
+      let(:response) {
+        resp = Response.new(http_request, http_response)
+        resp.config = double('config', :proxy_uri => nil)
+        resp
+      }
 
       context '#pattern' do
-        
+
         it 'it set in the constructor' do
           LogFormatter.new('pattern').pattern.should == 'pattern'
         end
@@ -32,7 +36,7 @@ module AWS
       end
 
       context '#max_string_size' do
-        
+
         it 'defaults to 1000' do
           LogFormatter.new('pattern').max_string_size.should == 1000
         end
@@ -55,13 +59,13 @@ module AWS
         end
 
         context 'substitutions' do
-          
+
           it 'returns unknown substitutions unmodified' do
             message_for(':fake_placeholder').should == ':fake_placeholder'
           end
 
           it 'replaces :service with the request class service name' do
-            http_request.stub_chain(:class, :name).and_return('AWS::EC2::Request')
+            http_request.service = 'EC2'
             message_for(':service').should == 'EC2'
           end
 
@@ -114,7 +118,7 @@ module AWS
             it 'returns the class name when an error is present' do
               error = AWS::S3::Errors::NoSuchKeyError.new('msg')
               response.error = error
-              message_for(':error_class').should == 
+              message_for(':error_class').should ==
                 'AWS::S3::Errors::NoSuchKeyError'
             end
 
@@ -142,7 +146,7 @@ module AWS
               message_for(':http_request_method').should == 'GET'
             end
 
-            it 'accepts alternative methods' do 
+            it 'accepts alternative methods' do
               http_request.http_method = 'PUT'
               message_for(':http_request_method').should == 'PUT'
             end
@@ -191,9 +195,9 @@ module AWS
           end
 
           it 'replaces :http_request_proxy_uri with the http request proxy uri' do
-            uri = URI.parse('http://proxy.com')
-            http_request.proxy_uri = uri
-            message_for(':http_request_proxy_uri').should == uri.to_s
+            proxy = URI.parse('http://proxy.com')
+            response.config.stub(:proxy_uri).and_return(proxy)
+            message_for(':http_request_proxy_uri').should == proxy.to_s
           end
 
           it 'replaces :http_response_status with the http response status code' do

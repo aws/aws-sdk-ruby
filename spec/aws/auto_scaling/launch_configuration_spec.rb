@@ -36,6 +36,7 @@ module AWS
           :created_time => now,
           :image_id => 'img-12345678',
           :instance_monitoring => { :enabled => false },
+          :associate_public_ip_address => true,
           :instance_type => 'instance-type',
           :kernel_id => 'kernel-id',
           :key_name => 'key-name',
@@ -71,6 +72,7 @@ module AWS
           launch_config.created_at.should == now
           launch_config.image_id.should == 'img-12345678'
           launch_config.detailed_instance_monitoring.should == false
+          launch_config.associate_public_ip_address.should == true
           launch_config.instance_type.should == 'instance-type'
           launch_config.kernel_id.should == 'kernel-id'
           launch_config.key_name.should == 'key-name'
@@ -146,7 +148,7 @@ module AWS
       end
 
       context '#exists?' do
-        
+
         it 'describes launch configurations with a name filter' do
           response.data[:launch_configurations] = [
             { :launch_configuration_name => 'name' },

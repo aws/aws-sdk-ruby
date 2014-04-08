@@ -33,7 +33,7 @@ module AWS
       end
 
       context '#serial_number' do
-        
+
         it 'returns the device serial number' do
           device.serial_number.should == 'arn'
         end
@@ -85,6 +85,14 @@ module AWS
                  :authentication_code_1 => "012345",
                  :authentication_code_2 => "654321")
           device.enable(User.new("username"), 12345, 654321)
+        end
+
+        it 'accepts input like "099999"' do
+          client.should_receive(:enable_mfa_device).with(hash_including(
+            :authentication_code_1 => '099999',
+            :authentication_code_2 => '098765'
+          ))
+          device.enable('username', '099999', '098765')
         end
 
         it 'should use the user name directly if passed as a string' do
@@ -140,7 +148,7 @@ module AWS
           end
 
           it 'returns the user when provided' do
-            device.user.should == 
+            device.user.should ==
               AWS::IAM::User.new('johndoe', :config => device.config)
           end
 
@@ -183,7 +191,7 @@ module AWS
         end
 
         context '#base_32_string_seed' do
-          
+
           it 'returns nil, only accessible on newly created devices' do
             device.base_32_string_seed.should == nil
           end
@@ -191,7 +199,7 @@ module AWS
         end
 
         context '#qr_code_png' do
-          
+
           it 'returns nil, only accessible on newly created devices' do
             device.qr_code_png.should == nil
           end

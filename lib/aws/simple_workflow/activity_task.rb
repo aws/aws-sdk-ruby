@@ -21,7 +21,7 @@ module AWS
 
       include Core::Model
 
-      # @private
+      # @api private
       def initialize domain, data, options = {}
 
         @domain = domain
@@ -43,7 +43,7 @@ module AWS
 
       end
 
-      # @return [String] The opaque string used as a handle on the task. 
+      # @return [String] The opaque string used as a handle on the task.
       attr_reader :task_token
 
       # @return [String] The unique identifier of this task.
@@ -52,11 +52,11 @@ module AWS
       # @return [Domain] The domain this task was scheduled in.
       attr_reader :domain
 
-      # @return [Integer] The id of the ActivityTaskStarted event recorded 
-      #   in the history.
+      # @return [Integer]
+      #   The id of the {ActivityTaskStarted} event recorded in the history.
       attr_reader :started_event_id
 
-      # @return [String,nil] The input provided when the activity task was 
+      # @return [String,nil] The input provided when the activity task was
       #   scheduled.
       attr_reader :input
 
@@ -68,10 +68,10 @@ module AWS
 
       # Reports to the service that the activity task is progressing.
       #
-      # You can optionally specify +:details+ that describe the progress.
+      # You can optionally specify `:details` that describe the progress.
       # This might be a percentage competition, step number, etc.
       #
-      #   activity_task.record_heartbeat! :details => '.75' # 75% complete
+      #     activity_task.record_heartbeat! :details => '.75' # 75% complete
       #
       # If the activity task has been canceled since it was received or
       # since the last recorded heartbeat, this method will raise
@@ -79,31 +79,24 @@ module AWS
       #
       # If you are processing the activity task inside a block passed
       # to one of the polling methods in {ActivityTaskCollection}
-      # then untrapped CancelRequestedErrors are caught 
+      # then untrapped CancelRequestedErrors are caught
       # and responded to automatically.
       #
-      #   domain.activity_tasks.poll('task-list') do |task|
-      #
-      #     task.record_heartbeat! # raises CancelRequestedError
-      #
-      #   end # traps the error and responds activity task canceled.
+      #     domain.activity_tasks.poll('task-list') do |task|
+      #       task.record_heartbeat! # raises CancelRequestedError
+      #     end # traps the error and responds activity task canceled.
       #
       # If you need to cleanup or provide additional details in the
       # cancellation response, you can trap the error and
       # respond manually.
       #
-      #   domain.activity_tasks.poll('task-list') do |task|
+      #     domain.activity_tasks.poll('task-list') do |task|
+      #       task.record_heartbeat! # raises CancelRequestedError
+      #     rescue CancelRequestedError => e
+      #        # cleanup
+      #        task.respond_canceled! :details => '...'
+      #     end
       #
-      #     task.record_heartbeat! # raises CancelRequestedError
-      #
-      #   rescue CancelRequestedError => e
-      #
-      #      # cleanup
-      #
-      #      task.respond_canceled! :details => '...'
-      #
-      #   end
-      #   
       # @param [Hash] options
       #
       # @option options [String] :details (nil)
@@ -159,6 +152,18 @@ module AWS
         !!@responded
       end
 
+      # Responds to one of the `respond_activity_task_` methods with a set of options. This method is called when any
+      # of the {#complete!}, {#cancel!}, or {#fail!} methods is invoked.
+      #
+      # @note Only one response can be logged per `ActivityTask` instance; If this task has already logged a response,
+      #   `respond` will raise an exception.
+      #
+      # @param [String] status
+      #   The status of the response: "canceled", "completed", or "failed".
+      #
+      # @param [Hash] options
+      #   Options to provide to the respond_activity_task function that will be called.
+      #
       protected
       def respond status, options
         raise "already responded" if responded?

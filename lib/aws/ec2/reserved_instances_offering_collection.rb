@@ -14,24 +14,30 @@
 module AWS
   class EC2
     class ReservedInstancesOfferingCollection < Collection
-      
+
       include TaggedCollection
+      include Core::Collection::WithLimitAndNextToken
 
       def member_class
         ReservedInstancesOffering
       end
 
-      def each &block
-        response = filtered_request(:describe_reserved_instances_offerings)
-        response.reserved_instances_offerings_set.each do |item|
+      protected
+
+      def _each_item(next_token, max_results, options = {}, &block)
+        options[:next_token] = next_token if next_token
+        options[:max_results] = max_results if max_results
+        resp = filtered_request(:describe_reserved_instances_offerings, options)
+        resp.reserved_instances_offerings_set.each do |item|
 
           reserved_instance_offering = ReservedInstancesOffering.new_from(
-            :describe_reserved_instances_offerings, item, 
+            :describe_reserved_instances_offerings, item,
             item.reserved_instances_offering_id, :config => config)
 
           yield(reserved_instance_offering)
 
         end
+        resp[:next_token]
       end
 
     end

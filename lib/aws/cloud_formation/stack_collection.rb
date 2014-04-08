@@ -18,9 +18,9 @@ module AWS
       include Core::Collection::WithNextToken
       include StackOptions
 
-      # @private
+      # @api private
       def initialize options = {}
-        @status_filter = options[:status_filter]
+        @status_filters = options[:status_filters] || []
         super
       end
 
@@ -94,11 +94,11 @@ module AWS
       # @param [String,URI,S3::S3Object,Object] template The stack template.
       #   This may be provided in a number of formats including:
       #
-      #   * a String, containing the template as a JSON document.
-      #   * a URL String pointing to the document in S3.
-      #   * a URI object pointing to the document in S3.
-      #   * an {S3::S3Object} which contains the template.
-      #   * an Object which responds to #to_json and returns the template.
+      #     * a String, containing the template as a JSON document.
+      #     * a URL String pointing to the document in S3.
+      #     * a URI object pointing to the document in S3.
+      #     * an {S3::S3Object} which contains the template.
+      #     * an Object which responds to #to_json and returns the template.
       #
       # @param [Hash] options
       #
@@ -108,11 +108,11 @@ module AWS
       #   parameter; otherwise, this action returns an
       #   InsufficientCapabilities error. IAM resources are the following:
       #
-      #   * AWS::IAM::AccessKey
-      #   * AWS::IAM::Group
-      #   * AWS::IAM::Policy
-      #   * AWS::IAM::User
-      #   * AWS::IAM::UserToGroupAddition
+      #     * AWS::IAM::AccessKey
+      #     * AWS::IAM::Group
+      #     * AWS::IAM::Policy
+      #     * AWS::IAM::User
+      #     * AWS::IAM::UserToGroupAddition
       #
       # @option options [Boolean] :disable_rollback (false)
       #   Set to true to disable rollback on stack creation failures.
@@ -127,7 +127,7 @@ module AWS
       #
       # @option options [Integer] :timeout The number of minutes
       #   that may pass before the stack creation fails.  If
-      #   +:disable_rollback+ is false, the stack will be rolled back.
+      #   `:disable_rollback` is false, the stack will be rolled back.
       #
       # @return [Stack]
       #
@@ -159,43 +159,66 @@ module AWS
       #     puts stack.name
       #   end
       #
-      # @param [Symbol,String] status_filter A status to filter stacks with.
+      # You can provide multiple statuses:
+      #
+      #   statuses = [:create_failed, :rollback_failed]
+      #   cloud_formation.stacks.with_status(statuses).each do |stack|
+      #     puts stack.name
+      #   end
+      #
+      # Status names may be symbolized (snake-cased) or upper-cased strings
+      # (e.g. :create_in_progress, 'CREATE_IN_PROGRESS').
+      #
+      # @param [Symbol,String] status_filters A status to filter stacks with.
       #   Valid values include:
-      #   * +:create_in_progress+
-      #   * +:create_failed+
-      #   * +:create_complete+
-      #   * +:rollback_in_progress+
-      #   * +:rollback_failed+
-      #   * +:rollback_complete+
-      #   * +:delete_in_progress+
-      #   * +:delete_failed+
-      #   * +:delete_complete+
-      #   * +:update_in_progress+
-      #   * +:update_complete_cleanup_in_progress+
-      #   * +:update_complete+
-      #   * +:update_rollback_in_progress+
-      #   * +:update_rollback_failed+
-      #   * +:update_rollback_complete_cleanup_in_progress+
-      #   * +:update_rollback_complete+
+      #
+      #     * `:create_in_progress`
+      #     * `:create_failed`
+      #     * `:create_complete`
+      #     * `:rollback_in_progress`
+      #     * `:rollback_failed`
+      #     * `:rollback_complete`
+      #     * `:delete_in_progress`
+      #     * `:delete_failed`
+      #     * `:delete_complete`
+      #     * `:update_in_progress`
+      #     * `:update_complete_cleanup_in_progress`
+      #     * `:update_complete`
+      #     * `:update_rollback_in_progress`
+      #     * `:update_rollback_failed`
+      #     * `:update_rollback_complete_cleanup_in_progress`
+      #     * `:update_rollback_complete`
       #
       # @return [StackCollection] Returns a new stack collection that
       #   filters the stacks returned by the given status.
       #
-      def with_status status_filter
-        StackCollection.new(:status_filter => status_filter, :config => config)
+      def with_status *status_filters
+        filters = @status_filters + status_filters.flatten.map(&:to_s).map(&:upcase)
+        StackCollection.new(:status_filters => filters, :config => config)
       end
 
       protected
 
       def _each_item next_token, options = {}
         options[:next_token] = next_token if next_token
-        resp = client.describe_stacks(options)
-        resp[:stacks].each do |summary|
+
+        if @status_filters.empty?
+          api_method = :describe_stacks
+          resp_key = :stacks
+        else
+          api_method = :list_stacks
+          resp_key = :stack_summaries
+          options[:stack_status_filter] = @status_filters
+        end
+
+        resp = client.send(api_method, options)
+
+        resp[resp_key].each do |data|
 
           stack = Stack.new_from(
-            :describe_stacks,
-            summary,
-            summary[:stack_name],
+            api_method,
+            data,
+            data[:stack_name],
             :config => config)
 
           yield(stack)

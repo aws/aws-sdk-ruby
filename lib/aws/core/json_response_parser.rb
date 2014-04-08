@@ -19,7 +19,7 @@ require 'base64'
 module AWS
   module Core
 
-    # @private
+    # @api private
     class JSONResponseParser
 
       def initialize rules

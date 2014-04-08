@@ -56,7 +56,7 @@ module AWS
               domain = SimpleDB::Domain.new('abc')
               klass.new(:domain => domain).domain.should == 'abc'
             end
-    
+
           end
 
           context '#id' do
@@ -96,16 +96,16 @@ module AWS
 
             it 'can not be set after construction' do
               obj = klass.new # domain is determined here
-              lambda { 
+              lambda {
                 obj.attributes = { :domain => 'abc' }
               }.should raise_error(NoMethodError, /domain=/)
             end
 
             it 'can not be updated' do
               klass.string_attr :foo
-              obj = klass.new :foo => 'bar' # default domain 
+              obj = klass.new :foo => 'bar' # default domain
               obj.save
-              lambda { 
+              lambda {
                 obj.update_attributes :domain => 'abc'
               }.should raise_error(NoMethodError, /domain=/)
             end
@@ -117,19 +117,19 @@ module AWS
             before(:each) do
               klass.string_attr :name
             end
-    
+
             it 'accepts string keys' do
               obj = klass.new
               obj.should_receive(:name=).with('new name')
               obj.attributes = {'name' => 'new name'}
             end
-    
+
             it 'accepts symbol keys' do
               obj = klass.new
               obj.should_receive(:name=).with('new name')
               obj.attributes = {:name => 'new name'}
             end
-    
+
             it 'raises exception for non-existant attributes' do
               obj = klass.new
               lambda {
@@ -143,17 +143,18 @@ module AWS
               obj.should_receive(:abc=).with('xyz')
               obj.attributes = { :foo => 'bar', 'abc' => 'xyz' }
             end
-    
+
 
           end
-    
+
           context '#attributes' do
 
             it 'returns a hash of attribute names and values' do
               klass.string_attr :foo
               klass.integer_attr :bar
               obj = klass.new(:foo => 'abc', :bar => '123')
-              obj.attributes.should == { 'foo' => 'abc', 'bar' => 123 }
+              obj.attributes['foo'].should eq('abc')
+              obj.attributes['bar'].should eq(123)
             end
 
             it 'it uses value override methods' do
@@ -164,7 +165,7 @@ module AWS
                 end
               end
               obj = klass.new(:foo => 'bar')
-              obj.attributes.should == { 'foo' => 'barbar' }
+              obj.attributes[:foo].should eq('barbar')
             end
 
             it 'includes the id for saved records' do

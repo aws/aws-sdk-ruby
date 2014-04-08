@@ -25,20 +25,20 @@ module AWS
       #   choice (e.g., example.com).
       #
       # @option options [Array<String>] :domain_name_servers
-      #   The IP addresses of domain name servers. You can specify up to 
+      #   The IP addresses of domain name servers. You can specify up to
       #   four addresses.
       #
-      # @option options [Array<String>] :ntp_servers 
-      #   The IP addresses of Network Time Protocol (NTP) servers. You can 
+      # @option options [Array<String>] :ntp_servers
+      #   The IP addresses of Network Time Protocol (NTP) servers. You can
       #   specify up to four addresses.
       #
-      # @option options [Array<String>] :netbios_name_servers 
-      #   The IP addresses of NetBIOS name servers. You can specify up to 
+      # @option options [Array<String>] :netbios_name_servers
+      #   The IP addresses of NetBIOS name servers. You can specify up to
       #   four addresses.
       #
-      # @option options [String] :netbios_node_type Value indicating the 
-      #   NetBIOS node type (1, 2, 4, or 8). For more information about the 
-      #   values, go to RFC 2132. We recommend you only use 2 at this time 
+      # @option options [String] :netbios_node_type Value indicating the
+      #   NetBIOS node type (1, 2, 4, or 8). For more information about the
+      #   values, go to RFC 2132. We recommend you only use 2 at this time
       #   (broadcast and multicast are currently not supported).
       #
       def create options = {}
@@ -55,7 +55,7 @@ module AWS
 
         resp = client.create_dhcp_options(client_opts)
 
-        DHCPOptions.new_from(:create_dhcp_options, 
+        DHCPOptions.new_from(:create_dhcp_options,
           resp.dhcp_options,
           resp.dhcp_options.dhcp_options_id,
           :config => config)
@@ -74,7 +74,7 @@ module AWS
         response = filtered_request(:describe_dhcp_options, options, &block)
         response.dhcp_options_set.each do |opts|
 
-          options = DHCPOptions.new_from(:describe_dhcp_options, opts, 
+          options = DHCPOptions.new_from(:describe_dhcp_options, opts,
             opts.dhcp_options_id, :config => config)
 
           yield(options)

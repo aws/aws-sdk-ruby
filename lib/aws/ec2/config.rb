@@ -13,6 +13,18 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'EC2', 'ec2', 'ec2.amazonaws.com'
+  add_service 'EC2', 'ec2', 'ec2'
+
+  add_option :ec2_signature_version do |config, value|
+    if config.ec2_region.match(/^cn-/)
+      :v4
+    elsif value
+      value
+    elsif config.ec2 && config.ec2[:signature_version]
+      config.ec2[:signature_version]
+    else
+      :v2
+    end
+  end
 
 end

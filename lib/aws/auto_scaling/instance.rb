@@ -16,30 +16,30 @@ module AWS
 
     # A small wrapper around an {EC2::Instance}.
     #
-    # == Getting Auto Scaling Instances
+    # ## Getting Auto Scaling Instances
     #
-    # If you know the EC2 instance id, you can use {InstanceCollection#[]} 
+    # If you know the EC2 instance id, you can use {InstanceCollection#[]}
     # to get the Auto Scaling instance.
     #
-    #   instance = auto_scaling.instances['i-1234578']
-    #   instance.health_statue #=> :healthy
-    #   instance.ec2_instance #=> <AWS::EC2::Instance instance_id:i-1234578>
+    #     instance = auto_scaling.instances['i-1234578']
+    #     instance.health_statue #=> :healthy
+    #     instance.ec2_instance #=> <AWS::EC2::Instance instance_id:i-1234578>
     #
-    # == Enumerating Auto Scaling Instances
+    # ## Enumerating Auto Scaling Instances
     #
     # You can enumerate *ALL* instances like so:
     #
-    #   auto_scaling = AWS::AutoScaling.new
-    #   auto_scaling.instances.each do |auto_scaling_instance|
-    #     # ... 
-    #   end
+    #     auto_scaling = AWS::AutoScaling.new
+    #     auto_scaling.instances.each do |auto_scaling_instance|
+    #       # ...
+    #     end
     #
     # If you want the instances for a single auto scaling group:
     #
-    #   group = auto_scaling.groups['group-name']
-    #   group.auto_scaling_instances.each do |instance|
-    #     # ...
-    #   end
+    #     group = auto_scaling.groups['group-name']
+    #     group.auto_scaling_instances.each do |instance|
+    #       # ...
+    #     end
     #
     # If you prefer {EC2::Instance} objects you should use
     # {Group#ec2_instances} instead.
@@ -57,7 +57,7 @@ module AWS
     #
     class Instance < Core::Resource
 
-      # @private
+      # @api private
       def initialize instance_id, options = {}
         @instance_id = instance_id
         super
@@ -70,10 +70,10 @@ module AWS
 
       attribute :auto_scaling_group_name, :static => true
 
-      attribute :availability_zone_name, 
+      attribute :availability_zone_name,
         :from => :availability_zone,
         :static => true
-          
+
       attribute :health_status
 
       attribute :launch_configuration_name, :static => true
@@ -116,19 +116,19 @@ module AWS
       def availability_zone
         EC2::AvailabilityZone.new(availability_zone_name, :config => config)
       end
-      
+
       # @return [LaunchConfiguration]
       def launch_configuration
         LaunchConfiguration.new(launch_configuration_name, :config => config)
       end
 
-      # @param [String] status Sets the health status of an instance.  
+      # @param [String] status Sets the health status of an instance.
       #   Valid values inculde 'Healthy' and 'Unhealthy'
       #
       # @param [Hash] options
       #
-      # @option options [Boolean] :respect_grace_period (false) If true, 
-      #   this call should respect the grace period associated with 
+      # @option options [Boolean] :respect_grace_period (false) If true,
+      #   this call should respect the grace period associated with
       #   this instance's Auto Scaling group.
       #
       # @return [nil]
@@ -137,12 +137,12 @@ module AWS
         client_opts = {}
         client_opts[:instance_id] = instance_id
         client_opts[:health_status] = status
-        client_opts[:should_respect_grace_period] = 
+        client_opts[:should_respect_grace_period] =
           options[:respect_grace_period] == true
         client.set_instance_health(client_opts)
       end
 
-      # @return [Boolean] Returns true if there exists an Auto Scaling 
+      # @return [Boolean] Returns true if there exists an Auto Scaling
       #   instance with this instance id.
       def exists?
         !get_resource.auto_scaling_instances.empty?
@@ -150,8 +150,8 @@ module AWS
 
       # Terminates the current Auto Scaling instance.
       #
-      # @param [Boolean] decrement_desired_capacity Specifies whether or not 
-      #   terminating this instance should also decrement the size of 
+      # @param [Boolean] decrement_desired_capacity Specifies whether or not
+      #   terminating this instance should also decrement the size of
       #   the AutoScalingGroup.
       #
       # @return [Activity] Returns an activity that represents the
@@ -161,15 +161,15 @@ module AWS
 
         client_opts = {}
         client_opts[:instance_id] = instance_id
-        client_opts[:should_decrement_desired_capacity] = 
+        client_opts[:should_decrement_desired_capacity] =
           decrement_desired_capacity
 
         resp = client.terminate_instance_in_auto_scaling_group(client_opts)
 
         Activity.new_from(
           :terminate_instance_in_auto_scaling_group,
-          resp.activity, 
-          resp.activity.activity_id, 
+          resp.activity,
+          resp.activity.activity_id,
           :config => config)
 
       end

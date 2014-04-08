@@ -14,6 +14,6 @@
 
 AWS::Core::Configuration.module_eval do
 
-  add_service 'ImportExport', 'import_export', 'importexport.amazonaws.com'
+  add_service 'ImportExport', 'import_export', 'importexport'
 
 end

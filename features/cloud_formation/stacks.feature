@@ -28,6 +28,25 @@ Feature: CloudFormations stacks
     When I create a stack
     Then the stack template should match
 
+  Scenario: Enumerating stacks without a filter
+    When I enumerate stacks
+    Then 1 request should have been made like:
+    | TYPE   | NAME                       | VALUE          |
+    | param  | Action                     | DescribeStacks |
+    And no request should have been made like:
+    | TYPE   | NAME                       | VALUE               |
+    | param  | Action                     | ListStacks          |
+
+  Scenario: Filtering stacks
+    Given I filter stacks by "create_in_progress"
+    And I filter stacks by "create_complete"
+    When I enumerate stacks
+    Then a request should have been made like:
+    | TYPE   | NAME                       | VALUE               |
+    | param  | Action                     | ListStacks          |
+    | param  | StackStatusFilter.member.1 | CREATE_IN_PROGRESS  |
+    | param  | StackStatusFilter.member.2 | CREATE_COMPLETE     |
+
   @slow
   Scenario: Updating a stack
     Given I create a stack

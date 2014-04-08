@@ -12,13 +12,12 @@
 # language governing permissions and limitations under the License.
 
 require 'thread'
-require 'stringio'
 
 module AWS
   module Core
     module Http
 
-      # @private
+      # @api private
       class CurbHandler
 
         def initialize
@@ -96,11 +95,6 @@ module AWS
           # curl.verbose = true
           request.headers.each {|k, v| curl.headers[k] = v}
 
-          if proxy = request.proxy_uri
-            curl.proxy_url = proxy.to_s
-            curl.proxy_port = proxy.port
-          end
-
           curl.on_header {|header_data|
             if header_data =~ /:\s+/
               name, value = header_data.strip.split(/:\s+/, 2)
@@ -123,7 +117,7 @@ module AWS
             curl.delete = true
           end
 
-          buffer = StringIO.new
+          buffer = []
 
           if read_block
             curl.on_body do |chunk|
@@ -140,8 +134,7 @@ module AWS
           curl.on_complete do
             response.status = curl.response_code
             unless read_block
-              buffer.rewind
-              response.body = buffer.read
+              response.body = buffer.join("")
             end
             thread.run if thread
           end

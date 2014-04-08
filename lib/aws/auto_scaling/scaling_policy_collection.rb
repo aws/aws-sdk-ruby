@@ -17,7 +17,7 @@ module AWS
 
       include Core::Collection::WithLimitAndNextToken
       include ScalingPolicyOptions
-      
+
       def initialize auto_scaling_group, options = {}
         @group = auto_scaling_group
         super
@@ -28,7 +28,7 @@ module AWS
 
       alias_method :auto_scaling_group, :group
 
-    
+
       # @param [String] name The name of the policy you want to create or update.
       # @param (see ScalingPolicyOptions#scaling_policy_options)
       # @option (see ScalingPolicyOptions#scaling_policy_options)
@@ -45,7 +45,7 @@ module AWS
       def [] policy_name
         ScalingPolicy.new(group, policy_name)
       end
-      
+
       protected
 
       def _each_item next_token, limit, options = {}, &block
@@ -56,13 +56,13 @@ module AWS
 
         resp = client.describe_policies(options)
         resp.scaling_policies.each do |details|
-          
+
           scaling_policy = ScalingPolicy.new_from(
-            :describe_policies, details, 
+            :describe_policies, details,
             group, details.policy_name)
 
           yield(scaling_policy)
-          
+
         end
         resp.data[:next_token]
       end

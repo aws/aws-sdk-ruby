@@ -16,8 +16,8 @@ module AWS
 
     # Represents a single version of an S3Object.
     #
-    # When you enable versioning on a S3 bucket, writing to an object 
-    # will create an object version instead of replacing the existing 
+    # When you enable versioning on a S3 bucket, writing to an object
+    # will create an object version instead of replacing the existing
     # object.
     class ObjectVersion
 
@@ -28,15 +28,21 @@ module AWS
       # @param [Hash] options
       # @option options [Boolean] :delete_marker Is this version a
       #   delete marker?
+      # @option options [DateTime] :last_modified Date and time the
+      #   object was last modified.
       def initialize(object, version_id, options = {})
         @object = object
         @version_id = version_id
         @delete_marker = options[:delete_marker]
+        @last_modified = options[:last_modified]
         super
       end
 
       # @return [S3Object] the object this is a version of.
       attr_reader :object
+
+      # @return [DateTime] timestamp of this version
+      attr_reader :last_modified
 
       def bucket
         object.bucket
@@ -112,14 +118,14 @@ module AWS
       end
 
       # If you delete an object in a versioned bucket, a delete marker
-      # is created.  
+      # is created.
       # @return [Boolean] Returns true if this version is a delete marker.
       def delete_marker?
         if @delete_marker.nil?
           begin
             # S3 responds with a 405 (method not allowed) when you try
             # to HEAD an s3 object version that is a delete marker
-            metadata['foo'] 
+            metadata['foo']
             @delete_marker = false
           rescue Errors::MethodNotAllowed => error
             @delete_marker = true
@@ -138,7 +144,7 @@ module AWS
 
       alias_method :eql?, :==
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class}:#{object.bucket.name}:#{object.key}:#{version_id}>"
       end

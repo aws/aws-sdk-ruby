@@ -18,32 +18,31 @@ module AWS
 
   # Provides an expressive, object-oriented interface to Amazon ElastiCache.
   #
-  # == Credentials
+  # ## Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the ElastiCache interface:
   #
-  #   ec = AWS::ElastiCache.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     ec = AWS::ElastiCache.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # @!attribute [r] client
   #   @return [Client] the low-level ElastiCache client object
   class ElastiCache
 
-    AWS.register_autoloads(self) do
-      autoload :Client,                        'client'
-      autoload :Errors,                        'errors'
-      autoload :Request,                       'request'
-    end
+    autoload :Client, 'aws/elasticache/client'
+    autoload :Errors, 'aws/elasticache/errors'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'elasticache'
 
   end
 

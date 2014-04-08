@@ -151,9 +151,7 @@ module AWS
           Inflection.ruby_name(value.to_s).to_sym
         end
 
-        ##
-        ## customization methods
-        ##
+        # customization methods
 
         def element element_name, &block
 

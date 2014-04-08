@@ -131,3 +131,6 @@ Then /^the queue should eventually have (\d+) message$/ do |count|
   @queue.visible_messages.should == count.to_i
 end
 
+Given(/^I set the "(.*?)" attribute to (\d+)$/) do |attr, value|
+  @queue.send("#{attr}=", value)
+end

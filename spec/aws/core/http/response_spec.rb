@@ -30,7 +30,7 @@ module AWS::Core
         it 'should default body to nil' do
           Response.new.body.should == nil
         end
-        
+
       end
 
       context '#initialize' do
@@ -71,7 +71,7 @@ module AWS::Core
       end
 
       context '#header' do
-        
+
         it 'returns nil when the response does not have the header' do
           Response.new(:headers => {}).header('foo').should == nil
         end

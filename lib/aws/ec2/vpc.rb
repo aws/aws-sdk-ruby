@@ -48,6 +48,14 @@ module AWS
         resp.vpc_set.find{|v| v.vpc_id == vpc_id }
       end
 
+      # @return [Boolean] Returns `true` if the resource exists.
+      def exists?
+        get_resource
+        true
+      rescue Errors::InvalidVpcID::NotFound
+        false
+      end
+
       # Deletes the current VPC.  The VPC must be empty before it can
       # be deleted.
       # @return [nil]
@@ -68,7 +76,7 @@ module AWS
         SecurityGroupCollection.new(:config => config).filter('vpc-id', vpc_id)
       end
 
-      # @return [SubnetCollection] Returns a filtered collection of 
+      # @return [SubnetCollection] Returns a filtered collection of
       #   subnets that are in this VPC.
       def subnets
         SubnetCollection.new(:config => config).filter('vpc-id', vpc_id)
@@ -120,12 +128,12 @@ module AWS
 
         if internet_gateway
           unless internet_gateway.is_a?(InternetGateway)
-            internet_gateway = InternetGateway.new(internet_gateway, 
+            internet_gateway = InternetGateway.new(internet_gateway,
               :config => config)
           end
           internet_gateway.attach(self)
         end
-        
+
       end
 
       # @return [VPNGateway,nil] Returns the vpn gateway attached to
@@ -136,7 +144,7 @@ module AWS
         gateways.filter('attachment.vpc-id', vpc_id).first
       end
 
-      # @return [DHCPOptions] Returns the dhcp options associated with 
+      # @return [DHCPOptions] Returns the dhcp options associated with
       #   this VPC.
       def dhcp_options
         DHCPOptions.new(dhcp_options_id, :config => config)
@@ -153,9 +161,9 @@ module AWS
       #
       # @param [DHCPOptions,String] dhcp_options A {DHCPOptions} object
       #   or a dhcp options id string.
-      # 
+      #
       def dhcp_options= dhcp_options
-        unless dhcp_options.is_a?(DHCPOptions) 
+        unless dhcp_options.is_a?(DHCPOptions)
           dhcp_options = DHCPOptions.new(dhcp_options, :config => config)
         end
         dhcp_options.associate(self)

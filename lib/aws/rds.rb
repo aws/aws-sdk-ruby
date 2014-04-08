@@ -21,39 +21,38 @@ module AWS
   #
   # For more information about RDS:
   #
-  # * {Amazon RDS}[http://aws.amazon.com/rds/]
-  # * {Amazon RDS Documentation}[http://aws.amazon.com/documentation/rds/]
+  # * [Amazon RDS](http://aws.amazon.com/rds/)
+  # * [Amazon RDS Documentation](http://aws.amazon.com/documentation/rds/)
   #
-  # = Credentials
+  # # Credentials
   #
   # You can setup default credentials for all AWS services via
   # AWS.config:
   #
-  #   AWS.config(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     AWS.config(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # Or you can set them directly on the AWS::RDS interface:
   #
-  #   rds = AWS::RDS.new(
-  #     :access_key_id => 'YOUR_ACCESS_KEY_ID',
-  #     :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
+  #     rds = AWS::RDS.new(
+  #       :access_key_id => 'YOUR_ACCESS_KEY_ID',
+  #       :secret_access_key => 'YOUR_SECRET_ACCESS_KEY')
   #
   # @!attribute [r] client
   #   @return [Client] the low-level RDS client object
   class RDS
 
-    AWS.register_autoloads(self) do
-      autoload :Client, 'client'
-      autoload :Errors, 'errors'
-      autoload :DBInstance, 'db_instance'
-      autoload :DBInstanceCollection, 'db_instance_collection'
-      autoload :DBSnapshot, 'db_snapshot'
-      autoload :DBSnapshotCollection, 'db_snapshot_collection'
-      autoload :Request, 'request'
-    end
+    autoload :Client, 'aws/rds/client'
+    autoload :Errors, 'aws/rds/errors'
+    autoload :DBInstance, 'aws/rds/db_instance'
+    autoload :DBInstanceCollection, 'aws/rds/db_instance_collection'
+    autoload :DBSnapshot, 'aws/rds/db_snapshot'
+    autoload :DBSnapshotCollection, 'aws/rds/db_snapshot_collection'
 
     include Core::ServiceInterface
+
+    endpoint_prefix 'rds'
 
     # @return [DBInstanceCollection]
     def db_instances

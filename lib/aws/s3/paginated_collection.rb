@@ -14,7 +14,7 @@
 module AWS
   class S3
 
-    # @private
+    # @api private
     module PaginatedCollection
 
       include Core::Collection::WithLimitAndNextToken

@@ -30,21 +30,29 @@ module AWS
         KEYS = Set[:access_key_id, :secret_access_key, :session_token]
 
         # @return [Hash] Returns a hash of credentials containg at least
-        #   the +:access_key_id+ and +:secret_access_key+.  The hash may
-        #   also contain a +:session_token+.
+        #   the `:access_key_id` and `:secret_access_key`.  The hash may
+        #   also contain a `:session_token`.
         #
         # @raise [Errors::MissingCredentialsError] Raised when the
-        #   +:access_key_id+ or the +:secret_access_key+ can not be found.
+        #   `:access_key_id` or the `:secret_access_key` can not be found.
         #
         def credentials
-          @cached_credentials ||= begin
-            creds = get_credentials
-            unless creds[:access_key_id] and creds[:secret_access_key]
-              raise Errors::MissingCredentialsError
-            end
-            creds
-          end
+          raise Errors::MissingCredentialsError unless set?
           @cached_credentials.dup
+        end
+
+        # @return [Boolean] Returns true if has credentials and it contains
+        #   at least the `:access_key_id` and `:secret_access_key`.
+        #
+        def set?
+          @cache_mutex ||= Mutex.new
+          unless @cached_credentials
+            @cache_mutex.synchronize do
+              @cached_credentials ||= get_credentials
+            end
+          end
+          @cached_credentials[:access_key_id] &&
+            @cached_credentials[:secret_access_key]
         end
 
         # @return [String] Returns the AWS access key id.
@@ -77,7 +85,7 @@ module AWS
 
         # This method is called on a credential provider to fetch
         # credentials.  The credentials hash returned from this
-        # method will be cashed until the client calls {#refresh}.
+        # method will be cached until the client calls {#refresh}.
         # @return [Hash]
         def get_credentials
           # should be defined in provider classes.
@@ -117,12 +125,15 @@ module AWS
 
         def credentials
           providers.each do |provider|
-            begin
+            if provider.set?
               return provider.credentials
-            rescue Errors::MissingCredentialsError
             end
           end
           raise Errors::MissingCredentialsError
+        end
+
+        def set?
+          providers.any?(&:set?)
         end
 
         def refresh
@@ -133,9 +144,9 @@ module AWS
       end
 
       # Static credentials are provided directly to config via
-      # +:access_key_id+ and +:secret_access_key+ (and optionally
-      # +:session_token+).
-      # @private
+      # `:access_key_id` and `:secret_access_key` (and optionally
+      # `:session_token`).
+      # @api private
       class StaticProvider
 
         include Provider
@@ -196,9 +207,54 @@ module AWS
               credentials[key] = value
             end
           end
+
+          # Merge in CredentialFileProvider credentials if
+          # a #{@prefix}_CREDENTIAL_FILE environment(ENV) variable is set
+          if ENV["#{@prefix}_CREDENTIAL_FILE"]
+            credentials.merge! CredentialFileProvider.new(ENV["#{@prefix}_CREDENTIAL_FILE"]).get_credentials
+          end
+
           credentials
         end
 
+      end
+
+      # This credential provider gets credentials from a credential file
+      # with the following format:
+      #
+      #  AWSAccessKeyId=your_key
+      #  AWSSecretKey=your_secret
+      #
+      class CredentialFileProvider
+
+        include Provider
+
+        # Map of AWS credential file key names to accepted provider key names
+        CREDENTIAL_FILE_KEY_MAP = { "AWSAccessKeyId" => :access_key_id, "AWSSecretKey" => :secret_access_key }
+
+        attr_reader :credential_file
+
+        # @param [Sring] credential_file The file path of a credential file
+        def initialize(credential_file)
+          @credential_file = credential_file
+        end
+
+        # (see Provider#get_credentials)
+        def get_credentials
+          credentials = {}
+          if File.exist?(credential_file) && File.readable?(credential_file)
+            File.open(credential_file, 'r') do |fh|
+              fh.each_line do |line|
+                key, val = line.strip.split(%r(\s*=\s*))
+                if key && val && CREDENTIAL_FILE_KEY_MAP[key] && KEYS.include?(CREDENTIAL_FILE_KEY_MAP[key])
+                  credentials[CREDENTIAL_FILE_KEY_MAP[key]] = val
+                end
+              end
+              fh.close
+            end
+          end
+          credentials
+        end
       end
 
       # This credential provider tries to get credentials from the EC2
@@ -207,14 +263,14 @@ module AWS
 
         # Raised when an http response is recieved with a non 200
         # http status code.
-        # @private
+        # @api private
         class FailedRequestError < StandardError; end
 
         # These are the errors we trap when attempting to talk to the
         # instance metadata service.  Any of these imply the service
         # is not present, no responding or some other non-recoverable
         # error.
-        # @private
+        # @api private
         FAILURES = [
           FailedRequestError,
           Errno::EHOSTUNREACH,
@@ -261,14 +317,14 @@ module AWS
 
         # Refresh provider if existing credentials will be expired in 5 min
         # @return [Hash] Returns a hash of credentials containg at least
-        #   the +:access_key_id+ and +:secret_access_key+.  The hash may
-        #   also contain a +:session_token+.
+        #   the `:access_key_id` and `:secret_access_key`.  The hash may
+        #   also contain a `:session_token`.
         #
         # @raise [Errors::MissingCredentialsError] Raised when the
-        #   +:access_key_id+ or the +:secret_access_key+ can not be found.
+        #   `:access_key_id` or the `:secret_access_key` can not be found.
         #
         def credentials
-          if @credentials_expiration && @credentials_expiration.utc <= Time.now.utc - 5 * 60
+          if @credentials_expiration && @credentials_expiration.utc <= (Time.now.utc + (15 * 60))
             refresh
           end
           super
@@ -328,10 +384,10 @@ module AWS
 
       end
 
-      # = Session Credential Provider
+      # # Session Credential Provider
       #
-      # The session provider consumes long term credentials (+:access_key_id+
-      # and +:secret_access_key+) and requests a session from STS.
+      # The session provider consumes long term credentials (`:access_key_id`
+      # and `:secret_access_key`) and requests a session from STS.
       # It then returns the short term credential set from STS.
       #
       # Calling {#refresh} causes the session provider to request a new
@@ -348,8 +404,8 @@ module AWS
         class << self
 
           # @param [Hash] long_term_credentials A hash of credentials with
-          #   +:access_key_id+ and +:secret_access_key+ (but not
-          #   +:session_token+).
+          #   `:access_key_id` and `:secret_access_key` (but not
+          #   `:session_token`).
           def for long_term_credentials
             @create_mutex.synchronize do
               @session_providers ||= {}
@@ -365,8 +421,8 @@ module AWS
         end
 
         # @param [Hash] long_term_credentials A hash of credentials with
-        #   +:access_key_id+ and +:secret_access_key+ (but not
-        #   +:session_token+).
+        #   `:access_key_id` and `:secret_access_key` (but not
+        #   `:session_token`).
         def initialize long_term_credentials
           @static = StaticProvider.new(long_term_credentials)
           if @static.session_token
@@ -424,7 +480,7 @@ module AWS
       class FakeProvider < StaticProvider
 
         # @param [Hash] options
-        # @option options [Boolean] :with_session_token (false) When +true+ a
+        # @option options [Boolean] :with_session_token (false) When `true` a
         #   fake session token will also be provided.
         def initialize options = {}
           options[:access_key_id] ||= fake_access_key_id

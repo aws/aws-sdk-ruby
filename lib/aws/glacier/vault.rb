@@ -50,16 +50,16 @@ module AWS
 
       populates_from(:list_vaults) do |resp|
         resp.request_options[:account_id] == account_id and
-        resp[:vault_list].find {|vault| vault[:name] == name }
+        resp[:vault_list].find {|vault| vault[:vault_name] == name }
       end
 
       populates_from(:describe_vault) do |resp|
-        if resp.request_options[:account_id] == account_id and resp[:name] == name
+        if resp.request_options[:account_id] == account_id and resp[:vault_name] == name
           resp
         end
       end
 
-      # @return [Boolean] Returns +true+ if the vault exists.
+      # @return [Boolean] Returns `true` if the vault exists.
       def exists?
         client.describe_vault(:vault_name => name, :account_id => account_id)
         true
@@ -69,7 +69,7 @@ module AWS
 
       # @return [ArchiveCollection]
       def archives
-        ArchiveCollection.new(self)
+        ArchiveCollection.new(self, :account_id => account_id)
       end
 
       # @param [String,SNS::Topic] topic The SNS topic ARN string or an
@@ -105,7 +105,7 @@ module AWS
       end
 
       # Sets the notification configuration for this vault.  If you pass
-      # a +nil+ value, the notification configuration will be deleted
+      # a `nil` value, the notification configuration will be deleted
       # @param [VaultNotificationConfiguration] cfg
       def notification_configuration= cfg
         if cfg

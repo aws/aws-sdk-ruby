@@ -69,6 +69,7 @@ module AWS
           stub_n_members(response, 1)
           res = resources.first
           res.should be_a(StackResource)
+          res.stack.should be(stack)
           res.stack_name.should == 'stack-name'
           res.stack_id.should == 'stack-id'
           res.resource_type.should == 'AWS::EC2::Instance'

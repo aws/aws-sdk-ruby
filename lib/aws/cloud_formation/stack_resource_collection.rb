@@ -14,13 +14,13 @@
 module AWS
   class CloudFormation
 
-    # = StackResourceCollection 
+    # # StackResourceCollection
     #
     # This collection represents the resources for a single {Stack}.
     # You can enumerate resources, or request a specific resource
     # by its logical resource id.
     #
-    # = Other Ways to Get Resource Details
+    # # Other Ways to Get Resource Details
     #
     # If you want to get a {StackResource} by its physical resource
     # id, then you should use {CloudFormation#stack_resource}.
@@ -30,15 +30,14 @@ module AWS
     #
     # @example Enumerating stack resources
     #
-    #   # enumerating all resources for a stack
-    #   stack.resources.each do |resource|
-    #     puts resource.resource_type + " " + resource.physical_resource_id
-    #   end
-    # 
+    #     # enumerating all resources for a stack
+    #     stack.resources.each do |resource|
+    #       puts resource.resource_type ` " " ` resource.physical_resource_id
+    #     end
+    #
     # @example Getting a stack resource by its logical resource id
     #
-    #   resource = stack.resources['web']
-    #
+    #     resource = stack.resources['web']
     class StackResourceCollection
 
       include Core::Collection::Simple
@@ -57,7 +56,7 @@ module AWS
       # @param [String] logical_resource_id
       # @return [StackResource] Returns a stack resource with the given
       #   logical resource id.
-      def [] logical_resource_id 
+      def [] logical_resource_id
         StackResource.new(stack, logical_resource_id)
       end
 
@@ -69,9 +68,9 @@ module AWS
         response.stack_resources.each do |details|
 
           stack_resource = StackResource.new_from(
-            :describe_stack_resources, 
+            :describe_stack_resources,
             details,
-            self, 
+            stack,
             details.logical_resource_id)
 
           yield(stack_resource)

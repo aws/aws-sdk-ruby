@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -296,6 +296,35 @@
               member:
                 :rename: :instance_states
                 :list: true
+- :name: DescribeLoadBalancerAttributes
+  :method: :describe_load_balancer_attributes
+  :inputs:
+    LoadBalancerName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DescribeLoadBalancerAttributesResult:
+        :ignore: true
+        :children:
+          LoadBalancerAttributes:
+            :children:
+              CrossZoneLoadBalancing:
+                :children:
+                  Enabled:
+                    :type: :boolean
+              AccessLog:
+                :children:
+                  Enabled:
+                    :type: :boolean
+                  EmitInterval:
+                    :type: :integer
+              ConnectionDraining:
+                :children:
+                  Enabled:
+                    :type: :boolean
+                  Timeout:
+                    :type: :integer
 - :name: DescribeLoadBalancerPolicies
   :method: :describe_load_balancer_policies
   :inputs:
@@ -522,6 +551,61 @@
               member:
                 :rename: :availability_zones
                 :list: true
+- :name: ModifyLoadBalancerAttributes
+  :method: :modify_load_balancer_attributes
+  :inputs:
+    LoadBalancerName:
+    - :string
+    - :required
+    LoadBalancerAttributes:
+    - :structure:
+        CrossZoneLoadBalancing:
+        - :structure:
+            Enabled:
+            - :boolean
+            - :required
+        AccessLog:
+        - :structure:
+            Enabled:
+            - :boolean
+            - :required
+            S3BucketName:
+            - :string
+            EmitInterval:
+            - :integer
+            S3BucketPrefix:
+            - :string
+        ConnectionDraining:
+        - :structure:
+            Enabled:
+            - :boolean
+            - :required
+            Timeout:
+            - :integer
+    - :required
+  :outputs:
+    :children:
+      ModifyLoadBalancerAttributesResult:
+        :ignore: true
+        :children:
+          LoadBalancerAttributes:
+            :children:
+              CrossZoneLoadBalancing:
+                :children:
+                  Enabled:
+                    :type: :boolean
+              AccessLog:
+                :children:
+                  Enabled:
+                    :type: :boolean
+                  EmitInterval:
+                    :type: :integer
+              ConnectionDraining:
+                :children:
+                  Enabled:
+                    :type: :boolean
+                  Timeout:
+                    :type: :integer
 - :name: RegisterInstancesWithLoadBalancer
   :method: :register_instances_with_load_balancer
   :inputs:

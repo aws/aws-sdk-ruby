@@ -50,12 +50,12 @@ module AWS
         nil
       end
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class}:#{local_cache_key}>"
       end
 
-      # @private
+      # @api private
       def local_cache_key
         response_index_key
       end

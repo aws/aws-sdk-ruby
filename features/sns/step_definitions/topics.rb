@@ -23,7 +23,7 @@ end
 
 Then /^the topic should have the correct display name$/ do
   @topic.name.should == @topic_name
-end 
+end
 
 When /^I delete the topic$/ do
   @topic.delete

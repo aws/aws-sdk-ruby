@@ -21,13 +21,13 @@ module AWS
 
       # Creates an Auto Scaling Group.
       #
-      #   group = auto_scaling.groups.create('group-name', 
-      #     :launch_configuration => 'launch-config-name',
-      #     :availability_zones => %(us-east-1a us-east-1b),
-      #     :min_size => 1,
-      #     :max_size => 4)
-      # 
-      # @param [String] name The name of the Auto Scaling group.  
+      #     group = auto_scaling.groups.create('group-name',
+      #       :launch_configuration => 'launch-config-name',
+      #       :availability_zones => %(us-west-2a us-west-2b),
+      #       :min_size => 1,
+      #       :max_size => 4)
+      #
+      # @param [String] name The name of the Auto Scaling group.
       #   Must be unique within the scope of your AWS account.
       #
       # @param [Hash] options
@@ -35,7 +35,7 @@ module AWS
       # @option (see GroupOptions#group_options)
       #
       # @option options [Array<ELB::LoadBalancer>,Array<String>] :load_balancers
-      #   A list of load balancers to use.  This can be an array of 
+      #   A list of load balancers to use.  This can be an array of
       #   {ELB::LoadBalancer} objects or an array of load balancer names.
       #
       # @return [Group]
@@ -76,7 +76,7 @@ module AWS
 
         resp = client.describe_auto_scaling_groups(options)
         resp.auto_scaling_groups.each do |details|
-          
+
           group = Group.new_from(
             :describe_auto_scaling_groups,
             details,
@@ -84,7 +84,7 @@ module AWS
             :config => config)
 
           yield(group)
-          
+
         end
 
         resp.data[:next_token]

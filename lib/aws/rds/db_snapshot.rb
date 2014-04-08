@@ -136,7 +136,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] Returns +true+ if the db snapshot exists.
+      # @return [Boolean] Returns `true` if the db snapshot exists.
       def exists?
         begin
           get_resource

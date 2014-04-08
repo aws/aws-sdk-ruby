@@ -615,6 +615,16 @@ module AWS
                         :select => ["foo", "bar"]).should == "FOO"
           end
 
+          it 'should also accept :attributes_to_get' do
+            items.stub(:enumerator).
+              with(hash_including(
+                :attributes_to_get => ["foo", "bar"],
+                :item_data => true)).
+              and_return("FOO")
+            items.query(:hash_value => "hash",
+                        :attributes_to_get => ["foo", "bar"]).should == "FOO"
+          end
+
           it 'should work for symbol attribute names' do
             items.stub(:enumerator).
               with(hash_including(:attributes_to_get => ["foo", "bar"])).

@@ -15,7 +15,7 @@ module AWS
   class Glacier
     class Resource < Core::Resource
 
-      # @private
+      # @api private
       def initialize *args
         options = args.last.is_a?(Hash) ? args.last : {}
         @account_id = options[:account_id] || '-'

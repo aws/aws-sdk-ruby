@@ -11,7 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'uuidtools'
 require 'date'
 require 'json'
 
@@ -20,14 +19,14 @@ module AWS
 
     # Represents an access policy for AWS operations and resources.  For example:
     #
-    #   policy = Policy.new do |policy|
-    #     policy.allow(:actions => ['s3:PutObject'],
-    #                  :resources => "arn:aws:s3:::mybucket/mykey/*",
-    #                  :principals => :any
+    #     policy = Policy.new
+    #     policy.allow(
+    #       :actions => ['s3:PutObject'],
+    #       :resources => "arn:aws:s3:::mybucket/mykey/*",
+    #       :principals => :any
     #     ).where(:acl).is("public-read")
-    #   end
     #
-    #   policy.to_json               # => '{ "Version":"2008-10-17", ...'
+    #     policy.to_json # => '{ "Version":"2008-10-17", ...'
     #
     # @see #initialize More ways to construct a policy.
     # @see http://docs.amazonwebservices.com/AmazonS3/latest/dev/AccessPolicyLanguage_UseCases_s3_a.html Example policies (in JSON).
@@ -52,7 +51,8 @@ module AWS
       # * With hash arguments:
       #
       #     Policy.new(:statements => [
-      #       { :effect => :allow,
+      #       {
+      #         :effect => :allow,
       #         :actions => :all,
       #         :principals => ["abc123"],
       #         :resources => "mybucket/mykey"
@@ -66,13 +66,11 @@ module AWS
       # * With a block:
       #
       #     Policy.new do |policy|
-      #
       #       policy.allow(
       #         :actions => ['s3:PutObject'],
       #         :resources => "arn:aws:s3:::mybucket/mykey/*",
       #         :principals => :any
       #       ).where(:acl).is("public-read")
-      #
       #     end
       #
       def initialize(opts = {})
@@ -85,7 +83,7 @@ module AWS
         if opts.has_key?(:id) or opts.has_key?("Id")
           @id = opts[:id] || opts["Id"]
         else
-          @id = UUIDTools::UUID.timestamp_create.to_s.tr('-','')
+          @id = SecureRandom.uuid.tr('-','')
         end
         if opts.has_key?(:version) or opts.has_key?("Version")
           @version = opts[:version] || opts["Version"]
@@ -109,7 +107,7 @@ module AWS
       # Removes the ids from the policy and its statements for the purpose
       # of comparing two policies for equivilence.
       # @return [Hash] Returns the policy as a hash with no ids
-      # @private
+      # @api private
       def hash_without_ids
         hash = self.to_h
         hash.delete('Id')
@@ -123,8 +121,8 @@ module AWS
       # Returns a hash representation of the policy. The following
       # statements are equivalent:
       #
-      #   policy.to_h.to_json
-      #   policy.to_json
+      #     policy.to_h.to_json
+      #     policy.to_json
       #
       # @return [Hash]
       def to_h
@@ -151,20 +149,20 @@ module AWS
       # Convenient syntax for expressing operators in statement
       # condition blocks.  For example, the following:
       #
-      #   policy.allow.where(:s3_prefix).not("forbidden").
-      #     where(:current_time).lte(Date.today+1)
+      #     policy.allow.where(:s3_prefix).not("forbidden").
+      #       where(:current_time).lte(Date.today+1)
       #
       # is equivalent to:
       #
-      #   conditions = Policy::ConditionBlock.new
-      #   conditions.add(:not, :s3_prefix, "forbidden")
-      #   conditions.add(:lte, :current_time, Date.today+1)
-      #   policy.allow(:conditions => conditions)
+      #     conditions = Policy::ConditionBlock.new
+      #     conditions.add(:not, :s3_prefix, "forbidden")
+      #     conditions.add(:lte, :current_time, Date.today+1)
+      #     policy.allow(:conditions => conditions)
       #
       # @see ConditionBlock#add
       class OperatorBuilder
 
-        # @private
+        # @api private
         def initialize(condition_builder, key)
           @condition_builder = condition_builder
           @key = key
@@ -185,14 +183,14 @@ module AWS
         # @return [Array] Returns an array of policy conditions.
         attr_reader :conditions
 
-        # @private
+        # @api private
         def initialize(conditions)
           @conditions = conditions
         end
 
         # Adds a condition for the given key.  For example:
         #
-        #   policy.allow(...).where(:current_time).lte(Date.today + 1)
+        #     policy.allow(...).where(:current_time).lte(Date.today + 1)
         #
         # @return [OperatorBuilder]
         def where(key, operator = nil, *values)
@@ -209,10 +207,11 @@ module AWS
       # Convenience method for constructing a new statement with the
       # "Allow" effect and adding it to the policy.  For example:
       #
-      #     policy.allow(:actions => [:put_object],
-      #                  :principals => :any,
-      #                  :resources => "mybucket/mykey/*").
-      #       where(:acl).is("public-read")
+      #     policy.allow(
+      #       :actions => [:put_object],
+      #       :principals => :any,
+      #       :resources => "mybucket/mykey/*").
+      #     where(:acl).is("public-read")
       #
       # @option (see Statement#initialize)
       # @see Statement#initialize
@@ -226,11 +225,11 @@ module AWS
       # Convenience method for constructing a new statement with the
       # "Deny" effect and adding it to the policy.  For example:
       #
-      #   policy.deny(
-      #     :actions => [:put_object],
-      #     :principals => :any,
-      #     :resources => "mybucket/mykey/*"
-      #   ).where(:acl).is("public-read")
+      #     policy.deny(
+      #       :actions => [:put_object],
+      #       :principals => :any,
+      #       :resources => "mybucket/mykey/*"
+      #     ).where(:acl).is("public-read")
       #
       # @param (see Statement#initialize)
       # @see Statement#initialize
@@ -244,12 +243,12 @@ module AWS
       # Represents the condition block of a policy.  In JSON,
       # condition blocks look like this:
       #
-      #   { "StringLike": { "s3:prefix": ["photos/*", "photos.html"] } }
+      #     { "StringLike": { "s3:prefix": ["photos/*", "photos.html"] } }
       #
       # ConditionBlock lets you specify conditions like the above
       # example using the add method, for example:
       #
-      #   conditions.add(:like, :s3_prefix, "photos/*", "photos.html")
+      #     conditions.add(:like, :s3_prefix, "photos/*", "photos.html")
       #
       # See the add method documentation for more details about how
       # to specify keys and operators.
@@ -295,7 +294,7 @@ module AWS
       #
       class ConditionBlock
 
-        # @private
+        # @api private
         def initialize(conditions = {})
           # filter makes a copy
           @conditions = filter_conditions(conditions)
@@ -322,22 +321,22 @@ module AWS
         # The following list shows which operators are accepted as
         # symbols and how they are represented in the JSON policy:
         #
-        # * +:is+ (StringEquals, NumericEquals, DateEquals, or Bool)
-        # * +:like+ (StringLike)
-        # * +:not_like+ (StringNotLike)
-        # * +:not+ (StringNotEquals, NumericNotEquals, or DateNotEquals)
-        # * +:greater_than+, +:gt+ (NumericGreaterThan or DateGreaterThan)
-        # * +:greater_than_equals+, +:gte+
+        # * `:is` (StringEquals, NumericEquals, DateEquals, or Bool)
+        # * `:like` (StringLike)
+        # * `:not_like` (StringNotLike)
+        # * `:not` (StringNotEquals, NumericNotEquals, or DateNotEquals)
+        # * `:greater_than`, `:gt` (NumericGreaterThan or DateGreaterThan)
+        # * `:greater_than_equals`, `:gte`
         #   (NumericGreaterThanEquals or DateGreaterThanEquals)
-        # * +:less_than+, +:lt+ (NumericLessThan or DateLessThan)
-        # * +:less_than_equals+, +:lte+
+        # * `:less_than`, `:lt` (NumericLessThan or DateLessThan)
+        # * `:less_than_equals`, `:lte`
         #   (NumericLessThanEquals or DateLessThanEquals)
-        # * +:is_ip_address+ (IpAddress)
-        # * +:not_ip_address+ (NotIpAddress)
-        # * +:is_arn+ (ArnEquals)
-        # * +:not_arn+ (ArnNotEquals)
-        # * +:is_arn_like+ (ArnLike)
-        # * +:not_arn_like+ (ArnNotLike)
+        # * `:is_ip_address` (IpAddress)
+        # * `:not_ip_address` (NotIpAddress)
+        # * `:is_arn` (ArnEquals)
+        # * `:not_arn` (ArnNotEquals)
+        # * `:is_arn_like` (ArnLike)
+        # * `:not_arn_like` (ArnNotLike)
         #
         # @param [Symbol or String] operator The operator used to
         #   compare the key with the value.  See above for valid
@@ -348,8 +347,8 @@ module AWS
         #   default, the key is assumed to be in the "aws"
         #   namespace, but if you prefix the symbol name with "s3_"
         #   it will be sent in the "s3" namespace.  For example,
-        #   +:s3_prefix+ is sent as "s3:prefix" while
-        #   +:secure_transport+ is sent as "aws:SecureTransport".
+        #   `:s3_prefix` is sent as "s3:prefix" while
+        #   `:secure_transport` is sent as "aws:SecureTransport".
         #   See
         #   http://docs.amazonwebservices.com/AmazonS3/latest/dev/UsingResOpsConditions.html
         #   for a list of the available keys for each action in S3.
@@ -375,7 +374,7 @@ module AWS
           op[translate_key(key)] = converted_values
         end
 
-        # @private
+        # @api private
         def to_h
           @conditions
         end
@@ -447,7 +446,7 @@ module AWS
           end.compact.flatten
         end
 
-        # @private
+        # @api private
         protected
         def match_triple(filter, type, op, key, value)
           value = [value].flatten.first
@@ -468,7 +467,7 @@ module AWS
           [match, type]
         end
 
-        # @private
+        # @api private
         protected
         def match_operator(filter, op, value)
           # dates are the only values that don't come back as native types in JSON
@@ -477,13 +476,13 @@ module AWS
           translate_operator(filter, value) == op
         end
 
-        # @private
+        # @api private
         protected
         def match_key(filter, key, value = nil)
           translate_key(filter) == key
         end
 
-        # @private
+        # @api private
         protected
         def filter_conditions(conditions = @conditions)
           conditions.inject({}) do |m, (op, keys)|
@@ -496,7 +495,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         protected
         def translate_key(key)
           if key.kind_of?(Symbol)
@@ -517,13 +516,13 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         MODIFIERS = {
           /_ignoring_case$/ => "IgnoreCase",
           /_equals$/ => "Equals"
         }
 
-        # @private
+        # @api private
         protected
         def valid_operator?(operator)
           translate_operator(operator, "")
@@ -532,7 +531,7 @@ module AWS
           false
         end
 
-        # @private
+        # @api private
         protected
         def translate_operator(operator, example_value)
           return operator if operator.kind_of?(String)
@@ -545,100 +544,100 @@ module AWS
           send("translate_#{operator}", example_value, opts)
         end
 
-        # @private
+        # @api private
         protected
         def translate_is(example, opts)
           return "Bool" if type_notation(example) == "Bool"
           base_translate(example, "Equals", opts[:ignore_case])
         end
 
-        # @private
+        # @api private
         protected
         def translate_not(example, opts)
           base_translate(example, "NotEquals", opts[:ignore_case])
         end
 
-        # @private
+        # @api private
         protected
         def translate_like(example, opts)
           base_translate(example, "Like")
         end
 
-        # @private
+        # @api private
         protected
         def translate_not_like(example, opts)
           base_translate(example, "NotLike")
         end
 
-        # @private
+        # @api private
         protected
         def translate_less_than(example, opts)
           base_translate(example, "LessThan", opts[:equals])
         end
         alias_method :translate_lt, :translate_less_than
 
-        # @private
+        # @api private
         protected
         def translate_lte(example, opts)
           translate_less_than(example, { :equals => "Equals" })
         end
 
-        # @private
+        # @api private
         protected
         def translate_greater_than(example, opts)
           base_translate(example, "GreaterThan", opts[:equals])
         end
         alias_method :translate_gt, :translate_greater_than
 
-        # @private
+        # @api private
         protected
         def translate_gte(example, opts)
           translate_greater_than(example, { :equals => "Equals" })
         end
 
-        # @private
+        # @api private
         protected
         def translate_is_ip_address(example, opts)
           "IpAddress"
         end
 
-        # @private
+        # @api private
         protected
         def translate_not_ip_address(example, opts)
           "NotIpAddress"
         end
 
-        # @private
+        # @api private
         protected
         def translate_is_arn(example, opts)
           "ArnEquals"
         end
 
-        # @private
+        # @api private
         protected
         def translate_not_arn(example, opts)
           "ArnNotEquals"
         end
 
-        # @private
+        # @api private
         protected
         def translate_is_arn_like(example, opts)
           "ArnLike"
         end
 
-        # @private
+        # @api private
         protected
         def translate_not_arn_like(example, opts)
           "ArnNotLike"
         end
 
-        # @private
+        # @api private
         protected
         def base_translate(example, base_operator, *modifiers)
           "#{type_notation(example)}#{base_operator}#{modifiers.join}"
         end
 
-        # @private
+        # @api private
         protected
         def type_notation(example)
           case example
@@ -653,7 +652,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         protected
         def convert_value(value)
           case value
@@ -666,7 +665,7 @@ module AWS
           end
         end
 
-        # @private
+        # @api private
         protected
         def strip_modifiers(operator)
           opts = {}
@@ -714,6 +713,8 @@ module AWS
         # @return [Array] Returns an array of conditions for this policy.
         attr_accessor :conditions
 
+        attr_accessor :excluded_resources
+
         # Constructs a new statement.
         #
         # @option opts [String] :sid The statement ID.  This is optional; if
@@ -731,12 +732,12 @@ module AWS
         #   Symbols are expected to match methods of S3::Client.
         # @option opts :excluded_actions Action or actions which are
         #   explicitly not affected by this statement.  As with
-        #   +:actions+, these may be symbols or strings.
+        #   `:actions`, these may be symbols or strings.
         # @option opts [String or array of strings] :resources The
         #   resource(s) affected by the statement.  These can be
-        #   expressed as ARNs (e.g. +arn:aws:s3:::mybucket/mykey+)
-        #   or you may omit the +arn:aws:s3:::+ prefix and just give
-        #   the path as +bucket_name/key+.  You may use the wildcard
+        #   expressed as ARNs (e.g. `arn:aws:s3:::mybucket/mykey`)
+        #   or you may omit the `arn:aws:s3:::` prefix and just give
+        #   the path as `bucket_name/key`.  You may use the wildcard
         #   character "*" to match zero or more characters in the
         #   resource name.
         # @option opts [ConditionBlock or Hash] :conditions
@@ -746,7 +747,7 @@ module AWS
         #   Policy#deny to add conditions to a statement.
         # @see S3::Client
         def initialize(opts = {})
-          self.sid = UUIDTools::UUID.timestamp_create.to_s.tr('-','')
+          self.sid = SecureRandom.uuid.tr('-','')
           self.conditions = ConditionBlock.new
 
           parse_options(opts)
@@ -770,17 +771,20 @@ module AWS
         end
         alias_method :exclude_action, :exclude_actions
 
-        # @private
+        # @api private
         def to_h
           stmt = {
             "Sid" => sid,
             "Effect" => Inflection.class_name(effect.to_s),
             "Principal" => principals_hash,
-            "Resource" => resource_arns,
+            "Resource" => (resource_arns if resource_arns),
+            "NotResource" => (excluded_resource_arns if excluded_resource_arns),
             "Condition" => (conditions.to_h if conditions)
           }
           stmt.delete("Condition") if !conditions || conditions.to_h.empty?
           stmt.delete("Principal") unless principals_hash
+          stmt.delete("Resource") unless resource_arns
+          stmt.delete("NotResource") unless excluded_resource_arns
           if !translated_actions || translated_actions.empty?
             stmt["NotAction"] = translated_excluded_actions
           else
@@ -833,6 +837,11 @@ module AWS
         def parse_resource_option(value)
           coerce_array_option(:resources, value)
         end
+
+        def parse_not_resource_option(value)
+          coerce_array_option(:excluded_resources, value)
+        end
+        alias_method :parse_excluded_resource_option, :parse_not_resource_option
 
         protected
         def parse_condition_option(value)
@@ -907,6 +916,22 @@ module AWS
         protected
         def resource_arn resource
           resource.to_s
+        end
+
+        protected
+        def excluded_resource_arns
+          return nil unless excluded_resources
+          excluded_resources.map do |excluded_resource|
+            case excluded_resource
+            when :any    then "*"
+            else excluded_resource_arn(excluded_resource)
+            end
+          end
+        end
+
+        protected
+        def excluded_resource_arn excluded_resource
+          excluded_resource.to_s
         end
 
       end

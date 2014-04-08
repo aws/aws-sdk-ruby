@@ -23,7 +23,7 @@ Feature: Basic Snapshot Operations
     Given I create a volume with the following parameters:
     | parameter         | value      |
     | size              | 1          |
-    | availability_zone | us-east-1a |
+    | availability_zone | us-east-1b |
     When I create a snapshot from the volume
     Then the result should be a snapshot
     And a request should have been made like:
@@ -51,7 +51,7 @@ Feature: Basic Snapshot Operations
     Given I create a volume with the following parameters:
     | parameter         | value      |
     | size              | 1          |
-    | availability_zone | us-east-1a |
+    | availability_zone | us-east-1b |
     And I create a snapshot from the volume
     When I ask for the list of snapshots
     Then the snapshot I created should be in the list
@@ -73,7 +73,7 @@ Feature: Basic Snapshot Operations
     Given I create a volume with the following parameters:
     | parameter         | value      |
     | size              | 1          |
-    | availability_zone | us-east-1a |
+    | availability_zone | us-east-1b |
     And I create a snapshot from the volume
     When I delete the snapshot
     Then the snapshot should eventually not exist
@@ -91,7 +91,7 @@ Feature: Basic Snapshot Operations
     Given I create a volume with the following parameters:
     | parameter         | value      |
     | size              | 1          |
-    | availability_zone | us-east-1a |
+    | availability_zone | us-east-1b |
     And I create a snapshot from the volume
     When I ask if the snapshot exists
     Then the result should be true

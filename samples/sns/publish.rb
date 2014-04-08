@@ -17,7 +17,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../samples_config')
 # Topic's arn can be found in AWS Management, under Topic Details.
 (topic_arn, message) = ARGV
 unless topic_arn && message
-  puts "Usage: upload.rb <TOPIC_ARN> <MESSAGE>"
+  puts "Usage: publish.rb <TOPIC_ARN> <MESSAGE>"
   exit 1
 end
 

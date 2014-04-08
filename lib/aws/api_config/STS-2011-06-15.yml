@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -29,6 +29,10 @@
     - :integer
     ExternalId:
     - :string
+    SerialNumber:
+    - :string
+    TokenCode:
+    - :string
   :outputs:
     :children:
       AssumeRoleResult:
@@ -40,6 +44,72 @@
                 :type: :time
           PackedPolicySize:
             :type: :integer
+- :name: AssumeRoleWithSAML
+  :method: :assume_role_with_saml
+  :inputs:
+    RoleArn:
+    - :string
+    - :required
+    PrincipalArn:
+    - :string
+    - :required
+    SAMLAssertion:
+    - :string
+    - :required
+    Policy:
+    - :string
+    DurationSeconds:
+    - :integer
+  :outputs:
+    :children:
+      AssumeRoleWithSAMLResult:
+        :ignore: true
+        :children:
+          Credentials:
+            :children:
+              Expiration:
+                :type: :time
+          PackedPolicySize:
+            :type: :integer
+- :name: AssumeRoleWithWebIdentity
+  :method: :assume_role_with_web_identity
+  :inputs:
+    RoleArn:
+    - :string
+    - :required
+    RoleSessionName:
+    - :string
+    - :required
+    WebIdentityToken:
+    - :string
+    - :required
+    ProviderId:
+    - :string
+    Policy:
+    - :string
+    DurationSeconds:
+    - :integer
+  :outputs:
+    :children:
+      AssumeRoleWithWebIdentityResult:
+        :ignore: true
+        :children:
+          Credentials:
+            :children:
+              Expiration:
+                :type: :time
+          PackedPolicySize:
+            :type: :integer
+- :name: DecodeAuthorizationMessage
+  :method: :decode_authorization_message
+  :inputs:
+    EncodedMessage:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DecodeAuthorizationMessageResult:
+        :ignore: true
 - :name: GetFederationToken
   :method: :get_federation_token
   :inputs:

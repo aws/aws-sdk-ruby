@@ -14,18 +14,18 @@
 module AWS
   class Route53
 
-    # = Modify resource record set
+    # # Modify resource record set
     #
-    #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
-    #   rrset = rrsets['foo.example.com.', 'A']
-    #   rrset.ttl = 3600
-    #   rrset.update
+    #     rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
+    #     rrset = rrsets['foo.example.com.', 'A']
+    #     rrset.ttl = 3600
+    #     rrset.update
     #
-    # = Delete existing resource record set
+    # # Delete existing resource record set
     #
-    #   rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
-    #   rrset = rrsets['foo.example.com.', 'A']
-    #   rrset.delete
+    #     rrsets = AWS::Route53::HostedZone.new(hosted_zone_id).rrsets
+    #     rrset = rrsets['foo.example.com.', 'A']
+    #     rrset.delete
     #
     # @attr_reader [Hash] alias_target
     #
@@ -39,7 +39,7 @@ module AWS
     #
     class ResourceRecordSet < Core::Resource
 
-      # @private
+      # @api private
       def initialize name, type, options = {}
         @name = name
         @type = type
@@ -119,6 +119,18 @@ module AWS
         @create_options[:ttl] = new_ttl
       end
 
+      attribute :failover
+
+      def failover= new_failover
+        @create_options[:failover] = new_failover
+      end
+
+      attribute :health_check_id
+
+      def health_check_id= new_health_check_id
+        @create_options[:health_check_id] = new_health_check_id
+      end
+
       attribute :resource_records
 
       # @param [Array<Hash>] new_rrs
@@ -137,7 +149,7 @@ module AWS
         }
       end
 
-      # @return [Boolean] Returns +true+ if this rrset exists.
+      # @return [Boolean] Returns `true` if this rrset exists.
       def exists?
         !get_resource.data[:resource_record_sets].find { |details|
           if set_identifier
@@ -159,9 +171,9 @@ module AWS
         end
 
         @change_info = batch.call()
-        @name = @create_options[:name]
-        @type = @create_options[:type]
-        @set_identifier = @create_options[:set_identifier]
+        @name = @create_options[:name] || @name
+        @type = @create_options[:type] || @type
+        @set_identifier = @create_options[:set_identifier] || @set_identifier
         @create_options = {}
         self
       end
@@ -199,9 +211,7 @@ module AWS
         DeleteRequest.new(options[:name], options[:type], options)
       end
 
-
-      private
-
+      protected
 
       def resource_identifiers
         [[:name, name], [:type, type], [:set_identifier, set_identifier]]
@@ -217,6 +227,8 @@ module AWS
         client.list_resource_record_sets(options)
       end
 
+      private
+
       # Format a hash of options that can be used to initialize a change
       # request.
       # @return [Hash]
@@ -229,6 +241,8 @@ module AWS
           options[:region] = region if region
           options[:ttl] = ttl if ttl
           options[:resource_records] = resource_records if resource_records && !resource_records.empty?
+          options[:failover] = failover if failover
+          options[:health_check_id] = health_check_id if health_check_id
         end
         options
       end

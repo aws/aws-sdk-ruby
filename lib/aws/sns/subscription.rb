@@ -23,7 +23,7 @@ module AWS
       include Core::Model
       include HasDeliveryPolicy
 
-      # @private
+      # @api private
       def initialize(arn, opts = {})
         @arn = arn
         @topic_arn = opts[:topic_arn]
@@ -42,11 +42,11 @@ module AWS
 
       # @return [String] The protocol.  Possible values:
       #
-      #  * +:http+
-      #  * +:https+
-      #  * +:email+
-      #  * +:email_json+
-      #  * +:sqs+
+      #  * `:http`
+      #  * `:https`
+      #  * `:email`
+      #  * `:email_json`
+      #  * `:sqs`
       attr_reader :protocol
 
       # @return [String] The AWS account ID of the subscription owner.
@@ -61,7 +61,7 @@ module AWS
 
       # @return [Topic]
       def topic
-        Topic.new(topic_arn, :config => config)  
+        Topic.new(topic_arn, :config => config)
       end
 
       # Deletes this subscription.
@@ -71,7 +71,7 @@ module AWS
         nil
       end
 
-      # @return [Boolean] Returns true if the subscription confirmation 
+      # @return [Boolean] Returns true if the subscription confirmation
       #   request was authenticated.
       def confirmation_authenticated?
 
@@ -97,6 +97,22 @@ module AWS
         get_attributes['EffectiveDeliveryPolicy']
       end
 
+      # @return [Boolean] Returns true if the subscriptions has raw message delivery enabled.
+      def raw_message_delivery
+        raw_value = get_attributes['RawMessageDelivery']
+        raw_value.downcase == 'true'
+      end
+
+      # @param [Boolean] raw_delivery Whether to enable or disable raw message delivery.
+      def raw_message_delivery= raw_delivery
+        value = if raw_delivery
+          'true'
+        else
+          'false'
+        end
+        update_subscription_attribute('RawMessageDelivery', value)
+      end
+
       # @note This method requests the entire list of subscriptions
       #   for the topic (if known) or the account (if the topic is not
       #   known).  It can be expensive if the number of subscriptions
@@ -112,7 +128,7 @@ module AWS
         end
       end
 
-      # @private
+      # @api private
       def inspect
         "<#{self.class} arn:#{arn}>"
       end
@@ -125,12 +141,17 @@ module AWS
       alias_method :==, :eql?
 
       protected
-      def update_delivery_policy policy_json
+      def update_subscription_attribute name, value
         client_opts = {}
         client_opts[:subscription_arn] = arn
-        client_opts[:attribute_name] = 'DeliveryPolicy'
-        client_opts[:attribute_value] = policy_json
+        client_opts[:attribute_name] = name
+        client_opts[:attribute_value] = value
         client.set_subscription_attributes(client_opts)
+      end
+
+      protected
+      def update_delivery_policy policy_json
+        update_subscription_attribute('DeliveryPolicy', policy_json)
       end
 
       protected

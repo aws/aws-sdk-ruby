@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -46,12 +46,63 @@
                     :rename: :ip_ranges
                     :list: true
             :ignore: true
+- :name: AuthorizeSnapshotAccess
+  :method: :authorize_snapshot_access
+  :inputs:
+    SnapshotIdentifier:
+    - :string
+    - :required
+    SnapshotClusterIdentifier:
+    - :string
+    AccountWithRestoreAccess:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      AuthorizeSnapshotAccessResult:
+        :ignore: true
+        :children:
+          Snapshot:
+            :children:
+              SnapshotCreateTime:
+                :type: :time
+              Port:
+                :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              NumberOfNodes:
+                :type: :integer
+              Encrypted:
+                :type: :boolean
+              EncryptedWithHSM:
+                :type: :boolean
+              AccountsWithRestoreAccess:
+                :ignore: true
+                :children:
+                  AccountWithRestoreAccess:
+                    :rename: :accounts_with_restore_access
+                    :list: true
+              TotalBackupSizeInMegaBytes:
+                :type: :float
+              ActualIncrementalBackupSizeInMegaBytes:
+                :type: :float
+              BackupProgressInMegaBytes:
+                :type: :float
+              CurrentBackupRateInMegaBytesPerSecond:
+                :type: :float
+              EstimatedSecondsToCompletion:
+                :type: :integer
+              ElapsedTimeInSeconds:
+                :type: :integer
+            :ignore: true
 - :name: CopyClusterSnapshot
   :method: :copy_cluster_snapshot
   :inputs:
     SourceSnapshotIdentifier:
     - :string
     - :required
+    SourceSnapshotClusterIdentifier:
+    - :string
     TargetSnapshotIdentifier:
     - :string
     - :required
@@ -69,6 +120,28 @@
               ClusterCreateTime:
                 :type: :time
               NumberOfNodes:
+                :type: :integer
+              Encrypted:
+                :type: :boolean
+              EncryptedWithHSM:
+                :type: :boolean
+              AccountsWithRestoreAccess:
+                :ignore: true
+                :children:
+                  AccountWithRestoreAccess:
+                    :rename: :accounts_with_restore_access
+                    :list: true
+              TotalBackupSizeInMegaBytes:
+                :type: :float
+              ActualIncrementalBackupSizeInMegaBytes:
+                :type: :float
+              BackupProgressInMegaBytes:
+                :type: :float
+              CurrentBackupRateInMegaBytesPerSecond:
+                :type: :float
+              EstimatedSecondsToCompletion:
+                :type: :integer
+              ElapsedTimeInSeconds:
                 :type: :integer
             :ignore: true
 - :name: CreateCluster
@@ -116,6 +189,14 @@
     - :integer
     PubliclyAccessible:
     - :boolean
+    Encrypted:
+    - :boolean
+    HsmClientCertificateIdentifier:
+    - :string
+    HsmConfigurationIdentifier:
+    - :string
+    ElasticIp:
+    - :string
   :outputs:
     :children:
       CreateClusterResult:
@@ -161,6 +242,30 @@
                 :type: :integer
               PubliclyAccessible:
                 :type: :boolean
+              Encrypted:
+                :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
+              ClusterSnapshotCopyStatus:
+                :children:
+                  RetentionPeriod:
+                    :type: :integer
+              ClusterNodes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :cluster_nodes
+                    :list: true
             :ignore: true
 - :name: CreateClusterParameterGroup
   :method: :create_cluster_parameter_group
@@ -234,6 +339,28 @@
                 :type: :time
               NumberOfNodes:
                 :type: :integer
+              Encrypted:
+                :type: :boolean
+              EncryptedWithHSM:
+                :type: :boolean
+              AccountsWithRestoreAccess:
+                :ignore: true
+                :children:
+                  AccountWithRestoreAccess:
+                    :rename: :accounts_with_restore_access
+                    :list: true
+              TotalBackupSizeInMegaBytes:
+                :type: :float
+              ActualIncrementalBackupSizeInMegaBytes:
+                :type: :float
+              BackupProgressInMegaBytes:
+                :type: :float
+              CurrentBackupRateInMegaBytesPerSecond:
+                :type: :float
+              EstimatedSecondsToCompletion:
+                :type: :integer
+              ElapsedTimeInSeconds:
+                :type: :integer
             :ignore: true
 - :name: CreateClusterSubnetGroup
   :method: :create_cluster_subnet_group
@@ -261,6 +388,92 @@
                   Subnet:
                     :rename: :subnets
                     :list: true
+            :ignore: true
+- :name: CreateEventSubscription
+  :method: :create_event_subscription
+  :inputs:
+    SubscriptionName:
+    - :string
+    - :required
+    SnsTopicArn:
+    - :string
+    - :required
+    SourceType:
+    - :string
+    SourceIds:
+    - :membered_list:
+      - :string
+    EventCategories:
+    - :membered_list:
+      - :string
+    Severity:
+    - :string
+    Enabled:
+    - :boolean
+  :outputs:
+    :children:
+      CreateEventSubscriptionResult:
+        :ignore: true
+        :children:
+          EventSubscription:
+            :children:
+              SubscriptionCreationTime:
+                :type: :time
+              SourceIdsList:
+                :ignore: true
+                :children:
+                  SourceId:
+                    :rename: :source_ids_list
+                    :list: true
+              EventCategoriesList:
+                :ignore: true
+                :children:
+                  EventCategory:
+                    :rename: :event_categories_list
+                    :list: true
+              Enabled:
+                :type: :boolean
+            :ignore: true
+- :name: CreateHsmClientCertificate
+  :method: :create_hsm_client_certificate
+  :inputs:
+    HsmClientCertificateIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateHsmClientCertificateResult:
+        :ignore: true
+        :children:
+          HsmClientCertificate:
+            :ignore: true
+- :name: CreateHsmConfiguration
+  :method: :create_hsm_configuration
+  :inputs:
+    HsmConfigurationIdentifier:
+    - :string
+    - :required
+    Description:
+    - :string
+    - :required
+    HsmIpAddress:
+    - :string
+    - :required
+    HsmPartitionName:
+    - :string
+    - :required
+    HsmPartitionPassword:
+    - :string
+    - :required
+    HsmServerPublicCertificate:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CreateHsmConfigurationResult:
+        :ignore: true
+        :children:
+          HsmConfiguration:
             :ignore: true
 - :name: DeleteCluster
   :method: :delete_cluster
@@ -317,6 +530,30 @@
                 :type: :integer
               PubliclyAccessible:
                 :type: :boolean
+              Encrypted:
+                :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
+              ClusterSnapshotCopyStatus:
+                :children:
+                  RetentionPeriod:
+                    :type: :integer
+              ClusterNodes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :cluster_nodes
+                    :list: true
             :ignore: true
 - :name: DeleteClusterParameterGroup
   :method: :delete_cluster_parameter_group
@@ -344,6 +581,8 @@
     SnapshotIdentifier:
     - :string
     - :required
+    SnapshotClusterIdentifier:
+    - :string
   :outputs:
     :children:
       DeleteClusterSnapshotResult:
@@ -359,6 +598,28 @@
                 :type: :time
               NumberOfNodes:
                 :type: :integer
+              Encrypted:
+                :type: :boolean
+              EncryptedWithHSM:
+                :type: :boolean
+              AccountsWithRestoreAccess:
+                :ignore: true
+                :children:
+                  AccountWithRestoreAccess:
+                    :rename: :accounts_with_restore_access
+                    :list: true
+              TotalBackupSizeInMegaBytes:
+                :type: :float
+              ActualIncrementalBackupSizeInMegaBytes:
+                :type: :float
+              BackupProgressInMegaBytes:
+                :type: :float
+              CurrentBackupRateInMegaBytesPerSecond:
+                :type: :float
+              EstimatedSecondsToCompletion:
+                :type: :integer
+              ElapsedTimeInSeconds:
+                :type: :integer
             :ignore: true
 - :name: DeleteClusterSubnetGroup
   :method: :delete_cluster_subnet_group
@@ -369,6 +630,37 @@
   :outputs:
     :children:
       DeleteClusterSubnetGroupResult:
+        :ignore: true
+- :name: DeleteEventSubscription
+  :method: :delete_event_subscription
+  :inputs:
+    SubscriptionName:
+    - :string
+    - :required
+    - :required
+  :outputs:
+    :children:
+      DeleteEventSubscriptionResult:
+        :ignore: true
+- :name: DeleteHsmClientCertificate
+  :method: :delete_hsm_client_certificate
+  :inputs:
+    HsmClientCertificateIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteHsmClientCertificateResult:
+        :ignore: true
+- :name: DeleteHsmConfiguration
+  :method: :delete_hsm_configuration
+  :inputs:
+    HsmConfigurationIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteHsmConfigurationResult:
         :ignore: true
 - :name: DescribeClusterParameterGroups
   :method: :describe_cluster_parameter_groups
@@ -466,6 +758,8 @@
     - :integer
     Marker:
     - :string
+    OwnerAccount:
+    - :string
   :outputs:
     :children:
       DescribeClusterSnapshotsResult:
@@ -485,6 +779,28 @@
                   ClusterCreateTime:
                     :type: :time
                   NumberOfNodes:
+                    :type: :integer
+                  Encrypted:
+                    :type: :boolean
+                  EncryptedWithHSM:
+                    :type: :boolean
+                  AccountsWithRestoreAccess:
+                    :ignore: true
+                    :children:
+                      AccountWithRestoreAccess:
+                        :rename: :accounts_with_restore_access
+                        :list: true
+                  TotalBackupSizeInMegaBytes:
+                    :type: :float
+                  ActualIncrementalBackupSizeInMegaBytes:
+                    :type: :float
+                  BackupProgressInMegaBytes:
+                    :type: :float
+                  CurrentBackupRateInMegaBytesPerSecond:
+                    :type: :float
+                  EstimatedSecondsToCompletion:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
                     :type: :integer
 - :name: DescribeClusterSubnetGroups
   :method: :describe_cluster_subnet_groups
@@ -594,6 +910,30 @@
                     :type: :integer
                   PubliclyAccessible:
                     :type: :boolean
+                  Encrypted:
+                    :type: :boolean
+                  RestoreStatus:
+                    :children:
+                      CurrentRestoreRateInMegaBytesPerSecond:
+                        :type: :float
+                      SnapshotSizeInMegaBytes:
+                        :type: :integer
+                      ProgressInMegaBytes:
+                        :type: :integer
+                      ElapsedTimeInSeconds:
+                        :type: :integer
+                      EstimatedTimeToCompletionInSeconds:
+                        :type: :integer
+                  ClusterSnapshotCopyStatus:
+                    :children:
+                      RetentionPeriod:
+                        :type: :integer
+                  ClusterNodes:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :cluster_nodes
+                        :list: true
 - :name: DescribeDefaultClusterParameters
   :method: :describe_default_cluster_parameters
   :inputs:
@@ -621,6 +961,73 @@
                       IsModifiable:
                         :type: :boolean
             :ignore: true
+- :name: DescribeEventCategories
+  :method: :describe_event_categories
+  :inputs:
+    SourceType:
+    - :string
+  :outputs:
+    :children:
+      DescribeEventCategoriesResult:
+        :ignore: true
+        :children:
+          EventCategoriesMapList:
+            :ignore: true
+            :children:
+              EventCategoriesMap:
+                :rename: :event_categories_map_list
+                :list: true
+                :children:
+                  Events:
+                    :ignore: true
+                    :children:
+                      EventInfoMap:
+                        :rename: :events
+                        :list: true
+                        :children:
+                          EventCategories:
+                            :ignore: true
+                            :children:
+                              EventCategory:
+                                :rename: :event_categories
+                                :list: true
+- :name: DescribeEventSubscriptions
+  :method: :describe_event_subscriptions
+  :inputs:
+    SubscriptionName:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeEventSubscriptionsResult:
+        :ignore: true
+        :children:
+          EventSubscriptionsList:
+            :ignore: true
+            :children:
+              EventSubscription:
+                :rename: :event_subscriptions_list
+                :list: true
+                :children:
+                  SubscriptionCreationTime:
+                    :type: :time
+                  SourceIdsList:
+                    :ignore: true
+                    :children:
+                      SourceId:
+                        :rename: :source_ids_list
+                        :list: true
+                  EventCategoriesList:
+                    :ignore: true
+                    :children:
+                      EventCategory:
+                        :rename: :event_categories_list
+                        :list: true
+                  Enabled:
+                    :type: :boolean
 - :name: DescribeEvents
   :method: :describe_events
   :inputs:
@@ -650,8 +1057,71 @@
                 :rename: :events
                 :list: true
                 :children:
+                  EventCategories:
+                    :ignore: true
+                    :children:
+                      EventCategory:
+                        :rename: :event_categories
+                        :list: true
                   Date:
                     :type: :time
+- :name: DescribeHsmClientCertificates
+  :method: :describe_hsm_client_certificates
+  :inputs:
+    HsmClientCertificateIdentifier:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeHsmClientCertificatesResult:
+        :ignore: true
+        :children:
+          HsmClientCertificates:
+            :ignore: true
+            :children:
+              HsmClientCertificate:
+                :rename: :hsm_client_certificates
+                :list: true
+- :name: DescribeHsmConfigurations
+  :method: :describe_hsm_configurations
+  :inputs:
+    HsmConfigurationIdentifier:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+  :outputs:
+    :children:
+      DescribeHsmConfigurationsResult:
+        :ignore: true
+        :children:
+          HsmConfigurations:
+            :ignore: true
+            :children:
+              HsmConfiguration:
+                :rename: :hsm_configurations
+                :list: true
+- :name: DescribeLoggingStatus
+  :method: :describe_logging_status
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DescribeLoggingStatusResult:
+        :ignore: true
+        :children:
+          LoggingEnabled:
+            :type: :boolean
+          LastSuccessfulDeliveryTime:
+            :type: :time
+          LastFailureTime:
+            :type: :time
 - :name: DescribeOrderableClusterOptions
   :method: :describe_orderable_cluster_options
   :inputs:
@@ -685,10 +1155,6 @@
   :method: :describe_reserved_node_offerings
   :inputs:
     ReservedNodeOfferingId:
-    - :string
-    NodeType:
-    - :string
-    Duration:
     - :string
     MaxRecords:
     - :integer
@@ -725,12 +1191,6 @@
   :method: :describe_reserved_nodes
   :inputs:
     ReservedNodeId:
-    - :string
-    ReservedNodeOfferingId:
-    - :string
-    NodeType:
-    - :string
-    Duration:
     - :string
     MaxRecords:
     - :integer
@@ -798,6 +1258,212 @@
               member:
                 :rename: :import_tables_not_started
                 :list: true
+          AvgResizeRateInMegaBytesPerSecond:
+            :type: :float
+          TotalResizeDataInMegaBytes:
+            :type: :integer
+          ProgressInMegaBytes:
+            :type: :integer
+          ElapsedTimeInSeconds:
+            :type: :integer
+          EstimatedTimeToCompletionInSeconds:
+            :type: :integer
+- :name: DisableLogging
+  :method: :disable_logging
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DisableLoggingResult:
+        :ignore: true
+        :children:
+          LoggingEnabled:
+            :type: :boolean
+          LastSuccessfulDeliveryTime:
+            :type: :time
+          LastFailureTime:
+            :type: :time
+- :name: DisableSnapshotCopy
+  :method: :disable_snapshot_copy
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DisableSnapshotCopyResult:
+        :ignore: true
+        :children:
+          Cluster:
+            :children:
+              Endpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              AutomatedSnapshotRetentionPeriod:
+                :type: :integer
+              ClusterSecurityGroups:
+                :ignore: true
+                :children:
+                  ClusterSecurityGroup:
+                    :rename: :cluster_security_groups
+                    :list: true
+              VpcSecurityGroups:
+                :ignore: true
+                :children:
+                  VpcSecurityGroup:
+                    :rename: :vpc_security_groups
+                    :list: true
+              ClusterParameterGroups:
+                :ignore: true
+                :children:
+                  ClusterParameterGroup:
+                    :rename: :cluster_parameter_groups
+                    :list: true
+              PendingModifiedValues:
+                :children:
+                  NumberOfNodes:
+                    :type: :integer
+                  AutomatedSnapshotRetentionPeriod:
+                    :type: :integer
+              AllowVersionUpgrade:
+                :type: :boolean
+              NumberOfNodes:
+                :type: :integer
+              PubliclyAccessible:
+                :type: :boolean
+              Encrypted:
+                :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
+              ClusterSnapshotCopyStatus:
+                :children:
+                  RetentionPeriod:
+                    :type: :integer
+              ClusterNodes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :cluster_nodes
+                    :list: true
+            :ignore: true
+- :name: EnableLogging
+  :method: :enable_logging
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+    BucketName:
+    - :string
+    - :required
+    S3KeyPrefix:
+    - :string
+  :outputs:
+    :children:
+      EnableLoggingResult:
+        :ignore: true
+        :children:
+          LoggingEnabled:
+            :type: :boolean
+          LastSuccessfulDeliveryTime:
+            :type: :time
+          LastFailureTime:
+            :type: :time
+- :name: EnableSnapshotCopy
+  :method: :enable_snapshot_copy
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+    DestinationRegion:
+    - :string
+    - :required
+    RetentionPeriod:
+    - :integer
+  :outputs:
+    :children:
+      EnableSnapshotCopyResult:
+        :ignore: true
+        :children:
+          Cluster:
+            :children:
+              Endpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              AutomatedSnapshotRetentionPeriod:
+                :type: :integer
+              ClusterSecurityGroups:
+                :ignore: true
+                :children:
+                  ClusterSecurityGroup:
+                    :rename: :cluster_security_groups
+                    :list: true
+              VpcSecurityGroups:
+                :ignore: true
+                :children:
+                  VpcSecurityGroup:
+                    :rename: :vpc_security_groups
+                    :list: true
+              ClusterParameterGroups:
+                :ignore: true
+                :children:
+                  ClusterParameterGroup:
+                    :rename: :cluster_parameter_groups
+                    :list: true
+              PendingModifiedValues:
+                :children:
+                  NumberOfNodes:
+                    :type: :integer
+                  AutomatedSnapshotRetentionPeriod:
+                    :type: :integer
+              AllowVersionUpgrade:
+                :type: :boolean
+              NumberOfNodes:
+                :type: :integer
+              PubliclyAccessible:
+                :type: :boolean
+              Encrypted:
+                :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
+              ClusterSnapshotCopyStatus:
+                :children:
+                  RetentionPeriod:
+                    :type: :integer
+              ClusterNodes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :cluster_nodes
+                    :list: true
+            :ignore: true
 - :name: ModifyCluster
   :method: :modify_cluster
   :inputs:
@@ -828,6 +1494,10 @@
     - :string
     AllowVersionUpgrade:
     - :boolean
+    HsmClientCertificateIdentifier:
+    - :string
+    HsmConfigurationIdentifier:
+    - :string
   :outputs:
     :children:
       ModifyClusterResult:
@@ -873,6 +1543,30 @@
                 :type: :integer
               PubliclyAccessible:
                 :type: :boolean
+              Encrypted:
+                :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
+              ClusterSnapshotCopyStatus:
+                :children:
+                  RetentionPeriod:
+                    :type: :integer
+              ClusterNodes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :cluster_nodes
+                    :list: true
             :ignore: true
 - :name: ModifyClusterParameterGroup
   :method: :modify_cluster_parameter_group
@@ -930,14 +1624,135 @@
                     :rename: :subnets
                     :list: true
             :ignore: true
+- :name: ModifyEventSubscription
+  :method: :modify_event_subscription
+  :inputs:
+    SubscriptionName:
+    - :string
+    - :required
+    SnsTopicArn:
+    - :string
+    SourceType:
+    - :string
+    SourceIds:
+    - :membered_list:
+      - :string
+    EventCategories:
+    - :membered_list:
+      - :string
+    Severity:
+    - :string
+    Enabled:
+    - :boolean
+  :outputs:
+    :children:
+      ModifyEventSubscriptionResult:
+        :ignore: true
+        :children:
+          EventSubscription:
+            :children:
+              SubscriptionCreationTime:
+                :type: :time
+              SourceIdsList:
+                :ignore: true
+                :children:
+                  SourceId:
+                    :rename: :source_ids_list
+                    :list: true
+              EventCategoriesList:
+                :ignore: true
+                :children:
+                  EventCategory:
+                    :rename: :event_categories_list
+                    :list: true
+              Enabled:
+                :type: :boolean
+            :ignore: true
+- :name: ModifySnapshotCopyRetentionPeriod
+  :method: :modify_snapshot_copy_retention_period
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+    RetentionPeriod:
+    - :integer
+    - :required
+  :outputs:
+    :children:
+      ModifySnapshotCopyRetentionPeriodResult:
+        :ignore: true
+        :children:
+          Cluster:
+            :children:
+              Endpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              AutomatedSnapshotRetentionPeriod:
+                :type: :integer
+              ClusterSecurityGroups:
+                :ignore: true
+                :children:
+                  ClusterSecurityGroup:
+                    :rename: :cluster_security_groups
+                    :list: true
+              VpcSecurityGroups:
+                :ignore: true
+                :children:
+                  VpcSecurityGroup:
+                    :rename: :vpc_security_groups
+                    :list: true
+              ClusterParameterGroups:
+                :ignore: true
+                :children:
+                  ClusterParameterGroup:
+                    :rename: :cluster_parameter_groups
+                    :list: true
+              PendingModifiedValues:
+                :children:
+                  NumberOfNodes:
+                    :type: :integer
+                  AutomatedSnapshotRetentionPeriod:
+                    :type: :integer
+              AllowVersionUpgrade:
+                :type: :boolean
+              NumberOfNodes:
+                :type: :integer
+              PubliclyAccessible:
+                :type: :boolean
+              Encrypted:
+                :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
+              ClusterSnapshotCopyStatus:
+                :children:
+                  RetentionPeriod:
+                    :type: :integer
+              ClusterNodes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :cluster_nodes
+                    :list: true
+            :ignore: true
 - :name: PurchaseReservedNodeOffering
   :method: :purchase_reserved_node_offering
   :inputs:
     ReservedNodeOfferingId:
     - :string
     - :required
-    ReservedNodeId:
-    - :string
     NodeCount:
     - :integer
   :outputs:
@@ -1018,6 +1833,30 @@
                 :type: :integer
               PubliclyAccessible:
                 :type: :boolean
+              Encrypted:
+                :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
+              ClusterSnapshotCopyStatus:
+                :children:
+                  RetentionPeriod:
+                    :type: :integer
+              ClusterNodes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :cluster_nodes
+                    :list: true
             :ignore: true
 - :name: ResetClusterParameterGroup
   :method: :reset_cluster_parameter_group
@@ -1059,6 +1898,8 @@
     SnapshotIdentifier:
     - :string
     - :required
+    SnapshotClusterIdentifier:
+    - :string
     Port:
     - :integer
     AvailabilityZone:
@@ -1069,6 +1910,14 @@
     - :string
     PubliclyAccessible:
     - :boolean
+    OwnerAccount:
+    - :string
+    HsmClientCertificateIdentifier:
+    - :string
+    HsmConfigurationIdentifier:
+    - :string
+    ElasticIp:
+    - :string
   :outputs:
     :children:
       RestoreFromClusterSnapshotResult:
@@ -1114,6 +1963,30 @@
                 :type: :integer
               PubliclyAccessible:
                 :type: :boolean
+              Encrypted:
+                :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
+              ClusterSnapshotCopyStatus:
+                :children:
+                  RetentionPeriod:
+                    :type: :integer
+              ClusterNodes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :cluster_nodes
+                    :list: true
             :ignore: true
 - :name: RevokeClusterSecurityGroupIngress
   :method: :revoke_cluster_security_group_ingress
@@ -1145,5 +2018,130 @@
                 :children:
                   IPRange:
                     :rename: :ip_ranges
+                    :list: true
+            :ignore: true
+- :name: RevokeSnapshotAccess
+  :method: :revoke_snapshot_access
+  :inputs:
+    SnapshotIdentifier:
+    - :string
+    - :required
+    SnapshotClusterIdentifier:
+    - :string
+    AccountWithRestoreAccess:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      RevokeSnapshotAccessResult:
+        :ignore: true
+        :children:
+          Snapshot:
+            :children:
+              SnapshotCreateTime:
+                :type: :time
+              Port:
+                :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              NumberOfNodes:
+                :type: :integer
+              Encrypted:
+                :type: :boolean
+              EncryptedWithHSM:
+                :type: :boolean
+              AccountsWithRestoreAccess:
+                :ignore: true
+                :children:
+                  AccountWithRestoreAccess:
+                    :rename: :accounts_with_restore_access
+                    :list: true
+              TotalBackupSizeInMegaBytes:
+                :type: :float
+              ActualIncrementalBackupSizeInMegaBytes:
+                :type: :float
+              BackupProgressInMegaBytes:
+                :type: :float
+              CurrentBackupRateInMegaBytesPerSecond:
+                :type: :float
+              EstimatedSecondsToCompletion:
+                :type: :integer
+              ElapsedTimeInSeconds:
+                :type: :integer
+            :ignore: true
+- :name: RotateEncryptionKey
+  :method: :rotate_encryption_key
+  :inputs:
+    ClusterIdentifier:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      RotateEncryptionKeyResult:
+        :ignore: true
+        :children:
+          Cluster:
+            :children:
+              Endpoint:
+                :children:
+                  Port:
+                    :type: :integer
+              ClusterCreateTime:
+                :type: :time
+              AutomatedSnapshotRetentionPeriod:
+                :type: :integer
+              ClusterSecurityGroups:
+                :ignore: true
+                :children:
+                  ClusterSecurityGroup:
+                    :rename: :cluster_security_groups
+                    :list: true
+              VpcSecurityGroups:
+                :ignore: true
+                :children:
+                  VpcSecurityGroup:
+                    :rename: :vpc_security_groups
+                    :list: true
+              ClusterParameterGroups:
+                :ignore: true
+                :children:
+                  ClusterParameterGroup:
+                    :rename: :cluster_parameter_groups
+                    :list: true
+              PendingModifiedValues:
+                :children:
+                  NumberOfNodes:
+                    :type: :integer
+                  AutomatedSnapshotRetentionPeriod:
+                    :type: :integer
+              AllowVersionUpgrade:
+                :type: :boolean
+              NumberOfNodes:
+                :type: :integer
+              PubliclyAccessible:
+                :type: :boolean
+              Encrypted:
+                :type: :boolean
+              RestoreStatus:
+                :children:
+                  CurrentRestoreRateInMegaBytesPerSecond:
+                    :type: :float
+                  SnapshotSizeInMegaBytes:
+                    :type: :integer
+                  ProgressInMegaBytes:
+                    :type: :integer
+                  ElapsedTimeInSeconds:
+                    :type: :integer
+                  EstimatedTimeToCompletionInSeconds:
+                    :type: :integer
+              ClusterSnapshotCopyStatus:
+                :children:
+                  RetentionPeriod:
+                    :type: :integer
+              ClusterNodes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :cluster_nodes
                     :list: true
             :ignore: true

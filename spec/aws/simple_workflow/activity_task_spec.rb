@@ -59,7 +59,7 @@ module AWS
       context '#record_heartbeat!' do
 
         let(:response) { client.stub_for(:record_activity_task_heartbeat) }
-      
+
         it 'calls record activity task heartbeat on the client' do
           client.should_receive(:record_activity_task_heartbeat).with(
             :task_token => task.task_token
@@ -127,7 +127,7 @@ module AWS
 
         it 'accepts details' do
           client.should_receive(:respond_activity_task_failed).with(
-            :task_token => task.task_token, 
+            :task_token => task.task_token,
             :reason => 'reason',
             :details => 'details')
           task.fail! :reason => 'reason', :details => 'details'
@@ -136,7 +136,7 @@ module AWS
       end
 
       context '#responded?' do
-        
+
         it 'starts out as false' do
           task.responded?.should == false
         end

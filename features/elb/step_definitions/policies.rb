@@ -20,7 +20,7 @@ Given /^I create a "([^"]*)" policy named "([^"]*)" with:$/ do |policy_type, pol
     attributes[name] << hash['VALUE']
   end
 
-  @load_balancer_policy = @load_balancer.policies.create(policy_name, 
+  @load_balancer_policy = @load_balancer.policies.create(policy_name,
     policy_type, attributes)
 
 end

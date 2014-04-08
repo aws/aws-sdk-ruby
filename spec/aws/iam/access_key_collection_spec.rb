@@ -28,8 +28,8 @@ module AWS
 
         let(:access_keys) { AccessKeyCollection.new(:user => user) }
 
-        context '#user' do 
-          
+        context '#user' do
+
           it 'returns the user passed to #new' do
             access_keys.user.should == user
           end
@@ -47,7 +47,7 @@ module AWS
         context '#create' do
 
           let(:response) { client.stub_for(:create_access_key) }
-          
+
           before(:each) do
 
             key = {
@@ -61,9 +61,9 @@ module AWS
             client.stub(:create_access_key).and_return(response)
 
           end
-          
+
           it 'calls create_access_key on the client' do
-            
+
             client.should_receive(:create_access_key).
               with(:user_name => user.name).
               and_return(response)
@@ -86,11 +86,11 @@ module AWS
         context '#[]' do
 
           let(:response) { client.stub_for(:list_access_keys) }
-          
+
           before(:each) do
             response.data[:access_key_metadata] = [
               {
-                :access_key_id => 'id', 
+                :access_key_id => 'id',
                 :user_name => user.name,
                 :status => 'Active',
               }
@@ -116,7 +116,7 @@ module AWS
               access_key.secret
             }.should raise_error(/only available for new access keys/)
           end
-          
+
         end
 
         it_behaves_like "a pageable collection with limits" do
@@ -178,7 +178,7 @@ module AWS
         context '#create' do
 
           let(:response) { client.stub_for(:create_access_key) }
-          
+
           before(:each) do
 
             key = {
@@ -192,9 +192,9 @@ module AWS
             client.stub(:create_access_key).and_return(response)
 
           end
-          
+
           it 'calls create_access_key on the client' do
-            
+
             client.should_receive(:create_access_key).with({}).
               and_return(response)
 
@@ -222,7 +222,7 @@ module AWS
             access_key.user.should == nil
             access_key.config.should == access_keys.config
           end
-          
+
         end
 
       end

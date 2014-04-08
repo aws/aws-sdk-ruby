@@ -24,7 +24,7 @@ Feature: EC2 Security Groups
     Then The security group should be in the list
 
   Scenario: Delete a security group
-    Given I create a security group 
+    Given I create a security group
     When I delete the security group
     Then The security group should not be in the list
 

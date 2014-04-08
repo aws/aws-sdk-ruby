@@ -109,7 +109,7 @@ module AWS
                 :ip_ranges => [
                   { :cidr_ip => '0.0.0.0/0' },
                   { :cidr_ip => '1.1.1.1/1' },
-                ] 
+                ]
               }
             ])
           group.send(method, 'TCP', 22, '0.0.0.0/0', '1.1.1.1/1')
@@ -121,7 +121,7 @@ module AWS
               { :ip_protocol => 'tcp', :from_port => 22, :to_port => 22,
                 :user_id_group_pairs => [
                   { :group_id => 'foo', :user_id => 'bar' },
-                ] 
+                ]
               }
             ])
           g1 = SecurityGroup.new('foo', :owner_id => 'bar')
@@ -134,7 +134,7 @@ module AWS
               { :ip_protocol => 'tcp', :from_port => 22, :to_port => 22,
                 :user_id_group_pairs => [
                   { :group_id => 'foo', :user_id => 'bar' },
-                ] 
+                ]
               }
             ])
           group.send(method, 'TCP', 22,
@@ -179,7 +179,7 @@ module AWS
               { :ip_protocol => '-1', :ip_ranges => [
                   { :cidr_ip => '0.0.0.0/0' },
                   { :cidr_ip => '1.1.1.1/1' },
-                ] 
+                ]
               }
             ])
           group.send(method, '0.0.0.0/0', '1.1.1.1/1')
@@ -188,10 +188,10 @@ module AWS
         it 'accepts groups' do
           client.should_receive(client_method).
             with(:group_id => 'id', :ip_permissions => [
-              { :ip_protocol => '-1', 
+              { :ip_protocol => '-1',
                 :user_id_group_pairs => [
                   { :group_id => 'foo', :user_id => 'bar' },
-                ] 
+                ]
               }
             ])
           g1 = SecurityGroup.new('foo', :owner_id => 'bar')
@@ -201,10 +201,10 @@ module AWS
         it 'accepts group hashes with a group_id' do
           client.should_receive(client_method).
             with(:group_id => 'id', :ip_permissions => [
-              { :ip_protocol => '-1', 
+              { :ip_protocol => '-1',
                 :user_id_group_pairs => [
                   { :group_id => 'foo' },
-                ] 
+                ]
               }
             ])
           group.send(method, { :group_id => 'foo' })
@@ -213,10 +213,10 @@ module AWS
         it 'accepts group hashes with a group_name' do
           client.should_receive(client_method).
             with(:group_id => 'id', :ip_permissions => [
-              { :ip_protocol => '-1', 
+              { :ip_protocol => '-1',
                 :user_id_group_pairs => [
                   { :group_name => 'foo' },
-                ] 
+                ]
               }
             ])
           group.send(method, { :group_name => 'foo', })
@@ -225,10 +225,10 @@ module AWS
         it 'accepts group hashes with a group_id and user_id' do
           client.should_receive(client_method).
             with(:group_id => 'id', :ip_permissions => [
-              { :ip_protocol => '-1', 
+              { :ip_protocol => '-1',
                 :user_id_group_pairs => [
                   { :group_id => 'foo', :user_id => 'bar' },
-                ] 
+                ]
               }
             ])
           group.send(method, { :group_id => 'foo', :user_id => 'bar' })
@@ -237,10 +237,10 @@ module AWS
         it 'accepts group hashes with a group_name and user_id' do
           client.should_receive(client_method).
             with(:group_id => 'id', :ip_permissions => [
-              { :ip_protocol => '-1', 
+              { :ip_protocol => '-1',
                 :user_id_group_pairs => [
                   { :group_name => 'foo', :user_id => 'bar' },
-                ] 
+                ]
               }
             ])
           group.send(method, { :group_name => 'foo', :user_id => 'bar' })
@@ -249,14 +249,14 @@ module AWS
         it 'raises an error for missing group' do
           lambda {
             # must provide :group_id or :group_name
-            group.send(method, { :user_id => 'bar' }) 
+            group.send(method, { :user_id => 'bar' })
           }.should raise_error(ArgumentError, /provide :group_id or :group_name/)
         end
 
         it 'raises an error for unknown group keys' do
           lambda {
             # intentional typo
-            group.send(method, { :group_id => 'foo', :usr_id => 'typo' }) 
+            group.send(method, { :group_id => 'foo', :usr_id => 'typo' })
           }.should raise_error(ArgumentError, /only accepts the following keys/)
         end
 
@@ -265,18 +265,18 @@ module AWS
           load_balancer = ELB::LoadBalancer.new('lb-name')
           load_balancer.stub(:source_security_group).
             and_return(
-              :group_name => 'lb-group-name', 
+              :group_name => 'lb-group-name',
               :user_id => 'lb-owner-alias')
 
           client.should_receive(client_method).
             with(:group_id => 'id', :ip_permissions => [
-              { :ip_protocol => '-1', 
+              { :ip_protocol => '-1',
                 :user_id_group_pairs => [
-                  { 
+                  {
                     :group_name => 'lb-group-name',
                     :user_id => 'lb-owner-alias'
                   },
-                ] 
+                ]
               }
             ])
 
@@ -322,8 +322,8 @@ module AWS
 
           response = client.new_stub_for(:describe_security_groups)
           stub_response_group(response, "id", {
-            :group_name => 'name', 
-            :owner_id => 'abc', 
+            :group_name => 'name',
+            :owner_id => 'abc',
             :group_description => 'xyz',
           })
 
@@ -340,7 +340,7 @@ module AWS
             SecurityGroup.new('id', :config => config).name
           }.should raise_error(/unable to find the security group/)
         end
-        
+
       end
 
       context '#owner_id' do
