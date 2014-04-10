@@ -145,10 +145,10 @@ version.
 | Service Name                        | Service Class             | API Versions                   |
 | ----------------------------------- | ------------------------- | ------------------------------ |
 | Amazon CloudFront                   | Aws::CloudFront           | 2012-05-05 &mdash; 2014-01-31  |
-| Amazon CloudSearch                  | Aws::CloudSearch          | 2011-02-01                     |
+| Amazon CloudSearch                  | Aws::CloudSearch          | 2011-02-01 &mdash; 2013-01-01  |
 | Amazon CloudWatch                   | Aws::CloudWatch           | 2010-08-01                     |
 | Amazon DynamoDB                     | Aws::DynamoDB             | 2011-12-05 &mdash; 2012-08-10  |
-| Amazon Elastic Compute Cloud        | Aws::EC2                  | 2013-06-15 &mdash; 2013-10-15  |
+| Amazon Elastic Compute Cloud        | Aws::EC2                  | 2013-06-15 &mdash; 2014-02-01  |
 | Amazon Elastic MapReduce            | Aws::EMR                  | 2009-03-31                     |
 | Amazon Elastic Transcoder           | Aws::ElasticTranscoder    | 2012-09-25                     |
 | Amazon ElastiCache                  | Aws::ElastiCache          | 2012-11-15 &mdash; 2013-06-15  |
