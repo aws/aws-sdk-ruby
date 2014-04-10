@@ -241,7 +241,7 @@ def document_svc_api_operation(svc_name, client, method_name, operation)
 #{documentor.api_ref(operation)}
 #{tabs}
 @param [Hash] params ({})
-@return [Seahorse::Client::Response]
+@return [PageableResponse]
 #{errors}
 DOCSTRING
 
