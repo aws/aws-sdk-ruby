@@ -699,7 +699,7 @@ module AWS
             @signer ||= begin
               signer_class = AWS::Core::Signers.const_get(version)
               signer_args = (version == :Version4) ?
-                [credential_provider, service_signing_name, @region] :
+                [credential_provider, service_signing_name, req.region] :
                 [credential_provider]
               signer_class.new(*signer_args)
             end
