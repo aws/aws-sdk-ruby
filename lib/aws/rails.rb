@@ -134,7 +134,7 @@ module AWS
     # If you need to supply configuration values for SES that are different than
     # those in {AWS.config} then you can pass those options:
     #
-    #     AWS.add_action_mailer_delivery_method(:ses, custom_options)
+    #     AWS::Rails.add_action_mailer_delivery_method(:ses, custom_options)
     #
     # @param [Symbol] name (:amazon_ses) The name of the delivery
     #   method.  The name used here should be the same as you set in
