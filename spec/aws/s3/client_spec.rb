@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -1694,6 +1694,31 @@ module AWS
         it_should_behave_like "returns last_modified"
 
         it_should_behave_like "returns server_side_encryption"
+
+        it_should_behave_like "sends option as header", :range, "Range"
+        it_should_behave_like "sends option as header", :if_modified_since, "If-Modified-Since"
+        it_should_behave_like "sends option as header", :if_unmodified_since, "If-Unmodified-Since"
+        it_should_behave_like "sends option as header", :if_match, "If-Match"
+        it_should_behave_like "sends option as header", :if_none_match, "If-None-Match"
+
+        it_should_behave_like "formats date header", :if_modified_since, "If-Modified-Since"
+        it_should_behave_like "formats date header", :if_unmodified_since, "If-Unmodified-Since"
+
+        context ':range option' do
+          it 'calculates the correct range for an inclusive Range object' do
+            http_handler.should_receive(:handle).with do |req, resp|
+              req.headers["range"].should == "bytes=3-10"
+            end
+            client.head_object(opts.merge(:range => (3..10)))
+          end
+
+          it 'calculates the correct range for an exclusive Range object' do
+            http_handler.should_receive(:handle).with do |req, resp|
+              req.headers["range"].should == "bytes=3-9"
+            end
+            client.head_object(opts.merge(:range => (3...10)))
+          end
+        end
 
         context 'response' do
 
