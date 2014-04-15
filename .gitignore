@@ -1,3 +1,4 @@
+.bundle
 vendor/tools
 integration-test-config.json
 Gemfile.lock
