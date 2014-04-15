@@ -35,8 +35,10 @@ module AWS
           provider.providers[1].should be_a(ENVProvider)
           provider.providers[1].prefix.should == 'AWS'
           provider.providers[2].should be_a(ENVProvider)
-          provider.providers[2].prefix.should == 'AMAZON'
-          provider.providers[3].should be_a(EC2Provider)
+          provider.providers[2].prefix.should == 'AWS'
+          provider.providers[3].should be_a(ENVProvider)
+          provider.providers[3].prefix.should == 'AMAZON'
+          provider.providers[4].should be_a(EC2Provider)
         end
 
         it 'passes static credentials to a static credential provider' do
@@ -300,6 +302,27 @@ module AWS
           provider.set?.should be_false
         end
 
+
+      end
+
+      describe ENVProvider do
+
+        let(:env_variables) {{
+            'AWS_ACCESS_KEY' => 'akid',
+            'AWS_SECRET_KEY' => 'secret',
+        }}
+
+        before(:each) do
+          ENV.stub(:[]).and_return{|key| env_variables[key] }
+        end
+
+        it 'reads credentials with supplied suffixes' do
+          ENVProvider.new('AWS', :access_key_id => 'ACCESS_KEY', :secret_access_key => 'SECRET_KEY', :session_token => 'SESSION_TOKEN').
+            credentials.should == {
+              :access_key_id => 'akid',
+              :secret_access_key => 'secret',
+            }
+        end
 
       end
 
