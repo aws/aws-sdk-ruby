@@ -116,6 +116,7 @@ module AWS
           @providers = []
           @providers << StaticProvider.new(static_credentials)
           @providers << ENVProvider.new('AWS')
+          @providers << ENVProvider.new('AWS', :access_key_id => 'ACCESS_KEY', :secret_access_key => 'SECRET_KEY', :session_token => 'SESSION_TOKEN')
           @providers << ENVProvider.new('AMAZON')
           @providers << EC2Provider.new
         end
@@ -192,8 +193,9 @@ module AWS
         include Provider
 
         # @param [String] prefix The prefix to apply to the ENV variable.
-        def initialize prefix
+        def initialize(prefix, suffixes=Hash[KEYS.map{|key| [key, key.to_s.upcase]}])
           @prefix = prefix
+          @suffixes = suffixes
         end
 
         # @return [String]
@@ -203,7 +205,7 @@ module AWS
         def get_credentials
           credentials = {}
           KEYS.each do |key|
-            if value = ENV["#{@prefix}_#{key.to_s.upcase}"]
+            if value = ENV["#{@prefix}_#{@suffixes[key]}"]
               credentials[key] = value
             end
           end
