@@ -101,7 +101,8 @@ module AWS
       #   * Static credentials from AWS.config (e.g. AWS.config.access_key_id,
       #     AWS.config.secret_access_key)
       #
-      #   * The environment (ENV['AWS_ACCESS_KEY'] and ENV['AWS_SECRET_KEY']
+      #   * The environment (e.g. ENV['AWS_ACCESS_KEY_ID'] or
+      #     ENV['AMAZON_ACCESS_KEY_ID'])
       #
       #   * EC2 metadata service (checks for credentials provided by
       #     roles for instances).
@@ -114,8 +115,8 @@ module AWS
         def initialize static_credentials = {}
           @providers = []
           @providers << StaticProvider.new(static_credentials)
-          @providers << ENVProvider.new('AWS', :access_key_id => 'ACCESS_KEY', :secret_access_key => 'SECRET_KEY', :session_token => 'SESSION_TOKEN')
           @providers << ENVProvider.new('AWS')
+          @providers << ENVProvider.new('AWS', :access_key_id => 'ACCESS_KEY', :secret_access_key => 'SECRET_KEY', :session_token => 'SESSION_TOKEN')
           @providers << ENVProvider.new('AMAZON')
           @providers << EC2Provider.new
         end

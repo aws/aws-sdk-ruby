@@ -30,13 +30,14 @@ module AWS
     # You can also export them into your environment and they will be picked up
     # automatically:
     #
-    #     export AWS_ACCESS_KEY='YOUR_KEY_ID_HERE'
-    #     export AWS_SECRET_KEY='YOUR_SECRET_KEY_HERE'
+    #     export AWS_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
+    #     export AWS_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
     #
-    # Previous variable names are also checked:
+    # For compatability with other AWS gems, the credentials can also be
+    # exported like:
     #
-    #     AMAZON_ACCESS_KEY_ID / AMAZON_SECRET_ACCESS_KEY
-    #     AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY
+    #     export AMAZON_ACCESS_KEY_ID='YOUR_KEY_ID_HERE'
+    #     export AMAZON_SECRET_ACCESS_KEY='YOUR_SECRET_KEY_HERE'
     #
     # ## Modifying a Configuration
     #

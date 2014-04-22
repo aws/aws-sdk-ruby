@@ -29,8 +29,8 @@ AWS.config(access_key_id: '...', secret_access_key: '...', region: 'us-west-2')
 
 You can also specify these values via `ENV`:
 
-    export AWS_ACCESS_KEY='...'
-    export AWS_SECRET_KEY='...'
+    export AWS_ACCESS_KEY_ID='...'
+    export AWS_SECRET_ACCESS_KEY='...'
     export AWS_REGION='us-west-2'
 
 ## Basic Usage
