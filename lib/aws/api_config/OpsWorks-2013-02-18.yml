@@ -83,6 +83,12 @@
         - :string
         Version:
         - :string
+    ChefConfiguration:
+    - :structure:
+        ManageBerkshelf:
+        - :boolean
+        BerkshelfVersion:
+        - :string
     UseCustomCookbooks:
     - :boolean
     UseOpsworksSecurityGroups:
@@ -356,6 +362,12 @@
         Name:
         - :string
         Version:
+        - :string
+    ChefConfiguration:
+    - :structure:
+        ManageBerkshelf:
+        - :boolean
+        BerkshelfVersion:
         - :string
     UseCustomCookbooks:
     - :boolean
@@ -1261,6 +1273,16 @@
             Version:
               :sym: :version
               :type: :string
+        ChefConfiguration:
+          :sym: :chef_configuration
+          :type: :hash
+          :members:
+            ManageBerkshelf:
+              :sym: :manage_berkshelf
+              :type: :boolean
+            BerkshelfVersion:
+              :sym: :berkshelf_version
+              :type: :string
         UseCustomCookbooks:
           :sym: :use_custom_cookbooks
           :type: :boolean
@@ -1834,6 +1856,12 @@
         Name:
         - :string
         Version:
+        - :string
+    ChefConfiguration:
+    - :structure:
+        ManageBerkshelf:
+        - :boolean
+        BerkshelfVersion:
         - :string
     UseCustomCookbooks:
     - :boolean

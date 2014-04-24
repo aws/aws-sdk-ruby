@@ -70,30 +70,45 @@
   \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\" For more information on custom
   JSON, see Use Custom JSON to Modify the Stack Configuration JSON\n  * `:configuration_manager`
   - (Hash) The configuration manager. When you clone a stack we recommend that you
-  use the configuration manager to specify the Chef version, 0.9 or 11.4. The default
-  value is currently 0.9. However, we expect to change the default value to 11.4 in
-  September 2013.\n    * `:name` - (String) The name. This parameter must be set to
-  \"Chef\".\n    * `:version` - (String) The Chef version. This parameter must be
-  set to \"0.9\" or \"11.4\". The default value is \"0.9\". However, we expect to
-  change the default value to \"11.4\" in September 2013.\n  * `:use_custom_cookbooks`
+  use the configuration manager to specify the Chef version, 0.9, 11.4, or 11.10.
+  The default value is currently 11.4.\n    * `:name` - (String) The name. This parameter
+  must be set to \"Chef\".\n    * `:version` - (String) The Chef version. This parameter
+  must be set to 0.9, 11.4, or 11.10. The default value is 11.4.\n  * `:chef_configuration`
+  - (Hash) A ChefConfiguration object that specifies whether to enable Berkshelf and
+  the Berkshelf version on Chef 11.10 stacks. For more information, see Create a New
+  Stack.\n    * `:manage_berkshelf` - (Boolean) Whether to enable Berkshelf.\n    *
+  `:berkshelf_version` - (String) The Berkshelf version.\n  * `:use_custom_cookbooks`
   - (Boolean) Whether to use custom cookbooks.\n  * `:use_opsworks_security_groups`
-  - (Boolean) \n  * `:custom_cookbooks_source` - (Hash) \n    * `:type` - (String)
+  - (Boolean) Whether to associate the AWS OpsWorks built-in security groups with
+  the stack's layers. AWS OpsWorks provides a standard set of built-in security groups,
+  one for each layer, which are associated with layers by default. With UseOpsworksSecurityGroups
+  you can instead provide your own custom security groups. UseOpsworksSecurityGroups
+  has the following settings: True - AWS OpsWorks automatically associates the appropriate
+  built-in security group with each layer (default setting). You can associate additional
+  security groups with a layer after you create it but you cannot delete the built-in
+  security group. False - AWS OpsWorks does not associate built-in security groups
+  with layers. You must create appropriate EC2 security groups and associate a security
+  group with each layer that you create. However, you can still manually associate
+  a built-in security group with a layer on creation; custom security groups are required
+  only for those layers that need custom settings. For more information, see Create
+  a New Stack.\n  * `:custom_cookbooks_source` - (Hash) \n    * `:type` - (String)
   The repository type.  Valid values include:\n      * `git`\n      * `svn`\n      *
   `archive`\n      * `s3`\n    * `:url` - (String) The source URL.\n    * `:username`
   - (String) This parameter depends on the repository type. For Amazon S3 bundles,
   set Username to the appropriate IAM access key ID. For HTTP bundles, Git repositories,
   and Subversion repositories, set Username to the user name.\n    * `:password` -
   (String) This parameter depends on the repository type. For Amazon S3 bundles, set
-  Password to the appropriate IAM secret access key. For HTTP bundles, Git repositories,
-  and Subversion repositories, set Password to the password.\n    * `:ssh_key` - (String)
-  The repository's SSH key.\n    * `:revision` - (String) The application's version.
-  AWS OpsWorks enables you to easily deploy new versions of an application. One of
-  the simplest approaches is to have branches or revisions in your repository that
-  represent different versions that can potentially be deployed.\n  * `:default_ssh_key_name`
-  - (String) A default SSH key for the stack instances. You can override this value
-  when you create or update an instance.\n  * `:clone_permissions` - (Boolean) Whether
-  to clone the source stack's permissions.\n  * `:clone_app_ids` - (Array&lt;<String>)
-  A list of source stack app IDs to be included in the cloned stack.\n  * `:default_root_device_type`
+  Password to the appropriate IAM secret access key. For HTTP bundles, and Subversion
+  repositories, set Password to the password. For more information on how to safely
+  handle IAM credentials, see .\n    * `:ssh_key` - (String) The repository's SSH
+  key.\n    * `:revision` - (String) The application's version. AWS OpsWorks enables
+  you to easily deploy new versions of an application. One of the simplest approaches
+  is to have branches or revisions in your repository that represent different versions
+  that can potentially be deployed.\n  * `:default_ssh_key_name` - (String) A default
+  SSH key for the stack instances. You can override this value when you create or
+  update an instance.\n  * `:clone_permissions` - (Boolean) Whether to clone the source
+  stack's permissions.\n  * `:clone_app_ids` - (Array&lt;<String>) A list of source
+  stack app IDs to be included in the cloned stack.\n  * `:default_root_device_type`
   - (String) The default root device type. This value is used by default for all instances
   in the cloned stack, but you can override it when you create an instance. For more
   information, see Storage for the Root Device.  Valid values include:\n    * `ebs`\n
@@ -120,7 +135,7 @@
         * `s3`
       * `:url` - (String) The source URL.
       * `:username` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Username to the appropriate IAM access key ID. For HTTP bundles, Git repositories, and Subversion repositories, set Username to the user name.
-      * `:password` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Password to the appropriate IAM secret access key. For HTTP bundles, Git repositories, and Subversion repositories, set Password to the password.
+      * `:password` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Password to the appropriate IAM secret access key. For HTTP bundles, and Subversion repositories, set Password to the password. For more information on how to safely handle IAM credentials, see .
       * `:ssh_key` - (String) The repository's SSH key.
       * `:revision` - (String) The application's version. AWS OpsWorks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
     * `:domains` - (Array&lt;<String>) The app virtual host settings, with multiple domains separated by commas. For example: 'www.example.com, example.com'
@@ -157,99 +172,73 @@
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:deployment_id` - (String)
-:create_instance: "Calls the CreateInstance API operation.\n@param [Hash] options\n
-  \ * `:stack_id` - *required* - (String) The stack ID.\n  * `:layer_ids` - *required*
-  - (Array&lt;<String>) An array that contains the instance layer IDs.\n  * `:instance_type`
-  - *required* - (String) The instance type. AWS OpsWorks supports all instance types
-  except Cluster Compute, Cluster GPU, and High Memory Cluster. For more information,
-  see Instance Families and Types. The parameter values that you use to specify the
-  various types are in the API Name column of the Available Instance Types table.\n
-  \ * `:auto_scaling_type` - (String) The instance auto scaling type, which has three
-  possible values: AlwaysRunning: A 24/7 instance, which is not affected by auto scaling.
-  TimeBasedAutoScaling: A time-based auto scaling instance, which is started and stopped
-  based on a specified schedule. To specify the schedule, call SetTimeBasedAutoScaling.
-  LoadBasedAutoScaling: A load-based auto scaling instance, which is started and stopped
-  based on load metrics. To use load-based auto scaling, you must enable it for the
-  instance layer and configure the thresholds by calling SetLoadBasedAutoScaling.
-  \ Valid values include:\n    * `load`\n    * `timer`\n  * `:hostname` - (String)
-  The instance host name.\n  * `:os` - (String) The instance operating system, which
-  must be set to one of the following. Standard operating systems: Amazon Linux or
-  Ubuntu 12.04 LTS Custom AMIs: Custom The default option is Amazon Linux. If you
-  set this parameter to Custom, you must use the CreateInstance action's AmiId parameter
-  to specify the custom AMI that you want to use. For more information on the standard
-  operating systems, see Operating SystemsFor more information on how to use custom
-  AMIs with OpsWorks, see Using Custom AMIs.\n  * `:ami_id` - (String) A custom AMI
-  ID to be used to create the instance. The AMI should be based on one of the standard
-  AWS OpsWorks APIs: Amazon Linux or Ubuntu 12.04 LTS. For more information, see Instances\n
-  \ * `:ssh_key_name` - (String) The instance SSH key name.\n  * `:availability_zone`
-  - (String) The instance Availability Zone. For more information, see Regions and
-  Endpoints.\n  * `:subnet_id` - (String) The ID of the instance's subnet. If the
-  stack is running in a VPC, you can use this parameter to override the stack's default
-  subnet ID value and direct AWS OpsWorks to launch the instance in a different subnet.\n
-  \ * `:architecture` - (String) The instance architecture. The default option is
-  x86_64. Instance types do not necessarily support both architectures. For a list
-  of the architectures that are supported by the different instance types, see Instance
-  Families and Types.  Valid values include:\n    * `x86_64`\n    * `i386`\n  * `:root_device_type`
-  - (String) The instance root device type. For more information, see Storage for
-  the Root Device.  Valid values include:\n    * `ebs`\n    * `instance-store`\n  *
-  `:install_updates_on_boot` - (Boolean) Whether to install operating system and package
-  updates when the instance boots. The default value is  `true` . To control when
-  updates are installed, set this value to  `false` . You must then update your instances
-  manually by using CreateDeployment to run the update_dependencies stack command
-  or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We
-  strongly recommend using the default value of  `true` , to ensure that your instances
-  have the latest security updates.\n  * `:ebs_optimized` - (Boolean) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:instance_id` - (String)"
-:create_layer: "Calls the CreateLayer API operation.\n@param [Hash] options\n  * `:stack_id`
-  - *required* - (String) The layer stack ID.\n  * `:type` - *required* - (String)
-  The layer type. A stack cannot have more than one built-in layer of the same type.
-  It can have any number of custom layers. This parameter must be set to one of the
-  following: custom: A custom layer db-master: A MySQL layer java-app: A Java App
-  Server layer lb: An HAProxy layer memcached: A Memcached layer monitoring-master:
-  A Ganglia layer nodejs-app: A Node.js App Server layer php-app: A PHP App Server
-  layer rails-app: A Rails App Server layer web: A Static Web Server layer  Valid
-  values include:\n    * `lb`\n    * `web`\n    * `php-app`\n    * `rails-app`\n    *
-  `nodejs-app`\n    * `memcached`\n    * `db-master`\n    * `monitoring-master`\n
-  \   * `custom`\n  * `:name` - *required* - (String) The layer name, which is used
-  by the console.\n  * `:shortname` - *required* - (String) The layer short name,
-  which is used internally by AWS OpsWorks and by Chef recipes. The short name is
-  also used as the name for the directory where your app files are installed. It can
-  have a maximum of 200 characters, which are limited to the alphanumeric characters,
-  '-', '_', and '.'.\n  * `:attributes` - (Hash&lt;<String,String>) One or more user-defined
-  key/value pairs to be added to the stack attributes.\n  * `:custom_instance_profile_arn`
-  - (String) The ARN of an IAM profile that to be used for the layer's EC2 instances.
-  For more information about IAM ARNs, see Using Identifiers.\n  * `:custom_security_group_ids`
-  - (Array&lt;<String>) An array containing the layer custom security group IDs.\n
-  \ * `:packages` - (Array&lt;<String>) An array of Package objects that describe
-  the layer packages.\n  * `:volume_configurations` - (Array&lt;<Hash>) A VolumeConfigurations
-  object that describes the layer Amazon EBS volumes.\n    * `:mount_point` - *required*
-  - (String) The volume mount point. For example \"/dev/sdh\".\n    * `:raid_level`
-  - (Integer) The volume RAID level.\n    * `:number_of_disks` - *required* - (Integer)
-  The number of disks in the volume.\n    * `:size` - *required* - (Integer) The volume
-  size.\n    * `:volume_type` - (String) \n    * `:iops` - (Integer) \n  * `:enable_auto_healing`
-  - (Boolean) Whether to disable auto healing for the layer.\n  * `:auto_assign_elastic_ips`
-  - (Boolean) Whether to automatically assign an Elastic IP address to the layer's
-  instances. For more information, see How to Edit a Layer.\n  * `:auto_assign_public_ips`
-  - (Boolean) For stacks that are running in a VPC, whether to automatically assign
-  a public IP address to the layer's instances. For more information, see How to Edit
-  a Layer.\n  * `:custom_recipes` - (Hash) A LayerCustomRecipes object that specifies
-  the layer custom recipes.\n    * `:setup` - (Array&lt;<String>) An array of custom
-  recipe names to be run following a setup event.\n    * `:configure` - (Array&lt;<String>)
-  An array of custom recipe names to be run following a configure event.\n    * `:deploy`
-  - (Array&lt;<String>) An array of custom recipe names to be run following a deploy
-  event.\n    * `:undeploy` - (Array&lt;<String>) An array of custom recipe names
-  to be run following a undeploy event.\n    * `:shutdown` - (Array&lt;<String>) An
-  array of custom recipe names to be run following a shutdown event.\n  * `:install_updates_on_boot`
-  - (Boolean) Whether to install operating system and package updates when the instance
-  boots. The default value is  `true` . To control when updates are installed, set
-  this value to  `false` . You must then update your instances manually by using CreateDeployment
-  to run the update_dependencies stack command or manually running yum (Amazon Linux)
-  or apt-get (Ubuntu) on the instances. We strongly recommend using the default value
-  of  `true` , to ensure that your instances have the latest security updates.\n  *
-  `:use_ebs_optimized_instances` - (Boolean) \n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:layer_id` - (String)"
+:create_instance: |-
+  Calls the CreateInstance API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+    * `:layer_ids` - *required* - (Array&lt;<String>) An array that contains the instance layer IDs.
+    * `:instance_type` - *required* - (String) The instance type. AWS OpsWorks supports all instance types except Cluster Compute, Cluster GPU, and High Memory Cluster. For more information, see Instance Families and Types. The parameter values that you use to specify the various types are in the API Name column of the Available Instance Types table.
+    * `:auto_scaling_type` - (String) The instance auto scaling type, which has three possible values: AlwaysRunning: A 24/7 instance, which is not affected by auto scaling. TimeBasedAutoScaling: A time-based auto scaling instance, which is started and stopped based on a specified schedule. To specify the schedule, call SetTimeBasedAutoScaling. LoadBasedAutoScaling: A load-based auto scaling instance, which is started and stopped based on load metrics. To use load-based auto scaling, you must enable it for the instance layer and configure the thresholds by calling SetLoadBasedAutoScaling.  Valid values include:
+      * `load`
+      * `timer`
+    * `:hostname` - (String) The instance host name.
+    * `:os` - (String) The instance operating system, which must be set to one of the following. Standard operating systems: Amazon Linux or Ubuntu 12.04 LTS Custom AMIs: Custom The default option is Amazon Linux. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. For more information on the standard operating systems, see Operating SystemsFor more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.
+    * `:ami_id` - (String) A custom AMI ID to be used to create the instance. The AMI should be based on one of the standard AWS OpsWorks APIs: Amazon Linux or Ubuntu 12.04 LTS. For more information, see Instances
+    * `:ssh_key_name` - (String) The instance SSH key name.
+    * `:availability_zone` - (String) The instance Availability Zone. For more information, see Regions and Endpoints.
+    * `:subnet_id` - (String) The ID of the instance's subnet. If the stack is running in a VPC, you can use this parameter to override the stack's default subnet ID value and direct AWS OpsWorks to launch the instance in a different subnet.
+    * `:architecture` - (String) The instance architecture. The default option is x86_64. Instance types do not necessarily support both architectures. For a list of the architectures that are supported by the different instance types, see Instance Families and Types.  Valid values include:
+      * `x86_64`
+      * `i386`
+    * `:root_device_type` - (String) The instance root device type. For more information, see Storage for the Root Device.  Valid values include:
+      * `ebs`
+      * `instance-store`
+    * `:install_updates_on_boot` - (Boolean) Whether to install operating system and package updates when the instance boots. The default value is  `true` . To control when updates are installed, set this value to  `false` . You must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the default value of  `true`  to ensure that your instances have the latest security updates.
+    * `:ebs_optimized` - (Boolean) Whether to create an Amazon EBS-optimized instance.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:instance_id` - (String)
+:create_layer: |-
+  Calls the CreateLayer API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The layer stack ID.
+    * `:type` - *required* - (String) The layer type. A stack cannot have more than one built-in layer of the same type. It can have any number of custom layers. This parameter must be set to one of the following: custom: A custom layer db-master: A MySQL layer java-app: A Java App Server layer rails-app: A Rails App Server layer lb: An HAProxy layer memcached: A Memcached layer monitoring-master: A Ganglia layer nodejs-app: A Node.js App Server layer php-app: A PHP App Server layer web: A Static Web Server layer  Valid values include:
+      * `lb`
+      * `web`
+      * `php-app`
+      * `rails-app`
+      * `nodejs-app`
+      * `memcached`
+      * `db-master`
+      * `monitoring-master`
+      * `custom`
+    * `:name` - *required* - (String) The layer name, which is used by the console.
+    * `:shortname` - *required* - (String) The layer short name, which is used internally by AWS OpsWorks and by Chef recipes. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters, which are limited to the alphanumeric characters, '-', '_', and '.'.
+    * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value pairs to be added to the stack attributes.
+    * `:custom_instance_profile_arn` - (String) The ARN of an IAM profile that to be used for the layer's EC2 instances. For more information about IAM ARNs, see Using Identifiers.
+    * `:custom_security_group_ids` - (Array&lt;<String>) An array containing the layer custom security group IDs.
+    * `:packages` - (Array&lt;<String>) An array of Package objects that describe the layer packages.
+    * `:volume_configurations` - (Array&lt;<Hash>) A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
+      * `:mount_point` - *required* - (String) The volume mount point. For example "/dev/sdh".
+      * `:raid_level` - (Integer) The volume RAID level.
+      * `:number_of_disks` - *required* - (Integer) The number of disks in the volume.
+      * `:size` - *required* - (Integer) The volume size.
+      * `:volume_type` - (String) The volume type, standard or PIOPS.
+      * `:iops` - (Integer) For PIOPS volumes, the IOPS per disk.
+    * `:enable_auto_healing` - (Boolean) Whether to disable auto healing for the layer.
+    * `:auto_assign_elastic_ips` - (Boolean) Whether to automatically assign an Elastic IP address to the layer's instances. For more information, see How to Edit a Layer.
+    * `:auto_assign_public_ips` - (Boolean) For stacks that are running in a VPC, whether to automatically assign a public IP address to the layer's instances. For more information, see How to Edit a Layer.
+    * `:custom_recipes` - (Hash) A LayerCustomRecipes object that specifies the layer custom recipes.
+      * `:setup` - (Array&lt;<String>) An array of custom recipe names to be run following a setup event.
+      * `:configure` - (Array&lt;<String>) An array of custom recipe names to be run following a configure event.
+      * `:deploy` - (Array&lt;<String>) An array of custom recipe names to be run following a deploy event.
+      * `:undeploy` - (Array&lt;<String>) An array of custom recipe names to be run following a undeploy event.
+      * `:shutdown` - (Array&lt;<String>) An array of custom recipe names to be run following a shutdown event.
+    * `:install_updates_on_boot` - (Boolean) Whether to install operating system and package updates when the instance boots. The default value is  `true` . To control when updates are installed, set this value to  `false` . You must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the default value of  `true` , to ensure that your instances have the latest security updates.
+    * `:use_ebs_optimized_instances` - (Boolean) Whether to use Amazon EBS-optimized instances.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:layer_id` - (String)
 :create_stack: "Calls the CreateStack API operation.\n@param [Hash] options\n  * `:name`
   - *required* - (String) The stack name.\n  * `:region` - *required* - (String) The
   stack AWS region, such as \"us-east-1\". For more information about Amazon regions,
@@ -297,41 +286,57 @@
   '\"'.: \"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\" For
   more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration
   JSON.\n  * `:configuration_manager` - (Hash) The configuration manager. When you
-  create a stack we recommend that you use the configuration manager to specify the
-  Chef version, 0.9 or 11.4. The default value is currently 0.9. However, we expect
-  to change the default value to 11.4 in September 2013.\n    * `:name` - (String)
-  The name. This parameter must be set to \"Chef\".\n    * `:version` - (String) The
-  Chef version. This parameter must be set to \"0.9\" or \"11.4\". The default value
-  is \"0.9\". However, we expect to change the default value to \"11.4\" in September
-  2013.\n  * `:use_custom_cookbooks` - (Boolean) Whether the stack uses custom cookbooks.\n
-  \ * `:use_opsworks_security_groups` - (Boolean) \n  * `:custom_cookbooks_source`
-  - (Hash) \n    * `:type` - (String) The repository type.  Valid values include:\n
-  \     * `git`\n      * `svn`\n      * `archive`\n      * `s3`\n    * `:url` - (String)
-  The source URL.\n    * `:username` - (String) This parameter depends on the repository
-  type. For Amazon S3 bundles, set Username to the appropriate IAM access key ID.
-  For HTTP bundles, Git repositories, and Subversion repositories, set Username to
-  the user name.\n    * `:password` - (String) This parameter depends on the repository
-  type. For Amazon S3 bundles, set Password to the appropriate IAM secret access key.
-  For HTTP bundles, Git repositories, and Subversion repositories, set Password to
-  the password.\n    * `:ssh_key` - (String) The repository's SSH key.\n    * `:revision`
-  - (String) The application's version. AWS OpsWorks enables you to easily deploy
-  new versions of an application. One of the simplest approaches is to have branches
-  or revisions in your repository that represent different versions that can potentially
-  be deployed.\n  * `:default_ssh_key_name` - (String) A default SSH key for the stack
-  instances. You can override this value when you create or update an instance.\n
-  \ * `:default_root_device_type` - (String) The default root device type. This value
-  is used by default for all instances in the stack, but you can override it when
-  you create an instance. The default option is instance-store. For more information,
-  see Storage for the Root Device.  Valid values include:\n    * `ebs`\n    * `instance-store`\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:stack_id` - (String)"
+  clone a stack we recommend that you use the configuration manager to specify the
+  Chef version, 0.9, 11.4, or 11.10. The default value is currently 11.4.\n    * `:name`
+  - (String) The name. This parameter must be set to \"Chef\".\n    * `:version` -
+  (String) The Chef version. This parameter must be set to 0.9, 11.4, or 11.10. The
+  default value is 11.4.\n  * `:chef_configuration` - (Hash) A ChefConfiguration object
+  that specifies whether to enable Berkshelf and the Berkshelf version on Chef 11.10
+  stacks. For more information, see Create a New Stack.\n    * `:manage_berkshelf`
+  - (Boolean) Whether to enable Berkshelf.\n    * `:berkshelf_version` - (String)
+  The Berkshelf version.\n  * `:use_custom_cookbooks` - (Boolean) Whether the stack
+  uses custom cookbooks.\n  * `:use_opsworks_security_groups` - (Boolean) Whether
+  to associate the AWS OpsWorks built-in security groups with the stack's layers.
+  AWS OpsWorks provides a standard set of built-in security groups, one for each layer,
+  which are associated with layers by default. With UseOpsworksSecurityGroups you
+  can instead provide your own custom security groups. UseOpsworksSecurityGroups has
+  the following settings: True - AWS OpsWorks automatically associates the appropriate
+  built-in security group with each layer (default setting). You can associate additional
+  security groups with a layer after you create it but you cannot delete the built-in
+  security group. False - AWS OpsWorks does not associate built-in security groups
+  with layers. You must create appropriate EC2 security groups and associate a security
+  group with each layer that you create. However, you can still manually associate
+  a built-in security group with a layer on creation; custom security groups are required
+  only for those layers that need custom settings. For more information, see Create
+  a New Stack.\n  * `:custom_cookbooks_source` - (Hash) \n    * `:type` - (String)
+  The repository type.  Valid values include:\n      * `git`\n      * `svn`\n      *
+  `archive`\n      * `s3`\n    * `:url` - (String) The source URL.\n    * `:username`
+  - (String) This parameter depends on the repository type. For Amazon S3 bundles,
+  set Username to the appropriate IAM access key ID. For HTTP bundles, Git repositories,
+  and Subversion repositories, set Username to the user name.\n    * `:password` -
+  (String) This parameter depends on the repository type. For Amazon S3 bundles, set
+  Password to the appropriate IAM secret access key. For HTTP bundles, and Subversion
+  repositories, set Password to the password. For more information on how to safely
+  handle IAM credentials, see .\n    * `:ssh_key` - (String) The repository's SSH
+  key.\n    * `:revision` - (String) The application's version. AWS OpsWorks enables
+  you to easily deploy new versions of an application. One of the simplest approaches
+  is to have branches or revisions in your repository that represent different versions
+  that can potentially be deployed.\n  * `:default_ssh_key_name` - (String) A default
+  SSH key for the stack instances. You can override this value when you create or
+  update an instance.\n  * `:default_root_device_type` - (String) The default root
+  device type. This value is used by default for all instances in the stack, but you
+  can override it when you create an instance. The default option is instance-store.
+  For more information, see Storage for the Root Device.  Valid values include:\n
+  \   * `ebs`\n    * `instance-store`\n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:stack_id`
+  - (String)"
 :create_user_profile: |-
   Calls the CreateUserProfile API operation.
   @param [Hash] options
     * `:iam_user_arn` - *required* - (String) The user's IAM ARN.
     * `:ssh_username` - (String) The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks removes them. For example, my.name will be changed to myname. If you do not specify an SSH user name, AWS OpsWorks generates one from the IAM user name.
     * `:ssh_public_key` - (String) The user's public SSH key.
-    * `:allow_self_management` - (Boolean) Whether users can specify their own SSH public key through the My Settings page. For more information, see .
+    * `:allow_self_management` - (Boolean) Whether users can specify their own SSH public key through the My Settings page. For more information, see Setting an IAM User's Public SSH Key.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:iam_user_arn` - (String)
@@ -345,7 +350,7 @@
   @param [Hash] options
     * `:instance_id` - *required* - (String) The instance ID.
     * `:delete_elastic_ip` - (Boolean) Whether to delete the instance Elastic IP address.
-    * `:delete_volumes` - (Boolean) Whether to delete the instance Amazon EBS volumes.
+    * `:delete_volumes` - (Boolean) Whether to delete the instance's Amazon EBS volumes.
   @return [Core::Response]
 :delete_layer: |-
   Calls the DeleteLayer API operation.
@@ -687,6 +692,9 @@
       * `:configuration_manager` - (Hash)
         * `:name` - (String)
         * `:version` - (String)
+      * `:chef_configuration` - (Hash)
+        * `:manage_berkshelf` - (Boolean)
+        * `:berkshelf_version` - (String)
       * `:use_custom_cookbooks` - (Boolean)
       * `:use_opsworks_security_groups` - (Boolean)
       * `:custom_cookbooks_source` - (Hash)
@@ -877,7 +885,7 @@
         * `s3`
       * `:url` - (String) The source URL.
       * `:username` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Username to the appropriate IAM access key ID. For HTTP bundles, Git repositories, and Subversion repositories, set Username to the user name.
-      * `:password` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Password to the appropriate IAM secret access key. For HTTP bundles, Git repositories, and Subversion repositories, set Password to the password.
+      * `:password` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Password to the appropriate IAM secret access key. For HTTP bundles, and Subversion repositories, set Password to the password. For more information on how to safely handle IAM credentials, see .
       * `:ssh_key` - (String) The repository's SSH key.
       * `:revision` - (String) The application's version. AWS OpsWorks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
     * `:domains` - (Array&lt;<String>) The app's virtual host settings, with multiple domains separated by commas. For example: 'www.example.com, example.com'
@@ -912,44 +920,35 @@
       * `i386`
     * `:install_updates_on_boot` - (Boolean) Whether to install operating system and package updates when the instance boots. The default value is  `true` . To control when updates are installed, set this value to  `false` . You must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the default value of  `true` , to ensure that your instances have the latest security updates.
   @return [Core::Response]
-:update_layer: "Calls the UpdateLayer API operation.\n@param [Hash] options\n  * `:layer_id`
-  - *required* - (String) The layer ID.\n  * `:name` - (String) The layer name, which
-  is used by the console.\n  * `:shortname` - (String) The layer short name, which
-  is used internally by AWS OpsWorksand by Chef. The short name is also used as the
-  name for the directory where your app files are installed. It can have a maximum
-  of 200 characters and must be in the following format: /\\A[a-z0-9\\-\\_\\.]+\\Z/.\n
-  \ * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value
-  pairs to be added to the stack attributes.\n  * `:custom_instance_profile_arn` -
-  (String) The ARN of an IAM profile to be used for all of the layer's EC2 instances.
-  For more information about IAM ARNs, see Using Identifiers.\n  * `:custom_security_group_ids`
-  - (Array&lt;<String>) An array containing the layer's custom security group IDs.\n
-  \ * `:packages` - (Array&lt;<String>) An array of Package objects that describe
-  the layer's packages.\n  * `:volume_configurations` - (Array&lt;<Hash>) A VolumeConfigurations
-  object that describes the layer's Amazon EBS volumes.\n    * `:mount_point` - *required*
-  - (String) The volume mount point. For example \"/dev/sdh\".\n    * `:raid_level`
-  - (Integer) The volume RAID level.\n    * `:number_of_disks` - *required* - (Integer)
-  The number of disks in the volume.\n    * `:size` - *required* - (Integer) The volume
-  size.\n    * `:volume_type` - (String) \n    * `:iops` - (Integer) \n  * `:enable_auto_healing`
-  - (Boolean) Whether to disable auto healing for the layer.\n  * `:auto_assign_elastic_ips`
-  - (Boolean) Whether to automatically assign an Elastic IP address to the layer's
-  instances. For more information, see How to Edit a Layer.\n  * `:auto_assign_public_ips`
-  - (Boolean) For stacks that are running in a VPC, whether to automatically assign
-  a public IP address to the layer's instances. For more information, see How to Edit
-  a Layer.\n  * `:custom_recipes` - (Hash) A LayerCustomRecipes object that specifies
-  the layer's custom recipes.\n    * `:setup` - (Array&lt;<String>) An array of custom
-  recipe names to be run following a setup event.\n    * `:configure` - (Array&lt;<String>)
-  An array of custom recipe names to be run following a configure event.\n    * `:deploy`
-  - (Array&lt;<String>) An array of custom recipe names to be run following a deploy
-  event.\n    * `:undeploy` - (Array&lt;<String>) An array of custom recipe names
-  to be run following a undeploy event.\n    * `:shutdown` - (Array&lt;<String>) An
-  array of custom recipe names to be run following a shutdown event.\n  * `:install_updates_on_boot`
-  - (Boolean) Whether to install operating system and package updates when the instance
-  boots. The default value is  `true` . To control when updates are installed, set
-  this value to  `false` . You must then update your instances manually by using CreateDeployment
-  to run the update_dependencies stack command or manually running yum (Amazon Linux)
-  or apt-get (Ubuntu) on the instances. We strongly recommend using the default value
-  of  `true` , to ensure that your instances have the latest security updates.\n  *
-  `:use_ebs_optimized_instances` - (Boolean) \n@return [Core::Response]"
+:update_layer: |-
+  Calls the UpdateLayer API operation.
+  @param [Hash] options
+    * `:layer_id` - *required* - (String) The layer ID.
+    * `:name` - (String) The layer name, which is used by the console.
+    * `:shortname` - (String) The layer short name, which is used internally by AWS OpsWorksand by Chef. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters and must be in the following format: /\A[a-z0-9\-\_\.]+\Z/.
+    * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value pairs to be added to the stack attributes.
+    * `:custom_instance_profile_arn` - (String) The ARN of an IAM profile to be used for all of the layer's EC2 instances. For more information about IAM ARNs, see Using Identifiers.
+    * `:custom_security_group_ids` - (Array&lt;<String>) An array containing the layer's custom security group IDs.
+    * `:packages` - (Array&lt;<String>) An array of Package objects that describe the layer's packages.
+    * `:volume_configurations` - (Array&lt;<Hash>) A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
+      * `:mount_point` - *required* - (String) The volume mount point. For example "/dev/sdh".
+      * `:raid_level` - (Integer) The volume RAID level.
+      * `:number_of_disks` - *required* - (Integer) The number of disks in the volume.
+      * `:size` - *required* - (Integer) The volume size.
+      * `:volume_type` - (String) The volume type, standard or PIOPS.
+      * `:iops` - (Integer) For PIOPS volumes, the IOPS per disk.
+    * `:enable_auto_healing` - (Boolean) Whether to disable auto healing for the layer.
+    * `:auto_assign_elastic_ips` - (Boolean) Whether to automatically assign an Elastic IP address to the layer's instances. For more information, see How to Edit a Layer.
+    * `:auto_assign_public_ips` - (Boolean) For stacks that are running in a VPC, whether to automatically assign a public IP address to the layer's instances. For more information, see How to Edit a Layer.
+    * `:custom_recipes` - (Hash) A LayerCustomRecipes object that specifies the layer's custom recipes.
+      * `:setup` - (Array&lt;<String>) An array of custom recipe names to be run following a setup event.
+      * `:configure` - (Array&lt;<String>) An array of custom recipe names to be run following a configure event.
+      * `:deploy` - (Array&lt;<String>) An array of custom recipe names to be run following a deploy event.
+      * `:undeploy` - (Array&lt;<String>) An array of custom recipe names to be run following a undeploy event.
+      * `:shutdown` - (Array&lt;<String>) An array of custom recipe names to be run following a shutdown event.
+    * `:install_updates_on_boot` - (Boolean) Whether to install operating system and package updates when the instance boots. The default value is  `true` . To control when updates are installed, set this value to  `false` . You must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the default value of  `true` , to ensure that your instances have the latest security updates.
+    * `:use_ebs_optimized_instances` - (Boolean) Whether to use Amazon EBS-optimized instances.
+  @return [Core::Response]
 :update_my_user_profile: |-
   Calls the UpdateMyUserProfile API operation.
   @param [Hash] options
@@ -989,32 +988,48 @@
   such as '\"'.: \"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"
   For more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration
   JSON.\n  * `:configuration_manager` - (Hash) The configuration manager. When you
-  update a stack you can optionally use the configuration manager to specify the Chef
-  version, 0.9 or 11.4. If you omit this parameter, AWS OpsWorks does not change the
-  Chef version.\n    * `:name` - (String) The name. This parameter must be set to
-  \"Chef\".\n    * `:version` - (String) The Chef version. This parameter must be
-  set to \"0.9\" or \"11.4\". The default value is \"0.9\". However, we expect to
-  change the default value to \"11.4\" in September 2013.\n  * `:use_custom_cookbooks`
-  - (Boolean) Whether the stack uses custom cookbooks.\n  * `:custom_cookbooks_source`
-  - (Hash) \n    * `:type` - (String) The repository type.  Valid values include:\n
-  \     * `git`\n      * `svn`\n      * `archive`\n      * `s3`\n    * `:url` - (String)
-  The source URL.\n    * `:username` - (String) This parameter depends on the repository
-  type. For Amazon S3 bundles, set Username to the appropriate IAM access key ID.
-  For HTTP bundles, Git repositories, and Subversion repositories, set Username to
-  the user name.\n    * `:password` - (String) This parameter depends on the repository
-  type. For Amazon S3 bundles, set Password to the appropriate IAM secret access key.
-  For HTTP bundles, Git repositories, and Subversion repositories, set Password to
-  the password.\n    * `:ssh_key` - (String) The repository's SSH key.\n    * `:revision`
-  - (String) The application's version. AWS OpsWorks enables you to easily deploy
-  new versions of an application. One of the simplest approaches is to have branches
-  or revisions in your repository that represent different versions that can potentially
-  be deployed.\n  * `:default_ssh_key_name` - (String) A default SSH key for the stack
-  instances. You can override this value when you create or update an instance.\n
-  \ * `:default_root_device_type` - (String) The default root device type. This value
-  is used by default for all instances in the stack, but you can override it when
-  you create an instance. For more information, see Storage for the Root Device.  Valid
-  values include:\n    * `ebs`\n    * `instance-store`\n  * `:use_opsworks_security_groups`
-  - (Boolean) \n@return [Core::Response]"
+  clone a stack we recommend that you use the configuration manager to specify the
+  Chef version, 0.9, 11.4, or 11.10. The default value is currently 11.4.\n    * `:name`
+  - (String) The name. This parameter must be set to \"Chef\".\n    * `:version` -
+  (String) The Chef version. This parameter must be set to 0.9, 11.4, or 11.10. The
+  default value is 11.4.\n  * `:chef_configuration` - (Hash) A ChefConfiguration object
+  that specifies whether to enable Berkshelf and the Berkshelf version on Chef 11.10
+  stacks. For more information, see Create a New Stack.\n    * `:manage_berkshelf`
+  - (Boolean) Whether to enable Berkshelf.\n    * `:berkshelf_version` - (String)
+  The Berkshelf version.\n  * `:use_custom_cookbooks` - (Boolean) Whether the stack
+  uses custom cookbooks.\n  * `:custom_cookbooks_source` - (Hash) \n    * `:type`
+  - (String) The repository type.  Valid values include:\n      * `git`\n      * `svn`\n
+  \     * `archive`\n      * `s3`\n    * `:url` - (String) The source URL.\n    *
+  `:username` - (String) This parameter depends on the repository type. For Amazon
+  S3 bundles, set Username to the appropriate IAM access key ID. For HTTP bundles,
+  Git repositories, and Subversion repositories, set Username to the user name.\n
+  \   * `:password` - (String) This parameter depends on the repository type. For
+  Amazon S3 bundles, set Password to the appropriate IAM secret access key. For HTTP
+  bundles, and Subversion repositories, set Password to the password. For more information
+  on how to safely handle IAM credentials, see .\n    * `:ssh_key` - (String) The
+  repository's SSH key.\n    * `:revision` - (String) The application's version. AWS
+  OpsWorks enables you to easily deploy new versions of an application. One of the
+  simplest approaches is to have branches or revisions in your repository that represent
+  different versions that can potentially be deployed.\n  * `:default_ssh_key_name`
+  - (String) A default SSH key for the stack instances. You can override this value
+  when you create or update an instance.\n  * `:default_root_device_type` - (String)
+  The default root device type. This value is used by default for all instances in
+  the stack, but you can override it when you create an instance. For more information,
+  see Storage for the Root Device.  Valid values include:\n    * `ebs`\n    * `instance-store`\n
+  \ * `:use_opsworks_security_groups` - (Boolean) Whether to associate the AWS OpsWorks
+  built-in security groups with the stack's layers. AWS OpsWorks provides a standard
+  set of built-in security groups, one for each layer, which are associated with layers
+  by default. UseOpsworksSecurityGroups allows you to instead provide your own custom
+  security groups. UseOpsworksSecurityGroups has the following settings: True - AWS
+  OpsWorks automatically associates the appropriate built-in security group with each
+  layer (default setting). You can associate additional security groups with a layer
+  after you create it but you cannot delete the built-in security group. False - AWS
+  OpsWorks does not associate built-in security groups with layers. You must create
+  appropriate EC2 security groups and associate a security group with each layer that
+  you create. However, you can still manually associate a built-in security group
+  with a layer on creation; custom security groups are required only for those layers
+  that need custom settings. For more information, see Create a New Stack.\n@return
+  [Core::Response]"
 :update_user_profile: |-
   Calls the UpdateUserProfile API operation.
   @param [Hash] options
