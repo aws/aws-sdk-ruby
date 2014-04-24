@@ -103,6 +103,7 @@ module AWS
         when :get, :read then :get_object
         when :put, :write then :put_object
         when :delete then :delete_object
+        when :head then :head_object
         else
           msg = "invalid method, expected :get, :put or :delete, got "
           msg << method.inspect

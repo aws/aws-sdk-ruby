@@ -1179,6 +1179,7 @@ module AWS
       #   * `:get` or `:read`
       #   * `:put` or `:write`
       #   * `:delete`
+      #   * `:head`
       #
       # @param [Hash] options Additional options for generating the URL.
       #
