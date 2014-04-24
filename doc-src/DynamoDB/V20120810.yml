@@ -1,16 +1,3 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 ---
 :batch_get_item: |-
   Calls the BatchGetItem API operation.
@@ -252,66 +239,90 @@
   - (Time)\n        * `:number_of_decreases_today` - (Integer)\n        * `:read_capacity_units`
   - (Integer)\n        * `:write_capacity_units` - (Integer)\n      * `:index_size_bytes`
   - (Integer)\n      * `:item_count` - (Integer)"
-:delete_item: |-
-  Calls the DeleteItem API operation.
-  @param [Hash] options
-    * `:table_name` - *required* - (String) The name of the table from which to delete the item.
-    * `:key` - *required* - (Hash&lt;<String,Hash>) A map of attribute names to AttributeValue objects, representing the primary key of the item to delete.
-      * `:s` - (String) A String data type
-      * `:n` - (String) A Number data type
-      * `:b` - (String) A Binary data type
-      * `:ss` - (Array&lt;<String>) A String set data type
-      * `:ns` - (Array&lt;<String>) Number set data type
-      * `:bs` - (Array&lt;<String>) A Binary set data type
-    * `:expected` - (Hash&lt;<String,Hash>) A map of attribute/condition pairs. This is the conditional block for the DeleteItemoperation. All the conditions must be met for the operation to succeed. Expected allows you to provide an attribute name, and whether or not Amazon DynamoDB should check to see if the attribute value already exists; or if the attribute value exists and has a particular value before changing it. Each item in Expected represents an attribute name for Amazon DynamoDB to check, along with the following: Value - The attribute value for Amazon DynamoDB to check. Exists - Causes Amazon DynamoDB to evaluate the value before attempting a conditional operation: If Exists is  `true` , Amazon DynamoDB will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a ConditionalCheckFailedException. If Exists is  `false` , Amazon DynamoDB assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a ConditionalCheckFailedException. The default setting for Exists is  `true` . If you supply a Value all by itself, Amazon DynamoDB assumes the attribute exists: You don't have to set Exists to  `true` , because it is implied. Amazon DynamoDB returns a ValidationException if: Exists is  `true`  but there is no Value to check. (You expect a value to exist, but don't specify what that value is.) Exists is  `false`  but you also specify a Value. (You cannot expect an attribute to have a value, while also expecting it not to exist.) If you specify more than one condition for Exists, then all of the conditions must evaluate to  `true` . (In other words, the conditions are ANDed together.) Otherwise, the conditional operation will fail.
-      * `:value` - (Hash) Specify whether or not a value already exists and has a specific content for the attribute name-value pair.
-        * `:s` - (String) A String data type
-        * `:n` - (String) A Number data type
-        * `:b` - (String) A Binary data type
-        * `:ss` - (Array&lt;<String>) A String set data type
-        * `:ns` - (Array&lt;<String>) Number set data type
-        * `:bs` - (Array&lt;<String>) A Binary set data type
-      * `:exists` - (Boolean) Causes Amazon DynamoDB to evaluate the value before attempting a conditional operation: If Exists is  `true` , Amazon DynamoDB will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a ConditionalCheckFailedException. If Exists is  `false` , Amazon DynamoDB assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a ConditionalCheckFailedException. The default setting for Exists is  `true` . If you supply a Value all by itself, Amazon DynamoDB assumes the attribute exists: You don't have to set Exists to  `true` , because it is implied. Amazon DynamoDB returns a ValidationException if: Exists is  `true`  but there is no Value to check. (You expect a value to exist, but don't specify what that value is.) Exists is  `false`  but you also specify a Value. (You cannot expect an attribute to have a value, while also expecting it not to exist.) If you specify more than one condition for Exists, then all of the conditions must evaluate to  `true` . (In other words, the conditions are ANDed together.) Otherwise, the conditional operation will fail.
-    * `:return_values` - (String) Use ReturnValues if you want to get the item attributes as they appeared before they were deleted. For DeleteItem, the valid values are: NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This is the default for ReturnValues.) ALL_OLD - The content of the old item is returned.  Valid values include:
-      * `NONE`
-      * `ALL_OLD`
-      * `UPDATED_OLD`
-      * `ALL_NEW`
-      * `UPDATED_NEW`
-    * `:return_consumed_capacity` - (String) Valid values include:
-      * `INDEXES`
-      * `TOTAL`
-      * `NONE`
-    * `:return_item_collection_metrics` - (String) If set to SIZE, statistics about item collections, if any, that were modified during the operation are returned in the response. If set to NONE (the default), no statistics are returned.  Valid values include:
-      * `SIZE`
-      * `NONE`
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:attributes` - (Hash<String,Hash>)
-      * `:s` - (String)
-      * `:n` - (String)
-      * `:b` - (String)
-      * `:ss` - (Array<String>)
-      * `:ns` - (Array<String>)
-      * `:bs` - (Array<Blob>)
-    * `:consumed_capacity` - (Hash)
-      * `:table_name` - (String)
-      * `:capacity_units` - (Numeric)
-      * `:table` - (Hash)
-        * `:capacity_units` - (Numeric)
-      * `:local_secondary_indexes` - (Hash<String,Hash>)
-        * `:capacity_units` - (Numeric)
-      * `:global_secondary_indexes` - (Hash<String,Hash>)
-        * `:capacity_units` - (Numeric)
-    * `:item_collection_metrics` - (Hash)
-      * `:item_collection_key` - (Hash<String,Hash>)
-        * `:s` - (String)
-        * `:n` - (String)
-        * `:b` - (String)
-        * `:ss` - (Array<String>)
-        * `:ns` - (Array<String>)
-        * `:bs` - (Array<Blob>)
-      * `:size_estimate_range_gb` - (Array<Float>)
+:delete_item: "Calls the DeleteItem API operation.\n@param [Hash] options\n  * `:table_name`
+  - *required* - (String) The name of the table from which to delete the item.\n  *
+  `:key` - *required* - (Hash&lt;<String,Hash>) A map of attribute names to AttributeValue
+  objects, representing the primary key of the item to delete.\n    * `:s` - (String)
+  A String data type\n    * `:n` - (String) A Number data type\n    * `:b` - (String)
+  A Binary data type\n    * `:ss` - (Array&lt;<String>) A String set data type\n    *
+  `:ns` - (Array&lt;<String>) Number set data type\n    * `:bs` - (Array&lt;<String>)
+  A Binary set data type\n  * `:expected` - (Hash&lt;<String,Hash>) A map of attribute/condition
+  pairs. This is the conditional block for the DeleteItemoperation. All the conditions
+  must be met for the operation to succeed. Expected allows you to provide an attribute
+  name, and whether or not Amazon DynamoDB should check to see if the attribute value
+  already exists; or if the attribute value exists and has a particular value before
+  changing it. Each item in Expected represents an attribute name for Amazon DynamoDB
+  to check, along with the following: Value - The attribute value for Amazon DynamoDB
+  to check. Exists - Causes Amazon DynamoDB to evaluate the value before attempting
+  a conditional operation: If Exists is  `true` , Amazon DynamoDB will check to see
+  if that attribute value already exists in the table. If it is found, then the operation
+  succeeds. If it is not found, the operation fails with a ConditionalCheckFailedException.
+  If Exists is  `false` , Amazon DynamoDB assumes that the attribute value does not
+  exist in the table. If in fact the value does not exist, then the assumption is
+  valid and the operation succeeds. If the value is found, despite the assumption
+  that it does not exist, the operation fails with a ConditionalCheckFailedException.
+  The default setting for Exists is  `true` . If you supply a Value all by itself,
+  Amazon DynamoDB assumes the attribute exists: You don't have to set Exists to  `true`
+  , because it is implied. Amazon DynamoDB returns a ValidationException if: Exists
+  is  `true`  but there is no Value to check. (You expect a value to exist, but don't
+  specify what that value is.) Exists is  `false`  but you also specify a Value. (You
+  cannot expect an attribute to have a value, while also expecting it not to exist.)
+  If you specify more than one condition for Exists, then all of the conditions must
+  evaluate to  `true` . (In other words, the conditions are ANDed together.) Otherwise,
+  the conditional operation will fail.\n    * `:value` - (Hash) Specify whether or
+  not a value already exists and has a specific content for the attribute name-value
+  pair.\n      * `:s` - (String) A String data type\n      * `:n` - (String) A Number
+  data type\n      * `:b` - (String) A Binary data type\n      * `:ss` - (Array&lt;<String>)
+  A String set data type\n      * `:ns` - (Array&lt;<String>) Number set data type\n
+  \     * `:bs` - (Array&lt;<String>) A Binary set data type\n    * `:exists` - (Boolean)
+  Causes Amazon DynamoDB to evaluate the value before attempting a conditional operation:
+  If Exists is  `true` , Amazon DynamoDB will check to see if that attribute value
+  already exists in the table. If it is found, then the operation succeeds. If it
+  is not found, the operation fails with a ConditionalCheckFailedException. If Exists
+  is  `false` , Amazon DynamoDB assumes that the attribute value does not exist in
+  the table. If in fact the value does not exist, then the assumption is valid and
+  the operation succeeds. If the value is found, despite the assumption that it does
+  not exist, the operation fails with a ConditionalCheckFailedException. The default
+  setting for Exists is  `true` . If you supply a Value all by itself, Amazon DynamoDB
+  assumes the attribute exists: You don't have to set Exists to  `true` , because
+  it is implied. Amazon DynamoDB returns a ValidationException if: Exists is  `true`
+  \ but there is no Value to check. (You expect a value to exist, but don't specify
+  what that value is.) Exists is  `false`  but you also specify a Value. (You cannot
+  expect an attribute to have a value, while also expecting it not to exist.) If you
+  specify more than one condition for Exists, then all of the conditions must evaluate
+  to  `true` . (In other words, the conditions are ANDed together.) Otherwise, the
+  conditional operation will fail.\n    * `:comparison_operator` - (String) Valid
+  values include:\n      * `EQ`\n      * `NE`\n      * `IN`\n      * `LE`\n      *
+  `LT`\n      * `GE`\n      * `GT`\n      * `BETWEEN`\n      * `NOT_NULL`\n      *
+  `NULL`\n      * `CONTAINS`\n      * `NOT_CONTAINS`\n      * `BEGINS_WITH`\n    *
+  `:attribute_value_list` - (Array&lt;<Hash>) \n      * `:s` - (String) A String data
+  type\n      * `:n` - (String) A Number data type\n      * `:b` - (String) A Binary
+  data type\n      * `:ss` - (Array&lt;<String>) A String set data type\n      * `:ns`
+  - (Array&lt;<String>) Number set data type\n      * `:bs` - (Array&lt;<String>)
+  A Binary set data type\n  * `:conditional_operator` - (String) Valid values include:\n
+  \   * `AND`\n    * `OR`\n  * `:return_values` - (String) Use ReturnValues if you
+  want to get the item attributes as they appeared before they were deleted. For DeleteItem,
+  the valid values are: NONE - If ReturnValues is not specified, or if its value is
+  NONE, then nothing is returned. (This is the default for ReturnValues.) ALL_OLD
+  - The content of the old item is returned.  Valid values include:\n    * `NONE`\n
+  \   * `ALL_OLD`\n    * `UPDATED_OLD`\n    * `ALL_NEW`\n    * `UPDATED_NEW`\n  *
+  `:return_consumed_capacity` - (String) Valid values include:\n    * `INDEXES`\n
+  \   * `TOTAL`\n    * `NONE`\n  * `:return_item_collection_metrics` - (String) If
+  set to SIZE, statistics about item collections, if any, that were modified during
+  the operation are returned in the response. If set to NONE (the default), no statistics
+  are returned.  Valid values include:\n    * `SIZE`\n    * `NONE`\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:attributes` - (Hash<String,Hash>)\n    * `:s` - (String)\n    * `:n` - (String)\n
+  \   * `:b` - (String)\n    * `:ss` - (Array<String>)\n    * `:ns` - (Array<String>)\n
+  \   * `:bs` - (Array<Blob>)\n  * `:consumed_capacity` - (Hash)\n    * `:table_name`
+  - (String)\n    * `:capacity_units` - (Numeric)\n    * `:table` - (Hash)\n      *
+  `:capacity_units` - (Numeric)\n    * `:local_secondary_indexes` - (Hash<String,Hash>)\n
+  \     * `:capacity_units` - (Numeric)\n    * `:global_secondary_indexes` - (Hash<String,Hash>)\n
+  \     * `:capacity_units` - (Numeric)\n  * `:item_collection_metrics` - (Hash)\n
+  \   * `:item_collection_key` - (Hash<String,Hash>)\n      * `:s` - (String)\n      *
+  `:n` - (String)\n      * `:b` - (String)\n      * `:ss` - (Array<String>)\n      *
+  `:ns` - (Array<String>)\n      * `:bs` - (Array<Blob>)\n    * `:size_estimate_range_gb`
+  - (Array<Float>)"
 :delete_table: |-
   Calls the DeleteTable API operation.
   @param [Hash] options
@@ -458,139 +469,382 @@
 
     * `:table_names` - (Array<String>)
     * `:last_evaluated_table_name` - (String)
-:put_item: |-
-  Calls the PutItem API operation.
-  @param [Hash] options
-    * `:table_name` - *required* - (String) The name of the table to contain the item.
-    * `:item` - *required* - (Hash&lt;<String,Hash>) A map of attribute name/value pairs, one for each attribute. Only the primary key attributes are required; you can optionally provide other attribute name-value pairs for the item. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition. For more information about primary keys, see Primary Key in the Amazon DynamoDB Developer Guide. Each element in the Item map is an AttributeValue object.
-      * `:s` - (String) A String data type
-      * `:n` - (String) A Number data type
-      * `:b` - (String) A Binary data type
-      * `:ss` - (Array&lt;<String>) A String set data type
-      * `:ns` - (Array&lt;<String>) Number set data type
-      * `:bs` - (Array&lt;<String>) A Binary set data type
-    * `:expected` - (Hash&lt;<String,Hash>) A map of attribute/condition pairs. This is the conditional block for the PutItem operation. All the conditions must be met for the operation to succeed. Expected allows you to provide an attribute name, and whether or not Amazon DynamoDB should check to see if the attribute value already exists; or if the attribute value exists and has a particular value before changing it. Each item in Expected represents an attribute name for Amazon DynamoDB to check, along with the following: Value - The attribute value for Amazon DynamoDB to check. Exists - Causes Amazon DynamoDB to evaluate the value before attempting a conditional operation: If Exists is  `true` , Amazon DynamoDB will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a ConditionalCheckFailedException. If Exists is  `false` , Amazon DynamoDB assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a ConditionalCheckFailedException. The default setting for Exists is  `true` . If you supply a Value all by itself, Amazon DynamoDB assumes the attribute exists: You don't have to set Exists to  `true` , because it is implied. Amazon DynamoDB returns a ValidationException if: Exists is  `true`  but there is no Value to check. (You expect a value to exist, but don't specify what that value is.) Exists is  `false`  but you also specify a Value. (You cannot expect an attribute to have a value, while also expecting it not to exist.) If you specify more than one condition for Exists, then all of the conditions must evaluate to  `true` . (In other words, the conditions are ANDed together.) Otherwise, the conditional operation will fail.
-      * `:value` - (Hash) Specify whether or not a value already exists and has a specific content for the attribute name-value pair.
-        * `:s` - (String) A String data type
-        * `:n` - (String) A Number data type
-        * `:b` - (String) A Binary data type
-        * `:ss` - (Array&lt;<String>) A String set data type
-        * `:ns` - (Array&lt;<String>) Number set data type
-        * `:bs` - (Array&lt;<String>) A Binary set data type
-      * `:exists` - (Boolean) Causes Amazon DynamoDB to evaluate the value before attempting a conditional operation: If Exists is  `true` , Amazon DynamoDB will check to see if that attribute value already exists in the table. If it is found, then the operation succeeds. If it is not found, the operation fails with a ConditionalCheckFailedException. If Exists is  `false` , Amazon DynamoDB assumes that the attribute value does not exist in the table. If in fact the value does not exist, then the assumption is valid and the operation succeeds. If the value is found, despite the assumption that it does not exist, the operation fails with a ConditionalCheckFailedException. The default setting for Exists is  `true` . If you supply a Value all by itself, Amazon DynamoDB assumes the attribute exists: You don't have to set Exists to  `true` , because it is implied. Amazon DynamoDB returns a ValidationException if: Exists is  `true`  but there is no Value to check. (You expect a value to exist, but don't specify what that value is.) Exists is  `false`  but you also specify a Value. (You cannot expect an attribute to have a value, while also expecting it not to exist.) If you specify more than one condition for Exists, then all of the conditions must evaluate to  `true` . (In other words, the conditions are ANDed together.) Otherwise, the conditional operation will fail.
-    * `:return_values` - (String) Use ReturnValues if you want to get the item attributes as they appeared before they were updated with the PutItem request. For PutItem, the valid values are: NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This is the default for ReturnValues.) ALL_OLD - If PutItem overwrote an attribute name-value pair, then the content of the old item is returned.  Valid values include:
-      * `NONE`
-      * `ALL_OLD`
-      * `UPDATED_OLD`
-      * `ALL_NEW`
-      * `UPDATED_NEW`
-    * `:return_consumed_capacity` - (String) Valid values include:
-      * `INDEXES`
-      * `TOTAL`
-      * `NONE`
-    * `:return_item_collection_metrics` - (String) If set to SIZE, statistics about item collections, if any, that were modified during the operation are returned in the response. If set to NONE (the default), no statistics are returned.  Valid values include:
-      * `SIZE`
-      * `NONE`
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:attributes` - (Hash<String,Hash>)
-      * `:s` - (String)
-      * `:n` - (String)
-      * `:b` - (String)
-      * `:ss` - (Array<String>)
-      * `:ns` - (Array<String>)
-      * `:bs` - (Array<Blob>)
-    * `:consumed_capacity` - (Hash)
-      * `:table_name` - (String)
-      * `:capacity_units` - (Numeric)
-      * `:table` - (Hash)
-        * `:capacity_units` - (Numeric)
-      * `:local_secondary_indexes` - (Hash<String,Hash>)
-        * `:capacity_units` - (Numeric)
-      * `:global_secondary_indexes` - (Hash<String,Hash>)
-        * `:capacity_units` - (Numeric)
-    * `:item_collection_metrics` - (Hash)
-      * `:item_collection_key` - (Hash<String,Hash>)
-        * `:s` - (String)
-        * `:n` - (String)
-        * `:b` - (String)
-        * `:ss` - (Array<String>)
-        * `:ns` - (Array<String>)
-        * `:bs` - (Array<Blob>)
-      * `:size_estimate_range_gb` - (Array<Float>)
-:query: |-
-  Calls the Query API operation.
-  @param [Hash] options
-    * `:table_name` - *required* - (String) The name of the table containing the requested items.
-    * `:index_name` - (String) The name of an index to query. This can be any local secondary index or global secondary index on the table.
-    * `:select` - (String) The attributes to be returned in the result. You can retrieve all item attributes, specific item attributes, the count of matching items, or in the case of an index, some or all of the attributes projected into the index. ALL_ATTRIBUTES: Returns all of the item attributes. For a table, this is the default. For an index, this mode causes Amazon DynamoDB to fetch the full item from the table for each matching item in the index. If the index is configured to project all item attributes, the matching items will not be fetched from the table. Fetching items from the table incurs additional throughput cost and latency. ALL_PROJECTED_ATTRIBUTES: Allowed only when querying an index. Retrieves all attributes which have been projected into the index. If the index is configured to project all attributes, this is equivalent to specifying ALL_ATTRIBUTES. COUNT: Returns the number of matching items, rather than the matching items themselves. SPECIFIC_ATTRIBUTES : Returns only the attributes listed in AttributesToGet. This is equivalent to specifying AttributesToGet without specifying any value for Select. If you are querying an index and request only attributes that are projected into that index, the operation will read only the index and not the table. If any of the requested attributes are not projected into the index, Amazon DynamoDB will need to fetch each matching item from the table. This extra fetching incurs additional throughput cost and latency. If neither Select nor AttributesToGet are specified, Amazon DynamoDB defaults to ALL_ATTRIBUTES when accessing a table, and ALL_PROJECTED_ATTRIBUTES when accessing an index. You cannot use both Select and AttributesToGet together in a single request, unless the value for Select is SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying AttributesToGet without any value for Select.)  Valid values include:
-      * `ALL_ATTRIBUTES`
-      * `ALL_PROJECTED_ATTRIBUTES`
-      * `SPECIFIC_ATTRIBUTES`
-      * `COUNT`
-    * `:attributes_to_get` - (Array&lt;<String>) The names of one or more attributes to retrieve. If no attribute names are specified, then all attributes will be returned. If any of the requested attributes are not found, they will not appear in the result. If you are querying an index and request only attributes that are projected into that index, the operation will read only the index and not the table. If any of the requested attributes are not projected into the index, Amazon DynamoDB will need to fetch each matching item from the table. This extra fetching incurs additional throughput cost and latency. You cannot use both AttributesToGet and Select together in a Query request, unless the value for Select is SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying AttributesToGet without any value for Select.)
-    * `:limit` - (Integer) The maximum number of items to evaluate (not necessarily the number of matching items). If Amazon DynamoDB processes the number of items up to the limit while processing the results, it stops the operation and returns the matching values up to that point, and a LastEvaluatedKey to apply in a subsequent operation, so that you can pick up where you left off. Also, if the processed data set size exceeds 1 MB before Amazon DynamoDB reaches this limit, it stops the operation and returns the matching values up to the limit, and a LastEvaluatedKey to apply in a subsequent operation to continue the operation. For more information see Query and Scan in the Amazon DynamoDB Developer Guide.
-    * `:consistent_read` - (Boolean) If set to  `true` , then the operation uses strongly consistent reads; otherwise, eventually consistent reads are used. Strongly consistent reads are not supported on global secondary indexes. If you query a global secondary index with ConsistentRead set to  `true` , you will receive an error message.
-    * `:key_conditions` - (Hash&lt;<String,Hash>) The selection criteria for the query. For a query on a table, you can only have conditions on the table primary key attributes. You must specify the hash key attribute name and value as an EQ condition. You can optionally specify a second condition, referring to the range key attribute. For a query on an index, you can only have conditions on the index key attributes. You must specify the index hash attribute name and value as an EQ condition. You can optionally specify a second condition, referring to the index key range attribute. Multiple conditions are evaluated using "AND"; in other words, all of the conditions must be met in order for an item to appear in the results results. Each KeyConditions element consists of an attribute name to compare, along with the following: AttributeValueList - One or more values to evaluate against the supplied attribute. This list contains exactly one value, except for a BETWEEN comparison, in which case the list contains two values. For type Number, value comparisons are numeric. String value comparisons for greater than, equals, or less than are based on ASCII character code values. For example, a is greater than A, and aa is greater than B. For a list of code values, see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters. For Binary, Amazon DynamoDB treats each byte of the binary data as unsigned when it compares binary values, for example when evaluating query expressions. ComparisonOperator - A comparator for evaluating attributes. For example, equals, greater than, less than, etc. Valid comparison operators for Query: EQ | LE | LT | GE | GT | BEGINS_WITH | BETWEEN For information on specifying data types in JSON, see JSON Data Format in the Amazon DynamoDB Developer Guide. The following are descriptions of each comparison operator. EQ : Equal. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not equal {"NS":["6", "2", "1"]}. LE : Less than or equal. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to {"NS":["6", "2", "1"]}. LT : Less than. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to {"NS":["6", "2", "1"]}. GE : Greater than or equal. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to {"NS":["6", "2", "1"]}. GT : Greater than. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to {"NS":["6", "2", "1"]}. BEGINS_WITH : checks for a prefix. AttributeValueList can contain only one AttributeValue of type String or Binary (not a Number or a set). The target attribute of the comparison must be a String or Binary (not a Number or a set). BETWEEN : Greater than or equal to the first value, and less than or equal to the second value. AttributeValueList must contain two AttributeValue elements of the same type, either String, Number, or Binary (not a set). A target attribute matches if the target value is greater than, or equal to, the first element and less than, or equal to, the second element. If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not compare to `{"N":"6"}`. Also, `{"N":"6"}` does not compare to {"NS":["6", "2", "1"]}
-      * `:attribute_value_list` - (Array&lt;<Hash>) One or more values to evaluate against the supplied attribute. This list contains exactly one value, except for a BETWEEN or IN comparison, in which case the list contains two values. For type Number, value comparisons are numeric. String value comparisons for greater than, equals, or less than are based on ASCII character code values. For example, a is greater than A, and aa is greater than B. For a list of code values, see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters. For Binary, Amazon DynamoDB treats each byte of the binary data as unsigned when it compares binary values, for example when evaluating query expressions.
-        * `:s` - (String) A String data type
-        * `:n` - (String) A Number data type
-        * `:b` - (String) A Binary data type
-        * `:ss` - (Array&lt;<String>) A String set data type
-        * `:ns` - (Array&lt;<String>) Number set data type
-        * `:bs` - (Array&lt;<String>) A Binary set data type
-      * `:comparison_operator` - *required* - (String) A comparator for evaluating attributes. For example, equals, greater than, less than, etc. Valid comparison operators for Query: EQ | LE | LT | GE | GT | BEGINS_WITH | BETWEEN Valid comparison operators for Scan: EQ | NE | LE | LT | GE | GT | NOT_NULL | NULL | CONTAINS | NOT_CONTAINS | BEGINS_WITH | IN | BETWEEN For information on specifying data types in JSON, see JSON Data Format in the Amazon DynamoDB Developer Guide. The following are descriptions of each comparison operator. EQ : Equal. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not equal {"NS":["6", "2", "1"]}. NE : Not equal. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not equal {"NS":["6", "2", "1"]}. LE : Less than or equal. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to {"NS":["6", "2", "1"]}. LT : Less than. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to {"NS":["6", "2", "1"]}. GE : Greater than or equal. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to {"NS":["6", "2", "1"]}. GT : Greater than. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to {"NS":["6", "2", "1"]}. NOT_NULL : The attribute exists. NULL : The attribute does not exist. CONTAINS : checks for a subsequence, or value in a set. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If the target attribute of the comparison is a String, then the operation checks for a substring match. If the target attribute of the comparison is Binary, then the operation looks for a subsequence of the target that matches the input. If the target attribute of the comparison is a set ("SS", "NS", or "BS"), then the operation checks for a member of the set (not as a substring). NOT_CONTAINS : checks for absence of a subsequence, or absence of a value in a set. AttributeValueList can contain only one AttributeValue of type String, Number, or Binary (not a set). If the target attribute of the comparison is a String, then the operation checks for the absence of a substring match. If the target attribute of the comparison is Binary, then the operation checks for the absence of a subsequence of the target that matches the input. If the target attribute of the comparison is a set ("SS", "NS", or "BS"), then the operation checks for the absence of a member of the set (not as a substring). BEGINS_WITH : checks for a prefix. AttributeValueList can contain only one AttributeValue of type String or Binary (not a Number or a set). The target attribute of the comparison must be a String or Binary (not a Number or a set). IN : checks for exact matches. AttributeValueList can contain more than one AttributeValue of type String, Number, or Binary (not a set). The target attribute of the comparison must be of the same type and exact value to match. A String never matches a String set. BETWEEN : Greater than or equal to the first value, and less than or equal to the second value. AttributeValueList must contain two AttributeValue elements of the same type, either String, Number, or Binary (not a set). A target attribute matches if the target value is greater than, or equal to, the first element and less than, or equal to, the second element. If an item contains an AttributeValue of a different type than the one specified in the request, the value does not match. For example, `{"S":"6"}` does not compare to `{"N":"6"}`. Also, `{"N":"6"}` does not compare to {"NS":["6", "2", "1"]}  Valid values include:
-        * `EQ`
-        * `NE`
-        * `IN`
-        * `LE`
-        * `LT`
-        * `GE`
-        * `GT`
-        * `BETWEEN`
-        * `NOT_NULL`
-        * `NULL`
-        * `CONTAINS`
-        * `NOT_CONTAINS`
-        * `BEGINS_WITH`
-    * `:scan_index_forward` - (Boolean) Specifies ascending ( `true` ) or descending ( `false` ) traversal of the index. Amazon DynamoDB returns results reflecting the requested order determined by the range key. If the data type is Number, the results are returned in numeric order. For String, the results are returned in order of ASCII character code values. For Binary, Amazon DynamoDB treats each byte of the binary data as unsigned when it compares binary values. If ScanIndexForward is not specified, the results are returned in ascending order.
-    * `:exclusive_start_key` - (Hash&lt;<String,Hash>) The primary key of the first item that this operation will evalute. Use the value that was returned for LastEvaluatedKey in the previous operation. The data type for ExclusiveStartKey must be String, Number or Binary. No set data types are allowed.
-      * `:s` - (String) A String data type
-      * `:n` - (String) A Number data type
-      * `:b` - (String) A Binary data type
-      * `:ss` - (Array&lt;<String>) A String set data type
-      * `:ns` - (Array&lt;<String>) Number set data type
-      * `:bs` - (Array&lt;<String>) A Binary set data type
-    * `:return_consumed_capacity` - (String) Valid values include:
-      * `INDEXES`
-      * `TOTAL`
-      * `NONE`
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:member` - (Hash<String,Hash>)
-      * `:s` - (String)
-      * `:n` - (String)
-      * `:b` - (String)
-      * `:ss` - (Array<String>)
-      * `:ns` - (Array<String>)
-      * `:bs` - (Array<Blob>)
-    * `:count` - (Integer)
-    * `:last_evaluated_key` - (Hash<String,Hash>)
-      * `:s` - (String)
-      * `:n` - (String)
-      * `:b` - (String)
-      * `:ss` - (Array<String>)
-      * `:ns` - (Array<String>)
-      * `:bs` - (Array<Blob>)
-    * `:consumed_capacity` - (Hash)
-      * `:table_name` - (String)
-      * `:capacity_units` - (Numeric)
-      * `:table` - (Hash)
-        * `:capacity_units` - (Numeric)
-      * `:local_secondary_indexes` - (Hash<String,Hash>)
-        * `:capacity_units` - (Numeric)
-      * `:global_secondary_indexes` - (Hash<String,Hash>)
-        * `:capacity_units` - (Numeric)
+:put_item: "Calls the PutItem API operation.\n@param [Hash] options\n  * `:table_name`
+  - *required* - (String) The name of the table to contain the item.\n  * `:item`
+  - *required* - (Hash&lt;<String,Hash>) A map of attribute name/value pairs, one
+  for each attribute. Only the primary key attributes are required; you can optionally
+  provide other attribute name-value pairs for the item. If you specify any attributes
+  that are part of an index key, then the data types for those attributes must match
+  those of the schema in the table's attribute definition. For more information about
+  primary keys, see Primary Key in the Amazon DynamoDB Developer Guide. Each element
+  in the Item map is an AttributeValue object.\n    * `:s` - (String) A String data
+  type\n    * `:n` - (String) A Number data type\n    * `:b` - (String) A Binary data
+  type\n    * `:ss` - (Array&lt;<String>) A String set data type\n    * `:ns` - (Array&lt;<String>)
+  Number set data type\n    * `:bs` - (Array&lt;<String>) A Binary set data type\n
+  \ * `:expected` - (Hash&lt;<String,Hash>) A map of attribute/condition pairs. This
+  is the conditional block for the PutItem operation. All the conditions must be met
+  for the operation to succeed. Expected allows you to provide an attribute name,
+  and whether or not Amazon DynamoDB should check to see if the attribute value already
+  exists; or if the attribute value exists and has a particular value before changing
+  it. Each item in Expected represents an attribute name for Amazon DynamoDB to check,
+  along with the following: Value - The attribute value for Amazon DynamoDB to check.
+  Exists - Causes Amazon DynamoDB to evaluate the value before attempting a conditional
+  operation: If Exists is  `true` , Amazon DynamoDB will check to see if that attribute
+  value already exists in the table. If it is found, then the operation succeeds.
+  If it is not found, the operation fails with a ConditionalCheckFailedException.
+  If Exists is  `false` , Amazon DynamoDB assumes that the attribute value does not
+  exist in the table. If in fact the value does not exist, then the assumption is
+  valid and the operation succeeds. If the value is found, despite the assumption
+  that it does not exist, the operation fails with a ConditionalCheckFailedException.
+  The default setting for Exists is  `true` . If you supply a Value all by itself,
+  Amazon DynamoDB assumes the attribute exists: You don't have to set Exists to  `true`
+  , because it is implied. Amazon DynamoDB returns a ValidationException if: Exists
+  is  `true`  but there is no Value to check. (You expect a value to exist, but don't
+  specify what that value is.) Exists is  `false`  but you also specify a Value. (You
+  cannot expect an attribute to have a value, while also expecting it not to exist.)
+  If you specify more than one condition for Exists, then all of the conditions must
+  evaluate to  `true` . (In other words, the conditions are ANDed together.) Otherwise,
+  the conditional operation will fail.\n    * `:value` - (Hash) Specify whether or
+  not a value already exists and has a specific content for the attribute name-value
+  pair.\n      * `:s` - (String) A String data type\n      * `:n` - (String) A Number
+  data type\n      * `:b` - (String) A Binary data type\n      * `:ss` - (Array&lt;<String>)
+  A String set data type\n      * `:ns` - (Array&lt;<String>) Number set data type\n
+  \     * `:bs` - (Array&lt;<String>) A Binary set data type\n    * `:exists` - (Boolean)
+  Causes Amazon DynamoDB to evaluate the value before attempting a conditional operation:
+  If Exists is  `true` , Amazon DynamoDB will check to see if that attribute value
+  already exists in the table. If it is found, then the operation succeeds. If it
+  is not found, the operation fails with a ConditionalCheckFailedException. If Exists
+  is  `false` , Amazon DynamoDB assumes that the attribute value does not exist in
+  the table. If in fact the value does not exist, then the assumption is valid and
+  the operation succeeds. If the value is found, despite the assumption that it does
+  not exist, the operation fails with a ConditionalCheckFailedException. The default
+  setting for Exists is  `true` . If you supply a Value all by itself, Amazon DynamoDB
+  assumes the attribute exists: You don't have to set Exists to  `true` , because
+  it is implied. Amazon DynamoDB returns a ValidationException if: Exists is  `true`
+  \ but there is no Value to check. (You expect a value to exist, but don't specify
+  what that value is.) Exists is  `false`  but you also specify a Value. (You cannot
+  expect an attribute to have a value, while also expecting it not to exist.) If you
+  specify more than one condition for Exists, then all of the conditions must evaluate
+  to  `true` . (In other words, the conditions are ANDed together.) Otherwise, the
+  conditional operation will fail.\n    * `:comparison_operator` - (String) Valid
+  values include:\n      * `EQ`\n      * `NE`\n      * `IN`\n      * `LE`\n      *
+  `LT`\n      * `GE`\n      * `GT`\n      * `BETWEEN`\n      * `NOT_NULL`\n      *
+  `NULL`\n      * `CONTAINS`\n      * `NOT_CONTAINS`\n      * `BEGINS_WITH`\n    *
+  `:attribute_value_list` - (Array&lt;<Hash>) \n      * `:s` - (String) A String data
+  type\n      * `:n` - (String) A Number data type\n      * `:b` - (String) A Binary
+  data type\n      * `:ss` - (Array&lt;<String>) A String set data type\n      * `:ns`
+  - (Array&lt;<String>) Number set data type\n      * `:bs` - (Array&lt;<String>)
+  A Binary set data type\n  * `:return_values` - (String) Use ReturnValues if you
+  want to get the item attributes as they appeared before they were updated with the
+  PutItem request. For PutItem, the valid values are: NONE - If ReturnValues is not
+  specified, or if its value is NONE, then nothing is returned. (This is the default
+  for ReturnValues.) ALL_OLD - If PutItem overwrote an attribute name-value pair,
+  then the content of the old item is returned.  Valid values include:\n    * `NONE`\n
+  \   * `ALL_OLD`\n    * `UPDATED_OLD`\n    * `ALL_NEW`\n    * `UPDATED_NEW`\n  *
+  `:return_consumed_capacity` - (String) Valid values include:\n    * `INDEXES`\n
+  \   * `TOTAL`\n    * `NONE`\n  * `:return_item_collection_metrics` - (String) If
+  set to SIZE, statistics about item collections, if any, that were modified during
+  the operation are returned in the response. If set to NONE (the default), no statistics
+  are returned.  Valid values include:\n    * `SIZE`\n    * `NONE`\n  * `:conditional_operator`
+  - (String) Valid values include:\n    * `AND`\n    * `OR`\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:attributes` - (Hash<String,Hash>)\n    * `:s` - (String)\n    * `:n` - (String)\n
+  \   * `:b` - (String)\n    * `:ss` - (Array<String>)\n    * `:ns` - (Array<String>)\n
+  \   * `:bs` - (Array<Blob>)\n  * `:consumed_capacity` - (Hash)\n    * `:table_name`
+  - (String)\n    * `:capacity_units` - (Numeric)\n    * `:table` - (Hash)\n      *
+  `:capacity_units` - (Numeric)\n    * `:local_secondary_indexes` - (Hash<String,Hash>)\n
+  \     * `:capacity_units` - (Numeric)\n    * `:global_secondary_indexes` - (Hash<String,Hash>)\n
+  \     * `:capacity_units` - (Numeric)\n  * `:item_collection_metrics` - (Hash)\n
+  \   * `:item_collection_key` - (Hash<String,Hash>)\n      * `:s` - (String)\n      *
+  `:n` - (String)\n      * `:b` - (String)\n      * `:ss` - (Array<String>)\n      *
+  `:ns` - (Array<String>)\n      * `:bs` - (Array<Blob>)\n    * `:size_estimate_range_gb`
+  - (Array<Float>)"
+:query: "Calls the Query API operation.\n@param [Hash] options\n  * `:table_name`
+  - *required* - (String) The name of the table containing the requested items.\n
+  \ * `:index_name` - (String) The name of an index to query. This can be any local
+  secondary index or global secondary index on the table.\n  * `:select` - (String)
+  The attributes to be returned in the result. You can retrieve all item attributes,
+  specific item attributes, the count of matching items, or in the case of an index,
+  some or all of the attributes projected into the index. ALL_ATTRIBUTES: Returns
+  all of the item attributes. For a table, this is the default. For an index, this
+  mode causes Amazon DynamoDB to fetch the full item from the table for each matching
+  item in the index. If the index is configured to project all item attributes, the
+  matching items will not be fetched from the table. Fetching items from the table
+  incurs additional throughput cost and latency. ALL_PROJECTED_ATTRIBUTES: Allowed
+  only when querying an index. Retrieves all attributes which have been projected
+  into the index. If the index is configured to project all attributes, this is equivalent
+  to specifying ALL_ATTRIBUTES. COUNT: Returns the number of matching items, rather
+  than the matching items themselves. SPECIFIC_ATTRIBUTES : Returns only the attributes
+  listed in AttributesToGet. This is equivalent to specifying AttributesToGet without
+  specifying any value for Select. If you are querying an index and request only attributes
+  that are projected into that index, the operation will read only the index and not
+  the table. If any of the requested attributes are not projected into the index,
+  Amazon DynamoDB will need to fetch each matching item from the table. This extra
+  fetching incurs additional throughput cost and latency. If neither Select nor AttributesToGet
+  are specified, Amazon DynamoDB defaults to ALL_ATTRIBUTES when accessing a table,
+  and ALL_PROJECTED_ATTRIBUTES when accessing an index. You cannot use both Select
+  and AttributesToGet together in a single request, unless the value for Select is
+  SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying AttributesToGet without
+  any value for Select.)  Valid values include:\n    * `ALL_ATTRIBUTES`\n    * `ALL_PROJECTED_ATTRIBUTES`\n
+  \   * `SPECIFIC_ATTRIBUTES`\n    * `COUNT`\n  * `:attributes_to_get` - (Array&lt;<String>)
+  The names of one or more attributes to retrieve. If no attribute names are specified,
+  then all attributes will be returned. If any of the requested attributes are not
+  found, they will not appear in the result. If you are querying an index and request
+  only attributes that are projected into that index, the operation will read only
+  the index and not the table. If any of the requested attributes are not projected
+  into the index, Amazon DynamoDB will need to fetch each matching item from the table.
+  This extra fetching incurs additional throughput cost and latency. You cannot use
+  both AttributesToGet and Select together in a Query request, unless the value for
+  Select is SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying AttributesToGet
+  without any value for Select.)\n  * `:limit` - (Integer) The maximum number of items
+  to evaluate (not necessarily the number of matching items). If Amazon DynamoDB processes
+  the number of items up to the limit while processing the results, it stops the operation
+  and returns the matching values up to that point, and a LastEvaluatedKey to apply
+  in a subsequent operation, so that you can pick up where you left off. Also, if
+  the processed data set size exceeds 1 MB before Amazon DynamoDB reaches this limit,
+  it stops the operation and returns the matching values up to the limit, and a LastEvaluatedKey
+  to apply in a subsequent operation to continue the operation. For more information
+  see Query and Scan in the Amazon DynamoDB Developer Guide.\n  * `:consistent_read`
+  - (Boolean) If set to  `true` , then the operation uses strongly consistent reads;
+  otherwise, eventually consistent reads are used. Strongly consistent reads are not
+  supported on global secondary indexes. If you query a global secondary index with
+  ConsistentRead set to  `true` , you will receive an error message.\n  * `:key_conditions`
+  - (Hash&lt;<String,Hash>) The selection criteria for the query. For a query on a
+  table, you can only have conditions on the table primary key attributes. You must
+  specify the hash key attribute name and value as an EQ condition. You can optionally
+  specify a second condition, referring to the range key attribute. For a query on
+  an index, you can only have conditions on the index key attributes. You must specify
+  the index hash attribute name and value as an EQ condition. You can optionally specify
+  a second condition, referring to the index key range attribute. Multiple conditions
+  are evaluated using \"AND\"; in other words, all of the conditions must be met in
+  order for an item to appear in the results results. Each KeyConditions element consists
+  of an attribute name to compare, along with the following: AttributeValueList -
+  One or more values to evaluate against the supplied attribute. This list contains
+  exactly one value, except for a BETWEEN comparison, in which case the list contains
+  two values. For type Number, value comparisons are numeric. String value comparisons
+  for greater than, equals, or less than are based on ASCII character code values.
+  For example, a is greater than A, and aa is greater than B. For a list of code values,
+  see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters. For Binary, Amazon
+  DynamoDB treats each byte of the binary data as unsigned when it compares binary
+  values, for example when evaluating query expressions. ComparisonOperator - A comparator
+  for evaluating attributes. For example, equals, greater than, less than, etc. Valid
+  comparison operators for Query: EQ | LE | LT | GE | GT | BEGINS_WITH | BETWEEN For
+  information on specifying data types in JSON, see JSON Data Format in the Amazon
+  DynamoDB Developer Guide. The following are descriptions of each comparison operator.
+  EQ : Equal. AttributeValueList can contain only one AttributeValue of type String,
+  Number, or Binary (not a set). If an item contains an AttributeValue of a different
+  type than the one specified in the request, the value does not match. For example,
+  `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not equal
+  {\"NS\":[\"6\", \"2\", \"1\"]}. LE : Less than or equal. AttributeValueList can
+  contain only one AttributeValue of type String, Number, or Binary (not a set). If
+  an item contains an AttributeValue of a different type than the one specified in
+  the request, the value does not match. For example, `{\"S\":\"6\"}` does not equal
+  `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\", \"2\",
+  \"1\"]}. LT : Less than. AttributeValueList can contain only one AttributeValue
+  of type String, Number, or Binary (not a set). If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GE : Greater than or equal.
+  AttributeValueList can contain only one AttributeValue of type String, Number, or
+  Binary (not a set). If an item contains an AttributeValue of a different type than
+  the one specified in the request, the value does not match. For example, `{\"S\":\"6\"}`
+  does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. GT : Greater than. AttributeValueList can contain only one AttributeValue
+  of type String, Number, or Binary (not a set). If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. BEGINS_WITH : checks for a prefix.
+  AttributeValueList can contain only one AttributeValue of type String or Binary
+  (not a Number or a set). The target attribute of the comparison must be a String
+  or Binary (not a Number or a set). BETWEEN : Greater than or equal to the first
+  value, and less than or equal to the second value. AttributeValueList must contain
+  two AttributeValue elements of the same type, either String, Number, or Binary (not
+  a set). A target attribute matches if the target value is greater than, or equal
+  to, the first element and less than, or equal to, the second element. If an item
+  contains an AttributeValue of a different type than the one specified in the request,
+  the value does not match. For example, `{\"S\":\"6\"}` does not compare to `{\"N\":\"6\"}`.
+  Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}\n    *
+  `:attribute_value_list` - (Array&lt;<Hash>) One or more values to evaluate against
+  the supplied attribute. This list contains exactly one value, except for a BETWEEN
+  or IN comparison, in which case the list contains two values. For type Number, value
+  comparisons are numeric. String value comparisons for greater than, equals, or less
+  than are based on ASCII character code values. For example, a is greater than A,
+  and aa is greater than B. For a list of code values, see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters.
+  For Binary, Amazon DynamoDB treats each byte of the binary data as unsigned when
+  it compares binary values, for example when evaluating query expressions.\n      *
+  `:s` - (String) A String data type\n      * `:n` - (String) A Number data type\n
+  \     * `:b` - (String) A Binary data type\n      * `:ss` - (Array&lt;<String>)
+  A String set data type\n      * `:ns` - (Array&lt;<String>) Number set data type\n
+  \     * `:bs` - (Array&lt;<String>) A Binary set data type\n    * `:comparison_operator`
+  - *required* - (String) A comparator for evaluating attributes. For example, equals,
+  greater than, less than, etc. Valid comparison operators for Query: EQ | LE | LT
+  | GE | GT | BEGINS_WITH | BETWEEN Valid comparison operators for Scan: EQ | NE |
+  LE | LT | GE | GT | NOT_NULL | NULL | CONTAINS | NOT_CONTAINS | BEGINS_WITH | IN
+  | BETWEEN For information on specifying data types in JSON, see JSON Data Format
+  in the Amazon DynamoDB Developer Guide. The following are descriptions of each comparison
+  operator. EQ : Equal. AttributeValueList can contain only one AttributeValue of
+  type String, Number, or Binary (not a set). If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not equal {\"NS\":[\"6\", \"2\", \"1\"]}. NE : Not equal. AttributeValueList
+  can contain only one AttributeValue of type String, Number, or Binary (not a set).
+  If an item contains an AttributeValue of a different type than the one specified
+  in the request, the value does not match. For example, `{\"S\":\"6\"}` does not
+  equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not equal {\"NS\":[\"6\", \"2\",
+  \"1\"]}. LE : Less than or equal. AttributeValueList can contain only one AttributeValue
+  of type String, Number, or Binary (not a set). If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. LT : Less than. AttributeValueList
+  can contain only one AttributeValue of type String, Number, or Binary (not a set).
+  If an item contains an AttributeValue of a different type than the one specified
+  in the request, the value does not match. For example, `{\"S\":\"6\"}` does not
+  equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. GE : Greater than or equal. AttributeValueList can contain only
+  one AttributeValue of type String, Number, or Binary (not a set). If an item contains
+  an AttributeValue of a different type than the one specified in the request, the
+  value does not match. For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`.
+  Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GT : Greater
+  than. AttributeValueList can contain only one AttributeValue of type String, Number,
+  or Binary (not a set). If an item contains an AttributeValue of a different type
+  than the one specified in the request, the value does not match. For example, `{\"S\":\"6\"}`
+  does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. NOT_NULL : The attribute exists. NULL : The attribute does not exist.
+  CONTAINS : checks for a subsequence, or value in a set. AttributeValueList can contain
+  only one AttributeValue of type String, Number, or Binary (not a set). If the target
+  attribute of the comparison is a String, then the operation checks for a substring
+  match. If the target attribute of the comparison is Binary, then the operation looks
+  for a subsequence of the target that matches the input. If the target attribute
+  of the comparison is a set (\"SS\", \"NS\", or \"BS\"), then the operation checks
+  for a member of the set (not as a substring). NOT_CONTAINS : checks for absence
+  of a subsequence, or absence of a value in a set. AttributeValueList can contain
+  only one AttributeValue of type String, Number, or Binary (not a set). If the target
+  attribute of the comparison is a String, then the operation checks for the absence
+  of a substring match. If the target attribute of the comparison is Binary, then
+  the operation checks for the absence of a subsequence of the target that matches
+  the input. If the target attribute of the comparison is a set (\"SS\", \"NS\", or
+  \"BS\"), then the operation checks for the absence of a member of the set (not as
+  a substring). BEGINS_WITH : checks for a prefix. AttributeValueList can contain
+  only one AttributeValue of type String or Binary (not a Number or a set). The target
+  attribute of the comparison must be a String or Binary (not a Number or a set).
+  IN : checks for exact matches. AttributeValueList can contain more than one AttributeValue
+  of type String, Number, or Binary (not a set). The target attribute of the comparison
+  must be of the same type and exact value to match. A String never matches a String
+  set. BETWEEN : Greater than or equal to the first value, and less than or equal
+  to the second value. AttributeValueList must contain two AttributeValue elements
+  of the same type, either String, Number, or Binary (not a set). A target attribute
+  matches if the target value is greater than, or equal to, the first element and
+  less than, or equal to, the second element. If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not compare to `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}  Valid values include:\n      *
+  `EQ`\n      * `NE`\n      * `IN`\n      * `LE`\n      * `LT`\n      * `GE`\n      *
+  `GT`\n      * `BETWEEN`\n      * `NOT_NULL`\n      * `NULL`\n      * `CONTAINS`\n
+  \     * `NOT_CONTAINS`\n      * `BEGINS_WITH`\n  * `:query_filter` - (Hash&lt;<String,Hash>)
+  \n    * `:attribute_value_list` - (Array&lt;<Hash>) One or more values to evaluate
+  against the supplied attribute. This list contains exactly one value, except for
+  a BETWEEN or IN comparison, in which case the list contains two values. For type
+  Number, value comparisons are numeric. String value comparisons for greater than,
+  equals, or less than are based on ASCII character code values. For example, a is
+  greater than A, and aa is greater than B. For a list of code values, see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters.
+  For Binary, Amazon DynamoDB treats each byte of the binary data as unsigned when
+  it compares binary values, for example when evaluating query expressions.\n      *
+  `:s` - (String) A String data type\n      * `:n` - (String) A Number data type\n
+  \     * `:b` - (String) A Binary data type\n      * `:ss` - (Array&lt;<String>)
+  A String set data type\n      * `:ns` - (Array&lt;<String>) Number set data type\n
+  \     * `:bs` - (Array&lt;<String>) A Binary set data type\n    * `:comparison_operator`
+  - *required* - (String) A comparator for evaluating attributes. For example, equals,
+  greater than, less than, etc. Valid comparison operators for Query: EQ | LE | LT
+  | GE | GT | BEGINS_WITH | BETWEEN Valid comparison operators for Scan: EQ | NE |
+  LE | LT | GE | GT | NOT_NULL | NULL | CONTAINS | NOT_CONTAINS | BEGINS_WITH | IN
+  | BETWEEN For information on specifying data types in JSON, see JSON Data Format
+  in the Amazon DynamoDB Developer Guide. The following are descriptions of each comparison
+  operator. EQ : Equal. AttributeValueList can contain only one AttributeValue of
+  type String, Number, or Binary (not a set). If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not equal {\"NS\":[\"6\", \"2\", \"1\"]}. NE : Not equal. AttributeValueList
+  can contain only one AttributeValue of type String, Number, or Binary (not a set).
+  If an item contains an AttributeValue of a different type than the one specified
+  in the request, the value does not match. For example, `{\"S\":\"6\"}` does not
+  equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not equal {\"NS\":[\"6\", \"2\",
+  \"1\"]}. LE : Less than or equal. AttributeValueList can contain only one AttributeValue
+  of type String, Number, or Binary (not a set). If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. LT : Less than. AttributeValueList
+  can contain only one AttributeValue of type String, Number, or Binary (not a set).
+  If an item contains an AttributeValue of a different type than the one specified
+  in the request, the value does not match. For example, `{\"S\":\"6\"}` does not
+  equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. GE : Greater than or equal. AttributeValueList can contain only
+  one AttributeValue of type String, Number, or Binary (not a set). If an item contains
+  an AttributeValue of a different type than the one specified in the request, the
+  value does not match. For example, `{\"S\":\"6\"}` does not equal `{\"N\":\"6\"}`.
+  Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}. GT : Greater
+  than. AttributeValueList can contain only one AttributeValue of type String, Number,
+  or Binary (not a set). If an item contains an AttributeValue of a different type
+  than the one specified in the request, the value does not match. For example, `{\"S\":\"6\"}`
+  does not equal `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}` does not compare to {\"NS\":[\"6\",
+  \"2\", \"1\"]}. NOT_NULL : The attribute exists. NULL : The attribute does not exist.
+  CONTAINS : checks for a subsequence, or value in a set. AttributeValueList can contain
+  only one AttributeValue of type String, Number, or Binary (not a set). If the target
+  attribute of the comparison is a String, then the operation checks for a substring
+  match. If the target attribute of the comparison is Binary, then the operation looks
+  for a subsequence of the target that matches the input. If the target attribute
+  of the comparison is a set (\"SS\", \"NS\", or \"BS\"), then the operation checks
+  for a member of the set (not as a substring). NOT_CONTAINS : checks for absence
+  of a subsequence, or absence of a value in a set. AttributeValueList can contain
+  only one AttributeValue of type String, Number, or Binary (not a set). If the target
+  attribute of the comparison is a String, then the operation checks for the absence
+  of a substring match. If the target attribute of the comparison is Binary, then
+  the operation checks for the absence of a subsequence of the target that matches
+  the input. If the target attribute of the comparison is a set (\"SS\", \"NS\", or
+  \"BS\"), then the operation checks for the absence of a member of the set (not as
+  a substring). BEGINS_WITH : checks for a prefix. AttributeValueList can contain
+  only one AttributeValue of type String or Binary (not a Number or a set). The target
+  attribute of the comparison must be a String or Binary (not a Number or a set).
+  IN : checks for exact matches. AttributeValueList can contain more than one AttributeValue
+  of type String, Number, or Binary (not a set). The target attribute of the comparison
+  must be of the same type and exact value to match. A String never matches a String
+  set. BETWEEN : Greater than or equal to the first value, and less than or equal
+  to the second value. AttributeValueList must contain two AttributeValue elements
+  of the same type, either String, Number, or Binary (not a set). A target attribute
+  matches if the target value is greater than, or equal to, the first element and
+  less than, or equal to, the second element. If an item contains an AttributeValue
+  of a different type than the one specified in the request, the value does not match.
+  For example, `{\"S\":\"6\"}` does not compare to `{\"N\":\"6\"}`. Also, `{\"N\":\"6\"}`
+  does not compare to {\"NS\":[\"6\", \"2\", \"1\"]}  Valid values include:\n      *
+  `EQ`\n      * `NE`\n      * `IN`\n      * `LE`\n      * `LT`\n      * `GE`\n      *
+  `GT`\n      * `BETWEEN`\n      * `NOT_NULL`\n      * `NULL`\n      * `CONTAINS`\n
+  \     * `NOT_CONTAINS`\n      * `BEGINS_WITH`\n  * `:conditional_operator` - (String)
+  Valid values include:\n    * `AND`\n    * `OR`\n  * `:scan_index_forward` - (Boolean)
+  Specifies ascending ( `true` ) or descending ( `false` ) traversal of the index.
+  Amazon DynamoDB returns results reflecting the requested order determined by the
+  range key. If the data type is Number, the results are returned in numeric order.
+  For String, the results are returned in order of ASCII character code values. For
+  Binary, Amazon DynamoDB treats each byte of the binary data as unsigned when it
+  compares binary values. If ScanIndexForward is not specified, the results are returned
+  in ascending order.\n  * `:exclusive_start_key` - (Hash&lt;<String,Hash>) The primary
+  key of the first item that this operation will evalute. Use the value that was returned
+  for LastEvaluatedKey in the previous operation. The data type for ExclusiveStartKey
+  must be String, Number or Binary. No set data types are allowed.\n    * `:s` - (String)
+  A String data type\n    * `:n` - (String) A Number data type\n    * `:b` - (String)
+  A Binary data type\n    * `:ss` - (Array&lt;<String>) A String set data type\n    *
+  `:ns` - (Array&lt;<String>) Number set data type\n    * `:bs` - (Array&lt;<String>)
+  A Binary set data type\n  * `:return_consumed_capacity` - (String) Valid values
+  include:\n    * `INDEXES`\n    * `TOTAL`\n    * `NONE`\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:member` - (Hash<String,Hash>)\n    * `:s` - (String)\n    * `:n` - (String)\n
+  \   * `:b` - (String)\n    * `:ss` - (Array<String>)\n    * `:ns` - (Array<String>)\n
+  \   * `:bs` - (Array<Blob>)\n  * `:count` - (Integer)\n  * `:scanned_count` - (Integer)\n
+  \ * `:last_evaluated_key` - (Hash<String,Hash>)\n    * `:s` - (String)\n    * `:n`
+  - (String)\n    * `:b` - (String)\n    * `:ss` - (Array<String>)\n    * `:ns` -
+  (Array<String>)\n    * `:bs` - (Array<Blob>)\n  * `:consumed_capacity` - (Hash)\n
+  \   * `:table_name` - (String)\n    * `:capacity_units` - (Numeric)\n    * `:table`
+  - (Hash)\n      * `:capacity_units` - (Numeric)\n    * `:local_secondary_indexes`
+  - (Hash<String,Hash>)\n      * `:capacity_units` - (Numeric)\n    * `:global_secondary_indexes`
+  - (Hash<String,Hash>)\n      * `:capacity_units` - (Numeric)"
 :scan: |-
   Calls the Scan API operation.
   @param [Hash] options
@@ -624,6 +878,9 @@
         * `CONTAINS`
         * `NOT_CONTAINS`
         * `BEGINS_WITH`
+    * `:conditional_operator` - (String) Valid values include:
+      * `AND`
+      * `OR`
     * `:exclusive_start_key` - (Hash&lt;<String,Hash>) The primary key of the first item that this operation will evalute. Use the value that was returned for LastEvaluatedKey in the previous operation. The data type for ExclusiveStartKey must be String, Number or Binary. No set data types are allowed. In a parallel scan, a Scan request that includes ExclusiveStartKey must specify the same segment whose previous Scan returned the corresponding value of LastEvaluatedKey.
       * `:s` - (String) A String data type
       * `:n` - (String) A Number data type
@@ -809,15 +1066,24 @@
   while also expecting it not to exist.) If you specify more than one condition for
   Exists, then all of the conditions must evaluate to  `true` . (In other words, the
   conditions are ANDed together.) Otherwise, the conditional operation will fail.\n
-  \ * `:return_values` - (String) Use ReturnValues if you want to get the item attributes
-  as they appeared either before or after they were updated. For UpdateItem, the valid
-  values are: NONE - If ReturnValues is not specified, or if its value is NONE, then
-  nothing is returned. (This is the default for ReturnValues.) ALL_OLD - If UpdateItem
-  overwrote an attribute name-value pair, then the content of the old item is returned.
-  UPDATED_OLD - The old versions of only the updated attributes are returned. ALL_NEW
-  - All of the attributes of the new version of the item are returned. UPDATED_NEW
-  - The new versions of only the updated attributes are returned.  Valid values include:\n
-  \   * `NONE`\n    * `ALL_OLD`\n    * `UPDATED_OLD`\n    * `ALL_NEW`\n    * `UPDATED_NEW`\n
+  \   * `:comparison_operator` - (String) Valid values include:\n      * `EQ`\n      *
+  `NE`\n      * `IN`\n      * `LE`\n      * `LT`\n      * `GE`\n      * `GT`\n      *
+  `BETWEEN`\n      * `NOT_NULL`\n      * `NULL`\n      * `CONTAINS`\n      * `NOT_CONTAINS`\n
+  \     * `BEGINS_WITH`\n    * `:attribute_value_list` - (Array&lt;<Hash>) \n      *
+  `:s` - (String) A String data type\n      * `:n` - (String) A Number data type\n
+  \     * `:b` - (String) A Binary data type\n      * `:ss` - (Array&lt;<String>)
+  A String set data type\n      * `:ns` - (Array&lt;<String>) Number set data type\n
+  \     * `:bs` - (Array&lt;<String>) A Binary set data type\n  * `:conditional_operator`
+  - (String) Valid values include:\n    * `AND`\n    * `OR`\n  * `:return_values`
+  - (String) Use ReturnValues if you want to get the item attributes as they appeared
+  either before or after they were updated. For UpdateItem, the valid values are:
+  NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is
+  returned. (This is the default for ReturnValues.) ALL_OLD - If UpdateItem overwrote
+  an attribute name-value pair, then the content of the old item is returned. UPDATED_OLD
+  - The old versions of only the updated attributes are returned. ALL_NEW - All of
+  the attributes of the new version of the item are returned. UPDATED_NEW - The new
+  versions of only the updated attributes are returned.  Valid values include:\n    *
+  `NONE`\n    * `ALL_OLD`\n    * `UPDATED_OLD`\n    * `ALL_NEW`\n    * `UPDATED_NEW`\n
   \ * `:return_consumed_capacity` - (String) Valid values include:\n    * `INDEXES`\n
   \   * `TOTAL`\n    * `NONE`\n  * `:return_item_collection_metrics` - (String) If
   set to SIZE, statistics about item collections, if any, that were modified during

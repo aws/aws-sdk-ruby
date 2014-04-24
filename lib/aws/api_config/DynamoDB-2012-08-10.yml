@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -652,6 +652,28 @@
                   - :blob
             Exists:
             - :boolean
+            ComparisonOperator:
+            - :string
+            AttributeValueList:
+            - :list:
+              - :structure:
+                  S:
+                  - :string
+                  N:
+                  - :string
+                  B:
+                  - :blob
+                  SS:
+                  - :list:
+                    - :string
+                  NS:
+                  - :list:
+                    - :string
+                  BS:
+                  - :list:
+                    - :blob
+    ConditionalOperator:
+    - :string
     ReturnValues:
     - :string
     ReturnConsumedCapacity:
@@ -1224,11 +1246,33 @@
                   - :blob
             Exists:
             - :boolean
+            ComparisonOperator:
+            - :string
+            AttributeValueList:
+            - :list:
+              - :structure:
+                  S:
+                  - :string
+                  N:
+                  - :string
+                  B:
+                  - :blob
+                  SS:
+                  - :list:
+                    - :string
+                  NS:
+                  - :list:
+                    - :string
+                  BS:
+                  - :list:
+                    - :blob
     ReturnValues:
     - :string
     ReturnConsumedCapacity:
     - :string
     ReturnItemCollectionMetrics:
+    - :string
+    ConditionalOperator:
     - :string
   :outputs:
     Attributes:
@@ -1369,6 +1413,35 @@
             ComparisonOperator:
             - :string
             - :required
+    QueryFilter:
+    - :map:
+        :key:
+        - :string
+        :value:
+        - :structure:
+            AttributeValueList:
+            - :list:
+              - :structure:
+                  S:
+                  - :string
+                  N:
+                  - :string
+                  B:
+                  - :blob
+                  SS:
+                  - :list:
+                    - :string
+                  NS:
+                  - :list:
+                    - :string
+                  BS:
+                  - :list:
+                    - :blob
+            ComparisonOperator:
+            - :string
+            - :required
+    ConditionalOperator:
+    - :string
     ScanIndexForward:
     - :boolean
     ExclusiveStartKey:
@@ -1422,6 +1495,9 @@
             :type: :blob
     Count:
       :sym: :count
+      :type: :integer
+    ScannedCount:
+      :sym: :scanned_count
       :type: :integer
     LastEvaluatedKey:
       :sym: :last_evaluated_key
@@ -1525,6 +1601,8 @@
             ComparisonOperator:
             - :string
             - :required
+    ConditionalOperator:
+    - :string
     ExclusiveStartKey:
     - :map:
         :key:
@@ -1724,6 +1802,28 @@
                   - :blob
             Exists:
             - :boolean
+            ComparisonOperator:
+            - :string
+            AttributeValueList:
+            - :list:
+              - :structure:
+                  S:
+                  - :string
+                  N:
+                  - :string
+                  B:
+                  - :blob
+                  SS:
+                  - :list:
+                    - :string
+                  NS:
+                  - :list:
+                    - :string
+                  BS:
+                  - :list:
+                    - :blob
+    ConditionalOperator:
+    - :string
     ReturnValues:
     - :string
     ReturnConsumedCapacity:
