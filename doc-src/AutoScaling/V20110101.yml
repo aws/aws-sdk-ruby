@@ -94,10 +94,15 @@
   Private Cloud (Amazon VPC). Specifies whether to assign a public IP address to each
   instance launched in a Amazon VPC. If you specify a value for this parameter, be
   sure to specify at least one VPC subnet using the VPCZoneIdentifier parameter when
-  you create your Auto Scaling group. Default: If the instance is launched in default
-  VPC, the default is  `true` . If the instance is launched in a nondefault VPC (EC2-VPC),
-  the default is  `false` . For more information about the platforms supported by
-  Auto Scaling, see Basic Auto Scaling Configuration.\n@return [Core::Response]"
+  you create your Auto Scaling group. Default: If the instance is launched into a
+  default subnet in a default VPC, the default is  `true` . If the instance is launched
+  into a nondefault subnet in a VPC, the default is  `false` . For information about
+  the platforms supported by Auto Scaling, see Get Started with Auto Scaling Using
+  the Command Line Interface.\n  * `:placement_tenancy` - (String) The tenancy of
+  the instance. An instance with a tenancy of dedicated runs on single-tenant hardware
+  and can only be launched into a VPC. For more information, see Auto Scaling in Amazon
+  Virtual Private Cloud in the Auto Scaling Developer Guide. Valid values: default
+  | dedicated\n@return [Core::Response]"
 :create_or_update_tags: |-
   Calls the CreateOrUpdateTags API operation.
   @param [Hash] options
@@ -262,6 +267,7 @@
       * `:created_time` - (Time)
       * `:ebs_optimized` - (Boolean)
       * `:associate_public_ip_address` - (Boolean)
+      * `:placement_tenancy` - (String)
     * `:next_token` - (String)
 :describe_metric_collection_types: |-
   Calls the DescribeMetricCollectionTypes API operation.

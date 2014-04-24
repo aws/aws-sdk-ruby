@@ -139,6 +139,8 @@
     - :boolean
     AssociatePublicIpAddress:
     - :boolean
+    PlacementTenancy:
+    - :string
   :outputs:
     :children:
       CreateLaunchConfigurationResult:
