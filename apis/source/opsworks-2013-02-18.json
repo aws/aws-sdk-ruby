@@ -7,7 +7,7 @@
   "service_full_name": "AWS OpsWorks",
   "endpoint_prefix": "opsworks",
   "xmlnamespace": "http://opsworks.amazonaws.com/doc/2013-02-18/",
-  "documentation": "\n  <fullname>AWS OpsWorks</fullname> \n  <p>Welcome to the  <i>AWS OpsWorks API Reference</i>. This guide provides descriptions, syntax, and usage examples about AWS OpsWorks\n         actions and data types, including common parameters and error codes. </p>\n  <p>AWS OpsWorks is an application management service that provides an integrated experience for overseeing the\n         complete application lifecycle. For information about this product, go to the\n  <a href=\"http://aws.amazon.com/opsworks/\">AWS OpsWorks</a> details page. </p>\n\n  <p><b>SDKs and CLI</b> </p>\n  <p>The most common way to use the AWS OpsWorks API is by using the AWS Command Line Interface (CLI) or\n   by using one of the AWS SDKs to implement applications in your preferred language. For more information, see:</p>\n  <ul>\n    <li><a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html\">AWS CLI</a></li>\n    <li><a href=\"http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html\">AWS SDK for Java</a></li>\n    <li><a href=\"http://docs.aws.amazon.com/sdkfornet/latest/apidocs/html/N_Amazon_OpsWorks.htm\">AWS SDK for .NET</a></li>\n    <li><a href=\"http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.OpsWorks.OpsWorksClient.html\">AWS SDK for PHP 2</a></li>\n    <li><a href=\"http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/OpsWorks/Client.html\">AWS SDK for Ruby</a></li>\n    <li><a href=\"http://aws.amazon.com/documentation/sdkforjavascript/\">AWS SDK for Node.js</a></li>\n    <li><a href=\"http://docs.pythonboto.org/en/latest/ref/opsworks.html\">AWS SDK for Python(Boto)</a></li>\n  </ul>\n    \n  <p><b>Endpoints</b></p>\n  <p>AWS OpsWorks supports only one endpoint, opsworks.us-east-1.amazonaws.com (HTTPS), so you must connect to that endpoint. You can then use the API\n         to direct AWS OpsWorks to create stacks in any AWS Region.</p>\n  <p><b>Chef Version</b></p>\n  <p>When you call <a>CreateStack</a>, <a>CloneStack</a>, or <a>UpdateStack</a> we recommend you use\n         the <code>ConfigurationManager</code> parameter to specify the Chef version, 0.9 or 11.4.\n         The default value is currently 0.9. However, we expect to change the default value to 11.4 in October 2013. \n         For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-chef11.html\">Using AWS OpsWorks with Chef 11</a>.</p>     \n  ",
+  "documentation": "\n  <fullname>AWS OpsWorks</fullname> \n  <p>Welcome to the  <i>AWS OpsWorks API Reference</i>. This guide provides descriptions, syntax, and usage examples about AWS OpsWorks\n         actions and data types, including common parameters and error codes. </p>\n  <p>AWS OpsWorks is an application management service that provides an integrated experience for overseeing the\n         complete application lifecycle. For information about this product, go to the\n  <a href=\"http://aws.amazon.com/opsworks/\">AWS OpsWorks</a> details page. </p>\n\n  <p><b>SDKs and CLI</b> </p>\n  <p>The most common way to use the AWS OpsWorks API is by using the AWS Command Line Interface (CLI) or\n   by using one of the AWS SDKs to implement applications in your preferred language. For more information, see:</p>\n  <ul>\n    <li><a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html\">AWS CLI</a></li>\n    <li><a href=\"http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html\">AWS SDK for Java</a></li>\n    <li><a href=\"http://docs.aws.amazon.com/sdkfornet/latest/apidocs/html/N_Amazon_OpsWorks.htm\">AWS SDK for .NET</a></li>\n    <li><a href=\"http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.OpsWorks.OpsWorksClient.html\">AWS SDK for PHP 2</a></li>\n    <li><a href=\"http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/OpsWorks/Client.html\">AWS SDK for Ruby</a></li>\n    <li><a href=\"http://aws.amazon.com/documentation/sdkforjavascript/\">AWS SDK for Node.js</a></li>\n    <li><a href=\"http://docs.pythonboto.org/en/latest/ref/opsworks.html\">AWS SDK for Python(Boto)</a></li>\n  </ul>\n    \n  <p><b>Endpoints</b></p>\n  <p>AWS OpsWorks supports only one endpoint, opsworks.us-east-1.amazonaws.com (HTTPS), so you must connect to that endpoint. You can then use the API\n         to direct AWS OpsWorks to create stacks in any AWS Region.</p>\n  <p><b>Chef Version</b></p>\n  <p>When you call <a>CreateStack</a>, <a>CloneStack</a>, or <a>UpdateStack</a> we recommend you use\n         the <code>ConfigurationManager</code> parameter to specify the Chef version, 0.9, 11.4, or 11.10.\n         The default value is currently 11.4.\n         For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-chef11.html\">Chef Versions</a>.</p>     \n  ",
   "operations": {
     "AssignVolume": {
       "name": "AssignVolume",
@@ -250,10 +250,28 @@
               "Version": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>The Chef version. This parameter must be set to \"0.9\" or \"11.4\". The default value is \"0.9\".\n         However, we expect to change the default value to \"11.4\" in September 2013.</p>\n  "
+                "documentation": "\n  <p>The Chef version. This parameter must be set to 0.9, 11.4, or 11.10. The default value is 11.4.</p>\n  "
               }
             },
-            "documentation": "\n  <p>The configuration manager. When you clone a stack we recommend that you use the configuration manager to\n         specify the Chef version, 0.9 or 11.4. The default value is currently 0.9.\n         However, we expect to change the default value to 11.4 in September 2013.</p>\n  "
+            "documentation": "\n  <p>The configuration manager. When you clone a stack we recommend that you use the configuration manager to\n         specify the Chef version, 0.9, 11.4, or 11.10. The default value is currently 11.4.</p>\n  "
+          },
+          "ChefConfiguration": {
+            "shape_name": "ChefConfiguration",
+            "type": "structure",
+            "members": {
+              "ManageBerkshelf": {
+                "shape_name": "Boolean",
+                "type": "boolean",
+                "box": true,
+                "documentation": "\n    <p>Whether to enable Berkshelf.</p>\n  "
+              },
+              "BerkshelfVersion": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n    <p>The Berkshelf version.</p>\n  "
+              }
+            },
+            "documentation": "\n    <p>A <code>ChefConfiguration</code> object that specifies whether to enable Berkshelf and the Berkshelf version on Chef 11.10 stacks.\n    For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html\">Create a New Stack</a>.</p>\n  "
           },
           "UseCustomCookbooks": {
             "shape_name": "Boolean",
@@ -265,7 +283,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": null
+            "documentation": "\n    <p>Whether to associate the AWS OpsWorks built-in security groups with the stack's layers.</p>\n    <p>AWS OpsWorks provides a standard set of built-in security groups, one for each layer, which are associated with layers by default.\n      With <code>UseOpsworksSecurityGroups</code> you can instead provide your own custom security groups.\n      <code>UseOpsworksSecurityGroups</code> has the following settings:\n    </p>\n    <ul>\n      <li>True - AWS OpsWorks automatically associates the appropriate built-in security group with each layer (default setting).\n        You can associate additional security groups with a layer after you create it but you cannot delete the built-in security group.\n      </li>\n      <li>False - AWS OpsWorks does not associate built-in security groups with layers.\n        You must create appropriate EC2 security groups and associate a security group with each layer that you create.\n        However, you can still manually associate a built-in security group with a layer on creation; custom security\n        groups are required only for those layers that need custom settings.\n      </li>\n    </ul>\n    <p>For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html\">Create a New Stack</a>.</p>\n  "
           },
           "CustomCookbooksSource": {
             "shape_name": "Source",
@@ -295,7 +313,7 @@
               "Password": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n    <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n    <li>For HTTP bundles, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  <p>For more information on how to safely handle IAM credentials, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\"></a>.</p>\n  "
               },
               "SshKey": {
                 "shape_name": "String",
@@ -452,7 +470,7 @@
               "Password": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n    <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n    <li>For HTTP bundles, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  <p>For more information on how to safely handle IAM credentials, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\"></a>.</p>\n  "
               },
               "SshKey": {
                 "shape_name": "String",
@@ -786,13 +804,13 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
+            "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code> to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
           },
           "EbsOptimized": {
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": null
+            "documentation": "\n    <p>Whether to create an Amazon EBS-optimized instance.</p>\n  "
           }
         },
         "documentation": null
@@ -863,7 +881,7 @@
               "monitoring-master",
               "custom"
             ],
-            "documentation": "\n  <p>The layer type. A stack cannot have more than one built-in layer of the same type. It can have any number of custom layers.\n    This parameter must be set to one of the following:</p>\n  <ul>\n    <li>custom: A custom layer</li>\n    <li>db-master: A MySQL layer</li>\n    <li>java-app: A Java App Server layer</li>\n    <li>lb: An HAProxy layer</li>\n    <li>memcached: A Memcached layer</li>\n    <li>monitoring-master: A Ganglia layer</li>\n    <li>nodejs-app: A Node.js App Server layer</li>\n    <li>php-app: A PHP App Server layer</li>\n    <li>rails-app: A Rails App Server layer</li>\n    <li>web: A Static Web Server layer</li>\n  </ul>\n  ",
+            "documentation": "\n  <p>The layer type. A stack cannot have more than one built-in layer of the same type. It can have any number of custom layers.\n    This parameter must be set to one of the following:</p>\n  <ul>\n    <li>custom: A custom layer</li>\n    <li>db-master: A MySQL layer</li>\n    <li>java-app: A Java App Server layer</li>\n    <li>rails-app: A Rails App Server layer</li>\n    <li>lb: An HAProxy layer</li>\n    <li>memcached: A Memcached layer</li>\n    <li>monitoring-master: A Ganglia layer</li>\n    <li>nodejs-app: A Node.js App Server layer</li>\n    <li>php-app: A PHP App Server layer</li>\n    <li>web: A Static Web Server layer</li>\n  </ul>\n  ",
             "required": true
           },
           "Name": {
@@ -980,18 +998,18 @@
                 "VolumeType": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null
+                  "documentation": "\n    <p>The volume type, standard or PIOPS.</p>\n  "
                 },
                 "Iops": {
                   "shape_name": "Integer",
                   "type": "integer",
                   "box": true,
-                  "documentation": null
+                  "documentation": "\n    <p>For PIOPS volumes, the IOPS per disk.</p>\n  "
                 }
               },
               "documentation": "\n  <p>Describes an Amazon EBS volume configuration.</p> \n  "
             },
-            "documentation": "\n  <p>A <code>VolumeConfigurations</code> object that describes the layer Amazon EBS volumes.</p>\n  "
+            "documentation": "\n  <p>A <code>VolumeConfigurations</code> object that describes the layer's Amazon EBS volumes.</p>\n  "
           },
           "EnableAutoHealing": {
             "shape_name": "Boolean",
@@ -1078,7 +1096,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": null
+            "documentation": "\n    <p>Whether to use Amazon EBS-optimized instances.</p>\n  "
           }
         },
         "documentation": null
@@ -1213,10 +1231,28 @@
               "Version": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>The Chef version. This parameter must be set to \"0.9\" or \"11.4\". The default value is \"0.9\".\n         However, we expect to change the default value to \"11.4\" in September 2013.</p>\n  "
+                "documentation": "\n  <p>The Chef version. This parameter must be set to 0.9, 11.4, or 11.10. The default value is 11.4.</p>\n  "
               }
             },
-            "documentation": "\n  <p>The configuration manager. When you create a stack we recommend that you use the configuration manager to\n         specify the Chef version, 0.9 or 11.4. The default value is currently 0.9.\n         However, we expect to change the default value to 11.4 in September 2013.</p>\n  "
+            "documentation": "\n  <p>The configuration manager. When you clone a stack we recommend that you use the configuration manager to\n         specify the Chef version, 0.9, 11.4, or 11.10. The default value is currently 11.4.</p>\n  "
+          },
+          "ChefConfiguration": {
+            "shape_name": "ChefConfiguration",
+            "type": "structure",
+            "members": {
+              "ManageBerkshelf": {
+                "shape_name": "Boolean",
+                "type": "boolean",
+                "box": true,
+                "documentation": "\n    <p>Whether to enable Berkshelf.</p>\n  "
+              },
+              "BerkshelfVersion": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n    <p>The Berkshelf version.</p>\n  "
+              }
+            },
+            "documentation": "\n    <p>A <code>ChefConfiguration</code> object that specifies whether to enable Berkshelf and the Berkshelf version on Chef 11.10 stacks.\n    For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html\">Create a New Stack</a>.</p>\n  "
           },
           "UseCustomCookbooks": {
             "shape_name": "Boolean",
@@ -1228,7 +1264,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": null
+            "documentation": "\n    <p>Whether to associate the AWS OpsWorks built-in security groups with the stack's layers.</p>\n    <p>AWS OpsWorks provides a standard set of built-in security groups, one for each layer, which are associated with layers by default.\n      With <code>UseOpsworksSecurityGroups</code> you can instead provide your own custom security groups.\n      <code>UseOpsworksSecurityGroups</code> has the following settings:\n    </p>\n    <ul>\n      <li>True - AWS OpsWorks automatically associates the appropriate built-in security group with each layer (default setting).\n        You can associate additional security groups with a layer after you create it but you cannot delete the built-in security group.\n      </li>\n      <li>False - AWS OpsWorks does not associate built-in security groups with layers.\n        You must create appropriate EC2 security groups and associate a security group with each layer that you create.\n        However, you can still manually associate a built-in security group with a layer on creation; custom security\n        groups are required only for those layers that need custom settings.\n      </li>\n    </ul>\n    <p>For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html\">Create a New Stack</a>.</p>\n  "
           },
           "CustomCookbooksSource": {
             "shape_name": "Source",
@@ -1258,7 +1294,7 @@
               "Password": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n    <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n    <li>For HTTP bundles, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  <p>For more information on how to safely handle IAM credentials, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\"></a>.</p>\n  "
               },
               "SshKey": {
                 "shape_name": "String",
@@ -1344,7 +1380,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": "\n  <p>Whether users can specify their own SSH public key through the My Settings page. For more information, see\n    <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html\"></a>.</p>\n  "
+            "documentation": "\n  <p>Whether users can specify their own SSH public key through the My Settings page. For more information, see\n    <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html\">Setting an IAM User's Public SSH Key</a>.</p>\n  "
           }
         },
         "documentation": null
@@ -1443,7 +1479,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": "\n  <p>Whether to delete the instance Amazon EBS volumes.</p>\n  "
+            "documentation": "\n  <p>Whether to delete the instance's Amazon EBS volumes.</p>\n  "
           }
         },
         "documentation": null
@@ -1797,7 +1833,7 @@
                     "Password": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n    <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n    <li>For HTTP bundles, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  <p>For more information on how to safely handle IAM credentials, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\"></a>.</p>\n  "
                     },
                     "SshKey": {
                       "shape_name": "String",
@@ -2661,7 +2697,7 @@
                   "shape_name": "Boolean",
                   "type": "boolean",
                   "box": true,
-                  "documentation": null
+                  "documentation": "\n    <p>Whether this is an Amazon EBS-optimized instance.</p>\n  "
                 }
               },
               "documentation": "\n    <p>Describes an instance.</p>\n  "
@@ -2882,13 +2918,13 @@
                       "VolumeType": {
                         "shape_name": "String",
                         "type": "string",
-                        "documentation": null
+                        "documentation": "\n    <p>The volume type, standard or PIOPS.</p>\n  "
                       },
                       "Iops": {
                         "shape_name": "Integer",
                         "type": "integer",
                         "box": true,
-                        "documentation": null
+                        "documentation": "\n    <p>For PIOPS volumes, the IOPS per disk.</p>\n  "
                       }
                     },
                     "documentation": "\n  <p>Describes an Amazon EBS volume configuration.</p> \n  "
@@ -3042,7 +3078,7 @@
                   "shape_name": "Boolean",
                   "type": "boolean",
                   "box": true,
-                  "documentation": null
+                  "documentation": "\n    <p>Whether the layer uses Amazon EBS-optimized instances.</p>\n  "
                 }
               },
               "documentation": "\n    <p>Describes a layer.</p>\n  "
@@ -3474,13 +3510,13 @@
                 "VolumeType": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null
+                  "documentation": "\n    <p>The volume type, standard or PIOPS.</p>\n  "
                 },
                 "Iops": {
                   "shape_name": "Integer",
                   "type": "integer",
                   "box": true,
-                  "documentation": null
+                  "documentation": "\n    <p>For PIOPS volumes, the IOPS per disk.</p>\n  "
                 }
               },
               "documentation": "\n  <p>Describes an instance's RAID array.</p>\n  "
@@ -3660,7 +3696,7 @@
               "Arn": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": null
+                "documentation": "\n    <p>The stack's ARN.</p>\n  "
               },
               "LayersCount": {
                 "shape_name": "Integer",
@@ -3694,7 +3730,7 @@
                     "shape_name": "Integer",
                     "type": "integer",
                     "box": true,
-                    "documentation": null
+                    "documentation": "\n    <p>The number of instances with <code>online</code> status.</p>\n  "
                   },
                   "Pending": {
                     "shape_name": "Integer",
@@ -3748,7 +3784,7 @@
                     "shape_name": "Integer",
                     "type": "integer",
                     "box": true,
-                    "documentation": null
+                    "documentation": "\n    <p>The number of instances with <code>stopping</code> status.</p>\n  "
                   },
                   "Terminated": {
                     "shape_name": "Integer",
@@ -3842,7 +3878,7 @@
                 "Arn": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null
+                  "documentation": "\n    <p>The stack's ARN.</p>\n  "
                 },
                 "Region": {
                   "shape_name": "String",
@@ -3919,10 +3955,28 @@
                     "Version": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": "\n  <p>The Chef version. This parameter must be set to \"0.9\" or \"11.4\". The default value is \"0.9\".\n         However, we expect to change the default value to \"11.4\" in September 2013.</p>\n  "
+                      "documentation": "\n  <p>The Chef version. This parameter must be set to 0.9, 11.4, or 11.10. The default value is 11.4.</p>\n  "
                     }
                   },
                   "documentation": "\n  <p>The configuration manager.</p>\n  "
+                },
+                "ChefConfiguration": {
+                  "shape_name": "ChefConfiguration",
+                  "type": "structure",
+                  "members": {
+                    "ManageBerkshelf": {
+                      "shape_name": "Boolean",
+                      "type": "boolean",
+                      "box": true,
+                      "documentation": "\n    <p>Whether to enable Berkshelf.</p>\n  "
+                    },
+                    "BerkshelfVersion": {
+                      "shape_name": "String",
+                      "type": "string",
+                      "documentation": "\n    <p>The Berkshelf version.</p>\n  "
+                    }
+                  },
+                  "documentation": "\n    <p>A <code>ChefConfiguration</code> object that specifies whether to enable Berkshelf and the Berkshelf version.\n    For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html\">Create a New Stack</a>.</p>\n  "
                 },
                 "UseCustomCookbooks": {
                   "shape_name": "Boolean",
@@ -3934,7 +3988,7 @@
                   "shape_name": "Boolean",
                   "type": "boolean",
                   "box": true,
-                  "documentation": null
+                  "documentation": "\n    <p>Whether the stack automatically associates the AWS OpsWorks built-in security groups with the stack's layers.</p>\n  "
                 },
                 "CustomCookbooksSource": {
                   "shape_name": "Source",
@@ -3964,7 +4018,7 @@
                     "Password": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                      "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n    <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n    <li>For HTTP bundles, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  <p>For more information on how to safely handle IAM credentials, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\"></a>.</p>\n  "
                     },
                     "SshKey": {
                       "shape_name": "String",
@@ -4414,13 +4468,13 @@
                 "VolumeType": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null
+                  "documentation": "\n    <p>The volume type, standard or PIOPS.</p>\n  "
                 },
                 "Iops": {
                   "shape_name": "Integer",
                   "type": "integer",
                   "box": true,
-                  "documentation": null
+                  "documentation": "\n    <p>For PIOPS volumes, the IOPS per disk.</p>\n  "
                 }
               },
               "documentation": "\n  <p>Describes an instance's Amazon EBS volume.</p> \n  "
@@ -5410,7 +5464,7 @@
               "Password": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n    <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n    <li>For HTTP bundles, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  <p>For more information on how to safely handle IAM credentials, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\"></a>.</p>\n  "
               },
               "SshKey": {
                 "shape_name": "String",
@@ -5793,13 +5847,13 @@
                 "VolumeType": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null
+                  "documentation": "\n    <p>The volume type, standard or PIOPS.</p>\n  "
                 },
                 "Iops": {
                   "shape_name": "Integer",
                   "type": "integer",
                   "box": true,
-                  "documentation": null
+                  "documentation": "\n    <p>For PIOPS volumes, the IOPS per disk.</p>\n  "
                 }
               },
               "documentation": "\n  <p>Describes an Amazon EBS volume configuration.</p> \n  "
@@ -5891,7 +5945,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": null
+            "documentation": "\n    <p>Whether to use Amazon EBS-optimized instances.</p>\n  "
           }
         },
         "documentation": null
@@ -6038,10 +6092,28 @@
               "Version": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>The Chef version. This parameter must be set to \"0.9\" or \"11.4\". The default value is \"0.9\".\n         However, we expect to change the default value to \"11.4\" in September 2013.</p>\n  "
+                "documentation": "\n  <p>The Chef version. This parameter must be set to 0.9, 11.4, or 11.10. The default value is 11.4.</p>\n  "
               }
             },
-            "documentation": "\n  <p>The configuration manager. When you update a stack you can optionally use the configuration manager to\n         specify the Chef version, 0.9 or 11.4. If you omit this parameter, AWS OpsWorks does not change\n         the Chef version.\n  </p>\n  "
+            "documentation": "\n  <p>The configuration manager. When you clone a stack we recommend that you use the configuration manager to\n         specify the Chef version, 0.9, 11.4, or 11.10. The default value is currently 11.4.</p>\n  "
+          },
+          "ChefConfiguration": {
+            "shape_name": "ChefConfiguration",
+            "type": "structure",
+            "members": {
+              "ManageBerkshelf": {
+                "shape_name": "Boolean",
+                "type": "boolean",
+                "box": true,
+                "documentation": "\n    <p>Whether to enable Berkshelf.</p>\n  "
+              },
+              "BerkshelfVersion": {
+                "shape_name": "String",
+                "type": "string",
+                "documentation": "\n    <p>The Berkshelf version.</p>\n  "
+              }
+            },
+            "documentation": "\n    <p>A <code>ChefConfiguration</code> object that specifies whether to enable Berkshelf and the Berkshelf version on Chef 11.10 stacks.\n    For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html\">Create a New Stack</a>.</p>\n  "
           },
           "UseCustomCookbooks": {
             "shape_name": "Boolean",
@@ -6077,7 +6149,7 @@
               "Password": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n  <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n  <li>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  "
+                "documentation": "\n  <p>This parameter depends on the repository type. </p>\n  <ul>\n    <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n    <li>For HTTP bundles, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  <p>For more information on how to safely handle IAM credentials, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\"></a>.</p>\n  "
               },
               "SshKey": {
                 "shape_name": "String",
@@ -6110,7 +6182,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": null
+            "documentation": "\n    <p>Whether to associate the AWS OpsWorks built-in security groups with the stack's layers.</p>\n    <p>AWS OpsWorks provides a standard set of built-in security groups, one for each layer, which are associated with layers by default.\n      <code>UseOpsworksSecurityGroups</code> allows you to instead provide your own custom security groups.\n      <code>UseOpsworksSecurityGroups</code> has the following settings:\n    </p>\n    <ul>\n      <li>True - AWS OpsWorks automatically associates the appropriate built-in security group with each layer (default setting).\n        You can associate additional security groups with a layer after you create it but you cannot delete the built-in security group.\n      </li>\n      <li>False - AWS OpsWorks does not associate built-in security groups with layers.\n        You must create appropriate EC2 security groups and associate a security group with each layer that you create.\n        However, you can still manually associate a built-in security group with a layer on creation; custom security\n        groups are required only for those layers that need custom settings.\n      </li>\n    </ul>\n    <p>For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html\">Create a New Stack</a>.</p>\n  "
           }
         },
         "documentation": null

@@ -442,7 +442,15 @@
           "AssociatePublicIpAddress": {
             "shape_name": "AssociatePublicIpAddress",
             "type": "boolean",
-            "documentation": "\n        <p>Used for Auto Scaling groups that launch instances into an Amazon Virtual Private Cloud (Amazon VPC). Specifies whether to assign a public IP address to each instance launched in a Amazon VPC.</p> \n         <note>\n             <p>If you specify a value for this parameter, be sure to specify at least one VPC subnet \n                 using the <i>VPCZoneIdentifier</i> parameter when you create your Auto Scaling group. </p>\n         </note>        \n        <p>Default: If the instance is launched in default VPC, the default is <code>true</code>. \n                    If the instance is launched in a nondefault VPC (EC2-VPC), the default is <code>false</code>.  \n                    For more information about the platforms supported by Auto Scaling, see \n                    <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_BasicSetup.html\">Basic Auto Scaling Configuration</a>.</p>\n    "
+            "documentation": "\n        <p>Used for Auto Scaling groups that launch instances into an Amazon Virtual Private Cloud (Amazon VPC). Specifies whether to assign a public IP address to each instance launched in a Amazon VPC.</p> \n         <note>\n             <p>If you specify a value for this parameter, be sure to specify at least one VPC subnet \n                 using the <i>VPCZoneIdentifier</i> parameter when you create your Auto Scaling group. </p>\n         </note>        \n        <p>Default: If the instance is launched into a default subnet in a default VPC, the default is <code>true</code>. \n                    If the instance is launched into a nondefault subnet in a VPC, the default is <code>false</code>.  \n                    For information about the platforms supported by Auto Scaling, see \n                    <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_BasicSetup.html\">Get Started with Auto Scaling Using the Command Line Interface</a>.</p>\n    "
+          },
+          "PlacementTenancy": {
+            "shape_name": "XmlStringMaxLen64",
+            "type": "string",
+            "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+            "min_length": 1,
+            "max_length": 64,
+            "documentation": "\n        <p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware and can only be launched into a VPC.</p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Auto Scaling in Amazon Virtual Private Cloud</a> in the <i>Auto Scaling Developer Guide</i>. </p>\n        <p>Valid values: <code>default</code> | <code>dedicated</code></p>\n        \n    "
           }
         },
         "documentation": "\n        <p>\n\n        </p>\n    "
@@ -916,8 +924,6 @@
           "MaxRecords": {
             "shape_name": "MaxRecords",
             "type": "integer",
-            "min_length": 1,
-            "max_length": 50,
             "documentation": "\n        <p>\n            The maximum number of records to return.\n        </p>\n    "
           }
         },
@@ -1287,8 +1293,6 @@
           "MaxRecords": {
             "shape_name": "MaxRecords",
             "type": "integer",
-            "min_length": 1,
-            "max_length": 50,
             "documentation": "\n        <p>\n            The maximum number of Auto Scaling instances to be described\n            with each call.\n        </p>\n    "
           },
           "NextToken": {
@@ -1454,8 +1458,6 @@
           "MaxRecords": {
             "shape_name": "MaxRecords",
             "type": "integer",
-            "min_length": 1,
-            "max_length": 50,
             "documentation": "\n        <p>\n            The maximum number of launch configurations. The default is 100.\n        </p>\n    "
           }
         },
@@ -1666,6 +1668,14 @@
                   "shape_name": "AssociatePublicIpAddress",
                   "type": "boolean",
                   "documentation": "\n        <p>Specifies whether the instance is associated with a public IP address (<code>true</code>) or not (<code>false</code>).</p>\n    "
+                },
+                "PlacementTenancy": {
+                  "shape_name": "XmlStringMaxLen64",
+                  "type": "string",
+                  "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*",
+                  "min_length": 1,
+                  "max_length": 64,
+                  "documentation": "\n        <p>Specifies the tenancy of the instance. It can be either <code>default</code> or <code>dedicated</code>. \n            An instance with <code>dedicated</code> tenancy runs in an isolated, single-tenant hardware and it can only be launched in a VPC.</p>\n    "
                 }
               },
               "documentation": "\n        <p>\n            The <code>LaunchConfiguration</code> data type.\n        </p>\n    "
@@ -1699,7 +1709,7 @@
           "documentation": "\n        <p>\n         The <code>NextToken</code> value is invalid.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n        Returns a full description of the launch configurations, or the specified launch configurations,\n        if they exist.\n        </p>\n        <p>\n        If no name is specified, then the full details of\n        all launch configurations are returned.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?LaunchConfigurationNames.member.1=my-test-lc\n&MaxRecords=20\n&Version=2011-01-01\n&Action=DescribeLaunchConfigurations\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeLaunchConfigurationsResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <DescribeLaunchConfigurationsResult>\n    <LaunchConfigurations>\n      <member>\n        <AssociatePublicIpAddress>true</AssociatePublicIpAddress>\n        <SecurityGroups/>\n        <CreatedTime>2013-01-21T23:04:42.200Z</CreatedTime>\n        <KernelId/>\n        <LaunchConfigurationName>my-test-lc</LaunchConfigurationName>\n        <UserData/>\n        <InstanceType>m1.small</InstanceType>\n        <LaunchConfigurationARN>arn:aws:autoscaling:us-east-1:803981987763:launchConfiguration:\n        9dbbbf87-6141-428a-a409-0752edbe6cad:launchConfigurationName/my-test-lc</LaunchConfigurationARN>\n        <BlockDeviceMappings/>\n        <ImageId>ami-514ac838</ImageId>\n        <KeyName/>\n        <RamdiskId/>\n        <InstanceMonitoring>\n          <Enabled>true</Enabled>\n        </InstanceMonitoring>\n        <EbsOptimized>false</EbsOptimized>\n      </member>\n    </LaunchConfigurations>\n  </DescribeLaunchConfigurationsResult>\n  <ResponseMetadata>\n    <RequestId>d05a22f8-b690-11e2-bf8e-2113fEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeLaunchConfigurationsResponse> </queryresponse>\n        </examples>       \n    "
+      "documentation": "\n        <p>\n        Returns a full description of the launch configurations, or the specified launch configurations,\n        if they exist.\n        </p>\n        <p>\n        If no name is specified, then the full details of\n        all launch configurations are returned.\n        </p>\n        <examples>      \n            <queryrequest>https://autoscaling.amazonaws.com/?LaunchConfigurationNames.member.1=my-test-lc\n&MaxRecords=20\n&Version=2011-01-01\n&Action=DescribeLaunchConfigurations\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DescribeLaunchConfigurationsResponse xmlns=\"http://autoscaling.amazonaws.com/doc/2011-01-01/\">\n  <DescribeLaunchConfigurationsResult>\n    <LaunchConfigurations>\n      <member>\n        <AssociatePublicIpAddress>true</AssociatePublicIpAddress>\n        <SecurityGroups/>\n        <PlacementTenancy>dedicated</PlacementTenancy>\n        <CreatedTime>2013-01-21T23:04:42.200Z</CreatedTime>\n        <KernelId/>\n        <LaunchConfigurationName>my-test-lc</LaunchConfigurationName>\n        <UserData/>\n        <InstanceType>m1.small</InstanceType>\n        <LaunchConfigurationARN>arn:aws:autoscaling:us-east-1:803981987763:launchConfiguration:\n        9dbbbf87-6141-428a-a409-0752edbe6cad:launchConfigurationName/my-test-lc</LaunchConfigurationARN>\n        <BlockDeviceMappings/>\n        <ImageId>ami-514ac838</ImageId>\n        <KeyName/>\n        <RamdiskId/>\n        <InstanceMonitoring>\n          <Enabled>true</Enabled>\n        </InstanceMonitoring>\n        <EbsOptimized>false</EbsOptimized>\n      </member>\n    </LaunchConfigurations>\n  </DescribeLaunchConfigurationsResult>\n  <ResponseMetadata>\n    <RequestId>d05a22f8-b690-11e2-bf8e-2113fEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeLaunchConfigurationsResponse> </queryresponse>\n        </examples>       \n    "
     },
     "DescribeMetricCollectionTypes": {
       "name": "DescribeMetricCollectionTypes",
@@ -1784,8 +1794,6 @@
           "MaxRecords": {
             "shape_name": "MaxRecords",
             "type": "integer",
-            "min_length": 1,
-            "max_length": 50,
             "documentation": "\n        <p>Maximum number of records to be returned.\n        </p>\n    "
           }
         },
@@ -1896,8 +1904,6 @@
           "MaxRecords": {
             "shape_name": "MaxRecords",
             "type": "integer",
-            "min_length": 1,
-            "max_length": 50,
             "documentation": "\n        <p>\n            The maximum number of policies that will be described\n            with each call.\n        </p>\n    "
           }
         },
@@ -2050,8 +2056,6 @@
           "MaxRecords": {
             "shape_name": "MaxRecords",
             "type": "integer",
-            "min_length": 1,
-            "max_length": 50,
             "documentation": "\n        <p>\n        The maximum number of scaling activities to return.\n        </p>\n    "
           },
           "NextToken": {
@@ -2267,8 +2271,6 @@
           "MaxRecords": {
             "shape_name": "MaxRecords",
             "type": "integer",
-            "min_length": 1,
-            "max_length": 50,
             "documentation": "\n        <p>\n            The maximum number of scheduled actions to return.\n        </p>\n    "
           }
         },
@@ -2424,8 +2426,6 @@
           "MaxRecords": {
             "shape_name": "MaxRecords",
             "type": "integer",
-            "min_length": 1,
-            "max_length": 50,
             "documentation": "\n        <p>\n            The maximum number of records to return.\n        </p>\n    "
           }
         },
@@ -3280,7 +3280,7 @@
           "HealthCheckGracePeriod": {
             "shape_name": "HealthCheckGracePeriod",
             "type": "integer",
-            "documentation": "\n        <p>\n            The length of time that Auto Scaling waits\n            before checking an instance's health status.\n            The grace period begins when an instance\n            comes into service.\n        </p>\n    "
+            "documentation": "\n        <p>\n            The length of time that Auto Scaling waits\n            before checking an instance's health status.\n            The grace period begins when the instance passes System Status and the Instance Status checks from Amazon EC2. For more information, see   \n            <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeInstanceStatus.html\">DescribeInstanceStatus</a>.\n        </p>\n    "
           },
           "PlacementGroup": {
             "shape_name": "XmlStringMaxLen255",

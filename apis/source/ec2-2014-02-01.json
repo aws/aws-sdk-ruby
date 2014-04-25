@@ -18,15 +18,15 @@
           "DryRun": {
             "shape_name": "Boolean",
             "type": "boolean",
-            "documentation": null
+            "documentation": "\n  "
           },
           "VpcPeeringConnectionId": {
             "shape_name": "String",
             "type": "string",
-            "documentation": null
+            "documentation": "\n    <p>The ID of the VPC peering connection.</p>\n  "
           }
         },
-        "documentation": null
+        "documentation": "\n  "
       },
       "output": {
         "shape_name": "AcceptVpcPeeringConnectionResult",
@@ -43,29 +43,29 @@
                   "CidrBlock": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The CIDR block for the VPC.</p>\n  ",
                     "xmlname": "cidrBlock"
                   },
                   "OwnerId": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The AWS account ID of the VPC owner.</p>\n  ",
                     "xmlname": "ownerId"
                   },
                   "VpcId": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The ID of the VPC.</p>\n  ",
                     "xmlname": "vpcId"
                   }
                 },
-                "documentation": null,
+                "documentation": "\n    <p>The information of the peer VPC.</p>\n  ",
                 "xmlname": "accepterVpcInfo"
               },
               "ExpirationTime": {
                 "shape_name": "DateTime",
                 "type": "timestamp",
-                "documentation": null,
+                "documentation": "\n    <p>The time that an unaccepted VPC peering connection will expire.</p>\n  ",
                 "xmlname": "expirationTime"
               },
               "RequesterVpcInfo": {
@@ -75,23 +75,23 @@
                   "CidrBlock": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The CIDR block for the VPC.</p>\n  ",
                     "xmlname": "cidrBlock"
                   },
                   "OwnerId": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The AWS account ID of the VPC owner.</p>\n  ",
                     "xmlname": "ownerId"
                   },
                   "VpcId": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The ID of the VPC.</p>\n  ",
                     "xmlname": "vpcId"
                   }
                 },
-                "documentation": null,
+                "documentation": "\n    <p>The information of the requester VPC.</p>\n  ",
                 "xmlname": "requesterVpcInfo"
               },
               "Status": {
@@ -101,17 +101,17 @@
                   "Code": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The status of the VPC peering connection.</p>\n  ",
                     "xmlname": "code"
                   },
                   "Message": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>A message that provides more information about the status, if applicable.</p>\n  ",
                     "xmlname": "message"
                   }
                 },
-                "documentation": null,
+                "documentation": "\n    <p>The status of the VPC peering connection.</p>\n  ",
                 "xmlname": "status"
               },
               "Tags": {
@@ -137,26 +137,26 @@
                   "documentation": "\n    <p>Describes a tag.</p>\n   ",
                   "xmlname": "item"
                 },
-                "documentation": null,
+                "documentation": "\n    <p>Any tags assigned to the resource.</p>\n  ",
                 "xmlname": "tagSet"
               },
               "VpcPeeringConnectionId": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": null,
+                "documentation": "\n    <p>The ID of the VPC peering connection.</p>\n  ",
                 "xmlname": "vpcPeeringConnectionId"
               }
             },
-            "documentation": null,
+            "documentation": "\n    <p>Information about the VPC peering connection.</p>\n  ",
             "xmlname": "vpcPeeringConnection"
           }
         },
-        "documentation": null
+        "documentation": "\n  "
       },
       "errors": [
 
       ],
-      "documentation": null
+      "documentation": "\n    <p>Accept a VPC peering connection request. To accept a request, the VPC peering connection\n      must be in the <code>pending-acceptance</code> state, and you must be the owner of\n      the peer VPC. Use the <code>DescribeVpcPeeringConnections</code> request to\n      view your outstanding VPC peering connection requests.</p>\n    <examples>\n      <example>\n        <name>Example</name>\n        <description>This example accepts the specified VPC peering connection\n          request.</description>\n        <queryrequest> https://ec2.amazonaws.com/?Action=AcceptVpcPeeringConnection\n&amp;vpcPeeringConnectionId=pcx-1a2b3c4d\n&amp;AUTHPARAMS</queryrequest>\n        <queryresponse>&lt;AcceptVpcPeeringConnectionResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n   &lt;requestId&gt;7a62c49f-347e-4fc4-9331-6e8eEXAMPLE&lt;/requestId&gt;\n   &lt;vpcPeeringConnection&gt;\n   &lt;vpcPeeringConnectionId&gt;pcx-1a2b3c4d&lt;/vpcPeeringConnectionId&gt;\n   &lt;requesterVpcInfo&gt;\n     &lt;ownerId&gt;123456789012&lt;/ownerId&gt;\n     &lt;vpcId&gt;vpc-1a2b3c4d&lt;/vpcId&gt;\n     &lt;cidrBlock&gt;10.0.0.0/28&lt;/cidrBlock&gt;\n   &lt;/requesterVpcInfo&gt;\n   &lt;accepterVpcInfo&gt;\n     &lt;ownerId&gt;777788889999&lt;/ownerId&gt;\n     &lt;vpcId&gt;vpc-111aaa22&lt;/vpcId&gt;\n     &lt;cidrBlock&gt;10.0.1.0/28&lt;/cidrBlock&gt;\n   &lt;/accepterVpcInfo&gt;\n   &lt;status&gt;\n     &lt;code&gt;active&lt;/code&gt;\n     &lt;message&gt;Active&lt;/message&gt;\n    &lt;/status&gt;\n   &lt;tagSet/&gt;\n  &lt;/vpcPeeringConnection&gt;\n &lt;/AcceptVpcPeeringConnectionResponse&gt;\"</queryresponse>\n      </example>\n    </examples>\n  "
     },
     "AllocateAddress": {
       "name": "AllocateAddress",
@@ -2942,6 +2942,12 @@
                     "documentation": "\n\t\t <p>The address of the Elastic IP address bound to the network interface.</p>\n   ",
                     "xmlname": "publicIp"
                   },
+                  "PublicDnsName": {
+                    "shape_name": "String",
+                    "type": "string",
+                    "documentation": null,
+                    "xmlname": "publicDnsName"
+                  },
                   "IpOwnerId": {
                     "shape_name": "String",
                     "type": "string",
@@ -3024,6 +3030,12 @@
                           "type": "string",
                           "documentation": "\n\t\t <p>The address of the Elastic IP address bound to the network interface.</p>\n   ",
                           "xmlname": "publicIp"
+                        },
+                        "PublicDnsName": {
+                          "shape_name": "String",
+                          "type": "string",
+                          "documentation": null,
+                          "xmlname": "publicDnsName"
                         },
                         "IpOwnerId": {
                           "shape_name": "String",
@@ -3374,7 +3386,7 @@
           "VpcPeeringConnectionId": {
             "shape_name": "String",
             "type": "string",
-            "documentation": null
+            "documentation": "\n    <p>The ID of a VPC peering connection.</p>\n  "
           }
         },
         "documentation": "\n   "
@@ -3383,7 +3395,7 @@
       "errors": [
 
       ],
-      "documentation": "\n     <p>Creates a route in a route table within a VPC.</p>\n     <p>You must specify one of the following targets: Internet gateway, NAT instance, or network interface.</p>\n     <p>When determining how to route traffic, we use the route with the most specific\n\t\t\tmatch. For example, let's say the traffic is destined for <code>192.0.2.3</code>, and the route\n\t\t\ttable includes the following two routes:</p>\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<p><code>192.0.2.0/24</code> (goes to some target A)</p>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<p><code>192.0.2.0/28</code> (goes to some target B)</p>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t <p>Both routes apply to the traffic destined for <code>192.0.2.3</code>. However, the second route\n\t\t\t\tin the list covers a smaller number of IP addresses and is therefore more specific,\n\t\t\t\tso we use that route to determine where to target the traffic.</p>\n     <p>For more information about route tables, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the\n\t\t\t\t<i>Amazon Virtual Private Cloud User Guide</i>.</p>\n     <examples>\n      <example>\n       <name>Example 1</name>\n       <description>This example creates a route in the route table with the ID <code>rtb-e4ad488d</code>. The\n\t\t\t\t\troute matches all traffic (<code>0.0.0.0/0</code>) and routes it to the Internet gateway with the\n\t\t\t\t\tID <code>igw-eaad4883</code>.</description>\n       <queryrequest>https://ec2.amazonaws.com/?Action=CreateRoute\n&amp;RouteTableId=rtb-e4ad488d\n&amp;DestinationCidrBlock=0.0.0.0/0\n&amp;GatewayId=igw-eaad4883\n&amp;AUTHPARAMS</queryrequest>\n      </example>\n      <example>\n       <name>Example 2</name>\n       <description>This example creates a route in the route table with the ID <code>rtb-g8ff4ea2</code>. The\n\t\t\t\t\troute sends all traffic (<code>0.0.0.0/0</code>) to the NAT instance with the ID\n\t\t\t\t\t<code>i-1a2b3c4d</code>.</description>\n       <queryrequest>https://ec2.amazonaws.com/?Action=CreateRoute\n&amp;RouteTableId=rtb-g8ff4ea2\n&amp;DestinationCidrBlock=0.0.0.0/0\n&amp;InstanceId=i-1a2b3c4d\n&amp;AUTHPARAMS</queryrequest>\n      </example>\n     </examples>\n   "
+      "documentation": "\n     <p>Creates a route in a route table within a VPC.</p>\n     <p>You must specify one of the following targets: Internet gateway, NAT instance, VPC peering connection, or network interface.</p>\n     <p>When determining how to route traffic, we use the route with the most specific\n\t\t\tmatch. For example, let's say the traffic is destined for <code>192.0.2.3</code>, and the route\n\t\t\ttable includes the following two routes:</p>\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<p><code>192.0.2.0/24</code> (goes to some target A)</p>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<p><code>192.0.2.0/28</code> (goes to some target B)</p>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t <p>Both routes apply to the traffic destined for <code>192.0.2.3</code>. However, the second route\n\t\t\t\tin the list covers a smaller number of IP addresses and is therefore more specific,\n\t\t\t\tso we use that route to determine where to target the traffic.</p>\n     <p>For more information about route tables, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the\n\t\t\t\t<i>Amazon Virtual Private Cloud User Guide</i>.</p>\n     <examples>\n      <example>\n       <name>Example 1</name>\n       <description>This example creates a route in the route table with the ID <code>rtb-e4ad488d</code>. The\n\t\t\t\t\troute matches all traffic (<code>0.0.0.0/0</code>) and routes it to the Internet gateway with the\n\t\t\t\t\tID <code>igw-eaad4883</code>.</description>\n       <queryrequest>https://ec2.amazonaws.com/?Action=CreateRoute\n&amp;RouteTableId=rtb-e4ad488d\n&amp;DestinationCidrBlock=0.0.0.0/0\n&amp;GatewayId=igw-eaad4883\n&amp;AUTHPARAMS</queryrequest>\n      </example>\n      <example>\n       <name>Example 2</name>\n       <description>This example creates a route in the route table with the ID <code>rtb-g8ff4ea2</code>. The\n\t\t\t\t\troute sends all traffic (<code>0.0.0.0/0</code>) to the NAT instance with the ID\n\t\t\t\t\t<code>i-1a2b3c4d</code>.</description>\n       <queryrequest>https://ec2.amazonaws.com/?Action=CreateRoute\n&amp;RouteTableId=rtb-g8ff4ea2\n&amp;DestinationCidrBlock=0.0.0.0/0\n&amp;InstanceId=i-1a2b3c4d\n&amp;AUTHPARAMS</queryrequest>\n      </example>\n       <example>\n         <name>Example 3</name>\n         <description>This example command creates a route in route table <code>rtb-g8ff4ea2</code>. The route\n           matches traffic for the CIDR block <code>10.0.0.0/16</code> and routes it to VPC\n           peering connection, <code>pcx-111aaa22</code>. This route enables traffic to be\n           directed to the other peered VPC in the VPC peering connection.</description>\n         <queryrequest>https://ec2.amazonaws.com/?Action=CreateRoute\n&amp;RouteTableId=rtb-g8ff4ea2\n&amp;DestinationCidrBlock=10.0.0.0/16\n&amp;vpcPeeringConnectionId=pcx-111aaa22\n&amp;AUTHPARAMS</queryrequest>\n       </example>\n     </examples>\n   "
     },
     "CreateRouteTable": {
       "name": "CreateRouteTable",
@@ -3465,7 +3477,7 @@
                     "VpcPeeringConnectionId": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": null,
+                      "documentation": "\n    <p>The ID of the VPC peering connection.</p>\n  ",
                       "xmlname": "vpcPeeringConnectionId"
                     },
                     "State": {
@@ -3486,7 +3498,7 @@
                         "CreateRoute",
                         "EnableVgwRoutePropagation"
                       ],
-                      "documentation": null,
+                      "documentation": "\n    <p>Describes how the route was created.</p>\n    <ul>\n      <li>\n<code>CreateRouteTable</code> indicates that route was automatically created when the route table was created.</li>\n        <li>\n<code>CreateRoute</code> indicates that the route was manually added to the route table.</li>\n        <li>\n<code>EnableVgwRoutePropagation</code> indicates that the route was propagated by route propagation.</li>\n    </ul>\n  ",
                       "xmlname": "origin"
                     }
                   },
@@ -4053,7 +4065,7 @@
               "standard",
               "io1"
             ],
-            "documentation": "\n  <p>The volume type.</p>\n  <p>Default: <code>standard</code></p>\n "
+            "documentation": "\n  <p>The volume type. This can be <code>standard</code> for standard EBS volumes or <code>io1</code>\n      for Provisioned IOPS volumes.</p>\n  <p>Default: <code>standard</code></p>\n "
           },
           "Iops": {
             "shape_name": "Integer",
@@ -4200,7 +4212,7 @@
               "standard",
               "io1"
             ],
-            "documentation": "\n  <p>The volume type.</p>\n ",
+            "documentation": "\n  <p>The volume type. This can be <code>standard</code> for standard EBS volumes or <code>io1</code>\n      for Provisioned IOPS volumes.</p>\n ",
             "xmlname": "volumeType"
           },
           "Iops": {
@@ -4346,25 +4358,25 @@
           "DryRun": {
             "shape_name": "Boolean",
             "type": "boolean",
-            "documentation": null
+            "documentation": "\n  "
           },
           "VpcId": {
             "shape_name": "String",
             "type": "string",
-            "documentation": null
+            "documentation": "\n    <p>The ID of the requester VPC.</p>\n  "
           },
           "PeerVpcId": {
             "shape_name": "String",
             "type": "string",
-            "documentation": null
+            "documentation": "\n    <p>The ID of the VPC with which you are creating the VPC peering connection.</p>\n  "
           },
           "PeerOwnerId": {
             "shape_name": "String",
             "type": "string",
-            "documentation": null
+            "documentation": "\n    <p>The AWS account ID of the owner of the peer VPC.</p>\n    <p>Default: Your AWS account ID</p>\n  "
           }
         },
-        "documentation": null
+        "documentation": "\n  "
       },
       "output": {
         "shape_name": "CreateVpcPeeringConnectionResult",
@@ -4381,29 +4393,29 @@
                   "CidrBlock": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The CIDR block for the VPC.</p>\n  ",
                     "xmlname": "cidrBlock"
                   },
                   "OwnerId": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The AWS account ID of the VPC owner.</p>\n  ",
                     "xmlname": "ownerId"
                   },
                   "VpcId": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The ID of the VPC.</p>\n  ",
                     "xmlname": "vpcId"
                   }
                 },
-                "documentation": null,
+                "documentation": "\n    <p>The information of the peer VPC.</p>\n  ",
                 "xmlname": "accepterVpcInfo"
               },
               "ExpirationTime": {
                 "shape_name": "DateTime",
                 "type": "timestamp",
-                "documentation": null,
+                "documentation": "\n    <p>The time that an unaccepted VPC peering connection will expire.</p>\n  ",
                 "xmlname": "expirationTime"
               },
               "RequesterVpcInfo": {
@@ -4413,23 +4425,23 @@
                   "CidrBlock": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The CIDR block for the VPC.</p>\n  ",
                     "xmlname": "cidrBlock"
                   },
                   "OwnerId": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The AWS account ID of the VPC owner.</p>\n  ",
                     "xmlname": "ownerId"
                   },
                   "VpcId": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The ID of the VPC.</p>\n  ",
                     "xmlname": "vpcId"
                   }
                 },
-                "documentation": null,
+                "documentation": "\n    <p>The information of the requester VPC.</p>\n  ",
                 "xmlname": "requesterVpcInfo"
               },
               "Status": {
@@ -4439,17 +4451,17 @@
                   "Code": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>The status of the VPC peering connection.</p>\n  ",
                     "xmlname": "code"
                   },
                   "Message": {
                     "shape_name": "String",
                     "type": "string",
-                    "documentation": null,
+                    "documentation": "\n    <p>A message that provides more information about the status, if applicable.</p>\n  ",
                     "xmlname": "message"
                   }
                 },
-                "documentation": null,
+                "documentation": "\n    <p>The status of the VPC peering connection.</p>\n  ",
                 "xmlname": "status"
               },
               "Tags": {
@@ -4475,26 +4487,26 @@
                   "documentation": "\n    <p>Describes a tag.</p>\n   ",
                   "xmlname": "item"
                 },
-                "documentation": null,
+                "documentation": "\n    <p>Any tags assigned to the resource.</p>\n  ",
                 "xmlname": "tagSet"
               },
               "VpcPeeringConnectionId": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": null,
+                "documentation": "\n    <p>The ID of the VPC peering connection.</p>\n  ",
                 "xmlname": "vpcPeeringConnectionId"
               }
             },
-            "documentation": null,
+            "documentation": "\n    <p>Information about the VPC peering connection.</p>\n  ",
             "xmlname": "vpcPeeringConnection"
           }
         },
-        "documentation": null
+        "documentation": "\n  "
       },
       "errors": [
 
       ],
-      "documentation": null
+      "documentation": "\n   <p>Requests a VPC peering connection between two VPCs: a requester VPC that you own and a peer\n    VPC with which to create the connection. The peer VPC can belong to another AWS\n    account. The requester VPC and peer VPC cannot have overlapping CIDR blocks.</p>\n    <p>The owner of the peer VPC must accept the peering request to activate the peering\n      connection. The VPC peering connection request expires after 7 days, after which it\n      cannot be accepted or rejected.</p>\n    <p>A <code>CreateVpcPeeringConnection</code> request between VPCs with overlapping CIDR blocks\n      results in the VPC peering connection having a status of <code>failed</code>.</p>\n    <examples>\n      <example>\n        <name>Example 1</name>\n        <description>This example requests a peering connection between your VPC (<code>vpc-1a2b3c4d</code>),\n          and a VPC (<code>vpc-a1b2c3d4</code>) that belongs to AWS account\n          123456789012. </description>\n        <queryrequest>https://ec2.amazonaws.com/?Action=CreateVpcPeeringConnection\n&amp;VpcId=vpc-1a2b3c4d\n&amp;PeerVpcId=vpc-a1b2c3d4\n&amp;PeerOwnerId=123456789012\n&amp;AUTHPARAMS           </queryrequest>\n        <queryresponse>&lt;CreateVpcPeeringConnectionResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n &lt;requestId&gt;7a62c49f-347e-4fc4-9331-6e8eEXAMPLE&lt;/requestId&gt;\n &lt;vpcPeeringConnection&gt;\n  &lt;vpcPeeringConnectionId&gt;pcx-73a5401a&lt;/vpcPeeringConnectionId&gt;\n    &lt;requesterVpcInfo&gt;\n     &lt;ownerId&gt;777788889999&lt;/ownerId&gt;\n     &lt;vpcId&gt;vpc-vpc-1a2b3c4d&lt;/vpcId&gt;\n     &lt;cidrBlock&gt;10.0.0.0/28&lt;/cidrBlock&gt;\n    &lt;/requesterVpcInfo&gt;\n    &lt;accepterVpcInfo&gt;\n      &lt;ownerId&gt;123456789012&lt;/ownerId&gt;\n      &lt;vpcId&gt;vpc-a1b2c3d4&lt;/vpcId&gt;\n    &lt;/accepterVpcInfo&gt;\n    &lt;status&gt;\n     &lt;code&gt;initiating-request&lt;/code&gt;\n     &lt;message&gt;Initiating Request to 123456789012&lt;/message&gt;\n    &lt;/status&gt;\n    &lt;expirationTime&gt;2014-02-18T14:37:25.000Z&lt;/expirationTime&gt;\n    &lt;tagSet/&gt;\n &lt;/vpcPeeringConnection&gt;\n&lt;/CreateVpcPeeringConnectionResponse&gt;</queryresponse>\n      </example>\n      <example>\n        <name>Example 2</name>\n        <description>This example requests a peering connection between your VPCs <code>vpc-1a2b3c4d</code> and <code>vpc-11122233</code>.</description>\n        <queryrequest>https://ec2.amazonaws.com/?Action=CreateVpcPeeringConnection\n&amp;VpcId=vpc-1a2b3c4d\n&amp;PeerVpcId=vpc-11122233\n&amp;AUTHPARAMS</queryrequest>\n      </example>\n    </examples>\n  "
     },
     "CreateVpnConnection": {
       "name": "CreateVpnConnection",
@@ -4719,7 +4731,7 @@
                   "documentation": "\n\t\t <p>Describes a static route for a VPN connection.</p>\n   ",
                   "xmlname": "item"
                 },
-                "documentation": "\n\t\t <p>The static routes assoicated with the VPN connection.</p>\n   ",
+                "documentation": "\n\t\t <p>The static routes associated with the VPN connection.</p>\n   ",
                 "xmlname": "routes"
               }
             },
@@ -5398,15 +5410,15 @@
           "DryRun": {
             "shape_name": "Boolean",
             "type": "boolean",
-            "documentation": null
+            "documentation": "\n  "
           },
           "VpcPeeringConnectionId": {
             "shape_name": "String",
             "type": "string",
-            "documentation": null
+            "documentation": "\n    <p>The ID of the VPC peering connection.</p>\n  "
           }
         },
-        "documentation": null
+        "documentation": "\n  "
       },
       "output": {
         "shape_name": "DeleteVpcPeeringConnectionResult",
@@ -5415,16 +5427,16 @@
           "Return": {
             "shape_name": "Boolean",
             "type": "boolean",
-            "documentation": null,
+            "documentation": "\n    <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>\n  ",
             "xmlname": "return"
           }
         },
-        "documentation": null
+        "documentation": "\n  "
       },
       "errors": [
 
       ],
-      "documentation": null
+      "documentation": "\n    <p>Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the\n      peer VPC can delete the VPC peering connection if it's in the <code>active</code>\n      state. The owner of the requester VPC can delete a VPC peering connection in the\n      <code>pending-acceptance</code> state.</p>\n    <examples>\n      <example>\n        <name>Example</name>\n        <description>This example deletes the specified VPC peering connection.</description>\n        <queryrequest>https://ec2.amazonaws.com/?Action=DeleteVpcPeeringConnection\n &amp;vpcPeeringConnectionId=pcx-1a2b3c4d\n&amp;AUTHPARAMS</queryrequest>\n        <queryresponse>&lt;DeleteVpcPeeringConnectionResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n  &lt;requestId&gt;7a62c49f-347e-4fc4-9331-6e8eEXAMPLE&lt;/requestId&gt;\n  &lt;return&gt;true&lt;/return&gt;\n&lt;/DeleteVpcPeeringConnectionResponse&gt;</queryresponse>\n      </example>\n    </examples> \n  "
     },
     "DeleteVpnConnection": {
       "name": "DeleteVpnConnection",
@@ -7116,7 +7128,7 @@
       "errors": [
 
       ],
-      "documentation": "   \n     <p>Describes an attributes of an AMI. You can specify only one attribute at a time.</p>\n     <examples>\n      <example>\n       <name>Example 1</name>\n       <description>This example lists the launch permissions for the specified AMI.</description>\n       <queryrequest>https://ec2.amazonaws.com/?Action=DescribeImageAttribute\n&amp;ImageId=ami-61a54008\n&amp;Attribute=launchPermission\n&amp;AUTHPARAMS</queryrequest>\n       <queryresponse><DescribeImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-06-15/\">\n   <requestId>59dbff89-35bd-4eac-99ed-be587EXAMPLE</requestId> \n   <imageId>ami-61a54008</imageId>\n   <launchPermission>\n      <item>\n         <group>all</group>\n      </item>\n      <item>\n         <userId>495219933132</userId>\n      </item>\n   </launchPermission>\n</DescribeImageAttributeResponse></queryresponse>\n      </example>\n      <example>\n       <name>Example 2</name>\n       <description>This example lists the product codes for the specified AMI.</description>\n       <queryrequest>https://ec2.amazonaws.com/?Action=DescribeImageAttribute\n&amp;ImageId=ami-2bb65342\n&amp;Attribute=productCodes\n&amp;AUTHPARAMS</queryrequest>\n       <queryresponse><DescribeImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-06-15/>\n   <requestId>59dbff89-35bd-4eac-99ed-be587EXAMPLE</requestId> \n   <imageId>ami-2bb65342</imageId>\n   <productCodes> \n      <item>\n        <productCode>a1b2c3d4e5f6g7h8i9j10k11</productCode>\n        <type>marketplace</type>\n      </item> \n   </productCodes> \n</DescribeImageAttributeResponse></queryresponse>\n      </example>\n     </examples>\n   "
+      "documentation": "   \n     <p>Describes the specified attribute of the specified AMI. You can specify only one attribute at a time.</p>\n     <examples>\n      <example>\n       <name>Example 1</name>\n       <description>This example lists the launch permissions for the specified AMI.</description>\n       <queryrequest>https://ec2.amazonaws.com/?Action=DescribeImageAttribute\n&amp;ImageId=ami-61a54008\n&amp;Attribute=launchPermission\n&amp;AUTHPARAMS</queryrequest>\n       <queryresponse><DescribeImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-06-15/\">\n   <requestId>59dbff89-35bd-4eac-99ed-be587EXAMPLE</requestId> \n   <imageId>ami-61a54008</imageId>\n   <launchPermission>\n      <item>\n         <group>all</group>\n      </item>\n      <item>\n         <userId>495219933132</userId>\n      </item>\n   </launchPermission>\n</DescribeImageAttributeResponse></queryresponse>\n      </example>\n      <example>\n       <name>Example 2</name>\n       <description>This example lists the product codes for the specified AMI.</description>\n       <queryrequest>https://ec2.amazonaws.com/?Action=DescribeImageAttribute\n&amp;ImageId=ami-2bb65342\n&amp;Attribute=productCodes\n&amp;AUTHPARAMS</queryrequest>\n       <queryresponse><DescribeImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-06-15/>\n   <requestId>59dbff89-35bd-4eac-99ed-be587EXAMPLE</requestId> \n   <imageId>ami-2bb65342</imageId>\n   <productCodes> \n      <item>\n        <productCode>a1b2c3d4e5f6g7h8i9j10k11</productCode>\n        <type>marketplace</type>\n      </item> \n   </productCodes> \n</DescribeImageAttributeResponse></queryresponse>\n      </example>\n     </examples>\n   "
     },
     "DescribeImages": {
       "name": "DescribeImages",
@@ -7781,7 +7793,7 @@
       "errors": [
 
       ],
-      "documentation": "\n     <p>Describes an attribute of the specified instance. You can specify only one\n\t\t\t\tattribute at a time.</p>\n    <examples>\n     <example>\n      <name>Example 1</name>\n      <description>This example lists the instance type of the specified instance.</description>\n      <queryrequest>https://ec2.amazonaws.com/?Action=DescribeInstanceAttribute\n&amp;InstanceId=i-10a64379\n&amp;Attribute=instanceType\n&amp;AUTHPARAMS</queryrequest>\n      <queryresponse>&lt;DescribeInstanceAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n  &lt;requestId&gt;59dbff89-35bd-4eac-99ed-be587EXAMPLE&lt;/requestId&gt;\n  &lt;instanceId&gt;i-10a64379&lt;/instanceId&gt;\n  &lt;instanceType&gt;\n    &lt;value&gt;t1.micro&lt;/value&gt;\n  &lt;/instanceType&gt;\n&lt;/DescribeInstanceAttributeResponse&gt;</queryresponse>\n     </example>\n     <example>\n      <name>Example 2</name>\n      <description>This example lists the current value of the <code>InstanceInitiatedShutdownBehavior</code> attribute for the specified instance.</description>\n      <queryrequest>https://ec2.amazonaws.com/?Action=DescribeInstanceAttribute\n&amp;InstanceId=i-10a64379\n&amp;Attribute=instanceInitiatedShutdownBehavior\n&amp;AUTHPARAMS</queryrequest>\n      <queryresponse>&lt;DescribeInstanceAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n  &lt;requestId&gt;59dbff89-35bd-4eac-99ed-be587EXAMPLE&lt;/requestId&gt;\n  &lt;instanceId&gt;i-10a64379&lt;/instanceId&gt;\n  &lt;instanceInitiatedShutdownBehavior&gt;\n    &lt;value&gt;stop&lt;/value&gt;\n  &lt;/instanceInitiatedShutdownBehavior&gt;\n&lt;/DescribeInstanceAttributeResponse&gt;</queryresponse>\n     </example>\n     <example>\n      <name>Example 3</name>\n      <description>This example lists the current value of the <code>DisableApiTermination</code> attribute for the specified instance.</description>\n      <queryrequest>https://ec2.amazonaws.com/?Action=DescribeInstanceAttribute\n&amp;InstanceId=i-10a64379\n&amp;Attribute=disableApiTermination\n&amp;AUTHPARAMS</queryrequest>\n      <queryresponse>&lt;DescribeInstanceAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n  &lt;requestId&gt;59dbff89-35bd-4eac-99ed-be587EXAMPLE&lt;/requestId&gt;\n  &lt;instanceId&gt;i-10a64379&lt;/instanceId&gt;\n  &lt;disableApiTermination&gt;\n    &lt;value&gt;false&lt;/value&gt;\n  &lt;/disableApiTermination&gt;\n&lt;/DescribeInstanceAttributeResponse&gt;</queryresponse>\n     </example>\n    </examples>\n   "
+      "documentation": "\n     <p>Describes the specified attribute of the specified instance. You can specify only one\n\t\t\t\tattribute at a time.</p>\n    <examples>\n     <example>\n      <name>Example 1</name>\n      <description>This example lists the instance type of the specified instance.</description>\n      <queryrequest>https://ec2.amazonaws.com/?Action=DescribeInstanceAttribute\n&amp;InstanceId=i-10a64379\n&amp;Attribute=instanceType\n&amp;AUTHPARAMS</queryrequest>\n      <queryresponse>&lt;DescribeInstanceAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n  &lt;requestId&gt;59dbff89-35bd-4eac-99ed-be587EXAMPLE&lt;/requestId&gt;\n  &lt;instanceId&gt;i-10a64379&lt;/instanceId&gt;\n  &lt;instanceType&gt;\n    &lt;value&gt;t1.micro&lt;/value&gt;\n  &lt;/instanceType&gt;\n&lt;/DescribeInstanceAttributeResponse&gt;</queryresponse>\n     </example>\n     <example>\n      <name>Example 2</name>\n      <description>This example lists the current value of the <code>InstanceInitiatedShutdownBehavior</code> attribute for the specified instance.</description>\n      <queryrequest>https://ec2.amazonaws.com/?Action=DescribeInstanceAttribute\n&amp;InstanceId=i-10a64379\n&amp;Attribute=instanceInitiatedShutdownBehavior\n&amp;AUTHPARAMS</queryrequest>\n      <queryresponse>&lt;DescribeInstanceAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n  &lt;requestId&gt;59dbff89-35bd-4eac-99ed-be587EXAMPLE&lt;/requestId&gt;\n  &lt;instanceId&gt;i-10a64379&lt;/instanceId&gt;\n  &lt;instanceInitiatedShutdownBehavior&gt;\n    &lt;value&gt;stop&lt;/value&gt;\n  &lt;/instanceInitiatedShutdownBehavior&gt;\n&lt;/DescribeInstanceAttributeResponse&gt;</queryresponse>\n     </example>\n     <example>\n      <name>Example 3</name>\n      <description>This example lists the current value of the <code>DisableApiTermination</code> attribute for the specified instance.</description>\n      <queryrequest>https://ec2.amazonaws.com/?Action=DescribeInstanceAttribute\n&amp;InstanceId=i-10a64379\n&amp;Attribute=disableApiTermination\n&amp;AUTHPARAMS</queryrequest>\n      <queryresponse>&lt;DescribeInstanceAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n  &lt;requestId&gt;59dbff89-35bd-4eac-99ed-be587EXAMPLE&lt;/requestId&gt;\n  &lt;instanceId&gt;i-10a64379&lt;/instanceId&gt;\n  &lt;disableApiTermination&gt;\n    &lt;value&gt;false&lt;/value&gt;\n  &lt;/disableApiTermination&gt;\n&lt;/DescribeInstanceAttributeResponse&gt;</queryresponse>\n     </example>\n    </examples>\n   "
     },
     "DescribeInstanceStatus": {
       "name": "DescribeInstanceStatus",
@@ -8143,7 +8155,7 @@
               "documentation": "\n   ",
               "xmlname": "Filter"
             },
-            "documentation": "\n    <p>One or more filters.</p>\n    <ul>\n      <li>\n        <p><code>architecture</code> - The instance architecture (<code>i386</code> | <code>x86_64</code>).</p>\n      </li>\n      <li>\n        <p><code>availability-zone</code> - The Availability Zone of the instance.</p>\n      </li>\n      <li>\n        <p><code>block-device-mapping.attach-time</code> - The attach time for an Amazon EBS volume mapped to the instance.</p>\n      </li>\n      <li>\n        <p><code>block-device-mapping.delete-on-termination</code> - A Boolean that indicates whether the Amazon EBS volume is deleted on instance termination.</p>\n      </li>\n      <li>\n        <p><code>block-device-mapping.device-name</code> - The device name for the Amazon EBS volume (for example, <code>/dev/sdh</code>).</p>\n      </li>\n      <li>\n        <p><code>block-device-mapping.status</code> - The status for the Amazon EBS volume (<code>attaching</code> | <code>attached</code> |\n          <code>detaching</code> | <code>detached</code>).</p>\n      </li>\n      <li>\n        <p><code>block-device-mapping.volume-id</code> - The volume ID of the Amazon EBS volume.</p>\n      </li>\n      <li>\n        <p><code>client-token</code> - The idempotency token you provided when you launched the instance.</p>\n      </li>\n      <li>\n        <p><code>dns-name</code> - The public DNS name of the instance.</p>\n      </li>\n      <li>\n        <p><code>group-id</code> - The ID of the security group for the instance. If the instance is in EC2-Classic or a default VPC, you can use <code>group-name</code> instead.</p>\n      </li>\n      <li>\n        <p><code>group-name</code> - The name of the security group for the instance. If the instance is in a nondefault VPC, you must use <code>group-id</code> instead.</p>\n      </li>\n      <li>\n        <p><code>hypervisor</code> - The hypervisor type of the instance (<code>ovm</code> | <code>xen</code>).</p>\n      </li>\n      <li>\n        <p><code>image-id</code> - The ID of the image used to launch the instance.</p>\n      </li>\n      <li>\n        <p><code>instance-id</code> - The ID of the instance.</p>\n      </li>\n      <li>\n        <p><code>instance-lifecycle</code> - Indicates whether this is a Spot Instance (<code>spot</code>).</p>\n      </li>\n      <li>\n        <p><code>instance-state-code</code> - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).</p>\n      </li>\n      <li>\n        <p><code>instance-state-name</code> - The state of the instance (<code>pending</code> | <code>running</code> | <code>shutting-down</code> | <code>terminated</code> | <code>stopping</code> | <code>stopped</code>).</p>\n      </li>\n      <li>\n        <p><code>instance-type</code> - The type of instance (for example, <code>m1.small</code>).</p>\n      </li>\n      <li>\n        <p><code>instance.group-id</code> - The ID of the security group for the instance. If the instance is in EC2-Classic or a default VPC, you can use <code>instance.group-name</code> instead.</p>\n      </li>\n      <li>\n        <p><code>instance.group-name</code> - The name of the security group for the instance. If the instance is in a nondefault VPC, you must use <code>instance.group-id</code> instead.</p>\n      </li>\n      <li>\n        <p><code>ip-address</code> - The public IP address of the instance.</p>\n      </li>\n      <li>\n        <p><code>kernel-id</code> - The kernel ID.</p>\n      </li>\n      <li>\n        <p><code>key-name</code> - The name of the key pair used when the instance was launched.</p>\n      </li>\n      <li>\n        <p><code>launch-index</code> - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on). </p>\n      </li>\n      <li>\n        <p><code>launch-time</code> - The time when the instance was launched.</p>\n      </li>\n      <li>\n        <p><code>monitoring-state</code> - Indicates whether monitoring is enabled for the instance (<code>disabled</code> | <code>enabled</code>).</p>\n      </li>\n      <li>\n        <p><code>owner-id</code> - The AWS account ID of the instance owner.</p>\n      </li>\n      <li>\n        <p><code>placement-group-name</code> - The name of the placement group for the instance.</p>\n      </li>\n      <li>\n        <p><code>platform</code> - The platform. Use <code>windows</code> if you have Windows instances; otherwise, leave blank.</p>\n      </li>\n      <li>\n        <p><code>private-dns-name</code> - The private DNS name of the instance.</p>\n      </li>\n      <li>\n        <p><code>private-ip-address</code> - The private IP address of the instance.</p>\n      </li>\n      <li>\n        <p><code>product-code</code> - The product code associated with the AMI used to launch the instance.</p>\n      </li>\n      <li>\n        <p><code>product-code.type</code> - The type of product code (<code>devpay</code> | <code>marketplace</code>).</p>\n      </li>\n      <li>\n        <p><code>ramdisk-id</code> - The RAM disk ID.</p>\n      </li>\n      <li>\n        <p><code>reason</code> - The reason for the current state of the instance (for example, shows \"User Initiated [date]\" when you stop or terminate the instance). Similar to the state-reason-code filter.</p>\n      </li>\n      <li>\n        <p><code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p>\n      </li>\n      <li>\n        <p><code>reservation-id</code> - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you'll get one reservation ID. If you launch ten instances using the same launch request, you'll also get one reservation ID.</p>\n      </li>\n      <li>\n        <p><code>root-device-name</code> - The name of the root device for the instance (for example, <code>/dev/sda1</code>).</p>\n      </li>\n      <li>\n        <p><code>root-device-type</code> - The type of root device that the instance uses (<code>ebs</code> | <code>instance-store</code>).</p>\n      </li>\n      <li>\n        <p><code>source-dest-check</code> - Indicates whether the instance performs source/destination checking. A value of <code>true</code> means that checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the instance to perform network address translation (NAT) in your VPC. </p>\n      </li>\n      <li>\n        <p><code>spot-instance-request-id</code> - The ID of the Spot Instance request.</p>\n      </li>\n      <li>\n        <p><code>state-reason-code</code> - The reason code for the state change.</p>\n      </li>\n      <li>\n        <p><code>state-reason-message</code> - A message that describes the state change.</p>\n      </li>\n      <li>\n        <p><code>subnet-id</code> - The ID of the subnet for the instance.</p>\n      </li>\n      <li>\n        <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p>\n      </li>\n      <li>\n        <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter.\n        For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both\n        the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is).\n        If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p>\n      </li>\n      <li>\n        <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p>\n      </li>\n      <li>\n        <p><code>virtualization-type</code> - The virtualization type of the instance (<code>paravirtual</code> | <code>hvm</code>).</p>\n      </li>\n      <li>\n        <p><code>vpc-id</code> - The ID of the VPC that the instance is running in.</p>\n      </li>\n      <li>\n        <p><code>network-interface.description</code> - The description of the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.subnet-id</code> - The ID of the subnet for the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.vpc-id</code> - The ID of the VPC for the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.network-interface.id</code> - The ID of the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.owner-id</code> - The ID of the owner of the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.availability-zone</code> - The Availability Zone for the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.requester-id</code> - The requester ID for the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.requester-managed</code> - Indicates whether the network interface is being managed by AWS.</p>\n      </li>\n      <li>\n        <p><code>network-interface.status</code> - The status of the network interface (<code>available</code>) | <code>in-use</code>).</p>\n      </li>\n      <li>\n        <p><code>network-interface.mac-address</code> - The MAC address of the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface-private-dns-name</code> - The private DNS name of the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.source-destination-check</code> - Whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC.</p>\n      </li>\n      <li>\n        <p><code>network-interface.group-id</code> - The ID of a security group associated with the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.group-name</code> - The name of a security group associated with the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.attachment-id</code> - The ID of the interface attachment.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p>\n      </li>\n      <li>\n        <p><code>network-interface.addresses.private-ip-address</code> - The private IP address associated with the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.device-index</code> - The device index to which the network interface is attached.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.attach-time</code> - The time that the network interface was attached to an instance.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.delete-on-termination</code> - Specifies whether the attachment is deleted when an instance is terminated.</p>\n      </li>\n      <li>\n        <p><code>network-interface.addresses.primary</code> - Specifies whether the IP address of the network interface is the primary private IP address.</p>\n      </li>\n      <li>\n        <p><code>network-interface.addresses.association.public-ip</code> - The ID of the association of an Elastic IP address with a network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.addresses.association.ip-owner-id</code> - The owner ID of the private IP address associated with the network interface.</p>\n      </li>\n      <li>\n        <p><code>association.public-ip</code> - The address of the Elastic IP address bound to the network interface.</p>\n      </li>\n      <li>\n        <p><code>association.ip-owner-id</code> - The owner of the Elastic IP address associated with the network interface.</p>\n      </li>\n      <li>\n        <p><code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address for your network interface.</p>\n      </li>\n      <li>\n        <p><code>association.association-id</code> - The association ID returned when the network interface was associated with an IP address.</p>\n      </li>\n    </ul>\n   ",
+            "documentation": "\n    <p>One or more filters.</p>\n    <ul>\n      <li>\n        <p><code>architecture</code> - The instance architecture (<code>i386</code> | <code>x86_64</code>).</p>\n      </li>\n      <li>\n        <p><code>availability-zone</code> - The Availability Zone of the instance.</p>\n      </li>\n      <li>\n        <p><code>block-device-mapping.attach-time</code> - The attach time for an Amazon EBS volume mapped to the instance.</p>\n      </li>\n      <li>\n        <p><code>block-device-mapping.delete-on-termination</code> - A Boolean that indicates whether the Amazon EBS volume is deleted on instance termination.</p>\n      </li>\n      <li>\n        <p><code>block-device-mapping.device-name</code> - The device name for the Amazon EBS volume (for example, <code>/dev/sdh</code>).</p>\n      </li>\n      <li>\n        <p><code>block-device-mapping.status</code> - The status for the Amazon EBS volume (<code>attaching</code> | <code>attached</code> |\n          <code>detaching</code> | <code>detached</code>).</p>\n      </li>\n      <li>\n        <p><code>block-device-mapping.volume-id</code> - The volume ID of the Amazon EBS volume.</p>\n      </li>\n      <li>\n        <p><code>client-token</code> - The idempotency token you provided when you launched the instance.</p>\n      </li>\n      <li>\n        <p><code>dns-name</code> - The public DNS name of the instance.</p>\n      </li>\n      <li>\n        <p><code>group-id</code> - The ID of the security group for the instance. If the instance is in EC2-Classic or a default VPC, you can use <code>group-name</code> instead.</p>\n      </li>\n      <li>\n        <p><code>group-name</code> - The name of the security group for the instance. If the instance is in a nondefault VPC, you must use <code>group-id</code> instead.</p>\n      </li>\n      <li>\n        <p><code>hypervisor</code> - The hypervisor type of the instance (<code>ovm</code> | <code>xen</code>).</p>\n      </li>\n      <li>\n        <p><code>image-id</code> - The ID of the image used to launch the instance.</p>\n      </li>\n      <li>\n        <p><code>instance-id</code> - The ID of the instance.</p>\n      </li>\n      <li>\n        <p><code>instance-lifecycle</code> - Indicates whether this is a Spot Instance (<code>spot</code>).</p>\n      </li>\n      <li>\n        <p><code>instance-state-code</code> - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).</p>\n      </li>\n      <li>\n        <p><code>instance-state-name</code> - The state of the instance (<code>pending</code> | <code>running</code> | <code>shutting-down</code> | <code>terminated</code> | <code>stopping</code> | <code>stopped</code>).</p>\n      </li>\n      <li>\n        <p><code>instance-type</code> - The type of instance (for example, <code>m1.small</code>).</p>\n      </li>\n      <li>\n        <p><code>instance.group-id</code> - The ID of the security group for the instance. If the instance is in EC2-Classic or a default VPC, you can use <code>instance.group-name</code> instead.</p>\n      </li>\n      <li>\n        <p><code>instance.group-name</code> - The name of the security group for the instance. If the instance is in a nondefault VPC, you must use <code>instance.group-id</code> instead.</p>\n      </li>\n      <li>\n        <p><code>ip-address</code> - The public IP address of the instance.</p>\n      </li>\n      <li>\n        <p><code>kernel-id</code> - The kernel ID.</p>\n      </li>\n      <li>\n        <p><code>key-name</code> - The name of the key pair used when the instance was launched.</p>\n      </li>\n      <li>\n        <p><code>launch-index</code> - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on). </p>\n      </li>\n      <li>\n        <p><code>launch-time</code> - The time when the instance was launched.</p>\n      </li>\n      <li>\n        <p><code>monitoring-state</code> - Indicates whether monitoring is enabled for the instance (<code>disabled</code> | <code>enabled</code>).</p>\n      </li>\n      <li>\n        <p><code>owner-id</code> - The AWS account ID of the instance owner.</p>\n      </li>\n      <li>\n        <p><code>placement-group-name</code> - The name of the placement group for the instance.</p>\n      </li>\n      <li>\n        <p><code>platform</code> - The platform. Use <code>windows</code> if you have Windows instances; otherwise, leave blank.</p>\n      </li>\n      <li>\n        <p><code>private-dns-name</code> - The private DNS name of the instance.</p>\n      </li>\n      <li>\n        <p><code>private-ip-address</code> - The private IP address of the instance.</p>\n      </li>\n      <li>\n        <p><code>product-code</code> - The product code associated with the AMI used to launch the instance.</p>\n      </li>\n      <li>\n        <p><code>product-code.type</code> - The type of product code (<code>devpay</code> | <code>marketplace</code>).</p>\n      </li>\n      <li>\n        <p><code>ramdisk-id</code> - The RAM disk ID.</p>\n      </li>\n      <li>\n        <p><code>reason</code> - The reason for the current state of the instance (for example, shows \"User Initiated [date]\" when you stop or terminate the instance). Similar to the state-reason-code filter.</p>\n      </li>\n      <li>\n        <p><code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p>\n      </li>\n      <li>\n        <p><code>reservation-id</code> - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you'll get one reservation ID. If you launch ten instances using the same launch request, you'll also get one reservation ID.</p>\n      </li>\n      <li>\n        <p><code>root-device-name</code> - The name of the root device for the instance (for example, <code>/dev/sda1</code>).</p>\n      </li>\n      <li>\n        <p><code>root-device-type</code> - The type of root device that the instance uses (<code>ebs</code> | <code>instance-store</code>).</p>\n      </li>\n      <li>\n        <p><code>source-dest-check</code> - Indicates whether the instance performs source/destination checking. A value of <code>true</code> means that checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the instance to perform network address translation (NAT) in your VPC. </p>\n      </li>\n      <li>\n        <p><code>spot-instance-request-id</code> - The ID of the Spot Instance request.</p>\n      </li>\n      <li>\n        <p><code>state-reason-code</code> - The reason code for the state change.</p>\n      </li>\n      <li>\n        <p><code>state-reason-message</code> - A message that describes the state change.</p>\n      </li>\n      <li>\n        <p><code>subnet-id</code> - The ID of the subnet for the instance.</p>\n      </li>\n      <li>\n        <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to\n          the resource, where <code>tag</code>:<i>key</i> is the tag's key. </p>\n      </li>\n      <li>\n        <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter.\n        For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both\n        the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is).\n        If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p>\n      </li>\n      <li>\n        <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p>\n      </li>\n      <li>\n        <p><code>virtualization-type</code> - The virtualization type of the instance (<code>paravirtual</code> | <code>hvm</code>).</p>\n      </li>\n      <li>\n        <p><code>vpc-id</code> - The ID of the VPC that the instance is running in.</p>\n      </li>\n      <li>\n        <p><code>network-interface.description</code> - The description of the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.subnet-id</code> - The ID of the subnet for the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.vpc-id</code> - The ID of the VPC for the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.network-interface.id</code> - The ID of the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.owner-id</code> - The ID of the owner of the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.availability-zone</code> - The Availability Zone for the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.requester-id</code> - The requester ID for the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.requester-managed</code> - Indicates whether the network interface is being managed by AWS.</p>\n      </li>\n      <li>\n        <p><code>network-interface.status</code> - The status of the network interface (<code>available</code>) | <code>in-use</code>).</p>\n      </li>\n      <li>\n        <p><code>network-interface.mac-address</code> - The MAC address of the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface-private-dns-name</code> - The private DNS name of the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.source-destination-check</code> - Whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC.</p>\n      </li>\n      <li>\n        <p><code>network-interface.group-id</code> - The ID of a security group associated with the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.group-name</code> - The name of a security group associated with the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.attachment-id</code> - The ID of the interface attachment.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p>\n      </li>\n      <li>\n        <p><code>network-interface.addresses.private-ip-address</code> - The private IP address associated with the network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.device-index</code> - The device index to which the network interface is attached.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.attach-time</code> - The time that the network interface was attached to an instance.</p>\n      </li>\n      <li>\n        <p><code>network-interface.attachment.delete-on-termination</code> - Specifies whether the attachment is deleted when an instance is terminated.</p>\n      </li>\n      <li>\n        <p><code>network-interface.addresses.primary</code> - Specifies whether the IP address of the network interface is the primary private IP address.</p>\n      </li>\n      <li>\n        <p><code>network-interface.addresses.association.public-ip</code> - The ID of the association of an Elastic IP address with a network interface.</p>\n      </li>\n      <li>\n        <p><code>network-interface.addresses.association.ip-owner-id</code> - The owner ID of the private IP address associated with the network interface.</p>\n      </li>\n      <li>\n        <p><code>association.public-ip</code> - The address of the Elastic IP address bound to the network interface.</p>\n      </li>\n      <li>\n        <p><code>association.ip-owner-id</code> - The owner of the Elastic IP address associated with the network interface.</p>\n      </li>\n      <li>\n        <p><code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address for your network interface.</p>\n      </li>\n      <li>\n        <p><code>association.association-id</code> - The association ID returned when the network interface was associated with an IP address.</p>\n      </li>\n    </ul>\n   ",
             "flattened": true
           },
           "NextToken": {
@@ -8354,7 +8366,12 @@
                           "cc1.4xlarge",
                           "cc2.8xlarge",
                           "g2.2xlarge",
-                          "cg1.4xlarge"
+                          "cg1.4xlarge",
+                          "r3.large",
+                          "r3.xlarge",
+                          "r3.2xlarge",
+                          "r3.4xlarge",
+                          "r3.8xlarge"
                         ],
                         "documentation": "\n     <p>The instance type.</p>\n   ",
                         "xmlname": "instanceType"
@@ -9852,6 +9869,12 @@
                       "documentation": "\n\t\t <p>The address of the Elastic IP address bound to the network interface.</p>\n   ",
                       "xmlname": "publicIp"
                     },
+                    "PublicDnsName": {
+                      "shape_name": "String",
+                      "type": "string",
+                      "documentation": null,
+                      "xmlname": "publicDnsName"
+                    },
                     "IpOwnerId": {
                       "shape_name": "String",
                       "type": "string",
@@ -9934,6 +9957,12 @@
                             "type": "string",
                             "documentation": "\n\t\t <p>The address of the Elastic IP address bound to the network interface.</p>\n   ",
                             "xmlname": "publicIp"
+                          },
+                          "PublicDnsName": {
+                            "shape_name": "String",
+                            "type": "string",
+                            "documentation": null,
+                            "xmlname": "publicDnsName"
                           },
                           "IpOwnerId": {
                             "shape_name": "String",
@@ -10301,7 +10330,12 @@
                     "cc1.4xlarge",
                     "cc2.8xlarge",
                     "g2.2xlarge",
-                    "cg1.4xlarge"
+                    "cg1.4xlarge",
+                    "r3.large",
+                    "r3.xlarge",
+                    "r3.2xlarge",
+                    "r3.4xlarge",
+                    "r3.8xlarge"
                   ],
                   "documentation": "\n     <p>The instance type on which the Reserved Instance can be used.</p>\n   ",
                   "xmlname": "instanceType"
@@ -10856,7 +10890,12 @@
                               "cc1.4xlarge",
                               "cc2.8xlarge",
                               "g2.2xlarge",
-                              "cg1.4xlarge"
+                              "cg1.4xlarge",
+                              "r3.large",
+                              "r3.xlarge",
+                              "r3.2xlarge",
+                              "r3.4xlarge",
+                              "r3.8xlarge"
                             ],
                             "documentation": "\n     <p>The instance type for the modified Reserved Instances.</p>\n   ",
                             "xmlname": "instanceType"
@@ -10985,7 +11024,12 @@
               "cc1.4xlarge",
               "cc2.8xlarge",
               "g2.2xlarge",
-              "cg1.4xlarge"
+              "cg1.4xlarge",
+              "r3.large",
+              "r3.xlarge",
+              "r3.2xlarge",
+              "r3.4xlarge",
+              "r3.8xlarge"
             ],
             "documentation": "\n     <p>The instance type on which the Reserved Instance can be used.\n\t\t\t\tFor more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n   "
           },
@@ -11138,7 +11182,12 @@
                     "cc1.4xlarge",
                     "cc2.8xlarge",
                     "g2.2xlarge",
-                    "cg1.4xlarge"
+                    "cg1.4xlarge",
+                    "r3.large",
+                    "r3.xlarge",
+                    "r3.2xlarge",
+                    "r3.4xlarge",
+                    "r3.8xlarge"
                   ],
                   "documentation": "\n     <p>The instance type on which the Reserved Instance can be used.</p>\n   ",
                   "xmlname": "instanceType"
@@ -11342,7 +11391,7 @@
               "documentation": "\n   ",
               "xmlname": "Filter"
             },
-            "documentation": "\n\t\t <p>One or more filters.</p>\n\t\t <ul>\n\t\t   <li>\n\t\t     <p><code>association.route-table-association-id</code> - The ID of an association ID for the route table.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>association.route-table-id</code> - The ID of the route table involved in the association.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>association.subnet-id</code> - The ID of the subnet involved in the association.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>association.main</code> - Indicates whether the route table is the main route table for the VPC.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route-table-id</code> - The ID of the route table.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route.destination-cidr-block</code> - The CIDR range specified in a route in the table.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route.gateway-id</code> - The ID of a gateway specified in a route in the table.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route.instance-id</code> - The ID of an instance specified in a route in the table.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route.origin</code> - Describes how the route was created (<code>CreateRouteTable</code> | <code>CreateRoute</code> | <code>EnableVgwRoutePropagation</code>).</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route.state</code> - The state of a route in the route table (<code>active</code> | <code>blackhole</code>). \n\t\t     The blackhole state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, the specified NAT instance has been terminated, and so on).</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. \n\t\t       For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both \n\t\t       the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). \n\t\t       If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>vpc-id</code> - The ID of the VPC for the route table.</p>\n\t\t   </li>\n\t\t </ul>\n   ",
+            "documentation": "\n\t\t <p>One or more filters.</p>\n\t\t <ul>\n\t\t   <li>\n\t\t     <p><code>association.route-table-association-id</code> - The ID of an association ID for the route table.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>association.route-table-id</code> - The ID of the route table involved in the association.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>association.subnet-id</code> - The ID of the subnet involved in the association.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>association.main</code> - Indicates whether the route table is the main route table for the VPC.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route-table-id</code> - The ID of the route table.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route.destination-cidr-block</code> - The CIDR range specified in a route in the table.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route.gateway-id</code> - The ID of a gateway specified in a route in the table.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route.instance-id</code> - The ID of an instance specified in a route in the table.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>route.origin</code> - Describes how the route was created (<code>CreateRouteTable</code> | <code>CreateRoute</code> | <code>EnableVgwRoutePropagation</code>).</p>\n\t\t   </li>\n\t\t   <li>\n        <p><code>route.state</code> - The state of a route in the route table (<code>active</code> |\n            <code>blackhole</code>). The blackhole state indicates that the route's target isn't\n          available (for example, the specified gateway isn't attached to the VPC, the specified NAT\n          instance has been terminated, and so on).</p>\n      </li>\n      <li>\n        <p><code>route.vpc-peering-connection-id</code> - The ID of a VPC peering connection\n          specified in a route in the table.</p>\n      </li>\n\t\t   <li>\n\t\t     <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. \n\t\t       For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both \n\t\t       the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). \n\t\t       If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p>\n\t\t   </li>\n\t\t   <li>\n\t\t     <p><code>vpc-id</code> - The ID of the VPC for the route table.</p>\n\t\t   </li>\n\t\t </ul>\n   ",
             "flattened": true
           }
         },
@@ -11411,7 +11460,7 @@
                       "VpcPeeringConnectionId": {
                         "shape_name": "String",
                         "type": "string",
-                        "documentation": null,
+                        "documentation": "\n    <p>The ID of the VPC peering connection.</p>\n  ",
                         "xmlname": "vpcPeeringConnectionId"
                       },
                       "State": {
@@ -11432,7 +11481,7 @@
                           "CreateRoute",
                           "EnableVgwRoutePropagation"
                         ],
-                        "documentation": null,
+                        "documentation": "\n    <p>Describes how the route was created.</p>\n    <ul>\n      <li>\n<code>CreateRouteTable</code> indicates that route was automatically created when the route table was created.</li>\n        <li>\n<code>CreateRoute</code> indicates that the route was manually added to the route table.</li>\n        <li>\n<code>EnableVgwRoutePropagation</code> indicates that the route was propagated by route propagation.</li>\n    </ul>\n  ",
                         "xmlname": "origin"
                       }
                     },
@@ -11965,7 +12014,7 @@
       "errors": [
 
       ],
-      "documentation": "\n  <p>Describes an attribute of the specified snapshot. You can specify only one attribute at a\n   time.</p>\n    <p>For more information about Amazon EBS snapshots, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html'>Amazon EBS Snapshots</a> in the <i>&EC2long; User Guide</i>.</p>\n  <examples>\n   <example>\n    <name>Example</name>\n    <description>This example describes permissions for a snapshot with the ID of\n            <code>snap-1a2b3c4d</code>.</description>\n    <queryrequest>https://ec2.amazonaws.com/?Action=DescribeSnapshotAttribute\n&amp;SnapshotId=snap-1a2b3c4d\n&amp;Attribute=createVolumePermission\n&amp;AUTHPARAMS</queryrequest>\n    <queryresponse><DescribeSnapshotAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-06-15/\">\n   <requestId>59dbff89-35bd-4eac-99ed-be587EXAMPLE</requestId> \n   <snapshotId>snap-1a2b3c4d</snapshotId>\n   <createVolumePermission>\n      <item>\n         <group>all</group>\n      </item>\n   </createVolumePermission>\n</DescribeSnapshotAttributeResponse></queryresponse>\n   </example>\n  </examples>\n "
+      "documentation": "\n  <p>Describes the specified attribute of the specified snapshot. You can specify only one attribute at a\n   time.</p>\n    <p>For more information about Amazon EBS snapshots, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html'>Amazon EBS Snapshots</a> in the <i>&EC2long; User Guide</i>.</p>\n  <examples>\n   <example>\n    <name>Example</name>\n    <description>This example describes permissions for a snapshot with the ID of\n            <code>snap-1a2b3c4d</code>.</description>\n    <queryrequest>https://ec2.amazonaws.com/?Action=DescribeSnapshotAttribute\n&amp;SnapshotId=snap-1a2b3c4d\n&amp;Attribute=createVolumePermission\n&amp;AUTHPARAMS</queryrequest>\n    <queryresponse><DescribeSnapshotAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-06-15/\">\n   <requestId>59dbff89-35bd-4eac-99ed-be587EXAMPLE</requestId> \n   <snapshotId>snap-1a2b3c4d</snapshotId>\n   <createVolumePermission>\n      <item>\n         <group>all</group>\n      </item>\n   </createVolumePermission>\n</DescribeSnapshotAttributeResponse></queryresponse>\n   </example>\n  </examples>\n "
     },
     "DescribeSnapshots": {
       "name": "DescribeSnapshots",
@@ -12501,7 +12550,12 @@
                         "cc1.4xlarge",
                         "cc2.8xlarge",
                         "g2.2xlarge",
-                        "cg1.4xlarge"
+                        "cg1.4xlarge",
+                        "r3.large",
+                        "r3.xlarge",
+                        "r3.2xlarge",
+                        "r3.4xlarge",
+                        "r3.8xlarge"
                       ],
                       "documentation": "\n     <p>The instance type.</p>\n   ",
                       "xmlname": "instanceType"
@@ -12883,7 +12937,12 @@
                 "cc1.4xlarge",
                 "cc2.8xlarge",
                 "g2.2xlarge",
-                "cg1.4xlarge"
+                "cg1.4xlarge",
+                "r3.large",
+                "r3.xlarge",
+                "r3.2xlarge",
+                "r3.4xlarge",
+                "r3.8xlarge"
               ],
               "documentation": null,
               "xmlname": "InstanceType"
@@ -12996,7 +13055,12 @@
                     "cc1.4xlarge",
                     "cc2.8xlarge",
                     "g2.2xlarge",
-                    "cg1.4xlarge"
+                    "cg1.4xlarge",
+                    "r3.large",
+                    "r3.xlarge",
+                    "r3.2xlarge",
+                    "r3.4xlarge",
+                    "r3.8xlarge"
                   ],
                   "documentation": "\n     <p>The instance type.</p>\n   ",
                   "xmlname": "instanceType"
@@ -13727,7 +13791,7 @@
               "documentation": "\n   ",
               "xmlname": "Filter"
             },
-            "documentation": "\n   <p>One or more filters.</p>\n   <ul>\n     <li>\n       <p><code>attachment.attach-time</code> - The time stamp when the attachment initiated.</p>\n     </li>\n     <li>\n       <p><code>attachment.delete-on-termination</code> - Whether the volume is deleted on instance termination.</p>\n     </li>\n     <li>\n       <p><code>attachment.device</code> - The device name that is exposed to the instance (for example, <code>/dev/sda1</code>).</p>\n     </li>\n     <li>\n       <p><code>attachment.instance-id</code> - The ID of the instance the volume is attached to.</p>\n     </li>\n     <li>\n       <p><code>attachment.status</code> - The attachment state (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p>\n     </li>\n     <li>\n       <p><code>availability-zone</code> - The Availability Zone in which the volume was created.</p>\n     </li>\n     <li>\n       <p><code>create-time</code> - The time stamp when the volume was created.</p>\n     </li>\n     <li>\n       <p><code>size</code> - The size of the volume, in GiB.</p>\n     </li>\n     <li>\n       <p><code>snapshot-id</code> - The snapshot from which the volume was created.</p>\n     </li>\n     <li>\n       <p><code>status</code> - The status of the volume (<code>creating</code> | <code>available</code> | <code>in-use</code> | <code>deleting</code> | <code>deleted</code> | <code>error</code>).</p>\n     </li>\n     <li>\n       <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p>\n     </li>\n     <li>\n       <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. \n       For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both \n       the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). \n       If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p>\n     </li>\n     <li>\n       <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p>\n     </li>\n     <li>\n       <p><code>volume-id</code> - The volume ID.</p>\n     </li>\n     <li>\n       <p><code>volume-type</code> - The Amazon EBS volume type (<code>standard</code> | <code>io1</code>).</p>\n     </li>\n   </ul>\n   ",
+            "documentation": "\n   <p>One or more filters.</p>\n   <ul>\n     <li>\n       <p><code>attachment.attach-time</code> - The time stamp when the attachment initiated.</p>\n     </li>\n     <li>\n       <p><code>attachment.delete-on-termination</code> - Whether the volume is deleted on instance termination.</p>\n     </li>\n     <li>\n       <p><code>attachment.device</code> - The device name that is exposed to the instance (for example, <code>/dev/sda1</code>).</p>\n     </li>\n     <li>\n       <p><code>attachment.instance-id</code> - The ID of the instance the volume is attached to.</p>\n     </li>\n     <li>\n       <p><code>attachment.status</code> - The attachment state (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p>\n     </li>\n     <li>\n       <p><code>availability-zone</code> - The Availability Zone in which the volume was created.</p>\n     </li>\n     <li>\n       <p><code>create-time</code> - The time stamp when the volume was created.</p>\n     </li>\n     <li>\n       <p><code>size</code> - The size of the volume, in GiB.</p>\n     </li>\n     <li>\n       <p><code>snapshot-id</code> - The snapshot from which the volume was created.</p>\n     </li>\n     <li>\n       <p><code>status</code> - The status of the volume (<code>creating</code> | <code>available</code> | <code>in-use</code> | <code>deleting</code> | <code>deleted</code> | <code>error</code>).</p>\n     </li>\n     <li>\n       <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p>\n     </li>\n     <li>\n       <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. \n       For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both \n       the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). \n       If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p>\n     </li>\n     <li>\n       <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p>\n     </li>\n     <li>\n       <p><code>volume-id</code> - The volume ID.</p>\n     </li>\n     <li>\n       <p><code>volume-type</code> - The Amazon EBS volume type.  This can be <code>standard</code>\n          for standard EBS volumes or <code>io1</code> for Provisioned IOPS volumes.</p>\n     </li>\n   </ul>\n   ",
             "flattened": true
           }
         },
@@ -13877,7 +13941,7 @@
                     "standard",
                     "io1"
                   ],
-                  "documentation": "\n  <p>The volume type.</p>\n ",
+                  "documentation": "\n  <p>The volume type. This can be <code>standard</code> for standard EBS volumes or <code>io1</code>\n      for Provisioned IOPS volumes.</p>\n ",
                   "xmlname": "volumeType"
                 },
                 "Iops": {
@@ -13985,7 +14049,7 @@
           "DryRun": {
             "shape_name": "Boolean",
             "type": "boolean",
-            "documentation": null
+            "documentation": "\n  "
           },
           "VpcPeeringConnectionIds": {
             "shape_name": "ValueStringList",
@@ -13996,7 +14060,7 @@
               "documentation": null,
               "xmlname": "VpcPeeringConnectionId"
             },
-            "documentation": null,
+            "documentation": "\n    <p>One or more VPC peering connection IDs.</p>\n    <p>Default: Describes all your VPC peering connections.</p>\n  ",
             "flattened": true
           },
           "Filters": {
@@ -14027,11 +14091,11 @@
               "documentation": "\n   ",
               "xmlname": "Filter"
             },
-            "documentation": null,
+            "documentation": "\n    <p>One or more filters.</p>\n    <ul>\n      <li>\n        <p><code>accepter-vpc-info.cidr-block</code> - The CIDR block of the peer VPC.</p>\n      </li>\n      <li>\n        <p><code>accepter-vpc-info.owner-id</code> - The AWS account ID of the owner of the peer\n          VPC.</p>\n      </li>\n      <li>\n        <p><code>accepter-vpc-info.vpc-id</code> - The ID of the peer VPC.</p>\n      </li>\n      <li>\n        <p><code>expiration-time</code> - The expiration date and time for the VPC peering\n          connection.</p>\n      </li>\n      <li>\n        <p><code>requester-vpc-info.cidr-block</code> - The CIDR block of the requester's\n          VPC.</p>\n      </li>\n      <li>\n        <p><code>requester-vpc-info.owner-id</code> - The AWS account ID of the owner of the\n          requester VPC.</p>\n      </li>\n      <li>\n        <p><code>requester-vpc-info.vpc-id</code> - The ID of the requester VPC.</p>\n      </li>\n      <li>\n        <p><code>status-code</code> - The status of the VPC peering connection\n            (<code>pending-acceptance</code> | <code>failed</code> | <code>expired</code> |\n            <code>provisioning</code> | <code>active</code> | <code>deleted</code> |\n            <code>rejected</code>).</p>\n      </li>\n      <li>\n        <p><code>status-message</code> - A message that provides more information about the status\n          of the VPC peering connection, if applicable.</p>\n      </li>\n      <li>\n        <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p>\n      </li>\n      <li>\n        <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. \n          For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both \n          the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). \n          If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p>\n      </li>\n      <li>\n        <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p>\n      </li>\n      <li>\n        <p><code>vpc-peering-connection-id</code> - The ID of the VPC peering connection.</p>\n      </li>\n    </ul>\n  ",
             "flattened": true
           }
         },
-        "documentation": null
+        "documentation": "\n  "
       },
       "output": {
         "shape_name": "DescribeVpcPeeringConnectionsResult",
@@ -14051,29 +14115,29 @@
                     "CidrBlock": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": null,
+                      "documentation": "\n    <p>The CIDR block for the VPC.</p>\n  ",
                       "xmlname": "cidrBlock"
                     },
                     "OwnerId": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": null,
+                      "documentation": "\n    <p>The AWS account ID of the VPC owner.</p>\n  ",
                       "xmlname": "ownerId"
                     },
                     "VpcId": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": null,
+                      "documentation": "\n    <p>The ID of the VPC.</p>\n  ",
                       "xmlname": "vpcId"
                     }
                   },
-                  "documentation": null,
+                  "documentation": "\n    <p>The information of the peer VPC.</p>\n  ",
                   "xmlname": "accepterVpcInfo"
                 },
                 "ExpirationTime": {
                   "shape_name": "DateTime",
                   "type": "timestamp",
-                  "documentation": null,
+                  "documentation": "\n    <p>The time that an unaccepted VPC peering connection will expire.</p>\n  ",
                   "xmlname": "expirationTime"
                 },
                 "RequesterVpcInfo": {
@@ -14083,23 +14147,23 @@
                     "CidrBlock": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": null,
+                      "documentation": "\n    <p>The CIDR block for the VPC.</p>\n  ",
                       "xmlname": "cidrBlock"
                     },
                     "OwnerId": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": null,
+                      "documentation": "\n    <p>The AWS account ID of the VPC owner.</p>\n  ",
                       "xmlname": "ownerId"
                     },
                     "VpcId": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": null,
+                      "documentation": "\n    <p>The ID of the VPC.</p>\n  ",
                       "xmlname": "vpcId"
                     }
                   },
-                  "documentation": null,
+                  "documentation": "\n    <p>The information of the requester VPC.</p>\n  ",
                   "xmlname": "requesterVpcInfo"
                 },
                 "Status": {
@@ -14109,17 +14173,17 @@
                     "Code": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": null,
+                      "documentation": "\n    <p>The status of the VPC peering connection.</p>\n  ",
                       "xmlname": "code"
                     },
                     "Message": {
                       "shape_name": "String",
                       "type": "string",
-                      "documentation": null,
+                      "documentation": "\n    <p>A message that provides more information about the status, if applicable.</p>\n  ",
                       "xmlname": "message"
                     }
                   },
-                  "documentation": null,
+                  "documentation": "\n    <p>The status of the VPC peering connection.</p>\n  ",
                   "xmlname": "status"
                 },
                 "Tags": {
@@ -14145,29 +14209,29 @@
                     "documentation": "\n    <p>Describes a tag.</p>\n   ",
                     "xmlname": "item"
                   },
-                  "documentation": null,
+                  "documentation": "\n    <p>Any tags assigned to the resource.</p>\n  ",
                   "xmlname": "tagSet"
                 },
                 "VpcPeeringConnectionId": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null,
+                  "documentation": "\n    <p>The ID of the VPC peering connection.</p>\n  ",
                   "xmlname": "vpcPeeringConnectionId"
                 }
               },
-              "documentation": null,
+              "documentation": "\n    <p>Describes a VPC peering connection.</p>\n  ",
               "xmlname": "item"
             },
-            "documentation": null,
+            "documentation": "\n    <p>Information about the VPC peering connections</p>\n  ",
             "xmlname": "vpcPeeringConnectionSet"
           }
         },
-        "documentation": null
+        "documentation": "\n  "
       },
       "errors": [
 
       ],
-      "documentation": null
+      "documentation": "\n    <p>Describes one or more of your VPC peering connections.</p>\n    <examples>\n      <example>\n        <name>Example 1</name>\n        <description>This example describes all of your VPC peering connections.</description>\n        <queryrequest>https://ec2.amazonaws.com/?Action=DescribeVpcPeeringConnections\n&amp;AUTHPARAMS</queryrequest>\n        <queryresponse>&lt;DescribeVpcPeeringConnectionsResponse xmlns=http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n&lt;requestId&gt;7a62c49f-347e-4fc4-9331-6e8eEXAMPLE&lt;/requestId&gt;\n &lt;vpcPeeringConnectionSet&gt;\n &lt;item&gt;\n  &lt;vpcPeeringConnectionId&gt;pcx-111aaa22&lt;/vpcPeeringConnectionId&gt;\n    &lt;requesterVpcInfo&gt;\n     &lt;ownerId&gt;777788889999&lt;/ownerId&gt;\n     &lt;vpcId&gt;vpc-1a2b3c4d&lt;/vpcId&gt;\n     &lt;cidrBlock&gt;172.31.0.0/16&lt;/cidrBlock&gt;\n    &lt;/requesterVpcInfo&gt;\n    &lt;accepterVpcInfo&gt;\n     &lt;ownerId&gt;123456789012&lt;/ownerId&gt;\n     &lt;vpcId&gt;vpc-aa22cc33&lt;/vpcId&gt;\n     &lt;/accepterVpcInfo&gt;\"\n     &lt;status&gt;\n      &lt;code&gt;pending-acceptance&lt;/code&gt;\n      &lt;message&gt;Pending Acceptance by 123456789012&lt;/message&gt;\n     &lt;/status&gt;\n     &lt;expirationTime&gt;2014-02-17T16:00:50.000Z&lt;/expirationTime&gt;\n     &lt;tagSet/&gt;\n     &lt;/item&gt;\n   &lt;/vpcPeeringConnectionSet&gt;\n&lt;/DescribeVpcPeeringConnectionsResponse&gt;</queryresponse>\n      </example>\n      <example>\n        <name>Example 2</name>\n        <description>This example describes all of your VPC peering connections that are in the\n          <code>pending-acceptance</code> state.</description>\n        <queryrequest>https://ec2.amazonaws.com/?Action=DescribeVpcPeeringConnections\n&amp;Filter.1.Name=status-code\n&amp;Filter.1.Value=pending-acceptance\n&amp;AUTHPARAMS</queryrequest>\n      </example>\n      <example>\n        <name>Example 3</name>\n        <description>This example describes all of your VPC peering connections that have the tag\n          <code>Name=Finance</code> or <code>Name=Accounts</code>.</description>\n        <queryrequest>https://ec2.amazonaws.com/?Action=DescribeVpcPeeringConnections\n&amp;Filter.1.Name=tag:Name\n&amp;Filter.1.Value.1=Finance\n&amp;Filter.1.Value.2=Accounts\n&amp;AUTHPARAMS</queryrequest>\n      </example>\n      <example>\n        <name>Example 4</name>\n        <description>This example describes all of the VPC peering connections for your specified VPC,\n          <code>vpc-1a2b3c4d</code>.</description>\n        <queryrequest>https://ec2.amazonaws.com/?Action=DescribeVpcPeeringConnections\n&amp;Filter.1.Name=requester-vpc-info.vpc-id\n&amp;Filter.1.Value=vpc-1a2b3c4d\n&amp;AUTHPARAMS</queryrequest>\n      </example>\n    </examples>\n  "
     },
     "DescribeVpcs": {
       "name": "DescribeVpcs",
@@ -14561,7 +14625,7 @@
                     "documentation": "\n\t\t <p>Describes a static route for a VPN connection.</p>\n   ",
                     "xmlname": "item"
                   },
-                  "documentation": "\n\t\t <p>The static routes assoicated with the VPN connection.</p>\n   ",
+                  "documentation": "\n\t\t <p>The static routes associated with the VPN connection.</p>\n   ",
                   "xmlname": "routes"
                 }
               },
@@ -15258,7 +15322,12 @@
                   "cc1.4xlarge",
                   "cc2.8xlarge",
                   "g2.2xlarge",
-                  "cg1.4xlarge"
+                  "cg1.4xlarge",
+                  "r3.large",
+                  "r3.xlarge",
+                  "r3.2xlarge",
+                  "r3.4xlarge",
+                  "r3.8xlarge"
                 ],
                 "documentation": "\n    <p>The instance type. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n   "
               },
@@ -16646,7 +16715,12 @@
                     "cc1.4xlarge",
                     "cc2.8xlarge",
                     "g2.2xlarge",
-                    "cg1.4xlarge"
+                    "cg1.4xlarge",
+                    "r3.large",
+                    "r3.xlarge",
+                    "r3.2xlarge",
+                    "r3.4xlarge",
+                    "r3.8xlarge"
                   ],
                   "documentation": "\n     <p>The instance type for the modified Reserved Instances.</p>\n   "
                 }
@@ -16855,7 +16929,7 @@
                 "documentation": "   \n   "
               }
             },
-            "documentation": "\n\t\t <p>Indicates whether DNS resolution is supported for the VPC. If\n\t\t\t\tthis attribute is <code>true</code>, the Amazon DNS server resolves DNS\n\t\t\t\thostnames for your instances to their corresponding IP addresses;\n\t\t\t\totherwise, it does not.</p>\n   "
+            "documentation": "\n\t\t <p>Indicates whether the DNS resolution is supported for the VPC. If this attribute is\n        <code>false</code>, the Amazon provided DNS service in the VPC that resolves public DNS\n      hostnames to IP addresses is not enabled. If this attribute is <code>true</code>, queries to\n      the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address\n      at the base of the VPC network range \"plus two\" will succeed.</p>\n   "
           },
           "EnableDnsHostnames": {
             "shape_name": "AttributeBooleanValue",
@@ -17208,15 +17282,15 @@
           "DryRun": {
             "shape_name": "Boolean",
             "type": "boolean",
-            "documentation": null
+            "documentation": "\n  "
           },
           "VpcPeeringConnectionId": {
             "shape_name": "String",
             "type": "string",
-            "documentation": null
+            "documentation": "\n    <p>The ID of the VPC peering connection.</p>\n  "
           }
         },
-        "documentation": null
+        "documentation": "\n  "
       },
       "output": {
         "shape_name": "RejectVpcPeeringConnectionResult",
@@ -17225,16 +17299,16 @@
           "Return": {
             "shape_name": "Boolean",
             "type": "boolean",
-            "documentation": null,
+            "documentation": "\n    <p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>\n  ",
             "xmlname": "return"
           }
         },
-        "documentation": null
+        "documentation": "\n  "
       },
       "errors": [
 
       ],
-      "documentation": null
+      "documentation": "\n    <p>Rejects a VPC peering connection request. The VPC peering connection must be in the\n      <code>pending-acceptance</code> state. Use the <code>DescribeVpcPeeringConnections</code> request to\n      view your outstanding VPC peering connection requests.</p>\n    <examples>\n      <example>\n        <name>Example</name>\n        <description>This example rejects the specified VPC peering connection\n          request.</description>\n        <queryrequest>https://ec2.amazonaws.com/?Action=RejectVpcPeeringConnection\n&amp;vpcPeeringConnectionId=pcx-1a2b3c4d\n&amp;AUTHPARAMS \n        </queryrequest>\n        <queryresponse>&lt;RejectVpcPeeringConnectionResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n   &lt;requestId&gt;7a62c49f-347e-4fc4-9331-6e8eEXAMPLE&lt;/requestId&gt;\n   &lt;return&gt;true&lt;/return&gt;\n&lt;/RejectVpcPeeringConnectionResponse&gt;\n        </queryresponse>\n      </example>\n    </examples>\n  "
     },
     "ReleaseAddress": {
       "name": "ReleaseAddress",
@@ -17446,7 +17520,7 @@
           "VpcPeeringConnectionId": {
             "shape_name": "String",
             "type": "string",
-            "documentation": null
+            "documentation": "\n    <p>The ID of a VPC peering connection.</p>\n  "
           }
         },
         "documentation": "\n   "
@@ -17455,7 +17529,7 @@
       "errors": [
 
       ],
-      "documentation": "\n\t\t <p>Replaces an existing route within a route table in a VPC. You must provide only one of the following: \n\t\t    Internet gateway, NAT instance, or network interface.</p>\n\t\t <p>For more information about route tables, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>\n     <examples>\n      <example>\n       <name>Example</name>\n       <description>This example replaces a route in the specified route table. The new\n\t\t\t\t\troute matches the CIDR <code>10.0.0.0/8</code> and sends the traffic to the virtual private gateway with\n\t\t\t\t\tthe ID <code>vgw-1d00376e</code>.</description>\n       <queryrequest>https://ec2.amazonaws.com/?Action=ReplaceRoute\n&amp;RouteTableId=rtb-e4ad488d\n&amp;DestinationCidrBlock=10.0.0.0/8\n&amp;GatewayId=vgw-1d00376e\n&amp;AUTHPARAMS</queryrequest>\n       <queryresponse>&lt;ReplaceRouteResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n   &lt;requestId&gt;59dbff89-35bd-4eac-99ed-be587EXAMPLE&lt;/requestId&gt; \n   &lt;return&gt;true&lt;/return&gt;\n&lt;/ReplaceRouteResponse&gt;</queryresponse>\n      </example>\n     </examples>\n   "
+      "documentation": "\n\t\t <p>Replaces an existing route within a route table in a VPC. You must provide only one of the following: \n\t\t    Internet gateway, NAT instance, VPC peering connection, or network interface.</p>\n\t\t <p>For more information about route tables, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>\n     <examples>\n      <example>\n       <name>Example</name>\n       <description>This example replaces a route in the specified route table. The new\n\t\t\t\t\troute matches the CIDR <code>10.0.0.0/8</code> and sends the traffic to the virtual private gateway with\n\t\t\t\t\tthe ID <code>vgw-1d00376e</code>.</description>\n       <queryrequest>https://ec2.amazonaws.com/?Action=ReplaceRoute\n&amp;RouteTableId=rtb-e4ad488d\n&amp;DestinationCidrBlock=10.0.0.0/8\n&amp;GatewayId=vgw-1d00376e\n&amp;AUTHPARAMS</queryrequest>\n       <queryresponse>&lt;ReplaceRouteResponse xmlns=\"http://ec2.amazonaws.com/doc/2013-10-01/\"&gt;\n   &lt;requestId&gt;59dbff89-35bd-4eac-99ed-be587EXAMPLE&lt;/requestId&gt; \n   &lt;return&gt;true&lt;/return&gt;\n&lt;/ReplaceRouteResponse&gt;</queryresponse>\n      </example>\n     </examples>\n   "
     },
     "ReplaceRouteTableAssociation": {
       "name": "ReplaceRouteTableAssociation",
@@ -17688,7 +17762,12 @@
                   "cc1.4xlarge",
                   "cc2.8xlarge",
                   "g2.2xlarge",
-                  "cg1.4xlarge"
+                  "cg1.4xlarge",
+                  "r3.large",
+                  "r3.xlarge",
+                  "r3.2xlarge",
+                  "r3.4xlarge",
+                  "r3.8xlarge"
                 ],
                 "documentation": "\n     <p>The instance type.</p>\n   "
               },
@@ -18137,7 +18216,12 @@
                         "cc1.4xlarge",
                         "cc2.8xlarge",
                         "g2.2xlarge",
-                        "cg1.4xlarge"
+                        "cg1.4xlarge",
+                        "r3.large",
+                        "r3.xlarge",
+                        "r3.2xlarge",
+                        "r3.4xlarge",
+                        "r3.8xlarge"
                       ],
                       "documentation": "\n     <p>The instance type.</p>\n   ",
                       "xmlname": "instanceType"
@@ -18972,7 +19056,12 @@
               "cc1.4xlarge",
               "cc2.8xlarge",
               "g2.2xlarge",
-              "cg1.4xlarge"
+              "cg1.4xlarge",
+              "r3.large",
+              "r3.xlarge",
+              "r3.2xlarge",
+              "r3.4xlarge",
+              "r3.8xlarge"
             ],
             "documentation": "\n    <p>The instance type. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n    <p>Default: <code>m1.small</code></p>\n   "
           },
@@ -19427,7 +19516,12 @@
                     "cc1.4xlarge",
                     "cc2.8xlarge",
                     "g2.2xlarge",
-                    "cg1.4xlarge"
+                    "cg1.4xlarge",
+                    "r3.large",
+                    "r3.xlarge",
+                    "r3.2xlarge",
+                    "r3.4xlarge",
+                    "r3.8xlarge"
                   ],
                   "documentation": "\n     <p>The instance type.</p>\n   ",
                   "xmlname": "instanceType"

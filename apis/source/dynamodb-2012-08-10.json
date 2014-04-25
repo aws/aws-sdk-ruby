@@ -40,6 +40,7 @@
                     "keys": {
                       "shape_name": "AttributeName",
                       "type": "string",
+                      "max_length": 65535,
                       "documentation": null
                     },
                     "members": {
@@ -107,6 +108,7 @@
                   "members": {
                     "shape_name": "AttributeName",
                     "type": "string",
+                    "max_length": 65535,
                     "documentation": null
                   },
                   "min_length": 1,
@@ -162,6 +164,7 @@
                 "keys": {
                   "shape_name": "AttributeName",
                   "type": "string",
+                  "max_length": 65535,
                   "documentation": null
                 },
                 "members": {
@@ -246,6 +249,7 @@
                     "keys": {
                       "shape_name": "AttributeName",
                       "type": "string",
+                      "max_length": 65535,
                       "documentation": null
                     },
                     "members": {
@@ -313,6 +317,7 @@
                   "members": {
                     "shape_name": "AttributeName",
                     "type": "string",
+                    "max_length": 65535,
                     "documentation": null
                   },
                   "min_length": 1,
@@ -494,6 +499,7 @@
                         "keys": {
                           "shape_name": "AttributeName",
                           "type": "string",
+                          "max_length": 65535,
                           "documentation": null
                         },
                         "members": {
@@ -564,6 +570,7 @@
                         "keys": {
                           "shape_name": "AttributeName",
                           "type": "string",
+                          "max_length": 65535,
                           "documentation": null
                         },
                         "members": {
@@ -690,6 +697,7 @@
                         "keys": {
                           "shape_name": "AttributeName",
                           "type": "string",
+                          "max_length": 65535,
                           "documentation": null
                         },
                         "members": {
@@ -760,6 +768,7 @@
                         "keys": {
                           "shape_name": "AttributeName",
                           "type": "string",
+                          "max_length": 65535,
                           "documentation": null
                         },
                         "members": {
@@ -855,6 +864,7 @@
                     "keys": {
                       "shape_name": "AttributeName",
                       "type": "string",
+                      "max_length": 65535,
                       "documentation": null
                     },
                     "members": {
@@ -1808,6 +1818,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -1871,6 +1882,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -1933,11 +1945,97 @@
                   "shape_name": "BooleanObject",
                   "type": "boolean",
                   "documentation": "\n    <p>Causes DynamoDB to evaluate the value before attempting a conditional operation:</p>\n    <ul>\n      <li>\n        <p>If <i>Exists</i> is <code>true</code>, DynamoDB will check to see if that attribute\n          value already exists in the table. If it is found, then the operation\n          succeeds. If it is not found, the operation fails with a\n          <i>ConditionalCheckFailedException</i>.</p>\n      </li>\n      <li>\n        <p>If <i>Exists</i> is <code>false</code>, DynamoDB assumes that the attribute value does\n          <i>not</i> exist in the table. If in fact the value does not exist, then the\n          assumption is valid and the operation succeeds. If the value is found,\n          despite the assumption that it does not exist, the operation fails with a\n          <i>ConditionalCheckFailedException</i>.</p>\n      </li>\n    </ul>\n    <p>The default setting for <i>Exists</i> is <code>true</code>. If you supply a <i>Value</i> all\n      by itself, DynamoDB assumes the attribute exists: You don't have to set <i>Exists</i> to\n        <code>true</code>, because it is implied.</p>\n    <p>DynamoDB returns a <i>ValidationException</i> if:</p>\n    <ul>\n      <li>\n        <p><i>Exists</i> is <code>true</code> but there is no <i>Value</i> to check. (You expect\n          a value to exist, but don't specify what that value is.)</p>\n      </li>\n      <li>\n        <p><i>Exists</i> is <code>false</code> but you also specify a <i>Value</i>. (You cannot\n          expect an attribute to have a value, while also expecting it not to exist.)</p>\n      </li>\n    </ul>\n    <p>If you specify more than one condition for <i>Exists</i>, then all of the conditions must\n      evaluate to true. (In other words, the conditions are ANDed together.) Otherwise, the\n      conditional operation will fail.</p>\n  "
+                },
+                "ComparisonOperator": {
+                  "shape_name": "ComparisonOperator",
+                  "type": "string",
+                  "enum": [
+                    "EQ",
+                    "NE",
+                    "IN",
+                    "LE",
+                    "LT",
+                    "GE",
+                    "GT",
+                    "BETWEEN",
+                    "NOT_NULL",
+                    "NULL",
+                    "CONTAINS",
+                    "NOT_CONTAINS",
+                    "BEGINS_WITH"
+                  ],
+                  "documentation": null
+                },
+                "AttributeValueList": {
+                  "shape_name": "AttributeValueList",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "AttributeValue",
+                    "type": "structure",
+                    "members": {
+                      "S": {
+                        "shape_name": "StringAttributeValue",
+                        "type": "string",
+                        "documentation": "\n    <p>A String data type</p>\n  "
+                      },
+                      "N": {
+                        "shape_name": "NumberAttributeValue",
+                        "type": "string",
+                        "documentation": "\n    <p>A Number data type</p>\n  "
+                      },
+                      "B": {
+                        "shape_name": "BinaryAttributeValue",
+                        "type": "blob",
+                        "documentation": "\n    <p>A Binary data type</p>\n  "
+                      },
+                      "SS": {
+                        "shape_name": "StringSetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "StringAttributeValue",
+                          "type": "string",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p>A String set data type</p>\n  "
+                      },
+                      "NS": {
+                        "shape_name": "NumberSetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "NumberAttributeValue",
+                          "type": "string",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p> Number set data type</p>\n  "
+                      },
+                      "BS": {
+                        "shape_name": "BinarySetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "BinaryAttributeValue",
+                          "type": "blob",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p>A Binary set data type</p>\n  "
+                      }
+                    },
+                    "documentation": "\n    <p>Represents the data for an attribute. You can set one, and only one, of the elements.</p>\n  "
+                  },
+                  "documentation": null
                 }
               },
               "documentation": "\n    <p>Represents an attribute value used with conditional <i>DeleteItem</i>, <i>PutItem</i> or <i>UpdateItem</i> operations.  DynamoDB will check to see if the attribute value already exists; or if the attribute exists and has a particular value before updating it.</p>\n  "
             },
             "documentation": "\n    <p>A map of attribute/condition pairs. This is the conditional block for the <i>DeleteItem</i> operation. All the conditions must be met for the operation to succeed.</p>     <p><i>Expected</i> allows you to\n      provide an attribute name, and whether or not DynamoDB should check to see if the attribute value\n      already exists; or if the attribute value exists and has a particular value before changing\n      it.</p>\n    <p>Each item in <i>Expected</i> represents an attribute name for DynamoDB to check, along with\n      the following: </p>\n    <ul>\n      <li>\n        <p><i>Value</i> - A value for DynamoDB to compare with an attribute. When performing the comparison, strongly consistent reads are used.</p>\n      </li>\n      <li>\n        <p><i>Exists</i> - Causes DynamoDB to evaluate the value before attempting a conditional\n          operation:</p>\n        <ul>\n          <li>\n            <p>If <i>Exists</i> is <code>true</code>, DynamoDB will check to see if that attribute\n              value already exists in the table. If it is found, then the operation\n              succeeds. If it is not found, the operation fails with a\n                <i>ConditionalCheckFailedException</i>.</p>\n          </li>\n          <li>\n            <p>If <i>Exists</i> is <code>false</code>, DynamoDB assumes that the attribute value does\n                <i>not</i> exist in the table. If in fact the value does not exist, then the\n              assumption is valid and the operation succeeds. If the value is found,\n              despite the assumption that it does not exist, the operation fails with a\n                <i>ConditionalCheckFailedException</i>.</p>\n          </li>\n        </ul>\n        <p>The default setting for <i>Exists</i> is <code>true</code>. If you supply a <i>Value</i>\n          all by itself, DynamoDB assumes the attribute exists:  You don't have to set <i>Exists</i> to <code>true</code>, because it is\n          implied.</p>\n        <p>DynamoDB returns a <i>ValidationException</i> if:</p>\n        <ul>\n          <li>\n            <p><i>Exists</i> is <code>true</code> but there is no <i>Value</i> to check. (You expect\n              a value to exist, but don't specify what that value is.)</p>\n          </li>\n          <li>\n            <p><i>Exists</i> is <code>false</code> but you also specify a <i>Value</i>. (You cannot\n              expect an attribute to have a value, while also expecting it not to exist.)</p>\n          </li>\n        </ul>\n      </li>\n    </ul>\n    <p>If you specify more than one condition for <i>Exists</i>, then all of the conditions must\n      evaluate to true. (In other words, the conditions are ANDed together.) Otherwise, the\n      conditional operation will fail.</p>\n\n  "
+          },
+          "ConditionalOperator": {
+            "shape_name": "ConditionalOperator",
+            "type": "string",
+            "enum": [
+              "AND",
+              "OR"
+            ],
+            "documentation": null
           },
           "ReturnValues": {
             "shape_name": "ReturnValue",
@@ -1983,6 +2081,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -2131,6 +2230,7 @@
                 "keys": {
                   "shape_name": "AttributeName",
                   "type": "string",
+                  "max_length": 65535,
                   "documentation": null
                 },
                 "members": {
@@ -3160,6 +3260,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -3223,6 +3324,7 @@
             "members": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "min_length": 1,
@@ -3256,6 +3358,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -3526,6 +3629,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -3589,6 +3693,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -3651,6 +3756,83 @@
                   "shape_name": "BooleanObject",
                   "type": "boolean",
                   "documentation": "\n    <p>Causes DynamoDB to evaluate the value before attempting a conditional operation:</p>\n    <ul>\n      <li>\n        <p>If <i>Exists</i> is <code>true</code>, DynamoDB will check to see if that attribute\n          value already exists in the table. If it is found, then the operation\n          succeeds. If it is not found, the operation fails with a\n          <i>ConditionalCheckFailedException</i>.</p>\n      </li>\n      <li>\n        <p>If <i>Exists</i> is <code>false</code>, DynamoDB assumes that the attribute value does\n          <i>not</i> exist in the table. If in fact the value does not exist, then the\n          assumption is valid and the operation succeeds. If the value is found,\n          despite the assumption that it does not exist, the operation fails with a\n          <i>ConditionalCheckFailedException</i>.</p>\n      </li>\n    </ul>\n    <p>The default setting for <i>Exists</i> is <code>true</code>. If you supply a <i>Value</i> all\n      by itself, DynamoDB assumes the attribute exists: You don't have to set <i>Exists</i> to\n        <code>true</code>, because it is implied.</p>\n    <p>DynamoDB returns a <i>ValidationException</i> if:</p>\n    <ul>\n      <li>\n        <p><i>Exists</i> is <code>true</code> but there is no <i>Value</i> to check. (You expect\n          a value to exist, but don't specify what that value is.)</p>\n      </li>\n      <li>\n        <p><i>Exists</i> is <code>false</code> but you also specify a <i>Value</i>. (You cannot\n          expect an attribute to have a value, while also expecting it not to exist.)</p>\n      </li>\n    </ul>\n    <p>If you specify more than one condition for <i>Exists</i>, then all of the conditions must\n      evaluate to true. (In other words, the conditions are ANDed together.) Otherwise, the\n      conditional operation will fail.</p>\n  "
+                },
+                "ComparisonOperator": {
+                  "shape_name": "ComparisonOperator",
+                  "type": "string",
+                  "enum": [
+                    "EQ",
+                    "NE",
+                    "IN",
+                    "LE",
+                    "LT",
+                    "GE",
+                    "GT",
+                    "BETWEEN",
+                    "NOT_NULL",
+                    "NULL",
+                    "CONTAINS",
+                    "NOT_CONTAINS",
+                    "BEGINS_WITH"
+                  ],
+                  "documentation": null
+                },
+                "AttributeValueList": {
+                  "shape_name": "AttributeValueList",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "AttributeValue",
+                    "type": "structure",
+                    "members": {
+                      "S": {
+                        "shape_name": "StringAttributeValue",
+                        "type": "string",
+                        "documentation": "\n    <p>A String data type</p>\n  "
+                      },
+                      "N": {
+                        "shape_name": "NumberAttributeValue",
+                        "type": "string",
+                        "documentation": "\n    <p>A Number data type</p>\n  "
+                      },
+                      "B": {
+                        "shape_name": "BinaryAttributeValue",
+                        "type": "blob",
+                        "documentation": "\n    <p>A Binary data type</p>\n  "
+                      },
+                      "SS": {
+                        "shape_name": "StringSetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "StringAttributeValue",
+                          "type": "string",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p>A String set data type</p>\n  "
+                      },
+                      "NS": {
+                        "shape_name": "NumberSetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "NumberAttributeValue",
+                          "type": "string",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p> Number set data type</p>\n  "
+                      },
+                      "BS": {
+                        "shape_name": "BinarySetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "BinaryAttributeValue",
+                          "type": "blob",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p>A Binary set data type</p>\n  "
+                      }
+                    },
+                    "documentation": "\n    <p>Represents the data for an attribute. You can set one, and only one, of the elements.</p>\n  "
+                  },
+                  "documentation": null
                 }
               },
               "documentation": "\n    <p>Represents an attribute value used with conditional <i>DeleteItem</i>, <i>PutItem</i> or <i>UpdateItem</i> operations.  DynamoDB will check to see if the attribute value already exists; or if the attribute exists and has a particular value before updating it.</p>\n  "
@@ -3687,6 +3869,15 @@
               "NONE"
             ],
             "documentation": "     <p>If set to <code>SIZE</code>, statistics about item collections, if any, that were modified during\n      the operation are returned in the response. If set to <code>NONE</code> (the default), no statistics are returned.</p>\n "
+          },
+          "ConditionalOperator": {
+            "shape_name": "ConditionalOperator",
+            "type": "string",
+            "enum": [
+              "AND",
+              "OR"
+            ],
+            "documentation": null
           }
         },
         "documentation": "\n    <p>Represents the input of a <i>PutItem</i> operation.</p>\n  "
@@ -3701,6 +3892,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -3849,6 +4041,7 @@
                 "keys": {
                   "shape_name": "AttributeName",
                   "type": "string",
+                  "max_length": 65535,
                   "documentation": null
                 },
                 "members": {
@@ -4025,6 +4218,7 @@
             "members": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "min_length": 1,
@@ -4047,6 +4241,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -4136,6 +4331,111 @@
             },
             "documentation": "\n    <p>The selection criteria for the query.</p>\n    <p>For a query on a table, you can only have conditions on the table primary key attributes. You\n      must specify the hash key attribute name and value as an <code>EQ</code> condition. You can\n      optionally specify a second condition, referring to the range key attribute.</p>\n    <p>For a query on an index, you can only have conditions on the index key attributes.\n      You must specify the index hash attribute name and value as an EQ condition. You can\n      optionally specify a second condition, referring to the index key range attribute.</p>\n    <p>Multiple conditions are evaluated using \"AND\"; in other words, all of the conditions must be met in order for an item to appear in the results results. </p>\n  <p>Each <i>KeyConditions</i> element consists of an attribute name to compare, along with the following:</p>\n    <ul>\n      <li>\n<p><i>AttributeValueList</i> - One or more values to evaluate against the supplied attribute. This list contains\n      exactly one value, except for a <code>BETWEEN</code> comparison, in which\n      case the list contains two values.</p>\n    <note>\n      <p>For type Number, value comparisons are numeric.</p>\n      <p>String value comparisons for greater than, equals, or less than are based on ASCII\n        character code values. For example, <code>a</code> is greater than <code>A</code>, and\n        <code>aa</code> is greater than <code>B</code>. For a list of code values, see <a href=\"http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters\">http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters</a>.</p>\n      <p>For Binary, DynamoDB treats each byte of the binary data as unsigned when it compares binary\n        values, for example when evaluating query expressions.</p>\n    </note>\n      </li>\n      <li>\n<p><i>ComparisonOperator</i> - A comparator for evaluating attributes. For example, equals, greater than, less\n        than, etc.</p>\n        <p>Valid comparison operators for Query:</p>\n      <p><code>EQ | LE | LT | GE | GT | BEGINS_WITH | BETWEEN</code></p>\n \n        <p>For\n          information on specifying data types in JSON, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html\">JSON\n            Data Format</a> in the Amazon DynamoDB Developer Guide.</p>\n      <p>The following are descriptions of each comparison operator.</p>\n      <ul>\n        <li>\n          <p><code>EQ</code> : Equal. </p>\n          <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n            Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n            type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not equal <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n          <p></p>\n        </li>\n        <li>\n          <p><code>LE</code> : Less than or equal. </p>\n          <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n            Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n            type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n          <p></p>\n        </li>\n        <li>\n          <p><code>LT</code> : Less than. </p>\n          <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n            Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n            type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n          <p></p>\n        </li>\n        <li>\n          <p><code>GE</code> : Greater than or equal. </p>\n          <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n            Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n            type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n          <p></p>\n        </li>\n        <li>\n          <p><code>GT</code> : Greater than. </p>\n          <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n            Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n            type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n          <p></p>\n        </li>\n        <li>\n          <p><code>BEGINS_WITH</code> : checks for a prefix. </p>\n          <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String or\n            Binary (not a Number or a set). The target attribute of the comparison must be a String or\n            Binary (not a Number or a set).</p>\n          <p></p>\n        </li>\n        <li>\n          <p><code>BETWEEN</code> : Greater than or equal to the first value, and less than or equal\n            to the second value. </p>\n          <p><i>AttributeValueList</i> must contain two <i>AttributeValue</i> elements of the same\n            type, either String, Number, or Binary (not a set). A target attribute matches if the\n            target value is greater than, or equal to, the first element and less than, or equal to,\n            the second element. If an item contains an <i>AttributeValue</i> of a different type than\n            the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not compare to <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code></p>\n        </li>\n      </ul>\n</li>\n</ul>\n  "
           },
+          "QueryFilter": {
+            "shape_name": "FilterConditionMap",
+            "type": "map",
+            "keys": {
+              "shape_name": "AttributeName",
+              "type": "string",
+              "max_length": 65535,
+              "documentation": null
+            },
+            "members": {
+              "shape_name": "Condition",
+              "type": "structure",
+              "members": {
+                "AttributeValueList": {
+                  "shape_name": "AttributeValueList",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "AttributeValue",
+                    "type": "structure",
+                    "members": {
+                      "S": {
+                        "shape_name": "StringAttributeValue",
+                        "type": "string",
+                        "documentation": "\n    <p>A String data type</p>\n  "
+                      },
+                      "N": {
+                        "shape_name": "NumberAttributeValue",
+                        "type": "string",
+                        "documentation": "\n    <p>A Number data type</p>\n  "
+                      },
+                      "B": {
+                        "shape_name": "BinaryAttributeValue",
+                        "type": "blob",
+                        "documentation": "\n    <p>A Binary data type</p>\n  "
+                      },
+                      "SS": {
+                        "shape_name": "StringSetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "StringAttributeValue",
+                          "type": "string",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p>A String set data type</p>\n  "
+                      },
+                      "NS": {
+                        "shape_name": "NumberSetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "NumberAttributeValue",
+                          "type": "string",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p> Number set data type</p>\n  "
+                      },
+                      "BS": {
+                        "shape_name": "BinarySetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "BinaryAttributeValue",
+                          "type": "blob",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p>A Binary set data type</p>\n  "
+                      }
+                    },
+                    "documentation": "\n    <p>Represents the data for an attribute. You can set one, and only one, of the elements.</p>\n  "
+                  },
+                  "documentation": "\n    <p>One or more values to evaluate against the supplied attribute. This list contains\n      exactly one value, except for a <code>BETWEEN</code> or <code>IN</code> comparison, in which\n      case the list contains two values.</p>\n    <note>\n      <p>For type Number, value comparisons are numeric.</p>\n      <p>String value comparisons for greater than, equals, or less than are based on ASCII\n        character code values. For example, <code>a</code> is greater than <code>A</code>, and\n          <code>aa</code> is greater than <code>B</code>. For a list of code values, see <a href=\"http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters\">http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters</a>.</p>\n      <p>For Binary, DynamoDB treats each byte of the binary data as unsigned when it compares binary\n        values, for example when evaluating query expressions.</p>\n    </note>\n  "
+                },
+                "ComparisonOperator": {
+                  "shape_name": "ComparisonOperator",
+                  "type": "string",
+                  "enum": [
+                    "EQ",
+                    "NE",
+                    "IN",
+                    "LE",
+                    "LT",
+                    "GE",
+                    "GT",
+                    "BETWEEN",
+                    "NOT_NULL",
+                    "NULL",
+                    "CONTAINS",
+                    "NOT_CONTAINS",
+                    "BEGINS_WITH"
+                  ],
+                  "documentation": "\n    <p>A comparator for evaluating attributes. For example, equals, greater than, less\n      than, etc.</p> <p>Valid comparison operators for Query:</p>\n      <p><code>EQ | LE | LT | GE | GT | BEGINS_WITH | BETWEEN</code></p>\n <p>Valid comparison operators for Scan:</p>\n      <p><code>EQ | NE | LE | LT | GE | GT | NOT_NULL | NULL | CONTAINS | NOT_CONTAINS | BEGINS_WITH | IN | BETWEEN</code></p>\n <p>For\n      information on specifying data types in JSON, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html\">JSON\n        Data Format</a> in the Amazon DynamoDB Developer Guide.</p>\n    <p>The following are descriptions of each comparison operator.</p>\n    <ul>\n      <li>\n        <p><code>EQ</code> : Equal. </p>\n        <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n          Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n          type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not equal <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n        <p></p>\n      </li>\n      <li>\n        <p><code>NE</code> : Not equal. </p>\n        <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n          Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n          type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not equal <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n        <p></p>\n      </li>\n      <li>\n        <p><code>LE</code> : Less than or equal. </p>\n        <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n          Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n          type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n        <p></p>\n      </li>\n      <li>\n        <p><code>LT</code> : Less than. </p>\n        <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n          Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n          type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n        <p></p>\n      </li>\n      <li>\n        <p><code>GE</code> : Greater than or equal. </p>\n        <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n          Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n          type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n        <p></p>\n      </li>\n      <li>\n        <p><code>GT</code> : Greater than. </p>\n        <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n          Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n          type than the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n        <p></p>\n      </li>\n      <li>\n        <p><code>NOT_NULL</code> : The attribute exists. </p>\n      </li>\n      <li>\n        <p><code>NULL</code> : The attribute does not exist. </p>\n      </li>\n      <li>\n        <p><code>CONTAINS</code> : checks for a subsequence, or value in a set.</p>\n        <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n          Number, or Binary (not a set). If the target attribute of the comparison is a String, then\n          the operation checks for a substring match. If the target attribute of the comparison is\n          Binary, then the operation looks for a subsequence of the target that matches the input.\n          If the target attribute of the comparison is a set (\"SS\", \"NS\", or \"BS\"), then the\n          operation checks for a member of the set (not as a substring).</p>\n      </li>\n      <li>\n        <p><code>NOT_CONTAINS</code> : checks for absence of a subsequence, or absence of a value in\n          a set.</p>\n        <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n          Number, or Binary (not a set). If the target attribute of the comparison is a String, then\n          the operation checks for the absence of a substring match. If the target attribute of the\n          comparison is Binary, then the operation checks for the absence of a subsequence of the\n          target that matches the input. If the target attribute of the comparison is a set (\"SS\",\n          \"NS\", or \"BS\"), then the operation checks for the absence of a member of the set (not as a\n          substring).</p>\n      </li>\n      <li>\n        <p><code>BEGINS_WITH</code> : checks for a prefix. </p>\n        <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String or\n          Binary (not a Number or a set). The target attribute of the comparison must be a String or\n          Binary (not a Number or a set).</p>\n        <p></p>\n      </li>\n      <li>\n        <p><code>IN</code> : checks for exact matches.</p>\n        <p><i>AttributeValueList</i> can contain more than one <i>AttributeValue</i> of type String,\n          Number, or Binary (not a set). The target attribute of the comparison must be of the same\n          type and exact value to match. A String never matches a String set.</p>\n      </li>\n      <li>\n        <p><code>BETWEEN</code> : Greater than or equal to the first value, and less than or equal\n          to the second value. </p>\n        <p><i>AttributeValueList</i> must contain two <i>AttributeValue</i> elements of the same\n          type, either String, Number, or Binary (not a set). A target attribute matches if the\n          target value is greater than, or equal to, the first element and less than, or equal to,\n          the second element. If an item contains an <i>AttributeValue</i> of a different type than\n          the one specified in the request, the value does not match. For example,\n            <code>{\"S\":\"6\"}</code> does not compare to <code>{\"N\":\"6\"}</code>. Also,\n            <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code></p>\n      </li>\n    </ul>\n  ",
+                  "required": true
+                }
+              },
+              "documentation": "\n    <p>Represents a selection criteria for a <i>Query</i> or <i>Scan</i> operation.</p>\n    <ul>\n      <li>\n        <p>For a <i>Query</i> operation, the condition specifies the key attributes to use when\n          querying a table or an index.</p>\n      </li>\n      <li>\n        <p>For a <i>Scan</i> operation, the condition is used to evaluate the scan results and\n          return only the desired values.</p>\n      </li>\n    </ul>\n    <p>Multiple conditions are \"ANDed\" together. In other words, all of the conditions must be met\n      to be included in the output.</p>\n  "
+            },
+            "documentation": null
+          },
+          "ConditionalOperator": {
+            "shape_name": "ConditionalOperator",
+            "type": "string",
+            "enum": [
+              "AND",
+              "OR"
+            ],
+            "documentation": null
+          },
           "ScanIndexForward": {
             "shape_name": "BooleanObject",
             "type": "boolean",
@@ -4147,6 +4447,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -4229,6 +4530,7 @@
               "keys": {
                 "shape_name": "AttributeName",
                 "type": "string",
+                "max_length": 65535,
                 "documentation": null
               },
               "members": {
@@ -4292,12 +4594,18 @@
             "type": "integer",
             "documentation": "\n    <p>The number of items in the response.</p>\n  "
           },
+          "ScannedCount": {
+            "shape_name": "Integer",
+            "type": "integer",
+            "documentation": null
+          },
           "LastEvaluatedKey": {
             "shape_name": "Key",
             "type": "map",
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -4500,6 +4808,7 @@
             "members": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "min_length": 1,
@@ -4528,6 +4837,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -4617,12 +4927,22 @@
             },
             "documentation": "\n    <p>Evaluates the scan results and returns only the desired values. Multiple conditions are\n      treated as \"AND\" operations: all conditions must be met to be included in the results.</p>\n    <p>Each <i>ScanConditions</i> element consists of an attribute name to compare, along with the following:</p>\n    <ul>\n      <li>\n<p><i>AttributeValueList</i> - One or more values to evaluate against the supplied attribute. This list contains\n        exactly one value, except for a <code>BETWEEN</code> or <code>IN</code> comparison, in which\n        case the list contains two values.</p>\n        <note>\n          <p>For type Number, value comparisons are numeric.</p>\n          <p>String value comparisons for greater than, equals, or less than are based on ASCII\n            character code values. For example, <code>a</code> is greater than <code>A</code>, and\n            <code>aa</code> is greater than <code>B</code>. For a list of code values, see <a href=\"http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters\">http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters</a>.</p>\n          <p>For Binary, DynamoDB treats each byte of the binary data as unsigned when it compares binary\n            values, for example when evaluating query expressions.</p>\n        </note>\n      </li>\n      <li>\n<p><i>ComparisonOperator</i> - A comparator for evaluating attributes. For example, equals, greater than, less\n        than, etc.</p>\n        <p>Valid comparison operators for Scan:</p>\n      <p><code>EQ | NE | LE | LT | GE | GT | NOT_NULL | NULL | CONTAINS | NOT_CONTAINS | BEGINS_WITH | IN | BETWEEN</code></p>\n \n        <p>For\n          information on specifying data types in JSON, see <a href=\"http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html\">JSON\n            Data Format</a> in the Amazon DynamoDB Developer Guide.</p>\n        <p>The following are descriptions of each comparison operator.</p>\n        <ul>\n          <li>\n            <p><code>EQ</code> : Equal. </p>\n            <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n              Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n              type than the one specified in the request, the value does not match. For example,\n              <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n              <code>{\"N\":\"6\"}</code> does not equal <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n            <p></p>\n          </li>\n          <li>\n            <p><code>NE</code> : Not equal. </p>\n            <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n              Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n              type than the one specified in the request, the value does not match. For example,\n              <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n              <code>{\"N\":\"6\"}</code> does not equal <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n            <p></p>\n          </li>\n          <li>\n            <p><code>LE</code> : Less than or equal. </p>\n            <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n              Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n              type than the one specified in the request, the value does not match. For example,\n              <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n              <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n            <p></p>\n          </li>\n          <li>\n            <p><code>LT</code> : Less than. </p>\n            <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n              Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n              type than the one specified in the request, the value does not match. For example,\n              <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n              <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n            <p></p>\n          </li>\n          <li>\n            <p><code>GE</code> : Greater than or equal. </p>\n            <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n              Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n              type than the one specified in the request, the value does not match. For example,\n              <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n              <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n            <p></p>\n          </li>\n          <li>\n            <p><code>GT</code> : Greater than. </p>\n            <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n              Number, or Binary (not a set). If an item contains an <i>AttributeValue</i> of a different\n              type than the one specified in the request, the value does not match. For example,\n              <code>{\"S\":\"6\"}</code> does not equal <code>{\"N\":\"6\"}</code>. Also,\n              <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code>.</p>\n            <p></p>\n          </li>\n          <li>\n            <p><code>NOT_NULL</code> : The attribute exists. </p>\n          </li>\n          <li>\n            <p><code>NULL</code> : The attribute does not exist. </p>\n          </li>\n          <li>\n            <p><code>CONTAINS</code> : checks for a subsequence, or value in a set.</p>\n            <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n              Number, or Binary (not a set). If the target attribute of the comparison is a String, then\n              the operation checks for a substring match. If the target attribute of the comparison is\n              Binary, then the operation looks for a subsequence of the target that matches the input.\n              If the target attribute of the comparison is a set (\"SS\", \"NS\", or \"BS\"), then the\n              operation checks for a member of the set (not as a substring).</p>\n          </li>\n          <li>\n            <p><code>NOT_CONTAINS</code> : checks for absence of a subsequence, or absence of a value in\n              a set.</p>\n            <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String,\n              Number, or Binary (not a set). If the target attribute of the comparison is a String, then\n              the operation checks for the absence of a substring match. If the target attribute of the\n              comparison is Binary, then the operation checks for the absence of a subsequence of the\n              target that matches the input. If the target attribute of the comparison is a set (\"SS\",\n              \"NS\", or \"BS\"), then the operation checks for the absence of a member of the set (not as a\n              substring).</p>\n          </li>\n          <li>\n            <p><code>BEGINS_WITH</code> : checks for a prefix. </p>\n            <p><i>AttributeValueList</i> can contain only one <i>AttributeValue</i> of type String or\n              Binary (not a Number or a set). The target attribute of the comparison must be a String or\n              Binary (not a Number or a set).</p>\n            <p></p>\n          </li>\n          <li>\n            <p><code>IN</code> : checks for exact matches.</p>\n            <p><i>AttributeValueList</i> can contain more than one <i>AttributeValue</i> of type String,\n              Number, or Binary (not a set). The target attribute of the comparison must be of the same\n              type and exact value to match. A String never matches a String set.</p>\n          </li>\n          <li>\n            <p><code>BETWEEN</code> : Greater than or equal to the first value, and less than or equal\n              to the second value. </p>\n            <p><i>AttributeValueList</i> must contain two <i>AttributeValue</i> elements of the same\n              type, either String, Number, or Binary (not a set). A target attribute matches if the\n              target value is greater than, or equal to, the first element and less than, or equal to,\n              the second element. If an item contains an <i>AttributeValue</i> of a different type than\n              the one specified in the request, the value does not match. For example,\n              <code>{\"S\":\"6\"}</code> does not compare to <code>{\"N\":\"6\"}</code>. Also,\n              <code>{\"N\":\"6\"}</code> does not compare to <code>{\"NS\":[\"6\", \"2\", \"1\"]}</code></p>\n          </li>\n        </ul>\n      </li>\n    </ul>\n  "
           },
+          "ConditionalOperator": {
+            "shape_name": "ConditionalOperator",
+            "type": "string",
+            "enum": [
+              "AND",
+              "OR"
+            ],
+            "documentation": null
+          },
           "ExclusiveStartKey": {
             "shape_name": "Key",
             "type": "map",
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -4693,14 +5013,14 @@
             "shape_name": "ScanTotalSegments",
             "type": "integer",
             "min_length": 1,
-            "max_length": 4096,
+            "max_length": 1000000,
             "documentation": "\n    <p>For a parallel <i>Scan</i> request, <i>TotalSegments</i> represents the total number of segments into which the <i>Scan</i> operation will be divided. The value of <i>TotalSegments</i>\n      corresponds to the number of application workers that will\n      perform the parallel scan. For example, if you want to scan a table using four\n      application threads, you would specify a <i>TotalSegments</i> value of 4.</p>\n    <p>The value for <i>TotalSegments</i> must be greater than or equal to 1, and less than or equal\n      to 4096. If you specify a <i>TotalSegments</i> value of 1, the <i>Scan</i> will be sequential\n      rather than parallel.</p>\n    <p>If you specify <i>TotalSegments</i>, you must also specify <i>Segment</i>.</p>\n"
           },
           "Segment": {
             "shape_name": "ScanSegment",
             "type": "integer",
             "min_length": 0,
-            "max_length": 4095,
+            "max_length": 999999,
             "documentation": "\n    <p>For a parallel <i>Scan</i> request, <i>Segment</i> identifies an individual segment to be scanned by an application worker.</p>\n    <p>Segment IDs are zero-based, so the first segment is always 0. For example, if you want to\n      scan a table using four application threads, the first thread would specify a <i>Segment</i>\n      value of 0, the second thread would specify 1, and so on.</p>\n    <p>The value of <i>LastEvaluatedKey</i> returned from a parallel <i>Scan</i> request must be used as <i>ExclusiveStartKey</i> with the same Segment ID in a subsequent <i>Scan</i> operation.</p>\n    <p>The value for <i>Segment</i> must be greater than or equal to 0, and less than the value provided for <i>TotalSegments</i>.</p>\n    <p>If you specify <i>Segment</i>, you must also specify <i>TotalSegments</i>.</p>\n  "
           }
         },
@@ -4719,6 +5039,7 @@
               "keys": {
                 "shape_name": "AttributeName",
                 "type": "string",
+                "max_length": 65535,
                 "documentation": null
               },
               "members": {
@@ -4793,6 +5114,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -4995,6 +5317,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -5058,6 +5381,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -5137,6 +5461,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -5199,11 +5524,97 @@
                   "shape_name": "BooleanObject",
                   "type": "boolean",
                   "documentation": "\n    <p>Causes DynamoDB to evaluate the value before attempting a conditional operation:</p>\n    <ul>\n      <li>\n        <p>If <i>Exists</i> is <code>true</code>, DynamoDB will check to see if that attribute\n          value already exists in the table. If it is found, then the operation\n          succeeds. If it is not found, the operation fails with a\n          <i>ConditionalCheckFailedException</i>.</p>\n      </li>\n      <li>\n        <p>If <i>Exists</i> is <code>false</code>, DynamoDB assumes that the attribute value does\n          <i>not</i> exist in the table. If in fact the value does not exist, then the\n          assumption is valid and the operation succeeds. If the value is found,\n          despite the assumption that it does not exist, the operation fails with a\n          <i>ConditionalCheckFailedException</i>.</p>\n      </li>\n    </ul>\n    <p>The default setting for <i>Exists</i> is <code>true</code>. If you supply a <i>Value</i> all\n      by itself, DynamoDB assumes the attribute exists: You don't have to set <i>Exists</i> to\n        <code>true</code>, because it is implied.</p>\n    <p>DynamoDB returns a <i>ValidationException</i> if:</p>\n    <ul>\n      <li>\n        <p><i>Exists</i> is <code>true</code> but there is no <i>Value</i> to check. (You expect\n          a value to exist, but don't specify what that value is.)</p>\n      </li>\n      <li>\n        <p><i>Exists</i> is <code>false</code> but you also specify a <i>Value</i>. (You cannot\n          expect an attribute to have a value, while also expecting it not to exist.)</p>\n      </li>\n    </ul>\n    <p>If you specify more than one condition for <i>Exists</i>, then all of the conditions must\n      evaluate to true. (In other words, the conditions are ANDed together.) Otherwise, the\n      conditional operation will fail.</p>\n  "
+                },
+                "ComparisonOperator": {
+                  "shape_name": "ComparisonOperator",
+                  "type": "string",
+                  "enum": [
+                    "EQ",
+                    "NE",
+                    "IN",
+                    "LE",
+                    "LT",
+                    "GE",
+                    "GT",
+                    "BETWEEN",
+                    "NOT_NULL",
+                    "NULL",
+                    "CONTAINS",
+                    "NOT_CONTAINS",
+                    "BEGINS_WITH"
+                  ],
+                  "documentation": null
+                },
+                "AttributeValueList": {
+                  "shape_name": "AttributeValueList",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "AttributeValue",
+                    "type": "structure",
+                    "members": {
+                      "S": {
+                        "shape_name": "StringAttributeValue",
+                        "type": "string",
+                        "documentation": "\n    <p>A String data type</p>\n  "
+                      },
+                      "N": {
+                        "shape_name": "NumberAttributeValue",
+                        "type": "string",
+                        "documentation": "\n    <p>A Number data type</p>\n  "
+                      },
+                      "B": {
+                        "shape_name": "BinaryAttributeValue",
+                        "type": "blob",
+                        "documentation": "\n    <p>A Binary data type</p>\n  "
+                      },
+                      "SS": {
+                        "shape_name": "StringSetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "StringAttributeValue",
+                          "type": "string",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p>A String set data type</p>\n  "
+                      },
+                      "NS": {
+                        "shape_name": "NumberSetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "NumberAttributeValue",
+                          "type": "string",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p> Number set data type</p>\n  "
+                      },
+                      "BS": {
+                        "shape_name": "BinarySetAttributeValue",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "BinaryAttributeValue",
+                          "type": "blob",
+                          "documentation": null
+                        },
+                        "documentation": "\n    <p>A Binary set data type</p>\n  "
+                      }
+                    },
+                    "documentation": "\n    <p>Represents the data for an attribute. You can set one, and only one, of the elements.</p>\n  "
+                  },
+                  "documentation": null
                 }
               },
               "documentation": "\n    <p>Represents an attribute value used with conditional <i>DeleteItem</i>, <i>PutItem</i> or <i>UpdateItem</i> operations.  DynamoDB will check to see if the attribute value already exists; or if the attribute exists and has a particular value before updating it.</p>\n  "
             },
             "documentation": "\n    <p>A map of attribute/condition pairs. This is the conditional block for the <i>UpdateItem</i> operation. All the conditions must be met for the operation to succeed.</p>\n        <p><i>Expected</i> allows you to\n      provide an attribute name, and whether or not DynamoDB should check to see if the attribute value\n      already exists; or if the attribute value exists and has a particular value before changing\n      it.</p>\n    <p>Each item in <i>Expected</i> represents an attribute name for DynamoDB to check, along with\n      the following: </p>\n    <ul>\n      <li>\n        <p><i>Value</i> - A value for DynamoDB to compare with an attribute. When performing the comparison, strongly consistent reads are used.</p>\n      </li>\n      <li>\n        <p><i>Exists</i> - Causes DynamoDB to evaluate the value before attempting a conditional\n          operation:</p>\n        <ul>\n          <li>\n            <p>If <i>Exists</i> is <code>true</code>, DynamoDB will check to see if that attribute\n              value already exists in the table. If it is found, then the operation\n              succeeds. If it is not found, the operation fails with a\n                <i>ConditionalCheckFailedException</i>.</p>\n          </li>\n          <li>\n            <p>If <i>Exists</i> is <code>false</code>, DynamoDB assumes that the attribute value does\n                <i>not</i> exist in the table. If in fact the value does not exist, then the\n              assumption is valid and the operation succeeds. If the value is found,\n              despite the assumption that it does not exist, the operation fails with a\n                <i>ConditionalCheckFailedException</i>.</p>\n          </li>\n        </ul>\n        <p>The default setting for <i>Exists</i> is <code>true</code>. If you supply a <i>Value</i>\n          all by itself, DynamoDB assumes the attribute exists:  You don't have to set <i>Exists</i> to <code>true</code>, because it is\n          implied.</p>\n        <p>DynamoDB returns a <i>ValidationException</i> if:</p>\n        <ul>\n          <li>\n            <p><i>Exists</i> is <code>true</code> but there is no <i>Value</i> to check. (You expect\n              a value to exist, but don't specify what that value is.)</p>\n          </li>\n          <li>\n            <p><i>Exists</i> is <code>false</code> but you also specify a <i>Value</i>. (You cannot\n              expect an attribute to have a value, while also expecting it not to exist.)</p>\n          </li>\n        </ul>\n      </li>\n    </ul>\n    <p>If you specify more than one condition for <i>Exists</i>, then all of the conditions must\n      evaluate to true. (In other words, the conditions are ANDed together.) Otherwise, the\n      conditional operation will fail.</p>\n\n  "
+          },
+          "ConditionalOperator": {
+            "shape_name": "ConditionalOperator",
+            "type": "string",
+            "enum": [
+              "AND",
+              "OR"
+            ],
+            "documentation": null
           },
           "ReturnValues": {
             "shape_name": "ReturnValue",
@@ -5249,6 +5660,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -5397,6 +5809,7 @@
                 "keys": {
                   "shape_name": "AttributeName",
                   "type": "string",
+                  "max_length": 65535,
                   "documentation": null
                 },
                 "members": {

@@ -157,6 +157,7 @@
                   "members": {
                     "shape_name": "AttributeName",
                     "type": "string",
+                    "max_length": 65535,
                     "documentation": null
                   },
                   "min_length": 1,
@@ -206,6 +207,7 @@
                     "keys": {
                       "shape_name": "AttributeName",
                       "type": "string",
+                      "max_length": 65535,
                       "documentation": null
                     },
                     "members": {
@@ -415,6 +417,7 @@
                   "members": {
                     "shape_name": "AttributeName",
                     "type": "string",
+                    "max_length": 65535,
                     "documentation": null
                   },
                   "min_length": 1,
@@ -509,6 +512,7 @@
                         "keys": {
                           "shape_name": "AttributeName",
                           "type": "string",
+                          "max_length": 65535,
                           "documentation": null
                         },
                         "members": {
@@ -761,6 +765,7 @@
                         "keys": {
                           "shape_name": "AttributeName",
                           "type": "string",
+                          "max_length": 65535,
                           "documentation": null
                         },
                         "members": {
@@ -1425,6 +1430,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -1518,6 +1524,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -2182,6 +2189,7 @@
             "members": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "min_length": 1,
@@ -2205,6 +2213,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -2398,6 +2407,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -2461,6 +2471,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -2554,6 +2565,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -2703,6 +2715,7 @@
             "members": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "min_length": 1,
@@ -2995,6 +3008,7 @@
               "keys": {
                 "shape_name": "AttributeName",
                 "type": "string",
+                "max_length": 65535,
                 "documentation": null
               },
               "members": {
@@ -3239,6 +3253,7 @@
             "members": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "min_length": 1,
@@ -3478,6 +3493,7 @@
               "keys": {
                 "shape_name": "AttributeName",
                 "type": "string",
+                "max_length": 65535,
                 "documentation": null
               },
               "members": {
@@ -3840,6 +3856,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -3920,6 +3937,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {
@@ -4013,6 +4031,7 @@
             "keys": {
               "shape_name": "AttributeName",
               "type": "string",
+              "max_length": 65535,
               "documentation": null
             },
             "members": {

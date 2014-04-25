@@ -282,6 +282,10 @@
           "associate_public_ip_address": {
             "type": "boolean",
             "serialized_name": "AssociatePublicIpAddress"
+          },
+          "placement_tenancy": {
+            "type": "string",
+            "serialized_name": "PlacementTenancy"
           }
         }
       }
@@ -987,6 +991,10 @@
                 "associate_public_ip_address": {
                   "type": "boolean",
                   "serialized_name": "AssociatePublicIpAddress"
+                },
+                "placement_tenancy": {
+                  "type": "string",
+                  "serialized_name": "PlacementTenancy"
                 }
               }
             }

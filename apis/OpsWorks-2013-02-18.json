@@ -164,6 +164,20 @@
               }
             }
           },
+          "chef_configuration": {
+            "type": "structure",
+            "serialized_name": "ChefConfiguration",
+            "members": {
+              "manage_berkshelf": {
+                "type": "boolean",
+                "serialized_name": "ManageBerkshelf"
+              },
+              "berkshelf_version": {
+                "type": "string",
+                "serialized_name": "BerkshelfVersion"
+              }
+            }
+          },
           "use_custom_cookbooks": {
             "type": "boolean",
             "serialized_name": "UseCustomCookbooks"
@@ -823,6 +837,20 @@
               "version": {
                 "type": "string",
                 "serialized_name": "Version"
+              }
+            }
+          },
+          "chef_configuration": {
+            "type": "structure",
+            "serialized_name": "ChefConfiguration",
+            "members": {
+              "manage_berkshelf": {
+                "type": "boolean",
+                "serialized_name": "ManageBerkshelf"
+              },
+              "berkshelf_version": {
+                "type": "string",
+                "serialized_name": "BerkshelfVersion"
               }
             }
           },
@@ -2509,6 +2537,20 @@
                     }
                   }
                 },
+                "chef_configuration": {
+                  "type": "structure",
+                  "serialized_name": "ChefConfiguration",
+                  "members": {
+                    "manage_berkshelf": {
+                      "type": "boolean",
+                      "serialized_name": "ManageBerkshelf"
+                    },
+                    "berkshelf_version": {
+                      "type": "string",
+                      "serialized_name": "BerkshelfVersion"
+                    }
+                  }
+                },
                 "use_custom_cookbooks": {
                   "type": "boolean",
                   "serialized_name": "UseCustomCookbooks"
@@ -3698,6 +3740,20 @@
               "version": {
                 "type": "string",
                 "serialized_name": "Version"
+              }
+            }
+          },
+          "chef_configuration": {
+            "type": "structure",
+            "serialized_name": "ChefConfiguration",
+            "members": {
+              "manage_berkshelf": {
+                "type": "boolean",
+                "serialized_name": "ManageBerkshelf"
+              },
+              "berkshelf_version": {
+                "type": "string",
+                "serialized_name": "BerkshelfVersion"
               }
             }
           },

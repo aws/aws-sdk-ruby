@@ -2206,6 +2206,10 @@
                     "type": "string",
                     "serialized_name": "publicIp"
                   },
+                  "public_dns_name": {
+                    "type": "string",
+                    "serialized_name": "publicDnsName"
+                  },
                   "ip_owner_id": {
                     "type": "string",
                     "serialized_name": "ipOwnerId"
@@ -2264,6 +2268,10 @@
                         "public_ip": {
                           "type": "string",
                           "serialized_name": "publicIp"
+                        },
+                        "public_dns_name": {
+                          "type": "string",
+                          "serialized_name": "publicDnsName"
                         },
                         "ip_owner_id": {
                           "type": "string",
@@ -6139,7 +6147,12 @@
                           "cc1.4xlarge",
                           "cc2.8xlarge",
                           "g2.2xlarge",
-                          "cg1.4xlarge"
+                          "cg1.4xlarge",
+                          "r3.large",
+                          "r3.xlarge",
+                          "r3.2xlarge",
+                          "r3.4xlarge",
+                          "r3.8xlarge"
                         ]
                       },
                       "launch_time": {
@@ -7200,6 +7213,10 @@
                       "type": "string",
                       "serialized_name": "publicIp"
                     },
+                    "public_dns_name": {
+                      "type": "string",
+                      "serialized_name": "publicDnsName"
+                    },
                     "ip_owner_id": {
                       "type": "string",
                       "serialized_name": "ipOwnerId"
@@ -7258,6 +7275,10 @@
                           "public_ip": {
                             "type": "string",
                             "serialized_name": "publicIp"
+                          },
+                          "public_dns_name": {
+                            "type": "string",
+                            "serialized_name": "publicDnsName"
                           },
                           "ip_owner_id": {
                             "type": "string",
@@ -7528,7 +7549,12 @@
                     "cc1.4xlarge",
                     "cc2.8xlarge",
                     "g2.2xlarge",
-                    "cg1.4xlarge"
+                    "cg1.4xlarge",
+                    "r3.large",
+                    "r3.xlarge",
+                    "r3.2xlarge",
+                    "r3.4xlarge",
+                    "r3.8xlarge"
                   ]
                 },
                 "availability_zone": {
@@ -7945,7 +7971,12 @@
                               "cc1.4xlarge",
                               "cc2.8xlarge",
                               "g2.2xlarge",
-                              "cg1.4xlarge"
+                              "cg1.4xlarge",
+                              "r3.large",
+                              "r3.xlarge",
+                              "r3.2xlarge",
+                              "r3.4xlarge",
+                              "r3.8xlarge"
                             ]
                           }
                         }
@@ -8046,7 +8077,12 @@
               "cc1.4xlarge",
               "cc2.8xlarge",
               "g2.2xlarge",
-              "cg1.4xlarge"
+              "cg1.4xlarge",
+              "r3.large",
+              "r3.xlarge",
+              "r3.2xlarge",
+              "r3.4xlarge",
+              "r3.8xlarge"
             ]
           },
           "availability_zone": {
@@ -8175,7 +8211,12 @@
                     "cc1.4xlarge",
                     "cc2.8xlarge",
                     "g2.2xlarge",
-                    "cg1.4xlarge"
+                    "cg1.4xlarge",
+                    "r3.large",
+                    "r3.xlarge",
+                    "r3.2xlarge",
+                    "r3.4xlarge",
+                    "r3.8xlarge"
                   ]
                 },
                 "availability_zone": {
@@ -9150,7 +9191,12 @@
                         "cc1.4xlarge",
                         "cc2.8xlarge",
                         "g2.2xlarge",
-                        "cg1.4xlarge"
+                        "cg1.4xlarge",
+                        "r3.large",
+                        "r3.xlarge",
+                        "r3.2xlarge",
+                        "r3.4xlarge",
+                        "r3.8xlarge"
                       ]
                     },
                     "placement": {
@@ -9431,7 +9477,12 @@
                 "cc1.4xlarge",
                 "cc2.8xlarge",
                 "g2.2xlarge",
-                "cg1.4xlarge"
+                "cg1.4xlarge",
+                "r3.large",
+                "r3.xlarge",
+                "r3.2xlarge",
+                "r3.4xlarge",
+                "r3.8xlarge"
               ]
             }
           },
@@ -9522,7 +9573,12 @@
                     "cc1.4xlarge",
                     "cc2.8xlarge",
                     "g2.2xlarge",
-                    "cg1.4xlarge"
+                    "cg1.4xlarge",
+                    "r3.large",
+                    "r3.xlarge",
+                    "r3.2xlarge",
+                    "r3.4xlarge",
+                    "r3.8xlarge"
                   ]
                 },
                 "product_description": {
@@ -11180,7 +11236,12 @@
                   "cc1.4xlarge",
                   "cc2.8xlarge",
                   "g2.2xlarge",
-                  "cg1.4xlarge"
+                  "cg1.4xlarge",
+                  "r3.large",
+                  "r3.xlarge",
+                  "r3.2xlarge",
+                  "r3.4xlarge",
+                  "r3.8xlarge"
                 ]
               },
               "placement": {
@@ -12209,7 +12270,12 @@
                     "cc1.4xlarge",
                     "cc2.8xlarge",
                     "g2.2xlarge",
-                    "cg1.4xlarge"
+                    "cg1.4xlarge",
+                    "r3.large",
+                    "r3.xlarge",
+                    "r3.2xlarge",
+                    "r3.4xlarge",
+                    "r3.8xlarge"
                   ]
                 }
               }
@@ -13012,7 +13078,12 @@
                   "cc1.4xlarge",
                   "cc2.8xlarge",
                   "g2.2xlarge",
-                  "cg1.4xlarge"
+                  "cg1.4xlarge",
+                  "r3.large",
+                  "r3.xlarge",
+                  "r3.2xlarge",
+                  "r3.4xlarge",
+                  "r3.8xlarge"
                 ]
               },
               "placement": {
@@ -13366,7 +13437,12 @@
                         "cc1.4xlarge",
                         "cc2.8xlarge",
                         "g2.2xlarge",
-                        "cg1.4xlarge"
+                        "cg1.4xlarge",
+                        "r3.large",
+                        "r3.xlarge",
+                        "r3.2xlarge",
+                        "r3.4xlarge",
+                        "r3.8xlarge"
                       ]
                     },
                     "placement": {
@@ -13985,7 +14061,12 @@
               "cc1.4xlarge",
               "cc2.8xlarge",
               "g2.2xlarge",
-              "cg1.4xlarge"
+              "cg1.4xlarge",
+              "r3.large",
+              "r3.xlarge",
+              "r3.2xlarge",
+              "r3.4xlarge",
+              "r3.8xlarge"
             ]
           },
           "placement": {
@@ -14343,7 +14424,12 @@
                     "cc1.4xlarge",
                     "cc2.8xlarge",
                     "g2.2xlarge",
-                    "cg1.4xlarge"
+                    "cg1.4xlarge",
+                    "r3.large",
+                    "r3.xlarge",
+                    "r3.2xlarge",
+                    "r3.4xlarge",
+                    "r3.8xlarge"
                   ]
                 },
                 "launch_time": {

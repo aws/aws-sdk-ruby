@@ -1319,9 +1319,78 @@
                 "exists": {
                   "type": "boolean",
                   "serialized_name": "Exists"
+                },
+                "comparison_operator": {
+                  "type": "string",
+                  "serialized_name": "ComparisonOperator",
+                  "enum": [
+                    "EQ",
+                    "NE",
+                    "IN",
+                    "LE",
+                    "LT",
+                    "GE",
+                    "GT",
+                    "BETWEEN",
+                    "NOT_NULL",
+                    "NULL",
+                    "CONTAINS",
+                    "NOT_CONTAINS",
+                    "BEGINS_WITH"
+                  ]
+                },
+                "attribute_value_list": {
+                  "type": "list",
+                  "serialized_name": "AttributeValueList",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "s": {
+                        "type": "string",
+                        "serialized_name": "S"
+                      },
+                      "n": {
+                        "type": "string",
+                        "serialized_name": "N"
+                      },
+                      "b": {
+                        "type": "blob",
+                        "serialized_name": "B"
+                      },
+                      "ss": {
+                        "type": "list",
+                        "serialized_name": "SS",
+                        "members": {
+                          "type": "string"
+                        }
+                      },
+                      "ns": {
+                        "type": "list",
+                        "serialized_name": "NS",
+                        "members": {
+                          "type": "string"
+                        }
+                      },
+                      "bs": {
+                        "type": "list",
+                        "serialized_name": "BS",
+                        "members": {
+                          "type": "blob"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
+          },
+          "conditional_operator": {
+            "type": "string",
+            "serialized_name": "ConditionalOperator",
+            "enum": [
+              "AND",
+              "OR"
+            ]
           },
           "return_values": {
             "type": "string",
@@ -2425,6 +2494,67 @@
                 "exists": {
                   "type": "boolean",
                   "serialized_name": "Exists"
+                },
+                "comparison_operator": {
+                  "type": "string",
+                  "serialized_name": "ComparisonOperator",
+                  "enum": [
+                    "EQ",
+                    "NE",
+                    "IN",
+                    "LE",
+                    "LT",
+                    "GE",
+                    "GT",
+                    "BETWEEN",
+                    "NOT_NULL",
+                    "NULL",
+                    "CONTAINS",
+                    "NOT_CONTAINS",
+                    "BEGINS_WITH"
+                  ]
+                },
+                "attribute_value_list": {
+                  "type": "list",
+                  "serialized_name": "AttributeValueList",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "s": {
+                        "type": "string",
+                        "serialized_name": "S"
+                      },
+                      "n": {
+                        "type": "string",
+                        "serialized_name": "N"
+                      },
+                      "b": {
+                        "type": "blob",
+                        "serialized_name": "B"
+                      },
+                      "ss": {
+                        "type": "list",
+                        "serialized_name": "SS",
+                        "members": {
+                          "type": "string"
+                        }
+                      },
+                      "ns": {
+                        "type": "list",
+                        "serialized_name": "NS",
+                        "members": {
+                          "type": "string"
+                        }
+                      },
+                      "bs": {
+                        "type": "list",
+                        "serialized_name": "BS",
+                        "members": {
+                          "type": "blob"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2455,6 +2585,14 @@
             "enum": [
               "SIZE",
               "NONE"
+            ]
+          },
+          "conditional_operator": {
+            "type": "string",
+            "serialized_name": "ConditionalOperator",
+            "enum": [
+              "AND",
+              "OR"
             ]
           }
         }
@@ -2746,6 +2884,88 @@
               }
             }
           },
+          "query_filter": {
+            "type": "map",
+            "serialized_name": "QueryFilter",
+            "keys": {
+              "type": "string"
+            },
+            "members": {
+              "type": "structure",
+              "members": {
+                "attribute_value_list": {
+                  "type": "list",
+                  "serialized_name": "AttributeValueList",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "s": {
+                        "type": "string",
+                        "serialized_name": "S"
+                      },
+                      "n": {
+                        "type": "string",
+                        "serialized_name": "N"
+                      },
+                      "b": {
+                        "type": "blob",
+                        "serialized_name": "B"
+                      },
+                      "ss": {
+                        "type": "list",
+                        "serialized_name": "SS",
+                        "members": {
+                          "type": "string"
+                        }
+                      },
+                      "ns": {
+                        "type": "list",
+                        "serialized_name": "NS",
+                        "members": {
+                          "type": "string"
+                        }
+                      },
+                      "bs": {
+                        "type": "list",
+                        "serialized_name": "BS",
+                        "members": {
+                          "type": "blob"
+                        }
+                      }
+                    }
+                  }
+                },
+                "comparison_operator": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "ComparisonOperator",
+                  "enum": [
+                    "EQ",
+                    "NE",
+                    "IN",
+                    "LE",
+                    "LT",
+                    "GE",
+                    "GT",
+                    "BETWEEN",
+                    "NOT_NULL",
+                    "NULL",
+                    "CONTAINS",
+                    "NOT_CONTAINS",
+                    "BEGINS_WITH"
+                  ]
+                }
+              }
+            }
+          },
+          "conditional_operator": {
+            "type": "string",
+            "serialized_name": "ConditionalOperator",
+            "enum": [
+              "AND",
+              "OR"
+            ]
+          },
           "scan_index_forward": {
             "type": "boolean",
             "serialized_name": "ScanIndexForward"
@@ -2860,6 +3080,10 @@
           "count": {
             "type": "integer",
             "serialized_name": "Count"
+          },
+          "scanned_count": {
+            "type": "integer",
+            "serialized_name": "ScannedCount"
           },
           "last_evaluated_key": {
             "type": "map",
@@ -3078,6 +3302,14 @@
                 }
               }
             }
+          },
+          "conditional_operator": {
+            "type": "string",
+            "serialized_name": "ConditionalOperator",
+            "enum": [
+              "AND",
+              "OR"
+            ]
           },
           "exclusive_start_key": {
             "type": "map",
@@ -3475,9 +3707,78 @@
                 "exists": {
                   "type": "boolean",
                   "serialized_name": "Exists"
+                },
+                "comparison_operator": {
+                  "type": "string",
+                  "serialized_name": "ComparisonOperator",
+                  "enum": [
+                    "EQ",
+                    "NE",
+                    "IN",
+                    "LE",
+                    "LT",
+                    "GE",
+                    "GT",
+                    "BETWEEN",
+                    "NOT_NULL",
+                    "NULL",
+                    "CONTAINS",
+                    "NOT_CONTAINS",
+                    "BEGINS_WITH"
+                  ]
+                },
+                "attribute_value_list": {
+                  "type": "list",
+                  "serialized_name": "AttributeValueList",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "s": {
+                        "type": "string",
+                        "serialized_name": "S"
+                      },
+                      "n": {
+                        "type": "string",
+                        "serialized_name": "N"
+                      },
+                      "b": {
+                        "type": "blob",
+                        "serialized_name": "B"
+                      },
+                      "ss": {
+                        "type": "list",
+                        "serialized_name": "SS",
+                        "members": {
+                          "type": "string"
+                        }
+                      },
+                      "ns": {
+                        "type": "list",
+                        "serialized_name": "NS",
+                        "members": {
+                          "type": "string"
+                        }
+                      },
+                      "bs": {
+                        "type": "list",
+                        "serialized_name": "BS",
+                        "members": {
+                          "type": "blob"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
+          },
+          "conditional_operator": {
+            "type": "string",
+            "serialized_name": "ConditionalOperator",
+            "enum": [
+              "AND",
+              "OR"
+            ]
           },
           "return_values": {
             "type": "string",

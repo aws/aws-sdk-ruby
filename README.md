@@ -151,7 +151,7 @@ version.
 | Amazon Elastic Compute Cloud        | Aws::EC2                  | 2013-06-15 &mdash; 2014-02-01  |
 | Amazon Elastic MapReduce            | Aws::EMR                  | 2009-03-31                     |
 | Amazon Elastic Transcoder           | Aws::ElasticTranscoder    | 2012-09-25                     |
-| Amazon ElastiCache                  | Aws::ElastiCache          | 2012-11-15 &mdash; 2013-06-15  |
+| Amazon ElastiCache                  | Aws::ElastiCache          | 2012-11-15 &mdash; 2014-03-24  |
 | Amazon Glacier                      | Aws::Glacier              | 2012-06-01                     |
 | Amazon Kinesis                      | Aws::Kinesis              | 2013-12-02                     |
 | Amazon Redshift                     | Aws::Redshift             | 2012-12-01                     |
