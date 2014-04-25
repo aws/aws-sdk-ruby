@@ -141,11 +141,13 @@ module Seahorse
       end
 
       add(StructureShape, Hash) { |h| h.dup }
-      add(StructureShape, Struct) { |struct| struct.to_h }
+      add(StructureShape, Struct) do |s|
+        s.members.each.with_object({}) {|k,h| h[k] = s[k] }
+      end
 
       add(MapShape, Hash) { |h| h.dup }
       add(MapShape, Struct) do |s|
-        s.members.inject({}) {|h,k| h[k] = s[k]; h }
+        s.members.each.with_object({}) {|k,h| h[k] = s[k] }
       end
 
       add(ListShape, Array) { |a| a.dup }
