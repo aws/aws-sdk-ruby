@@ -1,0 +1,289 @@
+{
+  "version": "2013-11-01",
+  "metadata": {
+    "endpoint_prefix": "cloudtrail",
+    "json_target_prefix": "com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
+    "json_version": 1.1,
+    "regional_endpoints": {
+      "us-east-1": "cloudtrail.us-east-1.amazonaws.com",
+      "us-west-2": "cloudtrail.us-west-2.amazonaws.com"
+    },
+    "service_abbreviation": "CloudTrail",
+    "service_class_name": "CloudTrail",
+    "service_full_name": "AWS CloudTrail"
+  },
+  "plugins": [
+    "Seahorse::Client::Plugins::Logging",
+    "Seahorse::Client::Plugins::RestfulBindings",
+    "Seahorse::Client::Plugins::ContentLength",
+    "Aws::Plugins::UserAgent",
+    "Aws::Plugins::RetryErrors",
+    "Aws::Plugins::GlobalConfiguration",
+    "Aws::Plugins::RegionalEndpoint",
+    "Aws::Plugins::InstanceProfileCredentials",
+    "Aws::Plugins::ResponsePaging",
+    "Aws::Plugins::Credentials",
+    "Aws::Plugins::JsonProtocol",
+    "Aws::Plugins::JsonRpcHeaders",
+    "Aws::Plugins::SignatureV4"
+  ],
+  "operations": {
+    "create_trail": {
+      "name": "CreateTrail",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Name"
+          },
+          "s3_bucket_name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "S3BucketName"
+          },
+          "s3_key_prefix": {
+            "type": "string",
+            "serialized_name": "S3KeyPrefix"
+          },
+          "sns_topic_name": {
+            "type": "string",
+            "serialized_name": "SnsTopicName"
+          },
+          "include_global_service_events": {
+            "type": "boolean",
+            "serialized_name": "IncludeGlobalServiceEvents"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "name": {
+            "type": "string",
+            "serialized_name": "Name"
+          },
+          "s3_bucket_name": {
+            "type": "string",
+            "serialized_name": "S3BucketName"
+          },
+          "s3_key_prefix": {
+            "type": "string",
+            "serialized_name": "S3KeyPrefix"
+          },
+          "sns_topic_name": {
+            "type": "string",
+            "serialized_name": "SnsTopicName"
+          },
+          "include_global_service_events": {
+            "type": "boolean",
+            "serialized_name": "IncludeGlobalServiceEvents"
+          }
+        }
+      }
+    },
+    "delete_trail": {
+      "name": "DeleteTrail",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Name"
+          }
+        }
+      }
+    },
+    "describe_trails": {
+      "name": "DescribeTrails",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "trail_name_list": {
+            "type": "list",
+            "serialized_name": "trailNameList",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "trail_list": {
+            "type": "list",
+            "serialized_name": "trailList",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "type": "string",
+                  "serialized_name": "Name"
+                },
+                "s3_bucket_name": {
+                  "type": "string",
+                  "serialized_name": "S3BucketName"
+                },
+                "s3_key_prefix": {
+                  "type": "string",
+                  "serialized_name": "S3KeyPrefix"
+                },
+                "sns_topic_name": {
+                  "type": "string",
+                  "serialized_name": "SnsTopicName"
+                },
+                "include_global_service_events": {
+                  "type": "boolean",
+                  "serialized_name": "IncludeGlobalServiceEvents"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "get_trail_status": {
+      "name": "GetTrailStatus",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Name"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "is_logging": {
+            "type": "boolean",
+            "serialized_name": "IsLogging"
+          },
+          "latest_delivery_error": {
+            "type": "string",
+            "serialized_name": "LatestDeliveryError"
+          },
+          "latest_notification_error": {
+            "type": "string",
+            "serialized_name": "LatestNotificationError"
+          },
+          "latest_delivery_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "LatestDeliveryTime"
+          },
+          "latest_notification_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "LatestNotificationTime"
+          },
+          "start_logging_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "StartLoggingTime"
+          },
+          "stop_logging_time": {
+            "type": "iso8601_timestamp",
+            "serialized_name": "StopLoggingTime"
+          }
+        }
+      }
+    },
+    "start_logging": {
+      "name": "StartLogging",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Name"
+          }
+        }
+      }
+    },
+    "stop_logging": {
+      "name": "StopLogging",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Name"
+          }
+        }
+      }
+    },
+    "update_trail": {
+      "name": "UpdateTrail",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "name": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "Name"
+          },
+          "s3_bucket_name": {
+            "type": "string",
+            "serialized_name": "S3BucketName"
+          },
+          "s3_key_prefix": {
+            "type": "string",
+            "serialized_name": "S3KeyPrefix"
+          },
+          "sns_topic_name": {
+            "type": "string",
+            "serialized_name": "SnsTopicName"
+          },
+          "include_global_service_events": {
+            "type": "boolean",
+            "serialized_name": "IncludeGlobalServiceEvents"
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "name": {
+            "type": "string",
+            "serialized_name": "Name"
+          },
+          "s3_bucket_name": {
+            "type": "string",
+            "serialized_name": "S3BucketName"
+          },
+          "s3_key_prefix": {
+            "type": "string",
+            "serialized_name": "S3KeyPrefix"
+          },
+          "sns_topic_name": {
+            "type": "string",
+            "serialized_name": "SnsTopicName"
+          },
+          "include_global_service_events": {
+            "type": "boolean",
+            "serialized_name": "IncludeGlobalServiceEvents"
+          }
+        }
+      }
+    }
+  }
+}
