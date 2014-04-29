@@ -22,7 +22,10 @@ module Aws
     # @return [Boolean] Returns `true` if the access key id and secret
     #   access key are both set.
     def set?
-      !!(access_key_id && secret_access_key)
+      !access_key_id.nil? &&
+      !access_key_id.empty? &&
+      !secret_access_key.nil? &&
+      !secret_access_key.empty?
     end
 
     # Removing the secret access key from the default inspect string.

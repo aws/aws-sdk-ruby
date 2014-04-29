@@ -34,6 +34,14 @@ module Aws
         expect(Credentials.new('akid', nil).set?).to be(false)
       end
 
+      it 'returns false if the key is an empty string' do
+        expect(Credentials.new('', 'secret').set?).to be(false)
+      end
+
+      it 'returns false if the secret is an empty string' do
+        expect(Credentials.new('akid', '').set?).to be(false)
+      end
+
     end
   end
 end
