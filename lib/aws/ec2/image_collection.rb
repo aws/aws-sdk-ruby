@@ -72,8 +72,7 @@ module AWS
 
       # @yield [image] Each image in the collection.
       # @return [nil]
-      def each &block
-        opts = {}
+      def each(opts = {}, &block)
         opts[:owners] = @owners.map { |id| id.to_s } unless @owners.empty?
         opts[:executable_users] = @executable_users.map { |id| id.to_s } unless
           @executable_users.empty?
