@@ -118,6 +118,15 @@ module AWS
           @providers << ENVProvider.new('AWS')
           @providers << ENVProvider.new('AWS', :access_key_id => 'ACCESS_KEY', :secret_access_key => 'SECRET_KEY', :session_token => 'SESSION_TOKEN')
           @providers << ENVProvider.new('AMAZON')
+          begin
+            if Dir.home
+              shared_cred_path = File.join(Dir.home, ".aws", "credentials")
+              profile = ENV['AWS_PROFILE']
+              @providers << SharedCredentialFileProvider.new(shared_cred_path)
+            end
+          rescue ArgumentError => e
+            puts "#{e}"
+          end
           @providers << EC2Provider.new
         end
 
@@ -236,7 +245,7 @@ module AWS
 
         attr_reader :credential_file
 
-        # @param [Sring] credential_file The file path of a credential file
+        # @param [String] credential_file The file path of a credential file
         def initialize(credential_file)
           @credential_file = credential_file
         end
@@ -253,6 +262,48 @@ module AWS
                 end
               end
               fh.close
+            end
+          end
+          credentials
+        end
+      end
+
+      class SharedCredentialFileProvider
+
+        include Provider
+
+        # Map of AWS credential file key names to accepted provider key names
+        CREDENTIAL_FILE_KEY_MAP = {
+          "aws_access_key_id" => :access_key_id,
+          "aws_secret_access_key" => :secret_access_key,
+          "aws_session_token" => :session_token }
+        
+        attr_reader :credential_file
+
+        # @param [String] credential_file The file path of a credential file
+        def initialize(credential_file, profile = nil)
+          @credential_file = credential_file
+
+          @profile = profile
+          @profile ||= ENV["AWS_PROFILE"]
+          @profile ||= 'default'
+        end
+
+        # (see Provider#get_credentials)
+        def get_credentials
+          credentials = {}
+          if File.exist?(credential_file) && File.readable?(credential_file)
+            File.open(credential_file, 'r') do |fh|
+              config_string = fh.read
+              ini_map = IniParser.parse(config_string)
+              profile_map = ini_map[@profile]
+              if profile_map
+                profile_map.each_key do |k|
+                  if cred_key = CREDENTIAL_FILE_KEY_MAP[k]
+                    credentials[cred_key] = profile_map[k]
+                  end
+                end
+              end
             end
           end
           credentials

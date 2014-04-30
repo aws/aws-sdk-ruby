@@ -38,7 +38,8 @@ module AWS
           provider.providers[2].prefix.should == 'AWS'
           provider.providers[3].should be_a(ENVProvider)
           provider.providers[3].prefix.should == 'AMAZON'
-          provider.providers[4].should be_a(EC2Provider)
+          provider.providers[4].should be_a(SharedCredentialFileProvider)
+          provider.providers[5].should be_a(EC2Provider)
         end
 
         it 'passes static credentials to a static credential provider' do
@@ -363,6 +364,63 @@ module AWS
 
         it 'is not set when key_id or access_key is missing' do
           provider = CredentialFileProvider.new('/no/file/here')
+          provider.set?.should be_false
+        end
+      end
+
+      describe SharedCredentialFileProvider do
+
+        let(:mock_shared_cred_file) { File.expand_path('../../../mock-shared-credentials', __FILE__) }
+
+        it 'reads the correct default credentials from a credentials file' do
+          provider = SharedCredentialFileProvider.new(mock_shared_cred_file)
+          provider.credentials.should == {
+            :access_key_id => 'ACCESS_KEY_0',
+            :secret_access_key => 'SECRET_KEY_0',
+            :session_token => 'TOKEN_0' }
+        end
+
+        it 'supports fetching profiles from ENV' do
+          env_variables = { 'AWS_PROFILE' => 'barprofile' }
+          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          provider = SharedCredentialFileProvider.new(mock_shared_cred_file)
+          provider.credentials.should == {
+            :access_key_id => 'ACCESS_KEY_2',
+            :secret_access_key => 'SECRET_KEY_2',
+            :session_token => 'TOKEN_2' }
+        end
+
+        it 'supports a manually specified profile' do
+          env_variables = { 'AWS_PROFILE' => 'barprofile' }
+          ENV.stub(:[]).and_return{|key| env_variables[key] }
+
+          provider = SharedCredentialFileProvider.new(mock_shared_cred_file,
+                                                      'fooprofile')
+          provider.credentials.should == {
+            :access_key_id => 'ACCESS_KEY_1',
+            :secret_access_key => 'SECRET_KEY_1',
+            :session_token => 'TOKEN_1' }
+        end
+
+        it 'raises when a profile does not exist' do
+          lambda {
+            SharedCredentialFileProvider.new(mock_shared_cred_file,
+                                             'bazprofile').credentials
+          }.should raise_error(Errors::MissingCredentialsError)
+        end
+
+        it 'should return an empty hash from a bad file' do
+          provider = SharedCredentialFileProvider.new('/no/file/here')
+          provider.get_credentials.should == {}
+        end
+
+        it 'is set when credentails is valid' do
+          provider = SharedCredentialFileProvider.new(mock_shared_cred_file)
+          provider.set?.should be_true
+        end
+
+        it 'is not set when key_id or access_key is missing' do
+          provider = SharedCredentialFileProvider.new('/no/file/here')
           provider.set?.should be_false
         end
       end
