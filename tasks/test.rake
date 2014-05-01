@@ -1,21 +1,24 @@
 require 'rspec/core/rake_task'
-require 'cucumber/rake/task'
 
 namespace :test do
-
   desc "Runs unit tests"
   RSpec::Core::RakeTask.new(:unit) do |t|
     t.pattern = "spec"
   end
-
-  Cucumber::Rake::Task.new(:integration) do |t|
-    t.cucumber_opts = "features"
-  end
-
 end
 
-desc 'Runs unit and integration tests'
-task :test => ['test:unit', 'test:integration']
+desc 'Runs unit tests'
+task :test => ['test:unit']
+
+begin
+  require 'cucumber/rake/task'
+  Cucumber::Rake::Task.new(:'test:integration') do |t|
+    t.cucumber_opts = "features"
+  end
+  desc 'Runs unit and integration tests'
+  task :test => ['test:integration']
+rescue LoadError
+end
 
 desc 'Generates a coverage report'
 task :coverage do
