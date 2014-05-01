@@ -161,6 +161,9 @@ module AWS
       #     * 'LessThanThreshold'
       #     * 'LessThanOrEqualToThreshold'
       #
+      # @option options [String,required] :namespace The namespace for the
+      #   alarm's associated metric.
+      #
       # @option options [Integer,required] :evaluation_periods The number
       #   of periods over which data is compared to the specified threshold.
       #
