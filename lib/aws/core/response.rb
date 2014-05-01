@@ -70,6 +70,9 @@ module AWS
       #   returned this response.
       attr_accessor :request_type
 
+      # @return [String] The API version of the request/client.
+      attr_accessor :api_version
+
       # @return [Hash] Returns the hash of options passed to the client
       #   request method that generated this response.
       attr_accessor :request_options
@@ -141,6 +144,7 @@ module AWS
       # @api private
       def cache_key
         [
+          api_version,
           http_request.access_key_id,
           http_request.host,
           request_type,

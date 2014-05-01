@@ -202,6 +202,7 @@ module AWS
       def new_response(*args, &block)
         resp = Response.new(*args, &block)
         resp.config = config
+        resp.api_version = self.class::API_VERSION
         resp
       end
 

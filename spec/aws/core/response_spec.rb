@@ -156,7 +156,8 @@ module AWS::Core
 
       it 'should consist of the access key, endpoint, and options' do
         response.stub(:serialized_options).and_return("OPTIONS")
-        response.cache_key.should == "KEY:ENDPOINT:some_request:OPTIONS"
+        response.api_version = '2012-01-02'
+        response.cache_key.should == "2012-01-02:KEY:ENDPOINT:some_request:OPTIONS"
       end
 
       context 'serialized options' do
