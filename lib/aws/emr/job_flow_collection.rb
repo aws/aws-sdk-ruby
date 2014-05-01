@@ -132,11 +132,10 @@ module AWS
       #     # enumerate jobs that are more than an hour old
       #     emr.job_flows.created_before(Time.now - 3600).each{|job| ... }
       #
-      # @param [Time,DateTime,Date] time
+      # @param [Time,DateTime,Date,Integer] time
       # @return [JobFlowCollection]
       def created_before time
-        time = time.iso8601 if time.respond_to?(:iso8601)
-        filter(:created_before, time)
+        filter(:created_before, time.to_i)
       end
 
       # Returns a new collection that will only enumerate job flows that
@@ -145,11 +144,10 @@ module AWS
       #     # enumerate jobs that are at most 1 hour old
       #     emr.job_flows.created_after(Time.now - 3600).each{|job| ... }
       #
-      # @param [Time,DateTime,Date] time
+      # @param [Time,DateTime,Date,Integer] time
       # @return [JobFlowCollection]
       def created_after time
-        time = time.iso8601 if time.respond_to?(:iso8601)
-        filter(:created_after, time)
+        filter(:created_after, time.to_i)
       end
 
       # @param [String,Symbol] name

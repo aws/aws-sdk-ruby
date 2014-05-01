@@ -109,7 +109,7 @@ module AWS
           it_behaves_like "a chainable filter method", :created_before do
             let(:now) { Time.now }
             let(:value) { now }
-            let(:formatted_value) { now.iso8601 }
+            let(:formatted_value) { now.to_i }
           end
 
         end
@@ -119,7 +119,7 @@ module AWS
           it_behaves_like "a chainable filter method", :created_after do
             let(:now) { Time.now }
             let(:value) { now }
-            let(:formatted_value) { now.iso8601 }
+            let(:formatted_value) { now.to_i }
           end
 
         end
