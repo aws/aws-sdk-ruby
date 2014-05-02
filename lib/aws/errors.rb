@@ -30,6 +30,10 @@ module Aws
     # version is found based on configuration.
     class NoSuchApiVersionError < RuntimeError; end
 
+    # Raised when a {Service} is constructed and the specified shared
+    # credentials profile does not exist.
+    class NoSuchProfileError < RuntimeError; end
+
     # Raised when a {Service} is constructed and credentials are not
     # set, or the set credentials are empty.
     class MissingCredentialsError < RuntimeError; end
