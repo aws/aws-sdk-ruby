@@ -104,21 +104,4 @@ module Aws::Util
     end
 
   end
-
-  describe 'ini_parse' do
-    include Aws::Util
-    it 'parses an ini file' do
-      ini = "; command at the beginning of the line
-      [section1] ; comment at end of line
-      invalidline
-      key1=value1 ;anothercomment
-      key2 = value2;value3
-      [emptysection]"
-
-      map = ini_parse(ini)
-      expect(map["section1"]["key1"]).to eq('value1')
-      expect(map["section1"]["key2"]).to eq('value2;value3')
-      expect(map["emptysection"]).to be_nil
-    end
-  end
 end
