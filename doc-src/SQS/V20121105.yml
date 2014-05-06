@@ -101,7 +101,8 @@
   @param [Hash] options
     * `:queue_url` - *required* - (String) The URL of the Amazon SQS queue to take action on.
     * `:attribute_names` - (Array&lt;<String>) A list of attributes that need to be returned along with each message. The following lists the names and descriptions of the attributes that can be returned: All - returns all values. ApproximateFirstReceiveTimestamp - returns the time when the message was first received (epoch time in milliseconds). ApproximateReceiveCount - returns the number of times a message has been received but not deleted. SenderId - returns the AWS account number (or the IP address, if anonymous access is allowed) of the sender. SentTimestamp - returns the time when the message was sent (epoch time in milliseconds).
-    * `:max_number_of_messages` - (Integer) The maximum number of messages to return. Amazon SQS never returns more messages than this value but may return fewer. All of the messages are not necessarily returned.
+    * `:message_attribute_names` - (Array&lt;<String>) The message attribute Name can contain the following characters: A-Z, a-z, 0-9, underscore(_), hyphen(-), and period (.). The message attribute name must not start or end with a period, and it should not have successive periods. The message attribute name is case sensitive and must be unique among all attribute names for the message. The message attribute name can be up to 256 characters long. Attribute names cannot start with "AWS." or "Amazon." because these prefixes are reserved for use by Amazon Web Services.
+    * `:max_number_of_messages` - (Integer) The maximum number of messages to return. Amazon SQS never returns more messages than this value but may return fewer. Values can be from 1 to 10. Default is 1. All of the messages are not necessarily returned.
     * `:visibility_timeout` - (Integer) The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request.
     * `:wait_time_seconds` - (Integer) The duration (in seconds) for which the call will wait for a message to arrive in the queue before returning. If a message is available, the call will return sooner than WaitTimeSeconds.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
@@ -112,6 +113,13 @@
       * `:md5_of_body` - (String)
       * `:body` - (String)
       * `:attributes` - (Hash<String,String>)
+      * `:md5_of_message_attributes` - (String)
+      * `:message_attributes` - (Hash<String,Hash>)
+        * `:string_value` - (String)
+        * `:binary_value` - (String)
+        * `:string_list_values` - (Array<String>)
+        * `:binary_list_values` - (Array<Blob>)
+        * `:data_type` - (String)
 :remove_permission: |-
   Calls the RemovePermission API operation.
   @param [Hash] options
@@ -124,9 +132,16 @@
     * `:queue_url` - *required* - (String) The URL of the Amazon SQS queue to take action on.
     * `:message_body` - *required* - (String) The message to send. String maximum 256 KB in size. For a list of allowed characters, see the preceding important note.
     * `:delay_seconds` - (Integer) The number of seconds (0 to 900 - 15 minutes) to delay a specific message. Messages with a positive DelaySeconds value become available for processing after the delay time is finished. If you don't specify a value, the default value for the queue applies.
+    * `:message_attributes` - (Hash&lt;<String,Hash>) Each message attribute consists of a Name, Type, and Value. For more information, see Message Attribute Items.
+      * `:string_value` - (String) Strings are Unicode with UTF8 binary encoding. For a list of code values, see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters.
+      * `:binary_value` - (String) Binary type attributes can store any binary data, for example, compressed data, encrypted data, or images.
+      * `:string_list_values` - (Array&lt;<String>) Not implemented. Reserved for future use.
+      * `:binary_list_values` - (Array&lt;<String>) Not implemented. Reserved for future use.
+      * `:data_type` - *required* - (String) Amazon SQS supports the following logical data types: String, Number, and Binary. In addition, you can append your own custom labels. For more information, see Message Attribute Data Types.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:md5_of_message_body` - (String)
+    * `:md5_of_message_attributes` - (String)
     * `:message_id` - (String)
 :send_message_batch: |-
   Calls the SendMessageBatch API operation.
@@ -136,12 +151,19 @@
       * `:id` - *required* - (String) An identifier for the message in this batch. This is used to communicate the result. Note that the Ids of a batch request need to be unique within the request.
       * `:message_body` - *required* - (String) Body of the message.
       * `:delay_seconds` - (Integer) The number of seconds for which the message has to be delayed.
+      * `:message_attributes` - (Hash&lt;<String,Hash>) Each message attribute consists of a Name, Type, and Value. For more information, see Message Attribute Items.
+        * `:string_value` - (String) Strings are Unicode with UTF8 binary encoding. For a list of code values, see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters.
+        * `:binary_value` - (String) Binary type attributes can store any binary data, for example, compressed data, encrypted data, or images.
+        * `:string_list_values` - (Array&lt;<String>) Not implemented. Reserved for future use.
+        * `:binary_list_values` - (Array&lt;<String>) Not implemented. Reserved for future use.
+        * `:data_type` - *required* - (String) Amazon SQS supports the following logical data types: String, Number, and Binary. In addition, you can append your own custom labels. For more information, see Message Attribute Data Types.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:successful` - (Array<Hash>)
       * `:id` - (String)
       * `:message_id` - (String)
       * `:md5_of_message_body` - (String)
+      * `:md5_of_message_attributes` - (String)
     * `:failed` - (Array<Hash>)
       * `:id` - (String)
       * `:sender_fault` - (Boolean)
