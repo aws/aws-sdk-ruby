@@ -41,7 +41,7 @@ module Aws
     end
 
     def load_profile
-      if profile = ini_parse(File.read(path))[profile_name]
+      if profile = profiles[profile_name]
         profile
       else
         msg = "Profile `#{profile_name}' not found in #{path}"
@@ -49,10 +49,14 @@ module Aws
       end
     end
 
-    def ini_parse(string)
+    def profiles
+      ini_parse(File.read(path))
+    end
+
+    def ini_parse(file)
       current_section = {}
       map = {}
-      string.split(/\r?\n/).each do |line|
+      file.lines.each do |line|
         line = line.split(/^|\s;/).first # remove comments
         section = line.match(/^\s*\[([^\[\]]+)\]\s*$/) unless line.nil?
         if section

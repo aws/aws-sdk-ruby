@@ -10,6 +10,8 @@ module Aws
 
       before do
         stub_const("ENV", env)
+        # disable loading credentials from shared file
+        allow(Dir).to receive(:home).and_raise(ArgumentError)
       end
 
       describe 'configuration' do

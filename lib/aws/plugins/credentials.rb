@@ -37,6 +37,16 @@ module Aws
       }
 
       option(:credentials) do |config|
+        begin
+          credentials = SharedCredentials.new
+          credentials.set? ? credentials : nil
+        rescue ArgumentError
+          # Dir.home raises an ArgumentError when ENV['HOME'] is not set
+          nil
+        end
+      end
+
+      option(:credentials) do |config|
         credentials = Aws::Credentials.new(
           config.access_key_id,
           config.secret_access_key,
