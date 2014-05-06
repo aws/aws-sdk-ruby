@@ -299,8 +299,9 @@ module AWS
 
         def load_from_path
           profile = load_profile
-          KEY_MAP.each.with_object({}) do |(source, target), credentials|
+          KEY_MAP.inject({}) do |credentials, (source, target)|
             credentials[target] = profile[source] if profile.key?(source)
+            credentials
           end
         end
 
