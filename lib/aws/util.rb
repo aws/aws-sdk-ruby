@@ -33,25 +33,5 @@ module Aws
     end
     module_function :uri_escape
 
-    def ini_parse(string)
-      current_section = {}
-      map = {}
-      string.split(/\r?\n/).each do |line|
-        line = line.split(/^|\s;/).first # remove comments
-        section = line.match(/^\s*\[([^\[\]]+)\]\s*$/) unless line.nil?
-        if section
-          current_section = section[1]
-        elsif current_section
-          item = line.match(/^\s*(.+?)\s*=\s*(.+)\s*$/) unless line.nil?
-          if item
-            map[current_section] = map[current_section] || {}
-            map[current_section][item[1]] = item[2]
-          end
-        end
-      end
-      map
-    end
-    module_function :ini_parse
-
   end
 end
