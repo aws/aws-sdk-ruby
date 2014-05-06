@@ -79,7 +79,6 @@ module Aws
     autoload :S3Redirects, "#{SRC}/plugins/s3_redirects"
     autoload :S3Signer, "#{SRC}/plugins/s3_signer"
     autoload :S3LocationConstraint, "#{SRC}/plugins/s3_location_constraint"
-    autoload :SharedCredentials, "#{SRC}/plugins/shared_credentials"
     autoload :SignatureV2, "#{SRC}/plugins/signature_v2"
     autoload :SignatureV3, "#{SRC}/plugins/signature_v3"
     autoload :SignatureV4, "#{SRC}/plugins/signature_v4"
