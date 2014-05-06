@@ -19,8 +19,10 @@ module AWS
     module CredentialProviders
 
       describe DefaultProvider do
+
         before do
           ENV.stub(:[]) { nil } # Stub out all environment variables
+          Dir.stub(:home).and_raise ArgumentError
         end
 
         it 'raises an error when no credentials are present' do
@@ -38,8 +40,13 @@ module AWS
           provider.providers[2].prefix.should == 'AWS'
           provider.providers[3].should be_a(ENVProvider)
           provider.providers[3].prefix.should == 'AMAZON'
+          provider.providers[4].should be_a(EC2Provider)
+        end
+
+        it 'includes a shared credential profile when Dir.home is gettable' do
+          Dir.stub(:home).and_return('~/')
+          provider = DefaultProvider.new
           provider.providers[4].should be_a(SharedCredentialFileProvider)
-          provider.providers[5].should be_a(EC2Provider)
         end
 
         it 'passes static credentials to a static credential provider' do
@@ -373,7 +380,7 @@ module AWS
         let(:mock_shared_cred_file) { File.expand_path('../../../mock-shared-credentials', __FILE__) }
 
         it 'reads the correct default credentials from a credentials file' do
-          provider = SharedCredentialFileProvider.new(mock_shared_cred_file)
+          provider = SharedCredentialFileProvider.new(:path => mock_shared_cred_file)
           provider.credentials.should == {
             :access_key_id => 'ACCESS_KEY_0',
             :secret_access_key => 'SECRET_KEY_0',
@@ -383,7 +390,7 @@ module AWS
         it 'supports fetching profiles from ENV' do
           env_variables = { 'AWS_PROFILE' => 'barprofile' }
           ENV.stub(:[]).and_return{|key| env_variables[key] }
-          provider = SharedCredentialFileProvider.new(mock_shared_cred_file)
+          provider = SharedCredentialFileProvider.new(:path => mock_shared_cred_file)
           provider.credentials.should == {
             :access_key_id => 'ACCESS_KEY_2',
             :secret_access_key => 'SECRET_KEY_2',
@@ -394,8 +401,10 @@ module AWS
           env_variables = { 'AWS_PROFILE' => 'barprofile' }
           ENV.stub(:[]).and_return{|key| env_variables[key] }
 
-          provider = SharedCredentialFileProvider.new(mock_shared_cred_file,
-                                                      'fooprofile')
+          provider = SharedCredentialFileProvider.new(
+            :path => mock_shared_cred_file,
+            :profile_name => 'fooprofile')
+
           provider.credentials.should == {
             :access_key_id => 'ACCESS_KEY_1',
             :secret_access_key => 'SECRET_KEY_1',
@@ -404,23 +413,25 @@ module AWS
 
         it 'raises when a profile does not exist' do
           lambda {
-            SharedCredentialFileProvider.new(mock_shared_cred_file,
-                                             'bazprofile').credentials
+            SharedCredentialFileProvider.new(
+              :path => mock_shared_cred_file,
+              :profile_name => 'bazprofile').credentials
           }.should raise_error(Errors::MissingCredentialsError)
         end
 
         it 'should return an empty hash from a bad file' do
-          provider = SharedCredentialFileProvider.new('/no/file/here')
+          provider = SharedCredentialFileProvider.new(:path => '/no/file/here')
           provider.get_credentials.should == {}
         end
 
         it 'is set when credentails is valid' do
-          provider = SharedCredentialFileProvider.new(mock_shared_cred_file)
+          provider = SharedCredentialFileProvider.new(:path => mock_shared_cred_file)
           provider.set?.should be_true
         end
 
         it 'is not set when key_id or access_key is missing' do
-          provider = SharedCredentialFileProvider.new('/no/file/here')
+          provider = SharedCredentialFileProvider.new(
+            :path => '/no/file/here')
           provider.set?.should be_false
         end
       end

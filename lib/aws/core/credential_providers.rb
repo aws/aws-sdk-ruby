@@ -118,15 +118,7 @@ module AWS
           @providers << ENVProvider.new('AWS')
           @providers << ENVProvider.new('AWS', :access_key_id => 'ACCESS_KEY', :secret_access_key => 'SECRET_KEY', :session_token => 'SESSION_TOKEN')
           @providers << ENVProvider.new('AMAZON')
-          begin
-            if Dir.home
-              shared_cred_path = File.join(Dir.home, ".aws", "credentials")
-              profile = ENV['AWS_PROFILE']
-              @providers << SharedCredentialFileProvider.new(shared_cred_path)
-            end
-          rescue ArgumentError => e
-            puts "#{e}"
-          end
+          @providers << SharedCredentialFileProvider.new if Dir.home rescue ArgumentError
           @providers << EC2Provider.new
         end
 
@@ -272,42 +264,51 @@ module AWS
 
         include Provider
 
-        # Map of AWS credential file key names to accepted provider key names
-        CREDENTIAL_FILE_KEY_MAP = {
+        # @api private
+        KEY_MAP = {
           "aws_access_key_id" => :access_key_id,
           "aws_secret_access_key" => :secret_access_key,
-          "aws_session_token" => :session_token }
-        
-        attr_reader :credential_file
+          "aws_session_token" => :session_token,
+        }
 
-        # @param [String] credential_file The file path of a credential file
-        def initialize(credential_file, profile = nil)
-          @credential_file = credential_file
-
-          @profile = profile
-          @profile ||= ENV["AWS_PROFILE"]
-          @profile ||= 'default'
+        # @option [String] :path
+        # @option [String] :profile
+        def initialize(options = {})
+          @path = options[:path] || File.join(Dir.home, '.aws', 'credentials')
+          @profile_name = options[:profile_name]
+          @profile_name ||= ENV['AWS_PROFILE']
+          @profile_name ||= 'default'
         end
+
+        # @return [String]
+        attr_reader :path
+
+        # @return [String]
+        attr_reader :profile_name
 
         # (see Provider#get_credentials)
         def get_credentials
-          credentials = {}
-          if File.exist?(credential_file) && File.readable?(credential_file)
-            File.open(credential_file, 'r') do |fh|
-              config_string = fh.read
-              ini_map = IniParser.parse(config_string)
-              profile_map = ini_map[@profile]
-              if profile_map
-                profile_map.each_key do |k|
-                  if cred_key = CREDENTIAL_FILE_KEY_MAP[k]
-                    credentials[cred_key] = profile_map[k]
-                  end
-                end
-              end
-            end
+          if File.exist?(path) && File.readable?(path)
+            load_from_path
+          else
+            {}
           end
-          credentials
         end
+
+        private
+
+        def load_from_path
+          profile = load_profile
+          KEY_MAP.each.with_object({}) do |(source, target), credentials|
+            credentials[target] = profile[source] if profile.key?(source)
+          end
+        end
+
+        def load_profile
+          ini = IniParser.parse(File.read(path))
+          ini[profile_name] || {}
+        end
+
       end
 
       # This credential provider tries to get credentials from the EC2
