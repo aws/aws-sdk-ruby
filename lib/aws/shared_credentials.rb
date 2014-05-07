@@ -12,15 +12,19 @@ module Aws
     # credentials from an ini file, which supports profiles. The default
     # profile name is 'default'. You can specify the profile name with the
     # `ENV['AWS_PROFILE']` or with the `:profile_name` option.
+    #
     # @option [String] :path Path to the shared file.  Defaults
     #   to "#{Dir.home}/.aws/credentials".
-    # @option [String] :profile_name Defaults to 'default' or `ENV['AWS_PROFILE']`.
+    #
+    # @option [String] :profile_name Defaults to 'default' or
+    #   `ENV['AWS_PROFILE']`.
+    #
     def initialize(options = {})
-      @path = options[:path] || File.join(Dir.home, '.aws', 'credentials')
+      @path = options[:path] || default_path
       @profile_name = options[:profile_name]
       @profile_name ||= ENV['AWS_PROFILE']
       @profile_name ||= 'default'
-      load_from_path if File.exist?(path) && File.readable?(path)
+      load_from_path if loadable?
     end
 
     # @return [String]
@@ -29,7 +33,32 @@ module Aws
     # @return [String]
     attr_reader :profile_name
 
+    # @api private
+    def inspect
+      parts = [
+        self.class.name,
+        "profile_name=#{profile_name.inspect}",
+        "path=#{path.inspect}",
+      ]
+      "#<#{parts.join(' ')}>"
+    end
+
+    # @return [Boolean] Returns `true` if a credential file
+    #   exists and has appropriate read permissions at {path}.
+    # @note This method does not indicate if the file found at {path}
+    #   will be parsable, only if it can be read.
+    def loadable?
+      !path.nil? && File.exists?(path) && File.readable?(path)
+    end
+
     private
+
+    def default_path
+      File.join(Dir.home, '.aws', 'credentials')
+    rescue ArgumentError
+      # Dir.home raises ArgumentError when ENV['home'] is not set
+      nil
+    end
 
     def load_from_path
       profile = load_profile

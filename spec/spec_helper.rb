@@ -7,11 +7,14 @@ require 'yaml'
 require_relative '../vendor/seahorse/spec/spec_helper'
 
 # prevent env from leaking state into tests
+ENV.delete('AWS_REGION')
+ENV.delete('AWS_PROFILE')
+ENV.delete('AWS_ACCESS_KEY')
+ENV.delete('AWS_SECRET_KEY')
 %w(AWS AMAZON).each do |prefix|
   ENV.delete("#{prefix}_ACCESS_KEY_ID")
   ENV.delete("#{prefix}_SECRET_ACCESS_KEY")
   ENV.delete("#{prefix}_SESSION_TOKEN")
-  ENV.delete("#{prefix}_PROFILE")
 end
 
 def dummy_credentials
