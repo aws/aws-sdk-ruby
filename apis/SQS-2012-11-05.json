@@ -27,7 +27,6 @@
     "Aws::Plugins::RetryErrors",
     "Aws::Plugins::GlobalConfiguration",
     "Aws::Plugins::RegionalEndpoint",
-    "Aws::Plugins::InstanceProfileCredentials",
     "Aws::Plugins::ResponsePaging",
     "Aws::Plugins::Credentials",
     "Aws::Plugins::QueryProtocol",
@@ -559,6 +558,14 @@
               ]
             }
           },
+          "message_attribute_names": {
+            "type": "flat_list",
+            "serialized_name": "MessageAttributeNames",
+            "members": {
+              "type": "string",
+              "serialized_name": "MessageAttributeName"
+            }
+          },
           "max_number_of_messages": {
             "type": "integer",
             "serialized_name": "MaxNumberOfMessages"
@@ -628,6 +635,52 @@
                     "type": "string",
                     "serialized_name": "Value"
                   }
+                },
+                "md5_of_message_attributes": {
+                  "type": "string",
+                  "serialized_name": "MD5OfMessageAttributes"
+                },
+                "message_attributes": {
+                  "type": "flat_map",
+                  "serialized_name": "MessageAttribute",
+                  "keys": {
+                    "type": "string",
+                    "serialized_name": "Name"
+                  },
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "Value",
+                    "members": {
+                      "string_value": {
+                        "type": "string",
+                        "serialized_name": "StringValue"
+                      },
+                      "binary_value": {
+                        "type": "blob",
+                        "serialized_name": "BinaryValue"
+                      },
+                      "string_list_values": {
+                        "type": "flat_list",
+                        "serialized_name": "StringListValue",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "StringListValue"
+                        }
+                      },
+                      "binary_list_values": {
+                        "type": "flat_list",
+                        "serialized_name": "BinaryListValue",
+                        "members": {
+                          "type": "blob",
+                          "serialized_name": "BinaryListValue"
+                        }
+                      },
+                      "data_type": {
+                        "type": "string",
+                        "serialized_name": "DataType"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -675,6 +728,49 @@
           "delay_seconds": {
             "type": "integer",
             "serialized_name": "DelaySeconds"
+          },
+          "message_attributes": {
+            "type": "flat_map",
+            "serialized_name": "MessageAttribute",
+            "keys": {
+              "type": "string",
+              "serialized_name": "Name"
+            },
+            "members": {
+              "type": "structure",
+              "serialized_name": "Value",
+              "members": {
+                "string_value": {
+                  "type": "string",
+                  "serialized_name": "StringValue"
+                },
+                "binary_value": {
+                  "type": "blob",
+                  "serialized_name": "BinaryValue"
+                },
+                "string_list_values": {
+                  "type": "flat_list",
+                  "serialized_name": "StringListValue",
+                  "members": {
+                    "type": "string",
+                    "serialized_name": "StringListValue"
+                  }
+                },
+                "binary_list_values": {
+                  "type": "flat_list",
+                  "serialized_name": "BinaryListValue",
+                  "members": {
+                    "type": "blob",
+                    "serialized_name": "BinaryListValue"
+                  }
+                },
+                "data_type": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "DataType"
+                }
+              }
+            }
           }
         }
       },
@@ -687,6 +783,10 @@
           "md5_of_message_body": {
             "type": "string",
             "serialized_name": "MD5OfMessageBody"
+          },
+          "md5_of_message_attributes": {
+            "type": "string",
+            "serialized_name": "MD5OfMessageAttributes"
           },
           "message_id": {
             "type": "string",
@@ -728,6 +828,49 @@
                 "delay_seconds": {
                   "type": "integer",
                   "serialized_name": "DelaySeconds"
+                },
+                "message_attributes": {
+                  "type": "flat_map",
+                  "serialized_name": "MessageAttribute",
+                  "keys": {
+                    "type": "string",
+                    "serialized_name": "Name"
+                  },
+                  "members": {
+                    "type": "structure",
+                    "serialized_name": "Value",
+                    "members": {
+                      "string_value": {
+                        "type": "string",
+                        "serialized_name": "StringValue"
+                      },
+                      "binary_value": {
+                        "type": "blob",
+                        "serialized_name": "BinaryValue"
+                      },
+                      "string_list_values": {
+                        "type": "flat_list",
+                        "serialized_name": "StringListValue",
+                        "members": {
+                          "type": "string",
+                          "serialized_name": "StringListValue"
+                        }
+                      },
+                      "binary_list_values": {
+                        "type": "flat_list",
+                        "serialized_name": "BinaryListValue",
+                        "members": {
+                          "type": "blob",
+                          "serialized_name": "BinaryListValue"
+                        }
+                      },
+                      "data_type": {
+                        "type": "string",
+                        "required": true,
+                        "serialized_name": "DataType"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -758,6 +901,10 @@
                 "md5_of_message_body": {
                   "type": "string",
                   "serialized_name": "MD5OfMessageBody"
+                },
+                "md5_of_message_attributes": {
+                  "type": "string",
+                  "serialized_name": "MD5OfMessageAttributes"
                 }
               }
             }
