@@ -49,9 +49,7 @@ module Aws
     end
 
     def shared_credentials(options = {})
-      c = SharedCredentials.new(profile_name: options[:config].profile)
-      puts c.inspect if @foo
-      c
+      SharedCredentials.new(profile_name: options[:config].profile)
     end
 
     def instance_profile_credentials(*args)
