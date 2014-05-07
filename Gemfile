@@ -9,11 +9,7 @@ gem 'ox' if ENV['OX']
 gem 'nokogiri' if ENV['NOKOGIRI']
 
 group :test do
-  gem 'rspec', github: 'rspec/rspec'
-  gem 'rspec-core', github: 'rspec/rspec-core'
-  gem 'rspec-mocks', github: 'rspec/rspec-mocks'
-  gem 'rspec-expectations', github: 'rspec/rspec-expectations'
-  gem 'rspec-support', github: 'rspec/rspec-support'
+  gem 'rspec', '~> 3.0.0.beta2'
   gem 'cucumber'
   gem 'webmock'
   gem 'simplecov', require: false
