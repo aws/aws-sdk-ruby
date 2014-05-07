@@ -7,7 +7,7 @@ module Aws
     end
 
     def resolve
-      providers.each do |method_name, options={}|
+      providers.each do |method_name, options|
         credentials = send(method_name, options.merge(config: @config))
         return credentials if credentials.set?
       end
@@ -18,12 +18,12 @@ module Aws
 
     def providers
       [
-        [:static_credentials],
+        [:static_credentials, {}],
         [:env_credentials, { prefix: 'AWS' }],
         [:env_credentials, { prefix: 'AMAZON' }],
         [:env_credentials, { key:'AWS_ACCESS_KEY', secret:'AWS_SECRET_KEY' }],
-        [:shared_credentials],
-        [:instance_profile_credentials],
+        [:shared_credentials, {}],
+        [:instance_profile_credentials, {}],
       ]
     end
 
