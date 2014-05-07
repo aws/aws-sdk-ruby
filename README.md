@@ -63,8 +63,8 @@ strongly recommended loading credentials from an external source.  By default,
 the Ruby SDK will attempt to load credentials from the following
 sources:
 
-* ENV['AWS_ACCESS_KEY_ID'] && ENV['AWS_SECRET_ACCESS_KEY']
-* The shared credentials ini file at 'HOME/.aws/credentials'
+* `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
+* The shared credentials ini file at `HOME/.aws/credentials`
 * From an instance profile when running on EC2
 
 Alternatively, you can specify your credentials directly using one of the
