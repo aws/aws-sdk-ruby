@@ -35,22 +35,52 @@ dependency in your Gemfile so Bundler can find it.
 
 ## Configuration
 
-At a minimum, you need to configure your AWS account access credentials and a
-default region.  You can supply these globally or per service object.
+To use the Ruby SDK, you must configure a region and your AWS account
+access credentials.
 
-```ruby
-require 'aws-sdk-core'
+### Region
 
-# Aws.config is used for default configuration.
-# You can construct service object with the same options.
-Aws.config = { access_key_id: '...', secret_access_key: '...', region: 'us-west-2' }
+You can export a default region to ENV:
+
+```
+export AWS_REGION='us-west-2'
 ```
 
-Additionally, the SDK will attempt to load these options from `ENV`:
+Or you can configure a region in code:
 
-    export AWS_ACCESS_KEY_ID='...'
-    export AWS_SECRET_ACCESS_KEY='...'
-    export AWS_REGION='us-west-2'
+```ruby
+# default region
+Aws.config[:region] = 'us-west-2'
+
+# per-service :region
+s3 = Aws::S3.new(region:'us-east-1')
+```
+
+### Credentials
+
+Please take care to never commit credentials to source control.  We
+strongly recommended loading credentials from an external source.  By default,
+the Ruby SDK will attempt to load credentials from the following
+sources:
+
+* ENV['AWS_ACCESS_KEY_ID'] && ENV['AWS_SECRET_ACCESS_KEY']
+* The shared credentials ini file at 'HOME/.aws/credentials'
+* From an instance profile when running on EC2
+
+Alternatively, you can specify your credentials directly using one of the
+following credential classes:
+
+* `Aws::Credentials`
+* `Aws::SharedCredentials`
+* `Aws::InstanceProfileCredentials`
+
+```ruby
+# default credentials
+Aws.config[:credentials] = Aws::SharedCredentials.new(profile_name:'myprofile')
+
+# per-service :credentials
+s3 = Aws::S3.new(credentials: Aws::SharedCredentials.new(profile_name:'myprofile')
+```
 
 ## Basic Usage
 
@@ -61,7 +91,7 @@ s3 = Aws::S3.new
 s3 = Aws.s3 # helper method returns a new client
 ```
 
-Each client provides one operation per API operation. Refer to the
+Each client provides one method per API operation. Refer to the
 [API documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
 for a complete list of available methods.
 
@@ -71,7 +101,7 @@ resp = s3.list_buckets
 puts resp.buckets.map(&:name)
 ```
 
-API methods each accept a hash of params and return a structured response.
+API methods accept a request params as a hash, and return structured responses.
 
 ```ruby
 resp = s3.list_objects(bucket: 'aws-sdk-core', max_keys: 2)
