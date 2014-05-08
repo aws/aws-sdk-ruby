@@ -21,27 +21,27 @@ module AWS
     # You can use this class to get information about a certificate
     # and to delete it.
     #
-    # @attr [String] The name that identifies the server certificate.
+    # @attr [String] name The name that identifies the server certificate.
     #
-    # @attr_reader [String] The stable and unique string identifying
+    # @attr_reader [String] id The stable and unique string identifying
     #   the server certificate.
     #
-    # @attr_reader [Time] The date when the server certificate was
+    # @attr_reader [Time] updload_date The date when the server certificate was
     #   uploaded.
     #
-    # @attr_reader [String] The Amazon Resource Name (ARN)
+    # @attr_reader [String] arn The Amazon Resource Name (ARN)
     #   specifying the server certificate. For more information
     #   about ARNs and how to use them in policies, see
     #   {http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
     #   Identifiers for IAM Entities} in <i>Using AWS Identity and
     #   Access Management</i>.
     #
-    # @attr [String] Path to the server certificate.
+    # @attr [String] path Path to the server certificate.
     #
-    # @attr_reader [String] The contents of the public key
+    # @attr_reader [String] certificate_body The contents of the public key
     #   certificate.
     #
-    # @attr_reader [String] The contents of the public key
+    # @attr_reader [String] certificate_chain The contents of the public key
     #   certificate chain.
     #
     class ServerCertificate < Resource
