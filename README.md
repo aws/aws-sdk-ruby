@@ -163,9 +163,12 @@ The SDK currently supports the following services:
       <td>2014-02-01</td>
     </tr>
     <tr>
-      <td>AWS::ElastiCache</td>
+      <td rowspan="2">AWS::ElastiCache</td>
       <td>2013-06-15</td>
-      <td>Amazon ElastiCache</td>
+      <td rowspan="2">Amazon ElastiCache</td>
+    </tr>
+    <tr>
+      <td>2014-03-24</td>
     </tr>
     <tr>
       <td>AWS::ElasticBeanstalk</td>
