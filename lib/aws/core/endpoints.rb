@@ -25,6 +25,13 @@ module AWS
       end
       module_function :hostname
 
+      def hosted_zone_id(region)
+        region = endpoints['regions'][region] || {}
+        endpoint = region['s3'] || {}
+        endpoint['hostedzoneid']
+      end
+      module_function :hosted_zone_id
+
       def endpoints
         @endpoints ||= begin
           JSON.parse(File.read(File.join(AWS::ROOT, 'endpoints.json')))
