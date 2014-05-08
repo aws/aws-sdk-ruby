@@ -272,7 +272,7 @@ module AWS
         }
 
         # @option [String] :path
-        # @option [String] :profile
+        # @option [String] :profile_name
         def initialize(options = {})
           @path = options[:path] || File.join(Dir.home, '.aws', 'credentials')
           @profile_name = options[:profile_name]
