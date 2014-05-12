@@ -14,6 +14,24 @@
 ---
 :api_version: '2013-01-01'
 :operations:
+- :name: BuildSuggesters
+  :method: :build_suggesters
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    - :required
+  :outputs:
+    :children:
+      BuildSuggestersResult:
+        :ignore: true
+        :children:
+          FieldNames:
+            :ignore: true
+            :children:
+              member:
+                :rename: :field_names
+                :list: true
 - :name: CreateDomain
   :method: :create_domain
   :inputs:
@@ -31,8 +49,6 @@
                 :type: :boolean
               Deleted:
                 :type: :boolean
-              NumSearchableDocs:
-                :type: :integer
               RequiresIndexDocuments:
                 :type: :boolean
               Processing:
@@ -41,6 +57,80 @@
                 :type: :integer
               SearchInstanceCount:
                 :type: :integer
+- :name: DefineAnalysisScheme
+  :method: :define_analysis_scheme
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    AnalysisScheme:
+    - :structure:
+        AnalysisSchemeName:
+        - :string
+        - :required
+        AnalysisSchemeLanguage:
+        - :string
+        - :required
+        AnalysisOptions:
+        - :structure:
+            Synonyms:
+            - :string
+            Stopwords:
+            - :string
+            StemmingDictionary:
+            - :string
+            AlgorithmicStemming:
+            - :string
+    - :required
+  :outputs:
+    :children:
+      DefineAnalysisSchemeResult:
+        :ignore: true
+        :children:
+          AnalysisScheme:
+            :children:
+              Status:
+                :children:
+                  CreationDate:
+                    :type: :time
+                  UpdateDate:
+                    :type: :time
+                  UpdateVersion:
+                    :type: :integer
+                  PendingDeletion:
+                    :type: :boolean
+- :name: DefineExpression
+  :method: :define_expression
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    Expression:
+    - :structure:
+        ExpressionName:
+        - :string
+        - :required
+        ExpressionValue:
+        - :string
+        - :required
+    - :required
+  :outputs:
+    :children:
+      DefineExpressionResult:
+        :ignore: true
+        :children:
+          Expression:
+            :children:
+              Status:
+                :children:
+                  CreationDate:
+                    :type: :time
+                  UpdateDate:
+                    :type: :time
+                  UpdateVersion:
+                    :type: :integer
+                  PendingDeletion:
+                    :type: :boolean
 - :name: DefineIndexField
   :method: :define_index_field
   :inputs:
@@ -55,67 +145,150 @@
         IndexFieldType:
         - :string
         - :required
-        UIntOptions:
+        IntOptions:
         - :structure:
             DefaultValue:
-            - :integer
+            - :long
+            SourceField:
+            - :string
+            FacetEnabled:
+            - :boolean
+            SearchEnabled:
+            - :boolean
+            ReturnEnabled:
+            - :boolean
+            SortEnabled:
+            - :boolean
+        DoubleOptions:
+        - :structure:
+            DefaultValue:
+            - :double
+            SourceField:
+            - :string
+            FacetEnabled:
+            - :boolean
+            SearchEnabled:
+            - :boolean
+            ReturnEnabled:
+            - :boolean
+            SortEnabled:
+            - :boolean
         LiteralOptions:
         - :structure:
             DefaultValue:
             - :string
-            SearchEnabled:
-            - :boolean
+            SourceField:
+            - :string
             FacetEnabled:
             - :boolean
-            ResultEnabled:
+            SearchEnabled:
+            - :boolean
+            ReturnEnabled:
+            - :boolean
+            SortEnabled:
             - :boolean
         TextOptions:
         - :structure:
             DefaultValue:
             - :string
+            SourceField:
+            - :string
+            ReturnEnabled:
+            - :boolean
+            SortEnabled:
+            - :boolean
+            HighlightEnabled:
+            - :boolean
+            AnalysisScheme:
+            - :string
+        DateOptions:
+        - :structure:
+            DefaultValue:
+            - :string
+            SourceField:
+            - :string
             FacetEnabled:
             - :boolean
-            ResultEnabled:
+            SearchEnabled:
             - :boolean
-            TextProcessor:
+            ReturnEnabled:
+            - :boolean
+            SortEnabled:
+            - :boolean
+        LatLonOptions:
+        - :structure:
+            DefaultValue:
             - :string
-        SourceAttributes:
-        - :membered_list:
-          - :structure:
-              SourceDataFunction:
-              - :string
-              - :required
-              SourceDataCopy:
-              - :structure:
-                  SourceName:
-                  - :string
-                  - :required
-                  DefaultValue:
-                  - :string
-              SourceDataTrimTitle:
-              - :structure:
-                  SourceName:
-                  - :string
-                  - :required
-                  DefaultValue:
-                  - :string
-                  Separator:
-                  - :string
-                  Language:
-                  - :string
-              SourceDataMap:
-              - :structure:
-                  SourceName:
-                  - :string
-                  - :required
-                  DefaultValue:
-                  - :string
-                  Cases:
-                  - :map:
-                      :key:
-                      - :string
-                      :value:
-                      - :string
+            SourceField:
+            - :string
+            FacetEnabled:
+            - :boolean
+            SearchEnabled:
+            - :boolean
+            ReturnEnabled:
+            - :boolean
+            SortEnabled:
+            - :boolean
+        IntArrayOptions:
+        - :structure:
+            DefaultValue:
+            - :long
+            SourceFields:
+            - :string
+            FacetEnabled:
+            - :boolean
+            SearchEnabled:
+            - :boolean
+            ReturnEnabled:
+            - :boolean
+        DoubleArrayOptions:
+        - :structure:
+            DefaultValue:
+            - :double
+            SourceFields:
+            - :string
+            FacetEnabled:
+            - :boolean
+            SearchEnabled:
+            - :boolean
+            ReturnEnabled:
+            - :boolean
+        LiteralArrayOptions:
+        - :structure:
+            DefaultValue:
+            - :string
+            SourceFields:
+            - :string
+            FacetEnabled:
+            - :boolean
+            SearchEnabled:
+            - :boolean
+            ReturnEnabled:
+            - :boolean
+        TextArrayOptions:
+        - :structure:
+            DefaultValue:
+            - :string
+            SourceFields:
+            - :string
+            ReturnEnabled:
+            - :boolean
+            HighlightEnabled:
+            - :boolean
+            AnalysisScheme:
+            - :string
+        DateArrayOptions:
+        - :structure:
+            DefaultValue:
+            - :string
+            SourceFields:
+            - :string
+            FacetEnabled:
+            - :boolean
+            SearchEnabled:
+            - :boolean
+            ReturnEnabled:
+            - :boolean
     - :required
   :outputs:
     :children:
@@ -126,41 +299,110 @@
             :children:
               Options:
                 :children:
-                  UIntOptions:
+                  IntOptions:
                     :children:
                       DefaultValue:
                         :type: :integer
-                  LiteralOptions:
-                    :children:
-                      SearchEnabled:
-                        :type: :boolean
                       FacetEnabled:
                         :type: :boolean
-                      ResultEnabled:
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
+                        :type: :boolean
+                  DoubleOptions:
+                    :children:
+                      DefaultValue:
+                        :type: :float
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
+                        :type: :boolean
+                  LiteralOptions:
+                    :children:
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
                         :type: :boolean
                   TextOptions:
                     :children:
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
+                        :type: :boolean
+                      HighlightEnabled:
+                        :type: :boolean
+                  DateOptions:
+                    :children:
                       FacetEnabled:
                         :type: :boolean
-                      ResultEnabled:
+                      SearchEnabled:
                         :type: :boolean
-                  SourceAttributes:
-                    :ignore: true
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
+                        :type: :boolean
+                  LatLonOptions:
                     :children:
-                      member:
-                        :rename: :source_attributes
-                        :list: true
-                        :children:
-                          SourceDataMap:
-                            :children:
-                              Cases:
-                                :ignore: true
-                                :children:
-                                  entry:
-                                    :rename: :cases
-                                    :map:
-                                    - key
-                                    - value
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
+                        :type: :boolean
+                  IntArrayOptions:
+                    :children:
+                      DefaultValue:
+                        :type: :integer
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                  DoubleArrayOptions:
+                    :children:
+                      DefaultValue:
+                        :type: :float
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                  LiteralArrayOptions:
+                    :children:
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                  TextArrayOptions:
+                    :children:
+                      ReturnEnabled:
+                        :type: :boolean
+                      HighlightEnabled:
+                        :type: :boolean
+                  DateArrayOptions:
+                    :children:
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
               Status:
                 :children:
                   CreationDate:
@@ -171,27 +413,60 @@
                     :type: :integer
                   PendingDeletion:
                     :type: :boolean
-- :name: DefineRankExpression
-  :method: :define_rank_expression
+- :name: DefineSuggester
+  :method: :define_suggester
   :inputs:
     DomainName:
     - :string
     - :required
-    RankExpression:
+    Suggester:
     - :structure:
-        RankName:
+        SuggesterName:
         - :string
         - :required
-        RankExpression:
-        - :string
+        DocumentSuggesterOptions:
+        - :structure:
+            SourceField:
+            - :string
+            - :required
+            FuzzyMatching:
+            - :string
+            SortExpression:
+            - :string
         - :required
     - :required
   :outputs:
     :children:
-      DefineRankExpressionResult:
+      DefineSuggesterResult:
         :ignore: true
         :children:
-          RankExpression:
+          Suggester:
+            :children:
+              Status:
+                :children:
+                  CreationDate:
+                    :type: :time
+                  UpdateDate:
+                    :type: :time
+                  UpdateVersion:
+                    :type: :integer
+                  PendingDeletion:
+                    :type: :boolean
+- :name: DeleteAnalysisScheme
+  :method: :delete_analysis_scheme
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    AnalysisSchemeName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteAnalysisSchemeResult:
+        :ignore: true
+        :children:
+          AnalysisScheme:
             :children:
               Status:
                 :children:
@@ -220,8 +495,6 @@
                 :type: :boolean
               Deleted:
                 :type: :boolean
-              NumSearchableDocs:
-                :type: :integer
               RequiresIndexDocuments:
                 :type: :boolean
               Processing:
@@ -230,6 +503,32 @@
                 :type: :integer
               SearchInstanceCount:
                 :type: :integer
+- :name: DeleteExpression
+  :method: :delete_expression
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    ExpressionName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteExpressionResult:
+        :ignore: true
+        :children:
+          Expression:
+            :children:
+              Status:
+                :children:
+                  CreationDate:
+                    :type: :time
+                  UpdateDate:
+                    :type: :time
+                  UpdateVersion:
+                    :type: :integer
+                  PendingDeletion:
+                    :type: :boolean
 - :name: DeleteIndexField
   :method: :delete_index_field
   :inputs:
@@ -248,41 +547,110 @@
             :children:
               Options:
                 :children:
-                  UIntOptions:
+                  IntOptions:
                     :children:
                       DefaultValue:
                         :type: :integer
-                  LiteralOptions:
-                    :children:
-                      SearchEnabled:
-                        :type: :boolean
                       FacetEnabled:
                         :type: :boolean
-                      ResultEnabled:
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
+                        :type: :boolean
+                  DoubleOptions:
+                    :children:
+                      DefaultValue:
+                        :type: :float
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
+                        :type: :boolean
+                  LiteralOptions:
+                    :children:
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
                         :type: :boolean
                   TextOptions:
                     :children:
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
+                        :type: :boolean
+                      HighlightEnabled:
+                        :type: :boolean
+                  DateOptions:
+                    :children:
                       FacetEnabled:
                         :type: :boolean
-                      ResultEnabled:
+                      SearchEnabled:
                         :type: :boolean
-                  SourceAttributes:
-                    :ignore: true
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
+                        :type: :boolean
+                  LatLonOptions:
                     :children:
-                      member:
-                        :rename: :source_attributes
-                        :list: true
-                        :children:
-                          SourceDataMap:
-                            :children:
-                              Cases:
-                                :ignore: true
-                                :children:
-                                  entry:
-                                    :rename: :cases
-                                    :map:
-                                    - key
-                                    - value
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                      SortEnabled:
+                        :type: :boolean
+                  IntArrayOptions:
+                    :children:
+                      DefaultValue:
+                        :type: :integer
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                  DoubleArrayOptions:
+                    :children:
+                      DefaultValue:
+                        :type: :float
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                  LiteralArrayOptions:
+                    :children:
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
+                  TextArrayOptions:
+                    :children:
+                      ReturnEnabled:
+                        :type: :boolean
+                      HighlightEnabled:
+                        :type: :boolean
+                  DateArrayOptions:
+                    :children:
+                      FacetEnabled:
+                        :type: :boolean
+                      SearchEnabled:
+                        :type: :boolean
+                      ReturnEnabled:
+                        :type: :boolean
               Status:
                 :children:
                   CreationDate:
@@ -293,21 +661,21 @@
                     :type: :integer
                   PendingDeletion:
                     :type: :boolean
-- :name: DeleteRankExpression
-  :method: :delete_rank_expression
+- :name: DeleteSuggester
+  :method: :delete_suggester
   :inputs:
     DomainName:
     - :string
     - :required
-    RankName:
+    SuggesterName:
     - :string
     - :required
   :outputs:
     :children:
-      DeleteRankExpressionResult:
+      DeleteSuggesterResult:
         :ignore: true
         :children:
-          RankExpression:
+          Suggester:
             :children:
               Status:
                 :children:
@@ -319,12 +687,47 @@
                     :type: :integer
                   PendingDeletion:
                     :type: :boolean
+- :name: DescribeAnalysisSchemes
+  :method: :describe_analysis_schemes
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    AnalysisSchemeNames:
+    - :membered_list:
+      - :string
+    Deployed:
+    - :boolean
+  :outputs:
+    :children:
+      DescribeAnalysisSchemesResult:
+        :ignore: true
+        :children:
+          AnalysisSchemes:
+            :ignore: true
+            :children:
+              member:
+                :rename: :analysis_schemes
+                :list: true
+                :children:
+                  Status:
+                    :children:
+                      CreationDate:
+                        :type: :time
+                      UpdateDate:
+                        :type: :time
+                      UpdateVersion:
+                        :type: :integer
+                      PendingDeletion:
+                        :type: :boolean
 - :name: DescribeAvailabilityOptions
   :method: :describe_availability_options
   :inputs:
     DomainName:
     - :string
     - :required
+    Deployed:
+    - :boolean
   :outputs:
     :children:
       DescribeAvailabilityOptionsResult:
@@ -334,29 +737,6 @@
             :children:
               Options:
                 :type: :boolean
-              Status:
-                :children:
-                  CreationDate:
-                    :type: :time
-                  UpdateDate:
-                    :type: :time
-                  UpdateVersion:
-                    :type: :integer
-                  PendingDeletion:
-                    :type: :boolean
-- :name: DescribeDefaultSearchField
-  :method: :describe_default_search_field
-  :inputs:
-    DomainName:
-    - :string
-    - :required
-  :outputs:
-    :children:
-      DescribeDefaultSearchFieldResult:
-        :ignore: true
-        :children:
-          DefaultSearchField:
-            :children:
               Status:
                 :children:
                   CreationDate:
@@ -389,8 +769,6 @@
                     :type: :boolean
                   Deleted:
                     :type: :boolean
-                  NumSearchableDocs:
-                    :type: :integer
                   RequiresIndexDocuments:
                     :type: :boolean
                   Processing:
@@ -399,6 +777,39 @@
                     :type: :integer
                   SearchInstanceCount:
                     :type: :integer
+- :name: DescribeExpressions
+  :method: :describe_expressions
+  :inputs:
+    DomainName:
+    - :string
+    - :required
+    ExpressionNames:
+    - :membered_list:
+      - :string
+    Deployed:
+    - :boolean
+  :outputs:
+    :children:
+      DescribeExpressionsResult:
+        :ignore: true
+        :children:
+          Expressions:
+            :ignore: true
+            :children:
+              member:
+                :rename: :expressions
+                :list: true
+                :children:
+                  Status:
+                    :children:
+                      CreationDate:
+                        :type: :time
+                      UpdateDate:
+                        :type: :time
+                      UpdateVersion:
+                        :type: :integer
+                      PendingDeletion:
+                        :type: :boolean
 - :name: DescribeIndexFields
   :method: :describe_index_fields
   :inputs:
@@ -408,6 +819,8 @@
     FieldNames:
     - :membered_list:
       - :string
+    Deployed:
+    - :boolean
   :outputs:
     :children:
       DescribeIndexFieldsResult:
@@ -422,41 +835,110 @@
                 :children:
                   Options:
                     :children:
-                      UIntOptions:
+                      IntOptions:
                         :children:
                           DefaultValue:
                             :type: :integer
-                      LiteralOptions:
-                        :children:
-                          SearchEnabled:
-                            :type: :boolean
                           FacetEnabled:
                             :type: :boolean
-                          ResultEnabled:
+                          SearchEnabled:
+                            :type: :boolean
+                          ReturnEnabled:
+                            :type: :boolean
+                          SortEnabled:
+                            :type: :boolean
+                      DoubleOptions:
+                        :children:
+                          DefaultValue:
+                            :type: :float
+                          FacetEnabled:
+                            :type: :boolean
+                          SearchEnabled:
+                            :type: :boolean
+                          ReturnEnabled:
+                            :type: :boolean
+                          SortEnabled:
+                            :type: :boolean
+                      LiteralOptions:
+                        :children:
+                          FacetEnabled:
+                            :type: :boolean
+                          SearchEnabled:
+                            :type: :boolean
+                          ReturnEnabled:
+                            :type: :boolean
+                          SortEnabled:
                             :type: :boolean
                       TextOptions:
                         :children:
+                          ReturnEnabled:
+                            :type: :boolean
+                          SortEnabled:
+                            :type: :boolean
+                          HighlightEnabled:
+                            :type: :boolean
+                      DateOptions:
+                        :children:
                           FacetEnabled:
                             :type: :boolean
-                          ResultEnabled:
+                          SearchEnabled:
                             :type: :boolean
-                      SourceAttributes:
-                        :ignore: true
+                          ReturnEnabled:
+                            :type: :boolean
+                          SortEnabled:
+                            :type: :boolean
+                      LatLonOptions:
                         :children:
-                          member:
-                            :rename: :source_attributes
-                            :list: true
-                            :children:
-                              SourceDataMap:
-                                :children:
-                                  Cases:
-                                    :ignore: true
-                                    :children:
-                                      entry:
-                                        :rename: :cases
-                                        :map:
-                                        - key
-                                        - value
+                          FacetEnabled:
+                            :type: :boolean
+                          SearchEnabled:
+                            :type: :boolean
+                          ReturnEnabled:
+                            :type: :boolean
+                          SortEnabled:
+                            :type: :boolean
+                      IntArrayOptions:
+                        :children:
+                          DefaultValue:
+                            :type: :integer
+                          FacetEnabled:
+                            :type: :boolean
+                          SearchEnabled:
+                            :type: :boolean
+                          ReturnEnabled:
+                            :type: :boolean
+                      DoubleArrayOptions:
+                        :children:
+                          DefaultValue:
+                            :type: :float
+                          FacetEnabled:
+                            :type: :boolean
+                          SearchEnabled:
+                            :type: :boolean
+                          ReturnEnabled:
+                            :type: :boolean
+                      LiteralArrayOptions:
+                        :children:
+                          FacetEnabled:
+                            :type: :boolean
+                          SearchEnabled:
+                            :type: :boolean
+                          ReturnEnabled:
+                            :type: :boolean
+                      TextArrayOptions:
+                        :children:
+                          ReturnEnabled:
+                            :type: :boolean
+                          HighlightEnabled:
+                            :type: :boolean
+                      DateArrayOptions:
+                        :children:
+                          FacetEnabled:
+                            :type: :boolean
+                          SearchEnabled:
+                            :type: :boolean
+                          ReturnEnabled:
+                            :type: :boolean
                   Status:
                     :children:
                       CreationDate:
@@ -467,43 +949,41 @@
                         :type: :integer
                       PendingDeletion:
                         :type: :boolean
-- :name: DescribeRankExpressions
-  :method: :describe_rank_expressions
+- :name: DescribeScalingParameters
+  :method: :describe_scaling_parameters
   :inputs:
     DomainName:
     - :string
     - :required
-    RankNames:
-    - :membered_list:
-      - :string
   :outputs:
     :children:
-      DescribeRankExpressionsResult:
+      DescribeScalingParametersResult:
         :ignore: true
         :children:
-          RankExpressions:
-            :ignore: true
+          ScalingParameters:
             :children:
-              member:
-                :rename: :rank_expressions
-                :list: true
+              Options:
                 :children:
-                  Status:
-                    :children:
-                      CreationDate:
-                        :type: :time
-                      UpdateDate:
-                        :type: :time
-                      UpdateVersion:
-                        :type: :integer
-                      PendingDeletion:
-                        :type: :boolean
+                  DesiredReplicationCount:
+                    :type: :integer
+              Status:
+                :children:
+                  CreationDate:
+                    :type: :time
+                  UpdateDate:
+                    :type: :time
+                  UpdateVersion:
+                    :type: :integer
+                  PendingDeletion:
+                    :type: :boolean
 - :name: DescribeServiceAccessPolicies
   :method: :describe_service_access_policies
   :inputs:
     DomainName:
     - :string
     - :required
+    Deployed:
+    - :boolean
   :outputs:
     :children:
       DescribeServiceAccessPoliciesResult:
@@ -521,75 +1001,39 @@
                     :type: :integer
                   PendingDeletion:
                     :type: :boolean
-- :name: DescribeStemmingOptions
-  :method: :describe_stemming_options
+- :name: DescribeSuggesters
+  :method: :describe_suggesters
   :inputs:
     DomainName:
     - :string
     - :required
+    SuggesterNames:
+    - :membered_list:
+      - :string
+    Deployed:
+    - :boolean
   :outputs:
     :children:
-      DescribeStemmingOptionsResult:
+      DescribeSuggestersResult:
         :ignore: true
         :children:
-          Stems:
+          Suggesters:
+            :ignore: true
             :children:
-              Status:
+              member:
+                :rename: :suggesters
+                :list: true
                 :children:
-                  CreationDate:
-                    :type: :time
-                  UpdateDate:
-                    :type: :time
-                  UpdateVersion:
-                    :type: :integer
-                  PendingDeletion:
-                    :type: :boolean
-- :name: DescribeStopwordOptions
-  :method: :describe_stopword_options
-  :inputs:
-    DomainName:
-    - :string
-    - :required
-  :outputs:
-    :children:
-      DescribeStopwordOptionsResult:
-        :ignore: true
-        :children:
-          Stopwords:
-            :children:
-              Status:
-                :children:
-                  CreationDate:
-                    :type: :time
-                  UpdateDate:
-                    :type: :time
-                  UpdateVersion:
-                    :type: :integer
-                  PendingDeletion:
-                    :type: :boolean
-- :name: DescribeSynonymOptions
-  :method: :describe_synonym_options
-  :inputs:
-    DomainName:
-    - :string
-    - :required
-  :outputs:
-    :children:
-      DescribeSynonymOptionsResult:
-        :ignore: true
-        :children:
-          Synonyms:
-            :children:
-              Status:
-                :children:
-                  CreationDate:
-                    :type: :time
-                  UpdateDate:
-                    :type: :time
-                  UpdateVersion:
-                    :type: :integer
-                  PendingDeletion:
-                    :type: :boolean
+                  Status:
+                    :children:
+                      CreationDate:
+                        :type: :time
+                      UpdateDate:
+                        :type: :time
+                      UpdateVersion:
+                        :type: :integer
+                      PendingDeletion:
+                        :type: :boolean
 - :name: IndexDocuments
   :method: :index_documents
   :inputs:
@@ -608,6 +1052,22 @@
               member:
                 :rename: :field_names
                 :list: true
+- :name: ListDomainNames
+  :method: :list_domain_names
+  :inputs: {}
+  :outputs:
+    :children:
+      ListDomainNamesResult:
+        :ignore: true
+        :children:
+          DomainNames:
+            :ignore: true
+            :children:
+              entry:
+                :rename: :domain_names
+                :map:
+                - key
+                - value
 - :name: UpdateAvailabilityOptions
   :method: :update_availability_options
   :inputs:
@@ -636,22 +1096,30 @@
                     :type: :integer
                   PendingDeletion:
                     :type: :boolean
-- :name: UpdateDefaultSearchField
-  :method: :update_default_search_field
+- :name: UpdateScalingParameters
+  :method: :update_scaling_parameters
   :inputs:
     DomainName:
     - :string
     - :required
-    DefaultSearchField:
-    - :string
+    ScalingParameters:
+    - :structure:
+        DesiredInstanceType:
+        - :string
+        DesiredReplicationCount:
+        - :integer
     - :required
   :outputs:
     :children:
-      UpdateDefaultSearchFieldResult:
+      UpdateScalingParametersResult:
         :ignore: true
         :children:
-          DefaultSearchField:
+          ScalingParameters:
             :children:
+              Options:
+                :children:
+                  DesiredReplicationCount:
+                    :type: :integer
               Status:
                 :children:
                   CreationDate:
@@ -677,84 +1145,6 @@
         :ignore: true
         :children:
           AccessPolicies:
-            :children:
-              Status:
-                :children:
-                  CreationDate:
-                    :type: :time
-                  UpdateDate:
-                    :type: :time
-                  UpdateVersion:
-                    :type: :integer
-                  PendingDeletion:
-                    :type: :boolean
-- :name: UpdateStemmingOptions
-  :method: :update_stemming_options
-  :inputs:
-    DomainName:
-    - :string
-    - :required
-    Stems:
-    - :string
-    - :required
-  :outputs:
-    :children:
-      UpdateStemmingOptionsResult:
-        :ignore: true
-        :children:
-          Stems:
-            :children:
-              Status:
-                :children:
-                  CreationDate:
-                    :type: :time
-                  UpdateDate:
-                    :type: :time
-                  UpdateVersion:
-                    :type: :integer
-                  PendingDeletion:
-                    :type: :boolean
-- :name: UpdateStopwordOptions
-  :method: :update_stopword_options
-  :inputs:
-    DomainName:
-    - :string
-    - :required
-    Stopwords:
-    - :string
-    - :required
-  :outputs:
-    :children:
-      UpdateStopwordOptionsResult:
-        :ignore: true
-        :children:
-          Stopwords:
-            :children:
-              Status:
-                :children:
-                  CreationDate:
-                    :type: :time
-                  UpdateDate:
-                    :type: :time
-                  UpdateVersion:
-                    :type: :integer
-                  PendingDeletion:
-                    :type: :boolean
-- :name: UpdateSynonymOptions
-  :method: :update_synonym_options
-  :inputs:
-    DomainName:
-    - :string
-    - :required
-    Synonyms:
-    - :string
-    - :required
-  :outputs:
-    :children:
-      UpdateSynonymOptionsResult:
-        :ignore: true
-        :children:
-          Synonyms:
             :children:
               Status:
                 :children:
