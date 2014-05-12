@@ -69,10 +69,13 @@ module AWS
           end
         end
 
+        token = client.credential_provider.session_token
+
         request.add_param("X-Amz-Algorithm", "AWS4-HMAC-SHA256")
         request.add_param("X-Amz-Date", now)
         request.add_param("X-Amz-SignedHeaders", signed_headers)
         request.add_param("X-Amz-Expires", seconds_away(options[:expires]))
+        request.add_param('X-Amz-Security-Token', token) if token
         request.add_param("X-Amz-Credential", signer.credential(now))
         request.add_param("X-Amz-Signature", signature(request, now))
 
