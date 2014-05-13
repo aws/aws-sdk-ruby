@@ -240,8 +240,10 @@ module AWS
         case type
         when "S"  then { :s  => value }
         when "N"  then { :n  => value }
+        when "B"  then { :b  => value }
         when "SS" then { :ss => value }
         when "NS" then { :ns => value }
+        when "BS" then { :bs => value }
         else
           raise "unhandled key type: #{type.inspect}"
         end
