@@ -159,7 +159,7 @@
         :ip_address:
           :name: IPAddress
           :type: :string
-          :required: true
+          :required: false
           :position: 0
         :port:
           :name: Port
