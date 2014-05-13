@@ -22,6 +22,20 @@ module AWS
     #
     module TaggedCollection
 
+      # Filters the collection by a paired tag key and value.
+      #
+      #    ec2.instances.with_tag('role', 'web')
+      #
+      # You can filter a single tag key with multiple values:
+      #
+      #    ec2.instances.with_tag('role', ['web', 'db'])
+      #
+      # @param [String] tag_key
+      # @param [String, Array<String>] tag_value
+      def with_tag(tag_key, *values)
+        filter("tag:#{tag_key}", *values)
+      end
+
       # Filter the collection by one or more tag keys.  If you pass multiple
       # tag keys they will be be treated as OR conditions.  If you want to
       # AND them together call tagged multiple times (chained).
