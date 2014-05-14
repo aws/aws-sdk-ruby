@@ -30,6 +30,8 @@ module AWS
 
       include Core::Model
 
+      class EmptyUploadError < StandardError; end
+      
       # @api private
       def initialize(object, id, options = {})
         @id = id
@@ -273,7 +275,7 @@ module AWS
           complete_opts = get_complete_opts(part_numbers)
         end
 
-        raise "no parts uploaded" if complete_opts[:parts].empty?
+        raise EmptyUploadError.new("Unable to complete an empty upload.") if complete_opts[:parts].empty?
 
         resp = client.complete_multipart_upload(complete_opts)
         if resp.data[:version_id]

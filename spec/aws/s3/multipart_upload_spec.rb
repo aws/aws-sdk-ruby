@@ -412,7 +412,7 @@ module AWS
             it 'should raise an error' do
               upload.stub(:completed_parts).and_return([])
               lambda { upload.complete }.
-                should raise_error("no parts uploaded")
+                should raise_error(MultipartUpload::EmptyUploadError, "Unable to complete an empty upload.")
             end
 
           end
@@ -463,7 +463,7 @@ module AWS
             it 'should raise an error' do
               resp.stub(:parts).and_return([])
               lambda { upload.complete(:remote_parts) }.
-                should raise_error("no parts uploaded")
+                should raise_error(MultipartUpload::EmptyUploadError, "Unable to complete an empty upload.")
             end
 
           end
