@@ -63,6 +63,14 @@
           "gateway_type": {
             "type": "string",
             "serialized_name": "GatewayType"
+          },
+          "tape_drive_type": {
+            "type": "string",
+            "serialized_name": "TapeDriveType"
+          },
+          "medium_changer_type": {
+            "type": "string",
+            "serialized_name": "MediumChangerType"
           }
         }
       },
@@ -1222,6 +1230,10 @@
                 "tape_size_in_bytes": {
                   "type": "integer",
                   "serialized_name": "TapeSizeInBytes"
+                },
+                "tape_status": {
+                  "type": "string",
+                  "serialized_name": "TapeStatus"
                 }
               }
             }
@@ -1404,6 +1416,18 @@
                   "type": "string",
                   "serialized_name": "VTLDeviceARN"
                 },
+                "vtl_device_type": {
+                  "type": "string",
+                  "serialized_name": "VTLDeviceType"
+                },
+                "vtl_device_vendor": {
+                  "type": "string",
+                  "serialized_name": "VTLDeviceVendor"
+                },
+                "vtl_device_product_identifier": {
+                  "type": "string",
+                  "serialized_name": "VTLDeviceProductIdentifier"
+                },
                 "device_iscsi_attributes": {
                   "type": "structure",
                   "serialized_name": "DeviceiSCSIAttributes",
@@ -1539,6 +1563,10 @@
                 "gateway_type": {
                   "type": "string",
                   "serialized_name": "GatewayType"
+                },
+                "gateway_operational_state": {
+                  "type": "string",
+                  "serialized_name": "GatewayOperationalState"
                 }
               }
             }

@@ -345,6 +345,10 @@
                 "type": "string",
                 "serialized_name": "Id"
               },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
               "pipeline_id": {
                 "type": "string",
                 "serialized_name": "PipelineId"
@@ -1109,6 +1113,16 @@
               "channels": {
                 "type": "string",
                 "serialized_name": "Channels"
+              },
+              "codec_options": {
+                "type": "structure",
+                "serialized_name": "CodecOptions",
+                "members": {
+                  "profile": {
+                    "type": "string",
+                    "serialized_name": "Profile"
+                  }
+                }
               }
             }
           },
@@ -1163,6 +1177,10 @@
                 "type": "string",
                 "serialized_name": "Id"
               },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
               "name": {
                 "type": "string",
                 "serialized_name": "Name"
@@ -1194,6 +1212,16 @@
                   "channels": {
                     "type": "string",
                     "serialized_name": "Channels"
+                  },
+                  "codec_options": {
+                    "type": "structure",
+                    "serialized_name": "CodecOptions",
+                    "members": {
+                      "profile": {
+                        "type": "string",
+                        "serialized_name": "Profile"
+                      }
+                    }
                   }
                 }
               },
@@ -1436,6 +1464,10 @@
                 "id": {
                   "type": "string",
                   "serialized_name": "Id"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
                 },
                 "pipeline_id": {
                   "type": "string",
@@ -1832,6 +1864,10 @@
                   "type": "string",
                   "serialized_name": "Id"
                 },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
                 "pipeline_id": {
                   "type": "string",
                   "serialized_name": "PipelineId"
@@ -2188,7 +2224,27 @@
     "list_pipelines": {
       "name": "ListPipelines",
       "http_method": "GET",
-      "http_path": "/2012-09-25/pipelines",
+      "http_path": "/2012-09-25/pipelines?Ascending={ascending}&PageToken={page_token}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "page_token": "next_page_token"
+          }
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "ascending": {
+            "type": "string",
+            "location": "uri"
+          },
+          "page_token": {
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
       "output": {
         "type": "output",
         "members": {
@@ -2326,6 +2382,10 @@
                 }
               }
             }
+          },
+          "next_page_token": {
+            "type": "string",
+            "serialized_name": "NextPageToken"
           }
         }
       }
@@ -2333,7 +2393,27 @@
     "list_presets": {
       "name": "ListPresets",
       "http_method": "GET",
-      "http_path": "/2012-09-25/presets",
+      "http_path": "/2012-09-25/presets?Ascending={ascending}&PageToken={page_token}",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "page_token": "next_page_token"
+          }
+        }
+      },
+      "input": {
+        "type": "input",
+        "members": {
+          "ascending": {
+            "type": "string",
+            "location": "uri"
+          },
+          "page_token": {
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
       "output": {
         "type": "output",
         "members": {
@@ -2346,6 +2426,10 @@
                 "id": {
                   "type": "string",
                   "serialized_name": "Id"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
                 },
                 "name": {
                   "type": "string",
@@ -2378,6 +2462,16 @@
                     "channels": {
                       "type": "string",
                       "serialized_name": "Channels"
+                    },
+                    "codec_options": {
+                      "type": "structure",
+                      "serialized_name": "CodecOptions",
+                      "members": {
+                        "profile": {
+                          "type": "string",
+                          "serialized_name": "Profile"
+                        }
+                      }
                     }
                   }
                 },
@@ -2542,6 +2636,10 @@
                 }
               }
             }
+          },
+          "next_page_token": {
+            "type": "string",
+            "serialized_name": "NextPageToken"
           }
         }
       }
@@ -2570,6 +2668,10 @@
               "id": {
                 "type": "string",
                 "serialized_name": "Id"
+              },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
               },
               "pipeline_id": {
                 "type": "string",
@@ -3096,6 +3198,10 @@
                 "type": "string",
                 "serialized_name": "Id"
               },
+              "arn": {
+                "type": "string",
+                "serialized_name": "Arn"
+              },
               "name": {
                 "type": "string",
                 "serialized_name": "Name"
@@ -3127,6 +3233,16 @@
                   "channels": {
                     "type": "string",
                     "serialized_name": "Channels"
+                  },
+                  "codec_options": {
+                    "type": "structure",
+                    "serialized_name": "CodecOptions",
+                    "members": {
+                      "profile": {
+                        "type": "string",
+                        "serialized_name": "Profile"
+                      }
+                    }
                   }
                 }
               },

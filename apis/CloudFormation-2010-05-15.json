@@ -78,6 +78,10 @@
                 "parameter_value": {
                   "type": "string",
                   "serialized_name": "ParameterValue"
+                },
+                "use_previous_value": {
+                  "type": "boolean",
+                  "serialized_name": "UsePreviousValue"
                 }
               }
             }
@@ -500,6 +504,10 @@
                       "parameter_value": {
                         "type": "string",
                         "serialized_name": "ParameterValue"
+                      },
+                      "use_previous_value": {
+                        "type": "boolean",
+                        "serialized_name": "UsePreviousValue"
                       }
                     }
                   }
@@ -639,6 +647,10 @@
                 "parameter_value": {
                   "type": "string",
                   "serialized_name": "ParameterValue"
+                },
+                "use_previous_value": {
+                  "type": "boolean",
+                  "serialized_name": "UsePreviousValue"
                 }
               }
             }
@@ -954,6 +966,10 @@
             "type": "string",
             "serialized_name": "TemplateURL"
           },
+          "use_previous_template": {
+            "type": "boolean",
+            "serialized_name": "UsePreviousTemplate"
+          },
           "stack_policy_during_update_body": {
             "type": "string",
             "serialized_name": "StackPolicyDuringUpdateBody"
@@ -975,6 +991,10 @@
                 "parameter_value": {
                   "type": "string",
                   "serialized_name": "ParameterValue"
+                },
+                "use_previous_value": {
+                  "type": "boolean",
+                  "serialized_name": "UsePreviousValue"
                 }
               }
             }
@@ -996,6 +1016,13 @@
           "stack_policy_url": {
             "type": "string",
             "serialized_name": "StackPolicyURL"
+          },
+          "notification_arns": {
+            "type": "list",
+            "serialized_name": "NotificationARNs",
+            "members": {
+              "type": "string"
+            }
           }
         }
       },

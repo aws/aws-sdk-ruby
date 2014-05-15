@@ -3063,6 +3063,13 @@
       "name": "DescribeSnapshots",
       "http_method": "POST",
       "http_path": "/",
+      "metadata": {
+        "paging": {
+          "tokens": {
+            "marker": "marker"
+          }
+        }
+      },
       "input": {
         "type": "input",
         "members": {

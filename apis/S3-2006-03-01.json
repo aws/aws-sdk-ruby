@@ -118,26 +118,26 @@
       "output": {
         "type": "output",
         "members": {
+          "location": {
+            "type": "string",
+            "serialized_name": "Location"
+          },
           "bucket": {
             "type": "string",
             "serialized_name": "Bucket"
           },
-          "etag": {
+          "key": {
             "type": "string",
-            "serialized_name": "ETag"
+            "serialized_name": "Key"
           },
           "expiration": {
             "type": "rfc822_timestamp",
             "location": "header",
             "serialized_name": "x-amz-expiration"
           },
-          "key": {
+          "etag": {
             "type": "string",
-            "serialized_name": "Key"
-          },
-          "location": {
-            "type": "string",
-            "serialized_name": "Location"
+            "serialized_name": "ETag"
           },
           "server_side_encryption": {
             "type": "string",
@@ -212,7 +212,7 @@
             "serialized_name": "x-amz-copy-source"
           },
           "copy_source_if_match": {
-            "type": "rfc822_timestamp",
+            "type": "string",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-match"
           },
@@ -222,7 +222,7 @@
             "serialized_name": "x-amz-copy-source-if-modified-since"
           },
           "copy_source_if_none_match": {
-            "type": "rfc822_timestamp",
+            "type": "string",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-none-match"
           },
@@ -317,20 +317,20 @@
                 "serialized_name": "ETag"
               },
               "last_modified": {
-                "type": "string",
+                "type": "rfc822_timestamp",
                 "serialized_name": "LastModified"
               }
             }
+          },
+          "expiration": {
+            "type": "rfc822_timestamp",
+            "location": "header",
+            "serialized_name": "x-amz-expiration"
           },
           "copy_source_version_id": {
             "type": "string",
             "location": "header",
             "serialized_name": "x-amz-copy-source-version-id"
-          },
-          "expiration": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-expiration"
           },
           "server_side_encryption": {
             "type": "string",
@@ -359,9 +359,7 @@
               "private",
               "public-read",
               "public-read-write",
-              "authenticated-read",
-              "bucket-owner-read",
-              "bucket-owner-full-control"
+              "authenticated-read"
             ]
           },
           "bucket": {
@@ -558,6 +556,10 @@
             "type": "string",
             "serialized_name": "Key"
           },
+          "upload_id": {
+            "type": "string",
+            "serialized_name": "UploadId"
+          },
           "server_side_encryption": {
             "type": "string",
             "location": "header",
@@ -565,10 +567,6 @@
             "enum": [
               "AES256"
             ]
-          },
-          "upload_id": {
-            "type": "string",
-            "serialized_name": "UploadId"
           }
         }
       }
@@ -769,14 +767,6 @@
             "members": {
               "type": "structure",
               "members": {
-                "delete_marker": {
-                  "type": "boolean",
-                  "serialized_name": "DeleteMarker"
-                },
-                "delete_marker_version_id": {
-                  "type": "string",
-                  "serialized_name": "DeleteMarkerVersionId"
-                },
                 "key": {
                   "type": "string",
                   "serialized_name": "Key"
@@ -784,6 +774,14 @@
                 "version_id": {
                   "type": "string",
                   "serialized_name": "VersionId"
+                },
+                "delete_marker": {
+                  "type": "boolean",
+                  "serialized_name": "DeleteMarker"
+                },
+                "delete_marker_version_id": {
+                  "type": "string",
+                  "serialized_name": "DeleteMarkerVersionId"
                 }
               }
             }
@@ -794,21 +792,21 @@
             "members": {
               "type": "structure",
               "members": {
-                "code": {
-                  "type": "string",
-                  "serialized_name": "Code"
-                },
                 "key": {
                   "type": "string",
                   "serialized_name": "Key"
                 },
-                "message": {
-                  "type": "string",
-                  "serialized_name": "Message"
-                },
                 "version_id": {
                   "type": "string",
                   "serialized_name": "VersionId"
+                },
+                "code": {
+                  "type": "string",
+                  "serialized_name": "Code"
+                },
+                "message": {
+                  "type": "string",
+                  "serialized_name": "Message"
                 }
               }
             }
@@ -833,6 +831,20 @@
       "output": {
         "type": "output",
         "members": {
+          "owner": {
+            "type": "structure",
+            "serialized_name": "Owner",
+            "members": {
+              "display_name": {
+                "type": "string",
+                "serialized_name": "DisplayName"
+              },
+              "id": {
+                "type": "string",
+                "serialized_name": "ID"
+              }
+            }
+          },
           "grants": {
             "type": "list",
             "serialized_name": "AccessControlList",
@@ -889,20 +901,6 @@
                     "READ_ACP"
                   ]
                 }
-              }
-            }
-          },
-          "owner": {
-            "type": "structure",
-            "serialized_name": "Owner",
-            "members": {
-              "display_name": {
-                "type": "string",
-                "serialized_name": "DisplayName"
-              },
-              "id": {
-                "type": "string",
-                "serialized_name": "ID"
               }
             }
           }
@@ -1071,7 +1069,18 @@
         "members": {
           "location_constraint": {
             "type": "string",
-            "serialized_name": "LocationConstraint"
+            "serialized_name": "LocationConstraint",
+            "enum": [
+              "EU",
+              "eu-west-1",
+              "us-west-1",
+              "us-west-2",
+              "ap-southeast-1",
+              "ap-southeast-2",
+              "ap-northeast-1",
+              "sa-east-1",
+              ""
+            ]
           }
         }
       }
@@ -1148,7 +1157,12 @@
                     },
                     "permission": {
                       "type": "string",
-                      "serialized_name": "Permission"
+                      "serialized_name": "Permission",
+                      "enum": [
+                        "FULL_CONTROL",
+                        "READ",
+                        "WRITE"
+                      ]
                     }
                   }
                 }
@@ -1307,20 +1321,20 @@
       "output": {
         "type": "output",
         "members": {
-          "mfa_delete": {
-            "type": "string",
-            "serialized_name": "MFADelete",
-            "enum": [
-              "Enabled",
-              "Disabled"
-            ]
-          },
           "status": {
             "type": "string",
             "serialized_name": "Status",
             "enum": [
               "Enabled",
               "Suspended"
+            ]
+          },
+          "mfa_delete": {
+            "type": "string",
+            "serialized_name": "MFADelete",
+            "enum": [
+              "Enabled",
+              "Disabled"
             ]
           }
         }
@@ -1343,26 +1357,6 @@
       "output": {
         "type": "output",
         "members": {
-          "error_document": {
-            "type": "structure",
-            "serialized_name": "ErrorDocument",
-            "members": {
-              "key": {
-                "type": "string",
-                "serialized_name": "Key"
-              }
-            }
-          },
-          "index_document": {
-            "type": "structure",
-            "serialized_name": "IndexDocument",
-            "members": {
-              "suffix": {
-                "type": "string",
-                "serialized_name": "Suffix"
-              }
-            }
-          },
           "redirect_all_requests_to": {
             "type": "structure",
             "serialized_name": "RedirectAllRequestsTo",
@@ -1378,6 +1372,26 @@
                   "http",
                   "https"
                 ]
+              }
+            }
+          },
+          "index_document": {
+            "type": "structure",
+            "serialized_name": "IndexDocument",
+            "members": {
+              "suffix": {
+                "type": "string",
+                "serialized_name": "Suffix"
+              }
+            }
+          },
+          "error_document": {
+            "type": "structure",
+            "serialized_name": "ErrorDocument",
+            "members": {
+              "key": {
+                "type": "string",
+                "serialized_name": "Key"
               }
             }
           },
@@ -1513,14 +1527,54 @@
       "output": {
         "type": "output",
         "members": {
+          "body": {
+            "type": "blob",
+            "serialized_name": "Body"
+          },
+          "delete_marker": {
+            "type": "boolean",
+            "location": "header",
+            "serialized_name": "x-amz-delete-marker"
+          },
           "accept_ranges": {
             "type": "string",
             "location": "header",
             "serialized_name": "accept-ranges"
           },
-          "body": {
-            "type": "blob",
-            "serialized_name": "Body"
+          "expiration": {
+            "type": "rfc822_timestamp",
+            "location": "header",
+            "serialized_name": "x-amz-expiration"
+          },
+          "restore": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-restore"
+          },
+          "last_modified": {
+            "type": "rfc822_timestamp",
+            "location": "header",
+            "serialized_name": "Last-Modified"
+          },
+          "content_length": {
+            "type": "integer",
+            "location": "header",
+            "serialized_name": "Content-Length"
+          },
+          "etag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          },
+          "missing_meta": {
+            "type": "integer",
+            "location": "header",
+            "serialized_name": "x-amz-missing-meta"
+          },
+          "version_id": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-version-id"
           },
           "cache_control": {
             "type": "string",
@@ -1542,40 +1596,28 @@
             "location": "header",
             "serialized_name": "Content-Language"
           },
-          "content_length": {
-            "type": "integer",
-            "location": "header",
-            "serialized_name": "Content-Length"
-          },
           "content_type": {
             "type": "string",
             "location": "header",
             "serialized_name": "Content-Type"
-          },
-          "delete_marker": {
-            "type": "boolean",
-            "location": "header",
-            "serialized_name": "x-amz-delete-marker"
-          },
-          "etag": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "ETag"
-          },
-          "expiration": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-expiration"
           },
           "expires": {
             "type": "rfc822_timestamp",
             "location": "header",
             "serialized_name": "Expires"
           },
-          "last_modified": {
-            "type": "rfc822_timestamp",
+          "website_redirect_location": {
+            "type": "string",
             "location": "header",
-            "serialized_name": "Last-Modified"
+            "serialized_name": "x-amz-website-redirect-location"
+          },
+          "server_side_encryption": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption",
+            "enum": [
+              "AES256"
+            ]
           },
           "metadata": {
             "type": "map",
@@ -1587,34 +1629,6 @@
             "members": {
               "type": "string"
             }
-          },
-          "missing_meta": {
-            "type": "integer",
-            "location": "header",
-            "serialized_name": "x-amz-missing-meta"
-          },
-          "restore": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-restore"
-          },
-          "server_side_encryption": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-server-side-encryption",
-            "enum": [
-              "AES256"
-            ]
-          },
-          "version_id": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-version-id"
-          },
-          "website_redirect_location": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-website-redirect-location"
           }
         },
         "payload": "body"
@@ -1646,6 +1660,20 @@
       "output": {
         "type": "output",
         "members": {
+          "owner": {
+            "type": "structure",
+            "serialized_name": "Owner",
+            "members": {
+              "display_name": {
+                "type": "string",
+                "serialized_name": "DisplayName"
+              },
+              "id": {
+                "type": "string",
+                "serialized_name": "ID"
+              }
+            }
+          },
           "grants": {
             "type": "list",
             "serialized_name": "AccessControlList",
@@ -1702,20 +1730,6 @@
                     "READ_ACP"
                   ]
                 }
-              }
-            }
-          },
-          "owner": {
-            "type": "structure",
-            "serialized_name": "Owner",
-            "members": {
-              "display_name": {
-                "type": "string",
-                "serialized_name": "DisplayName"
-              },
-              "id": {
-                "type": "string",
-                "serialized_name": "ID"
               }
             }
           }
@@ -1818,10 +1832,50 @@
       "output": {
         "type": "output",
         "members": {
+          "delete_marker": {
+            "type": "boolean",
+            "location": "header",
+            "serialized_name": "x-amz-delete-marker"
+          },
           "accept_ranges": {
             "type": "string",
             "location": "header",
             "serialized_name": "accept-ranges"
+          },
+          "expiration": {
+            "type": "rfc822_timestamp",
+            "location": "header",
+            "serialized_name": "x-amz-expiration"
+          },
+          "restore": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-restore"
+          },
+          "last_modified": {
+            "type": "rfc822_timestamp",
+            "location": "header",
+            "serialized_name": "Last-Modified"
+          },
+          "content_length": {
+            "type": "integer",
+            "location": "header",
+            "serialized_name": "Content-Length"
+          },
+          "etag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
+          },
+          "missing_meta": {
+            "type": "integer",
+            "location": "header",
+            "serialized_name": "x-amz-missing-meta"
+          },
+          "version_id": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-version-id"
           },
           "cache_control": {
             "type": "string",
@@ -1843,40 +1897,28 @@
             "location": "header",
             "serialized_name": "Content-Language"
           },
-          "content_length": {
-            "type": "integer",
-            "location": "header",
-            "serialized_name": "Content-Length"
-          },
           "content_type": {
             "type": "string",
             "location": "header",
             "serialized_name": "Content-Type"
-          },
-          "delete_marker": {
-            "type": "boolean",
-            "location": "header",
-            "serialized_name": "x-amz-delete-marker"
-          },
-          "etag": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "ETag"
-          },
-          "expiration": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-expiration"
           },
           "expires": {
             "type": "rfc822_timestamp",
             "location": "header",
             "serialized_name": "Expires"
           },
-          "last_modified": {
-            "type": "rfc822_timestamp",
+          "website_redirect_location": {
+            "type": "string",
             "location": "header",
-            "serialized_name": "Last-Modified"
+            "serialized_name": "x-amz-website-redirect-location"
+          },
+          "server_side_encryption": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption",
+            "enum": [
+              "AES256"
+            ]
           },
           "metadata": {
             "type": "map",
@@ -1888,34 +1930,6 @@
             "members": {
               "type": "string"
             }
-          },
-          "missing_meta": {
-            "type": "integer",
-            "location": "header",
-            "serialized_name": "x-amz-missing-meta"
-          },
-          "restore": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-restore"
-          },
-          "server_side_encryption": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-server-side-encryption",
-            "enum": [
-              "AES256"
-            ]
-          },
-          "version_id": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-version-id"
-          },
-          "website_redirect_location": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-website-redirect-location"
           }
         }
       }
@@ -1934,13 +1948,13 @@
               "type": "structure",
               "serialized_name": "Bucket",
               "members": {
-                "creation_date": {
-                  "type": "rfc822_timestamp",
-                  "serialized_name": "CreationDate"
-                },
                 "name": {
                   "type": "string",
                   "serialized_name": "Name"
+                },
+                "creation_date": {
+                  "type": "rfc822_timestamp",
+                  "serialized_name": "CreationDate"
                 }
               }
             }
@@ -2019,51 +2033,33 @@
             "type": "string",
             "serialized_name": "Bucket"
           },
-          "common_prefixes": {
-            "type": "flat_list",
-            "serialized_name": "CommonPrefixes",
-            "members": {
-              "type": "structure",
-              "members": {
-                "prefix": {
-                  "type": "string",
-                  "serialized_name": "Prefix"
-                }
-              }
-            }
-          },
-          "encoding_type": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "Encoding-Type"
-          },
-          "is_truncated": {
-            "type": "boolean",
-            "serialized_name": "IsTruncated"
-          },
           "key_marker": {
             "type": "string",
             "serialized_name": "KeyMarker"
           },
-          "max_uploads": {
-            "type": "integer",
-            "serialized_name": "MaxUploads"
+          "upload_id_marker": {
+            "type": "string",
+            "serialized_name": "UploadIdMarker"
           },
           "next_key_marker": {
             "type": "string",
             "serialized_name": "NextKeyMarker"
           },
-          "next_upload_id_marker": {
-            "type": "string",
-            "serialized_name": "NextUploadIdMarker"
-          },
           "prefix": {
             "type": "string",
             "serialized_name": "Prefix"
           },
-          "upload_id_marker": {
+          "next_upload_id_marker": {
             "type": "string",
-            "serialized_name": "UploadIdMarker"
+            "serialized_name": "NextUploadIdMarker"
+          },
+          "max_uploads": {
+            "type": "integer",
+            "serialized_name": "MaxUploads"
+          },
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
           },
           "uploads": {
             "type": "flat_list",
@@ -2071,27 +2067,26 @@
             "members": {
               "type": "structure",
               "members": {
-                "initiated": {
-                  "type": "rfc822_timestamp",
-                  "serialized_name": "Initiated"
-                },
-                "initiator": {
-                  "type": "structure",
-                  "serialized_name": "Initiator",
-                  "members": {
-                    "display_name": {
-                      "type": "string",
-                      "serialized_name": "DisplayName"
-                    },
-                    "id": {
-                      "type": "string",
-                      "serialized_name": "ID"
-                    }
-                  }
+                "upload_id": {
+                  "type": "string",
+                  "serialized_name": "UploadId"
                 },
                 "key": {
                   "type": "string",
                   "serialized_name": "Key"
+                },
+                "initiated": {
+                  "type": "rfc822_timestamp",
+                  "serialized_name": "Initiated"
+                },
+                "storage_class": {
+                  "type": "string",
+                  "serialized_name": "StorageClass",
+                  "enum": [
+                    "STANDARD",
+                    "REDUCED_REDUNDANCY",
+                    "GLACIER"
+                  ]
                 },
                 "owner": {
                   "type": "structure",
@@ -2107,21 +2102,42 @@
                     }
                   }
                 },
-                "storage_class": {
-                  "type": "string",
-                  "serialized_name": "StorageClass",
-                  "enum": [
-                    "STANDARD",
-                    "REDUCED_REDUNDANCY",
-                    "GLACIER"
-                  ]
-                },
-                "upload_id": {
-                  "type": "string",
-                  "serialized_name": "UploadId"
+                "initiator": {
+                  "type": "structure",
+                  "serialized_name": "Initiator",
+                  "members": {
+                    "id": {
+                      "type": "string",
+                      "serialized_name": "ID"
+                    },
+                    "display_name": {
+                      "type": "string",
+                      "serialized_name": "DisplayName"
+                    }
+                  }
                 }
               }
             }
+          },
+          "common_prefixes": {
+            "type": "flat_list",
+            "serialized_name": "CommonPrefixes",
+            "members": {
+              "type": "structure",
+              "members": {
+                "prefix": {
+                  "type": "string",
+                  "serialized_name": "Prefix"
+                }
+              }
+            }
+          },
+          "encoding_type": {
+            "type": "string",
+            "serialized_name": "EncodingType",
+            "enum": [
+              "url"
+            ]
           }
         }
       }
@@ -2179,6 +2195,133 @@
       "output": {
         "type": "output",
         "members": {
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "key_marker": {
+            "type": "string",
+            "serialized_name": "KeyMarker"
+          },
+          "version_id_marker": {
+            "type": "string",
+            "serialized_name": "VersionIdMarker"
+          },
+          "next_key_marker": {
+            "type": "string",
+            "serialized_name": "NextKeyMarker"
+          },
+          "next_version_id_marker": {
+            "type": "string",
+            "serialized_name": "NextVersionIdMarker"
+          },
+          "versions": {
+            "type": "flat_list",
+            "serialized_name": "Version",
+            "members": {
+              "type": "structure",
+              "members": {
+                "etag": {
+                  "type": "string",
+                  "serialized_name": "ETag"
+                },
+                "size": {
+                  "type": "integer",
+                  "serialized_name": "Size"
+                },
+                "storage_class": {
+                  "type": "string",
+                  "serialized_name": "StorageClass",
+                  "enum": [
+                    "STANDARD",
+                    "REDUCED_REDUNDANCY",
+                    "GLACIER"
+                  ]
+                },
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "version_id": {
+                  "type": "string",
+                  "serialized_name": "VersionId"
+                },
+                "is_latest": {
+                  "type": "boolean",
+                  "serialized_name": "IsLatest"
+                },
+                "last_modified": {
+                  "type": "rfc822_timestamp",
+                  "serialized_name": "LastModified"
+                },
+                "owner": {
+                  "type": "structure",
+                  "serialized_name": "Owner",
+                  "members": {
+                    "display_name": {
+                      "type": "string",
+                      "serialized_name": "DisplayName"
+                    },
+                    "id": {
+                      "type": "string",
+                      "serialized_name": "ID"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "delete_markers": {
+            "type": "flat_list",
+            "serialized_name": "DeleteMarker",
+            "members": {
+              "type": "structure",
+              "members": {
+                "owner": {
+                  "type": "structure",
+                  "serialized_name": "Owner",
+                  "members": {
+                    "display_name": {
+                      "type": "string",
+                      "serialized_name": "DisplayName"
+                    },
+                    "id": {
+                      "type": "string",
+                      "serialized_name": "ID"
+                    }
+                  }
+                },
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "version_id": {
+                  "type": "string",
+                  "serialized_name": "VersionId"
+                },
+                "is_latest": {
+                  "type": "boolean",
+                  "serialized_name": "IsLatest"
+                },
+                "last_modified": {
+                  "type": "rfc822_timestamp",
+                  "serialized_name": "LastModified"
+                }
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "serialized_name": "Name"
+          },
+          "prefix": {
+            "type": "string",
+            "serialized_name": "Prefix"
+          },
+          "max_keys": {
+            "type": "integer",
+            "serialized_name": "MaxKeys"
+          },
           "common_prefixes": {
             "type": "flat_list",
             "serialized_name": "CommonPrefixes",
@@ -2192,137 +2335,12 @@
               }
             }
           },
-          "delete_markers": {
-            "type": "flat_list",
-            "serialized_name": "DeleteMarker",
-            "members": {
-              "type": "structure",
-              "members": {
-                "is_latest": {
-                  "type": "boolean",
-                  "serialized_name": "IsLatest"
-                },
-                "key": {
-                  "type": "string",
-                  "serialized_name": "Key"
-                },
-                "last_modified": {
-                  "type": "rfc822_timestamp",
-                  "serialized_name": "LastModified"
-                },
-                "owner": {
-                  "type": "structure",
-                  "serialized_name": "Owner",
-                  "members": {
-                    "display_name": {
-                      "type": "string",
-                      "serialized_name": "DisplayName"
-                    },
-                    "id": {
-                      "type": "string",
-                      "serialized_name": "ID"
-                    }
-                  }
-                },
-                "version_id": {
-                  "type": "string",
-                  "serialized_name": "VersionId"
-                }
-              }
-            }
-          },
           "encoding_type": {
             "type": "string",
-            "location": "header",
-            "serialized_name": "Encoding-Type"
-          },
-          "is_truncated": {
-            "type": "boolean",
-            "serialized_name": "IsTruncated"
-          },
-          "key_marker": {
-            "type": "string",
-            "serialized_name": "KeyMarker"
-          },
-          "max_keys": {
-            "type": "integer",
-            "serialized_name": "MaxKeys"
-          },
-          "name": {
-            "type": "string",
-            "serialized_name": "Name"
-          },
-          "next_key_marker": {
-            "type": "string",
-            "serialized_name": "NextKeyMarker"
-          },
-          "next_version_id_marker": {
-            "type": "string",
-            "serialized_name": "NextVersionIdMarker"
-          },
-          "prefix": {
-            "type": "string",
-            "serialized_name": "Prefix"
-          },
-          "version_id_marker": {
-            "type": "string",
-            "serialized_name": "VersionIdMarker"
-          },
-          "versions": {
-            "type": "flat_list",
-            "serialized_name": "Version",
-            "members": {
-              "type": "structure",
-              "members": {
-                "etag": {
-                  "type": "string",
-                  "serialized_name": "ETag"
-                },
-                "is_latest": {
-                  "type": "boolean",
-                  "serialized_name": "IsLatest"
-                },
-                "key": {
-                  "type": "string",
-                  "serialized_name": "Key"
-                },
-                "last_modified": {
-                  "type": "rfc822_timestamp",
-                  "serialized_name": "LastModified"
-                },
-                "owner": {
-                  "type": "structure",
-                  "serialized_name": "Owner",
-                  "members": {
-                    "display_name": {
-                      "type": "string",
-                      "serialized_name": "DisplayName"
-                    },
-                    "id": {
-                      "type": "string",
-                      "serialized_name": "ID"
-                    }
-                  }
-                },
-                "size": {
-                  "type": "string",
-                  "serialized_name": "Size"
-                },
-                "storage_class": {
-                  "type": "string",
-                  "serialized_name": "StorageClass",
-                  "enum": [
-                    "STANDARD",
-                    "REDUCED_REDUNDANCY",
-                    "GLACIER"
-                  ]
-                },
-                "version_id": {
-                  "type": "string",
-                  "serialized_name": "VersionId"
-                }
-              }
-            }
+            "serialized_name": "EncodingType",
+            "enum": [
+              "url"
+            ]
           }
         }
       }
@@ -2375,18 +2393,17 @@
       "output": {
         "type": "output",
         "members": {
-          "common_prefixes": {
-            "type": "flat_list",
-            "serialized_name": "CommonPrefixes",
-            "members": {
-              "type": "structure",
-              "members": {
-                "prefix": {
-                  "type": "string",
-                  "serialized_name": "Prefix"
-                }
-              }
-            }
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "marker": {
+            "type": "string",
+            "serialized_name": "Marker"
+          },
+          "next_marker": {
+            "type": "string",
+            "serialized_name": "NextMarker"
           },
           "contents": {
             "type": "flat_list",
@@ -2394,10 +2411,6 @@
             "members": {
               "type": "structure",
               "members": {
-                "etag": {
-                  "type": "string",
-                  "serialized_name": "ETag"
-                },
                 "key": {
                   "type": "string",
                   "serialized_name": "Key"
@@ -2405,6 +2418,23 @@
                 "last_modified": {
                   "type": "rfc822_timestamp",
                   "serialized_name": "LastModified"
+                },
+                "etag": {
+                  "type": "string",
+                  "serialized_name": "ETag"
+                },
+                "size": {
+                  "type": "integer",
+                  "serialized_name": "Size"
+                },
+                "storage_class": {
+                  "type": "string",
+                  "serialized_name": "StorageClass",
+                  "enum": [
+                    "STANDARD",
+                    "REDUCED_REDUNDANCY",
+                    "GLACIER"
+                  ]
                 },
                 "owner": {
                   "type": "structure",
@@ -2419,51 +2449,41 @@
                       "serialized_name": "ID"
                     }
                   }
-                },
-                "size": {
-                  "type": "integer",
-                  "serialized_name": "Size"
-                },
-                "storage_class": {
+                }
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "serialized_name": "Name"
+          },
+          "prefix": {
+            "type": "string",
+            "serialized_name": "Prefix"
+          },
+          "max_keys": {
+            "type": "integer",
+            "serialized_name": "MaxKeys"
+          },
+          "common_prefixes": {
+            "type": "flat_list",
+            "serialized_name": "CommonPrefixes",
+            "members": {
+              "type": "structure",
+              "members": {
+                "prefix": {
                   "type": "string",
-                  "serialized_name": "StorageClass",
-                  "enum": [
-                    "STANDARD",
-                    "REDUCED_REDUNDANCY",
-                    "GLACIER"
-                  ]
+                  "serialized_name": "Prefix"
                 }
               }
             }
           },
           "encoding_type": {
             "type": "string",
-            "location": "header",
-            "serialized_name": "Encoding-Type"
-          },
-          "is_truncated": {
-            "type": "boolean",
-            "serialized_name": "IsTruncated"
-          },
-          "marker": {
-            "type": "string",
-            "serialized_name": "Marker"
-          },
-          "max_keys": {
-            "type": "integer",
-            "serialized_name": "MaxKeys"
-          },
-          "name": {
-            "type": "string",
-            "serialized_name": "Name"
-          },
-          "next_marker": {
-            "type": "string",
-            "serialized_name": "NextMarker"
-          },
-          "prefix": {
-            "type": "string",
-            "serialized_name": "Prefix"
+            "serialized_name": "EncodingType",
+            "enum": [
+              "url"
+            ]
           }
         }
       }
@@ -2515,35 +2535,68 @@
             "type": "string",
             "serialized_name": "Bucket"
           },
-          "initiator": {
-            "type": "structure",
-            "serialized_name": "Initiator",
-            "members": {
-              "display_name": {
-                "type": "string",
-                "serialized_name": "DisplayName"
-              },
-              "id": {
-                "type": "string",
-                "serialized_name": "ID"
-              }
-            }
-          },
-          "is_truncated": {
-            "type": "boolean",
-            "serialized_name": "IsTruncated"
-          },
           "key": {
             "type": "string",
             "serialized_name": "Key"
+          },
+          "upload_id": {
+            "type": "string",
+            "serialized_name": "UploadId"
+          },
+          "part_number_marker": {
+            "type": "integer",
+            "serialized_name": "PartNumberMarker"
+          },
+          "next_part_number_marker": {
+            "type": "integer",
+            "serialized_name": "NextPartNumberMarker"
           },
           "max_parts": {
             "type": "integer",
             "serialized_name": "MaxParts"
           },
-          "next_part_number_marker": {
-            "type": "integer",
-            "serialized_name": "NextPartNumberMarker"
+          "is_truncated": {
+            "type": "boolean",
+            "serialized_name": "IsTruncated"
+          },
+          "parts": {
+            "type": "flat_list",
+            "serialized_name": "Part",
+            "members": {
+              "type": "structure",
+              "members": {
+                "part_number": {
+                  "type": "integer",
+                  "serialized_name": "PartNumber"
+                },
+                "last_modified": {
+                  "type": "rfc822_timestamp",
+                  "serialized_name": "LastModified"
+                },
+                "etag": {
+                  "type": "string",
+                  "serialized_name": "ETag"
+                },
+                "size": {
+                  "type": "integer",
+                  "serialized_name": "Size"
+                }
+              }
+            }
+          },
+          "initiator": {
+            "type": "structure",
+            "serialized_name": "Initiator",
+            "members": {
+              "id": {
+                "type": "string",
+                "serialized_name": "ID"
+              },
+              "display_name": {
+                "type": "string",
+                "serialized_name": "DisplayName"
+              }
+            }
           },
           "owner": {
             "type": "structure",
@@ -2559,35 +2612,6 @@
               }
             }
           },
-          "part_number_marker": {
-            "type": "integer",
-            "serialized_name": "PartNumberMarker"
-          },
-          "parts": {
-            "type": "flat_list",
-            "serialized_name": "Part",
-            "members": {
-              "type": "structure",
-              "members": {
-                "etag": {
-                  "type": "string",
-                  "serialized_name": "ETag"
-                },
-                "last_modified": {
-                  "type": "rfc822_timestamp",
-                  "serialized_name": "LastModified"
-                },
-                "part_number": {
-                  "type": "integer",
-                  "serialized_name": "PartNumber"
-                },
-                "size": {
-                  "type": "integer",
-                  "serialized_name": "Size"
-                }
-              }
-            }
-          },
           "storage_class": {
             "type": "string",
             "serialized_name": "StorageClass",
@@ -2596,10 +2620,6 @@
               "REDUCED_REDUNDANCY",
               "GLACIER"
             ]
-          },
-          "upload_id": {
-            "type": "string",
-            "serialized_name": "UploadId"
           }
         }
       }
@@ -2619,9 +2639,7 @@
               "private",
               "public-read",
               "public-read-write",
-              "authenticated-read",
-              "bucket-owner-read",
-              "bucket-owner-full-control"
+              "authenticated-read"
             ]
           },
           "access_control_policy": {
@@ -2988,7 +3006,12 @@
                         },
                         "permission": {
                           "type": "string",
-                          "serialized_name": "Permission"
+                          "serialized_name": "Permission",
+                          "enum": [
+                            "FULL_CONTROL",
+                            "READ",
+                            "WRITE"
+                          ]
                         }
                       }
                     }
@@ -3159,7 +3182,6 @@
                 "serialized_name": "TagSet",
                 "members": {
                   "type": "structure",
-                  "required": true,
                   "serialized_name": "Tag",
                   "members": {
                     "key": {
@@ -3496,15 +3518,15 @@
       "output": {
         "type": "output",
         "members": {
-          "etag": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "ETag"
-          },
           "expiration": {
             "type": "rfc822_timestamp",
             "location": "header",
             "serialized_name": "x-amz-expiration"
+          },
+          "etag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
           },
           "server_side_encryption": {
             "type": "string",
@@ -3754,11 +3776,6 @@
       "output": {
         "type": "output",
         "members": {
-          "etag": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "ETag"
-          },
           "server_side_encryption": {
             "type": "string",
             "location": "header",
@@ -3766,6 +3783,11 @@
             "enum": [
               "AES256"
             ]
+          },
+          "etag": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "ETag"
           }
         }
       }
@@ -3789,7 +3811,7 @@
             "serialized_name": "x-amz-copy-source"
           },
           "copy_source_if_match": {
-            "type": "rfc822_timestamp",
+            "type": "string",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-match"
           },
@@ -3799,7 +3821,7 @@
             "serialized_name": "x-amz-copy-source-if-modified-since"
           },
           "copy_source_if_none_match": {
-            "type": "rfc822_timestamp",
+            "type": "string",
             "location": "header",
             "serialized_name": "x-amz-copy-source-if-none-match"
           },
@@ -3833,6 +3855,11 @@
       "output": {
         "type": "output",
         "members": {
+          "copy_source_version_id": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-copy-source-version-id"
+          },
           "copy_part_result": {
             "type": "structure",
             "serialized_name": "CopyPartResult",
@@ -3846,11 +3873,6 @@
                 "serialized_name": "LastModified"
               }
             }
-          },
-          "copy_source_version_id": {
-            "type": "string",
-            "location": "header",
-            "serialized_name": "x-amz-copy-source-version-id"
           },
           "server_side_encryption": {
             "type": "string",

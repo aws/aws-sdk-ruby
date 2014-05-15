@@ -3,8 +3,14 @@
     "DescribeConnections": {
       "result_key": "connections"
     },
-    "DescribeOfferings": {
-      "result_key": "offerings"
+    "DescribeConnectionsOnInterconnect": {
+      "result_key": "connections"
+    },
+    "DescribeInterconnects": {
+      "result_key": "interconnects"
+    },
+    "DescribeLocations": {
+      "result_key": "locations"
     },
     "DescribeVirtualGateways": {
       "result_key": "virtualGateways"

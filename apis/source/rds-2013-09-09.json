@@ -7,7 +7,7 @@
   "service_abbreviation": "Amazon RDS",
   "endpoint_prefix": "rds",
   "xmlnamespace": "http://rds.amazonaws.com/doc/2013-09-09/",
-  "documentation": "\n        <fullname>Amazon Relational Database Service</fullname> \n        <p>        \n        Amazon Relational Database Service (Amazon RDS) is a web service\n        that makes it easier to set up, operate, and scale a relational\n        database in the cloud. It provides cost-efficient, resizable\n        capacity for an industry-standard relational database and manages\n        common database administration tasks, freeing up developers to focus\n        on what makes their applications and businesses unique. \n        </p>\n        <p>\n        Amazon RDS gives you access to the capabilities of a familiar MySQL or Oracle \n        database server. This means the code, applications, and tools you\n        already use today with your existing MySQL or Oracle databases work with Amazon\n        RDS without modification. Amazon RDS automatically backs up your database\n        and maintains the database software that powers your DB instance. Amazon\n        RDS is flexible: you can scale your database instance's compute resources\n        and storage capacity to meet your application's demand. As with all\n        Amazon Web Services, there are no up-front investments, and you pay\n        only for the resources you use.  \n        </p>\n       \n            <p>\n            This is the <i>Amazon RDS API Reference</i>. It contains a comprehensive description \n            of all Amazon RDS Query APIs and data types. Note that this API is asynchronous and some\n            actions may require polling to determine when an action has been applied. See the parameter description to determine if \n        a change is applied immediately or on the next instance reboot or during the maintenance window.  \n            For more information on Amazon RDS concepts and usage scenarios, go to the \n            <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/\">Amazon RDS User Guide</a>.\n        </p>\n    ",
+  "documentation": "\n        <fullname>Amazon Relational Database Service</fullname> \n        <p>        \n        Amazon Relational Database Service (Amazon RDS) is a web service\n        that makes it easier to set up, operate, and scale a relational\n        database in the cloud. It provides cost-efficient, resizable\n        capacity for an industry-standard relational database and manages\n        common database administration tasks, freeing up developers to focus\n        on what makes their applications and businesses unique. \n        </p>\n        <p>\n        Amazon RDS gives you access to the capabilities of a familiar MySQL or Oracle \n        database server. This means the code, applications, and tools you\n        already use today with your existing MySQL or Oracle databases work with Amazon\n        RDS without modification. Amazon RDS automatically backs up your database\n        and maintains the database software that powers your DB instance. Amazon\n        RDS is flexible: you can scale your database instance's compute resources\n        and storage capacity to meet your application's demand. As with all\n        Amazon Web Services, there are no up-front investments, and you pay\n        only for the resources you use.  \n        </p>\n        <p>\n         This is an interface reference for Amazon RDS. It contains documentation for a\n         programming or command line interface you can use to manage Amazon RDS. Note\n         that Amazon RDS is asynchronous, which means that some interfaces may require\n         techniques such as polling or callback functions to determine when a command has\n         been applied. In this reference, the parameter descriptions indicate whether a\n         command is applied immediately, on the next instance reboot, or during the\n         maintenance window. For a summary of the Amazon RDS interfaces, go to \n            <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>.\n        </p>\n    ",
   "operations": {
     "AddSourceIdentifierToSubscription": {
       "name": "AddSourceIdentifierToSubscription",
@@ -343,7 +343,7 @@
           "SourceDBSnapshotIdentifier": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n        The identifier for the source DB snapshot.\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be the identifier for a valid system snapshot in the \"available\" state.</li>\n        </ul>\n        <p>Example: <code>rds:mydb-2012-04-02-00-01</code></p>\n    ",
+            "documentation": "\n        <p>\n        The identifier for the source DB snapshot.\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must specify a valid system snapshot in the \"available\" state.</li>\n            <li>If the source snapshot is in the same region as the copy, \n                specify a valid DB snapshot identifier.</li>\n            <li>If the source snapshot is in a different region than the copy,\n                specify valid DB snapshot ARN. For more information, go to\n                <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html\">\n                    Copying a DB Snapshot</a>.</li>\n        </ul>\n        <p>Example: <code>rds:mydb-2012-04-02-00-01</code></p>\n        <p>Example: <code>arn:aws:rds:rr-regn-1:123456789012:snapshot:mysql-instance1-snapshot-20130805</code></p>\n    ",
             "required": true
           },
           "TargetDBSnapshotIdentifier": {
@@ -469,12 +469,12 @@
               "PercentProgress": {
                 "shape_name": "Integer",
                 "type": "integer",
-                "documentation": null
+                "documentation": "\n        <p>\n            The percentage of the estimated data that has been transferred.\n        </p>\n    "
               },
               "SourceRegion": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": null
+                "documentation": "\n        <p>\n            The region that the DB snapshot was created in or copied from.\n        </p>\n    "
               }
             },
             "wrapper": true,
@@ -606,7 +606,7 @@
           "BackupRetentionPeriod": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n        The number of days for which automated backups are retained.\n        Setting this parameter to a positive number enables backups.\n        Setting this parameter to 0 disables automated backups.\n        </p>\n        <p>\n            Default: 1\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be a value from 0 to 8</li>\n            <li>Cannot be set to 0 if the DB instance is a master instance with read replicas</li>\n        </ul>\n    "
+            "documentation": "\n        <p>\n        The number of days for which automated backups are retained.\n        Setting this parameter to a positive number enables backups.\n        Setting this parameter to 0 disables automated backups.\n        </p>\n        <p>\n            Default: 1\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be a value from 0 to 35</li>\n            <li>Cannot be set to 0 if the DB instance is a source to read replicas</li>\n        </ul>\n    "
           },
           "PreferredBackupWindow": {
             "shape_name": "String",
@@ -720,7 +720,7 @@
               "DBName": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. \n        </p>\n    "
+                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use. For example, this value returns only MySQL \n        information when returning values from CreateDBInstanceReadReplica since read replicas are only supported for MySQL.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to \n            an Oracle DB instance. \n        </p>\n    "
               },
               "Endpoint": {
                 "shape_name": "Endpoint",
@@ -1144,7 +1144,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         },
         {
           "shape_name": "InvalidVPCNetworkStateFault",
@@ -1185,7 +1185,7 @@
           "SourceDBInstanceIdentifier": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n    <p>\n    The identifier of the DB instance that will act as the source for the read replica.\n    Each DB instance can have up to five read replicas.\n    </p>\n    <p>Constraints: Must be the identifier of an existing DB instance that is not already a read replica DB instance. </p>\n   ",
+            "documentation": "\n    <p>\n    The identifier of the DB instance that will act as the source for the read replica.\n    Each DB instance can have up to five read replicas.\n    </p>\n    <p>Constraints:</p>\n       <ul>\n           <li>Must be the identifier of an existing DB instance.</li>\n           <li>Can specify a DB instance that is a read replica only if the source is running MySQL 5.6.</li>\n           <li>The specified DB instance must have automatic backups enabled,\n               its backup retention period must be greater than 0.</li>\n       </ul>\n   ",
             "required": true
           },
           "DBInstanceClass": {
@@ -1245,6 +1245,11 @@
               "xmlname": "Tag"
             },
             "documentation": "\n        <p>A list of tags.</p>\n    "
+          },
+          "DBSubnetGroupName": {
+            "shape_name": "String",
+            "type": "string",
+            "documentation": "\n         <p>A DB Subnet Group to associate with this DB Instance in case of a cross region read replica.</p>\n         <p>If there is no DB Subnet Group, then it is a non-VPC DB instance.</p>\n         <p>\n         \tConstraints: All the cross region read replicas that share the source instance \n         \tshould lie within the same VPC. \n         </p>\n    "
           }
         },
         "documentation": "\n    "
@@ -1285,7 +1290,7 @@
               "DBName": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. \n        </p>\n    "
+                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use. For example, this value returns only MySQL \n        information when returning values from CreateDBInstanceReadReplica since read replicas are only supported for MySQL.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to \n            an Oracle DB instance. \n        </p>\n    "
               },
               "Endpoint": {
                 "shape_name": "Endpoint",
@@ -1723,7 +1728,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         },
         {
           "shape_name": "InvalidVPCNetworkStateFault",
@@ -1745,6 +1750,20 @@
           "members": {
           },
           "documentation": "   \n        <p>\n           The specified option group could not be found. \n        </p>\n    "
+        },
+        {
+          "shape_name": "DBSubnetGroupNotAllowedFault",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n\t\tIndicates that the DBSubnetGroup should not be specified while creating read replicas\n\t\tthat lie in the same region as the source instance.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidDBSubnetGroupFault",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n\t\tIndicates the DBSubnetGroup does not belong to the same VPC \n\t\tas that of an existing cross region read replica of the same source instance.\n        </p>\n    "
         }
       ],
       "documentation": "\n    <p>\n    Creates a DB instance that acts as a read replica of a source DB instance.\n    </p>\n    <p>\n    All read replica DB instances are created as Single-AZ deployments with backups disabled.\n    All other DB instance attributes (including DB security groups and DB parameter groups)\n    are inherited from the source DB instance, except as specified below.\n    </p>\n    <important>\n        <p>\n        The source DB instance must have backup retention enabled.\n        </p>\n    </important>\n       <examples>\n           <queryrequest>https://rds.amazonaws.com/\n   ?Action=CreateDBInstanceReadReplica\n   &DBInstanceIdentifier=myreadreplica\n   &SourceDBInstanceIdentifier=mydbinstance\n   &Version=2013-05-15\n   &SignatureVersion=2\n   &SignatureMethod=HmacSHA256\n   &Timestamp=2011-05-15T23%3A35%3A07.325Z\n   &AWSAccessKeyId=<AWS Access Key ID>\n   &Signature=<Signature></queryrequest>\n           <queryresponse><CreateDBInstanceReadReplicaResponse xmlns=\"http://rds.amazonaws.com/doc/2013-05-15/\">\n  <CreateDBInstanceReadReplicaResult>\n    <DBInstance>\n      <ReadReplicaDBInstanceIdentifiers/>\n      <Engine>mysql</Engine>\n      <PendingModifiedValues/>\n      <BackupRetentionPeriod>0</BackupRetentionPeriod>\n      <MultiAZ>false</MultiAZ>\n      <LicenseModel>general-public-license</LicenseModel>\n      <DBInstanceStatus>creating</DBInstanceStatus>\n      <EngineVersion>5.1.50</EngineVersion>\n      <DBInstanceIdentifier>myreadreplica</DBInstanceIdentifier>\n      <DBParameterGroups>\n        <DBParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <DBParameterGroupName>default.mysql5.1</DBParameterGroupName>\n        </DBParameterGroup>\n      </DBParameterGroups>\n      <ReadReplicaSourceDBInstanceIdentifier>mydbinstance</ReadReplicaSourceDBInstanceIdentifier>\n      <DBSecurityGroups>\n        <DBSecurityGroup>\n          <Status>active</Status>\n          <DBSecurityGroupName>default</DBSecurityGroupName>\n        </DBSecurityGroup>\n      </DBSecurityGroups>\n      <PreferredBackupWindow>23:00-01:00</PreferredBackupWindow>\n      <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>\n      <PreferredMaintenanceWindow>sun:05:00-sun:09:00</PreferredMaintenanceWindow>\n      <AllocatedStorage>10</AllocatedStorage>\n      <DBInstanceClass>db.m1.small</DBInstanceClass>\n      <MasterUsername>master</MasterUsername>\n    </DBInstance>\n  </CreateDBInstanceReadReplicaResult>\n  <ResponseMetadata>\n    <RequestId>3e24c5cd-c6e2-11df-8463-4f0c49644cb7</RequestId>\n  </ResponseMetadata>\n</CreateDBInstanceReadReplicaResponse></queryresponse>\n       </examples>\n   "
@@ -2140,12 +2159,12 @@
               "PercentProgress": {
                 "shape_name": "Integer",
                 "type": "integer",
-                "documentation": null
+                "documentation": "\n        <p>\n            The percentage of the estimated data that has been transferred.\n        </p>\n    "
               },
               "SourceRegion": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": null
+                "documentation": "\n        <p>\n            The region that the DB snapshot was created in or copied from.\n        </p>\n    "
               }
             },
             "wrapper": true,
@@ -2350,7 +2369,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n            Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=CreateDBSubnetGroup\n    &DBSubnetGroupName=mydbsubnetgroup\n    &DBSubnetGroupDescription=My%20new%20DBSubnetGroup\n    &Version=2013-05-15\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T18%3A14%3A49.482Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><CreateDBSubnetGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-05-15/\">\n    <CreateDBSubnetGroupResult>\n            <DBSubnetGroup>\n                <VpcId>990524496922</VpcId>\n                <SubnetGroupStatus>Complete</SubnetGroupStatus>\n                <DBSubnetGroupDescription>My new DBSubnetGroup</DBSubnetGroupDescription>\n                <DBSubnetGroupName>mydbsubnetgroup</DBSubnetGroupName>\n                <Subnets>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7c5b4115</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1c</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7b5b4112</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1b</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-3ea6bd57</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1d</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                </Subnets>\n            </DBSubnetGroup>       \n        </CreateDBSubnetGroupResult>\n        <ResponseMetadata>\n            <RequestId>ed662948-a57b-11df-9e38-7ffab86c801f</RequestId>\n        </ResponseMetadata>\n    </CreateDBSubnetGroupResponse></queryresponse>\n            </examples>\n    "
@@ -2830,12 +2849,12 @@
           "SkipFinalSnapshot": {
             "shape_name": "Boolean",
             "type": "boolean",
-            "documentation": "\n        <p>\n            Determines whether a final DB snapshot is created before the DB instance is deleted. \n            If <code>true</code> is specified, no DBSnapshot is created. If false is specified, a DB snapshot \n            is created before the DB instance is deleted.\n        </p>\n        <note>The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot is <code>false</code>.</note>\n        <p>Default: <code>false</code></p>\n    "
+            "documentation": "\n        <p>\n            Determines whether a final DB snapshot is created before the DB instance is deleted. \n            If <code>true</code> is specified, no DBSnapshot is created. If <code>false</code> is specified, a DB snapshot \n            is created before the DB instance is deleted.\n        </p>\n        <p>Specify <code>true</code> when deleting a read replica.</p>\n        <note>The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot is <code>false</code>.</note>\n        <p>Default: <code>false</code></p>\n    "
           },
           "FinalDBSnapshotIdentifier": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n        <p>\n        The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot\n        is set to <code>false</code>.\n        </p>\n        <note>\n        Specifying this parameter and also setting \n        the SkipFinalShapshot parameter to true results in an error.\n        </note>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be 1 to 255 alphanumeric characters</li>\n            <li>First character must be a letter</li>\n            <li>Cannot end with a hyphen or contain two consecutive hyphens</li>\n        </ul>\n    "
+            "documentation": "\n        <p>\n        The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot\n        is set to <code>false</code>.\n        </p>\n        <note>\n        Specifying this parameter and also setting \n        the SkipFinalShapshot parameter to true results in an error.\n        </note>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be 1 to 255 alphanumeric characters</li>\n            <li>First character must be a letter</li>\n            <li>Cannot end with a hyphen or contain two consecutive hyphens</li>\n            <li>Cannot be specified when deleting a read replica.</li>\n        </ul>\n    "
           }
         },
         "documentation": "\n        <p>\n\n        </p>\n    "
@@ -2876,7 +2895,7 @@
               "DBName": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. \n        </p>\n    "
+                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use. For example, this value returns only MySQL \n        information when returning values from CreateDBInstanceReadReplica since read replicas are only supported for MySQL.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to \n            an Oracle DB instance. \n        </p>\n    "
               },
               "Endpoint": {
                 "shape_name": "Endpoint",
@@ -3444,12 +3463,12 @@
               "PercentProgress": {
                 "shape_name": "Integer",
                 "type": "integer",
-                "documentation": null
+                "documentation": "\n        <p>\n            The percentage of the estimated data that has been transferred.\n        </p>\n    "
               },
               "SourceRegion": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": null
+                "documentation": "\n        <p>\n            The region that the DB snapshot was created in or copied from.\n        </p>\n    "
               }
             },
             "wrapper": true,
@@ -3473,7 +3492,7 @@
           "documentation": "\n        <p>\n        <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n        Deletes a DBSnapshot. \n        </p>\n        <note>The DBSnapshot must be in the <code>available</code> state to be\n        deleted.</note>\n        <examples>\n            <queryrequest>https://rds.amazon.com/\n   &DBSnapshotIdentifier=mydbsnapshot\n   &Version=2013-05-15\n   &SignatureVersion=2\n   &SignatureMethod=HmacSHA256\n   &Timestamp=2011-05-23T06%3A27%3A42.551Z\n   &AWSAccessKeyId=<AWS Access Key ID>\n   &Signature=<Signature></queryrequest>\n            <queryresponse><DeleteDBSnapshotResponse xmlns=\"http://rds.amazonaws.com/doc/2013-05-15/\">\n  <DeleteDBSnapshotResult>\n    <DBSnapshot>\n      <Port>3306</Port>\n      <SnapshotCreateTime>2011-03-11T07:20:24.082Z</SnapshotCreateTime>\n      <Engine>mysql</Engine>\n      <Status>deleted</Status>\n      <AvailabilityZone>us-east-1d</AvailabilityZone>\n      <LicenseModel>general-public-license</LicenseModel>\n      <InstanceCreateTime>2010-07-16T00:06:59.107Z</InstanceCreateTime>\n      <AllocatedStorage>60</AllocatedStorage>\n      <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n      <EngineVersion>5.1.47</EngineVersion>\n      <DBSnapshotIdentifier>mysnapshot2</DBSnapshotIdentifier>\n      <SnapshotType>manual</SnapshotType>\n      <MasterUsername>master</MasterUsername>\n    </DBSnapshot>\n  </DeleteDBSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>627a43a1-8507-11e0-bd9b-a7b1ece36d51</RequestId>\n  </ResponseMetadata>\n</DeleteDBSnapshotResponse></queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>\n        Deletes a DBSnapshot. If the snapshot is being copied, the copy operation is terminated.\n        </p>\n        <note>The DBSnapshot must be in the <code>available</code> state to be\n        deleted.</note>\n        <examples>\n            <queryrequest>https://rds.amazon.com/\n   &DBSnapshotIdentifier=mydbsnapshot\n   &Version=2013-05-15\n   &SignatureVersion=2\n   &SignatureMethod=HmacSHA256\n   &Timestamp=2011-05-23T06%3A27%3A42.551Z\n   &AWSAccessKeyId=<AWS Access Key ID>\n   &Signature=<Signature></queryrequest>\n            <queryresponse><DeleteDBSnapshotResponse xmlns=\"http://rds.amazonaws.com/doc/2013-05-15/\">\n  <DeleteDBSnapshotResult>\n    <DBSnapshot>\n      <Port>3306</Port>\n      <SnapshotCreateTime>2011-03-11T07:20:24.082Z</SnapshotCreateTime>\n      <Engine>mysql</Engine>\n      <Status>deleted</Status>\n      <AvailabilityZone>us-east-1d</AvailabilityZone>\n      <LicenseModel>general-public-license</LicenseModel>\n      <InstanceCreateTime>2010-07-16T00:06:59.107Z</InstanceCreateTime>\n      <AllocatedStorage>60</AllocatedStorage>\n      <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n      <EngineVersion>5.1.47</EngineVersion>\n      <DBSnapshotIdentifier>mysnapshot2</DBSnapshotIdentifier>\n      <SnapshotType>manual</SnapshotType>\n      <MasterUsername>master</MasterUsername>\n    </DBSnapshot>\n  </DeleteDBSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>627a43a1-8507-11e0-bd9b-a7b1ece36d51</RequestId>\n  </ResponseMetadata>\n</DeleteDBSnapshotResponse></queryresponse>\n        </examples>\n    "
     },
     "DeleteDBSubnetGroup": {
       "name": "DeleteDBSubnetGroup",
@@ -3814,7 +3833,7 @@
                 "FilterName": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 },
                 "FilterValue": {
@@ -3826,14 +3845,14 @@
                     "documentation": null,
                     "xmlname": "Value"
                   },
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 }
               },
               "documentation": "\n        \n    ",
               "xmlname": "Filter"
             },
-            "documentation": "\n        \n    "
+            "documentation": "\n        <p>This parameter is not currently supported.</p>\n    "
           },
           "MaxRecords": {
             "shape_name": "IntegerOptional",
@@ -3892,7 +3911,7 @@
                 "DBName": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. \n        </p>\n    "
+                  "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use. For example, this value returns only MySQL \n        information when returning values from CreateDBInstanceReadReplica since read replicas are only supported for MySQL.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to \n            an Oracle DB instance. \n        </p>\n    "
                 },
                 "Endpoint": {
                   "shape_name": "Endpoint",
@@ -4358,7 +4377,7 @@
           "documentation": "\n        <p>\n        <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n            Returns a list of DB log files for the DB instance.        \n        </p>\n        \n        <examples>\n            <queryrequest>\n            </queryrequest>\n            <queryresponse>\n            </queryresponse>\n        </examples>\n    "
+      "documentation": "\n        <p>\n            Returns a list of DB log files for the DB instance.        \n        </p>\n        \n        <examples>\n            <queryrequest>\nhttps://rds.amazonaws.com/\n?DBInstanceIdentifier=rrak-mysql\n&MaxRecords=100\n&Version=2013-02-12\n&Action=DescribeDBLogFiles\n&SignatureVersion=4\n&SignatureMethod=HmacSHA256\n&Timestamp=20130327T173621Z\n&X-Amz-Algorithm=AWS4-HMAC-SHA256\n&X-Amz-Date=20130327T173621Z\n&X-Amz-SignedHeaders=Host\n&X-Amz-Expires=20130327T173621Z\n&X-Amz-Credential=<AWS Access Key ID>\n&X-Amz-Signature=<Signature>\n            \n            </queryrequest>\n            <queryresponse>\n                \n<DescribeDBLogFilesResponse xmlns=\"http://rds.amazonaws.com/doc/2013-02-12/\">\n  <DescribeDBLogFilesResult>\n    <DescribeDBLogFiles>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364403600000</LastWritten>\n        <LogFileName>error/mysql-error-running.log</LogFileName>\n        <Size>0</Size>\n      </DescribeDBLogFilesDetails>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364338800000</LastWritten>\n        <LogFileName>error/mysql-error-running.log.0</LogFileName>\n        <Size>0</Size>\n      </DescribeDBLogFilesDetails>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364342400000</LastWritten>\n        <LogFileName>error/mysql-error-running.log.1</LogFileName>\n        <Size>0</Size>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364346000000</LastWritten>\n        <LogFileName>error/mysql-error-running.log.2</LogFileName>\n        <Size>0</Size>\n      </DescribeDBLogFilesDetails>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364349600000</LastWritten>\n        <LogFileName>error/mysql-error-running.log.3</LogFileName>\n        <Size>0</Size>\n      </DescribeDBLogFilesDetails>\n      <DescribeDBLogFilesDetails>\n        <LastWritten>1364405700000</LastWritten>\n        <LogFileName>error/mysql-error.log</LogFileName>\n        <Size>0</Size>\n      </DescribeDBLogFilesDetails>\n    </DescribeDBLogFiles>\n  </DescribeDBLogFilesResult>\n  <ResponseMetadata>\n    <RequestId>d70fb3b3-9704-11e2-a0db-871552e0ef19</RequestId>\n  </ResponseMetadata>\n</DescribeDBLogFilesResponse>\n\n            </queryresponse>\n        </examples>\n    "
     },
     "DescribeDBParameterGroups": {
       "name": "DescribeDBParameterGroups",
@@ -4381,7 +4400,7 @@
                 "FilterName": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 },
                 "FilterValue": {
@@ -4393,14 +4412,14 @@
                     "documentation": null,
                     "xmlname": "Value"
                   },
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 }
               },
               "documentation": "\n        \n    ",
               "xmlname": "Filter"
             },
-            "documentation": null
+            "documentation": "\n       <p>This parameter is not currently supported.</p> \n    "
           },
           "MaxRecords": {
             "shape_name": "IntegerOptional",
@@ -4608,7 +4627,7 @@
                 "FilterName": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 },
                 "FilterValue": {
@@ -4620,14 +4639,14 @@
                     "documentation": null,
                     "xmlname": "Value"
                   },
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 }
               },
               "documentation": "\n        \n    ",
               "xmlname": "Filter"
             },
-            "documentation": null
+            "documentation": "\n        <p>This parameter is not currently supported.</p>    \n    "
           },
           "MaxRecords": {
             "shape_name": "IntegerOptional",
@@ -4786,7 +4805,7 @@
                 "FilterName": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 },
                 "FilterValue": {
@@ -4798,14 +4817,14 @@
                     "documentation": null,
                     "xmlname": "Value"
                   },
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 }
               },
               "documentation": "\n        \n    ",
               "xmlname": "Filter"
             },
-            "documentation": null
+            "documentation": "\n        <p>This parameter is not currently supported.</p>    \n    "
           },
           "MaxRecords": {
             "shape_name": "IntegerOptional",
@@ -4919,12 +4938,12 @@
                 "PercentProgress": {
                   "shape_name": "Integer",
                   "type": "integer",
-                  "documentation": null
+                  "documentation": "\n        <p>\n            The percentage of the estimated data that has been transferred.\n        </p>\n    "
                 },
                 "SourceRegion": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null
+                  "documentation": "\n        <p>\n            The region that the DB snapshot was created in or copied from.\n        </p>\n    "
                 }
               },
               "wrapper": true,
@@ -4968,7 +4987,7 @@
                 "FilterName": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 },
                 "FilterValue": {
@@ -4980,14 +4999,14 @@
                     "documentation": null,
                     "xmlname": "Value"
                   },
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 }
               },
               "documentation": "\n        \n    ",
               "xmlname": "Filter"
             },
-            "documentation": null
+            "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    "
           },
           "MaxRecords": {
             "shape_name": "IntegerOptional",
@@ -5298,7 +5317,7 @@
                 "FilterName": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 },
                 "FilterValue": {
@@ -5310,14 +5329,14 @@
                     "documentation": null,
                     "xmlname": "Value"
                   },
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 }
               },
               "documentation": "\n        \n    ",
               "xmlname": "Filter"
             },
-            "documentation": null
+            "documentation": "\n        <p>This parameter is not currently supported.</p>    \n    "
           },
           "MaxRecords": {
             "shape_name": "IntegerOptional",
@@ -5734,7 +5753,7 @@
                 "FilterName": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 },
                 "FilterValue": {
@@ -5746,14 +5765,14 @@
                     "documentation": null,
                     "xmlname": "Value"
                   },
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 }
               },
               "documentation": "\n        \n    ",
               "xmlname": "Filter"
             },
-            "documentation": null
+            "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    "
           },
           "Marker": {
             "shape_name": "String",
@@ -6173,7 +6192,7 @@
                 "FilterName": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 },
                 "FilterValue": {
@@ -6185,14 +6204,14 @@
                     "documentation": null,
                     "xmlname": "Value"
                   },
-                  "documentation": null,
+                  "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    ",
                   "required": true
                 }
               },
               "documentation": "\n        \n    ",
               "xmlname": "Filter"
             },
-            "documentation": null
+            "documentation": "\n        <p>This parameter is not currently supported.</p>   \n    "
           },
           "MaxRecords": {
             "shape_name": "IntegerOptional",
@@ -6677,7 +6696,7 @@
           "BackupRetentionPeriod": {
             "shape_name": "IntegerOptional",
             "type": "integer",
-            "documentation": "\n        <p>\n        The number of days to retain automated backups.\n        Setting this parameter to a positive number enables backups.\n        Setting this parameter to 0 disables automated backups.\n        </p>\n        <p>Changing this parameter can result in an outage if you change from 0 to a non-zero value or from a non-zero value to 0.  \n            These changes are applied during the next maintenance window\n            unless the <code>ApplyImmediately</code> parameter is set\n            to <code>true</code> for this request. If you change the parameter from one non-zero value to another \n            non-zero value, the change is asynchronously applied as soon as possible.</p>\n        \n        <p>Default: Uses existing setting</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be a value from 0 to 8</li>\n            <li>Cannot be set to 0 if the DB instance is a master instance \n                with read replicas or if the DB instance is a read replica</li>\n        </ul>\n    "
+            "documentation": "\n        <p>\n        The number of days to retain automated backups.\n        Setting this parameter to a positive number enables backups.\n        Setting this parameter to 0 disables automated backups.\n        </p>\n        <p>Changing this parameter can result in an outage if you change from 0 to a non-zero value or from a non-zero value to 0.  \n            These changes are applied during the next maintenance window\n            unless the <code>ApplyImmediately</code> parameter is set\n            to <code>true</code> for this request. If you change the parameter from one non-zero value to another \n            non-zero value, the change is asynchronously applied as soon as possible.</p>\n        \n        <p>Default: Uses existing setting</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be a value from 0 to 35</li>\n            <li>Can be specified for a read replica only if the source is running MySQL 5.6</li>\n            <li>Cannot be set to 0 if the DB instance is a source to read replicas</li>\n        </ul>\n    "
           },
           "PreferredBackupWindow": {
             "shape_name": "String",
@@ -6763,7 +6782,7 @@
               "DBName": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. \n        </p>\n    "
+                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use. For example, this value returns only MySQL \n        information when returning values from CreateDBInstanceReadReplica since read replicas are only supported for MySQL.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to \n            an Oracle DB instance. \n        </p>\n    "
               },
               "Endpoint": {
                 "shape_name": "Endpoint",
@@ -7208,7 +7227,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n            The DB upgrade failed because a resource the DB depends on could not be modified.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Modify settings for a DB instance. You can change one\n        or more database configuration parameters by specifying these parameters and the new values in the\n        request.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n   ?Action=ModifyDBInstance\n   &DBInstanceIdentifier=simcoprod01\n   &AllocatedStorage=50\n   &Version=2013-05-15\n   &ApplyImmediately=false\n   &SignatureVersion=2\n   &SignatureMethod=HmacSHA256\n   &Timestamp=2011-05-23T08%3A02%3A09.574Z\n   &AWSAccessKeyId=<AWS Access Key ID>\n   &Signature=<Signature>\n            </queryrequest>\n            <queryresponse><ModifyDBInstanceResponse xmlns=\"http://rds.amazonaws.com/doc/2013-05-15/\">\n  <ModifyDBInstanceResult>\n    <DBInstance>\n      <ReadReplicaDBInstanceIdentifiers/>\n      <LatestRestorableTime>2011-05-23T08:00:00Z</LatestRestorableTime>\n      <Engine>mysql</Engine>\n      <PendingModifiedValues>\n        <AllocatedStorage>50</AllocatedStorage>\n      </PendingModifiedValues>\n      <BackupRetentionPeriod>1</BackupRetentionPeriod>\n      <MultiAZ>false</MultiAZ>\n      <LicenseModel>general-public-license</LicenseModel>\n      <DBInstanceStatus>available</DBInstanceStatus>\n      <EngineVersion>5.1.50</EngineVersion>\n      <Endpoint>\n        <Port>3306</Port>\n        <Address>simcoprod01.cu7u2t4uz396.us-east-1.rds.amazonaws.com</Address>\n      </Endpoint>\n      <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n      <DBParameterGroups>\n        <DBParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <DBParameterGroupName>default.mysql5.1</DBParameterGroupName>\n        </DBParameterGroup>\n      </DBParameterGroups>\n      <DBSecurityGroups>\n        <DBSecurityGroup>\n          <Status>active</Status>\n          <DBSecurityGroupName>default</DBSecurityGroupName>\n        </DBSecurityGroup>\n      </DBSecurityGroups>\n      <PreferredBackupWindow>00:00-00:30</PreferredBackupWindow>\n      <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>\n      <PreferredMaintenanceWindow>sat:07:30-sat:08:00</PreferredMaintenanceWindow>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <InstanceCreateTime>2011-05-23T06:06:43.110Z</InstanceCreateTime>\n      <AllocatedStorage>10</AllocatedStorage>\n      <DBInstanceClass>db.m1.large</DBInstanceClass>\n      <MasterUsername>master</MasterUsername>\n    </DBInstance>\n  </ModifyDBInstanceResult>\n  <ResponseMetadata>\n    <RequestId>f61a020f-8512-11e0-90aa-eb648410240d</RequestId>\n  </ResponseMetadata>\n</ModifyDBInstanceResponse></queryresponse>\n        </examples>\n    "
@@ -7467,7 +7486,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n            Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=ModifyDBSubnetGroup\n    &DBSubnetGroupName=mydbsubnetgroup\n    &DBSubnetGroupDescription=My%20modified%20DBSubnetGroup\n    &Version=2013-05-15\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T18%3A14%3A49.482Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><ModifyDBSubnetGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-05-15/\">\n    <ModifyDBSubnetGroupResult>\n            <DBSubnetGroup>\n                <VpcId>990524496922</VpcId>\n                <SubnetGroupStatus>Complete</SubnetGroupStatus>\n                <DBSubnetGroupDescription>My modified DBSubnetGroup</DBSubnetGroupDescription>\n                <DBSubnetGroupName>mydbsubnetgroup</DBSubnetGroupName>\n                <Subnets>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7c5b4115</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1c</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7b5b4112</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1b</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-3ea6bd57</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1d</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                </Subnets>\n            </DBSubnetGroup>       \n        </ModifyDBSubnetGroupResult>\n        <ResponseMetadata>\n            <RequestId>ed662948-a57b-11df-9e38-7ffab86c801f</RequestId>\n        </ResponseMetadata>\n    </ModifyDBSubnetGroupResponse></queryresponse>\n            </examples>\n    "
@@ -8029,7 +8048,7 @@
               "DBName": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. \n        </p>\n    "
+                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use. For example, this value returns only MySQL \n        information when returning values from CreateDBInstanceReadReplica since read replicas are only supported for MySQL.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to \n            an Oracle DB instance. \n        </p>\n    "
               },
               "Endpoint": {
                 "shape_name": "Endpoint",
@@ -8641,7 +8660,7 @@
               "DBName": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. \n        </p>\n    "
+                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use. For example, this value returns only MySQL \n        information when returning values from CreateDBInstanceReadReplica since read replicas are only supported for MySQL.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to \n            an Oracle DB instance. \n        </p>\n    "
               },
               "Endpoint": {
                 "shape_name": "Endpoint",
@@ -9433,7 +9452,7 @@
               "DBName": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. \n        </p>\n    "
+                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use. For example, this value returns only MySQL \n        information when returning values from CreateDBInstanceReadReplica since read replicas are only supported for MySQL.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to \n            an Oracle DB instance. \n        </p>\n    "
               },
               "Endpoint": {
                 "shape_name": "Endpoint",
@@ -9871,7 +9890,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         },
         {
           "shape_name": "ProvisionedIopsNotAvailableInAZFault",
@@ -10040,7 +10059,7 @@
               "DBName": {
                 "shape_name": "String",
                 "type": "string",
-                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. \n        </p>\n    "
+                "documentation": "\n        <p>The meaning of this parameter differs according to the database engine you use. For example, this value returns only MySQL \n        information when returning values from CreateDBInstanceReadReplica since read replicas are only supported for MySQL.</p>\n        <p><b>MySQL</b></p>\n        <p>\n        Contains the name of the initial database of this instance that was\n        provided at create time, if one was specified when the\n        DB instance was created. This same name is returned for\n        the life of the DB instance.\n        </p>\n        <p>Type: String</p>\n        <p><b>Oracle</b></p>\n        <p>\n            Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to \n            an Oracle DB instance. \n        </p>\n    "
               },
               "Endpoint": {
                 "shape_name": "Endpoint",
@@ -10485,7 +10504,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         },
         {
           "shape_name": "ProvisionedIopsNotAvailableInAZFault",
