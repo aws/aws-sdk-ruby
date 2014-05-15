@@ -27,7 +27,7 @@ response:
   headers:
     X-Amz-Delete-Marker: false
     Accept-Ranges: accept-ranges
-    X-Amz-Expiration: expiration
+    X-Amz-Expiration: Fri, 13 Sep 2013 14:58:41 -0000
     Last-Modified: Fri, 13 Sep 2013 14:58:41 -0000
     Content-Length: '100'
     ETag: etag
@@ -39,7 +39,7 @@ response:
 data:
   :delete_marker: false
   :accept_ranges: accept-ranges
-  :expiration: expiration
+  :expiration: 2013-09-13 14:58:41 Z
   :last_modified: 2013-09-13 14:58:41 Z
   :content_length: 100
   :etag: etag
