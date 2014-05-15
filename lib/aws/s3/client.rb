@@ -236,7 +236,7 @@ module AWS
       end
 
       def md5 str
-        Base64.encode64(Digest::MD5.digest(str)).strip
+        Base64.encode64(OpenSSL::Digest::MD5.digest(str)).strip
       end
 
       def parse_copy_part_response resp
@@ -1015,7 +1015,7 @@ module AWS
       #     * `:permission` - (String) Logging permissions given to the Grantee
       #          for the bucket. The bucket owner is automatically granted FULL_CONTROL
       #          to all logs delivered to the bucket. This optional element enables
-      #          you grant access to others. Valid Values: FULL_CONTROL | READ | WRITE 
+      #          you grant access to others. Valid Values: FULL_CONTROL | READ | WRITE
       #   @return [Core::Response]
       bucket_method(:put_bucket_logging, :put) do
         configure_request do |req, options|
@@ -1062,7 +1062,7 @@ module AWS
           xml = xml.doc.root.to_xml
           req.body = xml
           req.headers['content-md5'] = md5(xml)
-          
+
           super(req, options)
 
         end

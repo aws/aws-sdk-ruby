@@ -150,7 +150,7 @@ module AWS
           end
 
           def hash value
-            Digest::SHA256.new.update(value).hexdigest
+            OpenSSL::Digest::SHA256.new.update(value).hexdigest
           end
 
           class << self
