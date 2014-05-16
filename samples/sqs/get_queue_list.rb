@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require File.expand_path(File.dirname(__FILE__) + '/../samples_config')
-
 # Gets an instance of the SQS interface using the default configuration
 sqs = AWS::SQS.new
 

@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require File.expand_path(File.dirname(__FILE__) + '/../samples_config')
+require 'aws-sdk'
 
 (bucket_name, file_name) = ARGV
 unless bucket_name && file_name

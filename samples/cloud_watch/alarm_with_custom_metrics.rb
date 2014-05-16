@@ -11,8 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require File.expand_path(File.dirname(__FILE__) + '/../samples_config')
-
 @cloud_watch = AWS::CloudWatch.new
 
 puts "Using CloudWatch endpoint : #{@cloud_watch.client.endpoint}"
