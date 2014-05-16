@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require '../samples_config'
+require 'aws-sdk'
 
 domain_name = ARGV[0]
 
@@ -31,30 +31,30 @@ invalid_name = false
 
 # make sure that the domain exists
 begin
-	if d.exists?
-		puts "	The domain '#{domain_name}' is available. Continue to add item"
-	else
-		d = client.domains.create domain_name 
-		puts "	Created domain '#{domain_name}'"
-	end
+  if d.exists?
+    puts "  The domain '#{domain_name}' is available. Continue to add item"
+  else
+    d = client.domains.create domain_name
+    puts "  Created domain '#{domain_name}'"
+  end
 rescue AWS::SimpleDB::Errors::InvalidParameterValue => e
-	puts e.message
-	invalid_name = true
+  puts e.message
+  invalid_name = true
 end
 
 unless invalid_name
-	# Add item to the domain
-	item = { :created_date => Date.today.iso8601, :description => 'A demo item for simpledb service' , :attribute1 => 'value1' }
-	item_name = 'Item 01'
-	puts <<EOS
+  # Add item to the domain
+  item = { :created_date => Date.today.iso8601, :description => 'A demo item for simpledb service' , :attribute1 => 'value1' }
+  item_name = 'Item 01'
+  puts <<EOS
 The generated item data:
-	- Name: #{item_name}
-	- Attributes: #{item}
+  - Name: #{item_name}
+  - Attributes: #{item}
 EOS
-	d.items.create item_name, item
-	puts "Added the item '#{item_name}' to domain '#{domain_name}'"
-	
-	# Delete the item
-	d.items[item_name].delete
-	puts "Delete the item '#{item_name}' in domain '#{domain_name}'"
+  d.items.create item_name, item
+  puts "Added the item '#{item_name}' to domain '#{domain_name}'"
+
+  # Delete the item
+  d.items[item_name].delete
+  puts "Delete the item '#{item_name}' in domain '#{domain_name}'"
 end
