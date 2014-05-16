@@ -11,9 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-
-require File.expand_path(File.dirname(__FILE__) + '/../samples_config')
-
 # Topic's arn can be found in AWS Management, under Topic Details.
 (topic_arn, message) = ARGV
 unless topic_arn && message
