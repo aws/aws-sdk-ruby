@@ -116,7 +116,8 @@ module AWS
     #
     # @attr_reader [Logger,nil] logger (nil) The logging interface.
     #
-    # @attr_reader [Symbol] log_level (:info) The log level.
+    # @attr_reader [Symbol] log_level (:info) The log level to use when
+    #   logging every API call.  Does not set the `:logger`'s log_level.
     #
     # @attr_reader [LogFormatter] log_formatter The log message formatter.
     #
