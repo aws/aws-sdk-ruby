@@ -82,7 +82,7 @@ module AWS
         end
 
         it 'returns false if it can not be found' do
-          response.data[:hosted_zone] = {} # empty
+          client.stub(:get_hosted_zone).and_raise(Errors::NoSuchHostedZone)
           hosted_zone.exists?.should == false
         end
 

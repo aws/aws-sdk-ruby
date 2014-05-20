@@ -94,7 +94,10 @@ module AWS
 
       # @return [Boolean] Returns `true` if this hosted zone exists.
       def exists?
-        get_resource.data[:hosted_zone][:id] == path
+        get_resource
+        true
+      rescue Errors::NoSuchHostedZone
+        false
       end
 
       # Returns resource record sets.
