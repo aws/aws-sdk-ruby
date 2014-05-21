@@ -41,6 +41,8 @@
           - :string
           ParameterValue:
           - :string
+          UsePreviousValue:
+          - :boolean
     DisableRollback:
     - :boolean
     TimeoutInMinutes:
@@ -165,6 +167,9 @@
                       member:
                         :rename: :parameters
                         :list: true
+                        :children:
+                          UsePreviousValue:
+                            :type: :boolean
                   CreationTime:
                     :type: :time
                   LastUpdatedTime:
@@ -211,6 +216,8 @@
           - :string
           ParameterValue:
           - :string
+          UsePreviousValue:
+          - :boolean
   :outputs:
     :children:
       EstimateTemplateCostResult:
@@ -307,6 +314,8 @@
     - :string
     TemplateURL:
     - :string
+    UsePreviousTemplate:
+    - :boolean
     StackPolicyDuringUpdateBody:
     - :string
     StackPolicyDuringUpdateURL:
@@ -318,6 +327,8 @@
           - :string
           ParameterValue:
           - :string
+          UsePreviousValue:
+          - :boolean
     Capabilities:
     - :membered_list:
       - :string
@@ -325,6 +336,9 @@
     - :string
     StackPolicyURL:
     - :string
+    NotificationARNs:
+    - :membered_list:
+      - :string
   :outputs:
     :children:
       UpdateStackResult:
