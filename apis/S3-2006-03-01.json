@@ -1037,10 +1037,35 @@
                       "type": "string",
                       "serialized_name": "StorageClass",
                       "enum": [
-                        "STANDARD",
-                        "REDUCED_REDUNDANCY",
                         "GLACIER"
                       ]
+                    }
+                  }
+                },
+                "noncurrent_version_transition": {
+                  "type": "structure",
+                  "serialized_name": "NoncurrentVersionTransition",
+                  "members": {
+                    "noncurrent_days": {
+                      "type": "integer",
+                      "serialized_name": "NoncurrentDays"
+                    },
+                    "storage_class": {
+                      "type": "string",
+                      "serialized_name": "StorageClass",
+                      "enum": [
+                        "GLACIER"
+                      ]
+                    }
+                  }
+                },
+                "noncurrent_version_expiration": {
+                  "type": "structure",
+                  "serialized_name": "NoncurrentVersionExpiration",
+                  "members": {
+                    "noncurrent_days": {
+                      "type": "integer",
+                      "serialized_name": "NoncurrentDays"
                     }
                   }
                 }
@@ -1331,7 +1356,7 @@
           },
           "mfa_delete": {
             "type": "string",
-            "serialized_name": "MFADelete",
+            "serialized_name": "MfaDelete",
             "enum": [
               "Enabled",
               "Disabled"
@@ -2084,8 +2109,7 @@
                   "serialized_name": "StorageClass",
                   "enum": [
                     "STANDARD",
-                    "REDUCED_REDUNDANCY",
-                    "GLACIER"
+                    "REDUCED_REDUNDANCY"
                   ]
                 },
                 "owner": {
@@ -2233,9 +2257,7 @@
                   "type": "string",
                   "serialized_name": "StorageClass",
                   "enum": [
-                    "STANDARD",
-                    "REDUCED_REDUNDANCY",
-                    "GLACIER"
+                    "STANDARD"
                   ]
                 },
                 "key": {
@@ -2617,8 +2639,7 @@
             "serialized_name": "StorageClass",
             "enum": [
               "STANDARD",
-              "REDUCED_REDUNDANCY",
-              "GLACIER"
+              "REDUCED_REDUNDANCY"
             ]
           }
         }
@@ -2914,10 +2935,35 @@
                           "type": "string",
                           "serialized_name": "StorageClass",
                           "enum": [
-                            "STANDARD",
-                            "REDUCED_REDUNDANCY",
                             "GLACIER"
                           ]
+                        }
+                      }
+                    },
+                    "noncurrent_version_transition": {
+                      "type": "structure",
+                      "serialized_name": "NoncurrentVersionTransition",
+                      "members": {
+                        "noncurrent_days": {
+                          "type": "integer",
+                          "serialized_name": "NoncurrentDays"
+                        },
+                        "storage_class": {
+                          "type": "string",
+                          "serialized_name": "StorageClass",
+                          "enum": [
+                            "GLACIER"
+                          ]
+                        }
+                      }
+                    },
+                    "noncurrent_version_expiration": {
+                      "type": "structure",
+                      "serialized_name": "NoncurrentVersionExpiration",
+                      "members": {
+                        "noncurrent_days": {
+                          "type": "integer",
+                          "serialized_name": "NoncurrentDays"
                         }
                       }
                     }
@@ -3235,7 +3281,7 @@
             "members": {
               "mfa_delete": {
                 "type": "string",
-                "serialized_name": "MFADelete",
+                "serialized_name": "MfaDelete",
                 "enum": [
                   "Enabled",
                   "Disabled"
@@ -3694,7 +3740,7 @@
     "restore_object": {
       "name": "RestoreObject",
       "http_method": "POST",
-      "http_path": "/{bucket}/{key}?restore",
+      "http_path": "/{bucket}/{key}?restore&versionId={version_id}",
       "input": {
         "type": "input",
         "members": {
@@ -3706,6 +3752,10 @@
           "key": {
             "type": "string",
             "required": true,
+            "location": "uri"
+          },
+          "version_id": {
+            "type": "string",
             "location": "uri"
           },
           "restore_request": {

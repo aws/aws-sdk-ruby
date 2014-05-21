@@ -364,7 +364,7 @@
             "location_name": "x-amz-server-side-encryption"
           },
           "StorageClass": {
-            "shape_name": "StorageClassOptions",
+            "shape_name": "StorageClass",
             "type": "string",
             "enum": [
               "STANDARD",
@@ -699,7 +699,7 @@
             "location_name": "x-amz-server-side-encryption"
           },
           "StorageClass": {
-            "shape_name": "StorageClassOptions",
+            "shape_name": "StorageClass",
             "type": "string",
             "enum": [
               "STANDARD",
@@ -1442,17 +1442,47 @@
                       "documentation": "Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer."
                     },
                     "StorageClass": {
-                      "shape_name": "StorageClass",
+                      "shape_name": "TransitionStorageClass",
                       "type": "string",
                       "enum": [
-                        "STANDARD",
-                        "REDUCED_REDUNDANCY",
                         "GLACIER"
                       ],
                       "documentation": "The class of storage used to store the object."
                     }
                   },
                   "documentation": null
+                },
+                "NoncurrentVersionTransition": {
+                  "shape_name": "NoncurrentVersionTransition",
+                  "type": "structure",
+                  "members": {
+                    "NoncurrentDays": {
+                      "shape_name": "Days",
+                      "type": "integer",
+                      "documentation": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.  For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
+                    },
+                    "StorageClass": {
+                      "shape_name": "TransitionStorageClass",
+                      "type": "string",
+                      "enum": [
+                        "GLACIER"
+                      ],
+                      "documentation": "The class of storage used to store the object."
+                    }
+                  },
+                  "documentation": "Container for the transition rule that describes when noncurrent objects transition to the GLACIER storage class.\n\nIf your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the GLACIER storage class at a specific period in the object's lifetime."
+                },
+                "NoncurrentVersionExpiration": {
+                  "shape_name": "NoncurrentVersionExpiration",
+                  "type": "structure",
+                  "members": {
+                    "NoncurrentDays": {
+                      "shape_name": "Days",
+                      "type": "integer",
+                      "documentation": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.  For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
+                    }
+                  },
+                  "documentation": "Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions.\n\nYou set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime."
                 }
               },
               "documentation": null
@@ -1869,7 +1899,8 @@
               "Enabled",
               "Disabled"
             ],
-            "documentation": "Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned."
+            "documentation": "Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.",
+            "xmlname": "MfaDelete"
           }
         },
         "documentation": null
@@ -2927,8 +2958,7 @@
                   "type": "string",
                   "enum": [
                     "STANDARD",
-                    "REDUCED_REDUNDANCY",
-                    "GLACIER"
+                    "REDUCED_REDUNDANCY"
                   ],
                   "documentation": "The class of storage used to store the object."
                 },
@@ -3114,12 +3144,10 @@
                   "documentation": "Size in bytes of the object."
                 },
                 "StorageClass": {
-                  "shape_name": "StorageClass",
+                  "shape_name": "ObjectVersionStorageClass",
                   "type": "string",
                   "enum": [
-                    "STANDARD",
-                    "REDUCED_REDUNDANCY",
-                    "GLACIER"
+                    "STANDARD"
                   ],
                   "documentation": "The class of storage used to store the object."
                 },
@@ -3369,7 +3397,7 @@
                   "documentation": null
                 },
                 "StorageClass": {
-                  "shape_name": "StorageClass",
+                  "shape_name": "ObjectStorageClass",
                   "type": "string",
                   "enum": [
                     "STANDARD",
@@ -3616,8 +3644,7 @@
             "type": "string",
             "enum": [
               "STANDARD",
-              "REDUCED_REDUNDANCY",
-              "GLACIER"
+              "REDUCED_REDUNDANCY"
             ],
             "documentation": "The class of storage used to store the object."
           }
@@ -4006,17 +4033,47 @@
                           "documentation": "Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer."
                         },
                         "StorageClass": {
-                          "shape_name": "StorageClass",
+                          "shape_name": "TransitionStorageClass",
                           "type": "string",
                           "enum": [
-                            "STANDARD",
-                            "REDUCED_REDUNDANCY",
                             "GLACIER"
                           ],
                           "documentation": "The class of storage used to store the object."
                         }
                       },
                       "documentation": null
+                    },
+                    "NoncurrentVersionTransition": {
+                      "shape_name": "NoncurrentVersionTransition",
+                      "type": "structure",
+                      "members": {
+                        "NoncurrentDays": {
+                          "shape_name": "Days",
+                          "type": "integer",
+                          "documentation": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.  For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
+                        },
+                        "StorageClass": {
+                          "shape_name": "TransitionStorageClass",
+                          "type": "string",
+                          "enum": [
+                            "GLACIER"
+                          ],
+                          "documentation": "The class of storage used to store the object."
+                        }
+                      },
+                      "documentation": "Container for the transition rule that describes when noncurrent objects transition to the GLACIER storage class.\n\nIf your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the GLACIER storage class at a specific period in the object's lifetime."
+                    },
+                    "NoncurrentVersionExpiration": {
+                      "shape_name": "NoncurrentVersionExpiration",
+                      "type": "structure",
+                      "members": {
+                        "NoncurrentDays": {
+                          "shape_name": "Days",
+                          "type": "integer",
+                          "documentation": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.  For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
+                        }
+                      },
+                      "documentation": "Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions.\n\nYou set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime."
                     }
                   },
                   "documentation": null
@@ -4436,7 +4493,8 @@
                   "Enabled",
                   "Disabled"
                 ],
-                "documentation": "Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned."
+                "documentation": "Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.",
+                "xmlname": "MfaDelete"
               },
               "Status": {
                 "shape_name": "BucketVersioningStatus",
@@ -4775,7 +4833,7 @@
             "location_name": "x-amz-server-side-encryption"
           },
           "StorageClass": {
-            "shape_name": "StorageClassOptions",
+            "shape_name": "StorageClass",
             "type": "string",
             "enum": [
               "STANDARD",
@@ -5035,7 +5093,7 @@
       "name": "RestoreObject",
       "http": {
         "method": "POST",
-        "uri": "/{Bucket}/{Key}?restore"
+        "uri": "/{Bucket}/{Key}?restore&versionId={VersionId}"
       },
       "input": {
         "shape_name": "RestoreObjectRequest",
@@ -5053,6 +5111,12 @@
             "type": "string",
             "documentation": null,
             "required": true,
+            "location": "uri"
+          },
+          "VersionId": {
+            "shape_name": "ObjectVersionId",
+            "type": "string",
+            "documentation": null,
             "location": "uri"
           },
           "RestoreRequest": {
