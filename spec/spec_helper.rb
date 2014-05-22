@@ -21,6 +21,13 @@ def dummy_credentials
   @dummy_credentials ||= Aws::Credentials.new('akid', 'secret')
 end
 
+# Simply returns the request context without any http response info.
+class NoSendHandler < Seahorse::Client::Handler
+  def call(context)
+    Seahorse::Client::Response.new(context: context)
+  end
+end
+
 # A helper :send_handler that does not send the request, it simply
 # returns an empty response.
 class DummySendHandler < Seahorse::Client::Handler
