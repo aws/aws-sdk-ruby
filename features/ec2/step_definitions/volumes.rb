@@ -25,6 +25,7 @@ When /^I create a volume with the following parameters:$/ do |table|
     opts[h["parameter"].to_sym] =
       case h["parameter"]
       when "size" then h["value"].to_i
+      when "encrypted" then h["value"] == 'true'
       else
         h["value"]
       end

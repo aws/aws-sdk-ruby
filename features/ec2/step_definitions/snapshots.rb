@@ -60,3 +60,11 @@ When /^I get all snapshots grouped by owner ID$/ do
     hash
   end
 end
+
+Then(/^I can copy the snapshot to 'us\-west\-(\d+)'$/) do |region|
+  client = @ec2.client.with(:ec2_region => region)
+  client.copy_snapshot(
+    source_region: @ec2.client.ec2_region,
+    source_snapshot_id: @snapshot.id
+  )
+end

@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'rspec'
+
 When /^I select items using the following attribute conditions:$/ do |table|
   # This would work:
   # @result = @domain.items.where(table.rows_hash).to_a

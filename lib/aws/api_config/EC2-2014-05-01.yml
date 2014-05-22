@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2014-02-01'
+:api_version: '2014-05-01'
 :operations:
 - :name: AcceptVpcPeeringConnection
   :method: :accept_vpc_peering_connection
@@ -442,6 +442,12 @@
     - :required
     Description:
     - :string
+    DestinationRegion:
+    - :string
+    - :rename: DestinationRegion
+    PresignedUrl:
+    - :string
+    - :rename: PresignedUrl
   :outputs: {}
 - :name: CreateCustomerGateway
   :method: :create_customer_gateway
@@ -544,6 +550,9 @@
               - :string
               Iops:
               - :integer
+              Encrypted:
+              - :boolean
+              - :rename: Encrypted
           NoDevice:
           - :string
     - :rename: blockDeviceMappings
@@ -920,6 +929,8 @@
           item:
             :rename: :tag_set
             :list: true
+      encrypted:
+        :type: :boolean
 - :name: CreateSpotDatafeedSubscription
   :method: :create_spot_datafeed_subscription
   :inputs:
@@ -996,6 +1007,9 @@
     - :string
     Iops:
     - :integer
+    Encrypted:
+    - :boolean
+    - :rename: Encrypted
   :outputs:
     :children:
       size:
@@ -1021,6 +1035,8 @@
             :list: true
       iops:
         :type: :integer
+      encrypted:
+        :type: :boolean
 - :name: CreateVpc
   :method: :create_vpc
   :inputs:
@@ -1698,6 +1714,8 @@
                     :type: :boolean
                   iops:
                     :type: :integer
+                  encrypted:
+                    :type: :boolean
 - :name: DescribeImages
   :method: :describe_images
   :inputs:
@@ -1757,6 +1775,8 @@
                             :type: :boolean
                           iops:
                             :type: :integer
+                          encrypted:
+                            :type: :boolean
               tagSet:
                 :ignore: true
                 :children:
@@ -2749,6 +2769,8 @@
                   item:
                     :rename: :tag_set
                     :list: true
+              encrypted:
+                :type: :boolean
             :index:
               :key: :snapshot_id
               :name: :snapshot_index
@@ -2817,6 +2839,8 @@
                                 :type: :boolean
                               iops:
                                 :type: :integer
+                              encrypted:
+                                :type: :boolean
                   monitoringEnabled:
                     :type: :boolean
                   networkInterfaceSet:
@@ -3106,6 +3130,8 @@
                     :list: true
               iops:
                 :type: :integer
+              encrypted:
+                :type: :boolean
             :index:
               :key: :volume_id
               :name: :volume_index
@@ -3935,6 +3961,9 @@
               - :string
               Iops:
               - :integer
+              Encrypted:
+              - :boolean
+              - :rename: Encrypted
           NoDevice:
           - :string
     - :rename: blockDeviceMappings
@@ -4130,6 +4159,9 @@
                   - :string
                   Iops:
                   - :integer
+                  Encrypted:
+                  - :boolean
+                  - :rename: Encrypted
               NoDevice:
               - :string
         - :rename: blockDeviceMappings
@@ -4229,6 +4261,8 @@
                                 :type: :boolean
                               iops:
                                 :type: :integer
+                              encrypted:
+                                :type: :boolean
                   monitoringEnabled:
                     :type: :boolean
                   networkInterfaceSet:
@@ -4487,6 +4521,9 @@
               - :string
               Iops:
               - :integer
+              Encrypted:
+              - :boolean
+              - :rename: Encrypted
           NoDevice:
           - :string
     - :rename: BlockDeviceMappings

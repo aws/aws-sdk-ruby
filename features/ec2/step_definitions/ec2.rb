@@ -40,6 +40,7 @@ Before("@ec2") do
   @created_dhcp_options = []
   @created_vpn_connections = []
 
+  @test_config ||= {}
   @test_config["account_id"] ||=
     @ec2.security_groups.filter("group-name", "default").first.owner_id
 

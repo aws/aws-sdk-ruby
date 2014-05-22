@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::QueryClient
 
-      API_VERSION = '2014-02-01'
+      API_VERSION = '2014-05-01'
 
       def sign_request request
         version = @config.ec2_signature_version ?
@@ -101,5 +101,48 @@ module AWS
       define_client_methods('2014-02-01')
     end
 
+    class Client::V20140501 < Client
+
+      define_client_methods('2014-05-01')
+
+      alias basic_copy_snapshot copy_snapshot
+
+      def copy_snapshot(params = {})
+        # Adding logic to auto-compute the destination group and presigned
+        # url params for the copy snapshot operation.  This is necessary
+        # when calling copy snapshot on snapshots for encrypted volumes.
+        # This addition should be transparent to the API user.
+        params = params.dup
+        params[:destination_region] = @region
+        params[:presigned_url] = presigned_copy_snapshot_url(params)
+        basic_copy_snapshot(params)
+      end
+
+      private
+
+      def presigned_copy_snapshot_url(params)
+        now = Time.now.strftime("%Y%m%dT%H%M%SZ")
+        token = credential_provider.session_token
+
+        req = build_request(:copy_snapshot, params)
+        req.headers['host'] = req.host
+
+        req.add_param("X-Amz-Algorithm", "AWS4-HMAC-SHA256")
+        req.add_param("X-Amz-Date", now)
+        req.add_param("X-Amz-SignedHeaders", 'host')
+        req.add_param("X-Amz-Expires", "3600")
+        req.add_param('X-Amz-Security-Token', token) if token
+        req.add_param("X-Amz-Credential", v4_signer.credential(now))
+
+        req.http_method = 'GET'
+        req.uri = '/?' + req.url_encoded_params
+        req.body = ''
+
+        key = v4_signer.derive_key(now)
+        sig = v4_signer.signature(req, key, now, v4_signer.class::EMPTY_DIGEST)
+        req.endpoint + req.uri + "&X-Amz-Signature=#{sig}"
+      end
+
+    end
   end
 end
