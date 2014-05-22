@@ -1,16 +1,3 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 ---
 :check_dns_availability: |-
   Calls the CheckDNSAvailability API operation.
@@ -44,30 +31,31 @@
   - (String) Describes this version.\n  * `:source_bundle` - (Hash) The Amazon S3
   bucket and key that identify the location of the source bundle for this version.
   If data found at the Amazon S3 location exceeds the maximum allowed source bundle
-  size, AWS Elastic Beanstalk returns an InvalidParameterValue error. Default: If
-  not specified, AWS Elastic Beanstalk uses a sample application. If only partially
-  specified (for example, a bucket is provided but not the key) or if no data is found
-  at the Amazon S3 location, AWS Elastic Beanstalk returns an InvalidParameterCombination
-  error.\n    * `:s3_bucket` - (String) The Amazon S3 bucket where the data is located.\n
-  \   * `:s3_key` - (String) The Amazon S3 key where the data is located.\n  * `:auto_create_application`
-  - (Boolean) Determines how the system behaves if the specified application for this
-  version does not already exist:  `true` : Automatically creates the specified application
-  for this version if it does not already exist.  `false` : Returns an InvalidParameterValue
-  if the specified application for this version does not already exist.  `true`  :
-  Automatically creates the specified application for this release if it does not
-  already exist.  `false`  : Throws an InvalidParameterValue if the specified application
-  for this release does not already exist. Default:  `false`  Valid Values:  `true`
-  \ |  `false` \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:application_version` - (Hash)\n
-  \   * `:application_name` - (String)\n    * `:description` - (String)\n    * `:version_label`
-  - (String)\n    * `:source_bundle` - (Hash)\n      * `:s3_bucket` - (String)\n      *
-  `:s3_key` - (String)\n    * `:date_created` - (Time)\n    * `:date_updated` - (Time)"
+  size, AWS Elastic Beanstalk returns an InvalidParameterValue error. The maximum
+  size allowed is 512 MB. Default: If not specified, AWS Elastic Beanstalk uses a
+  sample application. If only partially specified (for example, a bucket is provided
+  but not the key) or if no data is found at the Amazon S3 location, AWS Elastic Beanstalk
+  returns an InvalidParameterCombination error.\n    * `:s3_bucket` - (String) The
+  Amazon S3 bucket where the data is located.\n    * `:s3_key` - (String) The Amazon
+  S3 key where the data is located.\n  * `:auto_create_application` - (Boolean) Determines
+  how the system behaves if the specified application for this version does not already
+  exist:  `true` : Automatically creates the specified application for this version
+  if it does not already exist.  `false` : Returns an InvalidParameterValue if the
+  specified application for this version does not already exist.  `true`  : Automatically
+  creates the specified application for this release if it does not already exist.
+  \ `false`  : Throws an InvalidParameterValue if the specified application for this
+  release does not already exist. Default:  `false`  Valid Values:  `true`  |  `false`
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:application_version` - (Hash)\n    * `:application_name`
+  - (String)\n    * `:description` - (String)\n    * `:version_label` - (String)\n
+  \   * `:source_bundle` - (Hash)\n      * `:s3_bucket` - (String)\n      * `:s3_key`
+  - (String)\n    * `:date_created` - (Time)\n    * `:date_updated` - (Time)"
 :create_configuration_template: |-
   Calls the CreateConfigurationTemplate API operation.
   @param [Hash] options
     * `:application_name` - *required* - (String) The name of the application to associate with this configuration template. If no application is found with this name, AWS Elastic Beanstalk returns an InvalidParameterValue error.
     * `:template_name` - *required* - (String) The name of the configuration template. Constraint: This name must be unique per application. Default: If a configuration template already exists with this name, AWS Elastic Beanstalk returns an InvalidParameterValue error.
-    * `:solution_stack_name` - (String) The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values. Use ListAvailableSolutionStacks to obtain a list of available solution stacks. Default: If the SolutionStackName is not specified and the source configuration parameter is blank, AWS Elastic Beanstalk uses the default solution stack. If not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template.
+    * `:solution_stack_name` - (String) The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values. Use ListAvailableSolutionStacks to obtain a list of available solution stacks. A solution stack name or a source configuration parameter must be specified, otherwise AWS Elastic Beanstalk returns an InvalidParameterValue error. If a solution stack name is not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template.
     * `:source_configuration` - (Hash) If specified, AWS Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration. Values specified in the OptionSettings parameter of this call overrides any values obtained from the SourceConfiguration. If no configuration template is found, returns an InvalidParameterValue error. Constraint: If both the solution stack name parameter and the source configuration parameters are specified, the solution stack of the source configuration template must match the specified solution stack name or else AWS Elastic Beanstalk returns an InvalidParameterCombination error.
       * `:application_name` - (String) The name of the application associated with the configuration.
       * `:template_name` - (String) The name of the configuration template.
@@ -91,66 +79,68 @@
       * `:namespace` - (String)
       * `:option_name` - (String)
       * `:value` - (String)
-:create_environment: "Calls the CreateEnvironment API operation.\n@param [Hash] options\n
-  \ * `:application_name` - *required* - (String) The name of the application that
-  contains the version to be deployed. If no application is found with this name,
-  CreateEnvironment returns an InvalidParameterValue error.\n  * `:environment_name`
-  - *required* - (String) A unique name for the deployment environment. Used in the
-  application URL. Constraint: Must be from 4 to 23 characters in length. The name
-  can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen.
-  This name must be unique in your account. If the specified name already exists,
-  AWS Elastic Beanstalk returns an InvalidParameterValue error. Default: If the CNAME
-  parameter is not specified, the environment name becomes part of the CNAME, and
-  therefore part of the visible URL for your application.\n  * `:description` - (String)
-  Describes this environment.\n  * `:cname_prefix` - (String) If specified, the environment
-  attempts to use this value as the prefix for the CNAME. If not specified, the environment
-  uses the environment name.\n  * `:tier` - (Hash) \n    * `:name` - (String) \n    *
-  `:type` - (String) \n    * `:version` - (String) \n  * `:version_label` - (String)
-  The name of the application version to deploy. If the specified application has
-  no associated application versions, AWS Elastic Beanstalk UpdateEnvironment returns
-  an InvalidParameterValue error. Default: If not specified, AWS Elastic Beanstalk
-  attempts to launch the most recently created application version.\n  * `:template_name`
-  - (String) The name of the configuration template to use in deployment. If no configuration
-  template is found with this name, AWS Elastic Beanstalk returns an InvalidParameterValue
-  error. Condition: You must specify either this parameter or a SolutionStackName,
-  but not both. If you specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination
-  error. If you do not specify either, AWS Elastic Beanstalk returns a MissingRequiredParameter
-  error.\n  * `:solution_stack_name` - (String) This is an alternative to specifying
-  a configuration name. If specified, AWS Elastic Beanstalk sets the configuration
-  values to the default values associated with the specified solution stack. Condition:
-  You must specify either this or a TemplateName, but not both. If you specify both,
-  AWS Elastic Beanstalk returns an InvalidParameterCombination error. If you do not
-  specify either, AWS Elastic Beanstalk returns a MissingRequiredParameter error.\n
-  \ * `:option_settings` - (Array&lt;<Hash>) If specified, AWS Elastic Beanstalk sets
-  the specified configuration options to the requested value in the configuration
-  set for the new environment. These override the values obtained from the solution
-  stack or the configuration template.\n    * `:namespace` - (String) A unique namespace
-  identifying the option's associated AWS resource.\n    * `:option_name` - (String)
-  The name of the configuration option.\n    * `:value` - (String) The current value
-  for the configuration option.\n  * `:options_to_remove` - (Array&lt;<Hash>) A list
-  of custom user-defined configuration options to remove from the configuration set
-  for this new environment.\n    * `:namespace` - (String) A unique namespace identifying
-  the option's associated AWS resource.\n    * `:option_name` - (String) The name
-  of the configuration option.\n@return [Core::Response] The `#data` method of the
-  response object returns a hash with the following structure:\n\n  * `:environment_name`
-  - (String)\n  * `:environment_id` - (String)\n  * `:application_name` - (String)\n
-  \ * `:version_label` - (String)\n  * `:solution_stack_name` - (String)\n  * `:template_name`
-  - (String)\n  * `:description` - (String)\n  * `:endpoint_url` - (String)\n  * `:cname`
-  - (String)\n  * `:date_created` - (Time)\n  * `:date_updated` - (Time)\n  * `:status`
-  - (String)\n  * `:health` - (String)\n  * `:resources` - (Hash)\n    * `:load_balancer`
-  - (Hash)\n      * `:load_balancer_name` - (String)\n      * `:domain` - (String)\n
-  \     * `:listeners` - (Array<Hash>)\n        * `:protocol` - (String)\n        *
-  `:port` - (Integer)\n  * `:tier` - (Hash)\n    * `:name` - (String)\n    * `:type`
-  - (String)\n    * `:version` - (String)"
+:create_environment: |-
+  Calls the CreateEnvironment API operation.
+  @param [Hash] options
+    * `:application_name` - *required* - (String) The name of the application that contains the version to be deployed. If no application is found with this name, CreateEnvironment returns an InvalidParameterValue error.
+    * `:environment_name` - *required* - (String) A unique name for the deployment environment. Used in the application URL. Constraint: Must be from 4 to 23 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique in your account. If the specified name already exists, AWS Elastic Beanstalk returns an InvalidParameterValue error. Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.
+    * `:description` - (String) Describes this environment.
+    * `:cname_prefix` - (String) If specified, the environment attempts to use this value as the prefix for the CNAME. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.
+    * `:tier` - (Hash) This specifies the tier to use for creating this environment.
+      * `:name` - (String) The name of this environment tier.
+      * `:type` - (String) The type of this environment tier.
+      * `:version` - (String) The version of this environment tier.
+    * `:tags` - (Array&lt;<Hash>) This specifies the tags applied to resources in the environment.
+      * `:key` - (String) The key of the tag.
+      * `:value` - (String) The value of the tag.
+    * `:version_label` - (String) The name of the application version to deploy. If the specified application has no associated application versions, AWS Elastic Beanstalk UpdateEnvironment returns an InvalidParameterValue error. Default: If not specified, AWS Elastic Beanstalk attempts to launch the sample application in the container.
+    * `:template_name` - (String) The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an InvalidParameterValue error. Condition: You must specify either this parameter or a SolutionStackName, but not both. If you specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination error. If you do not specify either, AWS Elastic Beanstalk returns a MissingRequiredParameter error.
+    * `:solution_stack_name` - (String) This is an alternative to specifying a configuration name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. Condition: You must specify either this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination error. If you do not specify either, AWS Elastic Beanstalk returns a MissingRequiredParameter error.
+    * `:option_settings` - (Array&lt;<Hash>) If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template.
+      * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
+      * `:option_name` - (String) The name of the configuration option.
+      * `:value` - (String) The current value for the configuration option.
+    * `:options_to_remove` - (Array&lt;<Hash>) A list of custom user-defined configuration options to remove from the configuration set for this new environment.
+      * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
+      * `:option_name` - (String) The name of the configuration option.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:environment_name` - (String)
+    * `:environment_id` - (String)
+    * `:application_name` - (String)
+    * `:version_label` - (String)
+    * `:solution_stack_name` - (String)
+    * `:template_name` - (String)
+    * `:description` - (String)
+    * `:endpoint_url` - (String)
+    * `:cname` - (String)
+    * `:date_created` - (Time)
+    * `:date_updated` - (Time)
+    * `:status` - (String)
+    * `:health` - (String)
+    * `:resources` - (Hash)
+      * `:load_balancer` - (Hash)
+        * `:load_balancer_name` - (String)
+        * `:domain` - (String)
+        * `:listeners` - (Array<Hash>)
+          * `:protocol` - (String)
+          * `:port` - (Integer)
+    * `:tier` - (Hash)
+      * `:name` - (String)
+      * `:type` - (String)
+      * `:version` - (String)
 :create_storage_location: |-
   Calls the CreateStorageLocation API operation.
   @param [Hash] options
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:s3_bucket` - (String)
-:delete_application: "Calls the DeleteApplication API operation.\n@param [Hash] options\n
-  \ * `:application_name` - *required* - (String) The name of the application to delete.\n
-  \ * `:terminate_env_by_force` - (Boolean) \n@return [Core::Response]"
+:delete_application: |-
+  Calls the DeleteApplication API operation.
+  @param [Hash] options
+    * `:application_name` - *required* - (String) The name of the application to delete.
+    * `:terminate_env_by_force` - (Boolean) When set to  `true` , running environments will be terminated before deleting the application.
+  @return [Core::Response]
 :delete_application_version: "Calls the DeleteApplicationVersion API operation.\n@param
   [Hash] options\n  * `:application_name` - *required* - (String) The name of the
   application to delete releases from.\n  * `:version_label` - *required* - (String)
@@ -474,43 +464,51 @@
       * `:namespace` - (String)
       * `:option_name` - (String)
       * `:value` - (String)
-:update_environment: "Calls the UpdateEnvironment API operation.\n@param [Hash] options\n
-  \ * `:environment_id` - (String) The ID of the environment to update. If no environment
-  with this ID exists, AWS Elastic Beanstalk returns an InvalidParameterValue error.
-  Condition: You must specify either this or an EnvironmentName, or both. If you do
-  not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter error.\n
-  \ * `:environment_name` - (String) The name of the environment to update. If no
-  environment with this name exists, AWS Elastic Beanstalk returns an InvalidParameterValue
-  error. Condition: You must specify either this or an EnvironmentId, or both. If
-  you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-  error.\n  * `:description` - (String) If this parameter is specified, AWS Elastic
-  Beanstalk updates the description of this environment.\n  * `:tier` - (Hash) \n
-  \   * `:name` - (String) \n    * `:type` - (String) \n    * `:version` - (String)
-  \n  * `:version_label` - (String) If this parameter is specified, AWS Elastic Beanstalk
-  deploys the named application version to the environment. If no such application
-  version is found, returns an InvalidParameterValue error.\n  * `:template_name`
-  - (String) If this parameter is specified, AWS Elastic Beanstalk deploys this configuration
-  template to the environment. If no such configuration template is found, AWS Elastic
-  Beanstalk returns an InvalidParameterValue error.\n  * `:option_settings` - (Array&lt;<Hash>)
-  If specified, AWS Elastic Beanstalk updates the configuration set associated with
-  the running environment and sets the specified configuration options to the requested
-  value.\n    * `:namespace` - (String) A unique namespace identifying the option's
-  associated AWS resource.\n    * `:option_name` - (String) The name of the configuration
-  option.\n    * `:value` - (String) The current value for the configuration option.\n
-  \ * `:options_to_remove` - (Array&lt;<Hash>) A list of custom user-defined configuration
-  options to remove from the configuration set for this environment.\n    * `:namespace`
-  - (String) A unique namespace identifying the option's associated AWS resource.\n
-  \   * `:option_name` - (String) The name of the configuration option.\n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:environment_name` - (String)\n  * `:environment_id` - (String)\n  * `:application_name`
-  - (String)\n  * `:version_label` - (String)\n  * `:solution_stack_name` - (String)\n
-  \ * `:template_name` - (String)\n  * `:description` - (String)\n  * `:endpoint_url`
-  - (String)\n  * `:cname` - (String)\n  * `:date_created` - (Time)\n  * `:date_updated`
-  - (Time)\n  * `:status` - (String)\n  * `:health` - (String)\n  * `:resources` -
-  (Hash)\n    * `:load_balancer` - (Hash)\n      * `:load_balancer_name` - (String)\n
-  \     * `:domain` - (String)\n      * `:listeners` - (Array<Hash>)\n        * `:protocol`
-  - (String)\n        * `:port` - (Integer)\n  * `:tier` - (Hash)\n    * `:name` -
-  (String)\n    * `:type` - (String)\n    * `:version` - (String)"
+:update_environment: |-
+  Calls the UpdateEnvironment API operation.
+  @param [Hash] options
+    * `:environment_id` - (String) The ID of the environment to update. If no environment with this ID exists, AWS Elastic Beanstalk returns an InvalidParameterValue error. Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
+    * `:environment_name` - (String) The name of the environment to update. If no environment with this name exists, AWS Elastic Beanstalk returns an InvalidParameterValue error. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
+    * `:description` - (String) If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.
+    * `:tier` - (Hash) This specifies the tier to use to update the environment. Condition: You can only update the tier version for an environment. If you change the name of the type, AWS Elastic Beanstalk returns InvalidParameterValue error.
+      * `:name` - (String) The name of this environment tier.
+      * `:type` - (String) The type of this environment tier.
+      * `:version` - (String) The version of this environment tier.
+    * `:version_label` - (String) If this parameter is specified, AWS Elastic Beanstalk deploys the named application version to the environment. If no such application version is found, returns an InvalidParameterValue error.
+    * `:template_name` - (String) If this parameter is specified, AWS Elastic Beanstalk deploys this configuration template to the environment. If no such configuration template is found, AWS Elastic Beanstalk returns an InvalidParameterValue error.
+    * `:option_settings` - (Array&lt;<Hash>) If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.
+      * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
+      * `:option_name` - (String) The name of the configuration option.
+      * `:value` - (String) The current value for the configuration option.
+    * `:options_to_remove` - (Array&lt;<Hash>) A list of custom user-defined configuration options to remove from the configuration set for this environment.
+      * `:namespace` - (String) A unique namespace identifying the option's associated AWS resource.
+      * `:option_name` - (String) The name of the configuration option.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:environment_name` - (String)
+    * `:environment_id` - (String)
+    * `:application_name` - (String)
+    * `:version_label` - (String)
+    * `:solution_stack_name` - (String)
+    * `:template_name` - (String)
+    * `:description` - (String)
+    * `:endpoint_url` - (String)
+    * `:cname` - (String)
+    * `:date_created` - (Time)
+    * `:date_updated` - (Time)
+    * `:status` - (String)
+    * `:health` - (String)
+    * `:resources` - (Hash)
+      * `:load_balancer` - (Hash)
+        * `:load_balancer_name` - (String)
+        * `:domain` - (String)
+        * `:listeners` - (Array<Hash>)
+          * `:protocol` - (String)
+          * `:port` - (Integer)
+    * `:tier` - (Hash)
+      * `:name` - (String)
+      * `:type` - (String)
+      * `:version` - (String)
 :validate_configuration_settings: |-
   Calls the ValidateConfigurationSettings API operation.
   @param [Hash] options
