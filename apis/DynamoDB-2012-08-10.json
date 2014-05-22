@@ -2811,6 +2811,7 @@
           },
           "key_conditions": {
             "type": "map",
+            "required": true,
             "serialized_name": "KeyConditions",
             "keys": {
               "type": "string"

@@ -281,6 +281,27 @@
             "type": "string",
             "serialized_name": "Description"
           },
+          "data_sources": {
+            "type": "list",
+            "serialized_name": "DataSources",
+            "members": {
+              "type": "structure",
+              "members": {
+                "type": {
+                  "type": "string",
+                  "serialized_name": "Type"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "database_name": {
+                  "type": "string",
+                  "serialized_name": "DatabaseName"
+                }
+              }
+            }
+          },
           "type": {
             "type": "string",
             "required": true,
@@ -519,6 +540,10 @@
           "availability_zone": {
             "type": "string",
             "serialized_name": "AvailabilityZone"
+          },
+          "virtualization_type": {
+            "type": "string",
+            "serialized_name": "VirtualizationType"
           },
           "subnet_id": {
             "type": "string",
@@ -1055,6 +1080,21 @@
         }
       }
     },
+    "deregister_rds_db_instance": {
+      "name": "DeregisterRdsDbInstance",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "rds_db_instance_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RdsDbInstanceArn"
+          }
+        }
+      }
+    },
     "deregister_volume": {
       "name": "DeregisterVolume",
       "http_method": "POST",
@@ -1118,6 +1158,27 @@
                 "description": {
                   "type": "string",
                   "serialized_name": "Description"
+                },
+                "data_sources": {
+                  "type": "list",
+                  "serialized_name": "DataSources",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "type": {
+                        "type": "string",
+                        "serialized_name": "Type"
+                      },
+                      "arn": {
+                        "type": "string",
+                        "serialized_name": "Arn"
+                      },
+                      "database_name": {
+                        "type": "string",
+                        "serialized_name": "DatabaseName"
+                      }
+                    }
+                  }
                 },
                 "type": {
                   "type": "string",
@@ -1599,6 +1660,10 @@
                 "ec2_instance_id": {
                   "type": "string",
                   "serialized_name": "Ec2InstanceId"
+                },
+                "virtualization_type": {
+                  "type": "string",
+                  "serialized_name": "VirtualizationType"
                 },
                 "hostname": {
                   "type": "string",
@@ -2258,6 +2323,78 @@
                 "iops": {
                   "type": "integer",
                   "serialized_name": "Iops"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "describe_rds_db_instances": {
+      "name": "DescribeRdsDbInstances",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stack_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StackId"
+          },
+          "rds_db_instance_arns": {
+            "type": "list",
+            "serialized_name": "RdsDbInstanceArns",
+            "members": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "output",
+        "members": {
+          "rds_db_instances": {
+            "type": "list",
+            "serialized_name": "RdsDbInstances",
+            "members": {
+              "type": "structure",
+              "members": {
+                "rds_db_instance_arn": {
+                  "type": "string",
+                  "serialized_name": "RdsDbInstanceArn"
+                },
+                "db_instance_identifier": {
+                  "type": "string",
+                  "serialized_name": "DbInstanceIdentifier"
+                },
+                "db_user": {
+                  "type": "string",
+                  "serialized_name": "DbUser"
+                },
+                "db_password": {
+                  "type": "string",
+                  "serialized_name": "DbPassword"
+                },
+                "region": {
+                  "type": "string",
+                  "serialized_name": "Region"
+                },
+                "address": {
+                  "type": "string",
+                  "serialized_name": "Address"
+                },
+                "engine": {
+                  "type": "string",
+                  "serialized_name": "Engine"
+                },
+                "stack_id": {
+                  "type": "string",
+                  "serialized_name": "StackId"
+                },
+                "missing_on_rds": {
+                  "type": "boolean",
+                  "serialized_name": "MissingOnRds"
                 }
               }
             }
@@ -2981,6 +3118,36 @@
         }
       }
     },
+    "register_rds_db_instance": {
+      "name": "RegisterRdsDbInstance",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "stack_id": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "StackId"
+          },
+          "rds_db_instance_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RdsDbInstanceArn"
+          },
+          "db_user": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "DbUser"
+          },
+          "db_password": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "DbPassword"
+          }
+        }
+      }
+    },
     "register_volume": {
       "name": "RegisterVolume",
       "http_method": "POST",
@@ -3306,6 +3473,27 @@
             "type": "string",
             "serialized_name": "Description"
           },
+          "data_sources": {
+            "type": "list",
+            "serialized_name": "DataSources",
+            "members": {
+              "type": "structure",
+              "members": {
+                "type": {
+                  "type": "string",
+                  "serialized_name": "Type"
+                },
+                "arn": {
+                  "type": "string",
+                  "serialized_name": "Arn"
+                },
+                "database_name": {
+                  "type": "string",
+                  "serialized_name": "DatabaseName"
+                }
+              }
+            }
+          },
           "type": {
             "type": "string",
             "serialized_name": "Type",
@@ -3479,6 +3667,10 @@
           "install_updates_on_boot": {
             "type": "boolean",
             "serialized_name": "InstallUpdatesOnBoot"
+          },
+          "ebs_optimized": {
+            "type": "boolean",
+            "serialized_name": "EbsOptimized"
           }
         }
       }
@@ -3667,6 +3859,29 @@
           "ssh_public_key": {
             "type": "string",
             "serialized_name": "SshPublicKey"
+          }
+        }
+      }
+    },
+    "update_rds_db_instance": {
+      "name": "UpdateRdsDbInstance",
+      "http_method": "POST",
+      "http_path": "/",
+      "input": {
+        "type": "input",
+        "members": {
+          "rds_db_instance_arn": {
+            "type": "string",
+            "required": true,
+            "serialized_name": "RdsDbInstanceArn"
+          },
+          "db_user": {
+            "type": "string",
+            "serialized_name": "DbUser"
+          },
+          "db_password": {
+            "type": "string",
+            "serialized_name": "DbPassword"
           }
         }
       }

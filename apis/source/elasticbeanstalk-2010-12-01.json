@@ -547,6 +547,32 @@
             },
             "documentation": "\n      <p>\n         This specifies the tier to use for creating this environment.\n      </p>\n   "
           },
+          "Tags": {
+            "shape_name": "Tags",
+            "type": "list",
+            "members": {
+              "shape_name": "Tag",
+              "type": "structure",
+              "members": {
+                "Key": {
+                  "shape_name": "TagKey",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 128,
+                  "documentation": "\n      <p>The key of the tag.</p>\n   "
+                },
+                "Value": {
+                  "shape_name": "TagValue",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 256,
+                  "documentation": "\n      <p>The value of the tag.</p>\n   "
+                }
+              },
+              "documentation": "\n      <p>Describes a tag applied to a resource in an environment.</p>\n   "
+            },
+            "documentation": "\n      <p>\n         This specifies the tags applied to resources in the environment.\n      </p>\n   "
+          },
           "VersionLabel": {
             "shape_name": "VersionLabel",
             "type": "string",

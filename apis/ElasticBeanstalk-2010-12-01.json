@@ -390,6 +390,23 @@
               }
             }
           },
+          "tags": {
+            "type": "list",
+            "serialized_name": "Tags",
+            "members": {
+              "type": "structure",
+              "members": {
+                "key": {
+                  "type": "string",
+                  "serialized_name": "Key"
+                },
+                "value": {
+                  "type": "string",
+                  "serialized_name": "Value"
+                }
+              }
+            }
+          },
           "version_label": {
             "type": "string",
             "serialized_name": "VersionLabel"
