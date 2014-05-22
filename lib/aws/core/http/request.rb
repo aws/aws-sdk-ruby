@@ -30,7 +30,7 @@ module AWS
           @headers = CaseInsensitiveHash.new
           @uri = '/'
           @params = []
-          @read_timeout = 60
+          @read_timeout = AWS.config.http_read_timeout || 60
         end
 
         # @return [String] hostname of the request
