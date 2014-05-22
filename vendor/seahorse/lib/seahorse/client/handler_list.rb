@@ -246,6 +246,7 @@ module Seahorse
           if handler.is_a?(Class)
             handler = handler.new(stack)
           else
+            handler = handler.dup
             handler.handler = stack
             handler
           end

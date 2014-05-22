@@ -41,6 +41,7 @@ module Aws
     module ServiceTranslators
       autoload :CloudFront, "#{SRC}/api/service_translators/cloud_front"
       autoload :DynamoDB, "#{SRC}/api/service_translators/dynamo_db"
+      autoload :EC2, "#{SRC}/api/service_translators/ec2"
       autoload :Glacier, "#{SRC}/api/service_translators/glacier"
       autoload :ImportExport, "#{SRC}/api/service_translators/import_export"
       autoload :Route53, "#{SRC}/api/service_translators/route53"
@@ -62,6 +63,7 @@ module Aws
   module Plugins
     autoload :Credentials, "#{SRC}/plugins/credentials"
     autoload :DynamoDBExtendedRetries, "#{SRC}/plugins/dynamodb_extended_retries"
+    autoload :EC2CopyEncryptedSnapshot, "#{SRC}/plugins/ec2_copy_encrypted_snapshot"
     autoload :GlacierAccountId, "#{SRC}/plugins/glacier_account_id"
     autoload :GlacierApiVersion, "#{SRC}/plugins/glacier_api_version"
     autoload :GlacierChecksums, "#{SRC}/plugins/glacier_checksums"
