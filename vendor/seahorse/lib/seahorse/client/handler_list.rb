@@ -7,8 +7,8 @@ module Seahorse
 
       class InvalidStepError < ArgumentError
         def initialize(step)
-          msg = "invalid :step `%s', must be one of :validate, :build, "
-          msg << ":sign or :send"
+          msg = "invalid :step `%s', must be one of :initialize, :validate, "
+          msg << ":build, :sign or :send"
           super(msg % step.inspect)
         end
       end
