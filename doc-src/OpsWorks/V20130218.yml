@@ -98,7 +98,7 @@
   set Username to the appropriate IAM access key ID. For HTTP bundles, Git repositories,
   and Subversion repositories, set Username to the user name.\n    * `:password` -
   (String) This parameter depends on the repository type. For Amazon S3 bundles, set
-  Password to the appropriate IAM secret access key. For HTTP bundles, and Subversion
+  Password to the appropriate IAM secret access key. For HTTP bundles and Subversion
   repositories, set Password to the password. For more information on how to safely
   handle IAM credentials, see .\n    * `:ssh_key` - (String) The repository's SSH
   key.\n    * `:revision` - (String) The application's version. AWS OpsWorks enables
@@ -121,6 +121,10 @@
     * `:shortname` - (String) The app's short name.
     * `:name` - *required* - (String) The app name.
     * `:description` - (String) A description of the app.
+    * `:data_sources` - (Array&lt;<Hash>) The app's data source.
+      * `:type` - (String) The data source's type, AutoSelectOpsworksMysqlInstance, OpsworksMysqlInstance, or RdsDbInstance.
+      * `:arn` - (String) The data source's ARN.
+      * `:database_name` - (String) The database name.
     * `:type` - *required* - (String) The app type. Each supported type is associated with a particular layer. For example, PHP applications are associated with a PHP layer. AWS OpsWorks deploys an application to those instances that are members of the corresponding layer.  Valid values include:
       * `rails`
       * `php`
@@ -135,7 +139,7 @@
         * `s3`
       * `:url` - (String) The source URL.
       * `:username` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Username to the appropriate IAM access key ID. For HTTP bundles, Git repositories, and Subversion repositories, set Username to the user name.
-      * `:password` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Password to the appropriate IAM secret access key. For HTTP bundles, and Subversion repositories, set Password to the password. For more information on how to safely handle IAM credentials, see .
+      * `:password` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Password to the appropriate IAM secret access key. For HTTP bundles and Subversion repositories, set Password to the password. For more information on how to safely handle IAM credentials, see .
       * `:ssh_key` - (String) The repository's SSH key.
       * `:revision` - (String) The application's version. AWS OpsWorks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
     * `:domains` - (Array&lt;<String>) The app virtual host settings, with multiple domains separated by commas. For example: 'www.example.com, example.com'
@@ -186,6 +190,7 @@
     * `:ami_id` - (String) A custom AMI ID to be used to create the instance. The AMI should be based on one of the standard AWS OpsWorks APIs: Amazon Linux or Ubuntu 12.04 LTS. For more information, see Instances
     * `:ssh_key_name` - (String) The instance SSH key name.
     * `:availability_zone` - (String) The instance Availability Zone. For more information, see Regions and Endpoints.
+    * `:virtualization_type` - (String) The instance's virtualization type, paravirtual or hvm.
     * `:subnet_id` - (String) The ID of the instance's subnet. If the stack is running in a VPC, you can use this parameter to override the stack's default subnet ID value and direct AWS OpsWorks to launch the instance in a different subnet.
     * `:architecture` - (String) The instance architecture. The default option is x86_64. Instance types do not necessarily support both architectures. For a list of the architectures that are supported by the different instance types, see Instance Families and Types.  Valid values include:
       * `x86_64`
@@ -315,7 +320,7 @@
   set Username to the appropriate IAM access key ID. For HTTP bundles, Git repositories,
   and Subversion repositories, set Username to the user name.\n    * `:password` -
   (String) This parameter depends on the repository type. For Amazon S3 bundles, set
-  Password to the appropriate IAM secret access key. For HTTP bundles, and Subversion
+  Password to the appropriate IAM secret access key. For HTTP bundles and Subversion
   repositories, set Password to the password. For more information on how to safely
   handle IAM credentials, see .\n    * `:ssh_key` - (String) The repository's SSH
   key.\n    * `:revision` - (String) The application's version. AWS OpsWorks enables
@@ -372,6 +377,11 @@
   @param [Hash] options
     * `:elastic_ip` - *required* - (String) The Elastic IP address.
   @return [Core::Response]
+:deregister_rds_db_instance: |-
+  Calls the DeregisterRdsDbInstance API operation.
+  @param [Hash] options
+    * `:rds_db_instance_arn` - *required* - (String) The Amazon RDS instance's ARN.
+  @return [Core::Response]
 :deregister_volume: |-
   Calls the DeregisterVolume API operation.
   @param [Hash] options
@@ -390,6 +400,10 @@
       * `:shortname` - (String)
       * `:name` - (String)
       * `:description` - (String)
+      * `:data_sources` - (Array<Hash>)
+        * `:type` - (String)
+        * `:arn` - (String)
+        * `:database_name` - (String)
       * `:type` - (String)
       * `:app_source` - (Hash)
         * `:type` - (String)
@@ -491,6 +505,7 @@
     * `:instances` - (Array<Hash>)
       * `:instance_id` - (String)
       * `:ec2_instance_id` - (String)
+      * `:virtualization_type` - (String)
       * `:hostname` - (String)
       * `:stack_id` - (String)
       * `:layer_ids` - (Array<String>)
@@ -627,6 +642,23 @@
       * `:created_at` - (String)
       * `:volume_type` - (String)
       * `:iops` - (Integer)
+:describe_rds_db_instances: |-
+  Calls the DescribeRdsDbInstances API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID that the instances are registered with. The operation returns descriptions of all registered Amazon RDS instances.
+    * `:rds_db_instance_arns` - (Array&lt;<String>) An array containing the ARNs of the instances to be described.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:rds_db_instances` - (Array<Hash>)
+      * `:rds_db_instance_arn` - (String)
+      * `:db_instance_identifier` - (String)
+      * `:db_user` - (String)
+      * `:db_password` - (String)
+      * `:region` - (String)
+      * `:address` - (String)
+      * `:engine` - (String)
+      * `:stack_id` - (String)
+      * `:missing_on_rds` - (Boolean)
 :describe_service_errors: |-
   Calls the DescribeServiceErrors API operation.
   @param [Hash] options
@@ -790,6 +822,14 @@
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:elastic_ip` - (String)
+:register_rds_db_instance: |-
+  Calls the RegisterRdsDbInstance API operation.
+  @param [Hash] options
+    * `:stack_id` - *required* - (String) The stack ID.
+    * `:rds_db_instance_arn` - *required* - (String) The Amazon RDS instance's ARN.
+    * `:db_user` - *required* - (String) The database's master user name.
+    * `:db_password` - *required* - (String) The database password.
+  @return [Core::Response]
 :register_volume: |-
   Calls the RegisterVolume API operation.
   @param [Hash] options
@@ -871,6 +911,10 @@
     * `:app_id` - *required* - (String) The app ID.
     * `:name` - (String) The app name.
     * `:description` - (String) A description of the app.
+    * `:data_sources` - (Array&lt;<Hash>) The app's data sources.
+      * `:type` - (String) The data source's type, AutoSelectOpsworksMysqlInstance, OpsworksMysqlInstance, or RdsDbInstance.
+      * `:arn` - (String) The data source's ARN.
+      * `:database_name` - (String) The database name.
     * `:type` - (String) The app type.  Valid values include:
       * `rails`
       * `php`
@@ -885,7 +929,7 @@
         * `s3`
       * `:url` - (String) The source URL.
       * `:username` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Username to the appropriate IAM access key ID. For HTTP bundles, Git repositories, and Subversion repositories, set Username to the user name.
-      * `:password` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Password to the appropriate IAM secret access key. For HTTP bundles, and Subversion repositories, set Password to the password. For more information on how to safely handle IAM credentials, see .
+      * `:password` - (String) This parameter depends on the repository type. For Amazon S3 bundles, set Password to the appropriate IAM secret access key. For HTTP bundles and Subversion repositories, set Password to the password. For more information on how to safely handle IAM credentials, see .
       * `:ssh_key` - (String) The repository's SSH key.
       * `:revision` - (String) The application's version. AWS OpsWorks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
     * `:domains` - (Array&lt;<String>) The app's virtual host settings, with multiple domains separated by commas. For example: 'www.example.com, example.com'
@@ -919,6 +963,7 @@
       * `x86_64`
       * `i386`
     * `:install_updates_on_boot` - (Boolean) Whether to install operating system and package updates when the instance boots. The default value is  `true` . To control when updates are installed, set this value to  `false` . You must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the default value of  `true` , to ensure that your instances have the latest security updates.
+    * `:ebs_optimized` - (Boolean) Whether this is an Amazon EBS-optimized instance.
   @return [Core::Response]
 :update_layer: |-
   Calls the UpdateLayer API operation.
@@ -953,6 +998,13 @@
   Calls the UpdateMyUserProfile API operation.
   @param [Hash] options
     * `:ssh_public_key` - (String) The user's SSH public key.
+  @return [Core::Response]
+:update_rds_db_instance: |-
+  Calls the UpdateRdsDbInstance API operation.
+  @param [Hash] options
+    * `:rds_db_instance_arn` - *required* - (String) The Amazon RDS instance's ARN.
+    * `:db_user` - (String) The master user name.
+    * `:db_password` - (String) The database password.
   @return [Core::Response]
 :update_stack: "Calls the UpdateStack API operation.\n@param [Hash] options\n  * `:stack_id`
   - *required* - (String) The stack ID.\n  * `:name` - (String) The stack's new name.\n
@@ -1005,7 +1057,7 @@
   Git repositories, and Subversion repositories, set Username to the user name.\n
   \   * `:password` - (String) This parameter depends on the repository type. For
   Amazon S3 bundles, set Password to the appropriate IAM secret access key. For HTTP
-  bundles, and Subversion repositories, set Password to the password. For more information
+  bundles and Subversion repositories, set Password to the password. For more information
   on how to safely handle IAM credentials, see .\n    * `:ssh_key` - (String) The
   repository's SSH key.\n    * `:revision` - (String) The application's version. AWS
   OpsWorks enables you to easily deploy new versions of an application. One of the

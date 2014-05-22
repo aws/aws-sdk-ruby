@@ -133,6 +133,15 @@
     - :required
     Description:
     - :string
+    DataSources:
+    - :list:
+      - :structure:
+          Type:
+          - :string
+          Arn:
+          - :string
+          DatabaseName:
+          - :string
     Type:
     - :string
     - :required
@@ -231,6 +240,8 @@
     SshKeyName:
     - :string
     AvailabilityZone:
+    - :string
+    VirtualizationType:
     - :string
     SubnetId:
     - :string
@@ -457,6 +468,13 @@
     - :string
     - :required
   :outputs: {}
+- :name: DeregisterRdsDbInstance
+  :method: :deregister_rds_db_instance
+  :inputs:
+    RdsDbInstanceArn:
+    - :string
+    - :required
+  :outputs: {}
 - :name: DeregisterVolume
   :method: :deregister_volume
   :inputs:
@@ -492,6 +510,19 @@
         Description:
           :sym: :description
           :type: :string
+        DataSources:
+          :sym: :data_sources
+          :type: :hash
+          :members:
+            Type:
+              :sym: :type
+              :type: :string
+            Arn:
+              :sym: :arn
+              :type: :string
+            DatabaseName:
+              :sym: :database_name
+              :type: :string
         Type:
           :sym: :type
           :type: :string
@@ -741,6 +772,9 @@
           :type: :string
         Ec2InstanceId:
           :sym: :ec2_instance_id
+          :type: :string
+        VirtualizationType:
+          :sym: :virtualization_type
           :type: :string
         Hostname:
           :sym: :hostname
@@ -1105,6 +1139,47 @@
         Iops:
           :sym: :iops
           :type: :integer
+- :name: DescribeRdsDbInstances
+  :method: :describe_rds_db_instances
+  :inputs:
+    StackId:
+    - :string
+    - :required
+    RdsDbInstanceArns:
+    - :list:
+      - :string
+  :outputs:
+    RdsDbInstances:
+      :sym: :rds_db_instances
+      :type: :hash
+      :members:
+        RdsDbInstanceArn:
+          :sym: :rds_db_instance_arn
+          :type: :string
+        DbInstanceIdentifier:
+          :sym: :db_instance_identifier
+          :type: :string
+        DbUser:
+          :sym: :db_user
+          :type: :string
+        DbPassword:
+          :sym: :db_password
+          :type: :string
+        Region:
+          :sym: :region
+          :type: :string
+        Address:
+          :sym: :address
+          :type: :string
+        Engine:
+          :sym: :engine
+          :type: :string
+        StackId:
+          :sym: :stack_id
+          :type: :string
+        MissingOnRds:
+          :sym: :missing_on_rds
+          :type: :boolean
 - :name: DescribeServiceErrors
   :method: :describe_service_errors
   :inputs:
@@ -1513,6 +1588,22 @@
     ElasticIp:
       :sym: :elastic_ip
       :type: :string
+- :name: RegisterRdsDbInstance
+  :method: :register_rds_db_instance
+  :inputs:
+    StackId:
+    - :string
+    - :required
+    RdsDbInstanceArn:
+    - :string
+    - :required
+    DbUser:
+    - :string
+    - :required
+    DbPassword:
+    - :string
+    - :required
+  :outputs: {}
 - :name: RegisterVolume
   :method: :register_volume
   :inputs:
@@ -1674,6 +1765,15 @@
     - :string
     Description:
     - :string
+    DataSources:
+    - :list:
+      - :structure:
+          Type:
+          - :string
+          Arn:
+          - :string
+          DatabaseName:
+          - :string
     Type:
     - :string
     AppSource:
@@ -1745,6 +1845,8 @@
     Architecture:
     - :string
     InstallUpdatesOnBoot:
+    - :boolean
+    EbsOptimized:
     - :boolean
   :outputs: {}
 - :name: UpdateLayer
@@ -1821,6 +1923,17 @@
   :method: :update_my_user_profile
   :inputs:
     SshPublicKey:
+    - :string
+  :outputs: {}
+- :name: UpdateRdsDbInstance
+  :method: :update_rds_db_instance
+  :inputs:
+    RdsDbInstanceArn:
+    - :string
+    - :required
+    DbUser:
+    - :string
+    DbPassword:
     - :string
   :outputs: {}
 - :name: UpdateStack
