@@ -555,6 +555,7 @@ module AWS
         http_request.port = port
         http_request.region = @region
         http_request.use_ssl = config.use_ssl?
+        http_request.read_timeout = config.http_read_timeout
 
         send("configure_#{name}_request", http_request, opts)
 
