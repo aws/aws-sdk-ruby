@@ -226,18 +226,7 @@ module Seahorse
           expect(handlers.to_stack).to eq(3)
         end
 
-        it 'does not construct handlers that are not classes' do
-          handler1 = double('handler1')
-          handler2 = double('handler2')
-          expect(handler2).to receive(:handler=).with(nil)
-          expect(handler1).to receive(:handler=).with(handler2)
-          handlers.add(handler1)
-          handlers.add(handler2)
-          handlers.to_stack
-        end
-
       end
-
     end
   end
 end
