@@ -56,10 +56,9 @@ module AWS
       it_should_behave_like "an aws client", :list_buckets
 
       it 'supports configurable http read timeouts' do
-        client = Client.new(http_read_timeout:1)
-        client.with_http_handler { |req, resp| yield(req, resp) }
-        resp = client.list_buckets
-        resp.http_request.read_timeout.should eq(1)
+        client = Client.new(test_credentials.merge(http_read_timeout:1))
+        req = client.send(:build_request, :list_buckets, {})
+        req.read_timeout.should eq(1)
       end
 
       shared_examples_for "handles modeled exception" do |code, base|
