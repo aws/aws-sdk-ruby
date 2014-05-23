@@ -105,6 +105,16 @@ module AWS
           rule.glacier_transition_time.should == 5
         end
 
+        it 'accepts days for Noncurrent Version Transition Days' do
+          rule = lifecycle.add_rule('prefix', :noncurrent_version_transition_days => 10)
+          rule.noncurrent_version_transition_days.should == 10
+        end
+
+        it 'accepts days for Noncurrent Version Expiration Days' do
+          rule = lifecycle.add_rule('prefix', :noncurrent_version_expiration_days => 30)
+          rule.noncurrent_version_expiration_days.should == 30
+        end
+        
       end
 
       context '#remove_rule' do

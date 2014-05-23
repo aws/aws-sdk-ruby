@@ -168,7 +168,9 @@ module AWS
         opts = {
           :status => options[:disabled] == true ? 'Disabled' : 'Enabled',
           :expiration_time => options[:expiration_time],
-          :glacier_transition_time => options[:glacier_transition_time]
+          :glacier_transition_time => options[:glacier_transition_time],
+          :noncurrent_version_transition_days => options[:noncurrent_version_transition_days],
+          :noncurrent_version_expiration_days => options[:noncurrent_version_expiration_days]
         }
         rule = Rule.new(self, id, prefix, opts)
         self.rules << rule
@@ -304,6 +306,13 @@ module AWS
                     xml.Date "#{date}T00:00:00Z"
                   end
                 end if rule.glacier_transition_time
+                xml.NoncurrentVersionTransition do
+                  xml.StorageClass 'GLACIER'
+                  xml.NoncurrentDays rule.noncurrent_version_transition_days
+                end if rule.noncurrent_version_transition_days
+                xml.NoncurrentVersionExpiration do
+                  xml.NoncurrentDays rule.noncurrent_version_expiration_days
+                end if rule.noncurrent_version_expiration_days
               end
             end
           end
@@ -384,6 +393,12 @@ module AWS
           @glacier_transition_time = convert_time_value(value)
         end
 
+        # @return [Integer]
+        attr_accessor :noncurrent_version_transition_days
+
+        # @return [Integer]
+        attr_accessor :noncurrent_version_expiration_days
+
         # @return [String] Returns the rule status, 'Enabled' or 'Disabled'
         attr_accessor :status
 
@@ -411,7 +426,9 @@ module AWS
           other.prefix == prefix and
           other.expiration_time == expiration_time and
           other.glacier_transition_time == glacier_transition_time and
-          other.status == status
+          other.status == status and
+          other.noncurrent_version_transition_days == noncurrent_version_transition_days and
+          other.noncurrent_version_expiration_days == noncurrent_version_expiration_days
         end
         alias_method :==, :eql?
 

@@ -192,6 +192,13 @@ module AWS
               element("Days") { integer_value }
               element("Date") { datetime_value }
             end
+            element("NoncurrentVersionTransition") do
+              element("NoncurrentDays") { integer_value }
+              element("StorageClass") { string_value }
+            end
+            element("NoncurrentVersionDays") do
+              element("NoncurrentDays") { integer_value }
+            end
           end
         end
 
