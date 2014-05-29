@@ -966,6 +966,8 @@
                 :children:
                   DesiredReplicationCount:
                     :type: :integer
+                  DesiredPartitionCount:
+                    :type: :integer
               Status:
                 :children:
                   CreationDate:
@@ -1108,6 +1110,8 @@
         - :string
         DesiredReplicationCount:
         - :integer
+        DesiredPartitionCount:
+        - :integer
     - :required
   :outputs:
     :children:
@@ -1119,6 +1123,8 @@
               Options:
                 :children:
                   DesiredReplicationCount:
+                    :type: :integer
+                  DesiredPartitionCount:
                     :type: :integer
               Status:
                 :children:

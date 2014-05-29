@@ -30,38 +30,38 @@
   - *required* - (String) Valid values include:\n      * `ar`\n      * `bg`\n      *
   `ca`\n      * `cs`\n      * `da`\n      * `de`\n      * `el`\n      * `en`\n      *
   `es`\n      * `eu`\n      * `fa`\n      * `fi`\n      * `fr`\n      * `ga`\n      *
-  `gl`\n      * `hi`\n      * `hu`\n      * `hy`\n      * `id`\n      * `it`\n      *
-  `ja`\n      * `ko`\n      * `lv`\n      * `mul`\n      * `nl`\n      * `no`\n      *
-  `pt`\n      * `ro`\n      * `ru`\n      * `sv`\n      * `th`\n      * `tr`\n      *
-  `zh-Hans`\n      * `zh-Hant`\n    * `:analysis_options` - (Hash) \n      * `:synonyms`
-  - (String) A JSON object that defines synonym groups and aliases. A synonym group
-  is an array of arrays, where each sub-array is a group of terms where each term
-  in the group is considered a synonym of every other term in the group. The aliases
-  value is an object that contains a collection of string:value pairs where the string
-  specifies a term and the array of values specifies each of the aliases for that
-  term. An alias is considered a synonym of the specified term, but the term is not
-  considered a synonym of the alias.\n      * `:stopwords` - (String) A JSON array
-  of terms to ignore during indexing and searching. For example, [\"a\", \"an\", \"the\",
-  \"of\"]. The stopwords dictionary must explicitly list each word you want to ignore.
-  Wildcards and regular expressions are not supported.\n      * `:stemming_dictionary`
-  - (String) A JSON object that contains a collection of string:value pairs that each
-  map a term to its stem. For example, {\"term1\": \"stem1\", \"term2\": \"stem2\",
-  \"term3\": \"stem3\"}. The stemming dictionary is applied in addition to any algorithmic
-  stemming. This enables you to override the results of the algorithmic stemming to
-  correct specific cases of overstemming or understemming. The maximum size of a stemming
-  dictionary is 500 KB.\n      * `:algorithmic_stemming` - (String) The level of algorithmic
-  stemming to perform: none, minimal, light, or full. The available levels vary depending
-  on the language. For more information, see Langage Specific Text Processing Settings
-  in the Amazon CloudSearch Developer Guide  Valid values include:\n        * `none`\n
-  \       * `minimal`\n        * `light`\n        * `full`\n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:analysis_scheme` - (Hash)\n    * `:options` - (Hash)\n      * `:analysis_scheme_name`
-  - (String)\n      * `:analysis_scheme_language` - (String)\n      * `:analysis_options`
-  - (Hash)\n        * `:synonyms` - (String)\n        * `:stopwords` - (String)\n
-  \       * `:stemming_dictionary` - (String)\n        * `:algorithmic_stemming` -
-  (String)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date`
-  - (Time)\n      * `:update_version` - (Integer)\n      * `:state` - (String)\n      *
-  `:pending_deletion` - (Boolean)"
+  `gl`\n      * `he`\n      * `hi`\n      * `hu`\n      * `hy`\n      * `id`\n      *
+  `it`\n      * `ja`\n      * `ko`\n      * `lv`\n      * `mul`\n      * `nl`\n      *
+  `no`\n      * `pt`\n      * `ro`\n      * `ru`\n      * `sv`\n      * `th`\n      *
+  `tr`\n      * `zh-Hans`\n      * `zh-Hant`\n    * `:analysis_options` - (Hash) \n
+  \     * `:synonyms` - (String) A JSON object that defines synonym groups and aliases.
+  A synonym group is an array of arrays, where each sub-array is a group of terms
+  where each term in the group is considered a synonym of every other term in the
+  group. The aliases value is an object that contains a collection of string:value
+  pairs where the string specifies a term and the array of values specifies each of
+  the aliases for that term. An alias is considered a synonym of the specified term,
+  but the term is not considered a synonym of the alias.\n      * `:stopwords` - (String)
+  A JSON array of terms to ignore during indexing and searching. For example, [\"a\",
+  \"an\", \"the\", \"of\"]. The stopwords dictionary must explicitly list each word
+  you want to ignore. Wildcards and regular expressions are not supported.\n      *
+  `:stemming_dictionary` - (String) A JSON object that contains a collection of string:value
+  pairs that each map a term to its stem. For example, {\"term1\": \"stem1\", \"term2\":
+  \"stem2\", \"term3\": \"stem3\"}. The stemming dictionary is applied in addition
+  to any algorithmic stemming. This enables you to override the results of the algorithmic
+  stemming to correct specific cases of overstemming or understemming. The maximum
+  size of a stemming dictionary is 500 KB.\n      * `:algorithmic_stemming` - (String)
+  The level of algorithmic stemming to perform: none, minimal, light, or full. The
+  available levels vary depending on the language. For more information, see Language
+  Specific Text Processing Settings in the Amazon CloudSearch Developer Guide  Valid
+  values include:\n        * `none`\n        * `minimal`\n        * `light`\n        *
+  `full`\n@return [Core::Response] The `#data` method of the response object returns
+  a hash with the following structure:\n\n  * `:analysis_scheme` - (Hash)\n    * `:options`
+  - (Hash)\n      * `:analysis_scheme_name` - (String)\n      * `:analysis_scheme_language`
+  - (String)\n      * `:analysis_options` - (Hash)\n        * `:synonyms` - (String)\n
+  \       * `:stopwords` - (String)\n        * `:stemming_dictionary` - (String)\n
+  \       * `:algorithmic_stemming` - (String)\n    * `:status` - (Hash)\n      *
+  `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      * `:update_version`
+  - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
 :define_expression: "Calls the DefineExpression API operation.\n@param [Hash] options\n
   \ * `:domain_name` - *required* - (String) \n  * `:expression` - *required* - (Hash)
   \n    * `:expression_name` - *required* - (String) \n    * `:expression_value` -
@@ -484,10 +484,10 @@
   [Hash] options\n  * `:domain_name` - *required* - (String) \n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:scaling_parameters` - (Hash)\n    * `:options` - (Hash)\n      * `:desired_instance_type`
-  - (String)\n      * `:desired_replication_count` - (Integer)\n    * `:status` -
-  (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      *
-  `:update_version` - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion`
-  - (Boolean)"
+  - (String)\n      * `:desired_replication_count` - (Integer)\n      * `:desired_partition_count`
+  - (Integer)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
+  `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
+  - (String)\n      * `:pending_deletion` - (Boolean)"
 :describe_service_access_policies: |-
   Calls the DescribeServiceAccessPolicies API operation.
   @param [Hash] options
@@ -550,13 +550,15 @@
   that you want to preconfigure for your domain. For example, search.m1.small.  Valid
   values include:\n      * `search.m1.small`\n      * `search.m1.large`\n      * `search.m2.xlarge`\n
   \     * `search.m2.2xlarge`\n    * `:desired_replication_count` - (Integer) The
-  number of replicas you want to preconfigure for each index partition.\n@return [Core::Response]
+  number of replicas you want to preconfigure for each index partition.\n    * `:desired_partition_count`
+  - (Integer) The number of partitions you want to preconfigure for your domain. Only
+  valid when you select m2.2xlarge as the desired instance type.\n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:scaling_parameters` - (Hash)\n    * `:options` - (Hash)\n      * `:desired_instance_type`
-  - (String)\n      * `:desired_replication_count` - (Integer)\n    * `:status` -
-  (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      *
-  `:update_version` - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion`
-  - (Boolean)"
+  - (String)\n      * `:desired_replication_count` - (Integer)\n      * `:desired_partition_count`
+  - (Integer)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
+  `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
+  - (String)\n      * `:pending_deletion` - (Boolean)"
 :update_service_access_policies: "Calls the UpdateServiceAccessPolicies API operation.\n@param
   [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:access_policies`
   - *required* - (String) The access rules you want to configure. These rules replace
