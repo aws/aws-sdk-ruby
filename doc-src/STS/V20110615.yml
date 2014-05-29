@@ -16,7 +16,8 @@
   - (Hash)\n    * `:access_key_id` - (String)\n    * `:secret_access_key` - (String)\n
   \   * `:session_token` - (String)\n    * `:expiration` - (Time)\n  * `:assumed_role_user`
   - (Hash)\n    * `:assumed_role_id` - (String)\n    * `:arn` - (String)\n  * `:packed_policy_size`
-  - (Integer)"
+  - (Integer)\n  * `:subject` - (String)\n  * `:subject_type` - (String)\n  * `:issuer`
+  - (String)\n  * `:audience` - (String)\n  * `:name_qualifier` - (String)"
 :assume_role_with_web_identity: "Calls the AssumeRoleWithWebIdentity API operation.\n@param
   [Hash] options\n  * `:role_arn` - *required* - (String) \n  * `:role_session_name`
   - *required* - (String) \n  * `:web_identity_token` - *required* - (String) \n  *
@@ -26,7 +27,8 @@
   - (String)\n    * `:secret_access_key` - (String)\n    * `:session_token` - (String)\n
   \   * `:expiration` - (Time)\n  * `:subject_from_web_identity_token` - (String)\n
   \ * `:assumed_role_user` - (Hash)\n    * `:assumed_role_id` - (String)\n    * `:arn`
-  - (String)\n  * `:packed_policy_size` - (Integer)"
+  - (String)\n  * `:packed_policy_size` - (Integer)\n  * `:provider` - (String)\n
+  \ * `:audience` - (String)"
 :decode_authorization_message: "Calls the DecodeAuthorizationMessage API operation.\n@param
   [Hash] options\n  * `:encoded_message` - *required* - (String) \n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
