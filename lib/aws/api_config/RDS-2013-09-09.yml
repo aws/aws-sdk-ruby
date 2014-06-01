@@ -66,6 +66,8 @@
 - :name: AuthorizeDBSecurityGroupIngress
   :method: :authorize_db_security_group_ingress
   :inputs:
+    DBSecurityGroupName:
+    - :string
     CIDRIP:
     - :string
     EC2SecurityGroupName:
