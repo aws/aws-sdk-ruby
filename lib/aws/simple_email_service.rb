@@ -55,6 +55,19 @@ module AWS
   # This has only been tested with Rails 2.3 and Rails 3.0.
   #
   #
+  # Regions
+  #
+  # SES is not available in all regions.  If you configure a default region
+  # where SES is not available, you will receive a network error.  You
+  # can configure a default region and a default SES region:
+  #
+  #     AWS.config(
+  #       :region => 'ap-southeast-1',
+  #       :ses => { :region => 'us-west-2' }
+  #     )
+  #
+  # [Go here for a complete list of supported regions](http://docs.aws.amazon.com/general/latest/gr/rande.html#ses_region).
+  #
   # # Identities
   #
   # Before you can send emails, you need to verify one or more identities.
