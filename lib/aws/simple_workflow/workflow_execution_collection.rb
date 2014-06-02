@@ -212,7 +212,7 @@ module AWS
       #   * `:failed`
       #   * `:canceled`
       #   * `:terminated`
-      #   * `:continued`
+      #   * `:continued_as_new`
       #   * `:timed_out`
       #
       #   If `:status` is anything besides `:open` or `:closed` then
@@ -422,7 +422,7 @@ module AWS
       #   * `:failed`
       #   * `:canceled`
       #   * `:terminated`
-      #   * `:continued`
+      #   * `:continued_as_new`
       #   * `:timed_out`
       #
       # @option options [Time] :started_after Filters workflow executions
