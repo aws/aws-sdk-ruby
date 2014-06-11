@@ -41,6 +41,7 @@ module Aws
         400 => 'BadRequest',
         403 => 'Forbidden',
         404 => 'NotFound',
+        412 => 'PreconditionFailed',
       }[status_code] || "#{status_code}Error"
     end
 
