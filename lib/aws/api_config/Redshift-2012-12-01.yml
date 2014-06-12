@@ -1498,6 +1498,8 @@
     - :string
     HsmConfigurationIdentifier:
     - :string
+    NewClusterIdentifier:
+    - :string
   :outputs:
     :children:
       ModifyClusterResult:
@@ -1918,6 +1920,18 @@
     - :string
     ElasticIp:
     - :string
+    ClusterParameterGroupName:
+    - :string
+    ClusterSecurityGroups:
+    - :membered_list:
+      - :string
+    VpcSecurityGroupIds:
+    - :membered_list:
+      - :string
+    PreferredMaintenanceWindow:
+    - :string
+    AutomatedSnapshotRetentionPeriod:
+    - :integer
   :outputs:
     :children:
       RestoreFromClusterSnapshotResult:
