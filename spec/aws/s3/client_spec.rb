@@ -1516,6 +1516,10 @@ module AWS
 
         it_should_behave_like "accepts input data"
 
+        it_should_behave_like "sends option as header", :sse_customer_algorithm, "x-amz-server-side-encryption-customer-algorithm"
+        it_should_behave_like "sends option as header", :sse_customer_key, "x-amz-server-side-encryption-customer-key"
+        it_should_behave_like "sends option as header", :sse_customer_key_md5, "x-amz-server-side-encryption-customer-key-MD5"
+
       end
 
       context '#copy_object' do
@@ -1547,6 +1551,10 @@ module AWS
         it_should_behave_like "sends metadata headers", false
 
         it_should_behave_like "sends option as header", :content_type, "Content-Type"
+
+        it_should_behave_like "sends option as header", :sse_customer_algorithm, "x-amz-server-side-encryption-customer-algorithm"
+        it_should_behave_like "sends option as header", :sse_customer_key, "x-amz-server-side-encryption-customer-key"
+        it_should_behave_like "sends option as header", :sse_customer_key_md5, "x-amz-server-side-encryption-customer-key-MD5"
 
         it 'requires :copy_source' do
           opts.delete(:copy_source)
@@ -1591,6 +1599,10 @@ module AWS
         it_should_behave_like "sends option as header", :if_unmodified_since, "If-Unmodified-Since"
         it_should_behave_like "sends option as header", :if_match, "If-Match"
         it_should_behave_like "sends option as header", :if_none_match, "If-None-Match"
+
+        it_should_behave_like "sends option as header", :sse_customer_algorithm, "x-amz-server-side-encryption-customer-algorithm"
+        it_should_behave_like "sends option as header", :sse_customer_key, "x-amz-server-side-encryption-customer-key"
+        it_should_behave_like "sends option as header", :sse_customer_key_md5, "x-amz-server-side-encryption-customer-key-MD5"
 
         it_should_behave_like "formats date header", :if_modified_since, "If-Modified-Since"
         it_should_behave_like "formats date header", :if_unmodified_since, "If-Unmodified-Since"
@@ -1706,6 +1718,10 @@ module AWS
         it_should_behave_like "sends option as header", :if_unmodified_since, "If-Unmodified-Since"
         it_should_behave_like "sends option as header", :if_match, "If-Match"
         it_should_behave_like "sends option as header", :if_none_match, "If-None-Match"
+
+        it_should_behave_like "sends option as header", :sse_customer_algorithm, "x-amz-server-side-encryption-customer-algorithm"
+        it_should_behave_like "sends option as header", :sse_customer_key, "x-amz-server-side-encryption-customer-key"
+        it_should_behave_like "sends option as header", :sse_customer_key_md5, "x-amz-server-side-encryption-customer-key-MD5"
 
         it_should_behave_like "formats date header", :if_modified_since, "If-Modified-Since"
         it_should_behave_like "formats date header", :if_unmodified_since, "If-Unmodified-Since"
@@ -1910,6 +1926,9 @@ module AWS
 
         it_should_behave_like "returns server_side_encryption"
 
+        it_should_behave_like "sends option as header", :sse_customer_algorithm, "x-amz-server-side-encryption-customer-algorithm"
+        it_should_behave_like "sends option as header", :sse_customer_key, "x-amz-server-side-encryption-customer-key"
+        it_should_behave_like "sends option as header", :sse_customer_key_md5, "x-amz-server-side-encryption-customer-key-MD5"
       end
 
       context '#list_multipart_uploads' do
@@ -1991,6 +2010,10 @@ module AWS
         it_should_behave_like "returns last_modified"
 
         it_should_behave_like "returns server_side_encryption"
+
+        it_should_behave_like "sends option as header", :sse_customer_algorithm, "x-amz-server-side-encryption-customer-algorithm"
+        it_should_behave_like "sends option as header", :sse_customer_key, "x-amz-server-side-encryption-customer-key"
+        it_should_behave_like "sends option as header", :sse_customer_key_md5, "x-amz-server-side-encryption-customer-key-MD5"
 
         it 'requires part_number' do
           opts.delete(:part_number)
