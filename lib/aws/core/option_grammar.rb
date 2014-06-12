@@ -378,13 +378,13 @@ module AWS
 
             option.extend self
 
-            key_option = option.key_option
+            key_option = option.key_option(members)
             if key_descriptors = members[:key]
               key_option = key_option.extend_with_config(*key_descriptors)
               MetaUtils.extend_method(option, :key_option) { key_option }
             end
 
-            value_option = option.value_option
+            value_option = option.value_option(members)
             if value_descriptors = members[:value]
               value_option = value_option.extend_with_config(*value_descriptors)
               MetaUtils.extend_method(option, :value_option) { value_option }
@@ -416,13 +416,13 @@ module AWS
             values.inject([]) do |params, (key,value)|
 
               index = params.size / 2 + 1
-              common_prefix = "#{prefixed_name(prefix)}#{separator}#{index}."
+              common_prefix = "#{prefixed_name(prefix)}#{separator}#{index}"
 
               key_name = common_prefix + key_option.param_name
               value_name = common_prefix + value_option.param_name
 
-              params << Http::Request::Param.new(key_name, key)
-              params << Http::Request::Param.new(value_name, value)
+              params += key_option.request_params(key, common_prefix)
+              params += value_option.request_params(value, common_prefix)
 
             end
           end
@@ -436,12 +436,12 @@ module AWS
             end
           end
 
-          def key_option
-            @_key_option ||= MapOption.new("key")
+          def key_option(options)
+            @_key_option ||= MapOption.new(options[:key_param] || "key")
           end
 
-          def value_option
-            @_value_option ||= MapOption.new("value")
+          def value_option(options)
+            @_value_option ||= MapOption.new(options[:value_param] || "value")
           end
 
         end
