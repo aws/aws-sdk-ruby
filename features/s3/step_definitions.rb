@@ -1,3 +1,5 @@
+require 'openssl'
+
 Before("@s3") do
   @s3 = @client = Aws.s3
   @created_buckets = []
@@ -130,4 +132,22 @@ end
 Then(/^the bucket name should not be in the request host$/) do
   endpoint = @response.context.http_request.endpoint
   expect(endpoint.host).not_to include(@bucket_name)
+end
+
+When(/^I put "(.*?)" to the key "(.*?)" with an aes key$/) do |body, key|
+  @aes_key = OpenSSL::Cipher.new('aes-256-cbc').random_key
+  @s3.put_object(
+    bucket: @bucket_name,
+    key: key,
+    body: body,
+    sse_customer_algorithm: 'AES256',
+    sse_customer_key: @aes_key)
+end
+
+Then(/^I can download the key "(.*?)" with the aes key$/) do |key|
+  @s3.get_object(
+    bucket: @bucket_name,
+    key: key,
+    sse_customer_algorithm: 'AES256',
+    sse_customer_key: @aes_key)
 end
