@@ -80,6 +80,7 @@ module Aws
     autoload :S3Md5s, "#{SRC}/plugins/s3_md5s"
     autoload :S3Redirects, "#{SRC}/plugins/s3_redirects"
     autoload :S3Signer, "#{SRC}/plugins/s3_signer"
+    autoload :S3SseCpk, "#{SRC}/plugins/s3_sse_cpk"
     autoload :S3LocationConstraint, "#{SRC}/plugins/s3_location_constraint"
     autoload :SignatureV2, "#{SRC}/plugins/signature_v2"
     autoload :SignatureV3, "#{SRC}/plugins/signature_v3"

@@ -7,6 +7,7 @@ module Aws::Api::ServiceTranslators::S3
       api.plugins << "Aws::Plugins::S3Md5s"
       api.plugins << "Aws::Plugins::S3Redirects"
       api.plugins << "Aws::Plugins::S3LocationConstraint"
+      api.plugins << "Aws::Plugins::S3SseCpk"
     end
   end
 end

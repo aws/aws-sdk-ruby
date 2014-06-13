@@ -36,7 +36,8 @@
     "Aws::Plugins::S3GetBucketLocationFix",
     "Aws::Plugins::S3Md5s",
     "Aws::Plugins::S3Redirects",
-    "Aws::Plugins::S3LocationConstraint"
+    "Aws::Plugins::S3LocationConstraint",
+    "Aws::Plugins::S3SseCpk"
   ],
   "operations": {
     "abort_multipart_upload": {
@@ -302,6 +303,36 @@
             "type": "string",
             "location": "header",
             "serialized_name": "x-amz-website-redirect-location"
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
+          },
+          "copy_source_sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-copy-source-server-side-encryption-customer-algorithm"
+          },
+          "copy_source_sse_customer_key": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-copy-source-server-side-encryption-customer-key"
+          },
+          "copy_source_sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-copy-source-server-side-encryption-customer-key-MD5"
           }
         }
       },
@@ -339,6 +370,16 @@
             "enum": [
               "AES256"
             ]
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         },
         "payload": "copy_object_result"
@@ -542,6 +583,21 @@
             "type": "string",
             "location": "header",
             "serialized_name": "x-amz-website-redirect-location"
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         }
       },
@@ -567,6 +623,16 @@
             "enum": [
               "AES256"
             ]
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         }
       }
@@ -1546,6 +1612,21 @@
           "version_id": {
             "type": "string",
             "location": "uri"
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         }
       },
@@ -1654,6 +1735,16 @@
             "members": {
               "type": "string"
             }
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         },
         "payload": "body"
@@ -1851,6 +1942,21 @@
           "version_id": {
             "type": "string",
             "location": "uri"
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         }
       },
@@ -1955,6 +2061,16 @@
             "members": {
               "type": "string"
             }
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         }
       }
@@ -3557,6 +3673,21 @@
             "type": "string",
             "location": "header",
             "serialized_name": "x-amz-website-redirect-location"
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         },
         "payload": "body"
@@ -3586,6 +3717,16 @@
             "type": "string",
             "location": "header",
             "serialized_name": "x-amz-version-id"
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         }
       }
@@ -3819,6 +3960,21 @@
             "type": "string",
             "required": true,
             "location": "uri"
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         },
         "payload": "body"
@@ -3838,6 +3994,16 @@
             "type": "string",
             "location": "header",
             "serialized_name": "ETag"
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         }
       }
@@ -3899,6 +4065,36 @@
             "type": "string",
             "required": true,
             "location": "uri"
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
+          },
+          "copy_source_sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-copy-source-server-side-encryption-customer-algorithm"
+          },
+          "copy_source_sse_customer_key": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-copy-source-server-side-encryption-customer-key"
+          },
+          "copy_source_sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-copy-source-server-side-encryption-customer-key-MD5"
           }
         }
       },
@@ -3931,6 +4127,16 @@
             "enum": [
               "AES256"
             ]
+          },
+          "sse_customer_algorithm": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-algorithm"
+          },
+          "sse_customer_key_md5": {
+            "type": "string",
+            "location": "header",
+            "serialized_name": "x-amz-server-side-encryption-customer-key-MD5"
           }
         },
         "payload": "copy_part_result"
