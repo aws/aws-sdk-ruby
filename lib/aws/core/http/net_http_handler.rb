@@ -58,33 +58,30 @@ module AWS
               http.continue_timeout = request.continue_timeout if
                 http.respond_to?(:continue_timeout=)
 
+              exp_length = nil
+              act_length = 0
               http.request(build_net_http_request(request)) do |net_http_resp|
                 response.status = net_http_resp.code.to_i
                 response.headers = net_http_resp.to_hash
                 exp_length = determine_expected_content_length(response)
-                act_length = 0
-                begin
-                  if block_given? and response.status < 300
-                    net_http_resp.read_body do |data|
-                      begin
-                        act_length += data.bytesize
-                        yield data
-                      ensure
-                        retry_possible = false
-                      end
+                if block_given? and response.status < 300
+                  net_http_resp.read_body do |data|
+                    begin
+                      act_length += data.bytesize
+                      yield data unless data.empty?
+                    ensure
+                      retry_possible = false
                     end
-                  else
-                    response.body = net_http_resp.read_body
-                    act_length += response.body.bytesize unless response.body.nil?
                   end
-                ensure
-                  run_check = exp_length.nil? == false && request.http_method != "HEAD" && @verify_content_length
-                  if run_check && act_length != exp_length
-                    raise TruncatedBodyError, 'content-length does not match'
-                  end
+                else
+                  response.body = net_http_resp.read_body
+                  act_length += response.body.bytesize unless response.body.nil?
                 end
               end
-
+              run_check = exp_length && request.http_method != "HEAD" && @verify_content_length
+              if run_check && act_length != exp_length
+                raise TruncatedBodyError, 'content-length does not match'
+              end
             end
 
           rescue *NETWORK_ERRORS => error
