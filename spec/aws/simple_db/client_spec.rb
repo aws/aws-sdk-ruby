@@ -79,7 +79,7 @@ module AWS
         end
 
         it 'should have a timestamp param' do
-          regex = '\d{4}-\d\d-\d\dT\d\d%3A\d\d%3A\d\d\.\d{3}Z'
+          regex = '\d{4}-\d\d-\d\dT\d\d%3A\d\d%3A\d\dZ'
           timestamp = nil
           client.with_http_handler {|req, resp|
             timestamp = req.body.match(/Timestamp=(#{regex})/)[1]
