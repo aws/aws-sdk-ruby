@@ -49,11 +49,8 @@ module Aws
       # @return [Seahorse::Client::Http::Request] the signed request.
       # @api private
       def presigned_url(request, options = {})
-        #request = request.dup
-        #request.headers = request.headers.dup
-
         now = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
-        body_digest = options[:body_digest] || hexdigest(req.body)
+        body_digest = options[:body_digest] || hexdigest(request.body)
 
         params = Query::ParamList.new
 

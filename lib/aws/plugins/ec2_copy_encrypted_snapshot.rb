@@ -25,9 +25,16 @@ module Aws
         private
 
         def presigned_url(client, params)
-          req = client.build_request(:copy_snapshot, params)
-          req.handlers.add(PresignHandler, step: :build, priorty: 0)
-          req.send_request.data # a presigned url
+          client = source_region_client(client, params)
+          client.handle(PresignHandler, step: :build, priority: 0)
+          client.copy_snapshot(params).data # presigned url
+        end
+
+        def source_region_client(client, params)
+          config = client.config.to_h
+          config.delete(:endpoint)
+          config[:region] = params[:source_region]
+          client.class.new(config)
         end
 
       end
