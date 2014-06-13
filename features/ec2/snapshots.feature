@@ -96,6 +96,17 @@ Feature: Basic Snapshot Operations
     When I ask if the snapshot exists
     Then the result should be true
 
+  @copy_snapshot @slow
+  Scenario: Copy snaphot cross-region
+    When I create a volume with the following parameters:
+    | parameter         | value      |
+    | size              | 1          |
+    | availability_zone | us-east-1b |
+    And I create a snapshot from the volume
+    Then I can copy the snapshot to "us-west-2"
+    And the cross-region snapshot will eventually be successful
+
+  @copy_snapshot @slow
   Scenario: Copy encrypted snaphot
     When I create a volume with the following parameters:
     | parameter         | value      |
@@ -103,4 +114,6 @@ Feature: Basic Snapshot Operations
     | availability_zone | us-east-1b |
     | encrypted         | true       |
     And I create a snapshot from the volume
-    Then I can copy the snapshot to 'us-west-1'
+    Then I can copy the snapshot to "us-west-2"
+    And the cross-region snapshot will eventually be successful
+

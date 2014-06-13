@@ -139,6 +139,13 @@ module AWS
         end
 
         # @api private
+        def remove_param(name)
+          if param = @params.find { |p| p.name == name }
+            @params.delete(param)
+          end
+        end
+
+        # @api private
         # @return [String,nil] Returns the url encoded request params.  If there
         #   are no params, then nil is returned.
         def url_encoded_params

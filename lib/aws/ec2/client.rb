@@ -121,26 +121,34 @@ module AWS
       private
 
       def presigned_copy_snapshot_url(params)
-        now = Time.now.strftime("%Y%m%dT%H%M%SZ")
         token = credential_provider.session_token
 
-        req = build_request(:copy_snapshot, params)
-        req.headers['host'] = req.host
+        client = self.with_options(ec2_region: params[:source_region])
+
+        req = client.build_request(:copy_snapshot, params)
+
+        now = req.remove_param("Timestamp").value
+        now = Time.parse(now).strftime("%Y%m%dT%H%M%SZ")
 
         req.add_param("X-Amz-Algorithm", "AWS4-HMAC-SHA256")
         req.add_param("X-Amz-Date", now)
         req.add_param("X-Amz-SignedHeaders", 'host')
         req.add_param("X-Amz-Expires", "3600")
         req.add_param('X-Amz-Security-Token', token) if token
-        req.add_param("X-Amz-Credential", v4_signer.credential(now))
+        req.add_param("X-Amz-Credential", client.v4_signer.credential(now))
 
         req.http_method = 'GET'
         req.uri = '/?' + req.url_encoded_params
         req.body = ''
+        req.headers.clear
+        req.headers['host'] = client.config.ec2_endpoint
 
-        key = v4_signer.derive_key(now)
-        sig = v4_signer.signature(req, key, now, v4_signer.class::EMPTY_DIGEST)
-        req.endpoint + req.uri + "&X-Amz-Signature=#{sig}"
+        key = client.v4_signer.derive_key(now)
+        sig = client.v4_signer.signature(req, key, now, client.v4_signer.class::EMPTY_DIGEST)
+
+        req.add_param('X-Amz-Signature', sig)
+
+        req.endpoint + '/?' + req.url_encoded_params
       end
 
     end

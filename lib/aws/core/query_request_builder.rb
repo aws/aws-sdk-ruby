@@ -25,7 +25,7 @@ module AWS
 
       def populate_request request, options
 
-          now = Time.now.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+          now = Time.now.utc.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
 
           request.headers['Content-Type'] =
             "application/x-www-form-urlencoded; charset=utf-8"

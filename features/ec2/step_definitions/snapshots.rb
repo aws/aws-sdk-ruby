@@ -12,6 +12,9 @@
 # language governing permissions and limitations under the License.
 
 When /^I create a snapshot from the volume$/ do
+  eventually do
+    @volume.status.should == :available
+  end
   @snapshot = @result = @volume.create_snapshot
   @created_snapshots << @snapshot
 end
@@ -61,10 +64,17 @@ When /^I get all snapshots grouped by owner ID$/ do
   end
 end
 
-Then(/^I can copy the snapshot to 'us\-west\-(\d+)'$/) do |region|
-  client = @ec2.client.with(:ec2_region => region)
-  client.copy_snapshot(
-    source_region: @ec2.client.ec2_region,
+Then(/^I can copy the snapshot to "(.*?)"$/) do |region|
+  @regional_client = @ec2.client.with_options(:ec2_region => region)
+  @response = @regional_client.copy_snapshot(
+    source_region: @ec2.client.config.ec2_region,
     source_snapshot_id: @snapshot.id
   )
+end
+
+Then(/^the cross-region snapshot will eventually be successful$/) do
+  eventually do
+    resp = @regional_client.describe_snapshots(snapshot_ids:[@response.snapshot_id])
+    resp.snapshot_set.first.status.should == 'completed'
+  end
 end
