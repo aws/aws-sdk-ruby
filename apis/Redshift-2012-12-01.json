@@ -686,6 +686,10 @@
                   "automated_snapshot_retention_period": {
                     "type": "integer",
                     "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  },
+                  "cluster_identifier": {
+                    "type": "string",
+                    "serialized_name": "ClusterIdentifier"
                   }
                 }
               },
@@ -1602,6 +1606,10 @@
                   "automated_snapshot_retention_period": {
                     "type": "integer",
                     "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  },
+                  "cluster_identifier": {
+                    "type": "string",
+                    "serialized_name": "ClusterIdentifier"
                   }
                 }
               },
@@ -2770,6 +2778,10 @@
                     "automated_snapshot_retention_period": {
                       "type": "integer",
                       "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                    },
+                    "cluster_identifier": {
+                      "type": "string",
+                      "serialized_name": "ClusterIdentifier"
                     }
                   }
                 },
@@ -4071,6 +4083,10 @@
                   "automated_snapshot_retention_period": {
                     "type": "integer",
                     "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  },
+                  "cluster_identifier": {
+                    "type": "string",
+                    "serialized_name": "ClusterIdentifier"
                   }
                 }
               },
@@ -4439,6 +4455,10 @@
                   "automated_snapshot_retention_period": {
                     "type": "integer",
                     "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  },
+                  "cluster_identifier": {
+                    "type": "string",
+                    "serialized_name": "ClusterIdentifier"
                   }
                 }
               },
@@ -4643,6 +4663,10 @@
           "hsm_configuration_identifier": {
             "type": "string",
             "serialized_name": "HsmConfigurationIdentifier"
+          },
+          "new_cluster_identifier": {
+            "type": "string",
+            "serialized_name": "NewClusterIdentifier"
           }
         }
       },
@@ -4802,6 +4826,10 @@
                   "automated_snapshot_retention_period": {
                     "type": "integer",
                     "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  },
+                  "cluster_identifier": {
+                    "type": "string",
+                    "serialized_name": "ClusterIdentifier"
                   }
                 }
               },
@@ -5388,6 +5416,10 @@
                   "automated_snapshot_retention_period": {
                     "type": "integer",
                     "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  },
+                  "cluster_identifier": {
+                    "type": "string",
+                    "serialized_name": "ClusterIdentifier"
                   }
                 }
               },
@@ -5792,6 +5824,10 @@
                   "automated_snapshot_retention_period": {
                     "type": "integer",
                     "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  },
+                  "cluster_identifier": {
+                    "type": "string",
+                    "serialized_name": "ClusterIdentifier"
                   }
                 }
               },
@@ -6058,6 +6094,34 @@
           "elastic_ip": {
             "type": "string",
             "serialized_name": "ElasticIp"
+          },
+          "cluster_parameter_group_name": {
+            "type": "string",
+            "serialized_name": "ClusterParameterGroupName"
+          },
+          "cluster_security_groups": {
+            "type": "list",
+            "serialized_name": "ClusterSecurityGroups",
+            "members": {
+              "type": "string",
+              "serialized_name": "ClusterSecurityGroupName"
+            }
+          },
+          "vpc_security_group_ids": {
+            "type": "list",
+            "serialized_name": "VpcSecurityGroupIds",
+            "members": {
+              "type": "string",
+              "serialized_name": "VpcSecurityGroupId"
+            }
+          },
+          "preferred_maintenance_window": {
+            "type": "string",
+            "serialized_name": "PreferredMaintenanceWindow"
+          },
+          "automated_snapshot_retention_period": {
+            "type": "integer",
+            "serialized_name": "AutomatedSnapshotRetentionPeriod"
           }
         }
       },
@@ -6217,6 +6281,10 @@
                   "automated_snapshot_retention_period": {
                     "type": "integer",
                     "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  },
+                  "cluster_identifier": {
+                    "type": "string",
+                    "serialized_name": "ClusterIdentifier"
                   }
                 }
               },
@@ -6763,6 +6831,10 @@
                   "automated_snapshot_retention_period": {
                     "type": "integer",
                     "serialized_name": "AutomatedSnapshotRetentionPeriod"
+                  },
+                  "cluster_identifier": {
+                    "type": "string",
+                    "serialized_name": "ClusterIdentifier"
                   }
                 }
               },

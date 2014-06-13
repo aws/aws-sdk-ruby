@@ -716,6 +716,33 @@
           "message_structure": {
             "type": "string",
             "serialized_name": "MessageStructure"
+          },
+          "message_attributes": {
+            "type": "map",
+            "serialized_name": "MessageAttributes",
+            "keys": {
+              "type": "string",
+              "serialized_name": "Name"
+            },
+            "members": {
+              "type": "structure",
+              "serialized_name": "Value",
+              "members": {
+                "data_type": {
+                  "type": "string",
+                  "required": true,
+                  "serialized_name": "DataType"
+                },
+                "string_value": {
+                  "type": "string",
+                  "serialized_name": "StringValue"
+                },
+                "binary_value": {
+                  "type": "blob",
+                  "serialized_name": "BinaryValue"
+                }
+              }
+            }
           }
         }
       },
