@@ -123,7 +123,7 @@ module AWS
       def presigned_copy_snapshot_url(params)
         token = credential_provider.session_token
 
-        client = self.with_options(ec2_region: params[:source_region])
+        client = self.with_options(:ec2_region => params[:source_region])
 
         req = client.build_request(:copy_snapshot, params)
 
