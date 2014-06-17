@@ -42,7 +42,7 @@ module Aws
         403 => 'Forbidden',
         404 => 'NotFound',
         412 => 'PreconditionFailed',
-      }[status_code] || "#{status_code}Error"
+      }[status_code] || "Http#{status_code}Error"
     end
 
   end
