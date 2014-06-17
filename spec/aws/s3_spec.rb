@@ -5,7 +5,11 @@ module Aws
   describe S3 do
 
     let(:s3) {
-      Aws.s3(credentials: Credentials.new('akid', 'secret'), region: 'us-east-1')
+      Aws::S3.new(
+        credentials: Credentials.new('akid', 'secret'),
+        region: 'us-east-1',
+        retry_limit: 0,
+      )
     }
 
     it 'creates an error class from empty body responses' do

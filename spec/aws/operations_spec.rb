@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'stringio'
 
 module Aws
   describe 'Aws' do
@@ -116,27 +117,30 @@ module Aws
           fixture_name = path.split('/')[-1][0..-5]
 
           it(fixture_name) do
-            # load the fixture from disk
-            f = OperationFixture.load(svc_name, fixture_name)
+            begin
+              # load the fixture from disk
+              f = OperationFixture.load(svc_name, fixture_name)
 
-            # remove the plugin that raises errors
-            Aws.service_classes[svc_name.to_sym].remove_plugin(
-              Seahorse::Client::Plugins::RaiseResponseErrors)
+              # remove the plugin that raises errors
+              Aws.service_classes[svc_name.to_sym].remove_plugin(
+                Seahorse::Client::Plugins::RaiseResponseErrors)
 
-            # build the service interface
-            svc = Aws.send(svc_name, f.config)
+              # build the service interface
+              svc = Aws.send(svc_name, f.config)
 
-            # build the request
-            req = svc.build_request(f.operation, f.params)
-            req.handler(f.handler, step: :send)
+              # build the request
+              req = svc.build_request(f.operation, f.params)
+              req.handler(f.handler, step: :send)
 
 
-            # send the request
-            resp = req.send_request
+              # send the request
+              resp = req.send_request
 
-            request_assertions(f, resp.context.http_request)
-            response_assertions(f, resp)
-
+              request_assertions(f, resp.context.http_request)
+              response_assertions(f, resp)
+            ensure
+              Aws.service_classes[svc_name.to_sym].add_plugin(Seahorse::Client::Plugins::RaiseResponseErrors)
+            end
           end
         end
       end
