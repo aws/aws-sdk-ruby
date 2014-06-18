@@ -67,7 +67,7 @@ When(/^I delete the bucket$/) do
 end
 
 Then(/^the bucket should not exist$/) do
-  eventually do
+  eventually(upto: 60) do
     begin
       @s3.get_bucket_location(bucket: @bucket_name)
     rescue => @error

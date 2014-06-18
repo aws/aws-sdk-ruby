@@ -1,4 +1,5 @@
-def eventually(seconds = 15, &block)
+def eventually(options = {}, &block)
+  seconds = options[:upto] || 15
   delays = [1]
   while delays.inject(0) { |sum, i| sum + i } < seconds
     delays << delays.last * 1.2
