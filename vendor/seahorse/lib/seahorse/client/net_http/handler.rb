@@ -54,6 +54,7 @@ module Seahorse
               resp.read_body do |chunk|
                 response.body.write(chunk)
               end
+              response.body.rewind if response.body.respond_to?(:rewind)
 
             end
           end

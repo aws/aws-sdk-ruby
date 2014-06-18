@@ -151,3 +151,15 @@ Then(/^I can download the key "(.*?)" with the aes key$/) do |key|
     sse_customer_algorithm: 'AES256',
     sse_customer_key: @aes_key)
 end
+
+When(/^I get the object with the key "(.*?)"$/) do |key|
+  @response = @s3.get_object(bucket: @bucket_name, key: key)
+end
+
+Then(/^the body should be an IO object$/) do
+  expect(@response.body).to be_kind_of(StringIO)
+end
+
+Then(/^the body\#read method should return "(.*?)"$/) do |str|
+  expect(@response.body.read).to eq(str)
+end
