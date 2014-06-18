@@ -1,3 +1,5 @@
+require 'openssl'
+
 module Aws
   module Signers
     class Base

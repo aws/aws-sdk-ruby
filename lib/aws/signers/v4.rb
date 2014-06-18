@@ -1,5 +1,4 @@
 require 'time'
-require 'digest/sha1'
 require 'openssl'
 
 module Aws
@@ -158,7 +157,7 @@ module Aws
       end
 
       def hexdigest(value)
-        digest = Digest::SHA256.new
+        digest = OpenSSL::Digest::SHA256.new
         if value.respond_to?(:read)
           chunk = nil
           chunk_size = 1024 * 1024 # 1 megabyte

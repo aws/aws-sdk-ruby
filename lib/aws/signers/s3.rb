@@ -1,6 +1,5 @@
 require 'set'
 require 'time'
-require 'digest/sha1'
 require 'openssl'
 require 'uri'
 
