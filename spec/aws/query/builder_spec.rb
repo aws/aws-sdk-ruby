@@ -132,6 +132,26 @@ module Aws
             ])
           end
 
+          it 'serializes empty lists' do
+            rules['members'] = {
+              'config' => {
+                'type' => 'structure',
+                'members' => {
+                  'items' => {
+                    'type' => 'flat_list',
+                    'members' => {
+                      'type' => 'string'
+                    }
+                  }
+                }
+              }
+            }
+            params = { config: { items: [] }}
+            expect(query_params(params)).to eq([
+              ['config.items', ''],
+            ])
+          end
+
         end
 
         describe 'non-flattened lists' do
@@ -189,6 +209,26 @@ module Aws
             expect(query_params(params)).to eq([
               ['people.member.1.name', 'John'],
               ['people.member.2.name', 'Jane'],
+            ])
+          end
+
+          it 'serializes empty lists' do
+            rules['members'] = {
+              'config' => {
+                'type' => 'structure',
+                'members' => {
+                  'items' => {
+                    'type' => 'list',
+                    'members' => {
+                      'type' => 'string'
+                    }
+                  }
+                }
+              }
+            }
+            params = { config: { items: [] }}
+            expect(query_params(params)).to eq([
+              ['config.items', ''],
             ])
           end
 

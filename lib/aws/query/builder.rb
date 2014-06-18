@@ -38,6 +38,10 @@ module Aws
       end
 
       def list(param_list, shape, prefix, values)
+        if values.empty?
+          param_list.set(prefix, '')
+          return
+        end
         member_shape = shape.members
         if flat?(shape)
           if member_shape.serialized_name
