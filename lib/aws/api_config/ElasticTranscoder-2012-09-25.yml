@@ -35,9 +35,11 @@
     :pipeline_id:
       :name: PipelineId
       :type: :string
+      :required: true
     :input:
       :name: Input
       :type: :hash
+      :required: true
       :members:
         :key:
           :name: Key
@@ -138,6 +140,45 @@
                   :duration:
                     :name: Duration
                     :type: :string
+        :captions:
+          :name: Captions
+          :type: :hash
+          :members:
+            :merge_policy:
+              :name: MergePolicy
+              :type: :string
+            :caption_sources:
+              :name: CaptionSources
+              :type: :array
+              :members:
+                :name: member
+                :type: :hash
+                :members:
+                  :key:
+                    :name: Key
+                    :type: :string
+                  :language:
+                    :name: Language
+                    :type: :string
+                  :time_offset:
+                    :name: TimeOffset
+                    :type: :string
+                  :label:
+                    :name: Label
+                    :type: :string
+            :caption_formats:
+              :name: CaptionFormats
+              :type: :array
+              :members:
+                :name: member
+                :type: :hash
+                :members:
+                  :format:
+                    :name: Format
+                    :type: :string
+                  :pattern:
+                    :name: Pattern
+                    :type: :string
     :outputs:
       :name: Outputs
       :type: :array
@@ -221,6 +262,45 @@
                       :type: :string
                     :duration:
                       :name: Duration
+                      :type: :string
+          :captions:
+            :name: Captions
+            :type: :hash
+            :members:
+              :merge_policy:
+                :name: MergePolicy
+                :type: :string
+              :caption_sources:
+                :name: CaptionSources
+                :type: :array
+                :members:
+                  :name: member
+                  :type: :hash
+                  :members:
+                    :key:
+                      :name: Key
+                      :type: :string
+                    :language:
+                      :name: Language
+                      :type: :string
+                    :time_offset:
+                      :name: TimeOffset
+                      :type: :string
+                    :label:
+                      :name: Label
+                      :type: :string
+              :caption_formats:
+                :name: CaptionFormats
+                :type: :array
+                :members:
+                  :name: member
+                  :type: :hash
+                  :members:
+                    :format:
+                      :name: Format
+                      :type: :string
+                    :pattern:
+                      :name: Pattern
                       :type: :string
     :output_key_prefix:
       :name: OutputKeyPrefix
@@ -370,6 +450,39 @@
                     Duration:
                       :sym: :duration
                       :type: :string
+            Captions:
+              :sym: :captions
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                CaptionSources:
+                  :sym: :caption_sources
+                  :type: :hash
+                  :members:
+                    Key:
+                      :sym: :key
+                      :type: :string
+                    Language:
+                      :sym: :language
+                      :type: :string
+                    TimeOffset:
+                      :sym: :time_offset
+                      :type: :string
+                    Label:
+                      :sym: :label
+                      :type: :string
+                CaptionFormats:
+                  :sym: :caption_formats
+                  :type: :hash
+                  :members:
+                    Format:
+                      :sym: :format
+                      :type: :string
+                    Pattern:
+                      :sym: :pattern
+                      :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -460,6 +573,39 @@
                     Duration:
                       :sym: :duration
                       :type: :string
+            Captions:
+              :sym: :captions
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                CaptionSources:
+                  :sym: :caption_sources
+                  :type: :hash
+                  :members:
+                    Key:
+                      :sym: :key
+                      :type: :string
+                    Language:
+                      :sym: :language
+                      :type: :string
+                    TimeOffset:
+                      :sym: :time_offset
+                      :type: :string
+                    Label:
+                      :sym: :label
+                      :type: :string
+                CaptionFormats:
+                  :sym: :caption_formats
+                  :type: :hash
+                  :members:
+                    Format:
+                      :sym: :format
+                      :type: :string
+                    Pattern:
+                      :sym: :pattern
+                      :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
           :type: :string
@@ -495,15 +641,18 @@
     :name:
       :name: Name
       :type: :string
+      :required: true
     :input_bucket:
       :name: InputBucket
       :type: :string
+      :required: true
     :output_bucket:
       :name: OutputBucket
       :type: :string
     :role:
       :name: Role
       :type: :string
+      :required: true
     :notifications:
       :name: Notifications
       :type: :hash
@@ -676,12 +825,14 @@
     :name:
       :name: Name
       :type: :string
+      :required: true
     :description:
       :name: Description
       :type: :string
     :container:
       :name: Container
       :type: :string
+      :required: true
     :video:
       :name: Video
       :type: :hash
@@ -1143,6 +1294,39 @@
                     Duration:
                       :sym: :duration
                       :type: :string
+            Captions:
+              :sym: :captions
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                CaptionSources:
+                  :sym: :caption_sources
+                  :type: :hash
+                  :members:
+                    Key:
+                      :sym: :key
+                      :type: :string
+                    Language:
+                      :sym: :language
+                      :type: :string
+                    TimeOffset:
+                      :sym: :time_offset
+                      :type: :string
+                    Label:
+                      :sym: :label
+                      :type: :string
+                CaptionFormats:
+                  :sym: :caption_formats
+                  :type: :hash
+                  :members:
+                    Format:
+                      :sym: :format
+                      :type: :string
+                    Pattern:
+                      :sym: :pattern
+                      :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -1232,6 +1416,39 @@
                       :type: :string
                     Duration:
                       :sym: :duration
+                      :type: :string
+            Captions:
+              :sym: :captions
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                CaptionSources:
+                  :sym: :caption_sources
+                  :type: :hash
+                  :members:
+                    Key:
+                      :sym: :key
+                      :type: :string
+                    Language:
+                      :sym: :language
+                      :type: :string
+                    TimeOffset:
+                      :sym: :time_offset
+                      :type: :string
+                    Label:
+                      :sym: :label
+                      :type: :string
+                CaptionFormats:
+                  :sym: :caption_formats
+                  :type: :hash
+                  :members:
+                    Format:
+                      :sym: :format
+                      :type: :string
+                    Pattern:
+                      :sym: :pattern
                       :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
@@ -1400,6 +1617,39 @@
                     Duration:
                       :sym: :duration
                       :type: :string
+            Captions:
+              :sym: :captions
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                CaptionSources:
+                  :sym: :caption_sources
+                  :type: :hash
+                  :members:
+                    Key:
+                      :sym: :key
+                      :type: :string
+                    Language:
+                      :sym: :language
+                      :type: :string
+                    TimeOffset:
+                      :sym: :time_offset
+                      :type: :string
+                    Label:
+                      :sym: :label
+                      :type: :string
+                CaptionFormats:
+                  :sym: :caption_formats
+                  :type: :hash
+                  :members:
+                    Format:
+                      :sym: :format
+                      :type: :string
+                    Pattern:
+                      :sym: :pattern
+                      :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -1489,6 +1739,39 @@
                       :type: :string
                     Duration:
                       :sym: :duration
+                      :type: :string
+            Captions:
+              :sym: :captions
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                CaptionSources:
+                  :sym: :caption_sources
+                  :type: :hash
+                  :members:
+                    Key:
+                      :sym: :key
+                      :type: :string
+                    Language:
+                      :sym: :language
+                      :type: :string
+                    TimeOffset:
+                      :sym: :time_offset
+                      :type: :string
+                    Label:
+                      :sym: :label
+                      :type: :string
+                CaptionFormats:
+                  :sym: :caption_formats
+                  :type: :hash
+                  :members:
+                    Format:
+                      :sym: :format
+                      :type: :string
+                    Pattern:
+                      :sym: :pattern
                       :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
@@ -1924,6 +2207,39 @@
                     Duration:
                       :sym: :duration
                       :type: :string
+            Captions:
+              :sym: :captions
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                CaptionSources:
+                  :sym: :caption_sources
+                  :type: :hash
+                  :members:
+                    Key:
+                      :sym: :key
+                      :type: :string
+                    Language:
+                      :sym: :language
+                      :type: :string
+                    TimeOffset:
+                      :sym: :time_offset
+                      :type: :string
+                    Label:
+                      :sym: :label
+                      :type: :string
+                CaptionFormats:
+                  :sym: :caption_formats
+                  :type: :hash
+                  :members:
+                    Format:
+                      :sym: :format
+                      :type: :string
+                    Pattern:
+                      :sym: :pattern
+                      :type: :string
         Outputs:
           :sym: :outputs
           :type: :hash
@@ -2013,6 +2329,39 @@
                       :type: :string
                     Duration:
                       :sym: :duration
+                      :type: :string
+            Captions:
+              :sym: :captions
+              :type: :hash
+              :members:
+                MergePolicy:
+                  :sym: :merge_policy
+                  :type: :string
+                CaptionSources:
+                  :sym: :caption_sources
+                  :type: :hash
+                  :members:
+                    Key:
+                      :sym: :key
+                      :type: :string
+                    Language:
+                      :sym: :language
+                      :type: :string
+                    TimeOffset:
+                      :sym: :time_offset
+                      :type: :string
+                    Label:
+                      :sym: :label
+                      :type: :string
+                CaptionFormats:
+                  :sym: :caption_formats
+                  :type: :hash
+                  :members:
+                    Format:
+                      :sym: :format
+                      :type: :string
+                    Pattern:
+                      :sym: :pattern
                       :type: :string
         OutputKeyPrefix:
           :sym: :output_key_prefix
@@ -2312,15 +2661,19 @@
     :role:
       :name: Role
       :type: :string
+      :required: true
     :input_bucket:
       :name: InputBucket
       :type: :string
+      :required: true
     :output_bucket:
       :name: OutputBucket
       :type: :string
+      :required: true
     :topics:
       :name: Topics
       :type: :array
+      :required: true
       :members:
         :name: member
         :type: :string
@@ -2524,6 +2877,7 @@
     :notifications:
       :name: Notifications
       :type: :hash
+      :required: true
       :members:
         :progressing:
           :name: Progressing
@@ -2637,6 +2991,7 @@
     :status:
       :name: Status
       :type: :string
+      :required: true
   :outputs:
     Pipeline:
       :sym: :pipeline
