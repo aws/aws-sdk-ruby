@@ -531,6 +531,57 @@ module AWS
 
       end
 
+      # An auto-refreshing credential provider that works by assuming
+      # a role via {AWS::STS#assume_role}.
+      #
+      #    provider = AWS::Core::CredentialProviders::AssumeRoleProvider.new(
+      #      sts: AWS::STS.new(access_key_id:'AKID', secret_access_key:'SECRET'),
+      #      # assume role options:
+      #      role_arn: "linked::account::arn",
+      #      role_session_name: "session-name"
+      #    )
+      #
+      #    ec2 = AWS::EC2.new(credential_provider:provider)
+      #
+      # If you omit the `:sts` option, a new {STS} service object will be
+      # constructed and it will use the default credential provider
+      # from {Aws.config}.
+      #
+      class AssumeRoleProvider
+
+        include Provider
+
+        # @option options [AWS::STS] :sts (STS.new) An instance of {AWS::STS}. 
+        #   This is used to make the API call to assume role.
+        # @option options [required, String] :role_arn
+        # @option options [required, String] :role_session_name
+        # @option options [String] :policy
+        # @option options [Integer] :duration_seconds
+        # @option options [String] :external_id
+        def initialize(options = {})
+          @options = options.dup
+          @sts = @options.delete(:sts) || STS.new
+        end
+
+        def credentials
+          refresh if near_expiration?
+          super
+        end
+
+        private
+
+        def near_expiration?
+          @expiration && @expiration.utc <= Time.now.utc + 5 * 60
+        end
+
+        def get_credentials
+          role = @sts.assume_role(@options)
+          @expiration = role[:credentials][:expiration]
+          role[:credentials]
+        end
+
+      end
+
       # Returns a set of fake credentials, should only be used for testing.
       class FakeProvider < StaticProvider
 
