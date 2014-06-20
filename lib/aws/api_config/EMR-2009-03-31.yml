@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -90,6 +90,7 @@
   :inputs:
     ResourceId:
     - :string
+    - :required
     Tags:
     - :list:
       - :structure:
@@ -97,12 +98,14 @@
           - :string
           Value:
           - :string
+    - :required
   :outputs: {}
 - :name: DescribeCluster
   :method: :describe_cluster
   :inputs:
     ClusterId:
     - :string
+    - :required
   :outputs:
     Cluster:
       :sym: :cluster
@@ -207,6 +210,9 @@
             Value:
               :sym: :value
               :type: :string
+        ServiceRole:
+          :sym: :service_role
+          :type: :string
 - :name: DescribeJobFlows
   :method: :describe_job_flows
   :inputs:
@@ -435,13 +441,18 @@
         JobFlowRole:
           :sym: :job_flow_role
           :type: :string
+        ServiceRole:
+          :sym: :service_role
+          :type: :string
 - :name: DescribeStep
   :method: :describe_step
   :inputs:
     ClusterId:
     - :string
+    - :required
     StepId:
     - :string
+    - :required
   :outputs:
     Step:
       :sym: :step
@@ -510,6 +521,7 @@
   :inputs:
     ClusterId:
     - :string
+    - :required
     Marker:
     - :string
   :outputs:
@@ -590,6 +602,7 @@
   :inputs:
     ClusterId:
     - :string
+    - :required
     Marker:
     - :string
   :outputs:
@@ -659,6 +672,7 @@
   :inputs:
     ClusterId:
     - :string
+    - :required
     InstanceGroupId:
     - :string
     InstanceGroupTypes:
@@ -727,6 +741,7 @@
   :inputs:
     ClusterId:
     - :string
+    - :required
     StepStates:
     - :list:
       - :string
@@ -796,9 +811,11 @@
   :inputs:
     ResourceId:
     - :string
+    - :required
     TagKeys:
     - :list:
       - :string
+    - :required
   :outputs: {}
 - :name: RunJobFlow
   :method: :run_job_flow
@@ -909,6 +926,8 @@
     VisibleToAllUsers:
     - :boolean
     JobFlowRole:
+    - :string
+    ServiceRole:
     - :string
     Tags:
     - :list:
