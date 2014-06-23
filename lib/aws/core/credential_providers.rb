@@ -16,6 +16,7 @@ require 'net/http'
 require 'timeout'
 require 'thread'
 require 'time'
+require 'json'
 
 module AWS
   module Core
