@@ -37,6 +37,10 @@ module Seahorse
 
         end
 
+        def after_initialize(client)
+          raise ArgumentError, ":endpoint not set" unless client.config.endpoint
+        end
+
         handle(Handler, priority: 90)
 
         # @api private

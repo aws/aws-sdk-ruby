@@ -40,6 +40,7 @@ module Aws
 
     module ServiceTranslators
       autoload :CloudFront, "#{SRC}/api/service_translators/cloud_front"
+      autoload :CloudSearchDomain, "#{SRC}/api/service_translators/cloud_search_domain"
       autoload :DynamoDB, "#{SRC}/api/service_translators/dynamo_db"
       autoload :EC2, "#{SRC}/api/service_translators/ec2"
       autoload :Glacier, "#{SRC}/api/service_translators/glacier"
