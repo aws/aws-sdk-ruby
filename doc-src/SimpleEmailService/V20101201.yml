@@ -1,16 +1,3 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 ---
 :delete_identity: |-
   Calls the DeleteIdentity API operation.
@@ -41,6 +28,7 @@
     * `:notification_attributes` - (Hash<String,Hash>)
       * `:bounce_topic` - (String)
       * `:complaint_topic` - (String)
+      * `:delivery_topic` - (String)
       * `:forwarding_enabled` - (Boolean)
 :get_identity_verification_attributes: |-
   Calls the GetIdentityVerificationAttributes API operation.
@@ -91,7 +79,7 @@
 :send_email: |-
   Calls the SendEmail API operation.
   @param [Hash] options
-    * `:source` - *required* - (String) The identity's email address.
+    * `:source` - *required* - (String) The identity's email address. By default, the string must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. For more information, see RFC 2047.
     * `:destination` - *required* - (Hash) The destination for this email, composed of To:, CC:, and BCC: fields.
       * `:to_addresses` - (Array&lt;<String>) The To: field(s) of the message.
       * `:cc_addresses` - (Array&lt;<String>) The CC: field(s) of the message.
@@ -108,17 +96,17 @@
           * `:data` - *required* - (String) The textual data of the content.
           * `:charset` - (String) The character set of the content.
     * `:reply_to_addresses` - (Array&lt;<String>) The reply-to email address(es) for the message. If the recipient replies to the message, each reply-to address will receive the reply.
-    * `:return_path` - (String) The email address to which bounce notifications are to be forwarded. If the message cannot be delivered to the recipient, then an error message will be returned from the recipient's ISP; this message will then be forwarded to the email address specified by the ReturnPath parameter.
+    * `:return_path` - (String) The email address to which bounces and complaints are to be forwarded when feedback forwarding is enabled. If the message cannot be delivered to the recipient, then an error message will be returned from the recipient's ISP; this message will then be forwarded to the email address specified by the ReturnPath parameter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:message_id` - (String)
 :send_raw_email: |-
   Calls the SendRawEmail API operation.
   @param [Hash] options
-    * `:source` - (String) The identity's email address. If you specify the Source parameter, then bounce notifications and complaints will be sent to this email address. This takes precedence over any Return-Path header that you might include in the raw text of the message.
-    * `:destinations` - (Array&lt;<String>) A list of destinations for the message.
-    * `:raw_message` - *required* - (Hash) The raw text of the message. The client is responsible for ensuring the following: Message must contain a header and a body, separated by a blank line. All required header fields must be present. Each part of a multipart MIME message must be formatted properly. MIME content types must be among those supported by Amazon SES. Refer to the Amazon SES Developer Guide for more details. Content must be base64-encoded, if MIME requires it.
-      * `:data` - *required* - (String) The raw data of the message. The client must ensure that the message format complies with Internet email standards regarding email header fields, MIME types, MIME encoding, and base64 encoding (if necessary). For more information, go to theAmazon SES Developer Guide.
+    * `:source` - (String) The identity's email address. By default, the string must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. For more information, see RFC 2047. If you specify the Source parameter and have feedback forwarding enabled, then bounces and complaints will be sent to this email address. This takes precedence over any Return-Path header that you might include in the raw text of the message.
+    * `:destinations` - (Array&lt;<String>) A list of destinations for the message, consisting of To:, CC:, and BCC: addresses.
+    * `:raw_message` - *required* - (Hash) The raw text of the message. The client is responsible for ensuring the following: Message must contain a header and a body, separated by a blank line. All required header fields must be present. Each part of a multipart MIME message must be formatted properly. MIME content types must be among those supported by Amazon SES. For more information, go to the Amazon SES Developer Guide. Content must be base64-encoded, if MIME requires it.
+      * `:data` - *required* - (String) The raw data of the message. The client must ensure that the message format complies with Internet email standards regarding email header fields, MIME types, MIME encoding, and base64 encoding (if necessary). The To:, CC:, and BCC: headers in the raw message can contain a group list. For more information, go to the Amazon SES Developer Guide.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:message_id` - (String)
@@ -131,17 +119,18 @@
 :set_identity_feedback_forwarding_enabled: |-
   Calls the SetIdentityFeedbackForwardingEnabled API operation.
   @param [Hash] options
-    * `:identity` - *required* - (String) The identity for which to set feedback notification forwarding. Examples: user@example.com, example.com.
-    * `:forwarding_enabled` - *required* - (Boolean) Sets whether Amazon SES will forward feedback notifications as email.  `true`  specifies that Amazon SES will forward feedback notifications as email, in addition to any Amazon SNS topic publishing otherwise specified.  `false`  specifies that Amazon SES will publish feedback notifications only through Amazon SNS. This value can only be set to  `false`  when topics are specified for both Bounce and Complaint topic types.
+    * `:identity` - *required* - (String) The identity for which to set bounce and complaint notification forwarding. Examples: user@example.com, example.com.
+    * `:forwarding_enabled` - *required* - (Boolean) Sets whether Amazon SES will forward bounce and complaint notifications as email.  `true`  specifies that Amazon SES will forward bounce and complaint notifications as email, in addition to any Amazon SNS topic publishing otherwise specified.  `false`  specifies that Amazon SES will publish bounce and complaint notifications only through Amazon SNS. This value can only be set to  `false`  when Amazon SNS topics are set for both Bounce and Complaint notification types.
   @return [Core::Response]
 :set_identity_notification_topic: |-
   Calls the SetIdentityNotificationTopic API operation.
   @param [Hash] options
-    * `:identity` - *required* - (String) The identity for which the topic will be set. Examples: user@example.com, example.com.
-    * `:notification_type` - *required* - (String) The type of feedback notifications that will be published to the specified topic.  Valid values include:
+    * `:identity` - *required* - (String) The identity for which the Amazon SNS topic will be set. Examples: user@example.com, example.com.
+    * `:notification_type` - *required* - (String) The type of notifications that will be published to the specified Amazon SNS topic.  Valid values include:
       * `Bounce`
       * `Complaint`
-    * `:sns_topic` - (String) The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic. If the parameter is ommited from the request or a null value is passed, the topic is cleared and publishing is disabled.
+      * `Delivery`
+    * `:sns_topic` - (String) The Amazon Resource Name (ARN) of the Amazon SNS topic. If the parameter is omitted from the request or a null value is passed, SnsTopic is cleared and publishing is disabled.
   @return [Core::Response]
 :verify_domain_dkim: |-
   Calls the VerifyDomainDkim API operation.
