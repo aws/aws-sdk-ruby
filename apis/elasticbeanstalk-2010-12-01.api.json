@@ -1185,6 +1185,10 @@
           "shape":"EnvironmentTier",
           "documentation":"<p>\n         This specifies the tier to use for creating this environment.\n      </p>"
         },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>\n         This specifies the tags applied to resources in the environment.\n      </p>"
+        },
         "VersionLabel":{
           "shape":"VersionLabel",
           "documentation":"<p>The name of the application version to deploy.</p>\n      <p>\n         If the specified application has no associated application versions, AWS Elastic Beanstalk\n         <code>UpdateEnvironment</code> returns an\n         <code>InvalidParameterValue</code>\n         error.\n      </p>\n      <p>\n         Default: If not specified, AWS Elastic Beanstalk\n         attempts to launch the <?oxy_delete author=\"brussard\" timestamp=\"20131030T145730-0700\" content=\"most recently created\n         application version\"><?oxy_insert_start author=\"brussard\" timestamp=\"20131030T145730-0700\">sample application in the container<?oxy_insert_end>.\n      </p>"
@@ -2137,6 +2141,34 @@
         }
       },
       "documentation":"<p></p>"
+    },
+    "Tag":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"TagKey",
+          "documentation":"<p>The key of the tag.</p>"
+        },
+        "Value":{
+          "shape":"TagValue",
+          "documentation":"<p>The value of the tag.</p>"
+        }
+      },
+      "documentation":"<p>Describes a tag applied to a resource in an environment.</p>"
+    },
+    "TagKey":{
+      "type":"string",
+      "min":1,
+      "max":128
+    },
+    "TagValue":{
+      "type":"string",
+      "min":1,
+      "max":256
+    },
+    "Tags":{
+      "type":"list",
+      "member":{"shape":"Tag"}
     },
     "TerminateEnvForce":{"type":"boolean"},
     "TerminateEnvironmentMessage":{
