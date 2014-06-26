@@ -923,7 +923,7 @@
       "members":{
         "Profile":{
           "shape":"AudioCodecProfile",
-          "documentation":"<p>If you specified <code>AAC</code> for <code>Audio:Codec</code>, choose the AAC profile for the output file.\n            Elastic Transcoder supports the following profiles:</p>\n        <ul>\n            <li>\n<code>auto</code>: If you specify <code>auto</code>, Elastic Transcoder will select\n                the profile based on the bit rate selected for the output file.</li>\n            <li>\n<code>AAC-LC</code>: The most common AAC profile. Use for bitrates larger than\n                64 kbps.</li>\n            <li>\n<code>HE-AAC</code>: Not supported on some older players and devices.\n                Use for bitrates between 40 and 80 kbps.</li>\n            <li>\n<code>HE-AACv2</code>: Not supported on some players and devices.\n                Use for bitrates less than 48 kbps.</li>\n        </ul>\n        <note><p>If you created any presets before AAC profiles were added, Elastic Transcoder automatically updated\n            your presets to use AAC-LC. You can change the value as required.</p></note>"
+          "documentation":"<p>You can only choose an audio profile when you specify AAC for the value of Audio:Codec.</p>\n        <p>Specify the AAC profile for the output file. Elastic Transcoder supports the following profiles:</p>\n        <ul>\n            <li>\n<code>auto</code>: If you specify <code>auto</code>, Elastic Transcoder will select\n                the profile based on the bit rate selected for the output file.</li>\n            <li>\n<code>AAC-LC</code>: The most common AAC profile. Use for bitrates larger than\n                64 kbps.</li>\n            <li>\n<code>HE-AAC</code>: Not supported on some older players and devices.\n                Use for bitrates between 40 and 80 kbps.</li>\n            <li>\n<code>HE-AACv2</code>: Not supported on some players and devices.\n                Use for bitrates less than 48 kbps.</li>\n        </ul>\n        <note><p>If you created any presets before AAC profiles were added, Elastic Transcoder automatically updated\n            your presets to use AAC-LC. You can change the value as required.</p></note>"
         }
       },
       "documentation":"<p>Options associated with your audio codec.</p>"
@@ -968,6 +968,7 @@
     },
     "CancelJobRequest":{
       "type":"structure",
+      "required":["Id"],
       "members":{
         "Id":{
           "shape":"Id",
@@ -976,14 +977,89 @@
           "documentation":"<p>The identifier of the job that you want to cancel. </p>\n        <p>To get a list of the jobs (including their <code>jobId</code>) that have a status of\n                <code>Submitted</code>, use the <a>ListJobsByStatus</a> API action.</p>"
         }
       },
-      "documentation":"<p>The <code>CancelJobRequest</code> structure.</p>",
-      "required":["Id"]
+      "documentation":"<p>The <code>CancelJobRequest</code> structure.</p>"
     },
     "CancelJobResponse":{
       "type":"structure",
       "members":{
       },
       "documentation":"<p>The response body contains a JSON object. If the job is successfully canceled, the value\n            of <code>Success</code> is <code>true</code>.</p>"
+    },
+    "CaptionFormat":{
+      "type":"structure",
+      "members":{
+        "Format":{
+          "shape":"CaptionFormatFormat",
+          "documentation":"<p>The format you specify determines whether Elastic Transcoder generates an\n         embedded or sidecar caption for this output.</p>\n      <ul>\n         <li>\n<p><b>Valid Embedded Caption Formats:</b></p>\n            <ul>\n               <li><p><b>For MP3</b>: None</p></li>\n               <li><p><b>For MP4</b>: mov-text</p></li>\n               <li><p><b>For MPEG-TS</b>: None</p></li>\n               <li><p><b>For ogg</b>: None</p></li>\n               <li><p><b>For webm</b>: None</p></li>\n            </ul>\n         </li>\n         <li>\n<p><b>Valid Sidecar Caption Formats:</b> Elastic Transcoder\n            supports dfxp (first div element only), scc, srt, and webvtt. There are\n            no container restrictions on sidecar captions. If you want ttml or smpte-tt\n            compatible captions, specify dfxp as your output format.</p>\n         </li>\n      </ul>"
+        },
+        "Pattern":{
+          "shape":"CaptionFormatPattern",
+          "documentation":"<p>The prefix for caption filenames, in the form <i>description</i>-<code>{language}</code>, where:</p>\n      <ul>\n         <li>\n<i>description</i> is a description of the video.</li>\n         <li>\n<code>{language}</code> is a literal value that Elastic Transcoder replaces with the two- or three-letter\n            code for the language of the caption in the output file names.</li>\n      </ul>\n      <p>If you don't include <code>{language}</code> in the file name pattern, Elastic Transcoder automatically\n         appends \"<code>{language}</code>\" to the value that you specify for the description.  In addition,\n         Elastic Transcoder automatically appends the count to the end of the segment files.</p>\n      <p>For example, suppose you're transcoding into srt format. When you enter\n         \"Sydney-{language}-sunrise\", and the language of the captions is English\n         (en), the name of the first caption file will be Sydney-en-sunrise00000.srt.</p>"
+        }
+      },
+      "documentation":"<p>The file format of the output captions. If you leave this value blank,\n         Elastic Transcoder returns an error.</p>"
+    },
+    "CaptionFormatFormat":{
+      "type":"string",
+      "pattern":"(^mov-text$)|(^cea-608$)|(^cea-708$)|(^srt$)|(^scc$)|(^webvtt$)|(^dfxp$)"
+    },
+    "CaptionFormatPattern":{
+      "type":"string",
+      "pattern":"(^$)|(^.*\\{language\\}.*$)"
+    },
+    "CaptionFormats":{
+      "type":"list",
+      "member":{"shape":"CaptionFormat"},
+      "max":4
+    },
+    "CaptionMergePolicy":{
+      "type":"string",
+      "pattern":"(^MergeOverride$)|(^MergeRetain$)|(^Override$)"
+    },
+    "CaptionSource":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"Key",
+          "documentation":"<p>The name of the sidecar caption file that you want Elastic Transcoder to include in the\n         output file.</p>"
+        },
+        "Language":{
+          "shape":"Key",
+          "documentation":"<p>A string that specifies the language of the caption. Specify this as one of:</p>\n      <ul>\n         <li><p>2-character ISO 639-1 code</p></li>\n         <li><p>3-character ISO 639-2 code</p></li>\n      </ul>\n      <p>For more information on ISO language codes and language names, see the List of ISO \n         639-1 codes.</p>"
+        },
+        "TimeOffset":{
+          "shape":"TimeOffset",
+          "documentation":"<p>For clip generation or captions that do not start at the same time\n         as the associated video file, the <code>TimeOffset</code> tells Elastic Transcoder how much of the video to encode\n         before including captions.</p>\n      <p>Specify the TimeOffset in the form [+-]SS.sss or [+-]HH:mm:SS.ss.</p>"
+        },
+        "Label":{
+          "shape":"Name",
+          "documentation":"<p>The label of the caption shown in the player when choosing\n         a language. We recommend that you put the caption language name here, \n         in the language of the captions.</p>"
+        }
+      },
+      "documentation":"<p>A source file for the input sidecar captions used during the transcoding\n         process.</p>"
+    },
+    "CaptionSources":{
+      "type":"list",
+      "member":{"shape":"CaptionSource"},
+      "max":20
+    },
+    "Captions":{
+      "type":"structure",
+      "members":{
+        "MergePolicy":{
+          "shape":"CaptionMergePolicy",
+          "documentation":"<p>A policy that determines how Elastic Transcoder handles the existence of multiple captions.</p>\n      <ul>\n         <li><p><b>MergeOverride:</b> Elastic Transcoder transcodes both embedded\n            and sidecar captions into outputs. If captions for a language are embedded in the input\n            file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the\n            embedded captions for that language.</p></li>\n         <li><p><b>MergeRetain:</b>  Elastic Transcoder transcodes both embedded\n            and sidecar captions into outputs. If captions for a language are embedded in the input\n            file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the\n            sidecar captions for that language. If <guilabel>CaptionSources</guilabel> is empty,\n            Elastic Transcoder omits all sidecar captions from the output files.</p></li>\n         <li><p><b>Override:</b> Elastic Transcoder transcodes only the\n            sidecar captions that you specify in <code>CaptionSources</code>.</p></li>\n      </ul>\n      <p><code>MergePolicy</code> cannot be null.</p>"
+        },
+        "CaptionSources":{
+          "shape":"CaptionSources",
+          "documentation":"<p>Source files for the input sidecar captions used during the transcoding\n         process. To omit all sidecar captions, leave <code>CaptionSources</code> blank.</p>"
+        },
+        "CaptionFormats":{
+          "shape":"CaptionFormats",
+          "documentation":"<p>The array of file formats for the output captions. If you leave this value blank,\n         Elastic Transcoder returns an error.</p>"
+        }
+      },
+      "documentation":"<p>The captions to be created, if any.</p>"
     },
     "Clip":{
       "type":"structure",
@@ -1043,7 +1119,11 @@
         },
         "Composition":{
           "shape":"Composition",
-          "documentation":"<p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>"
+          "documentation":"<p>You can create an output file that contains an excerpt from the input file. This \n           excerpt, called a clip, can come from the beginning, middle, or end of the file. \n           The Composition object contains settings for the clips that make up an output file. \n           For the current release, you can only specify settings for a single clip per output \n           file. The Composition object cannot be null.</p>"
+        },
+        "Captions":{
+          "shape":"Captions",
+          "documentation":"<p>You can configure Elastic Transcoder to transcode captions, or subtitles, from one format to another.\n         All captions must be in UTF-8. Elastic Transcoder supports two types of captions:</p>\n      <ul>\n         <li>\n<p><b>Embedded:</b> Embedded captions\n            are included in the same file as the audio and video. Elastic Transcoder supports\n            only one embedded caption per language, to a maximum of 300 embedded captions per file.</p>\n            <p>Valid input values include: <code>CEA-608 (EIA-608</code>, first non-empty channel only),\n            \t<code>CEA-708 (EIA-708</code>, first non-empty channel only), and <code>mov-text</code></p>\n            <p>Valid outputs include: <code>mov-text</code></p>\n            <p>Elastic Transcoder supports a maximum of one embedded format per output.</p>\n</li>\n         <li>\n<p><b>Sidecar:</b> Sidecar captions are kept in a\n            separate metadata file from the audio and video data.  Sidecar captions require a player\n            that is capable of understanding the relationship between the video file and the sidecar\n            file. Elastic Transcoder supports only one sidecar caption per language, to a maximum of 20 sidecar\n            captions per file.</p>\n            <p>Valid input values include: <code>dfxp</code> (first div element only),\n               <code>ebu-tt</code>, <code>scc</code>, <code>smpt</code>, <code>srt</code>,\n               <code>ttml</code> (first div element only), and <code>webvtt</code></p>\n            <p>Valid outputs include: <code>dfxp</code> (first div element only), <code>scc</code>,\n               <code>srt</code>, and <code>webvtt</code>.</p>\n</li>\n         </ul>\n         <p> If you want ttml or smpte-tt compatible captions, specify dfxp as your output format.</p>\n         <p>Elastic Transcoder does not support OCR (Optical Character Recognition), does not accept pictures\n            as a valid input for captions, and is not available for audio-only transcoding. Elastic Transcoder does\n            not preserve text formatting (for example, italics) during the transcoding process.</p>\n            <p>To remove captions or leave the captions empty, set <code>Captions</code> to null. To pass through\n            existing captions unchanged, set the <code>MergePolicy</code> to <code>MergeRetain</code>,\n            and pass in a null <code>CaptionSources</code> array.</p>\n      <p>For more information on embedded files, see the Subtitles Wikipedia page.</p>\n      <p>For more information on sidecar files, see the Extensible Metadata Platform and Sidecar file\n         Wikipedia pages.</p>"
         }
       },
       "documentation":"<p>The <code>CreateJobOutput</code> structure.</p>"
@@ -1078,6 +1158,10 @@
     },
     "CreateJobRequest":{
       "type":"structure",
+      "required":[
+        "PipelineId",
+        "Input"
+      ],
       "members":{
         "PipelineId":{
           "shape":"Id",
@@ -1115,6 +1199,11 @@
     },
     "CreatePipelineRequest":{
       "type":"structure",
+      "required":[
+        "Name",
+        "InputBucket",
+        "Role"
+      ],
       "members":{
         "Name":{
           "shape":"Name",
@@ -1159,6 +1248,10 @@
     },
     "CreatePresetRequest":{
       "type":"structure",
+      "required":[
+        "Name",
+        "Container"
+      ],
       "members":{
         "Name":{
           "shape":"Name",
@@ -1203,6 +1296,7 @@
     },
     "DeletePipelineRequest":{
       "type":"structure",
+      "required":["Id"],
       "members":{
         "Id":{
           "shape":"Id",
@@ -1211,8 +1305,7 @@
           "documentation":"<p>The identifier of the pipeline that you want to delete.</p>"
         }
       },
-      "documentation":"<p>The <code>DeletePipelineRequest</code> structure.</p>",
-      "required":["Id"]
+      "documentation":"<p>The <code>DeletePipelineRequest</code> structure.</p>"
     },
     "DeletePipelineResponse":{
       "type":"structure",
@@ -1222,6 +1315,7 @@
     },
     "DeletePresetRequest":{
       "type":"structure",
+      "required":["Id"],
       "members":{
         "Id":{
           "shape":"Id",
@@ -1230,8 +1324,7 @@
           "documentation":"<p>The identifier of the preset for which you want to get detailed information.</p>"
         }
       },
-      "documentation":"<p>The <code>DeletePresetRequest</code> structure.</p>",
-      "required":["Id"]
+      "documentation":"<p>The <code>DeletePresetRequest</code> structure.</p>"
     },
     "DeletePresetResponse":{
       "type":"structure",
@@ -1456,7 +1549,11 @@
         },
         "Composition":{
           "shape":"Composition",
-          "documentation":"<p>You can create an output file that contains an excerpt from the input file. This excerpt, called a clip, can come from the beginning, middle, or end of the file. The Composition object contains settings for the clips that make up an output file. For the current release, you can only specify settings for a single clip per output file. The Composition object cannot be null.</p>"
+          "documentation":"<p>You can create an output file that contains an excerpt from the input file. This \n           excerpt, called a clip, can come from the beginning, middle, or end of the file. \n           The Composition object contains settings for the clips that make up an output \n           file. For the current release, you can only specify settings for a single clip \n           per output file. The Composition object cannot be null.</p>"
+        },
+        "Captions":{
+          "shape":"Captions",
+          "documentation":"<p>You can configure Elastic Transcoder to transcode captions, or subtitles, from one format to another.\n         All captions must be in UTF-8. Elastic Transcoder supports two types of captions:</p>\n      <ul>\n         <li>\n<p><b>Embedded:</b> Embedded captions\n            are included in the same file as the audio and video. Elastic Transcoder supports\n            only one embedded caption per language, to a maximum of 300 embedded captions per file.</p>\n            <p>Valid input values include: <code>CEA-608 (EIA-608</code>, first non-empty channel only),\n               <code>CEA-708 (EIA-708</code>, first non-empty channel only), and <code>mov-text</code></p>\n            <p>Valid outputs include: <code>mov-text</code></p>\n            <p>Elastic Transcoder supports a maximum of one embedded format per output.</p>\n</li>\n         <li>\n<p><b>Sidecar:</b> Sidecar captions are kept in a\n            separate metadata file from the audio and video data.  Sidecar captions require a player\n            that is capable of understanding the relationship between the video file and the sidecar\n            file. Elastic Transcoder supports only one sidecar caption per language, to a maximum of 20 sidecar\n            captions per file.</p>\n            <p>Valid input values include: <code>dfxp</code> (first div element only),\n               <code>ebu-tt</code>, <code>scc</code>, <code>smpt</code>, <code>srt</code>,\n               <code>ttml</code> (first div element only), and <code>webvtt</code></p>\n            <p>Valid outputs include: <code>dfxp</code> (first div element only), <code>scc</code>,\n               <code>srt</code>, and <code>webvtt</code>.</p>\n</li>\n         </ul>\n         <p> If you want ttml or smpte-tt compatible captions, specify dfxp as your output format.</p>\n         <p>Elastic Transcoder does not support OCR (Optical Character Recognition), does not accept pictures\n            as a valid input for captions, and is not available for audio-only transcoding. Elastic Transcoder does\n            not preserve text formatting (for example, italics) during the transcoding process.</p>\n            <p>To remove captions or leave the captions empty, set <code>Captions</code> to null. To pass through\n            existing captions unchanged, set the <code>MergePolicy</code> to <code>MergeRetain</code>,\n            and pass in a null <code>CaptionSources</code> array.</p>\n      <p>For more information on embedded files, see the Subtitles Wikipedia page.</p>\n      <p>For more information on sidecar files, see the Extensible Metadata Platform and Sidecar file\n         Wikipedia pages.</p>"
         }
       },
       "documentation":"<p><important>Outputs recommended instead.</important>If you specified one output for a job,\n            information about that output. If you specified multiple outputs for a job, the\n                <code>Output</code> object lists information about the first output. This duplicates\n            the information that is listed for the first output in the <code>Outputs</code>\n            object.</p>"
@@ -1514,6 +1611,7 @@
     },
     "ListJobsByPipelineRequest":{
       "type":"structure",
+      "required":["PipelineId"],
       "members":{
         "PipelineId":{
           "shape":"Id",
@@ -1534,8 +1632,7 @@
           "documentation":"<p> When Elastic Transcoder returns more than one page of results, use <code>pageToken</code> in\n            subsequent <code>GET</code> requests to get each successive page of results. </p>"
         }
       },
-      "documentation":"<p>The <code>ListJobsByPipelineRequest</code> structure.</p>",
-      "required":["PipelineId"]
+      "documentation":"<p>The <code>ListJobsByPipelineRequest</code> structure.</p>"
     },
     "ListJobsByPipelineResponse":{
       "type":"structure",
@@ -1553,6 +1650,7 @@
     },
     "ListJobsByStatusRequest":{
       "type":"structure",
+      "required":["Status"],
       "members":{
         "Status":{
           "shape":"JobStatus",
@@ -1573,8 +1671,7 @@
           "documentation":"<p> When Elastic Transcoder returns more than one page of results, use <code>pageToken</code> in\n            subsequent <code>GET</code> requests to get each successive page of results. </p>"
         }
       },
-      "documentation":"<p>The <code>ListJobsByStatusRequest</code> structure.</p>",
-      "required":["Status"]
+      "documentation":"<p>The <code>ListJobsByStatusRequest</code> structure.</p>"
     },
     "ListJobsByStatusResponse":{
       "type":"structure",
@@ -1801,7 +1898,7 @@
     },
     "PixelsOrPercent":{
       "type":"string",
-      "pattern":"(^\\d{1,3}(\\.\\d{0,5})?%$)|(^\\d{2,4}?px$)"
+      "pattern":"(^\\d{1,3}(\\.\\d{0,5})?%$)|(^\\d{1,4}?px$)"
     },
     "Playlist":{
       "type":"structure",
@@ -1948,6 +2045,7 @@
     },
     "ReadJobRequest":{
       "type":"structure",
+      "required":["Id"],
       "members":{
         "Id":{
           "shape":"Id",
@@ -1956,8 +2054,7 @@
           "documentation":"<p>The identifier of the job for which you want to get detailed information.</p>"
         }
       },
-      "documentation":"<p>The <code>ReadJobRequest</code> structure.</p>",
-      "required":["Id"]
+      "documentation":"<p>The <code>ReadJobRequest</code> structure.</p>"
     },
     "ReadJobResponse":{
       "type":"structure",
@@ -1971,6 +2068,7 @@
     },
     "ReadPipelineRequest":{
       "type":"structure",
+      "required":["Id"],
       "members":{
         "Id":{
           "shape":"Id",
@@ -1979,8 +2077,7 @@
           "documentation":"<p>The identifier of the pipeline to read.</p>"
         }
       },
-      "documentation":"<p>The <code>ReadPipelineRequest</code> structure.</p>",
-      "required":["Id"]
+      "documentation":"<p>The <code>ReadPipelineRequest</code> structure.</p>"
     },
     "ReadPipelineResponse":{
       "type":"structure",
@@ -1994,6 +2091,7 @@
     },
     "ReadPresetRequest":{
       "type":"structure",
+      "required":["Id"],
       "members":{
         "Id":{
           "shape":"Id",
@@ -2002,8 +2100,7 @@
           "documentation":"<p>The identifier of the preset for which you want to get detailed information.</p>"
         }
       },
-      "documentation":"<p>The <code>ReadPresetRequest</code> structure.</p>",
-      "required":["Id"]
+      "documentation":"<p>The <code>ReadPresetRequest</code> structure.</p>"
     },
     "ReadPresetResponse":{
       "type":"structure",
@@ -2071,6 +2168,12 @@
     },
     "TestRoleRequest":{
       "type":"structure",
+      "required":[
+        "Role",
+        "InputBucket",
+        "OutputBucket",
+        "Topics"
+      ],
       "members":{
         "Role":{
           "shape":"Role",
@@ -2155,6 +2258,10 @@
       "type":"string",
       "pattern":"(^\\d{1,5}(\\.\\d{0,3})?$)|(^([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\\.\\d{0,3})?$)"
     },
+    "TimeOffset":{
+      "type":"string",
+      "pattern":"(^[+-]?\\d{1,5}(\\.\\d{0,3})?$)|(^[+-]?([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\\.\\d{0,3})?$)"
+    },
     "TimeSpan":{
       "type":"structure",
       "members":{
@@ -2164,13 +2271,17 @@
         },
         "Duration":{
           "shape":"Time",
-          "documentation":"<p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file , Elastic Transcoder transcodes \n       the file and returns a warning message.</p>"
+          "documentation":"<p>The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS \n       is thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value, \n       Elastic Transcoder creates an output file from StartTime to the end of the file.</p>\n       <p>If you specify a value longer than the duration of the input file, Elastic Transcoder transcodes \n       the file and returns a warning message.</p>"
         }
       },
       "documentation":"<p>Settings that determine when a clip begins and how long it lasts.</p>"
     },
     "UpdatePipelineNotificationsRequest":{
       "type":"structure",
+      "required":[
+        "Id",
+        "Notifications"
+      ],
       "members":{
         "Id":{
           "shape":"Id",
@@ -2183,8 +2294,7 @@
           "documentation":"<p>The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify to report job\n            status.</p>\n        <important>To receive notifications, you must also subscribe to the new topic in the Amazon SNS\n            console.</important>\n        <ul>\n            <li>\n<b>Progressing</b>: The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to\n                notify when Elastic Transcoder has started to process jobs that are added to this pipeline. This\n                is the ARN that Amazon SNS returned when you created the topic.</li>\n            <li>\n<b>Completed</b>: The topic ARN for the Amazon SNS topic that you want to notify when\n                Elastic Transcoder has finished processing a job. This is the ARN that Amazon SNS returned when\n                you created the topic.</li>\n            <li>\n<b>Warning</b>: The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder\n                encounters a warning condition. This is the ARN that Amazon SNS returned when you\n                created the topic.</li>\n            <li>\n<b>Error</b>: The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder\n                encounters an error condition. This is the ARN that Amazon SNS returned when you\n                created the topic.</li>\n        </ul>"
         }
       },
-      "documentation":"<p>The <code>UpdatePipelineNotificationsRequest</code> structure.</p>",
-      "required":["Id"]
+      "documentation":"<p>The <code>UpdatePipelineNotificationsRequest</code> structure.</p>"
     },
     "UpdatePipelineNotificationsResponse":{
       "type":"structure",
@@ -2240,6 +2350,10 @@
     },
     "UpdatePipelineStatusRequest":{
       "type":"structure",
+      "required":[
+        "Id",
+        "Status"
+      ],
       "members":{
         "Id":{
           "shape":"Id",
@@ -2252,8 +2366,7 @@
           "documentation":"<p>The desired status of the pipeline:</p>\n        <ul>\n            <li>\n                <code>Active</code>: The pipeline is processing jobs.</li>\n            <li>\n                <code>Paused</code>: The pipeline is not currently processing jobs.</li>\n        </ul>"
         }
       },
-      "documentation":"<p>The <code>UpdatePipelineStatusRequest</code> structure.</p>",
-      "required":["Id"]
+      "documentation":"<p>The <code>UpdatePipelineStatusRequest</code> structure.</p>"
     },
     "UpdatePipelineStatusResponse":{
       "type":"structure",
