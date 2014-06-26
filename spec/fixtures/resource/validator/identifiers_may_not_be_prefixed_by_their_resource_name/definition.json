@@ -1,0 +1,10 @@
+{
+  "resources": {
+    "ResourceName": {
+      "identifiers": [
+        { "name": "ResourceNameId" },
+        { "name": "ResourceNameArn" }
+      ]
+    }
+  }
+}

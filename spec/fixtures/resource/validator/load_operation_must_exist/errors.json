@@ -1,0 +1,3 @@
+[
+  "'#/resources/ResourceName/load/request/operation' is set but is not defined at 'api#/operations/OperationName'."
+]

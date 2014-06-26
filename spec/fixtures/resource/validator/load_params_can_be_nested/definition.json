@@ -1,0 +1,21 @@
+{
+  "resources": {
+    "ResourceName": {
+      "identifiers": [
+        { "name": "Type" },
+        { "name": "Id" }
+      ],
+      "shape": "ResourceShape",
+      "load": {
+        "request": {
+          "operation": "OperationName",
+          "params": [
+            { "target":"Filters[0].Name", "sourceType":"identifier", "source":"Type" },
+            { "target":"Filters[0].Values[]", "sourceType":"identifier", "source":"Id" }
+          ]
+        },
+        "path": "$"
+      }
+    }
+  }
+}

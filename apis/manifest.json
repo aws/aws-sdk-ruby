@@ -106,13 +106,15 @@
     "2012-06-01": {
       "api": "apis/glacier-2012-06-01.api.json",
       "paginators": "apis/glacier-2012-06-01.paginators.json",
-      "waiters": "apis/glacier-2012-06-01.waiters.json"
+      "waiters": "apis/glacier-2012-06-01.waiters.json",
+      "resources": "apis/glacier-2012-06-01.resources.json"
     }
   },
   "IAM": {
     "2010-05-08": {
       "api": "apis/iam-2010-05-08.api.json",
-      "paginators": "apis/iam-2010-05-08.paginators.json"
+      "paginators": "apis/iam-2010-05-08.paginators.json",
+      "resources": "apis/iam-2010-05-08.resources.json"
     }
   },
   "ImportExport": {
@@ -136,7 +138,8 @@
   "OpsWorks": {
     "2013-02-18": {
       "api": "apis/opsworks-2013-02-18.api.json",
-      "paginators": "apis/opsworks-2013-02-18.paginators.json"
+      "paginators": "apis/opsworks-2013-02-18.paginators.json",
+      "resources": "apis/opsworks-2013-02-18.resources.json"
     }
   },
   "RDS": {
@@ -171,7 +174,8 @@
     "2006-03-01": {
       "api": "apis/s3-2006-03-01.api.json",
       "paginators": "apis/s3-2006-03-01.paginators.json",
-      "waiters": "apis/s3-2006-03-01.waiters.json"
+      "waiters": "apis/s3-2006-03-01.waiters.json",
+      "resources": "apis/s3-2006-03-01.resources.json"
     }
   },
   "SimpleDB": {
@@ -183,13 +187,15 @@
   "SNS": {
     "2010-03-31": {
       "api": "apis/sns-2010-03-31.api.json",
-      "paginators": "apis/sns-2010-03-31.paginators.json"
+      "paginators": "apis/sns-2010-03-31.paginators.json",
+      "resources": "apis/sns-2010-03-31.resources.json"
     }
   },
   "SQS": {
     "2012-11-05": {
       "api": "apis/sqs-2012-11-05.api.json",
-      "paginators": "apis/sqs-2012-11-05.paginators.json"
+      "paginators": "apis/sqs-2012-11-05.paginators.json",
+      "resources": "apis/sqs-2012-11-05.resources.json"
     }
   },
   "StorageGateway": {

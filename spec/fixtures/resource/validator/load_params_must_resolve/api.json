@@ -1,0 +1,20 @@
+{
+  "operations": {
+    "OperationName": {
+      "input": { "shape": "RequestShape" },
+      "output": { "shape": "ResourceShape" }
+    }
+  },
+  "shapes": {
+    "RequestShape": {
+      "type": "structure",
+      "members": {
+      }
+    },
+    "ResourceShape": {
+      "type": "structure",
+      "members": {
+      }
+    }
+  }
+}

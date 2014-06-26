@@ -1,0 +1,11 @@
+{
+  "operations": {
+  },
+  "shapes": {
+    "ShapeName": {
+      "type": "structure",
+      "members": {
+      }
+    }
+  }
+}

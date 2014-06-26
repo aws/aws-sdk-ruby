@@ -1,0 +1,210 @@
+{
+  "type": "object",
+  "required": ["resources"],
+  "additionalProperties": false,
+  "properties": {
+    "service": { "$ref": "#/definitions/Service" },
+    "resources": { "$ref": "#/definitions/ResourceMap" }
+  },
+  "definitions": {
+    "ActionMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/Operation" }
+      }
+    },
+    "HasManyMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/Operation" }
+      }
+    },
+    "HasOneMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/ResourceReference" }
+      }
+    },
+    "HasSomeMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/ResourceReference" }
+      }
+    },
+    "JMESPathExpression": {
+      "type": "string",
+      "minLength": 1
+    },
+    "Identifier": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "$ref": "#/definitions/IdentifierName" },
+        "memberName": { "type": "string" },
+        "nullable": { "type": "boolean", "default": false }
+      }
+    },
+    "IdentifierList": {
+      "type": "array",
+      "additionalItems": false,
+      "items": { "$ref": "#/definitions/Identifier" }
+    },
+    "IdentifierName": { "$ref": "#/definitions/UpperCamelCaseString" },
+    "Operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request": { "$ref": "#/definitions/Request" },
+        "resource": { "$ref": "#/definitions/ResourceBuilder" },
+        "path": { "$ref": "#/definitions/JMESPathExpression" }
+      }
+    },
+    "OperationName": { "type": "string" },
+    "Request": {
+      "type": "object",
+      "required": ["operation"],
+      "additionalProperties": false,
+      "properties": {
+        "operation": { "$ref": "#/definitions/OperationName" },
+        "params":  { "$ref": "#/definitions/RequestParamList" }
+      }
+    },
+    "RequestParam": {
+      "type": "object",
+      "required": [
+        "target",
+        "sourceType",
+        "source"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "target": { "type": "string" },
+        "sourceType": {
+          "type": "string",
+          "enum": ["identifier", "dataMember", "string", "integer", "boolean"]
+        },
+        "source": { "type": "string" }
+      }
+    },
+    "RequestParamList": {
+      "type": "array",
+      "minItems": 1,
+      "additionalItems": false,
+      "items": { "$ref": "#/definitions/RequestParam" }
+    },
+    "ResourceIdentifier": {
+      "type": "object",
+      "required": [
+        "target",
+        "sourceType",
+        "source"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "target": { "$ref": "#/definitions/IdentifierName" },
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "identifier",
+            "dataMember",
+            "requestParameter",
+            "responsePath"
+          ]
+        },
+        "source": { "type": "string" }
+      }
+    },
+    "ResourceIdentifierList": {
+      "type": "array",
+      "additionalItems": false,
+      "items": { "$ref": "#/definitions/ResourceIdentifier" }
+    },
+    "Resource": {
+      "type": "object",
+      "required": [],
+      "additionalProperties": false,
+      "properties": {
+        "shape":            { "$ref": "#/definitions/ShapeName" },
+        "identifiers":      { "$ref": "#/definitions/IdentifierList" },
+        "load":             { "$ref": "#/definitions/Operation" },
+        "actions":          { "$ref": "#/definitions/ActionMap" },
+        "batchActions":     { "$ref": "#/definitions/ActionMap" },
+        "hasMany":          { "$ref": "#/definitions/HasManyMap" },
+        "hasSome":          { "$ref": "#/definitions/HasSomeMap" },
+        "hasOne":           { "$ref": "#/definitions/HasOneMap" },
+        "subResources":     { "$ref": "#/definitions/SubResources" }
+      }
+    },
+    "ResourceBuilder": {
+      "type": "object",
+      "required": ["type", "identifiers"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "$ref": "#/definitions/ResourceName" },
+        "identifiers": { "$ref": "#/definitions/ResourceIdentifierList" }
+      }
+    },
+    "ResourceMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/Resource" }
+      }
+    },
+    "ResourceName": { "$ref": "#/definitions/UpperCamelCaseString" },
+    "ResourceReference": {
+      "type": "object",
+      "required": ["resource"],
+      "additionalProperties": false,
+      "properties": {
+        "resource": { "$ref": "#/definitions/ResourceBuilder" },
+        "path": { "$ref": "#/definitions/JMESPathExpression" }
+      }
+    },
+    "Service": {
+      "type": "object",
+      "required": [],
+      "additionalProperties": false,
+      "properties": {
+        "actions": { "$ref": "#/definitions/ActionMap" },
+        "hasMany": { "$ref": "#/definitions/HasManyMap" }
+      }
+    },
+    "ShapeName": { "type": "string" },
+    "SubResourceIdentifierMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/UpperCamelCaseString" }
+      }
+    },
+    "SubResourceList": {
+      "type": "array",
+      "minItems": 1,
+      "additionalItems": false,
+      "items": { "$ref": "#/definitions/ResourceName" }
+    },
+    "SubResources": {
+      "type": "object",
+      "required": [
+        "resources",
+        "identifiers"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "resources": { "$ref": "#/definitions/SubResourceList" },
+        "identifiers": { "$ref": "#/definitions/SubResourceIdentifierMap" }
+      }
+    },
+    "UpperCamelCaseString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^([A-Z][a-z]+)+$"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "resources": {
+    "ResourceName": {
+      "shape": "ShapeName"
+    }
+  }
+}

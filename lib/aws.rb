@@ -17,6 +17,8 @@ module Aws
   autoload :PageableResponse, "#{SRC}/pageable_response"
   autoload :PagingProvider, "#{SRC}/paging_provider"
   autoload :RestBodyHandler, "#{SRC}/rest_body_handler"
+  autoload :Resource, "#{SRC}/resource"
+  autoload :Resources, "#{SRC}/resources"
   autoload :Service, "#{SRC}/service"
   autoload :SharedCredentials, "#{SRC}/shared_credentials"
   autoload :Structure, "#{SRC}/structure"
@@ -45,7 +47,7 @@ module Aws
     autoload :SimpleBodyHandler, "#{SRC}/json/simple_body_handler"
   end
 
-  module Plugins
+module Plugins
     autoload :Credentials, "#{SRC}/plugins/credentials"
     autoload :DynamoDBExtendedRetries, "#{SRC}/plugins/dynamodb_extended_retries"
     autoload :EC2CopyEncryptedSnapshot, "#{SRC}/plugins/ec2_copy_encrypted_snapshot"

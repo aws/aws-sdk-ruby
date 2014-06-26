@@ -1,0 +1,22 @@
+{
+  "operations": {
+    "OperationName": {
+      "input": { "shape": "RequestShape" },
+      "output": { "shape": "ResourceShape" }
+    }
+  },
+  "shapes": {
+    "RequestShape": {
+      "type": "structure",
+      "members": {
+        "ResourceId": { "shape": "string" }
+      }
+    },
+    "ResourceShape": {
+      "type": "structure",
+      "members": {
+      }
+    },
+    "string": { "type": "string" }
+  }
+}

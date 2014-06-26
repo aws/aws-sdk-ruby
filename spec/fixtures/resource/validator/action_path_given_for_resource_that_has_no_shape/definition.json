@@ -1,0 +1,19 @@
+{
+  "resources": {
+    "ResourceName": {
+      "actions": {
+        "CreateSomething": {
+          "request": {
+            "operation": "CreateSomeResource"
+          },
+          "resource": {
+            "type": "SomeResource",
+            "identifiers": []
+          },
+          "path": "$"
+        }
+      }
+    },
+    "SomeResource": {}
+  }
+}

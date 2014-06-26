@@ -1,0 +1,13 @@
+{
+  "resources": {
+    "ResourceName": {
+      "shape": "ShapeName",
+      "load": {
+        "request": {
+          "operation": "OperationName"
+        },
+        "path": "$"
+      }
+    }
+  }
+}

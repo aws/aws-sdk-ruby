@@ -14,6 +14,7 @@ group :test do
   gem 'cucumber'
   gem 'webmock'
   gem 'simplecov', require: false
+  gem 'json-schema'
 end
 
 group :docs do

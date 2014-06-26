@@ -1,0 +1,12 @@
+{
+  "resources": {
+    "ResourceName": {
+      "load": {
+        "request": {
+          "operation": "OperationName"
+        },
+        "path": "$"
+      }
+    }
+  }
+}

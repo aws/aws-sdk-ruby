@@ -1,0 +1,13 @@
+{
+  "operations": {
+    "OperationName": {
+      "output": { "shape": "ResponseShape" }
+    }
+  },
+  "shapes": {
+    "ResponseShape": {
+      "type": "structure",
+      "members": {}
+    }
+  }
+}

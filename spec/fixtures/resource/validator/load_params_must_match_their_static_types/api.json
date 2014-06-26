@@ -1,0 +1,26 @@
+{
+  "operations": {
+    "OperationName": {
+      "input": { "shape": "RequestShape" },
+      "output": { "shape": "ResourceShape" }
+    }
+  },
+  "shapes": {
+    "RequestShape": {
+      "type": "structure",
+      "members": {
+        "StrValue": { "shape": "String" },
+        "IntValue": { "shape": "Integer" },
+        "BoolValue": { "shape": "Boolean" }
+      }
+    },
+    "ResourceShape": {
+      "type": "structure",
+      "members": {
+      }
+    },
+    "String": { "type": "string" },
+    "Integer": { "type": "integer" },
+    "Boolean": { "type": "boolean" }
+  }
+}
