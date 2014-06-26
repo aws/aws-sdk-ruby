@@ -364,6 +364,27 @@
       ],
       "documentation":"<p>Deregisters a specified Elastic IP address. The address can then be registered by another stack.  For more information, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html\">Resource Management</a>.</p>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
     },
+    "DeregisterRdsDbInstance":{
+      "name":"DeregisterRdsDbInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeregisterRdsDbInstanceRequest"},
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true,
+          "documentation":"<p>Indicates that a request was invalid.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true,
+          "documentation":"<p>Indicates that a resource was not found.</p>"
+        }
+      ],
+      "documentation":"<p>Deregisters an Amazon RDS instance.</p>"
+    },
     "DeregisterVolume":{
       "name":"DeregisterVolume",
       "http":{
@@ -647,6 +668,31 @@
       ],
       "documentation":"<p>Describe an instance's RAID arrays.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage\n       permissions level for the stack, or an attached policy that explicitly grants permissions.\n       For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
     },
+    "DescribeRdsDbInstances":{
+      "name":"DescribeRdsDbInstances",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeRdsDbInstancesRequest"},
+      "output":{
+        "shape":"DescribeRdsDbInstancesResult",
+        "documentation":"<p>Contains the response to a <code>DescribeRdsDbInstances</code> request.</p>"
+      },
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true,
+          "documentation":"<p>Indicates that a request was invalid.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true,
+          "documentation":"<p>Indicates that a resource was not found.</p>"
+        }
+      ],
+      "documentation":"<p>Describes Amazon RDS instances.</p>"
+    },
     "DescribeServiceErrors":{
       "name":"DescribeServiceErrors",
       "http":{
@@ -904,6 +950,27 @@
         }
       ],
       "documentation":"<p>Registers an Elastic IP address with a specified stack. An address can be\n    registered with only one stack at a time. If the address is already registered, you must first deregister it\n      by calling <a>DeregisterElasticIp</a>. For more information, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html\">Resource Management</a>.</p>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
+    },
+    "RegisterRdsDbInstance":{
+      "name":"RegisterRdsDbInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RegisterRdsDbInstanceRequest"},
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true,
+          "documentation":"<p>Indicates that a request was invalid.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true,
+          "documentation":"<p>Indicates that a resource was not found.</p>"
+        }
+      ],
+      "documentation":"<p>Registers an Amazon RDS instance with a stack.</p>"
     },
     "RegisterVolume":{
       "name":"RegisterVolume",
@@ -1198,6 +1265,27 @@
       ],
       "documentation":"<p>Updates a user's SSH public key.</p>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have self-management enabled or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
     },
+    "UpdateRdsDbInstance":{
+      "name":"UpdateRdsDbInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateRdsDbInstanceRequest"},
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true,
+          "documentation":"<p>Indicates that a request was invalid.</p>"
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true,
+          "documentation":"<p>Indicates that a resource was not found.</p>"
+        }
+      ],
+      "documentation":"<p>Updates an Amazon RDS instance.</p>"
+    },
     "UpdateStack":{
       "name":"UpdateStack",
       "http":{
@@ -1286,6 +1374,10 @@
           "shape":"String",
           "documentation":"<p>A description of the app.</p>"
         },
+        "DataSources":{
+          "shape":"DataSources",
+          "documentation":"<p>The app's data sources.</p>"
+        },
         "Type":{
           "shape":"AppType",
           "documentation":"<p>The app type.</p>"
@@ -1296,7 +1388,7 @@
         },
         "Domains":{
           "shape":"Strings",
-          "documentation":"<p>The app vhost settings, with multiple domains separated by commas. For example: <code>'www.example.com, example.com'</code></p>"
+          "documentation":"<p>The app vhost settings with multiple domains separated by commas. For example: <code>'www.example.com, example.com'</code></p>"
         },
         "EnableSsl":{
           "shape":"Boolean",
@@ -1625,6 +1717,10 @@
           "shape":"String",
           "documentation":"<p>A description of the app.</p>"
         },
+        "DataSources":{
+          "shape":"DataSources",
+          "documentation":"<p>The app's data source.</p>"
+        },
         "Type":{
           "shape":"AppType",
           "documentation":"<p>The app type. Each supported type is associated with a particular layer. For example, PHP applications are associated with a PHP layer.\n         AWS OpsWorks deploys an application to those instances that are members of the corresponding layer.</p>"
@@ -1747,6 +1843,10 @@
         "AvailabilityZone":{
           "shape":"String",
           "documentation":"<p>The instance Availability Zone. For more information, see\n  <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html\">Regions and Endpoints</a>.</p>"
+        },
+        "VirtualizationType":{
+          "shape":"String",
+          "documentation":"<p>The instance's virtualization type, <code>paravirtual</code> or <code>hvm</code>.</p>"
         },
         "SubnetId":{
           "shape":"String",
@@ -1988,6 +2088,28 @@
       "key":{"shape":"Hour"},
       "value":{"shape":"Switch"}
     },
+    "DataSource":{
+      "type":"structure",
+      "members":{
+        "Type":{
+          "shape":"String",
+          "documentation":"<p>The data source's type, <code>AutoSelectOpsworksMysqlInstance</code>, <code>OpsworksMysqlInstance</code>, or <code>RdsDbInstance</code>.</p>"
+        },
+        "Arn":{
+          "shape":"String",
+          "documentation":"<p>The data source's ARN.</p>"
+        },
+        "DatabaseName":{
+          "shape":"String",
+          "documentation":"<p>The database name.</p>"
+        }
+      },
+      "documentation":"<p>Describes an app's data source.</p>"
+    },
+    "DataSources":{
+      "type":"list",
+      "member":{"shape":"DataSource"}
+    },
     "DateTime":{"type":"string"},
     "DeleteAppRequest":{
       "type":"structure",
@@ -2144,6 +2266,16 @@
         "ElasticIp":{
           "shape":"String",
           "documentation":"<p>The Elastic IP address.</p>"
+        }
+      }
+    },
+    "DeregisterRdsDbInstanceRequest":{
+      "type":"structure",
+      "required":["RdsDbInstanceArn"],
+      "members":{
+        "RdsDbInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon RDS instance's ARN.</p>"
         }
       }
     },
@@ -2409,6 +2541,30 @@
         }
       },
       "documentation":"<p>Contains the response to a <code>DescribeRaidArrays</code> request.</p>"
+    },
+    "DescribeRdsDbInstancesRequest":{
+      "type":"structure",
+      "required":["StackId"],
+      "members":{
+        "StackId":{
+          "shape":"String",
+          "documentation":"<p>The stack ID that the instances are registered with. The operation returns descriptions of all registered Amazon RDS instances.</p>"
+        },
+        "RdsDbInstanceArns":{
+          "shape":"Strings",
+          "documentation":"<p>An array containing the ARNs of the instances to be described.</p>"
+        }
+      }
+    },
+    "DescribeRdsDbInstancesResult":{
+      "type":"structure",
+      "members":{
+        "RdsDbInstances":{
+          "shape":"RdsDbInstances",
+          "documentation":"<p>An a array of <code>RdsDbInstance</code> objects that describe the instances.</p>"
+        }
+      },
+      "documentation":"<p>Contains the response to a <code>DescribeRdsDbInstances</code> request.</p>"
     },
     "DescribeServiceErrorsRequest":{
       "type":"structure",
@@ -2688,6 +2844,10 @@
         "Ec2InstanceId":{
           "shape":"String",
           "documentation":"<p>The ID of the associated Amazon EC2 instance.</p>"
+        },
+        "VirtualizationType":{
+          "shape":"String",
+          "documentation":"<p>The instance's virtualization type, <code>paravirtual</code> or <code>hvm</code>.</p>"
         },
         "Hostname":{
           "shape":"String",
@@ -3120,6 +3280,52 @@
       "type":"list",
       "member":{"shape":"RaidArray"}
     },
+    "RdsDbInstance":{
+      "type":"structure",
+      "members":{
+        "RdsDbInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>The instance's ARN.</p>"
+        },
+        "DbInstanceIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The DB instance identifier.</p>"
+        },
+        "DbUser":{
+          "shape":"String",
+          "documentation":"<p>The master user name.</p>"
+        },
+        "DbPassword":{
+          "shape":"String",
+          "documentation":"<p>The database password.</p>"
+        },
+        "Region":{
+          "shape":"String",
+          "documentation":"<p>The instance's AWS region.</p>"
+        },
+        "Address":{
+          "shape":"String",
+          "documentation":"<p>The instance's address.</p>"
+        },
+        "Engine":{
+          "shape":"String",
+          "documentation":"<p>The instance's database engine.</p>"
+        },
+        "StackId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the stack that the instance is registered with.</p>"
+        },
+        "MissingOnRds":{
+          "shape":"Boolean",
+          "documentation":"<p>Set to <code>true</code> if AWS OpsWorks was unable to discover the Amazon RDS instance.\n    AWS OpsWorks attempts to discover the instance only once. If this value is set to <code>true</code>,\n    you must deregister the instance and then register it again.</p>"
+        }
+      },
+      "documentation":"<p>Describes an Amazon RDS instance.</p>"
+    },
+    "RdsDbInstances":{
+      "type":"list",
+      "member":{"shape":"RdsDbInstance"}
+    },
     "RebootInstanceRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -3182,6 +3388,33 @@
         }
       },
       "documentation":"<p>Contains the response to a <code>RegisterElasticIp</code> request.</p>"
+    },
+    "RegisterRdsDbInstanceRequest":{
+      "type":"structure",
+      "required":[
+        "StackId",
+        "RdsDbInstanceArn",
+        "DbUser",
+        "DbPassword"
+      ],
+      "members":{
+        "StackId":{
+          "shape":"String",
+          "documentation":"<p>The stack ID.</p>"
+        },
+        "RdsDbInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon RDS instance's ARN.</p>"
+        },
+        "DbUser":{
+          "shape":"String",
+          "documentation":"<p>The database's master user name.</p>"
+        },
+        "DbPassword":{
+          "shape":"String",
+          "documentation":"<p>The database password.</p>"
+        }
+      }
     },
     "RegisterVolumeRequest":{
       "type":"structure",
@@ -3363,7 +3596,7 @@
         },
         "Password":{
           "shape":"String",
-          "documentation":"<p>This parameter depends on the repository type. </p>\n  <ul>\n    <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n    <li>For HTTP bundles, and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  <p>For more information on how to safely handle IAM credentials, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\"></a>.</p>"
+          "documentation":"<p>This parameter depends on the repository type. </p>\n  <ul>\n    <li>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</li>\n    <li>For HTTP bundles and Subversion repositories, set <code>Password</code> to the password.</li>\n  </ul>\n  <p>For more information on how to safely handle IAM credentials, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\"></a>.</p>"
         },
         "SshKey":{
           "shape":"String",
@@ -3641,6 +3874,10 @@
           "shape":"String",
           "documentation":"<p>A description of the app.</p>"
         },
+        "DataSources":{
+          "shape":"DataSources",
+          "documentation":"<p>The app's data sources.</p>"
+        },
         "Type":{
           "shape":"AppType",
           "documentation":"<p>The app type.</p>"
@@ -3724,6 +3961,10 @@
         "InstallUpdatesOnBoot":{
           "shape":"Boolean",
           "documentation":"<p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>"
+        },
+        "EbsOptimized":{
+          "shape":"Boolean",
+          "documentation":"<p>Whether this is an Amazon EBS-optimized instance.</p>"
         }
       }
     },
@@ -3795,6 +4036,24 @@
         "SshPublicKey":{
           "shape":"String",
           "documentation":"<p>The user's SSH public key.</p>"
+        }
+      }
+    },
+    "UpdateRdsDbInstanceRequest":{
+      "type":"structure",
+      "required":["RdsDbInstanceArn"],
+      "members":{
+        "RdsDbInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon RDS instance's ARN.</p>"
+        },
+        "DbUser":{
+          "shape":"String",
+          "documentation":"<p>The master user name.</p>"
+        },
+        "DbPassword":{
+          "shape":"String",
+          "documentation":"<p>The database password.</p>"
         }
       }
     },
