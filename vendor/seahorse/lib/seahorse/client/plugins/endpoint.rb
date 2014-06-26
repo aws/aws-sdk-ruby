@@ -21,11 +21,13 @@ module Seahorse
         class Handler < Client::Handler
 
           def call(context)
-            endpoint = Http::Endpoint.new(context.config.endpoint)
+            endpoint = Http::Endpoint.new(endpoint_for(context))
             apply_url_params(endpoint, context)
             context.http_request.endpoint = endpoint
             @handler.call(context)
           end
+
+          private
 
           def apply_url_params(endpoint, context)
             prefix = endpoint.path.sub(/\/$/, '')
@@ -35,11 +37,16 @@ module Seahorse
             ).path(context.params)
           end
 
+          def endpoint_for(context)
+            if context.config.endpoint
+              context.config.endpoint
+            else
+              raise "required configuration option :endpoint not set"
+            end
+          end
+
         end
 
-        def after_initialize(client)
-          raise ArgumentError, ":endpoint not set" unless client.config.endpoint
-        end
 
         handle(Handler, priority: 90)
 
