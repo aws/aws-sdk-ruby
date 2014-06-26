@@ -972,10 +972,7 @@
     },
     "HealthCheckConfig":{
       "type":"structure",
-      "required":[
-        "IPAddress",
-        "Type"
-      ],
+      "required":["Type"],
       "members":{
         "IPAddress":{
           "shape":"IPAddress",
