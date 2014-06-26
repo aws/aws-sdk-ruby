@@ -51,7 +51,7 @@
       },
       "output":{
         "shape":"AddJobFlowStepsOutput",
-        "documentation":"<p>The output for the <a>AddJobFlowSteps</a> operation. </p>"
+        "documentation":"<p> The output for the <a>AddJobFlowSteps</a> operation. </p>"
       },
       "errors":[
         {
@@ -74,11 +74,11 @@
       },
       "input":{
         "shape":"AddTagsInput",
-        "documentation":"<p>This input identifies a cluster and a list of tags to attach.\n      </p>"
+        "documentation":"<p>This input identifies a cluster and a list of tags to attach.                                                                                                                         \n      </p>"
       },
       "output":{
         "shape":"AddTagsOutput",
-        "documentation":"<p>This output indicates the result of adding tags to a resource.  \n      </p>"
+        "documentation":"<p>This output indicates the result of adding tags to a resource.                                                                                                                        \n      </p>"
       },
       "errors":[
         {
@@ -93,7 +93,7 @@
           "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
         }
       ],
-      "documentation":"<p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p>"
+      "documentation":"<p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs.         \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.                            \n      </p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1                                                                                                                                                \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nX-Amz-Target: ElasticMapReduce.AddTags                                                                                                                                                         \nAUTHPARAMS                                                                                                                                                                                     \n{                                                                                                                                                                                              \n  \"ResourceId\": \"j-3U7TSX5GZFD8Y\",                                                                                                                                                             \n  \"Tags\": [{                                 \n        \"Key\": \"stack\",                                                                                                                                                                          \n      \"Value\": \"Production\"                                                                                                                                                                    \n  },                                                                                                                                                                                           \n  {                                                                                                                                                                                            \n      \"Key\": \"hbase\"                                                                                                                                                                           \n  }]                                                                                                                                                                                           \n}                                                                                                                                                                                              \n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK                                                                                                                                               \nx-amzn-RequestId: 9da5a349-ed9e-11e2-90db-69a5154aeb8d                                                                                                                                         \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nContent-Length: 71                                                                                                                                                                             \nDate: Mon, 15 Jul 2013 22:33:47 GMT                                                                                                                                                            \n{                                                                                                                                                                                              \n}                                                                                                                                                                                              \n </queryresponse>\n      </examples>"
     },
     "DescribeCluster":{
       "name":"DescribeCluster",
@@ -150,7 +150,7 @@
         }
       ],
       "deprecated":true,
-      "documentation":"<p> DescribeJobFlows returns a list of job flows that match all of the supplied parameters.\n         The parameters can include a list of job flow IDs, job flow states, and restrictions on job\n         flow creation date and time.</p>\n      <p> Regardless of supplied parameters, only job flows created within the last two months are\n         returned.</p>\n      <p> If no parameters are supplied, then job flows matching either of the following criteria\n         are returned:</p>\n      <ul>\n         <li>Job flows created and completed in the last two weeks</li>\n         <li> Job flows created within the last two months that are in one of the following states:\n               <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>,\n               <code>STARTING</code>\n         </li>\n      </ul>\n      <p> Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions. </p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.DescribeJobFlows\nContent-Length: 62\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130715T220330Z\nX-Amz-Content-Sha256: fce83af973f96f173512aca2845c56862b946feb1de0600326f1365b658a0e39\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130715/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=29F98a6f44e05ad54fe1e8b3d1a7101ab08dc3ad348995f89c533693cee2bb3b\nAccept: */*\n\n{\n    \"JobFlowIds\": [\"j-ZKIY4CKQRX72\"],\n    \"DescriptionType\": \"EXTENDED\"\n}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 634d4142-ed9a-11e2-bbba-b56d7d016ec4\nContent-Type: application/x-amz-json-1.1\nContent-Length: 1624\nDate: Mon, 15 Jul 2013 22:03:31 GMT\n\n{\"JobFlows\": [{\n    \"AmiVersion\": \"2.3.6\",\n    \"BootstrapActions\": [],\n    \"ExecutionStatusDetail\": {\n        \"CreationDateTime\": 1.373923429E9,\n        \"EndDateTime\": 1.373923995E9,\n        \"LastStateChangeReason\": \"Steps completed\",\n        \"ReadyDateTime\": 1.373923754E9,\n        \"StartDateTime\": 1.373923754E9,\n        \"State\": \"COMPLETED\"\n    },\n    \"Instances\": {\n        \"HadoopVersion\": \"1.0.3\",\n        \"InstanceCount\": 1,\n        \"InstanceGroups\": [{\n            \"CreationDateTime\": 1.373923429E9,\n            \"EndDateTime\": 1.373923995E9,\n            \"InstanceGroupId\": \"ig-3SRUWV3E0NB7K\",\n            \"InstanceRequestCount\": 1,\n            \"InstanceRole\": \"MASTER\",\n            \"InstanceRunningCount\": 0,\n            \"InstanceType\": \"m1.small\",\n            \"LastStateChangeReason\": \"Job flow terminated\",\n            \"Market\": \"ON_DEMAND\",\n            \"Name\": \"Master InstanceGroup\",\n            \"ReadyDateTime\": 1.37392375E9,\n            \"StartDateTime\": 1.373923646E9,\n            \"State\": \"ENDED\"\n        }],\n        \"KeepJobFlowAliveWhenNoSteps\": false,\n        \"MasterInstanceId\": \"i-8c4fbbef\",\n        \"MasterInstanceType\": \"m1.small\",\n        \"MasterPublicDnsName\": \"ec2-107-20-46-140.compute-1.amazonaws.com\",\n        \"NormalizedInstanceHours\": 1,\n        \"Placement\": {\"AvailabilityZone\": \"us-east-1a\"},\n        \"TerminationProtected\": false\n    },\n    \"JobFlowId\": \"j-ZKIY4CKQRX72\",\n    \"Name\": \"Development Job Flow\",\n    \"Steps\": [{\n        \"ExecutionStatusDetail\": {\n            \"CreationDateTime\": 1.373923429E9,\n            \"EndDateTime\": 1.373923914E9,\n            \"StartDateTime\": 1.373923754E9,\n            \"State\": \"COMPLETED\"\n        },\n        \"StepConfig\": {\n            \"ActionOnFailure\": \"CANCEL_AND_WAIT\",\n            \"HadoopJarStep\": {\n                \"Args\": [\n                    \"-input\",\n                    \"s3://elasticmapreduce/samples/wordcount/input\",\n                    \"-output\",\n                    \"s3://examples-bucket/example-output\",\n                    \"-mapper\",\n                    \"s3://elasticmapreduce/samples/wordcount/wordSplitter.py\",\n                    \"-reducer\",\n                    \"aggregate\"\n                ],\n                \"Jar\": \"/home/hadoop/contrib/streaming/hadoop-streaming.jar\",\n                \"Properties\": []\n            },\n            \"Name\": \"Example Streaming Step\"\n        }\n    }],\n    \"SupportedProducts\": [],\n    \"VisibleToAllUsers\": false\n}]}\n</queryresponse>\n      </examples>"
+      "documentation":"<p> This API is deprecated and will eventually be removed. We recommend you use <a>ListClusters</a>,\n         <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a>\n         instead.</p>\n      <p> DescribeJobFlows returns a list of job flows that match all of the supplied parameters.\n         The parameters can include a list of job flow IDs, job flow states, and restrictions on job\n         flow creation date and time.</p>\n      <p> Regardless of supplied parameters, only job flows created within the last two months are\n         returned.</p>\n      <p> If no parameters are supplied, then job flows matching either of the following criteria\n         are returned:</p>\n      <ul>\n         <li>Job flows created and completed in the last two weeks</li>\n         <li> Job flows created within the last two months that are in one of the following states:\n               <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>,\n               <code>STARTING</code>\n         </li>\n      </ul>\n      <p> Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions. </p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.DescribeJobFlows\nContent-Length: 62\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130715T220330Z\nX-Amz-Content-Sha256: fce83af973f96f173512aca2845c56862b946feb1de0600326f1365b658a0e39\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130715/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=29F98a6f44e05ad54fe1e8b3d1a7101ab08dc3ad348995f89c533693cee2bb3b\nAccept: */*\n\n{\n    \"JobFlowIds\": [\"j-ZKIY4CKQRX72\"],\n    \"DescriptionType\": \"EXTENDED\"\n}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 634d4142-ed9a-11e2-bbba-b56d7d016ec4\nContent-Type: application/x-amz-json-1.1\nContent-Length: 1624\nDate: Mon, 15 Jul 2013 22:03:31 GMT\n\n{\"JobFlows\": [{\n    \"AmiVersion\": \"2.3.6\",\n    \"BootstrapActions\": [],\n    \"ExecutionStatusDetail\": {\n        \"CreationDateTime\": 1.373923429E9,\n        \"EndDateTime\": 1.373923995E9,\n        \"LastStateChangeReason\": \"Steps completed\",\n        \"ReadyDateTime\": 1.373923754E9,\n        \"StartDateTime\": 1.373923754E9,\n        \"State\": \"COMPLETED\"\n    },\n    \"Instances\": {\n        \"HadoopVersion\": \"1.0.3\",\n        \"InstanceCount\": 1,\n        \"InstanceGroups\": [{\n            \"CreationDateTime\": 1.373923429E9,\n            \"EndDateTime\": 1.373923995E9,\n            \"InstanceGroupId\": \"ig-3SRUWV3E0NB7K\",\n            \"InstanceRequestCount\": 1,\n            \"InstanceRole\": \"MASTER\",\n            \"InstanceRunningCount\": 0,\n            \"InstanceType\": \"m1.small\",\n            \"LastStateChangeReason\": \"Job flow terminated\",\n            \"Market\": \"ON_DEMAND\",\n            \"Name\": \"Master InstanceGroup\",\n            \"ReadyDateTime\": 1.37392375E9,\n            \"StartDateTime\": 1.373923646E9,\n            \"State\": \"ENDED\"\n        }],\n        \"KeepJobFlowAliveWhenNoSteps\": false,\n        \"MasterInstanceId\": \"i-8c4fbbef\",\n        \"MasterInstanceType\": \"m1.small\",\n        \"MasterPublicDnsName\": \"ec2-107-20-46-140.compute-1.amazonaws.com\",\n        \"NormalizedInstanceHours\": 1,\n        \"Placement\": {\"AvailabilityZone\": \"us-east-1a\"},\n        \"TerminationProtected\": false\n    },\n    \"JobFlowId\": \"j-ZKIY4CKQRX72\",\n    \"Name\": \"Development Job Flow\",\n    \"Steps\": [{\n        \"ExecutionStatusDetail\": {\n            \"CreationDateTime\": 1.373923429E9,\n            \"EndDateTime\": 1.373923914E9,\n            \"StartDateTime\": 1.373923754E9,\n            \"State\": \"COMPLETED\"\n        },\n        \"StepConfig\": {\n            \"ActionOnFailure\": \"CANCEL_AND_WAIT\",\n            \"HadoopJarStep\": {\n                \"Args\": [\n                    \"-input\",\n                    \"s3://elasticmapreduce/samples/wordcount/input\",\n                    \"-output\",\n                    \"s3://examples-bucket/example-output\",\n                    \"-mapper\",\n                    \"s3://elasticmapreduce/samples/wordcount/wordSplitter.py\",\n                    \"-reducer\",\n                    \"aggregate\"\n                ],\n                \"Jar\": \"/home/hadoop/contrib/streaming/hadoop-streaming.jar\",\n                \"Properties\": []\n            },\n            \"Name\": \"Example Streaming Step\"\n        }\n    }],\n    \"SupportedProducts\": [],\n    \"VisibleToAllUsers\": false\n}]}\n</queryresponse>\n      </examples>"
     },
     "DescribeStep":{
       "name":"DescribeStep",
@@ -193,7 +193,7 @@
       },
       "output":{
         "shape":"ListBootstrapActionsOutput",
-        "documentation":"<p>This output contains the bootstrap actions detail.</p>"
+        "documentation":"<p>This output contains the boostrap actions detail\n      .</p>"
       },
       "errors":[
         {
@@ -357,11 +357,11 @@
       },
       "input":{
         "shape":"RemoveTagsInput",
-        "documentation":"<p>This input identifies a cluster and a list of tags to remove.    \n      </p>"
+        "documentation":"<p>This input identifies a cluster and a list of tags to remove.                                                                                                                         \n      </p>"
       },
       "output":{
         "shape":"RemoveTagsOutput",
-        "documentation":"<p>This output indicates the result of removing tags from a resource.       \n      </p>"
+        "documentation":"<p>This output indicates the result of removing tags from a resource.                                                                                                                    \n      </p>"
       },
       "errors":[
         {
@@ -376,7 +376,7 @@
           "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
         }
       ],
-      "documentation":"<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.         \n      </p>"
+      "documentation":"<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs.    \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.                            \n      </p>\n      <p>The following example removes the stack tag with value Prod from a cluster:</p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1                                                                                                                                                \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nX-Amz-Target: ElasticMapReduce.RemoveTags                                                                                                                                                      \nAUTHPARAMS                                                                                                                                                                                     \n{                                                                                                                                                                                              \n  \"ResourceId\": \"j-3U7TSX5GZFD8Y\",                                                                                                                                                             \n  \"Tags\": [{                                                                                                                                                                                   \n      \"Key\": \"stack\",                                                                                                                                                                          \n      \"Value\": \"Prod\"                                                                                                                                                                          \n  }]                                                                                                                                                                                           \n}                                                                                                                                                                                              \n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK                                                                                                                                               \nx-amzn-RequestId: 9da5a349-ed9e-11e2-90db-69a5154aeb8d                                                                                                                                         \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nContent-Length: 71                                                                                                                                                                             \nDate: Mon, 15 Jul 2013 22:33:47 GMT                                                                                                                                                            \n{                                                                                                                                                                                              \n}                                                                                                                                                                                              \n </queryresponse>\n         <p>The following example removes the stack and hbase tags from a cluster:</p>\n         <queryrequest>POST / HTTP/1.1                                                                                                                                                \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nX-Amz-Target: ElasticMapReduce.RemoveTags                                                                                                                                                      \nAUTHPARAMS                                                                                                                                                                                     \n{                                                                                                                                                                                              \n  \"ResourceId\": \"j-3U7TSX5GZFD8Y\",                                                                                                                                                             \n  \"Tags\": [{                                                                                                                                                                                   \n      \"Key\": \"stack\"                                                                                                                                                                           \n  },                                                                                                                                                                                           \n  {                                                                                                                                                                                            \n      \"Key\": \"hbase\"                                                                                                                                                                           \n  }]                                                                                                                                                                                           \n}                                                                                                                                                                                              \n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK                                                                                                                                               \nx-amzn-RequestId: 9da5a349-ed9e-11e2-90db-69a5154aeb8d                                                                                                                                         \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nContent-Length: 71                                                                                                                                                                             \nDate: Mon, 15 Jul 2013 22:33:47 GMT                                                                                                                                                            \n{                                                                                                                                                                                              \n}                                                                                                                                                                                              \n </queryresponse>\n      </examples>"
     },
     "RunJobFlow":{
       "name":"RunJobFlow",
@@ -526,11 +526,11 @@
       "members":{
         "JobFlowId":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>A string that uniquely identifies the job flow. This identifier is returned by\n            <a>RunJobFlow</a> and can also be obtained from <a>DescribeJobFlows</a>. </p>"
+          "documentation":"<p>A string that uniquely identifies the job flow. This identifier is returned by\n            <a>RunJobFlow</a> and can also be obtained from <a>ListClusters</a>. </p>"
         },
         "Steps":{
           "shape":"StepConfigList",
-          "documentation":"<p>A list of <a>StepConfig</a> to be executed by the job flow. </p>"
+          "documentation":"<p> A list of <a>StepConfig</a> to be executed by the job flow. </p>"
         }
       },
       "documentation":"<p> The input argument to the <a>AddJobFlowSteps</a> operation. </p>"
@@ -543,10 +543,14 @@
           "documentation":"<p>The identifiers of the list of steps added to the job flow.</p>"
         }
       },
-      "documentation":"<p>The output for the <a>AddJobFlowSteps</a> operation. </p>"
+      "documentation":"<p> The output for the <a>AddJobFlowSteps</a> operation. </p>"
     },
     "AddTagsInput":{
       "type":"structure",
+      "required":[
+        "ResourceId",
+        "Tags"
+      ],
       "members":{
         "ResourceId":{
           "shape":"ResourceId",
@@ -557,13 +561,13 @@
           "documentation":"<p>A list of tags to associate with a cluster and propagate to Amazon EC2 instances. Tags are user-defined key/value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.</p>"
         }
       },
-      "documentation":"<p>This input identifies a cluster and a list of tags to attach.\n      </p>"
+      "documentation":"<p>This input identifies a cluster and a list of tags to attach.                                                                                                                         \n      </p>"
     },
     "AddTagsOutput":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>This output indicates the result of adding tags to a resource.  \n      </p>"
+      "documentation":"<p>This output indicates the result of adding tags to a resource.                                                                                                                        \n      </p>"
     },
     "Application":{
       "type":"structure",
@@ -585,7 +589,7 @@
           "documentation":"<p>This option is for advanced users only. This is meta information about third-party applications that third-party vendors use for testing purposes.</p>"
         }
       },
-      "documentation":"<p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p>\n      <ul>         \n         <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n         <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition, respectively.</li>\n      </ul>"
+      "documentation":"<p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p>\n      <ul>        \n         <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n         <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition, respectively.</li>\n      </ul>"
     },
     "ApplicationList":{
       "type":"list",
@@ -674,7 +678,11 @@
         },
         "Tags":{
           "shape":"TagList",
-          "documentation":"<p>A list of tags associated with cluster.</p>"
+          "documentation":"<p>A list of tags associated with a cluster.</p>"
+        },
+        "ServiceRole":{
+          "shape":"String",
+          "documentation":"<p>The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.</p>"
         }
       },
       "documentation":"<p>The detailed description of the cluster.</p>"
@@ -805,6 +813,7 @@
     "Date":{"type":"timestamp"},
     "DescribeClusterInput":{
       "type":"structure",
+      "required":["ClusterId"],
       "members":{
         "ClusterId":{
           "shape":"ClusterId",
@@ -857,6 +866,10 @@
     },
     "DescribeStepInput":{
       "type":"structure",
+      "required":[
+        "ClusterId",
+        "StepId"
+      ],
       "members":{
         "ClusterId":{
           "shape":"ClusterId",
@@ -903,7 +916,7 @@
           "documentation":"<p>The IAM role that was specified when the job flow was launched. The EC2 instances of the job flow assume this role.</p>"
         }
       },
-      "documentation":"<p>Provides information about the EC2 instances in a cluster grouped by category. For example, EC2 Key Name, Subnet Id, Instance Profile, and so on.</p>"
+      "documentation":"<p>Provides information about the EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.</p>"
     },
     "ErrorCode":{
       "type":"string",
@@ -1169,7 +1182,7 @@
         },
         "EC2InstanceIdsToTerminate":{
           "shape":"EC2InstanceIdsToTerminateList",
-          "documentation":"<p>The EC2 InstanceIds to terminate. For advanced users only. \n         Once you terminate the instances, the instance group will not return to its original requested size.</p>"
+          "documentation":"<p>The EC2 InstanceIds to terminate. For advanced users only.                                                                                                                            \n         Once you terminate the instances, the instance group will not return to its original requested size.</p>"
         }
       },
       "documentation":"<p>Modify an instance group size.</p>"
@@ -1221,7 +1234,7 @@
       "members":{
         "State":{
           "shape":"InstanceGroupState",
-          "documentation":"<p>The current state of the instance group. The following values are deprecated: ARRESTED, SHUTTING_DOWN, and ENDED. Use SUSPENDED, TERMINATING, and TERMINATED instead, respectively.\n      </p>"
+          "documentation":"<p>The current state of the instance group.</p>"
         },
         "StateChangeReason":{
           "shape":"InstanceGroupStateChangeReason",
@@ -1444,6 +1457,10 @@
         "JobFlowRole":{
           "shape":"XmlString",
           "documentation":"<p>The IAM role that was specified when the job flow was launched. The EC2 instances of the job flow assume this role.</p>"
+        },
+        "ServiceRole":{
+          "shape":"XmlString",
+          "documentation":"<p>The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.</p>"
         }
       },
       "documentation":"<p> A description of a job flow.</p>"
@@ -1548,7 +1565,7 @@
           "documentation":"<p>\n         To launch the job flow in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where \n         you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal Amazon Web Services cloud, outside of an \n         Amazon VPC. \n      </p>\n      <p>\n         Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances.  \n         Thus you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a Amazon VPC.\n      </p>"
         }
       },
-      "documentation":"<p>A description of the Amazon EC2 instance running the job flow. </p>"
+      "documentation":"<p>A description of the Amazon EC2 instance running the job flow. \n         A valid JobFlowInstancesConfig must contain at least InstanceGroups, which is the recommended configuration. However, a valid alternative is to have MasterInstanceType, SlaveInstanceType, and InstanceCount (all three must be present).</p>"
     },
     "JobFlowInstancesDetail":{
       "type":"structure",
@@ -1633,14 +1650,15 @@
     },
     "ListBootstrapActionsInput":{
       "type":"structure",
+      "required":["ClusterId"],
       "members":{
         "ClusterId":{
           "shape":"ClusterId",
-          "documentation":"<p>The cluster identifier for the bootstrap actions to list.</p>"
+          "documentation":"<p>The cluster identifier for the bootstrap actions to list\n      .</p>"
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve\n         .</p>"
         }
       },
       "documentation":"<p>This input determines which bootstrap actions to retrieve.</p>"
@@ -1650,25 +1668,25 @@
       "members":{
         "BootstrapActions":{
           "shape":"CommandList",
-          "documentation":"<p>The bootstrap actions associated with the cluster.</p>"
+          "documentation":"<p>The bootstrap actions associated with the cluster\n      .</p>"
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token is a random string indicating whether there are more results to fetch. Use the pagination token in later API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve\n      .</p>"
         }
       },
-      "documentation":"<p>This output contains the bootstrap actions detail.</p>"
+      "documentation":"<p>This output contains the boostrap actions detail\n      .</p>"
     },
     "ListClustersInput":{
       "type":"structure",
       "members":{
         "CreatedAfter":{
           "shape":"Date",
-          "documentation":"<p>The creation date and time beginning value filter for listing clusters.</p>"
+          "documentation":"<p>The creation date and time beginning value filter for listing clusters\n      .</p>"
         },
         "CreatedBefore":{
           "shape":"Date",
-          "documentation":"<p>The creation date and time end value filter for listing clusters.</p>"
+          "documentation":"<p>The creation date and time end value filter for listing clusters\n      .</p>"
         },
         "ClusterStates":{
           "shape":"ClusterStateList",
@@ -1676,7 +1694,7 @@
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.\n      </p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.\n      </p>"
         }
       },
       "documentation":"<p>This input determines how the ListClusters action filters the list of clusters that it returns.</p>"
@@ -1690,13 +1708,14 @@
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token is a random string indicating whether there are more results to fetch. Use the pagination token in later API calls to retrieve the next page of results. When the value is null, all results have been returned. \n      </p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.\n      </p>"
         }
       },
       "documentation":"<p>This contains a ClusterSummaryList with the cluster details; for example, the cluster IDs, names, and status.</p>"
     },
     "ListInstanceGroupsInput":{
       "type":"structure",
+      "required":["ClusterId"],
       "members":{
         "ClusterId":{
           "shape":"ClusterId",
@@ -1704,7 +1723,7 @@
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
       "documentation":"<p>This input determines which instance groups to retrieve.</p>"
@@ -1718,13 +1737,14 @@
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token is a random string indicating whether there are more results to fetch. Use the pagination token in later API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
       "documentation":"<p>This input determines which instance groups to retrieve.</p>"
     },
     "ListInstancesInput":{
       "type":"structure",
+      "required":["ClusterId"],
       "members":{
         "ClusterId":{
           "shape":"ClusterId",
@@ -1740,7 +1760,7 @@
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
       "documentation":"<p>This input determines which instances to list.</p>"
@@ -1754,13 +1774,14 @@
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token is a random string indicating whether there are more results to fetch. Use the pagination token in later API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
       "documentation":"<p>This output contains the list of instances.</p>"
     },
     "ListStepsInput":{
       "type":"structure",
+      "required":["ClusterId"],
       "members":{
         "ClusterId":{
           "shape":"ClusterId",
@@ -1772,7 +1793,7 @@
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token is a random string indicating whether there are more results to fetch. Provide the pagination token from earlier API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
       "documentation":"<p>This input determines which steps to list.</p>"
@@ -1786,7 +1807,7 @@
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token is a random string indicating whether there are more results to fetch. Use the pagination token in later API calls to retrieve the next page of results. When the value is null, all results have been returned.</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.</p>"
         }
       },
       "documentation":"<p>This output contains the list of steps.</p>"
@@ -1826,6 +1847,10 @@
     },
     "RemoveTagsInput":{
       "type":"structure",
+      "required":[
+        "ResourceId",
+        "TagKeys"
+      ],
       "members":{
         "ResourceId":{
           "shape":"ResourceId",
@@ -1836,13 +1861,13 @@
           "documentation":"<p>A list of tag keys to remove from a resource.</p>"
         }
       },
-      "documentation":"<p>This input identifies a cluster and a list of tags to remove.    \n      </p>"
+      "documentation":"<p>This input identifies a cluster and a list of tags to remove.                                                                                                                         \n      </p>"
     },
     "RemoveTagsOutput":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>This output indicates the result of removing tags from a resource.       \n      </p>"
+      "documentation":"<p>This output indicates the result of removing tags from a resource.                                                                                                                    \n      </p>"
     },
     "ResourceId":{"type":"string"},
     "RunJobFlowInput":{
@@ -1895,6 +1920,10 @@
         "JobFlowRole":{
           "shape":"XmlString",
           "documentation":"<p>An IAM role for the job flow. The EC2 instances of the job flow assume this role. The default role is <code>EMRJobflowDefault</code>. In order to use the default role, you must have already created it using the CLI.</p>"
+        },
+        "ServiceRole":{
+          "shape":"XmlString",
+          "documentation":"<p>The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.</p>"
         },
         "Tags":{
           "shape":"TagList",
@@ -1981,7 +2010,7 @@
         },
         "ActionOnFailure":{
           "shape":"ActionOnFailure",
-          "documentation":"<p>This specifies what action to take when the cluster step fails. TERMINATE_JOB_FLOW is deprecated, use TERMINATE_CLUSTER instead.\n         </p>"
+          "documentation":"<p>This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.\n         </p>"
         },
         "Status":{
           "shape":"StepStatus",
@@ -2167,11 +2196,11 @@
         },
         "StartDateTime":{
           "shape":"Date",
-          "documentation":"<p>The date and time when the cluster step execution started.\n         Due to delays in step status reporting, this can display a time which pre-dates a previous call to DescribeStep that indicated the step was not yet running. \n      </p>"
+          "documentation":"<p>The date and time when the cluster step execution started.\n      </p>"
         },
         "EndDateTime":{
           "shape":"Date",
-          "documentation":"<p>The date and time when the cluster step execution completed or failed. \n         This can display a time that pre-dates a call to DescribeStep that indicates the step is running, due to delays in step status reporting. \n      </p>"
+          "documentation":"<p>The date and time when the cluster step execution completed or failed.\n      </p>"
         }
       },
       "documentation":"<p>The timeline of the cluster step lifecycle.\n      </p>"
@@ -2209,14 +2238,14 @@
       "members":{
         "Key":{
           "shape":"String",
-          "documentation":"<p>A user-defined key, which is the minimum required information for a valid tag.\n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p>"
+          "documentation":"<p>A user-defined key, which is the minimum required information for a valid tag.                                                                                                        \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.                            \n      </p>"
         },
         "Value":{
           "shape":"String",
-          "documentation":"<p>A user-defined value, which is optional in a tag.\n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p>"
+          "documentation":"<p>A user-defined value, which is optional in a tag.                                                                                                                                     \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.                            \n      </p>"
         }
       },
-      "documentation":"<p>A key/value pair that contains user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.     \n      </p>"
+      "documentation":"<p>A key/value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clu\\\nsters to track your Amazon EMR resource allocation costs.                                                                                                                                      \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.                            \n      </p>"
     },
     "TagList":{
       "type":"list",
