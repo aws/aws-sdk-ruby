@@ -3,6 +3,7 @@ $:.unshift(File.join(root, 'vendor', 'seahorse', 'lib'))
 $:.unshift(File.join(root, 'lib'))
 
 require 'aws-sdk-core'
+require 'erb'
 
 YARD::Tags::Library.define_tag('CONFIGURATION_OPTIONS', :seahorse_client_option)
 YARD::Tags::Library.define_tag('SERVICE', :service)
@@ -55,54 +56,28 @@ Returns a new instance of {#{svc_name}}.
   DOC
 end
 
-def document_svc_class(svc_name, apis)
+def default_path
+end
 
+def service_docstring(svc_name, apis)
+  path = "doc-src/services/#{svc_name}/service.md"
+  if File.exists?(path)
+    template = File.read(path)
+  else
+    template = File.read('doc-src/services/default/service.md')
+  end
   oldest_api = apis.sort_by(&:version).first
   default_api = apis.sort_by(&:version).last
   full_name = default_api.metadata['service_full_name']
+  ERB.new(template).result(binding)
+end
+
+def document_svc_class(svc_name, apis)
 
   namespace = YARD::Registry['Aws']
   klass = YARD::CodeObjects::ClassObject.new(namespace, svc_name)
   klass.superclass = YARD::Registry['Aws::Service']
-  klass.docstring = <<-DOCSTRING
-A service client builder for #{full_name}.
-
-## Configuration
-
-You can specify global default configuration options via `Aws.config`.  Values
-in `Aws.config` are used as default options for all services.
-
-    Aws.config[:region] = 'us-west-2'
-
-You can specify service specific defaults as well:
-
-    Aws.config[:#{svc_name.downcase}] = { region: 'us-west-1' }
-
-This has a higher precendence that values at the root of `Aws.config` and will
-only applied to objects constructed by {new}.
-
-## Regions & Endpoints
-
-You must configure a default region with `Aws.config` or provide a `:region`
-when creating a service client.  The regions listed below will connect
-to the following endpoints:
-
-#{default_api.metadata['regional_endpoints'].map { |r,e| "* `#{r}` - #{e}"}.join("\n")}
-
-## API Versions
-
-Calling {new} will construct and return a versioned service client. The client
-will default to the most recent API version. You can also specify an API version:
-
-    #{svc_name.downcase} = Aws::#{svc_name}.new # Aws::#{svc_name}::V#{default_api.version.gsub(/-/, '')}
-    #{svc_name.downcase} = Aws::#{svc_name}.new(api_version: '#{oldest_api.version}') # Aws::#{svc_name}::V#{oldest_api.version.gsub(/-/, '')}
-
-The following API versions are available for Aws::#{svc_name}:
-
-#{apis.map{ |a| "* {V#{a.version.gsub(/-/, '')} #{a.version}}" }.join("\n")}
-
-You can specify the API version for the client by passing `:api_version` to {new}.
-  DOCSTRING
+  klass.docstring = service_docstring(svc_name, apis)
   klass.docstring.add_tag(YARD::Tags::Tag.new(:service, svc_name))
 
   svc = Aws.const_get(svc_name)
@@ -224,9 +199,6 @@ def document_svc_api_operation(svc_name, client, method_name, operation)
     end
     t.tab(method_name, 'Response Structure') do
       documentor.output
-    end
-    t.tab(method_name, 'API Model') do
-      "<div class=\"api-src\"><pre><code class=\"json\">#{JSON.pretty_generate(without_docs(operation.to_hash), pretty: true, max_nesting: false)}</pre></code></div>"
     end
   end
 
