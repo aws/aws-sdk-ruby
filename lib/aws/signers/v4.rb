@@ -25,7 +25,7 @@ module Aws
         @region = region
       end
 
-      # @param [Seahorse::Client::Http::Request] request
+      # @param [Seahorse::Client::Http::Request] req
       # @return [Seahorse::Client::Http::Request] the signed request.
       def sign(req)
         datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")

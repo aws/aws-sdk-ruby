@@ -44,8 +44,8 @@ module Aws
     end
 
     # @return [Boolean] Returns `true` if a credential file
-    #   exists and has appropriate read permissions at {path}.
-    # @note This method does not indicate if the file found at {path}
+    #   exists and has appropriate read permissions at {#path}.
+    # @note This method does not indicate if the file found at {#path}
     #   will be parsable, only if it can be read.
     def loadable?
       !path.nil? && File.exists?(path) && File.readable?(path)
