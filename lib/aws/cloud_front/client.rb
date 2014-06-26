@@ -49,7 +49,7 @@ module AWS
       define_client_methods('2014-01-31')
     end
 
-    class Client::V20140131 < Client
+    class Client::V20140531 < Client
       define_client_methods('2014-05-31')
     end
 
