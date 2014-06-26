@@ -59,10 +59,10 @@
     }
   },
   "EC2": {
-    "2014-02-01": {
-      "api": "apis/ec2-2014-02-01.api.json",
-      "paginators": "apis/ec2-2014-02-01.paginators.json",
-      "waiters": "apis/ec2-2014-02-01.waiters.json"
+    "2014-05-01": {
+      "api": "apis/ec2-2014-05-01.api.json",
+      "paginators": "apis/ec2-2014-05-01.paginators.json",
+      "waiters": "apis/ec2-2014-05-01.waiters.json"
     }
   },
   "ElastiCache": {

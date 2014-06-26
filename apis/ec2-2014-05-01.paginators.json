@@ -34,9 +34,6 @@
       "result_key": "InstanceStatuses"
     },
     "DescribeInstances": {
-      "input_token": "NextToken",
-      "output_token": "NextToken",
-      "limit_key": "MaxResults",
       "result_key": "Reservations"
     },
     "DescribeInternetGateways": {
@@ -62,11 +59,6 @@
     },
     "DescribeReservedInstancesListings": {
       "result_key": "ReservedInstancesListings"
-    },
-    "DescribeReservedInstancesModifications": {
-      "input_token": "NextToken",
-      "output_token": "NextToken",
-      "result_key": "ReservedInstancesModifications"
     },
     "DescribeReservedInstancesOfferings": {
       "input_token": "NextToken",
@@ -96,9 +88,6 @@
       "result_key": "Subnets"
     },
     "DescribeTags": {
-      "input_token": "NextToken",
-      "output_token": "NextToken",
-      "limit_key": "MaxResults",
       "result_key": "Tags"
     },
     "DescribeVolumeStatus": {
@@ -109,9 +98,6 @@
     },
     "DescribeVolumes": {
       "result_key": "Volumes"
-    },
-    "DescribeVpcPeeringConnections": {
-      "result_key": "VpcPeeringConnections"
     },
     "DescribeVpcs": {
       "result_key": "Vpcs"
