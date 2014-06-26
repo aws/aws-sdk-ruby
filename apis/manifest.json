@@ -16,6 +16,11 @@
       "api": "apis/cloudfront-2014-01-31.api.json",
       "paginators": "apis/cloudfront-2014-01-31.paginators.json",
       "waiters": "apis/cloudfront-2014-01-31.waiters.json"
+    },
+    "2014-05-31": {
+      "api": "apis/cloudfront-2014-05-31.api.json",
+      "paginators": "apis/cloudfront-2014-05-31.paginators.json",
+      "waiters": "apis/cloudfront-2014-05-31.waiters.json"
     }
   },
   "CloudSearch": {
