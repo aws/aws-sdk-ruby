@@ -11,7 +11,3 @@ Feature: AWS CloudTrail
     | Name         | example           |
     | S3BucketName | not-my-bucket-123 |
     Then I expect the response error code to be "S3BucketDoesNotExistException"
-    And I expect the response error message to include:
-    """
-    S3 bucket does not exist!
-    """
