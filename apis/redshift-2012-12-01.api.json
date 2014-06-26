@@ -44,7 +44,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The state of the cluster security group is not \"available\".\n        </p>"
+          "documentation":"<p>\n            The state of the cluster security group is not <code>available</code>.\n        </p>"
         },
         {
           "shape":"AuthorizationAlreadyExistsFault",
@@ -64,7 +64,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The authorization quota for the cluster security group has been reached. \nFor information about increasing your quota, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Management Guide</i>.\n\n        </p>"
+          "documentation":"<p>\n        The authorization quota for the cluster security group has been reached.\n        </p>"
         }
       ],
       "documentation":"<p>\n            Adds an inbound (ingress) rule to an Amazon Redshift security group.             \n           Depending on whether the application accessing your cluster is running \n           on the Internet or an EC2 instance, you can \n           authorize inbound access to either a Classless Interdomain Routing (CIDR) IP address range\n           or an EC2 security group.  <!-- Required parameters for this operation are a CIDRIP range or both an \n            <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i> -->\n             You can add as many as 20 ingress rules to an Amazon Redshift security group. \n        </p>\n        <note>\n            The EC2 security group must be defined in the AWS region where the cluster resides.\n        </note>\n        <p>For an overview of CIDR blocks, see the Wikipedia article on   \n            <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.\n        </p>\n        <p>\n            You must also associate the security group with a cluster so that clients \n            running on these IP addresses or the EC2 instance are authorized to connect to the cluster.\n            For information about managing security groups, go to\n            <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Working with Security Groups</a> in the \n            <i>Amazon Redshift Management Guide</i>.</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=AuthorizeClusterSecurityGroupIngress\n    &CIDRIP=192.168.40.3/32\n    &ClusterSecurityGroupName=securitygroup1\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T020649Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><AuthorizeClusterSecurityGroupIngressResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <AuthorizeClusterSecurityGroupIngressResult>\n    <ClusterSecurityGroup>\n      <EC2SecurityGroups/>\n      <IPRanges>\n        <IPRange>\n          <CIDRIP>192.168.40.3/32</CIDRIP>\n          <Status>authorized</Status>\n        </IPRange>\n      </IPRanges>\n      <Description>my security group</Description>\n      <ClusterSecurityGroupName>securitygroup1</ClusterSecurityGroupName>\n    </ClusterSecurityGroup>\n  </AuthorizeClusterSecurityGroupIngressResult>\n  <ResponseMetadata>\n    <RequestId>8c7cd4c8-6501-11e2-a8da-655adc216806</RequestId>\n  </ResponseMetadata>\n</AuthorizeClusterSecurityGroupIngressResponse></queryresponse>\n        </examples>"
@@ -114,7 +114,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The authorization quota for the cluster security group has been reached. \nFor information about increasing your quota, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Management Guide</i>.\n\n        </p>"
+          "documentation":"<p>\n        The authorization quota for the cluster security group has been reached.\n        </p>"
         }
       ],
       "documentation":"<p>\n            Authorizes the specified AWS customer account to restore the specified snapshot.\n        </p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>"
@@ -164,7 +164,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The state of the cluster snapshot is not \"available\", or other accounts are authorized to access the snapshot.\n        </p>"
+          "documentation":"<p>\n            The state of the cluster snapshot is not <code>available</code>, or other accounts are authorized to access the snapshot.\n        </p>"
         },
         {
           "shape":"ClusterSnapshotQuotaExceededFault",
@@ -464,7 +464,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>"
+          "documentation":"<p>\n        The specified cluster is not in the <code>available</code> state.\n        </p>"
         },
         {
           "shape":"ClusterNotFoundFault",
@@ -487,7 +487,7 @@
           "documentation":"<p>\n            The request would result in the user exceeding the allowed number of cluster snapshots.\n        </p>"
         }
       ],
-      "documentation":"<p>\n        Creates a manual snapshot of the specified cluster. \n        The cluster must be in the \"available\" state.\n        </p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=CreateClusterSnapshot\n    &ClusterIdentifier=examplecluster\n    &SnapshotIdentifier=snapshot-1234\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T010824Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><CreateClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <CreateClusterSnapshotResult>\n    <Snapshot>\n      <Port>5439</Port>\n      <SnapshotIdentifier>my-snapshot-123</SnapshotIdentifier>\n      <Status>creating</Status>\n      <SnapshotType>manual</SnapshotType>\n      <ClusterVersion>1.0</ClusterVersion>\n      <SnapshotCreateTime>2013-01-23T01:08:29.142Z</SnapshotCreateTime>\n      <NumberOfNodes>2</NumberOfNodes>\n      <DBName>dev</DBName>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <MasterUsername>adminuser</MasterUsername>\n    </Snapshot>\n  </CreateClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>65baef14-64f9-11e2-bea9-49e0ce183f07</RequestId>\n  </ResponseMetadata>\n</CreateClusterSnapshotResponse></queryresponse>\n        </examples>"
+      "documentation":"<p>\n        Creates a manual snapshot of the specified cluster. \n        The cluster must be in the <code>available</code> state.\n        </p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=CreateClusterSnapshot\n    &ClusterIdentifier=examplecluster\n    &SnapshotIdentifier=snapshot-1234\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T010824Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><CreateClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <CreateClusterSnapshotResult>\n    <Snapshot>\n      <Port>5439</Port>\n      <SnapshotIdentifier>my-snapshot-123</SnapshotIdentifier>\n      <Status>creating</Status>\n      <SnapshotType>manual</SnapshotType>\n      <ClusterVersion>1.0</ClusterVersion>\n      <SnapshotCreateTime>2013-01-23T01:08:29.142Z</SnapshotCreateTime>\n      <NumberOfNodes>2</NumberOfNodes>\n      <DBName>dev</DBName>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <MasterUsername>adminuser</MasterUsername>\n    </Snapshot>\n  </CreateClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>65baef14-64f9-11e2-bea9-49e0ce183f07</RequestId>\n  </ResponseMetadata>\n</CreateClusterSnapshotResponse></queryresponse>\n        </examples>"
     },
     "CreateClusterSubnetGroup":{
       "name":"CreateClusterSubnetGroup",
@@ -783,7 +783,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>"
+          "documentation":"<p>\n        The specified cluster is not in the <code>available</code> state.\n        </p>"
         },
         {
           "shape":"ClusterSnapshotAlreadyExistsFault",
@@ -861,7 +861,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The state of the cluster security group is not \"available\".\n        </p>"
+          "documentation":"<p>\n            The state of the cluster security group is not <code>available</code>.\n        </p>"
         },
         {
           "shape":"ClusterSecurityGroupNotFoundFault",
@@ -901,7 +901,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The state of the cluster snapshot is not \"available\", or other accounts are authorized to access the snapshot.\n        </p>"
+          "documentation":"<p>\n            The state of the cluster snapshot is not <code>available</code>, or other accounts are authorized to access the snapshot.\n        </p>"
         },
         {
           "shape":"ClusterSnapshotNotFoundFault",
@@ -914,7 +914,7 @@
           "documentation":"<p>\n        The snapshot identifier does not refer to an existing cluster snapshot.\n        </p>"
         }
       ],
-      "documentation":"<p>\n            Deletes the specified manual snapshot. The snapshot must be in the \"available\" state, with no other users authorized to access the snapshot. \n        </p>\n        <p>\n            Unlike automated snapshots, manual snapshots are retained even after you \n            delete your cluster.           \n            Amazon Redshift does not delete your manual snapshots. You must delete manual snapshot \n            explicitly to avoid getting charged.\n            If other accounts are authorized to access the snapshot, you must revoke all of the authorizations before you can delete the snapshot.\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DeleteClusterSnapshot\n    &SnapshotIdentifier=snapshot-1234\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20121208/us-east-1/redshift/aws4_request\n    &x-amz-date=20121208T005225Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DeleteClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DeleteClusterSnapshotResult>\n    <Snapshot>\n      <SnapshotCreateTime>2012-12-07T23:31:02.372Z</SnapshotCreateTime>\n      <Port>5439</Port>\n      <SnapshotIdentifier>snapshot-1234</SnapshotIdentifier>\n      <Status>deleted</Status>\n      <ClusterCreateTime>2012-12-06T23:09:01.475Z</ClusterCreateTime>\n      <SnapshotType>manual</SnapshotType>\n      <ClusterVersion>1.0</ClusterVersion>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <MasterUsername>masteruser</MasterUsername>\n      <NodeType>dw1.xlarge</NodeType>\n      <DBName>mydb</DBName>\n      <NumberOfNodes>3</NumberOfNodes>\n    </Snapshot>\n  </DeleteClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>88a31de4-40d1-11e2-8a25-eb010998df4e</RequestId>\n  </ResponseMetadata>\n</DeleteClusterSnapshotResponse></queryresponse>\n        </examples>"
+      "documentation":"<p>\n            Deletes the specified manual snapshot. The snapshot must be in the <code>available</code> state, with no other users authorized to access the snapshot. \n        </p>\n        <p>\n            Unlike automated snapshots, manual snapshots are retained even after you \n            delete your cluster.           \n            Amazon Redshift does not delete your manual snapshots. You must delete manual snapshot \n            explicitly to avoid getting charged.\n            If other accounts are authorized to access the snapshot, you must revoke all of the authorizations before you can delete the snapshot.\n        </p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=DeleteClusterSnapshot\n    &SnapshotIdentifier=snapshot-1234\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20121208/us-east-1/redshift/aws4_request\n    &x-amz-date=20121208T005225Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><DeleteClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <DeleteClusterSnapshotResult>\n    <Snapshot>\n      <SnapshotCreateTime>2012-12-07T23:31:02.372Z</SnapshotCreateTime>\n      <Port>5439</Port>\n      <SnapshotIdentifier>snapshot-1234</SnapshotIdentifier>\n      <Status>deleted</Status>\n      <ClusterCreateTime>2012-12-06T23:09:01.475Z</ClusterCreateTime>\n      <SnapshotType>manual</SnapshotType>\n      <ClusterVersion>1.0</ClusterVersion>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <MasterUsername>masteruser</MasterUsername>\n      <NodeType>dw1.xlarge</NodeType>\n      <DBName>mydb</DBName>\n      <NumberOfNodes>3</NumberOfNodes>\n    </Snapshot>\n  </DeleteClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>88a31de4-40d1-11e2-8a25-eb010998df4e</RequestId>\n  </ResponseMetadata>\n</DeleteClusterSnapshotResponse></queryresponse>\n        </examples>"
     },
     "DeleteClusterSubnetGroup":{
       "name":"DeleteClusterSubnetGroup",
@@ -977,6 +977,16 @@
           },
           "exception":true,
           "documentation":"<p>An Amazon Redshift event notification subscription with the specified name does not exist.</p>"
+        },
+        {
+          "shape":"InvalidSubscriptionStateFault",
+          "error":{
+            "code":"InvalidSubscriptionStateFault",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n            The subscription request is invalid because it is a duplicate request. This subscription request is already in progress.\n        </p>"
         }
       ],
       "documentation":"<p>\n            Deletes an Amazon Redshift event notification subscription.\n        </p>"
@@ -1000,7 +1010,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>The specified HSM client certificate is not in the <i>available</i> state, or it is still in\n            use by one or more Amazon Redshift clusters.</p>"
+          "documentation":"<p>The specified HSM client certificate is not in the <code>available</code> state, or it is still in\n            use by one or more Amazon Redshift clusters.</p>"
         },
         {
           "shape":"HsmClientCertificateNotFoundFault",
@@ -1034,7 +1044,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>The specified HSM configuration is not in the <i>available</i> state, or it is still in\n            use by one or more Amazon Redshift clusters.</p>"
+          "documentation":"<p>The specified HSM configuration is not in the <code>available</code> state, or it is still in\n            use by one or more Amazon Redshift clusters.</p>"
         },
         {
           "shape":"HsmConfigurationNotFoundFault",
@@ -1590,7 +1600,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>"
+          "documentation":"<p>\n        The specified cluster is not in the <code>available</code> state.\n        </p>"
         },
         {
           "shape":"UnauthorizedOperation",
@@ -1709,7 +1719,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>"
+          "documentation":"<p>\n        The specified cluster is not in the <code>available</code> state.\n        </p>"
         },
         {
           "shape":"ClusterNotFoundFault",
@@ -1789,7 +1799,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>"
+          "documentation":"<p>\n        The specified cluster is not in the <code>available</code> state.\n        </p>"
         },
         {
           "shape":"InvalidClusterSecurityGroupStateFault",
@@ -1799,7 +1809,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The state of the cluster security group is not \"available\".\n        </p>"
+          "documentation":"<p>\n            The state of the cluster security group is not <code>available</code>.\n        </p>"
         },
         {
           "shape":"ClusterNotFoundFault",
@@ -1859,7 +1869,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> An request option was specified that is not supported.            \n        </p>"
+          "documentation":"<p> A request option was specified that is not supported.            \n        </p>"
         },
         {
           "shape":"UnauthorizedOperation",
@@ -1890,9 +1900,19 @@
           },
           "exception":true,
           "documentation":"<p>There is no Amazon Redshift HSM configuration with the specified identifier.</p>"
+        },
+        {
+          "shape":"ClusterAlreadyExistsFault",
+          "error":{
+            "code":"ClusterAlreadyExists",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The account already has a cluster with the given identifier.\n        </p>"
         }
       ],
-      "documentation":"<p>      \n        Modifies the settings for a cluster. \n        For example, you can add another security or parameter group, \n        update the preferred maintenance window, or change the master user password.  \n        Resetting a cluster password or modifying the security groups associated \n        with a cluster do not need a reboot. However, modifying parameter group \n        requires a reboot for parameters to take effect.        \n        \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n\n        </p>\n        <p>You can also change node type and the number of nodes to scale up or down the cluster. \n            When resizing a cluster, you must specify\n            both the number of nodes and the node type even if one of the parameters does \n            not change. If you specify\n        the same number of nodes and node type that are already configured for the cluster, \n        an error is returned.</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=ModifyCluster\n    &AllowVersionUpgrade=true\n    &AutomatedSnapshotRetentionPeriod=2\n    &ClusterIdentifier=examplecluster\n    &ClusterParameterGroupName=parametergroup1\n    &PreferredMaintenanceWindow=wed:07:30-wed:08:00\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T022911Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><ModifyClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <ModifyClusterResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <Endpoint>\n        <Port>5439</Port>\n        <Address>examplecluster.coqoarplqhsn.us-east-1.redshift.amazonaws.com</Address>\n      </Endpoint>\n      <ClusterStatus>available</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>2</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>wed:07:30-wed:08:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>applying</ParameterApplyStatus>\n          <ParameterGroupName>parametergroup1</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>adminuser</MasterUsername>\n    </Cluster>\n  </ModifyClusterResult>\n  <ResponseMetadata>\n    <RequestId>acbc43d5-6504-11e2-bea9-49e0ce183f07</RequestId>\n  </ResponseMetadata>\n</ModifyClusterResponse></queryresponse>\n        </examples>"
+      "documentation":"<p>      \n        Modifies the settings for a cluster. \n        For example, you can add another security or parameter group, \n        update the preferred maintenance window, or change the master user password.  \n        Resetting a cluster password or modifying the security groups associated \n        with a cluster do not need a reboot. However, modifying a parameter group \n        requires a reboot for parameters to take effect.        \n        \nFor more information about managing clusters, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Management Guide</i>\n\n        </p>\n        <p>You can also change node type and the number of nodes to scale up or down the cluster. \n            When resizing a cluster, you must specify\n            both the number of nodes and the node type even if one of the parameters does \n            not change. If you specify\n        the same number of nodes and node type that are already configured for the cluster, \n        an error is returned.</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=ModifyCluster\n    &AllowVersionUpgrade=true\n    &AutomatedSnapshotRetentionPeriod=2\n    &ClusterIdentifier=examplecluster\n    &ClusterParameterGroupName=parametergroup1\n    &PreferredMaintenanceWindow=wed:07:30-wed:08:00\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T022911Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><ModifyClusterResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <ModifyClusterResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <Endpoint>\n        <Port>5439</Port>\n        <Address>examplecluster.coqoarplqhsn.us-east-1.redshift.amazonaws.com</Address>\n      </Endpoint>\n      <ClusterStatus>available</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>2</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>wed:07:30-wed:08:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>applying</ParameterApplyStatus>\n          <ParameterGroupName>parametergroup1</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterCreateTime>2013-01-22T19:23:59.368Z</ClusterCreateTime>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <AvailabilityZone>us-east-1c</AvailabilityZone>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>adminuser</MasterUsername>\n    </Cluster>\n  </ModifyClusterResult>\n  <ResponseMetadata>\n    <RequestId>acbc43d5-6504-11e2-bea9-49e0ce183f07</RequestId>\n  </ResponseMetadata>\n</ModifyClusterResponse></queryresponse>\n        </examples>"
     },
     "ModifyClusterParameterGroup":{
       "name":"ModifyClusterParameterGroup",
@@ -2098,6 +2118,16 @@
           },
           "exception":true,
           "documentation":"<p>The specified Amazon Redshift event source could not be found.</p>"
+        },
+        {
+          "shape":"InvalidSubscriptionStateFault",
+          "error":{
+            "code":"InvalidSubscriptionStateFault",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n            The subscription request is invalid because it is a duplicate request. This subscription request is already in progress.\n        </p>"
         }
       ],
       "documentation":"<p>\n            Modifies an existing Amazon Redshift event notification subscription.\n        </p>"
@@ -2157,7 +2187,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>"
+          "documentation":"<p>\n        The specified cluster is not in the <code>available</code> state.\n        </p>"
         }
       ],
       "documentation":"<p>\n            Modifies the number of days to retain automated snapshots in the destination region after they are copied from the source region.\n        </p>"
@@ -2237,7 +2267,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>"
+          "documentation":"<p>\n        The specified cluster is not in the <code>available</code> state.\n        </p>"
         },
         {
           "shape":"ClusterNotFoundFault",
@@ -2366,7 +2396,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The state of the cluster snapshot is not \"available\", or other accounts are authorized to access the snapshot.\n        </p>"
+          "documentation":"<p>\n            The state of the cluster snapshot is not <code>available</code>, or other accounts are authorized to access the snapshot.\n        </p>"
         },
         {
           "shape":"InvalidRestoreFault",
@@ -2477,9 +2507,29 @@
           },
           "exception":true,
           "documentation":"<p>The Elastic IP (EIP) is invalid or cannot be found.</p>"
+        },
+        {
+          "shape":"ClusterParameterGroupNotFoundFault",
+          "error":{
+            "code":"ClusterParameterGroupNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n        The parameter group name does not refer to an\n        existing parameter group.\n        </p>"
+        },
+        {
+          "shape":"ClusterSecurityGroupNotFoundFault",
+          "error":{
+            "code":"ClusterSecurityGroupNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>\n            The cluster security group name does not refer to an existing cluster security group.\n        </p>"
         }
       ],
-      "documentation":"<p>\n        \n        Creates a new cluster from a snapshot. Amazon Redshift creates the resulting cluster \n        with the same configuration as the original cluster from which the snapshot was created, \n        except that the new cluster\n        is created with the default cluster security and parameter group. \n        \n        After Amazon Redshift creates the cluster you can use the <a>ModifyCluster</a> \n            API to associate a different security group and different parameter group with the\n            restored cluster.\n        \n       \n        </p>\n        <p> If a snapshot is taken of a cluster in VPC, you can restore it only in VPC. \n            In this case, you must provide a cluster subnet group where you want the cluster \n            restored. If snapshot is taken of a cluster outside VPC, then you can \n        restore it only outside VPC.</p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=RestoreFromClusterSnapshot\n    &ClusterIdentifier=examplecluster-restored\n    &SnapshotIdentifier=cm:examplecluster-2013-01-22-19-27-58\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T023350Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><RestoreFromClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <RestoreFromClusterSnapshotResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <ClusterStatus>creating</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sun:06:30-sun:07:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster-restored</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>adminuser</MasterUsername>\n    </Cluster>\n  </RestoreFromClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>52a9aee8-6505-11e2-bec0-17624ad140dd</RequestId>\n  </ResponseMetadata>\n</RestoreFromClusterSnapshotResponse></queryresponse>\n        </examples>"
+      "documentation":"<p>\n        Creates a new cluster from a snapshot. Amazon Redshift creates the resulting cluster \n        with the same configuration as the original cluster from which the snapshot was created, \n        except that the new cluster\n        is created with the default cluster security and parameter group. \n        \n        After Amazon Redshift creates the cluster you can use the <a>ModifyCluster</a> \n            API to associate a different security group and different parameter group with the\n            restored cluster.\n        </p>\n        <p> If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster \n            restored.\n        </p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Management Guide</i>.\n</p>\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=RestoreFromClusterSnapshot\n    &ClusterIdentifier=examplecluster-restored\n    &SnapshotIdentifier=cm:examplecluster-2013-01-22-19-27-58\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T023350Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><RestoreFromClusterSnapshotResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <RestoreFromClusterSnapshotResult>\n    <Cluster>\n      <PendingModifiedValues/>\n      <ClusterVersion>1.0</ClusterVersion>\n      <VpcSecurityGroups/>\n      <ClusterStatus>creating</ClusterStatus>\n      <NumberOfNodes>2</NumberOfNodes>\n      <AutomatedSnapshotRetentionPeriod>1</AutomatedSnapshotRetentionPeriod>\n      <PubliclyAccessible>true</PubliclyAccessible>\n      <Encrypted>false</Encrypted>\n      <DBName>dev</DBName>\n      <PreferredMaintenanceWindow>sun:06:30-sun:07:00</PreferredMaintenanceWindow>\n      <ClusterParameterGroups>\n        <ClusterParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <ParameterGroupName>default.redshift-1.0</ParameterGroupName>\n        </ClusterParameterGroup>\n      </ClusterParameterGroups>\n      <ClusterSecurityGroups>\n        <ClusterSecurityGroup>\n          <Status>active</Status>\n          <ClusterSecurityGroupName>default</ClusterSecurityGroupName>\n        </ClusterSecurityGroup>\n      </ClusterSecurityGroups>\n      <NodeType>dw1.xlarge</NodeType>\n      <ClusterIdentifier>examplecluster-restored</ClusterIdentifier>\n      <AllowVersionUpgrade>true</AllowVersionUpgrade>\n      <MasterUsername>adminuser</MasterUsername>\n    </Cluster>\n  </RestoreFromClusterSnapshotResult>\n  <ResponseMetadata>\n    <RequestId>52a9aee8-6505-11e2-bec0-17624ad140dd</RequestId>\n  </ResponseMetadata>\n</RestoreFromClusterSnapshotResponse></queryresponse>\n        </examples>"
     },
     "RevokeClusterSecurityGroupIngress":{
       "name":"RevokeClusterSecurityGroupIngress",
@@ -2526,7 +2576,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The state of the cluster security group is not \"available\".\n        </p>"
+          "documentation":"<p>\n            The state of the cluster security group is not <code>available</code>.\n        </p>"
         }
       ],
       "documentation":"<p>\n        Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or \n        Amazon EC2 security group. To add\n        an ingress rule, see <a>AuthorizeClusterSecurityGroupIngress</a>. \n            \nFor information about managing security groups, go to\n<a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Amazon Redshift Cluster Security Groups</a> in the \n<i>Amazon Redshift Management Guide</i>.\n\n        </p>\n\n        <examples>\n            <queryrequest>https://redshift.us-east-1.amazonaws.com/\n    ?Action=RevokeClusterSecurityGroupIngress\n    &ClusterSecurityGroupName=securitygroup1\n    &CIDRIP=192.168.40.3/32\n    &Version=2012-12-01\n    &x-amz-algorithm=AWS4-HMAC-SHA256\n    &x-amz-credential=AKIAIOSFODNN7EXAMPLE/20130123/us-east-1/redshift/aws4_request\n    &x-amz-date=20130123T021606Z\n    &x-amz-signedheaders=content-type;host;x-amz-date</queryrequest>\n            <queryresponse><RevokeClusterSecurityGroupIngressResponse xmlns=\"http://redshift.amazonaws.com/doc/2012-12-01/\">\n  <RevokeClusterSecurityGroupIngressResult>\n    <ClusterSecurityGroup>\n      <EC2SecurityGroups/>\n      <IPRanges/>\n      <Description>my security group</Description>\n      <ClusterSecurityGroupName>securitygroup1</ClusterSecurityGroupName>\n    </ClusterSecurityGroup>\n  </RevokeClusterSecurityGroupIngressResult>\n  <ResponseMetadata>\n    <RequestId>d8eff363-6502-11e2-a8da-655adc216806</RequestId>\n  </ResponseMetadata>\n</RevokeClusterSecurityGroupIngressResponse></queryresponse>\n        </examples>"
@@ -2616,7 +2666,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>"
+          "documentation":"<p>\n        The specified cluster is not in the <code>available</code> state.\n        </p>"
         }
       ],
       "documentation":"<p>\n            Rotates the encryption keys for a cluster.\n        </p>"
@@ -2686,7 +2736,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>\n        The authorization quota for the cluster security group has been reached. \nFor information about increasing your quota, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Management Guide</i>.\n\n        </p>"
+      "documentation":"<p>\n        The authorization quota for the cluster security group has been reached.\n        </p>"
     },
     "AuthorizeClusterSecurityGroupIngressMessage":{
       "type":"structure",
@@ -2778,7 +2828,7 @@
         },
         "ClusterStatus":{
           "shape":"String",
-          "documentation":"<p>\n        The current state of this cluster. Possible values include\n            <code>available</code>, <code>creating</code>, <code>deleting</code>, \n            <code>rebooting</code>, and <code>resizing</code>.\n        </p>"
+          "documentation":"<p>\n        The current state of this cluster. Possible values include\n            <code>available</code>, <code>creating</code>, <code>deleting</code>, \n            <code>rebooting</code>, <code>renaming</code>, and <code>resizing</code>.\n        </p>"
         },
         "ModifyStatus":{
           "shape":"String",
@@ -2854,7 +2904,7 @@
         },
         "Encrypted":{
           "shape":"Boolean",
-          "documentation":"<p>If <code>true</code>, data in cluster is encrypted at rest.</p>"
+          "documentation":"<p>If <code>true</code>, data in the cluster is encrypted at rest.</p>"
         },
         "RestoreStatus":{
           "shape":"RestoreStatus",
@@ -3387,7 +3437,7 @@
       "members":{
         "SourceSnapshotIdentifier":{
           "shape":"String",
-          "documentation":"<p>\n        The identifier for the source snapshot.\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be the identifier for a valid automated snapshot whose state is \"available\".</li>\n        </ul>"
+          "documentation":"<p>\n        The identifier for the source snapshot.\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be the identifier for a valid automated snapshot whose state is <code>available</code>.</li>\n        </ul>"
         },
         "SourceSnapshotClusterIdentifier":{
           "shape":"String",
@@ -3495,7 +3545,7 @@
         },
         "Encrypted":{
           "shape":"BooleanOptional",
-          "documentation":"<p>If <code>true</code>, the data in cluster is encrypted at rest. </p>\n        <p>Default: false</p>"
+          "documentation":"<p>If <code>true</code>, the data in the cluster is encrypted at rest. </p>\n        <p>Default: false</p>"
         },
         "HsmClientCertificateIdentifier":{
           "shape":"String",
@@ -4734,7 +4784,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>\n        The state of the cluster security group is not \"available\".\n        </p>"
+      "documentation":"<p>\n            The state of the cluster security group is not <code>available</code>.\n        </p>"
     },
     "InvalidClusterSnapshotStateFault":{
       "type":"structure",
@@ -4746,7 +4796,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>\n        The state of the cluster snapshot is not \"available\", or other accounts are authorized to access the snapshot.\n        </p>"
+      "documentation":"<p>\n            The state of the cluster snapshot is not <code>available</code>, or other accounts are authorized to access the snapshot.\n        </p>"
     },
     "InvalidClusterStateFault":{
       "type":"structure",
@@ -4758,7 +4808,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>\n        The specified cluster is not in the <i>available</i> state.\n        </p>"
+      "documentation":"<p>\n        The specified cluster is not in the <code>available</code> state.\n        </p>"
     },
     "InvalidClusterSubnetGroupStateFault":{
       "type":"structure",
@@ -4806,7 +4856,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>The specified HSM client certificate is not in the <i>available</i> state, or it is still in\n            use by one or more Amazon Redshift clusters.</p>"
+      "documentation":"<p>The specified HSM client certificate is not in the <code>available</code> state, or it is still in\n            use by one or more Amazon Redshift clusters.</p>"
     },
     "InvalidHsmConfigurationStateFault":{
       "type":"structure",
@@ -4818,7 +4868,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>The specified HSM configuration is not in the <i>available</i> state, or it is still in\n            use by one or more Amazon Redshift clusters.</p>"
+      "documentation":"<p>The specified HSM configuration is not in the <code>available</code> state, or it is still in\n            use by one or more Amazon Redshift clusters.</p>"
     },
     "InvalidRestoreFault":{
       "type":"structure",
@@ -4867,6 +4917,18 @@
       },
       "exception":true,
       "documentation":"<p>\n         The requested subnet is not valid, or not all of the subnets are in the same VPC. \n        </p>"
+    },
+    "InvalidSubscriptionStateFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidSubscriptionStateFault",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>\n            The subscription request is invalid because it is a duplicate request. This subscription request is already in progress.\n        </p>"
     },
     "InvalidVPCNetworkStateFault":{
       "type":"structure",
@@ -4934,11 +4996,11 @@
         },
         "ClusterSecurityGroups":{
           "shape":"ClusterSecurityGroupNameList",
-          "documentation":"<p>\n        A list of cluster security groups to be authorized on this cluster.\n        This change is asynchronously applied as soon as possible. \n        </p>\n        <p>Security groups currently associated with the cluster and not in \n        the list of groups to apply, will be revoked from the cluster.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be 1 to 255 alphanumeric characters or hyphens</li>\n            <li>First character must be a letter</li>\n            <li>Cannot end with a hyphen or contain two consecutive hyphens</li>\n        </ul>"
+          "documentation":"<p>\n        A list of cluster security groups to be authorized on this cluster.\n        This change is asynchronously applied as soon as possible. \n        </p>\n        <p>Security groups currently associated with the cluster, and not in \n        the list of groups to apply, will be revoked from the cluster.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>Must be 1 to 255 alphanumeric characters or hyphens</li>\n            <li>First character must be a letter</li>\n            <li>Cannot end with a hyphen or contain two consecutive hyphens</li>\n        </ul>"
         },
         "VpcSecurityGroupIds":{
           "shape":"VpcSecurityGroupIdList",
-          "documentation":"<p>\n           A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.\n        </p>"
+          "documentation":"<p>\n           A list of virtual private cloud (VPC) security groups to be associated with the cluster.\n        </p>"
         },
         "MasterUserPassword":{
           "shape":"String",
@@ -4950,7 +5012,7 @@
         },
         "AutomatedSnapshotRetentionPeriod":{
           "shape":"IntegerOptional",
-          "documentation":"<p>\n        The number of days that automated snapshots are retained.\n        If the value is 0, automated snapshots are disabled. Even if\n        automated snapshots are disabled, you can still create\n        manual snapshots when you want with <a>CreateClusterSnapshot</a>.\n        </p>\n        <p>If you decrease the automated snapshot retention period from its current value, \n            existing automated snapshots which fall outside of the new retention period will be immediately deleted.</p>\n        <p>Default: Uses existing setting.</p>\n        <p>Constraints: Must be a value from 0 to 35.</p>"
+          "documentation":"<p>\n        The number of days that automated snapshots are retained.\n        If the value is 0, automated snapshots are disabled. Even if\n        automated snapshots are disabled, you can still create\n        manual snapshots when you want with <a>CreateClusterSnapshot</a>.\n        </p>\n        <p> If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted.</p>\n        <p>Default: Uses existing setting.</p>\n        <p>Constraints: Must be a value from 0 to 35.</p>"
         },
         "PreferredMaintenanceWindow":{
           "shape":"String",
@@ -4971,6 +5033,10 @@
         "HsmConfigurationIdentifier":{
           "shape":"String",
           "documentation":"<p>Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster\n            can use to retrieve and store keys in an HSM.</p>"
+        },
+        "NewClusterIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The new identifier for the cluster.</p>\n        \n<p>Constraints:</p>\n<ul>\n<li>Must contain from 1 to 63 alphanumeric characters or hyphens.</li>\n<li>Alphabetic characters must be lowercase.</li>\n<li>First character must be a letter.</li>\n<li>Cannot end with a hyphen or contain two consecutive hyphens.</li>\n<li>Must be unique for all clusters within an AWS account.</li>\n</ul>\n\n        <p>Example: <code>examplecluster</code></p>"
         }
       },
       "documentation":"<p></p>"
@@ -4988,7 +5054,7 @@
         },
         "Parameters":{
           "shape":"ParametersList",
-          "documentation":"<p>\n            An array of parameters to be modified.  \n            A maximum of 20 parameters can be modified in a single request.\n        </p>\n        <p>\n            For each parameter to be modified, you must supply at least the parameter name\n        and parameter value; other name-value pairs of the parameter are optional.\n        </p>"
+          "documentation":"<p>\n            An array of parameters to be modified.  \n            A maximum of 20 parameters can be modified in a single request.\n        </p>\n        <p>\n            For each parameter to be modified, you must supply at least the parameter name\n        and parameter value; other name-value pairs of the parameter are optional.\n        </p>\n        <p>\n            For the workload management (WLM) configuration, \n            you must supply all the name-value pairs in the wlm_json_configuration parameter.\n        </p>"
         }
       },
       "documentation":"<p>\n\n        </p>"
@@ -5201,7 +5267,7 @@
         },
         "NumberOfNodes":{
           "shape":"IntegerOptional",
-          "documentation":"<p>\n            The pending or in-progress change of the number nodes in the cluster.            \n        </p>"
+          "documentation":"<p>\n            The pending or in-progress change of the number of nodes in the cluster.            \n        </p>"
         },
         "ClusterType":{
           "shape":"String",
@@ -5214,6 +5280,10 @@
         "AutomatedSnapshotRetentionPeriod":{
           "shape":"IntegerOptional",
           "documentation":"<p>\n            The pending or in-progress change of the automated snapshot retention period.            \n        </p>"
+        },
+        "ClusterIdentifier":{
+          "shape":"String",
+          "documentation":"<p>The pending or in-progress change of the new identifier for the cluster.</p>"
         }
       },
       "documentation":"<p>\n        Describes cluster attributes that are in a pending state. A change to one or\n        more the attributes was requested and is in progress or will be applied.\n        </p>"
@@ -5589,6 +5659,26 @@
         "ElasticIp":{
           "shape":"String",
           "documentation":"<p>The elastic IP (EIP) address for the cluster.</p>"
+        },
+        "ClusterParameterGroupName":{
+          "shape":"String",
+          "documentation":"<p>\n            The name of the parameter group to be associated\n            with this cluster. \n        </p>\n        <p>Default: The default Amazon Redshift \n            cluster parameter group. For information about the default parameter group,\n            go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Working with Amazon Redshift Parameter Groups</a>.</p>\n        <p>\n            Constraints:\n        </p>\n        <ul>\n            <li>Must be 1 to 255 alphanumeric characters or hyphens.</li>\n            <li>First character must be a letter.</li>\n            <li>Cannot end with a hyphen or contain two consecutive hyphens.</li>\n        </ul>"
+        },
+        "ClusterSecurityGroups":{
+          "shape":"ClusterSecurityGroupNameList",
+          "documentation":"<p>\n            A list of security groups to be associated\n            with this cluster.\n        </p>\n        <p>\n            Default: The default cluster security group for Amazon Redshift. \n        </p>\n        <p>Cluster security groups only apply to clusters outside of VPCs.</p>"
+        },
+        "VpcSecurityGroupIds":{
+          "shape":"VpcSecurityGroupIdList",
+          "documentation":"<p>\n            A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.\n        </p>\n        <p>\n            Default: The default VPC security group is associated with the cluster.\n        </p>\n        <p>\n            VPC security groups only apply to clusters in VPCs.\n        </p>"
+        },
+        "PreferredMaintenanceWindow":{
+          "shape":"String",
+          "documentation":"<p>\n            The weekly time range (in UTC) during which automated cluster maintenance can occur.\n        </p>\n        <p>\n            Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n        </p>\n        <p>\n            Default: The value selected for the cluster from which the snapshot was taken. \n            The following list shows the time blocks for each region \n            from which the default maintenance windows are assigned.\n        </p>\n        <ul>\n            <li>\n<b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC</li>\n            <li>\n<b>US-West (Oregon) Region</b> 06:00-14:00 UTC</li>\n            <li>\n<b>EU (Ireland) Region</b> 22:00-06:00 UTC</li>\n            <li>\n<b>Asia Pacific (Singapore) Region</b> 14:00-22:00 UTC</li>\n            <li>\n<b>Asia Pacific (Sydney) Region</b> 12:00-20:00 UTC</li>\n            <li>\n<b>Asia Pacific (Tokyo) Region</b> 17:00-03:00 UTC</li>\n        </ul>\n        <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p>\n        <p>Constraints: Minimum 30-minute window.</p>"
+        },
+        "AutomatedSnapshotRetentionPeriod":{
+          "shape":"IntegerOptional",
+          "documentation":"<p>\n            The number of days that automated snapshots are retained.\n            If the value is 0, automated snapshots are disabled. Even if\n            automated snapshots are disabled, you can still create\n            manual snapshots when you want with <a>CreateClusterSnapshot</a>.\n        </p>\n        <p>\n            Default: The value selected for the cluster from which the snapshot was taken.\n        </p>\n        <p>Constraints: Must be a value from 0 to 35.</p>"
         }
       },
       "documentation":"<p></p>"
@@ -6044,7 +6134,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p> An request option was specified that is not supported.            \n        </p>"
+      "documentation":"<p> A request option was specified that is not supported.            \n        </p>"
     },
     "VpcSecurityGroupIdList":{
       "type":"list",
