@@ -72,6 +72,7 @@ module Aws
     autoload :UserAgent, "#{SRC}/plugins/user_agent"
 
     module Protocols
+      autoload :EC2, "#{SRC}/plugins/protocols/ec2"
       autoload :JsonRpc, "#{SRC}/plugins/protocols/json_rpc"
       autoload :Query, "#{SRC}/plugins/protocols/query"
       autoload :RestJson, "#{SRC}/plugins/protocols/rest_json"
@@ -82,6 +83,7 @@ module Aws
 
   # @api private
   module Query
+    autoload :EC2ParamBuilder, "#{SRC}/query/ec2_param_builder"
     autoload :Handler, "#{SRC}/query/handler"
     autoload :Param, "#{SRC}/query/param"
     autoload :ParamBuilder, "#{SRC}/query/param_builder"

@@ -14,8 +14,10 @@ module Aws
       # @param [String<xml>] xml
       # @param [Hash, nil] target
       # @return [Structure]
-      def parse(xml, target = nil)
-        structure(@shape, MultiXml.parse(xml).values.first || {}, target)
+      def parse(xml, target = nil, &block)
+        xml = MultiXml.parse(xml).values.first || {}
+        yield(xml) if block_given?
+        structure(@shape, xml, target)
       end
 
       private

@@ -63,6 +63,7 @@ module Aws
         def apply_protocol_plugin(client_class)
           protocol = client_class.api.metadata('protocol')
           plugin = case protocol
+          when 'ec2'       then Aws::Plugins::Protocols::EC2
           when 'query'     then Aws::Plugins::Protocols::Query
           when 'json'      then Aws::Plugins::Protocols::JsonRpc
           when 'rest-json' then Aws::Plugins::Protocols::RestJson
