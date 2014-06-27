@@ -199,9 +199,29 @@ module AWS
           }.should raise_error(EC2::Errors::Foo, "BAR")
         end
 
+        it 'does not retry InsufficientInstanceCapacity errors' do
+          http_handler.stub(:handle) do |req, resp|
+            resp.status = 500
+            resp.body = <<-XML
+              <Response>
+                <Errors>
+                  <Error>
+                    <Code>InsufficientInstanceCapacity</Code>
+                    <Message>msg</Message>
+                  </Error>
+                </Errors>
+              </Response>
+            XML
+          end
+          http_handler.should_receive(:handle).exactly(1).times
+          error = nil
+          begin
+            client.run_instances(:min_count => 1, :max_count => 1, :image_id => 'id')
+          rescue Errors::InsufficientInstanceCapacity
+          end
+        end
+
       end
-
     end
-
   end
 end

@@ -31,6 +31,14 @@ module AWS
         end
       end
 
+      def retryable_error?(response)
+        if response.error.is_a?(Errors::InsufficientInstanceCapacity)
+          false
+        else
+          super
+        end
+      end
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_addresses,
