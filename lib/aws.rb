@@ -15,7 +15,6 @@ module Aws
   autoload :Errors, "#{SRC}/errors"
   autoload :InstanceProfileCredentials, "#{SRC}/instance_profile_credentials"
   autoload :PageableResponse, "#{SRC}/pageable_response"
-  autoload :PagingProvider, "#{SRC}/paging_provider"
   autoload :RestBodyHandler, "#{SRC}/rest_body_handler"
   autoload :Service, "#{SRC}/service"
   autoload :SharedCredentials, "#{SRC}/shared_credentials"
@@ -43,6 +42,14 @@ module Aws
     autoload :RpcBodyHandler, "#{SRC}/json/rpc_body_handler"
     autoload :RpcHeadersHandler, "#{SRC}/json/rpc_headers_handler"
     autoload :SimpleBodyHandler, "#{SRC}/json/simple_body_handler"
+  end
+
+  # @api private
+  module Paging
+    autoload :NullPager, "#{SRC}/paging/null_pager"
+    autoload :NullProvider, "#{SRC}/paging/null_provider"
+    autoload :Pager, "#{SRC}/paging/pager"
+    autoload :Provider, "#{SRC}/paging/provider"
   end
 
   module Plugins

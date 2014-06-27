@@ -3,7 +3,7 @@ require 'spec_helper'
 module Aws
   describe PageableResponse do
 
-    let(:pager) { PagingProvider::Pager.new(rules) }
+    let(:pager) { Paging::Pager.new(rules) }
 
     let(:resp) { PageableResponse.new(Seahorse::Client::Response.new, pager) }
 
@@ -11,7 +11,7 @@ module Aws
     # un-pageable and will always treat a response as the last page.
     describe 'unpageable-operation' do
 
-      let(:pager) { PagingProvider::NullPager.new }
+      let(:pager) { Paging::NullPager.new }
 
       it 'returns true from #last_page?' do
         expect(resp.last_page?).to be(true)

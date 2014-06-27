@@ -198,12 +198,12 @@ module Aws
 
       def apply_paging(api, paging)
         paging = case paging
-          when nil then PagingProvider.new
-          when PagingProvider then paging
+          when nil then Paging::NullProvider.new
+          when Paging::Provider then paging
           when Hash then PagingProvider.new(paging)
           when String
             path = File.expand_path(paging, GEM_ROOT)
-            PagingProvider.new(MultiJson.load(File.read(path)))
+            Paging::Provider.new(MultiJson.load(File.read(path)))
           else raise "unhandled paging format `#{paging}'"
         end
         api.definition['metadata']['paging'] = paging

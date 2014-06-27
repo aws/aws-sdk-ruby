@@ -1,26 +1,5 @@
 module Aws
-
-  # @note This class provides an interface over the API pagination definitions.
-  #   The format and structure of these files should not be considered
-  #   a public interface and should be considered unstable.
-  # @stability Unstable
-  class PagingProvider
-
-    # @param [Hash] rules
-    def initialize(rules = { 'pagination' => {}})
-      @operations = rules['pagination'].select { |k,v| v.key?('input_token') }
-    end
-
-    # @param [String] operation_name
-    # @return [Pager]
-    def pager(operation_name)
-      if rules = @operations[operation_name]
-        Pager.new(rules)
-      else
-        NullPager.new
-      end
-    end
-
+  module Paging
     class Pager
 
       def initialize(rules)
@@ -73,24 +52,5 @@ module Aws
       end
 
     end
-
-    # @stability Unstable
-    class NullPager < Pager
-
-      def initialize
-      end
-
-      # @return [{}]
-      def next_tokens
-        {}
-      end
-
-      # @return [false]
-      def truncated?(response)
-        false
-      end
-
-    end
-
   end
 end
