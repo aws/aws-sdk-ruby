@@ -54,9 +54,6 @@ Returns a new instance of {#{svc_name}}.
   DOC
 end
 
-def default_path
-end
-
 def service_docstring(svc_name, apis)
   path = "doc-src/services/#{svc_name}/service.md"
   if File.exists?(path)
