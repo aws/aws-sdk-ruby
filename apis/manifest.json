@@ -33,6 +33,11 @@
       "paginators": "apis/cloudsearch-2013-01-01.paginators.json"
     }
   },
+  "CloudSearchDomain": {
+    "2013-01-01": {
+      "api": "apis/cloudsearchdomain-2013-01-01.api.json"
+    }
+  },
   "CloudTrail": {
     "2013-11-01": {
       "api": "apis/cloudtrail-2013-11-01.api.json",

@@ -88,6 +88,11 @@ module Aws
         reshape_members 'MaxItems', 'shape' => 'integer'
       end
 
+      customize 'cloudsearchdomain' do
+        remove_plugin 'Aws::Plugins::Credentials'
+        remove_plugin 'Aws::Plugins::RegionalEndpoint'
+      end
+
       customize 'dynamodb' do
         add_plugin 'Aws::Plugins::DynamoDBExtendedRetries'
       end

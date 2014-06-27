@@ -148,8 +148,7 @@ module Aws
               request_assertions(f, resp.context.http_request)
               response_assertions(f, resp)
             ensure
-              Aws.service_classes[svc_name.to_sym].add_plugin(
-                Seahorse::Client::Plugins::RaiseResponseErrors)
+              Aws.service_classes[svc_name.to_sym].add_plugin(Seahorse::Client::Plugins::RaiseResponseErrors)
             end
           end
         end

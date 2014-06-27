@@ -22,8 +22,6 @@ module Seahorse
 
         class Handler < Client::Handler
 
-          # @param [RequestContext] context
-          # @return [Response]
           def call(context)
             context.http_request.endpoint = build_endpoint(context)
             @handler.call(context)
@@ -32,10 +30,18 @@ module Seahorse
           private
 
           def build_endpoint(context)
-            uri = URI.parse(Http::Endpoint.new(context.config.endpoint).to_s)
+            uri = URI.parse(Http::Endpoint.new(configured_endpoint(context)))
             apply_path_params(uri, context)
             apply_querystring_params(uri, context)
             Http::Endpoint.new(uri)
+          end
+
+          def configured_endpoint(context)
+            if context.config.endpoint
+              context.config.endpoint
+            else
+              raise "required configuration option :endpoint not set"
+            end
           end
 
           def apply_path_params(uri, context)

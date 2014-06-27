@@ -3,6 +3,7 @@ $:.unshift(File.join(root, 'vendor', 'seahorse', 'lib'))
 $:.unshift(File.join(root, 'lib'))
 
 require 'aws-sdk-core'
+require 'erb'
 
 YARD::Tags::Library.define_tag('CONFIGURATION_OPTIONS', :seahorse_client_option)
 YARD::Tags::Library.define_tag('SERVICE', :service)
@@ -53,45 +54,28 @@ Returns a new instance of {#{svc_name}}.
   DOC
 end
 
-def document_svc_class(svc_name, apis)
+def default_path
+end
 
+def service_docstring(svc_name, apis)
+  path = "doc-src/services/#{svc_name}/service.md"
+  if File.exists?(path)
+    template = File.read(path)
+  else
+    template = File.read('doc-src/services/default/service.md')
+  end
   oldest_api = apis.sort_by(&:version).first
   default_api = apis.sort_by(&:version).last
   full_name = default_api.metadata('serviceFullName')
+  ERB.new(template).result(binding)
+end
+
+def document_svc_class(svc_name, apis)
 
   namespace = YARD::Registry['Aws']
   klass = YARD::CodeObjects::ClassObject.new(namespace, svc_name)
   klass.superclass = YARD::Registry['Aws::Service']
-  klass.docstring = <<-DOCSTRING
-A service client builder for #{full_name}.
-
-## Region
-
-To use Aws::#{svc_name}, you need to configure a region.
-
-    # global default
-    Aws.config[:region] = 'us-west-2'
-
-    # global service default
-    Aws.config[:#{svc_name.downcase}] = { region: 'us-west-1' }
-
-    # per instance
-    #{svc_name.downcase} = Aws::#{svc_name}.new(region: 'api-northeast-1')
-
-## API Versions
-
-Calling {new} will construct and return a versioned service client. The client
-will default to the most recent API version. You can also specify an API version:
-
-    #{svc_name.downcase} = Aws::#{svc_name}.new # Aws::#{svc_name}::V#{default_api.version.gsub(/-/, '')}
-    #{svc_name.downcase} = Aws::#{svc_name}.new(api_version: '#{oldest_api.version}') # Aws::#{svc_name}::V#{oldest_api.version.gsub(/-/, '')}
-
-The following API versions are available for Aws::#{svc_name}:
-
-#{apis.map{ |a| "* {V#{a.version.gsub(/-/, '')} #{a.version}}" }.join("\n")}
-
-You can specify the API version for the client by passing `:api_version` to {new}.
-  DOCSTRING
+  klass.docstring = service_docstring(svc_name, apis)
   klass.docstring.add_tag(YARD::Tags::Tag.new(:service, svc_name))
 
   svc = Aws.const_get(svc_name)
