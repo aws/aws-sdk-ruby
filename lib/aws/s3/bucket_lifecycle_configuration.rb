@@ -242,10 +242,10 @@ module AWS
       #
       # @return [nil]
       #
-      def update &block
+      def update arg = {}, &block
         begin
           @batching = true
-          instance_eval(&block) if block_given?
+          instance_exec(arg, &block) if block_given?
           persist(true)
         ensure
           @batching = false
