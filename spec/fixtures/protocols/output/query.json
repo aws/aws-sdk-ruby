@@ -120,47 +120,13 @@
     ]
   },
   {
-    "description": "Result not wrapped",
-    "metadata": {
-      "protocol": "query",
-      "resultWrapped": false
-    },
-    "shapes": {
-      "OutputShape": {
-        "type": "structure",
-        "members": {
-          "Str": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "cases": [
-      {
-        "given": {
-          "output": {
-            "shape": "OutputShape"
-          },
-          "name": "OperationName"
-        },
-        "result": {
-          "Str": "myname"
-        },
-        "response": {
-          "status_code": 200,
-          "headers": {},
-          "body": "<OperationNameResult><Str>myname</Str></OperationNameResult>"
-        }
-      }
-    ]
-  },
-  {
     "description": "Blob",
     "metadata": {
       "protocol": "query"
     },
     "shapes": {
       "OutputShape": {
+        "resultWrapper": "OperationNameResult",
         "type": "structure",
         "members": {
           "Blob": {
@@ -183,7 +149,7 @@
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "<OperationNameResult><Blob>dmFsdWU=</Blob></OperationNameResult>"
+          "body": "<OperationNameResponse><OperationNameResult><Blob>dmFsdWU=</Blob></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
         }
       }
     ]
@@ -196,6 +162,7 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
+        "resultWrapper": "OperationNameResult",
         "members": {
           "ListMember": {
             "shape": "ListShape"
@@ -223,7 +190,7 @@
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "<OperationNameResult><ListMember><member>abc</member><member>123</member></ListMember></OperationNameResult>"
+          "body": "<OperationNameResponse><OperationNameResult><ListMember><member>abc</member><member>123</member></ListMember></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
         }
       }
     ]
@@ -236,6 +203,7 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
+        "resultWrapper": "OperationNameResult",
         "members": {
           "ListMember": {
             "shape": "ListShape"
@@ -264,7 +232,7 @@
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "<OperationNameResult><ListMember><item>abc</item><item>123</item></ListMember></OperationNameResult>"
+          "body": "<OperationNameResponse><OperationNameResult><ListMember><item>abc</item><item>123</item></ListMember></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
         }
       }
     ]
@@ -277,6 +245,7 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
+        "resultWrapper": "OperationNameResult",
         "members": {
           "ListMember": {
             "type": "list",
@@ -302,7 +271,7 @@
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "<OperationNameResult><ListMember>abc</ListMember><ListMember>123</ListMember></OperationNameResult>"
+          "body": "<OperationNameResponse><OperationNameResult><ListMember>abc</ListMember><ListMember>123</ListMember></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
         }
       }
     ]
@@ -315,6 +284,7 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
+        "resultWrapper": "OperationNameResult",
         "members": {
           "Map": {
             "type": "map",
@@ -354,7 +324,7 @@
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "<OperationNameResult><Map><entry><key>qux</key><value><foo>bar</foo></value></entry><entry><key>baz</key><value><foo>bam</foo></value></entry></Map></OperationNameResult>"
+          "body": "<OperationNameResponse><OperationNameResult><Map><entry><key>qux</key><value><foo>bar</foo></value></entry><entry><key>baz</key><value><foo>bam</foo></value></entry></Map></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
         }
       }
     ]
@@ -367,6 +337,7 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
+        "resultWrapper": "OperationNameResult",
         "members": {
           "Map": {
             "type": "map",
@@ -398,7 +369,7 @@
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "<OperationNameResult><Map><key>qux</key><value>bar</value></Map><Map><key>baz</key><value>bam</value></Map></OperationNameResult>"
+          "body": "<OperationNameResponse><OperationNameResult><Map><key>qux</key><value>bar</value></Map><Map><key>baz</key><value>bam</value></Map></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
         }
       }
     ]
@@ -411,6 +382,7 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
+        "resultWrapper": "OperationNameResult",
         "members": {
           "Map": {
             "type": "map",
@@ -444,7 +416,7 @@
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "<OperationNameResult><Map><foo>qux</foo><bar>bar</bar></Map><Map><foo>baz</foo><bar>bam</bar></Map></OperationNameResult>"
+          "body": "<OperationNameResponse><OperationNameResult><Map><foo>qux</foo><bar>bar</bar></Map><Map><foo>baz</foo><bar>bam</bar></Map></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
         }
       }
     ]
