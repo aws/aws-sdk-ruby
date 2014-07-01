@@ -282,13 +282,14 @@
   size.\n      * `:delete_on_termination` - (Boolean) Indicates whether the Amazon
   EBS volume is deleted on instance termination.\n      * `:volume_type` - (String)
   The volume type. Default: standard  Valid values include:\n        * `standard`\n
-  \       * `io1`\n      * `:iops` - (Integer) The number of I/O operations per second
-  (IOPS) that the volume supports. Constraint: Range is 100 to 4000. Condition: Required
-  when the volume type is io1; not used with standard volumes.\n      * `:encrypted`
-  - (Boolean) Indicates whether the Amazon EBS volume is encrypted.\n    * `:no_device`
-  - (String) Suppresses the specified device included in the block device mapping
-  of the AMI.\n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:image_id` - (String)"
+  \       * `io1`\n        * `gp2`\n      * `:iops` - (Integer) The number of I/O
+  operations per second (IOPS) that the volume supports. Constraint: Range is 100
+  to 4000. Condition: Required when the volume type is io1; not used with standard
+  or gp2 volumes.\n      * `:encrypted` - (Boolean) Indicates whether the Amazon EBS
+  volume is encrypted.\n    * `:no_device` - (String) Suppresses the specified device
+  included in the block device mapping of the AMI.\n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:image_id` - (String)"
 :create_instance_export_task: "Calls the CreateInstanceExportTask API operation.\n@param
   [Hash] options\n  * `:description` - (String) A description for the conversion task
   or the resource being exported. The maximum length is 255 bytes.\n  * `:instance_id`
@@ -499,13 +500,14 @@
   from which to create the volume.\n  * `:availability_zone` - *required* - (String)
   The Availability Zone in which to create the volume. Use DescribeAvailabilityZones
   to list the Availability Zones that are currently available to you.\n  * `:volume_type`
-  - (String) The volume type. This can be standard for standard EBS volumes or io1
-  for Provisioned IOPS volumes. Default: standard  Valid values include:\n    * `standard`\n
-  \   * `io1`\n  * `:iops` - (Integer) The number of I/O operations per second (IOPS)
-  that the volume supports. This parameter is not used with standard volumes, but
-  is required when the volume type is io1.\n  * `:encrypted` - (Boolean) Specifies
-  whether the volume should be encrypted.\n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:volume_id`
+  - (String) The volume type. This can be gp2 for General Purpose (SSD) volumes, io1
+  for Provisioned IOPS (SSD) volumes, or standard for Magnetic volumes. Default: standard
+  \ Valid values include:\n    * `standard`\n    * `io1`\n    * `gp2`\n  * `:iops`
+  - (Integer) The number of I/O operations per second (IOPS) that the volume supports.
+  This parameter is not used with Magnetic or General Purpose (SSD) volumes, but is
+  required when the volume type is io1.\n  * `:encrypted` - (Boolean) Specifies whether
+  the volume should be encrypted.\n@return [Core::Response] The `#data` method of
+  the response object returns a hash with the following structure:\n\n  * `:volume_id`
   - (String)\n  * `:size` - (Integer)\n  * `:snapshot_id` - (String)\n  * `:availability_zone`
   - (String)\n  * `:status` - (String)\n  * `:create_time` - (Time)\n  * `:attachment_set`
   - (Array<Hash>)\n    * `:volume_id` - (String)\n    * `:instance_id` - (String)\n
@@ -833,9 +835,9 @@
   volume (for example, /dev/sdh). block-device-mapping.snapshot-id - The ID of the
   snapshot used for the Amazon EBS volume. block-device-mapping.volume-size - The
   volume size of the Amazon EBS volume, in GiB. block-device-mapping.volume-type -
-  The volume type of the Amazon EBS volume (standard | io1). description - The description
-  of the image (provided during image creation). hypervisor - The hypervisor type
-  (ovm | xen). image-id - The ID of the image. image-type - The image type (machine
+  The volume type of the Amazon EBS volume (gp2 | standard | io1). description - The
+  description of the image (provided during image creation). hypervisor - The hypervisor
+  type (ovm | xen). image-id - The ID of the image. image-type - The image type (machine
   | kernel | ramdisk). is-public - A Boolean that indicates whether the image is public.
   kernel-id - The kernel ID. manifest-location - The location of the image manifest.
   name - The name of the AMI (provided during image creation). owner-alias - The AWS
@@ -892,7 +894,7 @@
   (Time)\n      * `:delete_on_termination` - (Boolean)\n  * `:product_codes` - (Array<Hash>)\n
   \   * `:product_code` - (String)\n    * `:type` - (String)\n  * `:ebs_optimized`
   - (Hash)\n    * `:value` - (Boolean)\n  * `:sriov_net_support` - (Hash)\n    * `:value`
-  - (String)"
+  - (String)\n  * `:source_dest_check` - (Hash)\n    * `:value` - (Boolean)"
 :describe_instance_status: "Calls the DescribeInstanceStatus API operation.\n@param
   [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:instance_ids` - (Array&lt;<String>)
   One or more instance IDs. Default: Describes all your instances. Constraints: Maximum
@@ -1346,50 +1348,50 @@
   information, see Instance Types in the Amazon Elastic Compute Cloud User Guide.
   \ Valid values include:\n    * `t1.micro`\n    * `m1.small`\n    * `m1.medium`\n
   \   * `m1.large`\n    * `m1.xlarge`\n    * `m3.medium`\n    * `m3.large`\n    *
-  `m3.xlarge`\n    * `m3.2xlarge`\n    * `m2.xlarge`\n    * `m2.2xlarge`\n    * `m2.4xlarge`\n
-  \   * `cr1.8xlarge`\n    * `i2.xlarge`\n    * `i2.2xlarge`\n    * `i2.4xlarge`\n
-  \   * `i2.8xlarge`\n    * `hi1.4xlarge`\n    * `hs1.8xlarge`\n    * `c1.medium`\n
-  \   * `c1.xlarge`\n    * `c3.large`\n    * `c3.xlarge`\n    * `c3.2xlarge`\n    *
-  `c3.4xlarge`\n    * `c3.8xlarge`\n    * `cc1.4xlarge`\n    * `cc2.8xlarge`\n    *
-  `g2.2xlarge`\n    * `cg1.4xlarge`\n    * `r3.large`\n    * `r3.xlarge`\n    * `r3.2xlarge`\n
-  \   * `r3.4xlarge`\n    * `r3.8xlarge`\n  * `:availability_zone` - (String) The
-  Availability Zone in which the Reserved Instance can be used.\n  * `:product_description`
-  - (String) The Reserved Instance description. Instances that include (Amazon VPC)
-  in the description are for use with Amazon VPC.  Valid values include:\n    * `Linux/UNIX`\n
-  \   * `Linux/UNIX (Amazon VPC)`\n    * `Windows`\n    * `Windows (Amazon VPC)`\n
-  \ * `:filters` - (Array&lt;<Hash>) One or more filters. availability-zone - The
-  Availability Zone where the Reserved Instance can be used. duration - The duration
-  of the Reserved Instance (for example, one year or three years), in seconds. fixed-price
-  - The purchase price of the Reserved Instance (for example, 9800.0). instance-type
-  - The instance type on which the Reserved Instance can be used. marketplace - Set
-  to  `true`  to show only Reserved Instance Marketplace offerings. When this filter
-  is not used, which is the default behavior, all offerings from AWS and Reserved
-  Instance Marketplace are listed. product-description - The description of the Reserved
-  Instance (Linux/UNIX | Linux/UNIX (Amazon VPC) | Windows | Windows (Amazon VPC)).
-  reserved-instances-offering-id - The Reserved Instances offering ID. usage-price
-  - The usage price of the Reserved Instance, per hour (for example, 0.84).\n    *
-  `:name` - (String) The name of the filter.\n    * `:values` - (Array&lt;<String>)
-  One or more filter values.\n  * `:instance_tenancy` - (String) The tenancy of the
-  Reserved Instance offering. A Reserved Instance with dedicated tenancy runs on single-tenant
-  hardware and can only be launched within a VPC. Default: default  Valid values include:\n
-  \   * `default`\n    * `dedicated`\n  * `:offering_type` - (String) The Reserved
-  Instance offering type.  Valid values include:\n    * `Heavy Utilization`\n    *
-  `Medium Utilization`\n    * `Light Utilization`\n  * `:next_token` - (String) The
-  token to use when requesting the next paginated set of offerings.\n  * `:max_results`
-  - (Integer) The maximum number of offerings to return.\n  * `:include_marketplace`
-  - (Boolean) Include Marketplace offerings in the response.\n  * `:min_duration`
-  - (Integer) The minimum duration (in seconds) to filter when searching for offerings.\n
-  \ * `:max_duration` - (Integer) The maximum duration (in seconds) to filter when
-  searching for offerings.\n  * `:max_instance_count` - (Integer) The maximum number
-  of instances to filter when searching for offerings.\n@return [Core::Response] The
-  `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:reserved_instances_offerings_set` - (Array<Hash>)\n    * `:reserved_instances_offering_id`
-  - (String)\n    * `:instance_type` - (String)\n    * `:availability_zone` - (String)\n
-  \   * `:duration` - (Integer)\n    * `:usage_price` - (Numeric)\n    * `:fixed_price`
-  - (Numeric)\n    * `:product_description` - (String)\n    * `:instance_tenancy`
-  - (String)\n    * `:currency_code` - (String)\n    * `:offering_type` - (String)\n
-  \   * `:recurring_charges` - (Array<Hash>)\n      * `:frequency` - (String)\n      *
-  `:amount` - (Numeric)\n    * `:marketplace` - (Boolean)\n    * `:pricing_details_set`
+  `m3.xlarge`\n    * `m3.2xlarge`\n    * `t2.micro`\n    * `t2.small`\n    * `t2.medium`\n
+  \   * `m2.xlarge`\n    * `m2.2xlarge`\n    * `m2.4xlarge`\n    * `cr1.8xlarge`\n
+  \   * `i2.xlarge`\n    * `i2.2xlarge`\n    * `i2.4xlarge`\n    * `i2.8xlarge`\n
+  \   * `hi1.4xlarge`\n    * `hs1.8xlarge`\n    * `c1.medium`\n    * `c1.xlarge`\n
+  \   * `c3.large`\n    * `c3.xlarge`\n    * `c3.2xlarge`\n    * `c3.4xlarge`\n    *
+  `c3.8xlarge`\n    * `cc1.4xlarge`\n    * `cc2.8xlarge`\n    * `g2.2xlarge`\n    *
+  `cg1.4xlarge`\n    * `r3.large`\n    * `r3.xlarge`\n    * `r3.2xlarge`\n    * `r3.4xlarge`\n
+  \   * `r3.8xlarge`\n  * `:availability_zone` - (String) The Availability Zone in
+  which the Reserved Instance can be used.\n  * `:product_description` - (String)
+  The Reserved Instance description. Instances that include (Amazon VPC) in the description
+  are for use with Amazon VPC.  Valid values include:\n    * `Linux/UNIX`\n    * `Linux/UNIX
+  (Amazon VPC)`\n    * `Windows`\n    * `Windows (Amazon VPC)`\n  * `:filters` - (Array&lt;<Hash>)
+  One or more filters. availability-zone - The Availability Zone where the Reserved
+  Instance can be used. duration - The duration of the Reserved Instance (for example,
+  one year or three years), in seconds. fixed-price - The purchase price of the Reserved
+  Instance (for example, 9800.0). instance-type - The instance type on which the Reserved
+  Instance can be used. marketplace - Set to  `true`  to show only Reserved Instance
+  Marketplace offerings. When this filter is not used, which is the default behavior,
+  all offerings from AWS and Reserved Instance Marketplace are listed. product-description
+  - The description of the Reserved Instance (Linux/UNIX | Linux/UNIX (Amazon VPC)
+  | Windows | Windows (Amazon VPC)). reserved-instances-offering-id - The Reserved
+  Instances offering ID. usage-price - The usage price of the Reserved Instance, per
+  hour (for example, 0.84).\n    * `:name` - (String) The name of the filter.\n    *
+  `:values` - (Array&lt;<String>) One or more filter values.\n  * `:instance_tenancy`
+  - (String) The tenancy of the Reserved Instance offering. A Reserved Instance with
+  dedicated tenancy runs on single-tenant hardware and can only be launched within
+  a VPC. Default: default  Valid values include:\n    * `default`\n    * `dedicated`\n
+  \ * `:offering_type` - (String) The Reserved Instance offering type.  Valid values
+  include:\n    * `Heavy Utilization`\n    * `Medium Utilization`\n    * `Light Utilization`\n
+  \ * `:next_token` - (String) The token to use when requesting the next paginated
+  set of offerings.\n  * `:max_results` - (Integer) The maximum number of offerings
+  to return.\n  * `:include_marketplace` - (Boolean) Include Marketplace offerings
+  in the response.\n  * `:min_duration` - (Integer) The minimum duration (in seconds)
+  to filter when searching for offerings.\n  * `:max_duration` - (Integer) The maximum
+  duration (in seconds) to filter when searching for offerings.\n  * `:max_instance_count`
+  - (Integer) The maximum number of instances to filter when searching for offerings.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:reserved_instances_offerings_set` - (Array<Hash>)\n
+  \   * `:reserved_instances_offering_id` - (String)\n    * `:instance_type` - (String)\n
+  \   * `:availability_zone` - (String)\n    * `:duration` - (Integer)\n    * `:usage_price`
+  - (Numeric)\n    * `:fixed_price` - (Numeric)\n    * `:product_description` - (String)\n
+  \   * `:instance_tenancy` - (String)\n    * `:currency_code` - (String)\n    * `:offering_type`
+  - (String)\n    * `:recurring_charges` - (Array<Hash>)\n      * `:frequency` - (String)\n
+  \     * `:amount` - (Numeric)\n    * `:marketplace` - (Boolean)\n    * `:pricing_details_set`
   - (Array<Hash>)\n      * `:price` - (Numeric)\n      * `:count` - (Integer)\n  *
   `:next_token` - (String)"
 :describe_route_tables: "Calls the DescribeRouteTables API operation.\n@param [Hash]
@@ -1516,8 +1518,8 @@
   - The device name for the Amazon EBS volume (for example, /dev/sdh). launch.block-device-mapping.snapshot-id
   - The ID of the snapshot used for the Amazon EBS volume. launch.block-device-mapping.volume-size
   - The size of the Amazon EBS volume, in GiB. launch.block-device-mapping.volume-type
-  - The type of the Amazon EBS volume (standard | io1). launch.group-id - The security
-  group for the instance. launch.image-id - The ID of the AMI. launch.instance-type
+  - The type of the Amazon EBS volume (gp2 | standard | io1). launch.group-id - The
+  security group for the instance. launch.image-id - The ID of the AMI. launch.instance-type
   - The type of instance (for example, m1.small). launch.kernel-id - The kernel ID.
   launch.key-name - The name of the key pair the instance launched with. launch.monitoring-enabled
   - Whether monitoring is enabled for the Spot Instance. launch.ramdisk-id - The RAM
@@ -1702,18 +1704,19 @@
   of what the tag's key is). If you want to list only resources where Purpose is X,
   see the tag:key=value filter. tag-value - The value of a tag assigned to the resource.
   This filter is independent of the tag-key filter. volume-id - The volume ID. volume-type
-  - The Amazon EBS volume type. This can be standard for standard EBS volumes or io1
-  for Provisioned IOPS volumes.\n    * `:name` - (String) The name of the filter.\n
-  \   * `:values` - (Array&lt;<String>) One or more filter values.\n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:volume_set` - (Array<Hash>)\n    * `:volume_id` - (String)\n    * `:size`
-  - (Integer)\n    * `:snapshot_id` - (String)\n    * `:availability_zone` - (String)\n
-  \   * `:status` - (String)\n    * `:create_time` - (Time)\n    * `:attachment_set`
-  - (Array<Hash>)\n      * `:volume_id` - (String)\n      * `:instance_id` - (String)\n
-  \     * `:device` - (String)\n      * `:status` - (String)\n      * `:attach_time`
-  - (Time)\n      * `:delete_on_termination` - (Boolean)\n    * `:tag_set` - (Array<Hash>)\n
-  \     * `:key` - (String)\n      * `:value` - (String)\n    * `:volume_type` - (String)\n
-  \   * `:iops` - (Integer)\n    * `:encrypted` - (Boolean)"
+  - The Amazon EBS volume type. This can be gp2 for General Purpose (SSD) volumes,
+  io1 for Provisioned IOPS (SSD) volumes, or standard for Magnetic volumes.\n    *
+  `:name` - (String) The name of the filter.\n    * `:values` - (Array&lt;<String>)
+  One or more filter values.\n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:volume_set` - (Array<Hash>)\n
+  \   * `:volume_id` - (String)\n    * `:size` - (Integer)\n    * `:snapshot_id` -
+  (String)\n    * `:availability_zone` - (String)\n    * `:status` - (String)\n    *
+  `:create_time` - (Time)\n    * `:attachment_set` - (Array<Hash>)\n      * `:volume_id`
+  - (String)\n      * `:instance_id` - (String)\n      * `:device` - (String)\n      *
+  `:status` - (String)\n      * `:attach_time` - (Time)\n      * `:delete_on_termination`
+  - (Boolean)\n    * `:tag_set` - (Array<Hash>)\n      * `:key` - (String)\n      *
+  `:value` - (String)\n    * `:volume_type` - (String)\n    * `:iops` - (Integer)\n
+  \   * `:encrypted` - (Boolean)"
 :describe_vpc_attribute: "Calls the DescribeVpcAttribute API operation.\n@param [Hash]
   options\n  * `:dry_run` - (Boolean) \n  * `:vpc_id` - *required* - (String) The
   ID of the VPC.\n  * `:attribute` - (String) The VPC attribute.  Valid values include:\n
@@ -1900,29 +1903,30 @@
   The instance type. For more information, see Instance Types in the Amazon Elastic
   Compute Cloud User Guide.  Valid values include:\n      * `t1.micro`\n      * `m1.small`\n
   \     * `m1.medium`\n      * `m1.large`\n      * `m1.xlarge`\n      * `m3.medium`\n
-  \     * `m3.large`\n      * `m3.xlarge`\n      * `m3.2xlarge`\n      * `m2.xlarge`\n
-  \     * `m2.2xlarge`\n      * `m2.4xlarge`\n      * `cr1.8xlarge`\n      * `i2.xlarge`\n
-  \     * `i2.2xlarge`\n      * `i2.4xlarge`\n      * `i2.8xlarge`\n      * `hi1.4xlarge`\n
-  \     * `hs1.8xlarge`\n      * `c1.medium`\n      * `c1.xlarge`\n      * `c3.large`\n
-  \     * `c3.xlarge`\n      * `c3.2xlarge`\n      * `c3.4xlarge`\n      * `c3.8xlarge`\n
-  \     * `cc1.4xlarge`\n      * `cc2.8xlarge`\n      * `g2.2xlarge`\n      * `cg1.4xlarge`\n
-  \     * `r3.large`\n      * `r3.xlarge`\n      * `r3.2xlarge`\n      * `r3.4xlarge`\n
-  \     * `r3.8xlarge`\n    * `:placement` - (Hash) \n      * `:availability_zone`
-  - (String) The Availability Zone of the instance.\n      * `:group_name` - (String)
-  The name of the placement group the instance is in (for cluster compute instances).\n
-  \     * `:tenancy` - (String) The tenancy of the instance (if the instance is running
-  in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.
-  \ Valid values include:\n        * `default`\n        * `dedicated`\n    * `:monitoring`
-  - (Boolean) \n    * `:subnet_id` - (String) [EC2-VPC] The ID of the subnet to launch
-  the instance into.\n    * `:instance_initiated_shutdown_behavior` - (String) Indicates
-  whether an instance stops or terminates when you initiate shutdown from the instance
-  (using the operating system command for system shutdown).  Valid values include:\n
-  \     * `stop`\n      * `terminate`\n    * `:private_ip_address` - (String) [EC2-VPC]
-  Optionally, you can use this parameter to assign the instance a specific available
-  IP address from the IP address range of the subnet.\n  * `:disk_images` - (Array&lt;<Hash>)
-  \n    * `:image` - (Hash) \n      * `:format` - *required* - (String) The disk image
-  format.  Valid values include:\n        * `VMDK`\n        * `RAW`\n        * `VHD`\n
-  \     * `:bytes` - *required* - (Integer) \n      * `:import_manifest_url` - *required*
+  \     * `m3.large`\n      * `m3.xlarge`\n      * `m3.2xlarge`\n      * `t2.micro`\n
+  \     * `t2.small`\n      * `t2.medium`\n      * `m2.xlarge`\n      * `m2.2xlarge`\n
+  \     * `m2.4xlarge`\n      * `cr1.8xlarge`\n      * `i2.xlarge`\n      * `i2.2xlarge`\n
+  \     * `i2.4xlarge`\n      * `i2.8xlarge`\n      * `hi1.4xlarge`\n      * `hs1.8xlarge`\n
+  \     * `c1.medium`\n      * `c1.xlarge`\n      * `c3.large`\n      * `c3.xlarge`\n
+  \     * `c3.2xlarge`\n      * `c3.4xlarge`\n      * `c3.8xlarge`\n      * `cc1.4xlarge`\n
+  \     * `cc2.8xlarge`\n      * `g2.2xlarge`\n      * `cg1.4xlarge`\n      * `r3.large`\n
+  \     * `r3.xlarge`\n      * `r3.2xlarge`\n      * `r3.4xlarge`\n      * `r3.8xlarge`\n
+  \   * `:placement` - (Hash) \n      * `:availability_zone` - (String) The Availability
+  Zone of the instance.\n      * `:group_name` - (String) The name of the placement
+  group the instance is in (for cluster compute instances).\n      * `:tenancy` -
+  (String) The tenancy of the instance (if the instance is running in a VPC). An instance
+  with a tenancy of dedicated runs on single-tenant hardware.  Valid values include:\n
+  \       * `default`\n        * `dedicated`\n    * `:monitoring` - (Boolean) \n    *
+  `:subnet_id` - (String) [EC2-VPC] The ID of the subnet to launch the instance into.\n
+  \   * `:instance_initiated_shutdown_behavior` - (String) Indicates whether an instance
+  stops or terminates when you initiate shutdown from the instance (using the operating
+  system command for system shutdown).  Valid values include:\n      * `stop`\n      *
+  `terminate`\n    * `:private_ip_address` - (String) [EC2-VPC] Optionally, you can
+  use this parameter to assign the instance a specific available IP address from the
+  IP address range of the subnet.\n  * `:disk_images` - (Array&lt;<Hash>) \n    *
+  `:image` - (Hash) \n      * `:format` - *required* - (String) The disk image format.
+  \ Valid values include:\n        * `VMDK`\n        * `RAW`\n        * `VHD`\n      *
+  `:bytes` - *required* - (Integer) \n      * `:import_manifest_url` - *required*
   - (String) A presigned URL for the import manifest stored in Amazon S3. For information
   about creating a presigned URL for an Amazon S3 object, read the \"Query String
   Request Authentication Alternative\" section of the Authenticating REST Requests
@@ -2086,6 +2090,9 @@
         * `m3.large`
         * `m3.xlarge`
         * `m3.2xlarge`
+        * `t2.micro`
+        * `t2.small`
+        * `t2.medium`
         * `m2.xlarge`
         * `m2.2xlarge`
         * `m2.4xlarge`
@@ -2136,8 +2143,9 @@
   volume permissions.  Valid values include:\n        * `all`\n@return [Core::Response]"
 :modify_volume_attribute: "Calls the ModifyVolumeAttribute API operation.\n@param
   [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:volume_id` - *required* - (String)
-  The ID of the volume.\n  * `:auto_enable_io` - (Boolean) Indicates whether the volume
-  should be auto-enabled for I/O operations.\n@return [Core::Response]"
+  The ID of the volume.\n  * `:auto_enable_io` - (Hash) Indicates whether the volume
+  should be auto-enabled for I/O operations.\n    * `:value` - (Boolean) \n@return
+  [Core::Response]"
 :modify_vpc_attribute: "Calls the ModifyVpcAttribute API operation.\n@param [Hash]
   options\n  * `:vpc_id` - *required* - (String) The ID of the VPC.\n  * `:enable_dns_support`
   - (Hash) Indicates whether the DNS resolution is supported for the VPC. If this
@@ -2193,12 +2201,12 @@
   and don't specify a volume size, the default is the snapshot size.\n      * `:delete_on_termination`
   - (Boolean) Indicates whether the Amazon EBS volume is deleted on instance termination.\n
   \     * `:volume_type` - (String) The volume type. Default: standard  Valid values
-  include:\n        * `standard`\n        * `io1`\n      * `:iops` - (Integer) The
-  number of I/O operations per second (IOPS) that the volume supports. Constraint:
-  Range is 100 to 4000. Condition: Required when the volume type is io1; not used
-  with standard volumes.\n      * `:encrypted` - (Boolean) Indicates whether the Amazon
-  EBS volume is encrypted.\n    * `:no_device` - (String) Suppresses the specified
-  device included in the block device mapping of the AMI.\n  * `:virtualization_type`
+  include:\n        * `standard`\n        * `io1`\n        * `gp2`\n      * `:iops`
+  - (Integer) The number of I/O operations per second (IOPS) that the volume supports.
+  Constraint: Range is 100 to 4000. Condition: Required when the volume type is io1;
+  not used with standard or gp2 volumes.\n      * `:encrypted` - (Boolean) Indicates
+  whether the Amazon EBS volume is encrypted.\n    * `:no_device` - (String) Suppresses
+  the specified device included in the block device mapping of the AMI.\n  * `:virtualization_type`
   - (String) The type of virtualization. Default: paravirtual\n  * `:sriov_net_support`
   - (String) Set to simple to enable enhanced networking for the AMI and any instances
   that you launch from the AMI. There is no way to disable enhanced networking at
@@ -2309,49 +2317,50 @@
   - (String) \n    * `:instance_type` - (String) The instance type.  Valid values
   include:\n      * `t1.micro`\n      * `m1.small`\n      * `m1.medium`\n      * `m1.large`\n
   \     * `m1.xlarge`\n      * `m3.medium`\n      * `m3.large`\n      * `m3.xlarge`\n
-  \     * `m3.2xlarge`\n      * `m2.xlarge`\n      * `m2.2xlarge`\n      * `m2.4xlarge`\n
-  \     * `cr1.8xlarge`\n      * `i2.xlarge`\n      * `i2.2xlarge`\n      * `i2.4xlarge`\n
-  \     * `i2.8xlarge`\n      * `hi1.4xlarge`\n      * `hs1.8xlarge`\n      * `c1.medium`\n
-  \     * `c1.xlarge`\n      * `c3.large`\n      * `c3.xlarge`\n      * `c3.2xlarge`\n
-  \     * `c3.4xlarge`\n      * `c3.8xlarge`\n      * `cc1.4xlarge`\n      * `cc2.8xlarge`\n
-  \     * `g2.2xlarge`\n      * `cg1.4xlarge`\n      * `r3.large`\n      * `r3.xlarge`\n
-  \     * `r3.2xlarge`\n      * `r3.4xlarge`\n      * `r3.8xlarge`\n    * `:placement`
-  - (Hash) The placement information for the instance.\n      * `:availability_zone`
-  - (String) The Availability Zone.\n      * `:group_name` - (String) The Availability
-  Zone group name.\n    * `:kernel_id` - (String) The ID of the kernel.\n    * `:ramdisk_id`
-  - (String) The ID of the RAM disk.\n    * `:block_device_mappings` - (Array&lt;<Hash>)
-  One or more block device mapping entries.\n      * `:virtual_name` - (String) The
-  virtual device name.\n      * `:device_name` - (String) The device name exposed
-  to the instance (for example, /dev/sdh).\n      * `:ebs` - (Hash) Parameters used
-  to automatically set up Amazon EBS volumes when the instance is launched.\n        *
-  `:snapshot_id` - (String) The ID of the snapshot.\n        * `:volume_size` - (Integer)
-  The size of the volume, in GiB. Constraints: If the volume type is io1, the minimum
-  size of the volume is 10 GiB. Default: If you're creating the volume from a snapshot
+  \     * `m3.2xlarge`\n      * `t2.micro`\n      * `t2.small`\n      * `t2.medium`\n
+  \     * `m2.xlarge`\n      * `m2.2xlarge`\n      * `m2.4xlarge`\n      * `cr1.8xlarge`\n
+  \     * `i2.xlarge`\n      * `i2.2xlarge`\n      * `i2.4xlarge`\n      * `i2.8xlarge`\n
+  \     * `hi1.4xlarge`\n      * `hs1.8xlarge`\n      * `c1.medium`\n      * `c1.xlarge`\n
+  \     * `c3.large`\n      * `c3.xlarge`\n      * `c3.2xlarge`\n      * `c3.4xlarge`\n
+  \     * `c3.8xlarge`\n      * `cc1.4xlarge`\n      * `cc2.8xlarge`\n      * `g2.2xlarge`\n
+  \     * `cg1.4xlarge`\n      * `r3.large`\n      * `r3.xlarge`\n      * `r3.2xlarge`\n
+  \     * `r3.4xlarge`\n      * `r3.8xlarge`\n    * `:placement` - (Hash) The placement
+  information for the instance.\n      * `:availability_zone` - (String) The Availability
+  Zone.\n      * `:group_name` - (String) The Availability Zone group name.\n    *
+  `:kernel_id` - (String) The ID of the kernel.\n    * `:ramdisk_id` - (String) The
+  ID of the RAM disk.\n    * `:block_device_mappings` - (Array&lt;<Hash>) One or more
+  block device mapping entries.\n      * `:virtual_name` - (String) The virtual device
+  name.\n      * `:device_name` - (String) The device name exposed to the instance
+  (for example, /dev/sdh).\n      * `:ebs` - (Hash) Parameters used to automatically
+  set up Amazon EBS volumes when the instance is launched.\n        * `:snapshot_id`
+  - (String) The ID of the snapshot.\n        * `:volume_size` - (Integer) The size
+  of the volume, in GiB. Constraints: If the volume type is io1, the minimum size
+  of the volume is 10 GiB. Default: If you're creating the volume from a snapshot
   and don't specify a volume size, the default is the snapshot size.\n        * `:delete_on_termination`
   - (Boolean) Indicates whether the Amazon EBS volume is deleted on instance termination.\n
   \       * `:volume_type` - (String) The volume type. Default: standard  Valid values
-  include:\n          * `standard`\n          * `io1`\n        * `:iops` - (Integer)
-  The number of I/O operations per second (IOPS) that the volume supports. Constraint:
-  Range is 100 to 4000. Condition: Required when the volume type is io1; not used
-  with standard volumes.\n        * `:encrypted` - (Boolean) Indicates whether the
-  Amazon EBS volume is encrypted.\n      * `:no_device` - (String) Suppresses the
-  specified device included in the block device mapping of the AMI.\n    * `:monitoring`
-  - (Hash) \n      * `:enabled` - *required* - (Boolean) \n    * `:subnet_id` - (String)
-  The ID of the subnet in which to launch the Spot Instance.\n    * `:network_interfaces`
-  - (Array&lt;<Hash>) One or more network interfaces.\n      * `:network_interface_id`
-  - (String) The ID of the network interface.\n      * `:device_index` - (Integer)
-  The index of the device on the instance for the network interface attachment.\n
-  \     * `:subnet_id` - (String) The ID of the subnet associated with the network
-  string.\n      * `:description` - (String) The description of the network interface.\n
-  \     * `:private_ip_address` - (String) The private IP address of the network interface.\n
-  \     * `:groups` - (Array&lt;<String>) The IDs of the security groups for the network
-  interface.\n      * `:delete_on_termination` - (Boolean) If set to  `true` , the
-  interface is deleted when the instance is terminated.\n      * `:private_ip_addresses`
-  - (Array&lt;<Hash>) One or more private IP addresses to assign to the network interface.\n
-  \       * `:private_ip_address` - *required* - (String) The private IP addresses.\n
-  \       * `:primary` - (Boolean) Indicates whether the private IP address is the
-  primary private IP address.\n      * `:secondary_private_ip_address_count` - (Integer)
-  The number of secondary private IP addresses.\n      * `:associate_public_ip_address`
+  include:\n          * `standard`\n          * `io1`\n          * `gp2`\n        *
+  `:iops` - (Integer) The number of I/O operations per second (IOPS) that the volume
+  supports. Constraint: Range is 100 to 4000. Condition: Required when the volume
+  type is io1; not used with standard or gp2 volumes.\n        * `:encrypted` - (Boolean)
+  Indicates whether the Amazon EBS volume is encrypted.\n      * `:no_device` - (String)
+  Suppresses the specified device included in the block device mapping of the AMI.\n
+  \   * `:monitoring` - (Hash) \n      * `:enabled` - *required* - (Boolean) \n    *
+  `:subnet_id` - (String) The ID of the subnet in which to launch the Spot Instance.\n
+  \   * `:network_interfaces` - (Array&lt;<Hash>) One or more network interfaces.\n
+  \     * `:network_interface_id` - (String) The ID of the network interface.\n      *
+  `:device_index` - (Integer) The index of the device on the instance for the network
+  interface attachment.\n      * `:subnet_id` - (String) The ID of the subnet associated
+  with the network string.\n      * `:description` - (String) The description of the
+  network interface.\n      * `:private_ip_address` - (String) The private IP address
+  of the network interface.\n      * `:groups` - (Array&lt;<String>) The IDs of the
+  security groups for the network interface.\n      * `:delete_on_termination` - (Boolean)
+  If set to  `true` , the interface is deleted when the instance is terminated.\n
+  \     * `:private_ip_addresses` - (Array&lt;<Hash>) One or more private IP addresses
+  to assign to the network interface.\n        * `:private_ip_address` - *required*
+  - (String) The private IP addresses.\n        * `:primary` - (Boolean) Indicates
+  whether the private IP address is the primary private IP address.\n      * `:secondary_private_ip_address_count`
+  - (Integer) The number of secondary private IP addresses.\n      * `:associate_public_ip_address`
   - (Boolean) Indicates whether to auto-assign a public IP address to an instance
   in a VPC. This public IP address can be assigned to the network interface for eth0
   only when you launch the instance. You must create the network interface instead
@@ -2504,39 +2513,40 @@
   Types in the Amazon Elastic Compute Cloud User Guide. Default: m1.small  Valid values
   include:\n    * `t1.micro`\n    * `m1.small`\n    * `m1.medium`\n    * `m1.large`\n
   \   * `m1.xlarge`\n    * `m3.medium`\n    * `m3.large`\n    * `m3.xlarge`\n    *
-  `m3.2xlarge`\n    * `m2.xlarge`\n    * `m2.2xlarge`\n    * `m2.4xlarge`\n    * `cr1.8xlarge`\n
-  \   * `i2.xlarge`\n    * `i2.2xlarge`\n    * `i2.4xlarge`\n    * `i2.8xlarge`\n
-  \   * `hi1.4xlarge`\n    * `hs1.8xlarge`\n    * `c1.medium`\n    * `c1.xlarge`\n
-  \   * `c3.large`\n    * `c3.xlarge`\n    * `c3.2xlarge`\n    * `c3.4xlarge`\n    *
-  `c3.8xlarge`\n    * `cc1.4xlarge`\n    * `cc2.8xlarge`\n    * `g2.2xlarge`\n    *
-  `cg1.4xlarge`\n    * `r3.large`\n    * `r3.xlarge`\n    * `r3.2xlarge`\n    * `r3.4xlarge`\n
-  \   * `r3.8xlarge`\n  * `:placement` - (Hash) The placement for the instance.\n
-  \   * `:availability_zone` - (String) The Availability Zone of the instance.\n    *
-  `:group_name` - (String) The name of the placement group the instance is in (for
-  cluster compute instances).\n    * `:tenancy` - (String) The tenancy of the instance
-  (if the instance is running in a VPC). An instance with a tenancy of dedicated runs
-  on single-tenant hardware.  Valid values include:\n      * `default`\n      * `dedicated`\n
-  \ * `:kernel_id` - (String) The ID of the kernel. We recommend that you use PV-GRUB
-  instead of kernels and RAM disks. For more information, see PV-GRUB: A New Amazon
-  Kernel Image in the Amazon Elastic Compute Cloud User Guide.\n  * `:ramdisk_id`
-  - (String) The ID of the RAM disk.\n  * `:block_device_mappings` - (Array&lt;<Hash>)
-  The block device mapping.\n    * `:virtual_name` - (String) The virtual device name.\n
-  \   * `:device_name` - (String) The device name exposed to the instance (for example,
-  /dev/sdh).\n    * `:ebs` - (Hash) Parameters used to automatically set up Amazon
-  EBS volumes when the instance is launched.\n      * `:snapshot_id` - (String) The
-  ID of the snapshot.\n      * `:volume_size` - (Integer) The size of the volume,
-  in GiB. Constraints: If the volume type is io1, the minimum size of the volume is
-  10 GiB. Default: If you're creating the volume from a snapshot and don't specify
-  a volume size, the default is the snapshot size.\n      * `:delete_on_termination`
-  - (Boolean) Indicates whether the Amazon EBS volume is deleted on instance termination.\n
-  \     * `:volume_type` - (String) The volume type. Default: standard  Valid values
-  include:\n        * `standard`\n        * `io1`\n      * `:iops` - (Integer) The
-  number of I/O operations per second (IOPS) that the volume supports. Constraint:
-  Range is 100 to 4000. Condition: Required when the volume type is io1; not used
-  with standard volumes.\n      * `:encrypted` - (Boolean) Indicates whether the Amazon
-  EBS volume is encrypted.\n    * `:no_device` - (String) Suppresses the specified
-  device included in the block device mapping of the AMI.\n  * `:monitoring` - (Hash)
-  The monitoring for the instance.\n    * `:enabled` - *required* - (Boolean) Indicates
+  `m3.2xlarge`\n    * `t2.micro`\n    * `t2.small`\n    * `t2.medium`\n    * `m2.xlarge`\n
+  \   * `m2.2xlarge`\n    * `m2.4xlarge`\n    * `cr1.8xlarge`\n    * `i2.xlarge`\n
+  \   * `i2.2xlarge`\n    * `i2.4xlarge`\n    * `i2.8xlarge`\n    * `hi1.4xlarge`\n
+  \   * `hs1.8xlarge`\n    * `c1.medium`\n    * `c1.xlarge`\n    * `c3.large`\n    *
+  `c3.xlarge`\n    * `c3.2xlarge`\n    * `c3.4xlarge`\n    * `c3.8xlarge`\n    * `cc1.4xlarge`\n
+  \   * `cc2.8xlarge`\n    * `g2.2xlarge`\n    * `cg1.4xlarge`\n    * `r3.large`\n
+  \   * `r3.xlarge`\n    * `r3.2xlarge`\n    * `r3.4xlarge`\n    * `r3.8xlarge`\n
+  \ * `:placement` - (Hash) The placement for the instance.\n    * `:availability_zone`
+  - (String) The Availability Zone of the instance.\n    * `:group_name` - (String)
+  The name of the placement group the instance is in (for cluster compute instances).\n
+  \   * `:tenancy` - (String) The tenancy of the instance (if the instance is running
+  in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.
+  \ Valid values include:\n      * `default`\n      * `dedicated`\n  * `:kernel_id`
+  - (String) The ID of the kernel. We recommend that you use PV-GRUB instead of kernels
+  and RAM disks. For more information, see PV-GRUB: A New Amazon Kernel Image in the
+  Amazon Elastic Compute Cloud User Guide.\n  * `:ramdisk_id` - (String) The ID of
+  the RAM disk.\n  * `:block_device_mappings` - (Array&lt;<Hash>) The block device
+  mapping.\n    * `:virtual_name` - (String) The virtual device name.\n    * `:device_name`
+  - (String) The device name exposed to the instance (for example, /dev/sdh).\n    *
+  `:ebs` - (Hash) Parameters used to automatically set up Amazon EBS volumes when
+  the instance is launched.\n      * `:snapshot_id` - (String) The ID of the snapshot.\n
+  \     * `:volume_size` - (Integer) The size of the volume, in GiB. Constraints:
+  If the volume type is io1, the minimum size of the volume is 10 GiB. Default: If
+  you're creating the volume from a snapshot and don't specify a volume size, the
+  default is the snapshot size.\n      * `:delete_on_termination` - (Boolean) Indicates
+  whether the Amazon EBS volume is deleted on instance termination.\n      * `:volume_type`
+  - (String) The volume type. Default: standard  Valid values include:\n        *
+  `standard`\n        * `io1`\n        * `gp2`\n      * `:iops` - (Integer) The number
+  of I/O operations per second (IOPS) that the volume supports. Constraint: Range
+  is 100 to 4000. Condition: Required when the volume type is io1; not used with standard
+  or gp2 volumes.\n      * `:encrypted` - (Boolean) Indicates whether the Amazon EBS
+  volume is encrypted.\n    * `:no_device` - (String) Suppresses the specified device
+  included in the block device mapping of the AMI.\n  * `:monitoring` - (Hash) The
+  monitoring for the instance.\n    * `:enabled` - *required* - (Boolean) Indicates
   whether monitoring is enabled for the instance.\n  * `:subnet_id` - (String) [EC2-VPC]
   The ID of the subnet to launch the instance into.\n  * `:disable_api_termination`
   - (Boolean) If you set this parameter to  `true` , you can't terminate the instance

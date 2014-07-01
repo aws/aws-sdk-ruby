@@ -1826,6 +1826,10 @@
         :children:
           value:
             :type: :boolean
+      sourceDestCheck:
+        :children:
+          value:
+            :type: :boolean
 - :name: DescribeInstanceStatus
   :method: :describe_instance_status
   :inputs:
@@ -3856,7 +3860,9 @@
     - :string
     - :required
     AutoEnableIO:
-    - :boolean
+    - :structure:
+        Value:
+        - :boolean
   :outputs: {}
 - :name: ModifyVpcAttribute
   :method: :modify_vpc_attribute
