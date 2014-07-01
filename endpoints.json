@@ -79,8 +79,7 @@
       "s3": {
         "http": true,
         "https": true,
-        "hostname": "s3.amazonaws.com",
-        "hostedzoneid": "Z3AQBSTGFYJSTF"
+        "hostname": "s3.amazonaws.com"
       },
       "autoscaling": {
         "http": true,
@@ -232,8 +231,7 @@
       "s3": {
         "http": true,
         "https": true,
-        "hostname": "s3-us-west-1.amazonaws.com",
-        "hostedzoneid": "Z2F56UZL2M1ACD"
+        "hostname": "s3-us-west-1.amazonaws.com"
       },
       "autoscaling": {
         "http": true,
@@ -365,8 +363,7 @@
       "s3": {
         "http": true,
         "https": true,
-        "hostname": "s3-us-west-2.amazonaws.com",
-        "hostedzoneid": "Z3BJ6K6RIION7M"
+        "hostname": "s3-us-west-2.amazonaws.com"
       },
       "autoscaling": {
         "http": true,
@@ -493,8 +490,7 @@
       "s3": {
         "http": true,
         "https": true,
-        "hostname": "s3-ap-northeast-1.amazonaws.com",
-        "hostedzoneid": "Z2M4EHUR26P7ZW"
+        "hostname": "s3-ap-northeast-1.amazonaws.com"
       },
       "autoscaling": {
         "http": true,
@@ -626,8 +622,7 @@
       "s3": {
         "http": true,
         "https": true,
-        "hostname": "s3-ap-southeast-1.amazonaws.com",
-        "hostedzoneid": "Z3O0J2DXBE1FTB"
+        "hostname": "s3-ap-southeast-1.amazonaws.com"
       },
       "autoscaling": {
         "http": true,
@@ -749,8 +744,7 @@
       "s3": {
         "http": true,
         "https": true,
-        "hostname": "s3-ap-southeast-2.amazonaws.com",
-        "hostedzoneid": "Z1WCIGYICN2BYD"
+        "hostname": "s3-ap-southeast-2.amazonaws.com"
       },
       "autoscaling": {
         "http": true,
@@ -872,8 +866,7 @@
       "s3": {
         "http": true,
         "https": true,
-        "hostname": "s3-sa-east-1.amazonaws.com",
-        "hostedzoneid": "Z7KQH4QJS55SO"
+        "hostname": "s3-sa-east-1.amazonaws.com"
       },
       "autoscaling": {
         "http": true,
@@ -990,8 +983,7 @@
       "s3": {
         "http": true,
         "https": true,
-        "hostname": "s3-eu-west-1.amazonaws.com",
-        "hostedzoneid": "Z1BKCTXD74EZPE"
+        "hostname": "s3-eu-west-1.amazonaws.com"
       },
       "autoscaling": {
         "http": true,
@@ -1103,8 +1095,7 @@
       "s3": {
         "http": true,
         "https": true,
-        "hostname": "s3.cn-north-1.amazonaws.com.cn",
-        "hostedzoneid": ""
+        "hostname": "s3.cn-north-1.amazonaws.com.cn"
       },
       "autoscaling": {
         "http": true,
@@ -1181,8 +1172,7 @@
       "s3": {
         "http": true,
         "https": true,
-        "hostname": "s3-us-gov-west-1.amazonaws.com",
-        "hostedzoneid": "Z31GFT0UA1I2HV"
+        "hostname": "s3-us-gov-west-1.amazonaws.com"
       },
       "autoscaling": {
         "http": true,
