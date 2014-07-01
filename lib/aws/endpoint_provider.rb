@@ -19,6 +19,7 @@ module Aws
       service_rules(options[:service].to_s).each do |rule|
         return rule.apply(options) if rule.matches?(options)
       end
+      nil
     end
 
     # Removes all rules.
