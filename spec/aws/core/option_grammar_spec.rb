@@ -547,11 +547,11 @@ module AWS::Core
               it 'serializes maps of structures' do
                 grammar.request_params(:foo => {
                   "ProductA" => { :size => 'large', :color => 'red' },
-                }).should == [
+                }).map(&:to_s).sort.should == [
                   Http::Request::Param.new("Foo.entry.1.key", "ProductA"),
                   Http::Request::Param.new("Foo.entry.1.value.Size", "large"),
                   Http::Request::Param.new("Foo.entry.1.value.Color", "red"),
-                ]
+                ].map(&:to_s).sort
               end
 
             end
@@ -580,11 +580,11 @@ module AWS::Core
               it 'serializes maps of structures' do
                 grammar.request_params(:foo => {
                   "ProductA" => { :size => 'large', :color => 'red' },
-                }).should == [
+                }).map(&:to_s).sort.should == [
                   Http::Request::Param.new("Foo.1.ProductName", "ProductA"),
                   Http::Request::Param.new("Foo.1.Attributes.Size", "large"),
                   Http::Request::Param.new("Foo.1.Attributes.Color", "red"),
-                ]
+                ].map(&:to_s).sort
               end
 
             end
