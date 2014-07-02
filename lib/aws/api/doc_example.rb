@@ -36,32 +36,32 @@ module Aws
       end
 
       def map(shape, i)
-        if multiline?(shape.values)
+        if multiline?(shape.value)
           multiline_map(shape, i)
         else
-          "{ #{key_name(shape)} => #{value(shape.values)} }"
+          "{ #{key_name(shape)} => #{value(shape.value)} }"
         end
       end
 
       def multiline_map(shape, i)
         lines = ["{"]
-        lines << "#{i}  #{key_name(shape)} => #{member(shape.values, i + '  ')},"
+        lines << "#{i}  #{key_name(shape)} => #{member(shape.value, i + '  ')},"
         lines << "#{i}  # repeated ..."
         lines << "#{i}}"
         lines.join("\n")
       end
 
       def list(shape, i)
-        if multiline?(shape.items)
+        if multiline?(shape.member)
           multiline_list(shape, i)
         else
-          "[#{value(shape.items)}, '...']"
+          "[#{value(shape.member)}, '...']"
         end
       end
 
       def multiline_list(shape, i)
         lines = ["["]
-        lines << "#{i}  #{member(shape.items, i + '  ')},"
+        lines << "#{i}  #{member(shape.member, i + '  ')},"
         lines << "#{i}  # repeated ... "
         lines << "#{i}]"
         lines.join("\n")
@@ -108,7 +108,7 @@ module Aws
       end
 
       def key_name(shape, inspect = true)
-        shape_name(shape.keys)
+        shape_name(shape.key)
       end
 
     end

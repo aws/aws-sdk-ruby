@@ -87,13 +87,13 @@ module Aws
       end
 
       def map(shape)
-        param(shape.values, key_name(shape), value_type(shape), false)
+        param(shape.value, key_name(shape), value_type(shape), false)
       end
 
       def list(shape)
-        case shape.items
-        when Seahorse::Model::Shapes::Structure then structure(shape.items)
-        when Seahorse::Model::Shapes::Map then map(shape.items)
+        case shape.member
+        when Seahorse::Model::Shapes::Structure then structure(shape.member)
+        when Seahorse::Model::Shapes::Map then map(shape.member)
         when Seahorse::Model::Shapes::List then raise NotImplementedError
         else [api_ref(shape)]
         end
@@ -125,30 +125,30 @@ module Aws
       end
 
       def key_type(shape)
-        shape_type(shape.keys)
+        shape_type(shape.key)
       end
 
       def value_type(shape)
         case shape
-        when Seahorse::Model::Shapes::List then shape_type(shape.items)
-        when Seahorse::Model::Shapes::Map then shape_type(shape.values)
+        when Seahorse::Model::Shapes::List then shape_type(shape.member)
+        when Seahorse::Model::Shapes::Map then shape_type(shape.value)
         else raise 'stop'
         end
       end
 
       def key_name(shape)
-        shape.keys.metadata('shape_name')
+        shape.key.metadata('shape')
       end
 
       def value_name(shape)
-        shape.members.metadata('shape_name')
+        shape.members.metadata('shape')
       end
 
       def leaf?(shape)
         case shape
         when Seahorse::Model::Shapes::Structure then false
         when Seahorse::Model::Shapes::Map then false
-        when Seahorse::Model::Shapes::List then leaf?(shape.items)
+        when Seahorse::Model::Shapes::List then leaf?(shape.member)
         else true
         end
       end

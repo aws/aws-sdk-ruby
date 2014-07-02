@@ -1,28 +1,73 @@
 A service client builder for <%= full_name %>.
 
-## Configuration
+# Configuration
 
-You can specify global default configuration options via `Aws.config`.  Values
-in `Aws.config` are used as default options for all services.
+You can provide default configuration options to `Aws.config` for
+all services, or for only this service. You can additionally provide
+configuration options to the constructor. Constructor options always
+take precedence.
 
+    # default region for all service
     Aws.config[:region] = 'us-west-2'
 
-You can specify service specific defaults as well:
-
+    # default region for only this service
     Aws.config[:<%= svc_name.downcase %>] = { region: 'us-west-1' }
 
-This has a higher precendence that values at the root of `Aws.config` and will
-only applied to objects constructed by {new}.
+    # this has the highest precedence
+    Aws::<%= svc_name %>.new(region: 'us-east-1')
 
-## Regions & Endpoints
+At a minimum, you must configure `:region` and `:credentials`.
 
-You must configure a default region with `Aws.config` or provide a `:region`
-when creating a service client.  The regions listed below will connect
-to the following endpoints:
+## Region
 
-<%= default_api.metadata['regional_endpoints'].map { |r,e| "* `#{r}` - #{e}"}.join("\n") %>
+If `ENV['AWS_REGION']` is set, this is used as the default region.
 
-## API Versions
+The `:region` option is used to build the `:endpoint`. You can override the
+endpoint constructed from the region, but the region is still required for
+signing requests.
+
+    <%= svc_name.downcase %> = Aws::<%= svc_name %>.new(region: 'us-west-1')
+    <%= svc_name.downcase %>.config.endpoint #=> <%= Aws::EndpointProvider.default_provider.resolve(service: default_api.metadata('endpointPrefix'), region:'us-west-1', scheme:'https').inspect %>
+
+## Credentials
+
+Credentials are used to sign requests sent to AWS. The Ruby SDK
+attempts to load credentials from the following locations:
+
+* From the instance profile when running on EC2
+* From AWS shared credentials file located at `ENV['HOME']/.aws/credentials`.
+* From `ENV['AWS_ACCESS_KEY_ID']` and `ENV['SECRET_ACCESS_KEY']`
+
+If credentials can not be found, they must be configured via `:credentials`:
+
+    credentials = Aws::SharedCredentials.new(
+      path: '/path/to/file',
+      profile_name: Rails.env)
+
+    Aws::<%= svc_name %>.new(credentials: credentials)
+
+The `:credentials` option should be one of the following types:
+
+* {Aws::Credentials}
+* {Aws::SharedCredentials}
+* {Aws::InstanceProfileCredentials}
+
+Alternatively, you configure credentials with `:access_key_id` and
+`:secret_access_key`:
+
+    # load credentials from disk
+    creds = YAML.load(File.read('/path/to/secrets'))
+
+    Aws::<%= svc_name %>.new(
+      access_key_id: creds['access_key_id'],
+      secret_access_key: creds['secret_access_key']
+    )
+
+**It is recommended to never configure credentials statically in your
+application.** This makes it difficult to rotate credentials and
+easy to commit to source control.
+
+## API Version
 
 Calling {new} will construct and return a versioned service client. The client
 will default to the most recent API version. You can also specify an API version:
@@ -34,5 +79,3 @@ The following API versions are available for Aws::<%= svc_name %>:
 
 <%= apis.map{ |a| "* {V#{a.version.gsub(/-/, '')} #{a.version}}" }.join("\n") %>
 
-You can specify the API version for the client by passing `:api_version` to {new}.
-  DOCSTRING
