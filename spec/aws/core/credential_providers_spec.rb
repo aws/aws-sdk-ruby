@@ -27,7 +27,9 @@ module AWS
 
         it 'raises an error when no credentials are present' do
           lambda {
-            DefaultProvider.new().credentials
+            default = DefaultProvider.new()
+            default.providers.pop # remove EC2Provider to keep test from failing on EC2
+            default.credentials
           }.should raise_error(Errors::MissingCredentialsError)
         end
 
