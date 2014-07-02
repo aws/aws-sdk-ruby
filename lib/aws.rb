@@ -53,7 +53,6 @@ module Aws
   end
 
   module Plugins
-    autoload :Credentials, "#{SRC}/plugins/credentials"
     autoload :DynamoDBExtendedRetries, "#{SRC}/plugins/dynamodb_extended_retries"
     autoload :EC2CopyEncryptedSnapshot, "#{SRC}/plugins/ec2_copy_encrypted_snapshot"
     autoload :GlacierAccountId, "#{SRC}/plugins/glacier_account_id"

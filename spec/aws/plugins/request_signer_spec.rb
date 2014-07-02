@@ -20,6 +20,8 @@ module Aws
         cfg
       }
 
+      it 'raises an error if you construct a client without credentials'
+
       describe 'sigv4 signing name' do
 
         it 'accepts a sigv4 signing name configuration option' do

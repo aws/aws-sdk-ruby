@@ -11,7 +11,6 @@ module Aws
         'Aws::Plugins::GlobalConfiguration',
         'Aws::Plugins::RegionalEndpoint',
         'Aws::Plugins::ResponsePaging',
-        'Aws::Plugins::Credentials',
         'Aws::Plugins::RequestSigner',
       ]
 
@@ -79,7 +78,7 @@ module Aws
       end
 
       customize 'cloudsearchdomain' do
-        remove_plugin 'Aws::Plugins::Credentials'
+        remove_plugin 'Aws::Plugins::RequestSigner'
         remove_plugin 'Aws::Plugins::RegionalEndpoint'
       end
 
