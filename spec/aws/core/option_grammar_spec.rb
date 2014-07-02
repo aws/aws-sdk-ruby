@@ -546,15 +546,11 @@ module AWS::Core
 
               it 'serializes maps of structures' do
                 grammar.request_params(:foo => {
-                  "ProductA" => { size: 'large', color: 'red' },
-                  "ProductB" => { size: 'small', color: 'blue' },
+                  "ProductA" => { :size => 'large', :color => 'red' },
                 }).should == [
                   Http::Request::Param.new("Foo.entry.1.key", "ProductA"),
                   Http::Request::Param.new("Foo.entry.1.value.Size", "large"),
                   Http::Request::Param.new("Foo.entry.1.value.Color", "red"),
-                  Http::Request::Param.new("Foo.entry.2.key", "ProductB"),
-                  Http::Request::Param.new("Foo.entry.2.value.Size", "small"),
-                  Http::Request::Param.new("Foo.entry.2.value.Color", "blue"),
                 ]
               end
 
@@ -583,15 +579,11 @@ module AWS::Core
 
               it 'serializes maps of structures' do
                 grammar.request_params(:foo => {
-                  "ProductA" => { size: 'large', color: 'red' },
-                  "ProductB" => { size: 'small', color: 'blue' },
+                  "ProductA" => { :size => 'large', :color => 'red' },
                 }).should == [
                   Http::Request::Param.new("Foo.1.ProductName", "ProductA"),
                   Http::Request::Param.new("Foo.1.Attributes.Size", "large"),
                   Http::Request::Param.new("Foo.1.Attributes.Color", "red"),
-                  Http::Request::Param.new("Foo.2.ProductName", "ProductB"),
-                  Http::Request::Param.new("Foo.2.Attributes.Size", "small"),
-                  Http::Request::Param.new("Foo.2.Attributes.Color", "blue"),
                 ]
               end
 
