@@ -6,7 +6,7 @@ module Aws
     #   for credentials:
     #
     #   * `:access_key_id`, `:secret_access_key`, and `:session_token` options
-    #   * ENV['AWS_ACCESS_KEY'], ENV['SECRET_ACCESS_KEY']
+    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #   * `HOME/.aws/credentials` shared credentials file
     #   * EC2 instance profile credentials
     #
@@ -72,10 +72,14 @@ module Aws
         }
 
         def call(context)
+          sign_authenticated_requests(context)
+          @handler.call(context)
+        end
+
+        def sign_authenticated_requests(context)
           if signer = SIGNERS[context.config.signature_version]
             signer.sign(context)
           end
-          @handler.call(context)
         end
 
       end
