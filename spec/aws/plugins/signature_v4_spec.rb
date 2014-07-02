@@ -2,9 +2,9 @@ require 'spec_helper'
 
 module Aws
   module Plugins
-    describe SignatureV4 do
+    describe RequestSigner do
 
-      let(:plugin) { SignatureV4.new }
+      let(:plugin) { RequestSigner.new }
 
       let(:api) {
         Seahorse::Model::Api.new(

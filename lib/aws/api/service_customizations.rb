@@ -12,6 +12,7 @@ module Aws
         'Aws::Plugins::RegionalEndpoint',
         'Aws::Plugins::ResponsePaging',
         'Aws::Plugins::Credentials',
+        'Aws::Plugins::RequestSigner',
       ]
 
       @customizations = Hash.new {|h,k| h[k] = [] }
@@ -51,7 +52,6 @@ module Aws
         def apply_plugins(client_class)
           apply_default_plugins(client_class)
           apply_protocol_plugin(client_class)
-          apply_signature_plugin(client_class)
         end
 
         def apply_default_plugins(client_class)
@@ -68,17 +68,6 @@ module Aws
           when 'json'      then Aws::Plugins::Protocols::JsonRpc
           when 'rest-json' then Aws::Plugins::Protocols::RestJson
           when 'rest-xml'  then Aws::Plugins::Protocols::RestXml
-          end
-          client_class.add_plugin(plugin) if plugin
-        end
-
-        def apply_signature_plugin(client_class)
-          signature_version = client_class.api.metadata('signatureVersion')
-          plugin = case signature_version
-          when 'v4'         then 'Aws::Plugins::SignatureV4'
-          when 'v3https'    then 'Aws::Plugins::SignatureV3'
-          when 'v2'         then 'Aws::Plugins::SignatureV2'
-          when 's3'         then 'Aws::Plugins::S3Signer'
           end
           client_class.add_plugin(plugin) if plugin
         end

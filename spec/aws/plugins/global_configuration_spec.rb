@@ -23,7 +23,7 @@ module Aws
         Aws::Svc.add_version(api.version, 'api' => api)
         Aws::Svc.remove_plugin(RegionalEndpoint)
         Aws::Svc.remove_plugin(Protocols::JsonRpc)
-        Aws::Svc.remove_plugin(SignatureV4)
+        Aws::Svc.remove_plugin(RequestSigner)
         Aws::Svc.add_plugin(GlobalConfiguration)
         Aws::Svc.add_plugin(plugin { option(:property, 'plugin-default') })
         allow(Aws).to receive(:config).and_return({})
