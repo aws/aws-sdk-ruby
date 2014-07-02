@@ -40,7 +40,7 @@ module Aws
       # Intentionally not documented - this should go away when all
       # services support signature version 4 in every region.
       option(:signature_version) do |cfg|
-        if cfg.region.match(/^cn-/)
+        if cfg.region.to_s.match(/^cn-/)
           'v4'
         else
           cfg.api.metadata('signatureVersion')
@@ -53,9 +53,9 @@ module Aws
 
       option(:sigv4_region) do |cfg|
         prefix = cfg.api.metadata('endpointPrefix')
-        if matches = cfg.endpoint.match(/#{prefix}[.-](.+)\.amazonaws\.com/)
+        if matches = cfg.endpoint.to_s.match(/#{prefix}[.-](.+)\.amazonaws\.com/)
           matches[1]
-        elsif cfg.endpoint.match(/#{prefix}\.amazonaws\.com/)
+        elsif cfg.endpoint.to_s.match(/#{prefix}\.amazonaws\.com/)
           'us-east-1'
         else
           cfg.region
