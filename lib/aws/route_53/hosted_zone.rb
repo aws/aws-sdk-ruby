@@ -28,6 +28,18 @@ module AWS
     #
     class HostedZone < Core::Resource
 
+      S3_HOSTED_ZONE_IDS = {
+          'us-east-1' => 'Z3AQBSTGFYJSTF',
+          'us-west-2' => 'Z3BJ6K6RIION7M',
+          'us-west-1' => 'Z2F56UZL2M1ACD',
+          'eu-west-1' => 'Z1BKCTXD74EZPE',
+          'ap-southeast-1' => 'Z3O0J2DXBE1FTB',
+          'ap-southeast-2' => 'Z1WCIGYICN2BYD',
+          'ap-northeast-1' => 'Z2M4EHUR26P7ZW',
+          'sa-east-1' => 'Z7KQH4QJS55SO',
+          'us-gov-west-1' => 'Z31GFT0UA1I2HV'
+      }
+
       # @api private
       def initialize id, options = {}
         @id = id.sub(%r!^/hostedzone/!, '')
