@@ -16,7 +16,7 @@ module Aws
         cfg = Seahorse::Client::Configuration.new
         cfg.add_option(:endpoint, 'svc-name.us-west-2.amazonaws.com')
         cfg.add_option(:api, api)
-        cfg.add_option(:region)
+        cfg.add_option(:region) { 'region-name' }
         cfg
       }
 
