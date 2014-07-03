@@ -193,7 +193,7 @@ module AWS
 
       # @return [Boolean] Returns `true` if the db instance exists.
       def exists?
-        fail AWS::RDS::Errors::DBInstanceNotFound if id.empty?
+        fail AWS::RDS::Errors::DBInstanceNotFound if id.to_s.empty?
         get_resource
         true
       rescue AWS::RDS::Errors::DBInstanceNotFound
