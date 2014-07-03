@@ -1,5 +1,3 @@
-require 'uri_template'
-
 module Seahorse
   module Client
     module Plugins
