@@ -89,14 +89,14 @@ module AWS
               lambda { client.send(method, opts) }.
                 should raise_error(klass)
             end
-  
+
             it "should raise an instance of #{kind}" do
               lambda { client.send(method, opts) }.
                 should raise_error(kind)
             end
-  
+
           end
-  
+
         end
 
       end
@@ -129,7 +129,7 @@ module AWS
       end
 
       context 'cors', :cors => true do
-  
+
         let(:xml) { <<-XML.strip.xml_cleanup }
 <CORSConfiguration>
   <CORSRule>
@@ -306,7 +306,7 @@ module AWS
             request.querystring.should eq('logging=')
 
           end
-          
+
         end
 
         context '#get_bucket_logging' do
@@ -1065,6 +1065,18 @@ module AWS
             color_header.should == 'red'
           end
 
+          context "When x-amz-* metadata is set" do
+            it "doesn't prefix special metadata keys" do
+              redirect_header = nil
+              client = with_http_handler do |req, resp|
+                redirect_header = req.headers['x-amz-website-redirect']
+              end
+
+              opts[:metadata] = { 'x-amz-website-redirect' => '/foo' }
+              client.send(method, opts)
+              redirect_header.should == '/foo'
+            end
+          end
         end
 
       end
