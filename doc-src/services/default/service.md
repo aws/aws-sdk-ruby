@@ -1,81 +1,28 @@
-A service client builder for <%= full_name %>.
+This module provides a client for making API requests to <%= full_name %>.
 
-# Configuration
+# Aws::<%= svc_name %>::Client
 
-You can provide default configuration options to `Aws.config` for
-all services, or for only this service. You can additionally provide
-configuration options to the constructor. Constructor options always
-take precedence.
+The {Aws::<%= svc_name %>::Client} class provides one-to-one mapping for each API operation.
 
-    # default region for all service
-    Aws.config[:region] = 'us-west-2'
+    <%= svc_name.downcase %> = Aws::<%= svc_name %>::Client.new(region: 'us-east-1')
+    <%= svc_name.downcase %>.operation_names
+    #=> [<%= default_api.operation_names[0..3].map(&:inspect).join(', ') %>, ...]
 
-    # default region for only this service
-    Aws.config[:<%= svc_name.downcase %>] = { region: 'us-west-1' }
+Each API operation method accepts a hash of request parameters and returns a response object.
 
-    # this has the highest precedence
-    Aws::<%= svc_name %>.new(region: 'us-east-1')
+    resp = <%= svc_name.downcase %>.<%= default_api.operation_names.first %>(params)
 
-At a minimum, you must configure `:region` and `:credentials`.
+See {Client} for more information.
 
-## Region
+# Aws::<%= svc_name %>::Errors
 
-If `ENV['AWS_REGION']` is set, this is used as the default region.
+Errors returned from <%= full_name %> are defined in the {Errors} module
+and extend {Aws::<%= svc_name %>::Errors::ServiceError}.
 
-The `:region` option is used to build the `:endpoint`. You can override the
-endpoint constructed from the region, but the region is still required for
-signing requests.
+    begin
+      # do stuff
+    rescue Aws::<%= svc_name %>::Errors::ServiceError
+      # rescues all errors returned by <%= full_name %>
+    end
 
-    <%= svc_name.downcase %> = Aws::<%= svc_name %>.new(region: 'us-west-1')
-    <%= svc_name.downcase %>.config.endpoint #=> <%= Aws::EndpointProvider.default_provider.resolve(service: default_api.metadata('endpointPrefix'), region:'us-west-1', scheme:'https').inspect %>
-
-## Credentials
-
-Credentials are used to sign requests sent to AWS. The Ruby SDK
-attempts to load credentials from the following locations:
-
-* From the instance profile when running on EC2
-* From AWS shared credentials file located at `ENV['HOME']/.aws/credentials`.
-* From `ENV['AWS_ACCESS_KEY_ID']` and `ENV['SECRET_ACCESS_KEY']`
-
-If credentials can not be found, they must be configured via `:credentials`:
-
-    credentials = Aws::SharedCredentials.new(
-      path: '/path/to/file',
-      profile_name: Rails.env)
-
-    Aws::<%= svc_name %>.new(credentials: credentials)
-
-The `:credentials` option should be one of the following types:
-
-* {Aws::Credentials}
-* {Aws::SharedCredentials}
-* {Aws::InstanceProfileCredentials}
-
-Alternatively, you configure credentials with `:access_key_id` and
-`:secret_access_key`:
-
-    # load credentials from disk
-    creds = YAML.load(File.read('/path/to/secrets'))
-
-    Aws::<%= svc_name %>.new(
-      access_key_id: creds['access_key_id'],
-      secret_access_key: creds['secret_access_key']
-    )
-
-**It is recommended to never configure credentials statically in your
-application.** This makes it difficult to rotate credentials and
-easy to commit to source control.
-
-## API Version
-
-Calling {new} will construct and return a versioned service client. The client
-will default to the most recent API version. You can also specify an API version:
-
-    <%= svc_name.downcase %> = Aws::<%= svc_name %>.new # Aws::<%= svc_name %>::V<%= default_api.version.gsub(/-/, '') %>
-    <%= svc_name.downcase %> = Aws::<%= svc_name %>.new(api_version: '<%= oldest_api.version %>') # Aws::<%= svc_name %>::V<%= oldest_api.version.gsub(/-/, '') %>
-
-The following API versions are available for Aws::<%= svc_name %>:
-
-<%= apis.map{ |a| "* {V#{a.version.gsub(/-/, '')} #{a.version}}" }.join("\n") %>
-
+See {Errors} for more information.
