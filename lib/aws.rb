@@ -8,6 +8,7 @@ module Aws
 
   @config = {}
 
+  autoload :Client, "#{SRC}/client"
   autoload :CredentialProviderChain, "#{SRC}/credential_provider_chain"
   autoload :Credentials, "#{SRC}/credentials"
   autoload :EmptyStructure, "#{SRC}/empty_structure"
@@ -131,8 +132,8 @@ module Aws
     # @param [Plugin] plugin
     # @return [void]
     def add_plugin(plugin)
-      service_classes.values.each do |svc_class|
-        svc_class.add_plugin(plugin)
+      service_modules.values.each do |svc_mod|
+        svc_mod.const_get(:Client).add_plugin(plugin)
       end
     end
 
@@ -141,15 +142,15 @@ module Aws
     # @param [Plugin] plugin
     # @return [void]
     def remove_plugin(plugin)
-      service_classes.values.each do |svc_class|
-        svc_class.remove_plugin(plugin)
+      service_modules.values.each do |svc_mod|
+        svc_mod.const_get(:Client).remove_plugin(plugin)
       end
     end
 
-    # @return [Array<Class>]
+    # @return [Hash<Symbol,Module>]
     # @api private
-    def service_classes
-      @service_classes ||= {}
+    def service_modules
+      @service_modules ||= {}
     end
 
     # Registers a new service interface.  This method accepts a constant
@@ -171,20 +172,24 @@ module Aws
     # You can register multiple API versions for a service, and
     #
     # @param [String] name The name of the new service class.
-    # @param [Hash] versions
+    # @param [Hash<YYYY-MM-DD,Hash>] versions A hash of API versions.  Hash
+    #   keys are API version dates, and values are hashes of:
+    #   * 'api' - path to API defintion
+    #   * 'paginators' - path to paginator defintion
     # @return [class<Service>]
     def add_service(name, versions = {})
-      svc = const_set(name, Service.define(name.downcase.to_sym, versions))
-      add_helper(svc.identifier, svc)
+      identifier = name.to_s.downcase.to_sym
+      svc = const_set(name, Service.define(identifier, versions))
+      add_helper(identifier, svc)
       svc
     end
 
     private
 
-    def add_helper(method_name, svc_class)
-      service_classes[method_name] = svc_class
+    def add_helper(method_name, svc_mod)
+      service_modules[method_name] = svc_mod
       define_method(method_name) do |options = {}|
-        svc_class.new(options)
+        svc_mod.const_get(:Client).new(options)
       end
       module_function(method_name)
     end

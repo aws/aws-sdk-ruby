@@ -127,10 +127,10 @@ module Aws
 
             # build the test service class by sub-classing the original
             # service class
-            svc_class = Aws.service_classes[svc_name.to_sym]
+            client_class = Aws.service_modules[svc_name.to_sym]::Client
 
-            svc = svc_class.new(f.config.merge(raise_response_errors: false))
-            req = svc.build_request(f.operation, f.params)
+            client = client_class.new(f.config.merge(raise_response_errors: false))
+            req = client.build_request(f.operation, f.params)
             req.handler(FixtureHandler, step: :send)
             req.context.metadata[:fixture] = f
             resp = req.send_request

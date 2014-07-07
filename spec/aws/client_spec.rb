@@ -1,11 +1,7 @@
 require 'spec_helper'
 
 module Aws
-  describe Service do
-
-    before(:each) do
-      stub_const('Aws::Api::ServiceCustomizations::DEFAULT_PLUGINS', [])
-    end
+  describe Client do
 
     let(:api_older) {
       Seahorse::Model::Api.new('metadata' => { 'apiVersion' => '2013-01-01'})
@@ -20,10 +16,14 @@ module Aws
       api_older.version => { 'api' => api_older },
     }}
 
+    before(:each) do
+      allow(Aws).to receive(:config).and_return({ region: 'us-east-1' })
+    end
+
     describe 'default_client_class' do
 
       it 'returns a client with the default api version' do
-        svc = Service.define(:name, apis)
+        svc = Client.define(:name, apis)
         allow(svc).to receive(:default_api_version).and_return(api_older.version)
         expect(svc.default_client_class.api).to be(api_older)
       end
@@ -33,13 +33,13 @@ module Aws
     describe 'add_version' do
 
       it 'registers a new API version' do
-        svc = Class.new(Service)
+        svc = Class.new(Client)
         svc.add_version('2013-01-02', 'path/to/api.json')
         expect(svc.api_versions).to eq(['2013-01-02'])
       end
 
       it 'can be called multiple times' do
-        svc = Class.new(Service)
+        svc = Class.new(Client)
         svc.add_version('2013-02-03', 'path/to/api2.json')
         svc.add_version('2013-01-02', 'path/to/api1.json')
         expect(svc.api_versions).to eq(['2013-01-02', '2013-02-03'])
@@ -47,7 +47,7 @@ module Aws
       end
 
       it 'treats the newest api version as the default' do
-        svc = Class.new(Service)
+        svc = Client.define(:identifier)
         svc.add_version('2013-02-03', 'path/to/api2.json')
         svc.add_version('2013-01-02', 'path/to/api1.json')
         expect(svc.default_api_version).to eq(svc.latest_api_version)
@@ -59,7 +59,7 @@ module Aws
 
       it 'adds a plugin to each versioned client class' do
         plugin = double('plugin')
-        svc = Service.define(:name, apis)
+        svc = Client.define(:name, apis)
         svc.add_plugin(plugin)
         svc.versioned_clients.each do |klass|
           expect(klass.plugins).to include(plugin)
@@ -72,7 +72,7 @@ module Aws
 
       it 'removes a plugin from each versioned client class' do
         plugin = double('plugin')
-        svc = Service.define(:name, apis)
+        svc = Client.define(:name, apis)
         svc.add_plugin(plugin)
         svc.remove_plugin(plugin)
         svc.versioned_clients.each do |klass|
@@ -86,85 +86,81 @@ module Aws
 
       let(:apis) { [] }
 
-      let(:svc) { Aws.add_service(:SvcName, apis) }
+      let(:client_class) { Client.define(:svcname, apis) }
 
       before(:each) do
         Aws.send(:remove_const, :SvcName) if Aws.const_defined?(:SvcName)
       end
 
       it 'defines a new client factory' do
-        expect(svc.ancestors).to include(Service)
+        expect(client_class.ancestors).to include(Client)
       end
 
-      it 'populates the method name' do
-        expect(svc.identifier).to eq(:svcname)
+      it 'populates the identifier' do
+        expect(client_class::IDENTIFIER).to eq(:svcname)
       end
 
       it 'accepts apis as a path to an api' do
         today = Time.now.strftime('%Y-%m-%d')
-        svc.add_version(today, 'api' => 'apis/s3-2006-03-01.api.json')
-        svc.new(api_version: today)
+        client_class.add_version(today, 'api' => 'apis/s3-2006-03-01.api.json')
+        client_class.new(api_version: today)
       end
 
       it 'accepts apis as a hash' do
         today = Time.now.strftime('%Y-%m-%d')
         api = MultiJson.load(File.read('apis/s3-2006-03-01.api.json'))
-        svc.add_version(today, 'api' => api)
-        svc.new(api_version: today)
+        client_class.add_version(today, 'api' => api)
+        client_class.new(api_version: today)
       end
 
       it 'accepts apis as a hash' do
         today = Time.now.strftime('%Y-%m-%d')
         api = MultiJson.load(File.read('apis/s3-2006-03-01.api.json'))
-        svc.add_version(today, 'api' => api)
-        svc.new(api_version: today)
+        client_class.add_version(today, 'api' => api)
+        client_class.new(api_version: today)
       end
 
       it 'accepts apis as Seahorse::Model::Api' do
         api = Seahorse::Model::Api.new('metadata' => {
           'apiVersion' => '2013-01-02'
         })
-        svc = Service.define(:svc, { api.version => { 'api' => api }})
-        expect(svc.const_get(:V20130102).new.config.api).to be(api)
+        client = Client.define(:svc, { api.version => { 'api' => api }})
+        expect(client.const_get(:V20130102).new.config.api).to be(api)
       end
 
     end
 
     describe 'new' do
 
-      before(:each) do
-        Aws.send(:remove_const, :SvcName) if Aws.const_defined?(:SvcName)
-      end
-
       after(:each) do
         Aws.config = {}
       end
 
       it 'builds the client class with the latest api version by default' do
-        svc = Aws.add_service(:SvcName, apis)
-        expect(svc.new.config.api).to be(api_newer)
-        expect(svc.new).to be_kind_of(svc.const_get(:V20130202))
+        client_class = Client.define(:svcname, apis)
+        expect(client_class.new.config.api).to be(api_newer)
+        expect(client_class.new).to be_kind_of(client_class.const_get(:V20130202))
       end
 
       it 'defaults to the global configured version for the client' do
         Aws.config[:svcname] = { api_version: api_older.version }
-        svc = Aws.add_service(:SvcName, apis)
-        expect(svc.new.config.api).to be(api_older)
-        expect(svc.new).to be_kind_of(svc.const_get(:V20130101))
+        client_class = Client.define(:svcname, apis)
+        expect(client_class.new.config.api).to be(api_older)
+        expect(client_class.new).to be_kind_of(client_class.const_get(:V20130101))
       end
 
       it 'accepts the api verison as a constructor option' do
         Aws.config[:svcname] = { api_version: api_older.version }
-        svc = Aws.add_service(:SvcName, apis)
-        client = svc.new(api_version: api_newer.version)
+        client_class = Client.define(:svcname, apis)
+        client = client_class.new(api_version: api_newer.version)
         expect(client.config.api).to be(api_newer)
-        expect(client).to be_kind_of(svc.const_get(:V20130202))
+        expect(client).to be_kind_of(client_class.const_get(:V20130202))
       end
 
       it 'uses the closest version without going over' do
         Aws.config[:api_version] = '2013-01-15'
-        svc = Aws.add_service(:SvcName, apis)
-        expect(svc.new.class).to be(svc.const_get(:V20130101))
+        client_class = Client.define(:svcname, apis)
+        expect(client_class.new.class).to be(client_class.const_get(:V20130101))
       end
 
       it 'raises an error if the global version is preceedes all versions' do
@@ -176,23 +172,15 @@ module Aws
       end
 
       it 'merges global defaults options when constructing the client' do
-        Aws::EC2.add_plugin(Plugins::GlobalConfiguration)
-        Aws::EC2.add_plugin(Plugins::RegionalEndpoint)
-        Aws::S3.add_plugin(Plugins::GlobalConfiguration)
-        Aws::S3.add_plugin(Plugins::RegionalEndpoint)
+        # default region for all services
+        Aws.config[:endpoint] = 'foo'
+        expect(Aws::EC2::Client.new.config.endpoint).to eq('foo')
+        expect(Aws::S3::Client.new.config.endpoint).to eq('foo')
 
-        # shared default
-        Aws.config = { region: 'us-east-1' }
-        expect(Aws::EC2.new.config.region).to eq('us-east-1')
-        expect(Aws::S3.new.config.region).to eq('us-east-1')
-
-        # default enabled, s3 disables
-        Aws.config = {
-          region: 'us-east-1',
-          s3: { region: 'us-west-2' }
-        }
-        expect(Aws::EC2.new.config.region).to eq('us-east-1')
-        expect(Aws::S3.new.config.region).to eq('us-west-2')
+        # override s3 default region
+        Aws.config[:s3] = { endpoint: 'bar' }
+        expect(Aws::EC2::Client.new.config.endpoint).to eq('foo')
+        expect(Aws::S3::Client.new.config.endpoint).to eq('bar')
       end
 
     end
@@ -200,7 +188,7 @@ module Aws
     describe 'client classes' do
 
       it 'returns each client class from .versioned_clients' do
-        svc = Service.define(:name, apis)
+        svc = Client.define(:name, apis)
         expect(svc.versioned_clients).to eq([
           svc.const_get(:V20130101),
           svc.const_get(:V20130202),
@@ -209,26 +197,26 @@ module Aws
 
       it 'defines clients for each api version' do
         target = Seahorse::Client::Base
-        c = Service.define(:name, apis)
+        c = Client.define(:name, apis)
         expect(c.const_get(:V20130101).ancestors).to include(target)
       end
 
       it 'raises an error if the asked for client class does not exist' do
-        svc = Service.define(:name)
+        svc = Client.define(:name)
         expect {
           svc.const_get(:V20001012)
         }.to raise_error(Errors::NoSuchApiVersionError)
       end
 
       it 'raises a helpful error when the api is not defined' do
-        svc = Service.define(:name)
+        svc = Client.define(:name)
         expect {
           svc.const_get(:V20001012)
         }.to raise_error("API 2000-10-12 not defined for #{svc.name}")
       end
 
       it 'does not interfere with const missing' do
-        svc = Service.define(:name)
+        svc = Client.define(:name)
         expect {
           svc.const_get(:FooBar)
         }.to raise_error(NameError, /uninitialized constant/)
