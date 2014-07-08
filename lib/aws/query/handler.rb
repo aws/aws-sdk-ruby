@@ -18,26 +18,26 @@ module Aws
 
       def build_request(context)
         context.http_request.headers['Content-Type'] = CONTENT_TYPE
-        query_params = ParamList.new
-        query_params.set('Version', context.config.api.version)
-        query_params.set('Action', context.operation.name)
+        param_list = ParamList.new
+        param_list.set('Version', context.config.api.version)
+        param_list.set('Action', context.operation.name)
         if input_shape = context.operation.input
-          ParamBuilder.new(query_params).apply(input_shape, context.params)
+          apply_params(param_list, context.params, input_shape)
         end
-        context.http_request.body = query_params.to_io
+        context.http_request.body = param_list.to_io
+      end
+
+      def apply_params(param_list, params, rules)
+        ParamBuilder.new(param_list).apply(rules, params)
       end
 
       def parse_xml(context)
-        output_shape = context.operation.output
-        case
-        when output_shape.nil?
-          EmptyStructure.new
-        when output_shape.metadata('resultWrapper')
-          output_shape = apply_wrapper(output_shape)
-          data = Xml::Parser.new(output_shape).parse(xml(context))
+        if rules = context.operation.output
+          rules = apply_wrapper(rules)
+          data = Xml::Parser.new(rules).parse(xml(context))
           remove_wrapper(data, context)
         else
-          Xml::Parser.new(output_shape).parse(xml(context))
+          EmptyStructure.new
         end
       end
 

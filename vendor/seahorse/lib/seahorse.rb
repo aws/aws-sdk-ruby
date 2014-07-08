@@ -11,6 +11,7 @@ module Seahorse
     autoload :Handler, 'seahorse/client/handler'
     autoload :HandlerBuilder, 'seahorse/client/handler_builder'
     autoload :HandlerList, 'seahorse/client/handler_list'
+    autoload :HandlerListEntry, 'seahorse/client/handler_list_entry'
     autoload :ManagedFile, 'seahorse/client/managed_file'
     autoload :ParamConverter, 'seahorse/client/param_converter'
     autoload :ParamValidator, 'seahorse/client/param_validator'

@@ -2,7 +2,7 @@ require 'base64'
 
 module Aws
   module Query
-    class ParamBuilder
+    class EC2ParamBuilder
 
       # @param [ParamList] param_list
       def initialize(param_list)
@@ -40,33 +40,10 @@ module Aws
       def list(list, values, prefix)
         if values.empty?
           set(prefix, '')
-          return
-        end
-        if flat?(list)
-          if name = query_name(list.member)
-            parts = prefix.split('.')
-            parts.pop
-            parts.push(name)
-            prefix = parts.join('.')
-          end
         else
-          prefix += '.member'
-        end
-        values.each.with_index do |value, n|
-          format(list.member, value, "#{prefix}.#{n+1}")
-        end
-      end
-
-      # @param [Seahorse::Model::Shapes::Map] map
-      # @param [Hash] values
-      # @param [String] prefix
-      def map(map, values, prefix)
-        prefix += '.entry' unless flat?(map)
-        key_name = "%s.%d.#{query_name(map.key, 'key')}"
-        value_name  = "%s.%d.#{query_name(map.value, 'value')}"
-        values.each.with_index do |(key, value), n|
-          format(map.key, key, key_name % [prefix, n + 1])
-          format(map.value, value, value_name % [prefix, n + 1])
+          values.each.with_index do |value, n|
+            format(list.member, value, "#{prefix}.#{n+1}")
+          end
         end
       end
 
@@ -77,7 +54,7 @@ module Aws
         case shape.type
         when 'structure' then structure(shape, value, prefix + '.')
         when 'list'      then list(shape, value, prefix)
-        when 'map'       then map(shape, value, prefix)
+        when 'map'       then raise NotImplementedError
         when 'blob'      then set(prefix, Base64.strict_encode64(value))
         when 'timestamp'
           set(prefix, shape.format_time(value, 'iso8601').to_s)
@@ -86,16 +63,16 @@ module Aws
         end
       end
 
-      def query_name(shape, default = nil)
-        shape.location_name || default
+      def query_name(shape)
+        shape.metadata('queryName') || ucfirst(shape.location_name)
       end
 
       def set(name, value)
         params.set(name, value)
       end
 
-      def flat?(shape)
-        !!shape.metadata('flattened')
+      def ucfirst(str)
+        str[0].upcase + str[1..-1]
       end
 
     end

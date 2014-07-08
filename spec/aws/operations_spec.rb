@@ -62,14 +62,9 @@ module Aws
 
     class FixtureHandler < Seahorse::Client::Handler
 
-      def initialize(fixture)
-        @f = fixture
-      end
-
-      attr_accessor :handler, :f
-
       def call(context)
         response = Seahorse::Client::Response.new(context: context)
+        f = context.metadata[:fixture]
         if f.response
           context.http_response.status_code = f.response.status_code
           context.http_response.headers = f.response.headers
@@ -127,30 +122,21 @@ module Aws
           fixture_name = path.split('/')[-1][0..-5]
 
           it(fixture_name) do
-            begin
-              # load the fixture from disk
-              f = OperationFixture.load(svc_name, fixture_name)
+            # load the fixture from disk
+            f = OperationFixture.load(svc_name, fixture_name)
 
-              # remove the plugin that raises errors
-              Aws.service_classes[svc_name.to_sym].remove_plugin(
-                Seahorse::Client::Plugins::RaiseResponseErrors)
+            # build the test service class by sub-classing the original
+            # service class
+            client_class = Aws.service_modules[svc_name.to_sym]::Client
 
-              # build the service interface
-              svc = Aws.send(svc_name, f.config)
+            client = client_class.new(f.config.merge(raise_response_errors: false))
+            req = client.build_request(f.operation, f.params)
+            req.handler(FixtureHandler, step: :send)
+            req.context.metadata[:fixture] = f
+            resp = req.send_request
 
-              # build the request
-              req = svc.build_request(f.operation, f.params)
-              req.handler(f.handler, step: :send)
-
-              # send the request
-              resp = req.send_request
-
-              request_assertions(f, resp.context.http_request)
-              response_assertions(f, resp)
-            ensure
-              Aws.service_classes[svc_name.to_sym].add_plugin(
-                Seahorse::Client::Plugins::RaiseResponseErrors)
-            end
+            request_assertions(f, resp.context.http_request)
+            response_assertions(f, resp)
           end
         end
       end

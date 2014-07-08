@@ -16,6 +16,11 @@
       "api": "apis/cloudfront-2014-01-31.api.json",
       "paginators": "apis/cloudfront-2014-01-31.paginators.json",
       "waiters": "apis/cloudfront-2014-01-31.waiters.json"
+    },
+    "2014-05-31": {
+      "api": "apis/cloudfront-2014-05-31.api.json",
+      "paginators": "apis/cloudfront-2014-05-31.paginators.json",
+      "waiters": "apis/cloudfront-2014-05-31.waiters.json"
     }
   },
   "CloudSearch": {
@@ -26,6 +31,11 @@
     "2013-01-01": {
       "api": "apis/cloudsearch-2013-01-01.api.json",
       "paginators": "apis/cloudsearch-2013-01-01.paginators.json"
+    }
+  },
+  "CloudSearchDomain": {
+    "2013-01-01": {
+      "api": "apis/cloudsearchdomain-2013-01-01.api.json"
     }
   },
   "CloudTrail": {

@@ -2,9 +2,9 @@ require 'spec_helper'
 
 module Aws
   module Plugins
-    describe SignatureV4 do
+    describe RequestSigner do
 
-      let(:plugin) { SignatureV4.new }
+      let(:plugin) { RequestSigner.new }
 
       let(:api) {
         Seahorse::Model::Api.new(
@@ -16,9 +16,28 @@ module Aws
         cfg = Seahorse::Client::Configuration.new
         cfg.add_option(:endpoint, 'svc-name.us-west-2.amazonaws.com')
         cfg.add_option(:api, api)
-        cfg.add_option(:region)
+        cfg.add_option(:region) { 'region-name' }
         cfg
       }
+
+      it 'raises an error if you construct a client without credentials' do
+        # remove env credentials
+        stub_const("ENV", {})
+
+        # disable loading credentials from shared file
+        allow(Dir).to receive(:home).and_raise(ArgumentError)
+
+        # disable instance profile credentials
+        path = '/latest/meta-data/iam/security-credentials/'
+        stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
+
+        klass = Class.new(Seahorse::Client::Base)
+        klass.add_plugin(RegionalEndpoint)
+        klass.add_plugin(RequestSigner)
+        expect {
+          klass.new(region:'region-name')
+        }.to raise_error(Errors::MissingCredentialsError)
+      end
 
       describe 'sigv4 signing name' do
 

@@ -156,7 +156,7 @@ module Aws
 
       describe 'Handler' do
 
-        let(:credentials) { Credentials.new }
+        let(:credentials) { Credentials.new('akid', 'secret') }
 
         let(:config) {
           cfg = Seahorse::Client::Configuration.new

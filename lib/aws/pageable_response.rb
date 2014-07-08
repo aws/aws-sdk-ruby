@@ -37,13 +37,13 @@ module Aws
     include Enumerable
 
     # @param [Seahorse::Client::Response] response
-    # @param [PagingProvider::Pager] pager
+    # @param [Paging::Pager] pager
     def initialize(response, pager)
       @pager = pager
       super(context:response.context, data:response.data, error:response.error)
     end
 
-    # @return [PagingProvider::Pager]
+    # @return [Paging::Pager]
     attr_reader :pager
 
     # Returns `true` if there are no more results.  Calling {#next_page}

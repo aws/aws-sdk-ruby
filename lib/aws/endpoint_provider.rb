@@ -19,6 +19,7 @@ module Aws
       service_rules(options[:service].to_s).each do |rule|
         return rule.apply(options) if rule.matches?(options)
       end
+      nil
     end
 
     # Removes all rules.
@@ -43,7 +44,7 @@ module Aws
     # gives it higest priority. Service specific rules are matches before
     # default rules.
     # @param [String] service The endpoint prefix of the service.
-    # @param [Rules] rule
+    # @param [Rule] rule
     # @return [void]
     def prepend_service_rule(service, rule)
       @rules[service].unshift(rule)
@@ -54,10 +55,20 @@ module Aws
     # default rules.
     # service specific rules.
     # @param [String] service The endpoint prefix of the service.
-    # @param [Rules] rule
+    # @param [Rule] rule
     # @return [void]
     def append_service_rule(service, rule)
       @rules[service].push(rule)
+    end
+
+    # Appends the given rule to each service and as a default rule, giving
+    # it the highest priority.
+    # @param [Rule] rule
+    # @return [void]
+    def prepend_all(rule)
+      @rules.keys.each do |svc|
+        prepend_service_rule(svc, rule)
+      end
     end
 
     private

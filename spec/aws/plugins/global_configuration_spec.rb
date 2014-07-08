@@ -19,13 +19,13 @@ module Aws
           'protocol' => 'json',
           'signatureVersion' => 'v4',
         })
-        Aws.add_service(:Svc)
-        Aws::Svc.add_version(api.version, 'api' => api)
-        Aws::Svc.remove_plugin(RegionalEndpoint)
-        Aws::Svc.remove_plugin(Protocols::JsonRpc)
-        Aws::Svc.remove_plugin(SignatureV4)
-        Aws::Svc.add_plugin(GlobalConfiguration)
-        Aws::Svc.add_plugin(plugin { option(:property, 'plugin-default') })
+        svc = Aws.add_service(:Svc)::Client
+        svc.add_version(api.version, 'api' => api)
+        svc.remove_plugin(RegionalEndpoint)
+        svc.remove_plugin(Protocols::JsonRpc)
+        svc.remove_plugin(RequestSigner)
+        svc.add_plugin(GlobalConfiguration)
+        svc.add_plugin(plugin { option(:property, 'plugin-default') })
         allow(Aws).to receive(:config).and_return({})
       end
 

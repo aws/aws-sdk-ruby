@@ -40,6 +40,7 @@ def client_for(suite, test_case)
   client_class.add_plugin(Seahorse::Client::Plugins::RestfulBindings)
   client_class.add_plugin(
     case protocol
+    when 'ec2'       then Aws::Plugins::Protocols::EC2
     when 'query'     then Aws::Plugins::Protocols::Query
     when 'json'      then Aws::Plugins::Protocols::JsonRpc
     when 'rest-json' then Aws::Plugins::Protocols::RestJson
@@ -111,7 +112,7 @@ def match_req_body(group, suite, test_case, http_req)
     group.it "serializes the #{protocol} body correctly" do
       body = http_req.body_contents
       case protocol
-      when 'query'
+      when 'query', 'ec2'
         body = body.split('&').sort.join('&')
         expected_body = expected_body.split('&').sort.join('&')
       when 'json'

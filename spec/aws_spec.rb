@@ -24,9 +24,11 @@ module Aws
   describe 'add_plugin' do
 
     it 'adds a plugin to every client for all services' do
-      klass = double('service-class')
-      expect(klass).to receive(:add_plugin).with('p')
-      expect(Aws).to receive(:service_classes).and_return(klass: klass)
+      client_class = double('client-class')
+      svc_module = Module.new
+      svc_module.const_set(:Client, client_class)
+      allow(Aws).to receive(:service_modules).and_return(klass: svc_module)
+      expect(svc_module::Client).to receive(:add_plugin).with('p')
       Aws.add_plugin('p')
     end
 
@@ -35,9 +37,11 @@ module Aws
   describe 'remove_plugin' do
 
     it 'removes a plugin from every client for each service' do
-      klass = double('service-class')
-      expect(klass).to receive(:remove_plugin).with('p')
-      expect(Aws).to receive(:service_classes).and_return(klass: klass)
+      client_class = double('client-class')
+      svc_module = Module.new
+      svc_module.const_set(:Client, client_class)
+      allow(Aws).to receive(:service_modules).and_return(klass: svc_module)
+      expect(svc_module::Client).to receive(:remove_plugin).with('p')
       Aws.remove_plugin('p')
     end
 
@@ -46,7 +50,7 @@ module Aws
   describe 'add_service' do
 
     before(:each) do
-      Aws.config[:region] = 'us-east-1'
+      Aws.config[:region] = 'region-name'
     end
 
     after(:each) do
@@ -64,7 +68,7 @@ module Aws
         '2006-03-01' => { 'api' => 'apis/S3-2006-03-01.api.json' },
       })
       svc = Aws.dummyservice(http_wire_trace: true, credentials: dummy_credentials)
-      expect(Aws::DummyService.api_versions).to eq(['2006-03-01'])
+      expect(Aws::DummyService::Client.api_versions).to eq(['2006-03-01'])
       expect(svc).to be_kind_of(Seahorse::Client::Base)
       expect(svc.config.api).to be_kind_of(Seahorse::Model::Api)
       expect(svc.config.http_wire_trace).to be(true)

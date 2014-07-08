@@ -23,9 +23,6 @@ module Seahorse
         @pools_mutex = Mutex.new
         @pools = {}
 
-        DEFAULT_CERT_BUNDLE = File.expand_path(File.join(
-          File.dirname(__FILE__), '..', '..', '..', '..', 'ca-bundle.crt'))
-
         OPTIONS = {
           http_proxy: nil,
           http_open_timeout: 15,
@@ -35,7 +32,7 @@ module Seahorse
           http_wire_trace: false,
           logger: nil,
           ssl_verify_peer: true,
-          ssl_ca_bundle: DEFAULT_CERT_BUNDLE,
+          ssl_ca_bundle: nil,
           ssl_ca_directory: nil,
         }
 
