@@ -58,6 +58,8 @@ module AWS
 
       attribute :dkim_verification_status
 
+      mutable_attribute :delivery_topic_arn, :from => :delivery_topic
+
       mutable_attribute :bounce_topic_arn, :from => :bounce_topic
 
       mutable_attribute :complaint_topic_arn, :from => :complaint_topic
@@ -73,6 +75,7 @@ module AWS
       end
 
       provider(:get_identity_notification_attributes) do |provider|
+        provider.provides :delivery_topic_arn
         provider.provides :bounce_topic_arn
         provider.provides :complaint_topic_arn
         provider.provides :forwarding_enabled
@@ -93,6 +96,20 @@ module AWS
           resp[:dkim_tokens]
         else
           raise "unable to verify dkim for an email address"
+        end
+      end
+
+      # @param [String,SNS::Topic] topic The topic (ARN string or topic
+      #   object) that delivery notifications should be published to.
+      def delivery_topic= topic
+        arn = topic.respond_to?(:arn) ? topic.arn : topic
+        self.delivery_topic_arn = arn
+      end
+
+      # @return [SNS::Topic,nil]
+      def delivery_topic
+        if arn = delivery_topic_arn
+          SNS::Topic.new(arn, :config => config)
         end
       end
 
@@ -185,6 +202,10 @@ module AWS
         client_opts = {}
         client_opts[:identity] = identity
         case attr.name
+        when :delivery_topic_arn
+            method = :set_identity_notification_topic
+            client_opts[:notification_type] = 'Delivery'
+            client_opts[:sns_topic] = value if value
         when :bounce_topic_arn
           method = :set_identity_notification_topic
           client_opts[:notification_type] = 'Bounce'
