@@ -26,9 +26,9 @@ module Aws
 
       # Specifies the maximum number of items to enumerate.
       #
-      #   collection.limit(10).each do |resource|
-      #     # yields at most 10 times
-      #   end
+      #     collection.limit(10).each do |resource|
+      #       # yields at most 10 times
+      #     end
       #
       # @param [Integer] limit The maximum number of items to yield
       #   via {#each} or {#batches}.
