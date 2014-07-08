@@ -11,6 +11,16 @@
 #     into the instance_attributes[:client] = { :read => m } and marking
 #     parent attr_reader as @api private
 #
+# TODOs
+#
+# - Document batch operations in the Resource class docstring
+# - Document operation inputs, subtracting provided inputs
+# - Add operation level documentation to the resource JSON that can be
+#   included with each operation docs
+# - Document resource constructors
+# - Investigate adding @see tags to related operations
+# - Investigate grouping related operations
+#
 
 require 'aws-sdk-resources'
 
