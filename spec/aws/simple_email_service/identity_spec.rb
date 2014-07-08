@@ -35,6 +35,42 @@ module AWS
             client.stub(:get_identity_notification_attributes).and_return(resp)
           end
 
+          context '#delivery_topic_arn' do
+
+            it 'calls #get_identity_notification_attributes on the client' do
+              client.should_receive(:get_identity_notification_attributes).
+                with(:identities => [identity.identity]).
+                and_return(resp)
+              identity.delivery_topic_arn
+            end
+
+            it 'returns the delivery notification topic arn' do
+              attributes[:delivery_topic] = 'delivery-arn'
+              identity.delivery_topic_arn.should eq('delivery-arn')
+            end
+
+            it 'returns nil when not present' do
+              attributes.delete(:delivery_topic)
+              identity.delivery_topic_arn.should eq(nil)
+            end
+
+            it 'is mutable' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Delivery',
+                :sns_topic => 'arn')
+              identity.delivery_topic_arn = 'arn'
+            end
+
+            it 'accepts nil' do
+              client.should_receive(:set_identity_notification_topic).with(
+                :identity => identity.identity,
+                :notification_type => 'Delivery')
+              identity.delivery_topic_arn = nil
+            end
+
+          end
+
           context '#bounce_topic_arn' do
 
             it 'calls #get_identity_notification_attributes on the client' do
@@ -480,7 +516,7 @@ module AWS
             client.should_receive(:verify_domain_dkim).
               with(:domain => identity.identity).
               and_return(resp)
-              
+
             identity.verify_dkim
 
           end
