@@ -8,7 +8,8 @@ module Aws
     class Definition
 
       # @param [Hash] source
-      def initialize(source, options = {})
+      def initialize(namespace, source, options = {})
+        @namespace = namespace
         @source = source
         @source_path = options[:path]
       end
@@ -42,7 +43,7 @@ module Aws
         each_resource do |name, definition|
           resource_class = resource_class(name, client_class, definition)
           resource_class.const_set(:Batch, Class.new(Resource::Batch))
-          service.const_set(name, resource_class)
+          @namespace.const_set(name, resource_class)
         end
         service
       end
@@ -68,7 +69,7 @@ module Aws
       def define_operations(service)
         define_resource_operations(service, service, svc_definition)
         each_resource do |name, definition|
-          define_resource_operations(service, service.const_get(name), definition)
+          define_resource_operations(service, @namespace.const_get(name), definition)
         end
       end
 
@@ -119,7 +120,7 @@ module Aws
         end
 
         top_level_resources.each do |name|
-          resource_class = service.const_get(name)
+          resource_class = @namespace.const_get(name)
           if resource_class.identifiers.count == 1
             add_sub_resoruce_reference(service, name, service, name, {})
           end
@@ -129,8 +130,8 @@ module Aws
       def define_batch_operations(service)
         each_resource do |resource_name, resoruce_definition|
           if actions = resoruce_definition['batchActions']
-            resource_class = service.const_get(resource_name)
-            batch_class = resource_class.const_get(:Batch)
+            resource_class = @namespace.const_get(resource_name)
+            batch_class = @namespace.const_get(:Batch)
             actions.each do |name, definition|
               method_name = underscore(name)
               operation = build_operation(service, resource_class, definition)
@@ -156,7 +157,7 @@ module Aws
         operation = Operations::ReferenceOperation.new(
           builder: builder,
           source: source(reference))
-        from = service.const_get(from) unless from.is_a?(Class)
+        from = @namespace.const_get(from) unless from.is_a?(Class)
         from.add_operation(underscore(name), operation)
       end
 
@@ -310,7 +311,7 @@ module Aws
 
       def define_builder(service, definition)
         builder = Resource::Builder.new(
-          resource_class: service.const_get(definition['type']),
+          resource_class: @namespace.const_get(definition['type']),
           sources: builder_sources(definition['identifiers'] || [])
         )
         delta = builder.resource_class.identifiers - builder.sources.map(&:target)

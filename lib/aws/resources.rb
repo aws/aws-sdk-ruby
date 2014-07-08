@@ -7,8 +7,8 @@ module Aws
     @define_service_mutex = Mutex.new
 
     # @api private
-    DEFINITIONS = Aws.service_classes.values.inject({}) do |definitions, svc|
-      latest_version, sources = svc.send(:versions).to_a.last
+    DEFINITIONS = Aws.service_modules.values.inject({}) do |definitions, svc|
+      latest_version, sources = svc.const_get(:Client).send(:versions).to_a.last
       if definition_path = sources['resources']
         definitions[svc.name.split('::').last.to_sym] = definition_path
       end

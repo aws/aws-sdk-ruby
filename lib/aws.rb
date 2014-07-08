@@ -17,8 +17,6 @@ module Aws
   autoload :InstanceProfileCredentials, "#{SRC}/instance_profile_credentials"
   autoload :PageableResponse, "#{SRC}/pageable_response"
   autoload :RestBodyHandler, "#{SRC}/rest_body_handler"
-  autoload :Resource, "#{SRC}/resource"
-  autoload :Resources, "#{SRC}/resources"
   autoload :Service, "#{SRC}/service"
   autoload :SharedCredentials, "#{SRC}/shared_credentials"
   autoload :Structure, "#{SRC}/structure"
