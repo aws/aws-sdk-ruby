@@ -7,7 +7,7 @@
     "xmlNamespace":"http://cloudsearch.amazonaws.com/doc/2011-02-01/",
     "protocol":"query"
   },
-  "documentation":"<fullname>Amazon CloudSearch Configuration Service</fullname>\n    <p>You use the configuration service to create, configure, and manage search domains. \n       Configuration service  requests are submitted using the AWS Query protocol. AWS Query requests\n       are HTTP or HTTPS requests submitted via HTTP GET or POST with a query parameter named Action.</p>\n    <p>The endpoint for configuration service requests is region-specific: cloudsearch.<i>region</i>.amazonaws.com.\n       For example, cloudsearch.us-east-1.amazonaws.com. For a current list of supported regions and endpoints,\n       see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region\">Regions and Endpoints</a>.</p>",
+  "documentation":"<fullname>Amazon CloudSearch Configuration Service</fullname> <p>You use the configuration service to create, configure, and manage search domains. Configuration service requests are submitted using the AWS Query protocol. AWS Query requests are HTTP or HTTPS requests submitted via HTTP GET or POST with a query parameter named Action.</p> <p>The endpoint for configuration service requests is region-specific: cloudsearch.<i>region</i>.amazonaws.com. For example, cloudsearch.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region\">Regions and Endpoints</a>.</p>",
   "operations":{
     "CreateDomain":{
       "name":"CreateDomain",
@@ -34,7 +34,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -74,7 +74,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -107,7 +107,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Configures an <code>IndexField</code> for the search domain. Used to create new fields and modify existing ones.  If the field exists, the new configuration replaces the old one. You can configure a maximum of 200 index fields.</p>"
+      "documentation":"<p>Configures an <code>IndexField</code> for the search domain. Used to create new fields and modify existing ones. If the field exists, the new configuration replaces the old one. You can configure a maximum of 200 index fields.</p>"
     },
     "DefineRankExpression":{
       "name":"DefineRankExpression",
@@ -134,7 +134,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -167,7 +167,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Configures a <code>RankExpression</code> for the search domain. Used to create new rank expressions and modify existing ones.  If the expression exists, the new configuration replaces the old one. You can configure a maximum of 50 rank expressions.</p>"
+      "documentation":"<p>Configures a <code>RankExpression</code> for the search domain. Used to create new rank expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. You can configure a maximum of 50 rank expressions.</p>"
     },
     "DeleteDomain":{
       "name":"DeleteDomain",
@@ -194,7 +194,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         }
       ],
       "documentation":"<p>Permanently deletes a search domain and all of its data.</p>"
@@ -224,7 +224,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -274,7 +274,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -327,7 +327,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -370,7 +370,7 @@
           "documentation":"<p>The request was rejected because it attempted an operation which is not enabled.</p>"
         }
       ],
-      "documentation":"<p>Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see  <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html\" target=\"_blank\">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html\" target=\"_blank\">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "DescribeDefaultSearchField":{
       "name":"DescribeDefaultSearchField",
@@ -397,7 +397,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -437,10 +437,10 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         }
       ],
-      "documentation":"<p>Gets information about the search domains owned by this account. Can be limited to specific domains. Shows\n    all domains by default.</p>"
+      "documentation":"<p>Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default.</p>"
     },
     "DescribeIndexFields":{
       "name":"DescribeIndexFields",
@@ -467,7 +467,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -507,7 +507,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -547,7 +547,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -587,7 +587,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -627,7 +627,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -667,7 +667,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -707,7 +707,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -720,7 +720,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Tells the search domain to start indexing its documents using the latest text processing options and <code>IndexFields</code>.  This operation must be invoked to make options whose <a>OptionStatus</a> has <code>OptionState</code> of <code>RequiresIndexDocuments</code> visible in search results.</p>"
+      "documentation":"<p>Tells the search domain to start indexing its documents using the latest text processing options and <code>IndexFields</code>. This operation must be invoked to make options whose <a>OptionStatus</a> has <code>OptionState</code> of <code>RequiresIndexDocuments</code> visible in search results.</p>"
     },
     "UpdateAvailabilityOptions":{
       "name":"UpdateAvailabilityOptions",
@@ -750,7 +750,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -820,7 +820,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -870,7 +870,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -930,7 +930,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -990,7 +990,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -1050,7 +1050,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -1101,7 +1101,7 @@
     },
     "Arn":{
       "type":"string",
-      "documentation":"<p>An Amazon Resource Name (ARN).  See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>"
+      "documentation":"<p>An Amazon Resource Name (ARN). See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>"
     },
     "AvailabilityOptionsStatus":{
       "type":"structure",
@@ -1460,7 +1460,7 @@
         },
         "Deleted":{
           "shape":"Boolean",
-          "documentation":"<p>True if the search domain has been deleted.  The system must clean up resources dedicated to the search domain when <a>DeleteDomain</a> is called.  Newly deleted search domains are returned from <a>DescribeDomains</a> with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>"
+          "documentation":"<p>True if the search domain has been deleted. The system must clean up resources dedicated to the search domain when <a>DeleteDomain</a> is called. Newly deleted search domains are returned from <a>DescribeDomains</a> with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>"
         },
         "NumSearchableDocs":{
           "shape":"DocumentCount",
@@ -1515,7 +1515,7 @@
       "min":1,
       "max":64,
       "pattern":"[a-z][a-z0-9_]*",
-      "documentation":"<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following\n   characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>"
+      "documentation":"<p>A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>"
     },
     "FieldNameList":{
       "type":"list",
@@ -1553,30 +1553,30 @@
       "members":{
         "IndexFieldName":{
           "shape":"FieldName",
-          "documentation":"<p>The name of a field in the search index. Field names must begin with a letter and can contain the following\n   characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>"
+          "documentation":"<p>The name of a field in the search index. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and cannot be specified as field or rank expression names.</p>"
         },
         "IndexFieldType":{
           "shape":"IndexFieldType",
-          "documentation":"<p>The type of field.  Based on this type, exactly one of the <a>UIntOptions</a>, <a>LiteralOptions</a> or <a>TextOptions</a> must be present.</p>"
+          "documentation":"<p>The type of field. Based on this type, exactly one of the <a>UIntOptions</a>, <a>LiteralOptions</a> or <a>TextOptions</a> must be present.</p>"
         },
         "UIntOptions":{
           "shape":"UIntOptions",
-          "documentation":"<p>Options for an unsigned integer field.  Present if <code>IndexFieldType</code> specifies the field is of type unsigned integer.</p>"
+          "documentation":"<p>Options for an unsigned integer field. Present if <code>IndexFieldType</code> specifies the field is of type unsigned integer.</p>"
         },
         "LiteralOptions":{
           "shape":"LiteralOptions",
-          "documentation":"<p>Options for literal field.  Present if <code>IndexFieldType</code> specifies the field is of type literal.</p>"
+          "documentation":"<p>Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type literal.</p>"
         },
         "TextOptions":{
           "shape":"TextOptions",
-          "documentation":"<p>Options for text field.  Present if <code>IndexFieldType</code> specifies the field is of type text.</p>"
+          "documentation":"<p>Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type text.</p>"
         },
         "SourceAttributes":{
           "shape":"SourceAttributeList",
-          "documentation":"<p>An optional list of source attributes that provide data for this index field. If not specified, the data is pulled from a source attribute with the same name as this <code>IndexField</code>. When one or more source attributes are specified, an optional data transformation can be applied to the source data when populating the index field.  You can configure a maximum of 20 sources for an <code>IndexField</code>.</p>"
+          "documentation":"<p>An optional list of source attributes that provide data for this index field. If not specified, the data is pulled from a source attribute with the same name as this <code>IndexField</code>. When one or more source attributes are specified, an optional data transformation can be applied to the source data when populating the index field. You can configure a maximum of 20 sources for an <code>IndexField</code>.</p>"
         }
       },
-      "documentation":"<p>Defines a field in the index, including its name, type, and the source of its data.  The <code>IndexFieldType</code> indicates which of the options will be present.  It is invalid to specify options for a type other than the <code>IndexFieldType</code>.</p>"
+      "documentation":"<p>Defines a field in the index, including its name, type, and the source of its data. The <code>IndexFieldType</code> indicates which of the options will be present. It is invalid to specify options for a type other than the <code>IndexFieldType</code>.</p>"
     },
     "IndexFieldStatus":{
       "type":"structure",
@@ -1616,7 +1616,7 @@
         "httpStatusCode":500
       },
       "exception":true,
-      "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
+      "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\">Service Health Dashboard</a>.</p>"
     },
     "InvalidTypeException":{
       "type":"structure",
@@ -1633,7 +1633,7 @@
     "Language":{
       "type":"string",
       "pattern":"[a-zA-Z]{2,8}(?:-[a-zA-Z]{2,8})*",
-      "documentation":"<p>An <a href=\"http://tools.ietf.org/html/rfc4646\">IETF RFC 4646</a> language code.  Only the primary language is considered. English (en) is currently the only supported language.</p>"
+      "documentation":"<p>An <a href=\"http://tools.ietf.org/html/rfc4646\">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.</p>"
     },
     "LimitExceededException":{
       "type":"structure",
@@ -1660,7 +1660,7 @@
         },
         "FacetEnabled":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether  facets are enabled for this field. Default: False.</p>"
+          "documentation":"<p>Specifies whether facets are enabled for this field. Default: False.</p>"
         },
         "ResultEnabled":{
           "shape":"Boolean",
@@ -1683,10 +1683,10 @@
         },
         "RankExpression":{
           "shape":"RankExpression",
-          "documentation":"<p>The expression to evaluate for ranking or thresholding while processing a search request.  The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p>\n<ul>\n    <li>Integer, floating point, hex and octal literals</li>\n    <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code>, if <code>a</code> is true, without evaluating <code>b</code> at all</li>\n    <li>JavaScript order of precedence for operators</li>\n    <li>Arithmetic operators: <code>+ - * / %</code>\n</li>\n    <li>Boolean operators (including the ternary operator)</li>\n    <li>Bitwise operators</li>\n    <li>Comparison operators</li>\n    <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code>\n</li>\n    <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code>\n</li>\n    <li>Random generation of a number between 0 and 1: <code>rand</code>\n</li>\n    <li>Current time in epoch: <code>time</code>\n</li>\n    <li>The <code>min max</code> functions that operate on a variable argument list</li>\n    </ul>\n\n    <p>Intermediate results are calculated as double precision floating point values.  The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295.  Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p>\n  <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>.  The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code>  in the document.</p>\n    <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>"
+          "documentation":"<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code>, if <code>a</code> is true, without evaluating <code>b</code> at all</li> <li>JavaScript order of precedence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>"
         }
       },
-      "documentation":"<p>A named expression that can be evaluated at search time and used for ranking or thresholding\n    in a search query. </p>"
+      "documentation":"<p>A named expression that can be evaluated at search time and used for ranking or thresholding in a search query. </p>"
     },
     "OptionState":{
       "type":"string",
@@ -1719,7 +1719,7 @@
         },
         "State":{
           "shape":"OptionState",
-          "documentation":"<p>The state of processing a change to an option.  Possible values:</p>\n<ul>\n    <li>\n<code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until  <a>IndexDocuments</a> has been called and indexing is complete.</li>\n    <li>\n<code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated.  </li>\n    <li>\n<code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li>\n  </ul>"
+          "documentation":"<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be visible in searches until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>"
         },
         "PendingDeletion":{
           "shape":"Boolean",
@@ -1734,7 +1734,7 @@
     },
     "PolicyDocument":{
       "type":"string",
-      "documentation":"<p>An IAM access policy as described in <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p>\n  <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:search/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { \"aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }},\n               {\"Effect\":\"Allow\",\n                \"Action\": \"*\",\n                \"Resource\":\n                  \"arn:aws:cs:us-east-1:1234567890:documents/movies\",\n                \"Condition\": \n                  { \"IpAddress\": { \"aws:SourceIp\": [\"203.0.113.1/32\"] }\n               }}\n              ]\n}</code></p>"
+      "documentation":"<p>An IAM access policy as described in <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html\" target=\"_blank\">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p> <p>Example: <code>{\"Statement\": [{\"Effect\":\"Allow\", \"Action\": \"*\", \"Resource\": \"arn:aws:cs:us-east-1:1234567890:search/movies\", \"Condition\": { \"IpAddress\": { \"aws:SourceIp\": [\"203.0.113.1/32\"] } }}, {\"Effect\":\"Allow\", \"Action\": \"*\", \"Resource\": \"arn:aws:cs:us-east-1:1234567890:documents/movies\", \"Condition\": { \"IpAddress\": { \"aws:SourceIp\": [\"203.0.113.1/32\"] } }} ] }</code></p>"
     },
     "RankExpression":{
       "type":"string",
@@ -1889,7 +1889,7 @@
     },
     "StemsDocument":{
       "type":"string",
-      "documentation":"<p>Maps terms to their stems, serialized as a JSON document.  The document has a single object with one property \"stems\" whose value is an object mapping terms to their stems.  The maximum size of a stemming document is 500 KB. Example: <code>{ \"stems\": {\"people\": \"person\", \"walking\": \"walk\"} }</code></p>"
+      "documentation":"<p>Maps terms to their stems, serialized as a JSON document. The document has a single object with one property \"stems\" whose value is an object mapping terms to their stems. The maximum size of a stemming document is 500 KB. Example: <code>{ \"stems\": {\"people\": \"person\", \"walking\": \"walk\"} }</code></p>"
     },
     "StopwordOptionsStatus":{
       "type":"structure",
@@ -1905,7 +1905,7 @@
     },
     "StopwordsDocument":{
       "type":"string",
-      "documentation":"<p>Lists stopwords serialized as a JSON document.  The document has a single object with one property \"stopwords\" whose value is an array of strings. The maximum size of a stopwords document is 10 KB. Example: <code>{ \"stopwords\": [\"a\", \"an\", \"the\", \"of\"] }</code></p>"
+      "documentation":"<p>Lists stopwords serialized as a JSON document. The document has a single object with one property \"stopwords\" whose value is an array of strings. The maximum size of a stopwords document is 10 KB. Example: <code>{ \"stopwords\": [\"a\", \"an\", \"the\", \"of\"] }</code></p>"
     },
     "String":{"type":"string"},
     "StringCaseMap":{
@@ -1927,7 +1927,7 @@
     },
     "SynonymsDocument":{
       "type":"string",
-      "documentation":"<p>Maps terms to their synonyms, serialized as a JSON document.  The document has a single object with one property \"synonyms\" whose value is an object mapping terms to their synonyms.  Each synonym is a simple string or an array of strings.  The maximum size of a stopwords document is 100 KB. Example: <code>{ \"synonyms\": {\"cat\": [\"feline\", \"kitten\"], \"puppy\": \"dog\"} }</code></p>"
+      "documentation":"<p>Maps terms to their synonyms, serialized as a JSON document. The document has a single object with one property \"synonyms\" whose value is an object mapping terms to their synonyms. Each synonym is a simple string or an array of strings. The maximum size of a stopwords document is 100 KB. Example: <code>{ \"synonyms\": {\"cat\": [\"feline\", \"kitten\"], \"puppy\": \"dog\"} }</code></p>"
     },
     "TextOptions":{
       "type":"structure",
@@ -1938,15 +1938,15 @@
         },
         "FacetEnabled":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether  facets are enabled for this field. Default: False.</p>"
+          "documentation":"<p>Specifies whether facets are enabled for this field. Default: False.</p>"
         },
         "ResultEnabled":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether  values of this field can be returned in search results and used for ranking. Default: False.</p>"
+          "documentation":"<p>Specifies whether values of this field can be returned in search results and used for ranking. Default: False.</p>"
         },
         "TextProcessor":{
           "shape":"FieldName",
-          "documentation":"<p>The text processor to apply to this field. Optional. Possible values:</p>\n    <ul>\n      <li>\n<code>cs_text_no_stemming</code>: turns off stemming for the field.</li>\n    </ul>\n    <p>Default: none</p>"
+          "documentation":"<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>"
         }
       },
       "documentation":"<p>Options that define a text field in the search index.</p>"

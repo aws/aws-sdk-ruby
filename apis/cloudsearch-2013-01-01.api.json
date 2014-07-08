@@ -7,7 +7,7 @@
     "xmlNamespace":"http://cloudsearch.amazonaws.com/doc/2013-01-01/",
     "protocol":"query"
   },
-  "documentation":"<fullname>Amazon CloudSearch Configuration Service</fullname>\n    <p>You use the Amazon CloudSearch configuration service to create, configure, and manage search domains.\n      Configuration service  requests are submitted using the AWS Query protocol. AWS Query requests\n      are HTTP or HTTPS requests submitted via HTTP GET or POST with a query parameter named Action.</p>\n    <p>The endpoint for configuration service requests is region-specific: cloudsearch.<i>region</i>.amazonaws.com.\n      For example, cloudsearch.us-east-1.amazonaws.com. For a current list of supported regions and endpoints,\n      see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region\" target=\"_blank\">Regions and Endpoints</a>.</p>",
+  "documentation":"<fullname>Amazon CloudSearch Configuration Service</fullname> <p>You use the Amazon CloudSearch configuration service to create, configure, and manage search domains. Configuration service requests are submitted using the AWS Query protocol. AWS Query requests are HTTP or HTTPS requests submitted via HTTP GET or POST with a query parameter named Action.</p> <p>The endpoint for configuration service requests is region-specific: cloudsearch.<i>region</i>.amazonaws.com. For example, cloudsearch.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region\" target=\"_blank\">Regions and Endpoints</a>.</p>",
   "operations":{
     "BuildSuggesters":{
       "name":"BuildSuggesters",
@@ -37,7 +37,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -80,7 +80,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -93,7 +93,7 @@
           "documentation":"<p>The request was rejected because a resource limit has already been met.</p>"
         }
       ],
-      "documentation":"<p>Creates a new search domain. For more information,\n      see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html\" target=\"_blank\">Creating a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Creates a new search domain. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html\" target=\"_blank\">Creating a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "DefineAnalysisScheme":{
       "name":"DefineAnalysisScheme",
@@ -123,7 +123,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -186,7 +186,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -219,7 +219,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Configures an <code><a>Expression</a></code> for the search domain. Used to create new expressions and modify existing ones.  If the expression exists, the new configuration replaces the old one. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html\" target=\"_blank\">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Configures an <code><a>Expression</a></code> for the search domain. Used to create new expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html\" target=\"_blank\">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "DefineIndexField":{
       "name":"DefineIndexField",
@@ -249,7 +249,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -312,7 +312,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -375,7 +375,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -428,10 +428,10 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         }
       ],
-      "documentation":"<p>Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information,\n      see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html\" target=\"_blank\">Deleting a Search  Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. </p>"
+      "documentation":"<p>Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html\" target=\"_blank\">Deleting a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. </p>"
     },
     "DeleteExpression":{
       "name":"DeleteExpression",
@@ -461,7 +461,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -514,7 +514,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -567,7 +567,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -620,7 +620,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -633,7 +633,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Gets the analysis schemes configured for a domain. An analysis scheme defines language-specific text processing options for a <code>text</code> field. Can be limited to specific analysis schemes by name.  By default, shows all analysis schemes and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes.  For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html\" target=\"_blank\">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Gets the analysis schemes configured for a domain. An analysis scheme defines language-specific text processing options for a <code>text</code> field. Can be limited to specific analysis schemes by name. By default, shows all analysis schemes and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html\" target=\"_blank\">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "DescribeAvailabilityOptions":{
       "name":"DescribeAvailabilityOptions",
@@ -663,7 +663,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -706,7 +706,7 @@
           "documentation":"<p>The request was rejected because it attempted an operation which is not enabled.</p>"
         }
       ],
-      "documentation":"<p>Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see  <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html\" target=\"_blank\">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html\" target=\"_blank\">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "DescribeDomains":{
       "name":"DescribeDomains",
@@ -736,10 +736,10 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         }
       ],
-      "documentation":"<p>Gets information about the search domains owned by this account. Can be limited to specific domains. Shows\n      all domains by default. To get the number of searchable documents in a domain, use the console or submit a <code>matchall</code> request to your domain's search endpoint: <code>q=matchall&amp;q.parser=structured&amp;size=0</code>. For more information,\n      see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html\" target=\"_blank\">Getting Information about a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default. To get the number of searchable documents in a domain, use the console or submit a <code>matchall</code> request to your domain's search endpoint: <code>q=matchall&amp;q.parser=structured&amp;size=0</code>. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html\" target=\"_blank\">Getting Information about a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "DescribeExpressions":{
       "name":"DescribeExpressions",
@@ -749,7 +749,7 @@
       },
       "input":{
         "shape":"DescribeExpressionsRequest",
-        "documentation":"<p>Container for the parameters to the <code><a>DescribeDomains</a></code> operation.\n      Specifies the name of the domain you want to describe. To restrict the response to particular expressions, specify the names of the expressions you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>"
+        "documentation":"<p>Container for the parameters to the <code><a>DescribeDomains</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular expressions, specify the names of the expressions you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>"
       },
       "output":{
         "shape":"DescribeExpressionsResponse",
@@ -769,7 +769,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -782,7 +782,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Gets the expressions configured for the search domain. Can be limited to specific expressions by name. By default, shows all expressions and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see  <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html\" target=\"_blank\">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Gets the expressions configured for the search domain. Can be limited to specific expressions by name. By default, shows all expressions and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html\" target=\"_blank\">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "DescribeIndexFields":{
       "name":"DescribeIndexFields",
@@ -792,7 +792,7 @@
       },
       "input":{
         "shape":"DescribeIndexFieldsRequest",
-        "documentation":"<p>Container for the parameters to the <code><a>DescribeIndexFields</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular index fields, specify the names of the index fields you want to describe. To show  the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>"
+        "documentation":"<p>Container for the parameters to the <code><a>DescribeIndexFields</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular index fields, specify the names of the index fields you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>"
       },
       "output":{
         "shape":"DescribeIndexFieldsResponse",
@@ -812,7 +812,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -825,7 +825,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Gets information about the index fields configured for the search domain.\n      Can be limited to specific fields by name.  By default, shows all fields and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information,\n      see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html\" target=\"_blank\">Getting Domain Information</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. By default, shows all fields and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html\" target=\"_blank\">Getting Domain Information</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "DescribeScalingParameters":{
       "name":"DescribeScalingParameters",
@@ -855,7 +855,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -868,7 +868,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Gets the scaling parameters configured for a domain. A domain's scaling parameters specify the desired search instance type and replication count. For more information, see   <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html\" target=\"_blank\">Configuring Scaling Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Gets the scaling parameters configured for a domain. A domain's scaling parameters specify the desired search instance type and replication count. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html\" target=\"_blank\">Configuring Scaling Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "DescribeServiceAccessPolicies":{
       "name":"DescribeServiceAccessPolicies",
@@ -898,7 +898,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -911,7 +911,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Gets information about the access policies that control access to the domain's document and search endpoints. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information,\n      see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html\" target=\"_blank\">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Gets information about the access policies that control access to the domain's document and search endpoints. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html\" target=\"_blank\">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "DescribeSuggesters":{
       "name":"DescribeSuggesters",
@@ -941,7 +941,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -954,7 +954,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Gets the suggesters configured for a domain. A suggester enables you to display possible matches before users finish typing their queries.  Can be limited to specific suggesters by name.  By default, shows all suggesters and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes.  For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html\" target=\"_blank\">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>Gets the suggesters configured for a domain. A suggester enables you to display possible matches before users finish typing their queries. Can be limited to specific suggesters by name. By default, shows all suggesters and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html\" target=\"_blank\">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "IndexDocuments":{
       "name":"IndexDocuments",
@@ -984,7 +984,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"ResourceNotFoundException",
@@ -997,7 +997,7 @@
           "documentation":"<p>The request was rejected because it attempted to reference a resource that does not exist.</p>"
         }
       ],
-      "documentation":"<p>Tells the search domain to start indexing its documents using the latest indexing options. This operation must be invoked to activate options whose <a>OptionStatus</a> is  <code>RequiresIndexDocuments</code>.</p>"
+      "documentation":"<p>Tells the search domain to start indexing its documents using the latest indexing options. This operation must be invoked to activate options whose <a>OptionStatus</a> is <code>RequiresIndexDocuments</code>.</p>"
     },
     "ListDomainNames":{
       "name":"ListDomainNames",
@@ -1047,7 +1047,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"InvalidTypeException",
@@ -1120,7 +1120,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -1183,7 +1183,7 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+          "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
         },
         {
           "shape":"LimitExceededException",
@@ -1216,7 +1216,7 @@
           "documentation":"<p>The request was rejected because it specified an invalid type definition.</p>"
         }
       ],
-      "documentation":"<p>Configures the access rules that control access to the domain's document and search endpoints.\n      For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html\" target=\"_blank\">\n        Configuring Access for an Amazon CloudSearch Domain</a>.</p>"
+      "documentation":"<p>Configures the access rules that control access to the domain's document and search endpoints. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html\" target=\"_blank\"> Configuring Access for an Amazon CloudSearch Domain</a>.</p>"
     }
   },
   "shapes":{
@@ -1226,7 +1226,7 @@
     },
     "ARN":{
       "type":"string",
-      "documentation":"<p>The Amazon Resource Name (ARN) of the search domain.  See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>"
+      "documentation":"<p>The Amazon Resource Name (ARN) of the search domain. See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>"
     },
     "AccessPoliciesStatus":{
       "type":"structure",
@@ -1258,7 +1258,7 @@
         },
         "Stopwords":{
           "shape":"String",
-          "documentation":"<p>A  JSON array of terms to ignore during indexing and searching. For example, [\"a\", \"an\", \"the\", \"of\"]. The stopwords dictionary must explicitly list each word you want to ignore. Wildcards and regular expressions are not supported. </p>"
+          "documentation":"<p>A JSON array of terms to ignore during indexing and searching. For example, [\"a\", \"an\", \"the\", \"of\"]. The stopwords dictionary must explicitly list each word you want to ignore. Wildcards and regular expressions are not supported. </p>"
         },
         "StemmingDictionary":{
           "shape":"String",
@@ -1323,7 +1323,7 @@
         "zh-Hans",
         "zh-Hant"
       ],
-      "documentation":"<p>An <a href=\"http://tools.ietf.org/html/rfc4646\" target=\"_blank\">IETF RFC 4646</a> language code or <code>mul</code>  for multiple languages.</p>"
+      "documentation":"<p>An <a href=\"http://tools.ietf.org/html/rfc4646\" target=\"_blank\">IETF RFC 4646</a> language code or <code>mul</code> for multiple languages.</p>"
     },
     "AnalysisSchemeStatus":{
       "type":"structure",
@@ -1335,7 +1335,7 @@
         "Options":{"shape":"AnalysisScheme"},
         "Status":{"shape":"OptionStatus"}
       },
-      "documentation":"<p>The status and configuration of an  <code>AnalysisScheme</code>.</p>"
+      "documentation":"<p>The status and configuration of an <code>AnalysisScheme</code>.</p>"
     },
     "AnalysisSchemeStatusList":{
       "type":"list",
@@ -1424,7 +1424,7 @@
           "documentation":"<p>Whether the contents of the field can be returned in the search results.</p>"
         }
       },
-      "documentation":"<p>Options for a field that contains an array of dates.  Present if <code>IndexFieldType</code> specifies the field is of type <code>date-array</code>. All options are enabled by default.</p>"
+      "documentation":"<p>Options for a field that contains an array of dates. Present if <code>IndexFieldType</code> specifies the field is of type <code>date-array</code>. All options are enabled by default.</p>"
     },
     "DateOptions":{
       "type":"structure",
@@ -1451,7 +1451,7 @@
           "documentation":"<p>Whether the field can be used to sort the search results.</p>"
         }
       },
-      "documentation":"<p>Options for a date field. Dates and times are specified in UTC (Coordinated Universal Time) according to IETF RFC3339: yyyy-mm-ddT00:00:00Z.  Present if <code>IndexFieldType</code> specifies the field is of type <code>date</code>. All options are enabled by default.</p>"
+      "documentation":"<p>Options for a date field. Dates and times are specified in UTC (Coordinated Universal Time) according to IETF RFC3339: yyyy-mm-ddT00:00:00Z. Present if <code>IndexFieldType</code> specifies the field is of type <code>date</code>. All options are enabled by default.</p>"
     },
     "DefineAnalysisSchemeRequest":{
       "type":"structure",
@@ -1748,7 +1748,7 @@
           "documentation":"<p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>"
         }
       },
-      "documentation":"<p>Container for the parameters to the <code><a>DescribeDomains</a></code> operation.\n      Specifies the name of the domain you want to describe. To restrict the response to particular expressions, specify the names of the expressions you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>"
+      "documentation":"<p>Container for the parameters to the <code><a>DescribeDomains</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular expressions, specify the names of the expressions you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>"
     },
     "DescribeExpressionsResponse":{
       "type":"structure",
@@ -1778,7 +1778,7 @@
           "documentation":"<p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>"
         }
       },
-      "documentation":"<p>Container for the parameters to the <code><a>DescribeIndexFields</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular index fields, specify the names of the index fields you want to describe. To show  the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>"
+      "documentation":"<p>Container for the parameters to the <code><a>DescribeIndexFields</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular index fields, specify the names of the index fields you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>"
     },
     "DescribeIndexFieldsResponse":{
       "type":"structure",
@@ -1881,7 +1881,7 @@
       "members":{
         "SourceField":{
           "shape":"FieldName",
-          "documentation":"<p>The name of the index field you want to use for suggestions.\n      </p>"
+          "documentation":"<p>The name of the index field you want to use for suggestions. </p>"
         },
         "FuzzyMatching":{
           "shape":"SuggesterFuzzyMatching",
@@ -1935,7 +1935,7 @@
         },
         "Deleted":{
           "shape":"Boolean",
-          "documentation":"<p>True if the search domain has been deleted.  The system must clean up resources dedicated to the search domain when <a>DeleteDomain</a> is called.  Newly deleted search domains are returned from <a>DescribeDomains</a> with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>"
+          "documentation":"<p>True if the search domain has been deleted. The system must clean up resources dedicated to the search domain when <a>DeleteDomain</a> is called. Newly deleted search domains are returned from <a>DescribeDomains</a> with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>"
         },
         "DocService":{
           "shape":"ServiceEndpoint",
@@ -1998,7 +1998,7 @@
           "documentation":"<p>Whether the contents of the field can be returned in the search results.</p>"
         }
       },
-      "documentation":"<p>Options for a field that contains an array of double-precision 64-bit floating point values.  Present if <code>IndexFieldType</code> specifies the field is of type <code>double-array</code>.  All options are enabled by default.</p>"
+      "documentation":"<p>Options for a field that contains an array of double-precision 64-bit floating point values. Present if <code>IndexFieldType</code> specifies the field is of type <code>double-array</code>. All options are enabled by default.</p>"
     },
     "DoubleOptions":{
       "type":"structure",
@@ -2028,7 +2028,7 @@
           "documentation":"<p>Whether the field can be used to sort the search results.</p>"
         }
       },
-      "documentation":"<p>Options for a double-precision 64-bit floating point field.  Present if <code>IndexFieldType</code> specifies the field is of type <code>double</code>. All options are enabled by default.</p>"
+      "documentation":"<p>Options for a double-precision 64-bit floating point field. Present if <code>IndexFieldType</code> specifies the field is of type <code>double</code>. All options are enabled by default.</p>"
     },
     "ErrorCode":{
       "type":"string",
@@ -2074,14 +2074,14 @@
       "type":"string",
       "min":1,
       "max":10240,
-      "documentation":"<p>The expression to evaluate for sorting while processing a search request.  The <code>Expression</code> syntax is based on JavaScript expressions. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html\" target=\"_blank\">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+      "documentation":"<p>The expression to evaluate for sorting while processing a search request. The <code>Expression</code> syntax is based on JavaScript expressions. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html\" target=\"_blank\">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
     },
     "FieldName":{
       "type":"string",
       "min":1,
       "max":64,
       "pattern":"[a-z][a-z0-9_]*",
-      "documentation":"<p>A string that represents the name of an index field. Field names begin with a letter and can contain the following\n   characters: a-z (lowercase), 0-9, and _ (underscore). The name \"score\" is reserved and cannot be used as a field name. To reference a document's ID, you can use the name <code>_id</code>.</p>"
+      "documentation":"<p>A string that represents the name of an index field. Field names begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). The name \"score\" is reserved and cannot be used as a field name. To reference a document's ID, you can use the name <code>_id</code>.</p>"
     },
     "FieldNameCommaList":{
       "type":"string",
@@ -2125,7 +2125,7 @@
       "members":{
         "IndexFieldName":{
           "shape":"FieldName",
-          "documentation":"<p>The name of a field in the search index. Field names must begin with a letter and can contain the following\n   characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The name \"score\" is reserved and cannot be specified as field or expression name.</p>"
+          "documentation":"<p>The name of a field in the search index. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The name \"score\" is reserved and cannot be specified as field or expression name.</p>"
         },
         "IndexFieldType":{"shape":"IndexFieldType"},
         "IntOptions":{"shape":"IntOptions"},
@@ -2204,7 +2204,7 @@
           "documentation":"<p>Whether the contents of the field can be returned in the search results.</p>"
         }
       },
-      "documentation":"<p>Options for a field that contains an array of 64-bit signed integers.  Present if <code>IndexFieldType</code> specifies the field is of type <code>int-array</code>. All options are enabled by default.</p>"
+      "documentation":"<p>Options for a field that contains an array of 64-bit signed integers. Present if <code>IndexFieldType</code> specifies the field is of type <code>int-array</code>. All options are enabled by default.</p>"
     },
     "IntOptions":{
       "type":"structure",
@@ -2234,7 +2234,7 @@
           "documentation":"<p>Whether the field can be used to sort the search results.</p>"
         }
       },
-      "documentation":"<p>Options for a 64-bit signed integer field.  Present if <code>IndexFieldType</code> specifies the field is of type <code>int</code>. All options are enabled by default.</p>"
+      "documentation":"<p>Options for a 64-bit signed integer field. Present if <code>IndexFieldType</code> specifies the field is of type <code>int</code>. All options are enabled by default.</p>"
     },
     "InternalException":{
       "type":"structure",
@@ -2245,7 +2245,7 @@
         "httpStatusCode":500
       },
       "exception":true,
-      "documentation":"<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
+      "documentation":"<p>An internal error occurred while processing the request. If this problem persists, report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>"
     },
     "InvalidTypeException":{
       "type":"structure",
@@ -2332,7 +2332,7 @@
           "documentation":"<p>Whether the contents of the field can be returned in the search results.</p>"
         }
       },
-      "documentation":"<p>Options for a field that contains an array of literal strings.  Present if <code>IndexFieldType</code> specifies the field is of type <code>literal-array</code>. All options are enabled by default.</p>"
+      "documentation":"<p>Options for a field that contains an array of literal strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal-array</code>. All options are enabled by default.</p>"
     },
     "LiteralOptions":{
       "type":"structure",
@@ -2359,7 +2359,7 @@
           "documentation":"<p>Whether the field can be used to sort the search results.</p>"
         }
       },
-      "documentation":"<p>Options for literal field.  Present if <code>IndexFieldType</code> specifies the field is of type <code>literal</code>. All options are enabled by default.</p>"
+      "documentation":"<p>Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal</code>. All options are enabled by default.</p>"
     },
     "Long":{"type":"long"},
     "MultiAZ":{"type":"boolean"},
@@ -2371,7 +2371,7 @@
         "Active",
         "FailedToValidate"
       ],
-      "documentation":"<p>The state of processing a change to an option. One of:</p>\n    <ul>\n      <li>RequiresIndexDocuments: The option's latest value will not be deployed until  <a>IndexDocuments</a> has been called and indexing is complete.</li>\n      <li>Processing: The option's latest value is in the process of being activated.</li>\n      <li>Active: The option's latest value is fully deployed. </li>\n      <li>FailedToValidate: The option value is not compatible with the domain's data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li>\n    </ul>"
+      "documentation":"<p>The state of processing a change to an option. One of:</p> <ul> <li>RequiresIndexDocuments: The option's latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li>Processing: The option's latest value is in the process of being activated.</li> <li>Active: The option's latest value is fully deployed. </li> <li>FailedToValidate: The option value is not compatible with the domain's data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>"
     },
     "OptionStatus":{
       "type":"structure",
@@ -2395,7 +2395,7 @@
         },
         "State":{
           "shape":"OptionState",
-          "documentation":"<p>The state of processing a change to an option.  Possible values:</p>\n<ul>\n    <li>\n<code>RequiresIndexDocuments</code>: the option's latest value will not be deployed until  <a>IndexDocuments</a> has been called and indexing is complete.</li>\n    <li>\n<code>Processing</code>: the option's latest value is in the process of being activated.  </li>\n    <li>\n<code>Active</code>: the option's latest value is completely deployed.</li>\n    <li>\n<code>FailedToValidate</code>: the option value is not compatible with the domain's data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li>\n  </ul>"
+          "documentation":"<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option's latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li> <code>Processing</code>: the option's latest value is in the process of being activated. </li> <li> <code>Active</code>: the option's latest value is completely deployed.</li> <li> <code>FailedToValidate</code>: the option value is not compatible with the domain's data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>"
         },
         "PendingDeletion":{
           "shape":"Boolean",
@@ -2448,7 +2448,7 @@
         },
         "DesiredPartitionCount":{
           "shape":"UIntValue",
-          "documentation":"<p>The number of partitions you want to preconfigure for your domain. Only valid when\n    you select <code>m2.2xlarge</code> as the desired instance type.</p>"
+          "documentation":"<p>The number of partitions you want to preconfigure for your domain. Only valid when you select <code>m2.2xlarge</code> as the desired instance type.</p>"
         }
       },
       "documentation":"<p>The desired instance type and desired number of replicas of each index partition.</p>"
@@ -2539,10 +2539,10 @@
         },
         "AnalysisScheme":{
           "shape":"Word",
-          "documentation":"<p>The name of an analysis scheme for a  <code>text-array</code> field.</p>"
+          "documentation":"<p>The name of an analysis scheme for a <code>text-array</code> field.</p>"
         }
       },
-      "documentation":"<p>Options for a field that contains an array of text strings.  Present if <code>IndexFieldType</code> specifies the field is of type <code>text-array</code>. A <code>text-array</code> field is always searchable. All options are enabled by default.</p>"
+      "documentation":"<p>Options for a field that contains an array of text strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>text-array</code>. A <code>text-array</code> field is always searchable. All options are enabled by default.</p>"
     },
     "TextOptions":{
       "type":"structure",
@@ -2566,10 +2566,10 @@
         },
         "AnalysisScheme":{
           "shape":"Word",
-          "documentation":"<p>The name of an analysis scheme for a  <code>text</code> field.</p>"
+          "documentation":"<p>The name of an analysis scheme for a <code>text</code> field.</p>"
         }
       },
-      "documentation":"<p>Options for text field.  Present if <code>IndexFieldType</code> specifies the field is of type <code>text</code>. A <code>text</code> field is always searchable. All options are enabled by default.</p>"
+      "documentation":"<p>Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type <code>text</code>. A <code>text</code> field is always searchable. All options are enabled by default.</p>"
     },
     "UIntValue":{
       "type":"integer",

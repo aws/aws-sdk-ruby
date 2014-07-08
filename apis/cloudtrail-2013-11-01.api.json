@@ -9,7 +9,7 @@
     "targetPrefix":"com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
     "protocol":"json"
   },
-  "documentation":"<fullname>AWS Cloud Trail</fullname>\n      <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> \n      <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p>\n      \n      \n      <note>\n         As an alternative to using the API, you can use one of the AWS SDKs, which consist of libraries and sample code \n         for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to AWSCloudTrail. For example, the SDKs take care of cryptographically \n         signing requests, managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services page</a>.\n      </note>\n      \n      \n<p>See the CloudTrail User Guide for information about the data that is included with each AWS API call listed in the log files.</p>",
+  "documentation":"<fullname>AWS Cloud Trail</fullname> <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> <p>See the CloudTrail User Guide for information about the data that is included with each AWS API call listed in the log files.</p>",
   "operations":{
     "CreateTrail":{
       "name":"CreateTrail",
@@ -117,7 +117,7 @@
           "documentation":"This exception is thrown when the provided trail name is not valid."
         }
       ],
-      "documentation":"<p>From the command line, use <code>create-subscription</code>. </p>\n      <p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. </p>"
+      "documentation":"<p>From the command line, use <code>create-subscription</code>. </p> <p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. </p>"
     },
     "DeleteTrail":{
       "name":"DeleteTrail",
@@ -383,7 +383,7 @@
           "documentation":"This exception is thrown when the provided trail name is not valid."
         }
       ],
-      "documentation":"<p>From the command line, use <code>update-subscription</code>.</p> \n      <p>Updates the settings that specify delivery of log files. Changes to a trail do not require\n         stopping the CloudTrail service. Use this action to designate an existing bucket for log\n         delivery. If the existing bucket has previously been a target for CloudTrail log files,\n         an IAM policy exists for the bucket. </p>"
+      "documentation":"<p>From the command line, use <code>update-subscription</code>.</p> <p>Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. </p>"
     }
   },
   "shapes":{
@@ -514,7 +514,7 @@
         },
         "LatestNotificationTime":{
           "shape":"Date",
-          "documentation":"<p>Specifies the date and time of the most recent Amazon SNS notification that CloudTrail has written a new log file to an account's Amazon S3 bucket.  </p>"
+          "documentation":"<p>Specifies the date and time of the most recent Amazon SNS notification that CloudTrail has written a new log file to an account's Amazon S3 bucket. </p>"
         },
         "StartLoggingTime":{
           "shape":"Date",
