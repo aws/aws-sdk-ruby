@@ -160,13 +160,11 @@ module Seahorse
       end
 
       def filter(operation)
-        entries.inject([]) do |filtered, handler|
-          if handler.operations.empty?
-            filtered << handler
-          elsif handler.operations.include?(operation)
-            handler = handler.dup
-            handler.operations.clear
-            filtered << handler
+        entries.inject([]) do |filtered, entry|
+          if entry.operations.empty?
+            filtered << entry
+          elsif entry.operations.include?(operation)
+            filtered << entry.copy(operations: [])
           end
           filtered
         end
