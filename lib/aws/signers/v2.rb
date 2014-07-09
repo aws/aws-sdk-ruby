@@ -35,8 +35,8 @@ module Aws
         endpoint = http_request.endpoint
         host = endpoint.host.downcase
         if
-          (endpoint.http? && endpoint.port != 80) ||
-          (endpoint.https? && endpoint.port != 443)
+          (endpoint.scheme == 'http' && endpoint.port != 80) ||
+          (endpoint.scheme == 'https' && endpoint.port != 443)
         then
           host += ":#{endpoint.port}"
         end

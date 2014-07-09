@@ -38,7 +38,7 @@ module Aws
           endpoint = context.http_request.endpoint
           if
             bucket_name &&
-            S3BucketDns.dns_compatible?(bucket_name, endpoint.https?)
+            S3BucketDns.dns_compatible?(bucket_name, https?(endpoint))
           then
             move_bucket_to_subdomain(bucket_name, endpoint)
           end
@@ -46,9 +46,13 @@ module Aws
 
         def move_bucket_to_subdomain(bucket_name, endpoint)
           endpoint.host = "#{bucket_name}.#{endpoint.host}"
-          request_uri = endpoint.request_uri.sub("/#{bucket_name}", '')
-          request_uri = "/#{request_uri}" unless request_uri.match(/^\//)
-          endpoint.request_uri = request_uri
+          path = endpoint.path.sub("/#{bucket_name}", '')
+          path = "/#{path}" unless path.match(/^\//)
+          endpoint.path = path
+        end
+
+        def https?(uri)
+          uri.scheme == 'https'
         end
 
       end

@@ -60,35 +60,28 @@ module Seahorse
           end
 
           it 'provides a :http_request_endpoint replacement' do
-            response.context.http_request.endpoint =
-              Http::Endpoint.new('http://foo.com:123')
+            response.context.http_request.endpoint = 'http://foo.com:123/'
             expect(format(':http_request_endpoint')).to eq('http://foo.com:123/')
           end
 
           it 'provides a :http_request_scheme replacement' do
-            response.context.http_request.endpoint =
-              Http::Endpoint.new('http://foo.com')
+            response.context.http_request.endpoint = 'http://foo.com'
             expect(format(':http_request_scheme')).to eq('http')
-            response.context.http_request.endpoint =
-              Http::Endpoint.new('https://foo.com')
+            response.context.http_request.endpoint = 'https://foo.com'
             expect(format(':http_request_scheme')).to eq('https')
           end
 
           it 'provides a :http_request_host replacement' do
-            response.context.http_request.endpoint =
-              Http::Endpoint.new('http://foo.com')
+            response.context.http_request.endpoint = 'http://foo.com'
             expect(format(':http_request_host')).to eq('foo.com')
           end
 
           it 'provides a :http_request_port replacement' do
-            response.context.http_request.endpoint =
-              Http::Endpoint.new('http://foo.com')
+            response.context.http_request.endpoint = 'http://foo.com'
             expect(format(':http_request_port')).to eq('80')
-            response.context.http_request.endpoint =
-              Http::Endpoint.new('https://foo.com')
+            response.context.http_request.endpoint = 'https://foo.com'
             expect(format(':http_request_port')).to eq('443')
-            response.context.http_request.endpoint =
-              Http::Endpoint.new('http://foo.com:123')
+            response.context.http_request.endpoint = 'http://foo.com:123'
             expect(format(':http_request_port')).to eq('123')
           end
 

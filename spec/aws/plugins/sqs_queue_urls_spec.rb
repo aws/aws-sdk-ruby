@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'uri'
 
 module Aws
   module Plugins
@@ -19,7 +20,7 @@ module Aws
 
       it 'moves the queue url param to the http request endpoint' do
         resp = send_request
-        expect(resp.context.http_request.endpoint).to eq('http://foo.com/')
+        expect(resp.context.http_request.endpoint).to eq(URI.parse('http://foo.com/'))
       end
 
       it 'resets the configured region based on the queue url' do

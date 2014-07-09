@@ -24,7 +24,7 @@ module Seahorse
         it 'populates the http request endpoint' do
           client = client_class.new(endpoint:'foo.com')
           resp = client.build_request('operation').send_request
-          expect(resp.context.http_request.endpoint).to eq('https://foo.com/')
+          expect(resp.context.http_request.endpoint).to eq(URI.parse('https://foo.com/'))
         end
 
       end

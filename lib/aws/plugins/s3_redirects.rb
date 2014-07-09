@@ -15,7 +15,6 @@ module Aws
           response = @handler.call(context)
           if context.http_response.status_code == 307
             endpoint = context.http_response.headers['location']
-            endpoint = Seahorse::Client::Http::Endpoint.new(endpoint)
             context.http_request.endpoint = endpoint
             context.http_response.body.truncate(0)
             @handler.call(context)

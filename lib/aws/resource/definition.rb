@@ -369,7 +369,7 @@ module Aws
 
       def underscore(str)
         if str
-          str.gsub(/\w+/) { |part| Util.underscore(part) }
+          str.gsub(/\w+/) { |part| Seahorse::Util.underscore(part) }
         end
       end
 

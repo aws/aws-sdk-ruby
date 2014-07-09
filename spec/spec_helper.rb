@@ -1,6 +1,7 @@
 require 'simplecov'
 require 'rspec'
 require 'aws-sdk-core'
+require 'aws-sdk-resources'
 require 'seahorse'
 require 'yaml'
 

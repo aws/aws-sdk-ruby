@@ -123,7 +123,7 @@ module Aws
         # virtual hosted-style requests require the hostname to appear
         # in the canonicalized resource prefixed by a forward slash.
         if bucket = params[:bucket]
-          ssl = endpoint.https?
+          ssl = endpoint.scheme == 'https'
           if Plugins::S3BucketDns.dns_compatible?(bucket.value, ssl) &&
             !@force_path_style
           then
@@ -147,7 +147,7 @@ module Aws
       end
 
       def signed_querystring_params(endpoint)
-        endpoint.querystring.to_s.split('&').select do |p|
+        endpoint.query.to_s.split('&').select do |p|
           SIGNED_QUERYSTRING_PARAMS.include?(p.split('=')[0])
         end.map { |p| URI.decode(p) }
       end
