@@ -35,7 +35,7 @@ module Aws
       private
 
       def escape(str)
-        Util.uri_escape(str)
+        Seahorse::Util.uri_escape(str)
       end
 
     end

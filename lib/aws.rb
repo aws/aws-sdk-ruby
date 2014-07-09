@@ -21,7 +21,6 @@ module Aws
   autoload :SharedCredentials, "#{SRC}/shared_credentials"
   autoload :Structure, "#{SRC}/structure"
   autoload :TreeHash, "#{SRC}/tree_hash"
-  autoload :Util, "#{SRC}/util"
   autoload :VERSION, "#{SRC}/version"
 
   # @api private

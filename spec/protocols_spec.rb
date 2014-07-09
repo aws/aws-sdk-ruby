@@ -51,7 +51,7 @@ def client_for(suite, test_case)
 end
 
 def underscore(str)
-  Aws::Util.underscore(str)
+  Seahorse::Util.underscore(str)
 end
 
 def format_data(shape, src)
