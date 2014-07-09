@@ -1,30 +1,25 @@
 module Aws
   module Plugins
+
+    # When making calls to {S3::Client#create_bucket} outside the
+    # "classic" region, the bucket location constraint must be specified.
+    # This plugin auto populates the constraint to the configured region.
     class S3LocationConstraint < Seahorse::Client::Plugin
 
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          s3_endpoint = context.config.endpoint
-          s3_endpoint = URI.parse(s3_endpoint.to_s).host if s3_endpoint
-
-          region = context.config.region
-          create_bucket_params = context.params[:create_bucket_configuration]
-          location_constraint = nil
-
-          if create_bucket_params
-            location_constraint = create_bucket_params[:location_constraint]
-          end
-
-          unless s3_endpoint.match(/s3\.amazonaws\.com$/) || location_constraint
-            set_location_constraint(context, region)
+          unless context.config.region == 'us-east-1'
+            populate_location_constraint(context.params, context.config.region)
           end
           @handler.call(context)
         end
 
-        def set_location_constraint(context, region)
-          context.params[:create_bucket_configuration] ||= {}
-          context.params[:create_bucket_configuration][:location_constraint] = region
+        private
+
+        def populate_location_constraint(params, region)
+          params[:create_bucket_configuration] ||= {}
+          params[:create_bucket_configuration][:location_constraint] ||= region
         end
 
       end
