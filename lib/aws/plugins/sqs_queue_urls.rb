@@ -7,8 +7,8 @@ module Aws
 
         def call(context)
           if url = context.params[:queue_url]
-            update_endpoint(context, url)
             update_region(context, url)
+            update_endpoint(context, url)
           end
           @handler.call(context)
         end
@@ -18,7 +18,7 @@ module Aws
         end
 
         def update_region(context, url)
-          if region = url.split('.')[1]
+          if region = url.to_s.split('.')[1]
             context.config = context.config.dup
             context.config.region = region
             context.config.sigv4_region = region

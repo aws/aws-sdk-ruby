@@ -5,9 +5,8 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-
           s3_endpoint = context.config.endpoint
-          s3_endpoint = s3_endpoint.host if s3_endpoint.respond_to?(:host)
+          s3_endpoint = URI.parse(s3_endpoint.to_s).host if s3_endpoint
 
           region = context.config.region
           create_bucket_params = context.params[:create_bucket_configuration]
@@ -20,7 +19,6 @@ module Aws
           unless s3_endpoint.match(/s3\.amazonaws\.com$/) || location_constraint
             set_location_constraint(context, region)
           end
-
           @handler.call(context)
         end
 

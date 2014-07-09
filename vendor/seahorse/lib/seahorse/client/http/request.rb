@@ -1,11 +1,12 @@
 require 'stringio'
+require 'uri'
 
 module Seahorse
   module Client
     module Http
       class Request
 
-        # @option options [Endpoint] :endpoint (nil)
+        # @option options [URI::HTTP, URI::HTTPS] :endpoint (nil)
         # @option options [String] :http_method ('GET')
         # @option options [Headers] :headers (Headers.new)
         # @option options [Body] :body (StringIO.new)
@@ -17,7 +18,7 @@ module Seahorse
           self.body = options[:body]
         end
 
-        # @return [Endpoint, nil]
+        # @return [URI::HTTP, URI::HTTPS, nil]
         attr_accessor :endpoint
 
         # @return [String] The HTTP request method, e.g. `GET`, `PUT`, etc.
@@ -29,8 +30,16 @@ module Seahorse
         # @return [IO]
         attr_reader :body
 
+        # @param [String, URI::HTTP, URI::HTTPS, nil]
         def endpoint=(endpoint)
-          @endpoint = Endpoint.new(endpoint)
+          endpoint = URI.parse(endpoint) if endpoint.is_a?(String)
+          if endpoint.nil? or URI::HTTP === endpoint or URI::HTTPS === endpoint
+            @endpoint = endpoint
+          else
+            msg = "invalid endpoint, expected URI::HTTP, URI::HTTPS, or nil, "
+            msg << "got #{endpoint.inspect}"
+            raise ArgumentError, msg
+          end
         end
 
         # @return [String]

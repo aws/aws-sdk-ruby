@@ -72,10 +72,10 @@ module Aws
         params.set("X-Amz-Credential", credential(now))
 
         endpoint = request.endpoint
-        if endpoint.querystring
-          endpoint.request_uri += '&' + params.to_s
+        if endpoint.query
+          endpoint.query += '&' + params.to_s
         else
-          endpoint.request_uri += '?' + params.to_s
+          endpoint.query = params.to_s
         end
         endpoint.to_s + '&X-Amz-Signature=' + signature(request, now, body_digest)
       end
@@ -122,12 +122,16 @@ module Aws
       def canonical_request(request, body_digest)
         [
           request.http_method,
-          request.endpoint.path,
-          normalized_querystring(request.endpoint.querystring),
+          path(request.endpoint),
+          normalized_querystring(request.endpoint.query),
           canonical_headers(request) + "\n",
           signed_headers(request),
           body_digest
         ].join("\n")
+      end
+
+      def path(uri)
+        uri.path == '' ? '/' : uri.path
       end
 
       def normalized_querystring(querystring)

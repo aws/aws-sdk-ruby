@@ -22,7 +22,6 @@ module Seahorse
     autoload :Response, 'seahorse/client/response'
 
     module Http
-      autoload :Endpoint, 'seahorse/client/http/endpoint'
       autoload :Error, 'seahorse/client/http/error'
       autoload :Headers, 'seahorse/client/http/headers'
       autoload :Request, 'seahorse/client/http/request'

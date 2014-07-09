@@ -28,15 +28,17 @@ module Seahorse
           private
 
           def build_endpoint(context)
-            uri = URI.parse(Http::Endpoint.new(configured_endpoint(context)))
+            uri = configured_endpoint(context)
             apply_path_params(uri, context)
             apply_querystring_params(uri, context)
-            Http::Endpoint.new(uri)
+            uri
           end
 
           def configured_endpoint(context)
             if context.config.endpoint
-              context.config.endpoint
+              endpoint = context.config.endpoint.to_s
+              endpoint = "https://#{endpoint}" unless endpoint =~ /^http/
+              URI.parse(endpoint)
             else
               raise "required configuration option :endpoint not set"
             end
