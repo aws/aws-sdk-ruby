@@ -115,7 +115,7 @@
           "request": {
             "operation": "ReportInstanceStatus",
             "params": [
-              { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
+              { "target":"Instances[]", "sourceType":"identifier", "source":"Id" }
             ]
           }
         },
