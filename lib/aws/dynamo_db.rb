@@ -124,10 +124,12 @@ module AWS
 
     endpoint_prefix 'dynamodb'
 
+    IGNORING_API_SPECIFIED_MSG = "WARNING: Ignoring DynamoDB API version specified because only '2011-12-05' is supported by this class.  To use another version of the API, invoke the lower level AWS::DynamoDB::Client explicitly."
 
     def initialize options = {}
       options = options.dup
       options[:dynamo_db] ||= {}
+      warn(IGNORING_API_SPECIFIED_MSG) if options[:dynamo_db][:api_version]
       options[:dynamo_db][:api_version] = '2011-12-05'
       super(options)
     end
