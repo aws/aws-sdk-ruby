@@ -44,6 +44,16 @@
       "paginators": "apis/cloudtrail-2013-11-01.paginators.json"
     }
   },
+  "CognitoIdentity": {
+    "2014-06-30": {
+      "api": "apis/cognito-identity-2014-06-30.api.json"
+    }
+  },
+  "CognitoSync": {
+    "2014-06-30": {
+      "api": "apis/cognito-sync-2014-06-30.api.json"
+    }
+  },
   "DataPipeline": {
     "2012-10-29": {
       "api": "apis/datapipeline-2012-10-29.api.json",
