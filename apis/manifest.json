@@ -150,6 +150,12 @@
       "paginators": "apis/kinesis-2013-12-02.paginators.json"
     }
   },
+  "CloudWatchLogs": {
+    "2014-03-28": {
+      "api": "apis/logs-2014-03-28.api.json",
+      "paginators": "apis/logs-2014-03-28.paginators.json"
+    }
+  },
   "CloudWatch": {
     "2010-08-01": {
       "api": "apis/monitoring-2010-08-01.api.json",
