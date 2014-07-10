@@ -3851,6 +3851,18 @@
               - :string
               - :rename: Group
   :outputs: {}
+- :name: ModifySubnetAttribute
+  :method: :modify_subnet_attribute
+  :inputs:
+    SubnetId:
+    - :string
+    - :required
+    - :rename: SubnetId
+    MapPublicIpOnLaunch:
+    - :structure:
+        Value:
+        - :boolean
+  :outputs: {}
 - :name: ModifyVolumeAttribute
   :method: :modify_volume_attribute
   :inputs:
