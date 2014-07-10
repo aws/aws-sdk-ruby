@@ -4,100 +4,93 @@ module Aws
   GEM_ROOT = File.dirname(File.dirname(__FILE__))
 
   # @api private
-  SRC = GEM_ROOT + '/lib/aws'
+  SRC = File.join(GEM_ROOT, 'lib', 'aws')
 
   @config = {}
 
-  autoload :Credentials, "#{SRC}/credentials"
+  autoload :Client, "#{SRC}/client"
   autoload :CredentialProviderChain, "#{SRC}/credential_provider_chain"
+  autoload :Credentials, "#{SRC}/credentials"
+  autoload :EmptyStructure, "#{SRC}/empty_structure"
+  autoload :EndpointProvider, "#{SRC}/endpoint_provider"
   autoload :Errors, "#{SRC}/errors"
-  autoload :ErrorHandler, "#{SRC}/error_handler"
   autoload :InstanceProfileCredentials, "#{SRC}/instance_profile_credentials"
   autoload :PageableResponse, "#{SRC}/pageable_response"
-  autoload :RequestHandler, "#{SRC}/request_handler"
-  autoload :ResponseHandler, "#{SRC}/response_handler"
+  autoload :RestBodyHandler, "#{SRC}/rest_body_handler"
   autoload :Service, "#{SRC}/service"
   autoload :SharedCredentials, "#{SRC}/shared_credentials"
   autoload :Structure, "#{SRC}/structure"
-  autoload :TimestampFormatter, "#{SRC}/timestamp_formatter"
   autoload :TreeHash, "#{SRC}/tree_hash"
-  autoload :Util, "#{SRC}/util"
   autoload :VERSION, "#{SRC}/version"
 
   # @api private
   module Api
-    autoload :BaseTranslator, "#{SRC}/api/base_translator"
-    autoload :Documentor, "#{SRC}/api/documentor"
+    autoload :Customizer, "#{SRC}/api/customizer"
     autoload :DocExample, "#{SRC}/api/doc_example"
-    autoload :InputShapeTranslator, "#{SRC}/api/shape_translator"
-    autoload :OperationTranslator, "#{SRC}/api/operation_translator"
-    autoload :OutputShapeTranslator, "#{SRC}/api/shape_translator"
-    autoload :PaginationTranslator, "#{SRC}/api/pagination_translator"
-    autoload :ServiceNamer, "#{SRC}/api/service_namer"
-    autoload :ShapeTranslator, "#{SRC}/api/shape_translator"
-    autoload :Translator, "#{SRC}/api/translator"
-    autoload :Visitor, "#{SRC}/api/visitor"
-
-    module ServiceTranslators
-      autoload :CloudFront, "#{SRC}/api/service_translators/cloud_front"
-      autoload :CloudSearchDomain, "#{SRC}/api/service_translators/cloud_search_domain"
-      autoload :DynamoDB, "#{SRC}/api/service_translators/dynamo_db"
-      autoload :EC2, "#{SRC}/api/service_translators/ec2"
-      autoload :Glacier, "#{SRC}/api/service_translators/glacier"
-      autoload :ImportExport, "#{SRC}/api/service_translators/import_export"
-      autoload :Route53, "#{SRC}/api/service_translators/route53"
-      autoload :S3, "#{SRC}/api/service_translators/s3"
-      autoload :SQS, "#{SRC}/api/service_translators/sqs"
-      autoload :SWF, "#{SRC}/api/service_translators/swf"
-    end
-
+    autoload :Documentor, "#{SRC}/api/documentor"
+    autoload :Manifest, "#{SRC}/api/manifest"
+    autoload :ManifestBuilder, "#{SRC}/api/manifest_builder"
+    autoload :ServiceCustomizations, "#{SRC}/api/service_customizations"
   end
 
   # @api private
   module Json
     autoload :Builder, "#{SRC}/json/builder"
-    autoload :ErrorParser, "#{SRC}/json/error_parser"
+    autoload :ErrorHandler, "#{SRC}/json/error_handler"
     autoload :Parser, "#{SRC}/json/parser"
-    autoload :Serializer, "#{SRC}/json/serializer"
+    autoload :RestHandler, "#{SRC}/json/rest_handler"
+    autoload :RpcBodyHandler, "#{SRC}/json/rpc_body_handler"
+    autoload :RpcHeadersHandler, "#{SRC}/json/rpc_headers_handler"
+    autoload :SimpleBodyHandler, "#{SRC}/json/simple_body_handler"
+  end
+
+  # @api private
+  module Paging
+    autoload :NullPager, "#{SRC}/paging/null_pager"
+    autoload :NullProvider, "#{SRC}/paging/null_provider"
+    autoload :Pager, "#{SRC}/paging/pager"
+    autoload :Provider, "#{SRC}/paging/provider"
   end
 
   module Plugins
-    autoload :Credentials, "#{SRC}/plugins/credentials"
     autoload :DynamoDBExtendedRetries, "#{SRC}/plugins/dynamodb_extended_retries"
     autoload :EC2CopyEncryptedSnapshot, "#{SRC}/plugins/ec2_copy_encrypted_snapshot"
     autoload :GlacierAccountId, "#{SRC}/plugins/glacier_account_id"
     autoload :GlacierApiVersion, "#{SRC}/plugins/glacier_api_version"
     autoload :GlacierChecksums, "#{SRC}/plugins/glacier_checksums"
     autoload :GlobalConfiguration, "#{SRC}/plugins/global_configuration"
-    autoload :JsonProtocol, "#{SRC}/plugins/json_protocol"
-    autoload :JsonRpcHeaders, "#{SRC}/plugins/json_rpc_headers"
-    autoload :QueryProtocol, "#{SRC}/plugins/query_protocol"
     autoload :RegionalEndpoint, "#{SRC}/plugins/regional_endpoint"
     autoload :ResponsePaging, "#{SRC}/plugins/response_paging"
+    autoload :RequestSigner, "#{SRC}/plugins/request_signer"
     autoload :RetryErrors, "#{SRC}/plugins/retry_errors"
     autoload :S3BucketDns, "#{SRC}/plugins/s3_bucket_dns"
     autoload :S3CompleteMultipartUploadFix, "#{SRC}/plugins/s3_complete_multipart_upload_fix"
     autoload :S3GetBucketLocationFix, "#{SRC}/plugins/s3_get_bucket_location_fix"
+    autoload :S3LocationConstraint, "#{SRC}/plugins/s3_location_constraint"
     autoload :S3Md5s, "#{SRC}/plugins/s3_md5s"
     autoload :S3Redirects, "#{SRC}/plugins/s3_redirects"
-    autoload :S3Signer, "#{SRC}/plugins/s3_signer"
     autoload :S3SseCpk, "#{SRC}/plugins/s3_sse_cpk"
-    autoload :S3LocationConstraint, "#{SRC}/plugins/s3_location_constraint"
-    autoload :SignatureV2, "#{SRC}/plugins/signature_v2"
-    autoload :SignatureV3, "#{SRC}/plugins/signature_v3"
-    autoload :SignatureV4, "#{SRC}/plugins/signature_v4"
     autoload :SQSQueueUrls, "#{SRC}/plugins/sqs_queue_urls"
     autoload :SWFReadTimeouts, "#{SRC}/plugins/swf_read_timeouts"
     autoload :UserAgent, "#{SRC}/plugins/user_agent"
-    autoload :XmlProtocol, "#{SRC}/plugins/xml_protocol"
+
+    module Protocols
+      autoload :EC2, "#{SRC}/plugins/protocols/ec2"
+      autoload :JsonRpc, "#{SRC}/plugins/protocols/json_rpc"
+      autoload :Query, "#{SRC}/plugins/protocols/query"
+      autoload :RestJson, "#{SRC}/plugins/protocols/rest_json"
+      autoload :RestXml, "#{SRC}/plugins/protocols/rest_xml"
+    end
+
   end
 
   # @api private
   module Query
-    autoload :Builder, "#{SRC}/query/builder"
+    autoload :EC2ParamBuilder, "#{SRC}/query/ec2_param_builder"
+    autoload :Handler, "#{SRC}/query/handler"
     autoload :Param, "#{SRC}/query/param"
+    autoload :ParamBuilder, "#{SRC}/query/param_builder"
     autoload :ParamList, "#{SRC}/query/param_list"
-    autoload :Serializer, "#{SRC}/query/serializer"
   end
 
   # @api private
@@ -113,9 +106,9 @@ module Aws
   # @api private
   module Xml
     autoload :Builder, "#{SRC}/xml/builder"
-    autoload :ErrorParser,  "#{SRC}/xml/error_parser"
+    autoload :ErrorHandler,  "#{SRC}/xml/error_handler"
     autoload :Parser, "#{SRC}/xml/parser"
-    autoload :Serializer, "#{SRC}/xml/serializer"
+    autoload :RestHandler, "#{SRC}/xml/rest_handler"
   end
 
   class << self
@@ -124,11 +117,13 @@ module Aws
     #   by all constructed clients.
     attr_reader :config
 
+    # @param [Hash] config
     def config=(config)
-      unless Hash === config
+      if Hash === config
+        @config = config
+      else
         raise ArgumentError, 'configuration object must be a hash'
       end
-      @config = config
     end
 
     # Adds a plugin to every AWS client class.  This registers the plugin
@@ -136,8 +131,8 @@ module Aws
     # @param [Plugin] plugin
     # @return [void]
     def add_plugin(plugin)
-      service_classes.values.each do |svc_class|
-        svc_class.add_plugin(plugin)
+      service_clients.each do |client|
+        client.add_plugin(plugin)
       end
     end
 
@@ -146,67 +141,68 @@ module Aws
     # @param [Plugin] plugin
     # @return [void]
     def remove_plugin(plugin)
-      service_classes.values.each do |svc_class|
-        svc_class.remove_plugin(plugin)
+      service_clients.each do |client|
+        client.remove_plugin(plugin)
       end
+    end
+
+    # @return [Hash<Symbol,Module>]
+    # @api private
+    def service_modules
+      @service_modules ||= {}
     end
 
     # @return [Array<Class>]
     # @api private
-    def service_classes
-      @service_classes ||= {}
+    def service_clients
+      service_modules.map { |_,svc_mod| svc_mod.const_get(:Client) }
     end
 
     # Registers a new service interface.  This method accepts a constant
-    # (class name) for the new service class and a list of client API
+    # (class name) for the new service class and map of API
     # versions.
     #
-    #     Aws.add_service(:S3, ['apis/S3-2006-03-01.json'])
+    #     # register a new service & API version
+    #     Aws.add_service('S3', {
+    #       '2006-03-01' => {
+    #          'api' => '/path/to/api.json',
+    #          'paginators' => '/path/to/paginators.json',
+    #        }
+    #     }
     #
-    # This method is called for each service defined in the apis directory of
-    # this project.
+    #     # create a versioned client
+    #     Aws::S3.new
+    #     #=> #<Aws::S3::V20060301>
     #
-    # @note You should normally not need to call this method directly.
+    # You can register multiple API versions for a service, and
     #
-    # @param [Symbol] name The name of the new service class.
-    # @param [Array<String, Seahorse::Model::Api>] apis
-    # @return [Class<Service>]
-    def add_service(name, apis = [])
-      svc_class = const_set(name, Service.define(name.downcase.to_sym, apis))
-      add_helper(svc_class.identifier, svc_class)
-      svc_class
+    # @param [String] name The name of the new service class.
+    # @param [Hash<YYYY-MM-DD,Hash>] versions A hash of API versions.  Hash
+    #   keys are API version dates, and values are hashes of:
+    #   * 'api' - path to API defintion
+    #   * 'paginators' - path to paginator defintion
+    # @return [class<Service>]
+    def add_service(name, versions = {})
+      identifier = name.to_s.downcase.to_sym
+      svc = const_set(name, Service.define(identifier, versions))
+      add_helper(identifier, svc)
+      svc
     end
 
     private
 
-    # Defines a `Aws.svcname` helper method.  This method accepts a hash
-    # of configuration options.
-    #
-    #    s3 = Aws.s3(http_wire_trace:true)
-    #    #=> Aws::S3::V20060301
-    #
-    #    s3.config.http_wire_trace
-    #    #=> true
-    #
-    def add_helper(method_name, svc_class)
-      service_classes[method_name] = svc_class
+    def add_helper(method_name, svc_mod)
+      service_modules[method_name] = svc_mod
       define_method(method_name) do |options = {}|
-        svc_class.new(options)
+        svc_mod.const_get(:Client).new(options)
       end
       module_function(method_name)
     end
 
-    # @return Returns a hash of API paths grouped by their service class names.
-    def bundled_apis
-      Dir.glob(File.join(GEM_ROOT, 'apis', '*.json')).group_by do |path|
-        File.basename(path).split('-').first
-      end
-    end
-
   end
 
-  bundled_apis.each do |svc_class_name, api_versions|
-    add_service(svc_class_name, api_versions)
+  Api::Manifest.default_manifest.services.each do |service|
+    add_service(service.name, service.versions)
   end
 
 end

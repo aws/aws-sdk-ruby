@@ -68,8 +68,9 @@ module Aws
 
         def new_endpoint(context)
           body = context.http_request.body_contents
-          endpoint = context.http_request.endpoint.to_s + '?' + body
-          Seahorse::Client::Http::Endpoint.new(endpoint)
+          endpoint = context.http_request.endpoint
+          endpoint.query = body
+          endpoint
         end
 
         def presigned_url(http_request, config)

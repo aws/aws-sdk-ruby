@@ -16,95 +16,61 @@ module Seahorse
       #
       class Endpoint < Plugin
 
-        option(:endpoint) { |config| config.api.endpoint }
+        option(:endpoint)
 
         class Handler < Client::Handler
 
           def call(context)
-            endpoint = Http::Endpoint.new(endpoint_for(context))
-            apply_url_params(endpoint, context)
-            context.http_request.endpoint = endpoint
+            context.http_request.endpoint = build_endpoint(context)
             @handler.call(context)
           end
 
           private
 
-          def apply_url_params(endpoint, context)
-            prefix = endpoint.path.sub(/\/$/, '')
-            endpoint.request_uri = prefix + RequestUriBuilder.new(
-              context.operation.http_path || '/',
-              context.operation.input.uri_members,
-            ).path(context.params)
+          def build_endpoint(context)
+            uri = configured_endpoint(context)
+            apply_path_params(uri, context)
+            apply_querystring_params(uri, context)
+            uri
           end
 
-          def endpoint_for(context)
+          def configured_endpoint(context)
             if context.config.endpoint
-              context.config.endpoint
+              endpoint = context.config.endpoint.to_s
+              endpoint = "https://#{endpoint}" unless endpoint =~ /^http/
+              URI.parse(endpoint)
             else
               raise "required configuration option :endpoint not set"
             end
           end
 
-        end
-
-
-        handle(Handler, priority: 90)
-
-        # @api private
-        class RequestUriBuilder
-
-          PLACEHOLDER_REGEX = /{\w+?}/
-
-          # @param [String] path_pattern
-          # @param [Hash<Model::Shapes::Shape>] rules
-          def initialize(path_pattern, rules)
-            @pattern = path_pattern
-            @rules = rules
-          end
-
-          # @param [Hash] params
-          # @return [String<URI path>]
-          def path(params)
-            path, querystring = @pattern.split('?')
-            path = escape_path_params(path, params)
-            if querystring
-              querystring = escape_querystring_params(querystring, params)
-              path = "#{path}?#{querystring}" unless querystring.empty?
-            end
-            path
-          end
-
-          private
-
-          def escape_path_params(path, params)
-            path.gsub(PLACEHOLDER_REGEX) do |placeholder|
-              param_value = params[param_name(placeholder)]
-              path_escape(param_value)
+          def apply_path_params(uri, context)
+            path = uri.path.sub(/\/$/, '')
+            path += context.operation.http_request_uri.split('?')[0]
+            input = context.operation.input
+            uri.path = path.gsub(/{\w+}/) do |placeholder|
+              placeholder = placeholder[1..-2]
+              name, shape = input.member_by_location_name(placeholder)
+              param = context.params[name]
+              param.split('/').map{ |value| escape(value) }.join('/')
             end
           end
 
-          def escape_querystring_params(querystring, params)
+          def apply_querystring_params(uri, context)
             parts = []
-            querystring.split('&').each do |part|
-              if match = part.match(PLACEHOLDER_REGEX)
-                placeholder = match[0]
-                param_value = params[param_name(placeholder)]
-                unless param_value.nil?
-                  parts << part.sub(placeholder, escape(param_value.to_s))
+            parts << context.operation.http_request_uri.split('?')[1]
+            parts.compact!
+            if input = context.operation.input
+              params = context.params
+              input.members.each do |member_name, member|
+                if member.location == 'querystring' && params.key?(member_name)
+                  param_name = member.location_name
+                  param_value = params[member_name]
+                  parts << "#{param_name}=#{escape(param_value.to_s)}"
                 end
-              else
-                parts << part # querystring param has no substitution
               end
             end
-            parts.join('&')
-          end
-
-          def param_name(placeholder)
-            placeholder[1..-2].to_sym
-          end
-
-          def path_escape(value)
-            escape(value).gsub('%2F', '/')
+            uri.query = parts.empty? ? nil : parts.join('&')
           end
 
           def escape(string)
@@ -112,6 +78,9 @@ module Seahorse
           end
 
         end
+
+        handle(Handler, priority: 90)
+
       end
     end
   end

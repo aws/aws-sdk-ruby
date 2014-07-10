@@ -57,6 +57,7 @@ module Aws
 
       def self.extended(submodule)
         submodule.instance_variable_set("@const_set_mutex", Mutex.new)
+        submodule.const_set(:ServiceError, Class.new(ServiceError))
       end
 
       def const_missing(constant)
@@ -89,7 +90,7 @@ module Aws
           if error_const_set?(constant)
             const_get(constant)
           else
-            const_set(constant , Class.new(ServiceError))
+            const_set(constant, Class.new(const_get(:ServiceError)))
           end
         end
       end

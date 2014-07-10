@@ -3,62 +3,52 @@ require 'spec_helper'
 module Aws
   describe PageableResponse do
 
-    let(:resp) { Seahorse::Client::Response.new }
+    let(:pager) { Paging::Pager.new(rules) }
 
-    let(:operation) { double('operation', metadata: { 'paging' => paging }) }
-
-    let(:pager) { PageableResponse.new(resp) }
-
-    let(:paging) { nil }
-
-    before(:each) do
-      resp.context.operation = operation
-    end
+    let(:resp) { PageableResponse.new(Seahorse::Client::Response.new, pager) }
 
     # If an operation has no paging metadata, then it is considered
     # un-pageable and will always treat a response as the last page.
     describe 'unpageable-operation' do
 
+      let(:pager) { Paging::NullPager.new }
+
       it 'returns true from #last_page?' do
-        expect(pager.last_page?).to be(true)
-        expect(pager.next_page?).to be(false)
+        expect(resp.last_page?).to be(true)
+        expect(resp.next_page?).to be(false)
       end
 
       it 'raises a LastPageError when calling next_page' do
-        expect { pager.next_page }.to raise_error(PageableResponse::LastPageError)
+        expect { resp.next_page }.to raise_error(PageableResponse::LastPageError)
       end
 
       it 'popualtes the error with the response' do
         begin
-          pager.next_page
+          resp.next_page
         rescue => error
-          expect(error.response).to eq(resp)
+          expect(error.response).to be(resp)
         end
       end
 
     end
 
-    # When paging is configured with tokens, the token keys are treated
-    # as request parameters and the values are treated as response data
-    # elements to map into the next request.
-    describe 'paging with tokens' do
+    describe 'pagable operations' do
 
-      let(:paging) {{
-        'tokens' => {
-          'offset' => 'next_token'
-        }
+      let(:rules) {{
+        'input_token' => 'Offset',
+        'output_token' => 'NextToken',
       }}
 
       it 'returns false from last page if the paging token value is present' do
         resp.data = { 'next_token' => 'OFFSET' }
-        expect(pager.last_page?).to be(false)
-        expect(pager.next_page?).to be(true)
+        expect(resp.last_page?).to be(false)
+        expect(resp.next_page?).to be(true)
       end
 
       it 'is not pageable if response data does not contain tokens' do
         resp.data = { }
-        expect(pager.last_page?).to be(true)
-        expect(pager.next_page?).to be(false)
+        expect(resp.last_page?).to be(true)
+        expect(resp.next_page?).to be(false)
       end
 
       it 'responds to #next_page by sending a new request with tokens applied' do
@@ -76,36 +66,34 @@ module Aws
         expect(new_request).to receive(:send_request).
           and_return(Seahorse::Client::Response.new)
 
-        pager.next_page
+        resp.next_page
       end
 
     end
 
     describe 'paging with multiple tokens' do
 
-      let(:paging) {{
-        'tokens' => {
-          'offset_a' => 'group',
-          'offset_b' => 'value',
-        }
+      let(:rules) {{
+        'input_token' => ['OffsetA', 'OffsetB'],
+        'output_token' => ['Group', 'Value'],
       }}
 
       it 'returns false from last page if all paging tokens are present' do
         resp.data = { 'group' => 'a', 'value' => 'b' }
-        expect(pager.last_page?).to be(false)
-        expect(pager.next_page?).to be(true)
+        expect(resp.last_page?).to be(false)
+        expect(resp.next_page?).to be(true)
       end
 
       it 'returns false from last page if ANY paging token is present' do
         resp.data = { 'group' => 'a' }
-        expect(pager.last_page?).to be(false)
-        expect(pager.next_page?).to be(true)
+        expect(resp.last_page?).to be(false)
+        expect(resp.next_page?).to be(true)
       end
 
       it 'returns true from last page if NO paging tokens are present' do
         resp.data = { }
-        expect(pager.last_page?).to be(true)
-        expect(pager.next_page?).to be(false)
+        expect(resp.last_page?).to be(true)
+        expect(resp.next_page?).to be(false)
       end
 
       it 'sends any tokens found a request params' do
@@ -122,50 +110,38 @@ module Aws
 
         allow(new_request).to receive(:send_request).and_return(resp)
 
-        pager.next_page
+        resp.next_page
       end
 
     end
 
     describe 'paging with truncation indicator' do
 
-      let(:paging) {{
-        'tokens' => { 'marker' => 'next_marker' },
-        'truncated_if' => 'is_truncated'
+      let(:rules) {{
+        'input_token' => 'Marker',
+        'output_token' => 'NextMarker',
+        'more_results' => 'IsTruncated',
       }}
 
       it 'returns false from last page if the truncation marker is true' do
         resp.data = { 'is_truncated' => true }
-        expect(pager.last_page?).to be(false)
-        expect(pager.next_page?).to be(true)
+        expect(resp.last_page?).to be(false)
+        expect(resp.next_page?).to be(true)
       end
 
       it 'returns true from last page if the truncation marker is false' do
         resp.data = { 'is_truncated' => false }
-        expect(pager.last_page?).to be(true)
-        expect(pager.next_page?).to be(false)
-      end
-
-    end
-
-    describe 'custom paging rules' do
-
-      let(:paging) {{ 'tokens' => { 'offset' => 'next_token' } }}
-
-      it 'can be constructed with an empty set of rules to disable paging' do
-        pager = PageableResponse.new(resp, paging_rules: {})
-        expect(pager.last_page?).to be(true)
-        expect(pager.next_page?).to be(false)
+        expect(resp.last_page?).to be(true)
+        expect(resp.next_page?).to be(false)
       end
 
     end
 
     describe '#each_page' do
 
-      let(:paging) {{
-        'tokens' => {
-          'offset' => 'next_token'
-        }
+      let(:rules) {{
+        'input_token' => 'Offset',
+        'output_token' => 'NextToken',
       }}
 
       it 'yields once per paging result' do
@@ -186,8 +162,8 @@ module Aws
         allow(new_request).to receive(:send_request).and_return(resp2)
 
         pages = []
-        pager.each { |r| pages << r }
-        expect(pages).to eq([resp, resp2])
+        resp.each { |r| pages << r.data }
+        expect(pages).to eq([resp.data, resp2.data])
       end
 
     end

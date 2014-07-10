@@ -4,19 +4,11 @@ module Aws
   module Json
     describe Parser do
 
-      let(:rules) {{
-        'type' => 'input',
-        'members' => {},
-      }}
-
-      let(:shape) { Seahorse::Model::Shapes::Shape.from_hash(rules) }
+      let(:members) { {} }
 
       def parse(json)
+        shape = Seahorse::Model::Shapes::Structure.new('members' => members)
         Parser.new.parse(shape, json).to_hash
-      end
-
-      it 'returns an empty hash when given an empty string' do
-        expect(parse('')).to eq({})
       end
 
       it 'returns an empty hash when the JSON is {}' do
@@ -26,45 +18,43 @@ module Aws
       describe 'structures' do
 
         it 'symbolizes structure members' do
-          rules['members'] = {
-            'name' => { 'type' => 'string' },
-          }
-          json = '{"name":"John Doe"}'
+          members['Name'] = { 'type' => 'string' }
+          json = '{"Name":"John Doe"}'
           expect(parse(json)).to eq(name: 'John Doe')
         end
 
         it 'parses members using their serialized name' do
-          rules['members'] = {
-            'first' => { 'type' => 'string', 'serialized_name' => 'FirstName' },
-            'last' => { 'type' => 'string', 'serialized_name' => 'LastName' }
+          members['First'] = {
+            'type' => 'string',
+            'locationName' => 'FirstName'
+          }
+          members['Last'] = {
+            'type' => 'string',
+            'locationName' => 'LastName'
           }
           json = '{"FirstName":"John", "LastName":"Doe"}'
           expect(parse(json)).to eq(first: 'John', last: 'Doe')
         end
 
         it 'ignores non-described values' do
-          rules['members'] = {
-            'foo' => { 'type' => 'string' },
-          }
-          json = '{"foo":"bar", "abc":"xyz"}'
+          members['Foo'] = { 'type' => 'string' }
+          json = '{"Foo":"bar", "Abc":"xyz"}'
           expect(parse(json)).to eq(foo: 'bar')
         end
 
         it 'skips over null values' do
-          rules['members'] = {
-            'base' => {
-              'type' => 'structure',
-              'members' => {
-                'nested' => {
-                  'type' => 'structure',
-                  'members' => {
-                    'leaf' => { 'type' => 'string' }
-                  }
+          members['Base'] = {
+            'type' => 'structure',
+            'members' => {
+              'Nested' => {
+                'type' => 'structure',
+                'members' => {
+                  'Leaf' => { 'type' => 'string' }
                 }
               }
-            },
+            }
           }
-          json = '{"base":{"nested":null}}'
+          json = '{"Base":{"Nested":null}}'
           expect(parse(json)).to eq(base: {})
         end
 
@@ -73,41 +63,35 @@ module Aws
       describe 'lists' do
 
         it 'returns nil for lists missing in the json' do
-          rules['members'] = {
-            'items' => {
-              'type' => 'list',
-              'members' => { 'type' => 'string' }
-            }
+          members['Values'] = {
+            'type' => 'list',
+            'member' => { 'type' => 'string' }
           }
           json = '{}'
-          expect(parse(json)[:items]).to be(nil)
+          expect(parse(json)[:values]).to be(nil)
         end
 
         it 'parses lists' do
-          rules['members'] = {
-            'items' => {
-              'type' => 'list',
-              'members' => { 'type' => 'string' }
-            }
+          members['Values'] = {
+            'type' => 'list',
+            'member' => { 'type' => 'string' }
           }
-          json = '{"items":["abc", "mno", "xyz"]}'
-          expect(parse(json)).to eq(items: %w(abc mno xyz))
+          json = '{"Values":["abc", "mno", "xyz"]}'
+          expect(parse(json)).to eq(values: %w(abc mno xyz))
         end
 
         it 'parses lists of complex members' do
-          rules['members'] = {
-            'items' => {
-              'type' => 'list',
+          members['Values'] = {
+            'type' => 'list',
+            'member' => {
+              'type' => 'structure',
               'members' => {
-                'type' => 'structure',
-                'members' => {
-                  'name' => { 'type' => 'string' }
-                }
+                'Name' => { 'type' => 'string' }
               }
             }
           }
-          json = '{"items":[{"name":"abc"},{"name":"xyz"}]}'
-          expect(parse(json)).to eq(items: [{name:'abc'}, {name:'xyz'}])
+          json = '{"Values":[{"Name":"abc"},{"Name":"xyz"}]}'
+          expect(parse(json)).to eq(values: [{name:'abc'}, {name:'xyz'}])
         end
 
       end
@@ -115,14 +99,12 @@ module Aws
       describe 'maps' do
 
         it 'parses maps as hashes (without symbolizing keys' do
-          rules['members'] = {
-            'attributes' => {
-              'type' => 'map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'string' }
-            }
+          members['Attributes'] = {
+            'type' => 'map',
+            'key' => { 'type' => 'string' },
+            'value' => { 'type' => 'string' }
           }
-          json = '{"attributes":{"Size":"large","Color":"red"}}'
+          json = '{"Attributes":{"Size":"large","Color":"red"}}'
           expect(parse(json)).to eq(attributes: {
             'Size' => 'large',
             'Color' => 'red'
@@ -134,11 +116,9 @@ module Aws
       describe 'booleans' do
 
         it 'converts true/false booleans' do
-          rules['members'] = {
-            'hot' => { 'type' => 'boolean' },
-            'cold' => { 'type' => 'boolean' },
-          }
-          json = '{"hot":true,"cold":false}'
+          members['Hot'] = { 'type' => 'boolean' }
+          members['Cold'] = { 'type' => 'boolean' }
+          json = '{"Hot":true,"Cold":false}'
           expect(parse(json)).to eq(hot: true, cold: false)
         end
 
@@ -147,18 +127,16 @@ module Aws
       describe 'timestamps' do
 
         before(:each) do
-          rules['members'] = {
-            'created_at' => {
-              'type' => 'timestamp',
-              'serialized_name' => 'CreatedAt',
-            }
+          members['CreatedAt'] = {
+            'type' => 'timestamp',
+            'locationName' => 'Created',
           }
         end
 
         it 'can parse unix timestamps' do
           timestamp = 1349908100
           time = Time.at(timestamp)
-          json = "{\"CreatedAt\":#{timestamp}}"
+          json = "{\"Created\":#{timestamp}}"
           data = parse(json)
           expect(data[:created_at]).to be_a(Time)
           expect(data[:created_at]).to eq(time)
@@ -167,7 +145,7 @@ module Aws
         it 'can parse unix timestamps expressed as floats' do
           timestamp = 1349908100.123
           time = Time.at(timestamp)
-          json = "{\"CreatedAt\":#{timestamp}}"
+          json = "{\"Created\":#{timestamp}}"
           data = parse(json)
           expect(data[:created_at]).to be_a(Time)
           expect(data[:created_at]).to eq(time)
@@ -176,7 +154,7 @@ module Aws
         it 'can parse iso8601 strings' do
           timestamp = '2012-09-10T15:47:10.001Z'
           time = Time.parse(timestamp).to_time.utc
-          json = "{\"CreatedAt\":\"#{timestamp}\"}"
+          json = "{\"Created\":\"#{timestamp}\"}"
           data = parse(json)
           expect(data[:created_at]).to be_a(Time)
           expect(data[:created_at]).to eq(time)
@@ -185,7 +163,7 @@ module Aws
         it 'can parse rfc822 strings' do
           timestamp = 'Wed, 10 Oct 2012 15:59:55 UTC'
           time = Time.parse(timestamp).to_time.utc
-          json = "{\"CreatedAt\":\"#{timestamp}\"}"
+          json = "{\"Created\":\"#{timestamp}\"}"
           data = parse(json)
           expect(data[:created_at]).to be_a(Time)
           expect(data[:created_at]).to eq(time)
@@ -196,7 +174,7 @@ module Aws
       describe 'integers' do
 
         it 'parses integers' do
-          rules['members'] = { 'count' => { 'type' => 'integer' } }
+          members['count'] = { 'type' => 'integer' }
           json = '{"count":123}'
           expect(parse(json)).to eq(count: 123)
         end
@@ -206,7 +184,7 @@ module Aws
       describe 'floats' do
 
         it 'parses floats' do
-          rules['members'] = { 'value' => { 'type' => 'float' } }
+          members['value'] = { 'type' => 'float' }
           json = '{"value":12.34}'
           expect(parse(json)).to eq(value: 12.34)
         end
@@ -216,9 +194,7 @@ module Aws
       describe 'blobs' do
 
         it 'base64 decodes blobs' do
-          rules['members'] = {
-            'data' => { 'type' => 'blob' }
-          }
+          members['data'] = { 'type' => 'blob' }
           json = '{"data":"aGVsbG8="}'
           expect(parse(json)).to eq(data: 'hello')
         end

@@ -39,16 +39,16 @@ module Aws
     class GlobalConfiguration < Seahorse::Client::Plugin
 
       # @api private
-      def before_initialize(service_class, options)
+      def before_initialize(client_class, options)
         # apply service specific defaults before the global aws defaults
-        apply_service_defaults(service_class, options)
-        apply_aws_defaults(options)
+        apply_service_defaults(client_class, options)
+        apply_aws_defaults(client_class, options)
       end
 
       private
 
-      def apply_service_defaults(service_class, options)
-        if defaults = Aws.config[identifier(service_class)]
+      def apply_service_defaults(client_class, options)
+        if defaults = Aws.config[client_class::IDENTIFIER]
           defaults.each do |option_name, default|
             next if option_name == :api_version
             next if options.key?(option_name)
@@ -57,21 +57,14 @@ module Aws
         end
       end
 
-      def apply_aws_defaults(options)
+      def apply_aws_defaults(client_class, options)
         Aws.config.each do |option_name, default|
-          next if svc_identifier?(option_name)
+          next if client_class::IDENTIFIER == option_name
+          next if Aws.service_modules.key?(option_name)
           next if option_name == :api_version
           next if options.key?(option_name)
           options[option_name] = default
         end
-      end
-
-      def identifier(service_class)
-        service_class.api.metadata['service_class_name'].downcase.to_sym
-      end
-
-      def svc_identifier?(option_name)
-        Aws.service_classes.key?(option_name)
       end
 
     end

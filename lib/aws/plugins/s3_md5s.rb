@@ -47,16 +47,13 @@ module Aws
       option(:compute_checksums, true)
 
       def add_handlers(handlers, config)
-        options = {
-          priority: 10, # set intentially low so the md5 is computed after
-          step: :build, # the request is built but before it is signed
-        }
-
-        if !config.compute_checksums
-          options[:operations] = REQUIRED_OPERATIONS
-        end
-
-        handlers.add(Handler, options)
+        # priority set low to ensure md5 is computed AFTER the request is
+        # built but before it is signed
+        handlers.add(Handler, {
+          priority: 10,
+          step: :build,
+          operations: config.compute_checksums ? nil : REQUIRED_OPERATIONS,
+        })
       end
 
     end

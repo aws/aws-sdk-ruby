@@ -7,8 +7,8 @@ module Aws
 
       def self.sign(context)
         new(
-          context.config.sigv4_name,
           context.config.credentials,
+          context.config.sigv4_name,
           context.config.sigv4_region
         ).sign(context.http_request)
       end
@@ -19,7 +19,7 @@ module Aws
       #   the endpoint prefix.
       # @param [String] region The region (e.g. 'us-west-1') the request
       #   will be made to.
-      def initialize(service_name, credentials, region)
+      def initialize(credentials, service_name, region)
         @service_name = service_name
         @credentials = credentials
         @region = region
@@ -72,10 +72,10 @@ module Aws
         params.set("X-Amz-Credential", credential(now))
 
         endpoint = request.endpoint
-        if endpoint.querystring
-          endpoint.request_uri += '&' + params.to_s
+        if endpoint.query
+          endpoint.query += '&' + params.to_s
         else
-          endpoint.request_uri += '?' + params.to_s
+          endpoint.query = params.to_s
         end
         endpoint.to_s + '&X-Amz-Signature=' + signature(request, now, body_digest)
       end
@@ -122,12 +122,21 @@ module Aws
       def canonical_request(request, body_digest)
         [
           request.http_method,
-          request.endpoint.path,
-          normalized_querystring(request.endpoint.querystring),
+          path(request.endpoint),
+          normalized_querystring(request.endpoint.query),
           canonical_headers(request) + "\n",
           signed_headers(request),
           body_digest
         ].join("\n")
+      end
+
+      def path(uri)
+        path = uri.path == '' ? '/' : uri.path
+        if @service_name == 's3'
+          path
+        else
+          path.gsub(/[^\/]+/) { |segment| Seahorse::Util.uri_escape(segment) }
+        end
       end
 
       def normalized_querystring(querystring)

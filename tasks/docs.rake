@@ -28,7 +28,7 @@ end
 
 desc "Generate the API documentation."
 task :doc => ['doc:clobber', 'doc:readme'] do
-  sh "bundle exec yard"
+  sh "SOURCE=1 bundle exec yard"
 end
 
 # Generates an HTML table of supported services that is used by README.md
@@ -37,11 +37,12 @@ def supported_services_table
   line = "| %-35s | %-25s | %-30s |\n"
 
   lines = []
-  Aws.service_classes.keys.sort_by(&:downcase).each do |svc|
-    svc = Aws.service_classes[svc]
-    client = svc.default_client_class
-    full_name = client.api.metadata['service_full_name']
-    versions = svc.api_versions
+  Aws::Api::Manifest.default_manifest.services.each do |svc|
+    api = MultiJson.load(File.read(svc.versions.values.first['api']))
+    api = Seahorse::Model::Api.new(api)
+    full_name = api.metadata('serviceFullName')
+    versions = svc.versions.keys
+
     if versions.size > 1
       versions = "#{versions.first} &mdash; #{versions.last}"
     else

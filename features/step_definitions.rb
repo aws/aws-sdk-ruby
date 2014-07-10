@@ -16,7 +16,7 @@ def eventually(options = {}, &block)
 end
 
 def underscore(str)
-  Aws::Util.underscore(str)
+  Seahorse::Util.underscore(str)
 end
 
 def symbolized_params(table)
@@ -43,8 +43,13 @@ When(/^I call the "(.*?)" API$/) do |api|
   @response = @client.send(underscore(api))
 end
 
-When(/^I (attempt to )?call the "(.*?)" API with:$/) do |_, api, params|
-  params = @raw_json ? raw_params(params) : symbolized_params(params)
+When(/^I call the "(.*?)" API with:$/) do |api, params|
+  params = @simple_json ? raw_params(params) : symbolized_params(params)
+  @response = @client.send(underscore(api), params)
+end
+
+When(/^I attempt to call the "(.*?)" API with:$/) do |api, params|
+  params = @simple_json ? raw_params(params) : symbolized_params(params)
   begin
     @response = @client.send(underscore(api), params)
   rescue => @error

@@ -45,9 +45,8 @@ module Seahorse
             expect(config.ssl_verify_peer).to eq(true)
           end
 
-          it 'adds a :ssl_ca_bundle option with default' do
-            expect(config.ssl_ca_bundle).to eq(File.expand_path(File.join(
-              File.dirname(__FILE__), '..', '..', '..', '..', 'ca-bundle.crt')))
+          it 'defaults the :ssl_ca_bundle to nil' do
+            expect(config.ssl_ca_bundle).to be(nil)
           end
 
           it 'adds a :ssl_ca_directory option without default' do

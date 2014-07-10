@@ -2,10 +2,10 @@ module Seahorse
   module Client
     describe ParamValidator do
 
-      let(:rules) {{ 'type' => 'input', 'members' => {} }}
+      let(:rules) {{ 'type' => 'structure', 'members' => {} }}
 
       def validate(params, expected_errors = [])
-        shape = Model::Shapes::Shape.from_hash(rules)
+        shape = Model::Shapes::Shape.new(rules)
         if expected_errors.empty?
           ParamValidator.new(shape).validate!(params)
         else
@@ -60,8 +60,9 @@ module Seahorse
         end
 
         it 'raises an error when a required paramter is missing' do
+          rules['required'] = %w(name)
           rules['members'] = {
-            'name' => { 'type' => 'string', 'required' => true }
+            'name' => { 'type' => 'string' }
           }
           validate({}, 'missing required parameter params[:name]')
         end
@@ -71,15 +72,17 @@ module Seahorse
         end
 
         it 'accepts members that pass validation' do
+          rules['required'] = %w(name)
           rules['members'] = {
-            'name' => { 'type' => 'string', 'required' => true }
+            'name' => { 'type' => 'string' }
           }
           validate(name: 'john doe')
         end
 
         it 'aggregates errors for members' do
+          rules['required'] = %w(name)
           rules['members'] = {
-            'name' => { 'type' => 'string', 'required' => true }
+            'name' => { 'type' => 'string' }
           }
           validate({foo: 'bar'}, [
             'missing required parameter params[:name]',
@@ -91,8 +94,9 @@ module Seahorse
           rules['members'] = {
             'config' => {
               'type' => 'structure',
+              'required' => %w(name),
               'members' => {
-                'name' => { 'type' => 'string', 'required' => true }
+                'name' => { 'type' => 'string' }
               }
             }
           }
@@ -109,17 +113,17 @@ module Seahorse
             # list of strings
             'names' => {
               'type' => 'list',
-              'members' => { 'type' => 'string' }
+              'member' => { 'type' => 'string' }
             },
             # list of structures
             'filters' => {
               'type' => 'list',
-              'members' => {
+              'member' => {
                 'type' => 'structure',
                 'members' => {
                   'values' => {
                     'type' => 'list',
-                    'members' => { 'type' => 'string' }
+                    'member' => { 'type' => 'string' }
                   }
                 }
               }
@@ -157,8 +161,8 @@ module Seahorse
           rules['members'] = {
             'attributes' => {
               'type' => 'map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'integer' }
+              'key' => { 'type' => 'string' },
+              'value' => { 'type' => 'integer' }
             }
           }
         end
@@ -208,9 +212,9 @@ module Seahorse
         it 'accepts time objects' do
           rules['members'] = {
             'a' => { 'type' => 'timestamp' },
-            'b' => { 'type' => 'iso8601_timestamp' },
-            'c' => { 'type' => 'rfc822_timestamp' },
-            'd' => { 'type' => 'unix_timestamp' },
+            'b' => { 'type' => 'timestamp', 'metadata' => { 'timestamp_format' => 'iso8601' }},
+            'c' => { 'type' => 'timestamp', 'metadata' => { 'timestamp_format' => 'rfc822' }},
+            'd' => { 'type' => 'timestamp', 'metadata' => { 'timestamp_format' => 'unix_timestamp' }},
           }
           validate(a: Time.now)
           validate(b: Time.now)

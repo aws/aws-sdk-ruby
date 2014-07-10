@@ -37,6 +37,18 @@ module Seahorse
         self
       end
 
+      # Yields to the block if the response has a 200 level status code.
+      # @return [self]
+      def on_success(&block)
+        on(200..299, &block)
+      end
+
+      # @param [Boolean] Returns `true` if the http response status
+      #   is a 200 level status code.
+      def successful?
+        (200..299).include?(status_code)
+      end
+
       # @api private
       def respond_to?(*args)
         @data.respond_to?(args.first, false) || super

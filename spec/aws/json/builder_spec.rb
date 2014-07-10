@@ -4,15 +4,11 @@ module Aws
   module Json
     describe Builder do
 
-      let(:rules) {{
-        'type' => 'input',
-        'serialized_name' => 'xml',
-        'members' => {},
-      }}
+      let(:members) { {} }
 
       def json(params)
-        shape = Seahorse::Model::Shapes::Shape.from_hash(rules)
-        Builder.to_json(shape, params)
+        shape = Seahorse::Model::Shapes::Structure.new('members' => members)
+        Builder.new.to_json(shape, params)
       end
 
       describe 'structures' do
@@ -26,34 +22,31 @@ module Aws
         end
 
         it 'observes serialized name properties' do
-          rules['members'] = {
-            'name' => { 'type' => 'string', 'serialized_name' => 'FullName' }
+          members['Name'] = {
+            'type' => 'string',
+            'locationName' => 'FullName'
           }
           expect(json(name: 'John Doe')).to eq('{"FullName":"John Doe"}')
         end
 
         it 'serializes nested structures' do
-          rules['members'] = {
-            'abc' => {
-              'type' => 'structure',
-              'members' => {
-                'mno' => { 'type' => 'string', 'serialized_name' => 'MNO' }
-              }
+          members['Abc'] = {
+            'type' => 'structure',
+            'members' => {
+              'Mno' => { 'type' => 'string', 'locationName' => 'MNO' }
             }
           }
-          expect(json(abc: { mno: 'xyz' })).to eq('{"abc":{"MNO":"xyz"}}')
+          expect(json(abc: { mno: 'xyz' })).to eq('{"Abc":{"MNO":"xyz"}}')
         end
 
         it 'does not serialize nil members' do
-          rules['members'] = {
-            'cfg' => {
-              'type' => 'structure',
-              'members' => {
-                'data' => { 'type' => 'blob' },
-              }
+          members['Cfg'] = {
+            'type' => 'structure',
+            'members' => {
+              'Data' => { 'type' => 'blob' },
             }
           }
-          expect(json(cfg: { data: nil })).to eq('{"cfg":{}}')
+          expect(json(cfg: { data: nil })).to eq('{"Cfg":{}}')
         end
 
       end
@@ -61,28 +54,24 @@ module Aws
       describe 'lists' do
 
         it 'serializes lists' do
-          rules['members'] = {
-            'items' => {
-              'type' => 'list',
-              'members' => { 'type' => 'string' }
-            }
+          members['Items'] = {
+            'type' => 'list',
+            'member' => { 'type' => 'string' }
           }
-          expect(json(items: %w(abc xyz))).to eq('{"items":["abc","xyz"]}')
+          expect(json(items: %w(abc xyz))).to eq('{"Items":["abc","xyz"]}')
         end
 
         it 'lists of complex shapes' do
-          rules['members'] = {
-            'abc' => {
-              'type' => 'list',
+          members['Abc'] = {
+            'type' => 'list',
+            'member' => {
+              'type' => 'structure',
               'members' => {
-                'type' => 'structure',
-                'members' => {
-                  'mno' => { 'type' => 'string', 'serialized_name' => 'MNO' }
-                }
+                'Mno' => { 'type' => 'string', 'locationName' => 'MNO' }
               }
             }
           }
-          expect(json(abc: [{mno:'xyz'}])).to eq('{"abc":[{"MNO":"xyz"}]}')
+          expect(json(abc: [{mno:'xyz'}])).to eq('{"Abc":[{"MNO":"xyz"}]}')
         end
 
       end
@@ -90,32 +79,28 @@ module Aws
       describe 'maps' do
 
         it 'accepts an arbitrary hash of values' do
-          rules['members'] = {
-            'attrs' => {
-              'type' => 'map',
-              'keys' => { 'type' => 'string' },
-              'members' => { 'type' => 'string' }
-            }
+          members['Attrs'] = {
+            'type' => 'map',
+            'key' => { 'type' => 'string' },
+            'value' => { 'type' => 'string' }
           }
           params = { attrs: { 'Size' => 'large', 'Color' => 'red' } }
-          expect(json(params)).to eq('{"attrs":{"Size":"large","Color":"red"}}')
+          expect(json(params)).to eq('{"Attrs":{"Size":"large","Color":"red"}}')
         end
 
         it 'supports complex hash values' do
-          rules['members'] = {
-            'people' => {
-              'type' => 'map',
-              'keys' => { 'type' => 'string' },
+          members['People'] = {
+            'type' => 'map',
+            'key' => { 'type' => 'string' },
+            'value' => {
+              'type' => 'structure',
               'members' => {
-                'type' => 'structure',
-                'members' => {
-                  'age' => { 'type' => 'integer', 'serialized_name' => 'AGE' }
-                }
+                'Age' => { 'type' => 'integer', 'locationName' => 'AGE' }
               }
             }
           }
           params = { people: { 'John' => { age: 40 } } }
-          expect(json(params)).to eq('{"people":{"John":{"AGE":40}}}')
+          expect(json(params)).to eq('{"People":{"John":{"AGE":40}}}')
         end
 
       end
@@ -123,73 +108,81 @@ module Aws
       describe 'scalars' do
 
         it 'serializes integers' do
-          rules['members'] = {
-            'count' => { 'type' => 'integer' }
-          }
-          expect(json(count: 123)).to eq('{"count":123}')
+          members['Count'] = { 'type' => 'integer' }
+          expect(json(count: 123)).to eq('{"Count":123}')
         end
 
         it 'serializes floats' do
-          rules['members'] = {
-            'price' => { 'type' => 'float' }
-          }
-          expect(json(price: 12.34)).to eq('{"price":12.34}')
+          members['Price'] = { 'type' => 'float' }
+          expect(json(price: 12.34)).to eq('{"Price":12.34}')
         end
 
         it 'serializes booleans' do
-          rules['members'] = {
-            'hot' => { 'type' => 'boolean' },
-            'cold' => { 'type' => 'boolean' }
-          }
-          expect(json(hot:true, cold:false)).to eq('{"hot":true,"cold":false}')
+          members['Hot'] = { 'type' => 'boolean' }
+          members['Cold'] = { 'type' => 'boolean' }
+          expect(json(hot:true, cold:false)).to eq('{"Hot":true,"Cold":false}')
+        end
+
+        it 'serializes timestamps' do
+          now = Time.now
+          members['When'] = { 'type' => 'timestamp' }
+          expect(json(when:now)).to eq("{\"When\":#{now.utc.to_i}}")
         end
 
         it 'serializes iso8601 timestamps' do
           now = Time.now
-          rules['members'] = {
-            'when' => { 'type' => 'iso8601_timestamp' }
+          members['When'] = {
+            'type' => 'timestamp',
+            'timestampFormat' => 'iso8601'
           }
-          expect(json(when:now)).to eq("{\"when\":\"#{now.utc.iso8601}\"}")
+          expect(json(when:now)).to eq("{\"When\":\"#{now.utc.iso8601}\"}")
         end
 
-        it 'can serializes timestamps as rfc8622 strings' do
+        it 'serializes rfc822 timestamps' do
           now = Time.now
-          rules['members'] = {
-            'when' => {
-              'type' => 'rfc822_timestamp'
-            }
+          members['When'] = {
+            'type' => 'timestamp',
+            'timestampFormat' => 'rfc822'
           }
-          expect(json(when:now)).to eq("{\"when\":\"#{now.utc.rfc822}\"}")
+          expect(json(when:now)).to eq("{\"When\":\"#{now.utc.rfc822}\"}")
         end
 
-        it 'can serializes timestamps as unix timestamps' do
+        it 'serializes unix timestamps' do
           now = Time.now
-          rules['members'] = {
-            'when' => {
-              'type' => 'unix_timestamp',
-            }
+          members['When'] = {
+            'type' => 'timestamp',
+            'timestampFormat' => 'unixTimestamp'
           }
-          expect(json(when:now)).to eq("{\"when\":#{now.to_i}}")
+          expect(json(when:now)).to eq("{\"When\":#{now.utc.to_i}}")
         end
 
-        it 'raises an error when the timestamp format is not specified' do
-          now = Time.now
-          rules['members'] = {
-            'when' => {
-              'type' => 'timestamp',
-            }
+        it 'raises an error for unknown timestamp formats' do
+          members['When'] = {
+            'type' => 'timestamp',
+            'timestampFormat' => 'bogus'
           }
-          expect { json(when:now) }.to raise_error(/invalid timestamp/)
+          expect {
+            json(when:Time.now)
+          }.to raise_error(ArgumentError, 'invalid timestamp format "bogus"')
         end
 
         it 'serializes blobs as base64 strings' do
-          rules['members'] = {
-            'data' => { 'type' => 'blob' }
-          }
+          members['data'] = { 'type' => 'blob' }
           expect(json(data:'hello')).to eq('{"data":"aGVsbG8="}')
         end
 
       end
+
+      # All of the previous tests in this spec file test given a root
+      # level structure. JSON allows for root level arrays.
+      it 'supports serializing an array as the root element' do
+        list_shape = Seahorse::Model::Shapes::List.new(
+          'member' => { 'type' => 'string' }
+        )
+        json = Builder.new.to_json(list_shape, %w(a b c))
+        expect(json).to eq('["a","b","c"]')
+      end
+
     end
   end
 end

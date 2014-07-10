@@ -7,8 +7,8 @@ module Seahorse
       describe 'convert' do
 
         it 'performs a deeply nested conversion of values' do
-          rules = Model::Shapes::Shape.from_hash({
-            'type' => 'input',
+          rules = Model::Shapes::Shape.new({
+            'type' => 'structure',
             'members' => {
               'username' => { 'type' => 'string' },
               'config' => {
@@ -17,12 +17,12 @@ module Seahorse
                   'enabled' => { 'type' => 'boolean' },
                   'settings' => {
                     'type' => 'map',
-                    'keys' => { 'type' => 'string' },
-                    'members' => { 'type' => 'string' },
+                    'key' => { 'type' => 'string' },
+                    'value' => { 'type' => 'string' },
                   },
                   'counts' => {
                     'type' => 'list',
-                    'members' => { 'type' => 'integer' },
+                    'member' => { 'type' => 'integer' },
                   }
                 }
               }
@@ -64,7 +64,7 @@ module Seahorse
           end
 
           it 'returns the value unmodified if the value class is unknown' do
-            shape_class = Model::Shapes::StringShape
+            shape_class = Model::Shapes::String
             value = double('raw')
             expect(ParamConverter.c(shape_class, value)).to be(value)
           end
@@ -73,7 +73,7 @@ module Seahorse
 
         describe 'structures' do
 
-          let(:shape_class) { Model::Shapes::StructureShape }
+          let(:shape_class) { Model::Shapes::Structure }
 
           it 'returns duplicate hashes' do
             value = { a: 1 }
@@ -92,7 +92,7 @@ module Seahorse
 
         describe 'maps' do
 
-          let(:shape_class) { Model::Shapes::MapShape }
+          let(:shape_class) { Model::Shapes::Map }
 
           it 'returns duplicate hashes' do
             value = { a: 1 }
@@ -111,7 +111,7 @@ module Seahorse
 
         describe 'lists' do
 
-          let(:shape_class) { Model::Shapes::ListShape }
+          let(:shape_class) { Model::Shapes::List }
 
           it 'duplicates arrays' do
             value = [1,2,3]
@@ -130,7 +130,7 @@ module Seahorse
 
         describe 'strings' do
 
-          let(:shape_class) { Model::Shapes::StringShape }
+          let(:shape_class) { Model::Shapes::String }
 
           it 'returns strings unmodified' do
             expect(ParamConverter.c(shape_class, 'abc')).to eq('abc')
@@ -144,7 +144,7 @@ module Seahorse
 
         describe 'integers' do
 
-          let(:shape_class) { Model::Shapes::IntegerShape }
+          let(:shape_class) { Model::Shapes::Integer }
 
           it 'returns integers unmodified' do
             expect(ParamConverter.c(shape_class, 123)).to eq(123)
@@ -166,7 +166,7 @@ module Seahorse
 
         describe 'floats' do
 
-          let(:shape_class) { Model::Shapes::FloatShape }
+          let(:shape_class) { Model::Shapes::Float }
 
           it 'returns floats unmodified' do
             expect(ParamConverter.c(shape_class, 12.34)).to eq(12.34)
@@ -188,59 +188,48 @@ module Seahorse
 
         describe 'timestamps' do
 
-          [
-            Model::Shapes::TimestampShape,
-            Model::Shapes::Iso8601TimestampShape,
-            Model::Shapes::Rfc822TimestampShape,
-            Model::Shapes::UnixTimestampShape,
-          ].each do |shape_class|
+          let(:shape_class) { Model::Shapes::Timestamp }
 
-            describe(shape_class.name.split('::').last) do
+          it 'returns Time objects unmodfied' do
+            time = Time.now
+            expect(ParamConverter.c(shape_class, time)).to be(time)
+          end
 
-              it 'returns Time objects unmodfied' do
-                time = Time.now
-                expect(ParamConverter.c(shape_class, time)).to be(time)
-              end
+          it 'returns DateTime objects as a Time object' do
+            time = DateTime.now
+            expect(ParamConverter.c(shape_class, time)).to eq(time.to_time)
+          end
 
-              it 'returns DateTime objects as a Time object' do
-                time = DateTime.now
-                expect(ParamConverter.c(shape_class, time)).to eq(time.to_time)
-              end
+          it 'returns Date objects as a Time object' do
+            time = Date.new
+            expect(ParamConverter.c(shape_class, time)).to eq(time.to_time)
+          end
 
-              it 'returns Date objects as a Time object' do
-                time = Date.new
-                expect(ParamConverter.c(shape_class, time)).to eq(time.to_time)
-              end
+          it 'converts integers to Time objects' do
+            time = Time.now.to_i
+            expect(ParamConverter.c(shape_class, time)).to eq(Time.at(time))
+          end
 
-              it 'converts integers to Time objects' do
-                time = Time.now.to_i
-                expect(ParamConverter.c(shape_class, time)).to eq(Time.at(time))
-              end
+          it 'parses strings as time objets' do
+            t1 = Time.now.utc.iso8601
+            t2 = Time.now.rfc822
+            t3 = Time.now.to_s
+            t4 = '2013-01-02'
+            expect(ParamConverter.c(shape_class, t1)).to eq(Time.parse(t1))
+            expect(ParamConverter.c(shape_class, t2)).to eq(Time.parse(t2))
+            expect(ParamConverter.c(shape_class, t3)).to eq(Time.parse(t3))
+            expect(ParamConverter.c(shape_class, t4)).to eq(Time.parse(t4))
+          end
 
-              it 'parses strings as time objets' do
-                t1 = Time.now.utc.iso8601
-                t2 = Time.now.rfc822
-                t3 = Time.now.to_s
-                t4 = '2013-01-02'
-                expect(ParamConverter.c(shape_class, t1)).to eq(Time.parse(t1))
-                expect(ParamConverter.c(shape_class, t2)).to eq(Time.parse(t2))
-                expect(ParamConverter.c(shape_class, t3)).to eq(Time.parse(t3))
-                expect(ParamConverter.c(shape_class, t4)).to eq(Time.parse(t4))
-              end
-
-              it 'returns strings unmodified if they can not be parsed' do
-                expect(ParamConverter.c(shape_class, 'abc')).to eq('abc')
-              end
-
-            end
-
+          it 'returns strings unmodified if they can not be parsed' do
+            expect(ParamConverter.c(shape_class, 'abc')).to eq('abc')
           end
 
         end
 
         describe 'booleans' do
 
-          let(:shape_class) { Model::Shapes::BooleanShape }
+          let(:shape_class) { Model::Shapes::Boolean }
 
           it 'returns true and false' do
             expect(ParamConverter.c(shape_class, true)).to be(true)
@@ -255,7 +244,7 @@ module Seahorse
 
         describe 'blobs' do
 
-          let(:shape_class) { Model::Shapes::BlobShape }
+          let(:shape_class) { Model::Shapes::Blob }
 
           it 'accepts io objects (like file)' do
             file = File.open(__FILE__, 'r')

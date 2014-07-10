@@ -1,38 +1,28 @@
-A service client builder for <%= full_name %>.
+This module provides a client for making API requests to <%= full_name %>.
 
-## Configuration
+# Aws::<%= svc_name %>::Client
 
-You can specify global default configuration options via `Aws.config`.  Values
-in `Aws.config` are used as default options for all services.
+The {Aws::<%= svc_name %>::Client} class provides one-to-one mapping for each API operation.
 
-    Aws.config[:region] = 'us-west-2'
+    <%= svc_name.downcase %> = Aws::<%= svc_name %>::Client.new(region: 'us-east-1')
+    <%= svc_name.downcase %>.operation_names
+    #=> [<%= default_api.operation_names[0..3].map(&:inspect).join(', ') %>, ...]
 
-You can specify service specific defaults as well:
+Each API operation method accepts a hash of request parameters and returns a response object.
 
-    Aws.config[:<%= svc_name.downcase %>] = { region: 'us-west-1' }
+    resp = <%= svc_name.downcase %>.<%= default_api.operation_names.first %>(params)
 
-This has a higher precendence that values at the root of `Aws.config` and will
-only applied to objects constructed by {new}.
+See {Client} for more information.
 
-## Regions & Endpoints
+# Aws::<%= svc_name %>::Errors
 
-You must configure a default region with `Aws.config` or provide a `:region`
-when creating a service client.  The regions listed below will connect
-to the following endpoints:
+Errors returned from <%= full_name %> are defined in the {Errors} module
+and extend {Aws::<%= svc_name %>::Errors::ServiceError}.
 
-<%= default_api.metadata['regional_endpoints'].map { |r,e| "* `#{r}` - #{e}"}.join("\n") %>
+    begin
+      # do stuff
+    rescue Aws::<%= svc_name %>::Errors::ServiceError
+      # rescues all errors returned by <%= full_name %>
+    end
 
-## API Versions
-
-Calling {new} will construct and return a versioned service client. The client
-will default to the most recent API version. You can also specify an API version:
-
-    <%= svc_name.downcase %> = Aws::<%= svc_name %>.new # Aws::<%= svc_name %>::V<%= default_api.version.gsub(/-/, '') %>
-    <%= svc_name.downcase %> = Aws::<%= svc_name %>.new(api_version: '<%= oldest_api.version %>') # Aws::<%= svc_name %>::V<%= oldest_api.version.gsub(/-/, '') %>
-
-The following API versions are available for Aws::<%= svc_name %>:
-
-<%= apis.map{ |a| "* {V#{a.version.gsub(/-/, '')} #{a.version}}" }.join("\n") %>
-
-You can specify the API version for the client by passing `:api_version` to {new}.
-  DOCSTRING
+See {Errors} for more information.

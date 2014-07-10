@@ -29,7 +29,7 @@ module Seahorse
           unless client.respond_to?(:operation_names)
             client.class.mutex.synchronize do
               unless client.respond_to?(:operation_names)
-                add_operation_helpers(client, client.config.api.operations.keys)
+                add_operation_helpers(client, client.config.api.operation_names)
               end
             end
           end

@@ -17,7 +17,27 @@ module Seahorse
           it 'can be set in the constructor' do
             endpoint = 'http://foo.com/'
             req = request(endpoint: endpoint)
-            expect(req.endpoint).to eq(endpoint)
+            expect(req.endpoint).to eq(URI.parse(endpoint))
+          end
+
+          it 'can be blanked out' do
+            req = request(endpoint: 'http://foo.com')
+            req.endpoint = nil
+            expect(req.endpoint).to be(nil)
+          end
+
+          it 'converts strings to URIs' do
+            req = Request.new
+            req.endpoint = 'http://foo.com'
+            expect(req.endpoint).to be_kind_of(URI::HTTP)
+            expect(req.endpoint).to eq(URI.parse('http://foo.com'))
+          end
+
+          it 'supports https endpoints' do
+            req = Request.new
+            req.endpoint = 'https://foo.com'
+            expect(req.endpoint).to be_kind_of(URI::HTTPS)
+            expect(req.endpoint).to eq(URI.parse('https://foo.com'))
           end
 
         end
@@ -77,7 +97,7 @@ module Seahorse
 
           it 'can be set as a string in the constructor' do
             req = request(body: 'body')
-            expect(req.body).to be_a(PlainStringIO)
+            expect(req.body).to be_a(StringIO)
             expect(req.body.read).to eq('body')
           end
 
@@ -90,7 +110,7 @@ module Seahorse
           it 'can be set as a string in accessor' do
             req = request
             req.body = 'body'
-            expect(req.body).to be_a(PlainStringIO)
+            expect(req.body).to be_a(StringIO)
             expect(req.body.read).to eq('body')
           end
 

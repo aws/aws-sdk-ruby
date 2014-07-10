@@ -6,7 +6,6 @@ module Seahorse
     describe Base do
 
       let(:api) {{
-        'endpoint' => 'http://endpoint:123',
         'operations' => {
           'operation_name' => {},
         }
@@ -34,10 +33,6 @@ module Seahorse
 
         it 'contains the client api' do
           expect(client.config.api).to be(client_class.api)
-        end
-
-        it 'defaults endpoint to the api endpoint' do
-          expect(client.config.endpoint).to eq(api['endpoint'])
         end
 
         it 'passes constructor args to the config' do
@@ -117,7 +112,7 @@ module Seahorse
         it 'raises an error for unknown operations' do
           expect {
             client.build_request('foo')
-          }.to raise_error("unknown operation `foo'")
+          }.to raise_error("unknown operation :foo")
         end
 
       end
@@ -125,7 +120,7 @@ module Seahorse
       describe '.api' do
 
         it 'can be set' do
-          api = Model::Api.from_hash({})
+          api = Model::Api.new({})
           client_class = Class.new(Base)
           client_class.set_api(api)
           expect(client_class.api).to be(api)
@@ -135,7 +130,7 @@ module Seahorse
           client_class = Class.new(Base)
           api = client_class.set_api({})
           expect(api).to be_kind_of(Model::Api)
-          expect(api.to_hash).to eq(Model::Api.from_hash({}).to_hash)
+          expect(api.definition).to eq(Model::Api.new({}).definition)
         end
 
       end
@@ -143,25 +138,25 @@ module Seahorse
       describe '.define' do
 
         it 'creates a new client class' do
-          client_class = Client.define
+          client_class = Base.define
           expect(client_class.ancestors).to include(Client::Base)
         end
 
         it 'sets the api on the client class' do
-          api = Model::Api.from_hash({})
-          client_class = Client.define(api: api)
+          api = Model::Api.new({})
+          client_class = Base.define(api: api)
           expect(client_class.api).to be(api)
         end
 
         it 'extends from subclasses of client' do
-          klass1 = Client.define
+          klass1 = Base.define
           klass2 = klass1.define
           expect(klass2.ancestors).to include(klass1)
           expect(klass2.ancestors).to include(Client::Base)
         end
 
         it 'applies plugins passed in via :plugins' do
-          client_class = Client.define(plugins: [plugin_a])
+          client_class = Base.define(plugins: [plugin_a])
           expect(client_class.plugins).to include(plugin_a)
         end
 

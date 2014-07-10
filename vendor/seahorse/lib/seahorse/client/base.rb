@@ -48,7 +48,7 @@ module Seahorse
       # @param [String] name
       # @return [Model::Operation]
       def operation(name)
-        config.api.operations[name] || raise("unknown operation `#{name}'")
+        config.api.operation(name)
       end
 
       # @api private
@@ -183,11 +183,11 @@ module Seahorse
         # @param [Model::Api, Hash] api
         # @return [Model::Api]
         def set_api(api)
-          api = Model::Api.from_hash(api) if api.is_a?(Hash)
-          Array(api.plugins).each do |plugin|
-            add_plugin(plugin)
+          if api.is_a?(Hash)
+            @api = Model::Api.new(api)
+          else
+            @api = api
           end
-          @api = api
         end
 
         # @option options [Model::Api, Hash] :api ({})

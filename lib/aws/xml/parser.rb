@@ -4,142 +4,129 @@ require 'base64'
 
 module Aws
   module Xml
-    # @api private
     class Parser
 
-      include Seahorse::Model::Shapes
-
-      # @param [Seahorse::Model::Shapes::OutputShape] output
-      # @param [String<xml>] xml
-      # @return [Hash]
-      def parse(output, xml)
-        rules = apply_wrapper(output)
-        result = structure(rules, MultiXml.parse(xml).values.first || {})
-        remove_wrapper(output, result)
+      # @param [Seahorse::Model::Shapes::Structure] shape
+      def initialize(shape)
+        @shape = shape
       end
 
-      # @param [Seahorse::Model::Shapes::OutputShape] rules
       # @param [String<xml>] xml
-      # @return [Hash]
-      def self.parse(rules, xml)
-        new.parse(rules, xml)
+      # @param [Hash, nil] target
+      # @return [Structure]
+      def parse(xml, target = nil, &block)
+        xml = MultiXml.parse(xml).values.first || {}
+        yield(xml) if block_given?
+        structure(@shape, xml, target)
       end
 
       private
 
-      def apply_wrapper(shape)
-        if wrapper_name = shape.metadata['wrapper']
-          wrapper = Seahorse::Model::Shapes::OutputShape.new
-          wrapper.serialized_name = wrapper_name
-          wrapper.members[wrapper_name] = shape
-          wrapper
+      # @param [Seahorse::Model::Shapes::Structure] structure
+      # @param [Hash] values
+      # @param [Hash, nil] target
+      # @return [Structure]
+      def structure(structure, values, target = nil)
+        target = Structure.new(structure.member_names) if target.nil?
+        structure.members.each do |member_name, member_shape|
+          value_key = member_key(member_shape) || member_name.to_s
+          target[member_name] = parse_shape(member_shape, values[value_key])
+        end
+        target
+      end
+
+      def member_key(shape)
+        if Seahorse::Model::Shapes::List === shape && flat?(shape)
+          shape.member.location_name || shape.location_name
         else
-          shape
+          shape.location_name
         end
       end
 
-      def remove_wrapper(shape, data)
-        if wrapper_name = shape.metadata['wrapper']
-          data[wrapper_name]
-        else
-          data
-        end
-      end
-
-      def structure(shape, hash)
-        data = Structure.new(shape.members.keys)
-        shape.members.each do |member_name, member_shape|
-          key = member_xmlname(member_shape)
-          data[member_name] = member(member_shape, hash[key])
-        end
-        data
-      end
-
-      def list(shape, values)
-        member_shape = shape.members
-        unless flat?(shape)
-          values = values[member_shape.serialized_name || 'member']
+      # @param [Seahorse::Model::Shapes::List] list
+      # @param [Array] values
+      # @return [Array]
+      def list(list, values)
+        unless flat?(list)
+          values = values[list.member.location_name || 'member']
         end
         values = [values] unless values.is_a?(Array)
-        values.map { |value| member(member_shape, value) }
+        values.collect { |value| parse_shape(list.member, value) }
       end
 
-      def map(shape, entries)
-        key_shape = shape.keys
-        value_shape = shape.members
+      # @param [Seahorse::Model::Shapes::Map] map
+      # @param [Hash] entries
+      # @return [Hash]
+      def map(map, entries)
         data = {}
-        entries = entries['entry'] unless flat?(shape)
+        entries = entries['entry'] unless flat?(map)
         entries = [entries] unless entries.is_a?(Array)
         entries.each do |entry|
-          key = entry[key_shape.serialized_name || 'key']
-          value = entry[value_shape.serialized_name || 'value']
-          data[member(key_shape, key)] = member(value_shape, value)
+          key = entry[map.key.location_name || 'key']
+          value = entry[map.value.location_name || 'value']
+          data[parse_shape(map.key, key)] = parse_shape(map.value, value)
         end
         data
       end
 
-      def member_xmlname(shape)
-        if shape.is_a?(FlatListShape)
-          shape.members.serialized_name || shape.serialized_name
-        else
-          shape.serialized_name
-        end
-      end
-
-      def member(shape, raw)
-        if raw.nil?
+      # @param [Seahorse::Model::Shapes::Shape] shape
+      # @param [Object] value
+      # @return [Object]
+      def parse_shape(shape, value)
+        if value.nil?
           case shape
-          when StructureShape then Structure.new(shape.members.keys)
-          when MapShape then {}
-          when ListShape then []
+          when Seahorse::Model::Shapes::Structure then nil
+          when Seahorse::Model::Shapes::Map then {}
+          when Seahorse::Model::Shapes::List then []
           else nil
           end
         else
           case shape
-          when StringShape then string(shape, raw)
-          when StructureShape then structure(shape, raw)
-          when ListShape then list(shape, raw)
-          when MapShape then map(shape, raw)
-          when BooleanShape then raw == 'true'
-          when IntegerShape then raw.to_i
-          when FloatShape then raw.to_f
-          when TimestampShape then timestamp(raw)
-          when BlobShape then Base64.decode64(raw)
-          else raw
+          when Seahorse::Model::Shapes::String then string(shape, value)
+          when Seahorse::Model::Shapes::Structure then structure(shape, value)
+          when Seahorse::Model::Shapes::List then list(shape, value)
+          when Seahorse::Model::Shapes::Map then map(shape, value)
+          when Seahorse::Model::Shapes::Boolean then value == 'true'
+          when Seahorse::Model::Shapes::Integer then value.to_i
+          when Seahorse::Model::Shapes::Float then value.to_f
+          when Seahorse::Model::Shapes::Timestamp then timestamp(value)
+          when Seahorse::Model::Shapes::Blob then Base64.decode64(value)
+          else
+            raise "unhandled shape type: `#{shape.type}'"
           end
         end
       end
 
-      def string(shape, raw)
-        if raw.is_a?(Hash)
-          decode_string(raw)
+      def string(shape, value)
+        if value.is_a?(Hash)
+          decode_string(value)
         else
-          raw
+          value
         end
       end
 
-      def decode_string(raw)
-        case raw['encoding']
-        when 'base64' then Base64.decode64(raw['__content__'])
-        else raw['__content__']
+      def decode_string(value)
+        case value['encoding']
+        when 'base64' then Base64.decode64(value['__content__'])
+        else value['__content__']
         end
       end
 
-      def timestamp(raw)
-        case raw
+      def timestamp(value)
+        case value
         when nil then nil
-        when /^\d+$/ then Time.at(raw.to_i)
+        when /^\d+$/ then Time.at(value.to_i)
         else
           begin
-            Time.parse(raw)
+            Time.parse(value)
           rescue ArgumentError
-            raise "unhandled timestamp format `#{raw}'"
+            raise "unhandled timestamp format `#{value}'"
           end
         end
       end
 
       def flat?(shape)
-        FlatListShape === shape || FlatMapShape === shape
+        !!shape.metadata('flattened')
       end
 
     end

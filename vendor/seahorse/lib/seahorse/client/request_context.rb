@@ -47,6 +47,9 @@ module Seahorse
       # @return [Integer]
       attr_accessor :retries
 
+      # @return [Hash]
+      attr_reader :metadata
+
       # Returns the metadata for the given `key`.
       # @param [Symbol] key
       # @return [Object]

@@ -19,8 +19,9 @@ module Seahorse
 
           def call(context)
             context.http_request.body = MultiJson.dump(context.params)
-            @handler.call(context).on(200..299) do |resp|
-              resp.data = MultiJson.load(context.http_response.body_contents)
+            @handler.call(context).on_success do |response|
+              response.error = nil
+              response.data = MultiJson.load(context.http_response.body_contents)
             end
           end
 

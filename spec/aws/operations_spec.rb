@@ -42,8 +42,7 @@ module Aws
         if @response
           @response.status_code ||= 200
           @response.headers = header_hash(@response.headers)
-          @response.body =
-            Seahorse::Client::Http::PlainStringIO.new(@response.body || '')
+          @response.body = StringIO.new(@response.body || '')
         end
       end
 
@@ -63,14 +62,9 @@ module Aws
 
     class FixtureHandler < Seahorse::Client::Handler
 
-      def initialize(fixture)
-        @f = fixture
-      end
-
-      attr_accessor :handler, :f
-
       def call(context)
         response = Seahorse::Client::Response.new(context: context)
+        f = context.metadata[:fixture]
         if f.response
           context.http_response.status_code = f.response.status_code
           context.http_response.headers = f.response.headers
@@ -85,20 +79,31 @@ module Aws
       if f.request
         expect(http_req.endpoint.host).to eq(f.request.host) if f.request.host
         expect(http_req.http_method).to eq(f.request.method) if f.request.method
-        expect(http_req.endpoint.request_uri).to eq(f.request.path) if f.request.path
+        if path = f.request.path
+          uri = http_req.endpoint.request_uri
+          case path
+          when String then expect(uri).to eq(path)
+          when Regexp then expect(uri).to match(path)
+          end
+        end
         if f.request.headers
           f.request.headers.each_pair do |header, value|
             expected_value = value.nil? ? nil : value.to_s
             expect(http_req.headers[header]).to eq(expected_value)
           end
         end
-        expect(http_req.body.read).to eq(f.request.body) if f.request.body
+        if f.request.body
+          yyyy_mm_dd = /\d{4}-\d{2}-\d{2}/
+          body = http_req.body.read.gsub(yyyy_mm_dd, 'YYYY-MM-DD')
+          expected_body = f.request.body.gsub(yyyy_mm_dd, 'YYYY-MM-DD')
+          expect(body).to eq(expected_body)
+        end
       end
     end
 
     def response_assertions(f, resp)
       if f.data
-        expect(resp.data.to_hash).to eq(f.data)
+        expect(resp.data.to_h).to eq(f.data)
       end
 
       if f.error
@@ -117,30 +122,21 @@ module Aws
           fixture_name = path.split('/')[-1][0..-5]
 
           it(fixture_name) do
-            begin
-              # load the fixture from disk
-              f = OperationFixture.load(svc_name, fixture_name)
+            # load the fixture from disk
+            f = OperationFixture.load(svc_name, fixture_name)
 
-              # remove the plugin that raises errors
-              Aws.service_classes[svc_name.to_sym].remove_plugin(
-                Seahorse::Client::Plugins::RaiseResponseErrors)
+            # build the test service class by sub-classing the original
+            # service class
+            client_class = Aws.service_modules[svc_name.to_sym]::Client
 
-              # build the service interface
-              svc = Aws.send(svc_name, f.config)
+            client = client_class.new(f.config.merge(raise_response_errors: false))
+            req = client.build_request(f.operation, f.params)
+            req.handler(FixtureHandler, step: :send)
+            req.context.metadata[:fixture] = f
+            resp = req.send_request
 
-              # build the request
-              req = svc.build_request(f.operation, f.params)
-              req.handler(f.handler, step: :send)
-
-
-              # send the request
-              resp = req.send_request
-
-              request_assertions(f, resp.context.http_request)
-              response_assertions(f, resp)
-            ensure
-              Aws.service_classes[svc_name.to_sym].add_plugin(Seahorse::Client::Plugins::RaiseResponseErrors)
-            end
+            request_assertions(f, resp.context.http_request)
+            response_assertions(f, resp)
           end
         end
       end
