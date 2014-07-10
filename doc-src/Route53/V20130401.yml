@@ -69,12 +69,23 @@
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:change_info` - (Hash)\n    * `:id` - (String)\n    * `:status` - (String)\n
   \   * `:submitted_at` - (Time)\n    * `:comment` - (String)"
+:change_tags_for_resource: "Calls the POST ChangeTagsForResource API operation.\n@param
+  [Hash] options\n  * `:resource_type` - *required* - (String) The type of the resource.
+  The resource type for health checks is healthcheck.  Valid values include:\n    *
+  `healthcheck`\n  * `:resource_id` - *required* - (String) The ID of the resource
+  for which you want to add, change, or delete tags.\n  * `:add_tags` - (Array&lt;Hash>)
+  A complex type that contains a list of Tag elements. Each Tag element identifies
+  a tag that you want to add or update for the specified resource.\n  * `:Tag` - (Hash)
+  \n    * `:key` - (String) The key for a Tag.\n    * `:value` - (String) The value
+  for a Tag.\n  * `:remove_tag_keys` - (Array&lt;String>) A list of Tag keys that
+  you want to remove from the specified resource.\n  * `:Key` - (String) \n@return
+  [Core::Response]"
 :create_health_check: |-
   Calls the POST CreateHealthCheck API operation.
   @param [Hash] options
     * `:caller_reference` - *required* - (String) A unique string that identifies the request and that allows failed CreateHealthCheck requests to be retried without the risk of executing the operation twice. You must use a unique CallerReference string every time you create a health check. CallerReference can be any unique string; you might choose to use a string that identifies your project. Valid characters are any Unicode code points that are legal in an XML 1.0 document. The UTF-8 encoding of the value must be less than 128 bytes.
     * `:health_check_config` - *required* - (Hash) A complex type that contains health check configuration.
-      * `:ip_address` - *required* - (String) IP Address of the instance being checked.
+      * `:ip_address` - (String) IP Address of the instance being checked.
       * `:port` - (Integer) Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified. For HTTPS this defaults to 443 if the port is not specified.
       * `:type` - *required* - (String) The type of health check to be performed. Currently supported protocols are TCP, HTTP, and HTTPS.  Valid values include:
         * `HTTP`
@@ -101,6 +112,7 @@
         * `:search_string` - (String)
         * `:request_interval` - (Integer)
         * `:failure_threshold` - (Integer)
+      * `:health_check_version` - (Integer)
 :create_hosted_zone: |-
   Calls the POST CreateHostedZone API operation.
   @param [Hash] options
@@ -151,6 +163,12 @@
       * `:status` - (String)
       * `:submitted_at` - (Time)
       * `:comment` - (String)
+:get_checker_ip_ranges: |-
+  Calls the GET GetCheckerIpRanges API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:checker_ip_ranges` - (Array<String>)
 :get_health_check: |-
   Calls the GET GetHealthCheck API operation.
   @param [Hash] options
@@ -169,6 +187,13 @@
         * `:search_string` - (String)
         * `:request_interval` - (Integer)
         * `:failure_threshold` - (Integer)
+      * `:health_check_version` - (Integer)
+:get_health_check_count: |-
+  Calls the GET GetHealthCheckCount API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:health_check_count` - (Integer)
 :get_hosted_zone: |-
   Calls the GET GetHostedZone API operation.
   @param [Hash] options
@@ -203,6 +228,7 @@
         * `:search_string` - (String)
         * `:request_interval` - (Integer)
         * `:failure_threshold` - (Integer)
+      * `:health_check_version` - (Integer)
     * `:marker` - (String)
     * `:is_truncated` - (Boolean)
     * `:next_marker` - (String)
@@ -265,3 +291,53 @@
     * `:next_record_type` - (String)
     * `:next_record_identifier` - (String)
     * `:max_items` - (Integer)
+:list_tags_for_resource: |-
+  Calls the GET ListTagsForResource API operation.
+  @param [Hash] options
+    * `:resource_type` - *required* - (String) The type of the resource. The resource type for health checks is healthcheck.  Valid values include:
+      * `healthcheck`
+    * `:resource_id` - *required* - (String) The ID of the resource for which you want to retrieve tags.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:resource_tag_set` - (Hash)
+      * `:resource_type` - (String)
+      * `:resource_id` - (String)
+      * `:tags` - (Array<Hash>)
+        * `:key` - (String)
+        * `:value` - (String)
+:list_tags_for_resources: "Calls the POST ListTagsForResources API operation.\n@param
+  [Hash] options\n  * `:resource_type` - *required* - (String) The type of the resources.
+  The resource type for health checks is healthcheck.  Valid values include:\n    *
+  `healthcheck`\n  * `:resource_ids` - *required* - (Array&lt;String>) A complex type
+  that contains the ResourceId element for each resource for which you want to get
+  a list of tags.\n  * `:ResourceId` - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:resource_tag_sets` - (Array<Hash>)\n    * `:resource_type` - (String)\n    * `:resource_id`
+  - (String)\n    * `:tags` - (Array<Hash>)\n      * `:key` - (String)\n      * `:value`
+  - (String)"
+:update_health_check: |-
+  Calls the POST UpdateHealthCheck API operation.
+  @param [Hash] options
+    * `:health_check_id` - *required* - (String) The ID of the health check to update.
+    * `:health_check_version` - (Integer) Optional. When you specify a health check version, Route 53 compares this value with the current value in the health check, which prevents you from updating the health check when the versions don't match. Using HealthCheckVersion lets you prevent overwriting another change to the health check.
+    * `:ip_address` - (String) The IP address of the resource that you want to check. Specify this value only if you want to change it.
+    * `:port` - (Integer) The port on which you want Route 53 to open a connection to perform health checks. Specify this value only if you want to change it.
+    * `:resource_path` - (String) The path that you want Amazon Route 53 to request when performing health checks. The path can be any value for which your endpoint will return an HTTP status code of 2xx or 3xx when the endpoint is healthy, for example the file /docs/route53-health-check.html. Specify this value only if you want to change it.
+    * `:fully_qualified_domain_name` - (String) Fully qualified domain name of the instance to be health checked. Specify this value only if you want to change it.
+    * `:search_string` - (String) If the value of Type is HTTP_STR_MATCH or HTTP_STR_MATCH, the string that you want Route 53 to search for in the response body from the specified resource. If the string appears in the response body, Route 53 considers the resource healthy. Specify this value only if you want to change it.
+    * `:failure_threshold` - (Integer) The number of consecutive health checks that an endpoint must pass or fail for Route 53 to change the current status of the endpoint from unhealthy to healthy or vice versa. Valid values are integers between 1 and 10. For more information, see "How Amazon Route 53 Determines Whether an Endpoint Is Healthy" in the Amazon Route 53 Developer Guide. Specify this value only if you want to change it.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:health_check` - (Hash)
+      * `:id` - (String)
+      * `:caller_reference` - (String)
+      * `:health_check_config` - (Hash)
+        * `:ip_address` - (String)
+        * `:port` - (Integer)
+        * `:type` - (String)
+        * `:resource_path` - (String)
+        * `:fully_qualified_domain_name` - (String)
+        * `:search_string` - (String)
+        * `:request_interval` - (Integer)
+        * `:failure_threshold` - (Integer)
+      * `:health_check_version` - (Integer)
