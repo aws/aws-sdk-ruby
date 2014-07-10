@@ -10,7 +10,7 @@ gem 'nokogiri' if ENV['NOKOGIRI']
 gem 'uri_template'
 
 group :test do
-  gem 'rspec', '~> 3.0.0.beta2'
+  gem 'rspec', '~> 3.0.0'
   gem 'cucumber'
   gem 'webmock'
   gem 'simplecov', require: false
