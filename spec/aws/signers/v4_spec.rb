@@ -9,7 +9,7 @@ module Aws
       let(:service_name) { 'SERVICE' }
       let(:region) { 'REGION' }
       let(:endpoint) { URI.parse('https://domain.com') }
-      let(:signer) { V4.new(service_name, credentials, region) }
+      let(:signer) { V4.new(credentials, service_name, region) }
       let(:sign) { signer.sign(http_request) }
       let(:http_request) do
         req = Seahorse::Client::Http::Request.new(endpoint: endpoint)
