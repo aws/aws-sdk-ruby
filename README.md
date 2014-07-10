@@ -9,6 +9,26 @@ than the clients in version 1 of the Ruby SDK.
 
 For version 1.0 of the Ruby SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
 
+## 2.0.0.rc11 Upgrading Notes
+
+RC 11 requires a few minor updates.  These should be the final public-facing
+changes before 2.0.0 final.
+
+* The prefered constructor for services is now using the client
+  class, example:
+    
+      # deprecated, will be removed for 2.0.0 final
+      Aws::S3.new
+    
+      # preferred
+      Aws::S3::Client.new
+
+* The `:raw_json` option for JSON protocol based services has been
+  renamed to `:simple_json`
+    
+* The short name for Aws::SimpleDB has been renamed from `sdb` to
+  `simpledb`.
+    
 ## Links of Interest
 
 * [Documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
