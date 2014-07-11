@@ -74,15 +74,12 @@ module Aws
     # @yieldparam [Response] response
     # @return [Enumerable,nil] Returns a new Enumerable if no block is given.
     def each_page(&block)
-      if block_given?
-        response = self
+      return enum_for(:each_page) unless block_given?
+      response = self
+      yield(response)
+      until response.last_page?
+        response = response.next_page
         yield(response)
-        until response.last_page?
-          response = response.next_page
-          yield(response)
-        end
-      else
-        to_enum(__method__)
       end
     end
     alias each each_page
