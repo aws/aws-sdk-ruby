@@ -19,8 +19,8 @@ def each_test_case(context, fixture_path)
   MultiJson.load(File.read(fixture_path)).each do |suite|
     describe(suite['description'].inspect) do
       suite['cases'].each.with_index do |test_case,n|
-        describe("case: #{n}") do |group|
-          yield(group, suite, test_case, n)
+        describe("case: #{n}") do
+          yield(self, suite, test_case, n)
         end
       end
     end
