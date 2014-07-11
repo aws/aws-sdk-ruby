@@ -65,7 +65,7 @@ module Aws
 
     it 'adds a helper method that constructs a service and client object' do
       Aws.add_service('DummyService', {
-        '2006-03-01' => { 'api' => 'apis/S3-2006-03-01.api.json' },
+        '2006-03-01' => { 'api' => 'apis/s3-2006-03-01.api.json' },
       })
       svc = Aws.dummyservice(http_wire_trace: true, credentials: dummy_credentials)
       expect(Aws::DummyService::Client.api_versions).to eq(['2006-03-01'])
@@ -75,14 +75,14 @@ module Aws
     end
 
     it 'adds the helper method to Aws (not Module)' do
-      Aws.add_service(:DummyService, ['apis/S3-2006-03-01.json'])
+      Aws.add_service(:DummyService, ['apis/s3-2006-03-01.json'])
       expect(Aws).to respond_to(:dummyservice)
       expect(Aws.class).not_to respond_to(:dummyservice)
     end
 
     it 'filters the :api_version option from the client constructor' do
       Aws.add_service('DummyService', {
-        '2006-03-01' => { 'api' => 'apis/S3-2006-03-01.api.json' },
+        '2006-03-01' => { 'api' => 'apis/s3-2006-03-01.api.json' },
       })
       Aws.config[:api_version] = '2007-01-01'
       Aws.config[:credentials] = dummy_credentials
