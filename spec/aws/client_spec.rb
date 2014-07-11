@@ -17,7 +17,11 @@ module Aws
     }}
 
     before(:each) do
-      allow(Aws).to receive(:config).and_return({ region: 'us-east-1' })
+      allow(Aws).to receive(:config).and_return({
+        region: 'us-east-1',
+        access_key_id: 'akid',
+        secret_access_key: 'secret',
+      })
     end
 
     describe 'default_client_class' do

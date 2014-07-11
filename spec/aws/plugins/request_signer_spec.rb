@@ -20,6 +20,11 @@ module Aws
         cfg
       }
 
+      before(:each) do
+        path = '/latest/meta-data/iam/security-credentials/'
+        stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
+      end
+
       it 'raises an error if you construct a client without credentials' do
         # remove env credentials
         stub_const("ENV", {})
