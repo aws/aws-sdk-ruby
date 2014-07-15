@@ -61,6 +61,10 @@ OptionParser.new do |opts|
     options[:color] = value
   end
 
+  opts.on("--profile PROFLIE", "Use a specific profile from your credential file.") do |value|
+    options[:profile] = value
+  end
+
   opts.on("-d", "--[no-]debug", "log HTTP wire traces, off by default") do |value|
     options[:debug] = value
     options[:debug_set] = true
@@ -105,6 +109,13 @@ require 'aws-sdk'
 # configure the aws-sdk gem
 
 cfg = {}
+
+if options[:profile]
+  provider = AWS::Core::CredentialProviders::SharedCredentialFileProvider.new(
+    :profile_name => options[:profile]
+  )
+  cfg[:credential_provider] = provider
+end
 
 if options[:log]
   logger = Logger.new($stdout)
