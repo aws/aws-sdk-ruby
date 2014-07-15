@@ -266,7 +266,7 @@ module AWS
             hash[:lifecycle_configuration].xml_cleanup.should eq(xml)
           end
 
-          lifecycle.update({id: 'abc-xyz'}) do |args|
+          lifecycle.update(:id => 'abc-xyz') do |args|
             add_rule 'foo/bar', 10
             add_rule 'bar/foo', 11, :id => args[:id], :disabled => true
           end
