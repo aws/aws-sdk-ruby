@@ -52,8 +52,8 @@ module AWS
               @cached_credentials ||= get_credentials
             end
           end
-          @cached_credentials[:access_key_id] &&
-            @cached_credentials[:secret_access_key]
+          !!(@cached_credentials[:access_key_id] &&
+            @cached_credentials[:secret_access_key])
         end
 
         # @return [String] Returns the AWS access key id.
