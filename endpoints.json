@@ -1,6 +1,16 @@
 {
   "regions": {
     "us-east-1": {
+      "cognito-sync": {
+        "http": false,
+        "https": true,
+        "hostname": "cognito-sync.us-east-1.amazonaws.com"
+      },
+      "cognito-identity": {
+        "http": false,
+        "https": true,
+        "hostname": "cognito-identity.us-east-1.amazonaws.com"
+      },
       "cloudformation": {
         "http": false,
         "https": true,
@@ -25,6 +35,11 @@
         "http": true,
         "https": true,
         "hostname": "monitoring.us-east-1.amazonaws.com"
+      },
+      "logs": {
+        "http": true,
+        "https": true,
+        "hostname": "logs.us-east-1.amazonaws.com"
       },
       "dynamodb": {
         "http": true,
@@ -171,12 +186,18 @@
       "cloudfront": {
         "http": true,
         "https": true,
-        "hostname": "cloudfront.amazonaws.com"
+        "hostname": "cloudfront.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "cloudsearch": {
         "http": false,
         "https": true,
         "hostname": "cloudsearch.us-west-1.amazonaws.com"
+      },
+      "cloudtrail": {
+        "http": false,
+        "https": true,
+        "hostname": "cloudtrail.us-west-1.amazonaws.com"
       },
       "monitoring": {
         "http": true,
@@ -246,7 +267,8 @@
       "iam": {
         "http": false,
         "https": true,
-        "hostname": "iam.amazonaws.com"
+        "hostname": "iam.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "importexport": {
         "http": false,
@@ -256,7 +278,8 @@
       "sts": {
         "http": false,
         "https": true,
-        "hostname": "sts.amazonaws.com"
+        "hostname": "sts.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "storagegateway": {
         "http": false,
@@ -298,7 +321,8 @@
       "cloudfront": {
         "http": true,
         "https": true,
-        "hostname": "cloudfront.amazonaws.com"
+        "hostname": "cloudfront.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "cloudsearch": {
         "http": false,
@@ -345,6 +369,11 @@
         "https": true,
         "hostname": "route53.amazonaws.com"
       },
+      "email": {
+        "http": false,
+        "https": true,
+        "hostname": "email.us-west-2.amazonaws.com"
+      },
       "sdb": {
         "http": true,
         "https": true,
@@ -378,7 +407,8 @@
       "iam": {
         "http": false,
         "https": true,
-        "hostname": "iam.amazonaws.com"
+        "hostname": "iam.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "importexport": {
         "http": false,
@@ -388,7 +418,8 @@
       "sts": {
         "http": false,
         "https": true,
-        "hostname": "sts.amazonaws.com"
+        "hostname": "sts.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "storagegateway": {
         "http": false,
@@ -415,10 +446,20 @@
         "https": true,
         "hostname": "directconnect.us-west-2.amazonaws.com"
       },
+      "datapipeline": {
+        "http": false,
+        "https": true,
+        "hostname": "datapipeline.us-west-2.amazonaws.com"
+      },
       "redshift": {
         "http": false,
         "https": true,
         "hostname": "redshift.us-west-2.amazonaws.com"
+      },
+      "kinesis": {
+        "http": false,
+        "https": true,
+        "hostname": "kinesis.us-west-2.amazonaws.com"
       },
       "elastictranscoder": {
         "http": false,
@@ -435,7 +476,18 @@
       "cloudfront": {
         "http": true,
         "https": true,
-        "hostname": "cloudfront.amazonaws.com"
+        "hostname": "cloudfront.amazonaws.com",
+        "authregion": "us-east-1"
+      },
+      "cloudsearch": {
+        "http": false,
+        "https": true,
+        "hostname": "cloudsearch.ap-northeast-1.amazonaws.com"
+      },
+      "cloudtrail": {
+        "http": false,
+        "https": true,
+        "hostname": "cloudtrail.ap-northeast-1.amazonaws.com"
       },
       "monitoring": {
         "http": true,
@@ -505,7 +557,8 @@
       "iam": {
         "http": false,
         "https": true,
-        "hostname": "iam.amazonaws.com"
+        "hostname": "iam.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "importexport": {
         "http": false,
@@ -515,7 +568,8 @@
       "sts": {
         "http": false,
         "https": true,
-        "hostname": "sts.amazonaws.com"
+        "hostname": "sts.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "storagegateway": {
         "http": false,
@@ -542,10 +596,20 @@
         "https": true,
         "hostname": "directconnect.ap-northeast-1.amazonaws.com"
       },
+      "datapipeline": {
+        "http": false,
+        "https": true,
+        "hostname": "datapipeline.ap-northeast-1.amazonaws.com"
+      },
       "redshift": {
         "http": false,
         "https": true,
         "hostname": "redshift.ap-northeast-1.amazonaws.com"
+      },
+      "kinesis": {
+        "http": false,
+        "https": true,
+        "hostname": "kinesis.ap-northeast-1.amazonaws.com"
       },
       "elastictranscoder": {
         "http": false,
@@ -562,12 +626,18 @@
       "cloudfront": {
         "http": true,
         "https": true,
-        "hostname": "cloudfront.amazonaws.com"
+        "hostname": "cloudfront.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "cloudsearch": {
         "http": false,
         "https": true,
         "hostname": "cloudsearch.ap-southeast-1.amazonaws.com"
+      },
+      "cloudtrail": {
+        "http": false,
+        "https": true,
+        "hostname": "cloudtrail.ap-southeast-1.amazonaws.com"
       },
       "monitoring": {
         "http": true,
@@ -637,7 +707,8 @@
       "iam": {
         "http": false,
         "https": true,
-        "hostname": "iam.amazonaws.com"
+        "hostname": "iam.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "importexport": {
         "http": false,
@@ -647,7 +718,8 @@
       "sts": {
         "http": false,
         "https": true,
-        "hostname": "sts.amazonaws.com"
+        "hostname": "sts.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "storagegateway": {
         "http": false,
@@ -674,6 +746,11 @@
         "https": true,
         "hostname": "redshift.ap-southeast-1.amazonaws.com"
       },
+      "kinesis": {
+        "http": false,
+        "https": true,
+        "hostname": "kinesis.ap-southeast-1.amazonaws.com"
+      },
       "elastictranscoder": {
         "http": false,
         "https": true,
@@ -689,7 +766,18 @@
       "cloudfront": {
         "http": true,
         "https": true,
-        "hostname": "cloudfront.amazonaws.com"
+        "hostname": "cloudfront.amazonaws.com",
+        "authregion": "us-east-1"
+      },
+      "cloudsearch": {
+        "http": false,
+        "https": true,
+        "hostname": "cloudsearch.ap-southeast-2.amazonaws.com"
+      },
+      "cloudtrail": {
+        "http": false,
+        "https": true,
+        "hostname": "cloudtrail.ap-southeast-2.amazonaws.com"
       },
       "monitoring": {
         "http": true,
@@ -759,7 +847,8 @@
       "iam": {
         "http": false,
         "https": true,
-        "hostname": "iam.amazonaws.com"
+        "hostname": "iam.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "importexport": {
         "http": false,
@@ -769,7 +858,8 @@
       "sts": {
         "http": false,
         "https": true,
-        "hostname": "sts.amazonaws.com"
+        "hostname": "sts.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "storagegateway": {
         "http": false,
@@ -796,10 +886,20 @@
         "https": true,
         "hostname": "directconnect.ap-southeast-2.amazonaws.com"
       },
+      "datapipeline": {
+        "http": false,
+        "https": true,
+        "hostname": "datapipeline.ap-southeast-2.amazonaws.com"
+      },
       "redshift": {
         "http": false,
         "https": true,
         "hostname": "redshift.ap-southeast-2.amazonaws.com"
+      },
+      "kinesis": {
+        "http": false,
+        "https": true,
+        "hostname": "kinesis.ap-southeast-2.amazonaws.com"
       }
     },
     "sa-east-1": {
@@ -811,7 +911,18 @@
       "cloudfront": {
         "http": true,
         "https": true,
-        "hostname": "cloudfront.amazonaws.com"
+        "hostname": "cloudfront.amazonaws.com",
+        "authregion": "us-east-1"
+      },
+      "cloudsearch": {
+        "http": false,
+        "https": true,
+        "hostname": "cloudsearch.sa-east-1.amazonaws.com"
+      },
+      "cloudtrail": {
+        "http": false,
+        "https": true,
+        "hostname": "cloudtrail.sa-east-1.amazonaws.com"
       },
       "monitoring": {
         "http": true,
@@ -881,7 +992,8 @@
       "iam": {
         "http": false,
         "https": true,
-        "hostname": "iam.amazonaws.com"
+        "hostname": "iam.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "importexport": {
         "http": false,
@@ -891,7 +1003,8 @@
       "sts": {
         "http": false,
         "https": true,
-        "hostname": "sts.amazonaws.com"
+        "hostname": "sts.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "storagegateway": {
         "http": false,
@@ -923,12 +1036,18 @@
       "cloudfront": {
         "http": true,
         "https": true,
-        "hostname": "cloudfront.amazonaws.com"
+        "hostname": "cloudfront.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "cloudsearch": {
         "http": false,
         "https": true,
         "hostname": "cloudsearch.eu-west-1.amazonaws.com"
+      },
+      "cloudtrail": {
+        "http": false,
+        "https": true,
+        "hostname": "cloudtrail.eu-west-1.amazonaws.com"
       },
       "monitoring": {
         "http": true,
@@ -965,6 +1084,11 @@
         "https": true,
         "hostname": "route53.amazonaws.com"
       },
+      "email": {
+        "http": false,
+        "https": true,
+        "hostname": "email.eu-west-1.amazonaws.com"
+      },
       "sdb": {
         "http": true,
         "https": true,
@@ -998,7 +1122,8 @@
       "iam": {
         "http": false,
         "https": true,
-        "hostname": "iam.amazonaws.com"
+        "hostname": "iam.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "importexport": {
         "http": false,
@@ -1008,7 +1133,8 @@
       "sts": {
         "http": false,
         "https": true,
-        "hostname": "sts.amazonaws.com"
+        "hostname": "sts.amazonaws.com",
+        "authregion": "us-east-1"
       },
       "storagegateway": {
         "http": false,
@@ -1035,10 +1161,20 @@
         "https": true,
         "hostname": "directconnect.eu-west-1.amazonaws.com"
       },
+      "datapipeline": {
+        "http": false,
+        "https": true,
+        "hostname": "datapipeline.eu-west-1.amazonaws.com"
+      },
       "redshift": {
         "http": false,
         "https": true,
         "hostname": "redshift.eu-west-1.amazonaws.com"
+      },
+      "kinesis": {
+        "http": false,
+        "https": true,
+        "hostname": "kinesis.eu-west-1.amazonaws.com"
       },
       "elastictranscoder": {
         "http": false,
@@ -1202,6 +1338,12 @@
     }
   },
   "services": {
+    "cognito-sync": [
+      "us-east-1"
+    ],
+    "cognito-identity": [
+      "us-east-1"
+    ],
     "cloudformation": [
       "us-east-1",
       "us-west-1",
@@ -1228,11 +1370,20 @@
       "us-west-1",
       "us-west-2",
       "eu-west-1",
-      "ap-southeast-1"
+      "ap-southeast-1",
+      "ap-northeast-1",
+      "ap-southeast-2",
+      "sa-east-1"
     ],
     "cloudtrail": [
       "us-east-1",
-      "us-west-2"
+      "us-west-1",
+      "us-west-2",
+      "eu-west-1",
+      "ap-southeast-1",
+      "ap-southeast-2",
+      "ap-northeast-1",
+      "sa-east-1"
     ],
     "monitoring": [
       "us-east-1",
@@ -1245,6 +1396,9 @@
       "eu-west-1",
       "cn-north-1",
       "us-gov-west-1"
+    ],
+    "logs": [
+      "us-east-1"
     ],
     "dynamodb": [
       "us-east-1",
@@ -1316,7 +1470,9 @@
       "eu-west-1"
     ],
     "email": [
-      "us-east-1"
+      "us-east-1",
+      "eu-west-1",
+      "us-west-2"
     ],
     "sdb": [
       "us-east-1",
@@ -1478,7 +1634,11 @@
       "eu-west-1"
     ],
     "datapipeline": [
-      "us-east-1"
+      "us-east-1",
+      "us-west-2",
+      "eu-west-1",
+      "ap-northeast-1",
+      "ap-southeast-2"
     ],
     "redshift": [
       "us-east-1",
@@ -1489,7 +1649,12 @@
       "ap-northeast-1"
     ],
     "kinesis": [
-      "us-east-1"
+      "us-east-1",
+      "us-west-2",
+      "eu-west-1",
+      "ap-southeast-1",
+      "ap-southeast-2",
+      "ap-northeast-1"
     ],
     "opsworks": [
       "us-east-1"
