@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -129,6 +129,8 @@
     Password:
     - :string
     - :required
+    PasswordResetRequired:
+    - :boolean
   :outputs:
     :children:
       CreateLoginProfileResult:
@@ -138,6 +140,8 @@
             :children:
               CreateDate:
                 :type: :time
+              PasswordResetRequired:
+                :type: :boolean
 - :name: CreateRole
   :method: :create_role
   :inputs:
@@ -405,6 +409,13 @@
     :children:
       EnableMFADeviceResult:
         :ignore: true
+- :name: GenerateCredentialReport
+  :method: :generate_credential_report
+  :inputs: {}
+  :outputs:
+    :children:
+      GenerateCredentialReportResult:
+        :ignore: true
 - :name: GetAccountPasswordPolicy
   :method: :get_account_password_policy
   :inputs: {}
@@ -431,6 +442,10 @@
                 :type: :boolean
               MaxPasswordAge:
                 :type: :integer
+              PasswordReusePrevention:
+                :type: :integer
+              HardExpiry:
+                :type: :boolean
 - :name: GetAccountSummary
   :method: :get_account_summary
   :inputs: {}
@@ -450,6 +465,18 @@
                 :children:
                   value:
                     :type: :integer
+- :name: GetCredentialReport
+  :method: :get_credential_report
+  :inputs: {}
+  :outputs:
+    :children:
+      GetCredentialReportResult:
+        :ignore: true
+        :children:
+          Content:
+            :type: :blob
+          GeneratedTime:
+            :type: :time
 - :name: GetGroup
   :method: :get_group
   :inputs:
@@ -532,6 +559,8 @@
             :children:
               CreateDate:
                 :type: :time
+              PasswordResetRequired:
+                :type: :boolean
 - :name: GetRole
   :method: :get_role
   :inputs:
@@ -591,6 +620,8 @@
               ServerCertificateMetadata:
                 :children:
                   UploadDate:
+                    :type: :time
+                  Expiration:
                     :type: :time
 - :name: GetUser
   :method: :get_user
@@ -922,6 +953,8 @@
                 :children:
                   UploadDate:
                     :type: :time
+                  Expiration:
+                    :type: :time
           IsTruncated:
             :type: :boolean
 - :name: ListSigningCertificates
@@ -1153,6 +1186,12 @@
     - :boolean
     AllowUsersToChangePassword:
     - :boolean
+    MaxPasswordAge:
+    - :integer
+    PasswordReusePrevention:
+    - :integer
+    HardExpiry:
+    - :boolean
   :outputs:
     :children:
       UpdateAccountPasswordPolicyResult:
@@ -1192,7 +1231,8 @@
     - :required
     Password:
     - :string
-    - :required
+    PasswordResetRequired:
+    - :boolean
   :outputs:
     :children:
       UpdateLoginProfileResult:
@@ -1277,6 +1317,8 @@
           ServerCertificateMetadata:
             :children:
               UploadDate:
+                :type: :time
+              Expiration:
                 :type: :time
 - :name: UploadSigningCertificate
   :method: :upload_signing_certificate
