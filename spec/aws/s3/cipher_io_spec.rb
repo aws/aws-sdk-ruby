@@ -108,6 +108,20 @@ module AWS
           cipherio.read().should == ""
         end
 
+        it 'correct returns bytes for reads on size boundries' do
+          key = Base64.decode64('NGzvNujaJqNbYouJ57XCRyZAqHJ7CdyPabn79kx6M/U=')
+
+          cipher = OpenSSL::Cipher.new('AES-256-CBC')
+          cipher.encrypt
+          cipher.key = key
+
+          io = AWS::S3::CipherIO.new(cipher, StringIO.new('.' * 2044), 2044)
+          io.size.should be(2048)
+          io.read(1024).bytesize.should eq(1024)
+          io.read(1024).bytesize.should eq(1024)
+          io.read(1024).should eq(nil)
+        end
+
       end
 
     end

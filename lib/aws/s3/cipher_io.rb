@@ -108,7 +108,7 @@ module AWS
         if free_space > 0
           @final = cipher.final
           chunk << @final[0..free_space-1]
-          @final = @final[free_space-1..@final.size-1]
+          @final = @final[free_space..@final.size-1]
           @eof   = true unless @final and @final.size > 0
         end
 
