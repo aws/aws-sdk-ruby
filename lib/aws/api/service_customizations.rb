@@ -110,6 +110,7 @@ module Aws
       end
 
       customize 'route53' do
+        add_plugin 'Aws::Plugins::Route53IdFix'
         reshape 'PageMaxItems', 'type' => 'integer'
       end
 

@@ -63,6 +63,7 @@ module Aws
     autoload :ResponsePaging, "#{SRC}/plugins/response_paging"
     autoload :RequestSigner, "#{SRC}/plugins/request_signer"
     autoload :RetryErrors, "#{SRC}/plugins/retry_errors"
+    autoload :Route53IdFix, "#{SRC}/plugins/route_53_id_fix"
     autoload :S3BucketDns, "#{SRC}/plugins/s3_bucket_dns"
     autoload :S3CompleteMultipartUploadFix, "#{SRC}/plugins/s3_complete_multipart_upload_fix"
     autoload :S3GetBucketLocationFix, "#{SRC}/plugins/s3_get_bucket_location_fix"
