@@ -3717,6 +3717,7 @@
     },
     "DeleteVpcPeeringConnectionRequest":{
       "type":"structure",
+      "required":["VpcPeeringConnectionId"],
       "members":{
         "DryRun":{
           "shape":"Boolean",
@@ -6352,6 +6353,11 @@
     },
     "ImportVolumeRequest":{
       "type":"structure",
+      "required":[
+        "AvailabilityZone",
+        "Image",
+        "Volume"
+      ],
       "members":{
         "DryRun":{
           "shape":"Boolean",
@@ -8679,6 +8685,7 @@
     },
     "RegisterImageRequest":{
       "type":"structure",
+      "required":["Name"],
       "members":{
         "DryRun":{
           "shape":"Boolean",
@@ -8747,6 +8754,7 @@
     },
     "RejectVpcPeeringConnectionRequest":{
       "type":"structure",
+      "required":["VpcPeeringConnectionId"],
       "members":{
         "DryRun":{
           "shape":"Boolean",
@@ -8968,6 +8976,11 @@
     },
     "ReportInstanceStatusRequest":{
       "type":"structure",
+      "required":[
+        "Instances",
+        "Status",
+        "ReasonCodes"
+      ],
       "members":{
         "DryRun":{
           "shape":"Boolean",
