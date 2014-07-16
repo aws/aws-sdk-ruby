@@ -16,6 +16,26 @@
 :target_prefix: AWSSupport_20130415.
 :api_version: '2013-04-15'
 :operations:
+- :name: AddAttachmentsToSet
+  :method: :add_attachments_to_set
+  :inputs:
+    attachmentSetId:
+    - :string
+    attachments:
+    - :list:
+      - :structure:
+          fileName:
+          - :string
+          data:
+          - :blob
+    - :required
+  :outputs:
+    attachmentSetId:
+      :sym: :attachment_set_id
+      :type: :string
+    expiryTime:
+      :sym: :expiry_time
+      :type: :string
 - :name: AddCommunicationToCase
   :method: :add_communication_to_case
   :inputs:
@@ -27,6 +47,8 @@
     ccEmailAddresses:
     - :list:
       - :string
+    attachmentSetId:
+    - :string
   :outputs:
     result:
       :sym: :result
@@ -53,10 +75,29 @@
     - :string
     issueType:
     - :string
+    attachmentSetId:
+    - :string
   :outputs:
     caseId:
       :sym: :case_id
       :type: :string
+- :name: DescribeAttachment
+  :method: :describe_attachment
+  :inputs:
+    attachmentId:
+    - :string
+    - :required
+  :outputs:
+    attachment:
+      :sym: :attachment
+      :type: :hash
+      :members:
+        fileName:
+          :sym: :file_name
+          :type: :string
+        data:
+          :sym: :data
+          :type: :blob
 - :name: DescribeCases
   :method: :describe_cases
   :inputs:
@@ -77,6 +118,8 @@
     - :integer
     language:
     - :string
+    includeCommunications:
+    - :boolean
   :outputs:
     cases:
       :sym: :cases
@@ -129,6 +172,16 @@
                 timeCreated:
                   :sym: :time_created
                   :type: :string
+                attachmentSet:
+                  :sym: :attachment_set
+                  :type: :hash
+                  :members:
+                    attachmentId:
+                      :sym: :attachment_id
+                      :type: :string
+                    fileName:
+                      :sym: :file_name
+                      :type: :string
             nextToken:
               :sym: :next_token
               :type: :string
@@ -172,6 +225,16 @@
         timeCreated:
           :sym: :time_created
           :type: :string
+        attachmentSet:
+          :sym: :attachment_set
+          :type: :hash
+          :members:
+            attachmentId:
+              :sym: :attachment_id
+              :type: :string
+            fileName:
+              :sym: :file_name
+              :type: :string
     nextToken:
       :sym: :next_token
       :type: :string

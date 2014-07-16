@@ -1,37 +1,51 @@
 ---
+:add_attachments_to_set: "Calls the AddAttachmentsToSet API operation.\n@param [Hash]
+  options\n  * `:attachment_set_id` - (String) \n  * `:attachments` - *required* -
+  (Array&lt;<Hash>) \n    * `:file_name` - (String) \n    * `:data` - (String) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:attachment_set_id` - (String)\n  * `:expiry_time`
+  - (String)"
 :add_communication_to_case: "Calls the AddCommunicationToCase API operation.\n@param
   [Hash] options\n  * `:case_id` - (String) \n  * `:communication_body` - *required*
-  - (String) \n  * `:cc_email_addresses` - (Array&lt;<String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:result` - (Boolean)"
+  - (String) \n  * `:cc_email_addresses` - (Array&lt;<String>) \n  * `:attachment_set_id`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:result` - (Boolean)"
 :create_case: "Calls the CreateCase API operation.\n@param [Hash] options\n  * `:subject`
   - *required* - (String) \n  * `:service_code` - (String) \n  * `:severity_code`
   - (String) \n  * `:category_code` - (String) \n  * `:communication_body` - *required*
   - (String) \n  * `:cc_email_addresses` - (Array&lt;<String>) \n  * `:language` -
-  (String) \n  * `:issue_type` - (String) \n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:case_id`
-  - (String)"
+  (String) \n  * `:issue_type` - (String) \n  * `:attachment_set_id` - (String) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:case_id` - (String)"
+:describe_attachment: "Calls the DescribeAttachment API operation.\n@param [Hash]
+  options\n  * `:attachment_id` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:attachment` - (Hash)\n    * `:file_name` - (String)\n    * `:data` - (String)"
 :describe_cases: "Calls the DescribeCases API operation.\n@param [Hash] options\n
   \ * `:case_id_list` - (Array&lt;<String>) \n  * `:display_id` - (String) \n  * `:after_time`
   - (String) \n  * `:before_time` - (String) \n  * `:include_resolved_cases` - (Boolean)
   \n  * `:next_token` - (String) \n  * `:max_results` - (Integer) \n  * `:language`
-  - (String) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:cases` - (Array<Hash>)\n    *
-  `:case_id` - (String)\n    * `:display_id` - (String)\n    * `:subject` - (String)\n
-  \   * `:status` - (String)\n    * `:service_code` - (String)\n    * `:category_code`
-  - (String)\n    * `:severity_code` - (String)\n    * `:submitted_by` - (String)\n
-  \   * `:time_created` - (String)\n    * `:recent_communications` - (Hash)\n      *
-  `:communications` - (Array<Hash>)\n        * `:case_id` - (String)\n        * `:body`
-  - (String)\n        * `:submitted_by` - (String)\n        * `:time_created` - (String)\n
-  \     * `:next_token` - (String)\n    * `:cc_email_addresses` - (Array<String>)\n
-  \   * `:language` - (String)\n  * `:next_token` - (String)"
+  - (String) \n  * `:include_communications` - (Boolean) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:cases` - (Array<Hash>)\n    * `:case_id` - (String)\n    * `:display_id` -
+  (String)\n    * `:subject` - (String)\n    * `:status` - (String)\n    * `:service_code`
+  - (String)\n    * `:category_code` - (String)\n    * `:severity_code` - (String)\n
+  \   * `:submitted_by` - (String)\n    * `:time_created` - (String)\n    * `:recent_communications`
+  - (Hash)\n      * `:communications` - (Array<Hash>)\n        * `:case_id` - (String)\n
+  \       * `:body` - (String)\n        * `:submitted_by` - (String)\n        * `:time_created`
+  - (String)\n        * `:attachment_set` - (Array<Hash>)\n          * `:attachment_id`
+  - (String)\n          * `:file_name` - (String)\n      * `:next_token` - (String)\n
+  \   * `:cc_email_addresses` - (Array<String>)\n    * `:language` - (String)\n  *
+  `:next_token` - (String)"
 :describe_communications: "Calls the DescribeCommunications API operation.\n@param
   [Hash] options\n  * `:case_id` - *required* - (String) \n  * `:before_time` - (String)
   \n  * `:after_time` - (String) \n  * `:next_token` - (String) \n  * `:max_results`
   - (Integer) \n@return [Core::Response] The `#data` method of the response object
   returns a hash with the following structure:\n\n  * `:communications` - (Array<Hash>)\n
   \   * `:case_id` - (String)\n    * `:body` - (String)\n    * `:submitted_by` - (String)\n
-  \   * `:time_created` - (String)\n  * `:next_token` - (String)"
+  \   * `:time_created` - (String)\n    * `:attachment_set` - (Array<Hash>)\n      *
+  `:attachment_id` - (String)\n      * `:file_name` - (String)\n  * `:next_token`
+  - (String)"
 :describe_services: "Calls the DescribeServices API operation.\n@param [Hash] options\n
   \ * `:service_code_list` - (Array&lt;<String>) \n  * `:language` - (String) \n@return
   [Core::Response] The `#data` method of the response object returns a hash with the
