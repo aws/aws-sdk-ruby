@@ -3,27 +3,15 @@
   \ * `:domain_name` - *required* - (String) \n@return [Core::Response] The `#data`
   method of the response object returns a hash with the following structure:\n\n  *
   `:field_names` - (Array<String>)"
-:create_domain: |-
-  Calls the CreateDomain API operation.
-  @param [Hash] options
-    * `:domain_name` - *required* - (String) A name for the domain you are creating. Allowed characters are a-z (lower-case letters), 0-9, and hyphen (-). Domain names must start with a letter or number and be at least 3 and no more than 28 characters long.
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:domain_status` - (Hash)
-      * `:domain_id` - (String)
-      * `:domain_name` - (String)
-      * `:arn` - (String)
-      * `:created` - (Boolean)
-      * `:deleted` - (Boolean)
-      * `:doc_service` - (Hash)
-        * `:endpoint` - (String)
-      * `:search_service` - (Hash)
-        * `:endpoint` - (String)
-      * `:requires_index_documents` - (Boolean)
-      * `:processing` - (Boolean)
-      * `:search_instance_type` - (String)
-      * `:search_partition_count` - (Integer)
-      * `:search_instance_count` - (Integer)
+:create_domain: "Calls the CreateDomain API operation.\n@param [Hash] options\n  *
+  `:domain_name` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:domain_status`
+  - (Hash)\n    * `:domain_id` - (String)\n    * `:domain_name` - (String)\n    *
+  `:arn` - (String)\n    * `:created` - (Boolean)\n    * `:deleted` - (Boolean)\n
+  \   * `:doc_service` - (Hash)\n      * `:endpoint` - (String)\n    * `:search_service`
+  - (Hash)\n      * `:endpoint` - (String)\n    * `:requires_index_documents` - (Boolean)\n
+  \   * `:processing` - (Boolean)\n    * `:search_instance_type` - (String)\n    *
+  `:search_partition_count` - (Integer)\n    * `:search_instance_count` - (Integer)"
 :define_analysis_scheme: "Calls the DefineAnalysisScheme API operation.\n@param [Hash]
   options\n  * `:domain_name` - *required* - (String) \n  * `:analysis_scheme` - *required*
   - (Hash) \n    * `:analysis_scheme_name` - *required* - (String) \n    * `:analysis_scheme_language`
@@ -34,29 +22,12 @@
   `it`\n      * `ja`\n      * `ko`\n      * `lv`\n      * `mul`\n      * `nl`\n      *
   `no`\n      * `pt`\n      * `ro`\n      * `ru`\n      * `sv`\n      * `th`\n      *
   `tr`\n      * `zh-Hans`\n      * `zh-Hant`\n    * `:analysis_options` - (Hash) \n
-  \     * `:synonyms` - (String) A JSON object that defines synonym groups and aliases.
-  A synonym group is an array of arrays, where each sub-array is a group of terms
-  where each term in the group is considered a synonym of every other term in the
-  group. The aliases value is an object that contains a collection of string:value
-  pairs where the string specifies a term and the array of values specifies each of
-  the aliases for that term. An alias is considered a synonym of the specified term,
-  but the term is not considered a synonym of the alias.\n      * `:stopwords` - (String)
-  A JSON array of terms to ignore during indexing and searching. For example, [\"a\",
-  \"an\", \"the\", \"of\"]. The stopwords dictionary must explicitly list each word
-  you want to ignore. Wildcards and regular expressions are not supported.\n      *
-  `:stemming_dictionary` - (String) A JSON object that contains a collection of string:value
-  pairs that each map a term to its stem. For example, {\"term1\": \"stem1\", \"term2\":
-  \"stem2\", \"term3\": \"stem3\"}. The stemming dictionary is applied in addition
-  to any algorithmic stemming. This enables you to override the results of the algorithmic
-  stemming to correct specific cases of overstemming or understemming. The maximum
-  size of a stemming dictionary is 500 KB.\n      * `:algorithmic_stemming` - (String)
-  The level of algorithmic stemming to perform: none, minimal, light, or full. The
-  available levels vary depending on the language. For more information, see Language
-  Specific Text Processing Settings in the Amazon CloudSearch Developer Guide  Valid
-  values include:\n        * `none`\n        * `minimal`\n        * `light`\n        *
-  `full`\n@return [Core::Response] The `#data` method of the response object returns
-  a hash with the following structure:\n\n  * `:analysis_scheme` - (Hash)\n    * `:options`
-  - (Hash)\n      * `:analysis_scheme_name` - (String)\n      * `:analysis_scheme_language`
+  \     * `:synonyms` - (String) \n      * `:stopwords` - (String) \n      * `:stemming_dictionary`
+  - (String) \n      * `:algorithmic_stemming` - (String) Valid values include:\n
+  \       * `none`\n        * `minimal`\n        * `light`\n        * `full`\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:analysis_scheme` - (Hash)\n    * `:options` - (Hash)\n
+  \     * `:analysis_scheme_name` - (String)\n      * `:analysis_scheme_language`
   - (String)\n      * `:analysis_options` - (Hash)\n        * `:synonyms` - (String)\n
   \       * `:stopwords` - (String)\n        * `:stemming_dictionary` - (String)\n
   \       * `:algorithmic_stemming` - (String)\n    * `:status` - (Hash)\n      *
@@ -73,96 +44,55 @@
   - (String)\n      * `:pending_deletion` - (Boolean)"
 :define_index_field: "Calls the DefineIndexField API operation.\n@param [Hash] options\n
   \ * `:domain_name` - *required* - (String) \n  * `:index_field` - *required* - (Hash)
-  The index field and field options you want to configure.\n    * `:index_field_name`
-  - *required* - (String) The name of a field in the search index. Field names must
-  begin with a letter and can contain the following characters: a-z (lowercase), 0-9,
-  and _ (underscore). Uppercase letters and hyphens are not allowed. The names \"body\",
-  \"docid\", and \"text_relevance\" are reserved and cannot be specified as field
-  or rank expression names.\n    * `:index_field_type` - *required* - (String) The
-  type of field. Based on this type, exactly one of the UIntOptions, LiteralOptions
-  or TextOptions must be present.  Valid values include:\n      * `int`\n      * `double`\n
-  \     * `literal`\n      * `text`\n      * `date`\n      * `latlon`\n      * `int-array`\n
-  \     * `double-array`\n      * `literal-array`\n      * `text-array`\n      * `date-array`\n
-  \   * `:int_options` - (Hash) \n      * `:default_value` - (Integer) A value to
-  use for the field if the field isn't specified for a document. This can be important
-  if you are using the field in an expression and that field is not present in every
-  document.\n      * `:source_field` - (String) The name of the source field to map
-  to the field.\n      * `:facet_enabled` - (Boolean) Whether facet information can
-  be returned for the field.\n      * `:search_enabled` - (Boolean) Whether the contents
-  of the field are searchable.\n      * `:return_enabled` - (Boolean) Whether the
-  contents of the field can be returned in the search results.\n      * `:sort_enabled`
-  - (Boolean) Whether the field can be used to sort the search results.\n    * `:double_options`
-  - (Hash) \n      * `:default_value` - (Float) A value to use for the field if the
-  field isn't specified for a document. This can be important if you are using the
-  field in an expression and that field is not present in every document.\n      *
-  `:source_field` - (String) The name of the source field to map to the field.\n      *
-  `:facet_enabled` - (Boolean) Whether facet information can be returned for the field.\n
-  \     * `:search_enabled` - (Boolean) Whether the contents of the field are searchable.\n
-  \     * `:return_enabled` - (Boolean) Whether the contents of the field can be returned
-  in the search results.\n      * `:sort_enabled` - (Boolean) Whether the field can
-  be used to sort the search results.\n    * `:literal_options` - (Hash) Options for
-  literal field. Present if IndexFieldType specifies the field is of type literal.\n
-  \     * `:default_value` - (String) The default value for a literal field. Optional.\n
-  \     * `:source_field` - (String) \n      * `:facet_enabled` - (Boolean) Specifies
-  whether facets are enabled for this field. Default: False.\n      * `:search_enabled`
+  \n    * `:index_field_name` - *required* - (String) The name of a field in the search
+  index. Field names must begin with a letter and can contain the following characters:
+  a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not
+  allowed. The names \"body\", \"docid\", and \"text_relevance\" are reserved and
+  cannot be specified as field or rank expression names.\n    * `:index_field_type`
+  - *required* - (String) The type of field. Based on this type, exactly one of the
+  UIntOptions, LiteralOptions or TextOptions must be present.  Valid values include:\n
+  \     * `int`\n      * `double`\n      * `literal`\n      * `text`\n      * `date`\n
+  \     * `latlon`\n      * `int-array`\n      * `double-array`\n      * `literal-array`\n
+  \     * `text-array`\n      * `date-array`\n    * `:int_options` - (Hash) \n      *
+  `:default_value` - (Integer) \n      * `:source_field` - (String) \n      * `:facet_enabled`
+  - (Boolean) \n      * `:search_enabled` - (Boolean) \n      * `:return_enabled`
+  - (Boolean) \n      * `:sort_enabled` - (Boolean) \n    * `:double_options` - (Hash)
+  \n      * `:default_value` - (Float) \n      * `:source_field` - (String) \n      *
+  `:facet_enabled` - (Boolean) \n      * `:search_enabled` - (Boolean) \n      * `:return_enabled`
+  - (Boolean) \n      * `:sort_enabled` - (Boolean) \n    * `:literal_options` - (Hash)
+  Options for literal field. Present if IndexFieldType specifies the field is of type
+  literal.\n      * `:default_value` - (String) The default value for a literal field.
+  Optional.\n      * `:source_field` - (String) \n      * `:facet_enabled` - (Boolean)
+  Specifies whether facets are enabled for this field. Default: False.\n      * `:search_enabled`
   - (Boolean) Specifies whether search is enabled for this field. Default: False.\n
-  \     * `:return_enabled` - (Boolean) Whether the contents of the field can be returned
-  in the search results.\n      * `:sort_enabled` - (Boolean) Whether the field can
-  be used to sort the search results.\n    * `:text_options` - (Hash) Options for
-  text field. Present if IndexFieldType specifies the field is of type text.\n      *
-  `:default_value` - (String) The default value for a text field. Optional.\n      *
-  `:source_field` - (String) \n      * `:return_enabled` - (Boolean) Whether the contents
-  of the field can be returned in the search results.\n      * `:sort_enabled` - (Boolean)
-  Whether the field can be used to sort the search results.\n      * `:highlight_enabled`
-  - (Boolean) Whether highlights can be returned for the field.\n      * `:analysis_scheme`
-  - (String) The name of an analysis scheme for a text field.\n    * `:date_options`
-  - (Hash) \n      * `:default_value` - (String) A value to use for the field if the
-  field isn't specified for a document.\n      * `:source_field` - (String) \n      *
-  `:facet_enabled` - (Boolean) Whether facet information can be returned for the field.\n
-  \     * `:search_enabled` - (Boolean) Whether the contents of the field are searchable.\n
-  \     * `:return_enabled` - (Boolean) Whether the contents of the field can be returned
-  in the search results.\n      * `:sort_enabled` - (Boolean) Whether the field can
-  be used to sort the search results.\n    * `:lat_lon_options` - (Hash) \n      *
-  `:default_value` - (String) A value to use for the field if the field isn't specified
-  for a document.\n      * `:source_field` - (String) \n      * `:facet_enabled` -
-  (Boolean) Whether facet information can be returned for the field.\n      * `:search_enabled`
-  - (Boolean) Whether the contents of the field are searchable.\n      * `:return_enabled`
-  - (Boolean) Whether the contents of the field can be returned in the search results.\n
-  \     * `:sort_enabled` - (Boolean) Whether the field can be used to sort the search
-  results.\n    * `:int_array_options` - (Hash) \n      * `:default_value` - (Integer)
-  A value to use for the field if the field isn't specified for a document.\n      *
-  `:source_fields` - (String) A list of source fields to map to the field.\n      *
-  `:facet_enabled` - (Boolean) Whether facet information can be returned for the field.\n
-  \     * `:search_enabled` - (Boolean) Whether the contents of the field are searchable.\n
-  \     * `:return_enabled` - (Boolean) Whether the contents of the field can be returned
-  in the search results.\n    * `:double_array_options` - (Hash) \n      * `:default_value`
-  - (Float) A value to use for the field if the field isn't specified for a document.\n
-  \     * `:source_fields` - (String) A list of source fields to map to the field.\n
-  \     * `:facet_enabled` - (Boolean) Whether facet information can be returned for
-  the field.\n      * `:search_enabled` - (Boolean) Whether the contents of the field
-  are searchable.\n      * `:return_enabled` - (Boolean) Whether the contents of the
-  field can be returned in the search results.\n    * `:literal_array_options` - (Hash)
-  \n      * `:default_value` - (String) A value to use for the field if the field
-  isn't specified for a document.\n      * `:source_fields` - (String) A list of source
-  fields to map to the field.\n      * `:facet_enabled` - (Boolean) Whether facet
-  information can be returned for the field.\n      * `:search_enabled` - (Boolean)
-  Whether the contents of the field are searchable.\n      * `:return_enabled` - (Boolean)
-  Whether the contents of the field can be returned in the search results.\n    *
-  `:text_array_options` - (Hash) \n      * `:default_value` - (String) A value to
-  use for the field if the field isn't specified for a document.\n      * `:source_fields`
-  - (String) A list of source fields to map to the field.\n      * `:return_enabled`
-  - (Boolean) Whether the contents of the field can be returned in the search results.\n
-  \     * `:highlight_enabled` - (Boolean) Whether highlights can be returned for
-  the field.\n      * `:analysis_scheme` - (String) The name of an analysis scheme
-  for a text-array field.\n    * `:date_array_options` - (Hash) \n      * `:default_value`
-  - (String) A value to use for the field if the field isn't specified for a document.\n
-  \     * `:source_fields` - (String) A list of source fields to map to the field.\n
-  \     * `:facet_enabled` - (Boolean) Whether facet information can be returned for
-  the field.\n      * `:search_enabled` - (Boolean) Whether the contents of the field
-  are searchable.\n      * `:return_enabled` - (Boolean) Whether the contents of the
-  field can be returned in the search results.\n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:index_field` - (Hash)\n    * `:options` - (Hash)\n      * `:index_field_name`
+  \     * `:return_enabled` - (Boolean) \n      * `:sort_enabled` - (Boolean) \n    *
+  `:text_options` - (Hash) Options for text field. Present if IndexFieldType specifies
+  the field is of type text.\n      * `:default_value` - (String) The default value
+  for a text field. Optional.\n      * `:source_field` - (String) \n      * `:return_enabled`
+  - (Boolean) \n      * `:sort_enabled` - (Boolean) \n      * `:highlight_enabled`
+  - (Boolean) \n      * `:analysis_scheme` - (String) \n    * `:date_options` - (Hash)
+  \n      * `:default_value` - (String) \n      * `:source_field` - (String) \n      *
+  `:facet_enabled` - (Boolean) \n      * `:search_enabled` - (Boolean) \n      * `:return_enabled`
+  - (Boolean) \n      * `:sort_enabled` - (Boolean) \n    * `:lat_lon_options` - (Hash)
+  \n      * `:default_value` - (String) \n      * `:source_field` - (String) \n      *
+  `:facet_enabled` - (Boolean) \n      * `:search_enabled` - (Boolean) \n      * `:return_enabled`
+  - (Boolean) \n      * `:sort_enabled` - (Boolean) \n    * `:int_array_options` -
+  (Hash) \n      * `:default_value` - (Integer) \n      * `:source_fields` - (String)
+  \n      * `:facet_enabled` - (Boolean) \n      * `:search_enabled` - (Boolean) \n
+  \     * `:return_enabled` - (Boolean) \n    * `:double_array_options` - (Hash) \n
+  \     * `:default_value` - (Float) \n      * `:source_fields` - (String) \n      *
+  `:facet_enabled` - (Boolean) \n      * `:search_enabled` - (Boolean) \n      * `:return_enabled`
+  - (Boolean) \n    * `:literal_array_options` - (Hash) \n      * `:default_value`
+  - (String) \n      * `:source_fields` - (String) \n      * `:facet_enabled` - (Boolean)
+  \n      * `:search_enabled` - (Boolean) \n      * `:return_enabled` - (Boolean)
+  \n    * `:text_array_options` - (Hash) \n      * `:default_value` - (String) \n
+  \     * `:source_fields` - (String) \n      * `:return_enabled` - (Boolean) \n      *
+  `:highlight_enabled` - (Boolean) \n      * `:analysis_scheme` - (String) \n    *
+  `:date_array_options` - (Hash) \n      * `:default_value` - (String) \n      * `:source_fields`
+  - (String) \n      * `:facet_enabled` - (Boolean) \n      * `:search_enabled` -
+  (Boolean) \n      * `:return_enabled` - (Boolean) \n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:index_field` - (Hash)\n    * `:options` - (Hash)\n      * `:index_field_name`
   - (String)\n      * `:index_field_type` - (String)\n      * `:int_options` - (Hash)\n
   \       * `:default_value` - (Integer)\n        * `:source_field` - (String)\n        *
   `:facet_enabled` - (Boolean)\n        * `:search_enabled` - (Boolean)\n        *
@@ -204,69 +134,49 @@
 :define_suggester: "Calls the DefineSuggester API operation.\n@param [Hash] options\n
   \ * `:domain_name` - *required* - (String) \n  * `:suggester` - *required* - (Hash)
   \n    * `:suggester_name` - *required* - (String) \n    * `:document_suggester_options`
-  - *required* - (Hash) \n      * `:source_field` - *required* - (String) The name
-  of the index field you want to use for suggestions.\n      * `:fuzzy_matching` -
-  (String) The level of fuzziness allowed when suggesting matches for a string: none,
-  low, or high. With none, the specified string is treated as an exact prefix. With
-  low, suggestions must differ from the specified string by no more than one character.
-  With high, suggestions can differ by up to two characters. The default is none.
-  \ Valid values include:\n        * `none`\n        * `low`\n        * `high`\n      *
-  `:sort_expression` - (String) An expression that computes a score for each suggestion
-  to control how they are sorted.\n@return [Core::Response] The `#data` method of
-  the response object returns a hash with the following structure:\n\n  * `:suggester`
-  - (Hash)\n    * `:options` - (Hash)\n      * `:suggester_name` - (String)\n      *
-  `:document_suggester_options` - (Hash)\n        * `:source_field` - (String)\n        *
-  `:fuzzy_matching` - (String)\n        * `:sort_expression` - (String)\n    * `:status`
-  - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      *
-  `:update_version` - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion`
-  - (Boolean)"
+  - *required* - (Hash) \n      * `:source_field` - *required* - (String) \n      *
+  `:fuzzy_matching` - (String) Valid values include:\n        * `none`\n        *
+  `low`\n        * `high`\n      * `:sort_expression` - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:suggester` - (Hash)\n    * `:options` - (Hash)\n      * `:suggester_name`
+  - (String)\n      * `:document_suggester_options` - (Hash)\n        * `:source_field`
+  - (String)\n        * `:fuzzy_matching` - (String)\n        * `:sort_expression`
+  - (String)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
+  `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
+  - (String)\n      * `:pending_deletion` - (Boolean)"
 :delete_analysis_scheme: "Calls the DeleteAnalysisScheme API operation.\n@param [Hash]
   options\n  * `:domain_name` - *required* - (String) \n  * `:analysis_scheme_name`
-  - *required* - (String) The name of the analysis scheme you want to delete.\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:analysis_scheme` - (Hash)\n    * `:options` - (Hash)\n
-  \     * `:analysis_scheme_name` - (String)\n      * `:analysis_scheme_language`
-  - (String)\n      * `:analysis_options` - (Hash)\n        * `:synonyms` - (String)\n
-  \       * `:stopwords` - (String)\n        * `:stemming_dictionary` - (String)\n
-  \       * `:algorithmic_stemming` - (String)\n    * `:status` - (Hash)\n      *
-  `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      * `:update_version`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:analysis_scheme` -
+  (Hash)\n    * `:options` - (Hash)\n      * `:analysis_scheme_name` - (String)\n
+  \     * `:analysis_scheme_language` - (String)\n      * `:analysis_options` - (Hash)\n
+  \       * `:synonyms` - (String)\n        * `:stopwords` - (String)\n        * `:stemming_dictionary`
+  - (String)\n        * `:algorithmic_stemming` - (String)\n    * `:status` - (Hash)\n
+  \     * `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      * `:update_version`
   - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
-:delete_domain: |-
-  Calls the DeleteDomain API operation.
-  @param [Hash] options
-    * `:domain_name` - *required* - (String) The name of the domain you want to permanently delete.
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:domain_status` - (Hash)
-      * `:domain_id` - (String)
-      * `:domain_name` - (String)
-      * `:arn` - (String)
-      * `:created` - (Boolean)
-      * `:deleted` - (Boolean)
-      * `:doc_service` - (Hash)
-        * `:endpoint` - (String)
-      * `:search_service` - (Hash)
-        * `:endpoint` - (String)
-      * `:requires_index_documents` - (Boolean)
-      * `:processing` - (Boolean)
-      * `:search_instance_type` - (String)
-      * `:search_partition_count` - (Integer)
-      * `:search_instance_count` - (Integer)
+:delete_domain: "Calls the DeleteDomain API operation.\n@param [Hash] options\n  *
+  `:domain_name` - *required* - (String) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:domain_status`
+  - (Hash)\n    * `:domain_id` - (String)\n    * `:domain_name` - (String)\n    *
+  `:arn` - (String)\n    * `:created` - (Boolean)\n    * `:deleted` - (Boolean)\n
+  \   * `:doc_service` - (Hash)\n      * `:endpoint` - (String)\n    * `:search_service`
+  - (Hash)\n      * `:endpoint` - (String)\n    * `:requires_index_documents` - (Boolean)\n
+  \   * `:processing` - (Boolean)\n    * `:search_instance_type` - (String)\n    *
+  `:search_partition_count` - (Integer)\n    * `:search_instance_count` - (Integer)"
 :delete_expression: "Calls the DeleteExpression API operation.\n@param [Hash] options\n
   \ * `:domain_name` - *required* - (String) \n  * `:expression_name` - *required*
-  - (String) The name of the Expression to delete.\n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:expression` - (Hash)\n    * `:options` - (Hash)\n      * `:expression_name` -
-  (String)\n      * `:expression_value` - (String)\n    * `:status` - (Hash)\n      *
-  `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      * `:update_version`
-  - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:expression` - (Hash)\n    *
+  `:options` - (Hash)\n      * `:expression_name` - (String)\n      * `:expression_value`
+  - (String)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
+  `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
+  - (String)\n      * `:pending_deletion` - (Boolean)"
 :delete_index_field: "Calls the DeleteIndexField API operation.\n@param [Hash] options\n
   \ * `:domain_name` - *required* - (String) \n  * `:index_field_name` - *required*
-  - (String) The name of the index field your want to remove from the domain's indexing
-  options.\n@return [Core::Response] The `#data` method of the response object returns
-  a hash with the following structure:\n\n  * `:index_field` - (Hash)\n    * `:options`
-  - (Hash)\n      * `:index_field_name` - (String)\n      * `:index_field_type` -
-  (String)\n      * `:int_options` - (Hash)\n        * `:default_value` - (Integer)\n
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:index_field` - (Hash)\n    *
+  `:options` - (Hash)\n      * `:index_field_name` - (String)\n      * `:index_field_type`
+  - (String)\n      * `:int_options` - (Hash)\n        * `:default_value` - (Integer)\n
   \       * `:source_field` - (String)\n        * `:facet_enabled` - (Boolean)\n        *
   `:search_enabled` - (Boolean)\n        * `:return_enabled` - (Boolean)\n        *
   `:sort_enabled` - (Boolean)\n      * `:double_options` - (Hash)\n        * `:default_value`
@@ -305,52 +215,32 @@
   `:pending_deletion` - (Boolean)"
 :delete_suggester: "Calls the DeleteSuggester API operation.\n@param [Hash] options\n
   \ * `:domain_name` - *required* - (String) \n  * `:suggester_name` - *required*
-  - (String) Specifies the name of the suggester you want to delete.\n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:suggester` - (Hash)\n    * `:options` - (Hash)\n      * `:suggester_name`
-  - (String)\n      * `:document_suggester_options` - (Hash)\n        * `:source_field`
-  - (String)\n        * `:fuzzy_matching` - (String)\n        * `:sort_expression`
-  - (String)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
-  `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
-  - (String)\n      * `:pending_deletion` - (Boolean)"
-:describe_analysis_schemes: |-
-  Calls the DescribeAnalysisSchemes API operation.
-  @param [Hash] options
-    * `:domain_name` - *required* - (String) The name of the domain you want to describe.
-    * `:analysis_scheme_names` - (Array&lt;<String>) The analysis schemes you want to describe.
-    * `:deployed` - (Boolean) Whether to display the deployed configuration ( `true` ) or include any pending changes ( `false` ). Defaults to  `false` .
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:analysis_schemes` - (Array<Hash>)
-      * `:options` - (Hash)
-        * `:analysis_scheme_name` - (String)
-        * `:analysis_scheme_language` - (String)
-        * `:analysis_options` - (Hash)
-          * `:synonyms` - (String)
-          * `:stopwords` - (String)
-          * `:stemming_dictionary` - (String)
-          * `:algorithmic_stemming` - (String)
-      * `:status` - (Hash)
-        * `:creation_date` - (Time)
-        * `:update_date` - (Time)
-        * `:update_version` - (Integer)
-        * `:state` - (String)
-        * `:pending_deletion` - (Boolean)
-:describe_availability_options: |-
-  Calls the DescribeAvailabilityOptions API operation.
-  @param [Hash] options
-    * `:domain_name` - *required* - (String) The name of the domain you want to describe.
-    * `:deployed` - (Boolean) Whether to display the deployed configuration ( `true` ) or include any pending changes ( `false` ). Defaults to  `false` .
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:availability_options` - (Hash)
-      * `:options` - (Boolean)
-      * `:status` - (Hash)
-        * `:creation_date` - (Time)
-        * `:update_date` - (Time)
-        * `:update_version` - (Integer)
-        * `:state` - (String)
-        * `:pending_deletion` - (Boolean)
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:suggester` - (Hash)\n    *
+  `:options` - (Hash)\n      * `:suggester_name` - (String)\n      * `:document_suggester_options`
+  - (Hash)\n        * `:source_field` - (String)\n        * `:fuzzy_matching` - (String)\n
+  \       * `:sort_expression` - (String)\n    * `:status` - (Hash)\n      * `:creation_date`
+  - (Time)\n      * `:update_date` - (Time)\n      * `:update_version` - (Integer)\n
+  \     * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+:describe_analysis_schemes: "Calls the DescribeAnalysisSchemes API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:analysis_scheme_names`
+  - (Array&lt;<String>) \n  * `:deployed` - (Boolean) \n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:analysis_schemes` - (Array<Hash>)\n    * `:options` - (Hash)\n      * `:analysis_scheme_name`
+  - (String)\n      * `:analysis_scheme_language` - (String)\n      * `:analysis_options`
+  - (Hash)\n        * `:synonyms` - (String)\n        * `:stopwords` - (String)\n
+  \       * `:stemming_dictionary` - (String)\n        * `:algorithmic_stemming` -
+  (String)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date`
+  - (Time)\n      * `:update_version` - (Integer)\n      * `:state` - (String)\n      *
+  `:pending_deletion` - (Boolean)"
+:describe_availability_options: "Calls the DescribeAvailabilityOptions API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) The name of the domain
+  you want to describe.\n  * `:deployed` - (Boolean) \n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:availability_options` - (Hash)\n    * `:options` - (Boolean)\n    * `:status`
+  - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      *
+  `:update_version` - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion`
+  - (Boolean)"
 :describe_domains: |-
   Calls the DescribeDomains API operation.
   @param [Hash] options
@@ -372,114 +262,57 @@
       * `:search_instance_type` - (String)
       * `:search_partition_count` - (Integer)
       * `:search_instance_count` - (Integer)
-:describe_expressions: |-
-  Calls the DescribeExpressions API operation.
-  @param [Hash] options
-    * `:domain_name` - *required* - (String) The name of the domain you want to describe.
-    * `:expression_names` - (Array&lt;<String>) Limits the DescribeExpressions response to the specified expressions. If not specified, all expressions are shown.
-    * `:deployed` - (Boolean) Whether to display the deployed configuration ( `true` ) or include any pending changes ( `false` ). Defaults to  `false` .
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:expressions` - (Array<Hash>)
-      * `:options` - (Hash)
-        * `:expression_name` - (String)
-        * `:expression_value` - (String)
-      * `:status` - (Hash)
-        * `:creation_date` - (Time)
-        * `:update_date` - (Time)
-        * `:update_version` - (Integer)
-        * `:state` - (String)
-        * `:pending_deletion` - (Boolean)
-:describe_index_fields: |-
-  Calls the DescribeIndexFields API operation.
-  @param [Hash] options
-    * `:domain_name` - *required* - (String) The name of the domain you want to describe.
-    * `:field_names` - (Array&lt;<String>) Limits the DescribeIndexFields response to the specified fields.
-    * `:deployed` - (Boolean) Whether to display the deployed configuration ( `true` ) or include any pending changes ( `false` ). Defaults to  `false` .
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:index_fields` - (Array<Hash>)
-      * `:options` - (Hash)
-        * `:index_field_name` - (String)
-        * `:index_field_type` - (String)
-        * `:int_options` - (Hash)
-          * `:default_value` - (Integer)
-          * `:source_field` - (String)
-          * `:facet_enabled` - (Boolean)
-          * `:search_enabled` - (Boolean)
-          * `:return_enabled` - (Boolean)
-          * `:sort_enabled` - (Boolean)
-        * `:double_options` - (Hash)
-          * `:default_value` - (Numeric)
-          * `:source_field` - (String)
-          * `:facet_enabled` - (Boolean)
-          * `:search_enabled` - (Boolean)
-          * `:return_enabled` - (Boolean)
-          * `:sort_enabled` - (Boolean)
-        * `:literal_options` - (Hash)
-          * `:default_value` - (String)
-          * `:source_field` - (String)
-          * `:facet_enabled` - (Boolean)
-          * `:search_enabled` - (Boolean)
-          * `:return_enabled` - (Boolean)
-          * `:sort_enabled` - (Boolean)
-        * `:text_options` - (Hash)
-          * `:default_value` - (String)
-          * `:source_field` - (String)
-          * `:return_enabled` - (Boolean)
-          * `:sort_enabled` - (Boolean)
-          * `:highlight_enabled` - (Boolean)
-          * `:analysis_scheme` - (String)
-        * `:date_options` - (Hash)
-          * `:default_value` - (String)
-          * `:source_field` - (String)
-          * `:facet_enabled` - (Boolean)
-          * `:search_enabled` - (Boolean)
-          * `:return_enabled` - (Boolean)
-          * `:sort_enabled` - (Boolean)
-        * `:lat_lon_options` - (Hash)
-          * `:default_value` - (String)
-          * `:source_field` - (String)
-          * `:facet_enabled` - (Boolean)
-          * `:search_enabled` - (Boolean)
-          * `:return_enabled` - (Boolean)
-          * `:sort_enabled` - (Boolean)
-        * `:int_array_options` - (Hash)
-          * `:default_value` - (Integer)
-          * `:source_fields` - (String)
-          * `:facet_enabled` - (Boolean)
-          * `:search_enabled` - (Boolean)
-          * `:return_enabled` - (Boolean)
-        * `:double_array_options` - (Hash)
-          * `:default_value` - (Numeric)
-          * `:source_fields` - (String)
-          * `:facet_enabled` - (Boolean)
-          * `:search_enabled` - (Boolean)
-          * `:return_enabled` - (Boolean)
-        * `:literal_array_options` - (Hash)
-          * `:default_value` - (String)
-          * `:source_fields` - (String)
-          * `:facet_enabled` - (Boolean)
-          * `:search_enabled` - (Boolean)
-          * `:return_enabled` - (Boolean)
-        * `:text_array_options` - (Hash)
-          * `:default_value` - (String)
-          * `:source_fields` - (String)
-          * `:return_enabled` - (Boolean)
-          * `:highlight_enabled` - (Boolean)
-          * `:analysis_scheme` - (String)
-        * `:date_array_options` - (Hash)
-          * `:default_value` - (String)
-          * `:source_fields` - (String)
-          * `:facet_enabled` - (Boolean)
-          * `:search_enabled` - (Boolean)
-          * `:return_enabled` - (Boolean)
-      * `:status` - (Hash)
-        * `:creation_date` - (Time)
-        * `:update_date` - (Time)
-        * `:update_version` - (Integer)
-        * `:state` - (String)
-        * `:pending_deletion` - (Boolean)
+:describe_expressions: "Calls the DescribeExpressions API operation.\n@param [Hash]
+  options\n  * `:domain_name` - *required* - (String) \n  * `:expression_names` -
+  (Array&lt;<String>) \n  * `:deployed` - (Boolean) \n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:expressions` - (Array<Hash>)\n    * `:options` - (Hash)\n      * `:expression_name`
+  - (String)\n      * `:expression_value` - (String)\n    * `:status` - (Hash)\n      *
+  `:creation_date` - (Time)\n      * `:update_date` - (Time)\n      * `:update_version`
+  - (Integer)\n      * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
+:describe_index_fields: "Calls the DescribeIndexFields API operation.\n@param [Hash]
+  options\n  * `:domain_name` - *required* - (String) \n  * `:field_names` - (Array&lt;<String>)
+  Limits the DescribeIndexFields response to the specified fields.\n  * `:deployed`
+  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:index_fields` - (Array<Hash>)\n
+  \   * `:options` - (Hash)\n      * `:index_field_name` - (String)\n      * `:index_field_type`
+  - (String)\n      * `:int_options` - (Hash)\n        * `:default_value` - (Integer)\n
+  \       * `:source_field` - (String)\n        * `:facet_enabled` - (Boolean)\n        *
+  `:search_enabled` - (Boolean)\n        * `:return_enabled` - (Boolean)\n        *
+  `:sort_enabled` - (Boolean)\n      * `:double_options` - (Hash)\n        * `:default_value`
+  - (Numeric)\n        * `:source_field` - (String)\n        * `:facet_enabled` -
+  (Boolean)\n        * `:search_enabled` - (Boolean)\n        * `:return_enabled`
+  - (Boolean)\n        * `:sort_enabled` - (Boolean)\n      * `:literal_options` -
+  (Hash)\n        * `:default_value` - (String)\n        * `:source_field` - (String)\n
+  \       * `:facet_enabled` - (Boolean)\n        * `:search_enabled` - (Boolean)\n
+  \       * `:return_enabled` - (Boolean)\n        * `:sort_enabled` - (Boolean)\n
+  \     * `:text_options` - (Hash)\n        * `:default_value` - (String)\n        *
+  `:source_field` - (String)\n        * `:return_enabled` - (Boolean)\n        * `:sort_enabled`
+  - (Boolean)\n        * `:highlight_enabled` - (Boolean)\n        * `:analysis_scheme`
+  - (String)\n      * `:date_options` - (Hash)\n        * `:default_value` - (String)\n
+  \       * `:source_field` - (String)\n        * `:facet_enabled` - (Boolean)\n        *
+  `:search_enabled` - (Boolean)\n        * `:return_enabled` - (Boolean)\n        *
+  `:sort_enabled` - (Boolean)\n      * `:lat_lon_options` - (Hash)\n        * `:default_value`
+  - (String)\n        * `:source_field` - (String)\n        * `:facet_enabled` - (Boolean)\n
+  \       * `:search_enabled` - (Boolean)\n        * `:return_enabled` - (Boolean)\n
+  \       * `:sort_enabled` - (Boolean)\n      * `:int_array_options` - (Hash)\n        *
+  `:default_value` - (Integer)\n        * `:source_fields` - (String)\n        * `:facet_enabled`
+  - (Boolean)\n        * `:search_enabled` - (Boolean)\n        * `:return_enabled`
+  - (Boolean)\n      * `:double_array_options` - (Hash)\n        * `:default_value`
+  - (Numeric)\n        * `:source_fields` - (String)\n        * `:facet_enabled` -
+  (Boolean)\n        * `:search_enabled` - (Boolean)\n        * `:return_enabled`
+  - (Boolean)\n      * `:literal_array_options` - (Hash)\n        * `:default_value`
+  - (String)\n        * `:source_fields` - (String)\n        * `:facet_enabled` -
+  (Boolean)\n        * `:search_enabled` - (Boolean)\n        * `:return_enabled`
+  - (Boolean)\n      * `:text_array_options` - (Hash)\n        * `:default_value`
+  - (String)\n        * `:source_fields` - (String)\n        * `:return_enabled` -
+  (Boolean)\n        * `:highlight_enabled` - (Boolean)\n        * `:analysis_scheme`
+  - (String)\n      * `:date_array_options` - (Hash)\n        * `:default_value` -
+  (String)\n        * `:source_fields` - (String)\n        * `:facet_enabled` - (Boolean)\n
+  \       * `:search_enabled` - (Boolean)\n        * `:return_enabled` - (Boolean)\n
+  \   * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date`
+  - (Time)\n      * `:update_version` - (Integer)\n      * `:state` - (String)\n      *
+  `:pending_deletion` - (Boolean)"
 :describe_scaling_parameters: "Calls the DescribeScalingParameters API operation.\n@param
   [Hash] options\n  * `:domain_name` - *required* - (String) \n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
@@ -488,42 +321,23 @@
   - (Integer)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
   `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
   - (String)\n      * `:pending_deletion` - (Boolean)"
-:describe_service_access_policies: |-
-  Calls the DescribeServiceAccessPolicies API operation.
-  @param [Hash] options
-    * `:domain_name` - *required* - (String) The name of the domain you want to describe.
-    * `:deployed` - (Boolean) Whether to display the deployed configuration ( `true` ) or include any pending changes ( `false` ). Defaults to  `false` .
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:access_policies` - (Hash)
-      * `:options` - (String)
-      * `:status` - (Hash)
-        * `:creation_date` - (Time)
-        * `:update_date` - (Time)
-        * `:update_version` - (Integer)
-        * `:state` - (String)
-        * `:pending_deletion` - (Boolean)
-:describe_suggesters: |-
-  Calls the DescribeSuggesters API operation.
-  @param [Hash] options
-    * `:domain_name` - *required* - (String) The name of the domain you want to describe.
-    * `:suggester_names` - (Array&lt;<String>) The suggesters you want to describe.
-    * `:deployed` - (Boolean) Whether to display the deployed configuration ( `true` ) or include any pending changes ( `false` ). Defaults to  `false` .
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:suggesters` - (Array<Hash>)
-      * `:options` - (Hash)
-        * `:suggester_name` - (String)
-        * `:document_suggester_options` - (Hash)
-          * `:source_field` - (String)
-          * `:fuzzy_matching` - (String)
-          * `:sort_expression` - (String)
-      * `:status` - (Hash)
-        * `:creation_date` - (Time)
-        * `:update_date` - (Time)
-        * `:update_version` - (Integer)
-        * `:state` - (String)
-        * `:pending_deletion` - (Boolean)
+:describe_service_access_policies: "Calls the DescribeServiceAccessPolicies API operation.\n@param
+  [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:deployed` - (Boolean)
+  \n@return [Core::Response] The `#data` method of the response object returns a hash
+  with the following structure:\n\n  * `:access_policies` - (Hash)\n    * `:options`
+  - (String)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
+  `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
+  - (String)\n      * `:pending_deletion` - (Boolean)"
+:describe_suggesters: "Calls the DescribeSuggesters API operation.\n@param [Hash]
+  options\n  * `:domain_name` - *required* - (String) \n  * `:suggester_names` - (Array&lt;<String>)
+  \n  * `:deployed` - (Boolean) \n@return [Core::Response] The `#data` method of the
+  response object returns a hash with the following structure:\n\n  * `:suggesters`
+  - (Array<Hash>)\n    * `:options` - (Hash)\n      * `:suggester_name` - (String)\n
+  \     * `:document_suggester_options` - (Hash)\n        * `:source_field` - (String)\n
+  \       * `:fuzzy_matching` - (String)\n        * `:sort_expression` - (String)\n
+  \   * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      * `:update_date`
+  - (Time)\n      * `:update_version` - (Integer)\n      * `:state` - (String)\n      *
+  `:pending_deletion` - (Boolean)"
 :index_documents: "Calls the IndexDocuments API operation.\n@param [Hash] options\n
   \ * `:domain_name` - *required* - (String) \n@return [Core::Response] The `#data`
   method of the response object returns a hash with the following structure:\n\n  *
@@ -546,23 +360,19 @@
   \     * `:state` - (String)\n      * `:pending_deletion` - (Boolean)"
 :update_scaling_parameters: "Calls the UpdateScalingParameters API operation.\n@param
   [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:scaling_parameters`
-  - *required* - (Hash) \n    * `:desired_instance_type` - (String) The instance type
-  that you want to preconfigure for your domain. For example, search.m1.small.  Valid
-  values include:\n      * `search.m1.small`\n      * `search.m1.large`\n      * `search.m2.xlarge`\n
-  \     * `search.m2.2xlarge`\n    * `:desired_replication_count` - (Integer) The
-  number of replicas you want to preconfigure for each index partition.\n    * `:desired_partition_count`
-  - (Integer) The number of partitions you want to preconfigure for your domain. Only
-  valid when you select m2.2xlarge as the desired instance type.\n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:scaling_parameters` - (Hash)\n    * `:options` - (Hash)\n      * `:desired_instance_type`
-  - (String)\n      * `:desired_replication_count` - (Integer)\n      * `:desired_partition_count`
+  - *required* - (Hash) \n    * `:desired_instance_type` - (String) Valid values include:\n
+  \     * `search.m1.small`\n      * `search.m1.large`\n      * `search.m2.xlarge`\n
+  \     * `search.m2.2xlarge`\n    * `:desired_replication_count` - (Integer) \n    *
+  `:desired_partition_count` - (Integer) \n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:scaling_parameters`
+  - (Hash)\n    * `:options` - (Hash)\n      * `:desired_instance_type` - (String)\n
+  \     * `:desired_replication_count` - (Integer)\n      * `:desired_partition_count`
   - (Integer)\n    * `:status` - (Hash)\n      * `:creation_date` - (Time)\n      *
   `:update_date` - (Time)\n      * `:update_version` - (Integer)\n      * `:state`
   - (String)\n      * `:pending_deletion` - (Boolean)"
 :update_service_access_policies: "Calls the UpdateServiceAccessPolicies API operation.\n@param
   [Hash] options\n  * `:domain_name` - *required* - (String) \n  * `:access_policies`
-  - *required* - (String) The access rules you want to configure. These rules replace
-  any existing rules.\n@return [Core::Response] The `#data` method of the response
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
   object returns a hash with the following structure:\n\n  * `:access_policies` -
   (Hash)\n    * `:options` - (String)\n    * `:status` - (Hash)\n      * `:creation_date`
   - (Time)\n      * `:update_date` - (Time)\n      * `:update_version` - (Integer)\n
