@@ -140,13 +140,7 @@ module AWS
       def set_metadata request, options
         if metadata = options[:metadata]
           Array(metadata).each do |name, value|
-            # Do not add x-amz-meta- prefix to
-            # special metadata keys (like x-amz-webiste-redirect)
-            # Make sure name is always a string to prevent exception from
-            # start_with?
-            name = name.to_s
-            key =  name.start_with?("x-amz-") ?  name : "x-amz-meta-#{name}"
-            request.headers[key] = value
+            request.headers["x-amz-meta-#{name}"] = value
           end
         end
       end

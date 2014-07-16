@@ -1065,18 +1065,6 @@ module AWS
             color_header.should == 'red'
           end
 
-          context "When x-amz-* metadata is set" do
-            it "doesn't prefix special metadata keys" do
-              redirect_header = nil
-              client = with_http_handler do |req, resp|
-                redirect_header = req.headers['x-amz-website-redirect']
-              end
-
-              opts[:metadata] = { 'x-amz-website-redirect' => '/foo' }
-              client.send(method, opts)
-              redirect_header.should == '/foo'
-            end
-          end
         end
 
       end
