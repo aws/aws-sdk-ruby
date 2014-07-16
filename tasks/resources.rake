@@ -2,6 +2,7 @@ namespace :resources do
   task :validate do
 
     require 'json-schema'
+    require 'aws-sdk-resources'
 
     Dir.glob("apis/#{ENV['PREFIX']}*.resources.json") do |path|
       definition = MultiJson.load(File.read(path))
