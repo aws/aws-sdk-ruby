@@ -24,19 +24,23 @@
     :hosted_zone_id:
       :type: :string
       :required: true
+      :position: 0
       :lstrip: /hostedzone/
     :change_batch:
       :name: ChangeBatch
       :type: :hash
       :required: true
+      :position: 1
       :members:
         :comment:
           :name: Comment
           :type: :string
+          :position: 0
         :changes:
           :name: Changes
           :type: :array
           :required: true
+          :position: 1
           :members:
             :name: Change
             :type: :hash
@@ -45,37 +49,47 @@
                 :name: Action
                 :type: :string
                 :required: true
+                :position: 0
               :resource_record_set:
                 :name: ResourceRecordSet
                 :type: :hash
                 :required: true
+                :position: 1
                 :members:
                   :name:
                     :name: Name
                     :type: :string
                     :required: true
+                    :position: 0
                   :type:
                     :name: Type
                     :type: :string
                     :required: true
+                    :position: 1
                   :set_identifier:
                     :name: SetIdentifier
                     :type: :string
+                    :position: 2
                   :weight:
                     :name: Weight
                     :type: :integer
+                    :position: 3
                   :region:
                     :name: Region
                     :type: :string
+                    :position: 4
                   :failover:
                     :name: Failover
                     :type: :string
+                    :position: 5
                   :ttl:
                     :name: TTL
                     :type: :integer
+                    :position: 6
                   :resource_records:
                     :name: ResourceRecords
                     :type: :array
+                    :position: 7
                     :members:
                       :name: ResourceRecord
                       :type: :hash
@@ -84,26 +98,32 @@
                           :name: Value
                           :type: :string
                           :required: true
+                          :position: 0
                   :alias_target:
                     :name: AliasTarget
                     :type: :hash
+                    :position: 8
                     :members:
                       :hosted_zone_id:
                         :name: HostedZoneId
                         :type: :string
                         :required: true
+                        :position: 0
                         :lstrip: /hostedzone/
                       :dns_name:
                         :name: DNSName
                         :type: :string
                         :required: true
+                        :position: 1
                       :evaluate_target_health:
                         :name: EvaluateTargetHealth
                         :type: :boolean
                         :required: true
+                        :position: 2
                   :health_check_id:
                     :name: HealthCheckId
                     :type: :string
+                    :position: 9
   :outputs:
     :children:
       ChangeInfo:
@@ -125,12 +145,15 @@
     :resource_type:
       :type: :string
       :required: true
+      :position: 0
     :resource_id:
       :type: :string
       :required: true
+      :position: 1
     :add_tags:
       :name: AddTags
       :type: :array
+      :position: 2
       :members:
         :name: Tag
         :type: :hash
@@ -144,6 +167,7 @@
     :remove_tag_keys:
       :name: RemoveTagKeys
       :type: :array
+      :position: 3
       :members:
         :name: Key
         :type: :string
@@ -161,36 +185,46 @@
       :name: CallerReference
       :type: :string
       :required: true
+      :position: 0
     :health_check_config:
       :name: HealthCheckConfig
       :type: :hash
       :required: true
+      :position: 1
       :members:
         :ip_address:
           :name: IPAddress
           :type: :string
+          :position: 0
         :port:
           :name: Port
           :type: :integer
+          :position: 1
         :type:
           :name: Type
           :type: :string
           :required: true
+          :position: 2
         :resource_path:
           :name: ResourcePath
           :type: :string
+          :position: 3
         :fully_qualified_domain_name:
           :name: FullyQualifiedDomainName
           :type: :string
+          :position: 4
         :search_string:
           :name: SearchString
           :type: :string
+          :position: 5
         :request_interval:
           :name: RequestInterval
           :type: :integer
+          :position: 6
         :failure_threshold:
           :name: FailureThreshold
           :type: :integer
+          :position: 7
   :outputs:
     :children:
       HealthCheck:
@@ -232,17 +266,21 @@
       :name: Name
       :type: :string
       :required: true
+      :position: 0
     :caller_reference:
       :name: CallerReference
       :type: :string
       :required: true
+      :position: 1
     :hosted_zone_config:
       :name: HostedZoneConfig
       :type: :hash
+      :position: 2
       :members:
         :comment:
           :name: Comment
           :type: :string
+          :position: 0
   :outputs:
     :children:
       HostedZone:
@@ -287,6 +325,7 @@
     :health_check_id:
       :type: :string
       :required: true
+      :position: 0
   :outputs: {}
 - :name: DeleteHostedZone
   :method: :delete_hosted_zone
@@ -297,6 +336,7 @@
     :id:
       :type: :string
       :required: true
+      :position: 0
       :lstrip: /hostedzone/
   :outputs:
     :children:
@@ -319,6 +359,7 @@
     :id:
       :type: :string
       :required: true
+      :position: 0
       :lstrip: /change/
   :outputs:
     :children:
@@ -356,6 +397,7 @@
     :health_check_id:
       :type: :string
       :required: true
+      :position: 0
   :outputs:
     :children:
       HealthCheck:
@@ -403,6 +445,7 @@
     :id:
       :type: :string
       :required: true
+      :position: 0
       :lstrip: /hostedzone/
   :outputs:
     :children:
@@ -437,8 +480,10 @@
   :inputs:
     :marker:
       :type: :string
+      :position: 0
     :max_items:
       :type: :integer
+      :position: 1
   :outputs:
     :children:
       HealthChecks:
@@ -488,8 +533,10 @@
   :inputs:
     :marker:
       :type: :string
+      :position: 0
     :max_items:
       :type: :integer
+      :position: 1
   :outputs:
     :children:
       HostedZones:
@@ -528,15 +575,20 @@
     :hosted_zone_id:
       :type: :string
       :required: true
+      :position: 0
       :lstrip: /hostedzone/
     :start_record_name:
       :type: :string
+      :position: 1
     :start_record_type:
       :type: :string
+      :position: 2
     :start_record_identifier:
       :type: :string
+      :position: 3
     :max_items:
       :type: :integer
+      :position: 4
   :outputs:
     :children:
       ResourceRecordSets:
@@ -598,9 +650,11 @@
     :resource_type:
       :type: :string
       :required: true
+      :position: 0
     :resource_id:
       :type: :string
       :required: true
+      :position: 1
   :outputs:
     :children:
       ResourceTagSet:
@@ -629,10 +683,12 @@
     :resource_type:
       :type: :string
       :required: true
+      :position: 0
     :resource_ids:
       :name: ResourceIds
       :type: :array
       :required: true
+      :position: 1
       :members:
         :name: ResourceId
         :type: :string
@@ -669,27 +725,35 @@
     :health_check_id:
       :type: :string
       :required: true
+      :position: 0
     :health_check_version:
       :name: HealthCheckVersion
       :type: :integer
+      :position: 1
     :ip_address:
       :name: IPAddress
       :type: :string
+      :position: 2
     :port:
       :name: Port
       :type: :integer
+      :position: 3
     :resource_path:
       :name: ResourcePath
       :type: :string
+      :position: 4
     :fully_qualified_domain_name:
       :name: FullyQualifiedDomainName
       :type: :string
+      :position: 5
     :search_string:
       :name: SearchString
       :type: :string
+      :position: 6
     :failure_threshold:
       :name: FailureThreshold
       :type: :integer
+      :position: 7
   :outputs:
     :children:
       HealthCheck:
