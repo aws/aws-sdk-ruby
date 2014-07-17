@@ -30,11 +30,11 @@ module AWS
       XML
 
       it 'should expose the code' do
-        resp.code.should == "InvalidInstanceID.NotFound"
+        resp.code.should eq("InvalidInstanceID.NotFound")
       end
 
       it 'should expose the message' do
-        resp.message.should == "msg"
+        resp.message.should eq("msg")
       end
 
     end

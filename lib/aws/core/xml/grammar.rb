@@ -283,6 +283,7 @@ module AWS
           other.is_a?(Grammar) and self.rules == other.rules
         end
         alias_method :==, :eql?
+        public :==
 
         def enum *args; end
         def position *args; end

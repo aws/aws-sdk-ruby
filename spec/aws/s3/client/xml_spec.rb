@@ -37,8 +37,8 @@ module AWS
           XML
 
           it 'should expose owner ID and display name' do
-            response.owner.id.should == "bcaf1ffd86f461ca5fb16fd081034f"
-            response.owner.display_name.should == "webfile"
+            response.owner.id.should eq "bcaf1ffd86f461ca5fb16fd081034f"
+            response.owner.display_name.should eq "webfile"
           end
 
           it 'should expose a list of buckets' do
@@ -46,8 +46,8 @@ module AWS
           end
 
           it 'should expose the bucket name and creation date' do
-            response.buckets.first.name.should == "quotes"
-            response.buckets.first.creation_date.should == "2006-02-03T16:45:09.000Z"
+            response.buckets.first.name.should eq "quotes"
+            response.buckets.first.creation_date.should eq "2006-02-03T16:45:09.000Z"
           end
 
         end
@@ -78,10 +78,10 @@ module AWS
           end
 
           it 'should expose the correct names and creation dates' do
-            response.buckets[0].name.should == "quotes"
-            response.buckets[0].creation_date.should == "2006-02-03T16:45:09.000Z"
-            response.buckets[1].name.should == "quotes2"
-            response.buckets[1].creation_date.should == "2009-02-03T16:45:09.000Z"
+            response.buckets[0].name.should eq "quotes"
+            response.buckets[0].creation_date.should eq "2006-02-03T16:45:09.000Z"
+            response.buckets[1].name.should eq "quotes2"
+            response.buckets[1].creation_date.should eq "2009-02-03T16:45:09.000Z"
           end
 
         end
@@ -130,7 +130,7 @@ module AWS
           XML
 
           it 'should add an acl attribute' do
-            response.to_hash.should == {
+            response.to_hash.should eq({
               :grants => [
                 {
                   :grantee=>{
@@ -145,7 +145,7 @@ module AWS
                 :id=>"8a6925ce4adee97f21c32aa379004fef",
                 :display_name=>"CustomersName@amazon.com"
               }
-            }
+            })
           end
 
         end
@@ -170,15 +170,15 @@ module AWS
           let(:response) { described_class.parse(xml) }
 
           it 'should always respond to common prefixes as an array' do
-            described_class.parse('<foo/>').common_prefixes.should == []
+            described_class.parse('<foo/>').common_prefixes.should eq []
           end
 
           it 'groups common prefixes into an array' do
-            response.common_prefixes.length.should == 2
+            response.common_prefixes.length.should eq 2
           end
 
           it 'flatttens CommonPrefix.Prefix to #common_prefixes' do
-            response.common_prefixes.should == [
+            response.common_prefixes.should eq [
               { :prefix => 'foo' },
               { :prefix => 'bar' },
             ]
@@ -231,19 +231,19 @@ module AWS
           XML
 
           it 'should expose Name as bucket_name' do
-            response.bucket_name.should == 'trowe-bucket'
+            response.bucket_name.should eq 'trowe-bucket'
           end
 
           it 'should expose Prefix as prefix' do
-            response.prefix.should == 'some_prefix'
+            response.prefix.should eq 'some_prefix'
           end
 
           it 'should expose Marker as marker' do
-            response.marker.should == 'some_marker'
+            response.marker.should eq 'some_marker'
           end
 
           it 'should expose MaxKeys as a numeric max_keys' do
-            response.max_keys.should == 2
+            response.max_keys.should eq 2
           end
 
           it 'should always respond to delimiter' do
@@ -259,30 +259,30 @@ module AWS
           end
 
           it 'should have 2 contents entries' do
-            response.contents.length.should == 2
+            response.contents.length.should eq 2
           end
 
           it 'should expose Contents\Key as .key' do
-            response.contents.first.key.should == 'some/key'
+            response.contents.first.key.should eq 'some/key'
           end
 
           it 'should expose Contents\LastModified as Time .last_modified' do
-            response.contents.first.last_modified.should ==
-              Time.parse('2011-02-07T17:24:19.000Z')
+            response.contents.first.last_modified.should eq(
+              Time.parse('2011-02-07T17:24:19.000Z'))
           end
 
           it 'should expose Contents\ETag as etag' do
-            response.contents.first.etag.should ==
-              "\"5ceaa7ed396ccb8e959c02753cb4bd18\""
+            response.contents.first.etag.should eq(
+              "\"5ceaa7ed396ccb8e959c02753cb4bd18\"")
           end
 
           it 'should expose Contents\Owner\ID as .owner.id' do
-            response.contents.first.owner.id.should ==
-            '154b2f3550127d0439dfe1e89a03a7a4178048cc05c6fdaeb40796841a5cfcef'
+            response.contents.first.owner.id.should eq(
+            '154b2f3550127d0439dfe1e89a03a7a4178048cc05c6fdaeb40796841a5cfcef')
           end
 
           it 'should expose Contents\Owner\DisplayName as .owner.id' do
-            response.contents.first.owner.display_name.should == 'awssandbox'
+            response.contents.first.owner.display_name.should eq 'awssandbox'
           end
 
           it_should_behave_like "s3 xml returns common prefixes"
@@ -310,15 +310,15 @@ module AWS
         XML
 
         it 'reports enabled as a symbol' do
-          described_class.parse(enabled).status.should == :enabled
+          described_class.parse(enabled).status.should eq :enabled
         end
 
         it 'reports suspended as a symbol' do
-          described_class.parse(suspended).status.should == :suspended
+          described_class.parse(suspended).status.should eq :suspended
         end
 
         it 'reports never enabled/suspended as :unversioned' do
-          described_class.parse(default_state).status.should == :unversioned
+          described_class.parse(default_state).status.should eq :unversioned
         end
 
       end
@@ -403,15 +403,15 @@ module AWS
         end
 
         it 'should make MaxKeys an integer' do
-          described_class.parse(xml).max_keys.should == 5
+          described_class.parse(xml).max_keys.should eq 5
         end
 
         it 'should make IsTruncated a boolean truncated?' do
-          described_class.parse(xml).truncated?.should == false
+          described_class.parse(xml).truncated?.should eq false
         end
 
         it 'should combine versions and delete markers' do
-          described_class.parse(xml).versions.length.should == 5
+          described_class.parse(xml).versions.length.should eq 5
         end
 
         context 'Delete markers' do
@@ -419,15 +419,15 @@ module AWS
           let(:delete_marker) { described_class.parse(xml).versions[1] }
 
           it 'should respond to #delete_marker? with true' do
-            delete_marker.delete_marker?.should == true
+            delete_marker.delete_marker?.should eq true
           end
 
           it 'should respond to #version? with false' do
-            delete_marker.version?.should == false
+            delete_marker.version?.should eq false
           end
 
           it 'should respond to #latest? with a boolean' do
-            delete_marker.latest?.should == true
+            delete_marker.latest?.should eq true
           end
 
           it 'should respond to #last_modified? with a date time' do
@@ -439,7 +439,7 @@ module AWS
           end
 
           it 'should not respond to #size' do
-            delete_marker[:size].should == nil
+            delete_marker[:size].should eq nil
           end
 
           it 'should not respond to #storage_class' do
@@ -453,15 +453,15 @@ module AWS
           let(:version) { described_class.parse(xml).versions[0] }
 
           it 'should respond to #delete_marker? with false' do
-            version.delete_marker?.should == false
+            version.delete_marker?.should eq false
           end
 
           it 'should respond to #version? with true' do
-            version.version?.should == true
+            version.version?.should eq true
           end
 
           it 'should respond to #latest? with a boolean' do
-            version.latest?.should == true
+            version.latest?.should eq true
           end
 
           it 'should respond to #last_modified? with a date time' do
@@ -469,15 +469,15 @@ module AWS
           end
 
           it 'should symbolze the storage class STANDARD to :standard' do
-            version.storage_class.should == :standard
+            version.storage_class.should eq :standard
           end
 
           it 'should respond to #size with an integer' do
-            version.size.should == 434234
+            version.size.should eq 434234
           end
 
           it 'should respond to #etag with a quoted string' do
-            version.etag.should == '"fba9dede5f27731c9771645a39863328"'
+            version.etag.should eq '"fba9dede5f27731c9771645a39863328"'
           end
 
         end
@@ -498,15 +498,15 @@ module AWS
 
         it 'should respond to upload_id' do
           response.upload_id.
-            should == "VXBsb2FkIElEIGZvciA2aWWpbmcncyBteS1tb3ZpZS5tMnRzIHVwbG9hZA"
+            should eq "VXBsb2FkIElEIGZvciA2aWWpbmcncyBteS1tb3ZpZS5tMnRzIHVwbG9hZA"
         end
 
         it 'should respond to bucket' do
-          response.bucket.should == "example-bucket"
+          response.bucket.should eq "example-bucket"
         end
 
         it 'should respond to key' do
-          response.key.should == "example-object"
+          response.key.should eq "example-object"
         end
 
       end
@@ -545,7 +545,7 @@ module AWS
         end
 
         it 'should return a number for max_uploads' do
-          response.max_uploads.should == 1000
+          response.max_uploads.should eq 1000
         end
 
         it 'should expose an uploads list' do
@@ -562,7 +562,7 @@ module AWS
           let(:upload) { response.uploads.first }
 
           it 'should expose storage_class as a symbol' do
-            upload.storage_class.should == :standard
+            upload.storage_class.should eq :standard
           end
 
           it 'should expose initiated as a DateTime' do
@@ -605,23 +605,23 @@ module AWS
         XML
 
         it 'should expose storage_class as a symbol' do
-          response.storage_class.should == :standard
+          response.storage_class.should eq :standard
         end
 
         it 'should expose truncated? as a boolean' do
-          response.truncated?.should == false
+          response.truncated?.should eq false
         end
 
         it 'should expose part_number_marker as an integer' do
-          response.part_number_marker.should == 0
+          response.part_number_marker.should eq 0
         end
 
         it 'should expose next_part_number_marker as an integer' do
-          response.next_part_number_marker.should == 0
+          response.next_part_number_marker.should eq 0
         end
 
         it 'should expose max_parts as an integer' do
-          response.max_parts.should == 1000
+          response.max_parts.should eq 1000
         end
 
         it 'should expose parts as an array' do
@@ -633,7 +633,7 @@ module AWS
           let(:part) { response.parts.first }
 
           it 'should expose part_number as an integer' do
-            part.part_number.should == 1
+            part.part_number.should eq 1
           end
 
           it 'should expose last_modified as a DateTime' do
@@ -641,7 +641,7 @@ module AWS
           end
 
           it 'should expose size as an integer' do
-            part.size.should == 5
+            part.size.should eq(5)
           end
 
         end
