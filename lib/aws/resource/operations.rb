@@ -166,7 +166,7 @@ module Aws
         # The client api metadata has a paging provider.  The paging
         # provider will specify if there is a 
         def limit_param_key(options)
-          client = options[:resource].client
+          client = option(:client, options)
           api = client.config.api
           paging = api.metadata('paging')
           pager = paging.pager(api.operation(@request.method_name).name)

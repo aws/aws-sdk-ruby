@@ -21,6 +21,7 @@ module Aws
       # @return [Array<RequestParams::Param>]
       attr_reader :params
 
+      # @option options [required, Seahorse::Client::Base] :client
       # @option options [required, Resource] :resource
       # @option options [Hash] :params ({})
       # @return [Seahorse::Client::Response]

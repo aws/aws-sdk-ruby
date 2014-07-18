@@ -180,11 +180,11 @@ module Aws
         def resource_reference(method_name, reference)
           if reference.requires_argument?
             define_method(method_name) do |identifier|
-              reference.call(resource:self, argument:identifier)
+              reference.call(client:client, resource:self, argument:identifier)
             end
           else
             define_method(method_name) do
-              cache(method_name) { reference.call(resource:self) }
+              cache(method_name) { reference.call(client:client, resource:self) }
             end
           end
         end

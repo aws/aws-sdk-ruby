@@ -17,7 +17,7 @@ module Aws
       # @param [String] service_name
       # @param [Class<Seahorse::Client::Base>] client_class
       # @return [Class<Resource>] Returns the service resource class.
-      def define_service(service_name, client_class)
+      def apply(service_name, client_class)
         service = define_resource_classes(service_name.to_s, client_class)
         define_operations(service)
         define_subresources(service)
@@ -43,7 +43,6 @@ module Aws
         each_resource do |name, definition|
           resource_class = resource_class(name, client_class, definition)
           resource_class.const_set(:Batch, Class.new(Resource::Batch))
-          @namespace.const_set(name, resource_class)
         end
         service
       end
@@ -59,6 +58,7 @@ module Aws
         (definition['identifiers'] || []).each do |identifier|
           resource_class.add_identifier(underscore(identifier['name']))
         end
+        @namespace.const_set(name, resource_class)
         resource_class
       end
 

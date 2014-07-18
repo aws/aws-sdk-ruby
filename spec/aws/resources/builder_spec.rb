@@ -71,7 +71,7 @@ module Aws
 
         it 'constructs a resource object of the given class' do
           builder = Builder.new(resource_class:resource_class)
-          resource = builder.build(resource:parent)
+          resource = builder.build(client:client, resource:parent)
           expect(resource).to be_kind_of(resource_class)
         end
 
@@ -79,7 +79,7 @@ module Aws
           parent = double('resource-parent',
             identifiers: { id: 'parent-id' },
             data: { 'member' => 'parent-member' },
-            client: double('client'),
+            client: client,
           )
           response = double('response',
             data: { 'path' => 'response-path'},
@@ -91,7 +91,7 @@ module Aws
             parent_member: 'parent-member',
             request_param: 'request-param',
             response_path: 'response-path',
-            client: parent.client,
+            client: client,
           ).and_return(resource)
           builder = Builder.new(resource_class:resource_class, sources:[
             BuilderSources::Identifier.new('id', 'parent_id'),
@@ -99,7 +99,7 @@ module Aws
             BuilderSources::RequestParameter.new('param', 'request_param'),
             BuilderSources::ResponsePath.new('path', 'response_path'),
           ])
-          expect(builder.build(resource:parent,response:response)).to be(resource)
+          expect(builder.build(client:client,resource:parent,response:response)).to be(resource)
         end
 
         it 'constructs multiple resources if any of its sources are plural' do
@@ -108,11 +108,13 @@ module Aws
             client: double('client')
           )
           resource_class = Resource.define(double('client-class'), [:id])
+          resource_class.const_set(:Batch, Class.new(Resource::Batch))
           builder = Builder.new(resource_class:resource_class, sources:[
             BuilderSources::DataMember.new('ids[]', 'id'),
           ])
-          result = builder.build(resource:parent)
-          expect(result).to be_an(Array)
+          result = builder.build(client:client,resource:parent)
+          expect(result).to be_a(resource_class::Batch)
+          expect(result).to be_kind_of(Resource::Batch)
           expect(result.size).to eq(2)
           expect(result[0]).to be_kind_of(resource_class)
           expect(result[1]).to be_kind_of(resource_class)
@@ -121,6 +123,7 @@ module Aws
         end
 
         it 'constructs then yield resources one at a time if a block is given' do
+          pending
           parent = double('resource-parent',
             data: { 'ids' => %w(id1 id2) },
             client: double('client')

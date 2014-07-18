@@ -55,6 +55,7 @@ module Aws
           it 'calls the request, passing the response onto the builder' do
 
             resource_class = Resource.define(double('client-class'), ['id'])
+            resource_class.const_set(:Batch, Class.new(Batch))
             resource_class.add_operation(:linked, EnumerateResourceOperation.new(
               request: Request.new(method_name:'list_resources'),
               builder: Builder.new(
@@ -70,6 +71,8 @@ module Aws
             responses = [resp1, resp2]
 
             client = double('client')
+            allow(client).to receive_message_chain(:config, :api, :metadata).and_return(Paging::NullProvider.new)
+            allow(client).to receive_message_chain(:config, :api, :operation, :name).and_return('OperationName')
             expect(client).to receive(:list_resources).
               and_return(responses)
 

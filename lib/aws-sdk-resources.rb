@@ -1,18 +1,29 @@
 require 'aws-sdk-core'
 require "#{Aws::SRC}/resource"
 
-module Aws::Resources; end
-
 Aws.service_modules.each do |_, svc_module|
-  name = svc_module.name.split('::').last
-  client_class = svc_module.const_get(:Client)
-  client_class.send(:versions).values.last.tap do |latest_version|
-    if path = latest_version['resources']
-      definition = MultiJson.load(File.read(path))
-      definition = Aws::Resource::Definition.new(svc_module, definition, path: path)
-      resources = definition.define_service(name, client_class.default_client_class)
-      svc_module.const_set(:Resource, resources)
-      Aws::Resources.const_set(name, resources)
-    end
+
+  api_version, files = svc_module::Client.send(:versions).to_a.last
+
+  if files['resources']
+
+    # define all of the resource classes
+    Aws::Resource.define_resource_classes(
+      namespace: svc_module,
+      client_class: svc_module::Client.versioned_client_class(api_version),
+      definition: files['resources'],
+    )
+
+    # Add a `.resources` helper method to the service module
+    svc_module.extend(Module.new {
+      def resource(options = {})
+        if options[:client]
+          const_get(:Resource).new(client: options[:client])
+        else
+          const_get(:Resource).new(client: options)
+        end
+      end
+    })
+
   end
 end

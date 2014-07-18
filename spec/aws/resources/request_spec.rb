@@ -43,8 +43,8 @@ module Aws
 
         let(:request) { Request.new(method_name:'method_name', params:params) }
 
-        it 'requires a :resource option' do
-          msg = 'missing required option :resource'
+        it 'requires a :client option' do
+          msg = 'missing required option :client'
           expect {
             request.call
           }.to raise_error(Errors::DefinitionError, msg)
@@ -52,19 +52,19 @@ module Aws
 
         it 'calls the method name on the given resource client' do
           expect(client).to receive(:method_name)
-          request.call(resource:resource)
+          request.call(client:client, resource:resource)
         end
 
         it 'passes along params to the resource client' do
           params = { foo: 'bar' }
           expect(client).to receive(:method_name).with(params)
-          request.call(resource:resource, params:params)
+          request.call(client:client, resource:resource, params:params)
         end
 
         it 'returns the client response' do
           response = double('client-response')
           allow(client).to receive(:method_name).and_return(response)
-          expect(request.call(resource:resource)).to be(response)
+          expect(request.call(client:client, resource:resource)).to be(response)
         end
 
         it 'merges request params with given params before calling client method' do
@@ -74,7 +74,9 @@ module Aws
           ])
           expect(client).to receive(:method_name).
             with(person:{name:'John Doe', age:40, aka:'johndoe'})
-          request.call(resource:resource, params:{ person: { aka:'johndoe' }})
+          request.call(client:client, resource:resource, params:{
+            person: { aka:'johndoe' }
+          })
         end
 
         it 'deep merges params with incoming params' do
@@ -91,7 +93,7 @@ module Aws
             { name:'n2', values: %w(v3 v4) },
             { name:'n3', values: %w(v5 v6) },
           ])
-          request.call(resource:resource, params:{ 
+          request.call(client:client, resource:resource, params:{
             filters:[{name:'n3', values:%w(v5 v6)}]
           })
         end

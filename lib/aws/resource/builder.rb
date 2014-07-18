@@ -86,7 +86,7 @@ module Aws
       end
 
       def client(options)
-        options[:resource].client
+        option(:client, options)
       end
 
     end

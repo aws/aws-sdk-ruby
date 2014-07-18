@@ -22,5 +22,19 @@ module Aws
       Base.define(*args)
     end
 
+    class << self
+
+      # @api private
+      def define_resource_classes(options)
+        definition(options).apply(:Resource, options[:client_class])
+      end
+
+      # @api private
+      def definition(options)
+        namespace, path = options.values_at(:namespace, :definition)
+        Definition.new(namespace, MultiJson.load(File.read(path), path: path))
+      end
+
+    end
   end
 end

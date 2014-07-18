@@ -57,7 +57,7 @@ module Aws
 
             client = double('client')
             response = double('client-response', data:{'path' => 'id'})
-            parent = double('resource-parent', client:client)
+            parent = double('resource-parent')
 
             expect(client).to receive(:operation_name).
               with(param:'param-value').
@@ -73,12 +73,13 @@ module Aws
             operation = ResourceOperation.new(request:request, builder:builder)
 
             resource = operation.call(
+              client: client,
               resource:parent,
               params:{param:'param-value'}
             )
             expect(resource).to be_kind_of(resource_class)
             expect(resource.identifiers).to eq(:id => 'id')
-            expect(resource.client).to be(parent.client)
+            expect(resource.client).to be(client)
           end
 
         end

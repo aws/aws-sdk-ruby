@@ -117,8 +117,20 @@ module Aws
       # @see .default_api_version
       # @see .default_client_class
       # @see .latest_api_version
+      # @see .versioned_client_class
       def versioned_clients
         api_versions.map { |api_version| versioned_client_class(api_version) }
+      end
+
+      # Returns the client class for a given API version:
+      #
+      #     Aws::DynamoDB.versioned_client_class('2011-12-05')
+      #     #=> Aws::DynamoDB::V20111205
+      #
+      # @return [Class]
+      # @see .versioned_clients
+      def versioned_client_class(api_version)
+        const_get("V#{api_version.gsub('-', '')}")
       end
 
       # @return [Class<Seahorse::Client::Base>]
@@ -207,10 +219,6 @@ module Aws
         if api_version = Aws.config[:api_version]
           api_versions.select { |v| v <= api_version }.last || api_version
         end
-      end
-
-      def versioned_client_class(api_version)
-        const_get("V#{api_version.gsub('-', '')}")
       end
 
       def versions

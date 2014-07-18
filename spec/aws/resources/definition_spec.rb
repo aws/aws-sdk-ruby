@@ -6,9 +6,9 @@ module Aws
 
       describe '#define_service' do
 
-        let(:client) { double('client') }
-
         let(:client_class) { double('client-class', api: api) }
+
+        let(:client) { double('client', class: client_class) }
 
         let(:definition) {{
           'service' => {},
@@ -19,10 +19,12 @@ module Aws
 
         let(:api) { Seahorse::Model::Api.new('shapes' => shapes) }
 
+        let(:namespace) { Module.new }
+
         let(:service_class) {
-          errors = DefinitionValidator.validate_against_schema(definition)
+          errors = Validator.validate(definition, api)
           expect(errors).to be_empty, lambda { errors.join("\n") }
-          Definition.new(definition).define_service('Svc', client_class)
+          Definition.new(namespace, definition).apply('Svc', client_class)
         }
 
         let(:service) { service_class.new }
@@ -35,7 +37,8 @@ module Aws
 
           it 'constructs default clients' do
             expect(client_class).to receive(:new).and_return(client)
-            svc = Definition.new(definition).define_service('Name', client_class)
+            definition = Definition.new(namespace, definition)
+            definition.apply('Name', client_class)
             expect(svc.client_class).to be(client_class)
             expect(svc.new.client).to be(client)
           end
@@ -46,13 +49,15 @@ module Aws
               'User' => { 'identifiers' => [{ 'name' => 'Name' }] },
             }
 
-            expect(service_class.constants.sort).to eq([:Group, :User])
+            service_class
 
-            user = service_class::User.new(name:'user-name')
+            expect(namespace.constants.sort).to eq([:Group, :User])
+
+            user = namespace::User.new(name:'user-name')
             expect(user).to be_kind_of(Resource::Base)
             expect(user.identifiers).to eq(name:'user-name')
 
-            group = service_class::Group.new(id:'group-id')
+            group = namespace::Group.new(id:'group-id')
             expect(group).to be_kind_of(Resource::Base)
             expect(group.identifiers).to eq(id:'group-id')
           end

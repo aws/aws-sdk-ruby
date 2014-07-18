@@ -19,7 +19,7 @@ module Aws
       attr_reader :services
 
       def self.default_manifest
-        new(MultiJson.load(File.read(DEFAULT_MANIFEST_PATH)))
+        @default ||= new(MultiJson.load(File.read(DEFAULT_MANIFEST_PATH)))
       end
 
       Entry = Struct.new(:name, :identifier, :versions)

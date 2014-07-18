@@ -99,7 +99,7 @@ module Aws
 
         before(:each) do
           allow(load_operation).to receive(:call).
-            with(resource:resource).
+            with(client: client, resource:resource).
             and_return(*datas)
           resource_class.load_operation = load_operation
         end
@@ -208,7 +208,7 @@ module Aws
             it 'passes additional arguments to the operation' do
               resource_class.add_operation(:action, operation)
               expect(operation).to receive(:call).
-                with(resource:resource, params:{foo:'bar'}).
+                with(client: client, resource:resource, params:{foo:'bar'}).
                 and_return(response)
               resource.action(foo:'bar')
             end
