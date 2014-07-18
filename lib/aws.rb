@@ -63,6 +63,7 @@ module Aws
     autoload :ResponsePaging, "#{SRC}/plugins/response_paging"
     autoload :RequestSigner, "#{SRC}/plugins/request_signer"
     autoload :RetryErrors, "#{SRC}/plugins/retry_errors"
+    autoload :Route53IdFix, "#{SRC}/plugins/route_53_id_fix"
     autoload :S3BucketDns, "#{SRC}/plugins/s3_bucket_dns"
     autoload :S3CompleteMultipartUploadFix, "#{SRC}/plugins/s3_complete_multipart_upload_fix"
     autoload :S3GetBucketLocationFix, "#{SRC}/plugins/s3_get_bucket_location_fix"
@@ -131,8 +132,8 @@ module Aws
     # @param [Plugin] plugin
     # @return [void]
     def add_plugin(plugin)
-      service_modules.values.each do |svc_mod|
-        svc_mod.const_get(:Client).add_plugin(plugin)
+      service_clients.each do |client|
+        client.add_plugin(plugin)
       end
     end
 
@@ -141,8 +142,8 @@ module Aws
     # @param [Plugin] plugin
     # @return [void]
     def remove_plugin(plugin)
-      service_modules.values.each do |svc_mod|
-        svc_mod.const_get(:Client).remove_plugin(plugin)
+      service_clients.each do |client|
+        client.remove_plugin(plugin)
       end
     end
 
@@ -150,6 +151,12 @@ module Aws
     # @api private
     def service_modules
       @service_modules ||= {}
+    end
+
+    # @return [Array<Class>]
+    # @api private
+    def service_clients
+      service_modules.map { |_,svc_mod| svc_mod.const_get(:Client) }
     end
 
     # Registers a new service interface.  This method accepts a constant

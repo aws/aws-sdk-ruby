@@ -16,7 +16,7 @@ def eventually(options = {}, &block)
 end
 
 def underscore(str)
-  Aws::Util.underscore(str)
+  Seahorse::Util.underscore(str)
 end
 
 def symbolized_params(table)

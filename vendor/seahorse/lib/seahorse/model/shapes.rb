@@ -48,7 +48,11 @@ module Seahorse
         # @return [Enumerator] Returns an enumerable object that yields
         #   registered type names and shape classes.
         def types
-          @types.enum_for(:each)
+          Enumerator.new do |y|
+            @types.each do |name, shape_class|
+              y.yield(name, shape_class)
+            end
+          end
         end
 
       end
@@ -231,7 +235,11 @@ module Seahorse
         # @return [Enumerable<Symbol,Shape>] Returns an enumerator that yields
         #   member names and shapes.
         def members
-          enum_for(:each_member) { |*args| member_names.size }
+          Enumerator.new do |y|
+            member_names.map do |member_name|
+              y.yield(member_name, member(member_name))
+            end
+          end
         end
 
         # Searches the structure members for a shape with the given
@@ -257,12 +265,6 @@ module Seahorse
         end
 
         private
-
-        def each_member(&block)
-          member_names.each do |member_name|
-            yield(member_name, member(member_name))
-          end
-        end
 
         def index_members_by_location_name
           members.each.with_object({}) do |(name, shape), hash|

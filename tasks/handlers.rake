@@ -73,24 +73,26 @@ end
 desc "List availalbe operation names for a service"
 task "operations:svc" => "operations"
 
-Aws::Api::Manifest.default_manifest.services.each do |svc|
+begin
+  Aws::Api::Manifest.default_manifest.services.each do |svc|
 
-  task "handlers:#{svc.identifier}" do
-    print_handlers(client(svc).handlers)
-  end
-
-  path = svc.versions.values.last['api']
-  api = MultiJson.load(File.read(path))
-  api = Seahorse::Model::Api.new(api)
-  api.operation_names.each do |operation_name|
-    task "handlers:#{svc.identifier}:#{operation_name}" do
-      req = client(svc).build_request(operation_name)
-      print_handlers(req.handlers)
+    task "handlers:#{svc.identifier}" do
+      print_handlers(client(svc).handlers)
     end
-  end
 
-  task "operations:#{svc.identifier}" do
-    puts svc.operation_names
-  end
+    path = svc.versions.values.last['api']
+    api = MultiJson.load(File.read(path))
+    api = Seahorse::Model::Api.new(api)
+    api.operation_names.each do |operation_name|
+      task "handlers:#{svc.identifier}:#{operation_name}" do
+        req = client(svc).build_request(operation_name)
+        print_handlers(req.handlers)
+      end
+    end
 
-end
+    task "operations:#{svc.identifier}" do
+      puts svc.operation_names
+    end
+
+  end
+rescue; end

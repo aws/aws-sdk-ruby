@@ -63,7 +63,7 @@ module Seahorse
             if input = context.operation.input
               params = context.params
               input.members.each do |member_name, member|
-                if member.location == 'querystring' && params.key?(member_name)
+                if member.location == 'querystring' && !params[member_name].nil?
                   param_name = member.location_name
                   param_value = params[member_name]
                   parts << "#{param_name}=#{escape(param_value.to_s)}"

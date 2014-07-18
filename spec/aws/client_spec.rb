@@ -17,7 +17,11 @@ module Aws
     }}
 
     before(:each) do
-      allow(Aws).to receive(:config).and_return({ region: 'us-east-1' })
+      allow(Aws).to receive(:config).and_return({
+        region: 'us-east-1',
+        access_key_id: 'akid',
+        secret_access_key: 'secret',
+      })
     end
 
     describe 'default_client_class' do
@@ -167,7 +171,7 @@ module Aws
         Aws.config[:api_version] = '2000-00-00'
         svc = Aws.add_service(:SvcName, apis)
         expect {
-          expect(svc.new)
+          expect(svc::Client.new)
         }.to raise_error(Errors::NoSuchApiVersionError, /2000-00-00/)
       end
 

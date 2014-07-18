@@ -44,6 +44,16 @@
       "paginators": "apis/cloudtrail-2013-11-01.paginators.json"
     }
   },
+  "CognitoIdentity": {
+    "2014-06-30": {
+      "api": "apis/cognito-identity-2014-06-30.api.json"
+    }
+  },
+  "CognitoSync": {
+    "2014-06-30": {
+      "api": "apis/cognito-sync-2014-06-30.api.json"
+    }
+  },
   "DataPipeline": {
     "2012-10-29": {
       "api": "apis/datapipeline-2012-10-29.api.json",
@@ -69,11 +79,11 @@
     }
   },
   "EC2": {
-    "2014-05-01": {
-      "api": "apis/ec2-2014-05-01.api.json",
-      "paginators": "apis/ec2-2014-05-01.paginators.json",
-      "waiters": "apis/ec2-2014-05-01.waiters.json",
-      "resources": "apis/ec2-2014-05-01.resources.json"
+    "2014-06-15": {
+      "api": "apis/ec2-2014-06-15.api.json",
+      "paginators": "apis/ec2-2014-06-15.paginators.json",
+      "waiters": "apis/ec2-2014-06-15.waiters.json",
+      "resources": "apis/ec2-2014-06-15.resources.json"
     }
   },
   "ElastiCache": {
@@ -138,6 +148,12 @@
     "2013-12-02": {
       "api": "apis/kinesis-2013-12-02.api.json",
       "paginators": "apis/kinesis-2013-12-02.paginators.json"
+    }
+  },
+  "CloudWatchLogs": {
+    "2014-03-28": {
+      "api": "apis/logs-2014-03-28.api.json",
+      "paginators": "apis/logs-2014-03-28.paginators.json"
     }
   },
   "CloudWatch": {
