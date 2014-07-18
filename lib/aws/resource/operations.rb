@@ -74,19 +74,48 @@ module Aws
 
       class EnumerateDataOperation < DataOperation
 
+        # @option options [required, Request] :request
+        # @option options [required, String<JMESPath>] :path
+        # @option options [Symbol] :limit_key
+        def initialize(options = {})
+          @limit_key = options[:limit_key]
+          super
+        end
+
         # @option options [required, Resource] :resource
         # @option options [Hash] :params ({})
         # @return [Enumerator]
         def call(options)
           expect_hash(:params, options)
-          enum_for(:each_value, options)
+          if limit = extract_limit(options)
+            enum_for(:limited_each, limit, options)
+          else
+            enum_for(:each, options)
+          end
         end
 
         private
 
-        def each_value(options, &block)
+        def each(options, &block)
           @request.call(options).each do |response|
             extract(response).each(&block)
+          end
+        end
+
+        def limited_each(limit, options, &block)
+          yielded = 0
+          each(options) do |value|
+            yield(value)
+            yielded += 1
+            break if yielded == limit
+          end
+        end
+
+        def extract_limit(options)
+          if options[:limit]
+            options[:limit]
+          else
+            (options[:params] || {})[@limit_key]
           end
         end
 
@@ -116,6 +145,14 @@ module Aws
 
       class EnumerateResourceOperation < ResourceOperation
 
+        # @option options [required, Request] :request
+        # @option options [required, Builder] :builder
+        # @option options [Symbol] :limit_key
+        def initialize(options)
+          @limit_key = options[:limit_key]
+          super
+        end
+
         # @option options [required, Resource] :resource
         # @option options [Hash] :params ({})
         # @return [Collection]
@@ -127,8 +164,7 @@ module Aws
         # @api private
         # @return [Enumerator<Batch>]
         def batches(options, &block)
-          limit = options[:limit] || extract_limit_param(options)
-          if limit
+          if limit = extract_limit(options)
             enum_for(:limited_batches, limit, options, &block)
           else
             enum_for(:all_batches, options, &block)
@@ -156,21 +192,12 @@ module Aws
           end
         end
 
-        def extract_limit_param(options)
-          if key = limit_param_key(options)
-            params = options[:params] || {}
-            params[key]
+        def extract_limit(options)
+          if options[:limit]
+            options[:limit]
+          else
+            (options[:params] || {})[@limit_key]
           end
-        end
-
-        # The client api metadata has a paging provider.  The paging
-        # provider will specify if there is a 
-        def limit_param_key(options)
-          client = option(:client, options)
-          api = client.config.api
-          paging = api.metadata('paging')
-          pager = paging.pager(api.operation(@request.method_name).name)
-          pager.limit_key
         end
 
       end

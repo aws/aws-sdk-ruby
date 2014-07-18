@@ -6,9 +6,11 @@ module Aws
 
       describe '#define_service' do
 
+        let(:config) { double('config', api: api) }
+
         let(:client_class) { double('client-class', api: api) }
 
-        let(:client) { double('client', class: client_class) }
+        let(:client) { double('client', config:config) }
 
         let(:definition) {{
           'service' => {},
@@ -17,30 +19,30 @@ module Aws
 
         let(:shapes) {{}}
 
-        let(:api) { Seahorse::Model::Api.new('shapes' => shapes) }
+        let(:metadata) {{ 'paging' => Paging::NullProvider.new }}
 
-        let(:namespace) { Module.new }
-
-        let(:service_class) {
-          errors = Validator.validate(definition, api)
-          expect(errors).to be_empty, lambda { errors.join("\n") }
-          Definition.new(namespace, definition).apply('Svc', client_class)
+        let(:api) {
+          Seahorse::Model::Api.new(
+            'shapes' => shapes,
+            'metadata' => metadata,
+          )
         }
 
-        let(:service) { service_class.new }
+        let(:namespace) { Module.new }
 
         before(:each) do
           allow(client_class).to receive(:new).and_return(client)
         end
 
+        def apply_definition
+          Definition.new(namespace, definition).apply('Resource', client_class)
+        end
+
         describe 'service' do
 
           it 'constructs default clients' do
-            expect(client_class).to receive(:new).and_return(client)
-            definition = Definition.new(namespace, definition)
-            definition.apply('Name', client_class)
-            expect(svc.client_class).to be(client_class)
-            expect(svc.new.client).to be(client)
+            Definition.new(namespace, definition).apply('Resource', client_class)
+            expect(namespace::Resource.new.client).to be(client)
           end
 
           it 'defines a resource class for each named resource' do
@@ -49,9 +51,13 @@ module Aws
               'User' => { 'identifiers' => [{ 'name' => 'Name' }] },
             }
 
-            service_class
+            Definition.new(namespace, definition).apply('Resource', client_class)
 
-            expect(namespace.constants.sort).to eq([:Group, :User])
+            expect(namespace.constants.sort).to eq([:Group, :Resource, :User])
+
+            svc = namespace::Resource.new
+            expect(svc).to be_kind_of(Resource::Base)
+            expect(svc.identifiers).to eq({})
 
             user = namespace::User.new(name:'user-name')
             expect(user).to be_kind_of(Resource::Base)
@@ -75,14 +81,14 @@ module Aws
                 }
               }
 
-              expect(service).to respond_to(:do_something)
-
               client_response = double('client-response')
               expect(client).to receive(:client_method).
                 with(foo:'bar').
                 and_return(client_response)
 
-              resp = service.do_something(foo:'bar')
+              apply_definition
+
+              resp = namespace::Resource.new.do_something(foo:'bar')
               expect(resp).to be(client_response)
             end
 
@@ -103,7 +109,9 @@ module Aws
                   data: { 'nested' => { 'value' => 'nested-value' }}
                 ))
 
-              resp = service.do_something(foo:'bar')
+              apply_definition
+
+              resp = namespace::Resource.new.do_something(foo:'bar')
               expect(resp).to eq('nested-value')
             end
 
@@ -141,15 +149,18 @@ module Aws
                     context: double('request-context', params:params))
                 end
 
-              thing = service.create_thing(thing_name:'thing-name')
-              expect(thing).to be_kind_of(service_class::Thing)
-              expect(thing.client).to be(service.client)
+              apply_definition
+
+              svc = namespace::Resource.new
+              thing = svc.create_thing(thing_name:'thing-name')
+              expect(thing).to be_kind_of(namespace::Thing)
+              expect(thing.client).to be(svc.client)
               expect(thing.name).to eq('thing-name')
             end
 
             it 'accepts identifier names in place of request params' do
               # For this test case to work, request params must be renamed
-              # following the resource identifier soources.  In this example
+              # following the resource identifier sources.  In this example
               # the "MakeThing" request requires a "ThingName" param, and
               # we want the user to be able to specify "Name" (the idenitifer
               # target) or "ThingName" (the request param).
@@ -187,7 +198,10 @@ module Aws
                     context: double('request-context', params:params))
                 end
 
-              thing = service.create_thing(name:'thing-name')
+              apply_definition
+
+              svc = namespace::Resource.new
+              thing = svc.create_thing(name:'thing-name')
               expect(thing.name).to eq('thing-name')
             end
 
@@ -229,10 +243,13 @@ module Aws
               expect(client).to receive(:make_things).
                 and_return(client_response)
 
-              things = service.create_things
-              expect(things).to be_an(Array)
-              expect(things[0]).to be_kind_of(service_class::Thing)
-              expect(things[1].client).to be(service.client)
+              apply_definition
+
+              svc = namespace::Resource.new
+              things = svc.create_things
+              expect(things).to be_an(Batch)
+              expect(things[0]).to be_kind_of(namespace::Thing)
+              expect(things[1].client).to be(svc.client)
               expect(things.map(&:name)).to eq(['thing1', 'thing2'])
             end
 
@@ -275,7 +292,10 @@ module Aws
               expect(client).to receive(:make_things).
                 and_return(client_response)
 
-              things = service.create_things
+              apply_definition
+
+              svc = namespace::Resource.new
+              things = svc.create_things
               expect(things.map(&:data)).to eq([
                 { 'name' => 'thing1', 'arn' => 'thing1-arn' },
                 { 'name' => 'thing2', 'arn' => 'thing2-arn' },
@@ -330,16 +350,22 @@ module Aws
                   }),
                 ]
               )
-              things = service.things(batch_size:2)
-              expect(things).to be_an(Enumerator)
+
+              apply_definition
+
+              svc = namespace::Resource.new
+              things = svc.things(batch_size:2)
+              expect(things).to be_an(Collection)
               expect(things.map(&:name)).to eq(%w(thing1 thing2 thing3 thing4))
             end
 
             it 'defines getter helpers for top-level resources' do
-              thing = service.thing('thing-name')
-              expect(thing).to be_kind_of(service_class::Thing)
+              apply_definition
+              svc = namespace::Resource.new
+              thing = svc.thing('thing-name')
+              expect(thing).to be_kind_of(namespace::Thing)
               expect(thing.name).to eq('thing-name')
-              expect(thing.client).to be(service.client)
+              expect(thing.client).to be(svc.client)
             end
 
           end
@@ -372,8 +398,6 @@ module Aws
 
           describe 'actions' do
 
-            let(:thing) { service_class::Thing.new(name:'thing-name') }
-
             it 'supports basic operations that return the client response' do
               definition['resources'] = {
                 'Thing' => {
@@ -398,6 +422,9 @@ module Aws
                 with(thing_name: 'thing-name', foo:'bar').
                 and_return(client_resp)
 
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name')
               resp = thing.delete(foo:'bar')
               expect(resp).to be(client_resp)
             end
@@ -427,6 +454,9 @@ module Aws
               expect(client).to receive(:deactivate_thing).
                 and_return(client_resp)
 
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name')
               expect(thing.deactivate).to eq('inactive')
             end
 
@@ -462,8 +492,11 @@ module Aws
                     context: double('request-context', params:params))
                 end
 
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name')
               new_thing = thing.copy(thing_name:'new-thing-name')
-              expect(new_thing).to be_kind_of(service_class::Thing)
+              expect(new_thing).to be_kind_of(namespace::Thing)
               expect(new_thing.client).to be(thing.client)
               expect(new_thing.name).to eq('new-thing-name')
             end
@@ -519,8 +552,11 @@ module Aws
                 with(thing_name: 'thing-name').
                 and_return(client_response)
 
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name')
               doo_dad = thing.create_doo_dad
-              expect(doo_dad).to be_an(service_class::DooDad)
+              expect(doo_dad).to be_an(namespace::DooDad)
               expect(doo_dad.name).to eq('doo-dad-name')
               expect(doo_dad.client).to be(thing.client)
             end
@@ -581,6 +617,9 @@ module Aws
                 with(thing_name: 'thing-name').
                 and_return(client_response)
 
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name')
               doo_dad = thing.create_doo_dad
               expect(doo_dad.data).to eq(data)
             end

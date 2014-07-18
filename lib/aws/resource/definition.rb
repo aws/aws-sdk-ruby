@@ -214,7 +214,8 @@ module Aws
           Operations::EnumerateDataOperation.new(
             request: define_request(definition['request']),
             path: underscore(definition['path']),
-            source: source
+            source: source,
+            limit_key: limit_key(resource, definition)
           )
         else
           Operations::DataOperation.new(
@@ -247,7 +248,14 @@ module Aws
         Operations::EnumerateResourceOperation.new(
           request: define_request(definition['request']),
           builder: builder,
-          source: source(definition))
+          source: source(definition),
+          limit_key: limit_key(resource, definition))
+      end
+
+      def limit_key(resource, definition)
+        operation_name = definition['request']['operation']
+        paging_provider = resource.client_class.api.metadata('paging')
+        paging_provider.pager(operation_name).limit_key
       end
 
       def define_request(definition)
