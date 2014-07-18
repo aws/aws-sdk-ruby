@@ -1,5 +1,6 @@
 require 'time'
 require 'net/http'
+require 'thread'
 
 module Aws
   class InstanceProfileCredentials < Credentials
@@ -34,6 +35,7 @@ module Aws
       @http_open_timeout = options[:http_open_timeout] || 1
       @http_read_timeout = options[:http_read_timeout] || 1
       @http_debug_output = options[:http_debug_output]
+      @refresh_mutex = Mutex.new
       refresh!
     end
 
@@ -62,14 +64,16 @@ module Aws
     end
 
     def refresh!
-      credentials = MultiJson.load(get_credentials)
-      @access_key_id = credentials['AccessKeyId']
-      @secret_access_key = credentials['SecretAccessKey']
-      @session_token = credentials['Token']
-      if expires = credentials['Expiration']
-        @expiration = Time.parse(expires)
-      else
-        @expiration = nil
+      @refresh_mutex.synchronize do
+        credentials = MultiJson.load(get_credentials)
+        @access_key_id = credentials['AccessKeyId']
+        @secret_access_key = credentials['SecretAccessKey']
+        @session_token = credentials['Token']
+        if expires = credentials['Expiration']
+          @expiration = Time.parse(expires)
+        else
+          @expiration = nil
+        end
       end
     end
 
