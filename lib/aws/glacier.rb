@@ -21,10 +21,10 @@ module AWS
   # To use Amazon Glacier you must first
   # [sign up here](http://aws.amazon.com/glacier/).
   #
-  # For more information about AWS Data Pipeline:
+  # For more information about Amazon Glacier:
   #
-  # * [AWS Data Pipeline](http://aws.amazon.com/glacier/)
-  # * [AWS Data Pipeline Documentation](http://aws.amazon.com/documentation/glacier/)
+  # * [Amazon Glacier](http://aws.amazon.com/glacier/)
+  # * [Amazon Glacier Documentation](http://aws.amazon.com/documentation/glacier/)
   #
   # # Credentials
   #
