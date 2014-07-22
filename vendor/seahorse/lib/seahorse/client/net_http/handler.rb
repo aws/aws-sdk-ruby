@@ -41,9 +41,8 @@ module Seahorse
 
         def error_message(context, error)
           if error.is_a?(SocketError) && error.message == DNS_ERROR_MESSAGE
-            <<-MSG.strip
-unable to connect to `#{context.http_request.endpoint.host}`; SocketError: #{error.message}
-            MSG
+            host = context.http_request.endpoint.host
+            "unable to connect to `#{host}`; SocketError: #{error.message}"
           else
             error.message
           end
