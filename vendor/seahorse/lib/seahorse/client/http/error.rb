@@ -3,8 +3,8 @@ module Seahorse
     module Http
       class Error < StandardError
 
-        def initialize(error)
-          super(error.message)
+        def initialize(error, msg = nil)
+          super(msg || error.message)
           set_backtrace(error.backtrace)
           @original_error = error
         end

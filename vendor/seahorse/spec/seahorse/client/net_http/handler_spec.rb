@@ -235,6 +235,18 @@ module Seahorse
             end
 
           end
+
+          describe 'DNS errors' do
+
+            it 'gives additional information about DNS errors' do
+              msg = 'getaddrinfo: nodename nor servname provided, or not known'
+              stub_request(:any, endpoint).to_raise(SocketError.new(msg))
+              resp = make_request
+              expect(resp.error).to be_a(Seahorse::Client::Http::Error)
+              expect(resp.error.message).to match("unable to connect to `#{URI.parse(endpoint).host}`; SocketError: #{msg}")
+            end
+
+          end
         end
       end
     end

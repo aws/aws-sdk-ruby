@@ -12,6 +12,9 @@ module Seahorse
           Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError
         ]
 
+        # @api private
+        DNS_ERROR_MESSAGE = 'getaddrinfo: nodename nor servname provided, or not known'
+
         # Raised when a {Handler} can not construct a `Net::HTTP::Request`
         # from the given http verb.
         class InvalidHttpVerbError < StandardError; end
@@ -23,7 +26,7 @@ module Seahorse
           begin
             transmit(context.config, context.http_request, context.http_response)
           rescue *NETWORK_ERRORS => error
-            response.error = Http::Error.new(error)
+            response.error = Http::Error.new(error, error_message(context, error))
           end
           response
         end
@@ -35,6 +38,16 @@ module Seahorse
         end
 
         private
+
+        def error_message(context, error)
+          if error.is_a?(SocketError) && error.message == DNS_ERROR_MESSAGE
+            <<-MSG.strip
+unable to connect to `#{context.http_request.endpoint.host}`; SocketError: #{error.message}
+            MSG
+          else
+            error.message
+          end
+        end
 
         # @param [Configuration] config
         # @param [Http::Request] request
