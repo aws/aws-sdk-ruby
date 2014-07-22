@@ -304,7 +304,7 @@ module AWS
       mutable_describe_call_attribute :ramdisk_id, :set_as => :ramdisk
 
       mutable_describe_attribute :source_dest_check do
-        translates_output{|bool| bool == "true" }
+        translates_output{|bool| bool.to_s == "true" }
       end
 
       alias_method :source_dest_check?, :source_dest_check

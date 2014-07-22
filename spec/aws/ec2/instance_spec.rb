@@ -761,6 +761,18 @@ module AWS
 
       end
 
+      context '#source_dest_check' do
+
+        let(:attribute) { :source_dest_check }
+        let(:response_field) { :source_dest_check }
+        let(:response_value) { true }
+        let(:translated_value) { true }
+        let(:request_attribute_name) { "sourceDestCheck" }
+
+        it_should_behave_like "ec2 instance attribute accessor (describe_instance_attribute)"
+
+      end
+
       context '#user_data=' do
 
         let(:attribute_setter) { :user_data= }
