@@ -89,6 +89,23 @@ module Aws
         end
 
       end
+
+      describe 'failure cases' do
+
+        let(:resp) { '{}' }
+
+        it 'given an empty response, entry credentials are returned' do
+          # This handles the case when the service response but returns
+          # a JSON document without credentials (error cases)
+          c = InstanceProfileCredentials.new
+          expect(c.set?).to be(false)
+          expect(c.access_key_id).to be(nil)
+          expect(c.secret_access_key).to be(nil)
+          expect(c.session_token).to be(nil)
+          expect(c.expiration).to be(nil)
+        end
+
+      end
     end
   end
 end
