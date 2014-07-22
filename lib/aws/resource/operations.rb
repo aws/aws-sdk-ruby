@@ -87,8 +87,8 @@ module Aws
         # @return [Enumerator]
         def call(options)
           expect_hash(:params, options)
-          if limit = extract_limit(options)
-            enum_for(:limited_each, limit, options)
+          if options[:limit]
+            enum_for(:limited_each, options[:limit], options)
           else
             enum_for(:each, options)
           end
@@ -153,6 +153,12 @@ module Aws
           super
         end
 
+        # @return [Builder]
+        attr_reader :builder
+
+        # @return [Symbol, nil]
+        attr_reader :limit_key
+
         # @option options [required, Resource] :resource
         # @option options [Hash] :params ({})
         # @return [Collection]
@@ -164,8 +170,8 @@ module Aws
         # @api private
         # @return [Enumerator<Batch>]
         def batches(options, &block)
-          if limit = extract_limit(options)
-            enum_for(:limited_batches, limit, options, &block)
+          if options[:limit]
+            enum_for(:limited_batches, options[:limit], options, &block)
           else
             enum_for(:all_batches, options, &block)
           end
@@ -174,6 +180,7 @@ module Aws
         private
 
         def all_batches(options, &block)
+          options = apply_batch_size(options)
           @request.call(options).each do |response|
             yield(@builder.build(options.merge(response:response)))
           end
@@ -192,11 +199,12 @@ module Aws
           end
         end
 
-        def extract_limit(options)
-          if options[:limit]
-            options[:limit]
+        def apply_batch_size(options)
+          if batch_size = options[:batch_size]
+            params = (options[:params] || {}).merge(limit_key => batch_size)
+            options.merge(params: params)
           else
-            (options[:params] || {})[@limit_key]
+            options
           end
         end
 
