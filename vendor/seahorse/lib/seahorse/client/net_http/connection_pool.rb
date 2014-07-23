@@ -4,6 +4,8 @@ require 'delegate'
 require 'thread'
 require 'logger'
 
+Seahorse::Client::NetHttp::Patches.apply!
+
 module Seahorse
   module Client
     module NetHttp
