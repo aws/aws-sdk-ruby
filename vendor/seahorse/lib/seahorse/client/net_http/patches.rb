@@ -71,7 +71,7 @@ module Seahorse
         end
 
         module Ruby_1_9_3
-          def transport_request(req)
+          def new_transport_request(req)
             begin_transport req
             res = catch(:response) {
               req.exec @socket, @curr_http_version, edit_path(req.path)
