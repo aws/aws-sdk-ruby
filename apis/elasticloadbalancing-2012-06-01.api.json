@@ -1368,6 +1368,17 @@
     },
     "ConnectionDrainingEnabled":{"type":"boolean"},
     "ConnectionDrainingTimeout":{"type":"integer"},
+    "ConnectionSettings":{
+      "type":"structure",
+      "required":["IdleTimeout"],
+      "members":{
+        "IdleTimeout":{
+          "shape":"IdleTimeout",
+          "documentation":"<p>Specifies the maximum time the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.</p>"
+        }
+      },
+      "documentation":"<p>The <code>ConnectionSettings</code> data type.</p>"
+    },
     "CookieExpirationPeriod":{"type":"long"},
     "CookieName":{"type":"string"},
     "CreateAccessPointInput":{
@@ -1645,6 +1656,10 @@
         "Marker":{
           "shape":"Marker",
           "documentation":"<p> An optional parameter reserved for future use. </p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p> The size of the page returned by this call. </p>"
         }
       },
       "documentation":"<p> The input for the <a>DescribeLoadBalancers</a> action. </p>"
@@ -1866,6 +1881,11 @@
       "min":2,
       "max":10
     },
+    "IdleTimeout":{
+      "type":"integer",
+      "min":1,
+      "max":3600
+    },
     "Instance":{
       "type":"structure",
       "members":{
@@ -2078,6 +2098,10 @@
         "ConnectionDraining":{
           "shape":"ConnectionDraining",
           "documentation":"<p>The name of the load balancer attribute. If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy back-end instance. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/config-conn-drain.html\">Enable Connection Draining</a>.</p>"
+        },
+        "ConnectionSettings":{
+          "shape":"ConnectionSettings",
+          "documentation":"<p>The name of the load balancer attribute. </p> <p>By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. If <code>ConnectionSettings</code> attribute is set, Elastic Load Balancing will allow the connections to remain idle (no data is sent over the connection) for the specified duration.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/config-idle-timeout.html\">Configure Idle Connection Timeout</a>.</p>"
         }
       },
       "documentation":"<p>The <code>LoadBalancerAttributes</code> data type.</p>"
@@ -2190,6 +2214,11 @@
         "LoadBalancerAttributes":{"shape":"LoadBalancerAttributes"}
       },
       "documentation":"<p>The output for the <a>ModifyLoadBalancerAttributes</a> action.</p>"
+    },
+    "PageSize":{
+      "type":"integer",
+      "min":1,
+      "max":400
     },
     "Policies":{
       "type":"structure",
