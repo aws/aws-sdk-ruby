@@ -325,6 +325,10 @@
                     :type: :boolean
                   Timeout:
                     :type: :integer
+              ConnectionSettings:
+                :children:
+                  IdleTimeout:
+                    :type: :integer
 - :name: DescribeLoadBalancerPolicies
   :method: :describe_load_balancer_policies
   :inputs:
@@ -383,6 +387,8 @@
       - :string
     Marker:
     - :string
+    PageSize:
+    - :integer
   :outputs:
     :children:
       DescribeLoadBalancersResult:
@@ -582,6 +588,11 @@
             - :required
             Timeout:
             - :integer
+        ConnectionSettings:
+        - :structure:
+            IdleTimeout:
+            - :integer
+            - :required
     - :required
   :outputs:
     :children:
@@ -605,6 +616,10 @@
                   Enabled:
                     :type: :boolean
                   Timeout:
+                    :type: :integer
+              ConnectionSettings:
+                :children:
+                  IdleTimeout:
                     :type: :integer
 - :name: RegisterInstancesWithLoadBalancer
   :method: :register_instances_with_load_balancer

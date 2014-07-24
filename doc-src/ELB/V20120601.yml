@@ -51,7 +51,7 @@
   Calls the CreateLoadBalancer API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name associated with the load balancer. The name must be unique within your set of load balancers.
-    * `:listeners` - *required* - (Array&lt;<Hash>) A list of the following tuples: LoadBalancerPort, InstancePort, and Protocol.
+    * `:listeners` - *required* - (Array&lt;<Hash>) A list of the following tuples: Protocol, LoadBalancerPort, InstanceProtocol, InstancePort, and SSLCertificateId.
       * `:protocol` - *required* - (String) Specifies the load balancer transport protocol to use for routing - HTTP, HTTPS, TCP or SSL. This property cannot be modified for the life of the load balancer.
       * `:load_balancer_port` - *required* - (Integer) Specifies the external load balancer port number. This property cannot be modified for the life of the load balancer.
       * `:instance_protocol` - (String) Specifies the protocol to use for routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL. This property cannot be modified for the life of the load balancer. If the front-end protocol is HTTP or HTTPS, InstanceProtocol has to be at the same protocol layer, i.e., HTTP or HTTPS. Likewise, if the front-end protocol is TCP or SSL, InstanceProtocol has to be TCP or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is secure, i.e., HTTPS or SSL, the listener's InstanceProtocol has to be secure, i.e., HTTPS or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is HTTP or TCP, the listener's InstanceProtocol must be either HTTP or TCP.
@@ -68,7 +68,7 @@
   Calls the CreateLoadBalancerListeners API operation.
   @param [Hash] options
     * `:load_balancer_name` - *required* - (String) The name of the load balancer.
-    * `:listeners` - *required* - (Array&lt;<Hash>) A list of LoadBalancerPort, InstancePort, Protocol, and SSLCertificateId items.
+    * `:listeners` - *required* - (Array&lt;<Hash>) A list of LoadBalancerPort, InstancePort, Protocol, InstanceProtocol, and SSLCertificateId items.
       * `:protocol` - *required* - (String) Specifies the load balancer transport protocol to use for routing - HTTP, HTTPS, TCP or SSL. This property cannot be modified for the life of the load balancer.
       * `:load_balancer_port` - *required* - (Integer) Specifies the external load balancer port number. This property cannot be modified for the life of the load balancer.
       * `:instance_protocol` - (String) Specifies the protocol to use for routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL. This property cannot be modified for the life of the load balancer. If the front-end protocol is HTTP or HTTPS, InstanceProtocol has to be at the same protocol layer, i.e., HTTP or HTTPS. Likewise, if the front-end protocol is TCP or SSL, InstanceProtocol has to be TCP or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is secure, i.e., HTTPS or SSL, the listener's InstanceProtocol has to be secure, i.e., HTTPS or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is HTTP or TCP, the listener's InstanceProtocol must be either HTTP or TCP.
@@ -142,6 +142,8 @@
       * `:connection_draining` - (Hash)
         * `:enabled` - (Boolean)
         * `:timeout` - (Integer)
+      * `:connection_settings` - (Hash)
+        * `:idle_timeout` - (Integer)
 :describe_load_balancer_policies: |-
   Calls the DescribeLoadBalancerPolicies API operation.
   @param [Hash] options
@@ -175,6 +177,7 @@
   @param [Hash] options
     * `:load_balancer_names` - (Array&lt;<String>) A list of load balancer names associated with the account.
     * `:marker` - (String) An optional parameter reserved for future use.
+    * `:page_size` - (Integer) The size of the page returned by this call.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:load_balancer_descriptions` - (Array<Hash>)
@@ -258,6 +261,8 @@
       * `:connection_draining` - (Hash) The name of the load balancer attribute. If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy back-end instance. For more information, see Enable Connection Draining.
         * `:enabled` - *required* - (Boolean) Specifies whether connection draining is enabled for the load balancer.
         * `:timeout` - (Integer) Specifies the maximum time (in seconds) to keep the existing connections open before deregistering the instances.
+      * `:connection_settings` - (Hash) The name of the load balancer attribute. By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. If ConnectionSettings attribute is set, Elastic Load Balancing will allow the connections to remain idle (no data is sent over the connection) for the specified duration. For more information, see Configure Idle Connection Timeout.
+        * `:idle_timeout` - *required* - (Integer) Specifies the maximum time the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:load_balancer_name` - (String)
@@ -272,6 +277,8 @@
       * `:connection_draining` - (Hash)
         * `:enabled` - (Boolean)
         * `:timeout` - (Integer)
+      * `:connection_settings` - (Hash)
+        * `:idle_timeout` - (Integer)
 :register_instances_with_load_balancer: |-
   Calls the RegisterInstancesWithLoadBalancer API operation.
   @param [Hash] options
