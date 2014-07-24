@@ -207,7 +207,7 @@ module AWS
 
             it 'can convert the standard amazon format to a time object' do
               data.date_time_like_element.should be_a(Time)
-              data.date_time_like_element.to_s.should == Time.parse(time_string).to_s
+              data.date_time_like_element.strftime('%s.%6N').should == Time.parse(time_string).strftime('%s.%6N')
             end
 
             it 'can convert non standard amazon formats to time objects' do
