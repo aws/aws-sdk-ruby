@@ -22,6 +22,20 @@ module AWS
   #       :access_key_id => '...',
   #       :secret_access_key => '...')
   #
+  # # Supported API Version
+  #
+  # Please note, the `AWS::DynamoDB` classes have been built against
+  # the 2011-12-05 API version. Constructing a `AWS::DynamoDB` object
+  # with a newer API version will emit a warning and then ignore the
+  # specified version.
+  #
+  # If you would like to use features of the newer 2012-08-10 API
+  # version, then please construct a DynamoDB client and use the
+  # client API directly.
+  #
+  #     # supports the latest API version
+  #     ddb = AWS::DynamoDB::Client.new(api_verison:'2012-08-10')
+  #
   # # Tables
   #
   # Tables contain items, and organize information into discrete
