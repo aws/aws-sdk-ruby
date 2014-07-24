@@ -77,6 +77,9 @@ module AWS
 
         alias_method :id, :message_id
 
+        # @return [String] Returns the request ID.
+        attr_accessor :request_id
+
         # @return [String] Returns an MD5 digest of the message body
         #   string.  You can use this to verify that SQS received your
         #   message correctly.
@@ -120,13 +123,14 @@ module AWS
         client_opts[:message_body] = body
 
         response = client.send_message(client_opts)
-        
+
         msg = SentMessage.new
         msg.message_id = response[:message_id]
+        msg.request_id = (response[:response_metadata] || {})[:request_id]
         msg.md5 = response[:md5_of_message_body]
 
         verify_send_message_checksum body, msg.md5
-        
+
         msg
 
       end

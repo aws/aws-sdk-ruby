@@ -102,6 +102,12 @@ module AWS
           expect { queue.send_message("GOODBYE") }.to raise_error(Errors::ChecksumError)
         end
 
+        it 'populates the the request id in sent message' do
+          resp.data[:response_metadata] = { :request_id => 'request-id' }
+          sent_message = queue.send_message('test')
+          sent_message.request_id.should eq('request-id')
+        end
+
       end
 
       context 'receiving messages' do
