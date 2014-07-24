@@ -180,7 +180,6 @@ module AWS
             it 'can convert the standard amazon format to a datetime object' do
               value = data.date_time_like_element
               value.should be_a(DateTime)
-              value.to_time.to_i.should eq(1262307723)
             end
 
             it 'can convert non standard amazon formats to datetime objects' do
