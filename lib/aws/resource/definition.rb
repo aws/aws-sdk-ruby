@@ -131,7 +131,7 @@ module Aws
         each_resource do |resource_name, resoruce_definition|
           if actions = resoruce_definition['batchActions']
             resource_class = @namespace.const_get(resource_name)
-            batch_class = @namespace.const_get(:Batch)
+            batch_class = resource_class.const_get(:Batch)
             actions.each do |name, definition|
               method_name = underscore(name)
               operation = build_operation(service, resource_class, definition)

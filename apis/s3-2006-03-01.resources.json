@@ -564,6 +564,17 @@
           }
         }
       },
+      "batchActions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteObjects",
+            "params": [
+              { "target":"Bucket", "sourceType":"identifier", "source":"BucketName" },
+              { "target":"Delete.Objects[].Key", "sourceType":"identifier", "source":"Key" }
+            ]
+          }
+        }
+      },
       "subResources": {
         "resources": [
           "ObjectAcl",
