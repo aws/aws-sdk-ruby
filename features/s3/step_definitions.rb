@@ -163,3 +163,27 @@ end
 Then(/^the body\#read method should return "(.*?)"$/) do |str|
   expect(@response.body.read).to eq(str)
 end
+
+When(/^I put a large object with a broken content-md5$/) do
+  begin
+    @s3.put_object(
+      bucket: @bucket_name,
+      key: 'key',
+      body: '.' * 1024 * 1024,
+      content_md5: 'abc')
+  rescue => @error
+  end
+end
+
+Then(/^I should receive an invalid digest error$/) do
+  expect(@error).to be_kind_of(Aws::S3::Errors::InvalidDigest)
+end
+
+When(/^I put a large object$/) do
+  @key = 'large-object'
+  @s3.put_object(bucket: @bucket_name, key: @key, body: '.' * 1024 * 1024)
+end
+
+Then(/^the object should exist$/) do
+  @s3.head_object(bucket: @bucket_name, key: @key)
+end

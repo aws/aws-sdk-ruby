@@ -66,6 +66,7 @@ module Aws
     autoload :Route53IdFix, "#{SRC}/plugins/route_53_id_fix"
     autoload :S3BucketDns, "#{SRC}/plugins/s3_bucket_dns"
     autoload :S3CompleteMultipartUploadFix, "#{SRC}/plugins/s3_complete_multipart_upload_fix"
+    autoload :S3Expect100Continue, "#{SRC}/plugins/s3_expect_100_continue"
     autoload :S3GetBucketLocationFix, "#{SRC}/plugins/s3_get_bucket_location_fix"
     autoload :S3LocationConstraint, "#{SRC}/plugins/s3_location_constraint"
     autoload :S3Md5s, "#{SRC}/plugins/s3_md5s"

@@ -116,6 +116,7 @@ module Aws
 
       customize 's3' do
         add_plugin 'Aws::Plugins::S3BucketDns'
+        add_plugin 'Aws::Plugins::S3Expect100Continue'
         add_plugin 'Aws::Plugins::S3CompleteMultipartUploadFix'
         add_plugin 'Aws::Plugins::S3GetBucketLocationFix'
         add_plugin 'Aws::Plugins::S3LocationConstraint'

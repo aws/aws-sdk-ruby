@@ -36,6 +36,7 @@ module Seahorse
     module NetHttp
       autoload :ConnectionPool, 'seahorse/client/net_http/connection_pool'
       autoload :Handler, 'seahorse/client/net_http/handler'
+      autoload :Patches, 'seahorse/client/net_http/patches'
     end
 
     module Plugins
