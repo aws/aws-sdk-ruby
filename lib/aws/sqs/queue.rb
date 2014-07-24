@@ -123,14 +123,14 @@ module AWS
         client_opts[:message_body] = body
 
         response = client.send_message(client_opts)
-        
+
         msg = SentMessage.new
         msg.message_id = response[:message_id]
-        msg.request_id = response[:response_metadata][:request_id]
+        msg.request_id = (response[:response_metadata] || {})[:request_id]
         msg.md5 = response[:md5_of_message_body]
 
         verify_send_message_checksum body, msg.md5
-        
+
         msg
 
       end
