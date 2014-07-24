@@ -11,10 +11,17 @@ Gem::Specification.new do |spec|
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'http://github.com/aws/aws-sdk-core-ruby'
   spec.license       = 'Apache 2.0'
-  spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(spec|features)/})
+
   spec.require_paths = ['lib', 'vendor/seahorse/lib']
+
+  spec.files =     ['README.md', 'LICENSE.txt']
+  spec.files += Dir['lib/**/*.rb']
+  spec.files += Dir['vendor/seahorse/lib/**/*.rb']
+  spec.files += Dir['apis/*.json']
+
+  spec.bindir = 'bin'
+  spec.executables << 'aws.rb'
+
   spec.add_dependency('multi_json', '~> 1.0')
   spec.add_dependency('multi_xml', '~> 0.5')
   spec.add_dependency('builder', '~> 3.0')
