@@ -73,7 +73,7 @@ Or you can configure a region in code:
 Aws.config[:region] = 'us-west-2'
 
 # per-service :region
-s3 = Aws::S3.new(region:'us-east-1')
+s3 = Aws::S3::Client.new(region:'us-east-1')
 ```
 
 ### Credentials
@@ -99,7 +99,7 @@ following credential classes:
 Aws.config[:credentials] = Aws::SharedCredentials.new(profile_name:'myprofile')
 
 # per-service :credentials
-s3 = Aws::S3.new(credentials: Aws::SharedCredentials.new(profile_name:'myprofile')
+s3 = Aws::S3::Client.new(credentials: Aws::SharedCredentials.new(profile_name:'myprofile')
 ```
 
 ## Basic Usage
@@ -107,8 +107,7 @@ s3 = Aws::S3.new(credentials: Aws::SharedCredentials.new(profile_name:'myprofile
 To make a request, you need to construct a service client.
 
 ```ruby
-s3 = Aws::S3.new
-s3 = Aws.s3 # helper method returns a new client
+s3 = Aws::S3::Client.new
 ```
 
 Each client provides one method per API operation. Refer to the
@@ -174,13 +173,13 @@ Call `#service_classes` to get a list of available service helpers and
 the class they construct.
 
 ```ruby
-Aws> service_classes
-{:autoscaling=>Aws::AutoScaling,
- :cloudformation=>Aws::CloudFormation,
- :cloudfront=>Aws::CloudFront,
- :cloudsearch=>Aws::CloudSearch,
+Aws> service_clients
+{:autoscaling=>Aws::AutoScaling::Client,
+ :cloudformation=>Aws::CloudFormation::Client,
+ :cloudfront=>Aws::CloudFront::Client,
+ :cloudsearch=>Aws::CloudSearch::Client,
  ...
- :swf=>Aws::SWF}
+ :swf=>Aws::SWF::Client}
 ```
 
 ## Versioning
