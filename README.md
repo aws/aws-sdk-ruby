@@ -16,19 +16,19 @@ changes before 2.0.0 final.
 
 * The prefered constructor for services is now using the client
   class, example:
-    
+
       # deprecated, will be removed for 2.0.0 final
       Aws::S3.new
-    
+
       # preferred
       Aws::S3::Client.new
 
 * The `:raw_json` option for JSON protocol based services has been
   renamed to `:simple_json`
-    
+
 * The short name for Aws::SimpleDB has been renamed from `sdb` to
   `simpledb`.
-    
+
 ## Links of Interest
 
 * [Documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
@@ -197,8 +197,11 @@ version.
 | Amazon CloudSearch                  | CloudSearch               | 2011-02-01 &mdash; 2013-01-01  |
 | Amazon CloudSearch Domain           | CloudSearchDomain         | 2013-01-01                     |
 | Amazon CloudWatch                   | CloudWatch                | 2010-08-01                     |
+| Amazon CloudWatch Logs              | CloudWatchLogs            | 2014-03-28                     |
+| Amazon Cognito Identity             | CognitoIdentity           | 2014-06-30                     |
+| Amazon Cognito Sync                 | CognitoSync               | 2014-06-30                     |
 | Amazon DynamoDB                     | DynamoDB                  | 2011-12-05 &mdash; 2012-08-10  |
-| Amazon Elastic Compute Cloud        | EC2                       | 2014-05-01                     |
+| Amazon Elastic Compute Cloud        | EC2                       | 2014-06-15                     |
 | Amazon Elastic MapReduce            | EMR                       | 2009-03-31                     |
 | Amazon Elastic Transcoder           | ElasticTranscoder         | 2012-09-25                     |
 | Amazon ElastiCache                  | ElastiCache               | 2014-03-24                     |
