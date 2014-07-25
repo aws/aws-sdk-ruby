@@ -76,7 +76,7 @@ module Aws
           if error.is_a?(Errors::ServiceError)
             error.class.code
           else
-            error.name.to_s
+            error.class.name.to_s
           end
         end
 
