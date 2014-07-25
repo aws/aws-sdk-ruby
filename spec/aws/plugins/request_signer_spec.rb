@@ -17,6 +17,7 @@ module Aws
         cfg.add_option(:endpoint, 'svc-name.us-west-2.amazonaws.com')
         cfg.add_option(:api, api)
         cfg.add_option(:region) { 'region-name' }
+        cfg.add_option(:region_defaults) {{}}
         cfg
       }
 
