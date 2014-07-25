@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib', 'vendor/seahorse/lib']
 
-  spec.files =     ['README.md', 'LICENSE.txt']
+  spec.files =     ['README.md', 'LICENSE.txt', 'endpoints.json']
   spec.files += Dir['lib/**/*.rb']
   spec.files += Dir['vendor/seahorse/lib/**/*.rb']
   spec.files += Dir['apis/*.json']

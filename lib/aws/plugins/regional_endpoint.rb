@@ -26,7 +26,7 @@ module Aws
           service: cfg.api.metadata('endpointPrefix'),
           region: cfg.region,
           scheme: 'https'
-        )
+        )[:endpoint]
       end
 
       def after_initialize(client)
