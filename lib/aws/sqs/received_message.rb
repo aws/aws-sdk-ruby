@@ -39,6 +39,9 @@ module AWS
       # @api private
       attr_reader :attributes
 
+      # @return [String] The message attributes attached to the message.
+      attr_reader :message_attributes
+
       # @api private
       ATTRIBUTE_ALIASES = {
         :sent_at => :sent_timestamp,
@@ -54,6 +57,7 @@ module AWS
         @body = opts[:body]
         @md5 = opts[:md5]
         @attributes = opts[:attributes] || {}
+        @message_attributes = opts[:message_attributes] || {}
         super
       end
 

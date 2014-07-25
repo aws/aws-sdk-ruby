@@ -188,6 +188,10 @@ module AWS
       #   See {ReceivedMessage} for documentation on each
       #   attribute's meaning.
       #
+      # @option opts [Array<String>] :message_attribute_names A list of
+      #   message attribute names to receive. These will be available on
+      #   the {ReceivedMessage} as `#message_attributes`.
+      #
       # @yieldparam [ReceivedMessage] message Each message that was received.
       #
       # @return [ReceivedMessage] Returns the received message (or messages)
@@ -204,7 +208,8 @@ module AWS
           ReceivedMessage.new(self, m[:message_id], m[:receipt_handle],
             :body => m[:body],
             :md5 => m[:md5_of_body],
-            :attributes => m[:attributes])
+            :attributes => m[:attributes],
+            :message_attributes => m[:message_attributes])
         end
 
         if block
@@ -543,11 +548,11 @@ module AWS
         client_opts[:entries] = entries
 
         response = client.send_message_batch(client_opts)
-        
+
         failed = batch_failures(entries, response, true)
 
         checksum_failed = verify_send_message_batch_checksum entries, response
-        
+
         sent = response[:successful].collect do |sent|
           msg = SentMessage.new
           msg.message_id = sent[:message_id]
@@ -700,11 +705,11 @@ module AWS
           if include_batch_index
             details[:batch_index] = failure[:id].to_i
           end
-          
+
           if message_body = entry[:message_body]
             details[:message_body] = message_body
           end
-          
+
           if handle = entry[:receipt_handle]
             details[:receipt_handle] = handle
           end
@@ -741,6 +746,8 @@ module AWS
           opts[:limit]
         receive_opts[:wait_time_seconds] = opts[:wait_time_seconds] if
           opts[:wait_time_seconds]
+        receive_opts[:message_attribute_names] = opts[:message_attribute_names] if
+          opts[:message_attribute_names]
 
         if names = opts[:attributes]
           receive_opts[:attribute_names] = names.map do |name|
@@ -750,6 +757,7 @@ module AWS
             name
           end
         end
+
         receive_opts
       end
 
