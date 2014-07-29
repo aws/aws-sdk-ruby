@@ -20,58 +20,66 @@ module Aws
 
       def params
         return '' if @operation.input.nil?
-        structure(@operation.input, '')
+        structure(@operation.input, '', [])
       end
 
-      def structure(shape, i)
+      def structure(shape, i, visited)
         lines = ['{']
         shape.members.each do |member_name, member_shape|
           if shape.required.include?(member_name)
             lines << "#{i}  # required"
           end
-          lines << "#{i}  #{member_name}: #{member(member_shape, i + '  ')},"
+          lines << "#{i}  #{member_name}: #{member(member_shape, i + '  ', visited)},"
         end
         lines << "#{i}}"
         lines.join("\n")
       end
 
-      def map(shape, i)
+      def map(shape, i, visited)
         if multiline?(shape.value)
-          multiline_map(shape, i)
+          multiline_map(shape, i, visited)
         else
           "{ #{key_name(shape)} => #{value(shape.value)} }"
         end
       end
 
-      def multiline_map(shape, i)
+      def multiline_map(shape, i, visited)
         lines = ["{"]
-        lines << "#{i}  #{key_name(shape)} => #{member(shape.value, i + '  ')},"
-        lines << "#{i}  # repeated ..."
+        lines << "#{i}  #{key_name(shape)} => #{member(shape.value, i + '  ', visited)},"
+        #lines << "#{i}  # repeated ..."
         lines << "#{i}}"
         lines.join("\n")
       end
 
-      def list(shape, i)
+      def list(shape, i, visited)
         if multiline?(shape.member)
-          multiline_list(shape, i)
+          multiline_list(shape, i, visited)
         else
           "[#{value(shape.member)}, '...']"
         end
       end
 
-      def multiline_list(shape, i)
+      def multiline_list(shape, i, visited)
         lines = ["["]
-        lines << "#{i}  #{member(shape.member, i + '  ')},"
-        lines << "#{i}  # repeated ... "
+        lines << "#{i}  #{member(shape.member, i + '  ', visited)},"
+        #lines << "#{i}  # repeated ... "
         lines << "#{i}]"
         lines.join("\n")
       end
 
-      def member(shape, i)
+      def member(shape, i, visited)
+        if visited.include?(shape.name)
+          recursive = ['{']
+          recursive << "#{i}  # recursive #{shape.name} ..."
+          recursive << "#{i}}"
+          return recursive.join("\n")
+        else
+          visited = visited + [shape.name]
+        end
         case shape
-        when Seahorse::Model::Shapes::Structure then structure(shape, i)
-        when Seahorse::Model::Shapes::Map then map(shape, i)
-        when Seahorse::Model::Shapes::List then list(shape, i)
+        when Seahorse::Model::Shapes::Structure then structure(shape, i, visited)
+        when Seahorse::Model::Shapes::Map then map(shape, i, visited)
+        when Seahorse::Model::Shapes::List then list(shape, i, visited)
         else value(shape)
         end
       end
