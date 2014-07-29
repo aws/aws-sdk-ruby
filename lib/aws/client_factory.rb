@@ -1,7 +1,11 @@
 require 'multi_json'
+require 'thread'
 
 module Aws
   class ClientFactory
+
+    @@const_set_mutex = Mutex.new
+
     class << self
 
       # Constructs and returns versioned API client.  Defaults to the 
@@ -164,7 +168,13 @@ module Aws
       # @api private
       def const_missing(const)
         if const =~ /^V\d{8}$/
-          const_set(const, build_versioned_client_class(api_version(const)))
+          @@const_set_mutex.synchronize do
+            if const_defined?(const)
+              const_get(const)
+            else
+              const_set(const, build_versioned_client_class(api_version(const)))
+            end
+          end
         else
           super
         end
