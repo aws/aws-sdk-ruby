@@ -1,7 +1,7 @@
 require 'multi_json'
 
 module Aws
-  class Client
+  class ClientFactory
     class << self
 
       # Constructs and returns versioned API client.  Defaults to the 

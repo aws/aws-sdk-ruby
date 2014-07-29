@@ -110,7 +110,7 @@ end
 
 def document_client(namespace, svc_name, apis)
   yard_klass = YARD::CodeObjects::ClassObject.new(namespace, 'Client')
-  yard_klass.superclass = YARD::Registry['Aws::Client']
+  yard_klass.superclass = YARD::Registry['Aws::ClientFactory']
   yard_klass.docstring = client_docstring(svc_name, apis)
 
   client = Aws.const_get(svc_name).const_get(:Client)

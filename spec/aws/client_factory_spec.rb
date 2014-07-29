@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Aws
-  describe Client do
+  describe ClientFactory do
 
     let(:api_older) {
       Seahorse::Model::Api.new('metadata' => { 'apiVersion' => '2013-01-01'})
@@ -27,7 +27,7 @@ module Aws
     describe 'default_client_class' do
 
       it 'returns a client with the default api version' do
-        svc = Client.define(:name, apis)
+        svc = ClientFactory.define(:name, apis)
         allow(svc).to receive(:default_api_version).and_return(api_older.version)
         expect(svc.default_client_class.api).to be(api_older)
       end
@@ -37,13 +37,13 @@ module Aws
     describe 'add_version' do
 
       it 'registers a new API version' do
-        svc = Class.new(Client)
+        svc = Class.new(ClientFactory)
         svc.add_version('2013-01-02', 'path/to/api.json')
         expect(svc.api_versions).to eq(['2013-01-02'])
       end
 
       it 'can be called multiple times' do
-        svc = Class.new(Client)
+        svc = Class.new(ClientFactory)
         svc.add_version('2013-02-03', 'path/to/api2.json')
         svc.add_version('2013-01-02', 'path/to/api1.json')
         expect(svc.api_versions).to eq(['2013-01-02', '2013-02-03'])
@@ -51,7 +51,7 @@ module Aws
       end
 
       it 'treats the newest api version as the default' do
-        svc = Client.define(:identifier)
+        svc = ClientFactory.define(:identifier)
         svc.add_version('2013-02-03', 'path/to/api2.json')
         svc.add_version('2013-01-02', 'path/to/api1.json')
         expect(svc.default_api_version).to eq(svc.latest_api_version)
@@ -63,7 +63,7 @@ module Aws
 
       it 'adds a plugin to each versioned client class' do
         plugin = double('plugin')
-        svc = Client.define(:name, apis)
+        svc = ClientFactory.define(:name, apis)
         svc.add_plugin(plugin)
         svc.versioned_clients.each do |klass|
           expect(klass.plugins).to include(plugin)
@@ -76,7 +76,7 @@ module Aws
 
       it 'removes a plugin from each versioned client class' do
         plugin = double('plugin')
-        svc = Client.define(:name, apis)
+        svc = ClientFactory.define(:name, apis)
         svc.add_plugin(plugin)
         svc.remove_plugin(plugin)
         svc.versioned_clients.each do |klass|
@@ -90,14 +90,14 @@ module Aws
 
       let(:apis) { [] }
 
-      let(:client_class) { Client.define(:svcname, apis) }
+      let(:client_class) { ClientFactory.define(:svcname, apis) }
 
       before(:each) do
         Aws.send(:remove_const, :SvcName) if Aws.const_defined?(:SvcName)
       end
 
       it 'defines a new client factory' do
-        expect(client_class.ancestors).to include(Client)
+        expect(client_class.ancestors).to include(ClientFactory)
       end
 
       it 'populates the identifier' do
@@ -128,7 +128,7 @@ module Aws
         api = Seahorse::Model::Api.new('metadata' => {
           'apiVersion' => '2013-01-02'
         })
-        client = Client.define(:svc, { api.version => { 'api' => api }})
+        client = ClientFactory.define(:svc, { api.version => { 'api' => api }})
         expect(client.const_get(:V20130102).new.config.api).to be(api)
       end
 
@@ -141,21 +141,21 @@ module Aws
       end
 
       it 'builds the client class with the latest api version by default' do
-        client_class = Client.define(:svcname, apis)
+        client_class = ClientFactory.define(:svcname, apis)
         expect(client_class.new.config.api).to be(api_newer)
         expect(client_class.new).to be_kind_of(client_class.const_get(:V20130202))
       end
 
       it 'defaults to the global configured version for the client' do
         Aws.config[:svcname] = { api_version: api_older.version }
-        client_class = Client.define(:svcname, apis)
+        client_class = ClientFactory.define(:svcname, apis)
         expect(client_class.new.config.api).to be(api_older)
         expect(client_class.new).to be_kind_of(client_class.const_get(:V20130101))
       end
 
       it 'accepts the api verison as a constructor option' do
         Aws.config[:svcname] = { api_version: api_older.version }
-        client_class = Client.define(:svcname, apis)
+        client_class = ClientFactory.define(:svcname, apis)
         client = client_class.new(api_version: api_newer.version)
         expect(client.config.api).to be(api_newer)
         expect(client).to be_kind_of(client_class.const_get(:V20130202))
@@ -163,7 +163,7 @@ module Aws
 
       it 'uses the closest version without going over' do
         Aws.config[:api_version] = '2013-01-15'
-        client_class = Client.define(:svcname, apis)
+        client_class = ClientFactory.define(:svcname, apis)
         expect(client_class.new.class).to be(client_class.const_get(:V20130101))
       end
 
@@ -192,7 +192,7 @@ module Aws
     describe 'client classes' do
 
       it 'returns each client class from .versioned_clients' do
-        svc = Client.define(:name, apis)
+        svc = ClientFactory.define(:name, apis)
         expect(svc.versioned_clients).to eq([
           svc.const_get(:V20130101),
           svc.const_get(:V20130202),
@@ -201,26 +201,26 @@ module Aws
 
       it 'defines clients for each api version' do
         target = Seahorse::Client::Base
-        c = Client.define(:name, apis)
+        c = ClientFactory.define(:name, apis)
         expect(c.const_get(:V20130101).ancestors).to include(target)
       end
 
       it 'raises an error if the asked for client class does not exist' do
-        svc = Client.define(:name)
+        svc = ClientFactory.define(:name)
         expect {
           svc.const_get(:V20001012)
         }.to raise_error(Errors::NoSuchApiVersionError)
       end
 
       it 'raises a helpful error when the api is not defined' do
-        svc = Client.define(:name)
+        svc = ClientFactory.define(:name)
         expect {
           svc.const_get(:V20001012)
         }.to raise_error("API 2000-10-12 not defined for #{svc.name}")
       end
 
       it 'does not interfere with const missing' do
-        svc = Client.define(:name)
+        svc = ClientFactory.define(:name)
         expect {
           svc.const_get(:FooBar)
         }.to raise_error(NameError, /uninitialized constant/)

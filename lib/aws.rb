@@ -8,7 +8,7 @@ module Aws
 
   @config = {}
 
-  autoload :Client, "#{SRC}/client"
+  autoload :ClientFactory, "#{SRC}/client_factory"
   autoload :CredentialProviderChain, "#{SRC}/credential_provider_chain"
   autoload :Credentials, "#{SRC}/credentials"
   autoload :EmptyStructure, "#{SRC}/empty_structure"
