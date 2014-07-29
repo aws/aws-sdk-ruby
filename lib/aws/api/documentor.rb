@@ -10,7 +10,7 @@ module Aws
       def input
         params(nil) do
           if @operation.input
-            structure(@operation.input)
+            structure(@operation.input, [])
           else
             []
           end
@@ -20,7 +20,7 @@ module Aws
       def output
         params(nil) do
           if @operation.output
-            structure(@operation.output)
+            structure(@operation.output, [])
           else
             []
           end
@@ -42,8 +42,8 @@ module Aws
 
       def api_ref(shape)
         docs = shape.nil? ? '' : shape.documentation
-        if docs
-          "<div class=\"api-ref\">#{clean(docs)}</div>" unless docs.empty?
+        if docs && !docs.empty?
+          "<div class=\"api-ref\">#{clean(docs)}</div>"
         end
       end
 
@@ -53,53 +53,60 @@ module Aws
         ['<div class="params">', api_ref(shape)] + yield + ['</div>']
       end
 
-      def param(shape, key_name, value_type, required, &block)
+      def param(shape, key_name, value_type, required, visited, &block)
         lines = []
         lines << '<div class="param">'
-        lines << entry(shape, key_name, value_type, required)
-        yield(lines) if block_given?
-        lines += nested_params(shape)
+        lines << entry(shape, key_name, value_type, required, visited)
+
+        if visited.include?(shape)
+          lines << "AttributeValue, recursive"
+        else
+          visited = visited + [shape]
+          yield(lines) if block_given?
+          lines += nested_params(shape, visited)
+        end
+
         lines << '</div>'
         lines
       end
 
-      def nested_params(shape)
+      def nested_params(shape, visited)
         if leaf?(shape)
-          nested(shape)
+          nested(shape, visited)
         else
-          params(shape) { nested(shape) }
+          params(shape) { nested(shape, visited) }
         end
       end
 
-      def nested(shape)
+      def nested(shape, visited)
         case shape
-        when Seahorse::Model::Shapes::Structure then structure(shape)
-        when Seahorse::Model::Shapes::Map then map(shape)
-        when Seahorse::Model::Shapes::List then list(shape)
+        when Seahorse::Model::Shapes::Structure then structure(shape, visited)
+        when Seahorse::Model::Shapes::Map then map(shape, visited)
+        when Seahorse::Model::Shapes::List then list(shape, visited)
         else [api_ref(shape)]
         end
       end
 
-      def structure(shape)
+      def structure(shape, visited)
         shape.members.inject([]) do |lines, (member_name, member_shape)|
-          lines += param(member_shape, member_name, shape_type(member_shape), shape.required.include?(member_name))
+          lines += param(member_shape, member_name, shape_type(member_shape), shape.required.include?(member_name), visited)
         end
       end
 
-      def map(shape)
-        param(shape.value, key_name(shape), value_type(shape), false)
+      def map(shape, visited)
+        param(shape.value, key_name(shape), value_type(shape), false, visited)
       end
 
-      def list(shape)
+      def list(shape, visited)
         case shape.member
-        when Seahorse::Model::Shapes::Structure then structure(shape.member)
-        when Seahorse::Model::Shapes::Map then map(shape.member)
+        when Seahorse::Model::Shapes::Structure then structure(shape.member, visited)
+        when Seahorse::Model::Shapes::Map then map(shape.member, visited)
         when Seahorse::Model::Shapes::List then raise NotImplementedError
         else [api_ref(shape)]
         end
       end
 
-      def entry(shape, key_name, value_type, required)
+      def entry(shape, key_name, value_type, required, visited)
         classes = ['key']
         classes << 'required' if required
         line = '<div class="entry">'
