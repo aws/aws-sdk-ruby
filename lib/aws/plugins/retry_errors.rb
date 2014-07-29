@@ -44,7 +44,7 @@ module Aws
 
         def initialize(error, http_status_code)
           @error = error
-          @name = error.class.name.split('::').last
+          @name = extract_name(error)
           @http_status_code = http_status_code
         end
 
@@ -68,6 +68,16 @@ module Aws
 
         def server?
           (500..599).include?(@http_status_code)
+        end
+
+        private
+
+        def extract_name(error)
+          if error.is_a?(Errors::ServiceError)
+            error.class.code
+          else
+            error.class.name.to_s
+          end
         end
 
       end

@@ -20,6 +20,12 @@ module Aws
       #   that triggered the remote service to return this error.
       attr_reader :context
 
+      class << self
+
+        # @return [String]
+        attr_accessor :code
+
+      end
     end
 
     # Various plugins perform client-side checksums of responses.
@@ -90,7 +96,9 @@ module Aws
           if error_const_set?(constant)
             const_get(constant)
           else
-            const_set(constant, Class.new(const_get(:ServiceError)))
+            error_class = Class.new(const_get(:ServiceError))
+            error_class.code = constant.to_s
+            const_set(constant, error_class)
           end
         end
       end
