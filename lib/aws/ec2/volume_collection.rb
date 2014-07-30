@@ -76,6 +76,10 @@ module AWS
       #
       # @option options [String] :volume_type
       #
+      # @option options [Boolean] :encrypted (false)
+      #   When true, the volume will be encrypted.
+      #   For more information, refer to [Amazon EBS Encryption](http://http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
+      #
       # @return [Volume]
       #
       def create options = {}
