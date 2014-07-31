@@ -844,7 +844,7 @@
         "MultipartUpload":{
           "shape":"CompletedMultipartUpload",
           "locationName":"CompleteMultipartUpload",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/"
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         },
         "UploadId":{
           "shape":"MultipartUploadId",
@@ -1187,7 +1187,7 @@
         },
         "CreateBucketConfiguration":{
           "shape":"CreateBucketConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"CreateBucketConfiguration"
         },
         "GrantFullControl":{
@@ -1573,7 +1573,7 @@
         },
         "Delete":{
           "shape":"Delete",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"Delete"
         },
         "MFA":{
@@ -3148,7 +3148,7 @@
         },
         "AccessControlPolicy":{
           "shape":"AccessControlPolicy",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"AccessControlPolicy"
         },
         "Bucket":{
@@ -3205,7 +3205,7 @@
         },
         "CORSConfiguration":{
           "shape":"CORSConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"CORSConfiguration"
         },
         "ContentMD5":{
@@ -3232,7 +3232,7 @@
         },
         "LifecycleConfiguration":{
           "shape":"LifecycleConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"LifecycleConfiguration"
         }
       },
@@ -3252,7 +3252,7 @@
         },
         "BucketLoggingStatus":{
           "shape":"BucketLoggingStatus",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"BucketLoggingStatus"
         },
         "ContentMD5":{
@@ -3282,7 +3282,7 @@
         },
         "NotificationConfiguration":{
           "shape":"NotificationConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"NotificationConfiguration"
         }
       },
@@ -3331,7 +3331,7 @@
         },
         "RequestPaymentConfiguration":{
           "shape":"RequestPaymentConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"RequestPaymentConfiguration"
         }
       },
@@ -3356,7 +3356,7 @@
         },
         "Tagging":{
           "shape":"Tagging",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"Tagging"
         }
       },
@@ -3387,7 +3387,7 @@
         },
         "VersioningConfiguration":{
           "shape":"VersioningConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"VersioningConfiguration"
         }
       },
@@ -3412,7 +3412,7 @@
         },
         "WebsiteConfiguration":{
           "shape":"WebsiteConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"WebsiteConfiguration"
         }
       },
@@ -3433,7 +3433,7 @@
         },
         "AccessControlPolicy":{
           "shape":"AccessControlPolicy",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"AccessControlPolicy"
         },
         "Bucket":{
@@ -3752,7 +3752,7 @@
         },
         "RestoreRequest":{
           "shape":"RestoreRequest",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"RestoreRequest"
         }
       },

@@ -369,7 +369,7 @@
           "documentation":"<p>The specified pipeline has been deleted.</p>"
         }
       ],
-      "documentation":"<p>Adds tasks, schedules, and preconditions that control the behavior of the pipeline. You can use PutPipelineDefinition to populate a new pipeline. </p> <p> <a>PutPipelineDefinition</a> also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline. <ol> <li>An object is missing a name or identifier field.</li> <li>A string or reference field is empty.</li> <li>The number of objects in the pipeline exceeds the maximum allowed objects.</li> </ol> </p> <p> Pipeline object definitions are passed to the <a>PutPipelineDefinition</a> action and returned by the <a>GetPipelineDefinition</a> action. </p> </examples>"
+      "documentation":"<p>Adds tasks, schedules, and preconditions that control the behavior of the pipeline. You can use PutPipelineDefinition to populate a new pipeline. </p> <p> <a>PutPipelineDefinition</a> also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline. <ol> <li>An object is missing a name or identifier field.</li> <li>A string or reference field is empty.</li> <li>The number of objects in the pipeline exceeds the maximum allowed objects.</li> </ol> </p> <p> Pipeline object definitions are passed to the <a>PutPipelineDefinition</a> action and returned by the <a>GetPipelineDefinition</a> action. </p>"
     },
     "QueryObjects":{
       "name":"QueryObjects",
@@ -599,7 +599,7 @@
           "documentation":"<p>The specified pipeline has been deleted.</p>"
         }
       ],
-      "documentation":"<p>Tests the pipeline definition with a set of validation checks to ensure that it is well formed and can run without error. </p> </examples>"
+      "documentation":"<p>Tests the pipeline definition with a set of validation checks to ensure that it is well formed and can run without error. </p>"
     }
   },
   "shapes":{
