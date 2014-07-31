@@ -16,6 +16,8 @@ require 'json'
 require 'net/http'
 require 'net/https'
 require 'openssl'
+require 'uri'
+
 Dir.glob("#{File.dirname __FILE__}/originators/*.rb").each { |rb| require rb }
 
 module AWS
@@ -166,7 +168,15 @@ module AWS
       end
 
       def download url
-        raise MessageWasNotAuthenticError, "cert is not hosted at AWS URL (https): #{url}" unless url =~ /^https.*amazonaws\.com\/.*$/i
+        uri = URI.parse(url)
+        unless
+          uri.scheme == 'https' &&
+          uri.host.match(/^sns\.[a-zA-Z0-9\-]{3,}\.amazonaws\.com(\.cn)?$/) &&
+          File.extname(uri.path) == '.pem'
+        then
+          msg = "cert is not hosted at AWS URL (https): #{url}"
+          raise MessageWasNotAuthenticError, msg
+        end
         tries = 0
         begin
           resp = https_get(url)

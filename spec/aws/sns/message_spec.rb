@@ -87,13 +87,32 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
       AWS::SNS::Message.new(raw).should be_authentic
     end
 
-    %w(https://foo.com/wibble.pem https://amazonaws.com.dirtyhackers.com/itsrealhonest.pem http://sns.eu-west-1.amazonaws.com/foo.pem).each do |cert_url|
+    %w(
+      https://foo.com/wibble.pem
+      https://amazonaws.com.dirtyhackers.com/itsrealhonest.pem
+      http://sns.eu-west-1.amazonaws.com/foo.pem
+      https://sns.us-east-1.amazonaws.com/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.notpem
+    ).each do |cert_url|
 
       it "should return false if the SigningCertURL does not originate from https-AWS" do
         raw = File.open("#{File.dirname __FILE__}/support/sns_manually_sent.json", 'r') {|f| f.read}
         parsed = JSON.parse raw
         parsed['SigningCertURL'] = cert_url
         AWS::SNS::Message.new(parsed).authentic?.should be_false
+      end
+
+    end
+
+    %w(
+      https://sns.us-east-1.amazonaws.com/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.pem
+      https://sns.cn-north-1.amazonaws.com.cn/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.pem
+    ).each do |cert_url|
+
+      it "should return true if the SigningCertURL originates from https-AWS" do
+        raw = File.open("#{File.dirname __FILE__}/support/sns_manually_sent.json", 'r') {|f| f.read}
+        parsed = JSON.parse raw
+        parsed['SigningCertURL'] = cert_url
+        AWS::SNS::Message.new(parsed).authentic?.should be(true)
       end
 
     end
