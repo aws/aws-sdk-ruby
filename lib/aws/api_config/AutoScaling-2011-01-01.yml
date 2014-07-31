@@ -27,6 +27,25 @@
     :children:
       AttachInstancesResult:
         :ignore: true
+- :name: CompleteLifecycleAction
+  :method: :complete_lifecycle_action
+  :inputs:
+    LifecycleHookName:
+    - :string
+    - :required
+    AutoScalingGroupName:
+    - :string
+    - :required
+    LifecycleActionToken:
+    - :string
+    - :required
+    LifecycleActionResult:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      CompleteLifecycleActionResult:
+        :ignore: true
 - :name: CreateAutoScalingGroup
   :method: :create_auto_scaling_group
   :inputs:
@@ -188,6 +207,19 @@
   :outputs:
     :children:
       DeleteLaunchConfigurationResult:
+        :ignore: true
+- :name: DeleteLifecycleHook
+  :method: :delete_lifecycle_hook
+  :inputs:
+    LifecycleHookName:
+    - :string
+    - :required
+    AutoScalingGroupName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteLifecycleHookResult:
         :ignore: true
 - :name: DeleteNotificationConfiguration
   :method: :delete_notification_configuration
@@ -443,6 +475,45 @@
                     :type: :boolean
                   AssociatePublicIpAddress:
                     :type: :boolean
+- :name: DescribeLifecycleHookTypes
+  :method: :describe_lifecycle_hook_types
+  :inputs: {}
+  :outputs:
+    :children:
+      DescribeLifecycleHookTypesResult:
+        :ignore: true
+        :children:
+          LifecycleHookTypes:
+            :ignore: true
+            :children:
+              member:
+                :rename: :lifecycle_hook_types
+                :list: true
+- :name: DescribeLifecycleHooks
+  :method: :describe_lifecycle_hooks
+  :inputs:
+    AutoScalingGroupName:
+    - :string
+    - :required
+    LifecycleHookNames:
+    - :membered_list:
+      - :string
+  :outputs:
+    :children:
+      DescribeLifecycleHooksResult:
+        :ignore: true
+        :children:
+          LifecycleHooks:
+            :ignore: true
+            :children:
+              member:
+                :rename: :lifecycle_hooks
+                :list: true
+                :children:
+                  HeartbeatTimeout:
+                    :type: :integer
+                  GlobalTimeout:
+                    :type: :integer
 - :name: DescribeMetricCollectionTypes
   :method: :describe_metric_collection_types
   :inputs: {}
@@ -647,6 +718,36 @@
               member:
                 :rename: :termination_policy_types
                 :list: true
+- :name: DetachInstances
+  :method: :detach_instances
+  :inputs:
+    InstanceIds:
+    - :membered_list:
+      - :string
+    AutoScalingGroupName:
+    - :string
+    - :required
+    ShouldDecrementDesiredCapacity:
+    - :boolean
+    - :required
+  :outputs:
+    :children:
+      DetachInstancesResult:
+        :ignore: true
+        :children:
+          Activities:
+            :ignore: true
+            :children:
+              member:
+                :rename: :activities
+                :list: true
+                :children:
+                  StartTime:
+                    :type: :time
+                  EndTime:
+                    :type: :time
+                  Progress:
+                    :type: :integer
 - :name: DisableMetricsCollection
   :method: :disable_metrics_collection
   :inputs:
@@ -676,6 +777,36 @@
     :children:
       EnableMetricsCollectionResult:
         :ignore: true
+- :name: EnterStandby
+  :method: :enter_standby
+  :inputs:
+    InstanceIds:
+    - :membered_list:
+      - :string
+    AutoScalingGroupName:
+    - :string
+    - :required
+    ShouldDecrementDesiredCapacity:
+    - :boolean
+    - :required
+  :outputs:
+    :children:
+      EnterStandbyResult:
+        :ignore: true
+        :children:
+          Activities:
+            :ignore: true
+            :children:
+              member:
+                :rename: :activities
+                :list: true
+                :children:
+                  StartTime:
+                    :type: :time
+                  EndTime:
+                    :type: :time
+                  Progress:
+                    :type: :integer
 - :name: ExecutePolicy
   :method: :execute_policy
   :inputs:
@@ -689,6 +820,58 @@
   :outputs:
     :children:
       ExecutePolicyResult:
+        :ignore: true
+- :name: ExitStandby
+  :method: :exit_standby
+  :inputs:
+    InstanceIds:
+    - :membered_list:
+      - :string
+    AutoScalingGroupName:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      ExitStandbyResult:
+        :ignore: true
+        :children:
+          Activities:
+            :ignore: true
+            :children:
+              member:
+                :rename: :activities
+                :list: true
+                :children:
+                  StartTime:
+                    :type: :time
+                  EndTime:
+                    :type: :time
+                  Progress:
+                    :type: :integer
+- :name: PutLifecycleHook
+  :method: :put_lifecycle_hook
+  :inputs:
+    LifecycleHookName:
+    - :string
+    - :required
+    AutoScalingGroupName:
+    - :string
+    - :required
+    LifecycleTransition:
+    - :string
+    RoleARN:
+    - :string
+    NotificationTargetARN:
+    - :string
+    NotificationMetadata:
+    - :string
+    HeartbeatTimeout:
+    - :integer
+    DefaultResult:
+    - :string
+  :outputs:
+    :children:
+      PutLifecycleHookResult:
         :ignore: true
 - :name: PutNotificationConfiguration
   :method: :put_notification_configuration
@@ -756,6 +939,22 @@
   :outputs:
     :children:
       PutScheduledUpdateGroupActionResult:
+        :ignore: true
+- :name: RecordLifecycleActionHeartbeat
+  :method: :record_lifecycle_action_heartbeat
+  :inputs:
+    LifecycleHookName:
+    - :string
+    - :required
+    AutoScalingGroupName:
+    - :string
+    - :required
+    LifecycleActionToken:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      RecordLifecycleActionHeartbeatResult:
         :ignore: true
 - :name: ResumeProcesses
   :method: :resume_processes
