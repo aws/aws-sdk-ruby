@@ -91,8 +91,12 @@ module Aws
 
       def shape_attrs(shape)
         if xmlns = shape.metadata('xmlNamespace')
+          # temporary work-around until all models are updated to
+          # xmlNamespace with a hash and optional prefix
           if xmlns.is_a?(Hash)
-            { "xmlns:#{xmlns['prefix']}" => xmlns['uri'] }
+            key = 'xmlns'
+            key += ':' + xmlns['prefix'] if xmlns['prefix']
+            { key => xmlns['uri'] }
           else
             { 'xmlns' => xmlns }
           end
