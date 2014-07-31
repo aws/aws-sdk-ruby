@@ -1360,7 +1360,7 @@
           "documentation":"<p>Indicates that the user has been denied access to the requested resource.</p>"
         }
       ],
-      "documentation":"<p>Prepares to subscribe an endpoint by sending the endpoint a confirmation message. To actually create a subscription, the endpoint owner must call the <code>ConfirmSubscription</code> action with the token from the confirmation message. Confirmation tokens are valid for three days.</p> </examples>"
+      "documentation":"<p>Prepares to subscribe an endpoint by sending the endpoint a confirmation message. To actually create a subscription, the endpoint owner must call the <code>ConfirmSubscription</code> action with the token from the confirmation message. Confirmation tokens are valid for three days.</p>"
     },
     "Unsubscribe":{
       "name":"Unsubscribe",

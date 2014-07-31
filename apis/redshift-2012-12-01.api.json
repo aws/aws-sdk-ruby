@@ -347,7 +347,7 @@
           "documentation":"<p>The Elastic IP (EIP) is invalid or cannot be found.</p>"
         }
       ],
-      "documentation":"<p> Creates a new cluster. To create the cluster in virtual private cloud (VPC), you must provide cluster subnet group name. If you don't provide a cluster subnet group name or the cluster security group parameter, Amazon Redshift creates a non-VPC cluster, it associates the default cluster security group with the cluster. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> . </p> </examples>"
+      "documentation":"<p> Creates a new cluster. To create the cluster in virtual private cloud (VPC), you must provide cluster subnet group name. If you don't provide a cluster subnet group name or the cluster security group parameter, Amazon Redshift creates a non-VPC cluster, it associates the default cluster security group with the cluster. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> . </p>"
     },
     "CreateClusterParameterGroup":{
       "name":"CreateClusterParameterGroup",
@@ -1242,7 +1242,7 @@
           "documentation":"<p> The <i>ClusterIdentifier</i> parameter does not refer to an existing cluster. </p>"
         }
       ],
-      "documentation":"<p> Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> . </p> </examples>"
+      "documentation":"<p> Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Management Guide</i> . </p>"
     },
     "DescribeDefaultClusterParameters":{
       "name":"DescribeDefaultClusterParameters",

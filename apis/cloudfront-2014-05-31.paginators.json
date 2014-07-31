@@ -2,31 +2,31 @@
   "pagination": {
     "ListCloudFrontOriginAccessIdentities": {
       "input_token": "Marker",
-      "output_token": "NextMarker",
+      "output_token": "CloudFrontOriginAccessIdentityList.NextMarker",
       "limit_key": "MaxItems",
-      "more_results": "IsTruncated",
-      "result_key": "Items"
+      "more_results": "CloudFrontOriginAccessIdentityList.IsTruncated",
+      "result_key": "CloudFrontOriginAccessIdentityList.Items"
     },
     "ListDistributions": {
       "input_token": "Marker",
-      "output_token": "NextMarker",
+      "output_token": "DistributionList.NextMarker",
       "limit_key": "MaxItems",
-      "more_results": "IsTruncated",
-      "result_key": "Items"
+      "more_results": "DistributionList.IsTruncated",
+      "result_key": "DistributionList.Items"
     },
     "ListInvalidations": {
       "input_token": "Marker",
-      "output_token": "NextMarker",
+      "output_token": "InvalidationList.NextMarker",
       "limit_key": "MaxItems",
-      "more_results": "IsTruncated",
-      "result_key": "Items"
+      "more_results": "InvalidationList.IsTruncated",
+      "result_key": "InvalidationList.Items"
     },
     "ListStreamingDistributions": {
       "input_token": "Marker",
-      "output_token": "NextMarker",
+      "output_token": "StreamingDistributionList.NextMarker",
       "limit_key": "MaxItems",
-      "more_results": "IsTruncated",
-      "result_key": "Items"
+      "more_results": "StreamingDistributionList.IsTruncated",
+      "result_key": "StreamingDistributionList.Items"
     }
   }
 }
