@@ -196,6 +196,11 @@
       "paginators": "apis/route53-2013-04-01.paginators.json"
     }
   },
+  "Route53Domains": {
+    "2014-05-15": {
+      "api": "apis/route53domains-2014-05-15.api.json"
+    }
+  },
   "S3": {
     "2006-03-01": {
       "api": "apis/s3-2006-03-01.api.json",
