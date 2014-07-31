@@ -90,6 +90,10 @@
     "2014-03-24": {
       "api": "apis/elasticache-2014-03-24.api.json",
       "paginators": "apis/elasticache-2014-03-24.paginators.json"
+    },
+    "2014-07-15": {
+      "api": "apis/elasticache-2014-07-15.api.json",
+      "paginators": "apis/elasticache-2014-07-15.paginators.json"
     }
   },
   "ElasticBeanstalk": {
