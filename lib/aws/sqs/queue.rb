@@ -208,6 +208,7 @@ module AWS
           ReceivedMessage.new(self, m[:message_id], m[:receipt_handle],
             :body => m[:body],
             :md5 => m[:md5_of_body],
+            :request_id => (resp[:response_metadata] || {})[:request_id],
             :attributes => m[:attributes],
             :message_attributes => m[:message_attributes])
         end
