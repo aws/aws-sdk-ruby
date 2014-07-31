@@ -9,7 +9,7 @@
     "targetPrefix":"com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
     "protocol":"json"
   },
-  "documentation":"<fullname>AWS Cloud Trail</fullname> <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> <p>See the CloudTrail User Guide for information about the data that is included with each AWS API call listed in the log files.</p>",
+  "documentation":"<fullname>AWS CloudTrail</fullname> <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> <p>See the CloudTrail User Guide for information about the data that is included with each AWS API call listed in the log files.</p>",
   "operations":{
     "CreateTrail":{
       "name":"CreateTrail",
@@ -165,13 +165,13 @@
       },
       "input":{
         "shape":"DescribeTrailsRequest",
-        "documentation":"<p>Returns the list of trails.</p>"
+        "documentation":"<p>Returns information about the trail.</p>"
       },
       "output":{
         "shape":"DescribeTrailsResponse",
         "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
       },
-      "documentation":"<p>Retrieves the settings for some or all trails associated with an account. </p>"
+      "documentation":"<p>Retrieves settings for the trail associated with the current region for your account.</p>"
     },
     "GetTrailStatus":{
       "name":"GetTrailStatus",
@@ -467,10 +467,10 @@
       "members":{
         "trailNameList":{
           "shape":"TrailNameList",
-          "documentation":"<p>The list of trails.</p>"
+          "documentation":"<p>The trail returned.</p>"
         }
       },
-      "documentation":"<p>Returns the list of trails.</p>"
+      "documentation":"<p>Returns information about the trail.</p>"
     },
     "DescribeTrailsResponse":{
       "type":"structure",
