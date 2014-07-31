@@ -27,5 +27,5 @@ data:
       :user_name: user
       :user_id: AIDAJGIY4Z6DJLHUYPUJ6
       :arn: arn:aws:iam::469596866844:user/u3
-      :create_date: 2012-03-22 17:38:39 UTC
+      :create_date: 2012-03-22 17:38:39 Z
   :is_truncated: false
