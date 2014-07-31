@@ -2,8 +2,7 @@
   "pagination": {
     "BatchGetItem": {
       "input_token": "RequestItems",
-      "output_token": "UnprocessedKeys",
-      "result_key": "Responses[]"
+      "output_token": "UnprocessedKeys"
     },
     "ListTables": {
       "input_token": "ExclusiveStartTableName",

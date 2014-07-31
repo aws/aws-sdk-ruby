@@ -12,12 +12,6 @@
       "limit_key": "MaxRecords",
       "result_key": "DBInstances"
     },
-    "DescribeDBLogFiles": {
-      "input_token": "Marker",
-      "output_token": "Marker",
-      "limit_key": "MaxRecords",
-      "result_key": "DescribeDBLogFiles"
-    },
     "DescribeDBParameterGroups": {
       "input_token": "Marker",
       "output_token": "Marker",
@@ -95,13 +89,6 @@
       "output_token": "Marker",
       "limit_key": "MaxRecords",
       "result_key": "ReservedDBInstancesOfferings"
-    },
-    "DownloadDBLogFilePortion": {
-      "input_token": "Marker",
-      "output_token": "Marker",
-      "limit_key": "NumberOfLines",
-      "more_results": "AdditionalDataPending",
-      "result_key": "LogFileData"
     },
     "ListTagsForResource": {
       "result_key": "TagList"
