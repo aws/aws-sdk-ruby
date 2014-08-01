@@ -12,11 +12,10 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'http://github.com/aws/aws-sdk-core-ruby'
   spec.license       = 'Apache 2.0'
 
-  spec.require_paths = ['lib', 'vendor/seahorse/lib']
+  spec.require_paths = ['lib']
 
   spec.files =     ['README.md', 'LICENSE.txt', 'endpoints.json']
   spec.files += Dir['lib/**/*.rb']
-  spec.files += Dir['vendor/seahorse/lib/**/*.rb']
   spec.files += Dir['apis/*.json']
 
   spec.bindir = 'bin'
