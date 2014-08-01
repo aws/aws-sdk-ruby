@@ -643,9 +643,9 @@
   [Core::Response]"
 :delete_vpc_peering_connection: "Calls the DeleteVpcPeeringConnection API operation.\n@param
   [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:vpc_peering_connection_id` -
-  (String) The ID of the VPC peering connection.\n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:return` - (Boolean)"
+  *required* - (String) The ID of the VPC peering connection.\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:return` - (Boolean)"
 :delete_vpn_connection: "Calls the DeleteVpnConnection API operation.\n@param [Hash]
   options\n  * `:dry_run` - (Boolean) \n  * `:vpn_connection_id` - *required* - (String)
   The ID of the VPN connection.\n@return [Core::Response]"
@@ -1152,17 +1152,17 @@
   \     * `:key` - (String)\n      * `:value` - (String)"
 :describe_network_interface_attribute: "Calls the DescribeNetworkInterfaceAttribute
   API operation.\n@param [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:network_interface_id`
-  - *required* - (String) The ID of the network interface.\n  * `:description` - (String)
-  The description attribute.\n  * `:source_dest_check` - (String) The sourceDestCheck
-  attribute.\n  * `:groups` - (String) The groupSet attribute.\n  * `:attachment`
-  - (String) The attachment attribute.\n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:network_interface_id`
-  - (String)\n  * `:description` - (Hash)\n    * `:value` - (String)\n  * `:source_dest_check`
-  - (Hash)\n    * `:value` - (Boolean)\n  * `:group_set` - (Array<Hash>)\n    * `:group_name`
-  - (String)\n    * `:group_id` - (String)\n  * `:attachment` - (Hash)\n    * `:attachment_id`
-  - (String)\n    * `:instance_id` - (String)\n    * `:instance_owner_id` - (String)\n
-  \   * `:device_index` - (Integer)\n    * `:status` - (String)\n    * `:attach_time`
-  - (Time)\n    * `:delete_on_termination` - (Boolean)"
+  - *required* - (String) The ID of the network interface.\n  * `:attribute` - (String)
+  The attribute of the network interface.  Valid values include:\n    * `description`\n
+  \   * `groupSet`\n    * `sourceDestCheck`\n    * `attachment`\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:network_interface_id` - (String)\n  * `:description` - (Hash)\n    * `:value`
+  - (String)\n  * `:source_dest_check` - (Hash)\n    * `:value` - (Boolean)\n  * `:group_set`
+  - (Array<Hash>)\n    * `:group_name` - (String)\n    * `:group_id` - (String)\n
+  \ * `:attachment` - (Hash)\n    * `:attachment_id` - (String)\n    * `:instance_id`
+  - (String)\n    * `:instance_owner_id` - (String)\n    * `:device_index` - (Integer)\n
+  \   * `:status` - (String)\n    * `:attach_time` - (Time)\n    * `:delete_on_termination`
+  - (Boolean)"
 :describe_network_interfaces: "Calls the DescribeNetworkInterfaces API operation.\n@param
   [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:network_interface_ids` - (Array&lt;<String>)
   One or more network interface IDs. Default: Describes all your network interfaces.\n
@@ -1935,10 +1935,10 @@
   Request Authentication Alternative\" section of the Authenticating REST Requests
   topic in the Amazon Simple Storage Service Developer Guide.\n    * `:description`
   - (String) \n    * `:volume` - (Hash) \n      * `:size` - *required* - (Integer)
-  The size of the volume.\n  * `:platform` - *required* - (String) The instance operating
-  system.  Valid values include:\n    * `Windows`\n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:conversion_task` - (Hash)\n    * `:conversion_task_id` - (String)\n    * `:expiration_time`
+  The size of the volume, in GiB.\n  * `:platform` - *required* - (String) The instance
+  operating system.  Valid values include:\n    * `Windows`\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:conversion_task` - (Hash)\n    * `:conversion_task_id` - (String)\n    * `:expiration_time`
   - (String)\n    * `:import_instance` - (Hash)\n      * `:volumes` - (Array<Hash>)\n
   \       * `:bytes_converted` - (Integer)\n        * `:availability_zone` - (String)\n
   \       * `:image` - (Hash)\n          * `:format` - (String)\n          * `:size`
@@ -1961,33 +1961,34 @@
   [Core::Response] The `#data` method of the response object returns a hash with the
   following structure:\n\n  * `:key_name` - (String)\n  * `:key_fingerprint` - (String)"
 :import_volume: "Calls the ImportVolume API operation.\n@param [Hash] options\n  *
-  `:dry_run` - (Boolean) \n  * `:availability_zone` - (String) The Availability Zone
-  for the resulting Amazon EBS volume.\n  * `:image` - (Hash) \n    * `:format` -
-  *required* - (String) The disk image format.  Valid values include:\n      * `VMDK`\n
-  \     * `RAW`\n      * `VHD`\n    * `:bytes` - *required* - (Integer) \n    * `:import_manifest_url`
-  - *required* - (String) A presigned URL for the import manifest stored in Amazon
-  S3. For information about creating a presigned URL for an Amazon S3 object, read
-  the \"Query String Request Authentication Alternative\" section of the Authenticating
-  REST Requests topic in the Amazon Simple Storage Service Developer Guide.\n  * `:description`
-  - (String) An optional description for the volume being imported.\n  * `:volume`
-  - (Hash) \n    * `:size` - *required* - (Integer) The size of the volume.\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:conversion_task` - (Hash)\n    * `:conversion_task_id`
-  - (String)\n    * `:expiration_time` - (String)\n    * `:import_instance` - (Hash)\n
-  \     * `:volumes` - (Array<Hash>)\n        * `:bytes_converted` - (Integer)\n        *
-  `:availability_zone` - (String)\n        * `:image` - (Hash)\n          * `:format`
-  - (String)\n          * `:size` - (Integer)\n          * `:import_manifest_url`
-  - (String)\n          * `:checksum` - (String)\n        * `:volume` - (Hash)\n          *
-  `:size` - (Integer)\n          * `:id` - (String)\n        * `:status` - (String)\n
-  \       * `:status_message` - (String)\n        * `:description` - (String)\n      *
-  `:instance_id` - (String)\n      * `:platform` - (String)\n      * `:description`
-  - (String)\n    * `:import_volume` - (Hash)\n      * `:bytes_converted` - (Integer)\n
-  \     * `:availability_zone` - (String)\n      * `:description` - (String)\n      *
-  `:image` - (Hash)\n        * `:format` - (String)\n        * `:size` - (Integer)\n
-  \       * `:import_manifest_url` - (String)\n        * `:checksum` - (String)\n
-  \     * `:volume` - (Hash)\n        * `:size` - (Integer)\n        * `:id` - (String)\n
-  \   * `:state` - (String)\n    * `:status_message` - (String)\n    * `:tag_set`
-  - (Array<Hash>)\n      * `:key` - (String)\n      * `:value` - (String)"
+  `:dry_run` - (Boolean) \n  * `:availability_zone` - *required* - (String) The Availability
+  Zone for the resulting Amazon EBS volume.\n  * `:image` - *required* - (Hash) \n
+  \   * `:format` - *required* - (String) The disk image format.  Valid values include:\n
+  \     * `VMDK`\n      * `RAW`\n      * `VHD`\n    * `:bytes` - *required* - (Integer)
+  \n    * `:import_manifest_url` - *required* - (String) A presigned URL for the import
+  manifest stored in Amazon S3. For information about creating a presigned URL for
+  an Amazon S3 object, read the \"Query String Request Authentication Alternative\"
+  section of the Authenticating REST Requests topic in the Amazon Simple Storage Service
+  Developer Guide.\n  * `:description` - (String) An optional description for the
+  volume being imported.\n  * `:volume` - *required* - (Hash) \n    * `:size` - *required*
+  - (Integer) The size of the volume, in GiB.\n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:conversion_task` - (Hash)\n    * `:conversion_task_id` - (String)\n    * `:expiration_time`
+  - (String)\n    * `:import_instance` - (Hash)\n      * `:volumes` - (Array<Hash>)\n
+  \       * `:bytes_converted` - (Integer)\n        * `:availability_zone` - (String)\n
+  \       * `:image` - (Hash)\n          * `:format` - (String)\n          * `:size`
+  - (Integer)\n          * `:import_manifest_url` - (String)\n          * `:checksum`
+  - (String)\n        * `:volume` - (Hash)\n          * `:size` - (Integer)\n          *
+  `:id` - (String)\n        * `:status` - (String)\n        * `:status_message` -
+  (String)\n        * `:description` - (String)\n      * `:instance_id` - (String)\n
+  \     * `:platform` - (String)\n      * `:description` - (String)\n    * `:import_volume`
+  - (Hash)\n      * `:bytes_converted` - (Integer)\n      * `:availability_zone` -
+  (String)\n      * `:description` - (String)\n      * `:image` - (Hash)\n        *
+  `:format` - (String)\n        * `:size` - (Integer)\n        * `:import_manifest_url`
+  - (String)\n        * `:checksum` - (String)\n      * `:volume` - (Hash)\n        *
+  `:size` - (Integer)\n        * `:id` - (String)\n    * `:state` - (String)\n    *
+  `:status_message` - (String)\n    * `:tag_set` - (Array<Hash>)\n      * `:key` -
+  (String)\n      * `:value` - (String)"
 :modify_image_attribute: "Calls the ModifyImageAttribute API operation.\n@param [Hash]
   options\n  * `:dry_run` - (Boolean) \n  * `:image_id` - *required* - (String) The
   ID of the AMI.\n  * `:attribute` - (String) The name of the attribute to modify.\n
@@ -2188,9 +2189,9 @@
   One or more instance IDs.\n@return [Core::Response]"
 :register_image: "Calls the RegisterImage API operation.\n@param [Hash] options\n
   \ * `:dry_run` - (Boolean) \n  * `:image_location` - (String) The full path to your
-  AMI manifest in Amazon S3 storage.\n  * `:name` - (String) A name for your AMI.
-  Constraints: 3-128 alphanumeric characters, parenthesis (()), commas (,), slashes
-  (/), dashes (-), or underscores (_)\n  * `:description` - (String) A description
+  AMI manifest in Amazon S3 storage.\n  * `:name` - *required* - (String) A name for
+  your AMI. Constraints: 3-128 alphanumeric characters, parenthesis (()), commas (,),
+  slashes (/), dashes (-), or underscores (_)\n  * `:description` - (String) A description
   for your AMI.\n  * `:architecture` - (String) The architecture of the AMI. Default:
   For Amazon EBS-backed AMIs, i386. For instance store-backed AMIs, the architecture
   specified in the manifest file.  Valid values include:\n    * `i386`\n    * `x86_64`\n
@@ -2223,9 +2224,9 @@
   object returns a hash with the following structure:\n\n  * `:image_id` - (String)"
 :reject_vpc_peering_connection: "Calls the RejectVpcPeeringConnection API operation.\n@param
   [Hash] options\n  * `:dry_run` - (Boolean) \n  * `:vpc_peering_connection_id` -
-  (String) The ID of the VPC peering connection.\n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:return` - (Boolean)"
+  *required* - (String) The ID of the VPC peering connection.\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:return` - (Boolean)"
 :release_address: "Calls the ReleaseAddress API operation.\n@param [Hash] options\n
   \ * `:dry_run` - (Boolean) \n  * `:public_ip` - (String) [EC2-Classic] The Elastic
   IP address.\n  * `:allocation_id` - (String) [EC2-VPC] The allocation ID.\n@return
@@ -2269,14 +2270,14 @@
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:new_association_id` - (String)"
 :report_instance_status: "Calls the ReportInstanceStatus API operation.\n@param [Hash]
-  options\n  * `:dry_run` - (Boolean) \n  * `:instances` - (Array&lt;<String>) One
-  or more instances.\n  * `:status` - (String) The status of all instances listed.
-  \ Valid values include:\n    * `ok`\n    * `impaired`\n  * `:start_time` - (String&lt;<ISO8601
-  datetime>) The time at which the reported instance health state began.\n  * `:end_time`
+  options\n  * `:dry_run` - (Boolean) \n  * `:instances` - *required* - (Array&lt;<String>)
+  One or more instances.\n  * `:status` - *required* - (String) The status of all
+  instances listed.  Valid values include:\n    * `ok`\n    * `impaired`\n  * `:start_time`
   - (String&lt;<ISO8601 datetime>) The time at which the reported instance health
-  state ended.\n  * `:reason_codes` - (Array&lt;<String>) One or more reason codes
-  that describes the health state of your instance. instance-stuck-in-state: My instance
-  is stuck in a state. unresponsive: My instance is unresponsive. not-accepting-credentials:
+  state began.\n  * `:end_time` - (String&lt;<ISO8601 datetime>) The time at which
+  the reported instance health state ended.\n  * `:reason_codes` - *required* - (Array&lt;<String>)
+  One or more reason codes that describes the health state of your instance. instance-stuck-in-state:
+  My instance is stuck in a state. unresponsive: My instance is unresponsive. not-accepting-credentials:
   My instance is not accepting my credentials. password-not-available: A password
   is not available for my instance. performance-network: My instance is experiencing
   performance problems which I believe are network related. performance-instance-store:
@@ -2577,9 +2578,9 @@
   - (String) Unique, case-sensitive identifier you provide to ensure the idempotency
   of the request. For more information, see How to Ensure Idempotency in the Amazon
   Elastic Compute Cloud User Guide. Constraints: Maximum 64 ASCII characters\n  *
-  `:additional_info` - (String) \n  * `:network_interfaces` - (Array&lt;<Hash>) One
-  or more network interfaces.\n    * `:network_interface_id` - (String) The ID of
-  the network interface.\n    * `:device_index` - (Integer) The index of the device
+  `:additional_info` - (String) Reserved.\n  * `:network_interfaces` - (Array&lt;<Hash>)
+  One or more network interfaces.\n    * `:network_interface_id` - (String) The ID
+  of the network interface.\n    * `:device_index` - (Integer) The index of the device
   on the instance for the network interface attachment.\n    * `:subnet_id` - (String)
   The ID of the subnet associated with the network string.\n    * `:description` -
   (String) The description of the network interface.\n    * `:private_ip_address`
@@ -2646,11 +2647,12 @@
   \   * `:sriov_net_support` - (String)"
 :start_instances: "Calls the StartInstances API operation.\n@param [Hash] options\n
   \ * `:instance_ids` - *required* - (Array&lt;<String>) One or more instance IDs.\n
-  \ * `:additional_info` - (String) \n  * `:dry_run` - (Boolean) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:instances_set` - (Array<Hash>)\n    * `:instance_id` - (String)\n    * `:current_state`
-  - (Hash)\n      * `:code` - (Integer)\n      * `:name` - (String)\n    * `:previous_state`
-  - (Hash)\n      * `:code` - (Integer)\n      * `:name` - (String)"
+  \ * `:additional_info` - (String) Reserved.\n  * `:dry_run` - (Boolean) \n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:instances_set` - (Array<Hash>)\n    * `:instance_id`
+  - (String)\n    * `:current_state` - (Hash)\n      * `:code` - (Integer)\n      *
+  `:name` - (String)\n    * `:previous_state` - (Hash)\n      * `:code` - (Integer)\n
+  \     * `:name` - (String)"
 :stop_instances: "Calls the StopInstances API operation.\n@param [Hash] options\n
   \ * `:dry_run` - (Boolean) \n  * `:instance_ids` - *required* - (Array&lt;<String>)
   One or more instance IDs.\n  * `:force` - (Boolean) Forces the instances to stop.

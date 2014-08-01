@@ -1346,6 +1346,7 @@
     - :boolean
     VpcPeeringConnectionId:
     - :string
+    - :required
   :outputs:
     :children:
       return:
@@ -2172,14 +2173,7 @@
     NetworkInterfaceId:
     - :string
     - :required
-    Description:
-    - :string
-    SourceDestCheck:
-    - :string
-    GroupSet:
-    - :string
-    - :rename: groups
-    Attachment:
+    Attribute:
     - :string
   :outputs:
     :children:
@@ -3580,6 +3574,7 @@
     - :boolean
     AvailabilityZone:
     - :string
+    - :required
     Image:
     - :structure:
         Format:
@@ -3591,6 +3586,7 @@
         ImportManifestUrl:
         - :string
         - :required
+    - :required
     Description:
     - :string
     Volume:
@@ -3598,6 +3594,7 @@
         Size:
         - :long
         - :required
+    - :required
   :outputs:
     :children:
       conversionTask:
@@ -3948,6 +3945,7 @@
     - :string
     Name:
     - :string
+    - :required
     Description:
     - :string
     Architecture:
@@ -3997,6 +3995,7 @@
     - :boolean
     VpcPeeringConnectionId:
     - :string
+    - :required
   :outputs:
     :children:
       return:
@@ -4100,9 +4099,11 @@
     InstanceId:
     - :list:
       - :string
+    - :required
     - :rename: instances
     Status:
     - :string
+    - :required
     StartTime:
     - :timestamp
     EndTime:
@@ -4110,6 +4111,7 @@
     ReasonCode:
     - :list:
       - :string
+    - :required
     - :rename: reasonCodes
     Description:
     - :string
