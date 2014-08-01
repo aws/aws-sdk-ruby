@@ -36,6 +36,9 @@ module AWS
       # @return [String] An MD5 digest of the message body.
       attr_reader :md5
 
+      # @return [String] The request ID.
+      attr_reader :request_id
+
       # @api private
       attr_reader :attributes
 
@@ -56,6 +59,7 @@ module AWS
         @handle = handle
         @body = opts[:body]
         @md5 = opts[:md5]
+        @request_id = opts[:request_id]
         @attributes = opts[:attributes] || {}
         @message_attributes = opts[:message_attributes] || {}
         super
