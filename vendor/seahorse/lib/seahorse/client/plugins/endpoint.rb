@@ -48,11 +48,20 @@ module Seahorse
             path = uri.path.sub(/\/$/, '')
             path += context.operation.http_request_uri.split('?')[0]
             input = context.operation.input
-            uri.path = path.gsub(/{\w+}/) do |placeholder|
-              placeholder = placeholder[1..-2]
+            uri.path = path.gsub(/{\w+\+?}/) do |placeholder|
+              if placeholder.include?('+')
+                placeholder = placeholder[1..-3]
+                greedy = true
+              else
+                placeholder = placeholder[1..-2]
+              end
               name, shape = input.member_by_location_name(placeholder)
               param = context.params[name]
-              param.split('/').map{ |value| escape(value) }.join('/')
+              if greedy
+                param.split('/').map{ |value| escape(value) }.join('/')
+              else
+                escape(param)
+              end
             end
           end
 

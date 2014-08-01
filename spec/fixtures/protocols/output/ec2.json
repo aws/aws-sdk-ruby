@@ -54,7 +54,7 @@
         "type": "long"
       },
       "CharType": {
-        "type": "char"
+        "type": "character"
       }
     },
     "cases": [
@@ -93,9 +93,12 @@
         "type": "structure",
         "members": {
           "Blob": {
-            "type": "blob"
+            "shape": "BlobType"
           }
         }
+      },
+      "BlobType": {
+        "type": "blob"
       }
     },
     "cases": [
@@ -134,8 +137,11 @@
       "ListShape": {
         "type": "list",
         "member": {
-          "type": "string"
+          "shape": "StringType"
         }
+      },
+      "StringType": {
+        "type": "string"
       }
     },
     "cases": [
@@ -174,9 +180,12 @@
       "ListShape": {
         "type": "list",
         "member": {
-          "type": "string",
+          "shape": "StringType",
           "locationName": "item"
         }
+      },
+      "StringType": {
+        "type": "string"
       }
     },
     "cases": [
@@ -208,13 +217,19 @@
         "type": "structure",
         "members": {
           "ListMember": {
-            "type": "list",
-            "flattened": true,
-            "member": {
-              "type": "string"
-            }
+            "shape": "ListType",
+            "flattened": true
           }
         }
+      },
+      "ListType": {
+        "type": "list",
+        "member": {
+          "shape": "StringType"
+        }
+      },
+      "StringType": {
+        "type": "string"
       }
     },
     "cases": [
@@ -246,20 +261,29 @@
         "type": "structure",
         "members": {
           "Map": {
-            "type": "map",
-            "key": {
-              "type": "string"
-            },
-            "value": {
-              "type": "structure",
-              "members": {
-                "foo": {
-                  "type": "string"
-                }
-              }
-            }
+            "shape": "MapType"
           }
         }
+      },
+      "MapType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType"
+        },
+        "value": {
+          "shape": "StructureType"
+        }
+      },
+      "StructureType": {
+        "type": "structure",
+        "members": {
+          "foo": {
+            "shape": "StringType"
+          }
+        }
+      },
+      "StringType": {
+        "type": "string"
       }
     },
     "cases": [
@@ -298,16 +322,22 @@
         "type": "structure",
         "members": {
           "Map": {
-            "type": "map",
-            "flattened": true,
-            "key": {
-              "type": "string"
-            },
-            "value": {
-              "type": "string"
-            }
+            "shape": "MapType",
+            "flattened": true
           }
         }
+      },
+      "MapType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType"
+        },
+        "value": {
+          "shape": "StringType"
+        }
+      },
+      "StringType": {
+        "type": "string"
       }
     },
     "cases": [
@@ -342,18 +372,24 @@
         "type": "structure",
         "members": {
           "Map": {
-            "type": "map",
-            "flattened": true,
-            "key": {
-              "type": "string",
-              "locationName": "foo"
-            },
-            "value": {
-              "type": "string",
-              "locationName": "bar"
-            }
+            "shape": "MapType",
+            "flattened": true
           }
         }
+      },
+      "MapType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType",
+          "locationName": "foo"
+        },
+        "value": {
+          "shape": "StringType",
+          "locationName": "bar"
+        }
+      },
+      "StringType": {
+        "type": "string"
       }
     },
     "cases": [

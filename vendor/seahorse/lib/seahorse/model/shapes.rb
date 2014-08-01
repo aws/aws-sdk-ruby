@@ -361,7 +361,7 @@ module Seahorse
 
       end
 
-      class Char < String; end
+      class Character < String; end
 
       class Byte < String; end
 
@@ -422,7 +422,7 @@ module Seahorse
       register('blob', Shapes::Blob)
       register('byte', Shapes::Byte)
       register('boolean', Shapes::Boolean)
-      register('char', Shapes::Char)
+      register('character', Shapes::Character)
       register('double', Shapes::Double)
       register('float', Shapes::Float)
       register('integer', Shapes::Integer)

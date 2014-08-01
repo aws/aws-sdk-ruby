@@ -78,7 +78,7 @@ module Seahorse
               ['blob', Shapes::Blob],
               ['boolean', Shapes::Boolean],
               ['byte', Shapes::Byte],
-              ['char', Shapes::Char],
+              ['character', Shapes::Character],
               ['double', Shapes::Double],
               ['float', Shapes::Float],
               ['integer', Shapes::Integer],

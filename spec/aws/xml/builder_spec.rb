@@ -357,7 +357,7 @@ module Aws
 
         it 'applies xml namespace to the root node' do
           rules['locationName'] = 'FooRequest'
-          rules['xmlNamespace'] = 'http://foo.com'
+          rules['xmlNamespace'] = { 'uri' => 'http://foo.com' }
           rules['members'] = {
             'Item' => { 'type' => 'string' }
           }

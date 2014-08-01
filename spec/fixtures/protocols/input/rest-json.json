@@ -35,7 +35,7 @@
           "PipelineId": "foo"
         },
         "serialized": {
-          "body": null,
+          "body": "",
           "uri": "/2014-01-01/jobsByPipeline/foo",
           "headers": {}
         }
@@ -79,7 +79,7 @@
           "Foo": "bar"
         },
         "serialized": {
-          "body": null,
+          "body": "",
           "uri": "/2014-01-01/jobsByPipeline/bar",
           "headers": {}
         }
@@ -135,7 +135,7 @@
           "PageToken": "bar"
         },
         "serialized": {
-          "body": null,
+          "body": "",
           "uri": "/2014-01-01/jobsByPipeline/foo?Ascending=true&PageToken=bar",
           "headers": {}
         }
@@ -363,7 +363,7 @@
     ]
   },
   {
-    "description": "Null query params should be omitted from the request URI",
+    "description": "Omits null query params, but serializes empty strings",
     "metadata": {
       "protocol": "rest-json",
       "apiVersion": "2014-01-01"
@@ -374,7 +374,7 @@
         "members": {
           "foo": {
             "location":"querystring",
-            "locationName":"placeholder",
+            "locationName":"param-name",
             "type": "string"
           }
         }
@@ -406,11 +406,11 @@
           },
           "input": { "shape": "InputShape" }
         },
-        "params": { "foo": null },
+        "params": { "foo": "" },
         "serialized": {
           "method": "POST",
           "body": "",
-          "uri": "/path?abc=mno"
+          "uri": "/path?abc=mno&param-name="
         }
       }
     ]
