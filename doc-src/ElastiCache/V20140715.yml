@@ -1,0 +1,1009 @@
+---
+:authorize_cache_security_group_ingress: |-
+  Calls the AuthorizeCacheSecurityGroupIngress API operation.
+  @param [Hash] options
+    * `:cache_security_group_name` - *required* - (String) The cache security group which will allow network ingress.
+    * `:ec2_security_group_name` - *required* - (String) The Amazon EC2 security group to be authorized for ingress to the cache security group.
+    * `:ec2_security_group_owner_id` - *required* - (String) The AWS account number of the Amazon EC2 security group owner. Note that this is not the same thing as an AWS access key ID - you must provide a valid AWS account number for this parameter.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:owner_id` - (String)
+    * `:cache_security_group_name` - (String)
+    * `:description` - (String)
+    * `:ec_2_security_groups` - (Array<Hash>)
+      * `:status` - (String)
+      * `:ec2_security_group_name` - (String)
+      * `:ec2_security_group_owner_id` - (String)
+:copy_snapshot: |-
+  Calls the CopySnapshot API operation.
+  @param [Hash] options
+    * `:source_snapshot_name` - *required* - (String) The name of an existing snapshot from which to copy.
+    * `:target_snapshot_name` - *required* - (String) A name for the copied snapshot.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:snapshot_name` - (String)
+    * `:cache_cluster_id` - (String)
+    * `:snapshot_status` - (String)
+    * `:snapshot_source` - (String)
+    * `:cache_node_type` - (String)
+    * `:engine` - (String)
+    * `:engine_version` - (String)
+    * `:num_cache_nodes` - (Integer)
+    * `:preferred_availability_zone` - (String)
+    * `:cache_cluster_create_time` - (Time)
+    * `:preferred_maintenance_window` - (String)
+    * `:topic_arn` - (String)
+    * `:port` - (Integer)
+    * `:cache_parameter_group_name` - (String)
+    * `:cache_subnet_group_name` - (String)
+    * `:vpc_id` - (String)
+    * `:auto_minor_version_upgrade` - (Boolean)
+    * `:snapshot_retention_limit` - (Integer)
+    * `:snapshot_window` - (String)
+    * `:node_snapshots` - (Array<Hash>)
+      * `:cache_node_id` - (String)
+      * `:cache_size` - (String)
+      * `:cache_node_create_time` - (Time)
+      * `:snapshot_create_time` - (Time)
+:create_cache_cluster: "Calls the CreateCacheCluster API operation.\n@param [Hash]
+  options\n  * `:cache_cluster_id` - *required* - (String) The cache cluster identifier.
+  This parameter is stored as a lowercase string. Constraints: Must contain from 1
+  to 20 alphanumeric characters or hyphens. First character must be a letter. Cannot
+  end with a hyphen or contain two consecutive hyphens.\n  * `:replication_group_id`
+  - (String) The replication group to which this cache cluster should belong. If this
+  parameter is specified, the cache cluster will be added to the specified replication
+  group as a read replica; otherwise, the cache cluster will be a standalone primary
+  that is not part of any replication group.\n  * `:num_cache_nodes` - (Integer) The
+  initial number of cache nodes that the cache cluster will have. For a Memcached
+  cluster, valid values are between 1 and 20. If you need to exceed this limit, please
+  fill out the ElastiCache Limit Increase Request form at . For Redis, only single-node
+  cache clusters are supported at this time, so the value for this parameter must
+  be 1.\n  * `:cache_node_type` - (String) The compute and memory capacity of the
+  nodes in the cache cluster. Valid cache types Microcache.t1.micro | cache.m1.small
+  General Purpose Current Generationcache.m3.medium | cache.m3.large | cache.m3.xlarge
+  | cache.m3.2xlarge Previous Generationcache.m1.medium | cache.m1.large | cache.m1.xlarge
+  Compute Optimizedcache.c1.xlarge Memory Optimized Current Generationcache.r3.large
+  | cache.r3.xlarge | cache.r3.2xlarge | cache.r3.4xlarge | cache.r3.8xlarge Previous
+  Generationcache.m2.xlarge | cache.m2.2xlarge | cache.m2.4xlarge For a complete listing
+  of cache node types and specifications, see Cache Node Type-Specific Parameters
+  for Memcached or Cache Node Type-Specific Parameters for Redis and Amazon ElastiCache
+  Product Features and Details.\n  * `:engine` - (String) The name of the cache engine
+  to be used for this cache cluster. Valid values for this parameter are: memcached
+  | redis\n  * `:engine_version` - (String) The version number of the cache engine
+  to be used for this cluster. To view the supported cache engine versions, use the
+  DescribeCacheEngineVersions operation.\n  * `:cache_parameter_group_name` - (String)
+  The name of the cache parameter group to associate with this cache cluster. If this
+  argument is omitted, the default cache parameter group for the specified engine
+  will be used.\n  * `:cache_subnet_group_name` - (String) The name of the cache subnet
+  group to be used for the cache cluster. Use this parameter only when you are creating
+  a cluster in an Amazon Virtual Private Cloud (VPC).\n  * `:cache_security_group_names`
+  - (Array&lt;<String>) A list of cache security group names to associate with this
+  cache cluster. Use this parameter only when you are creating a cluster outside of
+  an Amazon Virtual Private Cloud (VPC).\n  * `:security_group_ids` - (Array&lt;<String>)
+  One or more VPC security groups associated with the cache cluster. Use this parameter
+  only when you are creating a cluster in an Amazon Virtual Private Cloud (VPC).\n
+  \ * `:snapshot_arns` - (Array&lt;<String>) A single-element string list containing
+  an Amazon Resource Name (ARN) that uniquely identifies a Redis RDB snapshot file
+  stored in Amazon S3. The snapshot file will be used to populate the Redis cache
+  in the new cache cluster. The Amazon S3 object name in the ARN cannot contain any
+  commas. Here is an example of an Amazon S3 ARN: arn:aws:s3:::my_bucket/snapshot1.rdb
+  Note: This parameter is only valid if the Engine parameter is redis.\n  * `:snapshot_name`
+  - (String) The name of a snapshot from which to restore data into the new cache
+  cluster. The snapshot's status changes to restoring while the new cache cluster
+  is being created.\n  * `:az_mode` - (String) Specifies whether the nodes in this
+  Memcached cache cluster are created in a single Availability Zone or created across
+  multiple Availability Zones. This option is only supported for Memcached cache clusters.
+  If the AZMode and PreferredAvailabilityZones are not specified, ElastiCache assumes
+  single-az mode. Valid values: single-az | cross-az.\n  * `:preferred_availability_zone`
+  - (String) The EC2 Availability Zone in which the cache cluster will be created.
+  All cache nodes belonging to this Memcached cache cluster are placed in the preferred
+  Availability Zone. If you want to create your cache nodes across multiple Availability
+  Zones, use PreferredAvailabilityZones. Default: System chosen Availability Zone.\n
+  \ * `:preferred_availability_zones` - (Array&lt;<String>) A list of the Availability
+  Zones in which nodes will be created. The order of the zones in the list is not
+  important. This option is only supported on Memcached clusters. If you are creating
+  your cache cluster in an Amazon VPC (recommended) you can only locate nodes in Availability
+  Zones that are associated with the subnets in the selected subnet group. The number
+  of Availability Zones listed must equal the value of NumCacheNodes. If you want
+  all your cache nodes in the same Availability Zone, use PreferredAvailabilityZone
+  instead or repeat the Availability Zone multiple times in the list. Default: System
+  chosen Availability Zones. Example: One Memcached node in each of three Availability
+  Zones: PreferredAvailabilityZones.member.1=us-east-1a&amp;PreferredAvailabilityZones.member.2=us-east-1b&amp;PreferredAvailabilityZones.member.3=us-east-1d
+  Example: All three Memcached nodes in one Availability Zone: PreferredAvailabilityZones.member.1=us-east-1a&amp;PreferredAvailabilityZones.member.2=us-east-1a&amp;PreferredAvailabilityZones.member.3=us-east-1a\n
+  \ * `:preferred_maintenance_window` - (String) The weekly time range (in UTC) during
+  which system maintenance can occur. Example: sun:05:00-sun:09:00\n  * `:port` -
+  (Integer) The port number on which each of the cache nodes will accept connections.\n
+  \ * `:notification_topic_arn` - (String) The Amazon Resource Name (ARN) of the Amazon
+  Simple Notification Service (SNS) topic to which notifications will be sent. The
+  Amazon SNS topic owner must be the same as the cache cluster owner.\n  * `:auto_minor_version_upgrade`
+  - (Boolean) Determines whether minor engine upgrades will be applied automatically
+  to the cache cluster during the maintenance window. A value of  `true`  allows these
+  upgrades to occur;  `false`  disables automatic upgrades. Default:  `true` \n  *
+  `:snapshot_retention_limit` - (Integer) The number of days for which ElastiCache
+  will retain automatic cache cluster snapshots before deleting them. For example,
+  if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will
+  be retained for 5 days before being deleted. If you do not specify this parameter,
+  then SnapshotRetentionLimit will be set to 0 (i.e., automatic backups will be disabled
+  for this cache cluster).\n  * `:snapshot_window` - (String) The daily time range
+  (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache
+  cluster. Example: 05:00-09:00 If you do not specify this parameter, then ElastiCache
+  will automatically choose an appropriate time range.\n@return [Core::Response] The
+  `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:cache_cluster_id` - (String)\n  * `:configuration_endpoint` - (Hash)\n    *
+  `:address` - (String)\n    * `:port` - (Integer)\n  * `:client_download_landing_page`
+  - (String)\n  * `:cache_node_type` - (String)\n  * `:engine` - (String)\n  * `:engine_version`
+  - (String)\n  * `:cache_cluster_status` - (String)\n  * `:num_cache_nodes` - (Integer)\n
+  \ * `:preferred_availability_zone` - (String)\n  * `:cache_cluster_create_time`
+  - (Time)\n  * `:preferred_maintenance_window` - (String)\n  * `:pending_modified_values`
+  - (Hash)\n    * `:num_cache_nodes` - (Integer)\n    * `:cache_node_ids_to_remove`
+  - (Array<String>)\n    * `:engine_version` - (String)\n  * `:notification_configuration`
+  - (Hash)\n    * `:topic_arn` - (String)\n    * `:topic_status` - (String)\n  * `:cache_security_groups`
+  - (Array<Hash>)\n    * `:cache_security_group_name` - (String)\n    * `:status`
+  - (String)\n  * `:cache_parameter_group` - (Hash)\n    * `:cache_parameter_group_name`
+  - (String)\n    * `:parameter_apply_status` - (String)\n    * `:cache_node_ids_to_reboot`
+  - (Array<String>)\n  * `:cache_subnet_group_name` - (String)\n  * `:cache_nodes`
+  - (Array<Hash>)\n    * `:cache_node_id` - (String)\n    * `:cache_node_status` -
+  (String)\n    * `:cache_node_create_time` - (Time)\n    * `:endpoint` - (Hash)\n
+  \     * `:address` - (String)\n      * `:port` - (Integer)\n    * `:parameter_group_status`
+  - (String)\n    * `:source_cache_node_id` - (String)\n    * `:customer_availability_zone`
+  - (String)\n  * `:auto_minor_version_upgrade` - (Boolean)\n  * `:security_groups`
+  - (Array<Hash>)\n    * `:security_group_id` - (String)\n    * `:status` - (String)\n
+  \ * `:replication_group_id` - (String)\n  * `:snapshot_retention_limit` - (Integer)\n
+  \ * `:snapshot_window` - (String)"
+:create_cache_parameter_group: |-
+  Calls the CreateCacheParameterGroup API operation.
+  @param [Hash] options
+    * `:cache_parameter_group_name` - *required* - (String) A user-specified name for the cache parameter group.
+    * `:cache_parameter_group_family` - *required* - (String) The name of the cache parameter group family the cache parameter group can be used with. Valid values are: memcached1.4 | redis2.6 | redis2.8
+    * `:description` - *required* - (String) A user-specified description for the cache parameter group.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cache_parameter_group_name` - (String)
+    * `:cache_parameter_group_family` - (String)
+    * `:description` - (String)
+:create_cache_security_group: |-
+  Calls the CreateCacheSecurityGroup API operation.
+  @param [Hash] options
+    * `:cache_security_group_name` - *required* - (String) A name for the cache security group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters. Must not be the word "Default". Example: mysecuritygroup
+    * `:description` - *required* - (String) A description for the cache security group.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:owner_id` - (String)
+    * `:cache_security_group_name` - (String)
+    * `:description` - (String)
+    * `:ec_2_security_groups` - (Array<Hash>)
+      * `:status` - (String)
+      * `:ec2_security_group_name` - (String)
+      * `:ec2_security_group_owner_id` - (String)
+:create_cache_subnet_group: |-
+  Calls the CreateCacheSubnetGroup API operation.
+  @param [Hash] options
+    * `:cache_subnet_group_name` - *required* - (String) A name for the cache subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: mysubnetgroup
+    * `:cache_subnet_group_description` - *required* - (String) A description for the cache subnet group.
+    * `:subnet_ids` - *required* - (Array&lt;<String>) A list of VPC subnet IDs for the cache subnet group.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cache_subnet_group_name` - (String)
+    * `:cache_subnet_group_description` - (String)
+    * `:vpc_id` - (String)
+    * `:subnets` - (Array<Hash>)
+      * `:subnet_identifier` - (String)
+      * `:subnet_availability_zone` - (Hash)
+        * `:name` - (String)
+:create_replication_group: |-
+  Calls the CreateReplicationGroup API operation.
+  @param [Hash] options
+    * `:replication_group_id` - *required* - (String) The replication group identifier. This parameter is stored as a lowercase string. Constraints: Must contain from 1 to 20 alphanumeric characters or hyphens. First character must be a letter. Cannot end with a hyphen or contain two consecutive hyphens.
+    * `:primary_cluster_id` - *required* - (String) The identifier of the cache cluster that will serve as the primary for this replication group. This cache cluster must already exist and have a status of available.
+    * `:replication_group_description` - *required* - (String) A user-specified description for the replication group.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:replication_group_id` - (String)
+    * `:description` - (String)
+    * `:status` - (String)
+    * `:pending_modified_values` - (Hash)
+      * `:primary_cluster_id` - (String)
+    * `:member_clusters` - (Array<String>)
+    * `:node_groups` - (Array<Hash>)
+      * `:node_group_id` - (String)
+      * `:status` - (String)
+      * `:primary_endpoint` - (Hash)
+        * `:address` - (String)
+        * `:port` - (Integer)
+      * `:node_group_members` - (Array<Hash>)
+        * `:cache_cluster_id` - (String)
+        * `:cache_node_id` - (String)
+        * `:read_endpoint` - (Hash)
+          * `:address` - (String)
+          * `:port` - (Integer)
+        * `:preferred_availability_zone` - (String)
+        * `:current_role` - (String)
+    * `:snapshotting_cluster_id` - (String)
+:create_snapshot: |-
+  Calls the CreateSnapshot API operation.
+  @param [Hash] options
+    * `:cache_cluster_id` - *required* - (String) The identifier of an existing cache cluster. The snapshot will be created from this cache cluster.
+    * `:snapshot_name` - *required* - (String) A name for the snapshot being created.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:snapshot_name` - (String)
+    * `:cache_cluster_id` - (String)
+    * `:snapshot_status` - (String)
+    * `:snapshot_source` - (String)
+    * `:cache_node_type` - (String)
+    * `:engine` - (String)
+    * `:engine_version` - (String)
+    * `:num_cache_nodes` - (Integer)
+    * `:preferred_availability_zone` - (String)
+    * `:cache_cluster_create_time` - (Time)
+    * `:preferred_maintenance_window` - (String)
+    * `:topic_arn` - (String)
+    * `:port` - (Integer)
+    * `:cache_parameter_group_name` - (String)
+    * `:cache_subnet_group_name` - (String)
+    * `:vpc_id` - (String)
+    * `:auto_minor_version_upgrade` - (Boolean)
+    * `:snapshot_retention_limit` - (Integer)
+    * `:snapshot_window` - (String)
+    * `:node_snapshots` - (Array<Hash>)
+      * `:cache_node_id` - (String)
+      * `:cache_size` - (String)
+      * `:cache_node_create_time` - (Time)
+      * `:snapshot_create_time` - (Time)
+:delete_cache_cluster: |-
+  Calls the DeleteCacheCluster API operation.
+  @param [Hash] options
+    * `:cache_cluster_id` - *required* - (String) The cache cluster identifier for the cluster to be deleted. This parameter is not case sensitive.
+    * `:final_snapshot_identifier` - (String) The name of a final cache cluster snapshot. ElastiCache creates the snapshot, and then deletes the cache cluster immediately afterward.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cache_cluster_id` - (String)
+    * `:configuration_endpoint` - (Hash)
+      * `:address` - (String)
+      * `:port` - (Integer)
+    * `:client_download_landing_page` - (String)
+    * `:cache_node_type` - (String)
+    * `:engine` - (String)
+    * `:engine_version` - (String)
+    * `:cache_cluster_status` - (String)
+    * `:num_cache_nodes` - (Integer)
+    * `:preferred_availability_zone` - (String)
+    * `:cache_cluster_create_time` - (Time)
+    * `:preferred_maintenance_window` - (String)
+    * `:pending_modified_values` - (Hash)
+      * `:num_cache_nodes` - (Integer)
+      * `:cache_node_ids_to_remove` - (Array<String>)
+      * `:engine_version` - (String)
+    * `:notification_configuration` - (Hash)
+      * `:topic_arn` - (String)
+      * `:topic_status` - (String)
+    * `:cache_security_groups` - (Array<Hash>)
+      * `:cache_security_group_name` - (String)
+      * `:status` - (String)
+    * `:cache_parameter_group` - (Hash)
+      * `:cache_parameter_group_name` - (String)
+      * `:parameter_apply_status` - (String)
+      * `:cache_node_ids_to_reboot` - (Array<String>)
+    * `:cache_subnet_group_name` - (String)
+    * `:cache_nodes` - (Array<Hash>)
+      * `:cache_node_id` - (String)
+      * `:cache_node_status` - (String)
+      * `:cache_node_create_time` - (Time)
+      * `:endpoint` - (Hash)
+        * `:address` - (String)
+        * `:port` - (Integer)
+      * `:parameter_group_status` - (String)
+      * `:source_cache_node_id` - (String)
+      * `:customer_availability_zone` - (String)
+    * `:auto_minor_version_upgrade` - (Boolean)
+    * `:security_groups` - (Array<Hash>)
+      * `:security_group_id` - (String)
+      * `:status` - (String)
+    * `:replication_group_id` - (String)
+    * `:snapshot_retention_limit` - (Integer)
+    * `:snapshot_window` - (String)
+:delete_cache_parameter_group: |-
+  Calls the DeleteCacheParameterGroup API operation.
+  @param [Hash] options
+    * `:cache_parameter_group_name` - *required* - (String) The name of the cache parameter group to delete. The specified cache security group must not be associated with any cache clusters.
+  @return [Core::Response]
+:delete_cache_security_group: |-
+  Calls the DeleteCacheSecurityGroup API operation.
+  @param [Hash] options
+    * `:cache_security_group_name` - *required* - (String) The name of the cache security group to delete. You cannot delete the default security group.
+  @return [Core::Response]
+:delete_cache_subnet_group: |-
+  Calls the DeleteCacheSubnetGroup API operation.
+  @param [Hash] options
+    * `:cache_subnet_group_name` - *required* - (String) The name of the cache subnet group to delete. Constraints: Must contain no more than 255 alphanumeric characters or hyphens.
+  @return [Core::Response]
+:delete_replication_group: |-
+  Calls the DeleteReplicationGroup API operation.
+  @param [Hash] options
+    * `:replication_group_id` - *required* - (String) The identifier for the replication group to be deleted. This parameter is not case sensitive.
+    * `:retain_primary_cluster` - (Boolean) If set to  `true` , all of the read replicas will be deleted, but the primary cache cluster will be retained.
+    * `:final_snapshot_identifier` - (String) The name of a final cache cluster snapshot. ElastiCache creates the snapshot from the primary cluster in the replication group, rather than one of the replicas; this is to ensure that it captures the freshest data. After the final snapshot is taken, the replication group is deleted immediately afterward.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:replication_group_id` - (String)
+    * `:description` - (String)
+    * `:status` - (String)
+    * `:pending_modified_values` - (Hash)
+      * `:primary_cluster_id` - (String)
+    * `:member_clusters` - (Array<String>)
+    * `:node_groups` - (Array<Hash>)
+      * `:node_group_id` - (String)
+      * `:status` - (String)
+      * `:primary_endpoint` - (Hash)
+        * `:address` - (String)
+        * `:port` - (Integer)
+      * `:node_group_members` - (Array<Hash>)
+        * `:cache_cluster_id` - (String)
+        * `:cache_node_id` - (String)
+        * `:read_endpoint` - (Hash)
+          * `:address` - (String)
+          * `:port` - (Integer)
+        * `:preferred_availability_zone` - (String)
+        * `:current_role` - (String)
+    * `:snapshotting_cluster_id` - (String)
+:delete_snapshot: |-
+  Calls the DeleteSnapshot API operation.
+  @param [Hash] options
+    * `:snapshot_name` - *required* - (String) The name of the snapshot to be deleted.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:snapshot_name` - (String)
+    * `:cache_cluster_id` - (String)
+    * `:snapshot_status` - (String)
+    * `:snapshot_source` - (String)
+    * `:cache_node_type` - (String)
+    * `:engine` - (String)
+    * `:engine_version` - (String)
+    * `:num_cache_nodes` - (Integer)
+    * `:preferred_availability_zone` - (String)
+    * `:cache_cluster_create_time` - (Time)
+    * `:preferred_maintenance_window` - (String)
+    * `:topic_arn` - (String)
+    * `:port` - (Integer)
+    * `:cache_parameter_group_name` - (String)
+    * `:cache_subnet_group_name` - (String)
+    * `:vpc_id` - (String)
+    * `:auto_minor_version_upgrade` - (Boolean)
+    * `:snapshot_retention_limit` - (Integer)
+    * `:snapshot_window` - (String)
+    * `:node_snapshots` - (Array<Hash>)
+      * `:cache_node_id` - (String)
+      * `:cache_size` - (String)
+      * `:cache_node_create_time` - (Time)
+      * `:snapshot_create_time` - (Time)
+:describe_cache_clusters: |-
+  Calls the DescribeCacheClusters API operation.
+  @param [Hash] options
+    * `:cache_cluster_id` - (String) The user-supplied cluster identifier. If this parameter is specified, only information about that specific cache cluster is returned. This parameter isn't case sensitive.
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+    * `:show_cache_node_info` - (Boolean) An optional flag that can be included in the DescribeCacheCluster request to retrieve information about the individual cache nodes.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:cache_clusters` - (Array<Hash>)
+      * `:cache_cluster_id` - (String)
+      * `:configuration_endpoint` - (Hash)
+        * `:address` - (String)
+        * `:port` - (Integer)
+      * `:client_download_landing_page` - (String)
+      * `:cache_node_type` - (String)
+      * `:engine` - (String)
+      * `:engine_version` - (String)
+      * `:cache_cluster_status` - (String)
+      * `:num_cache_nodes` - (Integer)
+      * `:preferred_availability_zone` - (String)
+      * `:cache_cluster_create_time` - (Time)
+      * `:preferred_maintenance_window` - (String)
+      * `:pending_modified_values` - (Hash)
+        * `:num_cache_nodes` - (Integer)
+        * `:cache_node_ids_to_remove` - (Array<String>)
+        * `:engine_version` - (String)
+      * `:notification_configuration` - (Hash)
+        * `:topic_arn` - (String)
+        * `:topic_status` - (String)
+      * `:cache_security_groups` - (Array<Hash>)
+        * `:cache_security_group_name` - (String)
+        * `:status` - (String)
+      * `:cache_parameter_group` - (Hash)
+        * `:cache_parameter_group_name` - (String)
+        * `:parameter_apply_status` - (String)
+        * `:cache_node_ids_to_reboot` - (Array<String>)
+      * `:cache_subnet_group_name` - (String)
+      * `:cache_nodes` - (Array<Hash>)
+        * `:cache_node_id` - (String)
+        * `:cache_node_status` - (String)
+        * `:cache_node_create_time` - (Time)
+        * `:endpoint` - (Hash)
+          * `:address` - (String)
+          * `:port` - (Integer)
+        * `:parameter_group_status` - (String)
+        * `:source_cache_node_id` - (String)
+        * `:customer_availability_zone` - (String)
+      * `:auto_minor_version_upgrade` - (Boolean)
+      * `:security_groups` - (Array<Hash>)
+        * `:security_group_id` - (String)
+        * `:status` - (String)
+      * `:replication_group_id` - (String)
+      * `:snapshot_retention_limit` - (Integer)
+      * `:snapshot_window` - (String)
+:describe_cache_engine_versions: |-
+  Calls the DescribeCacheEngineVersions API operation.
+  @param [Hash] options
+    * `:engine` - (String) The cache engine to return. Valid values: memcached | redis
+    * `:engine_version` - (String) The cache engine version to return. Example: 1.4.14
+    * `:cache_parameter_group_family` - (String) The name of a specific cache parameter group family to return details for. Constraints: Must be 1 to 255 alphanumeric characters First character must be a letter Cannot end with a hyphen or contain two consecutive hyphens
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+    * `:default_only` - (Boolean) If  `true` , specifies that only the default version of the specified engine or engine and major version combination is to be returned.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:cache_engine_versions` - (Array<Hash>)
+      * `:engine` - (String)
+      * `:engine_version` - (String)
+      * `:cache_parameter_group_family` - (String)
+      * `:cache_engine_description` - (String)
+      * `:cache_engine_version_description` - (String)
+:describe_cache_parameter_groups: |-
+  Calls the DescribeCacheParameterGroups API operation.
+  @param [Hash] options
+    * `:cache_parameter_group_name` - (String) The name of a specific cache parameter group to return details for.
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:cache_parameter_groups` - (Array<Hash>)
+      * `:cache_parameter_group_name` - (String)
+      * `:cache_parameter_group_family` - (String)
+      * `:description` - (String)
+:describe_cache_parameters: |-
+  Calls the DescribeCacheParameters API operation.
+  @param [Hash] options
+    * `:cache_parameter_group_name` - *required* - (String) The name of a specific cache parameter group to return details for.
+    * `:source` - (String) The parameter types to return. Valid values: user | system | engine-default
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:parameters` - (Array<Hash>)
+      * `:parameter_name` - (String)
+      * `:parameter_value` - (String)
+      * `:description` - (String)
+      * `:source` - (String)
+      * `:data_type` - (String)
+      * `:allowed_values` - (String)
+      * `:is_modifiable` - (Boolean)
+      * `:minimum_engine_version` - (String)
+    * `:cache_node_type_specific_parameters` - (Array<Hash>)
+      * `:parameter_name` - (String)
+      * `:description` - (String)
+      * `:source` - (String)
+      * `:data_type` - (String)
+      * `:allowed_values` - (String)
+      * `:is_modifiable` - (Boolean)
+      * `:minimum_engine_version` - (String)
+      * `:cache_node_type_specific_values` - (Array<Hash>)
+        * `:cache_node_type` - (String)
+        * `:value` - (String)
+:describe_cache_security_groups: |-
+  Calls the DescribeCacheSecurityGroups API operation.
+  @param [Hash] options
+    * `:cache_security_group_name` - (String) The name of the cache security group to return details for.
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:cache_security_groups` - (Array<Hash>)
+      * `:owner_id` - (String)
+      * `:cache_security_group_name` - (String)
+      * `:description` - (String)
+      * `:ec_2_security_groups` - (Array<Hash>)
+        * `:status` - (String)
+        * `:ec2_security_group_name` - (String)
+        * `:ec2_security_group_owner_id` - (String)
+:describe_cache_subnet_groups: |-
+  Calls the DescribeCacheSubnetGroups API operation.
+  @param [Hash] options
+    * `:cache_subnet_group_name` - (String) The name of the cache subnet group to return details for.
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:cache_subnet_groups` - (Array<Hash>)
+      * `:cache_subnet_group_name` - (String)
+      * `:cache_subnet_group_description` - (String)
+      * `:vpc_id` - (String)
+      * `:subnets` - (Array<Hash>)
+        * `:subnet_identifier` - (String)
+        * `:subnet_availability_zone` - (Hash)
+          * `:name` - (String)
+:describe_engine_default_parameters: |-
+  Calls the DescribeEngineDefaultParameters API operation.
+  @param [Hash] options
+    * `:cache_parameter_group_family` - *required* - (String) The name of the cache parameter group family. Valid values are: memcached1.4 | redis2.6 | redis2.8
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cache_parameter_group_family` - (String)
+    * `:marker` - (String)
+    * `:parameters` - (Array<Hash>)
+      * `:parameter_name` - (String)
+      * `:parameter_value` - (String)
+      * `:description` - (String)
+      * `:source` - (String)
+      * `:data_type` - (String)
+      * `:allowed_values` - (String)
+      * `:is_modifiable` - (Boolean)
+      * `:minimum_engine_version` - (String)
+    * `:cache_node_type_specific_parameters` - (Array<Hash>)
+      * `:parameter_name` - (String)
+      * `:description` - (String)
+      * `:source` - (String)
+      * `:data_type` - (String)
+      * `:allowed_values` - (String)
+      * `:is_modifiable` - (Boolean)
+      * `:minimum_engine_version` - (String)
+      * `:cache_node_type_specific_values` - (Array<Hash>)
+        * `:cache_node_type` - (String)
+        * `:value` - (String)
+:describe_events: |-
+  Calls the DescribeEvents API operation.
+  @param [Hash] options
+    * `:source_identifier` - (String) The identifier of the event source for which events will be returned. If not specified, then all sources are included in the response.
+    * `:source_type` - (String) The event source to retrieve events for. If no value is specified, all events are returned. Valid values are: cache-cluster | cache-parameter-group | cache-security-group | cache-subnet-group  Valid values include:
+      * `cache-cluster`
+      * `cache-parameter-group`
+      * `cache-security-group`
+      * `cache-subnet-group`
+    * `:start_time` - (String&lt;<ISO8601 datetime>) The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
+    * `:end_time` - (String&lt;<ISO8601 datetime>) The end of the time interval for which to retrieve events, specified in ISO 8601 format.
+    * `:duration` - (Integer) The number of minutes' worth of events to retrieve.
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:events` - (Array<Hash>)
+      * `:source_identifier` - (String)
+      * `:source_type` - (String)
+      * `:message` - (String)
+      * `:date` - (Time)
+:describe_replication_groups: |-
+  Calls the DescribeReplicationGroups API operation.
+  @param [Hash] options
+    * `:replication_group_id` - (String) The identifier for the replication group to be described. This parameter is not case sensitive. If you do not specify this parameter, information about all replication groups is returned.
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:replication_groups` - (Array<Hash>)
+      * `:replication_group_id` - (String)
+      * `:description` - (String)
+      * `:status` - (String)
+      * `:pending_modified_values` - (Hash)
+        * `:primary_cluster_id` - (String)
+      * `:member_clusters` - (Array<String>)
+      * `:node_groups` - (Array<Hash>)
+        * `:node_group_id` - (String)
+        * `:status` - (String)
+        * `:primary_endpoint` - (Hash)
+          * `:address` - (String)
+          * `:port` - (Integer)
+        * `:node_group_members` - (Array<Hash>)
+          * `:cache_cluster_id` - (String)
+          * `:cache_node_id` - (String)
+          * `:read_endpoint` - (Hash)
+            * `:address` - (String)
+            * `:port` - (Integer)
+          * `:preferred_availability_zone` - (String)
+          * `:current_role` - (String)
+      * `:snapshotting_cluster_id` - (String)
+:describe_reserved_cache_nodes: |-
+  Calls the DescribeReservedCacheNodes API operation.
+  @param [Hash] options
+    * `:reserved_cache_node_id` - (String) The reserved cache node identifier filter value. Use this parameter to show only the reservation that matches the specified reservation ID.
+    * `:reserved_cache_nodes_offering_id` - (String) The offering identifier filter value. Use this parameter to show only purchased reservations matching the specified offering identifier.
+    * `:cache_node_type` - (String) The cache node type filter value. Use this parameter to show only those reservations matching the specified cache node type.
+    * `:duration` - (String) The duration filter value, specified in years or seconds. Use this parameter to show only reservations for this duration. Valid Values: 1 | 3 | 31536000 | 94608000
+    * `:product_description` - (String) The product description filter value. Use this parameter to show only those reservations matching the specified product description.
+    * `:offering_type` - (String) The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. Valid values: "Light Utilization" | "Medium Utilization" | "Heavy Utilization"
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:reserved_cache_nodes` - (Array<Hash>)
+      * `:reserved_cache_node_id` - (String)
+      * `:reserved_cache_nodes_offering_id` - (String)
+      * `:cache_node_type` - (String)
+      * `:start_time` - (Time)
+      * `:duration` - (Integer)
+      * `:fixed_price` - (Numeric)
+      * `:usage_price` - (Numeric)
+      * `:cache_node_count` - (Integer)
+      * `:product_description` - (String)
+      * `:offering_type` - (String)
+      * `:state` - (String)
+      * `:recurring_charges` - (Array<Hash>)
+        * `:recurring_charge_amount` - (Numeric)
+        * `:recurring_charge_frequency` - (String)
+:describe_reserved_cache_nodes_offerings: |-
+  Calls the DescribeReservedCacheNodesOfferings API operation.
+  @param [Hash] options
+    * `:reserved_cache_nodes_offering_id` - (String) The offering identifier filter value. Use this parameter to show only the available offering that matches the specified reservation identifier. Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706
+    * `:cache_node_type` - (String) The cache node type filter value. Use this parameter to show only the available offerings matching the specified cache node type.
+    * `:duration` - (String) Duration filter value, specified in years or seconds. Use this parameter to show only reservations for a given duration. Valid Values: 1 | 3 | 31536000 | 94608000
+    * `:product_description` - (String) The product description filter value. Use this parameter to show only the available offerings matching the specified product description.
+    * `:offering_type` - (String) The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. Valid Values: "Light Utilization" | "Medium Utilization" | "Heavy Utilization"
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 100Constraints: minimum 20; maximum 100.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:reserved_cache_nodes_offerings` - (Array<Hash>)
+      * `:reserved_cache_nodes_offering_id` - (String)
+      * `:cache_node_type` - (String)
+      * `:duration` - (Integer)
+      * `:fixed_price` - (Numeric)
+      * `:usage_price` - (Numeric)
+      * `:product_description` - (String)
+      * `:offering_type` - (String)
+      * `:recurring_charges` - (Array<Hash>)
+        * `:recurring_charge_amount` - (Numeric)
+        * `:recurring_charge_frequency` - (String)
+:describe_snapshots: |-
+  Calls the DescribeSnapshots API operation.
+  @param [Hash] options
+    * `:cache_cluster_id` - (String) A user-supplied cluster identifier. If this parameter is specified, only snapshots associated with that specific cache cluster will be described.
+    * `:snapshot_name` - (String) A user-supplied name of the snapshot. If this parameter is specified, only this snapshot will be described.
+    * `:snapshot_source` - (String) If set to system, the output shows snapshots that were automatically created by ElastiCache. If set to user the output shows snapshots that were manually created. If omitted, the output shows both automatically and manually created snapshots.
+    * `:marker` - (String) An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+    * `:max_records` - (Integer) The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. Default: 50Constraints: minimum 20; maximum 50.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:marker` - (String)
+    * `:snapshots` - (Array<Hash>)
+      * `:snapshot_name` - (String)
+      * `:cache_cluster_id` - (String)
+      * `:snapshot_status` - (String)
+      * `:snapshot_source` - (String)
+      * `:cache_node_type` - (String)
+      * `:engine` - (String)
+      * `:engine_version` - (String)
+      * `:num_cache_nodes` - (Integer)
+      * `:preferred_availability_zone` - (String)
+      * `:cache_cluster_create_time` - (Time)
+      * `:preferred_maintenance_window` - (String)
+      * `:topic_arn` - (String)
+      * `:port` - (Integer)
+      * `:cache_parameter_group_name` - (String)
+      * `:cache_subnet_group_name` - (String)
+      * `:vpc_id` - (String)
+      * `:auto_minor_version_upgrade` - (Boolean)
+      * `:snapshot_retention_limit` - (Integer)
+      * `:snapshot_window` - (String)
+      * `:node_snapshots` - (Array<Hash>)
+        * `:cache_node_id` - (String)
+        * `:cache_size` - (String)
+        * `:cache_node_create_time` - (Time)
+        * `:snapshot_create_time` - (Time)
+:modify_cache_cluster: "Calls the ModifyCacheCluster API operation.\n@param [Hash]
+  options\n  * `:cache_cluster_id` - *required* - (String) The cache cluster identifier.
+  This value is stored as a lowercase string.\n  * `:num_cache_nodes` - (Integer)
+  The number of cache nodes that the cache cluster should have. If the value for NumCacheNodes
+  is greater than the sum of the number of current cache nodes and the number of cache
+  nodes pending creation (which may be zero), then more nodes will be added. If the
+  value is less than the number of existing cache nodes, then nodes will be removed.
+  If the value is equal to the number of current cache nodes, then any pending add
+  or remove requests are canceled. If you are removing cache nodes, you must use the
+  CacheNodeIdsToRemove parameter to provide the IDs of the specific cache nodes to
+  remove. For cache clusters running Redis, the value of NumCacheNodesmust be 1. Note:Adding
+  or removing Memcached cache nodes can be applied immediately or as a pending action.
+  See ApplyImmediately. A pending action to modify the number of cache nodes in a
+  cluster during its maintenance window, whether by adding or removing nodes in accordance
+  with the scale out architecture, is not queued. The customer's latest request to
+  add or remove nodes to the cluster overrides any previous pending actions to modify
+  the number of cache nodes in the cluster. For example, a request to remove 2 nodes
+  would override a previous pending action to remove 3 nodes. Similarly, a request
+  to add 2 nodes would override a previous pending action to remove 3 nodes and vice
+  versa. As Memcached cache nodes may now be provisioned in different Availability
+  Zones with flexible cache node placement, a request to add nodes does not automatically
+  override a previous pending action to add nodes. The customer can modify the previous
+  pending action to add more nodes or explicitly cancel the pending request and retry
+  the new request. To cancel pending actions to modify the number of cache nodes in
+  a cluster, use the ModifyCacheCluster request and set NumCacheNodes equal to the
+  number of cache nodes currently in the cache cluster.\n  * `:cache_node_ids_to_remove`
+  - (Array&lt;<String>) A list of cache node IDs to be removed. A node ID is a numeric
+  identifier (0001, 0002, etc.). This parameter is only valid when NumCacheNodes is
+  less than the existing number of cache nodes. The number of cache node IDs supplied
+  in this parameter must match the difference between the existing number of cache
+  nodes in the cluster or pending cache nodes, whichever is greater, and the value
+  of NumCacheNodes in the request. For example: If you have 3 active cache nodes,
+  7 pending cache nodes, and the number of cache nodes in this ModifyCacheCluser call
+  is 5, you must list 2 (7 - 5) cache node IDs to remove.\n  * `:cache_security_group_names`
+  - (Array&lt;<String>) A list of cache security group names to authorize on this
+  cache cluster. This change is asynchronously applied as soon as possible. This parameter
+  can be used only with clusters that are created outside of an Amazon Virtual Private
+  Cloud (VPC). Constraints: Must contain no more than 255 alphanumeric characters.
+  Must not be \"Default\".\n  * `:security_group_ids` - (Array&lt;<String>) Specifies
+  the VPC Security Groups associated with the cache cluster. This parameter can be
+  used only with clusters that are created in an Amazon Virtual Private Cloud (VPC).\n
+  \ * `:preferred_maintenance_window` - (String) The weekly time range (in UTC) during
+  which system maintenance can occur. Note that system maintenance may result in an
+  outage. This change is made immediately. If you are moving this window to the current
+  time, there must be at least 120 minutes between the current time and end of the
+  window to ensure that pending changes are applied.\n  * `:notification_topic_arn`
+  - (String) The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications
+  will be sent. The Amazon SNS topic owner must be same as the cache cluster owner.\n
+  \ * `:cache_parameter_group_name` - (String) The name of the cache parameter group
+  to apply to this cache cluster. This change is asynchronously applied as soon as
+  possible for parameters when the ApplyImmediately parameter is specified as  `true`
+  \ for this request.\n  * `:notification_topic_status` - (String) The status of the
+  Amazon SNS notification topic. Notifications are sent only if the status is active.
+  Valid values: active | inactive\n  * `:apply_immediately` - (Boolean) If  `true`
+  , this parameter causes the modifications in this request and any pending modifications
+  to be applied, asynchronously and as soon as possible, regardless of the PreferredMaintenanceWindow
+  setting for the cache cluster. If  `false` , then changes to the cache cluster are
+  applied on the next maintenance reboot, or the next failure reboot, whichever occurs
+  first. If you perform a ModifyCacheCluster before a pending modification is applied,
+  the pending modification is replaced by the newer modification. Valid values:  `true`
+  \ |  `false`  Default:  `false` \n  * `:engine_version` - (String) The upgraded
+  version of the cache engine to be run on the cache nodes.\n  * `:auto_minor_version_upgrade`
+  - (Boolean) If  `true` , then minor engine upgrades will be applied automatically
+  to the cache cluster during the maintenance window. Valid values:  `true`  |  `false`
+  \ Default:  `true` \n  * `:snapshot_retention_limit` - (Integer) The number of days
+  for which ElastiCache will retain automatic cache cluster snapshots before deleting
+  them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that
+  was taken today will be retained for 5 days before being deleted. ImportantIf the
+  value of SnapshotRetentionLimit is set to zero (0), backups are turned off.\n  *
+  `:snapshot_window` - (String) The daily time range (in UTC) during which ElastiCache
+  will begin taking a daily snapshot of your cache cluster.\n  * `:az_mode` - (String)
+  Specifies whether the new nodes in this Memcached cache cluster are all created
+  in a single Availability Zone or created across multiple Availability Zones. Valid
+  values: single-az | cross-az. This option is only supported for Memcached cache
+  clusters. You cannot specify single-az if the Memcached cache cluster already has
+  cache nodes in different Availability Zones. If cross-az is specified, existing
+  Memcached nodes remain in their current Availability Zone. Only newly created nodes
+  will be located in different Availability Zones. For instructions on how to move
+  existing Memcached nodes to different Availability Zones, see the Availability Zone
+  Considerations section of Cache Node Considerations for Memcached.\n  * `:new_availability_zones`
+  - (Array&lt;<String>) The list of Availability Zones where the new Memcached cache
+  nodes will be created. This parameter is only valid when NumCacheNodes in the request
+  is greater than the sum of the number of active cache nodes and the number of cache
+  nodes pending creation (which may be zero). The number of Availability Zones supplied
+  in this list must match the cache nodes being added in this request. This option
+  is only supported on Memcached clusters. Scenarios: Scenario 1: You have 3 active
+  nodes and wish to add 2 nodes. Specify NumCacheNodes=5 (3 + 2) and opitonally specify
+  two Availability Zones for the two new nodes. Scenario 2: You have 3 active nodes
+  and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node.
+  Specify NumCacheNodes=6 ((3 + 2) + 1) and optionally specify an Availability Zone
+  for the new node. Scenario 3: You want to cancel all pending actions. You want to
+  cancel all pending actions. Specify NumCacheNodes=3 (the original number of nodes).
+  You cannot cancel just some pending operations. If you want to cancel a subset of
+  the pending operations, cancel all of them, then re-request those you want. The
+  Availability Zone placement of nodes pending creation cannot be modified. If you
+  wish to cancel any nodes pending creation, add 0 nodes by setting NumCacheNodes
+  to the number of current nodes. If cross-az is specified, existing Memcached nodes
+  remain in their current Availability Zone. Only newly created nodes can be located
+  in different Availability Zones. For guidance on how to move existing Memcached
+  nodes to different Availability Zones, see the Availability Zone Considerations
+  section of Cache Node Considerations for Memcached. Example: NewAvailabilityZones.member.1=us-east-1a&amp;NewAvailabilityZones.member.2=us-east-1b&amp;NewAvailabilityZones.member.3=us-east-1d\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:cache_cluster_id` - (String)\n  * `:configuration_endpoint`
+  - (Hash)\n    * `:address` - (String)\n    * `:port` - (Integer)\n  * `:client_download_landing_page`
+  - (String)\n  * `:cache_node_type` - (String)\n  * `:engine` - (String)\n  * `:engine_version`
+  - (String)\n  * `:cache_cluster_status` - (String)\n  * `:num_cache_nodes` - (Integer)\n
+  \ * `:preferred_availability_zone` - (String)\n  * `:cache_cluster_create_time`
+  - (Time)\n  * `:preferred_maintenance_window` - (String)\n  * `:pending_modified_values`
+  - (Hash)\n    * `:num_cache_nodes` - (Integer)\n    * `:cache_node_ids_to_remove`
+  - (Array<String>)\n    * `:engine_version` - (String)\n  * `:notification_configuration`
+  - (Hash)\n    * `:topic_arn` - (String)\n    * `:topic_status` - (String)\n  * `:cache_security_groups`
+  - (Array<Hash>)\n    * `:cache_security_group_name` - (String)\n    * `:status`
+  - (String)\n  * `:cache_parameter_group` - (Hash)\n    * `:cache_parameter_group_name`
+  - (String)\n    * `:parameter_apply_status` - (String)\n    * `:cache_node_ids_to_reboot`
+  - (Array<String>)\n  * `:cache_subnet_group_name` - (String)\n  * `:cache_nodes`
+  - (Array<Hash>)\n    * `:cache_node_id` - (String)\n    * `:cache_node_status` -
+  (String)\n    * `:cache_node_create_time` - (Time)\n    * `:endpoint` - (Hash)\n
+  \     * `:address` - (String)\n      * `:port` - (Integer)\n    * `:parameter_group_status`
+  - (String)\n    * `:source_cache_node_id` - (String)\n    * `:customer_availability_zone`
+  - (String)\n  * `:auto_minor_version_upgrade` - (Boolean)\n  * `:security_groups`
+  - (Array<Hash>)\n    * `:security_group_id` - (String)\n    * `:status` - (String)\n
+  \ * `:replication_group_id` - (String)\n  * `:snapshot_retention_limit` - (Integer)\n
+  \ * `:snapshot_window` - (String)"
+:modify_cache_parameter_group: |-
+  Calls the ModifyCacheParameterGroup API operation.
+  @param [Hash] options
+    * `:cache_parameter_group_name` - *required* - (String) The name of the cache parameter group to modify.
+    * `:parameter_name_values` - *required* - (Array&lt;<Hash>) An array of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional. A maximum of 20 parameters may be modified per request.
+      * `:parameter_name` - (String) The name of the parameter.
+      * `:parameter_value` - (String) The value of the parameter.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cache_parameter_group_name` - (String)
+:modify_cache_subnet_group: |-
+  Calls the ModifyCacheSubnetGroup API operation.
+  @param [Hash] options
+    * `:cache_subnet_group_name` - *required* - (String) The name for the cache subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: mysubnetgroup
+    * `:cache_subnet_group_description` - (String) A description for the cache subnet group.
+    * `:subnet_ids` - (Array&lt;<String>) The EC2 subnet IDs for the cache subnet group.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cache_subnet_group_name` - (String)
+    * `:cache_subnet_group_description` - (String)
+    * `:vpc_id` - (String)
+    * `:subnets` - (Array<Hash>)
+      * `:subnet_identifier` - (String)
+      * `:subnet_availability_zone` - (Hash)
+        * `:name` - (String)
+:modify_replication_group: "Calls the ModifyReplicationGroup API operation.\n@param
+  [Hash] options\n  * `:replication_group_id` - *required* - (String) The identifier
+  of the replication group to modify.\n  * `:replication_group_description` - (String)
+  A description for the replication group. Maximum length is 255 characters.\n  *
+  `:cache_security_group_names` - (Array&lt;<String>) A list of cache security group
+  names to authorize for the clusters in this replication group. This change is asynchronously
+  applied as soon as possible. This parameter can be used only with replication groups
+  containing cache clusters running outside of an Amazon Virtual Private Cloud (VPC).
+  Constraints: Must contain no more than 255 alphanumeric characters. Must not be
+  \"Default\".\n  * `:security_group_ids` - (Array&lt;<String>) Specifies the VPC
+  Security Groups associated with the cache clusters in the replication group. This
+  parameter can be used only with replication groups containing cache clusters running
+  in an Amazon Virtual Private Cloud (VPC).\n  * `:preferred_maintenance_window` -
+  (String) The weekly time range (in UTC) during which replication group system maintenance
+  can occur. Note that system maintenance may result in an outage. This change is
+  made immediately. If you are moving this window to the current time, there must
+  be at least 120 minutes between the current time and end of the window to ensure
+  that pending changes are applied.\n  * `:notification_topic_arn` - (String) The
+  Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be
+  sent. The Amazon SNS topic owner must be same as the replication group owner.\n
+  \ * `:cache_parameter_group_name` - (String) The name of the cache parameter group
+  to apply to all of the cache nodes in this replication group. This change is asynchronously
+  applied as soon as possible for parameters when the ApplyImmediately parameter is
+  specified as  `true`  for this request.\n  * `:notification_topic_status` - (String)
+  The status of the Amazon SNS notification topic for the replication group. Notifications
+  are sent only if the status is active. Valid values: active | inactive\n  * `:apply_immediately`
+  - (Boolean) If  `true` , this parameter causes the modifications in this request
+  and any pending modifications to be applied, asynchronously and as soon as possible,
+  regardless of the PreferredMaintenanceWindow setting for the replication group.
+  If  `false` , then changes to the nodes in the replication group are applied on
+  the next maintenance reboot, or the next failure reboot, whichever occurs first.
+  Valid values:  `true`  |  `false`  Default:  `false` \n  * `:engine_version` - (String)
+  The upgraded version of the cache engine to be run on the nodes in the replication
+  group..\n  * `:auto_minor_version_upgrade` - (Boolean) Determines whether minor
+  engine upgrades will be applied automatically to all of the cache nodes in the replication
+  group during the maintenance window. A value of  `true`  allows these upgrades to
+  occur;  `false`  disables automatic upgrades.\n  * `:primary_cluster_id` - (String)
+  If this parameter is specified, ElastiCache will promote each of the nodes in the
+  specified cache cluster to the primary role. The nodes of all other clusters in
+  the replication group will be read replicas.\n  * `:snapshot_retention_limit` -
+  (Integer) The number of days for which ElastiCache will retain automatic cache cluster
+  snapshots before deleting them. For example, if you set SnapshotRetentionLimit to
+  5, then a snapshot that was taken today will be retained for 5 days before being
+  deleted. ImportantIf the value of SnapshotRetentionLimit is set to zero (0), backups
+  are turned off.\n  * `:snapshot_window` - (String) The daily time range (in UTC)
+  during which ElastiCache will begin taking a daily snapshot of the cache cluster
+  specified by SnapshottingClusterId. Example: 05:00-09:00 If you do not specify this
+  parameter, then ElastiCache will automatically choose an appropriate time range.\n
+  \ * `:snapshotting_cluster_id` - (String) The cache cluster ID that will be used
+  as the daily snapshot source for the replication group.\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:replication_group_id` - (String)\n  * `:description` - (String)\n  * `:status`
+  - (String)\n  * `:pending_modified_values` - (Hash)\n    * `:primary_cluster_id`
+  - (String)\n  * `:member_clusters` - (Array<String>)\n  * `:node_groups` - (Array<Hash>)\n
+  \   * `:node_group_id` - (String)\n    * `:status` - (String)\n    * `:primary_endpoint`
+  - (Hash)\n      * `:address` - (String)\n      * `:port` - (Integer)\n    * `:node_group_members`
+  - (Array<Hash>)\n      * `:cache_cluster_id` - (String)\n      * `:cache_node_id`
+  - (String)\n      * `:read_endpoint` - (Hash)\n        * `:address` - (String)\n
+  \       * `:port` - (Integer)\n      * `:preferred_availability_zone` - (String)\n
+  \     * `:current_role` - (String)\n  * `:snapshotting_cluster_id` - (String)"
+:purchase_reserved_cache_nodes_offering: |-
+  Calls the PurchaseReservedCacheNodesOffering API operation.
+  @param [Hash] options
+    * `:reserved_cache_nodes_offering_id` - *required* - (String) The ID of the reserved cache node offering to purchase. Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706
+    * `:reserved_cache_node_id` - (String) A customer-specified identifier to track this reservation. Example: myreservationID
+    * `:cache_node_count` - (Integer) The number of cache node instances to reserve. Default: 1
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:reserved_cache_node_id` - (String)
+    * `:reserved_cache_nodes_offering_id` - (String)
+    * `:cache_node_type` - (String)
+    * `:start_time` - (Time)
+    * `:duration` - (Integer)
+    * `:fixed_price` - (Numeric)
+    * `:usage_price` - (Numeric)
+    * `:cache_node_count` - (Integer)
+    * `:product_description` - (String)
+    * `:offering_type` - (String)
+    * `:state` - (String)
+    * `:recurring_charges` - (Array<Hash>)
+      * `:recurring_charge_amount` - (Numeric)
+      * `:recurring_charge_frequency` - (String)
+:reboot_cache_cluster: |-
+  Calls the RebootCacheCluster API operation.
+  @param [Hash] options
+    * `:cache_cluster_id` - *required* - (String) The cache cluster identifier. This parameter is stored as a lowercase string.
+    * `:cache_node_ids_to_reboot` - *required* - (Array&lt;<String>) A list of cache node IDs to reboot. A node ID is a numeric identifier (0001, 0002, etc.). To reboot an entire cache cluster, specify all of the cache node IDs.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:cache_cluster_id` - (String)
+    * `:configuration_endpoint` - (Hash)
+      * `:address` - (String)
+      * `:port` - (Integer)
+    * `:client_download_landing_page` - (String)
+    * `:cache_node_type` - (String)
+    * `:engine` - (String)
+    * `:engine_version` - (String)
+    * `:cache_cluster_status` - (String)
+    * `:num_cache_nodes` - (Integer)
+    * `:preferred_availability_zone` - (String)
+    * `:cache_cluster_create_time` - (Time)
+    * `:preferred_maintenance_window` - (String)
+    * `:pending_modified_values` - (Hash)
+      * `:num_cache_nodes` - (Integer)
+      * `:cache_node_ids_to_remove` - (Array<String>)
+      * `:engine_version` - (String)
+    * `:notification_configuration` - (Hash)
+      * `:topic_arn` - (String)
+      * `:topic_status` - (String)
+    * `:cache_security_groups` - (Array<Hash>)
+      * `:cache_security_group_name` - (String)
+      * `:status` - (String)
+    * `:cache_parameter_group` - (Hash)
+      * `:cache_parameter_group_name` - (String)
+      * `:parameter_apply_status` - (String)
+      * `:cache_node_ids_to_reboot` - (Array<String>)
+    * `:cache_subnet_group_name` - (String)
+    * `:cache_nodes` - (Array<Hash>)
+      * `:cache_node_id` - (String)
+      * `:cache_node_status` - (String)
+      * `:cache_node_create_time` - (Time)
+      * `:endpoint` - (Hash)
+        * `:address` - (String)
+        * `:port` - (Integer)
+      * `:parameter_group_status` - (String)
+      * `:source_cache_node_id` - (String)
+      * `:customer_availability_zone` - (String)
+    * `:auto_minor_version_upgrade` - (Boolean)
+    * `:security_groups` - (Array<Hash>)
+      * `:security_group_id` - (String)
+      * `:status` - (String)
+    * `:replication_group_id` - (String)
+    * `:snapshot_retention_limit` - (Integer)
+    * `:snapshot_window` - (String)
+:reset_cache_parameter_group: "Calls the ResetCacheParameterGroup API operation.\n@param
+  [Hash] options\n  * `:cache_parameter_group_name` - *required* - (String) The name
+  of the cache parameter group to reset.\n  * `:reset_all_parameters` - (Boolean)
+  If  `true` , all parameters in the cache parameter group will be reset to default
+  values. If  `false` , no such action occurs. Valid values:  `true`  |  `false` \n
+  \ * `:parameter_name_values` - *required* - (Array&lt;<Hash>) An array of parameter
+  names to be reset. If you are not resetting the entire cache parameter group, you
+  must specify at least one parameter name.\n    * `:parameter_name` - (String) The
+  name of the parameter.\n    * `:parameter_value` - (String) The value of the parameter.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:cache_parameter_group_name` - (String)"
+:revoke_cache_security_group_ingress: |-
+  Calls the RevokeCacheSecurityGroupIngress API operation.
+  @param [Hash] options
+    * `:cache_security_group_name` - *required* - (String) The name of the cache security group to revoke ingress from.
+    * `:ec2_security_group_name` - *required* - (String) The name of the Amazon EC2 security group to revoke access from.
+    * `:ec2_security_group_owner_id` - *required* - (String) The AWS account number of the Amazon EC2 security group owner. Note that this is not the same thing as an AWS access key ID - you must provide a valid AWS account number for this parameter.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:owner_id` - (String)
+    * `:cache_security_group_name` - (String)
+    * `:description` - (String)
+    * `:ec_2_security_groups` - (Array<Hash>)
+      * `:status` - (String)
+      * `:ec2_security_group_name` - (String)
+      * `:ec2_security_group_owner_id` - (String)

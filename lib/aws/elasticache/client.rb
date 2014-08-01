@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon ElastiCache.
     class Client < Core::QueryClient
 
-      API_VERSION = '2014-03-24'
+      API_VERSION = '2014-07-15'
 
       signature_version :Version4, 'elasticache'
 
@@ -34,5 +34,8 @@ module AWS
       define_client_methods('2014-03-24')
     end
 
+    class Client::V20140715 < Client
+      define_client_methods('2014-07-15')
+    end
   end
 end
