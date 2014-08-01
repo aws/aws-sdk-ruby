@@ -78,18 +78,35 @@
                     :name: Region
                     :type: :string
                     :position: 4
+                  :geo_location:
+                    :name: GeoLocation
+                    :type: :hash
+                    :position: 5
+                    :members:
+                      :continent_code:
+                        :name: ContinentCode
+                        :type: :string
+                        :position: 0
+                      :country_code:
+                        :name: CountryCode
+                        :type: :string
+                        :position: 1
+                      :subdivision_code:
+                        :name: SubdivisionCode
+                        :type: :string
+                        :position: 2
                   :failover:
                     :name: Failover
                     :type: :string
-                    :position: 5
+                    :position: 6
                   :ttl:
                     :name: TTL
                     :type: :integer
-                    :position: 6
+                    :position: 7
                   :resource_records:
                     :name: ResourceRecords
                     :type: :array
-                    :position: 7
+                    :position: 8
                     :members:
                       :name: ResourceRecord
                       :type: :hash
@@ -102,7 +119,7 @@
                   :alias_target:
                     :name: AliasTarget
                     :type: :hash
-                    :position: 8
+                    :position: 9
                     :members:
                       :hosted_zone_id:
                         :name: HostedZoneId
@@ -123,7 +140,7 @@
                   :health_check_id:
                     :name: HealthCheckId
                     :type: :string
-                    :position: 9
+                    :position: 10
   :outputs:
     :children:
       ChangeInfo:
@@ -388,6 +405,37 @@
             :rename: :checker_ip_ranges
             :list: true
             :type: :string
+- :name: GetGeoLocation
+  :method: :get_geo_location
+  :http:
+    :verb: GET
+    :uri: /2013-04-01/geolocation?continentcode=:continent_code&countrycode=:country_code&subdivisioncode=:subdivision_code
+  :inputs:
+    :continent_code:
+      :type: :string
+      :position: 0
+    :country_code:
+      :type: :string
+      :position: 1
+    :subdivision_code:
+      :type: :string
+      :position: 2
+  :outputs:
+    :children:
+      GeoLocationDetails:
+        :children:
+          ContinentCode:
+            :type: :string
+          ContinentName:
+            :type: :string
+          CountryCode:
+            :type: :string
+          CountryName:
+            :type: :string
+          SubdivisionCode:
+            :type: :string
+          SubdivisionName:
+            :type: :string
 - :name: GetHealthCheck
   :method: :get_health_check
   :http:
@@ -472,6 +520,55 @@
                 :rename: :name_servers
                 :list: true
                 :type: :string
+- :name: ListGeoLocations
+  :method: :list_geo_locations
+  :http:
+    :verb: GET
+    :uri: /2013-04-01/geolocations?startcontinentcode=:start_continent_code&startcountrycode=:start_country_code&startsubdivisioncode=:start_subdivision_code&maxitems=:max_items
+  :inputs:
+    :start_continent_code:
+      :type: :string
+      :position: 0
+    :start_country_code:
+      :type: :string
+      :position: 1
+    :start_subdivision_code:
+      :type: :string
+      :position: 2
+    :max_items:
+      :type: :integer
+      :position: 3
+  :outputs:
+    :children:
+      GeoLocationDetailsList:
+        :ignore: true
+        :children:
+          GeoLocationDetails:
+            :rename: :geo_location_details_list
+            :list: true
+            :children:
+              ContinentCode:
+                :type: :string
+              ContinentName:
+                :type: :string
+              CountryCode:
+                :type: :string
+              CountryName:
+                :type: :string
+              SubdivisionCode:
+                :type: :string
+              SubdivisionName:
+                :type: :string
+      IsTruncated:
+        :type: :boolean
+      NextContinentCode:
+        :type: :string
+      NextCountryCode:
+        :type: :string
+      NextSubdivisionCode:
+        :type: :string
+      MaxItems:
+        :type: :string
 - :name: ListHealthChecks
   :method: :list_health_checks
   :http:
@@ -608,6 +705,14 @@
                 :type: :integer
               Region:
                 :type: :string
+              GeoLocation:
+                :children:
+                  ContinentCode:
+                    :type: :string
+                  CountryCode:
+                    :type: :string
+                  SubdivisionCode:
+                    :type: :string
               Failover:
                 :type: :string
               TTL:

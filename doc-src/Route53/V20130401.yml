@@ -1,5 +1,5 @@
 ---
-:change_resource_record_sets: ! "Calls the POST ChangeResourceRecordSets API operation.\n@param
+:change_resource_record_sets: "Calls the POST ChangeResourceRecordSets API operation.\n@param
   [Hash] options\n  * `:hosted_zone_id` - *required* - (String) The ID of the hosted
   zone that contains the resource record sets that you want to change.\n  * `:change_batch`
   - *required* - (Hash) A complex type that contains an optional comment and the Changes
@@ -26,23 +26,36 @@
   current resource record set.  Valid values include:\n          * `us-east-1`\n          *
   `us-west-1`\n          * `us-west-2`\n          * `eu-west-1`\n          * `ap-southeast-1`\n
   \         * `ap-southeast-2`\n          * `ap-northeast-1`\n          * `sa-east-1`\n
-  \         * `cn-north-1`\n        * `:failover` - (String) Failover resource record
-  sets only: Among resource record sets that have the same combination of DNS name
-  and type, a value that indicates whether the current resource record set is a primary
-  or secondary resource record set. A failover set may contain at most one resource
-  record set marked as primary and one resource record set marked as secondary. A
-  resource record set marked as primary will be returned if any of the following are
-  \ `true` : (1) an associated health check is passing, (2) if the resource record
-  set is an alias with the evaluate target health and at least one target resource
-  record set is healthy, (3) both the primary and secondary resource record set are
-  failing health checks or (4) there is no secondary resource record set. A secondary
-  resource record set will be returned if: (1) the primary is failing a health check
-  and either the secondary is passing a health check or has no associated health check,
-  or (2) there is no primary resource record set. Valid values: PRIMARY | SECONDARY
-  \ Valid values include:\n          * `PRIMARY`\n          * `SECONDARY`\n        *
-  `:ttl` - (Integer) The cache time to live for the current resource record set.\n
-  \       * `:resource_records` - (Array&lt;Hash>) A complex type that contains the
-  resource records for the current resource record set.\n        * `:ResourceRecord`
+  \         * `cn-north-1`\n        * `:geo_location` - (Hash) Geo location resource
+  record sets only: Among resource record sets that have the same combination of DNS
+  name and type, a value that specifies the geo location for the current resource
+  record set.\n          * `:continent_code` - (String) The code for a continent geo
+  location. Note: only continent locations have a continent code. Valid values: AF
+  | AN | AS | EU | OC | NA | SA Constraint: Specifying ContinentCode with either CountryCode
+  or SubdivisionCode returns an InvalidInput error.\n          * `:country_code` -
+  (String) The code for a country geo location. The default location uses '*' for
+  the country code and will match all locations that are not matched by a geo location.
+  The default geo location uses a * for the country code. All other country codes
+  follow the ISO 3166 two-character code.\n          * `:subdivision_code` - (String)
+  The code for a country's subdivision (e.g., a province of Canada). A subdivision
+  code is only valid with the appropriate country code. Constraint: Specifying SubdivisionCode
+  without CountryCode returns an InvalidInput error.\n        * `:failover` - (String)
+  Failover resource record sets only: Among resource record sets that have the same
+  combination of DNS name and type, a value that indicates whether the current resource
+  record set is a primary or secondary resource record set. A failover set may contain
+  at most one resource record set marked as primary and one resource record set marked
+  as secondary. A resource record set marked as primary will be returned if any of
+  the following are  `true` : (1) an associated health check is passing, (2) if the
+  resource record set is an alias with the evaluate target health and at least one
+  target resource record set is healthy, (3) both the primary and secondary resource
+  record set are failing health checks or (4) there is no secondary resource record
+  set. A secondary resource record set will be returned if: (1) the primary is failing
+  a health check and either the secondary is passing a health check or has no associated
+  health check, or (2) there is no primary resource record set. Valid values: PRIMARY
+  | SECONDARY  Valid values include:\n          * `PRIMARY`\n          * `SECONDARY`\n
+  \       * `:ttl` - (Integer) The cache time to live for the current resource record
+  set.\n        * `:resource_records` - (Array&lt;Hash>) A complex type that contains
+  the resource records for the current resource record set.\n        * `:ResourceRecord`
   - (Hash) \n          * `:value` - *required* - (String) The value of the Value element
   for the current resource record set.\n        * `:alias_target` - (Hash) Alias resource
   record sets only: Information about the Elastic Load Balancing LoadBalancer to which
@@ -69,7 +82,7 @@
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:change_info` - (Hash)\n    * `:id` - (String)\n    * `:status` - (String)\n
   \   * `:submitted_at` - (Time)\n    * `:comment` - (String)"
-:change_tags_for_resource: ! "Calls the POST ChangeTagsForResource API operation.\n@param
+:change_tags_for_resource: "Calls the POST ChangeTagsForResource API operation.\n@param
   [Hash] options\n  * `:resource_type` - *required* - (String) The type of the resource.
   The resource type for health checks is healthcheck.  Valid values include:\n    *
   `healthcheck`\n  * `:resource_id` - *required* - (String) The ID of the resource
@@ -80,166 +93,272 @@
   for a Tag.\n  * `:remove_tag_keys` - (Array&lt;String>) A list of Tag keys that
   you want to remove from the specified resource.\n  * `:Key` - (String) \n@return
   [Core::Response]"
-:create_health_check: ! "Calls the POST CreateHealthCheck API operation.\n@param [Hash]
-  options\n  * `:caller_reference` - *required* - (String) A unique string that identifies
-  the request and that allows failed CreateHealthCheck requests to be retried without
-  the risk of executing the operation twice. You must use a unique CallerReference
-  string every time you create a health check. CallerReference can be any unique string;
-  you might choose to use a string that identifies your project. Valid characters
-  are any Unicode code points that are legal in an XML 1.0 document. The UTF-8 encoding
-  of the value must be less than 128 bytes.\n  * `:health_check_config` - *required*
-  - (Hash) A complex type that contains health check configuration.\n    * `:ip_address`
-  - (String) IP Address of the instance being checked.\n    * `:port` - (Integer)
-  Port on which connection will be opened to the instance to health check. For HTTP
-  this defaults to 80 if the port is not specified. For HTTPS this defaults to 443
-  if the port is not specified.\n    * `:type` - *required* - (String) The type of
-  health check to be performed. Currently supported protocols are TCP, HTTP, and HTTPS.
-  \ Valid values include:\n      * `HTTP`\n      * `HTTPS`\n      * `HTTP_STR_MATCH`\n
-  \     * `HTTPS_STR_MATCH`\n      * `TCP`\n    * `:resource_path` - (String) Path
-  to ping on the instance to check the health. Required for HTTP and HTTPS health
-  checks, HTTP request is issued to the instance on the given port and path.\n    *
-  `:fully_qualified_domain_name` - (String) Fully qualified domain name of the instance
-  to be health checked.\n    * `:search_string` - (String) A string to search for
-  in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH
-  health checks.\n    * `:request_interval` - (Integer) The number of seconds between
-  the time that Route 53 gets a response from your endpoint and the time that it sends
-  the next health-check request. Each Route 53 health checker makes requests at this
-  interval. Valid values are 10 and 30. The default value is 30.\n    * `:failure_threshold`
-  - (Integer) The number of consecutive health checks that an endpoint must pass or
-  fail for Route 53 to change the current status of the endpoint from unhealthy to
-  healthy or vice versa. Valid values are integers between 1 and 10. For more information,
-  see \"How Amazon Route 53 Determines Whether an Endpoint Is Healthy\" in the Amazon
-  Route 53 Developer Guide.\n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:health_check` - (Hash)\n
-  \   * `:id` - (String)\n    * `:caller_reference` - (String)\n    * `:health_check_config`
-  - (Hash)\n      * `:ip_address` - (String)\n      * `:port` - (Integer)\n      *
-  `:type` - (String)\n      * `:resource_path` - (String)\n      * `:fully_qualified_domain_name`
-  - (String)\n      * `:search_string` - (String)\n      * `:request_interval` - (Integer)\n
-  \     * `:failure_threshold` - (Integer)\n    * `:health_check_version` - (Integer)"
-:create_hosted_zone: ! "Calls the POST CreateHostedZone API operation.\n@param [Hash]
-  options\n  * `:name` - *required* - (String) The name of the domain. This must be
-  a fully-specified domain, for example, www.example.com. The trailing dot is optional;
-  Route 53 assumes that the domain name is fully qualified. This means that Route
-  53 treats www.example.com (without a trailing dot) and www.example.com. (with a
-  trailing dot) as identical. This is the name you have registered with your DNS registrar.
-  You should ask your registrar to change the authoritative name servers for your
-  domain to the set of NameServers elements returned in DelegationSet.\n  * `:caller_reference`
-  - *required* - (String) A unique string that identifies the request and that allows
-  failed CreateHostedZone requests to be retried without the risk of executing the
-  operation twice. You must use a unique CallerReference string every time you create
-  a hosted zone. CallerReference can be any unique string; you might choose to use
-  a string that identifies your project, such as DNSMigration_01. Valid characters
-  are any Unicode code points that are legal in an XML 1.0 document. The UTF-8 encoding
-  of the value must be less than 128 bytes.\n  * `:hosted_zone_config` - (Hash) A
-  complex type that contains an optional comment about your hosted zone.\n    * `:comment`
-  - (String) An optional comment about your hosted zone. If you don't want to specify
-  a comment, you can omit the HostedZoneConfig and Comment elements from the XML document.\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:hosted_zone` - (Hash)\n    * `:id` - (String)\n    *
-  `:name` - (String)\n    * `:caller_reference` - (String)\n    * `:config` - (Hash)\n
-  \     * `:comment` - (String)\n    * `:resource_record_set_count` - (Integer)\n
-  \ * `:change_info` - (Hash)\n    * `:id` - (String)\n    * `:status` - (String)\n
-  \   * `:submitted_at` - (Time)\n    * `:comment` - (String)\n  * `:delegation_set`
-  - (Hash)\n    * `:name_servers` - (Array<String>)"
-:delete_health_check: ! "Calls the DELETE DeleteHealthCheck API operation.\n@param
-  [Hash] options\n  * `:health_check_id` - *required* - (String) The ID of the health
-  check to delete.\n@return [Core::Response]"
-:delete_hosted_zone: ! "Calls the DELETE DeleteHostedZone API operation.\n@param [Hash]
-  options\n  * `:id` - *required* - (String) The ID of the request. Include this ID
-  in a call to GetChange to track when the change has propagated to all Route 53 DNS
-  servers.\n@return [Core::Response] The `#data` method of the response object returns
-  a hash with the following structure:\n\n  * `:change_info` - (Hash)\n    * `:id`
-  - (String)\n    * `:status` - (String)\n    * `:submitted_at` - (Time)\n    * `:comment`
-  - (String)"
-:get_change: ! "Calls the GET GetChange API operation.\n@param [Hash] options\n  *
-  `:id` - *required* - (String) The ID of the change batch request. The value that
-  you specify here is the value that ChangeResourceRecordSets returned in the Id element
-  when you submitted the request.\n@return [Core::Response] The `#data` method of
-  the response object returns a hash with the following structure:\n\n  * `:change_info`
-  - (Hash)\n    * `:id` - (String)\n    * `:status` - (String)\n    * `:submitted_at`
-  - (Time)\n    * `:comment` - (String)"
-:get_checker_ip_ranges: ! "Calls the GET GetCheckerIpRanges API operation.\n@param
-  [Hash] options\n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:checker_ip_ranges` - (Array<String>)"
-:get_health_check: ! "Calls the GET GetHealthCheck API operation.\n@param [Hash] options\n
-  \ * `:health_check_id` - *required* - (String) The ID of the health check to retrieve.\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:health_check` - (Hash)\n    * `:id` - (String)\n    *
-  `:caller_reference` - (String)\n    * `:health_check_config` - (Hash)\n      * `:ip_address`
-  - (String)\n      * `:port` - (Integer)\n      * `:type` - (String)\n      * `:resource_path`
-  - (String)\n      * `:fully_qualified_domain_name` - (String)\n      * `:search_string`
-  - (String)\n      * `:request_interval` - (Integer)\n      * `:failure_threshold`
-  - (Integer)\n    * `:health_check_version` - (Integer)"
-:get_health_check_count: ! "Calls the GET GetHealthCheckCount API operation.\n@param
-  [Hash] options\n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:health_check_count` - (Integer)"
-:get_hosted_zone: ! "Calls the GET GetHostedZone API operation.\n@param [Hash] options\n
-  \ * `:id` - *required* - (String) The ID of the hosted zone for which you want to
-  get a list of the name servers in the delegation set.\n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:hosted_zone` - (Hash)\n    * `:id` - (String)\n    * `:name` - (String)\n
-  \   * `:caller_reference` - (String)\n    * `:config` - (Hash)\n      * `:comment`
-  - (String)\n    * `:resource_record_set_count` - (Integer)\n  * `:delegation_set`
-  - (Hash)\n    * `:name_servers` - (Array<String>)"
-:list_health_checks: ! "Calls the GET ListHealthChecks API operation.\n@param [Hash]
-  options\n  * `:marker` - (String) If the request returned more than one page of
-  results, submit another request and specify the value of NextMarker from the last
-  response in the marker parameter to get the next page of results.\n  * `:max_items`
-  - (Integer) Specify the maximum number of health checks to return per page of results.\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:health_checks` - (Array<Hash>)\n    * `:id` - (String)\n
-  \   * `:caller_reference` - (String)\n    * `:health_check_config` - (Hash)\n      *
-  `:ip_address` - (String)\n      * `:port` - (Integer)\n      * `:type` - (String)\n
-  \     * `:resource_path` - (String)\n      * `:fully_qualified_domain_name` - (String)\n
-  \     * `:search_string` - (String)\n      * `:request_interval` - (Integer)\n      *
-  `:failure_threshold` - (Integer)\n    * `:health_check_version` - (Integer)\n  *
-  `:marker` - (String)\n  * `:is_truncated` - (Boolean)\n  * `:next_marker` - (String)\n
-  \ * `:max_items` - (String)"
-:list_hosted_zones: ! "Calls the GET ListHostedZones API operation.\n@param [Hash]
-  options\n  * `:marker` - (String) If the request returned more than one page of
-  results, submit another request and specify the value of NextMarker from the last
-  response in the marker parameter to get the next page of results.\n  * `:max_items`
-  - (Integer) Specify the maximum number of hosted zones to return per page of results.\n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:hosted_zones` - (Array<Hash>)\n    * `:id` - (String)\n
-  \   * `:name` - (String)\n    * `:caller_reference` - (String)\n    * `:config`
-  - (Hash)\n      * `:comment` - (String)\n    * `:resource_record_set_count` - (Integer)\n
-  \ * `:marker` - (String)\n  * `:is_truncated` - (Boolean)\n  * `:next_marker` -
-  (String)\n  * `:max_items` - (Integer)"
-:list_resource_record_sets: ! "Calls the GET ListResourceRecordSets API operation.\n@param
-  [Hash] options\n  * `:hosted_zone_id` - *required* - (String) The ID of the hosted
-  zone that contains the resource record sets that you want to get.\n  * `:start_record_name`
-  - (String) The first name in the lexicographic ordering of domain names that you
-  want the ListResourceRecordSets request to list.\n  * `:start_record_type` - (String)
-  The DNS type at which to begin the listing of resource record sets. Valid values:
-  A | AAAA | CNAME | MX | NS | PTR | SOA | SPF | SRV | TXT Values for Weighted Resource
-  Record Sets: A | AAAA | CNAME | TXT Values for Alias Resource Record Sets: A | AAAA
-  Constraint: Specifying type without specifying name returns an InvalidInput error.
-  \ Valid values include:\n    * `SOA`\n    * `A`\n    * `TXT`\n    * `NS`\n    *
-  `CNAME`\n    * `MX`\n    * `PTR`\n    * `SRV`\n    * `SPF`\n    * `AAAA`\n  * `:start_record_identifier`
-  - (String) Weighted resource record sets only: If results were truncated for a given
-  DNS name and type, specify the value of ListResourceRecordSetsResponse$NextRecordIdentifier
-  from the previous response to get the next resource record set that has the current
-  DNS name and type.\n  * `:max_items` - (Integer) The maximum number of records you
-  want in the response body.\n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:resource_record_sets`
-  - (Array<Hash>)\n    * `:name` - (String)\n    * `:type` - (String)\n    * `:set_identifier`
-  - (String)\n    * `:weight` - (Integer)\n    * `:region` - (String)\n    * `:failover`
-  - (String)\n    * `:ttl` - (Integer)\n    * `:resource_records` - (Array<Hash>)\n
-  \     * `:value` - (String)\n    * `:alias_target` - (Hash)\n      * `:hosted_zone_id`
-  - (String)\n      * `:dns_name` - (String)\n      * `:evaluate_target_health` -
-  (Boolean)\n    * `:health_check_id` - (String)\n  * `:is_truncated` - (Boolean)\n
-  \ * `:next_record_name` - (String)\n  * `:next_record_type` - (String)\n  * `:next_record_identifier`
-  - (String)\n  * `:max_items` - (Integer)"
-:list_tags_for_resource: ! "Calls the GET ListTagsForResource API operation.\n@param
-  [Hash] options\n  * `:resource_type` - *required* - (String) The type of the resource.
-  The resource type for health checks is healthcheck.  Valid values include:\n    *
-  `healthcheck`\n  * `:resource_id` - *required* - (String) The ID of the resource
-  for which you want to retrieve tags.\n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:resource_tag_set`
-  - (Hash)\n    * `:resource_type` - (String)\n    * `:resource_id` - (String)\n    *
-  `:tags` - (Array<Hash>)\n      * `:key` - (String)\n      * `:value` - (String)"
-:list_tags_for_resources: ! "Calls the POST ListTagsForResources API operation.\n@param
+:create_health_check: |-
+  Calls the POST CreateHealthCheck API operation.
+  @param [Hash] options
+    * `:caller_reference` - *required* - (String) A unique string that identifies the request and that allows failed CreateHealthCheck requests to be retried without the risk of executing the operation twice. You must use a unique CallerReference string every time you create a health check. CallerReference can be any unique string; you might choose to use a string that identifies your project. Valid characters are any Unicode code points that are legal in an XML 1.0 document. The UTF-8 encoding of the value must be less than 128 bytes.
+    * `:health_check_config` - *required* - (Hash) A complex type that contains health check configuration.
+      * `:ip_address` - (String) IP Address of the instance being checked.
+      * `:port` - (Integer) Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified. For HTTPS this defaults to 443 if the port is not specified.
+      * `:type` - *required* - (String) The type of health check to be performed. Currently supported protocols are TCP, HTTP, and HTTPS.  Valid values include:
+        * `HTTP`
+        * `HTTPS`
+        * `HTTP_STR_MATCH`
+        * `HTTPS_STR_MATCH`
+        * `TCP`
+      * `:resource_path` - (String) Path to ping on the instance to check the health. Required for HTTP and HTTPS health checks, HTTP request is issued to the instance on the given port and path.
+      * `:fully_qualified_domain_name` - (String) Fully qualified domain name of the instance to be health checked.
+      * `:search_string` - (String) A string to search for in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH health checks.
+      * `:request_interval` - (Integer) The number of seconds between the time that Route 53 gets a response from your endpoint and the time that it sends the next health-check request. Each Route 53 health checker makes requests at this interval. Valid values are 10 and 30. The default value is 30.
+      * `:failure_threshold` - (Integer) The number of consecutive health checks that an endpoint must pass or fail for Route 53 to change the current status of the endpoint from unhealthy to healthy or vice versa. Valid values are integers between 1 and 10. For more information, see "How Amazon Route 53 Determines Whether an Endpoint Is Healthy" in the Amazon Route 53 Developer Guide.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:health_check` - (Hash)
+      * `:id` - (String)
+      * `:caller_reference` - (String)
+      * `:health_check_config` - (Hash)
+        * `:ip_address` - (String)
+        * `:port` - (Integer)
+        * `:type` - (String)
+        * `:resource_path` - (String)
+        * `:fully_qualified_domain_name` - (String)
+        * `:search_string` - (String)
+        * `:request_interval` - (Integer)
+        * `:failure_threshold` - (Integer)
+      * `:health_check_version` - (Integer)
+:create_hosted_zone: |-
+  Calls the POST CreateHostedZone API operation.
+  @param [Hash] options
+    * `:name` - *required* - (String) The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical. This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of NameServers elements returned in DelegationSet.
+    * `:caller_reference` - *required* - (String) A unique string that identifies the request and that allows failed CreateHostedZone requests to be retried without the risk of executing the operation twice. You must use a unique CallerReference string every time you create a hosted zone. CallerReference can be any unique string; you might choose to use a string that identifies your project, such as DNSMigration_01. Valid characters are any Unicode code points that are legal in an XML 1.0 document. The UTF-8 encoding of the value must be less than 128 bytes.
+    * `:hosted_zone_config` - (Hash) A complex type that contains an optional comment about your hosted zone.
+      * `:comment` - (String) An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the HostedZoneConfig and Comment elements from the XML document.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:hosted_zone` - (Hash)
+      * `:id` - (String)
+      * `:name` - (String)
+      * `:caller_reference` - (String)
+      * `:config` - (Hash)
+        * `:comment` - (String)
+      * `:resource_record_set_count` - (Integer)
+    * `:change_info` - (Hash)
+      * `:id` - (String)
+      * `:status` - (String)
+      * `:submitted_at` - (Time)
+      * `:comment` - (String)
+    * `:delegation_set` - (Hash)
+      * `:name_servers` - (Array<String>)
+:delete_health_check: |-
+  Calls the DELETE DeleteHealthCheck API operation.
+  @param [Hash] options
+    * `:health_check_id` - *required* - (String) The ID of the health check to delete.
+  @return [Core::Response]
+:delete_hosted_zone: |-
+  Calls the DELETE DeleteHostedZone API operation.
+  @param [Hash] options
+    * `:id` - *required* - (String) The ID of the request. Include this ID in a call to GetChange to track when the change has propagated to all Route 53 DNS servers.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:change_info` - (Hash)
+      * `:id` - (String)
+      * `:status` - (String)
+      * `:submitted_at` - (Time)
+      * `:comment` - (String)
+:get_change: |-
+  Calls the GET GetChange API operation.
+  @param [Hash] options
+    * `:id` - *required* - (String) The ID of the change batch request. The value that you specify here is the value that ChangeResourceRecordSets returned in the Id element when you submitted the request.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:change_info` - (Hash)
+      * `:id` - (String)
+      * `:status` - (String)
+      * `:submitted_at` - (Time)
+      * `:comment` - (String)
+:get_checker_ip_ranges: |-
+  Calls the GET GetCheckerIpRanges API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:checker_ip_ranges` - (Array<String>)
+:get_geo_location: |-
+  Calls the GET GetGeoLocation API operation.
+  @param [Hash] options
+    * `:continent_code` - (String) The code for a continent geo location. Note: only continent locations have a continent code. Valid values: AF | AN | AS | EU | OC | NA | SA Constraint: Specifying ContinentCode with either CountryCode or SubdivisionCode returns an InvalidInput error.
+    * `:country_code` - (String) The code for a country geo location. The default location uses '*' for the country code and will match all locations that are not matched by a geo location. The default geo location uses a * for the country code. All other country codes follow the ISO 3166 two-character code.
+    * `:subdivision_code` - (String) The code for a country's subdivision (e.g., a province of Canada). A subdivision code is only valid with the appropriate country code. Constraint: Specifying SubdivisionCode without CountryCode returns an InvalidInput error.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:geo_location_details` - (Hash)
+      * `:continent_code` - (String)
+      * `:continent_name` - (String)
+      * `:country_code` - (String)
+      * `:country_name` - (String)
+      * `:subdivision_code` - (String)
+      * `:subdivision_name` - (String)
+:get_health_check: |-
+  Calls the GET GetHealthCheck API operation.
+  @param [Hash] options
+    * `:health_check_id` - *required* - (String) The ID of the health check to retrieve.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:health_check` - (Hash)
+      * `:id` - (String)
+      * `:caller_reference` - (String)
+      * `:health_check_config` - (Hash)
+        * `:ip_address` - (String)
+        * `:port` - (Integer)
+        * `:type` - (String)
+        * `:resource_path` - (String)
+        * `:fully_qualified_domain_name` - (String)
+        * `:search_string` - (String)
+        * `:request_interval` - (Integer)
+        * `:failure_threshold` - (Integer)
+      * `:health_check_version` - (Integer)
+:get_health_check_count: |-
+  Calls the GET GetHealthCheckCount API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:health_check_count` - (Integer)
+:get_hosted_zone: |-
+  Calls the GET GetHostedZone API operation.
+  @param [Hash] options
+    * `:id` - *required* - (String) The ID of the hosted zone for which you want to get a list of the name servers in the delegation set.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:hosted_zone` - (Hash)
+      * `:id` - (String)
+      * `:name` - (String)
+      * `:caller_reference` - (String)
+      * `:config` - (Hash)
+        * `:comment` - (String)
+      * `:resource_record_set_count` - (Integer)
+    * `:delegation_set` - (Hash)
+      * `:name_servers` - (Array<String>)
+:list_geo_locations: |-
+  Calls the GET ListGeoLocations API operation.
+  @param [Hash] options
+    * `:start_continent_code` - (String) The first continent code in the lexicographic ordering of geo locations that you want the ListGeoLocations request to list. For non-continent geo locations, this should be null. Valid values: AF | AN | AS | EU | OC | NA | SA Constraint: Specifying ContinentCode with either CountryCode or SubdivisionCode returns an InvalidInput error.
+    * `:start_country_code` - (String) The first country code in the lexicographic ordering of geo locations that you want the ListGeoLocations request to list. The default geo location uses a * for the country code. All other country codes follow the ISO 3166 two-character code.
+    * `:start_subdivision_code` - (String) The first subdivision code in the lexicographic ordering of geo locations that you want the ListGeoLocations request to list. Constraint: Specifying SubdivisionCode without CountryCode returns an InvalidInput error.
+    * `:max_items` - (Integer) The maximum number of geo locations you want in the response body.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:geo_location_details_list` - (Array<Hash>)
+      * `:continent_code` - (String)
+      * `:continent_name` - (String)
+      * `:country_code` - (String)
+      * `:country_name` - (String)
+      * `:subdivision_code` - (String)
+      * `:subdivision_name` - (String)
+    * `:is_truncated` - (Boolean)
+    * `:next_continent_code` - (String)
+    * `:next_country_code` - (String)
+    * `:next_subdivision_code` - (String)
+    * `:max_items` - (String)
+:list_health_checks: |-
+  Calls the GET ListHealthChecks API operation.
+  @param [Hash] options
+    * `:marker` - (String) If the request returned more than one page of results, submit another request and specify the value of NextMarker from the last response in the marker parameter to get the next page of results.
+    * `:max_items` - (Integer) Specify the maximum number of health checks to return per page of results.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:health_checks` - (Array<Hash>)
+      * `:id` - (String)
+      * `:caller_reference` - (String)
+      * `:health_check_config` - (Hash)
+        * `:ip_address` - (String)
+        * `:port` - (Integer)
+        * `:type` - (String)
+        * `:resource_path` - (String)
+        * `:fully_qualified_domain_name` - (String)
+        * `:search_string` - (String)
+        * `:request_interval` - (Integer)
+        * `:failure_threshold` - (Integer)
+      * `:health_check_version` - (Integer)
+    * `:marker` - (String)
+    * `:is_truncated` - (Boolean)
+    * `:next_marker` - (String)
+    * `:max_items` - (String)
+:list_hosted_zones: |-
+  Calls the GET ListHostedZones API operation.
+  @param [Hash] options
+    * `:marker` - (String) If the request returned more than one page of results, submit another request and specify the value of NextMarker from the last response in the marker parameter to get the next page of results.
+    * `:max_items` - (Integer) Specify the maximum number of hosted zones to return per page of results.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:hosted_zones` - (Array<Hash>)
+      * `:id` - (String)
+      * `:name` - (String)
+      * `:caller_reference` - (String)
+      * `:config` - (Hash)
+        * `:comment` - (String)
+      * `:resource_record_set_count` - (Integer)
+    * `:marker` - (String)
+    * `:is_truncated` - (Boolean)
+    * `:next_marker` - (String)
+    * `:max_items` - (Integer)
+:list_resource_record_sets: |-
+  Calls the GET ListResourceRecordSets API operation.
+  @param [Hash] options
+    * `:hosted_zone_id` - *required* - (String) The ID of the hosted zone that contains the resource record sets that you want to get.
+    * `:start_record_name` - (String) The first name in the lexicographic ordering of domain names that you want the ListResourceRecordSets request to list.
+    * `:start_record_type` - (String) The DNS type at which to begin the listing of resource record sets. Valid values: A | AAAA | CNAME | MX | NS | PTR | SOA | SPF | SRV | TXT Values for Weighted Resource Record Sets: A | AAAA | CNAME | TXT Values for Alias Resource Record Sets: A | AAAA Constraint: Specifying type without specifying name returns an InvalidInput error.  Valid values include:
+      * `SOA`
+      * `A`
+      * `TXT`
+      * `NS`
+      * `CNAME`
+      * `MX`
+      * `PTR`
+      * `SRV`
+      * `SPF`
+      * `AAAA`
+    * `:start_record_identifier` - (String) Weighted resource record sets only: If results were truncated for a given DNS name and type, specify the value of ListResourceRecordSetsResponse$NextRecordIdentifier from the previous response to get the next resource record set that has the current DNS name and type.
+    * `:max_items` - (Integer) The maximum number of records you want in the response body.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:resource_record_sets` - (Array<Hash>)
+      * `:name` - (String)
+      * `:type` - (String)
+      * `:set_identifier` - (String)
+      * `:weight` - (Integer)
+      * `:region` - (String)
+      * `:geo_location` - (Hash)
+        * `:continent_code` - (String)
+        * `:country_code` - (String)
+        * `:subdivision_code` - (String)
+      * `:failover` - (String)
+      * `:ttl` - (Integer)
+      * `:resource_records` - (Array<Hash>)
+        * `:value` - (String)
+      * `:alias_target` - (Hash)
+        * `:hosted_zone_id` - (String)
+        * `:dns_name` - (String)
+        * `:evaluate_target_health` - (Boolean)
+      * `:health_check_id` - (String)
+    * `:is_truncated` - (Boolean)
+    * `:next_record_name` - (String)
+    * `:next_record_type` - (String)
+    * `:next_record_identifier` - (String)
+    * `:max_items` - (Integer)
+:list_tags_for_resource: |-
+  Calls the GET ListTagsForResource API operation.
+  @param [Hash] options
+    * `:resource_type` - *required* - (String) The type of the resource. The resource type for health checks is healthcheck.  Valid values include:
+      * `healthcheck`
+    * `:resource_id` - *required* - (String) The ID of the resource for which you want to retrieve tags.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:resource_tag_set` - (Hash)
+      * `:resource_type` - (String)
+      * `:resource_id` - (String)
+      * `:tags` - (Array<Hash>)
+        * `:key` - (String)
+        * `:value` - (String)
+:list_tags_for_resources: "Calls the POST ListTagsForResources API operation.\n@param
   [Hash] options\n  * `:resource_type` - *required* - (String) The type of the resources.
   The resource type for health checks is healthcheck.  Valid values include:\n    *
   `healthcheck`\n  * `:resource_ids` - *required* - (Array&lt;String>) A complex type
@@ -249,35 +368,29 @@
   `:resource_tag_sets` - (Array<Hash>)\n    * `:resource_type` - (String)\n    * `:resource_id`
   - (String)\n    * `:tags` - (Array<Hash>)\n      * `:key` - (String)\n      * `:value`
   - (String)"
-:update_health_check: ! "Calls the POST UpdateHealthCheck API operation.\n@param [Hash]
-  options\n  * `:health_check_id` - *required* - (String) The ID of the health check
-  to update.\n  * `:health_check_version` - (Integer) Optional. When you specify a
-  health check version, Route 53 compares this value with the current value in the
-  health check, which prevents you from updating the health check when the versions
-  don't match. Using HealthCheckVersion lets you prevent overwriting another change
-  to the health check.\n  * `:ip_address` - (String) The IP address of the resource
-  that you want to check. Specify this value only if you want to change it.\n  * `:port`
-  - (Integer) The port on which you want Route 53 to open a connection to perform
-  health checks. Specify this value only if you want to change it.\n  * `:resource_path`
-  - (String) The path that you want Amazon Route 53 to request when performing health
-  checks. The path can be any value for which your endpoint will return an HTTP status
-  code of 2xx or 3xx when the endpoint is healthy, for example the file /docs/route53-health-check.html.
-  Specify this value only if you want to change it.\n  * `:fully_qualified_domain_name`
-  - (String) Fully qualified domain name of the instance to be health checked. Specify
-  this value only if you want to change it.\n  * `:search_string` - (String) If the
-  value of Type is HTTP_STR_MATCH or HTTP_STR_MATCH, the string that you want Route
-  53 to search for in the response body from the specified resource. If the string
-  appears in the response body, Route 53 considers the resource healthy. Specify this
-  value only if you want to change it.\n  * `:failure_threshold` - (Integer) The number
-  of consecutive health checks that an endpoint must pass or fail for Route 53 to
-  change the current status of the endpoint from unhealthy to healthy or vice versa.
-  Valid values are integers between 1 and 10. For more information, see \"How Amazon
-  Route 53 Determines Whether an Endpoint Is Healthy\" in the Amazon Route 53 Developer
-  Guide. Specify this value only if you want to change it.\n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:health_check` - (Hash)\n    * `:id` - (String)\n    * `:caller_reference`
-  - (String)\n    * `:health_check_config` - (Hash)\n      * `:ip_address` - (String)\n
-  \     * `:port` - (Integer)\n      * `:type` - (String)\n      * `:resource_path`
-  - (String)\n      * `:fully_qualified_domain_name` - (String)\n      * `:search_string`
-  - (String)\n      * `:request_interval` - (Integer)\n      * `:failure_threshold`
-  - (Integer)\n    * `:health_check_version` - (Integer)"
+:update_health_check: |-
+  Calls the POST UpdateHealthCheck API operation.
+  @param [Hash] options
+    * `:health_check_id` - *required* - (String) The ID of the health check to update.
+    * `:health_check_version` - (Integer) Optional. When you specify a health check version, Route 53 compares this value with the current value in the health check, which prevents you from updating the health check when the versions don't match. Using HealthCheckVersion lets you prevent overwriting another change to the health check.
+    * `:ip_address` - (String) The IP address of the resource that you want to check. Specify this value only if you want to change it.
+    * `:port` - (Integer) The port on which you want Route 53 to open a connection to perform health checks. Specify this value only if you want to change it.
+    * `:resource_path` - (String) The path that you want Amazon Route 53 to request when performing health checks. The path can be any value for which your endpoint will return an HTTP status code of 2xx or 3xx when the endpoint is healthy, for example the file /docs/route53-health-check.html. Specify this value only if you want to change it.
+    * `:fully_qualified_domain_name` - (String) Fully qualified domain name of the instance to be health checked. Specify this value only if you want to change it.
+    * `:search_string` - (String) If the value of Type is HTTP_STR_MATCH or HTTP_STR_MATCH, the string that you want Route 53 to search for in the response body from the specified resource. If the string appears in the response body, Route 53 considers the resource healthy. Specify this value only if you want to change it.
+    * `:failure_threshold` - (Integer) The number of consecutive health checks that an endpoint must pass or fail for Route 53 to change the current status of the endpoint from unhealthy to healthy or vice versa. Valid values are integers between 1 and 10. For more information, see "How Amazon Route 53 Determines Whether an Endpoint Is Healthy" in the Amazon Route 53 Developer Guide. Specify this value only if you want to change it.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:health_check` - (Hash)
+      * `:id` - (String)
+      * `:caller_reference` - (String)
+      * `:health_check_config` - (Hash)
+        * `:ip_address` - (String)
+        * `:port` - (Integer)
+        * `:type` - (String)
+        * `:resource_path` - (String)
+        * `:fully_qualified_domain_name` - (String)
+        * `:search_string` - (String)
+        * `:request_interval` - (Integer)
+        * `:failure_threshold` - (Integer)
+      * `:health_check_version` - (Integer)
