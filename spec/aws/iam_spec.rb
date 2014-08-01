@@ -4,6 +4,8 @@ module Aws
   module IAM
     describe Client do
 
+      let(:dummy_credentials) { Aws::Credentials.new('akid', 'secret') }
+
       it 'forces the endpoint to iam.amazonaws.com despite region' do
         iam = Client.new(region: 'us-west-2', credentials: dummy_credentials)
         expect(iam.config.endpoint).to eq('https://iam.amazonaws.com')

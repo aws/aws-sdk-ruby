@@ -1,10 +1,9 @@
 require 'simplecov'
 require 'rspec'
+require 'webmock/rspec'
 require 'aws-sdk-core'
 require 'seahorse'
 require 'yaml'
-
-require_relative '../vendor/seahorse/spec/spec_helper'
 
 # prevent env from leaking state into tests
 ENV.delete('AWS_REGION')
@@ -15,10 +14,6 @@ ENV.delete('AWS_SECRET_KEY')
   ENV.delete("#{prefix}_ACCESS_KEY_ID")
   ENV.delete("#{prefix}_SECRET_ACCESS_KEY")
   ENV.delete("#{prefix}_SESSION_TOKEN")
-end
-
-def dummy_credentials
-  @dummy_credentials ||= Aws::Credentials.new('akid', 'secret')
 end
 
 # Simply returns the request context without any http response info.
@@ -63,4 +58,26 @@ def call_handler(klass, opts = {}, &block)
 
   klass.new(DummySendHandler.new).call(context)
 
+end
+
+class DummySendPlugin < Seahorse::Client::Plugin
+  class Handler < Seahorse::Client::Handler
+    def call(context)
+      Seahorse::Client::Response.new(
+        context: context,
+        data: context.config.response_data)
+    end
+  end
+  option(:response_data) { { result: 'success' } }
+  handler Handler, step: :send
+end
+
+def client_class_with_plugin(&block)
+  client = Seahorse::Client::Base.define
+  client.set_plugins([Class.new(Seahorse::Client::Plugin, &block)])
+  client
+end
+
+def client_with_plugin(options = {}, &block)
+  client_class_with_plugin(&block).new(options)
 end

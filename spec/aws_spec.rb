@@ -49,6 +49,8 @@ module Aws
 
   describe 'add_service' do
 
+    let(:dummy_credentials) { Aws::Credentials.new('akid', 'secret') }
+
     before(:each) do
       Aws.config[:region] = 'region-name'
     end
