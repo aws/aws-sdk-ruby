@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -19,26 +19,16 @@
   :inputs:
     Name:
     - :string
+    - :required
     S3BucketName:
     - :string
+    - :required
     S3KeyPrefix:
     - :string
     SnsTopicName:
     - :string
     IncludeGlobalServiceEvents:
     - :boolean
-    trail:
-    - :structure:
-        Name:
-        - :string
-        S3BucketName:
-        - :string
-        S3KeyPrefix:
-        - :string
-        SnsTopicName:
-        - :string
-        IncludeGlobalServiceEvents:
-        - :boolean
   :outputs:
     :children:
       CreateTrailResult:
@@ -46,10 +36,6 @@
         :children:
           IncludeGlobalServiceEvents:
             :type: :boolean
-          trail:
-            :children:
-              IncludeGlobalServiceEvents:
-                :type: :boolean
 - :name: DeleteTrail
   :method: :delete_trail
   :inputs:
@@ -126,6 +112,7 @@
   :inputs:
     Name:
     - :string
+    - :required
     S3BucketName:
     - :string
     S3KeyPrefix:
@@ -134,18 +121,6 @@
     - :string
     IncludeGlobalServiceEvents:
     - :boolean
-    trail:
-    - :structure:
-        Name:
-        - :string
-        S3BucketName:
-        - :string
-        S3KeyPrefix:
-        - :string
-        SnsTopicName:
-        - :string
-        IncludeGlobalServiceEvents:
-        - :boolean
   :outputs:
     :children:
       UpdateTrailResult:
@@ -153,7 +128,3 @@
         :children:
           IncludeGlobalServiceEvents:
             :type: :boolean
-          trail:
-            :children:
-              IncludeGlobalServiceEvents:
-                :type: :boolean
