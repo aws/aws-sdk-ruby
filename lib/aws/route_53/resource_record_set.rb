@@ -119,6 +119,12 @@ module AWS
         @create_options[:ttl] = new_ttl
       end
 
+      attribute :geo_location
+
+      def geo_location= new_geo_location
+        @create_options[:geo_location] = new_geo_location
+      end
+
       attribute :failover
 
       def failover= new_failover
@@ -241,6 +247,7 @@ module AWS
           options[:region] = region if region
           options[:ttl] = ttl if ttl
           options[:resource_records] = resource_records if resource_records && !resource_records.empty?
+          options[:geo_location] = geo_location if geo_location
           options[:failover] = failover if failover
           options[:health_check_id] = health_check_id if health_check_id
         end
