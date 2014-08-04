@@ -22,12 +22,5 @@ module Aws
       const_get(:Client).new(options)
     end
 
-    # Constructs and returns an API client for this service.
-    # All options are passed to the Client class constructor.
-    # @api private
-    def client(options = {})
-      const_get(:Client).new(options)
-    end
-
   end
 end
