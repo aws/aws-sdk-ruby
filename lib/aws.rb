@@ -186,7 +186,7 @@ module Aws
       svc_module.send(:extend, Service)
       svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
       svc_module.const_set(:Client, client_class(svc_name, options))
-      add_helper(svc_name.downcase.to_sym, svc_module)
+      add_helper(svc_name, svc_module)
       const_set(svc_name, svc_module)
     end
 
@@ -222,9 +222,16 @@ module Aws
       end
     end
 
-    def add_helper(method_name, svc_mod)
+    def add_helper(svc_name, svc_mod)
+      method_name = svc_name.downcase.to_sym
       service_modules[method_name] = svc_mod
       define_method(method_name) do |options = {}|
+        unless instance_variable_get("@#{method_name}_warned")
+          instance_variable_set("@#{method_name}_warned", true)
+          warn(<<-MSG.strip)
+Aws.#{method_name} deprecated as of v2.0.0.rc14 and will be removed as of v2.0.0.0 final; use Aws::#{svc_name}::Client.new() instead
+          MSG
+        end
         svc_mod.const_get(:Client).new(options)
       end
       module_function(method_name)

@@ -29,9 +29,9 @@ module Aws
     #   optional placeholders. This is applied when rules match during
     #   resolution. Valid placeholders include:
     #
-    #   * "{scheme}"
-    #   * "{region}"
-    #   * "{service}"
+    #   * `{scheme}`
+    #   * `{region}`
+    #   * `{service}`
     #
     #   An example pattern:
     #

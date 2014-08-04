@@ -30,7 +30,7 @@ module Seahorse
         # @return [IO]
         attr_reader :body
 
-        # @param [String, URI::HTTP, URI::HTTPS, nil]
+        # @param [String, URI::HTTP, URI::HTTPS, nil] endpoint
         def endpoint=(endpoint)
           endpoint = URI.parse(endpoint) if endpoint.is_a?(String)
           if endpoint.nil? or URI::HTTP === endpoint or URI::HTTPS === endpoint

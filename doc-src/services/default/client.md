@@ -1,4 +1,4 @@
-A service client builder for <%= full_name %>.
+An API client for <%= full_name %>.
 
 # Configuration
 
@@ -27,7 +27,7 @@ endpoint constructed from the region, but the region is still required for
 signing requests.
 
     <%= svc_name.downcase %> = Aws::<%= svc_name %>::Client.new(region: 'us-west-1')
-    <%= svc_name.downcase %>.config.endpoint #=> <%= Aws::EndpointProvider.default_provider.resolve(service: default_api.metadata('endpointPrefix'), region:'us-west-1', scheme:'https').inspect %>
+    <%= svc_name.downcase %>.config.endpoint #=> <%= Aws::EndpointProvider.default_provider.resolve(service: api.metadata('endpointPrefix'), region:'us-west-1', scheme:'https').inspect %>
 
 ## Credentials
 
@@ -66,19 +66,4 @@ Alternatively, you configure credentials with `:access_key_id` and
 **It is recommended to never configure credentials statically in your
 application.** This makes it difficult to rotate credentials and
 easy to commit to source control.
-
-## API Version
-
-Calling {Client.new} will construct and return a versioned service client. The client
-will default to the most recent API version. You can also specify an API version:
-
-    <%= svc_name.downcase %> = Aws::<%= svc_name %>::Client.new
-    #=> #<Aws::<%= svc_name %>::Client::V<%= default_api.version.gsub(/-/, '') %>>
-
-    <%= svc_name.downcase %> = Aws::<%= svc_name %>::Client.new(api_version: '<%= oldest_api.version %>') 
-    #=> #<Aws::<%= svc_name %>::Client::V<%= oldest_api.version.gsub(/-/, '') %>>
-
-The following API versions are available for Aws::<%= svc_name %>:
-
-<%= apis.map{ |a| "* {Client::V#{a.version.gsub(/-/, '')} #{a.version}}" }.join("\n") %>
 

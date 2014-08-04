@@ -9,7 +9,24 @@ than the clients in version 1 of the Ruby SDK.
 
 For version 1.0 of the Ruby SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
 
-## 2.0.0.rc11 Upgrading Notes
+### 2.0.0.rc14 Upgrading Notes
+
+RC14 simplifies the API versioning strategy. This may require small changes for
+users that use the API version locking options.
+
+* Versioned client classes removed, e.g. `Aws::S3::Client::V20060301.new` should
+  be replaced with `Aws::S3::Client.new`
+
+* The `:api_version` constructor option is no longer accepted.
+
+* Aws helper methods for client construction deprecated; For example,
+  calling `Aws.s3` will generate a deprecation warning. Call `Aws::S3::Client.new`
+  instead. Top-level helpers will be removed as of v2.0.0 final.
+
+In future versions, backwards incompatible API updates will be surfaced in their
+own module and client class to ensure users are not broken by API updates.
+
+### 2.0.0.rc11 Upgrading Notes
 
 RC 11 requires a few minor updates.  These should be the final public-facing
 changes before 2.0.0 final.
@@ -193,23 +210,24 @@ version.
 
 | Service Name                        | Service Class             | API Versions                   |
 | ----------------------------------- | ------------------------- | ------------------------------ |
-| Amazon CloudFront                   | CloudFront                | 2014-01-31 &mdash; 2014-05-31  |
-| Amazon CloudSearch                  | CloudSearch               | 2011-02-01 &mdash; 2013-01-01  |
+| Amazon CloudFront                   | CloudFront                | 2014-05-31                     |
+| Amazon CloudSearch                  | CloudSearch               | 2013-01-01                     |
 | Amazon CloudSearch Domain           | CloudSearchDomain         | 2013-01-01                     |
 | Amazon CloudWatch                   | CloudWatch                | 2010-08-01                     |
 | Amazon CloudWatch Logs              | CloudWatchLogs            | 2014-03-28                     |
 | Amazon Cognito Identity             | CognitoIdentity           | 2014-06-30                     |
 | Amazon Cognito Sync                 | CognitoSync               | 2014-06-30                     |
-| Amazon DynamoDB                     | DynamoDB                  | 2011-12-05 &mdash; 2012-08-10  |
+| Amazon DynamoDB                     | DynamoDB                  | 2012-08-10                     |
 | Amazon Elastic Compute Cloud        | EC2                       | 2014-06-15                     |
 | Amazon Elastic MapReduce            | EMR                       | 2009-03-31                     |
 | Amazon Elastic Transcoder           | ElasticTranscoder         | 2012-09-25                     |
-| Amazon ElastiCache                  | ElastiCache               | 2014-03-24                     |
+| Amazon ElastiCache                  | ElastiCache               | 2014-07-15                     |
 | Amazon Glacier                      | Glacier                   | 2012-06-01                     |
 | Amazon Kinesis                      | Kinesis                   | 2013-12-02                     |
 | Amazon Redshift                     | Redshift                  | 2012-12-01                     |
-| Amazon Relational Database Service  | RDS                       | 2013-01-10 &mdash; 2013-09-09  |
+| Amazon Relational Database Service  | RDS                       | 2013-09-09                     |
 | Amazon Route 53                     | Route53                   | 2013-04-01                     |
+| Amazon Route 53 Domains             | Route53Domains            | 2014-05-15                     |
 | Amazon Simple Email Service         | SES                       | 2010-12-01                     |
 | Amazon Simple Notification Service  | SNS                       | 2010-03-31                     |
 | Amazon Simple Queue Service         | SQS                       | 2012-11-05                     |

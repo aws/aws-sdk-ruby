@@ -16,14 +16,15 @@ module Aws
       unless @warned
         @warned = true
         warn(<<-MSG.strip)
-#{self.name}.new deprecated as of v2.0.0.rc11 and will be removed as of v2.0.0.0 final; use #{self.name}.client() or #{self.name}::Client.new() instead
+#{self.name}.new deprecated as of v2.0.0.rc11 and will be removed as of v2.0.0.0 final; use #{self.name}::Client.new() instead
         MSG
       end
-      client(options)
+      const_get(:Client).new(options)
     end
 
     # Constructs and returns an API client for this service.
     # All options are passed to the Client class constructor.
+    # @api private
     def client(options = {})
       const_get(:Client).new(options)
     end

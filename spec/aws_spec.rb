@@ -60,23 +60,21 @@ module Aws
       Aws.config = {}
     end
 
-    it 'defines a new service interface' do
+    it 'defines a new service module' do
       Aws.add_service('DummyService', 'api' => 'apis/s3-2006-03-01.api.json')
       expect(Aws::DummyService.ancestors).to include(Aws::Service)
     end
 
-    it 'adds a helper method that constructs a service and client object' do
+    it 'defines an errors module' do
       Aws.add_service('DummyService', 'api' => 'apis/s3-2006-03-01.api.json')
-      svc = Aws.dummyservice(http_wire_trace: true, credentials: dummy_credentials)
-      expect(svc).to be_kind_of(Seahorse::Client::Base)
-      expect(svc.config.api).to be_kind_of(Seahorse::Model::Api)
-      expect(svc.config.http_wire_trace).to be(true)
+      errors = Aws::DummyService::Errors
+      expect(errors::ServiceError.ancestors).to include(Aws::Errors::ServiceError)
+      expect(errors::FooError.ancestors).to include(Aws::Errors::ServiceError)
     end
 
-    it 'adds the helper method to Aws (not Module)' do
+    it 'defines a client class' do
       Aws.add_service('DummyService', 'api' => 'apis/s3-2006-03-01.api.json')
-      expect(Aws).to respond_to(:dummyservice)
-      expect(Aws.class).not_to respond_to(:dummyservice)
+      expect(Aws::DummyService::Client.ancestors).to include(Seahorse::Client::Base)
     end
 
   end

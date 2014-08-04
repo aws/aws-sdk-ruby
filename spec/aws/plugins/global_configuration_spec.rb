@@ -30,26 +30,26 @@ module Aws
 
       it 'gives priority to Aws.config over plugin defaults' do
         Aws.config[:property] = 'aws-default'
-        expect(Aws.svc.config.property).to eq('aws-default')
+        expect(Aws::Svc::Client.new.config.property).to eq('aws-default')
       end
 
       it 'gives priority to Aws.config[:svc] over Aws.config' do
         Aws.config[:property] = 'aws-default'
         Aws.config[:svc] = { property: 'svc-default' }
-        expect(Aws.svc.config.property).to eq('svc-default')
+        expect(Aws::Svc::Client.new.config.property).to eq('svc-default')
       end
 
       it 'gives priority to constructor options over Aws.config' do
         Aws.config[:property] = 'aws-default'
         Aws.config[:svc] = { property: 'svc-default' }
-        expect(Aws.svc(property: 'arg').config.property).to eq('arg')
+        expect(Aws::Svc::Client.new(property: 'arg').config.property).to eq('arg')
       end
 
       it 'ignores configuration for others services in Aws.config' do
         Aws.config[:property] = 'aws-default'
         Aws.config[:svc] = { property: 'svc-default' }
         Aws.config[:s3] = { property: 's3-default' }
-        expect(Aws.svc.config.property).to eq('svc-default')
+        expect(Aws::Svc::Client.new.config.property).to eq('svc-default')
       end
 
     end
