@@ -1,5 +1,5 @@
 Before("@swf") do
-  @swf = @client = Aws.swf
+  @client = Aws::SWF::Client.new
 end
 
 After("@swf") do

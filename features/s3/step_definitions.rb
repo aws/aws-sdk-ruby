@@ -1,41 +1,41 @@
 require 'openssl'
 
 Before("@s3") do
-  @s3 = @client = Aws.s3
+  @client = Aws::S3::Client.new
   @created_buckets = []
 end
 
 After("@s3") do
   @created_buckets.each do |bucket|
     loop do
-      objects = @s3.list_object_versions(bucket: bucket).data.versions.map do |v|
+      objects = @client.list_object_versions(bucket: bucket).data.versions.map do |v|
         { key: v.key, version_id: v.version_id }
       end
       break if objects.empty?
-      @s3.delete_objects(bucket: bucket, delete: { objects: objects })
+      @client.delete_objects(bucket: bucket, delete: { objects: objects })
     end
-    @s3.delete_bucket(bucket: bucket)
+    @client.delete_bucket(bucket: bucket)
   end
 end
 
 def create_bucket(options = {})
   @bucket_name = "aws-sdk-test-#{Time.now.to_i}-#{rand(1000)}"
   options[:bucket] = @bucket_name
-  if @s3.config.region != 'us-east-1' && !options[:create_bucket_configuration]
+  if @client.config.region != 'us-east-1' && !options[:create_bucket_configuration]
     options[:create_bucket_configuration] = {
-      location_constraint: @s3.config.region
+      location_constraint: @client.config.region
     }
   end
-  @s3.create_bucket(options)
+  @client.create_bucket(options)
   @created_buckets << @bucket_name
 end
 
 When(/^I force path style requests$/) do
-  @s3 = Aws.s3(force_path_style:true)
+  @client = Aws.s3(force_path_style:true)
 end
 
 Given(/^I am using the S3 "(.*?)" region$/) do |region|
-  @s3 = Aws.s3(region: region)
+  @client = Aws.s3(region: region)
 end
 
 When(/^I create a bucket$/) do
@@ -53,23 +53,23 @@ When(/^I create a bucket with the location constraint "(.*?)"$/) do |loc|
 end
 
 Then(/^the bucket should have a location constraint of "(.*?)"$/) do |loc|
-  resp = @s3.get_bucket_location(bucket: @bucket_name)
+  resp = @client.get_bucket_location(bucket: @bucket_name)
   expect(resp.data.location_constraint).to eq(loc)
 end
 
 Then(/^the bucket should exist$/) do
-  expect { @s3.get_bucket_location(bucket: @bucket_name) }.not_to raise_error
+  expect { @client.get_bucket_location(bucket: @bucket_name) }.not_to raise_error
 end
 
 When(/^I delete the bucket$/) do
-  @s3.delete_bucket(bucket: @bucket_name)
+  @client.delete_bucket(bucket: @bucket_name)
   @created_buckets.delete(@bucket_name)
 end
 
 Then(/^the bucket should not exist$/) do
   eventually(upto: 60) do
     begin
-      @s3.get_bucket_location(bucket: @bucket_name)
+      @client.get_bucket_location(bucket: @bucket_name)
     rescue => @error
     end
     expect(@error).to be_kind_of(Aws::S3::Errors::NoSuchBucket)
@@ -77,27 +77,27 @@ Then(/^the bucket should not exist$/) do
 end
 
 When(/^I put nothing to the key "(.*?)"$/) do |key|
-  @s3.put_object(bucket: @bucket_name, key: key)
+  @client.put_object(bucket: @bucket_name, key: key)
 end
 
 When(/^I put "(.*?)" to the key "(.*?)"$/) do |data, key|
-  @response = @s3.put_object(bucket: @bucket_name, key: key, body: data)
+  @response = @client.put_object(bucket: @bucket_name, key: key, body: data)
 end
 
 When(/^I put the test png to the key "(.*?)"$/) do |key|
   file = File.open(File.join(File.dirname(__FILE__), 'test.png'), 'rb')
-  @s3.put_object(bucket: @bucket_name, key: key, body: file)
+  @client.put_object(bucket: @bucket_name, key: key, body: file)
   file.close
 end
 
 Then(/^the object with the key "(.*?)" should have a content length of (\d+)$/) do |key, size|
-  resp = @s3.head_object(bucket: @bucket_name, key: key)
+  resp = @client.head_object(bucket: @bucket_name, key: key)
   expect(resp.data.content_length).to eq(size.to_i)
 end
 
 When(/^I page s3 objects prefixed "(.*?)" delimited "(.*?)" limit (\d+)$/) do |prefix, delimiter, max_keys|
   @responses = []
-  @s3.list_objects(
+  @client.list_objects(
     bucket: @bucket_name,
     prefix: prefix,
     delimiter: delimiter,
@@ -112,16 +112,16 @@ Then(/^I should have received (\d+) responses$/) do |count|
 end
 
 Given(/^I am using the S3 "(.*?)" endpoint$/) do |endpoint|
-  @s3 = Aws.s3(endpoint: endpoint)
+  @client = Aws.s3(endpoint: endpoint)
 end
 
 When(/^I create a bucket with a DNS compatible name that contains a dot$/) do
   @bucket_name = "aws.#{Time.now.to_i}.sdk"
-  @s3.create_bucket(bucket: @bucket_name)
+  @client.create_bucket(bucket: @bucket_name)
 end
 
 Then(/^I should be able to delete the bucket$/) do
-  @s3.delete_bucket(bucket: @bucket_name)
+  @client.delete_bucket(bucket: @bucket_name)
 end
 
 Then(/^the bucket name should be in the request path$/) do
@@ -136,7 +136,7 @@ end
 
 When(/^I put "(.*?)" to the key "(.*?)" with an aes key$/) do |body, key|
   @aes_key = OpenSSL::Cipher.new('aes-256-cbc').random_key
-  @s3.put_object(
+  @client.put_object(
     bucket: @bucket_name,
     key: key,
     body: body,
@@ -145,7 +145,7 @@ When(/^I put "(.*?)" to the key "(.*?)" with an aes key$/) do |body, key|
 end
 
 Then(/^I can download the key "(.*?)" with the aes key$/) do |key|
-  @s3.get_object(
+  @client.get_object(
     bucket: @bucket_name,
     key: key,
     sse_customer_algorithm: 'AES256',
@@ -153,7 +153,7 @@ Then(/^I can download the key "(.*?)" with the aes key$/) do |key|
 end
 
 When(/^I get the object with the key "(.*?)"$/) do |key|
-  @response = @s3.get_object(bucket: @bucket_name, key: key)
+  @response = @client.get_object(bucket: @bucket_name, key: key)
 end
 
 Then(/^the body should be an IO object$/) do
@@ -166,7 +166,7 @@ end
 
 When(/^I put a large object with a broken content-md5$/) do
   begin
-    @s3.put_object(
+    @client.put_object(
       bucket: @bucket_name,
       key: 'key',
       body: '.' * 1024 * 1024,
@@ -181,9 +181,9 @@ end
 
 When(/^I put a large object$/) do
   @key = 'large-object'
-  @s3.put_object(bucket: @bucket_name, key: @key, body: '.' * 1024 * 1024)
+  @client.put_object(bucket: @bucket_name, key: @key, body: '.' * 1024 * 1024)
 end
 
 Then(/^the object should exist$/) do
-  @s3.head_object(bucket: @bucket_name, key: @key)
+  @client.head_object(bucket: @bucket_name, key: @key)
 end

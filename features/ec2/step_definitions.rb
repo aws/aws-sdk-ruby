@@ -1,5 +1,5 @@
 Before("@ec2") do
-  @ec2 = @client = Aws.ec2
+  @client = Aws::EC2::Client.new
 end
 
 After("@ec2") do

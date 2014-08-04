@@ -1,5 +1,5 @@
 Before("@elasticloadbalancing") do
-  @elasticloadbalancing = @client = Aws.elasticloadbalancing
+  @client = Aws::ElasticLoadBalancing::Client.new
 end
 
 After("@elasticloadbalancing") do

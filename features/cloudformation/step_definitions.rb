@@ -1,5 +1,5 @@
 Before("@cloudformation") do
-  @cloudformation = @client = Aws.cloudformation
+  @client = Aws::CloudFormation::Client.new
 end
 
 After("@cloudformation") do

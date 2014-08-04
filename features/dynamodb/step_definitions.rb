@@ -1,5 +1,5 @@
 Before("@dynamodb") do
-  @dynamodb = @client = Aws.dynamodb
+  @client = Aws::DynamoDB::Client.new
 end
 
 After("@dynamodb") do
@@ -7,5 +7,5 @@ end
 
 Given(/^I disable translation features Aws::DynamoDB$/) do
   @simple_json = true
-  @dynamodb = @client = Aws.dynamodb(simple_json: true)
+  @client = Aws::DynamoDB::Client.new(simple_json: true)
 end

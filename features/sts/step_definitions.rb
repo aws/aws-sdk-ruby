@@ -1,5 +1,5 @@
 Before("@sts") do
-  @sts = @client = Aws.sts
+  @client = Aws::STS::Client.new
 end
 
 After("@sts") do

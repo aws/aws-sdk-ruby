@@ -1,5 +1,5 @@
 Before("@cloudtrail") do
-  @cloudtrail = @client = Aws.cloudtrail
+  @client = Aws::CloudTrail::Client.new
 end
 
 After("@cloudtrail") do

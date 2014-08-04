@@ -1,5 +1,5 @@
 Before("@rds") do
-  @rds = @client = Aws.rds
+  @client = Aws::RDS::Client.new
 end
 
 After("@rds") do
