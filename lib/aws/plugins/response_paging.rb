@@ -6,7 +6,7 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          paging_provider = context.config.api.metadata('paging')
+          paging_provider = context.client.class::PAGING_PROVIDER
           pager = paging_provider.pager(context.operation.name)
           PageableResponse.new(@handler.call(context), pager)
         end

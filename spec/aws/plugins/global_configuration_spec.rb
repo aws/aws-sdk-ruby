@@ -19,8 +19,7 @@ module Aws
           'protocol' => 'json',
           'signatureVersion' => 'v4',
         })
-        svc = Aws.add_service(:Svc)::Client
-        svc.add_version(api.version, 'api' => api)
+        svc = Aws.add_service(:Svc, 'api' => api)::Client
         svc.remove_plugin(RegionalEndpoint)
         svc.remove_plugin(Protocols::JsonRpc)
         svc.remove_plugin(RequestSigner)

@@ -8,7 +8,6 @@ module Aws
 
   @config = {}
 
-  autoload :ClientFactory, "#{SRC}/client_factory"
   autoload :CredentialProviderChain, "#{SRC}/credential_provider_chain"
   autoload :Credentials, "#{SRC}/credentials"
   autoload :EmptyStructure, "#{SRC}/empty_structure"
@@ -160,38 +159,68 @@ module Aws
       service_modules.map { |_,svc_mod| svc_mod.const_get(:Client) }
     end
 
-    # Registers a new service interface.  This method accepts a constant
-    # (class name) for the new service class and map of API
-    # versions.
+    # Registers a new service. Creates a Client class and an Errors
+    # module.
     #
     #     # register a new service & API version
-    #     Aws.add_service('S3', {
-    #       '2006-03-01' => {
-    #          'api' => '/path/to/api.json',
-    #          'paginators' => '/path/to/paginators.json',
-    #        }
-    #     }
+    #     Aws.add_service('S3',
+    #       'api' => '/path/to/api.json',
+    #       'paginators' => '/path/to/paginators.json',
+    #     )
     #
     #     # create a versioned client
-    #     Aws::S3.new
-    #     #=> #<Aws::S3::V20060301>
+    #     Aws::S3::Client.new
+    #     #=> #<Aws::S3::Client>
     #
-    # You can register multiple API versions for a service, and
+    # To register multiple API versions for the same service, use separate
+    # service names.
     #
-    # @param [String] name The name of the new service class.
-    # @param [Hash<YYYY-MM-DD,Hash>] versions A hash of API versions.  Hash
-    #   keys are API version dates, and values are hashes of:
-    #   * 'api' - path to API defintion
-    #   * 'paginators' - path to paginator defintion
-    # @return [class<Service>]
-    def add_service(name, versions = {})
-      identifier = name.to_s.downcase.to_sym
-      svc = const_set(name, Service.define(identifier, versions))
-      add_helper(identifier, svc)
-      svc
+    # @param [Symbol,String] svc_name The service module name.
+    # @option options [required, String,Seahorse::Model::Api] 'api' The path to the
+    #   service API description, or a loaded {Seahorse::Model::Api} object.
+    # @option options [String,Paging::Provider] 'paginators' The path to a paging
+    #   description file, or a load {Paging::Provider} object.
+    # @return [Module]
+    def add_service(svc_name, options = {})
+      svc_module = Module.new
+      svc_module.send(:extend, Service)
+      svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
+      svc_module.const_set(:Client, client_class(svc_name, options))
+      add_helper(svc_name.downcase.to_sym, svc_module)
+      const_set(svc_name, svc_module)
     end
 
     private
+
+    def client_class(svc_name, options)
+      client_class = Class.new(Seahorse::Client::Base)
+      client_class.const_set(:IDENTIFIER, svc_name.downcase.to_sym)
+      client_class.const_set(:PAGING_PROVIDER, paging_provider(options))
+      client_class.set_api(api(options))
+      Api::ServiceCustomizations.apply(client_class)
+      client_class
+    end
+
+    def api(options)
+      api = options['api']
+      case api
+      when Seahorse::Model::Api then api
+      when Hash then Seahorse::Model::Api.new(api)
+      when String then Seahorse::Model::Api.new(MultiJson.load(File.read(api)))
+      else
+        raise ArgumentError, "expected :api to be an Api, Hash or String"
+      end
+    end
+
+    def paging_provider(options)
+      paginators = options['paginators']
+      case paginators
+      when Paging::Provider then paginators
+      when Hash then Paging::Provider.new(paginators)
+      when String then Paging::Provider.new(MultiJson.load(File.read(paginators)))
+      when nil then Paging::NullProvider.new
+      end
+    end
 
     def add_helper(method_name, svc_mod)
       service_modules[method_name] = svc_mod
@@ -204,7 +233,7 @@ module Aws
   end
 
   Api::Manifest.default_manifest.services.each do |service|
-    add_service(service.name, service.versions)
+    add_service(service.name, service.versions.values.last)
   end
 
 end
