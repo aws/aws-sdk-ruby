@@ -17,6 +17,7 @@ module Aws
   autoload :PageableResponse, "#{SRC}/pageable_response"
   autoload :RestBodyHandler, "#{SRC}/rest_body_handler"
   autoload :Service, "#{SRC}/service"
+  autoload :ServiceBuilder, "#{SRC}/service_builder"
   autoload :SharedCredentials, "#{SRC}/shared_credentials"
   autoload :Structure, "#{SRC}/structure"
   autoload :TreeHash, "#{SRC}/tree_hash"
@@ -175,52 +176,16 @@ module Aws
     # To register multiple API versions for the same service, use separate
     # service names.
     #
-    # @param [Symbol,String] svc_name The service module name.
-    # @option options [required, String,Seahorse::Model::Api] 'api' The path to the
-    #   service API description, or a loaded {Seahorse::Model::Api} object.
-    # @option options [String,Paging::Provider] 'paginators' The path to a paging
-    #   description file, or a load {Paging::Provider} object.
-    # @return [Module]
+    # @param (see ServiceBuilder.new)
+    # @option (see ServiceBuilder.new)
+    # @return (see ServiceBuilder.new)
     def add_service(svc_name, options = {})
-      svc_module = Module.new
-      svc_module.send(:extend, Service)
-      svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
-      svc_module.const_set(:Client, client_class(svc_name, options))
+      svc_module = const_set(svc_name, ServiceBuilder.new(svc_name, options))
       add_helper(svc_name, svc_module)
-      const_set(svc_name, svc_module)
+      svc_module
     end
 
     private
-
-    def client_class(svc_name, options)
-      client_class = Class.new(Seahorse::Client::Base)
-      client_class.const_set(:IDENTIFIER, svc_name.downcase.to_sym)
-      client_class.const_set(:PAGING_PROVIDER, paging_provider(options))
-      client_class.set_api(api(options))
-      Api::ServiceCustomizations.apply(client_class)
-      client_class
-    end
-
-    def api(options)
-      api = options['api']
-      case api
-      when Seahorse::Model::Api then api
-      when Hash then Seahorse::Model::Api.new(api)
-      when String then Seahorse::Model::Api.new(MultiJson.load(File.read(api)))
-      else
-        raise ArgumentError, "expected :api to be an Api, Hash or String"
-      end
-    end
-
-    def paging_provider(options)
-      paginators = options['paginators']
-      case paginators
-      when Paging::Provider then paginators
-      when Hash then Paging::Provider.new(paginators)
-      when String then Paging::Provider.new(MultiJson.load(File.read(paginators)))
-      when nil then Paging::NullProvider.new
-      end
-    end
 
     def add_helper(svc_name, svc_mod)
       method_name = svc_name.downcase.to_sym

@@ -181,6 +181,7 @@ def document_operation(svc_name, client, method_name, operation)
   m.scope = :instance
   m.parameters << ['params', '{}']
   m.docstring = operation_docstring(svc_name, method_name, operation)
+  m.group = 'API Operation Methods'
 end
 
 def operation_docstring(svc_name, method_name, operation)

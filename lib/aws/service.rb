@@ -29,17 +29,5 @@ module Aws
       const_get(:Client).new(options)
     end
 
-    class << self
-
-      # @api private
-      def define(identifier, versions = {})
-        svc_mod = Module.new
-        svc_mod.extend(Service)
-        svc_mod.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
-        svc_mod.const_set(:Client, ClientFactory.define(identifier, versions))
-        svc_mod
-      end
-
-    end
   end
 end
