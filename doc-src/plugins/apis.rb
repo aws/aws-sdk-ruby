@@ -12,18 +12,14 @@ YARD::Tags::Library.define_tag('API_VERSION', :api_version)
 YARD::Templates::Engine.register_template_path(File.join(File.dirname(__FILE__), '..', 'templates'))
 
 YARD::Parser::SourceParser.after_parse_list do
-  each_service do |svc_name, apis|
-    document_svc(svc_name, apis)
+  each_service do |svc_name|
+    document_svc(svc_name)
   end
 end
 
 def each_service(&block)
   Aws::Api::Manifest.default_manifest.services.each do |svc|
-    apis = svc.versions.map do |date, definitions|
-      api = MultiJson.load(File.read(definitions['api']))
-      Seahorse::Model::Api.new(api)
-    end
-    yield(svc.name, apis)
+    yield(svc.name)
   end
 end
 
@@ -34,58 +30,42 @@ def load_api(path)
     errors: true)
 end
 
-def document_svc(svc_name, apis)
-  document_svc_helper(svc_name, apis)
-  svc_mod = document_service(svc_name, apis)
-  document_errors(svc_mod, svc_name, apis)
-  client = document_client(svc_mod, svc_name, apis)
-  apis.each do |api|
-    document_client_versions(client, svc_name, api)
-  end
+def document_svc(svc_name)
+  svc_mod = document_service(svc_name)
+  document_errors(svc_mod, svc_name)
+  document_client(svc_mod, svc_name)
 end
 
-def document_svc_helper(svc_name, apis)
-  method_name = svc_name.downcase
-  m = YARD::CodeObjects::MethodObject.new(YARD::Registry['Aws'], method_name)
-  m.scope = :class
-  m.parameters << ['options', '{}']
-  m.docstring = <<-DOC.strip
-Returns a new instance of {#{svc_name}}.
-@option (see Aws::#{svc_name}.new)
-@return (see Aws::#{svc_name}.new)
-  DOC
-end
-
-def document_service(svc_name, apis)
+def document_service(svc_name)
   namespace = YARD::Registry['Aws']
   yard_mod = YARD::CodeObjects::ModuleObject.new(namespace, svc_name)
-  yard_mod.docstring = service_docstring(svc_name, apis)
+  yard_mod.docstring = service_docstring(svc_name)
   yard_mod.docstring.add_tag(YARD::Tags::Tag.new(:service, svc_name))
   yard_mod
 end
 
-def service_docstring(svc_name, apis)
+def service_docstring(svc_name)
   path = "doc-src/services/#{svc_name}/service.md"
   if File.exists?(path)
     template = File.read(path)
   else
     template = File.read('doc-src/services/default/service.md')
   end
-  default_api = apis.sort_by(&:version).last
-  full_name = default_api.metadata('serviceFullName')
+  api = Aws.const_get(svc_name).const_get(:Client).api
+  full_name = api.metadata('serviceFullName')
   ERB.new(template).result(binding)
 end
 
-def document_errors(namespace, svc_name, apis)
+def document_errors(namespace, svc_name)
   errors_mod = YARD::CodeObjects::ModuleObject.new(namespace, 'Errors')
-  errors_mod.docstring = errors_docstring(svc_name, apis)
+  errors_mod.docstring = errors_docstring(svc_name)
 
   base_error = YARD::CodeObjects::ClassObject.new(errors_mod, 'ServiceError')
   base_error.docstring = "Base class for all Aws::#{svc_name} errors."
   base_error.superclass = YARD::Registry['Aws::Errors::ServiceError']
 
-  default_api = apis.sort_by(&:version).last
-  default_api.operations.each do |_, operation|
+  api = Aws.const_get(svc_name).const_get(:Client).api
+  api.operations.each do |_, operation|
     operation.errors.each do |error|
       error_klass = YARD::CodeObjects::ClassObject.new(errors_mod, error.name)
       error_klass.superclass = base_error
@@ -95,29 +75,29 @@ def document_errors(namespace, svc_name, apis)
 
 end
 
-def errors_docstring(svc_name, apis)
+def errors_docstring(svc_name)
   path = "doc-src/services/#{svc_name}/errors.md"
   if File.exists?(path)
     template = File.read(path)
   else
     template = File.read('doc-src/services/default/errors.md')
   end
-  default_api = apis.sort_by(&:version).last
-  full_name = default_api.metadata('serviceFullName')
-  known_errors = default_api.operations.map {|_,o| o.errors.map(&:name) }.flatten.uniq.sort
+  api = Aws.const_get(svc_name).const_get(:Client).api
+  full_name = api.metadata('serviceFullName')
+  known_errors = api.operations.map {|_,o| o.errors.map(&:name) }.flatten.uniq.sort
   ERB.new(template).result(binding)
 end
 
-def document_client(namespace, svc_name, apis)
+def document_client(namespace, svc_name)
   yard_klass = YARD::CodeObjects::ClassObject.new(namespace, 'Client')
-  yard_klass.superclass = YARD::Registry['Aws::Client']
-  yard_klass.docstring = client_docstring(svc_name, apis)
+  yard_klass.superclass = YARD::Registry['Seahorse::Client::Base']
+  yard_klass.docstring = client_docstring(svc_name)
 
   client = Aws.const_get(svc_name).const_get(:Client)
 
   options = {}
 
-  client.default_client_class.plugins.each do |plugin|
+  client.plugins.each do |plugin|
     if p = YARD::Registry[plugin.name]
       p.tags.each do |tag|
         if tag.tag_name == 'seahorse_client_option'
@@ -132,60 +112,33 @@ def document_client(namespace, svc_name, apis)
   options = options.sort_by { |k,v| k }.map(&:last).join("\n")
 
   docstring = <<-DOCS.strip
-Constructs a versioned client for this service.
-@option options [String<YYYY-MM-DD>] :api_version ('#{client.latest_api_version}')
-  The API version to use for this service.  Valid values include:
-
-  * #{client.api_versions.join("\n  * ")}
+Constructs an API client.
 #{options}
-@return [#{client.default_client_class.name}] Returns a versioned client.
-  By default, this will be a client for the latest API version.  Configure
-  the `:api_version` option to affect which client class is constructed.
-  Possible versioned clients are:
-
-  * #{client.versioned_clients.map{ |k| "{#{k.name}}" }.join("\n  * ")}
-
+@return [#{client.name}] Returns an API client.
   DOCS
 
-  constructor = YARD::CodeObjects::MethodObject.new(yard_klass, :new)
-  constructor.scope = :class
+  constructor = YARD::CodeObjects::MethodObject.new(yard_klass, :initialize)
+  constructor.scope = :instance
   constructor.parameters << ['options', '{}']
   constructor.docstring = docstring
 
-  client.default_client_class.api.operations.each do |method_name, operation|
+  client.api.operations.each do |method_name, operation|
     document_operation(svc_name, yard_klass, method_name, operation)
   end
 
   yard_klass
 end
 
-def client_docstring(svc_name, apis)
+def client_docstring(svc_name)
   path = "doc-src/services/#{svc_name}/client.md"
   if File.exists?(path)
     template = File.read(path)
   else
     template = File.read('doc-src/services/default/client.md')
   end
-  oldest_api = apis.sort_by(&:version).first
-  default_api = apis.sort_by(&:version).last
-  full_name = default_api.metadata('serviceFullName')
-  ERB.new(template).result(binding)
-end
-
-def document_client_versions(namespace, svc_name, api)
-  name = "V#{api.version.gsub(/-/, '')}"
+  api = Aws.const_get(svc_name).const_get(:Client).api
   full_name = api.metadata('serviceFullName')
-  klass = YARD::CodeObjects::ClassObject.new(namespace, name)
-  klass.superclass = YARD::Registry['Seahorse::Client::Base']
-  klass.docstring = "A client for the #{full_name} #{api.version} API."
-  klass.docstring.add_tag(YARD::Tags::Tag.new(:api_version, api.version))
-  api.operations.each do |method_name, operation|
-    document_operation(svc_name, klass, method_name, operation)
-  end
-  constructor = YARD::CodeObjects::MethodObject.new(klass, :initialize)
-  constructor.scope = :instance
-  constructor.parameters << ['options', '{}']
-  constructor.docstring = "@option (see #{svc_name}.new)"
+  ERB.new(template).result(binding)
 end
 
 class Tabulator
@@ -228,6 +181,7 @@ def document_operation(svc_name, client, method_name, operation)
   m.scope = :instance
   m.parameters << ['params', '{}']
   m.docstring = operation_docstring(svc_name, method_name, operation)
+  m.group = 'API Operation Methods'
 end
 
 def operation_docstring(svc_name, method_name, operation)

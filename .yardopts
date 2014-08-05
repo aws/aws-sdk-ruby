@@ -4,6 +4,7 @@
 --markup-provider rdiscount
 --hide-api private
 --plugin sitemap
+--embed-mixins
 --asset doc-src/images:images
 -e doc-src/plugins/apis.rb
 -e doc-src/plugins/resources.rb

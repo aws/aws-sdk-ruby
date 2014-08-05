@@ -6,7 +6,18 @@
     "globalEndpoint":"s3.amazonaws.com",
     "serviceAbbreviation":"Amazon S3",
     "serviceFullName":"Amazon Simple Storage Service",
-    "signatureVersion":"s3",
+    "signatureVersion":"v4",
+    "v3Regions": [
+      "us-east-1",
+      "us-west-1",
+      "us-west-2",
+      "ap-northeast-1",
+      "ap-southeast-1",
+      "ap-southeast-2",
+      "sa-east-1",
+      "eu-west-1",
+      "us-gov-west-1"
+    ],
     "timestampFormat":"rfc822",
     "protocol":"rest-xml"
   },
@@ -15,7 +26,7 @@
       "name":"AbortMultipartUpload",
       "http":{
         "method":"DELETE",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"AbortMultipartUploadRequest"},
       "errors":[
@@ -32,7 +43,7 @@
       "name":"CompleteMultipartUpload",
       "http":{
         "method":"POST",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"CompleteMultipartUploadRequest"},
       "output":{"shape":"CompleteMultipartUploadOutput"},
@@ -43,7 +54,7 @@
       "name":"CopyObject",
       "http":{
         "method":"PUT",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"CopyObjectRequest"},
       "output":{"shape":"CopyObjectOutput"},
@@ -81,7 +92,7 @@
       "name":"CreateMultipartUpload",
       "http":{
         "method":"POST",
-        "requestUri":"/{Bucket}/{Key}?uploads"
+        "requestUri":"/{Bucket}/{Key+}?uploads"
       },
       "input":{"shape":"CreateMultipartUploadRequest"},
       "output":{"shape":"CreateMultipartUploadOutput"},
@@ -153,7 +164,7 @@
       "name":"DeleteObject",
       "http":{
         "method":"DELETE",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"DeleteObjectRequest"},
       "output":{"shape":"DeleteObjectOutput"},
@@ -297,7 +308,7 @@
       "name":"GetObject",
       "http":{
         "method":"GET",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"GetObjectRequest"},
       "output":{"shape":"GetObjectOutput"},
@@ -315,7 +326,7 @@
       "name":"GetObjectAcl",
       "http":{
         "method":"GET",
-        "requestUri":"/{Bucket}/{Key}?acl"
+        "requestUri":"/{Bucket}/{Key+}?acl"
       },
       "input":{"shape":"GetObjectAclRequest"},
       "output":{"shape":"GetObjectAclOutput"},
@@ -333,7 +344,7 @@
       "name":"GetObjectTorrent",
       "http":{
         "method":"GET",
-        "requestUri":"/{Bucket}/{Key}?torrent"
+        "requestUri":"/{Bucket}/{Key+}?torrent"
       },
       "input":{"shape":"GetObjectTorrentRequest"},
       "output":{"shape":"GetObjectTorrentOutput"},
@@ -361,7 +372,7 @@
       "name":"HeadObject",
       "http":{
         "method":"HEAD",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"HeadObjectRequest"},
       "output":{"shape":"HeadObjectOutput"},
@@ -432,7 +443,7 @@
       "name":"ListParts",
       "http":{
         "method":"GET",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"ListPartsRequest"},
       "output":{"shape":"ListPartsOutput"},
@@ -543,7 +554,7 @@
       "name":"PutObject",
       "http":{
         "method":"PUT",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"PutObjectRequest"},
       "output":{"shape":"PutObjectOutput"},
@@ -554,7 +565,7 @@
       "name":"PutObjectAcl",
       "http":{
         "method":"PUT",
-        "requestUri":"/{Bucket}/{Key}?acl"
+        "requestUri":"/{Bucket}/{Key+}?acl"
       },
       "input":{"shape":"PutObjectAclRequest"},
       "errors":[
@@ -571,7 +582,7 @@
       "name":"RestoreObject",
       "http":{
         "method":"POST",
-        "requestUri":"/{Bucket}/{Key}?restore"
+        "requestUri":"/{Bucket}/{Key+}?restore"
       },
       "input":{"shape":"RestoreObjectRequest"},
       "errors":[
@@ -589,7 +600,7 @@
       "name":"UploadPart",
       "http":{
         "method":"PUT",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"UploadPartRequest"},
       "output":{"shape":"UploadPartOutput"},
@@ -600,7 +611,7 @@
       "name":"UploadPartCopy",
       "http":{
         "method":"PUT",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"UploadPartCopyRequest"},
       "output":{"shape":"UploadPartCopyOutput"},
@@ -844,7 +855,7 @@
         "MultipartUpload":{
           "shape":"CompletedMultipartUpload",
           "locationName":"CompleteMultipartUpload",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/"
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         },
         "UploadId":{
           "shape":"MultipartUploadId",
@@ -1187,7 +1198,7 @@
         },
         "CreateBucketConfiguration":{
           "shape":"CreateBucketConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"CreateBucketConfiguration"
         },
         "GrantFullControl":{
@@ -1573,7 +1584,7 @@
         },
         "Delete":{
           "shape":"Delete",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"Delete"
         },
         "MFA":{
@@ -3148,7 +3159,7 @@
         },
         "AccessControlPolicy":{
           "shape":"AccessControlPolicy",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"AccessControlPolicy"
         },
         "Bucket":{
@@ -3205,7 +3216,7 @@
         },
         "CORSConfiguration":{
           "shape":"CORSConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"CORSConfiguration"
         },
         "ContentMD5":{
@@ -3232,7 +3243,7 @@
         },
         "LifecycleConfiguration":{
           "shape":"LifecycleConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"LifecycleConfiguration"
         }
       },
@@ -3252,7 +3263,7 @@
         },
         "BucketLoggingStatus":{
           "shape":"BucketLoggingStatus",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"BucketLoggingStatus"
         },
         "ContentMD5":{
@@ -3282,7 +3293,7 @@
         },
         "NotificationConfiguration":{
           "shape":"NotificationConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"NotificationConfiguration"
         }
       },
@@ -3331,7 +3342,7 @@
         },
         "RequestPaymentConfiguration":{
           "shape":"RequestPaymentConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"RequestPaymentConfiguration"
         }
       },
@@ -3356,7 +3367,7 @@
         },
         "Tagging":{
           "shape":"Tagging",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"Tagging"
         }
       },
@@ -3387,7 +3398,7 @@
         },
         "VersioningConfiguration":{
           "shape":"VersioningConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"VersioningConfiguration"
         }
       },
@@ -3412,7 +3423,7 @@
         },
         "WebsiteConfiguration":{
           "shape":"WebsiteConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"WebsiteConfiguration"
         }
       },
@@ -3433,7 +3444,7 @@
         },
         "AccessControlPolicy":{
           "shape":"AccessControlPolicy",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"AccessControlPolicy"
         },
         "Bucket":{
@@ -3752,7 +3763,7 @@
         },
         "RestoreRequest":{
           "shape":"RestoreRequest",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"RestoreRequest"
         }
       },

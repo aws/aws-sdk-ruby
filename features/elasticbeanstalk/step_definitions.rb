@@ -1,5 +1,5 @@
 Before("@elasticbeanstalk") do
-  @elasticbeanstalk = @client = Aws.elasticbeanstalk
+  @client = Aws::ElasticBeanstalk::Client.new
 end
 
 After("@elasticbeanstalk") do

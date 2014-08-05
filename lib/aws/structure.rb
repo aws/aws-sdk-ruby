@@ -1,7 +1,10 @@
+require 'thread'
+
 module Aws
   class Structure < Struct
 
     @@classes = {}
+    @@classes_mutex = Mutex.new
 
     # Deeply converts the Structure into a hash.  Structure members that
     # are `nil` are omitted from the resultant hash.
@@ -88,8 +91,14 @@ module Aws
         if members.empty? && self == Structure
           EmptyStructure.new
         else
-          @@classes[members] ||= members.empty? ? super(:_) : super(*members)
-          @@classes[members].new(*values)
+          struct_class = @@classes[members]
+          if struct_class.nil?
+            @@classes_mutex.synchronize do
+              struct_class = members.empty? ? super(:_) : super(*members)
+              @@classes[members] = struct_class
+            end
+          end
+          struct_class.new(*values)
         end
       end
 

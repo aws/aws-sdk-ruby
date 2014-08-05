@@ -1,5 +1,5 @@
 Before("@opsworks") do
-  @opsworks = @client = Aws.opsworks
+  @client = Aws::OpsWorks::Client.new
 end
 
 After("@opsworks") do

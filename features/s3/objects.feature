@@ -35,3 +35,12 @@ Feature: S3 Objects
     And I put nothing to the key "photos/friends.jpg"
     When I page s3 objects prefixed "photos/" delimited "/" limit 1
     Then I should have received 4 responses
+
+  # Previously, this was causing an issue as S3 was closing the socket
+  # as the Ruby SDK was not sending Expect: 100-continue. This also
+  # exercises the patch that fixes the faulty net/http implementation
+  # of 100-continue.
+  @100continue
+  Scenario: Expect 100 continue
+    When I put a large object with a broken content-md5
+    Then I should receive an invalid digest error

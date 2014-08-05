@@ -1,7 +1,5 @@
 # CloudFront uses a target payload.  This test ensures the response elements
 # are correctly deserialized
-config:
-  api_version: '2014-01-31'
 operation: list_distributions
 response:
   status_code: 200

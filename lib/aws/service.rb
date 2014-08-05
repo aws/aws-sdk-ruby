@@ -16,23 +16,11 @@ module Aws
       unless @warned
         @warned = true
         warn(<<-MSG.strip)
-#{self.name}.new deprecated as of v2.0.0.rc11 and will be removed as of v2.0.0.0 final; use #{self.name}::Client.new instead
+#{self.name}.new deprecated as of v2.0.0.rc11 and will be removed as of v2.0.0.0 final; use #{self.name}::Client.new() instead
         MSG
       end
       const_get(:Client).new(options)
     end
 
-    class << self
-
-      # @api private
-      def define(identifier, versions = {})
-        svc_mod = Module.new
-        svc_mod.extend(Service)
-        svc_mod.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
-        svc_mod.const_set(:Client, Client.define(identifier, versions))
-        svc_mod
-      end
-
-    end
   end
 end

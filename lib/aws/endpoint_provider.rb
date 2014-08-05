@@ -3,161 +3,92 @@ require 'multi_json'
 module Aws
   class EndpointProvider
 
-    # @api private
-    DEFAULT_RULES_PATH = File.expand_path(File.join(File.dirname(__FILE__),
-      '..', '..', 'apis', 'endpoints.json'
-    ))
-
-    def initialize
-      clear_rules
+    # @option options [Array<Hash>] :rules ([]) An array of grouped rules.
+    def initialize(options = {})
+      @rules = options[:rules] || []
     end
 
     # @option options [required, String] :service
     # @option options [required, String] :region
     # @option options [required, String] :scheme
-    def resolve(options = {})
-      service_rules(options[:service].to_s).each do |rule|
-        return rule.apply(options) if rule.matches?(options)
-      end
-      nil
-    end
-
-    # Removes all rules.
-    def clear_rules
-      @rules = Hash.new{ |h,k| h[k] = [] }
-    end
-
-    # Prepends a default rule that applies to all services.  Default
-    # rules have lower priority than service specific rules.
-    def prepend_default_rule(rule)
-      prepend_service_rule('_default', rule)
-    end
-
-    # Appends a rule that applies for all services.  Appending a rule
-    # gives it lowest priority. Default rules have lower priority than
-    # service specific rules.
-    def append_default_rule(rule)
-      append_service_rule('_default', rule)
-    end
-
-    # Prepends a rule that applies to a single service.  Prepending a rule
-    # gives it higest priority. Service specific rules are matches before
-    # default rules.
-    # @param [String] service The endpoint prefix of the service.
-    # @param [Rule] rule
-    # @return [void]
-    def prepend_service_rule(service, rule)
-      @rules[service].unshift(rule)
-    end
-
-    # Appends a rule that applies to a single service.  Appending a rule
-    # gives it lowest priority. Service specific rules are matches before
-    # default rules.
-    # service specific rules.
-    # @param [String] service The endpoint prefix of the service.
-    # @param [Rule] rule
-    # @return [void]
-    def append_service_rule(service, rule)
-      @rules[service].push(rule)
-    end
-
-    # Appends the given rule to each service and as a default rule, giving
-    # it the highest priority.
-    # @param [Rule] rule
-    # @return [void]
-    def prepend_all(rule)
-      @rules.keys.each do |svc|
-        prepend_service_rule(svc, rule)
-      end
-    end
-
-    private
-
-    def service_rules(service_name)
-      rules_for(service_name) + rules_for('_default')
-    end
-
-    def rules_for(service_name)
-      @rules.key?(service_name) ? @rules[service_name] : []
-    end
-
-    class Rule
-
-      # @param [String] uri
-      # @param [Array<Array<String>>] constraints Each constraint must specify
-      #   the following:
-      #
-      #   * an option ("service", "region", "scheme")
-      #   * a constraint ("startsWith", "equals", "notEquals", "oneOf")
-      #   * a value or array of values for "oneOf"
-      #
-      #   Example constraints:
-      #
-      #       ['region', 'equals', 'cn-north-1']
-      #       ['region', 'notEquals', 'us-east-1']
-      #       ['region', 'oneOf', ['us-east-1', 'us-west-1']]
-      #
-      def initialize(uri, constraints = [])
-        @uri = uri
-        @constraints = constraints
-      end
-
-      def matches?(options)
-        @constraints.all? do |option, constraint_name, constraint|
-          send("option_#{constraint_name}", options[option.to_sym], constraint)
-        end
-      end
-
-      def apply(options)
-        @uri.gsub(/{(scheme|service|region)}/) do |placeholder|
-          options[placeholder[1..-2].to_sym]
-        end
-      end
-
-      private
-
-      def option_startsWith(option, constraint)
-        option.to_s.match(/^#{constraint}/)
-      end
-
-      def option_notStartsWith(option, constraint)
-        !option_startsWith(option, constraint)
-      end
-
-      def option_equals(option, constraint)
-        option == constraint
-      end
-
-      def option_notEquals(option, constraint)
-        !option_equals(option, constraint)
-      end
-
-      def option_oneOf(option, constraint)
-        constraint.include?(option)
-      end
-
-    end
-
-    class << self
-
-      # @return [EndpointProvider]
-      def default_provider
-        @default_provider ||= begin
-          new.tap do |provider|
-            default_rules do |service, rule|
-              provider.append_service_rule(service, rule)
+    # @return [Hash]
+    def resolve(options)
+      @rules.each do |rule_group|
+        if region_matches?(rule_group, options)
+          rule_group['rules'].each do |rule|
+            if service_matches?(rule, options)
+              return expand_endpoint(rule['config']['endpoint'], options)
             end
           end
         end
       end
+      {}
+    end
 
-      # @api private
-      def default_rules(&block)
-        MultiJson.load(File.read(DEFAULT_RULES_PATH)).each do |service, rules|
-          rules.each do |rule|
-            yield(service, Rule.new(rule['uri'], rule['constraints'] || []))
-          end
-        end
+    # @option options [required, String] :pattern The endpoint pattern with
+    #   optional placeholders. This is applied when rules match during
+    #   resolution. Valid placeholders include:
+    #
+    #   * `{scheme}`
+    #   * `{region}`
+    #   * `{service}`
+    #
+    #   An example pattern:
+    #
+    #       "#{scheme}://{service}.{region}.amazonaws.com"
+    #
+    # @option options [Integer] :priority (100) A number from 0 to 999.
+    #   Rules with lower number have a higher priority and are evaluated first.
+    #
+    # @option options [String] :region_prefix ("") Causes regions with this
+    #   prefix to match. Leave this empty if you want to match all regions.
+    #
+    # @option options [Array<String>] :services A list of services this rule
+    #   applies to. Omit this option if you want this rule to apply to all
+    #   services.
+    #
+    #   The string must be the service endpoint prefix as a string.
+    #   E.g. "s3", "ec2", "monitoring" (for cloud watch).
+    #
+    def add_rule(options = {})
+      @rules = (@rules + [new_rule(options)]).sort_by { |r| r['priority'] }
+    end
+
+    private
+
+    def new_rule(options)
+      rule = {}
+      rule['services'] = options[:services] if options[:services]
+      rule['config'] = {}
+      rule['config']['endpoint'] = options[:pattern]
+      {
+        'priority' => options[:priority] || 100,
+        'regionPrefix' => options[:region_prefix] || '',
+        'rules' => [rule]
+      }
+    end
+
+    def region_matches?(rule_group, options)
+      options[:region] && options[:region].match(/^#{rule_group['regionPrefix']}/)
+    end
+
+    def service_matches?(rule, options)
+      rule['services'].nil? || rule['services'].include?(options[:service])
+    end
+
+    def expand_endpoint(pattern, options)
+      pattern.gsub(/{\w+}/) { |match| options[match[1..-2].to_sym] }
+    end
+
+    class << self
+
+      def default_provider
+        @default_provider ||= EndpointProvider.new(rules: default_rules)
+      end
+
+      def default_rules
+        path = File.join(File.dirname(__FILE__), '..', '..', 'endpoints.json')
+        MultiJson.load(File.read(path))
       end
 
     end

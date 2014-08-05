@@ -8,7 +8,6 @@ module Aws
 
   @config = {}
 
-  autoload :Client, "#{SRC}/client"
   autoload :CredentialProviderChain, "#{SRC}/credential_provider_chain"
   autoload :Credentials, "#{SRC}/credentials"
   autoload :EmptyStructure, "#{SRC}/empty_structure"
@@ -18,6 +17,7 @@ module Aws
   autoload :PageableResponse, "#{SRC}/pageable_response"
   autoload :RestBodyHandler, "#{SRC}/rest_body_handler"
   autoload :Service, "#{SRC}/service"
+  autoload :ServiceBuilder, "#{SRC}/service_builder"
   autoload :SharedCredentials, "#{SRC}/shared_credentials"
   autoload :Structure, "#{SRC}/structure"
   autoload :TreeHash, "#{SRC}/tree_hash"
@@ -66,6 +66,7 @@ module Aws
     autoload :Route53IdFix, "#{SRC}/plugins/route_53_id_fix"
     autoload :S3BucketDns, "#{SRC}/plugins/s3_bucket_dns"
     autoload :S3CompleteMultipartUploadFix, "#{SRC}/plugins/s3_complete_multipart_upload_fix"
+    autoload :S3Expect100Continue, "#{SRC}/plugins/s3_expect_100_continue"
     autoload :S3GetBucketLocationFix, "#{SRC}/plugins/s3_get_bucket_location_fix"
     autoload :S3LocationConstraint, "#{SRC}/plugins/s3_location_constraint"
     autoload :S3Md5s, "#{SRC}/plugins/s3_md5s"
@@ -159,42 +160,43 @@ module Aws
       service_modules.map { |_,svc_mod| svc_mod.const_get(:Client) }
     end
 
-    # Registers a new service interface.  This method accepts a constant
-    # (class name) for the new service class and map of API
-    # versions.
+    # Registers a new service. Creates a Client class and an Errors
+    # module.
     #
     #     # register a new service & API version
-    #     Aws.add_service('S3', {
-    #       '2006-03-01' => {
-    #          'api' => '/path/to/api.json',
-    #          'paginators' => '/path/to/paginators.json',
-    #        }
-    #     }
+    #     Aws.add_service('S3',
+    #       'api' => '/path/to/api.json',
+    #       'paginators' => '/path/to/paginators.json',
+    #     )
     #
     #     # create a versioned client
-    #     Aws::S3.new
-    #     #=> #<Aws::S3::V20060301>
+    #     Aws::S3::Client.new
+    #     #=> #<Aws::S3::Client>
     #
-    # You can register multiple API versions for a service, and
+    # To register multiple API versions for the same service, use separate
+    # service names.
     #
-    # @param [String] name The name of the new service class.
-    # @param [Hash<YYYY-MM-DD,Hash>] versions A hash of API versions.  Hash
-    #   keys are API version dates, and values are hashes of:
-    #   * 'api' - path to API defintion
-    #   * 'paginators' - path to paginator defintion
-    # @return [class<Service>]
-    def add_service(name, versions = {})
-      identifier = name.to_s.downcase.to_sym
-      svc = const_set(name, Service.define(identifier, versions))
-      add_helper(identifier, svc)
-      svc
+    # @param (see ServiceBuilder.new)
+    # @option (see ServiceBuilder.new)
+    # @return (see ServiceBuilder.new)
+    def add_service(svc_name, options = {})
+      svc_module = const_set(svc_name, ServiceBuilder.new(svc_name, options))
+      add_helper(svc_name, svc_module)
+      svc_module
     end
 
     private
 
-    def add_helper(method_name, svc_mod)
+    def add_helper(svc_name, svc_mod)
+      method_name = svc_name.downcase.to_sym
       service_modules[method_name] = svc_mod
       define_method(method_name) do |options = {}|
+        unless instance_variable_get("@#{method_name}_warned")
+          instance_variable_set("@#{method_name}_warned", true)
+          warn(<<-MSG.strip)
+Aws.#{method_name} deprecated as of v2.0.0.rc14 and will be removed as of v2.0.0.0 final; use Aws::#{svc_name}::Client.new() instead
+          MSG
+        end
         svc_mod.const_get(:Client).new(options)
       end
       module_function(method_name)
@@ -203,7 +205,7 @@ module Aws
   end
 
   Api::Manifest.default_manifest.services.each do |service|
-    add_service(service.name, service.versions)
+    add_service(service.name, service.versions.values.last)
   end
 
 end

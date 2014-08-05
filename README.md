@@ -1,4 +1,4 @@
-# AWS SDK Core [![Build Status](https://travis-ci.org/aws/aws-sdk-core-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-core-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-core-ruby.png)](https://codeclimate.com/github/aws/aws-sdk-core-ruby)
+# AWS SDK Core [![Build Status](https://travis-ci.org/aws/aws-sdk-core-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-core-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-core-ruby.png)](https://codeclimate.com/github/aws/aws-sdk-core-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-core-ruby/badge.png?branch=master)](https://coveralls.io/r/aws/aws-sdk-core-ruby?branch=master)
 
 This library is in a developer preview period.
 
@@ -9,26 +9,45 @@ than the clients in version 1 of the Ruby SDK.
 
 For version 1.0 of the Ruby SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
 
-## 2.0.0.rc11 Upgrading Notes
+### 2.0.0.rc14 Upgrading Notes
+
+RC14 simplifies the API versioning strategy. This may require small changes for
+users that use the API version locking options. Also, there are minor changes
+when configuring raw endpoints.
+
+* Versioned client classes removed, e.g. `Aws::S3::Client::V20060301.new` should
+  be replaced with `Aws::S3::Client.new` The `:api_version` constructor option
+  is no longer accepted.
+
+* Aws helper methods for client construction deprecated; For example,
+  calling `Aws.s3` will generate a deprecation warning. Call `Aws::S3::Client.new`
+  instead. Top-level helpers will be removed as of v2.0.0 final.
+
+* When configuring an `:endpoint` directly, you must now specify the
+  HTTP scheme, e.g. "http://localhost:3000", instead of "localhost:3000".
+  Please note, this should only be done for testing. Normally you only
+  need to configure a `:region`.
+
+### 2.0.0.rc11 Upgrading Notes
 
 RC 11 requires a few minor updates.  These should be the final public-facing
 changes before 2.0.0 final.
 
 * The prefered constructor for services is now using the client
   class, example:
-    
+
       # deprecated, will be removed for 2.0.0 final
       Aws::S3.new
-    
+
       # preferred
       Aws::S3::Client.new
 
 * The `:raw_json` option for JSON protocol based services has been
   renamed to `:simple_json`
-    
+
 * The short name for Aws::SimpleDB has been renamed from `sdb` to
   `simpledb`.
-    
+
 ## Links of Interest
 
 * [Documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
@@ -73,7 +92,7 @@ Or you can configure a region in code:
 Aws.config[:region] = 'us-west-2'
 
 # per-service :region
-s3 = Aws::S3.new(region:'us-east-1')
+s3 = Aws::S3::Client.new(region:'us-east-1')
 ```
 
 ### Credentials
@@ -99,7 +118,7 @@ following credential classes:
 Aws.config[:credentials] = Aws::SharedCredentials.new(profile_name:'myprofile')
 
 # per-service :credentials
-s3 = Aws::S3.new(credentials: Aws::SharedCredentials.new(profile_name:'myprofile')
+s3 = Aws::S3::Client.new(credentials: Aws::SharedCredentials.new(profile_name:'myprofile')
 ```
 
 ## Basic Usage
@@ -107,8 +126,7 @@ s3 = Aws::S3.new(credentials: Aws::SharedCredentials.new(profile_name:'myprofile
 To make a request, you need to construct a service client.
 
 ```ruby
-s3 = Aws::S3.new
-s3 = Aws.s3 # helper method returns a new client
+s3 = Aws::S3::Client.new
 ```
 
 Each client provides one method per API operation. Refer to the
@@ -174,13 +192,13 @@ Call `#service_classes` to get a list of available service helpers and
 the class they construct.
 
 ```ruby
-Aws> service_classes
-{:autoscaling=>Aws::AutoScaling,
- :cloudformation=>Aws::CloudFormation,
- :cloudfront=>Aws::CloudFront,
- :cloudsearch=>Aws::CloudSearch,
+Aws> service_clients
+{:autoscaling=>Aws::AutoScaling::Client,
+ :cloudformation=>Aws::CloudFormation::Client,
+ :cloudfront=>Aws::CloudFront::Client,
+ :cloudsearch=>Aws::CloudSearch::Client,
  ...
- :swf=>Aws::SWF}
+ :swf=>Aws::SWF::Client}
 ```
 
 ## Versioning
@@ -194,20 +212,24 @@ version.
 
 | Service Name                        | Service Class             | API Versions                   |
 | ----------------------------------- | ------------------------- | ------------------------------ |
-| Amazon CloudFront                   | CloudFront                | 2014-01-31 &mdash; 2014-05-31  |
-| Amazon CloudSearch                  | CloudSearch               | 2011-02-01 &mdash; 2013-01-01  |
+| Amazon CloudFront                   | CloudFront                | 2014-05-31                     |
+| Amazon CloudSearch                  | CloudSearch               | 2013-01-01                     |
 | Amazon CloudSearch Domain           | CloudSearchDomain         | 2013-01-01                     |
 | Amazon CloudWatch                   | CloudWatch                | 2010-08-01                     |
-| Amazon DynamoDB                     | DynamoDB                  | 2011-12-05 &mdash; 2012-08-10  |
-| Amazon Elastic Compute Cloud        | EC2                       | 2014-05-01                     |
+| Amazon CloudWatch Logs              | CloudWatchLogs            | 2014-03-28                     |
+| Amazon Cognito Identity             | CognitoIdentity           | 2014-06-30                     |
+| Amazon Cognito Sync                 | CognitoSync               | 2014-06-30                     |
+| Amazon DynamoDB                     | DynamoDB                  | 2012-08-10                     |
+| Amazon Elastic Compute Cloud        | EC2                       | 2014-06-15                     |
 | Amazon Elastic MapReduce            | EMR                       | 2009-03-31                     |
 | Amazon Elastic Transcoder           | ElasticTranscoder         | 2012-09-25                     |
-| Amazon ElastiCache                  | ElastiCache               | 2014-03-24                     |
+| Amazon ElastiCache                  | ElastiCache               | 2014-07-15                     |
 | Amazon Glacier                      | Glacier                   | 2012-06-01                     |
 | Amazon Kinesis                      | Kinesis                   | 2013-12-02                     |
 | Amazon Redshift                     | Redshift                  | 2012-12-01                     |
-| Amazon Relational Database Service  | RDS                       | 2013-01-10 &mdash; 2013-09-09  |
+| Amazon Relational Database Service  | RDS                       | 2013-09-09                     |
 | Amazon Route 53                     | Route53                   | 2013-04-01                     |
+| Amazon Route 53 Domains             | Route53Domains            | 2014-05-15                     |
 | Amazon Simple Email Service         | SES                       | 2010-12-01                     |
 | Amazon Simple Notification Service  | SNS                       | 2010-03-31                     |
 | Amazon Simple Queue Service         | SQS                       | 2012-11-05                     |

@@ -61,13 +61,17 @@ module Aws
         it 'raises an argument error when not set' do
           client = Seahorse::Client::Base.define
           client.add_plugin(RegionalEndpoint)
-          expect { client.new }.to raise_error(Errors::MissingRegionError)
+          expect {
+            client.new(endpoint:'http://foo.com')
+          }.to raise_error(Errors::MissingRegionError)
         end
 
         it 'raises an argument error when set to nil' do
           client = Seahorse::Client::Base.define
           client.add_plugin(RegionalEndpoint)
-          expect { client.new(region:nil) }.to raise_error(Errors::MissingRegionError)
+          expect {
+            client.new(endpoint:'http://foo.com', region: nil)
+          }.to raise_error(Errors::MissingRegionError)
         end
 
       end
@@ -77,7 +81,7 @@ module Aws
         it 'defaults the endpoint to PREFIX.REGION.amazonaws.com' do
           metadata['endpointPrefix'] = 'PREFIX'
           client = client_class.new(region: 'REGION')
-          expect(client.config.endpoint).to eq('https://PREFIX.REGION.amazonaws.com')
+          expect(client.config.endpoint.to_s).to eq('https://PREFIX.REGION.amazonaws.com')
         end
 
       end

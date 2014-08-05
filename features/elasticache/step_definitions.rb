@@ -1,5 +1,5 @@
 Before("@elasticache") do
-  @elasticache = @client = Aws.elasticache
+  @client = Aws::ElastiCache::Client.new
 end
 
 After("@elasticache") do

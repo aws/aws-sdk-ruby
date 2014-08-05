@@ -49,6 +49,8 @@ module Aws
 
   describe 'add_service' do
 
+    let(:dummy_credentials) { Aws::Credentials.new('akid', 'secret') }
+
     before(:each) do
       Aws.config[:region] = 'region-name'
     end
@@ -58,36 +60,21 @@ module Aws
       Aws.config = {}
     end
 
-    it 'defines a new service interface' do
-      Aws.add_service(:DummyService)
+    it 'defines a new service module' do
+      Aws.add_service('DummyService', 'api' => 'apis/s3-2006-03-01.api.json')
       expect(Aws::DummyService.ancestors).to include(Aws::Service)
     end
 
-    it 'adds a helper method that constructs a service and client object' do
-      Aws.add_service('DummyService', {
-        '2006-03-01' => { 'api' => 'apis/s3-2006-03-01.api.json' },
-      })
-      svc = Aws.dummyservice(http_wire_trace: true, credentials: dummy_credentials)
-      expect(Aws::DummyService::Client.api_versions).to eq(['2006-03-01'])
-      expect(svc).to be_kind_of(Seahorse::Client::Base)
-      expect(svc.config.api).to be_kind_of(Seahorse::Model::Api)
-      expect(svc.config.http_wire_trace).to be(true)
+    it 'defines an errors module' do
+      Aws.add_service('DummyService', 'api' => 'apis/s3-2006-03-01.api.json')
+      errors = Aws::DummyService::Errors
+      expect(errors::ServiceError.ancestors).to include(Aws::Errors::ServiceError)
+      expect(errors::FooError.ancestors).to include(Aws::Errors::ServiceError)
     end
 
-    it 'adds the helper method to Aws (not Module)' do
-      Aws.add_service(:DummyService, ['apis/s3-2006-03-01.json'])
-      expect(Aws).to respond_to(:dummyservice)
-      expect(Aws.class).not_to respond_to(:dummyservice)
-    end
-
-    it 'filters the :api_version option from the client constructor' do
-      Aws.add_service('DummyService', {
-        '2006-03-01' => { 'api' => 'apis/s3-2006-03-01.api.json' },
-      })
-      Aws.config[:api_version] = '2007-01-01'
-      Aws.config[:credentials] = dummy_credentials
-      expect { Aws.dummyservice }.not_to raise_error
-      expect { Aws.dummyservice(api_version: '2006-03-01') }.not_to raise_error
+    it 'defines a client class' do
+      Aws.add_service('DummyService', 'api' => 'apis/s3-2006-03-01.api.json')
+      expect(Aws::DummyService::Client.ancestors).to include(Seahorse::Client::Base)
     end
 
   end

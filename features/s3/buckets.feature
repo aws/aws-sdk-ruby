@@ -38,3 +38,13 @@ Feature: S3 Buckets
     When I put "abc" to the key "object-key"
     Then the bucket name should be in the request path
     And the bucket name should not be in the request host
+
+  # Putting an object to a newly created bucket causes a 307 redirect,
+  # that requires you to support Expect: 100-continue for large object
+  # put requests.
+  @100continue
+  Scenario: Follow 307 redirect on new buckets
+    Given I am using the S3 "http://s3.amazonaws.com" endpoint
+    When I create a bucket with the location constraint "us-west-2"
+    When I put a large object
+    Then the object should exist

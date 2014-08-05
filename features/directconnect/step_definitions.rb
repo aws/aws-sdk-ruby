@@ -1,5 +1,5 @@
 Before("@directconnect") do
-  @directconnect = @client = Aws.directconnect
+  @client = Aws::DirectConnect::Client.new
 end
 
 After("@directconnect") do

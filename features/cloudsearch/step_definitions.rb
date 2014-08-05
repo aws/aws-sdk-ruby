@@ -1,5 +1,5 @@
 Before("@cloudsearch") do
-  @cloudsearch = @client = Aws.cloudsearch
+  @client = Aws::CloudSearch::Client.new
 end
 
 After("@cloudsearch") do

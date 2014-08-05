@@ -19,10 +19,8 @@ module Aws
         ENV.values_at(*keys).compact.first
       }
 
-      option(:endpoint_provider) { EndpointProvider.default_provider }
-
       option(:endpoint) do |cfg|
-        cfg.endpoint_provider.resolve(
+        EndpointProvider.default_provider.resolve(
           service: cfg.api.metadata('endpointPrefix'),
           region: cfg.region,
           scheme: 'https'

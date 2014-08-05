@@ -1,5 +1,5 @@
 .bundle
-vendor/tools
+vendor/
 integration-test-config.json
 Gemfile.lock
 coverage

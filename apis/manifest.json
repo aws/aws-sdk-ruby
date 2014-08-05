@@ -90,6 +90,10 @@
     "2014-03-24": {
       "api": "apis/elasticache-2014-03-24.api.json",
       "paginators": "apis/elasticache-2014-03-24.paginators.json"
+    },
+    "2014-07-15": {
+      "api": "apis/elasticache-2014-07-15.api.json",
+      "paginators": "apis/elasticache-2014-07-15.paginators.json"
     }
   },
   "ElasticBeanstalk": {
@@ -195,6 +199,11 @@
     "2013-04-01": {
       "api": "apis/route53-2013-04-01.api.json",
       "paginators": "apis/route53-2013-04-01.paginators.json"
+    }
+  },
+  "Route53Domains": {
+    "2014-05-15": {
+      "api": "apis/route53domains-2014-05-15.api.json"
     }
   },
   "S3": {

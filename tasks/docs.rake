@@ -37,18 +37,11 @@ def supported_services_table
   line = "| %-35s | %-25s | %-30s |\n"
 
   lines = []
-  Aws::Api::Manifest.default_manifest.services.each do |svc|
-    api = MultiJson.load(File.read(svc.versions.values.first['api']))
-    api = Seahorse::Model::Api.new(api)
-    full_name = api.metadata('serviceFullName')
-    versions = svc.versions.keys
-
-    if versions.size > 1
-      versions = "#{versions.first} &mdash; #{versions.last}"
-    else
-      versions = versions.first
-    end
-    lines << line % [full_name, svc.name, versions]
+  Aws.service_clients.each do |client_class|
+    full_name = client_class.api.metadata('serviceFullName')
+    module_name = client_class.name.split('::')[1]
+    version = client_class.api.version
+    lines << line % [full_name, module_name, version]
   end
 
   [

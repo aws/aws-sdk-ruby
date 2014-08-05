@@ -16,7 +16,21 @@
         "requestUri":"/"
       },
       "input":{"shape":"AttachInstancesQuery"},
-      "documentation":"<p> Attaches one or more Amazon EC2 instances to an existing Auto Scaling group. After the instance(s) is attached, it becomes a part of the Auto Scaling group. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-instance-asg.html\">Attach Amazon EC2 Instance(s) to Your Existing Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+      "documentation":"<p> Attaches one or more Amazon EC2 instances to an existing Auto Scaling group. After the instance(s) is attached, it becomes a part of the Auto Scaling group. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-instance-asg.html\">Attach Amazon EC2 Instances to Your Existing Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+    },
+    "CompleteLifecycleAction":{
+      "name":"CompleteLifecycleAction",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CompleteLifecycleActionType"},
+      "output":{
+        "shape":"CompleteLifecycleActionAnswer",
+        "documentation":"<p>The output of the <a>CompleteLifecycleAction</a>. </p>",
+        "resultWrapper":"CompleteLifecycleActionResult"
+      },
+      "documentation":"<p>Completes the lifecycle action for the associated token initiated under the given lifecycle hook with the specified result. </p> <p> This operation is a part of the basic sequence for adding a lifecycle hook to an Auto Scaling group: </p> <ol> <li> Create a notification target. A target can be either an Amazon SQS queue or an Amazon SNS topic. </li> <li> Create an IAM role. This role allows Auto Scaling to publish lifecycle notifications to the designated SQS queue or SNS topic. </li> <li> Create the lifecycle hook. You can create a hook that acts when instances launch or when instances terminate. </li> <li> If necessary, record the lifecycle action heartbeat to keep the instance in a pending state. </li> <li> <b>Complete the lifecycle action.</b> </li> </ol> <p>To learn more, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingPendingState.html\">Auto Scaling Pending State</a> and <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingTerminatingState.html\">Auto Scaling Terminating State</a>.</p>"
     },
     "CreateAutoScalingGroup":{
       "name":"CreateAutoScalingGroup",
@@ -177,6 +191,20 @@
         }
       ],
       "documentation":"<p> Deletes the specified <a>LaunchConfiguration</a>. </p> <p> The specified launch configuration must not be attached to an Auto Scaling group. When this call completes, the launch configuration is no longer available for use. </p>"
+    },
+    "DeleteLifecycleHook":{
+      "name":"DeleteLifecycleHook",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteLifecycleHookType"},
+      "output":{
+        "shape":"DeleteLifecycleHookAnswer",
+        "documentation":"<p>The output of the <a>DeleteLifecycleHook</a> action. </p>",
+        "resultWrapper":"DeleteLifecycleHookResult"
+      },
+      "documentation":"<p>Deletes the specified lifecycle hook. If there are any outstanding lifecycle actions, they are completed first (ABANDON for launching instances, CONTINUE for terminating instances).</p>"
     },
     "DeleteNotificationConfiguration":{
       "name":"DeleteNotificationConfiguration",
@@ -348,6 +376,32 @@
         }
       ],
       "documentation":"<p> Returns a full description of the launch configurations, or the specified launch configurations, if they exist. </p> <p> If no name is specified, then the full details of all launch configurations are returned. </p>"
+    },
+    "DescribeLifecycleHookTypes":{
+      "name":"DescribeLifecycleHookTypes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{
+        "shape":"DescribeLifecycleHookTypesAnswer",
+        "resultWrapper":"DescribeLifecycleHookTypesResult"
+      },
+      "documentation":"<p>Describes the available types of lifecycle hooks.</p>"
+    },
+    "DescribeLifecycleHooks":{
+      "name":"DescribeLifecycleHooks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeLifecycleHooksType"},
+      "output":{
+        "shape":"DescribeLifecycleHooksAnswer",
+        "documentation":"<p>The output of the <a>DescribeLifecycleHooks</a> action. </p>",
+        "resultWrapper":"DescribeLifecycleHooksResult"
+      },
+      "documentation":"<p> Describes the lifecycle hooks that currently belong to the specified Auto Scaling group. </p>"
     },
     "DescribeMetricCollectionTypes":{
       "name":"DescribeMetricCollectionTypes",
@@ -524,6 +578,20 @@
       },
       "documentation":"<p> Returns a list of all termination policies supported by Auto Scaling. </p>"
     },
+    "DetachInstances":{
+      "name":"DetachInstances",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetachInstancesQuery"},
+      "output":{
+        "shape":"DetachInstancesAnswer",
+        "documentation":"<p>The output of the <a>DetachInstances</a> action. </p>",
+        "resultWrapper":"DetachInstancesResult"
+      },
+      "documentation":"<p>Using <code>DetachInstances</code>, you can remove an instance from an Auto Scaling group. After the instances are detached, you can manage them independently from the rest of the Auto Scaling group.</p> <p>To learn more about detaching instances, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/detach-instance-asg.html\">Detach Amazon EC2 Instances From Your Auto Scaling Group</a>.</p>"
+    },
     "DisableMetricsCollection":{
       "name":"DisableMetricsCollection",
       "http":{
@@ -541,6 +609,20 @@
       },
       "input":{"shape":"EnableMetricsCollectionQuery"},
       "documentation":"<p> Enables monitoring of group metrics for the Auto Scaling group specified in <code>AutoScalingGroupName</code>. You can specify the list of enabled metrics with the <code>Metrics</code> parameter. </p> <p> Auto Scaling metrics collection can be turned on only if the <code>InstanceMonitoring</code> flag, in the Auto Scaling group's launch configuration, is set to <code>True</code>. </p>"
+    },
+    "EnterStandby":{
+      "name":"EnterStandby",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"EnterStandbyQuery"},
+      "output":{
+        "shape":"EnterStandbyAnswer",
+        "documentation":"<p>The output of the <a>EnterStandby</a> action. </p>",
+        "resultWrapper":"EnterStandbyResult"
+      },
+      "documentation":"<p> Move instances in an Auto Scaling group into a Standby mode. </p> <p>To learn more about how to put instances into a Standby mode, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingInServiceState.html\">Auto Scaling InService State</a>.</p>"
     },
     "ExecutePolicy":{
       "name":"ExecutePolicy",
@@ -562,6 +644,46 @@
         }
       ],
       "documentation":"<p>Executes the specified policy. </p>"
+    },
+    "ExitStandby":{
+      "name":"ExitStandby",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ExitStandbyQuery"},
+      "output":{
+        "shape":"ExitStandbyAnswer",
+        "documentation":"<p>The output of the <a>ExitStandby</a> action. </p>",
+        "resultWrapper":"ExitStandbyResult"
+      },
+      "documentation":"<p> Move an instance out of Standby mode. </p> <p>To learn more about how to put instances that are in a Standby mode back into service, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingInServiceState.html\">Auto Scaling InService State</a>.</p>"
+    },
+    "PutLifecycleHook":{
+      "name":"PutLifecycleHook",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutLifecycleHookType"},
+      "output":{
+        "shape":"PutLifecycleHookAnswer",
+        "documentation":"<p>The output of the <a>PutLifecycleHook</a> action. </p>",
+        "resultWrapper":"PutLifecycleHookResult"
+      },
+      "errors":[
+        {
+          "shape":"LimitExceededFault",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p> The quota for capacity groups or launch configurations for this customer has already been reached. </p>"
+        }
+      ],
+      "documentation":"<p>Creates or updates a lifecycle hook for an Auto Scaling Group.</p> <p>A lifecycle hook tells Auto Scaling that you want to perform an action on an instance that is not actively in service; for example, either when the instance launches or before the instance terminates.</p> <p> This operation is a part of the basic sequence for adding a lifecycle hook to an Auto Scaling group: </p> <ol> <li> Create a notification target. A target can be either an Amazon SQS queue or an Amazon SNS topic. </li> <li> Create an IAM role. This role allows Auto Scaling to publish lifecycle notifications to the designated SQS queue or SNS topic. </li> <li> <b>Create the lifecycle hook. You can create a hook that acts when instances launch or when instances terminate.</b> </li> <li> If necessary, record the lifecycle action heartbeat to keep the instance in a pending state. </li> <li> Complete the lifecycle action. </li> </ol> <p>To learn more, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingPendingState.html\">Auto Scaling Pending State</a> and <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingTerminatingState.html\">Auto Scaling Terminating State</a>.</p>"
     },
     "PutNotificationConfiguration":{
       "name":"PutNotificationConfiguration",
@@ -639,7 +761,21 @@
           "documentation":"<p> The quota for capacity groups or launch configurations for this customer has already been reached. </p>"
         }
       ],
-      "documentation":"<p> Creates or updates a scheduled scaling action for an Auto Scaling group. When updating a scheduled scaling action, if you leave a parameter unspecified, the corresponding value remains unchanged in the affected Auto Scaling group. </p> <p>For information on creating or updating a scheduled action for your Auto Scaling group, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/schedule_time.html\">Scale Based on a Schedule</a>.</p> </examples>"
+      "documentation":"<p> Creates or updates a scheduled scaling action for an Auto Scaling group. When updating a scheduled scaling action, if you leave a parameter unspecified, the corresponding value remains unchanged in the affected Auto Scaling group. </p> <p>For information on creating or updating a scheduled action for your Auto Scaling group, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/schedule_time.html\">Scale Based on a Schedule</a>.</p>"
+    },
+    "RecordLifecycleActionHeartbeat":{
+      "name":"RecordLifecycleActionHeartbeat",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RecordLifecycleActionHeartbeatType"},
+      "output":{
+        "shape":"RecordLifecycleActionHeartbeatAnswer",
+        "documentation":"<p>The output of the <a>RecordLifecycleActionHeartbeat</a> action. </p>",
+        "resultWrapper":"RecordLifecycleActionHeartbeatResult"
+      },
+      "documentation":"<p> Records a heartbeat for the lifecycle action associated with a specific token. This extends the timeout by the length of time defined by the <code>HeartbeatTimeout</code> parameter of the <a>PutLifecycleHook</a> operation. </p> <p> This operation is a part of the basic sequence for adding a lifecycle hook to an Auto Scaling group: </p> <ol> <li> Create a notification target. A target can be either an Amazon SQS queue or an Amazon SNS topic. </li> <li> Create an IAM role. This role allows Auto Scaling to publish lifecycle notifications to the designated SQS queue or SNS topic. </li> <li> Create the lifecycle hook. You can create a hook that acts when instances launch or when instances terminate. </li> <li> <b>If necessary, record the lifecycle action heartbeat to keep the instance in a pending state.</b> </li> <li> Complete the lifecycle action. </li> </ol> <p>To learn more, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingPendingState.html\">Auto Scaling Pending State</a> and <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingTerminatingState.html\">Auto Scaling Terminating State</a>.</p>"
     },
     "ResumeProcesses":{
       "name":"ResumeProcesses",
@@ -743,7 +879,7 @@
           "documentation":"<p> You cannot delete an Auto Scaling group while there are scaling activities in progress for that group. </p>"
         }
       ],
-      "documentation":"<p> Updates the configuration for the specified <a>AutoScalingGroup</a>. </p> <p> The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Scaling activities that are currently in progress aren't affected. </p> </examples>"
+      "documentation":"<p> Updates the configuration for the specified <a>AutoScalingGroup</a>. </p> <p> The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Scaling activities that are currently in progress aren't affected. </p>"
     }
   },
   "shapes":{
@@ -880,6 +1016,12 @@
       },
       "exception":true,
       "documentation":"<p> The named Auto Scaling group or launch configuration already exists. </p>"
+    },
+    "AsciiStringMaxLen255":{
+      "type":"string",
+      "min":1,
+      "max":255,
+      "pattern":"[A-Za-z0-9\\-_\\/]+"
     },
     "AssociatePublicIpAddress":{"type":"boolean"},
     "AttachInstancesQuery":{
@@ -1145,6 +1287,39 @@
       "type":"list",
       "member":{"shape":"BlockDeviceMapping"}
     },
+    "CompleteLifecycleActionAnswer":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The output of the <a>CompleteLifecycleAction</a>. </p>"
+    },
+    "CompleteLifecycleActionType":{
+      "type":"structure",
+      "required":[
+        "LifecycleHookName",
+        "AutoScalingGroupName",
+        "LifecycleActionToken",
+        "LifecycleActionResult"
+      ],
+      "members":{
+        "LifecycleHookName":{
+          "shape":"AsciiStringMaxLen255",
+          "documentation":"<p>The name of the lifecycle hook.</p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the Auto Scaling group to which the lifecycle hook belongs.</p>"
+        },
+        "LifecycleActionToken":{
+          "shape":"LifecycleActionToken",
+          "documentation":"<p>A universally unique identifier (UUID) that identifies a specific lifecycle action associated with an instance. Auto Scaling sends this token to the notification target you specified when you created the lifecycle hook.</p>"
+        },
+        "LifecycleActionResult":{
+          "shape":"LifecycleActionResult",
+          "documentation":"<p>The action the Auto Scaling group should take. The value for this parameter can be either <code>CONTINUE</code> or <code>ABANDON</code>.</p>"
+        }
+      }
+    },
     "Cooldown":{"type":"integer"},
     "CreateAutoScalingGroupType":{
       "type":"structure",
@@ -1188,7 +1363,7 @@
         },
         "LoadBalancerNames":{
           "shape":"LoadBalancerNames",
-          "documentation":"<p> A list of existing Elastic Load Balancing load balancers to use. The load balancers must be associated with the AWS account. </p> <p>For information on using load balancers, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SetUpASLBApp.html\">Use Load Balancer to Load Balance Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+          "documentation":"<p> A list of existing Elastic Load Balancing load balancers to use. The load balancers must be associated with the AWS account. </p> <p>For information on using load balancers, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SetUpASLBApp.html\">Load Balance Your Auto Scaling Group</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
         },
         "HealthCheckType":{
           "shape":"XmlStringMaxLen32",
@@ -1196,7 +1371,7 @@
         },
         "HealthCheckGracePeriod":{
           "shape":"HealthCheckGracePeriod",
-          "documentation":"<p>Length of time in seconds after a new Amazon EC2 instance comes into service that Auto Scaling starts checking its health. During this time any health check failure for the that instance is ignored.</p> <p>This is required if you are adding <code>ELB</code> health check. Frequently, new instances need to warm up, briefly, before they can pass a health check. To provide ample warm-up time, set the health check grace period of the group to match the expected startup period of your application.</p>"
+          "documentation":"<p>Length of time in seconds after a new Amazon EC2 instance comes into service that Auto Scaling starts checking its health. During this time any health check failure for the that instance is ignored.</p> <p>This is required if you are adding <code>ELB</code> health check. Frequently, new instances need to warm up, briefly, before they can pass a health check. To provide ample warm-up time, set the health check grace period of the group to match the expected startup period of your application.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-add-elb-healthcheck.html#as-add-elb-healthcheck-api\">Add an Elastic Load Balancing Health Check</a>.</p>"
         },
         "PlacementGroup":{
           "shape":"XmlStringMaxLen255",
@@ -1204,7 +1379,7 @@
         },
         "VPCZoneIdentifier":{
           "shape":"XmlStringMaxLen255",
-          "documentation":"<p>A comma-separated list of subnet identifiers of Amazon Virtual Private Clouds (Amazon VPCs).</p> <p>If you specify subnets and Availability Zones with this call, ensure that the subnets' Availability Zones match the Availability Zones specified. </p> <p>For information on launching your Auto Scaling group into Amazon VPC subnets, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Launch Auto Scaling Instances into Amazon VPC</a> in the <i>Auto Scaling Developer Guide</i> .</p>"
+          "documentation":"<p>A comma-separated list of subnet identifiers of Amazon Virtual Private Clouds (Amazon VPCs).</p> <p>If you specify subnets and Availability Zones with this call, ensure that the subnets' Availability Zones match the Availability Zones specified. </p> <p>For information on launching your Auto Scaling group into Amazon VPC subnets, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Auto Scaling in Amazon Virtual Private Cloud</a> in the <i>Auto Scaling Developer Guide</i> .</p>"
         },
         "TerminationPolicies":{
           "shape":"TerminationPolicies",
@@ -1279,11 +1454,11 @@
         },
         "AssociatePublicIpAddress":{
           "shape":"AssociatePublicIpAddress",
-          "documentation":"<p>Used for Auto Scaling groups that launch instances into an Amazon Virtual Private Cloud (Amazon VPC). Specifies whether to assign a public IP address to each instance launched in a Amazon VPC.</p> <p>Default: If the instance is launched into a default subnet in a default VPC, the default is <code>true</code>. If the instance is launched into a nondefault subnet in a VPC, the default is <code>false</code>. For information about the platforms supported by Auto Scaling, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_BasicSetup.html\">Get Started with Auto Scaling Using the Command Line Interface</a>.</p>"
+          "documentation":"<p>Used for Auto Scaling groups that launch instances into an Amazon Virtual Private Cloud (Amazon VPC). Specifies whether to assign a public IP address to each instance launched in a Amazon VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Auto Scaling in Amazon Virtual Private Cloud</a>.</p> <p>Default: If the instance is launched into a default subnet in a default VPC, the default is <code>true</code>. If the instance is launched into a nondefault subnet in a VPC, the default is <code>false</code>. For information about default VPC and VPC platforms, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide//as-supported-platforms.html\">Supported Platforms</a>.</p>"
         },
         "PlacementTenancy":{
           "shape":"XmlStringMaxLen64",
-          "documentation":"<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware and can only be launched into a VPC.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Auto Scaling in Amazon Virtual Private Cloud</a> in the <i>Auto Scaling Developer Guide</i>. </p> <p>Valid values: <code>default</code> | <code>dedicated</code></p>"
+          "documentation":"<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware and can only be launched in a VPC.</p> <p>You must set the value of this parameter to <code>dedicated</code> if want to launch Dedicated Instances in a shared tenancy VPC (VPC with instance placement tenancy attribute set to <code>default</code>).</p> <p>If you specify a value for this parameter, be sure to specify at least one VPC subnet using the <i>VPCZoneIdentifier</i> parameter when you create your Auto Scaling group. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Auto Scaling in Amazon Virtual Private Cloud</a> in the <i>Auto Scaling Developer Guide</i>. </p> <p>Valid values: <code>default</code> | <code>dedicated</code></p>"
         }
       },
       "documentation":"<p> </p>"
@@ -1309,10 +1484,33 @@
         },
         "ForceDelete":{
           "shape":"ForceDelete",
-          "documentation":"<p>Starting with API version 2011-01-01, specifies that the Auto Scaling group will be deleted along with all instances associated with the group, without waiting for all instances to be terminated. </p>"
+          "documentation":"<p>Starting with API version 2011-01-01, specifies that the Auto Scaling group will be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group. </p>"
         }
       },
       "documentation":"<p> </p>"
+    },
+    "DeleteLifecycleHookAnswer":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The output of the <a>DeleteLifecycleHook</a> action. </p>"
+    },
+    "DeleteLifecycleHookType":{
+      "type":"structure",
+      "required":[
+        "LifecycleHookName",
+        "AutoScalingGroupName"
+      ],
+      "members":{
+        "LifecycleHookName":{
+          "shape":"AsciiStringMaxLen255",
+          "documentation":"<p>The name of the lifecycle hook.</p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the Auto Scaling group to which the lifecycle hook belongs.</p>"
+        }
+      }
     },
     "DeleteNotificationConfigurationType":{
       "type":"structure",
@@ -1424,12 +1622,45 @@
       },
       "documentation":"<p>The <code>AutoScalingNotificationTypes</code> data type.</p>"
     },
+    "DescribeLifecycleHookTypesAnswer":{
+      "type":"structure",
+      "members":{
+        "LifecycleHookTypes":{
+          "shape":"AutoScalingNotificationTypes",
+          "documentation":"<p>Returns a list of all notification types supported by Auto Scaling. They are:</p> <ul> <li><p><code>autoscaling:EC2_INSTANCE_LAUNCHING</code></p></li> <li><p><code>autoscaling:EC2_INSTANCE_TERMINATING</code></p></li> </ul>"
+        }
+      }
+    },
+    "DescribeLifecycleHooksAnswer":{
+      "type":"structure",
+      "members":{
+        "LifecycleHooks":{
+          "shape":"LifecycleHooks",
+          "documentation":"<p> A list describing the lifecycle hooks that belong to the specified Auto Scaling group. </p>"
+        }
+      },
+      "documentation":"<p>The output of the <a>DescribeLifecycleHooks</a> action. </p>"
+    },
+    "DescribeLifecycleHooksType":{
+      "type":"structure",
+      "required":["AutoScalingGroupName"],
+      "members":{
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of one or more Auto Scaling groups.</p>"
+        },
+        "LifecycleHookNames":{
+          "shape":"LifecycleHookNames",
+          "documentation":"<p>The name of one or more lifecycle hooks.</p>"
+        }
+      }
+    },
     "DescribeMetricCollectionTypesAnswer":{
       "type":"structure",
       "members":{
         "Metrics":{
           "shape":"MetricCollectionTypes",
-          "documentation":"<p>The list of Metrics collected. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>"
+          "documentation":"<p>The list of Metrics collected. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupStandbyInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>"
         },
         "Granularities":{
           "shape":"MetricGranularityTypes",
@@ -1570,6 +1801,37 @@
       },
       "documentation":"<p>The <code>TerminationPolicyTypes</code> data type.</p>"
     },
+    "DetachInstancesAnswer":{
+      "type":"structure",
+      "members":{
+        "Activities":{
+          "shape":"Activities",
+          "documentation":"<p> A list describing the activities related to detaching the instances from the Auto Scaling group. </p>"
+        }
+      },
+      "documentation":"<p>The output of the <a>DetachInstances</a> action. </p>"
+    },
+    "DetachInstancesQuery":{
+      "type":"structure",
+      "required":[
+        "AutoScalingGroupName",
+        "ShouldDecrementDesiredCapacity"
+      ],
+      "members":{
+        "InstanceIds":{
+          "shape":"InstanceIds",
+          "documentation":"<p> A list of instances to detach from the Auto Scaling group. You must specify at least one instance ID. </p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p> The name of the Auto Scaling group from which to detach instances. </p>"
+        },
+        "ShouldDecrementDesiredCapacity":{
+          "shape":"ShouldDecrementDesiredCapacity",
+          "documentation":"<p> Specifies if the detached instance should decrement the desired capacity value for the Auto Scaling group. If set to <code>True</code>, the Auto Scaling group decrements the desired capacity value by the number of instances detached. </p>"
+        }
+      }
+    },
     "DisableMetricsCollectionQuery":{
       "type":"structure",
       "required":["AutoScalingGroupName"],
@@ -1580,7 +1842,7 @@
         },
         "Metrics":{
           "shape":"Metrics",
-          "documentation":"<p> The list of metrics to disable. If no metrics are specified, all metrics are disabled. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>"
+          "documentation":"<p> The list of metrics to disable. If no metrics are specified, all metrics are disabled. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupStandbyInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>"
         }
       }
     },
@@ -1624,7 +1886,7 @@
         },
         "Metrics":{
           "shape":"Metrics",
-          "documentation":"<p> The list of metrics to collect. If no metrics are specified, all metrics are enabled. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>"
+          "documentation":"<p> The list of metrics to collect. If no metrics are specified, all metrics are enabled. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupStandbyInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>"
         },
         "Granularity":{
           "shape":"XmlStringMaxLen255",
@@ -1650,6 +1912,37 @@
       "type":"list",
       "member":{"shape":"EnabledMetric"}
     },
+    "EnterStandbyAnswer":{
+      "type":"structure",
+      "members":{
+        "Activities":{
+          "shape":"Activities",
+          "documentation":"<p> A list describing the activities related to moving instances into Standby mode. </p>"
+        }
+      },
+      "documentation":"<p>The output of the <a>EnterStandby</a> action. </p>"
+    },
+    "EnterStandbyQuery":{
+      "type":"structure",
+      "required":[
+        "AutoScalingGroupName",
+        "ShouldDecrementDesiredCapacity"
+      ],
+      "members":{
+        "InstanceIds":{
+          "shape":"InstanceIds",
+          "documentation":"<p> The instances to move into Standby mode. You must specify at least one instance ID. </p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p> The name of the Auto Scaling group from which to move instances into Standby mode. </p>"
+        },
+        "ShouldDecrementDesiredCapacity":{
+          "shape":"ShouldDecrementDesiredCapacity",
+          "documentation":"<p> Specifies whether the instances moved to Standby mode count as part of the Auto Scaling group's desired capacity. If set, the desired capacity for the Auto Scaling group decrements by the number of instances moved to Standby mode. </p>"
+        }
+      }
+    },
     "ExecutePolicyType":{
       "type":"structure",
       "required":["PolicyName"],
@@ -1665,6 +1958,30 @@
         "HonorCooldown":{
           "shape":"HonorCooldown",
           "documentation":"<p>Set to <code>True</code> if you want Auto Scaling to wait for the cooldown period associated with the Auto Scaling group to complete before executing the policy.</p> <p>Set to <code>False</code> if you want Auto Scaling to circumvent the cooldown period associated with the Auto Scaling group and execute the policy before the cooldown period ends. </p> <p>For information about cooldown period, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AS_Concepts.html#Cooldown\">Cooldown Period</a> in the <i>Auto Scaling Developer Guide</i>.</p>"
+        }
+      }
+    },
+    "ExitStandbyAnswer":{
+      "type":"structure",
+      "members":{
+        "Activities":{
+          "shape":"Activities",
+          "documentation":"<p>A list describing the activities related to moving instances out of Standby mode.</p>"
+        }
+      },
+      "documentation":"<p>The output of the <a>ExitStandby</a> action. </p>"
+    },
+    "ExitStandbyQuery":{
+      "type":"structure",
+      "required":["AutoScalingGroupName"],
+      "members":{
+        "InstanceIds":{
+          "shape":"InstanceIds",
+          "documentation":"<p> A list of instances to move out of Standby mode. You must specify at least one instance ID. </p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p> The name of the Auto Scaling group from which to move instances out of Standby mode. </p>"
         }
       }
     },
@@ -1687,7 +2004,9 @@
       "member":{"shape":"Filter"}
     },
     "ForceDelete":{"type":"boolean"},
+    "GlobalTimeout":{"type":"integer"},
     "HealthCheckGracePeriod":{"type":"integer"},
+    "HeartbeatTimeout":{"type":"integer"},
     "HonorCooldown":{"type":"boolean"},
     "Instance":{
       "type":"structure",
@@ -1888,16 +2207,81 @@
       },
       "documentation":"<p> The <code>LaunchConfigurationsType</code> data type. </p>"
     },
+    "LifecycleActionResult":{"type":"string"},
+    "LifecycleActionToken":{
+      "type":"string",
+      "min":36,
+      "max":36
+    },
+    "LifecycleHook":{
+      "type":"structure",
+      "members":{
+        "LifecycleHookName":{
+          "shape":"AsciiStringMaxLen255",
+          "documentation":"<p> The name of the lifecycle action hook. </p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p> The name of the Auto Scaling group to which the lifecycle action belongs. </p>"
+        },
+        "LifecycleTransition":{
+          "shape":"LifecycleTransition",
+          "documentation":"<p>The Amazon EC2 instance state to which you want to attach the lifecycle hook. See <a>DescribeLifecycleHooks</a> for a list of available lifecycle hook types.</p>"
+        },
+        "NotificationTargetARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>The ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic. The notification message sent to the target will include:</p> <ul> <li>Lifecycle action token</li> <li>User account ID</li> <li>Name of the Auto Scaling group</li> <li>Lifecycle hook name</li> <li>EC2 instance ID</li> <li>Lifecycle transition</li> <li>Notification metadata</li> </ul>"
+        },
+        "RoleARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>The ARN of the Amazon IAM role that allows the Auto Scaling group to publish to the specified notification target.</p>"
+        },
+        "NotificationMetadata":{
+          "shape":"XmlStringMaxLen1023",
+          "documentation":"<p>Contains additional information that you want to include any time Auto Scaling sends a message to the notification target.</p>"
+        },
+        "HeartbeatTimeout":{
+          "shape":"HeartbeatTimeout",
+          "documentation":"<p>Defines the amount of time that can elapse before the lifecycle hook times out. When the lifecycle hook times out, Auto Scaling performs the action defined in the <code>DefaultResult</code> parameter. You can prevent the lifecycle hook from timing out by calling <a>RecordLifecycleActionHeartbeat</a>.</p>"
+        },
+        "GlobalTimeout":{
+          "shape":"GlobalTimeout",
+          "documentation":"<p>The maximum length of time an instance can remain in a <code>Pending:Wait</code> or <code>Terminating:Wait</code> state. Currently, this value is set at 48 hours.</p>"
+        },
+        "DefaultResult":{
+          "shape":"LifecycleActionResult",
+          "documentation":"<p>Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. The value for this parameter can be either <code>CONTINUE</code> or <code>ABANDON</code>. The default value for this parameter is <code>CONTINUE</code>.</p>"
+        }
+      },
+      "documentation":"<p> A lifecycle hook tells Auto Scaling that you want to perform an action when an instance launches or terminates. When you have a lifecycle hook in place, the Auto Scaling group will either: </p> <ul> <li> Pause the instance after it launches, but before it is put into service </li> <li> Pause the instance as it terminates, but before it is fully terminated </li> </ul> <p>To learn more, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingPendingState.html\">Auto Scaling Pending State</a> and <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingTerminatingState.html\">Auto Scaling Terminating State</a>.</p>"
+    },
+    "LifecycleHookNames":{
+      "type":"list",
+      "member":{"shape":"AsciiStringMaxLen255"}
+    },
+    "LifecycleHooks":{
+      "type":"list",
+      "member":{"shape":"LifecycleHook"}
+    },
     "LifecycleState":{
       "type":"string",
       "enum":[
         "Pending",
+        "Pending:Wait",
+        "Pending:Proceed",
         "Quarantined",
         "InService",
         "Terminating",
-        "Terminated"
+        "Terminating:Wait",
+        "Terminating:Proceed",
+        "Terminated",
+        "Detaching",
+        "Detached",
+        "EnteringStandby",
+        "Standby"
       ]
     },
+    "LifecycleTransition":{"type":"string"},
     "LimitExceededFault":{
       "type":"structure",
       "members":{
@@ -2035,6 +2419,53 @@
     },
     "Progress":{"type":"integer"},
     "PropagateAtLaunch":{"type":"boolean"},
+    "PutLifecycleHookAnswer":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The output of the <a>PutLifecycleHook</a> action. </p>"
+    },
+    "PutLifecycleHookType":{
+      "type":"structure",
+      "required":[
+        "LifecycleHookName",
+        "AutoScalingGroupName"
+      ],
+      "members":{
+        "LifecycleHookName":{
+          "shape":"AsciiStringMaxLen255",
+          "documentation":"<p>The name of the lifecycle hook.</p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the Auto Scaling group to which you want to assign the lifecycle hook.</p>"
+        },
+        "LifecycleTransition":{
+          "shape":"LifecycleTransition",
+          "documentation":"<p>The Amazon EC2 instance state to which you want to attach the lifecycle hook. See <a>DescribeLifecycleHookTypes</a> for a list of available lifecycle hook types.</p>"
+        },
+        "RoleARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>The ARN of the Amazon IAM role that allows the Auto Scaling group to publish to the specified notification target.</p>"
+        },
+        "NotificationTargetARN":{
+          "shape":"ResourceName",
+          "documentation":"<p>The ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic. </p> <p>The notification message sent to the target will include:</p> <ul> <li> <b>LifecycleActionToken</b>. The Lifecycle action token.</li> <li> <b>AccountId</b>. The user account ID.</li> <li> <b>AutoScalingGroupName</b>. The name of the Auto Scaling group.</li> <li> <b>LifecycleHookName</b>. The lifecycle hook name.</li> <li> <b>EC2InstanceId</b>. The EC2 instance ID.</li> <li> <b>LifecycleTransition</b>. The lifecycle transition.</li> <li> <b>NotificationMetadata</b>. The notification metadata.</li> </ul> <p>This operation uses the JSON format when sending notifications to an Amazon SQS queue, and an email key/value pair format when sending notifications to an Amazon SNS topic.</p> <p>When you call this operation, a test message is sent to the notification target. This test message contains an additional key/value pair: <code>Event:autoscaling:TEST_NOTIFICATION</code>.</p>"
+        },
+        "NotificationMetadata":{
+          "shape":"XmlStringMaxLen1023",
+          "documentation":"<p>Contains additional information that you want to include any time Auto Scaling sends a message to the notification target.</p>"
+        },
+        "HeartbeatTimeout":{
+          "shape":"HeartbeatTimeout",
+          "documentation":"<p>Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. When the lifecycle hook times out, Auto Scaling performs the action defined in the <code>DefaultResult</code> parameter. You can prevent the lifecycle hook from timing out by calling <a>RecordLifecycleActionHeartbeat</a>. The default value for this parameter is 3600 seconds (1 hour).</p>"
+        },
+        "DefaultResult":{
+          "shape":"LifecycleActionResult",
+          "documentation":"<p>Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. The value for this parameter can be either <code>CONTINUE</code> or <code>ABANDON</code>. The default value for this parameter is <code>ABANDON</code>.</p>"
+        }
+      }
+    },
     "PutNotificationConfigurationType":{
       "type":"structure",
       "required":[
@@ -2137,6 +2568,34 @@
         }
       }
     },
+    "RecordLifecycleActionHeartbeatAnswer":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The output of the <a>RecordLifecycleActionHeartbeat</a> action. </p>"
+    },
+    "RecordLifecycleActionHeartbeatType":{
+      "type":"structure",
+      "required":[
+        "LifecycleHookName",
+        "AutoScalingGroupName",
+        "LifecycleActionToken"
+      ],
+      "members":{
+        "LifecycleHookName":{
+          "shape":"AsciiStringMaxLen255",
+          "documentation":"<p>The name of the lifecycle hook.</p>"
+        },
+        "AutoScalingGroupName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the Auto Scaling group to which the hook belongs.</p>"
+        },
+        "LifecycleActionToken":{
+          "shape":"LifecycleActionToken",
+          "documentation":"<p>A token that uniquely identifies a specific lifecycle action associated with an instance. Auto Scaling sends this token to the notification target you specified when you created the lifecycle hook.</p>"
+        }
+      }
+    },
     "ResourceInUseFault":{
       "type":"structure",
       "members":{
@@ -2183,6 +2642,8 @@
         "WaitingForInstanceId",
         "PreInService",
         "InProgress",
+        "WaitingForELBConnectionDraining",
+        "MidLifecycleAction",
         "Successful",
         "Failed",
         "Cancelled"

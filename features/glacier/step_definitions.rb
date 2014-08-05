@@ -1,12 +1,12 @@
 Before("@glacier") do
-  @glacier = @client = Aws.glacier
+  @client = Aws::Glacier::Client.new
 end
 
 After("@glacier") do
 end
 
 def upload_glacier_archive(contents)
-  resp = @glacier.upload_archive(
+  resp = @client.upload_archive(
     vault_name: @vault_name,
     body: contents
   )
@@ -28,9 +28,9 @@ Given(/^I have a vault ready to receive uploads$/) do
   # ensure we have a suitable vault for testing with
   @vault_name = 'aws-sdk-core-integration-test-vault'
   begin
-    @glacier.describe_vault(vault_name: @vault_name, account_id: '-')
+    @client.describe_vault(vault_name: @vault_name, account_id: '-')
   rescue Aws::Glacier::Errors::ResourceNotFoundException
-    @glacier.create_vault(vault_name: @vault_name, account_id: '-')
+    @client.create_vault(vault_name: @vault_name, account_id: '-')
   end
 end
 
@@ -51,7 +51,7 @@ When(/^I multipart\-upload a ([0-9\.]+)MB file in ([0-9\.]+) byte chunks$/) do |
   part_size = part_size.to_i
 
   # start the multipart upload
-  resp = @glacier.initiate_multipart_upload(
+  resp = @client.initiate_multipart_upload(
     vault_name: @vault_name,
     part_size: part_size
   )
@@ -67,7 +67,7 @@ When(/^I multipart\-upload a ([0-9\.]+)MB file in ([0-9\.]+) byte chunks$/) do |
   offset = 0
   until file.eof?
     chunk = file.read(part_size)
-    resp = @glacier.upload_multipart_part(
+    resp = @client.upload_multipart_part(
       vault_name: @vault_name,
       upload_id: @upload_id,
       body: chunk,
@@ -78,7 +78,7 @@ When(/^I multipart\-upload a ([0-9\.]+)MB file in ([0-9\.]+) byte chunks$/) do |
   end
 
   # complete the multipart upload
-  resp = @glacier.complete_multipart_upload(
+  resp = @client.complete_multipart_upload(
     vault_name: @vault_name,
     upload_id: @upload_id,
     archive_size: file.size,
@@ -89,5 +89,5 @@ When(/^I multipart\-upload a ([0-9\.]+)MB file in ([0-9\.]+) byte chunks$/) do |
 end
 
 Then(/^I should be able to delete the archive$/) do
-  @glacier.delete_archive(vault_name: @vault_name, archive_id: @archive_id)
+  @client.delete_archive(vault_name: @vault_name, archive_id: @archive_id)
 end

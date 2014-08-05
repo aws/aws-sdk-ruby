@@ -1,5 +1,5 @@
 Before("@simpledb") do
-  @simpledb = @client = Aws.simpledb
+  @client = Aws::SimpleDB::Client.new
 end
 
 After("@simpledb") do

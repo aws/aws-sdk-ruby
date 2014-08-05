@@ -6,15 +6,17 @@ branches:
 rvm:
 - 1.9.3
 - 2.0.0
+- 2.1.2
 - jruby
 env:
-  - PURE_RUBY=1
-  - NOKOGIRI=1
-  - OX=1 OJ=1
+  - COVERAGE=1 PURE_RUBY=1
+  - COVERAGE=1 NOKOGIRI=1
+  - COVERAGE=1 OX=1 OJ=1
 gemfile:
   - Gemfile
 matrix:
   exclude:
+    # oj and ox gems do not build in jruby
     - rvm: jruby
-      env: OX=1 OJ=1
+      env: COVERAGE=1 OX=1 OJ=1
       gemfile: Gemfile

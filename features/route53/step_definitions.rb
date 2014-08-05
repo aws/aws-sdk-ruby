@@ -1,5 +1,5 @@
 Before("@route53") do
-  @route53 = @client = Aws.route53
+  @client = Aws::Route53::Client.new
 end
 
 After("@route53") do

@@ -1,5 +1,5 @@
 Before("@redshift") do
-  @redshift = @client = Aws.redshift
+  @client = Aws::Redshift::Client.new
 end
 
 After("@redshift") do
