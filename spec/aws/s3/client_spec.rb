@@ -64,7 +64,10 @@ module Aws
       describe 'https required for sse cpk' do
 
         it 'raises a runtime error when attempting SSE CPK over HTTP' do
-          s3 = Client.new(endpoint: 'http://s3.amazonaws.com', region:'us-east-1')
+          s3 = Client.new(
+            endpoint: 'http://s3.amazonaws.com', 
+            region:'us-east-1',
+            credentials: credentials)
 
           # put_object
           expect {
