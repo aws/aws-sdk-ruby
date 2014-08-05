@@ -16,6 +16,7 @@ gemfile:
   - Gemfile
 matrix:
   exclude:
+    # oj and ox gems do not build in jruby
     - rvm: jruby
-      env: OX=1 OJ=1
+      env: COVERAGE=1 OX=1 OJ=1
       gemfile: Gemfile
