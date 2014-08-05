@@ -16,9 +16,8 @@ users that use the API version locking options. Also, there are minor changes
 when configuring raw endpoints.
 
 * Versioned client classes removed, e.g. `Aws::S3::Client::V20060301.new` should
-  be replaced with `Aws::S3::Client.new`
-
-* The `:api_version` constructor option is no longer accepted.
+  be replaced with `Aws::S3::Client.new` The `:api_version` constructor option
+  is no longer accepted.
 
 * Aws helper methods for client construction deprecated; For example,
   calling `Aws.s3` will generate a deprecation warning. Call `Aws::S3::Client.new`
@@ -28,9 +27,6 @@ when configuring raw endpoints.
   HTTP scheme, e.g. "http://localhost:3000", instead of "localhost:3000".
   Please note, this should only be done for testing. Normally you only
   need to configure a `:region`.
-
-In future versions, backwards incompatible API updates will be surfaced in their
-own module and client class to ensure users are not broken by API updates.
 
 ### 2.0.0.rc11 Upgrading Notes
 
