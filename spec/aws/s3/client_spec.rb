@@ -80,7 +80,7 @@ module Aws
               bucket:'aws-sdk',
               key:'key',
               copy_source: 'bucket#key',
-              sse_customer_key: 'secret')
+              copy_source_sse_customer_key: 'secret')
           }.to raise_error(/HTTPS/)
         end
 
