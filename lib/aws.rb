@@ -8,6 +8,10 @@ module Aws
 
   @config = {}
 
+  @services = {}
+
+  @service_added_callbacks = []
+
   autoload :CredentialProviderChain, "#{SRC}/credential_provider_chain"
   autoload :Credentials, "#{SRC}/credentials"
   autoload :EmptyStructure, "#{SRC}/empty_structure"
@@ -133,8 +137,8 @@ module Aws
     # @param [Plugin] plugin
     # @return [void]
     def add_plugin(plugin)
-      service_clients.each do |client|
-        client.add_plugin(plugin)
+      client_classes.each do |client_class|
+        client_class.add_plugin(plugin)
       end
     end
 
@@ -143,31 +147,43 @@ module Aws
     # @param [Plugin] plugin
     # @return [void]
     def remove_plugin(plugin)
-      service_clients.each do |client|
-        client.remove_plugin(plugin)
+      client_classes.each do |client_class|
+        client_class.remove_plugin(plugin)
       end
     end
 
-    # @return [Hash<Symbol,Module>]
     # @api private
-    def service_modules
-      @service_modules ||= {}
+    def services
+      @services
     end
 
     # @return [Array<Class>]
     # @api private
-    def service_clients
-      service_modules.map { |_,svc_mod| svc_mod.const_get(:Client) }
+    def client_classes
+      @services.values.map { |svc_module, options| svc_module.const_get(:Client) }
+    end
+
+    # Yields to the given block for each service that has already been
+    # defined via {add_service}. Also yields to the given block for
+    # each new service added after the callback is registered.
+    # @api private
+    def service_added(&block)
+      callback = Proc.new
+      @services.each do |svc_name, (svc_module, options)|
+        callback.call(svc_name, svc_module, options)
+      end
+      @service_added_callbacks << callback
     end
 
     # Registers a new service. Creates a Client class and an Errors
     # module.
     #
     #     # register a new service & API version
-    #     Aws.add_service('S3',
+    #     Aws.add_service('S3', {
     #       'api' => '/path/to/api.json',
     #       'paginators' => '/path/to/paginators.json',
-    #     )
+    #       'resources' => '/path/to/resources.json',
+    #     })
     #
     #     # create a versioned client
     #     Aws::S3::Client.new
@@ -180,28 +196,28 @@ module Aws
     # @option (see ServiceBuilder.new)
     # @return (see ServiceBuilder.new)
     def add_service(svc_name, options = {})
-      svc_module = const_set(svc_name, ServiceBuilder.new(svc_name, options))
-      add_helper(svc_name, svc_module)
+      identifier = svc_name.downcase.to_sym
+      svc_module = ServiceBuilder.new(identifier, options)
+      const_set(svc_name, svc_module)
+      @services[identifier] = [svc_module, options]
+      @service_added_callbacks.each do |callback|
+        callback.call(identifier, svc_module, options)
+      end
       svc_module
     end
 
-    private
+  end
 
-    def add_helper(svc_name, svc_mod)
-      method_name = svc_name.downcase.to_sym
-      service_modules[method_name] = svc_mod
-      define_method(method_name) do |options = {}|
-        unless instance_variable_get("@#{method_name}_warned")
-          instance_variable_set("@#{method_name}_warned", true)
-          warn(<<-MSG.strip)
-Aws.#{method_name} deprecated as of v2.0.0.rc14 and will be removed as of v2.0.0.0 final; use Aws::#{svc_name}::Client.new() instead
-          MSG
-        end
-        svc_mod.const_get(:Client).new(options)
+  service_added do |identifier, svc_module, _|
+    define_singleton_method(identifier) do |options={}|
+      unless instance_variable_get("@#{identifier}_warned")
+        instance_variable_set("@#{identifier}_warned", true)
+        warn(<<-MSG.strip)
+Aws.#{identifier} deprecated as of v2.0.0.rc14 and will be removed as of v2.0.0.0 final; use #{svc_module.name}::Client.new() instead
+        MSG
       end
-      module_function(method_name)
+      svc_module::Client.new(options)
     end
-
   end
 
   Api::Manifest.default_manifest.services.each do |service|
