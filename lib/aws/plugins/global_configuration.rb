@@ -50,9 +50,7 @@ module Aws
       def apply_service_defaults(client_class, options)
         if defaults = Aws.config[client_class::IDENTIFIER]
           defaults.each do |option_name, default|
-            next if option_name == :api_version
-            next if options.key?(option_name)
-            options[option_name] = default
+            options[option_name] = default unless options.key?(option_name)
           end
         end
       end
@@ -60,8 +58,7 @@ module Aws
       def apply_aws_defaults(client_class, options)
         Aws.config.each do |option_name, default|
           next if client_class::IDENTIFIER == option_name
-          next if Aws.service_modules.key?(option_name)
-          next if option_name == :api_version
+          next if Aws.services.key?(option_name)
           next if options.key?(option_name)
           options[option_name] = default
         end

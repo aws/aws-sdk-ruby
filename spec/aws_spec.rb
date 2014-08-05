@@ -25,10 +25,8 @@ module Aws
 
     it 'adds a plugin to every client for all services' do
       client_class = double('client-class')
-      svc_module = Module.new
-      svc_module.const_set(:Client, client_class)
-      allow(Aws).to receive(:service_modules).and_return(klass: svc_module)
-      expect(svc_module::Client).to receive(:add_plugin).with('p')
+      allow(Aws).to receive(:client_classes).and_return([client_class])
+      expect(client_class).to receive(:add_plugin).with('p')
       Aws.add_plugin('p')
     end
 
@@ -38,10 +36,8 @@ module Aws
 
     it 'removes a plugin from every client for each service' do
       client_class = double('client-class')
-      svc_module = Module.new
-      svc_module.const_set(:Client, client_class)
-      allow(Aws).to receive(:service_modules).and_return(klass: svc_module)
-      expect(svc_module::Client).to receive(:remove_plugin).with('p')
+      allow(Aws).to receive(:client_classes).and_return([client_class])
+      expect(client_class).to receive(:remove_plugin).with('p')
       Aws.remove_plugin('p')
     end
 

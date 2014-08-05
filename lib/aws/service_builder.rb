@@ -2,23 +2,23 @@ module Aws
   class ServiceBuilder
     class << self
 
-      # @param [String, Symbol] svc_name
+      # @param [Symbol] identifier
       # @option options [required, String, Hash, Seahorse::Model::Api] 'api'
       # @option options [String, Hash, Paging::Provider] 'paging'
       # @return [Module<Service>]
-      def new(svc_name, options = {})
+      def new(identifier, options = {})
         svc_module = Module.new
         svc_module.send(:extend, Service)
         svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
-        svc_module.const_set(:Client, client_class(svc_name, options))
+        svc_module.const_set(:Client, client_class(identifier, options))
         svc_module
       end
 
       private
 
-      def client_class(svc_name, options)
+      def client_class(identifier, options)
         client_class = Class.new(Seahorse::Client::Base)
-        client_class.const_set(:IDENTIFIER, svc_name.downcase.to_sym)
+        client_class.const_set(:IDENTIFIER, identifier)
         client_class.const_set(:PAGING_PROVIDER, paging_provider(options))
         client_class.set_api(api(options))
         Api::ServiceCustomizations.apply(client_class)
