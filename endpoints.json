@@ -27,8 +27,14 @@
         }
       },
       {
+        "services": ["s3"],
         "config": {
-          "endpoint": "{scheme}://{service}.{region}.us-gov.amazonaws.com"
+          "endpoint": "{scheme}://{service}-{region}.amazonaws.com"
+        }
+      },
+      {
+        "config": {
+          "endpoint": "{scheme}://{service}.{region}.amazonaws.com"
         }
       }
     ]
