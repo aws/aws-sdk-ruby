@@ -6,6 +6,7 @@ branches:
 rvm:
 - 1.9.3
 - 2.0.0
+- 2.1.2
 - jruby
 env:
   - COVERAGE=1 PURE_RUBY=1
