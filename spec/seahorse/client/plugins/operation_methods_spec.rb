@@ -17,7 +17,7 @@ module Seahorse
           klass
         end
 
-        let(:client) { client_class.new endpoint: 'localhost' }
+        let(:client) { client_class.new endpoint: 'http://localhost' }
 
         let(:operations) { [:operation_1, :operation_2, :operation_3] }
 
@@ -50,7 +50,7 @@ module Seahorse
         it 'can be removed from client' do
           next_client_class = Class.new(client_class)
           next_client_class.remove_plugin OperationMethods
-          client = next_client_class.new
+          client = next_client_class.new(endpoint:'http://foo.com')
 
           expect(client.methods).not_to include(*operations.map(&:to_sym))
           expect { client.operation1 }.to raise_error(NoMethodError)
@@ -67,7 +67,7 @@ module Seahorse
             expect(client_class).to receive(:define_method).
               with(operation_name).exactly(1).times
           end
-          client_class.new(endpoint: 'localhost')
+          client_class.new(endpoint: 'http://localhost')
         end
 
       end

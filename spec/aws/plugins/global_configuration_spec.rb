@@ -16,14 +16,12 @@ module Aws
       before(:each) do
         api = Seahorse::Model::Api.new('metadata' => {
           'apiVersion' => '2013-01-01',
-          'protocol' => 'json',
-          'signatureVersion' => 'v4',
         })
         svc = Aws.add_service(:Svc, 'api' => api)::Client
         svc.remove_plugin(RegionalEndpoint)
-        svc.remove_plugin(Protocols::JsonRpc)
         svc.remove_plugin(RequestSigner)
         svc.add_plugin(GlobalConfiguration)
+        svc.add_plugin(plugin { option(:endpoint, 'http://foo.com') })
         svc.add_plugin(plugin { option(:property, 'plugin-default') })
         allow(Aws).to receive(:config).and_return({})
       end

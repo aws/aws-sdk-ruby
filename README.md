@@ -12,7 +12,8 @@ For version 1.0 of the Ruby SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aw
 ### 2.0.0.rc14 Upgrading Notes
 
 RC14 simplifies the API versioning strategy. This may require small changes for
-users that use the API version locking options.
+users that use the API version locking options. Also, there are minor changes
+when configuring raw endpoints.
 
 * Versioned client classes removed, e.g. `Aws::S3::Client::V20060301.new` should
   be replaced with `Aws::S3::Client.new`
@@ -22,6 +23,11 @@ users that use the API version locking options.
 * Aws helper methods for client construction deprecated; For example,
   calling `Aws.s3` will generate a deprecation warning. Call `Aws::S3::Client.new`
   instead. Top-level helpers will be removed as of v2.0.0 final.
+
+* When configuring an `:endpoint` directly, you must now specify the
+  HTTP scheme, e.g. "http://localhost:3000", instead of "localhost:3000".
+  Please note, this should only be done for testing. Normally you only
+  need to configure a `:region`.
 
 In future versions, backwards incompatible API updates will be surfaced in their
 own module and client class to ensure users are not broken by API updates.

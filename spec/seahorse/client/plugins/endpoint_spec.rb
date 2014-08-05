@@ -17,12 +17,12 @@ module Seahorse
         end
 
         it 'adds an #endpoint option to config' do
-          client = client_class.new(endpoint:'foo.com')
-          expect(client.config.endpoint).to eq('foo.com')
+          client = client_class.new(endpoint:'http://foo.com')
+          expect(client.config.endpoint.to_s).to eq('http://foo.com')
         end
 
         it 'populates the http request endpoint' do
-          client = client_class.new(endpoint:'foo.com')
+          client = client_class.new(endpoint:'https://foo.com')
           resp = client.build_request('operation').send_request
           expect(resp.context.http_request.endpoint).to eq(URI.parse('https://foo.com/'))
         end

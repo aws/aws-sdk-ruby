@@ -11,9 +11,9 @@ module Seahorse
         }
       }}
 
-      let(:client_class) { Base.define(api: api) }
+      let(:client_class) { Base.define(api:api) }
 
-      let(:client) { client_class.new }
+      let(:client) { client_class.new(endpoint:'http://example.com') }
 
       let(:required_plugins) { Base::REQUIRED_PLUGINS }
 
@@ -260,7 +260,7 @@ module Seahorse
         }
 
         it 'instructs plugins to #before_initialize' do
-          options = {}
+          options = { endpoint: 'http://foo.com' }
           expect(plugin).to receive(:before_initialize).with(client_class, options)
           client_class.add_plugin(plugin)
           client_class.new(options)
@@ -269,6 +269,7 @@ module Seahorse
         it 'instructs plugins to #add_options' do
           expect(plugin).to receive(:add_options) do |config|
             config.add_option(:foo, 'bar')
+            config.add_option(:endpoint, 'http://foo.com')
           end
           client_class.add_plugin(plugin)
           expect(client_class.new.config.foo).to eq('bar')
@@ -278,19 +279,19 @@ module Seahorse
           expect(plugin).to receive(:add_handlers).
             with(kind_of(HandlerList), kind_of(Struct))
           client_class.add_plugin(plugin)
-          client_class.new
+          client_class.new(endpoint:'http://foo.com')
         end
 
         it 'instructs plugins to #after_initialize' do
           expect(plugin).to receive(:after_initialize).with(kind_of(Client::Base))
           client_class.add_plugin(plugin)
-          client_class.new
+          client_class.new(endpoint:'http://foo.com')
         end
 
         it 'does not call methods that plugin does not respond to' do
           plugin = Object.new
           client_class.add_plugin(plugin)
-          client_class.new
+          client_class.new(endpoint:'http://foo.com')
         end
 
       end

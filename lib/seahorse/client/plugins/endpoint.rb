@@ -18,6 +18,16 @@ module Seahorse
 
         option(:endpoint)
 
+        def after_initialize(client)
+          endpoint = URI.parse(client.config.endpoint.to_s)
+          if URI::HTTPS === endpoint or URI::HTTP === endpoint
+            client.config.endpoint = endpoint
+          else
+            msg = 'expected :endpoint to be a HTTP or HTTPS endpoint'
+            raise ArgumentError, msg
+          end
+        end
+
         class Handler < Client::Handler
 
           def call(context)
@@ -28,20 +38,10 @@ module Seahorse
           private
 
           def build_endpoint(context)
-            uri = configured_endpoint(context)
+            uri = URI.parse(context.config.endpoint.to_s)
             apply_path_params(uri, context)
             apply_querystring_params(uri, context)
             uri
-          end
-
-          def configured_endpoint(context)
-            if context.config.endpoint
-              endpoint = context.config.endpoint.to_s
-              endpoint = "https://#{endpoint}" unless endpoint =~ /^http/
-              URI.parse(endpoint)
-            else
-              raise "required configuration option :endpoint not set"
-            end
           end
 
           def apply_path_params(uri, context)
