@@ -61,6 +61,28 @@ module Aws
 
       end
 
+      describe 'https required for sse cpk' do
+
+        it 'raises a runtime error when attempting SSE CPK over HTTP' do
+          s3 = Client.new(endpoint: 'http://s3.amazonaws.com', region:'us-east-1')
+
+          # put_object
+          expect {
+            s3.put_object(bucket:'aws-sdk', key:'key', sse_customer_key:'secret')
+          }.to raise_error(/HTTPS/)
+
+          # copy_object_source
+          expect {
+            s3.copy_object(
+              bucket:'aws-sdk',
+              key:'key',
+              copy_source: 'bucket#key',
+              sse_customer_key: 'secret')
+          }.to raise_error(/HTTPS/)
+        end
+
+      end
+
       describe '#create_bucket' do
 
         it 'omits location constraint for the classic region' do
