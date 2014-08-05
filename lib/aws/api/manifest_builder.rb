@@ -31,10 +31,6 @@ module Aws
         name
       end
 
-      def compatible_with(api)
-        api['metadata']['compatibleWith']
-      end
-
       def path_for(file_type, api)
         prefix = api['metadata']['endpointPrefix']
         version = api['metadata']['apiVersion']
@@ -48,7 +44,6 @@ module Aws
           'paginators' => path_for('paginators', api),
           'waiters' => path_for('waiters', api),
           'resources' => path_for('resources', api),
-          'compatibleWith' => compatible_with(api),
         }.delete_if { |k,v| v.nil? }
       end
 
