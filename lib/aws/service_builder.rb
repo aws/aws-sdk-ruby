@@ -47,7 +47,8 @@ module Aws
       end
 
       def load_json(path)
-        MultiJson.load(File.read(File.join(GEM_ROOT, path)))
+        path = File.join(GEM_ROOT, path) unless path.match(/^#{File::SEPARATOR}/)
+        MultiJson.load(File.read(path))
       end
 
     end

@@ -73,11 +73,18 @@ module Aws
       expect(Aws::DummyService::Client.ancestors).to include(Seahorse::Client::Base)
     end
 
-    it 'loads the API from the GEM_ROOT' do
+    it 'loads API with relative paths from the GEM_ROOT' do
       path = File.join(Aws::GEM_ROOT, 'apis/s3-2006-03-01.api.json')
       api = File.read(path)
-      expect(File).to receive(:read).and_return(api)
+      expect(File).to receive(:read).with(path).and_return(api)
       Aws.add_service('DummyService', 'api' => 'apis/s3-2006-03-01.api.json')
+    end
+
+    it 'does not prefix absolute api paths with GEM_ROOT' do
+      path = File.join(Aws::GEM_ROOT, 'apis/s3-2006-03-01.api.json')
+      api = File.read(path)
+      expect(File).to receive(:read).with(path).and_return(api)
+      Aws.add_service('DummyService', 'api' => path)
     end
 
   end
