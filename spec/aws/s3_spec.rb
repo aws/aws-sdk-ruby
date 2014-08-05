@@ -30,6 +30,37 @@ module Aws
 
       end
 
+      describe 'signature version' do
+
+        [
+          "us-east-1",
+          "us-west-1",
+          "us-west-2",
+          "ap-northeast-1",
+          "ap-southeast-1",
+          "ap-southeast-2",
+          "sa-east-1",
+          "eu-west-1",
+          "us-gov-west-1",
+        ].each do |region|
+          it "defaults signature_version to 'v3' for '#{region}'" do
+            client = Client.new(region: region)
+            expect(client.config.signature_version).to eq('s3')
+          end
+        end
+
+        [
+          "cn-north-1",
+          "brand-new-region",
+        ].each do |region|
+          it "defaults signature_version to 'v4' for '#{region}'" do
+            client = Client.new(region: region)
+            expect(client.config.signature_version).to eq('v4')
+          end
+        end
+
+      end
+
       describe '#create_bucket' do
 
         it 'omits location constraint for the classic region' do

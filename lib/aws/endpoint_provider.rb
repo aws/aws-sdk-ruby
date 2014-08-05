@@ -17,7 +17,7 @@ module Aws
         if region_matches?(rule_group, options)
           rule_group['rules'].each do |rule|
             if service_matches?(rule, options)
-              return apply_rule(rule, options)
+              return expand_endpoint(rule['config']['endpoint'], options)
             end
           end
         end
@@ -36,10 +36,6 @@ module Aws
     #   An example pattern:
     #
     #       "#{scheme}://{service}.{region}.amazonaws.com"
-    #
-    # @option options [String] :signature_version When resolving and a match
-    #   is found, this is returned with the resolved `:pattern`. This can be
-    #   used to provide per-endpoint overrides for the signature version.
     #
     # @option options [Integer] :priority (100) A number from 0 to 999.
     #   Rules with lower number have a higher priority and are evaluated first.
@@ -65,8 +61,6 @@ module Aws
       rule['services'] = options[:services] if options[:services]
       rule['config'] = {}
       rule['config']['endpoint'] = options[:pattern]
-      rule['config']['signatureVersion'] = options[:signature_version] if
-        options[:signature_version]
       {
         'priority' => options[:priority] || 100,
         'regionPrefix' => options[:region_prefix] || '',
@@ -82,17 +76,7 @@ module Aws
       rule['services'].nil? || rule['services'].include?(options[:service])
     end
 
-    def apply_rule(rule, options)
-      rule['config'].each.with_object({}) do |(key, value), result|
-        if key == 'endpoint'
-          result[:endpoint] = resolve_endpoint(value, options)
-        else
-          result[Seahorse::Util.underscore(key).to_sym] = value
-        end
-      end
-    end
-
-    def resolve_endpoint(pattern, options)
+    def expand_endpoint(pattern, options)
       pattern.gsub(/{\w+}/) { |match| options[match[1..-2].to_sym] }
     end
 

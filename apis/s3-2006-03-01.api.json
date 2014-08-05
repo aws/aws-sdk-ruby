@@ -6,7 +6,18 @@
     "globalEndpoint":"s3.amazonaws.com",
     "serviceAbbreviation":"Amazon S3",
     "serviceFullName":"Amazon Simple Storage Service",
-    "signatureVersion":"s3",
+    "signatureVersion":"v4",
+    "v3Regions": [
+      "us-east-1",
+      "us-west-1",
+      "us-west-2",
+      "ap-northeast-1",
+      "ap-southeast-1",
+      "ap-southeast-2",
+      "sa-east-1",
+      "eu-west-1",
+      "us-gov-west-1"
+    ],
     "timestampFormat":"rfc822",
     "protocol":"rest-xml"
   },

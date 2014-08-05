@@ -19,16 +19,13 @@ module Aws
         ENV.values_at(*keys).compact.first
       }
 
-      # intentionally not documented
-      option(:region_defaults) do |cfg|
+      option(:endpoint) do |cfg|
         EndpointProvider.default_provider.resolve(
           service: cfg.api.metadata('endpointPrefix'),
           region: cfg.region,
           scheme: 'https'
         )
       end
-
-      option(:endpoint) { |cfg| cfg.region_defaults[:endpoint] }
 
       def after_initialize(client)
         if client.config.region.nil? or client.config.region == ''
