@@ -8,7 +8,7 @@ module Aws
 
         let(:config) { double('config', api: api) }
 
-        let(:client_class) { double('client-class', api: api) }
+        let(:client_class) { Seahorse::Client::Base.define(api: api) }
 
         let(:client) { double('client', config:config) }
 
@@ -19,18 +19,12 @@ module Aws
 
         let(:shapes) {{}}
 
-        let(:metadata) {{ 'paging' => Paging::NullProvider.new }}
-
-        let(:api) {
-          Seahorse::Model::Api.new(
-            'shapes' => shapes,
-            'metadata' => metadata,
-          )
-        }
+        let(:api) { Seahorse::Model::Api.new('shapes' => shapes) }
 
         let(:namespace) { Module.new }
 
         before(:each) do
+          client_class.const_set(:PAGING_PROVIDER, Paging::NullProvider.new)
           allow(client_class).to receive(:new).and_return(client)
         end
 

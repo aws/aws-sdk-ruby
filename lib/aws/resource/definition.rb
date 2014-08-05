@@ -254,7 +254,7 @@ module Aws
 
       def limit_key(resource, definition)
         operation_name = definition['request']['operation']
-        paging_provider = resource.client_class.api.metadata('paging')
+        paging_provider = resource.client_class::PAGING_PROVIDER
         paging_provider.pager(operation_name).limit_key
       end
 
