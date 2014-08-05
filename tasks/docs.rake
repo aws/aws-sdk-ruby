@@ -37,7 +37,7 @@ def supported_services_table
   line = "| %-35s | %-25s | %-30s |\n"
 
   lines = []
-  Aws.service_clients.each do |client_class|
+  Aws.client_classes.each do |client_class|
     full_name = client_class.api.metadata('serviceFullName')
     module_name = client_class.name.split('::')[1]
     version = client_class.api.version
