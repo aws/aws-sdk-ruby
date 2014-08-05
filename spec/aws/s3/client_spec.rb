@@ -5,19 +5,22 @@ module Aws
   module S3
     describe Client do
 
-      let(:credentials) { Credentials.new('akid', 'secret') }
+      before(:each) do
+        Aws.config[:s3] = {
+          region: 'us-east-1',
+          credentials: Credentials.new('akid', 'secret'),
+          retry_limit: 0
+        }
+      end
+
+      after(:each) do
+        Aws.config = {}
+      end
 
       describe 'empty body error responses' do
 
-        let(:s3) {
-          Client.new({
-            region: 'us-east-1',
-            credentials: credentials,
-            retry_limit: 0,
-          })
-        }
-
         it 'creates an error class from empty body responses' do
+          s3 = Client.new
           s3.handle(step: :send) do |context|
             context.http_response.status_code = 500
             context.http_response.body = StringIO.new('')
@@ -64,10 +67,7 @@ module Aws
       describe 'https required for sse cpk' do
 
         it 'raises a runtime error when attempting SSE CPK over HTTP' do
-          s3 = Client.new(
-            endpoint: 'http://s3.amazonaws.com', 
-            region:'us-east-1',
-            credentials: credentials)
+          s3 = Client.new(endpoint: 'http://s3.amazonaws.com')
 
           # put_object
           expect {
@@ -89,7 +89,7 @@ module Aws
       describe 'endpoints' do
 
         it 'resolves correctly for gov-cloud' do
-          s3 = Client.new(region: 'us-gov-west-1', credentials: credentials)
+          s3 = Client.new(region: 'us-gov-west-1')
           expect(s3.config.endpoint.to_s).to eq('https://s3-us-gov-west-1.amazonaws.com')
         end
 
@@ -98,7 +98,7 @@ module Aws
       describe '#create_bucket' do
 
         it 'omits location constraint for the classic region' do
-          s3 = Client.new(region: 'us-east-1', credentials: credentials)
+          s3 = Client.new(region: 'us-east-1')
           s3.handle(step: :send) do |context|
             context.http_response.status_code = 200
             Seahorse::Client::Response.new(context: context)
@@ -108,7 +108,7 @@ module Aws
         end
 
         it 'populates the bucket location constraint for non-classic regions' do
-          s3 = Client.new(region: 'us-west-2', credentials: credentials)
+          s3 = Client.new(region: 'us-west-2')
           s3.handle(step: :send) do |context|
             context.http_response.status_code = 200
             Seahorse::Client::Response.new(context: context)
@@ -122,7 +122,7 @@ module Aws
         end
 
         it 'does not overide bucket location constraint params' do
-          s3 = Client.new(region: 'eu-west-1', credentials: credentials)
+          s3 = Client.new(region: 'eu-west-1')
           s3.handle(step: :send) do |context|
             context.http_response.status_code = 200
             Seahorse::Client::Response.new(context: context)
