@@ -4,10 +4,10 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      def initialize(obj_name, method_name, operation)
-        @obj_name = obj_name
-        @method_name = method_name
-        @operation = operation
+      def initialize(options)
+        @obj_name = options[:svc_var_name]
+        @method_name = options[:method_name]
+        @operation = options[:operation]
       end
 
       def to_str

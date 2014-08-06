@@ -107,6 +107,11 @@ module Seahorse
           "#<#{self.class.name}>"
         end
 
+        # @api private
+        def with(options)
+          self.class.new(@definition.merge(options), shape_map: shape_map)
+        end
+
         private
 
         def underscore(string)

@@ -1,10 +1,11 @@
+require 'multi_json'
 require 'erb'
 
 module Aws
   module Api
     class Documenter
 
-      def initialize(svc_module)
+      def initialize(svc_module, docs_path)
         @svc_module = svc_module
         @svc_name = svc_module.name.split('::').last
         @client_class = svc_module.const_get(:Client)
@@ -13,12 +14,13 @@ module Aws
         @error_names = @api.operations.map {|_,o| o.errors.map(&:name) }
         @error_names = @error_names.flatten.uniq.sort
         @namespace = YARD::Registry['Aws']
+        apply_docstrings(docs_path)
       end
 
       def apply
         document_service
-        document_errors
         document_client
+        document_errors
       end
 
       private
@@ -85,6 +87,7 @@ module Aws
 
       def document_client_constructor(namespace)
         constructor = YARD::CodeObjects::MethodObject.new(namespace, :initialize)
+        constructor.group = 'Constructor'
         constructor.scope = :instance
         constructor.parameters << ['options', '{}']
         constructor.docstring = client_constructor_docstring
@@ -123,7 +126,7 @@ Constructs an API client.
 
       def document_client_operation(namespace, method_name, operation)
         m = YARD::CodeObjects::MethodObject.new(namespace, method_name)
-        m.group = 'API Operation Methods'
+        m.group = 'Service Operations'
         m.scope = :instance
         m.parameters << ['params', '{}']
         m.docstring = operation_docstring(method_name, operation)
@@ -131,7 +134,10 @@ Constructs an API client.
 
       def operation_docstring(method_name, operation)
 
-        documentor = OperationDocumenter.new(@svc_name.downcase, method_name, operation)
+        documentor = OperationDocumenter.new(
+          svc_var_name: @svc_name.downcase,
+          method_name: method_name,
+          operation: operation)
 
         tabs = Tabulator.new.tap do |t|
           t.tab(method_name, 'Formatting Example') do
@@ -191,6 +197,33 @@ Constructs an API client.
         alias to_str to_html
         alias to_s to_html
 
+      end
+
+      def apply_docstrings(path)
+        docs = MultiJson.load(read(path))
+        api = @api.definition
+
+        api['documentation'] = docs['service']
+
+        docs['operations'].each do |operation, doc|
+          api['operations'][operation]['documentation'] = doc
+        end
+
+        docs['shapes'].each do |shape_name, shape|
+          api['shapes'][shape_name]['documentation'] = shape['base']
+          shape['refs'].each do |ref,doc|
+            target_shape_name, member = ref.split('$')
+            target_shape = api['shapes'][target_shape_name]
+            case target_shape['type']
+            when 'structure' then target_shape['members'][member]['documentation'] = doc
+            when 'list' then target_shape[member]['documentation'] = doc
+            when 'map' then target_shape[member]['documentation'] = doc
+            else raise 'not handled'
+            end
+          end
+        end
+
+        @api = Seahorse::Model::Api.new(api)
       end
 
       def read(path)

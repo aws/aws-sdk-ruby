@@ -2,9 +2,9 @@ module Aws
   module Api
     class OperationDocumenter
 
-      def initialize(obj_name, method_name, operation)
-        @operation = operation
-        @example = OperationExample.new(obj_name, method_name, operation)
+      def initialize(options)
+        @operation = options[:operation]
+        @example = OperationExample.new(options)
       end
 
       def input
