@@ -174,7 +174,7 @@ fixtures.each do |directory, files|
 
         group.it "extract response data correctly" do
           resp = client.example_operation
-          data = resp.data.to_h
+          data = data_to_hash(resp.data)
           expected_data = format_data(resp.context.operation.output, test_case['result'])
           expect(data).to eq(expected_data)
         end

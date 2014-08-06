@@ -22,8 +22,6 @@ module Aws
         end
       when Array
         obj.collect { |value| to_hash(value) }
-      when StringIO
-        obj.string
       else
         obj
       end

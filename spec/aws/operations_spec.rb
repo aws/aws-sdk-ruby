@@ -103,7 +103,7 @@ module Aws
 
     def response_assertions(f, resp)
       if f.data
-        expect(resp.data.to_h).to eq(f.data)
+        expect(data_to_hash(resp.data)).to eq(f.data)
       end
 
       if f.error
