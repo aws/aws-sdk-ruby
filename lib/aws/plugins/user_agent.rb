@@ -13,11 +13,10 @@ module Aws
         end
 
         def set_user_agent(context)
-          ua = "aws-sdk-ruby2/#{VERSION} %s/%s %s Seahorse/%s %s" % [
+          ua = "aws-sdk-ruby2/#{VERSION} %s/%s %s %s" % [
             (RUBY_ENGINE rescue nil or "ruby"),
             RUBY_VERSION,
             RUBY_PLATFORM,
-            Seahorse::VERSION,
             context.config.user_agent_suffix,
           ]
           context.http_request.headers['User-Agent'] = ua.strip

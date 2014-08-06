@@ -14,7 +14,6 @@ module Seahorse
           self.endpoint = options[:endpoint] if options[:endpoint]
           self.http_method = options[:http_method] || 'GET'
           self.headers = Headers.new(options[:headers] || {})
-          self.headers['User-Agent'] ||= ua
           self.body = options[:body]
         end
 
@@ -57,13 +56,6 @@ module Seahorse
             when String then StringIO.new(io)
             else io
           end
-        end
-
-        private
-
-        # @return [String]
-        def ua
-          "Seahorse/#{Seahorse::VERSION}"
         end
 
       end

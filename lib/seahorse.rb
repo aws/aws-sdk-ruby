@@ -1,6 +1,5 @@
 module Seahorse
 
-  autoload :VERSION, 'seahorse/version'
   autoload :Util, 'seahorse/util'
 
   module Client
