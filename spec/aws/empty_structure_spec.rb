@@ -41,16 +41,34 @@ module Aws
       expect(yields).to be_empty
     end
 
+    it 'returns an enumerable from #each' do
+      enum = EmptyStructure.new.each
+      expect(enum).to be_kind_of(Enumerable)
+      expect(enum.to_a).to eq([])
+    end
+
     it 'can be enumerated in pairs, but yields no members or values' do
       yields = []
       EmptyStructure.new.each { |*args| yields << args }
       expect(yields).to be_empty
     end
 
+    it 'returns an enumerable from #each_pair' do
+      enum = EmptyStructure.new.each_pair
+      expect(enum).to be_kind_of(Enumerable)
+      expect(enum.to_a).to eq([])
+    end
+
     it 'equals other empty structures' do
       expect(EmptyStructure.new).to eq(EmptyStructure.new)
       expect(EmptyStructure.new == EmptyStructure.new).to be(true)
       expect(EmptyStructure.new.eql?(EmptyStructure.new)).to be(true)
+    end
+
+    it 'supports pretty print' do
+      r = double('receiver')
+      expect(r).to receive(:text).with('#<struct>')
+      EmptyStructure.new.pretty_print(r)
     end
 
     it 'has a sensible inspect string' do
