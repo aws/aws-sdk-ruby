@@ -1,6 +1,6 @@
 module Aws
   module Api
-    class DocExample
+    class OperationExample
 
       include Seahorse::Model::Shapes
 

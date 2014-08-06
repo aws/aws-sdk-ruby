@@ -30,11 +30,11 @@ module Aws
   # @api private
   module Api
     autoload :Customizer, "#{SRC}/api/customizer"
-    autoload :DocExample, "#{SRC}/api/doc_example"
-    autoload :Documentor, "#{SRC}/api/documentor"
     autoload :Documenter, "#{SRC}/api/documenter"
     autoload :Manifest, "#{SRC}/api/manifest"
     autoload :ManifestBuilder, "#{SRC}/api/manifest_builder"
+    autoload :OperationDocumenter, "#{SRC}/api/operation_documenter"
+    autoload :OperationExample, "#{SRC}/api/operation_example"
     autoload :ServiceCustomizations, "#{SRC}/api/service_customizations"
   end
 

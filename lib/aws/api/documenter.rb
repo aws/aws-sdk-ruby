@@ -131,7 +131,7 @@ Constructs an API client.
 
       def operation_docstring(method_name, operation)
 
-        documentor = Documentor.new(@svc_name.downcase, method_name, operation)
+        documentor = OperationDocumenter.new(@svc_name.downcase, method_name, operation)
 
         tabs = Tabulator.new.tap do |t|
           t.tab(method_name, 'Formatting Example') do
