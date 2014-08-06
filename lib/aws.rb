@@ -32,6 +32,7 @@ module Aws
     autoload :Customizer, "#{SRC}/api/customizer"
     autoload :DocExample, "#{SRC}/api/doc_example"
     autoload :Documentor, "#{SRC}/api/documentor"
+    autoload :Documenter, "#{SRC}/api/documenter"
     autoload :Manifest, "#{SRC}/api/manifest"
     autoload :ManifestBuilder, "#{SRC}/api/manifest_builder"
     autoload :ServiceCustomizations, "#{SRC}/api/service_customizations"
