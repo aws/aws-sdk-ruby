@@ -1,6 +1,5 @@
 module Seahorse
   module Client
-    # @api private
     module Xml
       class Builder
 
