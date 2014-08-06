@@ -1,4 +1,5 @@
 module Aws
+  # @api private
   class CredentialProviderChain
 
     def initialize(config)

@@ -132,9 +132,8 @@ module Aws
       end
     end
 
-    # Adds a plugin to every AWS client class.  This registers the plugin
-    # with each versioned client for each service.
-    # @param [Plugin] plugin
+    # Applies the plugin to every AWS client class.
+    # @param [Seahorse::Client::Plugin] plugin
     # @return [void]
     def add_plugin(plugin)
       client_classes.each do |client_class|
@@ -142,9 +141,8 @@ module Aws
       end
     end
 
-    # Removes a plugin to from AWS client class.  This removes the plugin
-    # from each versioned client for each service.
-    # @param [Plugin] plugin
+    # Removes the plugin from every AWS client class.
+    # @param [Seahorse::Client::Plugin] plugin
     # @return [void]
     def remove_plugin(plugin)
       client_classes.each do |client_class|

@@ -1,6 +1,8 @@
 require 'thread'
 
 module Aws
+
+  # Each Service module has its own Errors module, e.g. {S3::Errors}.
   module Errors
 
     # The base class for all errors returned by an Amazon Web Service.

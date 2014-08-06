@@ -1,9 +1,9 @@
 module Seahorse
   module Client
+    # @api private
     module Xml
       class Builder
 
-        # @api private
         class XmlDoc
 
           # @option options [#<<] :target ('')
