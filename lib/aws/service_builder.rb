@@ -1,4 +1,5 @@
 module Aws
+  # @api private
   class ServiceBuilder
     class << self
 
@@ -30,7 +31,7 @@ module Aws
         case api
         when Seahorse::Model::Api then api
         when Hash then Seahorse::Model::Api.new(api)
-        when String then Seahorse::Model::Api.new(MultiJson.load(File.read(api)))
+        when String then Seahorse::Model::Api.new(load_json(api))
         else
           raise ArgumentError, "expected :api to be an Api, Hash or String"
         end
@@ -41,9 +42,14 @@ module Aws
         case paginators
         when Paging::Provider then paginators
         when Hash then Paging::Provider.new(paginators)
-        when String then Paging::Provider.new(MultiJson.load(File.read(paginators)))
+        when String then Paging::Provider.new(load_json(paginators))
         when nil then Paging::NullProvider.new
         end
+      end
+
+      def load_json(path)
+        path = File.join(GEM_ROOT, path) unless path.match(/^#{File::SEPARATOR}/)
+        MultiJson.load(File.open(path, 'r', encoding: 'UTF-8') { |f| f.read })
       end
 
     end

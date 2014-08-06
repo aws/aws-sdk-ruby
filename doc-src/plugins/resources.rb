@@ -31,7 +31,7 @@ end
 class ResourceDocPlugin
 
   def apply
-    Aws.service_modules.each do |_, svc_module|
+    Aws.service_added do |_, svc_module, _|
       namespace = YARD::Registry[svc_module.name]
       svc_module.constants.each do |const|
         klass = svc_module.const_get(const)

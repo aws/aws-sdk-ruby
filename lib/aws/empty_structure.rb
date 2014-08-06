@@ -6,14 +6,14 @@ module Aws
     end
 
     def ==(other)
-      other.is_a?(EmptyStruct)
+      other.is_a?(EmptyStructure)
     end
 
     def [](member_name)
       raise NameError, "no member '#{member_name}' in struct"
     end
 
-    def []=(member_name)
+    def []=(member_name, value)
       raise NameError, "no member '#{member_name}' in struct"
     end
 
@@ -30,7 +30,7 @@ module Aws
     end
 
     def eql?(other)
-      other.is_a?(EmptyStruct)
+      other.is_a?(EmptyStructure)
     end
 
     # @api private
@@ -52,6 +52,7 @@ module Aws
     end
 
     def select(&block)
+      []
     end
 
     def size

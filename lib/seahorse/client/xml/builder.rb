@@ -3,7 +3,6 @@ module Seahorse
     module Xml
       class Builder
 
-        # @api private
         class XmlDoc
 
           # @option options [#<<] :target ('')

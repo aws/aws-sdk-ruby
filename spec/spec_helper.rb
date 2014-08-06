@@ -82,3 +82,20 @@ end
 def client_with_plugin(options = {}, &block)
   client_class_with_plugin(&block).new(options)
 end
+
+def data_to_hash(obj)
+  case obj
+  when Struct
+    obj.members.each.with_object({}) do |member, hash|
+      value = obj[member]
+      hash[member] = data_to_hash(value) unless value.nil?
+    end
+  when Hash
+    obj.each.with_object({}) do |(key, value), hash|
+      hash[key] = data_to_hash(value)
+    end
+  when Array then obj.collect { |value| data_to_hash(value) }
+  when IO, StringIO then obj.read
+  else obj
+  end
+end

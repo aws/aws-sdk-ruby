@@ -1,6 +1,5 @@
 module Seahorse
 
-  autoload :VERSION, 'seahorse/version'
   autoload :Util, 'seahorse/util'
 
   module Client
@@ -33,6 +32,7 @@ module Seahorse
       autoload :Formatter, 'seahorse/client/logging/formatter'
     end
 
+    # @api private
     module NetHttp
       autoload :ConnectionPool, 'seahorse/client/net_http/connection_pool'
       autoload :Handler, 'seahorse/client/net_http/handler'
@@ -53,6 +53,7 @@ module Seahorse
       autoload :RestfulBindings, 'seahorse/client/plugins/restful_bindings'
     end
 
+    # @api private
     module Xml
       autoload :Builder, 'seahorse/client/xml/builder'
     end

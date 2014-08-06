@@ -1,6 +1,7 @@
 require 'multi_json'
 
 module Aws
+  # @api private
   class EndpointProvider
 
     # @option options [Array<Hash>] :rules ([]) An array of grouped rules.

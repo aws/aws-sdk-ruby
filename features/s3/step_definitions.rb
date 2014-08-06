@@ -31,11 +31,11 @@ def create_bucket(options = {})
 end
 
 When(/^I force path style requests$/) do
-  @client = Aws.s3(force_path_style:true)
+  @client = Aws::S3::Client.new(force_path_style: true)
 end
 
 Given(/^I am using the S3 "(.*?)" region$/) do |region|
-  @client = Aws.s3(region: region)
+  @client = Aws::S3::Client.new(region: region)
 end
 
 When(/^I create a bucket$/) do
