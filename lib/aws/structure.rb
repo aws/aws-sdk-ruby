@@ -1,13 +1,60 @@
 require 'thread'
 
 module Aws
+
+  # A utilty class that makes it easier to work with Struct objects.
+  #
+  # ## Construction
+  #
+  # You can construct a Structure with a simple hash.
+  #
+  #     person = Structure.new(name: 'John Doe', age: 40)
+  #     #=> #<struct  name="John Doe", age=40>
+  #
+  # ## Empty Structures
+  #
+  # The stdlib Struct class does not work with empty member lists.
+  # Structure solves this by introducing the EmptyStructure class.
+  #
+  #     struct = Structure.new({})
+  #     #=> #<struct>
+  #
+  # ## Structure Classes
+  #
+  # In addition to simpler object construction, struct classes are re-used
+  # automatically.
+  #
+  #   person1 = Structure.new(name: 'John Doe', age: 40)
+  #   person2 = Structure.new(name: 'Jane Doe', age: 40)
+  #
+  #   person1.class == person2.class
+  #
+  # ## Hash Conversion
+  #
+  # Calling {#to_h} or {#to_hash} on a Structure object performs a deep
+  # conversion of Structure objects into hashes.
+  #
+  #     person = Structure.new(
+  #       name: "John",
+  #       age: 40,
+  #       friend: Structure.new(name: "Jane", age: 40, friend: nil)
+  #     )
+  #     person.to_h
+  #     #=> {:name=>"John", :age=>40, :friend=>{:name=>"Jane", :age=>40}}
+  #
   class Structure < Struct
 
     @@classes = {}
     @@classes_mutex = Mutex.new
 
+    alias orig_to_h to_h
+
     # Deeply converts the Structure into a hash.  Structure members that
     # are `nil` are omitted from the resultant hash.
+    #
+    # You can call #orig_to_h to get vanilla #to_h behavior as defined
+    # in stdlib Struct.
+    #
     # @return [Hash]
     def to_h(obj = self)
       case obj
