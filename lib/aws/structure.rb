@@ -47,7 +47,9 @@ module Aws
     @@classes = {}
     @@classes_mutex = Mutex.new
 
-    alias orig_to_h to_h
+    if Struct.instance_methods.include?(:to_h)
+      alias orig_to_h to_h
+    end
 
     # Deeply converts the Structure into a hash.  Structure members that
     # are `nil` are omitted from the resultant hash.
