@@ -20,11 +20,8 @@ begin
 rescue LoadError
 end
 
-desc 'Generates a coverage report'
-task :coverage do
-  ENV['COVERAGE'] = 'true'
-  rm_rf "coverage/"
-  task = Rake::Task['test']
-  task.reenable
-  task.invoke
+begin
+  require 'coveralls/rake/task'
+  Coveralls::RakeTask.new
+rescue LoadError
 end
