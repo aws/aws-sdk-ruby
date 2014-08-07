@@ -50,7 +50,11 @@ module Aws
       private
 
       def params(shape, &block)
-        ['<div class="params">', api_ref(shape)] + yield + ['</div>']
+        if shape && shape.name == 'AttributeValue'
+          ['<p>An attribute value may be one of:<ul><li>`String`</li><li>`Numeric`</li><li>`IO`</li><li>`Set<String,Numeric,IO>`</li></ul></p>']
+        else
+          ['<div class="params">', api_ref(shape)] + yield + ['</div>']
+        end
       end
 
       def param(shape, key_name, value_type, required, visited, &block)

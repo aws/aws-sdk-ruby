@@ -3,13 +3,15 @@ module Aws
     module Protocols
 
       # @seahorse.client.option [Boolean] :simple_json (false)
-      #   Enables simple mode where the request body becomes a simple
-      #   JSON dump of the request paramters.  The response data will also
-      #   be a simple JSON load of the response body.  Enabling
-      #   simple mode avoids the overhead of request parameter valdiation,
-      #   request parameter type conversion, and structuring response
-      #   data.  You must provide request params in the format expected
-      #   by the remote service.
+      #   Disables request parameter conversion, validation, and formatting.
+      #   Also disable response data type conversions. This option is useful
+      #   when you want to ensure the highest level of performance by
+      #   avoiding overhead of walking request parameters and response data
+      #   structures.
+      #
+      #   When `:simple_json` is enabled, the request parameters hash must
+      #   be formatted exactly as the DynamoDB API expects.
+      #
       class JsonRpc < Seahorse::Client::Plugin
 
         option(:simple_json, false)

@@ -46,7 +46,6 @@ module Aws
       def multiline_map(shape, i, visited)
         lines = ["{"]
         lines << "#{i}  #{key_name(shape)} => #{member(shape.value, i + '  ', visited)},"
-        #lines << "#{i}  # repeated ..."
         lines << "#{i}}"
         lines.join("\n")
       end
@@ -62,7 +61,6 @@ module Aws
       def multiline_list(shape, i, visited)
         lines = ["["]
         lines << "#{i}  #{member(shape.member, i + '  ', visited)},"
-        #lines << "#{i}  # repeated ... "
         lines << "#{i}]"
         lines.join("\n")
       end
@@ -73,6 +71,9 @@ module Aws
           recursive << "#{i}  # recursive #{shape.name} ..."
           recursive << "#{i}}"
           return recursive.join("\n")
+        elsif shape.name == 'AttributeValue'
+          msg='"value", #<String,Numeric,IO,Set>'
+          return msg
         else
           visited = visited + [shape.name]
         end

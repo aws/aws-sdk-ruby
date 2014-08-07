@@ -58,6 +58,7 @@ module Aws
 
   module Plugins
     autoload :DynamoDBExtendedRetries, "#{SRC}/plugins/dynamodb_extended_retries"
+    autoload :DynamoDBSimpleAttributes, "#{SRC}/plugins/dynamodb_simple_attributes"
     autoload :EC2CopyEncryptedSnapshot, "#{SRC}/plugins/ec2_copy_encrypted_snapshot"
     autoload :GlacierAccountId, "#{SRC}/plugins/glacier_account_id"
     autoload :GlacierApiVersion, "#{SRC}/plugins/glacier_api_version"
@@ -220,6 +221,10 @@ Aws.#{identifier} deprecated as of v2.0.0.rc14 and will be removed as of v2.0.0.
 
   Api::Manifest.default_manifest.services.each do |service|
     add_service(service.name, service.versions.values.last)
+  end
+
+  module DynamoDB
+    autoload :AttributeValue, "#{SRC}/dynamodb/attribute_value"
   end
 
 end
