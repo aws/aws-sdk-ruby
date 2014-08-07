@@ -7,7 +7,6 @@
     "signatureVersion":"v4",
     "protocol":"rest-json"
   },
-  "documentation":"<fullname>Amazon Cognito Sync</fullname> <p>Amazon Cognito Sync provides an AWS service and client library that enable cross-device syncing of application-related user data. High-level client libraries are available for both iOS and Android. You can use these libraries to persist data locally so that it's available even if the device is offline. Developer credentials don't need to be stored on the mobile device to access the service. You can use Amazon Cognito to obtain a normalized user ID and credentials. User data is persisted in a dataset that can store up to 1 MB of key-value pairs, and you can have up to 20 datasets per user identity.</p>",
   "operations":{
     "DeleteDataset":{
       "name":"DeleteDataset",
@@ -16,41 +15,30 @@
         "requestUri":"/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
         "responseCode":200
       },
-      "input":{
-        "shape":"DeleteDatasetRequest",
-        "documentation":"A request to delete the specific dataset."
-      },
-      "output":{
-        "shape":"DeleteDatasetResponse",
-        "documentation":"Response to a successful DeleteDataset request."
-      },
+      "input":{"shape":"DeleteDatasetRequest"},
+      "output":{"shape":"DeleteDatasetResponse"},
       "errors":[
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown if the resource doesn't exist."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"Indicates an internal service error."
+          "exception":true
         }
-      ],
-      "documentation":"Deletes the specific dataset. The dataset will be deleted permanently, and the action can't be undone. Datasets that this dataset was merged with will no longer report the merge. Any consequent operation on this dataset will result in a ResourceNotFoundException."
+      ]
     },
     "DescribeDataset":{
       "name":"DescribeDataset",
@@ -59,41 +47,30 @@
         "requestUri":"/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
         "responseCode":200
       },
-      "input":{
-        "shape":"DescribeDatasetRequest",
-        "documentation":"A request for metadata about a dataset (creation date, number of records, size) by owner and dataset name."
-      },
-      "output":{
-        "shape":"DescribeDatasetResponse",
-        "documentation":"Response to a successful DescribeDataset request."
-      },
+      "input":{"shape":"DescribeDatasetRequest"},
+      "output":{"shape":"DescribeDatasetResponse"},
       "errors":[
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown if the resource doesn't exist."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"Indicates an internal service error."
+          "exception":true
         }
-      ],
-      "documentation":"Gets metadata about a dataset by identity and dataset name."
+      ]
     },
     "DescribeIdentityPoolUsage":{
       "name":"DescribeIdentityPoolUsage",
@@ -102,41 +79,30 @@
         "requestUri":"/identitypools/{IdentityPoolId}",
         "responseCode":200
       },
-      "input":{
-        "shape":"DescribeIdentityPoolUsageRequest",
-        "documentation":"A request for usage information about the identity pool."
-      },
-      "output":{
-        "shape":"DescribeIdentityPoolUsageResponse",
-        "documentation":"Response to a successful DescribeIdentityPoolUsage request."
-      },
+      "input":{"shape":"DescribeIdentityPoolUsageRequest"},
+      "output":{"shape":"DescribeIdentityPoolUsageResponse"},
       "errors":[
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown if the resource doesn't exist."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"Indicates an internal service error."
+          "exception":true
         }
-      ],
-      "documentation":"Gets usage details (for example, data storage) about a particular identity pool."
+      ]
     },
     "DescribeIdentityUsage":{
       "name":"DescribeIdentityUsage",
@@ -145,41 +111,30 @@
         "requestUri":"/identitypools/{IdentityPoolId}/identities/{IdentityId}",
         "responseCode":200
       },
-      "input":{
-        "shape":"DescribeIdentityUsageRequest",
-        "documentation":"A request for information about the usage of an identity pool."
-      },
-      "output":{
-        "shape":"DescribeIdentityUsageResponse",
-        "documentation":"The response to a successful DescribeIdentityUsage request."
-      },
+      "input":{"shape":"DescribeIdentityUsageRequest"},
+      "output":{"shape":"DescribeIdentityUsageResponse"},
       "errors":[
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown if the resource doesn't exist."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"Indicates an internal service error."
+          "exception":true
         }
-      ],
-      "documentation":"Gets usage information for an identity, including number of datasets and data usage."
+      ]
     },
     "ListDatasets":{
       "name":"ListDatasets",
@@ -188,35 +143,25 @@
         "requestUri":"/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets",
         "responseCode":200
       },
-      "input":{
-        "shape":"ListDatasetsRequest",
-        "documentation":"Request for a list of datasets for an identity."
-      },
-      "output":{
-        "shape":"ListDatasetsResponse",
-        "documentation":"Returned for a successful ListDatasets request."
-      },
+      "input":{"shape":"ListDatasetsRequest"},
+      "output":{"shape":"ListDatasetsResponse"},
       "errors":[
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"Indicates an internal service error."
+          "exception":true
         }
-      ],
-      "documentation":"Lists datasets for an identity."
+      ]
     },
     "ListIdentityPoolUsage":{
       "name":"ListIdentityPoolUsage",
@@ -225,35 +170,25 @@
         "requestUri":"/identitypools",
         "responseCode":200
       },
-      "input":{
-        "shape":"ListIdentityPoolUsageRequest",
-        "documentation":"A request for usage information on an identity pool."
-      },
-      "output":{
-        "shape":"ListIdentityPoolUsageResponse",
-        "documentation":"Returned for a successful ListIdentityPoolUsage request."
-      },
+      "input":{"shape":"ListIdentityPoolUsageRequest"},
+      "output":{"shape":"ListIdentityPoolUsageResponse"},
       "errors":[
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"Indicates an internal service error."
+          "exception":true
         }
-      ],
-      "documentation":"Gets a list of identity pools registered with Cognito."
+      ]
     },
     "ListRecords":{
       "name":"ListRecords",
@@ -262,41 +197,30 @@
         "requestUri":"/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/records",
         "responseCode":200
       },
-      "input":{
-        "shape":"ListRecordsRequest",
-        "documentation":"A request for a list of records."
-      },
-      "output":{
-        "shape":"ListRecordsResponse",
-        "documentation":"Returned for a successful ListRecordsRequest."
-      },
+      "input":{"shape":"ListRecordsRequest"},
+      "output":{"shape":"ListRecordsResponse"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown if the request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"Indicates an internal service error."
+          "exception":true
         }
-      ],
-      "documentation":"Gets paginated records, optionally changed after a particular sync count for a dataset and identity."
+      ]
     },
     "UpdateRecords":{
       "name":"UpdateRecords",
@@ -305,59 +229,45 @@
         "requestUri":"/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
         "responseCode":200
       },
-      "input":{
-        "shape":"UpdateRecordsRequest",
-        "documentation":"A request to post updates to records or add and delete records for a dataset and user."
-      },
-      "output":{
-        "shape":"UpdateRecordsResponse",
-        "documentation":"Returned for a successful UpdateRecordsRequest."
-      },
+      "input":{"shape":"UpdateRecordsRequest"},
+      "output":{"shape":"UpdateRecordsResponse"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+          "exception":true
         },
         {
           "shape":"LimitExceededException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when the limit on the number of objects or operations has been exceeded."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown if the resource doesn't exist."
+          "exception":true
         },
         {
           "shape":"ResourceConflictException",
           "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown if the request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "error":{"httpStatusCode":500},
-          "exception":true,
-          "documentation":"Indicates an internal service error."
+          "exception":true
         }
-      ],
-      "documentation":"Posts updates to records and add and delete records for a dataset and user."
+      ]
     }
   },
   "shapes":{
@@ -366,36 +276,14 @@
     "Dataset":{
       "type":"structure",
       "members":{
-        "IdentityId":{
-          "shape":"IdentityId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
-        },
-        "DatasetName":{
-          "shape":"DatasetName",
-          "documentation":"A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.' (dot)."
-        },
-        "CreationDate":{
-          "shape":"Date",
-          "documentation":"Date."
-        },
-        "LastModifiedDate":{
-          "shape":"Date",
-          "documentation":"Date when the dataset was last modified."
-        },
-        "LastModifiedBy":{
-          "shape":"String",
-          "documentation":"The device that made the last change to this dataset."
-        },
-        "DataStorage":{
-          "shape":"Long",
-          "documentation":"Total size in bytes of the records in this dataset."
-        },
-        "NumRecords":{
-          "shape":"Long",
-          "documentation":"Number of records in this dataset."
-        }
-      },
-      "documentation":"A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don't exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs."
+        "IdentityId":{"shape":"IdentityId"},
+        "DatasetName":{"shape":"DatasetName"},
+        "CreationDate":{"shape":"Date"},
+        "LastModifiedDate":{"shape":"Date"},
+        "LastModifiedBy":{"shape":"String"},
+        "DataStorage":{"shape":"Long"},
+        "NumRecords":{"shape":"Long"}
+      }
     },
     "DatasetList":{
       "type":"list",
@@ -419,33 +307,25 @@
         "IdentityPoolId":{
           "shape":"IdentityPoolId",
           "location":"uri",
-          "locationName":"IdentityPoolId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityPoolId"
         },
         "IdentityId":{
           "shape":"IdentityId",
           "location":"uri",
-          "locationName":"IdentityId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityId"
         },
         "DatasetName":{
           "shape":"DatasetName",
           "location":"uri",
-          "locationName":"DatasetName",
-          "documentation":"A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.' (dot)."
+          "locationName":"DatasetName"
         }
-      },
-      "documentation":"A request to delete the specific dataset."
+      }
     },
     "DeleteDatasetResponse":{
       "type":"structure",
       "members":{
-        "Dataset":{
-          "shape":"Dataset",
-          "documentation":"A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don't exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs."
-        }
-      },
-      "documentation":"Response to a successful DeleteDataset request."
+        "Dataset":{"shape":"Dataset"}
+      }
     },
     "DescribeDatasetRequest":{
       "type":"structure",
@@ -458,33 +338,25 @@
         "IdentityPoolId":{
           "shape":"IdentityPoolId",
           "location":"uri",
-          "locationName":"IdentityPoolId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityPoolId"
         },
         "IdentityId":{
           "shape":"IdentityId",
           "location":"uri",
-          "locationName":"IdentityId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityId"
         },
         "DatasetName":{
           "shape":"DatasetName",
           "location":"uri",
-          "locationName":"DatasetName",
-          "documentation":"A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.' (dot)."
+          "locationName":"DatasetName"
         }
-      },
-      "documentation":"A request for metadata about a dataset (creation date, number of records, size) by owner and dataset name."
+      }
     },
     "DescribeDatasetResponse":{
       "type":"structure",
       "members":{
-        "Dataset":{
-          "shape":"Dataset",
-          "documentation":"Metadata for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don't exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs."
-        }
-      },
-      "documentation":"Response to a successful DescribeDataset request."
+        "Dataset":{"shape":"Dataset"}
+      }
     },
     "DescribeIdentityPoolUsageRequest":{
       "type":"structure",
@@ -493,21 +365,15 @@
         "IdentityPoolId":{
           "shape":"IdentityPoolId",
           "location":"uri",
-          "locationName":"IdentityPoolId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityPoolId"
         }
-      },
-      "documentation":"A request for usage information about the identity pool."
+      }
     },
     "DescribeIdentityPoolUsageResponse":{
       "type":"structure",
       "members":{
-        "IdentityPoolUsage":{
-          "shape":"IdentityPoolUsage",
-          "documentation":"Information about the usage of the identity pool."
-        }
-      },
-      "documentation":"Response to a successful DescribeIdentityPoolUsage request."
+        "IdentityPoolUsage":{"shape":"IdentityPoolUsage"}
+      }
     },
     "DescribeIdentityUsageRequest":{
       "type":"structure",
@@ -519,27 +385,20 @@
         "IdentityPoolId":{
           "shape":"IdentityPoolId",
           "location":"uri",
-          "locationName":"IdentityPoolId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityPoolId"
         },
         "IdentityId":{
           "shape":"IdentityId",
           "location":"uri",
-          "locationName":"IdentityId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityId"
         }
-      },
-      "documentation":"A request for information about the usage of an identity pool."
+      }
     },
     "DescribeIdentityUsageResponse":{
       "type":"structure",
       "members":{
-        "IdentityUsage":{
-          "shape":"IdentityUsage",
-          "documentation":"Usage information for the identity."
-        }
-      },
-      "documentation":"The response to a successful DescribeIdentityUsage request."
+        "IdentityUsage":{"shape":"IdentityUsage"}
+      }
     },
     "ExceptionMessage":{"type":"string"},
     "IdentityId":{
@@ -557,24 +416,11 @@
     "IdentityPoolUsage":{
       "type":"structure",
       "members":{
-        "IdentityPoolId":{
-          "shape":"IdentityPoolId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
-        },
-        "SyncSessionsCount":{
-          "shape":"Long",
-          "documentation":"Number of sync sessions for the identity pool."
-        },
-        "DataStorage":{
-          "shape":"Long",
-          "documentation":"Data storage information for the identity pool."
-        },
-        "LastModifiedDate":{
-          "shape":"Date",
-          "documentation":"Date on which the identity pool was last modified."
-        }
-      },
-      "documentation":"Usage information for the identity pool."
+        "IdentityPoolId":{"shape":"IdentityPoolId"},
+        "SyncSessionsCount":{"shape":"Long"},
+        "DataStorage":{"shape":"Long"},
+        "LastModifiedDate":{"shape":"Date"}
+      }
     },
     "IdentityPoolUsageList":{
       "type":"list",
@@ -583,28 +429,12 @@
     "IdentityUsage":{
       "type":"structure",
       "members":{
-        "IdentityId":{
-          "shape":"IdentityId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
-        },
-        "IdentityPoolId":{
-          "shape":"IdentityPoolId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
-        },
-        "LastModifiedDate":{
-          "shape":"Date",
-          "documentation":"Date on which the identity was last modified."
-        },
-        "DatasetCount":{
-          "shape":"Integer",
-          "documentation":"Number of datasets for the identity."
-        },
-        "DataStorage":{
-          "shape":"Long",
-          "documentation":"Total data storage for this identity."
-        }
-      },
-      "documentation":"Usage information for the identity."
+        "IdentityId":{"shape":"IdentityId"},
+        "IdentityPoolId":{"shape":"IdentityPoolId"},
+        "LastModifiedDate":{"shape":"Date"},
+        "DatasetCount":{"shape":"Integer"},
+        "DataStorage":{"shape":"Long"}
+      }
     },
     "Integer":{"type":"integer"},
     "IntegerString":{"type":"integer"},
@@ -612,40 +442,28 @@
       "type":"structure",
       "required":["message"],
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"Message returned by InternalErrorException."
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
       "error":{"httpStatusCode":500},
-      "exception":true,
-      "documentation":"Indicates an internal service error."
+      "exception":true
     },
     "InvalidParameterException":{
       "type":"structure",
       "required":["message"],
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"Message returned by InvalidParameterException."
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Thrown when a request parameter does not comply with the associated constraints."
+      "exception":true
     },
     "LimitExceededException":{
       "type":"structure",
       "required":["message"],
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"Message returned by LimitExceededException."
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Thrown when the limit on the number of objects or operations has been exceeded."
+      "exception":true
     },
     "ListDatasetsRequest":{
       "type":"structure",
@@ -657,47 +475,32 @@
         "IdentityPoolId":{
           "shape":"IdentityPoolId",
           "location":"uri",
-          "locationName":"IdentityPoolId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityPoolId"
         },
         "IdentityId":{
           "shape":"IdentityId",
           "location":"uri",
-          "locationName":"IdentityId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityId"
         },
         "NextToken":{
           "shape":"String",
           "location":"querystring",
-          "locationName":"nextToken",
-          "documentation":"A pagination token for obtaining the next page of results."
+          "locationName":"nextToken"
         },
         "MaxResults":{
           "shape":"IntegerString",
           "location":"querystring",
-          "locationName":"maxResults",
-          "documentation":"The maximum number of results to be returned."
+          "locationName":"maxResults"
         }
-      },
-      "documentation":"Request for a list of datasets for an identity."
+      }
     },
     "ListDatasetsResponse":{
       "type":"structure",
       "members":{
-        "Datasets":{
-          "shape":"DatasetList",
-          "documentation":"A set of datasets."
-        },
-        "Count":{
-          "shape":"Integer",
-          "documentation":"Number of datasets returned."
-        },
-        "NextToken":{
-          "shape":"String",
-          "documentation":"A pagination token for obtaining the next page of results."
-        }
-      },
-      "documentation":"Returned for a successful ListDatasets request."
+        "Datasets":{"shape":"DatasetList"},
+        "Count":{"shape":"Integer"},
+        "NextToken":{"shape":"String"}
+      }
     },
     "ListIdentityPoolUsageRequest":{
       "type":"structure",
@@ -705,39 +508,23 @@
         "NextToken":{
           "shape":"String",
           "location":"querystring",
-          "locationName":"nextToken",
-          "documentation":"A pagination token for obtaining the next page of results."
+          "locationName":"nextToken"
         },
         "MaxResults":{
           "shape":"IntegerString",
           "location":"querystring",
-          "locationName":"maxResults",
-          "documentation":"The maximum number of results to be returned."
+          "locationName":"maxResults"
         }
-      },
-      "documentation":"A request for usage information on an identity pool."
+      }
     },
     "ListIdentityPoolUsageResponse":{
       "type":"structure",
       "members":{
-        "IdentityPoolUsages":{
-          "shape":"IdentityPoolUsageList",
-          "documentation":"Usage information for the identity pools."
-        },
-        "MaxResults":{
-          "shape":"Integer",
-          "documentation":"The maximum number of results to be returned."
-        },
-        "Count":{
-          "shape":"Integer",
-          "documentation":"Total number of identities for the identity pool."
-        },
-        "NextToken":{
-          "shape":"String",
-          "documentation":"A pagination token for obtaining the next page of results."
-        }
-      },
-      "documentation":"Returned for a successful ListIdentityPoolUsage request."
+        "IdentityPoolUsages":{"shape":"IdentityPoolUsageList"},
+        "MaxResults":{"shape":"Integer"},
+        "Count":{"shape":"Integer"},
+        "NextToken":{"shape":"String"}
+      }
     },
     "ListRecordsRequest":{
       "type":"structure",
@@ -750,86 +537,53 @@
         "IdentityPoolId":{
           "shape":"IdentityPoolId",
           "location":"uri",
-          "locationName":"IdentityPoolId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityPoolId"
         },
         "IdentityId":{
           "shape":"IdentityId",
           "location":"uri",
-          "locationName":"IdentityId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityId"
         },
         "DatasetName":{
           "shape":"DatasetName",
           "location":"uri",
-          "locationName":"DatasetName",
-          "documentation":"A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.' (dot)."
+          "locationName":"DatasetName"
         },
         "LastSyncCount":{
           "shape":"Long",
           "location":"querystring",
-          "locationName":"lastSyncCount",
-          "documentation":"The last server sync count for this record."
+          "locationName":"lastSyncCount"
         },
         "NextToken":{
           "shape":"String",
           "location":"querystring",
-          "locationName":"nextToken",
-          "documentation":"A pagination token for obtaining the next page of results."
+          "locationName":"nextToken"
         },
         "MaxResults":{
           "shape":"IntegerString",
           "location":"querystring",
-          "locationName":"maxResults",
-          "documentation":"The maximum number of results to be returned."
+          "locationName":"maxResults"
         },
         "SyncSessionToken":{
           "shape":"SyncSessionToken",
           "location":"querystring",
-          "locationName":"syncSessionToken",
-          "documentation":"A token containing a session ID, identity ID, and expiration."
+          "locationName":"syncSessionToken"
         }
-      },
-      "documentation":"A request for a list of records."
+      }
     },
     "ListRecordsResponse":{
       "type":"structure",
       "members":{
-        "Records":{
-          "shape":"RecordList",
-          "documentation":"A list of all records."
-        },
-        "NextToken":{
-          "shape":"String",
-          "documentation":"A pagination token for obtaining the next page of results."
-        },
-        "Count":{
-          "shape":"Integer",
-          "documentation":"Total number of records."
-        },
-        "DatasetSyncCount":{
-          "shape":"Long",
-          "documentation":"Server sync count for this dataset."
-        },
+        "Records":{"shape":"RecordList"},
+        "NextToken":{"shape":"String"},
+        "Count":{"shape":"Integer"},
+        "DatasetSyncCount":{"shape":"Long"},
         "LastModifiedBy":{"shape":"String"},
-        "MergedDatasetNames":{
-          "shape":"MergedDatasetNameList",
-          "documentation":"Names of merged datasets."
-        },
-        "DatasetExists":{
-          "shape":"Boolean",
-          "documentation":"Indicates whether the dataset exists."
-        },
-        "DatasetDeletedAfterRequestedSyncCount":{
-          "shape":"Boolean",
-          "documentation":"A boolean value specifying whether to delete the dataset locally."
-        },
-        "SyncSessionToken":{
-          "shape":"String",
-          "documentation":"A token containing a session ID, identity ID, and expiration."
-        }
-      },
-      "documentation":"Returned for a successful ListRecordsRequest."
+        "MergedDatasetNames":{"shape":"MergedDatasetNameList"},
+        "DatasetExists":{"shape":"Boolean"},
+        "DatasetDeletedAfterRequestedSyncCount":{"shape":"Boolean"},
+        "SyncSessionToken":{"shape":"String"}
+      }
     },
     "Long":{"type":"long"},
     "MergedDatasetNameList":{
@@ -840,14 +594,10 @@
       "type":"structure",
       "required":["message"],
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"The message returned by a NotAuthorizedException."
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
       "error":{"httpStatusCode":403},
-      "exception":true,
-      "documentation":"Thrown when a user is not authorized to access the requested resource."
+      "exception":true
     },
     "Operation":{
       "type":"string",
@@ -859,32 +609,13 @@
     "Record":{
       "type":"structure",
       "members":{
-        "Key":{
-          "shape":"RecordKey",
-          "documentation":"The key for the record."
-        },
-        "Value":{
-          "shape":"RecordValue",
-          "documentation":"The value for the record."
-        },
-        "SyncCount":{
-          "shape":"Long",
-          "documentation":"The server sync count for this record."
-        },
-        "LastModifiedDate":{
-          "shape":"Date",
-          "documentation":"The date on which the record was last modified."
-        },
-        "LastModifiedBy":{
-          "shape":"String",
-          "documentation":"The user/device that made the last change to this record."
-        },
-        "DeviceLastModifiedDate":{
-          "shape":"Date",
-          "documentation":"The last modified date of the client device."
-        }
-      },
-      "documentation":"The basic data structure of a dataset."
+        "Key":{"shape":"RecordKey"},
+        "Value":{"shape":"RecordValue"},
+        "SyncCount":{"shape":"Long"},
+        "LastModifiedDate":{"shape":"Date"},
+        "LastModifiedBy":{"shape":"String"},
+        "DeviceLastModifiedDate":{"shape":"Date"}
+      }
     },
     "RecordKey":{
       "type":"string",
@@ -903,28 +634,12 @@
         "SyncCount"
       ],
       "members":{
-        "Op":{
-          "shape":"Operation",
-          "documentation":"An operation, either replace or remove."
-        },
-        "Key":{
-          "shape":"RecordKey",
-          "documentation":"The key associated with the record patch."
-        },
-        "Value":{
-          "shape":"RecordValue",
-          "documentation":"The value associated with the record patch."
-        },
-        "SyncCount":{
-          "shape":"Long",
-          "documentation":"Last known server sync count for this record. Set to 0 if unknown."
-        },
-        "DeviceLastModifiedDate":{
-          "shape":"Date",
-          "documentation":"The last modified date of the client device."
-        }
-      },
-      "documentation":"An update operation for a record."
+        "Op":{"shape":"Operation"},
+        "Key":{"shape":"RecordKey"},
+        "Value":{"shape":"RecordValue"},
+        "SyncCount":{"shape":"Long"},
+        "DeviceLastModifiedDate":{"shape":"Date"}
+      }
     },
     "RecordPatchList":{
       "type":"list",
@@ -938,27 +653,19 @@
       "type":"structure",
       "required":["message"],
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"The message returned by a ResourceConflictException."
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict."
+      "exception":true
     },
     "ResourceNotFoundException":{
       "type":"structure",
       "required":["message"],
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"Message returned by a ResourceNotFoundException."
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
       "error":{"httpStatusCode":404},
-      "exception":true,
-      "documentation":"Thrown if the resource doesn't exist."
+      "exception":true
     },
     "String":{"type":"string"},
     "SyncSessionToken":{"type":"string"},
@@ -966,14 +673,10 @@
       "type":"structure",
       "required":["message"],
       "members":{
-        "message":{
-          "shape":"ExceptionMessage",
-          "documentation":"Message returned by a TooManyRequestsException."
-        }
+        "message":{"shape":"ExceptionMessage"}
       },
       "error":{"httpStatusCode":429},
-      "exception":true,
-      "documentation":"Thrown if the request is throttled."
+      "exception":true
     },
     "UpdateRecordsRequest":{
       "type":"structure",
@@ -987,43 +690,32 @@
         "IdentityPoolId":{
           "shape":"IdentityPoolId",
           "location":"uri",
-          "locationName":"IdentityPoolId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityPoolId"
         },
         "IdentityId":{
           "shape":"IdentityId",
           "location":"uri",
-          "locationName":"IdentityId",
-          "documentation":"A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region."
+          "locationName":"IdentityId"
         },
         "DatasetName":{
           "shape":"DatasetName",
           "location":"uri",
-          "locationName":"DatasetName",
-          "documentation":"A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.' (dot)."
+          "locationName":"DatasetName"
         },
         "RecordPatches":{"shape":"RecordPatchList"},
-        "SyncSessionToken":{
-          "shape":"SyncSessionToken",
-          "documentation":"The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity."
-        },
+        "SyncSessionToken":{"shape":"SyncSessionToken"},
         "ClientContext":{
           "shape":"ClientContext",
           "location":"header",
           "locationName":"x-amz-Client-Context"
         }
-      },
-      "documentation":"A request to post updates to records or add and delete records for a dataset and user."
+      }
     },
     "UpdateRecordsResponse":{
       "type":"structure",
       "members":{
-        "Records":{
-          "shape":"RecordList",
-          "documentation":"A list of records that have been updated."
-        }
-      },
-      "documentation":"Returned for a successful UpdateRecordsRequest."
+        "Records":{"shape":"RecordList"}
+      }
     }
   }
 }

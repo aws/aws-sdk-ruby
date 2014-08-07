@@ -9,7 +9,6 @@
     "targetPrefix":"com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
     "protocol":"json"
   },
-  "documentation":"<fullname>AWS CloudTrail</fullname> <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> <p>See the CloudTrail User Guide for information about the data that is included with each AWS API call listed in the log files.</p>",
   "operations":{
     "CreateTrail":{
       "name":"CreateTrail",
@@ -17,14 +16,8 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateTrailRequest",
-        "documentation":"<p>Specifies the settings for each trail.</p>"
-      },
-      "output":{
-        "shape":"CreateTrailResponse",
-        "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
-      },
+      "input":{"shape":"CreateTrailRequest"},
+      "output":{"shape":"CreateTrailResponse"},
       "errors":[
         {
           "shape":"MaximumNumberOfTrailsExceededException",
@@ -33,8 +26,7 @@
             "httpStatusCode":403,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the maximum number of trails is reached."
+          "exception":true
         },
         {
           "shape":"TrailAlreadyExistsException",
@@ -43,8 +35,7 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the specified trail already exists."
+          "exception":true
         },
         {
           "shape":"S3BucketDoesNotExistException",
@@ -53,8 +44,7 @@
             "httpStatusCode":404,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the specified S3 bucket does not exist."
+          "exception":true
         },
         {
           "shape":"InsufficientS3BucketPolicyException",
@@ -63,8 +53,7 @@
             "httpStatusCode":403,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the policy on the S3 bucket is not sufficient."
+          "exception":true
         },
         {
           "shape":"InsufficientSnsTopicPolicyException",
@@ -73,8 +62,7 @@
             "httpStatusCode":403,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the policy on the SNS topic is not sufficient."
+          "exception":true
         },
         {
           "shape":"InvalidS3BucketNameException",
@@ -83,8 +71,7 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided S3 bucket name is not valid."
+          "exception":true
         },
         {
           "shape":"InvalidS3PrefixException",
@@ -93,8 +80,7 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided S3 prefix is not valid."
+          "exception":true
         },
         {
           "shape":"InvalidSnsTopicNameException",
@@ -103,8 +89,7 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided SNS topic name is not valid."
+          "exception":true
         },
         {
           "shape":"InvalidTrailNameException",
@@ -113,11 +98,9 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "exception":true
         }
-      ],
-      "documentation":"<p>From the command line, use <code>create-subscription</code>. </p> <p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. </p>"
+      ]
     },
     "DeleteTrail":{
       "name":"DeleteTrail",
@@ -125,14 +108,8 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteTrailRequest",
-        "documentation":"<a>The request that specifies the name of a trail to delete.</a>"
-      },
-      "output":{
-        "shape":"DeleteTrailResponse",
-        "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
-      },
+      "input":{"shape":"DeleteTrailRequest"},
+      "output":{"shape":"DeleteTrailResponse"},
       "errors":[
         {
           "shape":"TrailNotFoundException",
@@ -141,8 +118,7 @@
             "httpStatusCode":404,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the trail with the given name is not found."
+          "exception":true
         },
         {
           "shape":"InvalidTrailNameException",
@@ -151,11 +127,9 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "exception":true
         }
-      ],
-      "documentation":"<p>Deletes a trail.</p>"
+      ]
     },
     "DescribeTrails":{
       "name":"DescribeTrails",
@@ -163,15 +137,8 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeTrailsRequest",
-        "documentation":"<p>Returns information about the trail.</p>"
-      },
-      "output":{
-        "shape":"DescribeTrailsResponse",
-        "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
-      },
-      "documentation":"<p>Retrieves settings for the trail associated with the current region for your account.</p>"
+      "input":{"shape":"DescribeTrailsRequest"},
+      "output":{"shape":"DescribeTrailsResponse"}
     },
     "GetTrailStatus":{
       "name":"GetTrailStatus",
@@ -179,14 +146,8 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetTrailStatusRequest",
-        "documentation":"<p>The name of a trail about which you want the current status.</p>"
-      },
-      "output":{
-        "shape":"GetTrailStatusResponse",
-        "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
-      },
+      "input":{"shape":"GetTrailStatusRequest"},
+      "output":{"shape":"GetTrailStatusResponse"},
       "errors":[
         {
           "shape":"TrailNotFoundException",
@@ -195,8 +156,7 @@
             "httpStatusCode":404,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the trail with the given name is not found."
+          "exception":true
         },
         {
           "shape":"InvalidTrailNameException",
@@ -205,11 +165,9 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "exception":true
         }
-      ],
-      "documentation":"<p>Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. </p>"
+      ]
     },
     "StartLogging":{
       "name":"StartLogging",
@@ -217,14 +175,8 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"StartLoggingRequest",
-        "documentation":"<p>The request to CloudTrail to start logging AWS API calls for an account.</p>"
-      },
-      "output":{
-        "shape":"StartLoggingResponse",
-        "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
-      },
+      "input":{"shape":"StartLoggingRequest"},
+      "output":{"shape":"StartLoggingResponse"},
       "errors":[
         {
           "shape":"TrailNotFoundException",
@@ -233,8 +185,7 @@
             "httpStatusCode":404,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the trail with the given name is not found."
+          "exception":true
         },
         {
           "shape":"InvalidTrailNameException",
@@ -243,11 +194,9 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "exception":true
         }
-      ],
-      "documentation":"<p>Starts the recording of AWS API calls and log file delivery for a trail.</p>"
+      ]
     },
     "StopLogging":{
       "name":"StopLogging",
@@ -255,14 +204,8 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"StopLoggingRequest",
-        "documentation":"<p>Passes the request to CloudTrail to stop logging AWS API calls for the specified account.</p>"
-      },
-      "output":{
-        "shape":"StopLoggingResponse",
-        "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
-      },
+      "input":{"shape":"StopLoggingRequest"},
+      "output":{"shape":"StopLoggingResponse"},
       "errors":[
         {
           "shape":"TrailNotFoundException",
@@ -271,8 +214,7 @@
             "httpStatusCode":404,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the trail with the given name is not found."
+          "exception":true
         },
         {
           "shape":"InvalidTrailNameException",
@@ -281,11 +223,9 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "exception":true
         }
-      ],
-      "documentation":"<p>Suspends the recording of AWS API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording.</p>"
+      ]
     },
     "UpdateTrail":{
       "name":"UpdateTrail",
@@ -293,14 +233,8 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UpdateTrailRequest",
-        "documentation":"<p>Specifies settings to update for the trail.</p>"
-      },
-      "output":{
-        "shape":"UpdateTrailResponse",
-        "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
-      },
+      "input":{"shape":"UpdateTrailRequest"},
+      "output":{"shape":"UpdateTrailResponse"},
       "errors":[
         {
           "shape":"S3BucketDoesNotExistException",
@@ -309,8 +243,7 @@
             "httpStatusCode":404,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the specified S3 bucket does not exist."
+          "exception":true
         },
         {
           "shape":"InsufficientS3BucketPolicyException",
@@ -319,8 +252,7 @@
             "httpStatusCode":403,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the policy on the S3 bucket is not sufficient."
+          "exception":true
         },
         {
           "shape":"InsufficientSnsTopicPolicyException",
@@ -329,8 +261,7 @@
             "httpStatusCode":403,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the policy on the SNS topic is not sufficient."
+          "exception":true
         },
         {
           "shape":"TrailNotFoundException",
@@ -339,8 +270,7 @@
             "httpStatusCode":404,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the trail with the given name is not found."
+          "exception":true
         },
         {
           "shape":"InvalidS3BucketNameException",
@@ -349,8 +279,7 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided S3 bucket name is not valid."
+          "exception":true
         },
         {
           "shape":"InvalidS3PrefixException",
@@ -359,8 +288,7 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided S3 prefix is not valid."
+          "exception":true
         },
         {
           "shape":"InvalidSnsTopicNameException",
@@ -369,8 +297,7 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided SNS topic name is not valid."
+          "exception":true
         },
         {
           "shape":"InvalidTrailNameException",
@@ -379,11 +306,9 @@
             "httpStatusCode":400,
             "senderFault":true
           },
-          "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "exception":true
         }
-      ],
-      "documentation":"<p>From the command line, use <code>update-subscription</code>.</p> <p>Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. </p>"
+      ]
     }
   },
   "shapes":{
@@ -395,137 +320,66 @@
         "S3BucketName"
       ],
       "members":{
-        "Name":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the trail.</p>"
-        },
-        "S3BucketName":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon S3 bucket designated for publishing log files.</p>"
-        },
-        "S3KeyPrefix":{
-          "shape":"String",
-          "documentation":"<p>Specifies the Amazon S3 key prefix that precedes the name of the bucket you have designated for log file delivery.</p>"
-        },
-        "SnsTopicName":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic defined for notification of log file delivery.</p>"
-        },
-        "IncludeGlobalServiceEvents":{
-          "shape":"Boolean",
-          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
-        }
-      },
-      "documentation":"<p>Specifies the settings for each trail.</p>"
+        "Name":{"shape":"String"},
+        "S3BucketName":{"shape":"String"},
+        "S3KeyPrefix":{"shape":"String"},
+        "SnsTopicName":{"shape":"String"},
+        "IncludeGlobalServiceEvents":{"shape":"Boolean"}
+      }
     },
     "CreateTrailResponse":{
       "type":"structure",
       "members":{
-        "Name":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the trail.</p>"
-        },
-        "S3BucketName":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon S3 bucket designated for publishing log files.</p>"
-        },
-        "S3KeyPrefix":{
-          "shape":"String",
-          "documentation":"<p>Specifies the Amazon S3 key prefix that precedes the name of the bucket you have designated for log file delivery.</p>"
-        },
-        "SnsTopicName":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic defined for notification of log file delivery.</p>"
-        },
-        "IncludeGlobalServiceEvents":{
-          "shape":"Boolean",
-          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
-        }
-      },
-      "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
+        "Name":{"shape":"String"},
+        "S3BucketName":{"shape":"String"},
+        "S3KeyPrefix":{"shape":"String"},
+        "SnsTopicName":{"shape":"String"},
+        "IncludeGlobalServiceEvents":{"shape":"Boolean"}
+      }
     },
     "Date":{"type":"timestamp"},
     "DeleteTrailRequest":{
       "type":"structure",
       "required":["Name"],
       "members":{
-        "Name":{
-          "shape":"String",
-          "documentation":"<p>The name of a trail to be deleted.</p>"
-        }
-      },
-      "documentation":"<a>The request that specifies the name of a trail to delete.</a>"
+        "Name":{"shape":"String"}
+      }
     },
     "DeleteTrailResponse":{
       "type":"structure",
       "members":{
-      },
-      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
+      }
     },
     "DescribeTrailsRequest":{
       "type":"structure",
       "members":{
-        "trailNameList":{
-          "shape":"TrailNameList",
-          "documentation":"<p>The trail returned.</p>"
-        }
-      },
-      "documentation":"<p>Returns information about the trail.</p>"
+        "trailNameList":{"shape":"TrailNameList"}
+      }
     },
     "DescribeTrailsResponse":{
       "type":"structure",
       "members":{
-        "trailList":{
-          "shape":"TrailList",
-          "documentation":"<p>The list of trails.</p>"
-        }
-      },
-      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
+        "trailList":{"shape":"TrailList"}
+      }
     },
     "GetTrailStatusRequest":{
       "type":"structure",
       "required":["Name"],
       "members":{
-        "Name":{
-          "shape":"String",
-          "documentation":"<p>The name of the trail for which you are requesting the current status.</p>"
-        }
-      },
-      "documentation":"<p>The name of a trail about which you want the current status.</p>"
+        "Name":{"shape":"String"}
+      }
     },
     "GetTrailStatusResponse":{
       "type":"structure",
       "members":{
-        "IsLogging":{
-          "shape":"Boolean",
-          "documentation":"<p>Whether the CloudTrail is currently logging AWS API calls.</p>"
-        },
-        "LatestDeliveryError":{
-          "shape":"String",
-          "documentation":"<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver log files to the designated bucket. For more information see the topic <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error Responses</a> in the Amazon S3 API Reference. </p>"
-        },
-        "LatestNotificationError":{
-          "shape":"String",
-          "documentation":"<p>Displays any Amazon SNS error that CloudTrail encountered when attempting to send a notification. For more information about Amazon SNS errors, see the <a href=\"http://docs.aws.amazon.com/sns/latest/dg/welcome.html\">Amazon SNS Developer Guide</a>. </p>"
-        },
-        "LatestDeliveryTime":{
-          "shape":"Date",
-          "documentation":"<p>Specifies the date and time that CloudTrail last delivered log files to an account's Amazon S3 bucket.</p>"
-        },
-        "LatestNotificationTime":{
-          "shape":"Date",
-          "documentation":"<p>Specifies the date and time of the most recent Amazon SNS notification that CloudTrail has written a new log file to an account's Amazon S3 bucket. </p>"
-        },
-        "StartLoggingTime":{
-          "shape":"Date",
-          "documentation":"<p>Specifies the most recent date and time when CloudTrail started recording API calls for an AWS account. </p>"
-        },
-        "StopLoggingTime":{
-          "shape":"Date",
-          "documentation":"<p>Specifies the most recent date and time when CloudTrail stopped recording API calls for an AWS account. </p>"
-        }
-      },
-      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
+        "IsLogging":{"shape":"Boolean"},
+        "LatestDeliveryError":{"shape":"String"},
+        "LatestNotificationError":{"shape":"String"},
+        "LatestDeliveryTime":{"shape":"Date"},
+        "LatestNotificationTime":{"shape":"Date"},
+        "StartLoggingTime":{"shape":"Date"},
+        "StopLoggingTime":{"shape":"Date"}
+      }
     },
     "InsufficientS3BucketPolicyException":{
       "type":"structure",
@@ -536,8 +390,7 @@
         "httpStatusCode":403,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"This exception is thrown when the policy on the S3 bucket is not sufficient."
+      "exception":true
     },
     "InsufficientSnsTopicPolicyException":{
       "type":"structure",
@@ -548,8 +401,7 @@
         "httpStatusCode":403,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"This exception is thrown when the policy on the SNS topic is not sufficient."
+      "exception":true
     },
     "InvalidS3BucketNameException":{
       "type":"structure",
@@ -560,8 +412,7 @@
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"This exception is thrown when the provided S3 bucket name is not valid."
+      "exception":true
     },
     "InvalidS3PrefixException":{
       "type":"structure",
@@ -572,8 +423,7 @@
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"This exception is thrown when the provided S3 prefix is not valid."
+      "exception":true
     },
     "InvalidSnsTopicNameException":{
       "type":"structure",
@@ -584,8 +434,7 @@
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"This exception is thrown when the provided SNS topic name is not valid."
+      "exception":true
     },
     "InvalidTrailNameException":{
       "type":"structure",
@@ -596,8 +445,7 @@
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"This exception is thrown when the provided trail name is not valid."
+      "exception":true
     },
     "MaximumNumberOfTrailsExceededException":{
       "type":"structure",
@@ -608,8 +456,7 @@
         "httpStatusCode":403,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"This exception is thrown when the maximum number of trails is reached."
+      "exception":true
     },
     "S3BucketDoesNotExistException":{
       "type":"structure",
@@ -620,69 +467,42 @@
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"This exception is thrown when the specified S3 bucket does not exist."
+      "exception":true
     },
     "StartLoggingRequest":{
       "type":"structure",
       "required":["Name"],
       "members":{
-        "Name":{
-          "shape":"String",
-          "documentation":"<p>The name of the trail for which CloudTrail logs AWS API calls.</p>"
-        }
-      },
-      "documentation":"<p>The request to CloudTrail to start logging AWS API calls for an account.</p>"
+        "Name":{"shape":"String"}
+      }
     },
     "StartLoggingResponse":{
       "type":"structure",
       "members":{
-      },
-      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
+      }
     },
     "StopLoggingRequest":{
       "type":"structure",
       "required":["Name"],
       "members":{
-        "Name":{
-          "shape":"String",
-          "documentation":"<p>Communicates to CloudTrail the name of the trail for which to stop logging AWS API calls.</p>"
-        }
-      },
-      "documentation":"<p>Passes the request to CloudTrail to stop logging AWS API calls for the specified account.</p>"
+        "Name":{"shape":"String"}
+      }
     },
     "StopLoggingResponse":{
       "type":"structure",
       "members":{
-      },
-      "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
+      }
     },
     "String":{"type":"string"},
     "Trail":{
       "type":"structure",
       "members":{
-        "Name":{
-          "shape":"String",
-          "documentation":"<p>Name of the trail set by calling <a>CreateTrail</a>.</p>"
-        },
-        "S3BucketName":{
-          "shape":"String",
-          "documentation":"<p>Name of the Amazon S3 bucket into which CloudTrail delivers your trail files. </p>"
-        },
-        "S3KeyPrefix":{
-          "shape":"String",
-          "documentation":"<p>Value of the Amazon S3 prefix.</p>"
-        },
-        "SnsTopicName":{
-          "shape":"String",
-          "documentation":"<p>Name of the existing Amazon SNS topic that CloudTrail uses to notify the account owner when new CloudTrail log files have been delivered. </p>"
-        },
-        "IncludeGlobalServiceEvents":{
-          "shape":"Boolean",
-          "documentation":"<p>Set to <b>True</b> to include AWS API calls from AWS global services such as IAM. Otherwise, <b>False</b>.</p>"
-        }
-      },
-      "documentation":"<p>The settings for a trail.</p>"
+        "Name":{"shape":"String"},
+        "S3BucketName":{"shape":"String"},
+        "S3KeyPrefix":{"shape":"String"},
+        "SnsTopicName":{"shape":"String"},
+        "IncludeGlobalServiceEvents":{"shape":"Boolean"}
+      }
     },
     "TrailAlreadyExistsException":{
       "type":"structure",
@@ -693,8 +513,7 @@
         "httpStatusCode":400,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"This exception is thrown when the specified trail already exists."
+      "exception":true
     },
     "TrailList":{
       "type":"list",
@@ -713,61 +532,28 @@
         "httpStatusCode":404,
         "senderFault":true
       },
-      "exception":true,
-      "documentation":"This exception is thrown when the trail with the given name is not found."
+      "exception":true
     },
     "UpdateTrailRequest":{
       "type":"structure",
       "required":["Name"],
       "members":{
-        "Name":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the trail.</p>"
-        },
-        "S3BucketName":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon S3 bucket designated for publishing log files.</p>"
-        },
-        "S3KeyPrefix":{
-          "shape":"String",
-          "documentation":"<p>Specifies the Amazon S3 key prefix that precedes the name of the bucket you have designated for log file delivery.</p>"
-        },
-        "SnsTopicName":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic defined for notification of log file delivery.</p>"
-        },
-        "IncludeGlobalServiceEvents":{
-          "shape":"Boolean",
-          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
-        }
-      },
-      "documentation":"<p>Specifies settings to update for the trail.</p>"
+        "Name":{"shape":"String"},
+        "S3BucketName":{"shape":"String"},
+        "S3KeyPrefix":{"shape":"String"},
+        "SnsTopicName":{"shape":"String"},
+        "IncludeGlobalServiceEvents":{"shape":"Boolean"}
+      }
     },
     "UpdateTrailResponse":{
       "type":"structure",
       "members":{
-        "Name":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the trail.</p>"
-        },
-        "S3BucketName":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon S3 bucket designated for publishing log files.</p>"
-        },
-        "S3KeyPrefix":{
-          "shape":"String",
-          "documentation":"<p>Specifies the Amazon S3 key prefix that precedes the name of the bucket you have designated for log file delivery.</p>"
-        },
-        "SnsTopicName":{
-          "shape":"String",
-          "documentation":"<p>Specifies the name of the Amazon SNS topic defined for notification of log file delivery.</p>"
-        },
-        "IncludeGlobalServiceEvents":{
-          "shape":"Boolean",
-          "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
-        }
-      },
-      "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
+        "Name":{"shape":"String"},
+        "S3BucketName":{"shape":"String"},
+        "S3KeyPrefix":{"shape":"String"},
+        "SnsTopicName":{"shape":"String"},
+        "IncludeGlobalServiceEvents":{"shape":"Boolean"}
+      }
     }
   }
 }

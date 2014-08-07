@@ -16,47 +16,35 @@
         "requestUri":"/2014-05-31/origin-access-identity/cloudfront",
         "responseCode":201
       },
-      "input":{
-        "shape":"CreateCloudFrontOriginAccessIdentityRequest",
-        "documentation":"The request to create a new origin access identity."
-      },
-      "output":{
-        "shape":"CreateCloudFrontOriginAccessIdentityResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"CreateCloudFrontOriginAccessIdentityRequest"},
+      "output":{"shape":"CreateCloudFrontOriginAccessIdentityResult"},
       "errors":[
         {
           "shape":"CloudFrontOriginAccessIdentityAlreadyExists",
           "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"If the CallerReference is a value you already sent in a previous request to create an identity but the content of the CloudFrontOriginAccessIdentityConfig is different from the original request, CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists error."
+          "exception":true
         },
         {
           "shape":"MissingBody",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"This operation requires a body. Ensure that the body is present and the Content-Type header is set."
+          "exception":true
         },
         {
           "shape":"TooManyCloudFrontOriginAccessIdentities",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Processing your request would cause you to exceed the maximum number of origin access identities allowed."
+          "exception":true
         },
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         },
         {
           "shape":"InconsistentQuantities",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The value of Quantity and the size of Items do not match."
+          "exception":true
         }
-      ],
-      "documentation":"Create a new origin access identity."
+      ]
     },
     "CreateDistribution":{
       "name":"CreateDistribution2014_05_31",
@@ -65,14 +53,8 @@
         "requestUri":"/2014-05-31/distribution",
         "responseCode":201
       },
-      "input":{
-        "shape":"CreateDistributionRequest",
-        "documentation":"The request to create a new distribution."
-      },
-      "output":{
-        "shape":"CreateDistributionResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"CreateDistributionRequest"},
+      "output":{"shape":"CreateDistributionResult"},
       "errors":[
         {
           "shape":"CNAMEAlreadyExists",
@@ -82,38 +64,32 @@
         {
           "shape":"DistributionAlreadyExists",
           "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"The caller reference you attempted to create the distribution with is associated with another distribution."
+          "exception":true
         },
         {
           "shape":"InvalidOrigin",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket."
+          "exception":true
         },
         {
           "shape":"InvalidOriginAccessIdentity",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The origin access identity is not valid or doesn't exist."
+          "exception":true
         },
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         },
         {
           "shape":"TooManyTrustedSigners",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Your request contains more trusted signers than are allowed per distribution."
+          "exception":true
         },
         {
           "shape":"TrustedSignerDoesNotExist",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"One or more of your trusted signers do not exist."
+          "exception":true
         },
         {
           "shape":"InvalidViewerCertificate",
@@ -123,32 +99,27 @@
         {
           "shape":"MissingBody",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"This operation requires a body. Ensure that the body is present and the Content-Type header is set."
+          "exception":true
         },
         {
           "shape":"TooManyDistributionCNAMEs",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Your request contains more CNAMEs than are allowed per distribution."
+          "exception":true
         },
         {
           "shape":"TooManyDistributions",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Processing your request would cause you to exceed the maximum number of distributions allowed."
+          "exception":true
         },
         {
           "shape":"InvalidDefaultRootObject",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The default root object file name is too big or contains an invalid character."
+          "exception":true
         },
         {
           "shape":"InvalidRelativePath",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The relative path is too big, is not URL-encoded, or does not begin with a slash (/)."
+          "exception":true
         },
         {
           "shape":"InvalidErrorCode",
@@ -163,44 +134,37 @@
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         },
         {
           "shape":"InvalidRequiredProtocol",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the RequiredProtocols element from your distribution configuration."
+          "exception":true
         },
         {
           "shape":"NoSuchOrigin",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"No origin exists with the specified Origin Id."
+          "exception":true
         },
         {
           "shape":"TooManyOrigins",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"You cannot create anymore origins for the distribution."
+          "exception":true
         },
         {
           "shape":"TooManyCacheBehaviors",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"You cannot create anymore cache behaviors for the distribution."
+          "exception":true
         },
         {
           "shape":"TooManyCookieNamesInWhiteList",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Your request contains more cookie names in the whitelist than are allowed per cache behavior."
+          "exception":true
         },
         {
           "shape":"InvalidForwardCookies",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Your request contains forward cookies option which doesn't match with the expectation for the whitelisted list of cookie names. Either list of cookie names has been specified when not allowed or list of cookie names is missing when expected."
+          "exception":true
         },
         {
           "shape":"TooManyHeadersInForwardedValues",
@@ -215,14 +179,12 @@
         {
           "shape":"InconsistentQuantities",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The value of Quantity and the size of Items do not match."
+          "exception":true
         },
         {
           "shape":"TooManyCertificates",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"You cannot create anymore custom ssl certificates."
+          "exception":true
         },
         {
           "shape":"InvalidLocationCode",
@@ -234,8 +196,7 @@
           "error":{"httpStatusCode":400},
           "exception":true
         }
-      ],
-      "documentation":"Create a new distribution."
+      ]
     },
     "CreateInvalidation":{
       "name":"CreateInvalidation2014_05_31",
@@ -244,38 +205,28 @@
         "requestUri":"/2014-05-31/distribution/{DistributionId}/invalidation",
         "responseCode":201
       },
-      "input":{
-        "shape":"CreateInvalidationRequest",
-        "documentation":"The request to create an invalidation."
-      },
-      "output":{
-        "shape":"CreateInvalidationResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"CreateInvalidationRequest"},
+      "output":{"shape":"CreateInvalidationResult"},
       "errors":[
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         },
         {
           "shape":"MissingBody",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"This operation requires a body. Ensure that the body is present and the Content-Type header is set."
+          "exception":true
         },
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         },
         {
           "shape":"NoSuchDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified distribution does not exist."
+          "exception":true
         },
         {
           "shape":"BatchTooLarge",
@@ -285,17 +236,14 @@
         {
           "shape":"TooManyInvalidationsInProgress",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"You have exceeded the maximum number of allowable InProgress invalidation batch requests, or invalidation objects."
+          "exception":true
         },
         {
           "shape":"InconsistentQuantities",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The value of Quantity and the size of Items do not match."
+          "exception":true
         }
-      ],
-      "documentation":"Create a new invalidation."
+      ]
     },
     "CreateStreamingDistribution":{
       "name":"CreateStreamingDistribution2014_05_31",
@@ -304,14 +252,8 @@
         "requestUri":"/2014-05-31/streaming-distribution",
         "responseCode":201
       },
-      "input":{
-        "shape":"CreateStreamingDistributionRequest",
-        "documentation":"The request to create a new streaming distribution."
-      },
-      "output":{
-        "shape":"CreateStreamingDistributionResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"CreateStreamingDistributionRequest"},
+      "output":{"shape":"CreateStreamingDistributionResult"},
       "errors":[
         {
           "shape":"CNAMEAlreadyExists",
@@ -326,38 +268,32 @@
         {
           "shape":"InvalidOrigin",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket."
+          "exception":true
         },
         {
           "shape":"InvalidOriginAccessIdentity",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The origin access identity is not valid or doesn't exist."
+          "exception":true
         },
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         },
         {
           "shape":"TooManyTrustedSigners",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Your request contains more trusted signers than are allowed per distribution."
+          "exception":true
         },
         {
           "shape":"TrustedSignerDoesNotExist",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"One or more of your trusted signers do not exist."
+          "exception":true
         },
         {
           "shape":"MissingBody",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"This operation requires a body. Ensure that the body is present and the Content-Type header is set."
+          "exception":true
         },
         {
           "shape":"TooManyStreamingDistributionCNAMEs",
@@ -367,23 +303,19 @@
         {
           "shape":"TooManyStreamingDistributions",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Processing your request would cause you to exceed the maximum number of streaming distributions allowed."
+          "exception":true
         },
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         },
         {
           "shape":"InconsistentQuantities",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The value of Quantity and the size of Items do not match."
+          "exception":true
         }
-      ],
-      "documentation":"Create a new streaming distribution."
+      ]
     },
     "DeleteCloudFrontOriginAccessIdentity":{
       "name":"DeleteCloudFrontOriginAccessIdentity2014_05_31",
@@ -392,42 +324,34 @@
         "requestUri":"/2014-05-31/origin-access-identity/cloudfront/{Id}",
         "responseCode":204
       },
-      "input":{
-        "shape":"DeleteCloudFrontOriginAccessIdentityRequest",
-        "documentation":"The request to delete a origin access identity."
-      },
+      "input":{"shape":"DeleteCloudFrontOriginAccessIdentityRequest"},
       "errors":[
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         },
         {
           "shape":"InvalidIfMatchVersion",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The If-Match version is missing or not valid for the distribution."
+          "exception":true
         },
         {
           "shape":"NoSuchCloudFrontOriginAccessIdentity",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified origin access identity does not exist."
+          "exception":true
         },
         {
           "shape":"PreconditionFailed",
           "error":{"httpStatusCode":412},
-          "exception":true,
-          "documentation":"The precondition given in one or more of the request-header fields evaluated to false."
+          "exception":true
         },
         {
           "shape":"CloudFrontOriginAccessIdentityInUse",
           "error":{"httpStatusCode":409},
           "exception":true
         }
-      ],
-      "documentation":"Delete an origin access identity."
+      ]
     },
     "DeleteDistribution":{
       "name":"DeleteDistribution2014_05_31",
@@ -436,16 +360,12 @@
         "requestUri":"/2014-05-31/distribution/{Id}",
         "responseCode":204
       },
-      "input":{
-        "shape":"DeleteDistributionRequest",
-        "documentation":"The request to delete a distribution."
-      },
+      "input":{"shape":"DeleteDistributionRequest"},
       "errors":[
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         },
         {
           "shape":"DistributionNotDisabled",
@@ -455,23 +375,19 @@
         {
           "shape":"InvalidIfMatchVersion",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The If-Match version is missing or not valid for the distribution."
+          "exception":true
         },
         {
           "shape":"NoSuchDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified distribution does not exist."
+          "exception":true
         },
         {
           "shape":"PreconditionFailed",
           "error":{"httpStatusCode":412},
-          "exception":true,
-          "documentation":"The precondition given in one or more of the request-header fields evaluated to false."
+          "exception":true
         }
-      ],
-      "documentation":"Delete a distribution."
+      ]
     },
     "DeleteStreamingDistribution":{
       "name":"DeleteStreamingDistribution2014_05_31",
@@ -480,16 +396,12 @@
         "requestUri":"/2014-05-31/streaming-distribution/{Id}",
         "responseCode":204
       },
-      "input":{
-        "shape":"DeleteStreamingDistributionRequest",
-        "documentation":"The request to delete a streaming distribution."
-      },
+      "input":{"shape":"DeleteStreamingDistributionRequest"},
       "errors":[
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         },
         {
           "shape":"StreamingDistributionNotDisabled",
@@ -499,23 +411,19 @@
         {
           "shape":"InvalidIfMatchVersion",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The If-Match version is missing or not valid for the distribution."
+          "exception":true
         },
         {
           "shape":"NoSuchStreamingDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified streaming distribution does not exist."
+          "exception":true
         },
         {
           "shape":"PreconditionFailed",
           "error":{"httpStatusCode":412},
-          "exception":true,
-          "documentation":"The precondition given in one or more of the request-header fields evaluated to false."
+          "exception":true
         }
-      ],
-      "documentation":"Delete a streaming distribution."
+      ]
     },
     "GetCloudFrontOriginAccessIdentity":{
       "name":"GetCloudFrontOriginAccessIdentity2014_05_31",
@@ -523,29 +431,20 @@
         "method":"GET",
         "requestUri":"/2014-05-31/origin-access-identity/cloudfront/{Id}"
       },
-      "input":{
-        "shape":"GetCloudFrontOriginAccessIdentityRequest",
-        "documentation":"The request to get an origin access identity's information."
-      },
-      "output":{
-        "shape":"GetCloudFrontOriginAccessIdentityResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"GetCloudFrontOriginAccessIdentityRequest"},
+      "output":{"shape":"GetCloudFrontOriginAccessIdentityResult"},
       "errors":[
         {
           "shape":"NoSuchCloudFrontOriginAccessIdentity",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified origin access identity does not exist."
+          "exception":true
         },
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         }
-      ],
-      "documentation":"Get the information about an origin access identity."
+      ]
     },
     "GetCloudFrontOriginAccessIdentityConfig":{
       "name":"GetCloudFrontOriginAccessIdentityConfig2014_05_31",
@@ -553,29 +452,20 @@
         "method":"GET",
         "requestUri":"/2014-05-31/origin-access-identity/cloudfront/{Id}/config"
       },
-      "input":{
-        "shape":"GetCloudFrontOriginAccessIdentityConfigRequest",
-        "documentation":"The request to get an origin access identity's configuration."
-      },
-      "output":{
-        "shape":"GetCloudFrontOriginAccessIdentityConfigResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"GetCloudFrontOriginAccessIdentityConfigRequest"},
+      "output":{"shape":"GetCloudFrontOriginAccessIdentityConfigResult"},
       "errors":[
         {
           "shape":"NoSuchCloudFrontOriginAccessIdentity",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified origin access identity does not exist."
+          "exception":true
         },
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         }
-      ],
-      "documentation":"Get the configuration information about an origin access identity."
+      ]
     },
     "GetDistribution":{
       "name":"GetDistribution2014_05_31",
@@ -583,29 +473,20 @@
         "method":"GET",
         "requestUri":"/2014-05-31/distribution/{Id}"
       },
-      "input":{
-        "shape":"GetDistributionRequest",
-        "documentation":"The request to get a distribution's information."
-      },
-      "output":{
-        "shape":"GetDistributionResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"GetDistributionRequest"},
+      "output":{"shape":"GetDistributionResult"},
       "errors":[
         {
           "shape":"NoSuchDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified distribution does not exist."
+          "exception":true
         },
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         }
-      ],
-      "documentation":"Get the information about a distribution."
+      ]
     },
     "GetDistributionConfig":{
       "name":"GetDistributionConfig2014_05_31",
@@ -613,29 +494,20 @@
         "method":"GET",
         "requestUri":"/2014-05-31/distribution/{Id}/config"
       },
-      "input":{
-        "shape":"GetDistributionConfigRequest",
-        "documentation":"The request to get a distribution configuration."
-      },
-      "output":{
-        "shape":"GetDistributionConfigResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"GetDistributionConfigRequest"},
+      "output":{"shape":"GetDistributionConfigResult"},
       "errors":[
         {
           "shape":"NoSuchDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified distribution does not exist."
+          "exception":true
         },
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         }
-      ],
-      "documentation":"Get the configuration information about a distribution."
+      ]
     },
     "GetInvalidation":{
       "name":"GetInvalidation2014_05_31",
@@ -643,35 +515,25 @@
         "method":"GET",
         "requestUri":"/2014-05-31/distribution/{DistributionId}/invalidation/{Id}"
       },
-      "input":{
-        "shape":"GetInvalidationRequest",
-        "documentation":"The request to get an invalidation's information."
-      },
-      "output":{
-        "shape":"GetInvalidationResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"GetInvalidationRequest"},
+      "output":{"shape":"GetInvalidationResult"},
       "errors":[
         {
           "shape":"NoSuchInvalidation",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified invalidation does not exist."
+          "exception":true
         },
         {
           "shape":"NoSuchDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified distribution does not exist."
+          "exception":true
         },
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         }
-      ],
-      "documentation":"Get the information about an invalidation."
+      ]
     },
     "GetStreamingDistribution":{
       "name":"GetStreamingDistribution2014_05_31",
@@ -679,29 +541,20 @@
         "method":"GET",
         "requestUri":"/2014-05-31/streaming-distribution/{Id}"
       },
-      "input":{
-        "shape":"GetStreamingDistributionRequest",
-        "documentation":"The request to get a streaming distribution's information."
-      },
-      "output":{
-        "shape":"GetStreamingDistributionResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"GetStreamingDistributionRequest"},
+      "output":{"shape":"GetStreamingDistributionResult"},
       "errors":[
         {
           "shape":"NoSuchStreamingDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified streaming distribution does not exist."
+          "exception":true
         },
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         }
-      ],
-      "documentation":"Get the information about a streaming distribution."
+      ]
     },
     "GetStreamingDistributionConfig":{
       "name":"GetStreamingDistributionConfig2014_05_31",
@@ -709,29 +562,20 @@
         "method":"GET",
         "requestUri":"/2014-05-31/streaming-distribution/{Id}/config"
       },
-      "input":{
-        "shape":"GetStreamingDistributionConfigRequest",
-        "documentation":"To request to get a streaming distribution configuration."
-      },
-      "output":{
-        "shape":"GetStreamingDistributionConfigResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"GetStreamingDistributionConfigRequest"},
+      "output":{"shape":"GetStreamingDistributionConfigResult"},
       "errors":[
         {
           "shape":"NoSuchStreamingDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified streaming distribution does not exist."
+          "exception":true
         },
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         }
-      ],
-      "documentation":"Get the configuration information about a streaming distribution."
+      ]
     },
     "ListCloudFrontOriginAccessIdentities":{
       "name":"ListCloudFrontOriginAccessIdentities2014_05_31",
@@ -739,23 +583,15 @@
         "method":"GET",
         "requestUri":"/2014-05-31/origin-access-identity/cloudfront"
       },
-      "input":{
-        "shape":"ListCloudFrontOriginAccessIdentitiesRequest",
-        "documentation":"The request to list origin access identities."
-      },
-      "output":{
-        "shape":"ListCloudFrontOriginAccessIdentitiesResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"ListCloudFrontOriginAccessIdentitiesRequest"},
+      "output":{"shape":"ListCloudFrontOriginAccessIdentitiesResult"},
       "errors":[
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         }
-      ],
-      "documentation":"List origin access identities."
+      ]
     },
     "ListDistributions":{
       "name":"ListDistributions2014_05_31",
@@ -763,23 +599,15 @@
         "method":"GET",
         "requestUri":"/2014-05-31/distribution"
       },
-      "input":{
-        "shape":"ListDistributionsRequest",
-        "documentation":"The request to list your distributions."
-      },
-      "output":{
-        "shape":"ListDistributionsResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"ListDistributionsRequest"},
+      "output":{"shape":"ListDistributionsResult"},
       "errors":[
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         }
-      ],
-      "documentation":"List distributions."
+      ]
     },
     "ListInvalidations":{
       "name":"ListInvalidations2014_05_31",
@@ -787,35 +615,25 @@
         "method":"GET",
         "requestUri":"/2014-05-31/distribution/{DistributionId}/invalidation"
       },
-      "input":{
-        "shape":"ListInvalidationsRequest",
-        "documentation":"The request to list invalidations."
-      },
-      "output":{
-        "shape":"ListInvalidationsResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"ListInvalidationsRequest"},
+      "output":{"shape":"ListInvalidationsResult"},
       "errors":[
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         },
         {
           "shape":"NoSuchDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified distribution does not exist."
+          "exception":true
         },
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         }
-      ],
-      "documentation":"List invalidation batches."
+      ]
     },
     "ListStreamingDistributions":{
       "name":"ListStreamingDistributions2014_05_31",
@@ -823,23 +641,15 @@
         "method":"GET",
         "requestUri":"/2014-05-31/streaming-distribution"
       },
-      "input":{
-        "shape":"ListStreamingDistributionsRequest",
-        "documentation":"The request to list your streaming distributions."
-      },
-      "output":{
-        "shape":"ListStreamingDistributionsResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"ListStreamingDistributionsRequest"},
+      "output":{"shape":"ListStreamingDistributionsResult"},
       "errors":[
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         }
-      ],
-      "documentation":"List streaming distributions."
+      ]
     },
     "UpdateCloudFrontOriginAccessIdentity":{
       "name":"UpdateCloudFrontOriginAccessIdentity2014_05_31",
@@ -847,65 +657,50 @@
         "method":"PUT",
         "requestUri":"/2014-05-31/origin-access-identity/cloudfront/{Id}/config"
       },
-      "input":{
-        "shape":"UpdateCloudFrontOriginAccessIdentityRequest",
-        "documentation":"The request to update an origin access identity."
-      },
-      "output":{
-        "shape":"UpdateCloudFrontOriginAccessIdentityResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"UpdateCloudFrontOriginAccessIdentityRequest"},
+      "output":{"shape":"UpdateCloudFrontOriginAccessIdentityResult"},
       "errors":[
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         },
         {
           "shape":"IllegalUpdate",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Origin and CallerReference cannot be updated."
+          "exception":true
         },
         {
           "shape":"InvalidIfMatchVersion",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The If-Match version is missing or not valid for the distribution."
+          "exception":true
         },
         {
           "shape":"MissingBody",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"This operation requires a body. Ensure that the body is present and the Content-Type header is set."
+          "exception":true
         },
         {
           "shape":"NoSuchCloudFrontOriginAccessIdentity",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified origin access identity does not exist."
+          "exception":true
         },
         {
           "shape":"PreconditionFailed",
           "error":{"httpStatusCode":412},
-          "exception":true,
-          "documentation":"The precondition given in one or more of the request-header fields evaluated to false."
+          "exception":true
         },
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         },
         {
           "shape":"InconsistentQuantities",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The value of Quantity and the size of Items do not match."
+          "exception":true
         }
-      ],
-      "documentation":"Update an origin access identity."
+      ]
     },
     "UpdateDistribution":{
       "name":"UpdateDistribution2014_05_31",
@@ -913,20 +708,13 @@
         "method":"PUT",
         "requestUri":"/2014-05-31/distribution/{Id}/config"
       },
-      "input":{
-        "shape":"UpdateDistributionRequest",
-        "documentation":"The request to update a distribution."
-      },
-      "output":{
-        "shape":"UpdateDistributionResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"UpdateDistributionRequest"},
+      "output":{"shape":"UpdateDistributionResult"},
       "errors":[
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         },
         {
           "shape":"CNAMEAlreadyExists",
@@ -936,50 +724,42 @@
         {
           "shape":"IllegalUpdate",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Origin and CallerReference cannot be updated."
+          "exception":true
         },
         {
           "shape":"InvalidIfMatchVersion",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The If-Match version is missing or not valid for the distribution."
+          "exception":true
         },
         {
           "shape":"MissingBody",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"This operation requires a body. Ensure that the body is present and the Content-Type header is set."
+          "exception":true
         },
         {
           "shape":"NoSuchDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified distribution does not exist."
+          "exception":true
         },
         {
           "shape":"PreconditionFailed",
           "error":{"httpStatusCode":412},
-          "exception":true,
-          "documentation":"The precondition given in one or more of the request-header fields evaluated to false."
+          "exception":true
         },
         {
           "shape":"TooManyDistributionCNAMEs",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Your request contains more CNAMEs than are allowed per distribution."
+          "exception":true
         },
         {
           "shape":"InvalidDefaultRootObject",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The default root object file name is too big or contains an invalid character."
+          "exception":true
         },
         {
           "shape":"InvalidRelativePath",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The relative path is too big, is not URL-encoded, or does not begin with a slash (/)."
+          "exception":true
         },
         {
           "shape":"InvalidErrorCode",
@@ -994,26 +774,22 @@
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         },
         {
           "shape":"InvalidOriginAccessIdentity",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The origin access identity is not valid or doesn't exist."
+          "exception":true
         },
         {
           "shape":"TooManyTrustedSigners",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Your request contains more trusted signers than are allowed per distribution."
+          "exception":true
         },
         {
           "shape":"TrustedSignerDoesNotExist",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"One or more of your trusted signers do not exist."
+          "exception":true
         },
         {
           "shape":"InvalidViewerCertificate",
@@ -1023,38 +799,32 @@
         {
           "shape":"InvalidRequiredProtocol",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the RequiredProtocols element from your distribution configuration."
+          "exception":true
         },
         {
           "shape":"NoSuchOrigin",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"No origin exists with the specified Origin Id."
+          "exception":true
         },
         {
           "shape":"TooManyOrigins",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"You cannot create anymore origins for the distribution."
+          "exception":true
         },
         {
           "shape":"TooManyCacheBehaviors",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"You cannot create anymore cache behaviors for the distribution."
+          "exception":true
         },
         {
           "shape":"TooManyCookieNamesInWhiteList",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Your request contains more cookie names in the whitelist than are allowed per cache behavior."
+          "exception":true
         },
         {
           "shape":"InvalidForwardCookies",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Your request contains forward cookies option which doesn't match with the expectation for the whitelisted list of cookie names. Either list of cookie names has been specified when not allowed or list of cookie names is missing when expected."
+          "exception":true
         },
         {
           "shape":"TooManyHeadersInForwardedValues",
@@ -1069,14 +839,12 @@
         {
           "shape":"InconsistentQuantities",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The value of Quantity and the size of Items do not match."
+          "exception":true
         },
         {
           "shape":"TooManyCertificates",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"You cannot create anymore custom ssl certificates."
+          "exception":true
         },
         {
           "shape":"InvalidLocationCode",
@@ -1088,8 +856,7 @@
           "error":{"httpStatusCode":400},
           "exception":true
         }
-      ],
-      "documentation":"Update a distribution."
+      ]
     },
     "UpdateStreamingDistribution":{
       "name":"UpdateStreamingDistribution2014_05_31",
@@ -1097,20 +864,13 @@
         "method":"PUT",
         "requestUri":"/2014-05-31/streaming-distribution/{Id}/config"
       },
-      "input":{
-        "shape":"UpdateStreamingDistributionRequest",
-        "documentation":"The request to update a streaming distribution."
-      },
-      "output":{
-        "shape":"UpdateStreamingDistributionResult",
-        "documentation":"The returned result of the corresponding request."
-      },
+      "input":{"shape":"UpdateStreamingDistributionRequest"},
+      "output":{"shape":"UpdateStreamingDistributionResult"},
       "errors":[
         {
           "shape":"AccessDenied",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Access denied."
+          "exception":true
         },
         {
           "shape":"CNAMEAlreadyExists",
@@ -1120,32 +880,27 @@
         {
           "shape":"IllegalUpdate",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Origin and CallerReference cannot be updated."
+          "exception":true
         },
         {
           "shape":"InvalidIfMatchVersion",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The If-Match version is missing or not valid for the distribution."
+          "exception":true
         },
         {
           "shape":"MissingBody",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"This operation requires a body. Ensure that the body is present and the Content-Type header is set."
+          "exception":true
         },
         {
           "shape":"NoSuchStreamingDistribution",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"The specified streaming distribution does not exist."
+          "exception":true
         },
         {
           "shape":"PreconditionFailed",
           "error":{"httpStatusCode":412},
-          "exception":true,
-          "documentation":"The precondition given in one or more of the request-header fields evaluated to false."
+          "exception":true
         },
         {
           "shape":"TooManyStreamingDistributionCNAMEs",
@@ -1155,35 +910,29 @@
         {
           "shape":"InvalidArgument",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The argument is invalid."
+          "exception":true
         },
         {
           "shape":"InvalidOriginAccessIdentity",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The origin access identity is not valid or doesn't exist."
+          "exception":true
         },
         {
           "shape":"TooManyTrustedSigners",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Your request contains more trusted signers than are allowed per distribution."
+          "exception":true
         },
         {
           "shape":"TrustedSignerDoesNotExist",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"One or more of your trusted signers do not exist."
+          "exception":true
         },
         {
           "shape":"InconsistentQuantities",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"The value of Quantity and the size of Items do not match."
+          "exception":true
         }
-      ],
-      "documentation":"Update a streaming distribution."
+      ]
     }
   },
   "shapes":{
@@ -1193,8 +942,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":403},
-      "exception":true,
-      "documentation":"Access denied."
+      "exception":true
     },
     "ActiveTrustedSigners":{
       "type":"structure",
@@ -1203,20 +951,10 @@
         "Quantity"
       ],
       "members":{
-        "Enabled":{
-          "shape":"boolean",
-          "documentation":"Each active trusted signer."
-        },
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of unique trusted signers included in all cache behaviors. For example, if three cache behaviors all list the same three AWS accounts, the value of Quantity for ActiveTrustedSigners will be 3."
-        },
-        "Items":{
-          "shape":"SignerList",
-          "documentation":"A complex type that contains one Signer complex type for each unique trusted signer that is specified in the TrustedSigners complex type, including trusted signers in the default cache behavior and in all of the other cache behaviors."
-        }
-      },
-      "documentation":"A complex type that lists the AWS accounts, if any, that you included in the TrustedSigners complex type for the default cache behavior or for any of the other cache behaviors for this distribution. These are accounts that you want to allow to create signed URLs for private content."
+        "Enabled":{"shape":"boolean"},
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"SignerList"}
+      }
     },
     "AliasList":{
       "type":"list",
@@ -1229,31 +967,17 @@
       "type":"structure",
       "required":["Quantity"],
       "members":{
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of CNAMEs, if any, for this distribution."
-        },
-        "Items":{
-          "shape":"AliasList",
-          "documentation":"Optional: A complex type that contains CNAME elements, if any, for this distribution. If Quantity is 0, you can omit Items."
-        }
-      },
-      "documentation":"A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution."
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"AliasList"}
+      }
     },
     "AllowedMethods":{
       "type":"structure",
       "required":["Quantity"],
       "members":{
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of HTTP methods that you want CloudFront to forward to your origin. Valid values are 2 (for GET and HEAD requests) and 7 (for DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT requests)."
-        },
-        "Items":{
-          "shape":"AllowedMethodsList",
-          "documentation":"A complex type that contains the HTTP methods that you want CloudFront to process and forward to your origin."
-        }
-      },
-      "documentation":"A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are two options: - CloudFront forwards only GET and HEAD requests. - CloudFront forwards DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT requests. If you choose the second option, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can't perform operations that you don't want them to. For example, you may not want users to have permission to delete objects from your origin."
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"AllowedMethodsList"}
+      }
     },
     "AllowedMethodsList":{
       "type":"list",
@@ -1296,37 +1020,15 @@
         "MinTTL"
       ],
       "members":{
-        "PathPattern":{
-          "shape":"string",
-          "documentation":"The pattern (for example, images/*.jpg) that specifies which requests you want this cache behavior to apply to. When CloudFront receives an end-user request, the requested path is compared with path patterns in the order in which cache behaviors are listed in the distribution. The path pattern for the default cache behavior is * and cannot be changed. If the request for an object does not match the path pattern for any cache behaviors, CloudFront applies the behavior in the default cache behavior."
-        },
-        "TargetOriginId":{
-          "shape":"string",
-          "documentation":"The value of ID for the origin that you want CloudFront to route requests to when a request matches the path pattern either for a cache behavior or for the default cache behavior."
-        },
-        "ForwardedValues":{
-          "shape":"ForwardedValues",
-          "documentation":"A complex type that specifies how CloudFront handles query strings, cookies and headers."
-        },
-        "TrustedSigners":{
-          "shape":"TrustedSigners",
-          "documentation":"A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer Guide. If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution."
-        },
-        "ViewerProtocolPolicy":{
-          "shape":"ViewerProtocolPolicy",
-          "documentation":"Use this element to specify the protocol that users can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. If you want CloudFront to allow end users to use any available protocol, specify allow-all. If you want CloudFront to require HTTPS, specify https. If you want CloudFront to respond to an HTTP request with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL, specify redirect-to-https. The viewer then resubmits the request using the HTTPS URL."
-        },
-        "MinTTL":{
-          "shape":"long",
-          "documentation":"The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated.You can specify a value from 0 to 3,153,600,000 seconds (100 years)."
-        },
+        "PathPattern":{"shape":"string"},
+        "TargetOriginId":{"shape":"string"},
+        "ForwardedValues":{"shape":"ForwardedValues"},
+        "TrustedSigners":{"shape":"TrustedSigners"},
+        "ViewerProtocolPolicy":{"shape":"ViewerProtocolPolicy"},
+        "MinTTL":{"shape":"long"},
         "AllowedMethods":{"shape":"AllowedMethods"},
-        "SmoothStreaming":{
-          "shape":"boolean",
-          "documentation":"Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify true; if not, specify false."
-        }
-      },
-      "documentation":"A complex type that describes how CloudFront processes requests. You can create up to 10 cache behaviors.You must create at least as many cache behaviors (including the default cache behavior) as you have origins if you want CloudFront to distribute objects from all of the origins. Each cache behavior specifies the one origin from which you want CloudFront to get objects. If you have two origins and only the default cache behavior, the default cache behavior will cause CloudFront to get objects from one of the origins, but the other origin will never be used. If you don't want to specify any cache behaviors, include only an empty CacheBehaviors element. Don't include an empty CacheBehavior element, or CloudFront returns a MalformedXML error. To delete all cache behaviors in an existing distribution, update the distribution configuration and include only an empty CacheBehaviors element. To add, change, or remove one or more cache behaviors, update the distribution configuration and specify all of the cache behaviors that you want to include in the updated distribution."
+        "SmoothStreaming":{"shape":"boolean"}
+      }
     },
     "CacheBehaviorList":{
       "type":"list",
@@ -1339,16 +1041,9 @@
       "type":"structure",
       "required":["Quantity"],
       "members":{
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of cache behaviors for this distribution."
-        },
-        "Items":{
-          "shape":"CacheBehaviorList",
-          "documentation":"Optional: A complex type that contains cache behaviors for this distribution. If Quantity is 0, you can omit Items."
-        }
-      },
-      "documentation":"A complex type that contains zero or more CacheBehavior elements."
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"CacheBehaviorList"}
+      }
     },
     "CloudFrontOriginAccessIdentity":{
       "type":"structure",
@@ -1357,20 +1052,10 @@
         "S3CanonicalUserId"
       ],
       "members":{
-        "Id":{
-          "shape":"string",
-          "documentation":"The ID for the origin access identity. For example: E74FTE3AJFJ256A."
-        },
-        "S3CanonicalUserId":{
-          "shape":"string",
-          "documentation":"The Amazon S3 canonical user ID for the origin access identity, which you use when giving the origin access identity read permission to an object in Amazon S3."
-        },
-        "CloudFrontOriginAccessIdentityConfig":{
-          "shape":"CloudFrontOriginAccessIdentityConfig",
-          "documentation":"The current configuration information for the identity."
-        }
-      },
-      "documentation":"CloudFront origin access identity."
+        "Id":{"shape":"string"},
+        "S3CanonicalUserId":{"shape":"string"},
+        "CloudFrontOriginAccessIdentityConfig":{"shape":"CloudFrontOriginAccessIdentityConfig"}
+      }
     },
     "CloudFrontOriginAccessIdentityAlreadyExists":{
       "type":"structure",
@@ -1378,8 +1063,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"If the CallerReference is a value you already sent in a previous request to create an identity but the content of the CloudFrontOriginAccessIdentityConfig is different from the original request, CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists error."
+      "exception":true
     },
     "CloudFrontOriginAccessIdentityConfig":{
       "type":"structure",
@@ -1388,16 +1072,9 @@
         "Comment"
       ],
       "members":{
-        "CallerReference":{
-          "shape":"string",
-          "documentation":"A unique number that ensures the request can't be replayed. If the CallerReference is new (no matter the content of the CloudFrontOriginAccessIdentityConfig object), a new origin access identity is created. If the CallerReference is a value you already sent in a previous request to create an identity, and the content of the CloudFrontOriginAccessIdentityConfig is identical to the original request (ignoring white space), the response includes the same information returned to the original request. If the CallerReference is a value you already sent in a previous request to create an identity but the content of the CloudFrontOriginAccessIdentityConfig is different from the original request, CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists error."
-        },
-        "Comment":{
-          "shape":"string",
-          "documentation":"Any comments you want to include about the origin access identity."
-        }
-      },
-      "documentation":"Origin access identity configuration."
+        "CallerReference":{"shape":"string"},
+        "Comment":{"shape":"string"}
+      }
     },
     "CloudFrontOriginAccessIdentityInUse":{
       "type":"structure",
@@ -1416,32 +1093,13 @@
         "Quantity"
       ],
       "members":{
-        "Marker":{
-          "shape":"string",
-          "documentation":"The value you provided for the Marker request parameter."
-        },
-        "NextMarker":{
-          "shape":"string",
-          "documentation":"If IsTruncated is true, this element is present and contains the value you can use for the Marker request parameter to continue listing your origin access identities where they left off."
-        },
-        "MaxItems":{
-          "shape":"integer",
-          "documentation":"The value you provided for the MaxItems request parameter."
-        },
-        "IsTruncated":{
-          "shape":"boolean",
-          "documentation":"A flag that indicates whether more origin access identities remain to be listed. If your results were truncated, you can make a follow-up pagination request using the Marker request parameter to retrieve more items in the list."
-        },
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of CloudFront origin access identities that were created by the current AWS account."
-        },
-        "Items":{
-          "shape":"CloudFrontOriginAccessIdentitySummaryList",
-          "documentation":"A complex type that contains one CloudFrontOriginAccessIdentitySummary element for each origin access identity that was created by the current AWS account."
-        }
-      },
-      "documentation":"The CloudFrontOriginAccessIdentityList type."
+        "Marker":{"shape":"string"},
+        "NextMarker":{"shape":"string"},
+        "MaxItems":{"shape":"integer"},
+        "IsTruncated":{"shape":"boolean"},
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"CloudFrontOriginAccessIdentitySummaryList"}
+      }
     },
     "CloudFrontOriginAccessIdentitySummary":{
       "type":"structure",
@@ -1451,20 +1109,10 @@
         "Comment"
       ],
       "members":{
-        "Id":{
-          "shape":"string",
-          "documentation":"The ID for the origin access identity. For example: E74FTE3AJFJ256A."
-        },
-        "S3CanonicalUserId":{
-          "shape":"string",
-          "documentation":"The Amazon S3 canonical user ID for the origin access identity, which you use when giving the origin access identity read permission to an object in Amazon S3."
-        },
-        "Comment":{
-          "shape":"string",
-          "documentation":"The comment for this origin access identity, as originally specified when created."
-        }
-      },
-      "documentation":"Summary of the information about a CloudFront origin access identity."
+        "Id":{"shape":"string"},
+        "S3CanonicalUserId":{"shape":"string"},
+        "Comment":{"shape":"string"}
+      }
     },
     "CloudFrontOriginAccessIdentitySummaryList":{
       "type":"list",
@@ -1484,31 +1132,17 @@
       "type":"structure",
       "required":["Quantity"],
       "members":{
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of whitelisted cookies for this cache behavior."
-        },
-        "Items":{
-          "shape":"CookieNameList",
-          "documentation":"Optional: A complex type that contains whitelisted cookies for this cache behavior. If Quantity is 0, you can omit Items."
-        }
-      },
-      "documentation":"A complex type that specifies the whitelisted cookies, if any, that you want CloudFront to forward to your origin that is associated with this cache behavior."
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"CookieNameList"}
+      }
     },
     "CookiePreference":{
       "type":"structure",
       "required":["Forward"],
       "members":{
-        "Forward":{
-          "shape":"ItemSelection",
-          "documentation":"Use this element to specify whether you want CloudFront to forward cookies to the origin that is associated with this cache behavior. You can specify all, none or whitelist. If you choose All, CloudFront forwards all cookies regardless of how many your application uses."
-        },
-        "WhitelistedNames":{
-          "shape":"CookieNames",
-          "documentation":"A complex type that specifies the whitelisted cookies, if any, that you want CloudFront to forward to your origin that is associated with this cache behavior."
-        }
-      },
-      "documentation":"A complex type that specifies the cookie preferences associated with this cache behavior."
+        "Forward":{"shape":"ItemSelection"},
+        "WhitelistedNames":{"shape":"CookieNames"}
+      }
     },
     "CreateCloudFrontOriginAccessIdentityRequest":{
       "type":"structure",
@@ -1516,35 +1150,27 @@
       "members":{
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
-          "documentation":"The origin access identity's configuration information.",
           "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         }
       },
-      "documentation":"The request to create a new origin access identity.",
       "payload":"CloudFrontOriginAccessIdentityConfig"
     },
     "CreateCloudFrontOriginAccessIdentityResult":{
       "type":"structure",
       "members":{
-        "CloudFrontOriginAccessIdentity":{
-          "shape":"CloudFrontOriginAccessIdentity",
-          "documentation":"The origin access identity's information."
-        },
+        "CloudFrontOriginAccessIdentity":{"shape":"CloudFrontOriginAccessIdentity"},
         "Location":{
           "shape":"string",
           "location":"header",
-          "locationName":"Location",
-          "documentation":"The fully qualified URI of the new origin access identity just created. For example: https://cloudfront.amazonaws.com/2010-11-01/origin-access-identity/cloudfront/E74FTE3AJFJ256A."
+          "locationName":"Location"
         },
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the origin access identity created."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"CloudFrontOriginAccessIdentity"
     },
     "CreateDistributionRequest":{
@@ -1553,35 +1179,27 @@
       "members":{
         "DistributionConfig":{
           "shape":"DistributionConfig",
-          "documentation":"The distribution's configuration information.",
           "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"DistributionConfig"
         }
       },
-      "documentation":"The request to create a new distribution.",
       "payload":"DistributionConfig"
     },
     "CreateDistributionResult":{
       "type":"structure",
       "members":{
-        "Distribution":{
-          "shape":"Distribution",
-          "documentation":"The distribution's information."
-        },
+        "Distribution":{"shape":"Distribution"},
         "Location":{
           "shape":"string",
           "location":"header",
-          "locationName":"Location",
-          "documentation":"The fully qualified URI of the new distribution resource just created. For example: https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5."
+          "locationName":"Location"
         },
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the distribution created."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"Distribution"
     },
     "CreateInvalidationRequest":{
@@ -1594,17 +1212,14 @@
         "DistributionId":{
           "shape":"string",
           "location":"uri",
-          "locationName":"DistributionId",
-          "documentation":"The distribution's id."
+          "locationName":"DistributionId"
         },
         "InvalidationBatch":{
           "shape":"InvalidationBatch",
-          "documentation":"The batch information for the invalidation.",
           "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"InvalidationBatch"
         }
       },
-      "documentation":"The request to create an invalidation.",
       "payload":"InvalidationBatch"
     },
     "CreateInvalidationResult":{
@@ -1613,15 +1228,10 @@
         "Location":{
           "shape":"string",
           "location":"header",
-          "locationName":"Location",
-          "documentation":"The fully qualified URI of the distribution and invalidation batch request, including the Invalidation ID."
+          "locationName":"Location"
         },
-        "Invalidation":{
-          "shape":"Invalidation",
-          "documentation":"The invalidation's information."
-        }
+        "Invalidation":{"shape":"Invalidation"}
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"Invalidation"
     },
     "CreateStreamingDistributionRequest":{
@@ -1630,59 +1240,38 @@
       "members":{
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
-          "documentation":"The streaming distribution's configuration information.",
           "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"StreamingDistributionConfig"
         }
       },
-      "documentation":"The request to create a new streaming distribution.",
       "payload":"StreamingDistributionConfig"
     },
     "CreateStreamingDistributionResult":{
       "type":"structure",
       "members":{
-        "StreamingDistribution":{
-          "shape":"StreamingDistribution",
-          "documentation":"The streaming distribution's information."
-        },
+        "StreamingDistribution":{"shape":"StreamingDistribution"},
         "Location":{
           "shape":"string",
           "location":"header",
-          "locationName":"Location",
-          "documentation":"The fully qualified URI of the new streaming distribution resource just created. For example: https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8."
+          "locationName":"Location"
         },
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the streaming distribution created."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"StreamingDistribution"
     },
     "CustomErrorResponse":{
       "type":"structure",
       "required":["ErrorCode"],
       "members":{
-        "ErrorCode":{
-          "shape":"integer",
-          "documentation":"The 4xx or 5xx HTTP status code that you want to customize. For a list of HTTP status codes that you can customize, see CloudFront documentation."
-        },
-        "ResponsePagePath":{
-          "shape":"string",
-          "documentation":"The path of the custom error page (for example, /custom_404.html). The path is relative to the distribution and must begin with a slash (/). If the path includes any non-ASCII characters or unsafe characters as defined in RFC 1783 (http://www.ietf.org/rfc/rfc1738.txt), URL encode those characters. Do not URL encode any other characters in the path, or CloudFront will not return the custom error page to the viewer."
-        },
-        "ResponseCode":{
-          "shape":"string",
-          "documentation":"The HTTP status code that you want CloudFront to return with the custom error page to the viewer. For a list of HTTP status codes that you can replace, see CloudFront Documentation."
-        },
-        "ErrorCachingMinTTL":{
-          "shape":"long",
-          "documentation":"The minimum amount of time you want HTTP error codes to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. You can specify a value from 0 to 31,536,000."
-        }
-      },
-      "documentation":"A complex type that describes how you'd prefer CloudFront to respond to requests that result in either a 4xx or 5xx response. You can control whether a custom error page should be displayed, what the desired response code should be for this error page and how long should the error response be cached by CloudFront. If you don't want to specify any custom error responses, include only an empty CustomErrorResponses element. To delete all custom error responses in an existing distribution, update the distribution configuration and include only an empty CustomErrorResponses element. To add, change, or remove one or more custom error responses, update the distribution configuration and specify all of the custom error responses that you want to include in the updated distribution."
+        "ErrorCode":{"shape":"integer"},
+        "ResponsePagePath":{"shape":"string"},
+        "ResponseCode":{"shape":"string"},
+        "ErrorCachingMinTTL":{"shape":"long"}
+      }
     },
     "CustomErrorResponseList":{
       "type":"list",
@@ -1695,16 +1284,9 @@
       "type":"structure",
       "required":["Quantity"],
       "members":{
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of custom error responses for this distribution."
-        },
-        "Items":{
-          "shape":"CustomErrorResponseList",
-          "documentation":"Optional: A complex type that contains custom error responses for this distribution. If Quantity is 0, you can omit Items."
-        }
-      },
-      "documentation":"A complex type that contains zero or more CustomErrorResponse elements."
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"CustomErrorResponseList"}
+      }
     },
     "CustomOriginConfig":{
       "type":"structure",
@@ -1714,20 +1296,10 @@
         "OriginProtocolPolicy"
       ],
       "members":{
-        "HTTPPort":{
-          "shape":"integer",
-          "documentation":"The HTTP port the custom origin listens on."
-        },
-        "HTTPSPort":{
-          "shape":"integer",
-          "documentation":"The HTTPS port the custom origin listens on."
-        },
-        "OriginProtocolPolicy":{
-          "shape":"OriginProtocolPolicy",
-          "documentation":"The origin protocol policy to apply to your origin."
-        }
-      },
-      "documentation":"A customer origin."
+        "HTTPPort":{"shape":"integer"},
+        "HTTPSPort":{"shape":"integer"},
+        "OriginProtocolPolicy":{"shape":"OriginProtocolPolicy"}
+      }
     },
     "DefaultCacheBehavior":{
       "type":"structure",
@@ -1739,33 +1311,14 @@
         "MinTTL"
       ],
       "members":{
-        "TargetOriginId":{
-          "shape":"string",
-          "documentation":"The value of ID for the origin that you want CloudFront to route requests to when a request matches the path pattern either for a cache behavior or for the default cache behavior."
-        },
-        "ForwardedValues":{
-          "shape":"ForwardedValues",
-          "documentation":"A complex type that specifies how CloudFront handles query strings, cookies and headers."
-        },
-        "TrustedSigners":{
-          "shape":"TrustedSigners",
-          "documentation":"A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer Guide. If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution."
-        },
-        "ViewerProtocolPolicy":{
-          "shape":"ViewerProtocolPolicy",
-          "documentation":"Use this element to specify the protocol that users can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. If you want CloudFront to allow end users to use any available protocol, specify allow-all. If you want CloudFront to require HTTPS, specify https. If you want CloudFront to respond to an HTTP request with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL, specify redirect-to-https. The viewer then resubmits the request using the HTTPS URL."
-        },
-        "MinTTL":{
-          "shape":"long",
-          "documentation":"The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated.You can specify a value from 0 to 3,153,600,000 seconds (100 years)."
-        },
+        "TargetOriginId":{"shape":"string"},
+        "ForwardedValues":{"shape":"ForwardedValues"},
+        "TrustedSigners":{"shape":"TrustedSigners"},
+        "ViewerProtocolPolicy":{"shape":"ViewerProtocolPolicy"},
+        "MinTTL":{"shape":"long"},
         "AllowedMethods":{"shape":"AllowedMethods"},
-        "SmoothStreaming":{
-          "shape":"boolean",
-          "documentation":"Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify true; if not, specify false."
-        }
-      },
-      "documentation":"A complex type that describes the default cache behavior if you do not specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements.You must create exactly one default cache behavior."
+        "SmoothStreaming":{"shape":"boolean"}
+      }
     },
     "DeleteCloudFrontOriginAccessIdentityRequest":{
       "type":"structure",
@@ -1773,17 +1326,14 @@
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The origin access identity's id."
+          "locationName":"Id"
         },
         "IfMatch":{
           "shape":"string",
           "location":"header",
-          "locationName":"If-Match",
-          "documentation":"The value of the ETag header you received from a previous GET or PUT request. For example: E2QWRUHAPOMQZL."
+          "locationName":"If-Match"
         }
       },
-      "documentation":"The request to delete a origin access identity.",
       "required":["Id"]
     },
     "DeleteDistributionRequest":{
@@ -1792,17 +1342,14 @@
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The distribution id."
+          "locationName":"Id"
         },
         "IfMatch":{
           "shape":"string",
           "location":"header",
-          "locationName":"If-Match",
-          "documentation":"The value of the ETag header you received when you disabled the distribution. For example: E2QWRUHAPOMQZL."
+          "locationName":"If-Match"
         }
       },
-      "documentation":"The request to delete a distribution.",
       "required":["Id"]
     },
     "DeleteStreamingDistributionRequest":{
@@ -1811,17 +1358,14 @@
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The distribution id."
+          "locationName":"Id"
         },
         "IfMatch":{
           "shape":"string",
           "location":"header",
-          "locationName":"If-Match",
-          "documentation":"The value of the ETag header you received when you disabled the streaming distribution. For example: E2QWRUHAPOMQZL."
+          "locationName":"If-Match"
         }
       },
-      "documentation":"The request to delete a streaming distribution.",
       "required":["Id"]
     },
     "Distribution":{
@@ -1836,36 +1380,14 @@
         "DistributionConfig"
       ],
       "members":{
-        "Id":{
-          "shape":"string",
-          "documentation":"The identifier for the distribution. For example: EDFDVBD632BHDS5."
-        },
-        "Status":{
-          "shape":"string",
-          "documentation":"This response element indicates the current status of the distribution. When the status is Deployed, the distribution's information is fully propagated throughout the Amazon CloudFront system."
-        },
-        "LastModifiedTime":{
-          "shape":"timestamp",
-          "documentation":"The date and time the distribution was last modified."
-        },
-        "InProgressInvalidationBatches":{
-          "shape":"integer",
-          "documentation":"The number of invalidation batches currently in progress."
-        },
-        "DomainName":{
-          "shape":"string",
-          "documentation":"The domain name corresponding to the distribution. For example: d604721fxaaqy9.cloudfront.net."
-        },
-        "ActiveTrustedSigners":{
-          "shape":"ActiveTrustedSigners",
-          "documentation":"CloudFront automatically adds this element to the response only if you've set up the distribution to serve private content with signed URLs. The element lists the key pair IDs that CloudFront is aware of for each trusted signer. The Signer child element lists the AWS account number of the trusted signer (or an empty Self element if the signer is you). The Signer element also includes the IDs of any active key pairs associated with the trusted signer's AWS account. If no KeyPairId element appears for a Signer, that signer can't create working signed URLs."
-        },
-        "DistributionConfig":{
-          "shape":"DistributionConfig",
-          "documentation":"The current configuration information for the distribution."
-        }
-      },
-      "documentation":"A distribution."
+        "Id":{"shape":"string"},
+        "Status":{"shape":"string"},
+        "LastModifiedTime":{"shape":"timestamp"},
+        "InProgressInvalidationBatches":{"shape":"integer"},
+        "DomainName":{"shape":"string"},
+        "ActiveTrustedSigners":{"shape":"ActiveTrustedSigners"},
+        "DistributionConfig":{"shape":"DistributionConfig"}
+      }
     },
     "DistributionAlreadyExists":{
       "type":"structure",
@@ -1873,8 +1395,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"The caller reference you attempted to create the distribution with is associated with another distribution."
+      "exception":true
     },
     "DistributionConfig":{
       "type":"structure",
@@ -1891,54 +1412,20 @@
         "Enabled"
       ],
       "members":{
-        "CallerReference":{
-          "shape":"string",
-          "documentation":"A unique number that ensures the request can't be replayed. If the CallerReference is new (no matter the content of the DistributionConfig object), a new distribution is created. If the CallerReference is a value you already sent in a previous request to create a distribution, and the content of the DistributionConfig is identical to the original request (ignoring white space), the response includes the same information returned to the original request. If the CallerReference is a value you already sent in a previous request to create a distribution but the content of the DistributionConfig is different from the original request, CloudFront returns a DistributionAlreadyExists error."
-        },
-        "Aliases":{
-          "shape":"Aliases",
-          "documentation":"A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution."
-        },
-        "DefaultRootObject":{
-          "shape":"string",
-          "documentation":"The object that you want CloudFront to return (for example, index.html) when an end user requests the root URL for your distribution (http://www.example.com) instead of an object in your distribution (http://www.example.com/index.html). Specifying a default root object avoids exposing the contents of your distribution. If you don't want to specify a default root object when you create a distribution, include an empty DefaultRootObject element. To delete the default root object from an existing distribution, update the distribution configuration and include an empty DefaultRootObject element. To replace the default root object, update the distribution configuration and specify the new object."
-        },
-        "Origins":{
-          "shape":"Origins",
-          "documentation":"A complex type that contains information about origins for this distribution."
-        },
-        "DefaultCacheBehavior":{
-          "shape":"DefaultCacheBehavior",
-          "documentation":"A complex type that describes the default cache behavior if you do not specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements.You must create exactly one default cache behavior."
-        },
-        "CacheBehaviors":{
-          "shape":"CacheBehaviors",
-          "documentation":"A complex type that contains zero or more CacheBehavior elements."
-        },
-        "CustomErrorResponses":{
-          "shape":"CustomErrorResponses",
-          "documentation":"A complex type that contains zero or more CustomErrorResponse elements."
-        },
-        "Comment":{
-          "shape":"string",
-          "documentation":"Any comments you want to include about the distribution."
-        },
-        "Logging":{
-          "shape":"LoggingConfig",
-          "documentation":"A complex type that controls whether access logs are written for the distribution."
-        },
-        "PriceClass":{
-          "shape":"PriceClass",
-          "documentation":"A complex type that contains information about price class for this distribution."
-        },
-        "Enabled":{
-          "shape":"boolean",
-          "documentation":"Whether the distribution is enabled to accept end user requests for content."
-        },
+        "CallerReference":{"shape":"string"},
+        "Aliases":{"shape":"Aliases"},
+        "DefaultRootObject":{"shape":"string"},
+        "Origins":{"shape":"Origins"},
+        "DefaultCacheBehavior":{"shape":"DefaultCacheBehavior"},
+        "CacheBehaviors":{"shape":"CacheBehaviors"},
+        "CustomErrorResponses":{"shape":"CustomErrorResponses"},
+        "Comment":{"shape":"string"},
+        "Logging":{"shape":"LoggingConfig"},
+        "PriceClass":{"shape":"PriceClass"},
+        "Enabled":{"shape":"boolean"},
         "ViewerCertificate":{"shape":"ViewerCertificate"},
         "Restrictions":{"shape":"Restrictions"}
-      },
-      "documentation":"A distribution Configuration."
+      }
     },
     "DistributionList":{
       "type":"structure",
@@ -1949,32 +1436,13 @@
         "Quantity"
       ],
       "members":{
-        "Marker":{
-          "shape":"string",
-          "documentation":"The value you provided for the Marker request parameter."
-        },
-        "NextMarker":{
-          "shape":"string",
-          "documentation":"If IsTruncated is true, this element is present and contains the value you can use for the Marker request parameter to continue listing your distributions where they left off."
-        },
-        "MaxItems":{
-          "shape":"integer",
-          "documentation":"The value you provided for the MaxItems request parameter."
-        },
-        "IsTruncated":{
-          "shape":"boolean",
-          "documentation":"A flag that indicates whether more distributions remain to be listed. If your results were truncated, you can make a follow-up pagination request using the Marker request parameter to retrieve more distributions in the list."
-        },
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of distributions that were created by the current AWS account."
-        },
-        "Items":{
-          "shape":"DistributionSummaryList",
-          "documentation":"A complex type that contains one DistributionSummary element for each distribution that was created by the current AWS account."
-        }
-      },
-      "documentation":"A distribution list."
+        "Marker":{"shape":"string"},
+        "NextMarker":{"shape":"string"},
+        "MaxItems":{"shape":"integer"},
+        "IsTruncated":{"shape":"boolean"},
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"DistributionSummaryList"}
+      }
     },
     "DistributionNotDisabled":{
       "type":"structure",
@@ -2003,55 +1471,21 @@
         "Restrictions"
       ],
       "members":{
-        "Id":{
-          "shape":"string",
-          "documentation":"The identifier for the distribution. For example: EDFDVBD632BHDS5."
-        },
-        "Status":{
-          "shape":"string",
-          "documentation":"This response element indicates the current status of the distribution. When the status is Deployed, the distribution's information is fully propagated throughout the Amazon CloudFront system."
-        },
-        "LastModifiedTime":{
-          "shape":"timestamp",
-          "documentation":"The date and time the distribution was last modified."
-        },
-        "DomainName":{
-          "shape":"string",
-          "documentation":"The domain name corresponding to the distribution. For example: d604721fxaaqy9.cloudfront.net."
-        },
-        "Aliases":{
-          "shape":"Aliases",
-          "documentation":"A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution."
-        },
-        "Origins":{
-          "shape":"Origins",
-          "documentation":"A complex type that contains information about origins for this distribution."
-        },
-        "DefaultCacheBehavior":{
-          "shape":"DefaultCacheBehavior",
-          "documentation":"A complex type that describes the default cache behavior if you do not specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements.You must create exactly one default cache behavior."
-        },
-        "CacheBehaviors":{
-          "shape":"CacheBehaviors",
-          "documentation":"A complex type that contains zero or more CacheBehavior elements."
-        },
-        "CustomErrorResponses":{
-          "shape":"CustomErrorResponses",
-          "documentation":"A complex type that contains zero or more CustomErrorResponses elements."
-        },
-        "Comment":{
-          "shape":"string",
-          "documentation":"The comment originally specified when this distribution was created."
-        },
+        "Id":{"shape":"string"},
+        "Status":{"shape":"string"},
+        "LastModifiedTime":{"shape":"timestamp"},
+        "DomainName":{"shape":"string"},
+        "Aliases":{"shape":"Aliases"},
+        "Origins":{"shape":"Origins"},
+        "DefaultCacheBehavior":{"shape":"DefaultCacheBehavior"},
+        "CacheBehaviors":{"shape":"CacheBehaviors"},
+        "CustomErrorResponses":{"shape":"CustomErrorResponses"},
+        "Comment":{"shape":"string"},
         "PriceClass":{"shape":"PriceClass"},
-        "Enabled":{
-          "shape":"boolean",
-          "documentation":"Whether the distribution is enabled to accept end user requests for content."
-        },
+        "Enabled":{"shape":"boolean"},
         "ViewerCertificate":{"shape":"ViewerCertificate"},
         "Restrictions":{"shape":"Restrictions"}
-      },
-      "documentation":"A summary of the information for an Amazon CloudFront distribution."
+      }
     },
     "DistributionSummaryList":{
       "type":"list",
@@ -2067,20 +1501,10 @@
         "Cookies"
       ],
       "members":{
-        "QueryString":{
-          "shape":"boolean",
-          "documentation":"Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior. If so, specify true; if not, specify false."
-        },
-        "Cookies":{
-          "shape":"CookiePreference",
-          "documentation":"A complex type that specifies how CloudFront handles cookies."
-        },
-        "Headers":{
-          "shape":"Headers",
-          "documentation":"A complex type that specifies the Headers, if any, that you want CloudFront to vary upon for this cache behavior."
-        }
-      },
-      "documentation":"A complex type that specifies how CloudFront handles query strings, cookies and headers."
+        "QueryString":{"shape":"boolean"},
+        "Cookies":{"shape":"CookiePreference"},
+        "Headers":{"shape":"Headers"}
+      }
     },
     "GeoRestriction":{
       "type":"structure",
@@ -2089,20 +1513,10 @@
         "Quantity"
       ],
       "members":{
-        "RestrictionType":{
-          "shape":"GeoRestrictionType",
-          "documentation":"The method that you want to use to restrict distribution of your content by country: - none: No geo restriction is enabled, meaning access to content is not restricted by client geo location. - blacklist: The Location elements specify the countries in which you do not want CloudFront to distribute your content. - whitelist: The Location elements specify the countries in which you want CloudFront to distribute your content."
-        },
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"When geo restriction is enabled, this is the number of countries in your whitelist or blacklist. Otherwise, when it is not enabled, Quantity is 0, and you can omit Items."
-        },
-        "Items":{
-          "shape":"LocationList",
-          "documentation":"A complex type that contains a Location element for each country in which you want CloudFront either to distribute your content (whitelist) or not distribute your content (blacklist). The Location element is a two-letter, uppercase country code for a country that you want to include in your blacklist or whitelist. Include one Location element for each country. CloudFront and MaxMind both use ISO 3166 country codes. For the current list of countries and the corresponding codes, see ISO 3166-1-alpha-2 code on the International Organization for Standardization website. You can also refer to the country list in the CloudFront console, which includes both country names and codes."
-        }
-      },
-      "documentation":"A complex type that controls the countries in which your content is distributed. For more information about geo restriction, go to Customizing Error Responses in the Amazon CloudFront Developer Guide. CloudFront determines the location of your users using MaxMind GeoIP databases. For information about the accuracy of these databases, see How accurate are your GeoIP databases? on the MaxMind website."
+        "RestrictionType":{"shape":"GeoRestrictionType"},
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"LocationList"}
+      }
     },
     "GeoRestrictionType":{
       "type":"string",
@@ -2118,28 +1532,21 @@
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The identity's id."
+          "locationName":"Id"
         }
       },
-      "documentation":"The request to get an origin access identity's configuration.",
       "required":["Id"]
     },
     "GetCloudFrontOriginAccessIdentityConfigResult":{
       "type":"structure",
       "members":{
-        "CloudFrontOriginAccessIdentityConfig":{
-          "shape":"CloudFrontOriginAccessIdentityConfig",
-          "documentation":"The origin access identity's configuration information."
-        },
+        "CloudFrontOriginAccessIdentityConfig":{"shape":"CloudFrontOriginAccessIdentityConfig"},
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the configuration. For example: E2QWRUHAPOMQZL."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"CloudFrontOriginAccessIdentityConfig"
     },
     "GetCloudFrontOriginAccessIdentityRequest":{
@@ -2148,28 +1555,21 @@
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The identity's id."
+          "locationName":"Id"
         }
       },
-      "documentation":"The request to get an origin access identity's information.",
       "required":["Id"]
     },
     "GetCloudFrontOriginAccessIdentityResult":{
       "type":"structure",
       "members":{
-        "CloudFrontOriginAccessIdentity":{
-          "shape":"CloudFrontOriginAccessIdentity",
-          "documentation":"The origin access identity's information."
-        },
+        "CloudFrontOriginAccessIdentity":{"shape":"CloudFrontOriginAccessIdentity"},
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the origin access identity's information. For example: E2QWRUHAPOMQZL."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"CloudFrontOriginAccessIdentity"
     },
     "GetDistributionConfigRequest":{
@@ -2178,28 +1578,21 @@
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The distribution's id."
+          "locationName":"Id"
         }
       },
-      "documentation":"The request to get a distribution configuration.",
       "required":["Id"]
     },
     "GetDistributionConfigResult":{
       "type":"structure",
       "members":{
-        "DistributionConfig":{
-          "shape":"DistributionConfig",
-          "documentation":"The distribution's configuration information."
-        },
+        "DistributionConfig":{"shape":"DistributionConfig"},
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the configuration. For example: E2QWRUHAPOMQZL."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"DistributionConfig"
     },
     "GetDistributionRequest":{
@@ -2208,28 +1601,21 @@
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The distribution's id."
+          "locationName":"Id"
         }
       },
-      "documentation":"The request to get a distribution's information.",
       "required":["Id"]
     },
     "GetDistributionResult":{
       "type":"structure",
       "members":{
-        "Distribution":{
-          "shape":"Distribution",
-          "documentation":"The distribution's information."
-        },
+        "Distribution":{"shape":"Distribution"},
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the distribution's information. For example: E2QWRUHAPOMQZL."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"Distribution"
     },
     "GetInvalidationRequest":{
@@ -2242,27 +1628,20 @@
         "DistributionId":{
           "shape":"string",
           "location":"uri",
-          "locationName":"DistributionId",
-          "documentation":"The distribution's id."
+          "locationName":"DistributionId"
         },
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The invalidation's id."
+          "locationName":"Id"
         }
-      },
-      "documentation":"The request to get an invalidation's information."
+      }
     },
     "GetInvalidationResult":{
       "type":"structure",
       "members":{
-        "Invalidation":{
-          "shape":"Invalidation",
-          "documentation":"The invalidation's information."
-        }
+        "Invalidation":{"shape":"Invalidation"}
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"Invalidation"
     },
     "GetStreamingDistributionConfigRequest":{
@@ -2271,28 +1650,21 @@
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The streaming distribution's id."
+          "locationName":"Id"
         }
       },
-      "documentation":"To request to get a streaming distribution configuration.",
       "required":["Id"]
     },
     "GetStreamingDistributionConfigResult":{
       "type":"structure",
       "members":{
-        "StreamingDistributionConfig":{
-          "shape":"StreamingDistributionConfig",
-          "documentation":"The streaming distribution's configuration information."
-        },
+        "StreamingDistributionConfig":{"shape":"StreamingDistributionConfig"},
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the configuration. For example: E2QWRUHAPOMQZL."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"StreamingDistributionConfig"
     },
     "GetStreamingDistributionRequest":{
@@ -2301,28 +1673,21 @@
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The streaming distribution's id."
+          "locationName":"Id"
         }
       },
-      "documentation":"The request to get a streaming distribution's information.",
       "required":["Id"]
     },
     "GetStreamingDistributionResult":{
       "type":"structure",
       "members":{
-        "StreamingDistribution":{
-          "shape":"StreamingDistribution",
-          "documentation":"The streaming distribution's information."
-        },
+        "StreamingDistribution":{"shape":"StreamingDistribution"},
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the streaming distribution's information. For example: E2QWRUHAPOMQZL."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"StreamingDistribution"
     },
     "HeaderList":{
@@ -2336,16 +1701,9 @@
       "type":"structure",
       "required":["Quantity"],
       "members":{
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of different headers that you want CloudFront to forward to the origin and to vary on for this cache behavior. The maximum number of headers that you can specify by name is 10. If you want CloudFront to forward all headers to the origin and vary on all of them, specify 1 for Quantity and * for Name. If you don't want CloudFront to forward any additional headers to the origin or to vary on any headers, specify 0 for Quantity and omit Items."
-        },
-        "Items":{
-          "shape":"HeaderList",
-          "documentation":"Optional: A complex type that contains a Name element for each header that you want CloudFront to forward to the origin and to vary on for this cache behavior. If Quantity is 0, omit Items."
-        }
-      },
-      "documentation":"A complex type that specifies the headers that you want CloudFront to forward to the origin for this cache behavior. For the headers that you specify, CloudFront also caches separate versions of a given object based on the header values in viewer requests; this is known as varying on headers. For example, suppose viewer requests for logo.jpg contain a custom Product header that has a value of either Acme or Apex, and you configure CloudFront to vary on the Product header. CloudFront forwards the Product header to the origin and caches the response from the origin once for each header value."
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"HeaderList"}
+      }
     },
     "IllegalUpdate":{
       "type":"structure",
@@ -2353,8 +1711,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Origin and CallerReference cannot be updated."
+      "exception":true
     },
     "InconsistentQuantities":{
       "type":"structure",
@@ -2362,8 +1719,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"The value of Quantity and the size of Items do not match."
+      "exception":true
     },
     "InvalidArgument":{
       "type":"structure",
@@ -2371,8 +1727,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"The argument is invalid."
+      "exception":true
     },
     "InvalidDefaultRootObject":{
       "type":"structure",
@@ -2380,8 +1735,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"The default root object file name is too big or contains an invalid character."
+      "exception":true
     },
     "InvalidErrorCode":{
       "type":"structure",
@@ -2397,8 +1751,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Your request contains forward cookies option which doesn't match with the expectation for the whitelisted list of cookie names. Either list of cookie names has been specified when not allowed or list of cookie names is missing when expected."
+      "exception":true
     },
     "InvalidGeoRestrictionParameter":{
       "type":"structure",
@@ -2422,8 +1775,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"The If-Match version is missing or not valid for the distribution."
+      "exception":true
     },
     "InvalidLocationCode":{
       "type":"structure",
@@ -2439,8 +1791,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket."
+      "exception":true
     },
     "InvalidOriginAccessIdentity":{
       "type":"structure",
@@ -2448,8 +1799,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"The origin access identity is not valid or doesn't exist."
+      "exception":true
     },
     "InvalidRelativePath":{
       "type":"structure",
@@ -2457,8 +1807,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"The relative path is too big, is not URL-encoded, or does not begin with a slash (/)."
+      "exception":true
     },
     "InvalidRequiredProtocol":{
       "type":"structure",
@@ -2466,8 +1815,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the RequiredProtocols element from your distribution configuration."
+      "exception":true
     },
     "InvalidResponseCode":{
       "type":"structure",
@@ -2494,24 +1842,11 @@
         "InvalidationBatch"
       ],
       "members":{
-        "Id":{
-          "shape":"string",
-          "documentation":"The identifier for the invalidation request. For example: IDFDVBD632BHDS5."
-        },
-        "Status":{
-          "shape":"string",
-          "documentation":"The status of the invalidation request. When the invalidation batch is finished, the status is Completed."
-        },
-        "CreateTime":{
-          "shape":"timestamp",
-          "documentation":"The date and time the invalidation request was first made."
-        },
-        "InvalidationBatch":{
-          "shape":"InvalidationBatch",
-          "documentation":"The current invalidation information for the batch request."
-        }
-      },
-      "documentation":"An invalidation."
+        "Id":{"shape":"string"},
+        "Status":{"shape":"string"},
+        "CreateTime":{"shape":"timestamp"},
+        "InvalidationBatch":{"shape":"InvalidationBatch"}
+      }
     },
     "InvalidationBatch":{
       "type":"structure",
@@ -2520,16 +1855,9 @@
         "CallerReference"
       ],
       "members":{
-        "Paths":{
-          "shape":"Paths",
-          "documentation":"The path of the object to invalidate. The path is relative to the distribution and must begin with a slash (/). You must enclose each invalidation object with the Path element tags. If the path includes non-ASCII characters or unsafe characters as defined in RFC 1783 (http://www.ietf.org/rfc/rfc1738.txt), URL encode those characters. Do not URL encode any other characters in the path, or CloudFront will not invalidate the old version of the updated object."
-        },
-        "CallerReference":{
-          "shape":"string",
-          "documentation":"A unique name that ensures the request can't be replayed. If the CallerReference is new (no matter the content of the Path object), a new distribution is created. If the CallerReference is a value you already sent in a previous request to create an invalidation batch, and the content of each Path element is identical to the original request, the response includes the same information returned to the original request. If the CallerReference is a value you already sent in a previous request to create a distribution but the content of any Path is different from the original request, CloudFront returns an InvalidationBatchAlreadyExists error."
-        }
-      },
-      "documentation":"An invalidation batch."
+        "Paths":{"shape":"Paths"},
+        "CallerReference":{"shape":"string"}
+      }
     },
     "InvalidationList":{
       "type":"structure",
@@ -2540,32 +1868,13 @@
         "Quantity"
       ],
       "members":{
-        "Marker":{
-          "shape":"string",
-          "documentation":"The value you provided for the Marker request parameter."
-        },
-        "NextMarker":{
-          "shape":"string",
-          "documentation":"If IsTruncated is true, this element is present and contains the value you can use for the Marker request parameter to continue listing your invalidation batches where they left off."
-        },
-        "MaxItems":{
-          "shape":"integer",
-          "documentation":"The value you provided for the MaxItems request parameter."
-        },
-        "IsTruncated":{
-          "shape":"boolean",
-          "documentation":"A flag that indicates whether more invalidation batch requests remain to be listed. If your results were truncated, you can make a follow-up pagination request using the Marker request parameter to retrieve more invalidation batches in the list."
-        },
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of invalidation batches that were created by the current AWS account."
-        },
-        "Items":{
-          "shape":"InvalidationSummaryList",
-          "documentation":"A complex type that contains one InvalidationSummary element for each invalidation batch that was created by the current AWS account."
-        }
-      },
-      "documentation":"An invalidation list."
+        "Marker":{"shape":"string"},
+        "NextMarker":{"shape":"string"},
+        "MaxItems":{"shape":"integer"},
+        "IsTruncated":{"shape":"boolean"},
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"InvalidationSummaryList"}
+      }
     },
     "InvalidationSummary":{
       "type":"structure",
@@ -2575,17 +1884,10 @@
         "Status"
       ],
       "members":{
-        "Id":{
-          "shape":"string",
-          "documentation":"The unique ID for an invalidation request."
-        },
+        "Id":{"shape":"string"},
         "CreateTime":{"shape":"timestamp"},
-        "Status":{
-          "shape":"string",
-          "documentation":"The status of an invalidation request."
-        }
-      },
-      "documentation":"Summary of an invalidation request."
+        "Status":{"shape":"string"}
+      }
     },
     "InvalidationSummaryList":{
       "type":"list",
@@ -2613,16 +1915,9 @@
       "type":"structure",
       "required":["Quantity"],
       "members":{
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of active CloudFront key pairs for AwsAccountNumber."
-        },
-        "Items":{
-          "shape":"KeyPairIdList",
-          "documentation":"A complex type that lists the active CloudFront key pairs, if any, that are associated with AwsAccountNumber."
-        }
-      },
-      "documentation":"A complex type that lists the active CloudFront key pairs, if any, that are associated with AwsAccountNumber."
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"KeyPairIdList"}
+      }
     },
     "ListCloudFrontOriginAccessIdentitiesRequest":{
       "type":"structure",
@@ -2630,27 +1925,20 @@
         "Marker":{
           "shape":"string",
           "location":"querystring",
-          "locationName":"Marker",
-          "documentation":"Use this when paginating results to indicate where to begin in your list of origin access identities. The results include identities in the list that occur after the marker. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response (which is also the ID of the last identity on that page)."
+          "locationName":"Marker"
         },
         "MaxItems":{
           "shape":"string",
           "location":"querystring",
-          "locationName":"MaxItems",
-          "documentation":"The maximum number of origin access identities you want in the response body."
+          "locationName":"MaxItems"
         }
-      },
-      "documentation":"The request to list origin access identities."
+      }
     },
     "ListCloudFrontOriginAccessIdentitiesResult":{
       "type":"structure",
       "members":{
-        "CloudFrontOriginAccessIdentityList":{
-          "shape":"CloudFrontOriginAccessIdentityList",
-          "documentation":"The CloudFrontOriginAccessIdentityList type."
-        }
+        "CloudFrontOriginAccessIdentityList":{"shape":"CloudFrontOriginAccessIdentityList"}
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"CloudFrontOriginAccessIdentityList"
     },
     "ListDistributionsRequest":{
@@ -2659,27 +1947,20 @@
         "Marker":{
           "shape":"string",
           "location":"querystring",
-          "locationName":"Marker",
-          "documentation":"Use this when paginating results to indicate where to begin in your list of distributions. The results include distributions in the list that occur after the marker. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response (which is also the ID of the last distribution on that page)."
+          "locationName":"Marker"
         },
         "MaxItems":{
           "shape":"string",
           "location":"querystring",
-          "locationName":"MaxItems",
-          "documentation":"The maximum number of distributions you want in the response body."
+          "locationName":"MaxItems"
         }
-      },
-      "documentation":"The request to list your distributions."
+      }
     },
     "ListDistributionsResult":{
       "type":"structure",
       "members":{
-        "DistributionList":{
-          "shape":"DistributionList",
-          "documentation":"The DistributionList type."
-        }
+        "DistributionList":{"shape":"DistributionList"}
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"DistributionList"
     },
     "ListInvalidationsRequest":{
@@ -2689,33 +1970,25 @@
         "DistributionId":{
           "shape":"string",
           "location":"uri",
-          "locationName":"DistributionId",
-          "documentation":"The distribution's id."
+          "locationName":"DistributionId"
         },
         "Marker":{
           "shape":"string",
           "location":"querystring",
-          "locationName":"Marker",
-          "documentation":"Use this parameter when paginating results to indicate where to begin in your list of invalidation batches. Because the results are returned in decreasing order from most recent to oldest, the most recent results are on the first page, the second page will contain earlier results, and so on. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response. This value is the same as the ID of the last invalidation batch on that page."
+          "locationName":"Marker"
         },
         "MaxItems":{
           "shape":"string",
           "location":"querystring",
-          "locationName":"MaxItems",
-          "documentation":"The maximum number of invalidation batches you want in the response body."
+          "locationName":"MaxItems"
         }
-      },
-      "documentation":"The request to list invalidations."
+      }
     },
     "ListInvalidationsResult":{
       "type":"structure",
       "members":{
-        "InvalidationList":{
-          "shape":"InvalidationList",
-          "documentation":"Information about invalidation batches."
-        }
+        "InvalidationList":{"shape":"InvalidationList"}
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"InvalidationList"
     },
     "ListStreamingDistributionsRequest":{
@@ -2724,27 +1997,20 @@
         "Marker":{
           "shape":"string",
           "location":"querystring",
-          "locationName":"Marker",
-          "documentation":"Use this when paginating results to indicate where to begin in your list of streaming distributions. The results include distributions in the list that occur after the marker. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response (which is also the ID of the last distribution on that page)."
+          "locationName":"Marker"
         },
         "MaxItems":{
           "shape":"string",
           "location":"querystring",
-          "locationName":"MaxItems",
-          "documentation":"The maximum number of streaming distributions you want in the response body."
+          "locationName":"MaxItems"
         }
-      },
-      "documentation":"The request to list your streaming distributions."
+      }
     },
     "ListStreamingDistributionsResult":{
       "type":"structure",
       "members":{
-        "StreamingDistributionList":{
-          "shape":"StreamingDistributionList",
-          "documentation":"The StreamingDistributionList type."
-        }
+        "StreamingDistributionList":{"shape":"StreamingDistributionList"}
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"StreamingDistributionList"
     },
     "LocationList":{
@@ -2763,24 +2029,11 @@
         "Prefix"
       ],
       "members":{
-        "Enabled":{
-          "shape":"boolean",
-          "documentation":"Specifies whether you want CloudFront to save access logs to an Amazon S3 bucket. If you do not want to enable logging when you create a distribution or if you want to disable logging for an existing distribution, specify false for Enabled, and specify empty Bucket and Prefix elements. If you specify false for Enabled but you specify values for Bucket, prefix and IncludeCookies, the values are automatically deleted."
-        },
-        "IncludeCookies":{
-          "shape":"boolean",
-          "documentation":"Specifies whether you want CloudFront to include cookies in access logs, specify true for IncludeCookies. If you choose to include cookies in logs, CloudFront logs all cookies regardless of how you configure the cache behaviors for this distribution. If you do not want to include cookies when you create a distribution or if you want to disable include cookies for an existing distribution, specify false for IncludeCookies."
-        },
-        "Bucket":{
-          "shape":"string",
-          "documentation":"The Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com."
-        },
-        "Prefix":{
-          "shape":"string",
-          "documentation":"An optional string that you want CloudFront to prefix to the access log filenames for this distribution, for example, myprefix/. If you want to enable logging, but you do not want to specify a prefix, you still must include an empty Prefix element in the Logging element."
-        }
-      },
-      "documentation":"A complex type that controls whether access logs are written for the distribution."
+        "Enabled":{"shape":"boolean"},
+        "IncludeCookies":{"shape":"boolean"},
+        "Bucket":{"shape":"string"},
+        "Prefix":{"shape":"string"}
+      }
     },
     "Method":{
       "type":"string",
@@ -2800,8 +2053,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"This operation requires a body. Ensure that the body is present and the Content-Type header is set."
+      "exception":true
     },
     "NoSuchCloudFrontOriginAccessIdentity":{
       "type":"structure",
@@ -2809,8 +2061,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":404},
-      "exception":true,
-      "documentation":"The specified origin access identity does not exist."
+      "exception":true
     },
     "NoSuchDistribution":{
       "type":"structure",
@@ -2818,8 +2069,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":404},
-      "exception":true,
-      "documentation":"The specified distribution does not exist."
+      "exception":true
     },
     "NoSuchInvalidation":{
       "type":"structure",
@@ -2827,8 +2077,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":404},
-      "exception":true,
-      "documentation":"The specified invalidation does not exist."
+      "exception":true
     },
     "NoSuchOrigin":{
       "type":"structure",
@@ -2836,8 +2085,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":404},
-      "exception":true,
-      "documentation":"No origin exists with the specified Origin Id."
+      "exception":true
     },
     "NoSuchStreamingDistribution":{
       "type":"structure",
@@ -2845,8 +2093,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":404},
-      "exception":true,
-      "documentation":"The specified streaming distribution does not exist."
+      "exception":true
     },
     "Origin":{
       "type":"structure",
@@ -2855,24 +2102,11 @@
         "DomainName"
       ],
       "members":{
-        "Id":{
-          "shape":"string",
-          "documentation":"A unique identifier for the origin. The value of Id must be unique within the distribution. You use the value of Id when you create a cache behavior. The Id identifies the origin that CloudFront routes a request to when the request matches the path pattern for that cache behavior."
-        },
-        "DomainName":{
-          "shape":"string",
-          "documentation":"Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin, for example, myawsbucket.s3.amazonaws.com. Custom origins: The DNS domain name for the HTTP server from which you want CloudFront to get objects for this origin, for example, www.example.com."
-        },
-        "S3OriginConfig":{
-          "shape":"S3OriginConfig",
-          "documentation":"A complex type that contains information about the Amazon S3 origin. If the origin is a custom origin, use the CustomOriginConfig element instead."
-        },
-        "CustomOriginConfig":{
-          "shape":"CustomOriginConfig",
-          "documentation":"A complex type that contains information about a custom origin. If the origin is an Amazon S3 bucket, use the S3OriginConfig element instead."
-        }
-      },
-      "documentation":"A complex type that describes the Amazon S3 bucket or the HTTP server (for example, a web server) from which CloudFront gets your files.You must create at least one origin."
+        "Id":{"shape":"string"},
+        "DomainName":{"shape":"string"},
+        "S3OriginConfig":{"shape":"S3OriginConfig"},
+        "CustomOriginConfig":{"shape":"CustomOriginConfig"}
+      }
     },
     "OriginList":{
       "type":"list",
@@ -2893,16 +2127,9 @@
       "type":"structure",
       "required":["Quantity"],
       "members":{
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of origins for this distribution."
-        },
-        "Items":{
-          "shape":"OriginList",
-          "documentation":"A complex type that contains origins for this distribution."
-        }
-      },
-      "documentation":"A complex type that contains information about origins for this distribution."
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"OriginList"}
+      }
     },
     "PathList":{
       "type":"list",
@@ -2915,16 +2142,9 @@
       "type":"structure",
       "required":["Quantity"],
       "members":{
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of objects that you want to invalidate."
-        },
-        "Items":{
-          "shape":"PathList",
-          "documentation":"A complex type that contains a list of the objects that you want to invalidate."
-        }
-      },
-      "documentation":"A complex type that contains information about the objects that you want to invalidate."
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"PathList"}
+      }
     },
     "PreconditionFailed":{
       "type":"structure",
@@ -2932,8 +2152,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":412},
-      "exception":true,
-      "documentation":"The precondition given in one or more of the request-header fields evaluated to false."
+      "exception":true
     },
     "PriceClass":{
       "type":"string",
@@ -2948,8 +2167,7 @@
       "required":["GeoRestriction"],
       "members":{
         "GeoRestriction":{"shape":"GeoRestriction"}
-      },
-      "documentation":"A complex type that identifies ways in which you want to restrict distribution of your content."
+      }
     },
     "S3Origin":{
       "type":"structure",
@@ -2958,27 +2176,16 @@
         "OriginAccessIdentity"
       ],
       "members":{
-        "DomainName":{
-          "shape":"string",
-          "documentation":"The DNS name of the S3 origin."
-        },
-        "OriginAccessIdentity":{
-          "shape":"string",
-          "documentation":"Your S3 origin's origin access identity."
-        }
-      },
-      "documentation":"A complex type that contains information about the Amazon S3 bucket from which you want CloudFront to get your media files for distribution."
+        "DomainName":{"shape":"string"},
+        "OriginAccessIdentity":{"shape":"string"}
+      }
     },
     "S3OriginConfig":{
       "type":"structure",
       "required":["OriginAccessIdentity"],
       "members":{
-        "OriginAccessIdentity":{
-          "shape":"string",
-          "documentation":"The CloudFront origin access identity to associate with the origin. Use an origin access identity to configure the origin so that end users can only access objects in an Amazon S3 bucket through CloudFront. If you want end users to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty OriginAccessIdentity element. To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty OriginAccessIdentity element. To replace the origin access identity, update the distribution configuration and specify the new origin access identity. Use the format origin-access-identity/cloudfront/Id where Id is the value that CloudFront returned in the Id element when you created the origin access identity."
-        }
-      },
-      "documentation":"A complex type that contains information about the Amazon S3 origin. If the origin is a custom origin, use the CustomOriginConfig element instead."
+        "OriginAccessIdentity":{"shape":"string"}
+      }
     },
     "SSLSupportMethod":{
       "type":"string",
@@ -2990,16 +2197,9 @@
     "Signer":{
       "type":"structure",
       "members":{
-        "AwsAccountNumber":{
-          "shape":"string",
-          "documentation":"Specifies an AWS account that can create signed URLs. Values: self, which indicates that the AWS account that was used to create the distribution can created signed URLs, or an AWS account number. Omit the dashes in the account number."
-        },
-        "KeyPairIds":{
-          "shape":"KeyPairIds",
-          "documentation":"A complex type that lists the active CloudFront key pairs, if any, that are associated with AwsAccountNumber."
-        }
-      },
-      "documentation":"A complex type that lists the AWS accounts that were included in the TrustedSigners complex type, as well as their active CloudFront key pair IDs, if any."
+        "AwsAccountNumber":{"shape":"string"},
+        "KeyPairIds":{"shape":"KeyPairIds"}
+      }
     },
     "SignerList":{
       "type":"list",
@@ -3018,32 +2218,13 @@
         "StreamingDistributionConfig"
       ],
       "members":{
-        "Id":{
-          "shape":"string",
-          "documentation":"The identifier for the streaming distribution. For example: EGTXBD79H29TRA8."
-        },
-        "Status":{
-          "shape":"string",
-          "documentation":"The current status of the streaming distribution. When the status is Deployed, the distribution's information is fully propagated throughout the Amazon CloudFront system."
-        },
-        "LastModifiedTime":{
-          "shape":"timestamp",
-          "documentation":"The date and time the distribution was last modified."
-        },
-        "DomainName":{
-          "shape":"string",
-          "documentation":"The domain name corresponding to the streaming distribution. For example: s5c39gqb8ow64r.cloudfront.net."
-        },
-        "ActiveTrustedSigners":{
-          "shape":"ActiveTrustedSigners",
-          "documentation":"CloudFront automatically adds this element to the response only if you've set up the distribution to serve private content with signed URLs. The element lists the key pair IDs that CloudFront is aware of for each trusted signer. The Signer child element lists the AWS account number of the trusted signer (or an empty Self element if the signer is you). The Signer element also includes the IDs of any active key pairs associated with the trusted signer's AWS account. If no KeyPairId element appears for a Signer, that signer can't create working signed URLs."
-        },
-        "StreamingDistributionConfig":{
-          "shape":"StreamingDistributionConfig",
-          "documentation":"The current configuration information for the streaming distribution."
-        }
-      },
-      "documentation":"A streaming distribution."
+        "Id":{"shape":"string"},
+        "Status":{"shape":"string"},
+        "LastModifiedTime":{"shape":"timestamp"},
+        "DomainName":{"shape":"string"},
+        "ActiveTrustedSigners":{"shape":"ActiveTrustedSigners"},
+        "StreamingDistributionConfig":{"shape":"StreamingDistributionConfig"}
+      }
     },
     "StreamingDistributionAlreadyExists":{
       "type":"structure",
@@ -3066,40 +2247,15 @@
         "Enabled"
       ],
       "members":{
-        "CallerReference":{
-          "shape":"string",
-          "documentation":"A unique number that ensures the request can't be replayed. If the CallerReference is new (no matter the content of the StreamingDistributionConfig object), a new streaming distribution is created. If the CallerReference is a value you already sent in a previous request to create a streaming distribution, and the content of the StreamingDistributionConfig is identical to the original request (ignoring white space), the response includes the same information returned to the original request. If the CallerReference is a value you already sent in a previous request to create a streaming distribution but the content of the StreamingDistributionConfig is different from the original request, CloudFront returns a DistributionAlreadyExists error."
-        },
-        "S3Origin":{
-          "shape":"S3Origin",
-          "documentation":"A complex type that contains information about the Amazon S3 bucket from which you want CloudFront to get your media files for distribution."
-        },
-        "Aliases":{
-          "shape":"Aliases",
-          "documentation":"A complex type that contains information about CNAMEs (alternate domain names), if any, for this streaming distribution."
-        },
-        "Comment":{
-          "shape":"string",
-          "documentation":"Any comments you want to include about the streaming distribution."
-        },
-        "Logging":{
-          "shape":"StreamingLoggingConfig",
-          "documentation":"A complex type that controls whether access logs are written for the streaming distribution."
-        },
-        "TrustedSigners":{
-          "shape":"TrustedSigners",
-          "documentation":"A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer Guide. If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution."
-        },
-        "PriceClass":{
-          "shape":"PriceClass",
-          "documentation":"A complex type that contains information about price class for this streaming distribution."
-        },
-        "Enabled":{
-          "shape":"boolean",
-          "documentation":"Whether the streaming distribution is enabled to accept end user requests for content."
-        }
-      },
-      "documentation":"The configuration for the streaming distribution."
+        "CallerReference":{"shape":"string"},
+        "S3Origin":{"shape":"S3Origin"},
+        "Aliases":{"shape":"Aliases"},
+        "Comment":{"shape":"string"},
+        "Logging":{"shape":"StreamingLoggingConfig"},
+        "TrustedSigners":{"shape":"TrustedSigners"},
+        "PriceClass":{"shape":"PriceClass"},
+        "Enabled":{"shape":"boolean"}
+      }
     },
     "StreamingDistributionList":{
       "type":"structure",
@@ -3110,32 +2266,13 @@
         "Quantity"
       ],
       "members":{
-        "Marker":{
-          "shape":"string",
-          "documentation":"The value you provided for the Marker request parameter."
-        },
-        "NextMarker":{
-          "shape":"string",
-          "documentation":"If IsTruncated is true, this element is present and contains the value you can use for the Marker request parameter to continue listing your streaming distributions where they left off."
-        },
-        "MaxItems":{
-          "shape":"integer",
-          "documentation":"The value you provided for the MaxItems request parameter."
-        },
-        "IsTruncated":{
-          "shape":"boolean",
-          "documentation":"A flag that indicates whether more streaming distributions remain to be listed. If your results were truncated, you can make a follow-up pagination request using the Marker request parameter to retrieve more distributions in the list."
-        },
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of streaming distributions that were created by the current AWS account."
-        },
-        "Items":{
-          "shape":"StreamingDistributionSummaryList",
-          "documentation":"A complex type that contains one StreamingDistributionSummary element for each distribution that was created by the current AWS account."
-        }
-      },
-      "documentation":"A streaming distribution list."
+        "Marker":{"shape":"string"},
+        "NextMarker":{"shape":"string"},
+        "MaxItems":{"shape":"integer"},
+        "IsTruncated":{"shape":"boolean"},
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"StreamingDistributionSummaryList"}
+      }
     },
     "StreamingDistributionNotDisabled":{
       "type":"structure",
@@ -3160,45 +2297,17 @@
         "Enabled"
       ],
       "members":{
-        "Id":{
-          "shape":"string",
-          "documentation":"The identifier for the distribution. For example: EDFDVBD632BHDS5."
-        },
-        "Status":{
-          "shape":"string",
-          "documentation":"Indicates the current status of the distribution. When the status is Deployed, the distribution's information is fully propagated throughout the Amazon CloudFront system."
-        },
-        "LastModifiedTime":{
-          "shape":"timestamp",
-          "documentation":"The date and time the distribution was last modified."
-        },
-        "DomainName":{
-          "shape":"string",
-          "documentation":"The domain name corresponding to the distribution. For example: d604721fxaaqy9.cloudfront.net."
-        },
-        "S3Origin":{
-          "shape":"S3Origin",
-          "documentation":"A complex type that contains information about the Amazon S3 bucket from which you want CloudFront to get your media files for distribution."
-        },
-        "Aliases":{
-          "shape":"Aliases",
-          "documentation":"A complex type that contains information about CNAMEs (alternate domain names), if any, for this streaming distribution."
-        },
-        "TrustedSigners":{
-          "shape":"TrustedSigners",
-          "documentation":"A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer Guide. If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution."
-        },
-        "Comment":{
-          "shape":"string",
-          "documentation":"The comment originally specified when this distribution was created."
-        },
+        "Id":{"shape":"string"},
+        "Status":{"shape":"string"},
+        "LastModifiedTime":{"shape":"timestamp"},
+        "DomainName":{"shape":"string"},
+        "S3Origin":{"shape":"S3Origin"},
+        "Aliases":{"shape":"Aliases"},
+        "TrustedSigners":{"shape":"TrustedSigners"},
+        "Comment":{"shape":"string"},
         "PriceClass":{"shape":"PriceClass"},
-        "Enabled":{
-          "shape":"boolean",
-          "documentation":"Whether the distribution is enabled to accept end user requests for content."
-        }
-      },
-      "documentation":"A summary of the information for an Amazon CloudFront streaming distribution."
+        "Enabled":{"shape":"boolean"}
+      }
     },
     "StreamingDistributionSummaryList":{
       "type":"list",
@@ -3215,20 +2324,10 @@
         "Prefix"
       ],
       "members":{
-        "Enabled":{
-          "shape":"boolean",
-          "documentation":"Specifies whether you want CloudFront to save access logs to an Amazon S3 bucket. If you do not want to enable logging when you create a streaming distribution or if you want to disable logging for an existing streaming distribution, specify false for Enabled, and specify empty Bucket and Prefix elements. If you specify false for Enabled but you specify values for Bucket and Prefix, the values are automatically deleted."
-        },
-        "Bucket":{
-          "shape":"string",
-          "documentation":"The Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com."
-        },
-        "Prefix":{
-          "shape":"string",
-          "documentation":"An optional string that you want CloudFront to prefix to the access log filenames for this streaming distribution, for example, myprefix/. If you want to enable logging, but you do not want to specify a prefix, you still must include an empty Prefix element in the Logging element."
-        }
-      },
-      "documentation":"A complex type that controls whether access logs are written for this streaming distribution."
+        "Enabled":{"shape":"boolean"},
+        "Bucket":{"shape":"string"},
+        "Prefix":{"shape":"string"}
+      }
     },
     "TooManyCacheBehaviors":{
       "type":"structure",
@@ -3236,8 +2335,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"You cannot create anymore cache behaviors for the distribution."
+      "exception":true
     },
     "TooManyCertificates":{
       "type":"structure",
@@ -3245,8 +2343,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"You cannot create anymore custom ssl certificates."
+      "exception":true
     },
     "TooManyCloudFrontOriginAccessIdentities":{
       "type":"structure",
@@ -3254,8 +2351,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Processing your request would cause you to exceed the maximum number of origin access identities allowed."
+      "exception":true
     },
     "TooManyCookieNamesInWhiteList":{
       "type":"structure",
@@ -3263,8 +2359,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Your request contains more cookie names in the whitelist than are allowed per cache behavior."
+      "exception":true
     },
     "TooManyDistributionCNAMEs":{
       "type":"structure",
@@ -3272,8 +2367,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Your request contains more CNAMEs than are allowed per distribution."
+      "exception":true
     },
     "TooManyDistributions":{
       "type":"structure",
@@ -3281,8 +2375,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Processing your request would cause you to exceed the maximum number of distributions allowed."
+      "exception":true
     },
     "TooManyHeadersInForwardedValues":{
       "type":"structure",
@@ -3298,8 +2391,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"You have exceeded the maximum number of allowable InProgress invalidation batch requests, or invalidation objects."
+      "exception":true
     },
     "TooManyOrigins":{
       "type":"structure",
@@ -3307,8 +2399,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"You cannot create anymore origins for the distribution."
+      "exception":true
     },
     "TooManyStreamingDistributionCNAMEs":{
       "type":"structure",
@@ -3324,8 +2415,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Processing your request would cause you to exceed the maximum number of streaming distributions allowed."
+      "exception":true
     },
     "TooManyTrustedSigners":{
       "type":"structure",
@@ -3333,8 +2423,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Your request contains more trusted signers than are allowed per distribution."
+      "exception":true
     },
     "TrustedSignerDoesNotExist":{
       "type":"structure",
@@ -3342,8 +2431,7 @@
         "Message":{"shape":"string"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"One or more of your trusted signers do not exist."
+      "exception":true
     },
     "TrustedSigners":{
       "type":"structure",
@@ -3352,20 +2440,10 @@
         "Quantity"
       ],
       "members":{
-        "Enabled":{
-          "shape":"boolean",
-          "documentation":"Specifies whether you want to require end users to use signed URLs to access the files specified by PathPattern and TargetOriginId."
-        },
-        "Quantity":{
-          "shape":"integer",
-          "documentation":"The number of trusted signers for this cache behavior."
-        },
-        "Items":{
-          "shape":"AwsAccountNumberList",
-          "documentation":"Optional: A complex type that contains trusted signers for this cache behavior. If Quantity is 0, you can omit Items."
-        }
-      },
-      "documentation":"A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer Guide. If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution."
+        "Enabled":{"shape":"boolean"},
+        "Quantity":{"shape":"integer"},
+        "Items":{"shape":"AwsAccountNumberList"}
+      }
     },
     "UpdateCloudFrontOriginAccessIdentityRequest":{
       "type":"structure",
@@ -3376,41 +2454,32 @@
       "members":{
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
-          "documentation":"The identity's configuration information.",
           "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         },
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The identity's id."
+          "locationName":"Id"
         },
         "IfMatch":{
           "shape":"string",
           "location":"header",
-          "locationName":"If-Match",
-          "documentation":"The value of the ETag header you received when retrieving the identity's configuration. For example: E2QWRUHAPOMQZL."
+          "locationName":"If-Match"
         }
       },
-      "documentation":"The request to update an origin access identity.",
       "payload":"CloudFrontOriginAccessIdentityConfig"
     },
     "UpdateCloudFrontOriginAccessIdentityResult":{
       "type":"structure",
       "members":{
-        "CloudFrontOriginAccessIdentity":{
-          "shape":"CloudFrontOriginAccessIdentity",
-          "documentation":"The origin access identity's information."
-        },
+        "CloudFrontOriginAccessIdentity":{"shape":"CloudFrontOriginAccessIdentity"},
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the configuration. For example: E2QWRUHAPOMQZL."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"CloudFrontOriginAccessIdentity"
     },
     "UpdateDistributionRequest":{
@@ -3422,41 +2491,32 @@
       "members":{
         "DistributionConfig":{
           "shape":"DistributionConfig",
-          "documentation":"The distribution's configuration information.",
           "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"DistributionConfig"
         },
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The distribution's id."
+          "locationName":"Id"
         },
         "IfMatch":{
           "shape":"string",
           "location":"header",
-          "locationName":"If-Match",
-          "documentation":"The value of the ETag header you received when retrieving the distribution's configuration. For example: E2QWRUHAPOMQZL."
+          "locationName":"If-Match"
         }
       },
-      "documentation":"The request to update a distribution.",
       "payload":"DistributionConfig"
     },
     "UpdateDistributionResult":{
       "type":"structure",
       "members":{
-        "Distribution":{
-          "shape":"Distribution",
-          "documentation":"The distribution's information."
-        },
+        "Distribution":{"shape":"Distribution"},
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the configuration. For example: E2QWRUHAPOMQZL."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"Distribution"
     },
     "UpdateStreamingDistributionRequest":{
@@ -3468,60 +2528,41 @@
       "members":{
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
-          "documentation":"The streaming distribution's configuration information.",
           "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"StreamingDistributionConfig"
         },
         "Id":{
           "shape":"string",
           "location":"uri",
-          "locationName":"Id",
-          "documentation":"The streaming distribution's id."
+          "locationName":"Id"
         },
         "IfMatch":{
           "shape":"string",
           "location":"header",
-          "locationName":"If-Match",
-          "documentation":"The value of the ETag header you received when retrieving the streaming distribution's configuration. For example: E2QWRUHAPOMQZL."
+          "locationName":"If-Match"
         }
       },
-      "documentation":"The request to update a streaming distribution.",
       "payload":"StreamingDistributionConfig"
     },
     "UpdateStreamingDistributionResult":{
       "type":"structure",
       "members":{
-        "StreamingDistribution":{
-          "shape":"StreamingDistribution",
-          "documentation":"The streaming distribution's information."
-        },
+        "StreamingDistribution":{"shape":"StreamingDistribution"},
         "ETag":{
           "shape":"string",
           "location":"header",
-          "locationName":"ETag",
-          "documentation":"The current version of the configuration. For example: E2QWRUHAPOMQZL."
+          "locationName":"ETag"
         }
       },
-      "documentation":"The returned result of the corresponding request.",
       "payload":"StreamingDistribution"
     },
     "ViewerCertificate":{
       "type":"structure",
       "members":{
-        "IAMCertificateId":{
-          "shape":"string",
-          "documentation":"If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), specify the IAM certificate identifier of the custom viewer certificate for this distribution. Specify either this value or CloudFrontDefaultCertificate."
-        },
-        "CloudFrontDefaultCertificate":{
-          "shape":"boolean",
-          "documentation":"If you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name of your distribution in your object URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg), set to true. Omit this value if you are setting an IAMCertificateId."
-        },
-        "SSLSupportMethod":{
-          "shape":"SSLSupportMethod",
-          "documentation":"If you specify a value for IAMCertificateId, you must also specify how you want CloudFront to serve HTTPS requests. Valid values are vip and sni-only. If you specify vip, CloudFront uses dedicated IP addresses for your content and can respond to HTTPS requests from any viewer. However, you must request permission to use this feature, and you incur additional monthly charges. If you specify sni-only, CloudFront can only respond to HTTPS requests from viewers that support Server Name Indication (SNI). All modern browsers support SNI, but some browsers still in use don't support SNI. Do not specify a value for SSLSupportMethod if you specified true for CloudFrontDefaultCertificate."
-        }
-      },
-      "documentation":"A complex type that contains information about viewer certificates for this distribution."
+        "IAMCertificateId":{"shape":"string"},
+        "CloudFrontDefaultCertificate":{"shape":"boolean"},
+        "SSLSupportMethod":{"shape":"SSLSupportMethod"}
+      }
     },
     "ViewerProtocolPolicy":{
       "type":"string",

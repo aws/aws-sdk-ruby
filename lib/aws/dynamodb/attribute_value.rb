@@ -4,6 +4,7 @@ require 'set'
 
 module Aws
   module DynamoDB
+    # @api private
     class AttributeValue
 
       def initialize

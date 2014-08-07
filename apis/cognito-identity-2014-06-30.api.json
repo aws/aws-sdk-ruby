@@ -8,7 +8,6 @@
     "targetPrefix":"AWSCognitoIdentityService",
     "protocol":"json"
   },
-  "documentation":"<fullname>Amazon Cognito</fullname> <p>Amazon Cognito is a web service that facilitates the delivery of scoped, temporary credentials to mobile devices or other untrusted environments. Amazon Cognito uniquely identifies a device or user and supplies the user with a consistent identity throughout the lifetime of an application.</p> <p>Amazon Cognito lets users authenticate with third-party identity providers (Facebook, Google, or Login with Amazon). As a developer, you decide which identity providers to trust. You can also choose to support unauthenticated access from your application. Your users are provided with Cognito tokens that uniquely identify their device and any information provided about third-party logins.</p>",
   "operations":{
     "CreateIdentityPool":{
       "name":"CreateIdentityPool",
@@ -16,53 +15,40 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"CreateIdentityPoolInput",
-        "documentation":"<p>Input to the CreateIdentityPool action.</p>"
-      },
-      "output":{
-        "shape":"IdentityPool",
-        "documentation":"An object representing a Cognito identity pool."
-      },
+      "input":{"shape":"CreateIdentityPoolInput"},
+      "output":{"shape":"IdentityPool"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"ResourceConflictException",
           "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
+          "fault":true
         },
         {
           "shape":"LimitExceededException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when the total number of user pools has exceeded a preset limit."
+          "exception":true
         }
-      ],
-      "documentation":"<p>Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account.</p>"
+      ]
     },
     "DeleteIdentityPool":{
       "name":"DeleteIdentityPool",
@@ -70,43 +56,34 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DeleteIdentityPoolInput",
-        "documentation":"<p>Input to the DeleteIdentityPool action.</p>"
-      },
+      "input":{"shape":"DeleteIdentityPoolInput"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
+          "fault":true
         }
-      ],
-      "documentation":"<p>Deletes a user pool. Once a pool is deleted, users will not be able to authenticate with the pool.</p>"
+      ]
     },
     "DescribeIdentityPool":{
       "name":"DescribeIdentityPool",
@@ -114,47 +91,35 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"DescribeIdentityPoolInput",
-        "documentation":"Input to the DescribeIdentityPool action."
-      },
-      "output":{
-        "shape":"IdentityPool",
-        "documentation":"An object representing a Cognito identity pool."
-      },
+      "input":{"shape":"DescribeIdentityPoolInput"},
+      "output":{"shape":"IdentityPool"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
+          "fault":true
         }
-      ],
-      "documentation":"<p>Gets details about a particular identity pool, including the pool name, ID description, creation date, and current number of users.</p>"
+      ]
     },
     "GetId":{
       "name":"GetId",
@@ -162,59 +127,45 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetIdInput",
-        "documentation":"Input to the GetId action."
-      },
-      "output":{
-        "shape":"GetIdResponse",
-        "documentation":"Returned in the response to a GetId request."
-      },
+      "input":{"shape":"GetIdInput"},
+      "output":{"shape":"GetIdResponse"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"ResourceConflictException",
           "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
+          "fault":true
         },
         {
           "shape":"LimitExceededException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown when the total number of user pools has exceeded a preset limit."
+          "exception":true
         }
-      ],
-      "documentation":"<p>Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an implicit linked account.</p>"
+      ]
     },
     "GetOpenIdToken":{
       "name":"GetOpenIdToken",
@@ -222,53 +173,40 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"GetOpenIdTokenInput",
-        "documentation":"Input to the GetOpenIdToken action."
-      },
-      "output":{
-        "shape":"GetOpenIdTokenResponse",
-        "documentation":"Returned in response to a successful GetOpenIdToken request."
-      },
+      "input":{"shape":"GetOpenIdTokenInput"},
+      "output":{"shape":"GetOpenIdTokenResponse"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"ResourceConflictException",
           "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
+          "fault":true
         }
-      ],
-      "documentation":"<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned from GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link.</p>"
+      ]
     },
     "ListIdentities":{
       "name":"ListIdentities",
@@ -276,47 +214,35 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListIdentitiesInput",
-        "documentation":"Input to the ListIdentities action."
-      },
-      "output":{
-        "shape":"ListIdentitiesResponse",
-        "documentation":"The response to a ListIdentities request."
-      },
+      "input":{"shape":"ListIdentitiesInput"},
+      "output":{"shape":"ListIdentitiesResponse"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
+          "fault":true
         }
-      ],
-      "documentation":"<p>Lists the identities in a pool.</p>"
+      ]
     },
     "ListIdentityPools":{
       "name":"ListIdentityPools",
@@ -324,41 +250,30 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"ListIdentityPoolsInput",
-        "documentation":"Input to the ListIdentityPools action."
-      },
-      "output":{
-        "shape":"ListIdentityPoolsResponse",
-        "documentation":"The result of a successful ListIdentityPools action."
-      },
+      "input":{"shape":"ListIdentityPoolsInput"},
+      "output":{"shape":"ListIdentityPoolsResponse"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
+          "fault":true
         }
-      ],
-      "documentation":"<p>Lists all of the Cognito identity pools registered for your account.</p>"
+      ]
     },
     "UnlinkIdentity":{
       "name":"UnlinkIdentity",
@@ -366,49 +281,39 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"UnlinkIdentityInput",
-        "documentation":"Input to the UnlinkIdentity action."
-      },
+      "input":{"shape":"UnlinkIdentityInput"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"ResourceConflictException",
           "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
+          "fault":true
         }
-      ],
-      "documentation":"<p>Unlinks a federated identity from an existing account. Unlinked logins will be considered new identities next time they are seen. Removing the last linked login will make this identity inaccessible.</p>"
+      ]
     },
     "UpdateIdentityPool":{
       "name":"UpdateIdentityPool",
@@ -416,53 +321,40 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{
-        "shape":"IdentityPool",
-        "documentation":"An object representing a Cognito identity pool."
-      },
-      "output":{
-        "shape":"IdentityPool",
-        "documentation":"An object representing a Cognito identity pool."
-      },
+      "input":{"shape":"IdentityPool"},
+      "output":{"shape":"IdentityPool"},
       "errors":[
         {
           "shape":"InvalidParameterException",
           "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"Thrown for missing or bad input parameter(s)."
+          "exception":true
         },
         {
           "shape":"ResourceNotFoundException",
           "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
+          "exception":true
         },
         {
           "shape":"NotAuthorizedException",
           "error":{"httpStatusCode":403},
-          "exception":true,
-          "documentation":"Thrown when a user is not authorized to access the requested resource."
+          "exception":true
         },
         {
           "shape":"ResourceConflictException",
           "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"Thrown when a user tries to use a login which is already linked to another account."
+          "exception":true
         },
         {
           "shape":"TooManyRequestsException",
           "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"Thrown when a request is throttled."
+          "exception":true
         },
         {
           "shape":"InternalErrorException",
           "exception":true,
-          "fault":true,
-          "documentation":"Thrown when the service encounters an error during processing the request."
+          "fault":true
         }
-      ],
-      "documentation":"<p>Updates a user pool.</p>"
+      ]
     }
   },
   "shapes":{
@@ -479,42 +371,24 @@
         "AllowUnauthenticatedIdentities"
       ],
       "members":{
-        "IdentityPoolName":{
-          "shape":"IdentityPoolName",
-          "documentation":"<p>A string that you provide.</p>"
-        },
-        "AllowUnauthenticatedIdentities":{
-          "shape":"IdentityPoolUnauthenticated",
-          "documentation":"<p>TRUE if the identity pool supports unauthenticated logins.</p>"
-        },
-        "SupportedLoginProviders":{
-          "shape":"IdentityProviders",
-          "documentation":"<p>Optional key:value pairs mapping provider names to provider app IDs.</p>"
-        }
-      },
-      "documentation":"<p>Input to the CreateIdentityPool action.</p>"
+        "IdentityPoolName":{"shape":"IdentityPoolName"},
+        "AllowUnauthenticatedIdentities":{"shape":"IdentityPoolUnauthenticated"},
+        "SupportedLoginProviders":{"shape":"IdentityProviders"}
+      }
     },
     "DeleteIdentityPoolInput":{
       "type":"structure",
       "required":["IdentityPoolId"],
       "members":{
-        "IdentityPoolId":{
-          "shape":"IdentityPoolId",
-          "documentation":"An identity pool ID in the format REGION:GUID."
-        }
-      },
-      "documentation":"<p>Input to the DeleteIdentityPool action.</p>"
+        "IdentityPoolId":{"shape":"IdentityPoolId"}
+      }
     },
     "DescribeIdentityPoolInput":{
       "type":"structure",
       "required":["IdentityPoolId"],
       "members":{
-        "IdentityPoolId":{
-          "shape":"IdentityPoolId",
-          "documentation":"An identity pool ID in the format REGION:GUID."
-        }
-      },
-      "documentation":"Input to the DescribeIdentityPool action."
+        "IdentityPoolId":{"shape":"IdentityPoolId"}
+      }
     },
     "GetIdInput":{
       "type":"structure",
@@ -523,59 +397,31 @@
         "IdentityPoolId"
       ],
       "members":{
-        "AccountId":{
-          "shape":"AccountId",
-          "documentation":"A standard AWS account ID (9+ digits)."
-        },
-        "IdentityPoolId":{
-          "shape":"IdentityPoolId",
-          "documentation":"An identity pool ID in the format REGION:GUID."
-        },
-        "Logins":{
-          "shape":"LoginsMap",
-          "documentation":"A set of optional name/value pairs that map provider names to provider tokens."
-        }
-      },
-      "documentation":"Input to the GetId action."
+        "AccountId":{"shape":"AccountId"},
+        "IdentityPoolId":{"shape":"IdentityPoolId"},
+        "Logins":{"shape":"LoginsMap"}
+      }
     },
     "GetIdResponse":{
       "type":"structure",
       "members":{
-        "IdentityId":{
-          "shape":"IdentityId",
-          "documentation":"A unique identifier in the format REGION:GUID."
-        }
-      },
-      "documentation":"Returned in the response to a GetId request."
+        "IdentityId":{"shape":"IdentityId"}
+      }
     },
     "GetOpenIdTokenInput":{
       "type":"structure",
       "required":["IdentityId"],
       "members":{
-        "IdentityId":{
-          "shape":"IdentityId",
-          "documentation":"A unique identifier in the format REGION:GUID."
-        },
-        "Logins":{
-          "shape":"LoginsMap",
-          "documentation":"A set of optional name/value pairs that map provider names to provider tokens."
-        }
-      },
-      "documentation":"Input to the GetOpenIdToken action."
+        "IdentityId":{"shape":"IdentityId"},
+        "Logins":{"shape":"LoginsMap"}
+      }
     },
     "GetOpenIdTokenResponse":{
       "type":"structure",
       "members":{
-        "IdentityId":{
-          "shape":"IdentityId",
-          "documentation":"A unique identifier in the format REGION:GUID. Note that the IdentityId returned may not match the one passed on input."
-        },
-        "Token":{
-          "shape":"OIDCToken",
-          "documentation":"An OpenID token."
-        }
-      },
-      "documentation":"Returned in response to a successful GetOpenIdToken request."
+        "IdentityId":{"shape":"IdentityId"},
+        "Token":{"shape":"OIDCToken"}
+      }
     },
     "IdentitiesList":{
       "type":"list",
@@ -584,16 +430,9 @@
     "IdentityDescription":{
       "type":"structure",
       "members":{
-        "IdentityId":{
-          "shape":"IdentityId",
-          "documentation":"A unique identifier in the format REGION:GUID."
-        },
-        "Logins":{
-          "shape":"LoginsList",
-          "documentation":"A set of optional name/value pairs that map provider names to provider tokens."
-        }
-      },
-      "documentation":"A description of the identity."
+        "IdentityId":{"shape":"IdentityId"},
+        "Logins":{"shape":"LoginsList"}
+      }
     },
     "IdentityId":{
       "type":"string",
@@ -609,24 +448,11 @@
         "AllowUnauthenticatedIdentities"
       ],
       "members":{
-        "IdentityPoolId":{
-          "shape":"IdentityPoolId",
-          "documentation":"An identity pool ID in the format REGION:GUID."
-        },
-        "IdentityPoolName":{
-          "shape":"IdentityPoolName",
-          "documentation":"<p>A string that you provide.</p>"
-        },
-        "AllowUnauthenticatedIdentities":{
-          "shape":"IdentityPoolUnauthenticated",
-          "documentation":"TRUE if the identity pool supports unauthenticated logins."
-        },
-        "SupportedLoginProviders":{
-          "shape":"IdentityProviders",
-          "documentation":"<p>Optional key:value pairs mapping provider names to provider app IDs.</p>"
-        }
-      },
-      "documentation":"An object representing a Cognito identity pool."
+        "IdentityPoolId":{"shape":"IdentityPoolId"},
+        "IdentityPoolName":{"shape":"IdentityPoolName"},
+        "AllowUnauthenticatedIdentities":{"shape":"IdentityPoolUnauthenticated"},
+        "SupportedLoginProviders":{"shape":"IdentityProviders"}
+      }
     },
     "IdentityPoolId":{
       "type":"string",
@@ -643,16 +469,9 @@
     "IdentityPoolShortDescription":{
       "type":"structure",
       "members":{
-        "IdentityPoolId":{
-          "shape":"IdentityPoolId",
-          "documentation":"An identity pool ID in the format REGION:GUID."
-        },
-        "IdentityPoolName":{
-          "shape":"IdentityPoolName",
-          "documentation":"A string that you provide."
-        }
-      },
-      "documentation":"A description of the identity pool."
+        "IdentityPoolId":{"shape":"IdentityPoolId"},
+        "IdentityPoolName":{"shape":"IdentityPoolName"}
+      }
     },
     "IdentityPoolUnauthenticated":{"type":"boolean"},
     "IdentityPoolsList":{
@@ -686,38 +505,26 @@
     "InternalErrorException":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"The message returned by an InternalErrorException."
-        }
+        "message":{"shape":"String"}
       },
       "exception":true,
-      "fault":true,
-      "documentation":"Thrown when the service encounters an error during processing the request."
+      "fault":true
     },
     "InvalidParameterException":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"The message returned by an InvalidParameterException."
-        }
+        "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Thrown for missing or bad input parameter(s)."
+      "exception":true
     },
     "LimitExceededException":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"The message returned by a LimitExceededException."
-        }
+        "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"Thrown when the total number of user pools has exceeded a preset limit."
+      "exception":true
     },
     "ListIdentitiesInput":{
       "type":"structure",
@@ -726,67 +533,33 @@
         "MaxResults"
       ],
       "members":{
-        "IdentityPoolId":{
-          "shape":"IdentityPoolId",
-          "documentation":"An identity pool ID in the format REGION:GUID."
-        },
-        "MaxResults":{
-          "shape":"QueryLimit",
-          "documentation":"The maximum number of identities to return."
-        },
-        "NextToken":{
-          "shape":"PaginationKey",
-          "documentation":"A pagination token."
-        }
-      },
-      "documentation":"Input to the ListIdentities action."
+        "IdentityPoolId":{"shape":"IdentityPoolId"},
+        "MaxResults":{"shape":"QueryLimit"},
+        "NextToken":{"shape":"PaginationKey"}
+      }
     },
     "ListIdentitiesResponse":{
       "type":"structure",
       "members":{
-        "IdentityPoolId":{
-          "shape":"IdentityPoolId",
-          "documentation":"An identity pool ID in the format REGION:GUID."
-        },
-        "Identities":{
-          "shape":"IdentitiesList",
-          "documentation":"An object containing a set of identities and associated mappings."
-        },
-        "NextToken":{
-          "shape":"PaginationKey",
-          "documentation":"A pagination token."
-        }
-      },
-      "documentation":"The response to a ListIdentities request."
+        "IdentityPoolId":{"shape":"IdentityPoolId"},
+        "Identities":{"shape":"IdentitiesList"},
+        "NextToken":{"shape":"PaginationKey"}
+      }
     },
     "ListIdentityPoolsInput":{
       "type":"structure",
       "required":["MaxResults"],
       "members":{
-        "MaxResults":{
-          "shape":"QueryLimit",
-          "documentation":"The maximum number of identities to return."
-        },
-        "NextToken":{
-          "shape":"PaginationKey",
-          "documentation":"A pagination token."
-        }
-      },
-      "documentation":"Input to the ListIdentityPools action."
+        "MaxResults":{"shape":"QueryLimit"},
+        "NextToken":{"shape":"PaginationKey"}
+      }
     },
     "ListIdentityPoolsResponse":{
       "type":"structure",
       "members":{
-        "IdentityPools":{
-          "shape":"IdentityPoolsList",
-          "documentation":"The identity pools returned by the ListIdentityPools action."
-        },
-        "NextToken":{
-          "shape":"PaginationKey",
-          "documentation":"A pagination token."
-        }
-      },
-      "documentation":"The result of a successful ListIdentityPools action."
+        "IdentityPools":{"shape":"IdentityPoolsList"},
+        "NextToken":{"shape":"PaginationKey"}
+      }
     },
     "LoginsList":{
       "type":"list",
@@ -801,14 +574,10 @@
     "NotAuthorizedException":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"The message returned by a NotAuthorizedException"
-        }
+        "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":403},
-      "exception":true,
-      "documentation":"Thrown when a user is not authorized to access the requested resource."
+      "exception":true
     },
     "OIDCToken":{"type":"string"},
     "PaginationKey":{
@@ -823,39 +592,27 @@
     "ResourceConflictException":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"The message returned by a ResourceConflictException."
-        }
+        "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"Thrown when a user tries to use a login which is already linked to another account."
+      "exception":true
     },
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"The message returned by a ResourceNotFoundException."
-        }
+        "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":404},
-      "exception":true,
-      "documentation":"Thrown when the requested resource (for example, a dataset or record) does not exist."
+      "exception":true
     },
     "String":{"type":"string"},
     "TooManyRequestsException":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"Message returned by a TooManyRequestsException"
-        }
+        "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":429},
-      "exception":true,
-      "documentation":"Thrown when a request is throttled."
+      "exception":true
     },
     "UnlinkIdentityInput":{
       "type":"structure",
@@ -865,20 +622,10 @@
         "LoginsToRemove"
       ],
       "members":{
-        "IdentityId":{
-          "shape":"IdentityId",
-          "documentation":"A unique identifier in the format REGION:GUID."
-        },
-        "Logins":{
-          "shape":"LoginsMap",
-          "documentation":"A set of optional name/value pairs that map provider names to provider tokens."
-        },
-        "LoginsToRemove":{
-          "shape":"LoginsList",
-          "documentation":"Provider names to unlink from this identity."
-        }
-      },
-      "documentation":"Input to the UnlinkIdentity action."
+        "IdentityId":{"shape":"IdentityId"},
+        "Logins":{"shape":"LoginsMap"},
+        "LoginsToRemove":{"shape":"LoginsList"}
+      }
     }
   }
 }
