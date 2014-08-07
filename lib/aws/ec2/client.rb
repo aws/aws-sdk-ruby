@@ -19,17 +19,7 @@ module AWS
 
       API_VERSION = '2014-05-01'
 
-      def sign_request request
-        version = @config.ec2_signature_version ?
-          @config.ec2_signature_version.to_sym :
-          (@region =~ /cn-/ ? :v4 : :v2)
-        case version
-        when :v4 then v4_signer.sign_request(request)
-        when :v2 then v2_signer.sign_request(request)
-        else
-          raise "invalid signature version #{version.inspect}"
-        end
-      end
+      signature_version :Version4, 'ec2'
 
       def retryable_error?(response)
         if response.error.is_a?(Errors::InsufficientInstanceCapacity)
