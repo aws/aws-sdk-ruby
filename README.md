@@ -9,6 +9,30 @@ than the clients in version 1 of the Ruby SDK.
 
 For version 1.0 of the Ruby SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
 
+#### 2.0.0.rc15 Upgrading Notes
+
+RC15 updates the `Aws::DynamoDB::Client` API operations to accept and return
+simple attribute values. Prior to rc14 values were specified as:
+
+    { s: 'string-value' }
+    { n: "5.0" }
+
+This update applies a plugin that allows users to specify values using simple
+Ruby types, such as Integer, Float, Set, String, etc.
+
+    "string-value"
+    5.0
+
+This affects **every** DynamoDB request and response structure
+that accepts or returns an attribute value. To revert to the older format,
+disable simple attributes:
+
+    # disable this new default behavior
+    Aws::DynamoDB::Client.new(simple_attributes: false)
+
+**Please Note** - RC15 may be the final release candidate version prior to
+a 2.0.0 final release of `aws-sdk-core`.
+
 #### 2.0.0.rc14 Upgrading Notes
 
 RC14 simplifies the API versioning strategy. This may require small changes for
