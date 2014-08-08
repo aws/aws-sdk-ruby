@@ -9,7 +9,7 @@ YARD::Tags::Library.define_tag('API_VERSION', :api_version)
 YARD::Templates::Engine.register_template_path(File.join(File.dirname(__FILE__), '..', 'templates'))
 
 YARD::Parser::SourceParser.after_parse_list do
-  Aws.service_added do |_, svc_module, options|
+  Aws.services.each do |_, svc_module, options|
     docs_path = options[:api].sub('.api.', '.docs.')
     Aws::Api::Documenter.new(svc_module, docs_path).apply
   end

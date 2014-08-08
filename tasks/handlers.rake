@@ -1,7 +1,7 @@
 def service_names
   line = "    "
   service_names = ""
-  Aws.service_added do |name, _, _|
+  Aws.services.each do |name, _, _|
     if (line + name).size > 72
       service_names << line.sub(/, $/, '')
       service_names << "\n"
@@ -72,7 +72,7 @@ end
 desc "List availalbe operation names for a service"
 task "operations:svc" => "operations"
 
-Aws.service_added do |svc_name, svc_module, _|
+Aws.services.each do |svc_name, svc_module, _|
 
   svc_identifier = svc_name.downcase
 
