@@ -1,5 +1,6 @@
 module Seahorse
   module Model
+    # @api private
     class ShapeMap
 
       # @param [Hash<String,Hash>] shape_defs ({}) A hash of shape definitions.

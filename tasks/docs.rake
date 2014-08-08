@@ -37,11 +37,11 @@ def supported_services_table
   line = "| %-35s | %-25s | %-30s |\n"
 
   lines = []
-  Aws.client_classes.each do |client_class|
+  Aws.service_added do |svc_name, svc_module, _|
+    client_class = svc_module.const_get(:Client)
     full_name = client_class.api.metadata('serviceFullName')
-    module_name = client_class.name.split('::')[1]
     version = client_class.api.version
-    lines << line % [full_name, module_name, version]
+    lines << line % [full_name, svc_name, version]
   end
 
   [

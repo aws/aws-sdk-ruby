@@ -127,7 +127,7 @@ module Aws
 
             # build the test service class by sub-classing the original
             # service class
-            client_class = Aws.services[svc_name.to_sym][0].const_get(:Client)
+            client_class = Aws.const_get(svc_name).const_get(:Client)
 
             client = client_class.new(f.config.merge(raise_response_errors: false))
             req = client.build_request(f.operation, f.params)

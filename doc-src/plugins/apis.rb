@@ -10,7 +10,7 @@ YARD::Templates::Engine.register_template_path(File.join(File.dirname(__FILE__),
 
 YARD::Parser::SourceParser.after_parse_list do
   Aws.service_added do |_, svc_module, options|
-    docs_path = options['api'].sub('.api.', '.docs.')
+    docs_path = options[:api].sub('.api.', '.docs.')
     Aws::Api::Documenter.new(svc_module, docs_path).apply
   end
 end

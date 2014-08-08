@@ -17,7 +17,7 @@ module Aws
         api = Seahorse::Model::Api.new('metadata' => {
           'apiVersion' => '2013-01-01',
         })
-        svc = Aws.add_service(:Svc, 'api' => api)::Client
+        svc = Aws.add_service(:Svc, api: api)::Client
         svc.remove_plugin(RegionalEndpoint)
         svc.remove_plugin(RequestSigner)
         svc.add_plugin(GlobalConfiguration)
