@@ -14,6 +14,26 @@
 ---
 :api_version: '2012-06-01'
 :operations:
+- :name: AddTags
+  :method: :add_tags
+  :inputs:
+    LoadBalancerNames:
+    - :membered_list:
+      - :string
+    - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          - :required
+          Value:
+          - :string
+    - :required
+  :outputs:
+    :children:
+      AddTagsResult:
+        :ignore: true
 - :name: ApplySecurityGroupsToLoadBalancer
   :method: :apply_security_groups_to_load_balancer
   :inputs:
@@ -160,6 +180,14 @@
       - :string
     Scheme:
     - :string
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          - :required
+          Value:
+          - :string
   :outputs:
     :children:
       CreateLoadBalancerResult:
@@ -494,6 +522,31 @@
                         :list: true
                   CreatedTime:
                     :type: :time
+- :name: DescribeTags
+  :method: :describe_tags
+  :inputs:
+    LoadBalancerNames:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      DescribeTagsResult:
+        :ignore: true
+        :children:
+          TagDescriptions:
+            :ignore: true
+            :children:
+              member:
+                :rename: :tag_descriptions
+                :list: true
+                :children:
+                  Tags:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :tags
+                        :list: true
 - :name: DetachLoadBalancerFromSubnets
   :method: :detach_load_balancer_from_subnets
   :inputs:
@@ -644,6 +697,23 @@
               member:
                 :rename: :instances
                 :list: true
+- :name: RemoveTags
+  :method: :remove_tags
+  :inputs:
+    LoadBalancerNames:
+    - :membered_list:
+      - :string
+    - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+    - :required
+  :outputs:
+    :children:
+      RemoveTagsResult:
+        :ignore: true
 - :name: SetLoadBalancerListenerSSLCertificate
   :method: :set_load_balancer_listener_ssl_certificate
   :inputs:
