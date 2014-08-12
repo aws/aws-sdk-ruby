@@ -57,7 +57,9 @@ module AWS
         password
       end
 
-	  # Set whether a user needs to update their password when they next signin
+	  # Set whether a user needs to update their password when they next signin.
+	  #
+	  # @param [Boolean] bool If the password needs to be reset on next login
 	  def password_reset_required=(bool)
 		  options = resource_options(:password_reset_required => bool)
 		  client.update_login_profile(options)
