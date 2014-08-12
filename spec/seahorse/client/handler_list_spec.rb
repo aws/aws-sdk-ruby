@@ -155,6 +155,16 @@ module Seahorse
           expect(handlers2.to_a).to eq(handlers.to_a)
         end
 
+        it 'accepts a block to skip handlers when the block returns false' do
+          handlers.add('handler1')
+          handlers.add('handler2')
+          filtered = HandlerList.new
+          filtered.copy_from(handlers) do |entry|
+            entry.handler_class != 'handler1'
+          end
+          expect(filtered.to_a).to eq(['handler2'])
+        end
+
       end
 
       describe '#for' do
