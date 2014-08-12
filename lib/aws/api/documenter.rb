@@ -78,11 +78,14 @@ module Aws
       def client_docstring
         path = "doc-src/services/#{@svc_name}/client.md"
         path = 'doc-src/services/default/client.md' unless File.exists?(path)
-        template = read(path)
+        render(path)
+      end
+
+      def render(path)
         svc_name = @svc_name
         api = @api
         full_name = @full_name
-        ERB.new(template).result(binding)
+        ERB.new(File.read(path)).result(binding)
       end
 
       def document_client_constructor(namespace)
