@@ -57,6 +57,16 @@ module AWS
         password
       end
 
+	  # Set whether a user needs to update their password when they next signin
+	  def password_reset_required=(bool)
+		  options = resource_options(:password_reset_required => bool)
+		  client.update_login_profile(options)
+		  bool
+	  rescue Errors::NoSuchEntity => e
+		 # a password has to be set for us to be able to create a login_profile :(
+		  raise ArgumentError, "Unable force password reset when no password is set"
+	  end
+
       # Deletes the login profile for the specified user, which
       # terminates the user's ability to access AWS services through
       # the IAM login page.
