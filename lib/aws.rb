@@ -60,6 +60,7 @@ module Aws
   end
 
   module Plugins
+    autoload :CSDConditionalSigning, "#{SRC}/plugins/csd_conditional_signing"
     autoload :DynamoDBExtendedRetries, "#{SRC}/plugins/dynamodb_extended_retries"
     autoload :DynamoDBSimpleAttributes, "#{SRC}/plugins/dynamodb_simple_attributes"
     autoload :EC2CopyEncryptedSnapshot, "#{SRC}/plugins/ec2_copy_encrypted_snapshot"

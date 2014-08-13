@@ -78,8 +78,8 @@ module Aws
       end
 
       customize 'cloudsearchdomain' do
-        remove_plugin 'Aws::Plugins::RequestSigner'
         remove_plugin 'Aws::Plugins::RegionalEndpoint'
+        add_plugin 'Aws::Plugins::CSDConditionalSigning'
       end
 
       customize 'dynamodb' do

@@ -79,21 +79,28 @@ module Aws
           @handler.call(context)
         end
 
+        private
+
         def sign_authenticated_requests(context)
           if signer = SIGNERS[context.config.signature_version]
+            require_credentials(context)
             signer.sign(context)
+          end
+        end
+
+        def require_credentials(context)
+          if
+            context.config.credentials.nil? or
+            !context.config.credentials.set?
+          then
+            msg = 'unable to sign request without credentials set'
+            raise Errors::MissingCredentialsError, msg
           end
         end
 
       end
 
       handler(Handler, step: :sign)
-
-      def after_initialize(client)
-        if client.config.credentials.nil? or !client.config.credentials.set?
-          raise Errors::MissingCredentialsError
-        end
-      end
 
     end
   end
