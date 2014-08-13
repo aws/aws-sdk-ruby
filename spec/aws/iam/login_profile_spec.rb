@@ -94,6 +94,24 @@ module AWS
 
       end
 
+	  context '#password_reset_required=' do 
+		  it 'should call update_login_profile' do 
+			client.should_receive(:update_login_profile).with(:user_name => "username", :password_reset_required => true)
+			profile.password_reset_required= true
+		  end
+
+		  it 'should return the boolean value provided as it was set' do 
+			  profile.send(:password_reset_required=, true).should == true
+			  profile.send(:password_reset_required=, false).should == false
+		  end
+			
+		  it 'should raise a ClientError when no login profile exists' do 
+			  client.stub(:update_login_profile).and_raise(Errors::NoSuchEntity.new)
+			  lambda { profile.password_reset_required= true }.should raise_error(ArgumentError)
+		  end
+
+	  end
+
       context '#password=' do
 
         it 'should call update_login_profile' do
