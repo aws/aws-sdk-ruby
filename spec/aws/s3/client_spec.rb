@@ -5,6 +5,8 @@ module Aws
   module S3
     describe Client do
 
+      let(:client) { Client.new }
+
       before(:each) do
         Aws.config[:s3] = {
           region: 'us-east-1',
@@ -20,14 +22,13 @@ module Aws
       describe 'empty body error responses' do
 
         it 'creates an error class from empty body responses' do
-          s3 = Client.new
-          s3.handle(step: :send) do |context|
+          client.handle(step: :send) do |context|
             context.http_response.status_code = 500
             context.http_response.body = StringIO.new('')
             Seahorse::Client::Response.new(context: context)
           end
           expect {
-            s3.head_bucket(bucket:'aws-sdk')
+            client.head_bucket(bucket:'aws-sdk')
           }.to raise_error(S3::Errors::Http500Error)
         end
 
@@ -145,8 +146,7 @@ module Aws
       describe '#list_objects' do
 
         it 'request url encoded keys and decodes them by default' do
-          s3 = Client.new
-          s3.handle(step: :send) do |context|
+          client.handle(step: :send) do |context|
             context.http_response.status_code = 200
             context.http_response.body = <<-XML.strip
             <?xml version="1.0" encoding="UTF-8"?>
@@ -165,7 +165,7 @@ module Aws
             XML
             Seahorse::Client::Response.new(context: context)
           end
-          resp = s3.list_objects(bucket:'aws-sdk')
+          resp = client.list_objects(bucket:'aws-sdk')
           expect(resp.context.params[:encoding_type]).to eq('url')
           expect(resp.data.to_h).to eq({
             prefix: 'a&',
@@ -178,8 +178,7 @@ module Aws
         end
 
         it 'skips url decoding when the user specifies the encoding' do
-          s3 = Client.new
-          s3.handle(step: :send) do |context|
+          client.handle(step: :send) do |context|
             context.http_response.status_code = 200
             context.http_response.body = <<-XML.strip
             <?xml version="1.0" encoding="UTF-8"?>
@@ -191,7 +190,7 @@ module Aws
             XML
             Seahorse::Client::Response.new(context: context)
           end
-          resp = s3.list_objects(bucket:'aws-sdk', encoding_type: 'url')
+          resp = client.list_objects(bucket:'aws-sdk', encoding_type: 'url')
           expect(resp.data.contents.map(&:key)).to eq(['a%26'])
         end
 
@@ -200,8 +199,7 @@ module Aws
       describe '#list_object_versions' do
 
         it 'request url encoded keys and decodes them by default' do
-          s3 = Client.new
-          s3.handle(step: :send) do |context|
+          client.handle(step: :send) do |context|
             context.http_response.status_code = 200
             context.http_response.body = <<-XML.strip
             <?xml version="1.0" encoding="UTF-8"?>
@@ -223,7 +221,7 @@ module Aws
             XML
             Seahorse::Client::Response.new(context: context)
           end
-          resp = s3.list_object_versions(bucket:'aws-sdk')
+          resp = client.list_object_versions(bucket:'aws-sdk')
           expect(resp.context.params[:encoding_type]).to eq('url')
           expect(resp.data.to_h).to eq({
             prefix: 'a&',
@@ -241,8 +239,7 @@ module Aws
       describe '#list_multipart_uploads' do
 
         it 'request url encoded keys and decodes them by default' do
-          s3 = Client.new
-          s3.handle(step: :send) do |context|
+          client.handle(step: :send) do |context|
             context.http_response.status_code = 200
             context.http_response.body = <<-XML.strip
             <?xml version="1.0" encoding="UTF-8"?>
@@ -261,7 +258,7 @@ module Aws
             XML
             Seahorse::Client::Response.new(context: context)
           end
-          resp = s3.list_multipart_uploads(bucket:'aws-sdk')
+          resp = client.list_multipart_uploads(bucket:'aws-sdk')
           expect(resp.context.params[:encoding_type]).to eq('url')
           expect(resp.data.to_h).to eq({
             prefix: 'a&',
