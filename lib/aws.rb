@@ -80,6 +80,7 @@ module Aws
     autoload :S3Md5s, "#{SRC}/plugins/s3_md5s"
     autoload :S3Redirects, "#{SRC}/plugins/s3_redirects"
     autoload :S3SseCpk, "#{SRC}/plugins/s3_sse_cpk"
+    autoload :S3UrlEncodedKeys, "#{SRC}/plugins/s3_url_encoded_keys"
     autoload :SQSQueueUrls, "#{SRC}/plugins/sqs_queue_urls"
     autoload :SWFReadTimeouts, "#{SRC}/plugins/swf_read_timeouts"
     autoload :UserAgent, "#{SRC}/plugins/user_agent"

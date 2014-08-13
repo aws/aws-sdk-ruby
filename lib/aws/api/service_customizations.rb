@@ -124,6 +124,7 @@ module Aws
         add_plugin 'Aws::Plugins::S3Md5s'
         add_plugin 'Aws::Plugins::S3Redirects'
         add_plugin 'Aws::Plugins::S3SseCpk'
+        add_plugin 'Aws::Plugins::S3UrlEncodedKeys'
       end
 
       customize 'sqs' do

@@ -2219,6 +2219,7 @@
         "UploadIdMarker":{"shape":"UploadIdMarker"},
         "NextKeyMarker":{"shape":"NextKeyMarker"},
         "Prefix":{"shape":"Prefix"},
+        "Delimiter":{"shape":"Delimiter"},
         "NextUploadIdMarker":{"shape":"NextUploadIdMarker"},
         "MaxUploads":{"shape":"MaxUploads"},
         "IsTruncated":{"shape":"IsTruncated"},
@@ -2289,6 +2290,7 @@
         },
         "Name":{"shape":"BucketName"},
         "Prefix":{"shape":"Prefix"},
+        "Delimiter":{"shape":"Delimiter"},
         "MaxKeys":{"shape":"MaxKeys"},
         "CommonPrefixes":{"shape":"CommonPrefixList"},
         "EncodingType":{"shape":"EncodingType"}
@@ -2344,6 +2346,7 @@
         "Contents":{"shape":"ObjectList"},
         "Name":{"shape":"BucketName"},
         "Prefix":{"shape":"Prefix"},
+        "Delimiter":{"shape":"Delimiter"},
         "MaxKeys":{"shape":"MaxKeys"},
         "CommonPrefixes":{"shape":"CommonPrefixList"},
         "EncodingType":{"shape":"EncodingType"}
