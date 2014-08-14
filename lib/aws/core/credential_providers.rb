@@ -392,7 +392,7 @@ module AWS
         def get_credentials
           begin
 
-            http = Net::HTTP.new(ip_address, port)
+            http = Net::HTTP.new(ip_address, port, nil)
             http.open_timeout = http_open_timeout
             http.read_timeout = http_read_timeout
             http.set_debug_output(http_debug_output) if
