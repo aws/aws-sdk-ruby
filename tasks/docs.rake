@@ -3,7 +3,7 @@ namespace :docs do
   desc "Delete the locally generated docs" if ENV['ALL']
   task :clobber do
     rm_rf ".yardoc"
-    rm_rf "docs"
+    rm_rf "api-docs"
   end
 
   # Updates the list of supported services and versions in the README
@@ -26,7 +26,7 @@ namespace :docs do
 
   desc "Generates docs.tgz"
   task :zip => :docs do
-    sh "tar czvf docs.tgz docs/"
+    sh "tar czvf api-docs.tgz api-docs/"
   end
 
 end

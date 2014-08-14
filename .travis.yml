@@ -25,10 +25,20 @@ matrix:
     gemfile: Gemfile
 
 deploy:
+
   - provider: rubygems
     gemspec: aws-sdk-core.gemspec
     api_key:
       secure: "MAZhh9g7Kq40scij2aVIz/Jz1h1FPXbguRj6Q97wfajywVHhWZpnsRKgcvUSnw7UiqoFfxEN0YO99bjVTXguA3IkEvcn9XAvp0JMJBnfoQu+weXvWglTsbVD25JeG+ZH3qsa6IDp0pzWUyDa1dIlBtXc5sYbVpODyGmsrANoKZE="
+    on:
+      repo: aws/aws-sdk-core-ruby
+      branch: master
+      tags: true
+
+  - provider: releases
+    api_key:
+      secure: iP6CzsFh6CcUtVFcvn/s9hphzHsVw4lL/CpwAxJUeHiVU/g9529BhBLr271wVC4xCoZeuRnbE6MWKaveyzBYFitLj2tmUY7O6SqYHUjgusG2YqkRefZK10pfgFYyePOc6z7OiZQSeZj1abiRWjGHh9GewFGgAQzmzSaeEE2VomI=
+    file: api-docs.tgz
     on:
       repo: aws/aws-sdk-core-ruby
       branch: master
