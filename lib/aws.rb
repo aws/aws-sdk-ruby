@@ -255,7 +255,7 @@ module Aws
       unless instance_variable_get("@#{method_name}_warned")
         instance_variable_set("@#{method_name}_warned", true)
         msg = "Aws.#{method_name} is deprecated as of v2.0.0.rc14 and will be "
-        msg << "removed as of v2.0.0.0 final; use Aws::#{name}::Client.new{}"
+        msg << "removed as of v2.0.0.0 final; use Aws::#{name}::Client.new "
         msg << "instead"
         warn(msg)
       end
