@@ -1,4 +1,4 @@
-Next Release (TBD)
+2.0.0.rc15 (2014-08-14)
 ---
 
 * Feature - `Aws::S3::Client` - Enabling url-encoding of Amazon S3 keys by default.
@@ -21,7 +21,7 @@ Next Release (TBD)
 * Issue - Documentation - Now loading API files with UTF-8 encoding.
   See [#92](https://github.com/aws/aws-sdk-core-ruby/issues/92).
 
-2.0.0.rc14 (2014-09-05)
+2.0.0.rc14 (2014-08-05)
 ---
 
 * Upgrading - Client Classes - Versioned client classes removed, e.g.
