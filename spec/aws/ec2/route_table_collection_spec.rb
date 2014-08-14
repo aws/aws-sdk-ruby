@@ -104,7 +104,7 @@ module AWS
 
           end
 
-          its 'accpets a vpc id' do
+          it 'accpets a vpc id' do
 
             client.should_receive(:create_route_table).
               with(:vpc_id => 'vpcid').

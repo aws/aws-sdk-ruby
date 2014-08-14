@@ -13,7 +13,7 @@
 
 source 'https://rubygems.org'
 
-gemspec
+gemspec :name => 'aws-sdk-v1'
 
 gem 'nokogiri', '< 1.6' if RUBY_VERSION < '1.9'
 
