@@ -4,6 +4,7 @@ integration-test-config.json
 release-notes.html
 Gemfile.lock
 coverage
-doc
+docs
+docs.tgz
 .yardoc
 *.gem

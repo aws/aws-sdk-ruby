@@ -1,9 +1,9 @@
-namespace :doc do
+namespace :docs do
 
   desc "Delete the locally generated docs" if ENV['ALL']
   task :clobber do
     rm_rf ".yardoc"
-    rm_rf "doc"
+    rm_rf "docs"
   end
 
   # Updates the list of supported services and versions in the README
@@ -24,10 +24,15 @@ namespace :doc do
     File.open('README.md', 'w') { |file| file.write(lines.join) }
   end
 
+  desc "Generates docs.tgz"
+  task :zip => :docs do
+    sh "tar czvf docs.tgz docs/"
+  end
+
 end
 
 desc "Generate the API documentation."
-task :doc => ['doc:clobber', 'doc:readme'] do
+task :docs => ['docs:clobber', 'docs:readme'] do
   sh "SOURCE=1 bundle exec yard"
 end
 
