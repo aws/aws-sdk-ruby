@@ -21,22 +21,7 @@ module Aws
         cfg
       }
 
-      before(:each) do
-        path = '/latest/meta-data/iam/security-credentials/'
-        stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
-      end
-
       it 'raises an error when attempting to sign a request w/out credentials' do
-        # remove env credentials
-        stub_const("ENV", {})
-
-        # disable loading credentials from shared file
-        allow(Dir).to receive(:home).and_raise(ArgumentError)
-
-        # disable instance profile credentials
-        path = '/latest/meta-data/iam/security-credentials/'
-        stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
-
         klass = Class.new(Seahorse::Client::Base)
         klass.set_api({
           'operations' => {

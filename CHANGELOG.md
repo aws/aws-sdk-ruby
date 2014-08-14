@@ -7,6 +7,10 @@ Next Release (TBD)
 * Feature - `Aws::ElasticLoadBalancing::Client` - Added support for the new tagging
   operations.
 
+* Feature - `Aws::CloudSearch::Client` - Will now sign requests when credentials
+  are provided. You can continue making unauthenticated requests if you do not
+  configure credentials to the client.
+
 * Feature - Coverage - Now generating coverage reports during Travis builds
   and reporting via Coveralls.io.
 
