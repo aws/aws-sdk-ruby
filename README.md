@@ -4,14 +4,33 @@ The official AWS SDK for Ruby.
 
 ## Installation
 
-You can install the AWS SDK for Ruby with rubygems:
+Version 1 of the AWS SDK for Ruby is available on rubygems.org as two gems:
 
-    gem install aws-sdk
+* `aws-sdk-v1`
+* `aws-sdk`
 
-If you are using Bundler, we recommend that you express a major version
-dependency (aws-sdk follows [semantic versioning](http://semver.org/)):
+This project uses [semantic versioning](http://semver.org/). If you are using the
+`aws-sdk` gem, we strongly recommend you specify a version constraint in
+your Gemfile. Version 2 of the Ruby SDK will not be backwards compatible
+with version 1.
 
-    gem 'aws-sdk', '~> 1.0'
+    # version constraint
+    gem 'aws-sdk', '< 2'
+
+    # or use the v1 gem
+    gem 'aws-sdk-v1'
+
+If you use the `aws-sdk-v1` gem, you may also load the v2 Ruby SDK in the
+same process; The v2 Ruby SDK uses a different namespace, making this possible.
+
+    # when the v2 SDK ships, you will be able to do the following
+    gem 'aws-sdk', '~> 2.0'
+    gem 'aws-sdk-v1'
+
+If you are currently using v1 of `aws-sdk` and you update to `aws-sdk-v1`, you
+may need to change how your require the Ruby SDK:
+
+    require 'aws-sdk-v1' # not 'aws-sdk'
 
 If you are using a version of Ruby older than 1.9, you may encounter problems with Nokogiri.
 The authors dropped support for Ruby 1.8.x in Nokogiri 1.6. To use aws-sdk, you'll also have
@@ -93,9 +112,9 @@ The SDK currently supports the following services:
       <td>AWS CloudFormation</td>
     </tr>
     <tr>
-      <td rowspan="6">AWS::CloudFront</td>
+      <td rowspan="7">AWS::CloudFront</td>
       <td>2013-05-12</td>
-      <td rowspan="6">Amazon CloudFront</td>
+      <td rowspan="7">Amazon CloudFront</td>
     </tr>
     <tr>
       <td>2013-08-26</td>
@@ -111,6 +130,9 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>2014-01-31</td>
+    </tr>
+    <tr>
+      <td>2014-05-31</td>
     </tr>
     <tr>
       <td rowspan="2">AWS::CloudSearch</td>
@@ -149,9 +171,9 @@ The SDK currently supports the following services:
       <td>2012-08-10</td>
     </tr>
     <tr>
-      <td rowspan="4">AWS::EC2</td>
+      <td rowspan="5">AWS::EC2</td>
       <td>2013-08-15</td>
-      <td rowspan="4">Amazon Elastic Compute Cloud</td>
+      <td rowspan="5">Amazon Elastic Compute Cloud</td>
     </tr>
     <tr>
       <td>2013-10-01</td>
@@ -163,12 +185,18 @@ The SDK currently supports the following services:
       <td>2014-02-01</td>
     </tr>
     <tr>
-      <td rowspan="2">AWS::ElastiCache</td>
+      <td>2014-05-01</td>
+    </tr>
+    <tr>
+      <td rowspan="3">AWS::ElastiCache</td>
       <td>2013-06-15</td>
-      <td rowspan="2">Amazon ElastiCache</td>
+      <td rowspan="3">Amazon ElastiCache</td>
     </tr>
     <tr>
       <td>2014-03-24</td>
+    </tr>
+    <tr>
+      <td>2014-07-15</td>
     </tr>
     <tr>
       <td>AWS::ElasticBeanstalk</td>
