@@ -1,26 +1,39 @@
-2.0.0.rc15
+Next Release (TBD)
 ---
 
-* Feature - Aws::S3::Client - Enabling url-encoding of Amazon S3 keys by default.
-  Keys are decoded before response data is returned. See #95,
-  a632f575d9ac870199904560a143dd31a14e45c7.
+* Feature - `Aws::S3::Client` - Enabling url-encoding of Amazon S3 keys by default.
+  Keys are decoded before response data is returned. See [#95](https://github.com/aws/aws-sdk-core-ruby/issues/95).
 
-* Feature - Aws::ElasticLoadBalancing::Client - Added support for the new tagging
-  operations. See b2f6f8f108a9b491d9c5a910bed5eef483250036.
+* Feature - `Aws::ElasticLoadBalancing::Client` - Added support for the new tagging
+  operations.
 
 * Feature - Coverage - Now generating coverage reports during Travis builds
-  and reporting via Coveralls.io. See 8cf92e64447fa240dacba68075023d5a6d5186b5.
+  and reporting via Coveralls.io.
 
-* Upgrading - Aws::DynamoDB::Client - Added a plugin that simplifies working
+* Upgrading - `Aws::DynamoDB::Client` - Added a plugin that simplifies working
   with DynamoDB attribute values. Enabled by default, to restore default
-  behavior, use `:simple_attributes => false`. See
-  d758cde57a776bc9ec1124a70e93c09c0f8b3634.
+  behavior, use `:simple_attributes => false`.
 
 * Issue - Documentation - Now loading API files with UTF-8 encoding.
-  See #92, 9539636b7cee27c531ce2744c40f9a743c9dccc9.
+  See [#92](https://github.com/aws/aws-sdk-core-ruby/issues/92).
 
-2.0.0.rc1 - 2.0.0.rc14
+2.0.0.rc14 (2014-09-05)
 ---
 
-* No changelog.
+* Upgrading - Client Classes - Versioned client classes removed, e.g.
+  `Aws::S3::Client::V20060301.new` is now `Aws::S3::Client.new` The
+  `:api_version` constructor option is no longer accepted.
+
+* Upgrading - `Aws` Module - Helper methods on `Aws` for client classes
+  deprecated; For example, calling `Aws.s3` will generate a deprecation
+  warning. Use `Aws::S3::Client.new` instead. Helpers will be removed as
+  of v2.0.0 final.
+
+* Upgrading - Conig - When configuring an `:endpoint`, you must now specify
+  the HTTP scheme, e.g. "http://localhost:3000", instead of "localhost:3000".
+
+2.0.0.rc1 - 2.0.0.rc13
+---
+
+* No changelog entries.
 
