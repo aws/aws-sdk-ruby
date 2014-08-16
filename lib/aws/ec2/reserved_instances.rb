@@ -29,6 +29,7 @@ module AWS
         :recurring_charges,
         :offering_type,
         :state,
+        :end,
       ]
 
       include TaggedItem
