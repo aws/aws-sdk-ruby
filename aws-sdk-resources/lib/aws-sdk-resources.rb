@@ -1,3 +1,5 @@
+require 'aws-sdk-core'
+
 require 'aws/resource/base'
 require 'aws/resource/batch'
 require 'aws/resource/builder'
@@ -36,5 +38,15 @@ module Aws
       end
 
     end
+  end
+end
+
+Aws.service_added do |_, svc_module, options|
+  if options['resources']
+    Aws::Resource.define_resource_classes(
+      namespace: svc_module,
+      client_class: svc_module::Client,
+      definition: options['resources'],
+    )
   end
 end

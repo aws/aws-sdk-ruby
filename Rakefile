@@ -1,16 +1,10 @@
 root = File.dirname(__FILE__)
 
-$:.unshift(File.join(root, "lib"))
-$:.unshift(File.join(root, "vendor/seahorse/lib"))
+Dir.glob(File.join(root, '**', 'lib')).each { |lib| $:.unshift(lib) }
 
-require 'aws-sdk-core'
+require 'aws-sdk-resources'
 
-Dir[File.join(root, 'tasks', '**', '*.rake')].each do |task_file|
-  load task_file
-end
-
-# vendored task files
-Dir[File.join(root, 'vendor', '**', 'tasks', '**', '*.rake')].each do |task_file|
+Dir[File.join(root, '**', '*.rake')].each do |task_file|
   load task_file
 end
 
