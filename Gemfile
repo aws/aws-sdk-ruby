@@ -19,7 +19,7 @@ end
 group :docs do
   gem 'yard'
   gem 'yard-sitemap', '~> 1.0'
-  gem 'rdiscount'
+  gem 'rdiscount', require: false
 end
 
 group :repl do
