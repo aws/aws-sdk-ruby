@@ -78,12 +78,13 @@ module Aws
       end
 
       customize 'cloudsearchdomain' do
-        remove_plugin 'Aws::Plugins::RequestSigner'
         remove_plugin 'Aws::Plugins::RegionalEndpoint'
+        add_plugin 'Aws::Plugins::CSDConditionalSigning'
       end
 
       customize 'dynamodb' do
         add_plugin 'Aws::Plugins::DynamoDBExtendedRetries'
+        add_plugin 'Aws::Plugins::DynamoDBSimpleAttributes'
       end
 
       customize 'ec2' do
@@ -123,6 +124,7 @@ module Aws
         add_plugin 'Aws::Plugins::S3Md5s'
         add_plugin 'Aws::Plugins::S3Redirects'
         add_plugin 'Aws::Plugins::S3SseCpk'
+        add_plugin 'Aws::Plugins::S3UrlEncodedKeys'
       end
 
       customize 'sqs' do

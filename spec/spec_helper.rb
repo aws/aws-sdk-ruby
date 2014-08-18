@@ -6,15 +6,26 @@ require 'aws-sdk-resources'
 require 'seahorse'
 require 'yaml'
 
-# prevent env from leaking state into tests
-ENV.delete('AWS_REGION')
-ENV.delete('AWS_PROFILE')
-ENV.delete('AWS_ACCESS_KEY')
-ENV.delete('AWS_SECRET_KEY')
-%w(AWS AMAZON).each do |prefix|
-  ENV.delete("#{prefix}_ACCESS_KEY_ID")
-  ENV.delete("#{prefix}_SECRET_ACCESS_KEY")
-  ENV.delete("#{prefix}_SESSION_TOKEN")
+# Prevent the SDK unit tests from loading actual credentials while under test.
+# By default the SDK attempts to load credentials from:
+#
+# * ENV, e.g. ENV['AWS_ACCESS_KEY_ID']
+# * Shared credentials file, e.g. ~/.aws/credentials
+# * EC2 instance metadata server running at 169.254.169.254
+#
+RSpec.configure do |config|
+  config.before(:each) do
+
+    stub_const('ENV', {})
+
+    # disable loading credentials from shared file
+    allow(Dir).to receive(:home).and_raise(ArgumentError)
+
+    # disable instance profile credentials
+    path = '/latest/meta-data/iam/security-credentials/'
+    stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
+
+  end
 end
 
 # Simply returns the request context without any http response info.

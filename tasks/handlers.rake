@@ -1,20 +1,19 @@
 def service_names
   line = "    "
   service_names = ""
-  names = Aws::Api::Manifest.default_manifest.services.map(&:identifier)
-  names.map(&:to_s).each do |name|
+  Aws.services.each do |name, _, _|
     if (line + name).size > 72
       service_names << line.sub(/, $/, '')
       service_names << "\n"
       line = "    "
     end
-    line << (name + ", ")
+    line << (name.downcase + ", ")
   end
   service_names << line.sub(/, $/, '')
 end
 
-def client(svc)
-  Aws.send(svc.identifier, {
+def client(svc_module)
+  svc_module.const_get(:Client).new({
     region: 'region',
     access_key_id: 'akid',
     secret_access_key: 'secret',
@@ -73,26 +72,24 @@ end
 desc "List availalbe operation names for a service"
 task "operations:svc" => "operations"
 
-begin
-  Aws::Api::Manifest.default_manifest.services.each do |svc|
+Aws.services.each do |svc_name, svc_module, _|
 
-    task "handlers:#{svc.identifier}" do
-      print_handlers(client(svc).handlers)
-    end
+  svc_identifier = svc_name.downcase
 
-    path = svc.versions.values.last['api']
-    api = MultiJson.load(File.read(path))
-    api = Seahorse::Model::Api.new(api)
-    api.operation_names.each do |operation_name|
-      task "handlers:#{svc.identifier}:#{operation_name}" do
-        req = client(svc).build_request(operation_name)
-        print_handlers(req.handlers)
-      end
-    end
-
-    task "operations:#{svc.identifier}" do
-      puts svc.operation_names
-    end
-
+  task "handlers:#{svc_identifier}" do
+    print_handlers(client(svc_module).handlers)
   end
-rescue; end
+
+  api = svc_module.const_get(:Client).api
+  api.operation_names.each do |operation_name|
+    task "handlers:#{svc_identifier}:#{operation_name}" do
+      req = client(svc_module).build_request(operation_name)
+      print_handlers(req.handlers)
+    end
+  end
+
+  task "operations:#{svc_identifier}" do
+    puts api.operation_names
+  end
+
+end

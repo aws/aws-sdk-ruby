@@ -1,9 +1,9 @@
-namespace :doc do
+namespace :docs do
 
   desc "Delete the locally generated docs" if ENV['ALL']
   task :clobber do
     rm_rf ".yardoc"
-    rm_rf "doc"
+    rm_rf "api-docs"
   end
 
   # Updates the list of supported services and versions in the README
@@ -24,10 +24,15 @@ namespace :doc do
     File.open('README.md', 'w') { |file| file.write(lines.join) }
   end
 
+  desc "Generates docs.tgz"
+  task :zip => :docs do
+    sh "tar czvf api-docs.tgz api-docs/"
+  end
+
 end
 
 desc "Generate the API documentation."
-task :doc => ['doc:clobber', 'doc:readme'] do
+task :docs => ['docs:clobber', 'docs:readme'] do
   sh "SOURCE=1 bundle exec yard"
 end
 
@@ -37,11 +42,11 @@ def supported_services_table
   line = "| %-35s | %-25s | %-30s |\n"
 
   lines = []
-  Aws.client_classes.each do |client_class|
+  Aws.services.each do |svc_name, svc_module, _|
+    client_class = svc_module.const_get(:Client)
     full_name = client_class.api.metadata('serviceFullName')
-    module_name = client_class.name.split('::')[1]
     version = client_class.api.version
-    lines << line % [full_name, module_name, version]
+    lines << line % [full_name, svc_name, version]
   end
 
   [

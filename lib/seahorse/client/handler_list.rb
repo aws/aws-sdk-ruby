@@ -113,11 +113,18 @@ module Seahorse
       end
 
       # Copies handlers from the `source_list` onto the current handler list.
+      # If a block is given, only the entries that return a `true` value
+      # from the block will be copied.
       # @param [HandlerList] source_list
       # @return [void]
-      def copy_from(source_list)
-        entries = source_list.entries.collect do |entry|
-          entry.copy(inserted: next_index)
+      def copy_from(source_list, &block)
+        entries = []
+        source_list.entries.each do |entry|
+          if block_given?
+            entries << entry.copy(inserted: next_index) if yield(entry)
+          else
+            entries << entry.copy(inserted: next_index)
+          end
         end
         add_entries(entries)
       end

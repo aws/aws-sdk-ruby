@@ -1,0 +1,259 @@
+{
+  "operations": {
+    "CreateIdentityPool": "<p>Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account.</p>",
+    "DeleteIdentityPool": "<p>Deletes a user pool. Once a pool is deleted, users will not be able to authenticate with the pool.</p>",
+    "DescribeIdentityPool": "<p>Gets details about a particular identity pool, including the pool name, ID description, creation date, and current number of users.</p>",
+    "GetId": "<p>Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an implicit linked account.</p>",
+    "GetOpenIdToken": "<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned from GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link.</p>",
+    "ListIdentities": "<p>Lists the identities in a pool.</p>",
+    "ListIdentityPools": "<p>Lists all of the Cognito identity pools registered for your account.</p>",
+    "UnlinkIdentity": "<p>Unlinks a federated identity from an existing account. Unlinked logins will be considered new identities next time they are seen. Removing the last linked login will make this identity inaccessible.</p>",
+    "UpdateIdentityPool": "<p>Updates a user pool.</p>"
+  },
+  "service": "<fullname>Amazon Cognito</fullname> <p>Amazon Cognito is a web service that facilitates the delivery of scoped, temporary credentials to mobile devices or other untrusted environments. Amazon Cognito uniquely identifies a device or user and supplies the user with a consistent identity throughout the lifetime of an application.</p> <p>Amazon Cognito lets users authenticate with third-party identity providers (Facebook, Google, or Login with Amazon). As a developer, you decide which identity providers to trust. You can also choose to support unauthenticated access from your application. Your users are provided with Cognito tokens that uniquely identify their device and any information provided about third-party logins.</p>",
+  "shapes": {
+    "AccountId": {
+      "base": null,
+      "refs": {
+        "GetIdInput$AccountId": "A standard AWS account ID (9+ digits)."
+      }
+    },
+    "CreateIdentityPoolInput": {
+      "base": "<p>Input to the CreateIdentityPool action.</p>",
+      "refs": {
+      }
+    },
+    "DeleteIdentityPoolInput": {
+      "base": "<p>Input to the DeleteIdentityPool action.</p>",
+      "refs": {
+      }
+    },
+    "DescribeIdentityPoolInput": {
+      "base": "Input to the DescribeIdentityPool action.",
+      "refs": {
+      }
+    },
+    "GetIdInput": {
+      "base": "Input to the GetId action.",
+      "refs": {
+      }
+    },
+    "GetIdResponse": {
+      "base": "Returned in the response to a GetId request.",
+      "refs": {
+      }
+    },
+    "GetOpenIdTokenInput": {
+      "base": "Input to the GetOpenIdToken action.",
+      "refs": {
+      }
+    },
+    "GetOpenIdTokenResponse": {
+      "base": "Returned in response to a successful GetOpenIdToken request.",
+      "refs": {
+      }
+    },
+    "IdentitiesList": {
+      "base": null,
+      "refs": {
+        "ListIdentitiesResponse$Identities": "An object containing a set of identities and associated mappings."
+      }
+    },
+    "IdentityDescription": {
+      "base": "A description of the identity.",
+      "refs": {
+        "IdentitiesList$member": null
+      }
+    },
+    "IdentityId": {
+      "base": null,
+      "refs": {
+        "GetIdResponse$IdentityId": "A unique identifier in the format REGION:GUID.",
+        "GetOpenIdTokenInput$IdentityId": "A unique identifier in the format REGION:GUID.",
+        "GetOpenIdTokenResponse$IdentityId": "A unique identifier in the format REGION:GUID. Note that the IdentityId returned may not match the one passed on input.",
+        "IdentityDescription$IdentityId": "A unique identifier in the format REGION:GUID.",
+        "UnlinkIdentityInput$IdentityId": "A unique identifier in the format REGION:GUID."
+      }
+    },
+    "IdentityPool": {
+      "base": "An object representing a Cognito identity pool.",
+      "refs": {
+      }
+    },
+    "IdentityPoolId": {
+      "base": null,
+      "refs": {
+        "DeleteIdentityPoolInput$IdentityPoolId": "An identity pool ID in the format REGION:GUID.",
+        "DescribeIdentityPoolInput$IdentityPoolId": "An identity pool ID in the format REGION:GUID.",
+        "GetIdInput$IdentityPoolId": "An identity pool ID in the format REGION:GUID.",
+        "IdentityPool$IdentityPoolId": "An identity pool ID in the format REGION:GUID.",
+        "IdentityPoolShortDescription$IdentityPoolId": "An identity pool ID in the format REGION:GUID.",
+        "ListIdentitiesInput$IdentityPoolId": "An identity pool ID in the format REGION:GUID.",
+        "ListIdentitiesResponse$IdentityPoolId": "An identity pool ID in the format REGION:GUID."
+      }
+    },
+    "IdentityPoolName": {
+      "base": null,
+      "refs": {
+        "CreateIdentityPoolInput$IdentityPoolName": "<p>A string that you provide.</p>",
+        "IdentityPool$IdentityPoolName": "<p>A string that you provide.</p>",
+        "IdentityPoolShortDescription$IdentityPoolName": "A string that you provide."
+      }
+    },
+    "IdentityPoolShortDescription": {
+      "base": "A description of the identity pool.",
+      "refs": {
+        "IdentityPoolsList$member": null
+      }
+    },
+    "IdentityPoolUnauthenticated": {
+      "base": null,
+      "refs": {
+        "CreateIdentityPoolInput$AllowUnauthenticatedIdentities": "<p>TRUE if the identity pool supports unauthenticated logins.</p>",
+        "IdentityPool$AllowUnauthenticatedIdentities": "TRUE if the identity pool supports unauthenticated logins."
+      }
+    },
+    "IdentityPoolsList": {
+      "base": null,
+      "refs": {
+        "ListIdentityPoolsResponse$IdentityPools": "The identity pools returned by the ListIdentityPools action."
+      }
+    },
+    "IdentityProviderId": {
+      "base": null,
+      "refs": {
+        "IdentityProviders$value": null
+      }
+    },
+    "IdentityProviderName": {
+      "base": null,
+      "refs": {
+        "IdentityProviders$key": null,
+        "LoginsList$member": null,
+        "LoginsMap$key": null
+      }
+    },
+    "IdentityProviderToken": {
+      "base": null,
+      "refs": {
+        "LoginsMap$value": null
+      }
+    },
+    "IdentityProviders": {
+      "base": null,
+      "refs": {
+        "CreateIdentityPoolInput$SupportedLoginProviders": "<p>Optional key:value pairs mapping provider names to provider app IDs.</p>",
+        "IdentityPool$SupportedLoginProviders": "<p>Optional key:value pairs mapping provider names to provider app IDs.</p>"
+      }
+    },
+    "InternalErrorException": {
+      "base": "Thrown when the service encounters an error during processing the request.",
+      "refs": {
+      }
+    },
+    "InvalidParameterException": {
+      "base": "Thrown for missing or bad input parameter(s).",
+      "refs": {
+      }
+    },
+    "LimitExceededException": {
+      "base": "Thrown when the total number of user pools has exceeded a preset limit.",
+      "refs": {
+      }
+    },
+    "ListIdentitiesInput": {
+      "base": "Input to the ListIdentities action.",
+      "refs": {
+      }
+    },
+    "ListIdentitiesResponse": {
+      "base": "The response to a ListIdentities request.",
+      "refs": {
+      }
+    },
+    "ListIdentityPoolsInput": {
+      "base": "Input to the ListIdentityPools action.",
+      "refs": {
+      }
+    },
+    "ListIdentityPoolsResponse": {
+      "base": "The result of a successful ListIdentityPools action.",
+      "refs": {
+      }
+    },
+    "LoginsList": {
+      "base": null,
+      "refs": {
+        "IdentityDescription$Logins": "A set of optional name/value pairs that map provider names to provider tokens.",
+        "UnlinkIdentityInput$LoginsToRemove": "Provider names to unlink from this identity."
+      }
+    },
+    "LoginsMap": {
+      "base": null,
+      "refs": {
+        "GetIdInput$Logins": "A set of optional name/value pairs that map provider names to provider tokens.",
+        "GetOpenIdTokenInput$Logins": "A set of optional name/value pairs that map provider names to provider tokens.",
+        "UnlinkIdentityInput$Logins": "A set of optional name/value pairs that map provider names to provider tokens."
+      }
+    },
+    "NotAuthorizedException": {
+      "base": "Thrown when a user is not authorized to access the requested resource.",
+      "refs": {
+      }
+    },
+    "OIDCToken": {
+      "base": null,
+      "refs": {
+        "GetOpenIdTokenResponse$Token": "An OpenID token."
+      }
+    },
+    "PaginationKey": {
+      "base": null,
+      "refs": {
+        "ListIdentitiesInput$NextToken": "A pagination token.",
+        "ListIdentitiesResponse$NextToken": "A pagination token.",
+        "ListIdentityPoolsInput$NextToken": "A pagination token.",
+        "ListIdentityPoolsResponse$NextToken": "A pagination token."
+      }
+    },
+    "QueryLimit": {
+      "base": null,
+      "refs": {
+        "ListIdentitiesInput$MaxResults": "The maximum number of identities to return.",
+        "ListIdentityPoolsInput$MaxResults": "The maximum number of identities to return."
+      }
+    },
+    "ResourceConflictException": {
+      "base": "Thrown when a user tries to use a login which is already linked to another account.",
+      "refs": {
+      }
+    },
+    "ResourceNotFoundException": {
+      "base": "Thrown when the requested resource (for example, a dataset or record) does not exist.",
+      "refs": {
+      }
+    },
+    "String": {
+      "base": null,
+      "refs": {
+        "InternalErrorException$message": "The message returned by an InternalErrorException.",
+        "InvalidParameterException$message": "The message returned by an InvalidParameterException.",
+        "LimitExceededException$message": "The message returned by a LimitExceededException.",
+        "NotAuthorizedException$message": "The message returned by a NotAuthorizedException",
+        "ResourceConflictException$message": "The message returned by a ResourceConflictException.",
+        "ResourceNotFoundException$message": "The message returned by a ResourceNotFoundException.",
+        "TooManyRequestsException$message": "Message returned by a TooManyRequestsException"
+      }
+    },
+    "TooManyRequestsException": {
+      "base": "Thrown when a request is throttled.",
+      "refs": {
+      }
+    },
+    "UnlinkIdentityInput": {
+      "base": "Input to the UnlinkIdentity action.",
+      "refs": {
+      }
+    }
+  }
+}

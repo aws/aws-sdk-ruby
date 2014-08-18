@@ -44,7 +44,7 @@ module Aws
       # @option options [required, Integer<Seconds>] :expires_in
       # @option options [optional, String] :body_digest The SHA256 hexdigest of
       #   the payload to sign.  For S3, this should be the string literal
-      #   `UNSIGNED-PALOAD`.
+      #   `UNSIGNED-PAYLOAD`.
       # @return [Seahorse::Client::Http::Request] the signed request.
       # @api private
       def presigned_url(request, options = {})

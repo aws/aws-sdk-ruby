@@ -5,6 +5,8 @@ module Aws
   module S3
     describe Client do
 
+      let(:client) { Client.new }
+
       before(:each) do
         Aws.config[:s3] = {
           region: 'us-east-1',
@@ -20,14 +22,13 @@ module Aws
       describe 'empty body error responses' do
 
         it 'creates an error class from empty body responses' do
-          s3 = Client.new
-          s3.handle(step: :send) do |context|
+          client.handle(step: :send) do |context|
             context.http_response.status_code = 500
             context.http_response.body = StringIO.new('')
             Seahorse::Client::Response.new(context: context)
           end
           expect {
-            s3.head_bucket(bucket:'aws-sdk')
+            client.head_bucket(bucket:'aws-sdk')
           }.to raise_error(S3::Errors::Http500Error)
         end
 
@@ -138,6 +139,135 @@ module Aws
   <LocationConstraint>EU</LocationConstraint>
 </CreateBucketConfiguration>
           XML
+        end
+
+      end
+
+      describe '#list_objects' do
+
+        it 'request url encoded keys and decodes them by default' do
+          client.handle(step: :send) do |context|
+            context.http_response.status_code = 200
+            context.http_response.body = <<-XML.strip
+            <?xml version="1.0" encoding="UTF-8"?>
+            <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+              <Prefix>a%26</Prefix>
+              <Delimiter>b%26</Delimiter>
+              <Marker>c%26</Marker>
+              <NextMarker>d%26</NextMarker>
+              <Contents>
+                <Key>e%26</Key>
+              </Contents>
+              <CommonPrefixes>
+                <Prefix>f%26</Prefix>
+              </CommonPrefixes>
+            </ListBucketResult>
+            XML
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.list_objects(bucket:'aws-sdk')
+          expect(resp.context.params[:encoding_type]).to eq('url')
+          expect(resp.data.to_h).to eq({
+            prefix: 'a&',
+            delimiter: 'b&',
+            marker: 'c&',
+            next_marker: 'd&',
+            contents: [{ key: 'e&' }],
+            common_prefixes: [{ prefix: 'f&' }],
+          })
+        end
+
+        it 'skips url decoding when the user specifies the encoding' do
+          client.handle(step: :send) do |context|
+            context.http_response.status_code = 200
+            context.http_response.body = <<-XML.strip
+            <?xml version="1.0" encoding="UTF-8"?>
+            <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+              <Contents>
+                <Key>a%26</Key>
+              </Contents>
+            </ListBucketResult>
+            XML
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.list_objects(bucket:'aws-sdk', encoding_type: 'url')
+          expect(resp.data.contents.map(&:key)).to eq(['a%26'])
+        end
+
+      end
+
+      describe '#list_object_versions' do
+
+        it 'request url encoded keys and decodes them by default' do
+          client.handle(step: :send) do |context|
+            context.http_response.status_code = 200
+            context.http_response.body = <<-XML.strip
+            <?xml version="1.0" encoding="UTF-8"?>
+            <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
+              <Prefix>a%26</Prefix>
+              <Delimiter>b%26</Delimiter>
+              <KeyMarker>c%26</KeyMarker>
+              <NextKeyMarker>d%26</NextKeyMarker>
+              <Version>
+                <Key>e%26</Key>
+              </Version>
+              <DeleteMarker>
+                <Key>f%26</Key>
+              </DeleteMarker>
+              <CommonPrefixes>
+                <Prefix>g%26</Prefix>
+              </CommonPrefixes>
+            </ListVersionsResult>
+            XML
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.list_object_versions(bucket:'aws-sdk')
+          expect(resp.context.params[:encoding_type]).to eq('url')
+          expect(resp.data.to_h).to eq({
+            prefix: 'a&',
+            delimiter: 'b&',
+            key_marker: 'c&',
+            next_key_marker: 'd&',
+            versions: [{ key: 'e&' }],
+            delete_markers: [{ key: 'f&' }],
+            common_prefixes: [{ prefix: 'g&' }],
+          })
+        end
+
+      end
+
+      describe '#list_multipart_uploads' do
+
+        it 'request url encoded keys and decodes them by default' do
+          client.handle(step: :send) do |context|
+            context.http_response.status_code = 200
+            context.http_response.body = <<-XML.strip
+            <?xml version="1.0" encoding="UTF-8"?>
+            <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
+              <Prefix>a%26</Prefix>
+              <Delimiter>b%26</Delimiter>
+              <KeyMarker>c%26</KeyMarker>
+              <NextKeyMarker>d%26</NextKeyMarker>
+              <Upload>
+                <Key>e%26</Key>
+              </Upload>
+              <CommonPrefixes>
+                <Prefix>f%26</Prefix>
+              </CommonPrefixes>
+            </ListVersionsResult>
+            XML
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.list_multipart_uploads(bucket:'aws-sdk')
+          expect(resp.context.params[:encoding_type]).to eq('url')
+          expect(resp.data.to_h).to eq({
+            prefix: 'a&',
+            delimiter: 'b&',
+            key_marker: 'c&',
+            next_key_marker: 'd&',
+            uploads: [{ key: 'e&' }],
+            common_prefixes: [{ prefix: 'f&' }],
+          })
         end
 
       end

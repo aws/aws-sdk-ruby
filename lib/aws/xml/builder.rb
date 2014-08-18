@@ -67,6 +67,7 @@ module Aws
         when 'list'      then list(name, shape, value)
         when 'timestamp' then node(name, shape, shape.format_time(value, 'iso8601'))
         when 'blob'      then node(name, shape, Base64.strict_encode64(value))
+        when 'map'       then raise NotImplementedError, 'not supported'
         else
           node(name, shape, value.to_s)
         end

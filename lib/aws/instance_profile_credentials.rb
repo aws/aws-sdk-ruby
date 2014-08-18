@@ -96,7 +96,7 @@ module Aws
     end
 
     def open_connection
-      http = Net::HTTP.new(@ip_address, @port)
+      http = Net::HTTP.new(@ip_address, @port, nil)
       http.open_timeout = @http_open_timeout
       http.read_timeout = @http_read_timeout
       http.set_debug_output(@http_debug_output) if @http_debug_output

@@ -1,3 +1,5 @@
+require 'set'
+
 module Aws
   module Plugins
 
@@ -39,6 +41,9 @@ module Aws
     class GlobalConfiguration < Seahorse::Client::Plugin
 
       # @api private
+      IDENTIFIERS = Set.new
+
+      # @api private
       def before_initialize(client_class, options)
         # apply service specific defaults before the global aws defaults
         apply_service_defaults(client_class, options)
@@ -48,7 +53,7 @@ module Aws
       private
 
       def apply_service_defaults(client_class, options)
-        if defaults = Aws.config[client_class::IDENTIFIER]
+        if defaults = Aws.config[client_class.identifier]
           defaults.each do |option_name, default|
             options[option_name] = default unless options.key?(option_name)
           end
@@ -57,8 +62,7 @@ module Aws
 
       def apply_aws_defaults(client_class, options)
         Aws.config.each do |option_name, default|
-          next if client_class::IDENTIFIER == option_name
-          next if Aws.services.key?(option_name)
+          next if IDENTIFIERS.include?(option_name)
           next if options.key?(option_name)
           options[option_name] = default
         end
@@ -66,4 +70,10 @@ module Aws
 
     end
   end
+
+  service_added do |name, _, _|
+    Plugins::GlobalConfiguration::IDENTIFIERS << name.downcase.to_sym
+  end
+
 end
+

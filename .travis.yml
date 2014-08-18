@@ -1,22 +1,48 @@
 script: bundle exec rake
-bundler_args: --without bin docs
+bundler_args: --without repl
 branches:
   only:
   - master
+
 rvm:
 - 1.9.3
 - 2.0.0
 - 2.1.2
 - jruby
+
 env:
-  - COVERAGE=1 PURE_RUBY=1
-  - COVERAGE=1 NOKOGIRI=1
-  - COVERAGE=1 OX=1 OJ=1
+- PURE_RUBY=1
+- NOKOGIRI=1
+- OX=1 OJ=1
+
 gemfile:
-  - Gemfile
+- Gemfile
+
 matrix:
   exclude:
-    # oj and ox gems do not build in jruby
-    - rvm: jruby
-      env: COVERAGE=1 OX=1 OJ=1
-      gemfile: Gemfile
+  - rvm: jruby
+    env: OX=1 OJ=1
+    gemfile: Gemfile
+
+deploy:
+
+  - provider: rubygems
+    gemspec: aws-sdk-core.gemspec
+    skip_cleanup: true
+    api_key:
+      secure: "MAZhh9g7Kq40scij2aVIz/Jz1h1FPXbguRj6Q97wfajywVHhWZpnsRKgcvUSnw7UiqoFfxEN0YO99bjVTXguA3IkEvcn9XAvp0JMJBnfoQu+weXvWglTsbVD25JeG+ZH3qsa6IDp0pzWUyDa1dIlBtXc5sYbVpODyGmsrANoKZE="
+    on:
+      ruby: 2.1.2
+      all_branches: true
+      tags: true
+
+  - provider: releases
+    skip_cleanup: true
+    file: api-docs.tgz
+    api_key:
+      secure: iP6CzsFh6CcUtVFcvn/s9hphzHsVw4lL/CpwAxJUeHiVU/g9529BhBLr271wVC4xCoZeuRnbE6MWKaveyzBYFitLj2tmUY7O6SqYHUjgusG2YqkRefZK10pfgFYyePOc6z7OiZQSeZj1abiRWjGHh9GewFGgAQzmzSaeEE2VomI=
+    on:
+      ruby: 2.1.2
+      repo: aws/aws-sdk-core-ruby
+      all_branches: true
+      tags: true

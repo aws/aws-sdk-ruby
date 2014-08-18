@@ -14,34 +14,29 @@ module Aws
 
       let(:config) {
         cfg = Seahorse::Client::Configuration.new
-        cfg.add_option(:endpoint, 'svc-name.us-west-2.amazonaws.com')
+        cfg.add_option(:endpoint, 'http://svc-name.us-west-2.amazonaws.com')
         cfg.add_option(:api, api)
         cfg.add_option(:region) { 'region-name' }
         cfg.add_option(:region_defaults) {{}}
         cfg
       }
 
-      before(:each) do
-        path = '/latest/meta-data/iam/security-credentials/'
-        stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
-      end
-
-      it 'raises an error if you construct a client without credentials' do
-        # remove env credentials
-        stub_const("ENV", {})
-
-        # disable loading credentials from shared file
-        allow(Dir).to receive(:home).and_raise(ArgumentError)
-
-        # disable instance profile credentials
-        path = '/latest/meta-data/iam/security-credentials/'
-        stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
-
+      it 'raises an error when attempting to sign a request w/out credentials' do
         klass = Class.new(Seahorse::Client::Base)
+        klass.set_api({
+          'operations' => {
+            'DoSomething' => {}
+          }
+        })
         klass.add_plugin(RegionalEndpoint)
         klass.add_plugin(RequestSigner)
+        client = klass.new(
+          signature_version: 'v4',
+          endpoint: 'http://domain.region.amazonaws.com',
+          region: 'region'
+        )
         expect {
-          klass.new(region:'region-name')
+          client.do_something
         }.to raise_error(Errors::MissingCredentialsError)
       end
 
