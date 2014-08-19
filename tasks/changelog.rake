@@ -2,13 +2,23 @@ task 'changelog:version' do
   # updates the CHANGELOG next release with the actual release version
   changelog = File.open('CHANGELOG.md', 'r', encoding: 'UTF-8') { |f| f.read }
   changelog = changelog.lines
-  changelog = changelog[0..4] + [nil, nil, nil] + changelog[5..-1]
-  changelog[5] = "v#{version} (#{Time.now.strftime('%Y-%m-%d')})\n"
-  changelog[6] = '-' * (changelog[5].chars.count) + "\n"
-  changelog[7] = "\n"
+  changelog[0] = "#{version} (#{Time.now.strftime('%Y-%m-%d')})\n"
   changelog = changelog.join
   File.open('CHANGELOG.md', 'w', encoding: 'UTF-8') { |f| f.write(changelog) }
   sh("git add CHANGELOG.md")
+end
+
+task 'changelog:new_release' do
+  # updates the CHANGELOG next release with the actual release version
+  lines = []
+  lines << "Next Release (TBD)\n"
+  lines << "------------------\n"
+  lines << "\n"
+  changelog = File.open('CHANGELOG.md', 'r', encoding: 'UTF-8') { |f| f.read }
+  changelog = lines.join + changelog
+  File.open('CHANGELOG.md', 'w', encoding: 'UTF-8') { |f| f.write(changelog) }
+  sh("git add CHANGELOG.md")
+  sh("git commit -m 'Added next release section to the changelog.'")
 end
 
 task 'changelog:latest' do

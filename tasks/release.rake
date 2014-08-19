@@ -1,5 +1,5 @@
 def version
-  verison = ENV['VERSION'].to_s.sub(/^v/, '')
+  version = ENV['VERSION'].to_s.sub(/^v/, '')
   if version.empty?
     warn("usage: VERSION=x.y.z rake release:tag")
     exit
@@ -38,7 +38,7 @@ task 'release:push' => [
   'git:push',
   'gems:push',
   'github:release',
-  # update CHANGELOG, adding a new section for the "Next Release (TBD)"
+  'changelog:new_release',
 ]
 
 desc "Public release"
