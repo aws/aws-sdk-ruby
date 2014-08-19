@@ -10,6 +10,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'http://github.com/aws/aws-sdk-core-ruby'
   spec.license       = 'Apache 2.0'
 
+  spec.require_paths = ['lib']
+  spec.files += Dir['lib/**/*.rb']
+
   spec.add_dependency('aws-sdk-resources', version)
 
 end
