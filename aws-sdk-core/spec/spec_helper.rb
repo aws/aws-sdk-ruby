@@ -2,9 +2,6 @@ require 'simplecov'
 require 'rspec'
 require 'webmock/rspec'
 require 'aws-sdk-core'
-require 'aws-sdk-resources'
-require 'seahorse'
-require 'yaml'
 
 # Prevent the SDK unit tests from loading actual credentials while under test.
 # By default the SDK attempts to load credentials from:

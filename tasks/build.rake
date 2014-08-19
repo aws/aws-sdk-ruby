@@ -1,4 +1,5 @@
 task :build do
+  sh("rm -f *.gem")
   [
     'aws-sdk-core',
     'aws-sdk-resources',

@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'stringio'
+require 'yaml'
 
 module Aws
   describe 'Aws' do

@@ -1,23 +1,22 @@
 require 'rspec/core/rake_task'
 
-namespace :test do
-  desc "Runs unit tests"
-  RSpec::Core::RakeTask.new(:unit) do |t|
-    t.pattern = "spec"
-  end
+desc "aws-sdk-core unit tests"
+RSpec::Core::RakeTask.new('test:unit') do |t|
+  t.rspec_opts = '-I aws-sdk-core/spec'
+  t.pattern = "aws-sdk-core/spec"
 end
-
-desc 'Runs unit tests'
-task :test => ['test:unit']
 
 begin
   require 'cucumber/rake/task'
-  Cucumber::Rake::Task.new(:'test:integration') do |t|
-    t.cucumber_opts = "features"
+  name = 'test:integration'
+  desc = 'aws-sdk-core integration tests'
+  Cucumber::Rake::Task.new(name, desc) do |t|
+    t.cucumber_opts = 'aws-sdk-core/features'
   end
-  desc 'Runs unit and integration tests'
-  task :test => ['test:integration']
 rescue LoadError
+  task 'test:integration' do
+    puts 'skipping inetegration tests, cucumber not loaded'
+  end
 end
 
 begin
