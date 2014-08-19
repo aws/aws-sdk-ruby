@@ -1,15 +1,13 @@
 Next Release (TDB)
 ------------------
 
-* Added an automated release process. Running `VERSION=x.y.z rake release`
-  with the proper credentials will not perform a fully automated release.
-
-* Separated the `aws-sdk-core` gem into three gems, `aws-sdk-core`, 
-  `aws-sdk-resources`, and `aws-sdk`.
-
-* Merged in resources branch. You can now use resource-oriented interfaces
-  with `Aws::S3`, `Aws::EC2`, `Aws::SQS`, `Aws::SNS`, `Aws::Glacier`,
+* Feature - Resources - Merged in resources branch. You can now use 
+  resource-oriented interfaces with `Aws::S3`, `Aws::EC2`, `Aws::SQS`,
+  `Aws::SNS`, `Aws::Glacier`,
   and `Aws::IAM`.
+
+* Feature - New Gems -  Added the `aws-sdk` v2 gemspec and the
+  `aws-sdk-resources` gemspec.
 
 2.0.0.rc15 (2014-08-14)
 -----------------------
