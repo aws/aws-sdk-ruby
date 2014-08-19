@@ -26,7 +26,7 @@ application.
     'README.md',
     'LICENSE.txt',
   ]
-  s.files += Dir['lib/**/*.rb']
+  s.files += Dir['lib/**/*.rb'].reject { |p| p.match('aws-sdk-v1.rb') }
   s.files += Dir['lib/**/*.yml']
 
   s.bindir = 'bin'
