@@ -19,8 +19,8 @@ task 'github:release' do
 
   gh.upload_asset(release.url, 'api-docs.tgz')
 
-  Dir.glob('*.gem').each do |path|
-    gh.upload_asset(release.url, path, name: File.basename(path))
+  $GEM_NAMES.each do |gem_name|
+    gh.upload_asset(release.url, "#{gem_name}-#{version}.gem")
   end
 
 end

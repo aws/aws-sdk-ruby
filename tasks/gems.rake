@@ -13,6 +13,7 @@ end
 
 task 'gems:push' do
   sh("gem push aws-sdk-core-#{version}.gem")
-  #sh("gem push aws-sdk-resources-#{version}.gem")
-  #sh("gem push aws-sdk-#{version}.gem")
+  #$GEM_NAMES.each do |gem_name|
+  #  sh("gem push #{gem_name}-#{version}.gem")
+  #end
 end

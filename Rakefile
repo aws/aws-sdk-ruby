@@ -2,6 +2,12 @@ root = File.dirname(__FILE__)
 
 Dir.glob(File.join(root, '**', 'lib')).each { |lib| $:.unshift(lib) }
 
+$GEM_NAMES = [
+  'aws-sdk-core',
+  'aws-sdk-resources',
+  'aws-sdk',
+]
+
 require 'aws-sdk-resources'
 
 Dir[File.join(root, '**', '*.rake')].each do |task_file|
