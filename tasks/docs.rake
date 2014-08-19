@@ -1,38 +1,35 @@
-namespace :docs do
+desc "Delete the locally generated docs" if ENV['ALL']
+task 'docs:clobber' do
+  rm_rf ".yardoc"
+  rm_rf "api-docs"
+end
 
-  desc "Delete the locally generated docs" if ENV['ALL']
-  task :clobber do
-    rm_rf ".yardoc"
-    rm_rf "api-docs"
-  end
-
-  # Updates the list of supported services and versions in the README
-  desc "Updated the list of supported services in the README" if ENV['ALL']
-  task :readme do
-    lines = []
-    skip = false
-    File.read('README.md').lines.each do |line|
-      if line == "## Supported Services\n"
-        lines << line
-        lines += supported_services_table
-        skip = true
-      elsif line == "## License\n"
-        skip = false
-      end
-      lines << line unless skip
+# Updates the list of supported services and versions in the README
+desc "Updated the list of supported services in the README" if ENV['ALL']
+task 'docs:update_readme' do
+  # Updates the table of supported services / api version in the README
+  lines = []
+  skip = false
+  File.read('README.md').lines.each do |line|
+    if line == "## Supported Services\n"
+      lines << line
+      lines += supported_services_table
+      skip = true
+    elsif line == "## License\n"
+      skip = false
     end
-    File.open('README.md', 'w') { |file| file.write(lines.join) }
+    lines << line unless skip
   end
+  File.open('README.md', 'w') { |file| file.write(lines.join) }
+end
 
-  desc "Generates docs.tgz"
-  task :zip => :docs do
-    sh "tar czvf api-docs.tgz api-docs/"
-  end
-
+desc "Generates docs.tgz"
+task 'docs:zip' => :docs do
+  sh "tar czvf api-docs.tgz api-docs/"
 end
 
 desc "Generate the API documentation."
-task :docs => ['docs:clobber', 'docs:readme'] do
+task :docs => ['docs:clobber', 'docs:update_readme'] do
   sh "SOURCE=1 bundle exec yard"
 end
 

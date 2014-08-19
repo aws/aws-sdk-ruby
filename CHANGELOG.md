@@ -1,5 +1,8 @@
+Next Release (TDB)
+------------------
+
 2.0.0.rc15 (2014-08-14)
----
+-----------------------
 
 * Feature - `Aws::S3::Client` - Enabling url-encoding of Amazon S3 keys by default.
   Keys are decoded before response data is returned. See [#95](https://github.com/aws/aws-sdk-core-ruby/issues/95).
@@ -22,7 +25,7 @@
   See [#92](https://github.com/aws/aws-sdk-core-ruby/issues/92).
 
 2.0.0.rc14 (2014-08-05)
----
+-----------------------
 
 * Upgrading - Client Classes - Versioned client classes removed, e.g.
   `Aws::S3::Client::V20060301.new` is now `Aws::S3::Client.new` The
@@ -37,7 +40,7 @@
   the HTTP scheme, e.g. "http://localhost:3000", instead of "localhost:3000".
 
 2.0.0.rc1 - 2.0.0.rc13
----
+----------------------
 
 * No changelog entries.
 
