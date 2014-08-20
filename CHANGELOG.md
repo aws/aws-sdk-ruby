@@ -6,8 +6,9 @@ Next Release (TDB)
   `Aws::SNS`, `Aws::Glacier`,
   and `Aws::IAM`.
 
-* Feature - New Gems -  Added the `aws-sdk` v2 gemspec and the
-  `aws-sdk-resources` gemspec.
+* Feature - New Gems - Organized the repository into three gems, `aws-sdk`,
+  `aws-sdk-resources`, and `aws-sdk-core`. Moved library and test files
+  each into their respective gem directories.
 
 2.0.0.rc15 (2014-08-14)
 -----------------------
