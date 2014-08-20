@@ -1,10 +1,11 @@
 def version
   version = ENV['VERSION'].to_s.sub(/^v/, '')
-  if version.empty?
-    warn("usage: VERSION=x.y.z rake release:tag")
+  if version.match(/^\d+\.\d+\.\d+(\.rc\d+)?$/)
+    version
+  else
+    warn("usage: VERSION=x.y.z ACCESS_TOKEN=... rake release")
     exit
   end
-  version
 end
 
 task 'release:require_version' do
@@ -23,6 +24,7 @@ end
 
 task 'release:stage' => [
   'release:require_version',
+  'github:require_access_token',
   'git:require_clean_workspace',
   'test:unit',
   'test:integration',

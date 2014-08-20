@@ -1,12 +1,6 @@
 source 'https://rubygems.org'
 
-%w(
-  aws-sdk-core
-  aws-sdk-resources
-  aws-sdk
-).each do |gem_name|
-  gemspec "#{gem_name}/#{gem_name}.gemspec"
-end
+gemspec path: 'aws-sdk-core'
 
 gem 'rake', require: false
 
