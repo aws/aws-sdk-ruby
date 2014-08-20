@@ -44,7 +44,7 @@ Next Release (TDB)
   warning. Use `Aws::S3::Client.new` instead. Helpers will be removed as
   of v2.0.0 final.
 
-* Upgrading - Conig - When configuring an `:endpoint`, you must now specify
+* Upgrading - Config - When configuring an `:endpoint`, you must now specify
   the HTTP scheme, e.g. "http://localhost:3000", instead of "localhost:3000".
 
 2.0.0.rc1 - 2.0.0.rc13
