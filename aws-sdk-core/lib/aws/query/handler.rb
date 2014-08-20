@@ -33,9 +33,8 @@ module Aws
 
       def parse_xml(context)
         if rules = context.operation.output
-          rules = apply_wrapper(rules)
-          data = Xml::Parser.new(rules).parse(xml(context))
-          remove_wrapper(data, context)
+          data = Xml::Parser.new(apply_wrapper(rules)).parse(xml(context))
+          remove_wrapper(data, context, rules)
         else
           EmptyStructure.new
         end
@@ -59,10 +58,10 @@ module Aws
         }, shape_map: shape.shape_map)
       end
 
-      def remove_wrapper(data, context)
+      def remove_wrapper(data, context, rules)
         if context.operation.output.metadata('resultWrapper')
           context[:request_id] = data.response_metadata.request_id
-          data[data.members.first]
+          data[data.members.first] || Structure.new(rules.member_names)
         else
           data
         end
