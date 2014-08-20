@@ -459,5 +459,43 @@
         }
       }
     ]
+  },
+  {
+    "description": "Empty XML result element",
+    "metadata": {
+      "protocol": "query"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "resultWrapper": "OperationNameResult",
+        "members": {
+          "Name": {
+            "shape": "StringType"
+          }
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          {}
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "<OperationNameResponse><OperationNameResult/><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
+        }
+      }
+    ]
   }
 ]
