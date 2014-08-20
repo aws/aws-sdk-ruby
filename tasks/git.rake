@@ -37,7 +37,4 @@ end
 task 'git:push' do
   sh('git push origin')
   sh('git push origin --tags')
-  sh("gem push aws-sdk-core-#{version}.gem")
-  #sh("gem push aws-sdk-resources-#{version}.gem")
-  #sh("gem push aws-sdk-#{version}.gem")
 end

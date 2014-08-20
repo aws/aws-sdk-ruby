@@ -1,10 +1,12 @@
 require 'rspec/core/rake_task'
 
 desc "aws-sdk-core unit tests"
-RSpec::Core::RakeTask.new('test:unit') do |t|
-  t.rspec_opts = '-I aws-sdk-core/spec'
-  t.pattern = "aws-sdk-core/spec"
+RSpec::Core::RakeTask.new('test:unit:aws-sdk-core') do |t|
+  t.rspec_opts = "-I #{$REPO_ROOT}/aws-sdk-core/lib"
+  t.rspec_opts << " -I #{$REPO_ROOT}/aws-sdk-core/spec"
+  t.pattern = "#{$REPO_ROOT}/aws-sdk-core/spec"
 end
+task 'test:unit' => 'test:unit:aws-sdk-core'
 
 begin
   require 'cucumber/rake/task'
