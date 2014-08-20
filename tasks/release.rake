@@ -40,7 +40,7 @@ task 'release:push' => [
   'git:push',
   'gems:push',
   'github:release',
-  'changelog:new_release',
+  'changelog:next_release',
 ]
 
 desc "Public release"

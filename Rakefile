@@ -1,24 +1,28 @@
-root = File.dirname(__FILE__)
-
-Dir.glob(File.join(root, '**', 'lib')).each { |lib| $:.unshift(lib) }
-
 $REPO_ROOT = File.dirname(__FILE__)
+
 $GEM_NAMES = [
   'aws-sdk-core',
   'aws-sdk-resources',
   'aws-sdk',
 ]
 
-require 'aws-sdk-resources'
+$GEM_NAMES.each do |gem_name|
+  $LOAD_PATH.unshift(File.join($REPO_ROOT, gem_name, 'lib'))
+end
 
-Dir[File.join(root, '**', '*.rake')].each do |task_file|
+require 'aws-sdk'
+
+Dir.glob('**/*.rake').each do |task_file|
   load task_file
 end
 
-desc 'Runs unit tests'
-task 'test:unit'
+begin
+  require 'coveralls/rake/task'
+  Coveralls::RakeTask.new
+rescue LoadError
+end
 
 desc 'Runs unit and integration tests'
-task :test => ['test:unit', 'test:integration']
+task 'test' => ['test:unit', 'test:integration']
 
 task :default => :test

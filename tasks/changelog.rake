@@ -1,5 +1,5 @@
 task 'changelog:version' do
-  # updates the CHANGELOG next release with the actual release version
+  # replaces "Next Release (TBD)" in the CHANGELOG with a version and date
   changelog = File.open('CHANGELOG.md', 'r', encoding: 'UTF-8') { |f| f.read }
   changelog = changelog.lines
   changelog[0] = "#{version} (#{Time.now.strftime('%Y-%m-%d')})\n"
@@ -8,8 +8,8 @@ task 'changelog:version' do
   sh("git add CHANGELOG.md")
 end
 
-task 'changelog:new_release' do
-  # updates the CHANGELOG next release with the actual release version
+task 'changelog:next_release' do
+  # inserts a "Next Release (TDB)" section at the top of the CHANGELOG
   lines = []
   lines << "Next Release (TBD)\n"
   lines << "------------------\n"
@@ -22,10 +22,11 @@ task 'changelog:new_release' do
 end
 
 task 'changelog:latest' do
+  # Returns the contents of the most recent CHANGELOG section
   changelog = File.open('CHANGELOG.md', 'r', encoding: 'UTF-8') { |f| f.read }
   lines = []
-  changelog.lines[8..-1].each do |line|
-    if line.match(/^v\d/)
+  changelog.lines[3..-1].each do |line|
+    if line.match(/^\d+\.\d+\.\d+/)
       break
     else
       lines << line

@@ -3,20 +3,6 @@ task 'release_notes:html' do
   require 'erb'
   require 'rdiscount'
 
-  entries = ['']
-  changelog = File.open('CHANGELOG.md', 'r', encoding: 'UTF-8') { |f| f.read }
-  changelog.lines.each.with_index do |line,n|
-    next if n < 3
-    break if line.match(/^\d\.\d+\.\d+/)
-    if line.match(/^\*/)
-      entries << ''
-    end
-    entries.last.concat(line)
-  end
-
-  entries.delete('')
-  entries = entries.map { |e| e[2..-1].strip }
-
   labels = {
     'Upgrading' => 'Upgrading Notes',
     'Feature' => 'New Features',
@@ -29,14 +15,21 @@ task 'release_notes:html' do
     'Resolved Issues' => [],
   }
 
+  entries = []
+  `rake changelog:latest`.lines.map(&:strip).each do |line|
+    if line.match(/^\*/)
+      entries << line.sub(/\* /, '')
+    else
+      entries.last.concat(' ' + line)
+    end
+  end
+
   entries.each do |entry|
     label, changed, description = entry.split(' - ')
     changed = changed.gsub('`', '')
     description = RDiscount.new(description).to_html
     categories[labels[label]] << [changed, description]
   end
-
-  version = changelog.lines.first.split(/\s+/).first
 
   services = {}
   Aws.services.each do |_, svc_module, _|

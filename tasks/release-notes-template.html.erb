@@ -1,6 +1,7 @@
 <h2>Installation</h2>
 <pre>gem install aws-sdk-core</pre>
 <% categories.each do |label, entries| %>
+<% next if entries.empty? %>
 
 <h2><%= label %></h2>
 <table border="0" cellspacing="0" cellpadding="0" id="aws-table">
