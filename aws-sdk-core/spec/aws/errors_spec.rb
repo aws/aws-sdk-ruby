@@ -20,6 +20,19 @@ module Aws
 
       it 'removes http namespaces from the error code' do
         expect(mod.error_class('ErrorClass:http://foo.com')).to be(mod::ErrorClass)
+        expect(mod.error_class('ErrorClass:https://foo.com')).to be(mod::ErrorClass)
+      end
+
+      it 'ensures the error class name starts with a letter' do
+        expect(mod.error_class('123Code')).to be(mod::Error123Code)
+      end
+
+      it 'ensures the error class constant is uppercased' do
+        expect(mod.error_class('errorClass')).to be(mod::ErrorClass)
+      end
+
+      it 'removes characters that are not valid as constants' do
+        expect(mod.error_class('Error 123~Code')).to be(mod::Error123Code)
       end
 
       it 'prevents #const_missing from re-setting the error constant' do

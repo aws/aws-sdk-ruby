@@ -10,6 +10,10 @@ Next Release (TDB)
   `aws-sdk-resources`, and `aws-sdk-core`. Moved library and test files
   each into their respective gem directories.
 
+* Issue - Error Class Names - Resolved an issue that could raise a
+  `NameError`, "wrong constant name" at runtime in response to a service
+  error. Fixes #97.
+
 2.0.0.rc15 (2014-08-14)
 -----------------------
 

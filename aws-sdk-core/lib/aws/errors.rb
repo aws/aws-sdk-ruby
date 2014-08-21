@@ -81,8 +81,21 @@ module Aws
       # @api private
       def error_class(error_code)
         constant = error_code.to_s
-        constant = constant.gsub(/http:\/\/.*$/, '') # remove http namespaces
-        constant = constant.gsub(/[^a-zA-Z0-9]/, '').to_sym
+
+        # some services suffix their error codes with an XML namespace
+        constant = constant.gsub(/https?:.*$/, '')
+
+        # remove characters that are not valid in a constant
+        constant = constant.gsub(/[^a-zA-Z0-9]/, '')
+
+        # constants must start with a letter
+        constant = 'Error' + constant unless constant.match(/^[a-z]/i)
+
+        # first letter in a constant must be uppercased
+        constant = constant[0].upcase + constant[1..-1]
+
+        constant = constant.to_sym
+
         if error_const_set?(constant)
           const_get(constant)
         else
