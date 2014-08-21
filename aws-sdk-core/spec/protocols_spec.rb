@@ -4,7 +4,9 @@ require 'rexml/document'
 
 def fixtures
   fixtures = {}
-  files = Dir.glob(File.join('spec', 'fixtures', 'protocols', '**', '*.json'))
+  files = Dir.glob(File.join(
+    File.dirname(__FILE__), 'fixtures', 'protocols', '**', '*.json'))
+  raise 'unable to locate spec files' if files.empty?
   files.each do |path|
     directory = File.basename(path).split('.').first
     input_output = path.split('/')[-2]

@@ -488,7 +488,6 @@
           "name": "OperationName"
         },
         "result": {
-          {}
         },
         "response": {
           "status_code": 200,
