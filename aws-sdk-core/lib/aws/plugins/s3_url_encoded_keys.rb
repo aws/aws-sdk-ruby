@@ -46,8 +46,8 @@ module Aws
           decode(:next_marker, data)
           decode(:prefix, data)
           decode(:delimiter, data)
-          data.contents.each { |o| decode(:key, o) }
-          data.common_prefixes.each { |o| decode(:prefix, o) }
+          data.contents.each { |o| decode(:key, o) } if data.contents
+          data.common_prefixes.each { |o| decode(:prefix, o) } if data.common_prefixes
         end
 
         def decode_list_object_versions_keys(data)
@@ -55,9 +55,9 @@ module Aws
           decode(:next_key_marker, data)
           decode(:prefix, data)
           decode(:delimiter, data)
-          data.versions.each { |o| decode(:key, o) }
-          data.delete_markers.each { |o| decode(:key, o) }
-          data.common_prefixes.each { |o| decode(:prefix, o) }
+          data.versions.each { |o| decode(:key, o) } if data.versions
+          data.delete_markers.each { |o| decode(:key, o) } if data.delete_markers
+          data.common_prefixes.each { |o| decode(:prefix, o) } if data.common_prefixes
         end
 
         def decode_list_multipart_uploads_keys(data)
@@ -65,8 +65,8 @@ module Aws
           decode(:next_key_marker, data)
           decode(:prefix, data)
           decode(:delimiter, data)
-          data.uploads.each { |o| decode(:key, o) }
-          data.common_prefixes.each { |o| decode(:prefix, o) }
+          data.uploads.each { |o| decode(:key, o) } if data.uploads
+          data.common_prefixes.each { |o| decode(:prefix, o) } if data.common_prefixes
         end
 
         def decode(member, struct)
