@@ -1,3 +1,5 @@
+$LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'aws-sdk-resources', 'lib')))
+
 # ISSUES
 #
 # - Changed Resource::Base#data, #client and #attributes from

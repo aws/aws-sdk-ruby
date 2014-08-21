@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift('./lib')
+$LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'aws-sdk-core', 'lib')))
 
 require 'aws-sdk-core'
 
