@@ -8,7 +8,7 @@ module Aws
 
         let(:config) { double('config', api: api) }
 
-        let(:client_class) { Seahorse::Client::Base.define(api: api) }
+        let(:client_class) { Aws::Client.define('Client', api: api) }
 
         let(:client) { double('client', config:config) }
 
@@ -24,7 +24,7 @@ module Aws
         let(:namespace) { Module.new }
 
         before(:each) do
-          client_class.const_set(:PAGING_PROVIDER, Paging::NullProvider.new)
+          client_class.paginators = Paging::NullProvider.new
           allow(client_class).to receive(:new).and_return(client)
         end
 
