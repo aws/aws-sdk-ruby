@@ -22,6 +22,9 @@ begin
 rescue LoadError
 end
 
+desc 'Runs unit tests'
+task 'test:unit'
+
 desc 'Runs unit and integration tests'
 task 'test' => ['test:unit', 'test:integration']
 

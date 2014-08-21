@@ -3,6 +3,8 @@ require 'rspec'
 require 'webmock/rspec'
 require 'aws-sdk-core'
 
+SimpleCov.command_name('test:unit:aws-sdk-core')
+
 # Prevent the SDK unit tests from loading actual credentials while under test.
 # By default the SDK attempts to load credentials from:
 #

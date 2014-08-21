@@ -4,6 +4,8 @@ require 'simplecov'
 require 'aws-sdk-core'
 require 'multi_json'
 
+SimpleCov.command_name('test:integration:aws-sdk-core')
+
 cfg = './integration-test-config.json'
 
 if File.exist?(cfg)
