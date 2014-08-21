@@ -22,7 +22,12 @@ module Seahorse
                   },
                   'counts' => {
                     'type' => 'list',
-                    'member' => { 'type' => 'integer' },
+                    'member' => {
+                      'type' => 'structure',
+                      'members' => {
+                        'value' => { 'type' => 'integer' }
+                      }
+                    },
                   }
                 }
               }
@@ -32,7 +37,11 @@ module Seahorse
           data = double('data')
 
           config = Struct.new(:enabled, :settings, :counts, :unknown)
-          config = config.new(true, { color: :red }, [1, 2.0, '3'], data)
+          config = config.new(true, { color: :red }, [
+            { value: 1 },
+            { value: 2.0 },
+            { value: '3' },
+          ], data)
 
           params = {
             username: :johndoe,
@@ -45,7 +54,11 @@ module Seahorse
             config: {
               enabled: true,
               settings: { 'color' => 'red' },
-              counts: [1, 2, 3],
+              counts: [
+                { value: 1 },
+                { value: 2 },
+                { value: 3 },
+              ],
               unknown: data
             }
           })

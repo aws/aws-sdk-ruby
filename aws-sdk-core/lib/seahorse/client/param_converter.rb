@@ -39,7 +39,7 @@ module Seahorse
       def list(list, values)
         values = c(list, values)
         if values.is_a?(Array)
-          values.map { |v| c(list.member, v) }
+          values.map { |v| member(list.member, v) }
         else
           values
         end
@@ -49,7 +49,7 @@ module Seahorse
         values = c(map, values)
         if values.is_a?(Hash)
           values.each.with_object({}) do |(key, value), hash|
-            hash[c(map.key, key)] = c(map.value, value)
+            hash[member(map.key, key)] = member(map.value, value)
           end
         else
           values
