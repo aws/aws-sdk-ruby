@@ -80,22 +80,7 @@ module Aws
       #
       # @api private
       def error_class(error_code)
-        constant = error_code.to_s
-
-        # some services suffix their error codes with an XML namespace
-        constant = constant.gsub(/https?:.*$/, '')
-
-        # remove characters that are not valid in a constant
-        constant = constant.gsub(/[^a-zA-Z0-9]/, '')
-
-        # constants must start with a letter
-        constant = 'Error' + constant unless constant.match(/^[a-z]/i)
-
-        # first letter in a constant must be uppercased
-        constant = constant[0].upcase + constant[1..-1]
-
-        constant = constant.to_sym
-
+        constant = error_class_constant(error_code)
         if error_const_set?(constant)
           const_get(constant)
         else
@@ -104,6 +89,21 @@ module Aws
       end
 
       private
+
+      # Convert an error code to an error class name/constant.
+      # This requires filtering non-safe characters from the constant
+      # name and ensuring it begins with an uppercase letter.
+      # @param [String] error_code
+      # @return [Symbol] Returns a symbolized constant name for the given
+      #   `error_code`.
+      def error_class_constant(error_code)
+        constant = error_code.to_s
+        constant = constant.gsub(/https?:.*$/, '')
+        constant = constant.gsub(/[^a-zA-Z0-9]/, '')
+        constant = 'Error' + constant unless constant.match(/^[a-z]/i)
+        constant = constant[0].upcase + constant[1..-1]
+        constant.to_sym
+      end
 
       def set_error_constant(constant)
         @const_set_mutex.synchronize do
