@@ -1,6 +1,15 @@
 Next Release (TDB)
 ------------------
 
+* Upgrading - API Clients - When parsing XML elements, missing list
+  and map elements are no longer represented with an empty list, or
+  empty hash. This ensures the response data can safely be used as
+  input to another operation without modifying the logical value of
+  a missing list or map.
+
+  **This requires code accessing empty list or maps to deal with
+  possible `nil` values**
+
 * Feature - Resources - Merged in resources branch. You can now use 
   resource-oriented interfaces with `Aws::S3`, `Aws::EC2`, `Aws::SQS`,
   `Aws::SNS`, `Aws::Glacier`,
