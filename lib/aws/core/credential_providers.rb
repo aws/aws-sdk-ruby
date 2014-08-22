@@ -119,7 +119,12 @@ module AWS
           @providers << ENVProvider.new('AWS')
           @providers << ENVProvider.new('AWS', :access_key_id => 'ACCESS_KEY', :secret_access_key => 'SECRET_KEY', :session_token => 'SESSION_TOKEN')
           @providers << ENVProvider.new('AMAZON')
-          @providers << SharedCredentialFileProvider.new if Dir.home rescue ArgumentError
+          begin
+            if Dir.home
+              @providers << SharedCredentialFileProvider.new
+            end
+          rescue ArgumentError, NoMethodError
+          end
           @providers << EC2Provider.new
         end
 
@@ -265,6 +270,16 @@ module AWS
 
         include Provider
 
+        def shared_credential_file_path
+          if RUBY_VERSION < '1.9'
+            raise ArgumentError(
+              "Must specify the :path to your shared credential file when using"\
+                " Ruby #{RUBY_VERSION}"
+            )
+          else
+            File.join(Dir.home, '.aws', 'credentials')
+          end
+        end
         # @api private
         KEY_MAP = {
           "aws_access_key_id" => :access_key_id,
@@ -275,7 +290,7 @@ module AWS
         # @option [String] :path
         # @option [String] :profile_name
         def initialize(options = {})
-          @path = options[:path] || File.join(Dir.home, '.aws', 'credentials')
+          @path = options[:path] || shared_credential_file_path
           @profile_name = options[:profile_name]
           @profile_name ||= ENV['AWS_PROFILE']
           @profile_name ||= 'default'
