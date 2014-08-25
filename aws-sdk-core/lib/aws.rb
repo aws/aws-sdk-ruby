@@ -118,6 +118,7 @@ module Aws
   # @api private
   module Xml
     autoload :Builder, "#{SRC}/xml/builder"
+    autoload :DefaultList,  "#{SRC}/xml/default_list"
     autoload :ErrorHandler,  "#{SRC}/xml/error_handler"
     autoload :Parser, "#{SRC}/xml/parser"
     autoload :RestHandler, "#{SRC}/xml/rest_handler"

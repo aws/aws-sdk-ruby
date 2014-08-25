@@ -84,7 +84,7 @@ module Aws
 
       describe 'non-flattened lists' do
 
-        it 'returns missing lists as []' do
+        it 'returns missing lists as nil' do
           definition['members'] = {
             'Values' => {
               'type' => 'list',
@@ -92,7 +92,21 @@ module Aws
             }
           }
           xml = "<xml/>"
-          expect(parse(xml)[:values]).to eq([])
+          expect(parse(xml)[:values]).to be(nil)
+        end
+
+        it 'popluates list members with a default list when not present' do
+          definition['members'] = {
+            'Values' => {
+              'type' => 'list',
+              'member' => { 'type' => 'string' }
+            }
+          }
+          xml = "<xml/>"
+          result = Parser.new(shape).parse(xml)
+          expect(result[:values]).to be_kind_of(DefaultList)
+          expect(result[:values]).to be_empty
+          expect(result[:values]).to be_nil
         end
 
         it 'returns empty list elements as []' do
@@ -199,7 +213,7 @@ module Aws
 
       describe 'flattened lists' do
 
-        it 'returns missing lists as []' do
+        it 'returns missing lists as nil' do
           definition['members'] = {
             'Values' => {
               'type' => 'list',
@@ -208,7 +222,7 @@ module Aws
             }
           }
           xml = "<xml/>"
-          expect(parse(xml)[:values]).to eq([])
+          expect(parse(xml)[:values]).to be(nil)
         end
 
         it 'returns empty list elements as []' do
@@ -307,7 +321,7 @@ module Aws
 
       describe 'non-flattened maps' do
 
-        it 'returns missing maps as {}' do
+        it 'returns missing maps as nil' do
           definition['members'] = {
             'Attributes' => {
               'type' => 'map',
@@ -316,7 +330,7 @@ module Aws
             }
           }
           xml = "<xml/>"
-          expect(parse(xml)[:attributes]).to eq({})
+          expect(parse(xml)[:attributes]).to be(nil)
         end
 
         it 'returns empty maps as {}' do
@@ -409,7 +423,7 @@ module Aws
 
       describe 'flattened maps' do
 
-        it 'returns missing maps as {}' do
+        it 'returns missing maps as nil' do
           definition['members'] = {
             'Attributes' => {
               'type' => 'map',
@@ -419,7 +433,7 @@ module Aws
             }
           }
           xml = "<xml/>"
-          expect(parse(xml)[:attributes]).to eq({})
+          expect(parse(xml)[:attributes]).to be(nil)
         end
 
         it 'returns empty maps as {}' do
@@ -622,12 +636,12 @@ module Aws
 
       describe 'strings' do
 
-        it 'returns nil for empty elements' do
+        it 'returns the empty string for self closing string XML elements' do
           definition['members'] = {
             'data' => { 'type' => 'string' }
           }
           xml = "<xml><data/></xml>"
-          expect(parse(xml)[:data]).to be(nil)
+          expect(parse(xml)[:data]).to eq('')
         end
 
         it 'base64 decodes strings when encoding attribute is present' do

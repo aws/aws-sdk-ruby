@@ -30,7 +30,11 @@ module Aws
         target = Structure.new(structure.member_names) if target.nil?
         structure.members.each do |member_name, member_shape|
           value_key = member_key(member_shape) || member_name.to_s
-          target[member_name] = parse_shape(member_shape, values[value_key])
+          if values.key?(value_key)
+            target[member_name] = parse_shape(member_shape, values[value_key])
+          elsif member_shape.is_a?(Seahorse::Model::Shapes::List)
+            target[member_name] = DefaultList.new
+          end
         end
         target
       end
@@ -78,6 +82,7 @@ module Aws
           when Seahorse::Model::Shapes::Structure then nil
           when Seahorse::Model::Shapes::Map then {}
           when Seahorse::Model::Shapes::List then []
+          when Seahorse::Model::Shapes::String then ''
           else nil
           end
         else
