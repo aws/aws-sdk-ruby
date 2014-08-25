@@ -12,7 +12,7 @@ begin
   require 'cucumber/rake/task'
   desc = 'aws-sdk-core integration tests'
   Cucumber::Rake::Task.new('test:integration', desc) do |t|
-    t.cucumber_opts = 'aws-sdk-core/features'
+    t.cucumber_opts = 'aws-sdk-core/features -t ~@veryslow'
   end
 rescue LoadError
   desc 'aws-sdk-core integration tests'

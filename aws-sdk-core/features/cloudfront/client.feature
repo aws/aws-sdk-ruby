@@ -15,3 +15,11 @@ Feature: Amazon CloudFront
     """
     The specified distribution does not exist.
     """
+
+  @veryslow
+  Scenario: CRUD distributions
+    Given I create a disabled distribution
+    When I get the distribution configuration
+    Then I can update the distribution configuration
+    And I can delete the distribution
+
