@@ -30,6 +30,13 @@ module Aws
         expect(auth).to match('region-name')
       end
 
+      it 'ignores the globally configured region' do
+        allow(Aws).to receive(:config).and_return(region:'us-west-2')
+        expect {
+          Client.new(endpoint:'http://foo.com')
+        }.not_to raise_error
+      end
+
     end
   end
 end

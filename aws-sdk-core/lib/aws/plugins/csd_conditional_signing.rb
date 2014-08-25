@@ -11,6 +11,11 @@ module Aws
     #
     class CSDConditionalSigning < Seahorse::Client::Plugin
 
+      # Adding region as an option to avoid an issue when `Aws.config[:region]`
+      # is populated and the global configuration plugin merges options onto
+      # this client.
+      option(:region)
+
       option(:sigv4_region) do |cfg|
         # extract the region name from the cloud search domain endpoint
         if cfg.endpoint

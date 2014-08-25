@@ -1,4 +1,4 @@
-Next Release (TDB)
+Next Release (TBD)
 ------------------
 
 * Feature - Resources - Merged in resources branch. You can now use 
@@ -13,6 +13,10 @@ Next Release (TDB)
 * Issue - Error Class Names - Resolved an issue that could raise a
   `NameError`, "wrong constant name" at runtime in response to a service
   error. Fixes #97.
+
+* Issue - `Aws::CloudSearchDomain::Client` - Resolved an issue that would cause
+  the `Aws::CloudSearchDomain::Client` constructor to raise an error when
+  `Aws.config[:region]` is set. Fixes #103.
 
 2.0.0.rc15 (2014-08-14)
 -----------------------
