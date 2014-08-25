@@ -751,6 +751,20 @@ module AWS
           client.stub(:head_object).and_return(head)
           object.etag.should eq('myetag')
         end
+
+        it 'returns memoized #etag without requesting data' do
+          object = S3Object.new(bucket, 'foo', {etag: 'memoized-etag'})
+          client.should_not_receive(:head)
+          object.etag.should eq('memoized-etag')
+        end
+
+        it 'forces refresh of etag' do
+          object = S3Object.new(bucket, 'foo', {etag: 'memoized-etag'})
+          head = { :etag => 'myetag' }
+          client.stub(:head_object).and_return(head)
+          object.etag(true).should eq('myetag')  # new value
+          object.etag.should eq('myetag')        # memoized new value
+        end
       end
 
       context '#last_modified' do
@@ -760,6 +774,23 @@ module AWS
           client.stub(:head_object).and_return(head)
           object.last_modified.should eq(now)
         end
+
+        it 'returns memoized #last_modified without requesting data' do
+          now = Time.now
+          object = S3Object.new(bucket, 'foo', {last_modified: now})
+          client.should_not_receive(:head)
+          object.last_modified.should eq(now)
+        end
+
+        it 'forces refresh of #last_modified' do
+          past = Time.new(2014, 8, 25)
+          now = Time.now
+          object = S3Object.new(bucket, 'foo', {last_modified: past})
+          head = { :last_modified => now }
+          client.stub(:head_object).and_return(head)
+          object.last_modified(true).should eq(now)  # new value
+          object.last_modified.should eq(now)        # memoized new value
+        end
       end
 
       context '#content_length' do
@@ -767,6 +798,20 @@ module AWS
           head = { :content_length => 123 }
           client.stub(:head_object).and_return(head)
           object.content_length.should eq(123)
+        end
+
+        it 'returns memoized #content_length without requesting data' do
+          object = S3Object.new(bucket, 'foo', {content_length: 123})
+          client.should_not_receive(:head)
+          object.content_length.should eq(123)
+        end
+
+        it 'forces refresh of #content_length' do
+          object = S3Object.new(bucket, 'foo', {content_length: 111})
+          head = { :content_length => 123 }
+          client.stub(:head_object).and_return(head)
+          object.content_length(true).should eq(123)  # new value
+          object.content_length.should eq(123)        # memoized new value
         end
       end
 
