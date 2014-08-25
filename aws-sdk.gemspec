@@ -14,21 +14,6 @@ application.
   s.license = 'Apache 2.0'
   s.author = 'Amazon Web Services'
   s.homepage = 'http://aws.amazon.com/sdkforruby'
-
-  s.add_dependency('nokogiri', '>= 1.4.4')
-  s.add_dependency('json', '~> 1.4')
-
-  s.files = [
-    'ca-bundle.crt',
-    'rails/init.rb',    # for compatibility with older versions of rails
-    'endpoints.json',
-    '.yardopts',
-    'README.md',
-    'LICENSE.txt',
-  ]
-  s.files += Dir['lib/**/*.rb'].reject { |p| p.match('aws-sdk-v1.rb') }
-  s.files += Dir['lib/**/*.yml']
-
-  s.bindir = 'bin'
-  s.executables << 'aws-rb'
+  s.add_dependency('aws-sdk-v1', AWS::VERSION)
+  s.files = ['lib/aws-sdk.rb']
 end
