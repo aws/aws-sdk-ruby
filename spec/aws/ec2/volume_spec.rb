@@ -314,6 +314,22 @@ module AWS
         it_should_behave_like "ec2 volume attribute accessor"
       end
 
+      context '#type' do
+        let(:attribute) { :type }
+        let(:response_field) { :volume_type }
+        let(:response_value) { "type" }
+        let(:translated_value) { "type" }
+        it_should_behave_like "ec2 volume attribute accessor"
+      end
+
+      context '#encrypted' do
+        let(:attribute) { :encrypted }
+        let(:response_field) { :encrypted }
+        let(:response_value) { true }
+        let(:translated_value) { true }
+        it_should_behave_like "ec2 volume attribute accessor"
+      end
+
     end
 
   end

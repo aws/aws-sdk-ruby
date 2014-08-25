@@ -48,6 +48,11 @@ module AWS
     # @attr_reader [Time] create_time The time at which the volume
     #   was created.
     #
+    # @attr_reader [String] type The volume type.
+    #
+    # @attr_reader [Boolean] encrypted Returns `true` if the volume is
+    #   encrypted.
+    #
     # @attr_reader [String] iops
     #
     class Volume < Resource
@@ -79,6 +84,12 @@ module AWS
       attribute :attachment_set
 
       attribute :iops, :static => true
+
+      attribute :type, :from => :volume_type, :static => true
+
+      attribute :encrypted, :static => true
+
+      alias encrypted? encrypted
 
       populates_from(:create_volume) do |resp|
         resp if resp.volume_id == id
