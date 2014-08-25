@@ -179,6 +179,23 @@ module AWS
         AttachmentCollection.new(self, :config => config)
       end
 
+      # @return [Boolean] True if the volume is encrypted.
+      def encrypted?
+        resp = client.describe_volumes(:filters => [
+          { :name => 'volume-id', :values => [id] }
+        ])
+        resp.volume_index[id].encrypted
+      end
+
+      # @return [String] Indicates whether the volume is a standard
+      #   (Magnetic), gp2 (General Purpose (SSD)) or io1 (Provisioned IOPS (SSD)) volume.
+      def type
+        resp = client.describe_volumes(:filters => [
+          { :name => 'volume-id', :values => [id] }
+        ])
+        resp.volume_index[id].volume_type
+      end
+
     end
 
   end
