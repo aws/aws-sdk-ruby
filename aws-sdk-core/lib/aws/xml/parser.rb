@@ -32,6 +32,8 @@ module Aws
           value_key = member_key(member_shape) || member_name.to_s
           if values.key?(value_key)
             target[member_name] = parse_shape(member_shape, values[value_key])
+          elsif member_shape.is_a?(Seahorse::Model::Shapes::List)
+            target[member_name] = DefaultList.new
           end
         end
         target

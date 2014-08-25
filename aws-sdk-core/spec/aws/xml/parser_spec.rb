@@ -95,6 +95,20 @@ module Aws
           expect(parse(xml)[:values]).to be(nil)
         end
 
+        it 'popluates list members with a default list when not present' do
+          definition['members'] = {
+            'Values' => {
+              'type' => 'list',
+              'member' => { 'type' => 'string' }
+            }
+          }
+          xml = "<xml/>"
+          result = Parser.new(shape).parse(xml)
+          expect(result[:values]).to be_kind_of(DefaultList)
+          expect(result[:values]).to be_empty
+          expect(result[:values]).to be_nil
+        end
+
         it 'returns empty list elements as []' do
           definition['members'] = {
             'Values' => {

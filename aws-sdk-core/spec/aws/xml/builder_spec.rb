@@ -4,7 +4,6 @@ module Aws
   module Xml
     describe Builder do
 
-
       let(:members) { {} }
 
       let(:rules) {{ 'locationName' => 'xml', 'members' => members }}
