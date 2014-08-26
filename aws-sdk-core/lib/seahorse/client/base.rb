@@ -10,7 +10,6 @@ module Seahorse
       @plugins = PluginList.new([
         Plugins::Endpoint,
         Plugins::NetHttp,
-        Plugins::OperationMethods,
         Plugins::ParamConversion,
         Plugins::ParamValidation,
         Plugins::RaiseResponseErrors,
@@ -50,7 +49,44 @@ module Seahorse
         "#<#{self.class.name}>"
       end
 
+      # @return [Array<Symbol>] Returns a list of valid request operation
+      #   names. These are valid arguments to {#build_request} and are also
+      #   valid methods.
+      def operation_names
+        self.class.api.operation_names
+      end
+
+      # @api private
+      def respond_to?(method_name, *args)
+        if request_method?(method_name)
+          true
+        else
+          super
+        end
+      end
+
+      # @api private
+      def method_missing(method_name, *args, &block)
+        if request_method?(method_name)
+          make_request(method_name, *args, &block)
+        else
+          super
+        end
+      end
+
       private
+
+      # @return [Boolean] Returns `true` if the method name is an API operation.t 
+      def request_method?(method_name)
+        operation_names.include?(method_name.to_sym)
+      end
+
+      # Builds and sends a request.
+      def make_request(name, *args, &block)
+        params = args[0] || {}
+        options = args[1] || {}
+        build_request(name, params).send_request(options, &block)
+      end
 
       # Constructs a {Configuration} object and gives each plugin the
       # opportunity to register options with default values.
@@ -101,9 +137,6 @@ module Seahorse
           client.send(:initialize, plugins, options)
           client
         end
-
-        # Used by plugins that modify the client class.
-        attr_reader :mutex
 
         # Registers a plugin with this client.
         #
@@ -212,7 +245,6 @@ module Seahorse
 
         def inherited(subclass)
           subclass.instance_variable_set('@plugins', PluginList.new(@plugins))
-          subclass.instance_variable_set("@mutex", Mutex.new)
         end
 
       end

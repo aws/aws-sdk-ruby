@@ -45,7 +45,6 @@ module Seahorse
       autoload :JsonSimple, 'seahorse/client/plugins/json_simple'
       autoload :Logging, 'seahorse/client/plugins/logging'
       autoload :NetHttp, 'seahorse/client/plugins/net_http'
-      autoload :OperationMethods, 'seahorse/client/plugins/operation_methods'
       autoload :ParamConversion, 'seahorse/client/plugins/param_conversion'
       autoload :ParamValidation, 'seahorse/client/plugins/param_validation'
       autoload :RaiseResponseErrors, 'seahorse/client/plugins/raise_response_errors'
