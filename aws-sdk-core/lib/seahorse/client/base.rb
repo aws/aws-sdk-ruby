@@ -18,7 +18,7 @@ module Seahorse
       # @api private
       def initialize(plugins, options)
         @config = build_config(plugins, options)
-        @handlers = handler_list(plugins)
+        @handlers = build_handler_list(plugins)
         after_initialize(plugins)
       end
 
@@ -100,14 +100,13 @@ module Seahorse
       end
 
       # Gives each plugin the opportunity to register handlers for this client.
-      def handler_list(plugins)
-        handlers = HandlerList.new
-        plugins.each do |plugin|
+      def build_handler_list(plugins)
+        plugins.inject(HandlerList.new) do |handlers, plugin|
           if plugin.respond_to?(:add_handlers)
             plugin.add_handlers(handlers, @config)
           end
+          handlers
         end
-        handlers
       end
 
       # Gives each plugin the opportunity to modify this client.
