@@ -9,7 +9,6 @@ module Seahorse
       # These plugins are applied to every client and can not be removed.
       # @api private
       REQUIRED_PLUGINS = [
-        Plugins::Api,
         Plugins::Endpoint,
       ]
 
@@ -61,12 +60,12 @@ module Seahorse
       # Constructs a {Configuration} object and gives each plugin the
       # opportunity to register options with default values.
       def build_config(plugins, options)
-        options = options.merge(api: self.class.api) unless options[:api]
         config = Configuration.new
+        config.add_option(:api)
         plugins.each do |plugin|
           plugin.add_options(config) if plugin.respond_to?(:add_options)
         end
-        config.build!(options)
+        config.build!(options.merge(api: self.class.api))
       end
 
       # Gives each plugin the opportunity to register handlers for this client.

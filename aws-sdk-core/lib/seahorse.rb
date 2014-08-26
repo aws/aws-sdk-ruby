@@ -40,7 +40,6 @@ module Seahorse
     end
 
     module Plugins
-      autoload :Api, 'seahorse/client/plugins/api'
       autoload :ContentLength, 'seahorse/client/plugins/content_length'
       autoload :Endpoint, 'seahorse/client/plugins/endpoint'
       autoload :JsonSimple, 'seahorse/client/plugins/json_simple'

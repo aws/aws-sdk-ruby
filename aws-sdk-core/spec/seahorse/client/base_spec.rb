@@ -231,7 +231,6 @@ module Seahorse
         it 'has a defualt list of plugins' do
           client_class = Class.new(Base)
           expect(client_class.plugins.to_a).to eq([
-            Plugins::Api,
             Plugins::Endpoint,
             Plugins::NetHttp,
             Plugins::OperationMethods,
