@@ -1,5 +1,3 @@
-require 'thread'
-
 module Seahorse
   module Client
     class Response
