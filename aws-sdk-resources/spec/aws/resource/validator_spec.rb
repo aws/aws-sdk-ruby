@@ -1,6 +1,14 @@
 require 'spec_helper'
 require 'multi_json'
 
+def fixtures
+  path = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 
+    'fixtures', 'validator', '*'))
+  directories = Dir.glob(path)
+  raise 'unable to locate fixtures' if directories.empty?
+  directories
+end
+
 module Aws
   module Resource
     describe Validator do
@@ -29,7 +37,7 @@ module Aws
         end
       end
 
-      Dir.glob('spec/fixtures/resource/validator/*').each do |dir|
+      fixtures.each do |dir|
 
         it(File.basename(dir)) do
           errors = Validator.validate(definition(dir), api(dir))
