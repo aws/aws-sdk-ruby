@@ -441,13 +441,76 @@ module Aws
 
           describe '#load' do
 
-            it 'raises a NotImplementedError when not specified'
+            it 'raises a NotImplementedError when not specified' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }]
+                }
+              }
 
-            it 'loads and returns resource data'
+              apply_definition
 
-            it 'caches resource data'
+              allow(namespace::Thing).to receive(:name).and_return('Thing')
 
-            it 'reloads data on request'
+              expect {
+                namespace::Thing.new(name:'thing-name').load
+              }.to raise_error(NotImplementedError, '#load not defined for Thing')
+            end
+
+            it 'loads and caches resource data' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'shape' => 'DataShape',
+                  'load' => {
+                    'request' => {
+                      'operation' => 'DescribeThing',
+                      'params' => [
+                        { 'target' => 'ThingName', 'sourceType' => 'identifier', 'source' => 'Name' }
+                      ]
+                    },
+                    'path' => 'ThingData'
+                  }
+                }
+              }
+              shapes['StringShape'] = { 'type' => 'string' }
+              shapes['DataShape'] = {
+                'type' => 'structure',
+                'members' => {
+                  'Color' => { 'shape' => 'StringShape' },
+                  'Size' => { 'shape' => 'StringShape' },
+                }
+              }
+
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name')
+
+              resp1 = double('response', data: { 'thing_data' => {
+                color: 'red',
+                size: 'large',
+              }})
+
+              resp2 = double('response', data: { 'thing_data' => {
+                color: 'blue',
+                size: 'small',
+              }})
+
+              expect(thing.client).to receive(:describe_thing).
+                with(thing_name:thing.name).
+                and_return(resp1, resp2).
+                twice
+
+              expect(thing.data_loaded?).to be(false)
+              expect(thing.load).to be(thing)
+              expect(thing.data_loaded?).to be(true)
+              expect(thing.color).to eq('red')
+              expect(thing.size).to eq('large')
+              expect(thing.reload).to be(thing)
+              expect(thing.data_loaded?).to be(true)
+              expect(thing.color).to eq('blue')
+              expect(thing.size).to eq('small')
+            end
 
           end
 

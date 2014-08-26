@@ -108,7 +108,7 @@ module Aws
 
           it 'raises a NotImplementedError when load_operation is not defined' do
             resource_class.load_operation = nil
-            msg = "load not defined for #{resource_name}"
+            msg = "#load not defined for #{resource_name}"
             expect {
               resource_class.new.load
             }.to raise_error(NotImplementedError, msg)

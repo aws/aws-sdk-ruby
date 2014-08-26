@@ -36,7 +36,7 @@ module Aws
           @data = load_operation.call(resource:self, client:client)
           self
         else
-          raise NotImplementedError, "load not defined for #{self.class.name}"
+          raise NotImplementedError, "#load not defined for #{self.class.name}"
         end
       end
       alias reload load
