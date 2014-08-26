@@ -105,5 +105,33 @@ module Aws
       expect(credentials.session_token).to eq('token')
     end
 
+    describe 'with shared credentials' do
+
+      let(:path) { File.join('HOME', '.aws', 'credentials') }
+
+      before(:each) do
+        allow(File).to receive(:exists?).with(path).and_return(true)
+        allow(File).to receive(:readable?).with(path).and_return(true)
+        allow(Dir).to receive(:home).and_return('HOME')
+      end
+
+      it 'returns no credentials when the shared file is empty' do
+        expect(File).to receive(:read).with(path).and_return('')
+        expect(chain.resolve).to be(nil)
+      end
+
+      it 'returns no credentials when the shared file profile is missing' do
+        no_default = <<-CREDS.strip
+[fooprofile]
+aws_access_key_id = ACCESS_KEY_1
+aws_secret_access_key = SECRET_KEY_1
+aws_session_token = TOKEN_1
+        CREDS
+        expect(File).to receive(:read).with(path).and_return(no_default)
+        expect(chain.resolve).to be(nil)
+      end
+
+    end
+
   end
 end

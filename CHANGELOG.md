@@ -18,6 +18,10 @@ Next Release (TBD)
   the `Aws::CloudSearchDomain::Client` constructor to raise an error when
   `Aws.config[:region]` is set. Fixes #103.
 
+* Issue - Shared Credentials - Resolved an issue where an error was raised
+  if the shared AWS credentials file is present and is empty or missing the
+  default profile. Fixes #104.
+
 2.0.0.rc15 (2014-08-14)
 -----------------------
 

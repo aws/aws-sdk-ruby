@@ -9,7 +9,7 @@ module Aws
     def resolve
       providers.each do |method_name, options|
         credentials = send(method_name, options.merge(config: @config))
-        return credentials if credentials.set?
+        return credentials if credentials && credentials.set?
       end
       nil
     end
@@ -50,6 +50,8 @@ module Aws
 
     def shared_credentials(options = {})
       SharedCredentials.new(profile_name: options[:config].profile)
+    rescue Errors::NoSuchProfileError
+      nil
     end
 
     def instance_profile_credentials(*args)
