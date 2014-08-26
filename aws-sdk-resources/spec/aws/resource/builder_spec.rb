@@ -122,20 +122,6 @@ module Aws
           expect(result[1].id).to eq('id2')
         end
 
-        it 'constructs then yield resources one at a time if a block is given' do
-          pending
-          parent = double('resource-parent',
-            data: { 'ids' => %w(id1 id2) },
-            client: double('client')
-          )
-          resource_class = Resource.define(double('client-class'), [:id])
-          expect(resource_class).to receive(:new).exactly(1).times
-          builder = Builder.new(resource_class:resource_class, sources:[
-            BuilderSources::DataMember.new('ids[]', 'id'),
-          ])
-          builder.build(resource:parent) { |resource| break }
-        end
-
       end
     end
   end
