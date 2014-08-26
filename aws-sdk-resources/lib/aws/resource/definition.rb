@@ -169,7 +169,9 @@ module Aws
             next if resource.identifiers.include?(member_name)
             if existing_methods.include?(member_name)
               conflict = "#{resource.resource_name}##{member_name}"
-              raise "duplicate resource data_attr #{conflict}"
+              msg = "unable to add attribute #{conflict}, "
+              msg << "method already exists"
+              raise msg
             else
               resource.add_data_attribute(member_name)
             end

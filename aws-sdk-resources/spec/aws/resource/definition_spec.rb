@@ -370,11 +370,72 @@ module Aws
 
           describe 'data attributes' do
 
-            it 'defines a getter for each member of the resource shape'
+            it 'defines a getter for each member of the resource shape' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'shape' => 'DataShape'
+                }
+              }
+              shapes['StringShape'] = { 'type' => 'string' }
+              shapes['DataShape'] = {
+                'type' => 'structure',
+                'members' => {
+                  'Color' => { 'shape' => 'StringShape' },
+                  'Size' => { 'shape' => 'StringShape' },
+                }
+              }
+              apply_definition
+              thing = namespace::Thing.new(name:'thing-name')
+              expect(thing.class.data_attributes).to eq([:color, :size])
+              expect(thing).to respond_to(:color)
+              expect(thing).to respond_to(:size)
+            end
 
-            it 'does not redefine identifiers that have the same name'
+            it 'does not redefine identifiers that have the same name' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'shape' => 'DataShape'
+                }
+              }
+              shapes['StringShape'] = { 'type' => 'string' }
+              shapes['DataShape'] = {
+                'type' => 'structure',
+                'members' => {
+                  'Name' => { 'shape' => 'StringShape' },
+                  'Color' => { 'shape' => 'StringShape' },
+                  'Size' => { 'shape' => 'StringShape' },
+                }
+              }
+              apply_definition
+              thing = namespace::Thing.new(name:'thing-name')
+              # notice that :name is not an attribute
+              expect(thing.class.data_attributes).to eq([:color, :size])
+              expect(thing.name).to eq('thing-name')
+              expect(thing).to respond_to(:color)
+              expect(thing).to respond_to(:size)
+            end
 
-            it 'raises an error if method already exists for the the data attr'
+            it 'raises an error if method already exists for the the data attr' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'shape' => 'DataShape'
+                }
+              }
+              shapes['StringShape'] = { 'type' => 'string' }
+              shapes['DataShape'] = {
+                'type' => 'structure',
+                'members' => {
+                  'Data' => { 'shape' => 'StringShape' },
+                }
+              }
+              msg = 'unable to add attribute Thing#data, method already exists'
+              expect {
+                apply_definition
+              }.to raise_error(msg)
+            end
 
           end
 
