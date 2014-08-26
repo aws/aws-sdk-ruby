@@ -15,8 +15,6 @@ module Seahorse
 
       let(:client) { client_class.new(endpoint:'http://example.com') }
 
-      let(:required_plugins) { Base::REQUIRED_PLUGINS }
-
       let(:plugin_a) { Class.new }
 
       let(:plugin_b) { Class.new }
@@ -52,10 +50,7 @@ module Seahorse
         it 'builds a handler list from client plugins' do
           client_class.clear_plugins
           client_class.add_plugin(Plugins::NetHttp)
-          expect(client.handlers.to_a).to eq([
-            NetHttp::Handler,
-            Plugins::Endpoint::Handler,
-          ])
+          expect(client_class.new.handlers.to_a).to eq([NetHttp::Handler])
         end
 
         it 'defaults the send handler to a NetHttp::Handler' do
@@ -203,7 +198,7 @@ module Seahorse
         it 'replaces existing plugins' do
           client_class.add_plugin(plugin_a)
           client_class.set_plugins([plugin_b])
-          expect(client_class.plugins).to eq(required_plugins + [plugin_b])
+          expect(client_class.plugins).to eq([plugin_b])
         end
 
       end
@@ -213,7 +208,7 @@ module Seahorse
         it 'removes all plugins' do
           client_class.add_plugin(plugin_a)
           client_class.clear_plugins
-          expect(client_class.plugins).to eq(required_plugins + [])
+          expect(client_class.plugins).to eq([])
         end
 
       end

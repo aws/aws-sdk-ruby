@@ -12,6 +12,7 @@ module Seahorse
             }
           }
           client_class.clear_plugins
+          client_class.add_plugin(Endpoint)
           client_class.add_plugin(DummySendPlugin)
           client_class
         end

@@ -6,14 +6,9 @@ module Seahorse
 
       include HandlerBuilder
 
-      # These plugins are applied to every client and can not be removed.
-      # @api private
-      REQUIRED_PLUGINS = [
-        Plugins::Endpoint,
-      ]
-
       # default plugins
       @plugins = PluginList.new([
+        Plugins::Endpoint,
         Plugins::NetHttp,
         Plugins::OperationMethods,
         Plugins::ParamConversion,
@@ -171,7 +166,7 @@ module Seahorse
         # @see .remove_plugin
         # @return [Array<Plugin>]
         def plugins
-          (REQUIRED_PLUGINS + Array(@plugins)).freeze
+          Array(@plugins).freeze
         end
 
         # @return [Model::Api]
