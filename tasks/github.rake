@@ -1,5 +1,5 @@
 def github_access_token
-  access_token = `task github:access-token`
+  access_token = `rake github:access-token`
   if access_token.empty?
     warn('missing github access token')
     exit

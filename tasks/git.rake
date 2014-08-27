@@ -1,13 +1,4 @@
-def version
-  verison = ENV['VERSION'].to_s.sub(/^v/, '')
-  if version.empty?
-    warn("usage: VERSION=x.y.z rake release:tag")
-    exit
-  end
-  version
-end
-
-task 'git:require_clean_workspace' do
+task 'git:require-clean-workspace' do
   # Ensure the git repo is free of unstaged or untracked files prior
   # to building / testing / pushing a release.
   unless `git diff --shortstat 2> /dev/null | tail -n1` == ''

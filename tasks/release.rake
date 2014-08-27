@@ -3,7 +3,7 @@ def version
   if version.match(/^\d+\.\d+\.\d+(\.rc\d+)?$/)
     version
   else
-    warn("usage: VERSION=x.y.z ACCESS_TOKEN=... rake release")
+    warn("usage: VERSION=x.y.z rake release")
     exit
   end
 end
@@ -25,7 +25,7 @@ end
 task 'release:stage' => [
   'release:require-version',
   'github:require-access-token',
-  'git:require_clean_workspace',
+  'git:require-clean-workspace',
   'test:unit',
   'test:integration',
   'docs:update_readme',
