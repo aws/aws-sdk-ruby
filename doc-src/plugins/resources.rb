@@ -78,6 +78,7 @@ a default client will be constructed.
     yard_class.superclass = YARD::Registry['Aws::Resource::Base']
     document_client_getter(yard_class, resource_class)
     document_identifiers_getter(name, yard_class, resource_class)
+    document_data_attribute_getters(yard_class, resource_class)
     document_operation_methods(yard_class, resource_class)
     yard_class
   end
@@ -103,6 +104,48 @@ a default client will be constructed.
     m.docstring = docstring
     m.add_tag(YARD::Tags::Tag.new(:return, nil, ['Hash']))
     yard_class.instance_attributes[:identifiers] = { :read => m }
+  end
+
+  def document_data_attribute_getters(yard_class, resource_class)
+
+    _, svc, resource_name = resource_class.name.split('::')
+
+    return if resource_name == 'Resource'
+
+    definition = File.read("aws-sdk-core/apis/#{svc}.resources.json")
+    definition = MultiJson.load(definition)
+    definition = definition['resources'][resource_name]
+    if shape_name = definition['shape']
+      shape = resource_class.client_class.api.shape_map.shape('shape' => shape_name)
+      shape.members.each do |member_name, member_shape|
+
+        return_type = case member_shape
+          when Seahorse::Model::Shapes::Blob then 'String<bytes>'
+          when Seahorse::Model::Shapes::Byte then  'String<bytes>'
+          when Seahorse::Model::Shapes::Boolean then 'Boolean'
+          when Seahorse::Model::Shapes::Character then 'String'
+          when Seahorse::Model::Shapes::Double then 'Float'
+          when Seahorse::Model::Shapes::Float then 'Float'
+          when Seahorse::Model::Shapes::Integer then 'Integer'
+          when Seahorse::Model::Shapes::List then 'Array'
+          when Seahorse::Model::Shapes::Long then 'Integer'
+          when Seahorse::Model::Shapes::Map then 'Hash'
+          when Seahorse::Model::Shapes::String then 'String'
+          when Seahorse::Model::Shapes::Structure then 'Structure'
+          when Seahorse::Model::Shapes::Timestamp then 'Time'
+          else raise 'unhandled type'
+        end
+
+        return_type = member_shape.class.name.split('::').last
+
+        m = YARD::CodeObjects::MethodObject.new(yard_class, member_name)
+        m.scope = :instance
+        m.docstring = ''
+        m.add_tag(YARD::Tags::Tag.new(:return, nil, [return_type]))
+        yard_class.instance_attributes[member_name] = { :read => m }
+
+      end
+    end
   end
 
   def document_operation_methods(yard_class, resource_class)
