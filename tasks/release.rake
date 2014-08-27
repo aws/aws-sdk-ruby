@@ -12,7 +12,7 @@ task 'release:require-version' do
   version
 end
 
-task 'release:version' do
+task 'release:bump-version' do
   # bumps the VERSION file and the `Aws::VERSION` constant
   sh("echo '#{version}' > VERSION")
   path = 'aws-sdk-core/lib/aws/version.rb'
@@ -30,7 +30,7 @@ task 'release:stage' => [
   'test:integration',
   'docs:update_readme',
   'changelog:version',
-  'release:version',
+  'release:bump-version',
   'git:tag',
   'gems:build',
   'docs:zip',
