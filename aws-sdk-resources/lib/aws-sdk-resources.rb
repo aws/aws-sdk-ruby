@@ -34,7 +34,9 @@ module Aws
       # @api private
       def definition(options)
         namespace, path = options.values_at(:namespace, :definition)
-        Definition.new(namespace, MultiJson.load(File.read(path), path: path))
+        source = File.open(path, 'r', encoding: 'UTF-8') { |f| f.read }
+        source = MultiJson.load(source)
+        Definition.new(namespace, source, source_path: path)
       end
 
     end

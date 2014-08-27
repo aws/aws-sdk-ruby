@@ -11,7 +11,7 @@ module Aws
       def initialize(namespace, source, options = {})
         @namespace = namespace
         @source = source
-        @source_path = options[:path]
+        @source_path = options[:source_path]
       end
 
       # @param [String] service_name
