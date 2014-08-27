@@ -202,6 +202,49 @@ resp = resp.next_page # send a request for the next response page
 resp = resp.next_page until resp.last_page?
 ```
 
+## Resource Interfaces
+
+**Resource interfaces are currently experimental. While `aws-sdk-core` is very stable,
+`aws-sdk-resources` should be considered unstable.**
+
+A handful of services provide resource-oriented interfaces that abstract the client
+APIs.
+
+
+```ruby
+
+s3 = Aws::S3::Resource.new
+
+# reference an existing bucket
+bucket = s3.bucket('aws-sdk')
+
+# enumerate every object in a bucket
+bucket.objects.each do |obj|
+  puts "#{object.key} => #{obj.etag}"
+end
+
+# batch operations, delete objects in batches of 1k
+bucket.objects(prefix: '/tmp-files/').delete
+
+# single object operations
+obj = bucket.object('hello')
+obj.put(body:'Hello World!')
+obj.etag
+obj.delete
+```
+
+Currently there are Resource-oriented interfaces for:
+
+* `Aws::S3`
+* `Aws::IAM`
+* `Aws::EC2` - partial
+* `Aws::SQS`
+* `Aws::SNS`
+* `Aws::Glacier`
+
+Documentation is currently fairly sparse on the resource classes, expect a lot of
+improvement on these over the coming weeks.
+
 ## Interactive Console
 
 AWS SDK Core ships with a REPL that acts as an interactive console. You
