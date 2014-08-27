@@ -136,8 +136,6 @@ a default client will be constructed.
           else raise 'unhandled type'
         end
 
-        return_type = member_shape.class.name.split('::').last
-
         m = YARD::CodeObjects::MethodObject.new(yard_class, member_name)
         m.scope = :instance
         m.docstring = ''
