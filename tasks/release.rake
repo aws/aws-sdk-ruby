@@ -8,7 +8,7 @@ def version
   end
 end
 
-task 'release:require_version' do
+task 'release:require-version' do
   version
 end
 
@@ -23,8 +23,8 @@ task 'release:version' do
 end
 
 task 'release:stage' => [
-  'release:require_version',
-  'github:require_access_token',
+  'release:require-version',
+  'github:require-access-token',
   'git:require_clean_workspace',
   'test:unit',
   'test:integration',

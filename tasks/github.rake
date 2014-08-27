@@ -1,22 +1,26 @@
 def github_access_token
-  access_token = ENV['ACCESS_TOKEN'].to_s.sub(/^v/, '')
+  access_token = `task github:access-token`
   if access_token.empty?
-    warn("usage: VERSION=x.y.z ACCESS_TOKEN=... rake release")
+    warn('missing github access token')
     exit
   else
     access_token
   end
 end
 
-task 'github:require_access_token' do
+task 'github:require-access-token' do
   github_access_token
 end
+
+# this task must be defined to deploy
+task 'github:access-token'
 
 task 'github:release' do
   require 'octokit'
 
-  access_token = `rake github:access_token`.strip
   repo = 'aws/aws-sdk-core-ruby'
+
+  puts github_access_token
 
   gh = Octokit::Client.new(access_token: github_access_token)
 
