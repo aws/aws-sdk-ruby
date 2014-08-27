@@ -26,6 +26,7 @@ module Aws
         def new_method
           m = YARD::CodeObjects::MethodObject.new(@yard_class, @operation_name)
           m.scope = :instance
+          m.group = group_name
           m.docstring = docstring
           m.source_type = :json
           m.source = @operation.source.format
@@ -56,7 +57,7 @@ module Aws
         end
 
         def group_name
-          'Resource Actions'
+          'Operations'
         end
 
         def resource_class_name

@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'aws-sdk-resources', 'lib')))
 
-# ISSUES
+# KNOWN ISSUES
 #
 # - Changed Resource::Base#data, #client and #attributes from
 #   attr_reader to methods so I could override them in the client
@@ -13,15 +13,18 @@ $LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'
 #     into the instance_attributes[:client] = { :read => m } and marking
 #     parent attr_reader as @api private
 #
+# - Unable to access data attributes for resources that have no load method defined,
+#   such as Bucket#creation_date unless the resource is constructed from an enumerator.
+#   Bucket.new(name:'aws-sdk').creation_date raises a NotImplementedError
+#
 # TODOs
 #
 # - Document batch operations in the Resource class docstring
 # - Document operation inputs, subtracting provided inputs
-# - Add operation level documentation to the resource JSON that can be
-#   included with each operation docs
+# - Document operation response structures for operations that return responses or data
+# - Add "documentation" traits to resource definitions for each operation
 # - Document resource constructors
 # - Investigate adding @see tags to related operations
-# - Investigate grouping related operations
 #
 
 require 'aws-sdk-resources'
@@ -77,7 +80,8 @@ a default client will be constructed.
     yard_class = YARD::CodeObjects::ClassObject.new(namespace, name)
     yard_class.superclass = YARD::Registry['Aws::Resource::Base']
     document_client_getter(yard_class, resource_class)
-    document_identifiers_getter(name, yard_class, resource_class)
+    document_identifiers_hash(yard_class, resource_class)
+    document_identifier_attributes(yard_class, resource_class)
     document_data_attribute_getters(yard_class, resource_class)
     document_operation_methods(yard_class, resource_class)
     yard_class
@@ -91,7 +95,7 @@ a default client will be constructed.
     yard_class.instance_attributes[:client] = { :read => m }
   end
 
-  def document_identifiers_getter(name, yard_class, resource_class)
+  def document_identifiers_hash(yard_class, resource_class)
     identifiers = resource_class.identifiers
     m = YARD::CodeObjects::MethodObject.new(yard_class, :identifiers)
     m.scope = :instance
@@ -106,6 +110,19 @@ a default client will be constructed.
     yard_class.instance_attributes[:identifiers] = { :read => m }
   end
 
+  def document_identifier_attributes(yard_class, resource_class)
+    identifiers = resource_class.identifiers
+    group = identifiers.count > 1 ? 'Identifiers' : 'Identifier'
+    identifiers.each do |identifier_name|
+      m = YARD::CodeObjects::MethodObject.new(yard_class, identifier_name)
+      m.scope = :instance
+      m.group = group
+      m.docstring = ''
+      m.add_tag(YARD::Tags::Tag.new(:return, nil, ['String']))
+      yard_class.instance_attributes[identifier_name] = { :read => m }
+    end
+  end
+
   def document_data_attribute_getters(yard_class, resource_class)
 
     _, svc, resource_name = resource_class.name.split('::')
@@ -116,9 +133,12 @@ a default client will be constructed.
     definition = MultiJson.load(definition)
     definition = definition['resources'][resource_name]
     if shape_name = definition['shape']
-      shape = resource_class.client_class.api.shape_map.shape('shape' => shape_name)
-      shape.members.each do |member_name, member_shape|
 
+      shape = resource_class.client_class.api.shape_map.shape('shape' => shape_name)
+
+      resource_class.data_attributes.each do |member_name|
+
+        member_shape = shape.member(member_name)
         return_type = case member_shape
           when Seahorse::Model::Shapes::Blob then 'String<bytes>'
           when Seahorse::Model::Shapes::Byte then  'String<bytes>'
@@ -138,6 +158,7 @@ a default client will be constructed.
 
         m = YARD::CodeObjects::MethodObject.new(yard_class, member_name)
         m.scope = :instance
+        m.group = 'Data Attributes'
         m.docstring = ''
         m.add_tag(YARD::Tags::Tag.new(:return, nil, [return_type]))
         yard_class.instance_attributes[member_name] = { :read => m }

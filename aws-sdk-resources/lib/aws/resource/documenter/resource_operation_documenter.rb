@@ -27,10 +27,6 @@ module Aws
           end
         end
 
-        def group_name
-          "#{resource_class_name} Operations"
-        end
-
         def plural?
           @operation.builder.plural?
         end

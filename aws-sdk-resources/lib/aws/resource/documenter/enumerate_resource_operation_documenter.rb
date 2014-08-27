@@ -20,7 +20,7 @@ module Aws
         end
 
         def group_name
-          "#{resource_class_name} Operations"
+          "Resource References"
         end
 
       end

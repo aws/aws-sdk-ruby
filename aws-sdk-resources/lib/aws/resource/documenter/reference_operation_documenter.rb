@@ -5,11 +5,11 @@ module Aws
 
         def docstring
           if argument?
-            "<p>Returns a new #{resource_class_name} object with the given `#{argument_name}`.</p>"
+            "<p>Returns a #{resource_class_name} resource with the given `#{argument_name}`.</p>"
           elsif plural?
-            "<p>Returns an array of #{resource_class_name} objects."
+            "<p>Returns an array of #{resource_class_name} resources."
           else
-            "<p>Returns a new #{resource_class_name} object."
+            "<p>Returns a #{resource_class_name} resource."
           end
         end
 
@@ -34,11 +34,7 @@ module Aws
         end
 
         def group_name
-          if argument?
-            "#{resource_class_name} Operations"
-          else
-            "References"
-          end
+          "Resource References"
         end
 
         def plural?
