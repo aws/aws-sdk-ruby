@@ -29,7 +29,9 @@ module Aws
           m.docstring = docstring
           m.source_type = :json
           m.source = @operation.source.format
-          m.add_file(@operation.source.file, nil, true) if @operation.source.file
+          filename = @operation.source.file
+          filename = filename.match('(aws-sdk-core/apis/.+\.resources\.json)')[1]
+          m.add_file(filename, nil, true) if @operation.source.file
           m
         end
 
