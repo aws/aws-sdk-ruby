@@ -58,19 +58,19 @@ module Aws
     end
 
     it 'defines a new service module' do
-      Aws.add_service('DummyService', api: 'apis/S3.api.json')
+      Aws.add_service('DummyService', api: File.join(GEM_ROOT, 'apis/S3.api.json'))
       expect(Aws::DummyService.ancestors).to include(Aws::Service)
     end
 
     it 'defines an errors module' do
-      Aws.add_service('DummyService', api: 'apis/S3.api.json')
+      Aws.add_service('DummyService', api: File.join(GEM_ROOT, 'apis/S3.api.json'))
       errors = Aws::DummyService::Errors
       expect(errors::ServiceError.ancestors).to include(Aws::Errors::ServiceError)
       expect(errors::FooError.ancestors).to include(Aws::Errors::ServiceError)
     end
 
     it 'defines a client class' do
-      Aws.add_service('DummyService', api: 'apis/S3.api.json')
+      Aws.add_service('DummyService', api: File.join(GEM_ROOT, 'apis/S3.api.json'))
       expect(Aws::DummyService::Client.ancestors).to include(Seahorse::Client::Base)
     end
 
@@ -78,7 +78,7 @@ module Aws
       path = File.join(Aws::GEM_ROOT, 'apis/S3.api.json')
       api = StringIO.new(File.read(path))
       expect(File).to receive(:open).with(path, 'r', encoding: 'UTF-8').and_return(api)
-      Aws.add_service('DummyService', api: 'apis/S3.api.json')
+      Aws.add_service('DummyService', api: File.join(GEM_ROOT, 'apis/S3.api.json'))
     end
 
     it 'does not prefix absolute api paths with GEM_ROOT' do
