@@ -20,7 +20,38 @@ module Aws
         private
 
         def tags
-          [return_tag]
+          param_option_tags + [return_tag] + see_also_tags
+        end
+
+        def param_option_tags
+          if @operation.respond_to?(:request)
+            api_operation = @operation.request.method_name
+            api_operation = @resource_class.client_class.api.operation(api_operation)
+            if api_operation.input
+              tags = []
+              api_operation.input.members.each do |member_name, member_shape|
+                if @operation.request.params.any? { |p| p.target.match(/^#{member_name}\b/) }
+                  next
+                end
+                tags << "@option params [#{member_shape.type}] :#{member_name}"
+              end
+              tags = tags.join("\n")
+              YARD::DocstringParser.new.parse(tags).to_docstring.tags
+            else
+              []
+            end
+          else
+            []
+          end
+        end
+
+        def see_also_tags
+          if called_operation
+            tag = "@see #{called_operation}"
+            YARD::DocstringParser.new.parse(tag).to_docstring.tags
+          else
+            []
+          end
         end
 
         def new_method
@@ -65,9 +96,13 @@ module Aws
         end
 
         def called_operation
-          client = @resource_class.client_class.name
-          method = @operation.request.method_name
-          client + '#' + method
+          if @operation.respond_to?(:request)
+            client = @resource_class.client_class.name
+            method = @operation.request.method_name
+            client + '#' + method
+          else
+            nil
+          end
         end
 
         def path_type

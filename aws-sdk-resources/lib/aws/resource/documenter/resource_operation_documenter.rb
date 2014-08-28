@@ -21,9 +21,9 @@ module Aws
 
         def return_message
           if plural?
-            "Calls #{called_operation} on the {#client} returning one {#{resource_class_name}} object."
+            "Calls {#{called_operation}} returning an array of {#{resource_class_name}} objects."
           else
-            "Calls #{called_operation} on the {#client} returning an array of {#{resource_class_name}} objects."
+            "Calls {#{called_operation}} returning a {#{resource_class_name}} object."
           end
         end
 

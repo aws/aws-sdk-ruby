@@ -25,6 +25,8 @@ $LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'
 # - Add "documentation" traits to resource definitions for each operation
 # - Document resource constructors
 # - Investigate adding @see tags to related operations
+# - Enumerate resource operations should document they return a
+#   Collection, not Enumerator
 #
 
 require 'aws-sdk-resources'
