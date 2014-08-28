@@ -304,29 +304,20 @@ module AWS
       # upload-part-md5s.
       #
       # @return [String] Returns the object's ETag
-      def etag(force_refresh = false)
-        if (!@etag || force_refresh)
-          @etag = head[:etag]
-        end
-        @etag
+      def etag
+        @etag = config.s3_cache_object_attributes && @etag || head[:etag]
       end
 
       # Returns the object's last modified time.
       #
       # @return [Time] Returns the object's last modified time.
-      def last_modified(force_refresh = false)
-        if (!@last_modified || force_refresh)
-          @last_modified = head[:last_modified]
-        end
-        @last_modified
+      def last_modified
+        @last_modified = config.s3_cache_object_attributes && @last_modified || head[:last_modified]
       end
 
       # @return [Integer] Size of the object in bytes.
-      def content_length(force_refresh = false)
-        if (!@content_length || force_refresh)
-          @content_length = head[:content_length]
-        end
-        @content_length
+      def content_length
+        @content_length = config.s3_cache_object_attributes && @content_length || head[:content_length]
       end
 
       # @note S3 does not compute content-type.  It reports the content-type
