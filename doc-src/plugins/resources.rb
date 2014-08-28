@@ -17,6 +17,9 @@ $LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'
 #   such as Bucket#creation_date unless the resource is constructed from an enumerator.
 #   Bucket.new(name:'aws-sdk').creation_date raises a NotImplementedError
 #
+# - How to preserve ordering of grouped methods, such as "Identifiers" - these
+#   have a logical ordering and they are being lexically ordered.
+#
 # TODOs
 #
 # - Document batch operations in the Resource class docstring

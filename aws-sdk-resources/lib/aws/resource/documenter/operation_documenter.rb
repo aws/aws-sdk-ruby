@@ -12,7 +12,7 @@ module Aws
         end
 
         def return_message
-          "Returns the reponse from calling #{called_operation}."
+          "Returns the reponse from calling {#{called_operation}}."
         end
 
         def return_type

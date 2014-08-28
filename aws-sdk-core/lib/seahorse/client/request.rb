@@ -79,7 +79,7 @@ module Seahorse
           @context.http_response.body =
             case target
             when Proc then BlockIO.new(&target)
-            when String, Pathname then ManagedFile.new(target, 'wb')
+            when String, Pathname then ManagedFile.new(target, 'r+b')
             else target
           end
         end

@@ -33,7 +33,7 @@ module Aws
                 if @operation.request.params.any? { |p| p.target.match(/^#{member_name}\b/) }
                   next
                 end
-                tags << "@option params [#{member_shape.type}] :#{member_name}"
+                tags << "@option params [#{ruby_type(member_shape)}] :#{member_name}"
               end
               tags = tags.join("\n")
               YARD::DocstringParser.new.parse(tags).to_docstring.tags
@@ -133,6 +133,25 @@ module Aws
           when Seahorse::Model::Shapes::Blob then 'IO'
           else
             raise "unhandled shape class `#{shape.class.name}'"
+          end
+        end
+
+        def ruby_type(shape)
+          case shape
+          when Seahorse::Model::Shapes::Blob then 'IO'
+          when Seahorse::Model::Shapes::Byte then  'String'
+          when Seahorse::Model::Shapes::Boolean then 'Boolean'
+          when Seahorse::Model::Shapes::Character then 'String'
+          when Seahorse::Model::Shapes::Double then 'Float'
+          when Seahorse::Model::Shapes::Float then 'Float'
+          when Seahorse::Model::Shapes::Integer then 'Integer'
+          when Seahorse::Model::Shapes::List then 'Array'
+          when Seahorse::Model::Shapes::Long then 'Integer'
+          when Seahorse::Model::Shapes::Map then 'Hash'
+          when Seahorse::Model::Shapes::String then 'String'
+          when Seahorse::Model::Shapes::Structure then 'Structure'
+          when Seahorse::Model::Shapes::Timestamp then 'Time'
+          else raise 'unhandled type'
           end
         end
 
