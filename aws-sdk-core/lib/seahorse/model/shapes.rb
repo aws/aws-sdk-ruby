@@ -68,7 +68,6 @@ module Seahorse
           @type = definition['type']
           @location = definition['location'] || 'body'
           @location_name = definition['locationName']
-          @documentation = definition['documentation']
           @shape_map = options[:shape_map] || ShapeMap.new
         end
 
@@ -89,11 +88,15 @@ module Seahorse
         #   shape references, not on the shape definition.
         attr_reader :location_name
 
-        # @return [String, nil]
         attr_reader :documentation
 
         # @return [ShapeMap]
         attr_reader :shape_map
+
+        # @return [String, nil]
+        def documentation
+          @definition['documentation']
+        end
 
         # @param [String] key
         # @return [Object, nil]

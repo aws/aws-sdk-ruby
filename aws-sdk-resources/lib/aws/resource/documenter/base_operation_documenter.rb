@@ -33,7 +33,8 @@ module Aws
                 if @operation.request.params.any? { |p| p.target.match(/^#{member_name}\b/) }
                   next
                 end
-                tags << "@option params [#{ruby_type(member_shape)}] :#{member_name}"
+                docstring = member_shape.documentation
+                tags << "@option params [#{ruby_type(member_shape)}] :#{member_name} #{docstring}"
               end
               tags = tags.join("\n")
               YARD::DocstringParser.new.parse(tags).to_docstring.tags

@@ -9,12 +9,12 @@ module Aws
         @svc_module = svc_module
         @svc_name = svc_module.name.split('::').last
         @client_class = svc_module.const_get(:Client)
+        Aws::Api::Docstrings.apply(@client_class, docs_path)
         @api = @client_class.api
         @full_name = @api.metadata('serviceFullName')
         @error_names = @api.operations.map {|_,o| o.errors.map(&:name) }
         @error_names = @error_names.flatten.uniq.sort
         @namespace = YARD::Registry['Aws']
-        apply_docstrings(docs_path)
       end
 
       def apply

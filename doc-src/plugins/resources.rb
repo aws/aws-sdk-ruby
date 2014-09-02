@@ -41,7 +41,10 @@ end
 class ResourceDocPlugin
 
   def apply
-    Aws.service_added do |_, svc_module, _|
+    Aws.service_added do |_, svc_module, files|
+
+      Aws::Api::Docstrings.apply(svc_module::Client, files[:docs])
+
       namespace = YARD::Registry[svc_module.name]
       svc_module.constants.each do |const|
         klass = svc_module.const_get(const)
@@ -164,8 +167,8 @@ a default client will be constructed.
         m = YARD::CodeObjects::MethodObject.new(yard_class, member_name)
         m.scope = :instance
         m.group = 'Data Attributes'
-        m.docstring = ''
-        m.add_tag(YARD::Tags::Tag.new(:return, nil, [return_type]))
+        m.docstring = "#{member_shape.documentation}\n@return [#{return_type}] #{member_shape.documentation}"
+        #m.add_tag(YARD::Tags::Tag.new(:return, nil, [return_type]))
         yard_class.instance_attributes[member_name] = { :read => m }
 
       end
