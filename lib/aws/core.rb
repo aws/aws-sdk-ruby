@@ -678,7 +678,7 @@ module AWS
         versions = {}
         pattern = File.join(File.dirname(__FILE__), 'api_config', '*.yml')
         Dir.glob(pattern).each do |path|
-          matches = path.match(/(\w+)-(\d{4}-\d{2}-\d{2})/)
+          path.match(/(\w+)-(\d{4}-\d{2}-\d{2})/)
           svc = SERVICES[$1].full_name
           versions[svc] ||= []
           versions[svc] << $2
