@@ -69,11 +69,15 @@ module Aws
         end
 
         def docstring
-          raise NotImplementedError
+          if called_operation
+            "For more information on the format of `params`, see #{called_operation}."
+          else
+            ''
+          end
         end
 
         def parameters
-          raise NotImplementedError
+          [['params', '{}']]
         end
 
         def return_tag
@@ -92,8 +96,12 @@ module Aws
           'Operations'
         end
 
+        def resp_resource_class
+          @operation.builder.resource_class
+        end
+
         def resource_class_name
-          @operation.builder.resource_class.name.split('::').last
+          resp_resource_class.name.split('::').last
         end
 
         def called_operation
@@ -107,22 +115,7 @@ module Aws
         end
 
         def path_type
-          api = @resource_class.client_class.api
-          shape = api.operation(@operation.request.method_name).output
-          resolve_path(shape, @operation.path)
-        end
-
-        def resolve_path(shape, path)
-          if path != '$'
-            shape = path.scan(/\w+|\[.*?\]/).inject(shape) do |shape, part|
-              if part[0] == '['
-                shape.member
-              else
-                shape.member(part)
-              end
-            end
-          end
-          case shape
+          case path_shape
           when Seahorse::Model::Shapes::Structure then 'Structure'
           when Seahorse::Model::Shapes::List then 'Array'
           when Seahorse::Model::Shapes::Map then 'Hash'
@@ -133,7 +126,25 @@ module Aws
           when Seahorse::Model::Shapes::Timestamp then 'Time'
           when Seahorse::Model::Shapes::Blob then 'IO'
           else
-            raise "unhandled shape class `#{shape.class.name}'"
+            raise "unhandled shape class `#{path_shape.class.name}'"
+          end
+        end
+
+        def path_shape
+          api = @resource_class.client_class.api
+          shape = api.operation(@operation.request.method_name).output
+          resolve_shape(shape, @operation.path)
+        end
+
+        def resolve_shape(shape, path)
+          if path != '$'
+            shape = path.scan(/\w+|\[.*?\]/).inject(shape) do |shape, part|
+              if part[0] == '['
+                shape.member
+              else
+                shape.member(part)
+              end
+            end
           end
         end
 

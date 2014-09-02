@@ -8,10 +8,6 @@ module Aws
           ''
         end
 
-        def parameters
-          [['params', '{}']]
-        end
-
         def return_type
           if @operation.path.match(/\[/)
             "Array<#{path_type}>"

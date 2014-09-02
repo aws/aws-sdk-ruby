@@ -7,10 +7,6 @@ module Aws
           ''
         end
 
-        def parameters
-          [['params', '{}']]
-        end
-
         def return_message
           "the reponse from {#{called_operation}}."
         end

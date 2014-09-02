@@ -7,10 +7,6 @@ module Aws
           ''
         end
 
-        def parameters
-          [['params', '{}']]
-        end
-
         def return_type
           if plural?
             "Array<#{resource_class_name}>"
