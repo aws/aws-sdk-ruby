@@ -20,7 +20,12 @@ module Aws
         private
 
         def tags
-          param_option_tags + [return_tag] + see_also_tags
+          param_option_tags + example_tags + [return_tag] + see_also_tags
+        end
+
+        # Defaults to an empty list, this may be overridden by sub-classes.
+        def example_tags
+          []
         end
 
         def param_option_tags
@@ -84,26 +89,65 @@ module Aws
           YARD::Tags::Tag.new(:return, return_message, [return_type])
         end
 
+        # The response object type for the @return tag. This must be overridden
+        # in sub-classes.
         def return_type
           raise NotImplementedError
         end
 
+        # The message portion of the @return tag for this operation. This must
+        # be overidden in sub-classes.
         def return_message
           raise NotImplementedError
         end
 
+        # The YARD docmentation group this operation belongs to. This is
+        # often overridden in sub-classes.
         def group_name
           'Operations'
         end
 
-        def resp_resource_class
+        # Returns the name of the resource class being documented without
+        # the namespace prefix:
+        #
+        #    Aws::S3::Resource => 'Resource'
+        #    Aws::S3::Bucket => 'Bucket'
+        #
+        def resource_class_name
+          @resource_class.name.split('::').last
+        end
+
+        # Returns a suitable variable name for the resource class being
+        # documented:
+        #
+        #    Aws::S3::Resource => 's3'
+        #    Aws::S3::Bucket => 'bucket'
+        #
+        def variable_name
+          parts = @resource_class.name.split('::')
+          (parts.last == 'Resource' ? parts[-2] : parts[-1]).downcase
+        end
+
+        # Returns the Ruby class of the resource returned by this operation.
+        def target_resource_class
           @operation.builder.resource_class
         end
 
-        def resource_class_name
-          resp_resource_class.name.split('::').last
+        # Returns the name of the Ruby class of the resource returned by
+        # this operation, without a namespace prefix:
+        #
+        #     Aws::S3::Bucket => 'Bucket'
+        #
+        def target_resource_class_name
+          target_resource_class.name.split('::').last
         end
 
+        # The class name and method name of the client API operation
+        # called by this resource operation. 
+        #
+        #     'ClientClassName#operation_name'
+        #
+        # Returns `nil` if the operation makes no API request.
         def called_operation
           if @operation.respond_to?(:request)
             client = @resource_class.client_class.name

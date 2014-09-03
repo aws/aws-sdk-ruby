@@ -5,11 +5,11 @@ module Aws
 
         def docstring
           if argument?
-            "<p>Returns a #{resource_class_name} resource with the given `#{argument_name}`.</p>"
+            "<p>Returns a #{target_resource_class_name} resource with the given `#{argument_name}`.</p>"
           elsif plural?
-            "<p>Returns an array of #{resource_class_name} resources."
+            "<p>Returns an array of #{target_resource_class_name} resources."
           else
-            "<p>Returns a #{resource_class_name} resource."
+            "<p>Returns a #{target_resource_class_name} resource."
           end
         end
 
@@ -23,9 +23,9 @@ module Aws
 
         def return_type
           if plural?
-            "Array<#{resource_class_name}>"
+            "Array<#{target_resource_class_name}>"
           else
-            resource_class_name
+            target_resource_class_name
           end
         end
 

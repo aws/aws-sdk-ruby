@@ -9,17 +9,17 @@ module Aws
 
         def return_type
           if plural?
-            "Array<#{resource_class_name}>"
+            "Array<#{target_resource_class_name}>"
           else
-            resource_class_name
+            target_resource_class_name
           end
         end
 
         def return_message
           if plural?
-            "Calls {#{called_operation}} returning an array of {#{resource_class_name}} objects."
+            "Calls {#{called_operation}} returning an array of {#{target_resource_class_name}} objects."
           else
-            "Calls {#{called_operation}} returning a {#{resource_class_name}} object."
+            "Calls {#{called_operation}} returning a {#{target_resource_class_name}} object."
           end
         end
 
