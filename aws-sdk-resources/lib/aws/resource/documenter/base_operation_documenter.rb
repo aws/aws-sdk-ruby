@@ -103,7 +103,7 @@ module Aws
         end
 
         def tags
-          param_option_tags + example_tags + [return_tag] + see_also_tags
+          option_tags + example_tags + [return_tag] + see_also_tags
         end
 
         # This method should be overridden in sub-classes to add YARD tags
@@ -113,18 +113,22 @@ module Aws
           []
         end
 
-        def param_option_tags
+        def option_tags
           if @operation.respond_to?(:request)
             api_operation = @operation.request.method_name
             api_operation = resource_class.client_class.api.operation(api_operation)
             if api_operation.input
               tags = []
-              api_operation.input.members.each do |member_name, member_shape|
+              required = api_operation.input.required
+              members = api_operation.input.members
+              members = members.sort_by { |name,_| required.include?(name) ? 0 : 1 }
+              members.each do |member_name, member_shape|
                 if @operation.request.params.any? { |p| p.target.match(/^#{member_name}\b/) }
                   next
                 end
                 docstring = member_shape.documentation
-                tags << "@option params [#{ruby_type(member_shape)}] :#{member_name} #{docstring}"
+                req = ' **`required`** &mdash; ' if required.include?(member_name)
+                tags << "@option params [#{param_type(member_shape)}] :#{member_name} #{req}#{docstring}"
               end
               tags = tags.join("\n")
               YARD::DocstringParser.new.parse(tags).to_docstring.tags
@@ -230,7 +234,7 @@ module Aws
           end
         end
 
-        def ruby_type(shape)
+        def param_type(shape)
           case shape
           when Seahorse::Model::Shapes::Blob then 'IO'
           when Seahorse::Model::Shapes::Byte then  'String'
@@ -243,7 +247,7 @@ module Aws
           when Seahorse::Model::Shapes::Long then 'Integer'
           when Seahorse::Model::Shapes::Map then 'Hash'
           when Seahorse::Model::Shapes::String then 'String'
-          when Seahorse::Model::Shapes::Structure then 'Structure'
+          when Seahorse::Model::Shapes::Structure then 'Hash'
           when Seahorse::Model::Shapes::Timestamp then 'Time'
           else raise 'unhandled type'
           end
