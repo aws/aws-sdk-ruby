@@ -3,6 +3,24 @@ module Aws
     class Documenter
       class ResourceOperationDocumenter < BaseOperationDocumenter
 
+        def initialize(*args)
+          super
+          @plural = @operation.builder.plural?
+        end
+
+        # @return [Boolean] Returns `true` if this operation returns an 
+        #   array of resource objects. Returns `false` if this method returns
+        #   a single resource object.
+        attr_reader :plural
+
+        alias plural? plural
+
+        def docstring
+          <<-DOCSTRING.strip
+#{return_message} Calls {#{called_operation}} once with any given params.
+          DOCSTRING
+        end
+
         def return_type
           if plural?
             "Array<#{target_resource_class_name}>"
@@ -13,14 +31,34 @@ module Aws
 
         def return_message
           if plural?
-            "Calls {#{called_operation}} returning an array of {#{target_resource_class_name}} objects."
+            "Returns an array of {#{target_resource_class_name}} resources."
           else
-            "Calls {#{called_operation}} returning a {#{target_resource_class_name}} object."
+            "Returns a {#{target_resource_class_name}} resource."
           end
         end
 
-        def plural?
-          @operation.builder.plural?
+        def example_tags
+          id = target_resource_class.identifiers.last.to_s
+          idv = target_resource_class_name.downcase + '-' + id.gsub('_', '-')
+          tag = []
+          tag << "@example Basic usage"
+          tag << "  #{resp_variable} = #{variable_name}.#{operation_name}(params)"
+          if plural?
+            tag << "  #{resp_variable}.map(&:#{id})"
+            tag << "  #=> [#{idv.inspect}, ...]"
+          else
+            tag << "  #{resp_variable}.#{id}"
+            tag << "  #=> #{idv.inspect}"
+          end
+          YARD::DocstringParser.new.parse(tag).to_docstring.tags
+        end
+
+        def resp_variable
+          if plural?
+            target_resource_class_name.downcase + 's'
+          else
+            target_resource_class_name.downcase
+          end
         end
 
       end
