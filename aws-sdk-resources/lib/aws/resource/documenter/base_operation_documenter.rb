@@ -27,6 +27,10 @@ module Aws
         # @return [YARD::CodeObject::ClassObject]
         attr_reader :yard_class
 
+        # @return [Class<Resource::Base>] Returns the resource class this
+        #   operation belongs to.
+        attr_reader :resource_class
+
         # @return [String] The name of this resource operation.
         attr_reader :operation_name
 
@@ -112,7 +116,7 @@ module Aws
         def param_option_tags
           if @operation.respond_to?(:request)
             api_operation = @operation.request.method_name
-            api_operation = @resource_class.client_class.api.operation(api_operation)
+            api_operation = resource_class.client_class.api.operation(api_operation)
             if api_operation.input
               tags = []
               api_operation.input.members.each do |member_name, member_shape|
@@ -138,7 +142,7 @@ module Aws
         def see_also_tags
           tags = []
           tags += called_operation_tag if called_operation
-          tags += related_resource_operation_tags
+          tags += related_resource_operation_tags if target_resource_class
           tags
         end
 
@@ -148,7 +152,17 @@ module Aws
         end
 
         def related_resource_operation_tags
-          []
+          tags = []
+          resource_class.operations.each do |name,op|
+            if
+              name != self.operation_name &&
+              op.respond_to?(:builder) &&
+              op.builder.resource_class == target_resource_class
+            then
+              tags << "@see ##{name}"
+            end
+          end
+          YARD::DocstringParser.new.parse(tags.sort.join("\n")).to_docstring.tags
         end
 
         def return_tag
@@ -174,7 +188,7 @@ module Aws
         #    Aws::S3::Bucket => 'bucket'
         #
         def variable_name
-          parts = @resource_class.name.split('::')
+          parts = resource_class.name.split('::')
           (parts.last == 'Resource' ? parts[-2] : parts[-1]).downcase
         end
 
@@ -200,7 +214,7 @@ module Aws
 
         # Returns the output shape for the called operation.
         def response_shape
-          api = @resource_class.client_class.api
+          api = resource_class.client_class.api
           api.operation(@operation.request.method_name).output
         end
 
