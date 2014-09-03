@@ -4,7 +4,12 @@ module Aws
       class EnumerateResourceOperationDocumenter < BaseOperationDocumenter
 
         def docstring
-          ''
+          <<-DOCSTRING.strip
+Returns a {Resource::Collection Collection} of {#{target_resource_class_name}}
+resources. Calling this method will not trigger any API calls until you enumerate
+then returned collection. {#{called_operation}} will be called multiple
+times until every {#{target_resource_class_name}} has been enumerated. 
+          DOCSTRING
         end
 
         def return_type
@@ -46,8 +51,7 @@ EXAMPLE
         end
 
         def batch_examples
-          example = "@example Batch operations on the "
-          example << "{#{target_resource_class_name}} collection"
+          example = "@example Batch operations callable on the returned collection"
           target_resource_batch_operations.each do |name|
             example << "\n  #{variable_name}.#{@operation_name}.#{name}"
           end

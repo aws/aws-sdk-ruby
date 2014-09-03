@@ -3,10 +3,6 @@ module Aws
     class Documenter
       class ResourceOperationDocumenter < BaseOperationDocumenter
 
-        def docstring
-          ''
-        end
-
         def return_type
           if plural?
             "Array<#{target_resource_class_name}>"

@@ -3,10 +3,6 @@ module Aws
     class Documenter
       class EnumerateDataOperationDocumenter < BaseOperationDocumenter
 
-        def docstring
-          ''
-        end
-
         def return_type
           "Enumerator<#{path_type}>"
         end

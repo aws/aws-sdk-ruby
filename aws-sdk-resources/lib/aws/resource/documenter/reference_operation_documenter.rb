@@ -3,16 +3,6 @@ module Aws
     class Documenter
       class ReferenceOperationDocumenter < BaseOperationDocumenter
 
-        def docstring
-          if argument?
-            "<p>Returns a #{target_resource_class_name} resource with the given `#{argument_name}`.</p>"
-          elsif plural?
-            "<p>Returns an array of #{target_resource_class_name} resources."
-          else
-            "<p>Returns a #{target_resource_class_name} resource."
-          end
-        end
-
         def parameters
           if argument?
             [[argument_name, nil]]

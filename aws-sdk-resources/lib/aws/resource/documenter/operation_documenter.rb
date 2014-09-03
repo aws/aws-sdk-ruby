@@ -3,12 +3,15 @@ module Aws
     class Documenter
       class OperationDocumenter < BaseOperationDocumenter
 
-        def docstring
-          ''
-        end
-
         def return_message
-          "the reponse from {#{called_operation}}."
+          msg = "the reponse from {#{called_operation}}."
+          if response_shape && response_shape.member_names.count > 0
+            msg << " The response data contains the following members:\n"
+            response_shape.member_names.each do |name|
+              msg << "\n* `#{name}`"
+            end
+          end
+          msg
         end
 
         def return_type
