@@ -44,7 +44,7 @@ module Aws
         def return_message
           if can_return_nil?
             "Returns a {#{target_resource_class_name}} resource, or `nil` " +
-            "if {##{data_member_source}} is `nil`."
+            "if `#data.#{data_member_source}` is `nil`."
           else
             "Returns a {#{target_resource_class_name}} resource."
           end

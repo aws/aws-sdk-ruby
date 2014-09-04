@@ -138,7 +138,6 @@ Loads the current #{name} by calling {Client##{method}}.
     identifiers.each do |identifier_name|
       m = YARD::CodeObjects::MethodObject.new(yard_class, identifier_name)
       m.scope = :instance
-      m.group = 'Data Attributes'
       m.docstring = ''
       m.add_tag(YARD::Tags::Tag.new(:return, nil, ['String']))
       yard_class.instance_attributes[identifier_name] = { :read => m }
@@ -180,11 +179,8 @@ Loads the current #{name} by calling {Client##{method}}.
 
         m = YARD::CodeObjects::MethodObject.new(yard_class, member_name)
         m.scope = :instance
-        m.group = 'Data Attributes'
         m.docstring = "#{member_shape.documentation}\n@return [#{return_type}] #{member_shape.documentation}"
-        #m.add_tag(YARD::Tags::Tag.new(:return, nil, [return_type]))
         yard_class.instance_attributes[member_name] = { :read => m }
-
       end
     end
   end
