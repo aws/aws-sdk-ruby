@@ -109,7 +109,7 @@ module Aws
         # @return [void]
         def add_identifier(name)
           name = name.to_sym
-          define_method(name) { @identifiers[name] }
+          safe_define_method(name) { @identifiers[name] }
           @identifiers << name
         end
 
@@ -119,7 +119,7 @@ module Aws
         # @param [Symbol] name
         # @return [void]
         def add_data_attribute(name)
-          define_method(name) { data[name] }
+          safe_define_method(name) { data[name] }
           @data_attributes << name
         end
 
@@ -171,19 +171,29 @@ module Aws
         # @param [Operations::ReferenceOperation] reference
         def resource_reference(method_name, reference)
           if reference.requires_argument?
-            define_method(method_name) do |identifier|
+            safe_define_method(method_name) do |identifier|
               reference.call(client:client, resource:self, argument:identifier)
             end
           else
-            define_method(method_name) do
+            safe_define_method(method_name) do
               reference.call(client:client, resource:self)
             end
           end
         end
 
         def resource_operation(method_name, operation)
-          define_method(method_name) do |params={}|
+          safe_define_method(method_name) do |params={}|
             operation.call(resource:self, client:client, params:params)
+          end
+        end
+
+        def safe_define_method(method_name, &block)
+          if instance_methods.include?(method_name.to_sym)
+            msg = "unable to define method #{name}##{method_name}, "
+            msg << "method already exists"
+            raise Errors::DefinitionError, msg
+          else
+            define_method(method_name, &block)
           end
         end
 

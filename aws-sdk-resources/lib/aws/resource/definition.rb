@@ -163,15 +163,10 @@ module Aws
 
       def define_data_attributes(resource, shape_name)
         if shape_name
-          existing_methods = Set.new(resource.instance_methods)
           shape = resource.client_class.api.shape_map.shape('shape' => shape_name)
           shape.member_names.each do |member_name|
-            next if resource.identifiers.include?(member_name)
-            if existing_methods.include?(member_name)
-              conflict = "#{resource.resource_name}##{member_name}"
-              msg = "unable to add attribute #{conflict}, "
-              msg << "method already exists"
-              raise msg
+            if resource.identifiers.include?(member_name)
+              next
             else
               resource.add_data_attribute(member_name)
             end
