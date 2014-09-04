@@ -7,6 +7,8 @@
 /vendor
 /samples/config.yml
 *.gem
+/.ruby-*
+/.rvm
 
 # credentials for testing features against live services
 /.ruby_sdk_test_config.yml
