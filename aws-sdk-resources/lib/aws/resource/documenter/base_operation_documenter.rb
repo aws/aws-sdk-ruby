@@ -109,7 +109,7 @@ module Aws
         end
 
         def tags
-          option_tags + example_tags + [return_tag] + see_also_tags
+          (option_tags + example_tags + [return_tag] + see_also_tags).compact
         end
 
         # This method should be overridden in sub-classes to add YARD tags
@@ -170,7 +170,11 @@ module Aws
         end
 
         def return_tag
-          YARD::Tags::Tag.new(:return, return_message, return_type)
+          if return_type == ['void'] && return_message.strip.empty?
+            nil
+          else
+            YARD::Tags::Tag.new(:return, return_message, return_type)
+          end
         end
 
         # The response object type for the @return tag. This must be overridden
