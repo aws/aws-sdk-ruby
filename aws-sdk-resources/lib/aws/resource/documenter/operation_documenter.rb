@@ -8,7 +8,7 @@ module Aws
         end
 
         def return_type
-          if returns_data_members != ''
+          if returns_data_members
             ['Structure']
           else
             ['void']
@@ -20,7 +20,9 @@ module Aws
         end
 
         def return_base_message
-          "Calls {#{called_operation}}, returning its reponse."
+          if returns_data_members
+            "Calls {#{called_operation}}, returning its reponse."
+          end
         end
 
         def returns_data_members
@@ -31,7 +33,7 @@ module Aws
             end
             msg
           else
-            ''
+            nil
           end
         end
 
