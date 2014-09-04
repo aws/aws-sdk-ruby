@@ -87,6 +87,7 @@ a default client will be constructed.
   def document_resource_class(name, namespace, resource_class)
     yard_class = YARD::CodeObjects::ClassObject.new(namespace, name)
     yard_class.superclass = YARD::Registry['Aws::Resource::Base']
+    document_constructor(yard_class, resource_class)
     #document_client_getter(yard_class, resource_class)
     #document_identifiers_hash(yard_class, resource_class)
     #document_load(yard_class, resource_class)
@@ -94,6 +95,18 @@ a default client will be constructed.
     document_data_attribute_getters(yard_class, resource_class)
     document_operation_methods(yard_class, resource_class)
     yard_class
+  end
+
+  def document_constructor(yard_class, resource_class)
+    docstring = []
+    resource_class.identifiers.each do |name|
+      docstring << "@option options [required,String] :#{name}"
+    end
+    docstring << "@option options [Client] :client"
+    m = YARD::CodeObjects::MethodObject.new(yard_class, :initialize)
+    m.scope = :instance
+    m.parameters = [['options', {}]]
+    m.docstring = docstring.join("\n")
   end
 
   def document_client_getter(yard_class, resource_class)
