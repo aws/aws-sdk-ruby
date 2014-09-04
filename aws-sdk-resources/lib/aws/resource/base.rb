@@ -51,14 +51,6 @@ module Aws
 
       private
 
-      def cache(name, &block)
-        if instance_variable_defined?("@#{name}")
-          instance_variable_get("@#{name}")
-        else
-          instance_variable_set("@#{name}", yield)
-        end
-      end
-
       def extract_client(client)
         case client
         when nil then build_client
@@ -184,7 +176,7 @@ module Aws
             end
           else
             define_method(method_name) do
-              cache(method_name) { reference.call(client:client, resource:self) }
+              reference.call(client:client, resource:self)
             end
           end
         end
