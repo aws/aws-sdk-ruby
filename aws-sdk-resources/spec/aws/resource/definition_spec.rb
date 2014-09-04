@@ -417,21 +417,20 @@ module Aws
               expect(thing).to respond_to(:size)
             end
 
-            it 'raises an error if method already exists for the the data attr' do
+            it 'raises an error if method already exists' do
               definition['resources'] = {
                 'Thing' => {
                   'identifiers' => [{ 'name' => 'Name' }],
-                  'shape' => 'DataShape'
+                  'actions' => {
+                    'Load' => {
+                      'request' => {
+                        'operation' => 'MakeThings'
+                      }
+                    }
+                  }
                 }
               }
-              shapes['StringShape'] = { 'type' => 'string' }
-              shapes['DataShape'] = {
-                'type' => 'structure',
-                'members' => {
-                  'Data' => { 'shape' => 'StringShape' },
-                }
-              }
-              msg = 'unable to add attribute Thing#data, method already exists'
+              msg = 'unable to define method #load, method already exists'
               expect {
                 apply_definition
               }.to raise_error(msg)

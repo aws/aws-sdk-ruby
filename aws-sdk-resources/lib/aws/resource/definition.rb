@@ -82,12 +82,12 @@ module Aws
       # @param [Hash] definition
       # @return [void]
       def define_resource_operations(service, resource, definition)
-        define_data_attributes(resource, definition['shape'])
         define_load(resource, definition['load'])
         define_actions(service, resource, definition['actions'] || {})
         define_has_many(service, resource, definition['hasMany'] || {})
         define_has_some(service, resource, definition['hasSome'] || {})
         define_has_one(service, resource, definition['hasOne'] || {})
+        define_data_attributes(resource, definition['shape'])
       end
 
       def define_subresources(service)
@@ -165,7 +165,10 @@ module Aws
         if shape_name
           shape = resource.client_class.api.shape_map.shape('shape' => shape_name)
           shape.member_names.each do |member_name|
-            if resource.identifiers.include?(member_name)
+            if
+              resource.identifiers.include?(member_name) ||
+              resource.instance_methods.include?(member_name)
+            then
               next
             else
               resource.add_data_attribute(member_name)
