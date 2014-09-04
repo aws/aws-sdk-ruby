@@ -1,8 +1,4 @@
 module Aws
-
-        def parameters
-          [['params', '{}']]
-        end
   module Resource
     class Documenter
       class BaseOperationDocumenter
@@ -15,13 +11,18 @@ module Aws
           @operation = operation
           @source = @operation.source
           if @operation.respond_to?(:request)
+            @api_request_name = @operation.request.method_name
+            @api_request = @resource_class.client_class.api.operation(@api_request_name)
             @request_operation_name = @operation.request.method_name.to_s
-            @called_operation = "Client##{@request_operation_name}"
+            @called_operation = "Client##{@api_request_name}"
           end
           if @operation.respond_to?(:builder)
-            @target_resource_class = @operation.builder.resource_class
+            @builder = @operation.builder
+            @target_resource_class = @builder.resource_class
             @target_resource_class_name = @target_resource_class.name.split('::').last
           end
+
+
         end
 
         # @return [YARD::CodeObject::ClassObject]
@@ -56,12 +57,22 @@ module Aws
         # @return [String,nil] Returns the name of the API operation called
         #   on the client. Returns `nil` if this operation does not make
         #   any API requests.
-        attr_reader :request_operation_name
+        attr_reader :api_request_name
+
+        # @return [Seahorse::Model::Operation,nil] Returns the model of the
+        #   API operation called. Returns `nil` if this operation does not make
+        #   any API requests.
+        attr_reader :api_request
 
         # @return [String,nil] Returns the `Client#operation_name` reference.
         #   This is useful for generating `@see` tags and `{links}`.
         attr_reader :called_operation
 
+        # @return [Resource::Builder,nil] Returns the resource builder for
+        #   this operation. Returns `nil` if this operation does not build
+        #   and return resource objects.
+        attr_reader :builder
+        
         # @return [Resource::Source]
         attr_reader :source
 
@@ -70,7 +81,6 @@ module Aws
         def method_object
           m = YARD::CodeObjects::MethodObject.new(yard_class, operation_name)
           m.scope = :instance
-          m.group = group_name
           m.parameters = parameters
           m.docstring = docstring
           if source
@@ -89,17 +99,15 @@ module Aws
         private
 
         def parameters
-          [['params', '{}']]
+          if option_tags.empty?
+            []
+          else
+            [['params', '{}']]
+          end
         end
 
         def docstring
           ''
-        end
-
-        # The YARD docmentation group this operation belongs to. This is
-        # often overridden in sub-classes.
-        def group_name
-          'Operations'
         end
 
         def tags
@@ -114,27 +122,21 @@ module Aws
         end
 
         def option_tags
-          if @operation.respond_to?(:request)
-            api_operation = @operation.request.method_name
-            api_operation = resource_class.client_class.api.operation(api_operation)
-            if api_operation.input
-              tags = []
-              required = api_operation.input.required
-              members = api_operation.input.members
-              members = members.sort_by { |name,_| required.include?(name) ? 0 : 1 }
-              members.each do |member_name, member_shape|
-                if @operation.request.params.any? { |p| p.target.match(/^#{member_name}\b/) }
-                  next
-                end
-                docstring = member_shape.documentation
-                req = ' **`required`** &mdash; ' if required.include?(member_name)
-                tags << "@option params [#{param_type(member_shape)}] :#{member_name} #{req}#{docstring}"
+          if api_request && api_request.input
+            tags = []
+            required = api_request.input.required
+            members = api_request.input.members
+            members = members.sort_by { |name,_| required.include?(name) ? 0 : 1 }
+            members.each do |member_name, member_shape|
+              if @operation.request.params.any? { |p| p.target.match(/^#{member_name}\b/) }
+                next
               end
-              tags = tags.join("\n")
-              YARD::DocstringParser.new.parse(tags).to_docstring.tags
-            else
-              []
+              docstring = member_shape.documentation
+              req = ' **`required`** &mdash; ' if required.include?(member_name)
+              tags << "@option params [#{param_type(member_shape)}] :#{member_name} #{req}#{docstring}"
             end
+            tags = tags.join("\n")
+            YARD::DocstringParser.new.parse(tags).to_docstring.tags
           else
             []
           end

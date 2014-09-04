@@ -3,19 +3,30 @@ module Aws
     class Documenter
       class OperationDocumenter < BaseOperationDocumenter
 
+        def docstring
+          super + ' ' + "Calls {#{called_operation}}, returning its response."
+        end
+
         def return_message
-          msg = "the reponse from {#{called_operation}}."
+          "Returns the response from {#{called_operation}}. #{data_members}"
+        end
+
+        def data_members
           if response_shape && response_shape.member_names.count > 0
-            msg << " The response data contains the following members:\n"
+            msg = "The response data structure responds to the following methods:"
             response_shape.member_names.each do |name|
               msg << "\n* `#{name}`"
             end
+            msg
+          else
+            ''
           end
-          msg
         end
 
         def return_type
           'Seahorse::Client::Response'
+          'void'
+          ''
         end
 
       end

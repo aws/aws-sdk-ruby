@@ -20,10 +20,6 @@ times until every {#{target_resource_class_name}} has been enumerated.
           "a {Aws::Resource::Collection Collection} of {#{target_resource_class_name}} resource objects."
         end
 
-        def group_name
-          "Resource References"
-        end
-
         def example_tags
           tags = []
           tags << enumerate_example

@@ -87,8 +87,9 @@ a default client will be constructed.
   def document_resource_class(name, namespace, resource_class)
     yard_class = YARD::CodeObjects::ClassObject.new(namespace, name)
     yard_class.superclass = YARD::Registry['Aws::Resource::Base']
-    document_client_getter(yard_class, resource_class)
-    document_identifiers_hash(yard_class, resource_class)
+    #document_client_getter(yard_class, resource_class)
+    #document_identifiers_hash(yard_class, resource_class)
+    #document_load(yard_class, resource_class)
     document_identifier_attributes(yard_class, resource_class)
     document_data_attribute_getters(yard_class, resource_class)
     document_operation_methods(yard_class, resource_class)
@@ -118,13 +119,26 @@ a default client will be constructed.
     yard_class.instance_attributes[:identifiers] = { :read => m }
   end
 
+  def document_load(yard_class, resource_class)
+    if op = resource_class.load_operation
+      name = resource_class.name.split('::').last
+      method = op.request.method_name
+      m = YARD::CodeObjects::MethodObject.new(yard_class, :load)
+      m.scope = :instance
+      m.group = 'Common Resource Methods'
+      m.docstring = <<-DOCS.strip
+Loads the current #{name} by calling {Client##{method}}.
+@return [self] Returns `self` after loading {#data}.
+      DOCS
+    end
+  end
+
   def document_identifier_attributes(yard_class, resource_class)
     identifiers = resource_class.identifiers
-    group = identifiers.count > 1 ? 'Identifiers' : 'Identifier'
     identifiers.each do |identifier_name|
       m = YARD::CodeObjects::MethodObject.new(yard_class, identifier_name)
       m.scope = :instance
-      m.group = group
+      m.group = 'Data Attributes'
       m.docstring = ''
       m.add_tag(YARD::Tags::Tag.new(:return, nil, ['String']))
       yard_class.instance_attributes[identifier_name] = { :read => m }

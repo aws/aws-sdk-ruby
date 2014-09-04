@@ -16,9 +16,7 @@ module Aws
         alias plural? plural
 
         def docstring
-          <<-DOCSTRING.strip
-#{return_message} Calls {#{called_operation}} once with any given params.
-          DOCSTRING
+          super + ' ' "#{return_message} Calls {#{called_operation}}."
         end
 
         def return_type
