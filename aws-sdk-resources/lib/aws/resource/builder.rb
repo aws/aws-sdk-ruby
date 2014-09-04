@@ -70,7 +70,6 @@ module Aws
 
       def build_one(identifiers, options)
         if identifiers.values.any?(&:nil?)
-          raise NotImplementedError, 'check nullable status of identifier'
           nil
         else
           @resource_class.new(identifiers.merge(

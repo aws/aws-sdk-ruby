@@ -4,11 +4,11 @@ module Aws
       class EnumerateResourceOperationDocumenter < BaseOperationDocumenter
 
         def docstring
-          <<-DOCSTRING.strip
+          super + ' ' +<<-DOCSTRING.lstrip
 Returns a {Resource::Collection Collection} of {#{target_resource_class_name}}
-resources. Calling this method will not trigger any API calls until you enumerate
-then returned collection. {#{called_operation}} will be called multiple
-times until every {#{target_resource_class_name}} has been enumerated. 
+resources. No API requests are made until you call an enumerable method on the
+collection. {#{called_operation}} will be called multiple times until every
+{#{target_resource_class_name}} has been yielded. 
           DOCSTRING
         end
 

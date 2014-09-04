@@ -7,7 +7,7 @@ module Aws
           @yard_class = yard_class
           @resource_class = resource_class
           @resource_class_name = @resource_class.name.split('::').last
-          @operation_name = operation_name
+          @operation_name = operation_name.to_s
           @operation = operation
           @source = @operation.source
           if @operation.respond_to?(:request)
@@ -21,8 +21,6 @@ module Aws
             @target_resource_class = @builder.resource_class
             @target_resource_class_name = @target_resource_class.name.split('::').last
           end
-
-
         end
 
         # @return [YARD::CodeObject::ClassObject]
@@ -147,8 +145,8 @@ module Aws
         # @return [Array<YARD::Tag>]
         def see_also_tags
           tags = []
-          tags += called_operation_tag if called_operation
           tags += related_resource_operation_tags if target_resource_class
+          tags += called_operation_tag if called_operation
           tags
         end
 
@@ -161,7 +159,7 @@ module Aws
           tags = []
           resource_class.operations.each do |name,op|
             if
-              name != self.operation_name &&
+              name.to_s != self.operation_name &&
               op.respond_to?(:builder) &&
               op.builder.resource_class == target_resource_class
             then

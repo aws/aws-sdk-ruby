@@ -3,12 +3,35 @@ module Aws
     class Documenter
       class EnumerateDataOperationDocumenter < BaseOperationDocumenter
 
+        def docstring
+          super + ' ' + <<-DOCSTRING.lstrip
+Returns an enumerator that yields #{operation_name.gsub('_', ' ')}.
+No API requests are made until you call an enumerable method.
+{#{called_operation}} will be called multiple times until all results
+have been yielded.
+          DOCSTRING
+        end
+
         def return_type
           "Enumerator<#{path_type}>"
         end
 
         def return_message
-          "an enumerator that yields #{resource_class_name} #{operation_name}."
+          msg = "Returns an enumerator that yields #{operation_name.gsub('_', ' ')}."
+          msg << data_members
+          msg
+        end
+
+        def data_members
+          if path_shape.type == 'structure'
+            msg = "\nEnumerated values have the following properties:\n"
+            path_shape.member_names.each do |name|
+              msg << "\n* `#{name}`"
+            end
+            msg
+          else
+            ''
+          end
         end
 
         def example_tags
