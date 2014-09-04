@@ -9,9 +9,9 @@ module Aws
 
         def return_type
           if returns_data_members != ''
-            'Structure'
+            ['Structure']
           else
-            'void'
+            ['void']
           end
         end
 

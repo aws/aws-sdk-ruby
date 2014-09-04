@@ -170,7 +170,7 @@ module Aws
         end
 
         def return_tag
-          YARD::Tags::Tag.new(:return, return_message, [return_type])
+          YARD::Tags::Tag.new(:return, return_message, return_type)
         end
 
         # The response object type for the @return tag. This must be overridden

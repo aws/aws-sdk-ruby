@@ -7,7 +7,7 @@ module Aws
           if plural?
             super + " Calls {#{called_operation}}, returning an array of {#{path_type}} objects."
           else
-            super + " Calls {#{called_operation}}, returning a #{return_type}."
+            super + " Calls {#{called_operation}}, returning a #{return_type.first}."
           end
         end
 
@@ -27,9 +27,9 @@ module Aws
 
         def return_type
           if plural?
-            "Array<#{path_type}>"
+            ["Array<#{path_type}>"]
           else
-            path_type
+            [path_type]
           end
         end
 

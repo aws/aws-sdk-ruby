@@ -21,9 +21,9 @@ module Aws
 
         def return_type
           if plural?
-            "Array<#{target_resource_class_name}>"
+            ["Array<#{target_resource_class_name}>"]
           else
-            target_resource_class_name
+            [target_resource_class_name]
           end
         end
 

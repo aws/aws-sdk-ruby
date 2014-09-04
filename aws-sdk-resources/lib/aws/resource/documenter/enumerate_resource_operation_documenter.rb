@@ -13,7 +13,7 @@ collection. {#{called_operation}} will be called multiple times until every
         end
 
         def return_type
-          "Collection<#{target_resource_class_name}>"
+          ["Collection<#{target_resource_class_name}>"]
         end
 
         def return_message

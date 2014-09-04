@@ -13,7 +13,7 @@ have been yielded.
         end
 
         def return_type
-          "Enumerator<#{path_type}>"
+          ["Enumerator<#{path_type}>"]
         end
 
         def return_message

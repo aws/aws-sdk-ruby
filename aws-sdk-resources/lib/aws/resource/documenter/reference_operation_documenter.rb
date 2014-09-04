@@ -33,11 +33,11 @@ module Aws
 
         def return_type
           if plural?
-            type = "Array<#{target_resource_class_name}>"
+            type = ["Array<#{target_resource_class_name}>"]
           else
-            type = target_resource_class_name
+            type = [target_resource_class_name]
           end
-          type << ',nil' if can_return_nil?
+          type << 'nil' if can_return_nil?
           type
         end
 
