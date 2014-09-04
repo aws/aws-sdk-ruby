@@ -13,23 +13,21 @@ $LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'
 #     into the instance_attributes[:client] = { :read => m } and marking
 #     parent attr_reader as @api private
 #
-# - Unable to access data attributes for resources that have no load method defined,
-#   such as Bucket#creation_date unless the resource is constructed from an enumerator.
-#   Bucket.new(name:'aws-sdk').creation_date raises a NotImplementedError
-#
-# - How to preserve ordering of grouped methods, such as "Identifiers" - these
-#   have a logical ordering and they are being lexically ordered.
-#
 # TODOs
 #
-# - Document batch operations in the Resource class docstring
-# - Document operation inputs, subtracting provided inputs
-# - Document operation response structures for operations that return responses or data
-# - Add "documentation" traits to resource definitions for each operation
-# - Document resource constructors
-# - Investigate adding @see tags to related operations
-# - Enumerate resource operations should document they return a
-#   Collection, not Enumerator
+# - document batch operations at the resource class level
+#
+# - document when a load method is not possible
+#   - add @raise tags to data attribute getters that show a NotImplementedError
+#     can be triggered, and under what conditions
+#
+# - skip documentation of limit keys for enumerable resource operations, these
+#   should not be controllable via the collection limit method
+#   ideally the operation could accept a generic :limit option
+#
+# - skip documentation of limit keys for enumerable data operations
+#   ideally the operation should raise an argument error
+#   additionally, it could support a generic :limit option or a :limit method
 #
 
 require 'aws-sdk-resources'
@@ -88,6 +86,7 @@ a default client will be constructed.
     yard_class = YARD::CodeObjects::ClassObject.new(namespace, name)
     yard_class.superclass = YARD::Registry['Aws::Resource::Base']
     document_constructor(yard_class, resource_class)
+    # intentionally disabled as these are documented in Aws::Resource::Base
     #document_client_getter(yard_class, resource_class)
     #document_identifiers_hash(yard_class, resource_class)
     #document_load(yard_class, resource_class)
