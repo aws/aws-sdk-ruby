@@ -12,6 +12,8 @@ SimpleCov.start do
 
   add_filter '/spec/'
   add_filter '/features/'
+  add_filter '/aws-sdk-resources/lib/aws/resource/documenter'
+  add_filter '/aws-sdk-resources/lib/aws/resource/source.rb'
 
   %w(aws-sdk aws-sdk-resources aws-sdk-core).each do |group_name|
     add_group(group_name, "/#{group_name}/lib")
