@@ -133,7 +133,7 @@ module AWS
         it 'should yield one object for each listed contents' do
           got_objects = []
           collection.each { |o| got_objects << o }
-          got_objects.should have(2).items
+          expect(got_objects.size).to eq(2)
         end
 
         it 'should yield an s3 object for each item in the response list' do
