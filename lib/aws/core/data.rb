@@ -241,6 +241,11 @@ module AWS
         end
         alias_method :is_a?, :kind_of?
 
+        # @api private
+        def empty?
+          @data.empty?
+        end
+
       end
     end
   end

@@ -100,6 +100,7 @@ module AWS
 
           it 'should expose an empty list of buckets' do
             response.buckets.should be_an(Array)
+            response.buckets.respond_to?(:empty?).should be_truthy
             response.buckets.should be_empty
           end
 
