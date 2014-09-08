@@ -26,12 +26,12 @@ module AWS
 
         it 'should return true if the IDs match' do
           instance.send(method, described_class.new("foo-id")).
-            should be_true
+            should be_truthy
         end
 
         it 'should return false if the IDs do not match' do
           instance.send(method, described_class.new("bar-id")).
-            should_not be_true
+            should_not be_truthy
         end
 
       end
@@ -43,7 +43,7 @@ module AWS
             def id; "foo-id"; end
           end
           instance.send(method, imposter_class.new(instance)).
-            should_not be_true
+            should_not be_truthy
         end
 
       end

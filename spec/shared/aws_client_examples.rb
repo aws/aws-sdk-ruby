@@ -68,8 +68,8 @@ module AWS::Core
           super(req, resp)
         }.send(sample_method)
 
-        called_super.should be_true
-        called_derived.should be_true
+        called_super.should be_truthy
+        called_derived.should be_truthy
       end
 
       it 'should set the http_response member to the same instance that was passed to the block' do

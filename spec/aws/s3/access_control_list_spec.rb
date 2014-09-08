@@ -42,7 +42,7 @@ END
         end
 
         it 'should not be valid' do
-          acl.valid?.should be_false
+          acl.valid?.should be_falsey
         end
 
         context 'validate!' do
@@ -59,7 +59,7 @@ END
       shared_examples_for "valid ACL" do
 
         it 'should be valid' do
-          acl.valid?.should be_true
+          acl.valid?.should be_truthy
         end
 
         context 'validate!' do
@@ -75,7 +75,7 @@ END
       shared_examples_for "invalid ACL" do |*args|
 
         it 'should not be valid' do
-          acl.valid?.should be_false
+          acl.valid?.should be_falsey
         end
 
         context 'validate!' do

@@ -69,7 +69,7 @@ Given /^I delete the queue$/ do
 end
 
 Then /^the queue should eventually not exist$/ do
-  eventually(60) { @queue.exists?.should be_false }
+  eventually(60) { @queue.exists?.should be_falsey }
 end
 
 Then /^the following integer fields should be present:$/ do |table|

@@ -42,12 +42,12 @@ module AWS
       end
 
       it 'should return false when the resource does not exist' do
-        resource.exists?.should be_false
+        resource.exists?.should be_falsey
       end
 
       it 'should return true when the resource exists' do
         stub_exists(resp)
-        resource.exists?.should be_true
+        resource.exists?.should be_truthy
       end
 
     end

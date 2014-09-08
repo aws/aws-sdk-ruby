@@ -64,11 +64,11 @@ When /^I deregister the image$/ do
 end
 
 Then /^the image should eventually not exist$/ do
-  eventually { @image.exists?.should be_false }
+  eventually { @image.exists?.should be_falsey }
 end
 
 Given /^I wait for the image to exist$/ do
-  eventually { @image.exists?.should be_true }
+  eventually { @image.exists?.should be_truthy }
 end
 
 Given /^I create an image with the following block device mappings:$/ do |string|

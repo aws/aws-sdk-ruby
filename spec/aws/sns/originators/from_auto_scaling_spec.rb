@@ -30,7 +30,7 @@ describe AWS::SNS::FromAutoScaling do
       @sns = AWS::SNS::Message.new @raw
     end
     it "should be applicable" do
-      AWS::SNS::FromAutoScaling.applicable?(@json).should be_true
+      AWS::SNS::FromAutoScaling.applicable?(@json).should be_truthy
     end
     it "should apply the mixin" do
       @sns.should respond_to :group_name

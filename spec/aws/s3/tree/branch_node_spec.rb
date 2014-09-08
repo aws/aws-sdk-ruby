@@ -45,7 +45,7 @@ module AWS
 
           it 'should store the append status' do
             BranchNode.new(parent, collection, :append => false).
-              append?.should be_false
+              append?.should be_falsey
           end
 
         end
@@ -69,7 +69,7 @@ module AWS
         context '#append?' do
 
           it 'defaults to true' do
-            node.append?.should be_true
+            node.append?.should be_truthy
           end
 
         end
@@ -101,7 +101,7 @@ module AWS
             children.should be_a(ChildCollection)
             children.delimiter.should == ":"
             children.prefix.should == "foo"
-            children.append?.should be_false
+            children.append?.should be_falsey
           end
 
         end
@@ -130,7 +130,7 @@ module AWS
             tree.should be_a(Tree)
             tree.delimiter.should == ":"
             tree.prefix.should == "foo"
-            tree.append?.should be_false
+            tree.append?.should be_falsey
           end
 
         end

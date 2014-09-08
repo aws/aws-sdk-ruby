@@ -90,7 +90,7 @@ And /^the objects should be valid$/ do
 end
 
 Then /^validation errors for (.+?) should contain:$/ do |id, error|
-  @result[:errored].should be_true
+  @result[:errored].should be_truthy
   @result[:validation_errors].should eq([
     {:errors => [error], :id => id}
   ])
