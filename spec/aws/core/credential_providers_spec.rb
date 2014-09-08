@@ -218,7 +218,7 @@ module AWS
         let(:mock_credential_file) { File.expand_path('../../../mock-credential-file.txt', __FILE__) }
 
         before(:each) do
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
         end
 
         it 'returns the prefix it was constructed with' do
@@ -325,7 +325,7 @@ module AWS
         }}
 
         before(:each) do
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
         end
 
         it 'reads credentials with supplied suffixes' do
@@ -393,7 +393,7 @@ module AWS
 
         it 'supports fetching profiles from ENV' do
           env_variables = { 'AWS_PROFILE' => 'barprofile' }
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
           provider = SharedCredentialFileProvider.new(:path => mock_shared_cred_file)
           provider.credentials.should == {
             :access_key_id => 'ACCESS_KEY_2',
@@ -403,7 +403,7 @@ module AWS
 
         it 'supports a manually specified profile' do
           env_variables = { 'AWS_PROFILE' => 'barprofile' }
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
 
           provider = SharedCredentialFileProvider.new(
             :path => mock_shared_cred_file,
