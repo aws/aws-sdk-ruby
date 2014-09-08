@@ -91,7 +91,7 @@ module AWS
             yielded << domain
           end
           yielded.length.should == 3
-          yielded.all?{|d| d.is_a?(Domain).should be_true }
+          yielded.all?{|d| d.is_a?(Domain).should be_truthy }
           yielded.collect{|d| d.name }.should == %w(foo bar yuck)
 
         end

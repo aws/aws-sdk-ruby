@@ -36,7 +36,7 @@ When /^I delete the snapshot$/ do
 end
 
 Then /^the snapshot should eventually not exist$/ do
-  eventually { @snapshot.exists?.should be_false }
+  eventually { @snapshot.exists?.should be_falsey }
 end
 
 Given /^I ask for the snapshot "([^\"]*)" by ID$/ do |id|

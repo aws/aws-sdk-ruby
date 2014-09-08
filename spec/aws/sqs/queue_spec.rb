@@ -523,7 +523,7 @@ module AWS
                   throw :done
                 end
               end
-              got_message.should be_true
+              got_message.should be_truthy
             end
 
             it 'should override the idle timeout if larger' do
@@ -535,7 +535,7 @@ module AWS
                   throw :done
                 end
               end
-              got_message.should be_true
+              got_message.should be_truthy
             end
 
             it 'should not prevent the first message if false' do
@@ -547,7 +547,7 @@ module AWS
                   throw :done
                 end
               end
-              got_message.should be_true
+              got_message.should be_truthy
             end
 
             it 'should not apply after the first message' do
@@ -563,7 +563,7 @@ module AWS
                   end
                 end
               end
-              got_second.should be_true
+              got_second.should be_truthy
             end
 
           end
@@ -584,17 +584,17 @@ module AWS
         it 'should return false if NonExistentQueue is raised' do
           client.stub(:get_queue_attributes).
             and_raise(SQS::Errors::NonExistentQueue)
-          queue.exists?.should be_false
+          queue.exists?.should be_falsey
         end
 
         it 'should return false if InvalidAddress is raised' do
           client.stub(:get_queue_attributes).
             and_raise(SQS::Errors::InvalidAddress)
-          queue.exists?.should be_false
+          queue.exists?.should be_falsey
         end
 
         it 'should return true if no exception is raised' do
-          queue.exists?.should be_true
+          queue.exists?.should be_truthy
         end
 
         it 'should not rescue other exceptions' do

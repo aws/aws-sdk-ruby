@@ -90,7 +90,7 @@ module AWS
           children.should be_a(Tree::ChildCollection)
           children.delimiter.should == ":"
           children.prefix.should == "foo"
-          children.append?.should be_false
+          children.append?.should be_falsey
         end
 
       end

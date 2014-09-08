@@ -139,7 +139,7 @@ module AWS
             end
 
             it 'should be false' do
-              collection.empty?.should be_false
+              collection.empty?.should be_falsey
             end
 
           end
@@ -169,7 +169,7 @@ module AWS
             end
 
             it 'should be true' do
-              collection.has_key?("foo").should be_true
+              collection.has_key?("foo").should be_truthy
             end
 
           end
@@ -188,7 +188,7 @@ module AWS
             end
 
             it 'should be true' do
-              collection.has_value?("foo").should be_true
+              collection.has_value?("foo").should be_truthy
             end
 
           end
@@ -200,7 +200,7 @@ module AWS
           context '#empty?' do
 
             it 'should be true' do
-              collection.empty?.should be_true
+              collection.empty?.should be_truthy
             end
 
           end
@@ -208,7 +208,7 @@ module AWS
           context '#has_key?' do
 
             it 'should be false' do
-              collection.has_key?("foo").should be_false
+              collection.has_key?("foo").should be_falsey
             end
 
           end
@@ -216,7 +216,7 @@ module AWS
           context '#has_value?' do
 
             it 'should be false' do
-              collection.has_value?("foo").should be_false
+              collection.has_value?("foo").should be_falsey
             end
 
           end
@@ -232,18 +232,18 @@ module AWS
 
           it 'should be empty if the cache is empty' do
             resource.stub(:cached_tags).and_return({})
-            collection.empty?.should be_true
+            collection.empty?.should be_truthy
           end
 
           it 'should use the cached keys' do
-            collection.has_key?("foo").should be_true
-            collection.has_key?(:foo).should be_true
-            collection.has_key?("bar").should be_false
+            collection.has_key?("foo").should be_truthy
+            collection.has_key?(:foo).should be_truthy
+            collection.has_key?("bar").should be_falsey
           end
 
           it 'should use the cached values' do
-            collection.has_value?("bar").should be_true
-            collection.has_value?("baz").should be_false
+            collection.has_value?("bar").should be_truthy
+            collection.has_value?("baz").should be_falsey
           end
 
         end

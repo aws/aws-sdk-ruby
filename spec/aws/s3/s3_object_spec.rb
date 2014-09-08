@@ -99,7 +99,7 @@ module AWS
         end
 
         it 'should return true if the request is successful' do
-          object.exists?.should be_true
+          object.exists?.should be_truthy
         end
 
         it 'should return false if a NoSuchKey error is raised' do
@@ -108,7 +108,7 @@ module AWS
                                             double("resp",
                                                    :status => 404,
                                                    :body => '')))
-          object.exists?.should be_false
+          object.exists?.should be_falsey
         end
 
         it 'should not intercept other kinds of errors' do
@@ -790,12 +790,12 @@ module AWS
 
         it 'should return true if server_side_encryption is not nil' do
           object.stub(:server_side_encryption => 'foo')
-          object.server_side_encryption?.should be_true
+          object.server_side_encryption?.should be_truthy
         end
 
         it 'should return false if server_side_encryption is nil' do
           object.stub(:server_side_encryption => nil)
-          object.server_side_encryption?.should be_false
+          object.server_side_encryption?.should be_falsey
         end
 
       end

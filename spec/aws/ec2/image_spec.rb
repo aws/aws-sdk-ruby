@@ -150,12 +150,12 @@ module AWS
         end
 
         it 'should return false when the image does not exist' do
-          image.exists?.should be_false
+          image.exists?.should be_falsey
         end
 
         it 'should return true when the image exists' do
           resp.stub(:images_set).and_return([double("image")])
-          image.exists?.should be_true
+          image.exists?.should be_truthy
         end
 
       end

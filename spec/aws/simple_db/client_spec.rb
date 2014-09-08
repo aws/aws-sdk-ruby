@@ -47,15 +47,15 @@ module AWS
       context '::valid_domain_name?' do
 
         it 'returns true for good names' do
-          client.valid_domain_name?('sample').should be_true
+          client.valid_domain_name?('sample').should be_truthy
         end
 
         it 'returns false for names shorter than 3 chars' do
-          client.valid_domain_name?('ab').should be_false
+          client.valid_domain_name?('ab').should be_falsey
         end
 
         it 'returns false for names longer than 255 chars' do
-          client.valid_domain_name?('a' * 256).should be_false
+          client.valid_domain_name?('a' * 256).should be_falsey
         end
 
       end

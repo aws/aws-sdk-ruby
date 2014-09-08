@@ -26,12 +26,12 @@ module AWS
 
         it 'should return true if everything matches' do
           instance.send(method, described_class.new(*constructor_args)).
-            should be_true
+            should be_truthy
         end
 
         it 'should return false if any identifying information does not match' do
           comparison_instances.each do |other|
-            instance.send(method, other).should_not be_true
+            instance.send(method, other).should_not be_truthy
           end
         end
 
@@ -42,7 +42,7 @@ module AWS
         it 'should return false' do
           imposter_class = Class.new(DelegateClass(described_class))
           instance.send(method, imposter_class.new(instance)).
-            should_not be_true
+            should_not be_truthy
         end
 
       end
