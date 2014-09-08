@@ -430,7 +430,7 @@ module Aws
                   }
                 }
               }
-              msg = 'unable to define method #load, method already exists'
+              msg = /unable to define method .*#load, method already exists/
               expect {
                 apply_definition
               }.to raise_error(msg)
