@@ -54,7 +54,7 @@ module Seahorse
 
           def serialize_header_value(shape, value)
             if shape.is_a?(Model::Shapes::Timestamp)
-              shape.format_time(value, 'rfc822')
+              shape.format_time(value, 'httpdate')
             else
               value.to_s
             end

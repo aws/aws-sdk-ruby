@@ -392,6 +392,7 @@ module Seahorse
           case format
           when 'iso8601'       then time.utc.iso8601
           when 'rfc822'        then time.utc.rfc822
+          when 'httpdate'      then time.httpdate
           when 'unixTimestamp' then time.utc.to_i
           else
             msg = "invalid timestamp format #{format.inspect}"
