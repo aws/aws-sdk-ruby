@@ -117,6 +117,18 @@ module Aws
   end
 
   # @api private
+  module Waiters
+    autoload :Error, "#{SRC}/waiters/waiter"
+    autoload :MaxAttemptsError, "#{SRC}/waiters/waiter"
+    autoload :NoSuchWaiter, "#{SRC}/waiters/waiter"
+    autoload :NullProvider, "#{SRC}/waiters/null_provider"
+    autoload :Provider, "#{SRC}/waiters/provider"
+    autoload :TerminalConditionError, "#{SRC}/waiters/waiter"
+    autoload :Waiter, "#{SRC}/waiters/waiter"
+    autoload :WaiterStoppedError, "#{SRC}/waiters/waiter"
+  end
+
+  # @api private
   module Xml
     autoload :Builder, "#{SRC}/xml/builder"
     autoload :DefaultList,  "#{SRC}/xml/default_list"
@@ -245,6 +257,19 @@ module Aws
       else raise ArgumentError, 'invalid :paginators option'
     end
     svc_module.const_get(:Client).paginators = paginators
+  end
+
+  # build service paginators
+  service_added do |name, svc_module, options|
+    waiters = options[:waiters]
+    waiters = case waiters
+      when Waiters::Provider then waiters
+      when Hash              then Waiters::Provider.new(waiters)
+      when String            then Waiters::Provider.new(Aws.load_json(waiters))
+      when nil               then Waiters::NullProvider.new
+      else raise ArgumentError, 'invalid :waiters option'
+    end
+    svc_module.const_get(:Client).waiters = waiters
   end
 
   # deprecated = define helper method for client class, this will be

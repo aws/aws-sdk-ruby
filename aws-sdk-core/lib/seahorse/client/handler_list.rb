@@ -112,6 +112,13 @@ module Seahorse
         handler_class
       end
 
+      # @param [Class<Handler>] handler_class
+      def remove(handler_class)
+        @entries.each do |key, entry|
+          @entries.delete(key) if entry.handler_class == handler_class
+        end
+      end
+
       # Copies handlers from the `source_list` onto the current handler list.
       # If a block is given, only the entries that return a `true` value
       # from the block will be copied.
