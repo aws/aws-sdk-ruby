@@ -269,6 +269,14 @@ module Aws
       when nil               then Waiters::NullProvider.new
       else raise ArgumentError, 'invalid :waiters option'
     end
+    if name == 'S3'
+      # temporary workaround for issue with S3 waiter definition
+      defs = waiters.instance_variable_get("@definitions")
+      defs[:bucket_exists]['ignore_errors'] = ['NotFound']
+      defs[:object_exists]['ignore_errors'] = ['NotFound']
+      defs[:bucket_not_exists]['success_value'] = 'NotFound'
+      defs[:object_not_exists]['success_value'] = 'NotFound'
+    end
     svc_module.const_get(:Client).waiters = waiters
   end
 
