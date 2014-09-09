@@ -6,13 +6,19 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          pager = context.client.class.paginators.pager(context.operation.name)
-          PageableResponse.new(@handler.call(context), pager)
+          context[:original_params] = context.params
+          PageableResponse.new(@handler.call(context), pager(context))
+        end
+
+        private
+
+        def pager(context)
+          context.client.class.paginators.pager(context.operation.name)
         end
 
       end
 
-      handler(Handler)
+      handler(Handler, step: :initialize, priority: 90)
 
     end
   end

@@ -5,7 +5,11 @@ module Aws
 
     let(:pager) { Paging::Pager.new(rules) }
 
-    let(:resp) { PageableResponse.new(Seahorse::Client::Response.new, pager) }
+    let(:resp) {
+      r = Seahorse::Client::Response.new
+      r.context[:original_params] = r.context.params
+      PageableResponse.new(r, pager)
+    }
 
     # If an operation has no paging metadata, then it is considered
     # un-pageable and will always treat a response as the last page.
