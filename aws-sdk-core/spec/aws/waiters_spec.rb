@@ -19,7 +19,7 @@ module Aws
         it 'raises an error when attempting to wait for an unknown state' do
           expect {
             client.wait_until(:fake_condition)
-          }.to raise_error(Waiters::Errors::NoSuchWaiterError)
+          }.to raise_error(Waiters::Errors::NoSuchWaiter)
         end
 
         it 'lists available waiters in the error message' do

@@ -31,7 +31,7 @@ module Aws
         if @waiter_names.include?(waiter_name)
           Waiter.new(resolve('extends' => waiter_name))
         else
-          raise Errors::NoSuchWaiterError.new(waiter_name, waiter_names)
+          raise Errors::NoSuchWaiter.new(waiter_name, waiter_names)
         end
       end
 

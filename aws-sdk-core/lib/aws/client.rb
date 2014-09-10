@@ -63,7 +63,7 @@ module Aws
     #     end
     #   end
     #
-    # @param [Symbol] water_name
+    # @param [Symbol] waiter_name
     # @param [Hash] params Additional request parameters.
     # @return [Boolean] Returns `true` when the waiter has succeeded.
     # @raise [Waiters::NoSuchWaiter] Raised when the given `waiter_name`
