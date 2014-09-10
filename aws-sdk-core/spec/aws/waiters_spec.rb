@@ -2,6 +2,7 @@ require 'spec_helper'
 
 module Aws
   module Waiters
+    # functionally testing waiters using the S3 and EC2 waiter configurations
     describe 'Waiters' do
 
       let(:client_options) {{
@@ -70,7 +71,7 @@ module Aws
                 yielded << "waited-#{attempts}-times"
               end
             end
-          }.to raise_error(Errors::MaxAttemptsError)
+          }.to raise_error
           expect(yielded).to eq(%w(0-attempts-made waited-1-times 1-attempts-made))
         end
 
@@ -82,11 +83,7 @@ module Aws
             instance_states = instances
             client.handle(step: :send) do |context|
               resp = Seahorse::Client::Response.new(context:context)
-              resp.data = {
-                'reservations' => [
-                  { 'instances' => instance_states }
-                ]
-              }
+              resp.data = {'reservations' => [{'instances' => instance_states}]}
               resp
             end
           end
@@ -108,30 +105,88 @@ module Aws
             instances << { 'state' => {'name' => 'terminated' }}
             expect {
               client.wait_until(:instance_stopped)
-            }.to raise_error(Errors::TerminalConditionError)
+            }.to raise_error(Errors::WatierFailed)
           end
 
           it 'raises a max attempts after the configured attempt count' do
-            msg = '4 attempts made without success or failure'
             instances << { 'state' => {'name' => 'running' }}
             expect {
               client.wait_until(:instance_stopped) do |w|
                 w.interval = 0
                 w.max_attempts = 4
               end
-            }.to raise_error(Errors::MaxAttemptsError, msg)
+            }.to raise_error(Errors::WatierFailed, /4 attempts made/)
           end
 
           it 'sleeps between attempts' do
-            begin
+            expect {
               instances << { 'state' => {'name' => 'running' }}
               client.wait_until(:instance_stopped) do |w|
                 w.interval = 1.234
                 w.max_attempts = 4
                 expect(w).to receive(:sleep).with(1.234).exactly(3).times
               end
-            rescue Errors::MaxAttemptsError
+            }.to raise_error(/too many attempts/)
+          end
+
+          it 'catches :stop_waiting from callbacks' do
+            expect {
+              instances << { 'state' => {'name' => 'running' }}
+              client.wait_until(:instance_stopped) do |w|
+                expect(w).not_to receive(:sleep)
+                w.before_wait do |attempts, response|
+                  throw :failure, 'custom-message'
+                end
+              end
+            }.to raise_error(Errors::WatierFailed, 'custom-message')
+          end
+
+          it 'catches :stop_waiting from callbacks' do
+            expect(client).not_to receive(:build_request)
+            client.wait_until(:instance_stopped) do |w|
+              w.before_attempt do |attempt|
+                throw :success
+              end
             end
+          end
+
+        end
+
+        describe 'matching on expectd errors' do
+
+          let(:client) { S3::Client.new(client_options) }
+
+          before(:each) do
+            client.handle(step: :send) do |context|
+              Seahorse::Client::Response.new(context:context)
+            end
+          end
+
+          it 'succeedes when an expected error is encountered' do
+            client.handle(step: :send) do |context|
+              resp = Seahorse::Client::Response.new(context:context)
+              resp.error = S3::Errors::NotFound.new(context, 'not found')
+              resp
+            end
+            client.wait_until(:bucket_not_exists, bucket:'aws-sdk')
+          end
+
+          it 'fails when an expected error is not encountered' do
+            client.handle(step: :send) do |context|
+              Seahorse::Client::Response.new(context:context)
+            end
+            expect {
+              client.wait_until(:bucket_not_exists, bucket:'aws-sdk') do |w|
+                w.interval = 0
+              end
+            }.to raise_error(Errors::WatierFailed)
+          end
+
+          it 'does not require an acceptor path to succeede' do
+            client.handle(step: :send) do |context|
+              Seahorse::Client::Response.new(context:context)
+            end
+            client.wait_until(:bucket_exists, bucket:'aws-sdk')
           end
 
         end
@@ -150,12 +205,12 @@ module Aws
           it 'raises response errors' do
             client.handle(step: :send) do |context|
               resp = Seahorse::Client::Response.new(context:context)
-              resp.error = StandardError.new('oops')
+              resp.error = RuntimeError.new('oops')
               resp
             end
             expect {
               client.wait_until(:instance_stopped)
-            }.to raise_error(StandardError, 'oops')
+            }.to raise_error(RuntimeError, 'oops')
           end
 
         end

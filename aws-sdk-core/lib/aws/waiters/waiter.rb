@@ -23,11 +23,18 @@ module Aws
       #       puts "#{attempts} made, about to make attempt #{attempts + 1}"
       #     end
       #
-      # Throwing `:stop_waiting` from the given block will prevent the
-      # next attempt and will trigger a {WaiterStoppedError} error.
+      # Throwing `:success` or `:failure` from the given block will stop
+      # the waiter and return or raise. You can pass a custom message to the
+      # throw:
       #
+      #     # raises Aws::Waiters::Errors::WatierFailed
       #     waiter.before_attempt do |attempts|
-      #       throw :stop_waiting, "optional reason"
+      #       throw :failure, 'custom-error-message'
+      #     end
+      #
+      #     # cause the waiter to stop polling and return
+      #     waiter.before_attempt do |attempts|
+      #       throw :success
       #     end
       #
       # @yieldparam [Integer] attempts The number of attempts made.
@@ -44,12 +51,20 @@ module Aws
       #       puts response.data.inspect
       #     end
       #
-      # Throwing `:stop_waiting` from the given block stop the waiter and
-      # will trigger a {WaiterStoppedError} error.
+      # Throwing `:success` or `:failure` from the given block will stop
+      # the waiter and return or raise. You can pass a custom message to the
+      # throw:
       #
-      #     waiter.before_wait do |attempts|
-      #       throw :stop_waiting, "optional reason"
+      #     # raises Aws::Waiters::Errors::WatierFailed
+      #     waiter.before_attempt do |attempts|
+      #       throw :failure, 'custom-error-message'
       #     end
+      #
+      #     # cause the waiter to stop polling and return
+      #     waiter.before_attempt do |attempts|
+      #       throw :success
+      #     end
+      #
       #
       # @yieldparam [Integer] attempts The number of attempts already made.
       # @yieldparam [Seahorse::Client::Response] response The response from
@@ -68,16 +83,22 @@ module Aws
       # @param [Hash] params
       def wait(client, params)
         attempts = 0
-        loop do
-          trigger_callbacks(@before_attempt, attempts)
-          attempts += 1
-          response = send_request(client, params)
-          return response if successful?(response)
-          raise Errors::TerminalConditionError if failure?(response)
-          raise response.error unless error_ignored?(response)
-          check_for_max_attempts(attempts)
-          trigger_callbacks(@before_wait, attempts, response)
-          sleep(interval)
+        catch(:success) do
+          failure = catch(:failure) do
+            loop do
+              trigger_callbacks(@before_attempt, attempts)
+              attempts += 1
+              resp = send_request(client, params)
+              throw :success, resp if successful?(resp)
+              throw :failure if failure?(resp)
+              throw :failure, resp.error unless error_ignored?(resp)
+              throw :failure, too_many(attempts) if attempts == max_attempts
+              trigger_callbacks(@before_wait, attempts, resp)
+              sleep(interval)
+            end
+          end
+          failure = 'waiter failed' if failure.nil?
+          raise String === failure ? Errors::WatierFailed.new(failure) : failure
         end
       end
 
@@ -92,13 +113,7 @@ module Aws
       end
 
       def trigger_callbacks(callbacks, *args)
-        msg = catch(:stop_waiting) do
-          callbacks.each do |block|
-            block.call(*args)
-          end
-          return # no callbacks threw :stop_waiting, return normally
-        end
-        raise WaiterStoppedError, msg || "callback threw `:stop_waiting`"
+        callbacks.each { |block| block.call(*args) }
       end
 
       def send_request(client, params)
@@ -113,10 +128,8 @@ module Aws
 
       def acceptor_matches?(acceptor, resp)
         case type(acceptor)
-        when nil then false
         when 'output' then output_matches?(resp, values(acceptor), path(acceptor))
         when 'error' then error_matches?(resp.error, values(acceptor))
-        else raise "unhandled acceptor type: #{type(acceptor).inspect}"
         end
       end
 
@@ -167,11 +180,9 @@ module Aws
         end
       end
 
-      def check_for_max_attempts(attempts)
-        if attempts == max_attempts
-          msg = "#{attempts} attempts made without success or failure"
-          raise Errors::MaxAttemptsError, msg
-        end
+      def too_many(attempts)
+        "too many attempts made, #{attempts} attempts made without " +
+        "success or failure"
       end
 
       def underscore(str)

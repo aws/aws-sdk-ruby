@@ -9,14 +9,11 @@ module Aws
 
       # Raised when a waiter detects a condition where the waiter can never
       # succeed.
-      class TerminalConditionError < Error; end
+      class WatierFailed < Error; end
 
       # Raised when a waiter does not succeed or fail after a configured
       # maximum number of attempts have been made.
       class MaxAttemptsError < Error; end
-
-      # Raised in response to `:stop_waiting` being thrown from a waiter callback.
-      class WaiterStoppedError < Error; end
 
       # Raised when attempting to get a waiter by name and the waiter has not
       # been defined.
