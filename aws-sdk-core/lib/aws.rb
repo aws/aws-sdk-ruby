@@ -116,16 +116,11 @@ module Aws
     autoload :V4, "#{SRC}/signers/v4"
   end
 
-  # @api private
   module Waiters
-    autoload :Error, "#{SRC}/waiters/waiter"
-    autoload :MaxAttemptsError, "#{SRC}/waiters/waiter"
-    autoload :NoSuchWaiter, "#{SRC}/waiters/waiter"
+    autoload :Errors, "#{SRC}/waiters/errors"
     autoload :NullProvider, "#{SRC}/waiters/null_provider"
     autoload :Provider, "#{SRC}/waiters/provider"
-    autoload :TerminalConditionError, "#{SRC}/waiters/waiter"
     autoload :Waiter, "#{SRC}/waiters/waiter"
-    autoload :WaiterStoppedError, "#{SRC}/waiters/waiter"
   end
 
   # @api private

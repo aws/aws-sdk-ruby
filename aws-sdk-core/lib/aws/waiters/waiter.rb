@@ -2,38 +2,6 @@ require 'jamespath'
 
 module Aws
   module Waiters
-
-    # Base class errors raised while waiting.
-    class Error < StandardError; end
-
-    # Raised when a waiter detects a condition where the waiter can never
-    # succeed.
-    class TerminalConditionError < Error; end
-
-    # Raised when a waiter does not succeed or fail after a configured
-    # maximum number of attempts have been made.
-    class MaxAttemptsError < Error; end
-
-    # Raised in response to `:stop_waiting` being thrown from a waiter callback.
-    class WaiterStoppedError < Error; end
-
-    # Raised when attempting to get a waiter by name and the waiter has not
-    # been defined.
-    class NoSuchWaiter < ArgumentError
-      def initialize(waiter_name, waiter_names)
-        msg = "no definition found for #{waiter_name.inspect}"
-        msg << "; valid waiter names are:"
-        waiter_names.sort.each.with_index do |name, n|
-          if n % 3 == 0
-            msg << "\n  #{name.inspect}"
-          else
-            msg << ", #{name.inspect}"
-          end
-        end
-        super(msg)
-      end
-    end
-
     class Waiter
 
       # @api private
@@ -101,23 +69,15 @@ module Aws
       def wait(client, params)
         attempts = 0
         loop do
-
           trigger_callbacks(@before_attempt, attempts)
-
           attempts += 1
           response = send_request(client, params)
-
-          return true if successful?(response)
-          raise TerminalConditionError if failure?(response)
+          return response if successful?(response)
+          raise Errors::TerminalConditionError if failure?(response)
           raise response.error unless error_ignored?(response)
-
-          if attempts == max_attempts
-            msg = "max attempts reached without success or failure"
-            raise MaxAttemptsError, msg
-          else
-            trigger_callbacks(@before_wait, attempts, response)
-            sleep(interval)
-          end
+          check_for_max_attempts(attempts)
+          trigger_callbacks(@before_wait, attempts, response)
+          sleep(interval)
         end
       end
 
@@ -204,6 +164,13 @@ module Aws
           errors.any? { |pattern| error.class.name.match(/#{pattern}$/) }
         else
           false
+        end
+      end
+
+      def check_for_max_attempts(attempts)
+        if attempts == max_attempts
+          msg = "#{attempts} attempts made without success or failure"
+          raise Errors::MaxAttemptsError, msg
         end
       end
 

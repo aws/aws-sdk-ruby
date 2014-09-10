@@ -2,6 +2,7 @@ require 'set'
 
 module Aws
   module Waiters
+    # @api private
     class Provider
 
       def initialize(definitions)
@@ -30,7 +31,7 @@ module Aws
         if @waiter_names.include?(waiter_name)
           Waiter.new(resolve('extends' => waiter_name))
         else
-          raise NoSuchWaiter.new(waiter_name, waiter_names)
+          raise Errors::NoSuchWaiterError.new(waiter_name, waiter_names)
         end
       end
 
