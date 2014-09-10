@@ -413,9 +413,9 @@ module AWS
           end
 
           def request_params values, prefix = nil
+            index = 0
             values.inject([]) do |params, (key,value)|
-
-              index = params.size / 2 + 1
+              index += 1
               common_prefix = "#{prefixed_name(prefix)}#{separator}#{index}"
 
               key_name = common_prefix + key_option.param_name
