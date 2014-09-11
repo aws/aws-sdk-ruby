@@ -180,6 +180,17 @@
         - :string
         :value:
         - :string
+    Environment:
+    - :list:
+      - :structure:
+          Key:
+          - :string
+          - :required
+          Value:
+          - :string
+          - :required
+          Secure:
+          - :boolean
   :outputs:
     AppId:
       :sym: :app_id
@@ -576,6 +587,19 @@
         CreatedAt:
           :sym: :created_at
           :type: :string
+        Environment:
+          :sym: :environment
+          :type: :hash
+          :members:
+            Key:
+              :sym: :key
+              :type: :string
+            Value:
+              :sym: :value
+              :type: :string
+            Secure:
+              :sym: :secure
+              :type: :boolean
 - :name: DescribeCommands
   :method: :describe_commands
   :inputs:
@@ -1095,6 +1119,8 @@
   :inputs:
     InstanceId:
     - :string
+    StackId:
+    - :string
     RaidArrayIds:
     - :list:
       - :string
@@ -1132,6 +1158,9 @@
           :type: :string
         CreatedAt:
           :sym: :created_at
+          :type: :string
+        StackId:
+          :sym: :stack_id
           :type: :string
         VolumeType:
           :sym: :volume_type
@@ -1811,6 +1840,17 @@
         - :string
         :value:
         - :string
+    Environment:
+    - :list:
+      - :structure:
+          Key:
+          - :string
+          - :required
+          Value:
+          - :string
+          - :required
+          Secure:
+          - :boolean
   :outputs: {}
 - :name: UpdateElasticIp
   :method: :update_elastic_ip

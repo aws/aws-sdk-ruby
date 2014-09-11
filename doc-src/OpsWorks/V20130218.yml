@@ -22,14 +22,14 @@
   stack name.\n  * `:region` - (String) The cloned stack AWS region, such as \"us-east-1\".
   For more information about AWS regions, see Regions and Endpoints.\n  * `:vpc_id`
   - (String) The ID of the VPC that the cloned stack is to be launched into. It must
-  be in the specified region. All instances will be launched into this VPC, and you
-  cannot change the ID later. If your account supports EC2 Classic, the default value
-  is no VPC. If your account does not support EC2 Classic, the default value is the
-  default VPC for the specified region. If the VPC ID corresponds to a default VPC
-  and you have specified either the DefaultAvailabilityZone or the DefaultSubnetId
-  parameter only, AWS OpsWorks infers the value of the other parameter. If you specify
-  neither parameter, AWS OpsWorks sets these parameters to the first valid Availability
-  Zone for the specified region and the corresponding default VPC subnet ID, respectively.
+  be in the specified region. All instances are launched into this VPC, and you cannot
+  change the ID later. If your account supports EC2 Classic, the default value is
+  no VPC. If your account does not support EC2 Classic, the default value is the default
+  VPC for the specified region. If the VPC ID corresponds to a default VPC and you
+  have specified either the DefaultAvailabilityZone or the DefaultSubnetId parameter
+  only, AWS OpsWorks infers the value of the other parameter. If you specify neither
+  parameter, AWS OpsWorks sets these parameters to the first valid Availability Zone
+  for the specified region and the corresponding default VPC subnet ID, respectively.
   If you specify a nondefault VPC ID, note the following: It must belong to a VPC
   in your account that is in the specified region. You must specify a value for DefaultSubnetId.
   For more information on how to use AWS OpsWorks with a VPC, see Running a Stack
@@ -47,73 +47,75 @@
   so explicitly.\n  * `:default_instance_profile_arn` - (String) The ARN of an IAM
   profile that is the default profile for all of the stack's EC2 instances. For more
   information about IAM ARNs, see Using Identifiers.\n  * `:default_os` - (String)
-  The cloned stack's default operating system, which must be set to Amazon Linux or
-  Ubuntu 12.04 LTS. The default option is Amazon Linux.\n  * `:hostname_theme` - (String)
-  The stack's host name theme, with spaces are replaced by underscores. The theme
-  is used to generate host names for the stack's instances. By default, HostnameTheme
-  is set to Layer_Dependent, which creates host names by appending integers to the
-  layer's short name. The other themes are: Baked_Goods Clouds European_Cities Fruits
-  Greek_Deities Legendary_Creatures_from_Japan Planets_and_Moons Roman_Deities Scottish_Islands
-  US_Cities Wild_Cats To obtain a generated host name, call GetHostNameSuggestion,
-  which returns a host name based on the current theme.\n  * `:default_availability_zone`
-  - (String) The cloned stack's default Availability Zone, which must be in the specified
-  region. For more information, see Regions and Endpoints. If you also specify a value
-  for DefaultSubnetId, the subnet must be in the same zone. For more information,
-  see the VpcId parameter description.\n  * `:default_subnet_id` - (String) The stack's
-  default subnet ID. All instances will be launched into this subnet unless you specify
-  otherwise when you create the instance. If you also specify a value for DefaultAvailabilityZone,
-  the subnet must be in the same zone. For information on default values and when
-  this parameter is required, see the VpcId parameter description.\n  * `:custom_json`
-  - (String) A string that contains user-defined, custom JSON. It is used to override
-  the corresponding default stack configuration JSON values. The string should be
-  in the following format and must escape characters such as '\"'.: \"{\\\"key1\\\":
-  \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\" For more information on custom
-  JSON, see Use Custom JSON to Modify the Stack Configuration JSON\n  * `:configuration_manager`
-  - (Hash) The configuration manager. When you clone a stack we recommend that you
-  use the configuration manager to specify the Chef version, 0.9, 11.4, or 11.10.
-  The default value is currently 11.4.\n    * `:name` - (String) The name. This parameter
-  must be set to \"Chef\".\n    * `:version` - (String) The Chef version. This parameter
-  must be set to 0.9, 11.4, or 11.10. The default value is 11.4.\n  * `:chef_configuration`
-  - (Hash) A ChefConfiguration object that specifies whether to enable Berkshelf and
-  the Berkshelf version on Chef 11.10 stacks. For more information, see Create a New
-  Stack.\n    * `:manage_berkshelf` - (Boolean) Whether to enable Berkshelf.\n    *
-  `:berkshelf_version` - (String) The Berkshelf version.\n  * `:use_custom_cookbooks`
-  - (Boolean) Whether to use custom cookbooks.\n  * `:use_opsworks_security_groups`
-  - (Boolean) Whether to associate the AWS OpsWorks built-in security groups with
-  the stack's layers. AWS OpsWorks provides a standard set of built-in security groups,
-  one for each layer, which are associated with layers by default. With UseOpsworksSecurityGroups
-  you can instead provide your own custom security groups. UseOpsworksSecurityGroups
-  has the following settings: True - AWS OpsWorks automatically associates the appropriate
-  built-in security group with each layer (default setting). You can associate additional
-  security groups with a layer after you create it but you cannot delete the built-in
-  security group. False - AWS OpsWorks does not associate built-in security groups
-  with layers. You must create appropriate EC2 security groups and associate a security
-  group with each layer that you create. However, you can still manually associate
-  a built-in security group with a layer on creation; custom security groups are required
-  only for those layers that need custom settings. For more information, see Create
-  a New Stack.\n  * `:custom_cookbooks_source` - (Hash) \n    * `:type` - (String)
-  The repository type.  Valid values include:\n      * `git`\n      * `svn`\n      *
-  `archive`\n      * `s3`\n    * `:url` - (String) The source URL.\n    * `:username`
-  - (String) This parameter depends on the repository type. For Amazon S3 bundles,
-  set Username to the appropriate IAM access key ID. For HTTP bundles, Git repositories,
-  and Subversion repositories, set Username to the user name.\n    * `:password` -
-  (String) This parameter depends on the repository type. For Amazon S3 bundles, set
-  Password to the appropriate IAM secret access key. For HTTP bundles and Subversion
-  repositories, set Password to the password. For more information on how to safely
-  handle IAM credentials, see .\n    * `:ssh_key` - (String) The repository's SSH
-  key.\n    * `:revision` - (String) The application's version. AWS OpsWorks enables
-  you to easily deploy new versions of an application. One of the simplest approaches
-  is to have branches or revisions in your repository that represent different versions
-  that can potentially be deployed.\n  * `:default_ssh_key_name` - (String) A default
-  SSH key for the stack instances. You can override this value when you create or
-  update an instance.\n  * `:clone_permissions` - (Boolean) Whether to clone the source
-  stack's permissions.\n  * `:clone_app_ids` - (Array&lt;<String>) A list of source
-  stack app IDs to be included in the cloned stack.\n  * `:default_root_device_type`
-  - (String) The default root device type. This value is used by default for all instances
-  in the cloned stack, but you can override it when you create an instance. For more
-  information, see Storage for the Root Device.  Valid values include:\n    * `ebs`\n
-  \   * `instance-store`\n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `:stack_id` - (String)"
+  The cloned stack's default operating system, which must be set to Amazon Linux,
+  Ubuntu 12.04 LTS, or Ubuntu 14.04 LTS. The default option is Amazon Linux.\n  *
+  `:hostname_theme` - (String) The stack's host name theme, with spaces are replaced
+  by underscores. The theme is used to generate host names for the stack's instances.
+  By default, HostnameTheme is set to Layer_Dependent, which creates host names by
+  appending integers to the layer's short name. The other themes are: Baked_Goods
+  Clouds European_Cities Fruits Greek_Deities Legendary_Creatures_from_Japan Planets_and_Moons
+  Roman_Deities Scottish_Islands US_Cities Wild_Cats To obtain a generated host name,
+  call GetHostNameSuggestion, which returns a host name based on the current theme.\n
+  \ * `:default_availability_zone` - (String) The cloned stack's default Availability
+  Zone, which must be in the specified region. For more information, see Regions and
+  Endpoints. If you also specify a value for DefaultSubnetId, the subnet must be in
+  the same zone. For more information, see the VpcId parameter description.\n  * `:default_subnet_id`
+  - (String) The stack's default VPC subnet ID. This parameter is required if you
+  specify a value for the VpcId parameter. All instances are launched into this subnet
+  unless you specify otherwise when you create the instance. If you also specify a
+  value for DefaultAvailabilityZone, the subnet must be in that zone. For information
+  on default values and when this parameter is required, see the VpcId parameter description.\n
+  \ * `:custom_json` - (String) A string that contains user-defined, custom JSON.
+  It is used to override the corresponding default stack configuration JSON values.
+  The string should be in the following format and must escape characters such as
+  '\"'.: \"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\" For
+  more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration
+  JSON\n  * `:configuration_manager` - (Hash) The configuration manager. When you
+  clone a stack we recommend that you use the configuration manager to specify the
+  Chef version, 0.9, 11.4, or 11.10. The default value is currently 11.4.\n    * `:name`
+  - (String) The name. This parameter must be set to \"Chef\".\n    * `:version` -
+  (String) The Chef version. This parameter must be set to 0.9, 11.4, or 11.10. The
+  default value is 11.4.\n  * `:chef_configuration` - (Hash) A ChefConfiguration object
+  that specifies whether to enable Berkshelf and the Berkshelf version on Chef 11.10
+  stacks. For more information, see Create a New Stack.\n    * `:manage_berkshelf`
+  - (Boolean) Whether to enable Berkshelf.\n    * `:berkshelf_version` - (String)
+  The Berkshelf version.\n  * `:use_custom_cookbooks` - (Boolean) Whether to use custom
+  cookbooks.\n  * `:use_opsworks_security_groups` - (Boolean) Whether to associate
+  the AWS OpsWorks built-in security groups with the stack's layers. AWS OpsWorks
+  provides a standard set of built-in security groups, one for each layer, which are
+  associated with layers by default. With UseOpsworksSecurityGroups you can instead
+  provide your own custom security groups. UseOpsworksSecurityGroups has the following
+  settings: True - AWS OpsWorks automatically associates the appropriate built-in
+  security group with each layer (default setting). You can associate additional security
+  groups with a layer after you create it but you cannot delete the built-in security
+  group. False - AWS OpsWorks does not associate built-in security groups with layers.
+  You must create appropriate EC2 security groups and associate a security group with
+  each layer that you create. However, you can still manually associate a built-in
+  security group with a layer on creation; custom security groups are required only
+  for those layers that need custom settings. For more information, see Create a New
+  Stack.\n  * `:custom_cookbooks_source` - (Hash) \n    * `:type` - (String) The repository
+  type.  Valid values include:\n      * `git`\n      * `svn`\n      * `archive`\n
+  \     * `s3`\n    * `:url` - (String) The source URL.\n    * `:username` - (String)
+  This parameter depends on the repository type. For Amazon S3 bundles, set Username
+  to the appropriate IAM access key ID. For HTTP bundles, Git repositories, and Subversion
+  repositories, set Username to the user name.\n    * `:password` - (String) This
+  parameter depends on the repository type. For Amazon S3 bundles, set Password to
+  the appropriate IAM secret access key. For HTTP bundles and Subversion repositories,
+  set Password to the password. For more information on how to safely handle IAM credentials,
+  see .\n    * `:ssh_key` - (String) The repository's SSH key.\n    * `:revision`
+  - (String) The application's version. AWS OpsWorks enables you to easily deploy
+  new versions of an application. One of the simplest approaches is to have branches
+  or revisions in your repository that represent different versions that can potentially
+  be deployed.\n  * `:default_ssh_key_name` - (String) A default SSH key for the stack
+  instances. You can override this value when you create or update an instance.\n
+  \ * `:clone_permissions` - (Boolean) Whether to clone the source stack's permissions.\n
+  \ * `:clone_app_ids` - (Array&lt;<String>) A list of source stack app IDs to be
+  included in the cloned stack.\n  * `:default_root_device_type` - (String) The default
+  root device type. This value is used by default for all instances in the cloned
+  stack, but you can override it when you create an instance. For more information,
+  see Storage for the Root Device.  Valid values include:\n    * `ebs`\n    * `instance-store`\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:stack_id` - (String)"
 :create_app: |-
   Calls the CreateApp API operation.
   @param [Hash] options
@@ -126,6 +128,7 @@
       * `:arn` - (String) The data source's ARN.
       * `:database_name` - (String) The database name.
     * `:type` - *required* - (String) The app type. Each supported type is associated with a particular layer. For example, PHP applications are associated with a PHP layer. AWS OpsWorks deploys an application to those instances that are members of the corresponding layer.  Valid values include:
+      * `java`
       * `rails`
       * `php`
       * `nodejs`
@@ -149,6 +152,10 @@
       * `:private_key` - *required* - (String) The private key; the contents of the certificate's domain.kex file.
       * `:chain` - (String) Optional. Can be used to specify an intermediate certificate authority key or client authentication.
     * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value pairs to be added to the stack attributes.
+    * `:environment` - (Array&lt;<Hash>) An array of EnvironmentVariable objects that specify environment variables to be associated with the app. You can specify up to ten environment variables. After you deploy the app, these variables are defined on the associated app server instance. This parameter is supported only by Chef 11.10 stacks. If you have specified one or more environment variables, you cannot modify the stack's Chef version.
+      * `:key` - *required* - (String) (Required) The environment variable's name, which can consist of up to 64 characters and must be specified. The name can contain upper- and lowercase letters, numbers, and underscores (_), but it must start with a letter or underscore.
+      * `:value` - *required* - (String) (Optional) The environment variable's value, which can be left empty. If you specify a value, it can contain up to 256 characters, which must all be printable.
+      * `:secure` - (Boolean) (Optional) Whether the variable's value will be returned by the DescribeApps action. To conceal an environment variable's value, set Secure to  `true` . DescribeApps then returns **Filtered** instead of the actual value. The default value for Secure is  `false` .
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:app_id` - (String)
@@ -182,12 +189,12 @@
     * `:stack_id` - *required* - (String) The stack ID.
     * `:layer_ids` - *required* - (Array&lt;<String>) An array that contains the instance layer IDs.
     * `:instance_type` - *required* - (String) The instance type. AWS OpsWorks supports all instance types except Cluster Compute, Cluster GPU, and High Memory Cluster. For more information, see Instance Families and Types. The parameter values that you use to specify the various types are in the API Name column of the Available Instance Types table.
-    * `:auto_scaling_type` - (String) The instance auto scaling type, which has three possible values: AlwaysRunning: A 24/7 instance, which is not affected by auto scaling. TimeBasedAutoScaling: A time-based auto scaling instance, which is started and stopped based on a specified schedule. To specify the schedule, call SetTimeBasedAutoScaling. LoadBasedAutoScaling: A load-based auto scaling instance, which is started and stopped based on load metrics. To use load-based auto scaling, you must enable it for the instance layer and configure the thresholds by calling SetLoadBasedAutoScaling.  Valid values include:
+    * `:auto_scaling_type` - (String) For load-based or time-based instances, the type.  Valid values include:
       * `load`
       * `timer`
     * `:hostname` - (String) The instance host name.
-    * `:os` - (String) The instance operating system, which must be set to one of the following. Standard operating systems: Amazon Linux or Ubuntu 12.04 LTS Custom AMIs: Custom The default option is Amazon Linux. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. For more information on the standard operating systems, see Operating SystemsFor more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.
-    * `:ami_id` - (String) A custom AMI ID to be used to create the instance. The AMI should be based on one of the standard AWS OpsWorks APIs: Amazon Linux or Ubuntu 12.04 LTS. For more information, see Instances
+    * `:os` - (String) The instance operating system, which must be set to one of the following. Standard operating systems: Amazon Linux, Ubuntu 12.04 LTS, or Ubuntu 14.04 LTS. Custom AMIs: Custom The default option is Amazon Linux. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. For more information on the standard operating systems, see Operating SystemsFor more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.
+    * `:ami_id` - (String) A custom AMI ID to be used to create the instance. The AMI should be based on one of the standard AWS OpsWorks AMIs: Amazon Linux, Ubuntu 12.04 LTS, or Ubuntu 14.04 LTS. For more information, see Instances
     * `:ssh_key_name` - (String) The instance SSH key name.
     * `:availability_zone` - (String) The instance Availability Zone. For more information, see Regions and Endpoints.
     * `:virtualization_type` - (String) The instance's virtualization type, paravirtual or hvm.
@@ -208,6 +215,7 @@
   @param [Hash] options
     * `:stack_id` - *required* - (String) The layer stack ID.
     * `:type` - *required* - (String) The layer type. A stack cannot have more than one built-in layer of the same type. It can have any number of custom layers. This parameter must be set to one of the following: custom: A custom layer db-master: A MySQL layer java-app: A Java App Server layer rails-app: A Rails App Server layer lb: An HAProxy layer memcached: A Memcached layer monitoring-master: A Ganglia layer nodejs-app: A Node.js App Server layer php-app: A PHP App Server layer web: A Static Web Server layer  Valid values include:
+      * `java-app`
       * `lb`
       * `web`
       * `php-app`
@@ -228,7 +236,7 @@
       * `:raid_level` - (Integer) The volume RAID level.
       * `:number_of_disks` - *required* - (Integer) The number of disks in the volume.
       * `:size` - *required* - (Integer) The volume size.
-      * `:volume_type` - (String) The volume type, standard or PIOPS.
+      * `:volume_type` - (String) The volume type: standard, PIOPS, or gp2.
       * `:iops` - (Integer) For PIOPS volumes, the IOPS per disk.
     * `:enable_auto_healing` - (Boolean) Whether to disable auto healing for the layer.
     * `:auto_assign_elastic_ips` - (Boolean) Whether to automatically assign an Elastic IP address to the layer's instances. For more information, see How to Edit a Layer.
@@ -249,7 +257,7 @@
   stack AWS region, such as \"us-east-1\". For more information about Amazon regions,
   see Regions and Endpoints.\n  * `:vpc_id` - (String) The ID of the VPC that the
   stack is to be launched into. It must be in the specified region. All instances
-  will be launched into this VPC, and you cannot change the ID later. If your account
+  are launched into this VPC, and you cannot change the ID later. If your account
   supports EC2 Classic, the default value is no VPC. If your account does not support
   EC2 Classic, the default value is the default VPC for the specified region. If the
   VPC ID corresponds to a default VPC and you have specified either the DefaultAvailabilityZone
@@ -269,27 +277,28 @@
   - *required* - (String) The ARN of an IAM profile that is the default profile for
   all of the stack's EC2 instances. For more information about IAM ARNs, see Using
   Identifiers.\n  * `:default_os` - (String) The stack's default operating system,
-  which must be set to Amazon Linux or Ubuntu 12.04 LTS. The default option is Amazon
-  Linux.\n  * `:hostname_theme` - (String) The stack's host name theme, with spaces
-  are replaced by underscores. The theme is used to generate host names for the stack's
-  instances. By default, HostnameTheme is set to Layer_Dependent, which creates host
-  names by appending integers to the layer's short name. The other themes are: Baked_Goods
-  Clouds European_Cities Fruits Greek_Deities Legendary_Creatures_from_Japan Planets_and_Moons
-  Roman_Deities Scottish_Islands US_Cities Wild_Cats To obtain a generated host name,
-  call GetHostNameSuggestion, which returns a host name based on the current theme.\n
-  \ * `:default_availability_zone` - (String) The stack's default Availability Zone,
-  which must be in the specified region. For more information, see Regions and Endpoints.
-  If you also specify a value for DefaultSubnetId, the subnet must be in the same
-  zone. For more information, see the VpcId parameter description.\n  * `:default_subnet_id`
-  - (String) The stack's default subnet ID. All instances will be launched into this
-  subnet unless you specify otherwise when you create the instance. If you also specify
-  a value for DefaultAvailabilityZone, the subnet must be in that zone. For information
-  on default values and when this parameter is required, see the VpcId parameter description.\n
-  \ * `:custom_json` - (String) A string that contains user-defined, custom JSON.
-  It is used to override the corresponding default stack configuration JSON values.
-  The string should be in the following format and must escape characters such as
-  '\"'.: \"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\" For
-  more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration
+  which must be set to Amazon Linux, Ubuntu 12.04 LTS, or Ubuntu 14.04 LTS. The default
+  option is Amazon Linux.\n  * `:hostname_theme` - (String) The stack's host name
+  theme, with spaces are replaced by underscores. The theme is used to generate host
+  names for the stack's instances. By default, HostnameTheme is set to Layer_Dependent,
+  which creates host names by appending integers to the layer's short name. The other
+  themes are: Baked_Goods Clouds European_Cities Fruits Greek_Deities Legendary_Creatures_from_Japan
+  Planets_and_Moons Roman_Deities Scottish_Islands US_Cities Wild_Cats To obtain a
+  generated host name, call GetHostNameSuggestion, which returns a host name based
+  on the current theme.\n  * `:default_availability_zone` - (String) The stack's default
+  Availability Zone, which must be in the specified region. For more information,
+  see Regions and Endpoints. If you also specify a value for DefaultSubnetId, the
+  subnet must be in the same zone. For more information, see the VpcId parameter description.\n
+  \ * `:default_subnet_id` - (String) The stack's default VPC subnet ID. This parameter
+  is required if you specify a value for the VpcId parameter. All instances are launched
+  into this subnet unless you specify otherwise when you create the instance. If you
+  also specify a value for DefaultAvailabilityZone, the subnet must be in that zone.
+  For information on default values and when this parameter is required, see the VpcId
+  parameter description.\n  * `:custom_json` - (String) A string that contains user-defined,
+  custom JSON. It is used to override the corresponding default stack configuration
+  JSON values. The string should be in the following format and must escape characters
+  such as '\"'.: \"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"
+  For more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration
   JSON.\n  * `:configuration_manager` - (Hash) The configuration manager. When you
   clone a stack we recommend that you use the configuration manager to specify the
   Chef version, 0.9, 11.4, or 11.10. The default value is currently 11.4.\n    * `:name`
@@ -420,6 +429,10 @@
         * `:chain` - (String)
       * `:attributes` - (Hash<String,String>)
       * `:created_at` - (String)
+      * `:environment` - (Array<Hash>)
+        * `:key` - (String)
+        * `:value` - (String)
+        * `:secure` - (Boolean)
 :describe_commands: |-
   Calls the DescribeCommands API operation.
   @param [Hash] options
@@ -626,6 +639,7 @@
   Calls the DescribeRaidArrays API operation.
   @param [Hash] options
     * `:instance_id` - (String) The instance ID. If you use this parameter, DescribeRaidArrays returns descriptions of the RAID arrays associated with the specified instance.
+    * `:stack_id` - (String) The stack ID.
     * `:raid_array_ids` - (Array&lt;<String>) An array of RAID array IDs. If you use this parameter, DescribeRaidArrays returns descriptions of the specified arrays. Otherwise, it returns a description of every array.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
@@ -640,6 +654,7 @@
       * `:mount_point` - (String)
       * `:availability_zone` - (String)
       * `:created_at` - (String)
+      * `:stack_id` - (String)
       * `:volume_type` - (String)
       * `:iops` - (Integer)
 :describe_rds_db_instances: |-
@@ -916,6 +931,7 @@
       * `:arn` - (String) The data source's ARN.
       * `:database_name` - (String) The database name.
     * `:type` - (String) The app type.  Valid values include:
+      * `java`
       * `rails`
       * `php`
       * `nodejs`
@@ -939,6 +955,10 @@
       * `:private_key` - *required* - (String) The private key; the contents of the certificate's domain.kex file.
       * `:chain` - (String) Optional. Can be used to specify an intermediate certificate authority key or client authentication.
     * `:attributes` - (Hash&lt;<String,String>) One or more user-defined key/value pairs to be added to the stack attributes.
+    * `:environment` - (Array&lt;<Hash>) An array of EnvironmentVariable objects that specify environment variables to be associated with the app. You can specify up to ten environment variables. After you deploy the app, these variables are defined on the associated app server instances. This parameter is supported only by Chef 11.10 stacks. If you have specified one or more environment variables, you cannot modify the stack's Chef version.
+      * `:key` - *required* - (String) (Required) The environment variable's name, which can consist of up to 64 characters and must be specified. The name can contain upper- and lowercase letters, numbers, and underscores (_), but it must start with a letter or underscore.
+      * `:value` - *required* - (String) (Optional) The environment variable's value, which can be left empty. If you specify a value, it can contain up to 256 characters, which must all be printable.
+      * `:secure` - (Boolean) (Optional) Whether the variable's value will be returned by the DescribeApps action. To conceal an environment variable's value, set Secure to  `true` . DescribeApps then returns **Filtered** instead of the actual value. The default value for Secure is  `false` .
   @return [Core::Response]
 :update_elastic_ip: |-
   Calls the UpdateElasticIp API operation.
@@ -952,12 +972,12 @@
     * `:instance_id` - *required* - (String) The instance ID.
     * `:layer_ids` - (Array&lt;<String>) The instance's layer IDs.
     * `:instance_type` - (String) The instance type. AWS OpsWorks supports all instance types except Cluster Compute, Cluster GPU, and High Memory Cluster. For more information, see Instance Families and Types. The parameter values that you use to specify the various types are in the API Name column of the Available Instance Types table.
-    * `:auto_scaling_type` - (String) The instance's auto scaling type, which has three possible values: AlwaysRunning: A 24/7 instance, which is not affected by auto scaling. TimeBasedAutoScaling: A time-based auto scaling instance, which is started and stopped based on a specified schedule. LoadBasedAutoScaling: A load-based auto scaling instance, which is started and stopped based on load metrics.  Valid values include:
+    * `:auto_scaling_type` - (String) For load-based or time-based instances, the type.  Valid values include:
       * `load`
       * `timer`
     * `:hostname` - (String) The instance host name.
-    * `:os` - (String) The instance operating system, which must be set to one of the following. Standard operating systems: Amazon Linux or Ubuntu 12.04 LTS Custom AMIs: Custom The default option is Amazon Linux. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. For more information on the standard operating systems, see Operating SystemsFor more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.
-    * `:ami_id` - (String) A custom AMI ID to be used to create the instance. The AMI should be based on one of the standard AWS OpsWorks APIs: Amazon Linux or Ubuntu 12.04 LTS. For more information, see Instances
+    * `:os` - (String) The instance operating system, which must be set to one of the following. Standard operating systems: Amazon Linux, Ubuntu 12.04 LTS, or Ubuntu 14.04 LTS. Custom AMIs: Custom The default option is Amazon Linux. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. For more information on the standard operating systems, see Operating SystemsFor more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.
+    * `:ami_id` - (String) A custom AMI ID to be used to create the instance. The AMI should be based on one of the standard AWS OpsWorks AMIs: Amazon Linux, Ubuntu 12.04 LTS, or Ubuntu 14.04 LTS. For more information, see Instances
     * `:ssh_key_name` - (String) The instance SSH key name.
     * `:architecture` - (String) The instance architecture. Instance types do not necessarily support both architectures. For a list of the architectures that are supported by the different instance types, see Instance Families and Types.  Valid values include:
       * `x86_64`
@@ -980,7 +1000,7 @@
       * `:raid_level` - (Integer) The volume RAID level.
       * `:number_of_disks` - *required* - (Integer) The number of disks in the volume.
       * `:size` - *required* - (Integer) The volume size.
-      * `:volume_type` - (String) The volume type, standard or PIOPS.
+      * `:volume_type` - (String) The volume type: standard, PIOPS, or gp2.
       * `:iops` - (Integer) For PIOPS volumes, the IOPS per disk.
     * `:enable_auto_healing` - (Boolean) Whether to disable auto healing for the layer.
     * `:auto_assign_elastic_ips` - (Boolean) Whether to automatically assign an Elastic IP address to the layer's instances. For more information, see How to Edit a Layer.
@@ -1019,26 +1039,28 @@
   - (String) The ARN of an IAM profile that is the default profile for all of the
   stack's EC2 instances. For more information about IAM ARNs, see Using Identifiers.\n
   \ * `:default_os` - (String) The stack's default operating system, which must be
-  set to Amazon Linux or Ubuntu 12.04 LTS. The default option is Amazon Linux.\n  *
-  `:hostname_theme` - (String) The stack's new host name theme, with spaces are replaced
-  by underscores. The theme is used to generate host names for the stack's instances.
-  By default, HostnameTheme is set to Layer_Dependent, which creates host names by
-  appending integers to the layer's short name. The other themes are: Baked_Goods
-  Clouds European_Cities Fruits Greek_Deities Legendary_Creatures_from_Japan Planets_and_Moons
-  Roman_Deities Scottish_Islands US_Cities Wild_Cats To obtain a generated host name,
-  call GetHostNameSuggestion, which returns a host name based on the current theme.\n
-  \ * `:default_availability_zone` - (String) The stack's default Availability Zone,
-  which must be in the specified region. For more information, see Regions and Endpoints.
-  If you also specify a value for DefaultSubnetId, the subnet must be in the same
-  zone. For more information, see CreateStack.\n  * `:default_subnet_id` - (String)
-  The stack's default subnet ID. All instances will be launched into this subnet unless
-  you specify otherwise when you create the instance. If you also specify a value
-  for DefaultAvailabilityZone, the subnet must be in that zone. For more information,
-  see CreateStack.\n  * `:custom_json` - (String) A string that contains user-defined,
-  custom JSON. It is used to override the corresponding default stack configuration
-  JSON values. The string should be in the following format and must escape characters
-  such as '\"'.: \"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"
-  For more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration
+  set to Amazon Linux, Ubuntu 12.04 LTS, or Ubuntu 14.04 LTS. The default option is
+  Amazon Linux.\n  * `:hostname_theme` - (String) The stack's new host name theme,
+  with spaces are replaced by underscores. The theme is used to generate host names
+  for the stack's instances. By default, HostnameTheme is set to Layer_Dependent,
+  which creates host names by appending integers to the layer's short name. The other
+  themes are: Baked_Goods Clouds European_Cities Fruits Greek_Deities Legendary_Creatures_from_Japan
+  Planets_and_Moons Roman_Deities Scottish_Islands US_Cities Wild_Cats To obtain a
+  generated host name, call GetHostNameSuggestion, which returns a host name based
+  on the current theme.\n  * `:default_availability_zone` - (String) The stack's default
+  Availability Zone, which must be in the specified region. For more information,
+  see Regions and Endpoints. If you also specify a value for DefaultSubnetId, the
+  subnet must be in the same zone. For more information, see CreateStack.\n  * `:default_subnet_id`
+  - (String) The stack's default VPC subnet ID. This parameter is required if you
+  specify a value for the VpcId parameter. All instances are launched into this subnet
+  unless you specify otherwise when you create the instance. If you also specify a
+  value for DefaultAvailabilityZone, the subnet must be in that zone. For information
+  on default values and when this parameter is required, see the VpcId parameter description.\n
+  \ * `:custom_json` - (String) A string that contains user-defined, custom JSON.
+  It is used to override the corresponding default stack configuration JSON values.
+  The string should be in the following format and must escape characters such as
+  '\"'.: \"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\" For
+  more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration
   JSON.\n  * `:configuration_manager` - (Hash) The configuration manager. When you
   clone a stack we recommend that you use the configuration manager to specify the
   Chef version, 0.9, 11.4, or 11.10. The default value is currently 11.4.\n    * `:name`
