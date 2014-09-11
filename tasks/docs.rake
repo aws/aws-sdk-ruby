@@ -30,7 +30,7 @@ end
 
 desc "Generate the API documentation."
 task :docs => ['docs:clobber', 'docs:update_readme'] do
-  sh "SOURCE=1 bundle exec yard"
+  sh({"SOURCE" => "1"}, "bundle exec yard")
 end
 
 # Generates an HTML table of supported services that is used by README.md
