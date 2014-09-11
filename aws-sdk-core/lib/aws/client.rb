@@ -65,15 +65,14 @@ module Aws
     #     end
     #   end
     #
-    # @param [Symbol] waiter_name
+    # @param [Symbol] waiter_name The name of the waiter. See {#waiter_names}
+    #   for a full list of supported waiters.
     # @param [Hash] params Additional request parameters.
-    # @return [Boolean] Returns `true` when the waiter has succeeded.
-    # @raise [Waiters::NoSuchWaiter] Raised when the given `waiter_name`
+    # @return [Seahorse::Client::Response] Returns the client response from
+    #   the successful polling request. If `:success` is thrown from a callback,
+    #   then the 2nd argument to `#throw` is returned.
+    # @raise [Waiters::Errors::NoSuchWaiter] Raised when the given `waiter_name`
     #   is not defined.
-    # @raise [Waiters::MaxAttemptsError] Raised when the waiter fails to
-    #   enter an acceptable state before `:max_attempts` have been made.
-    # @raise [Waiters::TerminalConditionError] Raised when the waiter enters
-    #   a terminal state that prevents the acceptor from succeeding.
     # @raise [Waiters::Errors::WaiterFailed] Raised when a waiter callback
     #   throws `:failure`.
     def wait_until(waiter_name, params = {}, &block)
