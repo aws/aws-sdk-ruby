@@ -20,6 +20,7 @@ task 'release:bump-version' do
   file = file.gsub(/VERSION = '.+?'/, "VERSION = '#{version}'")
   File.open(path, 'w') { |f| f.write(file) }
   sh("git add #{path}")
+  sh("git add VERSION")
 end
 
 task 'release:stage' => [
