@@ -25,7 +25,7 @@ end
 
 desc "Generates docs.tgz"
 task 'docs:zip' => :docs do
-  sh "tar czvf api-docs.tgz api-docs/"
+  sh "tar czf api-docs.tgz api-docs/"
 end
 
 desc "Generate the API documentation."
