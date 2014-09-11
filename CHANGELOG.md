@@ -1,6 +1,15 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Waiters - Added a new feature called waiters. Waiters poll a
+  single API until a certain condition is matched. Waiters are invoked
+  by a name and can be configured.
+
+      ec2_client.wait_until(:instance_stopped, instance_ids:['i-12345678'])
+
+  See the API documentation for each service client for `#wait_until` and
+  `#waiter_names` for more information.
+
 * Upgrading - Gems - Now publishing three gems:
 
   * `aws-sdk-core`
