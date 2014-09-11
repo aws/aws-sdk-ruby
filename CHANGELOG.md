@@ -17,17 +17,6 @@ Next Release (TBD)
   See the client API documentation for `#wait_until` and the resource API
   documentation for `#wait_until_{condition}`.
 
-* Upgrading - Gems - Now publishing three gems:
-
-  * `aws-sdk-core`
-  * `aws-sdk-resources`
-  * `aws-sdk`
-
-  You can now `gem install aws-sdk --pre` to pull in the preview release
-  of version 2 of the AWS SDK for Ruby. If you wish to use v1 and v2 in the
-  same applicaiton, you should change your dependency on v1 of `aws-sdk` to
-  the `aws-sdk-v1` gem.
-
 * Feature - Resources - Merged in resources branch. You can now use 
   resource-oriented interfaces with `Aws::S3`, `Aws::EC2`, `Aws::SQS`,
   `Aws::SNS`, `Aws::Glacier`,

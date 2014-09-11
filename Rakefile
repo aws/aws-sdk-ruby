@@ -2,8 +2,8 @@ $REPO_ROOT = File.dirname(__FILE__)
 
 $GEM_NAMES = [
   'aws-sdk-core',
-  'aws-sdk-resources',
-  'aws-sdk',
+#  'aws-sdk-resources',
+#  'aws-sdk',
 ]
 
 $GEM_NAMES.each do |gem_name|
