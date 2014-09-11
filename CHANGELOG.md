@@ -1,4 +1,4 @@
-Next Release (TBD)
+2.0.0.rc16 (2014-09-11)
 ------------------
 
 * Feature - Waiters - Added a new feature called waiters. Waiters poll a
