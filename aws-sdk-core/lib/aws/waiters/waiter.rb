@@ -27,7 +27,7 @@ module Aws
       # the waiter and return or raise. You can pass a custom message to the
       # throw:
       #
-      #     # raises Aws::Waiters::Errors::WatierFailed
+      #     # raises Aws::Waiters::Errors::WaiterFailed
       #     waiter.before_attempt do |attempts|
       #       throw :failure, 'custom-error-message'
       #     end
@@ -55,7 +55,7 @@ module Aws
       # the waiter and return or raise. You can pass a custom message to the
       # throw:
       #
-      #     # raises Aws::Waiters::Errors::WatierFailed
+      #     # raises Aws::Waiters::Errors::WaiterFailed
       #     waiter.before_attempt do |attempts|
       #       throw :failure, 'custom-error-message'
       #     end
@@ -98,7 +98,7 @@ module Aws
             end
           end
           failure = 'waiter failed' if failure.nil?
-          raise String === failure ? Errors::WatierFailed.new(failure) : failure
+          raise String === failure ? Errors::WaiterFailed.new(failure) : failure
         end
       end
 

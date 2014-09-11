@@ -105,7 +105,7 @@ module Aws
             instances << { 'state' => {'name' => 'terminated' }}
             expect {
               client.wait_until(:instance_stopped)
-            }.to raise_error(Errors::WatierFailed)
+            }.to raise_error(Errors::WaiterFailed)
           end
 
           it 'raises a max attempts after the configured attempt count' do
@@ -115,7 +115,7 @@ module Aws
                 w.interval = 0
                 w.max_attempts = 4
               end
-            }.to raise_error(Errors::WatierFailed, /4 attempts made/)
+            }.to raise_error(Errors::WaiterFailed, /4 attempts made/)
           end
 
           it 'sleeps between attempts' do
@@ -138,7 +138,7 @@ module Aws
                   throw :failure, 'custom-message'
                 end
               end
-            }.to raise_error(Errors::WatierFailed, 'custom-message')
+            }.to raise_error(Errors::WaiterFailed, 'custom-message')
           end
 
           it 'catches :stop_waiting from callbacks' do
@@ -179,7 +179,7 @@ module Aws
               client.wait_until(:bucket_not_exists, bucket:'aws-sdk') do |w|
                 w.interval = 0
               end
-            }.to raise_error(Errors::WatierFailed)
+            }.to raise_error(Errors::WaiterFailed)
           end
 
           it 'does not require an acceptor path to succeede' do

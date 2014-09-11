@@ -32,12 +32,14 @@ module Aws
     #
     #     # yields just before polling for change
     #     waiter.before_attempt do |attempt|
-    #       # ...
+    #       # throw :success to stop waiting
+    #       # throw :failure, 'optional-msg' to stop waiting with an error
     #     end
     #
     #     # yields before sleeping
     #     waiter.before_wait do |attempt|
-    #       # ...
+    #       # throw :success to stop waiting
+    #       # throw :failure, 'optional-msg' to stop waiting with an error
     #     end
     #
     #   end
@@ -59,7 +61,7 @@ module Aws
     #     one_hour = Time.now + 3600
     #     waiter.max_attempts = nil
     #     waiter.before_attempt do |attempt|
-    #       throw(:stop_waiting) if Time.now > one_hour
+    #       throw(:failure, 'waited to long') if Time.now > one_hour
     #     end
     #   end
     #
@@ -72,8 +74,8 @@ module Aws
     #   enter an acceptable state before `:max_attempts` have been made.
     # @raise [Waiters::TerminalConditionError] Raised when the waiter enters
     #   a terminal state that prevents the acceptor from succeeding.
-    # @raise [Waiters::WatierStoppedError] Raised when a waiter callback
-    #   throws `:stop_waiting`.
+    # @raise [Waiters::Errors::WaiterFailed] Raised when a waiter callback
+    #   throws `:failure`.
     def wait_until(waiter_name, params = {}, &block)
       waiter = self.class.waiters.waiter(waiter_name)
       yield(waiter) if block_given?

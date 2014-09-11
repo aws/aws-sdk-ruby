@@ -6,7 +6,7 @@ module Aws
 
       # Raised when a waiter detects a condition where the waiter can never
       # succeed.
-      class WatierFailed < StandardError; end
+      class WaiterFailed < StandardError; end
 
       # Raised when attempting to get a waiter by name and the waiter has not
       # been defined.
