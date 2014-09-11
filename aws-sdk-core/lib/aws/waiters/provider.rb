@@ -41,7 +41,7 @@ module Aws
         if extends = definition.delete('extends')
           resolve(@definitions[extends].merge(definition))
         else
-          @definitions['__default__'].merge(definition)
+          (@definitions['__default__'] || {}).merge(definition)
         end
       end
 
