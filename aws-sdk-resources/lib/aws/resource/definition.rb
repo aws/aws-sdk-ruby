@@ -84,6 +84,7 @@ module Aws
       def define_resource_operations(service, resource, definition)
         define_load(resource, definition['load'])
         define_actions(service, resource, definition['actions'] || {})
+        define_waiters(service, resource, definition['waiters'] || {})
         define_has_many(service, resource, definition['hasMany'] || {})
         define_has_some(service, resource, definition['hasSome'] || {})
         define_has_one(service, resource, definition['hasOne'] || {})
@@ -194,6 +195,12 @@ module Aws
         end
       end
 
+      def define_waiters(service, resource, waiters)
+        waiters.each do |name, definition|
+          operation = build_waiter_operation(service, resource, definition)
+          resource.add_operation("wait_until_#{underscore(name)}", operation)
+        end
+      end
 
       def build_operation(service, resource, definition)
         type = operation_type(definition)
@@ -250,6 +257,14 @@ module Aws
           builder: builder,
           source: source(definition),
           limit_key: limit_key(resource, definition))
+      end
+
+      def build_waiter_operation(service, resource, definition)
+        Operations::WaiterOperation.new(
+          waiter_name: underscore(definition['waiterName']).to_sym,
+          params: request_params(definition['params']),
+          path: underscore(definition['path'])
+        )
       end
 
       def limit_key(resource, definition)

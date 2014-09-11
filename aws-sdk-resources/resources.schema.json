@@ -133,6 +133,7 @@
         "identifiers":      { "$ref": "#/definitions/IdentifierList" },
         "load":             { "$ref": "#/definitions/Operation" },
         "actions":          { "$ref": "#/definitions/ActionMap" },
+        "waiters":          { "$ref": "#/definitions/WaiterMap" },
         "batchActions":     { "$ref": "#/definitions/ActionMap" },
         "hasMany":          { "$ref": "#/definitions/HasManyMap" },
         "hasSome":          { "$ref": "#/definitions/HasSomeMap" },
@@ -205,6 +206,25 @@
       "type": "string",
       "minLength": 1,
       "pattern": "^([A-Z][a-z]+)+$"
+    },
+    "Waiter": {
+      "type": "object",
+      "required": [
+        "waiterName"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "waiterName": { "$ref": "#/definitions/UpperCamelCaseString" },
+        "params":  { "$ref": "#/definitions/RequestParamList" },
+        "path": { "$ref": "#/definitions/JMESPathExpression" }
+      }
+    },
+    "WaiterMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/Waiter" }
+      }
     }
   }
 }
