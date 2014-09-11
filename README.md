@@ -202,6 +202,32 @@ resp = resp.next_page # send a request for the next response page
 resp = resp.next_page until resp.last_page?
 ```
 
+## Waiters
+
+Waiters are a utility to poll for a particular state. Waiters are named
+and are invoked from a client object via `#wait_until`.
+
+```ruby
+begin
+  ec2.wait_until(:instance_running, instance_ids:['i-12345678'])
+  puts "instance running"
+rescue Aws::Waiters::Errors::WaiterFailed => error
+  puts "failed waiting for instance running: #{error.message}"
+end
+```
+
+Waiters are configurable and have sensible defaults. You can configure:
+
+* maximum number of attempts before failing
+* time between polling requests
+* callbacks
+  * before each attempt
+  * before waiting/sleeping
+  * callbacks can trigger success or failure
+
+See the documentation for each service client class to get a list of
+supported waiters and additional examples.
+
 ## Resource Interfaces
 
 **Resource interfaces are currently experimental. While `aws-sdk-core` is very stable,

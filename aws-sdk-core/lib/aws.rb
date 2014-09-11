@@ -116,6 +116,13 @@ module Aws
     autoload :V4, "#{SRC}/signers/v4"
   end
 
+  module Waiters
+    autoload :Errors, "#{SRC}/waiters/errors"
+    autoload :NullProvider, "#{SRC}/waiters/null_provider"
+    autoload :Provider, "#{SRC}/waiters/provider"
+    autoload :Waiter, "#{SRC}/waiters/waiter"
+  end
+
   # @api private
   module Xml
     autoload :Builder, "#{SRC}/xml/builder"
@@ -245,6 +252,27 @@ module Aws
       else raise ArgumentError, 'invalid :paginators option'
     end
     svc_module.const_get(:Client).paginators = paginators
+  end
+
+  # build service paginators
+  service_added do |name, svc_module, options|
+    waiters = options[:waiters]
+    waiters = case waiters
+      when Waiters::Provider then waiters
+      when Hash              then Waiters::Provider.new(waiters)
+      when String            then Waiters::Provider.new(Aws.load_json(waiters))
+      when nil               then Waiters::NullProvider.new
+      else raise ArgumentError, 'invalid :waiters option'
+    end
+    if name == 'S3'
+      # temporary workaround for issue with S3 waiter definition
+      defs = waiters.instance_variable_get("@definitions")
+      defs[:bucket_exists]['ignore_errors'] = ['NotFound']
+      defs[:object_exists]['ignore_errors'] = ['NotFound']
+      defs[:bucket_not_exists]['success_value'] = 'NotFound'
+      defs[:object_not_exists]['success_value'] = 'NotFound'
+    end
+    svc_module.const_get(:Client).waiters = waiters
   end
 
   # deprecated = define helper method for client class, this will be

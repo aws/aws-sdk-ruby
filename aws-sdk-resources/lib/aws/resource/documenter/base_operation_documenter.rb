@@ -13,6 +13,7 @@ module Aws
           if @operation.respond_to?(:request)
             @api_request_name = @operation.request.method_name
             @api_request = @resource_class.client_class.api.operation(@api_request_name)
+            @api_request_params = @operation.request.params
             @request_operation_name = @operation.request.method_name.to_s
             @called_operation = "Client##{@api_request_name}"
           end
@@ -61,6 +62,11 @@ module Aws
         #   API operation called. Returns `nil` if this operation does not make
         #   any API requests.
         attr_reader :api_request
+ 
+        # @return [Array<Resource::RequestParams::Base>, nil] Returns the
+        #   parameters this operation binds to the made request. Returns `nil`
+        #   if this operation does not make a request.
+        attr_reader :api_request_params
 
         # @return [String,nil] Returns the `Client#operation_name` reference.
         #   This is useful for generating `@see` tags and `{links}`.
@@ -126,7 +132,7 @@ module Aws
             members = api_request.input.members
             members = members.sort_by { |name,_| required.include?(name) ? 0 : 1 }
             members.each do |member_name, member_shape|
-              if @operation.request.params.any? { |p| p.target.match(/^#{member_name}\b/) }
+              if api_request_params.any? { |p| p.target.match(/^#{member_name}\b/) }
                 next
               end
               docstring = member_shape.documentation

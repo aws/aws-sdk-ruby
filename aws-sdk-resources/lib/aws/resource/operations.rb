@@ -1,4 +1,5 @@
 require 'aws/resource/options'
+require 'jamespath'
 
 module Aws
   module Resource
@@ -252,6 +253,55 @@ module Aws
         end
 
       end
+
+      class WaiterOperation < Base
+
+        include Options
+
+        def initialize(options = {})
+          @waiter_name = option(:waiter_name, options)
+          @params = option(:params, options)
+          @path = options[:path]
+          super
+        end
+
+        # @return [Symbol]
+        attr_reader :waiter_name
+
+        # @return [Array<RequestParams::Base>]
+        attr_reader :params
+
+        # @return [String<JMESPathExpression>, nil]
+        attr_reader :path
+
+        def call(options = {}, &block)
+          client = option(:client, options)
+          params_hash = {}
+          @params.each do |param|
+            param.apply(params_hash, options)
+          end
+
+          user_params = options[:params] || {}
+          params = deep_merge(user_params, params_hash)
+          resp = client.wait_until(@waiter_name, params)
+
+          resource = options[:resource]
+          resource_opts = resource.identifiers.dup
+          resource_opts[:data] = Jamespath.search(@path, resp.data) if @path
+          resource_opts[:client] = resource.client
+          resource.class.new(resource_opts)
+        end
+
+        def deep_merge(obj1, obj2)
+          case obj1
+          when Hash then obj1.merge(obj2) { |key, v1, v2| deep_merge(v1, v2) }
+          when Array then obj2 + obj1
+          else obj2
+          end
+        end
+
+      end
+
     end
   end
 end
