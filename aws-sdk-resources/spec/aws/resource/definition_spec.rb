@@ -765,6 +765,51 @@ module Aws
             it 'returns a single resource object'
 
           end
+
+          describe 'waiters' do
+
+            it 'uses the client waiter to poll for state change' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'shape' => 'ThingShape',
+                  'waiters' => {
+                    'Ready' => {
+                      'waiterName' => 'ThingReady',
+                      'params' => [
+                        { 'target' => 'ThingName', 'sourceType' => 'identifier', 'source' => 'Name' }
+                      ],
+                      'path' => 'Thing'
+                    }
+                  }
+                }
+              }
+              shapes['ThingShape'] = {
+                'type' => 'structure',
+                'members' => {
+                  'Value' => { 'shape' => 'String' }
+                }
+              }
+              shapes['String'] = { 'type' => 'string' }
+
+              client_response = double('client-response', data: {
+                'thing' =>  { value: 'abc' }
+              })
+              expect(client).to receive(:wait_until).
+                with(:thing_ready, { thing_name: 'thing-name'}).
+                and_return(client_response)
+
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name')
+              thing2 = thing.wait_until_ready
+              expect(thing2.identifiers).to eq(thing.identifiers)
+              expect(thing2.client).to be(thing.client)
+              expect(thing2.data_loaded?).to be(true)
+              expect(thing2.value).to eq('abc')
+            end
+
+          end
         end
       end
     end

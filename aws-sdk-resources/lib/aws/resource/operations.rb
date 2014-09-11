@@ -283,7 +283,7 @@ module Aws
           resp = client.wait_until(@waiter_name, params)
 
           resource = options[:resource]
-          resource_opts = resource.identifiers
+          resource_opts = resource.identifiers.dup
           resource_opts[:data] = Jamespath.search(@path, resp.data) if @path
           resource_opts[:client] = resource.client
           resource.class.new(resource_opts)
