@@ -1012,7 +1012,10 @@
     },
     "EnvironmentInfoType":{
       "type":"string",
-      "enum":["tail"]
+      "enum":[
+        "tail",
+        "bundle"
+      ]
     },
     "EnvironmentName":{
       "type":"string",
