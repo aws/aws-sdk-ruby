@@ -271,6 +271,9 @@ module Aws
         # @return [Array<RequestParams::Base>]
         attr_reader :params
 
+        # @return [String<JMESPathExpression>, nil]
+        attr_reader :path
+
         def call(options = {}, &block)
           client = option(:client, options)
           params_hash = {}

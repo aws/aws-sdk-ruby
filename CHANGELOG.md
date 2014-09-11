@@ -5,10 +5,17 @@ Next Release (TBD)
   single API until a certain condition is matched. Waiters are invoked
   by a name and can be configured.
 
-      ec2_client.wait_until(:instance_stopped, instance_ids:['i-12345678'])
+      # client waiter
+      ec2 = Aws::EC2::Client.new
+      ec2.wait_until(:instance_stopped, instance_ids:['i-12345678'])
 
-  See the API documentation for each service client for `#wait_until` and
-  `#waiter_names` for more information.
+      # resource waiters
+      instance = Aws::EC2::Instance.new(id:'i-12345678')
+      instance.start
+      instance.wait_until_running
+
+  See the client API documentation for `#wait_until` and the resource API
+  documentation for `#wait_until_{condition}`.
 
 * Upgrading - Gems - Now publishing three gems:
 
