@@ -73,6 +73,7 @@ module Aws
         yard_class.docstring = client_docstring
         document_client_constructor(yard_class)
         document_client_operations(yard_class)
+        document_client_waiters(yard_class)
       end
 
       def client_docstring
@@ -165,6 +166,35 @@ Constructs an API client.
 @return [PageableResponse]
 #{errors}
         DOCSTRING
+      end
+
+      def document_client_waiters(yard_class)
+        m = YARD::CodeObjects::MethodObject.new(yard_class, :wait_until)
+        m.scope = :instance
+        m.parameters << ['waiter_name', nil]
+        m.parameters << ['params', '{}']
+        m.docstring = YARD::Registry['Aws::Client#wait_until'].docstring
+
+        waiters = @client_class.waiters.waiter_names.sort.inject('') do |w,name|
+          operation = @client_class.waiters.waiter(name).send(:operation_name)
+          w << "<tr><td><tt>:#{name}</tt></td><td>{##{operation}}</td></tr>"
+        end
+        docstring = <<-DOCSTRING
+Returns the list of supported waiters. The following table lists the supported
+waiters and the client method they call:
+<table>
+<thead>
+<tr><th>Waiter Name</th><th>Client Method</th></tr>
+</thead>
+<tbody>
+#{waiters}
+</tbody>
+</table>
+@return [Array<Symbol>] the list of supported waiters.
+        DOCSTRING
+        m = YARD::CodeObjects::MethodObject.new(yard_class, :waiter_names)
+        m.scope = :instance
+        m.docstring = docstring
       end
 
       class Tabulator

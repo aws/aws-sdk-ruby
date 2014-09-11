@@ -3,60 +3,45 @@ module Aws
   # Base class for all {Aws} service clients.
   class Client < Seahorse::Client::Base
 
-    # Waits until a particular condition is satisfied.
+    # Waits until a particular condition is satisfied. This works by
+    # polling a client request and checking for particular response
+    # data or errors. Waiters each have a default duration max attempts
+    # which are configurable.  Additionally, you can register callbacks
+    # and stop waiters by throwing `:success` or `:failure`.
     #
-    #     client.wait_until(:condition_name)
+    # @example Basic usage
+    #   client.wait_until(:waiter_name)
     #
-    # Each waiter has success and failure conditions. The waiter returns
-    # `true` one the success condition has been satisfied. If the failure
-    # condition is met, then an error is raised. If a maximum number of
-    # attempts have been made without success or failure, then an
-    # error is raised.
-    #
-    # Normally you will invoke this method with additional request params.
-    # The params required depend on the client method being polled.
-    #
-    #     # see Aws::S3::Client#head_bucket for a list of supported options
-    #     s3.wait_until(:bucket_exists, bucket:'aws-sdk')
-    #
-    # @example Custom interval and max attempts
-    #
-    #   client.wait_until(:waiter_name) do |waiter|
-    #     waiter.interval = 30    # sleep 30 seconds between attempts
-    #     waiter.max_attempts = 5 # try 5 times then give up
+    # @example Configuring interval and maximum attempts
+    #   client.wait_until(:waiter_name) do |w|
+    #     w.interval = 10    # number of seconds to sleep between attempts
+    #     w.max_attempts = 6 # maximum number of polling attempts
     #   end
     #
-    # @example Progress Callbacks
+    # @example Rescuing a failed wait
+    #   begin
+    #     client.wait_until(:waiter_name)
+    #   rescue Aws::Waiters::Errors::WaiterFailed
+    #     # gave up waiting
+    #   end
     #
-    #   client.wait_until(:waiter_name) do |waiter|
+    # @example Waiting with progress callbacks
+    #   client.wait_until(:waiter_name) do |w|
     #
     #     # yields just before polling for change
-    #     waiter.before_attempt do |attempt|
-    #       # throw :success to stop waiting
-    #       # throw :failure, 'optional-msg' to stop waiting with an error
+    #     w.before_attempt do |attempt|
+    #       # attempts - number of previous attempts made
     #     end
     #
     #     # yields before sleeping
-    #     waiter.before_wait do |attempt|
-    #       # throw :success to stop waiting
-    #       # throw :failure, 'optional-msg' to stop waiting with an error
-    #     end
-    #
-    #   end
-    #
-    # @example Exponential back-off
-    #
-    #   # exponential back-off, sleep 1, 2, 4, and 8 seconds
-    #   client.wait_until(:waiter_name) do |waiter|
-    #     waiter.interval = 0 # disable default sleep
-    #     waiter.max_attempts = 4
-    #     waiter.before_wait do |attempt|
-    #       sleep(attempt ** 2)
+    #     w.before_wait do |attempt, prev_response|
+    #       # attempts - number of previous attempts made
+    #       # prev_response - the last client response received
     #     end
     #   end
     #
-    # @example Limit time, not attempts
-    #
+    # @example Throw :success or :failure to terminate early
+    #   # wait for an hour, not for a number of requests
     #   client.wait_until(:waiter_name) do |waiter|
     #     one_hour = Time.now + 3600
     #     waiter.max_attempts = nil
@@ -67,14 +52,23 @@ module Aws
     #
     # @param [Symbol] waiter_name The name of the waiter. See {#waiter_names}
     #   for a full list of supported waiters.
-    # @param [Hash] params Additional request parameters.
+    # @param [Hash] params Additional request parameters. See the {#waiter_names}
+    #   for a list of supported waiters and what request they call. The
+    #   called request determines the list of accepted parameters.
     # @return [Seahorse::Client::Response] Returns the client response from
     #   the successful polling request. If `:success` is thrown from a callback,
     #   then the 2nd argument to `#throw` is returned.
-    # @raise [Waiters::Errors::NoSuchWaiter] Raised when the given `waiter_name`
+    # @yieldparam [Waiters::Waiter] waiter Yields a {Waiters::Waiter Waiter} 
+    #   object that can be configured prior to waiting.
+    # @raise [Waiters::Errors::NoSuchWaiter] Raised when the named waiter
     #   is not defined.
-    # @raise [Waiters::Errors::WaiterFailed] Raised when a waiter callback
-    #   throws `:failure`.
+    # @raise [Waiters::Errors::WaiterFailed] Raised when one of the
+    #   following conditions is met:
+    #
+    #   * A failure condition is detected
+    #   * The maximum number of attempts has been made without success
+    #   * `:failure` is thrown from a callback
+    #
     def wait_until(waiter_name, params = {}, &block)
       waiter = self.class.waiters.waiter(waiter_name)
       yield(waiter) if block_given?
