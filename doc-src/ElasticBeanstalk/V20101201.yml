@@ -350,6 +350,7 @@
     * `:environment_name` - (String) The name of the environment of the requested data. If no such environment is found, RequestEnvironmentInfo returns an InvalidParameterValue error. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
     * `:info_type` - *required* - (String) The type of information to request.  Valid values include:
       * `tail`
+      * `bundle`
   @return [Core::Response]
 :restart_app_server: |-
   Calls the RestartAppServer API operation.
@@ -364,6 +365,7 @@
     * `:environment_name` - (String) The name of the data's environment. If no such environment is found, returns an InvalidParameterValue error. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
     * `:info_type` - *required* - (String) The type of information to retrieve.  Valid values include:
       * `tail`
+      * `bundle`
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:environment_info` - (Array<Hash>)
