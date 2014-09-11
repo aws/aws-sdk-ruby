@@ -1107,7 +1107,8 @@
         "EnableSsl":{"shape":"Boolean"},
         "SslConfiguration":{"shape":"SslConfiguration"},
         "Attributes":{"shape":"AppAttributes"},
-        "CreatedAt":{"shape":"String"}
+        "CreatedAt":{"shape":"String"},
+        "Environment":{"shape":"EnvironmentVariables"}
       }
     },
     "AppAttributes":{
@@ -1126,6 +1127,7 @@
     "AppType":{
       "type":"string",
       "enum":[
+        "java",
         "rails",
         "php",
         "nodejs",
@@ -1273,7 +1275,8 @@
         "Domains":{"shape":"Strings"},
         "EnableSsl":{"shape":"Boolean"},
         "SslConfiguration":{"shape":"SslConfiguration"},
-        "Attributes":{"shape":"AppAttributes"}
+        "Attributes":{"shape":"AppAttributes"},
+        "Environment":{"shape":"EnvironmentVariables"}
       }
     },
     "CreateAppResult":{
@@ -1673,6 +1676,7 @@
       "type":"structure",
       "members":{
         "InstanceId":{"shape":"String"},
+        "StackId":{"shape":"String"},
         "RaidArrayIds":{"shape":"Strings"}
       }
     },
@@ -1829,6 +1833,22 @@
       "type":"list",
       "member":{"shape":"ElasticLoadBalancer"}
     },
+    "EnvironmentVariable":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{"shape":"String"},
+        "Value":{"shape":"String"},
+        "Secure":{"shape":"Boolean"}
+      }
+    },
+    "EnvironmentVariables":{
+      "type":"list",
+      "member":{"shape":"EnvironmentVariable"}
+    },
     "GetHostnameSuggestionRequest":{
       "type":"structure",
       "required":["LayerId"],
@@ -1849,7 +1869,7 @@
       "members":{
         "InstanceId":{"shape":"String"},
         "Ec2InstanceId":{"shape":"String"},
-        "VirtualizationType":{"shape":"String"},
+        "VirtualizationType":{"shape":"VirtualizationType"},
         "Hostname":{"shape":"String"},
         "StackId":{"shape":"String"},
         "LayerIds":{"shape":"Strings"},
@@ -1967,6 +1987,7 @@
     "LayerType":{
       "type":"string",
       "enum":[
+        "java-app",
         "lb",
         "web",
         "php-app",
@@ -1998,7 +2019,8 @@
     "Minute":{
       "type":"integer",
       "min":1,
-      "max":100
+      "max":100,
+      "box":true
     },
     "Permission":{
       "type":"structure",
@@ -2027,6 +2049,7 @@
         "MountPoint":{"shape":"String"},
         "AvailabilityZone":{"shape":"String"},
         "CreatedAt":{"shape":"DateTime"},
+        "StackId":{"shape":"String"},
         "VolumeType":{"shape":"String"},
         "Iops":{"shape":"Integer"}
       }
@@ -2340,7 +2363,8 @@
         "Domains":{"shape":"Strings"},
         "EnableSsl":{"shape":"Boolean"},
         "SslConfiguration":{"shape":"SslConfiguration"},
-        "Attributes":{"shape":"AppAttributes"}
+        "Attributes":{"shape":"AppAttributes"},
+        "Environment":{"shape":"EnvironmentVariables"}
       }
     },
     "UpdateElasticIpRequest":{
@@ -2465,6 +2489,13 @@
         "message":{"shape":"String"}
       },
       "exception":true
+    },
+    "VirtualizationType":{
+      "type":"string",
+      "enum":[
+        "paravirtual",
+        "hvm"
+      ]
     },
     "Volume":{
       "type":"structure",
