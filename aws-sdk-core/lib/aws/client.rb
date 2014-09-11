@@ -75,25 +75,15 @@ module Aws
     # @raise [Waiters::WatierStoppedError] Raised when a waiter callback
     #   throws `:stop_waiting`.
     def wait_until(waiter_name, params = {}, &block)
-      w = waiter(waiter_name)
-      yield(w) if block_given?
-      w.wait(self, params)
+      waiter = self.class.waiters.waiter(waiter_name)
+      yield(waiter) if block_given?
+      waiter.wait(self, params)
     end
 
     # Returns the list of supported waiters.
     # @return [Array<Symbol>]
     def waiter_names
       self.class.waiters.waiter_names
-    end
-
-    private
-
-    def waiter(name, options = {})
-      w = self.class.waiters.waiter(name)
-      options.each do |opt_name, opt_value|
-        w.send("#{opt_name}=", opt_value)
-      end
-      w
     end
 
     class << self
