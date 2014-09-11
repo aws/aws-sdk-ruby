@@ -20,8 +20,6 @@ task 'github:release' do
 
   repo = 'aws/aws-sdk-core-ruby'
 
-  puts github_access_token
-
   gh = Octokit::Client.new(access_token: github_access_token)
 
   release = gh.releases(repo).find { |r| r.tag_name.match(version) }
