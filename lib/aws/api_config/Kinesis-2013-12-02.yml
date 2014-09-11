@@ -16,6 +16,20 @@
 :target_prefix: Kinesis_20131202.
 :api_version: '2013-12-02'
 :operations:
+- :name: AddTagsToStream
+  :method: :add_tags_to_stream
+  :inputs:
+    StreamName:
+    - :string
+    - :required
+    Tags:
+    - :map:
+        :key:
+        - :string
+        :value:
+        - :string
+    - :required
+  :outputs: {}
 - :name: CreateStream
   :method: :create_stream
   :inputs:
@@ -150,6 +164,30 @@
     HasMoreStreams:
       :sym: :has_more_streams
       :type: :boolean
+- :name: ListTagsForStream
+  :method: :list_tags_for_stream
+  :inputs:
+    StreamName:
+    - :string
+    - :required
+    ExclusiveStartTagKey:
+    - :string
+    Limit:
+    - :integer
+  :outputs:
+    Tags:
+      :sym: :tags
+      :type: :hash
+      :members:
+        Key:
+          :sym: :key
+          :type: :string
+        Value:
+          :sym: :value
+          :type: :string
+    HasMoreTags:
+      :sym: :has_more_tags
+      :type: :boolean
 - :name: MergeShards
   :method: :merge_shards
   :inputs:
@@ -186,6 +224,51 @@
     SequenceNumber:
       :sym: :sequence_number
       :type: :string
+- :name: PutRecords
+  :method: :put_records
+  :inputs:
+    Records:
+    - :list:
+      - :structure:
+          Data:
+          - :blob
+          - :required
+          ExplicitHashKey:
+          - :string
+          PartitionKey:
+          - :string
+          - :required
+    - :required
+    StreamName:
+    - :string
+    - :required
+    SequenceNumberForOrdering:
+    - :string
+  :outputs:
+    Records:
+      :sym: :records
+      :type: :hash
+      :members:
+        SequenceNumber:
+          :sym: :sequence_number
+          :type: :string
+        ShardId:
+          :sym: :shard_id
+          :type: :string
+        Message:
+          :sym: :message
+          :type: :string
+- :name: RemoveTagsFromStream
+  :method: :remove_tags_from_stream
+  :inputs:
+    StreamName:
+    - :string
+    - :required
+    TagKeys:
+    - :list:
+      - :string
+    - :required
+  :outputs: {}
 - :name: SplitShard
   :method: :split_shard
   :inputs:
