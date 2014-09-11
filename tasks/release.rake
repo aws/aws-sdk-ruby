@@ -38,6 +38,7 @@ task 'release:stage' => [
 ]
 
 task 'release:push' => [
+  'release:require-version',
   'git:push',
   'gems:push',
   'github:release',

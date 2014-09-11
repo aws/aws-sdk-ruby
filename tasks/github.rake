@@ -18,16 +18,13 @@ task 'github:access-token'
 task 'github:release' do
   require 'octokit'
 
-  repo = 'aws/aws-sdk-core-ruby'
-
   gh = Octokit::Client.new(access_token: github_access_token)
 
-  release = gh.releases(repo).find { |r| r.tag_name.match(version) }
-
+  repo = 'aws/aws-sdk-core-ruby'
   tag_ref_sha = `git show-ref v#{version}`.split(' ').first
   tag = gh.tag(repo, tag_ref_sha)
 
-  gh.update_release(release.url, {
+  release = gh.create_release(repo, "v#{version}", {
     name: 'Release v' + version + ' - ' + tag.tagger.date.strftime('%Y-%m-%d'),
     body: tag.message.lines[2..-1].join,
     prerelease: version.match('rc') ? true : false,
@@ -36,7 +33,8 @@ task 'github:release' do
   gh.upload_asset(release.url, 'api-docs.tgz')
 
   $GEM_NAMES.each do |gem_name|
-    gh.upload_asset(release.url, "#{gem_name}-#{version}.gem")
+    gh.upload_asset(release.url, "#{gem_name}-#{version}.gem", 
+      :content_type => 'application/octet-stream')
   end
 
 end
