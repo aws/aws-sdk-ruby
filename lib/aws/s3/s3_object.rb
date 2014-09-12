@@ -72,7 +72,7 @@ module AWS
     #
     # ## Streaming Uploads
     #
-    # When you call {#write} with an IO-like object, it will be streamed 
+    # When you call {#write} with an IO-like object, it will be streamed
     # to S3 in chunks.
     #
     # While it is possible to determine the size of many IO objects, you may
@@ -242,6 +242,9 @@ module AWS
       # @param [Bucket] bucket The bucket this object belongs to.
       # @param [String] key The object's key.
       def initialize(bucket, key, opts = {})
+        @content_length = opts.delete(:content_length)
+        @etag = opts.delete(:etag)
+        @last_modified = opts.delete(:last_modified)
         super
         @key = key
         @bucket = bucket
@@ -302,19 +305,19 @@ module AWS
       #
       # @return [String] Returns the object's ETag
       def etag
-        head[:etag]
+        @etag = config.s3_cache_object_attributes && @etag || head[:etag]
       end
 
       # Returns the object's last modified time.
       #
       # @return [Time] Returns the object's last modified time.
       def last_modified
-        head[:last_modified]
+        @last_modified = config.s3_cache_object_attributes && @last_modified || head[:last_modified]
       end
 
       # @return [Integer] Size of the object in bytes.
       def content_length
-        head[:content_length]
+        @content_length = config.s3_cache_object_attributes && @content_length || head[:content_length]
       end
 
       # @note S3 does not compute content-type.  It reports the content-type
@@ -617,11 +620,11 @@ module AWS
       # part upload is handled.  Otherwise, {#write} is much simpler
       # to use.
       #
-      # Note: After you initiate multipart upload and upload one or 
-      # more parts, you must either complete or abort multipart 
-      # upload in order to stop getting charged for storage of the 
-      # uploaded parts. Only after you either complete or abort 
-      # multipart upload, Amazon S3 frees up the parts storage and 
+      # Note: After you initiate multipart upload and upload one or
+      # more parts, you must either complete or abort multipart
+      # upload in order to stop getting charged for storage of the
+      # uploaded parts. Only after you either complete or abort
+      # multipart upload, Amazon S3 frees up the parts storage and
       # stops charging you for the parts storage.
       #
       # @example Uploading an object in two parts
@@ -1196,11 +1199,11 @@ module AWS
       #   secure (HTTPS) URL or a plain HTTP url.
       #
       # @option options [String] :content_type Object content type for
-      #   HTTP PUT. When provided, has to be also added to the request 
+      #   HTTP PUT. When provided, has to be also added to the request
       #   header as a 'content-type' field
       #
       # @option options [String] :content_md5 Object MD5 hash for HTTP PUT.
-      #   When provided, has to be also added to the request header as a 
+      #   When provided, has to be also added to the request header as a
       #   'content-md5' field
       #
       # @option options [String] :endpoint Sets the hostname of the
@@ -1347,10 +1350,10 @@ module AWS
 
         multipart_upload(options) do |upload|
           pos = 0
-          # We copy in part_size chunks until we read the 
+          # We copy in part_size chunks until we read the
           until pos >= source_length
             last_byte = (pos + part_size >= source_length) ? source_length - 1 : pos + part_size - 1
-            upload.copy_part(options[:copy_source], options.merge({:copy_source_range => "bytes=#{pos}-#{last_byte}"})) 
+            upload.copy_part(options[:copy_source], options.merge({:copy_source_range => "bytes=#{pos}-#{last_byte}"}))
             pos += part_size
           end
         end

@@ -751,6 +751,13 @@ module AWS
           client.stub(:head_object).and_return(head)
           object.etag.should eq('myetag')
         end
+
+        it 'returns memoized #etag without requesting data' do
+          object.config.stub(:s3_cache_object_attributes => true)
+          object = S3Object.new(bucket, 'foo', {etag: 'memoized-etag'})
+          client.should_not_receive(:head)
+          object.etag.should eq('memoized-etag')
+        end
       end
 
       context '#last_modified' do
@@ -760,12 +767,27 @@ module AWS
           client.stub(:head_object).and_return(head)
           object.last_modified.should eq(now)
         end
+
+        it 'returns memoized #last_modified without requesting data' do
+          object.config.stub(:s3_cache_object_attributes => true)
+          now = Time.now
+          object = S3Object.new(bucket, 'foo', {last_modified: now})
+          client.should_not_receive(:head)
+          object.last_modified.should eq(now)
+        end
       end
 
       context '#content_length' do
         it 'returns #content_length from the head response' do
           head = { :content_length => 123 }
           client.stub(:head_object).and_return(head)
+          object.content_length.should eq(123)
+        end
+
+        it 'returns memoized #content_length without requesting data' do
+          object.config.stub(:s3_cache_object_attributes => true)
+          object = S3Object.new(bucket, 'foo', {content_length: 123})
+          client.should_not_receive(:head)
           object.content_length.should eq(123)
         end
       end
