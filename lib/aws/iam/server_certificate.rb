@@ -26,7 +26,7 @@ module AWS
     # @attr_reader [String] id The stable and unique string identifying
     #   the server certificate.
     #
-    # @attr_reader [Time] updload_date The date when the server certificate was
+    # @attr_reader [Time] upload_date The date when the server certificate was
     #   uploaded.
     #
     # @attr_reader [String] arn The Amazon Resource Name (ARN)
