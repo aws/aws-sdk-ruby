@@ -203,13 +203,16 @@ module Aws
     # @option options[required,String,Hash,Seahorse::Model::Api] :api
     # @option options[String,Hash,Paging::Provider] :paginators
     # @option options[String] :resources
+    # @yieldparam [String] svc_name
+    # @yieldparam [Module<Service>] svc_module
+    # @yieldparam [Hash<String,String>] svc_files
     # @return [Module<Service>]
     def add_service(svc_name, options = {})
       svc_module = Module.new { extend Service }
       const_set(svc_name, svc_module)
       @services[svc_name] = [svc_module, options]
       @service_added_callbacks.each do |callback|
-        callback.call(svc_name, *@services[svc_name])
+        callback.call(svc_name.to_s, *@services[svc_name])
       end
       svc_module
     end
@@ -241,7 +244,7 @@ module Aws
     svc_module.const_get(:Client).paginators = paginators
   end
 
-  # build service paginators
+  # build service waiters
   service_added do |name, svc_module, options|
     waiters = options[:waiters]
     waiters = case waiters
