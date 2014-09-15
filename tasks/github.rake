@@ -30,7 +30,8 @@ task 'github:release' do
     prerelease: version.match('rc') ? true : false,
   })
 
-  gh.upload_asset(release.url, 'api-docs.tgz')
+  gh.upload_asset(release.url, 'api-docs.zip',
+    :content_type => 'application/octet-stream')
 
   $GEM_NAMES.each do |gem_name|
     gh.upload_asset(release.url, "#{gem_name}-#{version}.gem", 

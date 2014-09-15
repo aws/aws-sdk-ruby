@@ -24,9 +24,9 @@ task 'docs:update_readme' do
   File.open('README.md', 'w') { |file| file.write(lines.join) }
 end
 
-desc "Generates docs.tgz"
+desc "Generates api-docs.zip"
 task 'docs:zip' => :docs do
-  sh "tar czf api-docs.tgz api-docs/"
+  sh("zip -9 -r -q api-docs.zip api-docs/")
 end
 
 desc "Generate the API documentation."

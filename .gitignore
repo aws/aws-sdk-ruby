@@ -2,7 +2,7 @@
 /.yardoc
 /*.gem
 /api-docs
-/api-docs.tgz
+/api-docs.zip
 /integration-test-config.json
 /coverage
 /Gemfile.lock
