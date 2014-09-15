@@ -55,6 +55,13 @@ module AWS
           end
         end
 
+        context 'with secure options' do
+          it 'should return https and the bucket name in the host' do
+            bucket = Bucket.new('bucket-name', :config => config)
+            bucket.url(secure: true).should == "https://bucket-name.s3.amazonaws.com/"
+          end
+        end
+
       end
 
       context '#lifecycle_configuration' do
