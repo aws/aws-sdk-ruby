@@ -220,19 +220,6 @@ module Aws
       @services.values.map { |svc_module, options| svc_module.const_get(:Client) }
     end
 
-    def api_files
-      files = Dir.glob(File.join(GEM_ROOT, 'apis', '*.json'))
-      files.each.with_object({}) do |path, services|
-        svc_name, type = File.basename(path).split('.')
-        services[svc_name] ||= {}
-        services[svc_name][type.to_sym] = path
-      end
-    end
-
-  end
-
-  api_files.each do |service_name, files|
-    add_service(service_name, files)
   end
 
   # build service client classes
@@ -292,8 +279,6 @@ module Aws
     end
   end
 
-  module DynamoDB
-    autoload :AttributeValue, "#{SRC}/dynamodb/attribute_value"
-  end
-
 end
+
+require 'aws/services'
