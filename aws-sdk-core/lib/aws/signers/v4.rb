@@ -141,7 +141,13 @@ module Aws
 
       def normalized_querystring(querystring)
         if querystring
-          querystring.split('&').sort.join('&')
+          querystring.split('&').map do |item|
+            if /=/.match(item)
+              item
+            else
+              item + "="
+            end
+          end.sort.join('&')
         end
       end
 

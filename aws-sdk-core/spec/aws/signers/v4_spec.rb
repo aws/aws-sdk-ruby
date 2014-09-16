@@ -136,6 +136,22 @@ xyz:1
 
       end
 
+      context '#normalized_querystring' do
+        it 'enforces the trailing = character on valueless keys' do
+          input = "other=&test&x-amz-header=foo"
+          expected = "other=&test=&x-amz-header=foo"
+          actual = signer.normalized_querystring(input)
+          expect(actual).to eq(expected)
+        end
+
+        it 'sorts the query parameters' do
+          input = "foo=&bar=&baz="
+          expected = "bar=&baz=&foo="
+          actual = signer.normalized_querystring(input)
+          expect(actual).to eq(expected)
+        end
+      end
+
     end
   end
 end
