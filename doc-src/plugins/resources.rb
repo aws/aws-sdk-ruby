@@ -97,15 +97,22 @@ a default client will be constructed.
   end
 
   def document_constructor(yard_class, resource_class)
-    docstring = []
-    resource_class.identifiers.each do |name|
-      docstring << "@option options [required,String] :#{name}"
-    end
-    docstring << "@option options [Client] :client"
+
+    positional = <<-DOCSTRING.strip
+@overload initialize(#{resource_class.identifiers.map(&:to_s).join(", ")}, options = {})
+#{resource_class.identifiers.map { |n| "  @param [String] #{n}" }.join("\n")}
+  @option options [Client] :client
+    DOCSTRING
+
+    hash_style = <<-DOCSTRING.strip
+@overload initialize(options = {})
+#{resource_class.identifiers.map { |n| "  @option options [required,String] :#{n}" }.join("\n")}
+  @option options [Client] :client
+    DOCSTRING
+
     m = YARD::CodeObjects::MethodObject.new(yard_class, :initialize)
     m.scope = :instance
-    m.parameters = [['options', {}]]
-    m.docstring = docstring.join("\n")
+    m.docstring = positional + "\n" + hash_style
   end
 
   def document_client_getter(yard_class, resource_class)
