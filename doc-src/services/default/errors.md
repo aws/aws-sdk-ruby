@@ -29,7 +29,7 @@ See {Seahorse::Client::RequestContext} for more information.
 
 # Error Classes
 
-You can rescue a specific errors by their error code:
+You can rescue a specific error using the error code:
 
     begin
       # do stuff
