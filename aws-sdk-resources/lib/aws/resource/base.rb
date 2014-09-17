@@ -2,9 +2,12 @@ module Aws
   module Resource
     class Base
 
+      # @overload initialize(options = {})
+      # @overload initialize(*identifiers, options = {})
       # @option options [Seahorse::Client::Base] :client
-      def initialize(options = {})
-        @identifiers = extract_identifiers(options)
+      def initialize(*args)
+        options = args.last.is_a?(Hash) ? args.pop : {}
+        @identifiers = extract_identifiers(args, options)
         @client = extract_client(options[:client])
         @data = options[:data]
       end
@@ -63,14 +66,18 @@ module Aws
         self.class.client_class.new(config)
       end
 
-      def extract_identifiers(options)
-        self.class.identifiers.each.with_object({}) do |name, identifiers|
-          if value = options[name]
-            identifiers[name] = value
+      def extract_identifiers(args, options)
+        identifiers = {}
+        self.class.identifiers.each.with_index do |name, n|
+          if args[n]
+            identifiers[name] = args[n]
+          elsif options.key?(name)
+            identifiers[name] = options[name]
           else
             raise ArgumentError, "missing required option #{name.inspect}"
           end
         end
+        identifiers
       end
 
       class << self

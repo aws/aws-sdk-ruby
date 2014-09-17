@@ -19,6 +19,31 @@ module Aws
         allow(resource_class).to receive(:name).and_return(resource_name)
       end
 
+      describe '#initialize' do
+
+        it 'accepts identifiers as a hash' do
+          resource_class.add_identifier(:bucket_name)
+          resource_class.add_identifier(:key)
+          r = resource_class.new(bucket_name:'bucket', key:'key')
+          expect(r.identifiers).to eq(bucket_name:'bucket', key:'key')
+        end
+
+        it 'accpets identifiers positionally' do
+          resource_class.add_identifier(:bucket_name)
+          resource_class.add_identifier(:key)
+          r = resource_class.new('bucket', 'key')
+          expect(r.identifiers).to eq(bucket_name:'bucket', key:'key')
+        end
+
+        it 'accpets identifiers positionally and as a hash' do
+          resource_class.add_identifier(:bucket_name)
+          resource_class.add_identifier(:key)
+          r = resource_class.new('bucket', key:'key')
+          expect(r.identifiers).to eq(bucket_name:'bucket', key:'key')
+        end
+
+      end
+
       describe '#client' do
 
         it 'constructs and returns a default client object' do
