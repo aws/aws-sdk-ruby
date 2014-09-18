@@ -189,7 +189,7 @@ Then(/^the object should exist$/) do
 end
 
 When(/^I create a presigned url for "(.*?)" with:$/) do |method, params|
-  presigner = Aws::S3::Presigner.new(@client)
+  presigner = Aws::S3::Presigner.new(client: @client)
   params = symbolized_params(params)
   params[:bucket] = @bucket_name
   @url = presigner.presigned_url(method.to_sym, params)

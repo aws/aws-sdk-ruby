@@ -31,7 +31,7 @@ module Aws
 
       describe '#initialize' do
         it 'accepts an injected S3 client' do
-          pre = Presigner.new(client)
+          pre = Presigner.new(client: client)
           expect(pre.class).to eq(Aws::S3::Presigner)
         end
 
@@ -54,7 +54,7 @@ module Aws
             "&X-Amz-Signature=aeeed9bbccd4d02ee5c0109b86d86835f995330da4c26595"\
             "7d157751f604d404"
 
-          pre = Presigner.new(client)
+          pre = Presigner.new(client: client)
           params = {
             bucket: bucket,
             key: key,
@@ -67,7 +67,7 @@ module Aws
         it 'raises when expires_in length is over 1 week' do
           bucket = "examplebucket"
           key = "test.txt"
-          pre = Presigner.new(client)
+          pre = Presigner.new(client: client)
           params = {
             bucket: bucket,
             key: key,

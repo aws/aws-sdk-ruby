@@ -1,13 +1,28 @@
 module Aws
   module S3
+
+    # Allows you to create presigned URLs for S3 operations.
+    #
+    # Example Use:
+    #
+    #      signer = Aws::S3::Presigner.new
+    #      url = signer.presigned_url(:get_object, bucket: "bucket", key: "key")
     class Presigner
-      def initialize(client = nil)
-        @client = client || Aws::S3::Client.new
+
+      # @option options [Client] :client Optionally provide an existing
+      #   S3 client
+      def initialize(options = {})
+        @client = options[:client] || Aws::S3::Client.new
       end
 
+      # @param [Symbol] method Symbolized method name of the operation you want
+      #   to presign.
+      # @option params [Integer] :expires_in (86400) The number of seconds
+      #   before the presigned URL expires. Must be less than 604800 seconds
+      #   (one week).
       def presigned_url(method, params = {})
         request = @client.build_request(method, params)
-        request.handle(PresignHandler, step: :sign, priority: 99)
+        request.handle(S3PresignHandler, step: :sign, priority: 99)
         expires_in = params.delete(:expires_in) || 86400
         validate_expires_in_header(expires_in)
         request.context[:presigned_expires_in] = expires_in
@@ -24,6 +39,7 @@ module Aws
       end
     end
 
+    # @api private
     class PresignHandler < Seahorse::Client::Handler
       def call(context)
         Seahorse::Client::Response.new(
