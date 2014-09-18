@@ -2,6 +2,48 @@ module Aws
   module Resource
     module RequestParams
 
+      # @api private
+      class ParamsHash
+
+        # @param [Array<RequestParams::Base>] params
+        def initialize(params)
+          @params = params
+        end
+
+        # @option options [required,Resource::Base] :resource
+        # @option options [required,Array<Mixed>] :args
+        # @return [Hash]
+        def build(options = {})
+          deep_merge(user_params(options), computed_params(options))
+        end
+
+        private
+
+        def user_params(options)
+          args = options[:args] || []
+          args.last.is_a?(Hash) ? args.last : {} 
+        end
+
+        def computed_params(options)
+          params_hash = {}
+          Array(options[:resource]).each do |resource|
+            @params.each do |param|
+              param.apply(params_hash, options.merge(resource: resource))
+            end
+          end
+          params_hash
+        end
+
+        def deep_merge(obj1, obj2)
+          case obj1
+          when Hash then obj1.merge(obj2) { |key, v1, v2| deep_merge(v1, v2) }
+          when Array then obj2 + obj1
+          else obj2
+          end
+        end
+
+      end
+
       # Base class for all request parameter types.
       # @see {RequestParams::Identifier}
       # @see {RequestParams::DataMember}

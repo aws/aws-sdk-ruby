@@ -74,7 +74,7 @@ module Aws
         end
 
         def argument?
-          @operation.requires_argument?
+          @operation.arity > 0
         end
 
         def can_return_nil?

@@ -62,16 +62,13 @@ module Aws
         end
 
         it 'extracts the named argument' do
-          source = described_class.new('source', 'target')
-          expect(source.extract(argument:'value')).to eq('value')
+          source = described_class.new('target')
+          expect(source.extract(args:['value'])).to eq('value')
         end
 
-        it 'raises an error if :arugment is not given' do
-          source = described_class.new('source', 'target')
-          msg = 'missing required option :argument'
-          expect {
-            source.extract({})
-          }.to raise_error(Errors::DefinitionError, msg)
+        it 'returns nil when the argument is not present' do
+          source = described_class.new('target')
+          expect(source.extract({})).to be(nil)
         end
 
       end

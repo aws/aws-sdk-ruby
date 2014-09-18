@@ -49,9 +49,13 @@ module Aws
 
       class Argument < Base
 
+        def initialize(target)
+          super(target.to_s, target)
+        end
+
         # @option [required, String] :argument
         def extract(options)
-          option(:argument, options)
+          (options[:args] || []).first
         end
 
       end

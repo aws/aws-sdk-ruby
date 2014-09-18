@@ -5,7 +5,13 @@ module Aws
   module Resource
     module Operations
 
-      # Base class for operations.
+      # Base class for operations. An operation is any object that responds
+      # to {#call} receiving a hash of options including:
+      #
+      # * `:resource` - The resource object the operation is invoked against.
+      # * `:args` - An array of arguments given by the caller
+      # * `:block` - An optional block argument
+      #
       class Base
 
         include Options
@@ -17,6 +23,10 @@ module Aws
         # @return [Source, nil]
         attr_reader :source
 
+        # @option options[required,Resource::Base] :resource
+        # @option options[required,Array<Mixed>] :args
+        # @option options[Proc] :block
+        # @return [Mixed]
         def call(options = {})
           raise NotImplementedError
         end
@@ -36,11 +46,9 @@ module Aws
         # @return [Request]
         attr_reader :request
 
-        # @option options [required, Resource] :resource
-        # @option options [Hash] :params ({})
+        # @option (see Base#call)
         # @return [Seahorse::Client::Response]
         def call(options)
-          expect_hash(:params, options)
           @request.call(options)
         end
 
@@ -58,8 +66,7 @@ module Aws
         # @return [String<JMESPath>]
         attr_reader :path
 
-        # @option options [required, Resource] :resource
-        # @option options [Hash] :params ({})
+        # @option (see Base#call)
         # @return [Object] Returns the value resolved to by {#path}.
         def call(options)
           extract(super)
@@ -83,11 +90,10 @@ module Aws
           super
         end
 
-        # @option options [required, Resource] :resource
-        # @option options [Hash] :params ({})
+        # @option (see Base#call)
+        # @option options [Integer] :limit (nil)
         # @return [Enumerator]
         def call(options)
-          expect_hash(:params, options)
           if options[:limit]
             enum_for(:limited_each, options[:limit], options)
           else
@@ -112,14 +118,6 @@ module Aws
           end
         end
 
-        def extract_limit(options)
-          if options[:limit]
-            options[:limit]
-          else
-            (options[:params] || {})[@limit_key]
-          end
-        end
-
       end
 
       class ResourceOperation < Operation
@@ -134,11 +132,9 @@ module Aws
         # @return [Builder]
         attr_reader :builder
 
-        # @option options [required, Resource] :resource
-        # @option options [Hash] :params ({})
+        # @option (see Base#call)
         # @return [Resource, Array<Resource>]
         def call(options)
-          expect_hash(:params, options)
           @builder.build(options.merge(response:super))
         end
 
@@ -160,11 +156,9 @@ module Aws
         # @return [Symbol, nil]
         attr_reader :limit_key
 
-        # @option options [required, Resource] :resource
-        # @option options [Hash] :params ({})
+        # @option (see Base#call)
         # @return [Collection]
         def call(options)
-          expect_hash(:params, options)
           Collection.new(self, options)
         end
 
@@ -222,34 +216,25 @@ module Aws
         # @return [Builder]
         attr_reader :builder
 
-        # @option options [required, Resource] :resource
-        # @option options [required, String] :argument
+        # @option (see Base#call)
         # @return [Resource]
         def call(options)
-          @builder.build(options)
+          if argc(options) == arity
+            @builder.build(options)
+          else
+            msg = "wrong number of arguments (#{argc(options)} for #{arity})"
+            raise ArgumentError, msg
+          end
         end
 
-        # @return [Boolean] Returns `true` if this builder requires user
-        #   input to specify an identifier
-        def requires_argument?
-          @builder.requires_argument?
+        def arity
+          @builder.sources.count { |s| BuilderSources::Argument === s }
         end
 
-      end
+        private
 
-      class BatchOperation < Base
-
-        def initialize(options = {})
-          @operation = option(:operation, options)
-          super
-        end
-
-        # @option options [required, Resource::Enumerator] :resources
-        # @option options [Hash] :params
-        # @return [void]
-        def call(options)
-          expect_hash(:params, options)
-          @operation.call(options.merge(resources: option(:resources, options)))
+        def argc(options)
+          (options[:args] || []).count
         end
 
       end
@@ -260,7 +245,7 @@ module Aws
 
         def initialize(options = {})
           @waiter_name = option(:waiter_name, options)
-          @params = option(:params, options)
+          @waiter_params = option(:waiter_params, options)
           @path = options[:path]
           super
         end
@@ -269,23 +254,26 @@ module Aws
         attr_reader :waiter_name
 
         # @return [Array<RequestParams::Base>]
-        attr_reader :params
+        attr_reader :waiter_params
 
         # @return [String<JMESPathExpression>, nil]
         attr_reader :path
 
-        def call(options = {}, &block)
-          client = option(:client, options)
+        # @option options [required,Resource::Base] :resource
+        # @option options [required,Array<Mixed>] :args
+        def call(options, &block)
+
+          resource = options[:resource]
+
           params_hash = {}
-          @params.each do |param|
+          @waiter_params.each do |param|
             param.apply(params_hash, options)
           end
 
           user_params = options[:params] || {}
           params = deep_merge(user_params, params_hash)
-          resp = client.wait_until(@waiter_name, params)
+          resp = resource.client.wait_until(@waiter_name, params)
 
-          resource = options[:resource]
           resource_opts = resource.identifiers.dup
           resource_opts[:data] = Jamespath.search(@path, resp.data) if @path
           resource_opts[:client] = resource.client

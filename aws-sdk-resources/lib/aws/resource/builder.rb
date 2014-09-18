@@ -13,8 +13,8 @@ module Aws
 
       # @option options [required, Class<Resource>] resource_class
       # @option options [Array<BuilderSources::Source>] :sources ([])
-      def initialize(options)
-        @resource_class = option(:resource_class, options)
+      def initialize(options = {})
+        @resource_class = options[:resource_class]
         @sources = options[:sources] || []
       end
 
@@ -29,12 +29,6 @@ module Aws
       #   of resource objects from {#build}.
       def plural?
         @sources.any?(&:plural?)
-      end
-
-      # @return [Boolean] Returns `true` if this builder requires additional
-      #   user input.
-      def requires_argument?
-        @sources.any? { |s| BuilderSources::Argument === s }
       end
 
       # @option [Resource] :resource
@@ -85,7 +79,7 @@ module Aws
       end
 
       def client(options)
-        option(:client, options)
+        Array(options[:resource]).first.client
       end
 
     end

@@ -136,8 +136,7 @@ module Aws
             actions.each do |name, definition|
               method_name = underscore(name)
               operation = build_operation(service, resource_class, definition)
-              batch_operation = Operations::BatchOperation.new(operation:operation)
-              batch_class.add_operation(method_name, batch_operation)
+              batch_class.add_operation(method_name, operation)
             end
           end
         end
@@ -262,7 +261,7 @@ module Aws
       def build_waiter_operation(service, resource, definition)
         Operations::WaiterOperation.new(
           waiter_name: underscore(definition['waiterName']).to_sym,
-          params: request_params(definition['params']),
+          waiter_params: request_params(definition['params']),
           path: underscore(definition['path'])
         )
       end
@@ -343,7 +342,7 @@ module Aws
         elsif delta.size == 1
           # all but one provided, adding an Argument source
           target = delta.first
-          builder.sources << BuilderSources::Argument.new(target.to_s, target)
+          builder.sources << BuilderSources::Argument.new(target)
         else
           msg = "too many unsourced identifiers: #{definition.inspect}"
           raise Errors::DefinitionError, msg

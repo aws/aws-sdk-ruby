@@ -231,25 +231,29 @@ module Aws
             end
 
             it 'passes additional arguments to the operation' do
+              block = lambda {}
               resource_class.add_operation(:action, operation)
               expect(operation).to receive(:call).
-                with(client: client, resource:resource, params:{foo:'bar'}).
+                with(resource:resource, args:[{foo:'bar'}], block:block).
                 and_return(response)
-              resource.action(foo:'bar')
+              resource.action(foo:'bar', &block)
             end
 
-            it 'defines a helper requiring an identifer for reference operations' do
-              builder = double('resource-builder', :requires_argument? => true)
-              operation = Operations::ReferenceOperation.new(builder: builder)
-              resource_class.add_operation(:reference, operation)
-              expect(resource.method(:reference).arity).to be(1)
+            it 'defines a method requiring no arguments based on builder args' do
+              operation = Operations::ReferenceOperation.new(builder: Builder.new)
+              resource_class.add_operation(:operation_name, operation)
+              expect {
+                resource.operation_name('arg')
+              }.to raise_error(ArgumentError, 'wrong number of arguments (1 for 0)')
             end
 
-            it 'defines a helper requiring an identifer for reference operations' do
-              builder = double('resource-builder', :requires_argument? => false)
+            it 'defines a method requiring a single argument based on builder args' do
+              builder = Builder.new(sources:[BuilderSources::Argument.new(:name)])
               operation = Operations::ReferenceOperation.new(builder: builder)
-              resource_class.add_operation(:reference, operation)
-              expect(resource.method(:reference).arity).to be(0)
+              resource_class.add_operation(:operation_name, operation)
+              expect {
+                resource.operation_name
+              }.to raise_error(ArgumentError, 'wrong number of arguments (0 for 1)')
             end
 
             it 'accepts a block argument' do
@@ -258,10 +262,10 @@ module Aws
                 yielded = options
                 :done
               end
-              result = resource.do_something(foo: 'bar')
+              result = resource.do_something('abc', foo: 'bar')
               expect(result).to be(:done)
               expect(yielded[:resource]).to be(resource)
-              expect(yielded[:params]).to eq(foo: 'bar')
+              expect(yielded[:args]).to eq(['abc', {foo: 'bar'}])
             end
 
           end

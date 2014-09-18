@@ -4,13 +4,11 @@ module Aws
   module Resource
     class Request
 
-      include Options
-
       # @option opitons [requried, String] :method_name
       # @option options [Array<RequestParams::Param>] :params ([]) A list of
       #   request params to apply to the request when called.
       def initialize(options = {})
-        @method_name = option(:method_name, options)
+        @method_name = options[:method_name]
         @params = options[:params] || []
       end
 
@@ -21,45 +19,21 @@ module Aws
       # @return [Array<RequestParams::Param>]
       attr_reader :params
 
-      # @option options [required, Seahorse::Client::Base] :client
-      # @option options [required, Resource] :resource
-      # @option options [Hash] :params ({})
+      # @option options [required,Resource::Base] :resource
+      # @option options [Array<Mixed>] :args
       # @return [Seahorse::Client::Response]
-      def call(options = {})
-        client(options).send(@method_name, build_params(options))
+      def call(options)
+        client(options).send(@method_name, req_params(options), &options[:block])
       end
 
       private
 
       def client(options)
-        option(:client, options)
+        Array(options[:resource]).first.client
       end
 
-      def build_params(options)
-        deep_merge(user_params(options), resource_params(options))
-      end
-
-      def user_params(options)
-        options[:params] || {}
-      end
-
-      def resource_params(options)
-        params_hash = {}
-        resources = options[:resources] || [options[:resource]]
-        resources.each do |resource|
-          @params.each do |param|
-            param.apply(params_hash, options.merge(resource: resource))
-          end
-        end
-        params_hash
-      end
-
-      def deep_merge(obj1, obj2)
-        case obj1
-        when Hash then obj1.merge(obj2) { |key, v1, v2| deep_merge(v1, v2) }
-        when Array then obj2 + obj1
-        else obj2
-        end
+      def req_params(options)
+        RequestParams::ParamsHash.new(@params).build(options)
       end
 
     end

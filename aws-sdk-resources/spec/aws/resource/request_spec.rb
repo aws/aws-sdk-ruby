@@ -10,13 +10,6 @@ module Aws
           expect(Request.new(method_name:'foo').method_name).to eq('foo')
         end
 
-        it 'requires a method name' do
-          msg = 'missing required option :method_name'
-          expect {
-            Request.new
-          }.to raise_error(Errors::DefinitionError, msg)
-        end
-
       end
 
       describe '#params' do
@@ -43,28 +36,21 @@ module Aws
 
         let(:request) { Request.new(method_name:'method_name', params:params) }
 
-        it 'requires a :client option' do
-          msg = 'missing required option :client'
-          expect {
-            request.call
-          }.to raise_error(Errors::DefinitionError, msg)
-        end
-
         it 'calls the method name on the given resource client' do
           expect(client).to receive(:method_name)
-          request.call(client:client, resource:resource)
+          request.call(resource:resource)
         end
 
         it 'passes along params to the resource client' do
           params = { foo: 'bar' }
           expect(client).to receive(:method_name).with(params)
-          request.call(client:client, resource:resource, params:params)
+          request.call(resource:resource, args:[params])
         end
 
         it 'returns the client response' do
           response = double('client-response')
           allow(client).to receive(:method_name).and_return(response)
-          expect(request.call(client:client, resource:resource)).to be(response)
+          expect(request.call(resource:resource)).to be(response)
         end
 
         it 'merges request params with given params before calling client method' do
@@ -74,9 +60,7 @@ module Aws
           ])
           expect(client).to receive(:method_name).
             with(person:{name:'John Doe', age:40, aka:'johndoe'})
-          request.call(client:client, resource:resource, params:{
-            person: { aka:'johndoe' }
-          })
+          request.call(resource:resource, args:[{person: { aka:'johndoe' }}])
         end
 
         it 'deep merges params with incoming params' do
@@ -93,9 +77,9 @@ module Aws
             { name:'n2', values: %w(v3 v4) },
             { name:'n3', values: %w(v5 v6) },
           ])
-          request.call(client:client, resource:resource, params:{
+          request.call(resource:resource, args:[{
             filters:[{name:'n3', values:%w(v5 v6)}]
-          })
+          }])
         end
 
       end

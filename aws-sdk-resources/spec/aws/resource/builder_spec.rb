@@ -22,13 +22,6 @@ module Aws
           expect(builder.resource_class).to be(resource_class)
         end
 
-        it 'is required by by the constructor' do
-          msg = 'missing required option :resource_class'
-          expect {
-            Builder.new({})
-          }.to raise_error(Errors::DefinitionError, msg)
-        end
-
       end
 
       context '#sources' do
@@ -37,7 +30,7 @@ module Aws
           sources = [
             BuilderSources::Identifier.new('source', 'target')
           ]
-          builder = Builder.new(resource_class:resource_class, sources:sources)
+          builder = Builder.new(sources:sources)
           expect(builder.sources).to be(sources)
         end
 

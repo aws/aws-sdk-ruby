@@ -41,6 +41,7 @@ module Aws
     class Batch
 
       include Enumerable
+      extend HasOperations
 
       # @param [Array<Resource>] resources
       # @option options [Seahorse::Client::Response] :response
@@ -94,49 +95,6 @@ module Aws
         "#<#{self.class.name} resources=#{@resources}>"
       end
 
-      private
-
-      def call_operation(operation, params)
-        unless empty?
-          operation.call(
-            resources: @resources,
-            client: @resources.first.client,
-            params: params)
-        end
-      end
-
-      class << self
-
-        def operation(name)
-          @operations[name.to_sym] or
-            raise Errors::UnknownOperationError.new(name)
-        end
-
-        # @return [Enumerable<Symbol,Operation>]
-        def operations(&block)
-          @operations.each(&block)
-        end
-
-        # @return [Array<Symbol>]
-        def operation_names
-          @operations.keys
-        end
-
-        # @param [Symbol] name
-        # @param [Operations::BatchOperation] operation
-        def add_operation(name, operation)
-          @operations[name.to_sym] = operation
-          define_method(name) do |params={}|
-            call_operation(operation, params)
-          end
-        end
-
-        # @api private
-        def inherited(subclass)
-          subclass.send(:instance_variable_set, "@operations", {})
-        end
-
-      end
     end
   end
 end

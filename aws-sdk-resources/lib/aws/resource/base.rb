@@ -2,6 +2,8 @@ module Aws
   module Resource
     class Base
 
+      extend HasOperations
+
       # @overload initialize(options = {})
       # @overload initialize(*identifiers, options = {})
       # @option options [Seahorse::Client::Base] :client
@@ -136,72 +138,11 @@ module Aws
           @data_attributes.dup
         end
 
-        # @param [Symbol] name
-        # @return [Operation] Returns the named operation.
-        # @raise [Errors::UnknownOperationError]
-        def operation(name)
-          @operations[name.to_sym] or
-            raise Errors::UnknownOperationError.new(name)
-        end
-
-        # @param [Symbol] method_name
-        # @param [Operation] operation
-        # @return [void]
-        def add_operation(method_name, operation = nil, &block)
-          operation = block if block_given?
-          operation.is_a?(Operations::ReferenceOperation) ?
-            resource_reference(method_name, operation) :
-            resource_operation(method_name, operation)
-          @operations[method_name.to_sym] = operation
-        end
-
-        # @return [Enumerable<Symbol,Operation>]
-        def operations(&block)
-          @operations.each(&block)
-        end
-
-        # @return [Array<Symbol>]
-        def operation_names
-          @operations.keys
-        end
-
         # @api private
         def inherited(subclass)
           subclass.send(:instance_variable_set, "@identifiers", [])
           subclass.send(:instance_variable_set, "@data_attributes", [])
-          subclass.send(:instance_variable_set, "@operations", {})
-        end
-
-        private
-
-        # @param [Symbol] method_name
-        # @param [Operations::ReferenceOperation] reference
-        def resource_reference(method_name, reference)
-          if reference.requires_argument?
-            safe_define_method(method_name) do |identifier|
-              reference.call(client:client, resource:self, argument:identifier)
-            end
-          else
-            safe_define_method(method_name) do
-              reference.call(client:client, resource:self)
-            end
-          end
-        end
-
-        def resource_operation(method_name, operation)
-          safe_define_method(method_name) do |params={}|
-            operation.call(resource:self, client:client, params:params)
-          end
-        end
-
-        def safe_define_method(method_name, &block)
-          if instance_methods.include?(method_name.to_sym)
-            msg = "unable to define method #{name}##{method_name}, "
-            msg << "method already exists"
-            raise Errors::DefinitionError, msg
-          else
-            define_method(method_name, &block)
-          end
+          super
         end
 
       end
