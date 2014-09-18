@@ -243,6 +243,13 @@ module Aws
       svc_module
     end
 
+    # @api private
+    def load_all_services
+      SERVICE_MODULE_NAMES.each do |const_name|
+        const_get(const_name)
+      end
+    end
+
   end
 
   # build service client classes
