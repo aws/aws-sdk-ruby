@@ -24,31 +24,13 @@ module Aws
       Base.define(*args)
     end
 
-    class << self
-
-      # @api private
-      def define_resource_classes(options)
-        definition(options).apply(:Resource, options[:client_class])
-      end
-
-      # @api private
-      def definition(options)
-        namespace, path = options.values_at(:namespace, :definition)
-        source = File.open(path, 'r', encoding: 'UTF-8') { |f| f.read }
-        source = MultiJson.load(source)
-        Definition.new(namespace, source, source_path: path)
-      end
-
-    end
   end
 end
 
 Aws.service_added do |_, svc_module, options|
-  if options[:resources]
-    Aws::Resource.define_resource_classes(
-      namespace: svc_module,
-      client_class: svc_module::Client,
-      definition: options[:resources],
-    )
+  if path = options[:resources]
+    definition = Aws.load_json(path)
+    definition = Aws::Resource::Definition.new(definition, source_path: path)
+    definition.apply(svc_module)
   end
 end

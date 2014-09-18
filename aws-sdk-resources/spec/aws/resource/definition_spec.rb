@@ -24,18 +24,19 @@ module Aws
         let(:namespace) { Module.new }
 
         before(:each) do
+          namespace.const_set(:Client, client_class)
           client_class.paginators = Paging::NullProvider.new
           allow(client_class).to receive(:new).and_return(client)
         end
 
         def apply_definition
-          Definition.new(namespace, definition).apply('Resource', client_class)
+          Definition.new(definition).apply(namespace)
         end
 
         describe 'service' do
 
           it 'constructs default clients' do
-            Definition.new(namespace, definition).apply('Resource', client_class)
+            Definition.new(definition).apply(namespace)
             expect(namespace::Resource.new.client).to be(client)
           end
 
@@ -45,9 +46,10 @@ module Aws
               'User' => { 'identifiers' => [{ 'name' => 'Name' }] },
             }
 
-            Definition.new(namespace, definition).apply('Resource', client_class)
+            apply_definition
 
-            expect(namespace.constants.sort).to eq([:Group, :Resource, :User])
+            expect(namespace.constants.sort).to eq(
+              [:Client, :Group, :Resource, :User])
 
             svc = namespace::Resource.new
             expect(svc).to be_kind_of(Resource::Base)

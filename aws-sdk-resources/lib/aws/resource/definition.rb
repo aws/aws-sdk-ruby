@@ -7,144 +7,72 @@ module Aws
     # of related resource classes.
     class Definition
 
-      # @param [Hash] source
-      def initialize(namespace, source, options = {})
-        @namespace = namespace
-        @source = source
+      # @param [Hash] definition
+      # @option options [String] :source_path
+      def initialize(definition, options = {})
+        @source = definition
         @source_path = options[:source_path]
       end
 
-      # @param [String] service_name
-      # @param [Class<Seahorse::Client::Base>] client_class
-      # @return [Class<Resource>] Returns the service resource class.
-      def apply(service_name, client_class)
-        service = define_resource_classes(service_name.to_s, client_class)
-        define_operations(service)
-        define_subresources(service)
-        define_batch_operations(service)
-        service
+      # @param [Module<Service>] namespace
+      # @return [void]
+      def apply(namespace)
+        build_resource_classes(namespace)
+        each_resource_class(namespace) do |resource, definition|
+          define_load(namespace, resource, definition['load'])
+          define_actions(namespace, resource, definition['actions'] || {})
+          define_batch_actions(namespace, resource, definition['batchActions'] || {})
+          define_waiters(namespace, resource, definition['waiters'] || {})
+          define_has_many(namespace, resource, definition['hasMany'] || {})
+          define_has_some(namespace, resource, definition['hasSome'] || {})
+          define_has_one(namespace, resource, definition['hasOne'] || {})
+          define_data_attributes(namespace, resource, definition['shape'])
+          define_subresources(namespace, resource, definition['subResources'] || {})
+        end
+        define_top_level_references(namespace)
       end
 
       private
 
-      # Defines and returns a resource class for the service.  It additionally
-      # defines a resource class for each resource definition.  These are
-      # added to the service as constants.
-      #
-      #     SvcClass
-      #     SvcClass::Resource1
-      #     SvcClass::Resource2
-      #
-      # @param [String] service_name
-      # @param [Class<Seahorse::Client::Base>] client_class
-      # @return [Class<Resource>] Returns the service resource class.
-      def define_resource_classes(service_name, client_class)
-        service = resource_class(service_name, client_class, svc_definition)
-        each_resource do |name, definition|
-          resource_class = resource_class(name, client_class, definition)
-          resource_class.const_set(:Batch, Class.new(Resource::Batch))
-        end
-        service
-      end
-
-      # Defines a new resource class.  This specifies the client class,
-      # and the identifiers, but it does NOT apply any operations.
-      # @param [String] name
-      # @param [Class<Seahorse::Client::Base>] client_class
-      # @return [Class<Resource>] Returns the new resource class.
-      def resource_class(name, client_class, definition)
-        resource_class = Base.define(client_class)
-        resource_class.resource_name = name
-        (definition['identifiers'] || []).each do |identifier|
-          resource_class.add_identifier(underscore(identifier['name']))
-        end
-        @namespace.const_set(name, resource_class)
-        resource_class
-      end
-
-      # Populates a resource class with operations.  These are extracted
-      # from the resource definition of actions and associations.
-      # @param [Class<Resource>] service The service resource class.
-      # @return [void]
-      def define_operations(service)
-        define_resource_operations(service, service, svc_definition)
-        each_resource do |name, definition|
-          define_resource_operations(service, @namespace.const_get(name), definition)
-        end
-      end
-
-      # Populates a resource class with operations.  These are extracted
-      # from the resource definition of actions and associations.
-      # @param [Class<Resource>] service The service or namespace.  All
-      #   resources referenced in the definition must be defined as
-      #   constants on the service.
-      # @param [Class<Resource>] resource
-      # @param [Hash] definition
-      # @return [void]
-      def define_resource_operations(service, resource, definition)
-        define_load(resource, definition['load'])
-        define_actions(service, resource, definition['actions'] || {})
-        define_waiters(service, resource, definition['waiters'] || {})
-        define_has_many(service, resource, definition['hasMany'] || {})
-        define_has_some(service, resource, definition['hasSome'] || {})
-        define_has_one(service, resource, definition['hasOne'] || {})
-        define_data_attributes(resource, definition['shape'])
-      end
-
-      def define_subresources(service)
-        top_level_resources = Set.new(@source['resources'].keys)
-        each_resource do |parent_name, definition|
-          sub_resources = definition['subResources'] || {}
-          (sub_resources['resources'] || []).each do |child_name|
-
-            top_level_resources.delete(child_name)
-
-            # add reference from parent to child
-            add_sub_resoruce_reference(
-              service,
-              child_name.sub(/^#{parent_name}/, ''),
-              parent_name,
-              child_name,
-              sub_resources['identifiers']
-            )
-
-            # add inverse reference from child to parent
-            add_sub_resoruce_reference(
-              service,
-              parent_name,
-              child_name,
-              parent_name,
-              sub_resources['identifiers'].invert
-            )
-
+      def build_resource_classes(namespace)
+        each_definition do |name, definition|
+          resource_class = Base.define(namespace::Client)
+          resource_class.resource_name = name
+          (definition['identifiers'] || []).each do |identifier|
+            resource_class.add_identifier(underscore(identifier['name']))
           end
-        end
-
-        top_level_resources.each do |name|
-          resource_class = @namespace.const_get(name)
-          if resource_class.identifiers.count == 1
-            add_sub_resoruce_reference(service, name, service, name, {})
+          namespace.const_set(name, resource_class)
+          unless name == 'Resource'
+            resource_class.const_set(:Batch, Class.new(Resource::Batch))
           end
         end
       end
 
-      def define_batch_operations(service)
-        each_resource do |resource_name, resoruce_definition|
-          if actions = resoruce_definition['batchActions']
-            resource_class = @namespace.const_get(resource_name)
-            batch_class = resource_class.const_get(:Batch)
-            actions.each do |name, definition|
-              method_name = underscore(name)
-              operation = build_operation(service, resource_class, definition)
-              batch_class.add_operation(method_name, operation)
-            end
-          end
+      def each_resource_class(namespace, &block)
+        each_definition do |name, definition|
+          yield(namespace.const_get(name), definition)
         end
       end
 
-      def add_sub_resoruce_reference(service, name, from, to, identifiers)
-        reference = {
-          'type' => to,
+      def define_subresources(namespace, parent, definition)
+        parent_name = parent.resource_name
+        identifiers = definition['identifiers'] || {}
+        (definition['resources'] || []).each do |child_name|
+
+          method_name = underscore(child_name.sub(/^#{parent_name}/, ''))
+          operation = subresource(namespace, child_name, identifiers)
+          parent.add_operation(method_name, operation)
+
+          method_name = underscore(parent_name)
+          operation = subresource(namespace, parent_name, identifiers.invert)
+          namespace.const_get(child_name).add_operation(method_name, operation)
+
+        end
+      end
+
+      def subresource(namespace, type, identifiers)
+        Operations::ReferenceOperation.new(builder: define_builder(namespace, {
+          'type' => type,
           'identifiers' => identifiers.map { |source, target|
             {
               'target' => target,
@@ -152,68 +80,85 @@ module Aws
               'source' => source,
             }
           }
-        }
-        builder = define_builder(service, reference)
-        operation = Operations::ReferenceOperation.new(
-          builder: builder,
-          source: source(reference))
-        from = @namespace.const_get(from) unless from.is_a?(Class)
-        from.add_operation(underscore(name), operation)
+        }))
       end
 
-      def define_data_attributes(resource, shape_name)
-        if shape_name
-          shape = resource.client_class.api.shape_map.shape('shape' => shape_name)
-          shape.member_names.each do |member_name|
-            if
-              resource.identifiers.include?(member_name) ||
-              resource.instance_methods.include?(member_name)
-            then
-              next
-            else
-              resource.add_data_attribute(member_name)
-            end
+      def define_top_level_references(namespace)
+        top_level = Set.new(@source['resources'].keys)
+        each_resource_class(namespace) do |resource, definition|
+          unless resource.identifiers.count == 1
+            top_level.delete(resource.resource_name)
+          end
+          ((definition['subResources'] || {})['resources'] || {}).each do |child|
+            top_level.delete(child)
+          end
+        end
+        top_level.each do |resource_name|
+          method_name = underscore(resource_name)
+          operation = subresource(namespace, resource_name, {})
+          namespace::Resource.add_operation(method_name, operation)
+        end
+      end
+
+      def define_batch_actions(namespace, resource, batch_actions)
+        batch_actions.each do |name, definition|
+          method_name = underscore(name)
+          operation = build_operation(namespace, resource, definition)
+          resource::Batch.add_operation(method_name, operation)
+        end
+      end
+
+      def define_data_attributes(namespace, resource, shape_name)
+        return unless shape_name
+        shape = resource.client_class.api.shape_map.shape('shape' => shape_name)
+        shape.member_names.each do |member_name|
+          if
+            resource.identifiers.include?(member_name) ||
+            resource.instance_methods.include?(member_name)
+          then
+            next # some data attributes are duplicates to identifiers
+          else
+            resource.add_data_attribute(member_name)
           end
         end
       end
 
-      def define_load(resource, definition)
-        if definition
-          resource.load_operation = Operations::DataOperation.new(
-            request: define_request(definition['request']),
-            path: underscore(definition['path']),
-            source: source(definition),
-          )
-        end
+      def define_load(namespace, resource, definition)
+        return unless definition
+        resource.load_operation = Operations::DataOperation.new(
+          request: define_request(definition['request']),
+          path: underscore(definition['path']),
+          source: source(definition),
+        )
       end
 
-      def define_actions(service, resource, actions)
+      def define_actions(namespace, resource, actions)
         actions.each do |name, action|
-          operation = build_operation(service, resource, action)
+          operation = build_operation(namespace, resource, action)
           resource.add_operation(underscore(name), operation)
         end
       end
 
-      def define_waiters(service, resource, waiters)
+      def define_waiters(namespace, resource, waiters)
         waiters.each do |name, definition|
-          operation = build_waiter_operation(service, resource, definition)
+          operation = build_waiter_operation(namespace, resource, definition)
           resource.add_operation("wait_until_#{underscore(name)}", operation)
         end
       end
 
-      def build_operation(service, resource, definition)
+      def build_operation(namespace, resource, definition)
         type = operation_type(definition)
-        send("build_#{type}_operation", service, resource, definition)
+        send("build_#{type}_operation", namespace, resource, definition)
       end
 
-      def build_basic_operation(service, resource, definition)
+      def build_basic_operation(namespace, resource, definition)
         Operations::Operation.new(
           request: define_request(definition['request']),
           source: source(definition)
         )
       end
 
-      def build_data_operation(service, resource, definition)
+      def build_data_operation(namespace, resource, definition)
         plural = definition['path'].include?('[')
         source = source(definition)
         if plural
@@ -232,8 +177,8 @@ module Aws
         end
       end
 
-      def build_resource_operation(service, resource, definition)
-        builder = define_builder(service, definition['resource'])
+      def build_resource_operation(namespace, resource, definition)
+        builder = define_builder(namespace, definition['resource'])
         if path = definition['path']
           source = underscore(path)
           builder.sources << BuilderSources::ResponsePath.new(source, :data)
@@ -245,8 +190,8 @@ module Aws
         )
       end
 
-      def build_enumerate_resource_operation(service, resource, definition)
-        builder = define_builder(service, definition['resource'])
+      def build_enumerate_resource_operation(namespace, resource, definition)
+        builder = define_builder(namespace, definition['resource'])
         if path = definition['path']
           source = underscore(path)
           builder.sources << BuilderSources::ResponsePath.new(source, :data)
@@ -258,7 +203,7 @@ module Aws
           limit_key: limit_key(resource, definition))
       end
 
-      def build_waiter_operation(service, resource, definition)
+      def build_waiter_operation(namespace, resource, definition)
         Operations::WaiterOperation.new(
           waiter_name: underscore(definition['waiterName']).to_sym,
           waiter_params: request_params(definition['params']),
@@ -300,27 +245,27 @@ module Aws
         end
       end
 
-      def define_has_many(service, resource, has_many)
+      def define_has_many(namespace, resource, has_many)
         has_many.each do |name, definition|
-          operation = build_enumerate_resource_operation(service, resource, definition)
+          operation = build_enumerate_resource_operation(namespace, resource, definition)
           resource.add_operation(underscore(name), operation)
         end
       end
 
-      def define_has_some(service, resource, has_some)
+      def define_has_some(namespace, resource, has_some)
         has_some.each do |name, definition|
-          define_reference(service, resource, name, definition)
+          define_reference(namespace, resource, name, definition)
         end
       end
 
-      def define_has_one(service, resource, has_one)
+      def define_has_one(namespace, resource, has_one)
         has_one.each do |name, definition|
-          define_reference(service, resource, name, definition)
+          define_reference(namespace, resource, name, definition)
         end
       end
 
-      def define_reference(service, resource, name, definition)
-        builder = define_builder(service, definition['resource'])
+      def define_reference(namespace, resource, name, definition)
+        builder = define_builder(namespace, definition['resource'])
         if path = definition['path']
           source = underscore(path)
           builder.sources << BuilderSources::DataMember.new(source, :data)
@@ -331,9 +276,9 @@ module Aws
         resource.add_operation(underscore(name), operation)
       end
 
-      def define_builder(service, definition)
+      def define_builder(namespace, definition)
         builder = Resource::Builder.new(
-          resource_class: @namespace.const_get(definition['type']),
+          resource_class: namespace.const_get(definition['type']),
           sources: builder_sources(definition['identifiers'] || [])
         )
         delta = builder.resource_class.identifiers - builder.sources.map(&:target)
@@ -385,7 +330,8 @@ module Aws
         @source['service']
       end
 
-      def each_resource(&block)
+      def each_definition(&block)
+        yield('Resource', svc_definition)
         @source['resources'].each(&block)
       end
 
