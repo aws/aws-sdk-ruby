@@ -187,3 +187,31 @@ end
 Then(/^the object should exist$/) do
   @client.head_object(bucket: @bucket_name, key: @key)
 end
+
+When(/^I create a presigned url for "(.*?)" with:$/) do |method, params|
+  presigner = Aws::S3::Presigner.new(@client)
+  params = symbolized_params(params)
+  params[:bucket] = @bucket_name
+  @url = presigner.presigned_url(method.to_sym, params)
+end
+
+When(/^I send an HTTP get request for the presigned url$/) do
+  @resp = Net::HTTP.get(URI(@url))
+end
+
+Then(/^the response should be "(.*?)"$/) do |expected|
+  expect(@resp).to eq(expected)
+end
+
+When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do |body|
+  uri = URI(@url)
+  http = Net::HTTP.new(uri.host)
+  req = Net::HTTP::Put.new(uri)
+  req.body = body
+  @resp = http.request(req)
+end
+
+Then(/^I make an unauthenticated HTTP request for key "(.*?)"$/) do |key|
+  url = "https://#{@bucket_name}.s3.amazonaws.com/#{key}"
+  @resp = Net::HTTP.get(URI(url))
+end

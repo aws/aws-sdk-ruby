@@ -5,3 +5,9 @@ Aws.add_service(:S3, {
   resources: File.join(Aws::GEM_ROOT, 'apis', 'S3.resources.json'),
   waiters: File.join(Aws::GEM_ROOT, 'apis', 'S3.waiters.json'),
 })
+
+module Aws
+  module S3
+    autoload :Presigner, "#{SRC}/s3/presigner"
+  end
+end
