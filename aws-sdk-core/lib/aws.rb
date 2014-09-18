@@ -8,11 +8,55 @@ module Aws
   # @api private
   SRC = File.join(GEM_ROOT, 'lib', 'aws')
 
+  # @api private
+  # services
+  SERVICE_MODULE_NAMES = [
+    :AutoScaling,
+    :CloudFormation,
+    :CloudFront,
+    :CloudSearch,
+    :CloudSearchDomain,
+    :CloudTrail,
+    :CloudWatch,
+    :CloudWatchLogs,
+    :CognitoIdentity,
+    :CognitoSync,
+    :DataPipeline,
+    :DirectConnect,
+    :DynamoDB,
+    :EC2,
+    :ElastiCache,
+    :ElasticBeanstalk,
+    :ElasticLoadBalancing,
+    :ElasticTranscoder,
+    :EMR,
+    :Glacier,
+    :IAM,
+    :ImportExport,
+    :Kinesis,
+    :OpsWorks,
+    :RDS,
+    :Redshift,
+    :Route53,
+    :Route53Domains,
+    :S3,
+    :SES,
+    :SimpleDB,
+    :SNS,
+    :SQS,
+    :StorageGateway,
+    :STS,
+    :Support,
+    :SWF,
+  ]
+
   @config = {}
-
   @services = {}
-
   @service_added_callbacks = []
+
+  SERVICE_MODULE_NAMES.each do |const_name|
+    autoload const_name, "#{SRC}/#{const_name.downcase}.rb"
+  end
 
   autoload :Client, "#{SRC}/client"
   autoload :CredentialProviderChain, "#{SRC}/credential_provider_chain"
@@ -28,45 +72,6 @@ module Aws
   autoload :Structure, "#{SRC}/structure"
   autoload :TreeHash, "#{SRC}/tree_hash"
   autoload :VERSION, "#{SRC}/version"
-
-  # services
-  autoload :AutoScaling, "#{SRC}/autoscaling.rb"
-  autoload :CloudFormation, "#{SRC}/cloudformation.rb"
-  autoload :CloudFront, "#{SRC}/cloudfront.rb"
-  autoload :CloudSearch, "#{SRC}/cloudsearch.rb"
-  autoload :CloudSearchDomain, "#{SRC}/cloudsearchdomain.rb"
-  autoload :CloudTrail, "#{SRC}/cloudtrail.rb"
-  autoload :CloudWatch, "#{SRC}/cloudwatch.rb"
-  autoload :CloudWatchLogs, "#{SRC}/cloudwatchlogs.rb"
-  autoload :CognitoIdentity, "#{SRC}/cognitoidentity.rb"
-  autoload :CognitoSync, "#{SRC}/cognitosync.rb"
-  autoload :DataPipeline, "#{SRC}/datapipeline.rb"
-  autoload :DirectConnect, "#{SRC}/directconnect.rb"
-  autoload :DynamoDB, "#{SRC}/dynamodb.rb"
-  autoload :EC2, "#{SRC}/ec2.rb"
-  autoload :ElastiCache, "#{SRC}/elasticache.rb"
-  autoload :ElasticBeanstalk, "#{SRC}/elasticbeanstalk.rb"
-  autoload :ElasticLoadBalancing, "#{SRC}/elasticloadbalancing.rb"
-  autoload :ElasticTranscoder, "#{SRC}/elastictranscoder.rb"
-  autoload :EMR, "#{SRC}/emr.rb"
-  autoload :Glacier, "#{SRC}/glacier.rb"
-  autoload :IAM, "#{SRC}/iam.rb"
-  autoload :ImportExport, "#{SRC}/importexport.rb"
-  autoload :Kinesis, "#{SRC}/kinesis.rb"
-  autoload :OpsWorks, "#{SRC}/opsworks.rb"
-  autoload :RDS, "#{SRC}/rds.rb"
-  autoload :Redshift, "#{SRC}/redshift.rb"
-  autoload :Route53, "#{SRC}/route53.rb"
-  autoload :Route53Domains, "#{SRC}/route53domains.rb"
-  autoload :S3, "#{SRC}/s3.rb"
-  autoload :SES, "#{SRC}/ses.rb"
-  autoload :SimpleDB, "#{SRC}/simpledb.rb"
-  autoload :SNS, "#{SRC}/sns.rb"
-  autoload :SQS, "#{SRC}/sqs.rb"
-  autoload :StorageGateway, "#{SRC}/storagegateway.rb"
-  autoload :STS, "#{SRC}/sts.rb"
-  autoload :Support, "#{SRC}/support.rb"
-  autoload :SWF, "#{SRC}/swf.rb"
 
   # @api private
   module Api
