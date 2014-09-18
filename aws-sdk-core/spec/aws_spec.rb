@@ -22,28 +22,6 @@ module Aws
 
   end
 
-  describe 'add_plugin' do
-
-    it 'adds a plugin to every client for all services' do
-      client_class = double('client-class')
-      allow(Aws).to receive(:client_classes).and_return([client_class])
-      expect(client_class).to receive(:add_plugin).with('p')
-      Aws.add_plugin('p')
-    end
-
-  end
-
-  describe 'remove_plugin' do
-
-    it 'removes a plugin from every client for each service' do
-      client_class = double('client-class')
-      allow(Aws).to receive(:client_classes).and_return([client_class])
-      expect(client_class).to receive(:remove_plugin).with('p')
-      Aws.remove_plugin('p')
-    end
-
-  end
-
   describe 'add_service' do
 
     let(:dummy_credentials) { Aws::Credentials.new('akid', 'secret') }

@@ -191,24 +191,6 @@ module Aws
       end
     end
 
-    # Applies the plugin to every AWS client class.
-    # @param [Seahorse::Client::Plugin] plugin
-    # @return [void]
-    def add_plugin(plugin)
-      client_classes.each do |client_class|
-        client_class.add_plugin(plugin)
-      end
-    end
-
-    # Removes the plugin from every AWS client class.
-    # @param [Seahorse::Client::Plugin] plugin
-    # @return [void]
-    def remove_plugin(plugin)
-      client_classes.each do |client_class|
-        client_class.remove_plugin(plugin)
-      end
-    end
-
     # Yields to the given block for each service that has already been
     # defined via {add_service}. Also yields to the given block for
     # each new service added after the callback is registered.
@@ -259,12 +241,6 @@ module Aws
         callback.call(svc_name.to_s, *@services[svc_name])
       end
       svc_module
-    end
-
-    private
-
-    def client_classes
-      @services.values.map { |svc_module, options| svc_module.const_get(:Client) }
     end
 
   end
