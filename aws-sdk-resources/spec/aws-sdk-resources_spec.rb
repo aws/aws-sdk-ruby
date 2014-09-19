@@ -1,13 +1,7 @@
-describe 'aws-sdk-resources gem' do
+require 'spec_helper'
 
-  %w(
-    S3
-    EC2
-    IAM
-    SQS
-    SNS
-    Glacier
-  ).each do |svc|
+describe 'aws-sdk-resources gem' do
+  Aws::SERVICE_MODULE_NAMES.each do |svc|
 
     it "defines a resource class for Aws::#{svc}" do
       resource_class = Aws.const_get(svc).const_get(:Resource)

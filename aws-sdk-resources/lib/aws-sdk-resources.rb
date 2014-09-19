@@ -25,12 +25,17 @@ module Aws
     end
 
   end
-end
 
-Aws.service_added do |_, svc_module, options|
-  if path = options[:resources]
-    definition = Aws.load_json(path)
-    definition = Aws::Resource::Definition.new(definition, source_path: path)
+  service_added do |_, svc_module, options|
+    definition = options[:resources]
+    definition = case definition
+      when nil then Resource::Definition.new({})
+      when Resource::Definition then definition
+      when Hash then Resource::Definition.new(definition)
+      when String then Resource::Definition.new(Aws.load_json(definition))
+      else raise ArgumentError, "invalid resource definition #{definition}"
+    end
     definition.apply(svc_module)
   end
+
 end

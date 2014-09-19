@@ -84,7 +84,7 @@ module Aws
       end
 
       def define_top_level_references(namespace)
-        top_level = Set.new(@source['resources'].keys)
+        top_level = Set.new(resource_definitions.keys)
         each_resource_class(namespace) do |resource, definition|
           unless resource.identifiers.count == 1
             top_level.delete(resource.resource_name)
@@ -327,12 +327,16 @@ module Aws
       end
 
       def svc_definition
-        @source['service']
+        @source['service'] || {}
+      end
+
+      def resource_definitions
+        @source['resources'] || {}
       end
 
       def each_definition(&block)
         yield('Resource', svc_definition)
-        @source['resources'].each(&block)
+        resource_definitions.each(&block)
       end
 
       def underscore(str)
