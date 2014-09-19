@@ -10,45 +10,45 @@ module Aws
 
   # @api private
   # services
-  SERVICE_MODULE_NAMES = [
-    :AutoScaling,
-    :CloudFormation,
-    :CloudFront,
-    :CloudSearch,
-    :CloudSearchDomain,
-    :CloudTrail,
-    :CloudWatch,
-    :CloudWatchLogs,
-    :CognitoIdentity,
-    :CognitoSync,
-    :DataPipeline,
-    :DirectConnect,
-    :DynamoDB,
-    :EC2,
-    :ElastiCache,
-    :ElasticBeanstalk,
-    :ElasticLoadBalancing,
-    :ElasticTranscoder,
-    :EMR,
-    :Glacier,
-    :IAM,
-    :ImportExport,
-    :Kinesis,
-    :OpsWorks,
-    :RDS,
-    :Redshift,
-    :Route53,
-    :Route53Domains,
-    :S3,
-    :SES,
-    :SimpleDB,
-    :SNS,
-    :SQS,
-    :StorageGateway,
-    :STS,
-    :Support,
-    :SWF,
-  ]
+  SERVICE_MODULE_NAMES = %w(
+    AutoScaling
+    CloudFormation
+    CloudFront
+    CloudSearch
+    CloudSearchDomain
+    CloudTrail
+    CloudWatch
+    CloudWatchLogs
+    CognitoIdentity
+    CognitoSync
+    DataPipeline
+    DirectConnect
+    DynamoDB
+    EC2
+    ElastiCache
+    ElasticBeanstalk
+    ElasticLoadBalancing
+    ElasticTranscoder
+    EMR
+    Glacier
+    IAM
+    ImportExport
+    Kinesis
+    OpsWorks
+    RDS
+    Redshift
+    Route53
+    Route53Domains
+    S3
+    SES
+    SimpleDB
+    SNS
+    SQS
+    StorageGateway
+    STS
+    Support
+    SWF
+  )
 
   @config = {}
   @services = {}
