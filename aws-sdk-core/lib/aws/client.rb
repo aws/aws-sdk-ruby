@@ -111,8 +111,8 @@ module Aws
         when Seahorse::Model::Api then api
         when Hash then Seahorse::Model::Api.new(api)
         when String then Seahorse::Model::Api.new(Aws.load_json(api))
-        else
-          raise ArgumentError, "expected :api to be an Api, Hash or String"
+        when nil then Seahorse::Model::Api.new({})
+        else raise ArgumentError, "invalid api definition #{api}"
         end
       end
 

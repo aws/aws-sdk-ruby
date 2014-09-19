@@ -9,7 +9,7 @@ module Aws
 
       # @param [Hash] definition
       # @option options [String] :source_path
-      def initialize(definition, options = {})
+      def initialize(definition = {}, options = {})
         @source = definition
         @source_path = options[:source_path]
       end
