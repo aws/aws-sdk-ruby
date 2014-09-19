@@ -76,7 +76,7 @@ module Aws
         #   this operation. Returns `nil` if this operation does not build
         #   and return resource objects.
         attr_reader :builder
-        
+
         # @return [Resource::Source]
         attr_reader :source
 
