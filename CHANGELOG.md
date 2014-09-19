@@ -1,6 +1,13 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Autoload - Service modules / classes now autoload upon first
+  use. This speeds up gem load time significantly.
+
+* Issue - SigV4 - Resolved an issue with how version 4 signatures generated
+  the normalized querystring. Query params without a value now consistantly
+  receive a trailing `=`.
+
 2.0.0.rc16 (2014-09-11)
 ------------------
 
