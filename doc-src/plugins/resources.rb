@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'
 
 # KNOWN ISSUES
 #
-# - Changed Resource::Base#data, #client and #attributes from
+# - Changed Resource#data, #client and #attributes from
 #   attr_reader to methods so I could override them in the client
 #   with the appropriate return values
 #
@@ -46,7 +46,7 @@ class ResourceDocPlugin
       namespace = YARD::Registry[svc_module.name]
       svc_module.constants.each do |const|
         klass = svc_module.const_get(const)
-        if klass.ancestors.include?(Aws::Resource::Base)
+        if klass.ancestors.include?(Aws::Resources::Resource)
           yard_class = document_resource_class(const, namespace, klass)
           if const == :Resource
             yard_class.docstring = service_docstring(const, yard_class, klass)
@@ -84,9 +84,9 @@ a default client will be constructed.
 
   def document_resource_class(name, namespace, resource_class)
     yard_class = YARD::CodeObjects::ClassObject.new(namespace, name)
-    yard_class.superclass = YARD::Registry['Aws::Resource::Base']
+    yard_class.superclass = YARD::Registry['Aws::Resources::Resource']
     document_constructor(yard_class, resource_class)
-    # intentionally disabled as these are documented in Aws::Resource::Base
+    # intentionally disabled as these are documented in Aws::Resources::Resource
     #document_client_getter(yard_class, resource_class)
     #document_identifiers_hash(yard_class, resource_class)
     #document_load(yard_class, resource_class)
@@ -212,7 +212,7 @@ Loads the current #{name} by calling {Client##{method}}.
 
   def document_operation_method(yard_class, resource_class, name, operation)
     type = operation.class.name.split('::').last
-    documenter = Aws::Resource::Documenter.const_get(type + 'Documenter')
+    documenter = Aws::Resources::Documenter.const_get(type + 'Documenter')
     documenter = documenter.new(yard_class, resource_class, name, operation)
     documenter.method_object
   end

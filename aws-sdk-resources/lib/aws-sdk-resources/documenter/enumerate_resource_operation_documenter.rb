@@ -5,7 +5,7 @@ module Aws
 
         def docstring
           super + ' ' +<<-DOCSTRING.lstrip
-Returns a {Resource::Collection Collection} of {#{target_resource_class_name}}
+Returns a {Resources::Collection Collection} of {#{target_resource_class_name}}
 resources. No API requests are made until you call an enumerable method on the
 collection. {#{called_operation}} will be called multiple times until every
 {#{target_resource_class_name}} has been yielded. 
@@ -17,7 +17,7 @@ collection. {#{called_operation}} will be called multiple times until every
         end
 
         def return_message
-          "a {Aws::Resource::Collection Collection} of {#{target_resource_class_name}} resource objects."
+          "a {Aws::Resources::Collection Collection} of {#{target_resource_class_name}} resource objects."
         end
 
         def example_tags

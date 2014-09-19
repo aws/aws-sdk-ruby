@@ -123,7 +123,7 @@ module Aws
       def reject_limit_param(options)
         if options[:params] && options[:params][limit_key]
           msg = "invalid option :#{limit_key}, call #limit or #batch_size "
-          msg << "on the returned Aws::Resource::Collection instead"
+          msg << "on the returned Aws::Resources::Collection instead"
           raise ArgumentError, msg
         end
       end

@@ -63,7 +63,7 @@ module Aws
         #   any API requests.
         attr_reader :api_request
  
-        # @return [Array<Resource::RequestParams::Base>, nil] Returns the
+        # @return [Array<Resources::RequestParams::Base>, nil] Returns the
         #   parameters this operation binds to the made request. Returns `nil`
         #   if this operation does not make a request.
         attr_reader :api_request_params
