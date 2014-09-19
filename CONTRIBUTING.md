@@ -24,7 +24,7 @@ Please submit any [issues][] or [pull requests][pull-requests] through GitHub.
 
 We are open to anything that improves the SDK and doesn't unnecessarily cause backwards-incompatible changes. If you are
 unsure if your idea is something we would be open to, please ask us; Open a ticket, send us an email, or post on the
-(forums)[https://forums.aws.amazon.com/forum.jspa?forumID=125]. Specifically, here are a few things that we would
+[forums](https://forums.aws.amazon.com/forum.jspa?forumID=125). Specifically, here are a few things that we would
 appreciate help on:
 
 1. **Waiters** – Waiter configurations are located in the apis directory.
