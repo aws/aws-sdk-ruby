@@ -1,6 +1,6 @@
 module Aws
   module Resource
-    module HasOperations
+    module OperationMethods
 
       # @param [Symbol] name
       # @return [Operation] Returns the named operation.

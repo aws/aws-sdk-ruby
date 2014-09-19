@@ -41,7 +41,7 @@ module Aws
     class Batch
 
       include Enumerable
-      extend HasOperations
+      extend OperationMethods
 
       # @param [Array<Resource>] resources
       # @option options [Seahorse::Client::Response] :response

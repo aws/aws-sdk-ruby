@@ -2,7 +2,7 @@ module Aws
   module Resource
     class Base
 
-      extend HasOperations
+      extend OperationMethods
 
       # @overload initialize(options = {})
       # @overload initialize(*identifiers, options = {})
