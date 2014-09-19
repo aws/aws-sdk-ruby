@@ -197,16 +197,10 @@ module Aws
     # @api private
     def service_added(&block)
       callback = Proc.new
-      services.each(&callback)
-      @service_added_callbacks << callback
-    end
-
-    # @api private
-    def services(&block)
-      return enum_for(:services) unless block_given?
       @services.each do |svc_name, (svc_module, options)|
         yield(svc_name, svc_module, options)
       end
+      @service_added_callbacks << callback
     end
 
     # @api private

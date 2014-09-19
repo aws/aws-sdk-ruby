@@ -1,7 +1,7 @@
 def service_names
   line = "    "
   service_names = ""
-  Aws.services.each do |name, _, _|
+  Aws::SERVICE_MODULE_NAMES.each do |name|
     if (line + name).size > 72
       service_names << line.sub(/, $/, '')
       service_names << "\n"
@@ -72,9 +72,10 @@ end
 desc "List availalbe operation names for a service"
 task "operations:svc" => "operations"
 
-Aws.services.each do |svc_name, svc_module, _|
+Aws::SERVICE_MODULE_NAMES.each do |svc_name|
 
   svc_identifier = svc_name.downcase
+  svc_module = Aws.const_get(svc_name)
 
   task "handlers:#{svc_identifier}" do
     print_handlers(client(svc_module).handlers)
