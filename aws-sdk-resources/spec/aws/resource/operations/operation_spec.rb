@@ -30,12 +30,12 @@ module Aws
               with(param:'value').
               and_return(response)
 
-            resource_class = Resource.define(double('client-class'), ['id'])
+            resource_class = Class.new(Resource::Base)
             resource_class.add_operation(:action, Operation.new(
               request: Request.new(method_name:'operation')
             ))
 
-            resource = resource_class.new(id:'id', client:client)
+            resource = resource_class.new(client:client)
             resp = resource.action(param:'value')
 
             expect(resp).to be(response)

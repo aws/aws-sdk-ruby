@@ -24,7 +24,7 @@ module Aws
         context '#call' do
 
           it 'calls the builder, returning the resource' do
-            resource_class = Resource.define(double('client-class'), ['id'])
+            resource_class = new_resource_class(identifiers: [:id])
             resource_class.add_operation(:get_linked, ReferenceOperation.new(
               builder: Builder.new(resource_class:resource_class, sources:[
                 BuilderSources::DataMember.new('ids[]', 'id')

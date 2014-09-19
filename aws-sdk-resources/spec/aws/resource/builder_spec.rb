@@ -13,7 +13,7 @@ module Aws
 
       let(:parent) { double('resource-parent-object', client:client) }
 
-      let(:resource_class) { Resource.define(double('client-class')) }
+      let(:resource_class) { Class.new(Resource::Base) }
 
       context '#resource_class' do
 
@@ -100,7 +100,7 @@ module Aws
             data: { 'ids' => %w(id1 id2) },
             client: double('client')
           )
-          resource_class = Resource.define(double('client-class'), [:id])
+          resource_class = new_resource_class(identifiers:[:id])
           resource_class.const_set(:Batch, Class.new(Resource::Batch))
           builder = Builder.new(resource_class:resource_class, sources:[
             BuilderSources::DataMember.new('ids[]', 'id'),

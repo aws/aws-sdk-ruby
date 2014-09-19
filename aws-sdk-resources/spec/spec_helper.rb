@@ -11,3 +11,13 @@ def fixture_path(*parts)
     *parts
   ]))
 end
+
+def new_resource_class(options = {})
+  resource_class = Class.new(Aws::Resource::Base)
+  resource_class.client_class = options[:client_class]
+  Array(options[:identifiers]).each do |identifier|
+    resource_class.add_identifier(identifier)
+  end
+  resource_class
+
+end

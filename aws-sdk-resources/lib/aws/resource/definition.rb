@@ -36,7 +36,8 @@ module Aws
 
       def build_resource_classes(namespace)
         each_definition do |name, definition|
-          resource_class = Base.define(namespace::Client)
+          resource_class = Class.new(Base)
+          resource_class.client_class = namespace::Client
           resource_class.resource_name = name
           (definition['identifiers'] || []).each do |identifier|
             resource_class.add_identifier(underscore(identifier['name']))

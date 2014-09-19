@@ -54,7 +54,7 @@ module Aws
 
           it 'calls the request, passing the response onto the builder' do
 
-            resource_class = Resource.define(double('client-class'), ['id'])
+            resource_class = new_resource_class(identifiers: [:id])
             resource_class.const_set(:Batch, Class.new(Batch))
             resource_class.add_operation(:linked, EnumerateResourceOperation.new(
               request: Request.new(method_name:'list_resources'),

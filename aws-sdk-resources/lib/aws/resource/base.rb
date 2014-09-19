@@ -95,18 +95,6 @@ module Aws
         # @return [Operations::DataOperation, nil]
         attr_accessor :load_operation
 
-        # @param [Class<Seahorse::Client::Base>] client_class
-        # @param [Array<Symbol>] identifiers
-        # @return [Class<Resource>] Returns a new resource subclass.
-        def define(client_class, identifiers = [])
-          klass = Class.new(self)
-          klass.client_class = client_class
-          identifiers.each do |identifier|
-            klass.add_identifier(identifier)
-          end
-          klass
-        end
-
         # @return [Array<Symbol>]
         # @see add_identifier
         # @see #identifiers

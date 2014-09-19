@@ -45,7 +45,7 @@ module Aws
             expect(client).to receive(:operation).
               and_return(double('response', data:{'path' => data}))
 
-            resource_class = Resource.define(double('client-class'), ['id'])
+            resource_class = new_resource_class(identifiers: [:id])
             resource_class.load_operation = DataOperation.new(
               request: Request.new(method_name:'operation'),
               path: 'path')
@@ -61,7 +61,7 @@ module Aws
             client = double('client')
             expect(client).to receive(:operation).and_return(response)
 
-            resource_class = Resource.define(double('client-class'), ['id'])
+            resource_class = new_resource_class(identifiers: [:id])
             resource_class.load_operation = DataOperation.new(
               request: Request.new(method_name:'operation'),
               path: '$')

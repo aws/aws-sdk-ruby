@@ -10,7 +10,9 @@ module Aws
 
       let(:resource_name) { 'Aws::Resources::Example' }
 
-      let(:resource_class) { Base.define(client_class) }
+      let(:resource_class) {
+        Class.new(Base).tap { |klass| klass.client_class = client_class }
+      }
 
       let(:resource) { resource_class.new }
 
@@ -188,21 +190,6 @@ module Aws
       end
 
       describe 'class methods' do
-
-        describe '.define' do
-
-          it 'returns a subclass of Resource' do
-            resource_class = Base.define(double('client-class'))
-            expect(resource_class.ancestors).to include(Base)
-          end
-
-          it 'populates the default client class' do
-            client_class = double('client-class')
-            resource_class = Base.define(client_class)
-            expect(resource_class.client_class).to be(client_class)
-          end
-
-        end
 
         describe 'identifiers' do
 

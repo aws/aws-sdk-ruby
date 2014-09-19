@@ -1,8 +1,8 @@
 require 'aws-sdk-core'
 
 module Aws
-  module Resource
 
+  module Resource
     autoload :Base, 'aws/resource/base'
     autoload :Batch, 'aws/resource/batch'
     autoload :Builder, 'aws/resource/builder'
@@ -17,13 +17,6 @@ module Aws
     autoload :RequestParams, 'aws/resource/request_params'
     autoload :Source, 'aws/resource/source'
     autoload :Validator, 'aws/resource/validator'
-
-    # @see Base.define
-    # @api private
-    def self.define(*args)
-      Base.define(*args)
-    end
-
   end
 
   service_added do |_, svc_module, options|

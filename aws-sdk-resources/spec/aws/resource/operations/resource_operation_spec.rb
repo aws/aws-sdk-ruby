@@ -63,7 +63,7 @@ module Aws
               with(param:'param-value').
               and_return(response)
 
-            resource_class = Resource.define(double('client-class'), ['id'])
+            resource_class = new_resource_class(identifiers: [:id])
 
             request = Request.new(method_name: 'operation_name')
             builder = Builder.new(resource_class:resource_class, sources:[
