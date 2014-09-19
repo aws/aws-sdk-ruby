@@ -1,4 +1,3 @@
-require 'aws/resource/options'
 require 'jamespath'
 
 module Aws

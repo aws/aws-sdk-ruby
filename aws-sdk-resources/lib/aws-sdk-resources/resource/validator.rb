@@ -1,13 +1,10 @@
 require 'multi_json'
 require 'json-schema'
-
-require 'aws/resource/validator/context'
-require 'aws/resource/validator/rule'
-
-require 'aws/resource/validator/shape_validator'
-require 'aws/resource/validator/identifier_validator'
-
-require 'aws/resource/validator/operation_validator'
+require 'aws-sdk-resources/resource/validator/context'
+require 'aws-sdk-resources/resource/validator/rule'
+require 'aws-sdk-resources/resource/validator/shape_validator'
+require 'aws-sdk-resources/resource/validator/identifier_validator'
+require 'aws-sdk-resources/resource/validator/operation_validator'
 
 module Aws
   module Resource

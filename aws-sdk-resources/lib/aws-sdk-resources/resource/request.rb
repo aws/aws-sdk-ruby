@@ -1,5 +1,3 @@
-require 'aws/resource/options'
-
 module Aws
   module Resource
     class Request
