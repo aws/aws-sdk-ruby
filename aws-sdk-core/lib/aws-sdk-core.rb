@@ -15,7 +15,7 @@ module Aws
   GEM_ROOT = File.dirname(File.dirname(__FILE__))
 
   # @api private
-  SRC = File.join(GEM_ROOT, 'lib', 'aws-sdk-core')
+  APIS_DIR = File.join(GEM_ROOT, 'apis')
 
   # @api private
   # services
@@ -64,125 +64,125 @@ module Aws
   @service_added_callbacks = []
 
   SERVICE_MODULE_NAMES.each do |const_name|
-    autoload const_name, "#{SRC}/#{const_name.downcase}.rb"
+    autoload const_name, "aws-sdk-core/#{const_name.downcase}"
   end
 
-  autoload :Client, "#{SRC}/client"
-  autoload :CredentialProviderChain, "#{SRC}/credential_provider_chain"
-  autoload :Credentials, "#{SRC}/credentials"
-  autoload :EmptyStructure, "#{SRC}/empty_structure"
-  autoload :EndpointProvider, "#{SRC}/endpoint_provider"
-  autoload :Errors, "#{SRC}/errors"
-  autoload :InstanceProfileCredentials, "#{SRC}/instance_profile_credentials"
-  autoload :PageableResponse, "#{SRC}/pageable_response"
-  autoload :RestBodyHandler, "#{SRC}/rest_body_handler"
-  autoload :Service, "#{SRC}/service"
-  autoload :SharedCredentials, "#{SRC}/shared_credentials"
-  autoload :Structure, "#{SRC}/structure"
-  autoload :TreeHash, "#{SRC}/tree_hash"
-  autoload :VERSION, "#{SRC}/version"
+  autoload :Client, 'aws-sdk-core/client'
+  autoload :CredentialProviderChain, 'aws-sdk-core/credential_provider_chain'
+  autoload :Credentials, 'aws-sdk-core/credentials'
+  autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
+  autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
+  autoload :Errors, 'aws-sdk-core/errors'
+  autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
+  autoload :PageableResponse, 'aws-sdk-core/pageable_response'
+  autoload :RestBodyHandler, 'aws-sdk-core/rest_body_handler'
+  autoload :Service, 'aws-sdk-core/service'
+  autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
+  autoload :Structure, 'aws-sdk-core/structure'
+  autoload :TreeHash, 'aws-sdk-core/tree_hash'
+  autoload :VERSION, 'aws-sdk-core/version'
 
   # @api private
   module Api
-    autoload :Customizer, "#{SRC}/api/customizer"
-    autoload :Documenter, "#{SRC}/api/documenter"
-    autoload :Docstrings, "#{SRC}/api/docstrings"
-    autoload :Manifest, "#{SRC}/api/manifest"
-    autoload :ManifestBuilder, "#{SRC}/api/manifest_builder"
-    autoload :OperationDocumenter, "#{SRC}/api/operation_documenter"
-    autoload :OperationExample, "#{SRC}/api/operation_example"
-    autoload :ServiceCustomizations, "#{SRC}/api/service_customizations"
+    autoload :Customizer, 'aws-sdk-core/api/customizer'
+    autoload :Documenter, 'aws-sdk-core/api/documenter'
+    autoload :Docstrings, 'aws-sdk-core/api/docstrings'
+    autoload :Manifest, 'aws-sdk-core/api/manifest'
+    autoload :ManifestBuilder, 'aws-sdk-core/api/manifest_builder'
+    autoload :OperationDocumenter, 'aws-sdk-core/api/operation_documenter'
+    autoload :OperationExample, 'aws-sdk-core/api/operation_example'
+    autoload :ServiceCustomizations, 'aws-sdk-core/api/service_customizations'
   end
 
   # @api private
   module Json
-    autoload :Builder, "#{SRC}/json/builder"
-    autoload :ErrorHandler, "#{SRC}/json/error_handler"
-    autoload :Parser, "#{SRC}/json/parser"
-    autoload :RestHandler, "#{SRC}/json/rest_handler"
-    autoload :RpcBodyHandler, "#{SRC}/json/rpc_body_handler"
-    autoload :RpcHeadersHandler, "#{SRC}/json/rpc_headers_handler"
-    autoload :SimpleBodyHandler, "#{SRC}/json/simple_body_handler"
+    autoload :Builder, 'aws-sdk-core/json/builder'
+    autoload :ErrorHandler, 'aws-sdk-core/json/error_handler'
+    autoload :Parser, 'aws-sdk-core/json/parser'
+    autoload :RestHandler, 'aws-sdk-core/json/rest_handler'
+    autoload :RpcBodyHandler, 'aws-sdk-core/json/rpc_body_handler'
+    autoload :RpcHeadersHandler, 'aws-sdk-core/json/rpc_headers_handler'
+    autoload :SimpleBodyHandler, 'aws-sdk-core/json/simple_body_handler'
   end
 
   # @api private
   module Paging
-    autoload :NullPager, "#{SRC}/paging/null_pager"
-    autoload :NullProvider, "#{SRC}/paging/null_provider"
-    autoload :Pager, "#{SRC}/paging/pager"
-    autoload :Provider, "#{SRC}/paging/provider"
+    autoload :NullPager, 'aws-sdk-core/paging/null_pager'
+    autoload :NullProvider, 'aws-sdk-core/paging/null_provider'
+    autoload :Pager, 'aws-sdk-core/paging/pager'
+    autoload :Provider, 'aws-sdk-core/paging/provider'
   end
 
   module Plugins
-    autoload :CSDConditionalSigning, "#{SRC}/plugins/csd_conditional_signing"
-    autoload :DynamoDBExtendedRetries, "#{SRC}/plugins/dynamodb_extended_retries"
-    autoload :DynamoDBSimpleAttributes, "#{SRC}/plugins/dynamodb_simple_attributes"
-    autoload :EC2CopyEncryptedSnapshot, "#{SRC}/plugins/ec2_copy_encrypted_snapshot"
-    autoload :GlacierAccountId, "#{SRC}/plugins/glacier_account_id"
-    autoload :GlacierApiVersion, "#{SRC}/plugins/glacier_api_version"
-    autoload :GlacierChecksums, "#{SRC}/plugins/glacier_checksums"
-    autoload :GlobalConfiguration, "#{SRC}/plugins/global_configuration"
-    autoload :RegionalEndpoint, "#{SRC}/plugins/regional_endpoint"
-    autoload :ResponsePaging, "#{SRC}/plugins/response_paging"
-    autoload :RequestSigner, "#{SRC}/plugins/request_signer"
-    autoload :RetryErrors, "#{SRC}/plugins/retry_errors"
-    autoload :Route53IdFix, "#{SRC}/plugins/route_53_id_fix"
-    autoload :S3BucketDns, "#{SRC}/plugins/s3_bucket_dns"
-    autoload :S3CompleteMultipartUploadFix, "#{SRC}/plugins/s3_complete_multipart_upload_fix"
-    autoload :S3Expect100Continue, "#{SRC}/plugins/s3_expect_100_continue"
-    autoload :S3GetBucketLocationFix, "#{SRC}/plugins/s3_get_bucket_location_fix"
-    autoload :S3LocationConstraint, "#{SRC}/plugins/s3_location_constraint"
-    autoload :S3Md5s, "#{SRC}/plugins/s3_md5s"
-    autoload :S3Redirects, "#{SRC}/plugins/s3_redirects"
-    autoload :S3SseCpk, "#{SRC}/plugins/s3_sse_cpk"
-    autoload :S3UrlEncodedKeys, "#{SRC}/plugins/s3_url_encoded_keys"
-    autoload :SQSQueueUrls, "#{SRC}/plugins/sqs_queue_urls"
-    autoload :SWFReadTimeouts, "#{SRC}/plugins/swf_read_timeouts"
-    autoload :UserAgent, "#{SRC}/plugins/user_agent"
+    autoload :CSDConditionalSigning, 'aws-sdk-core/plugins/csd_conditional_signing'
+    autoload :DynamoDBExtendedRetries, 'aws-sdk-core/plugins/dynamodb_extended_retries'
+    autoload :DynamoDBSimpleAttributes, 'aws-sdk-core/plugins/dynamodb_simple_attributes'
+    autoload :EC2CopyEncryptedSnapshot, 'aws-sdk-core/plugins/ec2_copy_encrypted_snapshot'
+    autoload :GlacierAccountId, 'aws-sdk-core/plugins/glacier_account_id'
+    autoload :GlacierApiVersion, 'aws-sdk-core/plugins/glacier_api_version'
+    autoload :GlacierChecksums, 'aws-sdk-core/plugins/glacier_checksums'
+    autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
+    autoload :RegionalEndpoint, 'aws-sdk-core/plugins/regional_endpoint'
+    autoload :ResponsePaging, 'aws-sdk-core/plugins/response_paging'
+    autoload :RequestSigner, 'aws-sdk-core/plugins/request_signer'
+    autoload :RetryErrors, 'aws-sdk-core/plugins/retry_errors'
+    autoload :Route53IdFix, 'aws-sdk-core/plugins/route_53_id_fix'
+    autoload :S3BucketDns, 'aws-sdk-core/plugins/s3_bucket_dns'
+    autoload :S3CompleteMultipartUploadFix, 'aws-sdk-core/plugins/s3_complete_multipart_upload_fix'
+    autoload :S3Expect100Continue, 'aws-sdk-core/plugins/s3_expect_100_continue'
+    autoload :S3GetBucketLocationFix, 'aws-sdk-core/plugins/s3_get_bucket_location_fix'
+    autoload :S3LocationConstraint, 'aws-sdk-core/plugins/s3_location_constraint'
+    autoload :S3Md5s, 'aws-sdk-core/plugins/s3_md5s'
+    autoload :S3Redirects, 'aws-sdk-core/plugins/s3_redirects'
+    autoload :S3SseCpk, 'aws-sdk-core/plugins/s3_sse_cpk'
+    autoload :S3UrlEncodedKeys, 'aws-sdk-core/plugins/s3_url_encoded_keys'
+    autoload :SQSQueueUrls, 'aws-sdk-core/plugins/sqs_queue_urls'
+    autoload :SWFReadTimeouts, 'aws-sdk-core/plugins/swf_read_timeouts'
+    autoload :UserAgent, 'aws-sdk-core/plugins/user_agent'
 
     module Protocols
-      autoload :EC2, "#{SRC}/plugins/protocols/ec2"
-      autoload :JsonRpc, "#{SRC}/plugins/protocols/json_rpc"
-      autoload :Query, "#{SRC}/plugins/protocols/query"
-      autoload :RestJson, "#{SRC}/plugins/protocols/rest_json"
-      autoload :RestXml, "#{SRC}/plugins/protocols/rest_xml"
+      autoload :EC2, 'aws-sdk-core/plugins/protocols/ec2'
+      autoload :JsonRpc, 'aws-sdk-core/plugins/protocols/json_rpc'
+      autoload :Query, 'aws-sdk-core/plugins/protocols/query'
+      autoload :RestJson, 'aws-sdk-core/plugins/protocols/rest_json'
+      autoload :RestXml, 'aws-sdk-core/plugins/protocols/rest_xml'
     end
 
   end
 
   # @api private
   module Query
-    autoload :EC2ParamBuilder, "#{SRC}/query/ec2_param_builder"
-    autoload :Handler, "#{SRC}/query/handler"
-    autoload :Param, "#{SRC}/query/param"
-    autoload :ParamBuilder, "#{SRC}/query/param_builder"
-    autoload :ParamList, "#{SRC}/query/param_list"
+    autoload :EC2ParamBuilder, 'aws-sdk-core/query/ec2_param_builder'
+    autoload :Handler, 'aws-sdk-core/query/handler'
+    autoload :Param, 'aws-sdk-core/query/param'
+    autoload :ParamBuilder, 'aws-sdk-core/query/param_builder'
+    autoload :ParamList, 'aws-sdk-core/query/param_list'
   end
 
   # @api private
   module Signers
-    autoload :Base, "#{SRC}/signers/base"
-    autoload :Handler, "#{SRC}/signers/handler"
-    autoload :S3, "#{SRC}/signers/s3"
-    autoload :V2, "#{SRC}/signers/v2"
-    autoload :V3, "#{SRC}/signers/v3"
-    autoload :V4, "#{SRC}/signers/v4"
+    autoload :Base, 'aws-sdk-core/signers/base'
+    autoload :Handler, 'aws-sdk-core/signers/handler'
+    autoload :S3, 'aws-sdk-core/signers/s3'
+    autoload :V2, 'aws-sdk-core/signers/v2'
+    autoload :V3, 'aws-sdk-core/signers/v3'
+    autoload :V4, 'aws-sdk-core/signers/v4'
   end
 
   module Waiters
-    autoload :Errors, "#{SRC}/waiters/errors"
-    autoload :NullProvider, "#{SRC}/waiters/null_provider"
-    autoload :Provider, "#{SRC}/waiters/provider"
-    autoload :Waiter, "#{SRC}/waiters/waiter"
+    autoload :Errors, 'aws-sdk-core/waiters/errors'
+    autoload :NullProvider, 'aws-sdk-core/waiters/null_provider'
+    autoload :Provider, 'aws-sdk-core/waiters/provider'
+    autoload :Waiter, 'aws-sdk-core/waiters/waiter'
   end
 
   # @api private
   module Xml
-    autoload :Builder, "#{SRC}/xml/builder"
-    autoload :DefaultList,  "#{SRC}/xml/default_list"
-    autoload :ErrorHandler,  "#{SRC}/xml/error_handler"
-    autoload :Parser, "#{SRC}/xml/parser"
-    autoload :RestHandler, "#{SRC}/xml/rest_handler"
+    autoload :Builder, 'aws-sdk-core/xml/builder'
+    autoload :DefaultList,  'aws-sdk-core/xml/default_list'
+    autoload :ErrorHandler,  'aws-sdk-core/xml/error_handler'
+    autoload :Parser, 'aws-sdk-core/xml/parser'
+    autoload :RestHandler, 'aws-sdk-core/xml/rest_handler'
   end
 
   class << self

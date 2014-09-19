@@ -1,5 +1,5 @@
 Aws.add_service(:SWF, {
-  api: File.join(Aws::GEM_ROOT, 'apis', 'SWF.api.json'),
-  docs: File.join(Aws::GEM_ROOT, 'apis', 'SWF.docs.json'),
-  paginators: File.join(Aws::GEM_ROOT, 'apis', 'SWF.paginators.json'),
+  api: File.join(Aws::APIS_DIR, 'SWF.api.json'),
+  docs: File.join(Aws::APIS_DIR, 'SWF.docs.json'),
+  paginators: File.join(Aws::APIS_DIR, 'SWF.paginators.json'),
 })

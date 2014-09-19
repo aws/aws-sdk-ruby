@@ -1,5 +1,5 @@
 Aws.add_service(:CloudFormation, {
-  api: File.join(Aws::GEM_ROOT, 'apis', 'CloudFormation.api.json'),
-  docs: File.join(Aws::GEM_ROOT, 'apis', 'CloudFormation.docs.json'),
-  paginators: File.join(Aws::GEM_ROOT, 'apis', 'CloudFormation.paginators.json'),
+  api: File.join(Aws::APIS_DIR, 'CloudFormation.api.json'),
+  docs: File.join(Aws::APIS_DIR, 'CloudFormation.docs.json'),
+  paginators: File.join(Aws::APIS_DIR, 'CloudFormation.paginators.json'),
 })

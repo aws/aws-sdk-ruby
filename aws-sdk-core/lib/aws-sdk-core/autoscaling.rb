@@ -1,5 +1,5 @@
 Aws.add_service(:AutoScaling, {
-  api: File.join(Aws::GEM_ROOT, 'apis', 'AutoScaling.api.json'),
-  docs: File.join(Aws::GEM_ROOT, 'apis', 'AutoScaling.docs.json'),
-  paginators: File.join(Aws::GEM_ROOT, 'apis', 'AutoScaling.paginators.json'),
+  api: File.join(Aws::APIS_DIR, 'AutoScaling.api.json'),
+  docs: File.join(Aws::APIS_DIR, 'AutoScaling.docs.json'),
+  paginators: File.join(Aws::APIS_DIR, 'AutoScaling.paginators.json'),
 })

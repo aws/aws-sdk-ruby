@@ -1,5 +1,5 @@
 Aws.add_service(:ElasticTranscoder, {
-  api: File.join(Aws::GEM_ROOT, 'apis', 'ElasticTranscoder.api.json'),
-  docs: File.join(Aws::GEM_ROOT, 'apis', 'ElasticTranscoder.docs.json'),
-  paginators: File.join(Aws::GEM_ROOT, 'apis', 'ElasticTranscoder.paginators.json'),
+  api: File.join(Aws::APIS_DIR, 'ElasticTranscoder.api.json'),
+  docs: File.join(Aws::APIS_DIR, 'ElasticTranscoder.docs.json'),
+  paginators: File.join(Aws::APIS_DIR, 'ElasticTranscoder.paginators.json'),
 })

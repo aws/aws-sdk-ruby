@@ -1,5 +1,5 @@
 Aws.add_service(:Support, {
-  api: File.join(Aws::GEM_ROOT, 'apis', 'Support.api.json'),
-  docs: File.join(Aws::GEM_ROOT, 'apis', 'Support.docs.json'),
-  paginators: File.join(Aws::GEM_ROOT, 'apis', 'Support.paginators.json'),
+  api: File.join(Aws::APIS_DIR, 'Support.api.json'),
+  docs: File.join(Aws::APIS_DIR, 'Support.docs.json'),
+  paginators: File.join(Aws::APIS_DIR, 'Support.paginators.json'),
 })

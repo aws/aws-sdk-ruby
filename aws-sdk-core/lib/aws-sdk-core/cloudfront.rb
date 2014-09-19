@@ -1,6 +1,6 @@
 Aws.add_service(:CloudFront, {
-  api: File.join(Aws::GEM_ROOT, 'apis', 'CloudFront.api.json'),
-  docs: File.join(Aws::GEM_ROOT, 'apis', 'CloudFront.docs.json'),
-  paginators: File.join(Aws::GEM_ROOT, 'apis', 'CloudFront.paginators.json'),
-  waiters: File.join(Aws::GEM_ROOT, 'apis', 'CloudFront.waiters.json'),
+  api: File.join(Aws::APIS_DIR, 'CloudFront.api.json'),
+  docs: File.join(Aws::APIS_DIR, 'CloudFront.docs.json'),
+  paginators: File.join(Aws::APIS_DIR, 'CloudFront.paginators.json'),
+  waiters: File.join(Aws::APIS_DIR, 'CloudFront.waiters.json'),
 })

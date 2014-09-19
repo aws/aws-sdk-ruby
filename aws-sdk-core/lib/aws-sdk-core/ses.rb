@@ -1,6 +1,6 @@
 Aws.add_service(:SES, {
-  api: File.join(Aws::GEM_ROOT, 'apis', 'SES.api.json'),
-  docs: File.join(Aws::GEM_ROOT, 'apis', 'SES.docs.json'),
-  paginators: File.join(Aws::GEM_ROOT, 'apis', 'SES.paginators.json'),
-  waiters: File.join(Aws::GEM_ROOT, 'apis', 'SES.waiters.json'),
+  api: File.join(Aws::APIS_DIR, 'SES.api.json'),
+  docs: File.join(Aws::APIS_DIR, 'SES.docs.json'),
+  paginators: File.join(Aws::APIS_DIR, 'SES.paginators.json'),
+  waiters: File.join(Aws::APIS_DIR, 'SES.waiters.json'),
 })
