@@ -1,6 +1,15 @@
 Next Release (TBD)
 ------------------
 
+* Feature - S3 Presigned URLs - Added support for pre-signed URLs for
+  Amazon S3.
+
+  ```ruby
+  presigner = Aws::S3::Presigner.new
+  presigner.presigned_url(:put_object, bucket:'aws-sdk', key:'key')
+  #=> "https://aws-sdk.s3.amazonaws.com/key?..."
+  ```
+
 * Feature - Autoload - Service modules / classes now autoload upon first
   use. This speeds up gem load time significantly.
 
