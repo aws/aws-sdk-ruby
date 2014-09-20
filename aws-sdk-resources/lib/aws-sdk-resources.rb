@@ -1,31 +1,33 @@
 require 'aws-sdk-core'
 
 module Aws
+  module Resources
 
-  module Resource
-    autoload :Base, 'aws/resource/base'
-    autoload :Batch, 'aws/resource/batch'
-    autoload :Builder, 'aws/resource/builder'
-    autoload :BuilderSources, 'aws/resource/builder_sources'
-    autoload :Collection, 'aws/resource/collection'
-    autoload :Definition, 'aws/resource/definition'
-    autoload :Documenter, 'aws/resource/documenter'
-    autoload :Errors, 'aws/resource/errors'
-    autoload :Operations, 'aws/resource/operations'
-    autoload :OperationMethods, 'aws/resource/operation_methods'
-    autoload :Request, 'aws/resource/request'
-    autoload :RequestParams, 'aws/resource/request_params'
-    autoload :Source, 'aws/resource/source'
-    autoload :Validator, 'aws/resource/validator'
+    autoload :Batch, 'aws-sdk-resources/batch'
+    autoload :Builder, 'aws-sdk-resources/builder'
+    autoload :BuilderSources, 'aws-sdk-resources/builder_sources'
+    autoload :Collection, 'aws-sdk-resources/collection'
+    autoload :Definition, 'aws-sdk-resources/definition'
+    autoload :Documenter, 'aws-sdk-resources/documenter'
+    autoload :Errors, 'aws-sdk-resources/errors'
+    autoload :Operations, 'aws-sdk-resources/operations'
+    autoload :OperationMethods, 'aws-sdk-resources/operation_methods'
+    autoload :Options, 'aws-sdk-resources/options'
+    autoload :Request, 'aws-sdk-resources/request'
+    autoload :RequestParams, 'aws-sdk-resources/request_params'
+    autoload :Resource, 'aws-sdk-resources/resource'
+    autoload :Source, 'aws-sdk-resources/source'
+    autoload :Validator, 'aws-sdk-resources/validator'
+
   end
 
   service_added do |_, svc_module, options|
     definition = options[:resources]
     definition = case definition
-      when nil then Resource::Definition.new({})
-      when Resource::Definition then definition
-      when Hash then Resource::Definition.new(definition)
-      when String then Resource::Definition.new(Aws.load_json(definition), source_path: definition)
+      when nil then Resources::Definition.new({})
+      when Resources::Definition then definition
+      when Hash then Resources::Definition.new(definition)
+      when String then Resources::Definition.new(Aws.load_json(definition), source_path: definition)
       else raise ArgumentError, "invalid resource definition #{definition}"
     end
     definition.apply(svc_module)
