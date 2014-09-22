@@ -61,7 +61,7 @@ OptionParser.new do |opts|
     options[:color] = value
   end
 
-  opts.on("--profile PROFLIE", "Use a specific profile from your credential file.") do |value|
+  opts.on("--profile PROFILE", "Use a specific profile from your credential file.") do |value|
     options[:profile] = value
   end
 
