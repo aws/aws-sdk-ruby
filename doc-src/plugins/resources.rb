@@ -101,13 +101,15 @@ a default client will be constructed.
     positional = <<-DOCSTRING.strip
 @overload initialize(#{resource_class.identifiers.map(&:to_s).join(", ")}, options = {})
 #{resource_class.identifiers.map { |n| "  @param [String] #{n}" }.join("\n")}
-  @option options [Client] :client
+  @option options [Client] :client When `:client is not given, the options hash
+    is used to construct a new {Client} object.
     DOCSTRING
 
     hash_style = <<-DOCSTRING.strip
 @overload initialize(options = {})
 #{resource_class.identifiers.map { |n| "  @option options [required,String] :#{n}" }.join("\n")}
-  @option options [Client] :client
+  @option options [Client] :client When `:client is not given, the options hash
+    is used to construct a new {Client} object.
     DOCSTRING
 
     m = YARD::CodeObjects::MethodObject.new(yard_class, :initialize)

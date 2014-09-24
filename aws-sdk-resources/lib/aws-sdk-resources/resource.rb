@@ -6,12 +6,14 @@ module Aws
 
       # @overload initialize(options = {})
       # @overload initialize(*identifiers, options = {})
+      # @param options Options except `:data` and identifier options are
+      #   used to construct a {Client} unless `:client` is given.
       # @option options [Client] :client
       def initialize(*args)
-        options = args.last.is_a?(Hash) ? args.pop : {}
+        options = args.last.is_a?(Hash) ? args.pop.dup : {}
         @identifiers = extract_identifiers(args, options)
-        @client = extract_client(options[:client])
-        @data = options[:data]
+        @data = options.delete(:data)
+        @client = extract_client(options)
       end
 
       # Marked private to prevent double documentation
@@ -56,16 +58,12 @@ module Aws
 
       private
 
-      def extract_client(client)
-        case client
-        when nil then build_client
-        when Hash then build_client(client)
-        else client
+      def extract_client(options)
+        if options[:client]
+          options[:client]
+        else
+          self.class.client_class.new(options)
         end
-      end
-
-      def build_client(config = {})
-        self.class.client_class.new(config)
       end
 
       def extract_identifiers(args, options)
@@ -74,7 +72,7 @@ module Aws
           if args[n]
             identifiers[name] = args[n]
           elsif options.key?(name)
-            identifiers[name] = options[name]
+            identifiers[name] = options.delete(name)
           else
             raise ArgumentError, "missing required option #{name.inspect}"
           end

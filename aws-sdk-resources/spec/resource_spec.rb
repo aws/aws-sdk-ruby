@@ -67,8 +67,9 @@ module Aws
           expect(client_class).to receive(:new).
             with(:foo => 'bar').
             and_return(client)
+          resource_class.add_identifier(:id)
           resource_class.client_class = client_class
-          resource = resource_class.new(client: { foo: 'bar' })
+          resource = resource_class.new(id:'id', data:'ignored', foo: 'bar')
           expect(resource.client).to be(client)
         end
 
