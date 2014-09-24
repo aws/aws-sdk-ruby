@@ -137,6 +137,7 @@ xyz:1
       end
 
       context '#normalized_querystring' do
+
         it 'enforces the trailing = character on valueless keys' do
           input = "other=&test&x-amz-header=foo"
           expected = "other=&test=&x-amz-header=foo"
@@ -150,8 +151,15 @@ xyz:1
           actual = signer.normalized_querystring(input)
           expect(actual).to eq(expected)
         end
-      end
 
+        it 'sorts by name, params with same name stay in the same order' do
+          input = "q.options=abc&q=xyz&q=mno"
+          expected = "q=xyz&q=mno&q.options=abc"
+          actual = signer.normalized_querystring(input)
+          expect(actual).to eq(expected)
+        end
+
+      end
     end
   end
 end

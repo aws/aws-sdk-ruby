@@ -123,7 +123,7 @@ module Aws
         [
           request.http_method,
           path(request.endpoint),
-          normalized_querystring(request.endpoint.query),
+          normalized_querystring(request.endpoint.query || ''),
           canonical_headers(request) + "\n",
           signed_headers(request),
           body_digest
@@ -140,15 +140,14 @@ module Aws
       end
 
       def normalized_querystring(querystring)
-        if querystring
-          querystring.split('&').map do |item|
-            if /=/.match(item)
-              item
-            else
-              item + "="
-            end
-          end.sort.join('&')
+        params = querystring.split('&')
+        params = params.map { |p| p.match(/=/) ? p : p + '=' }
+        params = params.sort do |left, right|
+          left_name = left.split('=').first
+          right_name = right.split('=').first
+          left_name == right_name ? -1 : left_name <=> right_name
         end
+        params.join('&')
       end
 
       def signed_headers(request)
