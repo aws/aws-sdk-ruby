@@ -45,10 +45,12 @@ module AWS
           provider.providers[4].should be_a(EC2Provider)
         end
 
-        it 'includes a shared credential profile when Dir.home is gettable' do
-          Dir.stub(:home).and_return('~/')
-          provider = DefaultProvider.new
-          provider.providers[4].should be_a(SharedCredentialFileProvider)
+        if RUBY_VERSION >= '1.9'
+          it 'includes a shared credential profile when Dir.home is gettable' do
+            Dir.stub(:home).and_return('~/')
+            provider = DefaultProvider.new
+            provider.providers[4].should be_a(SharedCredentialFileProvider)
+          end
         end
 
         it 'passes static credentials to a static credential provider' do
@@ -436,6 +438,14 @@ module AWS
             :path => '/no/file/here')
           provider.set?.should be_false
         end
+
+        it 'requires a path when RUBY_VERSION is less than 1.9' do
+          stub_const('RUBY_VERSION', '1.8.7')
+          lambda {
+            SharedCredentialFileProvider.new
+          }.should raise_error(ArgumentError, /specify the :path to your shared credential file/)
+        end
+
       end
 
       describe EC2Provider do

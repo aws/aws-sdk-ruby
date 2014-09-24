@@ -272,10 +272,9 @@ module AWS
 
         def shared_credential_file_path
           if RUBY_VERSION < '1.9'
-            raise ArgumentError(
-              "Must specify the :path to your shared credential file when using"\
-                " Ruby #{RUBY_VERSION}"
-            )
+            msg = "Must specify the :path to your shared credential file when using"
+            msg << " Ruby #{RUBY_VERSION}"
+            raise ArgumentError, msg
           else
             File.join(Dir.home, '.aws', 'credentials')
           end
