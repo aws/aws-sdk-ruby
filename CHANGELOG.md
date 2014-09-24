@@ -17,6 +17,9 @@ Next Release (TBD)
   the normalized querystring. Query params without a value now consistantly
   receive a trailing `=`.
 
+* Issue - SigV4 - Resolved an issue with how version 4 signatures generated
+  the normalized querystring. Query params are now sorted by name.
+
 2.0.0.rc16 (2014-09-11)
 ------------------
 

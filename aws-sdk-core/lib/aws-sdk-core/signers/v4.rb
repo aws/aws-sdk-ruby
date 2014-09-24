@@ -142,11 +142,7 @@ module Aws
       def normalized_querystring(querystring)
         params = querystring.split('&')
         params = params.map { |p| p.match(/=/) ? p : p + '=' }
-        params = params.sort do |left, right|
-          left_name = left.split('=').first
-          right_name = right.split('=').first
-          left_name == right_name ? -1 : left_name <=> right_name
-        end
+        params = params.sort { |a, b| a.split('=')[0] <=> b.split('=')[0] }
         params.join('&')
       end
 
