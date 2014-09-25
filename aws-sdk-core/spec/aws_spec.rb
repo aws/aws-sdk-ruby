@@ -52,6 +52,14 @@ module Aws
       expect(Aws::DummyService::Client.ancestors).to include(Seahorse::Client::Base)
     end
 
+    it 'defines a client class that requires a region' do
+      Aws.add_service('DummyService')
+      Aws.config = {}
+      expect {
+        Aws::DummyService::Client.new
+      }.to raise_error(Errors::MissingRegionError)
+    end
+
     it 'loads API with relative paths from the GEM_ROOT' do
       path = File.join(Aws::GEM_ROOT, 'apis/S3.api.json')
       api = StringIO.new(File.read(path))

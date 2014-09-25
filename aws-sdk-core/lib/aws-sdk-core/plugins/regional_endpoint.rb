@@ -29,7 +29,9 @@ module Aws
 
       def after_initialize(client)
         if client.config.region.nil? or client.config.region == ''
-          raise Errors::MissingRegionError
+          msg = "missing region; use :region option or "
+          msg << "export region name to ENV['AWS_REGION']"
+          raise Errors::MissingRegionError, msg
         end
       end
 

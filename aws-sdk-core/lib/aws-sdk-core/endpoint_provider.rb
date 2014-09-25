@@ -12,7 +12,7 @@ module Aws
     # @option options [required, String] :service
     # @option options [required, String] :region
     # @option options [required, String] :scheme
-    # @return [Hash]
+    # @return [String,nil]
     def resolve(options)
       @rules.each do |rule_group|
         if region_matches?(rule_group, options)
@@ -23,7 +23,7 @@ module Aws
           end
         end
       end
-      {}
+      nil
     end
 
     # @option options [required, String] :pattern The endpoint pattern with

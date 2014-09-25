@@ -111,7 +111,7 @@ module Seahorse
 
       # Gives each plugin the opportunity to modify this client.
       def after_initialize(plugins)
-        plugins.each do |plugin|
+        plugins.reverse.each do |plugin|
           plugin.after_initialize(self) if plugin.respond_to?(:after_initialize)
         end
       end
