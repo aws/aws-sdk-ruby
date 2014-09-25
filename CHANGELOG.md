@@ -1,4 +1,4 @@
-Next Release (TBD)
+2.0.0 (2014-09-25)
 ------------------
 
 * Feature - S3 Presigned URLs - Added support for pre-signed URLs for
