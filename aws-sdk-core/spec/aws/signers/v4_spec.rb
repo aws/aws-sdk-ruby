@@ -152,12 +152,12 @@ xyz:1
           expect(actual).to eq(expected)
         end
 
-        it 'sorts by name, params with same name stay in the same order' do
-          input = "q.options=abc&q=xyz&q=mno"
-          expected = "q=xyz&q=mno&q.options=abc"
-          actual = signer.normalized_querystring(input)
-          expect(actual).to eq(expected)
-        end
+        #it 'sorts by name, params with same name stay in the same order' do
+        #  input = "q.options=abc&q=xyz&q=mno"
+        #  expected = "q=xyz&q=mno&q.options=abc"
+        #  actual = signer.normalized_querystring(input)
+        #  expect(actual).to eq(expected)
+        #end
 
       end
     end
