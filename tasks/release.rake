@@ -15,7 +15,7 @@ end
 task 'release:bump-version' do
   # bumps the VERSION file and the `Aws::VERSION` constant
   sh("echo '#{version}' > VERSION")
-  path = 'aws-sdk-core/lib/aws/version.rb'
+  path = 'aws-sdk-core/lib/aws-sdk-core/version.rb'
   file = File.read(path)
   file = file.gsub(/VERSION = '.+?'/, "VERSION = '#{version}'")
   File.open(path, 'w') { |f| f.write(file) }
