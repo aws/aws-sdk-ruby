@@ -224,40 +224,6 @@
     SequenceNumber:
       :sym: :sequence_number
       :type: :string
-- :name: PutRecords
-  :method: :put_records
-  :inputs:
-    Records:
-    - :list:
-      - :structure:
-          Data:
-          - :blob
-          - :required
-          ExplicitHashKey:
-          - :string
-          PartitionKey:
-          - :string
-          - :required
-    - :required
-    StreamName:
-    - :string
-    - :required
-    SequenceNumberForOrdering:
-    - :string
-  :outputs:
-    Records:
-      :sym: :records
-      :type: :hash
-      :members:
-        SequenceNumber:
-          :sym: :sequence_number
-          :type: :string
-        ShardId:
-          :sym: :shard_id
-          :type: :string
-        Message:
-          :sym: :message
-          :type: :string
 - :name: RemoveTagsFromStream
   :method: :remove_tags_from_stream
   :inputs:
