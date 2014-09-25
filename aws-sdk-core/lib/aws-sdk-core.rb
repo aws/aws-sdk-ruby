@@ -295,21 +295,4 @@ module Aws
     svc_module.const_get(:Client).waiters = waiters
   end
 
-  # deprecated = define helper method for client class, this will be
-  # replaced eventually with a helper that returns a resource object
-  # for the service.
-  service_added do |name, svc_module, _|
-    method_name = name.downcase.to_sym
-    define_singleton_method(method_name) do |options={}|
-      unless instance_variable_get("@#{method_name}_warned")
-        instance_variable_set("@#{method_name}_warned", true)
-        msg = "Aws.#{method_name} is deprecated as of v2.0.0.rc14 and will be "
-        msg << "removed as of v2.0.0.0 final; use Aws::#{name}::Client.new "
-        msg << "instead"
-        warn(msg)
-      end
-      svc_module.const_get(:Client).new(options)
-    end
-  end
-
 end
