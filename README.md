@@ -1,18 +1,40 @@
 # AWS SDK for Ruby V2 [![Build Status](https://travis-ci.org/aws/aws-sdk-core-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-core-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-core-ruby.png)](https://codeclimate.com/github/aws/aws-sdk-core-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-core-ruby/badge.png?branch=master)](https://coveralls.io/r/aws/aws-sdk-core-ruby?branch=master)
 
-This library is in a developer preview period.
+This repository contains the code for the V2 AWS SDK for Ruby. Code is organized
+into three gems. Installing `aws-sdk --pre` will install the full v2 Ruby SDK.
 
-We are working on version 2 of the official AWS SDK for Ruby.  This library
-is the first part of our v2 strategy.  AWS SDK Core is an updated set of
-service clients.  Our goal is to make them more flexible and extensible
-than the clients in version 1 of the Ruby SDK.
+* aws-sdk
+  * aws-sdk-resources
+  * aws-sdk-core
 
 For version 1.0 of the Ruby SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
 
 ## Upgrade Notes
 
-During the preview period, there have been some minor backwards incompatible
-updates between release candidates. These changes are summarized below.
+### 2.0.0 stable Upgrading Notes
+
+The `aws-sdk-core` gem has moved from developer preview to a stable 2.0.0
+release. Deprecated interfaces have been removed.
+
+* 2.0.0 stable release of `aws-sdk-core` is now available
+
+      gem install aws-sdk-core
+
+* 2.0.0 previews of `aws-sdk` and `aws-sdk-resources` are now available
+
+      gem install aws-sdk --pre
+
+* Removed deprecated constructor on service modules.
+
+      Aws::EC2.new # removed
+
+      Aws::EC2::Client.new # do this
+
+* Removed deprecated service helpers on Aws module.
+
+      Aws.ec2 # removed
+
+      Aws::EC2::Client.new # use this
 
 ### 2.0.0.rc15 Upgrading Notes
 
@@ -89,15 +111,12 @@ changes before 2.0.0 final.
 
 You can install the AWS SDK Core from rubygems:
 
-    gem install aws-sdk-core --pre
+    gem install aws-sdk-core
 
 If you are using Bundler, we recommend that you express a major version
 dependency (this library uses [semantic versioning](http://semver.org/)):
 
     gem 'aws-sdk-core', '~> 2.0'
-
-Until the final release becomes available on Rubygems, leave off the version
-dependency in your Gemfile so Bundler can find it.
 
 **Note:** AWS SDK Core requires Ruby 1.9.3+.
 
