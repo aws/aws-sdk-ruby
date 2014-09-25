@@ -1,6 +1,9 @@
 Next Release (TBD)
 ------------------
 
+* Issue - Region - Now giving a helpful error message when a region is
+  not configured. Was previously exposing a URI parse error message.
+
 2.0.0 (2014-09-25)
 ------------------
 
