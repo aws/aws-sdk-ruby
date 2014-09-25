@@ -67,6 +67,8 @@ module AWS
       #   Amazon Virtual Private Cloud (Amazon VPC). Specifies whether
       #   to assign a public IP address to each instance launched in a Amazon VPC.
       #
+      # @option options [String] :placement_tenancy
+      #
       # @return [LaunchConfiguration]
       #
       def create name, image, instance_type, options = {}
@@ -88,7 +90,8 @@ module AWS
           :kernel_id,
           :ramdisk_id,
           :block_device_mappings,
-          :associate_public_ip_address
+          :associate_public_ip_address,
+          :placement_tenancy,
         ].each do |opt|
           client_opts[opt] = options[opt] if options.key?(opt)
         end
