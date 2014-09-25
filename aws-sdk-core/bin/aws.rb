@@ -94,6 +94,16 @@ end
 
 require 'aws-sdk-core'
 
+module Aws
+  class << self
+    SERVICE_MODULE_NAMES.each do |svc_name|
+      define_method(svc_name.downcase) do |options={}|
+        const_get(svc_name).const_get(:Client).new(options)
+      end
+    end
+  end
+end
+
 begin
   # attempt to load aws-sdk-resources, checking first for source from
   # a relative path in the repo, otherwise will check for the installed gem
