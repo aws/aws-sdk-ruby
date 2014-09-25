@@ -105,14 +105,6 @@
 
     * `:shard_id` - (String)
     * `:sequence_number` - (String)
-:put_records: "Calls the PutRecords API operation.\n@param [Hash] options\n  * `:records`
-  - *required* - (Array&lt;<Hash>) \n    * `:data` - *required* - (String) \n    *
-  `:explicit_hash_key` - (String) \n    * `:partition_key` - *required* - (String)
-  \n  * `:stream_name` - *required* - (String) \n  * `:sequence_number_for_ordering`
-  - (String) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:records` - (Array<Hash>)\n
-  \   * `:sequence_number` - (String)\n    * `:shard_id` - (String)\n    * `:message`
-  - (String)"
 :remove_tags_from_stream: |-
   Calls the RemoveTagsFromStream API operation.
   @param [Hash] options
