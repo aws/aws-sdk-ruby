@@ -473,7 +473,7 @@ module AWS
 
         context 'timeouts' do
 
-          it 'has a short default timeouts' do
+          it 'has short default timeouts' do
             provider.http_open_timeout.should == 1
             provider.http_read_timeout.should == 1
           end
@@ -487,7 +487,7 @@ module AWS
             provider.http_read_timeout.should == 1.5
           end
 
-          it 'uses the timeouts when request credentials' do
+          it 'uses the timeouts when requesting credentials' do
 
             profiles = "profile-name\n"
             creds = <<-CREDS.strip
@@ -602,16 +602,42 @@ module AWS
           provider.credentials.should == creds2
         end
 
-        it 'is set when credentails is valid' do
+        it 'is set when credentials are valid' do
           provider.set?.should be_true
         end
 
-        it 'is not set when key_id or access_key is missing' do
+        it 'is not set when the request fails' do
           http = double('http').as_null_object
           http.should_receive(:start).and_raise(Errno::ECONNREFUSED)
           Net::HTTP.stub(:new).and_return(http)
 
           provider.set?.should be_false
+        end
+
+        context 'retries' do
+
+          it 'does not retry by default' do
+            provider.retries.should == 0
+          end
+
+          it 'accepts a value for the number of retries' do
+            provider = EC2Provider.new({:retries => 2})
+            provider.retries.should == 2
+          end
+
+          it 'retries the request for the set amount of times' do
+            http = double('http').as_null_object
+            http.should_receive(:start).exactly(3).times.and_raise(Errno::ECONNREFUSED)
+            Net::HTTP.stub(:new).and_return(http)
+
+            Kernel.should_receive(:sleep).with(1)
+            Kernel.should_receive(:sleep).with(2)
+
+            provider = EC2Provider.new({:retries => 2})
+            provider.set?.should be_false
+            provider.retries.should == 2
+          end
+
         end
 
       end
