@@ -1,6 +1,8 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Aws::CognitoIdentity::Client - Added support for Cognito developer identities.
+
 * Issue - Region - Now giving a helpful error message when a region is
   not configured. Was previously exposing a URI parse error message.
 
