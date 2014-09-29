@@ -112,7 +112,7 @@ Then(/^I should have received (\d+) responses$/) do |count|
 end
 
 Given(/^I am using the S3 "(.*?)" endpoint$/) do |endpoint|
-  @client = Aws.s3(endpoint: endpoint)
+  @client = Aws::S3::Client.new(endpoint: endpoint)
 end
 
 When(/^I create a bucket with a DNS compatible name that contains a dot$/) do
