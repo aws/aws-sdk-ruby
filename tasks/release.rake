@@ -37,7 +37,7 @@ task 'release:stage' => [
   'docs:zip',
 ]
 
-task 'release:push' => [
+task 'release:publish' => [
   'release:require-version',
   'git:push',
   'gems:push',
