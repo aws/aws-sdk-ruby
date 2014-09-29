@@ -68,6 +68,7 @@ module Aws
   end
 
   autoload :Client, 'aws-sdk-core/client'
+  autoload :ClientStubs, 'aws-sdk-core/client_stubs'
   autoload :CredentialProviderChain, 'aws-sdk-core/credential_provider_chain'
   autoload :Credentials, 'aws-sdk-core/credentials'
   autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
@@ -137,6 +138,7 @@ module Aws
     autoload :S3SseCpk, 'aws-sdk-core/plugins/s3_sse_cpk'
     autoload :S3UrlEncodedKeys, 'aws-sdk-core/plugins/s3_url_encoded_keys'
     autoload :SQSQueueUrls, 'aws-sdk-core/plugins/sqs_queue_urls'
+    autoload :StubResponses, 'aws-sdk-core/plugins/stub_responses'
     autoload :SWFReadTimeouts, 'aws-sdk-core/plugins/swf_read_timeouts'
     autoload :UserAgent, 'aws-sdk-core/plugins/user_agent'
 

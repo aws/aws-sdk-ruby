@@ -10,8 +10,10 @@ module Seahorse
       end
 
       # @param [Model::Shapes::Shape] shape
-      def initialize(shape)
+      # @option options [Boolean] :validate_required (true)
+      def initialize(shape, options = {})
         @shape = shape || Seahorse::Model::Shapes::Structure.new
+        @validate_required = options[:validate_required] != false
       end
 
       # @param [Hash] params
@@ -29,10 +31,12 @@ module Seahorse
         return unless hash?(values, errors, context)
 
         # ensure required members are present
-        structure.required.each do |member_name|
-          if values[member_name].nil?
-            param = "#{context}[#{member_name.inspect}]"
-            errors << "missing required parameter #{param}"
+        if @validate_required
+          structure.required.each do |member_name|
+            if values[member_name].nil?
+              param = "#{context}[#{member_name.inspect}]"
+              errors << "missing required parameter #{param}"
+            end
           end
         end
 

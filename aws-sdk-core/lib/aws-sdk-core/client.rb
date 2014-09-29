@@ -1,7 +1,8 @@
 module Aws
-
   # Base class for all {Aws} service clients.
   class Client < Seahorse::Client::Base
+
+    include ClientStubs
 
     # Waits until a particular condition is satisfied. This works by
     # polling a client request and checking for particular response
