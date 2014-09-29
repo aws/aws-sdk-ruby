@@ -1,4 +1,4 @@
-Next Release (TBD)
+2.0.1 (2014-09-29)
 ------------------
 
 * Feature - Aws::CognitoIdentity::Client - Added support for Cognito developer identities.
