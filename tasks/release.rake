@@ -42,8 +42,11 @@ task 'release:publish' => [
   'git:push',
   'gems:push',
   'github:release',
+]
+
+task 'release:cleanup' => [
   'changelog:next_release',
 ]
 
 desc "Public release"
-task :release => ['release:stage', 'release:publish']
+task :release => ['release:stage', 'release:publish', 'release:cleanup']
