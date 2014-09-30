@@ -104,7 +104,7 @@ options[:load_paths].each do |path|
   $LOAD_PATH.unshift(path)
 end
 
-require 'aws-sdk'
+require 'aws-sdk-v1'
 
 # configure the aws-sdk gem
 
