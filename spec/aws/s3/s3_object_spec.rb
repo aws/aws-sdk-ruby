@@ -47,6 +47,20 @@ module AWS
         object.bucket.should == bucket
       end
 
+      context '#copy_from' do
+
+        it 'accepts an S3Object and forms the correct path' do
+          client.should_receive(:copy_object).with(hash_including(
+            :bucket_name => bucket.name,
+            :key => 'target',
+            :copy_source => '/source-bucket/source-key'
+          ))
+          source = S3Object.new(Bucket.new('source-bucket'), 'source-key')
+          S3Object.new(bucket, 'target').copy_from(source)
+        end
+
+      end
+
       context '#inspect' do
 
         it 'should include the object bucket and key' do

@@ -873,7 +873,7 @@ module AWS
         options[:copy_source] =
           case source
           when S3Object
-            "#{source.bucket.name}/#{source.key}"
+            "/#{source.bucket.name}/#{source.key}"
           when ObjectVersion
             options[:version_id] = source.version_id
             "#{source.object.bucket.name}/#{source.object.key}"
