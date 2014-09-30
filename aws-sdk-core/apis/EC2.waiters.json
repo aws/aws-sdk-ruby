@@ -11,10 +11,7 @@
     },
     "__InstanceStatus": {
       "operation": "DescribeInstanceStatus",
-      "success_value": "ok",
-      "failure_value": [
-        "impaired"
-      ]
+      "success_value": "ok"
     },
     "SystemStatusGreen": {
       "extends": "__InstanceStatus",
