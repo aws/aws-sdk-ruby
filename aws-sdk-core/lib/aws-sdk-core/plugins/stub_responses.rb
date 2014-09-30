@@ -28,7 +28,6 @@ module Aws
         def call(context)
           response = Seahorse::Client::Response.new(context: context)
           apply_stub(response, context.client.next_stub(context.operation_name))
-          pp response.data
           response
         end
 
