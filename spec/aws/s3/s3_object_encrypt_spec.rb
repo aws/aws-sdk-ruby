@@ -707,12 +707,12 @@ module AWS
           client.should_receive(:copy_object).with(
             hash_including(:bucket_name => "foobucket",
                            :key => "foo2.instruction",
-                           :copy_source => "foobucket/foo.instruction",
+                           :copy_source => "/foobucket/foo.instruction",
                            :metadata_directive => "COPY"))
           client.should_receive(:copy_object).with(
             hash_including(:bucket_name => "foobucket",
                            :key => "foo2",
-                           :copy_source => "foobucket/foo",
+                           :copy_source => "/foobucket/foo",
                            :metadata_directive => "COPY"))
           object.copy_to("foo2", :client_side_encrypted => true)
         end
@@ -721,7 +721,7 @@ module AWS
           client.should_receive(:copy_object).with(
             hash_including(:bucket_name => "foobucket",
                            :key => "foo2",
-                           :copy_source => "foobucket/foo",
+                           :copy_source => "/foobucket/foo",
                            :metadata_directive => "COPY"))
           object.copy_to("foo2", :client_side_encrypted => true)
         end
@@ -730,7 +730,7 @@ module AWS
           client.should_receive(:copy_object).with(
             hash_including(:bucket_name => "foobucket",
                            :key => "foo2",
-                           :copy_source => "foobucket/foo",
+                           :copy_source => "/foobucket/foo",
                            :metadata_directive => "REPLACE",
                            :metadata => {
                              'foo' => 'bar',

@@ -1168,7 +1168,7 @@ module AWS
           client.should_receive(:copy_object).
             with(:bucket_name => "foobucket",
                  :key => "foo",
-                 :copy_source => "foobucket/foo",
+                 :copy_source => "/foobucket/foo",
                  :metadata_directive => "COPY",
                  :storage_class => sc)
         end

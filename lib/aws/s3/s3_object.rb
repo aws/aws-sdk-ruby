@@ -805,9 +805,9 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [String] :bucket_name The name of the bucket
-      #   the source object can be found in.  Defaults to the current
-      #   object's bucket.
+      # @option options [String] :bucket_name The slash-prefixed name of
+      #   the bucket the source object can be found in.  Defaults to the
+      #   current object's bucket.
       #
       # @option options [Bucket] :bucket The bucket the source object
       #   can be found in.  Defaults to the current object's bucket.
@@ -876,14 +876,17 @@ module AWS
             "/#{source.bucket.name}/#{source.key}"
           when ObjectVersion
             options[:version_id] = source.version_id
-            "#{source.object.bucket.name}/#{source.object.key}"
+            "/#{source.object.bucket.name}/#{source.object.key}"
           else
             if options[:bucket]
-              "#{options.delete(:bucket).name}/#{source}"
+              "/#{options.delete(:bucket).name}/#{source}"
             elsif options[:bucket_name]
+              # oops, this should be slash-prefixed, but unable to change
+              # this without breaking users that already work-around this
+              # bug by sending :bucket_name => "/bucket-name"
               "#{options.delete(:bucket_name)}/#{source}"
             else
-              "#{self.bucket.name}/#{source}"
+              "/#{self.bucket.name}/#{source}"
             end
           end
 
@@ -936,9 +939,9 @@ module AWS
       #
       # @param [Hash] options
       #
-      # @option options [String] :bucket_name The name of the bucket
-      #   the object should be copied into.  Defaults to the current object's
-      #   bucket.
+      # @option options [String] :bucket_name The slash-prefixed name of the
+      #   bucket the object should be copied into.  Defaults to the current
+      #   object's bucket.
       #
       # @option options [Bucket] :bucket The bucket the target object
       #   should be copied into. Defaults to the current object's bucket.
