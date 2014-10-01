@@ -5,7 +5,7 @@ module Aws
     describe Stub do
       describe '#format' do
 
-        describe 'without an ouptut shape' do
+        describe 'without an output shape' do
 
           it 'returns an empty struct when there is no output shape' do
             data = Stub.new(nil).format
@@ -20,7 +20,7 @@ module Aws
 
         end
 
-        describe 'with an ouptut shape' do
+        describe 'with an output shape' do
 
           let(:shape_map) { Seahorse::Model::ShapeMap.new({
             'Person' => {
