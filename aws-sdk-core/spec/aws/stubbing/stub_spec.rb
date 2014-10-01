@@ -71,7 +71,7 @@ module Aws
 
           let(:stub) { Stub.new(shape) }
 
-          it 'returns an empty stub when no data is given' do
+          it 'returns a stub with the appropriate members' do
             data = stub.format
             expect(data).to be_kind_of(Structure)
             expect(data.members).to eq(shape.member_names)
