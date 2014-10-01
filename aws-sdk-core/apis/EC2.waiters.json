@@ -54,6 +54,10 @@
         "stopping"
       ]
     },
+    "PasswordDataAvailable": {
+      "operation": "GetPasswordData",
+      "success_path": "not_null(PasswordData)"
+    },
     "__ExportTaskState": {
       "operation": "DescribeExportTasks",
       "acceptor_path": "ExportTasks[].State"
