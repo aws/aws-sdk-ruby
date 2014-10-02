@@ -65,15 +65,6 @@
               { "target":"StackName", "sourceType":"identifier", "source":"Name" }
             ]
           }
-        },
-
-        "Events": {
-          "request": {
-            "operation": "DescribeStackEvents",
-            "params": [
-              { "target":"StackName", "sourceType":"identifier", "source":"Name" }
-            ]
-          }
         }
       },
       "hasMany": {
@@ -92,6 +83,22 @@
             ]
           },
           "path": "StackResources[]"
+        },
+
+        "Events": {
+          "request": {
+            "operation": "DescribeStackEvents",
+            "params": [
+              { "target":"StackName", "sourceType":"identifier", "source":"Name" }
+            ]
+          },
+          "resource": {
+            "type":"Event",
+            "identifiers": [
+              { "target": "EventId", "sourceType": "responsePath", "source": "StackEvents[].EventId"}
+]
+          },
+          "path": "StackEvents[]"
         }
       },
 
@@ -117,6 +124,10 @@
         },
         "path": "StackResourceDetail"
       }
+    },
+    "Event": {
+      "identifiers": [{"name": "EventId"}],
+      "shape": "StackEvent"
     }
   }
 }
