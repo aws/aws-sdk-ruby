@@ -354,6 +354,8 @@ module AWS
         # @param [Hash] options
         # @option options [String] :ip_address ('169.254.169.254')
         # @option options [Integer] :port (80)
+        # @option options [Integer] :retries (0) Number of times to
+        #   retry retrieving credentials.
         # @option options [Float] :http_open_timeout (1)
         # @option options [Float] :http_read_timeout (1)
         # @option options [Object] :http_debug_output (nil) HTTP wire
@@ -362,6 +364,7 @@ module AWS
         def initialize options = {}
           @ip_address = options[:ip_address] || '169.254.169.254'
           @port = options[:port] || 80
+          @retries = options[:retries] || 0
           @http_open_timeout = options[:http_open_timeout] || 1
           @http_read_timeout = options[:http_read_timeout] || 1
           @http_debug_output = options[:http_debug_output]
@@ -372,6 +375,9 @@ module AWS
 
         # @return [Integer] Defaults to port 80.
         attr_accessor :port
+
+        # @return [Integer] Defaults to 0
+        attr_accessor :retries
 
         # @return [Float]
         attr_accessor :http_open_timeout
@@ -404,6 +410,8 @@ module AWS
 
         # (see Provider#get_credentials)
         def get_credentials
+          retries_left = retries
+
           begin
 
             http = Net::HTTP.new(ip_address, port, nil)
@@ -432,7 +440,15 @@ module AWS
             credentials
 
           rescue *FAILURES => e
-            {}
+            if retries_left > 0
+              sleep_time = 2 ** (retries - retries_left)
+              Kernel.sleep(sleep_time)
+
+              retries_left -= 1
+              retry
+            else
+              {}
+            end
           end
         end
 
@@ -566,7 +582,7 @@ module AWS
 
         include Provider
 
-        # @option options [AWS::STS] :sts (STS.new) An instance of {AWS::STS}. 
+        # @option options [AWS::STS] :sts (STS.new) An instance of {AWS::STS}.
         #   This is used to make the API call to assume role.
         # @option options [required, String] :role_arn
         # @option options [required, String] :role_session_name
