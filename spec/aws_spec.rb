@@ -49,7 +49,7 @@ describe AWS do
 
     it 'should enable memoization' do
       AWS.start_memoizing
-      AWS.memoizing?.should be_true
+      AWS.memoizing?.should be_truthy
     end
 
     it 'should return nil' do
@@ -59,7 +59,7 @@ describe AWS do
     it 'should not extend into other threads' do
       AWS.start_memoizing
       Thread.new do
-        AWS.memoizing?.should be_false
+        AWS.memoizing?.should be_falsey
       end.join
     end
 
@@ -68,16 +68,16 @@ describe AWS do
   context '#stop_memoizing' do
 
     it 'should do nothing if memoization is disabled' do
-      AWS.memoizing?.should be_false
+      AWS.memoizing?.should be_falsey
       AWS.stop_memoizing
-      AWS.memoizing?.should be_false
+      AWS.memoizing?.should be_falsey
     end
 
     it 'should stop memoization' do
       AWS.start_memoizing
-      AWS.memoizing?.should be_true
+      AWS.memoizing?.should be_truthy
       AWS.stop_memoizing
-      AWS.memoizing?.should be_false
+      AWS.memoizing?.should be_falsey
     end
 
     it 'should only affect the current thread' do
@@ -85,7 +85,7 @@ describe AWS do
       t = Thread.new do
         AWS.start_memoizing
         Thread.stop
-        AWS.memoizing?.should be_true
+        AWS.memoizing?.should be_truthy
       end
       Thread.pass until t.stop?
       AWS.stop_memoizing

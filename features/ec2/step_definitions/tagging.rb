@@ -83,7 +83,7 @@ Then /^the resource should be taggable$/ do
 end
 
 Then /^the resource should memoize tags properly$/ do
-  eventually { @resource.exists?.should be_true }
+  eventually { @resource.exists?.should be_truthy }
   step 'I tag the resource "ruby-test-1-key" with the value "ruby-test-1-value"'
   step 'the resource tag "ruby-test-1-key" should eventually have value "ruby-test-1-value"'
   step 'I start a memoization block'

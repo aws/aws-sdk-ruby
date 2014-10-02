@@ -53,7 +53,7 @@ module AWS::Core
       end
 
       it 'treats trailing numbers as part of the word' do
-        pending do
+        skip do
           Inflection.ruby_name('Ec2').should eq('ec2')
           Inflection.ruby_name('ABC123').should eq('abc123')
         end

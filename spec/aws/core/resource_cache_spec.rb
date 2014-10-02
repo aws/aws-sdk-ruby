@@ -23,13 +23,13 @@ module AWS::Core
 
       it 'should cause the provided attributes to be cached' do
         cache.store("some_resource", :foo => "BAR")
-        cache.cached?("some_resource", :foo).should be_true
+        cache.cached?("some_resource", :foo).should be_truthy
       end
 
       it 'should not remove attributes that are already cached' do
         cache.store("some_resource", :foo => "BAR")
         cache.store("some_resource", :bla => "BAZ")
-        cache.cached?("some_resource", :bla).should be_true
+        cache.cached?("some_resource", :bla).should be_truthy
       end
 
       it 'should update the stored values of the provided attributes' do
@@ -44,12 +44,12 @@ module AWS::Core
 
       it 'should return false if the resource is cached without the attribute' do
         cache.store("resource", :foo => "BAR")
-        cache.cached?("resource", :bar).should be_false
+        cache.cached?("resource", :bar).should be_falsey
       end
 
       it 'should return true if the attribute is cached with a nil value' do
         cache.store("resource", :foo => nil)
-        cache.cached?("resource", :foo).should be_true
+        cache.cached?("resource", :foo).should be_truthy
       end
 
     end

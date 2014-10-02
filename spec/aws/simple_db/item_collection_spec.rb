@@ -363,6 +363,13 @@ module AWS
 
       context '#count' do
 
+        def craft_response(resp, tokens_and_counts)
+          next_token, count = tokens_and_counts.shift
+          resp.data[:next_token] = next_token
+          resp.data[:items].first[:attributes].first[:value] = count
+          resp
+        end
+
         it_should_behave_like 'method accepting query options', :count
 
         it_behaves_like('accepts :consistent_read option', lambda{|i|}) do
@@ -406,12 +413,7 @@ module AWS
 
           tokens_and_counts = [['abc',12], ['mno', 12], [nil,2]]
 
-          client.stub(:select).and_return {
-            next_token, count = tokens_and_counts.shift
-            resp.data[:next_token] = next_token
-            resp.data[:items].first[:attributes].first[:value] = count
-            resp
-          }
+          client.stub(:select){ craft_response(resp, tokens_and_counts) }
 
           items.count.should == 26
 
@@ -429,12 +431,7 @@ module AWS
 
             tokens_and_counts = [['abc',12], ['mno', 12], [nil,2]]
 
-            client.stub(:select).and_return {
-              next_token, count = tokens_and_counts.shift
-              resp.data[:next_token] = next_token
-              resp.data[:items].first[:attributes].first[:value] = count
-              resp
-            }
+            client.stub(:select){ craft_response(resp, tokens_and_counts) }
 
             items.limit(12).count.should == 12
 
@@ -450,12 +447,7 @@ module AWS
 
             tokens_and_counts = [['abc',6], ['mno', 6], [nil,2]]
 
-            client.stub(:select).and_return {
-              next_token, count = tokens_and_counts.shift
-              resp.data[:next_token] = next_token
-              resp.data[:items].first[:attributes].first[:value] = count
-              resp
-            }
+            client.stub(:select){ craft_response(resp, tokens_and_counts) }
 
             items.limit(12).count.should == 12
 

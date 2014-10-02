@@ -160,7 +160,7 @@ module AWS
         end
 
         it 'should return true if there is no error' do
-          policies.has_key?("p1").should be_true
+          policies.has_key?("p1").should be_truthy
         end
 
         it 'should return false if there is a NoSuchEntity error' do
@@ -169,7 +169,7 @@ module AWS
                                                     double("resp",
                                                            :status => 404,
                                                            :body => "<foo/>")))
-          policies.has_key?("p1").should be_false
+          policies.has_key?("p1").should be_falsey
         end
 
         it 'should not rescue other errors' do

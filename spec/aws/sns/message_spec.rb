@@ -98,7 +98,7 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
         raw = File.open("#{File.dirname __FILE__}/support/sns_manually_sent.json", 'r') {|f| f.read}
         parsed = JSON.parse raw
         parsed['SigningCertURL'] = cert_url
-        AWS::SNS::Message.new(parsed).authentic?.should be_false
+        AWS::SNS::Message.new(parsed).authentic?.should be_falsey
       end
 
     end
@@ -127,7 +127,7 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
     it "should return false when the message cannot be verified against the signing-cert" do
       hash = JSON.parse(raw)
       hash['Signature'] = 'clear evidence of tampering'
-      AWS::SNS::Message.new(hash).authentic?.should be_false
+      AWS::SNS::Message.new(hash).authentic?.should be_falsey
     end
 
   end

@@ -317,12 +317,12 @@ module AWS
       context '#monitoring_enabled?' do
         it 'should return true if monitoring is enabled' do
           instance.stub(:monitoring).and_return(:enabled)
-          instance.monitoring_enabled?.should be_true
+          instance.monitoring_enabled?.should be_truthy
         end
 
         it 'should return false if monitoring is not enabled' do
           instance.stub(:monitoring).and_return(:disabled)
-          instance.monitoring_enabled?.should be_false
+          instance.monitoring_enabled?.should be_falsey
         end
       end
 
@@ -338,7 +338,7 @@ module AWS
           end
 
           it 'should return true' do
-            (instance.monitoring_enabled = true).should be_true
+            (instance.monitoring_enabled = true).should be_truthy
           end
 
         end
@@ -353,7 +353,7 @@ module AWS
           end
 
           it 'should return false' do
-            (instance.monitoring_enabled = false).should be_false
+            (instance.monitoring_enabled = false).should be_falsey
           end
 
         end
@@ -403,12 +403,12 @@ module AWS
       context '#spot_instance?' do
         it 'should return true if the instance has a spot lifecycle' do
           instance.stub(:instance_lifecycle).and_return(:spot)
-          instance.spot_instance?.should be_true
+          instance.spot_instance?.should be_truthy
         end
 
         it 'should return false if the instance does not have a spot lifecycle' do
           instance.stub(:instance_lifecycle).and_return(:normal)
-          instance.spot_instance?.should be_false
+          instance.spot_instance?.should be_falsey
         end
       end
 
@@ -920,12 +920,12 @@ module AWS
 
         it 'should return true if the response has a true return value' do
           resp.stub(:return).and_return(true)
-          instance.send(method).should be_true
+          instance.send(method).should be_truthy
         end
 
         it 'should return false if the response has a false return value' do
           resp.stub(:return).and_return(false)
-          instance.send(method).should be_false
+          instance.send(method).should be_falsey
         end
 
       end

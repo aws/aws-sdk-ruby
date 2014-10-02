@@ -102,7 +102,7 @@ module AWS
           end
 
           it 'should return true if a matching table is found' do
-            table.exists?.should be_true
+            table.exists?.should be_truthy
           end
 
           it 'should return false if no tables are found' do
@@ -117,12 +117,12 @@ module AWS
 
           it 'should return true if range_key is nil' do
             table.stub(:range_key).and_return(nil)
-            table.simple_key?.should be_true
+            table.simple_key?.should be_truthy
           end
 
           it 'should return false if range_key is not nil' do
             table.stub(:range_key).and_return("foo")
-            table.simple_key?.should be_false
+            table.simple_key?.should be_falsey
           end
 
         end
@@ -131,12 +131,12 @@ module AWS
 
           it 'should return false if range_key is nil' do
             table.stub(:range_key).and_return(nil)
-            table.composite_key?.should be_false
+            table.composite_key?.should be_falsey
           end
 
           it 'should return true if range_key is not nil' do
             table.stub(:range_key).and_return("foo")
-            table.composite_key?.should be_true
+            table.composite_key?.should be_truthy
           end
 
         end
@@ -310,7 +310,7 @@ module AWS
       context '#schema_loaded?' do
 
         it 'should return false by default' do
-          table.schema_loaded?.should be_false
+          table.schema_loaded?.should be_falsey
         end
 
         it 'should return true when the schema is populated from a response object' do
@@ -323,7 +323,7 @@ module AWS
                                                }
                                              }
                                            }, "MyTable")
-          table.schema_loaded?.should be_true
+          table.schema_loaded?.should be_truthy
         end
 
       end
@@ -408,7 +408,7 @@ module AWS
 
         it 'should cause schema_loaded? to return true' do
           table.hash_key = { "foo" => :string }
-          table.schema_loaded?.should be_true
+          table.schema_loaded?.should be_truthy
         end
 
       end

@@ -83,12 +83,12 @@ module AWS
           provider.providers.clear
           provider.providers << double('provider-1', :set? => false)
           provider.providers << double('provider-2', :set? => false)
-          provider.set?.should be_false
+          provider.set?.should be_falsey
 
           provider.providers.clear
           provider.providers << double('provider-1', :set? => false)
           provider.providers << double('provider-2', :set? => true)
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'refreshes its provider chain' do
@@ -191,13 +191,13 @@ module AWS
             :access_key_id => 'akid',
             :secret_access_key => 'secret'}
           provider = StaticProvider.new(creds)
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'is not set when key_id or access_key is missing' do
-          StaticProvider.new({}).set?.should be_false
-          StaticProvider.new({:access_key_id => 'akid'}).set?.should be_false
-          StaticProvider.new({:secret_access_key => 'secret'}).set?.should be_false
+          StaticProvider.new({}).set?.should be_falsey
+          StaticProvider.new({:access_key_id => 'akid'}).set?.should be_falsey
+          StaticProvider.new({:secret_access_key => 'secret'}).set?.should be_falsey
         end
 
         it 'raises an error if you pass an unexpected option' do
@@ -218,7 +218,7 @@ module AWS
         let(:mock_credential_file) { File.expand_path('../../../mock-credential-file.txt', __FILE__) }
 
         before(:each) do
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
         end
 
         it 'returns the prefix it was constructed with' do
@@ -298,20 +298,20 @@ module AWS
           provider = ENVProvider.new('AWS')
           env_variables['AWS_ACCESS_KEY_ID'] = 'new-akid'
           env_variables['AWS_SECRET_ACCESS_KEY'] = 'new-secret'
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'is not set when key_id or access_key is missing' do
           provider = ENVProvider.new('AWS')
           env_variables['AWS_ACCESS_KEY_ID'] = nil
           env_variables['AWS_SECRET_ACCESS_KEY'] = nil
-          provider.set?.should be_false
+          provider.set?.should be_falsey
           env_variables['AWS_ACCESS_KEY_ID'] = 'new-akid'
           env_variables['AWS_SECRET_ACCESS_KEY'] = nil
-          provider.set?.should be_false
+          provider.set?.should be_falsey
           env_variables['AWS_ACCESS_KEY_ID'] = nil
           env_variables['AWS_SECRET_ACCESS_KEY'] = 'new-secret'
-          provider.set?.should be_false
+          provider.set?.should be_falsey
         end
 
 
@@ -325,7 +325,7 @@ module AWS
         }}
 
         before(:each) do
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
         end
 
         it 'reads credentials with supplied suffixes' do
@@ -370,12 +370,12 @@ module AWS
 
         it 'is set when credentails is valid' do
           provider = CredentialFileProvider.new(mock_credential_file)
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'is not set when key_id or access_key is missing' do
           provider = CredentialFileProvider.new('/no/file/here')
-          provider.set?.should be_false
+          provider.set?.should be_falsey
         end
       end
 
@@ -393,7 +393,7 @@ module AWS
 
         it 'supports fetching profiles from ENV' do
           env_variables = { 'AWS_PROFILE' => 'barprofile' }
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
           provider = SharedCredentialFileProvider.new(:path => mock_shared_cred_file)
           provider.credentials.should == {
             :access_key_id => 'ACCESS_KEY_2',
@@ -403,7 +403,7 @@ module AWS
 
         it 'supports a manually specified profile' do
           env_variables = { 'AWS_PROFILE' => 'barprofile' }
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
 
           provider = SharedCredentialFileProvider.new(
             :path => mock_shared_cred_file,
@@ -430,13 +430,13 @@ module AWS
 
         it 'is set when credentails is valid' do
           provider = SharedCredentialFileProvider.new(:path => mock_shared_cred_file)
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'is not set when key_id or access_key is missing' do
           provider = SharedCredentialFileProvider.new(
             :path => '/no/file/here')
-          provider.set?.should be_false
+          provider.set?.should be_falsey
         end
 
         it 'requires a path when RUBY_VERSION is less than 1.9' do
@@ -603,7 +603,7 @@ module AWS
         end
 
         it 'is set when credentails is valid' do
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'is not set when key_id or access_key is missing' do
@@ -611,7 +611,7 @@ module AWS
           http.should_receive(:start).and_raise(Errno::ECONNREFUSED)
           Net::HTTP.stub(:new).and_return(http)
 
-          provider.set?.should be_false
+          provider.set?.should be_falsey
         end
 
       end
@@ -728,7 +728,7 @@ module AWS
             and_return(session_creds)
 
           provider = SessionProvider.for(long_term_creds)
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
       end
     end

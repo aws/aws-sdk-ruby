@@ -55,7 +55,7 @@ Then /^the list of all DynamoDB tables should include the table$/ do
 end
 
 Then /^the table should exist$/ do
-  @table.exists?.should be_true
+  @table.exists?.should be_truthy
 end
 
 When /^I access the following table attributes:$/ do |table|
@@ -84,7 +84,7 @@ When /^I compute a map of table name to table status$/ do
 end
 
 Then /^the table should have a range key$/ do
-  @table.composite_key?.should be_true
+  @table.composite_key?.should be_truthy
   @table.range_key.name.should == "range"
   @table.range_key.type.should == :number
 end

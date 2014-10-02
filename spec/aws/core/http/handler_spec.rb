@@ -63,7 +63,7 @@ module AWS::Core
             block_called = true
           end
           handler.handle('req', 'resp')
-          block_called.should be_true
+          block_called.should be_truthy
         end
 
         it 'provides access to the base handler from the block via super' do
@@ -71,7 +71,7 @@ module AWS::Core
             super(req,resp)
           end
           handler.handle('request', 'response')
-          base_handler.handle_called?.should be_true
+          base_handler.handle_called?.should be_truthy
         end
 
         it 'should pass the #handle request to the block' do
