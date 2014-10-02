@@ -9,6 +9,19 @@ Next Release (TBD)
   InstanceProfileCredentials.new(retries:3)
   ```
 
+* Feature - Stubbing Client Responses - Added support for stubbing
+  client responses without making API calls. In addition to the
+  default fake resposnes, you can provide stub data and errors:
+
+  ```ruby
+  s3 = Aws::S3::Client.new(stub_responses: true)
+  s3.stub_responses(:list_buckets, buckets:[{name:'aws-sdk'}])
+  s3.list_buckets.buckets.map(&:name)
+  #=> ['aws-sdk']
+  ```
+
+  See API docs for `Aws::Client#stub_responses` for more information.
+
 2.0.1 (2014-09-29)
 ------------------
 
