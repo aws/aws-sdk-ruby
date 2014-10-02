@@ -90,7 +90,8 @@
               { "target":"LogicalId", "sourceType":"responsePath", "source":"StackResources[].LogicalResourceId" },
               { "target":"StackName", "sourceType":"responsePath", "source":"StackResources[].StackName" }
             ]
-          }
+          },
+          "path": "StackResources[]"
         }
       },
 
