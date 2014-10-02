@@ -35,6 +35,7 @@ module Aws
           end
           resp = client.receive_message(queue_url: 'https://foo.com')
           expect(resp.data.members).to eq([:messages])
+          expect(resp.data.messages).to eq([])
         end
 
       end
