@@ -1,6 +1,14 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Instance Profile Credentials - Added the ability to configure the
+  number of attempts to make when loading instance profile credentials.
+
+  ```ruby
+  # makes at most 4 attempts to load credentials
+  InstanceProfileCredentials.new(retries:3)
+  ```
+
 2.0.1 (2014-09-29)
 ------------------
 

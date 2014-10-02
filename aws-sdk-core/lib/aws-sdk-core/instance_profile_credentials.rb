@@ -22,6 +22,8 @@ module Aws
     ]
 
     # @param [Hash] options
+    # @option options [Integer] :retries (0) Number of times to retry
+    #   when retrieving credentials.
     # @option options [String] :ip_address ('169.254.169.254')
     # @option options [Integer] :port (80)
     # @option options [Float] :http_open_timeout (1)
@@ -30,6 +32,7 @@ module Aws
     #   traces are sent to this object.  You can specify something
     #   like $stdout.
     def initialize options = {}
+      @retries = options[:retries] || 0
       @ip_address = options[:ip_address] || '169.254.169.254'
       @port = options[:port] || 80
       @http_open_timeout = options[:http_open_timeout] || 1
@@ -38,6 +41,10 @@ module Aws
       @refresh_mutex = Mutex.new
       refresh!
     end
+
+    # @return [Integer] The number of times to retry failed atttempts to
+    #   fetch credentials from the instance metadata service. Defaults to 0.
+    attr_reader :retries
 
     # @return [String,nil]
     def access_key_id
@@ -86,13 +93,26 @@ module Aws
     end
 
     def get_credentials
-      open_connection do |conn|
-        path = '/latest/meta-data/iam/security-credentials/'
-        profile_name = http_get(conn, path).lines.first.strip
-        http_get(conn, path + profile_name)
+      failed_attempts = 0
+      begin
+        open_connection do |conn|
+          path = '/latest/meta-data/iam/security-credentials/'
+          profile_name = http_get(conn, path).lines.first.strip
+          http_get(conn, path + profile_name)
+        end
+      rescue *FAILURES => e
+        if failed_attempts < @retries
+          backoff(failed_attempts)
+          failed_attempts += 1
+          retry
+        else
+          '{}'
+        end
       end
-    rescue *FAILURES => e
-      '{}'
+    end
+
+    def backoff(failed_attempts)
+      Kernel.sleep(2 ** failed_attempts)
     end
 
     def open_connection

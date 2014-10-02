@@ -106,6 +106,25 @@ module Aws
         end
 
       end
+
+    end
+
+    describe '#retries' do
+
+      it 'defaults to 0' do
+        expect(InstanceProfileCredentials.new.retries).to be(0)
+      end
+
+      it 'keepts trying "retries" times, with exponential backoff' do
+        expected_request = stub_request(:get, "http://169.254.169.254#{path}").
+          to_raise(Errno::ECONNREFUSED)
+        expect(Kernel).to receive(:sleep).with(1)
+        expect(Kernel).to receive(:sleep).with(2)
+        expect(Kernel).to receive(:sleep).with(4)
+        InstanceProfileCredentials.new(retries:3)
+        assert_requested(expected_request, times:4)
+      end
+
     end
   end
 end
