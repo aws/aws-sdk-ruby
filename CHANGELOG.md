@@ -22,6 +22,13 @@ Next Release (TBD)
 
   See API docs for `Aws::Client#stub_responses` for more information.
 
+* Feature - S3 Waiters - Added resource waiters for `S3::Bucket` and
+  `S3::Object`.
+
+* Issue - Aws::SQS::Client#receive_message - Resolved an issue where
+  the response from `#receive_message` could return `nil` for `#messages`.
+  It now always returns an array.
+
 2.0.1 (2014-09-29)
 ------------------
 
