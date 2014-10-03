@@ -55,7 +55,7 @@ module AWS
         signed_headers = 'Host'
 
         if options[:acl]
-          request.add_param("X-Amz-Acl", options[:acl].to_s.gsub(/_/, '-'))
+          request.add_param("x-amz-acl", options[:acl].to_s.gsub(/_/, '-'))
         end
 
         # must be sent along with the PUT request headers
