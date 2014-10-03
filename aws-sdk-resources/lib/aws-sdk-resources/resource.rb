@@ -62,7 +62,9 @@ module Aws
         if options[:client]
           options[:client]
         else
-          self.class.client_class.new(options)
+          self.class.client_class.new(options.merge(
+            user_agent_suffix: "resources"
+          ))
         end
       end
 

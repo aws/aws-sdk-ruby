@@ -12,6 +12,7 @@ module Aws
         'Aws::Plugins::RegionalEndpoint',
         'Aws::Plugins::ResponsePaging',
         'Aws::Plugins::RequestSigner',
+        'Aws::Plugins::StubResponses',
       ]
 
       @customizations = Hash.new {|h,k| h[k] = [] }

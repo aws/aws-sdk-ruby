@@ -71,6 +71,20 @@
           }
         }
       },
+      "waiters": {
+        "Exists": {
+          "waiterName": "BucketExists",
+          "params": [
+            { "target":"Bucket", "sourceType":"identifier", "source":"Name" }
+          ]
+        },
+        "NotExists": {
+          "waiterName": "BucketNotExists",
+          "params": [
+            { "target":"Bucket", "sourceType":"identifier", "source":"Name" }
+          ]
+        }
+      },
       "hasMany": {
         "Objects": {
           "request": {
@@ -573,6 +587,22 @@
               { "target":"Delete.Objects[].Key", "sourceType":"identifier", "source":"Key" }
             ]
           }
+        }
+      },
+      "waiters": {
+        "Exists": {
+          "waiterName": "ObjectExists",
+          "params": [
+            { "target":"Bucket", "sourceType":"identifier", "source":"BucketName" },
+            { "target":"Key", "sourceType":"identifier", "source":"Key" }
+          ]
+        },
+        "NotExists": {
+          "waiterName": "ObjectNotExists",
+          "params": [
+            { "target":"Bucket", "sourceType":"identifier", "source":"BucketName" },
+            { "target":"Key", "sourceType":"identifier", "source":"Key" }
+          ]
         }
       },
       "subResources": {

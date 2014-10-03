@@ -79,7 +79,7 @@ module Aws
       def parse_shape(shape, value)
         if value.nil?
           case shape
-          when Seahorse::Model::Shapes::Structure then nil
+          when Seahorse::Model::Shapes::Structure then structure(shape, {})
           when Seahorse::Model::Shapes::Map then {}
           when Seahorse::Model::Shapes::List then []
           when Seahorse::Model::Shapes::String then ''

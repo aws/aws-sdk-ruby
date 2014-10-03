@@ -1,6 +1,34 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Instance Profile Credentials - Added the ability to configure the
+  number of attempts to make when loading instance profile credentials.
+
+  ```ruby
+  # makes at most 4 attempts to load credentials
+  InstanceProfileCredentials.new(retries:3)
+  ```
+
+* Feature - Stubbing Client Responses - Added support for stubbing
+  client responses without making API calls. In addition to the
+  default fake resposnes, you can provide stub data and errors:
+
+  ```ruby
+  s3 = Aws::S3::Client.new(stub_responses: true)
+  s3.stub_responses(:list_buckets, buckets:[{name:'aws-sdk'}])
+  s3.list_buckets.buckets.map(&:name)
+  #=> ['aws-sdk']
+  ```
+
+  See API docs for `Aws::Client#stub_responses` for more information.
+
+* Feature - S3 Waiters - Added resource waiters for `S3::Bucket` and
+  `S3::Object`.
+
+* Issue - Aws::SQS::Client#receive_message - Resolved an issue where
+  the response from `#receive_message` could return `nil` for `#messages`.
+  It now always returns an array.
+
 2.0.1 (2014-09-29)
 ------------------
 
