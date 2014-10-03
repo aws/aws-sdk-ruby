@@ -105,6 +105,7 @@ module AWS
       #       * `:volume_type` - (String) Valid values include:
       #         * `standard`
       #         * `io1`
+      #         * `gp2`
       #       * `:iops` - (Integer)
       #     * `:no_device` - (String) Specifies the device name to suppress
       #       during instance launch.
