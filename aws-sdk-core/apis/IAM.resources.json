@@ -233,6 +233,33 @@
         }
       }
     },
+    "AccessKeyPair": {
+      "identifiers": [
+        { "name": "UserName" },
+        { "name": "Id" }
+      ],
+      "shape": "AccessKey",
+      "hasOne": {
+        "AccessKey": {
+          "resource": {
+            "type": "AccessKey",
+            "identifiers": [
+              { "target":"UserName", "sourceType":"identifier", "source":"UserName" },
+              { "target":"Id", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        },
+        "User": {
+          "resource": {
+            "type": "AccessKey",
+            "identifiers": [
+              { "target":"UserName", "sourceType":"identifier", "source":"UserName" },
+              { "target":"Id", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        }
+      }
+    },
     "AccountAlias": {
       "identifiers": [
         { "name": "Name" }
@@ -803,7 +830,7 @@
             ]
           },
           "resource": {
-            "type": "AccessKey",
+            "type": "AccessKeyPair",
             "identifiers": [
               { "target":"UserName", "sourceType":"identifier", "source":"Name" },
               { "target":"Id", "sourceType":"responsePath", "source":"AccessKey.AccessKeyId" }
