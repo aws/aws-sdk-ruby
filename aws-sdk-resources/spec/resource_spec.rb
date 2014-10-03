@@ -65,7 +65,7 @@ module Aws
           client_class = double('client-class')
           client = double('client')
           expect(client_class).to receive(:new).
-            with(:foo => 'bar').
+            with(hash_including(:foo => 'bar')).
             and_return(client)
           resource_class.add_identifier(:id)
           resource_class.client_class = client_class
