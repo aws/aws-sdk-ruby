@@ -104,7 +104,7 @@ module AWS
 
       path = Pathname.new("#{rails_root}/config/aws.yml")
 
-      if File.exists?(path)
+      if File.exist?(path)
         cfg = YAML::load(ERB.new(File.read(path)).result)
         unless cfg[rails_env]
           raise "config/aws.yml is missing a section for `#{rails_env}`"
