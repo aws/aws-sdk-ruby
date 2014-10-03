@@ -95,7 +95,7 @@
           "resource": {
             "type":"Event",
             "identifiers": [
-              { "target": "EventId", "sourceType": "responsePath", "source": "StackEvents[].EventId"}
+              { "target": "Id", "sourceType": "responsePath", "source": "StackEvents[].EventId"}
 ]
           },
           "path": "StackEvents[]"
@@ -126,7 +126,7 @@
       }
     },
     "Event": {
-      "identifiers": [{"name": "EventId"}],
+      "identifiers": [{"name": "Id"}],
       "shape": "StackEvent"
     }
   }
