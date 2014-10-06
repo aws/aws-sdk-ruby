@@ -8,7 +8,7 @@ module Seahorse
         let(:client_class) do
           client_class = Client::Base.define api: {
             'operations' => {
-              'Operation' => { 'name' => 'Operation' },
+              'OperationName' => { 'name' => 'OperationName' },
             }
           }
           client_class.clear_plugins
@@ -24,7 +24,7 @@ module Seahorse
 
         it 'populates the http request endpoint' do
           client = client_class.new(endpoint:'https://foo.com')
-          resp = client.build_request('operation').send_request
+          resp = client.build_request('operation_name').send_request
           expect(resp.context.http_request.endpoint).to eq(URI.parse('https://foo.com/'))
         end
 

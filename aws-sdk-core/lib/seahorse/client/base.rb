@@ -56,37 +56,7 @@ module Seahorse
         self.class.api.operation_names
       end
 
-      # @api private
-      def respond_to?(method_name, *args)
-        if request_method?(method_name)
-          true
-        else
-          super
-        end
-      end
-
-      # @api private
-      def method_missing(method_name, *args, &block)
-        if request_method?(method_name)
-          make_request(method_name, *args, &block)
-        else
-          super
-        end
-      end
-
       private
-
-      # @return [Boolean] Returns `true` if the method name is an API operation.t 
-      def request_method?(method_name)
-        operation_names.include?(method_name.to_sym)
-      end
-
-      # Builds and sends a request.
-      def make_request(name, *args, &block)
-        params = args[0] || {}
-        options = args[1] || {}
-        build_request(name, params).send_request(options, &block)
-      end
 
       # Constructs a {Configuration} object and gives each plugin the
       # opportunity to register options with default values.
@@ -214,6 +184,8 @@ module Seahorse
           else
             @api = api
           end
+          define_operation_methods
+          @api
         end
 
         # @option options [Model::Api, Hash] :api ({})
@@ -231,6 +203,16 @@ module Seahorse
         alias extend define
 
         private
+
+        def define_operation_methods
+          @api.operation_names.each do |method_name|
+            define_method(method_name) do |*args, &block|
+              params = args[0] || {}
+              options = args[1] || {}
+              build_request(method_name, params).send_request(options, &block)
+            end
+          end
+        end
 
         def build_plugins
           plugins.map { |plugin| plugin.is_a?(Class) ? plugin.new : plugin }
