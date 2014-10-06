@@ -29,6 +29,10 @@ Next Release (TBD)
   the response from `#receive_message` could return `nil` for `#messages`.
   It now always returns an array.
 
+* Issue - Waiters - Resolved an issue with `Aws::EC2::Client#wait_until`
+  and the volume status waiters. These were polling the incorrect API
+  method causing `#wait_until` to raise an error. See issue #129.
+
 2.0.1 (2014-09-29)
 ------------------
 
