@@ -19,7 +19,7 @@ end
 desc 'Runs unit tests'
 task 'test:unit' => 'test:coverage:clear'
 
-desc 'Runs unit tests'
+desc 'Runs integration tests'
 task 'test:integration' => 'test:coverage:clear'
 
 desc 'Runs unit and integration tests'

@@ -15,9 +15,8 @@ elsif ENV['AWS_INTEGRATION']
 else
   msg = <<-MSG
 
-*** skipping integration tests ***
+*** skipping aws-sdk-core integration tests ***
   To enable integration tests, create a #{cfg} file or export AWS_INTEGRATION=1
-  Please note, running integration tests requires AWS account credentials.
 
   MSG
   puts msg

@@ -7,3 +7,17 @@ RSpec::Core::RakeTask.new('test:unit:aws-sdk-resources') do |t|
   t.pattern = "#{$REPO_ROOT}/aws-sdk-resources/spec"
 end
 task 'test:unit' => 'test:unit:aws-sdk-resources'
+
+begin
+  require 'cucumber/rake/task'
+  desc = 'aws-sdk-resource integration tests'
+  Cucumber::Rake::Task.new('test:integration:aws-sdk-resources', desc) do |t|
+    t.cucumber_opts = 'aws-sdk-resources/features -t ~@veryslow'
+  end
+  task 'test:integration' => 'test:integration:aws-sdk-resources'
+rescue LoadError
+  desc 'aws-sdk-resources integration tests'
+  task 'test:integration' do
+    puts 'skipping aws-sdk-resource integration tests, cucumber not loaded'
+  end
+end
