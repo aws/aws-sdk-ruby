@@ -66,20 +66,23 @@ module Seahorse
       # @return [Response]
       #
       def send_request(options = {}, &block)
-        set_target(options, &block)
-        resp = @handlers.to_stack.call(@context)
+        set_response_target(options, &block)
+        @handlers.to_stack.call(@context)
+      ensure
         close_managed_files
-        resp
       end
 
       private
 
-      def set_target(options, &block)
-        if target = options[:target] || block
+      def set_response_target(options, &block)
+        target = options[:target]
+        target ||= block
+        target ||= context.params.delete(:response_target)
+        if target
           @context.http_response.body =
             case target
             when Proc then BlockIO.new(&target)
-            when String, Pathname then ManagedFile.new(target, 'r+b')
+            when String, Pathname then ManagedFile.new(target, 'w+b')
             else target
           end
         end

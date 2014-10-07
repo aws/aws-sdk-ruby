@@ -125,6 +125,18 @@ module Seahorse
 
         end
 
+        describe 'target from params' do
+
+          it 'writes the response to the optional :response_target param' do
+            tempfile = Tempfile.new('response-target')
+            tempfile.close
+            context.params[:response_target] = tempfile.path
+            resp = request.send_request
+            expect(File.read(tempfile.path)).to eq('part1part2part3')
+          end
+
+        end
+
         describe 'Block target' do
 
           it 'streams data from the handler to the #send_request block' do

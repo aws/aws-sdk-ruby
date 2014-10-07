@@ -220,7 +220,11 @@ module Seahorse
 
         # @return [Shape, nil]
         def payload_member
-          @payload_member ||= member(payload)
+          if payload
+            @payload_member ||= member(payload)
+          else
+            nil
+          end
         end
 
         # @param [Symbol] name

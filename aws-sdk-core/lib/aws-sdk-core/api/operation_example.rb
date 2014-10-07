@@ -8,6 +8,11 @@ module Aws
         @obj_name = options[:svc_var_name]
         @method_name = options[:method_name]
         @operation = options[:operation]
+        @streaming_output = !!(
+          @operation.output &&
+          @operation.output.payload_member &&
+          @operation.output.payload_member.definition['streaming']
+        )
       end
 
       def to_str
@@ -25,6 +30,9 @@ module Aws
 
       def structure(shape, i, visited)
         lines = ['{']
+        if @streaming_output
+          lines << "#{i}  response_target: '/path/to/file', # optional target file path"
+        end
         shape.members.each do |member_name, member_shape|
           if shape.required.include?(member_name)
             lines << "#{i}  # required"

@@ -10,7 +10,11 @@ module Aws
       def input
         params(nil) do
           if @operation.input
-            structure(@operation.input, [])
+            lines = []
+            if @operation.output
+              lines << '<div class="param"><div class="entry"><span class="key">:response_target</span> => String, Pathname, File</div>Optional path to a file or file object where the HTTP response body should be written.</div>'
+            end
+            lines + structure(@operation.input, [])
           else
             []
           end
