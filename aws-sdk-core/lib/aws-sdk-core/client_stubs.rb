@@ -68,7 +68,7 @@ module Aws
     # @param [Mixed] stubs One or more responses to return from the named
     #   operation.
     # @return [void]
-    # @raise [RuntimeError] Raises a runtime error when {#stub} is called
+    # @raise [RuntimeError] Raises a runtime error when called
     #   on a client that has not enabled response stubbing via
     #   `:stub_responses => true`.
     def stub_responses(operation_name, *stubs)

@@ -4,11 +4,10 @@ module Aws
 
       extend OperationMethods
 
-      # @overload initialize(options = {})
       # @overload initialize(*identifiers, options = {})
-      # @param options Options except `:data` and identifier options are
-      #   used to construct a {Client} unless `:client` is given.
-      # @option options [Client] :client
+      #   @param [Hash] options Options except `:data` and identifier options are
+      #     used to construct a {Client} unless `:client` is given.
+      #   @option options [Client] :client
       def initialize(*args)
         options = args.last.is_a?(Hash) ? args.pop.dup : {}
         @identifiers = extract_identifiers(args, options)
