@@ -2,11 +2,13 @@ require 'stringio'
 require 'date'
 require 'time'
 require 'tempfile'
+require 'thread'
 
 module Seahorse
   module Client
     class ParamConverter
 
+      @mutex = Mutex.new
       @converters = Hash.new { |h,k| h[k] = {} }
 
       # @param [Model::Shapes::Shape] shape
@@ -110,7 +112,11 @@ module Seahorse
 
         def converter_for(shape_class, value)
           unless @converters[shape_class].key?(value.class)
-            @converters[shape_class][value.class] = find(shape_class, value)
+            @mutex.synchronize {
+              unless @converters[shape_class].key?(value.class)
+                @converters[shape_class][value.class] = find(shape_class, value)
+              end
+            }
           end
           @converters[shape_class][value.class]
         end

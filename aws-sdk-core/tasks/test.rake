@@ -11,12 +11,13 @@ task 'test:unit' => 'test:unit:aws-sdk-core'
 begin
   require 'cucumber/rake/task'
   desc = 'aws-sdk-core integration tests'
-  Cucumber::Rake::Task.new('test:integration', desc) do |t|
+  Cucumber::Rake::Task.new('test:integration:aws-sdk-core', desc) do |t|
     t.cucumber_opts = 'aws-sdk-core/features -t ~@veryslow'
   end
+  task 'test:integration' => 'test:integration:aws-sdk-core'
 rescue LoadError
   desc 'aws-sdk-core integration tests'
   task 'test:integration' do
-    puts 'skipping inetegration tests, cucumber not loaded'
+    puts 'skipping aws-sdk-core integration tests, cucumber not loaded'
   end
 end

@@ -31,6 +31,11 @@ module Aws
       else raise ArgumentError, "invalid resource definition #{definition}"
     end
     definition.apply(svc_module)
-  end
 
+    begin
+      require "aws-sdk-resources/#{_.downcase}"
+    rescue LoadError
+    end
+
+  end
 end

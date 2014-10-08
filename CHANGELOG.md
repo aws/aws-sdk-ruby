@@ -1,6 +1,15 @@
 Next Release (TBD)
 ------------------
 
+* Feature - S3::Object#upload_file - Added a utility method for uploading
+  files to Amazon S3. This method automatically manages uploading large
+  objects using the multipart upload APIs.
+
+  ```ruby
+  s3 = Aws::S3::Resource.new
+  s3.bucket('aws-sdk').object('key').upload_file('/path/to/file')
+  ```
+
 * Feature - Instance Profile Credentials - Added the ability to configure the
   number of attempts to make when loading instance profile credentials.
 
