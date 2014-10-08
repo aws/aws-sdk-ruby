@@ -12,6 +12,7 @@ module Seahorse
       # @seahorse.client.option [Boolean] :ssl_verify_peer (true)
       # @seahorse.client.option [String] :ssl_ca_bundle
       # @seahorse.client.option [String] :ssl_ca_directory
+      # @seahorse.client.option [String] :ssl_ca_store
       class NetHttp < Plugin
 
         Client::NetHttp::ConnectionPool::OPTIONS.each_pair do |name, default|

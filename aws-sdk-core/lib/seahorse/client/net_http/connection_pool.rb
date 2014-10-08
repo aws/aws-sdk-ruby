@@ -20,6 +20,7 @@ module Seahorse
       # @attr_reader [Boolean] ssl_verify_peer
       # @attr_reader [String,nil] ssl_ca_bundle
       # @attr_reader [String,nil] ssl_ca_directory
+      # @attr_reader [String,nil] ssl_ca_store
       class ConnectionPool
 
         @pools_mutex = Mutex.new
@@ -36,6 +37,7 @@ module Seahorse
           ssl_verify_peer: true,
           ssl_ca_bundle: nil,
           ssl_ca_directory: nil,
+          ssl_ca_store: nil,
         }
 
         # @api private
@@ -237,6 +239,7 @@ module Seahorse
               :ssl_verify_peer => verify_peer,
               :ssl_ca_bundle => options[:ssl_ca_bundle],
               :ssl_ca_directory => options[:ssl_ca_directory],
+              :ssl_ca_store => options[:ssl_ca_store],
             }
           end
 
@@ -269,6 +272,7 @@ module Seahorse
               http.verify_mode = OpenSSL::SSL::VERIFY_PEER
               http.ca_file = ssl_ca_bundle if ssl_ca_bundle
               http.ca_path = ssl_ca_directory if ssl_ca_directory
+              http.cert_store = ssl_ca_store if ssl_ca_store
             else
               http.verify_mode = OpenSSL::SSL::VERIFY_NONE
             end

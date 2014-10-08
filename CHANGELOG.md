@@ -1,6 +1,11 @@
 Next Release (TBD)
 ------------------
 
+* Feature - HTTP - Added the ability to configure the CA Cert store
+  for HTTPs requests.
+
+      Aws.config[:ssl_ca_store] = OpenSSL::X509::Store.new
+
 2.0.2 (2014-10-08)
 ------------------
 
