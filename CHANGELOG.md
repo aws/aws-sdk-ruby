@@ -1,4 +1,4 @@
-Next Release (TBD)
+2.0.2 (2014-10-08)
 ------------------
 
 * Feature - DynamoDB Document Attributes - Added support for hashes,
