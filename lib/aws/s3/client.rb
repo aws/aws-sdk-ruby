@@ -51,10 +51,7 @@ module AWS
       # @param [Core::Http::Request] request
       # @api private
       def sign_request request
-        version = @config.s3_signature_version ?
-          @config.s3_signature_version.to_sym :
-          (@region =~ /cn-/ ? :v4 : :v3)
-        case version
+        case @config.s3_signature_version
         when :v4 then v4_signer.sign_request(request)
         when :v3 then v3_signer.sign_request(request)
         else
