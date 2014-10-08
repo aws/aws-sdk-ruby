@@ -55,7 +55,7 @@ module Aws
 
       def params(shape, &block)
         if shape && shape.name == 'AttributeValue'
-          ['<p>An attribute value may be one of:<ul><li>`String`</li><li>`Numeric`</li><li>`IO`</li><li>`Set<String,Numeric,IO>`</li></ul></p>']
+          ['<p>An attribute value may be one of:<ul><li>`Hash`</li><li>`Array`</li><li>`String`</li><li>`Numeric`</li><li>`true` | `false`</li><li>`nil`</li><li>`IO`</li><li>`Set<String,Numeric,IO>`</li></ul></p>']
         else
           ['<div class="params">', api_ref(shape)] + yield + ['</div>']
         end

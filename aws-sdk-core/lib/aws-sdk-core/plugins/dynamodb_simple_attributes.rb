@@ -21,7 +21,12 @@ module Aws
     #         id: 'uuid',
     #         age: 35,
     #         tags: Set.new(%w(simple attributes)),
-    #         data: StringIO.new('data')
+    #         data: StringIO.new('data'),
+    #         scores: [5, 4.5, 4.9, nil],
+    #         name: {
+    #           first: 'John',
+    #           last: 'Doe',
+    #         }
     #       }
     #     )
     #
@@ -36,6 +41,20 @@ module Aws
     #         'age' => { n: '35' },
     #         'tags' => { ss: ['simple', 'attributes'] },
     #         'data' => { b: 'data' },
+    #         'scores' => {
+    #           l: [
+    #             { n: '5' },
+    #             { n: '4.5' },
+    #             { n: '4.9' },
+    #             { null: true },
+    #           ]
+    #         },
+    #         'name' => {
+    #           m: {
+    #             'first' => { s: 'John' },
+    #             'last' => { s: 'Doe' },
+    #           }
+    #         }
     #       }
     #     )
     #
@@ -49,7 +68,12 @@ module Aws
     #       id: 'uuid',
     #       age: 35,
     #       tags: Set.new(%w(simple attributes)),
-    #       data: StringIO.new('data')
+    #       data: StringIO.new('data'),
+    #       scores: [5, 4.5, 4.9, nil],
+    #       name: {
+    #         first: 'John',
+    #         last: 'Doe',
+    #       }
     #     }
     #
     # With this plugin **disabled**, `simple_attributes: false`:
@@ -58,15 +82,14 @@ module Aws
     #     resp = dynamodb.get(table_name: 'aws-sdk', key: { 'id' => { s: 'uuid' }})
     #     resp.item
     #     # {
-    #     #   "id"=> <struct s='uuid', n=nil, b=nil, ss=nil, ns=nil, bs=nil>,
-    #     #   "age"=> <struct s=nil, n="35", b=nil, ss=nil, ns=nil, bs=nil>,
-    #     #   "tags"=> <struct s=nil, n=nil, b=nil, ss=['simple', 'attributes'], ns=nil, bs=nil>,
-    #     #   "data"=> <struct s=nil, n=nil, b="data", ss=nil, ns=nil, bs=nil>,
+    #     #   "id"=> <struct s='uuid', n=nil, b=nil, ss=nil, ns=nil, bs=nil, m=nil, l=nil, null=nil, bool=nil>
+    #     #   "age"=> <struct s=nil, n="35", b=nil, ss=nil, ns=nil, bs=nil, m=nil, l=nil, null=nil, bool=nil>
+    #     #   ...
     #     # }
     #
     # @seahorse.client.option [Boolean] :simple_attributes (true)
-    #   Enables working with DynamoDB attribute values using simple
-    #   Ruby natives.
+    #   Enables working with DynamoDB attribute values using
+    #   hashes, arrays, sets, integers, floats, booleans, and nil.
     #
     #   Disabling this option requires that all attribute values have
     #   their types specified, e.g. `{ s: 'abc' }` instead of simply

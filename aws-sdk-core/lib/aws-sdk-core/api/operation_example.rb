@@ -80,7 +80,7 @@ module Aws
           recursive << "#{i}}"
           return recursive.join("\n")
         elsif shape.name == 'AttributeValue'
-          msg='"value", #<String,Numeric,IO,Set>'
+          msg='"value", #<Hash,Array,String,Numeric,Boolean,nil,IO,Set>'
           return msg
         else
           visited = visited + [shape.name]

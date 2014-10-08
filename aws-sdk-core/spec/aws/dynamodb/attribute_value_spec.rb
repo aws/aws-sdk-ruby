@@ -10,6 +10,22 @@ module Aws
 
       describe '#marshal' do
 
+        it 'converts hashes to :m (map)' do
+          formatted = value.marshal(foo: 'bar', abc: 'mno')
+          expect(formatted).to eq(m: {
+            "foo" => { s: 'bar' },
+            "abc" => { s: 'mno' },
+          })
+        end
+
+        it 'converts arrays to :l (list)' do
+          formatted = value.marshal(['abc', 'mno'])
+          expect(formatted).to eq(l: [
+            { s: 'abc' },
+            { s: 'mno' },
+          ])
+        end
+
         it 'converts string sets to :ss (string set)' do
           formatted = value.marshal(Set.new(%w(abc mno)))
           expect(formatted).to eq(ss: %w(abc mno))
@@ -36,6 +52,80 @@ module Aws
           expect(value.marshal('abc')).to eq(s: 'abc')
         end
 
+        it 'converts booleans :bool' do
+          # supports both true and false
+          expect(value.marshal(true)).to eq(bool: true)
+          expect(value.marshal(false)).to eq(bool: false)
+        end
+
+        it 'converts nil to :null' do
+          expect(value.marshal(nil)).to eq(null: true)
+        end
+
+        it 'recursively converted mixed types' do
+          formatted = value.marshal({
+            name: { first: 'John', last: 'Doe' },
+            age: 40,
+            married: false,
+            hobbies: Set.new(%w(scuba hiking)),
+            parents: [
+              {
+                name: { first: 'John Sr.', last: 'Doe' },
+                age: 70,
+              },
+              {
+                name: { first: 'Jane', last: 'Doe' },
+                age: nil,
+              },
+            ],
+            scores: [4.5, 5, 3.9, nil, 'perfect'],
+          })
+          expect(formatted).to eq({
+            m: {
+              "name" => {
+                m: {
+                  "first" => { s: 'John' },
+                  "last" => { s: 'Doe' },
+                }
+              },
+              "age" => { n: "40" },
+              "married" => { bool: false },
+              "hobbies" => { ss: ['scuba', 'hiking'] },
+              "parents" => { l:
+                [
+                  {
+                    m: {
+                      "name" => { m: {
+                        "first" => { s: 'John Sr.' },
+                        "last" => { s: 'Doe' },
+                      }},
+                      "age" => { n: "70" },
+                    }
+                  },
+                  {
+                    m: {
+                      "name" => { m: {
+                        "first" => { s: 'Jane' },
+                        "last" => { s: 'Doe' },
+                      }},
+                      "age" => { null: true },
+                    },
+                  }
+                ],
+              },
+              "scores" => {
+                l: [
+                  { n: '4.5' },
+                  { n: '5' },
+                  { n: '3.9' },
+                  { null: true },
+                  { s: 'perfect' },
+                ]
+              }
+            }
+          })
+        end
+
         it 'raises an argument error for unhandled types' do
           expect {
             value.marshal(Time.now)
@@ -45,6 +135,20 @@ module Aws
       end
 
       describe '#unmarshal' do
+
+        it 'converts :m to a hash with string keys (not symbols)' do
+          expect(value.unmarshal(m: {
+            "foo" => { s: 'bar' },
+            "abc" => { s: 'mno' },
+          })).to eq('foo' => 'bar', 'abc' => 'mno')
+        end
+
+        it 'converts :l to an array' do
+          expect(value.unmarshal(l: [
+            { s: 'abc' },
+            { s: 'mno' },
+          ])).to eq(%w(abc mno))
+        end
 
         it 'converts :ss to a set of strings' do
           expect(value.unmarshal(ss: %w(abc mno))).to eq(Set.new(%w(abc mno)))
@@ -71,6 +175,86 @@ module Aws
 
         it 'converts :s to a string' do
           expect(value.unmarshal(s: 'abc')).to eq('abc')
+        end
+
+        it 'converts :bool to booleans true or false' do
+          # supports both true and false
+          expect(value.unmarshal(bool: true)).to be(true)
+          expect(value.unmarshal(bool: false)).to be(false)
+        end
+
+        it 'converts :null to nil' do
+          expect(value.unmarshal(null: true)).to be(nil)
+        end
+
+        it 'recursively converted mixed types' do
+
+          expect(value.unmarshal({
+            m: {
+              "name" => {
+                m: {
+                  "first" => { s: 'John' },
+                  "last" => { s: 'Doe' },
+                }
+              },
+              "age" => { n: "40" },
+              "married" => { bool: false },
+              "hobbies" => { ss: ['scuba', 'hiking'] },
+              "parents" => { l:
+                [
+                  {
+                    m: {
+                      "name" => { m: {
+                        "first" => { s: 'John Sr.' },
+                        "last" => { s: 'Doe' },
+                      }},
+                      "age" => { n: "70" },
+                    }
+                  },
+                  {
+                    m: {
+                      "name" => { m: {
+                        "first" => { s: 'Jane' },
+                        "last" => { s: 'Doe' },
+                      }},
+                      "age" => { null: true },
+                    },
+                  }
+                ],
+              },
+              "scores" => {
+                l: [
+                  { n: '4.5' },
+                  { n: '5' },
+                  { n: '3.9' },
+                  { null: true },
+                  { s: 'perfect' },
+                ]
+              }
+            }
+          })).to eq(
+            'name' =>  { 'first' => 'John', 'last' => 'Doe' },
+            'age' => 40,
+            'married' => false,
+            'hobbies' => Set.new(%w(scuba hiking)),
+            'parents' => [
+              {
+                'name' => { 'first' => 'John Sr.', 'last' => 'Doe' },
+                'age' => 70,
+              },
+              {
+                'name' => { 'first' => 'Jane', 'last' => 'Doe' },
+                'age' => nil,
+              },
+            ],
+            'scores' => [
+              BigDecimal.new('4.5'),
+              BigDecimal.new('5'),
+              BigDecimal.new('3.9'),
+              nil,
+              'perfect'
+            ]
+          )
         end
 
         it 'raises an argument error for unhandled types' do

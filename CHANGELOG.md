@@ -1,6 +1,17 @@
 Next Release (TBD)
 ------------------
 
+* Feature - DynamoDB Document Attributes - Added support for hashes,
+  arrays, booleans, and nil to DynamoDB attribute values.
+
+      ddb.put_item(table_name:'name', item: {
+        id: 123,
+        complex: {
+          attributes: true
+          lists: ['with', { mixed: true }, 123, 'data'],
+        }
+      })
+
 * Feature - S3::Object#upload_file - Added a utility method for uploading
   files to Amazon S3. This method automatically manages uploading large
   objects using the multipart upload APIs.

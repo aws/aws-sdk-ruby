@@ -24,13 +24,23 @@ module Aws
 
         def format(obj)
           case obj
+          when Hash
+            obj.each.with_object(m:{}) do |(key, value), map|
+              map[:m][key.to_s] = format(value)
+            end
+          when Array
+            obj.each.with_object(l:[]) do |value, list|
+              list[:l] << format(value)
+            end
           when String then { s: obj }
           when Numeric then { n: obj.to_s }
           when StringIO, IO then { b: obj.read }
           when Set then format_set(obj)
+          when true, false then { bool: obj }
+          when nil then { null: true }
           else
-            msg = "unsupported type, expected Set, String, Numeric, or "
-            msg << "IO object, got #{obj.class.name}"
+            msg = "unsupported type, expected Hash, Array, Set, String, Numeric, "
+            msg << "IO, true, false, or nil, got #{obj.class.name}"
             raise ArgumentError, msg
           end
         end
@@ -55,9 +65,16 @@ module Aws
         def format(obj)
           type, value = extract_type_and_value(obj)
           case type
+          when :m
+            value.each.with_object({}) do |(key, value), map|
+              map[key] = format(value)
+            end
+          when :l then value.map { |v| format(v) }
           when :s then value
           when :n then BigDecimal.new(value)
           when :b then StringIO.new(value)
+          when :null then nil
+          when :bool then value
           when :ss then Set.new(value)
           when :ns then Set.new(value.map { |n| BigDecimal.new(n) })
           when :bs then Set.new(value.map { |b| StringIO.new(b) })
