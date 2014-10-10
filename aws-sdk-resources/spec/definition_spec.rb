@@ -813,21 +813,199 @@ module Aws
               expect(thing.doo_dads.limit(3).map(&:identifiers)).to eq(doo_dads[0..2].map(&:identifiers))
             end
 
-            it 'defines a getter for sub-resources'
+          end
 
-            it 'does not define a getter for sibling resources'
+          describe 'sub resources' do
+
+            it 'defines a getter with a single argument for sub-resources' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'subResources' => {
+                    'resources' => ['DooDad'],
+                    'identifiers' => { 'Name' => 'ThingName' }
+                  }
+                },
+                'DooDad' => {
+                  'identifiers' => [
+                    { 'name' => 'ThingName' },
+                    { 'name' => 'Name' }
+                  ]
+                }
+              }
+
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name')
+              doo_dad = thing.doo_dad('doo-dad-name')
+              expect(doo_dad).to be_kind_of(namespace::DooDad)
+              expect(doo_dad.name).to eq('doo-dad-name')
+              expect(doo_dad.thing_name).to eq('thing-name')
+              expect(doo_dad.thing.name).to eq('thing-name') # reverse association
+              expect(doo_dad.client).to be(thing.client)
+            end
+
+            it 'defines a getter without arguments when possible' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'subResources' => {
+                    'resources' => ['DooDad'],
+                    'identifiers' => { 'Name' => 'ThingName' }
+                  }
+                },
+                'DooDad' => {
+                  'identifiers' => [
+                    { 'name' => 'ThingName' },
+                  ]
+                }
+              }
+
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name')
+              doo_dad = thing.doo_dad
+              expect(doo_dad).to be_kind_of(namespace::DooDad)
+              expect(doo_dad.thing_name).to eq('thing-name')
+              expect(doo_dad.thing.name).to eq('thing-name') # reverse association
+              expect(doo_dad.client).to be(thing.client)
+            end
 
           end
 
           describe 'has some associations' do
 
-            it 'returns an array of resource objects'
+            it 'returns a batch of resource objects' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'shape' => 'ThingShape',
+                  'hasSome' => {
+                    'DooDads' => {
+                      'resource' => {
+                        'type' => 'DooDad',
+                        'identifiers' => [
+                          {
+                            'target' => 'Name',
+                            'sourceType' => 'dataMember',
+                            'source' => 'DooDads[].Name',
+                          }
+                        ]
+                      },
+                      'path' => 'DooDads[]'
+                    }
+                  }
+                },
+                'DooDad' => {
+                  'identifiers' => [
+                    { 'name' => 'Name' },
+                  ]
+                }
+              }
+              shapes.update(
+                'ThingShape' => {
+                  'type' => 'structure',
+                  'members' => {
+                    'DooDads' => { 'shape' => 'DooDadList' }
+                  }
+                },
+                'DooDadList' => {
+                  'type' => 'list',
+                  'member' => { 'shape' => 'DooDad' }
+                },
+                'DooDad' => {
+                  'type' => 'structure',
+                  'members' => {
+                    'Name' => { 'shape' => 'StringShape' }
+                  }
+                },
+                'StringShape' => { 'type' => 'string' }
+              )
+
+              apply_definition
+
+              # returns associated object when data member set
+              thing = namespace::Thing.new(
+                name: 'thing-name',
+                data: {
+                  'doo_dads' => [
+                    { 'name' => 'dd1' },
+                    { 'name' => 'dd2' },
+                  ]
+                }
+              )
+              doo_dads = thing.doo_dads
+              expect(doo_dads).to be_kind_of(namespace::DooDad::Batch)
+              expect(doo_dads.count).to be(2)
+              doo_dads.each do |dd|
+                expect(dd).to be_kind_of(namespace::DooDad)
+                expect(dd.client).to be(thing.client)
+                expect(dd.data_loaded?).to be(true)
+              end
+
+              # returns an empty list when data member not set
+              thing = namespace::Thing.new(
+                name: 'thing-name',
+                data: {}
+              )
+              doo_dads = thing.doo_dads
+              expect(doo_dads).to be_empty
+            end
 
           end
 
           describe 'has one associations' do
 
-            it 'returns a single resource object'
+            it 'returns a single resource object' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'shape' => 'ThingShape',
+                  'hasOne' => {
+                    'DooDad' => {
+                      'resource' => {
+                        'type' => 'DooDad',
+                        'identifiers' => [
+                          {
+                            'target' => 'Name',
+                            'sourceType' => 'dataMember',
+                            'source' => 'DooDadName',
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                'DooDad' => {
+                  'identifiers' => [
+                    { 'name' => 'Name' },
+                  ]
+                }
+              }
+              shapes['StringShape'] = { 'type' => 'string' }
+              shapes['ThingShape'] = {
+                'type' => 'structure',
+                'members' => {
+                  'DooDadName' => { 'shape' => 'StringShape' }
+                }
+              }
+
+              apply_definition
+
+              # returns associated object when data member set
+              thing = namespace::Thing.new(
+                name: 'thing-name',
+                data: { 'doo_dad_name' => 'doo-dad-name' }
+              )
+              expect(thing.doo_dad.name).to eq('doo-dad-name')
+
+              # returns nil when data member not set
+              thing = namespace::Thing.new(
+                name: 'thing-name',
+                data: {}
+              )
+              expect(thing.doo_dad).to be(nil)
+            end
 
           end
 
