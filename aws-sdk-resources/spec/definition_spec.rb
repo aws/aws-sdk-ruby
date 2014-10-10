@@ -750,7 +750,7 @@ module Aws
                 'description' => 'desc'
               }
               client_response = double('client-response', data: {
-                'doo_dad' =>  data 
+                'doo_dad' =>  data
               })
               expect(client).to receive(:create_doo_dad).
                 with(thing_name: 'thing-name').
@@ -763,12 +763,102 @@ module Aws
               expect(doo_dad.data).to eq(data)
             end
 
-
           end
 
           describe 'has many associations' do
 
-            it 'returns an Enumerator'
+            it 'returns an enumerable' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'shape' => 'ThingShape',
+                  'hasMany' => {
+                    'DooDads' => {
+                      'request' => {
+                        'operation' => 'ListDooDads',
+                        'params' => [
+                          {
+                            'target' => 'ThingName',
+                            'sourceType' => 'identifier',
+                            'source' => 'Name'
+                          },
+                        ]
+                      },
+                      'resource' => {
+                        'type' => 'DooDad',
+                        'identifiers' => [
+                          {
+                            'target' => 'ThingName',
+                            'sourceType' => 'identifier',
+                            'source' => 'Name',
+                          },
+                          {
+                            'target' => 'ThingType',
+                            'sourceType' => 'dataMember',
+                            'source' => 'Type',
+                          },
+                          {
+                            'target' => 'Name',
+                            'sourceType' => 'responsePath',
+                            'source' => 'DooDads[].Name'
+                          },
+                        ],
+                      },
+                      'path' => 'DooDads[]'
+                    }
+                  }
+                },
+                'DooDad' => {
+                  'identifiers' => [
+                    { 'name' => 'ThingName' },
+                    { 'name' => 'ThingType' },
+                    { 'name' => 'Name' },
+                  ]
+                }
+              }
+              shapes['StringShape'] = { 'type' => 'string' }
+              shapes['ThingShape'] = {
+                'type' => 'structure',
+                'members' => {
+                  'Type' => { 'shape' => 'StringShape' }
+                }
+              }
+
+              apply_definition
+
+              page1 = double('client-response', data: {
+                'doo_dads' => [
+                  { 'name' => 'd1' },
+                  { 'name' => 'd2' },
+                ]
+              })
+              page2 = double('client-response', data: {
+                'doo_dads' => [
+                  { 'name' => 'd3' },
+                  { 'name' => 'd4' },
+                ]
+              })
+              allow(page1).to receive(:each).and_yield(page1).and_yield(page2)
+
+              allow(client).to receive(:list_doo_dads).
+                with(thing_name: 'thing-name').
+                and_return(page1)
+
+              thing = namespace::Thing.new(
+                name:'thing-name',
+                data: {'type' => 'Widget'}
+              )
+              expect(thing.doo_dads).to be_kind_of(Enumerable)
+              doo_dads = thing.doo_dads.to_a
+              expect(doo_dads.map(&:identifiers)).to eq([
+                { thing_name: 'thing-name', thing_type: 'Widget', name: 'd1' },
+                { thing_name: 'thing-name', thing_type: 'Widget', name: 'd2' },
+                { thing_name: 'thing-name', thing_type: 'Widget', name: 'd3' },
+                { thing_name: 'thing-name', thing_type: 'Widget', name: 'd4' }
+              ])
+              expect(doo_dads.all?(&:data_loaded?))
+              expect(thing.doo_dads.limit(3).map(&:identifiers)).to eq(doo_dads[0..2].map(&:identifiers))
+            end
 
             it 'defines a getter for sub-resources'
 
