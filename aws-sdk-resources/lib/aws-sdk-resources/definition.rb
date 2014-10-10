@@ -26,7 +26,7 @@ module Aws
           define_has_many(namespace, resource, definition['hasMany'] || {})
           define_has_some(namespace, resource, definition['hasSome'] || {})
           define_has_one(namespace, resource, definition['hasOne'] || {})
-          define_data_attributes(namespace, resource, definition['shape'])
+          define_data_attributes(namespace, resource, definition)
           define_subresources(namespace, resource, definition['subResources'] || {})
         end
         define_top_level_references(namespace)
@@ -109,19 +109,24 @@ module Aws
         end
       end
 
-      def define_data_attributes(namespace, resource, shape_name)
-        return unless shape_name
+      def define_data_attributes(namespace, resource, definition)
+        return unless shape_name = definition['shape']
         shape = resource.client_class.api.shape_map.shape('shape' => shape_name)
         shape.member_names.each do |member_name|
           if
-            resource.identifiers.include?(member_name) ||
-            resource.instance_methods.include?(member_name)
+            resource.instance_methods.include?(member_name) ||
+            data_attribute_is_an_identifier?(member_name, resource, definition)
           then
             next # some data attributes are duplicates to identifiers
           else
             resource.add_data_attribute(member_name)
           end
         end
+      end
+
+      def data_attribute_is_an_identifier?(attr_name, resource, definition)
+        resource.identifiers.include?(attr_name) ||
+        definition['identifiers'].any? { |i| underscore(i['dataMember']) == attr_name.to_s }
       end
 
       def define_load(namespace, resource, definition)

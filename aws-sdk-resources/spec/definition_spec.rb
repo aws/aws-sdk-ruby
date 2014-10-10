@@ -394,7 +394,7 @@ module Aws
               expect(thing).to respond_to(:size)
             end
 
-            it 'does not redefine identifiers that have the same name' do
+            it 'does not define attributes that collide with identifiers' do
               definition['resources'] = {
                 'Thing' => {
                   'identifiers' => [{ 'name' => 'Name' }],
@@ -417,6 +417,26 @@ module Aws
               expect(thing.name).to eq('thing-name')
               expect(thing).to respond_to(:color)
               expect(thing).to respond_to(:size)
+            end
+
+            it 'does not define attributes that have matched identifiers' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name', 'dataMember' => 'ThingName' }],
+                  'shape' => 'DataShape'
+                }
+              }
+              shapes['StringShape'] = { 'type' => 'string' }
+              shapes['DataShape'] = {
+                'type' => 'structure',
+                'members' => {
+                  'ThingName' => { 'shape' => 'StringShape' },
+                }
+              }
+              apply_definition
+              thing = namespace::Thing.new(name:'thing-name')
+              expect(thing.name).to eq('thing-name')
+              expect(thing).not_to respond_to(:thing_name)
             end
 
             it 'raises an error if method already exists' do
