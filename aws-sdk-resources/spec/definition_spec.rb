@@ -154,53 +154,6 @@ module Aws
               expect(thing.name).to eq('thing-name')
             end
 
-            it 'accepts identifier names in place of request params' do
-              # For this test case to work, request params must be renamed
-              # following the resource identifier sources.  In this example
-              # the "MakeThing" request requires a "ThingName" param, and
-              # we want the user to be able to specify "Name" (the idenitifer
-              # target) or "ThingName" (the request param).
-              pending('not implemented')
-              definition.update(
-                'service' => {
-                  'actions' => {
-                    'CreateThing' => {
-                      'request' => {
-                        'operation' => 'MakeThing'
-                      },
-                      'resource' => {
-                        'type' => 'Thing',
-                        'identifiers' => [
-                          {
-                            'target' => 'Name',
-                            'sourceType' => 'requestParameter',
-                            'source' => 'ThingName'
-                          }
-                        ]
-                      }
-                    }
-                  }
-                },
-                'resources' => {
-                  'Thing' => {
-                    'identifiers' => [{ 'name' => 'Name' }]
-                  }
-                }
-              )
-
-              expect(client).to receive(:make_thing).
-                with(thing_name:'thing-name') do |params|
-                  double('client-response',
-                    context: double('request-context', params:params))
-                end
-
-              apply_definition
-
-              svc = namespace::Resource.new
-              thing = svc.create_thing(name:'thing-name')
-              expect(thing.name).to eq('thing-name')
-            end
-
             it 'can return an array of resources' do
               definition.update(
                 'service' => {
