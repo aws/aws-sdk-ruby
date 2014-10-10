@@ -396,6 +396,7 @@ module AWS::Core::Http
       it_behaves_like(:traps_certain_errors_as_networking_errors, EOFError)
       it_behaves_like(:traps_certain_errors_as_networking_errors, IOError)
       it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::ECONNABORTED)
+      it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::EHOSTUNREACH)
       it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::ECONNRESET)
       it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::EPIPE)
       it_behaves_like(:traps_certain_errors_as_networking_errors, Errno::EINVAL)
