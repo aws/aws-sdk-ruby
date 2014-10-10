@@ -201,6 +201,8 @@ module AWS
     # @attr_reader [String] ssl_ca_path (nil)
     #   The path the a CA cert directory.
     #
+    # @attr_reader [String] ssl_cert_store (nil)
+    #
     # @attr_reader [Boolean] ssl_verify_peer (true) When `true`
     #   the HTTP handler validate server certificates for HTTPS requests.
     #
@@ -462,6 +464,7 @@ module AWS
             :ssl_verify_peer?,
             :ssl_ca_file,
             :ssl_ca_path,
+            :ssl_cert_store,
             :use_ssl?,
             :user_agent_prefix,
           ]
@@ -529,6 +532,8 @@ module AWS
 
       add_option :ssl_ca_path
 
+      add_option :ssl_cert_store
+
       add_option :stub_requests, false, :boolean => true
 
       add_option :use_ssl, true, :boolean => true
@@ -536,7 +541,7 @@ module AWS
       add_option :user_agent_prefix
 
       add_option :verify_response_body_content_length, true, :boolean => true
-      
+
     end
   end
 end
