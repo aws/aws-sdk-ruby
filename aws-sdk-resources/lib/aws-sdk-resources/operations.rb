@@ -188,7 +188,7 @@ module Aws
               remaining -= batch.size
             else
               yield(batch.first(remaining))
-              break
+              return
             end
           end
         end
