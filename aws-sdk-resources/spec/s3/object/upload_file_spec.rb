@@ -36,26 +36,18 @@ module Aws
           )
         }
 
-        let(:one_meg_file) {
-          file = Tempfile.new('ten-meg-file')
-          file.write('.' * one_meg)
-          file.rewind
-          file
-        }
+        let(:one_meg_file) { Tempfile.new('ten-meg-file') }
 
-        let(:ten_meg_file) {
-          file = Tempfile.new('ten-meg-file')
-          file.write('.' * (10 * one_meg))
-          file.rewind
-          file
-        }
+        let(:ten_meg_file) { Tempfile.new('ten-meg-file') }
 
-        let(:seventeen_meg_file) {
-          file = Tempfile.new('ten-meg-file')
-          file.write('.' * (17 * one_meg))
-          file.rewind
-          file
-        }
+        let(:seventeen_meg_file) { Tempfile.new('ten-meg-file') }
+
+        before(:each) do
+          allow(File).to receive(:size).with(one_meg_file).and_return(one_meg)
+          allow(File).to receive(:size).with(ten_meg_file).and_return(10 * one_meg)
+          allow(File).to receive(:size).with(ten_meg_file.path).and_return(10 * one_meg)
+          allow(File).to receive(:size).with(seventeen_meg_file).and_return(17 * one_meg)
+        end
 
         describe 'small objects' do
 
