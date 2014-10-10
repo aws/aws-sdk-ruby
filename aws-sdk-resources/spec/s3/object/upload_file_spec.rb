@@ -152,6 +152,8 @@ module Aws
 
           it 'automatically deletes failed multipart upload on error' do
 
+            allow_any_instance_of(FilePart).to receive(:read).and_return(nil)
+
             client.stub_responses(:upload_part, [
               { etag: 'etag-1' },
               { etag: 'etag-2' },

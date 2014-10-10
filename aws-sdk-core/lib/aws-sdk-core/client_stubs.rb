@@ -1,3 +1,5 @@
+require 'thread'
+
 module Aws
 
   # This module provides the ability to specify the data and/or errors to
@@ -8,6 +10,7 @@ module Aws
 
     def initialize(*args)
       @stubs = {}
+      @stub_mutex = Mutex.new
       super
     end
 
@@ -83,11 +86,13 @@ module Aws
 
     # @api private
     def next_stub(operation_name)
-      stubs = @stubs[operation_name.to_sym] || []
-      case stubs.length
-      when 0 then new_stub(operation_name)
-      when 1 then stubs.first
-      else stubs.shift
+      @stub_mutex.synchronize do
+        stubs = @stubs[operation_name.to_sym] || []
+        case stubs.length
+        when 0 then new_stub(operation_name)
+        when 1 then stubs.first
+        else stubs.shift
+        end
       end
     end
 
@@ -101,12 +106,14 @@ module Aws
     end
 
     def apply_stubs(operation_name, stubs)
-      @stubs[operation_name.to_sym] = stubs.map do |stub|
-        case stub
-        when Exception then stub
-        when String then service_error_class(stub)
-        when Hash then new_stub(operation_name, stub)
-        else stub
+      @stub_mutex.synchronize do
+        @stubs[operation_name.to_sym] = stubs.map do |stub|
+          case stub
+          when Exception then stub
+          when String then service_error_class(stub)
+          when Hash then new_stub(operation_name, stub)
+          else stub
+          end
         end
       end
     end
