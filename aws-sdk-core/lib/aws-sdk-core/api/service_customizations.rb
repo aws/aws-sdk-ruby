@@ -102,6 +102,11 @@ module Aws
         add_plugin 'Aws::Plugins::S3Redirects'
         add_plugin 'Aws::Plugins::S3SseCpk'
         add_plugin 'Aws::Plugins::S3UrlEncodedKeys'
+        defs = client_class.waiters.instance_variable_get("@definitions")
+        defs[:bucket_exists]['ignore_errors'] = ['NotFound']
+        defs[:object_exists]['ignore_errors'] = ['NotFound']
+        defs[:bucket_not_exists]['success_value'] = 'NotFound'
+        defs[:object_not_exists]['success_value'] = 'NotFound'
       end
 
       customize 'sqs' do
