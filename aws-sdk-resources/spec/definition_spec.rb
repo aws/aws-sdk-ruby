@@ -25,7 +25,6 @@ module Aws
 
         before(:each) do
           namespace.const_set(:Client, client_class)
-          client_class.paginators = Paging::NullProvider.new
           allow(client_class).to receive(:new).and_return(client)
         end
 

@@ -1,4 +1,5 @@
 require 'cgi'
+require 'multi_json'
 
 module Seahorse
   module Util
@@ -22,6 +23,10 @@ module Seahorse
 
       def uri_escape(string)
         CGI::escape(string.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
+      end
+
+      def load_json(path)
+        MultiJson.load(File.open(path, 'r', encoding: 'UTF-8') { |f| f.read })
       end
 
     end

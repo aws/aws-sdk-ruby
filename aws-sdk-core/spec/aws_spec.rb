@@ -60,19 +60,5 @@ module Aws
       }.to raise_error(Errors::MissingRegionError)
     end
 
-    it 'loads API with relative paths from the GEM_ROOT' do
-      path = File.join(Aws::GEM_ROOT, 'apis/S3.api.json')
-      api = StringIO.new(File.read(path))
-      expect(File).to receive(:open).with(path, 'r', encoding: 'UTF-8').and_return(api)
-      Aws.add_service('DummyService', api: File.join(GEM_ROOT, 'apis/S3.api.json'))
-    end
-
-    it 'does not prefix absolute api paths with GEM_ROOT' do
-      path = File.join(Aws::GEM_ROOT, 'apis/S3.api.json')
-      api = StringIO.new(File.read(path))
-      expect(File).to receive(:open).with(path, 'r', encoding: 'UTF-8').and_return(api)
-      Aws.add_service('DummyService', api: path)
-    end
-
   end
 end

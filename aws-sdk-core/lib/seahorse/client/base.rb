@@ -179,11 +179,14 @@ module Seahorse
         # @param [Model::Api, Hash] api
         # @return [Model::Api]
         def set_api(api)
-          if api.is_a?(Hash)
-            @api = Model::Api.new(api)
-          else
-            @api = api
-          end
+          @api =
+            case api
+            when nil then Model::Api.new({})
+            when Model::Api then api
+            when Hash then Model::Api.new(api)
+            when String then Model::Api.new(Util.load_json(api))
+            else raise ArgumentError, "invalid api definition #{api}"
+            end
           define_operation_methods
           @api
         end

@@ -68,7 +68,9 @@ module Aws
   end
 
   autoload :Client, 'aws-sdk-core/client'
+  autoload :ClientPaging, 'aws-sdk-core/client_paging'
   autoload :ClientStubs, 'aws-sdk-core/client_stubs'
+  autoload :ClientWaiters, 'aws-sdk-core/client_waiters'
   autoload :CredentialProviderChain, 'aws-sdk-core/credential_provider_chain'
   autoload :Credentials, 'aws-sdk-core/credentials'
   autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
@@ -216,7 +218,7 @@ module Aws
 
     # @api private
     def load_json(path)
-      MultiJson.load(File.open(path, 'r', encoding: 'UTF-8') { |f| f.read })
+      Seahorse::Util.load_json(path)
     end
 
     # Registers a new service.
@@ -259,42 +261,18 @@ module Aws
 
   # build service client classes
   service_added do |name, svc_module, options|
+
     svc_module.const_set(:Client, Client.define(name, options))
     svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
-  end
 
-  # build service paginators
-  service_added do |name, svc_module, options|
-    paginators = options[:paginators]
-    paginators = case paginators
-      when Paging::Provider then paginators
-      when Hash then Paging::Provider.new(paginators)
-      when String then Paging::Provider.new(Aws.load_json(paginators))
-      when nil then Paging::NullProvider.new
-      else raise ArgumentError, 'invalid :paginators option'
-    end
-    svc_module.const_get(:Client).paginators = paginators
-  end
-
-  # build service waiters
-  service_added do |name, svc_module, options|
-    waiters = options[:waiters]
-    waiters = case waiters
-      when Waiters::Provider then waiters
-      when Hash              then Waiters::Provider.new(waiters)
-      when String            then Waiters::Provider.new(Aws.load_json(waiters))
-      when nil               then Waiters::NullProvider.new
-      else raise ArgumentError, 'invalid :waiters option'
-    end
+    # temporary workaround for issue with S3 waiter definition
     if name == 'S3'
-      # temporary workaround for issue with S3 waiter definition
-      defs = waiters.instance_variable_get("@definitions")
+      defs = svc_module::Client.waiters.instance_variable_get("@definitions")
       defs[:bucket_exists]['ignore_errors'] = ['NotFound']
       defs[:object_exists]['ignore_errors'] = ['NotFound']
       defs[:bucket_not_exists]['success_value'] = 'NotFound'
       defs[:object_not_exists]['success_value'] = 'NotFound'
     end
-    svc_module.const_get(:Client).waiters = waiters
   end
 
 end

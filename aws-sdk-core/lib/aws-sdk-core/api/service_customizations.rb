@@ -2,19 +2,6 @@ module Aws
   module Api
     module ServiceCustomizations
 
-      DEFAULT_PLUGINS = [
-        'Seahorse::Client::Plugins::Logging',
-        'Seahorse::Client::Plugins::RestfulBindings',
-        'Seahorse::Client::Plugins::ContentLength',
-        'Aws::Plugins::UserAgent',
-        'Aws::Plugins::RetryErrors',
-        'Aws::Plugins::GlobalConfiguration',
-        'Aws::Plugins::RegionalEndpoint',
-        'Aws::Plugins::ResponsePaging',
-        'Aws::Plugins::RequestSigner',
-        'Aws::Plugins::StubResponses',
-      ]
-
       @customizations = Hash.new {|h,k| h[k] = [] }
 
       class << self
@@ -40,7 +27,7 @@ module Aws
         # @see {#customize}
         # @see {Customizer}
         def apply(client_class)
-          apply_plugins(client_class)
+          apply_protocol_plugin(client_class)
           endpoint_prefix = client_class.api.metadata('endpointPrefix')
           @customizations[endpoint_prefix].each do |customization|
             Customizer.new(client_class).apply(&customization)
@@ -48,17 +35,6 @@ module Aws
         end
 
         private
-
-        def apply_plugins(client_class)
-          apply_default_plugins(client_class)
-          apply_protocol_plugin(client_class)
-        end
-
-        def apply_default_plugins(client_class)
-          DEFAULT_PLUGINS.each do |plugin|
-            client_class.add_plugin(plugin)
-          end
-        end
 
         def apply_protocol_plugin(client_class)
           protocol = client_class.api.metadata('protocol')
