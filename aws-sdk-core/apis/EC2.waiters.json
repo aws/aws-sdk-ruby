@@ -13,11 +13,11 @@
       "operation": "DescribeInstanceStatus",
       "success_value": "ok"
     },
-    "SystemStatusGreen": {
+    "SystemStatusOk": {
       "extends": "__InstanceStatus",
       "acceptor_path": "InstanceStatuses[].SystemStatus.Status"
     },
-    "InstanceStatusGreen": {
+    "InstanceStatusOk": {
       "extends": "__InstanceStatus",
       "acceptor_path": "InstanceStatuses[].InstanceStatus.Status"
     },
