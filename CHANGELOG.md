@@ -6,6 +6,11 @@ Next Release (TBD)
 
       Aws.config[:ssl_ca_store] = OpenSSL::X509::Store.new
 
+* Feature - Waiters - Added waiters for Amazon EC2 instance
+  instance and system status.
+
+* Feature - Waiters - Added waiters for Amazon EC2 image availability.
+
 2.0.2 (2014-10-08)
 ------------------
 
