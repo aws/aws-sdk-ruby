@@ -57,6 +57,12 @@
                 :type: :integer
               SearchInstanceCount:
                 :type: :integer
+              Limits:
+                :children:
+                  MaximumReplicationCount:
+                    :type: :integer
+                  MaximumPartitionCount:
+                    :type: :integer
 - :name: DefineAnalysisScheme
   :method: :define_analysis_scheme
   :inputs:
@@ -78,6 +84,8 @@
             Stopwords:
             - :string
             StemmingDictionary:
+            - :string
+            JapaneseTokenizationDictionary:
             - :string
             AlgorithmicStemming:
             - :string
@@ -503,6 +511,12 @@
                 :type: :integer
               SearchInstanceCount:
                 :type: :integer
+              Limits:
+                :children:
+                  MaximumReplicationCount:
+                    :type: :integer
+                  MaximumPartitionCount:
+                    :type: :integer
 - :name: DeleteExpression
   :method: :delete_expression
   :inputs:
@@ -777,6 +791,12 @@
                     :type: :integer
                   SearchInstanceCount:
                     :type: :integer
+                  Limits:
+                    :children:
+                      MaximumReplicationCount:
+                        :type: :integer
+                      MaximumPartitionCount:
+                        :type: :integer
 - :name: DescribeExpressions
   :method: :describe_expressions
   :inputs:
