@@ -344,7 +344,7 @@ version.
 | Amazon Glacier                      | Glacier                   | 2012-06-01                     |
 | Amazon Kinesis                      | Kinesis                   | 2013-12-02                     |
 | Amazon Redshift                     | Redshift                  | 2012-12-01                     |
-| Amazon Relational Database Service  | RDS                       | 2013-09-09                     |
+| Amazon Relational Database Service  | RDS                       | 2014-09-01                     |
 | Amazon Route 53                     | Route53                   | 2013-04-01                     |
 | Amazon Route 53 Domains             | Route53Domains            | 2014-05-15                     |
 | Amazon Simple Email Service         | SES                       | 2010-12-01                     |
