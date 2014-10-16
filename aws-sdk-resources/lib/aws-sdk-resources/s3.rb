@@ -23,12 +23,7 @@ module Aws
       #
       # @param [Symbol] http_method
       #   The HTTP method to generate a presigned URL for. Valid values
-      #   are:
-      #
-      #   * `:get`
-      #   * `:put`
-      #   * `:head`
-      #   * `:delete`
+      #   are `:get`, `:put`, `:head`, and `:delete`.
       #
       # @param [Hash] params
       #   Additional request parameters to use when generating the pre-signed
