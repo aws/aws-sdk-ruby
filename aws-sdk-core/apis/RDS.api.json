@@ -1,11 +1,11 @@
 {
   "metadata":{
-    "apiVersion":"2013-09-09",
+    "apiVersion":"2014-09-01",
     "endpointPrefix":"rds",
     "serviceAbbreviation":"Amazon RDS",
     "serviceFullName":"Amazon Relational Database Service",
     "signatureVersion":"v4",
-    "xmlNamespace":"http://rds.amazonaws.com/doc/2013-09-09/",
+    "xmlNamespace":"http://rds.amazonaws.com/doc/2014-09-01/",
     "protocol":"query"
   },
   "operations":{
@@ -121,6 +121,48 @@
         }
       ]
     },
+    "CopyDBParameterGroup":{
+      "name":"CopyDBParameterGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CopyDBParameterGroupMessage"},
+      "output":{
+        "shape":"CopyDBParameterGroupResult",
+        "wrapper":true,
+        "resultWrapper":"CopyDBParameterGroupResult"
+      },
+      "errors":[
+        {
+          "shape":"DBParameterGroupNotFoundFault",
+          "error":{
+            "code":"DBParameterGroupNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"DBParameterGroupAlreadyExistsFault",
+          "error":{
+            "code":"DBParameterGroupAlreadyExists",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"DBParameterGroupQuotaExceededFault",
+          "error":{
+            "code":"DBParameterGroupQuotaExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        }
+      ]
+    },
     "CopyDBSnapshot":{
       "name":"CopyDBSnapshot",
       "http":{
@@ -165,6 +207,48 @@
           "shape":"SnapshotQuotaExceededFault",
           "error":{
             "code":"SnapshotQuotaExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        }
+      ]
+    },
+    "CopyOptionGroup":{
+      "name":"CopyOptionGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CopyOptionGroupMessage"},
+      "output":{
+        "shape":"CopyOptionGroupResult",
+        "wrapper":true,
+        "resultWrapper":"CopyOptionGroupResult"
+      },
+      "errors":[
+        {
+          "shape":"OptionGroupAlreadyExistsFault",
+          "error":{
+            "code":"OptionGroupAlreadyExistsFault",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"OptionGroupNotFoundFault",
+          "error":{
+            "code":"OptionGroupNotFoundFault",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"OptionGroupQuotaExceededFault",
+          "error":{
+            "code":"OptionGroupQuotaExceededFault",
             "httpStatusCode":400,
             "senderFault":true
           },
@@ -289,6 +373,24 @@
           "error":{
             "code":"OptionGroupNotFoundFault",
             "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"StorageTypeNotSupportedFault",
+          "error":{
+            "code":"StorageTypeNotSupported",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"AuthorizationNotFoundFault",
+          "error":{
+            "code":"AuthorizationNotFound",
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -447,6 +549,15 @@
           "shape":"InvalidDBSubnetGroupFault",
           "error":{
             "code":"InvalidDBSubnetGroupFault",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"StorageTypeNotSupportedFault",
+          "error":{
+            "code":"StorageTypeNotSupported",
             "httpStatusCode":400,
             "senderFault":true
           },
@@ -1490,6 +1601,24 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"StorageTypeNotSupportedFault",
+          "error":{
+            "code":"StorageTypeNotSupported",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"AuthorizationNotFoundFault",
+          "error":{
+            "code":"AuthorizationNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -2017,6 +2146,24 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"StorageTypeNotSupportedFault",
+          "error":{
+            "code":"StorageTypeNotSupported",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"AuthorizationNotFoundFault",
+          "error":{
+            "code":"AuthorizationNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -2158,6 +2305,24 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"StorageTypeNotSupportedFault",
+          "error":{
+            "code":"StorageTypeNotSupported",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"AuthorizationNotFoundFault",
+          "error":{
+            "code":"AuthorizationNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -2281,8 +2446,7 @@
     "AvailabilityZone":{
       "type":"structure",
       "members":{
-        "Name":{"shape":"String"},
-        "ProvisionedIopsCapable":{"shape":"Boolean"}
+        "Name":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -2302,6 +2466,20 @@
         "CharacterSetDescription":{"shape":"String"}
       }
     },
+    "CopyDBParameterGroupMessage":{
+      "type":"structure",
+      "required":[
+        "SourceDBParameterGroupIdentifier",
+        "TargetDBParameterGroupIdentifier",
+        "TargetDBParameterGroupDescription"
+      ],
+      "members":{
+        "SourceDBParameterGroupIdentifier":{"shape":"String"},
+        "TargetDBParameterGroupIdentifier":{"shape":"String"},
+        "TargetDBParameterGroupDescription":{"shape":"String"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "CopyDBSnapshotMessage":{
       "type":"structure",
       "required":[
@@ -2311,6 +2489,20 @@
       "members":{
         "SourceDBSnapshotIdentifier":{"shape":"String"},
         "TargetDBSnapshotIdentifier":{"shape":"String"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CopyOptionGroupMessage":{
+      "type":"structure",
+      "required":[
+        "SourceOptionGroupIdentifier",
+        "TargetOptionGroupIdentifier",
+        "TargetOptionGroupDescription"
+      ],
+      "members":{
+        "SourceOptionGroupIdentifier":{"shape":"String"},
+        "TargetOptionGroupIdentifier":{"shape":"String"},
+        "TargetOptionGroupDescription":{"shape":"String"},
         "Tags":{"shape":"TagList"}
       }
     },
@@ -2349,7 +2541,10 @@
         "OptionGroupName":{"shape":"String"},
         "CharacterSetName":{"shape":"String"},
         "PubliclyAccessible":{"shape":"BooleanOptional"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"},
+        "TdeCredentialPassword":{"shape":"String"}
       }
     },
     "CreateDBInstanceReadReplicaMessage":{
@@ -2369,7 +2564,8 @@
         "OptionGroupName":{"shape":"String"},
         "PubliclyAccessible":{"shape":"BooleanOptional"},
         "Tags":{"shape":"TagList"},
-        "DBSubnetGroupName":{"shape":"String"}
+        "DBSubnetGroupName":{"shape":"String"},
+        "StorageType":{"shape":"String"}
       }
     },
     "CreateDBParameterGroupMessage":{
@@ -2515,7 +2711,9 @@
         "CharacterSetName":{"shape":"String"},
         "SecondaryAvailabilityZone":{"shape":"String"},
         "PubliclyAccessible":{"shape":"Boolean"},
-        "StatusInfos":{"shape":"DBInstanceStatusInfoList"}
+        "StatusInfos":{"shape":"DBInstanceStatusInfoList"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -2765,7 +2963,9 @@
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupName":{"shape":"String"},
         "PercentProgress":{"shape":"Integer"},
-        "SourceRegion":{"shape":"String"}
+        "SourceRegion":{"shape":"String"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -2964,6 +3164,7 @@
         "Engine":{"shape":"String"},
         "EngineVersion":{"shape":"String"},
         "DBParameterGroupFamily":{"shape":"String"},
+        "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"},
         "DefaultOnly":{"shape":"Boolean"},
@@ -3002,6 +3203,7 @@
         "FilenameContains":{"shape":"String"},
         "FileLastWritten":{"shape":"Long"},
         "FileSize":{"shape":"Long"},
+        "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"}
       }
@@ -3028,6 +3230,7 @@
       "members":{
         "DBParameterGroupName":{"shape":"String"},
         "Source":{"shape":"String"},
+        "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"}
       }
@@ -3066,6 +3269,7 @@
       "required":["DBParameterGroupFamily"],
       "members":{
         "DBParameterGroupFamily":{"shape":"String"},
+        "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"}
       }
@@ -3073,7 +3277,8 @@
     "DescribeEventCategoriesMessage":{
       "type":"structure",
       "members":{
-        "SourceType":{"shape":"String"}
+        "SourceType":{"shape":"String"},
+        "Filters":{"shape":"FilterList"}
       }
     },
     "DescribeEventSubscriptionsMessage":{
@@ -3094,6 +3299,7 @@
         "EndTime":{"shape":"TStamp"},
         "Duration":{"shape":"IntegerOptional"},
         "EventCategories":{"shape":"EventCategoriesList"},
+        "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"}
       }
@@ -3104,6 +3310,7 @@
       "members":{
         "EngineName":{"shape":"String"},
         "MajorEngineVersion":{"shape":"String"},
+        "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"}
       }
@@ -3128,6 +3335,7 @@
         "DBInstanceClass":{"shape":"String"},
         "LicenseModel":{"shape":"String"},
         "Vpc":{"shape":"BooleanOptional"},
+        "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"}
       }
@@ -3156,6 +3364,7 @@
         "ProductDescription":{"shape":"String"},
         "OfferingType":{"shape":"String"},
         "MultiAZ":{"shape":"BooleanOptional"},
+        "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"}
       }
@@ -3309,12 +3518,12 @@
     "Filter":{
       "type":"structure",
       "required":[
-        "FilterName",
-        "FilterValue"
+        "Name",
+        "Values"
       ],
       "members":{
-        "FilterName":{"shape":"String"},
-        "FilterValue":{"shape":"FilterValueList"}
+        "Name":{"shape":"String"},
+        "Values":{"shape":"FilterValueList"}
       }
     },
     "FilterList":{
@@ -3509,7 +3718,8 @@
       "type":"structure",
       "required":["ResourceName"],
       "members":{
-        "ResourceName":{"shape":"String"}
+        "ResourceName":{"shape":"String"},
+        "Filters":{"shape":"FilterList"}
       }
     },
     "Long":{"type":"long"},
@@ -3534,7 +3744,10 @@
         "AutoMinorVersionUpgrade":{"shape":"BooleanOptional"},
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupName":{"shape":"String"},
-        "NewDBInstanceIdentifier":{"shape":"String"}
+        "NewDBInstanceIdentifier":{"shape":"String"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"},
+        "TdeCredentialPassword":{"shape":"String"}
       }
     },
     "ModifyDBParameterGroupMessage":{
@@ -3790,7 +4003,9 @@
         "AvailabilityZones":{"shape":"AvailabilityZoneList"},
         "MultiAZCapable":{"shape":"Boolean"},
         "ReadReplicaCapable":{"shape":"Boolean"},
-        "Vpc":{"shape":"Boolean"}
+        "Vpc":{"shape":"Boolean"},
+        "StorageType":{"shape":"String"},
+        "SupportsIops":{"shape":"Boolean"}
       },
       "wrapper":true
     },
@@ -3841,7 +4056,8 @@
         "MultiAZ":{"shape":"BooleanOptional"},
         "EngineVersion":{"shape":"String"},
         "Iops":{"shape":"IntegerOptional"},
-        "DBInstanceIdentifier":{"shape":"String"}
+        "DBInstanceIdentifier":{"shape":"String"},
+        "StorageType":{"shape":"String"}
       }
     },
     "PointInTimeRestoreNotEnabledFault":{
@@ -4075,7 +4291,10 @@
         "Engine":{"shape":"String"},
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupName":{"shape":"String"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"},
+        "TdeCredentialPassword":{"shape":"String"}
       }
     },
     "RestoreDBInstanceToPointInTimeMessage":{
@@ -4101,7 +4320,10 @@
         "Engine":{"shape":"String"},
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupName":{"shape":"String"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "StorageType":{"shape":"String"},
+        "TdeCredentialArn":{"shape":"String"},
+        "TdeCredentialPassword":{"shape":"String"}
       }
     },
     "RevokeDBSecurityGroupIngressMessage":{
@@ -4192,6 +4414,17 @@
       },
       "error":{
         "code":"StorageQuotaExceeded",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "StorageTypeNotSupportedFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"StorageTypeNotSupported",
         "httpStatusCode":400,
         "senderFault":true
       },
@@ -4325,10 +4558,22 @@
         "DBSecurityGroup":{"shape":"DBSecurityGroup"}
       }
     },
+    "CopyDBParameterGroupResult":{
+      "type":"structure",
+      "members":{
+        "DBParameterGroup":{"shape":"DBParameterGroup"}
+      }
+    },
     "CopyDBSnapshotResult":{
       "type":"structure",
       "members":{
         "DBSnapshot":{"shape":"DBSnapshot"}
+      }
+    },
+    "CopyOptionGroupResult":{
+      "type":"structure",
+      "members":{
+        "OptionGroup":{"shape":"OptionGroup"}
       }
     },
     "CreateDBInstanceResult":{

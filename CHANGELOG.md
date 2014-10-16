@@ -1,6 +1,8 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Amazon RDS - Added support for the 2014-09-01 API version.
+
 * Feature - Pre-signed URLs - Added the ability to generate presigned
   URLs from an `Aws::S3::Object`.
 
