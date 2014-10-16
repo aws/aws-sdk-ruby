@@ -29,8 +29,10 @@ module Aws
       # @param [String, nil] prefix
       def structure(structure, values, prefix)
         values.each do |name, value|
-          member_shape = structure.member(name)
-          format(member_shape, value, prefix + query_name(member_shape))
+          unless value.nil?
+            member_shape = structure.member(name)
+            format(member_shape, value, prefix + query_name(member_shape))
+          end
         end
       end
 

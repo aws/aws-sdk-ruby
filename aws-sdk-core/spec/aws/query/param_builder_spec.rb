@@ -58,6 +58,15 @@ module Aws
             ])
           end
 
+          it 'does not serialize nil values' do
+            members['Name'] = { 'type' => 'string' }
+            members['Nickname'] = { 'type' => 'string' }
+            params = { name: 'John', nickname: nil }
+            expect(query_params(params)).to eq([
+              ['Name', 'John'],
+            ])
+          end
+
         end
 
         describe 'flattened lists' do

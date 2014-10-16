@@ -27,6 +27,9 @@ Next Release (TBD)
 
 * Feature - Waiters - Added waiters for Amazon EC2 image availability.
 
+* Issue - Resolved an issue with the query serializer sending `nil`
+  values. See #133.
+
 2.0.2 (2014-10-08)
 ------------------
 
