@@ -8,6 +8,57 @@ module Aws
 
     class Object
 
+      # Generates a pre-signed URL for this object.
+      #
+      # @example Pre-signed GET URL, valid for one hour
+      #
+      #     obj.presigned_url(:get, expires_in: 3600)
+      #     #=> "https://bucket-name.s3.amazonaws.com/object-key?..."
+      #
+      # @example Pre-signed PUT with a canned ACL
+      #
+      #     # the object uploaded using this URL will be publicly accessible
+      #     obj.presigned_url(:put, acl: 'public-read')
+      #     #=> "https://bucket-name.s3.amazonaws.com/object-key?..."
+      #
+      # @param [Symbol] http_method
+      #   The HTTP method to generate a presigned URL for. Valid values
+      #   are:
+      #
+      #   * `:get`
+      #   * `:put`
+      #   * `:head`
+      #   * `:delete`
+      #
+      # @param [Hash] params
+      #   Additional request parameters to use when generating the pre-signed
+      #   URL. See the related documentation in {Client} for accepted
+      #   params.
+      #
+      #   | HTTP Method   | Client Method          |
+      #   |---------------|------------------------|
+      #   | `:get`        | {Client#put_object}    |
+      #   | `:put`        | {Client#get_object}    |
+      #   | `:head`       | {Client#head_object}   |
+      #   | `:delete`     | {Client#delete_object} |
+      #
+      # @option params [Integer] :exipres_in (900) Number of seconds before
+      #   the pre-signed URL expires. This may not exceed one week (604800
+      #   seconds).
+      #
+      # @raise [ArgumentError] Raised if `:expires_in` exceeds one week
+      #   (604800 seconds).
+      #
+      # @return [String]
+      #
+      def presigned_url(http_method, params = {})
+        presigner = Presigner.new(client: client)
+        presigner.presigned_url("#{http_method.downcase}_object", params.merge(
+          bucket: bucket_name,
+          key: key,
+        ))
+      end
+
       # Uploads a file from disk to the current object in S3.
       #
       # @example

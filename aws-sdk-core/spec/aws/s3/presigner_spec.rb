@@ -27,7 +27,7 @@ module Aws
       let(:now) { double('now') }
       let(:utc) { double('utc-time') }
       let(:datetime) { '20130524T000000Z' }
-      
+
 
       describe '#initialize' do
         it 'accepts an injected S3 client' do

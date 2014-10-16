@@ -1,6 +1,22 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Pre-signed URLs - Added the ability to generate presigned
+  URLs from an `Aws::S3::Object`.
+
+      s3 = Aws::S3::Resource.new
+      obj = s3.bucket('aws-sdk').object('key').
+
+      obj.presigned_url(:get)
+      #=> "https://bucket-name.s3.amazonaws.com/object-key?..."
+
+  URLs expire in 15 minutes by default. You can configure the
+  expiration period and provide additional params:
+
+      # url expires in one hour, the file upload will be
+      # publicly accessible
+      obj.presigned_url(:put, expires_in: 3600, acl: 'public-read')
+
 * Feature - HTTP - Added the ability to configure the CA Cert store
   for HTTPs requests.
 
