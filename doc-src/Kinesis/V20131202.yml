@@ -43,7 +43,7 @@
   Calls the GetRecords API operation.
   @param [Hash] options
     * `:shard_iterator` - *required* - (String) The position in the shard from which you want to start sequentially reading data records. A shard iterator specifies this position using the sequence number of a data record in the shard.
-    * `:limit` - (Integer) The maximum size of data to return, in MB. Specify a value of up to 10,000. If you specify a value that is greater than 10,000, GetRecords throws InvalidArgumentException.
+    * `:limit` - (Integer) The maximum number of records to return. Specify a value of up to 10,000. If you specify a value that is greater than 10,000, GetRecords throws InvalidArgumentException.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:records` - (Array<Hash>)
@@ -97,7 +97,7 @@
   Calls the PutRecord API operation.
   @param [Hash] options
     * `:stream_name` - *required* - (String) The name of the stream to put the data record into.
-    * `:data` - *required* - (String) The data blob to put into the record, which is Base64-encoded when the blob is serialized. The maximum size of the data blob (the payload after Base64-decoding) is 50 kilobytes (KB)
+    * `:data` - *required* - (String) The data blob to put into the record, which is Base64-encoded when the blob is serialized. The maximum size of the data blob (the payload before Base64-encoding) is 50 kilobytes (KB)
     * `:partition_key` - *required* - (String) Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 bytes. Amazon Kinesis uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key will map to the same shard within the stream.
     * `:explicit_hash_key` - (String) The hash value used to explicitly determine the shard the data record is assigned to by overriding the partition key hash.
     * `:sequence_number_for_ordering` - (String) Guarantees strictly increasing sequence numbers, for puts from the same client and to the same partition key. Usage: set the SequenceNumberForOrdering of record n to the sequence number of record n-1 (as returned in the PutRecordResult when putting record n-1). If this parameter is not set, records will be coarsely ordered based on arrival time.
