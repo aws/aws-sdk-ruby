@@ -7,7 +7,14 @@ module Aws
     #
     #      signer = Aws::S3::Presigner.new
     #      url = signer.presigned_url(:get_object, bucket: "bucket", key: "key")
+    #
     class Presigner
+
+      # @api private
+      ONE_WEEK = 60 * 60 * 24 * 7
+
+      # @api private
+      FIFTEEN_MINUTES = 60 * 15
 
       # @option options [Client] :client Optionally provide an existing
       #   S3 client
@@ -17,13 +24,17 @@ module Aws
 
       # @param [Symbol] method Symbolized method name of the operation you want
       #   to presign.
-      # @option params [Integer] :expires_in (86400) The number of seconds
-      #   before the presigned URL expires. Must be less than 604800 seconds
-      #   (one week).
+      #
+      # @option params [Integer] :expires_in (900) The number of seconds
+      #   before the presigned URL expires. Defaults to 15 minutes.
+      #
+      # @raise [ArgumentError] Raises an ArgumentError if `:expires_in`
+      #   exceeds one week.
+      #
       def presigned_url(method, params = {})
         request = @client.build_request(method, params)
         request.handle(PresignHandler, step: :sign, priority: 99)
-        expires_in = params.delete(:expires_in) || 86400
+        expires_in = params.delete(:expires_in) || FIFTEEN_MINUTES
         validate_expires_in_header(expires_in)
         request.context[:presigned_expires_in] = expires_in
         request.send_request.data
@@ -31,7 +42,7 @@ module Aws
 
       private
       def validate_expires_in_header(expires_in)
-        if(expires_in > 604800)
+        if(expires_in > ONE_WEEK)
           raise ArgumentError.new(
             "expires_in value of #{expires_in} exceeds one-week maximum"
           )
