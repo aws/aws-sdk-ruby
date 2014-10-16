@@ -32,6 +32,9 @@ Next Release (TBD)
 * Feature - Waiters - Added `:job_complete` waiter to
   Aws::ElasticTranscoder::Client.
 
+* Feature - Aws::CloudSearch::Client - Added support for configuring advanced
+  Japanese language processing.
+
 * Issue - Resolved an issue with the query serializer sending `nil`
   values. See #133.
 

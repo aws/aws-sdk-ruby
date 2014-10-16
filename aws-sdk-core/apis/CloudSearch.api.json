@@ -1040,6 +1040,7 @@
         "Synonyms":{"shape":"String"},
         "Stopwords":{"shape":"String"},
         "StemmingDictionary":{"shape":"String"},
+        "JapaneseTokenizationDictionary":{"shape":"String"},
         "AlgorithmicStemming":{"shape":"AlgorithmicStemming"}
       }
     },
@@ -1513,7 +1514,8 @@
         "Processing":{"shape":"Boolean"},
         "SearchInstanceType":{"shape":"SearchInstanceType"},
         "SearchPartitionCount":{"shape":"PartitionCount"},
-        "SearchInstanceCount":{"shape":"InstanceCount"}
+        "SearchInstanceCount":{"shape":"InstanceCount"},
+        "Limits":{"shape":"Limits"}
       }
     },
     "DomainStatusList":{
@@ -1728,6 +1730,17 @@
       },
       "exception":true
     },
+    "Limits":{
+      "type":"structure",
+      "required":[
+        "MaximumReplicationCount",
+        "MaximumPartitionCount"
+      ],
+      "members":{
+        "MaximumReplicationCount":{"shape":"MaximumReplicationCount"},
+        "MaximumPartitionCount":{"shape":"MaximumPartitionCount"}
+      }
+    },
     "ListDomainNamesResponse":{
       "type":"structure",
       "members":{
@@ -1756,6 +1769,14 @@
       }
     },
     "Long":{"type":"long"},
+    "MaximumPartitionCount":{
+      "type":"integer",
+      "min":1
+    },
+    "MaximumReplicationCount":{
+      "type":"integer",
+      "min":1
+    },
     "MultiAZ":{"type":"boolean"},
     "OptionState":{
       "type":"string",
