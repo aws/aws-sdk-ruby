@@ -1,4 +1,4 @@
-Next Release (TBD)
+2.0.3 (2014-10-16)
 ------------------
 
 * Feature - Amazon RDS - Added support for the 2014-09-01 API version.
