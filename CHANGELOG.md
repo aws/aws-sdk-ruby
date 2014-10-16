@@ -29,6 +29,9 @@ Next Release (TBD)
 
 * Feature - Waiters - Added waiters for Amazon EC2 image availability.
 
+* Feature - Waiters - Added `:job_complete` waiter to
+  Aws::ElasticTranscoder::Client.
+
 * Issue - Resolved an issue with the query serializer sending `nil`
   values. See #133.
 

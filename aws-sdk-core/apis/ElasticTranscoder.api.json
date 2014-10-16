@@ -758,7 +758,7 @@
     },
     "CaptionFormatFormat":{
       "type":"string",
-      "pattern":"(^mov-text$)|(^cea-608$)|(^cea-708$)|(^srt$)|(^scc$)|(^webvtt$)|(^dfxp$)"
+      "pattern":"(^mov-text$)|(^srt$)|(^scc$)|(^webvtt$)|(^dfxp$)"
     },
     "CaptionFormatPattern":{
       "type":"string",
@@ -1311,7 +1311,7 @@
     },
     "PlaylistFormat":{
       "type":"string",
-      "pattern":"(^HLSv3$)"
+      "pattern":"(^HLSv3$)|(^HLSv4$)|(^Smooth$)"
     },
     "Playlists":{
       "type":"list",
@@ -1333,7 +1333,7 @@
     },
     "PresetContainer":{
       "type":"string",
-      "pattern":"(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^ogg$)"
+      "pattern":"(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^ogg$)|(^fmp4$)"
     },
     "PresetType":{
       "type":"string",
@@ -1568,7 +1568,6 @@
     },
     "UpdatePipelineResponse":{
       "type":"structure",
-      "required":["Pipeline"],
       "members":{
         "Pipeline":{"shape":"Pipeline"}
       }
