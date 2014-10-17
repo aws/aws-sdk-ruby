@@ -48,25 +48,25 @@ module Aws
 
     # @return [String,nil]
     def access_key_id
-      refresh_if_stale
+      refresh_if_near_expiration
       @access_key_id
     end
 
     # @return [String,nil]
     def secret_access_key
-      refresh_if_stale
+      refresh_if_near_expiration
       @secret_access_key
     end
 
     # @return [String,nil]
     def session_token
-      refresh_if_stale
+      refresh_if_near_expiration
       @session_token
     end
 
     # @return [Time,nil]
     def expiration
-      refresh_if_stale
+      refresh_if_near_expiration
       @expiration
     end
 
@@ -88,7 +88,7 @@ module Aws
 
     # Refreshes instance metadata credentials if they are within
     # 5 minutes of expiration.
-    def refresh_if_stale
+    def refresh_if_near_expiration
       refresh! if @expiration && @expiration.utc <= Time.now.utc + 5 * 60
     end
 
