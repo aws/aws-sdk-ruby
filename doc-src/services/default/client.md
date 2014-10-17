@@ -2,55 +2,37 @@ An API client for <%= full_name %>.
 
 # Configuration
 
-You can provide default configuration options to `Aws.config` for
-all services, or for only this service. You can additionally provide
-configuration options to the constructor. Constructor options always
-take precedence.
+To construct a client, you need to configure a `:region` and `:credentials`.
 
-    # default region for all service
-    Aws.config[:region] = 'us-west-2'
-
-    # default region for only this service
-    Aws.config[:<%= svc_name.downcase %>] = { region: 'us-west-1' }
-
-    # this has the highest precedence
-    Aws::<%= svc_name %>::Client.new(region: 'us-east-1')
-
-At a minimum, you must configure `:region` and `:credentials`.
+    <%= svc_name.downcase %> = Aws::<%= svc_name %>::Client.new(
+      region: region_name,
+      credentials: credentials
+    )
 
 ## Region
 
-If `ENV['AWS_REGION']` is set, this is used as the default region.
+You can configure a default region in the following locations:
 
-The `:region` option is used to build the `:endpoint`. You can override the
-endpoint constructed from the region, but the region is still required for
-signing requests.
+* `ENV['AWS_REGION']`
+* `Aws.config[:region]`
 
-    <%= svc_name.downcase %> = Aws::<%= svc_name %>::Client.new(region: 'us-west-1')
-    <%= svc_name.downcase %>.config.endpoint #=> <%= Aws::EndpointProvider.default_provider.resolve(service: api.metadata('endpointPrefix'), region:'us-west-1', scheme:'https').inspect %>
+[Go here for a list of supported regions.](http://docs.aws.amazon.com/general/latest/gr/rande.html)
 
 ## Credentials
 
-Credentials are used to sign requests sent to AWS. The Ruby SDK
-attempts to load credentials from the following locations:
+Credentials are loaded automatically from the following locations:
 
-* From the instance profile when running on EC2
-* From AWS shared credentials file located at `ENV['HOME']/.aws/credentials`.
-* From `ENV['AWS_ACCESS_KEY_ID']` and `ENV['SECRET_ACCESS_KEY']`
+* `ENV['AWS_ACCESS_KEY']` and `ENV['AWS_SECRET_ACCESS_KEY']`
+* `Aws.config[:credentials]`
+* Shared credentials file, `~/.aws/credentials`
+* EC2 Instance profile
 
-If credentials can not be found, they must be configured via `:credentials`:
+You can also construct a credentials object from one of the following
+classes:
 
-    credentials = Aws::SharedCredentials.new(
-      path: '/path/to/file',
-      profile_name: Rails.env)
-
-    Aws::<%= svc_name %>::Client.new(credentials: credentials)
-
-The `:credentials` option should be one of the following types:
-
-* {Aws::Credentials}
-* {Aws::SharedCredentials}
-* {Aws::InstanceProfileCredentials}
+* {Credentials}
+* {SharedCredentials}
+* {InstanceProfileCredentials}
 
 Alternatively, you configure credentials with `:access_key_id` and
 `:secret_access_key`:
@@ -63,7 +45,5 @@ Alternatively, you configure credentials with `:access_key_id` and
       secret_access_key: creds['secret_access_key']
     )
 
-**It is recommended to never configure credentials statically in your
-application.** This makes it difficult to rotate credentials and
-easy to commit to source control.
-
+**Always load your credentials from outside your application.** Avoid
+configuring credentials statically and never commit them to source control.
