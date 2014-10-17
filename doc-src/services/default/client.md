@@ -33,6 +33,7 @@ classes:
 * {Credentials}
 * {SharedCredentials}
 * {InstanceProfileCredentials}
+* {AssumeRoleCredentials}
 
 Alternatively, you configure credentials with `:access_key_id` and
 `:secret_access_key`:

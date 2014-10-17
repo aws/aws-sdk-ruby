@@ -67,6 +67,7 @@ module Aws
     autoload const_name, "aws-sdk-core/#{const_name.downcase}"
   end
 
+  autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
   autoload :Client, 'aws-sdk-core/client'
   autoload :ClientPaging, 'aws-sdk-core/client_paging'
   autoload :ClientStubs, 'aws-sdk-core/client_stubs'
@@ -79,6 +80,7 @@ module Aws
   autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
   autoload :PageableResponse, 'aws-sdk-core/pageable_response'
   autoload :RestBodyHandler, 'aws-sdk-core/rest_body_handler'
+  autoload :RefreshingCredentials, 'aws-sdk-core/refreshing_credentials'
   autoload :Service, 'aws-sdk-core/service'
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
   autoload :Structure, 'aws-sdk-core/structure'
