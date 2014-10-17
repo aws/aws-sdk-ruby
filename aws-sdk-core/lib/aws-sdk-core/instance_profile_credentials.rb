@@ -38,8 +38,8 @@ module Aws
       @http_open_timeout = options[:http_open_timeout] || 1
       @http_read_timeout = options[:http_read_timeout] || 1
       @http_debug_output = options[:http_debug_output]
-      @refresh_mutex = Mutex.new
-      refresh!
+      @mutex = Mutex.new
+      _refresh
     end
 
     # @return [Integer] The number of times to retry failed atttempts to
@@ -71,25 +71,37 @@ module Aws
     end
 
     def refresh!
-      @refresh_mutex.synchronize do
-        credentials = MultiJson.load(get_credentials)
-        @access_key_id = credentials['AccessKeyId']
-        @secret_access_key = credentials['SecretAccessKey']
-        @session_token = credentials['Token']
-        if expires = credentials['Expiration']
-          @expiration = Time.parse(expires)
-        else
-          @expiration = nil
-        end
-      end
+      @mutex.synchronize { _refresh }
     end
 
     private
 
+    # Should be called from inside a synchronize block
+    def _refresh
+      credentials = MultiJson.load(get_credentials)
+      @access_key_id = credentials['AccessKeyId']
+      @secret_access_key = credentials['SecretAccessKey']
+      @session_token = credentials['Token']
+      if expires = credentials['Expiration']
+        @expiration = Time.parse(expires)
+      else
+        @expiration = nil
+      end
+    end
+
     # Refreshes instance metadata credentials if they are within
     # 5 minutes of expiration.
     def refresh_if_near_expiration
-      refresh! if @expiration && @expiration.utc <= Time.now.utc + 5 * 60
+      if near_expiration?
+        @mutex.synchronize do
+          _refresh if near_expiration?
+        end
+      end
+    end
+
+    def near_expiration?
+      # are we within 5 minutes of expiration?
+      (Time.now.to_i + 5 * 60) > @expiration.to_i
     end
 
     def get_credentials
