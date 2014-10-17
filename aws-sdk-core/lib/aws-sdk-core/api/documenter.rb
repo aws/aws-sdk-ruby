@@ -173,7 +173,7 @@ Constructs an API client.
         m.scope = :instance
         m.parameters << ['waiter_name', nil]
         m.parameters << ['params', '{}']
-        m.docstring = YARD::Registry['Aws::Client#wait_until'].docstring
+        m.docstring = YARD::Registry['Aws::ClientWaiters#wait_until'].docstring
 
         waiters = @client_class.waiters.waiter_names.sort.inject('') do |w,name|
           operation = @client_class.waiters.waiter(name).send(:operation_name)
