@@ -1,6 +1,11 @@
 Next Release (TBD)
 ------------------
 
+* Issue - Aws::PageableResponse - Calling `#count` on a pageable response
+  was triggering n API calls to get the number of response pages. Instead
+  it raises an error now, unless the wrapped data object responds to
+  count. Fixes #106.
+
 2.0.3 (2014-10-16)
 ------------------
 

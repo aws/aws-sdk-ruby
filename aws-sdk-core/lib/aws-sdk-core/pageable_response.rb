@@ -84,6 +84,24 @@ module Aws
     end
     alias each each_page
 
+    # @api private
+    def count
+      if respond_to?(:count)
+        data.count
+      else
+        raise NotImplementedError
+      end
+    end
+
+    # @api private
+    def respond_to?(method_name, *args)
+      if method_name == :count
+        data.respond_to?(:count)
+      else
+        super
+      end
+    end
+
     private
 
     # @param [Hash] params A hash of additional request params to

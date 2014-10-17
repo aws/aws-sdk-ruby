@@ -171,5 +171,39 @@ module Aws
       end
 
     end
+
+    describe '#count' do
+
+      it 'raises not implemented error by default' do
+        data = double('data')
+        resp = double('resp', data:data, error:nil, context:nil)
+        page = PageableResponse.new(resp, Paging::NullPager.new)
+        expect {
+          page.count
+        }.to raise_error(NotImplementedError)
+      end
+
+      it 'passes count from the raises not implemented error by default' do
+        data = double('data', count: 10)
+        resp = double('resp', data:data, error:nil, context:nil)
+        page = PageableResponse.new(resp, Paging::NullPager.new)
+        expect(page.count).to eq(10)
+      end
+
+      it 'returns false from respond_to when count not present' do
+        data = double('data')
+        resp = double('resp', data:data, error:nil, context:nil)
+        page = PageableResponse.new(resp, Paging::NullPager.new)
+        expect(page.respond_to?(:count)).to be(false)
+      end
+
+      it 'indicates it responds to count when data#count exists' do
+        data = double('data', count: 10)
+        resp = double('resp', data:data, error:nil, context:nil)
+        page = PageableResponse.new(resp, Paging::NullPager.new)
+        expect(page.respond_to?(:count))
+      end
+
+    end
   end
 end
