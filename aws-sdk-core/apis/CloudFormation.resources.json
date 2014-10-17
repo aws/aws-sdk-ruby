@@ -67,22 +67,28 @@
           }
         }
       },
+
+      "subResources": {
+        "resources": ["StackResource"],
+        "identifiers": {"Name": "StackName"}
+      },
+
       "hasMany": {
-        "StackResources": {
+        "ResourceSummaries": {
           "request": {
-            "operation": "DescribeStackResources",
+            "operation": "ListStackResources",
             "params": [
               { "target":"StackName", "sourceType":"identifier", "source":"Name" }
             ]
           },
           "resource": {
-            "type": "StackResource",
+            "type": "StackResourceSummary",
             "identifiers": [
-              { "target":"LogicalId", "sourceType":"responsePath", "source":"StackResources[].LogicalResourceId" },
-              { "target":"StackName", "sourceType":"responsePath", "source":"StackResources[].StackName" }
+              { "target":"LogicalId", "sourceType":"responsePath", "source":"StackResourceSummaries[].LogicalResourceId" },
+              { "target":"StackName", "sourceType":"requestParameter", "source":"StackName" }
             ]
           },
-          "path": "StackResources[]"
+          "path": "StackResourceSummaries[]"
         },
 
         "Events": {
@@ -111,9 +117,10 @@
         }
       }
     },
+
     "StackResource" : {
       "identifiers": [{"name": "LogicalId"}, {"name": "StackName"}],
-      "shape": "StackResource",
+      "shape": "StackResourceDetail",
       "load": {
         "request": {
           "operation": "DescribeStackResource",
@@ -125,6 +132,25 @@
         "path": "StackResourceDetail"
       }
     },
+
+    "StackResourceSummary": {
+      "identifiers": [{"name": "LogicalId"}, {"name": "StackName"}],
+      "shape": "StackResourceSummary",
+
+      "hasOne": {
+        "Resource": {
+          "resource": {
+            "type": "StackResource",
+            "identifiers": [
+            { "target":"LogicalId", "sourceType":"identifier", "source":"LogicalId" },
+            { "target":"StackName", "sourceType":"identifier", "source":"StackName" }
+            ]
+          }
+        }
+      }
+    },
+
+
     "Event": {
       "identifiers": [{"name": "Id"}],
       "shape": "StackEvent"
