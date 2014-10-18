@@ -3,14 +3,20 @@ require 'spec_helper'
 module Aws
   describe AssumeRoleCredentials do
 
-    let(:client) { STS::Client.new(stub_responses: true) }
+    let(:client) {
+      STS::Client.new(
+        region: 'us-eas-1',
+        credentials: credentials,
+        stub_responses: true
+      )
+    }
 
     let(:in_one_hour) { Time.now + 60 * 60 }
 
     let(:expiration) { in_one_hour }
 
     let(:credentials) {
-      double('credentials', 
+      double('credentials',
         access_key_id: 'akid',
         secret_access_key: 'secret',
         session_token: 'session',
