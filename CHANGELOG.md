@@ -1,6 +1,18 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Assume Role Credentials - Added a credentials class that assumes
+  a role via `Aws::STS::Client#assume_role`. Credentials are automatically
+  refreshed before the expire:
+
+  ```ruby
+  credentials = Aws::AssumeRoleCredentials.new(
+    role_arn: 'role-arn',
+    role_session_name: 'session-name',
+    client: Aws::STS::Client.new(...)
+  )
+  ```
+
 * Issue - Aws::PageableResponse - Calling `#count` on a pageable response
   was triggering n API calls to get the number of response pages. Instead
   it raises an error now, unless the wrapped data object responds to
