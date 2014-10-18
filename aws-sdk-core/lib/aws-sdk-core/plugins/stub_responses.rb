@@ -20,7 +20,9 @@ module Aws
 
       def after_initialize(client)
         # disable retries when stubbing responses
-        client.config.retry_limit = 0 if client.config.stub_responses
+        if client.config.stub_responses
+          client.handlers.remove(RetryErrors::Handler)
+        end
       end
 
       class Handler < Seahorse::Client::Handler
