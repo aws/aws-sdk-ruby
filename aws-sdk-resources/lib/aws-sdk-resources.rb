@@ -21,21 +21,35 @@ module Aws
 
   end
 
-  service_added do |_, svc_module, options|
-    definition = options[:resources]
-    definition = case definition
+  class << self
+
+    private
+
+    def define_resource_classes(svc_module, definition)
+      build_definition(definition).apply(svc_module)
+    end
+
+    def build_definition(definition)
+      case definition
       when nil then Resources::Definition.new({})
       when Resources::Definition then definition
       when Hash then Resources::Definition.new(definition)
       when String then Resources::Definition.new(Aws.load_json(definition), source_path: definition)
       else raise ArgumentError, "invalid resource definition #{definition}"
+      end
     end
-    definition.apply(svc_module)
 
-    begin
-      require "aws-sdk-resources/#{_.downcase}"
+    def load_resource_customizations(svc_name)
+      require "aws-sdk-resources/#{svc_name.downcase}"
     rescue LoadError
+      # no customizations
     end
 
   end
+
+  service_added do |svc_name, svc_module, options|
+    define_resource_classes(svc_module, options[:resources])
+    load_resource_customizations(svc_name)
+  end
+
 end
