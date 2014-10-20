@@ -16,14 +16,6 @@ module Aws
 
       let(:client) { S3::Client.new(stub_responses: true) }
 
-      before(:each) do
-        stub_const('ENV', {
-          'AWS_REGION' => 'us-east-1',
-          'AWS_ACCESS_KEY_ID' => 'akid',
-          'AWS_SECRET_ACCESS_KEY' => 'secret',
-        })
-      end
-
       describe '#upload_file' do
 
         let(:one_meg) { 1024 * 1024 }

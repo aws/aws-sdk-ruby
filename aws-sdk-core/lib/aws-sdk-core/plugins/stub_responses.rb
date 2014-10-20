@@ -14,6 +14,16 @@ module Aws
 
       option(:stub_responses, false)
 
+      option(:region) do |config|
+        'stubbed-region' if config.stub_responses
+      end
+
+      option(:credentials) do |config|
+        if config.stub_responses
+          Credentials.new('stubbed-akid', 'stubbed-secret')
+        end
+      end
+
       def add_handlers(handlers, config)
         handlers.add(Handler, step: :send) if config.stub_responses
       end
