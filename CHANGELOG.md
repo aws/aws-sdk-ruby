@@ -1,8 +1,8 @@
 Next Release (TBD)
 ------------------
 
-* Feature - Queue Attributes - `Aws::SQS::Queue` now had getter methods for
-  queue attributes that return the type-casted values from the `#attributes`
+* Feature - Queue Attributes - `Aws::SQS::Queue` now has getter methods for
+  queue attributes that return type-casted values from the `#attributes`
   hash.
 
   ```ruby
