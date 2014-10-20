@@ -1,6 +1,22 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Queue Attributes - `Aws::SQS::Queue` now had getter methods for
+  queue attributes that return the type-casted values from the `#attributes`
+  hash.
+
+  ```ruby
+  # before
+  queue.attributes['CreatedTimestamp'] #=> '1413825896' (epoc seconds)
+  queue.attributes['DelaySeconds'] #=> '60' (string seconds)
+  queue.attributes['QueueArn'] #=> 'arn'
+
+  # after
+  queue.created_timestamp #=> 2014-10-20 10:24:56 -0700 (Time obj)
+  queue.delay_seconds #=> 60 (integer seconds)
+  queue.arn #=> 'arn' (without extra queue_ prefix on method)
+  ```
+
 * Feature - Assume Role Credentials - Added a credentials class that assumes
   a role via `Aws::STS::Client#assume_role`. Credentials are automatically
   refreshed before the expire:
