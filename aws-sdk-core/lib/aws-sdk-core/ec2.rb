@@ -5,3 +5,9 @@ Aws.add_service(:EC2, {
   resources: File.join(Aws::APIS_DIR, 'EC2.resources.json'),
   waiters: File.join(Aws::APIS_DIR, 'EC2.waiters.json'),
 })
+
+module Aws
+  module EC2
+    autoload :Instance, 'aws-sdk-core/ec2/instance'
+  end
+end
