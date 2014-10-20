@@ -1,6 +1,15 @@
 Next Release (TBD)
 ------------------
 
+* Feature - SQS Batch Message Delete - `Aws::SQS::Message` objects can
+  now be deleted in batches. See #141.
+
+  ```ruby
+  messages = queue.receive_messages(max_number_of_messages: 5)
+  # do something with messages ...
+  messages.delete # delete the batch of messages in a single request
+  ```ruby
+
 * Feature - Batch Resource Actions - Added the following operations that can
   be called on collections or batches of `Aws::EC2::Instance` objects:
 

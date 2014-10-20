@@ -53,6 +53,25 @@ module Aws
           expect(params).to eq(params:[{name:'n1', values:['v1','v2']},{name:'n2', values:['v3','v4']}])
         end
 
+        it 'supports grouped params' do
+          params = {}
+          param_list = [
+            RequestParams::Base.new('entries[n].id'),
+            RequestParams::Base.new('entries[n].value')
+          ]
+          3.times do |n|
+            param_list[0].apply(params, "id-#{n+1}", n)
+            param_list[1].apply(params, "value-#{n+1}", n)
+          end
+          expect(params).to eq({
+            entries: [
+              { id: 'id-1', value: 'value-1' },
+              { id: 'id-2', value: 'value-2' },
+              { id: 'id-3', value: 'value-3' },
+            ]
+          })
+        end
+
       end
 
       describe RequestParams::Identifier do

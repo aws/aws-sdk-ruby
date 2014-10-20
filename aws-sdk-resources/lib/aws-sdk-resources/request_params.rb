@@ -26,9 +26,9 @@ module Aws
 
         def computed_params(options)
           params_hash = {}
-          Array(options[:resource]).each do |resource|
+          Array(options[:resource]).each.with_index do |resource, n|
             @params.each do |param|
-              param.apply(params_hash, options.merge(resource: resource))
+              param.apply(params_hash, options.merge(resource: resource, n: n))
             end
           end
           params_hash
@@ -55,9 +55,10 @@ module Aws
         def initialize(target)
           @target = target.to_s
           @steps = []
-          @target.scan(/\w+|\[\]/) do |step|
+          @target.scan(/\w+|\[\]|\[\*\]|\[[0-9]+\]/) do |step|
             case step
-            when /\d+/ then @steps += [:array, step.to_i]
+            when /\[\d+\]/ then @steps += [:array, step[1..-2].to_i]
+            when /\[\*\]/ then @steps += [:array, :n]
             when '[]' then @steps += [:array, -1]
             else @steps += [:hash, step.to_sym]
             end
@@ -72,23 +73,25 @@ module Aws
         # @param [Hash] params
         # @param [Object] value
         # @return [Hash] Returns the modified params hash.
-        def apply(params, value)
+        def apply(params, value, n = nil)
           if @final == -1
-            build_context(params) << value
+            build_context(params, n) << value
           else
-            build_context(params)[@final] = value
+            build_context(params, n)[@final] = value
           end
           params
         end
 
         private
 
-        def build_context(params)
+        def build_context(params, n)
           @steps.each_slice(2).inject(params) do |context, (key, type)|
             entry = type == :array ? [] : {}
             if key == -1
               context << entry
               entry
+            elsif key == :n
+              context[n] ||= entry
             else
               context[key] ||= entry
             end
@@ -113,7 +116,7 @@ module Aws
         # @option [requried, Resource] :resource
         def apply(params_hash, options)
           value = options[:resource].identifiers[identifier_name]
-          super(params_hash, value)
+          super(params_hash, value, options[:n])
         end
 
         # @api private
@@ -139,7 +142,7 @@ module Aws
         # @option [requried, Resource] :resource
         def apply(params_hash, options)
           value = options[:resource].data[member_name.to_sym]
-          super(params_hash, value)
+          super(params_hash, value, options[:n])
         end
 
         # @api private
@@ -163,7 +166,7 @@ module Aws
 
         # @param [Hash] params_hash
         def apply(params_hash, options = {})
-          super(params_hash, value)
+          super(params_hash, value, options[:n])
         end
 
         # @api private
@@ -187,7 +190,7 @@ module Aws
 
         # @param [Hash] params_hash
         def apply(params_hash, options = {})
-          super(params_hash, value)
+          super(params_hash, value, options[:n])
         end
 
         # @api private
@@ -211,7 +214,7 @@ module Aws
 
         # @param [Hash] params_hash
         def apply(params_hash, options = {})
-          super(params_hash, value)
+          super(params_hash, value, options[:n])
         end
 
         # @api private
