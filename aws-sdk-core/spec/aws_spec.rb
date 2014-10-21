@@ -36,19 +36,19 @@ module Aws
     end
 
     it 'defines a new service module' do
-      Aws.add_service('DummyService', api: File.join(GEM_ROOT, 'apis/EC2.api.json'))
+      Aws.add_service('DummyService', api: File.join(APIS_DIR, 'EC2.api.json'))
       expect(Aws::DummyService.ancestors).to include(Aws::Service)
     end
 
     it 'defines an errors module' do
-      Aws.add_service('DummyService', api: File.join(GEM_ROOT, 'apis/EC2.api.json'))
+      Aws.add_service('DummyService', api: File.join(APIS_DIR, 'EC2.api.json'))
       errors = Aws::DummyService::Errors
       expect(errors::ServiceError.ancestors).to include(Aws::Errors::ServiceError)
       expect(errors::FooError.ancestors).to include(Aws::Errors::ServiceError)
     end
 
     it 'defines a client class' do
-      Aws.add_service('DummyService', api: File.join(GEM_ROOT, 'apis/EC2.api.json'))
+      Aws.add_service('DummyService', api: File.join(APIS_DIR, 'EC2.api.json'))
       expect(Aws::DummyService::Client.ancestors).to include(Seahorse::Client::Base)
     end
 

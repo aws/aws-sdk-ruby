@@ -12,10 +12,7 @@ Seahorse::Util.irregular_inflections({
 module Aws
 
   # @api private
-  GEM_ROOT = File.dirname(File.dirname(__FILE__))
-
-  # @api private
-  APIS_DIR = File.join(GEM_ROOT, 'apis')
+  APIS_DIR = File.join(File.dirname(File.dirname(__FILE__)), 'apis')
 
   # @api private
   # services
