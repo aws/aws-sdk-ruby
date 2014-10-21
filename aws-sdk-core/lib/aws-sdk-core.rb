@@ -260,18 +260,8 @@ module Aws
 
   # build service client classes
   service_added do |name, svc_module, options|
-
     svc_module.const_set(:Client, Client.define(name, options))
     svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
-
-    # temporary workaround for issue with S3 waiter definition
-    if name == 'S3'
-      defs = svc_module::Client.waiters.instance_variable_get("@definitions")
-      defs[:bucket_exists]['ignore_errors'] = ['NotFound']
-      defs[:object_exists]['ignore_errors'] = ['NotFound']
-      defs[:bucket_not_exists]['success_value'] = 'NotFound'
-      defs[:object_not_exists]['success_value'] = 'NotFound'
-    end
   end
 
 end
