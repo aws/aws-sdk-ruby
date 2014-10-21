@@ -40,7 +40,7 @@ module Aws
     end
 
     def load_resource_customizations(svc_name)
-      require "aws-sdk-resources/#{svc_name.downcase}"
+      require "aws-sdk-resources/services/#{svc_name.downcase}"
     rescue LoadError
       # no customizations
     end
