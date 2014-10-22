@@ -7,7 +7,7 @@
     "serviceAbbreviation":"Amazon S3",
     "serviceFullName":"Amazon Simple Storage Service",
     "signatureVersion":"v4",
-    "v3Regions": [
+    "sigv2Regions": [
       "us-east-1",
       "us-west-1",
       "us-west-2",

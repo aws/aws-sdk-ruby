@@ -8,6 +8,25 @@ Aws.add_service(:S3, {
 
 module Aws
   module S3
+
     autoload :Presigner, 'aws-sdk-core/s3/presigner'
+    autoload :BucketRegionCache, 'aws-sdk-core/s3/bucket_region_cache'
+
+    # A cache of discovered bucket regions. You can call `#bucket_added`
+    # on this to be notified when you must configure the proper region
+    # to access a bucket.
+    #
+    # This cache is considered an implementation detail.
+    #
+    # @api private
+    BUCKET_REGIONS = BucketRegionCache.new
+
+    # @param [String] region
+    # @return [Boolean]
+    # @api private
+    def self.sigv2_region?(region)
+      Client.api.metadata('sigv2Regions').include?(region)
+    end
+
   end
 end

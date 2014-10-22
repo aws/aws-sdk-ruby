@@ -40,14 +40,7 @@ module Aws
       # Intentionally not documented - this should go away when all
       # services support signature version 4 in every region.
       option(:signature_version) do |cfg|
-        if
-          cfg.api.metadata('endpointPrefix') == 's3' &&
-          cfg.api.metadata('v3Regions').include?(cfg.region)
-        then
-          's3'
-        else
-          cfg.api.metadata('signatureVersion')
-        end
+        cfg.api.metadata('signatureVersion')
       end
 
       option(:sigv4_name) do |cfg|
@@ -82,7 +75,8 @@ module Aws
         private
 
         def sign_authenticated_requests(context)
-          if signer = SIGNERS[context.config.signature_version]
+          version = context[:signature_version] || context.config.signature_version
+          if signer = SIGNERS[version]
             require_credentials(context)
             signer.sign(context)
           end

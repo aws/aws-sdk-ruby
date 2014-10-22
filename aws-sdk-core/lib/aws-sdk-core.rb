@@ -136,6 +136,7 @@ module Aws
     autoload :S3LocationConstraint, 'aws-sdk-core/plugins/s3_location_constraint'
     autoload :S3Md5s, 'aws-sdk-core/plugins/s3_md5s'
     autoload :S3Redirects, 'aws-sdk-core/plugins/s3_redirects'
+    autoload :S3RegionDetection, 'aws-sdk-core/plugins/s3_region_detection'
     autoload :S3SseCpk, 'aws-sdk-core/plugins/s3_sse_cpk'
     autoload :S3UrlEncodedKeys, 'aws-sdk-core/plugins/s3_url_encoded_keys'
     autoload :SQSQueueUrls, 'aws-sdk-core/plugins/sqs_queue_urls'

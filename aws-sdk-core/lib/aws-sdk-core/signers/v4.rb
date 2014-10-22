@@ -9,7 +9,7 @@ module Aws
         new(
           context.config.credentials,
           context.config.sigv4_name,
-          context.config.sigv4_region
+          context[:sigv4_region] || context.config.sigv4_region
         ).sign(context.http_request)
       end
 
