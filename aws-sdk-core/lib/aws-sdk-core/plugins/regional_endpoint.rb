@@ -20,11 +20,7 @@ module Aws
       }
 
       option(:endpoint) do |cfg|
-        EndpointProvider.default_provider.resolve(
-          service: cfg.api.metadata('endpointPrefix'),
-          region: cfg.region,
-          scheme: 'https'
-        )
+        EndpointProvider.resolve(cfg.region, cfg.api.metadata('endpointPrefix'))
       end
 
       def after_initialize(client)
