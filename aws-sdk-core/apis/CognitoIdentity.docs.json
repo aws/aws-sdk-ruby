@@ -276,6 +276,19 @@
       "refs": {
       }
     },
+    "OIDCProviderARN": {
+      "base": null,
+      "refs": {
+        "OIDCProviderList$member": null
+      }
+    },
+    "OIDCProviderList": {
+      "base": null,
+      "refs": {
+        "CreateIdentityPoolInput$OpenIdConnectProviderARNs": null,
+        "IdentityPool$OpenIdConnectProviderARNs": null
+      }
+    },
     "OIDCToken": {
       "base": null,
       "refs": {

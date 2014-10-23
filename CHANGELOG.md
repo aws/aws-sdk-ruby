@@ -1,7 +1,8 @@
 Next Release (TBD)
 ------------------
 
-* Feature - `Aws::IAM::Client` - Added support for Open-ID Connect.
+* Feature - Open-ID Connect - Added support for Open-ID Connect to
+  `Aws::IAM::Client` and `Aws::EC2::Client`.
 
 * Feature - Queue Attributes - `Aws::SQS::Queue` now has getter methods for
   queue attributes that return type-casted values from the `#attributes`

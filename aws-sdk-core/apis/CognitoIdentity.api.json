@@ -542,7 +542,8 @@
         "IdentityPoolName":{"shape":"IdentityPoolName"},
         "AllowUnauthenticatedIdentities":{"shape":"IdentityPoolUnauthenticated"},
         "SupportedLoginProviders":{"shape":"IdentityProviders"},
-        "DeveloperProviderName":{"shape":"DeveloperProviderName"}
+        "DeveloperProviderName":{"shape":"DeveloperProviderName"},
+        "OpenIdConnectProviderARNs":{"shape":"OIDCProviderList"}
       }
     },
     "DeleteIdentityPoolInput":{
@@ -660,7 +661,8 @@
         "IdentityPoolName":{"shape":"IdentityPoolName"},
         "AllowUnauthenticatedIdentities":{"shape":"IdentityPoolUnauthenticated"},
         "SupportedLoginProviders":{"shape":"IdentityProviders"},
-        "DeveloperProviderName":{"shape":"DeveloperProviderName"}
+        "DeveloperProviderName":{"shape":"DeveloperProviderName"},
+        "OpenIdConnectProviderARNs":{"shape":"OIDCProviderList"}
       }
     },
     "IdentityPoolId":{
@@ -702,7 +704,7 @@
     "IdentityProviderToken":{
       "type":"string",
       "min":1,
-      "max":1024,
+      "max":2048,
       "pattern":"[\\S]+"
     },
     "IdentityProviders":{
@@ -828,10 +830,20 @@
       "error":{"httpStatusCode":403},
       "exception":true
     },
+    "OIDCProviderARN":{
+      "type":"string",
+      "min":20,
+      "max":2048
+    },
+    "OIDCProviderList":{
+      "type":"list",
+      "member":{"shape":"OIDCProviderARN"}
+    },
     "OIDCToken":{"type":"string"},
     "PaginationKey":{
       "type":"string",
-      "min":1
+      "min":1,
+      "pattern":"[\\S]+"
     },
     "QueryLimit":{
       "type":"integer",
