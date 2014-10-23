@@ -1,4 +1,4 @@
-Next Release (TBD)
+2.0.4 (2014-10-23)
 ------------------
 
 * Feature - Paginators - Added support for paging `Aws::EC2::Client#describe_volumes`.
