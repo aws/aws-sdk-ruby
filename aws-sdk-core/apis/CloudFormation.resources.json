@@ -106,15 +106,6 @@
           },
           "path": "StackEvents[]"
         }
-      },
-
-      "waiters": {
-        "Complete": {
-          "waiterName": "StackComplete",
-          "params": [
-            { "target": "StackName", "sourceType": "identifier", "source": "Name" }
-          ]
-        }
       }
     },
 
