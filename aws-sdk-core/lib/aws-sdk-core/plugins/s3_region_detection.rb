@@ -23,7 +23,7 @@ module Aws
           if region == 'us-east-1'
             "#{bucket}.s3-external-1.amazonaws.com"
           else
-            "#{bucket}.s3.#{region}.amazonaws.com"
+            bucket + '.' + URI.parse(EndpointProvider.resolve(region, 's3')).host
           end
         end
 
@@ -45,8 +45,7 @@ module Aws
           if cached_region && cached_region != context.config.region
             context.http_request.endpoint.host = new_hostname(context, cached_region)
             context[:sigv4_region] = cached_region
-            context[:signature_version] =
-              S3.sigv2_region?(cached_region) ? 's3' : 'v4'
+            context[:signature_version] = 'v4'
           end
         end
 
@@ -66,10 +65,7 @@ module Aws
             detect_region_and_retry(response)
           elsif wrong_sigv4_region?(response)
             extract_body_region_and_retry(response.context)
-          elsif moved_permanently?(response) and dns_style?(response.context)
-            # region detection not supported for 301 moved permanently
-            # when using path style
-            detect_region_and_retry(response) else
+          else
             response
           end
         end
@@ -83,10 +79,6 @@ module Aws
         def wrong_sigv4_region?(resp)
           resp.context.http_response.status_code == 400 &&
           resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/)
-        end
-
-        def moved_permanently?(resp)
-          resp.context.http_response.status_code == 301
         end
 
         def extract_body_region_and_retry(context)
@@ -120,14 +112,9 @@ module Aws
           signer.sign(context.http_request)
         end
 
-        def dns_style?(context)
-          bucket = context.params[:bucket]
-          context.http_request.endpoint.host.match(/^#{Regexp.escape(bucket)}\.s3/)
-        end
-
         def region_from_location_header(context)
           location = context.http_response.headers['location']
-          location.match(/s3\.(.+?)\.amazonaws\.com/)[1]
+          location.match(/s3.(.+?)\.amazonaws\.com/)[1]
         end
 
         def log_warning(context, actual_region)
