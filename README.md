@@ -337,7 +337,7 @@ version.
 | Amazon Cognito Identity             | CognitoIdentity           | 2014-06-30                     |
 | Amazon Cognito Sync                 | CognitoSync               | 2014-06-30                     |
 | Amazon DynamoDB                     | DynamoDB                  | 2012-08-10                     |
-| Amazon Elastic Compute Cloud        | EC2                       | 2014-06-15                     |
+| Amazon Elastic Compute Cloud        | EC2                       | 2014-09-01                     |
 | Amazon Elastic MapReduce            | EMR                       | 2009-03-31                     |
 | Amazon Elastic Transcoder           | ElasticTranscoder         | 2012-09-25                     |
 | Amazon ElastiCache                  | ElastiCache               | 2014-09-30                     |

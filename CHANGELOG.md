@@ -1,6 +1,13 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Amazon EC2 - Added support for the 2014-09-01 API version. Also
+  expanded coverage of resource interfaces, waiters, and paginators.
+
+* Issue - Amazon EC2 - Now defaulting to signature version 4 so that
+  `Aws::EC2::Client` works in the new 'eu-central-1' region without extra
+  configuration.
+
 2.0.4 (2014-10-23)
 ------------------
 
