@@ -1,6 +1,8 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Paginators - Added support for paging `Aws::EC2::Client#describe_volumes`.
+
 * Feature - Route53 Domains - Added support for auto-renew domains.
 
 * Feature - Open-ID Connect - Added support for Open-ID Connect to
