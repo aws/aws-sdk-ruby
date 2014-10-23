@@ -100,13 +100,6 @@ S3 client configured for "us-east-1" but the bucket "bucket" is in "eu-central-1
 
         end
 
-        it 'detects the moved permanently and redirects' do
-          client = S3::Client.new(client_opts.merge(region: 'us-west-2'))
-          resp = client.put_object(bucket:'bucket', key:'key', body:'body')
-          host = resp.context.http_request.endpoint.host
-          expect(host).to eq('bucket.s3.eu-central-1.amazonaws.com')
-        end
-
       end
 
       describe 'accessing eu-central-1 bucket using classic endpoitn and wrong sigv4 region' do
