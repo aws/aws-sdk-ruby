@@ -114,6 +114,7 @@ module AWS
     autoload :BucketCollection, 'aws/s3/bucket_collection'
     autoload :BucketTagCollection, 'aws/s3/bucket_tag_collection'
     autoload :BucketLifecycleConfiguration, 'aws/s3/bucket_lifecycle_configuration'
+    autoload :BucketRegionCache, 'aws/s3/bucket_region_cache'
     autoload :BucketVersionCollection, 'aws/s3/bucket_version_collection'
     autoload :Client, 'aws/s3/client'
     autoload :CORSRule, 'aws/s3/cors_rule'
@@ -136,6 +137,7 @@ module AWS
     autoload :PresignedPost, 'aws/s3/presigned_post'
     autoload :PresignV4, 'aws/s3/presign_v4'
     autoload :Request, 'aws/s3/request'
+    autoload :RegionDetection, 'aws/s3/region_detection'
     autoload :S3Object, 'aws/s3/s3_object'
     autoload :Tree, 'aws/s3/tree'
     autoload :UploadedPart, 'aws/s3/uploaded_part'
@@ -145,6 +147,8 @@ module AWS
     include Core::ServiceInterface
 
     endpoint_prefix 's3'
+
+    BUCKET_REGIONS = BucketRegionCache.new
 
     # @return [BucketCollection] Returns a collection that represents all
     #  buckets in the account.

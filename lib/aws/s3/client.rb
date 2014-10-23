@@ -26,6 +26,8 @@ module AWS
     # Client class for Amazon Simple Storage Service (S3).
     class Client < Core::Client
 
+      include RegionDetection
+
       signature_version :S3
 
       API_VERSION = '2006-03-01'
