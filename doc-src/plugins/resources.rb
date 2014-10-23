@@ -46,7 +46,7 @@ class ResourceDocPlugin
       namespace = YARD::Registry[svc_module.name]
       svc_module.constants.each do |const|
         klass = svc_module.const_get(const)
-        if klass.ancestors.include?(Aws::Resources::Resource)
+        if klass.is_a?(Module) && klass.ancestors.include?(Aws::Resources::Resource)
           yard_class = document_resource_class(const, namespace, klass)
           if const == :Resource
             yard_class.docstring = service_docstring(const, yard_class, klass)

@@ -340,7 +340,7 @@ version.
 | Amazon Elastic Compute Cloud        | EC2                       | 2014-06-15                     |
 | Amazon Elastic MapReduce            | EMR                       | 2009-03-31                     |
 | Amazon Elastic Transcoder           | ElasticTranscoder         | 2012-09-25                     |
-| Amazon ElastiCache                  | ElastiCache               | 2014-07-15                     |
+| Amazon ElastiCache                  | ElastiCache               | 2014-09-30                     |
 | Amazon Glacier                      | Glacier                   | 2012-06-01                     |
 | Amazon Kinesis                      | Kinesis                   | 2013-12-02                     |
 | Amazon Redshift                     | Redshift                  | 2012-12-01                     |

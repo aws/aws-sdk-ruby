@@ -45,6 +45,7 @@ def class_list(root = Registry.root)
       out << "</li>"
       out << "<ul>"
       svc.children.each do |child|
+        next unless child.respond_to?(:children)
         name = child.namespace.is_a?(CodeObjects::Proxy) ? child.path : child.name
         has_children = run_verifier(child.children).any? {|o| o.is_a?(CodeObjects::NamespaceObject) }
         out << "<li>"
