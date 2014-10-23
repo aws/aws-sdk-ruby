@@ -1,7 +1,9 @@
 {
   "operations": {
     "CheckDomainAvailability": "<p>This operation checks the availability of one domain name. You can access this API without authenticating. Note that if the availability status of a domain is pending, you must submit another request to determine the availability of the domain name.</p>",
+    "DisableDomainAutoRenew": "<p>This operation disables automatic renewal of domain registration for the specified domain.</p>",
     "DisableDomainTransferLock": "<p>This operation removes the transfer lock on the domain (specifically the <code>clientTransferProhibited</code> status) to allow domain transfers. We recommend you refrain from performing this action unless you intend to transfer the domain to a different registrar. Successful submission returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.</p>",
+    "EnableDomainAutoRenew": "<p>This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires. The cost of renewing your domain registration is billed to your AWS account.</p> <p>The period during which you can renew a domain name varies by TLD. For a list of TLDs and their renewal policies, see \"Renewal, restoration, and deletion times\" (http://wiki.gandi.net/en/domains/renew#renewal_restoration_and_deletion_times) on the website for our registrar partner, Gandi. Route 53 requires that you renew before the end of the renewal period that is listed on the Gandi website so we can complete processing before the deadline.</p>",
     "EnableDomainTransferLock": "<p>This operation sets the transfer lock on the domain (specifically the <code>clientTransferProhibited</code> status) to prevent domain transfers. Successful submission returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.</p>",
     "GetDomainDetail": "<p>This operation returns detailed information about the domain. The domain's contact information is also returned as part of the output.</p>",
     "GetOperationDetail": "<p>This operation returns the current status of an operation that is not completed.</p>",
@@ -112,6 +114,16 @@
         "GetDomainDetailResponse$DnsSec": "<p>Reserved for future use.</p>"
       }
     },
+    "DisableDomainAutoRenewRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DisableDomainAutoRenewResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
     "DisableDomainTransferLockRequest": {
       "base": "<p>The DisableDomainTransferLock request includes the following element.</p>",
       "refs": {
@@ -144,8 +156,10 @@
       "base": null,
       "refs": {
         "CheckDomainAvailabilityRequest$DomainName": "<p>The name of a domain.</p> <p>Type: String</p> <p>Default: None</p> <p>Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.</p> <p>Required: Yes</p>",
+        "DisableDomainAutoRenewRequest$DomainName": null,
         "DisableDomainTransferLockRequest$DomainName": "<p>The name of a domain.</p> <p>Type: String</p> <p>Default: None</p> <p>Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.</p> <p>Required: Yes</p>",
         "DomainSummary$DomainName": "<p>The name of a domain.</p> <p>Type: String</p>",
+        "EnableDomainAutoRenewRequest$DomainName": null,
         "EnableDomainTransferLockRequest$DomainName": "<p>The name of a domain.</p> <p>Type: String</p> <p>Default: None</p> <p>Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.</p> <p>Required: Yes</p>",
         "GetDomainDetailRequest$DomainName": "<p>The name of a domain.</p> <p>Type: String</p> <p>Default: None</p> <p>Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.</p> <p>Required: Yes</p>",
         "GetDomainDetailResponse$DomainName": "<p>The name of a domain.</p> <p>Type: String</p>",
@@ -199,6 +213,16 @@
       "refs": {
         "ContactDetail$Email": "<p>Email address of the contact.</p> <p>Type: String</p> <p>Default: None</p> <p>Constraints: Maximum 254 characters.</p> <p>Parents: <code>RegistrantContact</code>, <code>AdminContact</code>, <code>TechContact</code> </p> <p>Required: Yes</p>",
         "GetDomainDetailResponse$AbuseContactEmail": "<p>Email address to contact to report incorrect contact information for a domain, to report that the domain is being used to send spam, to report that someone is cybersquatting on a domain name, or report some other type of abuse. </p> <p>Type: String</p>"
+      }
+    },
+    "EnableDomainAutoRenewRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "EnableDomainAutoRenewResponse": {
+      "base": null,
+      "refs": {
       }
     },
     "EnableDomainTransferLockRequest": {

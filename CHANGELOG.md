@@ -1,6 +1,8 @@
 Next Release (TBD)
 ------------------
 
+* Feature - Route53 Domains - Added support for auto-renew domains.
+
 * Feature - Open-ID Connect - Added support for Open-ID Connect to
   `Aws::IAM::Client` and `Aws::EC2::Client`.
 
