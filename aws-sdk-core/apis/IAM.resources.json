@@ -199,7 +199,7 @@
         { "name": "UserName" },
         { "name": "Id" }
       ],
-      "shape": "AccessKeyMetadata",
+      "shape": "AccessKey",
       "actions": {
         "Activate": {
           "request": {
@@ -228,33 +228,6 @@
             "params": [
               { "target":"UserName", "sourceType":"identifier", "source":"UserName" },
               { "target":"AccessKeyId", "sourceType":"identifier", "source":"Id" }
-            ]
-          }
-        }
-      }
-    },
-    "AccessKeyPair": {
-      "identifiers": [
-        { "name": "UserName" },
-        { "name": "Id" }
-      ],
-      "shape": "AccessKey",
-      "hasOne": {
-        "AccessKey": {
-          "resource": {
-            "type": "AccessKey",
-            "identifiers": [
-              { "target":"UserName", "sourceType":"identifier", "source":"UserName" },
-              { "target":"Id", "sourceType":"identifier", "source":"Id" }
-            ]
-          }
-        },
-        "User": {
-          "resource": {
-            "type": "AccessKey",
-            "identifiers": [
-              { "target":"UserName", "sourceType":"identifier", "source":"UserName" },
-              { "target":"Id", "sourceType":"identifier", "source":"Id" }
             ]
           }
         }
@@ -830,7 +803,7 @@
             ]
           },
           "resource": {
-            "type": "AccessKeyPair",
+            "type": "AccessKey",
             "identifiers": [
               { "target":"UserName", "sourceType":"identifier", "source":"Name" },
               { "target":"Id", "sourceType":"responsePath", "source":"AccessKey.AccessKeyId" }
