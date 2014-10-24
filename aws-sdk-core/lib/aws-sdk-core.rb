@@ -226,20 +226,19 @@ module Aws
     #     Aws.add_service('SvcName',
     #       api: '/path/to/svc.api.json',
     #       paginators: '/path/to/svc.paginators.json',
+    #       waiters: '/path/to/svc.waiters.json',
     #       resources: '/path/to/svc.resources.json')
     #
     #     Aws::SvcName::Client.new
     #     #=> #<Aws::SvcName::Client>
     #
     # @param [String] svc_name The name of the service. This will also be
-    #   the namespace under {Aws}.
-    # @option options[required,String,Hash,Seahorse::Model::Api] :api
-    # @option options[String,Hash,Paging::Provider] :paginators
-    # @option options[String] :resources
-    # @yieldparam [String] svc_name
-    # @yieldparam [Module<Service>] svc_module
-    # @yieldparam [Hash<String,String>] svc_files
-    # @return [Module<Service>]
+    #   the namespace under {Aws}. This must be a valid constant name.
+    # @option options[String,Pathname,Hash,Seahorse::Model::Api,nil] :api
+    # @option options[String,Pathname,Hash,Paging::Provider,nil] :paginators
+    # @option options[String,Pathname,Hash,Waiters::Provider,nil] :waiters
+    # @option options[String,Pathname,Hash,Resources::Definition,nil] :resources
+    # @return [Module<Service>] Returns the new service module.
     def add_service(svc_name, options = {})
       svc_module = Module.new { extend Service }
       const_set(svc_name, svc_module)
