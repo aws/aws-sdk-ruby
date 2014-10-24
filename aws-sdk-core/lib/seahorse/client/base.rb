@@ -184,7 +184,7 @@ module Seahorse
             when nil then Model::Api.new({})
             when Model::Api then api
             when Hash then Model::Api.new(api)
-            when String then Model::Api.new(Util.load_json(api))
+            when String, Pathname then Model::Api.new(Util.load_json(api))
             else raise ArgumentError, "invalid api definition #{api}"
             end
           define_operation_methods

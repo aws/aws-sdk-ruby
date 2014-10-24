@@ -13,7 +13,7 @@ module Aws
           @paginators = case paginators
             when Paging::Provider then paginators
             when Hash then Paging::Provider.new(paginators)
-            when String then Paging::Provider.new(Aws.load_json(paginators))
+            when String, Pathname then Paging::Provider.new(Aws.load_json(paginators))
             when nil then Paging::NullProvider.new
             else raise ArgumentError, 'invalid paginators'
           end

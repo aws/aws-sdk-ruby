@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'stringio'
+require 'pathname'
 
 module Aws
   describe 'VERSION' do
@@ -58,6 +59,40 @@ module Aws
       expect {
         Aws::DummyService::Client.new
       }.to raise_error(Errors::MissingRegionError)
+    end
+
+    describe ':api option' do
+
+      it 'accepts nil' do
+        Aws.add_service('DummyService', api: nil)
+        expect(DummyService::Client.api.definition).to eq({})
+      end
+
+      it 'accepts string file path values' do
+        path = File.join(API_DIR, 'EC2.api.json')
+        Aws.add_service('DummyService', api: path)
+        expect(DummyService::Client.api.definition).to eq(EC2::Client.api.definition)
+      end
+
+      it 'accpets Pathname values' do
+        path = Pathname.new(File.join(API_DIR, 'EC2.api.json'))
+        Aws.add_service('DummyService', api: path)
+        expect(DummyService::Client.api.definition).to eq(EC2::Client.api.definition)
+      end
+
+      it 'accpets hash values' do
+        api = Aws.load_json(File.join(API_DIR, 'EC2.api.json'))
+        Aws.add_service('DummyService', api: api)
+        expect(DummyService::Client.api.definition).to eq(api)
+      end
+
+      it 'accpets Seahorse::Model::Api values' do
+        api = Aws.load_json(File.join(API_DIR, 'EC2.api.json'))
+        api = Seahorse::Model::Api.new(api)
+        Aws.add_service('DummyService', api: api)
+        expect(DummyService::Client.api).to be(api)
+      end
+
     end
 
   end

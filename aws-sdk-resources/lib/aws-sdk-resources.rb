@@ -34,7 +34,7 @@ module Aws
       when nil then Resources::Definition.new({})
       when Resources::Definition then definition
       when Hash then Resources::Definition.new(definition)
-      when String then Resources::Definition.new(Aws.load_json(definition), source_path: definition)
+      when String, Pathname then Resources::Definition.new(Aws.load_json(definition), source_path: definition.to_s)
       else raise ArgumentError, "invalid resource definition #{definition}"
       end
     end
