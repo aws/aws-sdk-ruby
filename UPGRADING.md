@@ -1,6 +1,6 @@
 # Upgrade Notes
 
-## 2.0.0 stable Upgrading Notes
+## `aws-sdk-core` - v2.0.0
 
 The `aws-sdk-core` gem has moved from developer preview to a stable 2.0.0
 release. Deprecated interfaces have been removed.
@@ -25,7 +25,7 @@ release. Deprecated interfaces have been removed.
 
       Aws::EC2::Client.new # use this
 
-## 2.0.0.rc15 Upgrading Notes
+## `aws-sdk-core` - v2.0.0.rc15
 
 RC15 updates the `Aws::DynamoDB::Client` API operations to accept and return
 simple attribute values. Prior to rc14 values were specified as:
@@ -49,7 +49,7 @@ disable simple attributes:
 **Please Note** - RC15 may be the final release candidate version prior to
 a 2.0.0 final release of `aws-sdk-core`.
 
-## 2.0.0.rc14 Upgrading Notes
+## `aws-sdk-core` - v2.0.0.rc14
 
 RC14 simplifies the API versioning strategy. This may require small changes for
 users that use the API version locking options. Also, there are minor changes
@@ -68,7 +68,7 @@ when configuring raw endpoints.
   Please note, this should only be done for testing. Normally you only
   need to configure a `:region`.
 
-## 2.0.0.rc11 Upgrading Notes
+## `aws-sdk-core` - v2.0.0.rc11
 
 RC 11 requires a few minor updates.  These should be the final public-facing
 changes before 2.0.0 final.
