@@ -1,3 +1,5 @@
+require 'pathname'
+
 module Aws
   # @api private
   module ClientPaging
