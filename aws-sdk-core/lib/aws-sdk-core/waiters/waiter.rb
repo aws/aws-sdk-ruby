@@ -150,7 +150,7 @@ module Aws
         if resp.error
           false
         elsif path
-          output_value_matches?(value, JAMESPath.search(path, resp.data))
+          output_value_matches?(value, JMESPath.search(path, resp.data))
         else
           true
         end
