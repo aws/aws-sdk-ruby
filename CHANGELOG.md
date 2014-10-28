@@ -21,6 +21,8 @@ Next Release (TBD)
   * `#reboot`
   * `#terminate`
 
+  Also added `Aws::EC2::Tag::Batch#delete`.
+
 * Upgrading - Replaced JMESPath library dependency from the `jamespath` gem to the
   newer `jmespath` gem. The `jmespath` gem has full compliance with the
   JMESPath spec.

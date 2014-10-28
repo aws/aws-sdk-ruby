@@ -515,14 +515,6 @@
             "params": [
               { "target":"Resources[]", "sourceType":"identifier", "source":"Id" }
             ]
-          },
-          "resource": {
-            "type": "Tag",
-            "identifiers": [
-              { "target":"ResourceId", "sourceType":"requestParameter", "source":"Resources[]" },
-              { "target":"Key", "sourceType":"requestParameter", "source":"Tags[].Key" },
-              { "target":"Value", "sourceType":"requestParameter", "source":"Tags[].Value" }
-            ]
           }
         },
         "Monitor": {
@@ -1970,6 +1962,18 @@
               { "target":"Resources[0]", "sourceType":"identifier", "source":"ResourceId" },
               { "target":"Tags[0].Key", "sourceType":"identifier", "source":"Key" },
               { "target":"Tags[0].Value", "sourceType":"identifier", "source":"Value" }
+            ]
+          }
+        }
+      },
+      "batchActions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteTags",
+            "params": [
+              { "target":"Resources[]", "sourceType":"identifier", "source":"ResourceId" },
+              { "target":"Tags[*].Key", "sourceType":"identifier", "source":"Key" },
+              { "target":"Tags[*].Value", "sourceType":"identifier", "source":"Value" }
             ]
           }
         }

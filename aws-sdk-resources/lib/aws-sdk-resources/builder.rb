@@ -49,7 +49,7 @@ module Aws
         resources = (0...resource_count(identifier_map)).collect do |n|
           identifiers = @sources.each.with_object({}) do |source, identifiers|
             value = identifier_map[source.target]
-            value = value[n] if Array === value
+            value = value[n] if source.plural?
             identifiers[source.target] = value
           end
           resource = build_one(identifiers, options)

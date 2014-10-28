@@ -56,8 +56,8 @@ module Aws
         it 'supports grouped params' do
           params = {}
           param_list = [
-            RequestParams::Base.new('entries[n].id'),
-            RequestParams::Base.new('entries[n].value')
+            RequestParams::Base.new('entries[*].id'),
+            RequestParams::Base.new('entries[*].value')
           ]
           3.times do |n|
             param_list[0].apply(params, "id-#{n+1}", n)
