@@ -1,5 +1,3 @@
-require 'jamespath'
-
 module Aws
   module Waiters
     module Errors

@@ -1,5 +1,3 @@
-require 'jamespath'
-
 module Aws
 
   # Decorates a {Seahorse::Client::Response} with paging methods:
