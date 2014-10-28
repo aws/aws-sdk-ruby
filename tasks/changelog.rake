@@ -11,7 +11,7 @@ end
 task 'changelog:next_release' do
   # inserts a "Next Release (TDB)" section at the top of the CHANGELOG
   lines = []
-  lines << "Next Release (TBD)\n"
+  lines << "Unreleased Changes\n"
   lines << "------------------\n"
   lines << "\n"
   changelog = File.open('CHANGELOG.md', 'r', encoding: 'UTF-8') { |f| f.read }

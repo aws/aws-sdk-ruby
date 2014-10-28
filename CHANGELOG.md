@@ -1,4 +1,4 @@
-Next Release (TBD)
+Unreleased Changes
 ------------------
 
 * Feature - SQS Batch Message Delete - `Aws::SQS::Message` objects can
