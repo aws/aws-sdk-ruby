@@ -508,6 +508,22 @@
           }
         }
       },
+      "waiters": {
+        "Stopped": {
+          "waiterName": "InstanceStopped",
+          "params": [
+            { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
+          ],
+          "path": "Reservations[0].Instances[0]"
+        },
+        "Running": {
+          "waiterName": "InstanceRunning",
+          "params": [
+            { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
+          ],
+          "path": "Reservations[0].Instances[0]"
+        }
+      },
       "hasOne": {
         "Subnet": {
           "resource": {
