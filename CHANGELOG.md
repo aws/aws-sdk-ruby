@@ -1,7 +1,18 @@
 Next Release (TBD)
 ------------------
 
-* Replaced JMESPath library dependency from the `jamespath` gem to the
+* Feature - Batch Resource Actions - Added the following operations that can
+  be called on collections or batches of `Aws::EC2::Instance` objects:
+
+  * `#create_tags`
+  * `#monitor`
+  * `#unmonitor`
+  * `#start`
+  * `#stop`
+  * `#reboot`
+  * `#terminate`
+
+* Upgrading - Replaced JMESPath library dependency from the `jamespath` gem to the
   newer `jmespath` gem. The `jmespath` gem has full compliance with the
   JMESPath spec.
 

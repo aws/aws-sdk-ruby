@@ -50,9 +50,9 @@ module Aws
       def build_batch(identifier_map, options, &block)
         resources = (0...resource_count(identifier_map)).collect do |n|
           identifiers = @sources.each.with_object({}) do |source, identifiers|
-            identifiers[source.target] = source.plural? ?
-              identifier_map[source.target][n] :
-              identifier_map[source.target]
+            value = identifier_map[source.target]
+            value = value[n] if Array === value
+            identifiers[source.target] = value
           end
           resource = build_one(identifiers, options)
           yield(resource) if block_given?

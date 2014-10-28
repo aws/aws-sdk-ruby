@@ -100,7 +100,8 @@ module Aws
 
         # @option [required, Seahorse::Client::Response] :response
         def extract(options)
-          response(options).context.params[source.to_sym]
+          params = response(options).context.params
+          JMESPath.search(source, params)
         end
 
         private

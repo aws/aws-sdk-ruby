@@ -508,6 +508,72 @@
           }
         }
       },
+      "batchActions": {
+        "CreateTags": {
+          "request": {
+            "operation": "CreateTags",
+            "params": [
+              { "target":"Resources[]", "sourceType":"identifier", "source":"Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target":"ResourceId", "sourceType":"requestParameter", "source":"Resources[]" },
+              { "target":"Key", "sourceType":"requestParameter", "source":"Tags[].Key" },
+              { "target":"Value", "sourceType":"requestParameter", "source":"Tags[].Value" }
+            ]
+          }
+        },
+        "Monitor": {
+          "request": {
+            "operation": "MonitorInstances",
+            "params": [
+              { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        },
+        "Start": {
+          "request": {
+            "operation": "StartInstances",
+            "params": [
+              { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        },
+        "Stop": {
+          "request": {
+            "operation": "StopInstances",
+            "params": [
+              { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        },
+        "Reboot": {
+          "request": {
+            "operation": "RebootInstances",
+            "params": [
+              { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        },
+        "Terminate": {
+          "request": {
+            "operation": "TerminateInstances",
+            "params": [
+              { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        },
+        "Unmonitor": {
+          "request": {
+            "operation": "UnmonitorInstances",
+            "params": [
+              { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        }
+      },
       "waiters": {
         "Stopped": {
           "waiterName": "InstanceStopped",
