@@ -1,4 +1,4 @@
-require 'jamespath'
+require 'jmespath'
 
 module Aws
   module Waiters
@@ -150,7 +150,7 @@ module Aws
         if resp.error
           false
         elsif path
-          output_value_matches?(value, Jamespath.search(path, resp.data))
+          output_value_matches?(value, JAMESPath.search(path, resp.data))
         else
           true
         end

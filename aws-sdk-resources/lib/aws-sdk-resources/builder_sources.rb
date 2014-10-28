@@ -1,4 +1,4 @@
-require 'jamespath'
+require 'jmespath'
 
 module Aws
   module Resources
@@ -82,7 +82,7 @@ module Aws
 
         # @option [required, Resource] :resource
         def extract(options)
-          Jamespath.search(source, resource(options).data)
+          JMESPath.search(source, resource(options).data)
         end
 
         private
@@ -120,7 +120,7 @@ module Aws
           if source == '$'
             response(options).data
           else
-            Jamespath.search(source, response(options).data)
+            JMESPath.search(source, response(options).data)
           end
         end
 

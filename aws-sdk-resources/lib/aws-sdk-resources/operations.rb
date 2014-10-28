@@ -1,4 +1,4 @@
-require 'jamespath'
+require 'jmespath'
 
 module Aws
   module Resources
@@ -74,7 +74,7 @@ module Aws
         private
 
         def extract(resp)
-          @path == '$' ? resp.data : Jamespath.search(@path, resp.data)
+          @path == '$' ? resp.data : JMESPath.search(@path, resp.data)
         end
 
       end
@@ -274,7 +274,7 @@ module Aws
           resp = resource.client.wait_until(@waiter_name, params)
 
           resource_opts = resource.identifiers.dup
-          resource_opts[:data] = Jamespath.search(@path, resp.data) if @path
+          resource_opts[:data] = JMESPath.search(@path, resp.data) if @path
           resource_opts[:client] = resource.client
           resource.class.new(resource_opts)
         end

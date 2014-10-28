@@ -1,3 +1,5 @@
+require 'jmespath'
+
 module Aws
   module Paging
     class Pager
@@ -19,7 +21,7 @@ module Aws
       # @return [Hash]
       def next_tokens(response)
         @tokens.each.with_object({}) do |(source, target), next_tokens|
-          value = Jamespath.search(source, response.data)
+          value = JMESPath.search(source, response.data)
           next_tokens[target.to_sym] = value unless value.nil?
         end
       end
@@ -28,7 +30,7 @@ module Aws
       # @return [Boolean]
       def truncated?(response)
         if @more_results
-          Jamespath.search(@more_results, response.data)
+          JMESPath.search(@more_results, response.data)
         else
           !next_tokens(response).empty?
         end

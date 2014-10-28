@@ -1,6 +1,10 @@
 Next Release (TBD)
 ------------------
 
+* Replaced JMESPath library dependency from the `jamespath` gem to the
+  newer `jmespath` gem. The `jmespath` gem has full compliance with the
+  JMESPath spec.
+
 2.0.5 (2014-10-23)
 ------------------
 
