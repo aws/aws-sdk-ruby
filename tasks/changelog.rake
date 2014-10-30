@@ -18,7 +18,7 @@ task 'changelog:next_release' do
   changelog = lines.join + changelog
   File.open('CHANGELOG.md', 'w', encoding: 'UTF-8') { |f| f.write(changelog) }
   sh("git add CHANGELOG.md")
-  sh("git commit -m 'Added next release section to the changelog.'")
+  sh("git commit -m 'Added next release section to the changelog. [ci skip]'")
 end
 
 task 'changelog:latest' do
