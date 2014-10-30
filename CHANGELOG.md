@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.6 (2014-10-30)
 ------------------
 
 * Feature - Amazon S3 - Added resource classes for object versions.
