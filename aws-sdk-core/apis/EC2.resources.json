@@ -580,6 +580,13 @@
             { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
           ],
           "path": "Reservations[0].Instances[0]"
+        },
+        "Terminated": {
+          "waiterName": "InstanceTerminated",
+          "params": [
+            { "target":"InstanceIds[]", "sourceType":"identifier", "source":"Id" }
+          ],
+          "path": "Reservations[0].Instances[0]"
         }
       },
       "hasOne": {

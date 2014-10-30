@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Feature - `Aws::EC2::Instance` Waiters - Added the following methods to
+  the instance resource class:
+
+  * `#wait_until_running`
+  * `#wait_until_stopped`
+  * `#wait_until_terminated`
+
 * Feature - SQS Batch Message Delete - `Aws::SQS::Message` objects can
   now be deleted in batches. See #141.
 
