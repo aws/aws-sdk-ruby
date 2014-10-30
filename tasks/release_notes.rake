@@ -16,11 +16,11 @@ task 'release_notes:html' do
   }
 
   entries = []
-  `rake changelog:latest`.lines.map(&:strip).each do |line|
+  `rake changelog:latest`.lines.map.each do |line|
     if line.match(/^\*/)
       entries << line.sub(/\* /, '')
     else
-      entries.last.concat(' ' + line)
+      entries.last.concat(line)
     end
   end
 
@@ -28,6 +28,9 @@ task 'release_notes:html' do
     label, changed, description = entry.split(' - ')
     changed = changed.gsub('`', '')
     description = RDiscount.new(description).to_html
+    description = description.gsub(/<pre><code class="``ruby">(.*?)<\/code><\/pre>/m) do |code|
+      "<pre>#{$1.strip}</pre>"
+    end.gsub(/\n  /m, "\n")
     categories[labels[label]] << [changed, description]
   end
 
