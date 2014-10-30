@@ -101,6 +101,23 @@
             ]
           }
         },
+        "ObjectVersions": {
+          "request": {
+            "operation": "ListObjectVersions",
+            "params": [
+              { "target":"Bucket", "sourceType":"identifier", "source":"Name" }
+            ]
+          },
+          "resource": {
+            "type": "ObjectVersion",
+            "identifiers": [
+              { "target":"BucketName", "sourceType":"identifier", "source":"Name" },
+              { "target":"ObjectKey", "sourceType":"responsePath", "source":"[Versions,DeleteMarkers]|[].Key" },
+              { "target":"Id", "sourceType":"responsePath", "source":"[Versions,DeleteMarkers]|[].VersionId" }
+            ]
+          },
+          "path":"[Versions,DeleteMarkers]|[]"
+        },
         "MultipartUploads": {
           "request": {
             "operation":"ListMultipartUploads",
@@ -615,6 +632,7 @@
       "subResources": {
         "resources": [
           "ObjectAcl",
+          "ObjectVersion",
           "MultipartUpload"
         ],
         "identifiers": {
@@ -646,6 +664,58 @@
             "params": [
               { "target":"Bucket", "sourceType":"identifier", "source":"BucketName" },
               { "target":"Key", "sourceType":"identifier", "source":"ObjectKey" }
+            ]
+          }
+        }
+      }
+    },
+    "ObjectVersion": {
+      "identifiers": [
+        { "name": "BucketName" },
+        { "name": "ObjectKey" },
+        { "name": "Id" }
+      ],
+      "shape": "ObjectVersion",
+      "actions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteObject",
+            "params": [
+              { "target":"Bucket", "sourceType":"identifier", "source":"BucketName" },
+              { "target":"Key", "sourceType":"identifier", "source":"ObjectKey" },
+              { "target":"VersionId", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        }
+      },
+      "batchActions": {
+        "Get": {
+          "request": {
+            "operation": "GetObject",
+            "params": [
+              { "target":"Bucket", "sourceType":"identifier", "source":"BucketName" },
+              { "target":"Key", "sourceType":"identifier", "source":"ObjectKey" },
+              { "target":"VersionId", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        },
+        "Head": {
+          "request": {
+            "operation": "HeadObject",
+            "params": [
+              { "target":"Bucket", "sourceType":"identifier", "source":"BucketName" },
+              { "target":"Key", "sourceType":"identifier", "source":"ObjectKey" },
+              { "target":"VersionId", "sourceType":"identifier", "source":"Id" }
+            ]
+          }
+        },
+        "Delete": {
+          "request": {
+            "operation": "DeleteObjects",
+            "params": [
+              { "target":"Bucket", "sourceType":"identifier", "source":"BucketName" },
+              { "target":"Delete.Objects[*].Key", "sourceType":"identifier", "source":"ObjectKey" },
+              { "target":"Delete.Objects[*].VersionId", "sourceType":"identifier", "source":"Id" }
             ]
           }
         }

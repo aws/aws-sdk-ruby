@@ -2285,7 +2285,7 @@
           "locationName":"Version"
         },
         "DeleteMarkers":{
-          "shape":"DeleteMarkers",
+          "shape":"ObjectVersionList",
           "locationName":"DeleteMarker"
         },
         "Name":{"shape":"BucketName"},
