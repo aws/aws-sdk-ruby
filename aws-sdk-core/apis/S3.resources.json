@@ -472,6 +472,13 @@
               { "target":"Key", "sourceType":"identifier", "source":"ObjectKey" },
               { "target":"UploadId", "sourceType":"identifier", "source":"Id" }
             ]
+          },
+          "resource": {
+            "type": "Object",
+            "identifiers": [
+              { "target":"BucketName", "sourceType":"identifier", "source":"BucketName" },
+              { "target":"Key", "sourceType":"identifier", "source":"ObjectKey" }
+            ]
           }
         },
         "Parts": {

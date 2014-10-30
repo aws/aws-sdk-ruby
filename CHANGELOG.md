@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - `Aws::S3` - You can now pass
+  `:compute_parts => true` to `Aws::S3::MultipartUpload#compelte` and the
+  part list will be computed automatically by calling `#list_parts` on
+  the client.
+
 * Feature - `Aws::EC2::Instance` Waiters - Added the following methods to
   the instance resource class:
 

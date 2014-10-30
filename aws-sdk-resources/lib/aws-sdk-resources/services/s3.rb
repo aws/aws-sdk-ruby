@@ -2,6 +2,7 @@ module Aws
   module S3
 
     require 'aws-sdk-resources/services/s3/object'
+    require 'aws-sdk-resources/services/s3/multipart_upload'
 
     autoload :FilePart, 'aws-sdk-resources/services/s3/file_part'
     autoload :FileUploader, 'aws-sdk-resources/services/s3/file_uploader'
