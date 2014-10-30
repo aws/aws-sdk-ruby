@@ -44,8 +44,7 @@ def class_list(root = Registry.root)
       out << "</small>"
       out << "</li>"
       out << "<ul>"
-      svc.children.each do |child|
-        next unless child.respond_to?(:children)
+      sorted_service_classes(svc) do |child|
         name = child.namespace.is_a?(CodeObjects::Proxy) ? child.path : child.name
         has_children = run_verifier(child.children).any? {|o| o.is_a?(CodeObjects::NamespaceObject) }
         out << "<li>"
@@ -64,4 +63,23 @@ def class_list(root = Registry.root)
   end
 
   out
+end
+
+def sorted_service_classes(svc, &block)
+  children = svc.children.each.with_object([]) do |child, list|
+    next unless child.respond_to?(:children)
+    next if child.tag(:api) and child.tag(:api).text == 'private'
+    list << child
+  end
+  fixed = [:Client, :Resource, :Errors]
+  children = children.sort do |a, b|
+    a_pos = fixed.index(a.name) || 4
+    b_pos = fixed.index(b.name) || 4
+    if a_pos < 4 || b_pos < 4
+      a_pos <=> b_pos
+    else
+      a.name <=> b.name
+    end
+  end
+  children.each(&block)
 end
