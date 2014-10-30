@@ -1,10 +1,36 @@
 Unreleased Changes
 ------------------
 
-* Feature - `Aws::S3` - You can now pass
-  `:compute_parts => true` to `Aws::S3::MultipartUpload#compelte` and the
+* Feature - Amazon S3 - Added resource classes for object versions.
+  Also added `Aws::S3::Bucket#delete!` using the batch delete feature
+  of `Aws::S3::ObjectVersion`.
+
+  ```ruby
+  bucket = S3::Resource.new.bucket('aws-sdk-versioned')
+
+  # enumerate every versioned object in a bucket
+  bucket.object_versions.each do |obj_version|
+    # ...
+  end
+
+  # delete every object version in a bucket (two options)
+  bucket.object_versions.delete
+  bucket.clear!
+
+  # delete a bucket and all of its objects
+  bucket.delete!
+  ```
+
+* Feature - Amazon S3 - You can now pass
+  `:compute_parts => true` to `Aws::S3::MultipartUpload#complete` and the
   part list will be computed automatically by calling `#list_parts` on
   the client.
+
+  ```ruby
+  s3 = Aws::S3::Resource.new
+  upload = s3.bucket('bucket-name').object('key').multipart_upload('id')
+  obj = upload.complete(compute_parts:true)
+  ```
 
 * Feature - `Aws::EC2::Instance` Waiters - Added the following methods to
   the instance resource class:
