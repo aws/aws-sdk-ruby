@@ -40,7 +40,7 @@ module Aws
           idv = target_resource_class_name.downcase + '-' + id.gsub('_', '-')
           tag = []
           tag << "@example Basic usage"
-          tag << "  #{resp_variable} = #{variable_name}.#{operation_name}(params)"
+          tag << "  #{resp_variable} = #{variable_name}.#{operation_name}(options)"
           if plural?
             tag << "  #{resp_variable}.map(&:#{id})"
             tag << "  #=> [#{idv.inspect}, ...]"

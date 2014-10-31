@@ -62,7 +62,7 @@ module Aws
         #   API operation called. Returns `nil` if this operation does not make
         #   any API requests.
         attr_reader :api_request
- 
+
         # @return [Array<Resources::RequestParams::Base>, nil] Returns the
         #   parameters this operation binds to the made request. Returns `nil`
         #   if this operation does not make a request.
@@ -83,10 +83,13 @@ module Aws
         # Constructs and returns a new YARD method object for this operation.
         # @return [YARD::CodeObject::MethodObject]
         def method_object
-          m = YARD::CodeObjects::MethodObject.new(yard_class, operation_name)
+          if m = YARD::Registry[@resource_class.name + "##{operation_name}"]
+          else
+            m = YARD::CodeObjects::MethodObject.new(yard_class, operation_name)
+            m.docstring = docstring
+            m.parameters = parameters
+          end
           m.scope = :instance
-          m.parameters = parameters
-          m.docstring = docstring
           if source
             m.source_type = :json
             m.source = source.format
@@ -106,7 +109,7 @@ module Aws
           if option_tags.empty?
             []
           else
-            [['params', '{}']]
+            [['options', '{}']]
           end
         end
 
@@ -137,7 +140,7 @@ module Aws
               end
               docstring = member_shape.documentation
               req = ' **`required`** &mdash; ' if required.include?(member_name)
-              tags << "@option params [#{param_type(member_shape)}] :#{member_name} #{req}#{docstring}"
+              tags << "@option options [#{param_type(member_shape)}] :#{member_name} #{req}#{docstring}"
             end
             tags = tags.join("\n")
             YARD::DocstringParser.new.parse(tags).to_docstring.tags
