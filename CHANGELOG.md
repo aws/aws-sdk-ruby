@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - `Aws::S3::Bucket` - Added a `#url` method that returns
+  the public URL for the bucket.
+
 2.0.6 (2014-10-30)
 ------------------
 
