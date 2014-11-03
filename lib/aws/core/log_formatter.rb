@@ -22,7 +22,7 @@ module AWS
     # a log message.  When you construct a {LogFormatter}, you provide
     # a pattern string with substitutions.
     #
-    #     pattern = '[REQUEST :http_status_code] :service :operation :duration'
+    #     pattern = '[AWS :http_response_status] :service :operation :duration'
     #     formatter = AWS::Core::LogFormatter.new(pattern)
     #     formatter.format(response)
     #     #=> '[AWS 200] EC2 get_bucket 0.0352'
@@ -33,7 +33,7 @@ module AWS
     # repace this formatter by building your own and then passing it
     # to {AWS.config}.
     #
-    #     pattern = '[REQUEST :http_status_code] :service :operation :duration'
+    #     pattern = '[AWS :http_response_status] :service :operation :duration'
     #     AWS.config(:log_formatter => AWS::Core::LogFormatter.new(pattern)
     #
     # ## Canned Formatters
