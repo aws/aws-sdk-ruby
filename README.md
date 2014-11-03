@@ -1,13 +1,9 @@
-# AWS SDK for Ruby V2 [![Build Status](https://travis-ci.org/aws/aws-sdk-core-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-core-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-core-ruby.png)](https://codeclimate.com/github/aws/aws-sdk-core-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-core-ruby/badge.png?branch=master)](https://coveralls.io/r/aws/aws-sdk-core-ruby?branch=master)
+# AWS SDK for Ruby - V2
 
-This repository contains the code for the V2 AWS SDK for Ruby. Code is organized
-into three gems. Installing `aws-sdk --pre` will install the full v2 Ruby SDK.
+[![Build Status](https://travis-ci.org/aws/aws-sdk-core-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-core-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-core-ruby.png)](https://codeclimate.com/github/aws/aws-sdk-core-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-core-ruby/badge.png?branch=master)](https://coveralls.io/r/aws/aws-sdk-core-ruby?branch=master)
 
-* aws-sdk
-  * aws-sdk-resources
-  * aws-sdk-core
-
-For version 1.0 of the Ruby SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
+This repository contains the code for the V2 AWS SDK for Ruby. For v1 of the 
+AWS SDK for Ruby, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
 
 ## Links of Interest
 
@@ -18,109 +14,134 @@ For version 1.0 of the Ruby SDK, see [aws/aws-sdk-ruby](http://github.com/aws/aw
 * [Forums](https://forums.aws.amazon.com/forum.jspa?forumID=125)
 * [License](http://aws.amazon.com/apache2.0/)
 
-## Installation
+## V2 Preview Release
 
-You can install the AWS SDK Core from rubygems:
+The V2 AWS SDK for Ruby is currently available as a preview-release. The code
+is organized into multiple gems. Installing the preview release of `aws-sdk`
+will install two other gems:
 
-    gem install aws-sdk-core
+* `aws-sdk` - *preview*
+* `aws-sdk-resources` - *preview*
+* `aws-sdk-core` - **stable**
 
-If you are using Bundler, we recommend that you express a major version
-dependency (this library uses [semantic versioning](http://semver.org/)):
+**Note:** Version 2 of the AWS SDK for Ruby requires Ruby 1.9.3+
 
-    gem 'aws-sdk-core', '~> 2.0'
+## Using V1 and V2 Together
 
-**Note:** AWS SDK Core requires Ruby 1.9.3+.
+Version 2 uses a the `Aws` namespace, allowing it to be used in the same
+application as the v1 AWS SDK for Ruby.
+
+```ruby
+AWS::S3 # v1
+Aws::S3 # v2
+```
+
+Here is an example that demonstrates using V1 and V2 together:
+
+```ruby
+# in Gemfile
+gem 'aws-sdk-v1'
+gem 'aws-sdk', '2.0.6.pre'
+
+# in application
+require 'aws-sdk-v1'
+require 'aws-sdk'
+```
 
 ## Configuration
 
-To use the Ruby SDK, you must configure a region and your AWS account
-access credentials.
+To use the Ruby SDK, you must configure a region and credentials.
 
 ### Region
 
-You can export a default region to ENV:
-
-```
-export AWS_REGION='us-west-2'
-```
-
-Or you can configure a region in code:
+You can construct a service client with a region:
 
 ```ruby
-# default region
-Aws.config[:region] = 'us-west-2'
-
-# per-service :region
-s3 = Aws::S3::Client.new(region:'us-east-1')
+ec2 = Aws::EC2::Client.new(region:'us-west-2')
 ```
+
+Alternatively, a default region can be loaded from one of the following
+locations:
+
+* `ENV['AWS_REGION']`
+* `Aws.config[:region]`
+
+
+See [this document](http://docs.amazonwebservices.com/general/latest/gr/rande.html)
+for a list of supported regions by service.
 
 ### Credentials
 
-Please take care to never commit credentials to source control.  We
-strongly recommended loading credentials from an external source.  By default,
-the Ruby SDK will attempt to load credentials from the following
-sources:
+You can construct a client with credentials like so:
+
+```ruby
+s3 = Aws::S3::Client.new(credentials: credentials)
+```
+
+The credentials object may be an instance of:
+
+* `Aws::Credentials`
+* `Aws::SharedCredentials`
+* `Aws::InstanceProfileCredentials`
+* `Aws::AssumeRoleCredentials`
+
+Default credentials are searched for in the following locations:
 
 * `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
 * The shared credentials ini file at `HOME/.aws/credentials`
 * From an instance profile when running on EC2
 
-Alternatively, you can specify your credentials directly using one of the
-following credential classes:
-
-* `Aws::Credentials`
-* `Aws::SharedCredentials`
-* `Aws::InstanceProfileCredentials`
+Please take care to **never commit credentials to source control**.  We
+strongly recommended loading credentials from an external source.
 
 ```ruby
-# default credentials
-Aws.config[:credentials] = Aws::SharedCredentials.new(profile_name:'myprofile')
-
-# per-service :credentials
-s3 = Aws::S3::Client.new(credentials: Aws::SharedCredentials.new(profile_name:'myprofile')
+require 'json'
+creds = JSON.load(File.read('secrets.json'))
+creds = Aws::Credentials.new(creds['AccessKeyId'], creds['SecretAccessKey'])
 ```
 
-## Basic Usage
+## Clients (aws-sdk-core) - **stable**
 
-To make a request, you need to construct a service client.
-
-```ruby
-s3 = Aws::S3::Client.new
-```
-
-Each client provides one method per API operation. Refer to the
+Construct a service client to make API calls. Each client provides a 1-to-1
+mapping of methods to API operations. Refer to the
 [API documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
 for a complete list of available methods.
 
 ```ruby
-# get a list of buckets in Amazon S3
+# list buckets in Amazon S3
+s3 = Aws::S3::Client.new
 resp = s3.list_buckets
-puts resp.buckets.map(&:name)
+resp.buckets.map(&:name)
+#=> ["bucket-1", "bucket-2", ...]
 ```
 
-API methods accept a request params as a hash, and return structured responses.
+API methods accept a hash of additional request parameters and return
+structured response data.
 
 ```ruby
+# list the first two objects in a bucket
 resp = s3.list_objects(bucket: 'aws-sdk-core', max_keys: 2)
 resp.contents.each do |object|
   puts "#{object.key} => #{object.etag}"
 end
 ```
 
-## Paging Responses
+### Paging Responses
 
 Many AWS operations limit the number of results returned with each response.
-A simple paging interface is provided that works with every AWS request.
+To make it easy to get the next page of results, every AWS response object
+is enumerable:
 
 ```ruby
-# yields once per response, even works with non-paged requests
-s3.list_objects(bucket:'aws-sdk').each do |resp|
-  puts resp.contents.map(&:key)
+# yields one response object per API call made, this will enumerate
+# EVERY object in the named bucket
+s3.list_objects(bucket:'aws-sdk').each do |response|
+  puts response.contents.map(&:key)
 end
 ```
 
-If you prefer to control paging yourself, all returned responses have the
-same helper methods:
+If you prefer to control paging yourself, response objects have helper methods
+that control paging:
 
 ```ruby
 # make a request that returns a truncated response
@@ -132,10 +153,10 @@ resp = resp.next_page # send a request for the next response page
 resp = resp.next_page until resp.last_page?
 ```
 
-## Waiters
+### Waiters
 
-Waiters are a utility to poll for a particular state. Waiters are named
-and are invoked from a client object via `#wait_until`.
+Waiters are a utility methods that poll for a particular state. To invoke a
+waiter, call `#wait_until` on a client:
 
 ```ruby
 begin
@@ -146,29 +167,19 @@ rescue Aws::Waiters::Errors::WaiterFailed => error
 end
 ```
 
-Waiters are configurable and have sensible defaults. You can configure:
+Waiters have sensible default polling intervals and maximum attempts. You can
+configure these per call to `#wait_until`. You can also register callbacks
+that are triggered before each polling attempt and before waiting.
+See the API documentation for more examples and for a list of supported
+waiters per service.
 
-* maximum number of attempts before failing
-* time between polling requests
-* callbacks
-  * before each attempt
-  * before waiting/sleeping
-  * callbacks can trigger success or failure
+## Resources (aws-sdk-resource) - *preview release*
 
-See the documentation for each service client class to get a list of
-supported waiters and additional examples.
-
-## Resource Interfaces
-
-**Resource interfaces are currently experimental. While `aws-sdk-core` is very stable,
-`aws-sdk-resources` should be considered unstable.**
-
-A handful of services provide resource-oriented interfaces that abstract the client
-APIs.
-
+Resource interfaces are object oriented classes that represent actual
+resources in AWS. Resource interfaces built ontop of API clients and provide
+additional functionality.
 
 ```ruby
-
 s3 = Aws::S3::Resource.new
 
 # reference an existing bucket
@@ -189,6 +200,8 @@ obj.etag
 obj.delete
 ```
 
+Resource interfaces are currently in a preview period. While quite stable,
+expect possible minor changes before a final stable version is released.
 Currently there are Resource-oriented interfaces for:
 
 * `Aws::S3`
@@ -197,18 +210,18 @@ Currently there are Resource-oriented interfaces for:
 * `Aws::SQS`
 * `Aws::SNS`
 * `Aws::Glacier`
+* `Aws::OpsWorld`
+* `Aws::CloudFormation`
 
-Documentation is currently fairly sparse on the resource classes, expect a lot of
-improvement on these over the coming weeks.
+## REPL - AWS Interactive Console
 
-## Interactive Console
-
-AWS SDK Core ships with a REPL that acts as an interactive console. You
-can access the REPL by running `aws.rb` from the command line.
+The `aws-sdk-core` gem ships with a REPL that provides a simple way to test
+the Ruby SDK. You can access the REPL by running `aws.rb` from the command line.
 
 ```ruby
 $ aws.rb
 Aws> ec2.describe_instances.reservations.first.instances.first
+[Aws::EC2::Client 200 0.216615 0 retries] describe_instances()
 <struct
  instance_id="i-1234567",
  image_id="ami-7654321",
@@ -216,25 +229,24 @@ Aws> ec2.describe_instances.reservations.first.instances.first
  ...>
 ```
 
-Call `#service_classes` to get a list of available service helpers and
-the class they construct.
+You can enable HTTP wire logging by setting the verbose flag:
 
-```ruby
-Aws> service_clients
-{:autoscaling=>Aws::AutoScaling::Client,
- :cloudformation=>Aws::CloudFormation::Client,
- :cloudfront=>Aws::CloudFront::Client,
- :cloudsearch=>Aws::CloudSearch::Client,
- ...
- :swf=>Aws::SWF::Client}
 ```
+$ aws.rb -v
+```
+
+In the REPL, every service class has a helper that returns a new client object.
+Simply downcase the service module name for the helper:
+
+* `Aws::S3` => `s3`
+* `Aws::EC2` => `ec2`
+* etc
 
 ## Versioning
 
-This project uses [semantic versioning](http://semver.org/). When the project
-leaves the developer preview state, we will continue by versioning from
-`2.0`.  Until then, all versions will be suffixed by a release candidate
-version.
+This project uses [semantic versioning](http://semver.org/). You can safely
+express a dependency on a major version and expect all minor and patch versions
+to be backwards compatible.
 
 ## Supported Services
 
