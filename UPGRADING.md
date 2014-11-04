@@ -1,6 +1,6 @@
 # Upgrade Notes
 
-## `aws-sdk-resources` - v2.0.7
+## `aws-sdk-resources` - v2.0.7.pre
 
 * Moved `Aws::S3::MultipartUpload#upload_part` and `#copy_part` to
   `Aws::S3::MultipartUploadPart#upload` and `#copy`.
