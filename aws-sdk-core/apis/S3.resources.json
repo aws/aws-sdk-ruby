@@ -497,7 +497,9 @@
               { "target":"Key", "sourceType":"identifier", "source":"ObjectKey" }
             ]
           }
-        },
+        }
+      },
+      "hasMany": {
         "Parts": {
           "request": {
             "operation": "ListParts",
@@ -507,25 +509,55 @@
               { "target":"UploadId", "sourceType":"identifier", "source":"Id" }
             ]
           },
-          "path": "Parts[]"
-        },
-        "UploadPart": {
+          "resource": {
+            "type": "MultipartUploadPart",
+            "identifiers": [
+              { "target":"BucketName", "sourceType":"requestParameter", "source":"Bucket" },
+              { "target":"ObjectKey", "sourceType":"requestParameter", "source":"Key" },
+              { "target":"MultipartUploadId", "sourceType":"requestParameter", "source":"UploadId" },
+              { "target":"PartNumer", "sourceType":"responsePath", "source":"Parts[].PartNumber" }
+            ],
+            "path": "Parts[]"
+          }
+        }
+      },
+      "subResources": {
+        "resources": ["MultipartUploadPart"],
+        "identifiers": {
+          "BucketName": "BucketName",
+          "ObjectKey": "ObjectKey",
+          "Id": "MultipartUploadId"
+        }
+      }
+    },
+    "MultipartUploadPart": {
+      "identifiers": [
+        { "name": "BucketName" },
+        { "name": "ObjectKey" },
+        { "name": "MultipartUploadId" },
+        { "name": "PartNumber", "memberName": "PartNumber", "type": "integer" }
+      ],
+      "shape": "Part",
+      "actions": {
+        "Upload": {
           "request":{
             "operation":"UploadPart",
             "params": [
               { "target":"Bucket", "sourceType":"identifier", "source":"BucketName" },
               { "target":"Key", "sourceType":"identifier", "source":"ObjectKey" },
-              { "target":"UploadId", "sourceType":"identifier", "source":"Id" }
+              { "target":"UploadId", "sourceType":"identifier", "source":"MultipartUploadId" },
+              { "target":"PartNumber", "sourceType":"identifier", "source":"PartNumber" }
             ]
           }
         },
-        "CopyPart": {
+        "CopyFrom": {
           "request":{
             "operation":"UploadPartCopy",
             "params": [
               { "target":"Bucket", "sourceType":"identifier", "source":"BucketName" },
               { "target":"Key", "sourceType":"identifier", "source":"ObjectKey" },
-              { "target":"UploadId", "sourceType":"identifier", "source":"Id" }
+              { "target":"UploadId", "sourceType":"identifier", "source":"MultipartUploadId" },
+              { "target":"PartNumber", "sourceType":"identifier", "source":"PartNumber" }
             ]
           }
         }
