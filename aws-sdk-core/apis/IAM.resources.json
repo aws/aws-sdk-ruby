@@ -1,10 +1,6 @@
 {
   "service": {
     "actions": {
-      "AccountSummary": {
-        "request": { "operation": "GetAccountSummary" },
-        "path": "SummaryMap"
-      },
       "ChangePassword": {
         "request": { "operation": "ChangePassword" }
       },
@@ -262,6 +258,14 @@
         "Update": {
           "request": { "operation": "UpdateAccountPasswordPolicy" }
         }
+      }
+    },
+    "AccountSummary": {
+      "identifiers": [],
+      "shape": "GetAccountSummaryResponse",
+      "load": {
+        "request": { "operation": "GetAccountSummary" },
+        "path": "$"
       }
     },
     "Group": {

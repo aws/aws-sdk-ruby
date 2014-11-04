@@ -2,6 +2,21 @@
 
 ## `aws-sdk-resources` - v2.0.7
 
+* Moved `Aws::S3::MultipartUpload#upload_part` and `#copy_part` to
+  `Aws::S3::MultipartUploadPart#upload` and `#copy`.
+
+  ```ruby
+  mpu = s3.bucket('name').object('key').multipart_upload('id')
+
+  # old
+  mpu.upload_part(part_number:1, body:data)
+  mpu.copy_part(part_number:1, copy_source:...)
+
+  # new
+  mpu.part(1).upload(body:data)
+  mpu.part(1).copy(copy_source:...)
+  ```
+
 * Renamed `Aws::OpsWorksStack#get_summary` to `Aws::OpsWorks::Stack#summary`.
   Additionally, this now returns a resource object of type
   `Aws::OpsWorks::StackSummary`. This new object should have all of the same
