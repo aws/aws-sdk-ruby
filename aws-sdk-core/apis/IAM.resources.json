@@ -26,9 +26,9 @@
           "type": "Group",
           "identifiers": [
             { "target":"Name", "sourceType":"requestParameter", "source":"GroupName" }
-          ]
-        },
-        "path": "Group"
+          ],
+          "path": "Group"
+        }
       },
       "CreateInstanceProfile": {
         "request": { "operation": "CreateInstanceProfile" },
@@ -36,9 +36,9 @@
           "type": "InstanceProfile",
           "identifiers": [
             { "target":"Name", "sourceType":"requestParameter", "source":"InstanceProfileName" }
-          ]
-        },
-        "path": "InstanceProfile"
+          ],
+          "path": "InstanceProfile"
+        }
       },
       "CreateRole": {
         "request": { "operation": "CreateRole" },
@@ -46,9 +46,9 @@
           "type": "Role",
           "identifiers": [
             { "target":"Name", "sourceType":"requestParameter", "source":"RoleName" }
-          ]
-        },
-        "path": "Role"
+          ],
+          "path": "Role"
+        }
       },
       "CreateSamlProvider": {
         "request": { "operation": "CreateSAMLProvider" },
@@ -74,9 +74,9 @@
           "type": "SigningCertificate",
           "identifiers": [
             { "target":"Id", "sourceType":"responsePath", "source":"Certificate.CertificateId" }
-          ]
-        },
-        "path": "Certificate"
+          ],
+          "path": "Certificate"
+        }
       },
       "CreateUser": {
         "request": { "operation": "CreateUser" },
@@ -84,9 +84,9 @@
           "type": "User",
           "identifiers": [
             { "target":"Name", "sourceType":"requestParameter", "source":"UserName" }
-          ]
-        },
-        "path": "User"
+          ],
+          "path": "User"
+        }
       },
       "CreateVirtualMfaDevice": {
         "request": { "operation": "CreateVirtualMFADevice" },
@@ -94,9 +94,9 @@
           "type": "VirtualMfaDevice",
           "identifiers": [
             { "target":"SerialNumber", "sourceType":"responsePath", "source":"VirtualMFADevice.SerialNumber" }
-          ]
-        },
-        "path": "VirtualMFADevice"
+          ],
+          "path": "VirtualMFADevice"
+        }
       }
     },
     "hasMany": {
@@ -115,9 +115,9 @@
           "type": "Group",
           "identifiers": [
             { "target":"Name", "sourceType":"responsePath", "source":"Groups[].GroupName" }
-          ]
-        },
-        "path": "Groups[]"
+          ],
+          "path": "Groups[]"
+        }
       },
       "InstanceProfiles": {
         "request": { "operation": "ListInstanceProfiles" },
@@ -125,9 +125,9 @@
           "type": "InstanceProfile",
           "identifiers": [
             { "target":"Name", "sourceType":"responsePath", "source":"InstanceProfiles[].InstanceProfileName" }
-          ]
-        },
-        "path": "InstanceProfiles[]"
+          ],
+          "path": "InstanceProfiles[]"
+        }
       },
       "Roles": {
         "request": { "operation": "ListRoles" },
@@ -135,9 +135,9 @@
           "type": "Role",
           "identifiers": [
             { "target":"Name", "sourceType":"responsePath", "source":"Roles[].RoleName" }
-          ]
-        },
-        "path": "Roles[]"
+          ],
+          "path": "Roles[]"
+        }
       },
       "SamlProviders": {
         "request": { "operation": "ListSAMLProviders" },
@@ -163,9 +163,9 @@
           "type": "SigningCertificate",
           "identifiers": [
             { "target":"Id", "sourceType":"responsePath", "source":"Certificates[].CertificateId" }
-          ]
-        },
-        "path": "Certificates[]"
+          ],
+          "path": "Certificates[]"
+        }
       },
       "Users": {
         "request": { "operation": "ListUsers" },
@@ -173,9 +173,9 @@
           "type": "User",
           "identifiers": [
             { "target":"Name", "sourceType":"responsePath", "source":"Users[].UserName" }
-          ]
-        },
-        "path": "Users[]"
+          ],
+          "path": "Users[]"
+        }
       },
       "VirtualMfaDevices": {
         "request": { "operation": "ListVirtualMFADevices" },
@@ -183,9 +183,9 @@
           "type": "VirtualMfaDevice",
           "identifiers": [
             { "target":"SerialNumber", "sourceType":"responsePath", "source":"VirtualMFADevices[].SerialNumber" }
-          ]
-        },
-        "path": "VirtualMFADevices[]"
+          ],
+          "path": "VirtualMFADevices[]"
+        }
       }
     }
   },
@@ -357,9 +357,9 @@
             "type": "User",
             "identifiers": [
               { "target":"Name", "sourceType":"responsePath", "source":"Users[].UserName" }
-            ]
-          },
-          "path": "Users[]"
+            ],
+            "path": "Users[]"
+          }
         },
         "Policies": {
           "request": {
@@ -592,9 +592,9 @@
             "type": "InstanceProfile",
             "identifiers": [
               { "target":"Name", "sourceType":"responsePath", "source":"InstanceProfiles[].InstanceProfileName" }
-            ]
-          },
-          "path": "InstanceProfiles[]"
+            ],
+            "path": "InstanceProfiles[]"
+          }
         },
         "Policies": {
           "request": {
@@ -811,9 +811,9 @@
             "identifiers": [
               { "target":"UserName", "sourceType":"identifier", "source":"Name" },
               { "target":"Id", "sourceType":"responsePath", "source":"AccessKey.AccessKeyId" }
-            ]
-          },
-          "path": "AccessKey"
+            ],
+            "path": "AccessKey"
+          }
         },
         "CreatePolicy": {
           "request": {
@@ -873,9 +873,9 @@
             "identifiers": [
               { "target":"UserName", "sourceType":"identifier", "source":"Name" },
               { "target":"Id", "sourceType":"responsePath", "source":"AccessKeyMetadata[].AccessKeyId" }
-            ]
-          },
-          "path": "AccessKeyMetadata[]"
+            ],
+            "path": "AccessKeyMetadata[]"
+          }
         },
         "Groups": {
           "request": {
@@ -888,9 +888,9 @@
             "type": "Group",
             "identifiers": [
               { "target":"Name", "sourceType":"responsePath", "source":"Groups[].GroupName" }
-            ]
-          },
-          "path": "Groups[]"
+            ],
+            "path": "Groups[]"
+          }
         },
         "MfaDevices": {
           "request": {
@@ -904,9 +904,9 @@
             "identifiers": [
               { "target":"UserName", "sourceType":"identifier", "source":"Name" },
               { "target":"SerialNumber", "sourceType":"responsePath", "source":"MFADevices[].SerialNumber" }
-            ]
-          },
-          "path": "MFADevices[]"
+            ],
+            "path": "MFADevices[]"
+          }
         },
         "Policies": {
           "request": {

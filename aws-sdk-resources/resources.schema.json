@@ -7,18 +7,36 @@
     "resources": { "$ref": "#/definitions/ResourceMap" }
   },
   "definitions": {
+    "Action": {
+      "type": "object",
+      "required": ["request"],
+      "additionalProperties": false,
+      "properties": {
+        "request": { "$ref": "#/definitions/Request" },
+        "resource": { "$ref": "#/definitions/ResourceBuilder" }
+      }
+    },
     "ActionMap": {
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/Operation" }
+        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/Action" }
+      }
+    },
+    "HasMany": {
+      "type": "object",
+      "required": ["request", "resource"],
+      "additionalProperties": false,
+      "properties": {
+        "request": { "$ref": "#/definitions/Request" },
+        "resource": { "$ref": "#/definitions/ResourceBuilder" }
       }
     },
     "HasManyMap": {
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/Operation" }
+        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/HasMany" }
       }
     },
     "HasOneMap": {
@@ -45,8 +63,8 @@
       "additionalProperties": false,
       "properties": {
         "name": { "$ref": "#/definitions/IdentifierName" },
-        "memberName": { "type": "string" },
-        "nullable": { "type": "boolean", "default": false }
+        "type": { "$ref": "#/definitions/IdentifierType" },
+        "memberName": { "type": "string" }
       }
     },
     "IdentifierList": {
@@ -55,12 +73,19 @@
       "items": { "$ref": "#/definitions/Identifier" }
     },
     "IdentifierName": { "$ref": "#/definitions/UpperCamelCaseString" },
-    "Operation": {
+    "IdentifierType": {
+      "type": "string",
+      "enum": [
+        "string",
+        "integer"
+      ]
+    },
+    "Load": {
       "type": "object",
+      "required": ["request", "path"],
       "additionalProperties": false,
       "properties": {
         "request": { "$ref": "#/definitions/Request" },
-        "resource": { "$ref": "#/definitions/ResourceBuilder" },
         "path": { "$ref": "#/definitions/JMESPathExpression" }
       }
     },
@@ -131,7 +156,7 @@
       "properties": {
         "shape":            { "$ref": "#/definitions/ShapeName" },
         "identifiers":      { "$ref": "#/definitions/IdentifierList" },
-        "load":             { "$ref": "#/definitions/Operation" },
+        "load":             { "$ref": "#/definitions/Load" },
         "actions":          { "$ref": "#/definitions/ActionMap" },
         "waiters":          { "$ref": "#/definitions/WaiterMap" },
         "batchActions":     { "$ref": "#/definitions/ActionMap" },
@@ -147,7 +172,8 @@
       "additionalProperties": false,
       "properties": {
         "type": { "$ref": "#/definitions/ResourceName" },
-        "identifiers": { "$ref": "#/definitions/ResourceIdentifierList" }
+        "identifiers": { "$ref": "#/definitions/ResourceIdentifierList" },
+        "path": { "$ref": "#/definitions/JMESPathExpression" }
       }
     },
     "ResourceMap": {

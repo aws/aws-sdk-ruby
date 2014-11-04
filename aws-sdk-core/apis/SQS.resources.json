@@ -102,9 +102,9 @@
             "identifiers": [
               { "target":"QueueUrl", "sourceType":"identifier", "source":"Url" },
               { "target":"ReceiptHandle", "sourceType":"responsePath", "source":"Messages[].ReceiptHandle" }
-            ]
-          },
-          "path":"Messages[]"
+            ],
+            "path":"Messages[]"
+          }
         },
         "SendMessage": {
           "request": {

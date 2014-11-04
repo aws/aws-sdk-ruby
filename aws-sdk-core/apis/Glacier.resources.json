@@ -30,9 +30,9 @@
           "identifiers" : [
             { "target":"AccountId", "sourceType":"requestParameter", "source":"accountId"},
             { "target":"Name", "sourceType":"responsePath", "source":"VaultList[].VaultName"}
-          ]
-        },
-        "path" : "VaultList[]"
+          ],
+          "path" : "VaultList[]"
+        }
       }
     }
   },
@@ -63,11 +63,11 @@
           "resource" : {
             "type" : "Vault",
             "identifiers" : [
-                { "target":"AccountId", "sourceType":"requestParameter", "source":"accountId"},
-                { "target":"Name", "sourceType":"responsePath", "source":"VaultList[].VaultName"}
-             ]
-          },
-          "path" : "VaultList[]"
+              { "target":"AccountId", "sourceType":"requestParameter", "source":"accountId"},
+              { "target":"Name", "sourceType":"responsePath", "source":"VaultList[].VaultName"}
+            ],
+            "path" : "VaultList[]"
+          }
         }
       }
     },
@@ -174,9 +174,9 @@
               { "target" : "AccountId", "sourceType" : "identifier", "source" : "AccountId" },
               { "target" : "VaultName", "sourceType" : "identifier", "source" : "Name" },
               { "target" : "Id", "sourceType" : "responsePath", "source" : "JobList[].JobId" }
-            ]
-          },
-          "path" : "JobList[]"
+            ],
+            "path" : "JobList[]"
+          }
         },
         "CompletedJobs" : {
           "request" : {
@@ -193,9 +193,9 @@
               { "target" : "AccountId", "sourceType" : "identifier", "source" : "AccountId" },
               { "target" : "VaultName", "sourceType" : "identifier", "source" : "Name" },
               { "target" : "Id", "sourceType" : "responsePath", "source" : "JobList[].JobId" }
-            ]
-          },
-          "path" : "JobList[]"
+            ],
+            "path" : "JobList[]"
+          }
         },
         "JobsInProgress" : {
           "request" : {
@@ -212,9 +212,9 @@
               { "target" : "AccountId", "sourceType" : "identifier", "source" : "AccountId" },
               { "target" : "VaultName", "sourceType" : "identifier", "source" : "Name" },
               { "target" : "Id", "sourceType" : "responsePath", "source" : "JobList[].JobId" }
-             ]
-          },
-          "path" : "JobList[]"
+            ],
+            "path" : "JobList[]"
+          }
         },
         "SucceededJobs" : {
           "request" : {
@@ -231,9 +231,9 @@
               { "target" : "AccountId", "sourceType" : "identifier", "source" : "AccountId" },
               { "target" : "VaultName", "sourceType" : "identifier", "source" : "Name" },
               { "target" : "Id", "sourceType" : "responsePath", "source" : "JobList[].JobId" }
-            ]
-          },
-          "path" : "JobList[]"
+            ],
+            "path" : "JobList[]"
+          }
         },
         "FailedJobs" : {
           "request" : {
@@ -250,9 +250,9 @@
               {"target" : "AccountId", "sourceType" : "identifier", "source" : "AccountId"},
               {"target" : "VaultName", "sourceType" : "identifier", "source" : "Name"},
               {"target" : "Id", "sourceType" : "responsePath", "source" : "JobList[].JobId"}
-            ]
-          },
-          "path" : "JobList[]"
+            ],
+            "path" : "JobList[]"
+          }
         },
         "MultipartUplaods" : {
           "request" : {
@@ -268,9 +268,9 @@
               {"target" : "AccountId", "sourceType" : "identifier", "source" : "AccountId"},
               {"target" : "VaultName", "sourceType" : "identifier", "source" : "Name"},
               {"target" : "Id", "sourceType" : "responsePath", "source" : "UploadsList[].MultipartUploadId"}
-            ]
-          },
-          "path" : "UploadsList[]"
+            ],
+            "path" : "UploadsList[]"
+          }
         }
       },
       "subResources": {

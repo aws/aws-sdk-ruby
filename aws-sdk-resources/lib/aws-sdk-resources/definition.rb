@@ -87,7 +87,7 @@ module Aws
       def define_top_level_references(namespace)
         top_level = Set.new(resource_definitions.keys)
         each_resource_class(namespace) do |resource, definition|
-          unless resource.identifiers.count == 1
+          unless resource.identifiers.count <= 1
             top_level.delete(resource.resource_name)
           end
           ((definition['subResources'] || {})['resources'] || {}).each do |child|
@@ -165,6 +165,7 @@ module Aws
       end
 
       def build_data_operation(namespace, resource, definition)
+        raise NotImplementedError, 'removed from spec'
         plural = definition['path'].include?('[')
         source = source(definition)
         if plural
@@ -185,7 +186,7 @@ module Aws
 
       def build_resource_operation(namespace, resource, definition)
         builder = define_builder(namespace, definition['resource'])
-        if path = definition['path']
+        if path = definition['resource']['path']
           source = underscore(path)
           builder.sources << BuilderSources::ResponsePath.new(source, :data)
         end
@@ -198,7 +199,7 @@ module Aws
 
       def build_enumerate_resource_operation(namespace, resource, definition)
         builder = define_builder(namespace, definition['resource'])
-        if path = definition['path']
+        if path = definition['resource']['path']
           source = underscore(path)
           builder.sources << BuilderSources::ResponsePath.new(source, :data)
         end
@@ -272,7 +273,7 @@ module Aws
 
       def define_reference(namespace, resource, name, definition)
         builder = define_builder(namespace, definition['resource'])
-        if path = definition['path']
+        if path = definition['resource']['path']
           source = underscore(path)
           builder.sources << BuilderSources::DataMember.new(source, :data)
         end

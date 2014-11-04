@@ -86,9 +86,9 @@
             "identifiers": [
               { "target":"LogicalId", "sourceType":"responsePath", "source":"StackResourceSummaries[].LogicalResourceId" },
               { "target":"StackName", "sourceType":"requestParameter", "source":"StackName" }
-            ]
-          },
-          "path": "StackResourceSummaries[]"
+            ],
+            "path": "StackResourceSummaries[]"
+          }
         },
 
         "Events": {
@@ -102,9 +102,9 @@
             "type":"Event",
             "identifiers": [
               { "target": "Id", "sourceType": "responsePath", "source": "StackEvents[].EventId"}
-]
-          },
-          "path": "StackEvents[]"
+            ],
+            "path": "StackEvents[]"
+          }
         }
       }
     },

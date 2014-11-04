@@ -18,9 +18,9 @@
           "type": "Bucket",
           "identifiers": [
             { "target":"Name", "sourceType":"responsePath", "source":"Buckets[].Name" }
-          ]
-        },
-        "path":"Buckets[]"
+          ],
+          "path":"Buckets[]"
+        }
       }
     }
   },
@@ -114,9 +114,9 @@
               { "target":"BucketName", "sourceType":"identifier", "source":"Name" },
               { "target":"ObjectKey", "sourceType":"responsePath", "source":"[Versions,DeleteMarkers]|[].Key" },
               { "target":"Id", "sourceType":"responsePath", "source":"[Versions,DeleteMarkers]|[].VersionId" }
-            ]
-          },
-          "path":"[Versions,DeleteMarkers]|[]"
+            ],
+            "path":"[Versions,DeleteMarkers]|[]"
+          }
         },
         "MultipartUploads": {
           "request": {
@@ -131,9 +131,9 @@
               { "target":"BucketName", "sourceType":"identifier", "source":"Name" },
               { "target":"ObjectKey", "sourceType":"responsePath", "source":"Uploads[].Key" },
               { "target":"Id", "sourceType":"responsePath", "source":"Uploads[].UploadId" }
-            ]
-          },
-          "path": "Uploads[]"
+            ],
+            "path": "Uploads[]"
+          }
         }
       },
       "subResources": {
@@ -515,7 +515,7 @@
               { "target":"BucketName", "sourceType":"requestParameter", "source":"Bucket" },
               { "target":"ObjectKey", "sourceType":"requestParameter", "source":"Key" },
               { "target":"MultipartUploadId", "sourceType":"requestParameter", "source":"UploadId" },
-              { "target":"PartNumer", "sourceType":"responsePath", "source":"Parts[].PartNumber" }
+              { "target":"PartNumber", "sourceType":"responsePath", "source":"Parts[].PartNumber" }
             ],
             "path": "Parts[]"
           }

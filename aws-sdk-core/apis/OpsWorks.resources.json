@@ -30,9 +30,9 @@
               "sourceType": "responsePath",
               "source": "Stacks[].StackId"
             }
-          ]
-        },
-        "path": "Stacks[]"
+          ],
+          "path": "Stacks[]"
+        }
       }
     }
   },
@@ -158,9 +158,9 @@
                 "sourceType": "responsePath",
                 "source": "Layers[].LayerId"
               }
-            ]
-          },
-          "path": "Layers[]"
+            ],
+            "path": "Layers[]"
+          }
         }
       },
       "subResources": {

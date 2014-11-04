@@ -87,29 +87,6 @@ module Aws
               expect(resp).to be(client_response)
             end
 
-            it 'supports operations that extract data' do
-              definition['service'] = {
-                'actions' => {
-                  'DoSomething' => {
-                    'request' => {
-                      'operation' => 'ClientMethod'
-                    },
-                    'path' => 'Nested.Value'
-                  }
-                }
-              }
-
-              expect(client).to receive(:client_method).
-                and_return(double('client-response',
-                  data: { 'nested' => { 'value' => 'nested-value' }}
-                ))
-
-              apply_definition
-
-              resp = namespace::Resource.new.do_something(foo:'bar')
-              expect(resp).to eq('nested-value')
-            end
-
             it 'supports operations that return singular resources' do
               definition.update(
                 'service' => {
@@ -219,8 +196,8 @@ module Aws
                             'source' => 'Things[].Name'
                           }
                         ],
-                      },
-                      'path' => 'Things[]'
+                        'path' => 'Things[]'
+                      }
                     }
                   }
                 },
@@ -268,8 +245,8 @@ module Aws
                           'source' => 'Things[].Name'
                         }
                       ],
-                    },
-                    'path' => 'Things[]'
+                      'path' => 'Things[]'
+                    }
                   }
                 }
               },
@@ -520,37 +497,6 @@ module Aws
               expect(resp).to be(client_resp)
             end
 
-            it 'supports operations that extract data' do
-              definition['resources'] = {
-                'Thing' => {
-                  'identifiers' => [
-                    { 'name' => 'Name' }
-                  ],
-                  'actions' => {
-                    'Deactivate' => {
-                      'request' => {
-                        'operation' => 'DeactivateThing',
-                        'params' => [
-                          { "target" => "ThingName", "sourceType" => "identifier", "source" => "Name" }
-                        ]
-                      },
-                      'path' => 'Thing.Status'
-                    }
-                  }
-                }
-              }
-
-              data = { 'thing' => { 'status' => 'inactive' } }
-              client_resp = double('client-response', data:data)
-              expect(client).to receive(:deactivate_thing).
-                and_return(client_resp)
-
-              apply_definition
-
-              thing = namespace::Thing.new(name:'thing-name')
-              expect(thing.deactivate).to eq('inactive')
-            end
-
             it 'supports operations that return singular resources' do
               definition['resources'] = {
                 'Thing' => {
@@ -681,9 +627,9 @@ module Aws
                             'sourceType' => 'responsePath',
                             'source' => 'DooDad.DooDadName'
                           }
-                        ]
-                      },
-                      'path' => 'DooDad'
+                        ],
+                        'path' => 'DooDad'
+                      }
                     }
                   }
                 },
@@ -755,8 +701,8 @@ module Aws
                             'source' => 'DooDads[].Name'
                           },
                         ],
-                      },
-                      'path' => 'DooDads[]'
+                        'path' => 'DooDads[]'
+                      }
                     }
                   }
                 },
@@ -889,9 +835,9 @@ module Aws
                             'sourceType' => 'dataMember',
                             'source' => 'DooDads[].Name',
                           }
-                        ]
-                      },
-                      'path' => 'DooDads[]'
+                        ],
+                        'path' => 'DooDads[]'
+                      }
                     }
                   }
                 },
