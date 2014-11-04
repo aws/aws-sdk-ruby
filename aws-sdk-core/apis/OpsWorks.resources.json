@@ -125,19 +125,6 @@
             ]
           }
         },
-        "GetSummary": {
-          "request": {
-            "operation": "DescribeStackSummary",
-            "params": [
-              {
-                "target": "StackId",
-                "sourceType": "identifier",
-                "source": "Id"
-              }
-            ]
-          },
-          "path": "StackSummary"
-        },
         "Delete": {
           "request": {
             "operation": "DeleteStack",
@@ -175,6 +162,31 @@
           },
           "path": "Layers[]"
         }
+      },
+      "subResources": {
+        "resources": ["StackSummary"],
+        "identifiers": {
+          "Id": "StackId"
+        }
+      }
+    },
+    "StackSummary": {
+      "identifiers": [
+        { "name":"StackId" }
+      ],
+      "shape": "StackSummary",
+      "load": {
+        "request": {
+          "operation": "DescribeStackSummary",
+          "params": [
+            {
+              "target": "StackId",
+              "sourceType": "identifier",
+              "source": "StackId"
+            }
+          ]
+        },
+        "path": "StackSummary"
       }
     }
   }

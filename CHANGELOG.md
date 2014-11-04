@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Upgrading - `Aws::OpsWorks::Stack` - Renamed `#get_summary` to
+  `#summary`.
+
 * Feature - `Aws::S3::Bucket` - Added a `#url` method that returns
   the public URL for the bucket.
 

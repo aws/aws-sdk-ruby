@@ -1,5 +1,12 @@
 # Upgrade Notes
 
+## `aws-sdk-resources` - v2.0.7
+
+* Renamed `Aws::OpsWorksStack#get_summary` to `Aws::OpsWorks::Stack#summary`.
+  Additionally, this now returns a resource object of type
+  `Aws::OpsWorks::StackSummary`. This new object should have all of the same
+  methods and the previous.
+
 ## `aws-sdk-core` - v2.0.0
 
 The `aws-sdk-core` gem has moved from developer preview to a stable 2.0.0
