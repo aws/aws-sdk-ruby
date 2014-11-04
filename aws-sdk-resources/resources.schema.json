@@ -3,55 +3,68 @@
   "required": ["resources"],
   "additionalProperties": false,
   "properties": {
-    "service": { "$ref": "#/definitions/Service" },
-    "resources": { "$ref": "#/definitions/ResourceMap" }
-  },
-  "definitions": {
-    "Action": {
+    "service": {
       "type": "object",
-      "required": ["request"],
+      "required": [],
       "additionalProperties": false,
       "properties": {
-        "request": { "$ref": "#/definitions/Request" },
-        "resource": { "$ref": "#/definitions/ResourceBuilder" }
+        "actions": { "$ref": "#/definitions/Actions" },
+        "hasMany": { "$ref": "#/definitions/HasMany" }
       }
     },
-    "ActionMap": {
+    "resources": {
       "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/Action" }
+      "additionalProperties": {
+        "type": "object",
+        "required": [],
+        "additionalProperties": false,
+        "properties": {
+          "shape":            { "$ref": "#/definitions/ShapeName" },
+          "identifiers":      { "$ref": "#/definitions/Identifiers" },
+          "load":             { "$ref": "#/definitions/Load" },
+          "actions":          { "$ref": "#/definitions/Actions" },
+          "batchActions":     { "$ref": "#/definitions/Actions" },
+          "waiters":          { "$ref": "#/definitions/Waiters" },
+          "hasMany":          { "$ref": "#/definitions/HasMany" },
+          "hasSome":          { "$ref": "#/definitions/HasSomeMap" },
+          "hasOne":           { "$ref": "#/definitions/HasOneMap" },
+          "subResources":     { "$ref": "#/definitions/SubResources" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Actions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["request"],
+        "additionalProperties": false,
+        "properties": {
+          "request": { "$ref": "#/definitions/Request" },
+          "resource": { "$ref": "#/definitions/ResourceBuilder" }
+        }
       }
     },
     "HasMany": {
       "type": "object",
-      "required": ["request", "resource"],
-      "additionalProperties": false,
-      "properties": {
-        "request": { "$ref": "#/definitions/Request" },
-        "resource": { "$ref": "#/definitions/ResourceBuilder" }
-      }
-    },
-    "HasManyMap": {
-      "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/HasMany" }
+      "additionalProperties": {
+        "type": "object",
+        "required": ["request", "resource"],
+        "additionalProperties": false,
+        "properties": {
+          "request": { "$ref": "#/definitions/Request" },
+          "resource": { "$ref": "#/definitions/ResourceBuilder" }
+        }
       }
     },
     "HasOneMap": {
       "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/ResourceReference" }
-      }
+      "additionalProperties": { "$ref": "#/definitions/ResourceReference" }
     },
     "HasSomeMap": {
       "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/ResourceReference" }
-      }
+      "additionalProperties": { "$ref": "#/definitions/ResourceReference" }
     },
     "JMESPathExpression": {
       "type": "string",
@@ -67,7 +80,7 @@
         "memberName": { "type": "string" }
       }
     },
-    "IdentifierList": {
+    "Identifiers": {
       "type": "array",
       "additionalItems": false,
       "items": { "$ref": "#/definitions/Identifier" }
@@ -149,23 +162,6 @@
       "additionalItems": false,
       "items": { "$ref": "#/definitions/ResourceIdentifier" }
     },
-    "Resource": {
-      "type": "object",
-      "required": [],
-      "additionalProperties": false,
-      "properties": {
-        "shape":            { "$ref": "#/definitions/ShapeName" },
-        "identifiers":      { "$ref": "#/definitions/IdentifierList" },
-        "load":             { "$ref": "#/definitions/Load" },
-        "actions":          { "$ref": "#/definitions/ActionMap" },
-        "waiters":          { "$ref": "#/definitions/WaiterMap" },
-        "batchActions":     { "$ref": "#/definitions/ActionMap" },
-        "hasMany":          { "$ref": "#/definitions/HasManyMap" },
-        "hasSome":          { "$ref": "#/definitions/HasSomeMap" },
-        "hasOne":           { "$ref": "#/definitions/HasOneMap" },
-        "subResources":     { "$ref": "#/definitions/SubResources" }
-      }
-    },
     "ResourceBuilder": {
       "type": "object",
       "required": ["type", "identifiers"],
@@ -174,13 +170,6 @@
         "type": { "$ref": "#/definitions/ResourceName" },
         "identifiers": { "$ref": "#/definitions/ResourceIdentifierList" },
         "path": { "$ref": "#/definitions/JMESPathExpression" }
-      }
-    },
-    "ResourceMap": {
-      "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/Resource" }
       }
     },
     "ResourceName": { "$ref": "#/definitions/UpperCamelCaseString" },
@@ -193,22 +182,10 @@
         "path": { "$ref": "#/definitions/JMESPathExpression" }
       }
     },
-    "Service": {
-      "type": "object",
-      "required": [],
-      "additionalProperties": false,
-      "properties": {
-        "actions": { "$ref": "#/definitions/ActionMap" },
-        "hasMany": { "$ref": "#/definitions/HasManyMap" }
-      }
-    },
     "ShapeName": { "type": "string" },
     "SubResourceIdentifierMap": {
       "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/UpperCamelCaseString" }
-      }
+      "additionalProperties": { "$ref": "#/definitions/UpperCamelCaseString" }
     },
     "SubResourceList": {
       "type": "array",
@@ -230,26 +207,21 @@
     },
     "UpperCamelCaseString": {
       "type": "string",
-      "minLength": 1,
-      "pattern": "^([A-Z][a-z]+)+$"
+      "minLength": 1
     },
-    "Waiter": {
+    "Waiters": {
       "type": "object",
-      "required": [
-        "waiterName"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "waiterName": { "$ref": "#/definitions/UpperCamelCaseString" },
-        "params":  { "$ref": "#/definitions/RequestParamList" },
-        "path": { "$ref": "#/definitions/JMESPathExpression" }
-      }
-    },
-    "WaiterMap": {
-      "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "^([A-Z][a-z]+)+$": { "$ref": "#/definitions/Waiter" }
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "waiterName"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "waiterName": { "$ref": "#/definitions/UpperCamelCaseString" },
+          "params":  { "$ref": "#/definitions/RequestParamList" },
+          "path": { "$ref": "#/definitions/JMESPathExpression" }
+        }
       }
     }
   }
