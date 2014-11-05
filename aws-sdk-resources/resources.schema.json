@@ -66,10 +66,6 @@
       "type": "object",
       "additionalProperties": { "$ref": "#/definitions/ResourceReference" }
     },
-    "JMESPathExpression": {
-      "type": "string",
-      "minLength": 1
-    },
     "Identifier": {
       "type": "object",
       "required": ["name"],
@@ -92,6 +88,10 @@
         "string",
         "integer"
       ]
+    },
+    "JMESPathExpression": {
+      "type": "string",
+      "minLength": 1
     },
     "Load": {
       "type": "object",
