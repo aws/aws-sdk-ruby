@@ -465,9 +465,9 @@
             "type": "Role",
             "identifiers": [
               { "target":"Name", "sourceType":"dataMember", "source":"Roles[].RoleName" }
-            ]
-          },
-          "path": "Roles[]"
+            ],
+            "path": "Roles[]"
+          }
         }
       }
     },
