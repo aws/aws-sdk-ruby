@@ -1,150 +1,147 @@
 {
   "service": {
-    "hasMany": {
-      "Stacks": {
-        "request": { "operation": "DescribeStacks" },
-          "resource": {
-            "type":"Stack",
-            "identifiers": [
-            { "target": "Name",  "sourceType": "responsePath", "source":"Stacks[].StackName" }
-            ]
-          }
-      }
-    },
-
     "actions": {
       "CreateStack": {
         "request": { "operation": "CreateStack" },
-          "resource": {
-            "type": "Stack",
-            "identifiers": [
-              {"target": "Name", "sourceType": "requestParameter", "source":"StackName" }
-            ]
-          }
+        "resource": {
+          "type": "Stack",
+          "identifiers": [
+            { "target": "Name", "sourceType": "requestParameter", "source": "StackName" }
+          ]
+        }
+      }
+    },
+    "hasMany": {
+      "Stacks": {
+        "request": { "operation": "DescribeStacks" },
+        "resource": {
+          "type": "Stack",
+          "identifiers": [
+            { "target": "Name", "sourceType": "responsePath", "source": "Stacks[].StackName" }
+          ]
+        }
       }
     }
   },
-
   "resources": {
+    "Event": {
+      "identifiers": [
+        { "name": "Id" }
+      ],
+      "shape": "StackEvent"
+    },
     "Stack": {
-      "shape":"Stack",
-      "identifiers": [ {"name":"Name"} ],
+      "identifiers": [
+        { "name": "Name" }
+      ],
+      "shape": "Stack",
       "load": {
         "request": {
           "operation": "DescribeStacks",
           "params": [
-            { "target":"StackName", "sourceType":"identifier", "source":"Name" }
+            { "target": "StackName", "sourceType": "identifier", "source": "Name" }
           ]
         },
         "path": "Stacks[0]"
       },
       "actions": {
-
-        "Update": {
-          "request": {
-            "operation": "UpdateStack",
-            "params": [
-            { "target":"StackName", "sourceType":"identifier", "source":"Name" }
-            ]
-          }
-        },
-
         "CancelUpdate": {
           "request": {
             "operation": "CancelUpdateStack",
             "params": [
-              { "target":"StackName", "sourceType":"identifier", "source":"Name" }
+              { "target": "StackName", "sourceType": "identifier", "source": "Name" }
             ]
           }
         },
-
         "Delete": {
           "request": {
             "operation": "DeleteStack",
             "params": [
-              { "target":"StackName", "sourceType":"identifier", "source":"Name" }
+              { "target": "StackName", "sourceType": "identifier", "source": "Name" }
+            ]
+          }
+        },
+        "Update": {
+          "request": {
+            "operation": "UpdateStack",
+            "params": [
+              { "target": "StackName", "sourceType": "identifier", "source": "Name" }
             ]
           }
         }
       },
-
-      "subResources": {
-        "resources": ["StackResource"],
-        "identifiers": {"Name": "StackName"}
-      },
-
       "hasMany": {
+        "Events": {
+          "request": {
+            "operation": "DescribeStackEvents",
+            "params": [
+              { "target": "StackName", "sourceType": "identifier", "source": "Name" }
+            ]
+          },
+          "resource": {
+            "type": "Event",
+            "identifiers": [
+              { "target": "Id", "sourceType": "responsePath", "source": "StackEvents[].EventId" }
+            ],
+            "path": "StackEvents[]"
+          }
+        },
         "ResourceSummaries": {
           "request": {
             "operation": "ListStackResources",
             "params": [
-              { "target":"StackName", "sourceType":"identifier", "source":"Name" }
+              { "target": "StackName", "sourceType": "identifier", "source": "Name" }
             ]
           },
           "resource": {
             "type": "StackResourceSummary",
             "identifiers": [
-              { "target":"LogicalId", "sourceType":"responsePath", "source":"StackResourceSummaries[].LogicalResourceId" },
-              { "target":"StackName", "sourceType":"requestParameter", "source":"StackName" }
+              { "target": "LogicalId", "sourceType": "responsePath", "source": "StackResourceSummaries[].LogicalResourceId" },
+              { "target": "StackName", "sourceType": "requestParameter", "source": "StackName" }
             ],
             "path": "StackResourceSummaries[]"
           }
-        },
-
-        "Events": {
-          "request": {
-            "operation": "DescribeStackEvents",
-            "params": [
-              { "target":"StackName", "sourceType":"identifier", "source":"Name" }
-            ]
-          },
-          "resource": {
-            "type":"Event",
-            "identifiers": [
-              { "target": "Id", "sourceType": "responsePath", "source": "StackEvents[].EventId"}
-            ],
-            "path": "StackEvents[]"
-          }
         }
+      },
+      "subResources": {
+        "resources": [ "StackResource" ],
+        "identifiers": { "Name": "StackName" }
       }
     },
-
-    "StackResource" : {
-      "identifiers": [{"name": "LogicalId"}, {"name": "StackName"}],
+    "StackResource": {
+      "identifiers": [
+        { "name": "LogicalId" },
+        { "name": "StackName" }
+      ],
       "shape": "StackResourceDetail",
       "load": {
         "request": {
           "operation": "DescribeStackResource",
           "params": [
-            { "target":"LogicalResourceId", "sourceType": "identifier", "source": "LogicalId" },
-            { "target":"StackName", "sourceType": "identifier", "source": "StackName" }
+            { "target": "LogicalResourceId", "sourceType": "identifier", "source": "LogicalId" },
+            { "target": "StackName", "sourceType": "identifier", "source": "StackName" }
           ]
         },
         "path": "StackResourceDetail"
       }
     },
-
     "StackResourceSummary": {
-      "identifiers": [{"name": "LogicalId"}, {"name": "StackName"}],
+      "identifiers": [
+        { "name": "LogicalId" },
+        { "name": "StackName" }
+      ],
       "shape": "StackResourceSummary",
-
       "hasOne": {
         "Resource": {
           "resource": {
             "type": "StackResource",
             "identifiers": [
-            { "target":"LogicalId", "sourceType":"identifier", "source":"LogicalId" },
-            { "target":"StackName", "sourceType":"identifier", "source":"StackName" }
+              { "target": "LogicalId", "sourceType": "identifier", "source": "LogicalId" },
+              { "target": "StackName", "sourceType": "identifier", "source": "StackName" }
             ]
           }
         }
       }
-    },
-
-
-    "Event": {
-      "identifiers": [{"name": "Id"}],
-      "shape": "StackEvent"
     }
   }
 }
