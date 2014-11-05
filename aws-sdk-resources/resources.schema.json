@@ -109,31 +109,30 @@
       "additionalProperties": false,
       "properties": {
         "operation": { "$ref": "#/definitions/OperationName" },
-        "params":  { "$ref": "#/definitions/RequestParamList" }
+        "params":  { "$ref": "#/definitions/RequestParams" }
       }
     },
-    "RequestParam": {
-      "type": "object",
-      "required": [
-        "target",
-        "sourceType",
-        "source"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "target": { "type": "string" },
-        "sourceType": {
-          "type": "string",
-          "enum": ["identifier", "dataMember", "string", "integer", "boolean"]
-        },
-        "source": { "type": "string" }
-      }
-    },
-    "RequestParamList": {
+    "RequestParams": {
       "type": "array",
       "minItems": 1,
       "additionalItems": false,
-      "items": { "$ref": "#/definitions/RequestParam" }
+      "items": {
+        "type": "object",
+        "required": [
+          "target",
+          "sourceType",
+          "source"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "target": { "type": "string" },
+          "sourceType": {
+            "type": "string",
+            "enum": ["identifier", "dataMember", "string", "integer", "boolean"]
+          },
+          "source": { "type": "string" }
+        }
+      }
     },
     "ResourceIdentifier": {
       "type": "object",
@@ -178,8 +177,7 @@
       "required": ["resource"],
       "additionalProperties": false,
       "properties": {
-        "resource": { "$ref": "#/definitions/ResourceBuilder" },
-        "path": { "$ref": "#/definitions/JMESPathExpression" }
+        "resource": { "$ref": "#/definitions/ResourceBuilder" }
       }
     },
     "ShapeName": { "type": "string" },
@@ -219,7 +217,7 @@
         "additionalProperties": false,
         "properties": {
           "waiterName": { "$ref": "#/definitions/UpperCamelCaseString" },
-          "params":  { "$ref": "#/definitions/RequestParamList" },
+          "params":  { "$ref": "#/definitions/RequestParams" },
           "path": { "$ref": "#/definitions/JMESPathExpression" }
         }
       }
