@@ -284,15 +284,28 @@
       :type: :string
       :required: true
       :position: 0
+    :vpc:
+      :name: VPC
+      :type: :hash
+      :position: 1
+      :members:
+        :vpc_id:
+          :name: VPCId
+          :type: :string
+          :position: 0
+        :vpc_region:
+          :name: VPCRegion
+          :type: :string
+          :position: 1
     :caller_reference:
       :name: CallerReference
       :type: :string
       :required: true
-      :position: 1
+      :position: 2
     :hosted_zone_config:
       :name: HostedZoneConfig
       :type: :hash
-      :position: 2
+      :position: 3
       :members:
         :comment:
           :name: Comment
