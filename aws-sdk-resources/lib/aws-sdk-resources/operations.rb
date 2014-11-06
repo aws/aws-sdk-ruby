@@ -22,14 +22,6 @@ module Aws
         # @return [Source, nil]
         attr_reader :source
 
-        # @option options[required,Resource] :resource
-        # @option options[required,Array<Mixed>] :args
-        # @option options[Proc] :block
-        # @return [Mixed]
-        def call(options = {})
-          raise NotImplementedError
-        end
-
       end
 
       # Makes an API request using the resource client, returning the client
