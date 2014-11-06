@@ -509,8 +509,23 @@
             :children:
               Comment:
                 :type: :string
+              PrivateZone:
+                :type: :boolean
           ResourceRecordSetCount:
             :type: :integer
+      VPCs:
+        :ignore: true
+        :children:
+          VPC:
+            :rename: :vpcs
+            :list: true
+            :children:
+              VPCId:
+                :rename: :vpc_id
+                :type: :string
+              VPCRegion:
+                :rename: :vpc_region
+                :type: :string
       DelegationSet:
         :children:
           NameServers:
