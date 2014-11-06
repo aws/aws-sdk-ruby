@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Added support for the 2014-10-21 API version.
+
 * Upgrading - `Aws::OpsWorks::Stack` - Renamed `#get_summary` to
   `#summary`.
 

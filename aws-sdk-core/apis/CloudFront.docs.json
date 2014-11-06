@@ -52,16 +52,10 @@
       }
     },
     "AllowedMethods": {
-      "base": "A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are two options: - CloudFront forwards only GET and HEAD requests. - CloudFront forwards DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT requests. If you choose the second option, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can't perform operations that you don't want them to. For example, you may not want users to have permission to delete objects from your origin.",
+      "base": "A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are three choices: - CloudFront forwards only GET and HEAD requests. - CloudFront forwards only GET, HEAD and OPTIONS requests. - CloudFront forwards GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE requests. If you pick the third choice, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can't perform operations that you don't want them to. For example, you may not want users to have permission to delete objects from your origin.",
       "refs": {
         "CacheBehavior$AllowedMethods": null,
         "DefaultCacheBehavior$AllowedMethods": null
-      }
-    },
-    "AllowedMethodsList": {
-      "base": null,
-      "refs": {
-        "AllowedMethods$Items": "A complex type that contains the HTTP methods that you want CloudFront to process and forward to your origin."
       }
     },
     "AwsAccountNumberList": {
@@ -97,6 +91,12 @@
       "refs": {
         "DistributionConfig$CacheBehaviors": "A complex type that contains zero or more CacheBehavior elements.",
         "DistributionSummary$CacheBehaviors": "A complex type that contains zero or more CacheBehavior elements."
+      }
+    },
+    "CachedMethods": {
+      "base": "A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices: - CloudFront caches responses to GET and HEAD requests. - CloudFront caches responses to GET, HEAD, and OPTIONS requests. If you pick the second choice for your S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers and Origin headers for the responses to be cached correctly.",
+      "refs": {
+        "AllowedMethods$CachedMethods": null
       }
     },
     "CloudFrontOriginAccessIdentity": {
@@ -455,6 +455,11 @@
       "refs": {
       }
     },
+    "InvalidProtocolSettings": {
+      "base": "You cannot specify SSLv3 as the minimum protocol version if you only want to support only clients that Support Server Name Indication (SNI).",
+      "refs": {
+      }
+    },
     "InvalidRelativePath": {
       "base": "The relative path is too big, is not URL-encoded, or does not begin with a slash (/).",
       "refs": {
@@ -580,7 +585,20 @@
     "Method": {
       "base": null,
       "refs": {
-        "AllowedMethodsList$member": null
+        "MethodsList$member": null
+      }
+    },
+    "MethodsList": {
+      "base": null,
+      "refs": {
+        "AllowedMethods$Items": "A complex type that contains the HTTP methods that you want CloudFront to process and forward to your origin.",
+        "CachedMethods$Items": "A complex type that contains the HTTP methods that you want CloudFront to cache responses to."
+      }
+    },
+    "MinimumProtocolVersion": {
+      "base": null,
+      "refs": {
+        "ViewerCertificate$MinimumProtocolVersion": "Specify the minimum version of the SSL protocol that you want CloudFront to use, SSLv3 or TLSv1, for HTTPS connections. CloudFront will serve your objects only to browsers or devices that support at least the SSL version that you specify. The TLSv1 protocol is more secure, so we recommend that you specify SSLv3 only if your users are using browsers or devices that don't support TLSv1. If you're using a custom certificate (if you specify a value for IAMCertificateId) and if you're using dedicated IP (if you specify vip for SSLSupportMethod), you can choose SSLv3 or TLSv1 as the MinimumProtocolVersion. If you're using a custom certificate (if you specify a value for IAMCertificateId) and if you're using SNI (if you specify sni-only for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion."
       }
     },
     "MissingBody": {
@@ -898,8 +916,9 @@
       "refs": {
         "ActiveTrustedSigners$Quantity": "The number of unique trusted signers included in all cache behaviors. For example, if three cache behaviors all list the same three AWS accounts, the value of Quantity for ActiveTrustedSigners will be 3.",
         "Aliases$Quantity": "The number of CNAMEs, if any, for this distribution.",
-        "AllowedMethods$Quantity": "The number of HTTP methods that you want CloudFront to forward to your origin. Valid values are 2 (for GET and HEAD requests) and 7 (for DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT requests).",
+        "AllowedMethods$Quantity": "The number of HTTP methods that you want CloudFront to forward to your origin. Valid values are 2 (for GET and HEAD requests), 3 (for GET, HEAD and OPTIONS requests) and 7 (for GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE requests).",
         "CacheBehaviors$Quantity": "The number of cache behaviors for this distribution.",
+        "CachedMethods$Quantity": "The number of HTTP methods for which you want CloudFront to cache responses. Valid values are 2 (for caching responses to GET and HEAD requests) and 3 (for caching responses to GET, HEAD, and OPTIONS requests).",
         "CloudFrontOriginAccessIdentityList$MaxItems": "The value you provided for the MaxItems request parameter.",
         "CloudFrontOriginAccessIdentityList$Quantity": "The number of CloudFront origin access identities that were created by the current AWS account.",
         "CookieNames$Quantity": "The number of whitelisted cookies for this cache behavior.",
@@ -1010,6 +1029,7 @@
         "InvalidLocationCode$Message": null,
         "InvalidOrigin$Message": null,
         "InvalidOriginAccessIdentity$Message": null,
+        "InvalidProtocolSettings$Message": null,
         "InvalidRelativePath$Message": null,
         "InvalidRequiredProtocol$Message": null,
         "InvalidResponseCode$Message": null,

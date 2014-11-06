@@ -252,7 +252,7 @@ to be backwards compatible.
 
 | Service Name                        | Service Class             | API Versions                   |
 | ----------------------------------- | ------------------------- | ------------------------------ |
-| Amazon CloudFront                   | CloudFront                | 2014-05-31                     |
+| Amazon CloudFront                   | CloudFront                | 2014-10-21                     |
 | Amazon CloudSearch                  | CloudSearch               | 2013-01-01                     |
 | Amazon CloudSearch Domain           | CloudSearchDomain         | 2013-01-01                     |
 | Amazon CloudWatch                   | CloudWatch                | 2010-08-01                     |
