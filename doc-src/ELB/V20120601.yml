@@ -1,177 +1,350 @@
 ---
-:add_tags: "Calls the AddTags API operation.\n@param [Hash] options\n  * `:load_balancer_names`
-  - *required* - (Array&lt;<String>) \n  * `:tags` - *required* - (Array&lt;<Hash>)
-  \n    * `:key` - *required* - (String) \n    * `:value` - (String) \n@return [Core::Response]"
-:apply_security_groups_to_load_balancer: "Calls the ApplySecurityGroupsToLoadBalancer
-  API operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* -
-  (String) \n  * `:security_groups` - *required* - (Array&lt;<String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:security_groups` - (Array<String>)"
-:attach_load_balancer_to_subnets: "Calls the AttachLoadBalancerToSubnets API operation.\n@param
-  [Hash] options\n  * `:load_balancer_name` - *required* - (String) \n  * `:subnets`
-  - *required* - (Array&lt;<String>) \n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:subnets`
-  - (Array<String>)"
-:configure_health_check: "Calls the ConfigureHealthCheck API operation.\n@param [Hash]
-  options\n  * `:load_balancer_name` - *required* - (String) \n  * `:health_check`
-  - *required* - (Hash) \n    * `:target` - *required* - (String) \n    * `:interval`
-  - *required* - (Integer) \n    * `:timeout` - *required* - (Integer) \n    * `:unhealthy_threshold`
-  - *required* - (Integer) \n    * `:healthy_threshold` - *required* - (Integer) \n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:health_check` - (Hash)\n    * `:target` - (String)\n
-  \   * `:interval` - (Integer)\n    * `:timeout` - (Integer)\n    * `:unhealthy_threshold`
-  - (Integer)\n    * `:healthy_threshold` - (Integer)"
-:create_app_cookie_stickiness_policy: "Calls the CreateAppCookieStickinessPolicy API
-  operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* - (String)
-  \n  * `:policy_name` - *required* - (String) \n  * `:cookie_name` - *required* -
-  (String) \n@return [Core::Response]"
-:create_lb_cookie_stickiness_policy: "Calls the CreateLBCookieStickinessPolicy API
-  operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* - (String)
-  \n  * `:policy_name` - *required* - (String) \n  * `:cookie_expiration_period` -
-  (Integer) \n@return [Core::Response]"
-:create_load_balancer: "Calls the CreateLoadBalancer API operation.\n@param [Hash]
-  options\n  * `:load_balancer_name` - *required* - (String) \n  * `:listeners` -
-  *required* - (Array&lt;<Hash>) \n    * `:protocol` - *required* - (String) \n    *
-  `:load_balancer_port` - *required* - (Integer) \n    * `:instance_protocol` - (String)
-  \n    * `:instance_port` - *required* - (Integer) \n    * `:ssl_certificate_id`
-  - (String) \n  * `:availability_zones` - (Array&lt;<String>) \n  * `:subnets` -
-  (Array&lt;<String>) \n  * `:security_groups` - (Array&lt;<String>) \n  * `:scheme`
-  - (String) \n  * `:tags` - (Array&lt;<Hash>) \n    * `:key` - *required* - (String)
-  \n    * `:value` - (String) \n@return [Core::Response] The `#data` method of the
-  response object returns a hash with the following structure:\n\n  * `:dns_name`
-  - (String)"
-:create_load_balancer_listeners: "Calls the CreateLoadBalancerListeners API operation.\n@param
-  [Hash] options\n  * `:load_balancer_name` - *required* - (String) \n  * `:listeners`
-  - *required* - (Array&lt;<Hash>) \n    * `:protocol` - *required* - (String) \n
-  \   * `:load_balancer_port` - *required* - (Integer) \n    * `:instance_protocol`
-  - (String) \n    * `:instance_port` - *required* - (Integer) \n    * `:ssl_certificate_id`
-  - (String) \n@return [Core::Response]"
-:create_load_balancer_policy: "Calls the CreateLoadBalancerPolicy API operation.\n@param
-  [Hash] options\n  * `:load_balancer_name` - *required* - (String) \n  * `:policy_name`
-  - *required* - (String) \n  * `:policy_type_name` - *required* - (String) \n  *
-  `:policy_attributes` - (Array&lt;<Hash>) \n    * `:attribute_name` - (String) \n
-  \   * `:attribute_value` - (String) \n@return [Core::Response]"
-:delete_load_balancer: "Calls the DeleteLoadBalancer API operation.\n@param [Hash]
-  options\n  * `:load_balancer_name` - *required* - (String) \n@return [Core::Response]"
-:delete_load_balancer_listeners: "Calls the DeleteLoadBalancerListeners API operation.\n@param
-  [Hash] options\n  * `:load_balancer_name` - *required* - (String) \n  * `:load_balancer_ports`
-  - *required* - (Array&lt;<Integer>) \n@return [Core::Response]"
-:delete_load_balancer_policy: "Calls the DeleteLoadBalancerPolicy API operation.\n@param
-  [Hash] options\n  * `:load_balancer_name` - *required* - (String) \n  * `:policy_name`
-  - *required* - (String) \n@return [Core::Response]"
-:deregister_instances_from_load_balancer: "Calls the DeregisterInstancesFromLoadBalancer
-  API operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* -
-  (String) \n  * `:instances` - *required* - (Array&lt;<Hash>) \n    * `:instance_id`
-  - (String) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:instances` - (Array<Hash>)\n
-  \   * `:instance_id` - (String)"
-:describe_instance_health: "Calls the DescribeInstanceHealth API operation.\n@param
-  [Hash] options\n  * `:load_balancer_name` - *required* - (String) \n  * `:instances`
-  - (Array&lt;<Hash>) \n    * `:instance_id` - (String) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:instance_states` - (Array<Hash>)\n    * `:instance_id` - (String)\n    * `:state`
-  - (String)\n    * `:reason_code` - (String)\n    * `:description` - (String)"
-:describe_load_balancer_attributes: "Calls the DescribeLoadBalancerAttributes API
-  operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* - (String)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:load_balancer_attributes` - (Hash)\n    *
-  `:cross_zone_load_balancing` - (Hash)\n      * `:enabled` - (Boolean)\n    * `:access_log`
-  - (Hash)\n      * `:enabled` - (Boolean)\n      * `:s3_bucket_name` - (String)\n
-  \     * `:emit_interval` - (Integer)\n      * `:s3_bucket_prefix` - (String)\n    *
-  `:connection_draining` - (Hash)\n      * `:enabled` - (Boolean)\n      * `:timeout`
-  - (Integer)\n    * `:connection_settings` - (Hash)\n      * `:idle_timeout` - (Integer)"
-:describe_load_balancer_policies: "Calls the DescribeLoadBalancerPolicies API operation.\n@param
-  [Hash] options\n  * `:load_balancer_name` - (String) \n  * `:policy_names` - (Array&lt;<String>)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:policy_descriptions` - (Array<Hash>)\n    *
-  `:policy_name` - (String)\n    * `:policy_type_name` - (String)\n    * `:policy_attribute_descriptions`
-  - (Array<Hash>)\n      * `:attribute_name` - (String)\n      * `:attribute_value`
-  - (String)"
-:describe_load_balancer_policy_types: "Calls the DescribeLoadBalancerPolicyTypes API
-  operation.\n@param [Hash] options\n  * `:policy_type_names` - (Array&lt;<String>)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `:policy_type_descriptions` - (Array<Hash>)\n
-  \   * `:policy_type_name` - (String)\n    * `:description` - (String)\n    * `:policy_attribute_type_descriptions`
-  - (Array<Hash>)\n      * `:attribute_name` - (String)\n      * `:attribute_type`
-  - (String)\n      * `:description` - (String)\n      * `:default_value` - (String)\n
-  \     * `:cardinality` - (String)"
-:describe_load_balancers: "Calls the DescribeLoadBalancers API operation.\n@param
-  [Hash] options\n  * `:load_balancer_names` - (Array&lt;<String>) \n  * `:marker`
-  - (String) \n  * `:page_size` - (Integer) \n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:load_balancer_descriptions` - (Array<Hash>)\n    * `:load_balancer_name` - (String)\n
-  \   * `:dns_name` - (String)\n    * `:canonical_hosted_zone_name` - (String)\n    *
-  `:canonical_hosted_zone_name_id` - (String)\n    * `:listener_descriptions` - (Array<Hash>)\n
-  \     * `:listener` - (Hash)\n        * `:protocol` - (String)\n        * `:load_balancer_port`
-  - (Integer)\n        * `:instance_protocol` - (String)\n        * `:instance_port`
-  - (Integer)\n        * `:ssl_certificate_id` - (String)\n      * `:policy_names`
-  - (Array<String>)\n    * `:policies` - (Hash)\n      * `:app_cookie_stickiness_policies`
-  - (Array<Hash>)\n        * `:policy_name` - (String)\n        * `:cookie_name` -
-  (String)\n      * `:lb_cookie_stickiness_policies` - (Array<Hash>)\n        * `:policy_name`
-  - (String)\n        * `:cookie_expiration_period` - (Integer)\n      * `:other_policies`
-  - (Array<String>)\n    * `:backend_server_descriptions` - (Array<Hash>)\n      *
-  `:instance_port` - (Integer)\n      * `:policy_names` - (Array<String>)\n    * `:availability_zones`
-  - (Array<String>)\n    * `:subnets` - (Array<String>)\n    * `:vpc_id` - (String)\n
-  \   * `:instances` - (Array<Hash>)\n      * `:instance_id` - (String)\n    * `:health_check`
-  - (Hash)\n      * `:target` - (String)\n      * `:interval` - (Integer)\n      *
-  `:timeout` - (Integer)\n      * `:unhealthy_threshold` - (Integer)\n      * `:healthy_threshold`
-  - (Integer)\n    * `:source_security_group` - (Hash)\n      * `:owner_alias` - (String)\n
-  \     * `:group_name` - (String)\n    * `:security_groups` - (Array<String>)\n    *
-  `:created_time` - (Time)\n    * `:scheme` - (String)\n  * `:next_marker` - (String)"
-:describe_tags: "Calls the DescribeTags API operation.\n@param [Hash] options\n  *
-  `:load_balancer_names` - *required* - (Array&lt;<String>) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:tag_descriptions` - (Array<Hash>)\n    * `:load_balancer_name` - (String)\n
-  \   * `:tags` - (Array<Hash>)\n      * `:key` - (String)\n      * `:value` - (String)"
-:detach_load_balancer_from_subnets: "Calls the DetachLoadBalancerFromSubnets API operation.\n@param
-  [Hash] options\n  * `:load_balancer_name` - *required* - (String) \n  * `:subnets`
-  - *required* - (Array&lt;<String>) \n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `:subnets`
-  - (Array<String>)"
-:disable_availability_zones_for_load_balancer: "Calls the DisableAvailabilityZonesForLoadBalancer
-  API operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* -
-  (String) \n  * `:availability_zones` - *required* - (Array&lt;<String>) \n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:availability_zones` - (Array<String>)"
-:enable_availability_zones_for_load_balancer: "Calls the EnableAvailabilityZonesForLoadBalancer
-  API operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* -
-  (String) \n  * `:availability_zones` - *required* - (Array&lt;<String>) \n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `:availability_zones` - (Array<String>)"
-:modify_load_balancer_attributes: "Calls the ModifyLoadBalancerAttributes API operation.\n@param
-  [Hash] options\n  * `:load_balancer_name` - *required* - (String) \n  * `:load_balancer_attributes`
-  - *required* - (Hash) \n    * `:cross_zone_load_balancing` - (Hash) \n      * `:enabled`
-  - *required* - (Boolean) \n    * `:access_log` - (Hash) \n      * `:enabled` - *required*
-  - (Boolean) \n      * `:s3_bucket_name` - (String) \n      * `:emit_interval` -
-  (Integer) \n      * `:s3_bucket_prefix` - (String) \n    * `:connection_draining`
-  - (Hash) \n      * `:enabled` - *required* - (Boolean) \n      * `:timeout` - (Integer)
-  \n    * `:connection_settings` - (Hash) \n      * `:idle_timeout` - *required* -
-  (Integer) \n@return [Core::Response] The `#data` method of the response object returns
-  a hash with the following structure:\n\n  * `:load_balancer_name` - (String)\n  *
-  `:load_balancer_attributes` - (Hash)\n    * `:cross_zone_load_balancing` - (Hash)\n
-  \     * `:enabled` - (Boolean)\n    * `:access_log` - (Hash)\n      * `:enabled`
-  - (Boolean)\n      * `:s3_bucket_name` - (String)\n      * `:emit_interval` - (Integer)\n
-  \     * `:s3_bucket_prefix` - (String)\n    * `:connection_draining` - (Hash)\n
-  \     * `:enabled` - (Boolean)\n      * `:timeout` - (Integer)\n    * `:connection_settings`
-  - (Hash)\n      * `:idle_timeout` - (Integer)"
-:register_instances_with_load_balancer: "Calls the RegisterInstancesWithLoadBalancer
-  API operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* -
-  (String) \n  * `:instances` - *required* - (Array&lt;<Hash>) \n    * `:instance_id`
-  - (String) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `:instances` - (Array<Hash>)\n
-  \   * `:instance_id` - (String)"
-:remove_tags: "Calls the RemoveTags API operation.\n@param [Hash] options\n  * `:load_balancer_names`
-  - *required* - (Array&lt;<String>) \n  * `:tags` - *required* - (Array&lt;<Hash>)
-  \n    * `:key` - (String) \n@return [Core::Response]"
-:set_load_balancer_listener_ssl_certificate: "Calls the SetLoadBalancerListenerSSLCertificate
-  API operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* -
-  (String) \n  * `:load_balancer_port` - *required* - (Integer) \n  * `:ssl_certificate_id`
-  - *required* - (String) \n@return [Core::Response]"
-:set_load_balancer_policies_for_backend_server: "Calls the SetLoadBalancerPoliciesForBackendServer
-  API operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* -
-  (String) \n  * `:instance_port` - *required* - (Integer) \n  * `:policy_names` -
-  *required* - (Array&lt;<String>) \n@return [Core::Response]"
-:set_load_balancer_policies_of_listener: "Calls the SetLoadBalancerPoliciesOfListener
-  API operation.\n@param [Hash] options\n  * `:load_balancer_name` - *required* -
-  (String) \n  * `:load_balancer_port` - *required* - (Integer) \n  * `:policy_names`
-  - *required* - (Array&lt;<String>) \n@return [Core::Response]"
+:add_tags: |-
+  Calls the AddTags API operation.
+  @param [Hash] options
+    * `:load_balancer_names` - *required* - (Array&lt;<String>) The name of the load balancer to tag. You can specify a maximum of one load balancer name.
+    * `:tags` - *required* - (Array&lt;<Hash>) A list of tags for each load balancer.
+      * `:key` - *required* - (String) The key of the tag.
+      * `:value` - (String) The value of the tag.
+  @return [Core::Response]
+:apply_security_groups_to_load_balancer: |-
+  Calls the ApplySecurityGroupsToLoadBalancer API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the load balancer. The name must be unique within the set of load balancers associated with your AWS account.
+    * `:security_groups` - *required* - (Array&lt;<String>) A list of security group IDs to associate with your load balancer in VPC. The security group IDs must be provided as the ID and not the security group name (For example, sg-1234).
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:security_groups` - (Array<String>)
+:attach_load_balancer_to_subnets: |-
+  Calls the AttachLoadBalancerToSubnets API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the load balancer. The name must be unique within the set of load balancers associated with your AWS account.
+    * `:subnets` - *required* - (Array&lt;<String>) A list of subnet IDs to add for the load balancer. You can add only one subnet per Availability Zone.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:subnets` - (Array<String>)
+:configure_health_check: |-
+  Calls the ConfigureHealthCheck API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The mnemonic name associated with the load balancer. The name must be unique within the set of load balancers associated with your AWS account.
+    * `:health_check` - *required* - (Hash) A structure containing the configuration information for the new healthcheck.
+      * `:target` - *required* - (String) Specifies the instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL. The range of valid ports is one (1) through 65535. TCP is the default, specified as a TCP: port pair, for example "TCP:5000". In this case a healthcheck simply attempts to open a TCP connection to the instance on the specified port. Failure to connect within the configured timeout is considered unhealthy. SSL is also specified as SSL: port pair, for example, SSL:5000. For HTTP or HTTPS protocol, the situation is different. You have to include a ping path in the string. HTTP is specified as a HTTP:port;/;PathToPing; grouping, for example "HTTP:80/weather/us/wa/seattle". In this case, a HTTP GET request is issued to the instance on the given port and path. Any answer other than "200 OK" within the timeout period is considered unhealthy. The total length of the HTTP ping target needs to be 1024 16-bit Unicode characters or less.
+      * `:interval` - *required* - (Integer) Specifies the approximate interval, in seconds, between health checks of an individual instance.
+      * `:timeout` - *required* - (Integer) Specifies the amount of time, in seconds, during which no response means a failed health probe. This value must be less than the Interval value.
+      * `:unhealthy_threshold` - *required* - (Integer) Specifies the number of consecutive health probe failures required before moving the instance to the Unhealthy state.
+      * `:healthy_threshold` - *required* - (Integer) Specifies the number of consecutive health probe successes required before moving the instance to the Healthy state.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:health_check` - (Hash)
+      * `:target` - (String)
+      * `:interval` - (Integer)
+      * `:timeout` - (Integer)
+      * `:unhealthy_threshold` - (Integer)
+      * `:healthy_threshold` - (Integer)
+:create_app_cookie_stickiness_policy: |-
+  Calls the CreateAppCookieStickinessPolicy API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name of the load balancer.
+    * `:policy_name` - *required* - (String) The name of the policy being created. The name must be unique within the set of policies for this load balancer.
+    * `:cookie_name` - *required* - (String) Name of the application cookie used for stickiness.
+  @return [Core::Response]
+:create_lb_cookie_stickiness_policy: |-
+  Calls the CreateLBCookieStickinessPolicy API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the load balancer.
+    * `:policy_name` - *required* - (String) The name of the policy being created. The name must be unique within the set of policies for this load balancer.
+    * `:cookie_expiration_period` - (Integer) The time period in seconds after which the cookie should be considered stale. Not specifying this parameter indicates that the sticky session will last for the duration of the browser session.
+  @return [Core::Response]
+:create_load_balancer: |-
+  Calls the CreateLoadBalancer API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the load balancer. The name must be unique within your set of load balancers, must have a maximum of 32 characters, and must only contain alphanumeric characters or hyphens.
+    * `:listeners` - *required* - (Array&lt;<Hash>) A list of the following tuples: Protocol, LoadBalancerPort, InstanceProtocol, InstancePort, and SSLCertificateId. For information about the protocols and the ports supported by Elastic Load Balancing, see Listener Configurations for Elastic Load Balancing.
+      * `:protocol` - *required* - (String) Specifies the load balancer transport protocol to use for routing - HTTP, HTTPS, TCP or SSL. This property cannot be modified for the life of the load balancer.
+      * `:load_balancer_port` - *required* - (Integer) Specifies the port on which the load balancer is listening - 25, 80, 443, 465, 587, or 1024-65535. This property cannot be modified for the life of the load balancer.
+      * `:instance_protocol` - (String) Specifies the protocol to use for routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL. This property cannot be modified for the life of the load balancer. If the front-end protocol is HTTP or HTTPS, InstanceProtocol has to be at the same protocol layer, i.e., HTTP or HTTPS. Likewise, if the front-end protocol is TCP or SSL, InstanceProtocol has to be TCP or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is secure, i.e., HTTPS or SSL, the listener's InstanceProtocol has to be secure, i.e., HTTPS or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is HTTP or TCP, the listener's InstanceProtocol must be either HTTP or TCP.
+      * `:instance_port` - *required* - (Integer) Specifies the port on which the instance server is listening - 25, 80, 443, 465, 587, or 1024-65535. This property cannot be modified for the life of the load balancer.
+      * `:ssl_certificate_id` - (String) The ARN string of the server certificate. To get the ARN of the server certificate, call the AWS Identity and Access Management UploadServerCertificate API.
+    * `:availability_zones` - (Array&lt;<String>) A list of Availability Zones. At least one Availability Zone must be specified. Specified Availability Zones must be in the same EC2 Region as the load balancer. Traffic will be equally distributed across all zones. You can later add more Availability Zones after the creation of the load balancer by calling EnableAvailabilityZonesForLoadBalancer action.
+    * `:subnets` - (Array&lt;<String>) A list of subnet IDs in your VPC to attach to your load balancer. Specify one subnet per Availability Zone.
+    * `:security_groups` - (Array&lt;<String>) The security groups to assign to your load balancer within your VPC.
+    * `:scheme` - (String) The type of a load balancer. By default, Elastic Load Balancing creates an Internet-facing load balancer with a publicly resolvable DNS name, which resolves to public IP addresses. For more information about Internet-facing and Internal load balancers, see Internet-facing and Internal Load Balancers. Specify the value internal for this option to create an internal load balancer with a DNS name that resolves to private IP addresses. This option is only available for load balancers created within EC2-VPC.
+    * `:tags` - (Array&lt;<Hash>) A list of tags to assign to the load balancer. For more information about setting tags for your load balancer, see Tagging.
+      * `:key` - *required* - (String) The key of the tag.
+      * `:value` - (String) The value of the tag.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:dns_name` - (String)
+:create_load_balancer_listeners: |-
+  Calls the CreateLoadBalancerListeners API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name of the load balancer.
+    * `:listeners` - *required* - (Array&lt;<Hash>) A list of LoadBalancerPort, InstancePort, Protocol, InstanceProtocol, and SSLCertificateId items.
+      * `:protocol` - *required* - (String) Specifies the load balancer transport protocol to use for routing - HTTP, HTTPS, TCP or SSL. This property cannot be modified for the life of the load balancer.
+      * `:load_balancer_port` - *required* - (Integer) Specifies the port on which the load balancer is listening - 25, 80, 443, 465, 587, or 1024-65535. This property cannot be modified for the life of the load balancer.
+      * `:instance_protocol` - (String) Specifies the protocol to use for routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL. This property cannot be modified for the life of the load balancer. If the front-end protocol is HTTP or HTTPS, InstanceProtocol has to be at the same protocol layer, i.e., HTTP or HTTPS. Likewise, if the front-end protocol is TCP or SSL, InstanceProtocol has to be TCP or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is secure, i.e., HTTPS or SSL, the listener's InstanceProtocol has to be secure, i.e., HTTPS or SSL. If there is another listener with the same InstancePort whose InstanceProtocol is HTTP or TCP, the listener's InstanceProtocol must be either HTTP or TCP.
+      * `:instance_port` - *required* - (Integer) Specifies the port on which the instance server is listening - 25, 80, 443, 465, 587, or 1024-65535. This property cannot be modified for the life of the load balancer.
+      * `:ssl_certificate_id` - (String) The ARN string of the server certificate. To get the ARN of the server certificate, call the AWS Identity and Access Management UploadServerCertificate API.
+  @return [Core::Response]
+:create_load_balancer_policy: |-
+  Calls the CreateLoadBalancerPolicy API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the LoadBalancer for which the policy is being created.
+    * `:policy_name` - *required* - (String) The name of the load balancer policy being created. The name must be unique within the set of policies for this load balancer.
+    * `:policy_type_name` - *required* - (String) The name of the base policy type being used to create this policy. To get the list of policy types, use the DescribeLoadBalancerPolicyTypes action.
+    * `:policy_attributes` - (Array&lt;<Hash>) A list of attributes associated with the policy being created.
+      * `:attribute_name` - (String) The name of the attribute associated with the policy.
+      * `:attribute_value` - (String) The value of the attribute associated with the policy.
+  @return [Core::Response]
+:delete_load_balancer: |-
+  Calls the DeleteLoadBalancer API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the load balancer.
+  @return [Core::Response]
+:delete_load_balancer_listeners: |-
+  Calls the DeleteLoadBalancerListeners API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The mnemonic name associated with the load balancer.
+    * `:load_balancer_ports` - *required* - (Array&lt;<Integer>) The client port number(s) of the load balancer listener(s) to be removed.
+  @return [Core::Response]
+:delete_load_balancer_policy: |-
+  Calls the DeleteLoadBalancerPolicy API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The mnemonic name associated with the load balancer.
+    * `:policy_name` - *required* - (String) The mnemonic name for the policy being deleted.
+  @return [Core::Response]
+:deregister_instances_from_load_balancer: |-
+  Calls the DeregisterInstancesFromLoadBalancer API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the load balancer.
+    * `:instances` - *required* - (Array&lt;<Hash>) A list of EC2 instance IDs consisting of all instances to be deregistered.
+      * `:instance_id` - (String) Provides an EC2 instance ID.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:instances` - (Array<Hash>)
+      * `:instance_id` - (String)
+:describe_instance_health: |-
+  Calls the DescribeInstanceHealth API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name of the load balancer.
+    * `:instances` - (Array&lt;<Hash>) A list of instance IDs whose states are being queried.
+      * `:instance_id` - (String) Provides an EC2 instance ID.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:instance_states` - (Array<Hash>)
+      * `:instance_id` - (String)
+      * `:state` - (String)
+      * `:reason_code` - (String)
+      * `:description` - (String)
+:describe_load_balancer_attributes: |-
+  Calls the DescribeLoadBalancerAttributes API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name of the load balancer.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:load_balancer_attributes` - (Hash)
+      * `:cross_zone_load_balancing` - (Hash)
+        * `:enabled` - (Boolean)
+      * `:access_log` - (Hash)
+        * `:enabled` - (Boolean)
+        * `:s3_bucket_name` - (String)
+        * `:emit_interval` - (Integer)
+        * `:s3_bucket_prefix` - (String)
+      * `:connection_draining` - (Hash)
+        * `:enabled` - (Boolean)
+        * `:timeout` - (Integer)
+      * `:connection_settings` - (Hash)
+        * `:idle_timeout` - (Integer)
+      * `:additional_attributes` - (Array<Hash>)
+        * `:key` - (String)
+        * `:value` - (String)
+:describe_load_balancer_policies: |-
+  Calls the DescribeLoadBalancerPolicies API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - (String) The mnemonic name associated with the load balancer. If no name is specified, the operation returns the attributes of either all the sample policies pre-defined by Elastic Load Balancing or the specified sample polices.
+    * `:policy_names` - (Array&lt;<String>) The names of load balancer policies you've created or Elastic Load Balancing sample policy names.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:policy_descriptions` - (Array<Hash>)
+      * `:policy_name` - (String)
+      * `:policy_type_name` - (String)
+      * `:policy_attribute_descriptions` - (Array<Hash>)
+        * `:attribute_name` - (String)
+        * `:attribute_value` - (String)
+:describe_load_balancer_policy_types: |-
+  Calls the DescribeLoadBalancerPolicyTypes API operation.
+  @param [Hash] options
+    * `:policy_type_names` - (Array&lt;<String>) Specifies the name of the policy types. If no names are specified, returns the description of all the policy types defined by Elastic Load Balancing service.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:policy_type_descriptions` - (Array<Hash>)
+      * `:policy_type_name` - (String)
+      * `:description` - (String)
+      * `:policy_attribute_type_descriptions` - (Array<Hash>)
+        * `:attribute_name` - (String)
+        * `:attribute_type` - (String)
+        * `:description` - (String)
+        * `:default_value` - (String)
+        * `:cardinality` - (String)
+:describe_load_balancers: |-
+  Calls the DescribeLoadBalancers API operation.
+  @param [Hash] options
+    * `:load_balancer_names` - (Array&lt;<String>) A list of load balancer names associated with the account.
+    * `:marker` - (String) An optional parameter used for pagination of results from this call. If specified, the response includes only records beyond the marker.
+    * `:page_size` - (Integer) The number of results returned in each page. The default is 400. You cannot specify a page size greater than 400 or less than 1.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:load_balancer_descriptions` - (Array<Hash>)
+      * `:load_balancer_name` - (String)
+      * `:dns_name` - (String)
+      * `:canonical_hosted_zone_name` - (String)
+      * `:canonical_hosted_zone_name_id` - (String)
+      * `:listener_descriptions` - (Array<Hash>)
+        * `:listener` - (Hash)
+          * `:protocol` - (String)
+          * `:load_balancer_port` - (Integer)
+          * `:instance_protocol` - (String)
+          * `:instance_port` - (Integer)
+          * `:ssl_certificate_id` - (String)
+        * `:policy_names` - (Array<String>)
+      * `:policies` - (Hash)
+        * `:app_cookie_stickiness_policies` - (Array<Hash>)
+          * `:policy_name` - (String)
+          * `:cookie_name` - (String)
+        * `:lb_cookie_stickiness_policies` - (Array<Hash>)
+          * `:policy_name` - (String)
+          * `:cookie_expiration_period` - (Integer)
+        * `:other_policies` - (Array<String>)
+      * `:backend_server_descriptions` - (Array<Hash>)
+        * `:instance_port` - (Integer)
+        * `:policy_names` - (Array<String>)
+      * `:availability_zones` - (Array<String>)
+      * `:subnets` - (Array<String>)
+      * `:vpc_id` - (String)
+      * `:instances` - (Array<Hash>)
+        * `:instance_id` - (String)
+      * `:health_check` - (Hash)
+        * `:target` - (String)
+        * `:interval` - (Integer)
+        * `:timeout` - (Integer)
+        * `:unhealthy_threshold` - (Integer)
+        * `:healthy_threshold` - (Integer)
+      * `:source_security_group` - (Hash)
+        * `:owner_alias` - (String)
+        * `:group_name` - (String)
+      * `:security_groups` - (Array<String>)
+      * `:created_time` - (Time)
+      * `:scheme` - (String)
+    * `:next_marker` - (String)
+:describe_tags: |-
+  Calls the DescribeTags API operation.
+  @param [Hash] options
+    * `:load_balancer_names` - *required* - (Array&lt;<String>) The names of the load balancers.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:tag_descriptions` - (Array<Hash>)
+      * `:load_balancer_name` - (String)
+      * `:tags` - (Array<Hash>)
+        * `:key` - (String)
+        * `:value` - (String)
+:detach_load_balancer_from_subnets: |-
+  Calls the DetachLoadBalancerFromSubnets API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the load balancer to be detached.
+    * `:subnets` - *required* - (Array&lt;<String>) A list of subnet IDs to remove from the set of configured subnets for the load balancer.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:subnets` - (Array<String>)
+:disable_availability_zones_for_load_balancer: |-
+  Calls the DisableAvailabilityZonesForLoadBalancer API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the load balancer.
+    * `:availability_zones` - *required* - (Array&lt;<String>) A list of Availability Zones to be removed from the load balancer. There must be at least one Availability Zone registered with a load balancer at all times. Specified Availability Zones must be in the same region.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:availability_zones` - (Array<String>)
+:enable_availability_zones_for_load_balancer: |-
+  Calls the EnableAvailabilityZonesForLoadBalancer API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the load balancer.
+    * `:availability_zones` - *required* - (Array&lt;<String>) A list of new Availability Zones for the load balancer. Each Availability Zone must be in the same region as the load balancer.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:availability_zones` - (Array<String>)
+:modify_load_balancer_attributes: |-
+  Calls the ModifyLoadBalancerAttributes API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name of the load balancer.
+    * `:load_balancer_attributes` - *required* - (Hash) Attributes of the load balancer.
+      * `:cross_zone_load_balancing` - (Hash) The name of the load balancer attribute. If enabled, the load balancer routes the request traffic evenly across all back-end instances regardless of the Availability Zones. For more information, see Enable Cross-Zone Load Balancing.
+        * `:enabled` - *required* - (Boolean) Specifies whether cross-zone load balancing is enabled for the load balancer.
+      * `:access_log` - (Hash) The name of the load balancer attribute. If enabled, the load balancer captures detailed information of all the requests and delivers the information to the Amazon S3 bucket that you specify. For more information, see Enable Access Logs.
+        * `:enabled` - *required* - (Boolean) Specifies whether access log is enabled for the load balancer.
+        * `:s3_bucket_name` - (String) The name of the Amazon S3 bucket where the access logs are stored.
+        * `:emit_interval` - (Integer) The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes. Default: 60 minutes
+        * `:s3_bucket_prefix` - (String) The logical hierarchy you created for your Amazon S3 bucket, for example my-bucket-prefix/prod. If the prefix is not provided, the log is placed at the root level of the bucket.
+      * `:connection_draining` - (Hash) The name of the load balancer attribute. If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy back-end instance. For more information, see Enable Connection Draining.
+        * `:enabled` - *required* - (Boolean) Specifies whether connection draining is enabled for the load balancer.
+        * `:timeout` - (Integer) Specifies the maximum time (in seconds) to keep the existing connections open before deregistering the instances.
+      * `:connection_settings` - (Hash) The name of the load balancer attribute. By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. If the ConnectionSettings attribute is set, Elastic Load Balancing will allow the connections to remain idle (no data is sent over the connection) for the specified duration. For more information, see Configure Idle Connection Timeout.
+        * `:idle_timeout` - *required* - (Integer) Specifies the time (in seconds) the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.
+      * `:additional_attributes` - (Array&lt;<Hash>) This parameter is reserved for future use.
+        * `:key` - (String) Reserved for future use.
+        * `:value` - (String) Reserved for future use.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:load_balancer_name` - (String)
+    * `:load_balancer_attributes` - (Hash)
+      * `:cross_zone_load_balancing` - (Hash)
+        * `:enabled` - (Boolean)
+      * `:access_log` - (Hash)
+        * `:enabled` - (Boolean)
+        * `:s3_bucket_name` - (String)
+        * `:emit_interval` - (Integer)
+        * `:s3_bucket_prefix` - (String)
+      * `:connection_draining` - (Hash)
+        * `:enabled` - (Boolean)
+        * `:timeout` - (Integer)
+      * `:connection_settings` - (Hash)
+        * `:idle_timeout` - (Integer)
+      * `:additional_attributes` - (Array<Hash>)
+        * `:key` - (String)
+        * `:value` - (String)
+:register_instances_with_load_balancer: |-
+  Calls the RegisterInstancesWithLoadBalancer API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name associated with the load balancer. The name must be unique within your set of load balancers.
+    * `:instances` - *required* - (Array&lt;<Hash>) A list of instance IDs that should be registered with the load balancer.
+      * `:instance_id` - (String) Provides an EC2 instance ID.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:instances` - (Array<Hash>)
+      * `:instance_id` - (String)
+:remove_tags: |-
+  Calls the RemoveTags API operation.
+  @param [Hash] options
+    * `:load_balancer_names` - *required* - (Array&lt;<String>) The name of the load balancer. You can specify a maximum of one load balancer name.
+    * `:tags` - *required* - (Array&lt;<Hash>) A list of tag keys to remove.
+      * `:key` - (String) The name of the key.
+  @return [Core::Response]
+:set_load_balancer_listener_ssl_certificate: |-
+  Calls the SetLoadBalancerListenerSSLCertificate API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name of the load balancer.
+    * `:load_balancer_port` - *required* - (Integer) The port that uses the specified SSL certificate.
+    * `:ssl_certificate_id` - *required* - (String) The Amazon Resource Number (ARN) of the SSL certificate chain to use. For more information on SSL certificates, see Managing Server Certificates in the AWS Identity and Access Management User Guide.
+  @return [Core::Response]
+:set_load_balancer_policies_for_backend_server: |-
+  Calls the SetLoadBalancerPoliciesForBackendServer API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The mnemonic name associated with the load balancer. This name must be unique within the set of your load balancers.
+    * `:instance_port` - *required* - (Integer) The port number associated with the back-end server.
+    * `:policy_names` - *required* - (Array&lt;<String>) List of policy names to be set. If the list is empty, then all current polices are removed from the back-end server.
+  @return [Core::Response]
+:set_load_balancer_policies_of_listener: |-
+  Calls the SetLoadBalancerPoliciesOfListener API operation.
+  @param [Hash] options
+    * `:load_balancer_name` - *required* - (String) The name of the load balancer.
+    * `:load_balancer_port` - *required* - (Integer) The external port of the load balancer to associate the policy.
+    * `:policy_names` - *required* - (Array&lt;<String>) List of policies to be associated with the listener. If the list is empty, the current policy is removed from the listener.
+  @return [Core::Response]
