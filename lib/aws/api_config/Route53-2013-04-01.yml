@@ -653,6 +653,8 @@
                 :children:
                   Comment:
                     :type: :string
+                  PrivateZone:
+                    :type: :boolean
               ResourceRecordSetCount:
                 :type: :integer
       Marker:
