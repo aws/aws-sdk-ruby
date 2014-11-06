@@ -79,46 +79,6 @@ module Aws
 
       end
 
-      class EnumerateDataOperation < DataOperation
-
-        # @option options [required, Request] :request
-        # @option options [required, String<JMESPath>] :path
-        # @option options [Symbol] :limit_key
-        def initialize(options = {})
-          @limit_key = options[:limit_key]
-          super
-        end
-
-        # @option (see Base#call)
-        # @option options [Integer] :limit (nil)
-        # @return [Enumerator]
-        def call(options)
-          if options[:limit]
-            enum_for(:limited_each, options[:limit], options)
-          else
-            enum_for(:each, options)
-          end
-        end
-
-        private
-
-        def each(options, &block)
-          @request.call(options).each do |response|
-            extract(response).each(&block)
-          end
-        end
-
-        def limited_each(limit, options, &block)
-          yielded = 0
-          each(options) do |value|
-            yield(value)
-            yielded += 1
-            break if yielded == limit
-          end
-        end
-
-      end
-
       class ResourceOperation < Operation
 
         # @option options [required, Request] :request

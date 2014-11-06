@@ -160,26 +160,6 @@ module Aws
         )
       end
 
-      def build_data_operation(namespace, resource, definition)
-        raise NotImplementedError, 'removed from spec'
-        plural = definition['path'].include?('[')
-        source = source(definition)
-        if plural
-          Operations::EnumerateDataOperation.new(
-            request: define_request(definition['request']),
-            path: underscore(definition['path']),
-            source: source,
-            limit_key: limit_key(resource, definition)
-          )
-        else
-          Operations::DataOperation.new(
-            request: define_request(definition['request']),
-            path: underscore(definition['path']),
-            source: source
-          )
-        end
-      end
-
       def build_resource_operation(namespace, resource, definition)
         builder = define_builder(namespace, definition['resource'])
         if path = definition['resource']['path']
