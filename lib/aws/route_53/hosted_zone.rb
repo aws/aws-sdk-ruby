@@ -122,7 +122,7 @@ module AWS
       end
       alias_method :rrsets, :resource_record_sets
 
-      # Associates an additional Amazon VPC with a private hosted zone. the hosted zone.
+      # Associates an additional Amazon VPC with a private hosted zone.
       # @return [ChangeInfo]
       def associate_vpc vpc
         resp = client.associate_vpc_with_hosted_zone(:hosted_zone_id => id, :vpc => vpc)
