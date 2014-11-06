@@ -72,6 +72,8 @@ module AWS
 
       get_attribute :delegation_set, :static => true
 
+      get_attribute :vpcs, :static => true
+
       provider(:list_hosted_zones) do |provider|
         provider.find do |resp|
           resp.data[:hosted_zones].find do |detail|
@@ -85,6 +87,7 @@ module AWS
         provider.find do |resp|
           if resp[:hosted_zone][:id] == path
             resp[:hosted_zone][:delegation_set] = resp[:delegation_set]
+            resp[:hosted_zone][:vpcs] = resp[:vpcs]
             resp[:hosted_zone]
           end
         end
