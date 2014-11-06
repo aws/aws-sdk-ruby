@@ -1,7 +1,8 @@
 Unreleased Changes
 ------------------
 
-* Feature - Aws::Route53 - Added support for private DNS.
+* Feature - Aws::Route53 - Added support for private DNS. Also,
+  `Aws::Route53::Client` now defaults to signature version 4.
 
 * Feature - Aws::CloudFront - Added support for the 2014-10-21 API version.
 
