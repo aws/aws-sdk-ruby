@@ -380,6 +380,40 @@
             :type: :time
           Comment:
             :type: :string
+- :name: DisassociateVPCFromHostedZone
+  :method: :disassociate_vpc_from_hosted_zone
+  :http:
+    :verb: POST
+    :uri: /2013-04-01/hostedzone/:hosted_zone_id/disassociatevpc
+  :inputs:
+    :hosted_zone_id:
+      :type: :string
+      :required: true
+      :position: 0
+      :lstrip: /hostedzone/
+    :vpc:
+      :name: VPC
+      :type: :hash
+      :position: 1
+      :members:
+        :vpc_id:
+          :name: VPCId
+          :type: :string
+          :position: 0
+        :vpc_region:
+          :name: VPCRegion
+          :type: :string
+          :position: 1
+  :outputs:
+    :children:
+      ChangeInfo:
+        :children:
+          Id:
+            :type: :string
+          Status:
+            :type: :string
+          SubmittedAt:
+            :type: :time
 - :name: GetChange
   :method: :get_change
   :http:
