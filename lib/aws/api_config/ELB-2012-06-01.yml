@@ -357,6 +357,12 @@
                 :children:
                   IdleTimeout:
                     :type: :integer
+              AdditionalAttributes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :additional_attributes
+                    :list: true
 - :name: DescribeLoadBalancerPolicies
   :method: :describe_load_balancer_policies
   :inputs:
@@ -646,6 +652,13 @@
             IdleTimeout:
             - :integer
             - :required
+        AdditionalAttributes:
+        - :membered_list:
+          - :structure:
+              Key:
+              - :string
+              Value:
+              - :string
     - :required
   :outputs:
     :children:
@@ -674,6 +687,12 @@
                 :children:
                   IdleTimeout:
                     :type: :integer
+              AdditionalAttributes:
+                :ignore: true
+                :children:
+                  member:
+                    :rename: :additional_attributes
+                    :list: true
 - :name: RegisterInstancesWithLoadBalancer
   :method: :register_instances_with_load_balancer
   :inputs:
