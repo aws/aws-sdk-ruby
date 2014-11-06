@@ -25,7 +25,7 @@ module Aws
         def remove_id_prefixes(params)
           # Many operations accept of :id or :hosted_zone_id as a root-level
           # param, pruning prefixes from those.
-          [:id, :hosted_zone_id].each do |key|
+          [:id, :hosted_zone_id, :delegation_set_id].each do |key|
             params[key] = remove_prefix(params[key]) if params[key]
           end
 
@@ -41,7 +41,7 @@ module Aws
         end
 
         def remove_prefix(str)
-          str.sub(/^\/(hostedzone|change)\//, '')
+          str.sub(/^\/(hostedzone|change|delegationset)\//, '')
         end
 
       end
