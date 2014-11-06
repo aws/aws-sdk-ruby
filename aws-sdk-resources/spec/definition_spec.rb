@@ -818,14 +818,14 @@ module Aws
 
           end
 
-          describe 'has some associations' do
+          describe 'belongsTo associations' do
 
-            it 'returns a batch of resource objects' do
+            it 'can return a batch of resource objects when plural' do
               definition['resources'] = {
                 'Thing' => {
                   'identifiers' => [{ 'name' => 'Name' }],
                   'shape' => 'ThingShape',
-                  'hasSome' => {
+                  'belongsTo' => {
                     'DooDads' => {
                       'resource' => {
                         'type' => 'DooDad',
@@ -897,16 +897,12 @@ module Aws
               expect(doo_dads).to be_empty
             end
 
-          end
-
-          describe 'has one associations' do
-
-            it 'returns a single resource object' do
+            it 'can return a single single resource when not plural' do
               definition['resources'] = {
                 'Thing' => {
                   'identifiers' => [{ 'name' => 'Name' }],
                   'shape' => 'ThingShape',
-                  'hasOne' => {
+                  'belongsTo' => {
                     'DooDad' => {
                       'resource' => {
                         'type' => 'DooDad',

@@ -26,8 +26,7 @@
           "batchActions":     { "$ref": "#/definitions/Actions" },
           "waiters":          { "$ref": "#/definitions/Waiters" },
           "hasMany":          { "$ref": "#/definitions/HasMany" },
-          "hasSome":          { "$ref": "#/definitions/HasSomeMap" },
-          "hasOne":           { "$ref": "#/definitions/HasOneMap" },
+          "belongsTo":        { "$ref": "#/definitions/BelongsTo" },
           "subResources":     { "$ref": "#/definitions/SubResources" }
         }
       }
@@ -58,13 +57,16 @@
         }
       }
     },
-    "HasOneMap": {
+    "BelongsTo": {
       "type": "object",
-      "additionalProperties": { "$ref": "#/definitions/ResourceReference" }
-    },
-    "HasSomeMap": {
-      "type": "object",
-      "additionalProperties": { "$ref": "#/definitions/ResourceReference" }
+      "additionalProperties": {
+        "type": "object",
+        "required": ["resource"],
+        "additionalProperties": false,
+        "properties": {
+          "resource": { "$ref": "#/definitions/ResourceBuilder" }
+        }
+      }
     },
     "Identifier": {
       "type": "object",
@@ -172,14 +174,6 @@
       }
     },
     "ResourceName": { "$ref": "#/definitions/UpperCamelCaseString" },
-    "ResourceReference": {
-      "type": "object",
-      "required": ["resource"],
-      "additionalProperties": false,
-      "properties": {
-        "resource": { "$ref": "#/definitions/ResourceBuilder" }
-      }
-    },
     "ShapeName": { "type": "string" },
     "SubResourceIdentifierMap": {
       "type": "object",

@@ -131,7 +131,7 @@
         { "name": "StackName" }
       ],
       "shape": "StackResourceSummary",
-      "hasOne": {
+      "belongsTo": {
         "Resource": {
           "resource": {
             "type": "StackResource",

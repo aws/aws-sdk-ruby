@@ -24,8 +24,7 @@ module Aws
           define_batch_actions(namespace, resource, definition['batchActions'] || {})
           define_waiters(namespace, resource, definition['waiters'] || {})
           define_has_many(namespace, resource, definition['hasMany'] || {})
-          define_has_some(namespace, resource, definition['hasSome'] || {})
-          define_has_one(namespace, resource, definition['hasOne'] || {})
+          define_belongs_to(namespace, resource, definition['belongsTo'] || {})
           define_data_attributes(namespace, resource, definition)
           define_subresources(namespace, resource, definition['subResources'] || {})
         end
@@ -259,14 +258,8 @@ module Aws
         end
       end
 
-      def define_has_some(namespace, resource, has_some)
+      def define_belongs_to(namespace, resource, has_some)
         has_some.each do |name, definition|
-          define_reference(namespace, resource, name, definition)
-        end
-      end
-
-      def define_has_one(namespace, resource, has_one)
-        has_one.each do |name, definition|
           define_reference(namespace, resource, name, definition)
         end
       end

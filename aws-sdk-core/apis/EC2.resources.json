@@ -732,7 +732,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "Image": {
           "resource": {
             "type": "Image",
@@ -938,7 +938,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "Vpc": {
           "resource": {
             "type": "Vpc",
@@ -1048,7 +1048,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "Subnet": {
           "resource": {
             "type": "Subnet",
@@ -1187,7 +1187,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "Vpc": {
           "resource": {
             "type": "Vpc",
@@ -1230,7 +1230,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "RouteTable": {
           "resource": {
             "type": "RouteTable",
@@ -1400,7 +1400,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "Volume": {
           "resource": {
             "type": "Volume",
@@ -1518,7 +1518,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "Vpc": {
           "resource": {
             "type": "Vpc",
@@ -2002,7 +2002,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "DhcpOptions": {
           "resource": {
             "type": "DhcpOptions",
@@ -2056,7 +2056,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "AccepterVpc": {
           "resource": {
             "type": "Vpc",

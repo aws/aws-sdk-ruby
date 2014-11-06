@@ -458,7 +458,7 @@
           }
         }
       },
-      "hasSome": {
+      "belongsTo": {
         "Roles": {
           "resource": {
             "type": "Role",
@@ -985,7 +985,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "User": {
           "resource": {
             "type": "User",

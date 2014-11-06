@@ -49,7 +49,7 @@
           }
         }
       },
-      "hasOne": {
+      "belongsTo": {
         "Stack": {
           "resource": {
             "type": "Stack",
