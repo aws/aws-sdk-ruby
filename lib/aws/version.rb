@@ -13,5 +13,5 @@
 
 module AWS
   # Current version of the AWS SDK for Ruby
-  VERSION = '1.57.0'
+  VERSION = '1.58.0'
 end
