@@ -72,7 +72,7 @@ module AWS
 
       get_attribute :delegation_set, :static => true
 
-      get_attribute :vpcs, :static => true
+      get_attribute :vpcs
 
       provider(:list_hosted_zones) do |provider|
         provider.find do |resp|
