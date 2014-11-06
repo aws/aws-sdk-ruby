@@ -179,7 +179,7 @@ module Aws
           source = underscore(path)
           builder.sources << BuilderSources::ResponsePath.new(source, :data)
         end
-        Operations::EnumerateResourceOperation.new(
+        Operations::HasManyOperation.new(
           request: define_request(definition['request']),
           builder: builder,
           source: source(definition),

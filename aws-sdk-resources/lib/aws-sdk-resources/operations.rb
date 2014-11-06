@@ -99,7 +99,7 @@ module Aws
 
       end
 
-      class EnumerateResourceOperation < ResourceOperation
+      class HasManyOperation < ResourceOperation
 
         # @option options [required, Request] :request
         # @option options [required, Builder] :builder

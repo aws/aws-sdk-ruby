@@ -4,8 +4,8 @@ module Aws
 
       include Enumerable
 
-      # @param [EnumerateResourceOperation] operation
-      # @option (see EnumerateResourceOperation#call)
+      # @param [HasManyOperation] operation
+      # @option (see HasManyOperation#call)
       # @api private
       def initialize(operation, options)
         @operation = operation

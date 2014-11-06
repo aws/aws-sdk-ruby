@@ -1,7 +1,7 @@
 module Aws
   module Resources
     class Documenter
-      class EnumerateResourceOperationDocumenter < BaseOperationDocumenter
+      class HasManyOperationDocumenter < BaseOperationDocumenter
 
         def docstring
           super + ' ' +<<-DOCSTRING.lstrip
