@@ -720,18 +720,6 @@
               { "target": "VersionId", "sourceType": "identifier", "source": "Id" }
             ]
           }
-        }
-      },
-      "batchActions": {
-        "Delete": {
-          "request": {
-            "operation": "DeleteObjects",
-            "params": [
-              { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" },
-              { "target": "Delete.Objects[*].Key", "sourceType": "identifier", "source": "ObjectKey" },
-              { "target": "Delete.Objects[*].VersionId", "sourceType": "identifier", "source": "Id" }
-            ]
-          }
         },
         "Get": {
           "request": {
@@ -750,6 +738,18 @@
               { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" },
               { "target": "Key", "sourceType": "identifier", "source": "ObjectKey" },
               { "target": "VersionId", "sourceType": "identifier", "source": "Id" }
+            ]
+          }
+        }
+      },
+      "batchActions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteObjects",
+            "params": [
+              { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" },
+              { "target": "Delete.Objects[*].Key", "sourceType": "identifier", "source": "ObjectKey" },
+              { "target": "Delete.Objects[*].VersionId", "sourceType": "identifier", "source": "Id" }
             ]
           }
         }

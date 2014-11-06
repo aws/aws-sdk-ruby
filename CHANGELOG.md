@@ -10,6 +10,9 @@ Unreleased Changes
 * Issue - JSON Protocol - Resolved an issue with serializing JSON requests
   where the operation does not model any input.
 
+* Issue - `Aws::S3::ObjectVersion` - The `#get` and `#head` methods were incorrectly
+  marked as batch actions instead of instance actions.
+
 2.0.6 (2014-10-30)
 ------------------
 
