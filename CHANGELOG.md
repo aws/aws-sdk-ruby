@@ -7,6 +7,9 @@ Unreleased Changes
 * Feature - `Aws::S3::Bucket` - Added a `#url` method that returns
   the public URL for the bucket.
 
+* Issue - JSON Protocol - Resolved an issue with serializing JSON requests
+  where the operation does not model any input.
+
 2.0.6 (2014-10-30)
 ------------------
 

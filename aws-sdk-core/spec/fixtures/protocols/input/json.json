@@ -1,5 +1,28 @@
 [
   {
+    "description": "No inputs",
+    "metadata": {
+      "protocol": "json",
+      "jsonVersion": "1.1",
+      "targetPrefix": "com.amazonaws.foo"
+    },
+    "shapes": {},
+    "cases": [
+      {
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST"
+          }
+        },
+        "params": {},
+        "serialized": {
+          "body": "{}"
+        }
+      }
+    ]
+  },
+  {
     "description": "Scalar members",
     "metadata": {
       "protocol": "json",

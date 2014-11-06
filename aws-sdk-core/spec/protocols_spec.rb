@@ -118,7 +118,7 @@ def match_req_body(group, suite, test_case, http_req)
         body = body.split('&').sort.join('&')
         expected_body = expected_body.split('&').sort.join('&')
       when 'json'
-        body = MultiJson.load(body)
+        body = MultiJson.load(body) unless body == ''
         expected_body = MultiJson.load(expected_body)
       when 'rest-json'
         if body[0] == '{'
