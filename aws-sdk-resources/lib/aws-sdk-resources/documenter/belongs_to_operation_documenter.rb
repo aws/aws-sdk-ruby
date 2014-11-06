@@ -1,7 +1,7 @@
 module Aws
   module Resources
     class Documenter
-      class ReferenceOperationDocumenter < BaseOperationDocumenter
+      class BelongsToOperationDocumenter < BaseOperationDocumenter
 
         def docstring
           docs = []

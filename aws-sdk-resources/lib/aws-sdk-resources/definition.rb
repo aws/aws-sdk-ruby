@@ -68,7 +68,7 @@ module Aws
       end
 
       def subresource(namespace, type, identifiers)
-        Operations::ReferenceOperation.new(builder: define_builder(namespace, {
+        Operations::BelongsToOperation.new(builder: define_builder(namespace, {
           'type' => type,
           'identifiers' => identifiers.map { |source, target|
             {
@@ -247,7 +247,7 @@ module Aws
           source = underscore(path)
           builder.sources << BuilderSources::DataMember.new(source, :data)
         end
-        operation = Operations::ReferenceOperation.new(
+        operation = Operations::BelongsToOperation.new(
           builder: builder,
           source: source(definition))
         resource.add_operation(underscore(name), operation)

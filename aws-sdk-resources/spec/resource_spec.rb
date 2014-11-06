@@ -228,7 +228,7 @@ module Aws
             end
 
             it 'defines a method requiring no arguments based on builder args' do
-              operation = Operations::ReferenceOperation.new(builder: Builder.new)
+              operation = Operations::BelongsToOperation.new(builder: Builder.new)
               resource_class.add_operation(:operation_name, operation)
               expect {
                 resource.operation_name('arg')
@@ -237,7 +237,7 @@ module Aws
 
             it 'defines a method requiring a single argument based on builder args' do
               builder = Builder.new(sources:[BuilderSources::Argument.new(:name)])
-              operation = Operations::ReferenceOperation.new(builder: builder)
+              operation = Operations::BelongsToOperation.new(builder: builder)
               resource_class.add_operation(:operation_name, operation)
               expect {
                 resource.operation_name
