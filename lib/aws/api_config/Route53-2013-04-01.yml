@@ -21,7 +21,7 @@
     :verb: POST
     :uri: /2013-04-01/hostedzone/:hosted_zone_id/associatevpc
   :inputs:
-    :id:
+    :hosted_zone_id:
       :type: :string
       :required: true
       :position: 0
@@ -420,7 +420,7 @@
     :verb: POST
     :uri: /2013-04-01/hostedzone/:hosted_zone_id/disassociatevpc
   :inputs:
-    :id:
+    :hosted_zone_id:
       :type: :string
       :required: true
       :position: 0
