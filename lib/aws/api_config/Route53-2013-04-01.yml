@@ -15,6 +15,40 @@
 :api_version: '2013-04-01'
 :namespace: https://route53.amazonaws.com/doc/2013-04-01/
 :operations:
+- :name: AssociateVPCWithHostedZone
+  :method: :associate_vpc_with_hosted_zone
+  :http:
+    :verb: POST
+    :uri: /2013-04-01/hostedzone/:hosted_zone_id/associatevpc
+  :inputs:
+    :hosted_zone_id:
+      :type: :string
+      :required: true
+      :position: 0
+      :lstrip: /hostedzone/
+    :vpc:
+      :name: VPC
+      :type: :hash
+      :position: 1
+      :members:
+        :vpc_id:
+          :name: VPCId
+          :type: :string
+          :position: 0
+        :vpc_region:
+          :name: VPCRegion
+          :type: :string
+          :position: 1
+  :outputs:
+    :children:
+      ChangeInfo:
+        :children:
+          Id:
+            :type: :string
+          Status:
+            :type: :string
+          SubmittedAt:
+            :type: :time
 - :name: ChangeResourceRecordSets
   :method: :change_resource_record_sets
   :http:
