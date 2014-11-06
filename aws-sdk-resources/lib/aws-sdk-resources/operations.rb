@@ -53,7 +53,7 @@ module Aws
 
       end
 
-      class DataOperation < Operation
+      class LoadOperation < Operation
 
         # @option options [required, Request] :request
         # @option options [required, String<JMESPath>] :path

@@ -3,12 +3,12 @@ require 'spec_helper'
 module Aws
   module Resources
     module Operations
-      describe EnumerateResourceOperation do
+      describe HasManyOperation do
         describe '#request' do
 
           it 'returns the request given to the constructor' do
             request = double('request')
-            operation = EnumerateResourceOperation.new(
+            operation = HasManyOperation.new(
               request: request,
               builder: double('builder').as_null_object
             )
@@ -18,7 +18,7 @@ module Aws
           it 'requries a :request option' do
             msg = 'missing required option :request'
             expect {
-              EnumerateResourceOperation.new(
+              HasManyOperation.new(
                 request: nil,
                 builder: double('builder')
               )
@@ -31,7 +31,7 @@ module Aws
 
           it 'returns the builder given to the constructor' do
             builder = double('builder').as_null_object
-            operation = EnumerateResourceOperation.new(
+            operation = HasManyOperation.new(
               request: double('request'),
               builder: builder
             )
@@ -41,7 +41,7 @@ module Aws
           it 'requries a :builder option' do
             msg = 'missing required option :builder'
             expect {
-              EnumerateResourceOperation.new(
+              HasManyOperation.new(
                 request: double('request'),
                 builder: nil,
               )
@@ -56,7 +56,7 @@ module Aws
 
             resource_class = new_resource_class(identifiers: [:id])
             resource_class.const_set(:Batch, Class.new(Batch))
-            resource_class.add_operation(:linked, EnumerateResourceOperation.new(
+            resource_class.add_operation(:linked, HasManyOperation.new(
               request: Request.new(method_name:'list_resources'),
               builder: Builder.new(
                 resource_class: resource_class,

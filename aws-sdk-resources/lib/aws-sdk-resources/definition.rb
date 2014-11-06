@@ -127,7 +127,7 @@ module Aws
 
       def define_load(namespace, resource, definition)
         return unless definition
-        resource.load_operation = Operations::DataOperation.new(
+        resource.load_operation = Operations::LoadOperation.new(
           request: define_request(definition['request']),
           path: underscore(definition['path']),
           source: source(definition),

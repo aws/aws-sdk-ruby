@@ -3,19 +3,19 @@ require 'spec_helper'
 module Aws
   module Resources
     module Operations
-      describe DataOperation do
+      describe LoadOperation do
         describe '#request' do
 
           it 'returns the request given to the constructor' do
             request = double('request')
-            operation = DataOperation.new(request: request, path: '$')
+            operation = LoadOperation.new(request: request, path: '$')
             expect(operation.request).to be(request)
           end
 
           it 'requries a :request option' do
             msg = 'missing required option :request'
             expect {
-              DataOperation.new(request: nil, path: '$')
+              LoadOperation.new(request: nil, path: '$')
             }.to raise_error(Errors::DefinitionError, msg)
           end
 
@@ -24,14 +24,14 @@ module Aws
         describe '#path' do
 
           it 'returns the path given to the constructor' do
-            operation = DataOperation.new(request: double('request'), path: '$')
+            operation = LoadOperation.new(request: double('request'), path: '$')
             expect(operation.path).to eq('$')
           end
 
           it 'requries a :path option' do
             msg = 'missing required option :path'
             expect {
-              DataOperation.new(request: double('request'))
+              LoadOperation.new(request: double('request'))
             }.to raise_error(Errors::DefinitionError, msg)
           end
 
@@ -46,7 +46,7 @@ module Aws
               and_return(double('response', data:{'path' => data}))
 
             resource_class = new_resource_class(identifiers: [:id])
-            resource_class.load_operation = DataOperation.new(
+            resource_class.load_operation = LoadOperation.new(
               request: Request.new(method_name:'operation'),
               path: 'path')
 
@@ -62,7 +62,7 @@ module Aws
             expect(client).to receive(:operation).and_return(response)
 
             resource_class = new_resource_class(identifiers: [:id])
-            resource_class.load_operation = DataOperation.new(
+            resource_class.load_operation = LoadOperation.new(
               request: Request.new(method_name:'operation'),
               path: '$')
 

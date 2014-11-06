@@ -91,7 +91,7 @@ module Aws
         #   this class.
         attr_accessor :client_class
 
-        # @return [Operations::DataOperation, nil]
+        # @return [Operations::LoadOperation, nil]
         attr_accessor :load_operation
 
         # @return [Array<Symbol>]
