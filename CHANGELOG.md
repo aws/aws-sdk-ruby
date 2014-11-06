@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.7 (2014-11-06)
 ------------------
 
 * Feature - Aws::CognitoSync - Added support for push sync.
