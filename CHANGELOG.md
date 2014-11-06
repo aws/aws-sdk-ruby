@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoSync - Added support for push sync.
+
 * Feature - Aws::Route53 - Added support for private DNS. Also,
   `Aws::Route53::Client` now defaults to signature version 4.
 
