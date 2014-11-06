@@ -1125,6 +1125,17 @@
       "members":{
       }
     },
+    "AdditionalAttribute":{
+      "type":"structure",
+      "members":{
+        "Key":{"shape":"StringVal"},
+        "Value":{"shape":"StringVal"}
+      }
+    },
+    "AdditionalAttributes":{
+      "type":"list",
+      "member":{"shape":"AdditionalAttribute"}
+    },
     "AppCookieStickinessPolicies":{
       "type":"list",
       "member":{"shape":"AppCookieStickinessPolicy"}
@@ -1735,7 +1746,8 @@
         "CrossZoneLoadBalancing":{"shape":"CrossZoneLoadBalancing"},
         "AccessLog":{"shape":"AccessLog"},
         "ConnectionDraining":{"shape":"ConnectionDraining"},
-        "ConnectionSettings":{"shape":"ConnectionSettings"}
+        "ConnectionSettings":{"shape":"ConnectionSettings"},
+        "AdditionalAttributes":{"shape":"AdditionalAttributes"}
       }
     },
     "LoadBalancerDescription":{
@@ -2025,6 +2037,7 @@
       }
     },
     "State":{"type":"string"},
+    "StringVal":{"type":"string"},
     "SubnetId":{"type":"string"},
     "SubnetNotFoundException":{
       "type":"structure",
