@@ -78,13 +78,13 @@ module Aws
         if count == 1
           limit(1).to_a.first
         else
-          resource_class::Batch.new(limit(count).to_a)
+          Batch.new(limit(count).to_a)
         end
       end
 
       # @api private
       def respond_to?(method_name, *args)
-        if resource_class::Batch.instance_methods.include?(method_name.to_sym)
+        if resource_class.batch_operation_names.include?(method_name.to_sym)
           true
         else
           super

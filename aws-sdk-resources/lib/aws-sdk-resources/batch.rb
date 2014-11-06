@@ -32,7 +32,7 @@ module Aws
     #
     # Batches provide operations that operate on the entire batch. These
     # operations are only defined for resources where the AWS API accepts
-    # multiple inputs. This means a batch operation for n elements will
+    # multiple inputs. This means a batch operation for n resources will
     # only make one request.
     #
     # Resource classes document each of their own batch operations.
@@ -41,7 +41,6 @@ module Aws
     class Batch
 
       include Enumerable
-      extend OperationMethods
 
       # @param [Array<Resource>] resources
       # @option options [Seahorse::Client::Response] :response
@@ -93,6 +92,40 @@ module Aws
       # @api private
       def inspect
         "#<#{self.class.name} resources=#{@resources}>"
+      end
+
+      # @api private
+      def respond_to?(method_name, *args)
+        if !empty? && batch_method?(method_name)
+          true
+        else
+          super
+        end
+      end
+
+
+      # @api private
+      def method_missing(method_name, *args, &block)
+        if respond_to?(method_name)
+          invoke_batch_operation(method_name, args, block) unless empty?
+        else
+          super
+        end
+      end
+
+      private
+
+      def batch_method?(method_name)
+        resource_class.batch_operation_names.include?(method_name.to_sym)
+      end
+
+      def resource_class
+        @resources.first.class
+      end
+
+      def invoke_batch_operation(method_name, args, block)
+        operation = resource_class.batch_operation(method_name)
+        operation.call(resource:self, args:args, block:block)
       end
 
     end

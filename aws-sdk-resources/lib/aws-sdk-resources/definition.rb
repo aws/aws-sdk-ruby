@@ -42,9 +42,6 @@ module Aws
             resource_class.add_identifier(underscore(identifier['name']))
           end
           namespace.const_set(name, resource_class)
-          unless name == 'Resource'
-            resource_class.const_set(:Batch, Class.new(Batch))
-          end
         end
       end
 
@@ -104,7 +101,7 @@ module Aws
         batch_actions.each do |name, definition|
           method_name = underscore(name)
           operation = build_operation(namespace, resource, definition)
-          resource::Batch.add_operation(method_name, operation)
+          resource.add_batch_operation(method_name, operation)
         end
       end
 

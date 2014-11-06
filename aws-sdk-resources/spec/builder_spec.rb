@@ -106,8 +106,7 @@ module Aws
             BuilderSources::DataMember.new('ids[]', 'id'),
           ])
           result = builder.build(client:client,resource:parent)
-          expect(result).to be_a(resource_class::Batch)
-          expect(result).to be_kind_of(Batch)
+          expect(result).to be_a(Batch)
           expect(result.size).to eq(2)
           expect(result[0]).to be_kind_of(resource_class)
           expect(result[1]).to be_kind_of(resource_class)

@@ -30,7 +30,6 @@ module Aws
                 BuilderSources::DataMember.new('ids[]', 'id')
               ])
             ))
-            resource_class.const_set(:Batch, Class.new(Batch))
             client = double('client')
             resource = resource_class.new(
               id: 'parent',
@@ -38,8 +37,7 @@ module Aws
               data: { 'ids' => %w(child-1 child-2) }
             )
             linked = resource.get_linked
-            expect(linked).to be_a(resource_class::Batch)
-            expect(linked).to be_kind_of(Batch)
+            expect(linked).to be_a(Batch)
             expect(linked.size).to eq(2)
             expect(linked[0].id).to eq('child-1')
             expect(linked[1].id).to eq('child-2')

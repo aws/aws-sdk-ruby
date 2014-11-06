@@ -880,7 +880,7 @@ module Aws
                 }
               )
               doo_dads = thing.doo_dads
-              expect(doo_dads).to be_kind_of(namespace::DooDad::Batch)
+              expect(doo_dads).to be_kind_of(Batch)
               expect(doo_dads.count).to be(2)
               doo_dads.each do |dd|
                 expect(dd).to be_kind_of(namespace::DooDad)

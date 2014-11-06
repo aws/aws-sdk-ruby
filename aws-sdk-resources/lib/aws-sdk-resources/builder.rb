@@ -56,7 +56,7 @@ module Aws
           yield(resource) if block_given?
           resource
         end
-        resource_class::Batch.new(resources, options)
+        Batch.new(resources, options)
       end
 
       def build_one(identifiers, options)

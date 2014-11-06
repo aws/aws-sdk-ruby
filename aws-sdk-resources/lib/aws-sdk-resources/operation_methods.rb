@@ -31,9 +31,36 @@ module Aws
         @operations.keys
       end
 
+      # @param [Symbol] name
+      # @return [Operation] Returns the named batch operation.
+      # @raise [Errors::UnknownOperationError]
+      def batch_operation(name)
+        @batch_operations[name.to_sym] or
+          raise Errors::UnknownOperationError.new(name)
+      end
+
+      # @param [Symbol] method_name
+      # @param [Operation] operation
+      # @return [void]
+      def add_batch_operation(method_name, operation = nil, &definition)
+        operation = definition if block_given?
+        @batch_operations[method_name.to_sym] = operation
+      end
+
+      # @return [Hash]
+      def batch_operations(&block)
+        @batch_operations.dup
+      end
+
+      # @return [Array<Symbol>]
+      def batch_operation_names
+        @batch_operations.keys
+      end
+
       # @api private
       def inherited(subclass)
         subclass.send(:instance_variable_set, "@operations", {})
+        subclass.send(:instance_variable_set, "@batch_operations", {})
       end
 
       private
