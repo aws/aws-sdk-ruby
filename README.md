@@ -63,9 +63,8 @@ ec2 = Aws::EC2::Client.new(region:'us-west-2')
 Alternatively, a default region can be loaded from one of the following
 locations:
 
-* `ENV['AWS_REGION']`
 * `Aws.config[:region]`
-
+* `ENV['AWS_REGION']`
 
 See [this document](http://docs.amazonwebservices.com/general/latest/gr/rande.html)
 for a list of supported regions by service.
@@ -87,6 +86,7 @@ The credentials object may be an instance of:
 
 Default credentials are searched for in the following locations:
 
+* `Aws.config[:credentials]`
 * `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
 * The shared credentials ini file at `HOME/.aws/credentials`
 * From an instance profile when running on EC2
