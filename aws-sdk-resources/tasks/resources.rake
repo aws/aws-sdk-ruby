@@ -20,7 +20,7 @@ namespace :resources do
     Dir.glob("aws-sdk-core/apis/*.resources.json").each do |path|
       data = File.open(path, 'r', encoding:'UTF-8') { |f| f.read }
       data = ResourceDefinitionFormatter.new.format_json(JSON.load(data))
-      File.open(path, 'w', encoding:'UTF-8') { |f| f.write(data) }
+      File.open(path, 'w', encoding:'UTF-8') { |f| f.write(data + "\n") }
     end
   end
 
